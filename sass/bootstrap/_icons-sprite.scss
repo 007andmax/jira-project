@@ -1,0 +1,423 @@
+@import "mixins/retina-sprites";
+
+.logo { @include icon-sprite(logo); }
+
+// Nav icons
+.icn-dashboard {
+	@include icon-sprite(icn-dashboard);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-dashboard-active); }
+}
+.icn-tickets {
+	@include icon-sprite(icn-tickets);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-tickets-active); }
+}
+.icn-clients {
+	@include icon-sprite(icn-clients);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-clients-active); }
+}
+.icn-accounts {
+	@include icon-sprite(icn-accounts);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-accounts-active); }
+}
+.icn-devices {
+	@include icon-sprite(icn-devices);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-devices-active); }
+}
+.icn-reports {
+	@include icon-sprite(icn-reports);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-reports-active); }
+}
+
+.icn-logout {
+	@include icon-sprite(icn-logout);
+}
+
+// Icons inside buttons
+.icn-add {
+	@include icon-sprite(icn-add);
+	.open > a > &,
+	:active > &,
+	:focus > & { opacity: .6; }
+}
+
+.icn-tick { @include icon-sprite(icn-tick); }
+.icn-remote-access { @include icon-sprite(icn-remote-access); }
+
+.icn-send {
+	@include icon-sprite(icn-send);
+	:active > &,
+	:focus > & { opacity: .6; }
+}
+
+.icn-load,
+:active > .icn-load,
+:focus > .icn-load,
+:focus:hover > .icn-load,
+:focus:active > .icn-load,
+:hover:active > .icn-load,
+.active > .icn-load,
+.open > .icn-load { @include icon-sprite(icn-load); }
+:hover > .icn-load { @include icon-sprite(icn-load-hover); }
+.loading > .icn-load { @include icon-sprite(icn-loading); }
+
+.icn-remote-access,
+:active > .icn-remote-access,
+:focus > .icn-remote-access,
+:focus:hover > .icn-remote-access,
+:focus:active > .icn-remote-access,
+:hover:active > .icn-remote-access,
+.active > .icn-remote-access,
+.open > .icn-remote-access { @include icon-sprite(icn-remote-access); }
+:hover > .icn-remote-access { @include icon-sprite(icn-remote-access-hover); }
+.connected > .icn-remote-access { @include icon-sprite(icn-remote-access-active); }
+
+.icn-caret-gray,
+:active > .icn-caret-gray,
+:focus > .icn-caret-gray,
+:focus:hover > .icn-caret-gray,
+:focus:active > .icn-caret-gray,
+:hover:active > .icn-caret-gray,
+.active > .icn-caret-gray,
+.open > .icn-caret-gray { @include icon-sprite(icn-caret-gray); }
+:hover > .icn-caret-gray { @include icon-sprite(icn-caret-gray-hover); }
+
+.icn-caret-gray-filter,
+:active > .icn-caret-gray-filter,
+:focus > .icn-caret-gray-filter,
+:focus:hover > .icn-caret-gray-filter,
+:focus:active > .icn-caret-gray-filter,
+:hover:active > .icn-caret-gray-filter,
+.active > .icn-caret-gray-filter,
+.open > .icn-caret-gray-filter { @include icon-sprite(icn-caret-gray-filter); }
+:hover > .icn-caret-gray-filter { @include icon-sprite(icn-caret-gray-filter-hover); }
+
+.icn-nav-delete,
+:active > .icn-nav-delete,
+:focus > .icn-nav-delete,
+:focus:hover > .icn-nav-delete,
+:focus:active > .icn-nav-delete,
+:hover:active > .icn-nav-delete,
+.active > .icn-nav-delete,
+.open > .icn-nav-delete { @include icon-sprite(icn-nav-delete); }
+:hover > .icn-nav-delete { @include icon-sprite(icn-nav-delete-hover); }
+
+.icn-edit,
+:active > .icn-edit,
+:focus > .icn-edit,
+:focus:hover > .icn-edit,
+:focus:active > .icn-edit,
+:hover:active > .icn-edit,
+.active > .icn-edit,
+.open > .icn-edit { @include icon-sprite(icn-edit); }
+:hover > .icn-edit { @include icon-sprite(icn-edit-hover); }
+
+.icn-nav-user,
+:active > .icn-nav-user,
+:focus > .icn-nav-user,
+:focus:hover > .icn-nav-user,
+:focus:active > .icn-nav-user,
+:hover:active > .icn-nav-user,
+.active > .icn-nav-user,
+.open > .icn-nav-user { @include icon-sprite(icn-nav-user); }
+:hover > .icn-nav-user { @include icon-sprite(icn-nav-user-hover); }
+
+.icn-nav-tag,
+:active > .icn-nav-tag,
+:focus > .icn-nav-tag,
+:focus:hover > .icn-nav-tag,
+:focus:active > .icn-nav-tag,
+:hover:active > .icn-nav-tag,
+.active > .icn-nav-tag,
+.open > .icn-nav-tag { @include icon-sprite(icn-nav-tag); }
+:hover > .icn-nav-tag { @include icon-sprite(icn-nav-tag-hover); }
+
+.icn-nav-more,
+:active > .icn-nav-more,
+:focus > .icn-nav-more,
+:focus:hover > .icn-nav-more,
+:focus:active > .icn-nav-more,
+:hover:active > .icn-nav-more,
+.active > .icn-nav-more,
+.open > .icn-nav-more { @include icon-sprite(icn-nav-more); }
+:hover > .icn-nav-more { @include icon-sprite(icn-nav-more-hover); }
+
+.icn-ticket-setting,
+:active > .icn-ticket-setting,
+:focus:hover > .icn-ticket-setting,
+:focus:active > .icn-ticket-setting,
+:hover:active > .icn-ticket-setting,
+.active > .icn-ticket-setting,
+.open > .icn-ticket-setting { @include icon-sprite(icn-ticket-setting); }
+:hover > .icn-ticket-setting { @include icon-sprite(icn-ticket-setting-hover); }
+
+.icn-ticket-minimize,
+:active > .icn-ticket-minimize,
+:focus > .icn-ticket-minimize,
+:focus:hover > .icn-ticket-minimize,
+:focus:active > .icn-ticket-minimize,
+:hover:active > .icn-ticket-minimize,
+.active > .icn-ticket-minimize,
+.open > .icn-ticket-minimize { @include icon-sprite(icn-ticket-minimize); }
+:hover > .icn-ticket-minimize { @include icon-sprite(icn-ticket-minimize-hover); }
+
+.icn-attachments-download,
+:active > .icn-attachments-download,
+:focus > .icn-attachments-download,
+:focus:hover > .icn-attachments-download,
+:focus:active > .icn-attachments-download,
+:hover:active > .icn-attachments-download,
+.active > .icn-attachments-download,
+.open > .icn-attachments-download { @include icon-sprite(icn-attachments-download); }
+:hover > .icn-attachments-download { @include icon-sprite(icn-attachments-download-hover); }
+
+.icn-add-attachment,
+:active > .icn-add-attachment,
+:focus > .icn-add-attachment,
+:focus:hover > .icn-add-attachment,
+:focus:active > .icn-add-attachment,
+:hover:active > .icn-add-attachment,
+.active > .icn-add-attachment,
+.open > .icn-add-attachment { @include icon-sprite(icn-add-attachment); }
+:hover > .icn-add-attachment { @include icon-sprite(icn-add-attachment-hover); }
+
+.icn-add-update,
+:active > .icn-add-update,
+:focus > .icn-add-update,
+:focus:hover > .icn-add-update,
+:focus:active > .icn-add-update,
+:hover:active > .icn-add-update,
+.active > .icn-add-update,
+.open > .icn-add-update { @include icon-sprite(icn-add-update); }
+:hover > .icn-add-update { @include icon-sprite(icn-add-update-hover); }
+
+.icn-create-label,
+:active > .icn-create-label,
+:focus > .icn-create-label,
+:focus:hover > .icn-create-label,
+:focus:active > .icn-create-label,
+:hover:active > .icn-create-label,
+.active > .icn-create-label,
+.open > .icn-create-label { @include icon-sprite(icn-create-label); }
+:hover > .icn-create-label { @include icon-sprite(icn-create-label-hover); }
+
+// Left sidebar icons
+.icn-toggle-menu {
+	@include icon-sprite(icn-toggle-menu);
+	&:hover { @include icon-sprite(icn-toggle-menu-hover); }
+	.opened-sidebar & {
+		@include icon-sprite(icn-toggle-menu-active);
+		&:hover { @include icon-sprite(icn-toggle-menu-active-hover); }
+	}
+}
+.icn-sb-more { @include icon-sprite(icn-sb-more); }
+.icn-less-caret {
+	@include icon-sprite(icn-less-caret);
+	:hover > & { @include icon-sprite(icn-less-caret-hover); }
+}
+
+// Right sidebar icons
+.icn-tab-company-info {
+	@include icon-sprite(icn-tab-company-info);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-tab-company-info-active); }
+}
+.icn-tab-devices {
+	@include icon-sprite(icn-tab-devices);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-tab-devices-active); }
+}
+.icn-tab-users {
+	@include icon-sprite(icn-tab-users);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-tab-users-active); }
+}
+.icn-tab-info {
+	@include icon-sprite(icn-tab-info);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-tab-info-active); }
+}
+.icn-tab-activities {
+	@include icon-sprite(icn-tab-activities);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-tab-activities-active); }
+}
+.icn-tab-companies {
+	@include icon-sprite(icn-tab-companies);
+	li:hover > a > &,
+	li.active > a > & { @include icon-sprite(icn-tab-companies-active); }
+}
+
+	// Devices icons
+	.icn-tablet { @include icon-sprite(icn-tablet); }
+	.icn-server { @include icon-sprite(icn-server); }
+	.icn-printer { @include icon-sprite(icn-printer); }
+	.icn-mobile { @include icon-sprite(icn-mobile); }
+	.icn-generic-device { @include icon-sprite(icn-generic-device); }
+	.icn-fax { @include icon-sprite(icn-fax); }
+	.icn-computer { @include icon-sprite(icn-computer); }
+
+	// rating stars
+	.icn-star-empty { @include icon-sprite(icn-star-empty); }
+	.icn-star-half { @include icon-sprite(icn-star-half); }
+	.icn-star-full { @include icon-sprite(icn-star-full); }
+
+	// Billing info
+	.icn-sb-location { @include icon-sprite(icn-sb-location); }
+
+	// companies icons
+	.icn-users {
+		@include icon-sprite(icn-users);
+		.active > & { @include icon-sprite(icn-users-active); }
+	}
+	.icn-cdevices {
+		@include icon-sprite(icn-cdevices);
+		.active > & { @include icon-sprite(icn-cdevices-active); }
+	}
+
+
+// Ticket icons
+.icn-status-in-progress { @include icon-sprite(icn-status-in-progress); }
+.icn-status-on-hold { @include icon-sprite(icn-status-on-hold); }
+.icn-status-completed { @include icon-sprite(icn-status-completed); }
+.dropdown-status .icn-status-in-progress { @include icon-sprite(icn-status-in-progress-active); }
+.dropdown-status .icn-status-on-hold { @include icon-sprite(icn-status-on-hold-active); }
+.dropdown-status .icn-status-completed { @include icon-sprite(icn-status-completed-active); }
+
+.icn-in-progress-small { @include icon-sprite(icn-in-progress-small); }
+.icn-on-hold-small { @include icon-sprite(icn-on-hold-small); }
+
+.icn-priority-high-small { @include icon-sprite(icn-priority-high-small); }
+
+.icn-claim-ticket {
+	@include icon-sprite(icn-claim-ticket);
+	:hover > & { @include icon-sprite(icn-claim-ticket-hover); }
+}
+
+.icn-ticket-attachment { @include icon-sprite(icn-ticket-attachment); }
+.icn-remove-attachment { @include icon-sprite(icn-remove-attachment); }
+.icn-restart-uploading { @include icon-sprite(icn-restart-uploading); }
+
+.icn-remove-user { @include icon-sprite(icn-remove-user); }
+
+.icn-remove-update {
+	@include icon-sprite(icn-remove-update);
+	:focus:hover > &,
+	:active:hover > & { @include icon-sprite(icn-remove-update); }
+	:hover > & { @include icon-sprite(icn-remove-update-hover); }
+}
+
+.icn-update-message { @include icon-sprite(icn-update-message); }
+
+.icn-add-note { @include icon-sprite(icn-add-note); }
+.icn-add-product { @include icon-sprite(icn-add-product); }
+.icn-add-service { @include icon-sprite(icn-add-service); }
+
+// Filter dropdown icons
+.icn-slider-start { @include icon-sprite(icn-slider-start); }
+.icn-slider-center { @include icon-sprite(icn-slider-center); }
+.icn-slider-end { @include icon-sprite(icn-slider-end); }
+.icn-slider-handle { @include icon-sprite(icn-slider-handle); }
+
+// Popover icons
+.icn-email { @include icon-sprite(icn-email); }
+.icn-load-gray { @include icon-sprite(icn-load-gray); }
+.icn-clock { @include icon-sprite(icn-clock); }
+.icn-at-the-rate { @include icon-sprite(icn-at-the-rate); }
+.icn-iphone { @include icon-sprite(icn-iphone); }
+
+.icn-share-screen { @include icon-sprite(icn-share-screen); }
+.icn-instant-message { @include icon-sprite(icn-instant-message); }
+.icn-add-directory { @include icon-sprite(icn-add-directory); }
+.icn-restart { @include icon-sprite(icn-restart); }
+
+// WYSIWYG icons
+.icn-wysiwyg-attachment { @include icon-sprite(icn-wysiwyg-attachment); }
+.icn-wysiwyg-tz { @include icon-sprite(icn-wysiwyg-tz); }
+.icn-wysiwyg-bold {
+	@include icon-sprite(icn-wysiwyg-bold);
+	&.active { @include icon-sprite(icn-wysiwyg-bold-active); }
+}
+.icn-wysiwyg-italic {
+	@include icon-sprite(icn-wysiwyg-italic);
+	&.active { @include icon-sprite(icn-wysiwyg-italic-active); }
+}
+.icn-wysiwyg-underline {
+	@include icon-sprite(icn-wysiwyg-underline);
+	&.active { @include icon-sprite(icn-wysiwyg-underline-active); }
+}
+.icn-wysiwyg-bn {
+	@include icon-sprite(icn-wysiwyg-bn);
+	&.active { @include icon-sprite(icn-wysiwyg-bn-active); }
+}
+.icn-wysiwyg-bp {
+	@include icon-sprite(icn-wysiwyg-bp);
+	&.active { @include icon-sprite(icn-wysiwyg-bp-active); }
+}
+.icn-wysiwyg-tal {
+	@include icon-sprite(icn-wysiwyg-tal);
+	&.active { @include icon-sprite(icn-wysiwyg-tal-active); }
+}
+.icn-wysiwyg-tac {
+	@include icon-sprite(icn-wysiwyg-tac);
+	&.active { @include icon-sprite(icn-wysiwyg-tac-active); }
+}
+.icn-wysiwyg-tar {
+	@include icon-sprite(icn-wysiwyg-tar);
+	&.active { @include icon-sprite(icn-wysiwyg-tar-active); }
+}
+.icn-wysiwyg-iless { @include icon-sprite(icn-wysiwyg-iless); }
+.icn-wysiwyg-imore { @include icon-sprite(icn-wysiwyg-imore); }
+.icn-wysiwyg-quote { @include icon-sprite(icn-wysiwyg-quote); }
+.icn-wysiwyg-reset {
+	@include icon-sprite(icn-wysiwyg-reset);
+	&.disabled { @include icon-sprite(icn-wysiwyg-reset_disabled); }
+}
+
+// Chipku icons
+.icn-close-chipku { @include icon-sprite(icn-close-chipku); }
+.icn-reset-user { @include icon-sprite(icn-reset-user); }
+
+.icn-reset-devices { @include icon-sprite(icn-reset-devices); }
+.icn-close-server { @include icon-sprite(icn-close-server); }
+
+// Random icons
+.icn-remove-token { @include icon-sprite(icn-remove-token); }
+.icn-load-green { @include icon-sprite(icn-load-green); }
+.icn-more-users { @include icon-sprite(icn-more-users); }
+
+.icn-add-new { @include icon-sprite(icn-add-new); }
+
+.icn-edit-tag {
+	@include icon-sprite(icn-edit-tag);
+	&:hover { @include icon-sprite(icn-edit-tag-hover); }
+}
+
+.icn-close-modal {
+	@include icon-sprite(icn-close-modal);
+	&:hover { @include icon-sprite(icn-close-modal-hover); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

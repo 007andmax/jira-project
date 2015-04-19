@@ -1,0 +1,239 @@
+<div class="ticket-header clearfix" ng-controller="UserController">
+    <div class="clearfix" ng-controller="CompaniesController">
+        <div class="ticket-author">
+            <a href="javascript:{}" class="pull-left avatar-38 avatar m-r">
+                <img src="html/images/avatars/a4.jpg" alt="..." class="img-circle">
+            </a>
+            <div class="clearfix pull-left">
+                <div class="user-name">
+                    <a href="javascript:{}">{{getFirstName(ticketDetail.createdUser.id)}} {{ getlastName(ticketDetail.createdUser.id)}}</a>
+                    <span class=" icn-priority {{ getStatusCSS(ticketDetail.priorityLevel)}}" data-toggle="tooltip" data-placement="top" data-original-title="{{ getCapitialize(ticketDetail.priorityLevel)}} Priority"></span>
+
+                    <span ng-repeat="tag in ticketDetail.tags" class="tag-color color{{tag.color}}" data-toggle="tooltip" data-placement="top" data-original-title="{{tag.name}}"></span>
+                </div>
+                <small class="user-title text-muted"><a href="javascript:{}" ng-if="ticketDetail.hasAttachments == true" class="icn-ticket-attachment pull-left"></a> {{renderDateTime(ticketDetail.createdAt)}}<span class="dot-sep"></span>{{ticketDetail.number}}</small>
+            </div>
+        </div>
+        <div class="ticket-actions pull-right">
+
+
+
+            <div class="dropdown pull-left">
+                <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top" data-original-title="Settings">
+                    <span class="icn-ticket-setting"></span>
+                </div>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-if="ticketDetail.assignedUser == null"><a ng-click="postAssignTicket($event, ticketDetail, currentUser)" tabindex="-1" href="javascript:{}">Claim Ticket</a></li>
+                    <li class="dropdown-submenu left-align"><a tabindex="-1" href="#">Label as...</a>
+
+                        <div class="dropdown-submenu-wrapper" ng-controller="TagController">
+                            <ul class="tag-list dropdown-menu" role="menu"> 
+                                <li ng-repeat="tag in tags">
+                                    <label class="control checkbox">
+                                        <input type="checkbox" value="{{tag.id}}">
+                                        <span class="control-indicator pull-left"></span>
+                                        <span class="tag-color color{{tag.color}}"></span>
+                                        {{tag.name}}
+                                    </label>
+                                </li>
+                                <li class="apply"><button type="button" class="btn btn-scooter" ng-click="postTagAs($event, ticketDetail.id)">Apply</button></li>
+                            </ul> 
+                        </div></li>
+                    <li class="dropdown-submenu left-align">
+                        <a tabindex="-1" href="javascript:{}" >Assign Ticket to...</a>
+                        <div class="dropdown-submenu-wrapper">
+                            <div class=" assign-ticket dropdown-menu">
+                                <div class="assign-ticket-content">
+                                    <div class="assign-ticket-header">
+                                        <div class="clearfix">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control tokenfield" value="Dylan Fosket" />
+                                                <div class="label-add-btn"> <a href="#" class="  btn input-btn-cr btn-green  btn-add-more pull-left "><span class="small-icn-tick icn"></span></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="scroll-pane">
+                                        <ul class="users-list">
+                                            <li ng-repeat="user in currentCompanyUser">
+                                                <a herf="" class="pull-left avatar-26 avatar m-r">
+                                                    <img src="html/images/avatars/a4.jpg" alt="..." class="img-circle">
+                                                </a>
+                                                <div class="clearfix">
+                                                    <div class="user-name"><a href="javascript:{}">{{user.firstName}} {{user.lastName}}  {{user.email}}</a></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></li>
+
+                    <li class="dropdown-submenu left-align">
+                        <a tabindex="-1" href="javascript:{}">Change Priority to...</a>
+                        <div class="dropdown-submenu-wrapper ">
+                            <ul class="dropdown-menu dropdown-priority">
+                                <li><a tabindex="-1" href="javascript:{}" ng-click="changePriority($event, ticketDetail, 'low')"> <span class="priority-dot low"></span>Low</a></li>
+                                <li><a tabindex="-1" href="javascript:{}" ng-click="changePriority($event, ticketDetail, 'medium')"> <span class="priority-dot medium"></span>Medium</a></li>
+                                <li><a tabindex="-1" href="javascript:{}" ng-click="changePriority($event, ticketDetail, 'high')"> <span class="priority-dot high"></span>High</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li ng-if="ticketDetail.spamPerformer == null" ng-click="markAsSpam($event, ticketDetail, true)"><a tabindex="-1" href="javascript:{}">Mark as Spam</a></li>
+                    <li ng-if="ticketDetail.trash == false"><a tabindex="-1" href="javascript:{}" ng-click="deleteTicket($event, ticketDetail, true)">Move to Trash</a></li>
+                </ul>
+            </div>
+            <div class="btn pull-left btn-white-gray btn-cr btn-collapse" data-toggle="tooltip" data-placement="top" data-original-title="collapse">
+                <span class="icn-ticket-minimize"></span>
+            </div>
+        </div>
+    </div>
+    <h3 class="ticket-title">{{ticketDetail.subject}}</h3>
+</div> <!-- .ticket-header -->
+<div class="ticket-detail clearfix" ng-controller="UserController">
+    <div class="ticket-message">
+        {{renderHTML('ticket-message', ticketDetail.note)}}
+    </div>
+    <div class="ticket-attachment clearfix" ng-if="ticketDetail.attachments.length > 0">
+        <div class="attachment-meta clearfix">
+            <span class="attachments-count pull-left">{{ticketDetail.attachments.length}} Attachments</span>
+            <div class="download-all pull-right">
+                <div class="btn btn-white-gray btn-cr pull-right" data-toggle="tooltip" data-placement="top" data-original-title="download all attachments">
+                    <span class="icn-attachments-download"></span>
+                </div>
+            </div>
+        </div>
+        <ul class="attachments clearfix">
+            <li class="viewable" <!--ng-repeat="attachment in ticketDetail.attachments"--> >
+
+                <div class="file-icon-name">
+                    <span class="file-icon icn"></span>
+                    <span class="file-ext">DOC</span>
+                </div>
+                <div class="file-name">Error Issue 3465</div>
+                <div class="onhover"> <span class="file-name">Error Issue 3465.doc</span>
+                    <span class="file-size">320 KB</span>
+                    <a href="javascript:void(0)" class="tp-hide file-download" data-toggle="tooltip" data-placement="bottom" data-original-title="Download"><span class="icn-attachments-download"></span></a></div>
+            </li>
+            <li class="viewable">
+
+                <div class="file-icon-name">
+                    <span class="file-icon icn"></span>
+                    <span class="file-ext">jpg</span>
+                </div>
+                <div class="file-name">Windows Update Error</div>
+                <div class="onhover"> <span class="file-name">Windows Update Error.jpg</span>
+                    <span class="file-size">320 KB</span>
+                    <a href="javascript:void(0)" class="tp-hide file-download" data-toggle="tooltip" data-placement="bottom" data-original-title="Download"><span class="icn-attachments-download"></span></a></div>
+            </li>
+            <li class="viewable">
+
+                <div class="file-icon-name">
+                    <span class="file-icon icn"></span>
+                    <span class="file-ext">png</span>
+                </div>
+                <div class="file-name">Catalyst Control Center</div>
+                <div class="onhover"> <span class="file-name file-full-name">Catalyst Control Center.png</span>
+                    <span class="file-size">230 KB</span>
+                    <a href="javascript:void(0)" class="tp-hide file-download" data-toggle="tooltip" data-placement="bottom" data-original-title="Download"><span class="icn-attachments-download"></span></a></div>
+            </li>
+            <li class="zip">
+
+                <div class="file-icon-name">
+                    <span class="file-icon icn"></span>
+                </div>
+                <div class="file-name">All Screenshots</div>
+                <div class="onhover"> <span class="file-name file-full-name">All Screenshots.zip</span>
+                    <span class="file-size">5 MB</span>
+                    <a href="javascript:void(0)" class="tp-hide file-download" data-toggle="tooltip" data-placement="bottom" data-original-title="Download"><span class="icn-attachments-download"></span></a></div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="ticket-updates clearfix">
+    <div class="ticket-update-header clearfix">
+        <h4><span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ticketDetail.updates.length}}</span></span> <span class="pull-left badge badge-light shared-with">SHARED WITH {{ticketDetail.sharedBetween.length}}  <div class="tooltip tooltip-users top">
+                    <div class="tooltip-arrow"></div>
+                    <ul class="tooltip-inner">
+                        <li ng-repeat="shared in ticketDetail.sharedBetween">
+                            <span class="username">{{getFirstName(shared.id)}} {{getLastName(shared.id)}}</span>
+                            <span class="usertitle">{{shared.id=='TECH'?'Team':'Client'}} User</span>
+                        </li>
+                        <li class="more-users" ng-if="ticketDetail.sharedBetween.length > 2"> 
+                            <a href="javascript:{}"><span class="icn-reset-devices"></span></a>
+                        </li>
+
+                    </ul>
+                </div></span></h4>
+        <a href="javascript:void(0)" class="btn btn-gray   btn-loadmore load-update pull-right" data-toggle="tooltip" data-placement="top" data-original-title="load more updates"><span class="icn-load-update icn"></span></a>
+    </div>
+
+
+
+    <div class="ticket-updates-wrapper clearfix">
+        <div ng-repeat="update in ticketDetail.updates" class="ticket-update clearfix {{update.attachments.length > 0 ? 'has-attachment' : ''}}">
+            <div class="ticket-updater pull-left" ng-if="update.type == 'NOTE'">
+                <div class="pull-left avatar-38 avatar m-r">
+                    <img src="html/images/avatars/a4.jpg" alt="..." class="img-circle">
+                </div>
+                <span class="icon-update icn-update-message"></span>
+            </div>
+            <div class="ticket-update-content pull-left" ng-if="update.type == 'NOTE'">
+                <div class="updater-name">{{ getFirstName(update.user.id)}} {{getLastName(update.user.id)}} <span class="added-type">added a Note</span> <a href="javascript:void(0)" class="icn-nav-delete pull-right tp-hide" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></a></div>
+                <p class="ticket-update-message">{{update.note}}</p>
+				<ul class="attachments clearfix" ng-if="update.attachments.length > 0">
+                    <li ng-repeat="attachment in update.attachments" class="{{attachment.type ==  'viewable'? 'viewable' : 'not-viewable'}}">
+                        <div class="file-icon-name">
+                            <span class="file-icon icn"></span>
+                            <span class="file-ext">{{attachment.extension}}</span>
+                        </div>
+                        <div class="file-name">{{attachment.name}}</div>
+                        <div class="onhover"> <span class="file-name">{{attachment.filename1}}</span>
+                            <span class="file-size">{{attachment.size}}</span>
+                            <a href="javascript:void(0)" class="tp-hide file-download" data-toggle="tooltip" data-placement="bottom" data-original-title="Download"><span class="icn-attachments-download"></span></a></div>
+                    </li>
+                </ul>
+                <div class="update-meta clearfix">
+                    <span class="pull-left">{{renderDateTime(updatecreatedAt)}}<span class="dot-sep"></span>{{update.sharedBetween.length}} people added to this update</span>
+                    <div class="pull-left avatar-26 avatar m-r" ng-repeat="shared in update.sharedBetween">
+                        <img src="html/images/avatars/a4.jpg" alt="..." class="img-circle">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="tips-message" ng-if="ticketDetail.assignedUser == null"><span class="icn icn-message-ticket-claim"></span>
+        <div class="message-detail">Got nothing to work on today? Hit up the <span class="bold">"Claim Ticket"</span> button to get the troubleshooting process started!</div>
+        <div class="message-btn">
+            <a href="javascript:void(0)" ng-click="postAssignTicket($event, ticketDetail, currentUser)" class="btn btn-sr btn-scooter">Claim Ticket</a>
+        </div>
+    </div>
+    <div class="tips-message has-updates" ng-if="ticketListType == 'closed'"><span class="icn icn-message-ticket-closed"></span>
+        <div class="message-detail">The Ticket is now closed. You can re-open it within 30 days by simply clicking <br>
+            <span class="bold">"Mark as Open"</span> button.</div>
+        <div class="message-btn">
+            <a href="javascript:void(0)" class="btn btn-sr btn-scooter" ng-click="markAsOpen(null, ticketDetail)">Mark as Open</a>
+        </div>
+    </div>
+    <div class="tips-message has-updates"  ng-if="ticketListType == 'trash'"><span class="icn icn-message-ticket-trash"></span>
+        <div class="message-detail">
+            <span class="bold blue">Steve Carter</span> has moved this ticket to trash. You can either delete the ticket forever or restore the ticket
+            status anytime, using the respective option.</div>
+        <div class="tip"><span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder where it was deleted from.</div>
+        <div class="message-btn shared">
+            <a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail, true)" class="btn btn-sr btn-red">Delete Forever</a>
+            <a href="javascript:void(0)" ng-click="markAsTrash(null, ticketDetail, false)" class="btn btn-sr btn-gray btn-cancel ">Restore</a>
+        </div>
+    </div>
+    <div class="tips-message has-updates" ng-if="ticketListType == 'spam'"><span class="icn icn-message-ticket-spam"></span>
+        <div class="message-detail"><span class="bold blue">Steve Carter</span> has marked this ticket as spam. You can either delete the ticket forever or restore the ticket
+            status anytime, using the respective option.</div>
+        <div class="tip"><span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder where it was marked as spam.</div>
+        <div class="message-btn shared">
+            <a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail, true)" class="btn btn-sr btn-red">Delete Forever</a>
+            <a href="javascript:void(0)" ng-click="markAsSpam(null, ticketDetail, false)" class="btn btn-sr btn-gray btn-cancel ">Restore</a>
+        </div>
+    </div>
+</div>

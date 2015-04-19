@@ -1,0 +1,379 @@
+aside.right {
+	position: fixed;
+	top: $navbar-height;
+	right: 0;
+	width: $right-sidebar;
+	height: calc(100% - #{$navbar-height});
+	background-color: #fff;
+	border-left: 1px solid $clr9;
+	z-index: $zindex-navbar;
+	
+	// Main tabs to sidebar contents
+	.nav-sb-tabs {
+		position: fixed;
+		top: $navbar-height;
+		width: $right-sidebar;
+		background-color: #FFF;
+		z-index: $zindex-navbar-fixed;
+
+	  > li {
+  
+	    > a {
+	      padding: 49px 40px 48px;
+	      border-bottom: 1px solid $clr9;
+	      &:hover,
+	      &:focus {
+	      	background-color: transparent;
+	      }
+	      .icon {
+	      	display: inherit;
+	      	margin-top: 0;
+	      }
+	    }
+
+	    // Active state, and its :hover to override normal :hover
+	    &.active > a {
+	      &,
+	      &:hover,
+	      &:focus {
+	        background-color: transparent;
+	        border-color: $clr11;
+	        cursor: default;
+	      }
+	    }
+
+	  }
+	}
+
+	// Tab contents
+	.tab-content {
+		margin-top: 120px;
+		height: calc(100% - 120px);
+	}
+
+	// Tab info
+	.tab-info {
+		.panel-heading { display: inline-block; }
+		.panel-heading-about { margin-top: 52px; }
+		.my-info {
+			
+			.about-company {
+				margin-top: 17px;
+				line-height: 26px;
+			}
+			
+			.icon {
+				float: left;
+				margin-right: 10px;
+				margin-top: 8px;
+				&.icn-load-gray { margin-top: 6px; }
+				&.icn-clock { margin-top: 7px; }
+				&.icn-at-the-rate { margin-top: 7px; }
+				&.icn-iphone {
+					margin-top: 6px;
+					margin-right: 11px;
+					margin-left: 1px;
+				}
+			}
+
+		}
+
+	}
+
+	.recent-activities-by {
+		
+		.user-name {
+			color: $clr6;
+			strong {
+				font-weight: 600;
+				color: $clr3;
+			}
+		}
+
+		.user-title {
+			display: block;
+			margin-top: 1px;
+			color: $clr3;
+		}
+
+		.time-ago {
+			margin-left: 50px;
+			margin-top: 5px;
+			display: block;
+			color: $clr6;
+		}
+
+	}
+
+	// Tab activities
+	.tab-activities {
+		.navbar-form-search .form-group,
+		.navbar-form-search .form-control-search { width: 100%; }
+	}
+
+	// Tab companies
+	.companies-list-wrapper {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		
+		> li {
+
+			padding: 6px 0px;
+			margin-bottom: 10px;
+			
+			.company-title {
+				padding: 0 40px;
+				font-weight: 600;
+				color: $clr3;
+			}
+
+			.company-numbers {
+				margin-top: 6px;
+				padding: 0 40px;
+			}
+
+			.numbers {
+				float: left;
+				margin-right: 30px;
+				font-size: 11px;
+				font-weight: 600;
+				text-transform: uppercase;
+				color: $clr5;
+				cursor: pointer;
+				&:hover,
+				&.active { color: $clr4; }
+				> .icon {
+					float: left;
+					margin-right: 6px;
+				}
+			}
+
+			&.opened-list {
+				margin-top: 20px;
+				padding: 26px 0px 0;
+				background-color: $clr10;
+				border-top: 1px solid $clr9;
+				border-bottom: 1px solid $clr9;
+				.company-numbers { margin-bottom: 16px; }
+				
+				.company-users {
+					.list-users { background-color: transparent; }
+					.user-name {
+						margin-top: 4px;
+						font-weight: 600;
+					}
+					.avatar > i {
+						width: 10px;
+						height: 10px;
+					}
+					.checkbox { margin-top: 2px; }
+				}
+
+				.company-devices {
+					.list-devices {
+						padding: 11px 40px;
+						background-color: transparent;
+					}
+				}
+
+			}
+
+
+
+		}
+
+	}
+
+	// Search form
+	.navbar-form-search {
+		margin-bottom: 11px;
+		padding: 16px 40px;
+	 .form-control-search { width: 168px; }
+	}
+
+	.tab-users {
+
+		.panel-heading {}
+		.user-name {
+			margin-top: 10px;
+			font-weight: 600;
+		}
+		.user-title { display: none; }
+	}
+
+	// Panel headings
+	.panel-heading {
+		padding: 0 40px;
+		padding-bottom: 15px;
+		font-size: 11px;
+		font-weight: bold;
+		color: $clr7-1;
+		text-transform: uppercase;
+	}
+
+	// Users and devices list
+	.list-users,
+	.list-devices {
+		position: relative;
+	  padding: 10px 40px;
+	  margin-bottom: 0;
+	  background-color: $list-group-bg;
+	  border: 0;
+	  border-radius: 0;
+
+	  // Round the first and last items
+	  &:first-child {
+	    @include border-top-radius($list-group-border-radius);
+	  }
+	  &:last-child {
+	    margin-bottom: 0;
+	    @include border-bottom-radius($list-group-border-radius);
+	  }
+
+	  &:hover { background-color: $clr9; }
+	  &.selected { background-color: $clr11; }
+
+	  .checkbox {
+	  	margin-top: 8px;
+	  	margin-right: 1px;
+	  }
+
+	  .avatar { margin-right: 12px; }
+	  .text-muted { color: $clr6; }
+
+	  .ticket-number { color: $clr3; }
+
+	}
+
+	// List devices 
+	.list-devices {
+		.avatar {
+			position: static;
+			> .icon {
+				display: inherit;
+				margin-top: 8px;
+			}
+			> i.right {
+				top: 24px;
+				right: 64px;
+				width: 8px;
+				height: 8px;
+				border: 0;
+			}
+		}
+		.user-name { font-weight: 600; }
+		.user-title {
+			font-size: 13px;
+			color: #83929c;
+		}
+	}
+
+	// Company detail 
+	.company-detail {
+		padding: 40px;
+		> h4 {
+			margin-top: 8px;
+			margin-bottom: 11px;
+			font-size: $font-size-h4 + 2;
+			font-weight: 400;
+		}
+		> .rating {
+			> li { margin-right: 4px; }
+		}
+		.btn-download-agent {
+			margin-top: 30px;
+			margin-bottom: 12px;
+		}
+	}
+
+	// Billing address
+	.billing-address {
+		padding: 5px 40px;
+		> .post-address {
+			font-weight: 600;
+			line-height: 20px;
+		}
+		> .site-ref {
+			margin-top: 15px;
+			> .btn-location {
+				display: inline-block;
+				padding: 6px 0;
+				font-weight: 600;
+				border-bottom: 1px solid transparent;
+				cursor: pointer;
+				&:hover {
+					color: $clr11;
+					border-color: $clr8;
+				}
+				> .icn-sb-location {
+					margin-top: 3px;
+					margin-right: 10px;
+				}
+			}
+		}
+		> .about-company {
+			margin-top: 10px;
+			margin-bottom: 39px;
+			color: $clr6;
+			line-height: 26px;
+			.dot-sep {
+				width: 4px;
+				height: 4px;
+				margin: 0 5px;
+				margin-bottom: 3px;
+			}
+		}
+	}
+
+	// Primary contacts
+	.panel-heading-primary-contanct {
+		padding-bottom: 10px;
+	}
+
+	.primary-contacts {
+		margin-bottom: 37px;
+		.user-name {
+			font-weight: 600;
+			margin-top: 10px;
+		}
+		.list-users {
+			padding: 15px 40px;
+			border-radius: 0;
+			.avatar { margin-right: 11px; }
+		}
+	}
+
+	// Ticket created by
+
+	.ticket-created-by {
+		.user-name {
+			font-weight: 600;
+			margin-top: 10px;
+		}
+	}
+
+	.icn-dot {
+		float: left;
+		width: 14px;
+		height: 14px;
+		margin-top: 2px;
+		margin-right: 10px;
+		background-color: $clr5;
+		border-radius: 50%;
+		&:hover { background-color: $clr4; }
+	}
+
+	.jspDrag { opacity: 0; }
+
+	.tab-devices {
+		.panel-heading { padding-bottom: 7px; }
+		.list-devices {
+			padding: 11px 40px;
+			border-radius: 0;
+		}
+	}
+
+}
+
+

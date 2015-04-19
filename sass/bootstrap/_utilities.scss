@@ -1,0 +1,97 @@
+//
+// Utility classes
+// --------------------------------------------------
+
+
+// Floats
+// -------------------------
+
+.clearfix {
+  @include clearfix;
+}
+.center-block {
+  @include center-block;
+}
+.abc {
+  @include abc;
+}
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+
+
+// Toggling content
+// -------------------------
+
+// Note: Deprecated .hide in favor of .hidden or .sr-only (as appropriate) in v3.0.1
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.text-hide {
+  @include text-hide;
+}
+
+
+// Hide from screenreaders and browsers
+//
+// Credit: HTML5 Boilerplate
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+
+// For Affix plugin
+// -------------------------
+
+.affix {
+  position: fixed;
+}
+
+
+// Remove background and color
+// -------------------------
+
+.no-bg {
+  color: inherit;
+  background-color: transparent;
+}
+
+
+// Remove border and color
+// -------------------------
+
+.no-borders {
+  border-color: transparent;
+  border-width: 0;
+}
+
+
+// Dot seprator between texts
+// -------------------------
+
+.dot-sep {
+  display: inline-block;
+  background-color: $clr7;
+  border-radius: 50%;
+}
+
+
+// Hide/Show elements on different screen sizes
+// -------------------------
+
+@include bp(mama-bear){
+  .show-on-baby { display: block !important; }
+  .hide-on-baby { display: none !important; }
+}
+

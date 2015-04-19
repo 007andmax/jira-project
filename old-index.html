@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" ng-app="main.app">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="html/css/fonts.css" />
+        <link rel="stylesheet" href="html/css/jscrollpane.css" />
+        <link rel="stylesheet" href="html/css/quicktech.css">
+        <script src="html/js/js_assest/vendors/modernizr.js"></script>
+        <script src="html/js/js_assest/vendors/jquery.js"></script>
+        <script src="html/app/bower_components/angular/angular.js"></script>
+        <script src="html/app/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="html/app/bower_components/angular-route/angular-route.js"></script>
+        <script src="html/app/bower_components/angular-resource/angular-resource.js"></script>
+        <script src="html/app.js"></script>
+        <script src="html/controllers.js"></script>
+        <!--<script src="html/filters.js"></script>
+        <script src="html/services.js"></script>-->
+
+
+    </head>
+    <body class="" ng-controller="TicketsController">
+
+        <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		<div class="alert-wrapper" id="notificationContainer" style="display:none">
+		  <center class="animator stop">
+			<div class="alert alert-yellow"></div>
+		  </center>
+		</div>
+		<div class="modal modal-label-as fade in " id="labelAs" tabindex="-1" role="dialog" aria-labelledby="labelAs" aria-hidden="true" ng-include="'html/templates/tagAs.html'"></div>
+		<div id="assignTicketModel" class="modal fade" id="assignTo" tabindex="-1" role="dialog" aria-labelledby="assignToLabel" aria-hidden="true" ng-include="'html/templates/assignTicket.html'"></div>
+		<div id="tagCreateModel" ng-controller="TagController" class="modal modal-tag fade in" id="assignTo" tabindex="-1" role="dialog" aria-labelledby="tagCreate" aria-hidden="true" ng-include="'html/templates/tagCreate.html'"></div>
+		<!-- Create Ticket -->
+		<div class="modal modal-create-ticket fade in " id="createTicketPopup" tabindex="-1" role="dialog" aria-labelledby="createTicketLabel" aria-hidden="true" ng-include="'html/templates/createTicket.html'"></div>
+        <nav class="navbar navbar-default navbar-fixed-top navbar-main" ng-include="'html/templates/topNav.html'"></nav>
+
+        <div class="main-container container-fluid">
+            <div class="row" ng-controller="CompaniesController">
+
+                <aside class="left" ng-include="'html/templates/leftNav.html'"></aside>
+
+                <aside class="right scroll-pane" ng-include="'html/templates/rightBar.html'" ng-controller="RightPanelController" {{getCompanyData(currentCompany)}}></aside>
+
+                <div id="content" class="content-container">
+                    <header class="ticket-nav clearfix" ng-include="'html/templates/ticketHeader.html'"></header>
+                    <div class="content-wrapper">
+                        <div class="ticket-sidebar tickets-list" ng-include="'html/templates/ticketList.html'"></div>
+                        <div class="ticket-content" ng-include="'html/templates/ticketDetail.html'"></div>
+						<a ng-click="loadMore()" id="loadMore"></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script src="html/js/js_assest/vendors/moment-with-locales.min.js"></script>
+        <script src="html/js/js_assest/bootstrap.min.js"></script>
+        <script src="html/js/js_assest/vendors/jquery.mousewheel.js"></script>
+		<script src="html/js/jquery.autocomplete.js"></script>
+        <script src="html/js/js_assest/vendors/jquery.jscrollpane.js"></script>
+        <script src="html/js/js_assest/vendors/bootstrap-tokenfield.js"></script>
+        <script src="html/js/js_assest/vendors/bootstrap3-typeahead.js"></script>
+        <script src="html/js/js_assest/vendors/bootstrap-select.js"></script>
+        <script src="html/js/js_assest/vendors/bootstrap-datetimepicker.js"></script>
+        <script src="html/js/js_assest/main.js"></script>
+<!--        <script src="html/js/restservices/common.js"></script>
+        <script src="html/js/restservices/realtime.js"></script>-->
+        <script src="html/rest-services.js"></script>
+    </body>
+</html>

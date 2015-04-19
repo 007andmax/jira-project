@@ -1,0 +1,38 @@
+.modal-att-box {
+	width: 502px;
+	> .modal-content {
+		background-color: $clr10;
+		
+		> .modal-header {
+			background-color: #FFF;
+			border-radius: $border-radius-base $border-radius-base 0 0;
+			.form-group { margin-bottom: 6px; }
+			.tokenfield.form-control { margin-top: 24px; }
+		}
+		
+		> .modal-body {
+			padding: 0;
+			max-height: 204px;
+			height: 204px;
+			
+			.users-list {
+				padding: 10px 0;
+				margin: 0;
+				list-style: none;
+				
+				> li {
+					padding: 10px 30px;
+					cursor: pointer;
+					&:hover { background-color: $clr9; }
+					&:active,
+					&.active { background-color: rgba($clr11, .12); }
+					.avatar { margin-right: 7px; }
+					.user-name { margin-top: 4px; }
+				}
+
+			}
+
+		}
+
+	}
+}

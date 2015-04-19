@@ -1,0 +1,39 @@
+    <!-- Tag create modal -->
+    
+      <div class="modal-backdrop fade in" style="height: 2000px;"></div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Modify Label</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <div class="error-msg">The label "onsite" already exists! Try another label</div>
+              <input type="text" class="form-control" placeholder="Enter label name" id="ticketTagName">
+              <div class="words-count pull-right">10</div>
+            </div>
+            <ul class="tags-list">
+              <li ng-click="selectColor($event, 0, 'red')"><a id="color0" href="javascript:{}"><span class="tag-color tag-red"></span></a></li>
+              <li ng-click="selectColor($event, 1, 'blue')"><a id="color1" href="javascript:{}"><span class="tag-color tag-blue"></span></a></li>
+              <li ng-click="selectColor($event, 2, 'green')"><a id="color2" href="javascript:{}"><span class="tag-color tag-green"></span></a></li>
+              <li ng-click="selectColor($event, 3, 'pink')"><a id="color3" href="javascript:{}"><span class="tag-color tag-pink"></span></a></li>
+              <li ng-click="selectColor($event, 4, 'orange')"><a id="color4" href="javascript:{}"><span class="tag-color tag-orange"></span></a></li>
+              <li ng-click="selectColor($event, 5, 'yellow')"><a id="color5" href="javascript:{}"><span class="tag-color tag-yellow"></span></a></li>
+              <li ng-click="selectColor($event, 6, 'maron')"><a id="color6" href="javascript:{}"><span class="tag-color tag-maron"></span></a></li>
+              <li ng-click="selectColor($event, 7, 'light-yellow')"><a id="color7" href="javascript:{}"><span class="tag-color tag-yellow-light"></span></a></li>
+              <li ng-click="selectColor($event, 8, 'light-green')"><a id="color8" href="javascript:{}"><span class="tag-color tag-green-light"></span></a></li>
+              <li ng-click="selectColor($event, 9, 'khaki')"><a id="color9" href="javascript:{}"><span class="tag-color tag-khaki"></span></a></li>
+            </ul>
+			<input type="hidden" id="tagColorCode" value="">
+			<input type="hidden" id="tagId" value="">
+          </div>
+          <div class="modal-footer">
+            <div id="deleteTagIcon" class="btn btn-white-gray btn-cr pull-left" data-placement="top" data-original-title="Delete" ng-click="deleteTag($event)">
+              <span class="icn-nav-delete"></span>
+            </div>
+            <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-scooter" ng-click="postCreateTag()">Save Changes</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
