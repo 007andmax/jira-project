@@ -1,71 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="main.app">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="html/assets/css/fonts.css" />
+	<link rel="stylesheet" href="html/assets/css/jscrollpane.css" />
+  <link rel="stylesheet" href="html/assets/css/quicktech.css">
+  <link rel="stylesheet" href="html/assets/css/quicktech-override.css">
+  <script src="html/assets/js/vendors/modernizr.js"></script>
+</head>
+<body class="unassigned" ng-app="quicktech.ticketing" ng-controller="TicketController">
+        <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+          <div id="loading" class="alert-wrapper">
+            <center class="animator stop">
+              <div class="alert alert-yellow">Loading ...</div>
+            </center>
+          </div>
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-    <link rel="stylesheet" href="html/css/fonts.css" />
-    <link rel="stylesheet" href="html/css/jscrollpane.css" />
-    <link rel="stylesheet" href="html/css/quicktech.css">
-    <script src="html/js/vendors/modernizr.js"></script>
-	<script src="html/js/js_assest/vendors/jquery.js"></script>
-        <script src="html/app/bower_components/angular/angular.js"></script>
-        <script src="html/app/bower_components/angular-animate/angular-animate.js"></script>
-        <script src="html/app/bower_components/angular-route/angular-route.js"></script>
-        <script src="html/app/bower_components/angular-resource/angular-resource.js"></script>
-        <script src="html/app.js"></script>
-        <script src="html/controllers.js"></script>
-  </head>
-  <body class=" {{ticketListType}} "  ng-controller="TicketsController">	
-
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-	<nav class="navbar navbar-default navbar-fixed-top navbar-main" ng-include="'html/templates/topNav.html'"></nav>
-    
-    <div class="main-container ">
-		<div class="row">
-			<aside class="left" ng-include="'html/templates/leftNav.html'"></aside>
-			<aside class="right scroll-pane" ng-include="'html/templates/rightBar.html'" ng-controller="RightPanelController" {{getCompanyData(currentCompany)}}></aside>
-
-        <div id="content" class="content-container">
-          
-          <div class="content-wrapper">
-		  
-			<div class="ticket-sidebar tickets-list" ng-include="'html/templates/ticketList.html'"></div>
-			<div class="ticket-content" ng-include="'html/templates/ticketDetail.html'"></div>
+          <nav class="navbar navbar-default navbar-fixed-top navbar-main" ng-include="'html/partials/header.html'">
+          </nav>
+          <div class="main-container ">
+           <div class="row">
+             <aside class="left" ng-include="'html/partials/left-panel.html'"></aside>
+             <aside class="right scroll-pane" ng-include="'html/partials/right-panel.html'"></aside>
+             <div id="content" class="content-container">
+               <div class="content-wrapper">
+                <div ui-view></div>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
-    
 
+      <script src="html/assets/js/vendors/jquery.js"></script>
+      <script src="html/assets/js/vendors/moment-with-locales.min.js"></script>
+      <script src="html/assets/js/bootstrap.min.js"></script>
+      <script src="html/assets/js/vendors/jquery.mousewheel.js"></script>
+      <script src="html/assets/js/vendors/jquery.jscrollpane.js"></script>
+      <script src="html/assets/js/vendors/bootstrap-tokenfield.js"></script>
+      <script src="html/assets/js/vendors/bootstrap3-typeahead.js"></script>
+      <script src="html/assets/js/vendors/bootstrap-select.js"></script>
+      <script src="html/assets/js/vendors/bootstrap-datetimepicker.js"></script>
+      <script src="html/assets/js/vendors/retina.min.js"></script>
+      <!--script src="html/assets/js/vendors/ui-bootstrap-tpls-0.12.1.min.js"></script-->
+      <script src="html/assets/js/main.js"></script>
+      <script src="html/assets/js/angular.js"></script>
+      <script src="html/assets/js/angular-ui-router.min.js"></script>
+      <script src="html/assets/js/angular-sanitize.min.js"></script>
+      
+      <script src="html/assets/js/typeahead.bundle.js"></script>
+      <script src="html/assets/js/handlebars-v3.0.3.js"></script>
 
+      <script src="html/assets/js/angular-smooth-scroll.min.js"></script>
 
-    <script src="html/js/vendors/jquery.js"></script>
-    <script src="html/js/vendors/moment-with-locales.min.js"></script>
-    <script src="html/js/bootstrap.min.js"></script>
-    <script src="html/js/vendors/jquery.mousewheel.js"></script>
-	<script src="html/js/jquery.autocomplete.js"></script>
-    <script src="html/js/vendors/jquery.jscrollpane.js"></script>
-    <script src="html/js/vendors/bootstrap-tokenfield.js"></script>
-    <script src="html/js/vendors/bootstrap3-typeahead.js"></script>
-    <script src="html/js/vendors/bootstrap-select.js"></script>
-    <script src="html/js/vendors/bootstrap-datetimepicker.js"></script>
-      <script src="html/js/vendors/retina.min.js"></script>
-    <script src="html/js/main.js"></script>
-	<script src="html/rest-services.js"></script>
+      <script src="html/rest-services.js"></script>
 
-   
-  </body>
-</html>
+      <script src="html/app.js"></script>
+      <script src="html/quicktech/ticketing/services/actionRights.js"></script>
+      <script src="html/quicktech/ticketing/filters/ticketsFilter.js"></script>
+      <script src="html/quicktech/ticketing/controllers/ticketController.js"></script>
+      <script src="html/quicktech/ticketing/controllers/ticketListController.js"></script>
+      <script src="html/quicktech/ticketing/controllers/ticketDetailController.js"></script>
+
+      <!--script src="html/quicktech/ticketing/directives/assignUser/assignUser.js"></script-->
+    </body>
+    </html>

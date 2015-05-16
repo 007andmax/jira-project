@@ -1,0 +1,76 @@
+<style>
+.assign-ticket-content {
+        background-color: #f7f9fb;
+        height: 282px;
+    }
+
+    .twitter-typeahead {
+        top: -5px;
+    }
+
+    .user-name {
+        padding-left:40px;
+    }
+
+    #assignedTo {
+        background: transparent;
+        border: none;
+        outline: none;
+        width: 280px;
+    }
+
+    .tt-menu {
+        top: 55px !important;
+        height:200px;
+        overflow:auto;
+    }
+
+    div.tt-dataset {
+        padding:10px 0;
+    }
+
+    div.tt-menu {
+        left: -34px !important;
+        width: 380px;
+    }
+
+    div.tt-suggestion {
+        padding: 12px 15px;
+        cursor: pointer;
+    }
+
+    .tt-suggestion.tt-cursor {
+        background: #e9edf1;
+    }
+
+    .tt-suggestion.tt-cursor a {
+        color: #25303d;
+    }
+
+    div.tt-suggestion:hover {
+        background-color: #e9edf1;
+    }
+    .assign-ticket .jspDrag {
+        margin-top:0;
+    }
+
+</style>
+<div class="assign-ticket ">
+    <div class="assign-ticket-content">
+        <div class="assign-ticket-header">
+            <div class="clearfix">
+                <div class="form-group">
+                    <div id="the-basics" class="form-control" style="width: 100%;">
+                        <input id="assignedTo" type="text" class="typeahead" placeholder="Add agent" >
+                        <input type="hidden" name="userId" id="userId" value="" />
+                    </div>
+                    <div class="label-add-btn">
+                        <a id="btnAssignUser" href="#" class="btn input-btn-cr btn-green btn-add-more disabled pull-left ">
+                            <span class="small-icn-tick icn"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

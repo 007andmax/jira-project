@@ -1,0 +1,143 @@
+.content-wrapper .ticket-sidebar {
+	width: 100%;
+	display: block;
+
+	-moz-user-select: none; 
+	-webkit-user-select: none; 
+	-ms-user-select:none; 
+	user-select:none;
+	-o-user-select:none;
+}
+
+aside.left {
+	z-index: 1071;
+}
+
+.selected {
+	background-color: #e0f5f7;
+}
+
+.assign-ticket .users-list {
+	margin-top: 0;
+	padding-top: 90px;
+}
+
+@media (max-width: 1366px) {
+	.opened-ticket .content-wrapper .ticket-sidebar {
+		display: none;
+	}
+	.content-wrapper .ticket-content {
+		float: none;
+		width: 100%;
+	}
+	.content-wrapper .ticket-content > .ticket-header > .ticket-fixed-header { 
+		left: 140px;
+	}
+}
+
+@media (min-width: 1367px) {
+	.opened-ticket .content-wrapper .ticket-sidebar {
+		display: block;
+		width: 35%;
+		border-right: 1px solid #e9edf1;
+	}
+}
+
+.content-wrapper .ticket-sidebar .ticket {
+	cursor: pointer;
+}
+
+/* ----------------- Assign User ---------------------- */
+.assign-ticket-content {
+	background-color: #f7f9fb;
+	height: 282px;
+}
+
+.open .user-name {
+	padding-left: 40px;
+}
+
+.assign-ticket .twitter-typeahead {
+	top: -5px;
+}
+
+#assignedTo, #bulkAssignedTo {
+	background: transparent;
+	border: none;
+	outline: none;
+	width: 280px;
+}
+
+.tt-menu {
+	top: 55px !important;
+	height:200px;
+	overflow:auto;
+}
+
+div.tt-dataset {
+	padding:10px 0;
+}
+
+div.tt-menu {
+	left: -34px !important;
+	width: 380px;
+}
+
+div.tt-suggestion {
+	padding: 12px 15px;
+	cursor: pointer;
+}
+
+.tt-suggestion.tt-cursor {
+	background: #e9edf1;
+}
+
+.tt-suggestion.tt-cursor a {
+	color: #25303d;
+}
+
+div.tt-suggestion:hover {
+	background-color: #e9edf1;
+}
+.assign-ticket .jspDrag {
+	margin-top:0;
+}
+
+.twitter-typeahead .tt-input, .twitter-typeahead .tt-hint {
+	padding:0;
+}
+.btn-green.disabled {
+	cursor: pointer;
+}
+/* //----------------- Assign User ---------------------- */
+
+.pad-left {
+	margin-left: 20px;
+}
+
+.assign-ticket-menu {
+	overflow: visible;
+}
+
+/* Font weight for assign user fixed */
+.content-wrapper .ticket-content > .ticket-header .dropdown-submenu-wrapper .user-name {
+	font-weight: normal;
+}
+
+.dropdown-menu > li > a.active {
+	background-color: #e9edf1;
+	outline: none;
+}
+
+.dropdown-menu > li.active {
+	background-color: #e9edf1;
+	outline: none;
+}
+
+.dropdown-menu-transparent > .dropdown-menu-products .subdropdown-menu {
+	list-style: none;
+	margin-left:0;
+	padding-left:0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

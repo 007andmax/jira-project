@@ -1,0 +1,147 @@
+<div class="dropdown pull-left" id="addUsersDropdown">
+  <a href="javascript:void(0);" data-placement="top" title="" data-original-title="add users to this update" class="btn pull-left btn-white-gray btn-cr btn-transparent dropdown-toggle tooltip-dp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icn-add-update"></span>
+  </a>
+  <ul id="myTabs" class="dropdown-menu dropdown-menu-tabs" ng-click="$event.stopPropagation();">
+
+    <ul class="nav nav-justified nav-tabs-dropdown" role="tablist">
+      <li class="active">
+        <a href="#teammembers" aria-controls="teammembers" role="tab" data-toggle="tab">Team Members</a>
+      </li>
+      <li>
+        <a href="#vendors" aria-controls="vendors" role="tab" data-toggle="tab">vendors</a>
+      </li>
+      <li>
+        <a href="#clientUsers" aria-controls="clientUsers" role="tab" data-toggle="tab">Client Users</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Team Members Panel -->
+      <div class="tab-pane active " id="teammembers">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-search form-control-dropdown-input" placeholder="Search agent..." ng-model="userFilter.query" ng-keyup="searchUser();">
+          <a href="#" class="close icn-remove-token" tabindex="-1"></a>
+        </div>
+        <div>
+
+          <!--div class="jspContainer" style="width: 0px; height: 333px;">
+          <div class="jspPane" style="padding: 0px; top: 0px; left: 0px; width: 0px;"-->
+
+            <ul class="users-list ">
+
+              <li ng-repeat="user in tech_users | UserFilter: userQuery " ng-class="{checked: user.isSelected}" ng-click="user.isSelected=!user.isSelected; addUsertoUpdate(user);">
+                <label class="control checkbox">
+                  <input type="checkbox" ng-model="user.isSelected">
+                  <span class="control-indicator"></span>
+                </label>
+                <a herf="" class="pull-left avatar-26 avatar m-r">
+                  <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+                </a>
+                <div class="clearfix">
+                  <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+
+            <!--/div>
+          </div-->
+        </div>
+      </div>
+
+      <!-- Vendor Panel -->
+      <div class="tab-pane" id="vendors">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-search form-control-dropdown-input" placeholder="Search vendor..." ng-model="userFilter.query" ng-keyup="searchUser();">
+          <a href="#" class="close icn-remove-token" tabindex="-1"></a>
+        </div>
+        <!--div class="scroll-pane" style="overflow: hidden; padding: 0px; width: 0px;">
+          <div class="jspContainer" style="width: 0px; height: 333px;">
+            <div class="jspPane" style="padding: 0px; top: 0px; left: 0px; width: 0px;"-->
+
+              <div>
+                <ul class="users-list ">
+
+                  <li ng-repeat="user in vendor_users | UserFilter: userQuery" ng-class="{checked: user.isSelected}" ng-click="user.isSelected=!user.isSelected; addUsertoUpdate(user);">
+                    <label class="control checkbox">
+                      <input type="checkbox" ng-model="user.isSelected">
+                      <span class="control-indicator"></span>
+                    </label>
+                    <a herf="" class="pull-left avatar-26 avatar m-r">
+                      <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+                    </a>
+                    <div class="clearfix">
+                      <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
+                      </div>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            <!--/div>
+          </div>
+        </div-->
+      </div>
+
+      <!-- Client User Panel -->
+      <div class="tab-pane" id="clientUsers">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-search form-control-dropdown-input" placeholder="Search client..." ng-model="userFilter.query" ng-keyup="searchUser();">
+          <a href="#" class="close icn-remove-token" tabindex="-1"></a>
+        </div>
+        <!--div class="scroll-pane" style="overflow: hidden; padding: 0px; width: 0px;">
+          <div class="jspContainer" style="width: 0px; height: 333px;">
+            <div class="jspPane" style="padding: 0px; top: 0px; left: 0px; width: 0px;"-->
+              <div>
+                <ul class="users-list ">
+
+                  <li ng-repeat="user in client_users | UserFilter: userQuery" ng-class="{checked: user.isSelected}"  ng-click="user.isSelected=!user.isSelected; addUsertoUpdate(user);">
+                    <label class="control checkbox">
+                      <input type="checkbox" ng-model="user.isSelected">
+                      <span class="control-indicator"></span>
+                    </label>
+                    <a herf="" class="pull-left avatar-26 avatar m-r">
+                      <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+                    </a>
+                    <div class="clearfix">
+                      <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
+                      </div>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            <!--/div>
+          </div>
+        </div-->
+
+      </div>
+    </div>
+  </ul>
+</div>
+
+<!-- Selected Users -->
+<ul class="selected-users pull-left">
+
+  <li ng-repeat="user in update_users">
+    <div class="pull-left avatar-26 avatar m-r">
+      <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+      <div class="remove-user"> 
+        <span class="icn-remove-user abc"></span> 
+      </div>
+      <div class="tooltip tooltip-users top">
+        <div class="tooltip-arrow"></div>
+        <ul class="tooltip-inner">
+          <li>
+            <span class="username">{{ user.firstName }} {{ user.lastName }}</span>
+            <span class="usertitle">{{ getUserType(user.accountType) }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+
+</ul>
+
+<div class="total-amount pull-right" ng-show=" updateType === 'PRODUCT' ">Total amount <span class="bold">{{ productTotalAmount | currency }}</span></div>
