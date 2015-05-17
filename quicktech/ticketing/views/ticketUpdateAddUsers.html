@@ -127,7 +127,7 @@
   <li ng-repeat="user in update_users">
     <div class="pull-left avatar-26 avatar m-r">
       <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
-      <div class="remove-user"> 
+      <div class="remove-user" ng-click="user.isSelected = false; addUsertoUpdate(user);"> 
         <span class="icn-remove-user abc"></span> 
       </div>
       <div class="tooltip tooltip-users top">

@@ -189,7 +189,7 @@
 	<!-- /ticket updates -->
 
 	<div class="ticket-updates-wrapper clearfix">
-		<div ng-repeat="ticketUpdate in ticketDetail.updates" class="ticket-update clearfix" ng-class="{'has-attachment': update.attachments.length > 0}">
+		<div ng-repeat="ticketUpdate in ticketDetail.updates" class="ticket-update clearfix" ng-class="{'has-attachment': update.attachments.length > 0}" ng-init="updateIndex = $index;">
 			<div class="ticket-updater pull-left">
 				<div class="pull-left avatar-38 avatar m-r">
 					<img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
@@ -206,8 +206,9 @@
 				<p class="ticket-update-message" ng-if=" ticketUpdate.type === 'NOTE' "> {{ ticketUpdate.note }}</p>
 
 				<!-- Update Content - Product -->
-				<div class="table-wrapper clearfix" ng-if=" ticketUpdate.type === 'PRODUCT' ">
-					<div class="table-content pull-left" ng-repeat="product in ticketUpdate.products">
+				<div class="table-wrapper clearfix" ng-repeat="product in ticketUpdate.products" ng-if=" ticketUpdate.type === 'PRODUCT' ">
+					
+					<div class="table-content pull-left" ng-if="product.editMode === undefined">
 						<div class="col-1"  data-popover="true" data-html="true" data-content="{{ product.item.name }} # {{ product.item.code }}"> 
 							{{ product.item.name }}   
 							<span class="model"># {{ product.item.code }}</span>
@@ -223,14 +224,85 @@
 							{{ product.item.description }}
 						</div>
 						<div class="table-content-action pull-right"> 
-							<a href="javascript:void(0)" class="icn-edit disabled tp-hide"></a> 
+							<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="edit product" class="icn-edit tp-hide" ng-click="showEditMode(product)"></a>
 						</div>
 					</div>
+
+					<div class="edit-wrapper clearfix" ng-if="product.editMode === true">       
+						<div class="table-content service-table edit-table edit-product-table pull-left">
+							<span class="icon-update icn-update-product"></span>
+							<div class="ticket-form-header">
+								<div class="add-product clearfix">
+									<div class="col-1">
+										<div class="col-wrapper dropdown">
+											<input type="text" class="form-control form-control-dropdown dropdown-toggle" placeholder="Product" value="" data-toggle="dropdown" aria-expanded="false" ng-model=" editProduct.item.name ">
+											<div class="dropdown-menu dropdown-menu-transparent">
+												<!-- Don't repeat yourself - create a control instead -->
+												<ul class="dropdown-menu dropdown-menu-categories">
+													<li role="presentation" ng-repeat=" category in productCategories" ng-click=" loadCategoryProducts($event, category);" ng-class="{active: category.isSelected}">
+														<a role="menuitem" tabindex="-1" href="#">
+															<span class="title" ng-bind="category.name"></span>
+															<span class="pull-right total-count">{{category.productsAmount}} items</span>
+															<span class="clearfix"></span>
+														</a>
+													</li>
+												</ul>
+												<ul class="dropdown-menu dropdown-menu-products">
+													<li role="presentation" class="dropdown-header">
+														<div class="form-group">
+															<input type="text" class="form-control form-control-search form-control-dropdown-input" placeholder="Filter product..." ng-model="productFilter.query" ng-click="$event.stopPropagation();">
+															<a href="#" class="close icn-remove-token" tabindex="-1"></a>
+														</div>
+													</li>
+													<li>
+														<ul class="subdropdown-menu dropdown-menu-products">
+
+															<li role="presentation" ng-repeat="prod in catProducts | filter: searchProduct ">
+																<a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="selectProductForEdit($event, prod, $parent.$index, updateIndex)">
+																	<span class="title" ng-bind="prod.name"></span>
+																	<!--span class="pull-right total-count">#{{ prod.code }}</span-->
+																</a>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="col-wrapper">
+											<input type="text" class="form-control" placeholder="Description" value="" ng-model="editProduct.item.description">
+										</div>
+									</div>
+
+									<div class="col-4">
+										<div class="col-wrapper">
+											<input type="text" class="form-control" placeholder="Amount" value="" readonly="" ng-model="editProduct.sum">
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="col-wrapper">
+											<input type="text" class="form-control" placeholder="Qty" value="4"
+											ng-model="editProduct.quantity">
+										</div>
+									</div>
+
+									<div class="edit-table-actions">
+										<a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left" ng-click="product.editMode = undefined;">Cancel</a>
+										<a href="javascript:void(0);" class="btn btn-sr btn-scooter pull-left" ng-click=" updateProduct(); " >Save Changes</a>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 
 				<!-- Update Content - Service -->
-				<div class="table-wrapper clearfix" ng-if=" ticketUpdate.type === 'SERVICE' ">
-					<div class="table-content service-table pull-left" ng-repeat="service in ticketUpdate.services">
+				<div class="table-wrapper clearfix" ng-if=" ticketUpdate.type === 'SERVICE' " ng-repeat="service in ticketUpdate.services">
+					
+					<div class="table-content service-table pull-left" ng-if="service.editMode === undefined;">
 						<div class="col-1"> {{ renderDateTime(service.createdAt) }} </div>
 						<div class="col-2"> {{ service.item.name }} </div>
 						<div class="col-3" data-popover="true" data-html="true" data-content=" {{ service.description }}"> {{ service.description }} </div>
@@ -238,9 +310,62 @@
 							Duration <span class="model">01:15</span>
 						</div>
 						<div class="table-content-action pull-right"> 
-							<a href="javascript:void(0)" class="icn-edit tp-hide disabled" ></a> 
+							<a href="javascript:void(0)" class="icn-edit tp-hide" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Service"  ng-click="showServiceEditMode(service)"></a>
 						</div>
 					</div>
+
+					<div class="edit-wrapper clearfix" ng-if=" service.editMode === true;">       
+						<div class="table-content service-table edit-table edit-service-table pull-left">
+							<span class="icon-update icn-update-service"></span>
+							<div class="ticket-form-header">
+								<div class="add-service clearfix">
+									<div class="col-1">
+										<div class="col-wrapper dropdown">
+											<input type="text" value="Onsite" class="form-control form-control-dropdown dropdown-toggle has-dropdown" placeholder="Service" data-toggle="dropdown" aria-expanded="true" ng-model=" editService.item.name ">
+											<ul class="dropdown-menu dropdown-menu-services">
+												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Remote Service</a></li>
+												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Onsite</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-2">
+										<div class="col-wrapper dropdown">
+											<input type="text" value="" class="form-control form-control-dropdown dropdown-toggle has-dropdown" data-toggle="dropdown" aria-expanded="false" placeholder="Hr : Min" ng-model="editService.HourMin ">
+											<div class="dropdown-menu dropdown-menu-transparent dropdown-time">
+												<ul class="dropdown-menu dropdown-menu-hour">
+													<li role="presentation">
+														<a role="menuitem" tabindex="-1" href="#">01</a>
+													</li>
+												</ul>
+												<ul class="dropdown-menu dropdown-menu-minute">
+													<li role="presentation">
+														<a role="menuitem" tabindex="-1" href="#">05</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-4">
+										<div class="col-wrapper">
+											<input type="text" id="datetimepicker2" value="23 Jan 2015" class="form-control form-control-dropdown dropdown-toggle has-dropdown" data-toggle="dropdown" aria-expanded="true" placeholder="Date">
+										</div>
+									</div>
+									<div class="col-3">
+										<div class="col-wrapper">
+											<input type="text" class="form-control service-description" value="Disabled superfluous system and third party services to run PC under lowest stress possible." placeholder="Description">
+										</div>
+									</div>
+									<div class="edit-table-actions">
+										<a href="javascript:void(0);" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left" ng-click=" service.editMode = undefined; ">Cancel</a>
+										<a href="javascript:void(0);" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left" ng-click="updateService();">Save Changes</a>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 
 				<div class="update-meta clearfix">
@@ -327,5 +452,4 @@
 			<a href="javascript:void(0)" ng-click="markAsSpam(null, ticketDetail, false)" class="btn btn-sr btn-gray btn-cancel ">Restore</a>
 		</div>
 	</div>
-
 </div>
