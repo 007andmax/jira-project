@@ -141,3 +141,11 @@ div.tt-suggestion:hover {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+.content-wrapper .table-wrapper {
+	margin-top: 0;
+}
+
+.content-wrapper .ticket-content .ticket-updates .ticket-update-content .updater-name {
+	margin-bottom: 9px;
+}

@@ -52,14 +52,7 @@
 
 				product.editMode = true;
 
-				$scope.editProduct = {
-					item : {
-						name : product.item.name,
-						description : product.item.description
-					},
-					sum : product.sum,
-					quantity : product.quantity
-				};
+				$scope.editProduct = product.staticCopy();
 			}
 
 			$scope.showServiceEditMode = function(service) {
@@ -74,97 +67,156 @@
 
 				service.editMode = true;
 
-				$scope.editService = {
-					item : {
-			name : service.item.name//,
-			//description : service.item.description
-		},
-		HourMin : service.HourMin,
-		description : service.description
-		//sum : 
-		//quantity : service.quantity
-	};
-}
+				$scope.editService = service.staticCopy();
 
-$scope.selectProductForEdit = function($event, product, $index, updateIndex){
-	$scope.editProduct.item.name = product.name;
-	$scope.editProduct.item.versionedId.id = product.versionedId.id;
-	$scope.editProduct.sum = product.sale;
-}
+				$scope.editService.date = $scope.getFormattedDate(new Date($scope.editService.date));
+				$scope.editService.HourMin = $scope.getTimeinFormat($scope.editService.quantity);
 
-$scope.selectProduct = function($event, product, $index){
+				var splitTime = $scope.editService.HourMin.split(':');
 
-	$event.preventDefault();
+				$scope.editService.selectedHourText = splitTime[0];
+				$scope.editService.selectedHour = parseInt(splitTime[0]);
+				$scope.editService.selectedMinText = splitTime[1];
+				$scope.editService.selectedMin = parseInt(splitTime[1]);
 
-	if($index == -1) {
-		$scope.product.name = product.name;
-		$scope.product.id = product.versionedId.id;
-		$scope.product.sale = product.sale;	
-	} else {
-		$scope.products[$index].item.name = product.name;
-		$scope.products[$index].item.versionedId.id = product.versionedId.id;
-		$scope.products[$index].sum = product.sale;
-	}
+				setTimeout(function(){
+					$('#datetimepicker2').datetimepicker({
+						keepOpen: true,
+						format: 'DD MMM YYYY',
+						maxDate: new Date()
+					}).on('dp.change', function(ev){
+						$('#datetimepicker2').blur();
+						$scope.editService.date = $('#datetimepicker2').val();
+					});
+				}, 500)
+				
+				
+			}
 
-}
+			$scope.selectProductForEdit = function($event, product, $index, updateIndex){
 
-$scope.searchProduct = function(product) {
+				$scope.editProduct.item.name = product.name;
+				$scope.editProduct.item.versionedId = { id : product.versionedId.id};
+				$scope.editProduct.sum = product.sale;
+			}
 
-	var q = $scope.productFilter.query.toLowerCase();
+			$scope.selectProduct = function($event, product, $index){
 
-	if (product.name.toLowerCase().indexOf(q)!=-1) {
-		return true;
-	}
+				$event.preventDefault();
 
-	return false;
-}
+				if($index == -1) {
+					$scope.product.name = product.name;
+					$scope.product.id = product.versionedId.id;
+					$scope.product.sale = product.sale;	
+					$scope.product.desc = product.description;
+				} else {
+					$scope.products[$index].item.name = product.name;
+					$scope.products[$index].item.versionedId.id = product.versionedId.id;
+					$scope.products[$index].sum = product.sale;
+				}
 
-if($stateParams.id === '') {
-	$state.go('Tickets', {'listType': $stateParams.listType});
-}
+			}
 
-$('body').addClass('opened-ticket');
+			$scope.searchProduct = function(product) {
+
+				var q = $scope.productFilter.query.toLowerCase();
+
+				if (product.name.toLowerCase().indexOf(q)!=-1) {
+					return true;
+				}
+
+				return false;
+			}
+
+			if($stateParams.id === '') {
+				$state.go('Tickets', {'listType': $stateParams.listType});
+			}
+
+			$('body').addClass('opened-ticket');
+
+			$scope.updateService = function(updateIndex, serviceIndex) {
+				var update = $scope.ticketDetail.updates[updateIndex].staticCopy();
+
+				angular.forEach(update.services, function(service) {
+					delete service.editMode;
+				});
+
+				//console.log($scope.editService.date);
+
+				update.services[serviceIndex].quantity = $scope.getTimeinPoints($scope.editService.selectedHour, 
+					$scope.editService.selectedMin);
+				
+				update.services[serviceIndex].date = new Date($scope.editService.date);
+				//update.services[serviceIndex].date = new Date($scope.editService.date);
+				update.services[serviceIndex].description = $scope.editService.description;
+				update.services[serviceIndex].item.name = $scope.editService.item.name;
+				update.services[serviceIndex].item.updatedAt = new Date();
+
+				console.dir(update);
+
+				TicketsService.saveTicketUpdate($scope.ticketDetail.id, update, false, function () {
+					$scope.$parent.notification('Update changed successfully!');
+					$scope.editService = {};
+					$scope.ticketDetail.updates[updateIndex].services[serviceIndex].editMode = undefined;
+				});
+
+			}
+
+			$scope.updateProduct = function(updateIndex, productIndex) {
+
+				var update = $scope.ticketDetail.updates[updateIndex].staticCopy();
+
+				angular.forEach(update.products, function(product) {
+					delete product.editMode;
+				});
+
+				update.products[productIndex].quantity = $scope.editProduct.quantity;
+				update.products[productIndex].sum = $scope.editProduct.sum;
+				update.products[productIndex].item.description = $scope.editProduct.item.description;
+				update.products[productIndex].item.name = $scope.editProduct.item.name;
+				update.products[productIndex].item.versionedId.id = $scope.editProduct.item.versionedId.id;
+				update.products[productIndex].item.updatedAt = new Date();
+
+				TicketsService.saveTicketUpdate($scope.ticketDetail.id, update, false, function () {
+					$scope.$parent.notification('Update changed successfully!');
+					$scope.editProduct = {};
+					$scope.ticketDetail.updates[updateIndex].products[productIndex].editMode = undefined;
+				});
+
+			}
+
+			$scope.ticketDetail = TicketsService.getOne($stateParams.id, $scope, true, function(){
+				$('#loading').hide();
+				$('.ticket-content').fadeIn();
+				$scope.isTagChecked	= function(id) {
+					for(var i=0; i< $scope.ticketDetail.tags.length; i++) {
+						if($scope.ticketDetail.tags[i].id === id) return true;
+					}
+					return false;
+				}
+
+				console.dir($scope.ticketDetail.updates);
+
+			});
 
 
-$scope.updateService = function() {
-	alert('Not functional yet...');
-}
+			$(window).scroll(function() {
+				var height = $('body').scrollTop();
+				var width=$(window).width();
+				var ticketListWidth =$(".tickets-list").width()+1;
+				var ticketHeaderW=$(".ticket-content .ticket-header > div").width();
 
-$scope.updateProduct = function() {
-	alert('Not functional yet...');
-}
+				if(height == "0") {
+					$(".ticket-content .ticket-header > div").removeClass('ticket-fixed-header');
+					$(".ticket-content .ticket-header > h3").css("margin-Top","10px");
+					$(".ticket-content .ticket-header > div").css("width","");
+				} else 
+				if (height > "180") {
+					$(".ticket-content .ticket-header > div").addClass('ticket-fixed-header');
+					$(".ticket-content .ticket-header > h3").css("margin-Top","49px");
+				}
 
-$scope.ticketDetail = TicketsService.getOne($stateParams.id, $scope, true, function(){
-	$('#loading').hide();
-	$('.ticket-content').fadeIn();
-	$scope.isTagChecked	= function(id) {
-		for(var i=0; i< $scope.ticketDetail.tags.length; i++) {
-			if($scope.ticketDetail.tags[i].id === id) return true;
-		}
-		return false;
-	}
-
-
-});
-
-
-$(window).scroll(function() {
-	var height = $('body').scrollTop();
-	var width=$(window).width();
-	var ticketListWidth =$(".tickets-list").width()+1;
-	var ticketHeaderW=$(".ticket-content .ticket-header > div").width();
-
-	if(height == "0") {
-		$(".ticket-content .ticket-header > div").removeClass('ticket-fixed-header');
-		$(".ticket-content .ticket-header > h3").css("margin-Top","10px");
-		$(".ticket-content .ticket-header > div").css("width","");
-	} else 
-	if (height > "180") {
-		$(".ticket-content .ticket-header > div").addClass('ticket-fixed-header');
-		$(".ticket-content .ticket-header > h3").css("margin-Top","49px");
-	}
-
-});
+			});
 
 			// Inherit the code from parent to be used in template
 			$scope.currentUser = $scope.$parent.currentUser;
@@ -199,16 +251,21 @@ $(window).scroll(function() {
 			$scope.products = [];
 
 			$scope.addProduct = function() {
+
+				if($scope.product.qty == undefined) $scope.product.qty = 1;
+
 				var newProduct = {
 					item : {
 						versionedId : {
 							id : $scope.product.id
 						},
-						name : $scope.product.name
+						name : $scope.product.name,
+						description : $scope.product.desc,	
 					},
 					serialNumber: new Date().getTime(),
 					date: new Date(),					
-					quantity : $scope.product.qty
+					quantity : $scope.product.qty,
+					sum : $scope.product.sale
 				};
 
 				$scope.products.push(newProduct);
@@ -240,7 +297,7 @@ $(window).scroll(function() {
 				selectedMinText : $scope.service.selectedMinText,
 				selectedHour : $scope.service.selectedHour,
 				selectedHourText : $scope.service.selectedHourText,
-				date: new Date($('#datetimepicker1').val()),
+				date: $('#datetimepicker1').val(),
 				desc: $scope.service.desc
 			};
 
@@ -276,6 +333,11 @@ $(window).scroll(function() {
 				$scope.services.splice($index, 1);
 			}
 
+			$scope.removeProduct = function($index) {
+				$scope.productTotalAmount -= $scope.products[$index].sum * $scope.products[$index].quantity;
+				$scope.products.splice($index, 1);
+			}
+
 			// set the time for the service - TODO: improve use a directive for this type of input
 			$scope.setTime = function($event, t, $index) {
 				var el = $($event.target);
@@ -303,7 +365,7 @@ $(window).scroll(function() {
 			} else {
 				switch(t) {
 					case 'hour' :
-					console.log($index);
+					//console.log($index);
 					//console.dir($scope.services[$index]);
 					$scope.services[$index].selectedHourText = el.text(); // For Display Purpose
 					$scope.services[$index].selectedHour = parseInt($scope.services[$index].selectedHourText); // For comparing purpose in template
@@ -324,6 +386,31 @@ $(window).scroll(function() {
 			}
 
 		}
+
+		$scope.setEditTime = function($event, t) {
+
+			var el = $($event.target);
+
+			switch(t) {
+				case 'hour' :
+					$scope.editService.selectedHourText = el.text(); // For Display Purpose
+					$scope.editService.selectedHour = parseInt($scope.editService.selectedHourText); // For comparing purpose in template
+					break;
+					case 'min' :
+					$scope.editService.selectedMinText = el.text();
+					$scope.editService.selectedMin = parseInt($scope.editService.selectedMinText);
+					break;
+				}
+
+				if($scope.editService.selectedHour !== null && $scope.editService.selectedMin !=null) {
+					$scope.editService.HourMin = $scope.editService.selectedHourText + ':' + $scope.editService.selectedMinText;
+					$event.preventDefault();
+				} else {
+					$event.preventDefault();
+					$event.stopPropagation();
+				}
+
+			}
 
 
 		//---------------------- Users --------------------------------------------------
@@ -629,6 +716,71 @@ $scope.loadMoreUpdates = function(ticket) {
 
 }
 
+$scope.getFormattedDate = function(d) {
+	
+	var date = new Date(d);
+
+	var monthNames = [
+	"Jan", "Feb", "March",
+	"April", "May", "June", "July",
+	"Aug", "Sep", "Oct",
+	"Nov", "Dec"
+	];
+
+	var day = date.getDate();
+	var monthIndex = date.getMonth();
+	var year = date.getFullYear();
+
+	return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+
+$scope.getTimeinPoints = function(selectedHour, selectedMin) {
+	
+	var fraction = 0;
+
+	if(parseInt(selectedMin) == 5) fraction = .08;
+	if(parseInt(selectedMin) == 10) fraction = .16;
+	if(parseInt(selectedMin) == 15) fraction = .25;
+	if(parseInt(selectedMin) == 20) fraction = .30;
+	if(parseInt(selectedMin) == 25) fraction = .40;
+	if(parseInt(selectedMin) == 30) fraction = .50;
+	
+	return selectedHour + fraction;
+
+}
+
+$scope.getTimeinFormat = function(quantity) {
+	
+	var arr = (quantity + '').split('.');
+	
+	var hour = parseInt(arr[0]);
+	var min = parseInt(arr[1]);
+
+
+	if(min == 8) min = 5;
+	else if(min == 16) min = 10;
+	else if(min == 25) min = 15;
+	else if(min == 3) min = 20;
+	else if(min == 4) min = 25;
+	else if(min == 5) min = 30;
+
+
+	if(hour < 10) {
+		hour = '0' + hour;
+	}
+
+	if(min < 10) {
+		min = '0' + min;
+	}
+
+	if(isNaN(min)) {
+		min = '00';
+	}
+
+	return hour + ':' + min;
+}
+
+
 $scope.postTicketUpdate = function (event, ticketId) {
 
 	event.preventDefault();
@@ -656,21 +808,21 @@ $scope.postTicketUpdate = function (event, ticketId) {
 							item : {
 								createdAt : new Date().getTime(),
 								name : item.type
-								/*,
+								,
 								versionedId : {
-									id : item.id
-								}*/
+									id : '0a2cc3cc-6b4a-4af8-8784-7ada8ef4537a' //TODO: FIX IT - item.id
+								}
 							},
 							description : item.desc,
-							//quantity: item.HourMin, What to do about it?
-							date : new Date()
-							//time : item.HourMin,
-							///type : item.type,
-							//date : item.date
+							quantity: $scope.getTimeinPoints(item.selectedHour, item.selectedMin), // TODO: Fix it
+							date : new Date(item.date)
 						}
 						count++;
 					});
 				} else {
+					
+					//console.dir($scope.products);
+
 					ticketUpdate.products = $scope.products;
 				}
                 /*update.note = note;
@@ -705,6 +857,11 @@ angular.forEach($scope.update_users, function(user){
 TicketsService.saveTicketUpdate(ticketId, ticketUpdate, false, function () {
 
 	$scope.$parent.notification('Update added successfully!');
+
+	$scope.ticketUpdate.note = '';
+	$scope.services = [];
+	$scope.products = [];
+	$scope.productTotalAmount = 0;
 
 	/*var element = document.getElementById('ticketUpdates');
 	

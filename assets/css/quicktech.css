@@ -19515,8 +19515,9 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
   height: 10px;
   width: 10px;
 }
+
 /* line 403, ../sass/bootstrap/_icons-sprite.scss */
-.icn-close-modal:hover , .icn-close-modal:active{
+.icn-close-modal:hover, .icn-close-modal:active{
   background-position: -736px 0;
   height: 10px;
   width: 10px;

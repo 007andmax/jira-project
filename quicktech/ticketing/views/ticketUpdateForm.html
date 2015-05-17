@@ -38,9 +38,13 @@
               </div>
               <!-- Update Box Footer -->
               <div class="ticket-form-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide" data-placement="top" title="" data-original-title="Attach files" data-toggle="tooltip"><span class="icn-add-attachment"></span>
-                </a>
-                <div class="line-sep pull-left"></div>
+
+              <div ng-if="false"> <!-- TODO: handel file attachment  and remove this div-->
+                  <a href="javascript:void(0)" class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide" data-placement="top" title="" data-original-title="Attach files" data-toggle="tooltip"><span class="icn-add-attachment"></span>
+                  </a>
+                  <div class="line-sep pull-left"></div>
+                </div>
+
                 <div ng-include="'html/quicktech/ticketing/views/ticketUpdateAddUsers.html'" include-replace>
                 </div>
               </div>

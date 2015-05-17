@@ -271,7 +271,7 @@
 									</div>
 									<div class="col-2">
 										<div class="col-wrapper">
-											<input type="text" class="form-control" placeholder="Description" value="" ng-model="editProduct.item.description">
+											<input type="text" class="form-control" placeholder="Description" value="" ng-model="editProduct.item.description" readonly="">
 										</div>
 									</div>
 
@@ -289,7 +289,7 @@
 
 									<div class="edit-table-actions">
 										<a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left" ng-click="product.editMode = undefined;">Cancel</a>
-										<a href="javascript:void(0);" class="btn btn-sr btn-scooter pull-left" ng-click=" updateProduct(); " >Save Changes</a>
+										<a href="javascript:void(0);" class="btn btn-sr btn-scooter pull-left" ng-click=" updateProduct(updateIndex, $index); " >Save Changes</a>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -303,11 +303,11 @@
 				<div class="table-wrapper clearfix" ng-if=" ticketUpdate.type === 'SERVICE' " ng-repeat="service in ticketUpdate.services">
 					
 					<div class="table-content service-table pull-left" ng-if="service.editMode === undefined;">
-						<div class="col-1"> {{ renderDateTime(service.createdAt) }} </div>
+						<div class="col-1"> {{ getFormattedDate(service.date) }} </div>
 						<div class="col-2"> {{ service.item.name }} </div>
 						<div class="col-3" data-popover="true" data-html="true" data-content=" {{ service.description }}"> {{ service.description }} </div>
 						<div class="col-4">
-							Duration <span class="model">01:15</span>
+							Duration <span class="model"> {{ getTimeinFormat(service.quantity) }}</span>
 						</div>
 						<div class="table-content-action pull-right"> 
 							<a href="javascript:void(0)" class="icn-edit tp-hide" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Service"  ng-click="showServiceEditMode(service)"></a>
@@ -323,8 +323,8 @@
 										<div class="col-wrapper dropdown">
 											<input type="text" value="Onsite" class="form-control form-control-dropdown dropdown-toggle has-dropdown" placeholder="Service" data-toggle="dropdown" aria-expanded="true" ng-model=" editService.item.name ">
 											<ul class="dropdown-menu dropdown-menu-services">
-												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Remote Service</a></li>
-												<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Onsite</a></li>
+												<!-- TODO: load dynamic services -->
+												<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">Remote Consulting</a></li>
 											</ul>
 										</div>
 									</div>
@@ -333,14 +333,16 @@
 											<input type="text" value="" class="form-control form-control-dropdown dropdown-toggle has-dropdown" data-toggle="dropdown" aria-expanded="false" placeholder="Hr : Min" ng-model="editService.HourMin ">
 											<div class="dropdown-menu dropdown-menu-transparent dropdown-time">
 												<ul class="dropdown-menu dropdown-menu-hour">
-													<li role="presentation">
-														<a role="menuitem" tabindex="-1" href="#">01</a>
+													<li role="presentation" ng-repeat="hour in serviceMeta.hours">
+														<a role="menuitem" tabindex="-1" href="#" ng-click="setEditTime($event, 'hour');" ng-class="{'active': editService.selectedHour === hour}">{{ hour | numberFixedLen:2 }}</a>
 													</li>
+
 												</ul>
 												<ul class="dropdown-menu dropdown-menu-minute">
-													<li role="presentation">
-														<a role="menuitem" tabindex="-1" href="#">05</a>
+													<li role="presentation" ng-repeat="min in serviceMeta.minutes">
+														<a role="menuitem" tabindex="-1" href="#" ng-click="setEditTime($event, 'min');" ng-class="{'active': editService.selectedMin === min}">{{ min | numberFixedLen:2 }}</a>
 													</li>
+
 												</ul>
 											</div>
 										</div>
@@ -348,17 +350,17 @@
 
 									<div class="col-4">
 										<div class="col-wrapper">
-											<input type="text" id="datetimepicker2" value="23 Jan 2015" class="form-control form-control-dropdown dropdown-toggle has-dropdown" data-toggle="dropdown" aria-expanded="true" placeholder="Date">
+											<input type="text" id="datetimepicker2" class="form-control form-control-dropdown dropdown-toggle has-dropdown" data-toggle="dropdown" aria-expanded="true" placeholder="Date" ng-model="editService.date"> 
 										</div>
 									</div>
 									<div class="col-3">
 										<div class="col-wrapper">
-											<input type="text" class="form-control service-description" value="Disabled superfluous system and third party services to run PC under lowest stress possible." placeholder="Description">
+											<input type="text" class="form-control service-description" value="" placeholder="Description" ng-model="editService.description">
 										</div>
 									</div>
 									<div class="edit-table-actions">
 										<a href="javascript:void(0);" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left" ng-click=" service.editMode = undefined; ">Cancel</a>
-										<a href="javascript:void(0);" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left" ng-click="updateService();">Save Changes</a>
+										<a href="javascript:void(0);" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left" ng-click="updateService(updateIndex, $index);">Save Changes</a>
 									</div>
 									<div class="clearfix"></div>
 								</div>

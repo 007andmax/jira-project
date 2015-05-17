@@ -1,7 +1,7 @@
 <div class="add-product clearfix" ng-repeat="addedProduct in products">
   <div class="col-1">
     <div class="col-wrapper dropdown">
-    <input type="text" class="form-control form-control-dropdown dropdown-toggle" placeholder="Product" value="Printers   #18240" data-toggle="dropdown" aria-expanded="true" ng-model="addedProduct.item.name" tabindex="1">
+      <input type="text" class="form-control form-control-dropdown dropdown-toggle" placeholder="Product" value="Printers   #18240" data-toggle="dropdown" aria-expanded="true" ng-model="addedProduct.item.name" tabindex="1">
       <input type="hidden" value="" ng-model="addedProduct.item.versionedId.id">
       <div class="dropdown-menu dropdown-menu-transparent">
         <ul class="dropdown-menu dropdown-menu-categories">
@@ -38,12 +38,12 @@
 
   <div class="col-2">
     <div class="col-wrapper">
-      <input type="text" class="form-control" placeholder="Description" value="" tabindex="2" ng-model="addedProduct.description">
+      <input type="text" class="form-control" placeholder="Description" value="" tabindex="2" ng-model="addedProduct.item.description">
     </div>
   </div>
   <div class="col-5">
     <div class="col-wrapper">
-      <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide" data-toggle="tooltip" data-original-title="Remove Product" data-placement="top" ng-click="removeProduct();">
+      <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide" data-toggle="tooltip" data-original-title="Remove Product" data-placement="top" ng-click="removeProduct($index);">
         <span class="icn-remove-update"></span>
       </a>
     </div>
@@ -100,7 +100,7 @@
 
   <div class="col-2">
     <div class="col-wrapper">
-      <input type="text" class="form-control" placeholder="Description" value="" tabindex="2" ng-model="product.desc">
+      <input type="text" class="form-control" placeholder="Description" value="" tabindex="2" ng-model="product.desc" readonly="" >
     </div>
   </div>
   <div class="col-5">
