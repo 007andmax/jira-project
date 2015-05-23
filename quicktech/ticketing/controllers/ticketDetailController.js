@@ -21,10 +21,10 @@
 
 	app.controller('TicketDetailController', ['$scope', 'TicketsService', '$stateParams', '$state','$rootScope',
 		'$location', 'ActionRightsService', 'Downloader', 'ServicesService', 'UsersService',
-		'CompaniesService', 'ProductsService',
+		'CompaniesService', 'ProductsService', 'FilesService',
 		function ($scope, TicketsService, $stateParams, $state, $rootScope, $location, 
 			ActionRightsService, Downloader, ServicesService, UsersService, CompaniesService,
-			ProductsService) {
+			ProductsService, FilesService) {
 
 			//$(window).unbind('scroll'); // TODO: Attach event again when going back to tickets page.
 
@@ -406,8 +406,9 @@
 
 			// saved services
 			$scope.services = [];
-			
 			$scope.products = [];
+			$scope.files = [];
+
 
 			$scope.addProduct = function() {
 
@@ -437,6 +438,7 @@
 				$scope.product.sale =  null;
 				$scope.product.qty =  null;
 
+				// $scope.changeProductServiceScrollbarVisibility('PRODUCT');
 			}
 
 			// add a new service in update
@@ -727,6 +729,14 @@
 			Downloader.downloadFile(fileId);
 		}
 
+		
+		//$scope.oldFileName = '';
+
+		/*$scope.files.push({
+			name: 'test.html',
+			size: '10 KB',
+			progress: 10
+		});*/
 
 		$scope.$on('$viewContentLoading', 
 			function(event, viewConfig){ 
@@ -770,55 +780,156 @@
 					$('#uploadFile').change(function (e) {
 
 						var self = e.currentTarget, file = self.files[0];
-						if (file.name === $scope.oldFile) {
-							return;
-						}
-					/*var id = Math.floor(Math.random() * (9999999 - 999 + 1) + 999);
-					$scope.oldFile = file.name;
+						
+						// TODO: check if the same file is being uploaded again!
+
+					// KB
 					var size = parseInt(file.size / 1024);
 
-					FilesService.create(file,
+					// MB
+					if(size >= 1024) {
+						size = parseFloat(size / 1024).toFixed(2) + ' MB';
+					} else {
+						size = size + ' KB';
+					}
+
+					//var newFile = ;
+
+					$scope.files.push({
+						name: file.name,
+						size: size,
+						progress: 0
+					});
+
+					console.log($scope.files.length);
+					//console.log('-----------');
+					//console.dir($scope.files);
+					//alert($scope.files.length);
+
+					/*FilesService.create(file,
 						function (arg) {
-							var uploadedPercentage = (arg.loaded / arg.total) * 100;
-							$('#' + id + '_element').attr('aria-valuenow', uploadedPercentage);
-							$('#' + id + '_element').attr('style', 'width:' + uploadedPercentage + '%;');
-							$('#' + id + '_percentage').text(parseInt(uploadedPercentage) + ' Complete');
-                                //OnProgress
-                            }, function (arg) {
-                            	$('input#' + id + '_val').val(arg.id);
-                        //OnFinish
-                    }, function (arg) {
-                    	$('li#' + id + '_li').remove();
-                        //OnError
-                    }
-                    );*/
+							//console.log('on progress!');
+							newFile.progress = (arg.loaded / arg.total) * 100;
+						}, function (arg) {
+							console.log('on finish!');
+							//$('input#' + id + '_val').val(arg.id);
+						}, function (arg) {
+							console.log('on error!');
+							//$('li#' + id + '_li').remove();
+						});*/
+				});
+
+// editable div - new note
+$("#ticket-new-note").focusout(function(){
+	var element = $(this);        
+	if (!element.text().trim().length) {
+		element.empty();
+	}
 });
 
-$scope.adjustHeight = function() {
-	var element = $('.ticket-form-header textarea');
-	var bottom_margin = 17;
-	var file_upload_size = 32 + 10; // height + margin of uploading file.
-	//var height = element.scrollHeight + bottom_margin + file_upload_size < 318 ? element.scrollHeight : 318;
-	
-	element.on('input', function() {
-		/*var scrollHeight = this.scrollHeight;
-		
-		if(element.scrollHeight + bottom_margin + file_upload_size > 318) {
-			scrollHeight = 31;
-		}*/
-
-		element.css({ 'height': 'auto', 'overflow-y': 'hidden' }).height(this.scrollHeight);
-	});
-	
-	element.jScrollPane({
-		autoReinitialise: true,
-		verticalDragMinHeight: 54,
-		verticalDragMaxHeight: 54,
-	});
+function setCursorToEnd(ele)
+{
+	var range = document.createRange();
+	var sel = window.getSelection();
+	range.setStart(ele, 1);
+	range.collapse(true);
+	sel.removeAllRanges();
+	sel.addRange(range);
+	ele.focus();
 }
 
-//$scope.adjustHeight();
+function placeCaretAtEnd(el) {
+	el.focus();
+	if (typeof window.getSelection != "undefined"
+		&& typeof document.createRange != "undefined") {
+		var range = document.createRange();
+	range.selectNodeContents(el);
+	range.collapse(false);
+	var sel = window.getSelection();
+	sel.removeAllRanges();
+	sel.addRange(range);
+} else if (typeof document.body.createTextRange != "undefined") {
+	var textRange = document.body.createTextRange();
+	textRange.moveToElementText(el);
+	textRange.collapse(false);
+	textRange.select();
+}
+}
 
+var ProdServiceScrollElement = null;
+
+$scope.changeProductServiceScrollbarVisibility = function(category) {
+	
+	var itemCount = 0;
+	
+	if(category === 'PRODUCT') {
+		itemCount = $scope.products.length;
+	} else if(category === 'SERVICE') {
+		itemCount = $scope.services.length;
+	}
+	
+	if(itemCount > 6) {
+		if(ProdServiceScrollElement === null) {
+			console.log('in there');
+			$('.ticket-form-header').css('overflow', 'auto');
+			ProdServiceScrollElement = $('.ticket-form-header').jScrollPane({
+				autoReinitialise: true,
+				verticalDragMinHeight: 54
+			});
+		}
+		ProdServiceScrollElement.data('jsp').scrollToBottom();
+	}
+
+	// vertical bar doesn't hide fast enough
+	setTimeout(function(){
+		if(ProdServiceScrollElement !== null && !$(".ticket-form-header .jspVerticalBar").is(":visible")) {
+			$('.ticket-form-header').css('overflow', 'hidden');
+			var api = ProdServiceScrollElement.data('jsp');
+			api.destroy();
+			ProdServiceScrollElement = null;
+		}
+	}, 500);
+}
+
+var element = null;
+$scope.changeScrollbarVisibility = function(selector) {
+	
+	var height = $(selector).height();
+	if(height === 318) {
+		if(element === null) {
+			console.log('in there');
+			$(selector).css('overflow', 'auto');
+			element = $(selector).jScrollPane({
+				autoReinitialise: true,
+				verticalDragMinHeight: 54
+			});
+			if(selector === '.editable-container' ) {
+				placeCaretAtEnd(document.getElementById("ticket-new-note"));
+			}
+		}
+		element.data('jsp').scrollToBottom();
+	}
+
+	// vertical bar doesn't hide fast enough
+	setTimeout(function(){
+		if(element !== null && !$(selector + " .jspVerticalBar").is(":visible")) {
+			$(selector).css('overflow', 'hidden');
+			var api = element.data('jsp');
+			api.destroy();
+			element = null;
+			if(selector === '.editable-container' ) {
+				placeCaretAtEnd(document.getElementById("ticket-new-note"));
+			}
+		}
+	}, 500);
+	
+}
+
+$("#ticket-new-note").on('keyup', function(e){
+	
+	$scope.changeScrollbarVisibility('.editable-container');
+
+});
 
 }, 2000);
 
@@ -828,11 +939,6 @@ $scope.productCategories = ProductsService.getCategories($scope, function(){
 		$scope.loadCategoryProducts(null, category);
 	}
 });
-
-
-
-
-
 
 
 });

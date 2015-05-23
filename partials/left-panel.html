@@ -14,7 +14,7 @@
 			<li ui-sref-active="active">
 				<a ui-sref="Tickets({listType: 'unassigned'})">
 					<span class="nav-icon icn-unassigned"></span> Unassigned 
-					<span class="badge">{{ticketCounts.UNASSIGNED}}</span>
+					<span class="badge" ng-if="ticketCounts.UNASSIGNED !== 0">{{ticketCounts.UNASSIGNED}}</span>
 				</a>
 			</li>
 			<li ui-sref-active="active">

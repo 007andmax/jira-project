@@ -4548,9 +4548,11 @@ border-color:#d7dde5;
   max-height: 400px;
   height: 78px;
 }
-.editable-container .jspDrag{
+
+/*.editable-container .jspDrag{
   margin-top: 3px;
-}
+}*/
+
 /* line 650, ../sass/bootstrap/_forms.scss */
 .form-control-note {
   height: 100%;
@@ -7169,28 +7171,7 @@ background-color:#f7f9fb; }
   visibility: visible;
 
 }
-.ticket-form-header.scroll-pane{
-  max-height: 318px;
-  height: 318px;
-  padding: 0px 0px !important;
-overflow: visible !important;
 
-}
-
-.ticket-form-header.scroll-pane > .jspContainer > .jspPane{
-    width: calc(100%  - 0px) !important;
-    padding: 0px 25px 0 15px !important;
- margin-top: 20px;
-    padding-bottom: 30px !important;
-overflow: visible !important;
-
-} 
-.ticket-form-header.scroll-pane > .jspContainer{
-
-}
-.ticket-form-header.scroll-pane > .jspContainer .jspDrag{
-  margin-top: 3px;
-}
 /* line 239, ../sass/bootstrap/_navs.scss */
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
