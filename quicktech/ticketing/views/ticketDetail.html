@@ -2,13 +2,15 @@
 	<div class="clearfix" ng-controller="CompaniesController">
 		<div class="ticket-author">
 			<a href="javascript:{}" class="pull-left avatar-38 avatar m-r">
-				<img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+				<img ng-src="users/{{ ticketDetail.createdUser.id }}/image" alt="..." class="img-circle">
 			</a>
 			<div class="clearfix pull-left">
 				<div class="user-name">
 					<a href="javascript:{}">{{getFirstName(ticketDetail.createdUser.id)}} {{ getlastName(ticketDetail.createdUser.id)}}</a>
 					<!-- TODO: use ng-class instead of rendering in class -->
 					<span class=" icn-priority {{ getStatusCSS(ticketDetail.priorityLevel)}}" data-toggle="tooltip" data-placement="top" data-original-title="{{ getCapitialize(ticketDetail.priorityLevel)}} Priority"></span>
+					
+					<span ng-if=" listType !== 'unassigned' " class="icns icn-status-{{lowerCaseWithOutUnderScore(ticketDetail.status)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ticketDetail.status}}"></span>
 
 					<span ng-repeat="tag in ticketDetail.tags" class="tag-color color{{tag.color}}" data-toggle="tooltip" data-placement="top" data-original-title="{{tag.name}}"></span>
 				</div>
@@ -17,14 +19,12 @@
 		</div>
 
 		<div class="ticket-actions pull-right">
-
 			<div class="btn pull-left btn-scooter btn-cr btn-update update-button" data-toggle="tooltip" data-placement="top" data-original-title="Update &amp; Close" ng-class="{disabled: ticketDetail.status === 'COMPLETED' }" ng-click="markAsClosed($event, ticketDetail)"
-			ng-if="listType !== 'spam' && listType != 'trash' ">
+			ng-if=" (ticketDetail.assignedUser !== null && currentUser.role !== 'USER' && listType !== 'trash' && listType !== 'spam') || (listType === 'user' && currentUser.role === 'USER') ">
 			<span class="icn-tick"></span>
 		</div>
 
-
-		<div id="btnTicketSettings" class="pad-left dropdown pull-left" ng-if="listType !== 'spam' && listType != 'trash' " >
+		<div id="btnTicketSettings" class="pad-left dropdown pull-left" ng-if="listType !== 'spam' && listType != 'trash' && listType !== 'shared' || (listType === 'shared' && currentUser.role === 'ADMIN') " >
 			<div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top" data-original-title="Settings">
 				<span class="icn-ticket-setting"></span>
 			</div>
@@ -80,10 +80,7 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
 		</li>
 
 		<li class="dropdown-submenu left-align"
@@ -98,10 +95,24 @@
 		</div>
 	</li>
 
-	<li ng-if="ActionRightsService.isMarkAsSpamIconVisible(listType, ticketMarkedSpamByRole(ticketDetail), currentUser.role)" ng-click="markAsSpam($event, ticketDetail, true)"><a tabindex="-1" href="javascript:{}">Mark as Spam</a>
+	<li class="dropdown-submenu" ng-if="ActionRightsService.isChangeStatusVisible(listType)">
+		<a tabindex="-1" href="#">Change Status to...</a>
+		<div class="dropdown-submenu-wrapper">
+			<ul class="dropdown-menu dropdown-priority">
+				<li><a tabindex="-1" href="javascript:void(0);" ng-click="changeStatus($event, ticketDetail, 'IN_PROGRESS', listType)"> In Progress </a></li>
+				<li><a tabindex="-1" href="javascript:void(0);" ng-click="changeStatus($event, ticketDetail, 'ON_HOLD', listType)">  On Hold </a></li>
+			</ul>
+		</div>
 	</li>
 
-	<li ng-if="ticketDetail.trash == false && ActionRightsService.isMoveToTrashDetailedVisible(listType, MarkedSpamByRole(ticketDetail),currentUser.role)">
+	<li ng-if="ActionRightsService.isMarkAsSpamDetailVisible(listType, currentUser.role)" ng-click="markAsSpam($event, ticketDetail, true)">
+		<a tabindex="-1" href="javascript:{}">
+			<span ng-if=" currentUser.role === 'ADMIN' " >Mark as Spam</span>
+			<span ng-if=" currentUser.role === 'USER' " >Report as Spam</span> 
+		</a>
+	</li>
+
+	<li ng-if="ticketDetail.trash == false && ActionRightsService.isMoveToTrashDetailedVisible(listType, MarkedSpamByRole(ticketDetail),currentUser.role) ">
 		<a tabindex="-1" href="javascript:{}" ng-click="deleteTicket($event, ticketDetail, true)">Move to Trash</a>
 	</li>
 
@@ -155,51 +166,96 @@
 	</div>
 </div>
 
-<div class="user-msg" ng-if=" listType === 'user'">
+<div class="user-msg" ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id !== currentUser.id && ticketDetail.isReassigned === true">
+	<strong>{{ getUserNameById(ticketDetail.assignPerformer) }}</strong> re-assigned this ticket to 
+	<strong>{{ getUserNameById(ticketDetail.assignedUser)  }}</strong> on {{ renderDateTime(ticketDetail.assignedAt) }}
+</div>
+
+<div class="user-msg" ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id !== currentUser.id && ticketDetail.assignPerformer.id !== ticketDetail.assignedUser.id && ticketDetail.isReassigned === false">
+	<span class="bold">{{ getUserNameById(ticketDetail.assignPerformer) }}</span> assigned this ticket to <strong>{{ getUserNameById(ticketDetail.assignedUser)  }}</strong> on <strong>{{ renderDateTime(ticketDetail.assignedAt) }}</strong>
+</div>
+
+<div class="user-msg" ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id === currentUser.id && ticketDetail.assignedUser.id === currentUser.id">
 	<span class="bold">You</span> Claimed this ticket on {{ renderDateTime(ticketDetail.assignedAt) }}
 </div>
 
-<div class="user-msg" ng-if=" listType === 'open' || listType === 'closed' ">
-	<span class="bold">{{ getUserNameById(ticketDetail.assignPerformer) }}</span> assigned this ticket to <strong>{{ getUserNameById(ticketDetail.assignedUser)  }}</strong> on <strong>{{ renderDateTime(ticketDetail.assignedAt) }}</strong>
+<div class="user-msg" ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignPerformer.id === ticketDetail.assignedUser.id ">
+	<span class="bold">{{ getUserNameById(ticketDetail.assignedUser) }}</span> Claimed this ticket on {{ renderDateTime(ticketDetail.assignedAt) }}
+</div>
+
+<div class="user-msg" ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id === currentUser.id && ticketDetail.assignedUser.id !== currentUser.id ">
+	<span class="bold">You</span> assigned this ticket to <strong>{{ getUserNameById(ticketDetail.assignedUser)  }}</strong> on <strong>{{ renderDateTime(ticketDetail.assignedAt) }}</strong>
+</div>
+
+<div class="user-msg" ng-if=" ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id === currentUser.id && ticketDetail.isReassigned === false ">
+	<span class="bold">{{ getUserNameById(ticketDetail.assignPerformer) }}</span> assigned this ticket to <strong>You</strong> on <strong>{{ renderDateTime(ticketDetail.assignedAt) }}</strong>
+</div>
+
+<div class="user-msg" ng-if=" ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id === currentUser.id && ticketDetail.isReassigned === true ">
+	<span class="bold">{{ getUserNameById(ticketDetail.assignPerformer) }}</span> re-assigned this ticket to <strong>You</strong> on <strong>{{ renderDateTime(ticketDetail.assignedAt) }}</strong>
 </div>
 
 <!-- ticket updates -->
 <div id="ticketUpdates" class="ticket-updates clearfix">
 
 	<!-- ticket updates - heading -->
-	<div class="ticket-update-header clearfix" ng-if="ticketDetail.updates.length > 0">
-		<h4><span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ticketDetail.updates.length}}</span></span> <span class="pull-left badge badge-light shared-with">SHARED WITH {{ticketDetail.sharedBetween.length}}  <div class="tooltip tooltip-users top">
-			<div class="tooltip-arrow"></div>
-			<ul class="tooltip-inner">
-				<li ng-repeat="shared in ticketDetail.sharedBetween">
-					<span class="username">{{getFirstName(shared.id)}} {{getLastName(shared.id)}}</span>
-					<span class="usertitle">{{ shared.id=='TECH' ? 'Team' : 'Client' }} User</span>
-				</li>
-				<li class="more-users" ng-if="ticketDetail.sharedBetween.length > 2"> 
-					<a href="javascript:{}"><span class="icn-reset-devices"></span></a>
-				</li>
-
-			</ul>
-		</div></span></h4>
+	<div class="ticket-update-header clearfix" ng-if="ticketDetail.updates.length > 0 && listType !== 'unassigned'">
+		<h4><span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ticketDetail.updates.length}}</span></span> 
+			<span class="pull-left badge badge-light shared-with shared-with-badge" data-toggle="tooltip" >SHARED WITH {{ticketDetail.sharedBetween.length}}  
+				<div class="tooltipa tooltip-users top">
+					<div class="tooltip-arrow"></div>
+					<ul class="tooltip-inner">
+						<li ng-repeat="shared in ticketDetail.sharedBetween" ng-if=" $index < 3 ">
+							<span class="username">{{getFirstName(shared.id)}} {{getLastName(shared.id)}}</span>
+							<span class="usertitle">{{ shared.id=='TECH' ? 'Team' : 'Client' }} User</span>
+						</li>
+						<li class="more-users" ng-if="ticketDetail.sharedBetween.length > 3"> 
+							<a href="javascript:void(0);" ng-click=" toggleSharedUsers(); "><span class="icn-reset-devices"></span></a>
+						</li>
+					</ul>
+				</div>
+			</span>
+		</h4>
 		<a href="javascript:void(0)" class="btn btn-gray btn-loadmore load-update pull-right" data-toggle="tooltip" data-placement="top" data-original-title="load more updates" ng-click="loadMoreUpdates(ticketDetail);" ng-class="{disabled: allUpdatesLoaded}">
 			<span class="icn-load-update icn"></span>
 		</a>
+		<div class="clearfix"></div>
+		<ul class="shared-users-list" ng-show="isSharedBetweenVisible === true">
+			<li ng-repeat="user in ticketDetail.sharedBetween">
+				<div class="pull-left avatar-38 avatar m-r">
+					<img ng-src="/users/{{ user.id }}/image" alt="..." class="img-circle">
+					<div class="tooltip tooltip-users top">
+						<div class="tooltip-arrow"></div>
+						<ul class="tooltip-inner">
+							<li>
+								<span class="username">{{ getUserFullNameById(user.id) }}</span>
+								<span class="usertitle"> {{ getUserTypeById(user.id) }} </span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a href="javascript:void(0)" class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp tp-hide" data-toggle="tooltip" data-original-title="Hide" data-placement="top" ng-click="toggleSharedUsers(); "><span class="icn-remove-users icn"></span></a>
+			</li>
+		</ul>
+
 	</div>
 
 	<!-- /ticket updates -->
 
-	<div class="ticket-updates-wrapper clearfix">
+	<div class="ticket-updates-wrapper clearfix" ng-if="listType !== 'unassigned'">
 		<div ng-repeat="ticketUpdate in ticketDetail.updates" class="ticket-update clearfix" ng-class="{'has-attachment': update.attachments.length > 0}" ng-init="updateIndex = $index;">
 			<div class="ticket-updater pull-left">
 				<div class="pull-left avatar-38 avatar m-r">
-					<img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+					<img ng-src="users/{{ ticketUpdate.user.id }}/image" alt="..." class="img-circle">
 				</div>
 				<span class="icon-update" ng-class="getUpdateClass(ticketUpdate.type)"></span>
 			</div>
 			<div class="ticket-update-content pull-left">
 				
 				<div class="updater-name">{{ getUserFullNameById(ticketUpdate.user.id) }} <span class="added-type">added a {{ getUpdateName(ticketUpdate.type) }}</span> 
-					<a href="javascript:void(0)" class="icn-nav-delete pull-right tp-hide" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" ng-click="deleteUpdate(ticketDetail.id, ticketUpdate.id)"></a>
+					<a href="javascript:void(0)" class="icn-nav-delete pull-right tp-hide" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" ng-click="deleteUpdate(ticketUpdate)" ng-class="{disabled: listType === 'closed' || listType === 'trash' || listType === 'spam' || cannotDeleteUpdate(ticketUpdate) }"></a>
 				</div>
 				
 				<!-- Update Content - Note -->
@@ -217,14 +273,14 @@
 							{{ product.sum | currency }} 
 						</div>
 						<div class="col-3"> 
-							{{ product.sum | currency }} 
+							{{ product.item.sale | currency }} 
 							<span class="model">Qty {{ product.quantity }}</span>
 						</div>
-						<div class="col-2 description" data-popover="true" data-html="true" data-content=" {{ product.item.description }}" data-original-title="" title="">
-							{{ product.item.description }}
+						<div class="col-2 description" data-popover="true" data-html="true" data-content=" {{ product.description }}" data-original-title="" title="">
+							{{ product.description ? product.description : '&nbsp;' }}
 						</div>
 						<div class="table-content-action pull-right"> 
-							<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="edit product" class="icn-edit tp-hide" ng-click="showEditMode(product)"></a>
+							<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="edit product" class="icn-edit tp-hide" ng-click="showEditMode(product)" ng-class="{ disabled: listType === 'closed' || listType === 'trash' || listType === 'spam' || isNotOwnerAndAdmin() }"></a>
 						</div>
 					</div>
 
@@ -271,7 +327,7 @@
 									</div>
 									<div class="col-2">
 										<div class="col-wrapper">
-											<input type="text" class="form-control" placeholder="Description" value="" ng-model="editProduct.item.description" readonly="">
+											<input type="text" class="form-control" placeholder="Description" value="" ng-model="editProduct.description">
 										</div>
 									</div>
 
@@ -305,12 +361,12 @@
 					<div class="table-content service-table pull-left" ng-if="service.editMode === undefined;">
 						<div class="col-1"> {{ getFormattedDate(service.date) }} </div>
 						<div class="col-2"> {{ service.item.name }} </div>
-						<div class="col-3" data-popover="true" data-html="true" data-content=" {{ service.description }}"> {{ service.description }} </div>
+						<div class="col-3" data-popover="true" data-html="true" data-content=" {{ service.description }}"> {{ service.description ? service.description : '&nbsp;' }} </div>
 						<div class="col-4">
 							Duration <span class="model"> {{ getTimeinFormat(service.quantity) }}</span>
 						</div>
 						<div class="table-content-action pull-right"> 
-							<a href="javascript:void(0)" class="icn-edit tp-hide" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Service"  ng-click="showServiceEditMode(service)"></a>
+							<a href="javascript:void(0)" class="icn-edit tp-hide" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Service"  ng-click="showServiceEditMode(service)" ng-class="{ disabled: listType === 'closed' || listType === 'trash' || listType === 'spam' || isNotOwnerAndAdmin() }"></a>
 						</div>
 					</div>
 
@@ -377,7 +433,7 @@
 						{{ticketUpdate.sharedBetween.length}} people added to this update
 					</span>
 					<div class="pull-left avatar-26 avatar m-r" ng-repeat="sharedBetweenPerson in ticketUpdate.sharedBetween">
-						<img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+						<img ng-src="users/{{ sharedBetweenPerson.id }}/image" alt="..." class="img-circle">
 					</div>
 				</div>
 
@@ -410,6 +466,7 @@
 			<a href="javascript:void(0)" class="btn btn-sr btn-scooter" ng-click="markAsOpen(null, ticketDetail)">Mark as Open</a>
 		</div>
 	</div>
+
 	<div class="tips-message has-updates no-button" ng-if=" listType === 'closed'  && !canBeReOpened(ticketDetail.createdAt)  && ticketDetail.hasInvoice !== true">
 		<span class="icn icn-message-ticket-closed"></span>
 		<div class="message-detail">
@@ -417,7 +474,8 @@
 		</div>
 		<div class="tip"><span class="bold">Tip:</span> You can create a new Ticket any time, and use this ticket's number as reference to <br> continue with troubleshooting.</div>
 	</div>
-	<div class="tips-message has-updates no-button" ng-if=" ticketDetail.hasInvoice === true">
+
+	<div class="tips-message has-updates no-button" ng-if=" listType === 'closed' && ticketDetail.hasInvoice === true">
 		<span class="icn icn-message-ticket-closed"></span>
 		<div class="message-detail">The Ticket is now closed, and already 
 			<span class="bold">billed to the client</span>. You cannot re-open it.
@@ -430,28 +488,42 @@
 	<div class="tips-message has-updates"  ng-if=" listType === 'trash' ">
 		<span class="icn icn-message-ticket-trash"></span>
 		<div class="message-detail">
-			<span class="bold blue">Steve Carter</span> has moved this ticket to trash. You can either delete the ticket forever or restore the ticket
+			<span class="bold blue">{{ getUserFullNameById(ticketDetail.deletePerformer.id) }}</span> has moved this ticket to trash. You can either delete the ticket forever or restore the ticket
 			status anytime, using the respective option.
 		</div>
 		<div class="tip">
 			<span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder where it was deleted from.
 		</div>
 		<div class="message-btn shared">
-			<a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail, true)" class="btn btn-sr btn-red">Delete Forever</a>
-			<a href="javascript:void(0)" ng-click="markAsTrash(null, ticketDetail, false)" class="btn btn-sr btn-gray btn-cancel ">Restore</a>
+			<a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail)" class="btn btn-sr btn-red">Delete Forever</a>
+			<a href="javascript:void(0)" ng-click="deleteTicket(null, ticketDetail, false)" class="btn btn-sr btn-gray btn-cancel ">Restore</a>
 		</div>
 	</div>
 
-	<div class="tips-message has-updates" ng-if=" listType === 'spam' ">
+	<div class="tips-message has-updates" ng-if=" listType === 'spam' && currentUser.role === 'ADMIN' ">
 		<span class="icn icn-message-ticket-spam"></span>
-		<div class="message-detail"><span class="bold blue">Steve Carter</span> has marked this ticket as spam. You can either delete the ticket forever or restore the ticket
+		<div class="message-detail"><span class="bold blue">{{ getUserFullNameById(ticketDetail.spamPerformer.id) }}</span> has marked this ticket as spam. You can either delete the ticket forever or restore the ticket
 			status anytime, using the respective option.
 		</div>
 		<div class="tip"><span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder where it was marked as spam.
 		</div>
 		<div class="message-btn shared">
-			<a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail, true)" class="btn btn-sr btn-red">Delete Forever</a>
-			<a href="javascript:void(0)" ng-click="markAsSpam(null, ticketDetail, false)" class="btn btn-sr btn-gray btn-cancel ">Restore</a>
+			<a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail)" class="btn btn-sr btn-red">Delete Forever</a>
+			<a href="javascript:void(0)" ng-click="markAsSpam($event, ticketDetail, false)" class="btn btn-sr btn-gray btn-cancel ">Restore</a>
 		</div>
 	</div>
+
+	<div class="tips-message" ng-if=" listType === 'spam' && currentUser.role === 'USER' ">
+		<span class="icn icn-message-ticket-spam"></span>
+		<div class="message-detail">You can use the 
+			<span class="bold ">Restore</span> button to reinstate the ticket status anytime!
+		</div>
+		<div class="tip">
+			<span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder where it was reported <br> as spam.
+		</div>
+		<div class="message-btn shared">
+			<a href="javascript:void(0)" id="" class="btn btn-sr btn-gray btn-cancel" ng-click="markAsSpam($event, ticketDetail, false)">Restore</a>
+		</div>
+	</div>
+
 </div>

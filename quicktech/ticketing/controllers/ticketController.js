@@ -3,116 +3,112 @@
 /* Controllers */
 (function (window, $, undefined) {
 	var app = angular.module('quicktech.ticketing');
-	app.controller('TicketController', ['$scope', 'TicketsService', 'TicketTagsService', 'UsersService',
-		'CompaniesService','ActionRightsService', '$rootScope',
-		function ($scope, TicketsService, TicketTagsService, UsersService, 
-            CompaniesService, ActionRightsService, $rootScope) {
+	app.controller('TicketController', ['$scope', 'TicketsService', 'TicketTagsService','ActionRightsService', '$rootScope',
+		function ($scope, TicketsService, TicketTagsService, ActionRightsService, $rootScope) {
 			
-            $scope.ticketCounts = TicketsService.getCounts($scope);
-            $scope.searchFilter = {};
-            $scope.bulk = {};
-            $scope.listType = '';
-            $scope.ActionRightsService = ActionRightsService;
+      $scope.ticketCounts = TicketsService.getCounts($scope);
+      $scope.searchFilter = {};
+      $scope.bulk = {};
+      $scope.listType = '';
+      $scope.ActionRightsService = ActionRightsService;
 
-            // TODO: Fix it, remove the loop, search for alternatives..
-            setTimeout(function(){
-                $scope.currentUser = $rootScope.currentUser;
-                //console.dir($scope.currentUser);    
-            },1500);
+      var tags = TicketTagsService.getList($scope, function(){
+        $scope.allTags = tags.staticCopy();
+      });
 
-            var tags = TicketTagsService.getList($scope, function(){
-                $scope.allTags = tags;
-            });
+    }]);
 
-        }]);
+  app.controller('CompaniesController', ['$scope', 'CompaniesService',
+   function ($scope, CompaniesService) {
+    $scope.companies = CompaniesService.getAllCompanies();
+    $scope.currentCompany = CompaniesService.getCurrentCompany();
 
-    app.controller('CompaniesController', ['$scope', 'CompaniesService',
-     function ($scope, CompaniesService) {
-      $scope.companies = CompaniesService.getAllCompanies();
-      $scope.currentCompany = CompaniesService.getCurrentCompany();
-      $scope.getCompanyName = function (companyId) {
-       var company = CompaniesService.getOneById(companyId);
-       return company.legalName != undefined ? company.legalName : '';
+    $scope.getCompanyName = function (companyId) {
+     var company = CompaniesService.getOneById(companyId);
+
+     return company.legalName != undefined ? company.legalName : '';
    }
+   
    $scope.getCompanyOwner = function (companyId) {
-       if (companyId)
-        var company = CompaniesService.getOneById(companyId);
+     if (companyId)
+      var company = CompaniesService.getOneById(companyId);
     else
-        return '';
+      return '';
     return company.primaryUser.id != undefined ? company.primaryUser.id : '';
-}
-$scope.filterUserByCompany = function (company) {
+  }
+
+  $scope.filterUserByCompany = function (company) {
    $scope.companyUsers = CompaniesService.getAllByCompanyId(company.id);
-}
-$scope.selectUser = function (event, user) {
+ }
+ $scope.selectUser = function (event, user) {
    $('input#ticketCreatedBy').val(user.firstName + " " + user.lastName);
    $('input#ticketCreatedById').val(user.id);
    $(event.target).parents('div.dropdown').removeClass('open');
-}
+ }
 
-$scope.selectPriority = function (event, priority) {
+ $scope.selectPriority = function (event, priority) {
    $('input#createTicketPriority').val(priority);
    $(event.target).parents('div.dropdown').removeClass('open');
-}
+ }
 }]);
 
 app.controller('UserController', ['$scope', 'UsersService',
 	function ($scope, UsersService) {
 
-        $scope.companyUsers = [];
-        $scope.currentUser = UsersService.getCurrentUser();
-        $scope.currentCompanyUser = [];
-        $scope.getFirstName = function (userId) {
-            var user = UsersService.getOneById(userId);
-            if (user)
-                return user.firstName != undefined ? user.firstName : '';
-        }
-        $scope.getlastName = function (userId) {
-            var user = UsersService.getOneById(userId);
-            if (user)
-                return user.lastName != undefined ? user.lastName : '';
-        }
-        $scope.currentUser = UsersService.getCurrentUser();
-        $scope.selectCompany = function (event, company) {
-           $scope.companyUsers = UsersService.getAllByCompanyId(company.id);
-           $('input#ticketCompany').val(company.legalName);
-           $('input#ticketCompanyId').val(company.id);
-           $(event.target).parents('div.dropdown').removeClass('open');
-       }
-       $scope.getAssignToUsers = function (company) {
-           $scope.currentCompanyUser = UsersService.getAllByCompanyId(company.id);
-       }
-       $scope.selectAssignTo = function (event, user) {
-           $('input#ticketAssignTo').val(user.firstName + ' ' + user.lastName);
-           $('input#ticketAssignToId').val(user.id);
-           $(event.target).parents('div.dropdown').removeClass('open');
-       }
-       if ($scope.currentUser && $scope.currentUser.id)
-           $scope.teamMembers = UsersService.getAllByCompanyId($scope.currentUser.id);
-       $scope.clientUsers = UsersService.getClientUsers();
-       $scope.getAllByCompanyId = function (company) {
-           return UsersService.getAllByCompanyId(company.id);
-       }
-       $scope.selectUsers = function (event, user) {
-           if (user) {
-            if ($(event.target).parents('.checkbox').find('input[type=checkbox]').is('checked')) {
-             $(event.target).parents('.checkbox').find('input[type=checkbox]').prop('checked', '')
-         } else {
-             $(event.target).parents('.checkbox').find('input[type=checkbox]').prop('checked', 'checked')
-         }
-         $(event.target).parents('.addUsersDropdown').addClass('open');
-     } else {
-        $(event.target).parents('.addUsersDropdown').addClass('open');
+    $scope.companyUsers = [];
+    $scope.currentUser = UsersService.getCurrentUser();
+    $scope.currentCompanyUser = [];
+    $scope.getFirstName = function (userId) {
+      var user = UsersService.getOneById(userId);
+      if (user)
+        return user.firstName != undefined ? user.firstName : '';
     }
-    event.preventDefault();
-    event.stopPropagation();
+    $scope.getlastName = function (userId) {
+      var user = UsersService.getOneById(userId);
+      if (user)
+        return user.lastName != undefined ? user.lastName : '';
+    }
+    $scope.currentUser = UsersService.getCurrentUser();
+    $scope.selectCompany = function (event, company) {
+     $scope.companyUsers = UsersService.getAllByCompanyId(company.id);
+     $('input#ticketCompany').val(company.legalName);
+     $('input#ticketCompanyId').val(company.id);
+     $(event.target).parents('div.dropdown').removeClass('open');
+   }
+   $scope.getAssignToUsers = function (company) {
+     $scope.currentCompanyUser = UsersService.getAllByCompanyId(company.id);
+   }
+   $scope.selectAssignTo = function (event, user) {
+     $('input#ticketAssignTo').val(user.firstName + ' ' + user.lastName);
+     $('input#ticketAssignToId').val(user.id);
+     $(event.target).parents('div.dropdown').removeClass('open');
+   }
+   if ($scope.currentUser && $scope.currentUser.id)
+     $scope.teamMembers = UsersService.getAllByCompanyId($scope.currentUser.id);
+   $scope.clientUsers = UsersService.getClientUsers();
+   $scope.getAllByCompanyId = function (company) {
+     return UsersService.getAllByCompanyId(company.id);
+   }
+   $scope.selectUsers = function (event, user) {
+     if (user) {
+      if ($(event.target).parents('.checkbox').find('input[type=checkbox]').is('checked')) {
+       $(event.target).parents('.checkbox').find('input[type=checkbox]').prop('checked', '')
+     } else {
+       $(event.target).parents('.checkbox').find('input[type=checkbox]').prop('checked', 'checked')
+     }
+     $(event.target).parents('.addUsersDropdown').addClass('open');
+   } else {
+    $(event.target).parents('.addUsersDropdown').addClass('open');
+  }
+  event.preventDefault();
+  event.stopPropagation();
 }
 
 $scope.showMembers = function (event, panelId) {
-   $(event.target).parents('ul').find('li').removeClass('active');
-   $(event.target).parents('li').addClass('active');
-   $(event.target).parents('div.addUsersDropdown').find('div.tab-content').find('div.tab-pane').removeClass('active');
-   $(event.target).parents('div.addUsersDropdown').find('div.' + panelId).addClass('active');
+ $(event.target).parents('ul').find('li').removeClass('active');
+ $(event.target).parents('li').addClass('active');
+ $(event.target).parents('div.addUsersDropdown').find('div.tab-content').find('div.tab-pane').removeClass('active');
+ $(event.target).parents('div.addUsersDropdown').find('div.' + panelId).addClass('active');
 }
 }
 ]);
@@ -156,106 +152,106 @@ app.controller('TagController', ['$scope', 'TicketTagsService',
 			$('div#tagCreateModel').modal('show');
 		};
 		
-        $scope.selectColor = function (event, code, color) {
-           debugger;
-           $(event.target).parents('ul.tag-list li a').addClass('open');
-           event.preventDefault();
-           event.stopPropagation();
-           $('input#tagColorCode').val(code);
-           if (event.target.localName === 'span') {
-            $(event.target).parent().addClass('is-selected');
-        } else if (event.target.localName === 'a') {
-            $(event.target).addClass('is-selected');
-        } else {
-            $(event.target).find('a').addClass('is-selected');
-        }
+    $scope.selectColor = function (event, code, color) {
+     debugger;
+     $(event.target).parents('ul.tag-list li a').addClass('open');
+     event.preventDefault();
+     event.stopPropagation();
+     $('input#tagColorCode').val(code);
+     if (event.target.localName === 'span') {
+      $(event.target).parent().addClass('is-selected');
+    } else if (event.target.localName === 'a') {
+      $(event.target).addClass('is-selected');
+    } else {
+      $(event.target).find('a').addClass('is-selected');
+    }
 
-    };
-
-    $scope.tags = TicketTagsService.getList($scope);
-
-    TicketTagsService.getTicketsCounts($scope, function (arg) {
-       $scope.tagsCount = arg;
-   });
-
-    $scope.colorCodes = [{"code": 0}, {"code": 1}, {"code": 2}, {"code": 3}, {"code": 4}, {"code": 5}, {"code": 6}, {"code": 7}, {"code": 8}, {"code": 9}];
-
-    $scope.deleteTag = function () {
-
-       var tagId = $('#tagId').val();
-       var tagName = $('#ticketTagName').val();
-       if (!tagId) {
-          return;
-      }
-      TicketTagsService.deleteTag(tagId, function () {
-          $('div#notificationContainer div.alert-yellow').text(tagName + ' deleted successfully.');
-          $('div#notificationContainer').show();
-          $('div#tagCreateModel').modal('hide');
-          setTimeout(function () {
-             $('div#notificationContainer').hide();
-         }, 3000);
-      });
   };
 
-  $scope.postCreateTag = function () {
-   var tag = {
-      "name": $('input#ticketTagName').val(),
-      "color": $('input#tagColorCode').val()
-  };
+  $scope.tags = TicketTagsService.getList($scope);
 
-  var tagId = $('#tagId').val();
+  TicketTagsService.getTicketsCounts($scope, function (arg) {
+   $scope.tagsCount = arg;
+ });
 
-  var message = ' created successfully';
+  $scope.colorCodes = [{"code": 0}, {"code": 1}, {"code": 2}, {"code": 3}, {"code": 4}, {"code": 5}, {"code": 6}, {"code": 7}, {"code": 8}, {"code": 9}];
 
-  if (tagId) {
-      tag.id = tagId;
-      message = ' updated successfully';
+  $scope.deleteTag = function () {
+
+   var tagId = $('#tagId').val();
+   var tagName = $('#ticketTagName').val();
+   if (!tagId) {
+    return;
   }
-
-  TicketTagsService.save(tag, function () {
-      $('div#tagCreateModel').modal('hide');
-      $('div#notificationContainer div.alert-yellow').text(tag.name + message);
-      $('div#notificationContainer').show();
-      setTimeout(function () {
-         $('div#notificationContainer').hide();
-     }, 3000);
+  TicketTagsService.deleteTag(tagId, function () {
+    $('div#notificationContainer div.alert-yellow').text(tagName + ' deleted successfully.');
+    $('div#notificationContainer').show();
+    $('div#tagCreateModel').modal('hide');
+    setTimeout(function () {
+     $('div#notificationContainer').hide();
+   }, 3000);
   });
+};
+
+$scope.postCreateTag = function () {
+ var tag = {
+  "name": $('input#ticketTagName').val(),
+  "color": $('input#tagColorCode').val()
+};
+
+var tagId = $('#tagId').val();
+
+var message = ' created successfully';
+
+if (tagId) {
+  tag.id = tagId;
+  message = ' updated successfully';
+}
+
+TicketTagsService.save(tag, function () {
+  $('div#tagCreateModel').modal('hide');
+  $('div#notificationContainer div.alert-yellow').text(tag.name + message);
+  $('div#notificationContainer').show();
+  setTimeout(function () {
+   $('div#notificationContainer').hide();
+ }, 3000);
+});
 
 };
 
 $scope.postTagAsBulk = function (event) {
-   if ($('div.ticketListClass').find('input.ticketBulkSelection[type=checkbox]:checked').length > 0) {
-      var ticketsNum = $('div.ticketListClass').find('input.ticketBulkSelection[type=checkbox]:checked').length;
-      var tickets = $('div.tickets-list').find('input.ticketBulkSelection[type=checkbox]:checked');
-      var tags = $('ul#ticketAssignTags').find('input[type=checkbox]:checked');
-      var ticketArr = [];
-      var tagsArr = [];
-      tickets.each(function (i, ticket) {
-         ticketArr[i] = {};
-         ticketArr[i].id = ticket.value;
-     });
-      tags.each(function (i, tag) {
-         tagsArr[i] = {};
-         tagsArr[i].id = tag.value;
-     });
-      var postData = {};
-      for (var c = 0; c < ticketArr.length; c++) {
-         postData[ticketArr[c].id] = [];
-         for (var j = 0; j < tagsArr.length; j++) {
-
-
-            postData[ticketArr[c].id][j] = tagsArr[j].id;
-        }
-    }
-
-    TicketTagsService.link(postData, function () {
-     $('div#labelAs').modal('hide');
-     $('div#notificationContainer div.alert-yellow').text(ticketsNum + 'has been updated successfully.');
-     $('div#notificationContainer').show();
-     setTimeout(function () {
-        $('div#notificationContainer').hide();
-    }, 3000);
+ if ($('div.ticketListClass').find('input.ticketBulkSelection[type=checkbox]:checked').length > 0) {
+  var ticketsNum = $('div.ticketListClass').find('input.ticketBulkSelection[type=checkbox]:checked').length;
+  var tickets = $('div.tickets-list').find('input.ticketBulkSelection[type=checkbox]:checked');
+  var tags = $('ul#ticketAssignTags').find('input[type=checkbox]:checked');
+  var ticketArr = [];
+  var tagsArr = [];
+  tickets.each(function (i, ticket) {
+   ticketArr[i] = {};
+   ticketArr[i].id = ticket.value;
  });
+  tags.each(function (i, tag) {
+   tagsArr[i] = {};
+   tagsArr[i].id = tag.value;
+ });
+  var postData = {};
+  for (var c = 0; c < ticketArr.length; c++) {
+   postData[ticketArr[c].id] = [];
+   for (var j = 0; j < tagsArr.length; j++) {
+
+
+    postData[ticketArr[c].id][j] = tagsArr[j].id;
+  }
+}
+
+TicketTagsService.link(postData, function () {
+ $('div#labelAs').modal('hide');
+ $('div#notificationContainer div.alert-yellow').text(ticketsNum + 'has been updated successfully.');
+ $('div#notificationContainer').show();
+ setTimeout(function () {
+  $('div#notificationContainer').hide();
+}, 3000);
+});
 }
 };
 
@@ -310,14 +306,14 @@ app.controller('FilesController', ['$scope', 'FilesService',
 						$('#' + id + '_element').attr('style', 'width:' + uploadedPercentage + '%;');
 						$('#' + id + '_percentage').text(parseInt(uploadedPercentage) + ' Complete');
                                 //OnProgress
-                            }, function (arg) {
-                            	$('input#' + id + '_val').val(arg.id);
+                              }, function (arg) {
+                               $('input#' + id + '_val').val(arg.id);
                         //OnFinish
-                    }, function (arg) {
-                    	$('li#' + id + '_li').remove();
+                      }, function (arg) {
+                       $('li#' + id + '_li').remove();
                         //OnError
-                    }
-                    );
+                      }
+                      );
 			}, false);
 }
 }]);

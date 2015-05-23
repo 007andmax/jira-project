@@ -2,11 +2,13 @@
 <div class="add-service clearfix" ng-repeat="service in services" ng-init="serviceIndex = $index">
   <div class="col-1">
     <div class="col-wrapper dropdown">
-      <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown" placeholder="Service" data-toggle="dropdown" aria-expanded="true" ng-model="service.type">
+      <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown" placeholder="Service" data-toggle="dropdown" aria-expanded="true" ng-model="service.name">
       <ul class="dropdown-menu dropdown-menu-services">
-      	<!-- TODO: need to fix this... make dynamic  -->
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">Remote Consulting</a></li>
-        <!--li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">Onsite</a></li-->
+      	
+        <li role="presentation" ng-repeat="companyService in companyServices">
+        <a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="service.id = companyService.versionedId.id; service.name = companyService.name"> {{ companyService.name }} </a>
+        </li>
+        
       </ul>
     </div>
   </div>
@@ -23,7 +25,7 @@
 
         <ul id="serviceminute" class="dropdown-menu dropdown-menu-minute">
           <li role="presentation" ng-repeat="min in serviceMeta.minutes">
-          <a role="menuitem" tabindex="-1" href="#" ng-click="setTime($event, 'min', serviceIndex);" ng-class="{'active': service.selectedMin === min}">{{ min | numberFixedLen:2 }}</a>
+            <a role="menuitem" tabindex="-1" href="#" ng-click="setTime($event, 'min', serviceIndex);" ng-class="{'active': service.selectedMin === min}">{{ min | numberFixedLen:2 }}</a>
           </li>
         </ul>
 
@@ -52,10 +54,11 @@
 <div class="add-service clearfix">
   <div class="col-1">
     <div class="col-wrapper dropdown">
-      <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown" placeholder="Service" data-toggle="dropdown" aria-expanded="true" ng-model="service.type">
+      <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown" placeholder="Service" data-toggle="dropdown" aria-expanded="true" ng-model="service.name">
       <ul class="dropdown-menu dropdown-menu-services">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">Remote Consulting</a></li>
-        <!--li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">Onsite</a></li-->
+        <li role="presentation" ng-repeat="companyService in companyServices">
+        <a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="service.id = companyService.versionedId.id; service.name = companyService.name"> {{ companyService.name }} </a>
+        </li>
       </ul>
     </div>
   </div>

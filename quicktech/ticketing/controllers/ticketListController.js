@@ -47,6 +47,7 @@
 
           	allTickets = $scope.tickets;
 
+          	//console.log(allTickets);
 
           $(window).scroll(function() { //TODO: need to optimize... //TODO: don't bind scroll event when the page is ticket detail
 
@@ -60,7 +61,7 @@
           				TicketsService.loadMore($scope, function() {
           					$('#loading').hide();
           					$('.ticket.loading').hide();
-          					setTimeout($scope.populateTechGusy, 1500);
+          					UsersService._addInitListener($scope.populateTechGusy);
           				});
           			}
           		}
@@ -68,10 +69,32 @@
 
           });
 
+          UsersService._addInitListener($scope.populateTechGusy);
       });
+$scope.techGuys  = [];
+$scope.loadTechGuys = function() {
+	$scope.techGuys = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+	
+	for(var i = 0; i < $scope.techGuys.length ; i++) {
+		$scope.techGuys[i].fullName = $scope.techGuys[i].firstName + ' ' + $scope.techGuys[i].lastName
+	};
 
+	for(var i = 0; i < $scope.techGuys.length ; i++) {
+		if($scope.techGuys[i].id == $scope.currentUser.id) {
+			$scope.techGuys.splice(i, 1);
+		}
+	}
+
+	//console.dir($scope.techGuys);
+}
+
+if($scope.techGuys.length === 0) {
+	UsersService._addInitListener($scope.loadTechGuys);	
+}
 
 $scope.ActionRightsService = ActionRightsService;
+$scope.$parent.allSelectedTicketsMarkedByAdmin = false;
+$scope.$parent.allSelectedTicketsReportedAsSpam = false;
 
 $scope.MarkedSpamByRole = function(ticket) {
 
@@ -102,7 +125,23 @@ $scope.isNotMarkedByAdmin = function(ticket) {
 	return false;
 }
 
-$scope.deleteForEver = function (ticket, hide) {
+$scope.getUserFullNameById = function(id) {
+	var user = UsersService.getOneById(id);
+	return user.firstName + ' ' + user.lastName;
+}
+
+$scope.getUserInitialsById = function(id) {
+	
+	var fullName = $scope.getUserFullNameById(id);
+	var matches = fullName.match(/\b(\w)/g);
+	var initials = matches.join('');
+	
+	return initials;
+}
+
+
+
+$scope.deleteForEver = function (ticket) {
 	TicketsService.deleteForever(ticket.id, function () {
 		notification('"' + ticket.subject + '" is deleted forever.');
 	});
@@ -169,7 +208,7 @@ $scope.$parent.search = function() {
 	$scope.tickets = TicketsService.getList($scope, params, function() {
 		$('#loading').hide();
 		$('.ticket.loading').hide();
-                setTimeout($scope.populateTechGusy, 1500); //TODO: need to optimize to load users only once...
+                //setTimeout($scope.populateTechGusy, 1500); //TODO: need to optimize to load users only once...
             });
 }
 
@@ -223,7 +262,8 @@ $scope.markAsSpam = function (event, ticket, flag) {
 		}
 
 		if(flag) {
-			notification('"' + ticket.subject + '" is moved to spam.');	
+			notification('"' + ticket.subject + '" is moved to spam.');
+
 		} else {
 			notification('"' + ticket.subject + '" restored successfully.');	
 		}
@@ -234,19 +274,23 @@ $scope.markAsSpam = function (event, ticket, flag) {
 
 $scope.deleteTicket = function (event, ticket, flag) {
 
-	TicketsService.changeTrashFlag(ticket.id, flag, function () {
+	TicketsService.changeTrashFlag(ticket.id, flag, function (response) {
 
-		if(event!=null){
-			$(event.target).parents('div.dropdown').removeClass('open');
-		}else {
-			$('body').removeClass('opened-ticket');
-		}
-
-		if(flag) {
-			notification('"' + ticket.subject + '" is deleted successfully.');
+		if(response.code === 403) {
+			notification('Error: ' + response.message);
 		} else {
-			notification('"' + ticket.subject + '" restored successfully.');
+			if(event!=null){
+				$(event.target).parents('div.dropdown').removeClass('open');
+			}else {
+				$('body').removeClass('opened-ticket');
+			}
+			if(flag) {
+				notification('"' + ticket.subject + '" is deleted successfully.');
+			} else {
+				notification('"' + ticket.subject + '" restored successfully.');
+			}	
 		}
+		
 
 	});
 };
@@ -268,6 +312,10 @@ $scope.enableBulkAction = function (event) {
 		$('div#search-and-filter').hide();
 
 		$('.total-selected').text(totalSelected);
+
+		// logid for spam different type of reported/marked spam bulk actions
+		$scope.updateBulkActionBar(selectedTickets);
+
         //TODO: need to optimize don't show on each checkbox
 
     } else {
@@ -282,9 +330,38 @@ $scope.enableBulkAction = function (event) {
     		$('div#search-and-filter').show();
     	}
     	$('.total-selected').text(totalSelected);
+
+    	$scope.updateBulkActionBar(selectedTickets);
     }
     $scope.updateState();
     event.stopPropagation();
+}
+
+$scope.updateBulkActionBar = function(selectedTickets) {
+	if($scope.listType == 'spam' && $scope.currentUser.role === 'ADMIN') {
+		var markedCount = 0;
+		var reportedCount = 0;
+
+		angular.forEach(selectedTickets, function(ticket) {
+			if($scope.isMarkedByAdmin(ticket)) {
+				markedCount++;
+			} else {
+				reportedCount++;
+			}
+		});
+
+		if(markedCount == selectedTickets.length) {
+			$scope.$parent.allSelectedTicketsMarkedByAdmin = true;
+		} else {
+			$scope.$parent.allSelectedTicketsMarkedByAdmin = false;
+		}
+
+		if(reportedCount == selectedTickets.length) {
+			$scope.$parent.allSelectedTicketsReportedAsSpam = true;
+		} else {
+			$scope.$parent.allSelectedTicketsReportedAsSpam = false;
+		}
+	}
 }
 
 $scope.getSelectedTicketIds = function() {
@@ -295,6 +372,15 @@ $scope.getSelectedTicketIds = function() {
 	});
 
 	return ids;
+}
+
+$scope.$parent.deleteBulkTicketsForever = function ($event, isDelete) {
+	
+	var params = $scope.getSelectedTicketIds();
+
+	TicketsService.deleteForever(params, function () {
+		notification(params.length + ' ticket(s) are deleted forever.');
+	});
 }
 
 $scope.$parent.restoreBulkTickets = function() {
@@ -331,6 +417,16 @@ $scope.$parent.changeBulkPriority = function (event, priority) {
 	TicketsService.changePriority(params, priority, function () {
 		$(event.target).parents('div.dropdown').removeClass('open');
 		notification('Priority for ' + params.length + ' Ticket(s) has been set!');
+		$scope.uncheckAll();
+	});
+};
+
+$scope.$parent.changeBulkStatus = function (status) {
+	
+	var params = $scope.getSelectedTicketIds();	
+	
+	TicketsService.changeStatus(params, status, function () {
+		notification('Status for ' + params.length + ' ticket(s) is updated!');
 		$scope.uncheckAll();
 	});
 };
@@ -497,7 +593,7 @@ $scope.postTagAs = function (event, ticketId) {
 
 	if ($(event.target).parents('ul.tag-list').find('input[type=checkbox]:checked').length > 0) {
 		var tags = $(event.target).parents('ul.tag-list').find('input[type=checkbox]:checked');
-		console.dir(tags);
+		//console.dir(tags);
 		var tagsArr = [];
 		tags.each(function (i, tag) {
 			tagsArr[i] = {};
@@ -510,8 +606,12 @@ $scope.postTagAs = function (event, ticketId) {
 			postData[ticketId][j] = tagsArr[j].id;
 		}
 
-		console.dir(postData);
-
+		TicketTagsService.link(postData, function () {
+			notification('Ticket has been tagged successfully.');
+		});
+	} else {
+		var postData = {};
+		postData[ticketId] = [];
 		TicketTagsService.link(postData, function () {
 			notification('Ticket has been tagged successfully.');
 		});
@@ -578,6 +678,13 @@ $scope.renderDateTime = function (time) {
 	return str;
 }
 
+$scope.getSpamIconToolTip = function(listType) {
+	if(listType === 'unassigned') {
+		return 'Report As Spam';
+	} else if(listType === 'spam') {
+		return 'Mark As Spam';
+	}
+}
 
 $scope.getStatusCSS = function (tag) {
 	if (tag)
@@ -604,28 +711,46 @@ $scope.expand = function (event, ticketId) {
     }
 };
 
-//TODO: fix spells and internal strucutre
 $scope.populateTechGusy = function() {
+	setTimeout($scope.populateTechGusy_typeahead, 500);
+}
+
+$scope.populateTechGusy_typeahead = function() {
 
 	var substringMatcher = function(strs) {
 		return function findMatches(q, cb) {
 			var matches, substringRegex;
 			matches = [];
-			var substrRegex = new RegExp(q, 'i');
+
+			q = q.trim().toLowerCase();
+			
 			$.each(strs, function(i, str) {
-				if (substrRegex.test(str.firstName) || substrRegex.test(str.lastName)) {
+				var firstName = str.firstName !== undefined ? str.firstName.toLowerCase() : '';
+				var lastName = str.lastName !== undefined ? str.lastName.toLowerCase() : '';
+				var fullName = str.fullName !== undefined ? str.fullName.toLowerCase() : '';
+				var primaryEmail = str.primaryEmail !== undefined ? str.primaryEmail.toLowerCase() : '';
+				if (firstName.indexOf(q) !== -1 
+					|| lastName.indexOf(q) !== -1 
+					|| primaryEmail.indexOf(q) !== -1
+					|| fullName.indexOf(q) !== -1) {
+					matches.push(str);
+			}
+		});
+			//var substrRegex = new RegExp(q, 'i');
+			/*$.each(strs, function(i, str) {
+				if (substrRegex.test(str.firstName) 
+					|| substrRegex.test(str.lastName) 
+					|| substrRegex.test(str.fullName) 
+					|| substrRegex.test(str.primaryEmail) ) {
 					matches.push(str);
 				}
-			});
-			cb(matches);
-		};
-	};
+			});*/
 
-	var techGuys = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
-	angular.forEach(techGuys, function(guy) {
-		guy.fullName = guy.firstName + ' ' + guy.lastName;
-	});
-	var selected = false;
+cb(matches);
+};
+};
+
+var selected = false;
 
 $('#the-basics .typeahead').typeahead('destroy'); // TODO: need to optimize the code
 
@@ -645,7 +770,7 @@ $('#the-basics .typeahead').typeahead({hint: true, highlight: true, minLength: 0
 			].join('\n'))
 	},
 	name: 'techGuys',
-	source: substringMatcher(techGuys)
+	source: substringMatcher($scope.techGuys)
 }).on('typeahead:beforeclose', function($e) { if(!selected) {$e.preventDefault();} })
 
 .on('typeahead:select', function($e, item){
@@ -675,9 +800,14 @@ $('#the-basics .typeahead').on('keyup', function(event){
 
 });
 
-}
 
-setTimeout($scope.populateTechGusy, 1800);
+$('.tt-menu').jScrollPane({
+	autoReinitialise: true,
+	verticalDragMinHeight: 54,
+	verticalDragMaxHeight: 54,
+});
+
+}
 
 prepareTicketsModule();
 

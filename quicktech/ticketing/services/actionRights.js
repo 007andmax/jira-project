@@ -52,7 +52,7 @@
 
         function isPriorityIconVisible(filter, userRole) {
 
-            var isTrueForOpen = filter === FILTERS.OPEN; 
+            var isTrueForOpen = filter === FILTERS.OPEN;
             var isTrueForShared = filter === FILTERS.SHARED && userRole !== USER_ROLES.USER;
             var isTrueForUser = filter === FILTERS.USER && userRole !== USER_ROLES.USER;
 
@@ -60,7 +60,7 @@
         }
 
         function isPriorityForDetailPageVisible(filter, userRole) {
-            return isPriorityVisible(filter) || isPriorityIconVisible(filter, userRole);
+            return (isPriorityVisible(filter) && userRole == USER_ROLES.ADMIN) || isPriorityIconVisible(filter, userRole);
         }
 
         function isChangeStatusVisible(filter) {
@@ -71,18 +71,20 @@
             return filter !== FILTERS.USER || (filter === FILTERS.USER && userRole !== USER_ROLES.USER)
         }
 
-        function isMoveToTrashIconVisible(filter, ticketMarkedSpamByRole, currentUserRole) {
-            var isDeleteSpamForAdmin =  filter === FILTERS.SPAM && 
-            ticketMarkedSpamByRole === USER_ROLES.ADMIN && currentUserRole !== USER_ROLES.USER;
+        function isMoveToTrashIconVisible(filter) {
 
             var isClosed = filter === FILTERS.CLOSE;
+            return isClosed;
+        }
 
-            return isDeleteSpamForAdmin || isClosed;
+        function isDeleteSpamForAdminVisible(filter, ticketMarkedSpamByRole, currentUserRole) {
+            return filter === FILTERS.SPAM && ticketMarkedSpamByRole === USER_ROLES.ADMIN && 
+            currentUserRole !== USER_ROLES.USER;
         }
 
         function isMoveToTrashDetailedVisible(filter, ticketMarkedSpamByRole, currentUserRole) {
-            return isMoveToTrashIconVisible(filter, ticketMarkedSpamByRole, currentUserRole) ||
-            isMoveToTrashVisible(filter, currentUserRole);
+            return (isMoveToTrashIconVisible(filter, ticketMarkedSpamByRole, currentUserRole) ||
+                isMoveToTrashVisible(filter, currentUserRole)) && currentUserRole !== USER_ROLES.USER;
         }
 
         function isMoveToTrashForeverIconVisible(filter) {
@@ -104,8 +106,16 @@
             return isTrueForUnassigned || isRolesCheckTrue;
         }
 
+        function isMarkAsSpamDetailVisible(filter, currentUserRole) {
+            var isTrueForFilter = filter === FILTERS.UNASSIGNED || filter === FILTERS.USER 
+            || filter === FILTERS.SHARED || filter === FILTERS.OPEN;
+            var isTrueForUser = currentUserRole == USER_ROLES.ADMIN;
+            return (isTrueForFilter && isTrueForUser) || (currentUserRole == USER_ROLES.USER && 
+                (filter === FILTERS.UNASSIGNED  ||  filter === FILTERS.USER));
+        }
+
         function isAssignToUserVisible(filter, userRole) {
-            var isTrueForFilter = filter === FILTERS.OPEN && filter === FILTERS.USER;
+            var isTrueForFilter = filter === FILTERS.OPEN || filter === FILTERS.USER;
             var isTrueForShared = filter === FILTERS.SHARED && userRole !== USER_ROLES.USER;
             var isTrueForUnassigned = filter === FILTERS.UNASSIGNED && userRole !== USER_ROLES.USER;
 
@@ -131,8 +141,10 @@
             
             isChangeStatusVisible : isChangeStatusVisible,
             isMarkAsSpamIconVisible : isMarkAsSpamIconVisible,
+            isMarkAsSpamDetailVisible : isMarkAsSpamDetailVisible,
             isAssignToUserVisible : isAssignToUserVisible,
-            isMoreActionsMenuVisible : isMoreActionsMenuVisible
+            isMoreActionsMenuVisible : isMoreActionsMenuVisible,
+            isDeleteSpamForAdminVisible : isDeleteSpamForAdminVisible
         }
 
     });

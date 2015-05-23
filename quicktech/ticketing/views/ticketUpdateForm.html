@@ -1,4 +1,4 @@
-<div class="ticket-post-update-wrapper">
+<div class="ticket-post-update-wrapper" ng-show=" listType !== 'unassigned' && listType !== 'closed' && listType !== 'trash' && listType !== 'spam' ">
   <div role="tabpanel">
 
     <!-- Nav tabs -->
@@ -8,12 +8,12 @@
           <span class="icon-add icn-add-note"></span>Note
         </a>
       </li>
-      <li role="presentation">
+      <li role="presentation" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <a href="#tab-add-product" aria-controls="tab-add-product" role="tab" data-toggle="tab" ng-click="activateTab($event, 'PRODUCT');">
           <span class="icon-add icn-add-product"></span>Product
         </a>
       </li>
-      <li role="presentation">
+      <li role="presentation" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <a href="#tab-add-service" aria-controls="tab-add-service" role="tab" data-toggle="tab" ng-click="activateTab($event, 'SERVICE');">
           <span class="icon-add icn-add-service"></span>Service
         </a>
@@ -38,13 +38,10 @@
               </div>
               <!-- Update Box Footer -->
               <div class="ticket-form-footer clearfix">
-
-              <div ng-if="false"> <!-- TODO: handel file attachment  and remove this div-->
-                  <a href="javascript:void(0)" class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide" data-placement="top" title="" data-original-title="Attach files" data-toggle="tooltip"><span class="icn-add-attachment"></span>
-                  </a>
-                  <div class="line-sep pull-left"></div>
-                </div>
-
+                <a href="javascript:void(0)" class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide" data-placement="top" title="" data-original-title="Attach files" data-toggle="tooltip"><span class="icn-add-attachment" onclick="$('#uploadFile').click();/*$('#attachments').show();*/"></span>
+                </a>
+                <input id="uploadFile" type="file" style="display:none" />
+                <div class="line-sep pull-left"></div>
                 <div ng-include="'html/quicktech/ticketing/views/ticketUpdateAddUsers.html'" include-replace>
                 </div>
               </div>
@@ -56,7 +53,7 @@
       </div>
 
       <!-- Add Product Panel -->
-      <div role="tabpanel" class="tab-pane tab-add-product" id="tab-add-product">
+      <div role="tabpanel" class="tab-pane tab-add-product" id="tab-add-product" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <div class="ticket-update clearfix">
           <div class="ticket-updater pull-left">
             <div class="pull-left avatar-38 avatar m-r">
@@ -79,7 +76,7 @@
       </div>
 
       <!-- Service Panel -->
-      <div role="tabpanel" class="tab-pane tab-add-service" id="tab-add-service">
+      <div role="tabpanel" class="tab-pane tab-add-service" id="tab-add-service" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <div class="ticket-update clearfix">
           <div class="ticket-updater pull-left">
             <div class="pull-left avatar-38 avatar m-r">

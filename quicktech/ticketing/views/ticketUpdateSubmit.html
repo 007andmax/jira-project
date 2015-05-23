@@ -3,7 +3,7 @@
     <label class="control checkbox">
       <input type="checkbox">
       <span class="control-indicator"></span>
-      Miles McMillan
+      {{getFirstName(ticketDetail.createdUser.id)}} {{ getLastName(ticketDetail.createdUser.id)}}
     </label>
   </div>
   <a href="#" class="btn btn-scooter btn-update pull-right" ng-click="postTicketUpdate($event, ticketDetail.id);"

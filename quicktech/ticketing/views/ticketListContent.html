@@ -47,13 +47,16 @@
 						</div>
 					</li>
 					<li>
-						<a ng-click="markAsSpam($event, ticket, true)" tabindex="-1" href="javascript:{}">Mark as Spam</a>
+						<a ng-click="markAsSpam($event, ticket, true)" tabindex="-1" href="javascript:{}">
+							<span ng-if=" currentUser.role === 'ADMIN' " >Mark as Spam</span>
+							<span ng-if=" currentUser.role === 'USER' " >Report as Spam</span>
+						</a>
 					</li>
 					<li ng-if="ticket.trash == false && ActionRightsService.isMoveToTrashVisible(listType,currentUser.role)"><a tabindex="-1" href="javascript:{}" ng-click="deleteTicket($event, ticket, true)">Move to Trash</a></li>
 				</ul>
 			</li>
 			<!-- delete forever, only visible in trash -->
-			<li ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType)">
+			<li ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType) || ActionRightsService.isDeleteSpamForAdminVisible(listType, MarkedSpamByRole(ticket),currentUser.role)">
 				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" ng-click="deleteForEver(ticket)" title="" data-original-title="delete forever">
 					<span class="icn-ticket-del icn"></span>
 				</a>
@@ -75,9 +78,10 @@
 					<span class="icn-small-ticket-restore icn"></span>
 				</a>
 			</li>
+			
 			<!-- mark as spam icon, visible when in unassigned and for USER only -->
 			<li ng-if="ActionRightsService.isMarkAsSpamIconVisible(listType, MarkedSpamByRole(ticket), currentUser.role)">
-				<a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark As Spam" ng-click="markAsSpam($event, ticket, true)"><span class="icn-ticket-spam icn"></span>
+				<a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ getSpamIconToolTip(listType) }}" ng-click="markAsSpam($event, ticket, true)"><span class="icn-ticket-spam icn"></span>
 				</a>
 			</li>
 
@@ -155,7 +159,7 @@
 	<div class="ticket-status" ng-if="listType!='unassigned'"> 
 		<span class="icns icn-status-{{lowerCaseWithOutUnderScore(ticket.status)}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ticket.status}}"></span>
 	</div>
-	<span ng-if="listType!='unassigned' && listType!='user'" class="label label-default label-ticket-assign-user" data-toggle="tooltip" data-placement="top" title="" data-original-title="Jacob Morton">JM</span>
+	<span ng-if="ticket.assignedUser !== null && listType !== 'user' && ticket.assignedUser.id !== currentUser.id " class="label label-default label-ticket-assign-user tooltip-dp" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ getUserFullNameById(ticket.assignedUser.id) }}" ng-bind="getUserInitialsById(ticket.assignedUser.id)"> </span>
 	<span class="label label-default label-ticket-number">{{ticket.number}}</span>
 	<span ng-if="ticket.hasNewUpdates==true" class="icn-load-green pull-right"></span>
 	<span ng-if="(listType!='user' || listType!='shared') && ticket.unread==true" class="label label-success pull-right">new

@@ -24,17 +24,6 @@ function prepareTicketsModule() {
 
 
 
-
-
-setTimeout(function(){
-    $('.tt-menu').jScrollPane({
-        autoReinitialise: true,
-        verticalDragMinHeight: 54,
-        verticalDragMaxHeight: 54,
-    });    
-}, 2000);
-
-
         //$('.ticket-content').css('height', $('body').innerHeight() - 90);
         $('.scroll-pane').jScrollPane({
             autoReinitialise: true,

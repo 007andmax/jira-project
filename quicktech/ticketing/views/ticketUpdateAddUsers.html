@@ -7,10 +7,10 @@
       <li class="active">
         <a href="#teammembers" aria-controls="teammembers" role="tab" data-toggle="tab">Team Members</a>
       </li>
-      <li>
+      <li ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <a href="#vendors" aria-controls="vendors" role="tab" data-toggle="tab">vendors</a>
       </li>
-      <li>
+      <li ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <a href="#clientUsers" aria-controls="clientUsers" role="tab" data-toggle="tab">Client Users</a>
       </li>
     </ul>
@@ -35,7 +35,7 @@
                   <span class="control-indicator"></span>
                 </label>
                 <a herf="" class="pull-left avatar-26 avatar m-r">
-                  <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+                  <img ng-src="users/{{ user.id }}/image" alt="..." class="img-circle">
                 </a>
                 <div class="clearfix">
                   <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
@@ -51,7 +51,7 @@
       </div>
 
       <!-- Vendor Panel -->
-      <div class="tab-pane" id="vendors">
+      <div class="tab-pane" id="vendors" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <div class="form-group">
           <input type="text" class="form-control form-control-search form-control-dropdown-input" placeholder="Search vendor..." ng-model="userFilter.query" ng-keyup="searchUser();">
           <a href="#" class="close icn-remove-token" tabindex="-1"></a>
@@ -69,7 +69,7 @@
                       <span class="control-indicator"></span>
                     </label>
                     <a herf="" class="pull-left avatar-26 avatar m-r">
-                      <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+                      <img ng-src="users/{{ user.id }}/image" alt="..." class="img-circle">
                     </a>
                     <div class="clearfix">
                       <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
@@ -85,7 +85,7 @@
       </div>
 
       <!-- Client User Panel -->
-      <div class="tab-pane" id="clientUsers">
+      <div class="tab-pane" id="clientUsers" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
         <div class="form-group">
           <input type="text" class="form-control form-control-search form-control-dropdown-input" placeholder="Search client..." ng-model="userFilter.query" ng-keyup="searchUser();">
           <a href="#" class="close icn-remove-token" tabindex="-1"></a>
@@ -102,7 +102,7 @@
                       <span class="control-indicator"></span>
                     </label>
                     <a herf="" class="pull-left avatar-26 avatar m-r">
-                      <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+                      <img ng-src="users/{{ user.id }}/image" alt="..." class="img-circle">
                     </a>
                     <div class="clearfix">
                       <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
@@ -126,7 +126,7 @@
 
   <li ng-repeat="user in update_users">
     <div class="pull-left avatar-26 avatar m-r">
-      <img src="html/assets/images/avatars/a4.jpg" alt="..." class="img-circle">
+      <img ng-src="users/{{ user.id }}/image" alt="..." class="img-circle">
       <div class="remove-user" ng-click="user.isSelected = false; addUsertoUpdate(user);"> 
         <span class="icn-remove-user abc"></span> 
       </div>

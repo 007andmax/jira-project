@@ -149,3 +149,52 @@ div.tt-suggestion:hover {
 .content-wrapper .ticket-content .ticket-updates .ticket-update-content .updater-name {
 	margin-bottom: 9px;
 }
+
+/* Tooltip should be visible on tooltip mouseover */
+/*.tooltip.top {
+	padding-bottom:10px;
+}
+.tooltip.top .tooltip-arrow {
+	bottom: 5px;
+}*/
+
+
+.content-wrapper .ticket-content > .ticket-header .icns.icn-status-completed
+{
+	background-position: -4511px 5px !important;
+}
+
+.tooltipa {
+	z-index: 1070;
+	display: none;
+	visibility: visible;
+	font-family: "myriad-pro", Helvetica, Arial, sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+	width: 142px;
+}
+.shared-with-badge:hover .tooltipa {
+	display: block;
+}
+
+.tooltipa.top {
+  margin-top: -3px;
+  padding: 5px 0;
+}
+
+.content-wrapper .ticket-content .ticket-updates .ticket-update-header .shared-with-badge .tooltip-users {
+	padding-bottom: 20px;
+	bottom: 16px;
+}
+
+.tooltipa.top .tooltip-arrow {
+  bottom: 15px;
+  left: 25px;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #0e141c;
+}
+
+.content-wrapper .shared-with-badge .tooltip-users {
+	bottom: 30px;
+}

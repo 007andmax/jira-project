@@ -20,10 +20,10 @@
 	});
 
 	app.controller('TicketDetailController', ['$scope', 'TicketsService', '$stateParams', '$state','$rootScope',
-		'$location', 'ActionRightsService', 'Downloader', 'UsersService', 'ServicesService', 
+		'$location', 'ActionRightsService', 'Downloader', 'ServicesService', 'UsersService',
 		'CompaniesService', 'ProductsService',
 		function ($scope, TicketsService, $stateParams, $state, $rootScope, $location, 
-			ActionRightsService, Downloader, UsersService, ServicesService, CompaniesService,
+			ActionRightsService, Downloader, ServicesService, UsersService, CompaniesService,
 			ProductsService) {
 
 			//$(window).unbind('scroll'); // TODO: Attach event again when going back to tickets page.
@@ -34,13 +34,65 @@
 			$scope.ticketUpdate = {};
 			$scope.ticketUpdate.note = '';
 
+			//var UsersService = $scope.$parent.UsersService;
+
 			$scope.productFilter = {
 				query: ''
 			};
+
+			$scope.canUserDeleteUpdate = function(update){
+				
+				var isUpdateCreator = false;
+
+				if(update.user !== undefined)
+					isUpdateCreator = $scope.currentUser.id === update.user.id;
+
+				if($scope.isOwnerOrAdmin() || isUpdateCreator) return true;
+				
+				return false;
+			}
+
+			
+
+			$scope.cannotDeleteUpdate = function(update) { return ! $scope.canUserDeleteUpdate(update) };
+
+			$scope.deleteUpdate = function(update) {
+				// ticket owner, ticket update creator and admin can delete ticket update
+				if( $scope.listType === 'closed' || 
+					$scope.listType === 'trash' || 
+					$scope.listType === 'spam' || 
+					!$scope.canUserDeleteUpdate(update)) 
+					return;
+
+				if(confirm('Do you really want to delete the update?'))
+				{
+					TicketsService.deleteTicketUpdate($scope.ticketDetail.id, update.id, function(){
+						$scope.$parent.notification('Updated deleted successfully!');
+					});
+				}
+			}
 			
 			$scope.product = {};
 
+			$scope.isOwnerOrAdmin = function() {
+				// only owner/admin of the ticket can edit service and product expenses
+				var isOwner = false;
+				if($scope.ticketDetail.assignedTo !== undefined)
+					isOwner = $scope.currentUser.id === $scope.ticketDetail.assignedTo.id;
+
+				return isOwner || $scope.currentUser.role === 'ADMIN';
+			}				
+
+			$scope.isNotOwnerAndAdmin = function() { return !$scope.isOwnerOrAdmin(); }
+
 			$scope.showEditMode = function(product) {
+
+
+				if($scope.listType == 'closed' || 
+					$scope.listType === 'trash' || 
+					$scope.listType === 'spam' ||
+					!$scope.isOwnerOrAdmin() ) 
+					return;
 
 				angular.forEach($scope.ticketDetail.updates, function(update){
 					angular.forEach(update.products, function(product){
@@ -56,6 +108,12 @@
 			}
 
 			$scope.showServiceEditMode = function(service) {
+				// only owner of the ticket can edit service and product expenses
+				if($scope.listType === 'closed' || 
+					$scope.listType === 'trash' || 
+					$scope.listType === 'spam' ||
+					!$scope.isOwnerOrAdmin() ) 
+					return;
 
 				angular.forEach($scope.ticketDetail.updates, function(update){
 					angular.forEach(update.services, function(service){
@@ -67,7 +125,19 @@
 
 				service.editMode = true;
 
-				$scope.editService = service.staticCopy();
+				//console.log(service);
+
+				$scope.editService = {
+					item : {
+						name : service.item.name
+					},
+					HourMin : service.HourMin,
+					description : service.description,
+					quantity : service.quantity,
+					billableQuantity : service.billableQuantity,
+					date: service.date
+				};
+
 
 				$scope.editService.date = $scope.getFormattedDate(new Date($scope.editService.date));
 				$scope.editService.HourMin = $scope.getTimeinFormat($scope.editService.quantity);
@@ -89,8 +159,14 @@
 						$scope.editService.date = $('#datetimepicker2').val();
 					});
 				}, 500)
-				
-				
+
+			}
+
+			$scope.deleteForEver = function (ticket) {
+				TicketsService.deleteForever(ticket.id, function () {
+					$scope.$parent.notification('"' + ticket.subject + '" is deleted forever.');
+					$scope.collapse();
+				});
 			}
 
 			$scope.selectProductForEdit = function($event, product, $index, updateIndex){
@@ -108,7 +184,7 @@
 					$scope.product.name = product.name;
 					$scope.product.id = product.versionedId.id;
 					$scope.product.sale = product.sale;	
-					$scope.product.desc = product.description;
+					//$scope.product.desc = product.description;
 				} else {
 					$scope.products[$index].item.name = product.name;
 					$scope.products[$index].item.versionedId.id = product.versionedId.id;
@@ -117,42 +193,113 @@
 
 			}
 
-			$scope.searchProduct = function(product) {
+			$scope.lowerCaseWithOutUnderScore = $scope.$parent.lowerCaseWithOutUnderScore;
 
-				var q = $scope.productFilter.query.toLowerCase();
+			/*$scope.getUserMessage = function() {
+				// TODO: create directive for this... MUST
 
-				if (product.name.toLowerCase().indexOf(q)!=-1) {
-					return true;
+				var msg = '';
+
+				var assignPerformer = $scope.ticketDetail.assignPerformer !== undefined ? $scope.ticketDetail.assignPerformer.id : 0;
+				var assignedUser = $scope.ticketDetail.assignedUser !== undefined ? $scope.ticketDetail.assignedUser.id : 0;
+				var currentUser = $scope.currentUser.id;
+				var isReassigned = $scope.ticketDetail.isReassigned;
+				var assignedAt = $scope.renderDateTime($scope.ticketDetail.assignedAt);
+
+				var subject = '<strong>You</strong>';
+				var action = 'claimed';
+				var this_ticket = 'this ticket';
+				var on = 'on';
+				var to = 'to';
+				
+				if(assignPerformer === currentUser && assignedUser === currentUser) {
+					msg = [subject, action, this_ticket, on, assignedAt].join(' ');
+				} else if (assignPerformer === currentUser && assignedUser !== currentUser) {
+					if(isReassigned) {
+						action = 're-assigned';
+						msg = [subject, action, this_ticket, to, '<strong>',
+						$scope.getUserNameById(assignedUser), '</strong>',
+						on, assignedAt].join(' ');
+					} else {
+						action = 'assigned';
+						msg = [subject, action, this_ticket, to, '<strong>',
+						$scope.getUserNameById(assignedUser), '</strong>',
+						on, assignedAt].join(' ');
+					}
+				} else if (assignPerformer !== currentUser && assignedUser !== currentUser) {
+					subject = '<strong>' + $scope.getUserNameById(assignedUser) + '</strong>';
 				}
-
-				return false;
 			}
 
-			if($stateParams.id === '') {
-				$state.go('Tickets', {'listType': $stateParams.listType});
+			return msg;
+		}*/
+
+		$scope.markAsSpam = function (event, ticket, flag) {
+			$scope.$parent.markAsSpam(event, ticket, flag);
+			$scope.collapse();
+		}
+
+		$scope.changeStatus = function (event, ticket, status, filterType) {
+			$scope.$parent.changeStatus(event, ticket, status, filterType);
+			$scope.$parent.notification('Ticket status updated successfully!');
+		}
+
+		$scope.searchProduct = function(product) {
+
+			var q = $scope.productFilter.query.toLowerCase();
+
+			if (product.name.toLowerCase().indexOf(q)!=-1) {
+				return true;
 			}
 
-			$('body').addClass('opened-ticket');
+			return false;
+		}
 
-			$scope.updateService = function(updateIndex, serviceIndex) {
-				var update = $scope.ticketDetail.updates[updateIndex].staticCopy();
+		$scope.getFirstName = function (userId) {
+			var user = UsersService.getOneById(userId);
+			if (user)
+				return user.firstName != undefined ? user.firstName : '';
+		}
 
-				angular.forEach(update.services, function(service) {
-					delete service.editMode;
-				});
+		$scope.getLastName = function (userId) {
+			var user = UsersService.getOneById(userId);
+			if (user)
+				return user.lastName != undefined ? user.lastName : '';
+		}
+
+		if($stateParams.id === '') {
+			$state.go('Tickets', {'listType': $stateParams.listType});
+		}
+
+		$('body').addClass('opened-ticket');
+
+		$scope.updateService = function(updateIndex, serviceIndex) {
+			var update = $scope.ticketDetail.updates[updateIndex].staticCopy();
+
+			angular.forEach(update.services, function(service) {
+				delete service.editMode;
+			});
+
+			//console.dir($scope.editService);
+
+			update.services[serviceIndex].quantity = $scope.getTimeinPoints($scope.editService.selectedHour, 
+				$scope.editService.selectedMin);
+			update.services[serviceIndex].billableQuantity = $scope.getTimeinPoints($scope.editService.selectedHour, 
+				$scope.editService.selectedMin);
 
 				//console.log($scope.editService.date);
-
-				update.services[serviceIndex].quantity = $scope.getTimeinPoints($scope.editService.selectedHour, 
-					$scope.editService.selectedMin);
 				
 				update.services[serviceIndex].date = new Date($scope.editService.date);
-				//update.services[serviceIndex].date = new Date($scope.editService.date);
 				update.services[serviceIndex].description = $scope.editService.description;
 				update.services[serviceIndex].item.name = $scope.editService.item.name;
-				update.services[serviceIndex].item.updatedAt = new Date();
+				
+				update.services[serviceIndex].updatedAt = new Date();
+				update.updatedAt = new Date();
 
-				console.dir(update);
+				// hack!
+				update.services[serviceIndex].createdAt = new Date(update.services[serviceIndex].createdAt);
+				
+				//console.dir(update);
 
 				TicketsService.saveTicketUpdate($scope.ticketDetail.id, update, false, function () {
 					$scope.$parent.notification('Update changed successfully!');
@@ -170,12 +317,17 @@
 					delete product.editMode;
 				});
 
+				//console.log($scope.editProduct.description);
+
 				update.products[productIndex].quantity = $scope.editProduct.quantity;
 				update.products[productIndex].sum = $scope.editProduct.sum;
-				update.products[productIndex].item.description = $scope.editProduct.item.description;
+				update.products[productIndex].description = $scope.editProduct.description;
+				
 				update.products[productIndex].item.name = $scope.editProduct.item.name;
 				update.products[productIndex].item.versionedId.id = $scope.editProduct.item.versionedId.id;
 				update.products[productIndex].item.updatedAt = new Date();
+
+				//console.dir(update);
 
 				TicketsService.saveTicketUpdate($scope.ticketDetail.id, update, false, function () {
 					$scope.$parent.notification('Update changed successfully!');
@@ -188,6 +340,7 @@
 			$scope.ticketDetail = TicketsService.getOne($stateParams.id, $scope, true, function(){
 				$('#loading').hide();
 				$('.ticket-content').fadeIn();
+				
 				$scope.isTagChecked	= function(id) {
 					for(var i=0; i< $scope.ticketDetail.tags.length; i++) {
 						if($scope.ticketDetail.tags[i].id === id) return true;
@@ -195,7 +348,12 @@
 					return false;
 				}
 
-				console.dir($scope.ticketDetail.updates);
+				$scope.companyServices = ServicesService.getAllByCompany($scope, $scope.ticketDetail.company.id,
+					function(){
+						// console.dir($scope.companyServices);
+					});
+
+				//console.dir($scope.ticketDetail);
 
 			});
 
@@ -235,14 +393,15 @@
 			
 			// ------------------------------- Service Update -------------------------------------
 			
+			
 			$scope.service = {};
+			$scope.service.id = 0;
+			$scope.service.name = '';
 			$scope.service.selectedHour = null;
 			$scope.service.selectedMin = null;
-
 			$scope.serviceMeta = {};
-			$scope.serviceMeta.hours = [1, 2, 3, 4, 5, 6];
-			$scope.serviceMeta.minutes = [5, 10, 15, 20, 25, 30];
-
+			$scope.serviceMeta.hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+			$scope.serviceMeta.minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 			$scope.productTotalAmount = 0;
 
 			// saved services
@@ -259,9 +418,9 @@
 						versionedId : {
 							id : $scope.product.id
 						},
-						name : $scope.product.name,
-						description : $scope.product.desc,	
+						name : $scope.product.name
 					},
+					description : $scope.product.desc,
 					serialNumber: new Date().getTime(),
 					date: new Date(),					
 					quantity : $scope.product.qty,
@@ -290,8 +449,12 @@
 				return;
 			}
 
+			//console.log($scope.service.id);
+
 			var newService = {
-				type: $scope.service.type,
+				id: $scope.service.id,
+				name: $scope.service.name,
+				item: $scope.service.item,
 				HourMin: $scope.service.HourMin,
 				selectedMin : $scope.service.selectedMin,
 				selectedMinText : $scope.service.selectedMinText,
@@ -318,7 +481,8 @@
 				}, 1000);
 
 				// Clear the row where the data was added
-				$scope.service.type ='';
+				$scope.service.id ='';
+				$scope.service.name ='';
 				$scope.service.HourMin = '';
 				$('#datetimepicker1').val('');
 				$scope.service.desc = '';
@@ -426,7 +590,9 @@
 				if(user.accountType === 'CLIENT') {
 					$scope.client_users.push(user);
 				} else if(user.accountType === 'TECH') {
-					$scope.tech_users.push(user);
+					if(user.id !== $scope.currentUser.id) {
+						$scope.tech_users.push(user);	
+					}
 				} else if(user.accountType === 'VENDOR') {
 					$scope.vendor_users.push(user);
 				}
@@ -475,6 +641,11 @@
 			}
 		}
 
+		$scope.getUserTypeById = function(userId) {
+			var user = UsersService.getOneById(userId);
+			return $scope.getUserType(user.accountType);
+		}
+
 		// TODO: impove method name...
 		$scope.postAssignTicket = function (event, ticket, user) {
 			$scope.$parent.postAssignTicket(event, ticket, user);
@@ -498,15 +669,6 @@
 			if(contentType === 'image/jpeg') return 'jpg';
 		}
 
-		$scope.deleteUpdate = function(ticketId, updateId) {
-			if(confirm('Do you really want to delete the update?'))
-			{
-				TicketsService.deleteTicketUpdate(ticketId, updateId, function(){
-					$scope.$parent.notification('Updated deleted successfully!');
-				});
-			}
-		}
-
 		$scope.markAsClosed = function (event, ticket) {
 			TicketsService.changeStatus(ticket.id, 'COMPLETED', function () {
 				$scope.$parent.notification('"' + ticket.subject + '" is closed successfully.');
@@ -524,7 +686,7 @@
 		$scope.getUserNameById = function(actionUser) {
 
 			if(actionUser !== undefined && actionUser !== null) {
-				if(actionUser.id === $scope.currentUser.id) return "You";
+				
 				var user = UsersService.getOneById(actionUser.id);
 				var userName = user.firstName + ' ' + user.lastName;
 
@@ -603,18 +765,92 @@
 						$(this).tab('show');
 					});
 
-				}, 2000);
+					$scope.$parent.populateTechGusy();
 
-				$scope.productCategories = ProductsService.getCategories($scope, function(){
-					if($scope.productCategories.length > 0) {
-						var category = $scope.productCategories[0];
-						$scope.loadCategoryProducts(null, category);
-					}
-				});
+					$('#uploadFile').change(function (e) {
 
-			});
+						var self = e.currentTarget, file = self.files[0];
+						if (file.name === $scope.oldFile) {
+							return;
+						}
+					/*var id = Math.floor(Math.random() * (9999999 - 999 + 1) + 999);
+					$scope.oldFile = file.name;
+					var size = parseInt(file.size / 1024);
+
+					FilesService.create(file,
+						function (arg) {
+							var uploadedPercentage = (arg.loaded / arg.total) * 100;
+							$('#' + id + '_element').attr('aria-valuenow', uploadedPercentage);
+							$('#' + id + '_element').attr('style', 'width:' + uploadedPercentage + '%;');
+							$('#' + id + '_percentage').text(parseInt(uploadedPercentage) + ' Complete');
+                                //OnProgress
+                            }, function (arg) {
+                            	$('input#' + id + '_val').val(arg.id);
+                        //OnFinish
+                    }, function (arg) {
+                    	$('li#' + id + '_li').remove();
+                        //OnError
+                    }
+                    );*/
+});
+
+$scope.adjustHeight = function() {
+	var element = $('.ticket-form-header textarea');
+	var bottom_margin = 17;
+	var file_upload_size = 32 + 10; // height + margin of uploading file.
+	//var height = element.scrollHeight + bottom_margin + file_upload_size < 318 ? element.scrollHeight : 318;
+	
+	element.on('input', function() {
+		/*var scrollHeight = this.scrollHeight;
+		
+		if(element.scrollHeight + bottom_margin + file_upload_size > 318) {
+			scrollHeight = 31;
+		}*/
+
+		element.css({ 'height': 'auto', 'overflow-y': 'hidden' }).height(this.scrollHeight);
+	});
+	
+	element.jScrollPane({
+		autoReinitialise: true,
+		verticalDragMinHeight: 54,
+		verticalDragMaxHeight: 54,
+	});
+}
+
+//$scope.adjustHeight();
+
+
+}, 2000);
+
+$scope.productCategories = ProductsService.getCategories($scope, function(){
+	if($scope.productCategories.length > 0) {
+		var category = $scope.productCategories[0];
+		$scope.loadCategoryProducts(null, category);
+	}
+});
+
+
+
+
+
+
+
+});
+
+$scope.isSharedBetweenVisible = false;
+
+$scope.toggleSharedUsers = function() {
+	$scope.isSharedBetweenVisible = !$scope.isSharedBetweenVisible;
+}
 
 $scope.catProducts = [];
+
+$scope.isUsersToolTipVisible = false;
+
+$scope.toggleUserToolTip = function() {
+	$scope.isUsersToolTipVisible = true;
+}
+
 
 $scope.loadCategoryProducts = function($event, category) {
 
@@ -736,14 +972,15 @@ $scope.getFormattedDate = function(d) {
 
 $scope.getTimeinPoints = function(selectedHour, selectedMin) {
 	
-	var fraction = 0;
+	var fraction = parseFloat(selectedMin / 60).toFixed(2);
+	//console.log(fraction);
 
-	if(parseInt(selectedMin) == 5) fraction = .08;
+	/*if(parseInt(selectedMin) == 5) fraction = .08;
 	if(parseInt(selectedMin) == 10) fraction = .16;
 	if(parseInt(selectedMin) == 15) fraction = .25;
 	if(parseInt(selectedMin) == 20) fraction = .30;
 	if(parseInt(selectedMin) == 25) fraction = .40;
-	if(parseInt(selectedMin) == 30) fraction = .50;
+	if(parseInt(selectedMin) == 30) fraction = .50;*/
 	
 	return selectedHour + fraction;
 
@@ -754,15 +991,14 @@ $scope.getTimeinFormat = function(quantity) {
 	var arr = (quantity + '').split('.');
 	
 	var hour = parseInt(arr[0]);
-	var min = parseInt(arr[1]);
+	var min =  parseFloat('.' + arr[1]) * 60;
 
-
-	if(min == 8) min = 5;
+	/*if(min == 8) min = 5;
 	else if(min == 16) min = 10;
 	else if(min == 25) min = 15;
 	else if(min == 3) min = 20;
 	else if(min == 4) min = 25;
-	else if(min == 5) min = 30;
+	else if(min == 5) min = 30;*/
 
 
 	if(hour < 10) {
@@ -794,7 +1030,7 @@ $scope.postTicketUpdate = function (event, ticketId) {
 
 	ticketUpdate.type = $scope.updateType;
 
-	console.log($scope.updateType);
+	//console.log($scope.updateType);
 	if ($scope.updateType == 'NOTE') {
 		ticketUpdate.note = $scope.ticketUpdate.note;
 					//TODO: file uploading here...
@@ -803,105 +1039,47 @@ $scope.postTicketUpdate = function (event, ticketId) {
 					var count = 0;
 
 					angular.forEach($scope.services, function(item){
-						
+
 						ticketUpdate.services[count] = {
 							item : {
 								createdAt : new Date().getTime(),
-								name : item.type
+								name : item.name
 								,
 								versionedId : {
-									id : '0a2cc3cc-6b4a-4af8-8784-7ada8ef4537a' //TODO: FIX IT - item.id
+									id : item.id
 								}
 							},
 							description : item.desc,
-							quantity: $scope.getTimeinPoints(item.selectedHour, item.selectedMin), // TODO: Fix it
-							date : new Date(item.date)
+							quantity: $scope.getTimeinPoints(item.selectedHour, item.selectedMin),
+							date : new Date(item.date).getTime()
 						}
 						count++;
 					});
 				} else {
 					
-					//console.dir($scope.products);
-
 					ticketUpdate.products = $scope.products;
 				}
-                /*update.note = note;
-                $('input[name=attachmentId]').each(function (i, entry) {
-                	update.attachments[i] = {};
-                	update.attachments[i].file = {};
-                	update.attachments[i].file.id = entry.value;
-                });*/
 
-                //update.sharedBetween = [];
-                
-                /*var sharedWith = $('.ticket-actions-footer .control').find('input[type=checkbox]:checked');
-                var sharedUsers = $('input[name=sharedUsers]:checked');
-                update.sharedBetween = [];
-                if (sharedUsers.length > 0) {
-                	sharedUsers.each(function (i, ctrl) {
-                		update.sharedBetween.push({"id": ctrl.value});
+				angular.forEach($scope.update_users, function(user){
+					ticketUpdate.sharedBetween.push({"id" : user.id});	
+				});
 
-                	});
-                }
+				TicketsService.saveTicketUpdate(ticketId, ticketUpdate, false, function (response) {
 
-                if (sharedWith.length > 0) {
-                	sharedWith.each(function (i, ctrl) {
-                		update.sharedBetween.push({"id": ctrl.value});
+					if(response.code === 500) {
+						$scope.$parent.notification('Error: ' + response.message);
+					} else {
+						$scope.$parent.notification('Update added successfully!');
 
-                	});
-}*/
-angular.forEach($scope.update_users, function(user){
-	ticketUpdate.sharedBetween.push({"id" : user.id});	
-});
+						$scope.ticketUpdate.note = '';
+						$scope.services = [];
+						$scope.products = [];
+						$scope.update_users = [];
+						$scope.productTotalAmount = 0;	
+					}
+					
+				});
+			};
 
-TicketsService.saveTicketUpdate(ticketId, ticketUpdate, false, function () {
-
-	$scope.$parent.notification('Update added successfully!');
-
-	$scope.ticketUpdate.note = '';
-	$scope.services = [];
-	$scope.products = [];
-	$scope.productTotalAmount = 0;
-
-	/*var element = document.getElementById('ticketUpdates');
-	
-	var options = {
-		offset: 90,
-		callbackAfter: function(element) {
-			//#ffecb3
-		}
-	};
-	
-	smoothScroll(element, options);*/
-
-	
-
-                	/*$('div#tab-add-note').find('textarea[name=ticketUpdateNote]').val('');
-                	$('ul.note-attachments li').remove();
-
-                	var i = $ctrlDiv.length;
-                	for (var c = 0; c < i; c++) {
-                		if (c > 0) {
-                			$ctrlDiv[0].remove();
-                		} else {
-                			$('input[name=ticketUpdateDescription]').val('');
-                			$('input[name=ticketUpdateTime]').val('');
-                			$('input[name=ticketUpdateService]').val('');
-                			$('input[name=ticketUpdateDate]').val('');
-                			$('input[name=product-name]').val('');
-                			$('input[name=product-ids]').val('');
-                			$('input[name=product-desc]').val('');
-                			$('input[name=product-amount]').val('');
-                			$('input[name=product-qty]').val('');
-                		}
-                	}
-                	$('div#notificationContainer div.alert-yellow').text('Ticket updated added successfully.');
-                	$('.ticket-actions-footer .control').find('input[type=checkbox]:checked').prop('checked', '');
-                	setTimeout(function () {
-                		$('div#notificationContainer').hide();
-                	}, 3000);*/
-});
-};
-
-}]);
+		}]);
 }(window, jQuery));

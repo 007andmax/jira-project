@@ -56,7 +56,7 @@
 			</div>
 
 			<div class="dropdown pull-left" 
-			ng-if="ActionRightsService.isPriorityIconVisible(listType, currentUser.role)">
+			ng-if="ActionRightsService.isPriorityForDetailPageVisible(listType, currentUser.role)">
 			<div class="btn btn-white-gray dropdown-toggle btn-cr tooltip-dp" data-toggle="dropdown" data-placement="bottom" title="Change Priority to...">
 				<span class="icn icn-ticket-priority"></span>
 			</div>
@@ -68,44 +68,60 @@
 		</div>
 
 		<div class="dropdown pull-left last" 
-		ng-if="currentUser.role === 'ADMIN' && (listType === 'unassigned' || listType === 'user' || listType === 'shared' || listType === 'open')">
+		ng-if="(currentUser.role === 'ADMIN' && (listType === 'unassigned' || listType === 'user' || listType === 'shared' || listType === 'open')) || (currentUser.role === 'USER' && listType === 'user' )">
 		<div class="btn btn-white-gray btn-cr dropdown-toggle tooltip-dp" data-toggle="dropdown" data-placement="bottom" title="More Actions">
 			<span class="icn-nav-more"></span>
 		</div>
 		<ul class="dropdown-menu" role="menu">
-			<li>
+			<li class="dropdown-submenu" ng-if="ActionRightsService.isChangeStatusVisible(listType)">
+				<a tabindex="-1" href="#">Change Status to...</a>
+				<div class="dropdown-submenu-wrapper">
+					<ul class="dropdown-menu dropdown-priority">
+						<li><a tabindex="-1" href="javascript:void(0);" ng-click="changeBulkStatus('IN_PROGRESS')"> In Progress </a></li>
+						<li><a tabindex="-1" href="javascript:void(0);" ng-click="changeBulkStatus('ON_HOLD')">  On Hold </a></li>
+					</ul>
+				</div>
+			</li>
+			<li ng-if=" currentUser.role !== 'USER' ">
 				<a tabindex="-1" href="javascript:void(0);" ng-click="deleteBulkTicket($event, true)">Move to Trash</a>
 			</li>
 			<li>
-				<a tabindex="-1" href="javascript:void(0);" ng-click="markAsBulkSpam($event, true)">Mark as Spam</a>
+				<a tabindex="-1" href="javascript:void(0);" ng-click="markAsBulkSpam($event, true)"> 
+					<span ng-if=" currentUser.role === 'ADMIN' ">Mark as Spam</span>
+					<span ng-if=" currentUser.role === 'USER' ">Report as Spam</span>
+				</a>
 			</li>
 		</ul>
 	</div>
 
-	<div class="btn btn-white-gray  btn-cr tooltip-dp" data-placement="bottom" title="" data-original-title="Restore" ng-click="restoreBulkTickets();"
+	<div class="btn btn-white-gray  btn-cr tooltip-dp" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Restore" ng-click="restoreBulkTickets();"
 	ng-if="ActionRightsService.isRestoreForTrashVisible(listType, currentUser.role) || ActionRightsService.isRestoreForSpamVisible(listType, currentUser.role)">
 	<span class="icn icn-ticket-restore"></span>
 </div>
 
-<div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="dropdown" data-placement="bottom" title="" data-original-title="Move to Trash" ng-click="deleteBulkTicket($event, true)" 
-ng-if="currentUser.role === 'ADMIN' && (listType === 'closed' || listType === 'spam')">
-	<span class="icn icn-ticket-delete"></span>
+<!--div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Move to Trash" ng-click="deleteBulkTicket($event, true)" 
+ng-if="currentUser.role === 'ADMIN' &&  ((listType === 'spam'&& allSelectedTicketsMarkedByAdmin) || listType === 'closed')">
+<span class="icn icn-ticket-delete"></span>
+</div-->
+
+<div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Move to Trash" ng-click="deleteBulkTicket($event, true)" 
+ng-if="currentUser.role === 'ADMIN' &&  listType === 'closed' ">
+<span class="icn icn-ticket-delete"></span>
 </div>
 
-<div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="dropdown" data-placement="bottom" title="" data-original-title="Move to Trash" ng-click="deleteBulkTicketsForever($event, true)"
+<div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Delete Forever" ng-click="deleteBulkTicketsForever($event, true)"
 ng-if="ActionRightsService.isMoveToTrashVisible(listType, currentUser.role) && listType === 'trash'">
 <span class="icn icn-ticket-delete"></span>
 </div>
 
 
-
-<div class="btn btn-white-gray btn-cr tooltip-dp" data-toggle="dropdown" data-placement="bottom" title="" data-original-title="Claim Ticket" ng-click="claimBulkTicket(currentUser)"
+<!--div class="btn btn-white-gray btn-cr tooltip-dp" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Claim Ticket" ng-click="claimBulkTicket(currentUser)"
 ng-if=" listType === 'unassigned' && currentUser.role === 'USER' ">
 <span class="icn icn-small-ticket-claim"></span>
-</div>
+</div-->
 
-<div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="dropdown" data-placement="bottom" title="" data-original-title="Mark As Spam" ng-click="markAsBulkSpam($event, true)"
-ng-if=" listType === 'unassigned' && currentUser.role === 'USER' ">
+<div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{ getSpamIconToolTip(listType) }}" ng-click="markAsBulkSpam($event, true)"
+ng-if=" (listType === 'unassigned' && currentUser.role === 'USER') || (allSelectedTicketsReportedAsSpam && currentUser.role === 'ADMIN') ">
 <span class="icn icn-ticket-spam"></span>
 </div>
 

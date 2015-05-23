@@ -12,8 +12,18 @@
 	<link rel="stylesheet" href="html/assets/css/fonts.css" />
 	<link rel="stylesheet" href="html/assets/css/jscrollpane.css" />
   <link rel="stylesheet" href="html/assets/css/quicktech.css">
-  <link rel="stylesheet" href="html/assets/css/quicktech-override.css">
-  <script src="html/assets/js/vendors/modernizr.js"></script>
+  
+  <script type="text/javascript">
+  if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)){ //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+    document.write("<link rel='stylesheet' href='html/assets/css/firefox.css'>");
+  }else if(window.ActiveXObject || "ActiveXObject" in window){
+    document.write("<link rel='stylesheet' href='html/assets/css/ie.css'>");
+  }
+</script>
+
+<link rel="stylesheet" href="html/assets/css/quicktech-override.css">
+<script src="html/assets/js/vendors/modernizr.js"></script>
+
 </head>
 <body class="unassigned" ng-app="quicktech.ticketing" ng-controller="TicketController">
         <!--[if lt IE 7]>
@@ -53,14 +63,14 @@
       <script src="html/assets/js/vendors/retina.min.js"></script>
       <!--script src="html/assets/js/vendors/ui-bootstrap-tpls-0.12.1.min.js"></script-->
       <script src="html/assets/js/main.js"></script>
-      <script src="html/assets/js/angular.min.js"></script>
+      <script src="html/assets/js/angular.js"></script>
       <script src="html/assets/js/angular-ui-router.min.js"></script>
       <script src="html/assets/js/angular-sanitize.min.js"></script>
       
       <script src="html/assets/js/typeahead.bundle.js"></script>
       <script src="html/assets/js/handlebars-v3.0.3.js"></script>
 
-      <script src="html/assets/js/angular-smooth-scroll.min.js"></script>
+      <!--script src="html/assets/js/angular-smooth-scroll.min.js"></script-->
 
       <script src="html/rest-services.js"></script>
 

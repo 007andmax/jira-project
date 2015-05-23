@@ -1,0 +1,560 @@
+
+body{
+	  line-height: 16px;
+
+}
+.badge {
+	  line-height: 11px;
+	    padding: 4px 12px 5px;
+
+}
+.label{
+	line-height: 8px;
+	  padding: 5px 12px 7px;
+}
+
+.form-control{
+	line-height: 21px;
+	padding-top: 6px;
+	padding-bottom: 7px;
+}
+.form-control-message {
+	padding: 13px 29px;
+}
+.chipku-new-message .form-control-subject{
+		padding-top: 9px;
+
+}
+.chipku-new-message .form-control-new-message {
+    padding-top: 12px;}
+.form-control-subject{
+	padding-top: 3px;
+}
+.content-wrapper .ticket-content .user-msg {
+  padding: 7px 20px 9px;}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+	  line-height: 13px;
+}
+
+/* left menu */
+aside.left .panel-heading {
+	 padding-top: 35px; 
+padding-bottom: 1px;
+}
+
+aside.left .nav-stacked > li .nav-icon,
+aside.left .nav-stacked > li > a .badge {
+  margin-top: 0px;
+}
+aside.left .nav-stacked > li > a {
+  padding: 15px 40px 17px;
+  line-height: 18px;
+}
+
+
+.content-wrapper .ticket-sidebar .ticket .ticket-by-and-when{
+	line-height: 9px;
+}
+.content-wrapper .ticket-sidebar .ticket .ticket-title {
+  padding: 9px 0 18px;
+}
+.user-title {
+	margin-top: 4px;
+}
+.content-wrapper .ticket-content > .ticket-header .ticket-title{
+	  line-height: 35px;
+	      margin-bottom: 9px;
+
+}
+.content-wrapper .ticket-content > .ticket-detail {
+  padding-bottom: 21px;}
+  .content-wrapper .ticket-content .ticket-updates .ticket-update-header h4 span.ticket-update-title {
+  margin-top: 4px;}
+.content-wrapper .ticket-content > .ticket-detail .ticket-attachment .attachments-count {
+  margin-top: 12px;}
+  .content-wrapper .ticket-content .ticket-updates {
+  padding-top: 39px;}
+.content-wrapper .ticket-content .ticket-updates .ticket-update-content {
+	padding-top: 11px;
+}
+.content-wrapper .ticket-content .ticket-post-update-wrapper .ticket-update-content{
+	padding-top: 0px;
+}
+.content-wrapper .ticket-content .ticket-post-update-wrapper .tab-content .ticket-update {
+  padding-top: 40px;
+}
+.form-control-note {
+    padding-top: 14px;}
+    .content-wrapper .ticket-content .ticket-post-update-wrapper .update-ticket-form-wrapper .ticket-form-footer > .btn-transparent {
+    	margin-top: 10px;
+    }
+    .content-wrapper .ticket-content .ticket-post-update-wrapper .ticket-actions-footer .control {
+    
+    line-height: 1.4;
+    margin-top: 9px;
+}
+.content-wrapper .ticket-content .ticket-updates .ticket-update-content .updater-name .icn-nav-delete {
+  margin-top: 2px;
+}
+.content-wrapper .ticket-content .ticket-updates .ticket-update-content .ticket-update-message {
+	  margin-top: 4px;
+  line-height: 24px;
+}
+
+.content-wrapper .ticket-content .ticket-updates .ticket-update-content .update-meta > span.pull-left {
+  margin-top: 5px;
+}
+.content-wrapper .ticket-content .ticket-updates .ticket-update-content .update-meta {
+  margin-top: 11px;
+}
+.content-wrapper .table-wrapper .table-content .col-1, .content-wrapper .table-wrapper .table-content .col-2, .content-wrapper .table-wrapper .table-content .col-3, .content-wrapper .table-wrapper .table-content .col-4{
+
+	padding-top: 18px;
+	padding-bottom: 18px;
+}
+
+.content-wrapper .table-wrapper{
+	margin-top: 11px;
+}
+.content-wrapper .ticket-content .attachments li .file-name {
+  padding: 27px 12px 0;}
+  .content-wrapper .ticket-content .ticket-post-update-wrapper .nav-post-update > li > a {
+  	line-height: 1.4;
+  	  padding-bottom: 8px !important;
+  }
+  
+  aside.right .company-detail {
+  padding-top: 36px;
+padding-bottom:43px;}
+
+  aside.right .company-detail > h4 {
+  margin-bottom: 12px;}
+
+  aside.right .billing-address > .site-ref > .btn-location {
+  padding: 7px 0 8px;}
+
+  aside.right .billing-address {
+  	padding-top: 4px;
+  	padding-bottom: 4px;
+  }
+ 
+  aside.right .panel-heading-primary-contanct {
+  padding-bottom: 11px;
+}
+
+aside.right .primary-contacts {
+  margin-bottom: 40px;
+}
+
+aside.right .created-by-heading {
+  padding-bottom: 10px;
+}
+
+aside.right .navbar-form-search {
+  margin-bottom: 9px;}
+
+  aside.right .tab-devices .panel-heading {
+  padding-bottom: 11px;
+}
+
+aside.right .list-devices .user-name {
+  line-height: 17px;
+}
+
+aside.right .tab-devices .list-devices {
+  padding: 12px 40px 12px;}
+
+  aside.right .panel-heading {
+  padding-bottom: 16px;}
+
+aside.right .panel-heading-primary-contanct {
+  padding-bottom: 11px;
+}
+aside.right .created-by-heading {
+  padding-bottom: 10px;
+}
+.popover-userinfo .popover-title {
+    padding: 1px 0px 8.5px;}
+    }
+.popover-userinfo .label-white {
+    padding: 2px 12px 3px;}
+    .popover-userinfo .user-email .icon.icn-at-the-rate, .popover-userinfo .user-no .icon.icn-at-the-rate {
+    margin-top: 4px;}
+    .popover-userinfo .user-email {
+    margin-top: 16px;
+}
+
+.popover-userinfo .user-no {
+    margin-top: 6px;
+}
+.popover-userinfo .user-no .icon.icn-iphone {
+    margin-top: 3px;}
+    .popover-userinfo {
+   padding: 28px 30px 25px;}
+   .popover-userinfo .icn-email {
+    margin-top: -1px;
+}
+
+.content-wrapper .dropdown-menu-tabs .nav-tabs-dropdown > li > a {
+line-height: 14px;
+}
+.dropdown-menu-tabs .users-list > li .control.checkbox {
+  margin: 3px 9px 0 0;
+}
+.dropdown-menu-tabs .users-list > li .avatar {
+   margin-top: -1px; 
+}
+.dropdown-menu-tabs .users-list > li {
+  padding: 11px 20px 10px;}
+
+  .subdropdown-menu > .jspContainer > .jspPane > li > a .total-count{
+  	margin-top: -18px;
+  }
+  .subdropdown-menu > .jspContainer > .jspPane > li > a{
+  padding-top: 6px;  }
+  .dropdown-menu > li > a, .subdropdown-menu > li > a, .dropdown-menu > .jspContainer > .jspPane > li > a, .subdropdown-menu > .jspContainer > .jspPane > li > a {
+  	line-height: 18px;
+  	padding: 5px 20px 7px;
+  }
+  .dropdown-menu-transparent > .dropdown-menu-products .scroll-pane .jspPane {
+    margin-top: 11px;}
+    .content-wrapper .ticket-content .ticket-post-update-wrapper .update-ticket-form-wrapper .ticket-form-footer .total-amount {
+    margin-top: 11px;}
+    .dropdown-menu-transparent > .dropdown-menu-categories .jspPane {
+    padding-top: 11px !important;}
+  .dropdown-menu.tag-list li.apply button {
+  padding: 8px 36px 9px;
+}
+.dropdown-menu.tag-list li {
+    padding: 9px 20px 11px;
+}
+.tokenfield .token-input{
+	height: 27px;
+}
+.popover-deviceinfo {
+	padding: 29px 30px 28px;
+	margin-top: -1px;
+}
+.popover-deviceinfo .icon {
+
+    margin-top: 1px;
+}
+.popover-deviceinfo .popover-title {
+    padding: 1px 0px 0px;
+}
+.content-wrapper .ticket-sidebar .ticket > .ticket-meta .ticket-action .more .dropdown-menu {
+    margin-top: 4px !important;
+}
+.content-wrapper .ticket-sidebar .ticket > .ticket-meta .ticket-action .left-align .dropdown-menu {
+    margin-top: 4px;}
+    .content-wrapper .ticket-sidebar .ticket > .ticket-meta .ticket-action .dropdown-menu {
+    margin-top: 4px;}
+  .dropdown-filter .filter-by-wrapper.filter-priority .filter-slider-wrapper {
+  margin-top: 46px;
+}
+.dropdown-filter .filter-slider-track {
+	margin-top: 1px;
+}
+.dropdown-filter .filter-slider-wrapper {
+    margin-top: 36px;
+}
+.dropdown-filter .active > .filter-label {
+    bottom: 27px;}
+    .dropdown-filter .filter-label {
+    bottom: 20px;}
+    input[type="range"], .rangeslider {
+    	margin: -4px 0px;
+    }
+    .dropdown-filter .filter-slider-wrapper {
+    margin-top: 37px;
+}
+.dropdown-filter .btn-apply-filter, .dropdown-filter .btn-reset-filter {
+	margin-top: 19px;
+}
+.btn{
+	padding-top: 9px;
+}
+.content-wrapper .ticket-content > .ticket-detail .ticket-attachment .attachment-meta {
+	margin-top: 1px;
+}
+.content-wrapper .ticket-content > .ticket-detail .ticket-attachment .attachments-count {
+	margin-top: 11px;
+}
+.content-wrapper .ticket-content  > .ticket-detail .attachments > li {
+	margin-bottom: 19px;
+}
+.content-wrapper .ticket-content  > .ticket-detail .attachments li .file-name {
+    padding: 24px 12px 0px;
+}
+
+    .content-wrapper .ticket-content .ticket-updates .tips-message .message-detail{
+    	padding-top: 30px;
+    }
+    .content-wrapper .ticket-content > .ticket-detail .ticket-attachment .attachment-meta {
+    margin-top: 2px;
+}
+.modal-header {
+    padding: 24px 30px 24px;}
+    .modal-header .close {
+    	    margin-top: -3px;
+}
+.chipku-new-message .note-attachments > li, 
+.modal-create-ticket .note-attachments > li {
+      line-height: 18px;
+}
+.chipku-new-message .note-attachments > li, .modal-create-ticket .note-attachments > li {
+	padding-top: 5px;
+	padding-bottom: 7px;
+}
+
+.progress-attachment {
+  
+    margin-top: 7px;}
+    .chipku-new-message .note-attachments > li .icn-restart-uploading, .modal-create-ticket .note-attachments > li .icn-restart-uploading {
+    margin-top: 4px;
+}
+ .icn-remove-attachment, .chipku-new-message .note-attachments > li .icn-restart-uploading, .modal-create-ticket .note-attachments > li .icn-remove-attachment {
+    margin-top: 5px;
+}
+.modal-create-ticket .modal-footer {
+	padding-top: 25px;
+}
+.modal-create-ticket label {
+    margin-bottom: 3px;}
+    .modal-create-ticket .row-wrapper + .row-wrapper {
+    margin-top: 15px;
+}
+.modal-create-ticket .actions-wrapper {
+    margin-top: 19px;
+}
+.dropdown .priority-dot-pos {
+    top: 29px;
+}
+.tokenfield .token .token-label {
+	line-height: 27px;
+}
+.modal-create-ticket .modal-footer .form-group + .form-group .clearfix{
+clear: both;
+}
+.chipku-header {
+    padding: 14px 20px 15px;}
+.chipku-header .close {
+    margin-top: 6px;
+}
+
+.chipku-im .chwh {
+  padding-top: 15px;
+  padding-bottom:19px;
+}
+.chipku-im .form-control-send-message{
+  line-height: 19px;
+}
+.chipku-alert .form-control {
+  padding: 5px 11px 6px;
+}
+.modal-spam .modal-footer {
+    padding-top: 22px;
+}
+
+.chipku-im .message-content{
+  padding: 8px 14px 10px;
+}
+
+.chipku-im .chat-box .message-box {
+    padding: 7px 0px 11px;
+  }
+  .chipku-im .chat-box .jspPane {
+    margin-top: 62px;}
+    .content-wrapper .content-head .content-all-time-stat .title {
+      margin-top: 0px;
+    }
+    .content-stat .heading {
+      padding: 10px 0px 52px;
+    }
+    .content-wrapper .content-head .content-all-time-stat .amount {
+ 
+    margin-top: 3px;
+  }
+  .content-wrapper .content-head .content-all-time-stat .total-billables {
+
+    margin-top: 43px;
+  }
+  .content-wrapper .content-head .content-all-time-stat .total-billables .amount {
+    margin-top: 4px;
+}
+.content-wrapper .content-body .btn-create-in {
+    padding: 10px 40px 9px !important;}
+    .content-wrapper .content-body .nav-tabs li a {
+    text-align: left;
+    padding: 15px 21px 17px;}
+    .content-wrapper .content-body .invoices > li > a {
+    padding: 25px 0px 29px;
+}
+.content-wrapper .content-body .companies-list li .label {
+    padding: 2px 12px 3px;}
+
+    .content-wrapper .table-wrapper .table-content .col-1, 
+    .content-wrapper .table-wrapper .table-content .col-2, 
+    .content-wrapper .table-wrapper .table-content .col-3, 
+    .content-wrapper .table-wrapper .table-content .col-4 {
+    padding-top: 17px;
+    padding-bottom: 19px;
+}
+.content-wrapper .content-head .report-nav li{
+  margin-top: 0px;
+}
+.content-wrapper .content-head .report-nav li .circle{
+  margin-top: 4px;
+}
+
+.content-wrapper .content-body .btn-create-company {
+    padding-top: 10px;
+}
+.content-wrapper .content-body .invoices li.head > div [class^="col-"] {
+    padding-top: 15px !important;
+    padding-bottom: 27px  !important;}
+    .content-wrapper .content-body .invoices.recurring li > div > [class^="col-"]{
+      padding: 26px 0px 25px;
+    }
+    .content-wrapper .content-body .invoices > li.add-more-button a {
+      padding-top: 11px !important;
+    }
+    .content-wrapper .content-body .btn-create-in {
+    margin-top: 8px;}
+.content-wrapper .content-body .invoices.recurring li .label{
+ padding: 5px 12px 7px;
+}
+.content-wrapper .content-body .invoices.recurring li.add-new .form-control{
+ padding: 5px 13px 7px;
+}
+.content-wrapper .content-body .invoices.recurring .add-more .add-table-actions .btn{
+  padding-top: 9px;
+}
+.content-wrapper .content-body .invoices.receivable li > div > .col-1{
+  padding-top: 25px;
+}
+.content-wrapper .content-body .companies-list li .name {
+  margin-top: 1px;
+}
+.content-wrapper .content-body .companies-list > li a {
+  padding-bottom: 38px;
+}
+.content-wrapper .content-body .invoices.products .product-name{
+  margin-top: 0px;
+}
+.content-wrapper .content-body .invoices.products li > div > .col-2{
+  padding-bottom: 24px;
+}
+.content-wrapper .content-body .invoices.services li > div > .col-1{
+  padding-bottom: 28px;
+}
+.content-wrapper .content-body .companies-list > li > a {
+  padding-bottom: 35px;
+}
+.content-wrapper .content-body .btn-create-service {
+    padding-right: 38px !important;
+    padding-bottom: 7px !important;
+    padding-top: 13px !important;
+    margin-top: 0px !important;
+    margin-bottom: 30px;
+}
+aside.right .tab-info .panel-heading-about {
+    margin-top: 32px;
+}
+aside.right .tab-info .my-info .icon.icn-iphone {
+  margin-top: 7px;
+}
+aside.right .tab-info .my-info .icon.icn-clock {
+    margin-top: 8px;
+}
+aside.right .tab-info .my-info .icon.icn-load-gray {
+    margin-top: 7px;
+}
+aside.right .tab-info .my-info .icon.icn-at-the-rate {
+    margin-top: 8px;
+}
+aside.right .sidebar-company .tab-info .my-info .about-company {
+  margin-bottom: 43px;
+}
+aside.right .sidebar-company .panel-heading.recent-heading {
+    padding-bottom: 11px;
+}
+aside.right .recent-activities-by .ticket-number {
+    line-height: 24px;
+}
+aside.right .recent-activities-by .time-ago {
+    line-height: 24px;}
+
+ aside.right .sidebar-company .recent-activities-by .list-users {   
+      padding: 15px 40px 8px;
+}
+aside.right .companies-list-wrapper > li .numbers > .icon {
+   
+    margin-top: 2px;}
+    aside.right .companies-list-wrapper > li .company-numbers {
+    margin-top: 7px;
+  margin-bottom: 1px;}
+  .modal-receive-payment label{
+    margin-top: -2px;
+    margin-bottom: 3px;
+  }
+  .modal-receive-payment .invoices .head .control {
+  margin-top: 0px;}
+  .modal-receive-payment .invoices li.head > div [class^='col-'] {
+  padding: 10px 0px 27px !important;}
+  .modal-receive-payment .invoices li.head .name {
+    margin-left: 26px;
+}
+
+.modal-receive-payment .invoices li > div > [class^="col-"]{
+  padding: 26px 0px 28px;
+}
+.modal-receive-payment .invoices .control {
+  margin-top: -2px;}
+  .create-new-user .header h4{
+    margin-top: 1px;
+  }
+  .create-new-user .content{
+    margin-top: 1px;
+  }
+  .create-new-user .header .close {
+  margin-top: -6px;
+}
+.create-new-user .header {
+  padding-bottom: 39px;
+}
+.create-new-user .avatar-content .file-type {
+  margin-top: 16px;}
+
+.create-new-user .user-fields .form-group > label {
+  margin-bottom: 3px;}
+  .create-new-user .user-fields .row-wrapper {
+  margin-top: 15px;
+}
+.create-new-user .user-fields .form-group .form-control-number-type {
+
+  margin-top: 19px;}
+  .create-new-user .user-fields .number-type .dropdown-default-value {
+
+  top: 29px;}
+  .create-new-user .user-fields .btn-remove-update, .create-new-user .user-fields .btn-add-more {
+  margin-top: 19px;}
+  .dropdown-default-value {
+  top: 28px;}
+  .create-new-user .user-fields .form-group .tokens {
+  top: 24px;}
+  .create-new-user .user-fields .form-group .btn-create {
+  margin-top: 19px;
+}
+.users-list .status {
+  margin-top: 7px;
+}
+.users-list .user-actions {
+  margin-top: 23px;
+}
+.users-list .user-actions .more {
+  margin-top: 15px;}
+  .users-list .company ,.users-list .number{
+  margin-top: 10px;}
+  .user-fields .dropdown-default-value {
+  top: 29px;}
