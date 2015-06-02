@@ -1098,7 +1098,7 @@ $scope.getTimeinFormat = function(quantity) {
 	var arr = (quantity + '').split('.');
 	
 	var hour = parseInt(arr[0]);
-	var min =  parseFloat('.' + arr[1]) * 60;
+	var min =  Math.round(parseFloat('.' + arr[1]) * 60);
 
 	/*if(min == 8) min = 5;
 	else if(min == 16) min = 10;
