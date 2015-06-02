@@ -793,7 +793,7 @@
 						size = size + ' KB';
 					}
 
-					//var newFile = ;
+					//var newFile = ; TODO: finish it...
 
 					$scope.files.push({
 						name: file.name,
@@ -1078,8 +1078,8 @@ $scope.getFormattedDate = function(d) {
 
 $scope.getTimeinPoints = function(selectedHour, selectedMin) {
 	
-	var fraction = parseFloat(selectedMin / 60).toFixed(2);
-	//console.log(fraction);
+	var fraction = selectedMin / 60;
+	//console.log(selectedHour, selectedMin, fraction);
 
 	/*if(parseInt(selectedMin) == 5) fraction = .08;
 	if(parseInt(selectedMin) == 10) fraction = .16;
@@ -1088,8 +1088,9 @@ $scope.getTimeinPoints = function(selectedHour, selectedMin) {
 	if(parseInt(selectedMin) == 25) fraction = .40;
 	if(parseInt(selectedMin) == 30) fraction = .50;*/
 	
-	return selectedHour + fraction;
+	//console.log(selectedHour);
 
+	return (selectedHour + fraction).toFixed(2);
 }
 
 $scope.getTimeinFormat = function(quantity) {

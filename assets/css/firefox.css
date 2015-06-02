@@ -531,12 +531,11 @@ aside.right .companies-list-wrapper > li .numbers > .icon {
   .create-new-user .user-fields .row-wrapper {
   margin-top: 15px;
 }
-.create-new-user .user-fields .form-group .form-control-number-type {
-
+.create-new-user .user-fields .number-type.form-group {
   margin-top: 19px;}
   .create-new-user .user-fields .number-type .dropdown-default-value {
 
-  top: 29px;}
+  top: 10px;}
   .create-new-user .user-fields .btn-remove-update, .create-new-user .user-fields .btn-add-more {
   margin-top: 19px;}
   .dropdown-default-value {

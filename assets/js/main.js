@@ -25,11 +25,14 @@ function prepareTicketsModule() {
 
 
         //$('.ticket-content').css('height', $('body').innerHeight() - 90);
+        
         $('.scroll-pane').jScrollPane({
             autoReinitialise: true,
             verticalDragMinHeight: 54,
             verticalDragMaxHeight: 54,
         });
+
+
         $('body').tooltip({selector: '[data-toggle=tooltip]'});
         
         $('.tokenfield').tokenfield();
