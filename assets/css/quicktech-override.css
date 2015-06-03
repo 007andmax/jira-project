@@ -224,6 +224,12 @@ div.tt-suggestion:hover {
 		content: "";
 	}
 
+
+	aside.left .scroll-pane {
+		margin-top: 18px;
+		height: 95.4%;
+	}
+
 	/* ----------------------------- Product/Services scroll bar ------------------------------*/
 
 	/*.ticket-form-header {

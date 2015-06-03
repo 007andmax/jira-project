@@ -738,49 +738,57 @@
 			progress: 10
 		});*/
 
-		$scope.$on('$viewContentLoading', 
-			function(event, viewConfig){ 
-				$('#loading').show();
+$scope.$on('$viewContentLoading', 
+	function(event, viewConfig){ 
+		$('#loading').show();
+	});
+
+$scope.$on('$viewContentLoaded', 
+	function(event){ 
+
+		$('.ticket-content').hide();
+
+		/*if($(window).width() > 1366) {
+			$('.ticket-content').jScrollPane({
+				autoReinitialise: true,
+				verticalDragMinHeight: 54,
+				verticalDragMaxHeight: 54,
+			});
+		}*/
+
+		$(document).on('mouseenter', '#detailAssignTicketTo', function() {
+			$('.dropdown-submenu-wrapper #assignedTo').focus();
+		});
+
+		$(document).on('click', '.dropdown-menu-services > li > a', function(e) {
+			e.preventDefault();
+			var selText = $(this).text();
+			$(this).parents('.add-service').find('input.dropdown-toggle:first').val(selText);
+			$scope.service.type = selText;
+		});
+
+		setTimeout(function(){
+			$('#datetimepicker1').datetimepicker({
+				keepOpen: true,
+				format: 'DD MMM YYYY',
+				maxDate: new Date()
+			}).on('dp.change', function(ev){
+				$('#datetimepicker1').blur();
 			});
 
-		$scope.$on('$viewContentLoaded', 
-			function(event){ 
+			$('.dropdown-menu-tabs a[data-toggle="tab"]').click(function (e) {
+				e.preventDefault();
+				e.stopPropagation();        
 
-				$('.ticket-content').hide();
+				$(this).tab('show');
+			});
 
-				$(document).on('mouseenter', '#detailAssignTicketTo', function() {
-					$('.dropdown-submenu-wrapper #assignedTo').focus();
-				});
+			$scope.$parent.populateTechGusy();
 
-				$(document).on('click', '.dropdown-menu-services > li > a', function(e) {
-					e.preventDefault();
-					var selText = $(this).text();
-					$(this).parents('.add-service').find('input.dropdown-toggle:first').val(selText);
-					$scope.service.type = selText;
-				});
+			$('#uploadFile').change(function (e) {
 
-				setTimeout(function(){
-					$('#datetimepicker1').datetimepicker({
-						keepOpen: true,
-						format: 'DD MMM YYYY',
-						maxDate: new Date()
-					}).on('dp.change', function(ev){
-						$('#datetimepicker1').blur();
-					});
+				var self = e.currentTarget, file = self.files[0];
 
-					$('.dropdown-menu-tabs a[data-toggle="tab"]').click(function (e) {
-						e.preventDefault();
-						e.stopPropagation();        
-
-						$(this).tab('show');
-					});
-
-					$scope.$parent.populateTechGusy();
-
-					$('#uploadFile').change(function (e) {
-
-						var self = e.currentTarget, file = self.files[0];
-						
 						// TODO: check if the same file is being uploaded again!
 
 					// KB
@@ -817,7 +825,7 @@
 							console.log('on error!');
 							//$('li#' + id + '_li').remove();
 						});*/
-				});
+		});
 
 // editable div - new note
 $("#ticket-new-note").focusout(function(){

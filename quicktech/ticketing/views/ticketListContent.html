@@ -22,7 +22,7 @@
 		</div>
 		<ul class="ticket-action pull-right">
 			<!-- More Actions on right -->
-			<li ng-if="ActionRightsService.isMoreActionsMenuVisible(listType, currentUser.role)" class="more left-align">
+			<li ng-if="ActionRightsService.isMoreActionsMenuVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' " class="more left-align">
 				<a  href="javascript:{}" class="dropdown-toggle tooltip-dp" aria-haspopup="true"  aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More Actions">
 					<span class="icn-ticket-more icn"></span>
 				</a>
@@ -62,7 +62,7 @@
 				</a>
 			</li>
 			<!-- delete, visible when in spam, is marked by admin and current user is admin -->
-			<li ng-if="ActionRightsService.isMoveToTrashIconVisible(listType, MarkedSpamByRole(ticket),currentUser.role)">
+			<li ng-if="ActionRightsService.isMoveToTrashIconVisible(listType, MarkedSpamByRole(ticket),currentUser.role) || (currentUser.role === 'ADMIN' && listType === 'user' && ticket.status === 'COMPLETED') ">
 				<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" ng-click="deleteTicket($event, ticket, true)" title="" data-original-title="move to trash">
 					<span class="icn-ticket-del icn"></span>
 				</a>
@@ -86,7 +86,7 @@
 			</li>
 
 			<!-- priority icon -->
-			<li ng-if="ActionRightsService.isPriorityIconVisible(listType, currentUser.role)" class=" left-align"><a href="javascript:{}" class="dropdown-toggle tooltip-dp" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="Change Priority to..."><span class="icn icn-ticket-priority"></span></a>
+			<li ng-if="ActionRightsService.isPriorityIconVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' " class=" left-align"><a href="javascript:{}" class="dropdown-toggle tooltip-dp" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="Change Priority to..."><span class="icn icn-ticket-priority"></span></a>
 				<ul class="dropdown-menu dropdown-priority" role="menu">
 					<li><a tabindex="-1" href="javascript:{}" ng-click="changePriority($event, ticket, 'low')"> <span class="priority-dot low"></span>Low </a></li>
 					<li><a tabindex="-1" href="javascript:{}" ng-click="changePriority($event, ticket, 'medium')"> <span class="priority-dot medium"></span> Medium </a></li>
@@ -95,7 +95,7 @@
 			</li>
 
 			<!-- Assign user, -->
-			<li ng-if="ActionRightsService.isAssignToUserVisible(listType, currentUser.role)" class="left-align">
+			<li ng-if="ActionRightsService.isAssignToUserVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' " class="left-align">
 				<a href="javascript:{}" class="tooltip-dp"  href="javascript:{}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-placement="top" data-original-title="assign ticket to..." ng-click="setFocus();">
 					<span class="icn-ticket-assign icn"></span>
 				</a>
