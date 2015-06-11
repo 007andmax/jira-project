@@ -1,0 +1,120 @@
+<div class="ticket-post-update-wrapper" ng-show=" listType !== 'unassigned' && listType !== 'closed' && listType !== 'trash' && listType !== 'spam' ">
+  <div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-post-update">
+      <li role="presentation" class="active">
+        <a href="#tab-add-note"  aria-controls="tab-add-note" role="tab" data-toggle="tab" ng-click="activateTab($event, 'NOTE');">
+          <span class="icon-add icn-add-note"></span>Note
+        </a>
+      </li>
+      <li role="presentation" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
+        <a href="#tab-add-product" aria-controls="tab-add-product" role="tab" data-toggle="tab" ng-click="activateTab($event, 'PRODUCT');">
+          <span class="icon-add icn-add-product"></span>Product
+        </a>
+      </li>
+      <li role="presentation" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
+        <a href="#tab-add-service" aria-controls="tab-add-service" role="tab" data-toggle="tab" ng-click="activateTab($event, 'SERVICE');">
+          <span class="icon-add icn-add-service"></span>Service
+        </a>
+      </li>
+      <a href="javascript:void(0)" class="btn btn-gray  btn-remote-access pull-right tp-hide" data-placement="top" title="" data-original-title="Remote Access" data-toggle="tooltip"><img src="images/spacer.gif" class="icn-remote-access"></a>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <!-- Add Note-->
+      <div role="tabpanel" class="tab-pane tab-add-note active" id="tab-add-note">
+        <div class="ticket-update clearfix">
+          <div class="ticket-updater pull-left">
+            <div class="pull-left avatar-38 avatar m-r">
+              <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+            </div>
+          </div>
+          <div class="ticket-update-content pull-left">
+            <div class="update-ticket-form-wrapper">
+              <!--div class="ticket-form-header" ng-include="'/html/quicktech/ticketing/views/ticketUpdateAddNote.html'">
+            </div-->
+            <div class="ticket-form-header">
+              <div class="editable-container" >
+                <!--textarea class="form-control form-control-note" placeholder="Click here to respond to the Ticket" ng-model="ticketUpdate.note" style="outline:1px dashed red;" ></textarea-->
+                <div id="ticket-new-note" placeholder="Click here to respond to the Tick" contenteditable="true"></div>
+                <ul class="note-attachments" id="attachments">
+                  <li ng-repeat="file in files">
+                    <span class="filename"> {{ file.name }}</span>
+                    <span class="filesize"> {{ file.size }} </span>
+                    <a href="#" class="icn-remove-token pull-right"></a>
+                    <div class="progress progress-attachment pull-right">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ file.progress }}%;">
+                        <span class="sr-only">{{ file.progress }}% Complete</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Update Box Footer -->
+            <div class="ticket-form-footer clearfix">
+              <a href="javascript:void(0)" class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide" data-placement="top" title="" data-original-title="Attach files" data-toggle="tooltip"><span class="icn-add-attachment" onclick="$('#uploadFile').click();/*$('#attachments').show();*/"></span>
+              </a>
+              <input id="uploadFile" type="file" style="display:none" />
+              <div class="line-sep pull-left"></div>
+              <div ng-include="'/html/quicktech/ticketing/views/ticketUpdateAddUsers.html'" include-replace>
+              </div>
+            </div>
+          </div>
+          <div ng-include="'/html/quicktech/ticketing/views/ticketUpdateSubmit.html'" include-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Product Panel -->
+    <div role="tabpanel" class="tab-pane tab-add-product" id="tab-add-product" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
+      <div class="ticket-update clearfix">
+        <div class="ticket-updater pull-left">
+          <div class="pull-left avatar-38 avatar m-r">
+            <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </div>
+        </div>
+        <div class="ticket-update-content pull-left">
+          <div class="update-ticket-form-wrapper">
+            <div class="ticket-form-header" ng-include="'/html/quicktech/ticketing/views/ticketUpdateAddProduct.html'"></div>
+            <!-- Update Box Footer -->
+            <div class="ticket-form-footer clearfix">
+              <div ng-include="'/html/quicktech/ticketing/views/ticketUpdateAddUsers.html'" include-replace>
+              </div>
+            </div>
+          </div>
+          <div ng-include="'/html/quicktech/ticketing/views/ticketUpdateSubmit.html'" include-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Panel -->
+    <div role="tabpanel" class="tab-pane tab-add-service" id="tab-add-service" ng-if=" listType !== 'shared' || currentUser.role !== 'USER' ">
+      <div class="ticket-update clearfix">
+        <div class="ticket-updater pull-left">
+          <div class="pull-left avatar-38 avatar m-r">
+            <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </div>
+        </div>
+        <div class="ticket-update-content pull-left">
+          <div class="update-ticket-form-wrapper">
+            <div class="ticket-form-header" ng-include="'/html/quicktech/ticketing/views/ticketUpdateAddService.html'">
+            </div>
+            <div class="ticket-form-footer clearfix">
+              <div ng-include="'/html/quicktech/ticketing/views/ticketUpdateAddUsers.html'" include-replace>
+              </div>
+            </div>
+          </div>
+          <div ng-include="'/html/quicktech/ticketing/views/ticketUpdateSubmit.html'" include-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

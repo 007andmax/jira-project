@@ -1,0 +1,34 @@
+<div class="ticket-sidebar tickets-list ">
+	<div class="{{listType}} ticketListClass" ng-controller="CompaniesController">
+
+		<!-- TODO: need to improve performance ... use include for spam only -->
+		<!-- Default tickets - all tickets except spam for admin -->
+		<div ng-show="listType!=='spam' || currentUser.role === 'USER'" ng-repeat="ticket in tickets" class="ticket has-actions {{ticket.status=='COMPLETED'?'completed':''}}"  data-ticket-id="{{ticket.id}}" id="listing_{{ticket.id}}" ng-controller="UserController" ng-click="expand($event, ticket.id)" ng-class="{selected : ticket.selected}">
+			<div ng-include="'/html/quicktech/ticketing/views/ticketListContent.html'" include-replace></div>
+		</div>
+
+		<!-- Spam Tickets -->
+		<div ng-show="listType=='spam' && currentUser.role !== 'USER'" class="spam-msg ng-hide">Tickets Marked as Spam</div>
+		<div ng-show="listType=='spam' && currentUser.role !== 'USER'" ng-repeat="ticket in tickets | filter:isMarkedByAdmin " class="ticket has-actions ng-hide {{ticket.status=='COMPLETED'?'completed':''}}"  data-ticket-id="{{ticket.id}}" id="listing_{{ticket.id}}" ng-controller="UserController" ng-click="expand($event, ticket.id)" ng-class="{selected : ticket.selected}">
+			<div ng-include="'/html/quicktech/ticketing/views/ticketListContent.html'" include-replace></div>
+		</div>
+		<div ng-show="listType=='spam' && currentUser.role !== 'USER'" class="spam-msg ng-hide">Tickets Reported as Spam</div>
+		<div ng-show="listType=='spam' && currentUser.role !== 'USER'"  ng-repeat="ticket in tickets | filter: isNotMarkedByAdmin" class="ticket has-actions ng-hide {{ticket.status=='COMPLETED'?'completed':''}}"  data-ticket-id="{{ticket.id}}" id="listing_{{ticket.id}}" ng-controller="UserController" ng-click="expand($event, ticket.id)" ng-class="{selected : ticket.selected}">
+			<div ng-include="'/html/quicktech/ticketing/views/ticketListContent.html'" include-replace></div>
+		</div>
+
+		<!-- ticket loading -->
+		<div class="ticket loading">
+			<div class="ticket-meta">
+				<span class="l1 pull-left"></span>
+				<span class="l2 pull-left"></span>
+				<span class="l3 pull-right"></span>
+				<span class="l4 pull-left "></span>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Ticket Detail -->
+<div class="ticket-content" ui-view>
+</div>

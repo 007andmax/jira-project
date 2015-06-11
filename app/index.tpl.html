@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
+  <link rel='stylesheet' href='/bower_components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css' />
+  <link rel='stylesheet' href='/bower_components/bootstrap-select/dist/css/bootstrap-select.css' />
+  <link rel='stylesheet' href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/fonts.css"/>
+  <link rel="stylesheet" href="styles/jscrollpane.css"/>
+  <link rel="stylesheet" href="styles/quicktech.css">
+  <link rel="stylesheet" href="styles/quicktech-override.css">
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/firefox.css -->
+  <link rel='stylesheet' href='styles/firefox.css'>
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/ie.css -->
+  <link rel='stylesheet' href='styles/ie.css'>
+  <!-- endbuild -->
+
+  <script type="text/javascript">
+    if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+      document.querySelector('[href*="styles/firefox."]').remove();
+    } else if (!(window.ActiveXObject || "ActiveXObject" in window)) {
+      document.querySelector('[href*="styles/ie."]').remove();
+    }
+  </script>
+
+</head>
+<body class="unassigned" ng-app="quicktech" ng-controller="TicketController">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+<div id="loading" class="alert-wrapper">
+  <center class="animator stop">
+    <div class="alert alert-yellow">Loading ...</div>
+  </center>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-main" ng-include="'/html/partials/header.html'">
+</nav>
+<div class="main-container ">
+  <div class="row">
+    <aside class="left" ng-include="'/html/partials/left-panel.html'"></aside>
+    <aside class="right scroll-pane" ng-include="'/html/partials/right-panel.html'"></aside>
+    <div id="content" class="content-container">
+      <div class="content-wrapper">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- build:js({.,app}) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+<script src="/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js"></script>
+<script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="/bower_components/moment/min/moment-with-locales.js"></script>
+<script src="/bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+<script src="/bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+<!-- endbower -->
+<script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
+<script src="scripts/js/vendors/modernizr.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/custom.js -->
+<script src="scripts/js/main.js"></script>
+<script src="scripts/js/handlebars-v3.0.3.js"></script>
+<script src="scripts/js/rest-services.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<!-- include: "type": "js", "files": ["scripts/**/*.mdl.js", "scripts/**/*.js", "!scripts/js/**/*.js", "!scripts/**/*.test.js", "quicktech/**/*.mdl.js", "quicktech/**/*.js", "!quicktech/**/*.test.js"] -->
+<!-- endbuild -->
+</body>
+</html>
