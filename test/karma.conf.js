@@ -33,8 +33,8 @@ module.exports = function(config) {
       'bower_components/bootstrap-select/dist/js/bootstrap-select.js',
       'bower_components/moment/moment.js',
       'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
-      'bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
       'bower_components/typeahead.js/dist/typeahead.bundle.js',
+      'bower_components/quicktech-angularjs-services/rest-services.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
