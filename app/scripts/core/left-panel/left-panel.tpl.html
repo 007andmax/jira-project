@@ -1,6 +1,6 @@
 <div class="toggle-menu icn-toggle-menu"></div>
 
-<div class="scroll-pane">
+<div class="scroll-pane" ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
 	<nav class="site-left-nav dashboard clearfix">
 		<ul class="nav nav-pills nav-stacked">
 			<li > <a href="#"> <span class="nav-icon icn-dashboard"></span> Dashboard </a> </li>
@@ -12,35 +12,35 @@
 		<ul class="nav nav-pills sub-nav nav-stacked">
 			<li ui-sref-active="active">
 				<a ui-sref="Tickets({listType: 'unassigned'})">
-					<span class="nav-icon icn-unassigned"></span> Unassigned 
+					<span class="nav-icon icn-unassigned"></span> Unassigned
 					<span class="badge" ng-if="ticketCounts.UNASSIGNED !== 0">{{ticketCounts.UNASSIGNED}}</span>
 				</a>
 			</li>
 			<li ui-sref-active="active">
 				<a ui-sref="Tickets({listType: 'user'})">
 					<span class="nav-icon icn-tickets"></span> My Tickets
-				</a> 
+				</a>
 			</li>
 			<li  ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'shared'})"> 
-					<span class="nav-icon icn-shared"></span>  Shared 
+				<a ui-sref="Tickets({listType: 'shared'})">
+					<span class="nav-icon icn-shared"></span>  Shared
 					<span class="badge">{{ticketCounts.SHARED}}</span>
-				</a> 
+				</a>
 			</li>
-			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'"> 
+			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
 				<a ui-sref="Tickets({listType: 'open'})">
 					<span class="nav-icon icn-open"></span>Open
-				</a> 
+				</a>
 			</li>
-			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'"> 
+			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
 				<a ui-sref="Tickets({listType: 'closed'})"> <span class="nav-icon icn-closed"></span> Closed
 				</a>
 			</li>
-			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'"> 
+			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
 				<a ui-sref="Tickets({listType: 'trash'})"><span class="nav-icon icn-trash"></span> Trash
-				</a> 
+				</a>
 			</li>
-			<li ui-sref-active="active"> 
+			<li ui-sref-active="active">
 				<a ui-sref="Tickets({listType: 'spam'})"><span class="nav-icon icn-spam"></span> Spam
 				</a>
 			</li>
@@ -56,7 +56,7 @@
 			<li > <a href="#"> <span class="nav-icon icn-users"></span>  Users</a> </li>
 			<li> <a href="#"> <span class="nav-icon icn-vendors no-icon"></span>  Vendors</a> </li>
 		</ul>
-	</nav> 
+	</nav>
 	<div class="clearfix divider"></div>
 	<nav class="site-left-nav clearfix">
 		<div class="nav-title panel-heading">Accounts</div>
@@ -66,7 +66,7 @@
 			<li > <a href="#"> <span class="nav-icon  icn-product-services no-icon"></span>  Products & Services</a> </li>
 			<li> <a href="#"> <span class="nav-icon icn-receipt-archive no-icon"></span>  Receipt Archive</a> </li>
 		</ul>
-	</nav> 
+	</nav>
 	<div class="clearfix divider"></div>
 	<!--nav class="site-left-nav clearfix label-nav" ng-controller="TagController">
 		<div class="nav-title panel-heading">labels</div>
@@ -114,5 +114,5 @@
 			<li > <a href="javascript:{}"> <span class="nav-icon icn-devices "></span>  Devices </a> </li>
 			<li> <a href="javascript:{}"> <span class="nav-icon icn-reports "></span> Reports  </a> </li>
 		</ul>
-	</nav> 
+	</nav>
 </div>

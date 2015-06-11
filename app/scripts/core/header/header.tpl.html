@@ -1,0 +1,36 @@
+<div class="nav-container" ng-controller="quicktech.core.header.headerCtrl">
+
+  <div ng-if="getTemplateNameByState()">
+    <div ng-include="'/html/scripts/core/header/header-' + getTemplateNameByState() + '.tpl.html'">
+    </div>
+  </div>
+  <div class="navbar-header">
+    <a class="navbar-brand navbar-quicktech" href="/">
+      <img src="images/spacer.gif" alt="Quick Tech" class="logo">
+    </a>
+  </div>
+  <div class="collapse navbar-collapse">
+    <div class="nav navbar-nav navbar-right">
+      <div class="btn-create-wrapper dropdown">
+        <div class="btn btn-green btn-cr btn-create dropdown-toggle tooltip-dp" data-placement="bottom" title=""
+             data-original-title="Create..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="icn-add"></span>
+        </div>
+        <ul class="dropdown-menu dropdown-create">
+          <li role="presentation" data-toggle="modal" data-target="#createTicket"><a role="menuitem"
+                                                                                     tabindex="-1" href="#">Ticket</a>
+          </li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">User</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Company</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Vendor</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lead</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="nav-right-container"><a herf="" class=" avatar-38 avatar m-r">
+  <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+</a>
+  <a href="#" class="btn-logout icn-logout tp-hide" data-toggle="tooltip" data-original-title="Logout"
+     data-placement="bottom"></a></div>

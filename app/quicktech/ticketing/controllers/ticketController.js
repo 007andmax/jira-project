@@ -3,20 +3,6 @@
 /* Controllers */
 (function (window, $, undefined) {
   var app = angular.module('quicktech.ticketing');
-  app.controller('TicketController', ['$scope', 'TicketsService', 'TicketTagsService', 'ActionRightsService', '$rootScope',
-    function ($scope, TicketsService, TicketTagsService, ActionRightsService, $rootScope) {
-
-      $scope.ticketCounts = TicketsService.getCounts($scope);
-      $scope.searchFilter = {};
-      $scope.bulk = {};
-      $scope.listType = '';
-      $scope.ActionRightsService = ActionRightsService;
-
-      var tags = TicketTagsService.getList($scope, function () {
-        $scope.allTags = tags.staticCopy();
-      });
-
-    }]);
 
   app.controller('CompaniesController', ['$scope', 'CompaniesService',
     function ($scope, CompaniesService) {

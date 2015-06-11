@@ -72,7 +72,10 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       includeSource: {
-        files: ['<%= yeoman.app %>/{,*/}index.tpl.html'],
+        files: [
+          '<%= yeoman.app %>/{,*/}index.tpl.html',
+          '<%= yeoman.app %>/scripts/{,*/}*.js'
+        ],
         tasks: ['includeSource']
       },
       livereload: {
