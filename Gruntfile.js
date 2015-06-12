@@ -121,7 +121,7 @@ module.exports = function (grunt) {
             https: false,
             xforward: false,
             headers: {
-              "is-proxy-mode": true
+              'is-proxy-mode': true
             }
           }
         ]
@@ -149,7 +149,7 @@ module.exports = function (grunt) {
             https: false,
             xforward: false,
             headers: {
-              "is-proxy-mode": true
+              'is-proxy-mode': true
             }
           }
         ]

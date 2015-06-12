@@ -5,8 +5,10 @@
   var app = angular.module("quicktech",
     [
       'main.services',
-      'quicktech.ticketing',
+      'quicktech.core.ticketing',
+      'quicktech.core.users',
       'quicktech.common.services',
+      'quicktech.common.directives',
       'ui.router',
       'ngSanitize'
     ]);
@@ -16,17 +18,22 @@
     $urlRouterProvider.otherwise('/tickets/unassigned');
 
     $stateProvider
-      .state("Tickets", {
+      .state('Tickets', {
         url: '/tickets/:listType',
         templateUrl: '/html/quicktech/ticketing/views/ticketList.html',
         controller: 'TicketListController'
       })
-      .state("Tickets.Detail", {
+      .state('Tickets.Detail', {
         url: '/:id',
         templateUrl: '/html/quicktech/ticketing/views/ticketDetail.html',
         controller: 'TicketDetailController'
+      })
+      .state('Users', {
+        url: '/users',
+        templateUrl: '/html/scripts/core/users/users.tpl.html',
+        controller: 'quicktech.core.users.usersCtrl'
       });
 
-  }])
+  }]);
 
 }());

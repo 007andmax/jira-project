@@ -2,7 +2,7 @@
 
 (function(){
 
-	var app = angular.module('quicktech.ticketing');
+	var app = angular.module('quicktech.core.ticketing');
 
 	app.controller('AssignUserController', function($scope) {
 
@@ -30,6 +30,6 @@
 			};
 		});
 
-	
+
 
 })();

@@ -1,7 +1,7 @@
 'use strict';
 
 (function(){
-	var app = angular.module('quicktech.ticketing');
+	var app = angular.module('quicktech.core.ticketing');
 
 	app.filter('TicketsFilter', function() {
 
@@ -31,7 +31,7 @@
 				if(userQuery === undefined) {
 					out = input;
 				} else {
-					if (user.firstName.toLowerCase().indexOf(userQuery.query)!=-1 || 
+					if (user.firstName.toLowerCase().indexOf(userQuery.query)!=-1 ||
 						user.lastName.toLowerCase().indexOf(userQuery.query)!=-1) {
 						out.push(user);
 				}

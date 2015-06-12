@@ -2,7 +2,7 @@
 
 /* Controllers */
 (function (window, $, undefined) {
-  var app = angular.module('quicktech.ticketing');
+  var app = angular.module('quicktech.core.ticketing');
 
 
   app.directive('includeReplace', function () {
@@ -18,7 +18,9 @@
 
   app.controller('TicketListController', ['$scope', 'TicketsService', 'TicketTagsService',
       'CompaniesService', 'UsersService', '$stateParams', '$state', '$rootScope', 'ActionRightsService', 'quicktech.common.services.SharedStateService',
-      function ($scope, TicketsService, TicketTagsService, CompaniesService, UsersService, $stateParams, $state, $rootScope, ActionRightsService, SharedStateService) {
+      'quicktech.common.services.UserNotificationService',
+      function ($scope, TicketsService, TicketTagsService, CompaniesService, UsersService, $stateParams, $state,
+                $rootScope, ActionRightsService, SharedStateService, UserNotificationService) {
 
         var headerSharedState = SharedStateService.getSharedState('header');
 
@@ -32,14 +34,14 @@
         $('#search-and-filter').show();
 
 
-        $('#loading').show();
+        UserNotificationService.show('Loading ...');
         var filter = $stateParams.listType;
         $scope.listType = $stateParams.listType;
 
         $scope.$parent.listType = $stateParams.listType; // Assigned to parent for displaying count based on filter
 
         $scope.tickets = TicketsService.getList($scope, {filter: filter}, function () {
-          $('#loading').hide();
+          UserNotificationService.hide();
           $('.ticket.loading').hide();
 
           setTimeout(function () {
@@ -57,11 +59,11 @@
             if (!$state.is('Tickets.Detail')) {
               if ($(window).scrollTop() + $(window).height() > $(document).height() - 10) {
 
-                  if ($scope.tickets.length < headerSharedState.count) {
-                  $('#loading').show();
+                if ($scope.tickets.length < headerSharedState.count) {
+                  UserNotificationService.show('Loading ...');
                   $('.ticket.loading').show();
                   TicketsService.loadMore($scope, function () {
-                    $('#loading').hide();
+                    UserNotificationService.hide();
                     $('.ticket.loading').hide();
                     UsersService._addInitListener($scope.populateTechGusy);
                   });
@@ -157,7 +159,7 @@
             headerSharedState.searchFilter.status = false;
 
             $scope.tickets = TicketsService.getList($scope, {filter: $stateParams.listType}, function () {
-              $('#loading').hide();
+              UserNotificationService.hide();
               $('.ticket.loading').hide();
 
               setTimeout(function () {
@@ -204,10 +206,10 @@
             params.status = STATUS[headerSharedState.searchFilter.statusValue];
           }
 
-          $('#loading').show();
+          UserNotificationService.show('Loading ...');
 
           $scope.tickets = TicketsService.getList($scope, params, function () {
-            $('#loading').hide();
+            UserNotificationService.hide();
             $('.ticket.loading').hide();
             //setTimeout($scope.populateTechGusy, 1500); //TODO: need to optimize to load users only once...
           });
@@ -621,17 +623,11 @@
 
         function notification(msg) {
 
-          $('#loading .alert-yellow').text(msg);
-
-          $('#loading').show();
+          UserNotificationService.show(msg);
 
           setTimeout(function () {
-            $('#loading').fadeOut();
+            UserNotificationService.hide();
           }, 3000);
-
-          setTimeout(function () {
-            $('#loading .alert-yellow').text('Loading ...');
-          }, 4000);
 
         }
 

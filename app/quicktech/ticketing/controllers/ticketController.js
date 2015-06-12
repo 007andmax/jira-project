@@ -2,7 +2,7 @@
 
 /* Controllers */
 (function (window, $, undefined) {
-  var app = angular.module('quicktech.ticketing');
+  var app = angular.module('quicktech.core.ticketing');
 
   app.controller('CompaniesController', ['$scope', 'CompaniesService',
     function ($scope, CompaniesService) {

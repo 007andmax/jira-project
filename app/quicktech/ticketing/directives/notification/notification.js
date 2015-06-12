@@ -2,7 +2,7 @@
 
 (function(){
 
-    var app = angular.module("quicktech.ticketing");
+    var app = angular.module("quicktech.core.ticketing");
 
     app.directive('notification', function($timeout){
         return {

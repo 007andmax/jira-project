@@ -2,7 +2,7 @@
 
 (function(){
 
-  var app = angular.module("quicktech.ticketing");
+  var app = angular.module("quicktech.core.ticketing");
 
   app.directive('scrollPane', function($timeout){
     return {
@@ -13,7 +13,7 @@
             autoReinitialise: true,
             verticalDragMinHeight: 54,
             verticalDragMaxHeight: 54,
-          });  
+          });
         }, 5000);
       }
     }

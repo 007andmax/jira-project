@@ -4,7 +4,7 @@
 
 (function (window, $, undefined) {
 
-    var app = angular.module('quicktech.ticketing');
+    var app = angular.module('quicktech.core.ticketing');
 
     app.factory('ActionRightsService', function () {
 
@@ -21,7 +21,7 @@
             CLOSE: 'closed',
             TRASH: 'trash',
             SPAM: 'spam'
-        };        
+        };
 
         function isMoreActionsMenuVisible(filter, userRole) {
             var isTrueForFilter = filter === FILTERS.USER || filter === FILTERS.OPEN;
@@ -78,7 +78,7 @@
         }
 
         function isDeleteSpamForAdminVisible(filter, ticketMarkedSpamByRole, currentUserRole) {
-            return filter === FILTERS.SPAM && ticketMarkedSpamByRole === USER_ROLES.ADMIN && 
+            return filter === FILTERS.SPAM && ticketMarkedSpamByRole === USER_ROLES.ADMIN &&
             currentUserRole !== USER_ROLES.USER;
         }
 
@@ -107,10 +107,10 @@
         }
 
         function isMarkAsSpamDetailVisible(filter, currentUserRole) {
-            var isTrueForFilter = filter === FILTERS.UNASSIGNED || filter === FILTERS.USER 
+            var isTrueForFilter = filter === FILTERS.UNASSIGNED || filter === FILTERS.USER
             || filter === FILTERS.SHARED || filter === FILTERS.OPEN;
             var isTrueForUser = currentUserRole == USER_ROLES.ADMIN;
-            return (isTrueForFilter && isTrueForUser) || (currentUserRole == USER_ROLES.USER && 
+            return (isTrueForFilter && isTrueForUser) || (currentUserRole == USER_ROLES.USER &&
                 (filter === FILTERS.UNASSIGNED  ||  filter === FILTERS.USER));
         }
 
@@ -125,20 +125,20 @@
         return {
             isLabelAsVisible : isLabelAsVisible,
             isClaimTicketVisible : isClaimTicketVisible,
-            
+
             isPriorityVisible : isPriorityVisible,
             isPriorityIconVisible : isPriorityIconVisible,
             isPriorityForDetailPageVisible : isPriorityForDetailPageVisible,
-            
+
             isMoveToTrashVisible : isMoveToTrashVisible,
             isMoveToTrashIconVisible : isMoveToTrashIconVisible,
             isMoveToTrashDetailedVisible : isMoveToTrashDetailedVisible,
             isMoveToTrashForeverIconVisible : isMoveToTrashForeverIconVisible,
-            
-            
+
+
             isRestoreForTrashVisible : isRestoreForTrashVisible,
             isRestoreForSpamVisible : isRestoreForSpamVisible,
-            
+
             isChangeStatusVisible : isChangeStatusVisible,
             isMarkAsSpamIconVisible : isMarkAsSpamIconVisible,
             isMarkAsSpamDetailVisible : isMarkAsSpamDetailVisible,
