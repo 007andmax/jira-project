@@ -8,7 +8,9 @@
 
         $scope.getTemplateNameByState = function () {
           if ($state.includes("Tickets")) {
-            return 'tickets'
+            return 'tickets';
+          } else if ($state.includes("users")) {
+            return 'users';
           }
         }
 

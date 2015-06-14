@@ -7,12 +7,19 @@
   angular.module('quicktech.common.services').factory('quicktech.common.services.SharedStateService',
     [function () {
 
-      var sharedStates = {
-        header: {
+      var defaultStates = {
+        ticketsHeader: {
           searchFilter: {},
-          allTags: []
+          allTags: [],
+          count: 0
+        },
+        usersHeader: {
+          count: 0,
+          filter: {keyword: ''}
         }
       };
+
+      var sharedStates = angular.extend({}, defaultStates);
 
       return {
         getSharedState: function (name) {
@@ -29,6 +36,9 @@
           }
 
           angular.extend(sharedStates[name], state);
+        },
+        clearState: function (name) {
+          sharedStates[name] = angular.extend({}, defaultStates[name]);
         }
       }
 

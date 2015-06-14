@@ -22,7 +22,11 @@
       function ($scope, TicketsService, TicketTagsService, CompaniesService, UsersService, $stateParams, $state,
                 $rootScope, ActionRightsService, SharedStateService, UserNotificationService) {
 
-        var headerSharedState = SharedStateService.getSharedState('header');
+        var headerSharedState = SharedStateService.getSharedState('ticketsHeader');
+
+        $scope.$on('$destroy', function () {
+          SharedStateService.clearState('ticketsHeader');
+        })
 
         $scope.searchResult = [];
         var allTickets = [];
@@ -822,7 +826,7 @@
 
         filter = filter && filter[0].toUpperCase() + filter.slice(1)
 
-        $scope.$parent.panelTitle = filter;
+        headerSharedState.panelTitle = filter;
 
       }]
   )

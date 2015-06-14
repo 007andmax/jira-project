@@ -10,6 +10,7 @@
       'quicktech.common.services',
       'quicktech.common.directives',
       'ui.router',
+      'ui.select',
       'ngSanitize'
     ]);
 
@@ -28,10 +29,14 @@
         templateUrl: '/html/quicktech/ticketing/views/ticketDetail.html',
         controller: 'TicketDetailController'
       })
-      .state('Users', {
+      .state('users', {
         url: '/users',
         templateUrl: '/html/scripts/core/users/users.tpl.html',
         controller: 'quicktech.core.users.usersCtrl'
+      })
+      .state('users.create', {
+        url: '/create',
+        templateUrl: '/html/scripts/core/users/user-edit.tpl.html'
       });
 
   }]);

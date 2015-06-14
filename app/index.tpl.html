@@ -16,10 +16,12 @@
 
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />
-  <link rel='stylesheet' href='/bower_components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css' />
-  <link rel='stylesheet' href='/bower_components/bootstrap-select/dist/css/bootstrap-select.css' />
-  <link rel='stylesheet' href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' />
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css'/>
+  <link rel='stylesheet' href='/bower_components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css'/>
+  <link rel='stylesheet' href='/bower_components/bootstrap-select/dist/css/bootstrap-select.css'/>
+  <link rel='stylesheet'
+        href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'/>
+  <link rel='stylesheet' href='/bower_components/angular-ui-select/dist/select.min.css'/>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -59,12 +61,13 @@
   </center>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-main" ng-include="'/html/scripts/core/header/header.tpl.html'">
+<nav class="navbar navbar-default navbar-fixed-top navbar-main"
+     ng-include="'/html/scripts/core/header/header.tpl.html'">
 </nav>
 <div class="main-container ">
   <div class="row">
-    <aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
-    <aside class="right scroll-pane" ng-include="'/html/partials/right-panel.html'"></aside>
+    <aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>
+    <aside class="right scroll-pane" ng-include="'/html/partials/right-panel.html'" qt-scroll-pane></aside>
     <div id="content" class="content-container">
       <div class="content-wrapper">
         <div ui-view></div>
@@ -80,6 +83,7 @@
 <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="/bower_components/angular/angular.js"></script>
 <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/bower_components/angular-ui-select/dist/select.min.js"></script>
 <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>

@@ -9,6 +9,8 @@
           restrict: 'A',
           link: function (scope, element, attrs) {
 
+            element.hide();
+
             UserNotificationService.setHideListener(function () {
               element.fadeOut();
             });

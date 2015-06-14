@@ -1,7 +1,8 @@
 <div class="content-body users">
-
+  <!--<ng-include src="'/html/scripts/core/users/user-edit.tpl.html'"></ng-include>-->
+  <div ui-view></div>
   <div class="users-list clearfix">
-    <div class="user" ng-repeat="user in users">
+    <div class="user" ng-repeat="user in users | filter : usersFilter">
       <div class="content">
         <ul class="user-badges">
           <li ng-if="subscriptions[user.id].ticket" id="{{ user.id + '-has-ticket-updates' }}"

@@ -2,17 +2,17 @@
 
 (function () {
 
-  angular.module('quicktech').controller('quicktech.core.header.headerTicketsCtrl',
+  angular.module('quicktech').controller('quicktech.core.header.ticketsCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'ActionRightsService', 'TicketTagsService',
       function ($scope, SharedStateService, ActionRightsService, TicketTagsService) {
 
-        $scope.sharedState = SharedStateService.getSharedState('header');
+        $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
 
         //TODO Review!!!
         $scope.ActionRightsService = ActionRightsService;
 
         var tags = TicketTagsService.getList($scope, function () {
-          SharedStateService.getSharedState('header').allTags = tags.staticCopy();
+          SharedStateService.getSharedState('ticketsHeader').allTags = tags.staticCopy();
         });
 
       }]);

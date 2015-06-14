@@ -1,13 +1,12 @@
-<div class="create-new-user clearfix">
+<div class="create-new-user clearfix" ng-controller="quicktech.core.users.editCtrl">
   <form>
     <div class="content clearfix">
-      <div class="header clearfix"><h4 class="title">Create User</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+      <div class="header clearfix"><h4 class="title">{{ isCreation ? 'Create' : 'Edit' }} User</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit()"><span
           aria-hidden="true" class="icn-close-modal"></span></button>
       </div>
       <div class="avatar-content default clearfix">
-        <div class="avatar"><img src="res/images/avatars/avatar-xlarge.png"
-                                 class="no-avatar"></div>
+        <div class="avatar"><img ng-src="/users/{{ user.id || 'default' }}/image" class="no-avatar"></div>
         <div class="choose-file">
           <div class="select-file"><input type="file"/>
             <button type="button" class="btn btn-gray pull-left" data-dismiss="modal">
@@ -22,31 +21,31 @@
         <div class="row-wrapper clearfix">
           <div class="form-group dropdown pull-left">
             <label>first name</label>
-            <input type="text" class="form-control " value="" aria-expanded="true">
+            <input type="text" class="form-control " ng-model="user.firstName" aria-expanded="true">
 
           </div>
           <div class="form-group dropdown pull-left">
             <label>last name</label>
-            <input type="text" class="form-control " value="" aria-expanded="true">
+            <input type="text" class="form-control " ng-model="user.lastName" aria-expanded="true">
 
           </div>
         </div>
         <div class="row-wrapper clearfix">
           <div class="form-group dropdown pull-left">
             <label>designation</label>
-            <input type="text" class="form-control " value="" aria-expanded="true">
+            <input type="text" class="form-control " ng-model="user.designation" aria-expanded="true">
 
           </div>
           <div class="form-group dropdown pull-left">
             <label>email</label>
-            <input type="text" class="form-control " value="" aria-expanded="true">
+            <input type="text" class="form-control " ng-model="user.primaryEmail" aria-expanded="true">
 
           </div>
         </div>
-        <div class="row-wrapper clearfix">
+        <div class="row-wrapper clearfix" ng-repeat="phoneNumber in user.phoneNumbers">
           <div class="form-group dropdown pull-left">
             <label>contact no.</label>
-            <input type="text" class="form-control " value="" aria-expanded="true">
+            <input type="text" class="form-control " ng-model="phoneNumber.number" aria-expanded="true">
 
           </div>
           <div class="form-group dropdown number-type pull-left">
@@ -65,10 +64,37 @@
 
           </div>
 
-          <a href="javascript:void(0)"
-             class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-             data-toggle="tooltip" data-original-title="Add More"
-             data-placement="top"><span class="icn-add"></span></a></div>
+          <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+             data-toggle="tooltip" data-original-title="Remove" data-placement="top"
+             ng-click="removePhoneNumber($index)">
+            <span class="icn-remove-update"></span>
+          </a>
+        </div>
+        <div class="row-wrapper clearfix" ng-if="user.phoneNumbers.length < 3">
+          <div class="form-group dropdown pull-left">
+            <label>contact no.</label>
+            <input type="text" class="form-control " ng-model="tmplPhone.number" aria-expanded="true">
+
+          </div>
+          <div class="form-group dropdown number-type pull-left">
+
+            <input type="text"
+                   class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
+                   value="" data-toggle="dropdown" aria-expanded="true">
+
+            <div class="dropdown-default-value">Mobile</div>
+            <ul class="dropdown-menu dropdown-account-type">
+              <li><a tabindex="-1" href="#"> Mobile </a></li>
+              <li><a tabindex="-1" href="#"> Office </a></li>
+              <li><a tabindex="-1" href="#"> Fax </a></li>
+            </ul>
+          </div>
+
+          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+             data-toggle="tooltip" data-original-title="Add More" data-placement="top" ng-click="addPhoneNumber()">
+            <span class="icn-add"></span>
+          </a>
+        </div>
         <div class="row-wrapper clearfix">
           <div class="form-group cs-type dropdown pull-left">
             <label>account type</label>
@@ -82,12 +108,21 @@
               <li><a tabindex="-1" href="#"> Administrator </a></li>
             </ul>
           </div>
+
+          <!--<ui-select ng-model="user.role" theme="bootstrap">-->
+            <!--<ui-select-match placeholder="Enter an address...">{{ user.role }}</ui-select-match>-->
+            <!--<ui-select-choices repeat="role in roles track by $index">-->
+              <!--<div ng-bind-html="role | highlight: $select.search"></div>-->
+            <!--</ui-select-choices>-->
+
+          <!--</ui-select>-->
+
           <div class="form-group dropdown pull-left">
             <label>company</label>
             <input type="text"
                    class="form-control form-control-dropdown dropdown-toggle " value=""
                    data-toggle="dropdown" aria-expanded="true">
-            <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
+            <ul class="dropdown-menu dropdown-company scroll-pane" qt-scroll-pane role="menu">
               <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Active
                 Information Systems</a></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Global
@@ -109,17 +144,19 @@
                    value="" data-toggle="dropdown" aria-expanded="true">
 
             <div class="tokens">
-              <div class="token ticket"><span class="token-label">tkt updates</span>
+              <div class="token ticket" ng-if="user.userSubscription.ticket">
+                <span class="token-label">tkt updates</span>
               </div>
 
-              <div class="token invoice"><span class="token-label">inv. updates</span>
+              <div class="token invoice" ng-if="user.userSubscription.invoice">
+                <span class="token-label">inv. updates</span>
               </div>
             </div>
 
             <ul class="dropdown-menu dropdown-subscribe">
               <li><a tabindex="-1" href="#">
                 <div class="clearfix"><label class="control checkbox pull-left">
-                  <input type="checkbox" checked="">
+                  <input type="checkbox" ng-model="user.userSubscription.ticket">
                   <span class="control-indicator"></span>
                 </label>
                   Ticket Updates
@@ -127,7 +164,7 @@
               </a></li>
               <li><a tabindex="-1" href="#">
                 <div class="clearfix"><label class="control checkbox pull-left">
-                  <input type="checkbox" checked="">
+                  <input type="checkbox" ng-model="user.userSubscription.invoice">
                   <span class="control-indicator"></span>
                 </label>
                   Invoice Updates
@@ -136,7 +173,8 @@
             </ul>
           </div>
           <div class="form-group dropdown pull-left">
-            <button type="button" class="btn btn-scooter btn-create pull-right">Create
+            <button type="button" class="btn btn-scooter btn-create pull-right">
+              {{ isCreation ? 'Create' : 'Save Changes' }}
             </button>
           </div>
         </div>

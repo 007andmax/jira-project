@@ -2,7 +2,7 @@
 
 ## Quick start
 
-1) install node
+1) install node (with npm)
 2) install bower
 3) install grunt
 4) move into project folder

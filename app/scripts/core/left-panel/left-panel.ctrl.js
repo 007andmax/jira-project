@@ -14,7 +14,7 @@
           return $scope.ticketCounts[$stateParams.listType.toUpperCase()];
         }
       }, function (count) {
-        SharedStateService.getSharedState('header').count = count;
+        SharedStateService.getSharedState('ticketsHeader').count = count;
       })
 
     }]);
