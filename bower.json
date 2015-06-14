@@ -15,8 +15,8 @@
     "eonasdan-bootstrap-datetimepicker": "^4.7.0",
     "retina.js": "^1.3.0",
     "moment": "~2.10.3",
-    "typeahead.js": "^0.11.1",
-    "quicktech-angularjs-services": "https://bnjmnnicholson@bitbucket.org/quicktechteam/quicktech-angularjs-services.git"
+    "typeahead.js": "^0.11.1"
+//    "quicktech-angularjs-services": "git@bitbucket.org:quicktechteam/quicktech-angularjs-services.git"
   },
   "resolutions":{
     "jquery": "^1.11.0",
