@@ -17,7 +17,7 @@ If you have started quicktech server on your local environment then run  `grunt 
 
 To apply changes on beta3 server run `grunt build` before commit 
 
-NOTE: Do not commit node_modules and bower_components folders and app/index.html file!
+NOTE: Do not commit node_modules, bower_components, .tmp, dist folders and app/index.html file!
 
 ## Testing
 

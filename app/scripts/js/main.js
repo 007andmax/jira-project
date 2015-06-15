@@ -1,3 +1,7 @@
+String.prototype.endsWith = function(suffix) {
+  return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 function prepareTicketsModule() {
   var pixelRatio = !!window.devicePixelRatio ? window.devicePixelRatio : 1;
 
