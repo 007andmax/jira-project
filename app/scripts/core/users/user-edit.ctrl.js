@@ -18,7 +18,10 @@
           $scope.user = {
             role: 'USER',
             phoneNumbers: [],
-            userSubscription: {}
+            userSubscription: {},
+            avatar: {
+              scale: 50
+            }
           };
         } else {
           $scope.user = {
@@ -30,18 +33,19 @@
             primaryEmail: $scope.user.primaryEmail,
             phoneNumbers: $scope.user.phoneNumbers.staticCopy(),
             companyId: $scope.user.company.id,
-            userSubscription: $scope.subscriptions[user.id].staticCopy()
+            userSubscription: $scope.subscriptions[user.id].staticCopy(),
+            avatar: $scope.user.avatar.staticCopy()
           }
         }
 
         $scope.addPhoneNumber = function () {
           $scope.user.phoneNumbers.push($scope.tmplPhone);
           $scope.tmplPhone = {};
-        }
+        };
 
         $scope.removePhoneNumber = function (index) {
           $scope.user.phoneNumbers.splice(index, 1);
-        }
+        };
 
         $scope.cancelEdit = function () {
           $state.go('users');

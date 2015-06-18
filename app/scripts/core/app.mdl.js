@@ -11,6 +11,7 @@
       'quicktech.common.directives',
       'ui.router',
       'ui.select',
+      'ui.bootstrap',
       'ngSanitize'
     ]);
 

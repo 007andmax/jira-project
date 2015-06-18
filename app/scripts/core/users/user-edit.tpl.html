@@ -5,18 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit()"><span
           aria-hidden="true" class="icn-close-modal"></span></button>
       </div>
-      <div class="avatar-content default clearfix">
-        <div class="avatar"><img ng-src="/users/{{ user.id || 'default' }}/image" class="no-avatar"></div>
-        <div class="choose-file">
-          <div class="select-file"><input type="file"/>
-            <button type="button" class="btn btn-gray pull-left" data-dismiss="modal">
-              Choose Avatar
-            </button>
-            <span class="file-name pull-left">No File Selected</span>
-          </div>
-          <div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>
-        </div>
-      </div>
+      <div ng-init="loadingInProcess = false" edit-avatar user="user" loading-in-process="loadingInProcess"></div>
       <div class="user-fields clearfix">
         <div class="row-wrapper clearfix">
           <div class="form-group dropdown pull-left">
@@ -110,10 +99,10 @@
           </div>
 
           <!--<ui-select ng-model="user.role" theme="bootstrap">-->
-            <!--<ui-select-match placeholder="Enter an address...">{{ user.role }}</ui-select-match>-->
-            <!--<ui-select-choices repeat="role in roles track by $index">-->
-              <!--<div ng-bind-html="role | highlight: $select.search"></div>-->
-            <!--</ui-select-choices>-->
+          <!--<ui-select-match placeholder="Enter an address...">{{ user.role }}</ui-select-match>-->
+          <!--<ui-select-choices repeat="role in roles track by $index">-->
+          <!--<div ng-bind-html="role | highlight: $select.search"></div>-->
+          <!--</ui-select-choices>-->
 
           <!--</ui-select>-->
 
@@ -173,7 +162,7 @@
             </ul>
           </div>
           <div class="form-group dropdown pull-left">
-            <button type="button" class="btn btn-scooter btn-create pull-right">
+            <button type="button" class="btn btn-scooter btn-create pull-right" ng-disabled="loadingInProcess">
               {{ isCreation ? 'Create' : 'Save Changes' }}
             </button>
           </div>

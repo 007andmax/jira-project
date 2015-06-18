@@ -1,0 +1,37 @@
+<div class="modal-customize-avatr fade in show" canvas-crop>
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
+          <span aria-hidden="true" class="icn-close-modal"></span>
+        </button>
+        <h4 class="modal-title pull-left">Select crop size<span class="dot-sep"></span></h4>
+        <span class="ticket-numer pull-left">Drag the photo around or use zoom slider</span>
+      </div>
+      <div class="modal-body">
+
+        <div class="crop-area">
+          <canvas width="578px" height="480px" style="cursor: move"></canvas>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="row-wrapper clearfix">
+          <div class="zoom-slider pull-left">
+            <a href="#" class="pull-left icn icn-zoom-minus" ng-mousedown="startReduceScale()"
+               ng-mouseup="stopReduceScale()"></a>
+
+            <div class="range-wrapper pull-left"><input type="range" ng-model="avatar.scale"/></div>
+            <a href="#" class="pull-right icn icn-zoom-plus" ng-mousedown="startIncreaseScale()"
+               ng-mouseup="stopIncreaseScale()"></a>
+
+
+          </div>
+          <div class="form-group actions-wrapper pull-right">
+            <button type="button" class="btn btn-scooter" ng-click="save()">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,6 +27,7 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-ui-select/dist/select.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js',
@@ -35,7 +36,6 @@ module.exports = function(config) {
       'bower_components/moment/moment.js',
       'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
       'bower_components/typeahead.js/dist/typeahead.bundle.js',
-      'bower_components/quicktech-angularjs-services/rest-services.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
