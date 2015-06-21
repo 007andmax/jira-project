@@ -4534,9 +4534,9 @@ select[multiple].input-lg,
 }
 
 /* line 580, ../sass/bootstrap/_forms.scss */
-.error-msg {
-  display: none;
-}
+/*.error-msg {*/
+  /*display: none;*/
+/*}*/
 
 /* line 582, ../sass/bootstrap/_forms.scss */
 /* .form-group.error {
@@ -4550,6 +4550,15 @@ select[multiple].input-lg,
 
 /* line 588, ../sass/bootstrap/_forms.scss */
 .form-group.error > .error-msg {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #e53935;
+}
+
+.qt-error-msg {
   display: block;
   margin-bottom: 2px;
   font-size: 11px;
@@ -18695,7 +18704,7 @@ a.disabled {
 }
 
 .hide-cursor:focus {
-  color: #f7f9fb;
+  /*color: #f7f9fb;*/
   cursor: pointer !important;
 
 }

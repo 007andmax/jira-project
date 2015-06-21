@@ -35,7 +35,7 @@
                   <span class="control-indicator"></span>
                 </label>
                 <a herf="" class="pull-left avatar-26 avatar m-r">
-                  <img ng-src="/users/{{ user.id }}/image" alt="..." class="img-circle">
+                  <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
                 </a>
                 <div class="clearfix">
                   <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
@@ -69,7 +69,7 @@
                       <span class="control-indicator"></span>
                     </label>
                     <a herf="" class="pull-left avatar-26 avatar m-r">
-                      <img ng-src="/users/{{ user.id }}/image" alt="..." class="img-circle">
+                      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
                     </a>
                     <div class="clearfix">
                       <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
@@ -102,7 +102,7 @@
                       <span class="control-indicator"></span>
                     </label>
                     <a herf="" class="pull-left avatar-26 avatar m-r">
-                      <img ng-src="/users/{{ user.id }}/image" alt="..." class="img-circle">
+                      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
                     </a>
                     <div class="clearfix">
                       <div class="user-name"><a href="">{{ user.firstName }} {{ user.lastName }}  "{{ user.primaryEmail }}"</a>
@@ -126,7 +126,7 @@
 
   <li ng-repeat="user in update_users">
     <div class="pull-left avatar-26 avatar m-r">
-      <img ng-src="/users/{{ user.id }}/image" alt="..." class="img-circle">
+      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
       <div class="remove-user" ng-click="user.isSelected = false; addUsertoUpdate(user);">
         <span class="icn-remove-user abc"></span>
       </div>

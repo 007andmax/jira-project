@@ -14,14 +14,14 @@
             cropHeight = 242,
             cropX = canvas[0].width / 2 - cropWidth / 2,
             cropY = canvas[0].height / 2 - cropHeight / 2,
-            imageWidth = scope.image.width,
-            imageHeight = scope.image.height,
+            imageWidth = Math.floor(scope.image.width),
+            imageHeight = Math.floor(scope.image.height),
             multiplier = Math.min(canvas[0].width / imageWidth, canvas[0].height / imageHeight),
             cropped;
 
           if (scope.avatar.scale === 50 && !scope.avatar.x && !scope.avatar.y) {
-            imageWidth *= multiplier;
-            imageHeight *= multiplier;
+            imageWidth = Math.floor(imageWidth * multiplier);
+            imageHeight = Math.floor(imageHeight * multiplier);
             scope.avatar.x = canvas[0].width / 2 - imageWidth / 2;
             scope.avatar.y = canvas[0].height / 2 - imageHeight / 2;
           }
@@ -78,8 +78,8 @@
               }
             }
 
-            imageWidth = scope.image.width * multiplier * scalePercents;
-            imageHeight = scope.image.height * multiplier * scalePercents;
+            imageWidth = Math.floor(scope.image.width * multiplier * scalePercents);
+            imageHeight = Math.floor(scope.image.height * multiplier * scalePercents);
 
             if (scalePercents < 1) {
               fixBoundsAndRedrawImage()

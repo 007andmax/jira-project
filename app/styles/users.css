@@ -545,7 +545,7 @@
 .create-new-user .user-fields .form-group .form-control-number-type:active,
 .create-new-user .user-fields .form-group .form-control-number-type:focus,
 .create-new-user .user-fields .form-group .form-control-number-type.focus {
-  color: #9fabb9;
+  /*color: #9fabb9;*/
   background-color: #9fabb9;
   border-color: #9fabb9;
   border-radius: 3px;

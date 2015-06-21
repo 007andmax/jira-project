@@ -2,7 +2,7 @@
 	<div class="clearfix" ng-controller="CompaniesController">
 		<div class="ticket-author">
 			<a href="javascript:{}" class="pull-left avatar-38 avatar m-r">
-				<img ng-src="/users/{{ ticketDetail.createdUser.id }}/image" alt="..." class="img-circle">
+				<img ng-src="{{ getUserAvatarUrl(ticketDetail.createdUser) }}" alt="..." class="img-circle">
 			</a>
 			<div class="clearfix pull-left">
 				<div class="user-name">
@@ -223,7 +223,7 @@
 		<ul class="shared-users-list" ng-show="isSharedBetweenVisible === true">
 			<li ng-repeat="user in ticketDetail.sharedBetween">
 				<div class="pull-left avatar-38 avatar m-r">
-					<img ng-src="/users/{{ user.id }}/image" alt="..." class="img-circle">
+					<img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
 					<div class="tooltip tooltip-users top">
 						<div class="tooltip-arrow"></div>
 						<ul class="tooltip-inner">
@@ -248,7 +248,7 @@
 		<div ng-repeat="ticketUpdate in ticketDetail.updates" class="ticket-update clearfix" ng-class="{'has-attachment': update.attachments.length > 0}" ng-init="updateIndex = $index;">
 			<div class="ticket-updater pull-left">
 				<div class="pull-left avatar-38 avatar m-r">
-					<img ng-src="/users/{{ ticketUpdate.user.id }}/image" alt="..." class="img-circle">
+					<img ng-src="{{ getUserAvatarUrl(ticketUpdate.user) }}" alt="..." class="img-circle">
 				</div>
 				<span class="icon-update" ng-class="getUpdateClass(ticketUpdate.type)"></span>
 			</div>
@@ -433,7 +433,7 @@
 						{{ticketUpdate.sharedBetween.length}} people added to this update
 					</span>
 					<div class="pull-left avatar-26 avatar m-r" ng-repeat="sharedBetweenPerson in ticketUpdate.sharedBetween">
-						<img ng-src="/users/{{ sharedBetweenPerson.id }}/image" alt="..." class="img-circle">
+						<img ng-src="/users/{{ sharedBetweenPerson.id }}/image?t={{ sharedBetweenPerson.avatar.updatedAt }}" alt="..." class="img-circle">
 					</div>
 				</div>
 

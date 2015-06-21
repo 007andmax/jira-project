@@ -1,10 +1,12 @@
 <div class="avatar-content default clearfix">
   <div class="avatar">
-    <img ng-src="/users/{{ user.id || 'default' }}/image" class="no-avatar" ng-if="!user.avatar.cropped.id">
+    <img ng-src="{{ getUserAvatarUrl(user) }}" class="no-avatar" ng-if="!user.avatar.cropped.id">
     <img ng-src="/file/{{ user.avatar.cropped.id }}" class="no-avatar" ng-if="user.avatar.cropped.id">
-    <div class="reposition-wrapper" ng-if="user.avatar.origin || loadingInProcess">
-      <div class="reposition" ng-if="user.avatar.origin && !loadingInProcess" change-position-button>REPOSITION...</div>
-      <div class="loader" ng-if="loadingInProcess"></div>
+
+    <div class="reposition-wrapper" ng-show="user.avatar.origin || loadingInProcess">
+      <div class="reposition" ng-show="user.avatar.origin && !loadingInProcess" change-position-button>REPOSITION...
+      </div>
+      <div class="loader" ng-show="loadingInProcess"></div>
     </div>
   </div>
   <div class="choose-file">
@@ -12,7 +14,7 @@
       <button type="button" class="btn btn-gray pull-left" change-avatar-button>
         Choose Avatar
       </button>
-      <span class="file-name pull-left" ng-if="!user.avatar.origin">No File Selected</span>
+      <span class="file-name pull-left" ng-show="!user.avatar.origin">No File Selected</span>
     </div>
     <div class="file-type pull-left ">maximum size of 2 MB. jpg, jpeg, GIF, PNG.</div>
     <div class="file-type pull-left text-danger" style="display: none;" too-large-file-msg>File is too large</div>

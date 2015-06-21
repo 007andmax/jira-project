@@ -12,7 +12,8 @@
       'ui.router',
       'ui.select',
       'ui.bootstrap',
-      'ngSanitize'
+      'ngSanitize',
+      'ngMessages'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -41,5 +42,12 @@
       });
 
   }]);
+
+  app.run(
+    ['$rootScope', function ($rootScope) {
+      $rootScope.getUserAvatarUrl = function (user) {
+        return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '');
+      }
+    }]);
 
 }());

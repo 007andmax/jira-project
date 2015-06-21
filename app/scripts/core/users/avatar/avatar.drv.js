@@ -11,7 +11,7 @@
   ];
 
   angular.module("quicktech.core.users").directive('editAvatar',
-    ['$modal', 'FilesService', function ($modal, FilesService) {
+    ['$modal', 'FilesService', '$rootScope', function ($modal, FilesService, $rootScope) {
       return {
         restrict: 'A',
         templateUrl: '/html/scripts/core/users/avatar/avatar.tpl.html',
@@ -20,6 +20,8 @@
           loadingInProcess: '=loadingInProcess'
         },
         link: function (scope, element, attrs) {
+
+          scope.getUserAvatarUrl = $rootScope.getUserAvatarUrl;
 
           element.on('click', '[change-avatar-button]', function () {
             var file = element.find('input[type=file]');
@@ -32,6 +34,7 @@
 
             var avatar = {
               scale: scope.user.avatar.scale,
+              origin: scope.user.avatar.origin,
               x: scope.user.avatar.x,
               y: scope.user.avatar.y
             };

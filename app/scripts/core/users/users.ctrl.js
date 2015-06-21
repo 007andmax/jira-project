@@ -32,6 +32,10 @@
           return true;
         };
 
+        $scope.getUserName = function (user) {
+          return user.firstName + ' ' + user.lastName;
+        };
+
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('usersHeader');
         });

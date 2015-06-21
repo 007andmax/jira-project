@@ -1,5 +1,6 @@
-<div class="create-new-user clearfix" ng-controller="quicktech.core.users.editCtrl">
-  <form>
+<div class="create-new-user clearfix" ng-controller="quicktech.core.users.editCtrl"
+     ng-class="{'edit-user': !!user.id}">
+  <form name="userForm">
     <div class="content clearfix">
       <div class="header clearfix"><h4 class="title">{{ isCreation ? 'Create' : 'Edit' }} User</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit()"><span
@@ -7,137 +8,183 @@
       </div>
       <div ng-init="loadingInProcess = false" edit-avatar user="user" loading-in-process="loadingInProcess"></div>
       <div class="user-fields clearfix">
+
         <div class="row-wrapper clearfix">
-          <div class="form-group dropdown pull-left">
+
+          <div class="form-group dropdown pull-left"
+               ng-class="{error: isShowingErrors(userForm, 'firstName')}">
+
             <label>first name</label>
-            <input type="text" class="form-control " ng-model="user.firstName" aria-expanded="true">
 
+            <div ng-messages="userForm.firstName.$error" ng-if="isShowingErrors(userForm, 'firstName')">
+              <div class="qt-error-msg" ng-message="required">First name is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">First name is too large</div>
+              <div class="qt-error-msg" ng-message="minlength">First name is too short</div>
+            </div>
+
+            <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
+                   name="firstName" ng-model="user.firstName" required="true">
           </div>
-          <div class="form-group dropdown pull-left">
+
+          <div class="form-group dropdown pull-left"
+               ng-class="{error: isShowingErrors(userForm, 'lastName')}">
             <label>last name</label>
-            <input type="text" class="form-control " ng-model="user.lastName" aria-expanded="true">
 
+            <div ng-messages="userForm.lastName.$error" ng-if="isShowingErrors(userForm, 'lastName')">
+              <div class="qt-error-msg" ng-message="required">Last name is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Last name is too large</div>
+              <div class="qt-error-msg" ng-message="minlength">Last name is too short</div>
+            </div>
+
+            <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
+                   name="lastName" ng-model="user.lastName" required="true">
           </div>
         </div>
+
         <div class="row-wrapper clearfix">
-          <div class="form-group dropdown pull-left">
+
+          <div class="form-group dropdown pull-left"
+               ng-class="{error: isShowingErrors(userForm, 'designation')}">
             <label>designation</label>
-            <input type="text" class="form-control " ng-model="user.designation" aria-expanded="true">
 
+            <div ng-messages="userForm.designation.$error" ng-if="isShowingErrors(userForm, 'designation')">
+              <div class="qt-error-msg" ng-message="required">Designation is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
+              <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
+            </div>
+
+            <input type="text" class="form-control " name="designation" aria-expanded="true"
+                   ng-model="user.designation" required="true" ng-minlength="3" ng-maxlength="30">
           </div>
-          <div class="form-group dropdown pull-left">
-            <label>email</label>
-            <input type="text" class="form-control " ng-model="user.primaryEmail" aria-expanded="true">
 
+          <div class="form-group dropdown pull-left"
+               ng-class="{error: isShowingErrors(userForm, 'primaryEmail')}">
+            <label>email</label>
+
+            <div ng-messages="userForm.primaryEmail.$error" ng-if="isShowingErrors(userForm, 'primaryEmail')">
+              <div class="qt-error-msg" ng-message="required"> Email field cannot be left empty.</div>
+              <div class="qt-error-msg" ng-message="email">Invalid email.</div>
+              <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
+            </div>
+
+            <input type="email" class="form-control " value="primaryEmail" aria-expanded="true"
+                   ng-model="user.primaryEmail" required="true" unique-email>
           </div>
         </div>
-        <div class="row-wrapper clearfix" ng-repeat="phoneNumber in user.phoneNumbers">
-          <div class="form-group dropdown pull-left">
-            <label>contact no.</label>
-            <input type="text" class="form-control " ng-model="phoneNumber.number" aria-expanded="true">
 
+        <!--phones form-->
+        <div class="row-wrapper clearfix" ng-repeat="phoneNumber in user.phoneNumbers" ng-init="phoneKey = $index">
+
+          <div class="form-group dropdown pull-left"
+               ng-class="{error: !userForm['phoneNumber' + phoneKey].$valid}">
+            <label>contact no.</label>
+
+            <div ng-messages="userForm['phoneNumber' + phoneKey].$error"
+                 ng-if="!userForm['phoneNumber' + phoneKey].$valid">
+              <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
+              <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
+              <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+            </div>
+
+            <input type="text" class="form-control" name="phoneNumber{{ phoneKey }}" ng-model="phoneNumber.number"
+                   aria-expanded="true" required="true" ng-minlength="3" ng-maxlength="20"
+                   ng-pattern="phoneNumberPattern">
           </div>
+
           <div class="form-group dropdown number-type pull-left">
 
-            <input type="text"
-                   class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
-                   value="" data-toggle="dropdown" aria-expanded="true">
+            <input type="text" ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
+                   aria-expanded="true"
+                   class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor">
 
-            <div class="dropdown-default-value">Mobile</div>
             <ul class="dropdown-menu dropdown-account-type">
-              <li><a tabindex="-1" href="#"> Mobile </a></li>
-              <li><a tabindex="-1" href="#"> Office </a></li>
-              <li><a tabindex="-1" href="#"> Fax </a></li>
-
+              <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
+                <a tabindex="-1" href="#">{{ label }}</a>
+              </li>
             </ul>
 
           </div>
 
-          <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-             data-toggle="tooltip" data-original-title="Remove" data-placement="top"
-             ng-click="removePhoneNumber($index)">
+          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide" data-toggle="tooltip"
+             data-original-title="Remove" data-placement="top" ng-click="removePhoneNumber($index)">
             <span class="icn-remove-update"></span>
           </a>
         </div>
-        <div class="row-wrapper clearfix" ng-if="user.phoneNumbers.length < 3">
+
+        <!--phone template - add phone form-->
+        <div class="row-wrapper clearfix" ng-class="{error: !userForm.phoneNumbers.$valid}"
+             ng-show="user.phoneNumbers.length < maximalAmountOfPhones">
           <div class="form-group dropdown pull-left">
             <label>contact no.</label>
-            <input type="text" class="form-control " ng-model="tmplPhone.number" aria-expanded="true">
 
+            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arrayminlength">Phone Number is required.</div>
+            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arraymaxlength">Only 3 Phone Numbers allowed.</div>
+
+            <input type="hidden" name="phoneNumbers" ng-model="user.phoneNumbers" array-minlength="1" array-maxlength="3">
+            <input type="text" class="form-control" name="templatePhoneNumber" ng-model="templatePhoneNumber.number">
           </div>
+
           <div class="form-group dropdown number-type pull-left">
 
-            <input type="text"
-                   class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
-                   value="" data-toggle="dropdown" aria-expanded="true">
+            <input type="text" ng-model="phoneNumberTypes[templatePhoneNumber.typeNumber]" data-toggle="dropdown"
+                   aria-expanded="true"
+                   class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor">
 
-            <div class="dropdown-default-value">Mobile</div>
             <ul class="dropdown-menu dropdown-account-type">
-              <li><a tabindex="-1" href="#"> Mobile </a></li>
-              <li><a tabindex="-1" href="#"> Office </a></li>
-              <li><a tabindex="-1" href="#"> Fax </a></li>
+              <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="templatePhoneNumber.typeNumber = type">
+                <a tabindex="-1" href="#">{{ label }}</a>
+              </li>
             </ul>
+
           </div>
 
-          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-             data-toggle="tooltip" data-original-title="Add More" data-placement="top" ng-click="addPhoneNumber()">
+          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide" data-toggle="tooltip"
+             data-original-title="Add More" data-placement="top" ng-click="addPhoneNumber()">
             <span class="icn-add"></span>
           </a>
         </div>
+
         <div class="row-wrapper clearfix">
           <div class="form-group cs-type dropdown pull-left">
             <label>account type</label>
-            <input type="text"
-                   class="form-control form-control-dropdown dropdown-toggle hide-cursor"
-                   value="" data-toggle="dropdown" aria-expanded="true">
+            <input type="text" ng-model="roles[user.role]" data-toggle="dropdown" aria-expanded="true"
+                   class="form-control form-control-dropdown dropdown-toggle hide-cursor">
 
-            <div class="dropdown-default-value">User</div>
             <ul class="dropdown-menu dropdown-account-type">
-              <li><a tabindex="-1" href="#"> User </a></li>
-              <li><a tabindex="-1" href="#"> Administrator </a></li>
+              <li ng-repeat="(role, label) in roles" ng-click="user.role = role">
+                <a tabindex="-1" href="#">{{ label }}</a>
+              </li>
             </ul>
           </div>
 
-          <!--<ui-select ng-model="user.role" theme="bootstrap">-->
-          <!--<ui-select-match placeholder="Enter an address...">{{ user.role }}</ui-select-match>-->
-          <!--<ui-select-choices repeat="role in roles track by $index">-->
-          <!--<div ng-bind-html="role | highlight: $select.search"></div>-->
-          <!--</ui-select-choices>-->
-
-          <!--</ui-select>-->
-
-          <div class="form-group dropdown pull-left">
+          <div class="form-group dropdown pull-left"
+               ng-class="{error: isShowingErrors(userForm, 'userCompany')}">
             <label>company</label>
-            <input type="text"
-                   class="form-control form-control-dropdown dropdown-toggle " value=""
-                   data-toggle="dropdown" aria-expanded="true">
-            <ul class="dropdown-menu dropdown-company scroll-pane" qt-scroll-pane role="menu">
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Active
-                Information Systems</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Global
-                Media</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sierra
-                Dental Care</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">South
-                Calgary Periodontal Group</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Silver
-                Star Group</a></li>
-            </ul>
+
+            <div class="qt-error-msg"
+                 ng-show="isShowingErrors(userForm, 'company') && userForm.company.$error.required">
+              Please select the company.
+            </div>
+
+            <input type="text" ng-model="userCompany" class="form-control form-control-dropdown dropdown-toggle"
+                   typeahead="company as company.legalName for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'legalName'"
+                   typeahead-editable="false" typeahead-min-length="0" ng-disabled="user.id" qt-typeahead-show-on-focus
+                   name="userCompany" ng-trim="false" required="true">
           </div>
         </div>
         <div class="row-wrapper clearfix">
           <div class="form-group  cs-type dropdown pull-left">
             <label>subscribe to</label>
-            <input type="text"
-                   class="form-control form-control-dropdown dropdown-toggle hide-cursor"
-                   value="" data-toggle="dropdown" aria-expanded="true">
+            <input type="text" class="form-control form-control-dropdown dropdown-toggle hide-cursor" value=""
+                   data-toggle="dropdown" aria-expanded="true">
 
-            <div class="tokens">
-              <div class="token ticket" ng-if="user.userSubscription.ticket">
+            <div class="tokens" data-toggle="dropdown">
+              <div class="token ticket" ng-show="user.userSubscription.ticket">
                 <span class="token-label">tkt updates</span>
               </div>
 
-              <div class="token invoice" ng-if="user.userSubscription.invoice">
+              <div class="token invoice" ng-show="user.userSubscription.invoice">
                 <span class="token-label">inv. updates</span>
               </div>
             </div>
@@ -146,7 +193,7 @@
               <li><a tabindex="-1" href="#">
                 <div class="clearfix"><label class="control checkbox pull-left">
                   <input type="checkbox" ng-model="user.userSubscription.ticket">
-                  <span class="control-indicator"></span>
+                  <span class="control-indicator" qt-checkbox ng-model="user.userSubscription.ticket"></span>
                 </label>
                   Ticket Updates
                 </div>
@@ -154,7 +201,7 @@
               <li><a tabindex="-1" href="#">
                 <div class="clearfix"><label class="control checkbox pull-left">
                   <input type="checkbox" ng-model="user.userSubscription.invoice">
-                  <span class="control-indicator"></span>
+                  <span class="control-indicator" qt-checkbox ng-model="user.userSubscription.invoice"></span>
                 </label>
                   Invoice Updates
                 </div>
@@ -162,14 +209,13 @@
             </ul>
           </div>
           <div class="form-group dropdown pull-left">
-            <button type="button" class="btn btn-scooter btn-create pull-right" ng-disabled="loadingInProcess">
+            <button type="button" class="btn btn-scooter btn-create pull-right"
+                    ng-disabled="!userForm.$valid || loadingInProcess || savingInProcess" ng-click="save(userForm)">
               {{ isCreation ? 'Create' : 'Save Changes' }}
             </button>
           </div>
         </div>
       </div>
-
     </div>
-
   </form>
 </div>

@@ -25,6 +25,7 @@ module.exports = function(config) {
       'bower_components/jquery/dist/jquery.js',
       'bower_components/jquery-mousewheel/jquery.mousewheel.js',
       'bower_components/angular/angular.js',
+      'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-ui-select/dist/select.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
