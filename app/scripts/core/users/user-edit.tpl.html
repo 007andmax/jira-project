@@ -63,12 +63,12 @@
 
             <div ng-messages="userForm.primaryEmail.$error" ng-if="isShowingErrors(userForm, 'primaryEmail')">
               <div class="qt-error-msg" ng-message="required"> Email field cannot be left empty.</div>
-              <div class="qt-error-msg" ng-message="email">Invalid email.</div>
+              <div class="qt-error-msg" ng-message="pattern">Invalid email.</div>
               <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
             </div>
 
-            <input type="email" class="form-control " value="primaryEmail" aria-expanded="true"
-                   ng-model="user.primaryEmail" required="true" unique-email>
+            <input type="text" class="form-control" name="primaryEmail" aria-expanded="true"
+                   ng-model="user.primaryEmail" required="true" unique-email ng-pattern="emailPattern">
           </div>
         </div>
 
