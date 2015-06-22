@@ -8,9 +8,12 @@ body{
 	    padding: 4px 12px 5px;
 
 }
+.create-new-user .avatar-content .avatar .reposition-wrapper .reposition {
+    line-height: 13px;
+}
 .label{
 	line-height: 8px;
-	  padding: 5px 12px 7px;
+	  padding: 5px 12px 7px !important;
 }
 
 .form-control{
@@ -264,6 +267,9 @@ line-height: 14px;
     bottom: 20px;}
     input[type="range"], .rangeslider {
     	margin: -4px 0px;
+    }
+     .modal-customize-avatr .modal-footer .zoom-slider .range-wrapper  input[type="range"], .rangeslider {
+      margin: -5px 0px;
     }
     .dropdown-filter .filter-slider-wrapper {
     margin-top: 37px;
@@ -557,3 +563,168 @@ aside.right .companies-list-wrapper > li .numbers > .icon {
   margin-top: 10px;}
   .user-fields .dropdown-default-value {
   top: 29px;}
+.create-new-user .user-fields .form-control {
+  padding: 5px 13px 7px;
+}
+.create-new-user .user-fields .form-group .dropdown-subscribe  {
+  padding-top: 9px;
+  padding-bottom: 11px;
+}
+.dropdown-subscribe li a,
+.dropdown-subscribe li a:hover,
+.dropdown-subscribe li a:active {
+  padding: 10px 20px 9px 20px;
+  line-height: 17px;
+  color: #333f50 !important;
+}
+
+.users-list .user .content h3.name {
+  margin-left: -1px;
+}
+.users-list .user-badges {
+  right: 10px;
+}
+
+.users-list .user .content .user-actions {
+  margin-top: 17px;
+}
+
+.users-list .user .content .number {
+  margin-top: 9px;
+}
+
+.users-list .user .content .number .icn-iphone {
+  margin-top: 1px;
+}
+
+.users-list .user .content .company .icn-company {
+  margin-top: 2px;
+}
+
+.users-list .total-tickets .bold {
+  line-height: 18px;
+}
+.company-profile .cover-wrrapper .company-info {
+  margin-top: 178px;
+}
+.company-profile .cover-wrrapper .company-info .info {
+
+    margin-top: 34px;
+}
+.company-profile .cover-wrrapper .company-info .rating {
+    margin-top: 7px;
+}
+.company-profile .cover-wrrapper .company-info .since {
+  margin-top: 25px;
+  margin-bottom: 27px;
+}
+.company-profile .cover-wrrapper .company-info .time-avg .avg {
+  padding: 17px 20px 19px;
+
+}
+.company-profile .cover-wrrapper .company-info .time-avg .time-clock {
+  line-height: 61px;
+}
+
+
+.company-profile .cover-wrrapper .primary .panel-heading .arrows {
+  top: 43px;
+}
+.company-profile .cover-wrrapper .primary .panel-heading .panel-title a {
+  padding-bottom:44px;
+}
+.company-profile .cover-wrrapper .primary .user .name {
+  margin-bottom: 9px;
+}
+.company-profile .cover-wrrapper .primary .user .number {
+  margin-top: 9px;
+}
+.company-profile .cover-wrrapper .primary .user .user-actions {
+  margin-top: 27px;
+}
+.company-profile .cover-wrrapper .primary .location {
+  margin-top: -1px;
+}
+.company-profile .cover-wrrapper .primary .location .site-ref > .btn-location {
+  margin-top: 6px;
+}
+.company-profile .cover-wrrapper .primary .location .company {
+  margin-top: 10px;
+}
+.company-profile .cover-wrrapper .primary .location .about-company {
+    margin-top: 18px;
+}
+.company-profile .charts-wrapper .chart .content .chart-list li {
+  line-height: 12px;
+  margin-bottom: 8px;
+}
+.company-profile .charts-wrapper .tchart .heading .arrows {
+    float: right;
+    margin-top: 0px;
+    margin-right: 0px;
+    height: 13px;
+}
+.company-profile .charts-wrapper .tchart .heading .arrows a {
+    margin-left: 7px;
+}
+.company-profile .charts-wrapper .tchart .chart-area {
+  margin-top: 40px;
+}
+.company-profile .charts-wrapper .tchart .heading .report-nav li {
+ margin-top: 1px;
+line-height: 8px;
+}
+.content-wrapper .content-body .nav-tabs li a {
+  padding-top: 15px;
+  padding-bottom: 17px;
+}
+.company-profile .tabs-wrapper .nav-tabs li .sub-nav {
+  top: 17px;
+}
+
+.company-profile .tabs-wrapper .nav-tabs li .sub-nav li a {
+    padding: 2px 12px 3px;}
+ .company-profile .tabs-wrapper .tab-pane .timeline-wrapper .timeline li .timestamp {
+   line-height: 12px;
+margin-bottom: 9px;
+padding-top: 0px;
+}
+.company-profile .tabs-wrapper .tab-pane .timeline-wrapper .timeline li .user {
+  margin-bottom: 8px;
+}
+.company-profile .tabs-wrapper .tab-pane .timeline-wrapper .timeline li .user div {
+  margin-top: 10px;
+  line-height: 17px;
+}
+.company-profile .tabs-wrapper .tab-pane .timeline-wrapper .timeline-navigation li {
+  margin-bottom: 24px;
+}
+.company-profile .tabs-wrapper .tab-pane .timeline-wrapper .timeline {
+  margin-top: 37px;
+}
+.company-profile .tabs-wrapper .tab-pane {
+    padding-top: 60px;}
+    .company-profile .tabs-wrapper .tab-pane .timeline-wrapper .timeline li {
+      margin-bottom: 26px;
+    }
+    .company-profile .tabs-wrapper .tab-pane .users-lists li.head div > [class^='col-']{
+      line-height: 9px;
+      padding-bottom: 31px;
+}
+.company-profile .tabs-wrapper .tab-pane .users-lists.vendors li.head div > [class^="col-"] {
+    padding-bottom: 30px;
+}
+.company-profile .tabs-wrapper .tab-pane .devices li.head div > [class^="col-"] {
+  padding-bottom: 34px !important;
+}
+.company-profile .tabs-wrapper .tab-pane .devices li div > [class^="col-"] {
+  padding-bottom: 42px !important;
+}
+.company-profile .tabs-wrapper .tab-pane .devices li div > .col-5 {
+    padding-bottom: 30px !important;
+}
+.company-profile .tabs-wrapper .tab-pane .devices li div .col-1 {
+    padding-top: 30px !important;}
+.company-profile .tabs-wrapper .tab-pane .users-lists.devices li div > .col-2 {
+    padding-bottom: 33px !important;
+}

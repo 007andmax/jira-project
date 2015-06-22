@@ -113,7 +113,7 @@
         </div>
 
         <!--phone template - add phone form-->
-        <div class="row-wrapper clearfix" ng-class="{error: !userForm.phoneNumbers.$valid}"
+        <div class="row-wrapper clearfix" ng-class="{error: userForm.$dirty && !userForm.phoneNumbers.$valid}"
              ng-show="user.phoneNumbers.length < maximalAmountOfPhones">
           <div class="form-group dropdown pull-left">
             <label>contact no.</label>
