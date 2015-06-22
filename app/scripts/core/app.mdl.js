@@ -46,6 +46,9 @@
   app.run(
     ['$rootScope', function ($rootScope) {
       $rootScope.getUserAvatarUrl = function (user) {
+        if(!user){
+         return '/users/default/image'
+        }
         return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '');
       }
     }]);
