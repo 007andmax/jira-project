@@ -18,8 +18,8 @@
 
             <div ng-messages="userForm.firstName.$error" ng-if="isShowingErrors(userForm, 'firstName')">
               <div class="qt-error-msg" ng-message="required">First name is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">First name is too large</div>
-              <div class="qt-error-msg" ng-message="minlength">First name is too short</div>
+              <div class="qt-error-msg" ng-message="maxlength">First name is too large.</div>
+              <div class="qt-error-msg" ng-message="minlength">First name is too short.</div>
             </div>
 
             <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
@@ -31,12 +31,12 @@
             <label>last name</label>
 
             <div ng-messages="userForm.lastName.$error" ng-if="isShowingErrors(userForm, 'lastName')">
-              <div class="qt-error-msg" ng-message="required">Last name is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">Last name is too large</div>
-              <div class="qt-error-msg" ng-message="minlength">Last name is too short</div>
+              <div class="qt-error-msg" ng-message="required">Last name requires at least 1 letter.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Last name is too large.</div>
+              <div class="qt-error-msg" ng-message="minlength">Last name is too short.</div>
             </div>
 
-            <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
+            <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
                    name="lastName" ng-model="user.lastName" required="true">
           </div>
         </div>
@@ -48,7 +48,7 @@
             <label>designation</label>
 
             <div ng-messages="userForm.designation.$error" ng-if="isShowingErrors(userForm, 'designation')">
-              <div class="qt-error-msg" ng-message="required">Designation is required.</div>
+              <div class="qt-error-msg" ng-message="required">Please enter a designation.</div>
               <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
               <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
             </div>
@@ -62,7 +62,7 @@
             <label>email</label>
 
             <div ng-messages="userForm.primaryEmail.$error" ng-if="isShowingErrors(userForm, 'primaryEmail')">
-              <div class="qt-error-msg" ng-message="required"> Email field cannot be left empty.</div>
+              <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
               <div class="qt-error-msg" ng-message="pattern">Invalid email.</div>
               <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
             </div>
@@ -118,10 +118,12 @@
           <div class="form-group dropdown pull-left">
             <label>contact no.</label>
 
-            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arrayminlength">Phone Number is required.</div>
-            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arraymaxlength">Only 3 Phone Numbers allowed.</div>
+            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arraymaxlength">Only 3
+              Phone Numbers allowed.
+            </div>
 
-            <input type="hidden" name="phoneNumbers" ng-model="user.phoneNumbers" array-minlength="1" array-maxlength="3">
+            <input type="hidden" name="phoneNumbers" ng-model="user.phoneNumbers"
+                   array-maxlength="{{ maximalAmountOfPhones }}">
             <input type="text" class="form-control" name="templatePhoneNumber" ng-model="templatePhoneNumber.number">
           </div>
 

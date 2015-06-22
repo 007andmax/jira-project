@@ -154,6 +154,34 @@ module.exports = function (grunt) {
           }
         ]
       },
+      beta3DistServer: {
+        proxies: [
+          {
+            context: '/html',
+            host: 'localhost',
+            port: 9000,
+            rewrite: {
+              '^/html': '/app'
+            }
+          },
+          {
+            context: [
+              '/',
+              '!/html',
+              '!/app',
+              '!/dist',
+              '!/bower_components'
+            ],
+            host: 'beta3.quicktech.com',
+            port: 80,
+            https: false,
+            xforward: false,
+            headers: {
+              'is-proxy-mode': true
+            }
+          }
+        ]
+      },
       livereload: {
         options: {
           open: true,
@@ -626,6 +654,20 @@ module.exports = function (grunt) {
       'autoprefixer:server',
       'connect:livereload',
       'watch'
+    ]);
+  });
+
+  grunt.registerTask('serveDist', 'Compile then start a connect web server', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
+    }
+
+    grunt.task.run([
+      'build',
+      'configureProxies:beta3DistServer',
+      'concurrent:server',
+      'autoprefixer:server',
+      'connect:livereload'
     ]);
   });
 

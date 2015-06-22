@@ -14,8 +14,8 @@
 
 Run `grunt serve` for preview.
 If you have started quicktech server on your local environment then run  `grunt serveLocal` for preview.
+If you need to test compiled code then run `grunt serveDist` for preview.
 
-To apply changes on beta3 server run `grunt build` before commit 
 
 NOTE: Do not commit node_modules, bower_components, .tmp, dist folders and app/index.html file!
 
