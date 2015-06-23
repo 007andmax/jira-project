@@ -23,7 +23,7 @@
             </div>
 
             <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
-                   name="firstName" ng-model="user.firstName" required="true">
+                   name="firstName" ng-model="user.firstName" required="true" make-dirty-on-blur>
           </div>
 
           <div class="form-group dropdown pull-left"
@@ -37,7 +37,7 @@
             </div>
 
             <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
-                   name="lastName" ng-model="user.lastName" required="true">
+                   name="lastName" ng-model="user.lastName" required="true" make-dirty-on-blur>
           </div>
         </div>
 
@@ -53,7 +53,7 @@
               <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
             </div>
 
-            <input type="text" class="form-control " name="designation" aria-expanded="true"
+            <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
                    ng-model="user.designation" required="true" ng-minlength="3" ng-maxlength="30">
           </div>
 
@@ -63,11 +63,11 @@
 
             <div ng-messages="userForm.primaryEmail.$error" ng-if="isShowingErrors(userForm, 'primaryEmail')">
               <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
-              <div class="qt-error-msg" ng-message="pattern">Invalid email.</div>
+              <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
               <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
             </div>
 
-            <input type="text" class="form-control" name="primaryEmail" aria-expanded="true"
+            <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
                    ng-model="user.primaryEmail" required="true" unique-email ng-pattern="emailPattern">
           </div>
         </div>
@@ -89,7 +89,7 @@
 
             <input type="text" class="form-control" name="phoneNumber{{ phoneKey }}" ng-model="phoneNumber.number"
                    aria-expanded="true" required="true" ng-minlength="3" ng-maxlength="20"
-                   ng-pattern="phoneNumberPattern">
+                   ng-pattern="phoneNumberPattern" make-dirty-on-blur>
           </div>
 
           <div class="form-group dropdown number-type pull-left">
@@ -106,8 +106,8 @@
 
           </div>
 
-          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide" data-toggle="tooltip"
-             data-original-title="Remove" data-placement="top" ng-click="removePhoneNumber($index)">
+          <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+             tooltip="Remove Contact no." tooltip-placement="top" ng-click="removePhoneNumber($index)">
             <span class="icn-remove-update"></span>
           </a>
         </div>
@@ -118,13 +118,14 @@
           <div class="form-group dropdown pull-left">
             <label>contact no.</label>
 
-            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arraymaxlength">Only 3
-              Phone Numbers allowed.
+            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arraymaxlength">
+              Only 3 Phone Numbers allowed.
             </div>
 
             <input type="hidden" name="phoneNumbers" ng-model="user.phoneNumbers"
                    array-maxlength="{{ maximalAmountOfPhones }}">
-            <input type="text" class="form-control" name="templatePhoneNumber" ng-model="templatePhoneNumber.number">
+            <input type="text" class="form-control" name="templatePhoneNumber" ng-model="templatePhoneNumber.number"
+                   make-dirty-on-blur>
           </div>
 
           <div class="form-group dropdown number-type pull-left">
@@ -141,8 +142,8 @@
 
           </div>
 
-          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide" data-toggle="tooltip"
-             data-original-title="Add More" data-placement="top" ng-click="addPhoneNumber()">
+          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+             tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()">
             <span class="icn-add"></span>
           </a>
         </div>
@@ -165,14 +166,14 @@
             <label>company</label>
 
             <div class="qt-error-msg"
-                 ng-show="isShowingErrors(userForm, 'company') && userForm.company.$error.required">
+                 ng-show="isShowingErrors(userForm, 'userCompany') && userForm.userCompany.$error">
               Please select the company.
             </div>
 
             <input type="text" ng-model="userCompany" class="form-control form-control-dropdown dropdown-toggle"
                    typeahead="company as company.legalName for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'legalName'"
                    typeahead-editable="false" typeahead-min-length="0" ng-disabled="user.id" qt-typeahead-show-on-focus
-                   name="userCompany" ng-trim="false" required="true">
+                   name="userCompany" ng-trim="false" required="true" ng-focus="onFocus($event)">
           </div>
         </div>
         <div class="row-wrapper clearfix">

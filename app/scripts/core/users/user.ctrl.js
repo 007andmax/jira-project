@@ -6,12 +6,15 @@
     ['$scope',
       function ($scope) {
 
-        $scope.startEditUser = function () {
-          $scope.isEdit = true;
-        };
+        $scope.checkEditUserId = function (index) {
 
-        $scope.cancelEditUser = function () {
-          $scope.isEdit = false;
+          if (index % 2) {
+            return $scope.editUserId === $scope.user.id
+              || $scope.editUserId === $scope.shownUsers[index - 1].id;
+          } else {
+            return $scope.editUserId === $scope.user.id && (index + 1) === $scope.shownUsers.length;
+          }
+
         };
 
       }]);

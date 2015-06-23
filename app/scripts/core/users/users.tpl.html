@@ -2,9 +2,9 @@
   <!--<ng-include src="'/html/scripts/core/users/user-edit.tpl.html'"></ng-include>-->
   <div ui-view></div>
   <div class="users-list clearfix">
-    <div ng-repeat="user in users | filter : usersFilter | orderBy: getUserName"
+    <div ng-repeat="user in (shownUsers = (users | filter : usersFilter | orderBy: getUserName))"
          ng-controller="quicktech.core.users.userCtrl">
-      <div class="user" ng-if="!isEdit">
+      <div class="user">
         <div class="content">
           <ul class="user-badges">
             <li ng-if="subscriptions[user.id].ticket" id="{{ user.id + '-has-ticket-updates' }}"
@@ -24,7 +24,7 @@
             </h3>
           <span class="pull-left">
           <a href="javascript:void(0)" class="icn-edit tp-hide" data-toggle="tooltip" data-placement="top"
-             title="" data-original-title="Edit user" ng-click="startEditUser()"></a>
+             title="" data-original-title="Edit user" ng-click="setEditUserId(user.id)"></a>
         </span>
           </div>
           <div class="status pull-left"><span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
@@ -130,7 +130,7 @@
 
         <div class="avatar"><img ng-src="{{ getUserAvatarUrl(user) }}"></div>
       </div>
-      <div ng-if="isEdit">
+      <div ng-if="checkEditUserId($index)">
         <div class="clearfix"></div>
         <div ng-include="'/html/scripts/core/users/user-edit.tpl.html'"></div>
       </div>

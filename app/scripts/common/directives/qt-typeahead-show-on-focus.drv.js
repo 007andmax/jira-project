@@ -13,9 +13,10 @@
 
           element.on('focus', function () {
             $timeout(function () {
-              $(element).trigger('input');
+              modelCtrl.$setViewValue(modelCtrl.$viewValue)
+              //$(element).trigger('input');
               $(element).trigger('change'); // for IE
-            }, 100);
+            });
           });
 
           // this parser run before typeahead's parser

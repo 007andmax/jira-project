@@ -26,14 +26,18 @@
         });
 
         $scope.usersFilter = function (value) {
-          if (value && value.length > 0) {
-            return (value.firstName + ' ' + value.lastName).indexOf(headerSharedState.filter) > -1;
+          if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
+            return (value.firstName + ' ' + value.lastName).toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
           }
           return true;
         };
 
         $scope.getUserName = function (user) {
           return user.firstName + ' ' + user.lastName;
+        };
+
+        $scope.setEditUserId = function (userId) {
+          $scope.editUserId = userId;
         };
 
         $scope.$on('$destroy', function () {

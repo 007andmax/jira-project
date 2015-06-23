@@ -38,7 +38,8 @@
       })
       .state('users.create', {
         url: '/create',
-        templateUrl: '/html/scripts/core/users/user-edit.tpl.html'
+        templateUrl: '/html/scripts/core/users/user-edit.tpl.html',
+        controller: 'quicktech.core.users.createUserCtrl'
       });
 
   }]);

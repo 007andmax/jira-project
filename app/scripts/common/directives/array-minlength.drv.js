@@ -3,7 +3,6 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("arrayMinlength", function () {
-    "use strict";
     return {
       restrict: 'A',
       require: 'ngModel',

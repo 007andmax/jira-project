@@ -6,6 +6,8 @@
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state) {
 
+        $scope.user = undefined;
+
         templatePhoneNumber();
 
         $scope.maximalAmountOfPhones = 3;
@@ -25,45 +27,47 @@
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-        var isEdit = $scope.user;
+        $scope.$watch('editUserId', function () {
 
-        if (!isEdit) {
-          $scope.isCreation = true;
-          $scope.user = {
-            role: 'USER',
-            phoneNumbers: [],
-            userSubscription: {},
-            avatar: {
-              scale: 50
-            }
-          };
+          if (!$scope.editUserId) {
+            $scope.isCreation = true;
+            $scope.user = {
+              role: 'USER',
+              phoneNumbers: [],
+              userSubscription: {},
+              avatar: {
+                scale: 50
+              }
+            };
 
-          $scope.$watch('userCompany', function (userCompany) {
-            $scope.user.companyId = userCompany ? userCompany.id : undefined;
-          });
+            $scope.$watch('userCompany', function (userCompany) {
+              $scope.user.companyId = userCompany ? userCompany.id : undefined;
+            });
 
-        } else {
-          var userSubscription = $scope.subscriptions[$scope.user.id];
-          var avatar = $scope.user.avatar;
+          } else {
+            var user = UsersService.getOneById($scope.editUserId);
+            var userSubscription = $scope.subscriptions[user.id];
+            var avatar = user.avatar;
 
-          userSubscription = userSubscription ? userSubscription.staticCopy() : {};
-          avatar = avatar ? avatar.staticCopy() : {};
+            userSubscription = userSubscription ? userSubscription.staticCopy() : {};
+            avatar = avatar ? avatar.staticCopy() : {};
 
-          $scope.userCompany = CompaniesService.getOneById($scope.user.company.id);
+            $scope.userCompany = CompaniesService.getOneById(user.company.id);
 
-          $scope.user = {
-            id: $scope.user.id,
-            firstName: $scope.user.firstName,
-            lastName: $scope.user.lastName,
-            designation: $scope.user.designation,
-            role: $scope.user.role,
-            primaryEmail: $scope.user.primaryEmail,
-            phoneNumbers: $scope.user.phoneNumbers.staticCopy(),
-            companyId: $scope.user.company.id,
-            userSubscription: userSubscription,
-            avatar: avatar
-          };
-        }
+            $scope.user = {
+              id: user.id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              designation: user.designation,
+              role: user.role,
+              primaryEmail: user.primaryEmail,
+              phoneNumbers: user.phoneNumbers.staticCopy(),
+              companyId: user.company.id,
+              userSubscription: userSubscription,
+              avatar: avatar
+            };
+          }
+        });
 
         $scope.addPhoneNumber = function () {
           $scope.user.phoneNumbers.push($scope.templatePhoneNumber);
@@ -75,8 +79,8 @@
         };
 
         $scope.cancelEdit = function () {
-          if (isEdit) {
-            $scope.cancelEditUser();
+          if (!!$scope.editUserId) {
+            $scope.setEditUserId();
           } else {
             $state.go('users');
           }
@@ -105,7 +109,7 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (isEdit || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form[fieldName] && (!!$scope.editUserId || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
         function templatePhoneNumber() {
