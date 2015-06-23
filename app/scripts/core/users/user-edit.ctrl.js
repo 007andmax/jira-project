@@ -8,8 +8,6 @@
 
         $scope.user = undefined;
 
-        templatePhoneNumber();
-
         $scope.maximalAmountOfPhones = 3;
         $scope.phoneNumberPattern = /^\+?\(?[0-9]{3}(\-|\) ?| )[0-9]{3}(\-| )[0-9]{4}$/;
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -67,11 +65,16 @@
               avatar: avatar
             };
           }
+
+          if ($scope.user.phoneNumbers.length === 0) {
+            $scope.addPhoneNumber();
+          }
         });
 
         $scope.addPhoneNumber = function () {
-          $scope.user.phoneNumbers.push($scope.templatePhoneNumber);
-          templatePhoneNumber();
+          $scope.user.phoneNumbers.unshift({
+            typeNumber: 'MOBILE'
+          });
         };
 
         $scope.removePhoneNumber = function (index) {
@@ -101,6 +104,13 @@
           if (form.$valid) {
             $scope.savingInProcess = true;
 
+            var phoneNumbers = $scope.user.phoneNumbers,
+              lastPhone = phoneNumbers[phoneNumbers.length - 1];
+
+            if (!lastPhone.number || lastPhone.number.trim().length === 0) {
+              phoneNumbers.splice(phoneNumbers.length - 1, 1);
+            }
+
             UsersService.save($scope.user, function () {
               $scope.savingInProcess = false;
               $scope.cancelEdit();
@@ -111,12 +121,6 @@
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && (!!$scope.editUserId || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
-
-        function templatePhoneNumber() {
-          $scope.templatePhoneNumber = {
-            typeNumber: 'MOBILE'
-          };
-        }
 
       }]);
 

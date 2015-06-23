@@ -73,79 +73,79 @@
         </div>
 
         <!--phones form-->
-        <div class="row-wrapper clearfix" ng-repeat="phoneNumber in user.phoneNumbers" ng-init="phoneKey = $index">
+        <div class="row-wrapper clearfix" ng-repeat="phoneNumber in user.phoneNumbers">
 
-          <div class="form-group dropdown pull-left"
-               ng-class="{error: !userForm['phoneNumber' + phoneKey].$valid}">
-            <label>contact no.</label>
+          <div ng-if="$index !== user.phoneNumbers.length - 1">
+            <div class="form-group dropdown pull-left"
+                 ng-class="{error: !userForm['phoneNumber' + $index].$valid}">
+              <label>contact no.</label>
 
-            <div ng-messages="userForm['phoneNumber' + phoneKey].$error"
-                 ng-if="!userForm['phoneNumber' + phoneKey].$valid">
-              <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
-              <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
-              <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+              <div ng-messages="userForm['phoneNumber' + $index].$error"
+                   ng-if="!userForm['phoneNumber' + $index].$valid">
+                <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
+                <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
+                <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
+                <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+              </div>
+
+              <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
+                     aria-expanded="true" required="true" ng-minlength="3" ng-maxlength="20"
+                     ng-pattern="phoneNumberPattern" make-dirty-on-blur>
             </div>
 
-            <input type="text" class="form-control" name="phoneNumber{{ phoneKey }}" ng-model="phoneNumber.number"
-                   aria-expanded="true" required="true" ng-minlength="3" ng-maxlength="20"
-                   ng-pattern="phoneNumberPattern" make-dirty-on-blur>
-          </div>
+            <div class="form-group dropdown number-type pull-left">
 
-          <div class="form-group dropdown number-type pull-left">
+              <input type="text" ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
+                     aria-expanded="true"
+                     class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor">
 
-            <input type="text" ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
-                   aria-expanded="true"
-                   class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor">
-
-            <ul class="dropdown-menu dropdown-account-type">
-              <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
-                <a tabindex="-1" href="#">{{ label }}</a>
-              </li>
-            </ul>
-
-          </div>
-
-          <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-             tooltip="Remove Contact no." tooltip-placement="top" ng-click="removePhoneNumber($index)">
-            <span class="icn-remove-update"></span>
-          </a>
-        </div>
-
-        <!--phone template - add phone form-->
-        <div class="row-wrapper clearfix" ng-class="{error: userForm.$dirty && !userForm.phoneNumbers.$valid}"
-             ng-show="user.phoneNumbers.length < maximalAmountOfPhones">
-          <div class="form-group dropdown pull-left">
-            <label>contact no.</label>
-
-            <div class="qt-error-msg" ng-show="userForm.$dirty && userForm.phoneNumbers.$error.arraymaxlength">
-              Only 3 Phone Numbers allowed.
+              <ul class="dropdown-menu dropdown-account-type">
+                <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
+                  <a tabindex="-1" href="#">{{ label }}</a>
+                </li>
+              </ul>
             </div>
 
-            <input type="hidden" name="phoneNumbers" ng-model="user.phoneNumbers"
-                   array-maxlength="{{ maximalAmountOfPhones }}">
-            <input type="text" class="form-control" name="templatePhoneNumber" ng-model="templatePhoneNumber.number"
-                   make-dirty-on-blur>
+            <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+               tooltip="Remove Contact no." tooltip-placement="top" ng-click="removePhoneNumber($index)">
+              <span class="icn-remove-update"></span>
+            </a>
           </div>
 
-          <div class="form-group dropdown number-type pull-left">
+          <div ng-if="$index === user.phoneNumbers.length - 1">
+            <div class="form-group dropdown pull-left" ng-class="{error: !userForm['phoneNumber' + $index].$valid}">
+              <label>contact no.</label>
 
-            <input type="text" ng-model="phoneNumberTypes[templatePhoneNumber.typeNumber]" data-toggle="dropdown"
-                   aria-expanded="true"
-                   class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor">
+              <div ng-messages="userForm['phoneNumber' + $index].$error"
+                   ng-if="!userForm['phoneNumber' + $index].$valid">
+                <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
+                <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+              </div>
 
-            <ul class="dropdown-menu dropdown-account-type">
-              <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="templatePhoneNumber.typeNumber = type">
-                <a tabindex="-1" href="#">{{ label }}</a>
-              </li>
-            </ul>
+              <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
+                     aria-expanded="true" ng-maxlength="20" ng-pattern="phoneNumberPattern" make-dirty-on-blur>
+            </div>
 
+            <div class="form-group dropdown number-type pull-left">
+
+              <input type="text" ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
+                     aria-expanded="true"
+                     class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor">
+
+              <ul class="dropdown-menu dropdown-account-type">
+                <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
+                  <a tabindex="-1" href="#">{{ label }}</a>
+                </li>
+              </ul>
+
+            </div>
+
+            <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+               tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()"
+               ng-disabled="user.phoneNumbers.length >= maximalAmountOfPhones">
+              <span class="icn-add"></span>
+            </a>
           </div>
-
-          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-             tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()">
-            <span class="icn-add"></span>
-          </a>
         </div>
 
         <div class="row-wrapper clearfix">

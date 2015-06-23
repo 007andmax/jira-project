@@ -130,7 +130,7 @@
 
         <div class="avatar"><img ng-src="{{ getUserAvatarUrl(user) }}"></div>
       </div>
-      <div ng-if="checkEditUserId($index)">
+      <div ng-if="editUserId === user.id">
         <div class="clearfix"></div>
         <div ng-include="'/html/scripts/core/users/user-edit.tpl.html'"></div>
       </div>
