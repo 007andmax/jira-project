@@ -15,13 +15,13 @@
         return company.legalName != undefined ? company.legalName : '';
       }
 
-      $scope.getCompanyOwner = function (companyId) {
-        if (companyId)
-          var company = CompaniesService.getOneById(companyId);
-        else
-          return '';
-        return company.primaryUser.id != undefined ? company.primaryUser.id : '';
-      }
+      //$scope.getCompanyOwner = function (companyId) {
+      //  if (companyId)
+      //    var company = CompaniesService.getOneById(companyId);
+      //  else
+      //    return '';
+      //  return company.primaryUser.id != undefined ? company.primaryUser.id : '';
+      //}
 
       $scope.filterUserByCompany = function (company) {
         $scope.companyUsers = CompaniesService.getAllByCompanyId(company.id);

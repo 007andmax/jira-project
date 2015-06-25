@@ -119,7 +119,7 @@
           </div>
           <div class="number pull-left" ng-if="user.phoneNumbers.length > 0">
             <span class="icn icn-iphone"></span>
-            <span>{{ user.phoneNumbers[0].number }}</span>
+            <span>{{ user.phoneNumbers[user.phoneNumbers.length - 1].number }}</span>
           </div>
           <div class="company pull-left">
             <span class="icn icn-company"></span>
