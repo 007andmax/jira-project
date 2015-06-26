@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.common.directives").directive('uniqueEmail',
+  angular.module("quicktech.core.users").directive('uniqueUserEmail',
     [function () {
       return {
         restrict: 'A',
