@@ -1,0 +1,43 @@
+'use strict';
+
+(function () {
+
+  angular.module('quicktech.core.users').controller('quicktech.core.companies.companyCtrl',
+    ['$scope',
+      function ($scope) {
+
+        $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
+          var primaryContact,
+            primaryAddress,
+            primaryPhone;
+
+          if (newInfo) {
+
+            for (var i = 0; i < newInfo.contacts.length; i++) {
+              if (!primaryContact || newInfo.contacts[i].priority < primaryContact.priority)
+                primaryContact = newInfo.contacts[i];
+            }
+
+            for (var i = 0; i < newInfo.addresses.length; i++) {
+              if (newInfo.addresses[i].isPrimary) {
+                primaryAddress = newInfo.addresses[i];
+              }
+            }
+
+            if (primaryAddress) {
+              for (var i = 0; i < primaryAddress.phoneNumbers.length; i++) {
+                if (!primaryPhone || primaryAddress.phoneNumbers[i].priority < primaryPhone.priority)
+                  primaryPhone = primaryAddress.phoneNumbers[i];
+              }
+            }
+          }
+
+          $scope.primaryContact = primaryContact;
+          $scope.primaryAddress = primaryAddress;
+          $scope.primaryPhone = primaryPhone;
+
+        });
+
+      }]);
+
+}());

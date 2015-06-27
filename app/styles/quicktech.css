@@ -4455,7 +4455,13 @@ th {
     text-transform: uppercase;
     color: #e53935;
   }
-
+  .error-alone{
+     font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #e53935;
+margin-left: 7px;
+  }
   /* line 604, ../sass/bootstrap/_forms.scss */
   .form-control-round {
     background-color: #e9edf1;
@@ -5888,7 +5894,7 @@ th {
       z-index: 10000;
       display: none;
       float: left;
-      min-width: 152px;
+      min-width: 163px;
       padding: 10px 0;
       margin: 6px 0 0;
       list-style: none;
@@ -10392,7 +10398,16 @@ a.btn-remote-access{
   border-radius: 3px;
   overflow: hidden;
 }
-
+.popover-location-right {
+  width: 300px;
+  height: 158px;
+  padding: 0px;
+  z-index: 100000;
+  margin-top: -4px !important;
+  margin-left: 82px;
+  border-radius: 3px;
+  overflow: hidden;
+}
 /* line 143, ../sass/bootstrap/_popovers.scss */
 .popover-userinfo .popover-title {
   padding:0;
@@ -20179,7 +20194,7 @@ height: 60px !important;
     width: 10px;
   }
   /* line 403, ../sass/bootstrap/_icons-sprite.scss */
-  .icn-close-modal:active , .close:hover  .icn-close-modal , .close:active  .icn-close-modal  {
+  .icn-close-modal:active , .close:hover  .icn-close-modal , .close:active  .icn-close-modal ,  .icn-close-modal:hover   {
     background-position: -736px 0;
     height: 10px;
     width: 10px;
@@ -20254,7 +20269,11 @@ height: 60px !important;
     width: 12px;
     height: 7px;
   }
-
+  .collaps-charts:hover .icn-collapse{
+    background-position: -1579px -206px;
+    width: 12px;
+    height: 7px;
+  }
 
 
 

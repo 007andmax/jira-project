@@ -11,6 +11,8 @@
             return 'tickets';
           } else if ($state.includes("users")) {
             return 'users';
+          } else if ($state.includes("companies") || $state.includes("createCompany")) {
+            return 'companies';
           }
         }
 

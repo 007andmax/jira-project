@@ -59,7 +59,7 @@ padding-top: 30px;
 .users-list .user .content{
 	width: calc(100% - 179px);
 	float: left;
-	padding: 28px 30px 30px;
+	padding: 28px 30px 30px; 
 	position: relative;
 }
 .users-list .user .content h3{
@@ -103,7 +103,7 @@ margin-right: 6px;
   font-weight: 600;
   margin-top: 0px;
   max-width: calc(100% - 14px);
-  overflow: hidden;
+  overflow: hidden; 
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 11px;
@@ -191,7 +191,7 @@ margin-right: 6px;
 float: left;
 margin-left: 6px;
        }
-
+   
         .devices-menu li a{
   padding: 11px 20px;
           }
@@ -203,7 +203,7 @@ margin-left: 6px;
 
        }
       .users-list .icn-ticket-more{
-       	height: 4px !important;
+       	height: 4px !important; 
        }
    .dropdown-menu  .dropdown-submenu-wrapper .dropdown-subscribe{
       	width: 160px;
@@ -224,18 +224,18 @@ margin-left: 6px;
       		width: 121px;
       		min-width: 121px;
       }
-        .dropdown-privilege li.active a{
+        .dropdown-privilege li.active a{ 
         background-color: #e0f5f7 !important;
         cursor: default;}
 
 
-
+    
 
     .create-new-user .content{
     	position: relative;
     	margin: 0 auto;
-    	width: 501px;
-    	padding-bottom: 40px;
+    	width: 501px;  
+    	padding-bottom: 40px;  
     }
 .create-new-user .header h4{
     	font-weight: 600;
@@ -305,7 +305,7 @@ border-radius: 0px;
          .create-new-user .avatar-content  .select-file {
   position: relative;
 }
-
+  
   .create-new-user .avatar-content .select-file input {
  display: none;
 }
@@ -344,6 +344,7 @@ border-radius: 0px;
 	width: 245px;
 	margin-bottom: 0px;
 }
+
 .create-new-user .user-fields .form-group.full{
   width: 100%;
   margin: 0px;
@@ -439,7 +440,7 @@ border-radius: 0px;
   -o-border-radius: 15px;
   border-radius: 15px;
  cursor: pointer;
-}
+}  
 .create-new-user .user-fields .form-group  .token.invoice{
 	 border: 0px;
   background-color: #4caf50;
@@ -477,7 +478,7 @@ border-radius: 0px;
 .create-new-user .user-fields .form-group .form-control-number-type.focus{
 	color: #9fabb9;
 	background-color: #9fabb9;
-	border-color: #9fabb9;
+	border-color: #9fabb9;	
   border-radius:3px;
 }
 
@@ -486,10 +487,13 @@ border-radius: 0px;
 	width: 197px;
   margin-top: 17px;
 }
+.create-new-user .user-fields .number-type.form-group.fullt {
+width: 245px;
+}
 .create-new-user .user-fields .number-type:active .form-control,
 .create-new-user .user-fields .number-type:focus .form-control{
   background-color: #9fabb9;
-  border-color: #9fabb9;
+  border-color: #9fabb9;  
     border-radius:3px;
 
 }
@@ -522,7 +526,7 @@ background-color: #333f50;
 	margin-top: 17px;
 }
 
-.icn-user-device {
+.icn-user-device { 
   background-position: -522px 0px;
   height: 12px;
   width: 12px;
@@ -778,7 +782,7 @@ background-color: #333f50;
 .icn-zoom-minus:hover,
 .icn-zoom-minus:active{
   background-position: -2261px -100px;
-
+ 
 }
 .icn-zoom-plus {
 	    background-position: -2191px -100px;
@@ -788,7 +792,7 @@ background-color: #333f50;
 .icn-zoom-plus:hover,
 .icn-zoom-plus:active{
 	    background-position: -2211px -100px;
-
+ 
 }
 .edit-user{
 	background: #f0fafb;
@@ -800,8 +804,7 @@ background-color: #333f50;
 }
 .modal-customize-avatr > .modal-dialog {
   width: 640px;
-   /*margin-top: -325px;*/
-   margin-top: -40%;
+   margin-top: -325px;
 }
 .modal-customize-avatr .modal-header{
 	border-bottom: 0px;
@@ -870,19 +873,19 @@ background-color: #333f50;
 
 @media (max-width: 1900px) {
   .users-list .user{
-       width:calc(100% / 2 - 40px);
+       width:calc(100% / 2 - 40px); 
 }
 }
 @media (max-width: 1400px) {
   .users-list .user{
        width:calc(100% / 1 - 40px);
-
+  
 }
 }
 @media (min-width: 2400px) {
   .users-list .user{
        width:calc(100% / 4 - 40px);
-}
+} 
 }
 @media (min-width: 2900px) {
   .users-list .user{
@@ -892,7 +895,7 @@ background-color: #333f50;
 
 @media (min-width: 3400px) {
   .users-list .user{
-       width:calc(100% / 6 - 40px);
+       width:calc(100% / 6 - 40px); 
 }
 
 }

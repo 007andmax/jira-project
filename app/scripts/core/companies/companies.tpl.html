@@ -1,0 +1,161 @@
+<div class="content-body company-profile compaines">
+  <div class="charts-wrapper clearfix">
+    <div class="charts-row">
+      <!--<div class="chart devices">-->
+      <!--<div class="content">-->
+      <!--<div class="device-circle"></div>-->
+
+      <!--<ul class="chart-list report-nav">-->
+      <!--<li><span class="circle blue"></span> Clients</li>-->
+      <!--<li><span class="circle green"></span> Portable Devices</li>-->
+      <!--<li><span class="circle orange"></span> Printers</li>-->
+      <!--<li><span class="circle dark-orange"></span> Member Servers</li>-->
+      <!--<li><span class="circle red"></span> Member Servers</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="chart tickets resolution">-->
+      <!--<div class="content">-->
+      <!--<div class="resolution-circle"></div>-->
+      <!--<ul class="chart-list report-nav">-->
+      <!--<div class="hd"><span class="bold">Tkt Resolutions</span>-->
+      <!--<span class="amount">All Time</span></div>-->
+      <!--<li><span class="circle blue"></span> Quick</li>-->
+      <!--<li><span class="circle dark-orange"></span> DELAYED</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <div class="chart timed-online-device ">
+        <div class="service">
+          <div class="contents">
+            <div class="icon-wrapper"><span class="icn icn-cservice"></span></div>
+            <div class="status">
+              <h4>service time billed</h4>
+
+              <div class="time"><span class="hour">685 </span>hrs</div>
+            </div>
+          </div>
+        </div>
+
+        <!--<div class="devices">-->
+        <!--<div class="contents">-->
+        <!--<div class="icon-wrapper"><span class="icn icn-cdevice"></span></div>-->
+        <!--<div class="status">-->
+        <!--<h4>online devices</h4>-->
+
+        <!--<div class="time"><span class="hour">628 </span></div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+    </div>
+
+    <!--<div class="charts-row">-->
+    <!--<div class="tchart">-->
+    <!--<div class="heading">-->
+    <!--<span class="bold">Top 10 Companies</span>-->
+    <!--<span class="amount">Contributed to Earnings</span>-->
+    <!--<span class="label green pull-right">4.6M USD</span>-->
+    <!--</div>-->
+    <!--<div class="chart-area"></div>-->
+    <!--</div>-->
+    <!--<div class="tchart last">-->
+    <!--<div class="heading">-->
+    <!--<span class="bold">Top 10 Companies</span>-->
+    <!--<span class="amount">Most Tickets Resolved</span>-->
+    <!--<span class="label blue pull-right">24,640 TICKETS</span>-->
+    <!--</div>-->
+    <!--<div class="chart-area"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+  </div>
+
+  <div class="collaps-charts">
+    <span class="collaps-pointer"> <span class="icn icn-collapse abc"></span> </span>
+  </div>
+
+  <div class="companies-list clearfix">
+
+    <div class="company clearfix" ng-repeat="company in companies" ng-controller="quicktech.core.companies.companyCtrl">
+      <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
+        <div class="overlay"></div>
+        <div class="archive-btn"><a class="black-btn" href="#"><span class="icn archive-company"></span></a></div>
+        <div class="company-info">
+          <h3 class="name"> {{ company.name }} </h3>
+
+          <div class="ac-start-wrapper clearfix">
+            <ul class="rating rating-5 clearfix pull-left">
+              <li class="icn-star-full star-1"></li>
+              <li class="icn-star-full star-2"></li>
+              <li class="icn-star-full star-3"></li>
+              <li class="icn-star-full star-4"></li>
+              <li class="icn-star-half star-5"></li>
+            </ul>
+
+            <div class="dot-sep pull-left"></div>
+
+            <a href="#" class="icn-wrapper pull-left" popover="{{ company.description }}" popover-placement="bottom"
+               popover-trigger="mouseenter">
+              <span class="icn company-detail"></span>
+            </a>
+
+            <a href="#" class="icn-wrapper tp-hide pull-left" tooltip-placement="top" tooltip="Edit Company info">
+              <span class="icn icn-edit-tag"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="company-information clearfix">
+        <div class="clearfix name-wrpper">
+          <a herf="" class="pull-left thumb avatar m-r">
+            <img ng-src="{{ getContactAvatarUrl(primaryContact) }}" alt="..." class="img-circle">
+          </a>
+
+          <div class="user-inf pull-left">
+            <h4 class="name">{{ primaryContact.firstName }} {{ primaryContact.lastName }}</h4>
+
+            <div class="status pull-left"><span class="dot on"></span> <span
+              class="label label-white pull-left label-ticket-number">{{ primaryContact.designation }}</span>
+
+
+              <ul class="user-badges pull-left">
+                <li id="has-ticket-updates1" class="icn icn-ticket-updates tp-hide" tooltip="subscriber ticket updates"
+                    tooltip-placement="top" ng-show="primaryContact.subscription.ticket"></li>
+                <li id="has-invoice-updates1" class="icn icn-invoice-updates tp-hide" tooltip-placement="top"
+                    tooltip="subscriber invoice updates" ng-show="primaryContact.subscription.ticket"></li>
+                <!--<li id="has-admin1" class="icn admin tp-hide" data-title="admin" data-toggle="tooltip"-->
+                <!--data-container="#has-admin1" data-placement="top" data-original-title="" title=""></li>-->
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="clearfix">
+          <div class="ci number clearfix">
+            <span class="icn icn-fax-machine"></span>
+            <span class="txt">{{ primaryPhone.number }}</span>
+          </div>
+          <div class="ci location clearfix">
+            <span class="icn icn-sb-location"></span>
+            <span class="txt">{{ primaryAddress.address }}</span>
+          </div>
+        </div>
+
+        <div class="clearfix company-actions">
+          <a href="#" class="btn btn-scooter btn-update pull-left" style="margin-right: 10px;">
+            <div class="icn-white-mail"></div>
+          </a>
+
+          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp" data-placement="top"
+               data-original-title="chat">
+            <span class="icn icn-user-chat"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

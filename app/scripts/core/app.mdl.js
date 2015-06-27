@@ -40,18 +40,36 @@
         url: '/create',
         templateUrl: '/html/scripts/core/users/user-edit.tpl.html',
         controller: 'quicktech.core.users.createUserCtrl'
-      });
+      })
+      .state('companies', {
+        url: '/companies',
+        templateUrl: '/html/scripts/core/companies/companies.tpl.html',
+        controller: 'quicktech.core.companies.companiesCtrl'
+      })
+      .state('createCompany', {
+        url: '/companies/create',
+        templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
+        controller: 'quicktech.core.companies.editCompanyCtrl'
+      })
 
   }]);
 
   app.run(
     ['$rootScope', function ($rootScope) {
       $rootScope.getUserAvatarUrl = function (user) {
-        if(!user){
-         return '/users/default/image'
+        if (!user) {
+          return '/users/default/image'
         }
         return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '');
       }
+
+      $rootScope.getContactAvatarUrl = function (contact) {
+        if (!contact) {
+          return '/contacts/default/image'
+        }
+        return '/contacts/' + (contact.id || 'default') + '/image' + (contact.avatar ? '?t=' + contact.avatar.updatedAt : '');
+      }
+
     }]);
 
 }());

@@ -16,6 +16,10 @@
         usersHeader: {
           count: 0,
           filter: {keyword: ''}
+        },
+        companiesHeader: {
+          count: 0,
+          filter: {keyword: ''}
         }
       };
 

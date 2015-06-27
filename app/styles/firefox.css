@@ -279,7 +279,9 @@ line-height: 14px;
 }
 .btn{
 	padding-top: 9px;
+    line-height: 19px;
 }
+
 .content-wrapper .ticket-content > .ticket-detail .ticket-attachment .attachment-meta {
 	margin-top: 1px;
 }
@@ -530,7 +532,7 @@ aside.right .companies-list-wrapper > li .numbers > .icon {
   padding-bottom: 39px;
 }
 .create-new-user .avatar-content .file-type {
-  margin-top: 16px;}
+  margin-top: 15px;}
 
 .create-new-user .user-fields .form-group > label {
   margin-bottom: 3px;}
