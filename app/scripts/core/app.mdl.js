@@ -61,13 +61,26 @@
           return '/users/default/image'
         }
         return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '');
-      }
+      };
 
       $rootScope.getContactAvatarUrl = function (contact) {
         if (!contact) {
           return '/contacts/default/image'
         }
         return '/contacts/' + (contact.id || 'default') + '/image' + (contact.avatar ? '?t=' + contact.avatar.updatedAt : '');
+      };
+
+      $rootScope.getPhoneNumberCssClass = function (phoneNumber) {
+
+        if (!phoneNumber) {
+          return;
+        } else if (phoneNumber.typeNumber === 'OFFICE') {
+          return 'icn-telephone';
+        } else if (phoneNumber.typeNumber === 'MOBILE') {
+          return 'icn-iphone';
+        } else if (phoneNumber.typeNumber === 'FAX') {
+          return 'icn-fax-machine';
+        }
       }
 
     }]);
