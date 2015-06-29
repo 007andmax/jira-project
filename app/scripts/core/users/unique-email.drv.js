@@ -2,16 +2,29 @@
 
 (function () {
 
-  angular.module("quicktech.core.users").directive('uniqueUserEmail',
-    [function () {
-      return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
+    angular.module("quicktech.core.users").directive('uniqueUserEmail',
+        ['UsersService',
+            function (UsersService) {
+                return {
+                    restrict: 'A',
+                    require: 'ngModel',
+                    link: function (scope, element, attrs, ngModelCtrl) {
 
-          element.on('blur', function () {
-            console.log("Here must be email validation!!!!")
-          });
-        }
-      }
-    }]);
+                        var email = (ngModelCtrl.$viewValue).toString();
+
+                        console.log("isUnique");
+                        var validationResult = UsersService.isEmailUnique(email, function () {
+                            ngModelCtrl.$setValidity('unique', validationResult.value);
+                        });
+
+                        scope.$watch(function () {
+                            return ngModelCtrl.$viewValue
+                        }, function () {
+                            var validationResult = UsersService.isEmailUnique(email, function () {
+                                ngModelCtrl.$setValidity('unique', validationResult.value);
+                            });
+                        });
+                    }
+                }
+            }]);
 })();

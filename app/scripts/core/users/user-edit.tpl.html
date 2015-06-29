@@ -64,6 +64,7 @@
             <div ng-messages="userForm.primaryEmail.$error" ng-if="isShowingErrors(userForm, 'primaryEmail')">
               <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
               <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
+              <div class="qt-error-msg" ng-message="unique">This email already engaged.</div>
               <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
             </div>
 
