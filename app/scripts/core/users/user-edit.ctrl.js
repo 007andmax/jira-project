@@ -91,7 +91,7 @@
 
         $scope.getUserCompanyName = function () {
           if ($scope.user.companyId) {
-            return CompaniesService.getOneById($scope.user.companyId).legalName;
+            return CompaniesService.getOneById($scope.user.companyId).name;
           }
         };
 

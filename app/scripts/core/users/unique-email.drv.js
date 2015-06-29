@@ -2,29 +2,31 @@
 
 (function () {
 
-    angular.module("quicktech.core.users").directive('uniqueUserEmail',
-        ['UsersService',
-            function (UsersService) {
-                return {
-                    restrict: 'A',
-                    require: 'ngModel',
-                    link: function (scope, element, attrs, ngModelCtrl) {
+  angular.module("quicktech.core.users").directive('uniqueUserEmail',
+    ['UsersService',
+      function (UsersService) {
+        return {
+          restrict: 'A',
+          require: 'ngModel',
+          scope: {
+            userId: '=userId'
+          },
+          link: function (scope, element, attrs, ngModelCtrl) {
 
-                        var email = (ngModelCtrl.$viewValue).toString();
+            validate();
 
-                        console.log("isUnique");
-                        var validationResult = UsersService.isEmailUnique(email, function () {
-                            ngModelCtrl.$setValidity('unique', validationResult.value);
-                        });
+            scope.$watch(function () {
+              return ngModelCtrl.$viewValue;
+            }, validate);
 
-                        scope.$watch(function () {
-                            return ngModelCtrl.$viewValue
-                        }, function () {
-                            var validationResult = UsersService.isEmailUnique(email, function () {
-                                ngModelCtrl.$setValidity('unique', validationResult.value);
-                            });
-                        });
-                    }
-                }
-            }]);
+            function validate() {
+              if (ngModelCtrl.$viewValue && ngModelCtrl.$valid) {
+                var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, scope.userId, function () {
+                  ngModelCtrl.$setValidity('unique', validationResult.value);
+                });
+              }
+            }
+          }
+        }
+      }]);
 })();

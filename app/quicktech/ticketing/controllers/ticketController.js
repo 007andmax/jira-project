@@ -12,7 +12,7 @@
       $scope.getCompanyName = function (companyId) {
         var company = CompaniesService.getOneById(companyId);
 
-        return company.legalName != undefined ? company.legalName : '';
+        return company.name != undefined ? company.name : '';
       }
 
       //$scope.getCompanyOwner = function (companyId) {
@@ -57,7 +57,7 @@
       $scope.currentUser = UsersService.getCurrentUser();
       $scope.selectCompany = function (event, company) {
         $scope.companyUsers = UsersService.getAllByCompanyId(company.id);
-        $('input#ticketCompany').val(company.legalName);
+        $('input#ticketCompany').val(company.name);
         $('input#ticketCompanyId').val(company.id);
         $(event.target).parents('div.dropdown').removeClass('open');
       }

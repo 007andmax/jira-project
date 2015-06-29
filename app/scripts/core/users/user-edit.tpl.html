@@ -64,12 +64,13 @@
             <div ng-messages="userForm.primaryEmail.$error" ng-if="isShowingErrors(userForm, 'primaryEmail')">
               <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
               <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
-              <div class="qt-error-msg" ng-message="unique">This email already engaged.</div>
+              <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
               <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
             </div>
 
             <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-                   ng-model="user.primaryEmail" required="true" unique-user-email ng-pattern="emailPattern">
+                   ng-model="user.primaryEmail" required="true" ng-pattern="emailPattern"
+                   unique-user-email user-id="user.id">
           </div>
         </div>
 
@@ -172,7 +173,7 @@
             </div>
 
             <input type="text" ng-model="userCompany" class="form-control form-control-dropdown dropdown-toggle"
-                   typeahead="company as company.legalName for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'legalName'"
+                   typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
                    typeahead-editable="false" typeahead-min-length="0" ng-disabled="user.id" qt-typeahead-show-on-focus
                    name="userCompany" ng-trim="false" required="true" ng-focus="onFocus($event)">
           </div>

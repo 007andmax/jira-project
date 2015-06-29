@@ -1,1 +1,463 @@
-{{ message }}
+<div class="content-body users ">
+  <div class="create-new-user clearfix">
+    <form>
+      <div class="navnform-wrapper clearfix">
+        <div class="form-navigation pull-left" style="position:fixed;">
+          <ul class="form-nav" navigation-bar="#navigation-content-wrapper">
+            <li role="presentation" navigate-to="#owerview"><a href="javascript:void(0);">
+              Overview
+            </a></li>
+            <li role="presentation" navigate-to="#basic-info"><a href="javascript:void(0);">
+              Basic Info
+            </a></li>
+            <li role="presentation" navigate-to="#site-location"><a href="javascript:void(0);">
+              Site/Location(s)
+            </a></li>
+            <li role="presentation" navigate-to="#primary-contacts"><a href="javascript:void(0);">
+              Primary Contact(s)
+            </a></li>
+            <li role="presentation" navigate-to="#vendors"><a href="javascript:void(0);">
+              Vendor(s)
+            </a></li>
+            <li role="presentation" navigate-to="#tax-rates"><a href="javascript:void(0);">
+              Default Tax
+            </a></li>
+            <li role="presentation" navigate-to="#create-agents"><a href="javascript:void(0);">
+              Create Agent(s)
+            </a></li>
+            <li role="presentation" navigate-to="#finish-navs"><a href="javascript:void(0);">
+              Finish
+            </a></li>
+          </ul>
+        </div>
+        <div id="navigation-content-wrapper" class="content pull-right">
+          <div id="owerview" class="header clearfix" style="padding-bottom: 11px;"><h4 class="title">Overview</h4></div>
+          <div class="overview-wrapper clearfix">
+            <div class="info pull-left">
+              <span class="nums" style="margin-right: 4px;">0</span>
+              <span class="dets">site/location(s)</span>
+            </div>
+            <div class="info pull-center">
+              <span class="nums">0</span>
+              <span class="dets">installed Agent(s)</span>
+            </div>
+            <div class="info pull-right">
+              <span class="nums" style="margin-left: 5px;">0</span>
+              <span class="dets">primary contact(s)</span>
+            </div>
+          </div>
+
+          <div class="forms-seprator up"></div>
+
+          <div id="basic-info" class="header clearfix"><h4 class="title">Basic Info</h4></div>
+          <div class="user-fields clearfix">
+            <div class="row-wrapper clearfix error">
+              <div class="form-group form-group-full error">
+                <label>Name</label>
+
+                <div class="error-msg" style="display:block">Company name is required.</div>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="row-wrapper clearfix">
+              <div class="form-group dropdown pull-left">
+                <label>Type</label>
+                <input type="text" class="form-control" data-popover="true" data-html="true"
+                       data-content="Enter the company type e.g., Automaker, Hardware Solutions, etc.">
+              </div>
+              <div class="form-group dropdown pull-left">
+                <label>Domain</label>
+                <input type="text" class="form-control" data-popover="true" data-html="true"
+                       data-content="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses.">
+              </div>
+            </div>
+            <div class="row-wrapper clearfix error">
+              <div class="form-group form-group-full error">
+                <label>address</label>
+
+                <div class="error-msg" style="display:block;">Please enter the company’s address.</div>
+                <input type="text" class="form-control" data-popover="true" data-html="true"
+                       data-content="Enter the company's full address.">
+              </div>
+            </div>
+            <div class="row-wrapper  locmap clearfix">
+              <div class="form-group full">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2965.0824050173574!2d-93.63905729999999!3d41.998507000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWebFilings%2C+University+Boulevard%2C+Ames%2C+IA!5e0!3m2!1sen!2sus!4v1390839289319"
+                  width="100%" height='224' frameborder='0' style='border:0'></iframe>
+              </div>
+            </div>
+            <div class="row-wrapper clearfix error">
+              <div class="form-group form-group-full dropdown error">
+                <label>description of business</label>
+
+                <div class="error-msg" style="display:block">Please enter a brief description of the company’s
+                  business.
+                </div>
+                <textarea class="form-control" data-popover="true" data-html="true"
+                          data-content="Describe the company's business in 80 characters (spaces included)."></textarea>
+
+                <div class="word-count">80</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="forms-seprator sl" style="margin-top: 74px;"></div>
+
+          <div id="site-location" class="header clearfix"><h4 class="title">Site/Location(s)</h4></div>
+          <div class="user-fields clearfix">
+            <div class="row-wrapper clearfix error">
+              <div class="form-group form-group-full error">
+                <label>address</label>
+
+                <div class="error-msg" style="display:block;">Please enter the company’s address.</div>
+                <input type="text" class="form-control" data-popover="true" data-html="true"
+                       data-content="Enter the company's full address.">
+              </div>
+            </div>
+            <div class="row-wrapper  locmap clearfix">
+              <div class="form-group full">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2965.0824050173574!2d-93.63905729999999!3d41.998507000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWebFilings%2C+University+Boulevard%2C+Ames%2C+IA!5e0!3m2!1sen!2sus!4v1390839289319"
+                  width="100%" height='224' frameborder='0' style='border:0'></iframe>
+              </div>
+            </div>
+
+
+            <div class="row-wrapper clearfix">
+              <div class="form-group pull-left">
+                <label>Contact No.</label>
+                <input type="text" class="form-control dropdown-toggle " value="" data-toggle="dropdown"
+                       aria-expanded="true">
+              </div>
+              <div class="form-group dropdown number-type pull-left">
+                <input type="text"
+                       class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
+                       value="" data-toggle="dropdown" aria-expanded="true">
+
+                <div class="dropdown-default-value">Mobile</div>
+                <ul class="dropdown-menu dropdown-account-type">
+                  <li><a tabindex="-1" href="#"> Mobile </a></li>
+                  <li><a tabindex="-1" href="#"> Office </a></li>
+                  <li><a tabindex="-1" href="#"> Fax </a></li>
+                </ul>
+              </div>
+              <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                 data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span class="icn-add"></span></a>
+            </div>
+
+            <div class="row-wrapper dropdown error clearfix">
+              <div class="form-group form-group-full error pull-left">
+                <label>Time Zone</label>
+
+                <div class="error-msg" style="display:block;">Please select the timezone.</div>
+                <input type="text" class="form-control form-control-dropdown dropdown-toggle pull-left" value=""
+                       data-toggle="dropdown" aria-expanded="true" style="width:453px;">
+                <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New York</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">San Francisco</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sialkot</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lahore</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Islamabad</a></li>
+                </ul>
+                <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                   data-toggle="tooltip" data-original-title="Add More" data-placement="top" style="margin-top:0;"><span
+                  class="icn-add"></span></a>
+              </div>
+            </div>
+
+            <div class="row-wrapper clearfix">
+              <label class="control checkbox pull-left">
+                <input type="checkbox" checked="" disabled>
+                <span class="control-indicator"></span>
+                Primary Billing address <span class="error-alone">Please add multiple site/locations first.</span>
+              </label>
+            </div>
+
+            <div class="forms-seprator dl" style="margin-top: 67px; margin-bottom:77px;"></div>
+
+            <div id="primary-contacts" class="content clearfix">
+              <div class="header clearfix">
+                <h4 class="title">Primary Contact(s)</h4>
+              </div>
+              <div class="avatar-content default clearfix" style="margin-top: 30px;">
+                <div class="avatar"><img src="res/images/avatars/avatar-xlarge.png" class="no-avatar"></div>
+                <div class="choose-file">
+                  <div class="select-file">
+                    <input type="file"/>
+                    <button type="button" class="btn btn-gray pull-left" data-dismiss="modal">Choose Avatar</button>
+                    <span class="file-name pull-left">No File Selected</span>
+                  </div>
+                  <div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>
+                </div>
+              </div>
+
+              <div class="user-fields clearfix">
+                <div class="row-wrapper clearfix">
+                  <div class="form-group dropdown pull-left error">
+                    <label>first name</label>
+
+                    <div class="error-msg" style="display:block;">First name is required.</div>
+                    <input type="text" class="form-control " value="" aria-expanded="true">
+                  </div>
+                  <div class="form-group dropdown pull-left error">
+                    <label>last name</label>
+
+                    <div class="error-msg" style="display:block;">Last name requires at least 1 letter.</div>
+                    <input type="text" class="form-control " value="" aria-expanded="true">
+                  </div>
+                </div>
+
+                <div class="row-wrapper clearfix">
+                  <div class="form-group error dropdown pull-left">
+                    <label>designation</label>
+
+                    <div class="error-msg" style="display:block;">Please enter a designation.</div>
+                    <input type="text" class="form-control " value="" aria-expanded="true">
+                  </div>
+                  <div class="form-group error dropdown pull-left">
+                    <label>email</label>
+
+                    <div class="error-msg" style="display:block;">Email field cannot be left empty.</div>
+                    <input type="text" class="form-control " value="" aria-expanded="true"
+                           data-content="Please enter a valid email address." data-html="true" data-popover="true">
+                  </div>
+                </div>
+
+                <div class="row-wrapper clearfix">
+                  <div class="form-group dropdown pull-left">
+                    <label>contact no.</label>
+                    <input type="text" class="form-control " value="" aria-expanded="true">
+                  </div>
+                  <div class="form-group dropdown number-type pull-left">
+                    <input type="text"
+                           class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
+                           value="" data-toggle="dropdown" aria-expanded="true">
+
+                    <div class="dropdown-default-value">Mobile</div>
+                    <ul class="dropdown-menu dropdown-account-type">
+                      <li><a tabindex="-1" href="#"> Mobile </a></li>
+                      <li><a tabindex="-1" href="#"> Office </a></li>
+                      <li><a tabindex="-1" href="#"> Fax </a></li>
+                    </ul>
+                  </div>
+                  <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span
+                    class="icn-add"></span></a>
+                </div>
+
+                <div class="row-wrapper clearfix">
+                  <div class="form-group cs-type dropdown pull-left">
+                    <label>subscribe to</label>
+                    <input type="text" class="form-control form-control-dropdown hide-cursor" aria-expanded="true"
+                           data-popover="true" data-html="true"
+                           data-content="Ticket and/or Invoice subscribers will receive respective updates via email.">
+                    <ul class="dropdown-menu dropdown-subscribe">
+                      <li>
+                        <a tabindex="-1" href="#">
+                          <div class="clearfix">
+                            <label class="control checkbox pull-left">
+                              <input type="checkbox" checked="">
+                              <span class="control-indicator"></span>
+                            </label>
+                            Ticket Updates
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" href="#">
+                          <div class="clearfix">
+                            <label class="control checkbox pull-left">
+                              <input type="checkbox" checked="">
+                              <span class="control-indicator"></span>
+                            </label>
+                            Invoice Updates
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="form-group pull-right">
+                    <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-right tp-hide"
+                       data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span
+                      class="icn-add"></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="forms-seprator vend" style="margin-top: 40px;"></div>
+
+            <div id="vendors" class="content clearfix">
+              <div class="header clearfix">
+                <h4 class="title">Vendor(s)</h4>
+              </div>
+
+              <div class="user-fields clearfix">
+                <div class="row-wrapper av-field clearfix">
+                  <div class="form-group clearfix">
+                    <label class="norm">Associated Vendor(s)</label>
+                  </div>
+                  <div class="dropdown">
+                    <div class="form-group" style="width: 100%;" data-popover="true" data-html="true"
+                         data-content="Enter vendor(s) to be associated with this company.">
+                      <input type="text" class="form-control dropdown-toggle tokenfield" data-toggle="dropdown"
+                             value="Spectrum & Co." placeholder="Click here to add vendor...">
+                      <ul class="dropdown-menu dropdown-subscribe">
+                        <li>
+                          <a tabindex="-1" href="#">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox">
+                                <span class="control-indicator"></span>
+                              </label>
+                              Millennium Systems
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a tabindex="-1" href="#">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox">
+                                <span class="control-indicator"></span>
+                              </label>
+                              Helmatic & Getanas Ltd.
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a tabindex="-1" href="#">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox" checked>
+                                <span class="control-indicator"></span>
+                              </label>
+                              Spectrum & Co.
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a tabindex="-1" href="#">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox">
+                                <span class="control-indicator"></span>
+                              </label>
+                              Jonas & John Inc.
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a tabindex="-1" href="#">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox">
+                                <span class="control-indicator"></span>
+                              </label>
+                              Creative Computers
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="forms-seprator ven" style="margin-top: 40px;"></div>
+
+            <div id="tax-rates" class="content clearfix">
+              <div class="header clearfix">
+                <h4 class="title">Default Tax</h4>
+              </div>
+
+              <div class="grid-header-row clearfix">
+                <div class="grid-col">TAX TYPE</div>
+                <div class="grid-col">RATE</div>
+              </div>
+
+              <div class="grid-row grid-row clearfix">
+                <div class="grid-col">GST</div>
+                <div class="grid-col val">
+                  <span>8%</span>
+                  <a href="javascript:void(0)" class="icn icn-nav-delete pull-right"></a>
+                  <a href="javascript:void(0)" class="icn icn-edit pull-right"></a>
+                </div>
+              </div>
+
+              <div class="user-fields clearfix ntr">
+                <div class="row-wrapper clearfix">
+                  <div class="form-group dropdown pull-left">
+                    <label class="norm">New Tax Rate</label>
+                    <input type="text" class="form-control" placeholder="Tax Type" data-popover="true" data-html="true"
+                           data-content="This Tax information will be added to this company's invoices with taxable products and services.">
+                  </div>
+
+                  <div class="form-group pull-left">
+                    <label class="norm">&nbsp;</label>
+                    <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
+                           style="width: 197px;">
+
+                    <div class="label-add-btn"><a href="#" class="btn btn-cr btn-green btn-tax pull-right"><span
+                      class="small-icn-tick icn"></span></a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="forms-seprator agent" style="margin-top: 40px;"></div>
+
+            <div id="create-agents" class="content clearfix">
+              <div class="header clearfix">
+                <h4 class="title">Create Agent(s)</h4>
+              </div>
+
+              <div class="user-fields clearfix">
+                <div class="row-wrapper clearfix">
+                  <div class="form-group dropdown pull-left">
+                    <label>Domain/Username</label>
+                    <input type="text" class="form-control " value="" aria-expanded="true"
+                           data-content="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain"
+                           data-html="true" data-popover="true">
+                  </div>
+
+                  <div class="form-group pull-left" style="position: relative;">
+                    <label>Password</label>
+                    <input type="text" class="form-control" value="Password" aria-expanded="true">
+
+                    <div class="password-eye hide-pass"><span class="icn-ipass"></span></div>
+                    <!-- <div class="password-eye"><span class="icn-ipass"></span></div> -->
+                  </div>
+                </div>
+
+
+                <div class="row-wrapper dropdown clearfix">
+                  <div class="form-group pull-left">
+                    <label>Description</label>
+                  </div>
+                  <div class="clearfix">
+                    <input type="text" class="form-control pull-left" style="width:453px;">
+                    <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                       data-toggle="tooltip" data-original-title="Add More" data-placement="top"
+                       style="margin-top:0;"><span class="icn-add"></span></a>
+                  </div>
+                  <div class="word-count">40</div>
+                </div>
+              </div>
+            </div>
+            <div id="finish-navs" class="forms-seprator full"></div>
+
+            <div class="row-wrapper clearfix" style="margin-top: 20px;">
+              <button type="button" class="btn btn-scooter btn-create pull-right" style="margin-left: 10px;">Create
+              </button>
+              <button type="button" class="btn btn-gray pull-right" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
