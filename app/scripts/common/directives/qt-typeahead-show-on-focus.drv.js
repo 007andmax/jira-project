@@ -30,6 +30,12 @@
           modelCtrl.$parsers.push(function (inputValue) {
             return inputValue === secretEmptyKey ? '' : inputValue; // set the secretEmptyKey back to empty string
           });
+
+          scope.stateComparator = function (state, viewValue) {
+            var secretEmptyKey = '[$empty$]';
+            return viewValue === secretEmptyKey || ('' + state).toLowerCase().indexOf(('' + viewValue).toLowerCase()) > -1;
+          };
+
         }
       }
     }]);

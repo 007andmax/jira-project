@@ -129,48 +129,33 @@
                 </div>
               </div>
 
-
-              <div class="row-wrapper clearfix">
-                <div class="form-group pull-left">
-                  <label>Contact No.</label>
-                  <input type="text" class="form-control dropdown-toggle " value="" data-toggle="dropdown"
-                         aria-expanded="true">
-                </div>
-                <div class="form-group dropdown number-type pull-left">
-                  <input type="text"
-                         class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
-                         value="" data-toggle="dropdown" aria-expanded="true">
-
-                  <div class="dropdown-default-value">Mobile</div>
-                  <ul class="dropdown-menu dropdown-account-type">
-                    <li><a tabindex="-1" href="#"> Mobile </a></li>
-                    <li><a tabindex="-1" href="#"> Office </a></li>
-                    <li><a tabindex="-1" href="#"> Fax </a></li>
-                  </ul>
-                </div>
-                <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                   data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span
-                  class="icn-add"></span></a>
-              </div>
+              <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
               <div class="row-wrapper dropdown error clearfix">
                 <div class="form-group form-group-full error pull-left">
                   <label>Time Zone</label>
 
                   <div class="error-msg" style="display:block;">Please select the timezone.</div>
-                  <input type="text" class="form-control form-control-dropdown dropdown-toggle pull-left" value=""
-                         data-toggle="dropdown" aria-expanded="true" style="width:453px;">
-                  <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New York</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">San Francisco</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sialkot</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lahore</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Islamabad</a></li>
-                  </ul>
+
+                  <input type="text" ng-model="location.locale"
+                         class="form-control form-control-dropdown dropdown-toggle pull-left"
+                         typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
+                         typeahead-editable="false" typeahead-min-length="0" ng-disabled="editUser.id"
+                         qt-typeahead-show-on-focus
+                         name="userCompany" ng-trim="false" required="true">
+
+
                   <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
                      data-toggle="tooltip" data-original-title="Add More" data-placement="top"
-                     style="margin-top:0;"><span
-                    class="icn-add"></span></a>
+                     style="margin-top:0;" ng-click="addLocation()" ng-show="$last">
+                    <span class="icn-add"></span>
+                  </a>
+
+                  <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"
+                     style="margin-top:0;" ng-click="removeLocation()" ng-show="!$last">
+                    <span class="icn-remove-update"></span>
+                  </a>
                 </div>
               </div>
 

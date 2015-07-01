@@ -22,8 +22,6 @@
           });
         }
 
-        $scope.maximalAmountOfPhones = 3;
-        $scope.phoneNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
         $scope.roles = {
@@ -31,31 +29,11 @@
           ADMIN: 'Administrator'
         };
 
-        $scope.phoneNumberTypes = {
-          MOBILE: 'Mobile',
-          OFFICE: 'Office',
-          FAX: 'Fax'
-        };
-
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);
-
-          if ($scope.editUser.phoneNumbers.length === 0) {
-            $scope.addPhoneNumber();
-          }
         });
-
-        $scope.addPhoneNumber = function () {
-          $scope.editUser.phoneNumbers.unshift({
-            typeNumber: 'MOBILE'
-          });
-        };
-
-        $scope.removePhoneNumber = function (index) {
-          $scope.editUser.phoneNumbers.splice(index, 1);
-        };
 
         $scope.cancelEdit = function () {
           if ($scope.editUser && $scope.editUser.id) {
@@ -69,11 +47,6 @@
           if ($scope.editUser.companyId) {
             return CompaniesService.getOneById($scope.editUser.companyId).name;
           }
-        };
-
-        $scope.stateComparator = function (state, viewValue) {
-          var secretEmptyKey = '[$empty$]';
-          return viewValue === secretEmptyKey || ('' + state).toLowerCase().indexOf(('' + viewValue).toLowerCase()) > -1;
         };
 
         $scope.save = function (form) {

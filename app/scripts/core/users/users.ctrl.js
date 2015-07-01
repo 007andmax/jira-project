@@ -65,9 +65,6 @@
               avatar: avatar
             };
 
-            if ($scope.editUser.phoneNumbers.length === 0) {
-              $scope.addPhoneNumber();
-            }
           } else {
             $scope.editUser = undefined;
           }
