@@ -4,10 +4,9 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.companies.editCompanyCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
-      'quicktech.common.services.SharedStateService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService) {
-
-        $scope.message = 'Here will be create/edit company form.';
+      'quicktech.common.services.SharedStateService', '$stateParams', '$state',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService,
+                $stateParams, $state) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
@@ -17,44 +16,36 @@
           headerSharedState.count = companiesCount;
         });
 
-        ////TODO fix data loading
-        //UsersService._addInitListener(function () {
-        //  $scope.subscriptions = SubscriptionsService.getAllClientUserSubscriptions($scope);
-        //  $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany(CompaniesService.getCurrentCompany().id, $scope)
-        //
-        //  $scope.getUserCompanyName = function (user) {
-        //    return CompaniesService.getOneById(user.company.id).legalName;
-        //  };
-        //});
-        //
-        //$scope.usersFilter = function (value) {
-        //  if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
-        //    return (value.firstName + ' ' + value.lastName).toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
-        //  }
-        //  return true;
-        //};
-        //
-        //$scope.getUserName = function (user) {
-        //  return user.firstName + ' ' + user.lastName;
-        //};
-        //
-        //$scope.setEditUserId = function (userId) {
-        //  $scope.editUserId = userId;
-        //};
+        if ($stateParams.companyId) {
+
+          var company = CompaniesService.getOneById($stateParams.companyId);
+          var companyData = CompaniesService.getCompanyData($stateParams.companyId);
+
+          if (!company) {
+            $state.go('companies');
+            throw 'wrong cmpany id specified!';
+          }
+
+          $scope.editCompany = {
+            id: $stateParams.companyId,
+            name: company.name,
+            type: company.type,
+            domain: company.domain,
+            primaryAddress: companyData.primaryAddress,
+            addresses: companyData.addresses || [{}],
+            contacts: companyData.contacts || [{}]
+          };
+
+        } else {
+          $scope.editCompany = {
+            addresses: [{}],
+            contacts: [{}]
+          };
+        }
 
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('companiesHeader');
         });
-
-        //$scope.changeUserRole = function (userId, userRole) {
-        //  UsersService.changeUserRole(userId, userRole);
-        //};
-        //
-        //$scope.subscribeUser = function (userId, nameSubscription) {
-        //  var newSubscription = $scope.subscriptions[userId].staticCopy();
-        //  newSubscription[nameSubscription] = !newSubscription[nameSubscription];
-        //  SubscriptionsService.saveUserSubscription(newSubscription);
-        //};
 
       }]);
 

@@ -51,6 +51,11 @@
         templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
         controller: 'quicktech.core.companies.editCompanyCtrl'
       })
+      .state('editCompany', {
+        url: '/companies/edit/:companyId',
+        templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
+        controller: 'quicktech.core.companies.editCompanyCtrl'
+      })
 
   }]);
 

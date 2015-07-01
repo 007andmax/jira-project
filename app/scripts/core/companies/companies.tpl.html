@@ -100,13 +100,12 @@
             <div class="dot-sep pull-left"></div>
 
             <a href="javascript:void(0)" class="icn-wrapper pull-left" popover="{{ company.description }}"
-               popover-placement="bottom"
-               popover-trigger="mouseenter">
+               popover-placement="bottom" popover-trigger="mouseenter">
               <span class="icn company-detail"></span>
             </a>
 
             <a href="javascript:void(0)" class="icn-wrapper tp-hide pull-left" tooltip-placement="top"
-               tooltip="Edit Company info">
+               tooltip="Edit Company info" ui-sref="editCompany( { companyId: company.id } )">
               <span class="icn icn-edit-tag"></span>
             </a>
           </div>

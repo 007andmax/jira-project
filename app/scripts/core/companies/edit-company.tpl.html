@@ -34,7 +34,7 @@
           <div id="owerview" class="header clearfix" style="padding-bottom: 11px;"><h4 class="title">Overview</h4></div>
           <div class="overview-wrapper clearfix">
             <div class="info pull-left">
-              <span class="nums" style="margin-right: 4px;">0</span>
+              <span class="nums" style="margin-right: 4px;">{{ editCompany.addresses.length }}</span>
               <span class="dets">site/location(s)</span>
             </div>
             <div class="info pull-center">
@@ -42,7 +42,7 @@
               <span class="dets">installed Agent(s)</span>
             </div>
             <div class="info pull-right">
-              <span class="nums" style="margin-left: 5px;">0</span>
+              <span class="nums" style="margin-left: 5px;">{{ editCompany.contacts.length }}</span>
               <span class="dets">primary contact(s)</span>
             </div>
           </div>
@@ -56,19 +56,21 @@
                 <label>Name</label>
 
                 <div class="error-msg" style="display:block">Company name is required.</div>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" ng-model="editCompany.name">
               </div>
             </div>
             <div class="row-wrapper clearfix">
               <div class="form-group dropdown pull-left">
                 <label>Type</label>
-                <input type="text" class="form-control" data-popover="true" data-html="true"
-                       data-content="Enter the company type e.g., Automaker, Hardware Solutions, etc.">
+                <input type="text" class="form-control" ng-model="editCompany.type"
+                       popover="Enter the company type e.g., Automaker, Hardware Solutions, etc."
+                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
               </div>
               <div class="form-group dropdown pull-left">
                 <label>Domain</label>
-                <input type="text" class="form-control" data-popover="true" data-html="true"
-                       data-content="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses.">
+                <input type="text" class="form-control" ng-model="editCompany.domain"
+                       popover="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses."
+                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
               </div>
             </div>
             <div class="row-wrapper clearfix error">
@@ -76,8 +78,9 @@
                 <label>address</label>
 
                 <div class="error-msg" style="display:block;">Please enter the company’s address.</div>
-                <input type="text" class="form-control" data-popover="true" data-html="true"
-                       data-content="Enter the company's full address.">
+                <input type="text" class="form-control" popover="Enter the company's full address."
+                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
+                       ng-model="editCompany.primaryAddress.address">
               </div>
             </div>
             <div class="row-wrapper  locmap clearfix">
@@ -94,8 +97,9 @@
                 <div class="error-msg" style="display:block">Please enter a brief description of the company’s
                   business.
                 </div>
-                <textarea class="form-control" data-popover="true" data-html="true"
-                          data-content="Describe the company's business in 80 characters (spaces included)."></textarea>
+                <textarea class="form-control" ng-model="editCompany.description"
+                          popover="Describe the company's business in 80 characters (spaces included)."
+                          popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
 
                 <div class="word-count">80</div>
               </div>
@@ -106,72 +110,77 @@
 
           <div id="site-location" class="header clearfix"><h4 class="title">Site/Location(s)</h4></div>
           <div class="user-fields clearfix">
-            <div class="row-wrapper clearfix error">
-              <div class="form-group form-group-full error">
-                <label>address</label>
+            <div ng-repeat="location in editCompany.addresses">
+              <div class="row-wrapper clearfix error">
+                <div class="form-group form-group-full error">
+                  <label>address</label>
 
-                <div class="error-msg" style="display:block;">Please enter the company’s address.</div>
-                <input type="text" class="form-control" data-popover="true" data-html="true"
-                       data-content="Enter the company's full address.">
+                  <div class="error-msg" style="display:block;">Please enter the company’s address.</div>
+                  <input type="text" class="form-control" ng-model="location.address"
+                         popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
+                         popover="Enter the company's full address.">
+                </div>
               </div>
-            </div>
-            <div class="row-wrapper  locmap clearfix">
-              <div class="form-group full">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2965.0824050173574!2d-93.63905729999999!3d41.998507000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWebFilings%2C+University+Boulevard%2C+Ames%2C+IA!5e0!3m2!1sen!2sus!4v1390839289319"
-                  width="100%" height='224' frameborder='0' style='border:0'></iframe>
+              <div class="row-wrapper  locmap clearfix">
+                <div class="form-group full">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2965.0824050173574!2d-93.63905729999999!3d41.998507000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWebFilings%2C+University+Boulevard%2C+Ames%2C+IA!5e0!3m2!1sen!2sus!4v1390839289319"
+                    width="100%" height='224' frameborder='0' style='border:0'></iframe>
+                </div>
               </div>
-            </div>
 
 
-            <div class="row-wrapper clearfix">
-              <div class="form-group pull-left">
-                <label>Contact No.</label>
-                <input type="text" class="form-control dropdown-toggle " value="" data-toggle="dropdown"
-                       aria-expanded="true">
-              </div>
-              <div class="form-group dropdown number-type pull-left">
-                <input type="text"
-                       class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
-                       value="" data-toggle="dropdown" aria-expanded="true">
+              <div class="row-wrapper clearfix">
+                <div class="form-group pull-left">
+                  <label>Contact No.</label>
+                  <input type="text" class="form-control dropdown-toggle " value="" data-toggle="dropdown"
+                         aria-expanded="true">
+                </div>
+                <div class="form-group dropdown number-type pull-left">
+                  <input type="text"
+                         class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
+                         value="" data-toggle="dropdown" aria-expanded="true">
 
-                <div class="dropdown-default-value">Mobile</div>
-                <ul class="dropdown-menu dropdown-account-type">
-                  <li><a tabindex="-1" href="#"> Mobile </a></li>
-                  <li><a tabindex="-1" href="#"> Office </a></li>
-                  <li><a tabindex="-1" href="#"> Fax </a></li>
-                </ul>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                 data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span class="icn-add"></span></a>
-            </div>
-
-            <div class="row-wrapper dropdown error clearfix">
-              <div class="form-group form-group-full error pull-left">
-                <label>Time Zone</label>
-
-                <div class="error-msg" style="display:block;">Please select the timezone.</div>
-                <input type="text" class="form-control form-control-dropdown dropdown-toggle pull-left" value=""
-                       data-toggle="dropdown" aria-expanded="true" style="width:453px;">
-                <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New York</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">San Francisco</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sialkot</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lahore</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Islamabad</a></li>
-                </ul>
+                  <div class="dropdown-default-value">Mobile</div>
+                  <ul class="dropdown-menu dropdown-account-type">
+                    <li><a tabindex="-1" href="#"> Mobile </a></li>
+                    <li><a tabindex="-1" href="#"> Office </a></li>
+                    <li><a tabindex="-1" href="#"> Fax </a></li>
+                  </ul>
+                </div>
                 <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                   data-toggle="tooltip" data-original-title="Add More" data-placement="top" style="margin-top:0;"><span
+                   data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span
                   class="icn-add"></span></a>
               </div>
-            </div>
 
-            <div class="row-wrapper clearfix">
-              <label class="control checkbox pull-left">
-                <input type="checkbox" checked="" disabled>
-                <span class="control-indicator"></span>
-                Primary Billing address <span class="error-alone">Please add multiple site/locations first.</span>
-              </label>
+              <div class="row-wrapper dropdown error clearfix">
+                <div class="form-group form-group-full error pull-left">
+                  <label>Time Zone</label>
+
+                  <div class="error-msg" style="display:block;">Please select the timezone.</div>
+                  <input type="text" class="form-control form-control-dropdown dropdown-toggle pull-left" value=""
+                         data-toggle="dropdown" aria-expanded="true" style="width:453px;">
+                  <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">New York</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">San Francisco</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sialkot</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Lahore</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Islamabad</a></li>
+                  </ul>
+                  <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"
+                     style="margin-top:0;"><span
+                    class="icn-add"></span></a>
+                </div>
+              </div>
+
+              <div class="row-wrapper clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" checked="" disabled>
+                  <span class="control-indicator"></span>
+                  Primary Billing address <span class="error-alone">Please add multiple site/locations first.</span>
+                </label>
+              </div>
             </div>
 
             <div class="forms-seprator dl" style="margin-top: 67px; margin-bottom:77px;"></div>
