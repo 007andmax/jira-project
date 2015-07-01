@@ -1,0 +1,308 @@
+.navnform-wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 731px;
+}
+
+.form-navigation {
+  position: relative;
+  margin-top: -9px;
+  width: 230px;
+}
+
+.form-navigation .form-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.form-navigation .form-nav > li > a {
+  position: relative;
+  display: block;
+  padding: 8px 0 7px;
+  padding-left: 16px;
+  font-size: 14px;
+  color: #25303d;
+}
+
+.form-navigation .form-nav > li > a:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #b4bfcc;
+  background-color: transparent;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  content: '';
+}
+
+.form-navigation .form-nav > li > a:hover,
+.form-navigation .form-nav > li.active > a {
+  background-color: transparent;
+  color: #00acc1;
+}
+
+.form-navigation .form-nav > li.active > a:before {
+  border-color: #00acc1;
+  background-color: #00acc1;
+}
+
+.form-navigation .form-nav > li > a:hover:before {
+  border-color: #00acc1;
+}
+
+textarea.form-control {
+  padding: 6px 13px;
+  height: 78px;
+  line-height: 20px;
+  resize: none;
+}
+
+.word-count {
+  font-size: 11px;
+  line-height: 20px;
+  margin-top: 1px;
+  color: #9fabb9;
+}
+
+.create-new-user .header {
+  padding-bottom: 7px;
+}
+
+.user-fields .row-wrapper .control {
+  margin-right: 30px;
+  padding-left: 24px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #4e5e71;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+.user-fields .row-wrapper .control.primaryc{
+  margin-top: 25px;
+}
+.user-fields .row-wrapper .dropdown-subscribe .control {
+  margin-right: auto;
+}
+
+.forms-seprator {
+  display: block;
+  margin: 75px auto 77px;
+  width: 39px;
+  height: 1px;
+  background-color: #e9edf1;
+}
+.forms-seprator.full{
+  margin-top: 34px;
+  width: 100%;
+  margin-bottom: 80px;
+}
+.forms-seprator.fullv{
+  margin-top: 78px;
+  width: 100%;
+  margin-bottom: 80px;
+}
+.forms-seprator.fulld{
+  margin-top:40px;
+  width: 100%;
+  background-color: #f7f9fb;
+  margin-bottom:40px;
+}
+.forms-seprator.fulld.agents{
+  margin-top: 34px;
+  margin-bottom: 20px;
+}
+.forms-seprator.fulld.location{
+  margin-top: 27px;
+  margin-bottom: 20px;
+}
+.create-new-user .user-fields .row-wrapper.locmap{
+  margin-top: 20px;
+}
+.forms-seprator.sl{
+  margin-bottom: 77px;
+}
+.create-new-user .user-fields .form-control {
+  padding: 6px 13px;
+}
+
+.create-new-user .user-fields textarea.form-control {
+  padding: 8px 13px;
+}
+
+.overview-wrapper .info {
+  position: relative;
+  padding: 0 20px;
+}
+
+.overview-wrapper .pull-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 200px;
+}
+
+.overview-wrapper .pull-center:before,
+.overview-wrapper .pull-center:after {
+  position: absolute;
+  top: 21px;
+  bottom: 0;
+  left: 13px;
+  margin: auto;
+  width: 4px;
+  height: 4px;
+  background-color: #b4bfcc;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  content: '';
+}
+
+.overview-wrapper .pull-center:after {
+  left: 0;
+  right: -166px;
+}
+
+.overview-wrapper .info:first-child {
+  padding-left: 0;
+}
+
+.overview-wrapper .info span {
+  text-align: center;
+  display: block;
+}
+
+.overview-wrapper .info span.nums {
+  font-size: 62px;
+  font-weight: 300;
+  color: #00acc1;
+}
+
+.overview-wrapper .info span.dets {
+  margin-top: 4px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #4e5e71;
+}
+
+.overview-wrapper .info:last-child {
+  padding-right: 0;
+}
+
+.create-new-user .user-fields .form-group.form-group-full {
+  width: 100%;
+}
+
+.create-new-user .user-fields .form-group > label.norm {
+  margin: -1px 0 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: none;
+  color: #25303d;
+}
+
+.grid-header-row .grid-col,
+.grid-row .grid-col {
+  width: 50%;
+  float: left;
+}
+
+.grid-header-row .grid-col {
+  padding: 27px 0 26px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #4e5e71;
+}
+.grid-header-row .grid-col:not(:first-child) {
+  padding-left: 6px;
+}
+
+.grid-row {
+  border-top: 1px solid #e9edf1;
+}
+
+.grid-row .grid-col {
+  padding: 26px 0px;
+  font-size: 14px;
+}
+
+.grid-row .grid-col:not(:first-child) {
+  padding-left: 6px;
+}
+
+.grid-row .grid-col {
+  font-weight: 600;
+  color: #4e5e71;
+}
+
+.grid-row .grid-col.val {
+  font-weight: normal;
+  color: #9fabb9;
+}
+
+.grid-row .grid-col .icn {
+  margin-top: 3px;
+}
+
+.grid-row .grid-col .icn-nav-delete {
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+.create-new-user .user-fields.ntr {
+  margin-top: 29px;
+}
+
+.password-eye {
+  position: absolute;
+  top: 27px;
+  right: 14px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #5287bf;
+  cursor: pointer;
+}
+
+.password-eye.hide-pass {
+  top: 29px;
+}
+
+.create-new-user .user-fields .av-field .form-group .token {
+  padding-right: 18px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.create-new-user .user-fields .av-field .form-group .token .token-label {
+  text-transform: none;
+}
+
+.create-new-user .user-fields .av-field .form-group .token .close {
+  right: 11px;
+  margin-top: -3px;
+}
+
+.create-new-user .user-fields .av-field .form-group .form-control {
+  padding: 4px 3px;
+}
+
+.create-new-user .user-fields .tokenfield .token-input {
+  padding-left: 13px;
+}
+
+.create-new-user .user-fields .popover {
+  width: 100%;
+  max-width: 100%;
+  left: auto !important;
+  line-height: 1.42857;
+  color: #9fabb9;
+  font-size: 12px;
+  padding: 16px 20px;
+}
