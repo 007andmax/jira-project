@@ -92,7 +92,7 @@
 
               <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                      aria-expanded="true" required="true" ng-minlength="3" ng-maxlength="20"
-                     ng-pattern="phoneNumberPattern" make-dirty-on-blur>
+                     ng-pattern="phoneNumberPattern" hard-reset-pattern="phoneNumberPattern" make-dirty-on-blur>
             </div>
 
             <div class="form-group dropdown number-type pull-left">
@@ -121,11 +121,13 @@
               <div ng-messages="userForm['phoneNumber' + $index].$error"
                    ng-if="!userForm['phoneNumber' + $index].$valid">
                 <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
+                <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
                 <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
               </div>
 
               <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-                     aria-expanded="true" ng-maxlength="20" ng-pattern="phoneNumberPattern" make-dirty-on-blur>
+                     aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"
+                     make-dirty-on-blur hard-reset-pattern="phoneNumberPattern">
             </div>
 
             <div class="form-group dropdown number-type pull-left">

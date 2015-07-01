@@ -23,7 +23,7 @@
         }
 
         $scope.maximalAmountOfPhones = 3;
-        $scope.phoneNumberPattern = /^\+?\(?[0-9]{3}(\-|\) ?| )[0-9]{3}(\-| )[0-9]{4}$/;
+        $scope.phoneNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
         $scope.roles = {
@@ -85,6 +85,10 @@
 
             if (!lastPhone.number || lastPhone.number.trim().length === 0) {
               phoneNumbers.splice(phoneNumbers.length - 1, 1);
+            }
+
+            if ($scope.editUser.avatar && !$scope.editUser.avatar.id && !$scope.editUser.avatar.origin && !$scope.editUser.avatar.cropped) {
+              $scope.editUser.avatar = undefined;
             }
 
             UsersService.save($scope.editUser, function () {
