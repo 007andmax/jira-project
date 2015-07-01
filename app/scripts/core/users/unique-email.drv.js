@@ -20,7 +20,7 @@
             }, validate);
 
             function validate() {
-              if (ngModelCtrl.$viewValue && ngModelCtrl.$valid) {
+              if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
                 var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, scope.userId, function () {
                   ngModelCtrl.$setValidity('unique', validationResult.value);
                 });

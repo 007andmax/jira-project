@@ -32,7 +32,7 @@
             $scope.user = {
               role: 'USER',
               phoneNumbers: [],
-              userSubscription: {},
+              subscription: {},
               avatar: {
                 scale: 50
               }
@@ -61,7 +61,7 @@
               primaryEmail: user.primaryEmail,
               phoneNumbers: user.phoneNumbers.staticCopy(),
               companyId: user.company.id,
-              userSubscription: userSubscription,
+              subscription: userSubscription,
               avatar: avatar
             };
           }

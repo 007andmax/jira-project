@@ -103,7 +103,7 @@
 
               <ul class="dropdown-menu dropdown-account-type">
                 <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
-                  <a tabindex="-1" href="#">{{ label }}</a>
+                  <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
                 </li>
               </ul>
             </div>
@@ -136,7 +136,7 @@
 
               <ul class="dropdown-menu dropdown-account-type">
                 <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
-                  <a tabindex="-1" href="#">{{ label }}</a>
+                  <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
                 </li>
               </ul>
 
@@ -158,7 +158,7 @@
 
             <ul class="dropdown-menu dropdown-account-type">
               <li ng-repeat="(role, label) in roles" ng-click="user.role = role">
-                <a tabindex="-1" href="#">{{ label }}</a>
+                <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
               </li>
             </ul>
           </div>
@@ -185,28 +185,28 @@
                    data-toggle="dropdown" aria-expanded="true">
 
             <div class="tokens" data-toggle="dropdown">
-              <div class="token ticket" ng-show="user.userSubscription.ticket">
+              <div class="token ticket" ng-show="user.subscription.ticket">
                 <span class="token-label">tkt updates</span>
               </div>
 
-              <div class="token invoice" ng-show="user.userSubscription.invoice">
+              <div class="token invoice" ng-show="user.subscription.invoice">
                 <span class="token-label">inv. updates</span>
               </div>
             </div>
 
-            <ul class="dropdown-menu dropdown-subscribe">
-              <li><a tabindex="-1" href="#">
+            <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
+              <li><a tabindex="-1" href qt-checkbox ng-model="user.subscription.ticket">
                 <div class="clearfix"><label class="control checkbox pull-left">
-                  <input type="checkbox" ng-model="user.userSubscription.ticket">
-                  <span class="control-indicator" qt-checkbox ng-model="user.userSubscription.ticket"></span>
+                  <input type="checkbox" ng-model="user.subscription.ticket">
+                  <span class="control-indicator" stop-propagation="true"></span>
                 </label>
                   Ticket Updates
                 </div>
               </a></li>
-              <li><a tabindex="-1" href="#">
+              <li><a tabindex="-1" href qt-checkbox ng-model="user.subscription.invoice">
                 <div class="clearfix"><label class="control checkbox pull-left">
-                  <input type="checkbox" ng-model="user.userSubscription.invoice">
-                  <span class="control-indicator" qt-checkbox ng-model="user.userSubscription.invoice"></span>
+                  <input type="checkbox" ng-model="user.subscription.invoice">
+                  <span class="control-indicator"></span>
                 </label>
                   Invoice Updates
                 </div>

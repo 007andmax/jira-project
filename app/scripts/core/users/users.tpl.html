@@ -1,10 +1,10 @@
 <div class="content-body users">
   <!--<ng-include src="'/html/scripts/core/users/user-edit.tpl.html'"></ng-include>-->
   <div ui-view></div>
-  <div class="users-list clearfix">
+  <div class="users-list clearfix" count-nodes-in-line="[userNode]" ng-model="usersInLine">
     <div ng-repeat="user in (shownUsers = (users | filter : usersFilter | orderBy: getUserName))"
-         ng-controller="quicktech.core.users.userCtrl">
-      <div class="user">
+         ng-controller="quicktech.core.users.userCtrl" on-finish-render="recalc-count-nodes-in-line">
+      <div class="user" userNode>
         <div class="content">
           <ul class="user-badges">
             <li ng-if="subscriptions[user.id].ticket" id="{{ user.id + '-has-ticket-updates' }}"
@@ -40,13 +40,13 @@
 
 
               <ul class="dropdown-menu devices-menu" role="menu">
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="#"><span-->
+                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
                 <!--class="icon icn-server"></span>File.Server</a></li>-->
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="#"><span-->
+                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
                 <!--class="icon icn-computer"></span>Skynet.2013</a></li>-->
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="#"><span-->
+                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
                 <!--class="icon icn-mobile"></span>Mobile.Jack</a></li>-->
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="#"><span-->
+                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
                 <!--class="icon icn-fax"></span>Fax.Sublime</a></li>-->
 
 
@@ -61,17 +61,17 @@
               <span class="icn icn-user-chat"></span>
             </div>
             <div class="more pull-left dropdown hover-dropdown">
-              <a href="#" class="dropdown-toggle tooltip-dp" aria-haspopup="true"
+              <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true"
                  aria-expanded="false" data-toggle="dropdown" data-placement="top" title=""
                  data-original-title="More"><span class="icn-ticket-more icn"></span></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu" role="menu" stop-propagation="click">
                 <li class="dropdown-submenu">
-                  <a tabindex="-1" href="#">Subscribe {{ user.firstName }} to...</a>
+                  <a tabindex="-1" href="javascript:void(0)">Subscribe {{ user.firstName }} to...</a>
 
-                  <div class="dropdown-submenu-wrapper">
+                  <div class="dropdown-submenu-wrapper" stop-propagation="click">
                     <ul class="dropdown-menu dropdown-subscribe">
                       <li ng-click="subscribeUser(user.id, 'ticket')">
-                        <a tabindex="-1" href="#">
+                        <a tabindex="-1" href=>
                           <div class="clearfix"><label
                                   class="control checkbox pull-left">
                             <input type="checkbox" ng-model="subscriptions[user.id].ticket">
@@ -81,7 +81,7 @@
                           </div>
                         </a></li>
                       <li ng-click="subscribeUser(user.id, 'invoice')">
-                        <a tabindex="-1" href="#">
+                        <a tabindex="-1" href>
                           <div class="clearfix" ><label
                                   class="control checkbox pull-left">
                             <input type="checkbox" ng-model="subscriptions[user.id].invoice">
@@ -94,19 +94,19 @@
                   </div>
                 </li>
                 <li class="dropdown-submenu">
-                  <a tabindex="-1" href="#"> Set {{ user.firstName }} Privilege</a>
+                  <a tabindex="-1" href="javascript:void(0)"> Set {{ user.firstName }} Privilege</a>
 
                   <div class="dropdown-submenu-wrapper">
                     <ul class="dropdown-menu dropdown-privilege">
-                      <li ng-class="{active:user.role==='USER'}" ng-click="changeUserRole(user.id, 'USER')"><a tabindex="-1" href="#" > User </a></li>
-                      <li ng-class="{active:user.role==='ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')"><a tabindex="-1" href="#"> Administrator </a>
+                      <li ng-class="{active:user.role==='USER'}" ng-click="changeUserRole(user.id, 'USER')"><a tabindex="-1" href="javascript:void(0)" > User </a></li>
+                      <li ng-class="{active:user.role==='ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')"><a tabindex="-1" href="javascript:void(0)"> Administrator </a>
                       </li>
 
                     </ul>
                   </div>
                 </li>
 
-                <li><a tabindex="-1" href="#">Archive this Contact</a></li>
+                <li><a tabindex="-1" href="javascript:void(0)">Archive this Contact</a></li>
 
               </ul>
 
@@ -132,7 +132,7 @@
 
         <div class="avatar"><img ng-src="{{ getUserAvatarUrl(user) }}"></div>
       </div>
-      <div ng-if="editUserId === user.id">
+      <div ng-if="checkEditUserId($index, usersInLine)">
         <div class="clearfix"></div>
         <div ng-include="'/html/scripts/core/users/user-edit.tpl.html'"></div>
       </div>

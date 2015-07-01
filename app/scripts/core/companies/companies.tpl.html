@@ -81,7 +81,8 @@
     <div class="company clearfix" ng-repeat="company in companies" ng-controller="quicktech.core.companies.companyCtrl">
       <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
         <div class="overlay"></div>
-        <div class="archive-btn"><a class="black-btn" href="#"><span class="icn archive-company"></span></a></div>
+        <div class="archive-btn"><a class="black-btn" href="javascript:void(0)"><span
+          class="icn archive-company"></span></a></div>
         <div class="company-info">
           <h3 class="name"> {{ company.name }} </h3>
 
@@ -96,12 +97,14 @@
 
             <div class="dot-sep pull-left"></div>
 
-            <a href="#" class="icn-wrapper pull-left" popover="{{ company.description }}" popover-placement="bottom"
+            <a href="javascript:void(0)" class="icn-wrapper pull-left" popover="{{ company.description }}"
+               popover-placement="bottom"
                popover-trigger="mouseenter">
               <span class="icn company-detail"></span>
             </a>
 
-            <a href="#" class="icn-wrapper tp-hide pull-left" tooltip-placement="top" tooltip="Edit Company info">
+            <a href="javascript:void(0)" class="icn-wrapper tp-hide pull-left" tooltip-placement="top"
+               tooltip="Edit Company info">
               <span class="icn icn-edit-tag"></span>
             </a>
           </div>
@@ -146,7 +149,7 @@
         </div>
 
         <div class="clearfix company-actions">
-          <a href="#" class="btn btn-scooter btn-update pull-left" style="margin-right: 10px;">
+          <a href="javascript:void(0)" class="btn btn-scooter btn-update pull-left" style="margin-right: 10px;">
             <div class="icn-white-mail"></div>
           </a>
 
