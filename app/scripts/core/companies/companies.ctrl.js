@@ -26,12 +26,16 @@
         //  };
         //});
         //
-        //$scope.usersFilter = function (value) {
-        //  if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
-        //    return (value.firstName + ' ' + value.lastName).toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
-        //  }
-        //  return true;
-        //};
+
+
+        $scope.companiesFilter = function (value) {
+          if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
+            return value.name.toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
+          }
+          return true;
+        };
+
+
         //
         //$scope.getUserName = function (user) {
         //  return user.firstName + ' ' + user.lastName;

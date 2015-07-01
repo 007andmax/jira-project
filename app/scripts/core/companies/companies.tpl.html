@@ -78,7 +78,9 @@
 
   <div class="companies-list clearfix">
 
-    <div class="company clearfix" ng-repeat="company in companies" ng-controller="quicktech.core.companies.companyCtrl">
+    <div class="company clearfix"
+         ng-repeat="company in (shownCompanies = (companies | filter : companiesFilter | orderBy: name))"
+         ng-controller="quicktech.core.companies.companyCtrl">
       <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
         <div class="overlay"></div>
         <div class="archive-btn"><a class="black-btn" href="#"><span class="icn archive-company"></span></a></div>
