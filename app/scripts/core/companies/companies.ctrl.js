@@ -59,6 +59,10 @@
         //  SubscriptionsService.saveUserSubscription(newSubscription);
         //};
 
+        UsersService._addInitListener(function () {
+          $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
+        });
+
       }]);
 
 }());
