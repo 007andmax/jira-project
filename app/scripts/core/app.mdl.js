@@ -21,41 +21,59 @@
     $urlRouterProvider.otherwise('/tickets/unassigned');
 
     $stateProvider
-      .state('Tickets', {
+      .state('Tickets', waitForServices({
         url: '/tickets/:listType',
         templateUrl: '/html/quicktech/ticketing/views/ticketList.html',
         controller: 'TicketListController'
-      })
-      .state('Tickets.Detail', {
+      }))
+      .state('Tickets.Detail', waitForServices({
         url: '/:id',
         templateUrl: '/html/quicktech/ticketing/views/ticketDetail.html',
         controller: 'TicketDetailController'
-      })
-      .state('users', {
+      }))
+      .state('users', waitForServices({
         url: '/users',
         templateUrl: '/html/scripts/core/users/users.tpl.html',
         controller: 'quicktech.core.users.usersCtrl'
-      })
-      .state('users.create', {
+      }))
+      .state('users.create', waitForServices({
         url: '/create',
         templateUrl: '/html/scripts/core/users/user-edit.tpl.html',
         controller: 'quicktech.core.users.createUserCtrl'
-      })
-      .state('companies', {
+      }))
+      .state('companies', waitForServices({
         url: '/companies',
         templateUrl: '/html/scripts/core/companies/companies.tpl.html',
         controller: 'quicktech.core.companies.companiesCtrl'
-      })
-      .state('createCompany', {
+      }))
+      .state('createCompany', waitForServices({
         url: '/companies/create',
         templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
         controller: 'quicktech.core.companies.editCompanyCtrl'
-      })
-      .state('editCompany', {
+      }))
+      .state('editCompany', waitForServices({
         url: '/companies/edit/:companyId',
         templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
         controller: 'quicktech.core.companies.editCompanyCtrl'
-      })
+      }));
+
+    function waitForServices(conf) {
+      if (!conf.resolve) {
+        conf.resolve = {};
+      }
+
+      conf.resolve.waitForServicesInitialization = ['$q', 'UsersService', function ($q, UsersService) {
+
+        var def = $q.defer();
+        UsersService._addInitListener(function () {
+          def.resolve();
+        });
+
+        return def.promise;
+      }];
+
+      return conf;
+    }
 
   }]);
 

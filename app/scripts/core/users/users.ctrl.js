@@ -17,15 +17,12 @@
           headerSharedState.count = usersCount;
         });
 
-        //TODO fix data loading
-        UsersService._addInitListener(function () {
-          $scope.subscriptions = SubscriptionsService.getAllClientUserSubscriptions($scope);
-          $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany(CompaniesService.getCurrentCompany().id, $scope)
+        $scope.subscriptions = SubscriptionsService.getAllClientUserSubscriptions($scope);
+        $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany(CompaniesService.getCurrentCompany().id, $scope)
 
-          $scope.getUserCompanyName = function (user) {
-            return CompaniesService.getOneById(user.company.id).name;
-          };
-        });
+        $scope.getUserCompanyName = function (user) {
+          return CompaniesService.getOneById(user.company.id).name;
+        };
 
         $scope.usersFilter = function (value) {
           if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
