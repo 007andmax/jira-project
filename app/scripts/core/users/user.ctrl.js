@@ -8,13 +8,17 @@
 
         $scope.checkEditUserId = function (index, usersInLine) {
 
+          if (!$scope.editUser || !$scope.editUser.id) {
+            return false;
+          }
+
           usersInLine *= 1;
 
           var isLastInArray = (index + 1) === $scope.shownUsers.length,
-            isLastInLine = index > 0 && !((index +1 ) % usersInLine);
+            isLastInLine = index > 0 && !((index + 1 ) % usersInLine);
 
           if (isLastInLine || isLastInArray) {
-            if ($scope.editUserId === $scope.user.id) {
+            if ($scope.editUser.id === $scope.user.id) {
               return true;
             }
 
@@ -24,7 +28,7 @@
             }
 
             for (var i = 1; i < usersInLine; i++) {
-              if ($scope.editUserId === $scope.shownUsers[index - i].id) {
+              if ($scope.editUser.id === $scope.shownUsers[index - i].id) {
                 return true;
               }
             }

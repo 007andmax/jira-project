@@ -7,6 +7,8 @@
       'quicktech.common.services.SharedStateService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService) {
 
+        $scope.editUser = undefined;
+
         var headerSharedState = SharedStateService.getSharedState('usersHeader');
 
         $scope.users = UsersService.getClientUsers();
@@ -36,16 +38,42 @@
           return user.firstName + ' ' + user.lastName;
         };
 
-        $scope.setEditUserId = function (userId) {
-          $scope.editUserId = userId;
-        };
-
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('usersHeader');
         });
 
         $scope.changeUserRole = function (userId, userRole) {
           UsersService.changeUserRole(userId, userRole);
+        };
+
+        $scope.setEditUserId = function (userId) {
+          if (userId) {
+            var user = UsersService.getOneById(userId);
+            var userSubscription = $scope.subscriptions[user.id];
+            var avatar = user.avatar;
+
+            userSubscription = userSubscription ? userSubscription.staticCopy() : {};
+            avatar = avatar ? avatar.staticCopy() : {};
+
+            $scope.editUser = {
+              id: user.id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              designation: user.designation,
+              role: user.role,
+              primaryEmail: user.primaryEmail,
+              phoneNumbers: user.phoneNumbers.staticCopy(),
+              companyId: user.company.id,
+              subscription: userSubscription,
+              avatar: avatar
+            };
+
+            if ($scope.editUser.phoneNumbers.length === 0) {
+              $scope.addPhoneNumber();
+            }
+          } else {
+            $scope.editUser = undefined;
+          }
         };
 
         $scope.subscribeUser = function (userId, nameSubscription) {

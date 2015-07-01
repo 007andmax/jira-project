@@ -6,7 +6,21 @@
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state) {
 
-        $scope.user = undefined;
+        if (!$scope.editUser || !$scope.editUser.id) {
+          $scope.isCreation = true;
+          $scope.editUser = {
+            role: 'USER',
+            phoneNumbers: [],
+            subscription: {},
+            avatar: {
+              scale: 50
+            }
+          };
+
+          $scope.$watch('userCompany', function (userCompany) {
+            $scope.editUser.companyId = userCompany ? userCompany.id : undefined;
+          });
+        }
 
         $scope.maximalAmountOfPhones = 3;
         $scope.phoneNumberPattern = /^\+?\(?[0-9]{3}(\-|\) ?| )[0-9]{3}(\-| )[0-9]{4}$/;
@@ -25,64 +39,26 @@
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-        $scope.$watch('editUserId', function () {
+        $scope.$watch('editUser.companyId', function (companyId) {
+          $scope.userCompany = CompaniesService.getOneById(companyId);
 
-          if (!$scope.editUserId) {
-            $scope.isCreation = true;
-            $scope.user = {
-              role: 'USER',
-              phoneNumbers: [],
-              subscription: {},
-              avatar: {
-                scale: 50
-              }
-            };
-
-            $scope.$watch('userCompany', function (userCompany) {
-              $scope.user.companyId = userCompany ? userCompany.id : undefined;
-            });
-
-          } else {
-            var user = UsersService.getOneById($scope.editUserId);
-            var userSubscription = $scope.subscriptions[user.id];
-            var avatar = user.avatar;
-
-            userSubscription = userSubscription ? userSubscription.staticCopy() : {};
-            avatar = avatar ? avatar.staticCopy() : {};
-
-            $scope.userCompany = CompaniesService.getOneById(user.company.id);
-
-            $scope.user = {
-              id: user.id,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              designation: user.designation,
-              role: user.role,
-              primaryEmail: user.primaryEmail,
-              phoneNumbers: user.phoneNumbers.staticCopy(),
-              companyId: user.company.id,
-              subscription: userSubscription,
-              avatar: avatar
-            };
-          }
-
-          if ($scope.user.phoneNumbers.length === 0) {
+          if ($scope.editUser.phoneNumbers.length === 0) {
             $scope.addPhoneNumber();
           }
         });
 
         $scope.addPhoneNumber = function () {
-          $scope.user.phoneNumbers.unshift({
+          $scope.editUser.phoneNumbers.unshift({
             typeNumber: 'MOBILE'
           });
         };
 
         $scope.removePhoneNumber = function (index) {
-          $scope.user.phoneNumbers.splice(index, 1);
+          $scope.editUser.phoneNumbers.splice(index, 1);
         };
 
         $scope.cancelEdit = function () {
-          if (!!$scope.editUserId) {
+          if ($scope.editUser && $scope.editUser.id) {
             $scope.setEditUserId();
           } else {
             $state.go('users');
@@ -90,8 +66,8 @@
         };
 
         $scope.getUserCompanyName = function () {
-          if ($scope.user.companyId) {
-            return CompaniesService.getOneById($scope.user.companyId).name;
+          if ($scope.editUser.companyId) {
+            return CompaniesService.getOneById($scope.editUser.companyId).name;
           }
         };
 
@@ -104,14 +80,14 @@
           if (form.$valid) {
             $scope.savingInProcess = true;
 
-            var phoneNumbers = $scope.user.phoneNumbers,
+            var phoneNumbers = $scope.editUser.phoneNumbers,
               lastPhone = phoneNumbers[phoneNumbers.length - 1];
 
             if (!lastPhone.number || lastPhone.number.trim().length === 0) {
               phoneNumbers.splice(phoneNumbers.length - 1, 1);
             }
 
-            UsersService.save($scope.user, function () {
+            UsersService.save($scope.editUser, function () {
               $scope.savingInProcess = false;
               $scope.cancelEdit();
             })
@@ -119,7 +95,7 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (!!$scope.editUserId || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
       }]);

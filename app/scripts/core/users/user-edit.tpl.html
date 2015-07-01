@@ -1,12 +1,12 @@
 <div class="create-new-user clearfix" ng-controller="quicktech.core.users.editCtrl"
-     ng-class="{'edit-user': !!user.id}">
+     ng-class="{'edit-user': editUser && editUser.id}">
   <form name="userForm">
     <div class="content clearfix">
       <div class="header clearfix"><h4 class="title">{{ isCreation ? 'Create' : 'Edit' }} User</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelEdit()"><span
           aria-hidden="true" class="icn-close-modal"></span></button>
       </div>
-      <div ng-init="loadingInProcess = false" edit-avatar user="user" loading-in-process="loadingInProcess"></div>
+      <div ng-init="loadingInProcess = false" edit-avatar user="editUser" loading-in-process="loadingInProcess"></div>
       <div class="user-fields clearfix">
 
         <div class="row-wrapper clearfix">
@@ -23,7 +23,7 @@
             </div>
 
             <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
-                   name="firstName" ng-model="user.firstName" required="true" make-dirty-on-blur>
+                   name="firstName" ng-model="editUser.firstName" required="true" make-dirty-on-blur>
           </div>
 
           <div class="form-group dropdown pull-left"
@@ -37,7 +37,7 @@
             </div>
 
             <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
-                   name="lastName" ng-model="user.lastName" required="true" make-dirty-on-blur>
+                   name="lastName" ng-model="editUser.lastName" required="true" make-dirty-on-blur>
           </div>
         </div>
 
@@ -54,7 +54,7 @@
             </div>
 
             <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
-                   ng-model="user.designation" required="true" ng-minlength="3" ng-maxlength="30">
+                   ng-model="editUser.designation" required="true" ng-minlength="3" ng-maxlength="30">
           </div>
 
           <div class="form-group dropdown pull-left"
@@ -69,15 +69,15 @@
             </div>
 
             <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-                   ng-model="user.primaryEmail" required="true" ng-pattern="emailPattern"
-                   unique-user-email user-id="user.id">
+                   ng-model="editUser.primaryEmail" required="true" ng-pattern="emailPattern"
+                   unique-user-email user-id="editUser.id">
           </div>
         </div>
 
         <!--phones form-->
-        <div class="row-wrapper clearfix" ng-repeat="phoneNumber in user.phoneNumbers">
+        <div class="row-wrapper clearfix" ng-repeat="phoneNumber in editUser.phoneNumbers">
 
-          <div ng-if="$index !== user.phoneNumbers.length - 1">
+          <div ng-if="$index !== editUser.phoneNumbers.length - 1">
             <div class="form-group dropdown pull-left"
                  ng-class="{error: !userForm['phoneNumber' + $index].$valid}">
               <label>contact no.</label>
@@ -114,7 +114,7 @@
             </a>
           </div>
 
-          <div ng-if="$index === user.phoneNumbers.length - 1">
+          <div ng-if="$index === editUser.phoneNumbers.length - 1">
             <div class="form-group dropdown pull-left" ng-class="{error: !userForm['phoneNumber' + $index].$valid}">
               <label>contact no.</label>
 
@@ -144,7 +144,7 @@
 
             <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
                tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()"
-               ng-disabled="user.phoneNumbers.length >= maximalAmountOfPhones">
+               ng-disabled="editUser.phoneNumbers.length >= maximalAmountOfPhones">
               <span class="icn-add"></span>
             </a>
           </div>
@@ -153,11 +153,11 @@
         <div class="row-wrapper clearfix">
           <div class="form-group cs-type dropdown pull-left">
             <label>account type</label>
-            <input type="text" ng-model="roles[user.role]" data-toggle="dropdown" aria-expanded="true"
+            <input type="text" ng-model="roles[editUser.role]" data-toggle="dropdown" aria-expanded="true"
                    class="form-control form-control-dropdown dropdown-toggle hide-cursor">
 
             <ul class="dropdown-menu dropdown-account-type">
-              <li ng-repeat="(role, label) in roles" ng-click="user.role = role">
+              <li ng-repeat="(role, label) in roles" ng-click="editUser.role = role">
                 <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
               </li>
             </ul>
@@ -174,7 +174,7 @@
 
             <input type="text" ng-model="userCompany" class="form-control form-control-dropdown dropdown-toggle"
                    typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
-                   typeahead-editable="false" typeahead-min-length="0" ng-disabled="user.id" qt-typeahead-show-on-focus
+                   typeahead-editable="false" typeahead-min-length="0" ng-disabled="editUser.id" qt-typeahead-show-on-focus
                    name="userCompany" ng-trim="false" required="true" ng-focus="onFocus($event)">
           </div>
         </div>
@@ -185,27 +185,27 @@
                    data-toggle="dropdown" aria-expanded="true">
 
             <div class="tokens" data-toggle="dropdown">
-              <div class="token ticket" ng-show="user.subscription.ticket">
+              <div class="token ticket" ng-show="editUser.subscription.ticket">
                 <span class="token-label">tkt updates</span>
               </div>
 
-              <div class="token invoice" ng-show="user.subscription.invoice">
+              <div class="token invoice" ng-show="editUser.subscription.invoice">
                 <span class="token-label">inv. updates</span>
               </div>
             </div>
 
             <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
-              <li><a tabindex="-1" href qt-checkbox ng-model="user.subscription.ticket">
+              <li><a tabindex="-1" href qt-checkbox ng-model="editUser.subscription.ticket">
                 <div class="clearfix"><label class="control checkbox pull-left">
-                  <input type="checkbox" ng-model="user.subscription.ticket">
+                  <input type="checkbox" ng-model="editUser.subscription.ticket">
                   <span class="control-indicator" stop-propagation="true"></span>
                 </label>
                   Ticket Updates
                 </div>
               </a></li>
-              <li><a tabindex="-1" href qt-checkbox ng-model="user.subscription.invoice">
+              <li><a tabindex="-1" href qt-checkbox ng-model="editUser.subscription.invoice">
                 <div class="clearfix"><label class="control checkbox pull-left">
-                  <input type="checkbox" ng-model="user.subscription.invoice">
+                  <input type="checkbox" ng-model="editUser.subscription.invoice">
                   <span class="control-indicator"></span>
                 </label>
                   Invoice Updates
