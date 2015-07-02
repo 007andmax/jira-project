@@ -1,5 +1,5 @@
 <div class="content-body company-profile compaines">
-  <div class="charts-wrapper clearfix">
+  <div class="charts-wrapper clearfix hide-fade" ng-hide="ifHideStatistic">
     <div class="charts-row">
       <!--<div class="chart devices">-->
       <!--<div class="content">-->
@@ -34,7 +34,7 @@
             <div class="status">
               <h4>service time billed</h4>
 
-              <div class="time"><span class="hour">{{timeBilledByCompany.value}}</span>hrs</div>
+              <div class="time"><span class="hour">{{ timeBilledByCompany.value }}</span>hrs</div>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
     <!--</div>-->
   </div>
 
-  <div class="collaps-charts">
+  <div class="collaps-charts" ng-click="hideStatistic()">
     <span class="collaps-pointer"> <span class="icn icn-collapse abc"></span> </span>
   </div>
 

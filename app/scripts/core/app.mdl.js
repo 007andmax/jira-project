@@ -13,7 +13,8 @@
       'ui.select',
       'ui.bootstrap',
       'ngSanitize',
-      'ngMessages'
+      'ngMessages',
+      'ngAnimate'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
