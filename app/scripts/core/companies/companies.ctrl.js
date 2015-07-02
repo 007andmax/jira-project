@@ -9,7 +9,6 @@
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
-        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
 
@@ -59,6 +58,14 @@
         //  newSubscription[nameSubscription] = !newSubscription[nameSubscription];
         //  SubscriptionsService.saveUserSubscription(newSubscription);
         //};
+
+        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
+
+        $scope.showStatistic = false;
+        $scope.toggleStatistic = function () {
+          $scope.showStatistic = !$scope.showStatistic;
+        };
+
 
       }]);
 
