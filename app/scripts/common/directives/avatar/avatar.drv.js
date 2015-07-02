@@ -10,18 +10,32 @@
     'png'
   ];
 
-  angular.module("quicktech.core.users").directive('editAvatar',
+  angular.module("quicktech.common.directives").directive('editAvatar',
     ['$modal', 'FilesService', '$rootScope', function ($modal, FilesService, $rootScope) {
+
+      var urlGetters = {
+        user: $rootScope.getUserAvatarUrl,
+        contact: $rootScope.getContactAvatarUrl
+      };
+
       return {
         restrict: 'A',
-        templateUrl: '/html/scripts/core/users/avatar/avatar.tpl.html',
+        templateUrl: '/html/scripts/common/directives/avatar/avatar.tpl.html',
+        require: 'ngModel',
         scope: {
-          user: '=user',
-          loadingInProcess: '=loadingInProcess'
+          model: '=ngModel'
         },
-        link: function (scope, element, attrs) {
+        link: function (scope, element, attrs, ctrl) {
 
-          scope.getUserAvatarUrl = $rootScope.getUserAvatarUrl;
+          if (!urlGetters[attrs.modelName]) {
+            throw 'model-name must be specified! Available values - ["user", "contact"]';
+          }
+
+          scope.getUrl = urlGetters[attrs.modelName];
+
+          scope.getError = function () {
+            return ctrl.$error;
+          };
 
           element.on('click', '[change-avatar-button]', function () {
             var file = element.find('input[type=file]');
@@ -33,10 +47,10 @@
           element.on('click', '[change-position-button]', function (e) {
 
             var avatar = {
-              scale: scope.user.avatar.scale,
-              origin: scope.user.avatar.origin,
-              x: scope.user.avatar.x,
-              y: scope.user.avatar.y
+              scale: scope.model.scale,
+              origin: scope.model.origin,
+              x: scope.model.x,
+              y: scope.model.y
             };
 
             var img = new Image;
@@ -46,16 +60,16 @@
 
               modalInstance.result.then(function (cropped) {
 
-                if (avatar.scale != scope.user.avatar.scale
-                  || avatar.x != scope.user.avatar.x
-                  || avatar.y != scope.user.avatar.y) {
+                if (avatar.scale != scope.model.scale
+                  || avatar.x != scope.model.x
+                  || avatar.y != scope.model.y) {
 
-                  scope.loadingInProcess = true;
+                  ctrl.$setValidity('loadingInProcess', false);
 
                   FilesService.createImageFromBase64Url(cropped, function (cropped) {
                     avatar.cropped = cropped;
-                    scope.user.avatar = avatar;
-                    scope.loadingInProcess = false;
+                    ctrl.$setViewValue(avatar);
+                    ctrl.$setValidity('loadingInProcess', true);
                   });
                 }
               }, function () {
@@ -63,7 +77,7 @@
               });
             };
 
-            img.src = '/file/' + scope.user.avatar.origin.id;
+            img.src = '/file/' + scope.model.origin.id;
 
           });
 
@@ -71,7 +85,7 @@
           element.on('change', 'input[type=file]', function (e) {
             var file = this.files[0];
 
-            if (validate(file, element)) {
+            if (validate(file, ctrl, scope)) {
 
               var avatar = {
                 scale: 50
@@ -84,7 +98,7 @@
 
                 modalInstance.result.then(function (cropped) {
 
-                  scope.loadingInProcess = true;
+                  ctrl.$setValidity('loadingInProcess', false);
 
                   FilesService.create(file, undefined, function (origin) {
                     avatar.origin = origin;
@@ -103,8 +117,8 @@
                     finished++;
 
                     if (finished >= 2) {
-                      scope.user.avatar = avatar;
-                      scope.loadingInProcess = false;
+                      ctrl.$setViewValue(avatar);
+                      ctrl.$setValidity('loadingInProcess', true);
                     }
                   }
                 }, function () {
@@ -121,8 +135,8 @@
             return $modal.open({
               animation: true,
               backdrop: 'static',
-              templateUrl: '/html/scripts/core/users/avatar/crop.tpl.html',
-              controller: 'quicktech.core.users.avatar.cropCtrl',
+              templateUrl: '/html/scripts/common/directives/avatar/crop.tpl.html',
+              controller: 'quicktech.common.directives.avatar.cropCtrl',
               resolve: {
                 image: function () {
                   return img;
@@ -138,27 +152,14 @@
       }
     }]);
 
-  function validate(file, element) {
+  function validate(file, ctrl, scope) {
 
-    var isValid = true;
+    ctrl.$setValidity('maxsize', file.size <= maxFileSize);
+    ctrl.$setValidity('filetype', allowedExtensions.indexOf(getExtension().toLowerCase()) >= 0);
 
-    if (file.size > maxFileSize) {
-      element.find('[too-large-file-msg]').show();
-      isValid = false;
-    } else {
-      element.find('[too-large-file-msg]').hide();
-    }
+    scope.$digest();
 
-    var extension = getExtension();
-
-    if (allowedExtensions.indexOf(extension.toLowerCase()) < 0) {
-      element.find('[illegal-file-type-msg]').show();
-      isValid = false;
-    } else {
-      element.find('[illegal-file-type-msg]').hide();
-    }
-
-    return isValid;
+    return ctrl.$valid;
 
     function getExtension() {
       var arr = file.name.split('.');

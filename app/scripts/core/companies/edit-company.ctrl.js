@@ -10,6 +10,7 @@
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
+        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.companies = CompaniesService.getClientCompanies();
         //todo receive it using services!!
         $http.get('/addresses/getAllLocales').success(function (resp) {
@@ -37,13 +38,13 @@
             domain: company.domain,
             primaryAddress: companyData.primaryAddress,
             addresses: companyData.addresses || [{}],
-            contacts: companyData.contacts || [{}]
+            contacts: companyData.contacts || [getEmptyContact()]
           };
 
         } else {
           $scope.editCompany = {
             addresses: [{}],
-            contacts: [{}]
+            contacts: [getEmptyContact()]
           };
         }
 
@@ -59,9 +60,27 @@
           $scope.editCompany.addresses.splice(index, 1);
         };
 
+        $scope.addContact = function () {
+          $scope.editCompany.contacts.unshift(getEmptyContact());
+        };
+
+        $scope.removeContact = function (index) {
+          $scope.editCompany.contacts.splice(index, 1);
+        };
+
+        $scope.isShowingErrors = function (contact, form, fieldName) {
+          return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+        };
+
         $scope.save = function () {
           //todo fix phone numbers before save!!!!!!!!!!!!!
         };
+
+        function getEmptyContact() {
+          return {
+            subscription: {}
+          };
+        }
       }]);
 
 }());

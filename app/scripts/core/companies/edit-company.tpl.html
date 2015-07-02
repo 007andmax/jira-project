@@ -1,6 +1,6 @@
 <div class="content-body users ">
   <div class="create-new-user clearfix">
-    <form>
+    <form name="companyForm">
       <div class="navnform-wrapper clearfix">
         <div class="form-navigation pull-left" style="position:fixed;">
           <ul class="form-nav" navigation-bar="#navigation-content-wrapper">
@@ -140,20 +140,18 @@
                   <input type="text" ng-model="location.locale"
                          class="form-control form-control-dropdown dropdown-toggle pull-left"
                          typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
-                         typeahead-editable="false" typeahead-min-length="0" ng-disabled="editUser.id"
-                         qt-typeahead-show-on-focus
-                         name="userCompany" ng-trim="false" required="true">
-
+                         typeahead-editable="false" typeahead-min-length="0"
+                         qt-typeahead-show-on-focus name="userCompany" ng-trim="false" required="true">
 
                   <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"
+                     tooltip="Add More" tooltip-placement="top"
                      style="margin-top:0;" ng-click="addLocation()" ng-show="$last">
                     <span class="icn-add"></span>
                   </a>
 
-                  <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"
-                     style="margin-top:0;" ng-click="removeLocation()" ng-show="!$last">
+                  <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+                     tooltip="Remove Contact no." tooltip-placement="top"
+                     style="margin-top:0;" ng-click="removeLocation($index)" ng-show="!$last">
                     <span class="icn-remove-update"></span>
                   </a>
                 </div>
@@ -170,91 +168,165 @@
 
             <div class="forms-seprator dl" style="margin-top: 67px; margin-bottom:77px;"></div>
 
-            <div id="primary-contacts" class="content clearfix">
+            <div id="primary-contacts" class="content clearfix" ng-repeat="contact in editCompany.contacts"
+                 ng-form="contactForm">
               <div class="header clearfix">
                 <h4 class="title">Primary Contact(s)</h4>
               </div>
-              <div class="avatar-content default clearfix" style="margin-top: 30px;">
-                <div class="avatar"><img src="res/images/avatars/avatar-xlarge.png" class="no-avatar"></div>
-                <div class="choose-file">
-                  <div class="select-file">
-                    <input type="file"/>
-                    <button type="button" class="btn btn-gray pull-left" data-dismiss="modal">Choose Avatar</button>
-                    <span class="file-name pull-left">No File Selected</span>
+              <div edit-avatar ng-model="contact.avatar" model-name="contact"></div>
+
+              <div class="user-fields clearfix">
+                <div class="form-group dropdown pull-left"
+                     ng-class="{error: isShowingErrors(contact, contactForm, 'firstName')}">
+
+                  <label>first name</label>
+
+                  <div ng-messages="contactForm.firstName.$error"
+                       ng-if="isShowingErrors(contact, contactForm, 'firstName')">
+                    <div class="qt-error-msg" ng-message="required">First name is required.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">First name is too large.</div>
+                    <div class="qt-error-msg" ng-message="minlength">First name is too short.</div>
                   </div>
-                  <div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>
+
+                  <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
+                         name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
+                </div>
+
+                <div class="form-group dropdown pull-left"
+                     ng-class="{error: isShowingErrors(contact, contactForm, 'lastName')}">
+                  <label>last name</label>
+
+                  <div ng-messages="contactForm.lastName.$error"
+                       ng-if="isShowingErrors(contact, contactForm, 'lastName')">
+                    <div class="qt-error-msg" ng-message="required">Last name requires at least 1 letter.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">Last name is too large.</div>
+                    <div class="qt-error-msg" ng-message="minlength">Last name is too short.</div>
+                  </div>
+
+                  <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
+                         name="lastName" ng-model="contact.lastName" required="true" make-dirty-on-blur>
                 </div>
               </div>
 
-              <div class="user-fields clearfix">
-                <div class="row-wrapper clearfix">
-                  <div class="form-group dropdown pull-left error">
-                    <label>first name</label>
+              <div class="row-wrapper clearfix">
 
-                    <div class="error-msg" style="display:block;">First name is required.</div>
-                    <input type="text" class="form-control " value="" aria-expanded="true">
-                  </div>
-                  <div class="form-group dropdown pull-left error">
-                    <label>last name</label>
+                <div class="form-group dropdown pull-left"
+                     ng-class="{error: isShowingErrors(contact, contactForm, 'designation')}">
+                  <label>designation</label>
 
-                    <div class="error-msg" style="display:block;">Last name requires at least 1 letter.</div>
-                    <input type="text" class="form-control " value="" aria-expanded="true">
+                  <div ng-messages="contactForm.designation.$error"
+                       ng-if="isShowingErrors(contact, contactForm, 'designation')">
+                    <div class="qt-error-msg" ng-message="required">Please enter a designation.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
+                    <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
                   </div>
+
+                  <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
+                         ng-model="contact.designation" required="true" ng-minlength="3" ng-maxlength="30">
                 </div>
 
-                <div class="row-wrapper clearfix">
-                  <div class="form-group error dropdown pull-left">
-                    <label>designation</label>
+                <div class="form-group dropdown pull-left"
+                     ng-class="{error: isShowingErrors(contact, contactForm, 'email')}">
+                  <label>email</label>
 
-                    <div class="error-msg" style="display:block;">Please enter a designation.</div>
-                    <input type="text" class="form-control " value="" aria-expanded="true">
+                  <div ng-messages="contactForm.email.$error" ng-if="isShowingErrors(contact, contactForm, 'email')">
+                    <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
+                    <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
+                    <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
+                    <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
                   </div>
-                  <div class="form-group error dropdown pull-left">
-                    <label>email</label>
 
-                    <div class="error-msg" style="display:block;">Email field cannot be left empty.</div>
-                    <input type="text" class="form-control " value="" aria-expanded="true"
-                           data-content="Please enter a valid email address." data-html="true" data-popover="true">
+                  <!--todo add uniq validation!!-->
+                  <input type="text" class="form-control" name="email" aria-expanded="true" make-dirty-on-blur
+                         ng-model="contact.email" required="true" ng-pattern="emailPattern"
+                         unique-contact-email contact-id="contact.id">
+                </div>
+              </div>
+
+              <div phone-numbers-edit ng-model="contact.phoneNumbers"></div>
+
+              <div class="row-wrapper clearfix">
+                <div class="form-group  cs-type dropdown pull-left">
+                  <label>subscribe to</label>
+                  <input type="text" class="form-control form-control-dropdown dropdown-toggle hide-cursor" value=""
+                         data-toggle="dropdown" aria-expanded="true">
+
+                  <div class="tokens" data-toggle="dropdown">
+                    <div class="token ticket" ng-show="contact.subscription.ticket">
+                      <span class="token-label">tkt updates</span>
+                    </div>
+
+                    <div class="token invoice" ng-show="contact.subscription.invoice">
+                      <span class="token-label">inv. updates</span>
+                    </div>
                   </div>
+
+                  <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
+                    <li><a tabindex="-1" href qt-checkbox ng-model="contact.subscription.ticket">
+                      <div class="clearfix"><label class="control checkbox pull-left">
+                        <input type="checkbox" ng-model="contact.subscription.ticket">
+                        <span class="control-indicator" stop-propagation="true"></span>
+                      </label>
+                        Ticket Updates
+                      </div>
+                    </a></li>
+                    <li><a tabindex="-1" href qt-checkbox ng-model="contact.subscription.invoice">
+                      <div class="clearfix"><label class="control checkbox pull-left">
+                        <input type="checkbox" ng-model="contact.subscription.invoice">
+                        <span class="control-indicator"></span>
+                      </label>
+                        Invoice Updates
+                      </div>
+                    </a></li>
+                  </ul>
                 </div>
 
-                <div class="row-wrapper clearfix">
-                  <div class="form-group dropdown pull-left">
-                    <label>contact no.</label>
-                    <input type="text" class="form-control " value="" aria-expanded="true">
-                  </div>
-                  <div class="form-group dropdown number-type pull-left">
-                    <input type="text"
-                           class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
-                           value="" data-toggle="dropdown" aria-expanded="true">
+                <div class="form-group pull-right">
 
-                    <div class="dropdown-default-value">Mobile</div>
-                    <ul class="dropdown-menu dropdown-account-type">
-                      <li><a tabindex="-1" href="#"> Mobile </a></li>
-                      <li><a tabindex="-1" href="#"> Office </a></li>
-                      <li><a tabindex="-1" href="#"> Fax </a></li>
-                    </ul>
-                  </div>
                   <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span
-                    class="icn-add"></span></a>
-                </div>
+                     tooltip="Add More" tooltip-placement="top"
+                     style="margin-top:0;" ng-click="addContact()" ng-show="$last">
+                    <span class="icn-add"></span>
+                  </a>
 
-                <div class="row-wrapper clearfix">
-                  <div class="form-group cs-type dropdown pull-left">
-                    <label>subscribe to</label>
-                    <input type="text" class="form-control form-control-dropdown hide-cursor" aria-expanded="true"
-                           data-popover="true" data-html="true"
-                           data-content="Ticket and/or Invoice subscribers will receive respective updates via email.">
+                  <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+                     tooltip="Remove Contact no." tooltip-placement="top"
+                     style="margin-top:0;" ng-click="removeContact($index)" ng-show="!$last">
+                    <span class="icn-remove-update"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="forms-seprator vend" style="margin-top: 40px;"></div>
+
+          <div id="vendors" class="content clearfix">
+            <div class="header clearfix">
+              <h4 class="title">Vendor(s)</h4>
+            </div>
+
+            <div class="user-fields clearfix">
+              <div class="row-wrapper av-field clearfix">
+                <div class="form-group clearfix">
+                  <label class="norm">Associated Vendor(s)</label>
+                </div>
+                <div class="dropdown">
+                  <div class="form-group" style="width: 100%;"
+                       popover="Enter vendor(s) to be associated with this company."
+                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+
+                    <input type="text" class="form-control dropdown-toggle tokenfield" data-toggle="dropdown"
+                           value="Spectrum & Co." placeholder="Click here to add vendor..." ng-disabled="true">
                     <ul class="dropdown-menu dropdown-subscribe">
                       <li>
                         <a tabindex="-1" href="#">
                           <div class="clearfix">
                             <label class="control checkbox pull-left">
-                              <input type="checkbox" checked="">
+                              <input type="checkbox">
                               <span class="control-indicator"></span>
                             </label>
-                            Ticket Updates
+                            Millennium Systems
                           </div>
                         </a>
                       </li>
@@ -262,193 +334,140 @@
                         <a tabindex="-1" href="#">
                           <div class="clearfix">
                             <label class="control checkbox pull-left">
-                              <input type="checkbox" checked="">
+                              <input type="checkbox">
                               <span class="control-indicator"></span>
                             </label>
-                            Invoice Updates
+                            Helmatic & Getanas Ltd.
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" href="#">
+                          <div class="clearfix">
+                            <label class="control checkbox pull-left">
+                              <input type="checkbox" checked>
+                              <span class="control-indicator"></span>
+                            </label>
+                            Spectrum & Co.
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" href="#">
+                          <div class="clearfix">
+                            <label class="control checkbox pull-left">
+                              <input type="checkbox">
+                              <span class="control-indicator"></span>
+                            </label>
+                            Jonas & John Inc.
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a tabindex="-1" href="#">
+                          <div class="clearfix">
+                            <label class="control checkbox pull-left">
+                              <input type="checkbox">
+                              <span class="control-indicator"></span>
+                            </label>
+                            Creative Computers
                           </div>
                         </a>
                       </li>
                     </ul>
                   </div>
-
-                  <div class="form-group pull-right">
-                    <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-right tp-hide"
-                       data-toggle="tooltip" data-original-title="Add More" data-placement="top"><span
-                      class="icn-add"></span></a>
-                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="forms-seprator vend" style="margin-top: 40px;"></div>
+          <div class="forms-seprator ven" style="margin-top: 40px;"></div>
 
-            <div id="vendors" class="content clearfix">
-              <div class="header clearfix">
-                <h4 class="title">Vendor(s)</h4>
-              </div>
+          <div id="tax-rates" class="content clearfix">
+            <div class="header clearfix">
+              <h4 class="title">Default Tax</h4>
+            </div>
 
-              <div class="user-fields clearfix">
-                <div class="row-wrapper av-field clearfix">
-                  <div class="form-group clearfix">
-                    <label class="norm">Associated Vendor(s)</label>
-                  </div>
-                  <div class="dropdown">
-                    <div class="form-group" style="width: 100%;" data-popover="true" data-html="true"
-                         data-content="Enter vendor(s) to be associated with this company.">
-                      <input type="text" class="form-control dropdown-toggle tokenfield" data-toggle="dropdown"
-                             value="Spectrum & Co." placeholder="Click here to add vendor...">
-                      <ul class="dropdown-menu dropdown-subscribe">
-                        <li>
-                          <a tabindex="-1" href="#">
-                            <div class="clearfix">
-                              <label class="control checkbox pull-left">
-                                <input type="checkbox">
-                                <span class="control-indicator"></span>
-                              </label>
-                              Millennium Systems
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a tabindex="-1" href="#">
-                            <div class="clearfix">
-                              <label class="control checkbox pull-left">
-                                <input type="checkbox">
-                                <span class="control-indicator"></span>
-                              </label>
-                              Helmatic & Getanas Ltd.
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a tabindex="-1" href="#">
-                            <div class="clearfix">
-                              <label class="control checkbox pull-left">
-                                <input type="checkbox" checked>
-                                <span class="control-indicator"></span>
-                              </label>
-                              Spectrum & Co.
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a tabindex="-1" href="#">
-                            <div class="clearfix">
-                              <label class="control checkbox pull-left">
-                                <input type="checkbox">
-                                <span class="control-indicator"></span>
-                              </label>
-                              Jonas & John Inc.
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a tabindex="-1" href="#">
-                            <div class="clearfix">
-                              <label class="control checkbox pull-left">
-                                <input type="checkbox">
-                                <span class="control-indicator"></span>
-                              </label>
-                              Creative Computers
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+            <div class="grid-header-row clearfix">
+              <div class="grid-col">TAX TYPE</div>
+              <div class="grid-col">RATE</div>
+            </div>
+
+            <div class="grid-row grid-row clearfix">
+              <div class="grid-col">GST</div>
+              <div class="grid-col val">
+                <span>8%</span>
+                <a href="javascript:void(0)" class="icn icn-nav-delete pull-right"></a>
+                <a href="javascript:void(0)" class="icn icn-edit pull-right"></a>
               </div>
             </div>
 
-            <div class="forms-seprator ven" style="margin-top: 40px;"></div>
-
-            <div id="tax-rates" class="content clearfix">
-              <div class="header clearfix">
-                <h4 class="title">Default Tax</h4>
-              </div>
-
-              <div class="grid-header-row clearfix">
-                <div class="grid-col">TAX TYPE</div>
-                <div class="grid-col">RATE</div>
-              </div>
-
-              <div class="grid-row grid-row clearfix">
-                <div class="grid-col">GST</div>
-                <div class="grid-col val">
-                  <span>8%</span>
-                  <a href="javascript:void(0)" class="icn icn-nav-delete pull-right"></a>
-                  <a href="javascript:void(0)" class="icn icn-edit pull-right"></a>
+            <div class="user-fields clearfix ntr">
+              <div class="row-wrapper clearfix">
+                <div class="form-group dropdown pull-left">
+                  <label class="norm">New Tax Rate</label>
+                  <input type="text" class="form-control" placeholder="Tax Type" data-popover="true" data-html="true"
+                         data-content="This Tax information will be added to this company's invoices with taxable products and services.">
                 </div>
-              </div>
 
-              <div class="user-fields clearfix ntr">
-                <div class="row-wrapper clearfix">
-                  <div class="form-group dropdown pull-left">
-                    <label class="norm">New Tax Rate</label>
-                    <input type="text" class="form-control" placeholder="Tax Type" data-popover="true" data-html="true"
-                           data-content="This Tax information will be added to this company's invoices with taxable products and services.">
-                  </div>
+                <div class="form-group pull-left">
+                  <label class="norm">&nbsp;</label>
+                  <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
+                         style="width: 197px;">
 
-                  <div class="form-group pull-left">
-                    <label class="norm">&nbsp;</label>
-                    <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
-                           style="width: 197px;">
-
-                    <div class="label-add-btn"><a href="#" class="btn btn-cr btn-green btn-tax pull-right"><span
-                      class="small-icn-tick icn"></span></a></div>
-                  </div>
+                  <div class="label-add-btn"><a href="#" class="btn btn-cr btn-green btn-tax pull-right"><span
+                    class="small-icn-tick icn"></span></a></div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="forms-seprator agent" style="margin-top: 40px;"></div>
+          <div class="forms-seprator agent" style="margin-top: 40px;"></div>
 
-            <div id="create-agents" class="content clearfix">
-              <div class="header clearfix">
-                <h4 class="title">Create Agent(s)</h4>
-              </div>
+          <div id="create-agents" class="content clearfix">
+            <div class="header clearfix">
+              <h4 class="title">Create Agent(s)</h4>
+            </div>
 
-              <div class="user-fields clearfix">
-                <div class="row-wrapper clearfix">
-                  <div class="form-group dropdown pull-left">
-                    <label>Domain/Username</label>
-                    <input type="text" class="form-control " value="" aria-expanded="true"
-                           data-content="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain"
-                           data-html="true" data-popover="true">
-                  </div>
-
-                  <div class="form-group pull-left" style="position: relative;">
-                    <label>Password</label>
-                    <input type="text" class="form-control" value="Password" aria-expanded="true">
-
-                    <div class="password-eye hide-pass"><span class="icn-ipass"></span></div>
-                    <!-- <div class="password-eye"><span class="icn-ipass"></span></div> -->
-                  </div>
+            <div class="user-fields clearfix">
+              <div class="row-wrapper clearfix">
+                <div class="form-group dropdown pull-left">
+                  <label>Domain/Username</label>
+                  <input type="text" class="form-control " value="" aria-expanded="true"
+                         data-content="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain"
+                         data-html="true" data-popover="true">
                 </div>
 
+                <div class="form-group pull-left" style="position: relative;">
+                  <label>Password</label>
+                  <input type="text" class="form-control" value="Password" aria-expanded="true">
 
-                <div class="row-wrapper dropdown clearfix">
-                  <div class="form-group pull-left">
-                    <label>Description</label>
-                  </div>
-                  <div class="clearfix">
-                    <input type="text" class="form-control pull-left" style="width:453px;">
-                    <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                       data-toggle="tooltip" data-original-title="Add More" data-placement="top"
-                       style="margin-top:0;"><span class="icn-add"></span></a>
-                  </div>
-                  <div class="word-count">40</div>
+                  <div class="password-eye hide-pass"><span class="icn-ipass"></span></div>
+                  <!-- <div class="password-eye"><span class="icn-ipass"></span></div> -->
                 </div>
               </div>
-            </div>
-            <div id="finish-navs" class="forms-seprator full"></div>
 
-            <div class="row-wrapper clearfix" style="margin-top: 20px;">
-              <button type="button" class="btn btn-scooter btn-create pull-right" style="margin-left: 10px;">Create
-              </button>
-              <button type="button" class="btn btn-gray pull-right" data-dismiss="modal">Cancel</button>
+
+              <div class="row-wrapper dropdown clearfix">
+                <div class="form-group pull-left">
+                  <label>Description</label>
+                </div>
+                <div class="clearfix">
+                  <input type="text" class="form-control pull-left" style="width:453px;">
+                  <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"
+                     style="margin-top:0;"><span class="icn-add"></span></a>
+                </div>
+                <div class="word-count">40</div>
+              </div>
             </div>
+          </div>
+          <div id="finish-navs" class="forms-seprator full"></div>
+
+          <div class="row-wrapper clearfix" style="margin-top: 20px;">
+            <button type="button" class="btn btn-scooter btn-create pull-right" style="margin-left: 10px;">Create
+            </button>
+            <button type="button" class="btn btn-gray pull-right" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>

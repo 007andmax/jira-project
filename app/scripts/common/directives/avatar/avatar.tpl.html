@@ -1,0 +1,27 @@
+<div class="avatar-content default clearfix">
+  <div class="avatar">
+    <img ng-src="{{ getUrl(model) }}" class="no-avatar" ng-if="!model.cropped.id">
+    <img ng-src="/file/{{ model.cropped.id }}" class="no-avatar" ng-if="model.cropped.id">
+
+    <div class="reposition-wrapper" ng-show="model.origin || getError().loadingInProcess">
+      <div class="reposition" ng-show="model.origin && !getError().loadingInProcess" change-position-button>
+        REPOSITION...
+      </div>
+      <div class="loader" ng-show="getError().loadingInProcess"></div>
+    </div>
+  </div>
+  <div class="choose-file">
+    <div class="select-file"><input type="file" accept=".jpg,.jpeg,.gif,.png"/>
+      <button type="button" class="btn btn-gray pull-left" change-avatar-button>
+        Choose Avatar
+      </button>
+      <span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>
+    </div>
+    <div class="file-type pull-left ">maximum size of 2 MB. jpg, jpeg, GIF, PNG.</div>
+
+    <div ng-messages="getError()">
+      <div class="qt-error-msg" ng-message="maxsize">File is too large</div>
+      <div class="qt-error-msg" ng-message="filetype">Illegal type of file</div>
+    </div>
+  </div>
+</div>
