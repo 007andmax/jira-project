@@ -61,14 +61,9 @@
 
         $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
-        $scope.ifHideStatistic = false;
-        $scope.hideStatistic = function () {
-          if (!$scope.ifHideStatistic) {
-            $scope.ifHideStatistic = true;
-          } else {
-            $scope.ifHideStatistic = false;
-          }
-          ;
+        $scope.showStatistic = false;
+        $scope.toggleStatistic = function () {
+          $scope.showStatistic = !$scope.showStatistic;
         };
 
 
