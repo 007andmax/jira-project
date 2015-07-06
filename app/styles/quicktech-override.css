@@ -9,9 +9,7 @@
 	-o-user-select:none;
 }
 
-aside.left {
-	z-index: 20000;
-}
+
 
 .selected {
 	background-color: #e0f5f7;
