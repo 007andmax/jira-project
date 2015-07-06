@@ -4603,6 +4603,7 @@ margin-left: 7px;
 
   .form-control-number-type,
   .open .form-control-number-type,
+  .open .form-control-number-type:hover,
   .number-type:active  .form-control,
   .number-type:focus  .form-control{
     background-image: url('../images/input-icons/icn-input-caret-dark.png?1423306610');
@@ -4620,7 +4621,7 @@ margin-left: 7px;
     }
   }
   /* line 669, ../sass/bootstrap/_forms.scss */
-  .form-control-dropdown:focus:hover,
+ /*.form-control-dropdown:focus:hover,*/
   .created-for .form-control.focus {
     background-image: url('../images/input-icons/icn-input-caret.png?1423306610') !important;
   }
