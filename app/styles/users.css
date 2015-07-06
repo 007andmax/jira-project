@@ -467,6 +467,7 @@ border-radius: 0px;
   -webkit-transition: 0.3s ease-out border-radius;
   -o-transition: 0.3s ease-out border-radius;
   transition: 0.3s ease-out border-radius;
+  cursor: default;
 }
 .create-new-user .user-fields .form-group .form-control-number-type:hover,
 .create-new-user .user-fields .form-group .form-control-number-type.hover{
@@ -476,7 +477,7 @@ border-radius: 0px;
 .create-new-user .user-fields .form-group .form-control-number-type:active,
 .create-new-user .user-fields .form-group .form-control-number-type:focus,
 .create-new-user .user-fields .form-group .form-control-number-type.focus{
-	color: #9fabb9;
+	color: #4E5E71;
 	background-color: #9fabb9;
 	border-color: #9fabb9;	
   border-radius:3px;
