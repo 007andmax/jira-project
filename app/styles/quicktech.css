@@ -4432,9 +4432,9 @@ th {
   }
 
   /* line 580, ../sass/bootstrap/_forms.scss */
-  .error-msg {
+ /* .error-msg {
     display: none;
-  }
+  }*/
 
   /* line 582, ../sass/bootstrap/_forms.scss */
 /* .form-group.error {
@@ -4447,7 +4447,7 @@ th {
     border-color: #f29c9a;
   }
   /* line 588, ../sass/bootstrap/_forms.scss */
-  .form-group.error > .error-msg {
+  .form-group.error  .qt-error-msg {
     display: block;
     margin-bottom: 2px;
     font-size: 11px;
@@ -5979,7 +5979,7 @@ margin-left: 7px;
   font-weight: normal;
   line-height: 1.32857;
   color: #4e5e71;
-
+outline: 0;
 }
 
 .subdropdown-menu > .jspContainer > .jspPane > li > a {
@@ -7356,7 +7356,7 @@ a.btn-remote-access{
       position: fixed;
       right: 0;
       left: 0;
-      z-index: 11111;
+      z-index: 1000;
     }
     @media (min-width: 1024px) {
       /* line 140, ../sass/bootstrap/_navbar.scss */

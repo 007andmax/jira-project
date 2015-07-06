@@ -1,19 +1,17 @@
 .content-body.users{
-	  padding: 37px 0px 40px 0px;}
+    padding: 37px 0px 40px 0px;}
 
 .users-list{
-	border-top: 1px solid #e9edf1;
-	padding-top: 40px;
-	width: calc(100%);
-	  padding-right: 40px;
+  width: calc(100%);
+    padding-right: 40px;
 }
 .users-list .user{
-	border: 1px solid #e9edf1;
-	float: left;
-	height: 242px;
-	 width:calc(100% / 3 - 40px);
-	margin-left: 40px;
-	margin-bottom: 40px;
+  border: 1px solid #e9edf1;
+  float: left;
+  height: 242px;
+   width:calc(100% / 3 - 40px);
+  margin-left: 40px;
+  margin-bottom: 40px;
   min-width: 440px !important;
 }
 
@@ -23,18 +21,18 @@
   width: 242px;
 }
 .users-list .user .avatar{
-	width: 180px;
-	overflow: hidden;
-	margin-top: -1px;
-	margin-right: -1px;
-	float: right;
-	border-radius: 0px;
-	height: 242px;
+  width: 180px;
+  overflow: hidden;
+  margin-top: -1px;
+  margin-right: -1px;
+  float: right;
+  border-radius: 0px;
+  height: 242px;
 }
 .users-list .user .avatar.no-avatar{
-	background: #e9edf1;
-	text-align: center;
-	vertical-align: middle;
+  background: #e9edf1;
+  text-align: center;
+  vertical-align: middle;
 }
 .users-list .user .avatar.no-avatar img{
 width: auto;
@@ -46,40 +44,40 @@ max-width: 120px;
 padding-top: 30px;
 }
 .users-list .user.loading .l1{
-	height: 10px;
-	width: 178px;
-	background-color: #e9edf1;
+  height: 10px;
+  width: 178px;
+  background-color: #e9edf1;
 }
 .users-list .user.loading .l2{
-	height: 10px;
-	width: 60px;
-	margin-top: 15px;
-	background-color: #e9edf1;
+  height: 10px;
+  width: 60px;
+  margin-top: 15px;
+  background-color: #e9edf1;
 }
 .users-list .user .content{
-	width: calc(100% - 179px);
-	float: left;
-	padding: 28px 30px 30px; 
-	position: relative;
+  width: calc(100% - 179px);
+  float: left;
+  padding: 28px 30px 30px; 
+  position: relative;
 }
 .users-list .user .content h3{
-	font-size: 14px;
-	font-weight: bold;
-	margin:0px;
+  font-size: 14px;
+  font-weight: bold;
+  margin:0px;
 }
 .users-list .user .content .title span {
-	margin-left:10px;
-	margin-top: -1px;
+  margin-left:10px;
+  margin-top: -1px;
 }
 .users-list .title{
-	width: 100%;
+  width: 100%;
 }
 .edit-user  .title{
   width: 200px !important;
 }
 .users-list .status{
-	width: 100%;
-	margin-top: 4px;
+  width: 100%;
+  margin-top: 4px;
 }
 .user .status .dot{
 margin-right: 6px;
@@ -91,10 +89,10 @@ margin-right: 6px;
   display: inline-block;
 }
 .user .status .dot.on{
-	background: #4caf50;
+  background: #4caf50;
 }
 .user .status .dot.off{
-	background: #7c8999;
+  background: #7c8999;
 }
 .user .status .label-white{
    padding: 6px 12px;
@@ -110,61 +108,61 @@ margin-right: 6px;
   position:  relative;
   display: inline-block;}
     .users-list  .user-actions{
-    	margin-top: 15px;
+      margin-top: 15px;
     }
     .users-list  .user-actions .btn{
-    	margin-right: 10px;
+      margin-right: 10px;
     }
       .user-actions .more{
-    	margin-right: 0px;
-    	margin-top: 16px;
-    	margin-left: 10px;
+      margin-right: 0px;
+      margin-top: 16px;
+      margin-left: 10px;
     }
  .user-actions .more > a{
-    	line-height: 0px;
+      line-height: 0px;
   padding: 0px;
   display: block;
   margin: 0px;
     }
       .users-list   .total-tickets{
-      	color: #9fabb9;
-      	margin-top: 16px;
-      	  width: 100%;
+        color: #9fabb9;
+        margin-top: 16px;
+          width: 100%;
 
       }
       .more > .dropdown-menu{left: -6px;}
            .left-align.more > .dropdown-menu{right: -6px; left: auto;}
             .users-list   .total-tickets .bold{
-            	font-weight: 600;
+              font-weight: 600;
             }
       .users-list   .total-tickets.no-number{
-      	margin-top: 41px;
+        margin-top: 41px;
       }
       .users-list   .total-tickets .icn,
       .users-list   .number .icn,
       .users-list   .company .icn{
-      	float: left;
-      	margin-top: 3px;
-      	margin-right: 10px;
+        float: left;
+        margin-top: 3px;
+        margin-right: 10px;
       }
        .users-list   .number .icn{margin-top: 2px;}
    .users-list   .bold{
-      	color: #4e5e71;
+        color: #4e5e71;
       }
       .users-list .number .icn-fax-machine,  .users-list .number .icn-telephone{
         margin-top: 3px;
       }
        .users-list   .number{
-      	color: #9fabb9;
-      	margin-top: 7px;
-      	    text-overflow: ellipsis;
+        color: #9fabb9;
+        margin-top: 7px;
+            text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
       }
        .users-list   .company{
-      	color: #9fabb9;
-      	margin-top: 7px;
+        color: #9fabb9;
+        margin-top: 7px;
     text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -172,22 +170,22 @@ margin-right: 6px;
 
       }
        .users-list .user-badges{
-       	position: absolute;
-       	right: 10px;
-       	top: 10px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
        }
         .users-list .user-badges .tooltip{
-        	margin-left: -11px !important;
-        	left: 0px !important;
+          margin-left: -11px !important;
+          left: 0px !important;
 
         }
         .users-list .user-badges .tooltip .tooltip-arrow{
-        	left: 15px !important;
+          left: 15px !important;
         }
        .users-list .user-badges li{
-       	width: 8px;
-       	height: 12px;
-       	position: relative;
+        width: 8px;
+        height: 12px;
+        position: relative;
 float: left;
 margin-left: 6px;
        }
@@ -196,17 +194,17 @@ margin-left: 6px;
   padding: 11px 20px;
           }
  .devices-menu li a span{
- 	float: left;
- 	display: inline-block;
- 	margin-right: 10px;
- 	margin-top: -1px;
+  float: left;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: -1px;
 
        }
       .users-list .icn-ticket-more{
-       	height: 4px !important; 
+        height: 4px !important; 
        }
    .dropdown-menu  .dropdown-submenu-wrapper .dropdown-subscribe{
-      	width: 160px;
+        width: 160px;
         margin-top: -13px !important;
       }
             .dropdown-subscribe li a,
@@ -221,8 +219,8 @@ margin-left: 6px;
               margin-top: -2px !important;
             }
       .dropdown-privilege{
-      		width: 121px;
-      		min-width: 121px;
+          width: 121px;
+          min-width: 121px;
       }
         .dropdown-privilege li.active a{ 
         background-color: #e0f5f7 !important;
@@ -232,23 +230,28 @@ margin-left: 6px;
     
 
     .create-new-user .content{
-    	position: relative;
-    	margin: 0 auto;
-    	width: 501px;  
-    	padding-bottom: 40px;  
+      position: relative;
+      margin: 0 auto;
+      width: 501px;  
+      padding-bottom: 40px;  
     }
 .create-new-user .header h4{
-    	font-weight: 600;
-    	font-size: 17px;
-    	float: left;
+      font-weight: 600;
+      font-size: 17px;
+      float: left;
 margin: 0px;
         }
+        .create-new-user {
+            border-bottom: 1px solid #e9edf1;
+            margin-bottom: 40px;
+
+        }
         .create-new-user .header .close{
-        	margin-top: -4px;
+          margin-top: -4px;
 
         }
          .create-new-user .header{
-         	padding-bottom: 37px;
+          padding-bottom: 37px;
          }
           .create-new-user .avatar-content .avatar{
 width: 120px;
@@ -260,16 +263,16 @@ border-radius: 0px;
 
                     }
           .create-new-user .avatar-content .avatar img{
-          	          	border-radius: 0px;
-          	background: none;
+                        border-radius: 0px;
+            background: none;
 
           }
           .create-new-user .avatar-content .avatar img.no-avatar{
-          	width: auto;
-          	margin-left: -1px;
-          	margin-top: -1px;
-          	background: none;
-          	border-radius: 0px;
+            width: auto;
+            margin-left: -1px;
+            margin-top: -1px;
+            background: none;
+            border-radius: 0px;
    max-width: 120px;
           }
           .create-new-user .avatar-content .avatar .reposition-wrapper {
@@ -289,7 +292,7 @@ border-radius: 0px;
             margin: 6px;
           }
           .create-new-user .avatar-content .avatar{
-          	float: left;
+            float: left;
           }
         .create-new-user .avatar-content .avatar .loader-wrapper-white{
   position: absolute;
@@ -299,8 +302,8 @@ border-radius: 0px;
 
                     }
          .create-new-user .avatar-content  .choose-file{
-         	float: left;
-         	margin-left: 20px;
+          float: left;
+          margin-left: 20px;
          }
          .create-new-user .avatar-content  .select-file {
   position: relative;
@@ -310,39 +313,39 @@ border-radius: 0px;
  display: none;
 }
 .create-new-user .avatar-content .select-file .file-name{
-	color: #7c8999;
-	margin-left: 10px;
+  color: #7c8999;
+  margin-left: 10px;
   margin-top: 10px;
 }
 .create-new-user .avatar-content .select-file .or,
  .or-link{
-		color: #9fabb9;
-	margin-left: 10px;
+    color: #9fabb9;
+  margin-left: 10px;
   margin-top: 10px;
 }
 .create-new-user .avatar-content .select-file .remove,
 .remove-link{
-		color: #4e5e71;
-	margin-left: 10px;
+    color: #4e5e71;
+  margin-left: 10px;
   margin-top: 10px;
 }
 .create-new-user .avatar-content .select-file .remove:hover{
-	color: #333f50;
+  color: #333f50;
 }
 .create-new-user .avatar-content .file-type {
-	color: #9fabb9;
-	font-size: 11px;
-	text-transform:uppercase;
-	margin-top: 17px;
+  color: #9fabb9;
+  font-size: 11px;
+  text-transform:uppercase;
+  margin-top: 17px;
 }
 .create-new-user .user-fields{
-	width: 100%;
-	margin-top: 10px;
+  width: 100%;
+  margin-top: 10px;
 
 }
 .create-new-user .user-fields .form-group{
-	width: 245px;
-	margin-bottom: 0px;
+  width: 245px;
+  margin-bottom: 0px;
 }
 
 .create-new-user .user-fields .form-group.full{
@@ -363,16 +366,16 @@ border-radius: 0px;
   width: 100%;
 }
 .create-new-user .user-fields .form-group.error label{
-	display: none;
+  display: none;
 }
 .create-new-user .user-fields .row-wrapper{
-	margin-top: 17px;
+  margin-top: 17px;
 }
 .create-new-user .user-fields .form-group .form-control{
-	padding: 6px 13px;
+  padding: 6px 13px;
 }
 .create-new-user .user-fields .row-wrapper .form-group:first-child{
-	margin-right: 11px;
+  margin-right: 11px;
 }
 
 .create-new-user .user-fields .form-group > label {
@@ -387,13 +390,13 @@ border-radius: 0px;
   width: 100%;
 }
 .dropdown-account-type{
-	width: 100%;
+  width: 100%;
 }
 .create-new-user .user-fields .form-group .dropdown-company{
-	width: 100%;
+  width: 100%;
 }
 .create-new-user .user-fields .form-group .control{
-	margin-top: -2px;
+  margin-top: -2px;
 }
 .create-new-user .user-fields .form-group .token .token-label {
   display: inline-block;
@@ -410,7 +413,7 @@ border-radius: 0px;
   max-width: 297px !important;
 }
 .create-new-user .user-fields .form-group .tokens{
-	    position: absolute;
+      position: absolute;
   top: 22px;
   width: 244px;
   height: 36px;
@@ -442,7 +445,7 @@ border-radius: 0px;
  cursor: pointer;
 }  
 .create-new-user .user-fields .form-group  .token.invoice{
-	 border: 0px;
+   border: 0px;
   background-color: #4caf50;
 }
 .create-new-user .user-fields .form-group .token .close {
@@ -453,14 +456,14 @@ border-radius: 0px;
 }
 
 .create-new-user .user-fields .form-group .btn-create{
-	margin-top: 17px;
+  margin-top: 17px;
 }
 .create-new-user .user-fields .form-group .form-control-number-type{
-	background-color: #b4bfcc;
-	border-color: #b4bfcc;
-	border-radius: 19px;
-	padding: 6px 20px;
-	 -webkit-user-select: none;
+  background-color: #b4bfcc;
+  border-color: #b4bfcc;
+  border-radius: 19px;
+  padding: 6px 20px;
+   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -470,21 +473,21 @@ border-radius: 0px;
 }
 .create-new-user .user-fields .form-group .form-control-number-type:hover,
 .create-new-user .user-fields .form-group .form-control-number-type.hover{
-	border-radius:3px;
+  border-radius:3px;
 }
 .create-new-user .user-fields  .open .form-control-number-type,
 .create-new-user .user-fields .form-group .form-control-number-type:active,
 .create-new-user .user-fields .form-group .form-control-number-type:focus,
 .create-new-user .user-fields .form-group .form-control-number-type.focus{
-	color: #9fabb9;
-	background-color: #9fabb9;
-	border-color: #9fabb9;	
+  color: #9fabb9;
+  background-color: #9fabb9;
+  border-color: #9fabb9;  
   border-radius:3px;
 }
 
 
 .create-new-user .user-fields .number-type.form-group {
-	width: 197px;
+  width: 197px;
   margin-top: 17px;
 }
 .create-new-user .user-fields .number-type.form-group.fullt {
@@ -503,14 +506,14 @@ width: 245px;
 
 }
 .create-new-user .user-fields .number-type .dropdown-default-value{
-	left: 20px;
-	font-weight: bold;
-	  top: 10px;
-	  color: #4e5e71;
+  left: 20px;
+  font-weight: bold;
+    top: 10px;
+    color: #4e5e71;
 }
 .create-new-user .user-fields .number-type:hover .dropdown-default-value,
 .create-new-user .user-fields .number-type.open .dropdown-default-value{
-	  color: #333f50;
+    color: #333f50;
 }
  .create-new-user .user-fields .btn-add-more{ background-color: #4e5e71;
   border-color: #4e5e71;
@@ -522,8 +525,8 @@ background-color: #333f50;
 }
 .create-new-user .user-fields .btn-remove-update,
 .create-new-user .user-fields .btn-add-more{
-	margin-left: 10px;
-	margin-top: 17px;
+  margin-left: 10px;
+  margin-top: 17px;
 }
 
 .icn-user-device { 
@@ -594,8 +597,8 @@ background-color: #333f50;
   width: 12px;
 }
 .btn-white-gray.disabled{
-	background: #e9edf1;
-	border-color: #e9edf1;
+  background: #e9edf1;
+  border-color: #e9edf1;
 }
 .disabled .icn-user-device {
      background-position: -382px -206px;
@@ -740,42 +743,42 @@ background-color: #333f50;
   width: 10px;
 }
 .icn-ticket-updates{
-	    background-position: -566px -206px;
+      background-position: -566px -206px;
   height: 12px;
   width: 8px;
 }
 .icn-invoice-updates{
-	    background-position: -584px -206px;
+      background-position: -584px -206px;
   height: 12px;
   width: 8px;
 }
 .user-badges .admin{
-	    background-position: -602px -206px;
+      background-position: -602px -206px;
   height: 12px;
   width: 8px;
 }
 .icn-total-ticket{
-	    background-position: -620px -206px;
+      background-position: -620px -206px;
   height: 12px;
   width: 12px;
 }
 .icn-company {
-	    background-position: -695px -206px;
+      background-position: -695px -206px;
   height: 12px;
   width: 12px;
 }
 .icn-fax-machine {
-	    background-position: -652px -206px;
+      background-position: -652px -206px;
   height: 12px;
   width: 12px;
 }
 .icn-telephone {
-	    background-position: -674px -206px;
+      background-position: -674px -206px;
   height: 12px;
   width: 12px;
 }
 .icn-zoom-minus {
-	    background-position: -2241px -100px;
+      background-position: -2241px -100px;
   height: 2px;
   width: 10px;
 }
@@ -785,20 +788,20 @@ background-color: #333f50;
  
 }
 .icn-zoom-plus {
-	    background-position: -2191px -100px;
+      background-position: -2191px -100px;
   height: 12px;
   width: 10px;
 }
 .icn-zoom-plus:hover,
 .icn-zoom-plus:active{
-	    background-position: -2211px -100px;
+      background-position: -2211px -100px;
  
 }
 .edit-user{
-	background: #f0fafb;
-	padding-top: 37px;
-	border-top: 1px solid #e0f5f7;
-	border-bottom: 1px solid #e0f5f7;
+  background: #f0fafb;
+  padding-top: 37px;
+  border-top: 1px solid #e0f5f7;
+  border-bottom: 1px solid #e0f5f7;
     width: calc(100% + 40px);
     margin-bottom: 40px;
 }
@@ -807,64 +810,64 @@ background-color: #333f50;
    margin-top: -325px;
 }
 .modal-customize-avatr .modal-header{
-	border-bottom: 0px;
+  border-bottom: 0px;
 }
 .modal-customize-avatr .modal-body{
-	padding: 0px 30px;
+  padding: 0px 30px;
   margin-top: -1px;
 }
 .modal-customize-avatr  .crop-area{
-	width: 578px;
-	height: 480px;
-	background-color: #25303d;
+  width: 578px;
+  height: 480px;
+  background-color: #25303d;
 }
 .modal-customize-avatr  .modal-footer{
-	border-top: 0px;
-	padding:30px;
+  border-top: 0px;
+  padding:30px;
 }
 .modal-customize-avatr  .modal-footer .form-group{
-	margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 .modal-customize-avatr  .modal-footer .zoom-slider{
-	width: 190px;
-	position: relative;
-	margin-top: 16px;
+  width: 190px;
+  position: relative;
+  margin-top: 16px;
 }
 .modal-customize-avatr  .modal-footer .zoom-slider .range-wrapper{
-	width: 150px;
-	position: relative;
+  width: 150px;
+  position: relative;
 }
 .modal-customize-avatr  .modal-footer .zoom-slider input[type=range]::-webkit-slider-runnable-track  {
 
-	background-color: #d7dde5;
-	height: 6px;
-	border-radius: 3px;
+  background-color: #d7dde5;
+  height: 6px;
+  border-radius: 3px;
 }
 
 .modal-customize-avatr  .modal-footer .zoom-slider input[type=range]::-moz-range-track{
-	background-color: #d7dde5;
-	height: 6px;
-	border-radius: 3px;
+  background-color: #d7dde5;
+  height: 6px;
+  border-radius: 3px;
 }
 .modal-customize-avatr  .modal-footer .zoom-slider input[type=range]::-ms-track {
-		background-color: #d7dde5;
-	height: 6px;
-	border-radius: 3px;
+    background-color: #d7dde5;
+  height: 6px;
+  border-radius: 3px;
 }
 .modal-customize-avatr  .modal-footer .zoom-slider  input[type=range]::-webkit-slider-thumb {
-	margin-top: -8px;
+  margin-top: -8px;
 }
 .modal-customize-avatr  .modal-footer .zoom-slider .icn-zoom-minus{
-	margin-right: 10px;
-	margin-top: 2px;
+  margin-right: 10px;
+  margin-top: 2px;
 }
 .modal-customize-avatr  .modal-footer .zoom-slider .icn-zoom-plus{
-	margin-left: 10px;
-	margin-top: -2px;
+  margin-left: 10px;
+  margin-top: -2px;
 }
 .modal-customize-avatr .modal-header .dot-sep{
-	margin-left: 10px;
-	margin-top: 0px;
+  margin-left: 10px;
+  margin-top: 0px;
 }
 .user-fields .dropdown-default-value{
   top: 27px;
