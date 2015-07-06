@@ -470,6 +470,7 @@ border-radius: 0px;
   -webkit-transition: 0.3s ease-out border-radius;
   -o-transition: 0.3s ease-out border-radius;
   transition: 0.3s ease-out border-radius;
+  cursor: default;
 }
 .create-new-user .user-fields .form-group .form-control-number-type:hover,
 .create-new-user .user-fields .form-group .form-control-number-type.hover{
@@ -479,9 +480,15 @@ border-radius: 0px;
 .create-new-user .user-fields .form-group .form-control-number-type:active,
 .create-new-user .user-fields .form-group .form-control-number-type:focus,
 .create-new-user .user-fields .form-group .form-control-number-type.focus{
+<<<<<<< HEAD
+	color: #4E5E71;
+	background-color: #9fabb9;
+	border-color: #9fabb9;	
+=======
   color: #9fabb9;
   background-color: #9fabb9;
   border-color: #9fabb9;  
+>>>>>>> 99a16e922b81abd3fee4d364fd1511d530093247
   border-radius:3px;
 }
 

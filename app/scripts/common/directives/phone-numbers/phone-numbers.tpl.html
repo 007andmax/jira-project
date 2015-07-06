@@ -58,7 +58,7 @@
 
         <input type="text" ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
                aria-expanded="true"
-               class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor">
+               class="form-control form-control-dropdown form-control-number-type dropdown-toggle" READONLY>
 
         <ul class="dropdown-menu dropdown-account-type">
           <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
