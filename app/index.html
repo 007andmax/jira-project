@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel='stylesheet' href='/bower_components/angular-ui-select/dist/select.css' />
+  <link rel='stylesheet' href='/bower_components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css' />
+  <link rel='stylesheet' href='/bower_components/bootstrap-select/dist/css/bootstrap-select.css' />
+  <link rel='stylesheet' href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/fonts.css"/>
+  <link rel="stylesheet" href="styles/jscrollpane.css"/>
+  <link rel="stylesheet" href="styles/quicktech.css">
+  <link rel="stylesheet" href="styles/quicktech-override.css">
+  <link rel="stylesheet" href="styles/users.css">
+  <link rel="stylesheet" href="styles/companies.css">
+  <link rel="stylesheet" href="styles/company.css">
+  <link rel="stylesheet" href="styles/create-company.css">
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/firefox.css -->
+  <link rel='stylesheet' href='styles/firefox.css'>
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/firefox-companies.css -->
+  <link rel='stylesheet' href='styles/firefox-companies.css'>
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/ie.css -->
+  <link rel='stylesheet' href='styles/ie.css'>
+  <!-- endbuild -->
+
+  <script type="text/javascript">
+    if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+      document.querySelector('[href*="styles/firefox."]').remove();
+      document.querySelector('[href*="styles/firefox-"]').remove();
+    } else if (!(window.ActiveXObject || "ActiveXObject" in window)) {
+      document.querySelector('[href*="styles/ie."]').remove();
+    }
+  </script>
+
+</head>
+<body class="unassigned" ng-app="quicktech">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+<div id="loading" class="alert-wrapper" user-notification>
+  <center class="animator stop">
+    <div class="alert alert-yellow" ng-bind="message">Loading ...</div>
+  </center>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-main"
+     ng-include="'/html/scripts/core/header/header.tpl.html'">
+</nav>
+<div class="main-container ">
+  <div class="row">
+    <aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>
+    <aside class="right scroll-pane" ng-include="'/html/partials/right-panel.html'" qt-scroll-pane></aside>
+    <div id="content" class="content-container">
+      <div class="content-wrapper">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- build:js({.,app}) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-messages/angular-messages.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/bower_components/angular-ui-select/dist/select.js"></script>
+<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+<script src="/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js"></script>
+<script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="/bower_components/moment/moment.js"></script>
+<script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+<!-- endbower -->
+<script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
+<script src="scripts/js/vendors/modernizr.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/custom.js -->
+<script src="scripts/js/main.js"></script>
+<script src="scripts/js/handlebars-v3.0.3.js"></script>
+<script src="scripts/js/rest-services.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/common/directives/directives.mdl.js"></script>
+<script src="scripts/common/services/services.mdl.js"></script>
+<script src="scripts/core/app.mdl.js"></script>
+<script src="scripts/core/tickets/tickets.mdl.js"></script>
+<script src="scripts/core/users/users.mdl.js"></script>
+<script src="scripts/common/directives/array-maxlength.drv.js"></script>
+<script src="scripts/common/directives/array-minlength.drv.js"></script>
+<script src="scripts/common/directives/avatar/avatar.drv.js"></script>
+<script src="scripts/common/directives/avatar/canvas-crop.drv.js"></script>
+<script src="scripts/common/directives/avatar/crop.ctrl.js"></script>
+<script src="scripts/common/directives/count-nodes-in-line.drv.js"></script>
+<script src="scripts/common/directives/hard-reset-pattern.drv.js"></script>
+<script src="scripts/common/directives/make-dirty-on-blur.drv.js"></script>
+<script src="scripts/common/directives/navigation-bar.drv.js"></script>
+<script src="scripts/common/directives/on-finish-render.drv.js"></script>
+<script src="scripts/common/directives/phone-numbers/phone-numbers.drv.js"></script>
+<script src="scripts/common/directives/qt-checkbox.drv.js"></script>
+<script src="scripts/common/directives/qt-custom-popover.drv.js"></script>
+<script src="scripts/common/directives/qt-scroll-pane.drv.js"></script>
+<script src="scripts/common/directives/qt-sidebar.drv.js"></script>
+<script src="scripts/common/directives/qt-typeahead-show-on-focus.drv.js"></script>
+<script src="scripts/common/directives/stop-propagation.drv.js"></script>
+<script src="scripts/common/directives/user-notification.drv.js"></script>
+<script src="scripts/common/services/shared-state.srv.js"></script>
+<script src="scripts/common/services/user-notification.srv.js"></script>
+<script src="scripts/core/companies/companies.ctrl.js"></script>
+<script src="scripts/core/companies/company.ctrl.js"></script>
+<script src="scripts/core/companies/edit-company.ctrl.js"></script>
+<script src="scripts/core/header/header-companies.ctrl.js"></script>
+<script src="scripts/core/header/header-tickets.ctrl.js"></script>
+<script src="scripts/core/header/header-users.ctrl.js"></script>
+<script src="scripts/core/header/header.ctrl.js"></script>
+<script src="scripts/core/left-panel/left-panel.ctrl.js"></script>
+<script src="scripts/core/users/unique-email.drv.js"></script>
+<script src="scripts/core/users/user-create.ctrl.js"></script>
+<script src="scripts/core/users/user-edit.ctrl.js"></script>
+<script src="scripts/core/users/user.ctrl.js"></script>
+<script src="scripts/core/users/users.ctrl.js"></script>
+<script src="quicktech/ticketing/controllers/ticketController.js"></script>
+<script src="quicktech/ticketing/controllers/ticketDetailController.js"></script>
+<script src="quicktech/ticketing/controllers/ticketListController.js"></script>
+<script src="quicktech/ticketing/directives/assignUser/assignUser.js"></script>
+<script src="quicktech/ticketing/directives/assignUser/assignUserController.js"></script>
+<script src="quicktech/ticketing/directives/notification/notification.js"></script>
+<script src="quicktech/ticketing/directives/scrollPane.js"></script>
+<script src="quicktech/ticketing/filters/ticketsFilter.js"></script>
+<script src="quicktech/ticketing/services/actionRights.js"></script>
+<!-- endbuild -->
+</body>
+</html>

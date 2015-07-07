@@ -5889,24 +5889,22 @@ margin-left: 7px;
     padding:10px 0; }
     /* line 30, ../sass/bootstrap/_dropdowns.scss */
     .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 10000;
-      display: none;
-      float: left;
-      min-width: 163px;
-      padding: 10px 0;
-      margin: 6px 0 0;
-      list-style: none;
-      font-size: 14px;
-      text-align: left;
-      background-color: white;
-  /*border: 1px solid rgba(10, 45, 92, 0.3);
-  border: 1px solid rgba(10, 45, 92, 0.3);*/
+        position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10000;
+  display: none;
+  float: left;
+  min-width: 152px;
+  padding: 10px 0;
+  margin: 6px 0 0;
+  list-style: none;
+  font-size: 14px;
+  text-align: left;
+  background-color: white;
   border-radius: 3px;
-  -webkit-box-shadow:0px 4px 12px 0px rgba(10, 45, 92, 0.2);
-  box-shadow:0px 4px 12px 0px rgba(10, 45, 92, 0.2);
+  -webkit-box-shadow: 0px 4px 12px 0px rgba(10, 45, 92, 0.2);
+  box-shadow: 0px 4px 12px 0px rgba(10, 45, 92, 0.2);
   background-clip: padding-box;
 }
 .content-wrapper .ticket-sidebar  .spam-msg{
@@ -5974,13 +5972,16 @@ margin-left: 7px;
 .subdropdown-menu > li > a,
 .dropdown-menu > .jspContainer > .jspPane > li > a,
 .subdropdown-menu > .jspContainer > .jspPane > li > a {
-  display: block;
+    display: block;
   padding: 6px 20px;
   clear: both;
   font-weight: normal;
   line-height: 1.32857;
   color: #4e5e71;
-outline: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  outline: 0;
 }
 
 .subdropdown-menu > .jspContainer > .jspPane > li > a {

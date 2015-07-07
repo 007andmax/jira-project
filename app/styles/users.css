@@ -28,6 +28,7 @@
   float: right;
   border-radius: 0px;
   height: 242px;
+  background:#e9edf1;
 }
 .users-list .user .avatar.no-avatar{
   background: #e9edf1;
@@ -115,14 +116,15 @@ margin-right: 6px;
     }
       .user-actions .more{
       margin-right: 0px;
-      margin-top: 16px;
       margin-left: 10px;
     }
  .user-actions .more > a{
-      line-height: 0px;
-  padding: 0px;
+     line-height: 34px;
+  /* padding: 0px; */
   display: block;
   margin: 0px;
+  /* width: 38px; */
+  height: 38px;
     }
       .users-list   .total-tickets{
         color: #9fabb9;
@@ -463,6 +465,7 @@ border-radius: 0px;
   border-color: #b4bfcc;
   border-radius: 19px;
   padding: 6px 20px;
+  font-weight: bold;
    -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -470,7 +473,7 @@ border-radius: 0px;
   -webkit-transition: 0.3s ease-out border-radius;
   -o-transition: 0.3s ease-out border-radius;
   transition: 0.3s ease-out border-radius;
-  cursor: default;
+  cursor: pointer;
 }
 .create-new-user .user-fields .form-group .form-control-number-type:hover,
 .create-new-user .user-fields .form-group .form-control-number-type.hover{
@@ -478,17 +481,11 @@ border-radius: 0px;
 }
 .create-new-user .user-fields  .open .form-control-number-type,
 .create-new-user .user-fields .form-group .form-control-number-type:active,
-.create-new-user .user-fields .form-group .form-control-number-type:focus,
 .create-new-user .user-fields .form-group .form-control-number-type.focus{
-<<<<<<< HEAD
-	color: #4E5E71;
 	background-color: #9fabb9;
 	border-color: #9fabb9;	
-=======
-  color: #9fabb9;
   background-color: #9fabb9;
   border-color: #9fabb9;  
->>>>>>> 99a16e922b81abd3fee4d364fd1511d530093247
   border-radius:3px;
 }
 

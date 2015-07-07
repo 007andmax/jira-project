@@ -1243,18 +1243,18 @@ a.right-arrow.active{
 
 	background-position: -876px -206px;
 }
-.company-detail{
+.company-profile .company-detail{
 	width: 10px;
 	height: 12px;
 	background-position: -780px -206px;
 }
-:hover > .company-detail,
-:active > .company-detail,
-:focus:hover > .company-detail,
-:focus:active > .company-detail,
-:hover:active > .company-detail,
-.active > .company-detail,
-.open  .company-detail , .open > .btn:hover .company-detail{
+:hover > .company-profile .company-detail,
+:active > .company-profile .company-detail,
+:focus:hover > .company-profile .company-detail,
+:focus:active > .company-profile .company-detail,
+:hover:active > .company-profile .company-detail,
+.active > .company-profile .company-detail,
+.open  .company-profile .company-detail , .open > .btn:hover .company-profile .company-detail{
 
 	background-position: -820px -206px;
 }
