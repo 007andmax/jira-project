@@ -483,10 +483,16 @@ border-radius: 0px;
 .create-new-user .user-fields .form-group .form-control-number-type:active,
 .create-new-user .user-fields .form-group .form-control-number-type.focus{
 <<<<<<< HEAD
+<<<<<<< HEAD
 	background-color: #9fabb9;
 	border-color: #9fabb9;	
   background-color: #9fabb9;
   border-color: #9fabb9;  
+=======
+	color: #4E5E71;
+	background-color: #9fabb9;
+	border-color: #9fabb9;
+>>>>>>> 0647dd6f56c0efc0ce470c96997ef017615900a4
 =======
 	color: #4E5E71;
 	background-color: #9fabb9;
