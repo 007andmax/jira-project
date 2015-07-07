@@ -4,7 +4,7 @@
   <div class="users-list clearfix" count-nodes-in-line="[userNode]" ng-model="usersInLine">
     <div ng-repeat="user in (shownUsers = (users | filter : usersFilter | orderBy: getUserName))"
          ng-controller="quicktech.core.users.userCtrl" on-finish-render="recalc-count-nodes-in-line">
-      <div class="user" userNode>
+      <div class="user" userNode ng-show="editUser.id != user.id">
         <div class="content">
           <ul class="user-badges">
             <li ng-if="subscriptions[user.id].ticket" id="{{ user.id + '-has-ticket-updates' }}"
