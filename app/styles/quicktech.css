@@ -4584,7 +4584,8 @@ margin-left: 7px;
   .created-for .form-control,
   .cs-type:focus .form-control-dropdown,
   .cs-type:active .form-control-dropdown,
-   .open .form-control-dropdown:hover{
+   .open .form-control-dropdown:hover,
+   .form-control-dropdown:focus:hover{
     padding-right: 20px;
     background-image: url('../images/input-icons/icn-input-caret.png?1423306610');
     background-position: right 13px center;
@@ -4597,7 +4598,8 @@ margin-left: 7px;
     .created-for .form-control,
     .cs-type:focus .form-control-dropdown,
     .cs-type:active .form-control-dropdown,
-   .open .form-control-dropdown:hover{
+   .open .form-control-dropdown:hover,
+   .form-control-dropdown:focus:hover{
       background-image: url('../images/input-icons/icn-input-caret@2x.png?1423306668');
       background-size: 6px 4px;
     }
