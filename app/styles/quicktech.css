@@ -9707,6 +9707,7 @@ a.btn-remote-access{
       left: 0;
       z-index: 100000;
       -webkit-overflow-scrolling: touch;
+        background-color: rgba(14, 20, 28, 0.5);
       outline: 0;
     }
     /* line 32, ../sass/bootstrap/_modals.scss */
@@ -9742,7 +9743,7 @@ a.btn-remote-access{
       top: 50%;
       left: auto;
       left: 50%;
-      margin-left: -251px;
+      margin-left: -310px;
 
     }
     .modal-dialog.create-ticket{
@@ -9814,6 +9815,7 @@ a.btn-remote-access{
             .assign-ticket  .jspArrowUp {
               height: 79px !important;
             }
+
 .assign-ticket  .jspArrowDown {
               height: 6px !important;
             }
