@@ -20276,6 +20276,10 @@ height: 60px !important;
     width: 12px;
     height: 7px;
   }
+  
+  .no-cursor{
+      cursor: pointer !important;
+  }
 
 
 
