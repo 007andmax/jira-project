@@ -105,13 +105,11 @@
           });
         };
 
-        $scope.checkboxAddress = true;
-        $scope.showError = false;
+        $scope.ValueRadio = false;
+        $scope.changeRadioButton = function () {
+          $scope.ValueRadio = true;
+        };
 
-        $scope.cahngeBox = function () {
-          $scope.showError = true;
-          $scope.checkboxAddress = true;
-        }
       }]);
 
 }());
