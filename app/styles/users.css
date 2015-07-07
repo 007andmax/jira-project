@@ -291,7 +291,10 @@ border-radius: 0px;
             background-color: rgba(14,20,28,.65);
             cursor: pointer;
           }
-           .create-new-user .avatar-content .avatar .reposition-wrapper {}
+                    .create-new-user .avatar-content .avatar .reposition-wrapper .loader{
+                      position: relative;
+margin: 6px auto;
+                    }
           .create-new-user .avatar-content .avatar .reposition-wrapper .reposition {
             margin: 6px;
           }

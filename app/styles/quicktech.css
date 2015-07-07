@@ -4584,6 +4584,8 @@ margin-left: 7px;
   .created-for .form-control,
   .cs-type:focus .form-control-dropdown,
   .cs-type:active .form-control-dropdown,
+     .cs-type.open:hover .form-control-dropdown,
+
    .open .form-control-dropdown:hover,
    .form-control-dropdown:focus:hover{
     padding-right: 20px;
@@ -4640,6 +4642,7 @@ margin-left: 7px;
   /* line 676, ../sass/bootstrap/_forms.scss */
   .form-control-dropdown:hover,
   .form-control-dropdown.hover,
+  .cs-type:hover .form-control-dropdown,
   .created-for .form-control:hover  {
     background-image: url('../images/input-icons/icn-input-caret-hover.png?1423306628');
   }
@@ -4647,6 +4650,7 @@ margin-left: 7px;
     /* line 676, ../sass/bootstrap/_forms.scss */
     .form-control-dropdown:hover,
     .form-control-dropdown.hover,
+    .cs-type:hover .form-control-dropdown,
     .created-for .form-control:hover  {
       background-image: url('../images/input-icons/icn-input-caret-hover@2x.png?1423306655');
       background-size: 6px 4px;
