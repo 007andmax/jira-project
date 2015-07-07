@@ -51,35 +51,61 @@
 
           <div id="basic-info" class="header clearfix"><h4 class="title">Basic Info</h4></div>
           <div class="user-fields clearfix">
-            <div class="row-wrapper clearfix error">
-              <div class="form-group form-group-full error">
+            <div class="row-wrapper clearfix">
+              <div class="form-group form-group-full" ng-class="{error: isShowingErrors(companyForm, 'companyName')}">
                 <label>Name</label>
 
-                <div class="error-msg" style="display:block">Company name is required.</div>
-                <input type="text" class="form-control" ng-model="editCompany.name">
+                <div ng-messages="companyForm.companyName.$error" ng-if="isShowingErrors(companyForm, 'companyName')">
+                  <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                  <div class="qt-error-msg" ng-message="minlength">Name is too short.</div>
+                  <div class="qt-error-msg" ng-message="unique">This name already occupied.</div>
+                </div>
+                <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
+                       ng-minlength="3" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+                       is-uniq-validation valid-type="validCompanyName">
               </div>
             </div>
             <div class="row-wrapper clearfix">
-              <div class="form-group dropdown pull-left">
+              <div class="form-group dropdown pull-left"
+                   ng-class="{error: isShowingErrors(companyForm, 'companyType')}">
                 <label>Type</label>
-                <input type="text" class="form-control" ng-model="editCompany.type"
+
+                <div ng-messages="companyForm.companyType.$error" ng-if="isShowingErrors(companyForm, 'companyType')">
+                  <div class="qt-error-msg" ng-message="maxlength">Type is too large.</div>
+                </div>
+                <input type="text" class="form-control" ng-model="editCompany.type" name="companyType" ng-maxlength="40"
                        popover="Enter the company type e.g., Automaker, Hardware Solutions, etc."
                        popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
               </div>
-              <div class="form-group dropdown pull-left">
+              <div class="form-group dropdown pull-left"
+                   ng-class="{error: isShowingErrors(companyForm, 'companyDomain')}">
                 <label>Domain</label>
+
+                <div ng-messages="companyForm.companyDomain.$error"
+                     ng-if="isShowingErrors(companyForm, 'companyDomain')">
+                  <div class="qt-error-msg" ng-message="unique">This domain already occupied.</div>
+                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid domain.</div>
+                </div>
                 <input type="text" class="form-control" ng-model="editCompany.domain"
                        popover="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses."
-                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
+                       name="companyDomain"
+                       is-uniq-validation valid-type="validCompanyDominian" ng-pattern="dominianPattern">
               </div>
             </div>
-            <div class="row-wrapper clearfix error">
-              <div class="form-group form-group-full error">
+            <div class="row-wrapper clearfix">
+              <div class="form-group form-group-full" ng-class="{error:isShowingErrors(companyForm, 'companyAddress')}">
                 <label>address</label>
 
-                <div class="error-msg" style="display:block;">Please enter the company’s address.</div>
+                <div ng-messages="companyForm.companyAddress.$error"
+                     ng-if="isShowingErrors(companyForm, 'companyAddress')">
+                  <div class="error-msg" ng-message="required">Please enter the company’s address.</div>
+                </div>
                 <input type="text" class="form-control" popover="Enter the company's full address."
-                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
+                       name="companyAddress"
+                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover required="true"
+                       make-dirty-on-blur
                        ng-model="editCompany.primaryAddress.address">
               </div>
             </div>
@@ -90,14 +116,20 @@
                   width="100%" height='224' frameborder='0' style='border:0'></iframe>
               </div>
             </div>
-            <div class="row-wrapper clearfix error">
-              <div class="form-group form-group-full dropdown error">
+            <div class="row-wrapper clearfix">
+              <div class="form-group form-group-full dropdown"
+                   ng-class="{error: isShowingErrors(companyForm, 'companyDescription')}">
                 <label>description of business</label>
 
-                <div class="error-msg" style="display:block">Please enter a brief description of the company’s
-                  business.
+                <div ng-messages="companyForm.companyName.$error"
+                     ng-if="isShowingErrors(companyForm, 'companyDescription')">
+                  <div class="qt-error-msg" ng-message="required">Please enter a brief description of the company’s
+                    business.
+                  </div>
+                  <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
                 </div>
-                <textarea class="form-control" ng-model="editCompany.description"
+                <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
+                          ng-maxlength="80" required="true"
                           popover="Describe the company's business in 80 characters (spaces included)."
                           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
 
@@ -111,12 +143,17 @@
           <div id="site-location" class="header clearfix"><h4 class="title">Site/Location(s)</h4></div>
           <div class="user-fields clearfix">
             <div ng-repeat="location in editCompany.addresses">
-              <div class="row-wrapper clearfix error">
-                <div class="form-group form-group-full error">
+              <div class="row-wrapper clearfix">
+                <div class="form-group form-group-full"
+                     ng-class="{error:isShowingErrors(companyForm, 'companyAddressLocation')}">
                   <label>address</label>
 
-                  <div class="error-msg" style="display:block;">Please enter the company’s address.</div>
-                  <input type="text" class="form-control" ng-model="location.address"
+                  <div ng-messages="companyForm.companyAddressLocation.$error"
+                       ng-if="isShowingErrors(companyForm, 'companyAddressLocation')">
+                    <div class="error-msg" ng-message="required">Please enter the company’s address.</div>
+                  </div>
+                  <input type="text" class="form-control" ng-model="location.address" name="companyAddressLocation"
+                         required="true"
                          popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
                          popover="Enter the company's full address.">
                 </div>
@@ -131,17 +168,21 @@
 
               <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
-              <div class="row-wrapper dropdown error clearfix">
-                <div class="form-group form-group-full error pull-left">
+              <div class="row-wrapper dropdown clearfix">
+                <div class="form-group form-group-full pull-left"
+                     ng-class="{error:isShowingErrors(companyForm, 'companyTimezone')}">
                   <label>Time Zone</label>
 
-                  <div class="error-msg" style="display:block;">Please select the timezone.</div>
-
+                  <div ng-messages="companyForm.companyTimezone.$error"
+                       ng-if="isShowingErrors(companyForm, 'companyTimezone')">
+                    <div class="error-msg">Please select the timezone.</div>
+                  </div>
                   <input type="text" ng-model="location.locale"
-                         class="form-control form-control-dropdown dropdown-toggle pull-left"
+                         class="form-control form-control-dropdown dropdown-toggle pull-left" required="true"
+                         name="companyTimezone"
                          typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
                          typeahead-editable="false" typeahead-min-length="0"
-                         qt-typeahead-show-on-focus name="userCompany" ng-trim="false" required="true">
+                         qt-typeahead-show-on-focus ng-trim="false">
 
                   <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
                      tooltip="Add More" tooltip-placement="top"
@@ -159,9 +200,11 @@
 
               <div class="row-wrapper clearfix">
                 <label class="control checkbox pull-left">
-                  <input type="checkbox" checked="" disabled>
+                  <input type="checkbox" checked="" ng-model="checkboxAddress"
+                         ng-change="cahngeBox(editCompany.addresses.length)">
                   <span class="control-indicator"></span>
-                  Primary Billing address <span class="error-alone">Please add multiple site/locations first.</span>
+                  Primary Billing address <span ng-if="showErrorAlone && (editCompany.addresses.length===1)"
+                                                class="error-alone">Please add multiple site/locations first.</span>
                 </label>
               </div>
             </div>
@@ -226,10 +269,10 @@
                 </div>
 
                 <div class="form-group dropdown pull-left"
-                     ng-class="{error: isShowingErrors(contact, contactForm, 'email')}">
+                     ng-class="{error: isShowingErrors(contactForm, 'email')}">
                   <label>email</label>
 
-                  <div ng-messages="contactForm.email.$error" ng-if="isShowingErrors(contact, contactForm, 'email')">
+                  <div ng-messages="contactForm.email.$error" ng-if="isShowingErrors(contactForm, 'email')">
                     <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
                     <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
                     <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
@@ -239,7 +282,7 @@
                   <!--todo add uniq validation!!-->
                   <input type="text" class="form-control" name="email" aria-expanded="true" make-dirty-on-blur
                          ng-model="contact.email" required="true" ng-pattern="emailPattern"
-                         unique-contact-email contact-id="contact.id">
+                         contact-id="contact.id" is-uniq-validation valid-type="validCompanyEmail">
                 </div>
               </div>
 

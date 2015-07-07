@@ -2,14 +2,14 @@
 
 (function () {
 
-  angular.module("quicktech.core.users").directive('uniqueUserEmail',
-    ['UsersService',
-      function (UsersService) {
+  angular.module("quicktech.common.directives").directive("isUniqValidation",
+    ['UsersService', 'CompaniesService', 'ContactsService',
+      function (UsersService, CompaniesService, ContactsService) {
         return {
           restrict: 'A',
           require: 'ngModel',
           scope: {
-            userId: '=userId'
+            valid: '=validType'
           },
           link: function (scope, element, attrs, ngModelCtrl) {
 
@@ -21,9 +21,7 @@
 
             function validate() {
               if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
-                var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, scope.userId, function () {
-                  ngModelCtrl.$setValidity('unique', validationResult.value);
-                });
+                scope.valid(ngModelCtrl, UsersService, CompaniesService, ContactsService);
               }
             }
           }

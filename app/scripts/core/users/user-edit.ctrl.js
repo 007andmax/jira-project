@@ -75,6 +75,12 @@
           return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
+        $scope.validUserEmail = function (ngModelCtrl, UsersService) {
+          //var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editUser.id, function () {
+          //  ngModelCtrl.$setValidity('unique', validationResult.value);
+          //});
+        }
+
       }]);
 
 }());

@@ -11,6 +11,7 @@
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $scope.dominianPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.companies = CompaniesService.getClientCompanies();
         //todo receive it using services!!
         $http.get('/addresses/getAllLocales').success(function (resp) {
@@ -80,6 +81,38 @@
           return {
             subscription: {}
           };
+        };
+
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+        };
+
+        $scope.validCompanyName = function (ngModelCtrl, UsersService, CompaniesService, ContactsService) {
+          console.log($scope.editCompany.id);
+          //var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id, function () {
+          //  ngModelCtrl.$setValidity('unique', validationResult.value);
+          //});
+        };
+
+        $scope.validCompanyDominian = function (ngModelCtrl, UsersService, CompaniesService, ContactsService) {
+          //var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id, function () {
+          //  ngModelCtrl.$setValidity('unique', validationResult.value);
+          //});
+        };
+
+        $scope.validCompanyEmail = function (ngModelCtrl, UsersService, CompaniesService, ContactsService) {
+          //var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.$scope.editCompany.id, function () {
+          //  ngModelCtrl.$setValidity('unique', validationResult.value);
+          //});
+        };
+
+        $scope.checkboxAddress = true;
+        $scope.showErrorAlone = false
+
+        $scope.cahngeBox = function (a) {
+          $scope.showErrorAlone = true;
+          $scope.checkboxAddress = true;
+
         }
       }]);
 
