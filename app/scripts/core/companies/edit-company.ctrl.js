@@ -87,34 +87,30 @@
           return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.nullstrok = '';
         $scope.validCompanyName = function (ngModelCtrl) {
-          var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.nullstrok, function () {
+          var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
         };
 
         $scope.validCompanyDominian = function (ngModelCtrl) {
-          console.log(ngModelCtrl.$viewValue);
-          console.log($scope.editCompany.id);
-          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.nullstrok, function () {
+          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
         };
 
         $scope.validCompanyEmail = function (ngModelCtrl) {
-          var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id, function () {
+          var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
         };
 
         $scope.checkboxAddress = true;
-        $scope.showError = false
+        $scope.showError = false;
 
-        $scope.cahngeBox = function (a) {
+        $scope.cahngeBox = function () {
           $scope.showError = true;
           $scope.checkboxAddress = true;
-
         }
       }]);
 
