@@ -80,7 +80,7 @@
           <div class="form-group cs-type dropdown pull-left">
             <label>account type</label>
             <input type="text" ng-model="roles[editUser.role]" data-toggle="dropdown" aria-expanded="true"
-                   class="form-control form-control-dropdown dropdown-toggle hide-cursor">
+                   class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
 
             <ul class="dropdown-menu dropdown-account-type">
               <li ng-repeat="(role, label) in roles" ng-click="editUser.role = role">
