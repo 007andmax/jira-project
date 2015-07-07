@@ -63,7 +63,7 @@
                 </div>
                 <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
                        ng-minlength="3" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
-                       is-uniq-validation valid-type="validCompanyName">
+                       is-uniq-validation validation-func="validCompanyName">
               </div>
             </div>
             <div class="row-wrapper clearfix">
@@ -91,7 +91,7 @@
                        popover="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses."
                        popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
                        name="companyDomain"
-                       is-uniq-validation valid-type="validCompanyDominian" ng-pattern="dominianPattern">
+                       is-uniq-validation validation-func="validCompanyDominian" ng-pattern="dominianPattern">
               </div>
             </div>
             <div class="row-wrapper clearfix">
@@ -203,7 +203,7 @@
                   <input type="checkbox" checked="" ng-model="checkboxAddress"
                          ng-change="cahngeBox(editCompany.addresses.length)">
                   <span class="control-indicator"></span>
-                  Primary Billing address <span ng-if="showErrorAlone && (editCompany.addresses.length===1)"
+                  Primary Billing address <span ng-if="showError && (editCompany.addresses.length===1)"
                                                 class="error-alone">Please add multiple site/locations first.</span>
                 </label>
               </div>
@@ -282,7 +282,7 @@
                   <!--todo add uniq validation!!-->
                   <input type="text" class="form-control" name="email" aria-expanded="true" make-dirty-on-blur
                          ng-model="contact.email" required="true" ng-pattern="emailPattern"
-                         contact-id="contact.id" is-uniq-validation valid-type="validCompanyEmail">
+                         contact-id="contact.id" is-uniq-validation validation-func="validCompanyEmail">
                 </div>
               </div>
 

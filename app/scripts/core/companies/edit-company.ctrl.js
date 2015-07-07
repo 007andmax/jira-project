@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$http',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService,
-                $stateParams, $state, $http) {
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
+                SharedStateService, $stateParams, $state, $http) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
@@ -87,30 +87,32 @@
           return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.validCompanyName = function (ngModelCtrl, UsersService, CompaniesService, ContactsService) {
+        $scope.nullstrok = '';
+        $scope.validCompanyName = function (ngModelCtrl) {
+          var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.nullstrok, function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
+        };
+
+        $scope.validCompanyDominian = function (ngModelCtrl) {
+          console.log(ngModelCtrl.$viewValue);
           console.log($scope.editCompany.id);
-          //var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id, function () {
-          //  ngModelCtrl.$setValidity('unique', validationResult.value);
-          //});
+          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.nullstrok, function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
         };
 
-        $scope.validCompanyDominian = function (ngModelCtrl, UsersService, CompaniesService, ContactsService) {
-          //var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id, function () {
-          //  ngModelCtrl.$setValidity('unique', validationResult.value);
-          //});
-        };
-
-        $scope.validCompanyEmail = function (ngModelCtrl, UsersService, CompaniesService, ContactsService) {
-          //var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.$scope.editCompany.id, function () {
-          //  ngModelCtrl.$setValidity('unique', validationResult.value);
-          //});
+        $scope.validCompanyEmail = function (ngModelCtrl) {
+          var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id, function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
         };
 
         $scope.checkboxAddress = true;
-        $scope.showErrorAlone = false
+        $scope.showError = false
 
         $scope.cahngeBox = function (a) {
-          $scope.showErrorAlone = true;
+          $scope.showError = true;
           $scope.checkboxAddress = true;
 
         }
