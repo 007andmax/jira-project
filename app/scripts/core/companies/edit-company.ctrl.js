@@ -87,27 +87,22 @@
           return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.validCompanyName = function (ngModelCtrl) {
+        $scope.validateCompanyName = function (ngModelCtrl) {
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
         };
 
-        $scope.validCompanyDominian = function (ngModelCtrl) {
+        $scope.validateCompanyDominian = function (ngModelCtrl) {
           var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
         };
 
-        $scope.validCompanyEmail = function (ngModelCtrl) {
+        $scope.validateCompanyEmail = function (ngModelCtrl) {
           var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
-        };
-
-        $scope.ValueRadio = false;
-        $scope.changeRadioButton = function () {
-          $scope.ValueRadio = true;
         };
 
       }]);

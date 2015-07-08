@@ -63,7 +63,7 @@
                 </div>
                 <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
                        ng-minlength="3" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
-                       is-uniq-validation validation-func="validCompanyName">
+                       is-uniq-validation validation-func="validateCompanyName">
               </div>
             </div>
             <div class="row-wrapper clearfix">
@@ -91,7 +91,7 @@
                        popover="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses."
                        popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
                        name="companyDomain"
-                       is-uniq-validation validation-func="validCompanyDominian" ng-pattern="dominianPattern">
+                       is-uniq-validation validation-func="validateCompanyDominian" ng-pattern="dominianPattern">
               </div>
             </div>
             <div class="row-wrapper clearfix">
@@ -133,7 +133,7 @@
                           popover="Describe the company's business in 80 characters (spaces included)."
                           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
 
-                <div class="word-count">80</div>
+                <div class="word-count">{{ 80 - editCompany.description.length }}</div>
               </div>
             </div>
           </div>
@@ -199,10 +199,10 @@
               </div>
 
               <div class="row-wrapper clearfix">
-                <label class="control checkbox pull-left" ng-click="changeRadioButton()">
-                  <input type="radio" name="chooseRadioButton" ng-checked="true">
+                <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
+                  <input type="radio" qt-checkbox name="chooseRadioButton" ng-model="location.isPrimary">
                   <span class="control-indicator"></span>
-                  Primary Billing address <span ng-if="ValueRadio && editCompany.addresses.length===1"
+                  Primary Billing address <span ng-if="changeRadioButton && editCompany.addresses.length === 1"
                                                 class="error-alone">Please add multiple site/locations first.</span>
                 </label>
               </div>
@@ -281,7 +281,7 @@
                   <!--todo add uniq validation!!-->
                   <input type="text" class="form-control" name="email" aria-expanded="true" make-dirty-on-blur
                          ng-model="contact.email" required="true" ng-pattern="emailPattern"
-                         contact-id="contact.id" is-uniq-validation validation-func="validCompanyEmail">
+                         contact-id="contact.id" is-uniq-validation validation-func="validateCompanyEmail">
                 </div>
               </div>
 
