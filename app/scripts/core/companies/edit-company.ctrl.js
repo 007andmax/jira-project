@@ -11,7 +11,7 @@
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        $scope.dominianPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.companies = CompaniesService.getClientCompanies();
         //todo receive it using services!!
         $http.get('/addresses/getAllLocales').success(function (resp) {
@@ -93,7 +93,7 @@
           });
         };
 
-        $scope.validateCompanyDominian = function (ngModelCtrl) {
+        $scope.validateCompanyDomain = function (ngModelCtrl) {
           var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
@@ -103,6 +103,15 @@
           var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
+        };
+
+        $scope.editCompany.addresses['0'].isPrimary = true;
+
+        $scope.primaryAddress = function (location) {
+          angular.forEach($scope.editCompany.addresses, function (address) {
+            address.isPrimary = false;
+          });
+          location.isPrimary = true;
         };
 
       }]);

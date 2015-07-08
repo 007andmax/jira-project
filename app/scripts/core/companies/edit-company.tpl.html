@@ -91,7 +91,7 @@
                        popover="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses."
                        popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
                        name="companyDomain"
-                       is-uniq-validation validation-func="validateCompanyDominian" ng-pattern="dominianPattern">
+                       is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
               </div>
             </div>
             <div class="row-wrapper clearfix">
@@ -200,7 +200,8 @@
 
               <div class="row-wrapper clearfix">
                 <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
-                  <input type="radio" qt-checkbox name="chooseRadioButton" ng-model="location.isPrimary">
+                  <input type="radio" name="chooseRadioButton" ng-checked="location.isPrimary"
+                         ng-click="primaryAddress(location)">
                   <span class="control-indicator"></span>
                   Primary Billing address <span ng-if="changeRadioButton && editCompany.addresses.length === 1"
                                                 class="error-alone">Please add multiple site/locations first.</span>
