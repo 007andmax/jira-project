@@ -47,7 +47,12 @@
   <!-- endbuild -->
 
   <script type="text/javascript">
-    if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+      if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) { 
+             document.querySelector('[href*="styles/firefox."]').remove();
+      document.querySelector('[href*="styles/firefox-"]').remove();
+            document.querySelector('[href*="styles/ie."]').remove();
+
+}else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
       document.querySelector('[href*="styles/firefox."]').remove();
       document.querySelector('[href*="styles/firefox-"]').remove();
     } else if (!(window.ActiveXObject || "ActiveXObject" in window)) {
@@ -125,6 +130,7 @@
 <script src="scripts/common/directives/avatar/crop.ctrl.js"></script>
 <script src="scripts/common/directives/count-nodes-in-line.drv.js"></script>
 <script src="scripts/common/directives/hard-reset-pattern.drv.js"></script>
+<script src="scripts/common/directives/is-uniq-validation.drv.js"></script>
 <script src="scripts/common/directives/make-dirty-on-blur.drv.js"></script>
 <script src="scripts/common/directives/navigation-bar.drv.js"></script>
 <script src="scripts/common/directives/on-finish-render.drv.js"></script>
@@ -146,11 +152,11 @@
 <script src="scripts/core/header/header-users.ctrl.js"></script>
 <script src="scripts/core/header/header.ctrl.js"></script>
 <script src="scripts/core/left-panel/left-panel.ctrl.js"></script>
-<script src="scripts/core/users/unique-email.drv.js"></script>
 <script src="scripts/core/users/user-create.ctrl.js"></script>
 <script src="scripts/core/users/user-edit.ctrl.js"></script>
 <script src="scripts/core/users/user.ctrl.js"></script>
 <script src="scripts/core/users/users.ctrl.js"></script>
+<script src="scripts/googleMap.js"></script>
 <script src="quicktech/ticketing/controllers/ticketController.js"></script>
 <script src="quicktech/ticketing/controllers/ticketDetailController.js"></script>
 <script src="quicktech/ticketing/controllers/ticketListController.js"></script>
