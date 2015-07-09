@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$http',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService,
                 SharedStateService, $stateParams, $state, $http) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
@@ -107,11 +107,33 @@
 
         $scope.editCompany.addresses['0'].isPrimary = true;
 
-        $scope.primaryAddress = function (location) {
+        $scope.changePrimaryAddress = function (location) {
           angular.forEach($scope.editCompany.addresses, function (address) {
             address.isPrimary = false;
           });
           location.isPrimary = true;
+        };
+
+        $scope.editCompany.taxRates = [];
+
+        $scope.saveNewTax = function () {
+          if (!$scope.newTaxType && !$scope.newTaxRate) {
+            $scope.showErrorType = true;
+            $scope.showErrorRate = true;
+            return;
+          } else if (!$scope.newTaxType) {
+            $scope.showErrorType = true;
+            return;
+          } else if (!$scope.newTaxRate) {
+            $scope.showErrorRate = true;
+            return;
+          }
+          ;
+          $scope.editCompany.taxRates.push({"rate": $scope.newTaxRate, "code": $scope.newTaxType});
+          $scope.newTaxRate = null;
+          $scope.newTaxType = null;
+          $scope.showErrorType = false;
+          $scope.showErrorRate = false;
         };
 
       }]);

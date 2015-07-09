@@ -426,39 +426,89 @@
 
           <div class="forms-seprator ven" style="margin-top: 40px;"></div>
 
+          <!--<div class="grid-header-row clearfix">-->
+          <!--<div class="grid-col">TAX TYPE</div>-->
+          <!--<div class="grid-col">RATE</div>-->
+          <!--</div>-->
+
+          <!--<div class="grid-row grid-row clearfix">-->
+          <!--<div class="grid-col">GST</div>-->
+          <!--<div class="grid-col val">-->
+          <!--<span>8%</span>-->
+          <!--<a href="javascript:void(0)" class="icn icn-nav-delete pull-right"></a>-->
+          <!--<a href="javascript:void(0)" class="icn icn-edit pull-right"></a>-->
+          <!--</div>-->
+          <!--</div>-->
+
           <div id="tax-rates" class="content clearfix">
             <div class="header clearfix">
               <h4 class="title">Default Tax</h4>
             </div>
-
             <div class="grid-header-row clearfix">
               <div class="grid-col">TAX TYPE</div>
               <div class="grid-col">RATE</div>
             </div>
+            <div ng-repeat="tax in editCompany.taxRates" ng-controller="quicktech.core.companies.TaxRateCtrl">
+              <div class="grid-row grid-row clearfix">
+                <div ng-if="!isEditing">
+                  <div class="grid-col">{{ tax.code }}</div>
+                  <div class="grid-col val">
+                    <span>{{ tax.rate }}%</span>
+                    <a href="javascript:void(0)" class="icn icn-nav-delete pull-right"
+                       ng-click="deleteCurrentlyTax($index)"></a>
+                    <a href="javascript:void(0)" class="icn icn-edit pull-right" ng-click="editCurrentlyTax()"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="user-fields clearfix ntr" style="margin: 0px;">
+                <div class="row-wrapper clearfix" ng-if="isEditing" style="margin: 16.5px 0px;">
+                  <div class="form-group dropdown pull-left" ng-class="{error: !tax.code}">
+                    <div class="qt-error-msg" ng-if="!tax.code">Tax Type is required.</div>
+                    <input type="text" class="form-control" data-popover="true" data-html="true"
+                           data-content="This Tax information will be added to this company's invoices with taxable products and services."
+                           ng-model="tax.code" name="currentlyTaxType">
+                  </div>
 
-            <div class="grid-row grid-row clearfix">
-              <div class="grid-col">GST</div>
-              <div class="grid-col val">
-                <span>8%</span>
-                <a href="javascript:void(0)" class="icn icn-nav-delete pull-right"></a>
-                <a href="javascript:void(0)" class="icn icn-edit pull-right"></a>
+                  <div class="form-group pull-left" ng-class="{error: !tax.rate}">
+                    <div class="qt-error-msg" ng-if="!tax.rate">Rate is required.</div>
+                    <input type="text" class="form-control pull-left" value="" aria-expanded="true"
+                           style="width: 197px;" ng-model="tax.rate" name="currentlyTaxRate">
+
+                    <div class="label-add-btn" ng-click="saveCurrentlyTax(tax.code, tax.rate, $index)"><a
+                      class="btn btn-cr btn-green btn-tax pull-right"><span
+                      class="small-icn-tick icn"></span></a></div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="user-fields clearfix ntr">
               <div class="row-wrapper clearfix">
-                <div class="form-group dropdown pull-left">
+                <div class="form-group dropdown pull-left"
+                     ng-class="{error: isShowingErrors(companyForm, 'newTaxType') && newTaxType===undefined || (showErrorType && !newTaxType)}">
                   <label class="norm">New Tax Rate</label>
+
+                  <div ng-messages="companyForm.newTaxType.$error"
+                       ng-if="isShowingErrors(companyForm, 'newTaxType') && newTaxType===undefined || (showErrorType  && !newTaxType)">
+                    <div class="qt-error-msg" ng-message="required">Tax Type is required.</div>
+                  </div>
                   <input type="text" class="form-control" placeholder="Tax Type" data-popover="true" data-html="true"
-                         data-content="This Tax information will be added to this company's invoices with taxable products and services.">
+                         data-content="This Tax information will be added to this company's invoices with taxable products and services."
+                         ng-model="newTaxType" name="newTaxType" required="true">
                 </div>
 
-                <div class="form-group pull-left">
+                <div class="form-group pull-left"
+                     ng-class="{error: isShowingErrors(companyForm, 'newTaxRate') && newTaxRate===undefined || (showErrorRate && !newTaxRate)}">
                   <label class="norm">&nbsp;</label>
-                  <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
-                         style="width: 197px;">
 
-                  <div class="label-add-btn"><a href="#" class="btn btn-cr btn-green btn-tax pull-right"><span
+                  <div ng-messages="companyForm.newTaxRate.$error"
+                       ng-if="isShowingErrors(companyForm, 'newTaxRate') && newTaxRate===undefined || (showErrorRate && !newTaxRate)">
+                    <div class="qt-error-msg" ng-message="required">Rate is required.</div>
+                  </div>
+                  <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
+                         style="width: 197px;" ng-model="newTaxRate" name="newTaxRate" required="true">
+
+                  <div class="label-add-btn" ng-click="saveNewTax()"><a class="btn btn-cr btn-green btn-tax pull-right"><span
                     class="small-icn-tick icn"></span></a></div>
                 </div>
               </div>
