@@ -6,27 +6,32 @@
     ['$scope',
       function ($scope) {
 
-        $scope.editCurrentlyTax = function () {
+        $scope.editTaxRate = function () {
+          $scope.currentTaxRate = $scope.$parent.tax.rate;
+          $scope.currentTaxCode = $scope.$parent.tax.code;
           $scope.isEditing = true;
         };
 
-        $scope.saveCurrentlyTax = function (currentlyTaxType, currentlyTaxRate, index) {
-          if (!(currentlyTaxType && currentlyTaxRate)) {
+        $scope.saveTax = function () {
+          if (!($scope.$parent.tax.code && $scope.$parent.tax.rate)) {
             return;
           }
           ;
           $scope.isEditing = false;
-          $scope.editCompany.taxRates[index] = {"rate": currentlyTaxRate, "code": currentlyTaxType};
+          $scope.editCompany.taxRates[$scope.editCompany.taxRates.indexOf($scope.$parent.tax)] = {
+            "rate": $scope.$parent.tax.rate,
+            "code": $scope.$parent.tax.code
+          };
         };
 
-        $scope.deleteCurrentlyTax = function (index) {
-          $scope.editCompany.taxRates.splice(index, 1);
+        $scope.cancelTax = function () {
+          $scope.isEditing = false;
+          $scope.$parent.tax.rate = $scope.currentTaxRate;
+          $scope.$parent.tax.code = $scope.currentTaxCode;
         };
 
-        $scope.validateCompanyEmail = function (ngModelCtrl) {
-          var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
-            ngModelCtrl.$setValidity('unique', validationResult.value);
-          });
+        $scope.deleteTaxRate = function () {
+          $scope.editCompany.taxRates.splice($scope.editCompany.taxRates.indexOf($scope.$parent.tax), 1);
         };
 
       }]);

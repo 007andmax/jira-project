@@ -94,7 +94,7 @@
                        is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
               </div>
             </div>
-           <div address-autocomplete ng-model="editCompany.primaryAddress"></div>
+            <div address-autocomplete ng-model="editCompany.primaryAddress"></div>
             <div class="row-wrapper clearfix">
               <div class="form-group form-group-full dropdown"
                    ng-class="{error: isShowingErrors(companyForm, 'companyDescription')}">
@@ -384,20 +384,6 @@
 
           <div class="forms-seprator ven" style="margin-top: 40px;"></div>
 
-          <!--<div class="grid-header-row clearfix">-->
-          <!--<div class="grid-col">TAX TYPE</div>-->
-          <!--<div class="grid-col">RATE</div>-->
-          <!--</div>-->
-
-          <!--<div class="grid-row grid-row clearfix">-->
-          <!--<div class="grid-col">GST</div>-->
-          <!--<div class="grid-col val">-->
-          <!--<span>8%</span>-->
-          <!--<a href="javascript:void(0)" class="icn icn-nav-delete pull-right"></a>-->
-          <!--<a href="javascript:void(0)" class="icn icn-edit pull-right"></a>-->
-          <!--</div>-->
-          <!--</div>-->
-
           <div id="tax-rates" class="content clearfix">
             <div class="header clearfix">
               <h4 class="title">Default Tax</h4>
@@ -413,28 +399,44 @@
                   <div class="grid-col val">
                     <span>{{ tax.rate }}%</span>
                     <a href="javascript:void(0)" class="icn icn-nav-delete pull-right"
-                       ng-click="deleteCurrentlyTax($index)"></a>
-                    <a href="javascript:void(0)" class="icn icn-edit pull-right" ng-click="editCurrentlyTax()"></a>
+                       ng-click="deleteTaxRate()"></a>
+                    <a href="javascript:void(0)" class="icn icn-edit pull-right" ng-click="editTaxRate()"></a>
                   </div>
                 </div>
               </div>
               <div class="user-fields clearfix ntr" style="margin: 0px;">
                 <div class="row-wrapper clearfix" ng-if="isEditing" style="margin: 16.5px 0px;">
-                  <div class="form-group dropdown pull-left" ng-class="{error: !tax.code}">
-                    <div class="qt-error-msg" ng-if="!tax.code">Tax Type is required.</div>
-                    <input type="text" class="form-control" data-popover="true" data-html="true"
+                  <div class="form-group dropdown pull-left"
+                       ng-class="{error: isShowingErrors(companyForm, 'currentlyTaxType')}"
+                       popover="This Tax information will be added to this company's invoices with taxable products and services."
+                       popover-placement="bottom">
+                    <div ng-messages="companyForm.currentlyTaxType.$error"
+                         ng-if="isShowingErrors(companyForm, 'currentlyTaxType')">
+                      <div class="qt-error-msg" ng-message="required" style="margin-top: -16px;">Tax Type is required.
+                      </div>
+                    </div>
+                    <input type="text" class="form-control"
                            data-content="This Tax information will be added to this company's invoices with taxable products and services."
-                           ng-model="tax.code" name="currentlyTaxType">
+                           ng-model="tax.code" name="currentlyTaxType" required="true">
                   </div>
 
-                  <div class="form-group pull-left" ng-class="{error: !tax.rate}">
-                    <div class="qt-error-msg" ng-if="!tax.rate">Rate is required.</div>
-                    <input type="text" class="form-control pull-left" value="" aria-expanded="true"
-                           style="width: 197px;" ng-model="tax.rate" name="currentlyTaxRate">
+                  <div class="form-group pull-left"
+                       ng-class="{error: isShowingErrors(companyForm, 'currentlyTaxRate')}">
+                    <div ng-messages="companyForm.currentlyTaxRate.$error"
+                         ng-if="isShowingErrors(companyForm, 'currentlyTaxRate')">
+                      <div class="qt-error-msg" ng-message="required" style="margin-top: -16px;">Rate is required.</div>
+                      <div class="qt-error-msg" ng-message="number" style="margin-top: -16px;">Rate must be a number.
+                      </div>
+                    </div>
+                    <input type="number" class="form-control pull-left" value="" aria-expanded="true"
+                           style="width: 155px;" ng-model="tax.rate" name="currentlyTaxRate" required="true" min="0">
 
-                    <div class="label-add-btn" ng-click="saveCurrentlyTax(tax.code, tax.rate, $index)"><a
+                    <div class="label-add-btn" ng-click="saveTax()"><a
                       class="btn btn-cr btn-green btn-tax pull-right"><span
                       class="small-icn-tick icn"></span></a></div>
+                    <div class="label-add-btn" ng-click="cancelTax()"><a style="margin-top: 0px"
+                                                                         class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide">
+                      <span class="icn-remove-update"></span></a></div>
                   </div>
                 </div>
               </div>
@@ -443,28 +445,31 @@
             <div class="user-fields clearfix ntr">
               <div class="row-wrapper clearfix">
                 <div class="form-group dropdown pull-left"
-                     ng-class="{error: isShowingErrors(companyForm, 'newTaxType') && newTaxType===undefined || (showErrorType && !newTaxType)}">
+                     popover="This Tax information will be added to this company's invoices with taxable products and services."
+                     popover-placement="bottom"
+                     ng-class="{error: isShowingErrors(companyForm, 'newTaxType') && newTaxRate.code===undefined || (showErrorType && !newTaxRate.code)}">
                   <label class="norm">New Tax Rate</label>
 
                   <div ng-messages="companyForm.newTaxType.$error"
-                       ng-if="isShowingErrors(companyForm, 'newTaxType') && newTaxType===undefined || (showErrorType  && !newTaxType)">
+                       ng-if="isShowingErrors(companyForm, 'newTaxType') && newTaxRate.code===undefined || (showErrorType && !newTaxRate.code)">
                     <div class="qt-error-msg" ng-message="required">Tax Type is required.</div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Tax Type" data-popover="true" data-html="true"
-                         data-content="This Tax information will be added to this company's invoices with taxable products and services."
-                         ng-model="newTaxType" name="newTaxType" required="true">
+                  <input type="text" class="form-control" placeholder="Tax Type" data-html="true"
+                         ng-model="newTaxRate.code" name="newTaxType" ng-required="true">
                 </div>
 
                 <div class="form-group pull-left"
-                     ng-class="{error: isShowingErrors(companyForm, 'newTaxRate') && newTaxRate===undefined || (showErrorRate && !newTaxRate)}">
+                     ng-class="{error: isShowingErrors(companyForm, 'newTaxRate') && newTaxRate.rate===undefined || (showErrorRate && !newTaxRate.rate)}">
                   <label class="norm">&nbsp;</label>
 
                   <div ng-messages="companyForm.newTaxRate.$error"
-                       ng-if="isShowingErrors(companyForm, 'newTaxRate') && newTaxRate===undefined || (showErrorRate && !newTaxRate)">
+                       ng-if="isShowingErrors(companyForm, 'newTaxRate') && newTaxRate.rate===undefined || (showErrorRate && !newTaxRate.rate)">
                     <div class="qt-error-msg" ng-message="required">Rate is required.</div>
+                    <div class="qt-error-msg" ng-message="number">Rate must be a number.</div>
                   </div>
-                  <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
-                         style="width: 197px;" ng-model="newTaxRate" name="newTaxRate" required="true">
+                  <input type="number" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
+                         data-html="true"
+                         style="width: 197px;" ng-model="newTaxRate.rate" name="newTaxRate" ng-required="true" min="0">
 
                   <div class="label-add-btn" ng-click="saveNewTax()"><a class="btn btn-cr btn-green btn-tax pull-right"><span
                     class="small-icn-tick icn"></span></a></div>

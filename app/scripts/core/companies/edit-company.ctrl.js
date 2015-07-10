@@ -44,8 +44,9 @@
 
         } else {
           $scope.editCompany = {
-            addresses: [{}],
-            contacts: [getEmptyContact()]
+            addresses: [{isPrimary: true}],
+            contacts: [getEmptyContact()],
+            taxRates: []
           };
         }
 
@@ -105,8 +106,6 @@
           });
         };
 
-        $scope.editCompany.addresses['0'].isPrimary = true;
-
         $scope.changePrimaryAddress = function (location) {
           angular.forEach($scope.editCompany.addresses, function (address) {
             address.isPrimary = false;
@@ -114,24 +113,23 @@
           location.isPrimary = true;
         };
 
-        $scope.editCompany.taxRates = [];
+        $scope.newTaxRate = {};
 
         $scope.saveNewTax = function () {
-          if (!$scope.newTaxType && !$scope.newTaxRate) {
+          if (!$scope.newTaxRate.code && !$scope.newTaxRate.rate) {
             $scope.showErrorType = true;
             $scope.showErrorRate = true;
             return;
-          } else if (!$scope.newTaxType) {
+          } else if (!$scope.newTaxRate.code) {
             $scope.showErrorType = true;
             return;
-          } else if (!$scope.newTaxRate) {
+          } else if (!$scope.newTaxRate.rate) {
             $scope.showErrorRate = true;
             return;
           }
           ;
-          $scope.editCompany.taxRates.push({"rate": $scope.newTaxRate, "code": $scope.newTaxType});
-          $scope.newTaxRate = null;
-          $scope.newTaxType = null;
+          $scope.editCompany.taxRates.push($scope.newTaxRate);
+          $scope.newTaxRate = {"code": null, "rate": null};
           $scope.showErrorType = false;
           $scope.showErrorRate = false;
         };
