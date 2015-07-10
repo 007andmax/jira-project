@@ -94,28 +94,7 @@
                        is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
               </div>
             </div>
-            <div class="row-wrapper clearfix">
-              <div class="form-group form-group-full" ng-class="{error:isShowingErrors(companyForm, 'companyAddress')}">
-                <label>address</label>
-
-                <div ng-messages="companyForm.companyAddress.$error"
-                     ng-if="isShowingErrors(companyForm, 'companyAddress')">
-                  <div class="error-msg" ng-message="required">Please enter the company’s address.</div>
-                </div>
-                <input type="text" class="form-control" popover="Enter the company's full address."
-                       name="companyAddress"
-                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover required="true"
-                       make-dirty-on-blur
-                       ng-model="editCompany.primaryAddress.address">
-              </div>
-            </div>
-            <div class="row-wrapper  locmap clearfix">
-              <div class="form-group full">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2965.0824050173574!2d-93.63905729999999!3d41.998507000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWebFilings%2C+University+Boulevard%2C+Ames%2C+IA!5e0!3m2!1sen!2sus!4v1390839289319"
-                  width="100%" height='224' frameborder='0' style='border:0'></iframe>
-              </div>
-            </div>
+           <div address-autocomplete ng-model="editCompany.primaryAddress"></div>
             <div class="row-wrapper clearfix">
               <div class="form-group form-group-full dropdown"
                    ng-class="{error: isShowingErrors(companyForm, 'companyDescription')}">
@@ -143,28 +122,7 @@
           <div id="site-location" class="header clearfix"><h4 class="title">Site/Location(s)</h4></div>
           <div class="user-fields clearfix">
             <div ng-repeat="location in editCompany.addresses">
-              <div class="row-wrapper clearfix">
-                <div class="form-group form-group-full"
-                     ng-class="{error:isShowingErrors(companyForm, 'companyAddressLocation')}">
-                  <label>address</label>
-
-                  <div ng-messages="companyForm.companyAddressLocation.$error"
-                       ng-if="isShowingErrors(companyForm, 'companyAddressLocation')">
-                    <div class="error-msg" ng-message="required">Please enter the company’s address.</div>
-                  </div>
-                  <input type="text" class="form-control" ng-model="location.address" name="companyAddressLocation"
-                         required="true"
-                         popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
-                         popover="Enter the company's full address.">
-                </div>
-              </div>
-              <div class="row-wrapper  locmap clearfix">
-                <div class="form-group full">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2965.0824050173574!2d-93.63905729999999!3d41.998507000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWebFilings%2C+University+Boulevard%2C+Ames%2C+IA!5e0!3m2!1sen!2sus!4v1390839289319"
-                    width="100%" height='224' frameborder='0' style='border:0'></iframe>
-                </div>
-              </div>
+              <div address-autocomplete ng-model="location"></div>
 
               <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 

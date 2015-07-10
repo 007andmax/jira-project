@@ -9,6 +9,7 @@
       'quicktech.core.users',
       'quicktech.common.services',
       'quicktech.common.directives',
+      'quicktech.core.companies',
       'ui.router',
       'ui.select',
       'ui.bootstrap',

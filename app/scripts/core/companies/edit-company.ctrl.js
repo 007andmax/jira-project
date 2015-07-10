@@ -2,10 +2,10 @@
 
 (function () {
 
-  angular.module('quicktech.core.users').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService',
+  angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$http',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
                 SharedStateService, $stateParams, $state, $http) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');

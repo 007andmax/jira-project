@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.users').controller('quicktech.core.companies.companyCtrl',
+  angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyCtrl',
     ['$scope', 'CompaniesService',
       function ($scope, CompaniesService) {
 
