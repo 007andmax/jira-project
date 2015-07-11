@@ -7,7 +7,8 @@
       restrict: 'A',
       require: 'ngModel',
       scope: {
-        model: '=ngModel'
+        model: '=ngModel',
+        showValidationMessages: '=showValidationMessages'
       },
       templateUrl: '/html/scripts/core/companies/address-autocomplete.tpl.html',
       link: function ($scope, element, attrs, ngModelCtrl) {
@@ -35,7 +36,9 @@
           });
         autocomplete.setTypes(['address']);
 
-        resetMap();
+        $scope.$watch(function () {
+          return ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address;
+        }, resetMap);
 
         input.on('change', function () {
           inputCtrl.$setValidity('correct', false);
@@ -43,7 +46,6 @@
           ngModelCtrl.$viewValue.countryCode = undefined;
           ngModelCtrl.$viewValue.locationLat = undefined;
           ngModelCtrl.$viewValue.locationLng = undefined;
-          resetMap();
         });
 
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
@@ -55,10 +57,10 @@
             return;
           }
 
+          ngModelCtrl.$viewValue.address = input.val();
           ngModelCtrl.$viewValue.countryCode = getCountryCode(place);
           ngModelCtrl.$viewValue.locationLat = place.geometry.location.A;
           ngModelCtrl.$viewValue.locationLng = place.geometry.location.F;
-          resetMap();
 
         });
 
@@ -73,7 +75,7 @@
 
         function resetMap() {
 
-          var hasLocation = ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
+          var hasLocation = ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
 
           if (hasLocation) {
             var position = new google.maps.LatLng(ngModelCtrl.$viewValue.locationLat, ngModelCtrl.$viewValue.locationLng);

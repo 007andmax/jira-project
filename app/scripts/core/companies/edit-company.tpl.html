@@ -94,7 +94,8 @@
                        is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
               </div>
             </div>
-            <div address-autocomplete ng-model="editCompany.primaryAddress"></div>
+            <div address-autocomplete ng-model="editCompany.primaryAddress"
+                 show-validation-messages="triedToSave"></div>
             <div class="row-wrapper clearfix">
               <div class="form-group form-group-full dropdown"
                    ng-class="{error: isShowingErrors(companyForm, 'companyDescription')}">
@@ -121,179 +122,190 @@
           <div id="site-location" class="header clearfix"><h4 class="title">Site/Location(s)</h4></div>
           <div class="user-fields clearfix">
             <div ng-repeat="location in editCompany.addresses">
-              <div address-autocomplete ng-model="location"></div>
+              <div ng-form="locationForm">
+                <div address-autocomplete ng-model="location" show-validation-messages="triedToSave"></div>
 
-              <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
+                <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
-              <div class="row-wrapper dropdown clearfix">
-                <div class="form-group form-group-full pull-left"
-                     ng-class="{error:isShowingErrors(companyForm, 'companyTimezone')}">
-                  <label>Time Zone</label>
+                <div class="row-wrapper dropdown clearfix">
+                  <div class="form-group form-group-full pull-left"
+                       ng-class="{error:isShowingErrors(locationForm, 'companyTimezone')}">
+                    <label>Time Zone</label>
 
-                  <div ng-messages="companyForm.companyTimezone.$error"
-                       ng-if="isShowingErrors(companyForm, 'companyTimezone')">
-                    <div class="error-msg">Please select the timezone.</div>
+                    <div ng-messages="locationForm.companyTimezone.$error"
+                         ng-if="isShowingErrors(locationForm, 'companyTimezone')">
+                      <div class="error-msg">Please select the timezone.</div>
+                    </div>
+                    <input type="text" ng-model="location.locale"
+                           class="form-control form-control-dropdown dropdown-toggle pull-left" required="true"
+                           name="companyTimezone"
+                           typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
+                           typeahead-editable="false" typeahead-min-length="0"
+                           qt-typeahead-show-on-focus ng-trim="false">
+
+                    <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                       tooltip="Add More" tooltip-placement="top"
+                       style="margin-top:0;" ng-click="addLocation()" ng-show="$last"
+                       ng-disabled="editCompany.addresses.length >= locationsMaxCount">
+                      <span class="icn-add"></span>
+                    </a>
+
+                    <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+                       tooltip="Remove Contact no." tooltip-placement="top"
+                       style="margin-top:0;" ng-click="removeLocation($index)" ng-show="!$last">
+                      <span class="icn-remove-update"></span>
+                    </a>
                   </div>
-                  <input type="text" ng-model="location.locale"
-                         class="form-control form-control-dropdown dropdown-toggle pull-left" required="true"
-                         name="companyTimezone"
-                         typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
-                         typeahead-editable="false" typeahead-min-length="0"
-                         qt-typeahead-show-on-focus ng-trim="false">
-
-                  <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                     tooltip="Add More" tooltip-placement="top"
-                     style="margin-top:0;" ng-click="addLocation()" ng-show="$last">
-                    <span class="icn-add"></span>
-                  </a>
-
-                  <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-                     tooltip="Remove Contact no." tooltip-placement="top"
-                     style="margin-top:0;" ng-click="removeLocation($index)" ng-show="!$last">
-                    <span class="icn-remove-update"></span>
-                  </a>
                 </div>
-              </div>
 
-              <div class="row-wrapper clearfix">
-                <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
-                  <input type="radio" name="chooseRadioButton" ng-checked="location.isPrimary"
-                         ng-click="changePrimaryAddress(location)">
-                  <span class="control-indicator"></span>
-                  Primary Billing address <span ng-if="changeRadioButton && editCompany.addresses.length === 1"
-                                                class="error-alone">Please add multiple site/locations first.</span>
-                </label>
+                <div class="row-wrapper clearfix">
+                  <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
+                    <input type="radio" name="chooseRadioButton" ng-checked="location.isPrimary"
+                           ng-click="changePrimaryAddress(location)">
+                    <span class="control-indicator"></span>
+                    Primary Billing address <span ng-if="changeRadioButton && editCompany.addresses.length === 1"
+                                                  class="error-alone">Please add multiple site/locations first.</span>
+                  </label>
+                </div>
               </div>
             </div>
 
             <div class="forms-seprator dl" style="margin-top: 67px; margin-bottom:77px;"></div>
 
-            <div id="primary-contacts" class="content clearfix" ng-repeat="contact in editCompany.contacts"
-                 ng-form="contactForm">
-              <div class="header clearfix">
-                <h4 class="title">Primary Contact(s)</h4>
-              </div>
-              <div edit-avatar ng-model="contact.avatar" model-name="contact"></div>
+            <div class="header clearfix">
+              <h4 class="title">Primary Contact(s)</h4>
+            </div>
 
-              <div class="user-fields clearfix">
-                <div class="form-group dropdown pull-left"
-                     ng-class="{error: isShowingErrors(contact, contactForm, 'firstName')}">
+            <div class="content clearfix">
+              <div ng-repeat="contact in editCompany.contacts">
+                <div ng-form="contactForm">
+                  <div edit-avatar ng-model="contact.avatar" model-name="contact"></div>
 
-                  <label>first name</label>
+                  <div class="user-fields clearfix">
+                    <div class="form-group dropdown pull-left"
+                         ng-class="{error: isShowingContactErrors(contact, contactForm, 'firstName')}">
 
-                  <div ng-messages="contactForm.firstName.$error"
-                       ng-if="isShowingErrors(contact, contactForm, 'firstName')">
-                    <div class="qt-error-msg" ng-message="required">First name is required.</div>
-                    <div class="qt-error-msg" ng-message="maxlength">First name is too large.</div>
-                    <div class="qt-error-msg" ng-message="minlength">First name is too short.</div>
-                  </div>
+                      <label>first name</label>
 
-                  <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
-                         name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
-                </div>
+                      <div ng-messages="contactForm.firstName.$error"
+                           ng-if="isShowingContactErrors(contact, contactForm, 'firstName')">
+                        <div class="qt-error-msg" ng-message="required">First name is required.</div>
+                        <div class="qt-error-msg" ng-message="maxlength">First name is too large.</div>
+                        <div class="qt-error-msg" ng-message="minlength">First name is too short.</div>
+                      </div>
 
-                <div class="form-group dropdown pull-left"
-                     ng-class="{error: isShowingErrors(contact, contactForm, 'lastName')}">
-                  <label>last name</label>
-
-                  <div ng-messages="contactForm.lastName.$error"
-                       ng-if="isShowingErrors(contact, contactForm, 'lastName')">
-                    <div class="qt-error-msg" ng-message="required">Last name requires at least 1 letter.</div>
-                    <div class="qt-error-msg" ng-message="maxlength">Last name is too large.</div>
-                    <div class="qt-error-msg" ng-message="minlength">Last name is too short.</div>
-                  </div>
-
-                  <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
-                         name="lastName" ng-model="contact.lastName" required="true" make-dirty-on-blur>
-                </div>
-              </div>
-
-              <div class="row-wrapper clearfix">
-
-                <div class="form-group dropdown pull-left"
-                     ng-class="{error: isShowingErrors(contact, contactForm, 'designation')}">
-                  <label>designation</label>
-
-                  <div ng-messages="contactForm.designation.$error"
-                       ng-if="isShowingErrors(contact, contactForm, 'designation')">
-                    <div class="qt-error-msg" ng-message="required">Please enter a designation.</div>
-                    <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
-                    <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
-                  </div>
-
-                  <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
-                         ng-model="contact.designation" required="true" ng-minlength="3" ng-maxlength="30">
-                </div>
-
-                <div class="form-group dropdown pull-left"
-                     ng-class="{error: isShowingErrors(contactForm, 'email')}">
-                  <label>email</label>
-
-                  <div ng-messages="contactForm.email.$error" ng-if="isShowingErrors(contactForm, 'email')">
-                    <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
-                    <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
-                    <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
-                    <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
-                  </div>
-
-                  <!--todo add uniq validation!!-->
-                  <input type="text" class="form-control" name="email" aria-expanded="true" make-dirty-on-blur
-                         ng-model="contact.email" required="true" ng-pattern="emailPattern"
-                         contact-id="contact.id" is-uniq-validation validation-func="validateCompanyEmail">
-                </div>
-              </div>
-
-              <div phone-numbers-edit ng-model="contact.phoneNumbers"></div>
-
-              <div class="row-wrapper clearfix">
-                <div class="form-group  cs-type dropdown pull-left">
-                  <label>subscribe to</label>
-                  <input type="text" class="form-control form-control-dropdown dropdown-toggle hide-cursor" value=""
-                         data-toggle="dropdown" aria-expanded="true">
-
-                  <div class="tokens" data-toggle="dropdown">
-                    <div class="token ticket" ng-show="contact.subscription.ticket">
-                      <span class="token-label">tkt updates</span>
+                      <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
+                             name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
                     </div>
 
-                    <div class="token invoice" ng-show="contact.subscription.invoice">
-                      <span class="token-label">inv. updates</span>
+                    <div class="form-group dropdown pull-left"
+                         ng-class="{error: isShowingContactErrors(contact, contactForm, 'lastName')}">
+                      <label>last name</label>
+
+                      <div ng-messages="contactForm.lastName.$error"
+                           ng-if="isShowingContactErrors(contact, contactForm, 'lastName')">
+                        <div class="qt-error-msg" ng-message="required">Last name requires at least 1 letter.</div>
+                        <div class="qt-error-msg" ng-message="maxlength">Last name is too large.</div>
+                        <div class="qt-error-msg" ng-message="minlength">Last name is too short.</div>
+                      </div>
+
+                      <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
+                             name="lastName" ng-model="contact.lastName" required="true" make-dirty-on-blur>
                     </div>
                   </div>
 
-                  <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
-                    <li><a tabindex="-1" href qt-checkbox ng-model="contact.subscription.ticket">
-                      <div class="clearfix"><label class="control checkbox pull-left">
-                        <input type="checkbox" ng-model="contact.subscription.ticket">
-                        <span class="control-indicator" stop-propagation="true"></span>
-                      </label>
-                        Ticket Updates
+                  <div class="row-wrapper clearfix">
+
+                    <div class="form-group dropdown pull-left"
+                         ng-class="{error: isShowingContactErrors(contact, contactForm, 'designation')}">
+                      <label>designation</label>
+
+                      <div ng-messages="contactForm.designation.$error"
+                           ng-if="isShowingContactErrors(contact, contactForm, 'designation')">
+                        <div class="qt-error-msg" ng-message="required">Please enter a designation.</div>
+                        <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
+                        <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
                       </div>
-                    </a></li>
-                    <li><a tabindex="-1" href qt-checkbox ng-model="contact.subscription.invoice">
-                      <div class="clearfix"><label class="control checkbox pull-left">
-                        <input type="checkbox" ng-model="contact.subscription.invoice">
-                        <span class="control-indicator"></span>
-                      </label>
-                        Invoice Updates
+
+                      <input type="text" class="form-control " name="designation" aria-expanded="true"
+                             make-dirty-on-blur
+                             ng-model="contact.designation" required="true" ng-minlength="3" ng-maxlength="30">
+                    </div>
+
+                    <div class="form-group dropdown pull-left"
+                         ng-class="{error: isShowingContactErrors(contact, contactForm, 'email')}">
+                      <label>email</label>
+
+                      <div ng-messages="contactForm.email.$error"
+                           ng-if="isShowingContactErrors(contact, contactForm, 'email')">
+                        <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
+                        <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
+                        <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
+                        <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
                       </div>
-                    </a></li>
-                  </ul>
-                </div>
 
-                <div class="form-group pull-right">
+                      <input type="text" class="form-control" name="email" aria-expanded="true" make-dirty-on-blur
+                             ng-model="contact.email" required="true" ng-pattern="emailPattern"
+                             contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
+                             model-id="contact.id">
+                    </div>
+                  </div>
 
-                  <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                     tooltip="Add More" tooltip-placement="top"
-                     style="margin-top:0;" ng-click="addContact()" ng-show="$last">
-                    <span class="icn-add"></span>
-                  </a>
+                  <div phone-numbers-edit ng-model="contact.phoneNumbers"></div>
 
-                  <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-                     tooltip="Remove Contact no." tooltip-placement="top"
-                     style="margin-top:0;" ng-click="removeContact($index)" ng-show="!$last">
-                    <span class="icn-remove-update"></span>
-                  </a>
+                  <div class="row-wrapper clearfix">
+                    <div class="form-group  cs-type dropdown pull-left">
+                      <label>subscribe to</label>
+                      <input type="text" class="form-control form-control-dropdown dropdown-toggle hide-cursor" value=""
+                             data-toggle="dropdown" aria-expanded="true">
+
+                      <div class="tokens" data-toggle="dropdown">
+                        <div class="token ticket" ng-show="contact.subscription.ticket">
+                          <span class="token-label">tkt updates</span>
+                        </div>
+
+                        <div class="token invoice" ng-show="contact.subscription.invoice">
+                          <span class="token-label">inv. updates</span>
+                        </div>
+                      </div>
+
+                      <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
+                        <li><a tabindex="-1" href qt-checkbox ng-model="contact.subscription.ticket">
+                          <div class="clearfix"><label class="control checkbox pull-left">
+                            <input type="checkbox" ng-model="contact.subscription.ticket">
+                            <span class="control-indicator"></span>
+                          </label>
+                            Ticket Updates
+                          </div>
+                        </a></li>
+                        <li><a tabindex="-1" href qt-checkbox ng-model="contact.subscription.invoice">
+                          <div class="clearfix"><label class="control checkbox pull-left">
+                            <input type="checkbox" ng-model="contact.subscription.invoice">
+                            <span class="control-indicator"></span>
+                          </label>
+                            Invoice Updates
+                          </div>
+                        </a></li>
+                      </ul>
+                    </div>
+
+                    <div class="form-group pull-right">
+
+                      <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                         tooltip="Add More" tooltip-placement="top"
+                         ng-disabled="editCompany.contacts.length >= contactsMaxCount"
+                         style="margin-top:0;" ng-click="addContact()" ng-show="$last">
+                        <span class="icn-add"></span>
+                      </a>
+
+                      <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+                         tooltip="Remove Contact" tooltip-placement="top"
+                         style="margin-top:0;" ng-click="removeContact($index)" ng-show="!$last">
+                        <span class="icn-remove-update"></span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="forms-seprator fulld" ng-show="!$last"></div>
                 </div>
               </div>
             </div>
@@ -387,7 +399,7 @@
             <div class="header clearfix">
               <h4 class="title">Default Tax</h4>
             </div>
-            <div class="grid-header-row clearfix">
+            <div class="grid-header-row clearfix" ng-show="editCompany.taxRates.length > 0">
               <div class="grid-col">TAX TYPE</div>
               <div class="grid-col">RATE</div>
             </div>
@@ -408,7 +420,7 @@
                   <div class="form-group dropdown pull-left"
                        ng-class="{error: isShowingErrors(companyForm, 'currentlyTaxType')}"
                        popover="This Tax information will be added to this company's invoices with taxable products and services."
-                       popover-placement="bottom">
+                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
                     <div ng-messages="companyForm.currentlyTaxType.$error"
                          ng-if="isShowingErrors(companyForm, 'currentlyTaxType')">
                       <div class="qt-error-msg" ng-message="required" style="margin-top: -16px;">Tax Type is required.
@@ -420,9 +432,7 @@
                         occupied.
                       </div>
                     </div>
-                    <input type="text" class="form-control"
-                           data-content="This Tax information will be added to this company's invoices with taxable products and services."
-                           ng-model="tax.code" name="currentlyTaxType" required="true" ng-maxlength="30"
+                    <input type="text" class="form-control" ng-model="tax.code" name="currentlyTaxType" required="true"
                            is-uniq-validation validation-func="validateTaxRateCode">
                   </div>
 
@@ -440,50 +450,53 @@
                       ng-disabled="isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')"
                       class="btn btn-cr btn-green btn-tax pull-right"><span
                       class="small-icn-tick icn"></span></a></div>
-                    <div class="label-add-btn" ng-click="cancelTax()"><a style="margin-top: 0px"
-                                                                         class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide">
-                      <span class="icn-remove-update"></span></a></div>
+                    <div class="label-add-btn" ng-click="cancelTax()">
+                      <a style="margin-top: 0px" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide">
+                        <span class="icn-remove-update"></span></a></div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="user-fields clearfix ntr">
+            <div class="user-fields clearfix ntr" ng-form="newTaxRateForm">
               <div class="row-wrapper clearfix">
                 <div class="form-group dropdown pull-left"
                      popover="This Tax information will be added to this company's invoices with taxable products and services."
-                     popover-placement="bottom"
-                     ng-class="{error: isShowingErrors(companyForm, 'newTaxType') && newTaxRate.code===undefined || (showErrorType && !newTaxRate.code)}">
+                     popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
+                     ng-class="{error: newTaxRateForm.validation.code.invalid && newTaxRateFormShowErrors}">
                   <label class="norm">New Tax Rate</label>
 
-                  <div ng-messages="companyForm.newTaxType.$error"
-                       ng-if="isShowingErrors(companyForm, 'newTaxType') && newTaxRate.code===undefined || (showErrorType && !newTaxRate.code)">
-                    <div class="qt-error-msg" ng-message="required">Tax Type is required.</div>
-                    <div class="qt-error-msg" ng-message="maxlength">Tax Type is too large.</div>
-                    <div class="qt-error-msg" ng-message="unique">This Tax Type already occupied.</div>
+                  <div class="qt-error-msg"
+                       ng-show="newTaxRateForm.validation.code.required && newTaxRateFormShowErrors">
+                    Tax Type is required.
                   </div>
-                  <input type="text" class="form-control" placeholder="Tax Type" data-html="true"
-                         ng-model="newTaxRate.code" name="newTaxType" ng-required="true" ng-maxlength="30"
-                         is-uniq-validation validation-func="validateTaxRateCode">
+                  <div class="qt-error-msg"
+                       ng-show="newTaxRateForm.validation.code.maxlength && newTaxRateFormShowErrors">
+                    Tax Type is too large.
+                  </div>
+                  <input type="text" class="form-control" placeholder="Tax Type" ng-model="newTaxRate.code"
+                         ng-change="validateNewTaxRate(newTaxRateForm)" name="code">
                 </div>
 
                 <div class="form-group pull-left"
-                     ng-class="{error: isShowingErrors(companyForm, 'newTaxRate') && newTaxRate.rate===undefined || (showErrorRate && !newTaxRate.rate)}">
+                     ng-class="{error: newTaxRateForm.validation.rate.invalid && newTaxRateFormShowErrors}">
                   <label class="norm">&nbsp;</label>
 
-                  <div ng-messages="companyForm.newTaxRate.$error"
-                       ng-if="isShowingErrors(companyForm, 'newTaxRate') && newTaxRate.rate===undefined || (showErrorRate && !newTaxRate.rate)">
-                    <div class="qt-error-msg" ng-message="required">Rate is required.</div>
+                  <div class="qt-error-msg"
+                       ng-show="newTaxRateForm.validation.rate.required && newTaxRateFormShowErrors">
+                    Rate is required.
                   </div>
-                  <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
-                         data-html="true"
-                         style="width: 197px;" ng-model="newTaxRate.rate" name="newTaxRate" ng-required="true"
-                         hard-reset-pattern="taxRateNumberPattern">
+                  <div class="qt-error-msg"
+                       ng-show="!newTaxRateForm.validation.rate.required && newTaxRateForm.validation.rate.number && newTaxRateFormShowErrors">
+                    Rate must be a number.
+                  </div>
+                  <input type="text" class="form-control pull-left" placeholder="Rate" style="width: 197px;"
+                         ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)">
 
-                  <div class="label-add-btn" ng-click="saveNewTax()"><a
-                    ng-disabled="isShowingErrors(companyForm, 'newTaxRate') || isShowingErrors(companyForm, 'newTaxType')"
-                    class="btn btn-cr btn-green btn-tax pull-right"><span
-                    class="small-icn-tick icn"></span></a></div>
+                  <div class="label-add-btn">
+                    <a class="btn btn-cr btn-green btn-tax pull-right" ng-click="saveNewTax(newTaxRateForm)">
+                      <span class="small-icn-tick icn"></span></a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -498,16 +511,16 @@
 
             <div class="user-fields clearfix">
               <div class="row-wrapper clearfix">
-                <div class="form-group dropdown pull-left">
+                <div class="form-group dropdown pull-left" popover-placement="bottom" popover-trigger="qtCustomPopover"
+                     qt-custom-popover
+                     popover="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain">
                   <label>Domain/Username</label>
-                  <input type="text" class="form-control " value="" aria-expanded="true"
-                         data-content="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain"
-                         data-html="true" data-popover="true">
+                  <input type="text" class="form-control " value="" aria-expanded="true" ng-disabled="true">
                 </div>
 
                 <div class="form-group pull-left" style="position: relative;">
                   <label>Password</label>
-                  <input type="text" class="form-control" value="Password" aria-expanded="true">
+                  <input type="text" class="form-control" value="Password" aria-expanded="true" ng-disabled="true">
 
                   <div class="password-eye hide-pass"><span class="icn-ipass"></span></div>
                   <!-- <div class="password-eye"><span class="icn-ipass"></span></div> -->
@@ -520,9 +533,9 @@
                   <label>Description</label>
                 </div>
                 <div class="clearfix">
-                  <input type="text" class="form-control pull-left" style="width:453px;">
+                  <input type="text" class="form-control pull-left" style="width:453px;" ng-disabled="true">
                   <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-                     data-toggle="tooltip" data-original-title="Add More" data-placement="top"
+                     tooltip="Add More" tooltip-placement="top" ng-disabled="true"
                      style="margin-top:0;"><span class="icn-add"></span></a>
                 </div>
                 <div class="word-count">40</div>
@@ -532,9 +545,11 @@
           <div id="finish-navs" class="forms-seprator full"></div>
 
           <div class="row-wrapper clearfix" style="margin-top: 20px;">
-            <button type="button" class="btn btn-scooter btn-create pull-right" style="margin-left: 10px;">Create
+            <button type="button" class="btn btn-scooter btn-create pull-right" style="margin-left: 10px;"
+                    ng-click="save(companyForm)" ng-disabled="triedToSave && (!companyForm.$valid || savingInProcess)">
+              {{ editCompany.id ? 'Save' : 'Create' }}
             </button>
-            <button type="button" class="btn btn-gray pull-right" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-gray pull-right" ui-sref="companies">Cancel</button>
           </div>
         </div>
       </div>

@@ -1,9 +1,8 @@
 <div class="row-wrapper clearfix" ng-form="addressForm">
-  <div class="form-group form-group-full" ng-class="{error:addressForm.address.$dirty && !addressForm.address.$valid}">
+  <div class="form-group form-group-full" ng-class="{error: (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
     <label>address</label>
 
-    <div ng-messages="addressForm.address.$error"
-         ng-if="addressForm.address.$dirty">
+    <div ng-messages="addressForm.address.$error" ng-if="addressForm.address.$dirty || showValidationMessages">
       <div class="error-msg" ng-message="required">Please enter the company’s address.</div>
       <div class="error-msg" ng-message="correct">Please select address from atocomplete results or set marker on map
       </div>

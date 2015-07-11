@@ -10,6 +10,8 @@
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
+        $scope.locationsMaxCount = 3;
+        $scope.contactsMaxCount = 3;
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
@@ -26,22 +28,24 @@
         if ($stateParams.companyId) {
 
           var company = CompaniesService.getOneById($stateParams.companyId);
-          var companyData = CompaniesService.getCompanyData($stateParams.companyId);
 
           if (!company) {
             $state.go('companies');
             throw 'wrong cmpany id specified!';
           }
 
-          $scope.editCompany = {
-            id: $stateParams.companyId,
-            name: company.name,
-            type: company.type,
-            domain: company.domain,
-            primaryAddress: companyData.primaryAddress,
-            addresses: companyData.addresses || [{}],
-            contacts: companyData.contacts || [getEmptyContact()]
-          };
+          var companyData = CompaniesService.getCompanyData($stateParams.companyId, function () {
+
+            if (!companyData.addresses || companyData.addresses.length === 0) {
+              companyData.addresses = [{}];
+            }
+
+            if (!companyData.contacts || companyData.contacts.length === 0) {
+              companyData.contacts = [getEmptyContact()];
+            }
+          });
+
+          $scope.editCompany = companyData;
 
         } else {
           $scope.editCompany = {
@@ -71,22 +75,52 @@
           $scope.editCompany.contacts.splice(index, 1);
         };
 
-        $scope.isShowingErrors = function (contact, form, fieldName) {
-          return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+        $scope.isShowingContactErrors = function (contact, form, fieldName) {
+          return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
-        $scope.save = function () {
-          //todo fix phone numbers before save!!!!!!!!!!!!!
-        };
+        $scope.save = function (form) {
 
-        function getEmptyContact() {
-          return {
-            subscription: {}
-          };
+          if (form.$valid) {
+            $scope.savingInProcess = true;
+
+            var contacts = $scope.editCompany.contacts,
+              addresses = $scope.editCompany.addresses;
+
+            for (var i = 0; i < contacts.length; i++) {
+              var contact = contacts[i];
+
+              processPhoneNumbers(contact.phoneNumbers);
+
+              if (contact.avatar && !contact.avatar.id && !contact.avatar.origin && !contact.avatar.cropped) {
+                contact.avatar = undefined;
+              }
+            }
+
+            for (var i = 0; i < addresses.length; i++) {
+              processPhoneNumbers(addresses[i].phoneNumbers);
+            }
+
+            CompaniesService.save($scope.editCompany, function () {
+              $scope.savingInProcess = false;
+              $state.go('companies');
+            })
+          } else {
+            $scope.triedToSave = true;
+          }
+
+          function processPhoneNumbers(phoneNumbers) {
+            var lastPhone = phoneNumbers[phoneNumbers.length - 1];
+
+            if (!lastPhone.number || lastPhone.number.trim().length === 0) {
+              phoneNumbers.splice(phoneNumbers.length - 1, 1);
+            }
+          }
+
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
         $scope.validateCompanyName = function (ngModelCtrl) {
@@ -101,10 +135,23 @@
           });
         };
 
-        $scope.validateCompanyEmail = function (ngModelCtrl) {
-          var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
-            ngModelCtrl.$setValidity('unique', validationResult.value);
-          });
+        $scope.validateContactEmail = function (ngModelCtrl, contactId) {
+
+          var emailsCount = 0;
+
+          for (var i = 0; i < $scope.editCompany.contacts.length; i++) {
+            if ($scope.editCompany.contacts[i].email === ngModelCtrl.$viewValue) {
+              emailsCount++;
+            }
+          }
+
+          if (emailsCount > 1) {
+            ngModelCtrl.$setValidity('unique', false);
+          } else {
+            var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', function () {
+              ngModelCtrl.$setValidity('unique', validationResult.value);
+            });
+          }
         };
 
         $scope.validateTaxRateCode = function (ngModelCtrl) {
@@ -127,24 +174,46 @@
 
         $scope.newTaxRate = {};
 
-        $scope.saveNewTax = function () {
-          if (!$scope.newTaxRate.code && !$scope.newTaxRate.rate) {
-            $scope.showErrorType = true;
-            $scope.showErrorRate = true;
-            return;
-          } else if (!$scope.newTaxRate.code) {
-            $scope.showErrorType = true;
-            return;
-          } else if (!$scope.newTaxRate.rate) {
-            $scope.showErrorRate = true;
-            return;
-          }
-          ;
-          $scope.editCompany.taxRates.push($scope.newTaxRate);
-          $scope.newTaxRate = {"code": null, "rate": null};
-          $scope.showErrorType = false;
-          $scope.showErrorRate = false;
+        $scope.validateNewTaxRate = function (form) {
+
+          var code = $scope.newTaxRate.code,
+            rate = $scope.newTaxRate.rate;
+
+          form.validation = {
+            code: {
+              required: !code,
+              maxlength: !!code && code.length > 30
+            },
+            rate: {
+              required: !rate,
+              number: !$.isNumeric(rate)
+            }
+          };
+//TODO add uniq validation!!!
+          form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength;
+          form.validation.rate.invalid = form.validation.rate.required || form.validation.rate.number;
+
         };
+
+        $scope.saveNewTax = function (form) {
+
+          if (form.validation && !form.validation.code.invalid && !form.validation.rate.invalid) {
+            $scope.editCompany.taxRates.push($scope.newTaxRate);
+            $scope.newTaxRate = {};
+            $scope.newTaxRateFormShowErrors = false;
+          } else {
+            $scope.newTaxRateFormShowErrors = true;
+          }
+        };
+
+        function getEmptyContact() {
+          return {
+            subscription: {},
+            avatar: {
+              scale: 50
+            }
+          };
+        }
 
       }]);
 

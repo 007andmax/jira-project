@@ -8,7 +8,8 @@
         restrict: 'A',
         require: 'ngModel',
         scope: {
-          validationFunc: '=validationFunc'
+          validationFunc: '=validationFunc',
+          modelId: '=modelId'
         },
         link: function (scope, element, attrs, ngModelCtrl) {
 
@@ -20,7 +21,7 @@
 
           function validate() {
             if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
-              scope.validationFunc(ngModelCtrl);
+              scope.validationFunc(ngModelCtrl, scope.modelId);
             }
           }
         }
