@@ -55,6 +55,8 @@
             });
           };
 
+          listenScroll();
+
           scope.$on('$destroy', function () {
             $(window).off('scroll');
           });
