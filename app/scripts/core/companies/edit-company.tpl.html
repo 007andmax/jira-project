@@ -105,10 +105,9 @@
                   <div class="qt-error-msg" ng-message="required">Please enter a brief description of the company’s
                     business.
                   </div>
-                  <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
                 </div>
                 <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
-                          ng-maxlength="80" required="true"
+                          required="true" maxlength="80"
                           popover="Describe the company's business in 80 characters (spaces included)."
                           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
 
@@ -159,7 +158,7 @@
               <div class="row-wrapper clearfix">
                 <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
                   <input type="radio" name="chooseRadioButton" ng-checked="location.isPrimary"
-                         ng-click="primaryAddress(location)">
+                         ng-click="changePrimaryAddress(location)">
                   <span class="control-indicator"></span>
                   Primary Billing address <span ng-if="changeRadioButton && editCompany.addresses.length === 1"
                                                 class="error-alone">Please add multiple site/locations first.</span>
@@ -414,10 +413,17 @@
                          ng-if="isShowingErrors(companyForm, 'currentlyTaxType')">
                       <div class="qt-error-msg" ng-message="required" style="margin-top: -16px;">Tax Type is required.
                       </div>
+                      <div class="qt-error-msg" ng-message="maxlength" style="margin-top: -16px;">Tax Type is too
+                        large.
+                      </div>
+                      <div class="qt-error-msg" ng-message="unique" style="margin-top: -16px;">This Tax Type already
+                        occupied.
+                      </div>
                     </div>
                     <input type="text" class="form-control"
                            data-content="This Tax information will be added to this company's invoices with taxable products and services."
-                           ng-model="tax.code" name="currentlyTaxType" required="true">
+                           ng-model="tax.code" name="currentlyTaxType" required="true" ng-maxlength="30"
+                           is-uniq-validation validation-func="validateTaxRateCode">
                   </div>
 
                   <div class="form-group pull-left"
@@ -425,13 +431,13 @@
                     <div ng-messages="companyForm.currentlyTaxRate.$error"
                          ng-if="isShowingErrors(companyForm, 'currentlyTaxRate')">
                       <div class="qt-error-msg" ng-message="required" style="margin-top: -16px;">Rate is required.</div>
-                      <div class="qt-error-msg" ng-message="number" style="margin-top: -16px;">Rate must be a number.
-                      </div>
                     </div>
-                    <input type="number" class="form-control pull-left" value="" aria-expanded="true"
-                           style="width: 155px;" ng-model="tax.rate" name="currentlyTaxRate" required="true" min="0">
+                    <input type="text" class="form-control pull-left" value="" aria-expanded="true"
+                           style="width: 155px;" ng-model="tax.rate" name="currentlyTaxRate" required="true"
+                           hard-reset-pattern="taxRateNumberPattern">
 
                     <div class="label-add-btn" ng-click="saveTax()"><a
+                      ng-disabled="isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')"
                       class="btn btn-cr btn-green btn-tax pull-right"><span
                       class="small-icn-tick icn"></span></a></div>
                     <div class="label-add-btn" ng-click="cancelTax()"><a style="margin-top: 0px"
@@ -453,9 +459,12 @@
                   <div ng-messages="companyForm.newTaxType.$error"
                        ng-if="isShowingErrors(companyForm, 'newTaxType') && newTaxRate.code===undefined || (showErrorType && !newTaxRate.code)">
                     <div class="qt-error-msg" ng-message="required">Tax Type is required.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">Tax Type is too large.</div>
+                    <div class="qt-error-msg" ng-message="unique">This Tax Type already occupied.</div>
                   </div>
                   <input type="text" class="form-control" placeholder="Tax Type" data-html="true"
-                         ng-model="newTaxRate.code" name="newTaxType" ng-required="true">
+                         ng-model="newTaxRate.code" name="newTaxType" ng-required="true" ng-maxlength="30"
+                         is-uniq-validation validation-func="validateTaxRateCode">
                 </div>
 
                 <div class="form-group pull-left"
@@ -465,13 +474,15 @@
                   <div ng-messages="companyForm.newTaxRate.$error"
                        ng-if="isShowingErrors(companyForm, 'newTaxRate') && newTaxRate.rate===undefined || (showErrorRate && !newTaxRate.rate)">
                     <div class="qt-error-msg" ng-message="required">Rate is required.</div>
-                    <div class="qt-error-msg" ng-message="number">Rate must be a number.</div>
                   </div>
-                  <input type="number" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
+                  <input type="text" class="form-control pull-left" value="" aria-expanded="true" placeholder="Rate"
                          data-html="true"
-                         style="width: 197px;" ng-model="newTaxRate.rate" name="newTaxRate" ng-required="true" min="0">
+                         style="width: 197px;" ng-model="newTaxRate.rate" name="newTaxRate" ng-required="true"
+                         hard-reset-pattern="taxRateNumberPattern">
 
-                  <div class="label-add-btn" ng-click="saveNewTax()"><a class="btn btn-cr btn-green btn-tax pull-right"><span
+                  <div class="label-add-btn" ng-click="saveNewTax()"><a
+                    ng-disabled="isShowingErrors(companyForm, 'newTaxRate') || isShowingErrors(companyForm, 'newTaxType')"
+                    class="btn btn-cr btn-green btn-tax pull-right"><span
                     class="small-icn-tick icn"></span></a></div>
                 </div>
               </div>

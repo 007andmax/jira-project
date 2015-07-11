@@ -15,11 +15,18 @@
 
           var newValue = element.val();
 
+          if (newValue.length === 1) {
+            value = '';
+          } else {
+            value = newValue.substring(0, newValue.length - 1);
+          }
+          ;
+
           if (newValue && !newValue.match(pattern)) {
             ctrl.$setViewValue(value);
             element.val(value);
           } else {
-            value = newValue || ''
+            value = newValue;
           }
         });
       }

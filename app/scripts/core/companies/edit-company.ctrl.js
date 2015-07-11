@@ -3,15 +3,16 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$http',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService,
                 SharedStateService, $stateParams, $state, $http) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.companies = CompaniesService.getClientCompanies();
         //todo receive it using services!!
         $http.get('/addresses/getAllLocales').success(function (resp) {
@@ -104,6 +105,17 @@
           var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
+        };
+
+        $scope.validateTaxRateCode = function (ngModelCtrl) {
+          //var validationResult = TaxRatesService.isUniqueInCompany(ngModelCtrl.$viewValue, $scope.editCompany.taxRates["0"].versionedId.id || '', $scope.editCompany.id || '', function () {
+          //  ngModelCtrl.$setValidity('unique', validationResult.value || angular.forEach($scope.editCompany.taxRates, function (taxRates) {
+          //      if (taxRates.code === ngModelCtrl.$viewValue) {
+          //        return false;
+          //      };
+          //      return true;
+          //    }));
+          //});
         };
 
         $scope.changePrimaryAddress = function (location) {
