@@ -133,7 +133,7 @@
 
           function openModalCropper(img, avatar) {
             return $modal.open({
-              animation: true,
+              animation: false,
               backdrop: 'static',
               templateUrl: '/html/scripts/common/directives/avatar/crop.tpl.html',
               controller: 'quicktech.common.directives.avatar.cropCtrl',
