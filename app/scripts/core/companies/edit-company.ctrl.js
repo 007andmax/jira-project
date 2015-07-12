@@ -64,6 +64,10 @@
         };
 
         $scope.removeLocation = function (index) {
+          if ($scope.editCompany.addresses[index].isPrimary) {
+            $scope.editCompany.addresses[index + 1].isPrimary = true;
+          }
+          ;
           $scope.editCompany.addresses.splice(index, 1);
         };
 
@@ -159,12 +163,14 @@
           var taxRateCount = 0;
 
           for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if ($scope.editCompany.contacts[i].code === ngModelCtrl.$viewValue) {
+            if ($scope.editCompany.taxRates[i].code === ngModelCtrl.$viewValue) {
               taxRateCount++;
             }
           }
 
-          if (taxRateCount > 1) {
+          if (taxRateCount === 1) {
+            ngModelCtrl.$setValidity('unique', true);
+          } else if (taxRateCount > 1) {
             ngModelCtrl.$setValidity('unique', false);
           } else {
             if ($scope.editCompany.id) {
@@ -181,12 +187,6 @@
           });
           location.isPrimary = true;
         };
-
-        $scope.$watch('editCompany.addresses.length', function (newVal, oldVal) {
-          if (newVal < oldVal) {
-            $scope.editCompany.addresses[($scope.editCompany.addresses.length - 1)].isPrimary = true;
-          }
-        });
 
         $scope.newTaxRate = {};
 
@@ -228,6 +228,8 @@
         };
 
         $scope.saveNewTax = function (form) {
+
+          $scope.validateNewTaxRate(form);
 
           if (form.validation && !form.validation.code.invalid && !form.validation.rate.invalid) {
             $scope.editCompany.taxRates.push($scope.newTaxRate);
