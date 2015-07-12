@@ -154,6 +154,27 @@
           }
         };
 
+        $scope.validateTaxRateCode = function (ngModelCtrl, modelId) {
+
+          var taxRateCount = 0;
+
+          for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
+            if ($scope.editCompany.contacts[i].code === ngModelCtrl.$viewValue) {
+              taxRateCount++;
+            }
+          }
+
+          if (taxRateCount > 1) {
+            ngModelCtrl.$setValidity('unique', false);
+          } else {
+            if ($scope.editCompany.id) {
+              var validationResult = TaxRatesService.isUniqueInCompany(ngModelCtrl.$viewValue, modelId, $scope.editCompany.id, function () {
+                ngModelCtrl.$setValidity('unique', validationResult.value);
+              });
+            }
+          }
+        };
+
         $scope.changePrimaryAddress = function (location) {
           angular.forEach($scope.editCompany.addresses, function (address) {
             address.isPrimary = false;
@@ -161,8 +182,10 @@
           location.isPrimary = true;
         };
 
-        $scope.$watch('editCompany.addresses.length', function () {
-          $scope.editCompany.addresses[($scope.editCompany.addresses.length - 1)].isPrimary = true;
+        $scope.$watch('editCompany.addresses.length', function (newVal, oldVal) {
+          if (newVal < oldVal) {
+            $scope.editCompany.addresses[($scope.editCompany.addresses.length - 1)].isPrimary = true;
+          }
         });
 
         $scope.newTaxRate = {};
@@ -186,20 +209,20 @@
           var taxRateCount = 0;
 
           for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if ($scope.editCompany.taxRates[i].code === ngModelCtrl.$viewValue) {
+            if ($scope.editCompany.taxRates[i].code === form.code.$viewValue) {
               taxRateCount++;
             }
           }
 
-          if (taxRateCount > 1) {
-            ngModelCtrl.$setValidity('unique', false);
+          if (taxRateCount >= 1) {
+            form.validation.code.unique = true;
           } else {
-            var validationResult = {value: false}
-            //var validationResult = TaxRatesService.isUniqueInCompany(form.code.$viewValue,'' , $scope.editCompany.id || '', function () {
-            //  ngModelCtrl.$setValidity('unique', validationResult.value);
-            //});
+            if ($scope.editCompany.id) {
+              var validationResult = TaxRatesService.isUniqueInCompany(form.code.$viewValue, '', $scope.editCompany.id || '', function () {
+                form.validation.code.unique = !validationResult.value;
+              });
+            }
           }
-          form.validation.code.unique = !validationResult.value;
           form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
           form.validation.rate.invalid = form.validation.rate.required || form.validation.rate.number;
         };

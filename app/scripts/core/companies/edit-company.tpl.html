@@ -433,7 +433,8 @@
                       </div>
                     </div>
                     <input type="text" class="form-control" ng-model="tax.code" name="currentlyTaxType" required="true"
-                           is-uniq-validation validation-func="validateTaxRateCode" ng-maxlength="30">
+                           is-uniq-validation validation-func="validateTaxRateCode" model-id="tax.versionedId.id"
+                           ng-maxlength="30">
                   </div>
 
                   <div class="form-group pull-left"
@@ -463,15 +464,15 @@
                 <div class="form-group dropdown pull-left"
                      popover="This Tax information will be added to this company's invoices with taxable products and services."
                      popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
-                     ng-class="{error: newTaxRateForm.validation.code.invalid}">
+                     ng-class="{error: newTaxRateForm.validation.code.invalid && newTaxRateFormShowErrors}">
                   <label class="norm">New Tax Rate</label>
 
                   <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.required">
+                       ng-show="newTaxRateForm.validation.code.required && newTaxRateFormShowErrors">
                     Tax Type is required.
                   </div>
                   <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.maxlength">
+                       ng-show="newTaxRateForm.validation.code.maxlength && newTaxRateFormShowErrors">
                     Tax Type is too large.
                   </div>
                   <div class="qt-error-msg"
@@ -483,15 +484,15 @@
                 </div>
 
                 <div class="form-group pull-left"
-                     ng-class="{error: newTaxRateForm.validation.rate.invalid}">
+                     ng-class="{error: newTaxRateForm.validation.rate.invalid && newTaxRateFormShowErrors}">
                   <label class="norm">&nbsp;</label>
 
                   <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.rate.required">
+                       ng-show="newTaxRateForm.validation.rate.required && newTaxRateFormShowErrors">
                     Rate is required.
                   </div>
                   <div class="qt-error-msg"
-                       ng-show="!newTaxRateForm.validation.rate.required && newTaxRateForm.validation.rate.number">
+                       ng-show="!newTaxRateForm.validation.rate.required && newTaxRateForm.validation.rate.number && newTaxRateFormShowErrors">
                     Rate must be a number.
                   </div>
                   <input type="text" class="form-control pull-left" placeholder="Rate" style="width: 197px;"
