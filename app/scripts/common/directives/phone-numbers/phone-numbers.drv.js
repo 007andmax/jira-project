@@ -11,7 +11,7 @@
         phoneNumbers: '=ngModel'
       },
       link: function ($scope, element, attrs, ngModelCtrl) {
-        if (!ngModelCtrl.$viewValue) {
+        if (!$scope.phoneNumbers) {
           ngModelCtrl.$setViewValue([]);
         }
       },

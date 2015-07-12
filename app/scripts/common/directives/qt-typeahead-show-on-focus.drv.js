@@ -13,8 +13,10 @@
 
           element.on('focus', function () {
             $timeout(function () {
-              modelCtrl.$setViewValue(modelCtrl.$viewValue)
-              //$(element).trigger('input');
+              if (!scope.$eval(attrs.ngModel)) {
+                modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
+              }
+              $(element).trigger('input');
               $(element).trigger('change'); // for IE
             });
           });

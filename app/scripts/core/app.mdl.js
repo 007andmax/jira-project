@@ -80,7 +80,7 @@
   }]);
 
   app.run(
-    ['$rootScope', function ($rootScope) {
+    ['$rootScope', '$templateCache', function ($rootScope, $templateCache) {
       $rootScope.getUserAvatarUrl = function (user) {
         if (!user) {
           return '/users/default/image'
@@ -106,8 +106,15 @@
         } else if (phoneNumber.typeNumber === 'FAX') {
           return 'icn-fax-machine';
         }
-      }
+      };
 
+      $templateCache.put("template/typeahead/typeahead-popup.html",
+        "<ul class=\"dropdown-menu\" ng-show=\"isOpen()\" ng-style=\"{width: '100%', 'max-height': '160px', 'overflow-y': 'scroll', top: position.top+'px', left: position.left+'px'}\" style=\"display: block;\" role=\"listbox\" aria-hidden=\"{{!isOpen()}}\">\n" +
+        "    <li ng-repeat=\"match in matches track by $index\" ng-class=\"{active: isActive($index) }\" ng-mouseenter=\"selectActive($index)\" ng-click=\"selectMatch($index)\" role=\"option\" id=\"{{match.id}}\">\n" +
+        "        <div typeahead-match index=\"$index\" match=\"match\" query=\"query\" template-url=\"templateUrl\"></div>\n" +
+        "    </li>\n" +
+        "</ul>\n" +
+        "");
     }]);
 
 }());
