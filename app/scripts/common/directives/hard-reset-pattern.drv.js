@@ -20,7 +20,6 @@
           } else {
             value = newValue.substring(0, newValue.length - 1);
           }
-          ;
 
           if (newValue && !newValue.match(pattern)) {
             ctrl.$setViewValue(value);

@@ -378,9 +378,11 @@
 }
 
 .hide-fade.ng-hide-add.ng-hide-add-active, .hide-fade.ng-hide-remove {
+  height: 0px;
   opacity: 0;
 }
 
 .hide-fade.ng-hide-add, .hide-fade.ng-hide-remove.ng-hide-remove-active {
+  height: 222px;
   opacity: 1;
 }

@@ -433,7 +433,7 @@
                       </div>
                     </div>
                     <input type="text" class="form-control" ng-model="tax.code" name="currentlyTaxType" required="true"
-                           is-uniq-validation validation-func="validateTaxRateCode">
+                           is-uniq-validation validation-func="validateTaxRateCode" ng-maxlength="30">
                   </div>
 
                   <div class="form-group pull-left"
@@ -463,35 +463,40 @@
                 <div class="form-group dropdown pull-left"
                      popover="This Tax information will be added to this company's invoices with taxable products and services."
                      popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
-                     ng-class="{error: newTaxRateForm.validation.code.invalid && newTaxRateFormShowErrors}">
+                     ng-class="{error: newTaxRateForm.validation.code.invalid}">
                   <label class="norm">New Tax Rate</label>
 
                   <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.required && newTaxRateFormShowErrors">
+                       ng-show="newTaxRateForm.validation.code.required">
                     Tax Type is required.
                   </div>
                   <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.maxlength && newTaxRateFormShowErrors">
+                       ng-show="newTaxRateForm.validation.code.maxlength">
                     Tax Type is too large.
+                  </div>
+                  <div class="qt-error-msg"
+                       ng-show="newTaxRateForm.validation.code.unique">
+                    Tax Type already occupied..
                   </div>
                   <input type="text" class="form-control" placeholder="Tax Type" ng-model="newTaxRate.code"
                          ng-change="validateNewTaxRate(newTaxRateForm)" name="code">
                 </div>
 
                 <div class="form-group pull-left"
-                     ng-class="{error: newTaxRateForm.validation.rate.invalid && newTaxRateFormShowErrors}">
+                     ng-class="{error: newTaxRateForm.validation.rate.invalid}">
                   <label class="norm">&nbsp;</label>
 
                   <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.rate.required && newTaxRateFormShowErrors">
+                       ng-show="newTaxRateForm.validation.rate.required">
                     Rate is required.
                   </div>
                   <div class="qt-error-msg"
-                       ng-show="!newTaxRateForm.validation.rate.required && newTaxRateForm.validation.rate.number && newTaxRateFormShowErrors">
+                       ng-show="!newTaxRateForm.validation.rate.required && newTaxRateForm.validation.rate.number">
                     Rate must be a number.
                   </div>
                   <input type="text" class="form-control pull-left" placeholder="Rate" style="width: 197px;"
-                         ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)">
+                         ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)"
+                         hard-reset-pattern="taxRateNumberPattern">
 
                   <div class="label-add-btn">
                     <a class="btn btn-cr btn-green btn-tax pull-right" ng-click="saveNewTax(newTaxRateForm)">
