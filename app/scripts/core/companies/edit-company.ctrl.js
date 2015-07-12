@@ -174,7 +174,7 @@
             ngModelCtrl.$setValidity('unique', false);
           } else {
             if ($scope.editCompany.id) {
-              var validationResult = TaxRatesService.isUniqueInCompany(ngModelCtrl.$viewValue, modelId, $scope.editCompany.id, function () {
+              var validationResult = TaxRatesService.isUniqueInCompany(ngModelCtrl.$viewValue, modelId || '', $scope.editCompany.id, function () {
                 ngModelCtrl.$setValidity('unique', validationResult.value);
               });
             }
@@ -220,6 +220,7 @@
             if ($scope.editCompany.id) {
               var validationResult = TaxRatesService.isUniqueInCompany(form.code.$viewValue, '', $scope.editCompany.id || '', function () {
                 form.validation.code.unique = !validationResult.value;
+                form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
               });
             }
           }
