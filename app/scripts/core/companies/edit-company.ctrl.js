@@ -65,9 +65,8 @@
 
         $scope.removeLocation = function (index) {
           if ($scope.editCompany.addresses[index].isPrimary) {
-            $scope.editCompany.addresses[index + 1].isPrimary = true;
+            $scope.editCompany.addresses[$scope.editCompany.addresses.length - 1].isPrimary = true;
           }
-          ;
           $scope.editCompany.addresses.splice(index, 1);
         };
 
@@ -168,16 +167,10 @@
             }
           }
 
-          if (taxRateCount === 1) {
-            ngModelCtrl.$setValidity('unique', true);
-          } else if (taxRateCount > 1) {
+          if (taxRateCount > 1) {
             ngModelCtrl.$setValidity('unique', false);
           } else {
-            if ($scope.editCompany.id) {
-              var validationResult = TaxRatesService.isUniqueInCompany(ngModelCtrl.$viewValue, modelId || '', $scope.editCompany.id, function () {
-                ngModelCtrl.$setValidity('unique', validationResult.value);
-              });
-            }
+            ngModelCtrl.$setValidity('unique', true);
           }
         };
 
@@ -216,14 +209,8 @@
 
           if (taxRateCount >= 1) {
             form.validation.code.unique = true;
-          } else {
-            if ($scope.editCompany.id) {
-              var validationResult = TaxRatesService.isUniqueInCompany(form.code.$viewValue, '', $scope.editCompany.id || '', function () {
-                form.validation.code.unique = !validationResult.value;
-                form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
-              });
-            }
           }
+          ;
           form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
           form.validation.rate.invalid = form.validation.rate.required || form.validation.rate.number;
         };

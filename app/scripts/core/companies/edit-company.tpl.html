@@ -108,7 +108,7 @@
                   </div>
                 </div>
                 <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
-                          required="true" maxlength="80"
+                          required="true" maxlength="80" ng-trim="false"
                           popover="Describe the company's business in 80 characters (spaces included)."
                           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
 
@@ -476,7 +476,7 @@
                     Tax Type is too large.
                   </div>
                   <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.unique">
+                       ng-show="newTaxRateForm.validation.code.unique && newTaxRateFormShowErrors">
                     Tax Type already occupied..
                   </div>
                   <input type="text" class="form-control" placeholder="Tax Type" ng-model="newTaxRate.code"
