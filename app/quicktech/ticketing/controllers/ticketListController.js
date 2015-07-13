@@ -60,7 +60,7 @@
 
           $(window).scroll(function () { //TODO: need to optimize... //TODO: don't bind scroll event when the page is ticket detail
 
-            if (!$state.is('Tickets.Detail')) {
+            if ($state.is('Tickets')) {
               if ($(window).scrollTop() + $(window).height() > $(document).height() - 10) {
 
                 if ($scope.tickets.length < headerSharedState.count) {
