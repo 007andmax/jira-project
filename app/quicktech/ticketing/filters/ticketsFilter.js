@@ -1,7 +1,7 @@
 'use strict';
 
 (function(){
-	var app = angular.module('quicktech.core.ticketing');
+	var app = angular.module('quicktech.core.tickets');
 
 	app.filter('TicketsFilter', function() {
 

@@ -210,7 +210,7 @@
           if (taxRateCount >= 1) {
             form.validation.code.unique = true;
           }
-          ;
+
           form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
           form.validation.rate.invalid = form.validation.rate.required || form.validation.rate.number;
         };

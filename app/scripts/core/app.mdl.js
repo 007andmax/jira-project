@@ -5,7 +5,7 @@
   var app = angular.module("quicktech",
     [
       'main.services',
-      'quicktech.core.ticketing',
+      'quicktech.core.tickets',
       'quicktech.core.users',
       'quicktech.common.services',
       'quicktech.common.directives',

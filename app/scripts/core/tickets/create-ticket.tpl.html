@@ -1,0 +1,263 @@
+<div class="modal-create-ticket fade in show">
+  <div class="modal-dialog create-ticket">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icn-close-modal"></span></button>
+        <h4 class="modal-title pull-left">Create Ticket <span class="dot-sep"></span> </h4><span class="ticket-numer pull-left">TKT# 0236589</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-subject" placeholder="Subject">
+        </div>
+        <div class="scroll-pane create-ticket-scroll" scroll-pane scroll-max-height-px="400">
+          <div class="form-group">
+            <div id="editor" class="editor" contenteditable="true" placeholder="Type your message..."></div>
+          </div>
+          <div class="form-group">
+            <ul class="note-attachments clearfix">
+              <li>
+                <span class="filename">Photo_1.png</span>
+                <span class="filesize">1.4 MB</span>
+                <a href="#" class="icn-remove-attachment pull-right"></a>
+              </li>
+              <li>
+                <span class="filename">Products_List.doc</span>
+                <span class="filesize">2 KB</span>
+                <a href="#" class="icn-remove-attachment pull-right"></a>
+                <a href="#" class="icn-restart-uploading pull-right" data-toggle="tooltip" data-placement="top" title="re-upload"></a>
+                <div class="progress progress-attachment error pull-right">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="39.5" aria-valuemin="0" aria-valuemax="100" style="width: 39.5%;">
+                    <span class="sr-only">39.5% Complete</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="wysiwyg-controls-wrapper btn-toolbar  clearfix" data-role="editor-toolbar"
+             data-target="#editor" >
+          <a href="#" class="pull-left icn-wysiwyg-attachment tp-hide"  data-toggle="tooltip" data-placement="top" title="Attach Files"></a>
+          <span class="pull-left line-sep"></span>
+
+          <div class="font-styles pull-left">
+            <a href="#" class="icon pull-left icn-wysiwyg-bold "  data-edit="bold" data-toggle="tooltip" data-placement="top" title="Bold"></a>
+            <a href="#" class="icon pull-left icn-wysiwyg-italic "  data-edit="italic"  data-toggle="tooltip" data-placement="top" title="Italic"></a>
+            <a href="#" class="icon pull-left icn-wysiwyg-underline  " data-edit="underline" data-toggle="tooltip" data-placement="top" title="Underline"></a>
+          </div>
+          <div class="text-bullets pull-left">
+            <a href="#" class="icon pull-left icn-wysiwyg-bn " data-edit="insertorderedlist" data-toggle="tooltip" data-placement="top" title="Numbered List"></a>
+            <a href="#" class="icon pull-left icn-wysiwyg-bp "data-edit="insertunorderedlist" data-toggle="tooltip" data-placement="top" title="Bulleted List"></a>
+          </div>
+
+          <div class="">
+            <div class="text-styles pull-left ql-picker-options">
+              <a href="#" class="icon pull-left icn-wysiwyg-tal" data-edit="justifyleft" data-value="left" data-toggle="tooltip" data-placement="top" title="Align Left"></a>
+              <a href="#" class="icon pull-left icn-wysiwyg-tac" data-edit="justifycenter" data-toggle="tooltip" data-placement="top" title="Align Center"></a>
+              <a href="#" class="icon pull-left icn-wysiwyg-tar" data-edit="justifyright" data-toggle="tooltip" data-placement="top" title="Align right"></a>
+              <a href="#" class="icon pull-left icn-wysiwyg-iless" data-edit="outdent" data-toggle="tooltip" data-placement="top" title="indent less"></a>
+              <a href="#" class="icon pull-left icn-wysiwyg-imore"  data-edit="indent" data-toggle="tooltip" data-placement="top" title="indent More"></a>
+            </div>
+            <a href="#" class="pull-left icn-wysiwyg-quote" data-edit="cblock" data-toggle="tooltip" data-placement="top" title="Quote"></a>
+
+            <div class="dropdown">
+              <a href="#" class="pull-left icn icn-wysiwyg-link tooltip-dp" data-edit="" data-toggle="dropdown"  data-placement="top" title="Add or Remove Link"></a>
+
+              <div class="dropdown-menu dropdown-link">
+                <div class="assign-ticket-header">
+                  <div class="clearfix">
+                    <div class="form-group clearfix">
+                      <input type="text" class="form-control " data-edit="createLink" placeholder="http://">
+                    </div>
+                    <div class="btn-groups clearfix"><button type="button" class="btn btn-scooter disabled ">Add</button>
+                      <button type="button" class="btn btn-gray" data-edit="unlink">Cancel</button>              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a href="#" class="pull-right icn-wysiwyg-reset" data-edit="removeformat"  data-toggle="tooltip" data-placement="top" title="Reset Formatting"></a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row-wrapper clearfix">
+          <div class="form-group dropdown pull-left">
+            <label>company</label>
+            <input type="email" class="form-control form-control-dropdown form-control-dropdown-company dropdown-toggle" value="" data-toggle="dropdown" aria-expanded="true">
+            <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Active Information Systems</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Global Media</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sierra Dental Care</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">South Calgary Periodontal Group</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Silver Star Group</a></li>
+            </ul>
+          </div>
+          <div class="form-group dropdown pull-left created-for">
+            <label>created for</label>
+            <div class="clearfix">
+              <input type="text" class="form-control form-control-dropdown dropdown-toggle tokenfield"   value="Jack Sudiacal" data-toggle="dropdown" aria-expanded="true">
+            </div>
+            <ul id="myTabs" class="dropdown-menu dropdown-menu-tabs add-user-tab" >
+
+              <div class="tab-contents">
+                <div class="tab-pane active " id="teammembers">
+
+                  <div class="scroll-pane">
+                    <ul class="users-list ">
+                      <li class="checked">
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Jack Sudiacal  “jack.sud97@gmail.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Dylan Fosket  “d.fosket@quicktech.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">JA Perez  “ja.perez@yahoo.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Esther Heesch  “est.heesch@gmail.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Esther Heesch  “est.heesch@gmail.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Esther Heesch  “est.heesch@gmail.com”</a></div>
+                        </div>
+                      </li>
+
+                    </ul></div>
+
+                </div>
+
+
+              </div>
+            </ul>
+          </div>
+          <div class="form-group dropdown  cs-type pull-right prority">
+            <label>priority</label>
+            <input type="text" class="form-control  form-control-dropdown dropdown-toggle hide-cursor" value="" data-toggle="dropdown" aria-expanded="true">
+            <div class="dropdown-default-value"><span class="priority-dot low"></span>Low</div>
+            <ul class="dropdown-menu dropdown-priority">
+              <li><a tabindex="-1" href="#"> <span class="priority-dot low"></span>Low </a></li>
+              <li><a tabindex="-1" href="#"> <span class="priority-dot medium"></span>Medium </a></li>
+              <li><a tabindex="-1" href="#"> <span class="priority-dot high"></span>High </a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row-wrapper clearfix">
+          <div class="form-group dropdown pull-left">
+            <label>assign to</label>
+            <input type="text" class="form-control form-control-dropdown dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <ul id="myTabs" class="dropdown-menu dropdown-menu-tabs add-user-tab">
+
+              <div class="tab-contents">
+                <div class="tab-pane active " id="teammembers">
+
+                  <div class="scroll-pane">
+                    <ul class="users-list ">
+                      <li class="">
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Jack Sudiacal  “jack.sud97@gmail.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Dylan Fosket  “d.fosket@quicktech.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">JA Perez  “ja.perez@yahoo.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Esther Heesch  “est.heesch@gmail.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Esther Heesch  “est.heesch@gmail.com”</a></div>
+                        </div>
+                      </li>
+                      <li>
+
+                        <a herf="" class="pull-left avatar-26 avatar m-r">
+                          <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
+                        </a>
+                        <div class="clearfix">
+                          <div class="user-name"><a href="">Esther Heesch  “est.heesch@gmail.com”</a></div>
+                        </div>
+                      </li>
+
+                    </ul></div>
+
+                </div>
+
+
+              </div>
+            </ul>
+          </div>
+          <div class="form-group actions-wrapper pull-right">
+            <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-scooter">Create</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
