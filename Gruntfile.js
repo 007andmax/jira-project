@@ -377,14 +377,16 @@ module.exports = function (grunt) {
               /<link[^\>]+href=['"]([^"']+)["']/gm, 'Replacing reference to styles',
               undefined,
               function (s) {
-                return '/html/' + s;
+                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                return s
               }
             ],
             [
               /<script.+src=['"]([^"']+)["']/gm, 'Replacing reference to scripts',
               undefined,
               function (s) {
-                return '/html/' + s;
+                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                return s
               }
             ],
             [
@@ -392,7 +394,8 @@ module.exports = function (grunt) {
               'Update the HTML with the new img filenames',
               undefined,
               function (s) {
-                return '/html/' + s;
+                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                return s
               }
             ],
             [
@@ -464,7 +467,8 @@ module.exports = function (grunt) {
               'Update the JS with the new img filenames',
               undefined,
               function (s) {
-                return '/html/' + s;
+                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                return s
               }
             ]
           ]
