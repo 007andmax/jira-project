@@ -235,7 +235,12 @@
               scale: 50
             }
           };
-        }
+        };
+
+        //$scope.preventPaste = function(e){
+        //  e.preventDefault();
+        //  return false;
+        //};
 
       }]);
 

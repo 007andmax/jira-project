@@ -151,7 +151,7 @@
                     </a>
 
                     <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-                       tooltip="Remove Contact no." tooltip-placement="top"
+                       tooltip="Remove" tooltip-placement="top"
                        style="margin-top:0;" ng-click="removeLocation($index)" ng-show="!$last">
                       <span class="icn-remove-update"></span>
                     </a>
@@ -445,7 +445,7 @@
                     </div>
                     <input type="text" class="form-control pull-left" value="" aria-expanded="true"
                            style="width: 155px;" ng-model="tax.rate" name="currentlyTaxRate" required="true"
-                           hard-reset-pattern="taxRateNumberPattern">
+                           hard-reset-pattern="taxRateNumberPattern"> <!--ng-paste='preventPaste($event)'-->
 
                     <div class="label-add-btn" ng-click="saveTax()"><a
                       ng-disabled="isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')"
@@ -497,7 +497,7 @@
                   </div>
                   <input type="text" class="form-control pull-left" placeholder="Rate" style="width: 197px;"
                          ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)"
-                         hard-reset-pattern="taxRateNumberPattern">
+                         hard-reset-pattern="taxRateNumberPattern"> <!-- ng-paste='preventPaste($event)'-->
 
                   <div class="label-add-btn">
                     <a class="btn btn-cr btn-green btn-tax pull-right" ng-click="saveNewTax(newTaxRateForm)">
