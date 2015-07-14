@@ -445,7 +445,7 @@
                     </div>
                     <input type="text" class="form-control pull-left" value="" aria-expanded="true"
                            style="width: 155px;" ng-model="tax.rate" name="currentlyTaxRate" required="true"
-                           hard-reset-pattern="taxRateNumberPattern"> <!--ng-paste='preventPaste($event)'-->
+                           hard-reset-pattern="taxRateNumberPattern">
 
                     <div class="label-add-btn" ng-click="saveTax()"><a
                       ng-disabled="isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')"
@@ -497,7 +497,7 @@
                   </div>
                   <input type="text" class="form-control pull-left" placeholder="Rate" style="width: 197px;"
                          ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)"
-                         hard-reset-pattern="taxRateNumberPattern"> <!-- ng-paste='preventPaste($event)'-->
+                         hard-reset-pattern="taxRateNumberPattern">
 
                   <div class="label-add-btn">
                     <a class="btn btn-cr btn-green btn-tax pull-right" ng-click="saveNewTax(newTaxRateForm)">

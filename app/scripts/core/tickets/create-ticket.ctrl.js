@@ -7,7 +7,7 @@
 
       $scope.message = 'HADKL:F L "DS:L MSKLADM KLAS '
 
-      $scope.ticketNumber = TicketsService.getActualNumber($scope, function (number) {
+      TicketsService.getActualNumber($scope, function (number) {
           $scope.ticketNumber = number;
         }
       );
