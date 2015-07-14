@@ -7,16 +7,12 @@
       <div class="user" userNode ng-show="editUser.id != user.id">
         <div class="content">
           <ul class="user-badges">
-            <li ng-if="subscriptions[user.id].ticket" id="{{ user.id + '-has-ticket-updates' }}"
-                class="icn icn-ticket-updates tp-hide"
-                data-title="subscriber ticket updates" data-container="{{ '#' + user.id + '-has-ticket-updates' }}"
-                data-toggle="tooltip" data-placement="top"></li>
-            <li ng-if="subscriptions[user.id].invoice" id="{{ user.id + '-has-invoice-updates' }}"
-                class="icn icn-invoice-updates tp-hide"
-                data-title="subscriber invoice updates" data-container="{{ '#' + user.id + '-has-invoice-updates' }}"
-                data-toggle="tooltip" data-placement="top"></li>
-            <li ng-if="user.role === 'ADMIN'" id="has-admin1" class="icn admin tp-hide" data-title="admin"
-                data-toggle="tooltip" data-container='#has-admin1' data-placement="top"></li>
+            <li ng-if="subscriptions[user.id].ticket" class="icn icn-ticket-updates tp-hide"
+                tooltip="subscriber ticket updates" tooltip-placement="top" tooltip-append-to-body="true"></li>
+            <li ng-if="subscriptions[user.id].invoice" class="icn icn-invoice-updates tp-hide"
+                tooltip="subscriber invoice updates" tooltip-placement="top" tooltip-append-to-body="true"></li>
+            <li ng-if="user.role === 'ADMIN'" class="icn admin tp-hide" tooltip="admin" data-placement="top"
+                tooltip-append-to-body="true"></li>
           </ul>
           <div class="title pull-left">
             <h3 class="name pull-left">
@@ -105,7 +101,7 @@
                     </ul>
                   </div>
                 </li>
-               
+
 
                 <li><a tabindex="-1" href="javascript:void(0)">Archive this Contact</a></li>
 

@@ -127,10 +127,10 @@
 
 
               <ul class="user-badges pull-left">
-                <li id="has-ticket-updates1" class="icn icn-ticket-updates tp-hide" tooltip="subscriber ticket updates"
-                    tooltip-placement="top" ng-show="primaryContact.subscription.ticket"></li>
-                <li id="has-invoice-updates1" class="icn icn-invoice-updates tp-hide" tooltip-placement="top"
-                    tooltip="subscriber invoice updates" ng-show="primaryContact.subscription.invoice"></li>
+                <li class="icn icn-ticket-updates tp-hide" tooltip="subscriber ticket updates" tooltip-placement="top"
+                    ng-show="primaryContact.subscription.ticket" tooltip-append-to-body="true"></li>
+                <li class="icn icn-invoice-updates tp-hide" tooltip-placement="top" tooltip="subscriber invoice updates"
+                    ng-show="primaryContact.subscription.invoice" tooltip-append-to-body="true"></li>
                 <!--<li id="has-admin1" class="icn admin tp-hide" data-title="admin" data-toggle="tooltip"-->
                 <!--data-container="#has-admin1" data-placement="top" data-original-title="" title=""></li>-->
               </ul>
@@ -155,8 +155,8 @@
             <div class="icn-white-mail"></div>
           </a>
 
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp" data-placement="top"
-               data-original-title="chat">
+          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp" tooltip-placement="top"
+               tooltip="chat">
             <span class="icn icn-user-chat"></span>
           </div>
         </div>

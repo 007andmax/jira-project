@@ -56,10 +56,10 @@
                 <label>Name</label>
 
                 <div ng-messages="companyForm.companyName.$error" ng-if="isShowingErrors(companyForm, 'companyName')">
-                  <div class="qt-error-msg" ng-message="required">Name is required.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
-                  <div class="qt-error-msg" ng-message="minlength">Name is too short.</div>
-                  <div class="qt-error-msg" ng-message="unique">This name already occupied.</div>
+                  <div class="qt-error-msg" ng-message="required">Company name is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">Company name is too large.</div>
+                  <div class="qt-error-msg" ng-message="minlength">Company name is too short.</div>
+                  <div class="qt-error-msg" ng-message="unique">This company name already occupied.</div>
                 </div>
                 <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
                        ng-minlength="3" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
@@ -101,14 +101,13 @@
                    ng-class="{error: isShowingErrors(companyForm, 'companyDescription')}">
                 <label>description of business</label>
 
-                <div ng-messages="companyForm.companyName.$error"
-                     ng-if="isShowingErrors(companyForm, 'companyDescription')">
-                  <div class="qt-error-msg" ng-message="required">Please enter a brief description of the company’s
-                    business.
+                <div ng-messages="companyForm.companyName.$error" ng-if="isShowingErrors(companyForm, 'companyDescription')">
+                  <div class="qt-error-msg" ng-message="required">
+                    Please enter a brief description of the company’s business.
                   </div>
                 </div>
                 <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
-                          required="true" maxlength="80" ng-trim="false"
+                          required="true" maxlength="80" ng-trim="false" make-dirty-on-blur
                           popover="Describe the company's business in 80 characters (spaces included)."
                           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
 

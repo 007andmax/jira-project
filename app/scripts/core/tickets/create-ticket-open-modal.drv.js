@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.tickets").directive("createTicket",
+  angular.module("quicktech.core.tickets").directive("createTicketOpenModal",
     ['$state', '$modal',
       function ($state, $modal) {
         return {

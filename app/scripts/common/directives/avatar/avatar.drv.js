@@ -27,6 +27,9 @@
         },
         link: function (scope, element, attrs, ctrl) {
 
+          var wind = $(window),
+            windowScrollTop;
+
           if (!urlGetters[attrs.modelName]) {
             throw 'model-name must be specified! Available values - ["user", "contact"]';
           }
@@ -59,7 +62,7 @@
               var modalInstance = openModalCropper(img, avatar);
 
               modalInstance.result.then(function (cropped) {
-
+                fixScroll();
                 if (avatar.scale != scope.model.scale
                   || avatar.x != scope.model.x
                   || avatar.y != scope.model.y) {
@@ -73,6 +76,7 @@
                   });
                 }
               }, function () {
+                fixScroll();
                 console.log('cancel')
               });
             };
@@ -132,6 +136,9 @@
           });
 
           function openModalCropper(img, avatar) {
+
+            windowScrollTop = wind.scrollTop();
+
             return $modal.open({
               animation: false,
               backdrop: 'static',
@@ -146,6 +153,12 @@
                 }
               }
             });
+          }
+
+          function fixScroll() {
+            setTimeout(function () {
+              wind.scrollTop(windowScrollTop)
+            }, 0);
           }
 
         }

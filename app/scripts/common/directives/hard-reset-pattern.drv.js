@@ -11,15 +11,16 @@
         var pattern = scope.$eval(attr.hardResetPattern),
           value = ctrl.$viewValue || '';
 
-        element.on('input', function (e) {
+        element.on('input', checkAndFix);
+        element.on('change', checkAndFix);
+
+        scope.$watch(function () {
+          return ctrl.$viewValue
+        }, checkAndFix);
+
+        function checkAndFix(e) {
 
           var newValue = element.val();
-
-          if (newValue.length === 1) {
-            value = '';
-          } else {
-            value = newValue.substring(0, newValue.length - 1);
-          }
 
           if (newValue && !newValue.match(pattern)) {
             ctrl.$setViewValue(value);
@@ -27,7 +28,7 @@
           } else {
             value = newValue;
           }
-        });
+        }
       }
     };
   })

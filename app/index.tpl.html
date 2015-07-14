@@ -50,12 +50,12 @@
   <!-- endbuild -->
 
   <script type="text/javascript">
-      if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {
-             document.querySelector('[href*="styles/firefox."]').remove();
+    if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {
+      document.querySelector('[href*="styles/firefox."]').remove();
       document.querySelector('[href*="styles/firefox-"]').remove();
-            document.querySelector('[href*="styles/ie."]').remove();
+      document.querySelector('[href*="styles/ie."]').remove();
 
-}else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+    } else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
       document.querySelector('[href*="styles/firefox."]').remove();
       document.querySelector('[href*="styles/firefox-"]').remove();
     } else if (!(window.ActiveXObject || "ActiveXObject" in window)) {
@@ -113,6 +113,8 @@
 <!-- endbower -->
 <script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
 <script src="scripts/js/vendors/modernizr.js"></script>
+<script src="scripts/js/vendors/editor/jquery.hotkeys.js"></script>
+<script src="scripts/js/vendors/editor/editor.js"></script>
 <!-- endbuild -->
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&language=en"></script>
