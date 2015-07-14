@@ -16,16 +16,15 @@
               var editor = element.find('[te-editor]'),
                 wysiwyg = editor.wysiwyg();
 
-              wysiwyg.on('change', function () {
+              editor.on('DOMSubtreeModified', function () {
                 ctrl.$setViewValue(wysiwyg.html());
-                console.log(ctrl.$viewValue)
               });
 
               element.on('click', "a[data-edit='cblock']", function () {
                 document.execCommand('formatBlock', false, '<blockquote>');
               });
 
-              element.on('click', "a[data-edit='cremoveformat']", function () {
+              element.on('click', "a[data-edit='removeformat']", function () {
                 var cleanText = editor.text();
                 editor.html(cleanText);
               });
