@@ -34,7 +34,8 @@
           <div id="owerview" class="header clearfix" style="padding-bottom: 11px;"><h4 class="title">Overview</h4></div>
           <div class="overview-wrapper clearfix">
             <div class="info pull-left">
-              <span class="nums" style="margin-right: 4px;">{{ editCompany.addresses.length }}</span>
+              <span class="nums"
+                    style="margin-right: 4px;">{{ editCompany.id ? editCompany.addresses.length : 0 }}</span>
               <span class="dets">site/location(s)</span>
             </div>
             <div class="info pull-center">
@@ -42,7 +43,7 @@
               <span class="dets">installed Agent(s)</span>
             </div>
             <div class="info pull-right">
-              <span class="nums" style="margin-left: 5px;">{{ editCompany.contacts.length }}</span>
+              <span class="nums" style="margin-left: 5px;">{{ editCompany.id ? editCompany.contacts.length : 0 }}</span>
               <span class="dets">primary contact(s)</span>
             </div>
           </div>
@@ -101,7 +102,8 @@
                    ng-class="{error: isShowingErrors(companyForm, 'companyDescription')}">
                 <label>description of business</label>
 
-                <div ng-messages="companyForm.companyName.$error" ng-if="isShowingErrors(companyForm, 'companyDescription')">
+                <div ng-messages="companyForm.companyName.$error"
+                     ng-if="isShowingErrors(companyForm, 'companyDescription')">
                   <div class="qt-error-msg" ng-message="required">
                     Please enter a brief description of the company’s business.
                   </div>

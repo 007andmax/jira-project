@@ -13,6 +13,10 @@
       link: function ($scope, element, attrs, ngModelCtrl) {
         if (!$scope.phoneNumbers) {
           ngModelCtrl.$setViewValue([]);
+        } else {
+          $scope.phoneNumbers.sort(function (a, b) {
+            return a.priority - b.priority;
+          });
         }
       },
       controller: function ($scope) {

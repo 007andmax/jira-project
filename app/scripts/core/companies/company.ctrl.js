@@ -14,7 +14,7 @@
           if (newInfo) {
 
             for (var i = 0; i < newInfo.contacts.length; i++) {
-              if (!primaryContact || newInfo.contacts[i].priority < primaryContact.priority)
+              if (!primaryContact || newInfo.contacts[i].priority > primaryContact.priority)
                 primaryContact = newInfo.contacts[i];
             }
 
@@ -26,7 +26,7 @@
 
             if (primaryAddress) {
               for (var i = 0; i < primaryAddress.phoneNumbers.length; i++) {
-                if (!primaryPhone || primaryAddress.phoneNumbers[i].priority < primaryPhone.priority)
+                if (!primaryPhone || primaryAddress.phoneNumbers[i].priority > primaryPhone.priority)
                   primaryPhone = primaryAddress.phoneNumbers[i];
               }
             }
