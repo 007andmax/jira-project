@@ -8,6 +8,12 @@
 
         $scope.ticket = {};
 
+        $scope.ticketPriorityValue = {
+          LOW: 'Low',
+          MEDIUM: 'Medium',
+          HIGH: 'High'
+        };
+
         TicketsService.getActualNumber($scope, function (number) {
             $scope.ticketNumber = number;
           }
@@ -15,7 +21,7 @@
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-        $scope.usersCurrentCompany = UsersService.getClientUsers();
+        $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
@@ -23,7 +29,7 @@
 
         $scope.$watch('ticketCompany', function () {
           if ($scope.ticketCompany) {
-            $scope.ticketCreatedUser = '';
+            delete $scope.ticketCreatedUser;
             $scope.ticket.company = $scope.ticketCompany.id;
             $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticketCompany.id);
           } else {
@@ -32,26 +38,12 @@
         });
 
         $scope.$watch('ticketCreatedUser', function () {
-          if ($scope.ticketCreatedUser) {
-            $scope.ticket.createdUser = $scope.ticketCreatedUser.id;
-          } else {
-            $scope.ticket.createdUser = '';
-          }
+          $scope.ticket.createdUser = $scope.ticketCreatedUser ? $scope.ticketCreatedUser.id : '';
         });
 
         $scope.$watch('ticketAssignTo', function () {
-          if ($scope.ticketAssignTo) {
-            $scope.ticket.assignedUser = $scope.ticketAssignTo.id;
-          } else {
-            $scope.ticket.assignedUser = '';
-          }
+          $scope.ticket.assignedUser = $scope.ticketAssignTo ? $scope.ticketAssignTo.id : '';
         });
-
-        $scope.ticketPriorityValue = {
-          LOW: 'Low',
-          MEDIUM: 'Medium',
-          HIGH: 'High'
-        };
 
         $scope.saveTicket = function () {
           if (false) {
