@@ -141,7 +141,8 @@
                      data-toggle="dropdown" ng-model="ticketCompany" name="ticketCompany"
                      typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
                      typeahead-min-length="0" required="true" typeahead-editable="false"
-                     qt-typeahead-show-on-focus ng-trim="false"> <!--ng-disabled="editUser.id"-->
+                     qt-typeahead-show-on-focus ng-trim="false"
+                     custom-style="{width: '100%', 'max-height': '170px', 'overflow-y': 'scroll'}"> <!--ng-disabled="editUser.id"-->
             </div>
             <div class="form-group dropdown pull-left created-for"
                  ng-class="{error: isShowingErrors(ticketForm, 'ticketCreatedUser')}">
@@ -155,9 +156,10 @@
               <input type="text"
                      class="form-control form-control-dropdown dropdown-toggle tokenfield form-control-dropdown-user"
                      data-toggle="dropdown" ng-model="ticketCreatedUser" name="ticketCreatedUser"
-                     typeahead-editable="false" typeahead-template-url="/html/scripts/core/tickets/user-avatar.tpl.html"
-                     typeahead="user as user.firstName + ' ' + user.lastName for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus ng-trim="false" required="true" ng-disabled="!ticketCompany">
+                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                     typeahead="user as getUserName(user) for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus ng-trim="false" required="true" ng-disabled="!ticketCompany"
+                     custom-style="{width: '382px', 'max-height': '204px', 'overflow-y': 'scroll'}">
             </div>
 
             <div class="form-group dropdown  cs-type pull-right prority" ng-model="ticket.priorityLevel"
@@ -183,9 +185,9 @@
               <label>assign to</label>
               <input type="text" class="form-control form-control-dropdown dropdown-toggle" data-toggle="dropdown"
                      aria-expanded="true" ng-model="ticketAssignTo" name="ticketAssignTo"
-                     typeahead-editable="false" typeahead-template-url="/html/scripts/core/tickets/user-avatar.tpl.html"
-                     typeahead="user as user.firstName for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus>
+                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus custom-style="{width: '382px', 'max-height': '204px', 'overflow-y': 'scroll'}">
             </div>
 
             <div class="form-group actions-wrapper pull-right">
@@ -197,8 +199,6 @@
           </div>
         </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-  <!-- /.modal-dialog -->
   </form>
 </div>

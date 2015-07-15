@@ -108,8 +108,20 @@
         }
       };
 
+      $rootScope.getUserName = function (user, includeImail) {
+        if (user) {
+          var username = user.firstName + ' ' + user.lastName;
+
+          if (includeImail) {
+            username += ('"' + user.primaryEmail + '"')
+          }
+
+          return username;
+        }
+      };
+
       $templateCache.put("template/typeahead/typeahead-popup.html",
-        "<ul class=\"dropdown-menu\" ng-show=\"isOpen()\" ng-style=\"{width: '100%', 'max-height': '160px', 'overflow-y': 'scroll', top: position.top+'px', left: position.left+'px'}\" style=\"display: block;\" role=\"listbox\" aria-hidden=\"{{!isOpen()}}\">\n" +
+        "<ul class=\"dropdown-menu\" qt-typeahead-styler ng-show=\"isOpen()\" ng-style=\"{top: position.top+'px', left: position.left+'px'}\" style=\"display: block;\" role=\"listbox\" aria-hidden=\"{{!isOpen()}}\">\n" +
         "    <li ng-repeat=\"match in matches track by $index\" ng-class=\"{active: isActive($index) }\" ng-mouseenter=\"selectActive($index)\" ng-click=\"selectMatch($index)\" role=\"option\" id=\"{{match.id}}\">\n" +
         "        <div typeahead-match index=\"$index\" match=\"match\" query=\"query\" template-url=\"templateUrl\"></div>\n" +
         "    </li>\n" +
