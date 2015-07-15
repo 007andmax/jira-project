@@ -15,24 +15,57 @@
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-        $scope.usersCompany = UsersService.getAllByCompanyId("d09bbe99-c0b7-42d4-9b82-1bab9ac3bd49");
+        $scope.usersCurrentCompany = UsersService.getClientUsers();
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.ticket || form[fieldName].$dirty) && !form[fieldName].$valid;
-          //return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
         $scope.$watch('ticketCompany', function () {
           if ($scope.ticketCompany) {
+            $scope.ticketCreatedUser = '';
             $scope.ticket.company = $scope.ticketCompany.id;
+            $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticketCompany.id);
+          } else {
+            $scope.ticket.company = '';
           }
         });
 
         $scope.$watch('ticketCreatedUser', function () {
           if ($scope.ticketCreatedUser) {
             $scope.ticket.createdUser = $scope.ticketCreatedUser.id;
+          } else {
+            $scope.ticket.createdUser = '';
           }
         });
+
+        $scope.$watch('ticketAssignTo', function () {
+          if ($scope.ticketAssignTo) {
+            $scope.ticket.assignedUser = $scope.ticketAssignTo.id;
+          } else {
+            $scope.ticket.assignedUser = '';
+          }
+        });
+
+        $scope.ticketPriorityValue = {
+          LOW: 'Low',
+          MEDIUM: 'Medium',
+          HIGH: 'High'
+        };
+
+        $scope.saveTicket = function () {
+          if (false) {
+
+          } else {
+            $scope.triedToSaveTicket = true;
+          }
+        };
+
+        $scope.closeCreateTicketForm = function () {
+          $modalInstance.dismiss();
+        };
+
+
 
         //$scope.$watch('ticket.company.id', function () {
         //  if($scope.ticket.company.id) {

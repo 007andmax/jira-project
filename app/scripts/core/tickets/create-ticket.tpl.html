@@ -3,8 +3,9 @@
     <div class="modal-dialog create-ticket">
       <div class="modal-content">
         <div class="modal-header clearfix">
-          <button type="button" class="close" data-dismiss="modal" ui-sref="tickets" aria-label="Close"><span
-            aria-hidden="true" class="icn-close-modal"></span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  ng-click="closeCreateTicketForm()">
+            <span aria-hidden="true" class="icn-close-modal"></span></button>
           <h4 class="modal-title pull-left">Create Ticket <span class="dot-sep"></span></h4><span
           class="ticket-numer pull-left">TKT# {{ ticketNumber }}</span>
         </div>
@@ -47,44 +48,57 @@
             </div>
             <div class="wysiwyg-controls-wrapper btn-toolbar  clearfix" data-role="editor-toolbar"
                  data-target="#editor">
-              <a href="#" class="pull-left icn-wysiwyg-attachment tp-hide" data-toggle="tooltip" data-placement="top"
-                 ng-click="add()" type="file"
+              <a href="javascript:void(0)" class="pull-left icn-wysiwyg-attachment tp-hide" data-toggle="tooltip"
+                 data-placement="top"
+                 type="file"
                  title="Attach Files"></a>
               <span class="pull-left line-sep"></span>
 
               <div class="font-styles pull-left">
-                <a href="#" class="icon pull-left icn-wysiwyg-bold " data-edit="bold" data-toggle="tooltip"
+                <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-bold " data-edit="bold"
+                   data-toggle="tooltip"
                    data-placement="top" title="Bold"></a>
-                <a href="#" class="icon pull-left icn-wysiwyg-italic " data-edit="italic" data-toggle="tooltip"
+                <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-italic " data-edit="italic"
+                   data-toggle="tooltip"
                    data-placement="top" title="Italic"></a>
-                <a href="#" class="icon pull-left icn-wysiwyg-underline  " data-edit="underline" data-toggle="tooltip"
+                <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-underline  " data-edit="underline"
+                   data-toggle="tooltip"
                    data-placement="top" title="Underline"></a>
               </div>
               <div class="text-bullets pull-left">
-                <a href="#" class="icon pull-left icn-wysiwyg-bn " data-edit="insertorderedlist" data-toggle="tooltip"
+                <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-bn " data-edit="insertorderedlist"
+                   data-toggle="tooltip"
                    data-placement="top" title="Numbered List"></a>
-                <a href="#" class="icon pull-left icn-wysiwyg-bp " data-edit="insertunorderedlist" data-toggle="tooltip"
+                <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-bp " data-edit="insertunorderedlist"
+                   data-toggle="tooltip"
                    data-placement="top" title="Bulleted List"></a>
               </div>
 
               <div class="">
                 <div class="text-styles pull-left ql-picker-options">
-                  <a href="#" class="icon pull-left icn-wysiwyg-tal" data-edit="justifyleft" data-value="left"
+                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-tal" data-edit="justifyleft"
+                     data-value="left"
                      data-toggle="tooltip" data-placement="top" title="Align Left"></a>
-                  <a href="#" class="icon pull-left icn-wysiwyg-tac" data-edit="justifycenter" data-toggle="tooltip"
+                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-tac" data-edit="justifycenter"
+                     data-toggle="tooltip"
                      data-placement="top" title="Align Center"></a>
-                  <a href="#" class="icon pull-left icn-wysiwyg-tar" data-edit="justifyright" data-toggle="tooltip"
+                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-tar" data-edit="justifyright"
+                     data-toggle="tooltip"
                      data-placement="top" title="Align right"></a>
-                  <a href="#" class="icon pull-left icn-wysiwyg-iless" data-edit="outdent" data-toggle="tooltip"
+                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-iless" data-edit="outdent"
+                     data-toggle="tooltip"
                      data-placement="top" title="indent less"></a>
-                  <a href="#" class="icon pull-left icn-wysiwyg-imore" data-edit="indent" data-toggle="tooltip"
+                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-imore" data-edit="indent"
+                     data-toggle="tooltip"
                      data-placement="top" title="indent More"></a>
                 </div>
-                <a href="#" class="pull-left icn-wysiwyg-quote" data-edit="cblock" data-toggle="tooltip"
+                <a href="javascript:void(0)" class="pull-left icn-wysiwyg-quote" data-edit="cblock"
+                   data-toggle="tooltip"
                    data-placement="top" title="Quote"></a>
 
                 <div class="dropdown">
-                  <a href="#" class="pull-left icn icn-wysiwyg-link tooltip-dp" data-edit="" data-toggle="dropdown"
+                  <a href="javascript:void(0)" class="pull-left icn icn-wysiwyg-link tooltip-dp" data-edit=""
+                     data-toggle="dropdown"
                      data-placement="top" title="Add or Remove Link"></a>
 
                   <div class="dropdown-menu dropdown-link">
@@ -106,7 +120,8 @@
                   </div>
                 </div>
 
-                <a href="#" class="pull-right icn-wysiwyg-reset" data-edit="removeformat" data-toggle="tooltip"
+                <a href="javascript:void(0)" class="pull-right icn-wysiwyg-reset" data-edit="removeformat"
+                   data-toggle="tooltip"
                    data-placement="top" title="Reset Formatting"></a>
               </div>
             </div>
@@ -123,7 +138,7 @@
               </div>
               <input type="text"
                      class="form-control form-control-dropdown form-control-dropdown-company dropdown-toggle"
-                     value="" data-toggle="dropdown" aria-expanded="true" ng-model="ticketCompany" name="ticketCompany"
+                     data-toggle="dropdown" ng-model="ticketCompany" name="ticketCompany"
                      typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
                      typeahead-min-length="0" required="true" typeahead-editable="false"
                      qt-typeahead-show-on-focus ng-trim="false"> <!--ng-disabled="editUser.id"-->
@@ -139,89 +154,13 @@
 
               <input type="text"
                      class="form-control form-control-dropdown dropdown-toggle tokenfield form-control-dropdown-user"
-                     data-toggle="dropdown" aria-expanded="true" ng-model="ticketCreatedUser" name="ticketCreatedUser"
-                     typeahead-editable="false"
-                     typeahead="user as user.firstName for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     data-toggle="dropdown" ng-model="ticketCreatedUser" name="ticketCreatedUser"
+                     typeahead-editable="false" typeahead-template-url="/html/scripts/core/tickets/user-avatar.tpl.html"
+                     typeahead="user as user.firstName + ' ' + user.lastName for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
                      qt-typeahead-show-on-focus ng-trim="false" required="true" ng-disabled="!ticketCompany">
-
-              <!--<ul id="myTabs" class="dropdown-menu dropdown-menu-tabs add-user-tab">-->
-
-              <!--<div class="tab-contents">-->
-              <!--<div class="tab-pane active " id="teammembers">-->
-
-              <!--<div class="scroll-pane">-->
-              <!--<ul class="users-list ">-->
-              <!--<li class="checked">-->
-
-              <!--<a herf="" class="pull-left avatar-26 avatar m-r">-->
-              <!--<img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">-->
-              <!--</a>-->
-
-              <!--<div class="clearfix">-->
-              <!--<div class="user-name"><a href="">Jack Sudiacal “jack.sud97@gmail.com”</a></div>-->
-              <!--</div>-->
-              <!--</li>-->
-              <!--<li>-->
-
-              <!--<a herf="" class="pull-left avatar-26 avatar m-r">-->
-              <!--<img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">-->
-              <!--</a>-->
-
-              <!--<div class="clearfix">-->
-              <!--<div class="user-name"><a href="">Dylan Fosket “d.fosket@quicktech.com”</a></div>-->
-              <!--</div>-->
-              <!--</li>-->
-              <!--<li>-->
-
-              <!--<a herf="" class="pull-left avatar-26 avatar m-r">-->
-              <!--<img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">-->
-              <!--</a>-->
-
-              <!--<div class="clearfix">-->
-              <!--<div class="user-name"><a href="">JA Perez “ja.perez@yahoo.com”</a></div>-->
-              <!--</div>-->
-              <!--</li>-->
-              <!--<li>-->
-
-              <!--<a herf="" class="pull-left avatar-26 avatar m-r">-->
-              <!--<img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">-->
-              <!--</a>-->
-
-              <!--<div class="clearfix">-->
-              <!--<div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>-->
-              <!--</div>-->
-              <!--</li>-->
-              <!--<li>-->
-
-              <!--<a herf="" class="pull-left avatar-26 avatar m-r">-->
-              <!--<img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">-->
-              <!--</a>-->
-
-              <!--<div class="clearfix">-->
-              <!--<div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>-->
-              <!--</div>-->
-              <!--</li>-->
-              <!--<li>-->
-
-              <!--<a herf="" class="pull-left avatar-26 avatar m-r">-->
-              <!--<img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">-->
-              <!--</a>-->
-
-              <!--<div class="clearfix">-->
-              <!--<div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>-->
-              <!--</div>-->
-              <!--</li>-->
-
-              <!--</ul>-->
-              <!--</div>-->
-
-              <!--</div>-->
-
-
-              <!--</div>-->
-              <!--</ul>-->
             </div>
-            <div class="form-group dropdown  cs-type pull-right prority" ticket-priority ng-model="ticket.priorityLevel"
+
+            <div class="form-group dropdown  cs-type pull-right prority" ng-model="ticket.priorityLevel"
                  ng-class="{error: isShowingErrors(ticketForm, 'ticketPriority')}">
               <label>priority</label>
 
@@ -243,87 +182,17 @@
             <div class="form-group dropdown pull-left">
               <label>assign to</label>
               <input type="text" class="form-control form-control-dropdown dropdown-toggle" data-toggle="dropdown"
-                     aria-expanded="true">
-              <ul id="myTabs" class="dropdown-menu dropdown-menu-tabs add-user-tab">
-
-                <div class="tab-contents">
-                  <div class="tab-pane active " id="teammembers">
-
-                    <div class="scroll-pane">
-                      <ul class="users-list ">
-                        <li class="">
-
-                          <a herf="" class="pull-left avatar-26 avatar m-r">
-                            <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
-                          </a>
-
-                          <div class="clearfix">
-                            <div class="user-name"><a href="">Jack Sudiacal “jack.sud97@gmail.com”</a></div>
-                          </div>
-                        </li>
-                        <li>
-
-                          <a herf="" class="pull-left avatar-26 avatar m-r">
-                            <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
-                          </a>
-
-                          <div class="clearfix">
-                            <div class="user-name"><a href="">Dylan Fosket “d.fosket@quicktech.com”</a></div>
-                          </div>
-                        </li>
-                        <li>
-
-                          <a herf="" class="pull-left avatar-26 avatar m-r">
-                            <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
-                          </a>
-
-                          <div class="clearfix">
-                            <div class="user-name"><a href="">JA Perez “ja.perez@yahoo.com”</a></div>
-                          </div>
-                        </li>
-                        <li>
-
-                          <a herf="" class="pull-left avatar-26 avatar m-r">
-                            <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
-                          </a>
-
-                          <div class="clearfix">
-                            <div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>
-                          </div>
-                        </li>
-                        <li>
-
-                          <a herf="" class="pull-left avatar-26 avatar m-r">
-                            <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
-                          </a>
-
-                          <div class="clearfix">
-                            <div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>
-                          </div>
-                        </li>
-                        <li>
-
-                          <a herf="" class="pull-left avatar-26 avatar m-r">
-                            <img src="res/images/avatars/a4.jpg" alt="..." class="img-circle">
-                          </a>
-
-                          <div class="clearfix">
-                            <div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>
-                          </div>
-                        </li>
-
-                      </ul>
-                    </div>
-
-                  </div>
-
-
-                </div>
-              </ul>
+                     aria-expanded="true" ng-model="ticketAssignTo" name="ticketAssignTo"
+                     typeahead-editable="false" typeahead-template-url="/html/scripts/core/tickets/user-avatar.tpl.html"
+                     typeahead="user as user.firstName for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus>
             </div>
+
             <div class="form-group actions-wrapper pull-right">
-              <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-scooter">Create</button>
+              <button type="button" class="btn btn-gray" data-dismiss="modal" ng-click="closeCreateTicketForm()">
+                Cancel
+              </button>
+              <button type="button" class="btn btn-scooter" ng-click="saveTicket()">Create</button>
             </div>
           </div>
         </div>
