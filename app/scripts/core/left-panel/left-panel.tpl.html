@@ -51,9 +51,13 @@
 	<nav class="site-left-nav clearfix">
 		<div class="nav-title panel-heading">clients</div>
 		<ul class="nav nav-pills sub-nav nav-stacked">
-			<li > <a ui-sref="companies"> <span class="nav-icon icn-companies"></span>  Companies</a> </li>
+			<li ui-sref-active="active">
+        <a ui-sref="companies"> <span class="nav-icon icn-companies"></span>  Companies</a>
+      </li>
 			<li  > <a href="#"> <span class="nav-icon icn-leads no-icon"></span> Leads  <span class="badge">8</span></a> </li>
-			<li > <a ui-sref="users"> <span class="nav-icon icn-users"></span>  Users</a> </li>
+			<li ui-sref-active="active">
+        <a ui-sref="users"> <span class="nav-icon icn-users"></span>  Users</a>
+      </li>
 			<li> <a href="#"> <span class="nav-icon icn-vendors no-icon"></span>  Vendors</a> </li>
 		</ul>
 	</nav>
@@ -63,7 +67,9 @@
 		<ul class="nav nav-pills sub-nav nav-stacked">
 			<li > <a href="#"> <span class="nav-icon icn-billable no-icon"></span>  Billable <span class="badge">16</span></a> </li>
 			<li  > <a href="#"> <span class="nav-icon icn-receivable no-icon"></span> Receivable  <span class="badge">9</span></a> </li>
-			<li > <a href="#"> <span class="nav-icon  icn-product-services no-icon"></span>  Products & Services</a> </li>
+			<li ui-sref-active="active">
+        <a ui-sref="ps"> <span class="nav-icon  icn-product-services no-icon"></span>  Products & Services</a>
+      </li>
 			<li> <a href="#"> <span class="nav-icon icn-receipt-archive no-icon"></span>  Receipt Archive</a> </li>
 		</ul>
 	</nav>

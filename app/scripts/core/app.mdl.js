@@ -10,6 +10,8 @@
       'quicktech.common.services',
       'quicktech.common.directives',
       'quicktech.core.companies',
+      'quicktech.core.products',
+      'quicktech.core.services',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -57,6 +59,25 @@
         url: '/companies/edit/:companyId',
         templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
         controller: 'quicktech.core.companies.editCompanyCtrl'
+      }))
+      .state('ps', waitForServices({
+        url: '/ps',
+        template: '<div ui-view></div>',
+        controller: ['$state', function ($state) {
+          if (!$state.includes('ps.services')) {
+            $state.go('ps.products');
+          }
+        }]
+      }))
+      .state('ps.products', waitForServices({
+        url: '/products',
+        templateUrl: '/html/scripts/core/products/products.tpl.html',
+        controller: 'quicktech.core.products.productsCtrl'
+      }))
+      .state('ps.services', waitForServices({
+        url: '/services',
+        templateUrl: '/html/scripts/core/services/services.tpl.html',
+        controller: 'quicktech.core.services.servicesCtrl'
       }));
 
     function waitForServices(conf) {
