@@ -96,15 +96,14 @@
 
                     <div class="dropdown-menu dropdown-link">
                       <div class="assign-ticket-header">
-                        <div class="clearfix" ng-class="{error: isShowingErrors(ticketForm, 'ticketEditorLink')}">
+                        <div class="clearfix" ng-class="{error: validLink.required || validLink.pattern}">
                           <div class="form-group clearfix">
-                            <div ng-messages="ticketForm.ticketEditorLink.$error"
-                                 ng-if="isShowingErrors(ticketForm, 'ticketEditorLink')">
-                              <div class="qt-error-msg" ng-message="required">Link is required.</div>
-                              <div class="qt-error-msg" ng-message="pattern">Please enter a valid link.</div>
+                            <div class="qt-error-msg" ng-show="validLink.required">Link is required.</div>
+                            <div class="qt-error-msg" ng-show="validLink.pattern && !validLink.required">Please enter a
+                              valid link.
                             </div>
                             <input type="text" class="form-control " data-edit="createLink" placeholder="http://"
-                                   ng-model="ticketEditorLink"
+                                   ng-model="ticketEditorLink" qt-on-input
                                    ng-pattern="linkPattern" required="true" name="ticketEditorLink">
                           </div>
                           <div class="btn-groups clearfix">
