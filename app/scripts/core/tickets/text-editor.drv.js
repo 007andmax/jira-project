@@ -16,17 +16,17 @@
               var editor = element.find('[te-editor]'),
                 wysiwyg = editor.wysiwyg();
 
+              validateRequired();
+
               editor.on('DOMSubtreeModified', function () {
                 var html = wysiwyg.html();
-                  ctrl.$setViewValue(html);
+                ctrl.$setViewValue(html);
 
-                if(attrs.teMaxlength){
+                if (attrs.teMaxlength) {
                   ctrl.$setValidity('maxlength', html.length <= attrs.teMaxlength);
                 }
 
-                if(attrs.teRequired){
-                  ctrl.$setValidity('required', wysiwyg.text().length > 0);
-                }
+                validateRequired();
               });
 
               element.on('click', "a[data-edit='cblock']", function () {
@@ -37,6 +37,12 @@
                 var cleanText = editor.text();
                 editor.html(cleanText);
               });
+
+              function validateRequired() {
+                if (attrs.teRequired) {
+                  ctrl.$setValidity('required', wysiwyg.text().length > 0);
+                }
+              }
             });
           }
         }

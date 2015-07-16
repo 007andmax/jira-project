@@ -7,7 +7,7 @@
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService) {
 
         $scope.ticket = {};
-
+        $scope.ticketAttachments = [];
         $scope.ticketPriorityValue = {
           LOW: 'Low',
           MEDIUM: 'Medium',
