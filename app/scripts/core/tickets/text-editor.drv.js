@@ -17,7 +17,16 @@
                 wysiwyg = editor.wysiwyg();
 
               editor.on('DOMSubtreeModified', function () {
-                ctrl.$setViewValue(wysiwyg.html());
+                var html = wysiwyg.html();
+                  ctrl.$setViewValue(html);
+
+                if(attrs.teMaxlength){
+                  ctrl.$setValidity('maxlength', html.length <= attrs.teMaxlength);
+                }
+
+                if(attrs.teRequired){
+                  ctrl.$setValidity('required', wysiwyg.text().length > 0);
+                }
               });
 
               element.on('click', "a[data-edit='cblock']", function () {
