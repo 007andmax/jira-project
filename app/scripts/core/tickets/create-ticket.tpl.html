@@ -91,19 +91,22 @@
 
                   <div class="dropdown-menu dropdown-link">
                     <div class="assign-ticket-header">
-                      <div class="clearfix">
+                      <div class="clearfix" ng-class="{error: isShowingErrors(ticketForm, 'ticketEditorLink')}">
                         <div class="form-group clearfix">
-                          <input type="text" class="form-control " data-edit="createLink" placeholder="http://">
+                          <div ng-messages="ticketForm.ticketEditorLink.$error"
+                               ng-if="isShowingErrors(ticketForm, 'ticketEditorLink')">
+                            <div class="qt-error-msg" ng-message="required">Link is required.</div>
+                            <div class="qt-error-msg" ng-message="pattern">Please enter a valid link.</div>
+                          </div>
+                          <input type="text" class="form-control " data-edit="createLink" placeholder="http://"
+                                 ng-model="ticketEditorLink"
+                                 ng-pattern="linkPattern" required="true" name="ticketEditorLink">
                         </div>
                         <div class="btn-groups clearfix">
-                          <button type="button" class="btn btn-scooter disabled ">Add</button>
+                          <button type="button" class="btn btn-scooter" ng-disabled="!ticketEditorLink">Add</button>
                           <button type="button" class="btn btn-gray" data-edit="unlink">Cancel</button>
                         </div>
                       </div>
-                      <!--<div class="btn-groups clearfix">-->
-                      <!--<button type="button" class="btn btn-scooter disabled ">Add</button>-->
-                      <!--<button type="button" class="btn btn-gray" data-edit="unlink">Cancel</button>-->
-                      <!--</div>-->
                     </div>
                   </div>
                 </div>

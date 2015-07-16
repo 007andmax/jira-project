@@ -14,6 +14,8 @@
           HIGH: 'High'
         };
 
+        $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
         TicketsService.getActualNumber($scope, function (number) {
             $scope.ticketNumber = number;
           }
@@ -56,57 +58,6 @@
         $scope.closeCreateTicketForm = function () {
           $modalInstance.dismiss();
         };
-
-
-
-        //$scope.$watch('ticket.company.id', function () {
-        //  if($scope.ticket.company.id) {
-        //    $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticket.company.id);
-        //  }
-        //});
-
-
-        //$scope.validateTicket = function (ticket) {
-        //  console.log(ticket);
-        //  var subject = ticket.subject;
-        //  var note = ticket.note;
-        //  var company = ticket.company;
-        //
-        //  ticket.validation = {
-        //    subject: {
-        //      required: !subject,
-        //      maxlength: !!subject && subject.length > 300
-        //    },
-        //    note: {
-        //      required: !note,
-        //      maxlength: !!note && note.length > 5000
-        //    },
-        //    company: {
-        //      invalid: !company
-        //    }
-        //
-        //  };
-        //  ticket.validation.subject.invalid = ticket.validation.subject.required || ticket.validation.subject.maxlength;
-        //  ticket.validation.note.invalid = ticket.validation.note.required || ticket.validation.note.maxlength;
-        //
-        //};
-
-        //$scope.userCompanies = function() {
-        //  if ($scope.ticket.company.id) {
-        //    return UsersService.getAllByCompanyId($scope.ticket.company.id);
-        //  }
-        //};
-
-        //$scope.add = function(){
-        //  var f = document.getElementById('file').files[0],
-        //    r = new FileReader();
-        //  r.onloadend = function(e){
-        //    var data = e.target.result;
-        //    //send you binary data via $http or $resource or do anything else with it
-        //  }
-        //  r.readAsBinaryString(f);
-        //}
-
 
       }]);
 
