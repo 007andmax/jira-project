@@ -20286,7 +20286,7 @@ height: 60px !important;
     width: 12px;
     height: 7px;
   }
-  
+
   .no-cursor{
       cursor: pointer !important;
   }
@@ -20295,5 +20295,8 @@ height: 60px !important;
       background-color: #f7f9fb;
   }
 
+.form-group.error label{
+  display: none;
+}
 
 

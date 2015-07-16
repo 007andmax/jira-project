@@ -125,7 +125,7 @@
         </div>
         <div class="modal-footer">
           <div class="row-wrapper clearfix">
-            <div class="form-group dropdown pull-left" ng-class="{error: isShowingErrors(ticketForm, 'ticketCompany')}">
+            <div class="form-group pull-left" ng-class="{error: isShowingErrors(ticketForm, 'ticketCompany')}">
               <label>company</label>
 
               <div class="qt-error-msg"
@@ -134,11 +134,11 @@
               </div>
               <input type="text"
                      class="form-control form-control-dropdown form-control-dropdown-company dropdown-toggle"
-                     data-toggle="dropdown" ng-model="ticketCompany" name="ticketCompany"
+                     ng-model="ticketCompany" name="ticketCompany"
                      typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
                      typeahead-min-length="0" required="true" typeahead-editable="false"
                      qt-typeahead-show-on-focus ng-trim="false"
-                     custom-style="{width: '100%', 'max-height': '170px', 'overflow-y': 'scroll'}">
+                     custom-style="{width: '174px', 'max-height': '170px', 'overflow-y': 'scroll'}">
             </div>
             <div class="form-group dropdown pull-left created-for"
                  ng-class="{error: isShowingErrors(ticketForm, 'ticketCreatedUser')}">
@@ -151,7 +151,7 @@
 
               <input type="text"
                      class="form-control form-control-dropdown dropdown-toggle tokenfield form-control-dropdown-user"
-                     data-toggle="dropdown" ng-model="ticketCreatedUser" name="ticketCreatedUser"
+                     ng-model="ticketCreatedUser" name="ticketCreatedUser"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
                      qt-typeahead-show-on-focus ng-trim="false" required="true" ng-disabled="!ticketCompany"
@@ -169,9 +169,11 @@
                      data-toggle="dropdown" aria-expanded="true" ng-model="ticketPriorityValue[ticket.priorityLevel]"
                      name="ticketPriority" required="true">
 
-              <ul class="dropdown-menu dropdown-account-type">
+              <ul class="dropdown-menu dropdown-priority">
                 <li ng-repeat="(priority, label) in ticketPriorityValue" ng-click="ticket.priorityLevel = priority">
-                  <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+                  <a tabindex="-1" href="javascript:void(0)">
+                    <span class="priority-dot {{ label.toLowerCase() }}"></span>{{ label }}
+                  </a>
                 </li>
               </ul>
             </div>
