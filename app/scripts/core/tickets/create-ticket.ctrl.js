@@ -8,6 +8,7 @@
 
         $scope.ticket = {};
         $scope.ticketAttachments = [];
+        $scope.ticketFilesId = [];
         $scope.ticketPriorityValue = {
           LOW: 'Low',
           MEDIUM: 'Medium',
@@ -47,9 +48,40 @@
           $scope.ticket.assignedUser = $scope.ticketAssignTo ? $scope.ticketAssignTo.id : '';
         });
 
-        $scope.saveTicket = function () {
-          if (false) {
+        $scope.addAttachmentFiles = function (file) {
+          $scope.ticketAttachments.push(file);
+          $scope.$apply();
+          FilesService.create(file,
+            function (progress) {
+              $scope.ticketAttachments[$scope.ticketAttachments.length - 1].progress = 100 * (progress.loaded / progress.total);
+              $scope.$apply();
+            },
+            function (finish) {
+              $scope.ticketFilesId.push(finish.id)
+            }, function (error) {
+            });
+        };
 
+        $scope.removeAttachment = function (index) {
+          $scope.ticketAttachments.splice(index, 1);
+          $scope.ticketFilesId.splice(index, 1);
+        };
+        $scope.reloadAttachment = function (file, index) {
+          FilesService.create(file,
+            function (progress) {
+              $scope.ticketAttachments[index].progress = 100 * (progress.loaded / progress.total);
+              $scope.$apply();
+            },
+            function (finish) {
+              $scope.ticketFilesId.push(finish.id)
+            }, function (error) {
+            });
+        }
+
+        $scope.saveTicket = function (form) {
+          if (form.$valid) {
+            $scope.ticket.attachFileIds = $scope.ticketFilesId;
+            //TicketsService.createTicket($scope.ticket);
           } else {
             $scope.triedToSaveTicket = true;
           }
@@ -58,6 +90,19 @@
         $scope.closeCreateTicketForm = function () {
           $modalInstance.dismiss();
         };
+
+        $scope.validateLink = function () {
+          $scope.validLink = {
+            required: !$scope.ticketEditorLink,
+            pattern: !$scope.ticketEditorLink.match($scope.linkPattern)
+          };
+        };
+
+        $scope.styleProgressBar = function (progress) {
+          return {
+            width: progress + '%'
+          };
+        }
 
       }]);
 

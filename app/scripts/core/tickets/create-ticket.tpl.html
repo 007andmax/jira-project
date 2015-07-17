@@ -48,6 +48,22 @@
                   <!--</div>-->
                   <!--</li>-->
                   <!--</ul>-->
+                  <ul class="note-attachments clearfix">
+                    <li ng-repeat="file in ticketAttachments">
+                      <span class="filename">{{ file.name }}</span>
+                      <span class="filesize">{{ file.size | fileSizeFilter }}</span>
+                      <a href="#" class="icn-remove-attachment pull-right" ng-click="removeAttachment($index)"></a>
+                      <a href="#" class="icn-restart-uploading pull-right" data-toggle="tooltip" data-placement="top"
+                         title="re-upload" ng-click="reloadAttachment(file, $index)"></a>
+
+                      <div class="progress progress-attachment error pull-right">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ file.progress }}"
+                             aria-valuemin="0" aria-valuemax="100" ng-style="styleProgressBar(file.progress)">
+                          <span class="sr-only">{{ file.progress }}% Complete</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
                 <!--<input  id="file" name="file"/>-->
               </div>
@@ -107,11 +123,10 @@
                               valid link.
                             </div>
                             <input type="text" class="form-control " data-edit="createLink" placeholder="http://"
-                                   ng-model="ticketEditorLink" qt-on-input
-                                   ng-pattern="linkPattern" required="true" name="ticketEditorLink">
+                                   ng-model="ticketEditorLink" ng-change="validateLink()">
                           </div>
                           <div class="btn-groups clearfix">
-                            <button type="button" class="btn btn-scooter" ng-disabled="!ticketEditorLink">Add</button>
+                            <button type="button" class="btn btn-scooter" ng-disabled="validLink.pattern">Add</button>
                             <button type="button" class="btn btn-gray" data-edit="unlink">Cancel</button>
                           </div>
                         </div>
@@ -196,7 +211,7 @@
               <button type="button" class="btn btn-gray" data-dismiss="modal" ng-click="closeCreateTicketForm()">
                 Cancel
               </button>
-              <button type="button" class="btn btn-scooter" ng-click="saveTicket()">Create</button>
+              <button type="button" class="btn btn-scooter" ng-click="saveTicket(ticketForm)">Create</button>
             </div>
           </div>
         </div>

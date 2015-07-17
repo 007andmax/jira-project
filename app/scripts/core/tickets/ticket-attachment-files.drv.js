@@ -15,9 +15,10 @@
           file.trigger('click');
         });
 
-        // files selected
         element.on('change', 'input[type=file]', function (e) {
-          console.log(this.files)
+          for (var i = 0; i < this.files.length; i++) {
+            scope.addAttachmentFiles(this.files[i]);
+          }
         })
 
       }
