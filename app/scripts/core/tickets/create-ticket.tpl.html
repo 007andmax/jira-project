@@ -194,7 +194,9 @@
               <button type="button" class="btn btn-gray" data-dismiss="modal" ng-click="closeCreateTicketForm()">
                 Cancel
               </button>
-              <button type="button" class="btn btn-scooter" ng-click="saveTicket(ticketForm)">Create</button>
+              <button type="button" class="btn btn-scooter" ng-click="saveTicket(ticketForm)"
+                      ng-disabled="disabledCreateButton">Create
+              </button>
             </div>
           </div>
         </div>

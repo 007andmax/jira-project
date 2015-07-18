@@ -82,7 +82,10 @@
             for (var i = 0; i < $scope.ticketAttachments.length; i++) {
               $scope.ticket.attachFileIds.push($scope.ticketAttachments[i].id);
             }
-            //TicketsService.createTicket($scope.ticket);
+            TicketsService.createTicket($scope.ticket, function () {
+              $modalInstance.dismiss();
+            });
+            $scope.disabledCreateButton = true;
           } else {
             $scope.triedToSaveTicket = true;
           }
