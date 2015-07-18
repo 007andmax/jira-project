@@ -8,7 +8,6 @@
 
         $scope.ticket = {};
         $scope.ticketAttachments = [];
-        $scope.ticketFilesId = [];
         $scope.ticketPriorityValue = {
           LOW: 'Low',
           MEDIUM: 'Medium',
@@ -53,34 +52,36 @@
           $scope.$apply();
           FilesService.create(file,
             function (progress) {
-              $scope.ticketAttachments[$scope.ticketAttachments.length - 1].progress = 100 * (progress.loaded / progress.total);
+              file.progress = 100 * (progress.loaded / progress.total);
               $scope.$apply();
             },
             function (finish) {
-              $scope.ticketFilesId.push(finish.id)
+              file.id = finish.id;
             }, function (error) {
             });
         };
 
         $scope.removeAttachment = function (index) {
           $scope.ticketAttachments.splice(index, 1);
-          $scope.ticketFilesId.splice(index, 1);
         };
-        $scope.reloadAttachment = function (file, index) {
+        $scope.reloadAttachment = function (file) {
           FilesService.create(file,
             function (progress) {
-              $scope.ticketAttachments[index].progress = 100 * (progress.loaded / progress.total);
+              file.progress = 100 * (progress.loaded / progress.total);
               $scope.$apply();
             },
             function (finish) {
-              $scope.ticketFilesId.push(finish.id)
+              file.id = finish.id;
             }, function (error) {
             });
-        }
+        };
 
         $scope.saveTicket = function (form) {
           if (form.$valid) {
-            $scope.ticket.attachFileIds = $scope.ticketFilesId;
+            $scope.ticket.attachFileIds = [];
+            for (var i = 0; i < $scope.ticketAttachments.length; i++) {
+              $scope.ticket.attachFileIds.push($scope.ticketAttachments[i].id);
+            }
             //TicketsService.createTicket($scope.ticket);
           } else {
             $scope.triedToSaveTicket = true;

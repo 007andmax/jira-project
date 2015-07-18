@@ -6,7 +6,10 @@
     return {
       restrict: 'A',
       require: 'ngModel',
-      link: function (scope, element, attrs, ctrl) {
+      scope: {
+        attachmentFunc: '=attachmentFunc'
+      },
+      link: function (scope, element) {
 
 
         element.on('click', 'a', function () {
@@ -15,9 +18,9 @@
           file.trigger('click');
         });
 
-        element.on('change', 'input[type=file]', function (e) {
+        element.on('change', 'input[type=file]', function () {
           for (var i = 0; i < this.files.length; i++) {
-            scope.addAttachmentFiles(this.files[i]);
+            scope.attachmentFunc(this.files[i]);
           }
         })
 
