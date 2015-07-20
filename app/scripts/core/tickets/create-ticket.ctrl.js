@@ -78,14 +78,18 @@
 
         $scope.saveTicket = function (form) {
           if (form.$valid) {
+            $scope.savingInProcess = true;
+
             $scope.ticket.attachFileIds = [];
+
             for (var i = 0; i < $scope.ticketAttachments.length; i++) {
               $scope.ticket.attachFileIds.push($scope.ticketAttachments[i].id);
             }
+
             TicketsService.createTicket($scope.ticket, function () {
+              $scope.savingInProcess = false;
               $modalInstance.dismiss();
             });
-            $scope.disabledCreateButton = true;
           } else {
             $scope.triedToSaveTicket = true;
           }

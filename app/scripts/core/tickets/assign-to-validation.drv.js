@@ -11,10 +11,15 @@
 
           scope.$watch(function () {
             return ngModelCtrl.$viewValue;
-          }, function () {
-            if ((ngModelCtrl.$viewValue === "[$empty$]" || ngModelCtrl.$viewValue === '' || ngModelCtrl.$viewValue === undefined)) {
-              ngModelCtrl.$valid = true;
-            }
+          }, function (value) {
+
+            var valid = ngModelCtrl.$modelValue || (value === "[$empty$]" || value === '' || value === undefined);
+
+            ngModelCtrl.$setValidity('choose', valid);
+
+            // reset default typeahead validation
+            ngModelCtrl.$setValidity('editable', true);
+            ngModelCtrl.$setValidity('parse', true);
           });
         }
       }
