@@ -12,7 +12,6 @@
           scope.$watch(function () {
             return ngModelCtrl.$viewValue;
           }, function () {
-            ngModelCtrl.$setValidity('choose', (ngModelCtrl.$viewValue === "[$empty$]" || ngModelCtrl.$viewValue === '' || ngModelCtrl.$viewValue === undefined));
             if ((ngModelCtrl.$viewValue === "[$empty$]" || ngModelCtrl.$viewValue === '' || ngModelCtrl.$viewValue === undefined)) {
               ngModelCtrl.$valid = true;
             }

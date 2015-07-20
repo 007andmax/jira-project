@@ -184,14 +184,15 @@
                  ng-class="{error: isShowingErrors(ticketForm, 'ticketAssignTo')}">
               <label>assign to</label>
 
-              <div ng-messages="ticketForm.ticketAssignTo.$error" ng-if="isShowingErrors(ticketForm, 'ticketAssignTo')">
-                <div class="qt-error-msg" ng-message="choose">Please select the user.</div>
+              <div class="qt-error-msg"
+                   ng-show="isShowingErrors(ticketForm, 'ticketAssignTo') && ticketForm.ticketAssignTo.$error">
+                Please select the user.
               </div>
               <input type="text" class="form-control form-control-dropdown dropdown-toggle" data-toggle="dropdown"
                      aria-expanded="true" ng-model="ticketAssignTo" name="ticketAssignTo"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus assign-to-validation
+                     qt-typeahead-show-on-focus assign-to-validation ng-required="false"
                      custom-style="{width: '382px', 'max-height': '204px', 'overflow-y': 'scroll'}">
             </div>
 
