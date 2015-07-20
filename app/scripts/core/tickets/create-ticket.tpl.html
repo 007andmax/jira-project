@@ -168,7 +168,7 @@
               </div>
               <input type="text" class="form-control  form-control-dropdown dropdown-toggle hide-cursor" value=""
                      data-toggle="dropdown" aria-expanded="true" ng-model="ticketPriorityValue[ticket.priorityLevel]"
-                     name="ticketPriority" required="true">
+                     name="ticketPriority" required="true" READONLY>
 
               <ul class="dropdown-menu dropdown-priority">
                 <li ng-repeat="(priority, label) in ticketPriorityValue" ng-click="ticket.priorityLevel = priority">
@@ -180,13 +180,18 @@
             </div>
           </div>
           <div class="row-wrapper clearfix">
-            <div class="form-group dropdown pull-left">
+            <div class="form-group dropdown pull-left"
+                 ng-class="{error: isShowingErrors(ticketForm, 'ticketAssignTo')}">
               <label>assign to</label>
+
+              <div ng-messages="ticketForm.ticketAssignTo.$error" ng-if="isShowingErrors(ticketForm, 'ticketAssignTo')">
+                <div class="qt-error-msg" ng-message="choose">Please select the user.</div>
+              </div>
               <input type="text" class="form-control form-control-dropdown dropdown-toggle" data-toggle="dropdown"
                      aria-expanded="true" ng-model="ticketAssignTo" name="ticketAssignTo"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus
+                     qt-typeahead-show-on-focus assign-to-validation
                      custom-style="{width: '382px', 'max-height': '204px', 'overflow-y': 'scroll'}">
             </div>
 
