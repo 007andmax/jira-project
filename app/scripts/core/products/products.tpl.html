@@ -3,18 +3,18 @@
     <div class="tabs-topbar">
 
       <div class="dropdown pull-right">
-        <a href="javascript:void(0)" id=""
-           class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp" data-placement="top"
-           title="" data-original-title="ADD Category" data-toggle="dropdown"><span
+        <a href="javascript:void(0)"
+           class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
+           tooltip="ADD Category" tooltip-placement="top" data-toggle="dropdown"><span
           class="icns icn icn-add-category "></span></a>
 
         <div class="dropdown-menu add-company-dropdown">
           <div class="clearfix">
             <div class="form-group ">
-              <input type="text" class="form-control form-control-round dropdown-toggle " data-toggle="dropdown"
-                     data-provide="typeahead" autocomplete="off" id="typeahead" placeholder="Category name...">
+              <input type="text" class="form-control form-control-round dropdown-toggle" placeholder="Category name..."
+                     ng-model="newCategoryName">
 
-              <div class="label-add-btn"><a href="#"
+              <div class="label-add-btn" ng-click="addCategory()"><a href="javascript:void(0)"
                                             class=" btn input-btn-cr btn-green disabled   btn-add-more pull-left "><span
                 class="small-icn-add icn"></span></a></div>
             </div>
@@ -24,7 +24,7 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-          <a href="" >Products</a></li>
+          <a href="javascript:void(0)">Products</a></li>
         <li role="presentation">
           <a ui-sref="ps.services">Services & Rates</a>
         </li>
@@ -34,32 +34,25 @@
     <div class="tab-content">
 
       <div role="tabpanel" class="tab-pane active" id="invoice-company">
-        <ul class="companies-list recurring products ">
-          <li>
-            <a href='javascript:void(0)'><span class="name">Scanners</span> <span
-            class="amount pull-right">8 items</span>
+        <ul class="companies-list recurring products">
+          <li qt-toggle-slider ng-repeat="category in categories"
+              ng-controller="quicktech.core.products.categoryProductsCtrl">
 
-            <div class="clearfix"></div>
+            <a href='javascript:void(0)' qt-ts-toggler>
+              <span class="name">{{ category.name }}</span> <!--ng-if="!showEditCategoryName"-->
+              <!--<div ng-if="showEditCategoryName">-->
+              <!--<input type="text" class="form-control" ng-model="editCategoryName.name" style="width: 400px"/>-->
+              <!--<a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"-->
+              <!--ng-click="saveEditCategoryName()" ng-disabled="showEditCategoryNameButton">Save Changes</a>-->
+              <!--<a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"-->
+              <!--ng-click="cancelEditCategoryName()">Cancel</a>-->
+              <!--</div>-->
+              <span class="amount pull-right">{{ category.productsAmount }} items</span>
 
-          </a>
+              <div class="clearfix"></div>
+            </a>
 
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler> <span class="name">Printers</span> <span
-            class="amount pull-right">4 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-            <ul class="invoices recurring  products   " qt-ts-slider>
+            <ul class="invoices recurring  products" qt-ts-slider>
               <li class="head clearfix">
                 <div class="">
                   <div class="col-1">CODE NO.</div>
@@ -69,398 +62,226 @@
                   <div class="col-5">SALE PRICE</div>
                 </div>
               </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1">1901</div>
-                  <div class="col-2 normal"><span class="product-name">HP Envy 4500 e AiO Printer</span>
+              <div ng-repeat="product in products" ng-controller="quicktech.core.products.productCtrl">
+                <li class="clearfix" ng-if="!showEditProduct">
+                  <div class="hover">
+                    <div class="col-1">{{ product.code }}</div>
+                    <div class="col-2 normal"><span class="product-name">{{ product.name }}</span>
 
-                    <div class="popover-container"><span class="icns icn-description" data-popover="true"
-                                                         data-html="true"
-                                                         data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
-                                                         data-original-title="" title=""></span></div>
-                  </div>
-                  <div class="col-3 normal">G Tech Suppliers</div>
-                  <div class="col-4 normal">$60</div>
+                      <div class="popover-container"><span class="icns icn-description" data-popover="true"
+                                                           data-html="true"
+                                                           data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
+                                                           data-original-title="" title=""></span></div>
+                    </div>
+                    <div class="col-3 normal">G Tech Suppliers</div>
+                    <div class="col-4 normal">{{ product.cost | currency }}</div>
 
-                  <div class="col-5 normal">$90</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Product"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Product"></a>
+                    <div class="col-5 normal">{{ product.sale | currency }}</div>
+                    <div class="sub-actions pull-left">
+                      <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
+                         ng-click="deleteProduct()"
+                         tooltip="Delete Product" tooltip-placement="top"></a>
+                      <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+                         ng-click="openEditProduct()"
+                         tooltip="Edit Product" tooltip-placement="top"></a>
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1">1902</div>
-                  <div class="col-2 normal"><span
-                    class="product-name">HP Officejet Pro 8600 eAiO with 3 year warranty</span>
+                </li>
+                <form name="editProductForm">
+                  <li class="clearfix no-border add-new edit-form" ng-if="showEditProduct">
+                    <div class="hover">
+                      <div class="col-1">{{ product.code }}</div>
+                      <div class="col-2 normal">
+                        <div class="col-wrapper one"
+                             ng-class="{error: isShowingErrors(editProductForm, 'editProductName')}">
+                          <div ng-messages="editProductForm.editProductName.$error"
+                               ng-if="isShowingErrors(editProductForm, 'editProductName')">
+                            <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                            <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                            <!--<div class="qt-error-msg" ng-message="unique">Name already occupied.</div>-->
+                          </div>
+                          <input type="text" class="form-control" placeholder="Product" name="editProductName"
+                                 ng-required="true" ng-model="editProduct.name" ng-maxlength="100">
+                        </div>
+                      </div>
+                      <div class="col-3 normal">
+                        <div class="col-wrapper">
+                          <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
+                                 data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier"
+                                 value="Creative Computers">
+                          <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
+                              Telecom</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Creative
+                              Computers</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Elite
+                              Networking Equipment</a>
+                            </li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">G Tech
+                              Suppliers</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Verizon
+                              Cloud</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
+                              Telecom</a></li>
 
-                    <div class="popover-container"><span class="icns icn-description" data-popover="true"
-                                                         data-html="true"
-                                                         data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
-                                                         data-original-title="" title=""></span></div>
-                  </div>
-                  <div class="col-3 normal">Elite Networking Equipment</div>
-                  <div class="col-4 normal">$130</div>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-4 normal">
+                        <div class="col-wrapper"
+                             ng-class="{error: isShowingErrors(editProductForm, 'editProductCost')}">
+                          <div ng-messages="editProductForm.editProductCost.$error"
+                               ng-if="isShowingErrors(editProductForm, 'editProductCost')">
+                            <div class="qt-error-msg" ng-message="required">Cost is required.</div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
+                                 name="editProductCost"
+                                 hard-reset-pattern="numberPattern" ng-required="true">
+                        </div>
+                      </div>
 
-                  <div class="col-5 normal">$180</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Product"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Product"></a>
-                  </div>
-                </div>
-              </li>
-              <li class="clearfix no-border">
-                <div class="hover">
-                  <div class="col-1">1903</div>
-                  <div class="col-2 normal"><span class="product-name">HP Photosmart 5520 e All in One Printer</span>
+                      <div class="col-5 normal">
+                        <div class="col-wrapper"
+                             ng-class="{error: isShowingErrors(editProductForm, 'editProductSale')}">
+                          <div ng-messages="editProductForm.editProductSale.$error"
+                               ng-if="isShowingErrors(editProductForm, 'editProductSale')">
+                            <div class="qt-error-msg" ng-message="required">Sale is required.</div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Sale Price" ng-model="editProduct.sale"
+                                 name="editProductSale"
+                                 hard-reset-pattern="numberPattern" ng-required="true">
+                        </div>
+                      </div>
 
-                    <div class="popover-container"><span class="icns icn-description" data-popover="true"
-                                                         data-html="true"
-                                                         data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
-                                                         data-original-title="" title=""></span></div>
-                  </div>
-                  <div class="col-3 normal">Creative Computers</div>
-                  <div class="col-4 normal">$60</div>
+                      <div class="col-6 normal description">
+                        <div class="col-wrapper"
+                             ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
+                          <div ng-messages="editProductForm.editProductDescription.$error"
+                               ng-if="isShowingErrors(editProductForm, 'editProductDescription')">
+                            <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Description"
+                                 ng-model="editProduct.description"
+                                 ng-maxlength="500" name="editProductDescription">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="add-more  new clearfix">
+                      <div class="add-table-actions pull-right">
+                        <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+                           ng-click="cancelEditProduct()">Cancel</a>
+                        <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+                           ng-click="saveChangeProduct(editProductForm)"
+                           ng-disabled="disabledSaveChangeButton">Save Changes</a>
+                      </div>
+                    </div>
+                  </li>
+                </form>
+              </div>
+              <form name="createProductForm">
+                <li class="clearfix no-border add-new" ng-if="showCreateProduct">
+                  <div class="hover">
+                    <div class="col-1">1655</div>
+                    <div class="col-2 normal">
+                      <div class="col-wrapper one"
+                           ng-class="{error: isShowingErrors(createProductForm, 'createProductName')}">
+                        <div ng-messages="createProductForm.createProductName.$error"
+                             ng-if="isShowingErrors(createProductForm, 'createProductName')">
+                          <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                          <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                          <!--<div class="qt-error-msg" ng-message="unique">Name already occupied.</div>-->
+                        </div>
+                        <input type="text" class="form-control  " placeholder="Product" ng-model="createProduct.name"
+                               name="createProductName" ng-required="true" ng-maxlength="100">
+                      </div>
+                    </div>
+                    <div class="col-3 normal">
+                      <div class="col-wrapper">
+                        <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
+                               data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier">
+                        <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
+                            Telecom</a></li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Creative
+                            Computers</a></li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Elite
+                            Networking Equipment</a>
+                          </li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">G Tech
+                            Suppliers</a></li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Verizon
+                            Cloud</a></li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
+                            Telecom</a></li>
 
-                  <div class="col-5 normal">$90</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Product"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Product"></a>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-4 normal">
+                      <div class="col-wrapper"
+                           ng-class="{error: isShowingErrors(createProductForm, 'createProductCost')}">
+                        <div ng-messages="createProductForm.createProductCost.$error"
+                             ng-if="isShowingErrors(createProductForm, 'createProductCost')">
+                          <div class="qt-error-msg" ng-message="required">Cost is required.</div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Cost" ng-model="createProduct.cost"
+                               name="createProductCost" ng-required="true" hard-reset-pattern="numberPattern">
+                      </div>
+                    </div>
+
+                    <div class="col-5 normal">
+                      <div class="col-wrapper"
+                           ng-class="{error: isShowingErrors(createProductForm, 'createProductSale')}">
+                        <div ng-messages="createProductForm.createProductSale.$error"
+                             ng-if="isShowingErrors(createProductForm, 'createProductSale')">
+                          <div class="qt-error-msg" ng-message="required">Sale is required.</div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Sale Price" ng-model="createProduct.sale"
+                               name="createProductSale" ng-required="true" hard-reset-pattern="numberPattern">
+                      </div>
+                    </div>
+
+                    <div class="col-6 normal description">
+                      <div class="col-wrapper"
+                           ng-class="{error: isShowingErrors(createProductForm, 'createProductDescription')}">
+                        <div ng-messages="createProductForm.createProductDescription.$error"
+                             ng-if="isShowingErrors(createProductForm, 'createProductDescription')">
+                          <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Description"
+                               ng-model="createProduct.description"
+                               name="createProductDescription" ng-maxlength="500">
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </li>
+                  <div class="add-more  new clearfix">
+                    <div class="add-table-actions pull-right">
+                      <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+                         ng-click="cancelCreateProduct()">Cancel</a>
+                      <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+                         ng-click="createNewProduct(createProductForm)"
+                         ng-disabled="disabledCreateProductButton">Create</a>
+                    </div>
+                  </div>
+                </li>
+              </form>
               <li class="clearfix add-product-wrapper">
-                <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-right" data-toggle="tooltip"
-                        data-placement="top" title="" data-original-title="Add Product"><span
-                  class="icns icn wt-icn-add-product "></span></button>
+                <button class="btn btn-sr btn-create-in btn-scooter pull-right" ng-click="addProduct()"
+                        tooltip="Add Product" tooltip-placement="top" ng-disabled="showCreateProduct">
+                  <span class="icns icn wt-icn-add-product "></span></button>
               </li>
+
 
             </ul>
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Ink & Toners</span> <span class="amount pull-right">4 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-            <ul class="invoices recurring  products   " qt-ts-slider>
-              <li class="head clearfix">
-                <div class="">
-                  <div class="col-1">CODE NO.</div>
-                  <div class="col-2">PRODUCT</div>
-                  <div class="col-3">VENDOR/SUPPLIER</div>
-                  <div class="col-4">COST</div>
-                  <div class="col-5">SALE PRICE</div>
-                </div>
-              </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1">1651</div>
-                  <div class="col-2 normal"><span
-                    class="product-name">HP 21XL High Yield Black Original Ink Cartridge</span>
-
-                    <div class="popover-container"><span class="icns icn-description" data-popover="true"
-                                                         data-html="true"
-                                                         data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
-                                                         data-original-title="" title=""></span></div>
-                  </div>
-                  <div class="col-3 normal">Creative Computers</div>
-                  <div class="col-4 normal">$25</div>
-
-                  <div class="col-5 normal">$50</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Product"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Product"></a>
-                  </div>
-                </div>
-              </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1">1652</div>
-                  <div class="col-2 normal"><span class="product-name">HP 22XL High Yield Original Ink Cartridge</span>
-
-                    <div class="popover-container"><span class="icns icn-description" data-popover="true"
-                                                         data-html="true"
-                                                         data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
-                                                         data-original-title="" title=""></span></div>
-                  </div>
-                  <div class="col-3 normal">Elite Networking Equipment</div>
-                  <div class="col-4 normal">$25</div>
-
-                  <div class="col-5 normal">$40</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Product"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Product"></a>
-                  </div>
-                </div>
-              </li>
-              <li class="clearfix no-border add-new edit-form">
-                <div class="hover">
-                  <div class="col-1">1653</div>
-                  <div class="col-2 normal">
-                    <div class="col-wrapper one">
-                      <input type="text" class="form-control  " placeholder="Product"
-                             value="HP 302XL High Yield Tri-Color Origin">
-                    </div>
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Description"
-                             value="HP 302XL High Yield Tri-Color Origin">
-                    </div>
-                  </div>
-                  <div class="col-3 normal">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
-                             data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier"
-                             value="Creative Computers">
-                      <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bell Telecom</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Creative Computers</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Elite Networking Equipment</a>
-                        </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">G Tech Suppliers</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Verizon Cloud</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bell Telecom</a></li>
-
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-4 normal">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Cost" value="$45">
-                    </div>
-                  </div>
-
-                  <div class="col-5 normal">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Sale Price" value="$90">
-                    </div>
-                  </div>
-
-                  <div class="col-6 normal description">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Product Name"
-                             value="HP 302XL High Yield Tri-Color Origin">
-                    </div>
-                  </div>
-                </div>
-                <div class="add-more  new clearfix">
-                  <div class="add-table-actions pull-right">
-                    <a href="#" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left">Cancel</a>
-                    <a href="#" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left">Save Changes</a>
-                  </div>
-                </div>
-              </li>
-
-              <li class="clearfix ">
-                <div class="hover">
-                  <div class="col-1">1654</div>
-                  <div class="col-2 normal"><span class="product-name">HP 22XL High Yield Original Ink Cartridge</span>
-
-                    <div class="popover-container"><span class="icns icn-description" data-popover="true"
-                                                         data-html="true"
-                                                         data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
-                                                         data-original-title="" title=""></span></div>
-                  </div>
-                  <div class="col-3 normal">Elite Networking Equipment</div>
-                  <div class="col-4 normal">$25</div>
-
-                  <div class="col-5 normal">$40</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Product"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Product"></a>
-                  </div>
-                </div>
-              </li>
-              <li class="clearfix no-border add-new">
-                <div class="hover">
-                  <div class="col-1">1655</div>
-                  <div class="col-2 normal">
-                    <div class="col-wrapper one">
-                      <input type="text" class="form-control  " placeholder="Product" value="">
-                    </div>
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Description" value="">
-                    </div>
-                  </div>
-                  <div class="col-3 normal">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
-                             data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier">
-                      <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bell Telecom</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Creative Computers</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Elite Networking Equipment</a>
-                        </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">G Tech Suppliers</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Verizon Cloud</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bell Telecom</a></li>
-
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-4 normal">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Cost" value="">
-                    </div>
-                  </div>
-
-                  <div class="col-5 normal">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Sale Price" value="">
-                    </div>
-                  </div>
-
-                  <div class="col-6 normal description">
-                    <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Description" value="">
-                    </div>
-                  </div>
-                </div>
-                <div class="add-more  new clearfix">
-                  <div class="add-table-actions pull-right">
-                    <a href="#" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left">Cancel</a>
-                    <a href="#" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left">Create</a>
-                  </div>
-                </div>
-              </li>
-              <li class="clearfix add-product-wrapper">
-                <button id="" class="btn btn-sr btn-create-in btn-scooter disabled   pull-right" data-toggle="tooltip"
-                        data-placement="top" title="" data-original-title="Add Product"><span
-                  class="icns icn wt-icn-add-product "></span></button>
-              </li>
-
-            </ul>
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Desktops</span> <span
-            class="amount pull-right">6 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
 
             <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
+              <button class="btn btn-sr btn-create-in btn-scooter pull-left" ng-click="addProduct()"
+                      tooltip="Add Product" tooltip-placement="top"><span
                 class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Laptops</span> <span
-            class="amount pull-right">14 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Tablets</span> <span
-            class="amount pull-right">10 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Cables</span> <span
-            class="amount pull-right">23 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Rams</span> <span class="amount pull-right">8 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
-            </div>
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Hard Disks</span> <span
-            class="amount pull-right">12 items</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-            <div class="actions pull-right">
-              <button id="" class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
-                      data-placement="top" title="" data-original-title="Add Product"><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Delete Category"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                 data-placement="top" title="" data-original-title="Edit Category"></a>
+              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
+                 tooltip="Delete Category" tooltip-placement="top" ng-click="deleteCategory()"></a>
+              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+                 tooltip="Edit Category" tooltip-placement="top" ng-click="editCategory()"></a>
             </div>
           </li>
         </ul>
