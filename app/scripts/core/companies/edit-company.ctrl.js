@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService', 'AddressesService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$http',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService, AddressesService,
                 SharedStateService, $stateParams, $state, $http) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
@@ -16,10 +16,7 @@
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.companies = CompaniesService.getClientCompanies();
-        //todo receive it using services!!
-        $http.get('/addresses/getAllLocales').success(function (resp) {
-          $scope.timezones = resp;
-        });
+        $scope.timezones = AddressesService.getAllLocales();
 
         $scope.$watch('companies.length', function (companiesCount) {
           headerSharedState.count = companiesCount;
