@@ -6,6 +6,8 @@
     ['$scope', 'ProductsService',
       function ($scope, ProductsService) {
 
+        $scope.vendors = []; // ProductsService.getAllInCompanyForAutocomplete(companyId, callback)
+
         $scope.openEditProduct = function () {
           $scope.showEditProduct = true;
           $scope.editProduct = {
@@ -21,7 +23,7 @@
         };
 
         $scope.saveChangeProduct = function (form) {
-          $scope.editProduct.versionedId = $scope.category.id;
+          $scope.editProduct.versionedId = $scope.product.versionedId;
           $scope.editProduct.category = {
             id: $scope.category.id
           };

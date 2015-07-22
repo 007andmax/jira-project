@@ -8,18 +8,30 @@
            tooltip="ADD Category" tooltip-placement="top" data-toggle="dropdown"><span
           class="icns icn icn-add-category "></span></a>
 
-        <div class="dropdown-menu add-company-dropdown">
-          <div class="clearfix">
-            <div class="form-group ">
-              <input type="text" class="form-control form-control-round dropdown-toggle" placeholder="Category name..."
-                     ng-model="newCategoryName">
 
-              <div class="label-add-btn" ng-click="addCategory()"><a href="javascript:void(0)"
-                                                                     class=" btn input-btn-cr btn-green disabled   btn-add-more pull-left "><span
-                class="small-icn-add icn"></span></a></div>
+        <div class="dropdown-menu add-company-dropdown">
+          <form name="newCategoryNameForm">
+            <div class="clearfix">
+              <div class="form-group" ng-class="{error: isShowingErrors(newCategoryNameForm, 'newCategoryName')}">
+                <div ng-messages="newCategoryNameForm.newCategoryName.$error"
+                     ng-if="isShowingErrors(newCategoryNameForm, 'newCategoryName')">
+                  <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                  <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
+                </div>
+                <input type="text" class="form-control form-control-round dropdown-toggle"
+                       placeholder="Category name..."
+                       ng-model="newCategoryName" name="newCategoryName" ng-required="true" ng-maxlength="100"
+                       ng-change="isUniqueCategoryName(newCategoryNameForm)">
+
+                <div class="label-add-btn" ng-click="addCategory(newCategoryNameForm)"><a href="javascript:void(0)"
+                                                                                          class=" btn input-btn-cr btn-green disabled   btn-add-more pull-left "><span
+                  class="small-icn-add icn"></span></a></div>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
+
       </div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
@@ -38,22 +50,34 @@
           <li ng-repeat="category in categories" products-toggle-slider="toggleProducts"
               ng-controller="quicktech.core.products.categoryCtrl">
 
-            <a href='javascript:void(0)' ng-click="toggleProducts()">
-              <span class="name">{{ category.name }}</span> <!--ng-if="!showEditCategoryName"-->
-              <!--<div ng-if="showEditCategoryName">-->
-              <!--<input type="text" class="form-control" ng-model="editCategoryName.name" style="width: 400px"/>-->
-              <!--<a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"-->
-              <!--ng-click="saveEditCategoryName()" ng-disabled="showEditCategoryNameButton">Save Changes</a>-->
-              <!--<a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"-->
-              <!--ng-click="cancelEditCategoryName()">Cancel</a>-->
-              <!--</div>-->
-              <span class="amount pull-right">{{ category.productsAmount }} items</span>
+            <form name="editCategoryNameForm">
+              <a href='javascript:void(0)' ng-click="toggleProducts()">
+                <span class="name" ng-if="!showEditCategoryName">{{ category.name }}</span>
+                <!--ng-if="!showEditCategoryName"-->
+                <div ng-if="showEditCategoryName"
+                     ng-class="{error: isShowingErrors(editCategoryNameForm, 'editCategoryName')}">
+                  <div ng-messages="editCategoryNameForm.editCategoryName.$error"
+                       ng-if="isShowingErrors(editCategoryNameForm, 'editCategoryName')">
+                    <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                    <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
+                  </div>
+                  <input type="text" class="form-control" ng-model="editCategoryName.name" style="width: 400px"
+                         name="editCategoryName" ng-required="true" ng-maxlength="100"
+                         ng-change="isUniqueEditCategoryName(editCategoryNameForm)"/>
+                  <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"
+                     ng-click="saveEditCategoryName()" ng-disabled="showEditCategoryNameButton">Save Changes</a>
+                  <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"
+                     ng-click="cancelEditCategoryName()">Cancel</a>
+                </div>
+                <span class="amount pull-right">{{ category.productsAmount }} items</span>
 
-              <div class="clearfix"></div>
-            </a>
+                <div class="clearfix"></div>
+              </a>
+            </form>
 
             <ul class="invoices recurring  products" products-ts-slider>
-              <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
+              <div ng-if="showProducts">
                 <li class="head clearfix">
                   <div class="">
                     <div class="col-1">CODE NO.</div>
@@ -99,10 +123,11 @@
                                  ng-if="isShowingErrors(editProductForm, 'editProductName')">
                               <div class="qt-error-msg" ng-message="required">Name is required.</div>
                               <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
-                              <!--<div class="qt-error-msg" ng-message="unique">Name already occupied.</div>-->
+                              <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
                             </div>
                             <input type="text" class="form-control" placeholder="Product" name="editProductName"
-                                   ng-required="true" ng-model="editProduct.name" ng-maxlength="100">
+                                   ng-required="true" ng-model="editProduct.name" ng-maxlength="100"
+                                   is-uniq-validation validation-func="validateProductName">
                           </div>
                         </div>
                         <div class="col-3 normal">
@@ -111,20 +136,9 @@
                                    data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier"
                                    value="Creative Computers">
                             <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
-                                Telecom</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Creative
-                                Computers</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Elite
-                                Networking Equipment</a>
-                              </li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">G Tech
-                                Suppliers</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Verizon
-                                Cloud</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
-                                Telecom</a></li>
-
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)"
+                                                         ng-repeat="vendor in vendors">
+                                {{ vendor.name }}</a></li>
                             </ul>
                           </div>
                         </div>
@@ -180,7 +194,7 @@
                   </form>
                 </div>
                 <form name="createProductForm">
-                  <li class="clearfix no-border add-new" ng-if="showCreateProduct">
+                  <li class="clearfix no-border add-new" id="createNewProduct" ng-if="showCreateProduct">
                     <div class="hover">
                       <div class="col-1">1655</div>
                       <div class="col-2 normal">
@@ -190,10 +204,11 @@
                                ng-if="isShowingErrors(createProductForm, 'createProductName')">
                             <div class="qt-error-msg" ng-message="required">Name is required.</div>
                             <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
-                            <!--<div class="qt-error-msg" ng-message="unique">Name already occupied.</div>-->
+                            <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
                           </div>
                           <input type="text" class="form-control  " placeholder="Product" ng-model="createProduct.name"
-                                 name="createProductName" ng-required="true" ng-maxlength="100">
+                                 name="createProductName" ng-required="true" ng-maxlength="100"
+                                 is-uniq-validation validation-func="validateProductName">
                         </div>
                       </div>
                       <div class="col-3 normal">
@@ -201,20 +216,9 @@
                           <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
                                  data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier">
                           <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
-                              Telecom</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Creative
-                              Computers</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Elite
-                              Networking Equipment</a>
-                            </li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">G Tech
-                              Suppliers</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Verizon
-                              Cloud</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Bell
-                              Telecom</a></li>
-
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)"
+                                                       ng-repeat="vendor in vendors">
+                              {{ vendor.name }}</a></li>
                           </ul>
                         </div>
                       </div>
@@ -276,7 +280,7 @@
             </ul>
 
             <div class="actions pull-right">
-              <button class="btn btn-sr btn-create-in btn-scooter pull-left" ng-click="addProduct()"
+              <button class="btn btn-sr btn-create-in btn-scooter pull-left" ng-click="addProduct(); toggleProducts()"
                       tooltip="Add Product" tooltip-placement="top"><span
                 class="icns icn wt-icn-add-product "></span></button>
               <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
