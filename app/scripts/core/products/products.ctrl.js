@@ -14,15 +14,27 @@
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.addCategory = function () {
-          console.log("add category");
-          console.log($scope.newCategoryName);
-          $scope.newCategory = {
-            name: $scope.newCategoryName
-          };
-          //ProductsService.saveCategory($scope.newCategory);
+        $scope.addCategory = function (form) {
+          if (form.$valid) {
+            //ProductsService.saveCategory({name: $scope.newCategoryName});
+          }
         };
 
-    }]);
+        $scope.isUniqueCategoryName = function (form) {
+          var uniqueNameCount = 0;
+          for (var i = 0; i < $scope.categories.length; i++) {
+            if ($scope.newCategoryName === $scope.categories[i].name) {
+              console.log(uniqueNameCount);
+              uniqueNameCount++
+            }
+          }
+          if (uniqueNameCount >= 1) {
+            form.newCategoryName.$setValidity('unique', false);
+          } else {
+            form.newCategoryName.$setValidity('unique', true);
+          }
+        };
+
+      }]);
 
 }());
