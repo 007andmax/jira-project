@@ -81,20 +81,19 @@
         });
         $scope.techGuys = [];
         $scope.loadTechGuys = function () {
-          $scope.techGuys = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+          var curCompanyUsers = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+          $scope.techGuys = [];
 
-          for (var i = 0; i < $scope.techGuys.length; i++) {
-            $scope.techGuys[i].fullName = $scope.techGuys[i].firstName + ' ' + $scope.techGuys[i].lastName
-          }
-          ;
+          for (var i = 0; i < curCompanyUsers.length; i++) {
+            var user = curCompanyUsers[i].staticCopy();
 
-          for (var i = 0; i < $scope.techGuys.length; i++) {
-            if ($scope.techGuys[i].id == $scope.currentUser.id) {
-              $scope.techGuys.splice(i, 1);
+            if (user.id !== $scope.currentUser.id) {
+              user.fullName = $rootScope.getUserName(user);
+              $scope.techGuys.push(user);
             }
+
           }
 
-          //console.dir($scope.techGuys);
         }
 
         if ($scope.techGuys.length === 0) {
