@@ -10,7 +10,7 @@
 
           scope.$on(attrs.productsToggleSlider, function () {
             element.toggleClass("opened");
-            element.find('[products-ts-slider]').slideToggle('fast');
+            element.find('[products-ts-slider]').slideToggle('slow');
           });
         }
       }

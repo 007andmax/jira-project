@@ -6,14 +6,13 @@
     ['$scope', 'ProductsService',
       function ($scope, ProductsService) {
 
-        $scope.vendors = []; // ProductsService.getAllInCompanyForAutocomplete(companyId, callback)
-
         $scope.openEditProduct = function () {
           $scope.showEditProduct = true;
           $scope.editProduct = {
             name: $scope.product.name,
             cost: $scope.product.cost,
             sale: $scope.product.sale,
+            vendor: $scope.product.vendor.name,
             description: $scope.product.description
           };
         };
@@ -29,17 +28,17 @@
           };
           if (form.$valid) {
             $scope.disabledSaveChangeButton = true;
-            //ProductsService.saveProduct($scope.editProduct, function() {
-            //  $scope.showEditProduct = false;
-            //  $scope.disabledSaveChangeButton = false;
-            //})
+            ProductsService.saveProduct($scope.editProduct, function () {
+              $scope.showEditProduct = false;
+              $scope.disabledSaveChangeButton = false;
+            })
           } else {
             $scope.triedToSaveProduct = true;
           }
         };
 
         $scope.deleteProduct = function () {
-          //ProductsService.deleteProduct($scope.product.versionedId.id)
+          ProductsService.deleteProduct($scope.product.versionedId.id)
         };
 
       }]);

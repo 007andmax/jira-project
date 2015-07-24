@@ -8,7 +8,6 @@
            tooltip="ADD Category" tooltip-placement="top" data-toggle="dropdown"><span
           class="icns icn icn-add-category "></span></a>
 
-
         <div class="dropdown-menu add-company-dropdown">
           <form name="newCategoryNameForm">
             <div class="clearfix">
@@ -22,7 +21,7 @@
                 <input type="text" class="form-control form-control-round dropdown-toggle"
                        placeholder="Category name..."
                        ng-model="newCategoryName" name="newCategoryName" ng-required="true" ng-maxlength="100"
-                       ng-change="isUniqueCategoryName(newCategoryNameForm)">
+                       is-uniq-validation validation-func="isUniqueCategoryName">
 
                 <div class="label-add-btn" ng-click="addCategory(newCategoryNameForm)"><a href="javascript:void(0)"
                                                                                           class=" btn input-btn-cr btn-green disabled   btn-add-more pull-left "><span
@@ -31,7 +30,6 @@
             </div>
           </form>
         </div>
-
       </div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
@@ -53,7 +51,7 @@
             <form name="editCategoryNameForm">
               <a href='javascript:void(0)' ng-click="toggleProducts()">
                 <span class="name" ng-if="!showEditCategoryName">{{ category.name }}</span>
-                <!--ng-if="!showEditCategoryName"-->
+                <span class="amount pull-right">{{ category.productsAmount }} items</span>
                 <div ng-if="showEditCategoryName"
                      ng-class="{error: isShowingErrors(editCategoryNameForm, 'editCategoryName')}">
                   <div ng-messages="editCategoryNameForm.editCategoryName.$error"
@@ -64,20 +62,19 @@
                   </div>
                   <input type="text" class="form-control" ng-model="editCategoryName.name" style="width: 400px"
                          name="editCategoryName" ng-required="true" ng-maxlength="100"
-                         ng-change="isUniqueEditCategoryName(editCategoryNameForm)"/>
+                         is-uniq-validation validation-func="isUniqueCategoryName"/>
+
                   <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"
                      ng-click="saveEditCategoryName()" ng-disabled="showEditCategoryNameButton">Save Changes</a>
                   <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"
                      ng-click="cancelEditCategoryName()">Cancel</a>
                 </div>
-                <span class="amount pull-right">{{ category.productsAmount }} items</span>
-
                 <div class="clearfix"></div>
               </a>
             </form>
 
             <ul class="invoices recurring  products" products-ts-slider>
-              <div ng-if="showProducts">
+              <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
                 <li class="head clearfix">
                   <div class="">
                     <div class="col-1">CODE NO.</div>
@@ -98,7 +95,7 @@
                                                              data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
                                                              data-original-title="" title=""></span></div>
                       </div>
-                      <div class="col-3 normal">G Tech Suppliers</div>
+                      <div class="col-3 normal">{{ product.vendor.name }}</div>
                       <div class="col-4 normal">{{ product.cost | currency }}</div>
 
                       <div class="col-5 normal">{{ product.sale | currency }}</div>
@@ -131,15 +128,24 @@
                           </div>
                         </div>
                         <div class="col-3 normal">
-                          <div class="col-wrapper">
+                          <div class="col-wrapper"
+                               ng-class="{error: isShowingErrors(editProductForm, 'editProductVendor')}">
+                            <div ng-messages="editProductForm.editProductVendor.$error"
+                                 ng-if="isShowingErrors(editProductForm, 'editProductVendor')">
+                              <div class="qt-error-msg" ng-message="required">company is required.</div>
+                              <div class="qt-error-msg" ng-message="parse">Please select the company.</div>
+                            </div>
                             <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
-                                   data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier"
-                                   value="Creative Computers">
-                            <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)"
-                                                         ng-repeat="vendor in vendors">
-                                {{ vendor.name }}</a></li>
-                            </ul>
+                                   placeholder="Vendor/Supplier"
+                                   ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
+                                   typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
+                                   typeahead-min-length="0" typeahead-editable="false"
+                                   qt-typeahead-show-on-focus ng-trim="false">
+                            <!--<ul class="dropdown-menu dropdown-company scroll-pane" role="menu">-->
+                            <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)"-->
+                            <!--ng-repeat="vendor in vendors">-->
+                            <!--{{ vendor.name }}</a></li>-->
+                            <!--</ul>-->
                           </div>
                         </div>
                         <div class="col-4 normal">
@@ -194,7 +200,8 @@
                   </form>
                 </div>
                 <form name="createProductForm">
-                  <li class="clearfix no-border add-new" id="createNewProduct" ng-if="showCreateProduct">
+                  <li class="clearfix no-border add-new" id="createNewProduct" ng-if="showCreateProduct"
+                      id="createNewProduct">
                     <div class="hover">
                       <div class="col-1">1655</div>
                       <div class="col-2 normal">
@@ -212,14 +219,21 @@
                         </div>
                       </div>
                       <div class="col-3 normal">
-                        <div class="col-wrapper">
+                        <div class="col-wrapper"
+                             ng-class="{error: isShowingErrors(createProductForm, 'createProductVendor')}">
+                          <div ng-messages="createProductForm.createProductVendor.$error"
+                               ng-if="isShowingErrors(createProductForm, 'createProductVendor')">
+                            <div class="qt-error-msg" ng-message="required">company is required.</div>
+                            <div class="qt-error-msg" ng-message="parse">Please select the company.</div>
+                          </div>
                           <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
-                                 data-toggle="dropdown" aria-expanded="true" placeholder="Vendor/Supplier">
-                          <ul class="dropdown-menu dropdown-company scroll-pane" role="menu">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)"
-                                                       ng-repeat="vendor in vendors">
-                              {{ vendor.name }}</a></li>
-                          </ul>
+                                 placeholder="Vendor/Supplier" ng-model="createProduct.vendor"
+                                 name="createProductVendor" ng-required="true"
+                                 typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
+                                 typeahead-min-length="0" typeahead-editable="false"
+                                 qt-typeahead-show-on-focus ng-trim="false">
+
+
                         </div>
                       </div>
                       <div class="col-4 normal">
@@ -264,7 +278,7 @@
                         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
                            ng-click="cancelCreateProduct()">Cancel</a>
                         <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-                           ng-click="createNewProduct(createProductForm)"
+                           ng-click="createNewProduct(createProductForm, category.id)"
                            ng-disabled="disabledCreateProductButton">Create</a>
                       </div>
                     </div>
@@ -280,8 +294,8 @@
             </ul>
 
             <div class="actions pull-right">
-              <button class="btn btn-sr btn-create-in btn-scooter pull-left" ng-click="addProduct(); toggleProducts()"
-                      tooltip="Add Product" tooltip-placement="top"><span
+              <button class="btn btn-sr btn-create-in btn-scooter pull-left" ng-click="toggleProducts(); addProduct()"
+                      tooltip="Add Product" tooltip-placement="top" scroll-to-form><span
                 class="icns icn wt-icn-add-product "></span></button>
               <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
                  tooltip="Delete Category" tooltip-placement="top" ng-click="deleteCategory()"></a>
