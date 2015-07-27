@@ -14,7 +14,7 @@
                   <div class="form-group">
                     <input type="email" class="form-control form-control-search form-control-dropdown-input"
                            placeholder="Search company...">
-                    <a href="#" class="close icn-remove-token" tabindex="-1"></a>
+                    <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
                   </div>
                 </div>
               </div>
@@ -115,71 +115,106 @@
                   <div class="col-5">RATE</div>
                 </div>
               </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1">
-                    <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                      <input type="checkbox" checked="">
-                      <span class="control-indicator"></span>
-                    </label></div>
-                    <span class="name">Remote Service</span></div>
-                  <div class="col-2 normal">30 minutes</div>
+              <div ng-controller="quicktech.core.services.companyServiceCtrl">
+                <!--ng-repeat="service in services"-->
+                <li class="clearfix" ng-if="!showEditService">
+                  <div class="hover">
+                    <div class="col-1">
+                      <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                        <input type="checkbox" checked="">
+                        <span class="control-indicator"></span>
+                      </label></div>
+                      <span class="name">Remote Service</span></div>
+                    <div class="col-2 normal">30 minutes</div>
 
 
-                  <div class="col-5 normal">$90</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Service"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Service"></a>
+                    <div class="col-5 normal">$90</div>
+                    <div class="sub-actions pull-left">
+                      <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
+                         data-toggle="tooltip"
+                         data-placement="top" title="" data-original-title="Delete Service"
+                         ng-click="deleteService()"></a>
+                      <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
+                         data-placement="top" title="" data-original-title="Edit Service" ng-click="editService()"></a>
+
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </li>
+                <!--<li class="clearfix">-->
+                <!--<div class="hover">-->
+                <!--<div class="col-1">-->
+                <!--<div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">-->
+                <!--<input type="checkbox" checked="">-->
+                <!--<span class="control-indicator"></span>-->
+                <!--</label></div>-->
+                <!--<span class="name">Onsite</span></div>-->
+                <!--<div class="col-2 normal">3 hours</div>-->
+
+
+                <!--<div class="col-5 normal">$250</div>-->
+                <!--<div class="sub-actions pull-left">-->
+                <!--<a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"-->
+                <!--data-placement="top" title="" data-original-title="Delete Service"></a>-->
+                <!--<a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"-->
+                <!--data-placement="top" title="" data-original-title="Edit Service"></a>-->
+                <!--</div>-->
+                <!--<div class="clearfix"></div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--<li class="clearfix no-border">-->
+                <!--<div class="hover">-->
+                <!--<div class="col-1">-->
+                <!--<div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">-->
+                <!--<input type="checkbox">-->
+                <!--<span class="control-indicator"></span>-->
+                <!--</label></div>-->
+                <!--<span class="name">Tasks Scheduling</span></div>-->
+                <!--<div class="col-2 normal">30 minutes</div>-->
+
+
+                <!--<div class="col-5 normal">$300</div>-->
+                <!--<div class="sub-actions pull-left">-->
+                <!--<a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"-->
+                <!--data-placement="top" title="" data-original-title="Delete Service"></a>-->
+                <!--<a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"-->
+                <!--data-placement="top" title="" data-original-title="Edit Service"></a>-->
+                <!--</div>-->
+                <!--<div class="clearfix"></div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <li class="clearfix no-border add-new " ng-if="showEditService">
+                  <div class="hover">
+                    <div class="col-1">
+                      <div class="col-wrapper one">
+                        <input type="text" class="form-control" placeholder="Type" value="">
+                      </div>
+                    </div>
+                    <div class="col-2 normal">
+                      <div class="col-wrapper one">
+                        <input type="text" class="form-control" placeholder="Min. Time Slice" value="">
+                      </div>
+                    </div>
+
+
+                    <div class="col-5 normal">
+                      <div class="col-wrapper">
+                        <input type="text" class="form-control" placeholder="Price" value="">
+                      </div>
+                    </div>
 
                   </div>
-                  <div class="clearfix"></div>
-                </div>
-              </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1">
-                    <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                      <input type="checkbox" checked="">
-                      <span class="control-indicator"></span>
-                    </label></div>
-                    <span class="name">Onsite</span></div>
-                  <div class="col-2 normal">3 hours</div>
-
-
-                  <div class="col-5 normal">$250</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Service"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Service"></a>
+                  <div class="add-more  new clearfix">
+                    <div class="add-table-actions pull-right">
+                      <a href="javascript:void(0)" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+                         ng-click="cancelEditService()">Cancel</a>
+                      <a href="javascript:void(0)" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+                         ng-click="saveEditService()">Save Changes</a>
+                    </div>
                   </div>
-                  <div class="clearfix"></div>
-                </div>
-              </li>
-              <li class="clearfix no-border">
-                <div class="hover">
-                  <div class="col-1">
-                    <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                      <input type="checkbox">
-                      <span class="control-indicator"></span>
-                    </label></div>
-                    <span class="name">Tasks Scheduling</span></div>
-                  <div class="col-2 normal">30 minutes</div>
-
-
-                  <div class="col-5 normal">$300</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Service"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Service"></a>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </li>
-              <li class="clearfix no-border add-new ">
+                </li>
+              </div>
+              <li class="clearfix no-border add-new" ng-if="showCreateService">
                 <div class="hover">
                   <div class="col-1">
                     <div class="col-wrapper one">
@@ -202,14 +237,17 @@
                 </div>
                 <div class="add-more  new clearfix">
                   <div class="add-table-actions pull-right">
-                    <a href="#" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left">Cancel</a>
-                    <a href="#" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left">Create</a>
+                    <a href="javascript:void(0)" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+                       ng-click="cancelCreateService()">Cancel</a>
+                    <a href="javascript:void(0)" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+                       ng-click="saveCreateService()">Create</a>
                   </div>
                 </div>
               </li>
-              <li class="clearfix add-product-wrapper">
-                <button id="" class="btn btn-sr btn-create-in btn-scooter  btn-create-service  pull-right disabled "
-                        data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Service"><span
+              <li class="clearfix add-product-wrapper" ng-if="!showCreateService">
+                <button id="" class="btn btn-sr btn-create-in btn-scooter  btn-create-service  pull-right"
+                        data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Service"
+                        ng-click="createService()"><span
                   class="icns icn wt-icn-add-service "></span></button>
               </li>
 
@@ -224,29 +262,16 @@
 
 
           </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Global Media</span> <span class="amount pull-right">2 services</span>
+          <li qt-toggle-slider ng-repeat="company in companies" ng-controller="quicktech.core.services.companyCtrl">
+            <a href='javascript:void(0)' qt-ts-toggler>
+              <span class="name">{{ company.name }}</span>
+              <span class="amount pull-right">{{ serviceData.length }} services</span>
 
             <div class="clearfix"></div>
 
           </a>
 
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Active Information Systems</span> <span
-            class="amount pull-right">3 services</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Martini</span> <span
-            class="amount pull-right">2 services</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-            <ul class="invoices recurring  services no-hover   " qt-ts-slider>
+            <ul class="invoices recurring  services no-hover" qt-ts-slider>
               <li class="head clearfix">
                 <div class="">
                   <div class="col-1">TYPE</div>
@@ -254,91 +279,97 @@
                   <div class="col-5">RATE</div>
                 </div>
               </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1"><span class="name">Remote Service</span></div>
-                  <div class="col-2 normal">30 minutes</div>
+              <div ng-repeat="service in serviceData" ng-controller="quicktech.core.services.serviceCtrl">
+                <li class="clearfix" ng-if="!showEditService">
+                  <div class="hover">
+                    <div class="col-1"><span class="name">{{ service.name }}</span></div>
+                    <div class="col-2 normal">{{ service.timeBlock | timeFilter }}</div>
 
 
-                  <div class="col-5 normal">$150</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Service"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Service"></a>
+                    <div class="col-5 normal">{{ service.rate | currency }}</div>
+                    <div class="sub-actions pull-left">
+                      <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
+                         data-toggle="tooltip"
+                         data-placement="top" title="" data-original-title="Delete Service"
+                         ng-click="deleteCompanyService()"></a>
+                      <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
+                         data-placement="top" title="" data-original-title="Edit Service"
+                         ng-click="editCompanyService()"></a>
+                    </div>
+                    <div class="clearfix"></div>
                   </div>
-                  <div class="clearfix"></div>
-                </div>
-              </li>
-              <li class="clearfix">
-                <div class="hover">
-                  <div class="col-1"><span class="name">Onsite</span></div>
-                  <div class="col-2 normal">3 hours</div>
+                </li>
+                <li class="clearfix no-border add-new edit-form last" ng-if="showEditService">
+                  <div class="hover">
+                    <div class="col-1">
+                      <div class="col-wrapper one">
+                        <input type="text" class="form-control" readonly="" placeholder="Type" ng-model="service.name">
+                      </div>
+                    </div>
+                    <div class="col-2 normal">
+                      <div class="col-wrapper one">
+                        <input type="text" class="form-control" readonly="" placeholder="Min. Time Slice"
+                               ng-model="service.timeBlock">
+                      </div>
+                    </div>
 
 
-                  <div class="col-5 normal">$600</div>
-                  <div class="sub-actions pull-left">
-                    <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Delete Service"></a>
-                    <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" data-toggle="tooltip"
-                       data-placement="top" title="" data-original-title="Edit Service"></a>
+                    <div class="col-5 normal">
+                      <div class="col-wrapper">
+                        <input type="text" class="form-control" placeholder="Rate" ng-model="service.rate">
+                      </div>
+                    </div>
+
                   </div>
-                  <div class="clearfix"></div>
-                </div>
-              </li>
-              <li class="clearfix no-border add-new edit-form last">
+                  <div class="add-more  new clearfix">
+                    <div class="add-table-actions pull-right">
+                      <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+                         ng-click="cancelEditCompanyService()">Cancel</a>
+                      <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+                         ng-click="saveEditCompanyService()">Save Changes</a>
+                    </div>
+                  </div>
+                </li>
+              </div>
+              <li class="clearfix no-border add-new" ng-if="showCreateCompanyService">
                 <div class="hover">
                   <div class="col-1">
                     <div class="col-wrapper one">
-                      <input type="text" class="form-control" readonly="" placeholder="Type" value="Onsite">
+                      <input type="text" class="form-control" placeholder="Type" value="">
                     </div>
                   </div>
                   <div class="col-2 normal">
                     <div class="col-wrapper one">
-                      <input type="text" class="form-control" readonly="" placeholder="Min. Time Slice" value="3 hours">
+                      <input type="text" class="form-control" placeholder="Min. Time Slice" value="">
                     </div>
                   </div>
 
 
                   <div class="col-5 normal">
                     <div class="col-wrapper">
-                      <input type="text" class="form-control" placeholder="Rate" value="$90">
+                      <input type="text" class="form-control" placeholder="Price" value="">
                     </div>
                   </div>
 
                 </div>
                 <div class="add-more  new clearfix">
                   <div class="add-table-actions pull-right">
-                    <a href="#" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left">Cancel</a>
-                    <a href="#" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left">Save Changes</a>
+                    <a href="javascript:void(0)" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+                       ng-click="cancelCreateCompanyService()">Cancel</a>
+                    <a href="javascript:void(0)" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+                       ng-click="saveCreateCompanyService()">Create</a>
                   </div>
                 </div>
               </li>
-              <li class="clearfix add-product-wrapper">
-                <button id="" class="btn btn-sr btn-create-in btn-scooter  btn-create-service disabled pull-right"
-                        data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Service"><span
+              <li class="clearfix add-product-wrapper" ng-if="!showCreateCompanyService">
+                <button class="btn btn-sr btn-create-in btn-scooter  btn-create-service pull-right"
+                        data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Service"
+                        ng-click="createCompanyService()"><span
                   class="icns icn wt-icn-add-service "></span></button>
               </li>
             </ul>
-
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Comedy & Cabaret Group</span> <span
-            class="amount pull-right">1 services</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
-          </li>
-          <li qt-toggle-slider><a href='javascript:void(0)' qt-ts-toggler><span class="name">Sierra Dental Care</span> <span class="amount pull-right">2 services</span>
-
-            <div class="clearfix"></div>
-
-          </a>
-
           </li>
         </ul>
-
       </div>
       <div role="tabpanel" class="tab-pane" id="invoice-number">
 
