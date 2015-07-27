@@ -34,7 +34,7 @@
 
             $timeout(function () {
               $scope.showProducts = false;
-            }, 0);
+            }, 200);
           } else {
             $scope.showProducts = true;
           }

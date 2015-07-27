@@ -1,0 +1,35 @@
+<ul class="invoices recurring services" qt-ts-slider>
+  <li class="head clearfix">
+    <div class="">
+      <div class="col-1">TYPE</div>
+      <div class="col-2">MIN. TIME SLICE</div>
+      <div class="col-5">RATE</div>
+    </div>
+  </li>
+  <li class="clearfix" ng-repeat="service in services" ng-controller="quicktech.core.services.serviceCtrl"
+      ng-class="{'no-border': isEditService, 'add-new': isEditService}">
+    <div class="hover" ng-if="!isEditService">
+      <div class="col-1">
+        <div class="ui-checkbox ui-checkbox-warning pull-left">
+          <label class="control checkbox">
+            <input type="checkbox" checked="" ng-if="showCheckboxes" ng-model="serviceChecked"
+                   ng-change="toggleCheckbox(serviceChecked, service)">
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+        <span class="name">{{ service.name }}</span></div>
+      <div class="col-2 normal">{{ service.timeBlock | timeFilter }}</div>
+
+      <div class="col-5 normal">${{ service.rate }}</div>
+
+      <div class="sub-actions pull-left">
+        <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" tooltip-placement="top"
+           tooltip="Delete Service" ng-click="deleteService()"></a>
+        <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" tooltip-placement="top"
+           tooltip="Edit Service" ng-click="showEditServiceForm()"></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div ng-if="isEditService" ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+  </li>
+</ul>
