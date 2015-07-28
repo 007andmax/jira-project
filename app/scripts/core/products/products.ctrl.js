@@ -12,23 +12,20 @@
 
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
 
-
-        //$scope.openCreateCategory = function() {
-        //  $scope.showCreateCategory = true;
-        //};
-
         $scope.status = {
           isopen: false
         };
 
-        //$scope.newCategory = {};
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
+        };
 
         $scope.addCategory = function (form) {
           if (form.$valid) {
             ProductsService.saveCategory($scope.newCategory, function () {
               $scope.status.isopen = false;
               $scope.newCategory = {};
-              form.$setPristine()
+              form.$setPristine();
             });
           } else {
             $scope.triedToSaveProduct = true;
@@ -39,6 +36,16 @@
           var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, modelId || '', CompaniesService.getCurrentCompany().id, function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
+        };
+
+        $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {
+          var uniqueNameCount = 0;
+          for (var i = 0; i < $scope.categories.length; i++) {
+            if ((ngModelCtrl.$viewValue === $scope.categories[i].name) && (modelId !== $scope.categories[i].id)) {
+              uniqueNameCount++;
+            }
+          }
+          ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
         };
 
       }]);
