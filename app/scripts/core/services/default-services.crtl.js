@@ -8,10 +8,6 @@
 
         $scope.showCheckboxes = true;
 
-        $scope.toggleCheckbox = function (value, service) {
-          console.log(value, service);
-        };
-
         $scope.showCreateServiceForm = function () {
           $scope.showCreateService = true;
         };

@@ -1,10 +1,12 @@
 <div class="content-body receipt">
   <div role="tabpanel">
     <div class="tabs-topbar">
-      <div class="dropdown pull-right service-move-to">
+      <div class="dropdown pull-right service-move-to" ng-controller="quicktech.core.services.servicesMovingCtrl">
         <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray    dropdown-toggle tooltip-dp"
-           data-placement="top" title="" data-original-title="move service(s) to..." data-toggle="dropdown"><span
-          class="icns icn icn-move-services "></span></a>
+           data-placement="top" title="" data-original-title="move service(s) to..." data-toggle="dropdown"
+           ng-click="generateMovementData()" qt-hide-dropdown="hideMovementDropdown">
+          <span class="icns icn icn-move-services "></span>
+        </a>
 
         <div class="dropdown-menu assign-ticket-menu" stop-propagation="click">
           <div class=" assign-ticket service-move-to-menu">
@@ -25,9 +27,10 @@
                   <li ng-repeat="company in companies | filter : searchCompany | orderBy: 'name'">
 
                     <div class="clearfix"><label class="control checkbox pull-left">
-                      <input type="checkbox">
-                      <span class="control-indicator"></span>
-                      <!--intermediate-->
+                      <input type="checkbox" ng-model="movementStates[company.id].checked"
+                             ng-change="updateMovementState(company.id)">
+                      <span class="control-indicator"
+                            ng-class="{ intermediate: movementStates[company.id].hasPartOfSelectedServices }"></span>
                     </label>
                       {{ company.name }}
                     </div>
@@ -35,7 +38,9 @@
                 </ul>
               </div>
               <div class="form-group btm-btn">
-                <button type="button" class="btn btn-scooter">Move</button>
+                <button type="button" class="btn btn-scooter" ng-click="moveServices()" ng-disabled="disableMoveButton">
+                  Move
+                </button>
               </div>
             </div>
           </div>
@@ -84,7 +89,8 @@
 
           </li>
           <li qt-toggle-slider ng-repeat="(companyId, services) in servicesData"
-              ng-controller="quicktech.core.services.companyCtrl">
+              ng-controller="quicktech.core.services.companyCtrl"
+              ng-if="companyId != 'default' && companyId != 'staticCopy'">
             <a href='javascript:void(0)' qt-ts-toggler>
               <span class="name">{{ company.name }}</span>
               <span class="amount pull-right">{{ services.length }} services</span>
