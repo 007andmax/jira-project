@@ -1,0 +1,87 @@
+<form name="editProductForm" ng-controller="quicktech.core.products.editProductCtrl">
+  <li class="clearfix no-border add-new edit-form">
+    <div class="hover">
+      <div class="col-1">{{ product.code }}</div>
+      <div class="col-2 normal">
+        <div class="col-wrapper one"
+             ng-class="{error: isShowingErrors(editProductForm, 'editProductName')}">
+          <div ng-messages="editProductForm.editProductName.$error"
+               ng-if="isShowingErrors(editProductForm, 'editProductName')">
+            <div class="qt-error-msg" ng-message="required">Name is required.</div>
+            <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+            <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
+          </div>
+          <input type="text" class="form-control" placeholder="Product" name="editProductName"
+                 ng-required="true" ng-model="editProduct.name" ng-maxlength="100"
+                 is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
+        </div>
+      </div>
+
+      <div class="col-3 normal">
+        <div class="col-wrapper"
+             ng-class="{error: isShowingErrors(editProductForm, 'editProductVendor')}">
+          <div ng-messages="editProductForm.editProductVendor.$error"
+               ng-if="isShowingErrors(editProductForm, 'editProductVendor')">
+            <div class="qt-error-msg" ng-message="required">Vendor is required.</div>
+            <div class="qt-error-msg" ng-message="parse">Please select the vendor.</div>
+          </div>
+          <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
+                 placeholder="Vendor/Supplier"
+                 ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
+                 typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
+                 typeahead-min-length="0" typeahead-editable="false"
+                 qt-typeahead-show-on-focus ng-trim="false">
+        </div>
+      </div>
+
+      <div class="col-4 normal">
+        <div class="col-wrapper"
+             ng-class="{error: isShowingErrors(editProductForm, 'editProductCost')}">
+          <div ng-messages="editProductForm.editProductCost.$error"
+               ng-if="isShowingErrors(editProductForm, 'editProductCost')">
+            <div class="qt-error-msg" ng-message="required">Cost is required.</div>
+          </div>
+          <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
+                 name="editProductCost"
+                 hard-reset-pattern="numberPattern" ng-required="true">
+        </div>
+      </div>
+
+      <div class="col-5 normal">
+        <div class="col-wrapper"
+             ng-class="{error: isShowingErrors(editProductForm, 'editProductSale')}">
+          <div ng-messages="editProductForm.editProductSale.$error"
+               ng-if="isShowingErrors(editProductForm, 'editProductSale')">
+            <div class="qt-error-msg" ng-message="required">Sale is required.</div>
+          </div>
+          <input type="text" class="form-control" placeholder="Sale Price" ng-model="editProduct.sale"
+                 name="editProductSale"
+                 hard-reset-pattern="numberPattern" ng-required="true">
+        </div>
+      </div>
+
+      <div class="col-6 normal description">
+        <div class="col-wrapper"
+             ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
+          <div ng-messages="editProductForm.editProductDescription.$error"
+               ng-if="isShowingErrors(editProductForm, 'editProductDescription')">
+            <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+          </div>
+          <input type="text" class="form-control" placeholder="Description"
+                 ng-model="editProduct.description"
+                 ng-maxlength="500" name="editProductDescription">
+        </div>
+      </div>
+    </div>
+
+    <div class="add-more  new clearfix">
+      <div class="add-table-actions pull-right">
+        <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+           ng-click="cancelEditProduct()">Cancel</a>
+        <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+           ng-click="saveChangeProduct(editProductForm)"
+           ng-disabled="disabledSaveChangeButton">Save Changes</a>
+      </div>
+    </div>
+  </li>
+</form>

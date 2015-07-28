@@ -12,56 +12,40 @@
 
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
 
+        $scope.status = {
+          isopen: false
+        };
+
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.addProduct = function () {
-          $scope.showCreateProduct = true;
-          $scope.createProduct = {};
-          //$location.hash('createNewProduct');
-          //$anchorScroll();
-        };
-
-        $scope.cancelCreateProduct = function () {
-          $scope.showCreateProduct = false;
-        };
-
-        $scope.createNewProduct = function (form, categoryId) {
-          $scope.createProduct.category = {id: categoryId};
-          if (form.$valid) {
-            $scope.disabledCreateProductButton = true;
-            delete $scope.createProduct.vendor.name;
-            ProductsService.saveProduct($scope.createProduct, function () {
-              $scope.showCreateProduct = false;
-              $scope.disabledCreateProductButton = false;
-            });
-          } else {
-            console.log("tried to save product = true");
-            $scope.triedToSaveProduct = true;
-          }
-        };
-
         $scope.addCategory = function (form) {
           if (form.$valid) {
-            ProductsService.saveCategory({name: $scope.newCategoryName});
+            ProductsService.saveCategory($scope.newCategory, function () {
+              $scope.status.isopen = false;
+              $scope.newCategory = {};
+              form.$setPristine();
+            });
           } else {
             $scope.triedToSaveProduct = true;
           }
         };
 
-        $scope.isUniqueCategoryName = function (ngModelCtrl) {
+        $scope.validateProductName = function (ngModelCtrl, modelId) {
+          var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, modelId || '', CompaniesService.getCurrentCompany().id, function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
+        };
+
+        $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {
           var uniqueNameCount = 0;
           for (var i = 0; i < $scope.categories.length; i++) {
-            if (ngModelCtrl.$viewValue === $scope.categories[i].name) {
-              uniqueNameCount++
+            if ((ngModelCtrl.$viewValue === $scope.categories[i].name) && (modelId !== $scope.categories[i].id)) {
+              uniqueNameCount++;
             }
           }
-          if (uniqueNameCount >= 1) {
-            ngModelCtrl.$setValidity('unique', false);
-          } else {
-            ngModelCtrl.$setValidity('unique', true);
-          }
+          ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
         };
 
       }]);

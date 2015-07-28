@@ -4,23 +4,23 @@
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.categoryCtrl',
     ['$scope', 'ProductsService', '$timeout', '$location', '$anchorScroll', 'CompaniesService',
-      function ($scope, ProductsService, $timeout, $location, $anchorScroll, CompaniesService) {
+      function ($scope, ProductsService, $timeout) {
 
-        $scope.editCategory = function () {
-          $scope.showEditCategoryName = true;
-          $scope.editCategoryName = $scope.category.staticCopy();
+        $scope.openEditCategory = function () {
+          $scope.isEditCategory = true;
+          $scope.editCategory = $scope.category.staticCopy();
         };
 
-        $scope.saveEditCategoryName = function () {
-          $scope.showEditCategoryNamebutton = true;
-          ProductsService.saveCategory($scope.editCategoryName, function () {
-            $scope.showEditCategoryNameButton = false;
-            $scope.showEditCategoryName = false;
+        $scope.saveEditCategory = function () {
+          $scope.disabledCreateButton = true;
+          ProductsService.saveCategory($scope.editCategory, function () {
+            $scope.disabledCreateButton = false;
+            $scope.isEditCategory = false;
           });
         };
 
-        $scope.cancelEditCategoryName = function () {
-          $scope.showEditCategoryName = false;
+        $scope.cancelEditCategory = function () {
+          $scope.isEditCategory = false;
         };
 
         $scope.deleteCategory = function () {
@@ -40,11 +40,13 @@
           }
         };
 
-        $scope.validateProductName = function (ngModelCtrl) {
-          var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, '', CompaniesService.getCurrentCompany().id, function () {
-            ngModelCtrl.$setValidity('unique', validationResult.value);
-          });
+        $scope.addProduct = function () {
+          $scope.showCreateProduct = true;
         };
+
+        $scope.$on('cancelCreateProduct', function () {
+          $scope.showCreateProduct = false;
+        });
 
       }]);
 

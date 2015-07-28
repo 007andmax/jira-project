@@ -10,7 +10,6 @@
           $scope.$emit('toggleProducts');
         }, true);
 
-
       }]);
 
 }());
