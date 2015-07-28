@@ -2,78 +2,34 @@
   <div role="tabpanel">
     <div class="tabs-topbar">
       <div class="dropdown pull-right service-move-to">
-        <a href="javascript:void(0)" id="" class="btn btn-sr btn-create-company  btn-gray    dropdown-toggle tooltip-dp"
+        <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray    dropdown-toggle tooltip-dp"
            data-placement="top" title="" data-original-title="move service(s) to..." data-toggle="dropdown"><span
           class="icns icn icn-move-services "></span></a>
 
-        <div class="dropdown-menu assign-ticket-menu">
+        <div class="dropdown-menu assign-ticket-menu" stop-propagation="click">
           <div class=" assign-ticket service-move-to-menu">
             <div class="assign-ticket-content">
               <div class="assign-ticket-header">
                 <div class="clearfix">
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-search form-control-dropdown-input"
-                           placeholder="Search company...">
+                    <input class="form-control form-control-search form-control-dropdown-input"
+                           placeholder="Search company..." ng-model="searchCompany.name">
                     <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
                   </div>
                 </div>
               </div>
-              <div class="scroll-pane">
+              <div move-services-scroll style="width: 300px !important; max-height: 350px; height: 350px;">
 
-                <ul class="users-list">
+                <ul class="users-list" style="padding-top: 0px;">
 
-                  <li>
-
-                    <div class="clearfix"><label class="control checkbox pull-left">
-                      <input type="checkbox">
-                      <span class="control-indicator"></span>
-                    </label>
-                      Global Media
-                    </div>
-                  </li>
-                  <li>
-
-                    <div class="clearfix"><label class="control checkbox pull-left">
-                      <input type="checkbox" checked="">
-                      <span class="control-indicator"></span>
-                    </label>
-                      Active Information Systems
-                    </div>
-                  </li>
-                  <li>
-
-                    <div class="clearfix"><label class="control checkbox pull-left">
-                      <input type="checkbox" checked="">
-                      <span class="control-indicator intermediate"></span>
-                    </label>
-                      Martini
-                    </div>
-                  </li>
-                  <li>
+                  <li ng-repeat="company in companies | filter : searchCompany | orderBy: 'name'">
 
                     <div class="clearfix"><label class="control checkbox pull-left">
                       <input type="checkbox">
                       <span class="control-indicator"></span>
+                      <!--intermediate-->
                     </label>
-                      Comedy & Cabaret Group
-                    </div>
-                  </li>
-                  <li>
-
-                    <div class="clearfix"><label class="control checkbox pull-left">
-                      <input type="checkbox">
-                      <span class="control-indicator"></span>
-                    </label>
-                      Sierra Dental Care
-                    </div>
-                  </li>
-                  <li>
-
-                    <div class="clearfix"><label class="control checkbox pull-left">
-                      <input type="checkbox" checked="">
-                      <span class="control-indicator"></span>
-                    </label>
-                      Global Media
+                      {{ company.name }}
                     </div>
                   </li>
                 </ul>
@@ -136,7 +92,7 @@
               <div class="clearfix"></div>
             </a>
 
-              <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
+            <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
           </li>
         </ul>
       </div>

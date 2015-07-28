@@ -24,7 +24,7 @@
       <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
          ng-click="cancelEditService()">Cancel</a>
       <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-         ng-click="saveEditService()">Save Changes</a>
+         ng-click="saveEditService()">{{ editService.versionedId ? 'Save Changes' : 'Create' }}</a>
     </div>
   </div>
 </div>
