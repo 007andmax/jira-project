@@ -41,7 +41,7 @@
         $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {
           var uniqueNameCount = 0;
           for (var i = 0; i < $scope.categories.length; i++) {
-            if ((ngModelCtrl.$viewValue === $scope.categories[i].name) && (modelId !== $scope.categories[i].id)) {
+            if ((ngModelCtrl.$viewValue.toLowerCase() === $scope.categories[i].name.toLowerCase()) && (modelId !== $scope.categories[i].id)) {
               uniqueNameCount++;
             }
           }

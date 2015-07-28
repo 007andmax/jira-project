@@ -7,7 +7,7 @@
       function ($scope, ServicesService) {
 
         $scope.deleteService = function () {
-          console.log("delete service");
+          ServicesService.deleteService($scope.service.versionedId.id);
         };
 
         $scope.showEditServiceForm = function () {

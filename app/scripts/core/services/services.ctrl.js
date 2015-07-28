@@ -3,26 +3,14 @@
 (function () {
 
   angular.module('quicktech.core.services').controller('quicktech.core.services.servicesCtrl',
-    ['$scope', 'ServicesService', 'Utils',
-      function ($scope, ServicesService, Utils) {
+    ['$scope', 'ServicesService', 'CompaniesService',
+      function ($scope, ServicesService, CompaniesService) {
+
         $scope.servicesData = ServicesService.getServicesData($scope);
 
-        $scope.checkedServices = {};
+        $scope.companies = CompaniesService.getClientCompanies();
 
-        $scope.getCheckedDefaultServices = function () {
-          var checkedDefaultServices = [];
-
-          //for the case when checked service had been deleted
-          var defaultServices = $scope.servicesData['default'];
-
-          for (var serviceId in $scope.checkedServices) {
-            if ($scope.checkedServices[serviceId] && Utils.findById(defaultServices, serviceId)) {
-              checkedDefaultServices.push(serviceId)
-            }
-          }
-
-          return checkedDefaultServices;
-        }
+        $scope.numberPattern = /^\+?[0-9]{0,19}$/;
 
       }]);
 

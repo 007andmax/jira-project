@@ -80,7 +80,7 @@
            ng-click="cancelEditProduct()">Cancel</a>
         <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
            ng-click="saveChangeProduct(editProductForm)"
-           ng-disabled="disabledSaveChangeButton">Save Changes</a>
+           ng-disabled="disabledSaveChangeButton">{{ product ? 'Save Changes' : 'Create' }}</a>
       </div>
     </div>
   </li>
