@@ -26,7 +26,6 @@
           if (form.$valid) {
             $scope.disabledSaveButton = true;
             $scope.editService.timeBlock = $scope.editService.timeBlock / 60;
-            console.log($scope.editService.timeBlock);
             ServicesService.save($scope.editService, function () {
               $scope.disabledSaveButton = false;
               $scope.$emit('cancelEditService');
