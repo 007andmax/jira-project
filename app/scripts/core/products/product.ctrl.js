@@ -3,18 +3,12 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productCtrl',
-    ['$scope', 'ProductsService',
-      function ($scope, ProductsService) {
+    ['$scope', 'ProductsService', 'CompaniesService',
+      function ($scope, ProductsService, CompaniesService) {
 
         $scope.openEditProduct = function () {
           $scope.showEditProduct = true;
-          $scope.editProduct = {
-            name: $scope.product.name,
-            cost: $scope.product.cost,
-            sale: $scope.product.sale,
-            vendor: $scope.product.vendor.name,
-            description: $scope.product.description
-          };
+          $scope.editProduct = $scope.product.staticCopy();
         };
 
         $scope.cancelEditProduct = function () {
@@ -22,7 +16,6 @@
         };
 
         $scope.saveChangeProduct = function (form) {
-          $scope.editProduct.versionedId = $scope.product.versionedId;
           $scope.editProduct.category = {
             id: $scope.category.id
           };
