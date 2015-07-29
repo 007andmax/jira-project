@@ -6,10 +6,9 @@
     ['$scope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, ProductsService, VendorsService, CompaniesService) {
 
-        $scope.numberPattern = /^\d?[0-9]{0,19}$/;
+        $scope.decimalNumberPattern = /^\d?[0-9]{0,17}\.?[0-9]{0,2}$/;
 
         $scope.categories = ProductsService.getCategories($scope);
-
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
 
         $scope.status = {

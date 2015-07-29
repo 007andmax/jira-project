@@ -11,7 +11,7 @@
             id: $scope.service.versionedId.id,
             name: $scope.service.name,
             rate: $scope.service.rate,
-            timeBlock: $scope.service.timeBlock * 60,
+            timeBlock: Math.round($scope.service.timeBlock * 60),
             taxable: true
           }
         } else {

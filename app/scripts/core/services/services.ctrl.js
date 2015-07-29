@@ -6,9 +6,11 @@
     ['$scope', 'ServicesService', 'Utils', 'CompaniesService',
       function ($scope, ServicesService, Utils, CompaniesService) {
 
-        $scope.servicesData = ServicesService.getServicesData($scope);
-
+        $scope.numberPattern = /^\d?[0-9]{0,19}$/;
+        $scope.decimalNumberPattern = /^\d?[0-9]{0,17}\.?[0-9]{0,2}$/;
         $scope.checkedServices = {};
+        $scope.companies = CompaniesService.getClientCompanies();
+        $scope.servicesData = ServicesService.getServicesData($scope);
 
         $scope.getCheckedDefaultServices = function () {
           var checkedDefaultServices = [];
@@ -24,10 +26,6 @@
 
           return checkedDefaultServices;
         };
-
-        $scope.companies = CompaniesService.getClientCompanies();
-
-        $scope.numberPattern = /^\d?[0-9]{0,19}$/;
 
       }]);
 

@@ -505,8 +505,9 @@ module.exports = function (grunt) {
     uglify: {
       build: {
         options: {
-          ASCIIOnly: true
-        },
+          ASCIIOnly: true,
+          ascii_only: true
+        }
       }
     },
 
