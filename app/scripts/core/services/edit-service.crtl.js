@@ -39,7 +39,7 @@
           return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.validateProductName = function (ngModelCtrl, modelId) {
+        $scope.validateServiceName = function (ngModelCtrl, modelId) {
           var uniqueNameCount = 0;
           for (var i = 0; i < $scope.services.length; i++) {
             if ((ngModelCtrl.$viewValue.toLowerCase() === $scope.services[i].name.toLowerCase()) && (modelId !== $scope.services[i].versionedId.id)) {
