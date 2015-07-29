@@ -502,15 +502,6 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    uglify: {
-      build: {
-        options: {
-          ASCIIOnly: true,
-          ascii_only: true
-        }
-      }
-    },
-
     imagemin: {
       dist: {
         files: [{
