@@ -9,14 +9,14 @@
             <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
           </div>
           <input type="text" class="form-control" placeholder="Type" ng-model="editService.name"
-                 name="editServiceName" ng-required="true" ng-disabled="!service.isDefault"
+                 name="editServiceName" ng-required="true" ng-disabled="!service.isDefault && service"
                  is-uniq-validation validation-func="validateServiceName" model-id="service.versionedId.id">
         </div>
       </div>
       <div class="col-2 normal">
         <div class="col-wrapper one">
           <input type="text" class="form-control" placeholder="Min. Time Slice" ng-model="editService.timeBlock"
-                 ng-disabled="!service.isDefault">
+                 ng-disabled="!service.isDefault && service" hard-reset-pattern="numberPattern">
         </div>
       </div>
 

@@ -17,7 +17,7 @@
         } else if (+input === 0) {
           return "0 minut";
         } else if (+minuts === 0) {
-          return hours + (hours === 1 ? " hour" : " hours");
+          return hours + (hours == 1 ? " hour" : " hours");
         } else if (+input < 2) {
           return hours + ' hour ' + minuts + ' minutes';
         } else {

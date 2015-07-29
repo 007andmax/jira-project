@@ -25,8 +25,13 @@
         $scope.saveEditService = function (form) {
           if (form.$valid) {
             $scope.disabledSaveButton = true;
-            $scope.editService.timeBlock = $scope.editService.timeBlock / 60;
-            ServicesService.save($scope.editService, function () {
+            ServicesService.save({
+              id: $scope.editService.id,
+              name: $scope.editService.name,
+              rate: $scope.editService.rate,
+              timeBlock: $scope.editService.timeBlock / 60,
+              taxable: true
+            }, function () {
               $scope.disabledSaveButton = false;
               $scope.$emit('cancelEditService');
             })
