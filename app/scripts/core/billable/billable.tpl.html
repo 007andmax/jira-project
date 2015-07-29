@@ -1,0 +1,267 @@
+<div>
+
+  <div class="content-head clearfix">
+    <div class="content-stat pull-left">
+      <div class="heading"><span class="bold">BILLED AMOUNT</span> LAST 30 DAYS <span class="dot-sep"></span> <span
+        class="amount">40,980 USD</span></div>
+      <div class="chart">
+
+      </div>
+    </div>
+    <div class="content-all-time-stat pull-left">
+      <div class="heading">
+        <div class="title"><span class="bold">BILLED AMOUNT</span> ALL TIME</div>
+        <div class="amount">6,986,536 usd</div>
+      </div>
+      <div class="total-billables">
+        <canvas id="myCanvas" class="pull-left" width="40" height="40"></canvas>
+        <div class="heading pull-left">
+          <div class="title"><span class="bold">TOTAL BILLABLES</span></div>
+          <div class="amount">98,938 USD</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="content-body">
+    <div role="tabpanel" fixed-tab-topbar="400">
+      <div class="tabs-topbar" ftt-topbar-to-be-fixed>
+
+        <a href="javascript:void(0)" class="btn btn-sr btn-create-in btn-scooter pull-right tp-hide"
+           data-toggle="tooltip" data-placement="top" title="" data-original-title="Create Invoice"><span
+          class="icns icn icn-create-invoice "></span></a>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="javascript:void(0)">
+              Billable Clients
+            </a>
+          </li>
+          <li role="presentation">
+            <a ui-sref="accounting.recurring">
+              Recurring Invoices
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="billable-clients">
+          <ul class="companies-list" ftt-tab-content>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Global Media</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$4,960</span>
+            </a>
+
+            </li>
+            <li event-toggle-slider="toggleBillableInvoices" ng-controller="quicktech.core.billable.companyCtrl">
+              <a href='javascript:void(0)' ng-click="toggleInvoices()">
+                <div class="ui-checkbox ui-checkbox-warning pull-left">
+                  <label class="control checkbox">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+                </div>
+                <span class="name">Active Information Systems</span> <span class=" badge badge-light ">3</span> <span
+                class="amount pull-right">$3,250</span>
+              </a>
+              <ul class="invoices" ets-slider>
+                <li><a href='javascript:void(0)'>
+                  <div class="ui-checkbox ui-checkbox-warning pull-left">
+                    <label class="control checkbox">
+                      <input type="checkbox" checked>
+                      <span class="control-indicator"></span>
+                    </label>
+                  </div>
+                  <span class="name">SpamTitan Email Filters Are Not Working! Shows Firewall Errors</span> <span
+                  class="label label-default label-ticket-number ">Tkt# 0236296</span> <span class="amount pull-right">$750</span>
+                </a></li>
+                <li><a href='javascript:void(0)'>
+                  <div class="ui-checkbox ui-checkbox-warning pull-left">
+                    <label class="control checkbox">
+                      <input type="checkbox" checked>
+                      <span class="control-indicator"></span>
+                    </label>
+                  </div>
+                  <span class="name">Problem Switching Over To Projector</span> <span
+                  class="label label-default label-ticket-number ">Tkt# 0236293</span> <span class="amount pull-right">$1,080</span>
+                </a></li>
+                <li><a href='javascript:void(0)'>
+                  <div class="ui-checkbox ui-checkbox-warning pull-left">
+                    <label class="control checkbox">
+                      <input type="checkbox">
+                      <span class="control-indicator"></span>
+                    </label>
+                  </div>
+                  <span class="name">Remote Connection Manager Doesn't Save Settings</span> <span
+                  class="label label-default label-ticket-number ">Tkt# 0235806</span> <span class="amount pull-right">$1,420</span>
+                </a></li>
+              </ul>
+            </li>
+
+            <li event-toggle-slider="toggleBillableInvoices" ng-controller="quicktech.core.billable.companyCtrl">
+              <a href='javascript:void(0)' ng-click="toggleInvoices()">
+                <div class="ui-checkbox ui-checkbox-warning pull-left">
+                  <label class="control checkbox">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+                </div>
+                <span class="name">Sierra Dental Care</span> <span class=" badge badge-light ">2</span> <span
+                class="amount pull-right">$3,400</span>
+              </a>
+              <ul class="invoices" ets-slider>
+                <li qt-toggle-slider>
+                  <a href='javascript:void(0)' qt-ts-toggler>
+                    <div class="ui-checkbox ui-checkbox-warning pull-left">
+                      <label class="control checkbox">
+                        <input type="checkbox" checked>
+                        <span class="control-indicator"></span>
+                      </label>
+                    </div>
+                    <span class="name">System Experiencing Exorbitant Hard Disk Usage</span>
+                    <span class="label label-default label-ticket-number ">Tkt# 0236326</span>
+                    <span class="amount pull-right">$2,600</span>
+                  </a>
+
+                  <ul class="updates" qt-ts-slider>
+
+                    <li class="product">
+                      <div class="table-wrapper clearfix">
+                        <div class="table-content pull-left">
+                          <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
+                          <div class="col-1 col-0">5 Jan 2015</div>
+                          <div class="col-1">Hard Disk <span class="model">#18976</span></div>
+                          <div class="col-4">$2300</div>
+                          <div class="col-3">$1150 <span class="model">Qty 2</span></div>
+                          <div class="col-2 description" data-popover="true" data-html="true"
+                               data-content="Hard disk diagnostics tool will be able to check all types of hard disk specific errors including both soft &amp; hard bad sectors. I think this is happening due to bad sectors on hard drive."
+                               data-original-title="" title="">Hard disk diagnostics tool will be able to check all
+                            types
+                            of hard disk specific errors including both soft &amp; hard bad sectors. I think this is
+                            happening due to bad sectors on hard drive.
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </li>
+                    <li class="service">
+                      <div class="table-wrapper clearfix">
+                        <div class="table-content pull-left">
+                          <div class="update-icon"><span class="icon-update icn-update-service"></span></div>
+                          <div class="col-1 col-0">6 Jan 2015</div>
+                          <div class="col-1">Onsite</div>
+                          <div class="col-4">$300</div>
+                          <div class="col-3">Duration <span class="model">02:00</span></div>
+                          <div class="col-2 description">Disabled superfluous system and third party services to run PC
+                            under lowest stress possible.
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href='javascript:void(0)'>
+                  <div class="ui-checkbox ui-checkbox-warning pull-left">
+                    <label class="control checkbox">
+                      <input type="checkbox" checked>
+                      <span class="control-indicator"></span>
+                    </label>
+                  </div>
+                  <span class="name">Skype Mic Voice Level Too High! Sends Noise Too</span> <span
+                  class="label label-default label-ticket-number ">Tkt# 0235668</span> <span class="amount pull-right">$800</span>
+                </a></li>
+
+              </ul>
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox" checked>
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Acrologics</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$2,650</span>
+            </a>
+
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Informatic Solutions</span> <span class=" badge badge-light ">4</span> <span
+              class="amount pull-right">$6,220</span>
+            </a>
+
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Computer Experts</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$3,670</span>
+            </a>
+
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Bently Nevada</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$3,960</span>
+            </a>
+
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Creative Computers</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$3,280</span>
+            </a>
+
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Comedy & Cabaret Group</span> <span class=" badge badge-light ">5</span> <span
+              class="amount pull-right">$9,920</span>
+            </a>
+
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

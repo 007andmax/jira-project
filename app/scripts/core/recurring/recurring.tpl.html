@@ -1,0 +1,441 @@
+<div>
+
+  <div class="content-head clearfix">
+    <div class="content-stat full pull-left">
+      <div class="heading"><span class="bold">INVOICES RECURRED</span> LAST 30 DAYS <span class="dot-sep"></span> <span
+        class="amount">94,580 USD</span>
+        <ul class="pull-right report-nav">
+          <li><span class="circle red"></span> WEEKLY</li>
+          <li><span class="circle green"></span> MONTHLY</li>
+          <li><span class="circle orange"></span> YEARLY</li>
+
+        </ul>
+      </div>
+      <div class="chart">
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="content-body">
+    <div role="tabpanel" fixed-tab-topbar="400">
+      <div class="tabs-topbar" ftt-topbar-to-be-fixed>
+
+        <div class="dropdown pull-right">
+          <a href="javascript:void(0)"
+             class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
+             data-placement="top" title="" data-original-title="ADD COMPANY" data-toggle="dropdown"><span
+            class="icns icn icn-add-company "></span></a>
+
+          <div class="dropdown-menu add-company-dropdown">
+            <div class="clearfix">
+              <div class="form-group ">
+                <input type="text" class="form-control form-control-round form-control-search dropdown-toggle "
+                       data-toggle="dropdown" data-provide="typeahead" autocomplete="off" id="typeahead"
+                       placeholder="Search Company...">
+
+                <div class="">
+                  <ul class="company-list dropdown-menu scroll-pane" style="display:block;">
+                    <li>
+
+                      <a href="">Acrologics</a>
+
+                    </li>
+
+                    <li>
+
+                      <a href="">Global Media</a>
+
+                    </li>
+                    <li>
+
+                      <a href="">Active Information Systems</a>
+
+                    </li>
+                    <li>
+
+                      <a href="">Computer Experts</a>
+
+                    </li>
+                    <li>
+
+                      <a href="">Sierra Dental Care</a>
+
+                    </li>
+                    <li>
+
+                      <a href="">Acrologics</a>
+
+                    </li>
+                    <li>
+
+                      <a href="">Computer Experts</a>
+
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation">
+            <a ui-sref="accounting.billable">
+              Billable Clients
+            </a>
+          </li>
+          <li role="presentation" class="active">
+            <a href="javascript:void(0)">
+              Recurring Invoices
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="recurring-invoices">
+          <ul class="companies-list recurring" ftt-tab-content>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Global Media</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$4,960</span>
+
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+            <li event-toggle-slider="toggleReceivableInvoices" ng-controller="quicktech.core.recurring.companyCtrl">
+              <a href='javascript:void(0)' ng-click="toggleInvoices()">
+                <div class="ui-checkbox ui-checkbox-warning pull-left">
+                  <label class="control checkbox">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+                </div>
+                <span class="name">Active Information Systems</span> <span class=" badge badge-light ">5</span> <span
+                class="amount pull-right">$3,250</span>
+              </a>
+              <ul class="invoices recurring" ets-slider>
+                <li class="head clearfix">
+                  <div class="">
+                    <div class="col-1">INVOICE NO.</div>
+                    <div class="col-2">SENT ON</div>
+                    <div class="col-3">FREQUENCY</div>
+                    <div class="col-4">NEXT DUE DATE</div>
+                    <div class="col-5">amount</div>
+                  </div>
+                </li>
+                <li class="clearfix">
+                  <div class="hover">
+                    <div class="col-1">39289</div>
+                    <div class="col-2 normal">19 Feb 2015</div>
+                    <div class="col-3"><span class="label label-danger">weekly</span></div>
+                    <div class="col-4 normal">26 Feb 2015</div>
+                    <div class="col-5 normal">$6,350 <a href="javascript:void(0)"
+                                                        class="icn-nav-delete delete pull-right tp-hide"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Delete"></a></div>
+                  </div>
+                </li>
+                <li class="clearfix" qt-toggle-slider>
+                  <div class="hover" qt-ts-toggler>
+                    <div class="col-1">39288</div>
+                    <div class="col-2 normal">19 Feb 2015</div>
+                    <div class="col-3"><span class="label label-green">monthly</span></div>
+                    <div class="col-4 normal">20 Mar 2015</div>
+                    <div class="col-5 normal">$11,600 <a href="javascript:void(0)"
+                                                         class="icn-nav-delete delete pull-right tp-hide"
+                                                         data-toggle="tooltip" data-placement="top" title=""
+                                                         data-original-title="Delete"></a></div>
+                  </div>
+                  <ul class="updates" qt-ts-slider>
+
+                    <li class="product">
+                      <div class="table-wrapper clearfix">
+                        <div class="table-content pull-left">
+                          <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
+                          <div class="col-5"><a href="javascript:void(0)"
+                                                class="icn-nav-delete delete pull-right  delete tp-hide"
+                                                data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Delete"></a>
+                            <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+                               data-toggle="tooltip" data-placement="top" title=""
+                               data-original-title="Edit Service"></a></div>
+                          <div class="col-1">Printing Paper <span class="model">#18976</span></div>
+                          <div class="col-4">$7,200</div>
+                          <div class="col-3">$9 <span class="model">Qty 800</span></div>
+                          <div class="col-2 description">A4 Paper Pack: Premium 80gsm Paper Pack Includes 800 Sheets.
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </li>
+                    <li class="service">
+                      <div class="table-wrapper clearfix">
+                        <div class="table-content pull-left">
+                          <div class="update-icon"><span class="icon-update icn-update-service"></span></div>
+                          <div class="col-5"><a href="javascript:void(0)"
+                                                class="icn-nav-delete delete pull-right  delete tp-hide"
+                                                data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Delete"></a>
+                            <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+                               data-toggle="tooltip" data-placement="top" title=""
+                               data-original-title="Edit Service"></a></div>
+                          <div class="col-1">Remote Service</div>
+
+                          <div class="col-4">$4,400</div>
+
+                          <div class="col-3">Duration <span class="model">02:00</span></div>
+                          <div class="col-2 description">Disabled superfluous system and third party services to run PC
+                            under lowest stress possible.
+                          </div>
+
+                        </div>
+
+
+                      </div>
+                    </li>
+                    <div class="add-more clearfix"><a class="add-product tp-hide" data-toggle="tooltip"
+                                                      data-placement="top" title="" data-original-title="ADD PRODUCT"
+                                                      href="#"><span class="icon-add icn-add-product"></span></a>
+                      <a class="add-service tp-hide" data-toggle="tooltip" data-placement="top" title=""
+                         data-original-title="ADD SERVICE" href="#"><span class="icon-add icn-add-service"></span></a>
+                    </div>
+                  </ul>
+                </li>
+                <li class="clearfix">
+                  <div class="hover">
+                    <div class="col-1">39302</div>
+                    <div class="col-2 normal">17 Feb 2015</div>
+                    <div class="col-3"><span class="label label-danger">weekly</span></div>
+                    <div class="col-4 normal">24 Feb 2015</div>
+                    <div class="col-5 normal">$5,980 <a href="javascript:void(0)"
+                                                        class="icn-nav-delete delete pull-right tp-hide"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Delete"></a></div>
+                  </div>
+                </li>
+                <li class="clearfix">
+                  <div class="hover">
+                    <div class="col-1">39324</div>
+                    <div class="col-2 normal">11 Feb 2015</div>
+                    <div class="col-3"><span class="label label-warning">yearly</span></div>
+                    <div class="col-4 normal">12 Feb 2016</div>
+                    <div class="col-5 normal">$10,860 <a href="javascript:void(0)"
+                                                         class="icn-nav-delete delete pull-right tp-hide"
+                                                         data-toggle="tooltip" data-placement="top" title=""
+                                                         data-original-title="Delete"></a></div>
+                  </div>
+                </li>
+                <li class="clearfix">
+                  <div class="hover">
+                    <div class="col-1">39330</div>
+                    <div class="col-2 normal">8 Feb 2015</div>
+                    <div class="col-3"><span class="label label-green">monthly</span></div>
+                    <div class="col-4 normal">9 Mar 2015</div>
+                    <div class="col-5 normal">$8,630 <a href="javascript:void(0)"
+                                                        class="icn-nav-delete delete pull-right tp-hide"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Delete"></a></div>
+                  </div>
+
+                </li>
+                <li class="clearfix add-new">
+                  <div class="clearfix">
+
+                    <div class="col-1">39435</div>
+                    <div class="col-2 normal">
+                      <div class="col-wrapper date-wrapper">
+                        <input type="text" id="datetimepicker2" value="20 Mar 2015"
+                               class="form-control form-control-dropdown dropdown-toggle has-dropdown"
+                               data-toggle="dropdown" aria-expanded="true" placeholder="Date">
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group dropdown frequency-wrapper">
+                        <input type="text" class="form-control form-control-dropdown dropdown-toggle " value="Weekly"
+                               data-toggle="dropdown" aria-expanded="true">
+
+                        <div class="priority-dot-pos"><span class="priority-dot red"></span></div>
+                        <ul class="dropdown-menu dropdown-priority">
+                          <li><a tabindex="-1" href="#"> <span class="priority-dot red"></span>Weekly </a></li>
+                          <li><a tabindex="-1" href="#"> <span class="priority-dot green"></span>Monthly </a></li>
+                          <li><a tabindex="-1" href="#"> <span class="priority-dot orange"></span>Yearly </a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-4 normal">27 Mar 2015</div>
+                    <div class="col-5 normal">$00</div>
+                  </div>
+                  <div class="add-more  new clearfix">
+                    <div class="add-table-actions pull-right">
+                      <a href="#" class="btn btn-sr btn-gray btn-apply-filter pull-left">Cancel</a>
+                      <a href="#" class="btn btn-sr btn-scooter btn-reset-filter pull-left">Create</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="add-more-button clearfix">
+                  <a href="javascript:void(0)"
+                     class="btn btn-sr btn-create-in btn-scooter  disabled pull-right"><span
+                    class="icns icn icn-create-invoice "></span></a>
+                </li>
+              </ul>
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Sierra Dental Care</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$3,400</span>
+
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox" checked>
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Acrologics</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$2,650</span>
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Informatic Solutions</span> <span class=" badge badge-light ">4</span> <span
+              class="amount pull-right">$6,220</span>
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Computer Experts</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$3,670</span>
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Bently Nevada</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$3,960</span>
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Creative Computers</span> <span class=" badge badge-light ">2</span> <span
+              class="amount pull-right">$3,280</span>
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+            <li><a href='javascript:void(0)'>
+              <div class="ui-checkbox ui-checkbox-warning pull-left">
+                <label class="control checkbox">
+                  <input type="checkbox">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+              <span class="name">Comedy & Cabaret Group</span> <span class=" badge badge-light ">5</span> <span
+              class="amount pull-right">$9,920</span>
+            </a>
+
+              <div class="actions pull-right">
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Create Invoice"><span
+                  class="icns icn icn-create-invoice "></span></button>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
+                   data-placement="top" title="" data-original-title="Delete"></a></div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

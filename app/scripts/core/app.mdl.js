@@ -12,6 +12,8 @@
       'quicktech.core.companies',
       'quicktech.core.products',
       'quicktech.core.services',
+      'quicktech.core.billable',
+      'quicktech.core.recurring',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -78,6 +80,25 @@
         url: '/services',
         templateUrl: '/html/scripts/core/services/services.tpl.html',
         controller: 'quicktech.core.services.servicesCtrl'
+      }))
+     .state('accounting', waitForServices({
+        url: '/accounting',
+        template: '<div ui-view></div>',
+        controller: ['$state', function ($state) {
+          if (!$state.includes('accounting.recurring')) {
+            $state.go('accounting.billable');
+          }
+        }]
+      }))
+      .state('accounting.billable', waitForServices({
+        url: '/billable',
+        templateUrl: '/html/scripts/core/billable/billable.tpl.html',
+        controller: 'quicktech.core.billable.billableCtrl'
+      }))
+      .state('accounting.recurring', waitForServices({
+        url: '/recurring',
+        templateUrl: '/html/scripts/core/recurring/recurring.tpl.html',
+        controller: 'quicktech.core.recurring.recurringCtrl'
       }));
 
     function waitForServices(conf) {

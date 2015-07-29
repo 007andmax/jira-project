@@ -2,15 +2,15 @@
 
 (function () {
 
-  angular.module("quicktech.core.products").directive('productsToggleSlider',
+  angular.module("quicktech.core.products").directive('eventToggleSlider',
     [function () {
       return {
         restrict: 'A',
         link: function (scope, element, attrs) {
 
-          scope.$on(attrs.productsToggleSlider, function () {
+          scope.$on(attrs.eventToggleSlider, function () {
             element.toggleClass("opened");
-            element.find('[products-ts-slider]').slideToggle('fast');
+            element.find('[ets-slider]').slideToggle('fast');
           });
         }
       }

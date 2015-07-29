@@ -15,7 +15,7 @@
           $(window).scroll(function () {
             var height = $body.scrollTop();
 
-            if (height === 0) {
+            if (height <= attrs.fixedTabTopbar) {
               topbar.removeClass('tabs-topbar-fixed');
               content.css("margin-Top", "1px");
             } else {
