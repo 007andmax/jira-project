@@ -27,7 +27,7 @@
 
         $scope.companies = CompaniesService.getClientCompanies();
 
-        $scope.numberPattern = /^\+?[0-9]{0,19}$/;
+        $scope.numberPattern = /^\d?[0-9]{0,19}$/;
 
       }]);
 

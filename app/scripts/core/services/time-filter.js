@@ -4,7 +4,7 @@
 
   angular.module("quicktech.core.services").filter('timeFilter', function () {
     return function (input) {
-      if (input !== undefined) {
+      if (input) {
         input = input.toString();
         var hours = (input.split('.')[0]);
         if (input.split('.')[1]) {
@@ -23,6 +23,8 @@
         } else {
           return hours + ' hours ' + minuts + ' minutes';
         }
+      } else {
+        return "0 minut";
       }
     }
   })
