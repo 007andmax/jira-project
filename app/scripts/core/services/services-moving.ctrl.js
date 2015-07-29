@@ -6,18 +6,17 @@
     ['$scope', 'ServicesService', 'CompaniesService',
       function ($scope, ServicesService, CompaniesService) {
 
-        var actualServicesMap,
-          moveServicesMap,
+        var moveServicesMap,
           checkedDefaultServices;
 
         $scope.companies = CompaniesService.getClientCompanies();
 
         $scope.generateMovementData = function () {
-          moveServicesMap = {};
           checkedDefaultServices = $scope.getCheckedDefaultServices();
+          $scope.disableMoveButton = checkedDefaultServices.length === 0;
 
           generateServicesMap();
-          generateMovementStates();
+          generateMovementStatesAndMap();
         };
 
         $scope.updateMovementState = function (companyId) {
@@ -38,6 +37,8 @@
 
             $scope.disableMoveButton = true;
 
+            moveServicesMap['hardMoveServiceIds'] = checkedDefaultServices;
+
             ServicesService.move(moveServicesMap, function () {
               $scope.disableMoveButton = false;
               $scope.$emit('hideMovementDropdown');
@@ -45,12 +46,12 @@
           }
         };
 
-        function generateMovementStates() {
+        function generateMovementStatesAndMap() {
           $scope.movementStates = {};
 
           $scope.companies.forEach(function (company) {
 
-            var companyServices = actualServicesMap[company.id],
+            var companyServices = moveServicesMap[company.id],
               servicesCount = 0;
 
             if (companyServices) {
@@ -70,7 +71,7 @@
         }
 
         function generateServicesMap() {
-          actualServicesMap = {};
+          moveServicesMap = {};
 
           $scope.companies.forEach(function (company) {
             var services = $scope.servicesData[company.id],
@@ -82,7 +83,7 @@
               })
             }
 
-            actualServicesMap[company.id] = serviceIds;
+            moveServicesMap[company.id] = serviceIds;
           });
 
         }

@@ -25,8 +25,6 @@
           return checkedDefaultServices;
         };
 
-        $scope.servicesData = ServicesService.getServicesData($scope);
-
         $scope.companies = CompaniesService.getClientCompanies();
 
         $scope.numberPattern = /^\+?[0-9]{0,19}$/;

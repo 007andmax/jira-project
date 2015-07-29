@@ -502,6 +502,14 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
+    uglify: {
+      build: {
+        options: {
+          ASCIIOnly: true
+        },
+      }
+    },
+
     imagemin: {
       dist: {
         files: [{
@@ -671,7 +679,8 @@ module.exports = function (grunt) {
       'configureProxies:beta3DistServer',
       'concurrent:server',
       'autoprefixer:server',
-      'connect:livereload'
+      'connect:livereload',
+      'watch'
     ]);
   });
 
