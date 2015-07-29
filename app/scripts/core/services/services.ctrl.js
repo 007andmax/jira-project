@@ -6,8 +6,8 @@
     ['$scope', 'ServicesService', 'Utils', 'CompaniesService',
       function ($scope, ServicesService, Utils, CompaniesService) {
 
-        $scope.numberPattern = /^\d?[0-9]{0,19}$/;
-        $scope.decimalNumberPattern = /^\d?[0-9]{1,17}\.?[0-9]{0,2}$/;
+        $scope.numberPattern = /^\d?[0-9]{0,17}$/;
+        $scope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
         $scope.checkedServices = {};
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.servicesData = ServicesService.getServicesData($scope);
