@@ -10,6 +10,7 @@
           $scope.editProduct = $scope.product.staticCopy();
           $scope.editProduct.category = {id: $scope.category.id};
         } else {
+          $scope.actualCode = ProductsService.getActualCode($scope);
           $scope.editProduct = {
             category: {id: $scope.category.id}
           };

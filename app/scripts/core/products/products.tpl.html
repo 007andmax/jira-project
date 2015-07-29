@@ -1,6 +1,6 @@
 <div class="content-body receipt">
-  <div role="tabpanel">
-    <div class="tabs-topbar">
+  <div role="tabpanel" fixed-tab-topbar>
+    <div class="tabs-topbar" ftt-topbar-to-be-fixed>
 
       <div class="btn-group pull-right" dropdown auto-close="outsideClick" is-open="status.isopen">
         <a href="javascript:void(0)" dropdown-toggle
@@ -43,8 +43,8 @@
 
     <div class="tab-content">
 
-      <div role="tabpanel" class="tab-pane active" id="invoice-company">
-        <ul class="companies-list recurring products">
+      <div role="tabpanel" class="tab-pane active">
+        <ul class="companies-list recurring products" ftt-tab-content>
           <li ng-repeat="category in categories" products-toggle-slider="toggleProducts"
               ng-controller="quicktech.core.products.categoryCtrl">
 
@@ -94,10 +94,16 @@
                       <div class="col-1">{{ product.code }}</div>
                       <div class="col-2 normal"><span class="product-name">{{ product.name }}</span>
 
-                        <div class="popover-container">
-                          <span class="icns icn-description"
-                                popover-placement="top" popover="{{ product.description }}" popover-trigger="mouseenter"
-                            ></span></div>
+                        <div class="popover-container" popover-placement="bottom" popover="{{ product.description }}"
+                             popover-trigger="mouseenter">
+                          <span class="icns icn-description" ></span>
+                        </div>
+
+                        <!--<a href="javascript:void(0)" popover="{{ product.description }}"-->
+                           <!--popover-placement="bottom" popover-trigger="mouseenter">-->
+                          <!--<span class="icn icn-description"></span>-->
+                        <!--</a>-->
+
                       </div>
                       <div class="col-3 normal">{{ product.vendor.name }}</div>
                       <div class="col-4 normal">{{ product.cost | currency }}</div>

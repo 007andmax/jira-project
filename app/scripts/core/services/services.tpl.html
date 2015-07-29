@@ -1,6 +1,6 @@
 <div class="content-body receipt">
-  <div role="tabpanel">
-    <div class="tabs-topbar">
+  <div role="tabpanel" fixed-tab-topbar>
+    <div class="tabs-topbar" ftt-topbar-to-be-fixed>
       <div class="dropdown pull-right service-move-to" ng-controller="quicktech.core.services.servicesMovingCtrl">
         <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray    dropdown-toggle tooltip-dp"
            data-placement="top" title="" data-original-title="move service(s) to..." data-toggle="dropdown"
@@ -61,7 +61,7 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active">
-        <ul class="companies-list recurring products services-list ">
+        <ul class="companies-list recurring products services-list" ftt-tab-content>
           <li class="opened default" ng-controller="quicktech.core.services.defaultServicesCtrl"
               style="padding-bottom: 100px">
             <a href='javascript:void(0)'>
