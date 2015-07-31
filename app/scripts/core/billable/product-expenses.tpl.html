@@ -1,0 +1,14 @@
+<li class="product" ng-repeat="product in ticket.productExpenses">
+  <div class="table-wrapper clearfix">
+    <div class="table-content pull-left">
+      <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
+      <div class="col-1 col-0">{{ product.createdAt | date:'dd MMM yyyy' }}</div>
+      <div class="col-1">Hard Disk <span class="model">#{{ product.item.code }}</span></div>
+      <div class="col-4">{{ product.sum | currency }}</div>
+      <div class="col-3">{{ product.price | currency }}<span class="model">Qty {{ product.quantity }}</span></div>
+      <div class="col-2 description" popover="{{ product.description }}" popover-trigger="mouseenter">{{
+        product.description }}
+      </div>
+    </div>
+  </div>
+</li>

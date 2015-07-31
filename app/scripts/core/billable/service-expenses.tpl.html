@@ -1,0 +1,14 @@
+<li class="service" ng-repeat="service in ticket.serviceExpenses">
+  <div class="table-wrapper clearfix">
+    <div class="table-content pull-left">
+      <div class="update-icon"><span class="icon-update icn-update-service"></span></div>
+      <div class="col-1 col-0">{{ service.createdAt | date:'dd MMM yyyy' }}</div>
+      <div class="col-1">{{ service.item.name }}</div>
+      <div class="col-4">{{ service.sum | currency }}</div>
+      <div class="col-3">Duration <span class="model">{{ service.item.timeBlock | durationFilter }}</span></div>
+      <div class="col-2 description" popover="{{ service.description }}" popover-trigger="mouseenter">{{
+        service.description }}
+      </div>
+    </div>
+  </div>
+</li>
