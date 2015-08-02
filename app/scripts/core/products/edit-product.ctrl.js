@@ -21,14 +21,14 @@
         };
 
         $scope.cancelEditProduct = function () {
-          $rootScope.$emit('cancelEditForm');
+          $rootScope.$broadcast('cancelEditForm');
         };
 
         $scope.saveChangeProduct = function (form) {
           if (form.$valid) {
             $scope.disabledSaveChangeButton = true;
             ProductsService.saveProduct($scope.editProduct, function () {
-              $rootScope.$emit('cancelEditForm', 'isProductCreation');
+              $rootScope.$broadcast('cancelEditForm', 'isProductCreation');
               $scope.disabledCreateProductButton = false;
             });
           } else {

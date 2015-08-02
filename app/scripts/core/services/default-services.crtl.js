@@ -9,11 +9,11 @@
         $scope.showCheckboxes = true;
 
         $scope.showCreateServiceForm = function () {
-          $rootScope.$emit('cancelEditForm');
+          $rootScope.$broadcast('cancelEditForm');
           $scope.showCreateService = true;
         };
 
-        $rootScope.$on('cancelEditForm', function () {
+        $scope.$on('cancelEditForm', function () {
           $scope.showCreateService = false;
         });
 

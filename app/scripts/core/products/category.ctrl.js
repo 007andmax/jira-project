@@ -7,7 +7,7 @@
       function ($scope, $rootScope, ProductsService, $timeout) {
 
         $scope.openEditCategory = function () {
-          $rootScope.$emit('cancelEditForm');
+          $rootScope.$broadcast('cancelEditForm');
           $scope.isEditCategory = true;
           $scope.editCategory = $scope.category.staticCopy();
         };
@@ -43,7 +43,7 @@
         };
 
         $scope.addProduct = function () {
-          $rootScope.$emit('cancelEditForm');
+          $rootScope.$broadcast('cancelEditForm');
           $scope.showCreateProduct = true;
         };
 
@@ -54,7 +54,7 @@
           }
         });
 
-        $rootScope.$on('cancelEditForm', function (event, data) {
+        $scope.$on('cancelEditForm', function (event, data) {
           $scope.cancelEditCategory();
           $scope.showCreateProduct = false;
 

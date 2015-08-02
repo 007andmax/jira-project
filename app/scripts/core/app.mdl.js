@@ -163,7 +163,7 @@
       };
 
       $rootScope.cancelEditForm = function (){
-        $rootScope.$emit('cancelEditForm');
+        $rootScope.$broadcast('cancelEditForm');
       };
 
       $templateCache.put("template/typeahead/typeahead-popup.html",

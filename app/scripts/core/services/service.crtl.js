@@ -11,11 +11,11 @@
         };
 
         $scope.showEditServiceForm = function () {
-          $rootScope.$emit('cancelEditForm');
+          $rootScope.$broadcast('cancelEditForm');
           $scope.isEditService = true;
         };
 
-        $rootScope.$on('cancelEditForm', function () {
+        $scope.$on('cancelEditForm', function () {
           $scope.isEditService = false;
         })
 

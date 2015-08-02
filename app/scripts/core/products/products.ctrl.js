@@ -42,7 +42,7 @@
         };
 
         $scope.cancelEditForms = function () {
-          $rootScope.$emit('cancelEditForm');
+          $rootScope.$broadcast('cancelEditForm');
         }
 
       }]);

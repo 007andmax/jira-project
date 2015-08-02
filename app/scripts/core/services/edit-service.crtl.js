@@ -29,7 +29,7 @@
               taxable: true
             }, function () {
               $scope.disabledSaveButton = false;
-              $rootScope.$emit('cancelEditForm');
+              $rootScope.$broadcast('cancelEditForm');
             })
           } else {
             $scope.triedToSaveService = true;
