@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.services').controller('quicktech.core.services.editServiceCtrl',
-    ['$scope', 'ServicesService',
-      function ($scope, ServicesService) {
+    ['$scope', '$rootScope', 'ServicesService',
+      function ($scope, $rootScope, ServicesService) {
 
         if ($scope.service) {
           $scope.editService = {
@@ -18,10 +18,6 @@
           $scope.editService = {taxable: true};
         }
 
-        $scope.cancelEditService = function () {
-          $scope.$emit('cancelEditService');
-        };
-
         $scope.saveEditService = function (form) {
           if (form.$valid) {
             $scope.disabledSaveButton = true;
@@ -33,7 +29,7 @@
               taxable: true
             }, function () {
               $scope.disabledSaveButton = false;
-              $scope.$emit('cancelEditService');
+              $rootScope.$emit('cancelEditForm');
             })
           } else {
             $scope.triedToSaveService = true;

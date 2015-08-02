@@ -2,9 +2,10 @@
   <div role="tabpanel" fixed-tab-topbar="0">
     <div class="tabs-topbar" ftt-topbar-to-be-fixed>
       <div class="dropdown pull-right service-move-to" ng-controller="quicktech.core.services.servicesMovingCtrl">
-        <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray    dropdown-toggle tooltip-dp"
-           data-placement="top" title="" data-original-title="move service(s) to..." data-toggle="dropdown"
-           ng-click="generateMovementData()" qt-hide-dropdown="hideMovementDropdown">
+        <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray dropdown-toggle tooltip-dp"
+           data-placement="top" data-original-title="move service(s) to..." data-toggle="dropdown"
+           ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
+           ng-disabled="!hasDefaultServicesChecked">
           <span class="icns icn icn-move-services "></span>
         </a>
 
@@ -88,12 +89,11 @@
             <div class="clearfix"></div>
 
           </li>
-          <li qt-toggle-slider ng-repeat="(companyId, services) in servicesData"
-              ng-controller="quicktech.core.services.companyCtrl"
-              ng-if="companyId != 'default' && companyId != 'staticCopy'">
-            <a href='javascript:void(0)' qt-ts-toggler>
+          <li qt-toggle-slider ng-repeat="company in companies | orderBy: 'name'"
+              ng-controller="quicktech.core.services.companyCtrl" event-toggle-slider="toggleServices">
+            <a href='javascript:void(0)' ng-click="toggleServices()">
               <span class="name">{{ company.name }}</span>
-              <span class="amount pull-right">{{ services.length }} services</span>
+              <span class="amount pull-right">{{ services.length || 0 }} services</span>
 
               <div class="clearfix"></div>
             </a>

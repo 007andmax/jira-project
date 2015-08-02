@@ -3,16 +3,17 @@
 (function () {
 
   angular.module('quicktech.core.services').controller('quicktech.core.services.defaultServicesCtrl',
-    ['$scope', 'ServicesService',
-      function ($scope) {
+    ['$scope', '$rootScope',
+      function ($scope, $rootScope) {
 
         $scope.showCheckboxes = true;
 
         $scope.showCreateServiceForm = function () {
+          $rootScope.$emit('cancelEditForm');
           $scope.showCreateService = true;
         };
 
-        $scope.$on('cancelEditService', function () {
+        $rootScope.$on('cancelEditForm', function () {
           $scope.showCreateService = false;
         });
 

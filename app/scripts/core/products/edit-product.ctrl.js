@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.editProductCtrl',
-    ['$scope', 'ProductsService',
-      function ($scope, ProductsService) {
+    ['$scope', '$rootScope', 'ProductsService',
+      function ($scope, $rootScope, ProductsService) {
 
         if ($scope.product) {
           $scope.editProduct = $scope.product.staticCopy();
@@ -21,19 +21,37 @@
         };
 
         $scope.cancelEditProduct = function () {
-          $scope.product ? $scope.$emit('cancelEditProduct') : $scope.$emit('cancelCreateProduct');
+          $rootScope.$emit('cancelEditForm');
         };
 
         $scope.saveChangeProduct = function (form) {
           if (form.$valid) {
             $scope.disabledSaveChangeButton = true;
             ProductsService.saveProduct($scope.editProduct, function () {
-              $scope.product ? $scope.$emit('cancelEditProduct') : $scope.$emit('cancelCreateProduct');
+              $rootScope.$emit('cancelEditForm', 'isProductCreation');
               $scope.disabledCreateProductButton = false;
             });
           } else {
             $scope.triedToSaveProduct = true;
           }
+        };
+
+        $scope.validateProductName = function (ngModelCtrl, modelId) {
+
+          if ($scope.editProduct.vendor) {
+            var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, modelId || '', $scope.editProduct.vendor.id, function () {
+              ngModelCtrl.$setValidity('unique', validationResult.value);
+            });
+          }
+        };
+
+        $scope.validateSaleAndCost = function (form) {
+
+          var valid = (!$scope.editProduct.sale || !$scope.editProduct.cost)
+            || ($scope.editProduct.sale * 1) > ($scope.editProduct.cost * 1);
+          form.sale.$setValidity('smallerThanCost', valid);
+          form.cost.$setValidity('biggerThanSale', valid);
+
         };
 
       }]);

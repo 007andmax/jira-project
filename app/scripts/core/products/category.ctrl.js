@@ -3,19 +3,21 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.categoryCtrl',
-    ['$scope', 'ProductsService', '$timeout', '$location', '$anchorScroll', 'CompaniesService',
-      function ($scope, ProductsService, $timeout) {
+    ['$scope', '$rootScope', 'ProductsService', '$timeout', '$location', '$anchorScroll', 'CompaniesService',
+      function ($scope, $rootScope, ProductsService, $timeout) {
 
         $scope.openEditCategory = function () {
+          $rootScope.$emit('cancelEditForm');
           $scope.isEditCategory = true;
           $scope.editCategory = $scope.category.staticCopy();
         };
 
-        $scope.saveEditCategory = function () {
+        $scope.saveEditCategory = function (form) {
           $scope.disabledCreateButton = true;
           ProductsService.saveCategory($scope.editCategory, function () {
             $scope.disabledCreateButton = false;
             $scope.isEditCategory = false;
+            form.$setPristine()
           });
         };
 
@@ -35,17 +37,31 @@
             $timeout(function () {
               $scope.showProducts = false;
             }, 200);
-          } else {
+          } else if ($scope.category.productsAmount > 0 || $scope.showCreateProduct) {
             $scope.showProducts = true;
           }
         };
 
         $scope.addProduct = function () {
+          $rootScope.$emit('cancelEditForm');
           $scope.showCreateProduct = true;
         };
 
-        $scope.$on('cancelCreateProduct', function () {
+        $scope.$watch('category.productsAmount', function (productsAmount) {
+          if (productsAmount === 0 && $scope.showProducts && !$scope.showCreateProduct) {
+            $scope.$broadcast('toggleProducts');
+            $scope.showProducts = false;
+          }
+        });
+
+        $rootScope.$on('cancelEditForm', function (event, data) {
+          $scope.cancelEditCategory();
           $scope.showCreateProduct = false;
+
+          if (data != 'isProductCreation' && $scope.category.productsAmount === 0 && $scope.showProducts) {
+            $scope.$broadcast('toggleProducts');
+            $scope.showProducts = false;
+          }
         });
 
       }]);

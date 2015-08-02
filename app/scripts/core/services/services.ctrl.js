@@ -27,6 +27,26 @@
           return checkedDefaultServices;
         };
 
+        $scope.onChangeCheckbox = fillHasDefaultServicesChecked;
+
+        $scope.$watch('servicesData["default"].length', fillHasDefaultServicesChecked);
+
+        function fillHasDefaultServicesChecked() {
+          $scope.hasDefaultServicesChecked = false;
+
+          var defaultServices = $scope.servicesData['default'];
+
+          for (var serviceId in $scope.checkedServices) {
+            if ($scope.checkedServices[serviceId] && Utils.findById(defaultServices, serviceId)) {
+              $scope.hasDefaultServicesChecked = true;
+            }
+
+            if ($scope.hasDefaultServicesChecked) {
+              return;
+            }
+          }
+        }
+
       }]);
 
 }());

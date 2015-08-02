@@ -3,14 +3,14 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productCtrl',
-    ['$scope', 'ProductsService', 'CompaniesService',
-      function ($scope, ProductsService) {
+    ['$scope', '$rootScope', 'ProductsService', 'CompaniesService',
+      function ($scope, $rootScope, ProductsService) {
 
         $scope.openEditProduct = function () {
           $scope.showEditProduct = true;
         };
 
-        $scope.$on('cancelEditProduct', function () {
+        $rootScope.$on('cancelEditForm', function () {
           $scope.showEditProduct = false;
         });
 

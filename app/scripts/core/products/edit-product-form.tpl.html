@@ -27,6 +27,7 @@
           </div>
           <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
                  placeholder="Vendor/Supplier"
+                 typeahead-on-select="validateProductName(editProductForm.editProductName, product.versionedId.id)"
                  ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
                  typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
                  typeahead-min-length="0" typeahead-editable="false"
@@ -36,26 +37,28 @@
 
       <div class="col-4 normal">
         <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'editProductCost')}">
-          <div ng-messages="editProductForm.editProductCost.$error"
-               ng-if="isShowingErrors(editProductForm, 'editProductCost')">
+             ng-class="{error: isShowingErrors(editProductForm, 'cost')}">
+          <div ng-messages="editProductForm.cost.$error"
+               ng-if="isShowingErrors(editProductForm, 'cost')">
             <div class="qt-error-msg" ng-message="required">Cost is required.</div>
+            <div class="qt-error-msg" ng-message="biggerThanSale">Cost should be smaller than sale.</div>
           </div>
           <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
-                 name="editProductCost"
+                 name="cost" ng-change="validateSaleAndCost(editProductForm)"
                  hard-reset-pattern="decimalNumberPattern" ng-required="true">
         </div>
       </div>
 
       <div class="col-5 normal">
         <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'editProductSale')}">
-          <div ng-messages="editProductForm.editProductSale.$error"
-               ng-if="isShowingErrors(editProductForm, 'editProductSale')">
+             ng-class="{error: isShowingErrors(editProductForm, 'sale')}">
+          <div ng-messages="editProductForm.sale.$error"
+               ng-if="isShowingErrors(editProductForm, 'sale')">
             <div class="qt-error-msg" ng-message="required">Sale is required.</div>
+            <div class="qt-error-msg" ng-message="smallerThanCost">Sale should be bigger that cost.</div>
           </div>
           <input type="text" class="form-control" placeholder="Sale Price" ng-model="editProduct.sale"
-                 name="editProductSale"
+                 name="sale" ng-change="validateSaleAndCost(editProductForm)"
                  hard-reset-pattern="decimalNumberPattern" ng-required="true">
         </div>
       </div>

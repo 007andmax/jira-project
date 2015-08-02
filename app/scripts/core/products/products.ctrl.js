@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
-    ['$scope', 'ProductsService', 'VendorsService', 'CompaniesService',
-      function ($scope, ProductsService, VendorsService, CompaniesService) {
+    ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
+      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
 
         $scope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
 
@@ -16,7 +16,7 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form[fieldName] && ($scope.triedToSaveCategory || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
         $scope.addCategory = function (form) {
@@ -27,14 +27,8 @@
               form.$setPristine();
             });
           } else {
-            $scope.triedToSaveProduct = true;
+            $scope.triedToSaveCategory = true;
           }
-        };
-
-        $scope.validateProductName = function (ngModelCtrl, modelId) {
-          var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, modelId || '', CompaniesService.getCurrentCompany().id, function () {
-            ngModelCtrl.$setValidity('unique', validationResult.value);
-          });
         };
 
         $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {
@@ -46,6 +40,10 @@
           }
           ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
         };
+
+        $scope.cancelEditForms = function () {
+          $rootScope.$emit('cancelEditForm');
+        }
 
       }]);
 

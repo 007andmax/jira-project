@@ -5,8 +5,9 @@
       <div class="btn-group pull-right" dropdown auto-close="outsideClick" is-open="status.isopen">
         <a href="javascript:void(0)" dropdown-toggle
            class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
-           tooltip="ADD Category" tooltip-placement="top"><span
-          class="icns icn icn-add-category "></span></a>
+           tooltip="ADD Category" tooltip-placement="top" ng-click="cancel">
+          <span class="icns icn icn-add-category"></span>
+        </a>
 
         <div class="dropdown-menu add-company-dropdown">
           <form name="newCategoryNameForm">
@@ -24,7 +25,8 @@
                        is-uniq-validation validation-func="isUniqueCategoryName">
 
                 <div class="label-add-btn" ng-click="addCategory(newCategoryNameForm)">
-                  <a href="javascript:void(0)" class=" btn input-btn-cr btn-green disabled btn-add-more pull-left">
+                  <a href="javascript:void(0)" class=" btn input-btn-cr btn-green disabled btn-add-more pull-left"
+                    ng-class="{disabled: newCategoryNameForm.$invalid}">
                     <span class="small-icn-add icn"></span>
                   </a>
                 </div>
@@ -69,7 +71,7 @@
                            is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
 
                     <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"
-                       ng-click="saveEditCategory()" ng-disabled="disabledSaveButton">Save Changes</a>
+                       ng-click="saveEditCategory(editCategoryForm)" ng-disabled="disabledSaveButton">Save Changes</a>
                     <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"
                        ng-click="cancelEditCategory()">Cancel</a>
                   </div>
@@ -81,7 +83,7 @@
 
             <ul class="invoices recurring  products" ets-slider>
               <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
-                <li class="head clearfix">
+                <li class="head clearfix" ng-show="products.length > 0">
                   <div class="">
                     <div class="col-1">CODE NO.</div>
                     <div class="col-2">PRODUCT</div>
@@ -90,7 +92,7 @@
                     <div class="col-5">SALE PRICE</div>
                   </div>
                 </li>
-                <div ng-repeat="product in products" ng-controller="quicktech.core.products.productCtrl">
+                <div ng-repeat="product in products | orderBy : 'code'" ng-controller="quicktech.core.products.productCtrl">
                   <li class="clearfix" ng-if="!showEditProduct">
                     <div class="hover">
                       <div class="col-1">{{ product.code }}</div>
@@ -137,7 +139,7 @@
 
             <div class="actions pull-right">
               <button class="btn btn-sr btn-create-in btn-scooter pull-left"
-                      ng-click="toggleProducts(); addProduct()"
+                      ng-click="addProduct(); toggleProducts()"
                       tooltip="Add Product" tooltip-placement="top" scroll-to-form><span
                 class="icns icn wt-icn-add-product "></span></button>
               <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
