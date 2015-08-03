@@ -5,9 +5,8 @@
       <div class="btn-group pull-right" dropdown auto-close="outsideClick" is-open="status.isopen">
         <a href="javascript:void(0)" dropdown-toggle
            class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
-           tooltip="ADD Category" tooltip-placement="top" ng-click="cancelEditForms()">
-          <span class="icns icn icn-add-category"></span>
-        </a>
+           tooltip="ADD Category" tooltip-placement="top">
+          <span class="icns icn icn-add-category"></span></a>
 
         <div class="dropdown-menu add-company-dropdown">
           <form name="newCategoryNameForm">
@@ -26,7 +25,7 @@
 
                 <div class="label-add-btn" ng-click="addCategory(newCategoryNameForm)">
                   <a href="javascript:void(0)" class=" btn input-btn-cr btn-green disabled btn-add-more pull-left"
-                    ng-class="{disabled: newCategoryNameForm.$invalid}">
+                     ng-class="{disabled: newCategoryNameForm.$invalid}">
                     <span class="small-icn-add icn"></span>
                   </a>
                 </div>
@@ -92,7 +91,9 @@
                     <div class="col-5">SALE PRICE</div>
                   </div>
                 </li>
-                <div ng-repeat="product in products | orderBy : 'code'" ng-controller="quicktech.core.products.productCtrl">
+                <div ng-repeat="product in products | orderBy : 'code'"
+                     ng-controller="quicktech.core.products.productCtrl"
+                     show-model-element="{{ 'show-' + product.versionedId.id }}">
                   <li class="clearfix" ng-if="!showEditProduct">
                     <div class="hover">
                       <div class="col-1">{{ product.code }}</div>

@@ -31,7 +31,8 @@
                  ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
                  typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
                  typeahead-min-length="0" typeahead-editable="false"
-                 qt-typeahead-show-on-focus ng-trim="false">
+                 qt-typeahead-show-on-focus ng-trim="false"
+                 custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'scroll'}">
         </div>
       </div>
 

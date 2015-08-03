@@ -47,6 +47,10 @@
           $scope.showCreateProduct = true;
         };
 
+        $scope.setHighlightProductId = function (productId) {
+          $scope.highlightProductId = productId;
+        };
+
         $scope.$watch('category.productsAmount', function (productsAmount) {
           if (productsAmount === 0 && $scope.showProducts && !$scope.showCreateProduct) {
             $scope.$broadcast('toggleProducts');
@@ -62,6 +66,14 @@
             $scope.$broadcast('toggleProducts');
             $scope.showProducts = false;
           }
+        });
+
+        $scope.$on($scope.category.id + '-showProduct', function (event, productId) {
+          if (!$scope.showProducts) {
+            $scope.toggleProducts();
+          }
+
+          $scope.setHighlightProductId(productId);
         });
 
       }]);

@@ -13,6 +13,10 @@
             return 'users';
           } else if ($state.includes("companies") || $state.includes("createCompany")) {
             return 'companies';
+          } else if ($state.includes("ps.products")) {
+            return 'products';
+          } else if ($state.includes("ps.services")) {
+            return 'services';
           }
         }
 

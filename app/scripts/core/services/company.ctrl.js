@@ -32,6 +32,15 @@
           $scope.services = services;
         });
 
+        $scope.$on($scope.company.id + '-showService', function (event, serviceId) {
+          if (!showServices) {
+            $scope.toggleServices();
+          }
+
+          $scope.$broadcast('show-' + serviceId);
+        });
+
+
       }]);
 
 }());

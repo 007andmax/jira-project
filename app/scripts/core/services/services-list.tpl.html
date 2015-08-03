@@ -8,7 +8,8 @@
   </li>
   <li class="clearfix" ng-repeat="service in services | orderBy : 'createdAt'"
       ng-controller="quicktech.core.services.serviceCtrl"
-      ng-class="{'no-border': isEditService, 'add-new': isEditService}">
+      ng-class="{'no-border': isEditService, 'add-new': isEditService}"
+      show-model-element="{{ 'show-' + service.versionedId.id }}">
     <div class="hover" ng-if="!isEditService">
       <div class="col-1">
         <div class="ui-checkbox ui-checkbox-warning pull-left" ng-if="showCheckboxes">
