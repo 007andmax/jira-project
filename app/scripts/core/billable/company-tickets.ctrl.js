@@ -24,9 +24,10 @@
           for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
 
             var productExpenses = $scope.companyBillableTickets[i].productExpenses,
-              serviceExpenses = $scope.companyBillableTickets[i].serviceExpenses;
+              serviceExpenses = $scope.companyBillableTickets[i].serviceExpenses,
+              ticketId = $scope.companyBillableTickets[i].id
 
-            $scope.totalTicketSum[$scope.companyBillableTickets[i].id] = calculateTotalTicketSum(productExpenses) + calculateTotalTicketSum(serviceExpenses);
+            $scope.totalTicketSum[ticketId] = calculateTotalTicketSum(productExpenses) + calculateTotalTicketSum(serviceExpenses);
           }
 
         });
