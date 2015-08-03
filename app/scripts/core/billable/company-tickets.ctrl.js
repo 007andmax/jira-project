@@ -14,14 +14,10 @@
 
           if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
             $scope.ticketsSelection[$scope.billableCompany.company.id].tickets = {};
-            for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
-              $scope.ticketsSelection[$scope.billableCompany.company.id].tickets[$scope.companyBillableTickets[i].id] = true;
-            }
+            setTicketsCheckboxes(true);
           } else if (companyTicketSelection === undefined) {
             $scope.ticketsSelection[$scope.billableCompany.company.id] = {tickets: {}};
-            for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
-              $scope.ticketsSelection[$scope.billableCompany.company.id].tickets[$scope.companyBillableTickets[i].id] = false;
-            }
+            setTicketsCheckboxes(false);
           }
 
           $scope.totalTicketSum = {};
@@ -37,6 +33,16 @@
               totalTicketSum += $scope.companyBillableTickets[i].serviceExpenses[j].sum;
             }
             $scope.totalTicketSum[$scope.companyBillableTickets[i].id] = totalTicketSum;
+          }
+
+          function setTicketsCheckboxes(val) {
+
+            var companyId = $scope.billableCompany.company.id;
+
+            for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
+              var ticketId = $scope.companyBillableTickets[i].id;
+              $scope.ticketsSelection[companyId].tickets[ticketId] = val;
+            }
           }
 
         });
