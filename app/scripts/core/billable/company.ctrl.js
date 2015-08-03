@@ -6,7 +6,7 @@
     ['$scope', 'BillableService', 'CompaniesService', '$timeout',
       function ($scope, BillableService, CompaniesService, $timeout) {
 
-         $scope.toggleBillableTickets = function () {
+        $scope.toggleBillableTickets = function () {
 
           if ($scope.showTickets) {
             $scope.$broadcast('toggleBillableTickets');

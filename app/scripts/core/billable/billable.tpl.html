@@ -52,13 +52,13 @@
         <div role="tabpanel" class="tab-pane active" id="billable-clients">
           <ul class="companies-list" ftt-tab-content>
 
-            <li event-toggle-slider="toggleBillableInvoices" ng-controller="quicktech.core.billable.companyCtrl"
+            <li event-toggle-slider="toggleBillableTickets" ng-controller="quicktech.core.billable.companyCtrl"
                 ng-repeat="billableCompany in billableCompanies">
               <a href='javascript:void(0)' ng-click="toggleBillableTickets()">
                 <div class="ui-checkbox ui-checkbox-warning pull-left" stop-propagation="click">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
-                           ng-change="changeCompanyCheckbox(company.id)">
+                           ng-click="changeCompanyCheckbox(company.id)">
                     <span class="control-indicator"></span>
                   </label>
                 </div>
@@ -67,19 +67,18 @@
               </a>
               <ul class="invoices" ets-slider ng-controller="quicktech.core.billable.companyTicketsCtrl"
                   ng-if="showTickets">
-                <li ng-repeat="ticket in companyBillableTickets" qt-toggle-slider
-                    ng-controller="quicktech.core.billable.ticketCtrl">
+                <li ng-repeat="ticket in companyBillableTickets" qt-toggle-slider>
                   <a href='javascript:void(0)' qt-ts-toggler>
                     <div class="ui-checkbox ui-checkbox-warning pull-left" stop-propagation="click">
                       <label class="control checkbox">
                         <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
-                               ng-change="changeTicketCheckbox(billableCompany,)">
+                               ng-change="changeTicketCheckbox(billableCompany)">
                         <span class="control-indicator"></span>
                       </label>
                     </div>
                     <span class="name">{{ ticket.subject }}</span> <span
                     class="label label-default label-ticket-number ">Tkt# {{ ticket.number }}</span> <span
-                    class="amount pull-right">{{ totalTicketSum | currency}}</span>
+                    class="amount pull-right">{{ totalTicketSum[ticket.id] | currency}}</span>
                   </a>
                   <ul class="updates" qt-ts-slider>
 
