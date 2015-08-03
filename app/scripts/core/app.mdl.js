@@ -14,6 +14,7 @@
       'quicktech.core.services',
       'quicktech.core.billable',
       'quicktech.core.recurring',
+      'quicktech.core.receivable',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -81,7 +82,7 @@
         templateUrl: '/html/scripts/core/services/services.tpl.html',
         controller: 'quicktech.core.services.servicesCtrl'
       }))
-     .state('accounting', waitForServices({
+      .state('accounting', waitForServices({
         url: '/accounting',
         template: '<div ui-view></div>',
         controller: ['$state', function ($state) {
@@ -99,6 +100,11 @@
         url: '/recurring',
         templateUrl: '/html/scripts/core/recurring/recurring.tpl.html',
         controller: 'quicktech.core.recurring.recurringCtrl'
+      }))
+      .state('receivable', waitForServices({
+        url: '/receivable/:mode',
+        templateUrl: '/html/scripts/core/receivable/receivable.tpl.html',
+        controller: 'quicktech.core.receivable.receivableCtrl'
       }));
 
     function waitForServices(conf) {
@@ -162,7 +168,7 @@
         }
       };
 
-      $rootScope.cancelEditForm = function (){
+      $rootScope.cancelEditForm = function () {
         $rootScope.$broadcast('cancelEditForm');
       };
 

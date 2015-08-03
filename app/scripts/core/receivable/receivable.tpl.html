@@ -1,0 +1,63 @@
+<div class="content-wrapper">
+  <div class="content-head clearfix">
+    <div class="content-stat pull-left">
+      <div class="heading"><span class="bold">total collected</span> LAST 30 DAYS <span class="dot-sep"></span> <span
+        class="amount">40,980 USD</span>
+        <ul class="pull-right report-nav">
+          <li><span class="circle red"></span> RECEIVABLE</li>
+          <li><span class="circle blue"></span> RECEIVED</li>
+
+        </ul>
+      </div>
+      <div class="chart">
+
+      </div>
+    </div>
+    <div class="content-all-time-stat pull-left">
+      <div class="heading">
+        <div class="title"><span class="bold">RECEIVED AMOUNT</span> ALL TIME</div>
+        <div class="amount">6,986,536 USD</div>
+      </div>
+      <div class="total-billables">
+        <canvas id="myCanvas" class="pull-left" width="40" height="40"></canvas>
+        <div class="heading pull-left">
+          <div class="title"><span class="bold">TOTAL RECEIVABLES</span></div>
+          <div class="amount">67,960 USD</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="content-body">
+    <div role="tabpanel" fixed-tab-topbar="400">
+      <div class="tabs-topbar" ftt-topbar-to-be-fixed>
+
+        <a href="javascript:void(0)" class="btn btn-sr btn-create-in btn-scooter pull-right tp-hide"
+           tooltip-placement="top" tooltip="receive payment"
+           modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
+          mw-controller="quicktech.core.receivable.receivePaymentCtrl">
+          <span class="icns icn icn-btn-payed "></span>
+        </a>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li role="presentation" ng-class="{active: mode === 'group-by-company'}">
+            <a ui-sref="receivable({mode: 'group-by-company'})">
+              Invoice by Company
+            </a>
+          </li>
+          <li role="presentation" ng-class="{active: mode === 'list'}">
+            <a ui-sref="receivable({mode: 'list'})">
+              Invoice by Number
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -21,6 +21,8 @@
             return 'billable';
           } else if ($state.includes("accounting.recurring")) {
             return 'recurring';
+          } else if ($state.includes("receivable")) {
+            return 'receivable';
           }
         }
 

@@ -1,0 +1,119 @@
+<div class=" modal-receive-payment fade in show">
+  <div class="modal-dialog payment-received">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close" ng-click="close()">
+          <span aria-hidden="true" class="icn-close-modal"></span>
+        </button>
+        <h4 class="modal-title pull-left">Receive Payment(s) </h4>
+      </div>
+
+
+      <div class="modal-footer ">
+        <div class="row-wrapper clearfix">
+          <div class="form-group dropdown cs-type pull-left">
+            <label>Payment Method</label>
+            <!--TODO here should be angular ui dropdown-->
+            <input type="email" class="form-control hide-cursor form-method-dropdown form-control-dropdown dropdown-toggle "  data-toggle="dropdown" aria-expanded="true">
+            <div class="dropdown-default-value">Cheque</div>
+            <ul class="dropdown-menu dropdown-payment-method " role="menu">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cheque</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cash</a></li>
+
+            </ul>
+          </div>
+
+
+        </div>
+        <ul class="invoices-sticky invoices" >
+          <li class="head clearfix">
+            <div class="">
+              <div class="col-1"><div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                <input type="checkbox" checked="">
+                <span class="control-indicator"></span>
+              </label></div> <span class="name">INVOICE NO.</span> </div>
+              <div class="col-2">SENT ON</div>
+              <div class="col-3">AMOUNT</div>
+            </div>
+          </li></ul>
+        <div class="invoices-list" id="invoiceList">
+          <ul class="invoices" scroll-pane>
+            <li class="clearfix">
+              <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-container='#invoiceList' data-placement="top" title="" data-original-title="recurring: monthly"></span>
+              <div class="hover">
+                <div class="col-1"> <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                  <input type="checkbox" checked="">
+                  <span class="control-indicator"></span>
+                </label></div> <span class="name">39302</span></div>
+                <div class="col-2 normal">25 Nov 2014</div>
+                <div class="col-3 normal">$4,480 </div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-container='#invoiceList' data-placement="top" title="" data-original-title="recurring: monthly"></span>
+              <div class="hover">
+                <div class="col-1"> <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                  <input type="checkbox" checked="">
+                  <span class="control-indicator"></span>
+                </label></div> <span class="name">39302</span></div>
+                <div class="col-2 normal">26 Dec 2014</div>
+                <div class="col-3 normal">$4,480 </div>
+              </div>
+            </li>
+
+            <li class="clearfix">
+              <div class="hover">
+                <div class="col-1"> <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                  <input type="checkbox" checked="">
+                  <span class="control-indicator"></span>
+                </label></div> <span class="name">39324</span> </div>
+                <div class="col-2 normal">12 Jan 2015</div>
+                <div class="col-3 normal">$10,860 </div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <span class="icns icn-red-calendar calendar" data-toggle="tooltip" data-container='#invoiceList' data-placement="top" title="" data-original-title="recurring: weekly"></span>
+              <div class="hover">
+                <div class="col-1"> <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                  <input type="checkbox" checked="">
+                  <span class="control-indicator"></span>
+                </label></div> <span class="name">39330</span></div>
+                <div class="col-2 normal">18 Feb 2015</div>
+                <div class="col-3 normal">$8,630 </div>
+              </div>
+            </li>
+            <li class="clearfix">
+              <div class="hover">
+                <div class="col-1"> <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                  <input type="checkbox" checked="">
+                  <span class="control-indicator"></span>
+                </label></div> <span class="name">39289</span> </div>
+                <div class="col-2 normal">18 Feb 2015</div>
+                <div class="col-3 normal">$6,350</div>
+              </div>
+            </li>
+            <li class="clearfix no-border">
+              <span class="icns icn-orange-calendar calendar" data-toggle="tooltip" data-container='#invoiceList' data-placement="top" title="" data-original-title="recurring: yearly"></span>
+              <div class="hover">
+                <div class="col-1"> <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                  <input type="checkbox" checked="">
+                  <span class="control-indicator"></span>
+                </label></div> <span class="name">39288</span> </div>
+                <div class="col-2 normal">12 Feb 2015</div>
+                <div class="col-3 normal">$7,200</div>
+              </div>
+            </li>
+
+          </ul></div>
+        <div class="total-amount pull-right">Total amount <span class="bold">$34,800</span></div>
+        <div class="row-wrapper clearfix">
+          <div class=" actions-wrapper pull-left">
+            <button type="button" class="btn btn-scooter">Receive</button>
+            <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
