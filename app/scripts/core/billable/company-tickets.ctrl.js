@@ -23,29 +23,35 @@
           $scope.totalTicketSum = {};
           for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
 
-            var totalTicketSum = 0;
+            var productExpenses = $scope.companyBillableTickets[i].productExpenses,
+              serviceExpenses = $scope.companyBillableTickets[i].serviceExpenses;
 
-            for (var j = 0; j < $scope.companyBillableTickets[i].productExpenses.length; j++) {
-              totalTicketSum += $scope.companyBillableTickets[i].productExpenses[j].sum;
-            }
-
-            for (var j = 0; j < $scope.companyBillableTickets[i].serviceExpenses.length; j++) {
-              totalTicketSum += $scope.companyBillableTickets[i].serviceExpenses[j].sum;
-            }
-            $scope.totalTicketSum[$scope.companyBillableTickets[i].id] = totalTicketSum;
-          }
-
-          function setTicketsCheckboxes(val) {
-
-            var companyId = $scope.billableCompany.company.id;
-
-            for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
-              var ticketId = $scope.companyBillableTickets[i].id;
-              $scope.ticketsSelection[companyId].tickets[ticketId] = val;
-            }
+            $scope.totalTicketSum[$scope.companyBillableTickets[i].id] = calculateTotalTicketSum(productExpenses) + calculateTotalTicketSum(serviceExpenses);
           }
 
         });
+
+        function setTicketsCheckboxes(val) {
+
+          var companyId = $scope.billableCompany.company.id;
+
+          for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
+            var ticketId = $scope.companyBillableTickets[i].id;
+            $scope.ticketsSelection[companyId].tickets[ticketId] = val;
+          }
+        }
+
+        function calculateTotalTicketSum(calculateArray) {
+
+          var totalTicketSum = 0;
+
+          for (var j = 0; j < calculateArray.length; j++) {
+            totalTicketSum += calculateArray[j].sum;
+          }
+
+          return totalTicketSum;
+
+        }
 
       }]);
 
