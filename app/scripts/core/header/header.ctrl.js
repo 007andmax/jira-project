@@ -17,6 +17,10 @@
             return 'products';
           } else if ($state.includes("ps.services")) {
             return 'services';
+          } else if ($state.includes("accounting.billable")) {
+            return 'billable';
+          } else if ($state.includes("accounting.recurring")) {
+            return 'recurring';
           }
         }
 
