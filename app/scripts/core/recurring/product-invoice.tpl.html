@@ -1,0 +1,32 @@
+<div ng-repeat="product in invoice.products" ng-controller="quicktech.core.recurring.editProductCtrl">
+
+  <li class="product" ng-if="!showEditProduct">
+    <div class="table-wrapper clearfix">
+
+      <div class="table-content pull-left">
+
+        <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
+
+        <div class="col-5">
+          <a href="javascript:void(0)" class="icn-nav-delete delete pull-right  delete tp-hide"
+             data-toggle="tooltip" data-placement="top" title=""
+             data-original-title="Delete" ng-click="deleteProductInvoice()"></a>
+          <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+             data-toggle="tooltip" data-placement="top" title=""
+             data-original-title="Edit Product" ng-click="showEditProductForm()"></a>
+        </div>
+
+        <div class="col-1">{{ product.item.name }}<span class="model">#{{ product.item.code }}</span></div>
+
+        <div class="col-4">{{ product.sum | currency }}</div>
+
+        <div class="col-3">{{ product.price | currency }} <span class="model">Qty {{ product.quantity }}</span></div>
+
+        <div class="col-2 description">{{ product.item.description }}</div>
+      </div>
+    </div>
+  </li>
+
+  <div ng-if="showEditProduct" ng-include="'/html/scripts/core/recurring/edit-product-invoice.tpl.html'"></div>
+
+</div>

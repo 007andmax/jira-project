@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.products").directive('scrollToForm',
+  angular.module("quicktech.common.directives").directive('scrollToForm',
     [function () {
       return {
         restrict: 'A',

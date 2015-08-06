@@ -2,10 +2,10 @@
 
 (function () {
 
-  angular.module("quicktech.core.services").filter('durationFilter', function () {
+  angular.module("quicktech.common.directives").filter('durationFilter', function () {
     return function (input) {
       if (!input) {
-        return "0 minuts";
+        return "00:00";
       }
 
       var timeInMinutes = input * 60,

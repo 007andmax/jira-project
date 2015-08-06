@@ -1,0 +1,62 @@
+<li class="clearfix add-new" ng-if="showCreateInvoiceForm" ng-controller="quicktech.core.recurring.createInvoiceCtrl">
+  <form name="createInvoiceForm">
+    <div class="clearfix">
+      <div class="col-1">{{ actualInvoiceNumber }}</div>
+
+      <div class="col-2 normal">
+        <div class="col-wrapper date-wrapper"
+             ng-class="{error: isShowingErrors(createInvoiceForm, 'createInvoiceDate')}">
+          <div ng-messages="createInvoiceForm.createInvoiceDate.$error"
+               ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceDate')">
+            <div class="qt-error-msg" ng-message="required">Date field cannot be left empty.</div>
+          </div>
+          <input type="text" id="datetimepicker2" datepicker-popup="{{ 'dd MMM yyyy' }}"
+                 ng-model="createInvoice.sentOn" min-date="validateMinDate" show-button-bar="false"
+                 is-open="opened" ng-required="true" aria-expanded="true" data-toggle="dropdown"
+                 name="createInvoiceDate"
+                 class="form-control no-cursor form-control-dropdown dropdown-toggle" ng-click="open()" READONLY>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div class="form-group dropdown frequency-wrapper"
+             ng-class="{error: isShowingErrors(createInvoiceForm, 'createInvoiceFrequency')}">
+          <div ng-messages="createInvoiceForm.createInvoiceFrequency.$error"
+               ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceFrequency')">
+            <div class="qt-error-msg" ng-message="required">Frequency field cannot be left empty.</div>
+          </div>
+          <input type="text" class="form-control no-cursor form-control-dropdown dropdown-toggle "
+                 ng-model="frequency[createInvoice.frequency]" data-toggle="dropdown" value="frequency.WEEKLY"
+                 name="createInvoiceFrequency" aria-expanded="true" READONLY ng-required="true">
+
+          <div class="priority-dot-pos">
+            <span class="priority-dot"
+                  ng-class="{'label-danger': createInvoice.frequency === 'WEEKLY', 'label-warning': createInvoice.frequency === 'YEARLY', 'label-green': createInvoice.frequency === 'MONTHLY'}">
+            </span>
+          </div>
+          <ul class="dropdown-menu dropdown-account-type">
+            <li ng-repeat="(value, label) in frequency" ng-click="createInvoice.frequency = value">
+              <a tabindex="-1" href="javascript:void(0)">
+                <span class="priority-dot"
+                      ng-class="{'label-danger': value === 'WEEKLY', 'label-warning': value === 'YEARLY', 'label-green': value === 'MONTHLY'}">
+                </span>{{ label }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-4 normal">{{ createNextDueDate || 'choose SENT ON' | date:'dd MMM yyyy' }}</div>
+      <div class="col-5 normal">$00</div>
+
+    </div>
+    <div class="add-more  new clearfix">
+      <div class="add-table-actions pull-right">
+        <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+           ng-click="cancelCreateRecurringInvoice()">Cancel</a>
+        <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+           ng-click="createRecurringInvoice(createInvoiceForm)" ng-disabled="disabledCreateButton">Create</a>
+      </div>
+    </div>
+  </form>
+</li>

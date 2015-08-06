@@ -1,0 +1,54 @@
+<div class="add-product clearfix">
+  <form name="editProductInvoiceForm">
+    <div class="col-1">
+      <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(editProductInvoiceForm, 'editProductName')}">
+        <div ng-messages="editProductInvoiceForm.editProductName.$error"
+             ng-if="isShowingErrors(editProductInvoiceForm, 'editProductName')">
+          <div class="qt-error-msg" ng-message="required">Name field cannot be left empty.</div>
+        </div>
+        <input type="text" class="form-control form-control-dropdown dropdown-toggle" placeholder="Product"
+               name="editProductName" ng-model="editProduct.item.name" ng-required="true"
+               data-toggle="dropdown" aria-expanded="true" tabindex="1"
+               typeahead="product.name as product.name for product in searchProducts($viewValue)">
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductInvoiceForm, 'editProductDescription')}">
+        <div ng-messages="editProductInvoiceForm.editProductDescription.$error"
+             ng-if="isShowingErrors(editProductInvoiceForm, 'editProductDescription')">
+          <div class="qt-error-msg" ng-message="required">Description field cannot be left empty.</div>
+          <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+        </div>
+        <input type="text" class="form-control" placeholder="Description"
+               tabindex="2" name="editProductDescription" ng-required="true"
+               ng-model="editProduct.description" ng-maxlength="1000">
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="col-wrapper">
+        <input type="text" class="form-control" placeholder="Amount" value="{{ editProduct.sum }}" READONLY>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductInvoiceForm, 'editProductQuantity')}">
+        <div ng-messages="editProductInvoiceForm.editProductQuantity.$error"
+             ng-if="isShowingErrors(editProductInvoiceForm, 'editProductQuantity')">
+          <div class="qt-error-msg" ng-message="required">Quantity field cannot be left empty.</div>
+        </div>
+        <input type="text" class="form-control" placeholder="Qty" tabindex="3"
+               ng-model="editProduct.quantity" ng-required="true" name="editProductQuantity"
+               hard-reset-pattern="numberPattern">
+      </div>
+    </div>
+    <div class="add-more  new clearfix">
+      <div class="add-table-actions pull-right">
+        <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+           ng-click="cancelEditProduct()">Cancel</a>
+        <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+           ng-click="saveProduct(editProductInvoiceForm)" ng-class="{disabled: disabledCreateProductButton}">
+          {{ product === undefined ? 'Create' : 'Save Changes' }}</a>
+      </div>
+    </div>
+  </form>
+</div>

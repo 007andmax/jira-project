@@ -1,0 +1,31 @@
+<li class="service" ng-repeat="service in invoice.services" ng-controller="quicktech.core.recurring.editServiceCtrl">
+
+  <div class="table-wrapper clearfix" ng-if="!showEditService">
+
+    <div class="table-content pull-left">
+
+      <div class="update-icon"><span class="icon-update icn-update-service"></span></div>
+
+      <div class="col-5">
+        <a href="javascript:void(0)" class="icn-nav-delete delete pull-right  delete tp-hide"
+           data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
+           ng-click="deleteServiceInvoice()"></a>
+        <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+           data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Service"
+           ng-click="showEditServiceForm()"></a>
+      </div>
+
+      <div class="col-1">{{ service.item.name }}</div>
+
+      <div class="col-4">{{ service.sum | currency }}</div>
+
+      <div class="col-3">Duration<span class="model">{{ service.item.timeBlock | durationFilter }}</span></div>
+      <div class="col-2 description">{{ service.description }}</div>
+
+    </div>
+
+  </div>
+
+  <div ng-if="showEditService" ng-include="'/html/scripts/core/recurring/edit-service-invoice.tpl.html'"></div>
+
+</li>
