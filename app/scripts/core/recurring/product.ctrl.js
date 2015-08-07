@@ -17,7 +17,6 @@
 
         $scope.$on('cancelEditForm', function () {
           $scope.showEditProduct = false;
-          $scope.showCreateProduct = false;
         });
 
       }]);

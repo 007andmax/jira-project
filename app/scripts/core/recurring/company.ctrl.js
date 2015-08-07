@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.companyCtrl',
-    ['$scope', 'CompaniesService', 'RecurringService', '$timeout',
-      function ($scope, CompaniesService, RecurringService, $timeout) {
+    ['$scope', 'CompaniesService', 'RecurringService', '$timeout', '$rootScope',
+      function ($scope, CompaniesService, RecurringService, $timeout, $rootScope) {
 
 
         $scope.toggleRecurringInvoices = function () {
@@ -22,11 +22,12 @@
 
         $scope.company = CompaniesService.getOneById($scope.recurringCompany.company.id);
 
-        $scope.$on('cancelCreateInvoiceForm', function () {
+        $scope.$on('cancelEditForm', function () {
           $scope.showCreateInvoiceForm = false;
         });
 
         $scope.showCreateRecurringInvoiceForm = function () {
+          $rootScope.$broadcast('cancelEditForm');
           $scope.showCreateInvoiceForm = true;
         };
 

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.createInvoiceCtrl',
-    ['$scope', 'RecurringService', 'BillableService',
-      function ($scope, RecurringService, BillableService) {
+    ['$scope', 'RecurringService', 'BillableService', '$rootScope',
+      function ($scope, RecurringService, BillableService, $rootScope) {
 
         $scope.actualInvoiceNumber = BillableService.getActualInvoiceNumber($scope, function (value) {
           $scope.actualInvoiceNumber = value;
@@ -47,16 +47,15 @@
         };
 
         $scope.cancelCreateRecurringInvoice = function () {
-          $scope.$emit('cancelCreateInvoiceForm');
+          $rootScope.$broadcast('cancelEditForm');
         };
 
         $scope.createRecurringInvoice = function (form) {
           if (form.$valid) {
             $scope.disabledCreateButton = true;
             $scope.createInvoice.sentOn = $scope.createInvoice.sentOn.getTime();
-            console.log($scope.createInvoice);
             RecurringService.createRecurringInvoice($scope.createInvoice, $scope.company.id, function () {
-              $scope.$emit('cancelCreateInvoiceForm');
+              $scope.$emit('cancelEditForm');
               $scope.disabledCreateButton = false;
             })
           } else {
