@@ -3,18 +3,26 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.companyCtrl',
-    ['$scope', 'CompaniesService', 'RecurringService',
-      function ($scope, CompaniesService, RecurringService) {
+    ['$scope', 'CompaniesService', 'RecurringService', '$timeout',
+      function ($scope, CompaniesService, RecurringService, $timeout) {
 
 
-        $scope.toggleInvoices = function () {
-          $scope.$emit('toggleReceivableInvoices');
+        $scope.toggleRecurringInvoices = function () {
+
+          if ($scope.showInvoices) {
+            $scope.$broadcast('toggleRecurringInvoices');
+
+            $timeout(function () {
+              $scope.showInvoices = false;
+            }, 200);
+          } else {
+            $scope.showInvoices = true;
+          }
         };
 
         $scope.company = CompaniesService.getOneById($scope.recurringCompany.company.id);
 
         $scope.$on('cancelCreateInvoiceForm', function () {
-          ;
           $scope.showCreateInvoiceForm = false;
         });
 
@@ -23,8 +31,7 @@
         };
 
         $scope.deleteAllRecurringInvoice = function () {
-          console.log('delete all ' + $scope.company.id);
-          //RecurringService.deleteAllRecurringInvoicesByCompany(companyId, callback)
+          RecurringService.deleteAllRecurringInvoicesByCompany($scope.company.id);
         };
 
       }]);

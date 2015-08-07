@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.recurring.editServiceCtrl',
-    ['$scope', 'RecurringService', 'ServicesService', '$rootScope',
-      function ($scope, RecurringService, ServicesService, $rootScope) {
+    ['$scope', 'RecurringService', 'ServicesService',
+      function ($scope, RecurringService, ServicesService) {
 
         $scope.editService = {};
 
@@ -31,36 +31,13 @@
           return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-
-        $scope.deleteServiceInvoice = function () {
-          console.log('delete service ' + $scope.service.id);
-          //RecurringService.deleteServiceExpenseFromRecInv(recurringInvoiceId, expenseId, callback)
-        };
-
-        $scope.showEditServiceForm = function () {
-          $rootScope.$broadcast('cancelEditForm');
-          $scope.showEditService = true;
-        };
-
-        $scope.$on('cancelEditForm', function () {
-          $scope.showEditService = false;
-          $scope.showCreateProduct = false;
-        });
-
         $scope.cancelEditService = function () {
-          console.log('cancelEditProduct');
-          $scope.service === undefined ? $scope.$emit('cancelCreateServiceInvoice') : $scope.showEditService = false;
+          $scope.$emit('cancelEditForm');
         };
 
         $scope.saveService = function (form) {
           if (form.$valid) {
             $scope.disabledCreateServiceButton = true;
-            //$scope.editService.item.timeBlock = ($scope.editService.item.timeBlock / 60);
-            //console.log($scope.editService);
-            //console.log($scope.editService.item.timeBlock);
-            //console.log($scope.invoice.id);
-            console.log('invoice id  ' + $scope.invoice.id);
-            console.log('product id ' + $scope.editService.id);
             RecurringService.saveRecInvServiceExpense($scope.invoice.id, {
               id: $scope.editService.id,
               description: $scope.editService.description,
@@ -72,12 +49,12 @@
               }
             }, function () {
               $scope.disabledCreateServiceButton = false;
-              $scope.service === undefined ? $scope.$emit('cancelCreateServiceInvoice') : $scope.showEditService = false;
+              $scope.$emit('cancelEditForm');
             })
           } else {
             $scope.triedToSaveService = true;
           }
-        }
+        };
 
       }]);
 

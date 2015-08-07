@@ -101,9 +101,9 @@
 
           <ul class="companies-list recurring" ftt-tab-content>
 
-            <li event-toggle-slider="toggleReceivableInvoices" ng-controller="quicktech.core.recurring.companyCtrl"
+            <li event-toggle-slider="toggleRecurringInvoices" ng-controller="quicktech.core.recurring.companyCtrl"
                 ng-repeat="recurringCompany in recurringCompanies">
-              <a href='javascript:void(0)' ng-click="toggleInvoices()">
+              <a href='javascript:void(0)' ng-click="toggleRecurringInvoices()">
 
                 <div class="ui-checkbox ui-checkbox-warning pull-left">
                   <label class="control checkbox" stop-propagation="click">
@@ -118,7 +118,8 @@
 
               </a>
 
-              <ul class="invoices recurring" ets-slider ng-controller="quicktech.core.recurring.companyInvoicesCtrl">
+              <ul class="invoices recurring" ets-slider ng-controller="quicktech.core.recurring.companyInvoicesCtrl"
+                  ng-if="showInvoices">
 
                 <li class="head clearfix">
 
@@ -143,8 +144,8 @@
                         {{ invoice.frequency }}
                       </span>
                     </div>
-                    <div class="col-4 normal">{{ nextDueDate[invoice.id] | date:'dd MMM yyyy' }}</div>
-                    <div class="col-5 normal">{{ totalInvoiceSum[invoice.id] | currency }}
+                    <div class="col-4 normal">{{ nextDueDate | date:'dd MMM yyyy' }}</div>
+                    <div class="col-5 normal">{{ totalInvoiceSum | currency }}
                       <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
                          ng-click="deleteRecurringInvoice()"
                          stop-propagation="click" data-toggle="tooltip" data-placement="top" title=""
@@ -192,7 +193,7 @@
               <div class="actions pull-right">
                 <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip" scroll-to-form
                         data-placement="top" title="" data-original-title="Create Invoice"
-                        ng-click="toggleInvoices(); showCreateRecurringInvoiceForm()">
+                        ng-click="showCreateRecurringInvoiceForm(); toggleRecurringInvoices();">
                   <span class="icns icn icn-create-invoice "></span></button>
                 <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
                    data-placement="top" title="" data-original-title="Delete"

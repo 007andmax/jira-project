@@ -10,13 +10,21 @@
           $scope.actualInvoiceNumber = value;
         });
 
+        $scope.frequency = {
+          WEEKLY: 'Weekly',
+          MONTHLY: 'Monthly',
+          YEARLY: 'Yearly'
+        };
+
         $scope.createInvoice = {
           products: [],
           services: [],
           frequency: 'WEEKLY'
         };
 
-        $scope.$watch('createInvoice.sentOn && createInvoice.frequency', function () {
+        $scope.$watchCollection(function () {
+          return [$scope.createInvoice.sentOn, $scope.createInvoice.frequency]
+        }, function () {
           var date = new Date($scope.createInvoice.sentOn);
           if ($scope.createInvoice.frequency === 'WEEKLY') {
             $scope.createNextDueDate = date.setDate(date.getDate() + 7);
@@ -25,13 +33,8 @@
           } else {
             $scope.createNextDueDate = date.setFullYear(date.getFullYear() + 1);
           }
-        });
+        }, true);
 
-        $scope.frequency = {
-          WEEKLY: 'Weekly',
-          MONTHLY: 'Monthly',
-          YEARLY: 'Yearly'
-        };
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveInvoice || form[fieldName].$dirty) && !form[fieldName].$valid;
