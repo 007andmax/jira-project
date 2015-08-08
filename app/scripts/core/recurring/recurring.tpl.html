@@ -26,7 +26,7 @@
         <div class="dropdown pull-right">
           <a href="javascript:void(0)"
              class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
-             data-placement="top" title="" data-original-title="ADD COMPANY" data-toggle="dropdown"><span
+             tooltip-placement="top" tooltip="ADD COMPANY" data-toggle="dropdown"><span
             class="icns icn icn-add-company "></span></a>
 
           <div class="dropdown-menu add-company-dropdown">
@@ -148,8 +148,8 @@
                     <div class="col-5 normal">{{ totalInvoiceSum | currency }}
                       <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
                          ng-click="deleteRecurringInvoice()"
-                         stop-propagation="click" data-toggle="tooltip" data-placement="top" title=""
-                         data-original-title="Delete"></a></div>
+                         stop-propagation="click" tooltip-placement="top" tooltip="Delete"></a>
+                    </div>
                   </div>
                   <ul class="updates" qt-ts-slider>
 
@@ -159,13 +159,11 @@
 
                     <div class="add-more clearfix">
                       <a class="add-product tp-hide" ng-disabled="showCreateProduct || showCreateService"
-                         data-toggle="tooltip" data-placement="top" title=""
-                         data-original-title="ADD PRODUCT" href="javascript:void(0)">
+                         tooltip-placement="top" tooltip="ADD PRODUCT" href="javascript:void(0)">
                         <!--ng-class="{disabled: showCreateProduct || showCreateService}"-->
                         <span class="icon-add icn-add-product" ng-click="showCreateProductInvoice()"></span></a>
                       <a class="add-service tp-hide" ng-disabled="showCreateProduct || showCreateService"
-                         data-toggle="tooltip" data-placement="top" title=""
-                         data-original-title="ADD SERVICE" href="javascript:void(0)">
+                         tooltip-placement="top" tooltip="ADD SERVICE" href="javascript:void(0)">
                         <!--ng-class="{disabled: showCreateProduct || showCreateService}"-->
                         <span class="icon-add icn-add-service" ng-click="showCreateServiceInvoice()"></span></a>
                     </div>
@@ -191,13 +189,13 @@
               </ul>
 
               <div class="actions pull-right">
-                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" data-toggle="tooltip" scroll-to-form
-                        data-placement="top" title="" data-original-title="Create Invoice"
+                <button class="btn btn-sr btn-create-in btn-scooter   pull-left" scroll-to-form
+                        tooltip-placement="top" tooltip="Create Invoice"
                         ng-click="showCreateRecurringInvoiceForm(); toggleRecurringInvoices();">
                   <span class="icns icn icn-create-invoice "></span></button>
-                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" data-toggle="tooltip"
-                   data-placement="top" title="" data-original-title="Delete"
-                   ng-click="deleteAllRecurringInvoice()"></a>
+                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
+                   tooltip-placement="top" tooltip="Delete" ng-click="deleteAllRecurringInvoice()">
+                </a>
               </div>
 
             </li>

@@ -8,12 +8,10 @@
         <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
 
         <div class="col-5">
-          <a href="javascript:void(0)" class="icn-nav-delete delete pull-right  delete tp-hide"
-             data-toggle="tooltip" data-placement="top" title=""
-             data-original-title="Delete" ng-click="deleteProductInvoice()"></a>
-          <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
-             data-toggle="tooltip" data-placement="top" title=""
-             data-original-title="Edit Product" ng-click="showEditProductForm()"></a>
+          <a href="javascript:void(0)" class="icn-nav-delete delete pull-right  delete tp-hide" tooltip-placement="top"
+             tooltip="Delete" ng-click="deleteProductInvoice()"></a>
+          <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" tooltip-placement="top"
+             tooltip="Edit Product" ng-click="showEditProductForm()"></a>
         </div>
 
         <div class="col-1">{{ product.item.name }}<span class="model">#{{ product.item.code }}</span></div>

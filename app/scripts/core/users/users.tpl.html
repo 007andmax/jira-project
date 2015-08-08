@@ -19,8 +19,8 @@
               {{ user.firstName }} {{ user.lastName }}
             </h3>
           <span class="pull-left">
-          <a href="javascript:void(0)" class="icn-edit tp-hide" data-toggle="tooltip" data-placement="top"
-             title="" data-original-title="Edit user" ng-click="setEditUserId(user.id)"></a>
+          <a href="javascript:void(0)" class="icn-edit tp-hide" tooltip-placement="top"
+             tooltip="Edit user" ng-click="setEditUserId(user.id)"></a>
         </span>
           </div>
           <div class="status pull-left"><span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
