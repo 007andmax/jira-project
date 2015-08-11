@@ -157,6 +157,14 @@
 
                     <div ng-include="'/html/scripts/core/recurring/service-invoice.tpl.html'"></div>
 
+                    <div ng-if="showCreateProduct"
+                         ng-include="'/html/scripts/core/recurring/edit-product-invoice.tpl.html'"
+                         ng-controller="quicktech.core.recurring.editProductCtrl"></div>
+
+                    <div ng-if="showCreateService"
+                         ng-include="'/html/scripts/core/recurring/edit-service-invoice.tpl.html'"
+                         ng-controller="quicktech.core.recurring.editServiceCtrl"></div>
+
                     <div class="add-more clearfix">
                       <a class="add-product tp-hide" ng-disabled="showCreateProduct || showCreateService"
                          tooltip-placement="top" tooltip="ADD PRODUCT" href="javascript:void(0)">
@@ -167,14 +175,6 @@
                         <!--ng-class="{disabled: showCreateProduct || showCreateService}"-->
                         <span class="icon-add icn-add-service" ng-click="showCreateServiceInvoice()"></span></a>
                     </div>
-
-                    <div ng-if="showCreateProduct"
-                         ng-include="'/html/scripts/core/recurring/edit-product-invoice.tpl.html'"
-                         ng-controller="quicktech.core.recurring.editProductCtrl"></div>
-
-                    <div ng-if="showCreateService"
-                         ng-include="'/html/scripts/core/recurring/edit-service-invoice.tpl.html'"
-                         ng-controller="quicktech.core.recurring.editServiceCtrl"></div>
 
                   </ul>
                 </li>

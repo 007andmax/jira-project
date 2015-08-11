@@ -5,11 +5,14 @@
         <div ng-messages="editProductInvoiceForm.editProductName.$error"
              ng-if="isShowingErrors(editProductInvoiceForm, 'editProductName')">
           <div class="qt-error-msg" ng-message="required">Name field cannot be left empty.</div>
+          <div class="qt-error-msg" ng-message="parse">Please select the product.</div>
         </div>
         <input type="text" class="form-control form-control-dropdown dropdown-toggle" placeholder="Product"
-               name="editProductName" ng-model="editProduct.item.name" ng-required="true"
+               name="editProductName" ng-model="editProduct.item" ng-required="true"
                data-toggle="dropdown" aria-expanded="true" tabindex="1"
-               typeahead="product.name as product.name for product in searchProducts($viewValue)">
+               typeahead="product as product.name for product in searchProducts($viewValue)"
+               typeahead-min-length="0" typeahead-editable="false"
+               qt-typeahead-show-on-focus ng-trim="false">
       </div>
     </div>
 

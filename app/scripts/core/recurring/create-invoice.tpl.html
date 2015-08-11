@@ -10,21 +10,15 @@
                ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceDate')">
             <div class="qt-error-msg" ng-message="required">Date field cannot be left empty.</div>
           </div>
-          <input type="text" id="datetimepicker2" datepicker-popup="{{ 'dd MMM yyyy' }}"
-                 ng-model="createInvoice.sentOn" min-date="validateMinDate" show-button-bar="false"
-                 is-open="opened" ng-required="true" aria-expanded="true" data-toggle="dropdown"
-                 name="createInvoiceDate"
-                 class="form-control no-cursor form-control-dropdown dropdown-toggle" ng-click="open()" READONLY>
+          <input type="text" time-picker id="datetimepicker1" ng-required="true"
+                 class="form-control form-control-dropdown dropdown-toggle has-dropdown"
+                 data-toggle="dropdown" aria-expanded="true" placeholder="Date" name="createInvoiceDate"
+                 ng-model="createInvoice.sentOn">
         </div>
       </div>
 
       <div class="col-3">
-        <div class="form-group dropdown frequency-wrapper"
-             ng-class="{error: isShowingErrors(createInvoiceForm, 'createInvoiceFrequency')}">
-          <div ng-messages="createInvoiceForm.createInvoiceFrequency.$error"
-               ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceFrequency')">
-            <div class="qt-error-msg" ng-message="required">Frequency field cannot be left empty.</div>
-          </div>
+        <div class="form-group dropdown frequency-wrapper">
           <input type="text" class="form-control no-cursor form-control-dropdown dropdown-toggle "
                  ng-model="frequency[createInvoice.frequency]" data-toggle="dropdown" value="frequency.WEEKLY"
                  name="createInvoiceFrequency" aria-expanded="true" READONLY ng-required="true">

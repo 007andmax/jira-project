@@ -6,7 +6,7 @@
     ['$scope', 'RecurringService', 'ProductsService',
       function ($scope, RecurringService, ProductsService) {
 
-        $scope.editProduct = {};
+        $scope.editProduct = {item: {}};
 
         $scope.searchProducts = ProductsService.search;
 
@@ -15,8 +15,8 @@
           $scope.editProduct = {
             id: $scope.product.id,
             description: $scope.product.description,
-            createdAt: $scope.product.createdAt,
             quantity: $scope.product.quantity,
+            serialNumber: $scope.product.serialNumber,
             item: {
               versionedId: $scope.product.item.versionedId,
               name: $scope.product.item.name
@@ -25,8 +25,6 @@
         }
 
         $scope.numberPattern = /^\d?[0-9]{0,17}$/;
-
-        $scope.categoryProducts = ProductsService.getCategories($scope);
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
@@ -37,6 +35,7 @@
         };
 
         $scope.saveProduct = function (form) {
+          console.log($scope.editProduct);
           if (form.$valid) {
             $scope.disabledCreateProductButton = true;
             RecurringService.saveRecInvProductExpense($scope.invoice.id, $scope.editProduct, function () {

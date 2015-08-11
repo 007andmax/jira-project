@@ -9,64 +9,19 @@
         </div>
         <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
                placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-               ng-model="editService.item.name" name="editServiceName" ng-required="true"
-               typeahead="companyService.name as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
+               ng-model="editService.item" name="editServiceName" ng-required="true"
+               typeahead="companyService as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
                typeahead-min-length="0" typeahead-editable="false"
                qt-typeahead-show-on-focus ng-trim="false">
-        <!--<ul class="dropdown-menu dropdown-menu-services">-->
-        <!--<li role="presentation" ng-repeat="companyService in companyServices">-->
-        <!--<a role="menuitem" tabindex="-1" href="javascript:void(0);"-->
-        <!--ng-click="editService.item.name = companyService.name">   &lt;!&ndash;ng-click="service.id = companyService.versionedId.id; service.name = companyService.name"&ndash;&gt;-->
-        <!--{{ companyService.name }} </a>-->
-        <!--</li>-->
-        <!--</ul>-->
       </div>
     </div>
     <div class="col-2">
-      <div class="col-wrapper dropdown"
-           ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceTimeBlock')}">
-        <div ng-messages="editServiceInvoiceForm.editServiceTimeBlock.$error"
-             ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceTimeBlock')">
-          <div class="qt-error-msg" ng-message="required">Hr : Min field cannot be left empty.</div>
-        </div>
-        <input type="text" class="form-control" ng-required="true"
-               aria-expanded="true" placeholder="Hr : Min" ng-model="editService.item.timeBlock"
-               name="editServiceTimeBlock" hard-reset-pattern="numberPattern">
-        <!--<div class="dropdown-menu dropdown-menu-transparent dropdown-time">-->
-
-        <!--<ul id="servicehour" class="dropdown-menu dropdown-menu-hour">-->
-        <!--<li role="presentation" ng-repeat="hour in serviceMeta.hours">-->
-        <!--<a role="menuitem" tabindex="-1" href="#" ng-click="setTime($event, 'hour', -1);" ng-class="{'active': service.selectedHour === hour}">{{ hour | numberFixedLen:2 }}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--<ul id="serviceminute" class="dropdown-menu dropdown-menu-minute">-->
-        <!--<li role="presentation" ng-repeat="min in serviceMeta.minutes">-->
-        <!--<a role="menuitem" tabindex="-1" href="#" ng-click="setTime($event, 'min', -1);" ng-class="{'active': service.selectedMin === min}">{{ min | numberFixedLen:2 }}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
+      <div class="col-wrapper dropdown">
+        <input type="text" class="form-control" ng-required="true" READONLY
+               aria-expanded="true" placeholder="{{ service.item.timeBlock | durationFilter }}">
       </div>
     </div>
-    <div class="col-4">
-      <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceDate')}">
-        <div ng-messages="editServiceInvoiceForm.editServiceDate.$error"
-             ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceDate')">
-          <div class="qt-error-msg" ng-message="required">Date field cannot be left empty.</div>
-        </div>
-        <input type="text" id="datetimepicker1" datepicker-popup="{{ 'dd MMM yyyy' }}"
-               ng-model="editService.createdAt" show-button-bar="false"
-               is-open="openedServiceDate" ng-required="true" aria-expanded="true" data-toggle="dropdown"
-               name="editServiceDate"
-               class="form-control no-cursor form-control-dropdown dropdown-toggle"
-               placeholder="Date" ng-click="openServiceDate()" READONLY>
-        <!--<input type="text" id="datetimepicker2" datepicker-popup="{{ 'dd MMM yyyy' }}"-->
-        <!--ng-model="editService.createdAt" min-date="validateMinDate" show-button-bar="false"-->
-        <!--is-open="opened" ng-required="true" aria-expanded="true" data-toggle="dropdown" name="createInvoiceDate"-->
-        <!--class="form-control no-cursor form-control-dropdown dropdown-toggle" ng-click="open()" READONLY >-->
-      </div>
-    </div>
+
     <div class="col-3">
       <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')}">
         <div ng-messages="editServiceInvoiceForm.editServiceDescription.$error"
@@ -76,6 +31,11 @@
         </div>
         <input type="text" class="form-control service-description" placeholder="Description" ng-maxlength="1000"
                ng-model="editService.description" name="editServiceDescription" ng-required="true">
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="col-wrapper">
+        <input type="text" class="form-control" placeholder="Amount" value="{{ editService.sum }}" READONLY>
       </div>
     </div>
     <div class="add-more  new clearfix">

@@ -40,12 +40,6 @@
           return form[fieldName] && ($scope.triedToSaveInvoice || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.open = function () {
-          var today = new Date();
-          $scope.validateMinDate = today.setDate(today.getDate() + 1);
-          $scope.opened = true;
-        };
-
         $scope.cancelCreateRecurringInvoice = function () {
           $rootScope.$broadcast('cancelEditForm');
         };
