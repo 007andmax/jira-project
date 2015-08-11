@@ -6,7 +6,7 @@
     ['$scope', 'RecurringService', 'ProductsService',
       function ($scope, RecurringService, ProductsService) {
 
-        $scope.editProduct = {item: {}};
+        $scope.editProduct = {};
 
         $scope.searchProducts = ProductsService.search;
 
@@ -19,7 +19,8 @@
             serialNumber: $scope.product.serialNumber,
             item: {
               versionedId: $scope.product.item.versionedId,
-              name: $scope.product.item.name
+              name: $scope.product.item.name,
+              sale: $scope.product.sale
             }
           };
         }
@@ -35,7 +36,6 @@
         };
 
         $scope.saveProduct = function (form) {
-          console.log($scope.editProduct);
           if (form.$valid) {
             $scope.disabledCreateProductButton = true;
             RecurringService.saveRecInvProductExpense($scope.invoice.id, $scope.editProduct, function () {

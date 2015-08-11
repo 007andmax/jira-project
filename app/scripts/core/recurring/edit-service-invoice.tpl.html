@@ -16,9 +16,14 @@
       </div>
     </div>
     <div class="col-2">
-      <div class="col-wrapper dropdown">
-        <input type="text" class="form-control" ng-required="true" READONLY
-               aria-expanded="true" placeholder="{{ service.item.timeBlock | durationFilter }}">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
+        <div ng-messages="editServiceInvoiceForm.editServiceQuantity.$error"
+             ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')">
+          <div class="qt-error-msg" ng-message="required">Quantity field cannot be left empty.</div>
+        </div>
+        <input type="text" class="form-control" placeholder="Qty" tabindex="3"
+               ng-model="editService.quantity" ng-required="true" name="editServiceQuantity"
+               hard-reset-pattern="numberPattern">
       </div>
     </div>
 
@@ -35,7 +40,8 @@
     </div>
     <div class="col-4">
       <div class="col-wrapper">
-        <input type="text" class="form-control" placeholder="Amount" value="{{ editService.sum }}" READONLY>
+        <input type="text" class="form-control" placeholder="Amount"
+               value="{{ editService.quantity * editService.item.rate || '' }}" READONLY>
       </div>
     </div>
     <div class="add-more  new clearfix">

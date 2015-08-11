@@ -6,7 +6,7 @@
     ['$scope', 'RecurringService', 'ServicesService',
       function ($scope, RecurringService, ServicesService) {
 
-        $scope.editService = {item: {}};
+        $scope.editService = {};
 
         if ($scope.service !== undefined) {
 
@@ -17,7 +17,8 @@
             quantity: $scope.service.quantity,
             item: {
               versionedId: $scope.service.item.versionedId,
-              name: $scope.service.item.name
+              name: $scope.service.item.name,
+              rate: $scope.service.item.rate
             }
           };
         }
@@ -48,6 +49,7 @@
               }
             } : {
               description: $scope.editService.description,
+              quantity: $scope.editService.quantity,
               item: {
                 versionedId: $scope.editService.item.versionedId,
                 name: $scope.editService.item.name

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.companyTicketsCtrl',
-    ['$scope', 'BillableService',
-      function ($scope, BillableService) {
+    ['$scope', 'BillableService', '$timeout',
+      function ($scope, BillableService, $timeout) {
 
         $scope.companyBillableTickets = BillableService.getCompanyBillableTickets($scope.billableCompany.company.id, $scope, function () {
 
@@ -29,6 +29,17 @@
 
             $scope.totalTicketSum[ticketId] = calculateTotalTicketSum(productExpenses) + calculateTotalTicketSum(serviceExpenses);
           }
+
+          $scope.$watch('highlightProductId', function (idTicket) {
+            if (idTicket) {
+
+              $scope.$broadcast('showTicket-' + idTicket);
+
+              $timeout(function () {
+                $scope.setHighlightTicketId();
+              }, 3000)
+            }
+          })
 
         });
 

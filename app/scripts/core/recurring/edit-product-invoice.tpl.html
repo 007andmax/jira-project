@@ -30,7 +30,8 @@
     </div>
     <div class="col-4">
       <div class="col-wrapper">
-        <input type="text" class="form-control" placeholder="Amount" value="{{ editProduct.sum }}" READONLY>
+        <input type="text" class="form-control" placeholder="Amount"
+               value="{{ editProduct.quantity * product.item.sale || '' }}" READONLY>
       </div>
     </div>
     <div class="col-3">

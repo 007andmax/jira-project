@@ -35,6 +35,18 @@
           RecurringService.deleteAllRecurringInvoicesByCompany($scope.company.id);
         };
 
+        $scope.setHighlightInvoiceId = function (invoiceId) {
+          $scope.highlightInvoiceId = invoiceId;
+        };
+
+        $scope.$on($scope.company.id + '-showInvoice', function (event, invoiceId) {
+          if (!$scope.showInvoices) {
+            $scope.toggleRecurringInvoices();
+          }
+
+          $scope.setHighlightInvoiceId(invoiceId);
+        });
+
       }]);
 
 }());

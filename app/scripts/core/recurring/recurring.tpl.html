@@ -33,50 +33,9 @@
             <div class="clearfix">
               <div class="form-group ">
                 <input type="text" class="form-control form-control-round form-control-search dropdown-toggle "
-                       data-toggle="dropdown" data-provide="typeahead" autocomplete="off" id="typeahead"
-                       placeholder="Search Company...">
-
-                <!--<div class="">-->
-                <!--<ul class="company-list dropdown-menu scroll-pane" style="display:block;">-->
-                <!--<li ng-repeat="recurringCompany in recurringCompanies" ng-controller="quicktech.core.recurring.companyCtrl">-->
-
-                <!--<a href="">{{ company.name }}</a>-->
-
-                <!--</li>-->
-
-                <!--&lt;!&ndash;<li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<a href="">Global Media</a>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<a href="">Active Information Systems</a>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<a href="">Computer Experts</a>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<a href="">Sierra Dental Care</a>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<a href="">Acrologics</a>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<a href="">Computer Experts</a>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</li>&ndash;&gt;-->
-
-                <!--</ul>-->
-                <!--</div>-->
+                       placeholder="Search Company..." name="addCompany" ng-required="true"
+                       ng-model="company" typeahead-on-select="addCompany()"
+                       typeahead="company as company.name for company in allCompanies($viewValue)">
               </div>
             </div>
           </div>
@@ -134,7 +93,8 @@
                 </li>
 
                 <li class="clearfix" qt-toggle-slider ng-repeat="invoice in companyRecurringInvoices"
-                    ng-controller="quicktech.core.recurring.invoiceCtrl">
+                    ng-controller="quicktech.core.recurring.invoiceCtrl"
+                    show-model-element="{{ 'showInvoice-' + invoice.id }}">
                   <div class="hover" qt-ts-toggler>
                     <div class="col-1">{{ invoice.number }}</div>
                     <div class="col-2 normal">{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
