@@ -18,7 +18,7 @@
           } else {
             $scope.nextDueDate = date.setFullYear(date.getFullYear() + 1);
           }
-        });
+        }, true);
 
         function calculateTotalInvoiceSum(calculateArray) {
 
