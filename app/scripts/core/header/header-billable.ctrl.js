@@ -6,7 +6,7 @@
     ['$scope', '$rootScope', 'CompaniesService', 'BillableService', 'quicktech.common.services.SharedStateService',
       function ($scope, $rootScope, CompaniesService, BillableService, SharedStateService) {
 
-        $scope.searchCompany = CompaniesService.searchByAllCompanies;
+        $scope.sharedState = SharedStateService.getSharedState('billableClientsHeader');
 
         $scope.searchTicket = BillableService.search;
 

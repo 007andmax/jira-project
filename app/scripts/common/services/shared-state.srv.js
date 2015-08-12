@@ -20,6 +20,9 @@
         companiesHeader: {
           count: 0,
           filter: {keyword: ''}
+        },
+        billableClientsHeader: {
+          companies: []
         }
       };
 

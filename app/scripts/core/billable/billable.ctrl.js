@@ -3,8 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
-    ['$scope', 'BillableService',
-      function ($scope, BillableService) {
+    ['$scope', 'BillableService', 'quicktech.common.services.SharedStateService',
+      function ($scope, BillableService, SharedStateService) {
+
+        var headerSharedState = SharedStateService.getSharedState('billableClientsHeader');
 
         $scope.ticketsSelection = {};
 
@@ -21,10 +23,15 @@
 
         $scope.billableCompanies = BillableService.getBillableCompanies($scope, function () {
           $scope.$watch('billableCompanies', function () {
+            var companies = [];
             $scope.totalbillables = 0;
             for (var i = 0; i < $scope.billableCompanies.length; i++) {
-              $scope.totalbillables += $scope.billableCompanies[i].total;
+              var company = $scope.billableCompanies[i];
+              $scope.totalbillables += company.total;
+              companies.push(company);
             }
+
+            headerSharedState.companies = companies;
           })
         });
 
@@ -57,6 +64,10 @@
         $scope.createInvoice = function () {
           console.log('create invoice');
         };
+
+        $scope.$on('$destroy', function () {
+          SharedStateService.clearState('billableClientsHeader');
+        });
 
       }]);
 
