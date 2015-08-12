@@ -32,7 +32,7 @@
         };
 
         $scope.deleteAllRecurringInvoice = function () {
-          RecurringService.deleteAllRecurringInvoicesByCompany($scope.company.id);
+          RecurringService.deleteAllRecurringInvoicesByCompany($scope.company.id, $scope.recurringCompanies);
         };
 
         $scope.setHighlightInvoiceId = function (invoiceId) {

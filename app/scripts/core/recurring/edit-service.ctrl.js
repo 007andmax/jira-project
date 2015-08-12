@@ -38,23 +38,7 @@
         $scope.saveService = function (form) {
           if (form.$valid) {
             $scope.disabledCreateServiceButton = true;
-            RecurringService.saveRecInvServiceExpense($scope.invoice.id, $scope.editService.id ? {
-              id: $scope.editService.id,
-              description: $scope.editService.description,
-              date: $scope.editService.date,
-              quantity: $scope.editService.quantity,
-              item: {
-                versionedId: $scope.editService.item.versionedId,
-                name: $scope.editService.item.name
-              }
-            } : {
-              description: $scope.editService.description,
-              quantity: $scope.editService.quantity,
-              item: {
-                versionedId: $scope.editService.item.versionedId,
-                name: $scope.editService.item.name
-              }
-            }, function () {
+            RecurringService.saveRecInvServiceExpense($scope.invoice.id, $scope.editService, function () {
               $scope.disabledCreateServiceButton = false;
               $scope.$emit('cancelEditForm');
             })

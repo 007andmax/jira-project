@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
-    ['$scope', 'RecurringService', 'CompaniesService',
-      function ($scope, RecurringService, CompaniesService) {
+    ['$scope', 'RecurringService', 'CompaniesService', '$rootScope',
+      function ($scope, RecurringService, CompaniesService, $rootScope) {
 
         $scope.companySelection = {};
 
@@ -16,6 +16,10 @@
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
+        };
+
+        $scope.openAddCompanyForm = function () {
+          $rootScope.$broadcast('cancelEditForm');
         };
 
         $scope.addCompany = function () {

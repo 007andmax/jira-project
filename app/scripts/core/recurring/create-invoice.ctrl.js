@@ -17,8 +17,6 @@
         };
 
         $scope.createInvoice = {
-          products: [],
-          services: [],
           frequency: 'WEEKLY'
         };
 
@@ -47,8 +45,12 @@
         $scope.createRecurringInvoice = function (form) {
           if (form.$valid) {
             $scope.disabledCreateButton = true;
-            $scope.createInvoice.sentOn = $scope.createInvoice.sentOn.getTime();
-            RecurringService.createRecurringInvoice($scope.createInvoice, $scope.company.id, function () {
+            RecurringService.createRecurringInvoice({
+              products: [],
+              services: [],
+              sentOn: $scope.createInvoice.sentOn.getTime(),
+              frequency: $scope.createInvoice.frequency
+            }, $scope.company.id, function () {
               $scope.$emit('cancelEditForm');
               $scope.disabledCreateButton = false;
             })
