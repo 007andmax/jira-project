@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
-    ['$scope', 'BillableService', 'quicktech.common.services.SharedStateService',
-      function ($scope, BillableService, SharedStateService) {
+    ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
+      function ($scope, BillableService, CompaniesService, SharedStateService) {
 
         var headerSharedState = SharedStateService.getSharedState('billableClientsHeader');
 
@@ -25,9 +25,13 @@
           $scope.$watch('billableCompanies', function () {
             var companies = [];
             $scope.totalbillables = 0;
+
             for (var i = 0; i < $scope.billableCompanies.length; i++) {
-              var company = $scope.billableCompanies[i];
-              $scope.totalbillables += company.total;
+
+              var companyTotal = $scope.billableCompanies[i],
+                company = CompaniesService.getOneById(companyTotal.company.id);
+
+              $scope.totalbillables += companyTotal.total;
               companies.push(company);
             }
 
