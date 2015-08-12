@@ -1,0 +1,27 @@
+<div class="content-wrapper">
+  <div class="content-body">
+    <div role="tabpanel" fixed-tab-topbar="0">
+      <div class="tabs-topbar" ftt-topbar-to-be-fixed>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li role="presentation" ng-class="{active: mode === 'group-by-company'}">
+            <a ui-sref="receipt-archive({mode: 'group-by-company'})">
+              Invoice by Company
+            </a>
+          </li>
+          <li role="presentation" ng-class="{active: mode === 'list'}">
+            <a ui-sref="receipt-archive({mode: 'list'})">
+              Invoice by Number
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div ng-include="'/html/scripts/core/receipt-archive/'+ mode +'.tpl.html'"></div>
+      </div>
+
+    </div>
+  </div>
+</div>

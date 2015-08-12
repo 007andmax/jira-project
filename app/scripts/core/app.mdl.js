@@ -15,6 +15,7 @@
       'quicktech.core.billable',
       'quicktech.core.recurring',
       'quicktech.core.receivable',
+      'quicktech.core.receiptArchive',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -105,6 +106,11 @@
         url: '/receivable/:mode',
         templateUrl: '/html/scripts/core/receivable/receivable.tpl.html',
         controller: 'quicktech.core.receivable.receivableCtrl'
+      }))
+      .state('receipt-archive', waitForServices({
+        url: '/receipt-archive/:mode',
+        templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
+        controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
       }));
 
     function waitForServices(conf) {
