@@ -20,7 +20,7 @@
             item: {
               versionedId: $scope.product.item.versionedId,
               name: $scope.product.item.name,
-              sale: $scope.product.sale
+              sale: $scope.product.item.sale
             }
           };
         }

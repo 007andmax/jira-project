@@ -960,12 +960,13 @@
       }, addCompany: function (a, b) {
         if (!a)throw"recurring is required!";
         if (!b)throw"companyId is required!";
-        a.push({company: d.getOneById(b)})
+        for (var e = 0; e < a.length; e++)if (a[e].company.id ===
+          b)return;
+        a.push({company: d.getOneById(b), total: 0, ticketsCount: 0})
       }
     }
   }])
-})(window,
-  jQuery);
+})(window, jQuery);
 (function (v, r, t) {
   angular.module("main.services").factory("RightPanelService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", "UsersService", "DevicesService", function (h, n, k, d, f, e, b) {
     function a() {
