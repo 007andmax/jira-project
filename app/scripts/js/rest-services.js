@@ -1,7 +1,7 @@
 (function (v, r, t) {
   v.layLoadingPageSize = 15;
   r = angular.module("main.services", []);
-  r.config(["$provide", "$httpProvider", function (h, m) {
+  r.config(["$provide", "$httpProvider", function (h, n) {
     h.factory("myHttpInterceptor", [function () {
       return {
         request: function (h) {
@@ -13,18 +13,18 @@
         }
       }
     }]);
-    m.interceptors.push("myHttpInterceptor")
+    n.interceptors.push("myHttpInterceptor")
   }]);
-  r.run(["$http", "$rootScope", function (h, m) {
+  r.run(["$http", "$rootScope", function (h, n) {
     h.get("/users/current").success(function (h) {
-      m.currentUser = h
+      n.currentUser = h
     });
-    m.numberCounterDelimiter = "-"
+    n.numberCounterDelimiter = "-"
   }]);
   r.service("Downloader", function () {
     function h(f) {
       if (/(iP)/g.test(navigator.userAgent))return alert("Your device does not support files downloading. Please try again in desktop browser."), !1;
-      if (m || k || d) {
+      if (n || k || d) {
         var e = document.createElement("a");
         e.href = f;
         if (e.download !== t) {
@@ -38,7 +38,7 @@
       return !0
     }
 
-    var m = -1 < navigator.userAgent.toLowerCase().indexOf("chrome"), k = -1 < navigator.userAgent.toLowerCase().indexOf("safari"), d = -1 < navigator.userAgent.toLowerCase().indexOf("firefox");
+    var n = -1 < navigator.userAgent.toLowerCase().indexOf("chrome"), k = -1 < navigator.userAgent.toLowerCase().indexOf("safari"), d = -1 < navigator.userAgent.toLowerCase().indexOf("firefox");
     return {
       downloadByUrl: h, downloadTicketAttachments: function (d) {
         h("/v2/tickets/" + d + "/downloadAttachments")
@@ -48,14 +48,14 @@
     }
   });
   r.service("Utils", ["$http", function (h) {
-    function m(b) {
+    function n(b) {
       var a =
         b;
       !a && this.staticCopy && (a = this);
       if ("[object Array]" === Object.prototype.toString.call(a)) {
         b = [];
-        for (var c = 0; c < a.length; c++)b.push(m(a[c]))
-      } else if ("[object Object]" === Object.prototype.toString.call(a))for (c in b = {}, a)"staticCopy" !== c && "$$hashKey" != c && (b[c] = m(a[c])); else return a;
+        for (var c = 0; c < a.length; c++)b.push(n(a[c]))
+      } else if ("[object Object]" === Object.prototype.toString.call(a))for (c in b = {}, a)"staticCopy" !== c && "$$hashKey" != c && (b[c] = n(a[c])); else return a;
       return b
     }
 
@@ -68,18 +68,18 @@
         k(g);
         f(a, c, g)
       }
-      f(a, "staticCopy", m);
+      f(a, "staticCopy", n);
       return a
     }
 
     function d(b, a) {
       if (a) {
         for (var c = 0; c < b.length; c++)a.push(k(b[c]));
-        f(a, "staticCopy", m);
+        f(a, "staticCopy", n);
         return a
       }
       for (c = 0; c < b.length; c++)b[c] = k(b[c]);
-      f(b, "staticCopy", m);
+      f(b, "staticCopy", n);
       return b
     }
 
@@ -137,7 +137,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("AddressesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("AddressesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     return {
       getAllLocales: function (f) {
         var e = d.customizeObj({});
@@ -153,7 +153,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("BillableService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("BillableService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     return {
       getTotalBilledAmount: function (f, e) {
         var b = d.customizeObj({});
@@ -270,17 +270,17 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("CompaniesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("CompaniesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     function f(b, c) {
       if (!b)throw"Keyword is required!";
-      for (var d = [], l = 0; l < a.companies.length; l++) {
-        var e = a.companies[l];
+      for (var d = [], m = 0; m < a.companies.length; m++) {
+        var e = a.companies[m];
         (c || a.currentCompany.id !== e.id) && -1 < e.name.indexOf(b) && d.push(e)
       }
       return d
     }
 
-    m = m.$new();
+    n = n.$new();
     var e = !1, b = [], a = {companies: [], clientCompanies: [], currentCompany: {}};
     d.customizeObj(a);
     h.get("/company/clients").then(function (b) {
@@ -303,13 +303,13 @@
       throw"Cannot initialize CompaniesService!";
     });
     var c = 0;
-    k.subscribe("/company", m, function (c) {
+    k.subscribe("/company", n, function (c) {
       console.log(c);
       if (e)if ("COMPANY_SAVED" == c.action) {
-        var n =
+        var l =
           d.findById(a.companies, c.data.id);
-        if (n)d.customizeObj(c.data, n); else for (c = d.customizeObj(c.data), a.companies.push(c), a.clientCompanies.push(c), c = 0; c < b.length; c++)b[c]()
-      } else if ("COMPANY_ARCHIVED" == c.action)for (d.deleteById(a.companies, c.data.id), d.deleteById(a.clientCompanies, c.data.id), c = 0; c < b.length; c++)b[c](); else if ("COMPANY_DEARCHIVED" == c.action)for (n = d.customizeObj(c.data), a.clientCompanies.push(n), a.companies.push(n), c = 0; c < b.length; c++)b[c]()
+        if (l)d.customizeObj(c.data, l); else for (c = d.customizeObj(c.data), a.companies.push(c), a.clientCompanies.push(c), c = 0; c < b.length; c++)b[c]()
+      } else if ("COMPANY_ARCHIVED" == c.action)for (d.deleteById(a.companies, c.data.id), d.deleteById(a.clientCompanies, c.data.id), c = 0; c < b.length; c++)b[c](); else if ("COMPANY_DEARCHIVED" == c.action)for (l = d.customizeObj(c.data), a.clientCompanies.push(l), a.companies.push(l), c = 0; c < b.length; c++)b[c]()
     });
     return {
       _addAmountChangeListener: function (a) {
@@ -350,10 +350,10 @@
       }, getCompanyInfo: function (a, b, c) {
         if (!a)throw"companyId is required!";
         if (!b || !b.$id)throw"Second argument must be Angularjs scope!";
-        var l = d.customizeObj({});
+        var m = d.customizeObj({});
         h.get("/company/" + a + "/info").then(function (a) {
           d.customizeObj(a.data,
-            l);
+            m);
           c && c(a.data)
         }, function (a) {
           c && c(a.data)
@@ -362,10 +362,10 @@
           console.log(b);
           if ("CLIENT_COMPANY_INFO" == b.action) {
             b = JSON.parse(b.data);
-            for (var c in b)c === a && d.customizeObj(b[a], l)
+            for (var c in b)c === a && d.customizeObj(b[a], m)
           }
         });
-        return l
+        return m
       }, archive: function (a, b) {
         if (!a)throw"companyId is required!";
         var c = h.get("/company/archive/" + a);
@@ -392,31 +392,31 @@
         return c
       }, isNameUnique: function (a, b, c) {
         if (!a)throw"name is required!";
-        var l = d.customizeObj({});
+        var m = d.customizeObj({});
         h.get("/company/isCompanyNameUnique?name=" + a + "&id=" + b).then(function (a) {
-          d.customizeObj(a.data, l);
+          d.customizeObj(a.data, m);
           c && c(a.data)
         }, function (a) {
           c &&
           c(a.data)
         });
-        return l
+        return m
       }, isDomainUnique: function (a, b, c) {
         if (!a)throw"domain is required!";
-        var l = d.customizeObj({});
+        var m = d.customizeObj({});
         h.get("/company/isCompanyDomainUnique?domain=" + a + "&id=" + b).then(function (a) {
-          d.customizeObj(a.data, l);
+          d.customizeObj(a.data, m);
           c && c(a.data)
         }, function (a) {
           c && c(a.data)
         });
-        return l
+        return m
       }
     }
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("ContactsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, m, k, d) {
+  angular.module("main.services").factory("ContactsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, k, d) {
     return {
       isEmailUnique: function (f, e, b) {
         if (!f)throw"email is required!";
@@ -433,8 +433,8 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("DevicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "UsersService", function (h, m, k, d, f) {
-    m = m.$new();
+  angular.module("main.services").factory("DevicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "UsersService", function (h, n, k, d, f) {
+    n = n.$new();
     var e = {devices: [], devicesByCompanies: {}};
     d.customizeObj(e);
     h.get("/devices").then(function (b) {
@@ -451,7 +451,7 @@
       console.error(b);
       throw"Cannot initialize CompaniesService!";
     });
-    k.subscribe("/device", m, function (b) {
+    k.subscribe("/device", n, function (b) {
       console.log(b)
     });
     return {
@@ -466,12 +466,12 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("FilesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("FilesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     return {
       create: function (d, e, b, a, c) {
         if (!d)throw"file is required!";
-        var g = {}, n = new FormData;
-        n.append("file", d);
+        var g = {}, l = new FormData;
+        l.append("file", d);
         d = new XMLHttpRequest;
         d.upload.addEventListener("progress", e, !1);
         d.addEventListener("load", function (a) {
@@ -481,7 +481,7 @@
         }, !1);
         d.addEventListener("error", a, !1);
         d.open("POST", "/file?isAvatar=" + !!c);
-        d.send(n);
+        d.send(l);
         return g
       }, createImageFromBase64Url: function (d, e) {
         if (!d)throw"base64Url is required!";
@@ -516,7 +516,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("ProductsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, m, k, d, f) {
+  angular.module("main.services").factory("ProductsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, k, d, f) {
     return {
       search: function (d) {
         if (!d)throw"Keyword is required!";
@@ -600,7 +600,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("RealTimeService", ["$http", "$timeout", "$rootScope", function (h, m, k) {
+  angular.module("main.services").factory("RealTimeService", ["$http", "$timeout", "$rootScope", function (h, n, k) {
     function d() {
       h.post("/realTime/createWatcher").success(function (b) {
         a = b.id;
@@ -620,21 +620,21 @@
 
     function f() {
       a = t;
-      for (var b in n) {
-        var g = n[b];
+      for (var b in l) {
+        var g = l[b];
         g && !g.scope.$$destroyed && c.push(g)
       }
-      n =
+      l =
       {};
       d()
     }
 
     function e() {
-      0 < g ? m(e, 300) : h.post("/realTime/watch/" + a, Object.keys(n) || []).then(function (a) {
+      0 < g ? n(e, 300) : h.post("/realTime/watch/" + a, Object.keys(l) || []).then(function (a) {
         console.log(a.data);
         if ("timeout" == a.data || "destroyed" == a.data.message || 205 == a.status)f(); else {
           for (var b in a.data) {
-            var c = n[b];
+            var c = l[b];
             if (c && !c.scope.$$destroyed) {
               var d = a.data[b];
               if (d)for (var g = 0; g < d.length; g++)c.callback(d[g])
@@ -643,33 +643,33 @@
           e()
         }
       }, function (a) {
-        a && 0 !== a.status ? 205 == a.status ? f() : (console.log("ERRRORRR!!!!!!!!!!!!", a), m(e, 300)) : (console.log("ERRRORRR?????", a), m(f, 1E3))
+        a && 0 !== a.status ? 205 == a.status ? f() : (console.log("ERRRORRR!!!!!!!!!!!!", a), n(e, 300)) : (console.log("ERRRORRR?????", a), n(f, 1E3))
       })
     }
 
     function b(a) {
-      for (var c in n) {
-        var d = n[c];
+      for (var c in l) {
+        var d = l[c];
         d && !d.scope.$$destroyed && d.callback !== b && d.callback(a)
       }
       "COMPANY_ARCHIVED" !== a.action && "COMPANY_DEARCHIVED" !== a.action || k.$broadcast(a.action.toLowerCase(), a.data.id)
     }
 
-    var a, c = [{url: "/global", scope: k, callback: b}], g = 0, n = {};
+    var a, c = [{url: "/global", scope: k, callback: b}], g = 0, l = {};
     d();
     var p = {
       subscribe: function (b, d, e) {
         a ? (g++, h.get("/realTime/subscribe/" + a + b).success(function (a) {
           g--;
-          n[a.id] = {url: b, scope: d, callback: e};
+          l[a.id] = {url: b, scope: d, callback: e};
           d.$on("$destroy", function () {
-            delete n[a.id]
+            delete l[a.id]
           })
-        }).error(function (a, n, p, h) {
+        }).error(function (a, l, p, h) {
           g--;
-          205 == n && (c.push({url: b, scope: d, callback: e}), f());
+          205 == l && (c.push({url: b, scope: d, callback: e}), f());
           console.error("Cannot subscribe on " +
-            b, a, n, p, h)
+            b, a, l, p, h)
         })) : c.push({url: b, scope: d, callback: e})
       }
     };
@@ -677,7 +677,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("ReceiptArchiveService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("ReceiptArchiveService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     return {
       getReceiptArchiveData: function (f, e) {
         if (!f || !f.$id)throw"First argument must be Angularjs scope!";
@@ -691,11 +691,11 @@
           k.subscribe("/receiptArchive", f, function (a) {
             console.log(a);
             if ("RECEIPT_ARCHIVE_ADDED" === a.action) {
-              for (var g = [], n = 0; n < a.data.length; n++) {
-                var e = a.data[n], l;
+              for (var g = [], l = 0; l < a.data.length; l++) {
+                var e = a.data[l], m;
                 if (e.recurringInvoice) {
                   var f = d.findById(b.list, e.recurringInvoice.id);
-                  f ? (d.defineReadOnlyProperty(f, "invoicesCount", f.invoicesCount + 1), d.defineReadOnlyProperty(f, "sum", f.sum + e.sum), e.date > f.date && (d.defineReadOnlyProperty(f, "date", e.date), d.defineReadOnlyProperty(f, "paidOn", e.paidOn))) : l = d.customizeObj({
+                  f ? (d.defineReadOnlyProperty(f, "invoicesCount", f.invoicesCount + 1), d.defineReadOnlyProperty(f, "sum", f.sum + e.sum), e.date > f.date && (d.defineReadOnlyProperty(f, "date", e.date), d.defineReadOnlyProperty(f, "paidOn", e.paidOn))) : m = d.customizeObj({
                     id: e.recurringInvoice.id,
                     isRecurring: !0,
                     frequency: e.recurringInvoice.frequency,
@@ -706,7 +706,7 @@
                     sum: e.sum,
                     invoicesCount: 1
                   })
-                } else l = d.customizeObj({
+                } else m = d.customizeObj({
                   id: e.id,
                   isRecurring: !1,
                   frequency: null,
@@ -717,7 +717,7 @@
                   sum: e.sum,
                   invoicesCount: null
                 });
-                l && (b.list.push(l), (e = b.companies[l.companyId]) ? e.push(l) : d.defineReadOnlyProperty(b.companies, l.companyId, d.customizeArray([l])), 0 > g.indexOf(l.companyId) && g.push(l.companyId))
+                m && (b.list.push(m), (e = b.companies[m.companyId]) ? e.push(m) : d.defineReadOnlyProperty(b.companies, m.companyId, d.customizeArray([m])), 0 > g.indexOf(m.companyId) && g.push(m.companyId))
               }
               b.list.sort(d.getComparatorBy("number"));
               g.forEach(function (a) {
@@ -725,7 +725,7 @@
               })
             } else if ("COMPANY_ARCHIVED" ===
               a.action) {
-              for (n = 0; n < b.list.length; n++)b.list[n].companyId === a.data.id && (b.list.splice(n, 1), n--);
+              for (l = 0; l < b.list.length; l++)b.list[l].companyId === a.data.id && (b.list.splice(l, 1), l--);
               delete b.companies[a.data.id]
             }
           });
@@ -739,7 +739,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("ReceivableService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (h, m, k, d, f) {
+  angular.module("main.services").factory("ReceivableService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (h, n, k, d, f) {
     function e(b, a) {
       if (!b)throw"invoiceIds is required!";
       var c = h({url: "/receivable/resend", method: "POST", data: b});
@@ -788,16 +788,16 @@
         });
         h.get("/receivable").then(function (d) {
           for (var e = f.customizeArray([]), p = 0; p < d.data.length; p++) {
-            var l = f.customizeObj(d.data[p]);
-            if (l.recurringInvoice) {
-              var h = f.findById(e, l.recurringInvoice.id);
-              h || (h = l.recurringInvoice, f.defineReadOnlyProperty(h, "isRecurring", !0), f.defineReadOnlyProperty(h, "company", l.company), f.defineReadOnlyProperty(h, "invoices", f.customizeArray([])), e.push(h));
-              h.invoices.push(l)
-            } else e.push(l)
+            var m = f.customizeObj(d.data[p]);
+            if (m.recurringInvoice) {
+              var h = f.findById(e, m.recurringInvoice.id);
+              h || (h = m.recurringInvoice, f.defineReadOnlyProperty(h, "isRecurring", !0), f.defineReadOnlyProperty(h, "company", m.company), f.defineReadOnlyProperty(h, "invoices", f.customizeArray([])), e.push(h));
+              h.invoices.push(m)
+            } else e.push(m)
           }
           e.sort(f.getComparatorBy("number"));
-          for (p = 0; p < e.length; p++)l = e[p], c.companies[l.company.id] ||
-          f.defineReadOnlyProperty(c.companies, l.company.id, f.customizeArray([])), c.companies[l.company.id].push(l);
+          for (p = 0; p < e.length; p++)m = e[p], c.companies[m.company.id] ||
+          f.defineReadOnlyProperty(c.companies, m.company.id, f.customizeArray([])), c.companies[m.company.id].push(m);
           f.defineReadOnlyProperty(c, "list", e);
           k.subscribe("/receivableInvoice", b, function (a) {
             console.log(a);
@@ -812,14 +812,14 @@
                 []), c.companies[d.company.id].push(b))
             } else if ("INVOICE_STATUS" === a.action)a.data.recurringInvoice ? ((b = f.findById(c.list, a.data.recurringInvoice.id)) || console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING RECURRING INVOICE-----!!!!!!!"), b = f.findById(b.invoices, a.data.id)) : b = f.findById(c.list, a.data.id), b ? f.defineReadOnlyProperty(b, "status", a.data.status) : console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!"); else if ("PAYMENT_RECEIVED" === a.action)for (a = a.data,
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         d = 0; d < a.length; d++) {
-              for (var e = a[d], n = 0; n < c.list.length && !g; n++) {
-                var l = c.list[n];
-                if (l.isRecurring)for (var p = 0; p < l.invoices.length && !g; p++) {
-                  var h = l.invoices[p];
-                  e === h.id && (l.invoices.splice(p, 1), g = h.company.id, b = l.id, 0 === l.invoices.length && c.list.splice(n, 1))
-                } else e === l.id && (c.list.splice(n, 1), g = l.company.id)
+              for (var e = a[d], l = 0; l < c.list.length && !g; l++) {
+                var m = c.list[l];
+                if (m.isRecurring)for (var p = 0; p < m.invoices.length && !g; p++) {
+                  var h = m.invoices[p];
+                  e === h.id && (m.invoices.splice(p, 1), g = h.company.id, b = m.id, 0 === m.invoices.length && c.list.splice(l, 1))
+                } else e === m.id && (c.list.splice(l, 1), g = m.company.id)
               }
-              g && c.companies[g] && (n = c.companies[g], b ? (e = f.indexOfId(n, b), -1 < e && 0 === n[e].invoices.length && n.splice(e, 1)) : (e = f.indexOfId(n, e), -1 < e && n.splice(e, 1)), 0 === n.length && delete c.companies[g])
+              g && c.companies[g] && (l = c.companies[g], b ? (e = f.indexOfId(l, b), -1 < e && 0 === l[e].invoices.length && l.splice(e, 1)) : (e = f.indexOfId(l, e), -1 < e && l.splice(e, 1)), 0 === l.length && delete c.companies[g])
             } else if ("COMPANY_ARCHIVED" ==
               a.action)for (delete c.companies[a.data.id], d = 0; d < c.list.length; d++)c.list[d].company.id === a.data.id && (c.list.splice(d, 1), d--)
           });
@@ -847,7 +847,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("RecurringService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (h, m, k, d, f) {
+  angular.module("main.services").factory("RecurringService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (h, n, k, d, f) {
     function e(a, b, d, e) {
       if (!b)throw"recurringInvoiceId is required!";
       if (!d)throw"expense is required!";
@@ -912,8 +912,8 @@
         if (!b || !b.$id)throw"Second argument must be Angularjs scope!";
         var e = [];
         h.get("/recurringInvoice?companyId=" +
-          a).then(function (p) {
-          f.customizeArray(p.data, e);
+          a).then(function (h) {
+          f.customizeArray(h.data, e);
           k.subscribe("/recurring?targetId=" + a, b, function (a) {
             console.log(a);
             if ("RECURRING_SAVED" == a.action) {
@@ -921,7 +921,7 @@
               b ? f.customizeObj(a.data, b) : e.push(f.customizeObj(a.data))
             } else"RECURRING_DELETE" == a.action && (a = f.indexOfId(e, a.data.id), -1 < a && e.splice(a, 1))
           });
-          d && d(p.data)
+          d && d(h.data)
         }, function (a) {
           d && d(a.data)
         });
@@ -939,12 +939,12 @@
       }, deleteAllRecurringInvoicesByCompany: function (a, b, d) {
         if (!a)throw"companyId is required!";
         var e = h({url: "/recurringInvoice/company/" + a, method: "DELETE"});
-        d(function () {
-          if (b)for (var d = 0; d < b.length; d++)b[d].company.id === a && (b.splice(d, 1), d--)
-        });
-        f.handleCallback(e, d)
-      }, saveRecInvProductExpense: function (a,
-                                             b, d) {
+        f.handleCallback(e, function (e) {
+          if (b)for (var l = 0; l < b.length; l++)b[l].company.id === a && (b.splice(l, 1), l--);
+          d && d(e.data)
+        })
+      },
+      saveRecInvProductExpense: function (a, b, d) {
         e("productExpense", a, b, d)
       }, saveRecInvServiceExpense: function (a, b, d) {
         e("serviceExpense", a, b, d)
@@ -964,9 +964,10 @@
       }
     }
   }])
-})(window, jQuery);
+})(window,
+  jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("RightPanelService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", "UsersService", "DevicesService", function (h, m, k, d, f, e, b) {
+  angular.module("main.services").factory("RightPanelService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", "UsersService", "DevicesService", function (h, n, k, d, f, e, b) {
     function a() {
       g.groupedData.splice(0, g.groupedData.length);
       for (var a = f.getClientCompanies(), d = 0; d < a.length; d++) {
@@ -996,10 +997,10 @@
       }
     }
 
-    m = m.$new();
+    n = n.$new();
     var g = {recentActivities: [], activitiesLists: {}, groupedData: []};
     d.customizeObj(g);
-    k.subscribe("/activity", m, function (a) {
+    k.subscribe("/activity", n, function (a) {
       if ("ACTIVITY_SAVED" == a.action) {
         a = d.customizeObj(a.data);
         g.recentActivities.unshift(a);
@@ -1072,7 +1073,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("ServicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, m, k, d, f) {
+  angular.module("main.services").factory("ServicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, k, d, f) {
     function e(b, a) {
       var c = a.company.id;
       c === f.getCurrentCompany().id && (c = "default");
@@ -1170,7 +1171,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("StatisticsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, m, k, d, f) {
+  angular.module("main.services").factory("StatisticsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, k, d, f) {
     return {
       getResolvedTicketsCountByCompany: function (e, b, a) {
         if (!e)throw"companyId is required!";
@@ -1285,13 +1286,13 @@
           var b, h;
           for (h in a.data)b ? (new Date(h)).getTime() > (new Date(b)).getTime() &&
           (b = h) : b = h;
-          var m = new Date(b);
+          var n = new Date(b);
           d.customizeObj(a.data, f);
           k.subscribe("/companyPaymentReceived?targetId=" + e, c, function (a) {
             console.log(a);
             if ("COMPANY_PAYMENT_RECEIVED" === a.action) {
               var c = new Date;
-              m.getFullYear() === c.getFullYear() && m.getMonth() === c.getMonth() && m.getDate() === c.getDate() && d.defineReadOnlyProperty(f, b, f[b] + a.data)
+              n.getFullYear() === c.getFullYear() && n.getMonth() === c.getMonth() && n.getDate() === c.getDate() && d.defineReadOnlyProperty(f, b, f[b] + a.data)
             }
           });
           g && g(a.data)
@@ -1312,8 +1313,8 @@
             if (a.getFullYear() === d.getFullYear() && a.getMonth() === d.getMonth() && a.getDate() === d.getDate())return !0
           }
 
-          var h, m;
-          for (m in a.data)h ? (new Date(m)).getTime() > (new Date(h)).getTime() && (h = m) : h = m;
+          var h, n;
+          for (n in a.data)h ? (new Date(n)).getTime() > (new Date(h)).getTime() && (h = n) : h = n;
           d.customizeObj(a.data,
             f);
           b(new Date(h)) && k.subscribe("/todayReceivableChartPoint?targetId=" + e, c, function (a) {
@@ -1376,13 +1377,13 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("SubscriptionsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, m, k, d, f) {
+  angular.module("main.services").factory("SubscriptionsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, k, d, f) {
     function e(b, a, c, e, f) {
       var p = d.customizeObj({});
       h(b).then(function (b) {
         for (var h = 0; h < b.data.length; h++) {
-          var m = b.data[h];
-          d.defineReadOnlyProperty(p, m.user.id, d.customizeObj(m))
+          var n = b.data[h];
+          d.defineReadOnlyProperty(p, n.user.id, d.customizeObj(n))
         }
         k.subscribe("/subscription?targetId=" + a, c, function (a) {
           console.log(a);
@@ -1424,7 +1425,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("TaxRatesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("TaxRatesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     return {
       getAllByCompany: function (f, e, b) {
         if (!e || !e.$id)throw"First argument must be Angularjs scope!";
@@ -1466,7 +1467,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("TicketsService", ["$http", "$rootScope", "RealTimeService", "Utils", "TicketTagsService", "CompaniesService", function (h, m, k, d, f, e) {
+  angular.module("main.services").factory("TicketsService", ["$http", "$rootScope", "RealTimeService", "Utils", "TicketTagsService", "CompaniesService", function (h, n, k, d, f, e) {
     function b(a) {
       a.filter && (a.filter = a.filter.toUpperCase());
       a.priority && (a.priority = a.priority.toUpperCase());
@@ -1488,10 +1489,10 @@
         params: c.params
       }).then(function (e) {
         if (e) {
-          for (var g = 0; g < e.data.length; g++) {
-            var h = e.data[g];
-            h.number = "Tkt# " + h.number;
-            h.tags && f._makeDynamic(h.tags, a)
+          for (var h = 0; h < e.data.length; h++) {
+            var g = e.data[h];
+            g.number = "Tkt# " + g.number;
+            g.tags && f._makeDynamic(g.tags, a)
           }
           d.customizeArray(e.data, c.list);
           c.loadingInProcess = !1;
@@ -1511,7 +1512,7 @@
       d.handleCallback(b, e)
     }
 
-    function n(a, b) {
+    function l(a, b) {
       for (var d in u.lists)for (var c = u.lists[d].list, e = 0; e < c.length; e++) {
         var f = c[e];
         if (f.id === a) {
@@ -1531,58 +1532,58 @@
         t[d.filter](a)
     }
 
-    function l(a) {
+    function m(a) {
       return a.assignedAt || a.createdAt
     }
 
     function w(a, b) {
-      return "URGENT" == b.filter && ("HIGH" != a.priorityLevel || "COMPLETED" == a.status || "ADMIN" !== m.currentUser.role && !a.sharedToCurrentUserAt) || "UNASSIGNED" == b.filter && a.assignedUser && a.assignedUser.id || "USER" == b.filter && (!a.assignedUser || a.assignedUser.id != m.currentUser.id) || "OPEN" == b.filter && "COMPLETED" == a.status || "CLOSED" == b.filter && ("COMPLETED" != a.status || "ADMIN" !== m.currentUser.role && (!a.assignedUser || a.assignedUser.id != m.currentUser.id)) ||
-      "SHARED" == b.filter && !a.sharedToCurrentUserAt || "SPAM" == b.filter && (!a.spamPerformer || !a.spamPerformer.id || "ADMIN" !== m.currentUser.role && a.spamPerformer.id != m.currentUser.id) || "TRASH" == b.filter && !a.trash || "SPAM" !== b.filter && "TRASH" !== b.filter && (a.spamPerformer && a.spamPerformer.id || a.trash) || b.companyId && b.companyId != a.company.id || b.status && b.status != a.status || b.priority && b.priority != a.priorityLevel ? !1 : !0
+      return "URGENT" == b.filter && ("HIGH" != a.priorityLevel || "COMPLETED" == a.status || "ADMIN" !== n.currentUser.role && !a.sharedToCurrentUserAt) || "UNASSIGNED" == b.filter && a.assignedUser && a.assignedUser.id || "USER" == b.filter && (!a.assignedUser || a.assignedUser.id != n.currentUser.id) || "OPEN" == b.filter && "COMPLETED" == a.status || "CLOSED" == b.filter && ("COMPLETED" != a.status || "ADMIN" !== n.currentUser.role && (!a.assignedUser || a.assignedUser.id != n.currentUser.id)) ||
+      "SHARED" == b.filter && !a.sharedToCurrentUserAt || "SPAM" == b.filter && (!a.spamPerformer || !a.spamPerformer.id || "ADMIN" !== n.currentUser.role && a.spamPerformer.id != n.currentUser.id) || "TRASH" == b.filter && !a.trash || "SPAM" !== b.filter && "TRASH" !== b.filter && (a.spamPerformer && a.spamPerformer.id || a.trash) || b.companyId && b.companyId != a.company.id || b.status && b.status != a.status || b.priority && b.priority != a.priorityLevel ? !1 : !0
     }
 
     var r = "ASSIGNED_USER PRIORITY_CHANGED STATUS TRASH SPAM TICKET_INVOICED TICKET_SHARE".split(" "),
-      q = 0, u = {lists: {}, tickets: {}, counts: {}}, x = m.$new();
+      q = 0, u = {lists: {}, tickets: {}, counts: {}}, x = n.$new();
     k.subscribe("/tickets", x, function (a) {
       console.log(a);
       a.data && a.data.number && (a.data.number = "Tkt# " + a.data.number);
       if ("CREATED_TICKET" === a.action) {
         var b = d.customizeObj(a.data, {}), e;
         for (e in u.lists) {
-          var g = u.lists[e];
-          w(a.data, g.params) && g.list.unshift(b)
+          var h = u.lists[e];
+          w(a.data, h.params) && h.list.unshift(b)
         }
       } else if (-1 < r.indexOf(a.action)) {
         b = d.customizeObj(a.data, {});
         for (e in u.lists) {
-          var g = u.lists[e], h = !1, l = d.indexOfId(g.list, b.id);
-          if (-1 < l)w(a.data, g.params) ? (d.customizeObj(b, g.list[l]), h = !0) : g.list.splice(l,
-            1); else if (w(a.data, g.params))if (0 === g.list.length)g.list.push(b); else if (l = g.list[g.list.length - 1], 15 > g.list.length || 0 >= p(b, l, g.params))g.list.push(b), h = !0;
-          h && g.list.sort(function (a, b) {
-            return p(a, b, g.params)
+          var h = u.lists[e], g = !1, m = d.indexOfId(h.list, b.id);
+          if (-1 < m)w(a.data, h.params) ? (d.customizeObj(b, h.list[m]), g = !0) : h.list.splice(m,
+            1); else if (w(a.data, h.params))if (0 === h.list.length)h.list.push(b); else if (m = h.list[h.list.length - 1], 15 > h.list.length || 0 >= p(b, m, h.params))h.list.push(b), g = !0;
+          g && h.list.sort(function (a, b) {
+            return p(a, b, h.params)
           })
         }
-        for (e in u.tickets)h = u.tickets[e].ticket, h.id === b.id && d.customizeObj(b, h)
-      } else if ("READ" === a.action)n(a.data.id, function (a) {
+        for (e in u.tickets)g = u.tickets[e].ticket, g.id === b.id && d.customizeObj(b, g)
+      } else if ("READ" === a.action)l(a.data.id, function (a) {
         d.defineReadOnlyProperty(a, "unread", !1)
       }); else if ("TICKET_COLLAPSED" === a.action || "TICKET_DELETED" === a.action) {
         for (e in u.lists)d.deleteById(u.lists[e].list, a.data.id);
         for (e in u.tickets)b = u.tickets[e], b.ticket.id === a.data.id && (delete u.tickets[e], b.scope.$broadcast("ticket_is_not_available_anymore"))
-      } else if ("TAG_LINKED" === a.action)for (b in a.data)n(b, function (b) {
+      } else if ("TAG_LINKED" === a.action)for (b in a.data)l(b, function (b) {
         f._merge(b.tags, a.data[b.id])
       }); else if ("COMPANY_ARCHIVED" === a.action) {
         for (e in u.lists) {
-          h = u.lists[e].list;
-          for (l = 0; l < h.length; l++)b = h[l], b.company.id === a.data.id && (h.splice(l, 1), l--);
-          h.length < v.layLoadingPageSize && c(u.lists[e].scope)
+          g = u.lists[e].list;
+          for (m = 0; m < g.length; m++)b = g[m], b.company.id === a.data.id && (g.splice(m, 1), m--);
+          g.length < v.layLoadingPageSize && c(u.lists[e].scope)
         }
-        for (e in u.tickets)h = u.tickets[e].ticket, h.company.id === a.data.id && delete u.tickets[e]
+        for (e in u.tickets)g = u.tickets[e].ticket, g.company.id === a.data.id && delete u.tickets[e]
       } else"TICKET_BILLABLE" ===
-      a.action && n(a.data.id, function (b) {
+      a.action && l(a.data.id, function (b) {
         d.defineReadOnlyProperty(b, "isBillable", a.data.isBillable)
       })
     });
     var t = {
-      URGENT: l, UNASSIGNED: function (a) {
+      URGENT: m, UNASSIGNED: function (a) {
         return a.createdAt
       }, USER: function (a) {
         return a.closedAt || a.assignedAt
@@ -1592,7 +1593,7 @@
         return a.closedAt
       }, SHARED: function (a) {
         return a.sharedToCurrentUserAt
-      }, ALL: l, NOT_SPAM_OR_TRASH: l, SPAM: function (a) {
+      }, ALL: m, NOT_SPAM_OR_TRASH: m, SPAM: function (a) {
         return a.deletedAt
       }, TRASH: function (a) {
         return a.deletedAt
@@ -1603,13 +1604,13 @@
         if (!a || !a.$id)throw"First argument must be Angularjs scope!";
         if (!e || !e.filter)throw"'filter' is mandatory parameter that must be counted in second argument";
         b(e);
-        var g = d.customizeObj([]);
-        u.lists[a.$id] = {params: e, scope: a, list: g};
+        var h = d.customizeObj([]);
+        u.lists[a.$id] = {params: e, scope: a, list: h};
         c(a, f);
         a.$on("$destroy", function () {
           delete u.lists[a.$id]
         });
-        return g
+        return h
       }, loadMore: c, search: function (a, d) {
         if (!a || !a.filter)throw"'filter' is mandatory parameter that must be counted in first argument";
         if (!a.keyword)throw"'keyword' is mandatory parameter that must be counted in first argument";
@@ -1652,17 +1653,17 @@
       }, getOne: function (b, c, e, g) {
         if (!b)throw"Id is mandatory argument!";
         if (!c || !c.$id)throw"Second argument must be Angularjs scope!";
-        var l = q++, n = {id: b}, p = "/v2/tickets/" + b;
+        var m = q++, l = {id: b}, p = "/v2/tickets/" + b;
         e && (p += "?view=extended");
-        u.tickets[l] = {ticket: n, scope: c};
+        u.tickets[m] = {ticket: l, scope: c};
         c.$on("$destroy", function () {
-          delete u.tickets[l]
+          delete u.tickets[m]
         });
         h.get(p).then(function (b) {
           b.data.number = "Tkt# " + b.data.number;
-          d.customizeObj(b.data, n);
-          n.tags && f._makeDynamic(n.tags, c);
-          e && n.updates.sort(a);
+          d.customizeObj(b.data, l);
+          l.tags && f._makeDynamic(l.tags, c);
+          e && l.updates.sort(a);
           g && g(b.data)
         }, function (a) {
           g && g(a.data)
@@ -1670,12 +1671,12 @@
         e && k.subscribe("/ticketUpdates?targetId=" + b, c, function (b) {
           console.log(b);
           if ("UPDATE_SAVED" == b.action || "UPDATE_CREATED" == b.action) {
-            var c = d.findById(n.updates, b.data.id);
-            c ? d.customizeObj(b.data, c) : (c = d.customizeObj(b.data), n.updates.push(c));
-            n.updates.sort(a)
-          } else"UPDATE_DELETED" == b.action && d.deleteById(n.updates, b.data.id)
+            var c = d.findById(l.updates, b.data.id);
+            c ? d.customizeObj(b.data, c) : (c = d.customizeObj(b.data), l.updates.push(c));
+            l.updates.sort(a)
+          } else"UPDATE_DELETED" == b.action && d.deleteById(l.updates, b.data.id)
         });
-        return n
+        return l
       }, changePriority: function (a, b, d) {
         if (!a || !b)throw"ticketId and priority is required arguments!";
         g("priority", a, b.toUpperCase(), d)
@@ -1743,13 +1744,13 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("TicketTagsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("TicketTagsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     function f(a, b) {
       return b.createdAt - a.createdAt
     }
 
     function e(a) {
-      c = m.$new();
+      c = n.$new();
       g.tags = d.customizeArray([]);
       h.get("/tag").then(function (b) {
         d.customizeArray(b.data, g.tags);
@@ -1850,7 +1851,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("UsersService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, m, k, d, f) {
+  angular.module("main.services").factory("UsersService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, k, d, f) {
     function e() {
       f._isInitialized() || setTimeout(e, 300);
       t || (t = !0, h.get("/users").then(function (b) {
@@ -1863,8 +1864,8 @@
           c.company.id !== f.getCurrentCompany().id && q.clientUsers.push(c)
         }
         r = !0;
-        for (b = 0; b < l.length; b++)l[b]();
-        l = []
+        for (b = 0; b < m.length; b++)m[b]();
+        m = []
       }, function (a) {
         console.error(a);
         throw"Cannot initialize CompaniesService!";
@@ -1898,14 +1899,14 @@
     }
 
     function c() {
-      return g(m.currentUser.id)
+      return g(n.currentUser.id)
     }
 
     function g(a) {
       return d.findById(q.users, a)
     }
 
-    function n(a, b, d) {
+    function l(a, b, d) {
       if (!a)throw"Keyword is required!";
       var e = [];
       d = d ? q.usersByCompanies[d] || [] : q.users;
@@ -1917,13 +1918,13 @@
       return e
     }
 
-    var p = m.$new(), l = [], r = !1, t = !1, q = {users: [], clientUsers: [], usersByCompanies: {}};
+    var p = n.$new(), m = [], r = !1, t = !1, q = {users: [], clientUsers: [], usersByCompanies: {}};
     d.customizeObj(q);
     e();
     return {
       _addInitListener: function (a) {
         if (!a)throw"callback is required!";
-        r ? a() : l.push(a)
+        r ? a() : m.push(a)
       }, getCurrentUser: c, getAllUsers: function () {
         return q.users
       }, getClientUsers: function () {
@@ -1931,12 +1932,12 @@
       }, getAllByCompanyId: function (a) {
         return q.usersByCompanies[a] || []
       }, getOneById: g, searchByAllUsers: function (a) {
-        return n(a,
+        return l(a,
           !0)
       }, searchByClientUsers: function (a) {
-        return n(a, !1)
+        return l(a, !1)
       }, searchByUsersFromCompany: function (a, b) {
-        return n(a, !1, b)
+        return l(a, !1, b)
       }, changeUserRole: function (a, b, c) {
         if (!a)throw"userId is required!";
         if (!b)throw"roleName is required!";
@@ -1963,7 +1964,7 @@
   }])
 })(window, jQuery);
 (function (v, r, t) {
-  angular.module("main.services").factory("VendorsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, m, k, d) {
+  angular.module("main.services").factory("VendorsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, k, d) {
     return {
       save: function (f, e) {
         if (!f)throw"vendor is required!";
