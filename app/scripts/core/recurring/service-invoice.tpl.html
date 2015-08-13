@@ -20,7 +20,9 @@
       <div class="col-4">{{ service.sum | currency }}</div>
 
       <div class="col-3">Duration<span class="model">{{ service.quantity | durationFilter }}</span></div>
-      <div class="col-2 description">{{ service.description }}</div>
+      <div class="col-2 description" popover="{{ service.description }}" popover-trigger="mouseenter"
+           popover-placement="bottom">{{ service.description }}
+      </div>
 
     </div>
 
