@@ -33,9 +33,9 @@
             <div class="clearfix">
               <div class="form-group ">
                 <input type="text" class="form-control form-control-round form-control-search dropdown-toggle "
-                       placeholder="Search Company..." name="addCompany" ng-required="true"
-                       ng-model="company" typeahead-on-select="addCompany()"
-                       typeahead="company as company.name for company in allCompanies($viewValue)">
+                       placeholder="Search Company..." name="addCompany" ng-required="true" ng-trim="false"
+                       ng-model="company" typeahead-on-select="addCompany()" qt-typeahead-show-on-focus
+                       typeahead="company as company.name for company in notRecurringCompaniesArray | filter:$viewValue:stateComparator | orderBy:'name'">
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
                 </div>
 
                 <span class="name">{{ company.name }}</span>
-                <span class=" badge badge-light ">{{ recurringCompany.invoicesCount }}</span>
+                <span class=" badge badge-light ">{{ recurringCompany.invoicesCount || 0 }}</span>
                 <span class="amount pull-right">{{ recurringCompany.total | currency }}</span>
 
               </a>

@@ -10,9 +10,28 @@
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope);
 
-        $scope.recurringCompanies = RecurringService.getRecurringCompanies($scope);
+        $scope.recurringCompanies = RecurringService.getRecurringCompanies($scope, function () {
 
-        $scope.allCompanies = CompaniesService.searchByAllCompanies;
+          $scope.allCompanies = CompaniesService.getAllCompanies();
+
+          $scope.$watch('recurringCompanies', function () {
+            $scope.notRecurringCompaniesArray = [];
+            for (var i = 0; i < $scope.allCompanies.length; i++) {
+              var companyCount = 0;
+              for (var j = 0; j < $scope.recurringCompanies.length; j++) {
+                if ($scope.allCompanies[i].id !== $scope.recurringCompanies[j].company.id) {
+                  companyCount++;
+                }
+              }
+              if (companyCount === $scope.recurringCompanies.length) {
+                $scope.notRecurringCompaniesArray.push($scope.allCompanies[i]);
+              }
+            }
+          }, true);
+
+        });
+
+
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
