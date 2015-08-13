@@ -15,20 +15,21 @@
           $scope.allCompanies = CompaniesService.getAllCompanies();
 
           $scope.$watch('recurringCompanies', function () {
+
+            $scope.recurringCompaniesId = [];
             $scope.notRecurringCompaniesArray = [];
+
+            for (var j = 0; j < $scope.recurringCompanies.length; j++) {
+              $scope.recurringCompaniesId.push($scope.recurringCompanies[j].company.id)
+            }
+
             for (var i = 0; i < $scope.allCompanies.length; i++) {
-              var companyCount = 0;
-              for (var j = 0; j < $scope.recurringCompanies.length; j++) {
-                if ($scope.allCompanies[i].id !== $scope.recurringCompanies[j].company.id) {
-                  companyCount++;
-                }
-              }
-              if (companyCount === $scope.recurringCompanies.length) {
+              if (($scope.recurringCompaniesId.indexOf($scope.allCompanies[i].id)) === -1) {
                 $scope.notRecurringCompaniesArray.push($scope.allCompanies[i]);
               }
             }
-          }, true);
 
+          }, true);
         });
 
 
