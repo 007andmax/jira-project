@@ -13744,6 +13744,13 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.products .col-wrapper{
                                                     padding-right: 10px;
                                                   }
+                                                  .content-wrapper .content-body .invoices.products .col-wrapper.error{
+                                                    position: relative;
+                                                  }
+                                                  .content-wrapper .content-body .invoices.products .col-wrapper.error .qt-error-msg{
+                                                    position: absolute;
+                                                    top: -20px;
+                                                  }
                                                   .content-wrapper .content-body .invoices.products .col-5 .col-wrapper{
                                                     padding-right: 0px;
                                                   }
