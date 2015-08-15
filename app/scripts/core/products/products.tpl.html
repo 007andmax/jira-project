@@ -55,31 +55,29 @@
             <a href='javascript:void(0)' ng-click="toggleProducts()">
               <span class="name" ng-if="!isEditCategory">{{ category.name }}</span>
               <span class="amount pull-right">{{ category.productsAmount }} items</span>
-              
               <div class="clearfix"></div>
-
-              <div ng-if="isEditCategory">
-                <form name="editCategoryForm">
-                  <div ng-class="{error: isShowingErrors(editCategoryForm, 'editCategoryName')}">
-                    <div ng-messages="editCategoryForm.editCategoryName.$error"
-                         ng-if="isShowingErrors(editCategoryForm, 'editCategoryName')">
-                      <div class="qt-error-msg" ng-message="required">Name is required.</div>
-                      <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
-                      <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
-                    </div>
-                    <input type="text" class="form-control" ng-model="editCategory.name" style="width: 400px"
-                           name="editCategoryName" ng-required="true" ng-maxlength="100"
-                           is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
-
-                    <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"
-                       ng-click="saveEditCategory(editCategoryForm)" ng-disabled="disabledSaveButton">Save Changes</a>
-                    <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"
-                       ng-click="cancelEditCategory()">Cancel</a>
-                  </div>
-                  <div class="clearfix"></div>
-                </form>
-              </div>
             </a>
+            <div ng-if="isEditCategory">
+              <form name="editCategoryForm" class="edit-category-form">
+                <div ng-class="{error: isShowingErrors(editCategoryForm, 'editCategoryName')}">
+                  <div ng-messages="editCategoryForm.editCategoryName.$error"
+                       ng-if="isShowingErrors(editCategoryForm, 'editCategoryName')">
+                    <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                    <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
+                  </div>
+                  <input type="text" class="form-control" ng-model="editCategory.name"
+                         name="editCategoryName" ng-required="true" ng-maxlength="100"
+                         is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
+
+                  <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"
+                     ng-click="saveEditCategory(editCategoryForm)" ng-disabled="disabledSaveButton">Save Changes</a>
+                  <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"
+                     ng-click="cancelEditCategory()">Cancel</a>
+                </div>
+                <div class="clearfix"></div>
+              </form>
+            </div>
 
 
             <ul class="invoices recurring  products" ets-slider>
