@@ -13418,7 +13418,8 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
 
                                         }
                                         .content-wrapper .content-body .companies-list >  li   a{
-                                          padding:35px 0px 35px;
+/*                                          padding:35px 0px 35px;*/
+                                          padding: 10px 20px;
                                           color:#25303d;
                                           font-weight:700;
                                           display:block;
@@ -13545,7 +13546,6 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                 }
                                                 .content-wrapper .content-body .invoices.recurring.services  li.add-new >  div >  .col-2{
                                                   font-weight: normal;
-
                                                   padding-right: 10px;
                                                 }
                                                 .content-wrapper .content-body .invoices.recurring li.head >  div >  [class^='col-']{
@@ -13631,9 +13631,26 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   width: calc(100% - 314px);
                                                   text-transform: capitalize;
                                                 }
+                                                
+                                                .content-wrapper .content-body .invoices.services li > div > div > form > div > .col-1 {
+                                                  width: calc(100% - 314px);
+                                                  text-transform: capitalize;
+                                                  float: left;
+                                                  display: inline;
+                                                  padding-right: 10px;
+                                                }
+                                                
                                                 .content-wrapper .content-body .invoices.services li > div > .col-2 {
                                                   width: 138px;
                                                 }
+                                                
+                                                .content-wrapper .content-body .invoices.services li > div > div > form > div > .col-2 {
+                                                  width: 138px;
+                                                  float: left;
+                                                  display: inline;
+                                                  padding-right: 10px;
+                                                }
+                                                
                                                 .content-wrapper .content-body .invoices.products li > div >  .col-1{
                                                   width:198px;
                                                 }
@@ -13789,6 +13806,14 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                     width: 112px;
                                                     text-align: right;
                                                   }
+                                                  
+                                                  .content-wrapper .content-body .invoices li > div > div > form > div > .col-5{
+                                                    width: 112px;
+                                                    text-align: right;
+                                                    float: left;
+                                                    display: inline;
+                                                  }
+                                                  
                                                   .content-wrapper .content-body .invoices   li a:hover:after , .content-wrapper .content-body .invoices   li a:hover:before, .content-wrapper .content-body .invoices.recurring li >  .hover:hover:after,
                                                   .content-wrapper .content-body .invoices.recurring li >  .hover:hover:before{
                                                     height: 70px;
@@ -13833,7 +13858,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.recurring .add-more .add-table-actions .btn-gray{
                                                     color: #4e5e71;
                                                     font-weight: 600;
-
+                                                    padding: 10px 20px;
                                                   }
                                                   .content-wrapper .content-body .invoices.recurring .add-more a
                                                   .content-wrapper .content-body .invoices  li  .label{
@@ -14062,6 +14087,48 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                             margin-left: -66px;
 
                                                           }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div.add-new{
+                                                            background: #f0fafb;
+                                                            left: 0;
+                                                            padding-left: 66px;
+                                                            border-top: 1px solid #e0f5f7;
+                                                            border-bottom: 1px solid #e0f5f7;
+                                                            padding-right: 40px;
+                                                            margin-top: -1px;
+                                                            padding-top: 14px;
+                                                            width: calc(100% + 106px);
+                                                            margin-left: -66px;
+                                                            margin-bottom: 30px;
+
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.col-1{
+                                                              width: calc(100% - 314px);
+                                                              text-transform: capitalize;
+                                                              float: left;
+                                                              display: inline;
+                                                              padding-right: 10px;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.col-2{
+                                                              width: 138px;
+                                                              float: left;
+                                                              display: inline;
+                                                              padding-right: 10px;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.col-5{
+                                                                width: 112px;
+                                                                text-align: right;
+                                                                float: left;
+                                                                display: inline;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div.add-more{
+                                                              padding: 30px 0px;
+                                                          }
+                                                          
                                                           .content-wrapper .content-body .invoices > li.add-new.new-updates{
                                                             padding-top: 30px;
                                                           }
@@ -20299,4 +20366,32 @@ height: 60px !important;
   display: none;
 }
 
+/*#editServiceForm{
+    width: 100%;
+}
+#editServiceForm div{
+    display: inline;
+    float: left;
+    background-color: #123;
+}
 
+#editServiceForm div.col-1{
+    padding-right: 10px;
+    width: 80%;
+}
+
+#editServiceForm div.col-1 div.col-wrapper{
+     width: 100%;
+}
+
+#editServiceForm div.col-2{
+    width: 138px;
+    padding-right: 10px;
+}
+
+#editServiceForm div.col-5{
+    width: 112px;
+    text-align: right;
+    padding-right: 10px;
+}
+    */
