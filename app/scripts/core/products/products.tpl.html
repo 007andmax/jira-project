@@ -55,6 +55,8 @@
             <a href='javascript:void(0)' ng-click="toggleProducts()">
               <span class="name" ng-if="!isEditCategory">{{ category.name }}</span>
               <span class="amount pull-right">{{ category.productsAmount }} items</span>
+              
+              <div class="clearfix"></div>
 
               <div ng-if="isEditCategory">
                 <form name="editCategoryForm">
