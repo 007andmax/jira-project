@@ -15,6 +15,16 @@
                  ng-required="true" ng-model="editProduct.name" ng-maxlength="100"
                  is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
         </div>
+        <div class="col-wrapper"
+             ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
+          <div ng-messages="editProductForm.editProductDescription.$error"
+               ng-if="isShowingErrors(editProductForm, 'editProductDescription')">
+            <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+          </div>
+          <input type="text" class="form-control" placeholder="Description"
+                 ng-model="editProduct.description"
+                 ng-maxlength="500" name="editProductDescription">
+        </div>
       </div>
 
       <div class="col-3 normal">

@@ -13241,6 +13241,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                         right: 0px;
                                         display: none;
                                         top: 40px;
+                                        z-index: 2;
                                       }
                                       .content-wrapper .content-body  .recurring li .actions a{
                                         padding-bottom: 0px;
@@ -13316,7 +13317,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
 
                                         .content-wrapper .content-body  .recurring li:hover .amount,
                                         .content-wrapper .content-body  .recurring li.opened .amount{
-                                          display: none;
+                                          opacity: 0;
                                         }
                                         .content-wrapper .content-body  .services-list li:hover .amount,
                                         .content-wrapper .content-body  .services-list li.opened .amount{
@@ -13377,6 +13378,9 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                           border-bottom:1px solid #e9edf1;
                                           position: relative;
                                         }
+                                        .content-wrapper .content-body .companies-list li.no-border{
+                                          border-bottom: 0;
+                                        }
                                         .content-wrapper .content-body .companies-list  li.opened.default{
                                           border-bottom: 0px;
                                         }
@@ -13402,9 +13406,6 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                         .content-wrapper .content-body .companies-list  li.opened.default ul{
                                           display: block;
                                         }
-                                        .content-wrapper .content-body .companies-list  li:last-child{
-                                          border-bottom: 0px;
-                                        }
                                         .content-wrapper .content-body .companies-list  li.add-product-wrapper:hover,
                                         .content-wrapper .content-body .companies-list.recurring.products  li.add-new:hover,
                                         .content-wrapper .content-body .companies-list.recurring.products  li.add-new .hover:hover,
@@ -13424,6 +13425,41 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                           font-weight:700;
                                           display:block;
                                           position:relative;
+                                        }
+                                        .content-wrapper .content-body .companies-list >  li .edit-category-form{
+                                          position: absolute;
+                                          top: -1px;
+                                          bottom: -1px;
+                                          left: -40px;
+                                          right: -40px;
+                                          background: #f0fafb;
+                                          border-top: 1px solid #e9edf1;
+                                          border-bottom: 1px solid #e9edf1;
+                                          padding: 0 30px 0 40px;
+                                          z-index: 999;
+                                        }
+                                        .content-wrapper .content-body .companies-list >  li .edit-category-form a.btn{
+                                          float: right;
+                                          position: static;
+                                          display: inline-block;
+                                          padding: 10px 20px;
+                                          margin: 26px 10px;
+                                        }
+                                        .content-wrapper .content-body .companies-list >  li .edit-category-form a.btn-scooter{
+                                          color: #fff;
+                                        }
+                                        .content-wrapper .content-body .companies-list >  li .edit-category-form a.btn:hover:after{
+                                          display: none;
+                                        }
+                                        .content-wrapper .content-body .companies-list >  li .edit-category-form input{
+                                          float: left;
+                                          background: #f0fafb;
+                                          color: #25303d;
+                                          font-weight: bold;
+                                          border: none;
+                                          height: 90px;
+                                          padding: 0;
+                                          width: calc(100% - 278px);
                                         }
                                         .content-wrapper .content-body .companies-list >  li   a.close{
                                           padding-bottom: 0px;
@@ -13494,6 +13530,10 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                             .content-wrapper .content-body .companies-list  li  .name{
                                               display: block;
                                               float: left;
+                                              width: calc(100% - 200px);
+                                              white-space: nowrap;
+                                              overflow: hidden;
+                                              text-overflow: ellipsis;
                                               margin-top: 1px;}
                                               .content-wrapper .content-body .companies-list  li  .amount{
                                                 color:#333f50;
@@ -13761,6 +13801,13 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.products .col-wrapper{
                                                     padding-right: 10px;
                                                   }
+                                                  .content-wrapper .content-body .invoices.products .col-wrapper.error{
+                                                    position: relative;
+                                                  }
+                                                  .content-wrapper .content-body .invoices.products .col-wrapper.error .qt-error-msg{
+                                                    position: absolute;
+                                                    top: -20px;
+                                                  }
                                                   .content-wrapper .content-body .invoices.products .col-5 .col-wrapper{
                                                     padding-right: 0px;
                                                   }
@@ -13897,7 +13944,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           margin-top: 28px;
                                                           height: 14px;
                                                           width: 14px;}
-                                                          .content-wrapper .content-body .invoices  li.no-border{
+                                                          .content-wrapper .content-body .invoices  li.no-border, .content-wrapper .content-body .invoices  .no-border li{
                                                             border-bottom: 0px ;
                                                           }
                                                           .content-wrapper .content-body .send-statment{
