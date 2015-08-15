@@ -13377,6 +13377,9 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                           border-bottom:1px solid #e9edf1;
                                           position: relative;
                                         }
+                                        .content-wrapper .content-body .companies-list li.no-border{
+                                          border-bottom: 0;
+                                        }
                                         .content-wrapper .content-body .companies-list  li.opened.default{
                                           border-bottom: 0px;
                                         }
