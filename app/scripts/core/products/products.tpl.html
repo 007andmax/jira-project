@@ -49,7 +49,7 @@
       <div role="tabpanel" class="tab-pane active">
         <ul class="companies-list recurring products" ftt-tab-content>
           <li ng-repeat="category in categories" event-toggle-slider="toggleProducts"
-              ng-controller="quicktech.core.products.categoryCtrl">
+              ng-controller="quicktech.core.products.categoryCtrl" ng-class="{'no-border':$last}">
 
 
             <a href='javascript:void(0)' ng-click="toggleProducts()">
