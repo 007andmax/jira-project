@@ -95,7 +95,7 @@
                 </li>
                 <div ng-repeat="product in products | orderBy : 'code'"
                      ng-controller="quicktech.core.products.productCtrl"
-                     show-model-element="{{ 'show-' + product.versionedId.id }}">
+                     show-model-element="{{ 'show-' + product.versionedId.id }}" ng-class="{'no-border':$last}">
                   <li class="clearfix" ng-if="!showEditProduct">
                     <div class="hover">
                       <div class="col-1">{{ product.code }}</div>
@@ -130,7 +130,7 @@
                 </div>
                 <div ng-if="showCreateProduct"
                      ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
-                <li class="clearfix add-product-wrapper">
+                <li class="clearfix no-border add-product-wrapper">
                   <button class="btn btn-sr btn-create-in btn-scooter pull-right" ng-click="addProduct()"
                           tooltip="Add Product" tooltip-placement="top" ng-disabled="showCreateProduct">
                     <span class="icns icn wt-icn-add-product "></span></button>

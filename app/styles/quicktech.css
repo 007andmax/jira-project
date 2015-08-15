@@ -13402,9 +13402,6 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                         .content-wrapper .content-body .companies-list  li.opened.default ul{
                                           display: block;
                                         }
-                                        .content-wrapper .content-body .companies-list  li:last-child{
-                                          border-bottom: 0px;
-                                        }
                                         .content-wrapper .content-body .companies-list  li.add-product-wrapper:hover,
                                         .content-wrapper .content-body .companies-list.recurring.products  li.add-new:hover,
                                         .content-wrapper .content-body .companies-list.recurring.products  li.add-new .hover:hover,
@@ -13879,7 +13876,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           margin-top: 28px;
                                                           height: 14px;
                                                           width: 14px;}
-                                                          .content-wrapper .content-body .invoices  li.no-border{
+                                                          .content-wrapper .content-body .invoices  li.no-border, .content-wrapper .content-body .invoices  .no-border li{
                                                             border-bottom: 0px ;
                                                           }
                                                           .content-wrapper .content-body .send-statment{
