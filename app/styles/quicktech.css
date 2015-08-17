@@ -4590,7 +4590,7 @@ margin-left: 7px;
    .form-control-dropdown:focus:hover{
     padding-right: 20px;
     background-image: url('../images/input-icons/icn-input-caret.png?1423306610');
-    background-position: right 13px center;
+    background-position: right 19px center;
     background-repeat: no-repeat;
   }
 
