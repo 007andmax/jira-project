@@ -13317,7 +13317,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
 
                                         .content-wrapper .content-body  .recurring li:hover .amount,
                                         .content-wrapper .content-body  .recurring li.opened .amount{
-                                          opacity: 0;
+/*                                          opacity: 0;*/
                                         }
                                         .content-wrapper .content-body  .services-list li:hover .amount,
                                         .content-wrapper .content-body  .services-list li.opened .amount{
@@ -13419,8 +13419,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
 
                                         }
                                         .content-wrapper .content-body .companies-list >  li   a{
-/*                                          padding:35px 0px 35px;*/
-                                          padding: 10px 20px;
+                                          padding:35px 0px 35px;
                                           color:#25303d;
                                           font-weight:700;
                                           display:block;
@@ -14138,12 +14137,12 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           .content-wrapper .content-body .services-list > li > div > div.add-new{
                                                             background: #f0fafb;
                                                             left: 0;
-                                                            padding-left: 66px;
+                                                            padding-left: 92px;
                                                             border-top: 1px solid #e0f5f7;
                                                             border-bottom: 1px solid #e0f5f7;
                                                             padding-right: 40px;
                                                             margin-top: -1px;
-                                                            padding-top: 14px;
+                                                            padding-top: 30px;
                                                             width: calc(100% + 106px);
                                                             margin-left: -66px;
                                                             margin-bottom: 30px;
@@ -14151,7 +14150,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           }
                                                           
                                                           .content-wrapper .content-body .services-list > li > div > div > form > div > div.col-1{
-                                                              width: calc(100% - 314px);
+                                                              width: calc(100% - 318px);
                                                               text-transform: capitalize;
                                                               float: left;
                                                               display: inline;
@@ -14159,7 +14158,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           }
                                                           
                                                           .content-wrapper .content-body .services-list > li > div > div > form > div > div.col-2{
-                                                              width: 138px;
+                                                              width: 142px;
                                                               float: left;
                                                               display: inline;
                                                               padding-right: 10px;
@@ -14174,6 +14173,29 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           
                                                           .content-wrapper .content-body .services-list > li > div > div > form > div.add-more{
                                                               padding: 30px 0px;
+                                                              margin-right: 65px;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.add-table-actions{
+                                                              margin-top: 30px;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.add-table-actions > a{
+                                                              padding: 10px 20px;
+                                                              margin-left: 10px;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.add-table-actions > a.btn-scooter{
+                                                              color: #FFF;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.add-table-actions > a.btn-scooter.disabled{
+                                                              color: #b4bfcc;
+                                                          }
+                                                          
+                                                          .content-wrapper .content-body .services-list > li > div > div > form > div > div.add-table-actions > a.btn-gray{
+                                                              font-weight: 600;
+                                                              color: #4e5e71;
                                                           }
                                                           
                                                           .content-wrapper .content-body .invoices > li.add-new.new-updates{
