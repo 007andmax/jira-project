@@ -16,15 +16,15 @@
 
           $scope.$watch('recurringCompanies', function () {
 
-            $scope.recurringCompaniesId = [];
+            var recurringCompaniesId = [];
             $scope.notRecurringCompaniesArray = [];
 
             for (var j = 0; j < $scope.recurringCompanies.length; j++) {
-              $scope.recurringCompaniesId.push($scope.recurringCompanies[j].company.id)
+              recurringCompaniesId.push($scope.recurringCompanies[j].company.id)
             }
 
             for (var i = 0; i < $scope.allCompanies.length; i++) {
-              if (($scope.recurringCompaniesId.indexOf($scope.allCompanies[i].id)) === -1) {
+              if ((recurringCompaniesId.indexOf($scope.allCompanies[i].id)) < 0) {
                 $scope.notRecurringCompaniesArray.push($scope.allCompanies[i]);
               }
             }
