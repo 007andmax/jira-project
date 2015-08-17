@@ -13241,6 +13241,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                         right: 0px;
                                         display: none;
                                         top: 40px;
+                                        background-color: #fff;
                                         z-index: 2;
                                       }
                                       .content-wrapper .content-body  .recurring li .actions a{
