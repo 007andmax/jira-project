@@ -23,7 +23,8 @@
               animation: false,
               backdrop: 'static',
               templateUrl: attrs.modalWindowButton,
-              controller: attrs.mwController
+              controller: attrs.mwController,
+              scope: scope
             });
 
             modalInstance.result.then(fixScroll, fixScroll);

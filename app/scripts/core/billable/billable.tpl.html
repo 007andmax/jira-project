@@ -3,7 +3,7 @@
   <div class="content-head clearfix">
     <div class="content-stat pull-left">
       <div class="heading"><span class="bold">BILLED AMOUNT</span> LAST 30 DAYS <span class="dot-sep"></span> <span
-        class="amount">{{ billedAmountLast30Days | currency : '' }} USD</span></div>
+        class="amount">{{ billedAmountLast30Days | currency:'' :0 }} USD</span></div>
       <div class="chart">
 
       </div>
@@ -11,13 +11,13 @@
     <div class="content-all-time-stat pull-left">
       <div class="heading">
         <div class="title"><span class="bold">BILLED AMOUNT</span> ALL TIME</div>
-        <div class="amount">{{ totalBilledAmount.value | currency : '' }} usd</div>
+        <div class="amount">{{ totalBilledAmount.value | currency:'' :0 }} usd</div>
       </div>
       <div class="total-billables">
-        <div pie-chart></div>
+        <div pie-chart first-value-pie-chart="totalbillables" second-value-pie-chart="billedAmountLast30Days"></div>
         <div class="heading pull-left">
           <div class="title"><span class="bold">TOTAL BILLABLES</span></div>
-          <div class="amount">{{ totalbillables | currency : '' }} USD</div>
+          <div class="amount">{{ totalbillables | currency:'' :0 }} USD</div>
         </div>
       </div>
     </div>

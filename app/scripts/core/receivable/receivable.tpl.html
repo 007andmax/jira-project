@@ -2,7 +2,7 @@
   <div class="content-head clearfix">
     <div class="content-stat pull-left">
       <div class="heading"><span class="bold">total collected</span> LAST 30 DAYS <span class="dot-sep"></span> <span
-        class="amount">40,980 USD</span>
+        class="amount">{{ totalCollectedLast30Days | currency: '': 0 }} USD</span>
         <ul class="pull-right report-nav">
           <li><span class="circle red"></span> RECEIVABLE</li>
           <li><span class="circle blue"></span> RECEIVED</li>
@@ -16,13 +16,13 @@
     <div class="content-all-time-stat pull-left">
       <div class="heading">
         <div class="title"><span class="bold">RECEIVED AMOUNT</span> ALL TIME</div>
-        <div class="amount">6,986,536 USD</div>
+        <div class="amount">{{ receivedAmountAllTime.value | currency: '': 0 }} USD</div>
       </div>
       <div class="total-billables">
-        <canvas id="myCanvas" class="pull-left" width="40" height="40"></canvas>
+        <div pie-chart first-value-pie-chart="totalReceivables" second-value-pie-chart="totalCollectedLast30Days"></div>
         <div class="heading pull-left">
           <div class="title"><span class="bold">TOTAL RECEIVABLES</span></div>
-          <div class="amount">67,960 USD</div>
+          <div class="amount">{{ totalReceivables | currency:'' :0 }} USD</div>
         </div>
       </div>
     </div>

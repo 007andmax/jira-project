@@ -2,23 +2,27 @@
 
 (function () {
 
-  angular.module("quicktech.core.products").directive('pieChart',
+  angular.module("quicktech.common.directives").directive('pieChart',
     [function () {
       return {
         restrict: 'A',
         template: "<canvas id='myCanvas' class='pull-left' width='40' height='40'></canvas>",
+        scope: {
+          firstValuePieChart: '=firstValuePieChart',
+          secondValuePieChart: '=secondValuePieChart'
+        },
         link: function (scope) {
 
-          scope.$watch('totalbillables', function () {
+          scope.$watch('firstValuePieChart', function () {
 
             var data = [
               {
-                percentage: (scope.totalbillables / scope.billedAmountLast30Days),
+                percentage: (scope.firstValuePieChart / scope.secondValuePieChart),
                 fillColor: "#7fd5e0",
                 label: "",
                 description: ""
               }, {
-                percentage: 1 - (scope.totalbillables / scope.billedAmountLast30Days),
+                percentage: 1 - (scope.firstValuePieChart / scope.secondValuePieChart),
                 fillColor: "#e53935",
                 label: "",
                 description: ""

@@ -4,7 +4,7 @@
       <div class="">
         <div class="col-1">
           <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox">
+            <input type="checkbox" ng-model="invoiceToSent.chooseAll" ng-change="chooseAllCheckbox()">
             <span class="control-indicator"></span>
           </label></div>
           <span class="name">INVOICE NO.</span></div>
@@ -15,100 +15,30 @@
         <div class="col-5">AMOUNT</div>
       </div>
     </li>
-    <li class="clearfix">
+    <li class="clearfix" ng-repeat="invoice in receivableInvoicesData.list"
+        ng-controller="quicktech.core.receivable.invoiceCtrl">
       <div class="hover">
         <div class="col-1">
           <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox" checked="checked">
+            <input type="checkbox" ng-model="invoiceToSent.invoices[invoice.id]">
             <span class="control-indicator"></span>
           </label></div>
-          <span class="name">39302</span></div>
-        <div class="col-1-2 normal">Comedy & Cabaret Group</div>
-        <div class="col-2 normal">26 Dec 2014</div>
-        <div class="col-3"><span class="label label-danger">overdue by 65 days</span></div>
-        <div class="col-4 normal">Resent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Send Again"></a>
+          <span class="name">{{ invoiceProperty('number') }}</span>
+          <span class=" badge badge-light ">{{ invoice.isRecurring ? invoice.invoices.length : '' }}</span></div>
+        <div class="col-1-2 normal">{{ company.name }}</div>
+        <div class="col-2 normal">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
+        <div class="col-3">
+          <span class="label" ng-class="{'label-blue': !dueDate.over, 'label-warning': dueDate.value <= 7,
+                                         'label-green': dueDate.value <= 31, 'label-danger': dueDate.over && dueDate.value > 31}">
+          {{ dueDate.over ? 'OVER DUE BY ' + dueDate.value + (dueDate.value > 1 ? ' DAYS' : ' DAY') : dueDate.value | date:'dd MMM yyyy' }}
+        </span></div>
+        <div class="col-4 normal">
+          {{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}
+          <a href="javascript:void(0)" class="pull-right icn-send icns" ng-click="sentInvoice()"
+             tooltip="Send Again" tooltip-placement="top"></a>
         </div>
-        <div class="col-5 normal">$5,980</div>
+        <div class="col-5 normal">{{ totalInvoiceSum | currency }}</div>
       </div>
     </li>
-    <li class="clearfix">
-      <div class="hover">
-        <div class="col-1">
-          <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox" checked="checked">
-            <span class="control-indicator"></span>
-          </label></div>
-          <span class="name">39324</span></div>
-        <div class="col-1-2 normal">Global Media</div>
-        <div class="col-2 normal">12 Jan 2015</div>
-        <div class="col-3"><span class="label label-green">overdue by 20 days</span></div>
-        <div class="col-4 normal">Resent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                            data-placement="top" title="" data-original-title="Send Again"></a>
-        </div>
-        <div class="col-5 normal">$10,860</div>
-      </div>
-    </li>
-    <li class="clearfix">
-              <span class="icns icn-orange-calendar calendar" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="recurring: yearly"></span>
-
-      <div class="hover">
-        <div class="col-1">
-          <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label></div>
-          <span class="name">39330</span> <span class=" badge badge-light ">1</span></div>
-        <div class="col-1-2 normal">Trading Co. Limited</div>
-
-        <div class="col-2 normal">18 Feb 2015</div>
-        <div class="col-3"><span class="label label-warning">overdue by 5 days</span></div>
-        <div class="col-4 normal">Sent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                          data-placement="top" title="" data-original-title="Send Again"></a>
-        </div>
-        <div class="col-5 normal">$18,500</div>
-      </div>
-    </li>
-    <li class="clearfix">
-              <span class="icns icn-red-calendar calendar" data-toggle="tooltip" data-placement="top" title=""
-                    data-original-title="recurring: weekly"></span>
-
-      <div class="hover">
-        <div class="col-1">
-          <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label></div>
-          <span class="name">39289</span> <span class=" badge badge-light ">1</span></div>
-        <div class="col-1-2 normal">Global Media</div>
-
-        <div class="col-2 normal">18 Feb 2015</div>
-        <div class="col-3"><span class="label label-blue">25 feb</span></div>
-        <div class="col-4 normal">Sent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                          data-placement="top" title="" data-original-title="Send Again"></a>
-        </div>
-        <div class="col-5 normal">$6,750</div>
-      </div>
-    </li>
-    <li class="clearfix">
-      <div class="hover">
-        <div class="col-1">
-          <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label></div>
-          <span class="name">39288</span></div>
-        <div class="col-1-2 normal">Global Media</div>
-
-        <div class="col-2 normal">12 Feb 2015</div>
-        <div class="col-3"><span class="label label-blue">22 feb</span></div>
-        <div class="col-4 normal">Sent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                          data-placement="top" title="" data-original-title="Send Again"></a>
-        </div>
-        <div class="col-5 normal">$7,200</div>
-      </div>
-    </li>
-
   </ul>
 </div>
