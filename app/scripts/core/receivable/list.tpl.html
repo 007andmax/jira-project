@@ -16,7 +16,8 @@
       </div>
     </li>
     <li class="clearfix" ng-repeat="invoice in receivableInvoicesData.list"
-        ng-controller="quicktech.core.receivable.invoiceCtrl">
+        ng-controller="quicktech.core.receivable.invoiceCtrl"
+        show-model-element="{{ 'showInvoice-' + invoice.id }}">
       <div class="hover">
         <div class="col-1">
           <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">

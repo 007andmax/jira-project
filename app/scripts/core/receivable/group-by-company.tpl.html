@@ -1,18 +1,7 @@
 <div role="tabpanel" class="tab-pane active">
   <ul class="companies-list" ftt-tab-content>
-    <!--<li><a href='javascript:void(0)'>-->
-    <!--<div class="ui-checkbox ui-checkbox-warning pull-left">-->
-    <!--<label class="control checkbox">-->
-    <!--<input type="checkbox">-->
-    <!--<span class="control-indicator"></span>-->
-    <!--</label>-->
-    <!--</div>-->
-    <!--<span class="name">Global Media</span> <span class=" badge badge-light ">2</span>-->
-    <!--<span class="amount pull-right">$4,960</span>-->
-    <!--</a>-->
-
-    <!--</li>-->
-    <li event-toggle-slider="toggleReceivableInvoices" ng-repeat="receivableCompany in receivableInvoicesCompanies"
+    <li event-toggle-slider="toggleReceivableInvoices"
+        ng-repeat="receivableCompany in receivableInvoicesCompanies"
         ng-controller="quicktech.core.receivable.companyCtrl">
       <div class="indicator-new-update" ng-if="showIndicator"></div>
       <a href='javascript:void(0)' ng-click="toggleReceivableInvoices()">
@@ -38,7 +27,8 @@
           </div>
         </li>
         <li class="clearfix" ng-repeat="invoice in receivableCompany.invoices"
-            ng-controller="quicktech.core.receivable.invoiceCtrl">
+            ng-controller="quicktech.core.receivable.invoiceCtrl"
+            show-model-element="{{ 'showInvoice-' + invoice.id }}">
                   <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-placement="top" title=""
                         data-original-title="recurring: monthly"></span>
 

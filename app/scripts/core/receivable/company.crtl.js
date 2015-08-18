@@ -10,8 +10,11 @@
 
         $scope.totalSum.companies[$scope.company.id] = 0;
 
+        var showInvoices;
+
         $scope.toggleReceivableInvoices = function () {
           $scope.$broadcast('toggleReceivableInvoices');
+          showInvoices = !showInvoices;
         };
 
         $scope.$on('indicatorInvoice', function () {
@@ -44,6 +47,13 @@
           }
           ReceivableService.resendInvoices(invoiceToSentId)
         };
+
+        $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
+          if (!showInvoices) {
+            $scope.toggleReceivableInvoices();
+          }
+          $scope.setHighlightInvoiceId(invoiceId);
+        });
 
       }]);
 

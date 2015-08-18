@@ -75,6 +75,10 @@
           }
         };
 
+        $scope.setHighlightInvoiceId = function (invoiceId) {
+          $scope.highlightInvoiceId = invoiceId;
+        };
+
         $scope.chooseAllCheckbox = function () {
           for (var invoice in $scope.invoiceToSent.invoices) {
             $scope.invoiceToSent.invoices[invoice] = $scope.invoiceToSent.chooseAll;

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.invoiceCtrl',
-    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService',
-      function ($scope, ReceivableService, $rootScope, CompaniesService) {
+    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', '$timeout',
+      function ($scope, ReceivableService, $rootScope, CompaniesService, $timeout) {
 
         $scope.totalSum.invoices[$scope.invoice.id] = 0;
 
@@ -57,6 +57,28 @@
         $scope.sentInvoice = function () {
           ReceivableService.resendInvoice($scope.invoice.id);
         };
+
+        $scope.$watch('highlightInvoiceId', function (invoiceId) {
+          if (invoiceId) {
+
+            if (invoiceId !== $scope.invoice.id && $scope.invoice.invoices) {
+              for (var i = 0; i < $scope.invoice.invoices.length; i++) {
+                if (invoiceId === $scope.invoice.invoices[i].id) {
+                  $scope.$broadcast('showInvoice-' + ($scope.invoice.invoices[i].recurringInvoice.id));
+                }
+              }
+            } else {
+              $scope.$broadcast('showInvoice-' + invoiceId);
+            }
+            $timeout(function () {
+              $scope.setHighlightInvoiceId();
+            }, 3000)
+          }
+        });
+
+        $scope.$on($scope.company.id + '-showInvoiceInList', function (event, invoiceId) {
+          $scope.setHighlightInvoiceId(invoiceId);
+        });
 
       }]);
 
