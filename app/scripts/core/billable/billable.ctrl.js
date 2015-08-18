@@ -69,6 +69,23 @@
           console.log('create invoice');
         };
 
+        $scope.$watch('ticketsSelection', function () {
+          //console.log()
+          $scope.countTicket = 0;
+          angular.forEach($scope.ticketsSelection, function (value, key) {
+            if (this[key].checked) {
+              $scope.countTicket++;
+            } else {
+              for (var id in this[key].tickets) {
+                if (this[key].tickets[id]) {
+                  $scope.countTicket++;
+                }
+              }
+            }
+
+          }, $scope.ticketsSelection);
+        }, true);
+
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('billableClientsHeader');
         });
