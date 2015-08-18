@@ -4,7 +4,7 @@
       <div class="update-icon"><span class="icon-update icn-update-service"></span></div>
       <div class="col-1 col-0">{{ service.createdAt | date:'dd MMM yyyy' }}</div>
       <div class="col-1">{{ service.item.name }}</div>
-      <div class="col-4">{{ service.sum | currency }}</div>
+      <div class="col-4">{{ service.sum | currency: '$': 0 }}</div>
       <div class="col-3">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
       <div class="col-2 description" popover="{{ service.description }}" popover-trigger="mouseenter"
            popover-placement="bottom">

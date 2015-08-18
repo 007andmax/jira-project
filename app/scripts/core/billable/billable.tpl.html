@@ -65,7 +65,7 @@
                   </label>
                 </div>
                 <span class="name">{{ company.name }}</span> <span class=" badge badge-light ">{{ billableCompany.ticketsCount }}</span> <span
-                class="amount pull-right">{{ billableCompany.total | currency }}</span>
+                class="amount pull-right">{{ billableCompany.total | currency: '$': 0 }}</span>
               </a>
               <ul class="invoices" ets-slider ng-controller="quicktech.core.billable.companyTicketsCtrl"
                   ng-if="showTickets">
@@ -81,7 +81,7 @@
                     </div>
                     <span class="name">{{ ticket.subject }}</span> <span
                     class="label label-default label-ticket-number ">Tkt# {{ ticket.number }}</span> <span
-                    class="amount pull-right">{{ totalTicketSum[ticket.id] | currency}}</span>
+                    class="amount pull-right">{{ totalTicketSum[ticket.id] | currency: '$': 0}}</span>
                   </a>
                   <ul class="updates" qt-ts-slider>
 

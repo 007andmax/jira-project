@@ -73,7 +73,7 @@
 
                 <span class="name">{{ company.name }}</span>
                 <span class=" badge badge-light ">{{ recurringCompany.invoicesCount || 0 }}</span>
-                <span class="amount pull-right">{{ recurringCompany.total | currency }}</span>
+                <span class="amount pull-right">{{ recurringCompany.total | currency: '$': 0 }}</span>
 
               </a>
 
@@ -105,7 +105,7 @@
                       </span>
                     </div>
                     <div class="col-4 normal">{{ nextDueDate | date:'dd MMM yyyy' }}</div>
-                    <div class="col-5 normal">{{ totalInvoiceSum | currency }}
+                    <div class="col-5 normal">{{ totalInvoiceSum | currency: '$': 0 }}
                       <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
                          ng-click="deleteRecurringInvoice()"
                          stop-propagation="click" tooltip-placement="top" tooltip="Delete"></a>

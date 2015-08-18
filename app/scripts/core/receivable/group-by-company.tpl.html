@@ -14,7 +14,7 @@
         </div>
         <span class="name">{{ company.name }}</span>
         <span class=" badge badge-light">{{ receivableCompany.invoices.length }}</span>
-        <span class="amount pull-right">{{ totalSum.companies[company.id] | currency }}</span>
+        <span class="amount pull-right">{{ totalSum.companies[company.id] | currency: '$': 0 }}</span>
       </a>
       <ul class="invoices recurring receivable " ets-slider>
         <li class="head clearfix">
@@ -53,7 +53,7 @@
               {{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}
               <a href="javascript:void(0)" class="pull-right icn-send icns" ng-click="sentInvoice()"
                  tooltip="Send Again" tooltip-placement="top"></a></div>
-            <div class="col-5 normal">{{ totalSum.invoices[invoice.id] | currency }}</div>
+            <div class="col-5 normal">{{ totalSum.invoices[invoice.id] | currency: '$': 0 }}</div>
           </div>
         </li>
 
