@@ -70,7 +70,6 @@
         };
 
         $scope.$watch('ticketsSelection', function () {
-          //console.log()
           $scope.countTicket = 0;
           angular.forEach($scope.ticketsSelection, function (value, key) {
             if (this[key].checked) {
