@@ -11,13 +11,18 @@
           method: 'CHEQUE'
         };
 
-        var invoicesIdToSend = [];
+        var chosenInvoices = [];
+
+        $scope.receivePaymentInvoices = [];
+
+        var invoiceList = $scope.receivableInvoicesData.list;
 
         $scope.paymentMethod = {
           CASH: 'Cash',
           CHEQUE: 'Cheque',
           DEBIT_CARD: 'Debit Card',
-          CREDIT_CARD: 'Credit Card'
+          CREDIT_CARD: 'Credit Card',
+          WIRE_TRANSFER: 'Wire Transfer'
         };
 
         $scope.close = function () {
@@ -25,33 +30,35 @@
         };
 
         if ($stateParams.mode === 'list') {
-          for (var id in $scope.invoiceToSent.invoices) {
-            if ($scope.invoiceToSent.invoices[id]) {
-              invoicesIdToSend.push(id);
+          for (var i = 0; i < invoiceList.length; i++) {
+            if ($scope.invoiceToSent.invoices[invoiceList[i].id]) {
+              chosenInvoices.push(invoiceList[i])
             }
           }
         } else {
           angular.forEach($scope.invoiceToSent, function (value, key) {
             if (this[key].invoices !== undefined) {
-              for (var id in this[key].invoices) {
-                if (this[key].invoices[id]) {
-                  invoicesIdToSend.push(id);
+              for (var i = 0; i < invoiceList.length; i++) {
+                if (this[key].invoices[invoiceList[i].id]) {
+                  chosenInvoices.push(invoiceList[i])
                 }
               }
             }
           }, $scope.invoiceToSent);
         }
 
-        $scope.filterById = function () {
-          return $scope.receivableInvoicesData.list.filter(function (invoice) {
-            return invoicesIdToSend.indexOf(invoice.id) !== -1;
-          });
-        };
+        for (var i = 0; i < chosenInvoices.length; i++) {
+          if (chosenInvoices[i].isRecurring) {
+            for (var j = 0; j < chosenInvoices[i].invoices.length; j++) {
+              $scope.receivePaymentInvoices.push(chosenInvoices[i].invoices[j])
+            }
+          } else {
+            $scope.receivePaymentInvoices.push(chosenInvoices[i]);
+          }
+        }
 
-        $scope.choosenInvoices = $scope.filterById($scope.receivableInvoicesData.list);
-
-        for (var i = 0; i < $scope.choosenInvoices.length; i++) {
-          $scope.invoiceToReceive.invoices[$scope.choosenInvoices[i].id] = true;
+        for (var i = 0; i < $scope.receivePaymentInvoices.length; i++) {
+          $scope.invoiceToReceive.invoices[$scope.receivePaymentInvoices[i].id] = true;
         }
 
         $scope.$watch('invoiceToReceive.invoices', function () {
@@ -64,7 +71,7 @@
             }
           }
 
-          $scope.invoiceToReceive.chooseAll = ($scope.choosenInvoices.length === countObj );
+          $scope.invoiceToReceive.chooseAll = ($scope.receivePaymentInvoices.length === countObj );
 
         }, true);
 
@@ -76,9 +83,9 @@
 
         $scope.$watch('invoiceToReceive.invoices', function () {
           $scope.receivePaymentSum = 0;
-          for (var i = 0; i < $scope.choosenInvoices.length; i++) {
-            if ($scope.invoiceToReceive.invoices[$scope.choosenInvoices[i].id]) {
-              $scope.receivePaymentSum += $scope.calculateTotalInvoiceSum($scope.choosenInvoices[i]);
+          for (var i = 0; i < $scope.receivePaymentInvoices.length; i++) {
+            if ($scope.invoiceToReceive.invoices[$scope.receivePaymentInvoices[i].id]) {
+              $scope.receivePaymentSum += $scope.receivePaymentInvoices[i].sum;
             }
           }
         }, true);

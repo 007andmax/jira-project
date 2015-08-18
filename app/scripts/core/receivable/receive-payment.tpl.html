@@ -24,34 +24,39 @@
 
 
         </div>
-        <ul class="invoices-sticky invoices" >
+        <ul class="invoices-sticky invoices">
           <li class="head clearfix">
             <div class="">
-              <div class="col-1"><div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
-                <span class="control-indicator"></span>
-              </label></div> <span class="name">INVOICE NO.</span> </div>
+              <div class="col-1">
+                <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                  <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
+                  <span class="control-indicator"></span>
+                </label></div>
+                <span class="name">INVOICE NO.</span></div>
               <div class="col-2">SENT ON</div>
               <div class="col-3">AMOUNT</div>
             </div>
-          </li></ul>
+          </li>
+        </ul>
         <div class="invoices-list" id="invoiceList">
           <ul class="invoices" qt-scroll-pane>
-            <li class="clearfix" ng-repeat="invoice in choosenInvoices"
-                ng-controller="quicktech.core.receivable.invoiceToReceiveCtrl">
+            <li class="clearfix" ng-repeat="invoice in receivePaymentInvoices">
               <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-container='#invoiceList'
                     data-placement="top" title="" data-original-title="recurring: monthly"></span>
+
               <div class="hover">
-                <div class="col-1"> <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                  <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
-                  <span class="control-indicator"></span>
-                </label></div>
-                  <span class="name">{{ invoiceProperty('number') }}</span></div>
-                <div class="col-2 normal">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
-                <div class="col-3 normal">{{ totalInvoiceSum | currency }}</div>
+                <div class="col-1">
+                  <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
+                    <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
+                    <span class="control-indicator"></span>
+                  </label></div>
+                  <span class="name">{{ invoice.number }}</span></div>
+                <div class="col-2 normal">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+                <div class="col-3 normal">{{ invoice.sum | currency }}</div>
               </div>
             </li>
-          </ul></div>
+          </ul>
+        </div>
         <div class="total-amount pull-right">Total amount <span
           class="bold">{{ receivePaymentSum | currency: '$': 0 }}</span></div>
         <div class="row-wrapper clearfix">

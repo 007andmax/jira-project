@@ -8,7 +8,7 @@
 
         $scope.company = CompaniesService.getOneById($scope.receivableCompany.id);
 
-        $scope.totalCompanySum = 0;
+        $scope.totalSum.companies[$scope.company.id] = 0;
 
         $scope.toggleReceivableInvoices = function () {
           $scope.$broadcast('toggleReceivableInvoices');
@@ -19,19 +19,8 @@
         });
 
         $scope.$on('calculateTotalCompanySum', function (event, data) {
-          $scope.totalCompanySum += data;
+          $scope.totalSum.companies[$scope.company.id] += data;
         });
-
-        $scope.sentInvoices = function () {
-          var companyInvoices = $scope.invoiceToSent[$scope.company.id].invoices;
-          $scope.invoiceToSentId = [];
-          for (var invoice in companyInvoices) {
-            if (companyInvoices[invoice]) {
-              $scope.invoiceToSentId.push(invoice)
-            }
-          }
-          ReceivableService.resendInvoices($scope.invoiceToSentId)
-        };
 
         $scope.$watch('invoiceToSent[company.id].invoices', function () {
           var countObj = 0,
@@ -43,7 +32,18 @@
             }
           }
           companyInvoices.checked = ($scope.receivableCompany.invoices.length === countObj);
-        }, true)
+        }, true);
+
+        $scope.sentInvoices = function () {
+          var companyInvoices = $scope.invoiceToSent[$scope.company.id].invoices;
+          var invoiceToSentId = [];
+          for (var invoice in companyInvoices) {
+            if (companyInvoices[invoice]) {
+              invoiceToSentId.push(invoice)
+            }
+          }
+          ReceivableService.resendInvoices(invoiceToSentId)
+        };
 
       }]);
 

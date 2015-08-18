@@ -3,14 +3,17 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivableCtrl',
-    ['$scope', '$state', '$stateParams', 'ReceivableService', 'CompaniesService', '$rootScope', '$timeout',
-      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, $rootScope, $timeout) {
+    ['$scope', '$state', '$stateParams', 'ReceivableService', 'CompaniesService',
+      function ($scope, $state, $stateParams, ReceivableService, CompaniesService) {
+
+        var availableMods = ['group-by-company', 'list'];
 
         $scope.invoiceToSent = {};
 
-        $scope.totalReceivables = 0;
-
-        $scope.allInvoicesId = [];
+        $scope.totalSum = {
+          companies: {},
+          invoices: {}
+        };
 
         $scope.receivedAmountAllTime = ReceivableService.getReceivedPaymentsSumByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
@@ -43,22 +46,7 @@
             }
           }
 
-          for (var i = 0; i < invoicesData.list.length; i++) {
-            if (invoicesData.list[i].isRecurring) {
-              for (var j = 0; j < invoicesData.list[i].invoices.length; j++) {
-                $scope.totalReceivables += invoicesData.list[i].invoices[j].sum;
-              }
-            } else {
-              $scope.totalReceivables += invoicesData.list[i].sum;
-            }
-
-            $scope.allInvoicesId.push(invoicesData.list[i].id);
-
-          }
-
         });
-
-        var availableMods = ['group-by-company', 'list'];
 
         $scope.$watch(function () {
           return $stateParams.mode;
@@ -74,8 +62,8 @@
 
         $scope.changeCompanyCheckbox = function (companyId) {
           for (var i = 0; i < $scope.receivableInvoicesCompanies.length; i++) {
-            if (companyId === $scope.receivableInvoicesCompanies[i].id) {
-              var company = $scope.receivableInvoicesCompanies[i];
+            var company = $scope.receivableInvoicesCompanies[i];
+            if (companyId === company.id) {
               $scope.invoiceToSent[companyId] = {
                 checked: $scope.invoiceToSent[companyId].checked,
                 invoices: {}
@@ -92,18 +80,6 @@
             $scope.invoiceToSent.invoices[invoice] = $scope.invoiceToSent.chooseAll;
           }
         };
-
-        $scope.calculateTotalInvoiceSum = function (invoice) {
-          $scope.totalInvoiceSum = 0;
-          if (invoice.sum !== undefined) {
-            $scope.totalInvoiceSum = invoice.sum;
-          } else {
-            for (var i = 0; i < invoice.invoices.length; i++) {
-              $scope.totalInvoiceSum += invoice.invoices[i].sum;
-            }
-          }
-          return $scope.totalInvoiceSum;
-        }
 
       }]);
 

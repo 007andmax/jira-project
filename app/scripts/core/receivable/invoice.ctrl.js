@@ -6,16 +6,14 @@
     ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService',
       function ($scope, ReceivableService, $rootScope, CompaniesService) {
 
-        $scope.totalInvoiceSum = 0;
+        $scope.totalSum.invoices[$scope.invoice.id] = 0;
 
-        $scope.chooseInvoice = [];
+        $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
         $scope.invoiceProperty = function (property) {
           var invoice = $scope.invoice;
           return invoice.isRecurring ? invoice.invoices[invoice.invoices.length - 1][property] : invoice[property]
         };
-
-        $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
         if ($scope.invoiceProperty('dueDate') < Date.now()) {
           $scope.dueDate = {
@@ -30,13 +28,17 @@
           }
         }
 
-        if ($scope.invoice.sum !== undefined) {
-          $scope.totalInvoiceSum = $scope.invoice.sum;
-        } else {
-          for (var i = 0; i < $scope.invoice.invoices.length; i++) {
-            $scope.totalInvoiceSum += $scope.invoice.invoices[i].sum;
+        $scope.$watch('receivableInvoicesData', function () {
+          if ($scope.invoice.sum !== undefined) {
+            $scope.totalSum.invoices[$scope.invoice.id] = $scope.invoice.sum;
+          } else {
+            for (var i = 0; i < $scope.invoice.invoices.length; i++) {
+              $scope.totalSum.invoices[$scope.invoice.id] += $scope.invoice.invoices[i].sum;
+            }
           }
-        }
+          $scope.$emit('calculateTotalCompanySum', $scope.totalSum.invoices[$scope.invoice.id]);
+        });
+
 
         $scope.$watch('invoiceToSent.invoices', function () {
           var countObj = 0,
@@ -53,7 +55,7 @@
         }, true);
 
         $scope.sentInvoice = function () {
-          ReceivableService.resendInvoice($scope.invoice.id)
+          ReceivableService.resendInvoice($scope.invoice.id);
         };
 
       }]);

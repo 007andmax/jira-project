@@ -13,7 +13,7 @@
         },
         link: function (scope) {
 
-          scope.$watch('firstValuePieChart', function () {
+          scope.$watchGroup(['firstValuePieChart', 'secondValuePieChart'], function () {
 
             var data = [
               {

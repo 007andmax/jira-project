@@ -25,7 +25,7 @@
         </div>
         <span class="name">{{ company.name }}</span>
         <span class=" badge badge-light">{{ receivableCompany.invoices.length }}</span>
-        <span class="amount pull-right">{{ totalCompanySum | currency }}</span>
+        <span class="amount pull-right">{{ totalSum.companies[company.id] | currency }}</span>
       </a>
       <ul class="invoices recurring receivable " ets-slider>
         <li class="head clearfix">
@@ -38,7 +38,7 @@
           </div>
         </li>
         <li class="clearfix" ng-repeat="invoice in receivableCompany.invoices"
-            ng-controller="quicktech.core.receivable.companyInvoiceCtrl">
+            ng-controller="quicktech.core.receivable.invoiceCtrl">
                   <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-placement="top" title=""
                         data-original-title="recurring: monthly"></span>
 
@@ -60,7 +60,7 @@
               {{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}
               <a href="javascript:void(0)" class="pull-right icn-send icns" ng-click="sentInvoice()"
                  tooltip="Send Again" tooltip-placement="top"></a></div>
-            <div class="col-5 normal">{{ totalInvoiceSum | currency }}</div>
+            <div class="col-5 normal">{{ totalSum.invoices[invoice.id] | currency }}</div>
           </div>
         </li>
 
