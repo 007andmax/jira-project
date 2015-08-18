@@ -13758,16 +13758,23 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.services  > li.add-new:last-child{
                                                     margin-bottom: 30px;
                                                   }
+<<<<<<< HEAD
 /*                                                  .content-wrapper .content-body .invoices > li.add-new{
                                                     margin-bottom: 30px;
 
                                                   }*/
                                                   .content-wrapper .content-body .invoices > li.edit-form{
+=======
+                                                  .content-wrapper .content-body .invoices li.edit-form{
+>>>>>>> ac803d40f475a89adfdb51ccd27f8cf9ea41c8f7
                                                     margin-bottom: 0px;
                                                     padding-bottom: 0px  !important;
                                                   }
                                                   .content-wrapper .content-body .invoices > li.edit-form.last{
                                                     margin-bottom: 30px  !important;
+                                                  }
+                                                  .content-wrapper .content-body .invoices li.edit-form > div > div{
+                                                    padding-bottom: 5px  !important;
                                                   }
                                                   .icn-description{
                                                     width: 10px;
@@ -14124,7 +14131,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           .content-wrapper .content-body .invoices .dropdown-menu li a:before{
                                                             display: none !important;
                                                           }
-                                                          .content-wrapper .content-body .invoices > li.add-new{
+                                                          .content-wrapper .content-body .invoices li.add-new{
                                                             background: #f0fafb;
                                                             left: 0;
                                                             padding-left: 66px;
@@ -14219,6 +14226,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           .content-wrapper .content-body .invoices > li.add-new > div > div{
                                                             padding-bottom: 5px !important;
                                                           }
+
                                                           .content-wrapper .content-body .invoices > li.add-new .new-updates{
                                                             padding: 0px;
                                                           }
