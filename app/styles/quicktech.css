@@ -13758,15 +13758,13 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.services  > li.add-new:last-child{
                                                     margin-bottom: 30px;
                                                   }
-<<<<<<< HEAD
-/*                                                  .content-wrapper .content-body .invoices > li.add-new{
+                                                  .content-wrapper .content-body .invoices > li.add-new{
                                                     margin-bottom: 30px;
 
-                                                  }*/
-                                                  .content-wrapper .content-body .invoices > li.edit-form{
-=======
+                                                  }
+
                                                   .content-wrapper .content-body .invoices li.edit-form{
->>>>>>> ac803d40f475a89adfdb51ccd27f8cf9ea41c8f7
+
                                                     margin-bottom: 0px;
                                                     padding-bottom: 0px  !important;
                                                   }
