@@ -13759,12 +13759,15 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                     margin-bottom: 30px;
 
                                                   }
-                                                  .content-wrapper .content-body .invoices > li.edit-form{
+                                                  .content-wrapper .content-body .invoices li.edit-form{
                                                     margin-bottom: 0px;
                                                     padding-bottom: 0px  !important;
                                                   }
                                                   .content-wrapper .content-body .invoices > li.edit-form.last{
                                                     margin-bottom: 30px  !important;
+                                                  }
+                                                  .content-wrapper .content-body .invoices li.edit-form > div > div{
+                                                    padding-bottom: 5px  !important;
                                                   }
                                                   .icn-description{
                                                     width: 10px;
@@ -14212,6 +14215,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           .content-wrapper .content-body .invoices > li.add-new > div > div{
                                                             padding-bottom: 5px !important;
                                                           }
+
                                                           .content-wrapper .content-body .invoices > li.add-new .new-updates{
                                                             padding: 0px;
                                                           }
