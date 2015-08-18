@@ -14121,7 +14121,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           .content-wrapper .content-body .invoices .dropdown-menu li a:before{
                                                             display: none !important;
                                                           }
-                                                          .content-wrapper .content-body .invoices > li.add-new{
+                                                          .content-wrapper .content-body .invoices li.add-new{
                                                             background: #f0fafb;
                                                             left: 0;
                                                             padding-left: 66px;
