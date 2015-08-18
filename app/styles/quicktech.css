@@ -13673,7 +13673,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                 }
                                                 
                                                 .content-wrapper .content-body .invoices.services li > div > div > form > div > .col-1 {
-                                                  width: calc(100% - 314px);
+                                                  width: calc(100% - 318px);
                                                   text-transform: capitalize;
                                                   float: left;
                                                   display: inline;
@@ -13685,7 +13685,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                 }
                                                 
                                                 .content-wrapper .content-body .invoices.services li > div > div > form > div > .col-2 {
-                                                  width: 138px;
+                                                  width: 142px;
                                                   float: left;
                                                   display: inline;
                                                   padding-right: 10px;
@@ -13749,16 +13749,19 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.products li .add-table-actions,
                                                   .content-wrapper .content-body .invoices.services li .add-table-actions{
                                                     margin-right: 41px !important;
-                                                    margin-top: 25px;
+                                                    margin-top: 30px;
                                                   }
                                                   .content-wrapper .content-body .invoices.products > li.add-new,
                                                   .content-wrapper .content-body .invoices.services  > li.add-new{
                                                     padding-top: 4px !important;
                                                   }
-                                                  .content-wrapper .content-body .invoices > li.add-new{
+                                                  .content-wrapper .content-body .invoices.services  > li.add-new:last-child{
+                                                    margin-bottom: 30px;
+                                                  }
+/*                                                  .content-wrapper .content-body .invoices > li.add-new{
                                                     margin-bottom: 30px;
 
-                                                  }
+                                                  }*/
                                                   .content-wrapper .content-body .invoices > li.edit-form{
                                                     margin-bottom: 0px;
                                                     padding-bottom: 0px  !important;
@@ -13873,7 +13876,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
 
                                                   }
                                                   .content-wrapper .content-body .invoices.recurring .add-more.new{
-                                                    margin: 10px 24px 25px;
+                                                    margin: 26px 24px 25px;
 
                                                   }
                                                   .content-wrapper .content-body .invoices.recurring .add-more a:before,
@@ -13915,9 +13918,9 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                       padding: 25px 0px 26px;}
                                                       .content-wrapper .content-body .invoices > li:first-child  a{
                                                         padding-top:15px;}
-                                                        .content-wrapper .content-body .invoices > li:last-child {
+                                                        .content-wrapper .content-body .invoices > li:last-child{
                                                           border-bottom:0px;
-                                                          padding-bottom:30px;
+                                                          /*padding-bottom:30px;*/
 
                                                         }
 
@@ -14149,6 +14152,10 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                             margin-bottom: 30px;
 
                                                           }
+                                                          
+/*                                                          ul.companies-list > li > div > ul > li.add-new{
+                                                              padding-top: 20px !important;
+                                                          }*/
                                                           
                                                           .content-wrapper .content-body .services-list > li > div > div > form > div > div.col-1{
                                                               width: calc(100% - 318px);
