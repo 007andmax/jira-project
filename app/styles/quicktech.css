@@ -13768,7 +13768,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                     margin-bottom: 0px;
                                                     padding-bottom: 0px  !important;
                                                   }
-                                                  .content-wrapper .content-body .invoices > li.edit-form.last{
+                                                  .content-wrapper .content-body .invoices li.last{
                                                     margin-bottom: 30px  !important;
                                                   }
                                                   .content-wrapper .content-body .invoices li.edit-form > div > div{
