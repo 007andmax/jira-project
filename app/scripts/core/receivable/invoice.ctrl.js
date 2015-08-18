@@ -6,8 +6,6 @@
     ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', '$timeout',
       function ($scope, ReceivableService, $rootScope, CompaniesService, $timeout) {
 
-        $scope.totalSum.invoices[$scope.invoice.id] = 0;
-
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
         $scope.invoiceProperty = function (property) {
@@ -27,18 +25,6 @@
             value: Math.floor(($scope.invoiceProperty('dueDate') - Date.now()) / 1000 / 60 / 60 / 24)
           }
         }
-
-        $scope.$watch('receivableInvoicesData', function () {
-          if ($scope.invoice.sum !== undefined) {
-            $scope.totalSum.invoices[$scope.invoice.id] = $scope.invoice.sum;
-          } else {
-            for (var i = 0; i < $scope.invoice.invoices.length; i++) {
-              $scope.totalSum.invoices[$scope.invoice.id] += $scope.invoice.invoices[i].sum;
-            }
-          }
-          $scope.$emit('calculateTotalCompanySum', $scope.totalSum.invoices[$scope.invoice.id]);
-        });
-
 
         $scope.$watch('invoiceToSent.invoices', function () {
           var countObj = 0,
@@ -61,13 +47,13 @@
         $scope.$watch('highlightInvoiceId', function (invoiceId) {
           if (invoiceId) {
 
-            if (invoiceId !== $scope.invoice.id && $scope.invoice.invoices) {
+            if ($scope.invoice.isRecurring) {
               for (var i = 0; i < $scope.invoice.invoices.length; i++) {
                 if (invoiceId === $scope.invoice.invoices[i].id) {
                   $scope.$broadcast('showInvoice-' + ($scope.invoice.invoices[i].recurringInvoice.id));
                 }
               }
-            } else {
+            } else if (invoiceId === $scope.invoice.id) {
               $scope.$broadcast('showInvoice-' + invoiceId);
             }
             $timeout(function () {

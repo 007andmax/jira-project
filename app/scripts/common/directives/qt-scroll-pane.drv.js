@@ -8,11 +8,19 @@
         restrict: 'A',
         link: function (scope, element, attrs) {
 
-          element.jScrollPane({
-            autoReinitialise: true,
-            verticalDragMinHeight: 54,
-            verticalDragMaxHeight: 54,
-          });
+          if (!attrs.qtspCreateEvent) {
+            initScroll();
+          } else {
+            scope.$on(attrs.qtspCreateEvent, initScroll);
+          }
+
+          function initScroll() {
+            element.jScrollPane({
+              autoReinitialise: true,
+              verticalDragMinHeight: 54,
+              verticalDragMaxHeight: 54
+            });
+          }
         }
       }
     }]);
