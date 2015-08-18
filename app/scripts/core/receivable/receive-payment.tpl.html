@@ -1,4 +1,4 @@
-<div class=" modal-receive-payment fade in show" style="margin-top: 150px;">
+<div class=" modal-receive-payment fade in show" >
   <div class="modal-dialog payment-received">
     <div class="modal-content">
       <div class="modal-header clearfix">
@@ -39,8 +39,8 @@
           </li>
         </ul>
         <div class="invoices-list" id="invoiceList">
-          <ul class="invoices" qt-scroll-pane>
-            <li class="clearfix" ng-repeat="invoice in receivePaymentInvoices">
+          <ul class="invoices" qt-scroll-pane qtsp-create-event="invoicesRenderingFinished">
+            <li class="clearfix" ng-repeat="invoice in receivePaymentInvoices" ng-init="checkInvoicesRendering($last)">
               <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-container='#invoiceList'
                     data-placement="top" title="" data-original-title="recurring: monthly"></span>
 

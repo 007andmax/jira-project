@@ -98,7 +98,13 @@
             }
           }
           ReceivableService.receivePayment($scope.invoiceToReceive.method, invoiceIdPayment)
-        }
+        };
+
+        $scope.checkInvoicesRendering = function (finished) {
+          if (finished) {
+            $scope.$emit('invoicesRenderingFinished');
+          }
+        };
 
       }]);
 
