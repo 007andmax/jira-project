@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.invoiceCtrl',
-    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', '$timeout', '$stateParams',
-      function ($scope, ReceivableService, $rootScope, CompaniesService, $timeout, $stateParams) {
+    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', '$timeout',
+      function ($scope, ReceivableService, $rootScope, CompaniesService, $timeout) {
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
@@ -25,22 +25,6 @@
             value: Math.floor(($scope.invoiceProperty('dueDate') - Date.now()) / 1000 / 60 / 60 / 24)
           }
         }
-
-        $scope.$watch('invoiceToSent.invoices', function () {
-          var countObj = 0,
-            invoices = $scope.invoiceToSent.invoices;
-
-          for (var invoiceId in invoices) {
-            if (invoices[invoiceId]) {
-              countObj++;
-            }
-          }
-
-          if ($stateParams.mode === 'list') {
-            $scope.invoiceToSent.chooseAll = ($scope.receivableInvoicesData.list.length === countObj );
-          }
-
-        }, true);
 
         $scope.sentInvoice = function () {
           var idInvoiceToSend;

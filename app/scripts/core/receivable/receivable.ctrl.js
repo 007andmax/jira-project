@@ -108,18 +108,30 @@
         };
 
         $scope.$watch('invoiceToSent', function () {
+
           $scope.countInvoice = 0;
+
           if ($stateParams.mode === 'group-by-company') {
-            angular.forEach($scope.invoiceToSent, function (value, key) {
-              if (this[key].invoices) {
-                for (var id in this[key].invoices) {
-                  if (this[key].invoices[id]) {
+            for (var id in $scope.invoiceToSent) {
+              if ($scope.invoiceToSent[id].invoices) {
+                for (var invoiceId in $scope.invoiceToSent[id].invoices) {
+                  if ($scope.invoiceToSent[id].invoices[invoiceId]) {
                     $scope.countInvoice++;
                   }
                 }
               }
-            }, $scope.invoiceToSent);
+            }
           } else {
+            var countObj = 0,
+              invoices = $scope.invoiceToSent.invoices;
+
+            for (var invoiceId in invoices) {
+              if (invoices[invoiceId]) {
+                countObj++;
+              }
+            }
+            $scope.invoiceToSent.chooseAll = ($scope.receivableInvoicesData.list.length === countObj );
+
             if ($scope.invoiceToSent.chooseAll) {
               $scope.countInvoice++;
             } else {

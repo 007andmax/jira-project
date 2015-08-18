@@ -71,18 +71,17 @@
 
         $scope.$watch('ticketsSelection', function () {
           $scope.countTicket = 0;
-          angular.forEach($scope.ticketsSelection, function (value, key) {
-            if (this[key].checked) {
+          for (var key in $scope.ticketsSelection) {
+            if ($scope.ticketsSelection[key].checked) {
               $scope.countTicket++;
             } else {
-              for (var id in this[key].tickets) {
-                if (this[key].tickets[id]) {
+              for (var id in $scope.ticketsSelection[key].tickets) {
+                if ($scope.ticketsSelection[key].tickets[id]) {
                   $scope.countTicket++;
                 }
               }
             }
-
-          }, $scope.ticketsSelection);
+          }
         }, true);
 
         $scope.$on('$destroy', function () {
