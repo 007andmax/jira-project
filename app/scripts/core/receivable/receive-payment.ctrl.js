@@ -106,6 +106,15 @@
           }
         };
 
+        $scope.$watch('invoiceToReceive.invoices', function () {
+          $scope.countReceiveInvoice = 0;
+          for (var id in $scope.invoiceToReceive.invoices) {
+            if ($scope.invoiceToReceive.invoices[id]) {
+              $scope.countReceiveInvoice++;
+            }
+          }
+        }, true);
+
       }]);
 
 }());

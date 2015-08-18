@@ -107,6 +107,31 @@
           }
         };
 
+        $scope.$watch('invoiceToSent', function () {
+          $scope.countInvoice = 0;
+          if ($stateParams.mode === 'group-by-company') {
+            angular.forEach($scope.invoiceToSent, function (value, key) {
+              if (this[key].invoices) {
+                for (var id in this[key].invoices) {
+                  if (this[key].invoices[id]) {
+                    $scope.countInvoice++;
+                  }
+                }
+              }
+            }, $scope.invoiceToSent);
+          } else {
+            if ($scope.invoiceToSent.chooseAll) {
+              $scope.countInvoice++;
+            } else {
+              for (var id in $scope.invoiceToSent.invoices) {
+                if ($scope.invoiceToSent.invoices[id]) {
+                  $scope.countInvoice++;
+                }
+              }
+            }
+          }
+        }, true);
+
       }]);
 
 }());

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.invoiceCtrl',
-    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', '$timeout',
-      function ($scope, ReceivableService, $rootScope, CompaniesService, $timeout) {
+    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', '$timeout', '$stateParams',
+      function ($scope, ReceivableService, $rootScope, CompaniesService, $timeout, $stateParams) {
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
@@ -36,12 +36,20 @@
             }
           }
 
-          $scope.invoiceToSent.chooseAll = ($scope.receivableInvoicesData.list.length === countObj );
+          if ($stateParams.mode === 'list') {
+            $scope.invoiceToSent.chooseAll = ($scope.receivableInvoicesData.list.length === countObj );
+          }
 
         }, true);
 
         $scope.sentInvoice = function () {
-          ReceivableService.resendInvoice($scope.invoice.id);
+          var idInvoiceToSend;
+          if ($scope.invoice.isRecurring) {
+            idInvoiceToSend = ($scope.invoice.invoices[$scope.invoice.invoices.length - 1].id);
+          } else {
+            idInvoiceToSend = ($scope.invoice.id);
+          }
+          ReceivableService.resendInvoice(idInvoiceToSend);
         };
 
         $scope.$watch('highlightInvoiceId', function (invoiceId) {

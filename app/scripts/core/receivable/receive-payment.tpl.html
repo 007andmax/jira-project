@@ -64,7 +64,9 @@
           class="bold">{{ receivePaymentSum | currency: '$': 0 }}</span></div>
         <div class="row-wrapper clearfix">
           <div class=" actions-wrapper pull-left">
-            <button type="button" class="btn btn-scooter" ng-click="receivePayment()">Receive</button>
+            <button type="button" class="btn btn-scooter" ng-disabled="!countReceiveInvoice"
+                    ng-click="receivePayment()">Receive
+            </button>
             <button type="button" class="btn btn-gray"
                     ng-click="close()" data-dismiss="modal">Cancel
             </button>

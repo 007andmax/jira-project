@@ -34,13 +34,31 @@
         $scope.sentInvoices = function () {
           var companyInvoices = $scope.invoiceToSent[$scope.company.id].invoices;
           var invoiceToSentId = [];
+          var listInvoices = $scope.receivableInvoicesData.list;
           for (var invoice in companyInvoices) {
             if (companyInvoices[invoice]) {
-              invoiceToSentId.push(invoice)
+              for (var i = 0; i < listInvoices.length; i++) {
+                if (invoice === listInvoices[i].id) {
+                  if (listInvoices[i].isRecurring) {
+                    invoiceToSentId.push(listInvoices[i].invoices[listInvoices[i].invoices.length - 1].id);
+                  } else {
+                    invoiceToSentId.push(invoice);
+                  }
+                }
+              }
             }
           }
-          ReceivableService.resendInvoices(invoiceToSentId)
+          ReceivableService.resendInvoices(invoiceToSentId);
         };
+
+        $scope.$watch('invoiceToSent[company.id]', function () {
+          $scope.countInvoicesInCompany = 0;
+          for (var id in $scope.invoiceToSent[$scope.company.id].invoices) {
+            if ($scope.invoiceToSent[$scope.company.id].invoices[id]) {
+              $scope.countInvoicesInCompany++
+            }
+          }
+        }, true);
 
         $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
           if (!showInvoices) {
