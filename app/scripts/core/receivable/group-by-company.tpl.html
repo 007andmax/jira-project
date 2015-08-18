@@ -1,30 +1,22 @@
 <div role="tabpanel" class="tab-pane active">
-  <ul class="companies-list">
-    <li><a href='javascript:void(0)'>
-      <div class="ui-checkbox ui-checkbox-warning pull-left">
-        <label class="control checkbox">
-          <input type="checkbox">
-          <span class="control-indicator"></span>
-        </label>
-      </div>
-      <span class="name">Global Media</span> <span class=" badge badge-light ">2</span> <span
-      class="amount pull-right">$4,960</span>
-    </a>
-
-    </li>
-    <li>
-      <div class="indicator-new-update"></div>
-      <a href='javascript:void(0)'>
+  <ul class="companies-list" ftt-tab-content>
+    <li event-toggle-slider="toggleReceivableInvoices"
+        ng-repeat="receivableCompany in receivableInvoicesCompanies"
+        ng-controller="quicktech.core.receivable.companyCtrl">
+      <div class="indicator-new-update" ng-if="showIndicator"></div>
+      <a href='javascript:void(0)' ng-click="toggleReceivableInvoices()">
         <div class="ui-checkbox ui-checkbox-warning pull-left">
-          <label class="control checkbox">
-            <input type="checkbox">
+          <label class="control checkbox" stop-propagation="click">
+            <input type="checkbox" ng-model="invoiceToSent[company.id].checked"
+                   ng-click="changeCompanyCheckbox(company.id)">
             <span class="control-indicator"></span>
           </label>
         </div>
-        <span class="name">Active Information Systems</span> <span class=" badge badge-light ">5</span> <span
-        class="amount pull-right">$39,020</span>
+        <span class="name">{{ company.name }}</span>
+        <span class=" badge badge-light">{{ receivableCompany.invoices.length }}</span>
+        <span class="amount pull-right">{{ totalSum.companies[company.id] | currency }}</span>
       </a>
-      <ul class="invoices recurring receivable ">
+      <ul class="invoices recurring receivable " ets-slider>
         <li class="head clearfix">
           <div class="">
             <div class="col-1">INVOICE NO.</div>
@@ -34,178 +26,42 @@
             <div class="col-5">AMOUNT</div>
           </div>
         </li>
-        <li class="clearfix">
+        <li class="clearfix" ng-repeat="invoice in receivableCompany.invoices"
+            ng-controller="quicktech.core.receivable.invoiceCtrl"
+            show-model-element="{{ 'showInvoice-' + invoice.id }}">
                   <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-placement="top" title=""
                         data-original-title="recurring: monthly"></span>
 
           <div class="hover">
             <div class="col-1">
               <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                <input type="checkbox">
+                <input type="checkbox" ng-model="invoiceToSent[company.id].invoices[invoice.id]">
                 <span class="control-indicator"></span>
               </label></div>
-              <span class="name">39302</span> <span class=" badge badge-light ">2</span></div>
-            <div class="col-2 normal">26 Dec 2014</div>
-            <div class="col-3"><span class="label label-danger">overdue by 65 days</span></div>
-            <div class="col-4 normal">Resent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                                data-placement="top" title=""
-                                                data-original-title="Send Again"></a></div>
-            <div class="col-5 normal">$8,960</div>
+              <span class="name">{{ invoiceProperty('number') }}</span>
+              <span class=" badge badge-light ">{{ invoice.isRecurring ? invoice.invoices.length : '' }}</span></div>
+            <div class="col-2 normal">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
+            <div class="col-3"><span class="label"
+                                     ng-class="{'label-blue': !dueDate.over, 'label-warning': dueDate.value <= 7,
+                                                'label-green': dueDate.value <= 31, 'label-danger': dueDate.over && dueDate.value > 31}">
+              {{ dueDate.over ? 'OVER DUE BY ' + dueDate.value + (dueDate.value > 1 ? ' DAYS' : ' DAY') : dueDate.value | date:'dd MMM yyyy' }}
+            </span></div>
+            <div class="col-4 normal">
+              {{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}
+              <a href="javascript:void(0)" class="pull-right icn-send icns" ng-click="sentInvoice()"
+                 tooltip="Send Again" tooltip-placement="top"></a></div>
+            <div class="col-5 normal">{{ totalSum.invoices[invoice.id] | currency }}</div>
           </div>
         </li>
-        <li class="clearfix">
-          <div class="hover">
-            <div class="col-1">
-              <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label></div>
-              <span class="name">39324</span></div>
-            <div class="col-2 normal">12 Jan 2015</div>
-            <div class="col-3"><span class="label label-green">overdue by 20 days</span></div>
-            <div class="col-4 normal">Resent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                                data-placement="top" title=""
-                                                data-original-title="Send Again"></a></div>
-            <div class="col-5 normal">$10,860</div>
-          </div>
-        </li>
-        <li class="clearfix">
-                  <span class="icns icn-red-calendar calendar" data-toggle="tooltip" data-placement="top" title=""
-                        data-original-title="recurring: weekly"></span>
 
-          <div class="hover">
-            <div class="col-1">
-              <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label></div>
-              <span class="name">39330</span> <span class=" badge badge-light ">1</span></div>
-            <div class="col-2 normal">18 Feb 2015</div>
-            <div class="col-3"><span class="label label-warning">overdue by 5 days</span></div>
-            <div class="col-4 normal">Sent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                              data-placement="top" title=""
-                                              data-original-title="Send Again"></a></div>
-            <div class="col-5 normal">$8,630</div>
-          </div>
-        </li>
-        <li class="clearfix">
-          <div class="hover">
-            <div class="col-1">
-              <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label></div>
-              <span class="name">39289</span></div>
-            <div class="col-2 normal">18 Feb 2015</div>
-            <div class="col-3"><span class="label label-blue">28 feb</span></div>
-            <div class="col-4 normal">Sent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                              data-placement="top" title=""
-                                              data-original-title="Send Again"></a></div>
-            <div class="col-5 normal">$6,350</div>
-          </div>
-        </li>
-        <li class="clearfix no-border">
-          <div class="hover">
-            <div class="col-1">
-              <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label></div>
-              <span class="name">39288</span></div>
-            <div class="col-2 normal">12 Feb 2015</div>
-            <div class="col-3"><span class="label label-blue">22 feb</span></div>
-            <div class="col-4 normal">Sent <a href="javascript:void(0)" class="pull-right icn-send icns" data-toggle="tooltip"
-                                              data-placement="top" title=""
-                                              data-original-title="Send Again"></a></div>
-            <div class="col-5 normal">$7,200</div>
-          </div>
-        </li>
         <li class="clearfix statment-wrapper">
-          <a href="javascript:void(0)" class="btn btn-gray send-statment" data-toggle="tooltip" data-placement="top" title=""
+          <a href="javascript:void(0)" class="btn btn-gray send-statment" data-toggle="tooltip"
+             data-placement="top" title="" ng-click="sentInvoices()"
              data-original-title="Send Statement"><span class="icon icn-dot"></span></a></li>
       </ul>
 
     </li>
 
-
-    <li>
-      <div class="indicator-new-update"></div>
-      <a href='javascript:void(0)'>
-        <div class="ui-checkbox ui-checkbox-warning pull-left">
-          <label class="control checkbox">
-            <input type="checkbox" checked>
-            <span class="control-indicator"></span>
-          </label>
-        </div>
-        <span class="name">Acrologics</span> <span class=" badge badge-light ">16</span> <span
-        class="amount pull-right">$22,650</span>
-      </a>
-
-    </li>
-    <li>
-      <div class="indicator-new-update"></div>
-      <a href='javascript:void(0)'>
-        <div class="ui-checkbox ui-checkbox-warning pull-left">
-          <label class="control checkbox">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label>
-        </div>
-        <span class="name">Informatic Solutions</span> <span class=" badge badge-light ">9</span> <span
-        class="amount pull-right">$18,220</span>
-      </a>
-
-    </li>
-    <li><a href='javascript:void(0)'>
-      <div class="ui-checkbox ui-checkbox-warning pull-left">
-        <label class="control checkbox">
-          <input type="checkbox">
-          <span class="control-indicator"></span>
-        </label>
-      </div>
-      <span class="name">Computer Experts</span> <span class=" badge badge-light ">4</span> <span
-      class="amount pull-right">$9,670</span>
-    </a>
-
-    </li>
-    <li><a href='javascript:void(0)'>
-      <div class="ui-checkbox ui-checkbox-warning pull-left">
-        <label class="control checkbox">
-          <input type="checkbox">
-          <span class="control-indicator"></span>
-        </label>
-      </div>
-      <span class="name">Bently Nevada</span> <span class=" badge badge-light ">3</span> <span
-      class="amount pull-right">$8,930</span>
-    </a>
-
-    </li>
-    <li>
-      <div class="indicator-new-update"></div>
-      <a href='javascript:void(0)'>
-        <div class="ui-checkbox ui-checkbox-warning pull-left">
-          <label class="control checkbox">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-          </label>
-        </div>
-        <span class="name">Creative Computers</span> <span class=" badge badge-light ">7</span> <span
-        class="amount pull-right">$13,280</span>
-      </a>
-
-    </li>
-    <li><a href='javascript:void(0)'>
-      <div class="ui-checkbox ui-checkbox-warning pull-left">
-        <label class="control checkbox">
-          <input type="checkbox">
-          <span class="control-indicator"></span>
-        </label>
-      </div>
-      <span class="name">Comedy & Cabaret Group</span> <span class=" badge badge-light ">5</span> <span
-      class="amount pull-right">$9,920</span>
-    </a>
-
-    </li>
   </ul>
 
 </div>
