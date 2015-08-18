@@ -8,8 +8,6 @@
 
         $scope.company = CompaniesService.getOneById($scope.receivableCompany.id);
 
-        $scope.totalSum.companies[$scope.company.id] = 0;
-
         var showInvoices;
 
         $scope.toggleReceivableInvoices = function () {
@@ -19,10 +17,6 @@
 
         $scope.$on('indicatorInvoice', function () {
           $scope.showIndicator = true;
-        });
-
-        $scope.$on('calculateTotalCompanySum', function (event, data) {
-          $scope.totalSum.companies[$scope.company.id] += data;
         });
 
         $scope.$watch('invoiceToSent[company.id].invoices', function () {

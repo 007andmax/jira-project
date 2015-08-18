@@ -46,6 +46,28 @@
             }
           }
 
+          $scope.$watch('receivableInvoicesData', function () {
+            $scope.totalReceivables = 0;
+            angular.forEach(invoicesData.companies, function (value, key) {
+              if (key !== 'staticCopy') {
+                var companyInvoices = invoicesData.companies[key];
+                this.companies[key] = 0;
+                for (var i = 0; i < companyInvoices.length; i++) {
+                  this.invoices[companyInvoices[i].id] = 0;
+                  if (companyInvoices[i].isRecurring) {
+                    for (var j = 0; j < companyInvoices[i].invoices.length; j++) {
+                      this.invoices[companyInvoices[i].id] += companyInvoices[i].invoices[j].sum;
+                    }
+                  } else {
+                    this.invoices[companyInvoices[i].id] += companyInvoices[i].sum;
+                  }
+                  this.companies[key] += this.invoices[companyInvoices[i].id];
+                }
+                $scope.totalReceivables += this.companies[key];
+              }
+            }, $scope.totalSum);
+          })
+
         });
 
         $scope.$watch(function () {

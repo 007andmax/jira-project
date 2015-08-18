@@ -41,8 +41,11 @@
         <div class="invoices-list" id="invoiceList">
           <ul class="invoices" qt-scroll-pane qtsp-create-event="invoicesRenderingFinished">
             <li class="clearfix" ng-repeat="invoice in receivePaymentInvoices" ng-init="checkInvoicesRendering($last)">
-              <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-container='#invoiceList'
-                    data-placement="top" title="" data-original-title="recurring: monthly"></span>
+              <span ng-if="invoice.recurringInvoice" class="icns calendar"
+                    data-toggle="tooltip" data-placement="top" title="" data-original-title="recurring: monthly"
+                    ng-class="{'icn-green-calendar': invoice.recurringInvoice.frequency === 'MONTHLY',
+                           'icn-orange-calendar': invoice.recurringInvoice.frequency === 'YEARLY',
+                           'icn-red-calendar': invoice.recurringInvoice.frequency === 'WEEKLY'}"></span>
 
               <div class="hover">
                 <div class="col-1">
