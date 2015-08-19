@@ -75,6 +75,7 @@
                     <div class="ui-checkbox ui-checkbox-warning pull-left" stop-propagation="click">
                       <label class="control checkbox">
                         <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
+                               ng-disabled="disabledTicket(ticket.id)"
                                ng-change="changeTicketCheckbox(billableCompany)">
                         <span class="control-indicator"></span>
                       </label>

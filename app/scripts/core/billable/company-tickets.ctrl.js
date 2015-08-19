@@ -49,7 +49,7 @@
 
           for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
             var ticketId = $scope.companyBillableTickets[i].id;
-            $scope.ticketsSelection[companyId].tickets[ticketId] = val;
+            $scope.ticketsSelection[companyId].tickets[ticketId] = val && !($scope.lockedTicketIds.indexOf(ticketId) >= 0);
           }
         }
 
@@ -63,6 +63,10 @@
 
           return totalTicketSum;
 
+        }
+
+        $scope.disabledTicket = function (ticketId) {
+          return $scope.lockedTicketIds.indexOf(ticketId) >= 0;
         }
 
       }]);

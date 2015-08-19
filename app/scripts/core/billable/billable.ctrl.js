@@ -10,6 +10,8 @@
 
         $scope.ticketsSelection = {};
 
+        $scope.lockedTicketIds = BillableService.getLockedTicketIds($scope);
+        
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
         $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
@@ -45,7 +47,7 @@
 
           if (ticketsSelection.tickets !== undefined) {
             for (var ticketId in ticketsSelection.tickets) {
-              ticketsSelection.tickets[ticketId] = ticketsSelection.checked;
+              ticketsSelection.tickets[ticketId] = ticketsSelection.checked && !($scope.lockedTicketIds.indexOf(ticketId) >= 0);
             }
           }
 
