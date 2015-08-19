@@ -130,7 +130,8 @@
                      ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
                 <li class="clearfix no-border add-product-wrapper">
                   <button class="btn btn-sr btn-create-in btn-scooter pull-right" ng-click="addProduct()"
-                          tooltip="Add Product" tooltip-placement="top" ng-disabled="showCreateProduct">
+                          tooltip="Add Product" tooltip-placement="top" ng-disabled="showCreateProduct"
+                          ng-class="{disabled: showCreateProduct}">
                     <span class="icns icn wt-icn-add-product "></span></button>
                 </li>
 

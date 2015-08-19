@@ -47,6 +47,8 @@
 
           var companyId = $scope.billableCompany.company.id;
 
+          $scope.ticketsSelection[companyId].tickets = {};
+
           for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
             var ticketId = $scope.companyBillableTickets[i].id;
             $scope.ticketsSelection[companyId].tickets[ticketId] = val && !($scope.lockedTicketIds.indexOf(ticketId) >= 0);

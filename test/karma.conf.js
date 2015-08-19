@@ -38,6 +38,8 @@ module.exports = function(config) {
       'bower_components/moment/moment.js',
       'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
       'bower_components/typeahead.js/dist/typeahead.bundle.js',
+      'bower_components/pdfjs-dist/build/pdf.js',
+      'bower_components/pdfjs-dist/build/pdf.worker.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

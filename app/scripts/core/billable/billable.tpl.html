@@ -29,8 +29,10 @@
       <div class="tabs-topbar" ftt-topbar-to-be-fixed>
 
         <a href="javascript:void(0)" class="btn btn-sr btn-create-in btn-scooter pull-right tp-hide"
-           ng-click="createInvoice()" ng-disabled="!countTicket"
-           tooltip-placement="top" tooltip="Create Invoice">
+           modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+           mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+           mw-controller="quicktech.core.billable.createInvoiceCtrl"
+           tooltip-placement="top" tooltip="Create Invoice" ng-disabled="!countTicket">
           <span class="icns icn icn-create-invoice "></span>
         </a>
 

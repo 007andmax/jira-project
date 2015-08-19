@@ -1,0 +1,63 @@
+<div ng-if="locksInitialized" ng-class="{'invoice-list-open': showThumbs}">
+  <div create-invoice="invoiceLocks" show-lock-id="invoiceLocks[showInvoiceLockIndex].id">
+    <div class="topbar">
+      <div class="alert alert-yellow" ng-show="shownInvoiceInfo.loadedPagesCount !== shownInvoiceInfo.pagesCount">
+        Loading invoice - {{ shownInvoiceInfo.loadedPagesCount }} of {{ shownInvoiceInfo.pagesCount }}
+        pages already loaded
+      </div>
+      <div class="paging" ng-show="shownInvoiceInfo.loadedPagesCount === shownInvoiceInfo.pagesCount">
+        ? of {{ shownInvoiceInfo.pagesCount }}
+      </div>
+      <span class="close-ico" ng-click="close()"></span>
+    </div>
+
+    <div class="nav-arrows">
+      <div class="next-arrow" ng-click="setShowInvoiceLockIndex(showInvoiceLockIndex + 1)"></div>
+      <div class="previous-arrow" ng-click="setShowInvoiceLockIndex(showInvoiceLockIndex - 1)"></div>
+    </div>
+
+    <div class="invoice-list">
+      <div class="invoice-titlebar" ng-click="showThumbs = !showThumbs">
+        <div class="current-invoice-info" stop-propagation="click">
+          <div class="invoice-icon">
+            <span class="ico"></span>
+          </div>
+          <div class="invoice-info">
+            <h4 class="modal-title pull-left">{{ invoiceLocks[showInvoiceLockIndex].company.name }}<span
+              class="dot-sep"></span>
+            </h4>
+            <span class="ticket-numer pull-left">INVOICE NO. {{ invoiceNumber }}</span>
+
+            <div class="total-invoices">{{ showInvoiceLockIndex + 1 }} of {{ invoiceLocks.length }}</div>
+          </div>
+        </div>
+        <div class="invoice-controls" stop-propagation="click">
+          <div class="zoom-slider pull-left">
+            <a href="#" class="pull-left icn icn-zoom-minus"></a>
+
+            <div class="range-wrapper pull-left"><input type="range"></div>
+            <a href="" class="pull-right icn icn-zoom-plus"></a>
+          </div>
+          <a href="">
+            <span tooltip="Print" tooltip-placement="top" class="print-ico pull-left tp-hide"></span>
+          </a>
+          <button type="button" class="pull-left btn btn-scooter"><span class="ico-arrow"></span></button>
+        </div>
+      </div>
+      <div class="invoice-thumbs" invoice-thumbs>
+        <ul>
+          <li ng-repeat="lock in invoiceLocks" ng-class="{active: showInvoiceLockIndex === $index}"
+              ng-click="setShowInvoiceLockIndex($index)">
+            <span id="invoice-thumb-{{ invoiceLocks[$index].id }}">
+              <!--<canvas  style="width: 100%; height: 100%;"></canvas>-->
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container" invoice-container>
+
+    </div>
+  </div>
+</div>

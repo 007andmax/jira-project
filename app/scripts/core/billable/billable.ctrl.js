@@ -11,7 +11,7 @@
         $scope.ticketsSelection = {};
 
         $scope.lockedTicketIds = BillableService.getLockedTicketIds($scope);
-        
+
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
         $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
@@ -65,10 +65,6 @@
           }
 
           ticketsSelectionCompany.checked = (billabledCompany.ticketsCount === countObj);
-        };
-
-        $scope.createInvoice = function () {
-          console.log('create invoice');
         };
 
         $scope.$watch('ticketsSelection', function () {
