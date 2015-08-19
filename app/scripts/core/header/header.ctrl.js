@@ -23,6 +23,8 @@
             return 'recurring';
           } else if ($state.includes("receivable")) {
             return 'receivable';
+          } else if ($state.includes("receipt-archive")) {
+            return 'receipt-archive';
           }
         }
 

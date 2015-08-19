@@ -23,6 +23,9 @@
         },
         billableClientsHeader: {
           companies: []
+        },
+        receiptArchiveInvoicesHeader: {
+          invoices: []
         }
       };
 

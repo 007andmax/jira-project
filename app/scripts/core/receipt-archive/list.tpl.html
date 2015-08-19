@@ -9,58 +9,23 @@
         <div class="col-5">AMOUNT</div>
       </div>
     </li>
-    <li class="clearfix">
-      <span class="icns icn-orange-calendar calendar" data-toggle="tooltip" data-placement="top" title="" data-original-title="recurring: yearly"></span>
+    <li class="clearfix" ng-repeat="invoice in receiptArchiveData.list"
+        ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
+        show-model-element="{{ 'showInvoice-' + invoice.id }}">
+      <span class="icns calendar" ng-if="invoice.recurring"
+            tooltip="recurring: {{ invoice.frequency }}" tooltip-placement="top"
+            ng-class="{'icn-green-calendar': invoice.frequency === 'MONTHLY',
+                           'icn-orange-calendar': invoice.frequency === 'YEARLY',
+                           'icn-red-calendar': invoice.frequency === 'WEEKLY'}"></span>
 
       <div class="hover">
-        <div class="col-1">  <span class="name">39302</span> <span class=" badge badge-light ">1</span></div>
-        <div class="col-1-2 normal">Comedy & Cabaret Group</div>
-        <div class="col-2 normal">26 Dec 2014</div>
-        <div class="col-3"><span class="label label-dark-orange">16 feb 2015</span></div>
-        <div class="col-5 normal">$5,980</div>
+        <div class="col-1"><span class="name">{{ invoice.number }}</span>
+          <span class=" badge badge-light " ng-if="invoice.invoicesCount">{{ invoice.invoicesCount }}</span></div>
+        <div class="col-1-2 normal">{{ company.name }}</div>
+        <div class="col-2 normal">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+        <div class="col-3"><span class="label label-dark-orange">{{ invoice.paidOn | date:'dd MMM yyyy' }}</span></div>
+        <div class="col-5 normal">{{ invoice.sum | currency:'$' :0 }}</div>
       </div>
     </li>
-    <li class="clearfix">
-      <div class="hover">
-        <div class="col-1"> <span class="name">39324</span> </div>
-        <div class="col-1-2 normal">Global Media</div>
-        <div class="col-2 normal">12 Jan 2015</div>
-        <div class="col-3"><span class="label label-dark-orange">28 feb 2015</span></div>
-        <div class="col-5 normal">$10,860</div>
-      </div>
-    </li>
-    <li class="clearfix">
-      <div class="hover">
-        <div class="col-1"> <span class="name">39330</span> </div>
-        <div class="col-1-2 normal">Trading Co. Limited</div>
-
-        <div class="col-2 normal">18 Feb 2015</div>
-        <div class="col-3"><span class="label label-dark-orange">30 mar 2015</span></div>
-        <div class="col-5 normal">$18,500</div>
-      </div>
-    </li>
-    <li class="clearfix">
-      <span class="icns icn-red-calendar calendar" data-toggle="tooltip" data-placement="top" title="" data-original-title="recurring: weekly"></span>
-
-      <div class="hover">
-        <div class="col-1"> <span class="name">39289</span> <span class=" badge badge-light ">2</span> </div>
-        <div class="col-1-2 normal">Global Media</div>
-
-        <div class="col-2 normal">18 Feb 2015</div>
-        <div class="col-3"><span class="label label-dark-orange">28 feb 2015</span></div>
-        <div class="col-5 normal">$6,750</div>
-      </div>
-    </li>
-    <li class="clearfix">
-      <div class="hover">
-        <div class="col-1"> <span class="name">39288</span> </div>
-        <div class="col-1-2 normal">Global Media</div>
-
-        <div class="col-2 normal">12 Feb 2015</div>
-        <div class="col-3"><span class="label label-dark-orange">22 feb 2015</span></div>
-        <div class="col-5 normal">$7,200</div>
-      </div>
-    </li>
-
   </ul>
 </div>

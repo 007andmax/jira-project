@@ -1,22 +1,21 @@
 <div role="tabpanel" class="tab-pane active">
   <ul class="companies-list">
-    <li> <a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Global Media</span> <span class=" badge badge-light ">2</span> <span class="amount pull-right">$4,960</span>
-    </a>
 
-    </li>
-    <li><a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Active Information Systems</span> <span class=" badge badge-light ">5</span> <span class="amount pull-right">$1,17,540</span>
+    <li event-toggle-slider="toggleReceiptArchiveInvoices"
+        ng-repeat="receiptArchiveCompany in receiptArchiveCompanies"
+        ng-controller="quicktech.core.receiptArchive.companyCtrl">
+      <a href='javascript:void(0)' ng-click="toggleReceiptArchiveInvoices()">
+        <div class="ui-checkbox ui-checkbox-warning pull-left">
+          <!--<label class="control checkbox">-->
+          <!--<input type="checkbox">-->
+          <!--<span class="control-indicator"></span>-->
+          <!--</label>-->
+        </div>
+        <span class="name">{{ company.name }}</span>
+        <span class=" badge badge-light ">{{ receiptArchiveCompany.invoices.length }}</span>
+        <span class="amount pull-right">{{ totalCompanySum[receiptArchiveCompany.id] | currency:'$' :0 }}</span>
     </a>
-      <ul class="invoices recurring receivable  receipt   ">
+      <ul class="invoices recurring receivable  receipt" ets-slider>
         <li class="head clearfix">
           <div class="">
             <div class="col-1">INVOICE NO.</div>
@@ -25,107 +24,28 @@
             <div class="col-5">AMOUNT</div>
           </div>
         </li>
-        <li class="clearfix">
-          <span class="icns icn-green-calendar calendar" data-toggle="tooltip" data-placement="top" title="" data-original-title="recurring: monthly"></span>
+        <li class="clearfix" ng-repeat="invoice in receiptArchiveCompany.invoices"
+            ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
+            show-model-element="{{ 'showInvoice-' + invoice.id }}">
+          <span class="icns calendar" ng-if="invoice.recurring"
+                tooltip="recurring: {{ invoice.frequency }}" tooltip-placement="top"
+                ng-class="{'icn-green-calendar': invoice.frequency === 'MONTHLY',
+                           'icn-orange-calendar': invoice.frequency === 'YEARLY',
+                           'icn-red-calendar': invoice.frequency === 'WEEKLY'}"></span>
           <div class="hover">
-            <div class="col-1"><span class="name">39302</span> <span class=" badge badge-light ">26</span></div>
-            <div class="col-2 normal">26 Dec 2014</div>
-            <div class="col-3"><span class="label label-dark-orange">16 feb 2015</span></div>
-            <div class="col-5 normal">$84,500</div>
+            <div class="col-1"><span class="name">{{ invoice.number }}</span>
+              <span class=" badge badge-light " ng-if="invoice.invoicesCount">{{ invoice.invoicesCount }}</span></div>
+            <div class="col-2 normal">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+            <div class="col-3"><span class="label label-dark-orange">{{ invoice.paidOn | date:'dd MMM yyyy' }}</span>
+            </div>
+            <div class="col-5 normal">{{ invoice.sum | currency:'$' :0 }}</div>
           </div>
         </li>
-        <li class="clearfix">
-          <div class="hover">
-            <div class="col-1"><span class="name">39324</span> </div>
-            <div class="col-2 normal">12 Jan 2015</div>
-            <div class="col-3"><span class="label label-dark-orange">28 feb 2015</span></div>
-            <div class="col-5 normal">$10,860 </div>
-          </div>
-        </li>
-        <li class="clearfix">
-          <span class="icns icn-red-calendar calendar"  data-toggle="tooltip" data-placement="top" title="" data-original-title="recurring: weekly"></span>
-          <div class="hover">
-            <div class="col-1">  <span class="name">39330</span> <span class=" badge badge-light ">3</span></div>
-            <div class="col-2 normal">18 Feb 2015</div>
-            <div class="col-3"><span class="label label-dark-orange">25 feb 2015</span></div>
-            <div class="col-5 normal">$8,630 </div>
-          </div>
-        </li>
-        <li class="clearfix">
-          <div class="hover">
-            <div class="col-1"> <span class="name">39289</span> </div>
-            <div class="col-2 normal">18 Feb 2015</div>
-            <div class="col-3"><span class="label label-dark-orange">28 feb 2015</span></div>
-            <div class="col-5 normal">$6,350</div>
-          </div>
-        </li>
-        <li class="clearfix no-border">
-          <div class="hover">
-            <div class="col-1">   <span class="name">39288</span> </div>
-            <div class="col-2 normal">12 Feb 2015</div>
-            <div class="col-3"><span class="label label-dark-orange">22 feb 2015</span></div>
-            <div class="col-5 normal">$7,200</div>
-          </div>
-        </li>
-        <li class="clearfix statment-wrapper">
-          <a href="#" class="btn btn-gray send-statment" data-toggle="tooltip" data-placement="top" title="" data-original-title="Export Report to Excel"><span class="icns icn-export-excel"></span></a></li>
+
+        <!--<li class="clearfix statment-wrapper">-->
+        <!--<a href="#" class="btn btn-gray send-statment" data-toggle="tooltip" data-placement="top" title=""-->
+        <!--data-original-title="Export Report to Excel"><span class="icns icn-export-excel"></span></a></li>-->
       </ul>
-
-    </li>
-
-
-    <li> <a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox" checked>
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Acrologics</span> <span class=" badge badge-light ">16</span> <span class="amount pull-right">$22,650</span>
-    </a>
-
-    </li>
-    <li>  <a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Informatic Solutions</span> <span class=" badge badge-light ">9</span> <span class="amount pull-right">$18,220</span>
-    </a>
-
-    </li>
-    <li> <a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Computer Experts</span> <span class=" badge badge-light ">4</span> <span class="amount pull-right">$9,670</span>
-    </a>
-
-    </li>
-    <li> <a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Bently Nevada</span> <span class=" badge badge-light ">3</span> <span class="amount pull-right">$8,930</span>
-    </a>
-
-    </li>
-    <li> <a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Creative Computers</span> <span class=" badge badge-light ">7</span> <span class="amount pull-right">$13,280</span>
-    </a>
-
-    </li>
-    <li> <a href='javascript:void(0)'><div class="ui-checkbox ui-checkbox-warning pull-left">
-      <label class="control checkbox">
-        <input type="checkbox">
-        <span class="control-indicator"></span>
-      </label>
-    </div> <span class="name">Comedy & Cabaret Group</span> <span class=" badge badge-light ">5</span> <span class="amount pull-right">$9,920</span>
-    </a>
 
     </li>
   </ul>
