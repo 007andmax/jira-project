@@ -18,8 +18,7 @@
     "eonasdan-bootstrap-datetimepicker": "^4.7.0",
     "retina.js": "^1.3.0",
     "moment": "~2.10.3",
-    "typeahead.js": "^0.11.1",
-    "pdfjs-dist": "^1.1.387"
+    "typeahead.js": "^0.11.1"
   },
   "resolutions":{
     "jquery": "^1.11.0",
