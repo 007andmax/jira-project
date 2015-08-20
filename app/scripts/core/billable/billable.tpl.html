@@ -75,7 +75,8 @@
                     show-model-element="{{ 'showTicket-' + ticket.id }}">
                   <a href='javascript:void(0)' qt-ts-toggler>
                     <div class="ui-checkbox ui-checkbox-warning pull-left" stop-propagation="click">
-                      <label class="control checkbox">
+                      <label class="control checkbox" ng-class="{disabled: disabledTicket(ticket.id)}"
+                             tooltip="{{ disabledTicket(ticket.id) ? 'Locked' : '' }}" tooltip-placement="top">
                         <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
                                ng-disabled="disabledTicket(ticket.id)"
                                ng-change="changeTicketCheckbox(billableCompany)">

@@ -97,7 +97,9 @@
               invoiceIdPayment.push(id)
             }
           }
-          ReceivableService.receivePayment($scope.invoiceToReceive.method, invoiceIdPayment)
+          ReceivableService.receivePayment($scope.invoiceToReceive.method, invoiceIdPayment, function () {
+            $modalInstance.dismiss('cancel');
+          });
         };
 
         $scope.checkInvoicesRendering = function (finished) {
