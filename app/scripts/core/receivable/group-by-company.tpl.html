@@ -30,7 +30,7 @@
             ng-controller="quicktech.core.receivable.invoiceCtrl"
             show-model-element="{{ 'showInvoice-' + invoice.id }}">
           <span ng-if="invoice.frequency" class="icns calendar"
-                data-toggle="tooltip" data-placement="top" title="" data-original-title="recurring: monthly"
+                tooltip="recurring: {{ invoice.frequency }}" tooltip-placement="top"
                 ng-class="{'icn-green-calendar': invoice.frequency === 'MONTHLY',
                            'icn-orange-calendar': invoice.frequency === 'YEARLY',
                            'icn-red-calendar': invoice.frequency === 'WEEKLY'}"></span>
