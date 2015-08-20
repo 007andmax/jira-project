@@ -17,16 +17,7 @@
       </div>
       <div class="modal-footer">
         <div class="row-wrapper clearfix">
-          <div class="zoom-slider pull-left">
-            <a href="#" class="pull-left icn icn-zoom-minus" ng-mousedown="startReduceScale()"
-               ng-mouseup="stopReduceScale()"></a>
-
-            <div class="range-wrapper pull-left"><input type="range" ng-model="avatar.scale"/></div>
-            <a href="#" class="pull-right icn icn-zoom-plus" ng-mousedown="startIncreaseScale()"
-               ng-mouseup="stopIncreaseScale()"></a>
-
-
-          </div>
+          <div zoom-slider ng-model="avatar.scale"></div>
           <div class="form-group actions-wrapper pull-right">
             <button type="button" class="btn btn-scooter" ng-click="save()">Continue</button>
           </div>

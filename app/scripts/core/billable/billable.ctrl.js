@@ -38,7 +38,7 @@
             }
 
             headerSharedState.companies = companies;
-          })
+          }, true)
         });
 
         $scope.changeCompanyCheckbox = function (companyId) {
