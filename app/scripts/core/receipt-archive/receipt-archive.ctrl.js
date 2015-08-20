@@ -56,6 +56,10 @@
           $scope.highlightInvoiceId = invoiceId;
         };
 
+        $scope.$on('$destroy', function () {
+          SharedStateService.clearState('receiptArchiveInvoicesHeader');
+        });
+
       }]);
 
 }());
