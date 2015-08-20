@@ -29,20 +29,19 @@
           var invoicesData = $scope.receivableInvoicesData;
 
           if ($stateParams.mode === 'group-by-company') {
-            $scope.receivableInvoicesCompanies = [];
-            angular.forEach(invoicesData.companies, function (value, key) {
-              if (key !== 'staticCopy') {
-                $scope.invoiceToSent[key] = {};
-                this.push({
-                  id: key,
-                  invoices: value
-                });
+
+            for (var companyId in invoicesData.companies) {
+              if (companyId !== 'staticCopy') {
+                $scope.invoiceToSent[companyId] = {
+                  checked: false,
+                  invoices: {}
+                };
               }
-            }, $scope.receivableInvoicesCompanies);
+            }
           } else {
             $scope.invoiceToSent.invoices = {};
             for (var i = 0; i < invoicesData.list.length; i++) {
-              $scope.invoiceToSent.invoices[invoicesData.list[i].id] = true;
+              $scope.invoiceToSent.invoices[invoicesData.list[i].id] = false;
             }
           }
 
@@ -66,7 +65,7 @@
                 $scope.totalReceivables += this.companies[key];
               }
             }, $scope.totalSum);
-          })
+          }, true)
 
         });
 
@@ -83,15 +82,15 @@
         });
 
         $scope.changeCompanyCheckbox = function (companyId) {
-          for (var i = 0; i < $scope.receivableInvoicesCompanies.length; i++) {
-            var company = $scope.receivableInvoicesCompanies[i];
-            if (companyId === company.id) {
-              $scope.invoiceToSent[companyId] = {
-                checked: $scope.invoiceToSent[companyId].checked,
-                invoices: {}
-              };
-              for (var j = 0; j < company.invoices.length; j++) {
-                $scope.invoiceToSent[companyId].invoices[company.invoices[j].id] = $scope.invoiceToSent[companyId].checked
+
+          for (var invCompanyId in $scope.invoiceToSent) {
+
+            if (companyId === invCompanyId) {
+
+              var invoices = $scope.receivableInvoicesData.companies[companyId];
+
+              for (var j = 0; j < invoices.length; j++) {
+                $scope.invoiceToSent[companyId].invoices[invoices[j].id] = $scope.invoiceToSent[companyId].checked
               }
             }
           }

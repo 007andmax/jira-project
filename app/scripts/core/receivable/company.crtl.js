@@ -6,7 +6,7 @@
     ['$scope', 'CompaniesService', 'ReceivableService', '$timeout', '$rootScope',
       function ($scope, CompaniesService, ReceivableService, $timeout, $rootScope) {
 
-        $scope.company = CompaniesService.getOneById($scope.receivableCompany.id);
+        $scope.company = CompaniesService.getOneById($scope.companyId);
 
         var showInvoices;
 
@@ -28,7 +28,7 @@
               countObj++;
             }
           }
-          companyInvoices.checked = ($scope.receivableCompany.invoices.length === countObj);
+          companyInvoices.checked = ($scope.invoices.length === countObj);
         }, true);
 
         $scope.sentInvoices = function () {

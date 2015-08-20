@@ -12,26 +12,24 @@
 
         $scope.recurringCompanies = RecurringService.getRecurringCompanies($scope, function () {
 
-          $scope.allCompanies = CompaniesService.getAllCompanies();
-
           $scope.$watch('recurringCompanies', function () {
 
-            var recurringCompaniesId = [];
+            var clientCompanies = CompaniesService.getClientCompanies(),
+              recurringCompaniesId = [];
             $scope.notRecurringCompaniesArray = [];
 
             for (var j = 0; j < $scope.recurringCompanies.length; j++) {
               recurringCompaniesId.push($scope.recurringCompanies[j].company.id)
             }
 
-            for (var i = 0; i < $scope.allCompanies.length; i++) {
-              if ((recurringCompaniesId.indexOf($scope.allCompanies[i].id)) < 0) {
-                $scope.notRecurringCompaniesArray.push($scope.allCompanies[i]);
+            for (var i = 0; i < clientCompanies.length; i++) {
+              if ((recurringCompaniesId.indexOf(clientCompanies[i].id)) < 0) {
+                $scope.notRecurringCompaniesArray.push(clientCompanies[i]);
               }
             }
 
           }, true);
         });
-
 
 
         $scope.isShowingErrors = function (form, fieldName) {
