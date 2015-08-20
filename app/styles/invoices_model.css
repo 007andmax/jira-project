@@ -393,22 +393,22 @@ cursor: pointer;
 .invoice-list-open .invoice-list {
   max-height: 320px;
 }
-.invoice-titlebar {
+.invoice-list .invoice-titlebar {
   padding-top: 30px;
   float: left;
   width: 100%;
 }
-.current-invoice-info {
+.invoice-list .current-invoice-info {
   float: left;
   margin-left: 20px;
   margin-bottom: 30px;
 }
-.invoice-controls {
+.invoice-list .invoice-controls {
   float: right;
   margin-right: 20px;
   margin-bottom: 30px;
 }
-.invoice-icon {
+.invoice-list .invoice-icon {
   float: left;
   width: 38px;
   height: 38px;
@@ -417,11 +417,11 @@ cursor: pointer;
   border: 2px solid #e9edf1;
   border-radius: 2px;
 }
-.invoice-icon span.ico {
+.invoice-list .invoice-icon span.ico {
   background: url('/html/images/sprites-s76c759f188.png') no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  .invoice-icon span.ico{
+  .invoice-list .invoice-icon span.ico{
     background: url('/html/images/sprites-retina-s9f68249a71.png') no-repeat;
     -webkit-background-size:4000px auto;
     -moz-background-size:4000px auto;
@@ -429,7 +429,7 @@ cursor: pointer;
     background-size:4000px auto;
   }
 }
-.invoice-icon span.ico {
+.invoice-list .invoice-icon span.ico {
   display: inline-block;
   width: 10px;
   height: 12px;
@@ -437,10 +437,10 @@ cursor: pointer;
   margin-top: 11px;
   margin-left: 12px;
 }
-.invoice-info {
+.invoice-list .invoice-info {
   float: left;
 }
-.total-invoices {
+.invoice-list .total-invoices {
   float: left;
   clear: left;
   font-size: 11px;
@@ -448,34 +448,34 @@ cursor: pointer;
   color: #9fabb9;
   margin-top: 6px;
 }
-.invoice-thumbs {
+.invoice-list .invoice-thumbs {
   float: left;
   clear: both;
   width: 100%;
   background-color: #0e141c;
   padding-bottom: 5px;
 }
-.invoice-thumbs ul {
+.invoice-list .invoice-thumbs ul {
   overflow-x: auto;
   white-space: nowrap;
   margin: 0;
   padding: 10px 10px 0;
 }
 /* Scrollbar styling for Chrome, Opera and Safari */
-.invoice-thumbs ul::-webkit-scrollbar-track {}
-.invoice-thumbs ul::-webkit-scrollbar {
+.invoice-list .invoice-thumbs ul::-webkit-scrollbar-track {}
+.invoice-list .invoice-thumbs ul::-webkit-scrollbar {
   height: 10px;
 }
-.invoice-thumbs ul::-webkit-scrollbar-thumb {
+.invoice-list .invoice-thumbs ul::-webkit-scrollbar-thumb {
   background-color: #2f3c4c;
   border: 3px solid #0e141c;
   border-radius: 10px;
 }
-.invoice-thumbs ul:hover::-webkit-scrollbar-thumb {
+.invoice-list .invoice-thumbs ul:hover::-webkit-scrollbar-thumb {
   background-color: #4c5c6f;
 }
 /* Scrollbar styling for Internet explorer */
-.invoice-thumbs ul {
+.invoice-list .invoice-thumbs ul {
   scrollbar-base-color: #4c5c6f;
   scrollbar-arrow-color: #2f3c4c;
   scrollbar-face-color: #4c5c6f;
@@ -485,7 +485,7 @@ cursor: pointer;
   scrollbar-3dlight-color: #2f3c4c;
   scrollbar-darkshadow-Color: #2f3c4c;
 }
-.invoice-thumbs li {
+.invoice-list .invoice-thumbs li {
   display: inline-block;
   vertical-align: top;
   width: 150px;
@@ -498,13 +498,13 @@ cursor: pointer;
   margin-bottom: 5px;
   background-color: #0e141c;
 }
-.invoice-thumbs li:hover {
+.invoice-list .invoice-thumbs li:hover {
   border-color: #4e5e71;
 }
-.invoice-thumbs li.active {
+.invoice-list .invoice-thumbs li.active {
   border-color: #fff;
 }
-.invoice-thumbs span {
+.invoice-list .invoice-thumbs span {
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -513,62 +513,62 @@ cursor: pointer;
 /*****/
 /* Zoom slider */
 /****/
-.zoom-slider {
+.invoice-list .zoom-slider {
   width: 205px;
   position: relative;
   margin-top: 16px;
 }
-.zoom-slider .range-wrapper {
+.invoice-list .zoom-slider .range-wrapper {
   width: 150px;
   position: relative;
 }
-.zoom-slider input[type=range]::-webkit-slider-runnable-track {
+.invoice-list .zoom-slider input[type=range]::-webkit-slider-runnable-track {
   background-color: #d7dde5;
   height: 6px;
   border-radius: 3px;
 }
-.zoom-slider input[type=range]::-moz-range-track {
+.invoice-list .zoom-slider input[type=range]::-moz-range-track {
   background-color: #d7dde5;
   height: 6px;
   border-radius: 3px;
 }
-.zoom-slider input[type=range]::-ms-track {
+.invoice-list .zoom-slider input[type=range]::-ms-track {
   background-color: #d7dde5;
   height: 6px;
   border-radius: 3px;
 }
-.zoom-slider input[type=range]::-webkit-slider-thumb {
+.invoice-list .zoom-slider input[type=range]::-webkit-slider-thumb {
   margin-top: -8px;
 }
-.icn-zoom-minus {
+.invoice-list .icn-zoom-minus {
   background-position: -2236px -91px;
   height: 20px;
   width: 20px;
   margin-top: -7px;
   margin-right: 5px;
 }
-.icn-zoom-minus:hover,
-.icn-zoom-minus:active{
+.invoice-list .icn-zoom-minus:hover,
+.invoice-list .icn-zoom-minus:active{
   background-position: -2256px -91px;
 
 }
-.icn-zoom-plus {
+.invoice-list .icn-zoom-plus {
   background-position: -2186px -95px;
   height: 20px;
   width: 20px;
   margin-top: -7px;
   margin-right: 5px;
 }
-.icn-zoom-plus:hover,
-.icn-zoom-plus:active{
+.invoice-list .icn-zoom-plus:hover,
+.invoice-list .icn-zoom-plus:active{
   background-position: -2206px -95px;
 }
 /*****/
-.print-ico {
+.invoice-list .print-ico {
   background: url('/html/images/sprites-s76c759f188.png') no-repeat -1805px 0;
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  .print-ico,.print-ico:hover,.print-ico:active{
+  .invoice-list .print-ico,.print-ico:hover,.print-ico:active{
     background: url('/html/images/sprites-retina-s9f68249a71.png') no-repeat;
     -webkit-background-size:4000px auto;
     -moz-background-size:4000px auto;
@@ -576,21 +576,21 @@ cursor: pointer;
     background-size:4000px auto;
   }
 }
-.print-ico {
+.invoice-list .print-ico {
   width: 20px;
   height: 20px;
   margin: 5px 40px;
   background-position: -1805px 0;
   cursor: pointer;
 }
-.print-ico:hover,.print-ico:active{
+.invoice-list .print-ico:hover,.invoice-list .print-ico:active{
   background-position: -2583px -206px;
 }
-.ico-arrow{
+.invoice-list .ico-arrow{
   background: url('/html/images/sprites-s76c759f188.png') no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  .ico-arrow{
+  .invoice-list .ico-arrow{
     background: url('/html/images/sprites-retina-s9f68249a71.png') no-repeat;
     -webkit-background-size:4000px auto;
     -moz-background-size:4000px auto;
@@ -598,22 +598,22 @@ cursor: pointer;
     background-size:4000px auto;
   }
 }
-.ico-arrow{
+.invoice-list .ico-arrow{
   background-position: -2623px -206px;
   display: inline-block;
   width: 16px;
   height: 12px;
 }
-.btn{
+.invoice-list .invoice-titlebar .invoice-controls .btn{
   width: 96px;
   height: 38px;
   padding: 11px 20px;
 }
-.next-arrow{
+.invoice-list .next-arrow{
   background: url('/html/images/sprites-s76c759f188.png') no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  .next-arrow,.next-arrow:hover,.next-arrow:active,.next-arrow.disabled,.next-arrow.disabled:hover{
+  .invoice-list .next-arrow,.invoice-list .next-arrow:hover,.invoice-list .next-arrow:active,.invoice-list .next-arrow.disabled,.invoice-list .next-arrow.disabled:hover{
     background: url('/html/images/sprites-retina-s9f68249a71.png') no-repeat;
     -webkit-background-size:4000px auto;
     -moz-background-size:4000px auto;
@@ -621,7 +621,7 @@ cursor: pointer;
     background-size:4000px auto;
   }
 }
-.next-arrow{
+.invoice-list .next-arrow{
   position: fixed;
   background-position: -2511px -206px;
   width: 21px;
@@ -635,21 +635,21 @@ cursor: pointer;
   -o-transition: .3s top;
   transition: .3s top;
 }
-.next-arrow:hover,.next-arrow:active{
+.invoice-list .next-arrow:hover,.invoice-list .next-arrow:active{
   background-position: -2542px -206px;
 }
-.next-arrow.disabled,.next-arrow.disabled:hover{
+.invoice-list .next-arrow.disabled,.invoice-list .next-arrow.disabled:hover{
   background-position: -2720px -206px;
   cursor: auto;
 }
 .invoice-list-open .next-arrow{
   top: calc(50% - 158px);
 }
-.previous-arrow{
+.invoice-list .previous-arrow{
   background: url('/html/images/sprites-s76c759f188.png') no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  .previous-arrow,.previous-arrow:hover,.previous-arrow:active,.previous-arrow.disabled,.previous-arrow.disabled:hover{
+  .invoice-list .previous-arrow,.invoice-list .previous-arrow:hover,.invoice-list .previous-arrow:active,.invoice-list .previous-arrow.disabled,.invoice-list .previous-arrow.disabled:hover{
     background: url('/html/images/sprites-retina-s9f68249a71.png') no-repeat;
     -webkit-background-size:4000px auto;
     -moz-background-size:4000px auto;
@@ -657,7 +657,7 @@ cursor: pointer;
     background-size:4000px auto;
   }
 }
-.previous-arrow{
+.invoice-list .previous-arrow{
   position: fixed;
   background-position: -2449px -206px;
   width: 21px;
@@ -671,10 +671,10 @@ cursor: pointer;
   -o-transition: .3s top;
   transition: .3s top;
 }
-.previous-arrow:hover,.previous-arrow:active{
+.invoice-list .previous-arrow:hover,.invoice-list .previous-arrow:active{
   background-position: -2480px -206px;
 }
-.previous-arrow.disabled,.previous-arrow.disabled:hover{
+.invoice-list .previous-arrow.disabled,.previous-arrow.disabled:hover{
   background-position: -2689px -206px;
   cursor: auto;
 }
