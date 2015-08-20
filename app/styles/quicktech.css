@@ -13773,7 +13773,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                     margin-bottom: 0px;
                                                     padding-bottom: 0px  !important;
                                                   }
-                                                  .content-wrapper .content-body .invoices li.last{
+                                                  .content-wrapper .content-body .invoices div.no-border li{
                                                     margin-bottom: 30px  !important;
                                                   }
                                                   .content-wrapper .content-body .invoices li.edit-form > div > div{
@@ -13931,6 +13931,10 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                         .content-wrapper .content-body .invoices > li:last-child{
                                                           border-bottom:0px;
                                                           padding-bottom:30px;
+                                                        }
+                                                        .content-wrapper .content-body .invoices > li:last-child.add-new{
+                                                          border-bottom:0px;
+                                                          padding-bottom:0px;
                                                         }
 
 
