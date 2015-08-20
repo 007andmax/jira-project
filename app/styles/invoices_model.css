@@ -609,11 +609,11 @@ cursor: pointer;
   height: 38px;
   padding: 11px 20px;
 }
-.invoice-list .next-arrow{
+.next-arrow{
   background: url('/html/images/sprites-s76c759f188.png') no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  .invoice-list .next-arrow,.invoice-list .next-arrow:hover,.invoice-list .next-arrow:active,.invoice-list .next-arrow.disabled,.invoice-list .next-arrow.disabled:hover{
+  .next-arrow,.next-arrow:hover,.next-arrow:active,.next-arrow.disabled,.next-arrow.disabled:hover{
     background: url('/html/images/sprites-retina-s9f68249a71.png') no-repeat;
     -webkit-background-size:4000px auto;
     -moz-background-size:4000px auto;
@@ -621,7 +621,7 @@ cursor: pointer;
     background-size:4000px auto;
   }
 }
-.invoice-list .next-arrow{
+.next-arrow{
   position: fixed;
   background-position: -2511px -206px;
   width: 21px;
@@ -635,21 +635,21 @@ cursor: pointer;
   -o-transition: .3s top;
   transition: .3s top;
 }
-.invoice-list .next-arrow:hover,.invoice-list .next-arrow:active{
+.next-arrow:hover,.next-arrow:active{
   background-position: -2542px -206px;
 }
-.invoice-list .next-arrow.disabled,.invoice-list .next-arrow.disabled:hover{
+.next-arrow.disabled,.next-arrow.disabled:hover{
   background-position: -2720px -206px;
   cursor: auto;
 }
 .invoice-list-open .next-arrow{
   top: calc(50% - 158px);
 }
-.invoice-list .previous-arrow{
+.previous-arrow{
   background: url('/html/images/sprites-s76c759f188.png') no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  .invoice-list .previous-arrow,.invoice-list .previous-arrow:hover,.invoice-list .previous-arrow:active,.invoice-list .previous-arrow.disabled,.invoice-list .previous-arrow.disabled:hover{
+  .previous-arrow,.previous-arrow:hover,.previous-arrow:active,.previous-arrow.disabled,.previous-arrow.disabled:hover{
     background: url('/html/images/sprites-retina-s9f68249a71.png') no-repeat;
     -webkit-background-size:4000px auto;
     -moz-background-size:4000px auto;
@@ -657,7 +657,7 @@ cursor: pointer;
     background-size:4000px auto;
   }
 }
-.invoice-list .previous-arrow{
+.previous-arrow{
   position: fixed;
   background-position: -2449px -206px;
   width: 21px;
@@ -671,10 +671,10 @@ cursor: pointer;
   -o-transition: .3s top;
   transition: .3s top;
 }
-.invoice-list .previous-arrow:hover,.invoice-list .previous-arrow:active{
+.previous-arrow:hover,.previous-arrow:active{
   background-position: -2480px -206px;
 }
-.invoice-list .previous-arrow.disabled,.previous-arrow.disabled:hover{
+.previous-arrow.disabled,.previous-arrow.disabled:hover{
   background-position: -2689px -206px;
   cursor: auto;
 }
