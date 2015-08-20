@@ -82,6 +82,20 @@
           }
         }, true);
 
+        $scope.$watch('lockedTicketIds', function () {
+
+          for (var companyId in $scope.ticketsSelection) {
+
+            var tickets = $scope.ticketsSelection[companyId].tickets;
+
+            for (var ticketId in  tickets) {
+              if (tickets[ticketId] && $scope.lockedTicketIds.indexOf(ticketId) > -1) {
+                tickets[ticketId] = false;
+              }
+            }
+          }
+        }, true);
+
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('billableClientsHeader');
         });
