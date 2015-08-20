@@ -13426,6 +13426,10 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                           display:block;
                                           position:relative;
                                         }
+                                        .content-wrapper .content-body .companies-list >  li   a.btn-gray{
+                                          font-weight: 600;
+                                          color: #4e5e71;
+                                        }
                                         .content-wrapper .content-body .companies-list >  li .edit-category-form{
                                           position: absolute;
                                           top: -1px;
@@ -13750,9 +13754,9 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.products li .add-table-actions,
                                                   .content-wrapper .content-body .invoices.services li .add-table-actions{
                                                     margin-right: 41px !important;
-                                                    margin-top: 30px;
+                                                    margin-top: 25px;
                                                   }
-                                                  .content-wrapper .content-body .invoices.products > li.add-new,
+                                                  .content-wrapper .content-body .invoices.products li.add-new,
                                                   .content-wrapper .content-body .invoices.services  > li.add-new{
                                                     padding-top: 4px !important;
                                                   }
@@ -13926,8 +13930,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                         padding-top:15px;}
                                                         .content-wrapper .content-body .invoices > li:last-child{
                                                           border-bottom:0px;
-                                                          /*padding-bottom:30px;*/
-
+                                                          padding-bottom:30px;
                                                         }
 
 
