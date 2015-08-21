@@ -1,0 +1,436 @@
+.content-body.vendors {
+  padding-top: 40px;
+  padding-left: 0px;
+}
+
+.content-body.vendors .companies-list .company .company-information .status .label-white {
+  max-width: 100%;
+}
+
+.content-body.vendors .companies-list .company .company-information {
+  overflow: hidden;
+}
+
+.content-body.vendors .companies-list .company .company-information {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.content-body.vendors .companies-list .company .company-information .users-list {
+  min-height: 100px;
+}
+
+.content-body.vendors .companies-list .company .company-information .users-list .user,
+.content-body.vendors .companies-list .vendors {
+  -webkit-transition: 0.3s ease-out all;
+  -o-transition: 0.3s ease-out all;
+  transition: 0.3s ease-out all;
+}
+
+.content-body.vendors .companies-list .vendors .company-information .users-list .user {
+  width: calc(100% - 52px);
+}
+
+.content-body.vendors .companies-list .company .company-information .users-list .user-finfo {
+  display: none;
+}
+
+.content-body.vendors .companies-list .company .company-information .users-list > .nactive {
+  position: absolute;
+  top: 30px;
+  right: calc(-100% + 77px);
+}
+
+.companies-list .company .company-information .nactive .thumb {
+  cursor: pointer;
+}
+
+.companies-list .company .company-information .nactive .thumb:before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 172, 193, 0.50);
+  border-radius: 25px;
+  left: 0px;
+  z-index: 1;
+  webkit-transition: 0.3s all;
+  -o-transition: 0.3s ease-out all;
+  transition: 0.3s ease-out all;
+}
+
+.companies-list .company .company-information .nactive .thumb img {
+  opacity: 0.5;
+}
+
+.content-body.vendors .companies-list .company .company-information .user {
+  display: inline-block;
+}
+
+.vendors-list .vendors .ac-start-wrapper .product {
+  color: #fff;
+  margin-top: -3px;
+}
+
+.vendors-list .vendors .ac-start-wrapper .product:hover {
+  cursor: pointer;
+}
+
+.product-icn {
+  width: 12px;
+  height: 12px;
+  background-position: -1643px -206px;
+  margin-right: 10px;
+  float: left;
+  margin-top: 3px;
+}
+
+.content-body.vendors .companies-list .company .company-information .ci:not(:first-child) {
+  margin-top: 2px;
+}
+
+.content-body.vendors .companies-list .company .company-info .dot-sep {
+  margin-left: 20px;
+}
+
+.companies-list .company .company-info {
+  bottom: 26px;
+}
+
+.content-body.vendors .companies-list .company .company-information .more {
+  position: absolute;
+  right: 30px;
+  bottom: 47px;
+}
+
+.content-body.vendors .companies-list .vendors.product:hover,
+.content-body.vendors .companies-list .vendors.loading:hover,
+.content-body.vendors .companies-list .vendors.company-profile:hover {
+  box-shadow: none;
+  border-color: #e9edf1;
+  margin-bottom: 40px;
+  margin-top: 0px;
+}
+
+.content-body.vendors .companies-list .vendors:hover .users-list > .nactive {
+
+  right: calc(-100% + 107px);
+
+}
+
+.content-body.vendors .companies-list .vendors:hover .users-list > .nactive.active {
+  right: auto;
+  left: 0px;
+
+}
+
+.content-body.vendors .companies-list .vendors .users-list > .nactive .thumb:hover:before {
+  opacity: 0;
+}
+
+.content-body.vendors .companies-list .vendors .users-list > .nactive .thumb:hover img {
+  opacity: 1;
+}
+
+.companies-list .company.vendors.product .company-cover-wrapper {
+  max-height: 72px;
+  min-height: 72px;
+
+}
+
+.companies-list .company.vendors.product .company-cover-wrapper .overlay {
+  height: 72px;
+}
+
+.companies-list .company.vendors.company-profile .company-cover-wrapper {
+  max-height: 72px;
+  min-height: 72px;
+  margin: 0px;
+
+}
+
+.companies-list .company.vendors.company-profile .company-cover-wrapper .overlay {
+  height: 72px;
+}
+
+.companies-list .company.vendors .close-btn {
+  position: absolute;
+  right: -20px;
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  top: -20px;
+  background: #fff;
+  box-shadow: 0px 2px 6px 0px rgba(10, 45, 92, 0.15);
+  z-index: 11;
+  text-align: center;
+  line-height: 38px;
+  font-size: 14px;
+}
+
+.companies-list .company.vendors {
+  position: relative;
+  min-height: 429px;
+}
+
+.companies-list .company.vendors .company-wrapper {
+  position: relative;
+}
+
+.companies-list .company.vendors .company-wrapper.company-profile.loc {
+
+}
+
+.companies-list .company.vendors .company-profile-wrapper {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+
+}
+
+.companies-list .company.vendors .over-wrapper {
+}
+
+.companies-list .company.vendors.product {
+  max-height: 429px;
+}
+
+.companies-list .company.vendors.company-profile .panel-group {
+}
+
+.companies-list .company.vendors .products-list {
+  margin: 0px;
+  padding: 0px 30px;
+  margin-top: 1px;
+}
+
+.companies-list .company.vendors .products-list li {
+  padding: 26px 0px;
+  border-bottom: 1px solid #f7f9fb;
+}
+
+.companies-list .company.vendors .products-list li .name {
+  color: #25303d;
+  margin-top: 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.companies-list .company.vendors .products-list li .name .product-name {
+  max-width: calc(100% - 72px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  float: left;
+}
+
+.companies-list .company.vendors .products-list li .name .icn-description {
+  margin-top: 3px;
+  position: absolute;
+}
+
+.companies-list .company.vendors .products-list li .name .price {
+  color: #00acc1;
+  float: right;
+  display: block;
+}
+
+.companies-list .company.vendors .products-list li .art {
+  color: #9fabb9;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-top: 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.product-list-popover {
+  max-width: 310px;
+  margin-left: 144px;
+  padding: 23px 30px 23px 30px;
+  line-height: 24px;
+  color: #25303d;
+}
+
+.companies-list .company.vendors .products-list li.loading {
+  padding: 30px 0;
+}
+
+.companies-list .company.vendors .products-list li.loading .l1 {
+  width: 120px;
+  height: 10px;
+  background: #e9edf1;
+  float: left;
+}
+
+.companies-list .company.vendors .products-list li.loading .l2 {
+  width: 25px;
+  height: 10px;
+  float: right;
+  background: #e9edf1;
+}
+
+.companies-list .company.vendors .products-list li.loading .l3 {
+  width: 60px;
+  height: 10px;
+  float: left;
+  margin-top: 8px;
+  background: #e9edf1;
+}
+
+.companies-list .company.vendors .products-list li:last-child {
+  border-bottom: 0px;
+}
+
+.companies-list .company.vendors .products.scroll-pane {
+  height: 357px;
+  max-height: 357px;
+  overflow: hidden;
+}
+
+.companies-list .company.vendors .products.scroll-pane .jspVerticalBar .jspArrow {
+  height: 14px !important;
+}
+
+.companies-list .company.vendors .products.scroll-pane .jspVerticalBar .jspDrag {
+  left: -9px;
+}
+
+.companies-list .company.vendors.company-profile .primary {
+  top: 0px;
+  right: 0px;
+  overflow: hidden;
+  border-radius: 0px;
+  height: 427px;
+  width: 100%;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-body .panel-heading {
+  border-radius: 0px;
+  background: none;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-body {
+  border: 0px;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading.client .panel-title a {
+  padding-top: 29px;
+  padding-bottom: 27px;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading .panel-title a {
+  padding: 28px 30px 28px;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading.active .panel-title a {
+  color: #4e5e71;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading.active.client {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.94);
+  z-index: 11;
+  width: 100%;
+  box-shadow: rgba(10, 29, 48, 0.0470588) 0px 1px 0px 0px;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading .arrows {
+  top: 27px;
+  right: 29px;
+}
+
+.content-body.vendors .companies-list .vendors.company-profile .primary .location {
+  margin-top: 20px;
+  padding: 0 30px;
+}
+
+.content-body.vendors .companies-list .vendors.company-profile:hover,
+.content-body.vendors .companies-list .vendors.loading:hover {
+  border-color: #e9edf1;
+}
+
+.content-body.vendors .companies-list .vendors.company-profile .primary .panel-body {
+  padding: 0px 0px 60px;
+}
+
+.companies-list .company.vendors.company-profile .products.scroll-pane {
+  height: 357px;
+  max-height: 357px;
+}
+
+.companies-list .company.vendors.company-profile .products.scroll-pane .jspContainer .jspPane {
+  padding-top: 70px !important;
+}
+
+.content-body.vendors .companies-list .vendors.company-profile .primary .panel-body.loc {
+  padding-bottom: 0px;
+  padding: 0px;
+}
+
+.companies-list .company.vendors.company-profile .products.scroll-pane .jspVerticalBar .jspArrowUp {
+  height: 85px !important;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading {
+  border-radius: 0px;
+  background-color: #e9edf1;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading.active {
+  background: none;
+}
+
+.companies-list .company.vendors.company-profile .primary .panel-heading .expand {
+  margin-top: 5px;
+}
+
+.vendors-popover {
+  background: #f7f9fb;
+  margin-top: -23px;
+  width: calc(100% + 60px);
+  margin-left: -30px;
+  padding: 23px 30px 23px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  margin-bottom: 23px;
+
+}
+
+.vendors-popover p {
+  color: #7c8999;
+  margin: 0px;
+}
+
+.vendors-popover p .blue {
+  width: 101px;
+  display: inline-block;
+}
+
+.vendors-popover .location {
+  margin-top: 16px;
+}
+
+.vendors-popover .location .icn {
+  margin-top: 6px;
+  float: left;
+}
+
+.vendors-popover .location a {
+  margin-left: 10px;
+  color: #25303d;
+  font-weight: 600;
+  line-height: 10px;
+}
+
+.url-globe {
+  width: 12px;
+  height: 12px;
+  background-position: -1665px -206px;
+}

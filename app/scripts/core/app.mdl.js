@@ -16,6 +16,7 @@
       'quicktech.core.recurring',
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
+      'quicktech.core.vendors',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -111,6 +112,21 @@
         url: '/receipt-archive/:mode',
         templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
         controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
+      }))
+      .state('vendors', waitForServices({
+        url: '/vendors',
+        templateUrl: '/html/scripts/core/vendors/vendors.tpl.html',
+        controller: 'quicktech.core.vendors.vendorsCtrl'
+      }))
+      .state('createVendor', waitForServices({
+        url: '/vendors/create',
+        templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
+        controller: 'quicktech.core.vendors.editVendorCtrl'
+      }))
+      .state('editVendor', waitForServices({
+        url: '/vendors/edit/:vendorId',
+        templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
+        controller: 'quicktech.core.vendors.editVendorCtrl'
       }));
 
     function waitForServices(conf) {
