@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane active">
   <ul class="companies-list" ftt-tab-content>
     <li event-toggle-slider="toggleReceivableInvoices"
-        ng-repeat="receivableCompany in receivableCompanies | orderBy: '-invoices.length'"
+        ng-repeat="company in receivableCompanies | orderBy: '-invoices.length'"
         ng-controller="quicktech.core.receivable.companyCtrl">
       <div class="indicator-new-update" ng-if="showIndicator"></div>
       <a href='javascript:void(0)' ng-click="toggleReceivableInvoices()">
@@ -13,7 +13,7 @@
           </label>
         </div>
         <span class="name">{{ company.name }}</span>
-        <span class=" badge badge-light">{{ receivableCompany.invoices.length }}</span>
+        <span class=" badge badge-light">{{ receivableInvoicesData.companies[company.id].length }}</span>
         <span class="amount pull-right">{{ totalSum.companies[company.id] | currency: '$': 0 }}</span>
       </a>
       <ul class="invoices recurring receivable " ets-slider>
@@ -26,7 +26,8 @@
             <div class="col-5">AMOUNT</div>
           </div>
         </li>
-        <li class="clearfix" ng-repeat="invoice in receivableCompany.invoices | orderBy: sortInvoice: true"
+        <li class="clearfix"
+            ng-repeat="invoice in receivableInvoicesData.companies[company.id] | orderBy: sortInvoice: true"
             ng-controller="quicktech.core.receivable.invoiceCtrl"
             show-model-element="{{ 'showInvoice-' + invoice.id }}">
           <span ng-if="invoice.frequency" class="icns calendar"

@@ -3,10 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.companyCtrl',
-    ['$scope', 'CompaniesService', 'ReceivableService',
-      function ($scope, CompaniesService, ReceivableService) {
-
-        $scope.company = CompaniesService.getOneById($scope.receivableCompany.id);
+    ['$scope', 'ReceivableService',
+      function ($scope, ReceivableService) {
 
         var showInvoices;
 
@@ -28,7 +26,7 @@
               countObj++;
             }
           }
-          companyInvoices.checked = ($scope.receivableCompany.invoices.length === countObj);
+          companyInvoices.checked = ($scope.receivableInvoicesData.companies[$scope.company.id].length === countObj);
         }, true);
 
         $scope.sentInvoices = function () {

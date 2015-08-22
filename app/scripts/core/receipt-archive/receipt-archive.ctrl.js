@@ -25,8 +25,9 @@
         });
 
         $scope.receiptArchiveData = ReceiptArchiveService.getReceiptArchiveData($scope, function () {
-          if ($stateParams.mode === 'group-by-company') {
+          $scope.$watch('receiptArchiveData', function () {
             $scope.receiptArchiveCompanies = [];
+            var companies = $scope.receiptArchiveCompanies;
             angular.forEach($scope.receiptArchiveData.companies, function (value, key) {
               if (key !== 'staticCopy') {
                 $scope.receiptArchiveCompanies.push({
@@ -36,9 +37,6 @@
                 });
               }
             }, $scope.receiptArchiveCompanies);
-          }
-          $scope.$watch('receiptArchiveData', function () {
-            var companies = $scope.receiptArchiveCompanies;
             if ($stateParams.mode === 'group-by-company') {
               for (var i = 0; i < companies.length; i++) {
                 $scope.totalCompanySum[companies[i].id] = 0;

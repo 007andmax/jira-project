@@ -47,6 +47,7 @@
 
           $scope.$watch('receivableInvoicesData', function () {
             $scope.totalReceivables = 0;
+            $scope.receivableCompanies = [];
             angular.forEach(invoicesData.companies, function (value, key) {
               if (key !== 'staticCopy') {
                 var companyInvoices = invoicesData.companies[key];
@@ -66,17 +67,9 @@
               }
             }, $scope.totalSum);
 
-            $scope.receivableCompanies = [];
             angular.forEach($scope.receivableInvoicesData.companies, function (val, key) {
               if (key !== 'staticCopy') {
-                var pushArray = {id: key, invoices: []};
-                for (var i = 0; i < $scope.receivableInvoicesData.companies[key].length; i++) {
-                  var invoice = $scope.receivableInvoicesData.companies[key][i]
-                  if (invoice !== 'staticCopy' && invoice !== undefined) {
-                    pushArray.invoices.push(invoice);
-                  }
-                }
-                $scope.receivableCompanies.push(pushArray);
+                $scope.receivableCompanies.push(CompaniesService.getOneById(key));
               }
             });
 
