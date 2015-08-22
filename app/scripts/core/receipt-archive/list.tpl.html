@@ -9,7 +9,7 @@
         <div class="col-5">AMOUNT</div>
       </div>
     </li>
-    <li class="clearfix" ng-repeat="invoice in receiptArchiveData.list"
+    <li class="clearfix" ng-repeat="invoice in receiptArchiveData.list | orderBy: 'number'"
         ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
         show-model-element="{{ 'showInvoice-' + invoice.id }}">
       <span class="icns calendar" ng-if="invoice.recurring"

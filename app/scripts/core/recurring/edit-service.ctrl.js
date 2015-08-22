@@ -25,7 +25,7 @@
 
         $scope.numberPattern = /^\d?[0-9]{0,17}$/;
 
-        $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
+        $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.recurringCompany.company.id);
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;

@@ -6,7 +6,7 @@
     ['$scope', 'RecurringService', '$timeout',
       function ($scope, RecurringService, $timeout) {
 
-        $scope.companyRecurringInvoices = RecurringService.getCompanyRecurringInvoices($scope.company.id, $scope, function () {
+        $scope.companyRecurringInvoices = RecurringService.getCompanyRecurringInvoices($scope.recurringCompany.company.id, $scope, function () {
           $scope.$emit('toggleRecurringInvoices');
 
           $scope.$watch('highlightInvoiceId', function (invoiceId) {

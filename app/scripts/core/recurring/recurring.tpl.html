@@ -61,17 +61,17 @@
           <ul class="companies-list recurring" ftt-tab-content>
 
             <li event-toggle-slider="toggleRecurringInvoices" ng-controller="quicktech.core.recurring.companyCtrl"
-                ng-repeat="recurringCompany in recurringCompanies">
+                ng-repeat="recurringCompany in recurringCompanies | orderBy: 'company.name'">
               <a href='javascript:void(0)' ng-click="toggleRecurringInvoices()">
 
                 <div class="ui-checkbox ui-checkbox-warning pull-left">
                   <label class="control checkbox" stop-propagation="click">
-                    <input type="checkbox" ng-model="companySelection[company.id]">
+                    <input type="checkbox" ng-model="companySelection[recurringCompany.company.id]">
                     <span class="control-indicator"></span>
                   </label>
                 </div>
 
-                <span class="name">{{ company.name }}</span>
+                <span class="name">{{ recurringCompany.company.name }}</span>
                 <span class=" badge badge-light ">{{ recurringCompany.invoicesCount || 0 }}</span>
                 <span class="amount pull-right">{{ recurringCompany.total | currency: '$': 0 }}</span>
 
@@ -92,7 +92,8 @@
 
                 </li>
 
-                <li class="clearfix" qt-toggle-slider ng-repeat="invoice in companyRecurringInvoices"
+                <li class="clearfix" qt-toggle-slider
+                    ng-repeat="invoice in companyRecurringInvoices | orderBy: 'number'"
                     ng-controller="quicktech.core.recurring.invoiceCtrl"
                     show-model-element="{{ 'showInvoice-' + invoice.id }}">
                   <div class="hover" qt-ts-toggler>

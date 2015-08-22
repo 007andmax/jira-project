@@ -10,7 +10,7 @@
 
         $scope.invoiceProperty = function (property) {
           var invoice = $scope.invoice;
-          return invoice.isRecurring ? invoice.invoices[invoice.invoices.length - 1][property] : invoice[property]
+          return invoice[property] || invoice.invoices[invoice.invoices.length - 1][property];
         };
 
         if ($scope.invoiceProperty('dueDate') < Date.now()) {

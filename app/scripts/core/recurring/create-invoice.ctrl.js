@@ -50,7 +50,7 @@
               services: [],
               sentOn: $scope.createInvoice.sentOn.getTime(),
               frequency: $scope.createInvoice.frequency
-            }, $scope.company.id, function () {
+            }, $scope.recurringCompany.company.id, function () {
               $scope.$emit('cancelEditForm');
               $scope.disabledCreateButton = false;
             })

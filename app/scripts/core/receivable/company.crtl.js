@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.companyCtrl',
-    ['$scope', 'CompaniesService', 'ReceivableService', '$timeout', '$rootScope',
-      function ($scope, CompaniesService, ReceivableService, $timeout, $rootScope) {
+    ['$scope', 'CompaniesService', 'ReceivableService',
+      function ($scope, CompaniesService, ReceivableService) {
 
-        $scope.company = CompaniesService.getOneById($scope.companyId);
+        $scope.company = CompaniesService.getOneById($scope.receivableCompany.id);
 
         var showInvoices;
 
@@ -28,7 +28,7 @@
               countObj++;
             }
           }
-          companyInvoices.checked = ($scope.invoices.length === countObj);
+          companyInvoices.checked = ($scope.receivableCompany.invoices.length === countObj);
         }, true);
 
         $scope.sentInvoices = function () {
@@ -66,6 +66,10 @@
           }
           $scope.setHighlightInvoiceId(invoiceId);
         });
+
+        $scope.sortInvoice = function (invoice) {
+          return invoice.dueDate || invoice.invoices[invoice.invoices.length - 1].dueDate;
+        }
 
       }]);
 

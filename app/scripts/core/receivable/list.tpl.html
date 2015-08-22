@@ -15,7 +15,7 @@
         <div class="col-5">AMOUNT</div>
       </div>
     </li>
-    <li class="clearfix" ng-repeat="invoice in receivableInvoicesData.list"
+    <li class="clearfix" ng-repeat="invoice in receivableInvoicesData.list | orderBy: 'number'"
         ng-controller="quicktech.core.receivable.invoiceCtrl"
         show-model-element="{{ 'showInvoice-' + invoice.id }}">
       <span ng-if="invoice.frequency" class="icns calendar"

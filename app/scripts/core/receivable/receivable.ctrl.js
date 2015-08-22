@@ -65,7 +65,23 @@
                 $scope.totalReceivables += this.companies[key];
               }
             }, $scope.totalSum);
-          }, true)
+
+            $scope.receivableCompanies = [];
+            angular.forEach($scope.receivableInvoicesData.companies, function (val, key) {
+              if (key !== 'staticCopy') {
+                var pushArray = {id: key, invoices: []};
+                for (var i = 0; i < $scope.receivableInvoicesData.companies[key].length; i++) {
+                  var invoice = $scope.receivableInvoicesData.companies[key][i]
+                  if (invoice !== 'staticCopy' && invoice !== undefined) {
+                    pushArray.invoices.push(invoice);
+                  }
+                }
+                $scope.receivableCompanies.push(pushArray);
+              }
+            });
+
+          }, true);
+
 
         });
 

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receiptArchive').controller('quicktech.core.receiptArchive.receiptArchiveCtrl',
-    ['$scope', '$state', '$stateParams', 'ReceiptArchiveService', 'quicktech.common.services.SharedStateService',
-      function ($scope, $state, $stateParams, ReceiptArchiveService, SharedStateService) {
+    ['$scope', '$state', '$stateParams', 'ReceiptArchiveService', 'quicktech.common.services.SharedStateService', 'CompaniesService',
+      function ($scope, $state, $stateParams, ReceiptArchiveService, SharedStateService, CompaniesService) {
 
         var headerSharedState = SharedStateService.getSharedState('receiptArchiveInvoicesHeader');
 
@@ -31,7 +31,8 @@
               if (key !== 'staticCopy') {
                 $scope.receiptArchiveCompanies.push({
                   id: key,
-                  invoices: value
+                  invoices: value,
+                  name: CompaniesService.getOneById(key).name
                 });
               }
             }, $scope.receiptArchiveCompanies);

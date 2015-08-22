@@ -14,6 +14,11 @@
 
           $scope.$watch('recurringCompanies', function () {
 
+            for (var i = 0; i < $scope.recurringCompanies.length; i++) {
+              var company = $scope.recurringCompanies[i];
+              company.company.name = CompaniesService.getOneById(company.company.id).name;
+            }
+
             var clientCompanies = CompaniesService.getClientCompanies(),
               recurringCompaniesId = [];
             $scope.notRecurringCompaniesArray = [];
@@ -43,7 +48,6 @@
         $scope.addCompany = function () {
           RecurringService.addCompany($scope.recurringCompanies, $scope.company.id);
           $scope.company = '';
-
         };
 
       }]);

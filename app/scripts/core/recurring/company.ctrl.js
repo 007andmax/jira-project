@@ -20,8 +20,6 @@
           }
         };
 
-        $scope.company = CompaniesService.getOneById($scope.recurringCompany.company.id);
-
         $scope.$on('cancelEditForm', function () {
           $scope.showCreateInvoiceForm = false;
         });
@@ -32,14 +30,14 @@
         };
 
         $scope.deleteAllRecurringInvoice = function () {
-          RecurringService.deleteAllRecurringInvoicesByCompany($scope.company.id, $scope.recurringCompanies);
+          RecurringService.deleteAllRecurringInvoicesByCompany($scope.recurringCompany.company.id, $scope.recurringCompanies);
         };
 
         $scope.setHighlightInvoiceId = function (invoiceId) {
           $scope.highlightInvoiceId = invoiceId;
         };
 
-        $scope.$on($scope.company.id + '-showInvoice', function (event, invoiceId) {
+        $scope.$on($scope.recurringCompany.company.id + '-showInvoice', function (event, invoiceId) {
           if (!$scope.showInvoices) {
             $scope.toggleRecurringInvoices();
           }
