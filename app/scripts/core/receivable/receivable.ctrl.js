@@ -48,23 +48,35 @@
           $scope.$watch('receivableInvoicesData', function () {
             $scope.totalReceivables = 0;
             $scope.receivableCompanies = [];
+
             angular.forEach(invoicesData.companies, function (value, key) {
-              if (key !== 'staticCopy') {
-                var companyInvoices = invoicesData.companies[key];
-                this.companies[key] = 0;
-                for (var i = 0; i < companyInvoices.length; i++) {
-                  this.invoices[companyInvoices[i].id] = 0;
-                  if (companyInvoices[i].isRecurring) {
-                    for (var j = 0; j < companyInvoices[i].invoices.length; j++) {
-                      this.invoices[companyInvoices[i].id] += companyInvoices[i].invoices[j].sum;
-                    }
-                  } else {
-                    this.invoices[companyInvoices[i].id] += companyInvoices[i].sum;
-                  }
-                  this.companies[key] += this.invoices[companyInvoices[i].id];
-                }
-                $scope.totalReceivables += this.companies[key];
+
+              if (key === 'staticCopy') {
+                return
               }
+
+              var companyInvoices = invoicesData.companies[key];
+              this.companies[key] = 0;
+
+              for (var i = 0; i < companyInvoices.length; i++) {
+
+                var invoice = companyInvoices[i],
+                  invoiceSum = 0;
+
+                if (invoice.isRecurring) {
+                  for (var j = 0; j < invoice.invoices.length; j++) {
+                    invoiceSum += invoice.invoices[j].sum;
+                  }
+                } else {
+                  invoiceSum += invoice.sum;
+                }
+
+                this.invoices[invoice.id] = invoiceSum;
+                this.companies[key] += invoiceSum;
+              }
+
+              $scope.totalReceivables += this.companies[key];
+
             }, $scope.totalSum);
 
             angular.forEach($scope.receivableInvoicesData.companies, function (val, key) {

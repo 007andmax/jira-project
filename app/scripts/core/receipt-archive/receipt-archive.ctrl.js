@@ -26,17 +26,19 @@
 
         $scope.receiptArchiveData = ReceiptArchiveService.getReceiptArchiveData($scope, function () {
           $scope.$watch('receiptArchiveData', function () {
+
             $scope.receiptArchiveCompanies = [];
-            var companies = $scope.receiptArchiveCompanies;
-            angular.forEach($scope.receiptArchiveData.companies, function (value, key) {
-              if (key !== 'staticCopy') {
+
+            for(var companyId in $scope.receiptArchiveData.companies){
+              if (companyId !== 'staticCopy') {
+
                 $scope.receiptArchiveCompanies.push({
-                  id: key,
-                  invoices: value,
-                  name: CompaniesService.getOneById(key).name
+                  id: companyId,
+                  name: CompaniesService.getOneById(companyId).name
                 });
               }
-            }, $scope.receiptArchiveCompanies);
+            }
+
             if ($stateParams.mode === 'group-by-company') {
               for (var i = 0; i < companies.length; i++) {
                 $scope.totalCompanySum[companies[i].id] = 0;
@@ -45,6 +47,7 @@
                 }
               }
             }
+
           }, true);
 
           headerSharedState.invoices = $scope.receiptArchiveData.list
