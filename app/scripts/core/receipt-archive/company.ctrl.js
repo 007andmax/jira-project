@@ -13,7 +13,7 @@
           showInvoices = !showInvoices;
         };
 
-        $scope.$on($scope.receiptArchiveCompany.id + '-showInvoiceInCompany', function (event, invoiceId) {
+        $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
           if (!showInvoices) {
             $scope.toggleReceiptArchiveInvoices();
           }

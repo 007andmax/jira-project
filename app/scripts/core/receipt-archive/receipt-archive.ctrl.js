@@ -3,13 +3,14 @@
 (function () {
 
   angular.module('quicktech.core.receiptArchive').controller('quicktech.core.receiptArchive.receiptArchiveCtrl',
-    ['$scope', '$state', '$stateParams', 'ReceiptArchiveService', 'quicktech.common.services.SharedStateService', 'CompaniesService',
-      function ($scope, $state, $stateParams, ReceiptArchiveService, SharedStateService, CompaniesService) {
+    ['$scope', '$state', '$stateParams', 'ReceiptArchiveService', 'quicktech.common.services.SharedStateService', 'CompaniesService', 'Utils',
+      function ($scope, $state, $stateParams, ReceiptArchiveService, SharedStateService, CompaniesService, Utils) {
 
         var headerSharedState = SharedStateService.getSharedState('receiptArchiveInvoicesHeader');
 
         var availableMods = ['group-by-company', 'list'];
 
+        $scope.receiptArchiveCompanies = [];
         $scope.totalCompanySum = {};
 
         $scope.$watch(function () {
@@ -27,10 +28,8 @@
         $scope.receiptArchiveData = ReceiptArchiveService.getReceiptArchiveData($scope, function () {
           $scope.$watch('receiptArchiveData', function () {
 
-            $scope.receiptArchiveCompanies = [];
-
-            for(var companyId in $scope.receiptArchiveData.companies){
-              if (companyId !== 'staticCopy') {
+            for (var companyId in $scope.receiptArchiveData.companies) {
+              if (companyId !== 'staticCopy' && !Utils.findById($scope.receiptArchiveCompanies, companyId)) {
 
                 $scope.receiptArchiveCompanies.push({
                   id: companyId,
@@ -39,11 +38,23 @@
               }
             }
 
+            for (var i = $scope.receiptArchiveCompanies - 1; i >= 0; i--) {
+              if (!$scope.receiptArchiveData.companies[$scope.receiptArchiveCompanies[i]]) {
+                $scope.receiptArchiveCompanies.splice(i, 1);
+              }
+            }
+
             if ($stateParams.mode === 'group-by-company') {
-              for (var i = 0; i < companies.length; i++) {
-                $scope.totalCompanySum[companies[i].id] = 0;
-                for (var j = 0; j < companies[i].invoices.length; j++) {
-                  $scope.totalCompanySum[companies[i].id] += companies[i].invoices[j].sum;
+
+              for (var i = 0; i < $scope.receiptArchiveCompanies.length; i++) {
+
+                var companyId = $scope.receiptArchiveCompanies[i].id,
+                  invoices = $scope.receiptArchiveData.companies[companyId];
+
+                $scope.totalCompanySum[companyId] = 0;
+
+                for (var j = 0; j < invoices.length; j++) {
+                  $scope.totalCompanySum[companyId] += invoices[j].sum;
                 }
               }
             }

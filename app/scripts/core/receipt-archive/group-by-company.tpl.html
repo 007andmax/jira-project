@@ -2,7 +2,7 @@
   <ul class="companies-list">
 
     <li event-toggle-slider="toggleReceiptArchiveInvoices"
-        ng-repeat="receiptArchiveCompany in receiptArchiveCompanies | orderBy: 'name'"
+        ng-repeat="company in receiptArchiveCompanies | orderBy: 'name'"
         ng-controller="quicktech.core.receiptArchive.companyCtrl">
       <a href='javascript:void(0)' ng-click="toggleReceiptArchiveInvoices()">
         <div class="ui-checkbox ui-checkbox-warning pull-left">
@@ -11,9 +11,9 @@
           <!--<span class="control-indicator"></span>-->
           <!--</label>-->
         </div>
-        <span class="name">{{ receiptArchiveCompany.name }}</span>
-        <span class=" badge badge-light ">{{ receiptArchiveCompany.invoices.length }}</span>
-        <span class="amount pull-right">{{ totalCompanySum[receiptArchiveCompany.id] | currency:'$' :0 }}</span>
+        <span class="name">{{ company.name }}</span>
+        <span class=" badge badge-light ">{{ receiptArchiveData.companies[company.id].length }}</span>
+        <span class="amount pull-right">{{ totalCompanySum[company.id] | currency:'$' :0 }}</span>
     </a>
       <ul class="invoices recurring receivable  receipt" ets-slider>
         <li class="head clearfix">
@@ -24,7 +24,7 @@
             <div class="col-5">AMOUNT</div>
           </div>
         </li>
-        <li class="clearfix" ng-repeat="invoice in receiptArchiveCompany.invoices | orderBy: '-paidOn'"
+        <li class="clearfix" ng-repeat="invoice in receiptArchiveData.companies[company.id] | orderBy: '-paidOn'"
             ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
             show-model-element="{{ 'showInvoice-' + invoice.id }}">
           <span class="icns calendar" ng-if="invoice.recurring"

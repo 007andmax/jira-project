@@ -121,6 +121,10 @@
           $scope.highlightInvoiceId = invoiceId;
         };
 
+        $scope.getInvoicesCount = function (company) {
+          return $scope.receivableInvoicesData.companies[company.id].length;
+        };
+
         $scope.chooseAllCheckbox = function () {
           for (var invoice in $scope.invoiceToSent.invoices) {
             $scope.invoiceToSent.invoices[invoice] = $scope.invoiceToSent.chooseAll;

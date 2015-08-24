@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane active">
   <ul class="companies-list" ftt-tab-content>
     <li event-toggle-slider="toggleReceivableInvoices"
-        ng-repeat="company in receivableCompanies | orderBy: '-invoices.length'"
+        ng-repeat="company in receivableCompanies | orderBy:getInvoicesCount:true"
         ng-controller="quicktech.core.receivable.companyCtrl">
       <div class="indicator-new-update" ng-if="showIndicator"></div>
       <a href='javascript:void(0)' ng-click="toggleReceivableInvoices()">
