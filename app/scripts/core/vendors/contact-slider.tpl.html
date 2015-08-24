@@ -1,0 +1,27 @@
+<div class="user-vendor" ng-class="{active: $index === 0, nactive: $index !== 0}"
+     ng-repeat="contact in contacts | orderBy: contactsOrder" cs-slide ng-show="$index <= 1">
+  <div class="clearfix name-wrpper">
+    <a herf="" class="pull-left thumb avatar m-r" ng-click="showNext(contact.id)">
+      <img src="images/avatars/avatar-large.png" alt="..." class="img-circle no-avatar">
+    </a>
+
+    <div class="user-inf pull-left user-finfo" style="display:block" ng-show="$index === 0">
+      <h4 class="name">{{ contact.name }}</h4>
+
+      <div class="status pull-left"><span
+        class="label label-white label-ticket-number">{{ contact.label }}</span>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="user-finfo" style="display:block" ng-show="$index === 0">
+    <div class="clearfix">
+      <div class="ci number clearfix">
+        <span class="icn icn-telephone"></span>
+        <span class="txt"> {{ contact.phone }}</span>
+      </div>
+
+    </div>
+  </div>
+</div>

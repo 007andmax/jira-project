@@ -16,9 +16,9 @@
 
           function initScroll() {
             element.jScrollPane({
-              autoReinitialise: true,
-              verticalDragMinHeight: 54,
-              verticalDragMaxHeight: 54
+              autoReinitialise: true
+              //verticalDragMinHeight: 54,
+              //verticalDragMaxHeight: 54
             });
           }
         }

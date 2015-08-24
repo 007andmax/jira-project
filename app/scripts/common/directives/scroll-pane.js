@@ -9,11 +9,11 @@
       restrict: 'A',
       link: function (scope, element, attrs) {
         element.jScrollPane({
-          autoReinitialise: true,
-          verticalDragMinHeight: 54,
-          verticalDragMaxHeight: 54
+          autoReinitialise: true
+          //verticalDragMinHeight: 54,
+          //verticalDragMaxHeight: 54
         });
-console.log('scroll 13')
+
         var maxHeight = attrs.scrollMaxHeightPx;
 
         if (maxHeight) {

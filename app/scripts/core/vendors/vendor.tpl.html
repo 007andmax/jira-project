@@ -1,0 +1,257 @@
+<div class="vendor-company company vendors clearfix"
+     ng-class="{
+      product: shownSection === 'products',
+      'company-profile loc': shownSection === 'more',
+     }"
+     ng-controller="quicktech.core.vendors.vendorCtrl">
+  <a href="javascript:void(0)" class="close-btn close " ng-show="shownSection"
+     ng-click="setShownSection()">
+    <span aria-hidden="true" class="icn-close-modal"></span>
+  </a>
+
+  <div class="over-wrapper">
+    <div class="company-wrapper">
+      <div class="company-cover-wrapper" style="background-image:url('images/company/cover.png')">
+        <div class="overlay"></div>
+        <div class="archive-btn thide " ng-hide="shownSection"><a class="black-btn "
+                                                                  href="javascript:void(0)"
+                                                                  data-original-title="Archive Vendor"
+                                                                  data-toggle="tooltip"><span
+          class="icn archive-company"></span></a>
+        </div>
+        <div class="company-info">
+          <h3 class="name thide " ng-hide="shownSection"> Helmatic & Getanas Ltd. </h3>
+
+          <div class="ac-start-wrapper clearfix">
+            <div class="product pull-left" ng-click="setShownSection('products')" ng-hide="shownSection === 'more'">
+              <span class="icn product-icn"></span>
+              <span class="bold">Products</span> 26
+            </div>
+
+            <div class="dot-sep pull-left thide " ng-hide="shownSection"></div>
+
+            <a href="javascript:void(0)" class="icn-wrapper pull-left thide "
+               ng-hide="shownSection"
+               popover-placement="bottom"
+               popover-trigger="mouseenter"
+               popover-template="'/html/scripts/core/vendors/popover.tpl.html'">
+              <span class="icn company-detail"></span>
+            </a>
+            <a href="javascript:void(0)" class="tp-hide pull-left icn-wrapper thide "
+               ng-hide="shownSection"
+               data-original-title="Change Cover"
+               data-toggle="tooltip"><span class="icn camera"></span></a>
+
+            <a href="javascript:void(0)" class="icn-wrapper tp-hide pull-left thide " data-placement="top"
+               ng-hide="shownSection"
+               data-original-title="Edit info" data-toggle="tooltip"
+               ui-sref="editVendor( { vendorId: vendor.id } )">
+              <span class="icn icn-edit-tag"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="company-information clearfix thide " ng-hide="shownSection">
+        <div class="users-list" contacts-slider ng-model="contacts">
+
+        </div>
+        <div class="ci location clearfix">
+          <span class="icn icn-sb-location"></span>
+          <span class="txt">78 River St, Tronoto, ON M5A 3N9 <br>Canada</span>
+        </div>
+        <div class="clearfix company-actions">
+          <a href="javascript:void(0)" class="btn btn-scooter btn-update pull-left" style="margin-right: 10px;">
+            <div class="icn-white-mail"></div>
+          </a>
+
+        </div>
+
+        <a href="javascript:void(0)" class="icn-reset-user more tp-hide" ng-click="setShownSection('more')"></a>
+      </div>
+    </div>
+
+    <div class="company-profile-wrapper" ng-show="shownSection === 'more'">
+      <div class="primary" ng-init="accordionStatus.openClients = true">
+        <accordion close-others="true">
+          <accordion-group is-open="accordionStatus.openLocations" is-disabled="accordionStatus.openLocations"
+                           ng-class="{active: accordionStatus.openLocations}">
+            <accordion-heading ng-class="{active: accordionStatus.openLocations}">
+              <a class="collapsed" style="padding:0px;" data-toggle="collapse" href="javascript:void(0)">
+                Site/Location(s) <span class="total">2</span>
+                <span class="expand icn" ng-show="!accordionStatus.openLocations"></span>
+              </a>
+
+              <div class="arrows" ng-show="accordionStatus.openLocations" style="display: block;">
+                <a href="javascript:void(0)" class="icn left-arrow disabled"></a>
+                <a href="javascript:void(0)" class="icn right-arrow"></a>
+
+              </div>
+            </accordion-heading>
+
+            <div class="location-slider">
+              <div class="location active">
+                <div class="panel-heading">Billing Address</div>
+                <div class="billing-address">
+                  <p class="post-address">48 River St, Tronoto, ON M5A 3N9<br>Canada</p>
+
+                  <div class="site-ref dropdown">
+                    <div class="btn-location" data-toggle="popover-location-right" data-container="body"
+                         data-placement="bottom" data-original-title="" title="">
+                      <span class="icn-sb-location pull-left"></span>
+                      Site Ref. “TCL 01”
+                    </div>
+                  </div>
+                  <div class="about-company">
+                    <div class="company"><span class="icn time-zone"></span> GMT/UTC <span
+                      class="dot-sep"></span> 05:00 hour
+                    </div>
+                    <div class="company"><span class="icn icn-telephone"></span> 829 606 6368</div>
+                    <div class="company"><span class="icn icn-fax-machine"></span> 306 830 8680</div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="location nactive" style="display:none">
+                <div class="panel-heading">Billing Address</div>
+                <div class="billing-address">
+                  <p class="post-address">48 River St, Tronoto, ON M5A 3N9<br>Canada</p>
+
+                  <div class="site-ref dropdown">
+                    <div class="btn-location" data-toggle="popover-location-right" data-placement="bottom"
+                         data-original-title="" title="">
+                      <span class="icn-sb-location pull-left"></span>
+                      Site Ref. “TCL 01”
+                    </div>
+                  </div>
+                  <div class="about-company">
+                    <div class="company"><span class="icn time-zone"></span> GMT/UTC <span
+                      class="dot-sep"></span> 05:00 hour
+                    </div>
+                    <div class="company"><span class="icn icn-telephone"></span> 829 606 6368</div>
+                    <div class="company"><span class="icn icn-fax-machine"></span> 306 830 8680</div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </accordion-group>
+
+          <accordion-group is-open="accordionStatus.openClients" is-disabled="accordionStatus.openClients"
+                           ng-class="{active: accordionStatus.openClients}">
+            <accordion-heading ng-class="{active: accordionStatus.openClients}">
+              <a class="collapsed" style="padding:0px;" data-toggle="collapse" href="javascript:void(0)">
+                Assc. Client Companies <span class="total">26</span>
+                <span ng-show="!accordionStatus.openClients" class="expand icn"></span>
+              </a>
+            </accordion-heading>
+
+
+            <div class="products clearfix scroll-pane" qt-scroll-pane>
+              <ul class="products-list">
+
+
+                <li class="clearfix">
+                  <div class="name">Sierra Dental Care</div>
+                  <div class="clearfix"></div>
+                  <div class="art clearfix">8 Matilda St, Toronto, ON M4M 1L9, Canada</div>
+                </li>
+
+                <li class="clearfix">
+                  <div class="name">Active Information Systems</div>
+                  <div class="clearfix"></div>
+                  <div class="art clearfix">48 River St, Toronto, ON M5A 3N9, Canada</div>
+                </li>
+                <li class="clearfix">
+                  <div class="name">Sierra Dental Care</div>
+                  <div class="clearfix"></div>
+                  <div class="art clearfix">8 Matilda St, Toronto, ON M4M 1L9, Canada</div>
+                </li>
+
+
+                <li class="clearfix">
+                  <div class="name">Bentley Motors</div>
+                  <div class="clearfix"></div>
+                  <div class="art clearfix">6841 Avenue Rd, Toronto, ON, Canada</div>
+                </li>
+                <li class="clearfix">
+                  <div class="name">Bentley Motors</div>
+                  <div class="clearfix"></div>
+                  <div class="art clearfix">6841 Avenue Rd, Toronto, ON, Canada</div>
+                </li>
+
+              </ul>
+            </div>
+          </accordion-group>
+        </accordion>
+
+      </div>
+    </div>
+
+
+    <div class="product-wrapper" ng-show="shownSection === 'products'">
+      <div class="products clearfix scroll-pane" qt-scroll-pane>
+        <ul class="products-list">
+
+          <li class="clearfix">
+            <div class="name"><span class="product-name">HP Envy 4500</span>
+              <span class="icns icn-description"
+                    data-popover="true"
+                    data-html="true"
+                    data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
+                    data-original-title="" title=""
+                    aria-describedby="popover188920"></span><span
+                class="price">$98</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="art clearfix">Printer #18976</div>
+          </li>
+
+          <li class="clearfix">
+            <div class="name"><span class="product-name">HP Photo Smart 5520</span><span
+              class="icns icn-description" data-popover="true" data-html="true"
+              data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
+              data-original-title="" title="" aria-describedby="popover188920"></span><span
+              class="price">$60</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="art clearfix">Printer #19378</div>
+          </li>
+          <li class="clearfix">
+            <div class="name"><span class="product-name">HP Black Ink Cartridge</span><span
+              class="icns icn-description" data-popover="true" data-html="true"
+              data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
+              data-original-title="" title="" aria-describedby="popover188920"></span><span
+              class="price">$30</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="art clearfix">ink & toners #20126</div>
+          </li>
+
+
+          <li class="clearfix">
+            <div class="name"><span class="product-name">HP Black Ink Cartridge</span><span
+              class="icns icn-description" data-popover="true" data-html="true" data-class="dynamic-class"
+              data-container="body"
+              data-content="Dolor sit amet, consectetuer adipiscing elit, diam nonummy nib euismod tincidunt laoreet dolore."
+              data-original-title="" title="" aria-describedby="popover188920"></span><span
+              class="price">$30</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="art clearfix">ink & toners #20126</div>
+          </li>
+          <li class="clearfix loading">
+            <div class="l1"></div>
+            <div class="l2"></div>
+            <div class="clearfix"></div>
+            <div class="l3"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

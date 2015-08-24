@@ -21,14 +21,14 @@
   min-height: 100px;
 }
 
-.content-body.vendors .companies-list .company .company-information .users-list .user,
+.content-body.vendors .companies-list .company .company-information .users-list .user-vendor,
 .content-body.vendors .companies-list .vendors {
   -webkit-transition: 0.3s ease-out all;
   -o-transition: 0.3s ease-out all;
   transition: 0.3s ease-out all;
 }
 
-.content-body.vendors .companies-list .vendors .company-information .users-list .user {
+.content-body.vendors .companies-list .vendors .company-information .users-list .user-vendor {
   width: calc(100% - 52px);
 }
 
@@ -64,7 +64,7 @@
   opacity: 0.5;
 }
 
-.content-body.vendors .companies-list .company .company-information .user {
+.content-body.vendors .companies-list .company .company-information .user-vendor {
   display: inline-block;
 }
 
@@ -383,7 +383,7 @@
   background-color: #e9edf1;
 }
 
-.companies-list .company.vendors.company-profile .primary .panel-heading.active {
+.companies-list .company.vendors.company-profile .panel.panel-default.active .panel-heading {
   background: none;
 }
 
@@ -434,3 +434,69 @@
   height: 12px;
   background-position: -1665px -206px;
 }
+
+.companies-list .vendor-company {
+  float: left;
+  margin-left: 40px;
+  margin-bottom: 40px;
+  width: calc(100% / 4 - 40px);
+  min-width: 260px !important;
+  border: 1px solid #e9edf1;
+}
+
+@media (max-width: 1890px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 4 - 40px);
+  }
+}
+
+@media (max-width: 1820px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 3 - 40px);
+
+  }
+}
+
+@media (max-width: 1480px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 2 - 40px);
+  }
+}
+
+@media (min-width: 2900px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 5 - 40px);
+  }
+}
+
+@media (min-width: 3400px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 6 - 40px);
+  }
+
+}
+
+@media (min-width: 3900px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 7 - 40px);
+  }
+}
+
+@media (min-width: 4400px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 8 - 40px);
+  }
+}
+
+@media (min-width: 4900px) {
+  .companies-list .vendor-company {
+    width: calc(100% / 9 - 40px);
+  }
+}
+
+.company-detail {
+  width: 10px;
+  height: 12px;
+  background-position: -780px -206px;
+}
+
