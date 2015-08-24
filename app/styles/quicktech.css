@@ -13751,10 +13751,13 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                 }
                                                 .content-wrapper .content-body .invoices.products li .sub-actions{
                                                   width: 65px;}
-                                                  .content-wrapper .content-body .invoices.products li .add-table-actions,
-                                                  .content-wrapper .content-body .invoices.services li .add-table-actions{
+                                                  .content-wrapper .content-body .invoices.products li .add-table-actions{
                                                     margin-right: 41px !important;
                                                     margin-top: 25px;
+                                                  }
+                                                  .content-wrapper .content-body .invoices.services li .add-table-actions{
+                                                    margin-right: 41px !important;
+                                                    margin-top: 30px;
                                                   }
                                                   .content-wrapper .content-body .invoices.products li.add-new,
                                                   .content-wrapper .content-body .invoices.services  > li.add-new{
@@ -13773,7 +13776,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                     margin-bottom: 0px;
                                                     padding-bottom: 0px  !important;
                                                   }
-                                                  .content-wrapper .content-body .invoices div.no-border li{
+                                                  .content-wrapper .content-body .invoices div.no-border li.edit-form, .content-wrapper .content-body .invoices div.create-product li{
                                                     margin-bottom: 30px  !important;
                                                   }
                                                   .content-wrapper .content-body .invoices li.edit-form > div > div{
@@ -13931,6 +13934,10 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                         .content-wrapper .content-body .invoices > li:last-child{
                                                           border-bottom:0px;
                                                           padding-bottom:30px;
+                                                        }
+                                                        .content-wrapper .content-body .default .invoices > li:last-child{
+                                                          border-bottom:0px;
+                                                          padding-bottom:0px;
                                                         }
                                                         .content-wrapper .content-body .invoices > li:last-child.add-new{
                                                           border-bottom:0px;
