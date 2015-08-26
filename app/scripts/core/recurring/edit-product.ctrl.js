@@ -26,8 +26,6 @@
           };
         }
 
-        $scope.numberPattern = /^\d?[0-9]{0,17}$/;
-
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
         };

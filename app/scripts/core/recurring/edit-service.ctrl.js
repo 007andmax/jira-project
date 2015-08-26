@@ -24,8 +24,6 @@
           };
         }
 
-        $scope.numberPattern = /^\d?[0-9]{0,17}$/;
-
         $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.recurringCompany.company.id);
 
         $scope.isShowingErrors = function (form, fieldName) {

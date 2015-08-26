@@ -50,7 +50,7 @@
         </div>
         <input type="text" class="form-control" placeholder="Amount" tabindex="2" name="amount"
                tooltip="Product cost {{ editProduct.item.cost | currency: '$'  }}" product-cost-validate="editProduct"
-               ng-required="true" ng-model="editProduct.sum" hard-reset-pattern="numberPattern">
+               ng-required="true" ng-model="editProduct.sum" hard-reset-pattern="decimalNumberPattern">
       </div>
     </div>
     <div class="add-more  new clearfix">
