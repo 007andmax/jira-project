@@ -14,7 +14,8 @@
             id: $scope.service.id,
             description: $scope.service.description,
             date: $scope.service.date,
-            quantity: $scope.service.quantity * 60,
+            quantity: Math.floor($scope.service.quantity * 60),
+            sum: $scope.service.sum,
             item: {
               versionedId: $scope.service.item.versionedId,
               name: $scope.service.item.name,
@@ -36,25 +37,25 @@
         };
 
         $scope.saveService = function (form) {
+
           if (form.$valid) {
             $scope.disabledCreateServiceButton = true;
-            RecurringService.saveRecInvServiceExpense($scope.invoice.id, $scope.editService.id ? {
-              id: $scope.editService.id,
+
+            var expense = {
               description: $scope.editService.description,
-              date: $scope.editService.date,
               quantity: $scope.editService.quantity / 60,
+              sum: $scope.editService.sum,
               item: {
                 versionedId: $scope.editService.item.versionedId,
                 name: $scope.editService.item.name
               }
-            } : {
-              description: $scope.editService.description,
-              quantity: $scope.editService.quantity / 60,
-              item: {
-                versionedId: $scope.editService.item.versionedId,
-                name: $scope.editService.item.name
-              }
-            }, function () {
+            };
+
+            if ($scope.editService.id) {
+              expense.id = $scope.editService.id;
+            }
+
+            RecurringService.saveRecInvServiceExpense($scope.invoice.id, expense, function () {
               $scope.disabledCreateServiceButton = false;
               $scope.$emit('cancelEditForm');
             })

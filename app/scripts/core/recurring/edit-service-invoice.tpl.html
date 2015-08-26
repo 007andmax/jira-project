@@ -39,9 +39,14 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="col-wrapper">
-        <input type="text" class="form-control" placeholder="Amount"
-               value="{{ editService.quantity / 60 * editService.item.rate || '' }}" READONLY>
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'amount')}">
+        <div ng-messages="editServiceInvoiceForm.amount.$error"
+             ng-if="isShowingErrors(editServiceInvoiceForm, 'amount')">
+          <div class="qt-error-msg" ng-message="required">Amount field cannot be left empty.</div>
+        </div>
+        <input type="text" class="form-control" placeholder="Amount" tabindex="3"
+               ng-model="editService.sum" ng-required="true" name="amount"
+               hard-reset-pattern="numberPattern">
       </div>
     </div>
     <div class="add-more  new clearfix">

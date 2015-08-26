@@ -17,10 +17,11 @@
             description: $scope.product.description,
             quantity: $scope.product.quantity,
             serialNumber: $scope.product.serialNumber,
+            sum: $scope.product.sum,
             item: {
               versionedId: $scope.product.item.versionedId,
               name: $scope.product.item.name,
-              sale: $scope.product.item.sale
+              cost: $scope.product.item.cost
             }
           };
         }
