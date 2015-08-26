@@ -95,7 +95,8 @@
                        is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
               </div>
             </div>
-            <div address-autocomplete ng-model="editCompany.primaryAddress"
+            <div address-autocomplete template-page="companies"
+                 ng-model="editCompany.primaryAddress"
                  show-validation-messages="triedToSave"></div>
             <div class="row-wrapper clearfix">
               <div class="form-group form-group-full dropdown"
@@ -124,7 +125,9 @@
           <div class="user-fields clearfix">
             <div ng-repeat="location in editCompany.addresses">
               <div ng-form="locationForm">
-                <div address-autocomplete ng-model="location" show-validation-messages="triedToSave"></div>
+                <div address-autocomplete template-page="companies"
+                     ng-model="location" show-validation-messages="triedToSave">
+                </div>
 
                 <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
