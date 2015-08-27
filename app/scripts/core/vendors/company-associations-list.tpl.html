@@ -3,7 +3,7 @@
   <li class="clearfix" ng-repeat="associationsCompany in vendor.companyAssociations">
     <div class="name">{{ associationsCompany.company.name }}</div>
     <div class="clearfix"></div>
-    <div class="art clearfix">{{ vendor.primaryAddress.address }}</div>
+    <div class="art clearfix">{{ associationsCompany.company.primaryAddress.address }}</div>
   </li>
 
 </ul>

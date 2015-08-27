@@ -19,10 +19,10 @@
     <div class="clearfix">
       <div class="ci number clearfix">
         <span class="icn"
-              ng-class="{'icn-iphone': priorityPhoneNumber(contact.phoneNumbers).typeNumber === 'MOBILE',
-                           'icn-fax-machine': priorityPhoneNumber(contact.phoneNumbers).typeNumber === 'FAX',
-                           'icn-telephone': priorityPhoneNumber(contact.phoneNumbers).typeNumber === 'OFFICE'}"></span>
-        <span class="txt"> {{ priorityPhoneNumber(contact.phoneNumbers).number }}</span>
+              ng-class="{'icn-iphone': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'MOBILE',
+                           'icn-fax-machine': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'FAX',
+                           'icn-telephone': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'OFFICE'}"></span>
+        <span class="txt"> {{ getPhoneWithLowestNumber(contact.phoneNumbers).number }}</span>
       </div>
 
     </div>
