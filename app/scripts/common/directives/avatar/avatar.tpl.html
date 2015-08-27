@@ -1,6 +1,6 @@
 <div class="avatar-content default clearfix">
   <div class="avatar">
-    <img ng-src="{{ getUrl(model) }}" class="no-avatar" ng-if="!model.cropped.id">
+    <img ng-src="{{ getUrl() }}" class="no-avatar" ng-if="!model.cropped.id">
     <img ng-src="/file/{{ model.cropped.id }}" class="no-avatar" ng-if="model.cropped.id">
 
     <div class="reposition-wrapper" ng-show="model.origin || getError().loadingInProcess">

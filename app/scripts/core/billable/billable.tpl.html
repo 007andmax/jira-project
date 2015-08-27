@@ -71,7 +71,7 @@
               </a>
               <ul class="invoices" ets-slider ng-controller="quicktech.core.billable.companyTicketsCtrl"
                   ng-if="showTickets">
-                <li ng-repeat="ticket in companyBillableTickets | orderBy:'-closedAt'" qt-toggle-slider
+                <li ng-repeat="ticket in companyBillableTickets | orderBy:'closedAt'" qt-toggle-slider
                     show-model-element="{{ 'showTicket-' + ticket.id }}">
                   <a href='javascript:void(0)' qt-ts-toggler>
                     <div class="ui-checkbox ui-checkbox-warning pull-left" stop-propagation="click">

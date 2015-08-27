@@ -103,7 +103,7 @@
                    ng-class="{error: isShowingErrors(companyForm, 'companyDescription')}">
                 <label>description of business</label>
 
-                <div ng-messages="companyForm.companyName.$error"
+                <div ng-messages="companyForm.companyDescription.$error"
                      ng-if="isShowingErrors(companyForm, 'companyDescription')">
                   <div class="qt-error-msg" ng-message="required">
                     Please enter a brief description of the company’s business.
@@ -184,7 +184,7 @@
             <div class="content clearfix">
               <div ng-repeat="contact in editCompany.contacts">
                 <div ng-form="contactForm">
-                  <div edit-avatar ng-model="contact.avatar" model-name="contact"></div>
+                  <div edit-avatar ng-model="contact.avatar" model-name="contact" model-id="{{ contact.id }}"></div>
 
                   <div class="user-fields clearfix">
                     <div class="form-group dropdown pull-left"

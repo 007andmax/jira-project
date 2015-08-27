@@ -34,7 +34,9 @@
             throw 'model-name must be specified! Available values - ["user", "contact"]';
           }
 
-          scope.getUrl = urlGetters[attrs.modelName];
+          scope.getUrl = function () {
+            return urlGetters[attrs.modelName]({id: attrs.modelId});
+          };
 
           scope.getError = function () {
             return ctrl.$error;
@@ -132,7 +134,7 @@
 
           function fixScroll() {
             setTimeout(function () {
-              wind.scrollTop(windowScrollTop)
+              wind.scrollTop(windowScrollTop);
             }, 0);
           }
 
