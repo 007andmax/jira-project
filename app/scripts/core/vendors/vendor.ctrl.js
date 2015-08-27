@@ -17,12 +17,10 @@
 
         //todo get contacts from db
 
-        $scope.changeCurrentLocation = function (change) {
-          change === 'right' ? $scope.locationIndex++ : $scope.locationIndex--;
-          if (0 <= $scope.locationIndex && $scope.locationIndex < $scope.vendor.addresses.length) {
+        $scope.changeCurrentLocation = function (index) {
+          if (0 <= index && index < $scope.vendor.addresses.length) {
+            $scope.locationIndex = index;
             $scope.currentLocation = $scope.vendor.addresses[$scope.locationIndex];
-          } else {
-            change === 'right' ? $scope.locationIndex-- : $scope.locationIndex++;
           }
         };
 
