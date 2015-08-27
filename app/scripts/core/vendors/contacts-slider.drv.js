@@ -14,6 +14,18 @@
 
             var shownId;
 
+            $scope.getUserName = function (user) {
+              return user.firstName + ' ' + user.lastName;
+            };
+
+            $scope.priorityPhoneNumber = function (phoneNumbers) {
+              for (var i = 0; i < phoneNumbers.length; i++) {
+                if (phoneNumbers[i].priority === 1) {
+                  return phoneNumbers[i];
+                }
+              }
+            };
+
             $scope.$watch('ngModel', function () {
               if (!$scope.contacts) {
                 shownId = ctrl.$viewValue[0].id;

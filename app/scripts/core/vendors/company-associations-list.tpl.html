@@ -3,7 +3,7 @@
   <li class="clearfix" ng-repeat="associationsCompany in vendor.companyAssociations">
     <div class="name">{{ associationsCompany.company.name }}</div>
     <div class="clearfix"></div>
-    <div class="art clearfix">8 Matilda St, Toronto, ON M4M 1L9, Canada</div>
+    <div class="art clearfix">{{ vendor.primaryAddress.address }}</div>
   </li>
 
 </ul>

@@ -82,9 +82,9 @@
               <div class="arrows" ng-show="accordionStatus.openLocations" style="display: block;">
                 <a href="javascript:void(0)" class="icn left-arrow"
                    ng-class="{disabled: locationIndex <= 0}"
-                   ng-click="changeCurrentLocation('left')"></a>
+                   ng-click="changeCurrentLocation(locationIndex - 1)"></a>
                 <a href="javascript:void(0)" class="icn right-arrow"
-                   ng-click="changeCurrentLocation('right')"
+                   ng-click="changeCurrentLocation(locationIndex + 1)"
                    ng-class="{disabled: locationIndex >= vendor.addresses.length - 1 }"></a>
 
               </div>

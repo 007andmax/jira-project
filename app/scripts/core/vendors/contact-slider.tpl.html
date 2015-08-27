@@ -6,7 +6,7 @@
     </a>
 
     <div class="user-inf pull-left user-finfo" style="display:block" ng-show="$index === 0">
-      <h4 class="name">{{ contact.firstName + ' ' + contact.lastName }}</h4>
+      <h4 class="name">{{ getUserName(contact) }}</h4>
 
       <div class="status pull-left"><span
         class="label label-white label-ticket-number">{{ contact.designation }}</span>
@@ -17,13 +17,12 @@
   </div>
   <div class="user-finfo" style="display:block" ng-show="$index === 0">
     <div class="clearfix">
-      <div class="ci number clearfix"
-           ng-repeat="phoneNumber in contact.phoneNumbers | orderBy: 'priority'">
+      <div class="ci number clearfix">
         <span class="icn"
-              ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
-                           'icn-fax-machine': phoneNumber.typeNumber === 'FAX',
-                           'icn-telephone': phoneNumber.typeNumber === 'OFFICE'}"></span>
-        <span class="txt"> {{ phoneNumber.number }}</span>
+              ng-class="{'icn-iphone': priorityPhoneNumber(contact.phoneNumbers).typeNumber === 'MOBILE',
+                           'icn-fax-machine': priorityPhoneNumber(contact.phoneNumbers).typeNumber === 'FAX',
+                           'icn-telephone': priorityPhoneNumber(contact.phoneNumbers).typeNumber === 'OFFICE'}"></span>
+        <span class="txt"> {{ priorityPhoneNumber(contact.phoneNumbers).number }}</span>
       </div>
 
     </div>
