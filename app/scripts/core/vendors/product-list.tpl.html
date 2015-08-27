@@ -1,0 +1,19 @@
+<ul class="products-list">
+
+  <li class="clearfix" ng-repeat="product in vendor.products">
+    <div class="name"><span class="product-name">{{ product.name }}</span>
+              <span class="icns icn-description"
+                    popover-placement="bottom" popover="{{ product.description }}" popover-trigger="mouseenter"
+                    aria-describedby="popover188920"></span><span
+        class="price">{{ product.sale | currency: '$': 0 }}</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="art clearfix">{{ product.category.name }} #{{ product.code }}</div>
+  </li>
+  <li class="clearfix loading">
+    <div class="l1"></div>
+    <div class="l2"></div>
+    <div class="clearfix"></div>
+    <div class="l3"></div>
+  </li>
+</ul>

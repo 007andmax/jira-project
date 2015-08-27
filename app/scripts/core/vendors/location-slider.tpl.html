@@ -1,0 +1,27 @@
+<div class="location active">
+  <div class="panel-heading">Billing Address</div>
+  <div class="billing-address">
+    <p class="post-address">{{ currentLocation.address }}</p>
+
+    <div class="site-ref dropdown">
+      <div class="btn-location" data-toggle="popover-location-right" data-container="body"
+           data-placement="bottom" data-original-title="" title="">
+        <span class="icn-sb-location pull-left"></span>
+        Site Ref. “TCL 01”
+      </div>
+    </div>
+    <div class="about-company">
+      <div class="company"><span class="icn time-zone"></span>
+        GMT/{{ currentLocation.locale.description.match(gmtPattern)[0] }}
+        <span class="dot-sep"></span> {{ currentLocation.locale.description.match(hourPattern)[0] }} hour
+      </div>
+      <div class="company" ng-repeat="phoneNumber in currentLocation.phoneNumbers | orderBy: 'priority'">
+                      <span class="icn"
+                            ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                           'icn-fax-machine': phoneNumber.typeNumber === 'FAX',
+                           'icn-telephone': phoneNumber.typeNumber === 'OFFICE'}"></span>
+        {{ phoneNumber.number }}
+      </div>
+    </div>
+  </div>
+</div>
