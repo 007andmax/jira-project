@@ -41,6 +41,9 @@
           };
 
           element.on('click', '[change-avatar-button]', function () {
+            if (ctrl.$error.loadingInProcess) {
+              return;
+            }
             var file = element.find('input[type=file]');
             file.replaceWith(file = file.clone(true));
             file.trigger('click');
@@ -50,39 +53,15 @@
           element.on('click', '[change-position-button]', function (e) {
 
             var avatar = {
-              scale: scope.model.scale,
+              id: scope.model.id,
               origin: scope.model.origin,
               x: scope.model.x,
-              y: scope.model.y
+              y: scope.model.y,
+              w: scope.model.w,
+              h: scope.model.h
             };
 
-            var img = new Image;
-
-            img.onload = function () {
-              var modalInstance = openModalCropper(img, avatar);
-
-              modalInstance.result.then(function (cropped) {
-                fixScroll();
-                if (avatar.scale != scope.model.scale
-                  || avatar.x != scope.model.x
-                  || avatar.y != scope.model.y) {
-
-                  ctrl.$setValidity('loadingInProcess', false);
-
-                  FilesService.createImageFromBase64Url(cropped, function (cropped) {
-                    avatar.cropped = cropped;
-                    ctrl.$setViewValue(avatar);
-                    ctrl.$setValidity('loadingInProcess', true);
-                  });
-                }
-              }, function () {
-                fixScroll();
-                console.log('cancel')
-              });
-            };
-
-            img.src = '/file/' + scope.model.origin.id;
-
+            crop(avatar, true);
           });
 
           //change avatar
@@ -91,51 +70,47 @@
 
             if (validate(file, ctrl, scope)) {
 
-              var avatar = {
-                scale: 50
-              };
+              var avatar = {};
 
-              var img = new Image;
+              if (scope.model) {
+                avatar.id = scope.model.id;
+              }
 
-              img.onload = function () {
-                var modalInstance = openModalCropper(img, avatar);
+              ctrl.$setValidity('loadingInProcess', false);
+              scope.$apply();
 
-                modalInstance.result.then(function (cropped) {
+              FilesService.create(file, undefined, function (origin) {
+                ctrl.$setValidity('loadingInProcess', true);
+                avatar.origin = origin;
 
-                  ctrl.$setValidity('loadingInProcess', false);
-
-                  FilesService.create(file, undefined, function (origin) {
-                    avatar.origin = origin;
-                    finish();
-                  }, undefined, true);
-
-                  FilesService.createImageFromBase64Url(cropped, function (cropped) {
-                    avatar.cropped = cropped;
-                    finish();
-                  });
-
-                  var finished = 0;
-
-                  function finish() {
-
-                    finished++;
-
-                    if (finished >= 2) {
-                      ctrl.$setViewValue(avatar);
-                      ctrl.$setValidity('loadingInProcess', true);
-                    }
-                  }
-                }, function () {
-                  console.log('cancel')
-                });
-              };
-
-              img.src = URL.createObjectURL(file);
+                crop(avatar, false);
+              }, undefined, true);
 
             }
           });
 
-          function openModalCropper(img, avatar) {
+          function crop(avatar, isReposition) {
+            var modalInstance = openModalCropper(avatar, isReposition);
+
+            modalInstance.result.then(function () {
+              fixScroll();
+
+              ctrl.$setValidity('loadingInProcess', false);
+
+              FilesService.cropAvatar(avatar, function (cropped) {
+                avatar.cropped = cropped;
+
+                ctrl.$setViewValue(avatar);
+                ctrl.$setValidity('loadingInProcess', true);
+              });
+
+            }, function () {
+              fixScroll();
+              console.log('cancel')
+            });
+          }
+
+          function openModalCropper(avatar, isReposition) {
 
             windowScrollTop = wind.scrollTop();
 
@@ -145,8 +120,8 @@
               templateUrl: '/html/scripts/common/directives/avatar/crop.tpl.html',
               controller: 'quicktech.common.directives.avatar.cropCtrl',
               resolve: {
-                image: function () {
-                  return img;
+                isReposition: function () {
+                  return isReposition;
                 },
                 avatar: function () {
                   return avatar;

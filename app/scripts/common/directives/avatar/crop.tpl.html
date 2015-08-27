@@ -1,4 +1,4 @@
-<div class="modal-customize-avatr fade in show" canvas-crop>
+<div class="modal-customize-avatr fade in show" crop ng-model="avatar" is-reposition="isReposition">
   <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header clearfix">
@@ -8,21 +8,30 @@
         <h4 class="modal-title pull-left">Select crop size<span class="dot-sep"></span></h4>
         <span class="ticket-numer pull-left">Drag the photo around or use zoom slider</span>
       </div>
-      <div class="modal-body">
 
-        <div class="crop-area">
-          <canvas width="578px" height="480px" style="cursor: move"></canvas>
+      <div class="modal-body" style="width:578px; height: 480px">
+        <div crop-box style="width:578px; height:480px;"></div>
+        <div id="uploadBox">
+          <div id="showProgress"></div>
         </div>
-
       </div>
+
       <div class="modal-footer">
-        <div class="row-wrapper clearfix">
-          <div zoom-slider ng-model="avatar.scale"></div>
+        <div id="cropBoxControls" class="row-wrapper clearfix">
+          <div class="zoom-slider pull-left">
+            <a  href="" class="pull-left icn icn-zoom-minus" icn-zoom-minus></a>
+            <div class="range-wrapper pull-left">
+              <input range-zoom type="range" max="130" min="0">
+            </div>
+            <a  href="" class="pull-right icn icn-zoom-plus" icn-zoom-plus></a>
+          </div>
+
           <div class="form-group actions-wrapper pull-right">
             <button type="button" class="btn btn-scooter" ng-click="save()">Continue</button>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

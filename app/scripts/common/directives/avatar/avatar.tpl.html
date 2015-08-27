@@ -12,7 +12,8 @@
   </div>
   <div class="choose-file">
     <div class="select-file"><input type="file" accept=".jpg,.jpeg,.gif,.png"/>
-      <button type="button" class="btn btn-gray pull-left" change-avatar-button>
+      <button type="button" class="btn btn-gray pull-left" change-avatar-button
+              ng-disabled="getError().loadingInProcess">
         Choose Avatar
       </button>
       <span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>
