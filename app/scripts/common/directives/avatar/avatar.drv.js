@@ -28,6 +28,7 @@
         link: function (scope, element, attrs, ctrl) {
 
           var wind = $(window),
+            errorMessage = element.find('[error-message]'),
             windowScrollTop;
 
           if (!urlGetters[attrs.modelName]) {
@@ -41,15 +42,6 @@
           scope.getError = function () {
             return ctrl.$error;
           };
-
-          element.on('click', '[change-avatar-button]', function () {
-            if (ctrl.$error.loadingInProcess) {
-              return;
-            }
-            var file = element.find('input[type=file]');
-            file.replaceWith(file = file.clone(true));
-            file.trigger('click');
-          });
 
           //reposition
           element.on('click', '[change-position-button]', function (e) {
@@ -66,11 +58,23 @@
             crop(avatar, true);
           });
 
-          //change avatar
-          element.on('change', 'input[type=file]', function (e) {
-            var file = this.files[0];
+          element.find('[change-avatar-button]').fileUploader({
+            uploadUrl: '/file?isAvatar=true',
+            uploadName: 'file',
+            maxUploadSize: 4 * 1024 * 1024,
+            accpetType: '.jpg,.png,.gif',
+            allowedExtensions: ['jpg', 'png', 'gif'],
+            minImageWidth: 244,
+            minImageHeight: 244,
 
-            if (validate(file, ctrl, scope)) {
+            onProgress: function (progress) {
+              ctrl.$setValidity('loadingInProcess', false);
+              console.log(progress);
+            },
+            onSuccess: function (data) {
+              console.log(data);
+
+              errorMessage.hide();
 
               var avatar = {};
 
@@ -78,16 +82,17 @@
                 avatar.id = scope.model.id;
               }
 
-              ctrl.$setValidity('loadingInProcess', false);
+              avatar.origin = data;
+
+              crop(avatar, false);
+
+              ctrl.$setValidity('loadingInProcess', true);
               scope.$apply();
-
-              FilesService.create(file, undefined, function (origin) {
-                ctrl.$setValidity('loadingInProcess', true);
-                avatar.origin = origin;
-
-                crop(avatar, false);
-              }, undefined, true);
-
+            },
+            onFailure: function (message) {
+              ctrl.$setValidity('loadingInProcess', true);
+              errorMessage.show();
+              errorMessage.text(message);
             }
           });
 

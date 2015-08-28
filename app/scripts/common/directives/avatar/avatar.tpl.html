@@ -11,18 +11,15 @@
     </div>
   </div>
   <div class="choose-file">
-    <div class="select-file"><input type="file" accept=".jpg,.jpeg,.gif,.png"/>
+    <div class="select-file">
       <button type="button" class="btn btn-gray pull-left" change-avatar-button
               ng-disabled="getError().loadingInProcess">
         Choose Avatar
       </button>
       <span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>
     </div>
-    <div class="file-type pull-left ">maximum size of 2 MB. jpg, jpeg, GIF, PNG.</div>
+    <div class="file-type pull-left ">maximum size of 4 MB. jpg, GIF, PNG.</div>
 
-    <div ng-messages="getError()">
-      <div class="qt-error-msg" ng-message="maxsize">File is too large</div>
-      <div class="qt-error-msg" ng-message="filetype">Illegal type of file</div>
-    </div>
+    <div error-message></div>
   </div>
 </div>
