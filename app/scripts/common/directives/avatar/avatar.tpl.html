@@ -14,11 +14,11 @@
     <div class="select-file">
       <button type="button" class="btn btn-gray pull-left" change-avatar-button
               ng-disabled="getError().loadingInProcess">
-        Choose Avatar
+       {{ model.origin ? 'Change': 'Choose' }} Avatar
       </button>
       <span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>
     </div>
-    <div class="file-type pull-left ">maximum size of 4 MB. jpg, GIF, PNG.</div>
+    <div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>
 
     <div error-message></div>
   </div>

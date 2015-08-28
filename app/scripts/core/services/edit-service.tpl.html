@@ -17,9 +17,15 @@
         </div>
       </div>
       <div class="col-2 normal">
-        <div class="col-wrapper one">
+        <div class="col-wrapper one" ng-class="{error: isShowingErrors(editServiceForm, 'timeBlock')}">
+          <div ng-messages="editServiceForm.timeBlock.$error"
+               ng-if="isShowingErrors(editServiceForm, 'timeBlock')">
+            <div class="qt-error-msg" ng-message="required">Time Slice is required</div>
+            <div class="qt-error-msg" ng-message="invalidwhen">Time Slice should be greater than 0</div>
+          </div>
           <input type="text" class="form-control" placeholder="Min. Time Slice" ng-model="editService.timeBlock"
-                 ng-disabled="!service.isDefault && service" hard-reset-pattern="numberPattern">
+                 ng-disabled="!service.isDefault && service" hard-reset-pattern="numberPattern"
+                 invalid-when="editService.timeBlock <= 0" ng-required="true" name="timeBlock">
         </div>
       </div>
 
@@ -41,8 +47,8 @@
         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
            ng-click="cancelEditForm()">Cancel</a>
         <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-           ng-click="saveEditService(editServiceForm)" ng-disabled="disabledSaveButton">{{ editService.id ?
-          'Save Changes' : 'Create' }}</a>
+           ng-click="saveEditService(editServiceForm)" ng-disabled="editServiceForm.$invalid || disabledSaveButton">
+          {{ editService.id ? 'Save Changes' : 'Create' }}</a>
       </div>
     </div>
   </form>

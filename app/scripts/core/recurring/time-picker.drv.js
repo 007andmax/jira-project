@@ -6,18 +6,17 @@
     return {
       restrict: 'A',
       require: 'ngModel',
-      link: function (scope, element) {
+      link: function (scope, element, attr, ctrl) {
 
         var today = new Date();
 
         element.datetimepicker({
           viewMode: 'years',
-          keepOpen: true,
+          keepOpen: false,
           format: 'DD MMM YYYY',
-          minDate: today.setDate(today.getDate() + 1)
+          minDate: today
         }).on('dp.change', function (event) {
-          element.blur();
-          scope.createInvoice.sentOn = event.date._d;
+          ctrl.$setViewValue(event.date._d);
         });
       }
 

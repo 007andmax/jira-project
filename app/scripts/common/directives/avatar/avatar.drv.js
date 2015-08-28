@@ -61,7 +61,7 @@
           element.find('[change-avatar-button]').fileUploader({
             uploadUrl: '/file?isAvatar=true',
             uploadName: 'file',
-            maxUploadSize: 4 * 1024 * 1024,
+            maxUploadSize: 2 * 1024 * 1024,
             accpetType: '.jpg,.png,.gif',
             allowedExtensions: ['jpg', 'png', 'gif'],
             minImageWidth: 244,
