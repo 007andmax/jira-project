@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.vendors").directive("contactsSlider",
-    ['$state', '$modal',
-      function ($state, $modal) {
+    ['$state', '$modal', '$rootScope',
+      function ($state, $modal, $rootScope) {
         return {
           restrict: 'A',
           require: 'ngModel',
@@ -14,16 +14,18 @@
 
             var shownId;
 
-            $scope.getUserName = function (user) {
-              return user.firstName + ' ' + user.lastName;
-            };
+            $scope.getUserName = $rootScope.getUserName;
 
-            $scope.priorityPhoneNumber = function (phoneNumbers) {
+            $scope.getPhoneWithLowestNumber = function (phoneNumbers) {
+              var priority;
+              var index;
               for (var i = 0; i < phoneNumbers.length; i++) {
-                if (phoneNumbers[i].priority === 1) {
-                  return phoneNumbers[i];
+                if (priority === undefined || phoneNumbers[i].priority < priority) {
+                  priority = phoneNumbers[i].priority;
+                  index = i;
                 }
               }
+              return phoneNumbers[index];
             };
 
             $scope.$watch('ngModel', function () {
