@@ -10,10 +10,10 @@
                ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceDate')">
             <div class="qt-error-msg" ng-message="required">Date field cannot be left empty.</div>
           </div>
-          <input type="text" time-picker ng-required="true"
-                 class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-                 data-toggle="dropdown" aria-expanded="true" placeholder="Date" name="createInvoiceDate"
-                 ng-model="createInvoice.sentOn">
+          <input type="text" class="form-control" name="createInvoiceDate" ng-model="createInvoice.sentOn"
+                 datepicker-popup="dd MMM yyyy" is-open="datepickerIsOpened" min-date="minSentOnDate" show-weeks="false"
+                 show-button-bar="false" ng-click="datepickerIsOpened = true" ng-required="true"
+                 class="form-control form-control-dropdown dropdown-toggle has-dropdown"/>
         </div>
       </div>
 

@@ -10,6 +10,9 @@
           $scope.actualInvoiceNumber = value;
         });
 
+        var day = 1000 * 60 * 60 * 24;
+        $scope.minSentOnDate = new Date(Date.now() + day);
+
         $scope.frequency = {
           WEEKLY: 'Weekly',
           MONTHLY: 'Monthly',
