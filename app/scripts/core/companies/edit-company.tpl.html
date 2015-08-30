@@ -328,71 +328,34 @@
                 <div class="form-group clearfix">
                   <label class="norm">Associated Vendor(s)</label>
                 </div>
-                <div class="dropdown">
-                  <div class="form-group" style="width: 100%;"
-                       popover="Enter vendor(s) to be associated with this company."
-                       popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                <div class="dropdown" vendor-association>
+                  <div class="form-group" style="width: 100%;">
+                    <div class="tokenfield form-control" va-tokenfield>
 
-                    <input type="text" class="form-control dropdown-toggle tokenfield" data-toggle="dropdown"
-                           value="Spectrum & Co." placeholder="Click here to add vendor..." ng-disabled="true">
-                    <ul class="dropdown-menu dropdown-subscribe">
-                      <li>
-                        <a tabindex="-1" href="#">
-                          <div class="clearfix">
-                            <label class="control checkbox pull-left">
-                              <input type="checkbox">
-                              <span class="control-indicator"></span>
-                            </label>
-                            Millennium Systems
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a tabindex="-1" href="#">
-                          <div class="clearfix">
-                            <label class="control checkbox pull-left">
-                              <input type="checkbox">
-                              <span class="control-indicator"></span>
-                            </label>
-                            Helmatic & Getanas Ltd.
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a tabindex="-1" href="#">
-                          <div class="clearfix">
-                            <label class="control checkbox pull-left">
-                              <input type="checkbox" checked>
-                              <span class="control-indicator"></span>
-                            </label>
-                            Spectrum & Co.
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a tabindex="-1" href="#">
-                          <div class="clearfix">
-                            <label class="control checkbox pull-left">
-                              <input type="checkbox">
-                              <span class="control-indicator"></span>
-                            </label>
-                            Jonas & John Inc.
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a tabindex="-1" href="#">
-                          <div class="clearfix">
-                            <label class="control checkbox pull-left">
-                              <input type="checkbox">
-                              <span class="control-indicator"></span>
-                            </label>
-                            Creative Computers
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
+                      <div class="token" ng-repeat="association in editCompany.companyAssociations">
+                        <span class="token-label" style="max-width: 467px;">{{ association.vendor.name }}</span>
+                        <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+                           ng-click="removeAssociation($index)"></a>
+                      </div>
+
+                      <input type="text" class="token-input" autocomplete="off" placeholder="Add more" tabindex="0"
+                             style="width: 80px;" ng-model="vendorFilter" va-input>
+                    </div>
                   </div>
+                  <ul class="dropdown-menu dropdown-subscribe" style="width: 100%; display:none" va-vendors>
+                    <li ng-repeat="vendor in vendors | filter:{name: vendorFilter} | orderBy: 'name'">
+                      <a tabindex="-1" href="javascript:void(0)">
+                        <div class="clearfix">
+                          <label class="control checkbox pull-left">
+                            <input type="checkbox" ng-model="vendorsSelection[vendor.id]"
+                                   ng-change="changeAssociation(vendor, vendorsSelection[vendor.id])">
+                            <span class="control-indicator"></span>
+                          </label>
+                          {{ vendor.name }}
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>

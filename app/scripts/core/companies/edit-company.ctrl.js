@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService', 'AddressesService',
-      'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$http',
+      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService, AddressesService,
-                SharedStateService, $stateParams, $state, $http) {
+                SharedStateService, $stateParams, $state, VendorsService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
@@ -15,7 +15,9 @@
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
+        $scope.vendorsSelection = {};
         $scope.companies = CompaniesService.getClientCompanies();
+        $scope.vendors = VendorsService.getAllForAutocomplete($scope);
         $scope.timezones = AddressesService.getAllLocales();
 
         $scope.$watch('companies.length', function (companiesCount) {
@@ -40,6 +42,12 @@
             if (!companyData.contacts || companyData.contacts.length === 0) {
               companyData.contacts = [getEmptyContact()];
             }
+
+            for (var i = 0; i < companyData.companyAssociations.length; i++) {
+              var association = companyData.companyAssociations[i];
+              $scope.vendorsSelection[association.vendor.id] = true;
+            }
+
           });
 
           $scope.editCompany = companyData;
@@ -48,7 +56,8 @@
           $scope.editCompany = {
             addresses: [{isPrimary: true}],
             contacts: [getEmptyContact()],
-            taxRates: []
+            taxRates: [],
+            companyAssociations: []
           };
         }
 
@@ -222,6 +231,27 @@
             $scope.newTaxRateFormShowErrors = false;
           } else {
             $scope.newTaxRateFormShowErrors = true;
+          }
+        };
+
+        $scope.removeAssociation = function (index) {
+          var association = $scope.editCompany.companyAssociations[index];
+          $scope.vendorsSelection[association.vendor.id] = false;
+          $scope.editCompany.companyAssociations.splice(index, 1);
+        };
+
+        $scope.changeAssociation = function (vendor, isAdd) {
+          if (isAdd) {
+            $scope.editCompany.companyAssociations.push({
+              vendor: vendor
+            })
+          } else {
+            for (var i = 0; i < $scope.editCompany.companyAssociations.length; i++) {
+              var association = $scope.editCompany.companyAssociations[i];
+              if (association.vendor.id === vendor.id) {
+                $scope.editCompany.companyAssociations.splice(i, 1);
+              }
+            }
           }
         };
 

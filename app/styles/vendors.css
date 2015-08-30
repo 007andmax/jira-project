@@ -294,13 +294,13 @@
   overflow: hidden;
 }
 
-.companies-list .company.vendors .products.scroll-pane .jspVerticalBar .jspArrow {
-  height: 14px !important;
-}
+/*.companies-list .company.vendors .products.scroll-pane .jspVerticalBar .jspArrow {*/
+  /*height: 14px !important;*/
+/*}*/
 
-.companies-list .company.vendors .products.scroll-pane .jspVerticalBar .jspDrag {
-  left: -9px;
-}
+/*.companies-list .company.vendors .products.scroll-pane .jspVerticalBar .jspDrag {*/
+  /*left: -9px;*/
+/*}*/
 
 .companies-list .company.vendors.company-profile .primary {
   top: 0px;
@@ -361,13 +361,13 @@
 }
 
 .companies-list .company.vendors.company-profile .products.scroll-pane {
-  height: 357px;
+  height: 285px;
   max-height: 357px;
 }
 
-.companies-list .company.vendors.company-profile .products.scroll-pane .jspContainer .jspPane {
-  padding-top: 70px !important;
-}
+/*.companies-list .company.vendors.company-profile .products.scroll-pane .jspContainer .jspPane {*/
+  /*padding-top: 70px !important;*/
+/*}*/
 
 .content-body.vendors .companies-list .vendors.company-profile .primary .panel-body.loc {
   padding-bottom: 0px;

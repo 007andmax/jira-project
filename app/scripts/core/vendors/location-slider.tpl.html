@@ -3,13 +3,13 @@
   <div class="billing-address">
     <p class="post-address">{{ currentLocation.address }}</p>
 
-    <!--<div class="site-ref dropdown">-->
-    <!--<div class="btn-location" data-toggle="popover-location-right" data-container="body"-->
-    <!--data-placement="bottom" data-original-title="" title="">-->
-    <!--<span class="icn-sb-location pull-left"></span>-->
-    <!--Site Ref. “TCL 01”-->
-    <!--</div>-->
-    <!--</div>-->
+    <div class="site-ref dropdown">
+      <div class="btn-location" data-toggle="popover-location-right" data-container="body"
+           data-placement="bottom" data-original-title="" title="">
+        <span class="icn-sb-location pull-left"></span>
+        Site Ref. “TCL 01”
+      </div>
+    </div>
     <div class="about-company">
       <div class="company"><span class="icn time-zone"></span>
         GMT/{{ currentLocation.locale.description.match(gmtPattern)[0] }}
