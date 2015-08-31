@@ -13,7 +13,7 @@
           $scope.editService = {
             id: $scope.service.id,
             description: $scope.service.description,
-            date: $scope.service.date,
+            date: $scope.toUTCDate($scope.service.date),
             quantity: Math.floor($scope.service.quantity * 60),
             sum: $scope.service.sum,
             item: {

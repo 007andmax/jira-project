@@ -359,7 +359,7 @@
 				<div class="table-wrapper clearfix" ng-if=" ticketUpdate.type === 'SERVICE' " ng-repeat="service in ticketUpdate.services">
 
 					<div class="table-content service-table pull-left" ng-if="service.editMode === undefined;">
-						<div class="col-1"> {{ getFormattedDate(service.date) }} </div>
+						<div class="col-1"> {{ getFormattedDate(toUTCDate(service.date)) }} </div>
 						<div class="col-2"> {{ service.item.name }} </div>
 						<div class="col-3" data-popover="true" data-html="true" data-content=" {{ service.description }}"> {{ service.description ? service.description : '&nbsp;' }} </div>
 						<div class="col-4">
