@@ -408,6 +408,9 @@ cursor: pointer;
   margin-right: 20px;
   margin-bottom: 30px;
 }
+.invoice-list .invoice-controls div{
+  float: left;
+}
 .invoice-list .invoice-icon {
   float: left;
   width: 38px;
