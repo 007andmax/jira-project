@@ -373,11 +373,11 @@ th {
   src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
   }*/
   @font-face {
-  font-family: 'Glyphicons Halflings';
+    font-family: 'Glyphicons Halflings';
 
-  src: url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');
-  src: url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
+    src: url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');
+    src: url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  }
 
   /* line 22, ../sass/bootstrap/_glyphicons.scss */
   .glyphicon {
@@ -810,12 +810,12 @@ th {
 
   /* line 119, ../sass/bootstrap/_glyphicons.scss */
   .glyphicon-chevron-left:before {
-    content: "\e079";
+    content: '\e079';
   }
 
   /* line 120, ../sass/bootstrap/_glyphicons.scss */
   .glyphicon-chevron-right:before {
-    content: "\e080";
+    content: '\e080';
   }
 
   /* line 121, ../sass/bootstrap/_glyphicons.scss */
@@ -9765,7 +9765,7 @@ a.btn-remote-access{
       .modal-dialog.create-ticket.max{
         margin-top: -392px;}
         .modal-dialog.payment-received{
-          margin-top: -315px;}
+          margin-top: -235px;}
           /* line 51, ../sass/bootstrap/_modals.scss */
           .modal-content {
             position: relative;
@@ -10130,7 +10130,7 @@ a.btn-remote-access{
               /* line 7, ../sass/bootstrap/_tooltip.scss */
               .tooltip {
                 position: absolute;
-                z-index: 11070;
+                z-index: 110140;
                 display: block;
                 visibility: visible;
                 font-family: "myriad-pro", Helvetica, Arial, sans-serif;
@@ -13574,7 +13574,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   padding: 6px 12px;
 
                                                 }
-                                                .content-wrapper .content-body .invoices.recurring li div > .col-1, .content-wrapper .content-body .invoices.recurring li div > .col-2, .content-wrapper .content-body .invoices.recurring li div > .col-3, .content-wrapper .content-body .invoices.recurring li div > .col-4, .content-wrapper .content-body .invoices.recurring li div > .col-5 {
+                                                .content-wrapper .content-body .invoices.recurring li >  div >  [class^='col-']{
                                                   float:left;
                                                   color:#4e5e71;
                                                   position: relative;
@@ -13871,7 +13871,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   .content-wrapper .content-body .invoices.recurring .table-wrapper > .table-content .col-1 {
                                                     width: 230px;
                                                   }
-                                                  .content-wrapper .content-body .invoices li div > .col-5{
+                                                  .content-wrapper .content-body .invoices li > div > .col-5{
                                                     width: 112px;
                                                     text-align: right;
                                                   }
@@ -13892,11 +13892,12 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                   }
                                                   .content-wrapper .content-body .invoices.recurring .add-more{
                                                     margin: 30px 24px 25px;
-
                                                   }
                                                   .content-wrapper .content-body .invoices.recurring .add-more.new{
                                                     margin: 26px 24px 25px;
-
+                                                  }
+                                                  .content-wrapper .content-body .invoices.recurring.services .add-more.new{
+                                                    margin: 26px 24px 25px 0;
                                                   }
                                                   .content-wrapper .content-body .invoices.recurring .add-more a:before,
                                                   .content-wrapper .content-body .invoices.recurring .add-more a:after{
@@ -13940,6 +13941,12 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                         .content-wrapper .content-body .invoices > li:last-child{
                                                           border-bottom:0px;
                                                           padding-bottom:30px;
+                                                        }
+                                                        .content-wrapper .content-body .invoices.recurring.receivable > li:nth-last-child(2){
+                                                          border-bottom: 0;
+                                                        }
+                                                        .content-wrapper .content-body .invoices.recurring.receivable.receipt > li:nth-last-child(2){
+                                                          border-bottom: 1px solid #e9edf1;
                                                         }
                                                         .content-wrapper .content-body .default .invoices > li:last-child{
                                                           padding-bottom:0px;
@@ -14293,20 +14300,20 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                             margin-top: 13px;
                                                             padding: 0px;
                                                           }
-                                                          .content-wrapper .content-body .invoices li .date-wrapper{
+                                                          .content-wrapper .content-body .invoices > li .date-wrapper{
                                                             width: 130px;
                                                             margin-top: -10px;
                                                             position: relative;
                                                           }
-                                                          .content-wrapper .content-body .invoices li .date-wrapper .form-control{
+                                                          .content-wrapper .content-body .invoices > li .date-wrapper .form-control{
                                                             padding-left: 12px;
                                                           }
-                                                          .content-wrapper .content-body .invoices li .frequency-wrapper{
+                                                          .content-wrapper .content-body .invoices > li .frequency-wrapper{
                                                             width: 134px;
                                                             margin-top: -10px;
                                                             position: relative;
                                                           }
-                                                          .content-wrapper .content-body .invoices li .frequency-wrapper  input{
+                                                          .content-wrapper .content-body .invoices > li .frequency-wrapper  input{
                                                             padding-left: 29px !important;
                                                             font-weight: normal;
                                                           }
@@ -14363,17 +14370,17 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                           }
                                                           @media (max-width: 1500px){
 
-                                                            .content-wrapper .content-body .invoices.recurring li div > .col-1 {
+                                                            .content-wrapper .content-body .invoices.recurring li > div > .col-1 {
                                                               width:calc(100% - 554px);
                                                             }
                                                             .content-wrapper .content-body .invoices.recurring.services   li > div > .col-1 {
                                                               width:calc(100% - 318px);
                                                             }
 
-                                                            .content-wrapper .content-body .invoices.recurring li div > .col-3 {
+                                                            .content-wrapper .content-body .invoices.recurring li > div > .col-3 {
                                                               width: 159px;
                                                             }
-                                                            .content-wrapper .content-body .invoices.recurring li div > .col-4 {
+                                                            .content-wrapper .content-body .invoices.recurring li > div > .col-4 {
                                                               width: 109px;
                                                             }
                                                             .content-wrapper .content-body .invoices.receivable li > div > .col-2 {
@@ -14442,7 +14449,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
                                                                 width:200px;
 
                                                               }
-                                                              .content-wrapper .content-body .invoices.recurring li div > .col-2 {
+                                                              .content-wrapper .content-body .invoices.recurring li > div > .col-2 {
                                                                 width: 142px;
                                                               }
                                                               .content-wrapper .content-body .invoices  .table-wrapper > .table-content .col-0 {
@@ -20499,32 +20506,29 @@ height: 60px !important;
     */
 
 
-/*New Classes - Start */
+/* New Classes Start */
 
 .product-add-table-message{
-    /*background-color: #ABC;*/
-    height: 68px;
+    /*height: 68px;*/
     color: #f29c9a;
-    padding-top: 35px;
     padding-left: 84px;
 }
 
 .product-add-table-message > div{
     display: inline-block;
+    padding-top: 35px;
     margin-right: 10px;
 }
 
 .service-add-table-message{
-    /*background-color: #ABC;*/
-    height: 68px;
+    /*height: 68px;*/
     color: #f29c9a;
-    padding-top: 35px;
-    /*padding-left: 84px;*/
 }
 
 .service-add-table-message > div{
+    padding-top: 35px;
     display: inline-block;
     margin-right: 10px;
 }
 
-/*New Classes - End*/
+/* New Classes End */
