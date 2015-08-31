@@ -50,6 +50,12 @@
           $scope.company = '';
         };
 
+        $scope.toUTCDate = function (date) {
+          var date = new Date(date),
+            _utc = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+          return _utc;
+        };
+
       }]);
 
 }());
