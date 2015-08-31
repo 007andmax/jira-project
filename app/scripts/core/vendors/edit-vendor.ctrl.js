@@ -22,7 +22,7 @@
           var vendor = VendorsService.getOneById($stateParams.vendorId, function () {
 
             if (!vendor.addresses || vendor.addresses.length === 0) {
-              vendor.addresses = [{}];
+              vendor.addresses = [{isPrimary: true}];
             }
 
             if (!vendor.contacts || vendor.contacts.length === 0) {
@@ -78,7 +78,6 @@
         function getEmptyContact() {
           return {
             avatar: {
-              scale: 50
             },
             phoneNumbers: [{typeNumber: "MOBILE"}],
             subscription: {ticket: true}
@@ -169,16 +168,11 @@
               }
             }
             if (countSubscription < 1) {
-              subscribeError(true)
+              $scope.showSubscribeError = true
             } else {
-              subscribeError(false)
+              $scope.showSubscribeError = false
             }
           }
-          function subscribeError(value) {
-            $scope.showSubscribeError = value;
-            $scope.vendorForm.$setValidity("subscribe", !value);
-          }
-
         }, true);
 
       }]);

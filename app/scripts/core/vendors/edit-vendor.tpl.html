@@ -270,7 +270,8 @@
                       </div>
                       <div class="row-wrapper clearfix">
                         <label class="control checkbox pull-left primaryc">
-                          <input type="checkbox" ng-model="contact.subscription.ticket">
+                          <input type="checkbox" ng-model="contact.subscription.ticket"
+                                 invalid-when="showSubscribeError">
                           <span class="control-indicator"></span>
                           Subscribe to ticket updates
                           <span ng-if="showSubscribeError"
