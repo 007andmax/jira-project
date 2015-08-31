@@ -95,8 +95,8 @@
           </accordion-group>
 
           <accordion-group is-open="accordionStatus.openClients" is-disabled="accordionStatus.openClients"
-                           ng-class="{active: accordionStatus.openClients}">
-            <accordion-heading ng-class="{active: accordionStatus.openClients}">
+                           ng-class="{'active': accordionStatus.openClients}">
+            <accordion-heading ng-class="{'active': accordionStatus.openClients}">
               <a class="collapsed" style="padding:0px;" data-toggle="collapse" href="javascript:void(0)">
                 Assc. Client Companies <span class="total">{{ vendor.companyAssociations.length }}</span>
                 <span ng-show="!accordionStatus.openClients" class="expand icn"></span>
