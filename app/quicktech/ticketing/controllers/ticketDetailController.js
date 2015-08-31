@@ -138,7 +138,7 @@
         };
 
 
-        $scope.editService.date = $scope.getFormattedDate(new Date($scope.editService.date));
+        $scope.editService.date = $scope.getFormattedDate($scope.toUTCDate($scope.editService.date));
         $scope.editService.HourMin = $scope.getTimeinFormat($scope.editService.quantity);
 
         var splitTime = $scope.editService.HourMin.split(':');
@@ -288,7 +288,7 @@
 
         //console.log($scope.editService.date);
 
-        update.services[serviceIndex].date = new Date($scope.editService.date);
+        update.services[serviceIndex].date = $scope.toUTCDate($scope.editService.date);
         update.services[serviceIndex].description = $scope.editService.description;
         update.services[serviceIndex].item.name = $scope.editService.item.name;
 
@@ -1152,6 +1152,9 @@
 
           angular.forEach($scope.services, function (item) {
 
+            var serviceDate = new Date(item.date);
+            serviceDate = Date.UTC(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate(), serviceDate.getHours(), serviceDate.getMinutes());
+
             ticketUpdate.services[count] = {
               item: {
                 createdAt: new Date().getTime(),
@@ -1163,7 +1166,7 @@
               },
               description: item.desc,
               quantity: $scope.getTimeinPoints(item.selectedHour, item.selectedMin),
-              date: new Date(item.date).getTime()
+              date: serviceDate
             }
             count++;
           });
