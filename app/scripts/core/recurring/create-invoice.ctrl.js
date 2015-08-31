@@ -10,8 +10,8 @@
           $scope.actualInvoiceNumber = value;
         });
 
-        var day = 1000 * 60 * 60 * 24;
-        $scope.minSentOnDate = new Date(Date.now() + day);
+        var today = new Date();
+        $scope.minSentOnDate = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 1);
 
         $scope.frequency = {
           WEEKLY: 'Weekly',
@@ -48,10 +48,12 @@
         $scope.createRecurringInvoice = function (form) {
           if (form.$valid) {
             $scope.disabledCreateButton = true;
+            var sentOn = $scope.createInvoice.sentOn;
+
             RecurringService.createRecurringInvoice({
               products: [],
               services: [],
-              sentOn: $scope.createInvoice.sentOn.getTime(),
+              sentOn: Date.UTC(sentOn.getFullYear(), sentOn.getMonth(), sentOn.getDate()),
               frequency: $scope.createInvoice.frequency
             }, $scope.recurringCompany.company.id, function () {
               $scope.$emit('cancelEditForm');
