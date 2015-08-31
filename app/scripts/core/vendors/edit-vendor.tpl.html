@@ -62,10 +62,12 @@
                     <div class="qt-error-msg" ng-message="required">Vendor payment terms is required.</div>
                     <div class="qt-error-msg" ng-message="pattern">Please enter a valid payment terms.</div>
                     <div class="qt-error-msg" ng-message="min">Vendor payment terms should be bigger that 0.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">Vendor name is too large.</div>
+                    <div class="qt-error-msg" ng-message="minlength">Vendor name is too short.</div>
                   </div>
                   <input type="text" class="form-control " placeholder="Net" aria-expanded="true"
                          ng-model="editVendor.paymentTerms" ng-required="true" name="vendorPaymentTerms"
-                         ng-change="validatePaymentTerms(vendorForm)"
+                         ng-change="validatePaymentTerms(vendorForm)" ng-minlength="1" ng-maxlength="3"
                          ng-pattern="numberPattern" hard-reset-pattern="numberPattern">
                 </div>
                 <div class="form-group dropdown pull-left"
@@ -234,7 +236,40 @@
                         </div>
                       </div>
 
-                      <div phone-numbers-edit ng-model="contact.phoneNumbers"></div>
+                      <div class="row-wrapper clearfix">
+                        <div class="form-group dropdown pull-left"
+                             ng-class="{error: isShowingContactErrors(contact, contactForm, 'phoneNumber')}">
+                          <label>contact no.</label>
+
+                          <div ng-messages="contactForm.phoneNumber.$error"
+                               ng-if="isShowingContactErrors(contact, contactForm, 'phoneNumber')">
+                            <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
+                            <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
+                            <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
+                            <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+                          </div>
+                          <input type="text" class="form-control " aria-expanded="true"
+                                 name="phoneNumber" ng-model="contact.phoneNumbers[0].number"
+                                 ng-required="true" ng-minlength="3" ng-maxlength="20"
+                                 ng-pattern="phoneNumberPattern" hard-reset-pattern="phoneNumberPattern"
+                                 make-dirty-on-blur>
+                        </div>
+                        <div class="form-group dropdown number-type fullt pull-left">
+                          <input type="text"
+                                 class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
+                                 ng-model="phoneNumberTypes[contact.phoneNumbers[0].typeNumber]" READONLY
+                                 data-toggle="dropdown" aria-expanded="true">
+
+                          <ul class="dropdown-menu dropdown-account-type">
+                            <li ng-repeat="(type, label) in phoneNumberTypes"
+                                ng-click="contact.phoneNumbers[0].typeNumber = type">
+                              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+                            </li>
+                          </ul>
+                        </div>
+
+
+                      </div>
 
                       <div class="row-wrapper clearfix">
                         <label class="control checkbox pull-left primaryc">
