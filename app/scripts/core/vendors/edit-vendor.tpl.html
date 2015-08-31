@@ -124,7 +124,7 @@
                       <input type="text" class="form-control form-control-dropdown dropdown-toggle pull-left"
                              required="true"
                              ng-model="location.locale" name="vendorTimezone"
-                             typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
+                             typeahead="timezone as timezone.description for timezone in timezones | filter: {description: $viewValue}:stateComparator | orderBy:'description'"
                              typeahead-editable="false" typeahead-min-length="0"
                              qt-typeahead-show-on-focus ng-trim="false"
                              style="width:453px;">
