@@ -20,7 +20,7 @@
             setTicketsCheckboxes(false);
           }
 
-          $scope.$watch('companyBillableTickets', function () {
+          $scope.$watch('companyBillableTickets.length', function () {
             $scope.totalTicketSum = {};
             for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
 
