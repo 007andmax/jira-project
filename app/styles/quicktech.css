@@ -20550,5 +20550,98 @@ height: 60px !important;
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > a.btn-create-in {
     margin-top: 30px;
 }
-/*New Classes - End*/
 
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div[class^='col-']{
+    float:left;
+    color:#4e5e71;
+    position: relative;
+    overflow: visible;
+    font-size:14px;
+    font-weight:600;
+    padding:26px 0px 5px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-1{
+    width: calc(100% - 554px);
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-2{
+    width: 142px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-3{
+    width: 159px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-4{
+    width: 109px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-5{
+    width: 112px;
+    text-align: right;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-2 .date-wrapper{
+    width: 130px;
+    margin-top: -10px;
+    position: relative;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-3 .frequency-wrapper{
+    width: 134px;
+    margin-top: -10px;
+    position: relative;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-3 .frequency-wrapper .form-control {
+    padding: 6px 24px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > div.col-5 > a{
+    margin-top: 21px;
+    padding: 0px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > div.col-5 > a.icn-nav-delete{
+    margin-left: 20px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > form > div.col-1{
+    width: 195px;
+    float: left;
+    padding-right: 10px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > form > div.col-2{
+    width: 140px;
+    float: left;
+    padding-right: 10px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > form > div.col-3{
+    width: calc(100% - 510px);
+    float: left;
+    padding-right: 10px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > form > div.col-4{
+    width:140px;
+    float: left;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > form > div > div.add-table-actions{
+    margin-top: 20px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > form > div.col-1{
+    width: 235px;
+    padding-right: 10px;
+    float: left;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > form > div.col-2{
+    width: calc(100% - 435);
+    padding-right: 10px;
+    float: left;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > form > div.col-3{
+    width: 100px;
+    padding-right: 10px;
+    float: left;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > form > div.col-4{
+    width: 100px;
+    float: left;
+}
+/*New Classes - End*/
