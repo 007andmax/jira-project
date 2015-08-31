@@ -5,22 +5,22 @@
       <div class="col-2 normal">
         <div class="col-wrapper one"
              ng-class="{error: isShowingErrors(editProductForm, 'editProductName')}">
-          <div ng-messages="editProductForm.editProductName.$error"
+          <!-- <div ng-messages="editProductForm.editProductName.$error"
                ng-if="isShowingErrors(editProductForm, 'editProductName')">
             <div class="qt-error-msg" ng-message="required">Name is required.</div>
             <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
             <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
-          </div>
+          </div> -->
           <input type="text" class="form-control" placeholder="Product" name="editProductName"
                  ng-required="true" ng-model="editProduct.name" ng-maxlength="100"
                  is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
         </div>
         <div class="col-wrapper"
              ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
-          <div ng-messages="editProductForm.editProductDescription.$error"
+          <!-- <div ng-messages="editProductForm.editProductDescription.$error"
                ng-if="isShowingErrors(editProductForm, 'editProductDescription')">
             <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-          </div>
+          </div> -->
           <input type="text" class="form-control" placeholder="Description"
                  ng-model="editProduct.description"
                  ng-maxlength="500" name="editProductDescription">
@@ -30,11 +30,11 @@
       <div class="col-3 normal">
         <div class="col-wrapper"
              ng-class="{error: isShowingErrors(editProductForm, 'editProductVendor')}">
-          <div ng-messages="editProductForm.editProductVendor.$error"
+          <!-- <div ng-messages="editProductForm.editProductVendor.$error"
                ng-if="isShowingErrors(editProductForm, 'editProductVendor')">
             <div class="qt-error-msg" ng-message="required">Vendor is required.</div>
             <div class="qt-error-msg" ng-message="parse">Please select the vendor.</div>
-          </div>
+          </div> -->
           <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
                  placeholder="Vendor/Supplier"
                  typeahead-on-select="validateProductName(editProductForm.editProductName, product.versionedId.id)"
@@ -49,11 +49,11 @@
       <div class="col-4 normal">
         <div class="col-wrapper"
              ng-class="{error: isShowingErrors(editProductForm, 'cost')}">
-          <div ng-messages="editProductForm.cost.$error"
+          <!-- <div ng-messages="editProductForm.cost.$error"
                ng-if="isShowingErrors(editProductForm, 'cost')">
             <div class="qt-error-msg" ng-message="required">Cost is required.</div>
             <div class="qt-error-msg" ng-message="biggerThanSale">Cost should be smaller than sale.</div>
-          </div>
+          </div> -->
           <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
                  name="cost" ng-change="validateSaleAndCost(editProductForm)"
                  hard-reset-pattern="decimalNumberPattern" ng-required="true">
@@ -63,11 +63,11 @@
       <div class="col-5 normal">
         <div class="col-wrapper"
              ng-class="{error: isShowingErrors(editProductForm, 'sale')}">
-          <div ng-messages="editProductForm.sale.$error"
+          <!-- <div ng-messages="editProductForm.sale.$error"
                ng-if="isShowingErrors(editProductForm, 'sale')">
             <div class="qt-error-msg" ng-message="required">Sale is required.</div>
             <div class="qt-error-msg" ng-message="smallerThanCost">Sale should be bigger that cost.</div>
-          </div>
+          </div> -->
           <input type="text" class="form-control" placeholder="Sale Price" ng-model="editProduct.sale"
                  name="sale" ng-change="validateSaleAndCost(editProductForm)"
                  hard-reset-pattern="decimalNumberPattern" ng-required="true">
@@ -77,10 +77,10 @@
       <div class="col-6 normal description">
         <div class="col-wrapper"
              ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
-          <div ng-messages="editProductForm.editProductDescription.$error"
+          <!-- <div ng-messages="editProductForm.editProductDescription.$error"
                ng-if="isShowingErrors(editProductForm, 'editProductDescription')">
             <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-          </div>
+          </div> -->
           <input type="text" class="form-control" placeholder="Description"
                  ng-model="editProduct.description"
                  ng-maxlength="500" name="editProductDescription">
@@ -89,6 +89,14 @@
     </div>
 
     <div class="add-more  new clearfix">
+      <div class="product-add-table-message pull-left">
+        <div ng-messages="editProductForm.sale.$error"
+             ng-if="isShowingErrors(editProductForm, 'sale') || isShowingErrors(editProductForm, 'cost') || isShowingErrors(editProductForm, 'editProductVendor') || isShowingErrors(editProductForm, 'editProductDescription') || isShowingErrors(editProductForm, 'editProductName')">
+          <div ng-message="required">Error message here.</div>
+          <div ng-message="biggerThanSale">Cost should be smaller than sale.</div>
+          <div ng-message="smallerThanCost">Sale should be bigger that cost.</div>
+        </div>
+      </div>
       <div class="add-table-actions pull-right">
         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
            ng-click="cancelEditProduct()">Cancel</a>
