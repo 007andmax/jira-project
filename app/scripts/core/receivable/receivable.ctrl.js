@@ -104,15 +104,14 @@
 
         $scope.changeCompanyCheckbox = function (companyId) {
 
-          for (var invCompanyId in $scope.invoiceToSent) {
+          var invoiceToSentData = $scope.invoiceToSent[companyId];
 
-            if (companyId === invCompanyId) {
+          if (invoiceToSentData) {
 
-              var invoices = $scope.receivableInvoicesData.companies[companyId];
+            var invoices = $scope.receivableInvoicesData.companies[companyId];
 
-              for (var j = 0; j < invoices.length; j++) {
-                $scope.invoiceToSent[companyId].invoices[invoices[j].id] = $scope.invoiceToSent[companyId].checked
-              }
+            for (var j = 0; j < invoices.length; j++) {
+              invoiceToSentData.invoices[invoices[j].id] = invoiceToSentData.checked
             }
           }
         };

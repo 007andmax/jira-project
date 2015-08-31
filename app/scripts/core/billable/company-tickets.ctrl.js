@@ -20,15 +20,17 @@
             setTicketsCheckboxes(false);
           }
 
-          $scope.totalTicketSum = {};
-          for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
+          $scope.$watch('companyBillableTickets', function () {
+            $scope.totalTicketSum = {};
+            for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
 
-            var productExpenses = $scope.companyBillableTickets[i].productExpenses,
-              serviceExpenses = $scope.companyBillableTickets[i].serviceExpenses,
-              ticketId = $scope.companyBillableTickets[i].id
+              var productExpenses = $scope.companyBillableTickets[i].productExpenses,
+                serviceExpenses = $scope.companyBillableTickets[i].serviceExpenses,
+                ticketId = $scope.companyBillableTickets[i].id;
 
-            $scope.totalTicketSum[ticketId] = calculateTotalTicketSum(productExpenses) + calculateTotalTicketSum(serviceExpenses);
-          }
+              $scope.totalTicketSum[ticketId] = calculateTotalTicketSum(productExpenses) + calculateTotalTicketSum(serviceExpenses);
+            }
+          });
 
           $scope.$watch('highlightProductId', function (idTicket) {
             if (idTicket) {

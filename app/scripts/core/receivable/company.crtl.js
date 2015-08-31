@@ -17,11 +17,21 @@
           $scope.showIndicator = true;
         });
 
-        $scope.$watch('invoiceToSent[company.id].invoices', function () {
+        $scope.$watch('invoiceToSent[company.id]', function (invoices) {
+
+          if (!invoices) {
+            return;
+          }
+
+          $scope.countInvoicesInCompany = 0;
+
           var countObj = 0,
             companyInvoices = $scope.invoiceToSent[$scope.company.id];
 
           for (var invoiceId in (companyInvoices.invoices)) {
+
+            $scope.countInvoicesInCompany++;
+
             if (companyInvoices.invoices[invoiceId]) {
               countObj++;
             }
@@ -48,15 +58,6 @@
           }
           ReceivableService.resendInvoices(invoiceToSentId);
         };
-
-        $scope.$watch('invoiceToSent[company.id]', function () {
-          $scope.countInvoicesInCompany = 0;
-          for (var id in $scope.invoiceToSent[$scope.company.id].invoices) {
-            if ($scope.invoiceToSent[$scope.company.id].invoices[id]) {
-              $scope.countInvoicesInCompany++
-            }
-          }
-        }, true);
 
         $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
           if (!showInvoices) {
