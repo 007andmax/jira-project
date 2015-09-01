@@ -20519,7 +20519,7 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 .product-add-table-message{
     /*height: 68px;*/
     color: #f29c9a;
-    padding-left: 84px;
+    /*padding-left: 84px;*/
 }
 
 .product-add-table-message > div{
@@ -20610,7 +20610,7 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 }
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-2 .date-wrapper .form-control {
-    padding: 6px 28px;
+    padding: 6px 14px;
     background-position: right 13px center;
 }
 
@@ -20722,7 +20722,7 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 }
 
 
-.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > li.product{
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div {
     margin-bottom: 10px;
 }
 
@@ -20740,6 +20740,40 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
     margin-left: -66px;
     padding-left: 66px;
     margin-right: -40px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div.add-product{
+    background-color: #f0fafb;
+    margin-left: -66px;
+    padding-left: 66px;
+    margin-right: -40px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div > form > div.col-1 {
+    width: 195px;
+    float: left;
+    padding-right: 10px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div > form > div.col-2 {
+    width: 140px;
+    float: left;
+    padding-right: 10px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div > form > div.col-3 {
+    width: calc(100% - 510px);
+    float: left;
+    padding-right: 10px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div > form > div.col-4 {
+    width: 140px;
+    float: left;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div > form > div > div.add-table-actions {
+    margin-top: 20px;
 }
 
 .content-container > div > div > div > div > div > div > div > #billable-clients > ul.companies-list > li > ul.invoices > li >  a > span.name {
