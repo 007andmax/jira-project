@@ -15531,7 +15531,7 @@ span.bold{
 .content-wrapper .ticket-content .ticket-post-update-wrapper .update-ticket-form-wrapper .ticket-form-header .note-attachments > li > span.filesize {
     margin-left: 6px;
     color: #9fabb9;
-
+}
 aside.left .last.nav-stacked.sub-nav li:last-child{
 /*padding-bottom: 36px;*/
 margin-bottom: 20px;
@@ -15647,12 +15647,14 @@ margin-bottom: 20px;
     display: inherit;
     margin: 2px auto;
 }
+
 @media (min-width: 1024px) and (max-width: 1340px) {
     /* line 314, ../sass/bootstrap/_ticket-content.scss */
     /*body.opened-ticket .content-wrapper .ticket-content {
      width: 100%;
      }*/
 }
+
 @media (max-width: 1820px) {
     /* line 318, ../sass/bootstrap/_ticket-content.scss */
     body .content-wrapper .ticket-content {
@@ -15674,6 +15676,7 @@ margin-bottom: 20px;
       width: 100%;
       }*/
 }
+
 @media (max-width: 1880px) {
 
     .ticket-nav .ticket-actions{
@@ -16314,7 +16317,7 @@ margin-bottom: 20px;
     background-color: #e9edf1;
 }
 /* line 28, ../sass/bootstrap/_att-box.scss */
-.chipku-new-message .users-list > li:active, ..chipku-new-message  .users-list > li.active {
+.chipku-new-message .users-list > li:active, .chipku-new-message  .users-list > li.active {
     background-color: #e0f5f7;
 }
 /* line 29, ../sass/bootstrap/_att-box.scss */
