@@ -11467,8 +11467,9 @@ aside.left .nav-stacked.sub-nav{
 aside.left .last.nav-stacked.sub-nav{
   margin-top: 20px;
 }
-aside.left .last.nav-stacked.sub-nav li a:last-child{
-padding-bottom: 36px;
+aside.left .last.nav-stacked.sub-nav li:last-child{
+/*padding-bottom: 36px;*/
+margin-bottom: 20px;
 }
 aside.left .divider{
   margin-top: 20px;
