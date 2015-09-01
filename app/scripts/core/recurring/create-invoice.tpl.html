@@ -10,9 +10,10 @@
                ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceDate')">
             <div class="qt-error-msg" ng-message="required">Date field cannot be left empty.</div>
           </div> -->
-          <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown" name="createInvoiceDate" ng-model="createInvoice.sentOn"
+          <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
+                 name="createInvoiceDate" ng-model="createInvoice.sentOn"
                  datepicker-popup="dd MMM yyyy" is-open="datepickerIsOpened" min-date="minSentOnDate" show-weeks="false"
-                 show-button-bar="false" ng-click="datepickerIsOpened = true" ng-required="true" />
+                 show-button-bar="false" ng-click="datepickerIsOpened = true" ng-required="true"/>
         </div>
       </div>
 
@@ -45,9 +46,9 @@
     </div>
     <div class="add-more  new clearfix">
       <div class="service-add-table-message pull-left">
-          <div ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceDate')" style="padding-top:10px;">
-            <div class="qt-error-msg" style="margin-left:-24px;">Error Message Here</div>
-          </div>
+        <div ng-if="isShowingErrors(createInvoiceForm, 'createInvoiceDate')" style="padding-top:10px;">
+          <div class="qt-error-msg" style="margin-left:-24px;">Error Message Here</div>
+        </div>
       </div>
       <div class="add-table-actions pull-right">
         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"

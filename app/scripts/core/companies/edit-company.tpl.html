@@ -146,7 +146,8 @@
                            typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
                            typeahead-editable="false" typeahead-min-length="0"
                            qt-typeahead-show-on-focus ng-trim="false"
-                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'scroll'}" style="width:453px;">
+                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'scroll'}"
+                           style="width:453px;">
 
                     <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
                        tooltip="Add More" tooltip-placement="top"
@@ -184,64 +185,65 @@
             <div class="content clearfix">
               <div ng-repeat="contact in editCompany.contacts">
                 <div ng-form="contactForm">
-                  <div edit-avatar ng-model="contact.avatar" model-name="contact" model-id="{{ contact.id }}" style="margin-top: 30px;"></div>
+                  <div edit-avatar ng-model="contact.avatar" model-name="contact" model-id="{{ contact.id }}"
+                       style="margin-top: 30px;"></div>
 
                   <div class="user-fields clearfix">
                     <div class="row-wrapper clearfix">
                       <div class="form-group dropdown pull-left"
                            ng-class="{error: isShowingContactErrors(contact, contactForm, 'firstName')}">
-                    
+
                         <label>first name</label>
-                    
+
                         <div ng-messages="contactForm.firstName.$error"
                              ng-if="isShowingContactErrors(contact, contactForm, 'firstName')">
                           <div class="qt-error-msg" ng-message="required">First name is required.</div>
                           <div class="qt-error-msg" ng-message="maxlength">First name is too large.</div>
                           <div class="qt-error-msg" ng-message="minlength">First name is too short.</div>
                         </div>
-                    
+
                         <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
                                name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
                       </div>
-                    
+
                       <div class="form-group dropdown pull-left"
                            ng-class="{error: isShowingContactErrors(contact, contactForm, 'lastName')}">
                         <label>last name</label>
-                    
+
                         <div ng-messages="contactForm.lastName.$error"
                              ng-if="isShowingContactErrors(contact, contactForm, 'lastName')">
                           <div class="qt-error-msg" ng-message="required">Last name requires at least 1 letter.</div>
                           <div class="qt-error-msg" ng-message="maxlength">Last name is too large.</div>
                           <div class="qt-error-msg" ng-message="minlength">Last name is too short.</div>
                         </div>
-                    
+
                         <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
                                name="lastName" ng-model="contact.lastName" required="true" make-dirty-on-blur>
                       </div>
                     </div>
-                    
+
                     <div class="row-wrapper clearfix">
-                    
+
                       <div class="form-group dropdown pull-left"
                            ng-class="{error: isShowingContactErrors(contact, contactForm, 'designation')}">
                         <label>designation</label>
-                    
+
                         <div ng-messages="contactForm.designation.$error"
                              ng-if="isShowingContactErrors(contact, contactForm, 'designation')">
                           <div class="qt-error-msg" ng-message="required">Please enter a designation.</div>
                           <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
                           <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
                         </div>
-                    
+
                         <input type="text" class="form-control " name="designation" aria-expanded="true"
                                make-dirty-on-blur
                                ng-model="contact.designation" required="true" ng-minlength="3" ng-maxlength="30">
                       </div>
-                    
+
                       <div class="form-group dropdown pull-left"
                            ng-class="{error: isShowingContactErrors(contact, contactForm, 'email')}">
                         <label>email</label>
-                    
+
                         <div ng-messages="contactForm.email.$error"
                              ng-if="isShowingContactErrors(contact, contactForm, 'email')">
                           <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
@@ -249,32 +251,33 @@
                           <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
                           <!--<div class="qt-error-msg" ng-message="minlength">Designation is too short</div>-->
                         </div>
-                    
+
                         <input type="text" class="form-control" name="email" aria-expanded="true" make-dirty-on-blur
                                ng-model="contact.email" required="true" ng-pattern="emailPattern"
                                contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
                                model-id="contact.id">
                       </div>
                     </div>
-                    
+
                     <div phone-numbers-edit ng-model="contact.phoneNumbers"></div>
-                    
+
                     <div class="row-wrapper clearfix">
                       <div class="form-group  cs-type dropdown pull-left">
                         <label>subscribe to</label>
-                        <input type="text" class="form-control form-control-dropdown dropdown-toggle hide-cursor" value=""
+                        <input type="text" class="form-control form-control-dropdown dropdown-toggle hide-cursor"
+                               value=""
                                data-toggle="dropdown" aria-expanded="true">
-                    
+
                         <div class="tokens" data-toggle="dropdown">
                           <div class="token ticket" ng-show="contact.subscription.ticket">
                             <span class="token-label">tkt updates</span>
                           </div>
-                    
+
                           <div class="token invoice" ng-show="contact.subscription.invoice">
                             <span class="token-label">inv. updates</span>
                           </div>
                         </div>
-                    
+
                         <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
                           <li><a tabindex="-1" href qt-checkbox ng-model="contact.subscription.ticket">
                             <div class="clearfix"><label class="control checkbox pull-left">
@@ -294,17 +297,19 @@
                           </a></li>
                         </ul>
                       </div>
-                    
+
                       <div class="form-group pull-right">
-                    
+
                         <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-right tp-hide"
                            tooltip="Add More" tooltip-placement="top"
-                           ng-disabled="editCompany.contacts.length >= contactsMaxCount" ng-click="addContact()" ng-show="$last">
+                           ng-disabled="editCompany.contacts.length >= contactsMaxCount" ng-click="addContact()"
+                           ng-show="$last">
                           <span class="icn-add"></span>
                         </a>
-                    
+
                         <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-right tp-hide"
-                           tooltip="Remove Contact" tooltip-placement="top" ng-click="removeContact($index)" ng-show="!$last">
+                           tooltip="Remove Contact" tooltip-placement="top" ng-click="removeContact($index)"
+                           ng-show="!$last">
                           <span class="icn-remove-update"></span>
                         </a>
                       </div>
@@ -329,7 +334,9 @@
                   <label class="norm">Associated Vendor(s)</label>
                 </div>
                 <div class="dropdown" vendor-association>
-                  <div class="form-group" style="width: 100%;" popover="Enter vendor(s) to be associated with this company." popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                  <div class="form-group" style="width: 100%;"
+                       popover="Enter vendor(s) to be associated with this company." popover-placement="bottom"
+                       popover-trigger="qtCustomPopover" qt-custom-popover>
                     <div class="tokenfield form-control" va-tokenfield>
 
                       <div class="token" ng-repeat="association in editCompany.companyAssociations">
@@ -400,7 +407,9 @@
                     </div>
                     <input type="text" class="form-control" ng-model="tax.code" name="currentlyTaxType" required="true"
                            is-uniq-validation validation-func="validateTaxRateCode" model-id="tax.versionedId.id"
-                           ng-maxlength="30" popover="This Tax information will be added to this company's invoices with taxable products and services." popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                           ng-maxlength="30"
+                           popover="This Tax information will be added to this company's invoices with taxable products and services."
+                           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
                   </div>
 
                   <div class="form-group pull-left"
@@ -413,10 +422,14 @@
                            style="width: 155px;" ng-model="tax.rate" name="currentlyTaxRate" required="true"
                            hard-reset-pattern="taxRateNumberPattern">
 
-                    <div class="label-add-btn" ng-click="saveTax()"><a
-                      ng-disabled="isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')"
-                      class="btn btn-cr btn-green btn-tax pull-right"><span
-                      class="small-icn-tick icn"></span></a></div>
+                    <div class="label-add-btn" ng-click="saveTax()">
+                      <a
+                        ng-disabled="isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')"
+                        ng-class="{disabled: isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')}"
+                        class="btn btn-cr btn-green btn-tax pull-right">
+                        <span class="small-icn-tick icn"></span>
+                      </a>
+                    </div>
                     <div class="label-add-btn" ng-click="cancelTax()">
                       <a style="margin-top: 0px" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide">
                         <span class="icn-remove-update"></span></a></div>
@@ -427,44 +440,25 @@
 
             <div class="user-fields clearfix ntr" ng-form="newTaxRateForm">
               <div class="row-wrapper clearfix">
-                <div class="form-group dropdown pull-left" ng-class="{error: newTaxRateForm.validation.code.invalid && newTaxRateFormShowErrors}">
+                <div class="form-group dropdown pull-left">
                   <label class="norm">New Tax Rate</label>
-
-                  <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.required && newTaxRateFormShowErrors">
-                    Tax Type is required.
-                  </div>
-                  <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.maxlength && newTaxRateFormShowErrors">
-                    Tax Type is too large.
-                  </div>
-                  <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.code.unique && newTaxRateFormShowErrors">
-                    Tax Type already occupied..
-                  </div>
                   <input type="text" class="form-control" placeholder="Tax Type" ng-model="newTaxRate.code"
-                         ng-change="validateNewTaxRate(newTaxRateForm)" name="code" popover="This Tax information will be added to this company's invoices with taxable products and services." popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                         ng-change="validateNewTaxRate(newTaxRateForm)" name="code"
+                         popover="This Tax information will be added to this company's invoices with taxable products and services."
+                         popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
                 </div>
 
-                <div class="form-group pull-left"
-                     ng-class="{error: newTaxRateForm.validation.rate.invalid && newTaxRateFormShowErrors}">
+                <div class="form-group pull-left">
                   <label class="norm">&nbsp;</label>
-
-                  <div class="qt-error-msg"
-                       ng-show="newTaxRateForm.validation.rate.required && newTaxRateFormShowErrors">
-                    Rate is required.
-                  </div>
-                  <div class="qt-error-msg"
-                       ng-show="!newTaxRateForm.validation.rate.required && newTaxRateForm.validation.rate.number && newTaxRateFormShowErrors">
-                    Rate must be a number.
-                  </div>
                   <input type="text" class="form-control pull-left" placeholder="Rate" style="width: 197px;"
                          ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)"
                          hard-reset-pattern="taxRateNumberPattern">
 
                   <div class="label-add-btn">
-                    <a class="btn btn-cr btn-green btn-tax pull-right disabled" ng-click="saveNewTax(newTaxRateForm)">
-                      <span class="small-icn-tick icn"></span></a>
+                    <a class="btn btn-cr btn-green btn-tax pull-right" ng-click="saveNewTax(newTaxRateForm)"
+                       ng-class="{disabled: newTaxRateForm.invalid || !newTaxRate.code || !newTaxRate.rate}">
+                      <span class="small-icn-tick icn"></span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -482,7 +476,10 @@
               <div class="row-wrapper clearfix">
                 <div class="form-group dropdown pull-left">
                   <label>Domain/Username</label>
-                  <input type="text" class="form-control " value="" aria-expanded="true" ng-disabled="true" popover-placement="bottom" popover-trigger="qtCustomPopover" popover="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain" qt-custom-popover>
+                  <input type="text" class="form-control " value="" aria-expanded="true" ng-disabled="true"
+                         popover-placement="bottom" popover-trigger="qtCustomPopover"
+                         popover="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain"
+                         qt-custom-popover>
                 </div>
 
                 <div class="form-group pull-left" style="position: relative;">
