@@ -1,0 +1,14 @@
+<div class="nav-left ticket-nav" ng-controller="quicktech.core.header.vendorsCtrl">
+
+  <div class="" id="search-and-filter">
+    <h4>Vendors <span class="tickt-counts">{{ sharedState.count }}</span></h4>
+
+    <div class="form-group search-form pull-left">
+      <input type="text" class="form-control form-control-round form-control-search"
+             autocomplete="off" placeholder="Search vendor..."
+             ng-model="sharedState.filter.keyword">
+      <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+         ng-click="sharedState.filter.keyword = undefined"></a>
+    </div>
+  </div>
+</div>
