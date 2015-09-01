@@ -4,7 +4,7 @@
   /*font-size: 14px;*/
   /*color: #4e5e71;*/
 /*}*/
-.container {
+.container.inv-container  {
   width: 770px;
   position: relative;
   margin: 64px auto 162px;
@@ -15,37 +15,37 @@
   -o-transition: .3s margin-bottom;
   transition: .3s margin-bottom;
 }
-.invoice-list-open .container{
+.invoice-list-open .container.inv-container {
   margin-bottom: 380px;
 }
-.header {
+.inv-container .header {
   border-bottom: 2px solid #f7f9fb;
   padding-bottom: 31px;
 }
-.header #logo {
+.inv-container .header #logo {
   float: left;
   padding: 2px 0px
 }
-.header .company-info {
+.inv-container .header .company-info {
   width: 170px;
   text-align: right;
   float: right;
   line-height: 24px;
   margin-top: -3px;
 }
-.header .company-info .name {
+.inv-container .header .company-info .name {
   font-size: 20px;
   color: #00acc1;
   font-weight: bold;
   margin-bottom: 8px;
 }
-.header .company-info .address {
+.inv-container .header .company-info .address {
   color: #25303d;
 }
-.content {
+.inv-container .content {
   padding-top: 39px;
 }
-.content .heading {
+.inv-container .content .heading {
   font-size: 11px;
   font-weight: bold;
   color: #9fabb9;
@@ -53,158 +53,158 @@
   margin: 0px;
   padding: 20px 0px 16px;
 }
-.content .sub-header {
+.inv-container .content .sub-header {
   padding-bottom: 31px;
 }
-.content .sub-header .billed,
-.content .sub-header .shipto {
+.inv-container .content .sub-header .billed,
+.inv-container .content .sub-header .shipto {
   width: 240px;
   float: left;
   margin-right: 10px;
 }
-.content .sub-header .heading {
+.inv-container .content .sub-header .heading {
   border-bottom: 1px solid #f7f9fb;
 }
-.content .sub-header .company-name {
+.inv-container .content .sub-header .company-name {
   font-size: 14px;
   color: #25303d;
   font-weight: bold;
   margin-top: 18px;
   margin-bottom: 12px;
 }
-.content .sub-header .number {
+.inv-container .content .sub-header .number {
   margin-bottom: 6px;
 }
-.content .sub-header .shipto .number {
+.inv-container .content .sub-header .shipto .number {
   margin-bottom: 3px;
 }
-.content .sub-header .email {
+.inv-container .content .sub-header .email {
   margin-bottom: 3px;
 }
-.content .sub-header .address {
+.inv-container .content .sub-header .address {
   line-height: 24px;
 }
-.content .sub-header .invoice-info {
+.inv-container .content .sub-header .invoice-info {
   width: 200px;
   float: right;
 }
-.content .sub-header .heading .total {
+.inv-container .content .sub-header .heading .total {
   color: #25303d;
   float: right;
 }
-.content .sub-header .detail {
+.inv-container .content .sub-header .detail {
   font-weight: bold;
   margin-top: 6px;
 }
-.content .sub-header .invoice-info .heading {
+.inv-container .content .sub-header .invoice-info .heading {
   margin-bottom: 18px;
 }
-.content .sub-header .detail .detail-sub {
+.inv-container .content .sub-header .detail .detail-sub {
   font-weight: normal;
   float: right;
 }
-.content .sub-header .amount {
+.inv-container .content .sub-header .amount {
   margin-top: 36px;
 }
-.content .sub-header .amount .detail-sub {
+.inv-container .content .sub-header .amount .detail-sub {
   color: #00acc1;
   font-weight: bold;
 }
-.content .ticket {
+.inv-container .content .ticket {
   padding-top: 58px;
   border-top: 2px solid #f7f9fb;
   padding-bottom: 60px;
 }
-.content .ticket .head {
+.inv-container .content .ticket .head {
   color: #25303d;
   font-weight: bold;
   margin-top: 0px;
   margin-bottom: 6px;
   font-size: 14px;
 }
-.ticket-numer{
+.inv-container .ticket-numer{
   font-size: 11px;
   line-height: 12px;
   color: #b4bfcc;
   text-transform: uppercase;
   margin-top: 3px;
 }
-.content .ticket .head + .head {
+.inv-container .content .ticket .head + .head {
   border-bottom: 1px solid #f7f9fb;
   padding-bottom: 14px;
 }
-.content .ticket .head .title {
+.inv-container .content .ticket .head .title {
   color: #00acc1;
   margin-right: 10px;
 }
-.content .ticket .head .date {
+.inv-container .content .ticket .head .date {
   font-weight: normal;
   float: right;
 }
-.content .ticket .items {
+.inv-container .content .ticket .items {
   margin: 0px;
   padding: 0px;
 }
-.content .ticket .items li {
+.inv-container .content .ticket .items li {
   float: left;
   list-style: none;
 }
-.content .ticket .items li .col-1 {
+.inv-container .content .ticket .items li .col-1 {
   width: 164px;
   color: #9fabb9;
 }
-.content .ticket .items li .col-2 {
+.inv-container .content .ticket .items li .col-2 {
   width: 328px;
 }
-.content .ticket .items li .col-3 {
+.inv-container .content .ticket .items li .col-3 {
   width: 111px;
   text-align: right;
 }
-.content .ticket .items li .col-4 {
+.inv-container .content .ticket .items li .col-4 {
   width: 95px;
   text-align: right;
 }
-.content .ticket .items li .col-5 {
+.inv-container .content .ticket .items li .col-5 {
   width: 72px;
   text-align: right;
 }
-.content .ticket .items li [class^='col-'] {
+.inv-container .content .ticket .items li [class^='col-'] {
   float: left;
   padding: 4px 0px 8px;
 }
-.content .ticket .items li.heads [class^='col-'] {
+.inv-container .content .ticket .items li.heads [class^='col-'] {
   text-transform: uppercase;
   font-weight: bold;
   padding: 13px 0px 10px;
   font-size: 11px;
   color: #9fabb9;
 }
-.content .ticket .items li .col-2 {
+.inv-container .content .ticket .items li .col-2 {
   line-height: 24px;
   padding-top: 1px;
   padding-bottom: 4px;
 }
-.content .ticket .items li.heads .col-2 {
+.inv-container .content .ticket .items li.heads .col-2 {
   padding: 13px 0px 10px;
   line-height: 13px;
 }
-.content .ticket .items li .name {
+.inv-container .content .ticket .items li .name {
   color: #25303d;
   font-weight: bold;
   margin-right: 10px;
 }
-.content .ticket .total {
+.inv-container .content .ticket .total {
   border: 1px solid #e9edf1;
   margin-top: 27px;
 }
-.content .ticket .total .updates {
+.inv-container .content .ticket .total .updates {
   float: left;
   padding: 19px 20px 13px;
 }
-.content .update {
+.inv-container .content .update {
   float: left;
 }
-.content .update h4 {
+.inv-container .content .update h4 {
   color: #9fabb9;
   text-transform: uppercase;
   font-size: 11px;
@@ -212,12 +212,12 @@
   margin-top: 0px;
   font-weight: bold;
 }
-.content .update .amount {
+.inv-container .content .update .amount {
   color: #25303d;
   font-size: 20px;
   font-weight: normal;
 }
-.content .updates .plus {
+.inv-container .content .updates .plus {
   font-size: 36px;
   float: left;
   margin-left: 60px;
@@ -225,100 +225,100 @@
   margin-top: -1px;
   color: #25303d;
 }
-.content .ticket .total .total-amount {
+.inv-container .content .ticket .total .total-amount {
   float: right;
   background-color: #e9edf1;
   padding: 20px;
   width: 158px;
   padding-bottom: 13px;
 }
-.content .ticket .total .total-amount .totals {
+.inv-container .content .ticket .total .total-amount .totals {
   color: #4e5e71;
   font-size: 11px;
   text-align: right;
   text-transform: uppercase;
   margin-top: -1px;
 }
-.content .ticket .total .total-amount .totals .number {
+.inv-container .content .ticket .total .total-amount .totals .number {
   font-weight: bold;
 }
-.content .ticket .total .total-amount .amount {
+.inv-container .content .ticket .total .total-amount .amount {
   color: #00acc1;
   text-align: right;
   font-size: 20px;
   margin-top: 7px;
 }
-.in-total {
+.inv-container .in-total {
   border-top: 2px solid #f7f9fb;
   border-bottom: 2px solid #f7f9fb;
   padding: 59px 0px 53px;
 }
-.in-total .amount-due {
+.inv-container .in-total .amount-due {
   float: right;
   font-size: 26px;
   color: #25303d;
   margin-top: 6px;
 }
-.in-total .amount-due .amount {
+.inv-container .in-total .amount-due .amount {
   color: #00acc1;
   font-weight: bold;
 }
-.footer {
+.inv-container .footer {
   margin-top: 503px;
   border-top: 2px solid #f7f9fb;
 }
-.footer .message {
+.inv-container .footer .message {
   border-bottom: 1px solid #f7f9fb;
   padding: 38px 0 34px;
 }
-.footer .message .thankyou {
+.inv-container .footer .message .thankyou {
   color: #4e5e71;
   font-size: 20px;
   float: left;
   margin-top: 12px;
 }
-.footer .message .contact {
+.inv-container .footer .message .contact {
   float: right;
   width: 304px;
   color: #4e5e71;
 }
-.footer .message .contact .email {
+.inv-container .footer .message .contact .email {
   width: 204px;
   float: left;
 }
-.footer .message .contact .numbers {
+.inv-container .footer .message .contact .numbers {
   float: left;
   width: 100px;
 }
-.footer .message .contact .numbers .fax {
+.inv-container .footer .message .contact .numbers .fax {
   margin-top: 12px;
 }
-.footer .message .contact .numbers img {
+.inv-container .footer .message .contact .numbers img {
   float: left;
   margin-right: 10px;
   margin-top: 3px;
 }
-.footer .message .contact .name {
+.inv-container .footer .message .contact .name {
   font-size: 14px;
   font-weight: bold;
   display: block;
   width: 100%;
 }
-.footer .message .contact .email .em {
+.inv-container .footer .message .contact .email .em {
   margin-top: 12px;
 }
-.footer .message .contact .email .em img {
+.inv-container .footer .message .contact .email .em img {
   float: left;
   margin-top: 3px;
   margin-right: 10px;
 }
-.footer .terms {
+.inv-container .footer .terms {
   padding: 38px 0 0 0;
   font-size: 11px;
   color: #7c8999;
   line-height: 16px;
 }
-.footer .terms b {
+.inv-container .footer .terms b {
   color: #25303d;
   text-transform: uppercase;
 }

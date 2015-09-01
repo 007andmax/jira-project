@@ -15526,10 +15526,16 @@ span.bold{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 /* line 231, ../sass/bootstrap/_ticket-content.scss */
 .content-wrapper .ticket-content .ticket-post-update-wrapper .update-ticket-form-wrapper .ticket-form-header .note-attachments > li > span.filesize {
     margin-left: 6px;
     color: #9fabb9;
+
+aside.left .last.nav-stacked.sub-nav li:last-child{
+/*padding-bottom: 36px;*/
+margin-bottom: 20px;
+
 }
 /* line 236, ../sass/bootstrap/_ticket-content.scss */
 .content-wrapper .ticket-content .ticket-post-update-wrapper .update-ticket-form-wrapper .ticket-form-header .note-attachments > li .icn-remove-token {
