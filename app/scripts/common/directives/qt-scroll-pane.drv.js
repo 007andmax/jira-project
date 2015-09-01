@@ -16,7 +16,8 @@
 
           function initScroll() {
             element.jScrollPane({
-              autoReinitialise: true
+              autoReinitialise: true,
+              showArrows: true
               //verticalDragMinHeight: 54,
               //verticalDragMaxHeight: 54
             });
