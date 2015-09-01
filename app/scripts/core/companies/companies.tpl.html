@@ -83,11 +83,11 @@
          ng-controller="quicktech.core.companies.companyCtrl">
       <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
         <div class="overlay"></div>
-        <div class="archive-btn" ng-click="archiveCompany(company.id)"><a class="black-btn"
-                                                                          href="javascript:void(0)"><span
+        <div class="archive-btn" ng-click="archiveCompany(company.id)"><a class="black-btn" href="javascript:void(0)" tooltip-placement="top" tooltip="Archive Company" ><span
           class="icn archive-company"></span></a></div>
         <div class="company-info">
-          <h3 class="name"> {{ company.name }} </h3>
+
+          <h3 class="name"> {{ company.name | limitTo: 125 }}{{company.name.length > 125 ? '...' : ''}}</h3>
 
           <div class="ac-start-wrapper clearfix">
             <ul class="rating rating-5 clearfix pull-left">
@@ -151,7 +151,7 @@
         </div>
 
         <div class="clearfix company-actions">
-          <a href="javascript:void(0)" class="btn btn-scooter btn-update pull-left" style="margin-right: 10px;">
+          <a href="javascript:void(0)" class="btn btn-scooter btn-update pull-left" style="margin-right: 10px;" tooltip-placement="top" tooltip="Send Email">
             <div class="icn-white-mail"></div>
           </a>
 

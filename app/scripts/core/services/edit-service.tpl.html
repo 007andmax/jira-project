@@ -44,9 +44,8 @@
     </div>
     <div class="add-more  new clearfix">
       <div class="service-add-table-message pull-left">
-        <div ng-messages="editServiceForm.editServiceName.$error"
-             ng-if="isShowingErrors(editServiceForm, 'editServiceName') || isShowingErrors(editServiceForm, 'timeBlock') || isShowingErrors(editServiceForm, 'editServiceRate')">
-          <div>Please fill the required fields</div>
+        <div ng-if="isShowingErrors(editServiceForm, 'editServiceName') || isShowingErrors(editServiceForm, 'timeBlock') || isShowingErrors(editServiceForm, 'editServiceRate')">
+          <div class="qt-error-msg">Error message here.</div>
         </div>
       </div>
       <div class="add-table-actions pull-right">

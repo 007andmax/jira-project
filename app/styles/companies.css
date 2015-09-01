@@ -53,7 +53,15 @@
   margin-bottom: 40px;
   width: calc(100% / 4 - 40px);
   min-width: 260px !important;
+  -webkit-transition: 0.3s ease-out all;
+    -o-transition: 0.3s ease-out all;
+    transition: 0.3s ease-out all;
   border: 1px solid #e9edf1;
+}
+
+.companies-list > .company:hover {
+    box-shadow: 0px 6px 18px 0px rgba(10, 45, 92, 0.15);
+    border-color: #fff;
 }
 
 @media (max-width: 1890px) {
@@ -322,6 +330,7 @@
   position: relative;
   float: left;
   margin-left: 6px;
+  border: 0;
 }
 
 .companies-list .company .company-information .ci {
@@ -342,6 +351,10 @@
 .companies-list .company .company-information .ci span {
   float: left;
   margin-right: 10px;
+}
+
+.companies-list .company .company-information .ci span.icn-iphone {
+  margin-bottom: -1px;
 }
 
 .companies-list .company .company-information .ci span.icn-sb-location {

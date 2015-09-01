@@ -15278,7 +15278,7 @@ span.bold{
     max-width: 400px;
     margin-top: 6px;
     padding: 23px 30px 23px 30px;
-    line-height: 24px;
+    line-height: 23px;
     color: #25303d;}
 .content-wrapper .ticket-content .ticket-updates .description:hover{
     background: #e9edf1 !important;
@@ -20517,9 +20517,13 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 /* New Classes Start */
 
 .product-add-table-message{
-    /*height: 68px;*/
     color: #f29c9a;
-    padding-left: 84px;
+    margin-left: 174px;
+}
+@media (max-width: 1620px){
+    .product-add-table-message{
+        margin-left: 84px;
+    }
 }
 
 .product-add-table-message > div{
