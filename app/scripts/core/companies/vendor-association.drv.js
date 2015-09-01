@@ -37,7 +37,7 @@
           });
 
           $wind.on('click', function (e) {
-            if (!e.originalEvent.itComesFromTarget) {
+            if (!e.originalEvent || !e.originalEvent.itComesFromTarget) {
               vendors.hide();
             }
           });
