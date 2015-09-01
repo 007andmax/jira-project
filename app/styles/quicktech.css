@@ -20650,7 +20650,7 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 }
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > form > div.add-more.new{
-    margin: 40px 0px 40px;
+    margin: 40px 0px 40px 24px;
 }
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > form > div.add-more.new > div.add-table-actions{

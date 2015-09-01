@@ -50,10 +50,10 @@
             </div>
         </div>
         <div class="add-more new clearfix">
-            <div class="service-edit-table-message pull-left">
+            <div class="service-add-table-message pull-left">
                 
-                <div ng-messages="editServiceInvoiceForm.editServiceName.$error" ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceName') || isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity') || isShowingErrors(editServiceInvoiceForm, 'editServiceDescription') || isShowingErrors(editServiceInvoiceForm, 'amount')">
-                    <div>Error Message Here</div>
+                <div ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceName') || isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity') || isShowingErrors(editServiceInvoiceForm, 'editServiceDescription') || isShowingErrors(editServiceInvoiceForm, 'amount')">
+                    <div class="qt-error-msg" style="margin-left:-24px;">Error Message Here</div>
                 </div>
 
             </div>
