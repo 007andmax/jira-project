@@ -11467,8 +11467,8 @@ aside.left .nav-stacked.sub-nav{
 aside.left .last.nav-stacked.sub-nav{
     margin-top: 20px;
 }
-aside.left .last.nav-stacked.sub-nav li a:last-child{
-    padding-bottom: 36px;
+aside.left .last.nav-stacked.sub-nav li:last-child{
+    margin-bottom: 20px;
 }
 aside.left .divider{
     margin-top: 20px;
@@ -20741,16 +20741,24 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li.service div div.add-service{
     background-color: #f0fafb;
+    border-top: 1px solid #e0f5f7;
+    border-bottom: 1px solid #e0f5f7;
     margin-left: -66px;
     padding-left: 66px;
     margin-right: -40px;
+    padding-top: 4px;
+    padding-bottom: 5px;
 }
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div.add-product{
     background-color: #f0fafb;
+    border-top: 1px solid #e0f5f7;
+    border-bottom: 1px solid #e0f5f7;
     margin-left: -66px;
     padding-left: 66px;
     margin-right: -40px;
+    padding-top: 4px;
+    padding-bottom: 5px;
 }
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > div > div > form > div.col-1 {
