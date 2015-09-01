@@ -329,7 +329,7 @@
                   <label class="norm">Associated Vendor(s)</label>
                 </div>
                 <div class="dropdown" vendor-association>
-                  <div class="form-group" style="width: 100%;">
+                  <div class="form-group" style="width: 100%;" popover="Enter vendor(s) to be associated with this company." popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
                     <div class="tokenfield form-control" va-tokenfield>
 
                       <div class="token" ng-repeat="association in editCompany.companyAssociations">
@@ -463,7 +463,7 @@
                          hard-reset-pattern="taxRateNumberPattern">
 
                   <div class="label-add-btn">
-                    <a class="btn btn-cr btn-green btn-tax pull-right" ng-click="saveNewTax(newTaxRateForm)">
+                    <a class="btn btn-cr btn-green btn-tax pull-right disabled" ng-click="saveNewTax(newTaxRateForm)">
                       <span class="small-icn-tick icn"></span></a>
                   </div>
                 </div>
