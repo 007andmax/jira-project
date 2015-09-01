@@ -26,6 +26,10 @@
         },
         receiptArchiveInvoicesHeader: {
           invoices: []
+        },
+        vendorsHeader: {
+          count: 0,
+          filter: {keyword: ''}
         }
       };
 

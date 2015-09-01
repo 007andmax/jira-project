@@ -116,8 +116,8 @@
         };
 
         $scope.validatePaymentTerms = function (form) {
-          var valid = $scope.editVendor.paymentTerms > 0;
-          form.vendorPaymentTerms.$setValidity('min', valid);
+          var valid = ($scope.editVendor.paymentTerms > 0 || $scope.editVendor.paymentTerms === undefined);
+          form.vendorPaymentTerms.$setValidity('minValue', valid);
         };
 
         $scope.saveVendor = function (form) {

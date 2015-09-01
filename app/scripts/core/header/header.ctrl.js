@@ -27,6 +27,8 @@
             return 'receipt-archive';
           } else if ($state.includes("company-profile")) {
             return 'company-profile';
+          } else if ($state.includes("vendors")) {
+            return 'vendors';
           }
         }
 

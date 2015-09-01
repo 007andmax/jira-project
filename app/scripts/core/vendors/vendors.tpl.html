@@ -3,7 +3,7 @@
 
 
     <div class="companies-list vendors-list  clearfix">
-      <div ng-repeat="vendor in vendors"
+      <div ng-repeat="vendor in vendors | filter : vendorsFilter | orderBy: 'name'"
            ng-include="'/html/scripts/core/vendors/vendor.tpl.html'"></div>
     </div>
   </div>
