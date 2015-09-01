@@ -89,12 +89,18 @@
     </div>
 
     <div class="add-more  new clearfix">
+<<<<<<< HEAD
       <div class="product-add-table-message pull-right">
         <div ng-messages="editProductForm.sale.$error"
              ng-if="isShowingErrors(editProductForm, 'sale') || isShowingErrors(editProductForm, 'cost') || isShowingErrors(editProductForm, 'editProductVendor') || isShowingErrors(editProductForm, 'editProductDescription') || isShowingErrors(editProductForm, 'editProductName')">
           <div>Error message here.</div>
 <!--          <div ng-message="biggerThanSale">Cost should be smaller than sale.</div>
           <div ng-message="smallerThanCost">Sale should be bigger that cost.</div>-->
+=======
+      <div class="product-add-table-message pull-left">
+        <div ng-if="isShowingErrors(editProductForm, 'sale') || isShowingErrors(editProductForm, 'cost') || isShowingErrors(editProductForm, 'editProductVendor') || isShowingErrors(editProductForm, 'editProductDescription') || isShowingErrors(editProductForm, 'editProductName')">
+          <div class="qt-error-msg">Error message here.</div>
+>>>>>>> 02f12df49eaf480601d318f8c5a72fead2f45a55
         </div>
       </div>
       <div class="add-table-actions pull-right">
