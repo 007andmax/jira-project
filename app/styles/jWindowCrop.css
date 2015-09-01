@@ -1,46 +1,81 @@
 .jwc_container {
-} .jwc_outer {
-    height:100%;
-    width:100%;
-    display:table;
-} .jwc_middle {
-    display: table-cell;
-    vertical-align: middle;
-} .jwc_frame {
-    margin: 0px auto;
-} .jwc_cropbox {
-    cursor:move;
-    width: 400px;
-    height: 300px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border: 1px solid black;
-    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
-} .jwc_image {
-    cursor:move;
-} .jwc_loader{
-    text-align: center;
-} .jwc_controls {
-    height:24px;
-    background-color:#000;
-    width:100%; height:26px;
-    opacity:0.6; filter:alpha(opacity=6);
-    position:absolute; z-index:100; bottom:0px; left:0px;
-} .jwc_controls span {
-    display:block; float:left;
-    color:#FFF; font-size:11px;
-    margin:7px 0px 0px 5px;
-} .jwc_zoom_in, .jwc_zoom_out {
-    display:block; background-color:transparent;
-    cursor:pointer;
-    width:16px; height:16px;
-    float:right; margin:4px 4px 0px 0px;
-    text-decoration:none; text-align:center;
-    font-size:16px; font-weight:bold; color:#000;
-    border-radius:100px;
-} .jwc_zoom_in {
-    background-image:url(../images/round_plus_16.png);
-} .jwc_zoom_out {
-    background-image:url(../images/round_minus_16.png);
+}
+
+.jwc_outer {
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+
+.jwc_middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.jwc_frame {
+  margin: 0px auto;
+}
+
+.jwc_cropbox {
+  cursor: move;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border: 1px solid black;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+}
+
+.jwc_image {
+  cursor: move;
+}
+
+.jwc_loader {
+  text-align: center;
+}
+
+.jwc_controls {
+  height: 24px;
+  background-color: #000;
+  width: 100%;
+  height: 26px;
+  opacity: 0.6;
+  filter: alpha(opacity=6);
+  position: absolute;
+  z-index: 100;
+  bottom: 0px;
+  left: 0px;
+}
+
+.jwc_controls span {
+  display: block;
+  float: left;
+  color: #FFF;
+  font-size: 11px;
+  margin: 7px 0px 0px 5px;
+}
+
+.jwc_zoom_in, .jwc_zoom_out {
+  display: block;
+  background-color: transparent;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  float: right;
+  margin: 4px 4px 0px 0px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  border-radius: 100px;
+}
+
+.jwc_zoom_in {
+  background-image: url(../images/round_plus_16.png);
+}
+
+.jwc_zoom_out {
+  background-image: url(../images/round_minus_16.png);
 }

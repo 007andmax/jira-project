@@ -10,20 +10,23 @@
       </div>
 
       <div class="modal-body" style="width:578px; height: 480px">
-        <div crop-box style="width:578px; height:480px;"></div>
-        <div id="uploadBox">
-          <div id="showProgress"></div>
+        <div class="crop-area avatorCropAreaNew">
+          <div crop-box style="width:578px; height:480px;"></div>
+          <div class="avatorCropProgressBar hide">
+            <div class="avatorCropProgressDone"></div>
+          </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <div id="cropBoxControls" class="row-wrapper clearfix">
           <div class="zoom-slider pull-left">
-            <a  href="" class="pull-left icn icn-zoom-minus" icn-zoom-minus></a>
+            <a href="" class="pull-left icn icn-zoom-minus" icn-zoom-minus></a>
+
             <div class="range-wrapper pull-left">
               <input range-zoom type="range" max="130" min="0">
             </div>
-            <a  href="" class="pull-right icn icn-zoom-plus" icn-zoom-plus></a>
+            <a href="" class="pull-right icn icn-zoom-plus" icn-zoom-plus></a>
           </div>
 
           <div class="form-group actions-wrapper pull-right">

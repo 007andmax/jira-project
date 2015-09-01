@@ -488,9 +488,9 @@ margin: 6px auto;
 .create-new-user .user-fields .form-group .form-control-number-type:active,
 .create-new-user .user-fields .form-group .form-control-number-type.focus{
 	background-color: #9fabb9;
-	border-color: #9fabb9;	
+	border-color: #9fabb9;
   background-color: #9fabb9;
-  border-color: #9fabb9;  
+  border-color: #9fabb9;
   border-radius:3px;
 }
 
@@ -926,4 +926,28 @@ background-color: #333f50;
   .users-list .user{
        width:calc(100% / 9 - 40px);
 }
+}
+
+.modal-customize-avatr .avatorCropAreaNew {
+  background-color: #f7f9fb;
+  position: relative;
+}
+
+.modal-customize-avatr .avatorCropProgressBar {
+  width: 100px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #e9edf1;
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  left: 50%;
+  margin-left: -50px;
+  overflow: hidden;
+}
+
+.modal-customize-avatr .avatorCropProgressDone {
+  background-color: #00acc1;
+  width: 26%;
+  height: 6px;
 }
