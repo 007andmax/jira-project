@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companyProfile').controller('quicktech.core.companyProfile.companyProfileCtrl',
-    ['$scope',
-      function ($scope) {
+    ['$scope', '$stateParams', 'CompaniesService', 'StatisticsService',
+      function ($scope, $stateParams, CompaniesService, StatisticsService) {
 
 
       }]);

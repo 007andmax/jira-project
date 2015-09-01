@@ -25,6 +25,8 @@
             return 'receivable';
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
+          } else if ($state.includes("company-profile")) {
+            return 'company-profile';
           }
         }
 

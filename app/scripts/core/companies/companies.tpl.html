@@ -81,7 +81,7 @@
     <div class="company clearfix"
          ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
          ng-controller="quicktech.core.companies.companyCtrl">
-      <a href="javascript:void(0)" ui-sref="companyProfile( { companyId: company.id } )">
+      <a href="javascript:void(0)" ui-sref="company-profile( { companyId: company.id } )">
         <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
           <div class="overlay"></div>
           <div class="archive-btn" ng-click="archiveCompany(company.id)"><a class="black-btn"

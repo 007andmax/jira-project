@@ -129,7 +129,7 @@
         templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
         controller: 'quicktech.core.vendors.editVendorCtrl'
       }))
-      .state('companyProfile', waitForServices({
+      .state('company-profile', waitForServices({
         url: '/companies/profile/:companyId',
         templateUrl: '/html/scripts/core/company-profile/company-profile.tpl.html',
         controller: 'quicktech.core.companyProfile.companyProfileCtrl'
