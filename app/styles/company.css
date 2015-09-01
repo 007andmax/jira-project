@@ -1243,7 +1243,7 @@ a.right-arrow.active{
 
 	background-position: -876px -206px;
 }
-.company-profile .company-detail{
+/*.company-profile .company-detail{
 	width: 10px;
 	height: 12px;
 	background-position: -780px -206px;
@@ -1257,7 +1257,24 @@ a.right-arrow.active{
 .open  .company-profile .company-detail , .open > .btn:hover .company-profile .company-detail{
 
 	background-position: -820px -206px;
+}*/
+
+.icn .company-detail{
+	width: 10px;
+	height: 12px;
+	background-position: -780px -206px;
 }
+a:hover > .company-detail,
+a:active > .company-detail,
+a:focus:hover > .company-detail,
+a:focus:active > .company-detail,
+a:hover:active > .company-detail,
+a.active > .company-detail,
+a.open  a.company-detail , .open > a.btn:hover .company-detail{
+
+	background-position: -820px -206px;
+}
+
 .company-location{
 	width: 10px;
   height: 12px;

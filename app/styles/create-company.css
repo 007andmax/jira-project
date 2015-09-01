@@ -70,9 +70,9 @@ textarea.form-control {
   color: #9fabb9;
 }
 
-/*.create-new-user .header {
+.create-new-user .navnform-wrapper .header {
   padding-bottom: 7px;
-}*/
+}
 
 .user-fields .row-wrapper .control {
   margin-right: 30px;
@@ -275,6 +275,7 @@ textarea.form-control {
 
 .create-new-user .user-fields .av-field .form-group .token {
   padding-right: 18px;
+  margin-right: 3px;
   font-size: 11px;
   font-weight: 600;
   color: #fff;
@@ -295,6 +296,7 @@ textarea.form-control {
 
 .create-new-user .user-fields .tokenfield .token-input {
   padding-left: 13px;
+  margin-bottom: 0;
 }
 
 .create-new-user .user-fields .popover {
