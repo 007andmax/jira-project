@@ -81,37 +81,39 @@
     <div class="company clearfix"
          ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
          ng-controller="quicktech.core.companies.companyCtrl">
-      <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
-        <div class="overlay"></div>
-        <div class="archive-btn" ng-click="archiveCompany(company.id)"><a class="black-btn"
-                                                                          href="javascript:void(0)"><span
-          class="icn archive-company"></span></a></div>
-        <div class="company-info">
-          <h3 class="name"> {{ company.name }} </h3>
+      <a href="javascript:void(0)" ui-sref="companyProfile( { companyId: company.id } )">
+        <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
+          <div class="overlay"></div>
+          <div class="archive-btn" ng-click="archiveCompany(company.id)"><a class="black-btn"
+                                                                            href="javascript:void(0)"><span
+            class="icn archive-company"></span></a></div>
+          <div class="company-info">
+            <h3 class="name"> {{ company.name }} </h3>
 
-          <div class="ac-start-wrapper clearfix">
-            <ul class="rating rating-5 clearfix pull-left">
-              <li class="icn-star-full star-1"></li>
-              <li class="icn-star-full star-2"></li>
-              <li class="icn-star-full star-3"></li>
-              <li class="icn-star-full star-4"></li>
-              <li class="icn-star-half star-5"></li>
-            </ul>
+            <div class="ac-start-wrapper clearfix">
+              <ul class="rating rating-5 clearfix pull-left">
+                <li class="icn-star-full star-1"></li>
+                <li class="icn-star-full star-2"></li>
+                <li class="icn-star-full star-3"></li>
+                <li class="icn-star-full star-4"></li>
+                <li class="icn-star-half star-5"></li>
+              </ul>
 
-            <div class="dot-sep pull-left"></div>
+              <div class="dot-sep pull-left"></div>
 
-            <a href="javascript:void(0)" class="icn-wrapper pull-left" popover="{{ company.description }}"
-               popover-placement="bottom" popover-trigger="mouseenter">
-              <span class="icn company-detail"></span>
-            </a>
+              <a href="javascript:void(0)" class="icn-wrapper pull-left" popover="{{ company.description }}"
+                 popover-placement="bottom" popover-trigger="mouseenter">
+                <span class="icn company-detail"></span>
+              </a>
 
-            <a href="javascript:void(0)" class="icn-wrapper tp-hide pull-left" tooltip-placement="top"
-               tooltip="Edit Company info" ui-sref="editCompany( { companyId: company.id } )">
-              <span class="icn icn-edit-tag"></span>
-            </a>
+              <a href="javascript:void(0)" class="icn-wrapper tp-hide pull-left" tooltip-placement="top"
+                 tooltip="Edit Company info" ui-sref="editCompany( { companyId: company.id } )">
+                <span class="icn icn-edit-tag"></span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
 
       <div class="company-information clearfix">
         <div class="clearfix name-wrpper">

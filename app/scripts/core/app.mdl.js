@@ -17,6 +17,7 @@
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
       'quicktech.core.vendors',
+      'quicktech.core.companyProfile',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -127,6 +128,11 @@
         url: '/vendors/edit/:vendorId',
         templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
         controller: 'quicktech.core.vendors.editVendorCtrl'
+      }))
+      .state('companyProfile', waitForServices({
+        url: '/companies/profile/:companyId',
+        templateUrl: '/html/scripts/core/company-profile/company-profile.tpl.html',
+        controller: 'quicktech.core.companyProfile.companyProfileCtrl'
       }));
 
     function waitForServices(conf) {
