@@ -95,7 +95,7 @@
 }
 
 .companies-list .company .company-info {
-  bottom: 30px;
+  bottom: 26px;
 }
 
 .content-body.vendors .companies-list .company .company-information .more {
@@ -172,6 +172,10 @@
 .companies-list .company.vendors {
   position: relative;
   min-height: 429px;
+}
+.companies-list .company.vendors:hover {
+  box-shadow: 0px 6px 18px 0px rgba(10, 45, 92, 0.15);
+  border-color: #fff;
 }
 
 .companies-list .company.vendors .company-wrapper {
@@ -256,6 +260,9 @@
   padding: 23px 30px 23px 30px;
   line-height: 24px;
   color: #25303d;
+}
+.product-list-popover .arrow{
+  display: none;
 }
 
 .companies-list .company.vendors .products-list li.loading {

@@ -86,18 +86,19 @@
                    ng-model="editVendor.primaryAddress" show-validation-messages="triedToSave">
               </div>
               <div class="row-wrapper clearfix">
-                <div class="form-group dropdown" ng-class="{error: isShowingErrors(vendorForm, 'vendorDescription')}">
-                  <label>description of business</label></div>
-                <div ng-messages="vendorForm.vendorDescription.$error"
-                     ng-if="isShowingErrors(vendorForm, 'vendorDescription')">
-                  <div class="qt-error-msg" ng-message="required">
-                    Please enter a brief description of the company’s business.
+                <div class="form-group form-group-full dropdown" ng-class="{error: isShowingErrors(vendorForm, 'vendorDescription')}">
+                  <label>description of business</label>
+                  <div ng-messages="vendorForm.vendorDescription.$error"
+                       ng-if="isShowingErrors(vendorForm, 'vendorDescription')">
+                    <div class="qt-error-msg" ng-message="required">
+                      Please enter a brief description of the company’s business.
+                    </div>
                   </div>
+                  <textarea class="form-control" ng-model="editVendor.description" name="vendorDescription"
+                            ng-required="true" maxlength="120" ng-trim="false" make-dirty-on-blur popover="Describe the company's business in 120 characters (spaces included)."
+                          popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
+                  <div class="word-count">{{ 120 - editVendor.description.length }}</div>
                 </div>
-                <textarea class="form-control" ng-model="editVendor.description" name="vendorDescription"
-                          ng-required="true" maxlength="120" ng-trim="false" make-dirty-on-blur></textarea>
-
-                <div class="word-count">{{ 120 - editVendor.description.length }}</div>
               </div>
             </div>
 
@@ -115,33 +116,35 @@
                     <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
                     <div class="row-wrapper dropdown clearfix">
-                      <div class="form-group pull-left"
+                      <div class="form-group form-group-full pull-left"
                            ng-class="{error: isShowingErrors(locationForm, 'vendorTimezone')}">
                         <label>Time Zone</label>
-                      </div>
-                      <div ng-messages="locationForm.vendorTimezone.$error"
-                           ng-if="isShowingErrors(locationForm, 'vendorTimezone')">
-                        <div class="error-msg">Please select the timezone.</div>
-                      </div>
-                      <input type="text" class="form-control form-control-dropdown dropdown-toggle pull-left"
-                             required="true"
-                             ng-model="location.locale" name="vendorTimezone"
-                             typeahead="timezone as timezone.description for timezone in timezones | filter: {description: $viewValue}:stateComparator | orderBy:'description'"
-                             typeahead-editable="false" typeahead-min-length="0"
-                             qt-typeahead-show-on-focus ng-trim="false"
-                             style="width:453px;">
-                      <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-right tp-hide"
-                         tooltip="Add More" tooltip-placement="top"
-                         style="margin-top:0px;" ng-click="addLocation()" ng-show="$last"
-                         ng-disabled="editVendor.addresses.length >= locationsMaxCount">
-                        <span class="icn-add"></span>
-                      </a>
+                        <div ng-messages="locationForm.vendorTimezone.$error"
+                             ng-if="isShowingErrors(locationForm, 'vendorTimezone')">
+                          <div class="qt-error-msg error-msg">Please select the timezone.</div>
+                        </div>
+                        <input type="text" class="form-control form-control-dropdown dropdown-toggle pull-left"
+                               required="true"
+                               ng-model="location.locale" name="vendorTimezone"
+                               typeahead="timezone as timezone.description for timezone in timezones | filter: {description: $viewValue}:stateComparator | orderBy:'description'"
+                               typeahead-editable="false" typeahead-min-length="0"
+                               qt-typeahead-show-on-focus ng-trim="false"
+                               custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'scroll'}"
+                               style="width:453px;">
 
-                      <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-right tp-hide"
-                         tooltip="Remove" tooltip-placement="top"
-                         style="margin-top:0;" ng-click="removeLocation($index)" ng-show="!$last">
-                        <span class="icn-remove-update"></span>
-                      </a>
+                               <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-right tp-hide"
+                                  tooltip="Add More" tooltip-placement="top"
+                                  style="margin-top:0px;" ng-click="addLocation()" ng-show="$last && editVendor.addresses.length < locationsMaxCount"
+                                  ng-disabled="editVendor.addresses.length >= locationsMaxCount">
+                                 <span class="icn-add"></span>
+                               </a>
+
+                               <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-right tp-hide"
+                                  tooltip="Remove" tooltip-placement="top"
+                                  style="margin-top:0;" ng-click="removeLocation($index)" ng-show="!$last || editVendor.addresses.length >= locationsMaxCount">
+                                 <span class="icn-remove-update"></span>
+                               </a>
+                      </div>
                     </div>
 
                     <div class="row-wrapper clearfix">
@@ -169,7 +172,7 @@
               <div ng-repeat="contact in editVendor.contacts">
                 <div ng-form="contactForm">
                   <div class="user-form">
-                    <div edit-avatar ng-model="contact.avatar" model-name="contact"></div>
+                    <div edit-avatar ng-model="contact.avatar" model-name="contact" style="margin-top: 30px;"></div>
 
                     <div class="user-fields clearfix">
                       <div class="row-wrapper clearfix">
@@ -256,7 +259,7 @@
                         </div>
                         <div class="form-group dropdown number-type fullt pull-left">
                           <input type="text"
-                                 class="form-control form-control-dropdown form-control-number-type dropdown-toggle hide-cursor"
+                                 class="form-control form-control-dropdown form-control-number-type dropdown-toggle"
                                  ng-model="phoneNumberTypes[contact.phoneNumbers[0].typeNumber]" READONLY
                                  data-toggle="dropdown" aria-expanded="true">
 
@@ -272,26 +275,26 @@
                       </div>
 
                       <div class="row-wrapper clearfix">
-                        <label class="control checkbox pull-left primaryc">
-                          <input type="checkbox" ng-model="contact.subscription.ticket"
-                                 invalid-when="showSubscribeError">
-                          <span class="control-indicator"></span>
-                          Subscribe to ticket updates
-                          <span ng-if="showSubscribeError"
-                                class="error-alone">at least one contact should be subscribed on ticket updates.</span>
-                        </label>
+                        <!-- <label class="control checkbox pull-left primaryc" popover="At least one contact should be subscribed on ticket updates." popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover > -->
+                          <label class="control checkbox pull-left primaryc">
+                            <input type="checkbox" ng-model="contact.subscription.ticket"
+                                   invalid-when="showSubscribeError">
+                            <span class="control-indicator"></span>
+                            Subscribe to ticket updates
+                            <div ng-if="showSubscribeError"
+                                  class="error-alone" style="position: absolute; top: 25px; left: -7px; white-space: nowrap;">at least one contact should be subscribed on ticket updates.</div>
+                          </label>
 
                         <div class="form-group pull-right">
-                          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+                          <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-right tp-hide"
                              tooltip="Add More" tooltip-placement="top"
-                             ng-disabled="editVendor.contacts.length >= contactsMaxCount"
-                             style="margin-top:0;" ng-click="addContact()" ng-show="$last">
+                             ng-click="addContact()" ng-show="$last && editVendor.contacts.length < contactsMaxCount">
                             <span class="icn-add"></span>
                           </a>
 
-                          <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+                          <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-right tp-hide"
                              tooltip="Remove Contact" tooltip-placement="top"
-                             style="margin-top:0;" ng-click="removeContact($index)" ng-show="!$last">
+                             ng-click="removeContact($index)" ng-show="!$last || editVendor.contacts.length >= contactsMaxCount">
                             <span class="icn-remove-update"></span>
                           </a>
                         </div>
