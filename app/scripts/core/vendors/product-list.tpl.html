@@ -2,10 +2,8 @@
 
   <li class="clearfix" ng-repeat="product in vendor.products">
     <div class="name"><span class="product-name">{{ product.name }}</span>
-              <span class="icns icn-description"
-                    popover-placement="bottom" popover="{{ product.description }}" popover-trigger="mouseenter"
-                    aria-describedby="popover188920"></span><span
-        class="price">{{ product.sale | currency: '$': 2 }}</span>
+              <span class="icns icn-description" popover-placement="bottom" popover="{{ product.description }}" popover-trigger="mouseenter" popover-class="product-list-popover" popover-append-to-body="true"></span>
+              <span class="price">{{ product.sale | currency: '$': 2 }}</span>
     </div>
     <div class="clearfix"></div>
     <div class="art clearfix">{{ product.category.name }} #{{ product.code }}</div>

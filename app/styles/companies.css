@@ -350,6 +350,10 @@
   width: calc(100% - 32px);
 }
 
+.companies-list .company .company-information .ci.location span.txt {
+  min-height: 40px;
+}
+
 .companies-list .company .company-information .ci span {
   float: left;
   margin-right: 10px;
