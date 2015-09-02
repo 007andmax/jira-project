@@ -6,9 +6,27 @@
     ['$scope', '$stateParams', 'AddressesService', 'VendorsService', 'ContactsService', '$state',
       function ($scope, $stateParams, AddressesService, VendorsService, ContactsService, $state) {
 
+        var currentTimeZone;
+
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
-        $scope.timezones = AddressesService.getAllLocales();
+        $scope.timezones = AddressesService.getAllLocales(function () {
+          var localZone = -(new Date().getTimezoneOffset() / 60);
+          for (var i = 0; i < $scope.timezones.length; i++) {
+            if ($scope.timezones[i].description.match(/\d+/) === null) {
+              var timeZone = 0
+            } else {
+              var timeZone = $scope.timezones[i].description.match(/\d+/)[0];
+            }
+            if (localZone === +timeZone) {
+              currentTimeZone = $scope.timezones[i];
+              if (!$stateParams.vendorId) {
+                setCurrentTimeZone(currentTimeZone);
+              }
+              return;
+            }
+          }
+        });
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.websitePattern = /^((http|https)\:\/\/[a-zA-Z0-9_\-]+(?:\.[a-zA-Z0-9_\-]+)*\.[a-zA-Z]{2,4}(?:\/[a-zA-Z0-9_]+)*(?:\/[a-zA-Z0-9_]+\.[a-zA-Z]{2,4}(?:\?[a-zA-Z0-9_]+\=[a-zA-Z0-9_]+)?)?(?:\&[a-zA-Z0-9_]+\=[a-zA-Z0-9_]+)*)$/;
         $scope.phoneNumberPattern = /^\+?[0-9]{0,19}$/;
@@ -51,6 +69,7 @@
 
         $scope.addLocation = function () {
           $scope.editVendor.addresses.unshift({});
+          setCurrentTimeZone(currentTimeZone);
         };
 
         $scope.removeLocation = function (index) {
@@ -174,6 +193,10 @@
             }
           }
         }, true);
+
+        function setCurrentTimeZone(timeZoneObject) {
+          $scope.editVendor.addresses[0].locale = timeZoneObject;
+        }
 
       }]);
 
