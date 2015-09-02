@@ -20580,17 +20580,40 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 }
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-1{
-    width: calc(100% - 554px);
+    width: calc(100% - 703px);
 }
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-2{
-    width: 142px;
+    width: 192px;
 }
+
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-3{
-    width: 159px;
+    width: 209px;
 }
+
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-4{
-    width: 109px;
+    width: 151px;
 }
+
+@media (max-width: 1500px){
+    .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-1{
+        width: calc(100% - 554px);
+    }
+    
+    .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-2{
+        width: 142px;
+    }
+    
+    .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-3{
+        width: 159px;
+    }
+    
+    .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-4{
+        width: 109px;
+    }
+}
+
+
+
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-5{
     width: 112px;
     text-align: right;
