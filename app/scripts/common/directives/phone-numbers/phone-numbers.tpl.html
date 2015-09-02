@@ -74,14 +74,18 @@
         <span class="icn-add"></span>
       </a> -->
 
-      <a ng-if="phoneNumbers.length < maximalAmountOfPhones" href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-         tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()">
-        <span class="icn-add"></span>
-      </a>
-      <a ng-if="phoneNumbers.length >= maximalAmountOfPhones" href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-         tooltip="Remove Contact no." tooltip-placement="top" ng-click="removePhoneNumber($index)">
-        <span class="icn-remove-update"></span>
-      </a>
+      <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
+        <a cns-if href="javascript:void(0)"
+           class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+           tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()">
+          <span class="icn-add"></span>
+        </a>
+        <a cns-else href="javascript:void(0)"
+           class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+           tooltip="Remove Contact no." tooltip-placement="top" ng-click="removePhoneNumber($index)">
+          <span class="icn-remove-update"></span>
+        </a>
+      </div>
     </div>
   </div>
 </div>
