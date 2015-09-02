@@ -20,6 +20,7 @@
         };
 
         $scope.createInvoice = {
+          sentOn: $scope.minSentOnDate,
           frequency: 'WEEKLY'
         };
 

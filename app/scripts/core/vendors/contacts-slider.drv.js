@@ -9,12 +9,15 @@
           restrict: 'A',
           require: 'ngModel',
           templateUrl: '/html/scripts/core/vendors/contact-slider.tpl.html',
-          scope: {},
+          scope: {
+            contacts: '=ngModel'
+          },
           link: function ($scope, element, attrs, ctrl) {
 
             var shownId;
 
             $scope.getUserName = $rootScope.getUserName;
+            $scope.getContactAvatarUrl = $rootScope.getContactAvatarUrl;
 
             $scope.getPhoneWithLowestNumber = function (phoneNumbers) {
               var priority;
@@ -28,12 +31,12 @@
               return phoneNumbers[index];
             };
 
-            $scope.$watch('ngModel', function () {
-              if (!$scope.contacts) {
+            $scope.$watch(function () {
+              return shownId
+            }, function () {
+              if (ctrl.$viewValue && !shownId) {
                 shownId = ctrl.$viewValue[0].id;
               }
-
-              $scope.contacts = ctrl.$viewValue;
             });
 
             $scope.contactsOrder = function (contact) {

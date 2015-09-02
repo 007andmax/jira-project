@@ -219,6 +219,8 @@
 
           form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
           form.validation.rate.invalid = form.validation.rate.required || form.validation.rate.number;
+
+          form.invalid = form.validation.rate.invalid ||  form.validation.code.invalid;
         };
 
         $scope.saveNewTax = function (form) {
@@ -228,10 +230,10 @@
           if (form.validation && !form.validation.code.invalid && !form.validation.rate.invalid) {
             $scope.editCompany.taxRates.push($scope.newTaxRate);
             $scope.newTaxRate = {};
-            $scope.newTaxRateFormShowErrors = false;
-          } else {
-            $scope.newTaxRateFormShowErrors = true;
-          }
+            //$scope.newTaxRateFormShowErrors = false;
+          } /*else {*/
+            //$scope.newTaxRateFormShowErrors = true;
+          //}
         };
 
         $scope.removeAssociation = function (index) {

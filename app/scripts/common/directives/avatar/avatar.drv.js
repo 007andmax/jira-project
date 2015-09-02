@@ -29,7 +29,8 @@
 
           var wind = $(window),
             errorMessage = element.find('[error-message]'),
-            windowScrollTop;
+            windowScrollTop,
+            avatar;
 
           if (!urlGetters[attrs.modelName]) {
             throw 'model-name must be specified! Available values - ["user", "contact"]';
@@ -46,7 +47,7 @@
           //reposition
           element.on('click', '[change-position-button]', function (e) {
 
-            var avatar = {
+            avatar = {
               id: scope.model.id,
               origin: scope.model.origin,
               x: scope.model.x,
@@ -67,24 +68,30 @@
             minImageWidth: 244,
             minImageHeight: 244,
 
-            onProgress: function (progress) {
-              ctrl.$setValidity('loadingInProcess', false);
-              console.log(progress);
-            },
-            onSuccess: function (data) {
-              console.log(data);
-
-              errorMessage.hide();
-
-              var avatar = {};
+            onStart: function () {
+              avatar = {};
 
               if (scope.model) {
                 avatar.id = scope.model.id;
               }
 
-              avatar.origin = data;
+              ctrl.$setValidity('loadingInProcess', false);
+
+              scope.$apply();
 
               crop(avatar, false);
+            },
+            onProgress: function (progress) {
+              console.log(progress);
+              $('.avatorCropProgressBar').removeClass('hide');
+              $('.avatorCropProgressDone').width(progress+'%');
+            },
+            onSuccess: function (data) {
+              $('.avatorCropProgressBar').hide();
+
+              errorMessage.hide();
+
+              avatar.origin = data;
 
               ctrl.$setValidity('loadingInProcess', true);
               scope.$apply();
