@@ -20834,6 +20834,43 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
     margin-bottom: 10px;
 }
 
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table{
+    /*background-color: #ABC;*/
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th > button{
+    background-color: transparent;
+    font-size: 14px;
+    color: #FFF;
+    text-align: left;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th > button > strong{
+    font-weight: 400;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul {
+    padding-top: 0px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li{
+    border-radius: 3px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr:first-child{
+    background-color: #00acc1;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr:last-child {
+    color: #00acc1;
+    font-size: 11px;
+    font-weight: 400;
+    background-color: #FFF;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th {
+    background-color: transparent;
+}
 
 /*New Classes - End*/
 
