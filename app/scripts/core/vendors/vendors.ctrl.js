@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.vendors').controller('quicktech.core.vendors.vendorsCtrl',
-    ['$scope', 'VendorsService', 'UsersService', 'quicktech.common.services.SharedStateService',
-      function ($scope, VendorsService, UsersService, SharedStateService) {
+    ['$scope', 'VendorsService', 'UsersService', 'quicktech.common.services.SharedStateService', '$rootScope',
+      function ($scope, VendorsService, UsersService, SharedStateService, $rootScope) {
 
         var headerSharedState = SharedStateService.getSharedState('vendorsHeader');
 
@@ -25,6 +25,16 @@
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('vendorsHeader');
         });
+
+        $scope.attachEvents = function (element) {
+          $('.popover').on('mouseenter', function () {
+            $rootScope.insidePopover = true;
+          });
+          $('.popover').on('mouseleave', function () {
+            $rootScope.insidePopover = false;
+            $(element).popover('hide');
+          });
+        };
 
       }]);
 
