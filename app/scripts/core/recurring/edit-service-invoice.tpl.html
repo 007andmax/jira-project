@@ -16,18 +16,6 @@
             </div>
         </div>
         <div class="col-2">
-            <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
-                <!--div ng-messages="editServiceInvoiceForm.editServiceQuantity.$error"
-                     ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')">
-                    <div class="qt-error-msg" ng-message="required">Quantity field cannot be left empty.</div>
-                </div-->
-                <input type="text" class="form-control" placeholder="Qty" tabindex="3"
-                       ng-model="editService.quantity" ng-required="true" name="editServiceQuantity"
-                       hard-reset-pattern="numberPattern">
-            </div>
-        </div>
-
-        <div class="col-3">
             <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')}">
                 <!--div ng-messages="editServiceInvoiceForm.editServiceDescription.$error"
                      ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')">
@@ -36,6 +24,18 @@
                 </div-->
                 <input type="text" class="form-control service-description" placeholder="Description" ng-maxlength="1000"
                        ng-model="editService.description" name="editServiceDescription" ng-required="true">
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
+                <!--div ng-messages="editServiceInvoiceForm.editServiceQuantity.$error"
+                     ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')">
+                    <div class="qt-error-msg" ng-message="required">Quantity field cannot be left empty.</div>
+                </div-->
+                <input type="text" class="form-control" placeholder="Qty" tabindex="3"
+                       ng-model="editService.quantity" ng-required="true" name="editServiceQuantity"
+                       hard-reset-pattern="numberPattern">
             </div>
         </div>
         <div class="col-4">
