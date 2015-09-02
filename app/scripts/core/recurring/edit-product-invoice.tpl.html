@@ -2,11 +2,6 @@
   <form name="editProductInvoiceForm">
     <div class="col-1">
       <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(editProductInvoiceForm, 'editProductName')}">
-        <!-- <div ng-messages="editProductInvoiceForm.editProductName.$error"
-             ng-if="isShowingErrors(editProductInvoiceForm, 'editProductName')">
-          <div class="qt-error-msg" ng-message="required">Name field cannot be left empty.</div>
-          <div class="qt-error-msg" ng-message="parse">Please select the product.</div>
-        </div> -->
         <input type="text" class="form-control form-control-dropdown dropdown-toggle" placeholder="Product"
                name="editProductName" ng-model="editProduct.item" ng-required="true"
                data-toggle="dropdown" aria-expanded="true" tabindex="1"
@@ -18,11 +13,6 @@
 
     <div class="col-2">
       <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductInvoiceForm, 'editProductDescription')}">
-        <!-- <div ng-messages="editProductInvoiceForm.editProductDescription.$error"
-             ng-if="isShowingErrors(editProductInvoiceForm, 'editProductDescription')">
-          <div class="qt-error-msg" ng-message="required">Description field cannot be left empty.</div>
-          <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-        </div> -->
         <input type="text" class="form-control" placeholder="Description"
                tabindex="2" name="editProductDescription" ng-required="true"
                ng-model="editProduct.description" ng-maxlength="1000">
@@ -30,10 +20,6 @@
     </div>
     <div class="col-3">
       <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductInvoiceForm, 'editProductQuantity')}">
-        <!-- <div ng-messages="editProductInvoiceForm.editProductQuantity.$error"
-             ng-if="isShowingErrors(editProductInvoiceForm, 'editProductQuantity')">
-          <div class="qt-error-msg" ng-message="required">Quantity field cannot be left empty.</div>
-        </div> -->
         <input type="text" class="form-control" placeholder="Qty" tabindex="3"
                ng-model="editProduct.quantity" ng-required="true" name="editProductQuantity"
                hard-reset-pattern="numberPattern">
@@ -41,24 +27,36 @@
     </div>
     <div class="col-4">
       <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductInvoiceForm, 'amount')}">
-        <!-- <div ng-messages="editProductInvoiceForm.amount.$error"
-             ng-if="isShowingErrors(editProductInvoiceForm, 'amount')">
-          <div class="qt-error-msg" ng-message="required">Amount field cannot be left empty.</div>
-          <div class="qt-error-msg" ng-message="lowprice">
-            Product price should exceed cost ({{ editProduct.item.cost | currency: '$' }})
-          </div>
-        </div> -->
+
         <input type="text" class="form-control" placeholder="Amount" tabindex="2" name="amount"
                tooltip="Product cost {{ editProduct.item.cost | currency: '$'  }}" product-cost-validate="editProduct"
                ng-required="true" ng-model="editProduct.sum" hard-reset-pattern="decimalNumberPattern">
       </div>
     </div>
     <div class="add-more  new clearfix">
-    <div class="service-add-table-message pull-left">
-      <div ng-if="isShowingErrors(editProductInvoiceForm, 'editProductName') || isShowingErrors(editProductInvoiceForm, 'editProductDescription') || isShowingErrors(editProductInvoiceForm, 'editProductQuantity') || isShowingErrors(editProductInvoiceForm, 'amount')">
-        <div class="qt-error-msg" style="margin-left:-24px;">Error message here.</div>
+      <div class="service-add-table-message pull-left">
+        <div>
+          <div ng-show="showIsRequiredMessage(editProductInvoiceForm)">
+            <div class="qt-error-msg">Please fill in the required field(s).</div>
+          </div>
+
+          <div ng-messages="editProductInvoiceForm.editProductName.$error"
+               ng-show="isShowingErrors(editProductInvoiceForm, 'editProductName')">
+            <div class="qt-error-msg" ng-message="parse">Please select product from dropdown.</div>
+          </div>
+
+          <div ng-messages="editProductInvoiceForm.editProductDescription.$error"
+               ng-show="isShowingErrors(editProductInvoiceForm, 'editProductDescription')">
+            <div class="qt-error-msg" ng-message="maxlength">Description exceeds maximum length.</div>
+          </div>
+
+          <div ng-messages="editProductInvoiceForm.amount.$error"
+               ng-show="isShowingErrors(editProductInvoiceForm, 'amount')">
+            <div class="qt-error-msg" ng-message="lowprice">Sale price must be higher than total cost price.</div>
+          </div>
+
+        </div>
       </div>
-    </div>
       <div class="add-table-actions pull-right">
         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
            ng-click="cancelEditProduct()">Cancel</a>
