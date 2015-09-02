@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
+    ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService) {
+      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService) {
 
         $scope.editUser = undefined;
 
@@ -39,11 +39,18 @@
           SharedStateService.clearState('usersHeader');
         });
 
+        $scope.$on('cancelEditForm', function () {
+          $scope.editUser = undefined;
+        });
+
         $scope.changeUserRole = function (userId, userRole) {
           UsersService.changeUserRole(userId, userRole);
         };
 
         $scope.setEditUserId = function (userId) {
+
+          $rootScope.$broadcast('cancelEditForm');
+
           if (userId) {
             var user = UsersService.getOneById(userId);
             var userSubscription = $scope.subscriptions[user.id];
