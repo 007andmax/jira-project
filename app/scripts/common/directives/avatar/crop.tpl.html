@@ -21,16 +21,18 @@
       <div class="modal-footer">
         <div id="cropBoxControls" class="row-wrapper clearfix">
           <div class="zoom-slider pull-left">
-            <a href="" class="pull-left icn icn-zoom-minus" icn-zoom-minus></a>
+            <a href="" class="pull-left icn icn-zoom-minus" icn-zoom-minus ng-class="{disabled: !avatar.origin.id}"></a>
 
             <div class="range-wrapper pull-left">
-              <input range-zoom type="range" max="130" min="0">
+              <input range-zoom type="range" max="130" min="0" ng-disabled="!avatar.origin.id">
             </div>
-            <a href="" class="pull-right icn icn-zoom-plus" icn-zoom-plus></a>
+            <a href="" class="pull-right icn icn-zoom-plus" icn-zoom-plus ng-class="{disabled: !avatar.origin.id}"></a>
           </div>
 
           <div class="form-group actions-wrapper pull-right">
-            <button type="button" class="btn btn-scooter" ng-click="save()">Continue</button>
+            <button type="button" class="btn btn-scooter" ng-click="save()" ng-disabled="!avatar.origin.id">
+              Continue
+            </button>
           </div>
         </div>
       </div>
