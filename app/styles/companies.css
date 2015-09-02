@@ -291,6 +291,7 @@
 
 .companies-list .company .company-information .status {
   width: 100%;
+  margin-top: 0;
 }
 
 .companies-list .company .company-information .status .label-white {
@@ -336,7 +337,8 @@
 .companies-list .company .company-information .ci {
   font-size: 14px;
   color: #9fabb9;
-  line-height: 13px;
+  line-height: 14px;
+  margin-top: 0;
 }
 
 .companies-list .company .company-information .ci:not(:first-child) {
@@ -351,10 +353,10 @@
 .companies-list .company .company-information .ci span {
   float: left;
   margin-right: 10px;
+  margin-top: 0;
 }
-
-.companies-list .company .company-information .ci span.icn-iphone {
-  margin-bottom: -1px;
+.companies-list .company .company-information .ci span.icn-fax-machine {
+  margin-top: 1px;
 }
 
 .companies-list .company .company-information .ci span.icn-sb-location {
@@ -369,7 +371,7 @@
 }
 
 .companies-list .company .company-information .name-wrpper {
-  margin-bottom: 29px;
+  margin-bottom: 28px;
 }
 
 .companies-list .company .company-actions {
