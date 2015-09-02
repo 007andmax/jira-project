@@ -20807,5 +20807,10 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
     margin-bottom: 10px;
 }
 
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li.service{
+    margin-bottom: 10px;
+}
+
+
 /*New Classes - End*/
 
