@@ -9,6 +9,7 @@
                 SharedStateService, $stateParams, $state, VendorsService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
+        var currentTimeZone;
 
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
@@ -18,7 +19,23 @@
         $scope.vendorsSelection = {};
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.vendors = VendorsService.getAllForAutocomplete($scope);
-        $scope.timezones = AddressesService.getAllLocales();
+        $scope.timezones = AddressesService.getAllLocales(function () {
+          var localZone = -(new Date().getTimezoneOffset() / 60);
+          for (var i = 0; i < $scope.timezones.length; i++) {
+            if ($scope.timezones[i].description.match(/\d+/) === null) {
+              var timeZone = 0
+            } else {
+              var timeZone = $scope.timezones[i].description.match(/\d+/)[0];
+            }
+            if (localZone === +timeZone) {
+              currentTimeZone = $scope.timezones[i];
+              if (!$stateParams.companyId) {
+                setCurrentTimeZone(currentTimeZone);
+              }
+              return;
+            }
+          }
+        });
 
         $scope.$watch('companies.length', function (companiesCount) {
           headerSharedState.count = companiesCount;
@@ -67,6 +84,7 @@
 
         $scope.addLocation = function () {
           $scope.editCompany.addresses.unshift({});
+          setCurrentTimeZone(currentTimeZone);
         };
 
         $scope.removeLocation = function (index) {
@@ -265,6 +283,10 @@
             }
           };
         };
+
+        function setCurrentTimeZone(timeZoneObject) {
+          $scope.editCompany.addresses[0].locale = timeZoneObject;
+        }
 
       }]);
 
