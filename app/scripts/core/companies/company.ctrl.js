@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyCtrl',
-    ['$scope', 'CompaniesService',
-      function ($scope, CompaniesService) {
+    ['$scope', 'CompaniesService', '$state',
+      function ($scope, CompaniesService, $state) {
 
         $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
           var primaryContact,
@@ -40,6 +40,10 @@
 
         $scope.archiveCompany = function (companyId) {
           CompaniesService.archive(companyId);
+        };
+
+        $scope.showCompanyProfile = function () {
+          $state.go('company-profile', {companyId: $scope.company.id});
         };
 
       }]);

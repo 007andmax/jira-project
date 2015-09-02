@@ -3,24 +3,12 @@
     <div class="hover">
       <div class="col-1">{{ product ? product.code : actualCode.value }}</div>
       <div class="col-2 normal">
-        <div class="col-wrapper one"
-             ng-class="{error: isShowingErrors(editProductForm, 'editProductName')}">
-          <!-- <div ng-messages="editProductForm.editProductName.$error"
-               ng-if="isShowingErrors(editProductForm, 'editProductName')">
-            <div class="qt-error-msg" ng-message="required">Name is required.</div>
-            <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
-            <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
-          </div> -->
+        <div class="col-wrapper one" ng-class="{error: isShowingErrors(editProductForm, 'editProductName')}">
           <input type="text" class="form-control" placeholder="Product" name="editProductName"
                  ng-required="true" ng-model="editProduct.name" ng-maxlength="100"
                  is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
         </div>
-        <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
-          <!-- <div ng-messages="editProductForm.editProductDescription.$error"
-               ng-if="isShowingErrors(editProductForm, 'editProductDescription')">
-            <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-          </div> -->
+        <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
           <input type="text" class="form-control" placeholder="Description"
                  ng-model="editProduct.description"
                  ng-maxlength="500" name="editProductDescription">
@@ -28,13 +16,7 @@
       </div>
 
       <div class="col-3 normal">
-        <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'editProductVendor')}">
-          <!-- <div ng-messages="editProductForm.editProductVendor.$error"
-               ng-if="isShowingErrors(editProductForm, 'editProductVendor')">
-            <div class="qt-error-msg" ng-message="required">Vendor is required.</div>
-            <div class="qt-error-msg" ng-message="parse">Please select the vendor.</div>
-          </div> -->
+        <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductForm, 'editProductVendor')}">
           <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
                  placeholder="Vendor/Supplier"
                  typeahead-on-select="validateProductName(editProductForm.editProductName, product.versionedId.id)"
@@ -47,13 +29,7 @@
       </div>
 
       <div class="col-4 normal">
-        <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'cost')}">
-          <!-- <div ng-messages="editProductForm.cost.$error"
-               ng-if="isShowingErrors(editProductForm, 'cost')">
-            <div class="qt-error-msg" ng-message="required">Cost is required.</div>
-            <div class="qt-error-msg" ng-message="biggerThanSale">Cost should be smaller than sale.</div>
-          </div> -->
+        <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductForm, 'cost')}">
           <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
                  name="cost" ng-change="validateSaleAndCost(editProductForm)"
                  hard-reset-pattern="decimalNumberPattern" ng-required="true">
@@ -63,11 +39,6 @@
       <div class="col-5 normal">
         <div class="col-wrapper"
              ng-class="{error: isShowingErrors(editProductForm, 'sale')}">
-          <!-- <div ng-messages="editProductForm.sale.$error"
-               ng-if="isShowingErrors(editProductForm, 'sale')">
-            <div class="qt-error-msg" ng-message="required">Sale is required.</div>
-            <div class="qt-error-msg" ng-message="smallerThanCost">Sale should be bigger that cost.</div>
-          </div> -->
           <input type="text" class="form-control" placeholder="Sale Price" ng-model="editProduct.sale"
                  name="sale" ng-change="validateSaleAndCost(editProductForm)"
                  hard-reset-pattern="decimalNumberPattern" ng-required="true">
@@ -76,23 +47,50 @@
 
       <div class="col-6 normal description">
         <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
-          <!-- <div ng-messages="editProductForm.editProductDescription.$error"
-               ng-if="isShowingErrors(editProductForm, 'editProductDescription')">
-            <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-          </div> -->
+             ng-class="{error: isShowingErrors(editProductForm, 'editProductDescriptionCopy')}">
           <input type="text" class="form-control" placeholder="Description"
                  ng-model="editProduct.description"
-                 ng-maxlength="500" name="editProductDescription">
+                 ng-maxlength="500" name="editProductDescriptionCopy">
         </div>
       </div>
     </div>
 
     <div class="add-more  new clearfix">
       <div class="product-add-table-message pull-left">
-        <div ng-if="isShowingErrors(editProductForm, 'sale') || isShowingErrors(editProductForm, 'cost') || isShowingErrors(editProductForm, 'editProductVendor') || isShowingErrors(editProductForm, 'editProductDescription') || isShowingErrors(editProductForm, 'editProductName')">
-          <div class="qt-error-msg">Error message here.</div>
+
+        <div ng-show="showIsRequiredMessage(editProductForm)">
+          <div class="qt-error-msg">Please fill in the required field(s).</div>
         </div>
+
+        <div ng-messages="editProductForm.editProductName.$error"
+             ng-show="isShowingErrors(editProductForm, 'editProductName')">
+          <div class="qt-error-msg" ng-message="maxlength">Product name exceeds maximum length.</div>
+          <div class="qt-error-msg" ng-message="unique">Product name already exists!</div>
+        </div>
+
+        <div
+          ng-show="isShowingErrors(editProductForm, 'editProductDescription') || isShowingErrors(editProductForm, 'editProductDescriptionCopy')">
+          <div class="qt-error-msg"
+               ng-show="editProductForm.editProductDescription.$error.maxlength || editProductForm.editProductDescriptionCopy.$error.maxlength">
+            Product description exceeds maximum length.
+          </div>
+        </div>
+
+        <div ng-messages="editProductForm.editProductVendor.$error"
+             ng-show="isShowingErrors(editProductForm, 'editProductVendor')">
+          <div class="qt-error-msg" ng-message="parse">Please select vendor from dropdown.</div>
+        </div>
+
+        <!--<div ng-messages="editProductForm.cost.$error"-->
+        <!--ng-show="isShowingErrors(editProductForm, 'cost')">-->
+        <!--<div class="qt-error-msg" ng-message="biggerThanSale">Cost should be smaller than sale.</div>-->
+        <!--</div>-->
+
+        <div ng-messages="editProductForm.sale.$error"
+             ng-show="isShowingErrors(editProductForm, 'sale')">
+          <div class="qt-error-msg" ng-message="smallerThanCost">Sale price must be higher than cost price.</div>
+        </div>
+
       </div>
       <div class="add-table-actions pull-right">
         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"

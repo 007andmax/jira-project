@@ -50,6 +50,18 @@
           ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
         };
 
+        $scope.showIsRequiredMessage = function (form) {
+          if (form.$error.required) {
+            for (var i = 0; i < form.$error.required.length; i++) {
+              if ($scope.isShowingErrors(form, form.$error.required[i].$name)) {
+                return true;
+              }
+            }
+          }
+
+          return false;
+        };
+
       }]);
 
 }());
