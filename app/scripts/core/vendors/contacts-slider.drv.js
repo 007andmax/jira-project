@@ -61,10 +61,14 @@
               }
 
               var slides = element.find('[cs-slide]'),
+                curSlide = $(slides[0]),
                 nextSlide = $(slides[1]),
+                curSlideHideData = curSlide.find('[contact-hide-info]'),
+                nextSlideHideData = nextSlide.find('[contact-hide-info]'),
                 right = 22;
 
-              //prevSlide.fadeOut(0);
+              curSlide.fadeOut(0);
+              curSlideHideData.fadeOut(0);
               nextSlide.addClass("un");
 
               nextSlide.animate({right: right}, {
@@ -80,6 +84,9 @@
                     nextSlide.css("right", "");
                     nextSlide.removeClass("un");
 
+                    curSlide.fadeIn(0);
+                    nextSlideHideData.fadeIn(500);
+
                     $scope.$apply(function () {
                       shownId = id;
                     })
@@ -87,6 +94,12 @@
 
                 }
               });
+            };
+
+            $scope.initializeContact = function (index) {
+              if (index === 0)
+                element.find('[cs-slide]:first').find('[contact-hide-info]').fadeIn(0);
+
             };
 
             function getContactIndex(contactId) {
