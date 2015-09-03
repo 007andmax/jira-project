@@ -207,9 +207,10 @@ div.tt-suggestion:hover {
 	}
 
 	#ticket-new-note {
-		width:96.5%;
-		margin:17px auto;
-		min-height: 36px;
+		width:100%;
+		padding: 0 20px;
+		margin:11px auto 17px;
+		min-height: 42px;
 		outline: none;
 	}
 
