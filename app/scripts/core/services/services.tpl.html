@@ -5,7 +5,7 @@
         <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray dropdown-toggle tooltip-dp"
            data-placement="top" data-original-title="move service(s) to..." data-toggle="dropdown"
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
-           ng-disabled="!hasDefaultServicesChecked">
+           ng-disabled="!hasDefaultServicesChecked" ng-class="{disabled: !hasDefaultServicesChecked}">
           <span class="icns icn icn-move-services "></span>
         </a>
 

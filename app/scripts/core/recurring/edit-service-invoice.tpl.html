@@ -1,69 +1,65 @@
 <div class="add-service clearfix" ng-controller="quicktech.core.recurring.editServiceCtrl">
-    <form name="editServiceInvoiceForm">
-        <div class="col-1">
-            <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceName')}">
-                <!--div ng-messages="editServiceInvoiceForm.editServiceName.$error"
-                     ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceName')">
-                    <div class="qt-error-msg" ng-message="required">Service field cannot be left empty.</div>
-                    <div class="qt-error-msg" ng-message="parse">Please select the Service.</div>
-                </div-->
-                <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-                       placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-                       ng-model="editService.item" name="editServiceName" ng-required="true"
-                       typeahead="companyService as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
-                       typeahead-min-length="0" typeahead-editable="false"
-                       qt-typeahead-show-on-focus ng-trim="false">
-            </div>
-        </div>
-        <div class="col-2">
-            <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
-                <!--div ng-messages="editServiceInvoiceForm.editServiceQuantity.$error"
-                     ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')">
-                    <div class="qt-error-msg" ng-message="required">Quantity field cannot be left empty.</div>
-                </div-->
-                <input type="text" class="form-control" placeholder="Qty" tabindex="3"
-                       ng-model="editService.quantity" ng-required="true" name="editServiceQuantity"
-                       hard-reset-pattern="numberPattern">
-            </div>
+  <form name="editServiceInvoiceForm">
+    <div class="col-1">
+      <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceName')}">
+
+        <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
+               placeholder="Service" data-toggle="dropdown" aria-expanded="true"
+               ng-model="editService.item" name="editServiceName" ng-required="true"
+               typeahead="companyService as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
+               typeahead-min-length="0" typeahead-editable="false"
+               qt-typeahead-show-on-focus ng-trim="false">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')}">
+
+        <input type="text" class="form-control service-description" placeholder="Description" ng-maxlength="1000"
+               ng-model="editService.description" name="editServiceDescription" ng-required="true">
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
+
+        <input type="text" class="form-control" placeholder="Qty" tabindex="3"
+               ng-model="editService.quantity" ng-required="true" name="editServiceQuantity"
+               hard-reset-pattern="numberPattern">
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'amount')}">
+
+        <input type="text" class="form-control" placeholder="Amount" tabindex="3"
+               ng-model="editService.sum" ng-required="true" name="amount"
+               hard-reset-pattern="decimalNumberPattern">
+      </div>
+    </div>
+    <div class="add-more new clearfix">
+      <div class="service-add-table-message pull-left">
+
+        <div ng-show="showIsRequiredMessage(editServiceInvoiceForm)">
+          <div class="qt-error-msg">Please fill in the required field(s).</div>
         </div>
 
-        <div class="col-3">
-            <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')}">
-                <!--div ng-messages="editServiceInvoiceForm.editServiceDescription.$error"
-                     ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')">
-                    <div class="qt-error-msg" ng-message="required">Description field cannot be left empty.</div>
-                    <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-                </div-->
-                <input type="text" class="form-control service-description" placeholder="Description" ng-maxlength="1000"
-                       ng-model="editService.description" name="editServiceDescription" ng-required="true">
-            </div>
+        <div ng-messages="editServiceInvoiceForm.editServiceName.$error"
+             ng-show="isShowingErrors(editServiceInvoiceForm, 'editServiceName')">
+          <div class="qt-error-msg" ng-message="parse">Please select service from dropdown.</div>
         </div>
-        <div class="col-4">
-            <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceInvoiceForm, 'amount')}">
-                <!--div ng-messages="editServiceInvoiceForm.amount.$error"
-                     ng-if="isShowingErrors(editServiceInvoiceForm, 'amount')">
-                    <div class="qt-error-msg" ng-message="required">Amount field cannot be left empty.</div>
-                </div-->
-                <input type="text" class="form-control" placeholder="Amount" tabindex="3"
-                       ng-model="editService.sum" ng-required="true" name="amount"
-                       hard-reset-pattern="decimalNumberPattern">
-            </div>
-        </div>
-        <div class="add-more new clearfix">
-            <div class="service-add-table-message pull-left">
-                
-                <div ng-if="isShowingErrors(editServiceInvoiceForm, 'editServiceName') || isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity') || isShowingErrors(editServiceInvoiceForm, 'editServiceDescription') || isShowingErrors(editServiceInvoiceForm, 'amount')">
-                    <div class="qt-error-msg" style="margin-left:-24px;">Error Message Here</div>
-                </div>
 
-            </div>
-            <div class="add-table-actions pull-right">
-                <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-                   ng-click="cancelEditService()">Cancel</a>
-                <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-                   ng-click="saveService(editServiceInvoiceForm)" ng-class="{disabled: disabledCreateServiceButton}">
-                    {{ service === undefined ? 'Create' : 'Save Changes' }}</a>
-            </div>
+        <div ng-messages="editServiceInvoiceForm.editServiceDescription.$error"
+             ng-show="isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')">
+          <div class="qt-error-msg" ng-message="maxlength">Description exceeds maximum length.</div>
         </div>
-    </form>
+
+      </div>
+      <div class="add-table-actions pull-right">
+        <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+           ng-click="cancelEditService()">Cancel</a>
+        <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+           ng-click="saveService(editServiceInvoiceForm)" ng-class="{disabled: disabledCreateServiceButton}">
+          {{ service === undefined ? 'Create' : 'Save Changes' }}</a>
+      </div>
+    </div>
+  </form>
 </div>

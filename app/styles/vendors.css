@@ -261,6 +261,9 @@
   line-height: 24px;
   color: #25303d;
 }
+.product-list-popover .arrow{
+  display: none;
+}
 
 .companies-list .company.vendors .products-list li.loading {
   padding: 30px 0;

@@ -29,7 +29,7 @@
             $scope.disabledSaveChangeButton = true;
             ProductsService.saveProduct($scope.editProduct, function () {
               $rootScope.$broadcast('cancelEditForm', 'isProductCreation');
-              $scope.disabledCreateProductButton = false;
+              $scope.disabledSaveChangeButton = false;
             });
           } else {
             $scope.triedToSaveProduct = true;
@@ -42,6 +42,8 @@
             var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, modelId || '', $scope.editProduct.vendor.id, function () {
               ngModelCtrl.$setValidity('unique', validationResult.value);
             });
+          } else{
+            ngModelCtrl.$setValidity('unique', true);
           }
         };
 
@@ -52,6 +54,18 @@
           form.sale.$setValidity('smallerThanCost', valid);
           form.cost.$setValidity('biggerThanSale', valid);
 
+        };
+
+        $scope.showIsRequiredMessage = function (form) {
+          if (form.$error.required) {
+            for (var i = 0; i < form.$error.required.length; i++) {
+              if ($scope.isShowingErrors(form, form.$error.required[i].$name)) {
+                return true;
+              }
+            }
+          }
+
+          return false;
         };
 
       }]);
