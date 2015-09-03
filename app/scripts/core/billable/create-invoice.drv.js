@@ -60,7 +60,7 @@
           modalWindow.on('scroll', function (e) {
             var position = modalWindow.scrollTop(),
               pageHeight = element.find('.invoice-page-container').height(),
-              shownPage = Math.ceil(position / pageHeight);
+              shownPage = Math.max(1, Math.ceil(position / pageHeight));
 
             pageNumberBox.text(shownPage + ' of ' + invoices[$scope.showLock.id].pagesCount);
             pageNumberBox.show();

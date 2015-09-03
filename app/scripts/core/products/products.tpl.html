@@ -66,7 +66,7 @@
                     <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
                     <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
                   </div>
-                  <input type="text" class="form-control" ng-model="editCategory.name"
+                  <input type="text" class="form-control" ng-model="editCategory.name" focus-on
                          name="editCategoryName" ng-required="true" ng-maxlength="100"
                          is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
 
