@@ -36,24 +36,8 @@
     <div class="add-more  new clearfix">
       <div class="service-add-table-message pull-left">
         <div>
-          <div ng-show="showIsRequiredMessage(editProductInvoiceForm)">
-            <div class="qt-error-msg">Please fill in the required field(s).</div>
-          </div>
 
-          <div ng-messages="editProductInvoiceForm.editProductName.$error"
-               ng-show="isShowingErrors(editProductInvoiceForm, 'editProductName')">
-            <div class="qt-error-msg" ng-message="parse">Please select product from dropdown.</div>
-          </div>
-
-          <div ng-messages="editProductInvoiceForm.editProductDescription.$error"
-               ng-show="isShowingErrors(editProductInvoiceForm, 'editProductDescription')">
-            <div class="qt-error-msg" ng-message="maxlength">Description exceeds maximum length.</div>
-          </div>
-
-          <div ng-messages="editProductInvoiceForm.amount.$error"
-               ng-show="isShowingErrors(editProductInvoiceForm, 'amount')">
-            <div class="qt-error-msg" ng-message="lowprice">Sale price must be higher than total cost price.</div>
-          </div>
+          <div class="qt-error-msg">{{ getValidationMessage(editProductInvoiceForm) }}</div>
 
         </div>
       </div>

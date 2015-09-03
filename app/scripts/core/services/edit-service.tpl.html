@@ -28,22 +28,7 @@
     </div>
     <div class="add-more  new clearfix">
       <div class="service-add-table-message pull-left">
-
-        <div ng-show="showIsRequiredMessage(editServiceForm)">
-          <div class="qt-error-msg">Please fill in the required field(s).</div>
-        </div>
-
-        <div ng-messages="editServiceForm.editServiceName.$error"
-             ng-show="isShowingErrors(editServiceForm, 'editServiceName')">
-          <div class="qt-error-msg" ng-message="maxlength">Service name exceeds maximum length.</div>
-          <div class="qt-error-msg" ng-message="minlength">Service name is too short!</div>
-          <div class="qt-error-msg" ng-message="unique">Service name already exists!</div>
-        </div>
-
-        <div ng-messages="editServiceForm.timeBlock.$error" ng-if="isShowingErrors(editServiceForm, 'timeBlock')">
-          <div class="qt-error-msg" ng-message="invalidwhen">Minimal Time Slice should be greater than 0.</div>
-        </div>
-
+        <div class="qt-error-msg">{{ getValidationMessage(editServiceForm) }}</div>
       </div>
       <div class="add-table-actions pull-right">
         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"

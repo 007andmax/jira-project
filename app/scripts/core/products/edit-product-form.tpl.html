@@ -57,40 +57,7 @@
 
     <div class="add-more  new clearfix">
       <div class="product-add-table-message pull-left">
-
-        <div ng-show="showIsRequiredMessage(editProductForm)">
-          <div class="qt-error-msg">Please fill in the required field(s).</div>
-        </div>
-
-        <div ng-messages="editProductForm.editProductName.$error"
-             ng-show="isShowingErrors(editProductForm, 'editProductName')">
-          <div class="qt-error-msg" ng-message="maxlength">Product name exceeds maximum length.</div>
-          <div class="qt-error-msg" ng-message="unique">Product name already exists!</div>
-        </div>
-
-        <div
-          ng-show="isShowingErrors(editProductForm, 'editProductDescription') || isShowingErrors(editProductForm, 'editProductDescriptionCopy')">
-          <div class="qt-error-msg"
-               ng-show="editProductForm.editProductDescription.$error.maxlength || editProductForm.editProductDescriptionCopy.$error.maxlength">
-            Product description exceeds maximum length.
-          </div>
-        </div>
-
-        <div ng-messages="editProductForm.editProductVendor.$error"
-             ng-show="isShowingErrors(editProductForm, 'editProductVendor')">
-          <div class="qt-error-msg" ng-message="parse">Please select vendor from dropdown.</div>
-        </div>
-
-        <!--<div ng-messages="editProductForm.cost.$error"-->
-        <!--ng-show="isShowingErrors(editProductForm, 'cost')">-->
-        <!--<div class="qt-error-msg" ng-message="biggerThanSale">Cost should be smaller than sale.</div>-->
-        <!--</div>-->
-
-        <div ng-messages="editProductForm.sale.$error"
-             ng-show="isShowingErrors(editProductForm, 'sale')">
-          <div class="qt-error-msg" ng-message="smallerThanCost">Sale price must be higher than cost price.</div>
-        </div>
-
+        <div class="qt-error-msg">{{ getValidationMessage(editProductForm) }}</div>
       </div>
       <div class="add-table-actions pull-right">
         <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"

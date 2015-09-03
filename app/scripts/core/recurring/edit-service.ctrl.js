@@ -62,16 +62,22 @@
           }
         };
 
-        $scope.showIsRequiredMessage = function (form) {
+        $scope.getValidationMessage = function (form) {
           if (form.$error.required) {
             for (var i = 0; i < form.$error.required.length; i++) {
               if ($scope.isShowingErrors(form, form.$error.required[i].$name)) {
-                return true;
+                return 'Please fill in the required field(s).';
               }
             }
           }
 
-          return false;
+          if (form.editServiceName && form.editServiceName.$error && form.editServiceName.$error.parse) {
+            return 'Please select service from dropdown.';
+          }
+
+          if (form.editServiceDescription && form.editServiceDescription.$error && form.editServiceDescription.$error.maxlength) {
+            return 'Description exceeds maximum length.';
+          }
         };
 
       }]);

@@ -44,18 +44,29 @@
           } else {
             $scope.triedToSaveProduct = true;
           }
-        }
+        };
 
-        $scope.showIsRequiredMessage = function (form) {
+        $scope.getValidationMessage = function (form) {
           if (form.$error.required) {
             for (var i = 0; i < form.$error.required.length; i++) {
               if ($scope.isShowingErrors(form, form.$error.required[i].$name)) {
-                return true;
+                return 'Please fill in the required field(s).';
               }
             }
           }
 
-          return false;
+          if (form.editProductName && form.editProductName.$error && form.editProductName.$error.parse) {
+            return 'Please select product from dropdown.';
+          }
+
+          if (form.editProductDescription && form.editProductDescription.$error && form.editProductDescription.$error.maxlength) {
+            return 'Description exceeds maximum length.';
+          }
+
+          if (form.amount && form.amount.$error && form.amount.$error.lowprice) {
+            return 'Sale price must be higher than total cost price.';
+          }
+
         };
 
       }]);

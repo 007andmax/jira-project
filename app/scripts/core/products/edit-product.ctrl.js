@@ -42,7 +42,7 @@
             var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, modelId || '', $scope.editProduct.vendor.id, function () {
               ngModelCtrl.$setValidity('unique', validationResult.value);
             });
-          } else{
+          } else {
             ngModelCtrl.$setValidity('unique', true);
           }
         };
@@ -56,16 +56,36 @@
 
         };
 
-        $scope.showIsRequiredMessage = function (form) {
+        $scope.getValidationMessage = function (form) {
           if (form.$error.required) {
             for (var i = 0; i < form.$error.required.length; i++) {
               if ($scope.isShowingErrors(form, form.$error.required[i].$name)) {
-                return true;
+                return 'Please fill in the required field(s).';
               }
             }
           }
 
-          return false;
+          if (form.editProductName && form.editProductName.$error && form.editProductName.$error.maxlength) {
+            return 'Product name exceeds maximum length.';
+          }
+
+          if (form.editProductName && form.editProductName.$error && form.editProductName.$error.unique) {
+            return 'Product name already exists!';
+          }
+
+          if ((form.editProductDescription && form.editProductDescription.$error && form.editProductDescription.$error.maxlength)
+            || (form.editProductDescriptionCopy && form.editProductDescriptionCopy.$error && form.editProductDescriptionCopy.$error.maxlength)) {
+            return 'Product description exceeds maximum length.';
+          }
+
+          if (form.editProductVendor && form.editProductVendor.$error && form.editProductVendor.$error.parse) {
+            return 'Please select vendor from dropdown.';
+          }
+
+          if (form.sale && form.sale.$error && form.sale.$error.smallerThanCost) {
+            return 'Sale price must be higher than cost price.';
+          }
+
         };
 
       }]);

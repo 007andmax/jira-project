@@ -50,16 +50,34 @@
           ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
         };
 
-        $scope.showIsRequiredMessage = function (form) {
+        $scope.getValidationMessage = function (form) {
+
           if (form.$error.required) {
             for (var i = 0; i < form.$error.required.length; i++) {
               if ($scope.isShowingErrors(form, form.$error.required[i].$name)) {
-                return true;
+                return 'Please fill in the required field(s).';
               }
             }
           }
 
-          return false;
+          if (form.editServiceName && form.editServiceName.$error) {
+
+            if (form.editServiceName.$error.maxlength) {
+              return 'Service name exceeds maximum length.';
+            }
+
+            if (form.editServiceName.$error.minlength) {
+              return 'Service name is too short!';
+            }
+
+            if (form.editServiceName.$error.unique) {
+              return 'Service name already exists!';
+            }
+          }
+
+          if (form.timeBlock && form.timeBlock.$error && form.timeBlock.$error.invalidwhen) {
+            return 'Minimal Time Slice should be greater than 0.';
+          }
         };
 
       }]);
