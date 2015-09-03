@@ -5265,7 +5265,7 @@ select[multiple].input-lg,
 }
 /* line 20, ../sass/bootstrap/mixins/_buttons.scss */
 .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
-    color: "";
+    color: #fff;
     background-color: "";
     border-color: "";
     border-radius: 3px;
@@ -5646,6 +5646,9 @@ input[type="button"].btn-block {
     float: left;
     margin-top: 2px;
     margin-right: 9px;
+}
+.btn:hover > img, .btn:focus > img,.btn:active > img, .btn:active:hover > img, .btn:focus:hover > img, .btn:active:focus > img{
+    height: 14px;
 }
 
 /* line 260, ../sass/bootstrap/_buttons.scss */
@@ -14817,8 +14820,8 @@ body.opened-ticket .content-wrapper .ticket-sidebar  .ticket .ticket-title .tick
 }
 /* line 8, ../sass/bootstrap/_ticket-content.scss */
 .content-wrapper .ticket-header {
-    /*padding: 40px;
-    padding-bottom: 18px;*/
+    padding: 40px;
+    padding-bottom: 0;
 }
 .content-wrapper .scroll-pane .ticket-header {
     padding: 40px;
@@ -14827,6 +14830,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar  .ticket .ticket-title .tick
 .content-wrapper .ticket-content   .ticket-fixed-header{
     position: fixed;
     right: 301px;
+    top: 91px;
     /*width: calc(100% - 401px); commented by wasim */
     padding: 40px;
     margin-left: -40px;
@@ -15901,6 +15905,9 @@ margin-bottom: 20px;
     background: rgba(255, 255, 255, 0.91);
     border-bottom: 1px solid #e9edf1;
 }
+.content-wrapper  .add-product .col-wrapper .dropdown-menu.dropdown-menu-products>li:last-child{
+    margin-top: 69px;
+}
 /* line 485, ../sass/bootstrap/_ticket-content.scss */
 .content-wrapper .dropdown-menu-products .dropdown-header .form-group {
     margin: 0;
@@ -15962,6 +15969,13 @@ margin-bottom: 20px;
     min-width: 54px;
     width: 54px;
 }
+
+.content-wrapper  .dropdown-time .dropdown-menu-hour > li > a,
+.content-wrapper  .dropdown-time .dropdown-menu-minute > li > a {
+    padding: 6px 0;
+    text-align: center;
+}
+
 /* line 529, ../sass/bootstrap/_ticket-content.scss */
 .content-wrapper  .dropdown-time .dropdown-menu-minute {
     margin-left: 60px;
@@ -20838,6 +20852,85 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
     margin-bottom: 10px;
 }
 
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table{
+    /*background-color: #ABC;*/
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th > button{
+    background-color: transparent;
+    font-size: 14px;
+    color: #FFF;
+    text-align: left;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th > button > strong{
+    font-weight: 400;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul {
+    padding-top: 0px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li{
+    border-radius: 3px;
+    padding-top: 3px;
+    background-color: #00acc1;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table{
+    width: 300px;
+    outline: none;
+    background-color: #fff;
+
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr:first-child{
+    background-color: #00acc1;
+    height: 47px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th:first-child{
+    padding-left: 10px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th:last-child{
+    padding-right: 10px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr:last-child > th:nth-child(2){
+    padding-left: 10px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr:last-child {
+    color: #00acc1;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #FFF;
+    height: 50px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > thead > tr > th {
+    background-color: transparent;
+}
+
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > tbody > tr > td:nth-child(2){
+    padding-left: 10px;
+}
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > tbody > tr > td:last-child{
+    padding-right: 10px;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > tbody > tr > td > button.btn-info {
+    background-color: #00acc1;
+    border-color: #00acc1;
+    color: #fff;
+    border-radius: 3px;
+    padding: 6px 0;
+    width: 75% !important;
+    margin: 0 auto;
+}
+
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > tbody > tr > td > button.btn-info > .text-info {
+    color: #fff;
+}
 
 /*New Classes - End*/
 

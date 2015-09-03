@@ -365,7 +365,7 @@
 
         if (height == "0") {
           $(".ticket-content .ticket-header > div").removeClass('ticket-fixed-header');
-          $(".ticket-content .ticket-header > h3").css("margin-Top", "10px");
+          $(".ticket-content .ticket-header > h3").css("margin-Top", "18px");
           $(".ticket-content .ticket-header > div").css("width", "");
         } else if (height > "180") {
           $(".ticket-content .ticket-header > div").addClass('ticket-fixed-header');

@@ -15,9 +15,7 @@
           var elem = element.find('[animation-change-location]'),
             location = $(elem.context);
 
-          $scope.$watch(function () {
-            return $scope.location;
-          }, function () {
+          $scope.$watch('location', function () {
             location.fadeOut(0, function () {
               location.fadeIn(300, function () {
               })

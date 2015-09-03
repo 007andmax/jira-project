@@ -11,12 +11,18 @@
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
         $scope.timezones = AddressesService.getAllLocales(function () {
-          var localZone = -(new Date().getTimezoneOffset() / 60);
+
+          var localZone = -(new Date().getTimezoneOffset() / 60),
+            timeZone;
+
           for (var i = 0; i < $scope.timezones.length; i++) {
-            if ($scope.timezones[i].description.match(/\d+/) === null) {
-              var timeZone = 0
+
+            var timeZoneDescription = $scope.timezones[i].description.match(/\d+/);
+
+            if (timeZoneDescription === null) {
+              timeZone = 0
             } else {
-              var timeZone = $scope.timezones[i].description.match(/\d+/)[0];
+              timeZone = timeZoneDescription[0];
             }
             if (localZone === +timeZone) {
               currentTimeZone = $scope.timezones[i];
