@@ -14817,8 +14817,8 @@ body.opened-ticket .content-wrapper .ticket-sidebar  .ticket .ticket-title .tick
 }
 /* line 8, ../sass/bootstrap/_ticket-content.scss */
 .content-wrapper .ticket-header {
-    /*padding: 40px;
-    padding-bottom: 18px;*/
+    padding: 40px;
+    padding-bottom: 0;
 }
 .content-wrapper .scroll-pane .ticket-header {
     padding: 40px;
@@ -14827,6 +14827,7 @@ body.opened-ticket .content-wrapper .ticket-sidebar  .ticket .ticket-title .tick
 .content-wrapper .ticket-content   .ticket-fixed-header{
     position: fixed;
     right: 301px;
+    top: 91px;
     /*width: calc(100% - 401px); commented by wasim */
     padding: 40px;
     margin-left: -40px;
