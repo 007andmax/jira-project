@@ -2,7 +2,7 @@
   <div class="table-wrapper clearfix">
     <div class="table-content pull-left">
       <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
-      <div class="col-1 col-0">{{ product.createdAt | date:'dd MMM yyyy' }}</div>
+      <!--<div class="col-1 col-0">{{ product.createdAt | date:'dd MMM yyyy' }}</div>-->
       <div class="col-1">Hard Disk <span class="model">#{{ product.item.code }}</span></div>
       <div class="col-4">{{ product.sum | currency: '$': 0 }}</div>
       <div class="col-3">{{ product.price | currency: '$': 0 }}<span class="model">Qty {{ product.billableQuantity }}</span></div>

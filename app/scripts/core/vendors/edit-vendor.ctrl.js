@@ -60,7 +60,7 @@
         } else {
           $scope.editVendor = {
             addresses: [{isPrimary: true}],
-            contacts: [getEmptyContact()],
+            contacts: [getEmptyContact(true)],
             products: []
           };
         }
@@ -93,19 +93,19 @@
         };
 
         $scope.addContact = function () {
-          $scope.editVendor.contacts.unshift(getEmptyContact());
+          $scope.editVendor.contacts.unshift(getEmptyContact(false));
         };
 
         $scope.removeContact = function (index) {
           $scope.editVendor.contacts.splice(index, 1);
         };
 
-        function getEmptyContact() {
+        function getEmptyContact(value) {
           return {
             avatar: {
             },
             phoneNumbers: [{typeNumber: "MOBILE"}],
-            subscription: {ticket: true}
+            subscription: {ticket: value}
           };
         }
 
