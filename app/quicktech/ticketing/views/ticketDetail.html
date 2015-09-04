@@ -433,7 +433,7 @@
 						{{ticketUpdate.sharedBetween.length}} people added to this update
 					</span>
 					<div class="pull-left avatar-26 avatar m-r" ng-repeat="sharedBetweenPerson in ticketUpdate.sharedBetween">
-						<img ng-src="/users/{{ sharedBetweenPerson.id }}/image?t={{ sharedBetweenPerson.avatar.updatedAt }}" alt="..." class="img-circle">
+						<img ng-src="{{ getUserAvatarUrl(sharedBetweenPerson) }}" alt="..." class="img-circle">
 					</div>
 				</div>
 

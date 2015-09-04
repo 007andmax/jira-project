@@ -1,11 +1,12 @@
 <div class="user-vendor" ng-class="{active: $index === 0, nactive: $index !== 0}"
-     ng-repeat="contact in contacts | orderBy: contactsOrder" cs-slide ng-show="$index <= 1">
+     ng-repeat="contact in contacts | orderBy: contactsOrder" cs-slide ng-show="$index <= 1"
+     ng-init="initializeContact($index)">
   <div class="clearfix name-wrpper">
     <a herf="" class="pull-left thumb avatar m-r" ng-click="showNext(contact.id)">
       <img ng-src="{{ getContactAvatarUrl(contact) }}" alt="..." class="img-circle no-avatar">
     </a>
 
-    <div class="user-inf pull-left user-finfo" style="display:block" ng-show="$index === 0">
+    <div class="user-inf pull-left user-finfo" style="display:none" contact-hide-info>
       <h4 class="name">{{ getUserName(contact) }}</h4>
 
       <div class="status pull-left"><span
@@ -15,7 +16,7 @@
 
     </div>
   </div>
-  <div class="user-finfo" style="display:block" ng-show="$index === 0">
+  <div class="user-finfo" style="display:none" contact-hide-info>
     <div class="clearfix">
       <div class="ci number clearfix">
         <span class="icn"

@@ -215,6 +215,7 @@
     }
 
     function handeImageLoad() {
+      base.options.onImageLoad.call(base.container);
       initializeDimensions();
     }
 
@@ -300,7 +301,8 @@
     rangeDecreaseElement: '',
 
     startWith: null,
-
+    onImageLoad: function () {
+    },
     onChange: function () {
     }
   };
