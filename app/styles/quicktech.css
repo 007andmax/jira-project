@@ -13449,7 +13449,7 @@ body .content-wrapper .ticket-sidebar {
     border-top: 1px solid #e0f5f7;
     border-bottom: 1px solid #e0f5f7;
     padding: 0 30px 0 40px;
-    z-index: 999;
+    z-index: 10;
 }
 .content-wrapper .content-body .companies-list >  li .edit-category-form a.btn{
     float: right;
@@ -20930,6 +20930,16 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 
 .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div > div > ul > li > div > table > tbody > tr > td > button.btn-info > .text-info {
     color: #fff;
+}
+
+
+.content-container > div > div > div > div > div > div > div > ul > li > div > form > div.error > div > div.qt-error-msg{
+    position: absolute;
+    top: 60px;
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #e53935;
 }
 
 /*New Classes - End*/
