@@ -18,22 +18,37 @@
             if (origin && origin.id) {
               unwatch();
 
-              element.find('[crop-box]').jWindowCrop({
+              var rangeIncreaseElement = element.find('[icn-zoom-plus]'),
+                rangeDecreaseElement = element.find('[icn-zoom-minus]'),
+                rangeSelectElement = element.find('[range-zoom]'),
+                continueButton = element.find('[continue-button]'),
+                cropBox = element.find('[crop-box]');
+
+              cropBox.jWindowCrop({
                 cropBoxWidth: 244,
                 cropBoxHeight: 244,
                 maxZoom: 2,
                 imageSource: '/file/' + scope.model.origin.id,
-                loadingText: 'Loading ...',
+                loadingText: '  ',
 
-                rangeSelectElement: element.find('[range-zoom]'),
-                rangeIncreaseElement: element.find('[icn-zoom-plus]'),
-                rangeDecreaseElement: element.find('[icn-zoom-minus]'),
+                rangeSelectElement: rangeSelectElement,
+                rangeIncreaseElement: rangeIncreaseElement,
+                rangeDecreaseElement: rangeDecreaseElement,
 
                 startWith: !scope.isReposition ? null : {
                   x: scope.model.x,
                   y: scope.model.y,
                   w: scope.model.w,
                   h: scope.model.h
+                },
+
+                onImageLoad: function () {
+                  cropBox.show();
+
+                  rangeIncreaseElement.removeClass('disabled');
+                  rangeSelectElement.prop('disabled', false);
+                  rangeDecreaseElement.removeClass('disabled');
+                  continueButton.prop('disabled', false);
                 },
 
                 onChange: function (e) {
