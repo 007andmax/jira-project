@@ -1,160 +1,161 @@
 <div class="content-body receipt">
-  <div role="tabpanel" fixed-tab-topbar="0">
-    <div class="tabs-topbar" ftt-topbar-to-be-fixed>
+    <div role="tabpanel" fixed-tab-topbar="0">
+        <div class="tabs-topbar" ftt-topbar-to-be-fixed>
 
-      <div class="btn-group pull-right" dropdown auto-close="outsideClick" is-open="status.isopen">
-        <a href="javascript:void(0)" dropdown-toggle
-           class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
-           tooltip="ADD Category" tooltip-placement="top">
-          <span class="icns icn icn-add-category"></span></a>
+            <div class="btn-group pull-right" dropdown auto-close="outsideClick" is-open="status.isopen">
+                <a href="javascript:void(0)" dropdown-toggle
+                   class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
+                   tooltip="ADD Category" tooltip-placement="top">
+                    <span class="icns icn icn-add-category"></span></a>
 
-        <div class="dropdown-menu add-company-dropdown">
-          <form name="newCategoryNameForm">
-            <div class="clearfix">
-              <div class="form-group" ng-class="{error: isShowingErrors(newCategoryNameForm, 'newCategoryName')}">
-                <div ng-messages="newCategoryNameForm.newCategoryName.$error" style="margin-top: -17px"
-                     ng-if="isShowingErrors(newCategoryNameForm, 'newCategoryName')">
-                  <div class="qt-error-msg" ng-message="required">Name is required.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
-                  <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
+                <div class="dropdown-menu add-company-dropdown">
+                    <form name="newCategoryNameForm">
+                        <div class="clearfix">
+                            <div class="form-group" ng-class="{error: isShowingErrors(newCategoryNameForm, 'newCategoryName')}">
+                                <div ng-messages="newCategoryNameForm.newCategoryName.$error" style="margin-top: -17px"
+                                     ng-if="isShowingErrors(newCategoryNameForm, 'newCategoryName')">
+                                    <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                                    <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                                    <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
+                                </div>
+                                <input type="text" class="form-control form-control-round dropdown-toggle"
+                                       placeholder="Category name..."
+                                       ng-model="newCategory.name" name="newCategoryName" ng-required="true" ng-maxlength="100"
+                                       is-uniq-validation validation-func="isUniqueCategoryName">
+
+                                <div class="label-add-btn" ng-click="addCategory(newCategoryNameForm)">
+                                    <a href="javascript:void(0)" class=" btn input-btn-cr btn-green disabled btn-add-more pull-left"
+                                       ng-class="{disabled: newCategoryNameForm.$invalid}">
+                                        <span class="small-icn-add icn"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <input type="text" class="form-control form-control-round dropdown-toggle"
-                       placeholder="Category name..."
-                       ng-model="newCategory.name" name="newCategoryName" ng-required="true" ng-maxlength="100"
-                       is-uniq-validation validation-func="isUniqueCategoryName">
-
-                <div class="label-add-btn" ng-click="addCategory(newCategoryNameForm)">
-                  <a href="javascript:void(0)" class=" btn input-btn-cr btn-green disabled btn-add-more pull-left"
-                     ng-class="{disabled: newCategoryNameForm.$invalid}">
-                    <span class="small-icn-add icn"></span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active">
-          <a href="javascript:void(0)">Products</a></li>
-        <li role="presentation">
-          <a ui-sref="ps.services">Services & Rates</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="tab-content">
-
-      <div role="tabpanel" class="tab-pane active">
-        <ul class="companies-list recurring products" ftt-tab-content>
-          <li ng-repeat="category in categories" event-toggle-slider="toggleProducts"
-              ng-controller="quicktech.core.products.categoryCtrl" ng-class="{'no-border':$last}">
-
-
-            <a href='javascript:void(0)' ng-click="toggleProducts()">
-              <span class="name" ng-if="!isEditCategory">{{ category.name }}</span>
-              <span class="amount pull-right">{{ category.productsAmount }} items</span>
-              <div class="clearfix"></div>
-            </a>
-            <div ng-if="isEditCategory">
-              <form name="editCategoryForm" class="edit-category-form">
-                <div ng-class="{error: isShowingErrors(editCategoryForm, 'editCategoryName')}">
-                  <div ng-messages="editCategoryForm.editCategoryName.$error"
-                       ng-if="isShowingErrors(editCategoryForm, 'editCategoryName')">
-                    <div class="qt-error-msg" ng-message="required">Name is required.</div>
-                    <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
-                    <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
-                  </div>
-                  <input type="text" class="form-control" ng-model="editCategory.name" focus-on
-                         name="editCategoryName" ng-required="true" ng-maxlength="100"
-                         is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
-
-                  <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"
-                     ng-click="saveEditCategory(editCategoryForm)" ng-disabled="disabledSaveButton">Save Changes</a>
-                  <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"
-                     ng-click="cancelEditCategory()">Cancel</a>
-                </div>
-                <div class="clearfix"></div>
-              </form>
             </div>
 
-
-            <ul class="invoices recurring  products" ets-slider>
-              <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
-                <li class="head clearfix" ng-show="products.length > 0">
-                  <div class="">
-                    <div class="col-1">CODE NO.</div>
-                    <div class="col-2">PRODUCT</div>
-                    <div class="col-3">VENDOR/SUPPLIER</div>
-                    <div class="col-4">COST</div>
-                    <div class="col-5">SALE PRICE</div>
-                  </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="javascript:void(0)">Products</a></li>
+                <li role="presentation">
+                    <a ui-sref="ps.services">Services & Rates</a>
                 </li>
-                <div ng-repeat="product in products | orderBy : 'code'"
-                     ng-controller="quicktech.core.products.productCtrl"
-                     show-model-element="{{ 'show-' + product.versionedId.id }}" ng-class="{'no-border':$last}">
-                  <li class="clearfix" ng-if="!showEditProduct">
-                    <div class="hover">
-                      <div class="col-1">{{ product.code }}</div>
-                      <div class="col-2 normal"><span class="product-name">{{ product.name }}</span>
+            </ul>
+        </div>
 
-                        <div class="popover-container">
-                          <span class="icns icn-description" popover-placement="bottom" popover="{{ product.description }}" popover-trigger="mouseenter"></span>
+        <div class="tab-content">
+
+            <div role="tabpanel" class="tab-pane active">
+                <ul class="companies-list recurring products" ftt-tab-content>
+                    <li ng-repeat="category in categories" event-toggle-slider="toggleProducts"
+                        ng-controller="quicktech.core.products.categoryCtrl" ng-class="{'no-border':$last}">
+
+
+                        <a href='javascript:void(0)' ng-click="toggleProducts()">
+                            <span class="name" ng-if="!isEditCategory">{{ category.name}}</span>
+                            <span class="amount pull-right">{{ category.productsAmount}} items</span>
+                            <div class="clearfix"></div>
+                        </a>
+                        <div ng-if="isEditCategory">
+                            <form name="editCategoryForm" class="edit-category-form">
+                                <div ng-class="{error: isShowingErrors(editCategoryForm, 'editCategoryName')}">
+
+                                    <input type="text" class="form-control" ng-model="editCategory.name" focus-on
+                                           name="editCategoryName" ng-required="true" ng-maxlength="100"
+                                           is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
+                                    <div ng-messages="editCategoryForm.editCategoryName.$error"
+                                         ng-if="isShowingErrors(editCategoryForm, 'editCategoryName')">
+                                        <div class="qt-error-msg" ng-message="required">Name is required.</div>
+                                        <div class="qt-error-msg" ng-message="maxlength">Name is too large.</div>
+                                        <div class="qt-error-msg" ng-message="unique">Name already occupied.</div>
+                                    </div>
+                                    <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter"
+                                       ng-click="saveEditCategory(editCategoryForm)" ng-disabled="disabledSaveButton">Save Changes</a>
+                                    <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter"
+                                       ng-click="cancelEditCategory()">Cancel</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </form>
                         </div>
 
-                        <!--<a href="javascript:void(0)" popover="{{ product.description }}"-->
-                        <!--popover-placement="bottom" popover-trigger="mouseenter">-->
-                        <!--<span class="icn icn-description"></span>-->
-                        <!--</a>-->
 
-                      </div>
-                      <div class="col-3 normal">{{ product.vendor.name }}</div>
-                      <div class="col-4 normal">{{ product.cost | currency }}</div>
+                        <ul class="invoices recurring  products" ets-slider>
+                            <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
+                                <li class="head clearfix" ng-show="products.length > 0">
+                                    <div class="">
+                                        <div class="col-1">CODE NO.</div>
+                                        <div class="col-2">PRODUCT</div>
+                                        <div class="col-3">VENDOR/SUPPLIER</div>
+                                        <div class="col-4">COST</div>
+                                        <div class="col-5">SALE PRICE</div>
+                                    </div>
+                                </li>
+                                <div ng-repeat="product in products| orderBy : 'code'"
+                                     ng-controller="quicktech.core.products.productCtrl"
+                                     show-model-element="{{ 'show-' + product.versionedId.id}}" ng-class="{'no-border':$last}">
+                                    <li class="clearfix" ng-if="!showEditProduct">
+                                        <div class="hover">
+                                            <div class="col-1">{{ product.code}}</div>
+                                            <div class="col-2 normal"><span class="product-name">{{ product.name}}</span>
 
-                      <div class="col-5 normal">{{ product.sale | currency }}</div>
-                      <div class="sub-actions pull-left">
-                        <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
-                           ng-click="deleteProduct()"
-                           tooltip="Delete Product" tooltip-placement="top"></a>
-                        <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
-                           ng-click="openEditProduct()"
-                           tooltip="Edit Product" tooltip-placement="top"></a>
-                      </div>
-                    </div>
-                  </li>
-                  <div ng-if="showEditProduct"
-                       ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
-                </div>
-                <div ng-if="showCreateProduct"
-                     ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'" class="create-product"></div>
-                <li class="clearfix no-border add-product-wrapper">
-                  <button class="btn btn-sr btn-create-in btn-scooter pull-right" ng-click="addProduct()"
-                          tooltip="Add Product" tooltip-placement="top" ng-disabled="showCreateProduct"
-                          ng-class="{disabled: showCreateProduct}">
-                    <span class="icns icn wt-icn-add-product "></span></button>
-                </li>
+                                                <div class="popover-container">
+                                                    <span class="icns icn-description" popover-placement="bottom" popover="{{ product.description}}" popover-trigger="mouseenter"></span>
+                                                </div>
 
-              </div>
-            </ul>
+                                                <!--<a href="javascript:void(0)" popover="{{ product.description }}"-->
+                                                <!--popover-placement="bottom" popover-trigger="mouseenter">-->
+                                                <!--<span class="icn icn-description"></span>-->
+                                                <!--</a>-->
 
-            <div class="actions pull-right">
-              <button class="btn btn-sr btn-create-in btn-scooter pull-left"
-                      ng-click="addProduct(); toggleProducts()"
-                      tooltip="Add Product" tooltip-placement="top" scroll-to-form><span
-                class="icns icn wt-icn-add-product "></span></button>
-              <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
-                 tooltip="Delete Category" tooltip-placement="top" ng-click="deleteCategory()"></a>
-              <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
-                 tooltip="Edit Category" tooltip-placement="top" ng-click="openEditCategory()"></a>
+                                            </div>
+                                            <div class="col-3 normal">{{ product.vendor.name}}</div>
+                                            <div class="col-4 normal">{{ product.cost | currency }}</div>
+
+                                            <div class="col-5 normal">{{ product.sale | currency }}</div>
+                                            <div class="sub-actions pull-left">
+                                                <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
+                                                   ng-click="deleteProduct()"
+                                                   tooltip="Delete Product" tooltip-placement="top"></a>
+                                                <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+                                                   ng-click="openEditProduct()"
+                                                   tooltip="Edit Product" tooltip-placement="top"></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <div ng-if="showEditProduct"
+                                         ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
+                                </div>
+                                <div ng-if="showCreateProduct"
+                                     ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'" class="create-product"></div>
+                                <li class="clearfix no-border add-product-wrapper">
+                                    <button class="btn btn-sr btn-create-in btn-scooter pull-right" ng-click="addProduct()"
+                                            tooltip="Add Product" tooltip-placement="top" ng-disabled="showCreateProduct"
+                                            ng-class="{disabled: showCreateProduct}">
+                                        <span class="icns icn wt-icn-add-product "></span></button>
+                                </li>
+
+                            </div>
+                        </ul>
+
+                        <div class="actions pull-right">
+                            <button class="btn btn-sr btn-create-in btn-scooter pull-left"
+                                    ng-click="addProduct();
+                                                        toggleProducts()"
+                                    tooltip="Add Product" tooltip-placement="top" scroll-to-form><span
+                                    class="icns icn wt-icn-add-product "></span></button>
+                            <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
+                               tooltip="Delete Category" tooltip-placement="top" ng-click="deleteCategory()"></a>
+                            <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete"
+                               tooltip="Edit Category" tooltip-placement="top" ng-click="openEditCategory()"></a>
+                        </div>
+                    </li>
+                </ul>
+
             </div>
-          </li>
-        </ul>
+            <div role="tabpanel" class="tab-pane" id="invoice-number">
 
-      </div>
-      <div role="tabpanel" class="tab-pane" id="invoice-number">
-
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
