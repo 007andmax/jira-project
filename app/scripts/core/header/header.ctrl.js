@@ -25,7 +25,7 @@
             return 'receivable';
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
-          } else if ($state.includes("company-profile")) {
+          } else if ($state.includes("companyProfile")) {
             return 'company-profile';
           } else if ($state.includes("vendors")) {
             return 'vendors';

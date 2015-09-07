@@ -1,0 +1,43 @@
+<div class="user active" animation-change-contact ng-model="currentContact">
+  <div class="avatar">
+    <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+  </div>
+
+  <h3 class="name">
+    {{ getUserName(currentContact) }}
+  </h3>
+
+  <div class="status clearfix ">
+    <!--<span class="dot on"></span> -->
+    <span class="label label-white label-ticket-number">{{ currentContact.designation }}</span>
+    <ul class="user-badges">
+      <li id="has-ticket-updates1" ng-show="currentContact.subscription.ticket"
+          class="icn icn-ticket-updates tp-hide"
+          data-container="#has-ticket-updates1"
+          tooltip="subscriber ticket updates" tooltip-placement="top"></li>
+      <li id="has-invoice-updates1" ng-show="currentContact.subscription.invoice"
+          class="icn icn-invoice-updates tp-hide"
+          data-container="#has-invoice-updates1"
+          tooltip="subscriber invoice updates" tooltip-placement="top"></li>
+    </ul>
+  </div>
+
+  <div class="number clearfix " ng-repeat="phoneNumber in currentContact.phoneNumbers | orderBy: 'priority'">
+    <span class="icn" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                           'icn-fax-machine': phoneNumber.typeNumber === 'FAX',
+                           'icn-telephone': phoneNumber.typeNumber === 'OFFICE'}"></span>
+    <span>{{ phoneNumber.number }}</span>
+  </div>
+
+  <div class="user-actions clearfix ">
+    <div class="btn  btn-white-gray btn-cr dropdown-toggle tooltip-dp"
+         data-placement="top" data-original-title="Send Email">
+      <span class="icn icn-user-msg"></span>
+    </div>
+    <div class="btn  btn-white-gray btn-cr dropdown-toggle tooltip-dp"
+         data-placement="top" data-original-title="chat">
+      <span class="icn icn-user-chat"></span>
+    </div>
+  </div>
+
+</div>

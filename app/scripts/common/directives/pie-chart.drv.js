@@ -6,12 +6,14 @@
     [function () {
       return {
         restrict: 'A',
-        template: "<canvas id='myCanvas' class='pull-left' width='40' height='40'></canvas>",
+        template: "<canvas id='myCanvas' pie-chart-canvas-tpl class='pull-left' width='40' height='40'></canvas>",
         scope: {
           firstValuePieChart: '=firstValuePieChart',
           secondValuePieChart: '=secondValuePieChart'
         },
-        link: function (scope) {
+        link: function (scope, element) {
+
+          var elem = element.find('[pie-chart-canvas-tpl]');
 
           scope.$watchGroup(['firstValuePieChart', 'secondValuePieChart'], function () {
 
@@ -29,7 +31,7 @@
 
               }];
 
-            HoverPie.make($("#myCanvas"), data, {});
+            HoverPie.make(elem, data, {});
 
           });
 

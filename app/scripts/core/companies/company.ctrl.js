@@ -43,7 +43,7 @@
         };
 
         $scope.showCompanyProfile = function () {
-          $state.go('company-profile', {companyId: $scope.company.id});
+          $state.go('companyProfile', {companyId: $scope.company.id, mode: 'activity'});
         };
 
       }]);

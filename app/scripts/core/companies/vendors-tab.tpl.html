@@ -1,0 +1,44 @@
+<ul class="users-lists vendors">
+  <li class="head ">
+    <div class="clearfix">
+      <div class="col-1">NAME</div>
+      <div class="col-2">PRIMARY CONTACT</div>
+      <div class="col-3">CONTACT NO.</div>
+      <div class="col-4">PRODUCTS</div>
+      <div class="col-5"></div>
+    </div>
+  </li>
+  <li class=" " ng-repeat="vendor in vendors | orderBy: 'name'" ng-controller="quicktech.core.companies.vendorsTabCtrl">
+    <div class="clearfix">
+
+      <div class="col-1"><span class="name">{{ vendor.name }}</span></div>
+      <div class="col-2"><a herf="" class="pull-left avatar-38 avatar m-r">
+        <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+
+      </a><span class="name">{{ getUserName(getPriorityContact()) }}</span><span
+        class=" badge badge-light ">{{ getPriorityContact().designation }}</span></div>
+      <div class="col-3"><span class="icn icn-telephone contact"></span>
+        {{ getPriorityNumber(getPriorityContact()) }}
+      </div>
+      <div class="col-4">{{ vendor.products.length }}</div>
+      <div class="col-5">
+        <div class="user-actions pull-right">
+
+          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
+               data-placement="top" data-original-title="Send Email" ng-click="sendMail()">
+            <span class="icn icn-user-msg"></span>
+          </div>
+          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
+               data-placement="top" data-original-title="dissociate" ng-click="dissociateVendor()">
+            <span class="icn icn-dissociate"></span>
+          </div>
+
+          <div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </li>
+</ul>
