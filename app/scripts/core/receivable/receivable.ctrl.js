@@ -9,7 +9,7 @@
         var availableMods = ['group-by-company', 'list'];
 
         $scope.invoiceToSent = {};
-
+        $scope.disabledInvoiceList = {};
         $scope.totalSum = {
           companies: {},
           invoices: {}
@@ -124,15 +124,10 @@
           return $scope.receivableInvoicesData.companies[company.id].length;
         };
 
-        $scope.chooseAllCheckbox = function () {
-          for (var invoice in $scope.invoiceToSent.invoices) {
-            $scope.invoiceToSent.invoices[invoice] = $scope.invoiceToSent.chooseAll;
-          }
-        };
-
         $scope.$watch('invoiceToSent', function () {
 
           $scope.countInvoice = 0;
+          var disabledCount = 0;
 
           if ($stateParams.mode === 'group-by-company') {
             for (var id in $scope.invoiceToSent) {
@@ -143,25 +138,28 @@
                   }
                 }
               }
-            }
-          } else {
-            var countObj = 0,
-              invoices = $scope.invoiceToSent.invoices;
 
-            for (var invoiceId in invoices) {
-              if (invoices[invoiceId]) {
-                countObj++;
+              if ($scope.invoiceToSent[id].checked) {
+                disabledCount++;
+                $scope.noDisabledId = id;
+              }
+              else {
+                for (var invoiceId in $scope.invoiceToSent[id].invoices) {
+                  if ($scope.invoiceToSent[id].invoices[invoiceId]) {
+                    disabledCount++;
+                    $scope.noDisabledId = id;
+                  }
+                }
               }
             }
-            $scope.invoiceToSent.chooseAll = ($scope.receivableInvoicesData.list.length === countObj );
 
-            if ($scope.invoiceToSent.chooseAll) {
-              $scope.countInvoice++;
-            } else {
-              for (var id in $scope.invoiceToSent.invoices) {
-                if ($scope.invoiceToSent.invoices[id]) {
-                  $scope.countInvoice++;
-                }
+            if (disabledCount === 0) {
+              $scope.noDisabledId = undefined;
+            }
+          } else {
+            for (var id in $scope.invoiceToSent.invoices) {
+              if ($scope.invoiceToSent.invoices[id]) {
+                $scope.countInvoice++;
               }
             }
           }
