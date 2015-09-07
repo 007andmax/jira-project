@@ -32,8 +32,6 @@
 
               }];
 
-            console.log(data);
-
             HoverPie.make(elem, data, {});
 
           });
