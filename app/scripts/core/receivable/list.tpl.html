@@ -20,8 +20,8 @@
       <div class="hover">
         <div class="col-1">
           <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox" ng-change="disabledInvoices()"
-                   ng-disabled="disabledInvoiceList[invoice.company.id]"
+            <input type="checkbox"
+                   ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
                    ng-model="invoiceToSent.invoices[invoice.id]">
             <span class="control-indicator"></span>
           </label></div>

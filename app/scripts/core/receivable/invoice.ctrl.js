@@ -58,29 +58,6 @@
           $scope.setHighlightInvoiceId(invoiceId);
         });
 
-        $scope.disabledInvoices = function () {
-          var invoiceCount = 0;
-          if ($scope.invoiceToSent.invoices[$scope.invoice.id]) {
-            for (var companyId in $scope.receivableInvoicesData.companies) {
-              if (companyId !== $scope.invoice.company.id) {
-                $scope.disabledInvoiceList[companyId] = true;
-              }
-            }
-            invoiceCount++
-          } else {
-            for (var invoiceId in $scope.invoiceToSent.invoices) {
-              if ($scope.invoiceToSent.invoices[invoiceId]) {
-                invoiceCount++
-              }
-            }
-          }
-          if (invoiceCount === 0) {
-            for (var companyId in $scope.receivableInvoicesData.companies) {
-              $scope.disabledInvoiceList[companyId] = false;
-            }
-          }
-        }
-
       }]);
 
 }());

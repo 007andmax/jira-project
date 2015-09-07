@@ -41,7 +41,7 @@
             <div class="col-1">
               <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
                 <input type="checkbox"
-                       ng-disabled="!(noDisabledId === undefined || noDisabledId === company.id)"
+                       ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === company.id)"
                        ng-model="invoiceToSent[company.id].invoices[invoice.id]">
                 <span class="control-indicator"></span>
               </label></div>

@@ -9,7 +9,6 @@
         var availableMods = ['group-by-company', 'list'];
 
         $scope.invoiceToSent = {};
-        $scope.disabledInvoiceList = {};
         $scope.totalSum = {
           companies: {},
           invoices: {}
@@ -130,37 +129,46 @@
           var disabledCount = 0;
 
           if ($stateParams.mode === 'group-by-company') {
-            for (var id in $scope.invoiceToSent) {
-              if ($scope.invoiceToSent[id].invoices) {
-                for (var invoiceId in $scope.invoiceToSent[id].invoices) {
-                  if ($scope.invoiceToSent[id].invoices[invoiceId]) {
+            for (var companyId in $scope.invoiceToSent) {
+              if ($scope.invoiceToSent[companyId].invoices) {
+                for (var invoiceId in $scope.invoiceToSent[companyId].invoices) {
+                  if ($scope.invoiceToSent[companyId].invoices[invoiceId]) {
                     $scope.countInvoice++;
                   }
                 }
               }
 
-              if ($scope.invoiceToSent[id].checked) {
+              if ($scope.invoiceToSent[companyId].checked) {
                 disabledCount++;
-                $scope.noDisabledId = id;
+                $scope.selectableCompanyId = companyId;
               }
               else {
-                for (var invoiceId in $scope.invoiceToSent[id].invoices) {
-                  if ($scope.invoiceToSent[id].invoices[invoiceId]) {
+                for (var invoiceId in $scope.invoiceToSent[companyId].invoices) {
+                  if ($scope.invoiceToSent[companyId].invoices[invoiceId]) {
                     disabledCount++;
-                    $scope.noDisabledId = id;
+                    $scope.selectableCompanyId = companyId;
                   }
                 }
               }
             }
 
             if (disabledCount === 0) {
-              $scope.noDisabledId = undefined;
+              $scope.selectableCompanyId = undefined;
             }
           } else {
-            for (var id in $scope.invoiceToSent.invoices) {
-              if ($scope.invoiceToSent.invoices[id]) {
+            for (var invoiceId in $scope.invoiceToSent.invoices) {
+              if ($scope.invoiceToSent.invoices[invoiceId]) {
                 $scope.countInvoice++;
+                disabledCount++;
+                for (var i = 0; i < $scope.receivableInvoicesData.list.length; i++) {
+                  if (invoiceId === $scope.receivableInvoicesData.list[i].id) {
+                    $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
+                  }
+                }
               }
+            }
+            if (disabledCount === 0) {
+              $scope.selectableCompanyId = undefined;
             }
           }
         }, true);
