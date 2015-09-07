@@ -6,7 +6,7 @@
     [function () {
       return {
         restrict: 'A',
-        template: "<canvas id='myCanvas' pie-chart-canvas-tpl class='pull-left' width='40' height='40'></canvas>",
+        template: "<canvas pie-chart-canvas-tpl class='pull-left' width='40' height='40'></canvas>",
         scope: {
           firstValuePieChart: '=firstValuePieChart',
           secondValuePieChart: '=secondValuePieChart'

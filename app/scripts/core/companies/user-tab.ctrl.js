@@ -28,7 +28,7 @@
         };
 
         $scope.archiveUser = function () {
-          //archive user
+          //UsersService.archiveUser($scope.user.id);
           console.log('archive user ' + $scope.user.id);
         };
 
