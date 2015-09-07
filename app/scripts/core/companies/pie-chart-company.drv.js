@@ -20,17 +20,19 @@
 
             var data = [
               {
-                percentage: scope.value[0] / sum,
+                percentage: scope.value[0] / sum || 0,
                 fillColor: "#eca935",
                 label: "",
                 description: ""
               }, {
-                percentage: scope.value[1] / sum,
+                percentage: scope.value[1] / sum || 0,
                 fillColor: "#2eabbe",
                 label: "",
                 description: ""
 
               }];
+
+            console.log(data);
 
             HoverPie.make(elem, data, {});
 

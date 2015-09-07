@@ -239,10 +239,10 @@
                  tooltip-template="'/html/scripts/core/companies/ticket-resolutions-tooltip.tpl.html'"></div>
 
             <ul class="chart-list">
-              <li><span class="blue">{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 }}%</span>
+              <li><span class="blue">{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
                 Tickets created & resolved within 2 days
               </li>
-              <li><span class="orange">{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 }}%</span>
+              <li><span class="orange">{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
                 Tickets created & resolved within 10 days
               </li>
             </ul>
