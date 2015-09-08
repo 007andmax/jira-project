@@ -8,7 +8,7 @@
         <div class="ui-checkbox ui-checkbox-warning pull-left">
           <label class="control checkbox" stop-propagation="click">
             <input type="checkbox" ng-model="invoiceToSent[company.id].checked"
-                   ng-disabled="!(noDisabledId === undefined || noDisabledId === company.id)"
+                   ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === company.id)"
                    ng-change="changeCompanyCheckbox(company.id)">
             <span class="control-indicator"></span>
           </label>
