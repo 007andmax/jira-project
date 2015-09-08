@@ -1,0 +1,54 @@
+<div class="chnage-cover-wrapper">
+
+  <div class="modal-body crop-company-cover" style="width:813px; height: 474px; background-color: #f7f9fb;">
+    <div class="instructionWrap" instruction-wrap>
+      <span class="instructions">Drag to Reposition Cover</span>
+    </div>
+    <div error-message></div>
+    <div class="crop-area avatorCropAreaNew">
+      <div crop-box style="width:813px; height:474px; display: none"></div>
+      <div class="avatorCropProgressBar hide" avator-crop-progress-bar>
+        <div class="avatorCropProgressDone" avator-crop-progress-done></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="form-group actions-wrapper pull-left">
+      <button type="button" class="btn btn-scooter pull-left"
+              save-button ng-click="saveEditCover()" ng-disabled="disabledCoverControl">
+        Save Changes
+      </button>
+
+      <button type="button" class="btn btn-gray pull-left" data-dismiss="modal"
+              ng-click="cancelEditCover()" ng-disabled="disabledCoverControl">
+        Cancel
+      </button>
+      <span class="or-link pull-left">or</span>
+      <a href="javascript:void(0)" class="remove-link pull-left"
+         ng-class="{'disabled': disabledCoverControl}"
+         ng-click="disabledCoverControl || restoreDefaultCover()">
+        Restore Default
+      </a>
+
+      <button type="button" class="btn btn-scooter pull-left" file-uploader ng-disabled="disabledCoverControl">
+        Upload Images
+      </button>
+    </div>
+
+    <div class="row-wrapper clearfix">
+      <div class="zoom-slider pull-centre">
+        <a href="javascript:void(0)" class="pull-left icn icn-zoom-minus disabled" icn-zoom-minus></a>
+
+        <div class="range-wrapper  pull-left">
+          <input range-zoom type="range" ng-disabled="disabledCoverControl"
+                 max="130" min="0" style="{width: 130px;}">
+        </div>
+        <a href="javascript:void(0)" class="pull-right icn icn-zoom-plus disabled" icn-zoom-plus></a>
+      </div>
+    </div>
+
+    <div error-message></div>
+
+  </div>
+</div>

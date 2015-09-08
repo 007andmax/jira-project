@@ -170,6 +170,13 @@
         return '/contacts/' + (contact.id || 'default') + '/image' + (contact.avatar ? '?t=' + contact.avatar.updatedAt : '');
       };
 
+      $rootScope.getCompanyCoverUrl = function (company) {
+        if (!company) {
+          return '/companies/default/cover'
+        }
+        return '/companies/' + (company.id || 'default') + '/cover' + (company.cover ? '?t=' + company.cover.updatedAt : '');
+      };
+
       $rootScope.getPhoneNumberCssClass = function (phoneNumber) {
 
         if (!phoneNumber) {

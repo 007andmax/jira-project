@@ -1,7 +1,8 @@
 <div class="content-wrapper">
 
   <div class="content-body company-profile">
-    <div class="cover-wrrapper" style="background-image:url('/company/{{ company.id }}/cover')">
+    <div class="cover-wrrapper" ng-if="!editCover"
+         style="background-image:url({{ getCompanyCoverUrl(company) }})">
       <div class="overlay">
         <div class="archive-btn">
           <a class="black-btn tp-hide" href="javascript:void(0)"
@@ -28,6 +29,7 @@
                      popover-placement="top" popover="{{ companyData.description }}">
                 <span class="icn company-detail"></span></a></li>
               <li><a href="javascript:void(0)" class="tp-hide"
+                     ng-click="showEditCover()"
                      tooltip="Change Cover" tooltip-placement="top">
                 <span class="icn camera"></span></a></li>
               <li><a href="javascript:void(0)" class="tp-hide"
@@ -103,26 +105,9 @@
 
     </div>
 
-    <div class="chnage-cover-wrapper" style="display:none">
-      <img class="coverPhotoImg photo img" src="/company/{{ company.id }}/cover" style="width:100%;"
-           alt="Cover Photo">
-
-      <div class="instructionWrap"><span class="instructions">Drag to Reposition Cover</span></div>
-      <div class="overlay"></div>
-      <div class="bottom">
-        <div class="form-group actions-wrapper pull-left">
-          <button type="button" class="btn btn-scooter pull-left">Save Changes</button>
-
-          <button type="button" class="btn btn-gray pull-left" data-dismiss="modal">Cancel
-          </button>
-          <span class="or-link pull-left">or</span>
-          <a href="javascript:void(0)" class="remove-link pull-left">Restore Default</a>
-        </div>
-        <div class="loader-wrapper-gray pull-right">
-          <div class="loader"></div>
-        </div>
-      </div>
-    </div>
+    <div edit-cover ec-reset-to-default="restoreDefaultCover"
+         ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
+         ng-model="editCover" ng-if="editCover" model-name="company" model-id="{{ company.id }}"></div>
 
     <div class="charts-wrapper clearfix">
       <div class="charts-row">

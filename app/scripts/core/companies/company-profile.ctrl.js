@@ -25,7 +25,7 @@
         $scope.users = UsersService.getAllByCompanyId($stateParams.companyId);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($stateParams.companyId, $scope);
         $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany($stateParams.companyId, $scope);
-        $scope.vendors = VendorsService.getAllForCompanyProfile($scope);
+        $scope.vendors = VendorsService.getAllForCompanyProfile($scope, $stateParams.companyId);
 
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.companyData.addresses.length) {
@@ -67,6 +67,25 @@
             }
           }
           return object.phoneNumbers[index].number;
+        };
+
+        $scope.showEditCover = function () {
+          $scope.editCover = $scope.company.cover.staticCopy();
+        };
+
+        $scope.cancelEditCover = function () {
+          $scope.editCover = undefined;
+        };
+
+        $scope.restoreDefaultCover = function () {
+          console.log('restore default cover');
+          $scope.editCover = undefined;
+        };
+
+        $scope.saveEditCover = function () {
+          CompaniesService.save($scope.company, function () {
+            $scope.editCover = undefined;
+          });
         };
 
       }]);
