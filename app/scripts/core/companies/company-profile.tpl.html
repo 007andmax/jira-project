@@ -4,7 +4,7 @@
     <div class="cover-wrrapper" ng-if="!isShowEditCover"
          style="background-image:url({{ getCompanyCoverUrl(company) }})">
       <div class="overlay">
-        <div class="archive-btn">
+        <div class="archive-btn" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
           <a class="black-btn tp-hide" href="javascript:void(0)"
              tooltip="Archive Company" tooltip-placement="bottom" ng-click="archiveCompany()">
             <span class="icn archive-company"></span>
@@ -28,11 +28,11 @@
               <li><a href="javascript:void(0)" data-html="true"
                      popover-placement="top" popover="{{ companyData.description }}">
                 <span class="icn company-detail"></span></a></li>
-              <li><a href="javascript:void(0)" class="tp-hide"
+              <li ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"><a href="javascript:void(0)" class="tp-hide"
                      ng-click="showEditCover()"
                      tooltip="Change Cover" tooltip-placement="top">
                 <span class="icn camera"></span></a></li>
-              <li><a href="javascript:void(0)" class="tp-hide"
+              <li ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"><a href="javascript:void(0)" class="tp-hide"
                      ui-sref="editCompany( { companyId: company.id } )"
                      tooltip="Edit Company info" tooltip-placement="top">
                 <span class="icn icn-edit-tag"></span></a></li>

@@ -1,7 +1,8 @@
 <div class="content-body receipt">
   <div role="tabpanel" fixed-tab-topbar="0">
     <div class="tabs-topbar" ftt-topbar-to-be-fixed>
-      <div class="dropdown pull-right service-move-to" ng-controller="quicktech.core.services.servicesMovingCtrl">
+      <div class="dropdown pull-right service-move-to" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
+           ng-controller="quicktech.core.services.servicesMovingCtrl">
         <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray dropdown-toggle tooltip-dp"
            data-placement="top" data-original-title="move service(s) to..." data-toggle="dropdown"
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
@@ -63,7 +64,8 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active">
         <ul class="companies-list recurring products services-list" ftt-tab-content>
-          <li class="opened default" ng-controller="quicktech.core.services.defaultServicesCtrl"
+          <li class="opened default" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
+              ng-controller="quicktech.core.services.defaultServicesCtrl"
               style="padding-bottom: 100px">
             <a href='javascript:void(0)'>
               <span class="name">DEFAULT SERVICES</span>

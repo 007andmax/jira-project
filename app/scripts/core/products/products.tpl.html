@@ -2,7 +2,8 @@
     <div role="tabpanel" fixed-tab-topbar="0">
         <div class="tabs-topbar" ftt-topbar-to-be-fixed>
 
-            <div class="btn-group pull-right" dropdown auto-close="outsideClick" is-open="status.isopen">
+            <div class="btn-group pull-right" dropdown ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
+                 auto-close="outsideClick" is-open="status.isopen">
                 <a href="javascript:void(0)" dropdown-toggle
                    class="btn btn-sr btn-create-company btn-hide-open btn-gray dropdown-toggle tooltip-dp"
                    tooltip="ADD Category" tooltip-placement="top">
@@ -87,7 +88,7 @@
                                         <div class="col-1">CODE NO.</div>
                                         <div class="col-2">PRODUCT</div>
                                         <div class="col-3">VENDOR/SUPPLIER</div>
-                                        <div class="col-4">COST</div>
+                                        <div class="col-4" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">COST</div>
                                         <div class="col-5">SALE PRICE</div>
                                     </div>
                                 </li>
@@ -110,10 +111,12 @@
 
                                             </div>
                                             <div class="col-3 normal">{{ product.vendor.name}}</div>
-                                            <div class="col-4 normal">{{ product.cost | currency }}</div>
+                                            <div class="col-4 normal" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+                                              {{ product.cost | currency }}
+                                            </div>
 
                                             <div class="col-5 normal">{{ product.sale | currency }}</div>
-                                            <div class="sub-actions pull-left">
+                                            <div class="sub-actions pull-left" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
                                                 <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide"
                                                    ng-click="deleteProduct()"
                                                    tooltip="Delete Product" tooltip-placement="top"></a>
@@ -128,7 +131,7 @@
                                 </div>
                                 <div ng-if="showCreateProduct"
                                      ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'" class="create-product"></div>
-                                <li class="clearfix no-border add-product-wrapper">
+                                <li class="clearfix no-border add-product-wrapper" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
                                     <button class="btn btn-sr btn-create-in btn-scooter pull-right" ng-click="addProduct()"
                                             tooltip="Add Product" tooltip-placement="top" ng-disabled="showCreateProduct"
                                             ng-class="{disabled: showCreateProduct}">
@@ -138,7 +141,7 @@
                             </div>
                         </ul>
 
-                        <div class="actions pull-right">
+                        <div class="actions pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
                             <button class="btn btn-sr btn-create-in btn-scooter pull-left"
                                     ng-click="addProduct();
                                                         toggleProducts()"

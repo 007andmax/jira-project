@@ -17,15 +17,31 @@
           <span class="icn-add"></span>
         </div>
         <ul class="dropdown-menu dropdown-create">
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="" create-ticket-open-modal="">Ticket</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="users.create">User</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="createCompany">Company</a></li>
           <li role="presentation">
-            <a role="menuitem" tabindex="-1" ui-sref="createVendor" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+            <a role="menuitem" tabindex="-1" href="" create-ticket-open-modal="">
+              Ticket
+            </a>
+          </li>
+          <li role="presentation" ng-show="currentUser.role !== 'USER'">
+            <a role="menuitem" tabindex="-1" ui-sref="users.create">
+              User
+            </a>
+          </li>
+          <li role="presentation" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+            <a role="menuitem" tabindex="-1" ui-sref="createCompany">
+              Company
+            </a>
+          </li>
+          <li role="presentation" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+            <a role="menuitem" tabindex="-1" ui-sref="createVendor">
               Vendor
             </a>
           </li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="">Lead</a></li>
+          <li role="presentation" ng-show="currentUser.role !== 'USER'">
+            <a role="menuitem" tabindex="-1" href="">
+              Lead
+            </a>
+          </li>
         </ul>
       </div>
     </div>

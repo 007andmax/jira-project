@@ -54,11 +54,15 @@
 			<li ui-sref-active="active">
         <a ui-sref="companies"> <span class="nav-icon icn-companies"></span>  Companies</a>
       </li>
-			<li  > <a href="#"> <span class="nav-icon icn-leads no-icon"></span> Leads  <span class="badge">8</span></a> </li>
-			<li ui-sref-active="active">
-        <a ui-sref="users"> <span class="nav-icon icn-users"></span>  Users</a>
+      <li >
+        <a href="#"> <span class="nav-icon icn-leads no-icon"></span> Leads  <span class="badge">8</span>
+        </a>
       </li>
-			<li ui-sref-active="active">
+      <li ui-sref-active="active">
+        <a ui-sref="users"> <span class="nav-icon icn-users"></span>  Users
+        </a>
+      </li>
+			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
         <a ui-sref="vendors">
           <span class="nav-icon icn-vendors no-icon"></span>  Vendors
         </a>
@@ -69,20 +73,22 @@
 	<nav class="site-left-nav clearfix">
 		<div class="nav-title panel-heading">Accounts</div>
 		<ul class="nav nav-pills sub-nav nav-stacked">
-			<li ui-sref-active="active">
-        <a ui-sref="accounting"> <span class="nav-icon icn-billable no-icon">
-        </span>Billable<span class="badge">16</span>
+      <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+        <a ui-sref="accounting"> <span class="nav-icon icn-billable no-icon"></span>Billable
+          <span class="badge">16</span>
         </a>
       </li>
-      <li ui-sref-active="active">
+      <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
         <a ui-sref="receivable({mode: 'group-by-company'})">
-          <span class="nav-icon icn-receivable no-icon"></span> Receivable <span class="badge">9</span>
+          <span class="nav-icon icn-receivable no-icon"></span> Receivable
+          <span class="badge">9</span>
         </a>
       </li>
-			<li ui-sref-active="active">
-        <a ui-sref="ps"> <span class="nav-icon  icn-product-services no-icon"></span>  Products & Services</a>
-      </li>
       <li ui-sref-active="active">
+        <a ui-sref="ps"> <span class="nav-icon  icn-product-services no-icon"></span>  Products & Services
+        </a>
+      </li>
+      <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
         <a ui-sref="receipt-archive({mode: 'group-by-company'})">
           <span class="nav-icon icn-receipt-archive no-icon"></span> Receipt Archive
         </a>
