@@ -45,18 +45,6 @@
           CompaniesService.archive($scope.company.id);
         };
 
-        $scope.$watch(function () {
-          return $stateParams.mode;
-        }, function (mode) {
-          if (availableMods.indexOf(mode) < 0) {
-            $state.go('companyProfile', {
-              mode: availableMods[0]
-            });
-          } else {
-            $scope.mode = mode;
-          }
-        });
-
         $scope.getPriorityNumber = function (object) {
           var priority;
           var index;
@@ -74,19 +62,28 @@
         };
 
         $scope.cancelEditCover = function () {
-          $scope.editCover = undefined;
+          closeEditCover();
         };
 
         $scope.restoreDefaultCover = function () {
           console.log('restore default cover');
-          $scope.editCover = undefined;
+          closeEditCover();
         };
 
         $scope.saveEditCover = function () {
           CompaniesService.save($scope.company, function () {
-            $scope.editCover = undefined;
+            closeEditCover();
           });
         };
+
+        $scope.$on('showEditCover', function(){
+          $scope.isShowEditCover = true;
+        });
+
+        function closeEditCover(){
+          $scope.editCover = undefined;
+          $scope.isShowEditCover = false;
+        }
 
       }]);
 

@@ -14,7 +14,8 @@
         <div class="amount">{{ totalBilledAmount.value | currency:'' :0 }} usd</div>
       </div>
       <div class="total-billables">
-        <div pie-chart first-value-pie-chart="totalbillables" second-value-pie-chart="billedAmountLast30Days"></div>
+        <div pie-chart pie-chart-value="[totalbillables, billedAmountLast30Days]"
+             pie-chart-size="40" pie-chart-color="['#7fd5e0', '#e53935']"></div>
         <div class="heading pull-left">
           <div class="title"><span class="bold">TOTAL BILLABLES</span></div>
           <div class="amount">{{ totalbillables | currency:'' :0 }} USD</div>

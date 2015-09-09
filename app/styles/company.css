@@ -1288,7 +1288,7 @@ a.open  a.company-detail , .open > a.btn:hover .company-detail{
   margin-top: 3px;
 }
 
-.crop-company-cover .avatorCropProgressBar {
+.chnage-cover-wrapper .avatorCropProgressBar {
   width: 100px;
   height: 6px;
   border-radius: 3px;
@@ -1301,7 +1301,7 @@ a.open  a.company-detail , .open > a.btn:hover .company-detail{
   overflow: hidden;
 }
 
-.crop-company-cover .avatorCropProgressDone {
+.chnage-cover-wrapper .avatorCropProgressDone {
   background-color: #00acc1;
   width: 26%;
   height: 6px;

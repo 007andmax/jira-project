@@ -19,7 +19,8 @@
         <div class="amount">{{ receivedAmountAllTime.value | currency: '': 0 }} USD</div>
       </div>
       <div class="total-billables">
-        <div pie-chart first-value-pie-chart="totalReceivables" second-value-pie-chart="totalCollectedLast30Days"></div>
+        <div pie-chart pie-chart-size="40" pie-chart-color="['#7fd5e0', '#e53935']"
+             pie-chart-value="[totalReceivables, totalCollectedLast30Days]"></div>
         <div class="heading pull-left">
           <div class="title"><span class="bold">TOTAL RECEIVABLES</span></div>
           <div class="amount">{{ totalReceivables | currency:'' :0 }} USD</div>

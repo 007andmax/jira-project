@@ -1,7 +1,7 @@
 <div class="content-wrapper">
 
   <div class="content-body company-profile">
-    <div class="cover-wrrapper" ng-if="!editCover"
+    <div class="cover-wrrapper" ng-if="!isShowEditCover"
          style="background-image:url({{ getCompanyCoverUrl(company) }})">
       <div class="overlay">
         <div class="archive-btn">
@@ -33,6 +33,7 @@
                      tooltip="Change Cover" tooltip-placement="top">
                 <span class="icn camera"></span></a></li>
               <li><a href="javascript:void(0)" class="tp-hide"
+                     ui-sref="editCompany( { companyId: company.id } )"
                      tooltip="Edit Company info" tooltip-placement="top">
                 <span class="icn icn-edit-tag"></span></a></li>
 
@@ -49,7 +50,7 @@
           </ul>
           <div class="since">Client since <span class="date">{{ company.createdAt | date:'dd MMM yyyy' }}</span></div>
           <div class="time-avg">
-            <div class=" time-clock"><span class="icn clock"></span></div>
+            <!--<div class=" time-clock"><span class="icn clock"></span></div>-->
             <!--<div class="avg">Avg. Response Time 45 mins</div>-->
           </div>
         </div>
@@ -105,9 +106,9 @@
 
     </div>
 
-    <div edit-cover ec-reset-to-default="restoreDefaultCover"
+    <div edit-cover ng-if="editCover" ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
          ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
-         ng-model="editCover" ng-if="editCover" model-name="company" model-id="{{ company.id }}"></div>
+         ng-model="editCover" model-name="company" model-id="{{ company.id }}"></div>
 
     <div class="charts-wrapper clearfix">
       <div class="charts-row">
@@ -138,8 +139,8 @@
         <!--</div>-->
         <div class="chart tickets">
           <div class="content">
-            <div pie-chart-company pie-chart-value="[ticketCounts.OPEN, ticketCounts.UNASSIGNED]"
-                 tooltip-placement="right"
+            <div pie-chart pie-chart-value="[ticketCounts.OPEN, ticketCounts.UNASSIGNED]"
+                 tooltip-placement="right" pie-chart-size="140" pie-chart-color="['#eca935', '#2eabbe']"
                  tooltip-template="'/html/scripts/core/companies/chart-tickets-tooltip.tpl.html'"></div>
             <ul class="chart-list report-nav">
               <li><span class="circle blue"></span> UNASSIGNED</li>
@@ -157,95 +158,95 @@
               </div>
             </div>
           </div>
-          <div class="devices">
-            <div class="contents">
-              <div class="icon-wrapper"><span class="icn icn-cdevice"></span></div>
-              <div class="status"><h4>online devices</h4>
+          <!--<div class="devices">-->
+            <!--<div class="contents">-->
+              <!--<div class="icon-wrapper"><span class="icn icn-cdevice"></span></div>-->
+              <!--<div class="status"><h4>online devices</h4>-->
 
-                <div class="time"><span class="hour">628 </span></div>
-              </div>
-            </div>
-          </div>
+                <!--<div class="time"><span class="hour">628 </span></div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
         </div>
 
       </div>
+      <!--<div class="charts-row">-->
+        <!--<div class="tchart">-->
+          <!--<div class="heading"><span class="bold">Total Earnings</span> <span-->
+            <!--class="dot-sep"></span> <span class="amount">94,580 USD</span>-->
+
+            <!--<div class="arrows">-->
+              <!--<a href="javascript:void(0)" class="icn left-arrow "></a>-->
+              <!--<a href="javascript:void(0)" class="icn right-arrow disabled"></a>-->
+
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="chart-area"></div>-->
+        <!--</div>-->
+        <!--<div class="tchart last">-->
+          <!--<div class="heading"><span class="bold">Total Receivables</span> <span-->
+            <!--class="dot-sep"></span> <span class="amount">56,960 USD</span>-->
+
+            <!--<div class="arrows">-->
+              <!--<a href="javascript:void(0)" class="icn left-arrow "></a>-->
+              <!--<a href="javascript:void(0)" class="icn right-arrow disabled"></a>-->
+
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="chart-area"></div>-->
+        <!--</div>-->
+
+      <!--</div>-->
       <div class="charts-row">
-        <div class="tchart">
-          <div class="heading"><span class="bold">Total Earnings</span> <span
-            class="dot-sep"></span> <span class="amount">94,580 USD</span>
+        <!--<div class="tchart">-->
+          <!--<div class="heading"><span class="bold">Tickets Closed</span> <span-->
+            <!--class="dot-sep"></span> <span class="amount">328</span>-->
 
-            <div class="arrows">
-              <a href="javascript:void(0)" class="icn left-arrow "></a>
-              <a href="javascript:void(0)" class="icn right-arrow disabled"></a>
+            <!--<div class="arrows">-->
+              <!--<a href="javascript:void(0)" class="icn left-arrow "></a>-->
+              <!--<a href="javascript:void(0)" class="icn right-arrow disabled"></a>-->
 
-            </div>
-          </div>
-          <div class="chart-area"></div>
-        </div>
-        <div class="tchart last">
-          <div class="heading"><span class="bold">Total Receivables</span> <span
-            class="dot-sep"></span> <span class="amount">56,960 USD</span>
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="chart-area"></div>-->
+        <!--</div>-->
+        <!--<div class="tchart last">-->
+          <!--<div class="heading"><span class="bold">Ticket Resolutions</span> All Time-->
+            <!--<ul class="pull-right report-nav">-->
+              <!--<li><span class="circle blue"></span> Quick</li>-->
+              <!--<li><span class="circle dark-orange"></span> DELAYED</li>-->
 
-            <div class="arrows">
-              <a href="javascript:void(0)" class="icn left-arrow "></a>
-              <a href="javascript:void(0)" class="icn right-arrow disabled"></a>
+            <!--</ul>-->
+          <!--</div>-->
+          <!--<div class="content clearfix">-->
+            <!--<div pie-chart-company pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"-->
+                 <!--tooltip-placement="right"-->
+                 <!--tooltip-template="'/html/scripts/core/companies/ticket-resolutions-tooltip.tpl.html'"></div>-->
 
-            </div>
-          </div>
-          <div class="chart-area"></div>
-        </div>
+            <!--<ul class="chart-list">-->
+              <!--<li><span class="blue">{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>-->
+                <!--Tickets created & resolved within 2 days-->
+              <!--</li>-->
+              <!--<li><span class="orange">{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>-->
+                <!--Tickets created & resolved within 10 days-->
+              <!--</li>-->
+            <!--</ul>-->
 
-      </div>
-      <div class="charts-row">
-        <div class="tchart">
-          <div class="heading"><span class="bold">Tickets Closed</span> <span
-            class="dot-sep"></span> <span class="amount">328</span>
-
-            <div class="arrows">
-              <a href="javascript:void(0)" class="icn left-arrow "></a>
-              <a href="javascript:void(0)" class="icn right-arrow disabled"></a>
-
-            </div>
-          </div>
-          <div class="chart-area"></div>
-        </div>
-        <div class="tchart last">
-          <div class="heading"><span class="bold">Ticket Resolutions</span> All Time
-            <ul class="pull-right report-nav">
-              <li><span class="circle blue"></span> Quick</li>
-              <li><span class="circle dark-orange"></span> DELAYED</li>
-
-            </ul>
-          </div>
-          <div class="content clearfix">
-            <div pie-chart-company pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
-                 tooltip-placement="right"
-                 tooltip-template="'/html/scripts/core/companies/ticket-resolutions-tooltip.tpl.html'"></div>
-
-            <ul class="chart-list">
-              <li><span class="blue">{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
-                Tickets created & resolved within 2 days
-              </li>
-              <li><span class="orange">{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
-                Tickets created & resolved within 10 days
-              </li>
-            </ul>
-
-          </div>
-        </div>
+          <!--</div>-->
+        <!--</div>-->
 
       </div>
     </div>
 
-    <div class="tabs-wrapper">
+    <div class="tabs-wrapper" ng-init="mode = 'user'">
 
       <div>
         <div class="">
           <ul class="nav nav-tabs">
 
             <!--<li role="presentation" class="activity" ng-class="{active: mode === 'activity'}">-->
-            <!--<a ui-sref="companyProfile({mode: 'activity'})">Activity</a>-->
+            <!--<a ng-click="mode = 'activity'">Activity</a>-->
             <!--<ul class="sub-nav">-->
             <!--<li><a href="javascript:void(0)" class="active">hour</a></li>-->
             <!--<li><a href="javascript:void(0)" class="weekly">week</a></li>-->
@@ -254,15 +255,15 @@
             <!--</li>-->
 
             <li role="presentation" class="" ng-class="{active: mode === 'user'}">
-              <a ui-sref="companyProfile({mode: 'user'})">Users <span class="count">{{ users.length }}</span></a>
+              <a ng-click="mode = 'user'">Users <span class="count">{{ users.length }}</span></a>
             </li>
 
             <!--<li role="presentation" class="" ng-class="{active: mode === 'device'}">-->
-            <!--<a ui-sref="companyProfile({mode: 'device'})">Devices <span class="count">4,665</span></a>-->
+            <!--<a ng-click="mode = 'device'">Devices <span class="count">4,665</span></a>-->
             <!--</li>-->
 
             <li role="presentation" class="" ng-class="{active: mode === 'vendors'}">
-              <a ui-sref="companyProfile({mode: 'vendors'})">Assc. Vendors <span
+              <a ng-click="mode = 'vendors'">Assc. Vendors <span
                 class="count">{{ vendors.length }}</span></a>
             </li>
 

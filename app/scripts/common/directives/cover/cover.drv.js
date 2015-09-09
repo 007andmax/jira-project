@@ -2,14 +2,6 @@
 
 (function () {
 
-  var maxFileSize = 2 * 1024 * 1024; // 2 mb
-  var allowedExtensions = [
-    'jpg',
-    'jpeg',
-    'gif',
-    'png'
-  ];
-
   angular.module("quicktech.common.directives").directive('editCover',
     ['$modal', 'FilesService', '$rootScope',
       function ($modal, FilesService, $rootScope) {
@@ -48,6 +40,7 @@
             setupUploading();
 
             if (scope.model.origin && scope.model.origin.id) {
+              scope.$emit('showEditCover');
               cropBoxModel(true);
             } else {
               $(fileUploader).trigger('click');
@@ -61,15 +54,7 @@
               return ctrl.$error;
             };
 
-            var disabledControlButton = function (value) {
-              scope.disabledCoverControl = value;
-            };
-
             var cropBoxModel = function (isReposition) {
-
-              cropBox.replaceWith(cropBoxClone);
-              cropBox = cropBoxClone;
-              cropBoxClone = cropBox.clone();
 
               cropBox.jWindowCrop({
                 cropBoxWidth: cropBox.width(),
@@ -90,14 +75,16 @@
                 },
                 onImageLoad: function () {
 
+                  progressBar.hide();
+
                   cropBox.show();
 
-                  setTimeout(function () {
-                    $(instructionWrap).hide();
-                  }, 1000);
-                  disabledControlButton(false);
-                  $(icnZoomPlus).removeClass('disabled');
-                  $(icnZoomMinus).removeClass('disabled');
+                  instructionWrap.fadeOut(1000);
+
+                  scope.$apply('disabledCoverControl = false');
+
+                  icnZoomPlus.removeClass('disabled');
+                  icnZoomMinus.removeClass('disabled');
                 },
 
                 onChange: function (e) {
@@ -124,15 +111,21 @@
 
 
                 onStart: function () {
-                  disabledControlButton(true);
+                  scope.$emit('showEditCover');
+                  progressBar.removeClass('hide');
+                  progressBar.show();
+                  scope.$apply('disabledCoverControl = true');
                   errorMessage.hide();
+
+                  cropBox.replaceWith(cropBoxClone);
+                  cropBox = cropBoxClone;
+                  cropBoxClone = cropBox.clone();
+
                 },
                 onProgress: function (progress) {
-                  $(progressBar).removeClass('hide');
-                  $(progressDone).width(progress + '%');
+                  progressDone.width(progress + '%');
                 },
                 onSuccess: function (data) {
-                  $(progressBar).hide();
                   ctrl.$setViewValue({
                     origin: {
                       id: data.id
