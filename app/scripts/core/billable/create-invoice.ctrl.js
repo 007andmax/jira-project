@@ -43,6 +43,24 @@
           })
         });
 
+        window.onbeforeunload = function () {
+
+          for (var i = 0; i < $scope.invoiceLocks.length; i++) {
+
+            var lockId = $scope.invoiceLocks[i].id,
+              xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.open("GET", '/invoice/unlock/' + lockId, false); //the false is for making the call synchronous
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            xmlhttp.send();
+          }
+
+        };
+
+        $scope.$on('$destroy', function () {
+          window.onbeforeunload = undefined;
+        });
+
         $scope.setShowInvoiceLockIndex = function (index) {
 
           if (index < 0) {
