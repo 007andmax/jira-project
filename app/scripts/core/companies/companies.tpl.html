@@ -81,7 +81,7 @@
     <div class="company clearfix"
          ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
          ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()">
-      <div class="company-cover-wrapper" style="background-image:url('/company/{{ company.id }}/cover')">
+      <div class="company-cover-wrapper" style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
         <div class="overlay"></div>
         <div class="archive-btn" ng-click="archiveCompany(company.id)"
              ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">

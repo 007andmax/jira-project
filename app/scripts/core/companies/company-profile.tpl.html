@@ -2,7 +2,7 @@
 
   <div class="content-body company-profile">
     <div class="cover-wrrapper" ng-if="!isShowEditCover"
-         style="background-image:url({{ getCompanyCoverUrl(company) }})">
+         style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
       <div class="overlay">
         <div class="archive-btn" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
           <a class="black-btn tp-hide" href="javascript:void(0)"
@@ -108,7 +108,8 @@
 
     <div edit-cover ng-if="editCover" ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
          ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
-         ng-model="editCover" model-name="company" model-id="{{ company.id }}"></div>
+         ng-model="editCover" model-name="company" model-id="{{ company.id }}"
+         ec-disabled-cover-control="disabledCoverControl"></div>
 
     <div class="charts-wrapper clearfix">
       <div class="charts-row">

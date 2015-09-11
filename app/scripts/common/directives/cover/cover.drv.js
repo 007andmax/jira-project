@@ -38,13 +38,9 @@
             }
 
             setupUploading();
+            initialize();
 
-            if (scope.model.origin && scope.model.origin.id) {
-              scope.$emit('showEditCover');
-              cropBoxModel(true);
-            } else {
-              $(fileUploader).trigger('click');
-            }
+            scope.$on('initializeCoverCropper', initialize);
 
             scope.getUrl = function () {
               return urlGetters[attrs.modelName]({id: attrs.modelId});
@@ -54,7 +50,17 @@
               return ctrl.$error;
             };
 
-            var cropBoxModel = function (isReposition) {
+            scope.callRestoreDefaultCover = function () {
+              scope.disabledCoverControl = true;
+              scope.restoreDefaultCover();
+            };
+
+            scope.callSaveEditCover = function (cover) {
+              scope.disabledCoverControl = true;
+              scope.saveEditCover(cover);
+            };
+
+            function setupCropBoxModel(isReposition) {
 
               cropBox.jWindowCrop({
                 cropBoxWidth: cropBox.width(),
@@ -132,15 +138,25 @@
                     }
                   });
 
-                  cropBoxModel(false);
+                  setupCropBoxModel(false);
                 },
                 onFailure: function (message) {
-                  ctrl.$setValidity('loadingInProcess', true);
+                  //ctrl.$setValidity('loadingInProcess', true);
                   errorMessage.show();
                   errorMessage.text(message);
                 }
               });
             }
+
+            function initialize() {
+              if (scope.model.origin && scope.model.origin.id) {
+                scope.$emit('showEditCover');
+                setupCropBoxModel(true);
+              } else {
+                $(fileUploader).trigger('click');
+              }
+            }
+
           }
         };
       }]);

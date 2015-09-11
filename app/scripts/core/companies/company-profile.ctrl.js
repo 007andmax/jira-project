@@ -58,29 +58,30 @@
         };
 
         $scope.showEditCover = function () {
-          $scope.editCover = $scope.company.cover.staticCopy();
+
+          $scope.editCover = $scope.company.cover ? $scope.company.cover.staticCopy() : {};
+          $scope.$broadcast('initializeCoverCropper');
         };
 
-        $scope.cancelEditCover = function () {
-          closeEditCover();
-        };
+        $scope.cancelEditCover = closeEditCover;
 
         $scope.restoreDefaultCover = function () {
-          console.log('restore default cover');
-          closeEditCover();
-        };
-
-        $scope.saveEditCover = function () {
-          CompaniesService.save($scope.company, function () {
+          CompaniesService.deleteCover($scope.company.id, function () {
             closeEditCover();
           });
         };
 
-        $scope.$on('showEditCover', function(){
+        $scope.saveEditCover = function (editCover) {
+          CompaniesService.saveCover(editCover, $scope.company.id, function () {
+            closeEditCover();
+          });
+        };
+
+        $scope.$on('showEditCover', function () {
           $scope.isShowEditCover = true;
         });
 
-        function closeEditCover(){
+        function closeEditCover() {
           $scope.editCover = undefined;
           $scope.isShowEditCover = false;
         }

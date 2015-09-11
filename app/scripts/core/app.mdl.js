@@ -172,9 +172,9 @@
 
       $rootScope.getCompanyCoverUrl = function (company) {
         if (!company) {
-          return '/companies/default/cover'
+          return '/company/default/cover'
         }
-        return '/companies/' + (company.id || 'default') + '/cover' + (company.cover ? '?t=' + company.cover.updatedAt : '');
+        return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '123');
       };
 
       $rootScope.getPhoneNumberCssClass = function (phoneNumber) {
