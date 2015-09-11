@@ -56,7 +56,7 @@
             throw 'wrong cmpany id specified!';
           }
 
-          var companyData = CompaniesService.getCompanyData($stateParams.companyId, function () {
+          var companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
 
             if (!companyData.addresses || companyData.addresses.length === 0) {
               companyData.addresses = [{}];
@@ -71,9 +71,9 @@
               $scope.vendorsSelection[association.vendor.id] = true;
             }
 
-          });
+            $scope.editCompany = companyData.staticCopy();
 
-          $scope.editCompany = companyData;
+          });
 
         } else {
           $scope.editCompany = {
