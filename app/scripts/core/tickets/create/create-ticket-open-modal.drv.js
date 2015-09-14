@@ -11,14 +11,14 @@
 
             element.click(function () {
 
-              if (!$state.is('Tickets') || $state.is('Tickets.Detail')) {
-                $state.go('Tickets', {listType: 'user'});
+              if (!$state.is('tickets') || $state.is('ickets.Detail')) {
+                $state.go('tickets', {listType: 'user'});
               }
 
               var modalInstance = $modal.open({
                 animation: false,
                 backdrop: 'static',
-                templateUrl: '/html/scripts/core/tickets/create-ticket.tpl.html',
+                templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
                 controller: 'quicktech.core.tickets.createTicketCtrl'
               });
             });

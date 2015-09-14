@@ -1,0 +1,13 @@
+<div ng-controller="quicktech.core.tickets.TicketsCtrl">
+  <div class="ticket-sidebar tickets-list" ng-controller="quicktech.core.tickets.TicketsListCtrl" ng-if="listType">
+
+    <!--{{ tickets.length }}-->
+    <div ng-repeat="ticket in tickets">
+      <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+    </div>
+  </div>
+
+  <!-- Ticket Detail -->
+  <div class="ticket-content" ui-view>
+  </div>
+</div>

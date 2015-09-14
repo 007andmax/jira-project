@@ -11,37 +11,37 @@
 		<div class="nav-title panel-heading">Tickets</div>
 		<ul class="nav nav-pills sub-nav nav-stacked">
 			<li ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'unassigned'})">
+				<a ui-sref="tickets({listType: 'unassigned'})">
 					<span class="nav-icon icn-unassigned"></span> Unassigned
 					<span class="badge" ng-if="ticketCounts.UNASSIGNED !== 0">{{ticketCounts.UNASSIGNED}}</span>
 				</a>
 			</li>
 			<li ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'user'})">
+				<a ui-sref="tickets({listType: 'user'})">
 					<span class="nav-icon icn-tickets"></span> My Tickets
 				</a>
 			</li>
 			<li  ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'shared'})">
+				<a ui-sref="tickets({listType: 'shared'})">
 					<span class="nav-icon icn-shared"></span>  Shared
 					<span class="badge">{{ticketCounts.SHARED}}</span>
 				</a>
 			</li>
 			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-				<a ui-sref="Tickets({listType: 'open'})">
+				<a ui-sref="tickets({listType: 'open'})">
 					<span class="nav-icon icn-open"></span>Open
 				</a>
 			</li>
 			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-				<a ui-sref="Tickets({listType: 'closed'})"> <span class="nav-icon icn-closed"></span> Closed
+				<a ui-sref="tickets({listType: 'closed'})"> <span class="nav-icon icn-closed"></span> Closed
 				</a>
 			</li>
 			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-				<a ui-sref="Tickets({listType: 'trash'})"><span class="nav-icon icn-trash"></span> Trash
+				<a ui-sref="tickets({listType: 'trash'})"><span class="nav-icon icn-trash"></span> Trash
 				</a>
 			</li>
 			<li ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'spam'})"><span class="nav-icon icn-spam"></span> Spam
+				<a ui-sref="tickets({listType: 'spam'})"><span class="nav-icon icn-spam"></span> Spam
 				</a>
 			</li>
 		</ul>

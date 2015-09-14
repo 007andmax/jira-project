@@ -30,15 +30,15 @@
     $urlRouterProvider.otherwise('/tickets/unassigned');
 
     $stateProvider
-      .state('Tickets', waitForServices({
+      .state('tickets', waitForServices({
         url: '/tickets/:listType',
-        templateUrl: '/html/quicktech/ticketing/views/ticketList.html',
-        controller: 'TicketListController'
+        templateUrl: '/html/scripts/core/tickets/tickets.html',
+        controller: 'quicktech.core.tickets.TicketsCtrl'
       }))
-      .state('Tickets.Detail', waitForServices({
+      .state('tickets.details', waitForServices({
         url: '/:id',
-        templateUrl: '/html/quicktech/ticketing/views/ticketDetail.html',
-        controller: 'TicketDetailController'
+        templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
+        controller: 'quicktech.core.tickets.TicketDetailsCtrl'
       }))
       .state('users', waitForServices({
         url: '/users',
