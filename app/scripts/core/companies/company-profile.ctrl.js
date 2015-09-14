@@ -15,7 +15,7 @@
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
         $scope.company = CompaniesService.getOneById($stateParams.companyId);
-        $scope.companyData = CompaniesService.getCompanyData($stateParams.companyId, function () {
+        $scope.companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
         });
@@ -25,7 +25,6 @@
         $scope.users = UsersService.getAllByCompanyId($stateParams.companyId);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($stateParams.companyId, $scope);
         $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany($stateParams.companyId, $scope);
-        $scope.vendors = VendorsService.getAllForCompanyProfile($scope, $stateParams.companyId);
 
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.companyData.addresses.length) {
