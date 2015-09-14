@@ -65,6 +65,10 @@
             }
           }
 
+          if (form.editProductName && form.editProductName.$error && form.editProductName.$error.minlength) {
+            return 'Product name is too short!';
+          }
+
           if (form.editProductName && form.editProductName.$error && form.editProductName.$error.maxlength) {
             return 'Product name exceeds maximum length.';
           }

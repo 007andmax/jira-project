@@ -5,7 +5,7 @@
       <div class="col-2 normal">
         <div class="col-wrapper one" ng-class="{error: isShowingErrors(editProductForm, 'editProductName')}">
           <input type="text" class="form-control" placeholder="Product" name="editProductName"
-                 ng-required="true" ng-model="editProduct.name" ng-maxlength="100"
+                 ng-required="true" ng-model="editProduct.name" ng-maxlength="100" ng-minlength="3"
                  is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
         </div>
         <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
