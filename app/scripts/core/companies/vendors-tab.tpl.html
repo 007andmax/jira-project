@@ -8,10 +8,11 @@
       <div class="col-5"></div>
     </div>
   </li>
-  <li class=" " ng-repeat="vendor in vendors | orderBy: 'name'" ng-controller="quicktech.core.companies.vendorsTabCtrl">
+  <li class=" " ng-repeat="association in companyData.companyAssociations | orderBy: 'vendor.name'"
+      ng-controller="quicktech.core.companies.vendorsTabCtrl">
     <div class="clearfix">
 
-      <div class="col-1"><span class="name">{{ vendor.name }}</span></div>
+      <div class="col-1"><span class="name">{{ association.vendor.name }}</span></div>
       <div class="col-2"><a herf="" class="pull-left avatar-38 avatar m-r">
         <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
 
@@ -20,7 +21,7 @@
       <div class="col-3"><span class="icn icn-telephone contact"></span>
         {{ getPriorityNumber(getPriorityContact()) }}
       </div>
-      <div class="col-4">{{ vendor.products.length }}</div>
+      <div class="col-4">{{ association.vendor.products.length }}</div>
       <div class="col-5">
         <div class="user-actions pull-right">
 
