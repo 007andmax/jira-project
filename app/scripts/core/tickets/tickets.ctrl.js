@@ -2,9 +2,11 @@
 
 (function () {
 
-  angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.TicketsCtrl',
-    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams) {
+  angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
+    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'ActionRightsService',
+      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, ActionRightsService) {
+
+        $scope.ActionRightsService = ActionRightsService;
 
         var availableTypes = ['unassigned', 'user', 'shared', 'spam'];
 
@@ -15,17 +17,28 @@
         }
 
         $scope.$watch(function () {
-          return $stateParams.listType;
-        }, function (listType) {
+          return $stateParams;
+        }, function (stateParams) {
 
-          if (availableTypes.indexOf(listType) < 0) {
+          if (availableTypes.indexOf(stateParams.listType) < 0) {
             $state.go('tickets', {
               listType: availableTypes[0]
             });
           } else {
-            $scope.listType = listType;
+            $scope.listType = stateParams.listType;
+            $scope.currentOpeningTicket = stateParams.ticketId;
           }
-        });
+        }, true);
+
+        $scope.ticketStatusToCssFormat = function (status) {
+          if (status === 'IN_PROGRESS') {
+            return 'progress';
+          } else if (status === 'COMPLETED') {
+            return 'completed';
+          } else if (status === 'ON_HOLD') {
+            return 'onhold';
+          }
+        };
 
       }]);
 

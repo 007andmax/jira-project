@@ -33,12 +33,12 @@
       .state('tickets', waitForServices({
         url: '/tickets/:listType',
         templateUrl: '/html/scripts/core/tickets/tickets.html',
-        controller: 'quicktech.core.tickets.TicketsCtrl'
+        controller: 'quicktech.core.tickets.ticketsCtrl'
       }))
       .state('tickets.details', waitForServices({
-        url: '/:id',
+        url: '/:ticketId',
         templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
-        controller: 'quicktech.core.tickets.TicketDetailsCtrl'
+        controller: 'quicktech.core.tickets.ticketDetailsCtrl'
       }))
       .state('users', waitForServices({
         url: '/users',

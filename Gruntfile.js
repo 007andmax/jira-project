@@ -154,6 +154,34 @@ module.exports = function (grunt) {
           }
         ]
       },
+      localDevServer: {
+        proxies: [
+          {
+            context: '/html',
+            host: 'localhost',
+            port: 9000,
+            rewrite: {
+              '^/html': '/app'
+            }
+          },
+          {
+            context: [
+              '/',
+              '!/html',
+              '!/app',
+              '!/dist',
+              '!/bower_components'
+            ],
+            host: '192.168.199.224',
+            port: 8080,
+            https: false,
+            xforward: false,
+            headers: {
+              'is-proxy-mode': true
+            }
+          }
+        ]
+      },
       beta3DistServer: {
         proxies: [
           {
@@ -654,6 +682,23 @@ module.exports = function (grunt) {
       'includeSource',
       'wiredep',
       'configureProxies:beta3Server',
+      'concurrent:server',
+      'autoprefixer:server',
+      'connect:livereload',
+      'watch'
+    ]);
+  });
+
+  grunt.registerTask('serveDev', 'Compile then start a connect web server', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
+    }
+
+    grunt.task.run([
+      'clean:server',
+      'includeSource',
+      'wiredep',
+      'configureProxies:localDevServer',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
