@@ -14,18 +14,19 @@
           <span class=" icn-priority {{ ticketDetails.priorityLevel.toLowerCase() }}"
                 tooltip="{{ ticketDetails.priorityLevel }}" tooltip-placement="top"></span>
 
-          <span class="icns icn-status-{{ ticketStatusToCssFormat(ticketDetails.status) }}"
+          <span ng-show="false" class="icns icn-status-{{ ticketStatusToCssFormat(ticketDetails.status) }}"
                 tooltip="{{ ticketDetails.status }}" tooltip-placement="top"></span>
             <!--ng-if=" listType !== 'unassigned' "-->
 
-          <span ng-repeat="tag in ticketDetails.tags" class="tag-color color{{ tag.color }}"
+          <span ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)"
+            ng-repeat="tag in ticketDetails.tags" class="tag-color color{{ tag.color }}"
                 tooltip="{{ tag.name }}" tooltip-placement="top"></span>
           </div>
           <small class="user-title text-muted">
 
-            <a href="javascript:void(0)" class="icn-ticket-attachment pull-left"></a>
+            <a ng-if="ticketDetails.hasAttachments === true" href="javascript:void(0)" class="icn-ticket-attachment pull-left"></a>
             <!--ng-if="ticketDetail.hasAttachments == true"-->
-            {{renderDateTime(ticketDetails.createdAt)}}
+            {{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}
 
             <span class="dot-sep"></span>
             {{ticketDetails.number}}
@@ -34,15 +35,15 @@
       </div>
 
       <div class="ticket-actions pull-right">
-        <div class="btn pull-left btn-scooter btn-cr btn-update update-button"
+        <div class="btn pull-left btn-scooter btn-cr btn-update update-button" ng-show="false"
              tooltip="Update &amp; Close" tooltip-placement="top"
-             ng-class="{disabled: ticketDetail.status === 'COMPLETED' }"
+             ng-class="{disabled: ticketDetails.status === 'COMPLETED' }"
              ng-click="updateAndCloseTicket()">
           <!--ng-if=" (ticketDetail.assignedUser !== null && currentUser.role !== 'USER' && listType !== 'trash' && listType !== 'spam') || (listType === 'user' && currentUser.role === 'USER') "-->
           <span class="icn-tick"></span>
         </div>
 
-        <div id="btnTicketSettings" class="pad-left dropdown pull-left" dropdown>
+        <div class="pad-left dropdown pull-left" dropdown>
           <!--ng-if="listType !== 'spam' && listType != 'trash' && listType !== 'shared' || (listType === 'shared' && currentUser.role === 'ADMIN') "-->
 
           <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
@@ -60,7 +61,7 @@
               </a>
             </li>
 
-            <li class="dropdown-submenu left-align">
+            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
               <!--ng-if="ActionRightsService.isLabelAsVisible(listType, currentUser.role)"-->
               <a tabindex="-1" href="#">Label as...</a>
 
@@ -86,7 +87,7 @@
               </div>
             </li>
 
-            <li id="detailAssignTicketTo" class="dropdown-submenu left-align">
+            <li id="detailAssignTicketTo" class="dropdown-submenu left-align" ng-if="PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
               <!--ng-if="ActionRightsService.isAssignToUserVisible(listType, currentUser.role)"-->
               <a tabindex="-1" href="javascript:void(0)">Assign Ticket to...</a>
 
@@ -97,7 +98,7 @@
               </div>
             </li>
 
-            <li class="dropdown-submenu left-align">
+            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role)">
               <!--ng-if="ActionRightsService.isPriorityForDetailPageVisible(listType, currentUser.role)"-->
               <a tabindex="-1" href="javascript:void(0)">
                 Change Priority to...
@@ -127,7 +128,7 @@
               </div>
             </li>
 
-            <li class="dropdown-submenu">
+            <li class="dropdown-submenu" ng-show="false">
               <!--ng-if="ActionRightsService.isChangeStatusVisible(listType)"-->
               <a tabindex="-1" href="#">
                 Change Status to...
@@ -151,9 +152,9 @@
 
             <li>
               <!--ng-if="ActionRightsService.isMarkAsSpamDetailVisible(listType, currentUser.role)" ng-click="moveIntoSpam()"-->
-              <a tabindex="-1" href="javascript:void(0)">
-                <span ng-if=" currentUser.role !== 'USER' ">Mark as Spam</span>
-                <span ng-if=" currentUser.role === 'USER' ">Report as Spam</span>
+              <a tabindex="-1" href="javascript:void(0)"  ng-click="moveIntoSpam()">
+                <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
+                <span ng-if="currentUser.role === 'USER' ">Report as Spam</span>
               </a>
             </li>
 
@@ -163,7 +164,7 @@
           </a>-->
             <!--</li>-->
 
-            <li>
+            <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
               <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType)"-->
               <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">
                 Move to Trash
@@ -172,7 +173,7 @@
 
           </ul>
         </div>
-        <div class="btn pull-left btn-white-gray btn-cr btn-collapse" ui-sref="tickets({listType: '{{ listType }}'})"
+        <div class="btn pull-left btn-white-gray btn-cr btn-collapse" ng-click="collapseTicket()"
              tooltip="collapse" tooltip-placement="top">
           <span class="icn-ticket-minimize"></span>
         </div>
@@ -191,15 +192,13 @@
     <div class="ticket-message" ng-bind-html="ticketDetails.note">
       <!--{{renderHTML('ticket-message', ticketDetail.note)}}-->
     </div>
-    <div class="ticket-attachment clearfix">
+    <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length !== 0">
       <!--ng-if="ticketDetails.attachments.length > 0"-->
       <div class="attachment-meta clearfix">
         <span class="attachments-count pull-left">{{ticketDetails.attachments.length}} Attachments</span>
 
         <div class="download-all pull-right">
           <div class="btn btn-white-gray btn-cr pull-right" tooltip="download all attachments"
-               ng-class="{'disabled': ticketDetails.attachments.length === 0}"
-               ng-disabled="ticketDetails.attachments.length === 0"
                tooltip-placement="top" ng-click="downloadAllAttachments()">
             <span class="icn-attachments-download"></span>
           </div>
@@ -229,13 +228,13 @@
     </div>
   </div>
 
-  <div class="user-msg">
+  <div class="user-msg"  ng-show="false">
     <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id !== currentUser.id && ticketDetail.isReassigned === true"-->
     <strong>{{ getUserName(assignPerformer) }}</strong> re-assigned this ticket to
     <strong>{{ getUserName(assignedUser) }}</strong> on {{ renderDateTime(ticketDetails.assignedAt) }}
   </div>
 
-  <div class="user-msg">
+  <div class="user-msg"  ng-show="false">
     <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id !== currentUser.id && ticketDetail.assignPerformer.id !== ticketDetail.assignedUser.id && ticketDetail.isReassigned === false"-->
     <span class="bold">{{ getUserName(assignPerformer) }}</span>
     assigned this ticket to
@@ -244,40 +243,40 @@
     <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
   </div>
 
-  <div class="user-msg">
+  <div class="user-msg"  ng-show="false">
     <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id === currentUser.id && ticketDetail.assignedUser.id === currentUser.id"-->
     <span class="bold">You</span> Claimed this ticket on {{ renderDateTime(ticketDetails.assignedAt) }}
   </div>
 
-  <div class="user-msg">
+  <div class="user-msg"  ng-show="false">
     <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignPerformer.id === ticketDetail.assignedUser.id "-->
     <span class="bold">{{ getUserName(assignedUser) }}</span>
     Claimed this ticket on {{ renderDateTime(ticketDetails.assignedAt) }}
   </div>
 
-  <div class="user-msg">
+  <div class="user-msg"  ng-show="false">
     <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id === currentUser.id && ticketDetail.assignedUser.id !== currentUser.id "-->
     <span class="bold">You</span> assigned this ticket to
     <strong>{{ getUserName(assignedUser)}}</strong> on <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
   </div>
 
-  <div class="user-msg">
+  <div class="user-msg"  ng-show="false">
     <!--ng-if=" ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id === currentUser.id && ticketDetail.isReassigned === false "-->
     <span class="bold">{{ getUserName(assignPerformer) }}</span> assigned this ticket to
     <strong>You</strong> on <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
   </div>
 
-  <div class="user-msg">
+  <div class="user-msg" ng-show="false">
     <!--ng-if=" ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id === currentUser.id && ticketDetail.isReassigned === true "-->
     <span class="bold">{{ getUserName(assignPerformer) }}</span> re-assigned this ticket to
     <strong>You</strong> on <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
   </div>
 
   <!-- ticket updates -->
-  <div id="ticketUpdates" class="ticket-updates clearfix">
+  <div class="ticket-updates clearfix">
 
     <!-- ticket updates - heading -->
-    <div class="ticket-update-header clearfix">
+    <div class="ticket-update-header clearfix" ng-show="false">
       <!--ng-if="ticketDetail.updates.length > 0 && listType !== 'unassigned'"-->
       <h4>
         <span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ticketDetails.updates.length}}</span></span>
@@ -341,7 +340,7 @@
 
     <!-- /ticket updates -->
 
-    <div class="ticket-updates-wrapper clearfix">
+    <div class="ticket-updates-wrapper clearfix" ng-show="false">
       <!--ng-if="listType !== 'unassigned'"-->
       <div ng-repeat="ticketUpdate in ticketDetails.updates" class="ticket-update clearfix"
            ng-controller="quicktech.core.tickets.ticketUpdateCtrl"
@@ -455,157 +454,7 @@
     </div>
 
 
-    <div ng-include="'/html/scripts/core/tickets/ticket-update-tab.tpl.html'"></div>
-
-    <!--<div class="ticket-post-update-wrapper">-->
-      <!--&lt;!&ndash;ng-show=" listType !== 'unassigned' && listType !== 'closed' && listType !== 'trash' && listType !== 'spam' "&ndash;&gt;-->
-      <!--<div role="tabpanel">-->
-        <!--&lt;!&ndash; Nav tabs &ndash;&gt;-->
-        <!--<ul class="nav nav-pills nav-post-update">-->
-          <!--<li role="presentation" ng-class="{'active': currentOpenTab === 'NOTE'}">-->
-            <!--<a href="javascript:void(0)"-->
-               <!--ng-click="openedTab('NOTE');">-->
-              <!--<span class="icon-add icn-add-note"></span>-->
-              <!--Note-->
-            <!--</a>-->
-          <!--</li>-->
-          <!--<li role="presentation" ng-class="{'active': currentOpenTab === 'PRODUCT'}">-->
-            <!--&lt;!&ndash;ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "&ndash;&gt;-->
-            <!--<a href="javascript:void(0)"-->
-               <!--ng-click="openedTab('PRODUCT');">-->
-              <!--<span class="icon-add icn-add-product"></span>-->
-              <!--Product-->
-            <!--</a>-->
-          <!--</li>-->
-          <!--<li role="presentation" ng-class="{'active': currentOpenTab === 'SERVICE'}">-->
-            <!--&lt;!&ndash;ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "&ndash;&gt;-->
-            <!--<a href="javascript:void(0)"-->
-               <!--ng-click="openedTab('SERVICE');">-->
-              <!--<span class="icon-add icn-add-service"></span>-->
-              <!--Service-->
-            <!--</a>-->
-          <!--</li>-->
-          <!--<a href="javascript:void(0)" class="btn btn-gray  btn-remote-access pull-right tp-hide"-->
-             <!--tooltip="Remote Access" tooltip-placement="top">-->
-            <!--<img src="images/spacer.gif" class="icn-remote-access">-->
-          <!--</a>-->
-        <!--</ul>-->
-
-        <!--&lt;!&ndash; Tab panes &ndash;&gt;-->
-        <!--<div class="tab-content">-->
-          <!--&lt;!&ndash; Add Note&ndash;&gt;-->
-          <!--<div role="tabpanel" class="tab-pane tab-add-note active"-->
-               <!--ng-if="currentOpenTab === 'NOTE'"-->
-               <!--ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">-->
-            <!--<div class="ticket-update clearfix">-->
-              <!--<div class="ticket-updater pull-left">-->
-                <!--<div class="pull-left avatar-38 avatar m-r">-->
-                  <!--<img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="ticket-update-content pull-left">-->
-                <!--<div class="update-ticket-form-wrapper">-->
-                  <!--<div ng-include="'/html/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>-->
-                  <!--&lt;!&ndash;div class="ticket-form-header" ng-include="'/html/quicktech/ticketing/views/ticketUpdateAddNote.html'">-->
-                <!--</div&ndash;&gt;-->
-
-                  <!--&lt;!&ndash; Update Box Footer &ndash;&gt;-->
-                  <!--<div class="ticket-form-footer clearfix">-->
-                    <!--<div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="ticketUpdate.noteUpdates.ticketAttachments">-->
-                      <!--<a href="javascript:void(0)"-->
-                         <!--class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide"-->
-                         <!--tooltip="Attach files" tooltip-placement="top">-->
-                        <!--<span class="icn-add-attachment"></span>-->
-                      <!--</a>-->
-                      <!--<input type="file" style="display:none"/>-->
-                    <!--</div>-->
-
-                    <!--<div class="line-sep pull-left"></div>-->
-
-                    <!--<div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>-->
-                  <!--</div>-->
-                <!--</div>-->
-
-                <!--<div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>-->
-
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--&lt;!&ndash; Add Product Panel &ndash;&gt;-->
-          <!--<div role="tabpanel" class="tab-pane tab-add-product active"-->
-               <!--ng-if="currentOpenTab === 'PRODUCT'"-->
-               <!--ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl">-->
-            <!--&lt;!&ndash;ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "&ndash;&gt;-->
-            <!--<div class="ticket-update clearfix">-->
-              <!--<div class="ticket-updater pull-left">-->
-                <!--<div class="pull-left avatar-38 avatar m-r">-->
-                  <!--<img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="ticket-update-content pull-left">-->
-                <!--<div class="update-ticket-form-wrapper">-->
-
-                  <!--<div ng-form="addProductsForm">-->
-                    <!--<div class="ticket-form-header" ng-repeat="productExpense in ticketUpdate.products">-->
-                      <!--<div ng-model="productExpense"-->
-                           <!--ticket-add-product-->
-                           <!--product-categories="productCategories"-->
-                           <!--remove-product-func="removeProduct"-->
-                        <!--show-errors="true"></div>-->
-                    <!--</div>-->
-                  <!--</div>-->
-
-                  <!--<div class="ticket-form-header" ng-model="productExpenseToAdd"-->
-                       <!--ticket-add-product enable-add-mode="true" add-product-func="addProduct"-->
-                       <!--remove-product-func="removeProduct"-->
-                       <!--product-categories="productCategories"-->
-                       <!--show-errors="triedToAddProduct"></div>-->
-
-                  <!--&lt;!&ndash; Update Box Footer &ndash;&gt;-->
-                  <!--<div class="ticket-form-footer clearfix">-->
-                    <!--<div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'">-->
-                    <!--</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'">-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--&lt;!&ndash; Service Panel &ndash;&gt;-->
-          <!--<div role="tabpanel" class="tab-pane tab-add-service"-->
-               <!--ng-if="currentOpenTab === 'SERVICE'" ng-class="{'active': currentOpenTab === 'SERVICE'}">-->
-            <!--&lt;!&ndash;ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "&ndash;&gt;-->
-            <!--<div class="ticket-update clearfix">-->
-              <!--<div class="ticket-updater pull-left">-->
-                <!--<div class="pull-left avatar-38 avatar m-r">-->
-                  <!--<img src="images/avatars/a4.jpg" alt="..." class="img-circle">-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="ticket-update-content pull-left">-->
-                <!--<div class="update-ticket-form-wrapper">-->
-
-                  <!--<div class="ticket-form-header" ng-repeat="serviceUpdate in servicesUpdates" service-update></div>-->
-
-                  <!--<div class="ticket-form-header" ng-controller="quicktech.core.tickets.ticketAddServiceCtrl"-->
-                       <!--ng-include="'/html/scripts/core/tickets/services/ticket-add-service.tpl.html'">-->
-                  <!--</div>-->
-                  <!--<div class="ticket-form-footer clearfix">-->
-                    <!--<div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'">-->
-                    <!--</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'">-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
+    <div ng-show="false" ng-include="'/html/scripts/core/tickets/ticket-update-tab.tpl.html'"></div>
 
     <!-- Ticket Notes -->
     <div class="tips-message">
@@ -617,7 +466,7 @@
         <span class="bold">"Claim Ticket"</span> button to get the troubleshooting process started!
       </div>
       <div class="message-btn">
-        <a href="javascript:void(0)" ng-click="postAssignTicket($event, ticketDetail, currentUser)"
+        <a href="javascript:void(0)" ng-click="claimTicket()"
            class="btn btn-sr btn-scooter">
           Claim Ticket
         </a>
@@ -625,7 +474,7 @@
     </div>
 
     <!-- closed -->
-    <div class="tips-message has-updates">
+    <div class="tips-message has-updates" ng-show="false">
       <!--ng-if=" listType === 'closed' && canBeReOpened(ticketDetail.createdAt) && ticketDetail.hasInvoice !== true "-->
       <span class="icn icn-message-ticket-closed"></span>
 
@@ -639,7 +488,7 @@
       </div>
     </div>
 
-    <div class="tips-message has-updates no-button">
+    <div class="tips-message has-updates no-button" ng-show="false">
       <!--ng-if=" listType === 'closed'  && !canBeReOpened(ticketDetail.createdAt)  && ticketDetail.hasInvoice !== true"-->
       <span class="icn icn-message-ticket-closed"></span>
 
@@ -652,7 +501,7 @@
       </div>
     </div>
 
-    <div class="tips-message has-updates no-button">
+    <div class="tips-message has-updates no-button" ng-show="false">
       <!--ng-if=" listType === 'closed' && ticketDetail.hasInvoice === true"-->
       <span class="icn icn-message-ticket-closed"></span>
 
@@ -666,7 +515,7 @@
       </div>
     </div>
 
-    <div class="tips-message has-updates">
+    <div class="tips-message has-updates" ng-show="false">
       <!--ng-if=" listType === 'trash' "-->
       <span class="icn icn-message-ticket-trash"></span>
 
@@ -688,12 +537,12 @@
       </div>
     </div>
 
-    <div class="tips-message has-updates">
+    <div class="tips-message has-updates" ng-show="false">
       <!--ng-if=" listType === 'spam' && currentUser.role === 'ADMIN' "-->
       <span class="icn icn-message-ticket-spam"></span>
 
       <div class="message-detail">
-        <span class="bold blue">{{ getUserFullNameById(ticketDetail.spamPerformer.id) }}</span>
+        <span class="bold blue">{{ getUserFullNameById(ticketDetails.spamPerformer.id) }}</span>
         has marked this ticket as
         spam. You can either delete the ticket forever or restore the ticket
         status anytime, using the respective option.
@@ -703,14 +552,14 @@
         where it was marked as spam.
       </div>
       <div class="message-btn shared">
-        <a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail)" class="btn btn-sr btn-red">Delete
+        <a href="javascript:void(0)" ng-click="deleteForEver(ticketDetails)" class="btn btn-sr btn-red">Delete
           Forever</a>
-        <a href="javascript:void(0)" ng-click="markAsSpam($event, ticketDetail, false)"
+        <a href="javascript:void(0)" ng-click="markAsSpam($event, ticketDetails, false)"
            class="btn btn-sr btn-gray btn-cancel ">Restore</a>
       </div>
     </div>
 
-    <div class="tips-message">
+    <div class="tips-message" ng-show="false">
       <!--ng-if=" listType === 'spam' && currentUser.role === 'USER' "-->
       <span class="icn icn-message-ticket-spam"></span>
 

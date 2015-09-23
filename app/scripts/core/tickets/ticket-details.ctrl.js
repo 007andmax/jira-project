@@ -35,20 +35,13 @@
 
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
             $scope.company = CompaniesService.getOneById($scope.ticketDetails.company.id);
-            $scope.assignPerformer = UsersService.getOneById($scope.ticketDetails.assignPerformer.id);
+            if ($scope.ticketDetails.assignPerformer && $scope.ticketDetails.assignPerformer.id) {
+              $scope.assignPerformer = UsersService.getOneById($scope.ticketDetails.assignPerformer.id);
+            }
 
             $scope.$broadcast('ticketDetailsLoad');
 
           });
-
-          $scope.renderDateTime = function (time) {
-
-            var data = new Date(time);
-
-            if (Object.prototype.toString.call(data) === "[object Date]" && !isNaN(data.getTime())) {
-              return data.toUTCString();
-            }
-          };
 
           $scope.setTicketTags = function () {
             for (var j = 0; j < $scope.ticketDetails.tags.length; j++) {
@@ -64,6 +57,10 @@
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               $state.go('tickets', {listType: $stateParams.listType});
             });
+          };
+
+          $scope.collapseTicket = function () {
+            $state.go('tickets', {listType: $stateParams.listType});
           };
 
           $scope.claimTicket = function () {
@@ -83,11 +80,15 @@
           };
 
           $scope.moveIntoSpam = function () {
-            TicketsService.changeSpamFlag($scope.ticketDetails.id, true);
+            TicketsService.changeSpamFlag($scope.ticketDetails.id, true, function () {
+              $state.go('tickets', {listType: $stateParams.listType});
+            });
           };
 
           $scope.moveToTrash = function (movedWay) {
-            TicketsService.changeTrashFlag($scope.ticketDetails.id, movedWay);
+            TicketsService.changeTrashFlag($scope.ticketDetails.id, movedWay, function () {
+              $state.go('tickets', {listType: $stateParams.listType});
+            });
           };
 
           $scope.downloadAllAttachments = function () {
@@ -135,7 +136,7 @@
             }
           };
 
-          $scope.getUserById = function(userId){
+          $scope.getUserById = function (userId) {
             return UsersService.getOneById(userId);
           }
 

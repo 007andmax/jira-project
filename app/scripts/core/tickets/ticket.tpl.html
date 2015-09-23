@@ -12,16 +12,17 @@
 
   <div class="ticket-meta clearfix">
 
-    <div class="ticket-by-and-when clearfix" ng-click="expand($event, ticket)">
+    <div class="ticket-by-and-when clearfix">
+      <!--ng-click="expand($event, ticket)"-->
 
-      <span class="pull-left">{{ getUserName(user) }}  <span
-        class="dot-sep"></span>
+      <span class="pull-left">{{ getUserName(user) }}
+        <span class="dot-sep"></span>
         <span class="company-name">{{ company.name }}</span>
       </span>
 
       <span class="pull-right"> {{ ticket.createdAt | date:'dd MMM yyyy'}} </span>
 
-      <ul class="nav-tags pull-right">
+      <ul class="nav-tags pull-right" ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)">
         <li ng-repeat="tag in ticket.tags">
           <span class="tag-color color{{ tag.color }}" tooltip="{{ tag.name }}" tooltip-placement="top"></span>
         </li>
@@ -33,12 +34,12 @@
 
       <div class="ticket-title-msg">
         <span class="pull-left">{{ticket.subject}}</span>
-        <span class="ticket-excerpt">{{ticket.note}}</span>
+        <!--<span class="ticket-excerpt">{{ticket.note}}</span>-->
       </div>
 
       <ul class="ticket-action pull-right" ng-click="doNotExpandTicket($event)">
         <!-- More Actions on right -->
-        <li class="more left-align dropdown">
+        <li class="more left-align dropdown" ng-if="PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isMoreActionsMenuVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' "-->
           <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true" aria-expanded="false"
              tooltip="More Actions" tooltip-placement="top" data-toggle="dropdown">
@@ -79,7 +80,7 @@
               </div>
             </li>
 
-            <li class="dropdown-submenu left-align">
+            <li class="dropdown-submenu left-align" ng-show="false">
               <!--ng-if="ActionRightsService.isChangeStatusVisible(listType)"-->
               <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
 
@@ -106,8 +107,8 @@
 
             <li>
               <a ng-click="moveIntoSpam(true)" tabindex="-1" href="javascript:void(0)">
-                <span ng-if=" currentUser.role !== 'USER' ">Mark as Spam</span>
-                <span ng-if=" currentUser.role === 'USER' ">Report as Spam</span>
+                <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
+                <span ng-if="currentUser.role === 'USER' ">Report as Spam</span>
               </a>
             </li>
 
@@ -120,14 +121,14 @@
         <!-- delete forever, only visible in trash -->
         <li>
           <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType) || ActionRightsService.isDeleteSpamForAdminVisible(listType, MarkedSpamByRole(ticket),currentUser.role)"-->
-          <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
+          <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top" ng-show="false">
             <span class="icn-ticket-del icn"></span>
           </a>
         </li>
         <!-- delete, visible when in spam, is marked by admin and current user is admin -->
         <li>
           <!--ng-if="ActionRightsService.isMoveToTrashIconVisible(listType, MarkedSpamByRole(ticket),currentUser.role) || (currentUser.role === 'ADMIN' && listType === 'user' && ticket.status === 'COMPLETED') "-->
-          <a href="javascript:void(0)" tooltip="move to trash" tooltip-placement="top"
+          <a href="javascript:void(0)" tooltip="move to trash" tooltip-placement="top" ng-show="false"
              ng-click="moveToTrash(true)">
             <span class="icn-ticket-del icn"></span>
           </a>
@@ -135,7 +136,7 @@
         <!-- restore, visible when in trash -->
         <li>
           <!-- ng-if="ActionRightsService.isRestoreForTrashVisible(listType)"-->
-          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
+          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top" ng-show="false"
              ng-click="moveToTrash(false)">
             <span class="icn-small-ticket-restore icn"></span>
           </a>
@@ -143,7 +144,7 @@
 
         <li>
           <!--ng-if="ActionRightsService.isRestoreForSpamVisible(listType)"-->
-          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
+          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top" ng-show="false"
              ng-click="moveIntoSpam(false)">
             <span class="icn-small-ticket-restore icn"></span>
           </a>
@@ -152,14 +153,14 @@
         <!-- mark as spam icon, visible when in unassigned and for USER only -->
         <li>
           <!--ng-if="ActionRightsService.isMarkAsSpamIconVisible(listType, MarkedSpamByRole(ticket), currentUser.role)"-->
-          <a href="javascript:void(0);" tooltip="{{ listType === 'unassigned' ? 'Report As Spam':'Mark As Spam' }}"
-             tooltip-placement="top" ng-click="moveIntoSpam(true)">
+          <a href="javascript:void(0);" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"
+             tooltip-placement="top" ng-click="moveIntoSpam(true)" ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role)">
             <span class="icn-ticket-spam icn"></span>
           </a>
         </li>
 
         <!-- priority icon -->
-        <li class=" left-align">
+        <li class=" left-align" ng-show="false">
           <!--ng-if="ActionRightsService.isPriorityIconVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' "-->
           <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true"
              aria-expanded="false" data-toggle="dropdown"
@@ -195,7 +196,7 @@
         </li>
 
         <!-- Assign user, -->
-        <li class="left-align">
+        <li class="left-align" ng-if="PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isAssignToUserVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' "-->
           <a href="javascript:void(0)" class="tooltip-dp" href="javascript:void(0)"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="isShowAssignUser = true"
@@ -210,7 +211,7 @@
 
         </li>
         <!-- Label as, -->
-        <li class="left-align">
+        <li class="left-align" ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isLabelAsVisible(listType, currentUser.role)"-->
           <a class="dropdown-toggle tooltip-dp" href="javascript:void(0)" tooltip="Label as..."
              tooltip-placement="top" data-toggle="dropdown" aria-haspopup="true"
@@ -244,7 +245,7 @@
         </li>
       </ul>
 
-      <a href="javascript:void(0)" class="icn-ticket-attachment pull-right"></a>
+      <a ng-if="ticket.hasAttachments==true" href="javascript:void(0)" class="icn-ticket-attachment pull-right"></a>
       <!--ng-if="ticket.hasAttachments==true"-->
     </div>
 
@@ -254,22 +255,23 @@
               tooltip="{{ ticket.priorityLevel }}" tooltip-placement="top"></span>
       </div>
 
-      <div class="ticket-status">
+      <div class="ticket-status" ng-show="false">
         <!--ng-if="listType!='unassigned'"-->
         <span class="icns icn-status-{{ ticketStatusToCssFormat(ticket.status) }}"
               tooltip="{{ ticket.status }}" tooltip-placement="top"></span>
       </div>
 
-      <span class="label label-default label-ticket-assign-user tooltip-dp"
+      <span ng-show="false"
+            class="label label-default label-ticket-assign-user tooltip-dp"
             tooltip="{{ getUserName(assignedUser) }}" tooltip-placement="top">
         <!--ng-if="ticket.assignedUser !== null && listType !== 'user' && ticket.assignedUser.id !== currentUser.id "-->
         {{ assignedUser.initials }}
       </span>
 
       <span class="label label-default label-ticket-number">{{ ticket.number }}</span>
-      <span class="icn-load-green pull-right"></span>
+      <span class="icn-load-green pull-right" ng-if="ticket.hasNewUpdates == true"></span>
       <!--ng-if="ticket.hasNewUpdates == true"-->
-      <span class="label label-success pull-right">
+      <span class="label label-success pull-right" ng-if="false" ng-show="false">
         <!--ng-if="(listType !== 'user' || listType !== 'shared') && ticket.unread==true"-->
         new
       </span>

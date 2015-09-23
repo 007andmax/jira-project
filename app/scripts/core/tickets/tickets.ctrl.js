@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
-    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'ActionRightsService', 'TicketTagsService',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, ActionRightsService, TicketTagsService) {
+    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'TicketTagsService', 'quicktech.common.services.PermissionsService',
+      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService, PermissionsService) {
 
-        $scope.ActionRightsService = ActionRightsService;
+        $scope.PermissionsService = PermissionsService;
         $scope.tags = TicketTagsService.getList($scope);
         $scope.users = UsersService.getAllUsers();
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
