@@ -10,11 +10,15 @@
         $scope.user = UsersService.getOneById($scope.ticket.createdUser.id);
         $scope.company = CompaniesService.getOneById($scope.ticket.company.id);
 
-        (function setTicketTags() {
+        if($scope.ticket.assignedUser && $scope.ticket.assignedUser.id){
+          $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);
+        }
+
+        $scope.setTicketTags = function () {
           for (var j = 0; j < $scope.ticket.tags.length; j++) {
             $scope.ticketTags[$scope.ticket.tags[j].id] = true;
           }
-        })();
+        };
 
         $scope.srefToDetails = function (event) {
           if (!event.originalEvent.notOpenTicketDetails) {

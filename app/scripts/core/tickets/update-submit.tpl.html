@@ -1,0 +1,16 @@
+<div class="ticket-actions-footer">
+
+  <div class="pull-left clearfix">
+    <label class="control checkbox">
+      <!--<input type="checkbox">-->
+      <span class="control-indicator"></span>
+      {{ getUserName(user) }}
+    </label>
+  </div>
+
+  <a class="btn btn-scooter btn-update pull-right" ng-click="saveTicketUpdate(ticketUpdate)"
+     ng-class="{ 'disabled': !isValidTicketUpdate()}" ng-disabled="!isValidTicketUpdate()">
+    <!--ng-class="{ disabled: (updateType === 'NOTE' && ticketUpdate.note === '') || (updateType === 'SERVICE' && services.length === 0) || (updateType === 'PRODUCT' && products.length === 0) }">-->
+    <div class="icn-send"></div>
+  </a>
+</div>

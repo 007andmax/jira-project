@@ -1,0 +1,164 @@
+<div class="dropdown pull-left" ng-controller="quicktech.core.tickets.updateAddUserCtrl">
+  <a href="javascript:void(0);"
+     class="btn pull-left btn-white-gray btn-cr btn-transparent dropdown-toggle tooltip-dp"
+     tooltip="add users to this update" tooltip-placement="top"
+     aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+    <span class="icn-add-update"></span>
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-tabs" stop-propagation="click">
+
+    <ul class="nav nav-justified nav-tabs-dropdown">
+      <li ng-class="{'active': currentAddUserTab === 'TEAM_MEMBER'}">
+        <a href="javascript:void(0)" ng-click="openAddUserTab('TEAM_MEMBER')">Team Members</a>
+      </li>
+      <li ng-class="{'active': currentAddUserTab === 'VENDOS'}">
+        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+        <a href="javascript:void(0)" ng-click="openAddUserTab('VENDOS')">vendors</a>
+      </li>
+      <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
+        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+        <a href="javascript:void(0)" ng-click="openAddUserTab('CLIENT_USER')">Client Users</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Team Members Panel -->
+
+      <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-search form-control-dropdown-input"
+                 placeholder="Search agent..." ng-model="searchFilter.agent">
+          <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+             ng-click="searchFilter.agent = undefined"></a>
+        </div>
+
+        <div>
+
+          <ul class="users-list ">
+
+            <li ng-repeat="agent in agents | filter: searchFilter.agent"
+                ng-class="{'checked': agent.isSelected}"
+                ng-click="addUsertoUpdate(agent);">
+              <!-- TODO search for firstName, lastNAme and email-->
+              <label class="control checkbox">
+                <input type="checkbox" ng-model="agent.isSelected">
+                <span class="control-indicator"></span>
+              </label>
+              <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
+                <img ng-src="{{ getUserAvatarUrl(agent) }}" alt="..." class="img-circle">
+              </a>
+
+              <div class="clearfix">
+                <div class="user-name"><a href="javascript:void(0)">{{ getUserName(agent) }} "{{ agent.primaryEmail }}"</a>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+
+      <!-- Vendor Panel -->
+      <!-- TODO get vendor's contacts in ctrl-->
+      <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'">
+        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+        <div class="form-group">
+          <input type="text" class="form-control form-control-search form-control-dropdown-input"
+                 placeholder="Search vendor..." ng-model="userFilter.query" ng-keyup="searchUser();">
+          <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
+        </div>
+
+        <div>
+          <ul class="users-list ">
+
+            <li ng-repeat="user in vendor_users | UserFilter: userQuery" ng-class="{checked: user.isSelected}"
+                ng-click="user.isSelected=!user.isSelected; addUsertoUpdate(user);">
+              <label class="control checkbox">
+                <input type="checkbox" ng-model="user.isSelected">
+                <span class="control-indicator"></span>
+              </label>
+              <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
+                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
+              </a>
+
+              <div class="clearfix">
+                <div class="user-name"><a href="javascript:void(0)">{{ user.firstName }} {{ user.lastName }}
+                  "{{user.primaryEmail }}"</a>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Client User Panel -->
+      <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'">
+        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+        <div class="form-group">
+          <input type="text" class="form-control form-control-search form-control-dropdown-input"
+                 placeholder="Search client..." ng-model="searchFilter.client">
+          <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
+        </div>
+
+        <div>
+          <ul class="users-list ">
+
+            <li ng-repeat="client in clients | filter: searchFilter.client"
+                ng-class="{'checked': client.isSelected}"
+                ng-click="addUsertoUpdate(client);">
+              <label class="control checkbox">
+                <input type="checkbox" ng-model="client.isSelected">
+                <span class="control-indicator"></span>
+              </label>
+              <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
+                <img ng-src="{{ getUserAvatarUrl(client) }}" alt="..." class="img-circle">
+              </a>
+
+              <div class="clearfix">
+                <div class="user-name"><a href="javascript:void(0)">{{ getUserName(client) }} "{{ client.primaryEmail }}"</a>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </ul>
+</div>
+
+<!-- Selected Users -->
+<ul class="selected-users pull-left">
+
+  <!--<li ng-repeat="user in update_users">-->
+  <!--<div class="pull-left avatar-26 avatar m-r">-->
+  <!--<img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">-->
+
+  <!--<div class="remove-user" ng-click="user.isSelected = false; addUsertoUpdate(user);">-->
+  <!--<span class="icn-remove-user abc"></span>-->
+  <!--</div>-->
+  <!--<div class="tooltip tooltip-users top">-->
+  <!--<div class="tooltip-arrow"></div>-->
+  <!--<ul class="tooltip-inner">-->
+  <!--<li>-->
+  <!--<span class="username">{{ user.firstName }} {{ user.lastName }}</span>-->
+  <!--<span class="usertitle">{{ getUserType(user.accountType) }}</span>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</li>-->
+
+</ul>
+
+<div class="total-amount pull-right">
+  <!--ng-show=" updateType === 'PRODUCT' "-->
+  Total amount
+  <!--<span class="bold">{{ productTotalAmount | currency }}</span>-->
+</div>
+

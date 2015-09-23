@@ -1,0 +1,33 @@
+<ul class="dropdown-menu dropdown-menu-categories" stop-propagation="click">
+  <li role="presentation" ng-repeat=" category in productCategories | filter: productNameFilter"
+      ng-click=" loadProductByCategory(category.id);" ng-class="{active: category.isSelected}">
+    <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+      <span class="title"> {{ category.name }} </span>
+      <span class="pull-right total-count">{{ category.productsAmount }} items</span>
+      <span class="clearfix"></span>
+    </a>
+  </li>
+</ul>
+
+<ul class="dropdown-menu dropdown-menu-products">
+  <li role="presentation" class="dropdown-header">
+    <div class="form-group">
+      <input type="text" class="form-control form-control-search form-control-dropdown-input"
+             style="background-color: #f7f9fb; border: 1px solid #d7dde5;"
+             placeholder="Filter product..." ng-model="filterProduct.name"
+             stop-propagation="click">
+      <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
+    </div>
+  </li>
+  <li>
+    <ul class="subdropdown-menu dropdown-menu-products">
+
+      <li role="presentation" ng-repeat="categoryProduct in productsByCategory | filter: filterProduct ">
+        <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="selectProduct(categoryProduct)">
+          <span class="title">{{ categoryProduct.name }}</span>
+          <span class="pull-right total-count">#{{ categoryProduct.code }}</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>

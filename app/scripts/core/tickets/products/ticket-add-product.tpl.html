@@ -1,0 +1,76 @@
+<div ng-init="formName = 'addProductForm' + $id"></div>
+<form name="addProductForm">
+  <div class="add-product clearfix">
+    <div class="col-1">
+
+      <div class="col-wrapper dropdown"
+           ng-class="{error: isShowingErrors(addProductForm, 'product')}">
+
+        <div ng-messages="addProductForm.product.$error"
+             ng-show="isShowingErrors(addProductForm, 'product')">
+          <div class="qt-error-msg" ng-message="required">Select product from dropdown.</div>
+        </div>
+
+        <input type="text" class="form-control form-control-dropdown dropdown-toggle"
+               placeholder="Product" name="productName"
+               data-toggle="dropdown" aria-expanded="true" ng-model="productNameFilter" tabindex="1">
+        <input type="hidden" name="product" ng-model="productExpense.item.versionedId.id" ng-required="true">
+
+        <div class="dropdown-menu dropdown-menu-transparent"
+             ng-include="'/html/scripts/core/tickets/products/choose-product-dropdown.tpl.html'"></div>
+
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(addProductForm, 'productDescription')}">
+        <div ng-messages="addProductForm.productDescription.$error"
+             ng-show="isShowingErrors(addProductForm, 'productDescription')">
+          <div class="qt-error-msg" ng-message="required">Description is required.</div>
+        </div>
+        <input type="text" class="form-control" name="productDescription" ng-required="true"
+               placeholder="Description" value="product.description" tabindex="2"
+               ng-model="productExpense.description">
+      </div>
+    </div>
+    <div class="col-5" ng-if="isAddMode">
+      <div class="col-wrapper">
+        <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
+           tooltip="Add Product" tooltip-placement="top" tabindex="4"
+           ng-click="addProduct(addProductForm)">
+          <span class="icn-add"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-5" ng-if="!isAddMode">
+      <div class="col-wrapper">
+        <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
+           tooltip="Remove Product" tooltip-placement="top" ng-click="removeProduct($index)">
+          <span class="icn-remove-update"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="col-wrapper">
+        <input type="text" class="form-control" placeholder="Amount"
+               value="{{ productExpense.item.sale * productExpense.quantity || '' }}" readonly>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="col-wrapper" ng-class="{error: isShowingErrors(addProductForm, 'productQty')}">
+
+        <div ng-messages="addProductForm.productQty.$error"
+             ng-show="isShowingErrors(addProductForm, 'productQty')">
+          <div class="qt-error-msg" ng-message="required">Qty is required.</div>
+        </div>
+
+        <input type="text" class="form-control" placeholder="Qty" name="productQty" ng-required="true"
+               ng-model="productExpense.quantity" tabindex="3"
+               ng-pattern="numberPattern" hard-reset-pattern="numberPattern">
+      </div>
+    </div>
+  </div>
+</form>

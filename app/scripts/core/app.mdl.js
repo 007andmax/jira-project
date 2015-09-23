@@ -32,7 +32,7 @@
     $stateProvider
       .state('tickets', waitForServices({
         url: '/tickets/:listType',
-        templateUrl: '/html/scripts/core/tickets/tickets.html',
+        templateUrl: '/html/scripts/core/tickets/tickets.tpl.html',
         controller: 'quicktech.core.tickets.ticketsCtrl'
       }))
       .state('tickets.details', waitForServices({

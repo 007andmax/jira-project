@@ -1,0 +1,93 @@
+<div class="table-content service-table edit-table edit-service-table pull-left">
+  <span class="icon-update icn-update-service"></span>
+
+  <form name="updateTicketService">
+    <div class="ticket-form-header">
+      <div class="add-service clearfix">
+
+        <div class="col-1">
+
+          <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(updateTicketService, 'serviceName')}">
+
+            <div ng-messages="updateTicketService.serviceName.$error"
+                 ng-if="isShowingErrors(updateTicketService, 'serviceName')">
+              <div class="qt-error-msg" ng-message="required">Product is required.</div>
+            </div>
+
+            <input type="text" name="serviceName" ng-required="true"
+                   class="form-control form-control-dropdown dropdown-toggle has-dropdown"
+                   placeholder="Service" data-toggle="dropdown" aria-expanded="true"
+                   ng-model=" editService.item "
+                   typeahead="companyService as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
+                   typeahead-min-length="0" typeahead-editable="false"
+                   qt-typeahead-show-on-focus ng-trim="false">
+          </div>
+        </div>
+
+        <div class="col-2">
+
+          <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(updateTicketService, 'serviceTime')}">
+
+            <div ng-messages="updateTicketService.serviceTime.$error"
+                 ng-if="isShowingErrors(updateTicketService, 'serviceTime')">
+              <div class="qt-error-msg" ng-message="required">Description is required.</div>
+            </div>
+
+            <input type="text" name="serviceTime" ng-required="true"
+                   class="form-control form-control-dropdown dropdown-toggle has-dropdown"
+                   data-toggle="dropdown" aria-expanded="false" placeholder="Hr : Min"
+                   ng-model="editService.quantity ">
+
+          </div>
+        </div>
+
+        <div class="col-4">
+
+          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketService, 'serviceData')}">
+
+            <div ng-messages="updateTicketService.serviceData.$error"
+                 ng-if="isShowingErrors(updateTicketService, 'serviceData')">
+              <div class="qt-error-msg" ng-message="required">Description is required.</div>
+            </div>
+
+            <input type="text" id="datetimepicker2" name="serviceData" ng-required="true"
+                   class="form-control form-control-dropdown dropdown-toggle has-dropdown"
+                   datepicker-popup="dd MMM yyyy" is-open="datepickerIsOpened" show-weeks="false"
+                   show-button-bar="false" ng-click="datepickerIsOpened = true" ng-required="true"
+                   data-toggle="dropdown" aria-expanded="true" placeholder="Date"
+                   ng-model="editService.date">
+          </div>
+        </div>
+
+        <div class="col-3">
+
+          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketService, 'serviceDescription')}">
+
+            <div ng-messages="updateTicketService.serviceDescription.$error"
+                 ng-if="isShowingErrors(updateTicketService, 'serviceDescription')">
+              <div class="qt-error-msg" ng-message="required">Description is required.</div>
+            </div>
+
+            <input type="text" class="form-control service-description" name="serviceDescription"
+                   ng-required="true" placeholder="Description"
+                   ng-model="editService.description">
+          </div>
+        </div>
+
+        <div class="edit-table-actions">
+
+          <a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+             ng-click="cancelEditService()">Cancel</a>
+
+          <a href="javascript:void(0);" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
+             ng-click="saveUpdateService(updateTicketService)">Save Changes</a>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+      </div>
+    </div>
+  </form>
+
+</div>
