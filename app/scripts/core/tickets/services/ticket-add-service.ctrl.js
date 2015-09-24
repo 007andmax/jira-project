@@ -12,6 +12,8 @@
           $scope.serviceExpenseToAdd = {};
           $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.company.id);
 
+          $scope.setTicketUpdate($scope.ticketUpdate);
+
           $scope.isValidTicketUpdate = function () {
             return $scope.ticketUpdate.services.length > 0;
           };

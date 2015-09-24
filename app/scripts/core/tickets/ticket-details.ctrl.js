@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
-      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state', 'ProductsService',
-        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $state, ProductsService) {
+      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state', 'ProductsService', '$sce',
+        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $state, ProductsService, $sce) {
 
           $scope.ticketTags = {};
           $scope.allUpdatesLoaded = false;
@@ -138,7 +138,15 @@
 
           $scope.getUserById = function (userId) {
             return UsersService.getOneById(userId);
-          }
+          };
+
+          $scope.saveTicketUpdate = function(){
+            console.log($scope.ticketUpdate)
+          };
+
+          $scope.getTicketNote = function() {
+            return $sce.trustAsHtml($scope.ticketDetails.note);
+          };
 
         }]);
   }()

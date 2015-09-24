@@ -34,7 +34,7 @@
 
       <div class="ticket-title-msg">
         <span class="pull-left">{{ticket.subject}}</span>
-        <!--<span class="ticket-excerpt">{{ticket.note}}</span>-->
+        <span class="ticket-excerpt" ng-show="!$scope.currentOpeningTicket">{{ticket.previewNote}}</span>
       </div>
 
       <ul class="ticket-action pull-right" ng-click="doNotExpandTicket($event)">
@@ -269,9 +269,9 @@
       </span>
 
       <span class="label label-default label-ticket-number">{{ ticket.number }}</span>
-      <span class="icn-load-green pull-right" ng-if="true"></span>
+      <span class="icn-load-green pull-right" ng-if="ticket.hasNewUpdates === true"></span>
       <!--ng-if="ticket.hasNewUpdates == true"-->
-      <span class="label label-success pull-right" ng-show="true">
+      <span class="label label-success pull-right" ng-show="false">
         <!--ng-if="(listType !== 'user' || listType !== 'shared') && ticket.unread==true"-->
         new
       </span>

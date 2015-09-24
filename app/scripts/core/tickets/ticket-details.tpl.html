@@ -189,7 +189,7 @@
   <!-- .ticket-header -->
 
   <div class="ticket-detail clearfix">
-    <div class="ticket-message" ng-bind-html="ticketDetails.note">
+    <div class="ticket-message" ng-bind-html="getTicketNote()">
       <!--{{renderHTML('ticket-message', ticketDetail.note)}}-->
     </div>
     <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length !== 0">

@@ -11,6 +11,8 @@
           };
           $scope.productExpenseToAdd = {};
 
+          $scope.setTicketUpdate($scope.ticketUpdate);
+
           $scope.isValidTicketUpdate = function () {
             return $scope.ticketUpdate.products.length > 0;
           };

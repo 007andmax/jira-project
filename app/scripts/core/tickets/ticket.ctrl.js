@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketCtrl',
-    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams) {
+    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state',
+      function ($scope, TicketsService, CompaniesService, UsersService, $state) {
 
         $scope.ticketTags = {};
         $scope.user = UsersService.getOneById($scope.ticket.createdUser.id);
