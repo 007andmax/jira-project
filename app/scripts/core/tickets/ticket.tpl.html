@@ -20,7 +20,7 @@
         <span class="company-name">{{ company.name }}</span>
       </span>
 
-      <span class="pull-right"> {{ ticket.createdAt | date:'dd MMM yyyy'}} </span>
+      <span class="pull-right"> {{ ticket.createdAt | ticketCreateDate }} </span>
 
       <ul class="nav-tags pull-right" ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)">
         <li ng-repeat="tag in ticket.tags">
