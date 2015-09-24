@@ -2,40 +2,35 @@
 
 (function () {
 
-  angular.module("quicktech.core.tickets").filter('ticketCreateDate', function () {
-    return function (input) {
+  angular.module("quicktech.core.tickets").filter('ticketCreateDate',
+    ['$filter',
+      function ($filter) {
+        return function (input) {
 
-      var day = 60 * 60 * 24 * 1000,
-        now = new Date(),
-        date = new Date(input),
-        dateYear = date.getFullYear(),
-        dateMonth = date.getUTCMonth(),
-        dateDay = date.getDate(),
-        dateHours = date.getHours(),
-        dateMinuts = date.getMinutes(),
-        stringDate = '',
-        month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          var now = new Date(),
+            date = new Date(input),
+            dateYear = date.getFullYear(),
+            dateMonth = date.getMonth(),
+            dateDay = date.getDate(),
+            template = '';
 
-      if ((now - input) < day) {
 
-        if (dateHours < 12) {
-          stringDate += dateHours === 0 ? '12:' + dateMinuts + ' am' : dateHours + ':' + dateMinuts + ' am';
-        } else {
-          stringDate += dateHours === 12 ? '12:' + dateMinuts + ' pm' : (dateHours - 12) + ':' + dateMinuts + ' pm';
+          if (dateYear === now.getFullYear() && dateMonth === now.getMonth() && dateDay === now.getDate()) {
+
+            template = 'h:mm a';
+
+          } else if (dateYear === now.getFullYear()) {
+
+            template = 'd MMM';
+
+          } else {
+
+            template = 'd MMM yyyy';
+
+          }
+
+          return $filter('date')(input, template);
+
         }
-
-        return stringDate;
-
-      } else if (dateYear === now.getFullYear()) {
-
-        stringDate += dateDay + ' ' + month[dateMonth];
-        return stringDate;
-
-      } else {
-
-        stringDate += dateDay + ' ' + month[dateMonth] + ' ' + dateYear;
-        return stringDate;
-      }
-    }
-  })
+      }])
 })();
