@@ -11,14 +11,15 @@
       $scope.ticketCounts = TicketsService.getCounts($scope);
 
       $scope.$watch(function () {
-        return $stateParams.listType;
-      }, function (filter) {
 
-        if (filter) {
-          ticketsHeaderState.count = $scope.ticketCounts[filter.toUpperCase()];
-          ticketsHeaderState.panelTitle = filter === 'user' ? 'My Tickets'
-            : (filter[0].toUpperCase() + filter.substring(1, filter.length));
+        if (!$stateParams.listType) {
+          return 0;
         }
+
+        return $scope.ticketCounts[$stateParams.listType.toUpperCase()];
+
+      }, function (count) {
+        ticketsHeaderState.count = count;
       })
 
     }]);

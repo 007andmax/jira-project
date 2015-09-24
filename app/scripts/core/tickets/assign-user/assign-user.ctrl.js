@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.assignUserCtrl',
-    ['$scope', 'TicketsService', 'UsersService', '$stateParams',
-      function ($scope, TicketsService, UsersService, $stateParams) {
+    ['$scope', 'TicketsService', 'UsersService', '$stateParams', '$state',
+      function ($scope, TicketsService, UsersService, $stateParams, $state) {
 
         $scope.userToAssign = {};
         $scope.assignToModel = '';
@@ -56,7 +56,9 @@
 
         $scope.assignUserToTicket = function () {
           if ($scope.userToAssign && $scope.userToAssign.id) {
-            TicketsService.assignTo($scope.ticket.id, $scope.userToAssign.id);
+            TicketsService.assignTo($scope.ticket.id, $scope.userToAssign.id, function(){
+              $state.go('tickets', {listType: $stateParams.listType});
+            });
           }
         }
 

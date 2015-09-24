@@ -33,8 +33,8 @@
     <div class="ticket-title clearfix">
 
       <div class="ticket-title-msg">
-        <span class="pull-left">{{ticket.subject}}</span>
-        <span class="ticket-excerpt" ng-show="!$scope.currentOpeningTicket">{{ticket.previewNote}}</span>
+        <span class="pull-left">{{ ticket.subject }}</span>
+        <span class="ticket-excerpt" ng-show="!currentOpeningTicket"> – {{ ticket.previewNote }}</span>
       </div>
 
       <ul class="ticket-action pull-right" ng-click="doNotExpandTicket($event)">

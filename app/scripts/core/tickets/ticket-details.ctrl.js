@@ -64,7 +64,9 @@
           };
 
           $scope.claimTicket = function () {
-            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id)
+            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id, function(){
+              $state.go('tickets', {listType: $stateParams.listType});
+            })
           };
 
           $scope.openSetting = function () {
@@ -92,7 +94,7 @@
           };
 
           $scope.downloadAllAttachments = function () {
-            Downloader.downloadTicketAttachments($scope.ticketDetails.id)
+            Downloader.downloadTicketAttachments($scope.ticketDetails.id);
           };
 
           $scope.downloadAttachment = function (attachmentId) {
@@ -141,7 +143,7 @@
           };
 
           $scope.saveTicketUpdate = function(){
-            console.log($scope.ticketUpdate)
+            console.log($scope.ticketUpdate);
           };
 
           $scope.getTicketNote = function() {
