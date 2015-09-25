@@ -6,12 +6,20 @@
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'TicketTagsService', 'quicktech.common.services.PermissionsService',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService, PermissionsService) {
 
+        var availableTypes = ['unassigned', 'user', 'shared', 'spam'];
+
         $scope.PermissionsService = PermissionsService;
         $scope.tags = TicketTagsService.getList($scope);
         $scope.users = UsersService.getAllUsers();
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
-
-        var availableTypes = ['unassigned', 'user', 'shared', 'spam'];
+        $scope.ticketStatus = {
+          IN_PROGRESS: 'IN PROGRESS',
+          ON_HOLD: 'ON HOLD',
+          COMPLETED: 'CLOSED'
+        };
+        $scope.attachmentImageClass = {
+          'image/jpg': 'viewable'
+        };
 
         if ($scope.currentUser.role === 'ADMIN' || $scope.currentUser.role === 'SUPER_TECH_ADMIN') {
           availableTypes.push('open');

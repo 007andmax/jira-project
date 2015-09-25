@@ -39,7 +39,7 @@
 
       <ul class="ticket-action pull-right" ng-click="doNotExpandTicket($event)">
         <!-- More Actions on right -->
-        <li class="more left-align dropdown" ng-if="PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
+        <li class="more left-align dropdown" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isMoreActionsMenuVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' "-->
           <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true" aria-expanded="false"
              tooltip="More Actions" tooltip-placement="top" data-toggle="dropdown">
@@ -48,7 +48,7 @@
 
           <ul class="dropdown-menu" role="menu">
 
-            <li class="dropdown-submenu left-align">
+            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role, false)">
               <!--ng-if="ActionRightsService.isPriorityVisible(listType)"-->
               <a tabindex="-1" href="javascript:void(0)">Change Priority to...</a>
 
@@ -80,7 +80,7 @@
               </div>
             </li>
 
-            <li class="dropdown-submenu left-align" ng-show="false">
+            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
               <!--ng-if="ActionRightsService.isChangeStatusVisible(listType)"-->
               <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
 
@@ -112,55 +112,55 @@
               </a>
             </li>
 
-            <li>
+            <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
               <!--ng-if="ticket.trash !== true && ActionRightsService.isMoveToTrashVisible(listType, currentUser.role)"-->
               <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
             </li>
           </ul>
         </li>
         <!-- delete forever, only visible in trash -->
-        <li>
+        <li ng-show="false">
           <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType) || ActionRightsService.isDeleteSpamForAdminVisible(listType, MarkedSpamByRole(ticket),currentUser.role)"-->
-          <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top" ng-show="false">
+          <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
             <span class="icn-ticket-del icn"></span>
           </a>
         </li>
         <!-- delete, visible when in spam, is marked by admin and current user is admin -->
-        <li>
+        <li ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isMoveToTrashIconVisible(listType, MarkedSpamByRole(ticket),currentUser.role) || (currentUser.role === 'ADMIN' && listType === 'user' && ticket.status === 'COMPLETED') "-->
-          <a href="javascript:void(0)" tooltip="move to trash" tooltip-placement="top" ng-show="false"
+          <a href="javascript:void(0)" tooltip="move to trash" tooltip-placement="top"
              ng-click="moveToTrash(true)">
             <span class="icn-ticket-del icn"></span>
           </a>
         </li>
         <!-- restore, visible when in trash -->
-        <li>
+        <li ng-show="false">
           <!-- ng-if="ActionRightsService.isRestoreForTrashVisible(listType)"-->
-          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top" ng-show="false"
+          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
              ng-click="moveToTrash(false)">
             <span class="icn-small-ticket-restore icn"></span>
           </a>
         </li>
 
-        <li>
+        <li ng-show="false">
           <!--ng-if="ActionRightsService.isRestoreForSpamVisible(listType)"-->
-          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top" ng-show="false"
+          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
              ng-click="moveIntoSpam(false)">
             <span class="icn-small-ticket-restore icn"></span>
           </a>
         </li>
 
         <!-- mark as spam icon, visible when in unassigned and for USER only -->
-        <li>
+        <li ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isMarkAsSpamIconVisible(listType, MarkedSpamByRole(ticket), currentUser.role)"-->
           <a href="javascript:void(0);" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"
-             tooltip-placement="top" ng-click="moveIntoSpam(true)" ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role)">
+             tooltip-placement="top" ng-click="moveIntoSpam(true)">
             <span class="icn-ticket-spam icn"></span>
           </a>
         </li>
 
         <!-- priority icon -->
-        <li class=" left-align" ng-show="false">
+        <li class=" left-align" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, true)">
           <!--ng-if="ActionRightsService.isPriorityIconVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' "-->
           <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true"
              aria-expanded="false" data-toggle="dropdown"
@@ -196,7 +196,7 @@
         </li>
 
         <!-- Assign user, -->
-        <li class="left-align" ng-if="PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
+        <li class="left-align" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isAssignToUserVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' "-->
           <a href="javascript:void(0)" class="tooltip-dp" href="javascript:void(0)"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="isShowAssignUser = true"
@@ -236,7 +236,7 @@
           </ul>
         </li>
         <!-- Claim Ticket icon -->
-        <li>
+        <li ng-if="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isClaimTicketVisible(listType, ticket.assignedUser)"-->
           <a ng-click="claimTicket()" href="javascript:void(0)"
              tooltip="Claim Ticket" tooltip-placement="top">
@@ -255,10 +255,10 @@
               tooltip="{{ ticket.priorityLevel }}" tooltip-placement="top"></span>
       </div>
 
-      <div class="ticket-status" ng-show="false">
+      <div class="ticket-status" ng-if="PermissionsService.isStatusVisible(listType, currentUser.role)">
         <!--ng-if="listType!='unassigned'"-->
         <span class="icns icn-status-{{ ticketStatusToCssFormat(ticket.status) }}"
-              tooltip="{{ ticket.status }}" tooltip-placement="top"></span>
+              tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top"></span>
       </div>
 
       <span ng-show="false"

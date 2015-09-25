@@ -14,8 +14,9 @@
           <span class=" icn-priority {{ ticketDetails.priorityLevel.toLowerCase() }}"
                 tooltip="{{ ticketDetails.priorityLevel }}" tooltip-placement="top"></span>
 
-          <span ng-show="false" class="icns icn-status-{{ ticketStatusToCssFormat(ticketDetails.status) }}"
-                tooltip="{{ ticketDetails.status }}" tooltip-placement="top"></span>
+          <span ng-if="PermissionsService.isStatusVisible(listType, currentUser.role)"
+                class="icns icn-status-{{ ticketStatusToCssFormat(ticketDetails.status) }}"
+                tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top"></span>
             <!--ng-if=" listType !== 'unassigned' "-->
 
           <span ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)"
@@ -25,7 +26,7 @@
           <small class="user-title text-muted">
 
             <a ng-if="ticketDetails.hasAttachments === true" href="javascript:void(0)" class="icn-ticket-attachment pull-left"></a>
-            <!--ng-if="ticketDetail.hasAttachments == true"-->
+
             {{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}
 
             <span class="dot-sep"></span>
@@ -35,9 +36,9 @@
       </div>
 
       <div class="ticket-actions pull-right">
-        <div class="btn pull-left btn-scooter btn-cr btn-update update-button" ng-show="false"
+        <div class="btn pull-left btn-scooter btn-cr btn-update update-button" ng-if="PermissionsService.isUpdateAndCloseVisible(listType, currentUser.role)"
              tooltip="Update &amp; Close" tooltip-placement="top"
-             ng-class="{disabled: ticketDetails.status === 'COMPLETED' }"
+             ng-class="{ 'disabled': ticketDetails.status === 'COMPLETED' }"
              ng-click="updateAndCloseTicket()">
           <!--ng-if=" (ticketDetail.assignedUser !== null && currentUser.role !== 'USER' && listType !== 'trash' && listType !== 'spam') || (listType === 'user' && currentUser.role === 'USER') "-->
           <span class="icn-tick"></span>
@@ -54,7 +55,7 @@
 
           <ul class="dropdown-menu" role="menu">
 
-            <li>
+            <li ng-if="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">
               <!--ng-if="ActionRightsService.isClaimTicketVisible(listType, ticketDetail.assignedUser)"-->
               <a ng-click="claimTicket()" tabindex="-1" href="javascript:void(0)">
                 Claim Ticket
@@ -98,7 +99,7 @@
               </div>
             </li>
 
-            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role)">
+            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'user' ? true : false))">
               <!--ng-if="ActionRightsService.isPriorityForDetailPageVisible(listType, currentUser.role)"-->
               <a tabindex="-1" href="javascript:void(0)">
                 Change Priority to...
@@ -207,7 +208,7 @@
       <ul class="attachments clearfix">
 
         <!-- For zip viewable will be replaced with zip -->
-        <li class="viewable" ng-repeat="attachment in ticketDetails.attachments">
+        <li class="{{ attachmentImageClass[attachment.file.contentType] }}" ng-repeat="attachment in ticketDetails.attachments">
 
           <div class="file-icon-name">
             <span class="file-icon icn"></span>
@@ -279,8 +280,8 @@
     <div class="ticket-update-header clearfix" ng-show="false">
       <!--ng-if="ticketDetail.updates.length > 0 && listType !== 'unassigned'"-->
       <h4>
-        <span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ticketDetails.updates.length}}</span></span>
-			<span class="pull-left badge badge-light shared-with shared-with-badge" data-toggle="tooltip">SHARED WITH {{ticketDetails.shares.length}}
+        <span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ ticketDetails.updates.length }}</span></span>
+			<span class="pull-left badge badge-light shared-with shared-with-badge" data-toggle="tooltip">SHARED WITH {{ ticketDetails.shares.length }}
 				<div class="tooltipa tooltip-users top">
 
           <div class="tooltip-arrow"></div>
@@ -305,7 +306,7 @@
 
       <a href="javascript:void(0)" class="btn btn-gray btn-loadmore load-update pull-right"
          tooltip="load more updates" tooltip-placement="top" ng-click="loadMoreUpdates();"
-         ng-class="{disabled: allUpdatesLoaded}" ng-disabled="allUpdatesLoaded">
+         ng-class="{ disabled: allUpdatesLoaded }" ng-disabled="allUpdatesLoaded">
         <span class="icn-load-update icn"></span>
       </a>
 
