@@ -9,12 +9,12 @@
         var labels = {
           'unassigned': 'Unassigned Tickets'
           },
-          saerchPriorityParamsMap = {
+          searchPriorityParamsMap = {
             0: 'LOW',
             1: 'MEDIUM',
             2: 'HIGH'
           },
-          saerchStatusParamsMap = {
+          searchStatusParamsMap = {
             0: 'ON_HOLD',
             1: 'IN_PROGRESS',
             2: 'COMPLETED'
@@ -48,13 +48,13 @@
         $scope.searchByParams = function(){
 
           if($scope.searchParams.priority.enabled){
-            $scope.sharedState.searchFilter.priority = saerchPriorityParamsMap[$scope.searchParams.priority.value];
+            $scope.sharedState.searchFilter.priority = searchPriorityParamsMap[$scope.searchParams.priority.value];
           } else {
             delete $scope.sharedState.searchFilter.priority;
           }
 
           if($scope.searchParams.status.enabled){
-            $scope.sharedState.searchFilter.status = saerchStatusParamsMap[$scope.searchParams.status.value];
+            $scope.sharedState.searchFilter.status = searchStatusParamsMap[$scope.searchParams.status.value];
           } else {
             delete $scope.sharedState.searchFilter.status;
           }
