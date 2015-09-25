@@ -35,6 +35,14 @@
                 paramsToSend.status = params.status;
               }
 
+              if (params.userId) {
+                paramsToSend.userId = params.userId;
+              }
+
+              if (params.companyId) {
+                paramsToSend.companyId = params.companyId;
+              }
+
               scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
 
                 scope.onTicketRendering = function (last) {
