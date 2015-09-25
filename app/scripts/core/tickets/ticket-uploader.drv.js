@@ -4,71 +4,105 @@
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
     ['$modal', 'FilesService', '$rootScope', 'TicketsService', '$stateParams', '$timeout', 'quicktech.common.services.UserNotificationService',
-      function ($modal, FilesService, $rootScope, TicketsService, $stateParams, $timeout, UserNotificationService) {
+      'quicktech.common.services.SharedStateService',
+      function ($modal, FilesService, $rootScope, TicketsService, $stateParams, $timeout, UserNotificationService, SharedStateService) {
 
         return {
           restrict: 'A',
           link: function (scope, element) {
 
-            var $document = $(document);
-              //loader = $('#loading');
+            var $document = $(document),
+              scrollListenerInitialize;
+            //loader = $('#loading');
 
-            scope.tickets = TicketsService.getList(scope, {filter: $stateParams.listType.toUpperCase()}, function(){
+            scope.ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
-              scope.onTicketRendering = function(last) {
+            scope.$watch('ticketsHeaderState', function (params) {
+              getTicketsList(params.searchFilter);
+            }, true);
 
-                if (last) {
+            function getTicketsList(params) {
 
-                  var ticketConteiner = element.find('[tu-tickets-container]');
-
-                  $timeout(function(){
-
-                    if(ticketConteiner.height() < $(window).height()){
-
-                      //UserNotificationService.show('Loading ...');
-                      //loader.show();
-
-                      TicketsService.loadMore(scope, function(moreTicket){
-
-                        //UserNotificationService.hide();
-                        //loader.hide();
-
-                        if (moreTicket.length === 0){
-                          $document.off('scroll');
-                        }
-                      })
-                    }
-                  }, 0);
-
-                }
+              var paramsToSend = {
+                filter: $stateParams.listType.toUpperCase()
               };
 
+              if (params.priority) {
+                paramsToSend.priority = params.priority;
+              }
 
+              if (params.status) {
+                paramsToSend.status = params.status;
+              }
+
+              scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
+
+                scope.onTicketRendering = function (last) {
+
+                  if (last) {
+
+                    var ticketConteiner = element.find('[tu-tickets-container]');
+
+                    $timeout(function () {
+
+                      if (ticketConteiner.height() < $(window).height()) {
+
+                        //UserNotificationService.show('Loading ...');
+                        //loader.show();
+
+                        TicketsService.loadMore(scope, function (moreTicket) {
+
+                          //UserNotificationService.hide();
+                          //loader.hide();
+
+                          if (moreTicket.length === 0) {
+                            $document.off('scroll');
+                          }
+                        })
+                      }
+                    }, 0);
+
+                  }
+                };
+
+                initScrollListener()
+
+              });
+            };
+
+            function initScrollListener(){
+
+              if(scrollListenerInitialize){
+                return;
+              }
+
+              scrollListenerInitialize = true;
 
               $document.on('scroll', function () {
 
-                if($document.scrollTop() > ($document.height() - 750)){
+                if ($document.scrollTop() > ($document.height() - 750)) {
 
                   //UserNotificationService.show('Loading ...');
                   //loader.show();
 
-                  TicketsService.loadMore(scope, function(moreTicket){
+                  TicketsService.loadMore(scope, function (moreTicket) {
 
                     //UserNotificationService.hide();
                     //loader.hide();
 
-                    if (moreTicket.length === 0){
+                    if (moreTicket.length === 0) {
                       $document.off('scroll');
                     }
                   })
                 }
               });
 
-              scope.$on('$destroy', function(){
+              scope.$on('$destroy', function () {
                 $document.off('scroll');
+                SharedStateService.clearState('billableClientsHeader');
               });
 
-            });
+            }
           }
         };
       }]);

@@ -165,73 +165,98 @@
       <a href="javascript:void(0);" class="close icn-remove-token" tabindex="-1"
          ng-click="loadAll();"></a>
     </div>
-    <div class="dropdown pull-right">
-      <button id="dropdownbtn" type="submit" class="btn btn-cr btn-gray btn-filter dropdown-toggle tooltip-dp"
-              data-placement="bottom" title="" data-original-title="Filter tickets" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"><span class="icn-filter icn"></span></button>
-      <div class="dropdown-menu dropdown-filter clearfix" ng-click="$event.stopPropagation();">
+    <div class="pull-right" dropdown is-open="searchByParamsDropdown.isOpen">
+
+      <button type="submit" class="btn btn-cr btn-gray btn-filter tooltip-dp" dropdown-toggle
+              tooltip-placement="bottom" tooltip="Filter tickets"
+              aria-haspopup="true" aria-expanded="false">
+        <span class="icn-filter icn"></span>
+      </button>
+
+      <div class="dropdown-menu dropdown-filter clearfix" stop-propagation="click">
+
         <div class="filter-by-wrapper filter-priority clearfix">
+
           <label class="control checkbox">
-            <input id="filter-by-priority" type="checkbox" class="filter-tickets"
-                   ng-model="sharedState.searchFilter.priority">
+            <input type="checkbox" class="filter-tickets"
+                   ng-model="searchParams.priority.enabled">
             <span class="control-indicator icn-checkbox"></span>
             Filter by Priority
           </label>
 
-          <div id="priority-wrapper" class="filter-slider-wrapper clearfix"
-               ng-class="{disabled: !sharedState.searchFilter.priority}">
+          <div class="filter-slider-wrapper clearfix"
+               ng-class="{ 'disabled': !searchParams.priority.enabled }">
 
             <div class="filter-slider-range">
-              <input type="range" min="0" max="2" step="1" value="0"
-                     ng-model="sharedState.searchFilter.priorityValue"/>
-            </div>
-            <div class="filter-slider-track" id="filter-slider-track">
-              <div class="slidpo filter-slider-starts icn-slider-start pull-left" data-value="32">
-                <span class="filter-label">Low</span>
-              </div>
-              <div class="slidpo filter-slider-center icn-slider-center active pull-left"
-                   data-value="134">
-                <span class="filter-label">Medium</span>
-              </div>
-              <div class="slidpo filter-slider-ends icn-slider-end pull-left" data-value="236">
-                <span class="filter-label">High</span>
-              </div>
+
+              <input type="range" min="0" max="2" step="1" ng-value="1"
+                     ng-model="searchParams.priority.value"/>
             </div>
 
+            <div class="filter-slider-track">
+
+              <div class="slidpo filter-slider-starts icn-slider-start pull-left">
+                <span class="filter-label">Low</span>
+              </div>
+
+              <div class="slidpo filter-slider-center icn-slider-center active pull-left">
+                <span class="filter-label">Medium</span>
+              </div>
+
+              <div class="slidpo filter-slider-ends icn-slider-end pull-left">
+                <span class="filter-label">High</span>
+              </div>
+
+            </div>
           </div>
         </div>
-        <div class="filter-by-wrapper filter-status clearfix">
+
+        <div class="filter-by-wrapper filter-status clearfix" ng-show="listType !== 'unassigned'">
+
           <label class="control checkbox">
-            <input id="filter-by-status" type="checkbox" class="filter-tickets"
-                   ng-model="sharedState.searchFilter.status">
+            <input type="checkbox" class="filter-tickets"
+                   ng-model="searchParams.status.enabled">
             <span class="control-indicator icn-checkbox"></span>
             Filter by Status
           </label>
 
-          <div id="status-wrapper" class="filter-slider-wrapper clearfix"
-               ng-class="{disabled: !sharedState.searchFilter.status}">
+          <div class="filter-slider-wrapper clearfix"
+               ng-class="{ 'disabled': !searchParams.status.enabled }">
+
             <div class="filter-slider-range">
+
               <input type="range" min="0" max="2" step="1" value="0"
-                     ng-model="sharedState.searchFilter.statusValue"/>
+                     ng-model="searchParams.status.value"/>
             </div>
-            <div class="filter-slider-track" id="filter-slider-track">
-              <div class="slidpo filter-slider-starts icn-slider-start active pull-left"
-                   data-value="32">
+
+            <div class="filter-slider-track">
+
+              <div class="slidpo filter-slider-starts icn-slider-start active pull-left" data-value="32">
                 <span class="filter-label">On Hold</span>
               </div>
+
               <div class="slidpo filter-slider-center icn-slider-center pull-left" data-value="134">
                 <span class="filter-label">In Progress</span>
               </div>
+
               <div class="slidpo filter-slider-ends icn-slider-end pull-left" data-value="236">
                 <span class="filter-label">Completed</span>
               </div>
+
             </div>
           </div>
         </div>
-        <a href="javascript:vpod(0);" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-           ng-click="search()">Search</a>
-        <a href="#" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-           onclick="$('#dropdownbtn').trigger('click'); event.preventDefault();">Cancel</a>
+
+        <a href="javascript:void(0)" ng-click="searchByParams()"
+           class="btn btn-sr btn-scooter btn-reset-filter pull-left">
+          Search
+        </a>
+
+        <a href="javascript:void(0)" ng-click="searchByParamsDropdown.isOpen = false"
+           class="btn btn-sr btn-gray btn-apply-filter pull-left">
+          Cancel
+        </a>
+
       </div>
     </div>
   </div>
