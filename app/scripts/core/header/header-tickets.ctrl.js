@@ -12,7 +12,8 @@
           autocompleteModel,
           labels = {
             'unassigned': 'Unassigned Tickets',
-            'user': 'My Tickets'
+            'user': 'My Tickets',
+            'open': 'Open Tickets'
           },
           searchPriorityParamsMap = {
             0: 'LOW',

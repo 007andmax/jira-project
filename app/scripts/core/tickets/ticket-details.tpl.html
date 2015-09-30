@@ -107,7 +107,7 @@
               </li>
 
               <li class="dropdown-submenu left-align"
-                  ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'user' ? true : false))">
+                  ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))">
                 <!--ng-if="ActionRightsService.isPriorityForDetailPageVisible(listType, currentUser.role)"-->
                 <a tabindex="-1" href="javascript:void(0)">
                   Change Priority to...

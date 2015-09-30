@@ -29,6 +29,10 @@
               $scope.assignPerformer = UsersService.getOneById($scope.ticketDetails.assignPerformer.id);
             }
 
+            if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id) {
+              $scope.assignedUser = UsersService.getOneById($scope.ticketDetails.assignedUser.id);
+            }
+
             $scope.$broadcast('ticketDetailsLoad');
 
             for(var i = 0; i < $scope.ticketDetails.updates.length; i++){

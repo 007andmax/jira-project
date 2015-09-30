@@ -28,10 +28,11 @@
     Claimed this ticket on {{ ticketDetails.assignedAt  | date: 'EEE, d MMM yyyy, h:mm a' }}
   </div>
 
-  <div class="user-msg" ng-show="false">
+  <div class="user-msg"
+       ng-show="listType !== 'unassigned' && ticketDetails.assignPerformer.id === currentUser.id && ticketDetails.assignedUser.id !== currentUser.id ">
     <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id === currentUser.id && ticketDetail.assignedUser.id !== currentUser.id "-->
     <span class="bold">You</span> assigned this ticket to
-    <strong>{{ getUserName(assignedUser) }}</strong> on <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
+    <strong>{{ getUserName(assignedUser) }}</strong> on <strong>{{ ticketDetails.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}</strong>
   </div>
 
   <div class="user-msg" ng-show="false">

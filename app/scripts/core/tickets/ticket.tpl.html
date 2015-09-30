@@ -5,7 +5,6 @@
   <div class="ui-checkbox ui-checkbox-warning" stop-propagation="click">
     <label class="control checkbox">
       <input type="checkbox" class="ticketBulkSelection" ng-model="ticket.selected">
-      <!--ng-click="enableBulkAction($event)"-->
       <span class="control-indicator"></span>
     </label>
   </div>
@@ -39,7 +38,8 @@
 
       <ul class="ticket-action pull-right" ng-click="doNotExpandTicket($event)">
         <!-- More Actions on right -->
-        <li class="more left-align dropdown" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
+        <li class="more left-align dropdown"
+            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isMoreActionsMenuVisible(listType, currentUser.role) && ticket.status !== 'COMPLETED' "-->
           <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true" aria-expanded="false"
              tooltip="More Actions" tooltip-placement="top" data-toggle="dropdown">
@@ -262,7 +262,7 @@
               tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top"></span>
       </div>
 
-      <span ng-show="false"
+      <span ng-if="PermissionsService.isInitialsVisible(listType, currentUser.role)"
             class="label label-default label-ticket-assign-user tooltip-dp"
             tooltip="{{ getUserName(assignedUser) }}" tooltip-placement="top">
         <!--ng-if="ticket.assignedUser !== null && listType !== 'user' && ticket.assignedUser.id !== currentUser.id "-->
