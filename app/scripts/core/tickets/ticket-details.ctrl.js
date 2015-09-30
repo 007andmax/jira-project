@@ -3,43 +3,52 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
-      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state', 'ProductsService', '$sce',
-        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $state, ProductsService, $sce) {
+      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state', 'ProductsService', '$sce', '$timeout',
+        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $state, ProductsService, $sce, $timeout) {
 
           $scope.ticketTags = {};
           $scope.allUpdatesLoaded = false;
           $scope.currentOpenTab = 'NOTE';
-          $scope.attachmentTypePattern = /[0-9a-z]+$/i;
-          $scope.numberPattern = /^\+?[0-9]{0,19}$/;
-          $scope.attachmentType = {
-            'image/jpg': 'jpg',
-            'image/jpeg': 'jpeg',
-            'image/bmp': 'bmp',
-            'image/gif': 'gif',
-            'application/vnd.oasis.opendocument.text': 'odt',
-            'application/vnd.oasis.opendocument.spreadsheet': 'ods',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
-            'application/vnd.ms-powerpoint': 'ppt',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
-            'application/msword': 'doc',
-            'application/msxls': 'xls',
-            'application/rtf': 'rtf',
-            'application/x-rtf': 'rtf',
-            'text/plain': 'txt',
-            'text/csv': 'cvs'
-          };
-
+          $scope.selectUpdateSharedUser = {};
+          $scope.updateSharedUsersList = [];
           $scope.productCategories = ProductsService.getCategories($scope);
-          $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $scope, true, function () {
+
+          $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $scope, true, function (details) {
+
+            var unreadUpdatesId = [];
+
+            if (details.message !== undefined && details.code === 400) {
+              $state.go('tickets', {listType: $stateParams.listType});
+              return;
+            }
 
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
             $scope.company = CompaniesService.getOneById($scope.ticketDetails.company.id);
+
             if ($scope.ticketDetails.assignPerformer && $scope.ticketDetails.assignPerformer.id) {
               $scope.assignPerformer = UsersService.getOneById($scope.ticketDetails.assignPerformer.id);
             }
 
             $scope.$broadcast('ticketDetailsLoad');
+
+            for(var i = 0; i < $scope.ticketDetails.updates.length; i++){
+
+              if($scope.ticketDetails.updates[i].unread){
+                if(unreadUpdatesId.length === 0){
+                  $scope.firstUnreadUpdateId = $scope.ticketDetails.updates[i].id;
+                }
+
+                unreadUpdatesId.push($scope.ticketDetails.updates[i].id);
+              }
+            }
+
+            if(unreadUpdatesId.length > 0){
+              $timeout(function(){
+                console.log(unreadUpdatesId);
+                TicketsService.markUpdateAsRead($scope.ticketDetails.id, unreadUpdatesId)
+              }, 1000);
+
+            }
 
           });
 
@@ -64,8 +73,10 @@
           };
 
           $scope.claimTicket = function () {
-            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id, function(){
-              $state.go('tickets', {listType: $stateParams.listType});
+            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id, function () {
+              $state.go('tickets', {listType: 'user'}).then(function () {
+                $state.go('tickets.details', {ticketId: $scope.ticketDetails.id});
+              });
             })
           };
 
@@ -103,7 +114,7 @@
 
           $scope.loadMoreUpdates = function () {
             TicketsService.loadRemainingTicketUpdates($scope.ticketDetails, function () {
-              $scope.allUpdatesLoaded = false;
+              $scope.allUpdatesLoaded = true;
             })
           };
 
@@ -142,13 +153,103 @@
             return UsersService.getOneById(userId);
           };
 
-          $scope.saveTicketUpdate = function(){
-            console.log($scope.ticketUpdate);
+          $scope.getSharedTitle = function (shared) {
+
+            if (shared.user && shared.user.id) {
+              var user = $scope.getUserById(shared.user.id);
+
+              return user.accountType === 'TECH' ? 'Team Member' : 'Client User'
+
+            } else {
+
+              return 'Vendor'
+            }
           };
 
-          $scope.getTicketNote = function() {
+          $scope.getTicketNote = function () {
             return $sce.trustAsHtml($scope.ticketDetails.note);
           };
+
+          $scope.deleteUpdateSharedUser = function (sharedUser) {
+
+            for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
+
+              if (sharedUser.user && $scope.updateSharedUsersList[i].user) {
+
+                if (sharedUser.user.id === $scope.updateSharedUsersList[i].user.id) {
+                  $scope.updateSharedUsersList.splice(i, 1);
+                }
+
+              } else if (sharedUser.contact && $scope.updateSharedUsersList[i].contact) {
+
+                if (sharedUser.contact.id === $scope.updateSharedUsersList[i].contact.id) {
+                  $scope.updateSharedUsersList.splice(i, 1);
+                }
+
+              }
+            }
+          };
+
+          $scope.saveTicketUpdate = function () {
+
+            var currentOpenTab = $scope.currentOpenTab,
+              ticketUpdateToSend = {
+                type: currentOpenTab,
+                shares: [],
+                ticket: {id: $scope.ticketDetails.id}
+              };
+
+            if ($scope.ticketUpdate.products) {
+
+              ticketUpdateToSend.products = $scope.ticketUpdate.products;
+
+            } else if ($scope.ticketUpdate.services) {
+
+              ticketUpdateToSend.services = $scope.ticketUpdate.services;
+
+              for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
+                ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
+              }
+
+            } else if ($scope.ticketUpdate.note !== undefined) {
+
+              ticketUpdateToSend.note = $scope.ticketUpdate.note;
+              ticketUpdateToSend.attachments = [];
+
+              for (var i = 0; i < $scope.ticketUpdate.attachments.length; i++) {
+                ticketUpdateToSend.attachments.push({file: {id: $scope.ticketUpdate.attachments[i].id}})
+              }
+
+            }
+
+            for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
+
+              if ($scope.updateSharedUsersList[i].user) {
+
+                ticketUpdateToSend.shares.push({user: {id: $scope.updateSharedUsersList[i].user.id}})
+
+              } else if ($scope.updateSharedUsersList[i].contact) {
+
+                ticketUpdateToSend.shares.push({contact: {id: $scope.updateSharedUsersList[i].contact.id}})
+              }
+            }
+
+            if($scope.ticketUpdate.notifyTicketCreator){
+              ticketUpdateToSend.notifyTicketCreator = $scope.ticketUpdate.notifyTicketCreator;
+            }
+
+            TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
+
+              $scope.$broadcast('setCreateUpdateFormToDefault');
+              $scope.selectUpdateSharedUser = {};
+              $scope.updateSharedUsersList = [];
+
+            });
+          };
+
+          $scope.setEditExpenseId = function (id) {
+            $scope.editExpenseId = id;
+          }
 
         }]);
   }()

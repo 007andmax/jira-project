@@ -20612,15 +20612,15 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
     .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-1{
         width: calc(100% - 554px);
     }
-    
+
     .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-2{
         width: 142px;
     }
-    
+
     .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-3{
         width: 159px;
     }
-    
+
     .content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > div > li > form > div > div.col-4{
         width: 109px;
     }
@@ -20943,4 +20943,16 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
 }
 
 /*New Classes - End*/
+
+.animation-hide.ng-hide-add {
+   -webkit-transition: all linear 3s;
+ }
+
+.animation-hide.ng-hide-add.ng-hide-add-active, .animation-hide.ng-hide-remove {
+  opacity: 0;
+}
+
+.animation-hide.ng-hide-add, .animation-hide.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+}
 

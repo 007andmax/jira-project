@@ -15,7 +15,7 @@
         <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
                placeholder="Service" name="serviceName"
                placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-               ng-model="serviceExpense.item.name" ng-required="true"
+               ng-model="serviceExpense.item" ng-required="true"
                typeahead="serviceList as serviceList.name for serviceList in serviceList | filter:$viewValue:stateComparator | orderBy:'name'"
                typeahead-min-length="0" typeahead-editable="false"
                qt-typeahead-show-on-focus ng-trim="false">
@@ -30,11 +30,13 @@
         <div ng-messages="addServiceForm.serviceTime.$error"
              ng-show="isShowingErrors(addServiceForm, 'serviceTime')">
           <div class="qt-error-msg" ng-message="required">Service quantity is required.</div>
+          <div class="qt-error-msg" ng-message="maxlength">quantity is too large.</div>
         </div>
 
-        <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-               ng-model="serviceExpense.quantity" name="serviceTime" ng-required="true"
-               data-toggle="dropdown" aria-expanded="true" placeholder="Hr : Min">
+        <input type="text" class="form-control" ng-model="serviceExpense.quantity"
+               name="serviceTime" ng-required="true" ng-maxlength="10"
+               aria-expanded="true" placeholder="Hr : Min"
+               hard-reset-pattern="numberPattern">
 
       </div>
     </div>
@@ -53,7 +55,7 @@
       <div class="col-wrapper">
         <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
            tooltip="Remove Service" tooltip-placement="top"
-           ng-click="removeService($index)">
+           ng-click="removeService(index)">
           <span class="icn-remove-update"></span>
         </a>
       </div>
@@ -66,7 +68,7 @@
 
         <div ng-messages="addServiceForm.serviceDate.$error"
              ng-if="isShowingErrors(addServiceForm, 'serviceDate')">
-          <div class="qt-error-msg" ng-message="required">Product is required.</div>
+          <div class="qt-error-msg" ng-message="required">Date is required.</div>
         </div>
 
         <input type="text" id="datetimepicker1" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
@@ -82,11 +84,13 @@
 
         <div ng-messages="addServiceForm.serviceDescription.$error"
              ng-if="isShowingErrors(addServiceForm, 'serviceDescription')">
-          <div class="qt-error-msg" ng-message="required">Product is required.</div>
+          <div class="qt-error-msg" ng-message="required">Description is required.</div>
+          <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+          <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
         </div>
 
         <input type="text" class="form-control service-description"
-               ng-model="serviceExpense.description"
+               ng-model="serviceExpense.description" ng-minlength="3" ng-maxlength="2000"
                name="serviceDescription" ng-required="true" placeholder="Description">
       </div>
     </div>

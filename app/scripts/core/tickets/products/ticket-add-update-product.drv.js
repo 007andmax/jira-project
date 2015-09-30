@@ -8,12 +8,14 @@
         return {
           restrict: 'A',
           require: 'ngModel',
-          templateUrl: '/html/scripts/core/tickets/products/ticket-add-product.tpl.html',
+          templateUrl: '/html/scripts/core/tickets/products/ticket-add-update-product.tpl.html',
           scope: {
             productExpense: '=ngModel',
             productCategories: '=',
             addProductFunc: '=addProductFunc',
             removeProduct: '=removeProductFunc',
+            numberPattern: '=numberPattern',
+            index: '=index',
             showErrors: '='
           },
           link: function ($scope, element, attrs, ctrl) {

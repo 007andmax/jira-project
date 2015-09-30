@@ -206,7 +206,8 @@
           </a>
 
           <div class="dropdown-menu" stop-propagation="click" ng-if="isShowAssignUser"
-               assign-user-button aub-ticket="ticket" users="usersCurrentCompany">
+               assign-user-button aub-ticket="ticket" users="usersCurrentCompany"
+               aub-current-user="currentUser">
           </div>
 
         </li>
@@ -269,9 +270,9 @@
       </span>
 
       <span class="label label-default label-ticket-number">{{ ticket.number }}</span>
-      <span class="icn-load-green pull-right" ng-if="ticket.hasNewUpdates === true"></span>
+      <span class="icn-load-green pull-right" ng-if="ticket.hasNewUpdates"></span>
       <!--ng-if="ticket.hasNewUpdates == true"-->
-      <span class="label label-success pull-right" ng-show="false">
+      <span class="label label-success pull-right" ng-show="ticket.unread">
         <!--ng-if="(listType !== 'user' || listType !== 'shared') && ticket.unread==true"-->
         new
       </span>

@@ -7,12 +7,14 @@
       return {
         restrict: 'A',
         require: 'ngModel',
-        templateUrl: '/html/scripts/core/tickets/services/ticket-add-service.tpl.html',
+        templateUrl: '/html/scripts/core/tickets/services/ticket-add-update-service.tpl.html',
         scope: {
           serviceExpense: '=ngModel',
           serviceList: '=serviceList',
           addServiceFunc: '=addServiceFunc',
           removeService: '=removeServiceFunc',
+          numberPattern: '=numberPattern',
+          index: '=index',
           showErrors: '='
         },
         link: function ($scope, element, attrs) {

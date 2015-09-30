@@ -1,0 +1,48 @@
+<div>
+  <div class="user-msg" ng-show="false">
+    <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id !== currentUser.id && ticketDetail.isReassigned === true"-->
+    <strong>{{ getUserName(assignPerformer) }}</strong> re-assigned this ticket to
+    <strong>{{ getUserName(assignedUser) }}</strong> on {{ renderDateTime(ticketDetails.assignedAt) }}
+  </div>
+
+  <div class="user-msg" ng-show="false">
+    <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id !== currentUser.id && ticketDetail.assignPerformer.id !== ticketDetail.assignedUser.id && ticketDetail.isReassigned === false"-->
+    <span class="bold">{{ getUserName(assignPerformer) }}</span>
+    assigned this ticket to
+    <strong>{{ getUserName(assignedUser) }}</strong>
+    on
+    <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
+  </div>
+
+  <div class="user-msg"
+       ng-show="listType !== 'unassigned' && ticketDetails.assignPerformer.id === currentUser.id && ticketDetails.assignedUser.id === currentUser.id">
+    <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id === currentUser.id && ticketDetail.assignedUser.id === currentUser.id"-->
+    <span class="bold">You</span>
+    Claimed this ticket on {{ ticketDetails.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}
+  </div>
+
+  <div class="user-msg"
+       ng-show="listType !== 'unassigned' && ticketDetails.assignPerformer.id !== currentUser.id && ticketDetails.assignPerformer.id === ticketDetails.assignedUser.id">
+    <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignPerformer.id === ticketDetail.assignedUser.id "-->
+    <span class="bold">{{ getUserName(assignedUser) }}</span>
+    Claimed this ticket on {{ ticketDetails.assignedAt  | date: 'EEE, d MMM yyyy, h:mm a' }}
+  </div>
+
+  <div class="user-msg" ng-show="false">
+    <!--ng-if=" listType !== 'unassigned' && ticketDetail.assignPerformer.id === currentUser.id && ticketDetail.assignedUser.id !== currentUser.id "-->
+    <span class="bold">You</span> assigned this ticket to
+    <strong>{{ getUserName(assignedUser) }}</strong> on <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
+  </div>
+
+  <div class="user-msg" ng-show="false">
+    <!--ng-if=" ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id === currentUser.id && ticketDetail.isReassigned === false "-->
+    <span class="bold">{{ getUserName(assignPerformer) }}</span> assigned this ticket to
+    <strong>You</strong> on <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
+  </div>
+
+  <div class="user-msg" ng-show="false">
+    <!--ng-if=" ticketDetail.assignPerformer.id !== currentUser.id && ticketDetail.assignedUser.id === currentUser.id && ticketDetail.isReassigned === true "-->
+    <span class="bold">{{ getUserName(assignPerformer) }}</span> re-assigned this ticket to
+    <strong>You</strong> on <strong>{{ renderDateTime(ticketDetails.assignedAt) }}</strong>
+  </div>
+</div>

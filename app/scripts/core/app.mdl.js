@@ -174,7 +174,7 @@
         if (!company) {
           return '/company/default/cover'
         }
-        return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '123');
+        return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '');
       };
 
       $rootScope.getPhoneNumberCssClass = function (phoneNumber) {
@@ -199,6 +199,18 @@
           }
 
           return username;
+        }
+      };
+
+      $rootScope.getContactName = function (contact, includeImail) {
+        if (contact) {
+          var contactname = contact.firstName + ' ' + contact.lastName;
+
+          if (includeImail) {
+            contactname += ('"' + contact.email + '"')
+          }
+
+          return contactname;
         }
       };
 

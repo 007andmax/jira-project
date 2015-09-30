@@ -106,6 +106,8 @@
                        ticket-add-product
                        product-categories="productCategories"
                        remove-product-func="removeProduct"
+                       index="$index"
+                       number-pattern="numberPattern"
                        show-errors="true"></div>
                 </div>
               </div>
@@ -114,6 +116,7 @@
                    ticket-add-product enable-add-mode="true" add-product-func="addProduct"
                    remove-product-func="removeProduct"
                    product-categories="productCategories"
+                   number-pattern="numberPattern"
                    show-errors="triedToAddProduct"></div>
 
               <!-- Update Box Footer -->
@@ -145,18 +148,14 @@
           <div class="ticket-update-content pull-left">
             <div class="update-ticket-form-wrapper">
 
-              <!--<div class="ticket-form-header" ng-repeat="serviceUpdate in servicesUpdates" service-update></div>-->
-
-              <!--<div class="ticket-form-header"-->
-              <!--ng-include="'/html/scripts/core/tickets/services/ticket-add-service.tpl.html'">-->
-              <!--</div>-->
-
               <div ng-form="addServicesForm">
                 <div class="ticket-form-header" ng-repeat="serviceExpense in ticketUpdate.services">
                   <div ng-model="serviceExpense"
                        ticket-add-service
                        service-list="serviceList"
                        remove-service-func="removeService"
+                       number-pattern="numberPattern"
+                       index="$index"
                        show-errors="true"></div>
                 </div>
               </div>
@@ -165,6 +164,7 @@
                    ticket-add-service enable-add-mode="true" add-service-func="addService"
                    remove-service-func="removeService"
                    service-list="serviceList"
+                   number-pattern="numberPattern"
                    show-errors="triedToAddService"></div>
 
               <div class="ticket-form-footer clearfix">

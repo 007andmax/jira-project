@@ -19,8 +19,13 @@
 
         $scope.filterAssignUser = function (item) {
 
+          if(item.id === $scope.currentUser.id){
+            return false;
+          }
+
           if ($scope.assignToModel && $scope.assignToModel.length > 0) {
-            return ((item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase()).indexOf($scope.assignToModel.toLowerCase()) !== -1;
+            var fullSearchFild = (item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase();
+            return fullSearchFild.indexOf($scope.assignToModel.toLowerCase()) !== -1;
           }
 
           return true;

@@ -6,15 +6,22 @@
       function () {
         return {
           restrict: 'A',
-          scope: {
-            noteUpdates: '=ngModel'
-          },
-          link: function (scope, element) {
+          require: 'ngModel',
+          scope: {},
+          link: function (scope, element, attr, ctrl) {
 
             element.bind('keyup', function(){
-              scope.noteUpdates.note = element.text();
+              ctrl.$setViewValue(element.text());
               scope.$apply();
             });
+
+            scope.$on('setCreateUpdateFormToDefault', function(){
+              element.text('');
+            });
+
+            //scope.$watch('noteUpdates.note', function(){
+            //  element.text(scope.noteUpdates.note);
+            //})
 
           }
         }

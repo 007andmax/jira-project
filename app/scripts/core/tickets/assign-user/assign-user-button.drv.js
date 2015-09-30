@@ -10,6 +10,7 @@
         controller: 'quicktech.core.tickets.assignUserCtrl',
         scope: {
           ticket: "=aubTicket",
+          currentUser: '=aubCurrentUser',
           usersCurrentCompany: "=users"
         },
         link: function (scope) {

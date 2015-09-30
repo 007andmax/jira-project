@@ -6,17 +6,22 @@
       ['$scope', 'FilesService',
         function ($scope, FilesService) {
 
-          $scope.setTicketUpdate({
-            note: '',
-            ticketAttachments: []
-          });
+          setTicketUpdateToDefault();
+
+          function setTicketUpdateToDefault() {
+
+            $scope.setTicketUpdate({
+              note: '',
+              attachments: []
+            });
+          }
 
           $scope.isValidTicketUpdate = function () {
-            return $scope.ticketUpdate.note.length > 0;
+            return $scope.ticketUpdate.note.length > 0 && $scope.ticketUpdate.note.length < 65000;
           };
 
           $scope.addAttachmentFiles = function (file) {
-            $scope.ticketUpdate.ticketAttachments.push(file);
+            $scope.ticketUpdate.attachments.push(file);
             $scope.$apply();
             FilesService.create(file,
               function (progress) {
@@ -36,8 +41,14 @@
           };
 
           $scope.removeAttachment = function (index) {
-            $scope.ticketUpdate.ticketAttachments.splice(index, 1);
+            $scope.ticketUpdate.attachments.splice(index, 1);
           };
+
+          $scope.isShowingErrors = function (form, fieldName) {
+            return form[fieldName] && !form[fieldName].$valid;
+          };
+
+          $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault)
 
         }]);
   }()

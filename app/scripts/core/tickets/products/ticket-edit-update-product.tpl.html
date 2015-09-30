@@ -1,4 +1,5 @@
-<div class="table-content service-table edit-table edit-product-table pull-left">
+<div class="table-content service-table edit-table edit-product-table pull-left"
+     ng-controller="quicktech.core.tickets.ticketEditUpdateProductCtrl">
   <span class="icon-update icn-update-product"></span>
 
   <form name="updateTicketProduct">
@@ -32,10 +33,12 @@
             <div ng-messages="updateTicketProduct.productDescription.$error"
                  ng-if="isShowingErrors(updateTicketProduct, 'productDescription')">
               <div class="qt-error-msg" ng-message="required">Description is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+              <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
             </div>
 
             <input type="text" class="form-control" placeholder="Description"
-                   name="productDescription" ng-requierd="true"
+                   name="productDescription" ng-requierd="true"ng-minlength="3" ng-maxlength="2000"
                    ng-model="editProduct.description">
           </div>
         </div>
@@ -55,18 +58,20 @@
             <div ng-messages="updateTicketProduct.productQty.$error"
                  ng-if="isShowingErrors(updateTicketProduct, 'productQty')">
               <div class="qt-error-msg" ng-message="required">Qty is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Qty is too large.</div>
             </div>
 
             <input type="text" class="form-control" placeholder="Qty"
+                   ng-model="editProduct.quantity" ng-maxlength="10"
                    name="productQty" ng-required="true"
-                   ng-model="editProduct.quantity">
+                   hard-reset-pattern="numberPattern">
           </div>
         </div>
 
         <div class="edit-table-actions" ng-if="editProduct.id">
 
           <a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-             ng-click="cancelEditProduct()">Cancel</a>
+             ng-click="setEditExpenseId()">Cancel</a>
 
           <a href="javascript:void(0);" class="btn btn-sr btn-scooter pull-left"
              ng-click="saveUpdateProduct(updateTicketProduct)">Save Changes</a>

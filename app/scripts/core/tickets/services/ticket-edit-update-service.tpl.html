@@ -1,4 +1,5 @@
-<div class="table-content service-table edit-table edit-service-table pull-left">
+<div class="table-content service-table edit-table edit-service-table pull-left"
+     ng-controller="quicktech.core.tickets.ticketEditUpdateServiceCtrl">
   <span class="icon-update icn-update-service"></span>
 
   <form name="updateTicketService">
@@ -30,13 +31,15 @@
 
             <div ng-messages="updateTicketService.serviceTime.$error"
                  ng-if="isShowingErrors(updateTicketService, 'serviceTime')">
-              <div class="qt-error-msg" ng-message="required">Description is required.</div>
+              <div class="qt-error-msg" ng-message="required">quantity is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">quantity is too large.</div>
             </div>
 
             <input type="text" name="serviceTime" ng-required="true"
                    class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-                   data-toggle="dropdown" aria-expanded="false" placeholder="Hr : Min"
-                   ng-model="editService.quantity ">
+                   ng-model="editService.quantity " ng-maxlength="10"
+                   aria-expanded="false" placeholder="Hr : Min"
+                   hard-reset-pattern="numberPattern">
 
           </div>
         </div>
@@ -66,18 +69,21 @@
             <div ng-messages="updateTicketService.serviceDescription.$error"
                  ng-if="isShowingErrors(updateTicketService, 'serviceDescription')">
               <div class="qt-error-msg" ng-message="required">Description is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+              <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
             </div>
 
-            <input type="text" class="form-control service-description" name="serviceDescription"
-                   ng-required="true" placeholder="Description"
-                   ng-model="editService.description">
+            <input type="text" class="form-control service-description"
+                   ng-model="editService.description"
+                   name="serviceDescription" ng-minlength="3" ng-maxlength="2000"
+                   ng-required="true" placeholder="Description">
           </div>
         </div>
 
         <div class="edit-table-actions">
 
           <a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-             ng-click="cancelEditService()">Cancel</a>
+             ng-click="setEditExpenseId()">Cancel</a>
 
           <a href="javascript:void(0);" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
              ng-click="saveUpdateService(updateTicketService)">Save Changes</a>

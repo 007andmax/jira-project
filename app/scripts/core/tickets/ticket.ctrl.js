@@ -52,7 +52,9 @@
 
         $scope.claimTicket = function () {
           TicketsService.assignTo($scope.ticket.id, $scope.currentUser.id, function(){
-            $state.go('tickets', {listType: $stateParams.listType});
+            $state.go('tickets', {listType: 'user'}).then(function(){
+              $state.go('tickets.details', {ticketId: $scope.ticket.id});
+            });
           });
         };
 

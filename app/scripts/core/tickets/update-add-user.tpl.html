@@ -6,20 +6,24 @@
     <span class="icn-add-update"></span>
   </a>
 
-  <ul class="dropdown-menu dropdown-menu-tabs" stop-propagation="click">
+  <ul class="dropdown-menu dropdown-menu-tabs" stop-propagation="click" style="height: 380px;">
 
     <ul class="nav nav-justified nav-tabs-dropdown">
+
       <li ng-class="{'active': currentAddUserTab === 'TEAM_MEMBER'}">
         <a href="javascript:void(0)" ng-click="openAddUserTab('TEAM_MEMBER')">Team Members</a>
       </li>
+
       <li ng-class="{'active': currentAddUserTab === 'VENDOS'}">
         <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <a href="javascript:void(0)" ng-click="openAddUserTab('VENDOS')">vendors</a>
       </li>
+
       <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
         <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <a href="javascript:void(0)" ng-click="openAddUserTab('CLIENT_USER')">Client Users</a>
       </li>
+
     </ul>
 
     <div class="tab-content">
@@ -27,32 +31,43 @@
 
       <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'">
         <div class="form-group">
+
           <input type="text" class="form-control form-control-search form-control-dropdown-input"
-                 placeholder="Search agent..." ng-model="searchFilter.agent">
+                 placeholder="Search agent..." ng-model="searchFilter.user">
+
           <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
-             ng-click="searchFilter.agent = undefined"></a>
+             ng-click="searchFilter.user = undefined"></a>
+
         </div>
 
-        <div>
+        <div class="scroll-pane jspScrollable" scroll-pane>
 
           <ul class="users-list ">
 
-            <li ng-repeat="agent in agents | filter: searchFilter.agent"
-                ng-class="{'checked': agent.isSelected}"
-                ng-click="addUsertoUpdate(agent);">
-              <!-- TODO search for firstName, lastNAme and email-->
+            <li ng-repeat="agent in agents | filter: filterUpdateUser"
+                ng-class="{'checked': selectUpdateSharedUser[agent.id]}">
+
               <label class="control checkbox">
-                <input type="checkbox" ng-model="agent.isSelected">
+
+                <input type="checkbox" ng-model="selectUpdateSharedUser[agent.id]"
+                       ng-change="addUserToUpdate(agent)">
+
                 <span class="control-indicator"></span>
+
               </label>
+
               <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
                 <img ng-src="{{ getUserAvatarUrl(agent) }}" alt="..." class="img-circle">
               </a>
 
               <div class="clearfix">
-                <div class="user-name"><a href="javascript:void(0)">{{ getUserName(agent) }} "{{ agent.primaryEmail }}"</a>
+                <div class="user-name">
+                  <a href="javascript:void(0)">
+                    {{ getUserName(agent) }} "{{ agent.primaryEmail }}"
+                  </a>
                 </div>
               </div>
+
             </li>
 
           </ul>
@@ -61,33 +76,45 @@
       </div>
 
       <!-- Vendor Panel -->
-      <!-- TODO get vendor's contacts in ctrl-->
       <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'">
         <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <div class="form-group">
+
           <input type="text" class="form-control form-control-search form-control-dropdown-input"
-                 placeholder="Search vendor..." ng-model="userFilter.query" ng-keyup="searchUser();">
-          <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
+                 placeholder="Search vendor..." ng-model="searchFilter.user">
+
+          <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+             ng-click="searchFilter.user = undefined"></a>
+
         </div>
 
-        <div>
+        <div class="scroll-pane jspScrollable" scroll-pane>>
           <ul class="users-list ">
 
-            <li ng-repeat="user in vendor_users | UserFilter: userQuery" ng-class="{checked: user.isSelected}"
-                ng-click="user.isSelected=!user.isSelected; addUsertoUpdate(user);">
+            <li ng-repeat="vendor in vendorsContacts | filter: filterUpdateUser"
+                ng-class="{checked: selectUpdateSharedUser[vendor.id]}">
+
               <label class="control checkbox">
-                <input type="checkbox" ng-model="user.isSelected">
+
+                <input type="checkbox" ng-model="selectUpdateSharedUser[vendor.id]"
+                       ng-click="addContactToUpdate(vendor)">
+
                 <span class="control-indicator"></span>
+
               </label>
+
               <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
-                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
+                <img ng-src="{{ getContactAvatarUrl(vendor) }}" alt="..." class="img-circle">
               </a>
 
               <div class="clearfix">
-                <div class="user-name"><a href="javascript:void(0)">{{ user.firstName }} {{ user.lastName }}
-                  "{{user.primaryEmail }}"</a>
+                <div class="user-name">
+                  <a href="javascript:void(0)">
+                    {{ getUserName(vendor) }} "{{ vendor.email }}"
+                  </a>
                 </div>
               </div>
+
             </li>
 
           </ul>
@@ -99,27 +126,39 @@
       <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'">
         <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <div class="form-group">
+
           <input type="text" class="form-control form-control-search form-control-dropdown-input"
-                 placeholder="Search client..." ng-model="searchFilter.client">
-          <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
+                 placeholder="Search client..." ng-model="searchFilter.user">
+
+          <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+             ng-click="searchFilter.user = undefined"></a>
+
         </div>
 
-        <div>
+        <div class="scroll-pane jspScrollable" scroll-pane>>
           <ul class="users-list ">
 
-            <li ng-repeat="client in clients | filter: searchFilter.client"
-                ng-class="{'checked': client.isSelected}"
-                ng-click="addUsertoUpdate(client);">
+            <li ng-repeat="client in clients | filter: filterUpdateUser"
+                ng-class="{checked: selectUpdateSharedUser[client.id]}">
+
               <label class="control checkbox">
-                <input type="checkbox" ng-model="client.isSelected">
+
+                <input type="checkbox" ng-model="selectUpdateSharedUser[client.id]"
+                       ng-change="addUserToUpdate(client)">
+
                 <span class="control-indicator"></span>
+
               </label>
+
               <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
                 <img ng-src="{{ getUserAvatarUrl(client) }}" alt="..." class="img-circle">
               </a>
 
               <div class="clearfix">
-                <div class="user-name"><a href="javascript:void(0)">{{ getUserName(client) }} "{{ client.primaryEmail }}"</a>
+                <div class="user-name">
+                  <a href="javascript:void(0)">
+                    {{ getUserName(client) }} "{{ client.primaryEmail }}"
+                  </a>
                 </div>
               </div>
             </li>
@@ -135,30 +174,37 @@
 <!-- Selected Users -->
 <ul class="selected-users pull-left">
 
-  <!--<li ng-repeat="user in update_users">-->
-  <!--<div class="pull-left avatar-26 avatar m-r">-->
-  <!--<img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">-->
+  <li ng-repeat="sharedUser in updateSharedUsersList">
 
-  <!--<div class="remove-user" ng-click="user.isSelected = false; addUsertoUpdate(user);">-->
-  <!--<span class="icn-remove-user abc"></span>-->
-  <!--</div>-->
-  <!--<div class="tooltip tooltip-users top">-->
-  <!--<div class="tooltip-arrow"></div>-->
-  <!--<ul class="tooltip-inner">-->
-  <!--<li>-->
-  <!--<span class="username">{{ user.firstName }} {{ user.lastName }}</span>-->
-  <!--<span class="usertitle">{{ getUserType(user.accountType) }}</span>-->
-  <!--</li>-->
-  <!--</ul>-->
-  <!--</div>-->
-  <!--</div>-->
-  <!--</li>-->
+    <div class="pull-left avatar-26 avatar m-r">
+
+      <img ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
+           alt="..." class="img-circle">
+
+      <div class="remove-user" ng-click="deleteUpdateSharedUser(sharedUser)">
+        <span class="icn-remove-user abc"></span>
+      </div>
+
+      <div class="tooltip tooltip-users top">
+
+        <div class="tooltip-arrow"></div>
+
+        <ul class="tooltip-inner">
+          <li>
+            <span class="username">{{ sharedUser.user ? getUserName(sharedUser.user) : getContactName(sharedUser.contact) }}</span>
+            <span class="usertitle">{{  getSharedTitle(sharedUser) }}</span>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </li>
 
 </ul>
 
-<div class="total-amount pull-right">
-  <!--ng-show=" updateType === 'PRODUCT' "-->
+<div class="total-amount pull-right" ng-show="currentOpenTab === 'PRODUCT'">
   Total amount
-  <!--<span class="bold">{{ productTotalAmount | currency }}</span>-->
+  <span class="bold">{{ productTotalAmount | currency }}</span>
 </div>
 

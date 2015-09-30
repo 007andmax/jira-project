@@ -27,10 +27,12 @@
         <div ng-messages="addProductForm.productDescription.$error"
              ng-show="isShowingErrors(addProductForm, 'productDescription')">
           <div class="qt-error-msg" ng-message="required">Description is required.</div>
+          <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+          <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
         </div>
         <input type="text" class="form-control" name="productDescription" ng-required="true"
-               placeholder="Description" value="product.description" tabindex="2"
-               ng-model="productExpense.description">
+               ng-model="productExpense.description" ng-minlength="3" ng-maxlength="2000"
+               placeholder="Description" value="product.description" tabindex="2">
       </div>
     </div>
     <div class="col-5" ng-if="isAddMode">
@@ -46,7 +48,7 @@
     <div class="col-5" ng-if="!isAddMode">
       <div class="col-wrapper">
         <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-           tooltip="Remove Product" tooltip-placement="top" ng-click="removeProduct($index)">
+           tooltip="Remove Product" tooltip-placement="top" ng-click="removeProduct(index)">
           <span class="icn-remove-update"></span>
         </a>
       </div>
@@ -65,11 +67,12 @@
         <div ng-messages="addProductForm.productQty.$error"
              ng-show="isShowingErrors(addProductForm, 'productQty')">
           <div class="qt-error-msg" ng-message="required">Qty is required.</div>
+          <div class="qt-error-msg" ng-message="maxlength">Qty is too large.</div>
         </div>
 
         <input type="text" class="form-control" placeholder="Qty" name="productQty" ng-required="true"
-               ng-model="productExpense.quantity" tabindex="3"
-               ng-pattern="numberPattern" hard-reset-pattern="numberPattern">
+               ng-model="productExpense.quantity" tabindex="3" ng-maxlength="10"
+               hard-reset-pattern="numberPattern">
       </div>
     </div>
   </div>

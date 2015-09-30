@@ -11,7 +11,8 @@
           companies = CompaniesService.getAllCompanies(),
           autocompleteModel,
           labels = {
-            'unassigned': 'Unassigned Tickets'
+            'unassigned': 'Unassigned Tickets',
+            'user': 'My Tickets'
           },
           searchPriorityParamsMap = {
             0: 'LOW',

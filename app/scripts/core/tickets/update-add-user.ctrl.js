@@ -3,16 +3,18 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.updateAddUserCtrl',
-      ['$scope', 'UsersService', 'CompaniesService',
-        function ($scope, UsersService, CompaniesService) {
+      ['$scope', 'UsersService', 'CompaniesService', 'ContactsService',
+        function ($scope, UsersService, CompaniesService, ContactsService) {
 
           $scope.currentAddUserTab = 'TEAM_MEMBER';
-
+          $scope.searchFilter = {};
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
           $scope.clients = UsersService.getClientUsers();
-          // TODO get vendor's contscts
+          $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket();
 
           $scope.openAddUserTab = function (mode) {
+
+            $scope.searchFilter = {};
 
             switch (mode) {
 
@@ -28,7 +30,53 @@
                 $scope.currentAddUserTab = 'CLIENT_USER';
                 return;
             }
-          }
+          };
+
+          $scope.filterUpdateUser = function (item) {
+
+            if ($scope.searchFilter.user && $scope.searchFilter.user.length > 0) {
+              return ((item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase()).indexOf($scope.searchFilter.user.toLowerCase()) !== -1;
+            }
+
+            return true;
+          };
+
+
+          $scope.addUserToUpdate = function (user) {
+
+            if ($scope.selectUpdateSharedUser[user.id]) {
+
+              $scope.updateSharedUsersList.push({user: user});
+
+            } else {
+
+              for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
+                if ($scope.updateSharedUsersList[i].user && $scope.updateSharedUsersList[i].user.id === user.id) {
+                  $scope.updateSharedUsersList.splice(i, 1);
+                }
+              }
+
+            }
+          };
+
+          $scope.addContactToUpdate = function (contact) {
+
+            if ($scope.selectUpdateSharedUser[contact.id]) {
+
+              $scope.updateSharedUsersList.push({contact: contact});
+
+            } else {
+
+              for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
+                if ($scope.updateSharedUsersList[i].contact && $scope.updateSharedUsersList[i].contact.id === contact.id) {
+                  $scope.updateSharedUsersList.splice(i, 1);
+                }
+              }
+
+            }
+          };
+
+
 
         }]);
   }()

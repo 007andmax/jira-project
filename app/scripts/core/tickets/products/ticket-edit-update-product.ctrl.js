@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateProductCtrl',
+    angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketEditUpdateProductCtrl',
       ['$scope', 'TicketsService', 'ProductsService', 'UsersService',
         function ($scope, TicketsService, ProductsService, UsersService) {
 
@@ -14,14 +14,6 @@
 
           $scope.selectProduct = function (product) {
             $scope.editProduct.item = product.staticCopy();
-          };
-
-          $scope.showEditProduct = function () {
-            $scope.isShowEditProduct = true;
-          };
-
-          $scope.cancelEditProduct = function () {
-            $scope.isShowEditProduct = false;
           };
 
           $scope.saveUpdateProduct = function (form) {
