@@ -34,6 +34,10 @@
 
           $scope.filterUpdateUser = function (item) {
 
+            if(item.id === $scope.currentUser.id){
+              return false;
+            }
+
             if ($scope.searchFilter.user && $scope.searchFilter.user.length > 0) {
               return ((item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase()).indexOf($scope.searchFilter.user.toLowerCase()) !== -1;
             }
