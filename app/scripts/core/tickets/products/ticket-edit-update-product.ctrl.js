@@ -33,7 +33,7 @@
 
                 }
               }, function () {
-                $scope.isShowEditProduct = false;
+                $scope.setEditExpenseId();
               })
             } else {
               $scope.triedToSaveProduct = true;

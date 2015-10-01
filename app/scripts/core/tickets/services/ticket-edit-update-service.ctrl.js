@@ -27,7 +27,7 @@
 
                 }
               }, function () {
-                $scope.isShowEditService = false;
+                $scope.setEditExpenseId();
               })
             } else {
               $scope.triedToSaveService = true;
