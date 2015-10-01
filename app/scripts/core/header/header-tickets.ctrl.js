@@ -13,7 +13,8 @@
           labels = {
             'unassigned': 'Unassigned Tickets',
             'user': 'My Tickets',
-            'open': 'Open Tickets'
+            'open': 'Open Tickets',
+            'closed': 'Closed Tickets'
           },
           searchPriorityParamsMap = {
             0: 'LOW',

@@ -48,9 +48,8 @@
 
             if(unreadUpdatesId.length > 0){
               $timeout(function(){
-                console.log(unreadUpdatesId);
                 TicketsService.markUpdateAsRead($scope.ticketDetails.id, unreadUpdatesId)
-              }, 1000);
+              }, 1500);
 
             }
 

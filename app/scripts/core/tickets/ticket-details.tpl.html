@@ -160,7 +160,7 @@
                 </div>
               </li>
 
-              <li>
+              <li ng-if="PermissionsService.isSendToSpamVisible(listType, currentUser.role)">
                 <!--ng-if="ActionRightsService.isMarkAsSpamDetailVisible(listType, currentUser.role)" ng-click="moveIntoSpam()"-->
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveIntoSpam()">
                   <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
@@ -482,7 +482,7 @@
         </div>
       </div>
 
-      <div ng-if="listType !== 'unassigned' && listType !== 'closed' && listType !== 'trash' && listType !== 'spam'"
+      <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, currentUser.role)"
            ng-include="'/html/scripts/core/tickets/ticket-update-tab.tpl.html'"></div>
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
