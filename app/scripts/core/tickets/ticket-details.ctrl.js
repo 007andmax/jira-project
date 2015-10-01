@@ -152,10 +152,6 @@
             }
           };
 
-          $scope.getUserById = function (userId) {
-            return UsersService.getOneById(userId);
-          };
-
           $scope.getSharedTitle = function (shared) {
 
             if (shared.user && shared.user.id) {
@@ -252,7 +248,13 @@
 
           $scope.setEditExpenseId = function (id) {
             $scope.editExpenseId = id;
-          }
+          };
+
+          $scope.deleteForever = function () {
+            TicketsService.deleteForever($scope.ticketDetails.id, function(){
+              $state.go('tickets', {listType: $stateParams.listType});
+            });
+          };
 
         }]);
   }()

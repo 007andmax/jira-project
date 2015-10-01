@@ -73,6 +73,10 @@
           }
         };
 
+        $scope.getUserById = function (userId) {
+          return UsersService.getOneById(userId);
+        };
+
       }]);
 
 }());

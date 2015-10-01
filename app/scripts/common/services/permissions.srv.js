@@ -105,8 +105,9 @@
         var isTrueForUser = listType === LIST_TYPES.USER;
         var isTrueForOpen = listType === LIST_TYPES.OPEN;
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
+        var isTrueForTrash = listType === LIST_TYPES.TRASH;
 
-        return isTrueForUser || isTrueForOpen || isTrueForClose;
+        return isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForTrash;
       }
 
       function isUpdateAndCloseVisible(listType, userRole) {
@@ -122,15 +123,23 @@
 
         var isTrueForOpen = listType === LIST_TYPES.OPEN;
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
+        var isTrueForTrash = listType === LIST_TYPES.TRASH;
 
-        return isTrueForOpen || isTrueForClose;
+        return isTrueForOpen || isTrueForClose || isTrueForTrash;
       }
 
       function isSendToSpamVisible(listType, userRole) {
 
-        var isFalseForClose = listType !== LIST_TYPES.CLOSE;
+        var isFalse = listType !== LIST_TYPES.CLOSE;
 
-        return isFalseForClose;
+        return isFalse;
+      }
+
+      function isSettingVisible(listType, userRole) {
+
+        var isFalse = listType !== LIST_TYPES.TRASH;
+
+        return isFalse;
       }
 
       function isCreateTicketUpdateVisible(listType, userRole) {
@@ -154,7 +163,8 @@
         isUpdateAndCloseVisible: isUpdateAndCloseVisible,
         isInitialsVisible: isInitialsVisible,
         isSendToSpamVisible: isSendToSpamVisible,
-        isCreateTicketUpdateVisible: isCreateTicketUpdateVisible
+        isCreateTicketUpdateVisible: isCreateTicketUpdateVisible,
+        isSettingVisible: isSettingVisible
       }
 
     }]);

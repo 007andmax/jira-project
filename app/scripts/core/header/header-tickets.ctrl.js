@@ -14,7 +14,8 @@
             'unassigned': 'Unassigned Tickets',
             'user': 'My Tickets',
             'open': 'Open Tickets',
-            'closed': 'Closed Tickets'
+            'closed': 'Closed Tickets',
+            'trash': 'Trash'
           },
           searchPriorityParamsMap = {
             0: 'LOW',

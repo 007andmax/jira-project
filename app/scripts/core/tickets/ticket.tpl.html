@@ -119,7 +119,7 @@
           </ul>
         </li>
         <!-- delete forever, only visible in trash -->
-        <li ng-show="false">
+        <li ng-if="listType === 'trash'">
           <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType) || ActionRightsService.isDeleteSpamForAdminVisible(listType, MarkedSpamByRole(ticket),currentUser.role)"-->
           <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
             <span class="icn-ticket-del icn"></span>
@@ -134,7 +134,7 @@
           </a>
         </li>
         <!-- restore, visible when in trash -->
-        <li ng-show="false">
+        <li ng-if="listType === 'trash'">
           <!-- ng-if="ActionRightsService.isRestoreForTrashVisible(listType)"-->
           <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
              ng-click="moveToTrash(false)">

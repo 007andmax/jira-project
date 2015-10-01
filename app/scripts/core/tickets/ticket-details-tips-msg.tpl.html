@@ -63,12 +63,12 @@
     </div>
   </div>
 
-  <div class="tips-message has-updates" ng-show="false">
+  <div class="tips-message has-updates" ng-if="listType === 'trash'">
     <!--ng-if=" listType === 'trash' "-->
     <span class="icn icn-message-ticket-trash"></span>
 
     <div class="message-detail">
-      <span class="bold blue">{{ getUserFullNameById(ticketDetail.deletePerformer.id) }}</span>
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.deletePerformer.id)) }}</span>
       has moved this ticket
       to trash. You can either delete the ticket forever or restore the ticket
       status anytime, using the respective option.
@@ -78,10 +78,16 @@
       deleted from.
     </div>
     <div class="message-btn shared">
-      <a href="javascript:void(0)" ng-click="deleteForEver(ticketDetail)" class="btn btn-sr btn-red">Delete
-        Forever</a>
-      <a href="javascript:void(0)" ng-click="deleteTicket(null, ticketDetail, false)"
-         class="btn btn-sr btn-gray btn-cancel ">Restore</a>
+
+      <a href="javascript:void(0)" ng-click="deleteForever()"
+         class="btn btn-sr btn-red">
+        Delete Forever
+      </a>
+
+      <a href="javascript:void(0)" ng-click="moveToTrash(false)"
+         class="btn btn-sr btn-gray btn-cancel ">
+        Restore
+      </a>
     </div>
   </div>
 

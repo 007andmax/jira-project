@@ -48,7 +48,8 @@
             <span class="icn-tick"></span>
           </div>
 
-          <div class="pad-left dropdown pull-left" dropdown>
+          <div class="pad-left dropdown pull-left" dropdown
+               ng-if="PermissionsService.isSettingVisible(listType, currentUser.role)">
             <!--ng-if="listType !== 'spam' && listType != 'trash' && listType !== 'shared' || (listType === 'shared' && currentUser.role === 'ADMIN') "-->
 
             <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
