@@ -1,5 +1,5 @@
 <ul class="dropdown-menu dropdown-menu-categories" stop-propagation="click">
-  <li role="presentation" ng-repeat=" category in productCategories | filter: productNameFilter"
+  <li role="presentation" ng-repeat=" category in productCategories | filter: {name: productNameFilter}"
       ng-click=" loadProductByCategory(category.id);" ng-class="{active: category.isSelected}">
     <a role="menuitem" tabindex="-1" href="javascript:void(0)">
       <span class="title"> {{ category.name }} </span>
@@ -22,7 +22,7 @@
   <li>
     <ul class="subdropdown-menu dropdown-menu-products">
 
-      <li role="presentation" ng-repeat="categoryProduct in productsByCategory | filter: filterProduct ">
+      <li role="presentation" ng-repeat="categoryProduct in productsByCategory | filter: {name: filterProduct.name}">
         <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="selectProduct(categoryProduct)">
           <span class="title">{{ categoryProduct.name }}</span>
           <span class="pull-right total-count">#{{ categoryProduct.code }}</span>

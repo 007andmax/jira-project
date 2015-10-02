@@ -8,7 +8,6 @@
 
           $scope.ticketTags = {};
           $scope.allUpdatesLoaded = false;
-          $scope.currentOpenTab = 'NOTE';
           $scope.selectUpdateSharedUser = {};
           $scope.updateSharedUsersList = [];
           $scope.productCategories = ProductsService.getCategories($scope);
@@ -16,6 +15,8 @@
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $scope, true, function (details) {
 
             var unreadUpdatesId = [];
+
+            $scope.currentOpenTab = 'NOTE';
 
             if (details.message !== undefined && details.code === 400) {
               $state.go('tickets', {listType: $stateParams.listType});
@@ -52,7 +53,6 @@
               }, 1500);
 
             }
-
           });
 
           $scope.setTicketTags = function () {

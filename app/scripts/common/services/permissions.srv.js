@@ -168,7 +168,7 @@
 
       function isEditUpdateDisabled(listType) {
 
-        var isTrue = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
+        var isTrue = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM || listType === LIST_TYPES.SHARED;
 
         return isTrue;
       }
@@ -176,7 +176,7 @@
       function isAditionalActionAccessForUser(ticket, user) {
 
         if (ticket && ticket.createdUser && ticket.createdUser.id) {
-          return user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN || ticket.createdUser.id === user.id;
+          return user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN || ticket.assignedUser.id === user.id;
         }
       }
 
@@ -247,7 +247,7 @@
               return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && ticket.isReassigned && isUserAdminOrSAdmin;
 
             case 'USER_CLAIMED':
-              return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === ticket.assignPerformer.id) && isUserAdminOrSAdmin;
+              return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === ticket.assignPerformer.id);
 
             case 'USER_RE-ASSIGNED_USER':
               return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned && isUserAdminOrSAdmin;

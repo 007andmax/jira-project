@@ -9,7 +9,7 @@
           $scope.currentAddUserTab = 'TEAM_MEMBER';
           $scope.searchFilter = {};
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
-          $scope.clients = UsersService.getClientUsers();
+          $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
           $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket();
 
           $scope.openAddUserTab = function (mode) {
