@@ -182,7 +182,7 @@
 
       function isTipVisibleOnClosedPage(listType, ticket, option) {
 
-        if(listType !== LIST_TYPES.CLOSE){
+        if (listType !== LIST_TYPES.CLOSE) {
           return false;
         }
 
@@ -192,7 +192,7 @@
         } else if (option === 'OLD') {
           return !ticket.hasInvoice && !isCanBeReOpened();
 
-        } else if(option === 'OPEN'){
+        } else if (option === 'OPEN') {
           return !ticket.hasInvoice && isCanBeReOpened();
         }
 
@@ -210,15 +210,54 @@
 
       function isTipVisibleOnSharedPage(listType, ticket, userRole, option) {
 
-        if(listType !== LIST_TYPES.SHARED){
+        if (listType !== LIST_TYPES.SHARED) {
           return false;
         }
 
-        if(option === 'ADMIN'){
+        if (option === 'ADMIN') {
           return ticket.status === 'COMPLETED' && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
-        } else if (option === 'USER'){
+        } else if (option === 'USER') {
           return ticket.status === 'COMPLETED' && userRole === USER_ROLES.USER;
+        }
+      }
+
+      function isUserMsgTipsVisible(listType, ticket, user, option) {
+
+        if (listType === LIST_TYPES.UNASSIGNED) {
+          return false
+        }
+
+        if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id) {
+
+          var isUserAdminOrSAdmin = user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN,
+            otherAPerformerAndAUser = ticket.assignPerformer.id !== ticket.assignedUser.id;
+
+          switch (option) {
+            case 'ASSIGNED_TO_ME':
+              return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === user.id) && !ticket.isReassigned;
+
+            case 'RE-ASSIGNED_TO_ME':
+              return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === user.id) && ticket.isReassigned;
+
+            case 'I_ASSIGNED_TO_USER':
+              return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && !ticket.isReassigned && isUserAdminOrSAdmin;
+
+            case 'I_RE-ASSIGNED_TO_USER':
+              return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && ticket.isReassigned && isUserAdminOrSAdmin;
+
+            case 'USER_CLAIMED':
+              return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === ticket.assignPerformer.id) && isUserAdminOrSAdmin;
+
+            case 'USER_RE-ASSIGNED_USER':
+              return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned && isUserAdminOrSAdmin;
+
+            case 'USER_ASSIGNED_USER':
+              return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned && isUserAdminOrSAdmin;
+
+            case 'MY_TICKET':
+              return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id === user.id);
+          }
         }
       }
 
@@ -241,7 +280,8 @@
         isEditUpdateDisabled: isEditUpdateDisabled,
         isAditionalActionAccessForUser: isAditionalActionAccessForUser,
         isTipVisibleOnClosedPage: isTipVisibleOnClosedPage,
-        isTipVisibleOnSharedPage: isTipVisibleOnSharedPage
+        isTipVisibleOnSharedPage: isTipVisibleOnSharedPage,
+        isUserMsgTipsVisible: isUserMsgTipsVisible
       }
 
     }]);
