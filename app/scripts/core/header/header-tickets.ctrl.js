@@ -15,7 +15,8 @@
             'user': 'My Tickets',
             'open': 'Open Tickets',
             'closed': 'Closed Tickets',
-            'trash': 'Trash'
+            'trash': 'Trash',
+            'shared': 'Shared Tickets'
           },
           searchPriorityParamsMap = {
             0: 'LOW',

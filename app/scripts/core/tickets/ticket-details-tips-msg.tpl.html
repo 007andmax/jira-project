@@ -17,8 +17,9 @@
   </div>
 
   <!-- closed -->
-  <div class="tips-message has-updates" ng-if="listType === 'closed' && isCanBeReOpened() && ticketDetails.hasInvoice !== true">
-    <!--ng-if=" listType === 'closed' && canBeReOpened(ticketDetail.createdAt) && ticketDetail.hasInvoice !== true "-->
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'OPEN')">
+
     <span class="icn icn-message-ticket-closed"></span>
 
     <div class="message-detail">
@@ -34,8 +35,8 @@
   </div>
 
   <div class="tips-message has-updates no-button"
-       ng-if="listType === 'closed' && !isCanBeReOpened() && ticketDetails.hasInvoice !== true">
-    <!--ng-if=" listType === 'closed'  && !canBeReOpened(ticketDetail.createdAt)  && ticketDetail.hasInvoice !== true"-->
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'OLD')">
+
     <span class="icn icn-message-ticket-closed"></span>
 
     <div class="message-detail">
@@ -48,8 +49,9 @@
     </div>
   </div>
 
-  <div class="tips-message has-updates no-button" ng-if="listType === 'closed' && ticketDetails.hasInvoice === true">
-    <!--ng-if=" listType === 'closed' && ticketDetail.hasInvoice === true"-->
+  <div class="tips-message has-updates no-button"
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'BILLED')">
+
     <span class="icn icn-message-ticket-closed"></span>
 
     <div class="message-detail">The Ticket is now closed, and already
@@ -125,9 +127,43 @@
       reported <br> as spam.
     </div>
     <div class="message-btn shared">
-      <a href="javascript:void(0)" id="" class="btn btn-sr btn-gray btn-cancel"
+      <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-cancel"
          ng-click="markAsSpam($event, ticketDetail, false)">Restore</a>
     </div>
   </div>
+
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnSharedPage(listType, ticketDetails, currentUser.role, 'ADMIN')">
+
+    <span class="icn icn-message-ticket-shared"></span>
+
+    <div class="message-detail">The shared ticket has been closed by the
+      <span class="bold">Ticket's owner</span>.
+    </div>
+
+    <div class="tip">
+      <span class="bold">Tip:</span> If you’ve administrative privileges, you can re-open the ticket by simply clicking "Mark as Open" <br>
+      button, and then add or remove the Ticket updates.
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="message-btn shared">
+      <a href="javascript:void(0)" id="" class="btn btn-sr btn-scooter ">Mark as Open</a>
+    </div>
+
+  </div>
+
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnSharedPage(listType, ticketDetails, currentUser.role, 'USER')">
+
+    <span class="icn icn-message-ticket-shared"></span>
+
+    <div class="message-detail">The shared ticket has been closed by the
+      <span class="bold">Ticket's owner</span>.
+      You cannot add or remove the ticket update(s) now.
+    </div>
+
+  </div>
+
 </div>
 

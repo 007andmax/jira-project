@@ -40,7 +40,7 @@
         <div class="ticket-actions pull-right">
 
           <div class="btn pull-left btn-scooter btn-cr btn-update update-button"
-               ng-if="PermissionsService.isUpdateAndCloseVisible(listType, currentUser.role)"
+               ng-if="PermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status)"
                tooltip="Update &amp; Close" tooltip-placement="top"
                ng-class="{ 'disabled': ticketDetails.status === 'COMPLETED' }"
                ng-click="updateAndCloseTicket()">
@@ -391,8 +391,12 @@
                   {{ product.item.name }}<span class="model"> #{{ product.item.code }}</span>
                 </div>
 
-                <div class="col-4">
+                <div class="col-4" ng-show="ticketDetails.status === 'COMPLETED'">
                   {{ product.sum | currency }}
+                </div>
+
+                <div class="col-4" ng-show="ticketDetails.status !== 'COMPLETED'">
+                  {{ product.item.sale * product.quantity || '' | currency }}
                 </div>
 
                 <div class="col-3">
@@ -408,8 +412,8 @@
 
                 <div class="table-content-action pull-right">
                   <a href="javascript:void(0)" tooltip="edit product" tooltip-placement="top"
-                     class="icn-edit tp-hide" ng-click="setEditExpenseId(product.id)"
-                     ng-class="{ disabled: listType === 'closed' || listType === 'trash' || listType === 'spam' || isNotOwnerAndAdmin() }"></a>
+                     class="icn-edit tp-hide" ng-click="PermissionsService.isEditUpdateDisabled(listType) || setEditExpenseId(product.id)"
+                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(listType)}"></a>
                 </div>
 
               </div>
@@ -440,8 +444,8 @@
 
                 <div class="table-content-action pull-right">
                   <a href="javascript:void(0)" class="icn-edit tp-hide"
-                     tooltip="Edit Service" tooltip-placement="top" ng-click="setEditExpenseId(service.id)"
-                     ng-class="{ disabled: listType === 'closed' || listType === 'trash' || listType === 'spam' || isNotOwnerAndAdmin() }">
+                     tooltip="Edit Service" tooltip-placement="top" ng-click="PermissionsService.isEditUpdateDisabled(listType) || setEditExpenseId(service.id)"
+                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(listType)}">
                   </a>
                 </div>
               </div>
@@ -483,7 +487,7 @@
         </div>
       </div>
 
-      <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, currentUser.role)"
+      <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status)"
            ng-include="'/html/scripts/core/tickets/ticket-update-tab.tpl.html'"></div>
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>

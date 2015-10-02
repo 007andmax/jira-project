@@ -12,20 +12,26 @@
 
       <div class="dropdown pull-left"
            ng-if="ActionRightsService.isLabelAsVisible(listType, currentUser.role)">
+
         <div class="btn btn-white-gray btn-cr  dropdown-toggle tooltip-dp" data-toggle="dropdown"
              title="label as..." data-placement="bottom">
+
           <span class="icn-nav-tag"></span>
         </div>
+
         <ul class="tag-list dropdown-menu" role="menu" ng-click="$event.stopPropagation();">
           <li ng-repeat="tag in sharedState.allTags">
             <label for="{{ tag.id }}" class="control checkbox" ng-click="toggleTagState(tag.id);">
+
               <input type="checkbox" id="{{ tag.id }}" ng-model="tag.isSelected">
-                                <span class="control-indicator pull-left"
-                                      ng-class="{intermediate: tag.state === 2}"></span>
+
+              <span class="control-indicator pull-left"
+                    ng-class="{intermediate: tag.state === 2}"></span>
               <span class="tag-color color{{tag.color}}"></span>
               {{ tag.name }}
             </label>
           </li>
+
           <li class="apply">
             <button type="button" class="btn btn-scooter"
                     ng-click="linkTags();">Apply
@@ -214,7 +220,7 @@
           </div>
         </div>
 
-        <div class="filter-by-wrapper filter-status clearfix" ng-show="listType !== 'unassigned'">
+        <div class="filter-by-wrapper filter-status clearfix" ng-show="listType !== 'unassigned' || listType !== 'closed'">
 
           <label class="control checkbox">
             <input type="checkbox" class="filter-tickets"
