@@ -1,0 +1,14 @@
+<li ng-repeat="tag in tags">
+  <label class="control checkbox">
+    <input type="checkbox" ng-model="ticketTags[tag.id]">
+    <span class="control-indicator pull-left"></span>
+    <span class="tag-color color{{tag.color}}"></span>
+    {{tag.name}}
+  </label>
+</li>
+
+<li class="apply">
+  <button type="button" class="btn btn-scooter" ng-click="applyTagsToTicket()">
+    Apply
+  </button>
+</li>

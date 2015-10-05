@@ -67,28 +67,16 @@
                 </a>
               </li>
 
-              <li class="dropdown-submenu left-align"
+              <li class="dropdown-submenu left-align" stop-propagation="click"
                   ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
                 <!--ng-if="ActionRightsService.isLabelAsVisible(listType, currentUser.role)"-->
-                <a tabindex="-1" href="#">Label as...</a>
+                <a tabindex="-1" href="javascript:void(0)">Label as...</a>
 
-                <div class="dropdown-submenu-wrapper" stop-propagation="click">
+                <div class="dropdown-submenu-wrapper">
 
-                  <ul class="tag-list dropdown-menu" role="menu">
-
-                    <li ng-repeat="tag in tags">
-                      <label class="control checkbox">
-                        <input type="checkbox" ng-model="ticketTags[tag.id]">
-                        <span class="control-indicator pull-left"></span>
-                        <span class="tag-color color{{tag.color}}"></span>
-                        {{tag.name}}
-                      </label>
-                    </li>
-
-                    <li class="apply">
-                      <button type="button" class="btn btn-scooter" ng-click="postTagAs($event, ticketDetail.id)">Apply
-                      </button>
-                    </li>
+                  <ul class="tag-list dropdown-menu" role="menu" ng-init="ticketId = ticketDetails.id"
+                      ng-controller="quicktech.core.tickets.ticketTagsCtrl"
+                      ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
                   </ul>
 
                 </div>
@@ -141,7 +129,7 @@
               <li class="dropdown-submenu"
                   ng-if="PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
                 <!--ng-if="ActionRightsService.isChangeStatusVisible(listType)"-->
-                <a tabindex="-1" href="#">
+                <a tabindex="-1" href="javascript:void(0)">
                   Change Status to...
                 </a>
 

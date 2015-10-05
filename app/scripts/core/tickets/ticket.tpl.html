@@ -220,20 +220,24 @@
             <span class="icn-ticket-label icn"></span>
           </a>
 
-          <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click">
+          <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click"
+              ng-controller="quicktech.core.tickets.ticketTagsCtrl" ng-init="ticketId = ticket.id"
+              ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
 
-            <li ng-repeat="tag in tags">
-              <label class="control checkbox">
-                <input type="checkbox" ng-model="ticketTags[tag.id]">
-                <span class="control-indicator pull-left"></span>
-                <span class="tag-color color{{tag.color}}"></span>
-                {{tag.name}}
-              </label>
-            </li>
+            <!--<li ng-repeat="tag in tags">-->
+              <!--<label class="control checkbox">-->
+                <!--<input type="checkbox" ng-model="ticketTags[tag.id]">-->
+                <!--<span class="control-indicator pull-left"></span>-->
+                <!--<span class="tag-color color{{tag.color}}"></span>-->
+                <!--{{tag.name}}-->
+              <!--</label>-->
+            <!--</li>-->
 
-            <li class="apply">
-              <button type="button" class="btn btn-scooter" ng-click="postTagAs($event, ticket.id)">Apply</button>
-            </li>
+            <!--<li class="apply">-->
+              <!--<button type="button" class="btn btn-scooter" ng-click="postTagAs($event, ticket.id)">-->
+                <!--Apply-->
+              <!--</button>-->
+            <!--</li>-->
           </ul>
         </li>
         <!-- Claim Ticket icon -->
