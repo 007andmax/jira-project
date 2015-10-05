@@ -3,11 +3,14 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
-    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'TicketTagsService', 'quicktech.common.services.PermissionsService',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService, PermissionsService) {
+    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'TicketTagsService',
+      'quicktech.common.services.PermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
+      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService, PermissionsService, SharedStateService, Utils) {
 
-        var availableTypes = ['unassigned', 'user', 'shared', 'spam'];
+        var availableTypes = ['unassigned', 'user', 'shared', 'spam'],
+          ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
+        $scope.selectedTickets = {};
         $scope.PermissionsService = PermissionsService;
         $scope.tags = TicketTagsService.getList($scope);
         $scope.users = UsersService.getAllUsers();
@@ -76,6 +79,33 @@
         $scope.getUserById = function (userId) {
           return UsersService.getOneById(userId);
         };
+
+        $scope.$watch('tickets',changeSelectedTickets);
+
+        $scope.changeSelectedTickets = changeSelectedTickets;
+
+        $scope.$on('uncheckAllTickets', function(){
+          $scope.selectedTickets = {};
+        });
+
+        function changeSelectedTickets(id, status){
+
+          ticketsHeaderState.checkedCompletedTicket = false;
+          ticketsHeaderState.checkedTicketsIds = [];
+
+          for(var ticketId in $scope.selectedTickets){
+            if($scope.selectedTickets[ticketId]){
+              ticketsHeaderState.checkedTicketsIds.push(ticketId);
+
+              if(!ticketsHeaderState.checkedCompletedTicket && Utils.findById($scope.tickets, ticketId).status === 'COMPLETED'){
+                ticketsHeaderState.checkedCompletedTicket = true;
+              }
+
+
+            }
+          }
+
+        }
 
       }]);
 

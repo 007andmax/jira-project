@@ -1,10 +1,11 @@
 <div class="ticket has-actions"
-     ng-class="{'selected' : ticket.selected, 'completed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
+     ng-class="{'selected' : selectedTickets[ticket.id], 'completed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
      ng-click="srefToDetails($event)">
 
   <div class="ui-checkbox ui-checkbox-warning" stop-propagation="click">
     <label class="control checkbox">
-      <input type="checkbox" class="ticketBulkSelection" ng-model="ticket.selected">
+      <input type="checkbox" class="ticketBulkSelection"
+             ng-model="selectedTickets[ticket.id]" ng-change="changeSelectedTickets(ticket.id, ticket.status)">
       <span class="control-indicator"></span>
     </label>
   </div>
@@ -119,7 +120,7 @@
           </ul>
         </li>
         <!-- delete forever, only visible in trash -->
-        <li ng-if="listType === 'trash'">
+        <li ng-if="listType === 'trash' || listType === 'spam'">
           <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType) || ActionRightsService.isDeleteSpamForAdminVisible(listType, MarkedSpamByRole(ticket),currentUser.role)"-->
           <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
             <span class="icn-ticket-del icn"></span>
@@ -206,7 +207,7 @@
           </a>
 
           <div class="dropdown-menu" stop-propagation="click" ng-if="isShowAssignUser"
-               assign-user-button aub-ticket="ticket" users="usersCurrentCompany"
+               assign-user-button aub-ticket-id="ticket.id" users="usersCurrentCompany"
                aub-current-user="currentUser">
           </div>
 
@@ -223,21 +224,6 @@
           <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click"
               ng-controller="quicktech.core.tickets.ticketTagsCtrl" ng-init="ticketId = ticket.id"
               ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
-
-            <!--<li ng-repeat="tag in tags">-->
-              <!--<label class="control checkbox">-->
-                <!--<input type="checkbox" ng-model="ticketTags[tag.id]">-->
-                <!--<span class="control-indicator pull-left"></span>-->
-                <!--<span class="tag-color color{{tag.color}}"></span>-->
-                <!--{{tag.name}}-->
-              <!--</label>-->
-            <!--</li>-->
-
-            <!--<li class="apply">-->
-              <!--<button type="button" class="btn btn-scooter" ng-click="postTagAs($event, ticket.id)">-->
-                <!--Apply-->
-              <!--</button>-->
-            <!--</li>-->
           </ul>
         </li>
         <!-- Claim Ticket icon -->

@@ -9,7 +9,7 @@
         templateUrl: '/html/scripts/core/tickets/assign-user/assign-user.tpl.html',
         controller: 'quicktech.core.tickets.assignUserCtrl',
         scope: {
-          ticket: "=aubTicket",
+          ticketId: "=aubTicketId",
           currentUser: '=aubCurrentUser',
           usersCurrentCompany: "=users"
         },

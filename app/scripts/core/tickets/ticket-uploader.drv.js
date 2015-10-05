@@ -17,8 +17,8 @@
 
             scope.ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
-            scope.$watch('ticketsHeaderState', function (params) {
-              getTicketsList(params.searchFilter);
+            scope.$watch('ticketsHeaderState.searchFilter', function (searchFilter) {
+              getTicketsList(searchFilter);
             }, true);
 
             function getTicketsList(params) {

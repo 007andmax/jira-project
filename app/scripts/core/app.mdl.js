@@ -195,7 +195,7 @@
           var username = user.firstName + ' ' + user.lastName;
 
           if (includeImail) {
-            username += ('"' + user.primaryEmail + '"')
+            username += (' "' + user.primaryEmail + '"')
           }
 
           return username;
@@ -207,7 +207,7 @@
           var contactname = contact.firstName + ' ' + contact.lastName;
 
           if (includeImail) {
-            contactname += ('"' + contact.email + '"')
+            contactname += (' "' + contact.email + '"')
           }
 
           return contactname;

@@ -3,15 +3,15 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.assignUserCtrl',
-    ['$scope', 'TicketsService', 'UsersService', '$stateParams', '$state',
-      function ($scope, TicketsService, UsersService, $stateParams, $state) {
+    ['$scope', 'TicketsService', 'UsersService', '$stateParams', '$state', '$rootScope',
+      function ($scope, TicketsService, UsersService, $stateParams, $state, $rootScope) {
 
         $scope.userToAssign = {};
         $scope.assignToModel = '';
 
-        if ($stateParams.listType !== 'user' && $scope.ticket.assignedUser && $scope.ticket.assignedUser.id !== $scope.currentUser.id) {
-          $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);
-        }
+        //if ($stateParams.listType !== 'user' && $scope.ticket.assignedUser && $scope.ticket.assignedUser.id !== $scope.currentUser.id) {
+        //  $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);
+        //}
 
         $scope.setUserToAssign = function (user) {
           $scope.userToAssign = user;
@@ -61,7 +61,10 @@
 
         $scope.assignUserToTicket = function () {
           if ($scope.userToAssign && $scope.userToAssign.id) {
-            TicketsService.assignTo($scope.ticket.id, $scope.userToAssign.id, function(){
+            TicketsService.assignTo($scope.ticketId, $scope.userToAssign.id, function(){
+              if($scope.ticketId instanceof Array){
+                $rootScope.$broadcast('uncheckAllTickets')
+              }
               $state.go('tickets', {listType: $stateParams.listType});
             });
           }

@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.ticketsCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', 'ActionRightsService', 'TicketTagsService',
+    ['$scope', 'quicktech.common.services.SharedStateService',
       '$stateParams', 'UsersService', 'CompaniesService', '$filter', 'TicketsService', '$state',
-      function ($scope, SharedStateService, ActionRightsService, TicketTagsService, $stateParams, UsersService, CompaniesService, $filter, TicketsService, $state) {
+      function ($scope, SharedStateService, $stateParams, UsersService, CompaniesService, $filter, TicketsService, $state) {
 
         var users,
           companies = CompaniesService.getAllCompanies(),
@@ -97,13 +97,6 @@
 
         });
 
-        //TODO Review!!!
-        $scope.ActionRightsService = ActionRightsService;
-
-        //var tags = TicketTagsService.getList($scope, function () {
-        //  SharedStateService.getSharedState('ticketsHeader').allTags = tags.staticCopy();
-        //});
-
         $scope.searchByParams = function () {
 
           if ($scope.searchParams.priority.enabled) {
@@ -157,7 +150,16 @@
             priority: {value: 1},
             status: {value: 1}
           };
-        };
+        }
+
+        $scope.$watch('sharedState.checkedTicketsIds', function (data) {
+
+          if (data && data.length > 0) {
+            $scope.isShowBulkAction = true;
+          } else {
+            $scope.isShowBulkAction = false;
+          }
+        })
 
       }]);
 
