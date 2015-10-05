@@ -59,13 +59,13 @@
               </label>
 
               <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
-                <img ng-src="{{ getUserAvatarUrl(agent) }}" alt="..." class="img-circle">
+                <img ng-src="{{ getUserAvatarUrl(getUserById(agent.id)) }}" alt="..." class="img-circle">
               </a>
 
               <div class="clearfix">
                 <div class="user-name">
                   <a href="javascript:void(0)">
-                    {{ getUserName(agent) }} "{{ agent.primaryEmail }}"
+                    {{ getUserName(getUserById(agent.id), true) }}
                   </a>
                 </div>
               </div>
@@ -153,13 +153,13 @@
               </label>
 
               <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
-                <img ng-src="{{ getUserAvatarUrl(client) }}" alt="..." class="img-circle">
+                <img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}" alt="..." class="img-circle">
               </a>
 
               <div class="clearfix">
                 <div class="user-name">
                   <a href="javascript:void(0)">
-                    {{ getUserName(client) }} "{{ client.primaryEmail }}"
+                    {{ getUserName(getUserById(client.id), true) }}
                   </a>
                 </div>
               </div>
@@ -200,13 +200,13 @@
               </label>
 
               <a herf="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
-                <img ng-src="{{ getUserAvatarUrl(agent) }}" alt="..." class="img-circle">
+                <img ng-src="{{ getUserAvatarUrl(getUserById(agent.id)) }}" alt="..." class="img-circle">
               </a>
 
               <div class="clearfix">
                 <div class="user-name">
                   <a href="javascript:void(0)">
-                    {{ getUserName(agent) }} "{{ agent.primaryEmail }}"
+                    {{ getUserName(getUserById(agent.id), true) }}
                   </a>
                 </div>
               </div>
@@ -240,7 +240,7 @@
 
         <ul class="tooltip-inner">
           <li>
-            <span class="username">{{ sharedUser.user ? getUserName(sharedUser.user) : getContactName(sharedUser.contact) }}</span>
+            <span class="username">{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</span>
             <span class="usertitle">{{  getSharedTitle(sharedUser) }}</span>
           </li>
         </ul>
