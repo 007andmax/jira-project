@@ -1,0 +1,53 @@
+<form name="editTagForm">
+  <div class="label-edit">
+
+    <div class="label-heading" ng-class="{'error': isShowingErrors(editTagForm, 'editTagName')}">
+
+      <div ng-messages="editTagForm.editTagName.$error" style="color: red"
+           ng-show="isShowingErrors(editTagForm, 'editTagName')">
+        <div class="qt-error-msg" ng-message="required">Label name is required.</div>
+        <div class="qt-error-msg" ng-message="unique">Label name already occupied.</div>
+        <div class="qt-error-msg" ng-message="maxlength">Label name is too large.</div>
+        <div class="qt-error-msg" ng-message="minlength">Label name is too short.</div>
+      </div>
+
+      <div class="color{{ editTag.color }} tag-color"></div>
+
+      <input type="text" class="form-control-edit" placeholder="Name"
+             ng-model="editTag.name" name="editTagName" ng-required="true"
+             ng-minlength="3" ng-maxlength="16"
+             is-uniq-validation validation-func="validateTagName">
+    </div>
+
+    <ul class="indctr-list clearfix">
+      <li ng-repeat="tagColor in tagColors"
+          ng-class="{'last': ($index === 4 || $index === 9), 'active': editTag.color === $index }"
+          ng-click="editTag.color = $index">
+        <span class="color{{ $index }} tag-color"></span>
+      </li>
+    </ul>
+
+    <div class="label-actions clearfix">
+
+      <a href="javascript:void(0)" ng-show="editTag.id"
+         ng-click="deleteTag(editTagForm)">
+        <div class="icn icn-label-delete pull-left"
+             tooltip-placement="top" tooltip="delete label">
+        </div>
+      </a>
+
+      <a href="javascript:void(0)" ng-click="saveTag(editTagForm)">
+        <div class="icn icn-label-save pull-right"
+             tooltip-placement="top" tooltip="save Changes">
+        </div>
+      </a>
+
+      <a href="javascript:void(0)" ng-click="openEditTagForm()">
+        <div class="icn icn-label-cancel pull-right"
+             tooltip-placement="top" tooltip="cancel">
+        </div>
+      </a>
+
+    </div>
+  </div>
+</form>
