@@ -27,7 +27,9 @@
           <li ng-repeat="tag in tags">
             <label class="control checkbox">
               <input type="checkbox" ng-model="bulkTicketsTags[tag.id].val"
-                     ng-change="changeTagCheckbox(tag.id, bulkTicketsTags[tag.id].val)">
+                     ng-change="changeTagCheckbox(tag.id, bulkTicketsTags[tag.id].val)"
+                     ng-class="{'disabled': disabledTags && !bulkTicketsTags[tag.id].val}"
+                     ng-disabled="disabledTags && !bulkTicketsTags[tag.id].val">
               <span class="control-indicator pull-left"
                     ng-class="{'intermediate': bulkTicketsTags[tag.id].isHalf}"></span>
               <span class="tag-color color{{tag.color}}"></span>

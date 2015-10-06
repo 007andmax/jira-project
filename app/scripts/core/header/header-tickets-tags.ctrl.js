@@ -67,5 +67,20 @@
           })
         };
 
+        $scope.$watch('bulkTicketsTags', function () {
+          var count = 0;
+          for (var tagId in $scope.bulkTicketsTags) {
+            if ($scope.bulkTicketsTags[tagId].val) {
+              count++;
+            }
+          }
+
+          if (count > 2) {
+            $scope.disabledTags = true;
+          } else {
+            $scope.disabledTags = false;
+          }
+        }, true);
+
       }]);
 }());

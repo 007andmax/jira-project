@@ -25,7 +25,22 @@
 
           TicketTagsService.link(tagsToSend)
 
-        }
+        };
+
+        $scope.$watch('ticketTags', function () {
+          var count = 0;
+          for (var tagId in $scope.ticketTags) {
+            if ($scope.ticketTags[tagId]) {
+              count++;
+            }
+          }
+
+          if (count > 2) {
+            $scope.disabledTags = true;
+          } else {
+            $scope.disabledTags = false;
+          }
+        }, true);
 
       }]);
 }());
