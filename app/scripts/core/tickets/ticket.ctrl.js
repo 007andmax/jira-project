@@ -10,7 +10,7 @@
         $scope.user = UsersService.getOneById($scope.ticket.createdUser.id);
         $scope.company = CompaniesService.getOneById($scope.ticket.company.id);
 
-        if($scope.ticket.assignedUser && $scope.ticket.assignedUser.id){
+        if ($scope.ticket.assignedUser && $scope.ticket.assignedUser.id) {
           $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);
         }
 
@@ -51,8 +51,8 @@
         };
 
         $scope.claimTicket = function () {
-          TicketsService.assignTo($scope.ticket.id, $scope.currentUser.id, function(){
-            $state.go('tickets', {listType: 'user'}).then(function(){
+          TicketsService.assignTo($scope.ticket.id, $scope.currentUser.id, function () {
+            $state.go('tickets', {listType: 'user'}).then(function () {
               $state.go('tickets.details', {ticketId: $scope.ticket.id});
             });
           });

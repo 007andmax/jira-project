@@ -2,26 +2,25 @@
 
 (function () {
 
-  var app = angular.module('quicktech');
+  angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
+    ['$scope', 'TicketsService', 'TicketTagsService', 'quicktech.common.services.SharedStateService', '$stateParams',
+      function ($scope, TicketsService, TicketTagsService, SharedStateService, $stateParams) {
 
-  app.controller('quicktech.core.leftPanel.leftPanelCtrl', ['$scope', 'TicketsService', 'TicketTagsService', 'quicktech.common.services.SharedStateService', '$stateParams',
-    function ($scope, TicketsService, TicketTagsService, SharedStateService, $stateParams) {
+        var ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
+        $scope.ticketCounts = TicketsService.getCounts($scope);
 
-      var ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
-      $scope.ticketCounts = TicketsService.getCounts($scope);
+        $scope.$watch(function () {
 
-      $scope.$watch(function () {
+          if (!$stateParams.listType) {
+            return 0;
+          }
 
-        if (!$stateParams.listType) {
-          return 0;
-        }
+          return $scope.ticketCounts[$stateParams.listType.toUpperCase()];
 
-        return $scope.ticketCounts[$stateParams.listType.toUpperCase()];
+        }, function (count) {
+          ticketsHeaderState.count = count;
+        })
 
-      }, function (count) {
-        ticketsHeaderState.count = count;
-      })
-
-    }]);
+      }]);
 
 }());
