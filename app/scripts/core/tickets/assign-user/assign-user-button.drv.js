@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.tickets").directive('assignUserButton',['$rootScope',
+  angular.module("quicktech.core.tickets").directive('assignUserButton', ['$rootScope',
     function ($rootScope) {
       return {
         restrict: 'A',
@@ -11,7 +11,8 @@
         scope: {
           ticketId: "=aubTicketId",
           currentUser: '=aubCurrentUser',
-          usersCurrentCompany: "=users"
+          usersCurrentCompany: "=users",
+          isBulkOperation: '=aubIsBulkOperation'
         },
         link: function (scope) {
           scope.getUserName = $rootScope.getUserName;

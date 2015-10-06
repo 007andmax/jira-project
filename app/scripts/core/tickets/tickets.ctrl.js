@@ -80,33 +80,36 @@
           return UsersService.getOneById(userId);
         };
 
-        $scope.$watch('tickets',changeSelectedTickets);
+        $scope.$watch('tickets', changeSelectedTickets);
 
         $scope.changeSelectedTickets = changeSelectedTickets;
 
-        $scope.$on('uncheckAllTickets', function(){
+        $scope.$on('uncheckAllTickets', function () {
           $scope.selectedTickets = {};
         });
 
-        function changeSelectedTickets(id, status){
+        function changeSelectedTickets(id, status) {
 
           ticketsHeaderState.checkedCompletedTicket = false;
           ticketsHeaderState.checkedTicketsIds = [];
+          ticketsHeaderState.ticketTags = {};
 
-          for(var ticketId in $scope.selectedTickets){
-            if($scope.selectedTickets[ticketId]){
+          for (var ticketId in $scope.selectedTickets) {
+            if ($scope.selectedTickets[ticketId]) {
+
+              ticketsHeaderState.ticketTags[ticketId] = Utils.findById($scope.tickets, ticketId).tags;
               ticketsHeaderState.checkedTicketsIds.push(ticketId);
 
-              if(!ticketsHeaderState.checkedCompletedTicket && Utils.findById($scope.tickets, ticketId).status === 'COMPLETED'){
+              if (!ticketsHeaderState.checkedCompletedTicket && Utils.findById($scope.tickets, ticketId).status === 'COMPLETED') {
                 ticketsHeaderState.checkedCompletedTicket = true;
               }
-
-
             }
           }
-
         }
 
-      }]);
+        $scope.$on('$destroy', function () {
+          SharedStateService.clearState('ticketsHeader');
+        });
 
+      }]);
 }());

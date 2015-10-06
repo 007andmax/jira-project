@@ -19,7 +19,7 @@
 
         $scope.filterAssignUser = function (item) {
 
-          if(item.id === $scope.currentUser.id){
+          if (item.id === $scope.currentUser.id) {
             return false;
           }
 
@@ -61,8 +61,9 @@
 
         $scope.assignUserToTicket = function () {
           if ($scope.userToAssign && $scope.userToAssign.id) {
-            TicketsService.assignTo($scope.ticketId, $scope.userToAssign.id, function(){
-              if($scope.ticketId instanceof Array){
+            TicketsService.assignTo($scope.ticketId, $scope.userToAssign.id, function () {
+
+              if ($scope.isBulkOperation) {
                 $rootScope.$broadcast('uncheckAllTickets')
               }
               $state.go('tickets', {listType: $stateParams.listType});

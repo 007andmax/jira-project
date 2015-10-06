@@ -6,17 +6,17 @@
     ['$scope', 'TicketTagsService',
       function ($scope, TicketTagsService) {
 
-        $scope.applyTagsToTicket = function(){
+        $scope.applyTagsToTicket = function () {
 
-          if(!$scope.ticketId){
+          if (!$scope.ticketId) {
             throw 'Error initialization ticketId!!!'
           }
 
           var tagsToSend = {},
             tagsId = [];
 
-          for(var tagId in $scope.ticketTags){
-            if($scope.ticketTags[tagId]){
+          for (var tagId in $scope.ticketTags) {
+            if ($scope.ticketTags[tagId]) {
               tagsId.push(tagId)
             }
           }

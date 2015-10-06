@@ -2,7 +2,7 @@
      ng-class="{'selected' : selectedTickets[ticket.id], 'completed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
      ng-click="srefToDetails($event)">
 
-  <div class="ui-checkbox ui-checkbox-warning" stop-propagation="click">
+  <div class="ui-checkbox ui-checkbox-warning" ng-click="doNotExpandTicket($event)">
     <label class="control checkbox">
       <input type="checkbox" class="ticketBulkSelection"
              ng-model="selectedTickets[ticket.id]" ng-change="changeSelectedTickets(ticket.id, ticket.status)">

@@ -11,19 +11,36 @@
       Selected
     </h4>
 
-    <div class="ticket-actions pull-right">
+    <div class="ticket-actions pull-right" ng-controller="quicktech.core.tickets.headerTicketTagsCtrl"
+         ng-init="ticketId = ticket.id">
 
       <div class="dropdown pull-left"
            ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
 
         <div class="btn btn-white-gray btn-cr  dropdown-toggle tooltip-dp" data-toggle="dropdown"
-             tooltip="label as..." tooltip-placement="bottom">
+             tooltip="label as..." tooltip-placement="bottom" ng-click="createTagsMatrix()">
           <span class="icn-nav-tag"></span>
         </div>
 
-        <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click"
-            ng-controller="quicktech.core.tickets.ticketTagsCtrl" ng-init="ticketId = ticket.id"
-            ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
+        <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click">
+
+          <li ng-repeat="tag in tags">
+            <label class="control checkbox">
+              <input type="checkbox" ng-model="bulkTicketsTags[tag.id].val"
+                     ng-change="changeTagCheckbox(tag.id, bulkTicketsTags[tag.id].val)">
+              <span class="control-indicator pull-left"
+                    ng-class="{'intermediate': bulkTicketsTags[tag.id].isHalf}"></span>
+              <span class="tag-color color{{tag.color}}"></span>
+              {{tag.name}}
+            </label>
+          </li>
+
+          <li class="apply">
+            <button type="button" class="btn btn-scooter" ng-click="bulkApplyTagsToTicket()">
+              Apply
+            </button>
+          </li>
+
         </ul>
       </div>
 
@@ -38,7 +55,7 @@
 
         <div class="dropdown-menu" stop-propagation="click" ng-if="isShowAssignUser"
              assign-user-button aub-ticket-id="sharedState.checkedTicketsIds" users="usersCurrentCompany"
-             aub-current-user="currentUser">
+             aub-current-user="currentUser" aub-is-bulk-operation="true">
         </div>
       </div>
 
