@@ -20956,3 +20956,11 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
   opacity: 1;
 }
 
+.modal-custom-size-confirmation-pop-up {
+  width: 400px;
+  margin-top: -75px;
+  top: 50%;
+  left: 50%;
+  margin-left: -251px;
+}
+
