@@ -36,11 +36,17 @@
         };
 
         $scope.validateTagName = function (ngModelCtrl) {
-
+          
           for (var i = 0; i < $scope.tags.length; i++) {
             if (ngModelCtrl.$viewValue.toLowerCase() === $scope.tags[i].name.toLowerCase()) {
-              ngModelCtrl.$setValidity('unique', false);
-              return;
+
+              if($scope.tags[i].id === $scope.editTag.id){
+                ngModelCtrl.$setValidity('unique', true);
+              } else{
+                ngModelCtrl.$setValidity('unique', false);
+                return;
+              }
+
             } else {
               ngModelCtrl.$setValidity('unique', true);
             }
