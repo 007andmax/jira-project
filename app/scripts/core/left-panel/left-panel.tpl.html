@@ -97,7 +97,7 @@
   </nav>
   <div class="clearfix divider"></div>
 
-  <nav class="site-left-nav clearfix label-nav">
+  <nav class="site-left-nav clearfix label-nav" ng-show="PermissionsService.isShowLabelsOnLeftPanel(listType)">
     <div ng-controller="quicktech.core.leftPanel.leftPanelTagsCtrl"
          ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-tags.tpl.html'"></div>
   </nav>

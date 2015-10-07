@@ -261,6 +261,14 @@
         }
       }
 
+      function isShowLabelsOnLeftPanel(listType){
+        for(var type in LIST_TYPES){
+          if (listType === LIST_TYPES[type]){
+            return true;
+          }
+        }
+      }
+
       return {
         isMoreActionsMenuVisible: isMoreActionsMenuVisible,
         isMoveIntoSpamVisible: isMoveIntoSpamVisible,
@@ -281,7 +289,8 @@
         isAditionalActionAccessForUser: isAditionalActionAccessForUser,
         isTipVisibleOnClosedPage: isTipVisibleOnClosedPage,
         isTipVisibleOnSharedPage: isTipVisibleOnSharedPage,
-        isUserMsgTipsVisible: isUserMsgTipsVisible
+        isUserMsgTipsVisible: isUserMsgTipsVisible,
+        isShowLabelsOnLeftPanel: isShowLabelsOnLeftPanel
       }
 
     }]);
