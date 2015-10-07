@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketCtrl',
-    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams) {
+    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, UserConfirmationsService) {
 
         $scope.ticketTags = {};
         $scope.user = UsersService.getOneById($scope.ticket.createdUser.id);
@@ -38,8 +38,20 @@
           TicketsService.changeStatus($scope.ticket.id, status);
         };
 
-        $scope.moveIntoSpam = function (movedWay) {
-          TicketsService.changeSpamFlag($scope.ticket.id, movedWay);
+        $scope.moveIntoSpam = function () {
+          var confirmMesage = 'Do you want to mark the ticket as spam?',
+            confirmButton = 'Spam';
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            if ($scope.currentUser.role === "USER") {
+              TicketsService.reportAsSpam($scope.ticket.id);
+            } else {
+              TicketsService.markAsSpam($scope.ticket.id);
+            }
+          });
+        };
+
+        $scope.restoreFromSpam = function () {
+          TicketsService.restoreFromSpam($scope.ticket.id);
         };
 
         $scope.moveToTrash = function (movedWay) {
@@ -47,7 +59,11 @@
         };
 
         $scope.deleteForever = function () {
-          TicketsService.deleteForever($scope.ticket.id);
+          var confirmMesage = 'The ticket will become inaccessible. Continue with permanent deletion?',
+            confirmButton = 'Delete';
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            TicketsService.deleteForever($scope.ticket.id);
+          });
         };
 
         $scope.claimTicket = function () {

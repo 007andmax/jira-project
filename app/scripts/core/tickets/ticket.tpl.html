@@ -107,7 +107,7 @@
             </li>
 
             <li>
-              <a ng-click="moveIntoSpam(true)" tabindex="-1" href="javascript:void(0)">
+              <a ng-click="moveIntoSpam()" tabindex="-1" href="javascript:void(0)">
                 <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
                 <span ng-if="currentUser.role === 'USER' ">Report as Spam</span>
               </a>
@@ -146,7 +146,7 @@
         <li ng-show="false">
           <!--ng-if="ActionRightsService.isRestoreForSpamVisible(listType)"-->
           <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
-             ng-click="moveIntoSpam(false)">
+             ng-click="restoreFromSpam()">
             <span class="icn-small-ticket-restore icn"></span>
           </a>
         </li>
@@ -155,7 +155,7 @@
         <li ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isMarkAsSpamIconVisible(listType, MarkedSpamByRole(ticket), currentUser.role)"-->
           <a href="javascript:void(0);" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"
-             tooltip-placement="top" ng-click="moveIntoSpam(true)">
+             tooltip-placement="top" ng-click="moveIntoSpam()">
             <span class="icn-ticket-spam icn"></span>
           </a>
         </li>

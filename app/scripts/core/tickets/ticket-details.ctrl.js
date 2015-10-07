@@ -3,8 +3,10 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
-      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state', 'ProductsService', '$sce', '$timeout',
-        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $state, ProductsService, $sce, $timeout) {
+      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state',
+        'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
+        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader,
+                  $state, ProductsService, $sce, $timeout, UserConfirmationsService) {
 
           $scope.ticketTags = {};
           $scope.allUpdatesLoaded = false;
@@ -36,10 +38,10 @@
 
             $scope.$broadcast('ticketDetailsLoad');
 
-            for(var i = 0; i < $scope.ticketDetails.updates.length; i++){
+            for (var i = 0; i < $scope.ticketDetails.updates.length; i++) {
 
-              if($scope.ticketDetails.updates[i].unread){
-                if(unreadUpdatesId.length === 0){
+              if ($scope.ticketDetails.updates[i].unread) {
+                if (unreadUpdatesId.length === 0) {
                   $scope.firstUnreadUpdateId = $scope.ticketDetails.updates[i].id;
                 }
 
@@ -47,8 +49,8 @@
               }
             }
 
-            if(unreadUpdatesId.length > 0){
-              $timeout(function(){
+            if (unreadUpdatesId.length > 0) {
+              $timeout(function () {
                 TicketsService.markUpdateAsRead($scope.ticketDetails.id, unreadUpdatesId)
               }, 1500);
 
@@ -96,8 +98,21 @@
           };
 
           $scope.moveIntoSpam = function () {
-            TicketsService.changeSpamFlag($scope.ticketDetails.id, true, function () {
-              $state.go('tickets', {listType: $stateParams.listType});
+            var confirmMesage = 'Do you want to mark the ticket as spam?',
+              confirmButton = 'Spam';
+
+            UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+
+              if ($scope.currentUser.role === "USER") {
+                TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
+                  $state.go('tickets', {listType: $stateParams.listType});
+                });
+
+              } else {
+                TicketsService.markAsSpam($scope.ticketDetails.id, function () {
+                  $state.go('tickets', {listType: $stateParams.listType});
+                });
+              }
             });
           };
 
@@ -233,7 +248,7 @@
               }
             }
 
-            if($scope.ticketUpdate.notifyTicketCreator){
+            if ($scope.ticketUpdate.notifyTicketCreator) {
               ticketUpdateToSend.notifyTicketCreator = $scope.ticketUpdate.notifyTicketCreator;
             }
 
@@ -251,8 +266,12 @@
           };
 
           $scope.deleteForever = function () {
-            TicketsService.deleteForever($scope.ticketDetails.id, function(){
-              $state.go('tickets', {listType: $stateParams.listType});
+            var confirmMesage = 'The ticket will become inaccessible. Continue with permanent deletion?',
+              confirmButton = 'Delete';
+            UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+              TicketsService.deleteForever($scope.ticketDetails.id, function () {
+                $state.go('tickets', {listType: $stateParams.listType});
+              });
             });
           };
 

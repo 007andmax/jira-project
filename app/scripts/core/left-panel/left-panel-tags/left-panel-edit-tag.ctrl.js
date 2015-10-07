@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelEditTagCtrl',
-    ['$scope', 'TicketTagsService',
-      function ($scope, TicketTagsService) {
+    ['$scope', 'TicketTagsService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, TicketTagsService, UserConfirmationsService) {
 
         var tryToSaveTag = false;
         $scope.tagColors = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -30,19 +30,29 @@
         };
 
         $scope.deleteTag = function () {
-          TicketTagsService.deleteTag($scope.editTag.id, function () {
-            $scope.openEditTagForm();
-          })
+          if ($scope.editTag.id && $scope.tagsCount[$scope.editTag.id]) {
+            var confirmMesage = 'The label “Device” is associated with ' + $scope.tagsCount[$scope.editTag.id] + ' Ticket(s). Continue with deletion?',
+              confirmButton = 'Delete';
+            UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+              TicketTagsService.deleteTag($scope.editTag.id, function () {
+                $scope.openEditTagForm();
+              })
+            });
+          } else {
+            TicketTagsService.deleteTag($scope.editTag.id, function () {
+              $scope.openEditTagForm();
+            })
+          }
         };
 
         $scope.validateTagName = function (ngModelCtrl) {
-          
+
           for (var i = 0; i < $scope.tags.length; i++) {
             if (ngModelCtrl.$viewValue.toLowerCase() === $scope.tags[i].name.toLowerCase()) {
 
-              if($scope.tags[i].id === $scope.editTag.id){
+              if ($scope.tags[i].id === $scope.editTag.id) {
                 ngModelCtrl.$setValidity('unique', true);
-              } else{
+              } else {
                 ngModelCtrl.$setValidity('unique', false);
                 return;
               }

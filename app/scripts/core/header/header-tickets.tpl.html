@@ -134,7 +134,7 @@
           </li>
 
           <li>
-            <a ng-click="moveIntoSpam(true)" tabindex="-1" href="javascript:void(0)">
+            <a ng-click="moveIntoSpam()" tabindex="-1" href="javascript:void(0)">
               <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
               <span ng-if="currentUser.role === 'USER' ">Report as Spam</span>
             </a>
@@ -172,7 +172,7 @@
 
       <div class="btn btn-white-gray btn-cr tooltip-dp last"
            tooltip-placement="bottom" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"
-           ng-click="moveIntoSpam(true)"
+           ng-click="moveIntoSpam()"
            ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role)">
         <span class="icn icn-ticket-spam"></span>
       </div>

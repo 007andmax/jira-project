@@ -4,8 +4,9 @@
 
   angular.module('quicktech').controller('quicktech.core.header.ticketsBulkCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', 'TicketTagsService',
-      '$stateParams', 'UsersService', 'CompaniesService', '$filter', 'TicketsService', '$rootScope',
-      function ($scope, SharedStateService, PermissionsService, TicketTagsService, $stateParams, UsersService, CompaniesService, $filter, TicketsService, $rootScope) {
+      'UsersService', 'CompaniesService', 'TicketsService', '$rootScope', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, SharedStateService, PermissionsService, TicketTagsService, UsersService,
+                CompaniesService, TicketsService, $rootScope, UserConfirmationsService) {
 
         $scope.PermissionsService = PermissionsService;
         $scope.tags = TicketTagsService.getList($scope);
@@ -27,8 +28,20 @@
           });
         };
 
-        $scope.moveIntoSpam = function (movedWay) {
-          TicketsService.changeSpamFlag($scope.sharedState.checkedTicketsIds, movedWay, $scope.uncheckAllTickets);
+        $scope.moveIntoSpam = function () {
+          var confirmMesage = 'Do you want to mark ' + $scope.sharedState.checkedTicketsIds.length + ' tickets as spam?',
+            confirmButton = 'Spam';
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            if ($scope.currentUser.role === "USER") {
+              TicketsService.reportAsSpam($scope.sharedState.checkedTicketsIds, $scope.uncheckAllTickets);
+            } else {
+              TicketsService.markAsSpam($scope.sharedState.checkedTicketsIds, $scope.uncheckAllTickets);
+            }
+          });
+        };
+
+        $scope.restoreFromSpam = function () {
+          TicketsService.restoreFromSpam($scope.sharedState.checkedTicketsIds, $scope.uncheckAllTickets)
         };
 
         $scope.moveToTrash = function (movedWay) {
@@ -36,14 +49,18 @@
         };
 
         $scope.restoreTickets = function () {
-          $scope.listType === 'trash' ? $scope.moveToTrash(false) : $scope.moveIntoSpam(false);
+          $scope.listType === 'trash' ? $scope.moveToTrash(false) : $scope.restoreFromSpam();
         };
 
         $scope.deleteForever = function () {
-          TicketsService.deleteForever($scope.sharedState.checkedTicketsIds, $scope.uncheckAllTickets);
+          var confirmMesage = 'The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets will become inaccessible. Continue with permanent deletion?',
+            confirmButton = 'Delete';
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            TicketsService.deleteForever($scope.sharedState.checkedTicketsIds, $scope.uncheckAllTickets);
+          });
         };
 
-        $scope.$on('uncheckAllTickets', function(){
+        $scope.$on('uncheckAllTickets', function () {
           $scope.sharedState.checkedTicketsIds = [];
         })
 
