@@ -97,12 +97,13 @@
   </nav>
   <div class="clearfix divider"></div>
 
-  <nav class="site-left-nav clearfix label-nav" ng-show="PermissionsService.isShowLabelsOnLeftPanel(listType)">
+  <nav class="site-left-nav clearfix label-nav">
     <div ng-controller="quicktech.core.leftPanel.leftPanelTagsCtrl"
+         ng-if="PermissionsService.isShowLabelsOnLeftPanel(listType)"
          ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-tags.tpl.html'"></div>
   </nav>
 
-  <div class="clearfix divider"></div>
+  <div class="clearfix divider" ng-show="PermissionsService.isShowLabelsOnLeftPanel(listType)"></div>
   <nav class="site-left-nav clearfix">
     <ul class="nav nav-pills last sub-nav nav-stacked">
       <li><a href="javascript:void(0)"><span class="nav-icon icn-devices"></span> Devices </a></li>

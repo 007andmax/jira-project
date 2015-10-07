@@ -29,8 +29,6 @@
             2: 'COMPLETED'
           };
 
-        $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
-
         $scope.search = function (value) {
 
           if (!isNaN(parseFloat(value)) && value.length > 2) {
@@ -78,6 +76,8 @@
         $scope.$watch(function () {
           return $stateParams.listType;
         }, function (filter) {
+
+          $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
 
           $scope.searchItem = undefined;
           setSearchParamsDefault();
