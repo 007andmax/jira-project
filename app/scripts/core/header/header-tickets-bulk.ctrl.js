@@ -29,7 +29,7 @@
         };
 
         $scope.moveIntoSpam = function () {
-          var confirmMesage = 'Do you want to mark ' + $scope.sharedState.checkedTicketsIds.length + ' tickets as spam?',
+          var confirmMesage = 'Do you want to ' + ($scope.currentUser.role === 'USER' ? 'report' : 'mark') + ' ' + $scope.sharedState.checkedTicketsIds.length + ' tickets as spam?',
             confirmButton = 'Spam';
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             if ($scope.currentUser.role === "USER") {
