@@ -116,7 +116,7 @@
 
                 TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
 
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam', true);
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam');
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
 
@@ -124,7 +124,7 @@
 
                 TicketsService.markAsSpam($scope.ticketDetails.id, function () {
 
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam');
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
               }
@@ -277,15 +277,16 @@
                 case 'NOTE':
 
                   UserNotificationService.show('New ticket update containing a note has been posted', true);
+                  setCreateUpdateFormToDefault()
                   return;
 
                 case 'SERVICE':
                   if (ticketUpdateToSend.services.length > 1) {
                     UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
                   } else {
-                    UserNotificationService.show('New ticket update containing a service has been posted');
-                    $scope.hideNotification();
+                    UserNotificationService.show('New ticket update containing a service has been posted', true);
                   }
+                  setCreateUpdateFormToDefault()
                   return;
 
                 case 'PRODUCT':
@@ -294,13 +295,15 @@
                   } else {
                     UserNotificationService.show('New ticket update containing a product has been posted', true);
                   }
+                  setCreateUpdateFormToDefault()
                   return;
               }
 
-              $scope.$broadcast('setCreateUpdateFormToDefault');
-              $scope.selectUpdateSharedUser = {};
-              $scope.updateSharedUsersList = [];
-
+              function setCreateUpdateFormToDefault(){
+                $scope.$broadcast('setCreateUpdateFormToDefault');
+                $scope.selectUpdateSharedUser = {};
+                $scope.updateSharedUsersList = [];
+              }
             });
           };
 

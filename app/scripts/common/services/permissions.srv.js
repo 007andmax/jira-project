@@ -166,12 +166,13 @@
         return isTrue;
       }
 
-      function isEditUpdateDisabled(ticketStatus, listType) {
+      function isEditUpdateDisabled(ticketStatus, listType, userRole) {
 
+        var isDisabledForUser = userRole === USER_ROLES.USER;
         var statusClosed = ticketStatus === 'COMPLETED';
-        var isTrue = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM || listType === LIST_TYPES.SHARED;
+        var isTrue = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
 
-        return statusClosed || isTrue;
+        return statusClosed || isTrue || isDisabledForUser;
       }
 
       function isAditionalActionAccessForUser(ticket, user) {
@@ -270,6 +271,13 @@
         }
       }
 
+      function isDisabledDeleteTicketUpdate(listType, creatorId, userId, userRole){
+        var isDisabledForUser = userRole === USER_ROLES.USER && creatorId !== userId;
+        var isDisablenOnPage = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
+
+        return isDisablenOnPage || isDisabledForUser;
+      }
+
       return {
         isMoreActionsMenuVisible: isMoreActionsMenuVisible,
         isMoveIntoSpamVisible: isMoveIntoSpamVisible,
@@ -291,7 +299,8 @@
         isTipVisibleOnClosedPage: isTipVisibleOnClosedPage,
         isTipVisibleOnSharedPage: isTipVisibleOnSharedPage,
         isUserMsgTipsVisible: isUserMsgTipsVisible,
-        isShowLabelsOnLeftPanel: isShowLabelsOnLeftPanel
+        isShowLabelsOnLeftPanel: isShowLabelsOnLeftPanel,
+        isDisabledDeleteTicketUpdate: isDisabledDeleteTicketUpdate
       }
 
     }]);

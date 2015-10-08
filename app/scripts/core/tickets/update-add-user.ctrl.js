@@ -34,7 +34,7 @@
 
           $scope.filterUpdateUser = function (item) {
 
-            if(item.id === $scope.currentUser.id){
+            if(item.id === $scope.currentUser.id || item.id === $scope.ticketDetails.assignedUser.id){
               return false;
             }
 

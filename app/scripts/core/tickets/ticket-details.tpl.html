@@ -341,7 +341,8 @@
               <span class="added-type">added a {{ updateType() }}</span>
               <a href="javascript:void(0)" class="icn-nav-delete pull-right tp-hide"
                  tooltip="Delete" tooltip-placement="top" ng-click="deleteUpdate()"
-                 ng-class="{disabled: listType === 'closed' || listType === 'trash' || listType === 'spam' || cannotDeleteUpdate(ticketUpdate) }"></a>
+                 ng-disabled="PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id, currentUser.role)"
+                 ng-class="{disabled: PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id,  currentUser.role) }"></a>
             </div>
 
             <!-- Update Content - Note -->
@@ -404,8 +405,8 @@
                 <div class="table-content-action pull-right">
                   <a href="javascript:void(0)" tooltip="edit product" tooltip-placement="top"
                      class="icn-edit tp-hide"
-                     ng-click="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType) || setEditExpenseId(product.id)"
-                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType)}"></a>
+                     ng-click="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role) || setEditExpenseId(product.id)"
+                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)}"></a>
                 </div>
 
               </div>
@@ -437,8 +438,8 @@
                 <div class="table-content-action pull-right">
                   <a href="javascript:void(0)" class="icn-edit tp-hide"
                      tooltip="Edit Service" tooltip-placement="top"
-                     ng-click="PermissionsService.isEditUpdateDisabled(listType) || setEditExpenseId(service.id)"
-                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(listType)}">
+                     ng-click="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role) || setEditExpenseId(service.id)"
+                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)}">
                   </a>
                 </div>
               </div>
