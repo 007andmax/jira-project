@@ -24,16 +24,14 @@
 
         $scope.changeTicketPriority = function (priority) {
           TicketsService.changePriority($scope.sharedState.checkedTicketsIds, priority, function () {
-            UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets priorities have been change to ' + priority);
-            hideNotification();
+            UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets priorities have been change to ' + priority, true);
             $scope.uncheckAllTickets();
           });
         };
 
         $scope.changeTicketStatus = function (status) {
           TicketsService.changeStatus($scope.sharedState.checkedTicketsIds, status, function () {
-            UserNotificationService.show('The tickets “' + $scope.sharedState.checkedTicketsIds.length + '” status has been changed to "' + $scope.ticketStatus[status] + '"');
-            hideNotification();
+            UserNotificationService.show('The tickets “' + $scope.sharedState.checkedTicketsIds.length + '” status has been changed to "' + $scope.ticketStatus[status] + '"', true);
             $scope.uncheckAllTickets();
           });
         };
@@ -47,18 +45,17 @@
             if ($scope.currentUser.role === "USER") {
 
               TicketsService.reportAsSpam($scope.sharedState.checkedTicketsIds, function () {
-                UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been reported as spam');
+                UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been reported as spam', true);
                 $scope.uncheckAllTickets();
               });
 
             } else {
 
               TicketsService.markAsSpam($scope.sharedState.checkedTicketsIds, function () {
-                UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been marked as spam');
+                UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been marked as spam', true);
                 $scope.uncheckAllTickets();
               });
             }
-            hideNotification();
           });
         };
 
@@ -69,8 +66,7 @@
         $scope.moveToTrash = function (movedWay) {
           TicketsService.changeTrashFlag($scope.sharedState.checkedTicketsIds, movedWay, function () {
             if (movedWay) {
-              UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been moved to Trash');
-              hideNotification();
+              UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been moved to Trash', true);
             }
             $scope.uncheckAllTickets()
           });
@@ -87,8 +83,7 @@
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             TicketsService.deleteForever($scope.sharedState.checkedTicketsIds, function () {
 
-              UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been deleted');
-              hideNotification();
+              UserNotificationService.show('The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets have been deleted', true);
               $scope.uncheckAllTickets()
             });
           });
@@ -97,12 +92,6 @@
         $scope.$on('uncheckAllTickets', function () {
           $scope.sharedState.checkedTicketsIds = [];
         });
-
-        function hideNotification() {
-          $timeout(function () {
-            UserNotificationService.hide();
-          }, 3000);
-        }
 
       }]);
 

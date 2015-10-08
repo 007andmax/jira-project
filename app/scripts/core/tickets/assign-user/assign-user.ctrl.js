@@ -65,24 +65,17 @@
             TicketsService.assignTo($scope.ticketId, $scope.userToAssign.id, function () {
 
               if ($scope.isBulkOperation) {
-                UserNotificationService.show('The selected ' + $scope.ticketNumber + ' tickets have been assigned to ' + $scope.getUserName($scope.userToAssign));
+                UserNotificationService.show('The selected ' + $scope.ticketNumber + ' tickets have been assigned to ' + $scope.getUserName($scope.userToAssign), true);
                 $rootScope.$broadcast('uncheckAllTickets')
 
               } else {
-                UserNotificationService.show('Ticket “' + $scope.ticketNumber + '” has been assigned to ' + $scope.getUserName($scope.userToAssign));
+                UserNotificationService.show('Ticket “' + $scope.ticketNumber + '” has been assigned to ' + $scope.getUserName($scope.userToAssign), true);
               }
 
-              hideNotification();
               $state.go('tickets', {listType: $stateParams.listType});
             });
           }
-        }
-
-        function hideNotification() {
-          $timeout(function () {
-            UserNotificationService.hide();
-          }, 3000);
-        }
+        };
 
       }]);
 

@@ -25,13 +25,11 @@
 
               $scope.openEditTagForm();
 
-              if(!$scope.editTag.id){
-                UserNotificationService.show('New Label "' + $scope.editTag.name + '" has been created');
-              } else if ($scope.tag.name !== $scope.editTag.name){
-                UserNotificationService.show('The label “' + $scope.tag.name + '” has been modified to “' + $scope.editTag.name + '”');
+              if (!$scope.editTag.id) {
+                UserNotificationService.show('New Label "' + $scope.editTag.name + '" has been created', true);
+              } else if ($scope.tag.name !== $scope.editTag.name) {
+                UserNotificationService.show('The label “' + $scope.tag.name + '” has been modified to “' + $scope.editTag.name + '”', true);
               }
-
-              hideNotification();
             })
           } else {
             tryToSaveTag = true
@@ -54,8 +52,7 @@
 
             TicketTagsService.deleteTag($scope.editTag.id, function () {
               $scope.openEditTagForm();
-              UserNotificationService.show('The label “' + $scope.editTag.name + '” has been deleted');
-              hideNotification();
+              UserNotificationService.show('The label “' + $scope.editTag.name + '” has been deleted', true);
             })
 
           }
@@ -78,12 +75,6 @@
             }
           }
         };
-
-        function hideNotification(){
-          $timeout(function(){
-            UserNotificationService.hide();
-          }, 3000);
-        }
 
       }]);
 

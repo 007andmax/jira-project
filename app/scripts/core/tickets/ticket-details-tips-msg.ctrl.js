@@ -8,8 +8,7 @@
 
         $scope.markAsOpen = function () {
           TicketsService.changeStatus($scope.ticketDetails.id, 'IN_PROGRESS', function () {
-            UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open');
-            $scope.hideNotification();
+            UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
             $state.go('tickets', {listType: $stateParams.listType});
           });
         };

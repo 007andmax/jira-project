@@ -25,8 +25,7 @@
 
           TicketTagsService.link(tagsToSend, function () {
 //TODO messages
-            UserNotificationService.show('TODO messages');
-            $scope.hideNotification();
+            UserNotificationService.show('TODO messages', true);
 
           })
 
@@ -48,8 +47,7 @@
         }, true);
 
         $scope.showNotificationMessage = function(){
-          UserNotificationService.show('More than 3 labels cannot be applied');
-          $scope.hideNotification();
+          UserNotificationService.show('More than 3 labels cannot be applied', true);
         }
 
       }]);

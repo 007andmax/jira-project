@@ -43,8 +43,7 @@
                   userPopUpMessage = 'The ticket update containing a note has been deleted';
                 UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
                   TicketsService.deleteTicketUpdate($scope.ticketDetails.id, $scope.ticketUpdate.id, function () {
-                    UserNotificationService.show(userPopUpMessage);
-                    $scope.hideNotification();
+                    UserNotificationService.show(userPopUpMessage, true);
                   });
                 });
                 return;
@@ -64,8 +63,7 @@
 
                 UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
                   TicketsService.deleteTicketUpdate($scope.ticketDetails.id, $scope.ticketUpdate.id, function () {
-                    UserNotificationService.show(userPopUpMessage);
-                    $scope.hideNotification();
+                    UserNotificationService.show(userPopUpMessage, true);
                   });
                 });
                 return;
@@ -85,8 +83,7 @@
 
                 UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
                   TicketsService.deleteTicketUpdate($scope.ticketDetails.id, $scope.ticketUpdate.id, function () {
-                    UserNotificationService.show(userPopUpMessage);
-                    $scope.hideNotification();
+                    UserNotificationService.show(userPopUpMessage, true);
                   });
                 });
                 return;

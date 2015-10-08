@@ -118,11 +118,5 @@
           SharedStateService.clearState('ticketsHeader');
         });
 
-        $scope.hideNotification = function () {
-          $timeout(function () {
-            UserNotificationService.hide();
-          }, 3000);
-        }
-
       }]);
 }());

@@ -73,8 +73,7 @@
 
           $scope.updateAndCloseTicket = function () {
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
-              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed');
-              $scope.hideNotification();
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $state.go('tickets', {listType: $stateParams.listType});
             });
           };
@@ -97,15 +96,13 @@
 
           $scope.changeTicketPriority = function (priority) {
             TicketsService.changePriority($scope.ticketDetails.id, priority, function () {
-              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” priority has been changed to ' + priority);
-              $scope.hideNotification();
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” priority has been changed to ' + priority, true);
             });
           };
 
           $scope.changeTicketStatus = function (status) {
             TicketsService.changeStatus($scope.ticketDetails.id, status, function () {
-              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"');
-              $scope.hideNotification();
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"', true);
             });
           };
 
@@ -119,7 +116,7 @@
 
                 TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
 
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam');
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam', true);
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
 
@@ -127,19 +124,17 @@
 
                 TicketsService.markAsSpam($scope.ticketDetails.id, function () {
 
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam');
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
               }
-              $scope.hideNotification();
             });
           };
 
           $scope.moveToTrash = function (movedWay) {
             TicketsService.changeTrashFlag($scope.ticketDetails.id, movedWay, function () {
               if (movedWay) {
-                UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been moved to Trash');
-                $scope.hideNotification();
+                UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been moved to Trash', true);
               }
               $state.go('tickets', {listType: $stateParams.listType});
             });
@@ -281,14 +276,12 @@
 
                 case 'NOTE':
 
-                  UserNotificationService.show('New ticket update containing a note has been posted');
-                  $scope.hideNotification();
+                  UserNotificationService.show('New ticket update containing a note has been posted', true);
                   return;
 
                 case 'SERVICE':
                   if (ticketUpdateToSend.services.length > 1) {
-                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted');
-                    $scope.hideNotification();
+                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
                   } else {
                     UserNotificationService.show('New ticket update containing a service has been posted');
                     $scope.hideNotification();
@@ -297,11 +290,9 @@
 
                 case 'PRODUCT':
                   if ($scope.ticketUpdate.products.length > 1) {
-                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.products.length + ' products has been posted');
-                    $scope.hideNotification();
+                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.products.length + ' products has been posted', true);
                   } else {
-                    UserNotificationService.show('New ticket update containing a product has been posted');
-                    $scope.hideNotification();
+                    UserNotificationService.show('New ticket update containing a product has been posted', true);
                   }
                   return;
               }
@@ -324,8 +315,7 @@
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
               TicketsService.deleteForever($scope.ticketDetails.id, function () {
 
-                UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been deleted');
-                $scope.hideNotification();
+                UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been deleted', true);
 
                 $state.go('tickets', {listType: $stateParams.listType});
               });

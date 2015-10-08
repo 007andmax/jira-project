@@ -90,7 +90,7 @@
             TicketsService.createTicket($scope.ticket, function () {
               $scope.savingInProcess = false;
               $modalInstance.dismiss();
-              UserNotificationService.show('New Ticket “' +  $scope.ticketNumber + '” has been created');
+              UserNotificationService.show('New Ticket “' +  $scope.ticketNumber + '” has been created', true);
               hideNotification();
             });
           } else {
@@ -113,12 +113,6 @@
           return {
             width: progress + '%'
           };
-        }
-
-        function hideNotification() {
-          $timeout(function () {
-            UserNotificationService.hide();
-          }, 3000);
         }
 
       }]);

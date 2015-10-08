@@ -65,8 +65,7 @@
           TicketTagsService.link(bulkTicketsTagsToSend, function () {
             $scope.uncheckAllTickets();
 //TODO tags messages
-            UserNotificationService.show('TODO messages');
-            hideNotification()
+            UserNotificationService.show('TODO messages', true);
           })
         };
 
@@ -86,15 +85,8 @@
         }, true);
 
         $scope.showNotificationMessage = function () {
-          UserNotificationService.show('More than 3 labels cannot be applied');
-          hideNotification();
+          UserNotificationService.show('More than 3 labels cannot be applied', true);
         };
-
-        function hideNotification() {
-          $timeout(function () {
-            UserNotificationService.hide();
-          }, 3000);
-        }
 
       }]);
 }());
