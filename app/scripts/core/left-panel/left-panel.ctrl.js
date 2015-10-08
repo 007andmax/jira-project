@@ -3,10 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
-    ['$scope', 'TicketsService', 'TicketTagsService', 'quicktech.common.services.SharedStateService', '$stateParams', 'quicktech.common.services.PermissionsService',
-      function ($scope, TicketsService, TicketTagsService, SharedStateService, $stateParams, PermissionsService) {
+    ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
+      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService) {
 
-        var ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
         $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
 
@@ -17,9 +16,8 @@
           }
           return $scope.ticketCounts[$stateParams.listType.toUpperCase()];
 
-        }, function (count) {
+        }, function () {
           $scope.listType = $stateParams.listType;
-          ticketsHeaderState.count = count;
         })
 
       }]);

@@ -10,6 +10,7 @@
         controller: 'quicktech.core.tickets.assignUserCtrl',
         scope: {
           ticketId: "=aubTicketId",
+          ticketNumber: "=aubTicketNumber",
           currentUser: '=aubCurrentUser',
           usersCurrentCompany: "=users",
           isBulkOperation: '=aubIsBulkOperation'

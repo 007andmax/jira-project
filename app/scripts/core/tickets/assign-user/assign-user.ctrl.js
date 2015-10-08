@@ -4,7 +4,8 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.assignUserCtrl',
     ['$scope', 'TicketsService', 'UsersService', '$stateParams', '$state', '$rootScope',
-      function ($scope, TicketsService, UsersService, $stateParams, $state, $rootScope) {
+      'quicktech.common.services.UserNotificationService', '$timeout',
+      function ($scope, TicketsService, UsersService, $stateParams, $state, $rootScope, UserNotificationService, $timeout) {
 
         $scope.userToAssign = {};
         $scope.assignToModel = '';
@@ -64,11 +65,23 @@
             TicketsService.assignTo($scope.ticketId, $scope.userToAssign.id, function () {
 
               if ($scope.isBulkOperation) {
+                UserNotificationService.show('The selected ' + $scope.ticketNumber + ' tickets have been assigned to ' + $scope.getUserName($scope.userToAssign));
                 $rootScope.$broadcast('uncheckAllTickets')
+
+              } else {
+                UserNotificationService.show('Ticket “' + $scope.ticketNumber + '” has been assigned to ' + $scope.getUserName($scope.userToAssign));
               }
+
+              hideNotification();
               $state.go('tickets', {listType: $stateParams.listType});
             });
           }
+        }
+
+        function hideNotification() {
+          $timeout(function () {
+            UserNotificationService.hide();
+          }, 3000);
         }
 
       }]);

@@ -3,10 +3,10 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
-      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state',
-        'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
+      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state', 'ProductsService',
+        '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader,
-                  $state, ProductsService, $sce, $timeout, UserConfirmationsService) {
+                  $state, ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService) {
 
           $scope.ticketTags = {};
           $scope.allUpdatesLoaded = false;
@@ -14,7 +14,12 @@
           $scope.updateSharedUsersList = [];
           $scope.productCategories = ProductsService.getCategories($scope);
 
+          UserNotificationService.show('Loading...');
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $scope, true, function (details) {
+
+            $timeout(function () {
+              UserNotificationService.hide();
+            }, 1500);
 
             var unreadUpdatesId = [];
 
@@ -53,7 +58,6 @@
               $timeout(function () {
                 TicketsService.markUpdateAsRead($scope.ticketDetails.id, unreadUpdatesId)
               }, 1500);
-
             }
           });
 
@@ -69,6 +73,8 @@
 
           $scope.updateAndCloseTicket = function () {
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed');
+              $scope.hideNotification();
               $state.go('tickets', {listType: $stateParams.listType});
             });
           };
@@ -82,7 +88,7 @@
               $state.go('tickets', {listType: 'user'}).then(function () {
                 $state.go('tickets.details', {ticketId: $scope.ticketDetails.id});
               });
-            })
+            });
           };
 
           $scope.openSetting = function () {
@@ -90,11 +96,17 @@
           };
 
           $scope.changeTicketPriority = function (priority) {
-            TicketsService.changePriority($scope.ticketDetails.id, priority);
+            TicketsService.changePriority($scope.ticketDetails.id, priority, function () {
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” priority has been changed to ' + priority);
+              $scope.hideNotification();
+            });
           };
 
           $scope.changeTicketStatus = function (status) {
-            TicketsService.changeStatus($scope.ticketDetails.id, status);
+            TicketsService.changeStatus($scope.ticketDetails.id, status, function () {
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"');
+              $scope.hideNotification();
+            });
           };
 
           $scope.moveIntoSpam = function () {
@@ -104,20 +116,31 @@
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
 
               if ($scope.currentUser.role === "USER") {
+
                 TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
+
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam');
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
 
               } else {
+
                 TicketsService.markAsSpam($scope.ticketDetails.id, function () {
+
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam');
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
               }
+              $scope.hideNotification();
             });
           };
 
           $scope.moveToTrash = function (movedWay) {
             TicketsService.changeTrashFlag($scope.ticketDetails.id, movedWay, function () {
+              if (movedWay) {
+                UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been moved to Trash');
+                $scope.hideNotification();
+              }
               $state.go('tickets', {listType: $stateParams.listType});
             });
           };
@@ -172,11 +195,11 @@
             if (shared.user && shared.user.id) {
               var user = $scope.getUserById(shared.user.id);
 
-              return user.accountType === 'TECH' ? 'Team Member' : 'Client User'
+              return user.accountType === 'TECH' ? 'Team Member' : 'Client User';
 
             } else {
 
-              return 'Vendor'
+              return 'Vendor';
             }
           };
 
@@ -254,6 +277,35 @@
 
             TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
 
+              switch (ticketUpdateToSend.type) {
+
+                case 'NOTE':
+
+                  UserNotificationService.show('New ticket update containing a note has been posted');
+                  $scope.hideNotification();
+                  return;
+
+                case 'SERVICE':
+                  if (ticketUpdateToSend.services.length > 1) {
+                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted');
+                    $scope.hideNotification();
+                  } else {
+                    UserNotificationService.show('New ticket update containing a service has been posted');
+                    $scope.hideNotification();
+                  }
+                  return;
+
+                case 'PRODUCT':
+                  if ($scope.ticketUpdate.products.length > 1) {
+                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.products.length + ' products has been posted');
+                    $scope.hideNotification();
+                  } else {
+                    UserNotificationService.show('New ticket update containing a product has been posted');
+                    $scope.hideNotification();
+                  }
+                  return;
+              }
+
               $scope.$broadcast('setCreateUpdateFormToDefault');
               $scope.selectUpdateSharedUser = {};
               $scope.updateSharedUsersList = [];
@@ -268,8 +320,13 @@
           $scope.deleteForever = function () {
             var confirmMesage = 'The ticket will become inaccessible. Continue with permanent deletion?',
               confirmButton = 'Delete';
+
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
               TicketsService.deleteForever($scope.ticketDetails.id, function () {
+
+                UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been deleted');
+                $scope.hideNotification();
+
                 $state.go('tickets', {listType: $stateParams.listType});
               });
             });

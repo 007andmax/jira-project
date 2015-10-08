@@ -4,7 +4,8 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService) {
+      'quicktech.common.services.UserNotificationService', '$timeout',
+      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService, $timeout) {
 
         $scope.ticket = {};
         $scope.ticketAttachments = [];
@@ -89,6 +90,8 @@
             TicketsService.createTicket($scope.ticket, function () {
               $scope.savingInProcess = false;
               $modalInstance.dismiss();
+              UserNotificationService.show('New Ticket “' +  $scope.ticketNumber + '” has been created');
+              hideNotification();
             });
           } else {
             $scope.triedToSaveTicket = true;
@@ -110,6 +113,12 @@
           return {
             width: progress + '%'
           };
+        }
+
+        function hideNotification() {
+          $timeout(function () {
+            UserNotificationService.hide();
+          }, 3000);
         }
 
       }]);

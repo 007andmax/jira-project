@@ -13,7 +13,6 @@
 
             var $document = $(document),
               scrollListenerInitialize;
-            //loader = $('#loading');
 
             scope.ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
@@ -43,8 +42,15 @@
                 paramsToSend.companyId = params.companyId;
               }
 
+              UserNotificationService.show('Loading...');
+
               scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
 
+                scope.countHeaderTickets = TicketsService.getCount(paramsToSend, scope, function () {
+                  scope.ticketsHeaderState.count = scope.countHeaderTickets.count;
+                });
+
+                UserNotificationService.hide();
                 scope.onTicketRendering = function (last) {
 
                   if (last) {
@@ -55,13 +61,10 @@
 
                       if (ticketConteiner.height() < $(window).height()) {
 
-                        //UserNotificationService.show('Loading ...');
-                        //loader.show();
-
+                        UserNotificationService.show('Loading...');
                         TicketsService.loadMore(scope, function (moreTicket) {
 
-                          //UserNotificationService.hide();
-                          //loader.hide();
+                          UserNotificationService.hide();
 
                           if (moreTicket.length === 0) {
                             $document.off('scroll');
@@ -76,11 +79,11 @@
                 initScrollListener()
 
               });
-            };
+            }
 
-            function initScrollListener(){
+            function initScrollListener() {
 
-              if(scrollListenerInitialize){
+              if (scrollListenerInitialize) {
                 return;
               }
 
@@ -90,13 +93,9 @@
 
                 if ($document.scrollTop() > ($document.height() - 750)) {
 
-                  //UserNotificationService.show('Loading ...');
-                  //loader.show();
-
+                  UserNotificationService.show('Loading...');
                   TicketsService.loadMore(scope, function (moreTicket) {
-
-                    //UserNotificationService.hide();
-                    //loader.hide();
+                    UserNotificationService.hide();
 
                     if (moreTicket.length === 0) {
                       $document.off('scroll');

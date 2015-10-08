@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.headerTicketTagsCtrl',
-    ['$scope', 'TicketTagsService',
-      function ($scope, TicketTagsService) {
+    ['$scope', 'TicketTagsService', 'quicktech.common.services.UserNotificationService', '$timeout',
+      function ($scope, TicketTagsService, UserNotificationService, $timeout) {
 
         var bulkTicketsTagsToSend = {};
         $scope.bulkTicketsTags = {};
@@ -64,6 +64,9 @@
         $scope.bulkApplyTagsToTicket = function () {
           TicketTagsService.link(bulkTicketsTagsToSend, function () {
             $scope.uncheckAllTickets();
+//TODO tags messages
+            UserNotificationService.show('TODO messages');
+            hideNotification()
           })
         };
 
@@ -81,6 +84,17 @@
             $scope.disabledTags = false;
           }
         }, true);
+
+        $scope.showNotificationMessage = function () {
+          UserNotificationService.show('More than 3 labels cannot be applied');
+          hideNotification();
+        };
+
+        function hideNotification() {
+          $timeout(function () {
+            UserNotificationService.hide();
+          }, 3000);
+        }
 
       }]);
 }());

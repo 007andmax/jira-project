@@ -74,7 +74,8 @@
 
                 <div class="dropdown-submenu-wrapper">
 
-                  <ul class="tag-list dropdown-menu" role="menu" ng-init="ticketId = ticketDetails.id"
+                  <ul class="tag-list dropdown-menu" role="menu"
+                      ng-init="ticketId = ticketDetails.id; ticketName = ticketDetails.name"
                       ng-controller="quicktech.core.tickets.ticketTagsCtrl"
                       ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
                   </ul>
@@ -89,7 +90,9 @@
 
                 <div class="dropdown-submenu-wrapper">
                   <div class="dropdown-menu assign-ticket-menu" stop-propagation="click"
-                       assign-user-button aub-ticket-id="ticketDetails.id" users="usersCurrentCompany"
+                       assign-user-button aub-ticket-id="ticketDetails.id"
+                       aub-ticket-number="ticketDetails.number"
+                       users="usersCurrentCompany"
                        aub-current-user="currentUser">
                   </div>
                 </div>
@@ -163,7 +166,7 @@
             </a>-->
               <!--</li>-->
 
-              <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+              <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)  && !ticket.hasInvoice">
                 <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType)"-->
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">
                   Move to Trash
@@ -400,8 +403,9 @@
 
                 <div class="table-content-action pull-right">
                   <a href="javascript:void(0)" tooltip="edit product" tooltip-placement="top"
-                     class="icn-edit tp-hide" ng-click="PermissionsService.isEditUpdateDisabled(listType) || setEditExpenseId(product.id)"
-                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(listType)}"></a>
+                     class="icn-edit tp-hide"
+                     ng-click="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType) || setEditExpenseId(product.id)"
+                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType)}"></a>
                 </div>
 
               </div>
@@ -432,7 +436,8 @@
 
                 <div class="table-content-action pull-right">
                   <a href="javascript:void(0)" class="icn-edit tp-hide"
-                     tooltip="Edit Service" tooltip-placement="top" ng-click="PermissionsService.isEditUpdateDisabled(listType) || setEditExpenseId(service.id)"
+                     tooltip="Edit Service" tooltip-placement="top"
+                     ng-click="PermissionsService.isEditUpdateDisabled(listType) || setEditExpenseId(service.id)"
                      ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(listType)}">
                   </a>
                 </div>

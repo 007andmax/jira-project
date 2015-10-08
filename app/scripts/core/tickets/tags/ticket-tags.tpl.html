@@ -3,7 +3,8 @@
     <input type="checkbox" ng-model="ticketTags[tag.id]"
            ng-class="{'disabled': disabledTags && !ticketTags[tag.id]}"
            ng-disabled="disabledTags && !ticketTags[tag.id]">
-    <span class="control-indicator pull-left"></span>
+    <span class="control-indicator pull-left"
+          ng-click="disabledTags && !ticketTags[tag.id] && showNotificationMessage()"></span>
     <span class="tag-color color{{tag.color}}"></span>
     {{tag.name}}
   </label>

@@ -111,7 +111,6 @@
             delete $scope.sharedState.searchFilter.status;
           }
 
-          $scope.searchByParamsDropdown.isOpen = false;
         };
 
         $scope.selectItem = function (item) {

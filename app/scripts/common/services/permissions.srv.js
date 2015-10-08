@@ -166,11 +166,12 @@
         return isTrue;
       }
 
-      function isEditUpdateDisabled(listType) {
+      function isEditUpdateDisabled(ticketStatus, listType) {
 
+        var statusClosed = ticketStatus === 'COMPLETED';
         var isTrue = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM || listType === LIST_TYPES.SHARED;
 
-        return isTrue;
+        return statusClosed || isTrue;
       }
 
       function isAditionalActionAccessForUser(ticket, user) {
@@ -261,9 +262,9 @@
         }
       }
 
-      function isShowLabelsOnLeftPanel(listType){
-        for(var type in LIST_TYPES){
-          if (listType === LIST_TYPES[type]){
+      function isShowLabelsOnLeftPanel(listType) {
+        for (var type in LIST_TYPES) {
+          if (listType === LIST_TYPES[type]) {
             return true;
           }
         }

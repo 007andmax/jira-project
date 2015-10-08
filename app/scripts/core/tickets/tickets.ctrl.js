@@ -5,7 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'TicketTagsService',
       'quicktech.common.services.PermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService, PermissionsService, SharedStateService, Utils) {
+      'quicktech.common.services.UserNotificationService', '$timeout',
+      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService,
+                PermissionsService, SharedStateService, Utils, UserNotificationService, $timeout) {
 
         var availableTypes = ['unassigned', 'user', 'shared', 'spam'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
@@ -91,6 +93,7 @@
         function changeSelectedTickets(id, status) {
 
           ticketsHeaderState.checkedCompletedTicket = false;
+          ticketsHeaderState.checkedHasInvoiceTicket = false;
           ticketsHeaderState.checkedTicketsIds = [];
           ticketsHeaderState.ticketTags = {};
 
@@ -103,6 +106,10 @@
               if (!ticketsHeaderState.checkedCompletedTicket && Utils.findById($scope.tickets, ticketId).status === 'COMPLETED') {
                 ticketsHeaderState.checkedCompletedTicket = true;
               }
+
+              if (!ticketsHeaderState.checkedHasInvoiceTicket && Utils.findById($scope.tickets, ticketId).hasInvoice) {
+                ticketsHeaderState.checkedHasInvoiceTicket = true;
+              }
             }
           }
         }
@@ -110,6 +117,12 @@
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('ticketsHeader');
         });
+
+        $scope.hideNotification = function () {
+          $timeout(function () {
+            UserNotificationService.hide();
+          }, 3000);
+        }
 
       }]);
 }());

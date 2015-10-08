@@ -127,7 +127,7 @@
           </a>
         </li>
         <!-- delete, visible when in spam, is marked by admin and current user is admin -->
-        <li ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+        <li ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role) && !ticket.hasInvoice">
           <!--ng-if="ActionRightsService.isMoveToTrashIconVisible(listType, MarkedSpamByRole(ticket),currentUser.role) || (currentUser.role === 'ADMIN' && listType === 'user' && ticket.status === 'COMPLETED') "-->
           <a href="javascript:void(0)" tooltip="move to trash" tooltip-placement="top"
              ng-click="moveToTrash(true)">
@@ -207,7 +207,9 @@
           </a>
 
           <div class="dropdown-menu" stop-propagation="click" ng-if="isShowAssignUser"
-               assign-user-button aub-ticket-id="ticket.id" users="usersCurrentCompany"
+               assign-user-button aub-ticket-id="ticket.id"
+               aub-ticket-number="ticket.number"
+               users="usersCurrentCompany"
                aub-current-user="currentUser">
           </div>
 
@@ -222,7 +224,7 @@
           </a>
 
           <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click"
-              ng-controller="quicktech.core.tickets.ticketTagsCtrl" ng-init="ticketId = ticket.id"
+              ng-controller="quicktech.core.tickets.ticketTagsCtrl" ng-init="ticketId = ticket.id; ticketName = ticket.name"
               ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
           </ul>
         </li>
@@ -260,7 +262,7 @@
       </span>
 
       <span class="label label-default label-ticket-number">{{ ticket.number }}</span>
-      <span class="icn-load-green pull-right" ng-if="ticket.hasNewUpdates"></span>
+      <span class="icn-load-green pull-right animation-hide" ng-show="ticket.hasNewUpdates"></span>
       <!--ng-if="ticket.hasNewUpdates == true"-->
       <span class="label label-success pull-right" ng-show="ticket.unread">
         <!--ng-if="(listType !== 'user' || listType !== 'shared') && ticket.unread==true"-->

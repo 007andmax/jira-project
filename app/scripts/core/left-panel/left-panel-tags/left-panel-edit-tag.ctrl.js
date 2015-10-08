@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelEditTagCtrl',
-    ['$scope', 'TicketTagsService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, TicketTagsService, UserConfirmationsService) {
+    ['$scope', '$timeout', 'TicketTagsService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, $timeout, TicketTagsService, UserConfirmationsService, UserNotificationService) {
 
         var tryToSaveTag = false;
         $scope.tagColors = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -22,7 +22,16 @@
         $scope.saveTag = function (form) {
           if (form.$valid) {
             TicketTagsService.save($scope.editTag, function () {
+
               $scope.openEditTagForm();
+
+              if(!$scope.editTag.id){
+                UserNotificationService.show('New Label "' + $scope.editTag.name + '" has been created');
+              } else if ($scope.tag.name !== $scope.editTag.name){
+                UserNotificationService.show('The label “' + $scope.tag.name + '” has been modified to “' + $scope.editTag.name + '”');
+              }
+
+              hideNotification();
             })
           } else {
             tryToSaveTag = true
@@ -31,17 +40,24 @@
 
         $scope.deleteTag = function () {
           if ($scope.editTag.id && $scope.tagsCount[$scope.editTag.id]) {
+
             var confirmMesage = 'The label “Device” is associated with ' + $scope.tagsCount[$scope.editTag.id] + ' Ticket(s). Continue with deletion?',
               confirmButton = 'Delete';
+
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
               TicketTagsService.deleteTag($scope.editTag.id, function () {
                 $scope.openEditTagForm();
               })
             });
+
           } else {
+
             TicketTagsService.deleteTag($scope.editTag.id, function () {
               $scope.openEditTagForm();
+              UserNotificationService.show('The label “' + $scope.editTag.name + '” has been deleted');
+              hideNotification();
             })
+
           }
         };
 
@@ -62,6 +78,12 @@
             }
           }
         };
+
+        function hideNotification(){
+          $timeout(function(){
+            UserNotificationService.hide();
+          }, 3000);
+        }
 
       }]);
 
