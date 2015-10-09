@@ -1,6 +1,6 @@
 <div class="ticket-actions-footer">
 
-  <div class="pull-left clearfix">
+  <div class="pull-left clearfix" ng-if="!(currentUser.role === 'USER')">
     <label class="control checkbox">
       <input type="checkbox" ng-model="ticketUpdate.notifyTicketCreator">
       <span class="control-indicator"></span>

@@ -31,11 +31,12 @@
         return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForShared;
       }
 
-      function isMoveIntoSpamVisible(listType, userRole) {
+      function isMoveIntoSpamVisible(listType, userRole, isReport, isMark) {
 
         var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && userRole === USER_ROLES.USER;
+        var isTrueForSpam = listType === LIST_TYPES.SPAM && userRole !== USER_ROLES.USER && isReport && !isMark;
 
-        return isTrueForUnassigned;
+        return isTrueForUnassigned || isTrueForSpam;
       }
 
       function isAssignTicketToVisible(listType, userRole) {
@@ -151,8 +152,9 @@
 
         var isFalseForTrash = listType === LIST_TYPES.TRASH;
         var isFalseForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.USER);
+        var isFalseForSpam = listType === LIST_TYPES.SPAM;
 
-        return !(isFalseForTrash || isFalseForShared);
+        return !(isFalseForTrash || isFalseForShared || isFalseForSpam);
       }
 
       function isCreateTicketUpdateVisible(listType, ticketStatus) {
@@ -224,6 +226,21 @@
         }
       }
 
+      function isTipVisibleOnSpamPage(listType, ticket, userRole, option) {
+
+        if (listType !== LIST_TYPES.SPAM) {
+          return false;
+        }
+
+        if (option === 'USER_SPAM') {
+          return userRole === USER_ROLES.USER && ticket.reportedAsSpamAt;
+        } else if (option === 'ADMIN_DELETE'){
+          return (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN) && ticket.markedAsSpamAt;
+        } else if (option === 'ADMIN_SPAM'){
+          return (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN) && !ticket.markedAsSpamAt && ticket.reportedAsSpamAt;
+        }
+      }
+
       function isUserMsgTipsVisible(listType, ticket, user, option) {
 
         if (listType === LIST_TYPES.UNASSIGNED) {
@@ -278,6 +295,21 @@
         return isDisablenOnPage || isDisabledForUser;
       }
 
+      function isRestoreFromSpamVisible(listType){
+
+        var isTrueForSpamList = listType === LIST_TYPES.SPAM;
+
+        return isTrueForSpamList;
+      }
+
+      function isDeleteForeverVisible(listType, userRole, ticket){
+
+        var isTrueForTrashList = listType === LIST_TYPES.TRASH;
+        var isTrueForSpamList = listType === LIST_TYPES.SPAM && userRole !== USER_ROLES.USER && ticket.markedAsSpamAt;
+
+        return isTrueForTrashList || isTrueForSpamList;
+      }
+
       return {
         isMoreActionsMenuVisible: isMoreActionsMenuVisible,
         isMoveIntoSpamVisible: isMoveIntoSpamVisible,
@@ -300,7 +332,10 @@
         isTipVisibleOnSharedPage: isTipVisibleOnSharedPage,
         isUserMsgTipsVisible: isUserMsgTipsVisible,
         isShowLabelsOnLeftPanel: isShowLabelsOnLeftPanel,
-        isDisabledDeleteTicketUpdate: isDisabledDeleteTicketUpdate
+        isDisabledDeleteTicketUpdate: isDisabledDeleteTicketUpdate,
+        isRestoreFromSpamVisible: isRestoreFromSpamVisible,
+        isDeleteForeverVisible: isDeleteForeverVisible,
+        isTipVisibleOnSpamPage: isTipVisibleOnSpamPage
       }
 
     }]);

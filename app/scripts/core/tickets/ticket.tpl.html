@@ -120,7 +120,7 @@
           </ul>
         </li>
         <!-- delete forever, only visible in trash -->
-        <li ng-if="listType === 'trash' || listType === 'spam'">
+        <li ng-if="PermissionsService.isDeleteForeverVisible(listType, currentUser.role, ticket)">
           <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType) || ActionRightsService.isDeleteSpamForAdminVisible(listType, MarkedSpamByRole(ticket),currentUser.role)"-->
           <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
             <span class="icn-ticket-del icn"></span>
@@ -143,7 +143,7 @@
           </a>
         </li>
 
-        <li ng-show="false">
+        <li ng-if="PermissionsService.isRestoreFromSpamVisible(listType, currentUser.role)">
           <!--ng-if="ActionRightsService.isRestoreForSpamVisible(listType)"-->
           <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
              ng-click="restoreFromSpam()">
@@ -152,7 +152,7 @@
         </li>
 
         <!-- mark as spam icon, visible when in unassigned and for USER only -->
-        <li ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role)">
+        <li ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role, ticket.reportedAsSpamAt,  ticket.markedAsSpamAt)">
           <!--ng-if="ActionRightsService.isMarkAsSpamIconVisible(listType, MarkedSpamByRole(ticket), currentUser.role)"-->
           <a href="javascript:void(0);" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"
              tooltip-placement="top" ng-click="moveIntoSpam()">

@@ -22,9 +22,17 @@
 
             function getTicketsList(params) {
 
-              var paramsToSend = {
-                filter: $stateParams.listType.toUpperCase()
-              };
+              var paramsToSend = {};
+
+              if ($stateParams.listType === 'spam') {
+                if (scope.currentUser.role === 'USER') {
+                  paramsToSend.filter = 'USER_SPAM';
+                } else {
+                  paramsToSend.filter = 'ADMIN_MARKED_AS_SPAM';
+                }
+              } else {
+                paramsToSend.filter = $stateParams.listType.toUpperCase();
+              }
 
               if (params.priority) {
                 paramsToSend.priority = params.priority;
@@ -51,12 +59,13 @@
                 });
 
                 UserNotificationService.hide();
+
                 scope.onTicketRendering = function (last) {
 
                   if (last) {
 
                     var ticketConteiner = element.find('[tu-tickets-container]');
-
+                    scope.markedSpamMesage = true;
                     $timeout(function () {
 
                       if (ticketConteiner.height() < $(window).height()) {
@@ -64,11 +73,13 @@
                         UserNotificationService.show('Loading...');
                         TicketsService.loadMore(scope, function (moreTicket) {
 
-                          UserNotificationService.hide();
-
-                          if (moreTicket.length === 0) {
-                            $document.off('scroll');
+                          if ($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER' && moreTicket.length === 0 && paramsToSend.filter === ADMIN_MARKED_AS_SPAM) {
+                            getReportSpamTicket(paramsToSend);
                           }
+
+                          UserNotificationService.hide();
+                          offScrolEvent(paramsToSend, moreTicket);
+
                         })
                       }
                     }, 0);
@@ -76,12 +87,12 @@
                   }
                 };
 
-                initScrollListener()
+                initScrollListener(paramsToSend)
 
               });
             }
 
-            function initScrollListener() {
+            function initScrollListener(paramsToSend) {
 
               if (scrollListenerInitialize) {
                 return;
@@ -94,12 +105,16 @@
                 if ($document.scrollTop() > ($document.height() - 750)) {
 
                   UserNotificationService.show('Loading...');
-                  TicketsService.loadMore(scope, function (moreTicket) {
-                    UserNotificationService.hide();
 
-                    if (moreTicket.length === 0) {
-                      $document.off('scroll');
+                  TicketsService.loadMore(scope, function (moreTicket) {
+
+                    if ($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER' && moreTicket.length === 0) {
+                      getReportSpamTicket(paramsToSend);
                     }
+
+                    UserNotificationService.hide();
+                    offScrolEvent(paramsToSend, moreTicket);
+
                   })
                 }
               });
@@ -110,6 +125,27 @@
               });
 
             }
+
+            function getReportSpamTicket(paramsToSend) {
+
+              paramsToSend.filter = 'ADMIN_REPORTED_AS_SPAM';
+
+              scope.reportSpamTickets = TicketsService.getList(scope, paramsToSend, function () {
+
+                scope.reportedSpamMesage = true;
+                scope.onReportedAsSpamTicketRendering = scope.onTicketRendering;
+                initScrollListener(paramsToSend)
+              });
+            }
+
+            function offScrolEvent(paramsToSend, moreTicket){
+              if (moreTicket.length === 0 && !($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER')) {
+                $document.off('scroll');
+              } else if (paramsToSend.filter === 'ADMIN_REPORTED_AS_SPAM' && moreTicket.length === 0) {
+                $document.off('scroll');
+              }
+            }
+
           }
         };
       }]);

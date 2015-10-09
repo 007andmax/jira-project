@@ -93,12 +93,13 @@
     </div>
   </div>
 
-  <div class="tips-message has-updates" ng-show="false">
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_DELETE')">
     <!--ng-if=" listType === 'spam' && currentUser.role === 'ADMIN' "-->
     <span class="icn icn-message-ticket-spam"></span>
 
     <div class="message-detail">
-      <span class="bold blue">{{ getUserFullNameById(ticketDetails.spamPerformer.id) }}</span>
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamPerformer.id)) }}</span>
       has marked this ticket as
       spam. You can either delete the ticket forever or restore the ticket
       status anytime, using the respective option.
@@ -108,15 +109,15 @@
       where it was marked as spam.
     </div>
     <div class="message-btn shared">
-      <a href="javascript:void(0)" ng-click="deleteForEver(ticketDetails)" class="btn btn-sr btn-red">Delete
+      <a href="javascript:void(0)" ng-click="deleteForever()" class="btn btn-sr btn-red">Delete
         Forever</a>
-      <a href="javascript:void(0)" ng-click="markAsSpam($event, ticketDetails, false)"
+      <a href="javascript:void(0)" ng-click="restoreFromSpam()"
          class="btn btn-sr btn-gray btn-cancel ">Restore</a>
     </div>
   </div>
 
-  <div class="tips-message" ng-show="false">
-    <!--ng-if=" listType === 'spam' && currentUser.role === 'USER' "-->
+  <div class="tips-message"
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'USER_SPAM')">
     <span class="icn icn-message-ticket-spam"></span>
 
     <div class="message-detail">You can use the
@@ -128,7 +129,26 @@
     </div>
     <div class="message-btn shared">
       <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-cancel"
-         ng-click="markAsSpam($event, ticketDetail, false)">Restore</a>
+         ng-click="restoreFromSpam()">Restore</a>
+    </div>
+  </div>
+
+  <div class="tips-message "
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_SPAM')">
+    <span class="icn icn-message-ticket-spam"></span>
+    <div class="message-detail">
+      <span class="bold blue">getUserName(getUserById(ticketDetails.spamPerformer.id))</span>
+      has reported this ticket as spam.
+      You can either mark the ticket as spam or restore the ticket status anytime, using the respective option.</div>
+
+    <div class="tip"><span class="bold">Tip:</span>
+      Restoring ticket moves the ticket back to its original folder where it was reported as spam.</div>
+
+    <div class="message-btn shared">
+      <a href="javascript:void(0)" class="btn btn-sr btn-red"
+         ng-click="moveIntoSpam()">Mark as spam</a>
+      <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-cancel "
+         ng-click="restoreFromSpam()">Restore</a>
     </div>
   </div>
 

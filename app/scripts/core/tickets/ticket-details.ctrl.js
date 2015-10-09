@@ -116,7 +116,7 @@
 
                 TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
 
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam');
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam', true);
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
 
@@ -124,11 +124,15 @@
 
                 TicketsService.markAsSpam($scope.ticketDetails.id, function () {
 
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam');
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
               }
             });
+          };
+
+          $scope.restoreFromSpam = function () {
+            TicketsService.restoreFromSpam($scope.ticketDetails.id);
           };
 
           $scope.moveToTrash = function (movedWay) {
@@ -277,7 +281,7 @@
                 case 'NOTE':
 
                   UserNotificationService.show('New ticket update containing a note has been posted', true);
-                  setCreateUpdateFormToDefault()
+                  setCreateUpdateFormToDefault();
                   return;
 
                 case 'SERVICE':
@@ -286,7 +290,7 @@
                   } else {
                     UserNotificationService.show('New ticket update containing a service has been posted', true);
                   }
-                  setCreateUpdateFormToDefault()
+                  setCreateUpdateFormToDefault();
                   return;
 
                 case 'PRODUCT':
@@ -295,7 +299,7 @@
                   } else {
                     UserNotificationService.show('New ticket update containing a product has been posted', true);
                   }
-                  setCreateUpdateFormToDefault()
+                  setCreateUpdateFormToDefault();
                   return;
               }
 
