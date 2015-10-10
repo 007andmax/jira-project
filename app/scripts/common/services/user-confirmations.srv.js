@@ -6,20 +6,11 @@
     ['$modal',
       function ($modal) {
 
-        var modalConfirmWindow = "" +
-          "<div class='modal-body' style='padding: 5px 30px;padding-top: 26px;'>" +
-          " <p>{{ messageConfirm }}</p>" +
-          "</div>" +
-          "<div class='modal-footer' style='border-top: none;padding: 19px 30px 30px;'>" +
-          " <button type='button' class='btn btn-gray' data-dismiss='modal' ng-click=cancelConfirm()>Cancel</button>" +
-          " <button type='button' class='btn btn-scooter' ng-click=approveConfirm()>{{ buttonConfirm }}</button>" +
-          "</div>";
-
         var modalParams = {
-          animation: true,
+          animation: false,
           backdrop: 'static',
           size: 'custom-size-confirmation-pop-up',
-          template: modalConfirmWindow
+          templateUrl: '/html/scripts/common/services/user-confirmations.tpl.html'
         };
 
         this.show = function (message, button) {
@@ -35,7 +26,7 @@
               };
 
               $scope.cancelConfirm = function () {
-                $modalInstance.dismiss('cancel');
+                $modalInstance.dismiss();
               };
 
             }]);
