@@ -25,7 +25,7 @@
 
             $scope.currentOpenTab = 'NOTE';
 
-            if (details.message !== undefined && details.code === 400) {
+            if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
               $state.go('tickets', {listType: $stateParams.listType});
               return;
             }
@@ -40,8 +40,6 @@
             if ($scope.ticketDetails.assignedUser && $scope.ticketDetails.assignedUser.id) {
               $scope.assignedUser = UsersService.getOneById($scope.ticketDetails.assignedUser.id);
             }
-
-            $scope.$broadcast('ticketDetailsLoad');
 
             for (var i = 0; i < $scope.ticketDetails.updates.length; i++) {
 
@@ -59,6 +57,11 @@
                 TicketsService.markUpdateAsRead($scope.ticketDetails.id, unreadUpdatesId)
               }, 1500);
             }
+
+
+            $timeout(function () {
+              $scope.$broadcast('ticketDetailsLoad');
+            }, 0)
           });
 
           $scope.setTicketTags = function () {
@@ -303,7 +306,7 @@
                   return;
               }
 
-              function setCreateUpdateFormToDefault(){
+              function setCreateUpdateFormToDefault() {
                 $scope.$broadcast('setCreateUpdateFormToDefault');
                 $scope.selectUpdateSharedUser = {};
                 $scope.updateSharedUsersList = [];
@@ -329,6 +332,40 @@
             });
           };
 
+          $scope.$watch('ticketDetails.shares', function (shares) {
+
+            $scope.shares = [];
+
+            if (!shares) {
+              return;
+            }
+
+            var processedShares = [];
+
+            for (var i = 0; i < shares.length; i++) {
+
+              var share = shares[i],
+                id = share.user ? share.user.id : share.contact.id;
+
+
+              if (processedShares.indexOf(id) > -1) {
+                continue;
+              }
+
+              processedShares.push(id);
+
+              $scope.shares.push({
+                name: share.user ? $scope.getUserName($scope.getUserById(share.user.id)) : $scope.getContactName(share.contact),
+                title: $scope.getSharedTitle(share),
+                avatarUrl: share.user ? $scope.getUserAvatarUrl($scope.getUserById(share.user.id)) : $scope.getContactAvatarUrl(share.contact)
+              })
+            }
+
+          });
+
+          $scope.$on('ticket_is_not_available_anymore', function(){
+            $state.go('tickets', {listType: $stateParams.listType});
+          })
         }]);
   }()
 );

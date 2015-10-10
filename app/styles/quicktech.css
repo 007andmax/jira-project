@@ -13854,7 +13854,7 @@ body .content-wrapper .ticket-sidebar {
     left: 4px !important;
     width: 310px;
 }
-.content-wrapper .content-body .invoices.recurring .updates >  li div a.icn-nav-delete{
+.content-wrapper .content-body .invoices.recurring .updates >  li div .icn-nav-delete{
     margin-left: 20px;
 }
 .content-wrapper .content-body .invoices .updates li   .col-5{
@@ -20720,7 +20720,7 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
     border-bottom: 1px #e0f5f7 solid;
 }
 
-.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > div.col-5 > a.icn-nav-delete{
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > li > div > div > div.col-5 > .icn-nav-delete{
     margin-left: 20px;
 }
 
@@ -20776,7 +20776,7 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
     padding: 0px;
 }
 
-.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > li > div > div > div.col-5 > a.icn-nav-delete {
+.content-container > div > div > div > div > div > div > div > #recurring-invoices > ul > li > ul > li > ul > div > div > li > div > div > div.col-5 > .icn-nav-delete {
     margin-left: 20px;
 }
 

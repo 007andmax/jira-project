@@ -15,7 +15,7 @@
             body.addClass('opened-ticket');
 
             scope.$on('ticketDetailsLoad', function () {
-              element.fadeIn(1000, function () {
+              element.fadeIn(1500, function () {
                 element.css("position", "fixed");
               });
             });

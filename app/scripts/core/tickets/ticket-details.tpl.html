@@ -250,19 +250,19 @@
         <!--ng-if="ticketDetail.updates.length > 0 && listType !== 'unassigned'"-->
         <h4>
           <span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ ticketDetails.updates.length }}</span></span>
-			<span class="pull-left badge badge-light shared-with shared-with-badge" data-toggle="tooltip">SHARED WITH {{ ticketDetails.shares.length }}
-				<div class="tooltipa tooltip-users top" ng-show="ticketDetails.shares.length > 0">
+			<span class="pull-left badge badge-light shared-with shared-with-badge" data-toggle="tooltip">SHARED WITH {{ shares.length }}
+				<div class="tooltipa tooltip-users top" ng-show="shares.length > 0">
 
           <div class="tooltip-arrow"></div>
 
           <ul class="tooltip-inner">
 
-            <li ng-repeat="shared in ticketDetails.shares | limitTo: 3">
-              <span class="username">{{ shared.user ? getUserName(getUserById(shared.user.id)) : getContactName(shared.contact)}}</span>
-              <span class="usertitle">{{ getSharedTitle(shared) }}</span>
+            <li ng-repeat="share in shares | limitTo: 3">
+              <span class="username">{{ share.name }}</span>
+              <span class="usertitle">{{ share.title }}</span>
             </li>
 
-            <li class="more-users" ng-if="ticketDetails.shares.length > 3">
+            <li class="more-users" ng-if="shares.length > 3">
               <a href="javascript:void(0);" ng-click="openFullSharedUsers()">
                 <span class="icn-reset-devices"></span>
               </a>
@@ -282,19 +282,19 @@
         <div class="clearfix"></div>
         <ul class="shared-users-list" ng-show="isFullSharedUserShow === true">
           <!--ng-show="isSharedBetweenVisible === true"-->
-          <li ng-repeat="share in ticketDetails.shares">
+          <li ng-repeat="share in shares">
             <div class="pull-left avatar-38 avatar m-r">
 
               <img
-                ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}"
+                ng-src="{{ share.avatarUrl }}"
                 alt="..." class="img-circle">
 
               <div class="tooltip tooltip-users top">
                 <div class="tooltip-arrow"></div>
                 <ul class="tooltip-inner">
                   <li>
-                    <span class="username">{{ share.user ? getUserName(getUserById(share.user.id)) : getContactName(share.contact) }}</span>
-                    <span class="usertitle">{{ getSharedTitle(share) }}</span>
+                    <span class="username">{{ share.name }}</span>
+                    <span class="usertitle">{{ share.title }}</span>
                   </li>
                 </ul>
               </div>
@@ -339,10 +339,10 @@
 
             <div class="updater-name">{{ getUserName(user) }}
               <span class="added-type">added a {{ updateType() }}</span>
-              <a href="javascript:void(0)" class="icn-nav-delete pull-right tp-hide"
-                 tooltip="Delete" tooltip-placement="top" ng-click="deleteUpdate()"
-                 ng-disabled="PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id, currentUser.role)"
-                 ng-class="{disabled: PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id,  currentUser.role) }"></a>
+              <button href="javascript:void(0)" class="icn-nav-delete pull-right tp-hide" style="border: 0px"
+                      tooltip="Delete" tooltip-placement="top" ng-click="deleteUpdate()"
+                      ng-disabled="PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id, currentUser.role)"
+                      ng-class="{disabled: PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id,  currentUser.role) }"></button>
             </div>
 
             <!-- Update Content - Note -->
@@ -436,11 +436,12 @@
                 </div>
 
                 <div class="table-content-action pull-right">
-                  <a href="javascript:void(0)" class="icn-edit tp-hide"
-                     tooltip="Edit Service" tooltip-placement="top"
-                     ng-click="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role) || setEditExpenseId(service.id)"
-                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)}">
-                  </a>
+                  <button href="javascript:void(0)" class="icn-edit tp-hide" style="border: 0px;"
+                          tooltip="Edit Service" tooltip-placement="top"
+                          ng-click="setEditExpenseId(service.id)"
+                          ng-disabled="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)"
+                          ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)}">
+                  </button>
                 </div>
               </div>
 
