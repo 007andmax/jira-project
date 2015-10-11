@@ -24,6 +24,10 @@
             return false;
           }
 
+          if (!$scope.isBulkOperation) {
+            return item.id !== $scope.ticketAssignedUserId;
+          }
+
           if ($scope.assignToModel && $scope.assignToModel.length > 0) {
             var fullSearchFild = (item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase();
             return fullSearchFild.indexOf($scope.assignToModel.toLowerCase()) !== -1;

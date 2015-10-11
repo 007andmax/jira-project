@@ -191,13 +191,13 @@
         }
 
         if (option === 'BILLED') {
-          return ticket.hasInvoice;
+          return ticket.billable && ticket.hasInvoice;
 
         } else if (option === 'OLD') {
-          return !ticket.hasInvoice && !isCanBeReOpened();
+          return !ticket.billable && !isCanBeReOpened();
 
         } else if (option === 'OPEN') {
-          return !ticket.hasInvoice && isCanBeReOpened();
+          return (ticket.billable && !ticket.hasInvoice) || (!ticket.billable && isCanBeReOpened());
         }
 
         function isCanBeReOpened() {

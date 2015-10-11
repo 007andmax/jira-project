@@ -13,7 +13,7 @@
       <li ui-sref-active="active">
         <a ui-sref="tickets({listType: 'unassigned'})">
           <span class="nav-icon icn-unassigned"></span> Unassigned
-          <span class="badge" ng-if="ticketCounts.UNASSIGNED !== 0">{{ ticketCounts.UNASSIGNED }}</span>
+          <span class="badge">{{ ticketCounts.UNASSIGNED }}</span>
         </a>
       </li>
       <li ui-sref-active="active">
@@ -24,7 +24,7 @@
       <li ui-sref-active="active">
         <a ui-sref="tickets({listType: 'shared'})">
           <span class="nav-icon icn-shared"></span> Shared
-          <span class="badge" ng-if="ticketCounts.SHARED !== 0">{{ ticketCounts.SHARED }}</span>
+          <span class="badge">{{ ticketCounts.SHARED }}</span>
         </a>
       </li>
       <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
@@ -76,13 +76,13 @@
     <ul class="nav nav-pills sub-nav nav-stacked">
       <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
         <a ui-sref="accounting"> <span class="nav-icon icn-billable no-icon"></span>Billable
-          <span class="badge" ng-if="ticketCounts.BILLABLE !== 0">{{ ticketCounts.BILLABLE }}</span>
+          <span class="badge">{{ ticketCounts.BILLABLE }}</span>
         </a>
       </li>
       <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
         <a ui-sref="receivable({mode: 'group-by-company'})">
           <span class="nav-icon icn-receivable no-icon"></span> Receivable
-          <span class="badge" ng-if="ticketCounts.RECEIVABLE !== 0">{{ ticketCounts.RECEIVABLE }}</span>
+          <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
         </a>
       </li>
       <li ui-sref-active="active">

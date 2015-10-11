@@ -91,6 +91,7 @@
                 <div class="dropdown-submenu-wrapper">
                   <div class="dropdown-menu assign-ticket-menu" stop-propagation="click"
                        assign-user-button aub-ticket-id="ticketDetails.id"
+                       ticket-assigned-user-id="ticketDetails.assignedUser.id"
                        aub-ticket-number="ticketDetails.number"
                        users="usersCurrentCompany"
                        aub-current-user="currentUser">
@@ -405,7 +406,8 @@
                 <div class="table-content-action pull-right">
                   <a href="javascript:void(0)" tooltip="edit product" tooltip-placement="top"
                      class="icn-edit tp-hide"
-                     ng-click="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role) || setEditExpenseId(product.id)"
+                     ng-click="setEditExpenseId(product.id)"
+                     ng-disabled="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)"
                      ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)}"></a>
                 </div>
 

@@ -11,6 +11,7 @@
         scope: {
           ticketId: "=aubTicketId",
           ticketNumber: "=aubTicketNumber",
+          ticketAssignedUserId: "=ticketAssignedUserId",
           currentUser: '=aubCurrentUser',
           usersCurrentCompany: "=users",
           isBulkOperation: '=aubIsBulkOperation'

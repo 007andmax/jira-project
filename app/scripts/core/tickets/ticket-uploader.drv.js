@@ -54,9 +54,7 @@
 
               scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
 
-                scope.countHeaderTickets = TicketsService.getCount(paramsToSend, scope, function () {
-                  scope.ticketsHeaderState.count = scope.countHeaderTickets.count;
-                });
+                scope.ticketsHeaderState.ticketsQuantity = TicketsService.getCount(paramsToSend, scope);
 
                 UserNotificationService.hide();
 
