@@ -2,6 +2,6 @@
 
 (function () {
 
-  var vendors = angular.module("quicktech.core.leftPanel", ['main.services']);
+  var leftPanel = angular.module("quicktech.core.leftPanel", ['main.services']);
 
 }());
