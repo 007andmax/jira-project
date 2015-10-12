@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketEditUpdateServiceCtrl',
-      ['$scope', 'TicketsService', 'ServicesService',
-        function ($scope, TicketsService, ServicesService) {
+      ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService',
+        function ($scope, TicketsService, ServicesService, UserNotificationService) {
 
           $scope.editService = $scope.service.staticCopy();
           $scope.editService.quantity = $scope.service.quantity * 60;
@@ -27,6 +27,7 @@
 
                 }
               }, function () {
+                UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
               })
             } else {

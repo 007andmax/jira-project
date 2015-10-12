@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketEditUpdateProductCtrl',
-      ['$scope', 'TicketsService', 'ProductsService', 'UsersService',
-        function ($scope, TicketsService, ProductsService, UsersService) {
+      ['$scope', 'TicketsService', 'ProductsService', 'quicktech.common.services.UserNotificationService',
+        function ($scope, TicketsService, ProductsService, UserNotificationService) {
 
           $scope.editProduct = $scope.product.staticCopy();
 
@@ -33,6 +33,7 @@
 
                 }
               }, function () {
+                UserNotificationService.show('The ticket update containing a product has been modified', true);
                 $scope.setEditExpenseId();
               })
             } else {

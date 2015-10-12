@@ -75,7 +75,7 @@
                 <div class="dropdown-submenu-wrapper">
 
                   <ul class="tag-list dropdown-menu" role="menu"
-                      ng-init="ticketId = ticketDetails.id; ticketName = ticketDetails.name"
+                      ng-init="ticketId = ticketDetails.id; ticketNumber = ticketDetails.number; ticketTagsUntilApply = ticketDetails.tags"
                       ng-controller="quicktech.core.tickets.ticketTagsCtrl"
                       ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
                   </ul>
