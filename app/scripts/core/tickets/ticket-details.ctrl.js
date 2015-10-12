@@ -55,7 +55,7 @@
             if (unreadUpdatesId.length > 0) {
               $timeout(function () {
                 TicketsService.markUpdateAsRead($scope.ticketDetails.id, unreadUpdatesId)
-              }, 1500);
+              }, 1000);
             }
 
 
@@ -363,7 +363,7 @@
 
           });
 
-          $scope.$on('ticket_is_not_available_anymore', function(){
+          $scope.$on('ticket_is_not_available_anymore', function () {
             $state.go('tickets', {listType: $stateParams.listType});
           })
         }]);

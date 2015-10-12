@@ -34,11 +34,12 @@
 
                   for (var i = 0; i < ticketUpdates.length; i++) {
                     if (scope.firstUnreadUpdateId === ticketUpdates[i].getAttribute('std-update')) {
-                      scrollPane.scrollToElement(ticketUpdates[i], true, true)
+                      scrollPane.scrollToElement(ticketUpdates[i], true, true);
+                      return;
                     }
                   }
 
-                }, 1500)
+                }, 2000)
               }
             }
           }
