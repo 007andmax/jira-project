@@ -191,13 +191,16 @@
         }
 
         if (option === 'BILLED') {
-          return ticket.billable && ticket.hasInvoice;
+          return ticket.hasInvoice;
 
         } else if (option === 'OLD') {
-          return !ticket.billable && !isCanBeReOpened();
+          return !ticket.isBillable && !isCanBeReOpened();
 
         } else if (option === 'OPEN') {
-          return (ticket.billable && !ticket.hasInvoice) || (!ticket.billable && isCanBeReOpened());
+          return !ticket.isBillable && isCanBeReOpened();
+
+        } else if (option === 'BILLABLE') {
+          return !ticket.hasInvoice
         }
 
         function isCanBeReOpened() {
@@ -234,9 +237,9 @@
 
         if (option === 'USER_SPAM') {
           return userRole === USER_ROLES.USER && ticket.reportedAsSpamAt;
-        } else if (option === 'ADMIN_DELETE'){
+        } else if (option === 'ADMIN_DELETE') {
           return (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN) && ticket.markedAsSpamAt;
-        } else if (option === 'ADMIN_SPAM'){
+        } else if (option === 'ADMIN_SPAM') {
           return (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN) && !ticket.markedAsSpamAt && ticket.reportedAsSpamAt;
         }
       }
@@ -288,21 +291,21 @@
         }
       }
 
-      function isDisabledDeleteTicketUpdate(listType, creatorId, userId, userRole){
+      function isDisabledDeleteTicketUpdate(listType, creatorId, userId, userRole) {
         var isDisabledForUser = userRole === USER_ROLES.USER && creatorId !== userId;
         var isDisablenOnPage = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
 
         return isDisablenOnPage || isDisabledForUser;
       }
 
-      function isRestoreFromSpamVisible(listType){
+      function isRestoreFromSpamVisible(listType) {
 
         var isTrueForSpamList = listType === LIST_TYPES.SPAM;
 
         return isTrueForSpamList;
       }
 
-      function isDeleteForeverVisible(listType, userRole, ticket){
+      function isDeleteForeverVisible(listType, userRole, ticket) {
 
         var isTrueForTrashList = listType === LIST_TYPES.TRASH;
         var isTrueForSpamList = listType === LIST_TYPES.SPAM && userRole !== USER_ROLES.USER && ticket.markedAsSpamAt;

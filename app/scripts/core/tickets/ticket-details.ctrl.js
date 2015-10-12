@@ -61,6 +61,7 @@
 
             $timeout(function () {
               $scope.$broadcast('ticketDetailsLoad');
+              $scope.showTicketTags = true;
             }, 0)
           });
 

@@ -31,7 +31,7 @@
                      ng-class="{'disabled': disabledTags && !bulkTicketsTags[tag.id].val}"
                      ng-disabled="disabledTags && !bulkTicketsTags[tag.id].val">
               <span class="control-indicator pull-left"
-                    ng-click="disabledTags && !ticketTags[tag.id] && showNotificationMessage()"
+                    ng-click="disabledTags && !bulkTicketsTags[tag.id].val && showNotificationMessage()"
                     ng-class="{'intermediate': bulkTicketsTags[tag.id].isHalf}"></span>
               <span class="tag-color color{{tag.color}}"></span>
               {{tag.name}}

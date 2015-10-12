@@ -72,7 +72,7 @@
                 <!--ng-if="ActionRightsService.isLabelAsVisible(listType, currentUser.role)"-->
                 <a tabindex="-1" href="javascript:void(0)">Label as...</a>
 
-                <div class="dropdown-submenu-wrapper">
+                <div class="dropdown-submenu-wrapper" ng-if="showTicketTags">
 
                   <ul class="tag-list dropdown-menu" role="menu"
                       ng-init="ticketId = ticketDetails.id; ticketNumber = ticketDetails.number; ticketTagsUntilApply = ticketDetails.tags"

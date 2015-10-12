@@ -30,48 +30,48 @@
               infoObj = {},
               notifyMessage;
 
-            for(var i = 0; i < tagsId.length; i++){
+            for (var i = 0; i < tagsId.length; i++) {
               infoObj[tagsId[i]] = 'apply';
-              for(var j = 0; j < $scope.ticketTagsUntilApply.length; j++){
-                if(tagsId[i] === $scope.ticketTagsUntilApply[j].id){
+              for (var j = 0; j < $scope.ticketTagsUntilApply.length; j++) {
+                if (tagsId[i] === $scope.ticketTagsUntilApply[j].id) {
                   delete infoObj[tagsId[i]];
                 }
               }
-              if(infoObj[tagsId[i]] === 'apply'){
+              if (infoObj[tagsId[i]] === 'apply') {
                 applyLabels.push(' ' + Utils.findById($scope.tags, tagsId[i]).name)
               }
             }
 
-            for(var j = 0; j < $scope.ticketTagsUntilApply.length; j++){
+            for (var j = 0; j < $scope.ticketTagsUntilApply.length; j++) {
               var countLabels = 0;
-              for(var i = 0; i < tagsId.length; i++){
-                if(tagsId[i] == $scope.ticketTagsUntilApply[j].id){
+              for (var i = 0; i < tagsId.length; i++) {
+                if (tagsId[i] == $scope.ticketTagsUntilApply[j].id) {
                   countLabels++
                 }
               }
-              if(countLabels === 0){
+              if (countLabels === 0) {
                 infoObj[$scope.ticketTagsUntilApply[j].id] = 'delete';
                 removeLebels.push(' ' + $scope.ticketTagsUntilApply[j].name)
               }
             }
 
-            if(applyLabels.length === 1){
+            if (applyLabels.length === 1) {
               notifyMessage = 'The label "' + applyLabels[0] + '" has been applied to ' + $scope.ticketNumber;
-            } else if (applyLabels.length > 1){
+            } else if (applyLabels.length > 1) {
               notifyMessage = 'The labels ' + applyLabels + ' have been applied to ' + $scope.ticketNumber;
             }
 
-            if(removeLebels.length === 1){
+            if (removeLebels.length === 1) {
 
-              if(notifyMessage){
+              if (notifyMessage) {
                 notifyMessage += '. The label "' + removeLebels[0] + '" has been removed from ' + $scope.ticketNumber;
               } else {
                 notifyMessage = 'The label "' + removeLebels[0] + '" has been removed from ' + $scope.ticketNumber;
               }
 
-            } else if (removeLebels.length > 1){
+            } else if (removeLebels.length > 1) {
 
-              if(notifyMessage){
+              if (notifyMessage) {
                 notifyMessage += '. The labels ' + removeLebels + ' have been removed from ' + $scope.ticketNumber;
               } else {
                 notifyMessage = 'The labels ' + removeLebels + ' have been removed from ' + $scope.ticketNumber;
@@ -84,22 +84,37 @@
         };
 
         $scope.$watch('ticketTags', function () {
-          var count = 0;
+          var count = 0,
+            tagsId = [];
+
           for (var tagId in $scope.ticketTags) {
             if ($scope.ticketTags[tagId]) {
+              tagsId.push(tagId);
               count++;
             }
           }
-
-          if (count > 2) {
-            $scope.disabledTags = true;
-          } else {
-            $scope.disabledTags = false;
+          if (tagsId !== undefined) {
+            $scope.disabledApplyButton = isEqualTagsObject(tagsId);
           }
+
+          count > 2 ? $scope.disabledTags = true : $scope.disabledTags = false;
         }, true);
 
-        $scope.showNotificationMessage = function(){
+        $scope.showNotificationMessage = function () {
           UserNotificationService.show('More than 3 labels cannot be applied', true);
+        };
+
+        function isEqualTagsObject(tagsId) {
+          if (tagsId.length !== $scope.ticketTagsUntilApply.length) {
+            return false;
+          }
+
+          for (var i = 0; i < tagsId.length; i++) {
+            if (!Utils.findById($scope.ticketTagsUntilApply, tagsId[i])) {
+              return false;
+            }
+          }
+          return true;
         }
 
       }]);

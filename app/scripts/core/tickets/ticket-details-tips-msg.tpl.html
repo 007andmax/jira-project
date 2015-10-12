@@ -65,6 +65,21 @@
     </div>
   </div>
 
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'BILLABLE')">
+    <span class="icn icn-message-ticket-closed"></span>
+
+    <div class="message-detail">
+      The Ticket is now closed. You can re-open it by simply clicking
+      <span class="bold">"Mark as Open"</span> button.
+    </div>
+
+    <div class="message-btn">
+      <a href="javascript:void(0)" class="btn btn-sr btn-scooter" ng-click="markAsOpen()">Mark as Open</a>
+    </div>
+
+  </div>
+
   <div class="tips-message has-updates" ng-if="listType === 'trash'">
     <!--ng-if=" listType === 'trash' "-->
     <span class="icn icn-message-ticket-trash"></span>
@@ -136,13 +151,16 @@
   <div class="tips-message "
        ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_SPAM')">
     <span class="icn icn-message-ticket-spam"></span>
+
     <div class="message-detail">
-      <span class="bold blue">getUserName(getUserById(ticketDetails.spamPerformer.id))</span>
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamPerformer.id)) }}</span>
       has reported this ticket as spam.
-      You can either mark the ticket as spam or restore the ticket status anytime, using the respective option.</div>
+      You can either mark the ticket as spam or restore the ticket status anytime, using the respective option.
+    </div>
 
     <div class="tip"><span class="bold">Tip:</span>
-      Restoring ticket moves the ticket back to its original folder where it was reported as spam.</div>
+      Restoring ticket moves the ticket back to its original folder where it was reported as spam.
+    </div>
 
     <div class="message-btn shared">
       <a href="javascript:void(0)" class="btn btn-sr btn-red"
@@ -162,7 +180,8 @@
     </div>
 
     <div class="tip">
-      <span class="bold">Tip:</span> If you’ve administrative privileges, you can re-open the ticket by simply clicking "Mark as Open" <br>
+      <span class="bold">Tip:</span> If you’ve administrative privileges, you can re-open the ticket by simply clicking
+      "Mark as Open" <br>
       button, and then add or remove the Ticket updates.
     </div>
     <div class="clearfix"></div>

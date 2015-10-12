@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.headerTicketTagsCtrl',
-    ['$scope', 'TicketTagsService', 'quicktech.common.services.UserNotificationService', '$timeout',
-      function ($scope, TicketTagsService, UserNotificationService, $timeout) {
+    ['$scope', 'TicketTagsService', 'quicktech.common.services.UserNotificationService', 'Utils',
+      function ($scope, TicketTagsService, UserNotificationService, Utils) {
 
         var bulkTicketsTagsToSend = {};
         $scope.bulkTicketsTags = {};
@@ -62,10 +62,33 @@
         };
 
         $scope.bulkApplyTagsToTicket = function () {
+
           TicketTagsService.link(bulkTicketsTagsToSend, function () {
+
+            var ticketsQuantity = 0,
+              labelsId = [],
+              labelsName = '';
+
+            for (var ticketId in bulkTicketsTagsToSend) {
+              ticketsQuantity++;
+
+              for (var i = 0; i < bulkTicketsTagsToSend[ticketId].length; i++) {
+                if (labelsId.indexOf(bulkTicketsTagsToSend[ticketId][i]) === -1) {
+                  labelsId.push(bulkTicketsTagsToSend[ticketId][i]);
+                  if (!labelsName) {
+                    labelsName = (Utils.findById($scope.tags, bulkTicketsTagsToSend[ticketId][i])).name;
+                  } else {
+                    labelsName += ', ' + (Utils.findById($scope.tags, bulkTicketsTagsToSend[ticketId][i])).name;
+                  }
+                }
+              }
+            }
+
+            var notifyMessage = 'The label' + (labelsId.length > 1 ? 's' : '') + ' ' + labelsName + ' have been apply from ' + ticketsQuantity + ' tickets';
+
+            UserNotificationService.show(notifyMessage, true);
+
             $scope.uncheckAllTickets();
-//TODO tags messages
-            UserNotificationService.show('TODO messages', true);
           })
         };
 
@@ -77,11 +100,7 @@
             }
           }
 
-          if (count > 2) {
-            $scope.disabledTags = true;
-          } else {
-            $scope.disabledTags = false;
-          }
+          count > 2 ? $scope.disabledTags = true : $scope.disabledTags = false;
         }, true);
 
         $scope.showNotificationMessage = function () {
