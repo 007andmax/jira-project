@@ -100,7 +100,7 @@
 
               $document.on('scroll', function () {
 
-                if ($document.scrollTop() > ($document.height() - 750)) {
+                if ($document.scrollTop() > ($document.height() - 1000)) {
 
                   UserNotificationService.show('Loading...');
 
