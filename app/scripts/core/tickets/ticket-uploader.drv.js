@@ -71,7 +71,7 @@
                         UserNotificationService.show('Loading...');
                         TicketsService.loadMore(scope, function (moreTicket) {
 
-                          if ($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER' && moreTicket.length === 0 && paramsToSend.filter === ADMIN_MARKED_AS_SPAM) {
+                          if ($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER' && moreTicket.length === 0 && paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
                             getReportSpamTicket(paramsToSend);
                           }
 

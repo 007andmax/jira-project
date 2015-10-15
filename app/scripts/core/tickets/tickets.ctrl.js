@@ -100,14 +100,14 @@
           for (var ticketId in $scope.selectedTickets) {
             if ($scope.selectedTickets[ticketId]) {
 
-              ticketsHeaderState.ticketTags[ticketId] = Utils.findById($scope.tickets, ticketId).tags;
+              ticketsHeaderState.ticketTags[ticketId] = (Utils.findById($scope.tickets, ticketId) || Utils.findById($scope.reportSpamTickets, ticketId)).tags;
               ticketsHeaderState.checkedTicketsIds.push(ticketId);
 
-              if (!ticketsHeaderState.checkedCompletedTicket && Utils.findById($scope.tickets, ticketId).status === 'COMPLETED') {
+              if ($scope.listType !== 'spam' && (!ticketsHeaderState.checkedCompletedTicket && (Utils.findById($scope.tickets, ticketId).status === 'COMPLETED'))) {
                 ticketsHeaderState.checkedCompletedTicket = true;
               }
 
-              if (!ticketsHeaderState.checkedHasInvoiceTicket && Utils.findById($scope.tickets, ticketId).hasInvoice) {
+              if ($scope.listType !== 'spam' && (!ticketsHeaderState.checkedHasInvoiceTicket && Utils.findById($scope.tickets, ticketId).hasInvoice)) {
                 ticketsHeaderState.checkedHasInvoiceTicket = true;
               }
             }

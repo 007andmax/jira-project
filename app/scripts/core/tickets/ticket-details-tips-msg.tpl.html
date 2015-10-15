@@ -1,4 +1,5 @@
-<div ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
+<div ng-if="currentOpenTab"
+     ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
   <!-- Ticket Notes -->
   <div class="tips-message" ng-if="listType === 'unassigned'">
     <!--ng-if=" listType === 'unassigned' "-->
@@ -23,7 +24,7 @@
     <span class="icn icn-message-ticket-closed"></span>
 
     <div class="message-detail">
-      The Ticket is now closed. You can re-open it within 30 days by simply clicking <br>
+      The Ticket is now closed. You can re-open it within {{ daysLeftToOpen }} days by simply clicking <br>
       <span class="bold">"Mark as Open"</span> button.
     </div>
 
@@ -114,7 +115,7 @@
     <span class="icn icn-message-ticket-spam"></span>
 
     <div class="message-detail">
-      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamPerformer.id)) }}</span>
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamMarker.id)) }}</span>
       has marked this ticket as
       spam. You can either delete the ticket forever or restore the ticket
       status anytime, using the respective option.
@@ -153,7 +154,7 @@
     <span class="icn icn-message-ticket-spam"></span>
 
     <div class="message-detail">
-      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamPerformer.id)) }}</span>
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamReporter.id)) }}</span>
       has reported this ticket as spam.
       You can either mark the ticket as spam or restore the ticket status anytime, using the respective option.
     </div>

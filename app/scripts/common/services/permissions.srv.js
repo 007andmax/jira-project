@@ -186,7 +186,11 @@
 
       function isTipVisibleOnClosedPage(listType, ticket, option) {
 
-        if (listType !== LIST_TYPES.CLOSE) {
+        if (listType !== LIST_TYPES.CLOSE && listType !== LIST_TYPES.USER) {
+          return false;
+        }
+
+        if(listType === LIST_TYPES.USER && ticket.status !== "COMPLETED"){
           return false;
         }
 
@@ -200,7 +204,7 @@
           return !ticket.isBillable && isCanBeReOpened();
 
         } else if (option === 'BILLABLE') {
-          return !ticket.hasInvoice
+          return ticket.isBillable && !ticket.hasInvoice
         }
 
         function isCanBeReOpened() {
