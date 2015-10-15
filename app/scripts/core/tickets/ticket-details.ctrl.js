@@ -15,7 +15,7 @@
           $scope.productCategories = ProductsService.getCategories($scope);
 
           UserNotificationService.show('Loading...');
-          $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $scope, true, function (details) {
+          $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {
 
             $timeout(function () {
               UserNotificationService.hide();
@@ -364,8 +364,11 @@
 
           });
 
-          $scope.$on('ticket_is_not_available_anymore', function () {
-            $state.go('tickets', {listType: $stateParams.listType});
+          $scope.$on('ticket_is_not_available_anymore', function (event, data) {
+
+            if (data.ticketId === $scope.ticketDetails.id
+              && (!data.ticketType || data.ticketType.toUpperCase() === $stateParams.listType.toUpperCase()))
+              $state.go('tickets', {listType: $stateParams.listType});
           })
         }]);
   }()

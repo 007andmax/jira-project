@@ -250,7 +250,10 @@
       <div class="ticket-update-header clearfix" ng-if="listType !== 'unassigned' && ticketDetails.updates.length > 0">
         <!--ng-if="ticketDetail.updates.length > 0 && listType !== 'unassigned'"-->
         <h4>
-          <span class="pull-left ticket-update-title">Ticket Updates <span class='light-cl'>{{ ticketDetails.updates.length }}</span></span>
+          <span class="pull-left ticket-update-title">
+            Ticket Updates
+            <span class='light-cl'>{{ ticketDetails.updates.length + ticketDetails.unloadedUpdates }}</span>
+          </span>
 			<span class="pull-left badge badge-light shared-with shared-with-badge" data-toggle="tooltip">SHARED WITH {{ shares.length }}
 				<div class="tooltipa tooltip-users top" ng-show="shares.length > 0">
 
@@ -276,7 +279,8 @@
 
         <a href="javascript:void(0)" class="btn btn-gray btn-loadmore load-update pull-right"
            tooltip="load more updates" tooltip-placement="top" ng-click="loadMoreUpdates();"
-           ng-class="{ disabled: allUpdatesLoaded }" ng-disabled="allUpdatesLoaded">
+           ng-class="{ disabled: allUpdatesLoaded || ticketDetails.unloadedUpdates === 0}"
+           ng-disabled="allUpdatesLoaded || ticketDetails.unloadedUpdates === 0">
           <span class="icn-load-update icn"></span>
         </a>
 
