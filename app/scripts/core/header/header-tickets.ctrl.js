@@ -132,7 +132,6 @@
         };
 
         $scope.cancelSearch = function () {
-          $scope.searchItem = undefined;
 
           if ($scope.sharedState.searchFilter.userId) {
 

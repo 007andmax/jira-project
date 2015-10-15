@@ -198,7 +198,7 @@
              custom-style="{'max-height': '160px', 'overflow-y': 'scroll'}">
 
       <a href="javascript:void(0);" class="close icn-remove-token" tabindex="-1"
-         ng-click="cancelSearch()"></a>
+         ng-click="cancelSearch(); searchItem = undefined;"></a>
     </div>
     <div class="pull-right" dropdown ng-init="searchByParamsDropdown = {}" is-open="searchByParamsDropdown.isOpen">
 
