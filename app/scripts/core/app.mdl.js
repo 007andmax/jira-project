@@ -18,6 +18,7 @@
       'quicktech.core.receiptArchive',
       'quicktech.core.vendors',
       'quicktech.core.leftPanel',
+      'quicktech.core.rightPanel',
       'ui.router',
       'ui.select',
       'ui.bootstrap',

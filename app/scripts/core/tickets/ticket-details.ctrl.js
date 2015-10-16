@@ -3,10 +3,14 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
-      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$state', 'ProductsService',
-        '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader,
-                  $state, ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService) {
+      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader',
+        '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
+        'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
+        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $state,
+                  ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService) {
+
+          var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
+          rightPanelSharedState.companyId = '';
 
           $scope.ticketTags = {};
           $scope.allUpdatesLoaded = false;
@@ -16,6 +20,9 @@
 
           UserNotificationService.show('Loading...');
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {
+
+            rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
+            rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
 
             $timeout(function () {
               UserNotificationService.hide();
@@ -369,7 +376,13 @@
             if (data.ticketId === $scope.ticketDetails.id
               && (!data.ticketType || data.ticketType.toUpperCase() === $stateParams.listType.toUpperCase()))
               $state.go('tickets', {listType: $stateParams.listType});
-          })
+          });
+
+          $scope.$on('$destroy', function () {
+            rightPanelSharedState.companyId = undefined;
+            rightPanelSharedState.createUserId = undefined;
+          });
+
         }]);
   }()
 );

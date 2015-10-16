@@ -1,0 +1,349 @@
+<div role="tabpanel" ng-if="companyGroupedData">
+
+  <ul class="nav nav-pills nav-justified nav-sb-tabs" role="tablist" ng-init="currentTicketInfoTab = 'COMPANY'">
+
+    <li ng-class="{'active': currentTicketInfoTab === 'COMPANY'}">
+      <a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="currentTicketInfoTab = 'COMPANY'">
+        <span class="icon icn-tab-company-info" tooltip-placement="top" tooltip="Company Info"></span>
+      </a>
+    </li>
+
+    <li ng-class="{'active': currentTicketInfoTab === 'DEVICE'}" ng-disabled="true" class="disabled">
+      <a href="javascript:void(0)" role="tab" data-toggle="tab">
+        <!--ng-click="currentTicketInfoTab = 'DEVICE'"-->
+        <span class="icon icn-tab-devices" tooltip-placement="top" tooltip="Devices"></span>
+      </a>
+    </li>
+
+    <li ng-class="{'active': currentTicketInfoTab === 'USER'}">
+      <a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="currentTicketInfoTab = 'USER'">
+        <span class="icon icn-tab-users" tooltip-placement="top" tooltip="Users"></span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane tab-company-info" ng-class="{'active': currentTicketInfoTab === 'COMPANY'}"
+         ng-controller="quicktech.core.rightPanel.rightPanelCompanyInfoTabCtrl">
+
+      <div class="wrapper-md">
+
+        <div class="company-detail">
+
+          <h4>{{ companyGroupedData.company.name }}</h4>
+
+          <!--<ul class="rating rating-5">-->
+          <!--<li class="icn-star-full star-1"></li>-->
+          <!--<li class="icn-star-full star-2"></li>-->
+          <!--<li class="icn-star-full star-3"></li>-->
+          <!--<li class="icn-star-half star-4"></li>-->
+          <!--<li class="icn-star-empty star-5"></li>-->
+          <!--</ul>-->
+
+          <!--<a href="javascript:void(0)" class="btn btn-gray btn-download-agent">-->
+          <!--<span class="icon icn-dot"></span>-->
+          <!--</a>-->
+
+        </div>
+      </div>
+
+      <div class="panel-heading">Billing Address</div>
+
+      <div class="billing-address">
+
+        <p class="post-address">{{ clientCompanyInfo.billingAddress.address }}</p>
+
+        <div class="site-ref dropdown">
+          <!--<div class="btn-location" data-container="body" data-toggle="popover-location" data-placement="bottom">-->
+          <!--<span class="icn-sb-location pull-left"></span>-->
+          <!--Site Ref. "TCL 01"-->
+          <!--</div>-->
+        </div>
+        <div class="about-company">
+
+          <div class="company-timezone"> GMT/{{ clientCompanyInfo.billingAddress.locale.description.match(gmtPattern)[0] }}
+            <span class="dot-sep"></span> {{ clientCompanyInfo.billingAddress.locale.description.match(hourPattern)[0] }} hour</div>
+
+          <div class="company-open-tickets">Open Tickets {{ clientCompanyInfo.openTickets }}</div>
+
+          <div class="company-response-time">Avg. Response Time {{ clientCompanyInfo.averageResponseTime }} mins</div>
+
+          <div class="company-phone-number" ng-repeat="phoneNumber in clientCompanyInfo.billingAddress.phoneNumbers">
+            {{ phoneNumber.number }}
+          </div>
+        </div>
+      </div>
+      <div class="panel-heading panel-heading-primary-contanct">Primary Contact(s)</div>
+
+      <ul class="list-group no-bg no-borders pull-in primary-contacts">
+
+        <li class="list-group-item list-users" ng-repeat="companyContact in companyContacts"
+            contact-popover contact-name="getUserName(companyContact)" attach-events="attachEvents"
+            send-email-in-popover="sendEmailInPopover" contact-number="companyContact.phoneNumbers"
+            contact-email="companyContact.email" contact-designation="companyContact.designation">
+
+          <a herf="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="{{ getContactAvatarUrl(companyContact) }}" alt="..." class="img-circle no-avatar">
+            <i class="b-white bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><a href="javascript:void(0)">{{ getUserName(companyContact) }}</a></div>
+          </div>
+
+        </li>
+      </ul>
+
+      <div ng-if="createTicketUser">
+        <div class="panel-heading created-by-heading">Ticket Created By</div>
+
+        <ul class="list-group no-bg no-borders pull-in ticket-created-by">
+
+          <li class="list-group-item list-users">
+
+            <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ getUserAvatarUrl(createTicketUser) }}" alt="..." class="img-circle">
+              <i class="b-white bottom" ng-class="{'on': createTicketUser.online, 'off': !createTicketUser.online}"></i>
+            </a>
+
+            <div class="clearfix">
+              <div class="user-name">
+                <a href="javascript:void(0)">{{ getUserName(createTicketUser) }}</a>
+              </div>
+            </div>
+
+          </li>
+
+        </ul>
+      </div>
+
+
+    </div>
+
+    <div role="tabpanel" class="tab-pane tab-devices" ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
+      <div class="wrapper-md">
+        <div class="form-search clearfix">
+          <form class="navbar-form navbar-form-search" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-round form-control-search"
+                     placeholder="Search device...">
+              <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
+            </div>
+            <div class="dropdown pull-right">
+              <div class="btn btn-white-gray btn-cr dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="icn-caret-gray"></span>
+              </div>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="javascript:void(0)">Select all Devices</a></li>
+                <li><a href="javascript:void(0)">Create Device</a></li>
+                <li><a href="javascript:void(0)">Delete Device(s)</a></li>
+                <li><a href="javascript:void(0)">Scan Network</a></li>
+                <li><a href="javascript:void(0)">Send Message</a></li>
+              </ul>
+
+              <!--- <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Select all Devices</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation" class="dropdown-header more-text">Select a device to see more <br>actions.</li>
+
+
+
+              </ul> -->
+            </div>
+          </form>
+        </div>
+        <div class="panel-heading">Devices <span class="total">7</span></div>
+        <ul class="list-group no-bg no-borders pull-in">
+          <li class="list-group-item list-devices checked">
+            <a href="javascript:void(0)" class="pull-left avatar m-r">
+              <span class="icon icn-tablet"></span>
+              <i class="on b-white right"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox" checked="checked">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name"><a href="javascript:void(0)">Tab.03</a></div>
+              <small class="user-title text-muted">Jack Williams</small>
+            </div>
+          </li>
+          <li class="list-group-item list-devices checked">
+            <a href="javascript:void(0)" class="pull-left avatar m-r">
+              <span class="icon icn-generic-device"></span>
+              <i class="on b-white right"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox" checked="checked">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>
+              <small class="user-title text-muted">Ryan.Burns</small>
+            </div>
+          </li>
+          <li class="list-group-item list-devices">
+            <a href="javascript:void(0)" class="pull-left avatar m-r">
+              <span class="icon icn-server"></span>
+              <i class="off b-white right"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name"><a href="javascript:void(0)">File.Server</a></div>
+              <small class="user-title text-muted">Miles.Mcmillan</small>
+            </div>
+          </li>
+          <li class="list-group-item list-devices">
+            <a href="javascript:void(0)" class="pull-left avatar m-r">
+              <span class="icon icn-printer"></span>
+              <i class="on b-white right"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>
+              <small class="user-title text-muted">Shaun.Pc</small>
+            </div>
+          </li>
+          <li class="list-group-item list-devices" data-container="body" data-toggle="popover-devices"
+              data-placement="left">
+            <a href="javascript:void(0)" class="pull-left avatar m-r">
+              <span class="icon icn-computer"></span>
+              <i class="on b-white right"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>
+              <small class="user-title text-muted">Miles.Mcmillan</small>
+            </div>
+          </li>
+          <li class="list-group-item list-devices">
+            <a href="javascript:void(0)" class="pull-left avatar m-r">
+              <span class="icon icn-mobile"></span>
+              <i class="off b-white right"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>
+              <small class="user-title text-muted">Laurie.Harding</small>
+            </div>
+          </li>
+          <li class="list-group-item list-devices">
+            <a href="javascript:void(0)" class="pull-left avatar m-r">
+              <span class="icon icn-fax"></span>
+              <i class="off b-white right"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>
+              <small class="user-title text-muted">File.Server</small>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane tab-users" ng-class="{'active': currentTicketInfoTab === 'USER'}"
+         ng-controller="quicktech.core.rightPanel.rightPanelUsersTabCtrl">
+      <div class="wrapper-md">
+        <div class="form-search clearfix">
+          <form class="navbar-form navbar-form-search" role="search">
+
+            <div class="form-group">
+              <input type="text" class="form-control form-control-round form-control-search"
+                     placeholder="Search user..." ng-model="searchUserKeyword">
+              <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+                 ng-click="searchUserKeyword = undefined"></a>
+            </div>
+
+            <div class="dropdown pull-right">
+              <div class="btn btn-white-gray btn-cr dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="icn-caret-gray"></span>
+              </div>
+
+              <ul class="dropdown-menu" role="menu">
+
+                <li>
+                  <a href="javascript:void(0)" ng-click="selectAllUsers()">Select all Users</a>
+                </li>
+
+                <li>
+                  <a href="javascript:void(0)" ui-sref="users.create">Create User</a>
+                </li>
+
+                <li role="presentation" class="divider"></li>
+
+                <li ng-show="isMoreActionsShow">
+                  <a href="javascript:void(0)" ng-click="deleteUsers()">Delete User(s)</a>
+                </li>
+
+                <li class="disabled" ng-show="isMoreActionsShow" ng-disabled="true">
+                  <a href="javascript:void(0)">Send Message</a>
+                </li>
+
+                <li ng-hide="isMoreActionsShow" role="presentation"
+                    class="dropdown-header more-text">Select a user to see more <br>actions.
+                </li>
+              </ul>
+
+            </div>
+          </form>
+        </div>
+
+        <div class="panel-heading">Users <span class="total">{{ companyGroupedData.users.length }}</span></div>
+        <ul class="list-group no-bg no-borders pull-in">
+
+          <li class="list-group-item list-users"
+              ng-class="{'checked': selectedUsers[user.id]}"
+              ng-repeat="user in companyGroupedData.users | filter: usersFilter">
+            <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
+              <i class="b-white bottom" ng-class="{'on': user.online, 'off': !user.online}"></i>
+            </a>
+
+            <div class="clearfix">
+              <label class="control checkbox pull-right">
+                <input type="checkbox" ng-model="selectedUsers[user.id]">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="user-name">
+                <a href="javascript:void(0)">{{ getUserName(user) }}</a>
+              </div>
+              <small class="user-title text-muted">{{ user.designation }}</small>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

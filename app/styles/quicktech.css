@@ -20964,3 +20964,15 @@ li a:hover  .icn-add-new , li a:active  .icn-add-new li a:focus  .icn-add-new{
   margin-left: -251px;
 }
 
+
+.animation-right-panel.ng-hide-add, .animation-right-panel.ng-hide-remove {
+  -webkit-transition: all linear 0.1s;
+}
+
+.animation-right-panel.ng-hide-add.ng-hide-add-active, .animation-right-panel.ng-hide-remove {
+  opacity: 0;
+}
+
+.animation-right-panel.ng-hide-add, .animation-right-panel.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+}
