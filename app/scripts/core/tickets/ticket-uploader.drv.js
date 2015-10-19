@@ -85,12 +85,12 @@
                   }
                 };
 
-                initScrollListener(paramsToSend)
+                initScrollListener(paramsToSend, scope);
 
               });
             }
 
-            function initScrollListener(paramsToSend) {
+            function initScrollListener(paramsToSend, $scope) {
 
               if (scrollListenerInitialize) {
                 return;
@@ -104,20 +104,24 @@
 
                   UserNotificationService.show('Loading...');
 
-                  TicketsService.loadMore(scope, function (moreTicket) {
-
-                    if ($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER' && moreTicket.length === 0) {
-                      getReportSpamTicket(paramsToSend);
-                    }
+                  TicketsService.loadMore($scope, function (moreTicket) {
 
                     UserNotificationService.hide();
-                    offScrolEvent(paramsToSend, moreTicket);
+
+                    if (moreTicket.length === 0) {
+
+                      $document.off('scroll');
+
+                      if (paramsToSend.filter !== 'ADMIN_REPORTED_AS_SPAM' && $stateParams.listType === 'spam' && $scope.currentUser.role !== 'USER') {
+                        getReportSpamTicket(paramsToSend);
+                      }
+                    }
 
                   })
                 }
               });
 
-              scope.$on('$destroy', function () {
+              $scope.$on('$destroy', function () {
                 $document.off('scroll');
                 SharedStateService.clearState('billableClientsHeader');
               });
@@ -128,22 +132,16 @@
 
               var reportedAsSpamScope = scope.$new();
 
+              scrollListenerInitialize = false;
+
               paramsToSend.filter = 'ADMIN_REPORTED_AS_SPAM';
 
               scope.reportSpamTickets = TicketsService.getList(reportedAsSpamScope, paramsToSend, function () {
 
                 scope.reportedSpamMesage = true;
                 scope.onReportedAsSpamTicketRendering = scope.onTicketRendering;
-                initScrollListener(paramsToSend)
+                initScrollListener(paramsToSend, reportedAsSpamScope)
               });
-            }
-
-            function offScrolEvent(paramsToSend, moreTicket){
-              if (moreTicket.length === 0 && !($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER')) {
-                $document.off('scroll');
-              } else if (paramsToSend.filter === 'ADMIN_REPORTED_AS_SPAM' && moreTicket.length === 0) {
-                $document.off('scroll');
-              }
             }
 
           }
