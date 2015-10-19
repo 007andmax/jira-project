@@ -126,9 +126,11 @@
 
             function getReportSpamTicket(paramsToSend) {
 
+              var reportedAsSpamScope = scope.$new();
+
               paramsToSend.filter = 'ADMIN_REPORTED_AS_SPAM';
 
-              scope.reportSpamTickets = TicketsService.getList(scope, paramsToSend, function () {
+              scope.reportSpamTickets = TicketsService.getList(reportedAsSpamScope, paramsToSend, function () {
 
                 scope.reportedSpamMesage = true;
                 scope.onReportedAsSpamTicketRendering = scope.onTicketRendering;
