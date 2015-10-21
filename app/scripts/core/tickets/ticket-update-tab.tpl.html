@@ -1,7 +1,7 @@
 <div class="ticket-post-update-wrapper">
-  <!--ng-show=" listType !== 'unassigned' && listType !== 'closed' && listType !== 'trash' && listType !== 'spam' "-->
+
   <div role="tabpanel">
-    <!-- Nav tabs -->
+
     <ul class="nav nav-pills nav-post-update"
         ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
 
@@ -14,7 +14,6 @@
       </li>
 
       <li role="presentation" ng-class="{'active': currentOpenTab === 'PRODUCT'}">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <a href="javascript:void(0)"
            ng-click="openedTab('PRODUCT');">
           <span class="icon-add icn-add-product"></span>
@@ -23,7 +22,6 @@
       </li>
 
       <li role="presentation" ng-class="{'active': currentOpenTab === 'SERVICE'}">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <a href="javascript:void(0)"
            ng-click="openedTab('SERVICE');">
           <span class="icon-add icn-add-service"></span>
@@ -39,9 +37,8 @@
 
     </ul>
 
-    <!-- Tab panes -->
     <div class="tab-content">
-      <!-- Add Note-->
+
       <div role="tabpanel" class="tab-pane tab-add-note active"
            ng-if="currentOpenTab === 'NOTE'"
            ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
@@ -58,7 +55,6 @@
             <div class="update-ticket-form-wrapper">
               <div ng-include="'/html/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
 
-              <!-- Update Box Footer -->
               <div class="ticket-form-footer clearfix">
                 <div ticket-attachment-files attachment-func="addAttachmentFiles"
                      ng-model="ticketUpdate.ticketAttachments">
@@ -85,11 +81,10 @@
         </div>
       </div>
 
-      <!-- Add Product Panel -->
       <div role="tabpanel" class="tab-pane tab-add-product active"
            ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'PRODUCT'"
            ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+
         <div class="ticket-update clearfix">
 
           <div class="ticket-updater pull-left">
@@ -120,7 +115,6 @@
                    number-pattern="numberPattern"
                    show-errors="triedToAddProduct"></div>
 
-              <!-- Update Box Footer -->
               <div class="ticket-form-footer clearfix">
                 <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'">
                 </div>
@@ -133,11 +127,10 @@
         </div>
       </div>
 
-      <!-- Service Panel -->
       <div role="tabpanel" class="tab-pane tab-add-service active"
            ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'SERVICE'"
            ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+
         <div class="ticket-update clearfix">
 
           <div class="ticket-updater pull-left">

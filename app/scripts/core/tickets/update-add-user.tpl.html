@@ -17,19 +17,16 @@
       </li>
 
       <li ng-class="{'active': currentAddUserTab === 'VENDOS'}">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <a href="javascript:void(0)" ng-click="openAddUserTab('VENDOS')">vendors</a>
       </li>
 
       <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
         <a href="javascript:void(0)" ng-click="openAddUserTab('CLIENT_USER')">Client Users</a>
       </li>
 
     </ul>
 
     <div class="tab-content">
-      <!-- Team Members Panel -->
 
       <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'">
         <div class="form-group">
@@ -77,9 +74,8 @@
         </div>
       </div>
 
-      <!-- Vendor Panel -->
       <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+
         <div class="form-group">
 
           <input type="text" class="form-control form-control-search form-control-dropdown-input"
@@ -124,9 +120,8 @@
 
       </div>
 
-      <!-- Client User Panel -->
       <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'">
-        <!--ng-if=" listType !== 'shared' || currentUser.role !== 'USER' "-->
+
         <div class="form-group">
 
           <input type="text" class="form-control form-control-search form-control-dropdown-input"
@@ -220,7 +215,6 @@
   </ul>
 </div>
 
-<!-- Selected Users -->
 <ul class="selected-users pull-left">
 
   <li ng-repeat="sharedUser in updateSharedUsersList">

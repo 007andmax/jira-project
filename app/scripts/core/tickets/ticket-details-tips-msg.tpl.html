@@ -2,7 +2,6 @@
      ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
   <!-- Ticket Notes -->
   <div class="tips-message" ng-if="listType === 'unassigned'">
-    <!--ng-if=" listType === 'unassigned' "-->
     <span class="icn icn-message-ticket-claim"></span>
 
     <div class="message-detail">
@@ -17,7 +16,6 @@
     </div>
   </div>
 
-  <!-- closed -->
   <div class="tips-message has-updates"
        ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'OPEN')">
 
@@ -82,7 +80,6 @@
   </div>
 
   <div class="tips-message has-updates" ng-if="listType === 'trash'">
-    <!--ng-if=" listType === 'trash' "-->
     <span class="icn icn-message-ticket-trash"></span>
 
     <div class="message-detail">
@@ -111,7 +108,6 @@
 
   <div class="tips-message has-updates"
        ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_DELETE')">
-    <!--ng-if=" listType === 'spam' && currentUser.role === 'ADMIN' "-->
     <span class="icn icn-message-ticket-spam"></span>
 
     <div class="message-detail">

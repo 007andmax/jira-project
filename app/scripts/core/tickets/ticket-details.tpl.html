@@ -18,7 +18,6 @@
           <span ng-if="PermissionsService.isStatusVisible(listType, currentUser.role)"
                 class="icns icn-status-{{ ticketStatusToCssFormat(ticketDetails.status) }}"
                 tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top"></span>
-              <!--ng-if=" listType !== 'unassigned' "-->
 
           <span ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)"
                 ng-repeat="tag in ticketDetails.tags" class="tag-color color{{ tag.color }}"
@@ -44,13 +43,11 @@
                tooltip="Update &amp; Close" tooltip-placement="top"
                ng-class="{ 'disabled': ticketDetails.status === 'COMPLETED' }"
                ng-click="updateAndCloseTicket()">
-            <!--ng-if=" (ticketDetail.assignedUser !== null && currentUser.role !== 'USER' && listType !== 'trash' && listType !== 'spam') || (listType === 'user' && currentUser.role === 'USER') "-->
             <span class="icn-tick"></span>
           </div>
 
           <div class="pad-left dropdown pull-left" dropdown
                ng-if="PermissionsService.isSettingVisible(listType, currentUser.role)">
-            <!--ng-if="listType !== 'spam' && listType != 'trash' && listType !== 'shared' || (listType === 'shared' && currentUser.role === 'ADMIN') "-->
 
             <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
                  tooltip="Settings" dropdown-toggle ng-click="setTicketTags()"
@@ -61,7 +58,6 @@
             <ul class="dropdown-menu" role="menu">
 
               <li ng-if="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">
-                <!--ng-if="ActionRightsService.isClaimTicketVisible(listType, ticketDetail.assignedUser)"-->
                 <a ng-click="claimTicket()" tabindex="-1" href="javascript:void(0)">
                   Claim Ticket
                 </a>
@@ -69,7 +65,6 @@
 
               <li class="dropdown-submenu left-align" stop-propagation="click"
                   ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
-                <!--ng-if="ActionRightsService.isLabelAsVisible(listType, currentUser.role)"-->
                 <a tabindex="-1" href="javascript:void(0)">Label as...</a>
 
                 <div class="dropdown-submenu-wrapper" ng-if="showTicketTags">
@@ -85,7 +80,6 @@
 
               <li id="detailAssignTicketTo" class="dropdown-submenu left-align"
                   ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
-                <!--ng-if="ActionRightsService.isAssignToUserVisible(listType, currentUser.role)"-->
                 <a tabindex="-1" href="javascript:void(0)">Assign Ticket to...</a>
 
                 <div class="dropdown-submenu-wrapper">
@@ -101,7 +95,6 @@
 
               <li class="dropdown-submenu left-align"
                   ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))">
-                <!--ng-if="ActionRightsService.isPriorityForDetailPageVisible(listType, currentUser.role)"-->
                 <a tabindex="-1" href="javascript:void(0)">
                   Change Priority to...
                 </a>
@@ -132,7 +125,6 @@
 
               <li class="dropdown-submenu"
                   ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
-                <!--ng-if="ActionRightsService.isChangeStatusVisible(listType)"-->
                 <a tabindex="-1" href="javascript:void(0)">
                   Change Status to...
                 </a>
@@ -153,16 +145,16 @@
                 </div>
               </li>
 
-              <li ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isSendToSpamVisible(listType, currentUser.role)">
-                <!--ng-if="ActionRightsService.isMarkAsSpamDetailVisible(listType, currentUser.role)" ng-click="moveIntoSpam()"-->
+              <li
+                ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isSendToSpamVisible(listType, currentUser.role)">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveIntoSpam()">
                   <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
                   <span ng-if="currentUser.role === 'USER' ">Report as Spam</span>
                 </a>
               </li>
 
-              <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)  && !ticketDetails.hasInvoice">
-                <!--ng-if="ActionRightsService.isMoveToTrashForeverIconVisible(listType)"-->
+              <li
+                ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)  && !ticketDetails.hasInvoice">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">
                   Move to Trash
                 </a>
@@ -183,14 +175,11 @@
         {{ ticketDetails.subject }}
       </h3>
     </div>
-    <!-- .ticket-header -->
 
     <div class="ticket-detail clearfix">
-      <div class="ticket-message" ng-bind-html="getTicketNote()">
-        <!--{{renderHTML('ticket-message', ticketDetail.note)}}-->
-      </div>
+
+      <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
       <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0">
-        <!--ng-if="ticketDetails.attachments.length > 0"-->
         <div class="attachment-meta clearfix">
           <span class="attachments-count pull-left">{{ ticketDetails.attachments.length }} Attachments</span>
 
@@ -205,7 +194,6 @@
         </div>
         <ul class="attachments clearfix">
 
-          <!-- For zip viewable will be replaced with zip -->
           <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
               ng-repeat="attachment in ticketDetails.attachments">
 
@@ -237,12 +225,9 @@
       <div ng-include="'/html/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
     </div>
 
-    <!-- ticket updates -->
     <div class="ticket-updates clearfix">
 
-      <!-- ticket updates - heading -->
       <div class="ticket-update-header clearfix" ng-if="listType !== 'unassigned' && ticketDetails.updates.length > 0">
-        <!--ng-if="ticketDetail.updates.length > 0 && listType !== 'unassigned'"-->
         <h4>
           <span class="pull-left ticket-update-title">
             Ticket Updates
@@ -280,7 +265,6 @@
 
         <div class="clearfix"></div>
         <ul class="shared-users-list" ng-show="isFullSharedUserShow === true">
-          <!--ng-show="isSharedBetweenVisible === true"-->
           <li ng-repeat="share in shares">
             <div class="pull-left avatar-38 avatar m-r">
 
@@ -309,10 +293,8 @@
 
       </div>
 
-      <!-- /ticket updates -->
-
       <div class="ticket-updates-wrapper clearfix" ng-if="listType !== 'unassigned'">
-        <!--ng-if="listType !== 'unassigned'"-->
+
         <div ng-repeat="ticketUpdate in ticketDetails.updates" class="ticket-update clearfix"
              ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
              ng-class="{'has-attachment': ticketUpdate.attachments.length > 0}" ng-init="updateIndex = $index;">
@@ -344,13 +326,11 @@
                       ng-class="{disabled: ticketDetails.status === 'COMPLETED' || PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id,  currentUser.role)}"></button>
             </div>
 
-            <!-- Update Content - Note -->
             <p class="ticket-update-message" ng-if="ticketUpdate.type === 'NOTE'">{{ ticketUpdate.note }}</p>
 
             <ul class="attachments clearfix"
                 ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
 
-              <!-- For zip viewable will be replaced with zip -->
               <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                   ng-repeat="updateUttachment in ticketUpdate.attachments">
 
@@ -371,7 +351,6 @@
               </li>
             </ul>
 
-            <!-- Update Content - Product -->
             <div class="table-wrapper clearfix"
                  ng-repeat="product in ticketUpdate.products" ng-if="ticketUpdate.type === 'PRODUCT'">
 
@@ -403,10 +382,10 @@
 
                 <div class="table-content-action pull-right">
                   <button href="javascript:void(0)" tooltip="edit product" tooltip-placement="top"
-                     class="icn-edit tp-hide" style="border: none"
-                     ng-click="setEditExpenseId(product.id)"
-                     ng-disabled="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)"
-                     ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)}"></button>
+                          class="icn-edit tp-hide" style="border: none"
+                          ng-click="setEditExpenseId(product.id)"
+                          ng-disabled="PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)"
+                          ng-class="{'disabled': PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role)}"></button>
                 </div>
 
               </div>
@@ -416,7 +395,6 @@
 
             </div>
 
-            <!-- Update Content - Service -->
             <div class="table-wrapper clearfix"
                  ng-if=" ticketUpdate.type === 'SERVICE' " ng-repeat="service in ticketUpdate.services">
 
