@@ -61,8 +61,11 @@
         </div>
         <div class="about-company">
 
-          <div class="company-timezone"> GMT/{{ clientCompanyInfo.billingAddress.locale.description.match(gmtPattern)[0] }}
-            <span class="dot-sep"></span> {{ clientCompanyInfo.billingAddress.locale.description.match(hourPattern)[0] }} hour</div>
+          <div class="company-timezone">
+            GMT/{{ clientCompanyInfo.billingAddress.locale.description.match(gmtPattern)[0] }}
+            <span class="dot-sep"></span>
+            {{ clientCompanyInfo.billingAddress.locale.description.match(hourPattern)[0] }} hour
+          </div>
 
           <div class="company-open-tickets">Open Tickets {{ clientCompanyInfo.openTickets }}</div>
 
@@ -77,18 +80,24 @@
 
       <ul class="list-group no-bg no-borders pull-in primary-contacts">
 
-        <li class="list-group-item list-users" ng-repeat="companyContact in companyContacts"
-            contact-popover contact-name="getUserName(companyContact)" attach-events="attachEvents"
-            send-email-in-popover="sendEmailInPopover" contact-number="companyContact.phoneNumbers"
-            contact-email="companyContact.email" contact-designation="companyContact.designation">
+        <li class="list-group-item list-users" style="padding: 15px 0px;"
+            ng-repeat="companyContact in companyContacts"
+            attach-events="attachEvents">
 
-          <a herf="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="{{ getContactAvatarUrl(companyContact) }}" alt="..." class="img-circle no-avatar">
-            <i class="b-white bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
-          </a>
+          <div style="width: 100%; padding-left: 40px;"
+               contact-popover contact-name="getUserName(companyContact)" attach-events="attachEvents"
+               send-email-in-popover="sendEmailInPopover" contact-number="companyContact.phoneNumbers"
+               contact-email="companyContact.email" contact-designation="companyContact.designation">
 
-          <div class="clearfix">
-            <div class="user-name"><a href="javascript:void(0)">{{ getUserName(companyContact) }}</a></div>
+            <a herf="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ getContactAvatarUrl(companyContact) }}" alt="..." class="img-circle no-avatar">
+              <i class="b-white bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
+            </a>
+
+            <div class="clearfix">
+              <div class="user-name"><a href="javascript:void(0)">{{ getUserName(companyContact) }}</a></div>
+            </div>
+
           </div>
 
         </li>

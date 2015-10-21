@@ -109,55 +109,38 @@
           </div>
         </li>
       </ul>
-      <div class="panel-heading crruently-heading">Currently working with</div>
-      <ul class="list-group no-bg no-borders pull-in primary-contacts">
-        <li class="list-group-item list-users" data-container="body" data-toggle="popover" data-placement="left"
-            data-title="Laurie Harding">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-            <i class="on b-white bottom"></i>
-          </a>
 
-          <div class="clearfix">
-            <div class="user-name"><a href="javascript:void(0)">Miles McMillan</a></div>
-            <small class="user-title text-muted">Client User</small>
+      <div class="panel-heading crruently-heading" ng-show="workingWithIdsUsers.length > 0">Currently working with</div>
+
+      <ul class="list-group no-bg no-borders pull-in primary-contacts" ng-if="vendorContactsLoad && workingWithIdsUsers.length > 0">
+
+        <li class="list-group-item list-users" style="padding: 15px 0px;"
+            ng-show="!!userInfo"
+            ng-repeat="workingWithIdUser in workingWithIdsUsers"
+            ng-controller="quicktech.core.rightPanel.workingWithUserCtrl">
+
+          <div contact-popover contact-name="getUserName(userInfo)" style="width: 100%; padding-left: 40px;"
+               send-email-in-popover="sendEmailInPopover" contact-number="userInfo.phoneNumbers"
+               contact-email="isUser ? userInfo.primaryEmail : userInfo.email" contact-designation="userInfo.designation">
+
+            <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ isUser ? getUserAvatarUrl(userInfo) : getContactAvatarUrl(userInfo) }}"
+                   alt="..." class="img-circle">
+              <i class="b-white bottom" ng-show="isUser"
+                 ng-class="{'on': userInfo.online, 'off': !userInfo.online}"></i>
+            </a>
+
+            <div class="clearfix">
+              <div class="user-name"><a href="javascript:void(0)">{{ getUserName(userInfo) }}</a></div>
+              <small class="user-title text-muted">{{ getUserRole() }}</small>
+            </div>
+
           </div>
         </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-            <i class="off b-white bottom"></i>
-          </a>
 
-          <div class="clearfix">
-            <div class="user-name"><a href="javascript:void(0)">Laurie Harding</a></div>
-            <small class="user-title text-muted">Client User</small>
-          </div>
-        </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-            <i class="off b-white bottom"></i>
-          </a>
-
-          <div class="clearfix">
-            <div class="user-name"><a href="javascript:void(0)">Eric Hoffman</a></div>
-            <small class="user-title text-muted">Team Member</small>
-          </div>
-        </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-            <i class="off b-white bottom"></i>
-          </a>
-
-          <div class="clearfix">
-            <div class="user-name"><a href="javascript:void(0)">Daria Strokous</a></div>
-            <small class="user-title text-muted">Team Member</small>
-          </div>
-        </li>
       </ul>
     </div>
+
     <div role="tabpanel" class="tab-pane tab-activities" ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}">
       <div class="form-search clearfix">
         <form class="navbar-form navbar-form-search" role="search">

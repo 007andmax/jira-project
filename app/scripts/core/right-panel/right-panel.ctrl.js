@@ -3,14 +3,20 @@
 (function () {
 
   angular.module('quicktech.core.rightPanel').controller('quicktech.core.rightPanel.rightPanelCtrl',
-    ['$scope', 'RightPanelService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
-      'CompaniesService', 'quicktech.common.services.SharedStateService', 'UsersService',
-      function ($scope, RightPanelService, TicketTagsService, $stateParams, PermissionsService, CompaniesService, SharedStateService, UsersService) {
+    ['$scope', 'RightPanelService', 'quicktech.common.services.SharedStateService', 'UsersService', 'TicketsService', 'ContactsService',
+      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, ContactsService) {
 
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
 
+        $scope.workingWithIdsUsers = TicketsService.getCurrentlyWorkingWith($scope);
+        $scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket(function(){
+          $scope.vendorContactsLoad = true;
+        });
+
         UsersService._addInitListener(function () {
+
+          $scope.isRightPanelInitialized = true;
 
           $scope.rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
 

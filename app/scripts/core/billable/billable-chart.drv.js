@@ -46,7 +46,7 @@
               chartHeight = chart.height(),
               maxValue = getMaxValue(chartData),
               markDate = [],
-              coef = Math.pow(10, ((maxValue.toFixed(0)).length - 1)),
+              coef = Math.pow(10, ((maxValue.toFixed(0)).length - 2)),
               maxMark = (Math.ceil(maxValue / coef)) * coef,
               midleMark = maxMark / 2,
               bottomMark = 0,

@@ -205,7 +205,7 @@
             if (shared.user && shared.user.id) {
               var user = $scope.getUserById(shared.user.id);
 
-              return user.accountType === 'TECH' ? 'Team Member' : 'Client User';
+              return user.company.id === $scope.currentUser.company.id ? 'Team Member' : 'Client User';
 
             } else {
 

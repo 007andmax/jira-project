@@ -76,7 +76,6 @@
                           }
 
                           UserNotificationService.hide();
-                          offScrolEvent(paramsToSend, moreTicket);
 
                         })
                       }
