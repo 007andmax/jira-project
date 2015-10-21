@@ -1,0 +1,52 @@
+<div class="assign-ticket">
+  <!-- TODO set 'isShowAssignUser' to false when dropdown closed-->
+  <div class="assign-ticket-content">
+    <div class="assign-ticket-header">
+      <div class="clearfix">
+        <div class="form-group">
+          <div id="the-basics" class="form-control">
+            <span class="twitter-typeahead" style="position: relative; display: inline-block;"
+                  up-down-key ng-model="userToAssign">
+
+              <input id="assignedTo" type="text" class="typeahead form-control"
+                     placeholder="Add agent" ng-model="assignToModel">
+
+              <div class="tt-menu" style="position: absolute;" scroll-pane>
+                <div>
+                  <div ng-repeat="assignUser in usersCurrentCompany | filter: filterAssignUser"
+                       assign-user="{{ assignUser.id }}">
+                    <div class="tt-suggestion tt-selectable" ng-click="setUserToAssign(assignUser)"
+                         ng-class="{'tt-cursor': $index === currentAssignUser}">
+
+                      <a herf="javascript:void(0);" class="pull-left avatar-26 avatar m-r">
+                        <img ng-src="{{ getUserAvatarUrl(assignUser) }}" alt="..." class="img-circle">
+                      </a>
+
+                      <div class="clearfix">
+                        <div class="user-name">
+                          <a href="javascript:void(0);">
+                            {{ getUserName(assignUser, true) }}
+                          </a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        </span>
+          </div>
+
+          <div class="label-add-btn">
+            <a id="btnAssignUser" href="javascript:void(0);" class="btn input-btn-cr btn-green btn-add-more pull-left"
+               ng-class="{'disabled': !userToAssign.id}" ng-disabled="!userToAssign.id"
+               ng-click="assignUserToTicket()">
+              <span class="small-icn-tick icn"></span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,91 +1,92 @@
 <div class="toggle-menu icn-toggle-menu"></div>
 
 <div class="scroll-pane" qt-scroll-pane ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
-	<nav class="site-left-nav dashboard clearfix">
-		<ul class="nav nav-pills nav-stacked">
-			<li > <a href="#"> <span class="nav-icon icn-dashboard"></span> Dashboard </a> </li>
-		</ul>
-	</nav>
-	<nav class="site-left-nav clearfix">
-		<div class="clearfix divider"></div>
-		<div class="nav-title panel-heading">Tickets</div>
-		<ul class="nav nav-pills sub-nav nav-stacked">
-			<li ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'unassigned'})">
-					<span class="nav-icon icn-unassigned"></span> Unassigned
-					<span class="badge" ng-if="ticketCounts.UNASSIGNED !== 0">{{ticketCounts.UNASSIGNED}}</span>
-				</a>
-			</li>
-			<li ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'user'})">
-					<span class="nav-icon icn-tickets"></span> My Tickets
-				</a>
-			</li>
-			<li  ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'shared'})">
-					<span class="nav-icon icn-shared"></span>  Shared
-					<span class="badge">{{ticketCounts.SHARED}}</span>
-				</a>
-			</li>
-			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-				<a ui-sref="Tickets({listType: 'open'})">
-					<span class="nav-icon icn-open"></span>Open
-				</a>
-			</li>
-			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-				<a ui-sref="Tickets({listType: 'closed'})"> <span class="nav-icon icn-closed"></span> Closed
-				</a>
-			</li>
-			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-				<a ui-sref="Tickets({listType: 'trash'})"><span class="nav-icon icn-trash"></span> Trash
-				</a>
-			</li>
-			<li ui-sref-active="active">
-				<a ui-sref="Tickets({listType: 'spam'})"><span class="nav-icon icn-spam"></span> Spam
-				</a>
-			</li>
-		</ul>
-	</nav>
-	<div class="clearfix divider"></div>
-
-	<nav class="site-left-nav clearfix">
-		<div class="nav-title panel-heading">clients</div>
-		<ul class="nav nav-pills sub-nav nav-stacked">
-			<li ui-sref-active="active">
-        <a ui-sref="companies"> <span class="nav-icon icn-companies"></span>  Companies</a>
-      </li>
-      <li >
-        <a href="#"> <span class="nav-icon icn-leads no-icon"></span> Leads  <span class="badge">8</span>
+  <nav class="site-left-nav dashboard clearfix">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="javascript:void(0)"> <span class="nav-icon icn-dashboard"></span> Dashboard </a></li>
+    </ul>
+  </nav>
+  <nav class="site-left-nav clearfix">
+    <div class="clearfix divider"></div>
+    <div class="nav-title panel-heading">Tickets</div>
+    <ul class="nav nav-pills sub-nav nav-stacked">
+      <li ui-sref-active="active">
+        <a ui-sref="tickets({listType: 'unassigned'})">
+          <span class="nav-icon icn-unassigned"></span> Unassigned
+          <span class="badge">{{ ticketCounts.UNASSIGNED }}</span>
         </a>
       </li>
       <li ui-sref-active="active">
-        <a ui-sref="users"> <span class="nav-icon icn-users"></span>  Users
+        <a ui-sref="tickets({listType: 'user'})">
+          <span class="nav-icon icn-tickets"></span> My Tickets
         </a>
       </li>
-			<li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+      <li ui-sref-active="active">
+        <a ui-sref="tickets({listType: 'shared'})">
+          <span class="nav-icon icn-shared"></span> Shared
+          <span class="badge">{{ ticketCounts.SHARED }}</span>
+        </a>
+      </li>
+      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+        <a ui-sref="tickets({listType: 'open'})">
+          <span class="nav-icon icn-open"></span>Open
+        </a>
+      </li>
+      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+        <a ui-sref="tickets({listType: 'closed'})"> <span class="nav-icon icn-closed"></span> Closed
+        </a>
+      </li>
+      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+        <a ui-sref="tickets({listType: 'trash'})"><span class="nav-icon icn-trash"></span> Trash
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="tickets({listType: 'spam'})"><span class="nav-icon icn-spam"></span> Spam
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="clearfix divider"></div>
+
+  <nav class="site-left-nav clearfix">
+    <div class="nav-title panel-heading">clients</div>
+    <ul class="nav nav-pills sub-nav nav-stacked">
+      <li ui-sref-active="active">
+        <a ui-sref="companies"> <span class="nav-icon icn-companies"></span> Companies</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)"> <span class="nav-icon icn-leads no-icon"></span> Leads <span
+          class="badge">8</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="users"> <span class="nav-icon icn-users"></span> Users
+        </a>
+      </li>
+      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
         <a ui-sref="vendors">
-          <span class="nav-icon icn-vendors no-icon"></span>  Vendors
+          <span class="nav-icon icn-vendors no-icon"></span> Vendors
         </a>
       </li>
-		</ul>
-	</nav>
-	<div class="clearfix divider"></div>
-	<nav class="site-left-nav clearfix">
-		<div class="nav-title panel-heading">Accounts</div>
-		<ul class="nav nav-pills sub-nav nav-stacked">
+    </ul>
+  </nav>
+  <div class="clearfix divider"></div>
+  <nav class="site-left-nav clearfix">
+    <div class="nav-title panel-heading">Accounts</div>
+    <ul class="nav nav-pills sub-nav nav-stacked">
       <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
         <a ui-sref="accounting"> <span class="nav-icon icn-billable no-icon"></span>Billable
-          <span class="badge">16</span>
+          <span class="badge">{{ ticketCounts.BILLABLE }}</span>
         </a>
       </li>
       <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
         <a ui-sref="receivable({mode: 'group-by-company'})">
           <span class="nav-icon icn-receivable no-icon"></span> Receivable
-          <span class="badge">9</span>
+          <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
         </a>
       </li>
       <li ui-sref-active="active">
-        <a ui-sref="ps"> <span class="nav-icon  icn-product-services no-icon"></span>  Products & Services
+        <a ui-sref="ps"> <span class="nav-icon  icn-product-services no-icon"></span> Products & Services
         </a>
       </li>
       <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
@@ -93,54 +94,21 @@
           <span class="nav-icon icn-receipt-archive no-icon"></span> Receipt Archive
         </a>
       </li>
-		</ul>
-	</nav>
-	<div class="clearfix divider"></div>
-	<!--nav class="site-left-nav clearfix label-nav" ng-controller="TagController">
-		<div class="nav-title panel-heading">labels</div>
-		<ul class="nav nav-pills nav-tags nav-stacked">
-			<li ng-repeat="tag in tags">
-				<a href="javascript:{}">
-					<span class="tag-color color{{tag.color}}"></span>
-					{{tag.name}}<span class="icn-edit-tag" data-toggle="tooltip" data-placement="top" title="edit label" ng-click="getcreateTag($event, tag)"></span>
-					<span class="badge badge-gray">{{tagsCount[tag.id]}}</span>
-				</a>
-			</li>
-			<li class="edit" style="display:">
-				<div class="label-edit">
-					<div class="label-heading">
-						<div class="color2 tag-color"></div>
-						<input type="text" class="form-control-edit" value="Onsite">
-					</div>
-					<ul class="indctr-list clearfix">
-						<li ng-repeat="color in colorCodes" class="{{color.code==4 || color.code==9 ? 'last':''}}"><span class="color{{color.code}} tag-color"></span></li>
-					</ul>
-					<div class="label-actions clearfix">
-						<a href="javascript:{}">
-							<div class="icn icn-label-delete pull-left" data-toggle="tooltip" data-placement="top" data-original-title="delete label"></div>
-						</a>
-						<a href="javascript:{}">
-							<div class="icn icn-label-save pull-right"   data-toggle="tooltip" data-placement="top" data-original-title="save"></div>
-						</a>
-						<a href="javascript:{}">
-							<div class="icn icn-label-cancel pull-right" data-toggle="tooltip" data-placement="top" data-original-title="cancel"></div>
-						</a>
-					</div>
-				</div>
-			</li>
-			<li class="create-new-label">
-				<a href="javascript:{}" ng-click="getcreateTag($event)">
-					<span class="tag-color icn-add-new"></span>
-					Create Label
-				</a>
-			</li>
-		</ul>
-	</nav-->
-	<div class="clearfix divider"></div>
-	<nav class="site-left-nav clearfix">
-		<ul class="nav nav-pills last sub-nav nav-stacked">
-			<li > <a href="javascript:{}"> <span class="nav-icon icn-devices "></span>  Devices </a> </li>
-			<li> <a href="javascript:{}"> <span class="nav-icon icn-reports "></span> Reports  </a> </li>
-		</ul>
-	</nav>
+    </ul>
+  </nav>
+  <div class="clearfix divider"></div>
+
+  <nav class="site-left-nav clearfix label-nav">
+    <div ng-controller="quicktech.core.leftPanel.leftPanelTagsCtrl"
+         ng-if="PermissionsService.isShowLabelsOnLeftPanel(listType)"
+         ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-tags.tpl.html'"></div>
+  </nav>
+
+  <div class="clearfix divider" ng-show="PermissionsService.isShowLabelsOnLeftPanel(listType)"></div>
+  <nav class="site-left-nav clearfix">
+    <ul class="nav nav-pills last sub-nav nav-stacked">
+      <li><a href="javascript:void(0)"><span class="nav-icon icn-devices"></span> Devices </a></li>
+      <li><a href="javascript:void(0)"><span class="nav-icon icn-reports"></span> Reports </a></li>
+    </ul>
+  </nav>
 </div>

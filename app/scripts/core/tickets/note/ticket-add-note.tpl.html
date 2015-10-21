@@ -1,0 +1,37 @@
+<form name="updateTicketNote">
+  <div class="ticket-form-header">
+    <div class="editable-container" ng-class="{error: isShowingErrors(updateTicketNote, 'updateNote')}">
+
+      <div ng-messages="updateTicketNote.updateNote.$error"
+           ng-if="isShowingErrors(updateTicketNote, 'updateNote')">
+        <div class="qt-error-msg" ng-message="required">note is required.</div>
+        <div class="qt-error-msg" ng-message="maxlength">note is too large.</div>
+      </div>
+
+      <input type="hidden" ng-model="ticketUpdate.note" ng-maxlength="65000" name="updateNote"/>
+
+
+      <div id="ticket-new-note" placeholder="Click here to respond to the Ticket"
+           contenteditable="true" ticket-note-fild ng-model="ticketUpdate.note"></div>
+
+      <ul class="note-attachments" id="attachments">
+        <li ng-repeat="file in ticketUpdate.attachments">
+
+          <span class="filename"> {{ file.name }}</span>
+          <span class="filesize"> {{ file.size | fileSizeFilter }} </span>
+
+          <a href="javascript:void(0)" class="icn-remove-token pull-right"
+             tooltip="Remove file" tooltip-placement="top" ng-click="removeAttachment($index)"></a>
+
+          <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{ file.progress }}"
+                 aria-valuemin="0" aria-valuemax="100" ng-style="styleProgressBar(file.progress)">
+              <span class="sr-only">{{ file.progress }}% Complete</span>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>

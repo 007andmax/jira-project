@@ -1,0 +1,443 @@
+<div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-pills nav-justified nav-sb-tabs" role="tablist" ng-init="currentTicketInfoTab = 'CURRENT_USER'">
+
+    <li ng-class="{'active': currentTicketInfoTab === 'CURRENT_USER'}">
+      <a href="javascript:void(0)" role="tab" ng-click="currentTicketInfoTab = 'CURRENT_USER'">
+        <span class="icon icn-tab-info" tooltip-placement="top" tooltip="about me"></span>
+      </a>
+    </li>
+
+    <li ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}">
+      <a href="javascript:void(0)" role="tab" ng-click="currentTicketInfoTab = 'ACTIVITY'">
+        <span class="icon icn-tab-activities" tooltip-placement="top" tooltip="all activity"></span>
+      </a>
+    </li>
+
+    <li ng-class="{'active': currentTicketInfoTab === 'USER_COMPANY'}">
+      <a href="javascript:void(0)" role="tab" ng-click="currentTicketInfoTab = 'USER_COMPANY'">
+        <div class="icon icn-tab-companies" tooltip-placement="top" tooltip="companies"></div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane tab-info" ng-class="{'active': currentTicketInfoTab === 'CURRENT_USER'}">
+
+      <div class="panel-heading panel-heading-about">About me</div>
+
+      <div class="billing-address my-info">
+
+        <p class="post-address">Dolor sit amet, consectetuer elit<br>adipiscing.</p>
+
+        <div class="about-company">
+
+          <div class="company-timezone">
+            <span class="icon icn-load-gray"></span>
+            Last update about {{ lastUpdateInHours }} hrs ago
+          </div>
+
+          <div class="company-open-tickets">
+            <span class="icon icn-clock"></span>
+            Total time spent {{ currentUserInfo.spentTime }} hrs
+          </div>
+
+          <div class="company-response-time tooltip-email" tooltip-placement="left"
+               tooltip="{{ currentUser.primaryEmail }}" tooltip-append-to-body="true">
+            <span class="icon icn-at-the-rate"></span>
+            {{ currentUser.primaryEmail }}
+          </div>
+
+          <div class="company-phone-number" ng-repeat="phoneNumber in currentUser.phoneNumbers">
+            <span class="icon" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                           'icn-fax-machine': phoneNumber.typeNumber === 'FAX',
+                           'icn-telephone': phoneNumber.typeNumber === 'OFFICE'}">
+            </span>
+            {{ phoneNumber.number }}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="panel-heading recent-heading">Recent activity</div>
+      <ul class="list-group no-bg no-borders pull-in recent-activities-by">
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>You</strong> added a note to</div>
+            <small class="user-title text-muted ticket-number">Tkt# 0246936</small>
+            <small class="time-ago text-muted">about 2 hours ago</small>
+          </div>
+        </li>
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>Jacob Morton</strong> added a note</div>
+            <small class="user-title text-muted"> to <span class="text-muted ticket-number">Tkt# 0246936</span></small>
+            <small class="time-ago text-muted">about 2 hours ago</small>
+          </div>
+        </li>
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/avatar-large.png" alt="..." class="img-circle no-avatar">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>Matt Trethe</strong> created a</div>
+            <small class="user-title text-muted"> company <span class="text-muted ticket-number">South Calgary Periodontal Group</span>
+            </small>
+            <small class="time-ago text-muted">about 5 hours ago</small>
+          </div>
+        </li>
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>Jang Woo Kim</strong> added a</div>
+            <small class="user-title text-muted"> service to <span class="text-muted ticket-number">Tkt# 0236928</span>
+            </small>
+            <small class="time-ago text-muted">about 6 hours ago</small>
+          </div>
+        </li>
+      </ul>
+
+      <div class="panel-heading crruently-heading" ng-show="workingWithIdsUsers.length > 0">Currently working with</div>
+
+      <ul class="list-group no-bg no-borders pull-in primary-contacts" ng-if="vendorContactsLoad && workingWithIdsUsers.length > 0">
+
+        <li class="list-group-item list-users" style="padding: 15px 0px;"
+            ng-show="!!userInfo"
+            ng-repeat="workingWithIdUser in workingWithIdsUsers"
+            ng-controller="quicktech.core.rightPanel.workingWithUserCtrl">
+
+          <div contact-popover contact-name="getUserName(userInfo)" style="width: 100%; padding-left: 40px;"
+               send-email-in-popover="sendEmailInPopover" contact-number="userInfo.phoneNumbers"
+               contact-email="isUser ? userInfo.primaryEmail : userInfo.email" contact-designation="userInfo.designation">
+
+            <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ isUser ? getUserAvatarUrl(userInfo) : getContactAvatarUrl(userInfo) }}"
+                   alt="..." class="img-circle">
+              <i class="b-white bottom" ng-show="isUser"
+                 ng-class="{'on': userInfo.online, 'off': !userInfo.online}"></i>
+            </a>
+
+            <div class="clearfix">
+              <div class="user-name"><a href="javascript:void(0)">{{ getUserName(userInfo) }}</a></div>
+              <small class="user-title text-muted">{{ getUserRole() }}</small>
+            </div>
+
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div role="tabpanel" class="tab-pane tab-activities" ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}">
+      <div class="form-search clearfix">
+        <form class="navbar-form navbar-form-search" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control form-control-round form-control-search"
+                   placeholder="Filter activity...">
+            <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
+          </div>
+        </form>
+      </div>
+      <div class="panel-heading">All Activity</div>
+      <ul class="list-group no-bg no-borders pull-in recent-activities-by">
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>You</strong> added a note to</div>
+            <small class="user-title text-muted ticket-number">Tkt# 0246936</small>
+            <small class="time-ago text-muted">about 2 hours ago</small>
+          </div>
+        </li>
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>Jacob Morton</strong> added a note</div>
+            <small class="user-title text-muted"> to <span class="text-muted ticket-number">Tkt# 0246936</span></small>
+            <small class="time-ago text-muted">about 2 hours ago</small>
+          </div>
+        </li>
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>Matt Trethe</strong> created a</div>
+            <small class="user-title text-muted"> company <span class="text-muted ticket-number">South Calgary Periodontal Group</span>
+            </small>
+            <small class="time-ago text-muted">about 5 hours ago</small>
+          </div>
+        </li>
+        <li class="list-group-item list-users">
+          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
+          </a>
+
+          <div class="clearfix">
+            <div class="user-name"><strong>Jang Woo Kim</strong> added a</div>
+            <small class="user-title text-muted"> service to <span class="text-muted ticket-number">Tkt# 0236928</span>
+            </small>
+            <small class="time-ago text-muted">about 6 hours ago</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div role="tabpanel" class="tab-pane tab-companies"
+         ng-class="{'active': currentTicketInfoTab === 'USER_COMPANY'}"
+         ng-controller="quicktech.core.rightPanel.rightPanelCompanyListTabCtrl">
+
+      <div class="form-search clearfix">
+        <form class="navbar-form navbar-form-search" role="search">
+
+          <div class="form-group">
+            <input type="text" class="form-control form-control-round form-control-search"
+                   placeholder="Search company..." ng-model="searchCompanyKeyword">
+            <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+               ng-click="searchCompanyKeyword = undefined"></a>
+          </div>
+
+          <div class="dropdown pull-right">
+
+            <div class="btn btn-white-gray btn-cr dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <span class="icn-caret-gray"></span>
+            </div>
+
+            <ul class="dropdown-menu" role="menu">
+
+              <li ng-show="currentOpenCompany">
+                <a href="javascript:void(0)" ng-click="selectAllUsers()">Select all Users</a>
+              </li>
+
+              <li ng-show="currentOpenCompany && isMoreActionsShow" class="disabled" ng-disabled="true">
+                <a href="javascript:void(0)" class="diasbled" ng-disabled="true" ng-click="archiveUsers()">
+                  Archive User(s)
+                </a>
+              </li>
+
+              <li ng-show="currentOpenCompany && isMoreActionsShow" class="disabled" ng-disabled="true">
+                <a href="javascript:void(0)" class="diasbled" ng-disabled="true">
+                  Send Email
+                </a>
+              </li>
+
+              <li role="presentation" class="divider" ng-hide="!currentOpenCompany || isMoreActionsShow"></li>
+
+              <li role="presentation" class="dropdown-header more-text" ng-hide="isMoreActionsShow">
+                Select user(s) or device(s) to<br>see more actions.
+              </li>
+            </ul>
+
+          </div>
+
+        </form>
+      </div>
+
+      <div class="panel-heading">COMPANIES
+        <span class="total">{{ clientCompaniesGroupedData.length }}</span>
+      </div>
+
+      <ul class="companies-list-wrapper">
+
+        <li ng-repeat="companyData in clientCompaniesGroupedData | filter: {company:{name: searchCompanyKeyword}}"
+            ng-class="{'opened-list': currentOpenCompany === companyData.company.id}"
+            ng-init="currentOpenCompanyMode = 'USERS'">
+
+          <div ng-click="openCompanyInfo(companyData.company.id)">
+            <div class="company-title">
+              {{ companyData.company.name }}
+              <a stop-propagation="click" href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
+                 ng-click="openCompanyInfo()"></a>
+            </div>
+
+            <div class="company-numbers clearfix">
+
+              <div class="numbers total-users"
+                   ng-class="{'active': currentOpenCompanyMode === 'USERS'}"
+                   ng-click="currentOpenCompanyMode = 'USERS'">
+                <span class="icon icn-cusers"></span>
+                {{ companyData.users.length }} Users
+              </div>
+
+              <div class="numbers total-devices disabled" ng-disabled="true"
+                   ng-class="{'active': currentOpenCompanyMode === 'DEVICES'}">
+                <!--ng-click="currentOpenCompanyMode = 'DEVICES'"-->
+                <span class="icon icn-cdevices"></span>
+                {{ companyData.devices.length }} Devices
+              </div>
+
+            </div>
+          </div>
+
+          <div class="lists-wrapper" ng-if="currentOpenCompany === companyData.company.id">
+
+            <ul class="list-group no-bg no-borders pull-in company-users" ng-show="currentOpenCompanyMode === 'USERS'">
+
+              <li class="list-group-item list-users"
+                  ng-class="{'checked': selectedCompanyUsers[companyData.company.id][companyUser.id]}"
+                  ng-repeat="companyUser in companyData.users">
+
+                <a href="javascript:void(0)" class="pull-left avatar-26 avatar m-r">
+                  <img ng-src="{{ getUserAvatarUrl(companyUser) }}" alt="..." class="img-circle">
+                  <i class="b-white bottom" ng-class="{'on': companyUser.online, 'off': !companyUser.online}"></i>
+                </a>
+
+                <div class="clearfix">
+
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox"
+                           ng-model="selectedCompanyUsers[companyUser.id]">
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name">
+                    <a href="javascript:void(0)">{{ getUserName(companyUser) }}</a>
+                  </div>
+
+                </div>
+              </li>
+
+            </ul>
+
+            <ul class="list-group no-bg no-borders pull-in company-devices"
+                ng-show="currentOpenCompanyMode === 'DEVICES'">
+              <li class="list-group-item list-devices checked">
+                <a href="javascript:void(0)" class="pull-left avatar m-r">
+                  <span class="icon icn-tablet"></span>
+                  <i class="on b-white right"></i>
+                </a>
+
+                <div class="clearfix">
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox" checked>
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name"><a href="javascript:void(0)">Tab.03</a></div>
+                  <small class="user-title text-muted">Jack Williams</small>
+                </div>
+              </li>
+              <li class="list-group-item list-devices">
+                <a href="javascript:void(0)" class="pull-left avatar m-r">
+                  <span class="icon icn-generic-device"></span>
+                  <i class="on b-white right"></i>
+                </a>
+
+                <div class="clearfix">
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>
+                  <small class="user-title text-muted">Ryan.Burns</small>
+                </div>
+              </li>
+              <li class="list-group-item list-devices">
+                <a href="javascript:void(0)" class="pull-left avatar m-r">
+                  <span class="icon icn-server"></span>
+                  <i class="off b-white right"></i>
+                </a>
+
+                <div class="clearfix">
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name"><a href="javascript:void(0)">File.Server</a></div>
+                  <small class="user-title text-muted">Miles.Mcmillan</small>
+                </div>
+              </li>
+              <li class="list-group-item list-devices">
+                <a href="javascript:void(0)" class="pull-left avatar m-r">
+                  <span class="icon icn-printer"></span>
+                  <i class="on b-white right"></i>
+                </a>
+
+                <div class="clearfix">
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>
+                  <small class="user-title text-muted">Shaun.Pc</small>
+                </div>
+              </li>
+              <li class="list-group-item list-devices">
+                <a href="javascript:void(0)" class="pull-left avatar m-r">
+                  <span class="icon icn-computer"></span>
+                  <i class="on b-white right"></i>
+                </a>
+
+                <div class="clearfix">
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>
+                  <small class="user-title text-muted">Miles.Mcmillan</small>
+                </div>
+              </li>
+              <li class="list-group-item list-devices">
+                <a href="javascript:void(0)" class="pull-left avatar m-r">
+                  <span class="icon icn-mobile"></span>
+                  <i class="off b-white right"></i>
+                </a>
+
+                <div class="clearfix">
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>
+                  <small class="user-title text-muted">Laurie.Harding</small>
+                </div>
+              </li>
+              <li class="list-group-item list-devices">
+                <a href="javascript:void(0)" class="pull-left avatar m-r">
+                  <span class="icon icn-fax"></span>
+                  <i class="off b-white right"></i>
+                </a>
+
+                <div class="clearfix">
+                  <label class="control checkbox pull-right">
+                    <input type="checkbox">
+                    <span class="control-indicator"></span>
+                  </label>
+
+                  <div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>
+                  <small class="user-title text-muted">File.Server</small>
+                </div>
+              </li>
+            </ul>
+
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>

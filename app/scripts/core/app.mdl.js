@@ -17,6 +17,8 @@
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
       'quicktech.core.vendors',
+      'quicktech.core.leftPanel',
+      'quicktech.core.rightPanel',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -30,15 +32,15 @@
     $urlRouterProvider.otherwise('/tickets/unassigned');
 
     $stateProvider
-      .state('Tickets', waitForServices({
+      .state('tickets', waitForServices({
         url: '/tickets/:listType',
-        templateUrl: '/html/quicktech/ticketing/views/ticketList.html',
-        controller: 'TicketListController'
+        templateUrl: '/html/scripts/core/tickets/tickets.tpl.html',
+        controller: 'quicktech.core.tickets.ticketsCtrl'
       }))
-      .state('Tickets.Detail', waitForServices({
-        url: '/:id',
-        templateUrl: '/html/quicktech/ticketing/views/ticketDetail.html',
-        controller: 'TicketDetailController'
+      .state('tickets.details', waitForServices({
+        url: '/:ticketId',
+        templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
+        controller: 'quicktech.core.tickets.ticketDetailsCtrl'
       }))
       .state('users', waitForServices({
         url: '/users',
@@ -174,7 +176,7 @@
         if (!company) {
           return '/company/default/cover'
         }
-        return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '123');
+        return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '');
       };
 
       $rootScope.getPhoneNumberCssClass = function (phoneNumber) {
@@ -195,10 +197,22 @@
           var username = user.firstName + ' ' + user.lastName;
 
           if (includeImail) {
-            username += ('"' + user.primaryEmail + '"')
+            username += (' "' + user.primaryEmail + '"')
           }
 
           return username;
+        }
+      };
+
+      $rootScope.getContactName = function (contact, includeImail) {
+        if (contact) {
+          var contactname = contact.firstName + ' ' + contact.lastName;
+
+          if (includeImail) {
+            contactname += (' "' + contact.email + '"')
+          }
+
+          return contactname;
         }
       };
 

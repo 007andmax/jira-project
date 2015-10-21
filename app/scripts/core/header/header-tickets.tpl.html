@@ -1,139 +1,170 @@
 <div class="nav-left ticket-nav" ng-controller="quicktech.core.header.ticketsCtrl">
-  <div id="bulk-actions" class="bulk-actions" style="display:none">
-    <div class="back-btn icn icn-back-btn" data-toggle="tooltip" title="uncheck all" data-placement="bottom"
-         ng-click="uncheckAll()">
+
+  <div class="bulk-actions" ng-if="isShowBulkAction" ng-controller="quicktech.core.header.ticketsBulkCtrl">
+
+    <div class="back-btn icn icn-back-btn" tooltip="uncheck all" tooltip-placement="bottom"
+         ng-click="uncheckAllTickets()">
     </div>
+
     <h4>
-				<span class="total-selected">
-				</span> Selected
+      <span class="total-selected">{{ sharedState.checkedTicketsIds.length }}</span>
+      Selected
     </h4>
 
-    <div class="ticket-actions pull-right">
+    <div class="ticket-actions pull-right" ng-controller="quicktech.core.tickets.headerTicketTagsCtrl"
+         ng-init="ticketId = ticket.id">
 
       <div class="dropdown pull-left"
-           ng-if="ActionRightsService.isLabelAsVisible(listType, currentUser.role)">
+           ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
+
         <div class="btn btn-white-gray btn-cr  dropdown-toggle tooltip-dp" data-toggle="dropdown"
-             title="label as..." data-placement="bottom">
+             tooltip="label as..." tooltip-placement="bottom" ng-click="createTagsMatrix()">
           <span class="icn-nav-tag"></span>
         </div>
-        <ul class="tag-list dropdown-menu" role="menu" ng-click="$event.stopPropagation();">
-          <li ng-repeat="tag in sharedState.allTags">
-            <label for="{{ tag.id }}" class="control checkbox" ng-click="toggleTagState(tag.id);">
-              <input type="checkbox" id="{{ tag.id }}" ng-model="tag.isSelected">
-                                <span class="control-indicator pull-left"
-                                      ng-class="{intermediate: tag.state === 2}"></span>
+
+        <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click">
+
+          <li ng-repeat="tag in tags">
+            <label class="control checkbox">
+              <input type="checkbox" ng-model="bulkTicketsTags[tag.id].val"
+                     ng-change="changeTagCheckbox(tag.id, bulkTicketsTags[tag.id].val)"
+                     ng-class="{'disabled': disabledTags && !bulkTicketsTags[tag.id].val}"
+                     ng-disabled="disabledTags && !bulkTicketsTags[tag.id].val">
+              <span class="control-indicator pull-left"
+                    ng-click="disabledTags && !bulkTicketsTags[tag.id].val && showNotificationMessage()"
+                    ng-class="{'intermediate': bulkTicketsTags[tag.id].isHalf}"></span>
               <span class="tag-color color{{tag.color}}"></span>
-              {{ tag.name }}
+              {{tag.name}}
             </label>
           </li>
+
           <li class="apply">
-            <button type="button" class="btn btn-scooter"
-                    ng-click="linkTags();">Apply
+            <button type="button" class="btn btn-scooter" ng-click="bulkApplyTagsToTicket()">
+              Apply
             </button>
           </li>
+
         </ul>
       </div>
 
-      <div id="bulkAssignUserDropDown" class="dropdown pull-left"
-           ng-if="ActionRightsService.isAssignToUserVisible(listType, currentUser.role)">
-        <div id="btnShowAssignUserforBulk" class="btn btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-             data-toggle="dropdown" data-placement="bottom" title="assign ticket to...">
+      <div class="dropdown pull-left"
+           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
+
+        <div class="btn btn-white-gray btn-cr dropdown-toggle tooltip-dp"
+             ng-click="isShowAssignUser = true"
+             data-toggle="dropdown" tooltip="assign ticket to..." tooltip-placement="bottom">
           <span class="icn-nav-user"></span>
         </div>
-        <div class="dropdown-menu assign-ticket-menu" ng-click="$event.stopPropagation();">
-          <div class=" assign-ticket ">
-            <div class="assign-ticket-content">
-              <div class="assign-ticket-header">
-                <div class="clearfix">
-                  <div class="form-group">
-                    <div id="the-basics" class="form-control" style="width: 100%;">
-                      <input id="bulkAssignedTo" type="text" class="typeahead"
-                             placeholder="Add agent">
-                      <input type="hidden" name="bulkUserId" id="bulkUserId" value=""
-                             ng-model="bulk.UserId"/>
-                    </div>
-                    <div class="label-add-btn">
-                      <a id="btnBulkAssignUser" href="javascript:void(0);"
-                         class="btn input-btn-cr btn-green btn-add-more disabled pull-left"
-                         ng-click="assignUsertoBulkTickets()">
-                        <span class="small-icn-tick icn"></span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+        <div class="dropdown-menu" stop-propagation="click" ng-if="isShowAssignUser"
+             assign-user-button aub-ticket-id="sharedState.checkedTicketsIds"
+             aub-ticket-number="sharedState.checkedTicketsIds.length"
+             users="usersCurrentCompany"
+             aub-current-user="currentUser" aub-is-bulk-operation="true">
         </div>
       </div>
 
       <div class="dropdown pull-left"
-           ng-if="ActionRightsService.isPriorityForDetailPageVisible(listType, currentUser.role)">
+           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))">
+
         <div class="btn btn-white-gray dropdown-toggle btn-cr tooltip-dp" data-toggle="dropdown"
-             data-placement="bottom" title="Change Priority to...">
+             tooltip="Change Priority to..." tooltip-placement="bottom">
           <span class="icn icn-ticket-priority"></span>
         </div>
+
         <ul class="dropdown-menu dropdown-priority" role="menu">
-          <li><a tabindex="-1" href="javascript:void(0);" ng-click="changeBulkPriority($event, 'low')">
-            <span class="priority-dot low"></span>Low </a></li>
-          <li><a tabindex="-1" href="javascript:void(0);" ng-click="changeBulkPriority($event, 'medium')">
-            <span class="priority-dot medium"></span>Medium </a></li>
-          <li><a tabindex="-1" href="javascript:void(0);" ng-click="changeBulkPriority($event, 'high')">
-            <span class="priority-dot high"></span>High </a></li>
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">
+              <span class="priority-dot low"></span>
+              Low
+            </a>
+          </li>
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">
+              <span class="priority-dot medium"></span>
+              Medium
+            </a>
+          </li>
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">
+              <span class="priority-dot high"></span>
+              High
+            </a>
+          </li>
+
         </ul>
+
       </div>
 
       <div class="dropdown pull-left last"
-           ng-if="(currentUser.role === 'ADMIN' && (listType === 'unassigned' || listType === 'user' || listType === 'shared' || listType === 'open')) || (currentUser.role === 'USER' && listType === 'user' )">
+           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
+
         <div class="btn btn-white-gray btn-cr dropdown-toggle tooltip-dp" data-toggle="dropdown"
-             data-placement="bottom" title="More Actions">
+             tooltip-placement="bottom" tooltip="More Actions">
           <span class="icn-nav-more"></span>
         </div>
+
         <ul class="dropdown-menu" role="menu">
-          <li class="dropdown-submenu" ng-if="ActionRightsService.isChangeStatusVisible(listType)">
-            <a tabindex="-1" href="#">Change Status to...</a>
+
+          <li class="dropdown-submenu" ng-if="PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
+
+            <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
 
             <div class="dropdown-submenu-wrapper">
               <ul class="dropdown-menu dropdown-priority">
-                <li><a tabindex="-1" href="javascript:void(0);"
-                       ng-click="changeBulkStatus('IN_PROGRESS')"> In Progress </a></li>
-                <li><a tabindex="-1" href="javascript:void(0);"
-                       ng-click="changeBulkStatus('ON_HOLD')"> On Hold </a></li>
+
+                <li>
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketStatus('IN_PROGRESS')">
+                    In Progress
+                  </a>
+                </li>
+
+                <li>
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketStatus('ON_HOLD')">
+                    On Hold
+                  </a>
+                </li>
+
               </ul>
             </div>
           </li>
-          <li ng-if=" currentUser.role !== 'USER' ">
-            <a tabindex="-1" href="javascript:void(0);" ng-click="deleteBulkTicket($event, true)">Move
-              to Trash</a>
+
+          <li
+            ng-if="!sharedState.checkedHasInvoiceTicket && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+            <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
           </li>
+
           <li>
-            <a tabindex="-1" href="javascript:void(0);" ng-click="markAsBulkSpam($event, true)">
-              <span ng-if=" currentUser.role === 'ADMIN' ">Mark as Spam</span>
-              <span ng-if=" currentUser.role === 'USER' ">Report as Spam</span>
+            <a ng-click="moveIntoSpam()" tabindex="-1" href="javascript:void(0)">
+              <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
+              <span ng-if="currentUser.role === 'USER' ">Report as Spam</span>
             </a>
           </li>
+
         </ul>
       </div>
 
-      <div class="btn btn-white-gray  btn-cr tooltip-dp" data-toggle="tooltip" data-placement="bottom"
-           title="" data-original-title="Restore" ng-click="restoreBulkTickets();"
-           ng-if="ActionRightsService.isRestoreForTrashVisible(listType, currentUser.role) || ActionRightsService.isRestoreForSpamVisible(listType, currentUser.role)">
+      <div class="btn btn-white-gray  btn-cr tooltip-dp"
+           tooltip-placement="bottom" tooltip="Restore"
+           ng-click="restoreTickets()"
+           ng-if="listType === 'trash' || listType === 'spam'">
         <span class="icn icn-ticket-restore"></span>
       </div>
 
-      <!--div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Move to Trash" ng-click="deleteBulkTicket($event, true)"
-      ng-if="currentUser.role === 'ADMIN' &&  ((listType === 'spam'&& allSelectedTicketsMarkedByAdmin) || listType === 'closed')">
-      <span class="icn icn-ticket-delete"></span>
-      </div-->
-
-      <div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom"
-           title="" data-original-title="Move to Trash" ng-click="deleteBulkTicket($event, true)"
-           ng-if="currentUser.role === 'ADMIN' &&  listType === 'closed' ">
+      <div class="btn btn-white-gray btn-cr tooltip-dp last"
+           tooltip-placement="bottom" tooltip="Move to Trash"
+           ng-click="moveToTrash(true)"
+           ng-if="(listType === 'closed' || sharedState.checkedCompletedTicket) && !sharedState.checkedHasInvoiceTicket">
         <span class="icn icn-ticket-delete"></span>
       </div>
 
-      <div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom"
-           title="" data-original-title="Delete Forever" ng-click="deleteBulkTicketsForever($event, true)"
-           ng-if="ActionRightsService.isMoveToTrashVisible(listType, currentUser.role) && listType === 'trash'">
+      <div class="btn btn-white-gray btn-cr tooltip-dp last"
+           tooltip-placement="bottom" tooltip="Delete Forever"
+           ng-click="deleteForever()"
+           ng-if="listType === 'trash' || listType === 'spam'">
         <span class="icn icn-ticket-delete"></span>
       </div>
 
@@ -143,95 +174,125 @@
       <span class="icn icn-small-ticket-claim"></span>
       </div-->
 
-      <div class="btn btn-white-gray btn-cr tooltip-dp last" data-toggle="tooltip" data-placement="bottom"
-           title="" data-original-title="{{ getSpamIconToolTip(listType) }}"
-           ng-click="markAsBulkSpam($event, true)"
-           ng-if=" (listType === 'unassigned' && currentUser.role === 'USER') || (allSelectedTicketsReportedAsSpam && currentUser.role === 'ADMIN') ">
+      <div class="btn btn-white-gray btn-cr tooltip-dp last"
+           tooltip-placement="bottom" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"
+           ng-click="moveIntoSpam()"
+           ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role)">
         <span class="icn icn-ticket-spam"></span>
       </div>
 
 
     </div>
   </div>
-  <div class="" id="search-and-filter">
-    <h4>{{ sharedState.panelTitle }} <span class="tickt-counts">{{ sharedState.count }}</span></h4>
+
+  <div ng-if="!isShowBulkAction">
+    <h4>{{ headerLabel }} <span class="tickt-counts">{{ sharedState.ticketsQuantity.count }}</span></h4>
 
     <div class="form-group search-form pull-left">
 
-      <input type="text" class="form-control form-control-round form-control-search" autocomplete="off"
+      <input type="text" class="form-control form-control-round form-control-search"
              placeholder="Search tickets..."
-             ng-keyup="$event.keyCode == 13 && search()" ng-model="sharedState.searchFilter.query">
+             ng-model="searchItem"
+             typeahead-on-select="selectItem(searchItem)"
+             typeahead="item as item.label for item in search($viewValue)"
+             custom-style="{'max-height': '160px', 'overflow-y': 'scroll'}">
 
       <a href="javascript:void(0);" class="close icn-remove-token" tabindex="-1"
-         ng-click="loadAll();"></a>
+         ng-click="cancelSearch(); searchItem = undefined;"></a>
     </div>
-    <div class="dropdown pull-right">
-      <button id="dropdownbtn" type="submit" class="btn btn-cr btn-gray btn-filter dropdown-toggle tooltip-dp"
-              data-placement="bottom" title="" data-original-title="Filter tickets" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"><span class="icn-filter icn"></span></button>
-      <div class="dropdown-menu dropdown-filter clearfix" ng-click="$event.stopPropagation();">
+    <div class="pull-right" dropdown ng-init="searchByParamsDropdown = {}" is-open="searchByParamsDropdown.isOpen">
+
+      <button type="submit" class="btn btn-cr btn-gray btn-filter tooltip-dp" dropdown-toggle
+              tooltip-placement="bottom" tooltip="Filter tickets"
+              aria-haspopup="true" aria-expanded="false">
+        <span class="icn-filter icn"></span>
+      </button>
+
+      <div class="dropdown-menu dropdown-filter clearfix" stop-propagation="click">
+
         <div class="filter-by-wrapper filter-priority clearfix">
+
           <label class="control checkbox">
-            <input id="filter-by-priority" type="checkbox" class="filter-tickets"
-                   ng-model="sharedState.searchFilter.priority">
+            <input type="checkbox" class="filter-tickets"
+                   ng-model="searchParams.priority.enabled">
             <span class="control-indicator icn-checkbox"></span>
             Filter by Priority
           </label>
 
-          <div id="priority-wrapper" class="filter-slider-wrapper clearfix"
-               ng-class="{disabled: !sharedState.searchFilter.priority}">
+          <div class="filter-slider-wrapper clearfix"
+               ng-class="{ 'disabled': !searchParams.priority.enabled }">
 
             <div class="filter-slider-range">
-              <input type="range" min="0" max="2" step="1" value="0"
-                     ng-model="sharedState.searchFilter.priorityValue"/>
-            </div>
-            <div class="filter-slider-track" id="filter-slider-track">
-              <div class="slidpo filter-slider-starts icn-slider-start pull-left" data-value="32">
-                <span class="filter-label">Low</span>
-              </div>
-              <div class="slidpo filter-slider-center icn-slider-center active pull-left"
-                   data-value="134">
-                <span class="filter-label">Medium</span>
-              </div>
-              <div class="slidpo filter-slider-ends icn-slider-end pull-left" data-value="236">
-                <span class="filter-label">High</span>
-              </div>
+
+              <input type="range" min="0" max="2" step="1" ng-value="1"
+                     ng-model="searchParams.priority.value"/>
             </div>
 
+            <div class="filter-slider-track">
+
+              <div class="slidpo filter-slider-starts icn-slider-start pull-left">
+                <span class="filter-label">Low</span>
+              </div>
+
+              <div class="slidpo filter-slider-center icn-slider-center active pull-left">
+                <span class="filter-label">Medium</span>
+              </div>
+
+              <div class="slidpo filter-slider-ends icn-slider-end pull-left">
+                <span class="filter-label">High</span>
+              </div>
+
+            </div>
           </div>
         </div>
-        <div class="filter-by-wrapper filter-status clearfix">
+
+        <div class="filter-by-wrapper filter-status clearfix"
+             ng-show="listType !== 'unassigned' || listType !== 'closed'">
+
           <label class="control checkbox">
-            <input id="filter-by-status" type="checkbox" class="filter-tickets"
-                   ng-model="sharedState.searchFilter.status">
+            <input type="checkbox" class="filter-tickets"
+                   ng-model="searchParams.status.enabled">
             <span class="control-indicator icn-checkbox"></span>
             Filter by Status
           </label>
 
-          <div id="status-wrapper" class="filter-slider-wrapper clearfix"
-               ng-class="{disabled: !sharedState.searchFilter.status}">
+          <div class="filter-slider-wrapper clearfix"
+               ng-class="{ 'disabled': !searchParams.status.enabled }">
+
             <div class="filter-slider-range">
+
               <input type="range" min="0" max="2" step="1" value="0"
-                     ng-model="sharedState.searchFilter.statusValue"/>
+                     ng-model="searchParams.status.value"/>
             </div>
-            <div class="filter-slider-track" id="filter-slider-track">
-              <div class="slidpo filter-slider-starts icn-slider-start active pull-left"
-                   data-value="32">
+
+            <div class="filter-slider-track">
+
+              <div class="slidpo filter-slider-starts icn-slider-start active pull-left" data-value="32">
                 <span class="filter-label">On Hold</span>
               </div>
+
               <div class="slidpo filter-slider-center icn-slider-center pull-left" data-value="134">
                 <span class="filter-label">In Progress</span>
               </div>
+
               <div class="slidpo filter-slider-ends icn-slider-end pull-left" data-value="236">
                 <span class="filter-label">Completed</span>
               </div>
+
             </div>
           </div>
         </div>
-        <a href="javascript:vpod(0);" id="" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-           ng-click="search()">Search</a>
-        <a href="#" id="" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-           onclick="$('#dropdownbtn').trigger('click'); event.preventDefault();">Cancel</a>
+
+        <a href="javascript:void(0)" ng-click="searchByParams(); searchByParamsDropdown.isOpen = false"
+           class="btn btn-sr btn-scooter btn-reset-filter pull-left">
+          Search
+        </a>
+
+        <a href="javascript:void(0)" ng-click="searchByParamsDropdown.isOpen = false"
+           class="btn btn-sr btn-gray btn-apply-filter pull-left">
+          Cancel
+        </a>
+
       </div>
     </div>
   </div>

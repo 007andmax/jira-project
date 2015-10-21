@@ -2,25 +2,24 @@
 
 (function () {
 
-  var app = angular.module('quicktech');
+  angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
+    ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
+      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService) {
 
-  app.controller('quicktech.core.leftPanel.leftPanelCtrl', ['$scope', 'TicketsService', 'TicketTagsService', 'quicktech.common.services.SharedStateService', '$stateParams',
-    function ($scope, TicketsService, TicketTagsService, SharedStateService, $stateParams) {
+        $scope.ticketCounts = TicketsService.getCounts($scope);
+        $scope.PermissionsService = PermissionsService;
 
-      var ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
-      $scope.ticketCounts = TicketsService.getCounts($scope);
+        $scope.$watch(function () {
 
-      $scope.$watch(function () {
-        return $stateParams.listType;
-      }, function (filter) {
+          if (!$stateParams.listType) {
+            return 0;
+          }
+          return $scope.ticketCounts[$stateParams.listType.toUpperCase()];
 
-        if (filter) {
-          ticketsHeaderState.count = $scope.ticketCounts[filter.toUpperCase()];
-          ticketsHeaderState.panelTitle = filter === 'user' ? 'My Tickets'
-            : (filter[0].toUpperCase() + filter.substring(1, filter.length));
-        }
-      })
+        }, function () {
+          $scope.listType = $stateParams.listType;
+        })
 
-    }]);
+      }]);
 
 }());

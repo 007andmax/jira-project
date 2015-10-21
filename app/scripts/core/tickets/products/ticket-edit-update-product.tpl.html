@@ -1,0 +1,86 @@
+<div class="table-content service-table edit-table edit-product-table pull-left"
+     ng-controller="quicktech.core.tickets.ticketEditUpdateProductCtrl">
+  <span class="icon-update icn-update-product"></span>
+
+  <form name="updateTicketProduct">
+    <div class="ticket-form-header">
+      <div class="add-product clearfix">
+
+        <div class="col-1">
+
+          <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(updateTicketProduct, 'productName')}">
+
+            <div ng-messages="updateTicketProduct.productName.$error"
+                 ng-if="isShowingErrors(updateTicketProduct, 'productName')">
+              <div class="qt-error-msg" ng-message="required">Product is required.</div>
+            </div>
+
+            <input type="text" class="form-control form-control-dropdown dropdown-toggle"
+                   name="productName" ng-reqiured="true"
+                   placeholder="Product" value="" data-toggle="dropdown" aria-expanded="false"
+                   ng-model=" editProduct.item.name ">
+
+            <div class="dropdown-menu dropdown-menu-transparent"
+                 ng-include="'/html/scripts/core/tickets/products/choose-product-dropdown.tpl.html'"></div>
+
+          </div>
+        </div>
+
+        <div class="col-2">
+
+          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketProduct, 'productDescription')}">
+
+            <div ng-messages="updateTicketProduct.productDescription.$error"
+                 ng-if="isShowingErrors(updateTicketProduct, 'productDescription')">
+              <div class="qt-error-msg" ng-message="required">Description is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
+              <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
+            </div>
+
+            <input type="text" class="form-control" placeholder="Description"
+                   name="productDescription" ng-requierd="true"ng-minlength="3" ng-maxlength="2000"
+                   ng-model="editProduct.description">
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="col-wrapper">
+
+            <input type="text" class="form-control" placeholder="Amount" readonly
+                   value="{{ editProduct.item.sale * editProduct.quantity || '' }}">
+          </div>
+        </div>
+
+        <div class="col-3">
+
+          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketProduct, 'productQty')}">
+
+            <div ng-messages="updateTicketProduct.productQty.$error"
+                 ng-if="isShowingErrors(updateTicketProduct, 'productQty')">
+              <div class="qt-error-msg" ng-message="required">Qty is required.</div>
+              <div class="qt-error-msg" ng-message="maxlength">Qty is too large.</div>
+            </div>
+
+            <input type="text" class="form-control" placeholder="Qty"
+                   ng-model="editProduct.quantity" ng-maxlength="10"
+                   name="productQty" ng-required="true"
+                   hard-reset-pattern="numberPattern">
+          </div>
+        </div>
+
+        <div class="edit-table-actions" ng-if="editProduct.id">
+
+          <a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left"
+             ng-click="setEditExpenseId()">Cancel</a>
+
+          <a href="javascript:void(0);" class="btn btn-sr btn-scooter pull-left"
+             ng-click="saveUpdateProduct(updateTicketProduct)">Save Changes</a>
+
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </form>
+
+</div>

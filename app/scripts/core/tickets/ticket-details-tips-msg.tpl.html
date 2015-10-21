@@ -1,0 +1,205 @@
+<div ng-if="currentOpenTab"
+     ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
+  <!-- Ticket Notes -->
+  <div class="tips-message" ng-if="listType === 'unassigned'">
+    <span class="icn icn-message-ticket-claim"></span>
+
+    <div class="message-detail">
+      Got nothing to work on today? Hit up the
+      <span class="bold">"Claim Ticket"</span> button to get the troubleshooting process started!
+    </div>
+    <div class="message-btn">
+      <a href="javascript:void(0)" ng-click="claimTicket()"
+         class="btn btn-sr btn-scooter">
+        Claim Ticket
+      </a>
+    </div>
+  </div>
+
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'OPEN')">
+
+    <span class="icn icn-message-ticket-closed"></span>
+
+    <div class="message-detail">
+      The Ticket is now closed. You can re-open it within {{ daysLeftToOpen }} days by simply clicking <br>
+      <span class="bold">"Mark as Open"</span> button.
+    </div>
+
+    <div class="message-btn">
+      <a href="javascript:void(0)" class="btn btn-sr btn-scooter" ng-click="markAsOpen()">
+        Mark as Open
+      </a>
+    </div>
+  </div>
+
+  <div class="tips-message has-updates no-button"
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'OLD')">
+
+    <span class="icn icn-message-ticket-closed"></span>
+
+    <div class="message-detail">
+      The Ticket is older than <span class="bold">30 days</span>. You cannot re-open it now.
+    </div>
+
+    <div class="tip">
+      <span class="bold">Tip:</span> You can create a new Ticket any time, and use this ticket's number
+      as reference to <br> continue with troubleshooting.
+    </div>
+  </div>
+
+  <div class="tips-message has-updates no-button"
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'BILLED')">
+
+    <span class="icn icn-message-ticket-closed"></span>
+
+    <div class="message-detail">The Ticket is now closed, and already
+      <span class="bold">billed to the client</span>. You cannot re-open it.
+    </div>
+
+    <div class="tip">
+      <span class="bold">Tip:</span>
+      You can create a new Ticket any time, and use this billed ticket's number as
+      reference to <br> continue with troubleshooting.
+    </div>
+  </div>
+
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'BILLABLE')">
+    <span class="icn icn-message-ticket-closed"></span>
+
+    <div class="message-detail">
+      The Ticket is now closed. You can re-open it by simply clicking
+      <span class="bold">"Mark as Open"</span> button.
+    </div>
+
+    <div class="message-btn">
+      <a href="javascript:void(0)" class="btn btn-sr btn-scooter" ng-click="markAsOpen()">Mark as Open</a>
+    </div>
+
+  </div>
+
+  <div class="tips-message has-updates" ng-if="listType === 'trash'">
+    <span class="icn icn-message-ticket-trash"></span>
+
+    <div class="message-detail">
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.deletePerformer.id)) }}</span>
+      has moved this ticket
+      to trash. You can either delete the ticket forever or restore the ticket
+      status anytime, using the respective option.
+    </div>
+    <div class="tip">
+      <span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder where it was
+      deleted from.
+    </div>
+    <div class="message-btn shared">
+
+      <a href="javascript:void(0)" ng-click="deleteForever()"
+         class="btn btn-sr btn-red">
+        Delete Forever
+      </a>
+
+      <a href="javascript:void(0)" ng-click="moveToTrash(false)"
+         class="btn btn-sr btn-gray btn-cancel ">
+        Restore
+      </a>
+    </div>
+  </div>
+
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_DELETE')">
+    <span class="icn icn-message-ticket-spam"></span>
+
+    <div class="message-detail">
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamMarker.id)) }}</span>
+      has marked this ticket as
+      spam. You can either delete the ticket forever or restore the ticket
+      status anytime, using the respective option.
+    </div>
+    <div class="tip">
+      <span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder
+      where it was marked as spam.
+    </div>
+    <div class="message-btn shared">
+      <a href="javascript:void(0)" ng-click="deleteForever()" class="btn btn-sr btn-red">Delete
+        Forever</a>
+      <a href="javascript:void(0)" ng-click="restoreFromSpam()"
+         class="btn btn-sr btn-gray btn-cancel ">Restore</a>
+    </div>
+  </div>
+
+  <div class="tips-message"
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'USER_SPAM')">
+    <span class="icn icn-message-ticket-spam"></span>
+
+    <div class="message-detail">You can use the
+      <span class="bold ">Restore</span> button to reinstate the ticket status anytime!
+    </div>
+    <div class="tip">
+      <span class="bold">Tip:</span> Restoring ticket moves the ticket back to its original folder where it was
+      reported <br> as spam.
+    </div>
+    <div class="message-btn shared">
+      <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-cancel"
+         ng-click="restoreFromSpam()">Restore</a>
+    </div>
+  </div>
+
+  <div class="tips-message "
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_SPAM')">
+    <span class="icn icn-message-ticket-spam"></span>
+
+    <div class="message-detail">
+      <span class="bold blue">{{ getUserName(getUserById(ticketDetails.spamReporter.id)) }}</span>
+      has reported this ticket as spam.
+      You can either mark the ticket as spam or restore the ticket status anytime, using the respective option.
+    </div>
+
+    <div class="tip"><span class="bold">Tip:</span>
+      Restoring ticket moves the ticket back to its original folder where it was reported as spam.
+    </div>
+
+    <div class="message-btn shared">
+      <a href="javascript:void(0)" class="btn btn-sr btn-red"
+         ng-click="moveIntoSpam()">Mark as spam</a>
+      <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-cancel "
+         ng-click="restoreFromSpam()">Restore</a>
+    </div>
+  </div>
+
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnSharedPage(listType, ticketDetails, currentUser.role, 'ADMIN')">
+
+    <span class="icn icn-message-ticket-shared"></span>
+
+    <div class="message-detail">The shared ticket has been closed by the
+      <span class="bold">Ticket's owner</span>.
+    </div>
+
+    <div class="tip">
+      <span class="bold">Tip:</span> If you’ve administrative privileges, you can re-open the ticket by simply clicking
+      "Mark as Open" <br>
+      button, and then add or remove the Ticket updates.
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="message-btn shared">
+      <a href="javascript:void(0)" id="" class="btn btn-sr btn-scooter ">Mark as Open</a>
+    </div>
+
+  </div>
+
+  <div class="tips-message has-updates"
+       ng-if="PermissionsService.isTipVisibleOnSharedPage(listType, ticketDetails, currentUser.role, 'USER')">
+
+    <span class="icn icn-message-ticket-shared"></span>
+
+    <div class="message-detail">The shared ticket has been closed by the
+      <span class="bold">Ticket's owner</span>.
+      You cannot add or remove the ticket update(s) now.
+    </div>
+
+  </div>
+
+</div>
+

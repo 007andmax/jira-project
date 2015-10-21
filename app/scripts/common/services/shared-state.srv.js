@@ -30,6 +30,9 @@
         vendorsHeader: {
           count: 0,
           filter: {keyword: ''}
+        },
+        rightPanel: {
+          companyId: undefined
         }
       };
 

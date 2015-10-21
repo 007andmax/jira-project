@@ -1,0 +1,174 @@
+<div class="ticket-post-update-wrapper">
+
+  <div role="tabpanel">
+
+    <ul class="nav nav-pills nav-post-update"
+        ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
+
+      <li role="presentation" ng-class="{'active': currentOpenTab === 'NOTE'}">
+        <a href="javascript:void(0)"
+           ng-click="openedTab('NOTE');">
+          <span class="icon-add icn-add-note"></span>
+          Note
+        </a>
+      </li>
+
+      <li role="presentation" ng-class="{'active': currentOpenTab === 'PRODUCT'}">
+        <a href="javascript:void(0)"
+           ng-click="openedTab('PRODUCT');">
+          <span class="icon-add icn-add-product"></span>
+          Product
+        </a>
+      </li>
+
+      <li role="presentation" ng-class="{'active': currentOpenTab === 'SERVICE'}">
+        <a href="javascript:void(0)"
+           ng-click="openedTab('SERVICE');">
+          <span class="icon-add icn-add-service"></span>
+          Service
+        </a>
+      </li>
+
+      <a href="javascript:void(0)" class="btn btn-gray  btn-remote-access pull-right tp-hide disabled"
+         ng-disabled="true"
+         tooltip="Remote Access" tooltip-placement="top">
+        <img src="images/spacer.gif" class="icn-remote-access">
+      </a>
+
+    </ul>
+
+    <div class="tab-content">
+
+      <div role="tabpanel" class="tab-pane tab-add-note active"
+           ng-if="currentOpenTab === 'NOTE'"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
+
+        <div class="ticket-update clearfix">
+
+          <div class="ticket-updater pull-left">
+            <div class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">
+            </div>
+          </div>
+
+          <div class="ticket-update-content pull-left">
+            <div class="update-ticket-form-wrapper">
+              <div ng-include="'/html/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
+
+              <div class="ticket-form-footer clearfix">
+                <div ticket-attachment-files attachment-func="addAttachmentFiles"
+                     ng-model="ticketUpdate.ticketAttachments">
+
+                  <a href="javascript:void(0)"
+                     class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide"
+                     tooltip="Attach files" tooltip-placement="top">
+                    <span class="icn-add-attachment"></span>
+                  </a>
+
+                  <input type="file" style="display:none" multiple=""/>
+
+                </div>
+
+                <div class="line-sep pull-left"></div>
+
+                <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
+              </div>
+            </div>
+
+            <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane tab-add-product active"
+           ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'PRODUCT'"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl">
+
+        <div class="ticket-update clearfix">
+
+          <div class="ticket-updater pull-left">
+            <div class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">
+            </div>
+          </div>
+
+          <div class="ticket-update-content pull-left">
+            <div class="update-ticket-form-wrapper">
+
+              <div ng-form="addProductsForm">
+                <div class="ticket-form-header" ng-repeat="productExpense in ticketUpdate.products">
+                  <div ng-model="productExpense"
+                       ticket-add-product
+                       product-categories="productCategories"
+                       remove-product-func="removeProduct"
+                       index="$index"
+                       number-pattern="numberPattern"
+                       show-errors="true"></div>
+                </div>
+              </div>
+
+              <div class="ticket-form-header" ng-model="productExpenseToAdd"
+                   ticket-add-product enable-add-mode="true" add-product-func="addProduct"
+                   remove-product-func="removeProduct"
+                   product-categories="productCategories"
+                   number-pattern="numberPattern"
+                   show-errors="triedToAddProduct"></div>
+
+              <div class="ticket-form-footer clearfix">
+                <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'">
+                </div>
+              </div>
+            </div>
+
+            <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane tab-add-service active"
+           ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'SERVICE'"
+           ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
+
+        <div class="ticket-update clearfix">
+
+          <div class="ticket-updater pull-left">
+            <div class="pull-left avatar-38 avatar m-r">
+              <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">
+            </div>
+          </div>
+
+          <div class="ticket-update-content pull-left">
+            <div class="update-ticket-form-wrapper">
+
+              <div ng-form="addServicesForm">
+                <div class="ticket-form-header" ng-repeat="serviceExpense in ticketUpdate.services">
+                  <div ng-model="serviceExpense"
+                       ticket-add-service
+                       service-list="serviceList"
+                       remove-service-func="removeService"
+                       number-pattern="numberPattern"
+                       index="$index"
+                       show-errors="true"></div>
+                </div>
+              </div>
+
+              <div class="ticket-form-header" ng-model="serviceExpenseToAdd"
+                   ticket-add-service enable-add-mode="true" add-service-func="addService"
+                   remove-service-func="removeService"
+                   service-list="serviceList"
+                   number-pattern="numberPattern"
+                   show-errors="triedToAddService"></div>
+
+              <div class="ticket-form-footer clearfix">
+                <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
+              </div>
+            </div>
+            <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

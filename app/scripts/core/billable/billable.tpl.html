@@ -4,9 +4,9 @@
     <div class="content-stat pull-left">
       <div class="heading"><span class="bold">BILLED AMOUNT</span> LAST 30 DAYS <span class="dot-sep"></span> <span
         class="amount">{{ billedAmountLast30Days | currency:'' :0 }} USD</span></div>
-      <div class="chart">
 
-      </div>
+      <div billable-chart ng-model="billableChartData"></div>
+
     </div>
     <div class="content-all-time-stat pull-left">
       <div class="heading">
