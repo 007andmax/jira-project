@@ -4,13 +4,13 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> created the weekly recurring invoice </div>
+    <div class="user-name"><strong>{{ userName }}</strong> created the weekly recurring invoice
 
-    <small class="user-title text-muted ticket-number">{{ invoiceNumber }}</small>
+      <span class="text-muted ticket-number">{{ invoiceNumber }}</span>
+      for
+      <span class="text-muted ticket-number">{{ companyName }}</span>
 
-    <div class="user-name"> for </div>
-
-    <small class="user-title text-muted ticket-number">{{ companyName }}</small>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

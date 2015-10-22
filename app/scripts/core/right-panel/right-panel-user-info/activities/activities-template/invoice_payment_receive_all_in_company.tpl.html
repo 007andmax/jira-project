@@ -4,11 +4,12 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong>  marked all invoices under </div>
+    <div class="user-name"><strong>{{ userName }}</strong> marked all invoices under
 
-    <small class="user-title text-muted ticket-number">{{ companyName }}</small>
+      <span class="text-muted ticket-number">{{ companyName }}</span>
+      as paid
 
-    <div class="user-name"> as paid</div>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

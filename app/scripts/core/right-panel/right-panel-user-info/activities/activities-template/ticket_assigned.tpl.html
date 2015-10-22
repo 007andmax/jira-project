@@ -4,9 +4,14 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> assigned the ticket </div>
-    <small class="user-title text-muted ticket-number">Tkt# {{ ticketNumber }}</small>
-    <div class="user-name"> to <strong>{{ aditionalUserName }}</strong></div>
+    <div class="user-name"><strong>{{ userName }}</strong> assigned the ticket
+
+      <span class="text-muted ticket-number">Tkt# {{ ticketNumber }}</span>
+      to
+      <strong>{{ aditionalUserName }}</strong>
+
+    </div>
+
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>
 </div>

@@ -4,11 +4,11 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> unsubscribed </div>
+    <div class="user-name"><strong>{{ userName }}</strong> unsubscribed
 
-    <small class="user-title text-muted ticket-number">{{ contactFirstName }}</small>
-
-    <div class="user-name"> from Invoice Updates</div>
+      <span class="text-muted ticket-number">{{ contactFirstName }}</span>
+      from Invoice Updates
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

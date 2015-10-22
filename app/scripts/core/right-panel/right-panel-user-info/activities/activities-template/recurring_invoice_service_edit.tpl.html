@@ -4,9 +4,11 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> edited a Service of recurring invoice </div>
+    <div class="user-name"><strong>{{ userName }}</strong> edited a Service of recurring invoice
 
-    <small class="user-title text-muted ticket-number">{{ invoiceNumber }}</small>
+      <span class="text-muted ticket-number">{{ invoiceNumber }}</span>
+
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

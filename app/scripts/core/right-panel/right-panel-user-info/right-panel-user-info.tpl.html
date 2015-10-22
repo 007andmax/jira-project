@@ -61,52 +61,13 @@
       </div>
 
       <div class="panel-heading recent-heading">Recent activity</div>
-      <ul class="list-group no-bg no-borders pull-in recent-activities-by">
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          </a>
 
-          <div class="clearfix">
-            <div class="user-name"><strong>You</strong> added a note to</div>
-            <small class="user-title text-muted ticket-number">Tkt# 0246936</small>
-            <small class="time-ago text-muted">about 2 hours ago</small>
-          </div>
-        </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          </a>
+      <ul class="list-group no-bg no-borders pull-in recent-activities-by"
+          ng-controller="quicktech.core.rightPanel.recentActivitiesCtrl" ng-init="resentUserActivities = true">
 
-          <div class="clearfix">
-            <div class="user-name"><strong>Jacob Morton</strong> added a note</div>
-            <small class="user-title text-muted"> to <span class="text-muted ticket-number">Tkt# 0246936</span></small>
-            <small class="time-ago text-muted">about 2 hours ago</small>
-          </div>
-        </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/avatar-large.png" alt="..." class="img-circle no-avatar">
-          </a>
-
-          <div class="clearfix">
-            <div class="user-name"><strong>Matt Trethe</strong> created a</div>
-            <small class="user-title text-muted"> company <span class="text-muted ticket-number">South Calgary Periodontal Group</span>
-            </small>
-            <small class="time-ago text-muted">about 5 hours ago</small>
-          </div>
-        </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          </a>
-
-          <div class="clearfix">
-            <div class="user-name"><strong>Jang Woo Kim</strong> added a</div>
-            <small class="user-title text-muted"> service to <span class="text-muted ticket-number">Tkt# 0236928</span>
-            </small>
-            <small class="time-ago text-muted">about 6 hours ago</small>
-          </div>
+        <li class="list-group-item list-users" ng-repeat="activity in activities | limitTo: 4"
+            ng-controller="quicktech.core.rightPanel.activityCtrl"
+            ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">
         </li>
       </ul>
 

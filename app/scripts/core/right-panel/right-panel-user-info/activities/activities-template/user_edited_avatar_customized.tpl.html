@@ -4,9 +4,11 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> customized the avatar of user </div>
+    <div class="user-name"><strong>{{ userName }}</strong> customized the avatar of user
 
-    <small class="user-title text-muted ticket-number">{{ userFirstName }}</small>
+      <span class="text-muted ticket-number">{{ userFirstName }}</span>
+
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

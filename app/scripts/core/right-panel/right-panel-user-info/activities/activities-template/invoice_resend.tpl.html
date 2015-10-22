@@ -5,15 +5,15 @@
 
   <div class="clearfix">
     <div class="user-name"><strong>{{ userName }}</strong> re-sent
-      {{ activity.firstList[0] && activity.firstList[0].RecurringInvoiceFrequency ? 'activity.firstList[0].RecurringInvoiceFrequency' : '' }} invoice </div>
+      {{ activity.firstList[0] && activity.firstList[0].RecurringInvoiceFrequency ? 'activity.firstList[0].RecurringInvoiceFrequency' : '' }} invoice
 
-    <small class="user-title text-muted ticket-number">{{ invoiceNumber }}</small>
+    <span class="text-muted ticket-number">{{ invoiceNumber }}</span>
+    to
+    <span class="text-muted ticket-number">{{ companyName }}</span>
 
-    <div class="user-name"> to </div>
+  </div>
 
-    <small class="user-title text-muted ticket-number">{{ companyName }}</small>
-
-    <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
+  <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>
 </div>
 

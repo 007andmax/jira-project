@@ -4,13 +4,13 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong>  edited the description of </div>
+    <div class="user-name"><strong>{{ userName }}</strong> edited the description of
 
-    <small class="user-title text-muted ticket-number">{{ productName }}</small>
+      <span class="text-muted ticket-number">{{ productName }}</span>
+      from
+      <span class="text-muted ticket-number">{{ categoryName }}</span>
 
-    <div class="user-name"> from </div>
-
-    <small class="user-title text-muted ticket-number">{{ categoryName }}</small>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

@@ -4,13 +4,13 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> dissociated vendor </div>
+    <div class="user-name"><strong>{{ userName }}</strong> dissociated vendor
 
-    <small class="user-title text-muted ticket-number">{{ vendorName }}</small>
+      <span class="text-muted ticket-number">{{ vendorName }}</span>
+      from company
+      <small class="text-muted ticket-number">{{ companyName }}</small>
 
-    <div class="user-name"> from company </div>
-
-    <small class="user-title text-muted ticket-number">{{ companyName }}</small>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

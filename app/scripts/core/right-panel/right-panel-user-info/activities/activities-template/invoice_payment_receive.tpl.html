@@ -4,13 +4,14 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> marked </div>
+    <div class="user-name"><strong>{{ userName }}</strong> marked
 
-    <small class="user-title text-muted ticket-number">
-      {{ activity.firstList.length === 1 ? 'invoice  ' + invoiceNumber : activity.firstList.length + ' invoices ' + invoiceNumber + (activity.firstList.length - 1) + ' others' }}
-    </small>
-
-    <div class="user-name"> as paid</div>
+      <span class="text-muted ticket-number">
+        {{ activity.firstList.length === 1 ? 'invoice ' + invoiceNumber : activity.firstList.length + ' invoices ' +
+        invoiceNumber + (activity.firstList.length - 1) + ' others' }}
+      </span>
+      as paid
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

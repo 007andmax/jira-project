@@ -7,9 +7,11 @@
 
     <div class="user-name"><strong>{{ userName }}</strong> removed
       {{ activity.firstList.length === 1 ? aditionalUserName : aditionalUserName + ' and ' + activity.firstList.length + ' others' }} from ticket
-    </div>
 
-    <small class="user-title text-muted ticket-number">Tkt# {{ ticketNumber }}</small>
+
+    <span class="text-muted ticket-number">Tkt# {{ ticketNumber }}</span>
+
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

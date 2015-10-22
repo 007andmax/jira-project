@@ -4,9 +4,11 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong>  added the category </div>
+    <div class="user-name"><strong>{{ userName }}</strong> added the category
 
-    <small class="user-title text-muted ticket-number">{{ categoryName }}</small>
+      <span class="text-muted ticket-number">{{ categoryName }}</span>
+
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

@@ -4,15 +4,15 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> sent invoice of </div>
+    <div class="user-name"><strong>{{ userName }}</strong> sent invoice of
 
-    <small class="user-title text-muted ticket-number">
-      {{ activity.firstList.length === 1 ? 'ticket Tkt# ' + ticketNumber : activity.firstList.length + ' tickets' }}
-    </small>
+      <span class="text-muted ticket-number">
+        {{ activity.firstList.length === 1 ? 'ticket Tkt# ' + ticketNumber : activity.firstList.length + ' tickets' }}
+      </span>
+      to
+      <span class="text-muted ticket-number">{{ companyName }}</span>
 
-    <div class="user-name"> to </div>
-
-    <small class="user-title text-muted ticket-number">{{ companyName }}</small>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

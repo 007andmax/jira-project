@@ -4,13 +4,14 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> reported </div>
+    <div class="user-name"><strong>{{ userName }}</strong> reported
 
-    <small class="user-title text-muted ticket-number">
-      {{ activity.firstList.length === 1 ? 'ticket Tkt# ' + ticketNumber : activity.firstList.length + ' tickets' }}
-    </small>
+      <span class="text-muted ticket-number">
+        {{ activity.firstList.length === 1 ? 'ticket Tkt# ' + ticketNumber : activity.firstList.length + ' tickets' }}
+      </span>
+      as spam
 
-    <div class="user-name"> as spam </div>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

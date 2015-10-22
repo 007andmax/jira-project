@@ -4,9 +4,11 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> edited the Rate of default </div>
+    <div class="user-name"><strong>{{ userName }}</strong> edited the Rate of default
 
-    <small class="user-title text-muted ticket-number">{{ serviceName }}</small>
+      <span class="text-muted ticket-number">{{ serviceName }}</span>
+
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

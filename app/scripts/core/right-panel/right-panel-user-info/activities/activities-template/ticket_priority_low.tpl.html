@@ -4,13 +4,15 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> changed </div>
+    <div class="user-name"><strong>{{ userName }}</strong> changed
 
-    <small class="user-title text-muted ticket-number">
-      {{ activity.firstList.length === 1 ? 'ticket Tkt# ' + ticketNumber : activity.firstList.length + ' tickets' }}
-    </small>
+      <span class="text-muted ticket-number">
+        {{ activity.firstList.length === 1 ? 'ticket Tkt# ' + ticketNumber : activity.firstList.length + ' tickets' }}
+      </span>
 
-    <div class="user-name"> {{ activity.firstList.length === 1 ? 'Priority' : 'priorities' }} to Low</strong></div>
+      {{ activity.firstList.length === 1 ? 'Priority' : 'priorities' }} to <strong>Low</strong>
+
+    </div>
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>
 </div>

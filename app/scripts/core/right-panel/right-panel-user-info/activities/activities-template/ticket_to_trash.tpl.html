@@ -4,13 +4,14 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> moved </div>
+    <div class="user-name"><strong>{{ userName }}</strong> moved
 
-    <small class="user-title text-muted ticket-number">
+    <span class="text-muted ticket-number">
       {{ activity.firstList.length === 1 ? 'the ticket Tkt# ' + ticketNumber : activity.firstList.length + ' tickets' }}
-    </small>
+    </span>
+    to Trash
 
-    <div class="user-name"> to Trash </div>
+  </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

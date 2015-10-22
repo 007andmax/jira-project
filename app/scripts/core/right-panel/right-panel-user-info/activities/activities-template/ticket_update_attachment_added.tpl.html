@@ -6,10 +6,13 @@
   <div class="clearfix">
 
     <div class="user-name"><strong>{{ userName }}</strong>
-      added {{ activity.firstList.length === 1 ? 'an Attachment' : activity.firstList.length + ' attachments' }} to ticket
+      added {{ activity.firstList.length === 1 ? 'an Attachment' : activity.firstList.length + ' attachments' }} to
+      ticket
+
+      <span class="text-muted ticket-number">Tkt# {{ ticketNumber }}</span>
+
     </div>
 
-    <small class="user-title text-muted ticket-number">Tkt# {{ ticketNumber }}</small>
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>
 </div>

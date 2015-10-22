@@ -4,11 +4,12 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> set </div>
+    <div class="user-name"><strong>{{ userName }}</strong> set
 
-    <small class="user-title text-muted ticket-number">{{ userFirstName }}</small>
+      <span class="text-muted ticket-number">{{ userFirstName }}</span>
+      account privilege to Administrator
 
-    <div class="user-name"> account privilege to Administrator</div>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>

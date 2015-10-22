@@ -4,13 +4,13 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> renamed the category </div>
+    <div class="user-name"><strong>{{ userName }}</strong> renamed the category
 
-    <small class="user-title text-muted ticket-number">{{ categoryName }}</small>
+      <span class="text-muted ticket-number">{{ categoryName }}</span>
+      to
+      <span class="text-muted ticket-number">{{ newCategoryName }}</span>
 
-    <div class="user-name"> to </div>
-
-    <small class="user-title text-muted ticket-number">{{ newCategoryName }}</small>
+    </div>
 
     <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
   </div>
