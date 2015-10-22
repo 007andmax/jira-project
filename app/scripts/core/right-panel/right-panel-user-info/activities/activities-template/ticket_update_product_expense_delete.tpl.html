@@ -1,0 +1,12 @@
+<div>
+  <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+    <img ng-src="{{ userAvatarUrl }}" alt="..." class="img-circle">
+  </a>
+
+  <div class="clearfix">
+    <div class="user-name"><strong>{{ userName }}</strong>
+      removed {{ activity.firstList.length === 1 ? 'a Product' : activity.firstList.length + ' products' }} from ticket </div>
+    <small class="user-title text-muted ticket-number">Tkt# {{ ticketNumber }}</small>
+    <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
+  </div>
+</div>

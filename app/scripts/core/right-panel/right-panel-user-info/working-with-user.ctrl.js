@@ -19,6 +19,10 @@
         }
 
         $scope.getUserRole = function(){
+          if(!$scope.userInfo){
+            return
+          }
+
           if($scope.isUser){
             var userRole = $scope.userInfo.company.id === $scope.currentUser.company.id ? 'Team Member' : 'Client User';
             return userRole;

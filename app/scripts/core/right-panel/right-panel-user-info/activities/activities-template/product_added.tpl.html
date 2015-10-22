@@ -1,0 +1,18 @@
+<div>
+  <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+    <img ng-src="{{ userAvatarUrl }}" alt="..." class="img-circle">
+  </a>
+
+  <div class="clearfix">
+    <div class="user-name"><strong>{{ userName }}</strong> added </div>
+
+    <small class="user-title text-muted ticket-number">{{ productName }}</small>
+
+    <div class="user-name"> to </div>
+
+    <small class="user-title text-muted ticket-number">{{ categoryName }}</small>
+
+    <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
+  </div>
+</div>
+

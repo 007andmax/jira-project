@@ -1,0 +1,21 @@
+<div>
+  <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+    <img ng-src="{{ userAvatarUrl }}" alt="..." class="img-circle">
+  </a>
+
+  <div class="clearfix">
+    <div class="user-name"><strong>{{ userName }}</strong> moved </div>
+
+    <small class="user-title text-muted ticket-number">
+      {{ activity.firstList.length === 1 ? 'the service ' + serviceName : activity.firstList.length + ' services ' + serviceName + ' aand ' + (activity.firstList.length - 1) + ' others' }}
+    </small>
+
+    <div class="user-name"> to company </div>
+
+    <small class="user-title text-muted ticket-number">
+      {{ activity.secondList.length === 0 ? companyName : activity.secondList.length + ' companies'}}
+    </small>
+
+    <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
+  </div>
+</div>

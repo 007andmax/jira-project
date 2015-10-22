@@ -17,6 +17,12 @@
             scope.ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
             scope.$watch('ticketsHeaderState.searchFilter', function (searchFilter) {
+
+              if($stateParams.listType.toLowerCase() === 'preview'){
+                $document.off('scroll');
+                return;
+              }
+
               getTicketsList(searchFilter);
             }, true);
 
@@ -122,7 +128,7 @@
 
               $scope.$on('$destroy', function () {
                 $document.off('scroll');
-                SharedStateService.clearState('billableClientsHeader');
+                SharedStateService.clearState('ticketsHeader');
               });
 
             }

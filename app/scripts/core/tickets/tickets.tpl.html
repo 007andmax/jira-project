@@ -1,6 +1,6 @@
 <div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader
      ng-if="!(listType === 'spam' && currentUser.role !== 'USER')">
-  <div class="ticket-sidebar tickets-list" tu-tickets-container ng-if="listType">
+  <div class="ticket-sidebar tickets-list" tu-tickets-container ng-if="listType && listType !== 'preview'">
 
     <div ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)"
          ng-controller="quicktech.core.tickets.ticketCtrl">

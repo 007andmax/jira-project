@@ -1,0 +1,12 @@
+<div>
+  <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
+    <img ng-src="{{ userAvatarUrl }}" alt="..." class="img-circle">
+  </a>
+
+  <div class="clearfix">
+    <div class="user-name"><strong>{{ userName }}</strong> assigned the ticket </div>
+    <small class="user-title text-muted ticket-number">Tkt# {{ ticketNumber }}</small>
+    <div class="user-name"> to <strong>{{ aditionalUserName }}</strong></div>
+    <small class="time-ago text-muted">{{ activity.createdAt | activitiesTime }}</small>
+  </div>
+</div>

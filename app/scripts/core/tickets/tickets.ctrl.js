@@ -9,7 +9,7 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService,
                 PermissionsService, SharedStateService, Utils, UserNotificationService, $timeout) {
 
-        var availableTypes = ['unassigned', 'user', 'shared', 'spam'],
+        var availableTypes = ['unassigned', 'user', 'shared', 'spam', 'preview'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
         $scope.selectedTickets = {};

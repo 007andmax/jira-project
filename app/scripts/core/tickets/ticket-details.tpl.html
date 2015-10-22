@@ -1,4 +1,4 @@
-<div class="ticket-content">
+<div class="ticket-content" ng-style="{ width: listType === 'preview' ? '100%' : '' }">
   <div show-ticket-details scroll-pane style="height: 100%">
     <div class="ticket-header clearfix">
       <div class="clearfix " fixed-header>
@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="ticket-actions pull-right">
+        <div class="ticket-actions pull-right" ng-if="listType !== 'preview'">
 
           <div class="btn pull-left btn-scooter btn-cr btn-update update-button"
                ng-if="PermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status)"

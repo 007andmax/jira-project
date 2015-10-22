@@ -1,5 +1,5 @@
 <div role="tabpanel">
-  <!-- Nav tabs -->
+
   <ul class="nav nav-pills nav-justified nav-sb-tabs" role="tablist" ng-init="currentTicketInfoTab = 'CURRENT_USER'">
 
     <li ng-class="{'active': currentTicketInfoTab === 'CURRENT_USER'}">
@@ -119,7 +119,8 @@
             ng-repeat="workingWithIdUser in workingWithIdsUsers"
             ng-controller="quicktech.core.rightPanel.workingWithUserCtrl">
 
-          <div contact-popover contact-name="getUserName(userInfo)" style="width: 100%; padding-left: 40px;"
+          <div ng-if="!!userInfo"
+               contact-popover contact-name="getUserName(userInfo)" style="width: 100%; padding-left: 40px;"
                send-email-in-popover="sendEmailInPopover" contact-number="userInfo.phoneNumbers"
                contact-email="isUser ? userInfo.primaryEmail : userInfo.email" contact-designation="userInfo.designation">
 
@@ -141,64 +142,28 @@
       </ul>
     </div>
 
-    <div role="tabpanel" class="tab-pane tab-activities" ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}">
-      <div class="form-search clearfix">
-        <form class="navbar-form navbar-form-search" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control form-control-round form-control-search"
-                   placeholder="Filter activity...">
-            <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
-          </div>
-        </form>
-      </div>
+    <div role="tabpanel" class="tab-pane tab-activities" ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}"
+         ng-controller="quicktech.core.rightPanel.activitiesCtrl">
+
+      <!--<div class="form-search clearfix">-->
+        <!--<form class="navbar-form navbar-form-search" role="search">-->
+          <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control form-control-round form-control-search"-->
+                   <!--placeholder="Filter activity...">-->
+            <!--<a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>-->
+          <!--</div>-->
+        <!--</form>-->
+      <!--</div>-->
+
       <div class="panel-heading">All Activity</div>
+
       <ul class="list-group no-bg no-borders pull-in recent-activities-by">
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          </a>
 
-          <div class="clearfix">
-            <div class="user-name"><strong>You</strong> added a note to</div>
-            <small class="user-title text-muted ticket-number">Tkt# 0246936</small>
-            <small class="time-ago text-muted">about 2 hours ago</small>
-          </div>
+        <li class="list-group-item list-users" ng-repeat="activity in activities"
+            ng-controller="quicktech.core.rightPanel.activityCtrl"
+            ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">
         </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          </a>
 
-          <div class="clearfix">
-            <div class="user-name"><strong>Jacob Morton</strong> added a note</div>
-            <small class="user-title text-muted"> to <span class="text-muted ticket-number">Tkt# 0246936</span></small>
-            <small class="time-ago text-muted">about 2 hours ago</small>
-          </div>
-        </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          </a>
-
-          <div class="clearfix">
-            <div class="user-name"><strong>Matt Trethe</strong> created a</div>
-            <small class="user-title text-muted"> company <span class="text-muted ticket-number">South Calgary Periodontal Group</span>
-            </small>
-            <small class="time-ago text-muted">about 5 hours ago</small>
-          </div>
-        </li>
-        <li class="list-group-item list-users">
-          <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-            <img ng-src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          </a>
-
-          <div class="clearfix">
-            <div class="user-name"><strong>Jang Woo Kim</strong> added a</div>
-            <small class="user-title text-muted"> service to <span class="text-muted ticket-number">Tkt# 0236928</span>
-            </small>
-            <small class="time-ago text-muted">about 6 hours ago</small>
-          </div>
-        </li>
       </ul>
     </div>
 
