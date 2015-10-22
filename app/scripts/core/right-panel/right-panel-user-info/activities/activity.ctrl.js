@@ -124,7 +124,6 @@
             var user = UsersService.getOneById($scope.activity.user.id);
             $scope.userName = $scope.activity.userName;
           }
-
           $scope.userAvatarUrl = $scope.getUserAvatarUrl(user);
         }
 
