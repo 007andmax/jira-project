@@ -122,7 +122,7 @@
             $scope.userName = 'You';
           } else {
             var user = UsersService.getOneById($scope.activity.user.id);
-            $scope.userName = user.firstName;
+            $scope.userName = $scope.activity.userName;
           }
 
           $scope.userAvatarUrl = $scope.getUserAvatarUrl(user);
