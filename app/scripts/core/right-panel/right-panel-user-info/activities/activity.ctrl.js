@@ -147,7 +147,7 @@
           if ($scope.activity.firstList[0] && $scope.activity.firstList[0].companyName) {
             $scope.companyName = $scope.activity.firstList[0].companyName;
           } else {
-            if($scope.activity.secondList[0] && $scope.activity.secondList[0].companyName){
+            if($scope.activity.secondList && $scope.activity.secondList[0] && $scope.activity.secondList[0].companyName){
               $scope.companyName = $scope.activity.secondList[0].companyName;
             } else {
               console.error('can not find companyName in activity ' + $scope.activity.action)

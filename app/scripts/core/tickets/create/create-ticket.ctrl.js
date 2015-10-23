@@ -91,8 +91,8 @@
               $scope.savingInProcess = false;
               $modalInstance.dismiss();
               UserNotificationService.show('New Ticket “' +  $scope.ticketNumber + '” has been created', true);
-              hideNotification();
             });
+
           } else {
             $scope.triedToSaveTicket = true;
           }

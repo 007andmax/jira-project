@@ -63,9 +63,9 @@
       <div class="panel-heading recent-heading">Recent activity</div>
 
       <ul class="list-group no-bg no-borders pull-in recent-activities-by"
-          ng-controller="quicktech.core.rightPanel.recentActivitiesCtrl" ng-init="resentUserActivities = true">
+          ng-controller="quicktech.core.rightPanel.recentActivitiesCtrl">
 
-        <li class="list-group-item list-users" ng-repeat="activity in activities | limitTo: 4"
+        <li class="list-group-item list-users" ng-repeat="activity in activities"
             ng-controller="quicktech.core.rightPanel.activityCtrl"
             ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">
         </li>
@@ -103,24 +103,25 @@
       </ul>
     </div>
 
-    <div role="tabpanel" class="tab-pane tab-activities" ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}"
-         ng-controller="quicktech.core.rightPanel.activitiesCtrl">
+    <div role="tabpanel" class="tab-pane tab-activities"
+         ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}" ng-if="currentTicketInfoTab === 'ACTIVITY'"
+         load-more-activities>
 
-      <!--<div class="form-search clearfix">-->
-        <!--<form class="navbar-form navbar-form-search" role="search">-->
-          <!--<div class="form-group">-->
-            <!--<input type="text" class="form-control form-control-round form-control-search"-->
-                   <!--placeholder="Filter activity...">-->
-            <!--<a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>-->
-          <!--</div>-->
-        <!--</form>-->
-      <!--</div>-->
+      <div class="form-search clearfix">
+        <form class="navbar-form navbar-form-search" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control form-control-round form-control-search" ng-model="searchActivity"
+                   placeholder="Filter activity...">
+            <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1" ng-click="searchActivity = undefined"></a>
+          </div>
+        </form>
+      </div>
 
       <div class="panel-heading">All Activity</div>
 
-      <ul class="list-group no-bg no-borders pull-in recent-activities-by">
+      <ul class="list-group no-bg no-borders pull-in recent-activities-by" lma-all-activities>
 
-        <li class="list-group-item list-users" ng-repeat="activity in activities"
+        <li class="list-group-item list-users" ng-repeat="activity in activities" lma-all-activity
             ng-controller="quicktech.core.rightPanel.activityCtrl"
             ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">
         </li>
