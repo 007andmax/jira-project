@@ -1135,7 +1135,7 @@ width: calc(100% - 686px) !important;
 .company-profile .tabs-wrapper .tab-pane .vendors li .col-2 .name{
   font-weight: 600;
 }
-a.left-arrow{
+button.left-arrow{
 		background-position: -1025px -206px;
 
 }
@@ -1157,31 +1157,31 @@ width: 13px;
 height: 20px;
 margin-left: 3px;
 }
-a.left-arrow:hover,
-a.left-arrow:active{
+button.left-arrow:hover,
+button.left-arrow:active{
 			background-position: -1042px -206px;
 
 }
-a.left-arrow.disabled:hover,
-a.left-arrow.disabled,
-a.left-arrow.active{
+button.left-arrow.disabled:hover,
+button.left-arrow.disabled,
+button.left-arrow.active{
 	cursor: default !important;
 			background-position: -1008px -206px;
 
 }
 
-a.right-arrow {
+button.right-arrow {
 		background-position: -1076px -206px;
 
 }
-a.right-arrow:hover,
-a.right-arrow:active{
+button.right-arrow:hover,
+button.right-arrow:active{
 			background-position: -1093px -206px;
 
 }
-a.right-arrow.disabled:hover,
-a.right-arrow.disabled,
-a.right-arrow.active{
+button.right-arrow.disabled:hover,
+button.right-arrow.disabled,
+button.right-arrow.active{
 	cursor: default !important;
 			background-position: -1059px -206px;
 

@@ -8,7 +8,6 @@
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, UsersService, TicketsService,
                 SubscriptionsService, VendorsService, SharedStateService) {
 
-        var availableMods = ['activity', 'user', 'device', 'vendors'];
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
 
         $scope.locationIndex = 0;

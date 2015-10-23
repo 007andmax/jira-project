@@ -78,12 +78,12 @@
               </a>
 
               <div class="arrows" ng-show="accordionStatus.openLocations" style="display: block;">
-                <a href="javascript:void(0)" class="icn left-arrow"
+                <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
                    ng-class="{disabled: locationIndex <= 0}"
-                   ng-click="changeCurrentLocation(locationIndex - 1)"></a>
-                <a href="javascript:void(0)" class="icn right-arrow"
+                   ng-click="changeCurrentLocation(locationIndex - 1)"></button>
+                <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
                    ng-click="changeCurrentLocation(locationIndex + 1)"
-                   ng-class="{disabled: locationIndex >= vendor.addresses.length - 1 }"></a>
+                   ng-class="{disabled: locationIndex >= vendor.addresses.length - 1 }"></button>
 
               </div>
             </accordion-heading>
