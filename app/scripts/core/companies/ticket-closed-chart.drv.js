@@ -26,9 +26,9 @@
             return ctrl.$viewValue;
           }, drawticketClosedChart, true);
 
-          window.onresize = function () {
-            drawticketClosedChart()
-          };
+          $(window).resize(function() {
+            drawticketClosedChart();
+          });
 
           function drawticketClosedChart() {
 

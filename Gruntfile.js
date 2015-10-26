@@ -172,7 +172,7 @@ module.exports = function (grunt) {
               '!/dist',
               '!/bower_components'
             ],
-            host: '192.168.1.51',
+            host: '192.168.1.50',
             port: 8080,
             https: false,
             xforward: false,

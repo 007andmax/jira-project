@@ -172,33 +172,45 @@
         </div>
 
       </div>
-      <!--<div class="charts-row">-->
-        <!--<div class="tchart">-->
-          <!--<div class="heading"><span class="bold">Total Earnings</span> <span-->
-            <!--class="dot-sep"></span> <span class="amount">94,580 USD</span>-->
 
-            <!--<div class="arrows">-->
-              <!--<a href="javascript:void(0)" class="icn left-arrow "></a>-->
-              <!--<a href="javascript:void(0)" class="icn right-arrow disabled"></a>-->
+      <div class="charts-row">
 
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="chart-area"></div>-->
-        <!--</div>-->
-        <!--<div class="tchart last">-->
-          <!--<div class="heading"><span class="bold">Total Receivables</span> <span-->
-            <!--class="dot-sep"></span> <span class="amount">56,960 USD</span>-->
+        <div class="tchart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">
+          <div class="heading"><span class="bold">Total Earnings</span> <span
+            class="dot-sep"></span> <span class="amount">{{ totalEarningValue }} USD</span>
 
-            <!--<div class="arrows">-->
-              <!--<a href="javascript:void(0)" class="icn left-arrow "></a>-->
-              <!--<a href="javascript:void(0)" class="icn right-arrow disabled"></a>-->
+            <div class="arrows">
+              <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
+                      ng-disabled="disabledLeftButton" ng-class="{'disabled': disabledLeftButton}"
+                      ng-click="changeRangeDateToGetTotalEarnings('PREV')"></button>
+              <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
+                      ng-disabled="disabledRightButton" ng-class="{'disabled': disabledRightButton}"
+                      ng-click="changeRangeDateToGetTotalEarnings('NEXT')"></button>
 
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="chart-area"></div>-->
-        <!--</div>-->
+            </div>
+          </div>
+          <div total-charts ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'" second-gradient-color="'#7BAF3F'"></div>
+        </div>
 
-      <!--</div>-->
+        <div class="tchart last" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
+          <div class="heading"><span class="bold">Total Receivables</span> <span
+            class="dot-sep"></span> <span class="amount">{{ totalReceivablesValue }} USD</span>
+
+            <div class="arrows">
+              <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
+                      ng-disabled="disabledLeftButton" ng-class="{'disabled': disabledLeftButton}"
+                      ng-click="changeRangeDateToGetTotalReceivables('PREV')"></button>
+              <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
+                      ng-disabled="disabledRightButton" ng-class="{'disabled': disabledRightButton}"
+                      ng-click="changeRangeDateToGetTotalReceivables('NEXT')"></button>
+
+            </div>
+          </div>
+          <div total-charts ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'" second-gradient-color="'#E55E36'"></div>
+        </div>
+
+      </div>
+
       <div class="charts-row" ng-controller="quicktech.core.companies.ticketsClosedChartCtrl">
         <div class="tchart">
           <div class="heading"><span class="bold">Tickets Closed</span> <span
