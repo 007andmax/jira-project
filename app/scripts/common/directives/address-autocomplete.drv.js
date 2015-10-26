@@ -62,8 +62,8 @@
 
             ngModelCtrl.$viewValue.address = input.val();
             ngModelCtrl.$viewValue.countryCode = getCountryCode(place);
-            ngModelCtrl.$viewValue.locationLat = place.geometry.location.G;
-            ngModelCtrl.$viewValue.locationLng = place.geometry.location.K;
+            ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
+            ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
 
           });
 
