@@ -196,6 +196,15 @@
         }
 
         function setServiceName() {
+          if($scope.activity.action === 'SERVICE_MOVED'){
+            if ($scope.activity.secondList[0] && $scope.activity.secondList[0].serviceName) {
+              $scope.serviceName = $scope.activity.secondList[0].serviceName;
+            } else {
+              console.error('can not find serviceName in activity ' + $scope.activity.action)
+            }
+            return;
+          }
+
           if ($scope.activity.firstList[0] && $scope.activity.firstList[0].serviceName) {
             $scope.serviceName = $scope.activity.firstList[0].serviceName;
           } else {

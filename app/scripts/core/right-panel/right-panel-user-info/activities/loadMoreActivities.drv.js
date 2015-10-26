@@ -19,13 +19,13 @@
 
             scope.searchActivity = '';
 
-            scope.activities = RightPanelService.getActivities(scope, params, function(){
+            scope.activities = RightPanelService.getActivities(scope, params, function () {
               initScrollListener();
             });
 
-            scope.$watch('searchActivity', function(){
+            scope.$watch('searchActivity', function () {
 
-              if(scope.searchActivity.length > 2 || scope.searchActivity.length === 0) {
+              if (scope.searchActivity.length > 2 || scope.searchActivity.length === 0) {
 
                 params.keyword = scope.searchActivity;
                 scope.activities = RightPanelService.getActivities(scope, params);
@@ -42,7 +42,7 @@
 
               $document.on('jsp-scroll-y', function () {
 
-                if(scrollPane.getPercentScrolledY() === 1){
+                if (scrollPane.getPercentScrolledY() === 1) {
 
                   if (loadingMoreActivities) {
                     return;
@@ -50,10 +50,10 @@
 
                   loadingMoreActivities = true;
 
-                  RightPanelService.loadMoreActivities(scope, function(moreActivities){
+                  RightPanelService.loadMoreActivities(scope, function (moreActivities) {
                     loadingMoreActivities = false;
 
-                    if(moreActivities.length === 0){
+                    if (moreActivities.length === 0) {
                       $document.off('jsp-scroll-y');
                     }
                   })
