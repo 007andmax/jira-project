@@ -87,8 +87,8 @@
             chartContext.fillText('-', widthBetweenLeftAndMarker, chartHeight - widthBetweenBottomAndRectangle);
 
             var linearGradient = chartContext.createLinearGradient(0, 0, 0, chartHeight - widthBetweenBottomAndRectangle - 2);
-            linearGradient.addColorStop(0, "#1B4EE4");
-            linearGradient.addColorStop(1, "#15a2e4");
+            linearGradient.addColorStop(0, "#1A7DDC");
+            linearGradient.addColorStop(1, "#3AA4E5");
 
             chartContext.textAlign = "center";
 

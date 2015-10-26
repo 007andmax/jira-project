@@ -4,13 +4,34 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
-      'quicktech.common.services.SharedStateService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService) {
+      'quicktech.common.services.SharedStateService', '$timeout',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, $timeout) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
+
+        $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function(){
+          $scope.mostTicketsResolved = 0;
+
+          for(var companyId in $scope.topCompaniesByResolvedTickets){
+            if(companyId === 'staticCopy'){
+              continue;
+            }
+            $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
+          }
+        });
+        $scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function(){
+          $scope.contributedToEarnings = 0;
+
+          for(var companyId in $scope.contributedToEarningTopCompanies){
+            if(companyId === 'staticCopy'){
+              continue;
+            }
+            $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
+          }
+        });
 
         $scope.$watch('companies.length', function (companiesCount) {
           headerSharedState.count = companiesCount;
@@ -63,9 +84,16 @@
 
         $scope.showStatistic = false;
         $scope.toggleStatistic = function () {
+          if($scope.showStatistic){
+            $timeout(function(){
+              $scope.showStatisticContent = false;
+            }, 500)
+          } else {
+            $scope.showStatisticContent = !$scope.showStatisticContent;
+          }
           $scope.showStatistic = !$scope.showStatistic;
-        };
 
+        }
 
       }]);
 
