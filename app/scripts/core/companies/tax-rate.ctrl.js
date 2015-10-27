@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.companies').controller('quicktech.core.companies.TaxRateCtrl',
+  angular.module('quicktech.core.companies').controller('quicktech.core.companies.taxRateCtrl',
     ['$scope',
       function ($scope) {
 
@@ -17,6 +17,7 @@
         $scope.saveTax = function () {
           $scope.isEditing = false;
           $scope.editCompany.taxRates[$scope.$index] = {
+            "versionedId": $scope.tax.versionedId,
             "rate": $scope.tax.rate,
             "code": $scope.tax.code
           };

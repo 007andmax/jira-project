@@ -379,7 +379,7 @@
               <div class="grid-col">TAX TYPE</div>
               <div class="grid-col">RATE</div>
             </div>
-            <div ng-repeat="tax in editCompany.taxRates" ng-controller="quicktech.core.companies.TaxRateCtrl">
+            <div ng-repeat="tax in editCompany.taxRates" ng-controller="quicktech.core.companies.taxRateCtrl">
               <div class="grid-row grid-row clearfix">
                 <div ng-if="!isEditing">
                   <div class="grid-col">{{ tax.code }}</div>

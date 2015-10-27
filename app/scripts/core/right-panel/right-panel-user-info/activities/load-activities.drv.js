@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.rightPanel").directive("loadMoreActivities",
+  angular.module("quicktech.core.rightPanel").directive("loadActivities",
     ['RightPanelService',
       function (RightPanelService) {
         return {

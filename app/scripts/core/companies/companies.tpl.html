@@ -90,9 +90,10 @@
          ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()">
       <div class="company-cover-wrapper" style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
         <div class="overlay"></div>
-        <div class="archive-btn" ng-click="archiveCompany(company.id)"
+        <div class="archive-btn" stop-propagation="click"
              ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
-          <a class="black-btn" href="javascript:void(0)" tooltip-placement="top" tooltip="Archive Company">
+          <a class="black-btn" href="javascript:void(0)" tooltip-placement="top" tooltip="Archive Company"
+             ng-click="archiveCompany(company.id)">
             <span class="icn archive-company"></span>
           </a>
         </div>

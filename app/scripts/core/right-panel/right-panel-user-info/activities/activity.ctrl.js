@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.rightPanel').controller('quicktech.core.rightPanel.activityCtrl',
-    ['$scope', 'RightPanelService', 'quicktech.common.services.SharedStateService', 'UsersService', 'TicketsService', 'ContactsService',
-      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, ContactsService) {
+    ['$scope', 'RightPanelService', 'quicktech.common.services.SharedStateService', 'UsersService',
+      function ($scope, RightPanelService, SharedStateService, UsersService) {
 
         var caseToSetTicketNumber = ['TICKET_UPDATE_NOTE_ADDED', 'TICKET_CLAIMED', 'TICKET_UPDATE_NOTE_DELETED',
           'TICKET_CREATED_FOR_USER', 'TICKET_CREATED_FOR_AGENT', 'TICKET_CREATED_VIA_EMAIL', 'TICKET_UPDATE_SERVICE_EXPENSE_EDIT', 'TICKET_UPDATE_PRODUCT_EXPENSE_EDIT',

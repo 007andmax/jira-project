@@ -49,7 +49,7 @@
         $scope.createRecurringInvoice = function (form) {
           if (form.$valid) {
             $scope.disabledCreateButton = true;
-            var sentOn = $scope.createInvoice.sentOn;
+            var sentOn = new Date($scope.createInvoice.sentOn);
 
             RecurringService.createRecurringInvoice({
               products: [],

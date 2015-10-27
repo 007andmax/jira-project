@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.usersCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', 'ActionRightsService', 'TicketTagsService',
-      function ($scope, SharedStateService, ActionRightsService, TicketTagsService) {
+    ['$scope', 'quicktech.common.services.SharedStateService',
+      function ($scope, SharedStateService) {
 
         $scope.sharedState = SharedStateService.getSharedState('usersHeader');
 
