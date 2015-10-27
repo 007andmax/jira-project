@@ -156,7 +156,7 @@
 
             for (var i = 0; i < tooltipMessage.length; i++) {
               var rect = tooltipMessage[i],
-                mouseOnRect = isMouseOnCircle(mouseX, mouseY, rect);
+                mouseOnRect = isMouseOnRect(mouseX, mouseY, rect);
 
               if (!mouseOnRect && rect.isTooltipShown) {
                 redrawGraph = true;
@@ -173,7 +173,7 @@
             }
           }
 
-          function isMouseOnCircle(mouseX, mouseY, positionRect) {
+          function isMouseOnRect(mouseX, mouseY, positionRect) {
             var trueForX = (mouseX > positionRect.x1 && mouseX < positionRect.x2);
             var trueForY = (mouseY > positionRect.y2 && mouseY < positionRect.y1);
 

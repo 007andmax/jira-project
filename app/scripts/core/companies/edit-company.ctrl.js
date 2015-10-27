@@ -192,7 +192,7 @@
           var taxRateCount = 0;
 
           for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if ($scope.editCompany.taxRates[i].code === ngModelCtrl.$viewValue) {
+            if (($scope.editCompany.taxRates[i].code).toLowerCase() === (ngModelCtrl.$viewValue).toLowerCase()) {
               taxRateCount++;
             }
           }
@@ -232,7 +232,7 @@
           var taxRateCount = 0;
 
           for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if ($scope.editCompany.taxRates[i].code === form.code.$viewValue) {
+            if (($scope.editCompany.taxRates[i].code).toLowerCase() === (form.code.$viewValue).toLowerCase()) {
               taxRateCount++;
             }
           }
