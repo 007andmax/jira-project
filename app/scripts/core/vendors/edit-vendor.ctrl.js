@@ -43,7 +43,11 @@
         };
 
         if ($stateParams.vendorId) {
-          var vendor = VendorsService.getOneById($stateParams.vendorId, function () {
+          var vendor = VendorsService.getOneById($stateParams.vendorId, function (resp) {
+
+            if(resp.code === 400){
+              $state.go('vendors');
+            }
 
             if (!vendor.addresses || vendor.addresses.length === 0) {
               vendor.addresses = [{isPrimary: true}];
