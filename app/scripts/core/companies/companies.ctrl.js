@@ -31,6 +31,10 @@
             }
             $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
           }
+
+          if($scope.contributedToEarnings){
+            $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
+          }
         });
 
         $scope.$watch('companies.length', function (companiesCount) {

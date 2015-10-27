@@ -36,8 +36,6 @@
           month = lastDayToGetClosedTkt.getMonth();
           firstDayToGetClosedTkt = new Date(year, month, day);
 
-          console.log(firstDayToGetClosedTkt, lastDayToGetClosedTkt)
-
           $scope.totalEarningsByDays = StatisticsService.getTotalEarningsByDays($stateParams.companyId, firstDayToGetClosedTkt, lastDayToGetClosedTkt, $scope, function () {
 
             for (var date in $scope.totalEarningsByDays) {
@@ -47,9 +45,6 @@
 
               $scope.totalEarningValue += $scope.totalEarningsByDays[date];
             }
-
-            console.log($scope.totalEarningsByDays)
-            console.log(Object.keys($scope.totalEarningsByDays).length)
 
           });
 

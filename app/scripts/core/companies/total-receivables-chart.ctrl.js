@@ -36,8 +36,6 @@
           month = lastDayToGetClosedTkt.getMonth();
           firstDayToGetClosedTkt = new Date(year, month, day);
 
-          console.log(firstDayToGetClosedTkt, lastDayToGetClosedTkt)
-
           $scope.totalReceivableByDays = StatisticsService.getTotalReceivableByDays($stateParams.companyId, firstDayToGetClosedTkt, lastDayToGetClosedTkt, $scope, function () {
 
             for (var date in $scope.totalReceivableByDays) {
@@ -51,9 +49,6 @@
             if($scope.totalReceivablesValue){
               $scope.totalReceivablesValue = $scope.totalReceivablesValue.toFixed(2);
             }
-
-            console.log($scope.totalReceivableByDays)
-            console.log(Object.keys($scope.totalReceivableByDays).length)
 
           });
 
