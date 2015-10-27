@@ -46,6 +46,10 @@
               $scope.totalEarningValue += $scope.totalEarningsByDays[date];
             }
 
+            if($scope.totalEarningValue){
+              $scope.totalEarningValue = $scope.totalEarningValue.toFixed(2);
+            }
+
           });
 
           $scope.disabledRightButton = +lastDayToGetClosedTkt >= +today;
