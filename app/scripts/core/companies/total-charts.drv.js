@@ -82,7 +82,7 @@
             chartContext.fillText((maxMark / 2), widthBetweenLeftAndText, chartHeight - (widthBetweenBottomAndRectangle + 2 * widthBetweenMarker));
             chartContext.fillText('0', widthBetweenLeftAndText, chartHeight - widthBetweenBottomAndRectangle);
 
-            chartContext.fillStyle = "#2d8ae5";
+            chartContext.fillStyle = $scope.firstGradientColor;
 
             chartContext.fillText('-', widthBetweenLeftAndMarker, chartHeight - (widthBetweenBottomAndRectangle + 4 * widthBetweenMarker));
             chartContext.fillText('-', widthBetweenLeftAndMarker, chartHeight - (widthBetweenBottomAndRectangle + 3 * widthBetweenMarker));
