@@ -237,8 +237,8 @@
       if (base.isDragging) {
         var xDif = (event.pageX || event.originalEvent.touches[0].pageX) - base.dragMouseCoords.x;
         var yDif = (event.pageY || event.originalEvent.touches[0].pageY) - base.dragMouseCoords.y;
-        var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width(), base.options.cropBoxWidth);
-        var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height(), base.options.cropBoxHeight);
+        var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width() - 1, base.options.cropBoxWidth);
+        var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height() - 1, base.options.cropBoxHeight);
         base.$image.css({'left': (newLeft.toString() + 'px'), 'top': (newTop.toString() + 'px')});
         storeFocalPoint();
         updateResult();
