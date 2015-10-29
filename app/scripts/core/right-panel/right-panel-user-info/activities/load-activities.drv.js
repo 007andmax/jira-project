@@ -15,7 +15,8 @@
               scrollListenerInitialize,
               rightPanel = $('#rightPanelElement'),
               scrollPane = rightPanel.data('jsp'),
-              $document = $(document);
+              $document = $(document),
+              loadSearchActivities = false;
 
             scope.searchActivity = '';
 
@@ -25,10 +26,22 @@
 
             scope.$watch('searchActivity', function () {
 
+              if(scope.searchActivity.length > 2){
+                loadSearchActivities = true;
+              }
+
               if (scope.searchActivity.length > 2 || scope.searchActivity.length === 0) {
 
+                if(!loadSearchActivities){
+                  return;
+                }
+
                 params.keyword = scope.searchActivity;
-                scope.activities = RightPanelService.getActivities(scope, params);
+                scope.activities = RightPanelService.getActivities(scope, params, function(){
+                  if(scope.searchActivity.length === 0){
+                    loadSearchActivities = false;
+                  }
+                });
               }
             });
 

@@ -29,12 +29,13 @@
                      popover-placement="top" popover="{{ companyData.description }}">
                 <span class="icn company-detail"></span></a></li>
               <li ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"><a href="javascript:void(0)" class="tp-hide"
-                     ng-click="showEditCover()"
-                     tooltip="Change Cover" tooltip-placement="top">
+                                                                       ng-click="showEditCover()"
+                                                                       tooltip="Change Cover" tooltip-placement="top">
                 <span class="icn camera"></span></a></li>
               <li ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"><a href="javascript:void(0)" class="tp-hide"
-                     ui-sref="editCompany( { companyId: company.id } )"
-                     tooltip="Edit Company info" tooltip-placement="top">
+                                                                       ui-sref="editCompany( { companyId: company.id } )"
+                                                                       tooltip="Edit Company info"
+                                                                       tooltip-placement="top">
                 <span class="icn icn-edit-tag"></span></a></li>
 
 
@@ -65,12 +66,14 @@
                 </a>
 
                 <div class="arrows" ng-show="accordionStatus.openContacts" style="display: block;">
-                  <button href="javascript:void(0)" class="icn left-arrow disabled" style="border-width: 0px; height: 12px; outline:none"
-                     ng-class="{disabled: contactIndex <= 0}"
-                     ng-click="changeCurrentContact(contactIndex - 1)"></button>
-                  <button href="javascript:void(0)" class="icn right-arrow" style="border-width: 0px; height: 12px; outline:none"
-                     ng-click="changeCurrentContact(contactIndex + 1)"
-                     ng-class="{disabled: contactIndex >= companyData.contacts.length - 1 }"></button>
+                  <button href="javascript:void(0)" class="icn left-arrow disabled"
+                          style="border-width: 0px; height: 12px; outline:none"
+                          ng-class="{disabled: contactIndex <= 0}"
+                          ng-click="changeCurrentContact(contactIndex - 1)"></button>
+                  <button href="javascript:void(0)" class="icn right-arrow"
+                          style="border-width: 0px; height: 12px; outline:none"
+                          ng-click="changeCurrentContact(contactIndex + 1)"
+                          ng-class="{disabled: contactIndex >= companyData.contacts.length - 1 }"></button>
                 </div>
               </accordion-heading>
 
@@ -87,12 +90,14 @@
                 </a>
 
                 <div class="arrows" ng-show="accordionStatus.openLocations" style="display: block;">
-                  <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
-                     ng-class="{disabled: locationIndex <= 0}"
-                     ng-click="changeCurrentLocation(locationIndex - 1)"></button>
-                  <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
-                     ng-click="changeCurrentLocation(locationIndex + 1)"
-                     ng-class="{disabled: locationIndex >= companyData.addresses.length - 1 }"></button>
+                  <button href="javascript:void(0)" class="icn left-arrow"
+                          style="border: none; height: 12px; outline:none"
+                          ng-class="{disabled: locationIndex <= 0}"
+                          ng-click="changeCurrentLocation(locationIndex - 1)"></button>
+                  <button href="javascript:void(0)" class="icn right-arrow"
+                          style="border: none; height: 12px; outline:none"
+                          ng-click="changeCurrentLocation(locationIndex + 1)"
+                          ng-class="{disabled: locationIndex >= companyData.addresses.length - 1 }"></button>
                 </div>
               </accordion-heading>
 
@@ -115,10 +120,14 @@
       <div class="charts-row">
 
         <!--<div class="chart devices">-->
+
         <!--<div class="content">-->
+
         <!--<div class="device-circle"></div>-->
+
         <!--<div class="tooltip tooltip-cdevice right">-->
         <!--<div class="tooltip-arrow"></div>-->
+
         <!--<ul class="tooltip-inner">-->
         <!--<li>-->
         <!--<span class="usertitle">clients</span>-->
@@ -126,23 +135,24 @@
         <!--<span class="username">2,236</span>-->
         <!--</li>-->
         <!--</ul>-->
+
         <!--</div>-->
+
         <!--<ul class="chart-list report-nav">-->
+
         <!--<li><span class="circle blue"></span> Clients</li>-->
         <!--<li><span class="circle green"></span> Portable Devices</li>-->
         <!--<li><span class="circle orange"></span> Printers</li>-->
         <!--<li><span class="circle dark-orange"></span> Member Servers</li>-->
         <!--<li><span class="circle red"></span> Member Servers</li>-->
 
-
         <!--</ul>-->
         <!--</div>-->
         <!--</div>-->
+
         <div class="chart tickets">
           <div class="content">
-            <div pie-chart pie-chart-value="[ticketCounts.OPEN, ticketCounts.UNASSIGNED]"
-                 tooltip-placement="right" pie-chart-size="140" pie-chart-color="['#eca935', '#2eabbe']"
-                 tooltip-template="'/html/scripts/core/companies/chart-tickets-tooltip.tpl.html'"></div>
+            <div style='margin-left: -6px;' tickets-donought-chart ng-model="countsByTypesAndCompany"></div>
             <ul class="chart-list report-nav">
               <li><span class="circle blue"></span> UNASSIGNED</li>
               <li><span class="circle orange"></span> OPEN</li>
@@ -159,14 +169,15 @@
               </div>
             </div>
           </div>
-          <!--<div class="devices">-->
-            <!--<div class="contents">-->
-              <!--<div class="icon-wrapper"><span class="icn icn-cdevice"></span></div>-->
-              <!--<div class="status"><h4>online devices</h4>-->
 
-                <!--<div class="time"><span class="hour">628 </span></div>-->
-              <!--</div>-->
-            <!--</div>-->
+          <!--<div class="devices">-->
+          <!--<div class="contents">-->
+          <!--<div class="icon-wrapper"><span class="icn icn-cdevice"></span></div>-->
+          <!--<div class="status"><h4>online devices</h4>-->
+
+          <!--<div class="time"><span class="hour">628 </span></div>-->
+          <!--</div>-->
+          <!--</div>-->
           <!--</div>-->
 
         </div>
@@ -189,7 +200,8 @@
 
             </div>
           </div>
-          <div total-charts ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'" second-gradient-color="'#7BAF3F'"></div>
+          <div total-charts ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'"
+               second-gradient-color="'#7BAF3F'"></div>
         </div>
 
         <div class="tchart last" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
@@ -206,7 +218,8 @@
 
             </div>
           </div>
-          <div total-charts ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'" second-gradient-color="'#E55E36'"></div>
+          <div total-charts ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'"
+               second-gradient-color="'#E55E36'"></div>
         </div>
 
       </div>
@@ -218,82 +231,105 @@
 
             <div class="arrows">
               <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
-                 ng-disabled="disabledLeftButton" ng-class="{'disabled': disabledLeftButton}"
-                 ng-click="changeRangeDateToGetClosedTkt('PREV')"></button>
+                      ng-disabled="disabledLeftButton" ng-class="{'disabled': disabledLeftButton}"
+                      ng-click="changeRangeDateToGetClosedTkt('PREV')"></button>
               <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
-                 ng-disabled="disabledRightButton" ng-class="{'disabled': disabledRightButton}"
-                 ng-click="changeRangeDateToGetClosedTkt('NEXT')"></button>
+                      ng-disabled="disabledRightButton" ng-class="{'disabled': disabledRightButton}"
+                      ng-click="changeRangeDateToGetClosedTkt('NEXT')"></button>
             </div>
           </div>
 
           <div ticket-closed-chart ng-model="closedTicketsGraphData"></div>
         </div>
-        <!--<div class="tchart last">-->
-          <!--<div class="heading"><span class="bold">Ticket Resolutions</span> All Time-->
-            <!--<ul class="pull-right report-nav">-->
-              <!--<li><span class="circle blue"></span> Quick</li>-->
-              <!--<li><span class="circle dark-orange"></span> DELAYED</li>-->
 
-            <!--</ul>-->
-          <!--</div>-->
-          <!--<div class="content clearfix">-->
-            <!--<div pie-chart-company pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"-->
-                 <!--tooltip-placement="right"-->
-                 <!--tooltip-template="'/html/scripts/core/companies/ticket-resolutions-tooltip.tpl.html'"></div>-->
 
-            <!--<ul class="chart-list">-->
-              <!--<li><span class="blue">{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>-->
-                <!--Tickets created & resolved within 2 days-->
-              <!--</li>-->
-              <!--<li><span class="orange">{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>-->
-                <!--Tickets created & resolved within 10 days-->
-              <!--</li>-->
-            <!--</ul>-->
+        <div class="tchart last">
 
-          <!--</div>-->
-        <!--</div>-->
+          <div class="heading">
 
-      </div>
-    </div>
+            <span class="bold">Ticket Resolutions</span> All Time
 
-    <div class="tabs-wrapper" ng-init="mode = 'user'">
+            <ul class="pull-right report-nav">
+              <li><span class="circle blue"></span> Quick</li>
+              <li><span class="circle dark-orange"></span> DELAYED</li>
+            </ul>
 
-      <div>
-        <div class="">
-          <ul class="nav nav-tabs">
+          </div>
 
-            <!--<li role="presentation" class="activity" ng-class="{active: mode === 'activity'}">-->
-            <!--<a ng-click="mode = 'activity'">Activity</a>-->
-            <!--<ul class="sub-nav">-->
-            <!--<li><a href="javascript:void(0)" class="active">hour</a></li>-->
-            <!--<li><a href="javascript:void(0)" class="weekly">week</a></li>-->
-            <!--<li><a href="javascript:void(0)" class="monthly">month</a></li>-->
-            <!--</ul>-->
-            <!--</li>-->
+          <div class="content clearfix">
 
-            <li role="presentation" class="" ng-class="{active: mode === 'user'}">
-              <a ng-click="mode = 'user'">Users <span class="count">{{ users.length }}</span></a>
-            </li>
+            <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
+                 pie-chart-color="['#2eabbe', '#eca935']"
+                 pie-chart-size="140"
+                 tooltip-placement="right"
+                 tooltip-template="'/html/scripts/core/companies/ticket-resolutions-tooltip.tpl.html'"></div>
 
-            <!--<li role="presentation" class="" ng-class="{active: mode === 'device'}">-->
-            <!--<a ng-click="mode = 'device'">Devices <span class="count">4,665</span></a>-->
-            <!--</li>-->
+            <!--<div class="tooltip tooltip-cdevice right">-->
+              <!-- -->
+              <!--<div class="tooltip-arrow"></div>-->
+              <!--<ul class="tooltip-inner">-->
+                <!--<li>-->
+                  <!--<span class="usertitle">Quick</span>-->
 
-            <li role="presentation" class="" ng-class="{active: mode === 'vendors'}">
-              <a ng-click="mode = 'vendors'">Assc. Vendors <span
-                class="count">{{ companyData.companyAssociations.length }}</span></a>
-            </li>
+                  <!--<span class="username">1,236</span>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</div>-->
 
-          </ul>
-        </div>
+            <ul class="chart-list">
 
-        <div class="tab-pane"
-             ng-include="'/html/scripts/core/companies/'+ mode +'-tab.tpl.html'">
+              <li><span class="blue">{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
+                Tickets created &amp; resolved within 2 days
+              </li>
+
+              <li><span class="orange">{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
+                Tickets created &amp; resolved within 10 days
+              </li>
+
+            </ul>
+          </div>
         </div>
 
       </div>
+
+      <div class="tabs-wrapper" ng-init="mode = 'user'">
+
+        <div>
+          <div class="">
+            <ul class="nav nav-tabs">
+
+              <!--<li role="presentation" class="activity" ng-class="{active: mode === 'activity'}">-->
+              <!--<a ng-click="mode = 'activity'">Activity</a>-->
+              <!--<ul class="sub-nav">-->
+              <!--<li><a href="javascript:void(0)" class="active">hour</a></li>-->
+              <!--<li><a href="javascript:void(0)" class="weekly">week</a></li>-->
+              <!--<li><a href="javascript:void(0)" class="monthly">month</a></li>-->
+              <!--</ul>-->
+              <!--</li>-->
+
+              <li role="presentation" class="" ng-class="{active: mode === 'user'}">
+                <a ng-click="mode = 'user'">Users <span class="count">{{ users.length }}</span></a>
+              </li>
+
+              <!--<li role="presentation" class="" ng-class="{active: mode === 'device'}">-->
+              <!--<a ng-click="mode = 'device'">Devices <span class="count">4,665</span></a>-->
+              <!--</li>-->
+
+              <li role="presentation" class="" ng-class="{active: mode === 'vendors'}">
+                <a ng-click="mode = 'vendors'">Assc. Vendors <span
+                  class="count">{{ companyData.companyAssociations.length }}</span></a>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="tab-pane"
+               ng-include="'/html/scripts/core/companies/'+ mode +'-tab.tpl.html'">
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
   </div>
-
-</div>

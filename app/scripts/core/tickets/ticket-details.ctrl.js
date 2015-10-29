@@ -16,6 +16,7 @@
           $scope.allUpdatesLoaded = false;
           $scope.selectUpdateSharedUser = {};
           $scope.updateSharedUsersList = [];
+          $scope.disabledWhenLoadAttachment = false;
           $scope.productCategories = ProductsService.getCategories($scope);
 
           UserNotificationService.show('Loading...');

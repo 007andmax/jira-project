@@ -6,6 +6,8 @@
       ['$scope', 'FilesService',
         function ($scope, FilesService) {
 
+          var uploadingAttachmentsCount = 0;
+
           setTicketUpdateToDefault();
 
           function setTicketUpdateToDefault() {
@@ -23,12 +25,22 @@
           $scope.addAttachmentFiles = function (file) {
             $scope.ticketUpdate.attachments.push(file);
             $scope.$apply();
+            $scope.disabledWhenLoadAttachment = true;
+
+            uploadingAttachmentsCount++;
+
             FilesService.create(file,
               function (progress) {
                 file.progress = 100 * (progress.loaded / progress.total);
                 $scope.$apply();
               },
               function (finish) {
+
+                if (--uploadingAttachmentsCount === 0) {
+                  $scope.disabledWhenLoadAttachment = false;
+                  $scope.$apply();
+                }
+
                 file.id = finish.id;
               }, function (error) {
               });

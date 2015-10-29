@@ -3,8 +3,8 @@
   <div class="content-head clearfix">
 
     <div class="content-stat full pull-left">
-      <div class="heading"><span class="bold">INVOICES RECURRED</span> LAST 30 DAYS <span class="dot-sep"></span> <span
-        class="amount">94,580 USD</span>
+      <div class="heading"><span class="bold">INVOICES RECURRED</span> LAST 30 DAYS <span class="dot-sep"></span>
+        <span class="amount">{{ last30DaysValue | currency:'':0 }} USD</span>
         <ul class="pull-right report-nav">
 
           <li><span class="circle red"></span> WEEKLY</li>
@@ -13,7 +13,7 @@
 
         </ul>
       </div>
-      <div class="chart"></div>
+      <div recurring-charts ng-model="recurringGraphData"></div>
 
     </div>
 

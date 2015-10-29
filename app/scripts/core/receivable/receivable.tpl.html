@@ -9,10 +9,11 @@
 
         </ul>
       </div>
-      <div class="chart">
 
-      </div>
+      <div receivable-chart ng-model="receivableGraphData"></div>
+
     </div>
+
     <div class="content-all-time-stat pull-left">
       <div class="heading">
         <div class="title"><span class="bold">RECEIVED AMOUNT</span> ALL TIME</div>
@@ -40,7 +41,6 @@
           <span class="icns icn icn-btn-payed "></span>
         </a>
 
-        <!-- Nav tabs -->
         <ul class="nav nav-tabs">
           <li role="presentation" ng-class="{active: mode === 'group-by-company'}">
             <a ui-sref="receivable({mode: 'group-by-company'})">
@@ -54,7 +54,7 @@
           </li>
         </ul>
       </div>
-      <!-- Tab panes -->
+
       <div class="tab-content">
         <div ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>
       </div>

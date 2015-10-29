@@ -22,12 +22,27 @@
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
         });
-        $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
         $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
         $scope.users = UsersService.getAllByCompanyId($stateParams.companyId);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($stateParams.companyId, $scope);
         $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany($stateParams.companyId, $scope);
+
+        $scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function(){
+
+          $scope.$watch('countsTicketsCompany', function(){
+            $scope.countsByTypesAndCompany = [{
+              label: 'Unassigned',
+              value: $scope.countsTicketsCompany['UNASSIGNED'],
+              color: "#00ACC1"
+            }, {
+              label: 'Open',
+              value: $scope.countsTicketsCompany['OPEN'],
+              color: "#FFA726"
+            }];
+          })
+
+        });
 
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.companyData.addresses.length) {

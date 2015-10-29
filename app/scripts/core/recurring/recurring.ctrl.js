@@ -8,7 +8,19 @@
 
         $scope.companySelection = {};
 
-        $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope);
+        $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
+          $scope.last30DaysValue = 0;
+
+          for (var r = 0; r < $scope.recurringGraphData.length; r++) {
+
+            for (var i = 0; i < $scope.recurringGraphData[r].length; i++) {
+
+              $scope.last30DaysValue += $scope.recurringGraphData[r][i].sum;
+            }
+          }
+
+
+        });
 
         $scope.recurringCompanies = RecurringService.getRecurringCompanies($scope, function () {
 

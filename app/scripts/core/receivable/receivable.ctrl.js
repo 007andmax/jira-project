@@ -19,7 +19,7 @@
         $scope.receivableGraphData = ReceivableService.getReceivableGraphData($scope, function () {
           $scope.totalCollectedLast30Days = 0;
           for (var i = 0; i < $scope.receivableGraphData.length; i++) {
-            $scope.totalCollectedLast30Days += $scope.receivableGraphData[i].total;
+            $scope.totalCollectedLast30Days += $scope.receivableGraphData[i].receivedOnDay;
           }
         });
 

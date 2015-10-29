@@ -9,8 +9,8 @@
   </div>
 
   <a class="btn btn-scooter btn-update pull-right" ng-click="saveTicketUpdate()"
-     ng-class="{ 'disabled': !isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid }"
-     ng-disabled="!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid"
+     ng-class="{ 'disabled': (!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid) && disabledWhenLoadAttachment }"
+     ng-disabled="(!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid) && disabledWhenLoadAttachment"
      ng-click="saveTicketUpdate()">
     <div class="icn-send"></div>
   </a>
