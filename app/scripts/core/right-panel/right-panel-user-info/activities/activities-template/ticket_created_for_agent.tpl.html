@@ -6,7 +6,8 @@
   <div class="clearfix">
     <div class="user-name"><strong>{{ userName }}</strong> created the ticket
 
-      <small class="text-muted ticket-number">Tkt# {{ ticketNumber }}</small>
+      <a class="text-muted ticket-number"
+         ui-sref="tickets.details({listType: 'preview', ticketId: activity.firstList[0].ticketId})">Tkt# {{ ticketNumber }}</a>
       for <strong>{{ aditionalUserName }}</strong> via Agent.
 
     </div>

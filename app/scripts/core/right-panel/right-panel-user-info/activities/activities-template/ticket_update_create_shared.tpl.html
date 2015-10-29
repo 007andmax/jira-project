@@ -9,7 +9,10 @@
       {{ activity.firstList.length === 1 ? aditionalUserName : aditionalUserName + ' and ' + activity.firstList.length + ' others' }}
       to ticket
 
-      <span class="text-muted ticket-number">Tkt# {{ ticketNumber }}</span>
+      <a class="text-muted ticket-number"
+            ui-sref="tickets.details({listType: 'preview', ticketId: activity.firstList[0].ticketId})">
+        Tkt# {{ ticketNumber }}
+      </a>
 
     </div>
 
