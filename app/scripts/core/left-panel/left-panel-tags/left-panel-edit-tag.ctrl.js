@@ -45,6 +45,7 @@
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
               TicketTagsService.deleteTag($scope.editTag.id, function () {
                 $scope.openEditTagForm();
+                UserNotificationService.show('The label “' + $scope.editTag.name + '” has been deleted', true);
               })
             });
 
