@@ -12,11 +12,15 @@
 
         today.setHours(0, 0, 0, 0);
 
+        $scope.totalReceivablesObj = StatisticsService.getReceivableAmountByCompany($stateParams.companyId, $scope, function(obj){
+          $scope.$watch('totalReceivablesObj.value', function(){
+            $scope.totalReceivablesValue = obj.value;
+          })
+        });
+
         $scope.changeRangeDateToGetTotalReceivables = function (option) {
 
           var optionDay, year, month, day, firstDayToGetClosedTkt;
-
-          $scope.totalReceivablesValue = 0;
 
           year = lastDayToGetClosedTkt.getFullYear();
           month = lastDayToGetClosedTkt.getMonth();
@@ -36,21 +40,7 @@
           month = lastDayToGetClosedTkt.getMonth();
           firstDayToGetClosedTkt = new Date(year, month, day);
 
-          $scope.totalReceivableByDays = StatisticsService.getTotalReceivableByDays($stateParams.companyId, firstDayToGetClosedTkt, lastDayToGetClosedTkt, $scope, function () {
-
-            for (var date in $scope.totalReceivableByDays) {
-              if (date === 'staticCopy') {
-                continue;
-              }
-
-              $scope.totalReceivablesValue += $scope.totalReceivableByDays[date];
-            }
-
-            if($scope.totalReceivablesValue){
-              $scope.totalReceivablesValue = $scope.totalReceivablesValue.toFixed(2);
-            }
-
-          });
+          $scope.totalReceivableByDays = StatisticsService.getTotalReceivableByDays($stateParams.companyId, firstDayToGetClosedTkt, lastDayToGetClosedTkt, $scope);
 
           $scope.disabledRightButton = +lastDayToGetClosedTkt >= +today;
           $scope.disabledLeftButton = firstDayToGetClosedTkt < ($scope.company.createdAt);

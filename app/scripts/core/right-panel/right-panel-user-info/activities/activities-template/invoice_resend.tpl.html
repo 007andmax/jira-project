@@ -5,7 +5,8 @@
 
   <div class="clearfix">
     <div class="user-name"><strong>{{ userName }}</strong> re-sent
-      {{ activity.firstList[0] && activity.firstList[0].RecurringInvoiceFrequency ? 'activity.firstList[0].RecurringInvoiceFrequency' : '' }} invoice
+      {{ activity.firstList[0] && activity.firstList[0].recurringInvoiceFrequency ? activity.firstList[0].recurringInvoiceFrequency + ' recurring ' : '' }}
+      invoice
 
     <span class="text-muted ticket-number">{{ invoiceNumber }}</span>
     to

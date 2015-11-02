@@ -188,7 +188,7 @@
 
         <div class="tchart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">
           <div class="heading"><span class="bold">Total Earnings</span> <span
-            class="dot-sep"></span> <span class="amount">{{ totalEarningValue }} USD</span>
+            class="dot-sep"></span> <span class="amount">{{ totalEarningValue | currency:'' :0 }} USD</span>
 
             <div class="arrows">
               <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
@@ -206,7 +206,7 @@
 
         <div class="tchart last" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
           <div class="heading"><span class="bold">Total Receivables</span> <span
-            class="dot-sep"></span> <span class="amount">{{ totalReceivablesValue }} USD</span>
+            class="dot-sep"></span> <span class="amount">{{ totalReceivablesValue | currency:'' :0 }} USD</span>
 
             <div class="arrows">
               <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
@@ -260,9 +260,7 @@
 
             <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
                  pie-chart-color="['#2eabbe', '#eca935']"
-                 pie-chart-size="140"
-                 tooltip-placement="right"
-                 tooltip-template="'/html/scripts/core/companies/ticket-resolutions-tooltip.tpl.html'"></div>
+                 pie-chart-size="140"></div>
 
             <!--<div class="tooltip tooltip-cdevice right">-->
               <!-- -->

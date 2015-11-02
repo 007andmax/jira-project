@@ -4,16 +4,16 @@
   </a>
 
   <div class="clearfix">
-    <div class="user-name"><strong>{{ userName }}</strong> moved
+    <div class="user-name"><strong>{{ userName }}</strong> moved {{ activity.secondList.length === 1 ? 'the service ' : '' }}
 
       <span class="text-muted ticket-number">
-        {{ activity.secondList.length === 1 ? 'the service ' + serviceName : activity.secondList.length + ' services ' + serviceName + ' and ' + (activity.secondList.length - 1) + ' others' }}
+        {{ activity.secondList.length === 1 ? serviceName : activity.secondList.length + ' services ' + serviceName + ' and ' + (activity.secondList.length - 1) + ' others' }}
       </span>
 
-      to company
+      to
 
       <span class="text-muted ticket-number">
-        {{ activity.secondList.length === 0 ? companyName : activity.secondList.length + ' companies'}}
+        {{ activity.firstList.length === 1 ? companyName : activity.firstList.length + ' companies'}}
       </span>
 
     </div>

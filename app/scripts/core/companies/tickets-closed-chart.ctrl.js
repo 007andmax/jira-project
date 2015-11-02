@@ -12,6 +12,12 @@
 
         today.setHours(0, 0, 0, 0);
 
+        $scope.resolvedTicketsCountByCompany = StatisticsService.getResolvedTicketsCountByCompany($stateParams.companyId, $scope, function(obj){
+          $scope.$watch('resolvedTicketsCountByCompany.value', function(){
+            $scope.allTicketsClosedByDays = obj.value;
+          })
+        });
+
         $scope.changeRangeDateToGetClosedTkt = function (option) {
 
           var optionDay, year, month, day, firstDayToGetClosedTkt;
@@ -40,13 +46,10 @@
               countDay = 0,
               countRect = 0;
 
-            $scope.allTicketsClosedByDays = 0;
-
             for (var date in $scope.ticketsClosedByDays) {
               if (date === 'staticCopy') {
                 continue;
               }
-              $scope.allTicketsClosedByDays += $scope.ticketsClosedByDays[date];
 
               if (countDay > 6) {
                 countDay = 0;

@@ -26,19 +26,19 @@
 
             scope.$watch('searchActivity', function () {
 
-              if(scope.searchActivity.length > 2){
+              if (scope.searchActivity.length > 2) {
                 loadSearchActivities = true;
               }
 
               if (scope.searchActivity.length > 2 || scope.searchActivity.length === 0) {
 
-                if(!loadSearchActivities){
+                if (!loadSearchActivities) {
                   return;
                 }
 
                 params.keyword = scope.searchActivity;
-                scope.activities = RightPanelService.getActivities(scope, params, function(){
-                  if(scope.searchActivity.length === 0){
+                scope.activities = RightPanelService.getActivities(scope, params, function () {
+                  if (scope.searchActivity.length === 0) {
                     loadSearchActivities = false;
                   }
                 });

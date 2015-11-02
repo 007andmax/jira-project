@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.totalEarningChartCtrl',
-    ['$scope', '$stateParams', 'StatisticsService',
-      function ($scope, $stateParams, StatisticsService) {
+    ['$scope', '$stateParams', 'StatisticsService', 'ReceivableService',
+      function ($scope, $stateParams, StatisticsService, ReceivableService) {
 
         var lastDayToGetClosedTkt = new Date(),
           timeRange = 29,
@@ -12,11 +12,15 @@
 
         today.setHours(0, 0, 0, 0);
 
+        $scope.totalEarningObj = ReceivableService.getReceivedPaymentsSumByCompany($stateParams.companyId, $scope, function(obj){
+          $scope.$watch('totalEarningObj.value', function(){
+            $scope.totalEarningValue = obj.value;
+          })
+        });
+
         $scope.changeRangeDateToGetTotalEarnings = function (option) {
 
           var optionDay, year, month, day, firstDayToGetClosedTkt;
-
-          $scope.totalEarningValue = 0;
 
           year = lastDayToGetClosedTkt.getFullYear();
           month = lastDayToGetClosedTkt.getMonth();
@@ -36,21 +40,7 @@
           month = lastDayToGetClosedTkt.getMonth();
           firstDayToGetClosedTkt = new Date(year, month, day);
 
-          $scope.totalEarningsByDays = StatisticsService.getTotalEarningsByDays($stateParams.companyId, firstDayToGetClosedTkt, lastDayToGetClosedTkt, $scope, function () {
-
-            for (var date in $scope.totalEarningsByDays) {
-              if (date === 'staticCopy') {
-                continue;
-              }
-
-              $scope.totalEarningValue += $scope.totalEarningsByDays[date];
-            }
-
-            if($scope.totalEarningValue){
-              $scope.totalEarningValue = $scope.totalEarningValue.toFixed(2);
-            }
-
-          });
+          $scope.totalEarningsByDays = StatisticsService.getTotalEarningsByDays($stateParams.companyId, firstDayToGetClosedTkt, lastDayToGetClosedTkt, $scope);
 
           $scope.disabledRightButton = +lastDayToGetClosedTkt >= +today;
           $scope.disabledLeftButton = firstDayToGetClosedTkt < ($scope.company.createdAt);
