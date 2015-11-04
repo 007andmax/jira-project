@@ -220,12 +220,6 @@
         $rootScope.$broadcast('cancelEditForm');
       };
 
-      $rootScope.toUTCDate = function (date) {
-        var date = new Date(date),
-          _utc = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-        return _utc;
-      };
-
       $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
       $rootScope.numberPattern = /^\d?[0-9]{0,17}$/;
 
