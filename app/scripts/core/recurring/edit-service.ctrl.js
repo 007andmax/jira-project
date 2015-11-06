@@ -10,10 +10,17 @@
 
         if ($scope.service !== undefined) {
 
+          var date = new Date($scope.service.date);
+
+          date.setHours(0);
+          date.setMinutes(0);
+          date.setSeconds(0);
+          date.setMilliseconds(0);
+
           $scope.editService = {
             id: $scope.service.id,
             description: $scope.service.description,
-            date: $scope.toUTCDate($scope.service.date),
+            date: date,
             quantity: Math.floor($scope.service.quantity * 60),
             sum: $scope.service.sum,
             item: {
