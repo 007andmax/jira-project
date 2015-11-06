@@ -1,0 +1,45 @@
+'use strict';
+
+(function () {
+
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoBasicInfoCtrl',
+    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService',
+      function ($scope, $state, $stateParams, $location, CompaniesService) {
+
+        $scope.techDomainName =  $scope.companyForSettingPage.techDomain.split('.')[0];
+
+        $scope.validateCompanyName = function (ngModelCtrl) {
+          var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
+        };
+
+        $scope.saveBasicInfo = function(form){
+
+          $scope.savingBasicInfoInProcess = true;
+
+          var basicInfo = {
+            logo: $scope.editCompany.logo,
+            name: $scope.editCompany.name,
+            supportMailBox: $scope.companyForSettingPage.supportMailBox,
+            techDomain: $scope.techDomainName + '.quicktech.com',
+            businessEmail: $scope.companyForSettingPage.businessEmail,
+            description: $scope.editCompany.description
+          };
+
+          CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function (a){
+            console.log(a);
+            $scope.savingBasicInfoInProcess = false;
+            form.$setPristine();
+          })
+        };
+
+        $scope.validateCompanyDomain = function (ngModelCtrl) {
+          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue + '.quicktech.com', $scope.editCompany.id || '', function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
+        }
+
+      }]);
+
+}());

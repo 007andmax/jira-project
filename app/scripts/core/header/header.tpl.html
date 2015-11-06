@@ -47,8 +47,40 @@
     </div>
   </div>
 </div>
-<div class="nav-right-container"><a herf="" class=" avatar-38 avatar m-r">
-  <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
-</a>
+<div class="nav-right-container">
+  <a herf="" class=" avatar-38 avatar m-r" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+  </a>
+
+  <div class="dropdown-menu dropdown-menu-right dropdown-avatar">
+    <div class="details">
+      <div class="details-user clearfix">
+
+        <i class="on"></i>
+
+        <strong class="pull-left">Tom Pecheux</strong>
+
+        <div class="user-badges pull-right">
+          <i class="icn-sm badge-super-admin pull-right persistent-tooltip"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="You're Super Admin">
+
+          </i>
+        </div>
+      </div>
+
+      <div class="details-email"><span class="text-muted">tom.pecheux@quicktech.com</span></div>
+
+      <div class="details-setting">
+        Agents
+        <span class="dot-sep"></span>
+        <button ui-sref="settings">Account Setting</button>
+      </div>
+
+    </div>
+  </div>
+
   <a href="/logout" class="btn-logout icn-logout tp-hide" data-toggle="tooltip" tooltip="Logout"
-     tooltip-placement="bottom"></a></div>
+     tooltip-placement="bottom">
+  </a>
+
+</div>

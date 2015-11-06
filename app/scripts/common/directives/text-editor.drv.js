@@ -2,9 +2,8 @@
 
 (function () {
 
-  angular.module("quicktech.core.tickets").directive("textEditor",
-    ['$state', '$modal',
-      function ($state, $modal) {
+  angular.module("quicktech.common.directives").directive("textEditor",
+    function () {
         return {
           restrict: 'A',
           require: 'ngModel',
@@ -14,6 +13,10 @@
 
             var editor = element.find('[te-editor]'),
               wysiwyg = editor.wysiwyg();
+
+            if (attrs.teInitialValue) {
+              wysiwyg.html(attrs.teInitialValue);
+            }
 
             validateRequired();
 
@@ -44,5 +47,5 @@
             }
           }
         }
-      }]);
+      });
 })();

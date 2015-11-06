@@ -15,7 +15,8 @@
 
       var urlGetters = {
         user: $rootScope.getUserAvatarUrl,
-        contact: $rootScope.getContactAvatarUrl
+        contact: $rootScope.getContactAvatarUrl,
+        company: $rootScope.getCompanyLogoUrl
       };
 
       return {
@@ -34,6 +35,8 @@
 
           if (!urlGetters[attrs.modelName]) {
             throw 'model-name must be specified! Available values - ["user", "contact"]';
+          } else if(attrs.modelName === 'company'){
+            scope.isLogo = true;
           }
 
           scope.getUrl = function () {

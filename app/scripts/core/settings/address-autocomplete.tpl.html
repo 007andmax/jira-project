@@ -1,0 +1,26 @@
+<div class="form-row clearfix" ng-form="addressForm">
+
+  <div class="form-group full-width"
+       ng-class="{error: (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
+
+    <label class="control-label">Mailing Address</label>
+
+    <div ng-messages="addressForm.address.$error" ng-if="addressForm.address.$dirty || showValidationMessages">
+      <div class="qt-error-msg error-msg" ng-message="required">Please enter the user’s address.</div>
+      <div class="qt-error-msg error-msg" ng-message="correct">
+        Please select address from atocomplete results or set marker on map
+      </div>
+    </div>
+
+    <input class="form-control" type="text" popover="Enter the user's full address."
+           name="address"
+           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover required="true"
+           make-dirty-on-blur
+           ng-model="model.address">
+  </div>
+
+  <div class="map-container">
+    <div map style="width: 500px; height:110px; frameborder: 0; border:0"></div>
+  </div>
+
+</div>

@@ -1,0 +1,727 @@
+<div class="settings-main-wrapper">
+  <div class="help-text">Manage your company's information, enter support &amp; business email addresses, and set weekly
+    schedule. Here, you can set when to notify agents, users, and vendors via email.
+  </div>
+
+  <div class="basic-info-wrapper"
+       id="companyInfoBasicInfo">
+
+    <div class="create-new-user settings-basic-info clearfix"
+         ng-if="companyForSettingLoad"
+         ng-controller="quicktech.core.settings.companyInfoBasicInfoCtrl">
+      <form name="basicInfoForm">
+
+        <div class="create-user-container">
+
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">Basic Info</h3>
+          </div>
+
+          <div edit-avatar ng-model="editCompany.logo" model-name="company" model-id="{{ editCompany.id }}"></div>
+
+          <!--<div class="create-user-avatar clearfix">-->
+          <!--<div class="avatar pull-left">-->
+          <!--<img ng-src="/html/images/logo-xlarge.png" class="no-avatar">-->
+          <!--</div>-->
+          <!--<div class="choose-file pull-left">-->
+          <!--<div class="select-file clearfix">-->
+          <!--<input type="file">-->
+
+          <!--<div class="btn btn-lg btn-primary pull-left">Choose Logo</div>-->
+          <!--<span class="file-name pull-left">Choosing a logo is recommended.</span>-->
+          <!--</div>-->
+          <!--<div class="file-type pull-left ">maximum size of 2 MB in PNG formart is allowed.</div>-->
+          <!--</div>-->
+          <!--</div>-->
+
+          <div class="create-user-form">
+            <div class="form-row clearfix">
+
+              <div class="form-group full-width" ng-class="{error: isShowingErrors(basicInfoForm, 'companyName')}">
+
+                <label class="control-label">Name</label>
+
+                <div ng-messages="basicInfoForm.companyName.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'companyName')">
+                  <div class="qt-error-msg" ng-message="required">Company name is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">Company name is too large.</div>
+                  <div class="qt-error-msg" ng-message="minlength">Company name is too short.</div>
+                  <div class="qt-error-msg" ng-message="unique">This company name already occupied.</div>
+                </div>
+
+                <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
+                       ng-minlength="3" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+                       is-uniq-validation validation-func="validateCompanyName">
+
+              </div>
+            </div>
+
+            <div class="form-row clearfix">
+
+              <div class="form-group full-width" ng-class="{error: isShowingErrors(basicInfoForm, 'supportMailBox')}">
+
+                <label class="control-label">Support Email</label>
+
+                <div ng-messages="basicInfoForm.supportMailBox.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'supportMailBox')">
+                  <div class="qt-error-msg" ng-message="required">SUPPORT EMAIL name is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">SUPPORT EMAIL name is too large.</div>
+                  <div class="qt-error-msg" ng-message="minlength">SUPPORT EMAIL name is too short.</div>
+                </div>
+
+                <input class="form-control has-addon" type="text"
+                       ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
+                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur>
+
+                <span class="">@</span>
+
+                <div ng-messages="basicInfoForm.techDomainName.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'techDomainName')">
+                  <div class="qt-error-msg" ng-message="required">Domain name is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">Domain name is too large.</div>
+                  <div class="qt-error-msg" ng-message="minlength">Domain name is too short.</div>
+                  <div class="qt-error-msg" ng-message="unique">This Domain name already occupied.</div>
+                </div>
+
+                <input class="form-control has-addon" type="text" ng-model="techDomainName"
+                       name="techDomainName" ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
+                       is-uniq-validation validation-func="validateCompanyDomain">
+
+                <span class="">.quicktech.com</span>
+              </div>
+
+            </div>
+
+            <div class="form-row clearfix">
+
+              <div class="form-group full-width" ng-class="{error: isShowingErrors(basicInfoForm, 'businessEmail')}">
+
+                <label class="control-label">Business Email</label>
+
+                <div ng-messages="basicInfoForm.businessEmail.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'businessEmail')">
+                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid email.</div>
+                </div>
+
+                <input class="form-control" type="text" name="businessEmail"
+                       ng-model="companyForSettingPage.businessEmail" ng-pattern="emailPattern">
+              </div>
+            </div>
+
+            <div class="form-row clearfix">
+
+              <div class="form-group full-width"
+                   ng-class="{error: isShowingErrors(basicInfoForm, 'companyDescription')}">
+
+                <label class="control-label">Description of Business</label>
+
+                <div ng-messages="basicInfoForm.companyDescription.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'companyDescription')">
+                  <div class="qt-error-msg" ng-message="required">
+                    Please enter a brief description of the company’s business.
+                  </div>
+                </div>
+
+                <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
+                          required="true" maxlength="80" ng-trim="false" make-dirty-on-blur
+                          popover="Describe the company's business in 80 characters (spaces included)."
+                          popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
+
+                <div class="word-count">{{ 80 - editCompany.description.length }}</div>
+              </div>
+            </div>
+            <div class="form-row clearfix">
+              <div class="form-group no-label full-width">
+                <div class="btn btn-lg btn-info pull-right"
+                     ng-class="{'disabled': basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess}"
+                     ng-disabled="basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess"
+                     ng-click="saveBasicInfo(basicInfoForm)">Save Changes
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="business-days-wrapper" id="companyInfoBusinessTime">
+    <form name="businessDaysHoursForm">
+
+      <h3>Business Days &amp; Hours </h3>
+
+      <div class="ranges-wrapper clearfix">
+
+        <div id="mon-range" class="range-slid noUi-target noUi-ltr noUi-horizontal noUi-background"
+             business-days-hours ng-model="timeRangeAllDays.monday"></div>
+
+        <div id="tue-range" class="range-slid noUi-target noUi-ltr noUi-horizontal noUi-background"
+             business-days-hours ng-model="timeRangeAllDays.tuesday"></div>
+
+        <div id="wed-range" class="range-slid noUi-target noUi-ltr noUi-horizontal noUi-background"
+             business-days-hours ng-model="timeRangeAllDays.wednesday"></div>
+
+        <div id="thu-range" class="range-slid noUi-target noUi-ltr noUi-horizontal noUi-background"
+             business-days-hours ng-model="timeRangeAllDays.thursday"></div>
+
+        <div id="fri-range" class="range-slid noUi-target noUi-ltr noUi-horizontal noUi-background"
+             business-days-hours ng-model="timeRangeAllDays.friday"></div>
+
+        <div id="sat-range" class="range-slid noUi-target noUi-ltr noUi-horizontal noUi-background"
+             business-days-hours ng-model="timeRangeAllDays.saturday"></div>
+
+        <div id="sun-range" class="range-slid noUi-target noUi-ltr noUi-horizontal noUi-background"
+             business-days-hours ng-model="timeRangeAllDays.sunday"></div>
+
+        <div class="range-pips">
+          <div class="step-line big first"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line big mid8"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line big mid16"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line"></div>
+          <div class="step-line big last"></div>
+        </div>
+      </div>
+      <div class="clearfix">
+        <button class="btn btn-lg btn-info pull-right"
+                ng-class="{'disabled': businessDaysHoursForm.$pristine || savingDaysHoursInProcess}"
+                ng-disabled="businessDaysHoursForm.$pristine || savingDaysHoursInProcess"
+                ng-click="saveBusinessDaysHours(businessDaysHoursForm)">Save Changes
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="contact-info-wrapper" id="companyInfoContactInfo">
+    <div class="create-new-user settings-basic-info clearfix"
+         ng-if="companyForSettingLoad"
+         ng-controller="quicktech.core.settings.companyInfoContactInfoCtrl">
+      <form name="addressesWrapForm">
+        <div class="create-user-container" change-current-address>
+          <div class="create-user-header clearfix">
+
+            <h3 class="pull-left">Contact Info</h3>
+
+            <h4 class="pull-left" ng-repeat="location in companyForSettingPage.addresses">
+              <a class="shoose-current-address-icn"
+                 ng-class="{'active disabled': currentAddressIndex === $index, 'invalid': addressesWrapForm['addressForm' + $index].$invalid}"
+                 href="javascript:void(0)" ng-click="changeAddressIndex($index)">
+                <span>0{{ $index + 1 }}</span>
+              </a>
+            </h4>
+
+          </div>
+
+          <div ng-repeat="address in companyForSettingPage.addresses" address-conteiner="{{ $index }}"
+               on-finish-render="changeAddressIndex(0)" ng-shw="$index === currentAddressIndex">
+          <div class="create-user-form" ng-form="{{ 'addressForm' + $index }}"
+               ng-init="addressFormName = 'addressForm' + $index">
+            <!--<div ng-if="IsShowMap">-->
+
+              <div address-autocomplete template-page="settings"
+                   ng-model="address"
+                   show-validation-messages="triedToSave"></div>
+
+              <div class="form-row clearfix"
+                   ng-repeat="phoneNumber in address.phoneNumbers">
+
+                <div class="form-group" ng-class="{error: this[addressFormName]['phoneNumber' + $index].$invalid}">
+
+                  <label class="control-label">Contact No.</label>
+
+                  <div ng-messages="this[addressFormName]['phoneNumber' + $index].$error"
+                       ng-if="this[addressFormName]['phoneNumber' + $index].$invalid">
+                    <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
+                    <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
+                    <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
+                    <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+                  </div>
+
+                  <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
+                         aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"
+                         make-dirty-on-blur hard-reset-pattern="phoneNumberPattern" ng-required="!$last">
+                </div>
+
+                <div class="form-group no-label">
+                  <div class="pull-left dropdown">
+                    <input class="form-control-number has-dropdown" type="text" make-dirty-on-blur
+                           ng-model="phoneNumberTypes[phoneNumber.typeNumber]" readonly="readonly"
+                           data-toggle="dropdown" aria-expanded="false">
+                    <i class="icn-sm icn-caret-gray"></i>
+
+                    <ul class="dropdown-menu dropdown-account-type">
+                      <li><a ng-click="phoneNumber.typeNumber = 'MOBILE'" href="javascript:void(0)"> Mobile </a></li>
+                      <li><a ng-click="phoneNumber.typeNumber = 'OFFICE'" href="javascript:void(0)"> Office </a></li>
+                      <li><a ng-click="phoneNumber.typeNumber = 'FAX'" href="javascript:void(0)"> Fax </a></li>
+                    </ul>
+
+                  </div>
+
+                  <button class="btn btn-dark has-tooltip pull-right"
+                       ng-if="$last && (address.phoneNumbers.length < 3)"
+                       ng-click="addPhoneNumber(address)" tooltip-placement="top" tooltip="Add more">
+                    <i class="icn-sm icn-plus"></i>
+                  </button>
+
+                  <button class="btn btn-primary has-tooltip pull-right"
+                       ng-if="!$last || $index === 2" ng-click="removePhoneNumber(address, $index)"
+                       tooltip-placement="top" tooltip="Remove">
+                    <i class="icn-sm icn-remove-token"></i>
+                  </button>
+
+                </div>
+              </div>
+              <div class="form-row clearfix">
+
+                <div class="form-group full-width"
+                     ng-class="{error:isShowingErrors(this[addressFormName], 'companyTimezone')}">
+
+                  <label class="control-label">Timezone</label>
+
+                  <div ng-messages="this[addressFormName].companyTimezone.$error"
+                       ng-if="isShowingErrors(this[addressFormName], 'companyTimezone')">
+                    <div class="qt-error-msg error-msg">Please select the timezone.</div>
+                  </div>
+
+                  <div class="pull-left dropdown">
+
+                    <input type="text" ng-model="address.locale"
+                           class="form-control form-control-dropdown dropdown-toggle pull-left" required="true"
+                           name="companyTimezone"
+                           typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
+                           typeahead-editable="false" typeahead-min-length="0"
+                           qt-typeahead-show-on-focus ng-trim="false"
+                           custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'scroll'}"
+                           style="width:453px;">
+
+                  </div>
+
+                  <button class="btn btn-dark has-tooltip pull-right" ng-show="$first"
+                          ng-click="addLocations(); changeAddressIndex(companyForSettingPage.addresses.length - 1)"
+                          tooltip-placement="top" tooltip="Add more">
+                    <i class="icn-sm icn-plus"></i>
+                  </button>
+
+                  <button class="btn btn-primary has-tooltip pull-right" ng-show="!$first"
+                          ng-click="removeLocation($index); changeAddressIndex(0)" tooltip-placement="top" tooltip="Remove">
+                    <i class="icn-sm icn-remove-token"></i>
+                  </button>
+
+                </div>
+              </div>
+
+              <div class="form-row clearfix">
+                <div class="form-group no-label full-width">
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
+                      <input type="checkbox" ng-model="address.isPrimary" ng-click="changePrimaryAddress(address)">
+                      <span class="control-indicator"></span> Primary Address
+                      <span ng-if="changeRadioButton && companyForSettingPage.addresses.length === 1"
+                            class="error-alone">Please add multiple site/locations first.</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row clearfix">
+                <div class="form-group no-label full-width">
+                  <button class="btn btn-lg btn-info pull-right"
+                          ng-class="{'disabled': addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess}"
+                          ng-disabled="addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess"
+                          ng-click="saveContactInfo(addressesWrapForm)">Save Changes</button>
+                </div>
+              </div>
+            <!--</div>-->
+
+          </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="email-me-wrapper">
+    <form name="notificationForm">
+      <h3>Send email to all relevant persons when: </h3>
+
+      <h4 id="companyInfoTicket">Ticket Notifications</h4>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TU_ADDED">
+          <span class="control-indicator"></span> a new Ticket Update is added
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TU_EDITED">
+          <span class="control-indicator"></span> a Ticket Update is edited
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TU_DELETED">
+          <span class="control-indicator"></span> a Ticket Update is deleted
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TICKET_ASSIGNED">
+          <span class="control-indicator"></span> a ticket is assigned/re-assigned
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TICKET_CREATED">
+          <span class="control-indicator"></span> a new ticket is created
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TICKET_CLOSED">
+          <span class="control-indicator"></span> a ticket is closed
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TICKET_OPENED">
+          <span class="control-indicator"></span> a ticket is marked as Open
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TICKET_SPAM">
+          <span class="control-indicator"></span> a ticket is marked/reported as Spam
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.TICKET_TRASH">
+          <span class="control-indicator"></span> a ticket is moved to Trash
+        </label>
+      </div>
+
+      <h4 id="companyInfoAgent">Agent Notifications</h4>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.AGENT_CREATED">
+          <span class="control-indicator"></span> a new agent is created
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.AGENT_CONTACT_MODIFIED">
+          <span class="control-indicator"></span> agent's contact information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.AGENT_ARCHIVED">
+          <span class="control-indicator"></span> an agent is archived
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.AGENT_TICKET_RESTORE">
+          <span class="control-indicator"></span> a ticket is restored to its original folder from either Spam or Trash
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.AGENT_ROLE_UPGRADED">
+          <span class="control-indicator"></span> agent's privilege is upgraded to either Administrator or Super Admin
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.AGENT_ROLE_DOWNGRADED">
+          <span class="control-indicator"></span> agent's privilege is downgraded to either Administrator or User
+        </label>
+      </div>
+
+      <h4 id="companyInfoUser">User Notifications</h4>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.USER_CREATED">
+          <span class="control-indicator"></span> a new user is created
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.USER_CONTACT_INFO_CHANGED">
+          <span class="control-indicator"></span> user's contact information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.USER_CONTACT_INFO_CHANGED">
+          <span class="control-indicator"></span> a user is archived
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.USER_SUBS_TU">
+          <span class="control-indicator"></span> a user is subscribed to Ticket Updates
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.USER_SUBS_INV">
+          <span class="control-indicator"></span> a user is subscribed to Invoice Updates
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.USER_ROLE_UPGRADED">
+          <span class="control-indicator"></span> user's privilege is upgraded to Administrator
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.USER_ROLE_DOWNGRADED">
+          <span class="control-indicator"></span> user's privilege is downgraded to User
+        </label>
+      </div>
+
+      <h4 id="companyInfoCompany">Company Notifications</h4>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_CREATED">
+          <span class="control-indicator"></span> a new company is created
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_BASIC_INFO">
+          <span class="control-indicator"></span> company’s basic information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_ARCHIVED">
+          <span class="control-indicator"></span> a company is archived
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_PRIMARY_CONTACT_ADDED">
+          <span class="control-indicator"></span> a new primary contact is added
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_PRIMARY_CONTACT_INFO">
+          <span class="control-indicator"></span> a primary contact information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_LOCATION_ADDED">
+          <span class="control-indicator"></span> a new site/location is added
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_LOCATION_EDITED">
+          <span class="control-indicator"></span> a site/location is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_TAX_ADDED">
+          <span class="control-indicator"></span> tax information is added
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_TAX_EDITED">
+          <span class="control-indicator"></span> tax information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_AGENT_APP_CREATED">
+          <span class="control-indicator"></span> a new agent application is created
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_AGENT_APP_LOGIN">
+          <span class="control-indicator"></span> agent application's login information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_AGENT_APP_UPDATED">
+          <span class="control-indicator"></span> agent application is updated to latest available version
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_DEVICE_ADDED">
+          <span class="control-indicator"></span> a new device is added
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_DEVICE_REMOVED">
+          <span class="control-indicator"></span> a device is removed
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_INV_SENT">
+          <span class="control-indicator"></span> an Invoice is sent
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_INV_RESENT">
+          <span class="control-indicator"></span> an Invoice is re-sent
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_OVERDUE_INV_SENT">
+          <span class="control-indicator"></span> an Overdue Invoice is sent
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.COMPANY_PAYMENT_RECEIVED">
+          <span class="control-indicator"></span> a payment is received
+        </label>
+      </div>
+
+      <h4 id="companyInfoVendor">Vendor Notifications</h4>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_CREATED">
+          <span class="control-indicator"></span> a new vendor is created
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_BASIC_INFO">
+          <span class="control-indicator"></span> vendor’s basic information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_ARCHIVED">
+          <span class="control-indicator"></span> a vendor is archived
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_NEW_PRIMARY_CONTACT">
+          <span class="control-indicator"></span> a new primary contact is added
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_PRIMARY_CONTACT_EDITED">
+          <span class="control-indicator"></span> primary contact’s information is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_LOCATION_ADDED">
+          <span class="control-indicator"></span> a new site/location is added
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_LOCATION_EDITED">
+          <span class="control-indicator"></span> a site/location is modified
+        </label>
+      </div>
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-model="emailNotifications.VENDOR_PRIM_CONTACT_SUBS_TU">
+          <span class="control-indicator"></span> vendor's primary contact is subscribed to Ticket Updates
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <div class="btn btn-lg btn-info pull-right"
+             ng-class="{'disabled': notificationForm.$pristine || savingNotifiInProcess}"
+             ng-disabled="notificationForm.$pristine || savingNotifiInProcess"
+             ng-click="saveNotificationDaysHours(notificationForm)">Save Changes
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

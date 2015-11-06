@@ -1,0 +1,661 @@
+<div class="settings-main-wrapper">
+  <div class="help-text">Configure email templates according to your help desk requirements. Here, you can set what
+    emails to send to agents, users, and vendors when their related actions are performed.
+  </div>
+  <div class="email-templates-wrapper">
+
+    <h3 id="emailTemplatesTicket">Ticket Templates</h3>
+
+    <ul class="template-list list-unstyled">
+
+      <li class="template-item"
+          ng-class="{'expanded': ticketTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault}"
+          ng-repeat="(ticketTemplate, ticketTemplateTitle) in ticketTemplates"
+          ng-click="openEmailTemplate(ticketTemplate, $event)">
+
+        <div class="template-usage-indicator"
+             ng-show="emailSettingPageDto.activeAndNotDefault[ticketTemplate].isActive"></div>
+
+        <div class="clearfix">
+
+          <h4 class="template-title">{{ ticketTemplateTitle }}</h4>
+
+          <div stop-propagation="click"
+               ng-show="emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault">
+
+            <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+               tooltip-placement="top" tooltip="Restore Default">
+              <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(ticketTemplate)"></i>
+            </a>
+
+          </div>
+
+          <a href="javascript:void(0)" class="hit-area close pull-right" ng-click="openEmailTemplate('CLOSE', $event)">
+            <i class="icn-sm icn-remove-token"></i>
+          </a>
+
+          <div class="template-details pull-left" ng-if="ticketTemplate === currentOpenTemplate">
+            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <form name="templateForm">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+
+                <label class="control-label">Subject</label>
+
+                <div ng-messages="templateForm.templateSubject.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
+                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                </div>
+
+                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
+                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+
+                <label class="control-label">Email</label>
+
+                <div ng-messages="templateForm.templateBody.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateBody')">
+                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                </div>
+
+                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+              </div>
+
+              <div class="form-actions clearfix">
+
+                <button class="btn pull-left btn-lg btn-info"
+                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
+                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        ng-click="saveEmailTemplate(ticketTemplate, templateForm)">Save Changes</button>
+
+                <button class="btn pull-left btn-lg btn-primary"
+                     ng-click="openEmailTemplate('CLOSE', $event)">Cancel
+                </button>
+
+                <div class="pull-left restore-link">or
+                  <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
+                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault}"
+                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault"
+                     ng-click="restoreDefault(ticketTemplate)">Restore Default</button>
+                </div>
+
+              </div>
+            </form>
+            <div class="template-footer pull-left">
+              This message will be sent when a ticket update, which is shared with the client user, has been edited.
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="template-form-wrapper" ticket-config>
+      <form name="ticketForm">
+
+        <div class="form-row clearfix">
+
+          <div class="form-group"
+               ng-class="{error: isShowingErrors(ticketForm, 'ticketCount')}">
+
+            <label class="control-label">ticket number starts from</label>
+
+            <div ng-messages="ticketForm.ticketCount.$error"
+                 ng-if="isShowingErrors(ticketForm, 'ticketCount')">
+              <div class="qt-error-msg" ng-message="required">number starts field cannot be left empty.</div>
+              <div class="qt-error-msg" ng-message="maxlength">number starts is too large</div>
+              <div class="qt-error-msg" ng-message="minlength">number starts is too short</div>
+              <div class="qt-error-msg" ng-message="pattern">Please enter a valid number starts.</div>
+            </div>
+
+            <input class="form-control" tc-number-input type="text" ng-model="ticketConfig.count"
+                   name="ticketCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
+                   ng-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
+          </div>
+
+          <div class="form-group" ng-class="{error: isShowingErrors(ticketForm, 'ticketPrefix')}">
+
+            <label class="control-label">prefix</label>
+
+            <div ng-messages="ticketForm.ticketPrefix.$error"
+                 ng-if="isShowingErrors(ticketForm, 'ticketPrefix')">
+              <div class="qt-error-msg" ng-message="maxlength">Prefix is too large</div>
+            </div>
+
+            <input class="form-control" tc-prefix-input type="text" ng-model="ticketConfig.prefix"
+                   name="ticketPrefix" aria-expanded="true" ng-maxlength="7">
+          </div>
+        </div>
+
+        <div class="form-row clearfix">
+          <div class="form-group full-width">
+            <label class="control-label">actual ticket starting number</label>
+            <input class="form-control" type="text" ng-value="actualTicketNumber" readonly="readonly">
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <h3 id="emailTemplatesAgent">Agent Templates</h3>
+
+    <ul class="template-list list-unstyled">
+
+      <li class="template-item"
+          ng-class="{'expanded': agentTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault}"
+          ng-repeat="(agentTemplate, agentTemplateTitle) in agentTemplates"
+          ng-click="openEmailTemplate(agentTemplate, $event)">
+
+        <div class="template-usage-indicator"
+             ng-show="emailSettingPageDto.activeAndNotDefault[agentTemplate].isActive"></div>
+
+        <div class="clearfix">
+
+          <h4 class="template-title">{{ agentTemplateTitle }}</h4>
+
+          <div stop-propagation="click"
+               ng-show="emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault">
+
+            <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+               tooltip-placement="top" tooltip="Restore Default">
+              <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(agentTemplate)"></i>
+            </a>
+
+          </div>
+
+          <a href="javascript:void(0)" class="hit-area close pull-right" ng-click="openEmailTemplate('CLOSE', $event)">
+            <i class="icn-sm icn-remove-token"></i>
+          </a>
+
+          <div class="template-details pull-left" ng-if="agentTemplate === currentOpenTemplate">
+            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <form name="templateForm">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+
+                <label class="control-label">Subject</label>
+
+                <div ng-messages="templateForm.templateSubject.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
+                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                </div>
+
+                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
+                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+
+                <label class="control-label">Email</label>
+
+                <div ng-messages="templateForm.templateBody.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateBody')">
+                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                </div>
+
+                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+              </div>
+
+              <div class="form-actions clearfix">
+
+                <button class="btn pull-left btn-lg btn-info"
+                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
+                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        ng-click="saveEmailTemplate(agentTemplate, templateForm)">Save Changes</button>
+
+                <button class="btn pull-left btn-lg btn-primary"
+                     ng-click="openEmailTemplate('CLOSE', $event)">Cancel
+                </button>
+
+                <div class="pull-left restore-link">or
+                  <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
+                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault}"
+                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault"
+                     ng-click="restoreDefault(agentTemplate)">Restore Default</button>
+                </div>
+
+              </div>
+            </form>
+            <div class="template-footer pull-left">
+              This message will be sent when a ticket update, which is shared with the client user, has been edited.
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <h3 id="emailTemplatesUser">User Templates</h3>
+
+    <ul class="template-list list-unstyled">
+
+      <li class="template-item"
+          ng-class="{'expanded': usersTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault}"
+          ng-repeat="(usersTemplate, usersTemplateTitle) in usersTemplates"
+          ng-click="openEmailTemplate(usersTemplate, $event)">
+
+        <div class="template-usage-indicator"
+             ng-show="emailSettingPageDto.activeAndNotDefault[usersTemplate].isActive"></div>
+
+        <div class="clearfix">
+
+          <h4 class="template-title">{{ usersTemplateTitle }}</h4>
+
+          <div stop-propagation="click"
+               ng-show="emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault">
+            <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+               tooltip-placement="top" tooltip="Restore Default">
+              <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(usersTemplate)"></i>
+            </a>
+          </div>
+
+          <a href="javascript:void(0)" class="hit-area close pull-right" ng-click="openEmailTemplate('CLOSE', $event)">
+            <i class="icn-sm icn-remove-token"></i>
+          </a>
+
+          <div class="template-details pull-left" ng-if="usersTemplate === currentOpenTemplate">
+            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <form name="templateForm">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+
+                <label class="control-label">Subject</label>
+
+                <div ng-messages="templateForm.templateSubject.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
+                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                </div>
+
+                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
+                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+
+                <label class="control-label">Email</label>
+
+                <div ng-messages="templateForm.templateBody.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateBody')">
+                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                </div>
+
+                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+              </div>
+
+              <div class="form-actions clearfix">
+
+                <button class="btn pull-left btn-lg btn-info"
+                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
+                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        ng-click="saveEmailTemplate(usersTemplate, templateForm)">Save Changes</button>
+
+                <button class="btn pull-left btn-lg btn-primary"
+                     ng-click="openEmailTemplate('CLOSE', $event)">Cancel
+                </button>
+
+                <div class="pull-left restore-link">or
+                  <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
+                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault}"
+                     disabled="!emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault"
+                     ng-click="restoreDefault(usersTemplate)">Restore Default</button>
+                </div>
+
+              </div>
+            </form>
+            <div class="template-footer pull-left">
+              This message will be sent when a ticket update, which is shared with the client user, has been edited.
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <h3 id="emailTemplatesCompany">Company Templates</h3>
+
+    <ul class="template-list list-unstyled">
+
+      <li class="template-item"
+          ng-class="{'expanded': companyTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault}"
+          ng-repeat="(companyTemplate, companyTemplateTitle) in companyTemplates"
+          ng-click="openEmailTemplate(companyTemplate, $event)">
+
+        <div class="template-usage-indicator"
+             ng-show="emailSettingPageDto.activeAndNotDefault[companyTemplate].isActive"></div>
+
+        <div class="clearfix">
+
+          <h4 class="template-title">{{ companyTemplateTitle }}</h4>
+
+          <div stop-propagation="click"
+               ng-show="emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault">
+
+            <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+               tooltip-placement="top" tooltip="Restore Default">
+              <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(companyTemplate)"></i>
+            </a>
+
+          </div>
+
+          <a href="javascript:void(0)" class="hit-area close pull-right" ng-click="openEmailTemplate('CLOSE', $event)">
+            <i class="icn-sm icn-remove-token"></i>
+          </a>
+
+          <div class="template-details pull-left" ng-if="companyTemplate === currentOpenTemplate">
+            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <form name="templateForm">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+
+                <label class="control-label">Subject</label>
+
+                <div ng-messages="templateForm.templateSubject.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
+                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                </div>
+
+                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
+                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+
+                <label class="control-label">Email</label>
+
+                <div ng-messages="templateForm.templateBody.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateBody')">
+                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                </div>
+
+                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+              </div>
+
+              <div class="form-actions clearfix">
+
+                <button class="btn pull-left btn-lg btn-info"
+                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
+                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        ng-click="saveEmailTemplate(companyTemplate, templateForm)">Save Changes</button>
+
+                <button class="btn pull-left btn-lg btn-primary"
+                     ng-click="openEmailTemplate('CLOSE', $event)">Cancel
+                </button>
+
+                <div class="pull-left restore-link">or
+                  <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
+                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault}"
+                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault"
+                     ng-click="restoreDefault(companyTemplate)">Restore Default</button>
+                </div>
+
+              </div>
+            </form>
+            <div class="template-footer pull-left">
+              This message will be sent when a ticket update, which is shared with the client user, has been edited.
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <h3 id="emailTemplatesInvoice">Invoice Templates</h3>
+
+    <ul class="template-list list-unstyled">
+
+      <li class="template-item"
+          ng-class="{'expanded': invoiceTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault}"
+          ng-repeat="(invoiceTemplate, invoiceTemplateTitle) in invoiceTemplates"
+          ng-click="openEmailTemplate(invoiceTemplate, $event)">
+
+        <div class="template-usage-indicator"
+             ng-show="emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isActive"></div>
+
+        <div class="clearfix">
+
+          <h4 class="template-title">{{ invoiceTemplateTitle }}</h4>
+
+          <div stop-propagation="click"
+               ng-show="emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault">
+
+            <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+               tooltip-placement="top" tooltip="Restore Default">
+              <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(invoiceTemplate)"></i>
+            </a>
+
+          </div>
+
+          <a href="javascript:void(0)" class="hit-area close pull-right" ng-click="openEmailTemplate('CLOSE', $event)">
+            <i class="icn-sm icn-remove-token"></i>
+          </a>
+
+          <div class="template-details pull-left" ng-if="invoiceTemplate === currentOpenTemplate">
+            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <form name="templateForm">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+
+                <label class="control-label">Subject</label>
+
+                <div ng-messages="templateForm.templateSubject.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
+                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                </div>
+
+                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
+                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+
+                <label class="control-label">Email</label>
+
+                <div ng-messages="templateForm.templateBody.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateBody')">
+                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                </div>
+
+                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+              </div>
+
+              <div class="form-actions clearfix">
+
+                <button class="btn pull-left btn-lg btn-info"
+                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
+                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        ng-click="saveEmailTemplate(invoiceTemplate, templateForm)">Save Changes</button>
+
+                <button class="btn pull-left btn-lg btn-primary"
+                     ng-click="openEmailTemplate('CLOSE', $event)">Cancel
+                </button>
+
+                <div class="pull-left restore-link">or
+                  <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
+                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault}"
+                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault"
+                     ng-click="restoreDefault(invoiceTemplate)">Restore Default</button>
+                </div>
+
+              </div>
+            </form>
+            <div class="template-footer pull-left">
+              This message will be sent when a ticket update, which is shared with the client user, has been edited.
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="template-form-wrapper" invoice-config>
+      <form name="invoiceForm">
+
+        <div class="form-row clearfix">
+
+          <div class="form-group" ng-class="{error: isShowingErrors(invoiceForm, 'invoiceCount')}">
+
+            <label class="control-label">invoice number starts from</label>
+
+            <div ng-messages="invoiceForm.invoiceCount.$error"
+                 ng-if="isShowingErrors(invoiceForm, 'invoiceCount')">
+              <div class="qt-error-msg" ng-message="required">number starts field cannot be left empty.</div>
+              <div class="qt-error-msg" ng-message="maxlength">number starts is too large</div>
+              <div class="qt-error-msg" ng-message="minlength">number starts is too short</div>
+              <div class="qt-error-msg" ng-message="pattern">Please enter a valid number starts.</div>
+            </div>
+
+            <input class="form-control" type="text" ic-number-input ng-model="invoiceConfig.count"
+                   name="invoiceCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
+                   ng-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
+          </div>
+
+          <div class="form-group" ng-class="{error: isShowingErrors(invoiceForm, 'invoiceTerms')}">
+
+            <label class="control-label">default terms on invoice</label>
+
+            <div ng-messages="invoiceForm.invoiceTerms.$error"
+                 ng-if="isShowingErrors(invoiceForm, 'invoiceTerms')">
+              <div class="qt-error-msg" ng-message="required">Terms field cannot be left empty.</div>
+              <div class="qt-error-msg" ng-message="minlength">Terms is too short</div>
+              <div class="qt-error-msg" ng-message="pattern">Please enter a valid Terms.</div>
+            </div>
+
+            <input class="form-control" type="text" ic-terms-input
+                   placeholder="e.g., Net 8" ng-model="invoiceConfig.term"
+                   name="invoiceTerms" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
+                   ng-required="true" ng-minlength="1" ng-maxlength="10" hard-reset-pattern="numberPattern">
+          </div>
+        </div>
+
+        <div class="form-row clearfix">
+
+          <div class="form-group full-width" ng-class="{error: isShowingErrors(invoiceForm, 'invoiceConditions')}">
+
+            <label class="control-label">terms &amp; conditions</label>
+
+            <div ng-messages="invoiceForm.invoiceConditions.$error"
+                 ng-if="isShowingErrors(invoiceForm, 'invoiceConditions')">
+              <div class="qt-error-msg" ng-message="required">terms &amp; conditions field cannot be left empty.</div>
+            </div>
+
+            <textarea class="form-control" ic-conditions-input ng-model="invoiceConfig.termsAndConditions"
+                      name="invoiceConditions" aria-expanded="true" make-dirty-on-blur
+                      ng-required="true" maxlength="400" ng-trim="false"></textarea>
+
+            <div class="word-count">{{ 400 - invoiceConfig.termsAndConditions.length }}</div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <h3 id="emailTemplatesVendor">Vendor Templates</h3>
+
+    <ul class="template-list list-unstyled">
+
+      <li class="template-item"
+          ng-class="{'expanded': vendorTemplate === currentOpenTemplate, 'default': !emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault}"
+          ng-repeat="(vendorTemplate, vendorTemplateTitle) in vendorTemplates"
+          ng-click="openEmailTemplate(vendorTemplate, $event)">
+
+        <div class="template-usage-indicator"
+             ng-show="emailSettingPageDto.activeAndNotDefault[vendorTemplate].isActive"></div>
+
+        <div class="clearfix">
+
+          <h4 class="template-title">{{ vendorTemplateTitle }}</h4>
+
+          <div stop-propagation="click"
+               ng-show="emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault">
+
+            <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+               tooltip-placement="top" tooltip="Restore Default">
+              <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(vendorTemplate)"></i>
+            </a>
+
+          </div>
+
+          <a href="javascript:void(0)" class="hit-area close pull-right" ng-click="openEmailTemplate('CLOSE', $event)">
+            <i class="icn-sm icn-remove-token"></i>
+          </a>
+
+          <div class="template-details pull-left" ng-if="vendorTemplate === currentOpenTemplate">
+            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <form name="templateForm">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+
+                <label class="control-label">Subject</label>
+
+                <div ng-messages="templateForm.templateSubject.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
+                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                </div>
+
+                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
+                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+
+                <label class="control-label">Email</label>
+
+                <div ng-messages="templateForm.templateBody.$error"
+                     ng-if="isShowingErrors(templateForm, 'templateBody')">
+                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                </div>
+
+                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+              </div>
+
+              <div class="form-actions clearfix">
+
+                <button class="btn pull-left btn-lg btn-info"
+                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
+                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        ng-click="saveEmailTemplate(vendorTemplate, templateForm)">Save Changes</button>
+
+                <button class="btn pull-left btn-lg btn-primary"
+                     ng-click="openEmailTemplate('CLOSE', $event)">Cancel
+                </button>
+
+                <div class="pull-left restore-link">or
+                  <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
+                          ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault}"
+                          ng-disabled="!emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault"
+                          ng-click="restoreDefault(vendorTemplate)">Restore Default
+                  </button>
+                </div>
+
+              </div>
+            </form>
+            <div class="template-footer pull-left">
+              This message will be sent when a ticket update, which is shared with the client user, has been edited.
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>

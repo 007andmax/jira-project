@@ -1,0 +1,158 @@
+.topNavbar{
+    background-color: #FFF;
+    border-radius: 0px;
+    border: none;
+    /*border-bottom: 1px #e7e7e7 solid;*/
+    height:78px;
+}
+
+.topNavbar-content{
+    height: 78px;
+    padding: 20px 0px;
+    margin: 0 30px 0 28px;
+}
+
+.topNavbar-title{
+    min-width: 85px;
+    padding-top: 9px;
+    margin-right: 30px;
+    height: 38px;
+        /*background-color: #ABC;*/
+}
+
+
+.topNavbarLeft{
+    /*background-color: #CDE;*/
+    width: 100%;
+    padding-right: 280px;
+}
+@media only screen and (max-width: 1320px){
+  .topNavbarLeft{
+      padding-right: 124px;
+  }
+  .topNavbarRight{
+    width: auto !important;
+  }
+  .topNavbar-user{
+    margin-right: 30px;
+  }
+}
+
+.topNavbar-logo{
+    position: absolute;
+    left: 50%;
+    margin-top: 1px;
+    margin-left: -16px;
+}
+
+.topNavbar-content{
+    position: relative;
+}
+
+.topNavbar-create{
+    margin-right: 1px;
+}
+
+.topNavbar-create .dropdown-menu{
+    min-width: 116px;
+}
+
+.topNavbarRight{
+    /*background-color: #DEF;*/
+    position: fixed;
+    right: 0;
+    width: 280px;
+    z-index: 2;
+    height: 38px;
+}
+
+.topNavbarLeft-Left{
+    /*background-color: #0074d9;*/
+    width: 391px;
+    display: flex;
+    display: -webkit-flex;
+}
+
+.topNavbarLeft-Left > p{
+    /*background-color: #ABC;*/
+    /*margin-left: 10px;*/
+    padding-left: 2px;
+    padding-top: 7px;
+    font-size: 17px;
+    line-height: 24px;
+    margin-right: 30px;
+    color: #4c5c6f;
+}
+.topNavbarLeft-Left > p strong{
+    font-weight: 400;
+}
+/*body.settings .topNavbarLeft-Left > p {
+    padding-top: 7px;
+    font-size: 17px;
+    line-height: 24px;
+}*/
+
+/*.topNavbarLeft-Left span{
+    cursor: pointer;
+}*/
+
+@-moz-document url-prefix() {
+    .topNavbarLeft-Left > p {
+        line-height: 19px;
+    }
+}
+
+.topNavbarLeft-Right{
+    height: 38px;
+}
+
+@media only screen and (min-width: 1800px) {
+    .topNavbarLeft-Left{
+        width: 511px;
+    }
+}
+@media only screen and (min-width: 2300px) {
+  .topNavbarLeft-Left{
+      width: 671px;
+  }
+}
+
+.topNavbar-logout{
+    margin-left: 29px;
+    padding-top: 10px;
+    margin-right: 28px;
+}
+
+.topNavbar-filter{
+    padding-right: 30px;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.topNavbar-filter button {
+    margin-right: 10px;
+}
+
+.topNavbar-search{
+    position: relative;
+    padding-right: 30px;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.topNavbar-filter > div > div.btn{
+    margin-right: 10px;
+}
+
+.topNavbar-filter .dropdown.more{
+    /*padding-top: 13px;*/
+    cursor: pointer;
+    line-height: 0;
+    margin-left: 8px;
+}
+
+/*topNavbar-search{
+    margin-left: 30px;
+}*/

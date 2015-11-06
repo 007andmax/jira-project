@@ -1,0 +1,601 @@
+<div class="settings-main-wrapper">
+
+  <div class="help-text">
+    Manage your basic information and general account settings.
+    Here, you can set when HelpPro
+    sends you updates via email.
+  </div>
+
+  <div class="basic-info-wrapper" id="myProfileBasicInfo"
+       ng-controller="quicktech.core.settings.myProfileBasicInfoCtrl">
+
+    <div class="create-new-user settings-basic-info clearfix">
+      <form name="basicInfoForm">
+        <div class="create-user-container">
+
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">Basic Info</h3>
+          </div>
+
+          <div edit-avatar ng-model="editUser.avatar" model-name="user" model-id="{{ editUser.id }}"></div>
+
+          <!--<div class="create-user-avatar clearfix">-->
+
+          <!--<div class="avatar pull-left">-->
+          <!--<img ng-src="/html/images/avatars/avatar-xlarge.png" class="no-avatar">-->
+          <!--</div>-->
+
+          <!--<div class="choose-file pull-left">-->
+          <!--<div class="select-file clearfix">-->
+          <!--<input type="file">-->
+
+          <!--<div class="btn btn-lg btn-primary pull-left">Choose Avatar</div>-->
+          <!--<span class="file-name pull-left">No File Selected</span>-->
+          <!--</div>-->
+          <!--<div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>-->
+          <!--</div>-->
+
+          <!--</div>-->
+
+          <div class="create-user-form">
+
+            <div class="form-row clearfix">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'firstName')}">
+
+                <label class="control-label">First Name</label>
+
+                <div ng-messages="basicInfoForm.firstName.$error" ng-if="isShowingErrors(basicInfoForm, 'firstName')">
+                  <div class="qt-error-msg" ng-message="required">First name is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">First name is too large.</div>
+                  <div class="qt-error-msg" ng-message="minlength">First name is too short.</div>
+                </div>
+
+                <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
+                       name="firstName" ng-model="editUser.firstName" required="true" make-dirty-on-blur>
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'lastName')}">
+
+                <label class="control-label">Last Name</label>
+
+                <div ng-messages="basicInfoForm.lastName.$error" ng-if="isShowingErrors(basicInfoForm, 'lastName')">
+                  <div class="qt-error-msg" ng-message="required">Last name requires at least 1 letter.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">Last name is too large.</div>
+                  <div class="qt-error-msg" ng-message="minlength">Last name is too short.</div>
+                </div>
+
+                <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
+                       name="lastName" ng-model="editUser.lastName" ng-required="true" make-dirty-on-blur>
+              </div>
+            </div>
+
+            <div class="form-row clearfix">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'designation')}">
+
+                <label class="control-label">Designation</label>
+
+                <div ng-messages="basicInfoForm.designation.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'designation')">
+                  <div class="qt-error-msg" ng-message="required">Please enter a designation.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
+                  <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
+                </div>
+
+                <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
+                       ng-model="editUser.designation" ng-required="true" ng-minlength="3" ng-maxlength="30">
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'primaryEmail')}">
+
+                <label class="control-label">Email</label>
+
+                <div ng-messages="basicInfoForm.primaryEmail.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'primaryEmail')">
+                  <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
+                  <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
+                </div>
+
+                <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                       ng-model="editUser.primaryEmail" ng-required="true" ng-pattern="emailPattern"
+                       is-uniq-validation validation-func="validateUserEmail">
+              </div>
+
+            </div>
+
+            <div class="form-row clearfix">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'secondaryEmail')}">
+
+                <label class="control-label">Secondary Email</label>
+
+                <div ng-messages="basicInfoForm.secondaryEmail.$error"
+                     ng-if="isShowingErrors(basicInfoForm, 'secondaryEmail')">
+                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
+                </div>
+
+                <input type="text" class="form-control" name="secondaryEmail" aria-expanded="true" make-dirty-on-blur
+                       ng-model="editUser.secondaryEmail" ng-pattern="emailPattern">
+              </div>
+
+              <div class="form-group">
+
+                <label class="control-label">Account Type</label>
+
+                <input class="form-control readonly-dark" type="text" ng-value="accountType[editUser.role]"
+                       readonly="readonly">
+
+              </div>
+
+            </div>
+
+            <div class="form-row clearfix" ng-if="loadUsertProfile">
+
+              <div class="form-group full-width" text-editor ng-model="userProfile.signature.content"
+                   te-initial-value="{{ userProfile.signature.content }}">
+
+                <label class="control-label">Signature</label>
+
+                <div te-editor class="editor" contenteditable="true" placeholder="Type your message..."></div>
+
+                <div class="wysiwyg-controls-wrapper clearfix">
+
+                  <div class="control-wrappers pull-left clearfix"
+                       data-role="editor-toolbar" data-target="#editor">
+
+                    <div class="font-styles pull-left">
+
+                      <a data-edit="bold" class="hit-area ha-14 pull-left has-tooltip icn-wysiwyg-bold"
+                         data-edit="bold"
+                         data-placement="top" title="Bold">
+                        <!--<i class="icn-sm " ></i>-->
+                      </a>
+
+                      <a data-edit="italic" class="hit-area ha-14 pull-left has-tooltip icn-wysiwyg-italic"
+                         data-edit="italic"
+                         tooltip="Italic" tooltip-placement="top">
+                        <!--<i class="icn-sm " ></i>-->
+                      </a>
+
+                      <a data-edit="underline" class="hit-area ha-14 pull-left has-tooltip icn-wysiwyg-underline"
+                         data-edit="underline"
+                         tooltip="Underline" tooltip-placement="top">
+                        <!--<i class="icn-sm " ></i>-->
+                      </a>
+
+                    </div>
+
+                    <div class="quote-link pull-left">
+
+                      <div class="dropdown">
+                        <a href="javascript:void(0)" class="pull-left icn icn-wysiwyg-link tooltip-dp"
+                           tooltip="Add Link" tooltip-placement="top" data-toggle="dropdown"></a>
+
+                        <div class="dropdown-menu dropdown-link">
+                          <div class="assign-ticket-header">
+                            <div class="clearfix" ng-class="{error: validLink.required || validLink.pattern}">
+
+                              <div class="form-group clearfix">
+                                <div class="qt-error-msg" ng-show="validLink.required">Link is required.</div>
+                                <div class="qt-error-msg" ng-show="validLink.pattern && !validLink.required">
+                                  Please enter a valid link.
+                                </div>
+
+                                <input type="text" class="form-control " data-edit="createLink" placeholder="http://"
+                                       ng-model="editorLink" ng-change="validateLink(editorLink)">
+
+                              </div>
+
+                              <div class="btn-groups clearfix">
+                                <button type="button" class="btn btn-scooter" ng-disabled="validLink.pattern">Add
+                                </button>
+                                <button type="button" class="btn btn-gray" data-edit="unlink">Cancel</button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip icn-wysiwyg-reset"
+                     tooltip-placement="top" tooltip="Reset Formating">
+                  </a>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row clearfix">
+              <div class="form-group no-label full-width">
+                <button class="btn btn-lg btn-info pull-right"
+                        ng-class="{'disabled': !basicInfoForm.$valid || basicInfoForm.$pristine || savingInProcess}"
+                        ng-disabled="!basicInfoForm.$valid || basicInfoForm.$pristine || savingInProcess"
+                        ng-click="saveBasicInfo(basicInfoForm)">Save Changes
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="change-password-wrapper" id="myProfileChangePassword">
+
+    <div class="create-new-user settings-basic-info clearfix">
+      <form name="passwordForm">
+        <div class="create-user-container">
+
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">Change Password</h3>
+          </div>
+
+          <div class="create-user-form">
+            <div class="form-row clearfix">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(passwordForm, 'oldPassword')}">
+
+                <label class="control-label">Old Password</label>
+
+                <div ng-messages="passwordForm.oldPassword.$error"
+                     ng-if="isShowingErrors(passwordForm, 'oldPassword')">
+                  <div class="qt-error-msg" ng-message="minlength">Password is too short</div>
+                  <div class="qt-error-msg" ng-message="notCorrectPass">Old Password is not correct</div>
+                </div>
+
+                <input ng-class="{'hide': showOldPasswoprd}" class="form-control show-password" type="password"
+                       ng-model="password.oldPassword" name="oldPassword">
+
+                <input ng-class="{'hide': !showOldPasswoprd}" class="form-control show-password" type="text"
+                       ng-model="password.oldPassword">
+                <!--ng-minlength="5"-->
+
+                <a ng-class="{'hide': showOldPasswoprd}" href="javascript:void(0)"
+                   class="hide-password-hit hit-area ha-18 has-tooltip"
+                   ng-click="showOldPasswoprd = passwordForm.$valid ? true : false" tooltip-placement="top"
+                   tooltip="Show Password">
+                  <i class="icn-sm icn-hide-password"></i>
+                </a>
+
+                <a ng-class="{'hide': !showOldPasswoprd}" href="javascript:void(0)"
+                   class="hide-password-hit hit-area ha-18 has-tooltip"
+                   ng-click="showOldPasswoprd = false" tooltip-placement="top" tooltip="Hide Password"
+                   style="position: absolute;right: 12px;top: 31px;">
+                  <i class="icn-sm icn-show-password"></i>
+                </a>
+
+              </div>
+
+              <div class="form-group" ng-class="{error: isShowingErrors(passwordForm, 'newPassword')}">
+
+                <label class="control-label">New Password</label>
+
+                <div ng-messages="passwordForm.newPassword.$error"
+                     ng-if="isShowingErrors(passwordForm, 'newPassword')">
+                  <div class="qt-error-msg" ng-message="minlength">Password is too short</div>
+                </div>
+
+                <input ng-class="{'hide': showNewPasswoprd}" class="form-control show-password" type="password"
+                       ng-model="password.newPassword" name="newPassword"
+                       ng-minlength="5">
+
+                <input ng-class="{'hide': !showNewPasswoprd}" class="form-control show-password" type="text"
+                       ng-model="password.newPassword">
+
+                <a ng-class="{'hide': showNewPasswoprd}" href="javascript:void(0)"
+                   class="show-password-hit hit-area ha-18 has-tooltip"
+                   ng-click="showNewPasswoprd = passwordForm.$valid ? true : false" tooltip-placement="top"
+                   tooltip="Show Password">
+                  <i class="icn-sm icn-hide-password"></i>
+                </a>
+
+                <a ng-class="{'hide': !showNewPasswoprd}" href="javascript:void(0)"
+                   class="show-password-hit hit-area ha-18 has-tooltip"
+                   ng-click="showNewPasswoprd = false" tooltip-placement="top" tooltip="Hide Password"
+                   style="position: absolute;right: 12px;top: 31px;">
+                  <i class="icn-sm icn-show-password"></i>
+                </a>
+
+              </div>
+
+            </div>
+
+            <div class="form-row clearfix">
+              <div class="form-group no-label full-width">
+                <div class="btn btn-lg btn-info pull-right"
+                     ng-class="{'disabled': !passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess}"
+                     ng-disabled="!passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess"
+                     ng-click="savePassword(passwordForm)">Save Changes
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="contact-info-wrapper" id="myProfileContactInfo"
+       ng-controller="quicktech.core.settings.myProfileContactInfoCtrl">
+
+    <div class="create-new-user settings-basic-info clearfix">
+      <form name="phoneNumbersForm">
+        <div class="create-user-container">
+
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">Contact Info</h3>
+          </div>
+
+          <div class="create-user-form">
+
+
+            <div address-autocomplete template-page="settings"
+                 ng-model="userProfile.address"
+                 show-validation-messages="triedToSave"></div>
+
+            <div class="form-row clearfix" ng-repeat="phoneNumber in userProfile.address.phoneNumbers">
+
+              <div class="form-group" ng-class="{error: !phoneNumbersForm['phoneNumber' + $index].$valid}">
+
+                <label class="control-label">Contact No.</label>
+
+                <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
+                     ng-if="!phoneNumbersForm['phoneNumber' + $index].$valid">
+                  <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
+                  <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
+                  <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
+                  <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+                </div>
+
+                <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
+                       aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"
+                       make-dirty-on-blur hard-reset-pattern="phoneNumberPattern" ng-required="!$last">
+              </div>
+
+              <div class="form-group no-label">
+                <div class="pull-left dropdown">
+
+                  <input class="form-control-number has-dropdown" type="text" make-dirty-on-blur
+                         ng-model="phoneNumberTypes[phoneNumber.typeNumber]" readonly="readonly"
+                         data-toggle="dropdown" aria-expanded="false">
+                  <i class="icn-sm icn-caret-gray"></i>
+
+                  <ul class="dropdown-menu dropdown-account-type">
+                    <li><a ng-click="phoneNumber.typeNumber = 'MOBILE'" href="javascript:void(0)"> Mobile </a></li>
+                    <li><a ng-click="phoneNumber.typeNumber = 'OFFICE'" href="javascript:void(0)"> Office </a></li>
+                    <li><a ng-click="phoneNumber.typeNumber = 'FAX'" href="javascript:void(0)"> Fax </a></li>
+                  </ul>
+
+                </div>
+
+                <div class="btn btn-dark has-tooltip pull-right"
+                     ng-if="$last && (userProfile.address.phoneNumbers.length < 3)" ng-click="addPhoneNumber()"
+                     tooltip-placement="top" tooltip="Add more">
+                  <i class="icn-sm icn-plus"></i>
+                </div>
+
+                <div class="btn btn-primary has-tooltip pull-right"
+                     ng-if="!$last || $index === 2" ng-click="removePhoneNumber($index)"
+                     tooltip-placement="top" tooltip="Remove">
+                  <i class="icn-sm icn-remove-token"></i>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-row clearfix">
+
+              <div class="form-group no-label full-width">
+                <button class="btn btn-lg btn-info pull-right"
+                        ng-class="{'disabled': !phoneNumbersForm.$valid || phoneNumbersForm.$pristine || savingInProcess}"
+                        ng-disabled="!phoneNumbersForm.$valid || phoneNumbersForm.$pristine || savingInProcess"
+                        ng-click="saveContactInfo(phoneNumbersForm)">
+                  Save Changes
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="misc-info-wrapper" id="myProfileMiscInfo">
+
+    <div class="create-new-user settings-basic-info clearfix"
+         ng-if="loadUsertProfile"
+         ng-controller="quicktech.core.settings.myProfileMiscInfoCtrl">
+      <form name="miscInfoForm">
+        <div class="create-user-container">
+
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">Misc. Info</h3>
+          </div>
+
+          <div class="create-user-form">
+            <div class="form-row clearfix">
+
+              <div class="form-group" ng-class="{error: isShowingErrors(miscInfoForm, 'shiftTiming')}">
+
+                <label class="control-label">Shift Timings</label>
+
+                <div ng-messages="miscInfoForm.shiftTiming.$error"
+                     ng-if="isShowingErrors(miscInfoForm, 'shiftTiming')">
+                  <div class="qt-error-msg" ng-message="required">Shift Timings field cannot be left empty.</div>
+                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid time. For example 9:00 18:00</div>
+                  <div class="qt-error-msg" ng-message="validShiftTiming">FROM should be less that TO</div>
+                </div>
+
+                <input class="form-control" type="text" name="shiftTiming" placeholder="00:00 to 00:00"
+                       ng-model="shiftTiming" make-dirty-on-blur ng-change="validShiftTiming(miscInfoForm)"
+                       ng-required="true" ng-pattern="patternShiftTiming">
+              </div>
+
+              <div class="form-group">
+
+                <label class="control-label">Page to open after login</label>
+
+                <div class="dropdown">
+
+                  <input class="form-control has-dropdown" type="text"
+                         ng-model="pageMapping[pageToOpen]" name="pageToOpen" make-dirty-on-blur
+                         data-toggle="dropdown" aria-expanded="false" readonly="readonly">
+
+                  <i class="icn-sm icn-caret-gray"></i>
+
+                  <ul class="dropdown-menu">
+
+                    <li>
+                      <a href="javascript:void(0)" ng-click="pageToOpen = 'UNASSIGNED'">Unassigned</a>
+                    </li>
+
+                    <li>
+                      <a href="javascript:void(0)" ng-click="pageToOpen = 'MY_TICKETS'">My Tickets</a>
+                    </li>
+
+                    <li>
+                      <a href="javascript:void(0)" ng-click="pageToOpen = 'SHARED'">Shared</a>
+                    </li>
+
+                    <li ng-show="currentUser.role !== 'USER'">
+                      <a href="javascript:void(0)" ng-click="pageToOpen = 'OPEN'">Open</a>
+                    </li>
+
+                    <li ng-show="currentUser.role !== 'USER'">
+                      <a href="javascript:void(0)" ng-click="pageToOpen = 'CLOSED'">Closed</a>
+                    </li>
+
+                    <li ng-show="currentUser.role !== 'USER'">
+                      <a href="javascript:void(0)" ng-click="pageToOpen = 'TRASH'">Trash</a>
+                    </li>
+
+                    <li>
+                      <a href="javascript:void(0)" ng-click="pageToOpen = 'Spam'">Spam</a>
+                    </li>
+
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row clearfix">
+              <div class="form-group no-label full-width">
+                <button class="btn btn-lg btn-info pull-right"
+                        ng-class="{'disabled': !miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess}"
+                        ng-disabled="!miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess"
+                        ng-click="saveMiscInfo(miscInfoForm)">
+                  Save Changes
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="email-me-wrapper" id="myProfileEmailNotifications">
+
+    <form name="emailNotificationsForm">
+
+      <h3>Email me when: </h3>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="userProfile.emailNotifications.newDevice">
+          <span class="control-indicator"></span> my account is logged in from a new device
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="userProfile.emailNotifications.scheduleChanged">
+          <span class="control-indicator"></span> HelpPro weekly schedule is changed
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="userProfile.emailNotifications.clientCompanyUpdated">
+          <span class="control-indicator"></span> Service Level Agreement with client company is updated
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="userProfile.emailNotifications.vendorUpdated">
+          <span class="control-indicator"></span> Service Level Agreement with vendor is updated
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <div class="btn btn-lg btn-info pull-right"
+             ng-class="{'disabled': emailNotificationsForm.$pristine || savingEmailInProcess}"
+             ng-disabled="emailNotificationsForm.$pristine || savingEmailInProcess"
+             ng-click="saveEmailNotifications(emailNotificationsForm)">Save Changes
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="manage-labels-wrapper" id="myProfileManageLabels"
+       ng-controller="quicktech.core.settings.myProfileManageLabelsCtrl">
+
+    <h3>Manage Labels </h3>
+
+    <ul class="labels-list">
+
+      <li ng-repeat="tag in tags"
+          ng-class="{'edit-label-wrapper clearfix': editTagId === tag.id}">
+
+        <div ng-if="editTagId !== tag.id">
+
+          <i class="tag-color tag-color-lg color{{ tag.color }}"></i>
+
+          {{ tag.name }}
+
+          <a href="javascript:void(0)" class="hit-area delete-label pull-right has-tooltip"
+             ng-click="deleteTag(tag.id, tag.name)"
+             tooltip-placement="top" tooltip="Delete Label">
+
+            <i class="icn-sm icn-nav-delete"></i>
+          </a>
+
+          <a href="javascript:void(0)" class="hit-area edit-label pull-right has-tooltip"
+             ng-click="openEditTagForm(tag.id)"
+             tooltip-placement="top" tooltip="Edit Label">
+
+            <i class="icn-sm icn-edit"></i>
+          </a>
+
+          <span class="badge badge-light pull-right">{{ tagsCount[tag.id] }}</span>
+
+        </div>
+
+        <div ng-if="editTagId === tag.id"
+             ng-include="'/html/scripts/core/settings/my-profile/my-profile-edit-label.tpl.html'"></div>
+
+      </li>
+
+      <li class="edit-label-wrapper clearfix" ng-if="editTagId === 'newLabel'">
+        <div ng-include="'/html/scripts/core/settings/my-profile/my-profile-edit-label.tpl.html'"></div>
+      </li>
+    </ul>
+
+    <div class="clearfix" ng-if="editTagId !== 'newLabel'">
+      <div class="btn btn-lg btn-info pull-right" ng-click="openEditTagForm('newLabel')">Create Label</div>
+    </div>
+
+  </div>
+</div>

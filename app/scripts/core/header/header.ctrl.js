@@ -29,6 +29,8 @@
             return 'company-profile';
           } else if ($state.includes("vendors")) {
             return 'vendors';
+          } else if ($state.includes("settings")) {
+            return 'settings';
           }
         }
 

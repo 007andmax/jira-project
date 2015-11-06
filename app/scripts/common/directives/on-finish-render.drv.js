@@ -8,7 +8,7 @@
       link: function (scope, element, attr) {
         if (scope.$last === true) {
           $timeout(function () {
-            scope.$emit(attr.onFinishRender);
+            scope.$apply(attr.onFinishRender);
           });
         }
       }

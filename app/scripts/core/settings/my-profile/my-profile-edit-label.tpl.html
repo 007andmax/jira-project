@@ -1,0 +1,52 @@
+<div ng-controller="quicktech.core.settings.myProfileEditLabelCtrl">
+  <form name="editTagForm">
+
+    <div class="dropdown clearfix">
+
+      <div class="label-color">
+
+        <div data-toggle="dropdown">
+          <i class="tag-color tag-color-lg color{{ editTag.color }}"></i>
+          <i class="icn-sm icn-caret-gray"></i>
+        </div>
+
+        <ul class="dropdown-menu dropdown-tag-colors">
+          <li ng-repeat="tagColor in tagColors"
+              ng-class="{'active': editTag.color === $index }"
+              ng-click="editTag.color = $index">
+            <i class="color{{ $index }} tag-color tag-color-md"></i>
+          </li>
+        </ul>
+
+      </div>
+
+      <div ng-messages="editTagForm.editTagName.$error" style="color: red"
+           ng-show="isShowingErrors(editTagForm, 'editTagName')">
+        <div class="qt-error-msg" ng-message="required">Label name is required.</div>
+        <div class="qt-error-msg" ng-message="unique">Label name already occupied.</div>
+        <div class="qt-error-msg" ng-message="maxlength">Label name is too large.</div>
+        <div class="qt-error-msg" ng-message="minlength">Label name is too short.</div>
+      </div>
+
+      <input type="text" class="form-control" placeholder="Name"
+             ng-model="editTag.name" name="editTagName" ng-required="true"
+             ng-minlength="3" ng-maxlength="16"
+             is-uniq-validation validation-func="validateTagName">
+
+    </div>
+
+    <div>
+      <div class="btn btn-lg btn-info pull-right"
+           ng-disabled="!editTagForm.$valid || disabledSaveEditTag"
+           ng-class="{'disabled': !editTagForm.$valid || disabledSaveEditTag}"
+           ng-click="saveTag(editTagForm)">
+        {{ editTag.id ? 'Save Changes' : 'Save Label' }}
+      </div>
+
+      <div class="btn btn-lg btn-primary pull-right" ng-click="openEditTagForm()">
+        Cancel
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,107 @@
+#top{
+      width: calc(100% - 76px);
+      height: 78px;
+      position: fixed;
+      right: 0;
+      left: 0;
+      top: 0;
+      margin-left: 76px;
+      padding: 0;
+      z-index: 1050;
+      background: transparent;
+      box-shadow: 0px 2px 6px 0px rgba(10, 45, 89, 0.15);
+}
+@media only screen and (min-width: 2300px){
+  #top{
+        width: calc(100% - 240px);
+        margin-left: 240px;
+  }
+}
+@-moz-document url-prefix() {
+  #top{
+    box-shadow: 0px 1px 4px 0px rgba(10, 45, 89, 0.15);
+  }
+}
+
+.main-container {
+  padding-top: 78px;
+  margin: 0px 15px;
+}
+.main-container > .row {
+  height: 100%;
+}
+.content-container {
+  position: relative;
+  width: calc(100% - 76px - 281px);
+  margin-left: 76px;
+}
+@media only screen and (max-width: 1320px){
+  .content-container {
+    width: calc(100% - 153px);
+  }
+}
+@media only screen and (min-width: 2300px){
+  .content-container {
+    width: calc(100% - 521px);
+    margin-left: 240px;
+  }
+}
+.content-wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.content-wrapper .container-ticket-list {
+  display: none;
+}
+
+body.opened-ticket-list .content-wrapper .container-ticket-list{
+    display: block;
+    width: 100%;
+}
+
+body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
+  width: 420px;
+  position: relative;
+  border-right: 1px solid #e7ecf2;
+}
+@media only screen and (min-width: 1800px){
+  body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
+    width: 540px;
+  }
+}
+@media only screen and (min-width: 2300px){
+  body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
+    width: 700px;
+  }
+}
+
+/*ticket content*/
+.ticket-list{
+  position: relative;
+}
+.content-wrapper > .container-ticket-content {
+  display: none;
+}
+.opened-ticket .content-wrapper > .container-ticket-content {
+  display: block;
+  float: right;
+  width: 100%;
+  padding-bottom: 30px;
+}
+.opened-ticket-list.opened-ticket .content-wrapper > .container-ticket-content {
+  position: fixed;
+  width: calc(100% - 777px);
+  height: 100%;
+  right: 281px !important;
+}
+@media only screen and (min-width: 1800px){
+  .opened-ticket-list.opened-ticket .content-wrapper > .container-ticket-content {
+    width: calc(100% - 897px);
+  }
+}
+@media only screen and (min-width: 2300px){
+  .opened-ticket-list.opened-ticket .content-wrapper > .container-ticket-content {
+    width: calc(100% - 1221px);
+  }
+}

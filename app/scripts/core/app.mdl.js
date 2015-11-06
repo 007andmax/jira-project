@@ -19,6 +19,7 @@
       'quicktech.core.vendors',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
+      'quicktech.core.settings',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -30,6 +31,10 @@
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/tickets/unassigned');
+
+    $urlRouterProvider.when('/accounting', '/accounting/billable');
+    $urlRouterProvider.when('/ps', '/ps/products');
+    $urlRouterProvider.when('/settings', '/settings/myProfile');
 
     $stateProvider
       .state('tickets', waitForServices({
@@ -75,11 +80,7 @@
       .state('ps', waitForServices({
         url: '/ps',
         template: '<div ui-view></div>',
-        controller: ['$state', function ($state) {
-          if (!$state.includes('ps.services')) {
-            $state.go('ps.products');
-          }
-        }]
+        redirectTo: 'ps.products'
       }))
       .state('ps.products', waitForServices({
         url: '/products',
@@ -94,11 +95,7 @@
       .state('accounting', waitForServices({
         url: '/accounting',
         template: '<div ui-view></div>',
-        controller: ['$state', function ($state) {
-          if (!$state.includes('accounting.recurring')) {
-            $state.go('accounting.billable');
-          }
-        }]
+        redirectTo: 'accounting.billable'
       }))
       .state('accounting.billable', waitForServices({
         url: '/billable',
@@ -134,6 +131,34 @@
         url: '/vendors/edit/:vendorId',
         templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
         controller: 'quicktech.core.vendors.editVendorCtrl'
+      }))
+      .state('settings', waitForServices({
+        url: '/settings',
+        templateUrl: '/html/scripts/core/settings/settings.tpl.html',
+        redirectTo: 'settings.myProfile',
+        controller: ['$scope', '$state', function ($scope, $state) {
+
+          $scope.$watch(function () {
+            return $state.current.url;
+          }, function (url) {
+            $scope.settingMode = url;
+          });
+        }]
+      }))
+      .state('settings.myProfile', waitForServices({
+        url: '/myProfile',
+        templateUrl: '/html/scripts/core/settings/my-profile/my-profile.tpl.html',
+        controller: 'quicktech.core.settings.myProfileCtrl'
+      }))
+      .state('settings.companyInfo', waitForServices({
+        url: '/companyInfo',
+        templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',
+        controller: 'quicktech.core.settings.companyInfoCtrl'
+      }))
+      .state('settings.emailTemplates', waitForServices({
+        url: '/emailTemplates',
+        templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
+        controller: 'quicktech.core.settings.emailTemplatesCtrl'
       }));
 
     function waitForServices(conf) {
@@ -177,6 +202,13 @@
           return '/company/default/cover'
         }
         return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '');
+      };
+
+      $rootScope.getCompanyLogoUrl = function (company) {
+        if (!company) {
+          return '/company/default/logo'
+        }
+        return '/companyLogo/' + (company.id || 'default') + '?t=' + (company.logo ? company.logo.updatedAt : '');
       };
 
       $rootScope.getPhoneNumberCssClass = function (phoneNumber) {
