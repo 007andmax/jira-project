@@ -15,22 +15,29 @@
             TicketsService.getActualNumber(scope, function (number) {
                 scope.actualTicketNumber = number;
 
-                scope.ticketConfig = {
-                  count: scope.actualTicketNumber.split('-')[1],
-                  prefix: scope.actualTicketNumber.split('-')[0]
-                };
+                if(scope.actualTicketNumber.split('-').length === 1){
+                  scope.ticketConfig = {
+                    count: scope.actualTicketNumber.split('-')[0],
+                    prefix: ''
+                  };
+                } else {
+                  scope.ticketConfig = {
+                    count: scope.actualTicketNumber.split('-')[1],
+                    prefix: scope.actualTicketNumber.split('-')[0]
+                  };
+                }
               }
             );
 
             numberInput.on('focusout', function () {
               if (scope.ticketForm.$valid) {
-                EmailSettingsService.saveNewNumberCounter(scope.ticketConfig, 'TICKET')
+                EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
               }
             });
 
             prefixInput.on('focusout', function () {
               if (scope.ticketForm.$valid) {
-                EmailSettingsService.saveNewNumberCounter(scope.ticketConfig, 'TICKET')
+                EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
               }
             })
 

@@ -32,19 +32,19 @@
 
             numberInput.on('focusout', function () {
               if (scope.invoiceForm.$valid) {
-                EmailSettingsService.saveNewNumberCounter(scope.invoiceConfig, 'INVOICE')
+                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE')
               }
             });
 
             termsInput.on('focusout', function () {
               if (scope.invoiceForm.$valid) {
-                EmailSettingsService.saveNewNumberCounter(scope.invoiceConfig, 'INVOICE')
+                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE')
               }
             });
 
             conditionsInput.on('focusout', function () {
               if (scope.invoiceForm.$valid) {
-                EmailSettingsService.saveNewNumberCounter(scope.invoiceConfig, 'INVOICE')
+                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE')
               }
             })
 
