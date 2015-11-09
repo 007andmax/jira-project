@@ -14,9 +14,7 @@
 
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
-        $scope.billableChartDataAA = BillableService.getBillableChartData($scope, function () {
-
-          $scope.billableChartData = [{"id":null,"date":"2015-10-28","sum":95079.33},{"id":null,"date":"2015-10-29","sum":79657.35},{"id":null,"date":"2015-10-30","sum":35999.01},{"id":null,"date":"2015-10-31","sum":37930.05},{"id":null,"date":"2015-11-01","sum":88056.79},{"id":null,"date":"2015-11-02","sum":37017.88},{"id":null,"date":"2015-11-03","sum":34971.88},{"id":null,"date":"2015-11-04","sum":51563.73},{"id":null,"date":"2015-11-05","sum":55506.28},{"id":null,"date":"2015-11-06","sum":18984.4},{"id":null,"date":1446854400000,"sum":0},{"id":null,"date":1446940800000,"sum":0},{"id":null,"date":1447027200000,"sum":0}]
+        $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
 
           if ($scope.billableChartData.length < 30) {
             var quantityMissingDays = 30 - $scope.billableChartData.length;
