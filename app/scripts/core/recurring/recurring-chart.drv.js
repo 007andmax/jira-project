@@ -130,7 +130,7 @@
                 x2: interval.leftRect + interval.widthRect,
                 y2: interval.bottomRect - (heightWeeklyRect + heightMonthlyRect + heightYearlyRect),
                 value: [chartData[0][i].sum, chartData[1][i].sum, chartData[2][i].sum],
-                date: chartData[0][1].date
+                date: chartData[0][i].date
               });
 
               interval.leftRect += interval.betweenRect + interval.widthRect;
