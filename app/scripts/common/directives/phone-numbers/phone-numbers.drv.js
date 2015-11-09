@@ -37,7 +37,7 @@
 
         $scope.addPhoneNumber = function () {
           $scope.phoneNumbers.unshift({
-            typeNumber: 'MOBILE'
+            typeNumber: 'OFFICE'
           });
         };
 
