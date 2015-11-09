@@ -35,7 +35,7 @@
           });
 
           function getOneDateAgo(dateString) {
-            var date = new Date(dateString)
+            var date = new Date(dateString);
             var dateCopy = new Date(dateString);
 
             dateCopy.setDate(date.getDate() - 1);
