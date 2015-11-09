@@ -10,7 +10,7 @@
 
       <li class="template-item"
           ng-class="{'expanded': ticketTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault}"
-          ng-repeat="(ticketTemplate, ticketTemplateTitle) in ticketTemplates"
+          ng-repeat="(ticketTemplate, ticketTemplateInfo) in ticketTemplates"
           ng-click="openEmailTemplate(ticketTemplate, $event)">
 
         <div class="template-usage-indicator"
@@ -18,7 +18,7 @@
 
         <div class="clearfix">
 
-          <h4 class="template-title">{{ ticketTemplateTitle }}</h4>
+          <h4 class="template-title">{{ ticketTemplateInfo.title }}</h4>
 
           <div stop-propagation="click"
                ng-show="emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault">
@@ -35,7 +35,7 @@
           </a>
 
           <div class="template-details pull-left" ng-if="ticketTemplate === currentOpenTemplate">
-            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <div class="recepients"><strong>Recipient</strong> {{ ticketTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
               <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
@@ -86,9 +86,7 @@
 
               </div>
             </form>
-            <div class="template-footer pull-left">
-              This message will be sent when a ticket update, which is shared with the client user, has been edited.
-            </div>
+            <div class="template-footer pull-left">{{ ticketTemplateInfo.description }}</div>
           </div>
         </div>
       </li>
@@ -148,7 +146,7 @@
 
       <li class="template-item"
           ng-class="{'expanded': agentTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault}"
-          ng-repeat="(agentTemplate, agentTemplateTitle) in agentTemplates"
+          ng-repeat="(agentTemplate, agentTemplateInfo) in agentTemplates"
           ng-click="openEmailTemplate(agentTemplate, $event)">
 
         <div class="template-usage-indicator"
@@ -156,7 +154,7 @@
 
         <div class="clearfix">
 
-          <h4 class="template-title">{{ agentTemplateTitle }}</h4>
+          <h4 class="template-title">{{ agentTemplateInfo.title }}</h4>
 
           <div stop-propagation="click"
                ng-show="emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault">
@@ -173,7 +171,7 @@
           </a>
 
           <div class="template-details pull-left" ng-if="agentTemplate === currentOpenTemplate">
-            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <div class="recepients"><strong>Recipient</strong> {{ agentTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
               <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
@@ -224,9 +222,7 @@
 
               </div>
             </form>
-            <div class="template-footer pull-left">
-              This message will be sent when a ticket update, which is shared with the client user, has been edited.
-            </div>
+            <div class="template-footer pull-left">{{ agentTemplateInfo.description }}</div>
           </div>
         </div>
       </li>
@@ -239,7 +235,7 @@
 
       <li class="template-item"
           ng-class="{'expanded': usersTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault}"
-          ng-repeat="(usersTemplate, usersTemplateTitle) in usersTemplates"
+          ng-repeat="(usersTemplate, usersTemplateInfo) in usersTemplates"
           ng-click="openEmailTemplate(usersTemplate, $event)">
 
         <div class="template-usage-indicator"
@@ -247,7 +243,7 @@
 
         <div class="clearfix">
 
-          <h4 class="template-title">{{ usersTemplateTitle }}</h4>
+          <h4 class="template-title">{{ usersTemplateInfo.title }}</h4>
 
           <div stop-propagation="click"
                ng-show="emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault">
@@ -262,7 +258,7 @@
           </a>
 
           <div class="template-details pull-left" ng-if="usersTemplate === currentOpenTemplate">
-            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <div class="recepients"><strong>Recipient</strong> {{ usersTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
               <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
@@ -313,9 +309,7 @@
 
               </div>
             </form>
-            <div class="template-footer pull-left">
-              This message will be sent when a ticket update, which is shared with the client user, has been edited.
-            </div>
+            <div class="template-footer pull-left">{{ usersTemplateInfo.description }}</div>
           </div>
         </div>
       </li>
@@ -328,7 +322,7 @@
 
       <li class="template-item"
           ng-class="{'expanded': companyTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault}"
-          ng-repeat="(companyTemplate, companyTemplateTitle) in companyTemplates"
+          ng-repeat="(companyTemplate, companyTemplateInfo) in companyTemplates"
           ng-click="openEmailTemplate(companyTemplate, $event)">
 
         <div class="template-usage-indicator"
@@ -336,7 +330,7 @@
 
         <div class="clearfix">
 
-          <h4 class="template-title">{{ companyTemplateTitle }}</h4>
+          <h4 class="template-title">{{ companyTemplateInfo.title }}</h4>
 
           <div stop-propagation="click"
                ng-show="emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault">
@@ -353,7 +347,7 @@
           </a>
 
           <div class="template-details pull-left" ng-if="companyTemplate === currentOpenTemplate">
-            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <div class="recepients"><strong>Recipient</strong> {{ companyTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
               <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
@@ -404,9 +398,7 @@
 
               </div>
             </form>
-            <div class="template-footer pull-left">
-              This message will be sent when a ticket update, which is shared with the client user, has been edited.
-            </div>
+            <div class="template-footer pull-left">{{ companyTemplateInfo.description }}</div>
           </div>
         </div>
       </li>
@@ -419,7 +411,7 @@
 
       <li class="template-item"
           ng-class="{'expanded': invoiceTemplate === currentOpenTemplate,'default': !emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault}"
-          ng-repeat="(invoiceTemplate, invoiceTemplateTitle) in invoiceTemplates"
+          ng-repeat="(invoiceTemplate, invoiceTemplateInfo) in invoiceTemplates"
           ng-click="openEmailTemplate(invoiceTemplate, $event)">
 
         <div class="template-usage-indicator"
@@ -427,7 +419,7 @@
 
         <div class="clearfix">
 
-          <h4 class="template-title">{{ invoiceTemplateTitle }}</h4>
+          <h4 class="template-title">{{ invoiceTemplateInfo.title }}</h4>
 
           <div stop-propagation="click"
                ng-show="emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault">
@@ -444,7 +436,7 @@
           </a>
 
           <div class="template-details pull-left" ng-if="invoiceTemplate === currentOpenTemplate">
-            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <div class="recepients"><strong>Recipient</strong> {{ invoiceTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
               <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
@@ -495,9 +487,7 @@
 
               </div>
             </form>
-            <div class="template-footer pull-left">
-              This message will be sent when a ticket update, which is shared with the client user, has been edited.
-            </div>
+            <div class="template-footer pull-left">{{ invoiceTemplateInfo.description }}</div>
           </div>
         </div>
       </li>
@@ -572,7 +562,7 @@
 
       <li class="template-item"
           ng-class="{'expanded': vendorTemplate === currentOpenTemplate, 'default': !emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault}"
-          ng-repeat="(vendorTemplate, vendorTemplateTitle) in vendorTemplates"
+          ng-repeat="(vendorTemplate, vendorTemplateInfo) in vendorTemplates"
           ng-click="openEmailTemplate(vendorTemplate, $event)">
 
         <div class="template-usage-indicator"
@@ -580,7 +570,7 @@
 
         <div class="clearfix">
 
-          <h4 class="template-title">{{ vendorTemplateTitle }}</h4>
+          <h4 class="template-title">{{ vendorTemplateInfo.title }}</h4>
 
           <div stop-propagation="click"
                ng-show="emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault">
@@ -597,7 +587,7 @@
           </a>
 
           <div class="template-details pull-left" ng-if="vendorTemplate === currentOpenTemplate">
-            <div class="recepients"><strong>Recipient</strong> All persons added to Ticket Update</div>
+            <div class="recepients"><strong>Recipient</strong> {{ vendorTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
               <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
@@ -649,9 +639,7 @@
 
               </div>
             </form>
-            <div class="template-footer pull-left">
-              This message will be sent when a ticket update, which is shared with the client user, has been edited.
-            </div>
+            <div class="template-footer pull-left">{{ vendorTemplateInfo.description }}</div>
           </div>
         </div>
       </li>
