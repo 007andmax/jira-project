@@ -31,16 +31,16 @@
 
           function drawBillableChart(generateCircles) {
 
+            if(!ctrl.$viewValue || ctrl.$viewValue.length === 0){
+              return;
+            }
+
             var chartData = ctrl.$viewValue;
 
             chartContext.clearRect(0, 0, chart.width(), chart.height());
 
             chartContext.canvas.width = chartContext.canvas.clientWidth;
             chartContext.canvas.height = chartContext.canvas.clientHeight;
-
-            if (chartData.length === 0) {
-              return;
-            }
 
             var chartWidth = chart.width(),
               chartHeight = chart.height(),
@@ -63,6 +63,16 @@
               graphPoints = [];
 
               for (var i = 0; i < chartData.length; i++) {
+
+                if(chartData[i].sum === undefined){
+                  graphPoints.push({
+                    x: distanceToNextValue,
+                    date: chartData[i].date
+                  });
+
+                  distanceToNextValue += distanseBetweenValue;
+                  continue;
+                }
 
                 graphPoints.push({
                   x: distanceToNextValue,
@@ -106,12 +116,16 @@
               chartContext.beginPath();
 
               if (drawGradient) {
-                chartContext.moveTo(graphPoints[0].x, markCoef * chartHeight);
+                chartContext.moveTo(startXCoordinateGrad(graphPoints), markCoef * chartHeight);
               } else {
                 chartContext.moveTo(graphPoints[0].x, graphPoints[0].y);
               }
 
               for (var i = 0; i < graphPoints.length; i++) {
+
+                if(!graphPoints[i].value && graphPoints[i].value !== 0){
+                  continue;
+                }
 
                 var point = graphPoints[i];
 
@@ -210,7 +224,7 @@
 
           function showTooltip(circle) {
 
-            var currentValue = circle.value + ' USD',
+            var currentValue = $filter('currency')(circle.value, '', 0) + ' USD',
               currentDay = $filter('date')(circle.date, 'EEE, d MMM yyyy');
 
             tooltipContext.clearRect(0, 0, tooltipContext.canvas.width, tooltipContext.canvas.height);
@@ -239,7 +253,7 @@
 
             for (var i = 0; i < chartData.length; i++) {
               if (i === 0 || maxValue < chartData[i].sum) {
-                maxValue = chartData[i].sum;
+                maxValue = chartData[i].sum || 0;
               }
             }
 
@@ -268,6 +282,14 @@
             chartContext.arc(x, y, 2, 0, Math.PI * 2);
             chartContext.fill();
             chartContext.closePath();
+          }
+
+          function startXCoordinateGrad(data){
+            for(var i = 0; i < data.length; i++){
+              if(data[i].value || data[i].value === 0){
+                return data[i].x;
+              }
+            }
           }
         }
       }
