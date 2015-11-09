@@ -13,7 +13,7 @@
 
           $(window).on('resize', countNodes);
           //scope.$on('recalc-count-nodes-in-line', countNodes);
-          $scope.countNodes = countNodes;
+          scope.countNodes = countNodes;
 
           scope.$on('$destroy', function(){
             $(window).on('off', countNodes);
