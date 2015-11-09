@@ -12,6 +12,8 @@
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
 
+        $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
+
         $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function(){
           $scope.mostTicketsResolved = 0;
 

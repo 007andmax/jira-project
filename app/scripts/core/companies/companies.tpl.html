@@ -17,17 +17,24 @@
         <!--</div>-->
         <!--</div>-->
 
-        <!--<div class="chart tickets resolution">-->
-        <!--<div class="content">-->
-        <!--<div class="resolution-circle"></div>-->
-        <!--<ul class="chart-list report-nav">-->
-        <!--<div class="hd"><span class="bold">Tkt Resolutions</span>-->
-        <!--<span class="amount">All Time</span></div>-->
-        <!--<li><span class="circle blue"></span> Quick</li>-->
-        <!--<li><span class="circle dark-orange"></span> DELAYED</li>-->
-        <!--</ul>-->
-        <!--</div>-->
-        <!--</div>-->
+        <div class="chart tickets resolution">
+          <div class="content">
+
+            <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
+                 pie-chart-color="['#1586E4', '#EF6C00']"
+                 pie-chart-size="140"></div>
+
+            <ul class="chart-list report-nav">
+
+              <div class="hd"><span class="bold">Tkt Resolutions</span>
+                <span class="amount">All Time</span>
+              </div>
+
+              <li><span class="circle blue"></span> Quick</li>
+              <li><span class="circle dark-orange"></span> DELAYED</li>
+            </ul>
+          </div>
+        </div>
 
         <div class="chart timed-online-device">
           <div class="service">
@@ -61,7 +68,8 @@
             <span class="amount">Contributed to Earnings</span>
             <span class="label green pull-right">{{ contributedToEarnings }} USD</span>
           </div>
-          <div top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'" second-gradient-color="'#7BAF3F'"></div>
+          <div top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'"
+               second-gradient-color="'#7BAF3F'"></div>
         </div>
 
         <div class="tchart last">
@@ -70,7 +78,8 @@
             <span class="amount">Most Tickets Resolved</span>
             <span class="label blue pull-right">{{ mostTicketsResolved }} TICKETS</span>
           </div>
-          <div top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'" second-gradient-color="'#3AA4E5'"></div>
+          <div top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'"
+               second-gradient-color="'#3AA4E5'"></div>
         </div>
       </div>
 
