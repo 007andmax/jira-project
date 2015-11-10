@@ -8,7 +8,6 @@
 
         var availableMods = ['group-by-company', 'list'];
 
-        $scope.invoiceToSent = {};
         $scope.totalSum = {
           companies: {},
           invoices: {}
@@ -27,26 +26,10 @@
 
           var invoicesData = $scope.receivableInvoicesData;
 
-          if ($stateParams.mode === 'group-by-company') {
-
-            for (var companyId in invoicesData.companies) {
-              if (companyId !== 'staticCopy') {
-                $scope.invoiceToSent[companyId] = {
-                  checked: false,
-                  invoices: {}
-                };
-              }
-            }
-          } else {
-            $scope.invoiceToSent.invoices = {};
-            for (var i = 0; i < invoicesData.list.length; i++) {
-              $scope.invoiceToSent.invoices[invoicesData.list[i].id] = false;
-            }
-          }
-
           $scope.$watch('receivableInvoicesData', function () {
             $scope.totalReceivables = 0;
             $scope.receivableCompanies = [];
+            $scope.invoiceToSent = {};
 
             angular.forEach(invoicesData.companies, function (value, key) {
 
@@ -83,6 +66,23 @@
                 $scope.receivableCompanies.push(CompaniesService.getOneById(key));
               }
             });
+
+            if ($stateParams.mode === 'group-by-company') {
+
+              for (var companyId in invoicesData.companies) {
+                if (companyId !== 'staticCopy') {
+                  $scope.invoiceToSent[companyId] = {
+                    checked: false,
+                    invoices: {}
+                  };
+                }
+              }
+            } else {
+              $scope.invoiceToSent.invoices = {};
+              for (var i = 0; i < invoicesData.list.length; i++) {
+                $scope.invoiceToSent.invoices[invoicesData.list[i].id] = false;
+              }
+            }
 
           }, true);
 

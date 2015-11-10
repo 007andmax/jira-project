@@ -216,7 +216,7 @@
          ng-if="companyForSettingLoad"
          ng-controller="quicktech.core.settings.companyInfoContactInfoCtrl">
       <form name="addressesWrapForm">
-        <div class="create-user-container" change-current-address>
+        <div class="create-user-container" addresses-control>
           <div class="create-user-header clearfix">
 
             <h3 class="pull-left">Contact Info</h3>
@@ -224,20 +224,20 @@
             <h4 class="pull-left" ng-repeat="location in companyForSettingPage.addresses">
               <a class="shoose-current-address-icn"
                  ng-class="{'active disabled': currentAddressIndex === $index, 'invalid': addressesWrapForm['addressForm' + $index].$invalid}"
-                 href="javascript:void(0)" ng-click="changeAddressIndex($index)">
+                 href="javascript:void(0)" ng-click="showAddress($index)">
                 <span>0{{ $index + 1 }}</span>
               </a>
             </h4>
 
           </div>
 
-          <div ng-repeat="address in companyForSettingPage.addresses" address-conteiner="{{ $index }}"
-               on-finish-render="changeAddressIndex(0)" ng-shw="$index === currentAddressIndex">
-          <div class="create-user-form" ng-form="{{ 'addressForm' + $index }}"
-               ng-init="addressFormName = 'addressForm' + $index">
-            <!--<div ng-if="IsShowMap">-->
+          <div ng-repeat="address in companyForSettingPage.addresses" address-item
+               style="display: none;" on-finish-render="showAddress(currentAddressIndex)">
+            <div class="create-user-form" ng-form="{{ 'addressForm' + $index }}"
+                 ng-init="addressFormName = 'addressForm' + $index">
+              <!--<div ng-if="IsShowMap">-->
 
-              <div address-autocomplete template-page="settings"
+              <div address-autocomplete template-page="settings" is-map-shown="$index === currentAddressIndex"
                    ng-model="address"
                    show-validation-messages="triedToSave"></div>
 
@@ -277,14 +277,15 @@
                   </div>
 
                   <button class="btn btn-dark has-tooltip pull-right"
-                       ng-if="$last && (address.phoneNumbers.length < 3)"
-                       ng-click="addPhoneNumber(address)" tooltip-placement="top" tooltip="Add more">
+                          ng-class="{'hide': !$last || $index >= 2}"
+                          ng-click="addPhoneNumber(address)" tooltip-placement="top" tooltip="Add more">
                     <i class="icn-sm icn-plus"></i>
                   </button>
 
                   <button class="btn btn-primary has-tooltip pull-right"
-                       ng-if="!$last || $index === 2" ng-click="removePhoneNumber(address, $index)"
-                       tooltip-placement="top" tooltip="Remove">
+                          ng-class="{'hide': $last && (address.phoneNumbers.length < 3)}"
+                          ng-click="removePhoneNumber(address, $index, addressesWrapForm)"
+                          tooltip-placement="top" tooltip="Remove">
                     <i class="icn-sm icn-remove-token"></i>
                   </button>
 
@@ -315,14 +316,18 @@
 
                   </div>
 
-                  <button class="btn btn-dark has-tooltip pull-right" ng-show="$first"
-                          ng-click="addLocations(); changeAddressIndex(companyForSettingPage.addresses.length - 1)"
+                  <button class="btn btn-dark has-tooltip pull-right"
+                          ng-class="{'hide': !$last || companyForSettingPage.addresses.length >= maximalAmountOfAddresses}"
+                          ng-click="addLocations(); showAddress(companyForSettingPage.addresses.length - 1, true)"
                           tooltip-placement="top" tooltip="Add more">
                     <i class="icn-sm icn-plus"></i>
                   </button>
 
-                  <button class="btn btn-primary has-tooltip pull-right" ng-show="!$first"
-                          ng-click="removeLocation($index); changeAddressIndex(0)" tooltip-placement="top" tooltip="Remove">
+                  <button class="btn btn-primary has-tooltip pull-right"
+                          ng-class="{'hide':$last && companyForSettingPage.addresses.length < maximalAmountOfAddresses}"
+                          ng-click="removeLocation($index, addressesWrapForm); showAddress($index - 1)"
+                          tooltip-placement="top"
+                          tooltip="Remove">
                     <i class="icn-sm icn-remove-token"></i>
                   </button>
 
@@ -347,12 +352,13 @@
                   <button class="btn btn-lg btn-info pull-right"
                           ng-class="{'disabled': addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess}"
                           ng-disabled="addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess"
-                          ng-click="saveContactInfo(addressesWrapForm)">Save Changes</button>
+                          ng-click="saveContactInfo(addressesWrapForm)">Save Changes
+                  </button>
                 </div>
               </div>
-            <!--</div>-->
+              <!--</div>-->
 
-          </div>
+            </div>
           </div>
         </div>
       </form>

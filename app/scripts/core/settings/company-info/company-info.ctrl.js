@@ -22,7 +22,7 @@
 
           for(var i = 0; i < $scope.companyForSettingPage.addresses.length; i++){
             if($scope.companyForSettingPage.addresses[i].phoneNumbers.length === 0){
-              $scope.companyForSettingPage.addresses[i].phoneNumbers.push({typeNumber: 'MOBILE'});
+              $scope.companyForSettingPage.addresses[i].phoneNumbers.push({typeNumber: 'OFFICE'});
             }
           }
 
@@ -32,7 +32,7 @@
         });
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form && form[fieldName] && (form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
         $scope.saveBusinessDaysHours = function(form){

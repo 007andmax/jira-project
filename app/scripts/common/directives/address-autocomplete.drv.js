@@ -3,13 +3,14 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("addressAutocomplete",
-    [function () {
+    ['$timeout', function ($timeout) {
       return {
         restrict: 'A',
         require: 'ngModel',
         scope: {
           model: '=ngModel',
-          showValidationMessages: '=showValidationMessages'
+          showValidationMessages: '=showValidationMessages',
+          isMapShown: "="
         },
         templateUrl: function (elem, attr) {
           return '/html/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';
@@ -25,30 +26,36 @@
             mapDiv = element.find('[map]')[0],
             input = element.find('input'),
             inputCtrl = input.controller('ngModel'),
-            autocomplete = new google.maps.places.Autocomplete(input[0]);
+            autocomplete = new google.maps.places.Autocomplete(input[0]),
+            map,
+            marker;
 
           var hasLocation = ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
           if (hasLocation) {
             mapOptions.center = new google.maps.LatLng(ngModelCtrl.$viewValue.locationLat, ngModelCtrl.$viewValue.locationLng);
           }
 
-          var map = new google.maps.Map(mapDiv, mapOptions),
-            marker = new google.maps.Marker({
-              map: map,
-              anchorPoint: new google.maps.Point(0, -29)
-            });
+          map = new google.maps.Map(mapDiv, mapOptions);
+          marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29)
+          });
           autocomplete.setTypes(['address']);
 
           $scope.$watch(function () {
             return ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address;
-          }, resetMap);
+          }, function () {
+            resetMap(google, map, marker, inputCtrl);
+          });
 
-          input.on('change', function () {
-            inputCtrl.$setValidity('correct', false);
-
-            ngModelCtrl.$viewValue.countryCode = undefined;
-            ngModelCtrl.$viewValue.locationLat = undefined;
-            ngModelCtrl.$viewValue.locationLng = undefined;
+          $scope.$watch('isMapShown', function (val) {
+            if (val) {
+              $timeout(function () {
+                var center = map.getCenter();
+                google.maps.event.trigger(map, 'resize');
+                map.setCenter(center);
+              }, 0);
+            }
           });
 
           google.maps.event.addListener(autocomplete, 'place_changed', function () {
@@ -65,6 +72,8 @@
             ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
             ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
 
+            $scope.$apply();
+
           });
 
           function getCountryCode(place) {
@@ -76,7 +85,11 @@
             }
           }
 
-          function resetMap() {
+          function resetMap(google, map, marker, inputCtrl) {
+
+            var hasMark = ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
+
+            inputCtrl.$setValidity('correct', !!hasMark);
 
             var hasLocation = ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
 
@@ -91,6 +104,7 @@
             } else {
               marker.setVisible(false);
             }
+
           }
         }
       }

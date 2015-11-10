@@ -26,8 +26,9 @@
           });
         };
 
-        $scope.removePhoneNumber = function (index) {
+        $scope.removePhoneNumber = function (index, form) {
           $scope.userProfile.address.phoneNumbers.splice(index, 1);
+          form.$setDirty();
         };
 
         $scope.saveContactInfo = function (form) {
