@@ -105,7 +105,7 @@
             recipient: "User",
             description: "This message will be sent when a user is archived."
           },
-          'USER_SUBS_TU': {
+          'USER_SUBS_TKT': {
             title: "A user is subscribed to Ticket Updates",
             recipient: "Users",
             description: "This message will be sent when a user is subscribed to ticket updates."
