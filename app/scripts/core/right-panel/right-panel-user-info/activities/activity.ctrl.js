@@ -139,6 +139,9 @@
         function setAditionalUserName() {
           if ($scope.activity.firstList[0] && $scope.activity.firstList[0].userFirstName) {
             $scope.aditionalUserName = $scope.activity.firstList[0].userFirstName;
+
+          } else if ($scope.activity.firstList[0] && $scope.activity.firstList[0].contactFirstName) {
+            $scope.aditionalUserName = $scope.activity.firstList[0].contactFirstNames;
           } else {
             console.error('can not find aditionalUserName in activity ' + $scope.activity.action)
           }
@@ -148,7 +151,7 @@
           if ($scope.activity.firstList[0] && $scope.activity.firstList[0].companyName) {
             $scope.companyName = $scope.activity.firstList[0].companyName;
           } else {
-            if($scope.activity.secondList && $scope.activity.secondList[0] && $scope.activity.secondList[0].companyName){
+            if ($scope.activity.secondList && $scope.activity.secondList[0] && $scope.activity.secondList[0].companyName) {
               $scope.companyName = $scope.activity.secondList[0].companyName;
             } else {
               console.error('can not find companyName in activity ' + $scope.activity.action)
@@ -197,7 +200,7 @@
         }
 
         function setServiceName() {
-          if($scope.activity.action === 'SERVICE_MOVED'){
+          if ($scope.activity.action === 'SERVICE_MOVED') {
             if ($scope.activity.secondList[0] && $scope.activity.secondList[0].serviceName) {
               $scope.serviceName = $scope.activity.secondList[0].serviceName;
             } else {
