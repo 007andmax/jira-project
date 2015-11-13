@@ -10,13 +10,10 @@ aside#right {
 }
 aside#right.collapsed {
   width: 77px;
-  /*background-color: #e7ecf2;*/
-  /*border: none;*/
   box-shadow: none;
 }
 @media only screen and (max-width: 1320px){
   aside#right {
-    /*border-left: none;*/
     box-shadow: 0 0 26px 0 rgba(10, 45, 89, .1);
   }
   @-moz-document url-prefix() {
@@ -44,42 +41,29 @@ aside#right .nav-sb-tabs {
   background: rgba(255, 255, 255, 0.94);
   z-index: 1030;
 }
+
 aside#right.collapsed .nav-sb-tabs {
   width: 76px;
   padding: 0;
-}
-aside#right.collapsed .nav-sb-tabs {
   top: 78px;
 }
 aside#right .nav-sb-tabs > li {
-  display: table-cell;
+  float: left;
   padding: 39px 40px;
-  width: auto;
-  background-color: transparent;
 }
-aside#right.collapsed .nav-sb-tabs > li {
-  /*background-color: #e7ecf2;*/
-  display: block;
-  padding: 40px 28px !important;
-
-}
-/*aside#right.collapsed .nav-sb-tabs > li:hover{
-  background-color: #e7ecf2;
-}*/
-
 aside#right .nav-sb-tabs > li:first-child {
   padding-left: 30px;
 }
 aside#right .nav-sb-tabs > li:last-child {
   padding-right: 30px;
 }
-aside#right .nav-sb-tabs > li > a {
-  padding: 0;
+aside#right.collapsed .nav-sb-tabs > li {
+  padding: 40px 28px !important;
 }
 
 
 
-aside#right .panel-heading {
+aside#right .sb-heading {
   float: left;
   width: 100%;
   padding: 0 30px 10px;
@@ -89,7 +73,7 @@ aside#right .panel-heading {
   color: #b2becd;
   text-transform: uppercase;
 }
-aside#right .panel-heading.about-heading {
+aside#right .sb-heading.about-heading {
   padding-bottom: 22px;
 }
 
@@ -147,6 +131,46 @@ aside#right .list-users:hover, aside#right .list-devices:hover {
   background-color: #e7ecf2;
   cursor: pointer;
 }
+aside#right .context-menu, .rightbar-context-menu{
+  position: absolute;
+  top: 26px;
+  left: 60px;
+  margin: 0;
+  list-style: none;
+  padding: 11px 0;
+  /*display: none;*/
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0 rgba(10,45,89,.1);
+  z-index: 1000;
+}
+aside#right .list-devices .context-menu > li, aside#right .list-users .context-menu > li, aside#right .list-users .dropdown-privilege > li, aside#right .list-users .dropdown-subscribe > li{
+  padding: 0;
+}
+aside#right .context-menu > li > a, .rightbar-context-menu > li > a{
+  display: block;
+  padding: 5px 20px;
+  line-height: 20px;
+  color: #4c5c6f;
+}
+aside#right .context-menu > li > a i, .rightbar-context-menu > li > a i{
+  margin-top: 4px;
+  margin-right: 10px;
+}
+aside#right .context-menu > li > a:hover, .rightbar-context-menu > li > a:hover{
+  text-decoration: none;
+  background-color: #e7ecf2;
+}
+@-moz-document url-prefix() {
+  aside#right .context-menu, .rightbar-context-menu{
+    box-shadow: 0 3px 12px 0 rgba(10,45,89,.1);
+  }
+  aside#right .context-menu > li > a, .rightbar-context-menu > li > a{
+    line-height: 19px;
+    padding: 5px 20px 6px;
+  }
+}
+
 .list-users:hover .avatar > i{
   border-color: #e7ecf2;
 }
@@ -335,7 +359,7 @@ aside#right .navbar-form-search .form-group {
 /*aside#right .navbar-form-search .form-control-search {
     width: 172px;
 }*/
-aside#right .panel-heading.companies-heading span{
+aside#right .sb-heading span{
   font-weight: normal;
 }
 aside#right .companies-list-wrapper{
@@ -506,7 +530,7 @@ aside#right .company-detail .rating{
 aside#right .company-detail .rating > li {
   margin-right: 4px;
 }
-aside#right .panel-heading.billing-heading{
+aside#right .sb-heading.billing-heading{
   padding-bottom: 22px;
 }
 aside#right .sidebar-general .primary-contacts {
@@ -544,7 +568,7 @@ aside#right .tab-company-info .list-users{
   padding: 9px 30px 10px;
 }
 /*2nd tab*/
-aside#right .panel-heading.devices-heading {
+aside#right .sb-heading.devices-heading {
   padding-bottom: 14px;
 }
 aside#right .general-devices{
@@ -602,7 +626,7 @@ aside#right .list-devices.checked .avatar > i, aside#right .list-users.checked .
   border-color: #e2f1fd;
 }
 /*3rd tab*/
-aside#right .panel-heading.users-heading{
+aside#right .sb-heading.users-heading{
   padding-bottom: 17px;
 }
 aside#right .general-users{
@@ -636,7 +660,7 @@ aside#right .companies-list-wrapper > li.opened-list .close {
 
 
 @-moz-document url-prefix() {
-  aside#right .panel-heading {
+  aside#right .sb-heading {
     line-height: 11px;
   }
   aside#right .billing-address .icn-sm {
@@ -645,13 +669,13 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   aside#right .list-users .avatar {
     margin-top: 2px;
   }
-  aside#right .sidebar-general .list-users .avatar, aside#right .panel-heading.recent-heading, aside#right .panel-heading.primary-contact-heading{
+  aside#right .sidebar-general .list-users .avatar, aside#right .sb-heading.recent-heading, aside#right .sb-heading.primary-contact-heading{
     margin-top: 1px;
   }
   aside#right .sidebar-company .recent-activities-by .list-users {
     padding: 8px 30px;
   }
-  aside#right .panel-heading.currently-heading, aside#right .panel-heading.devices-heading, aside#right .panel-heading.users-heading {
+  aside#right .sb-heading.currently-heading, aside#right .sb-heading.devices-heading, aside#right .sb-heading.users-heading {
     margin-bottom: 1px;
   }
   aside#right .primary-contacts .user-name, aside#right .sidebar-company .primary-contacts .user-name, aside#right .companies-list-wrapper > li.opened-list .company-title, aside#right .companies-list-wrapper > li.opened-list .company-numbers, aside#right .companies-list-wrapper > li.opened-list .company-devices .user-name, aside#right .sidebar-general .general-devices li .user-name, aside#right .general-users .user-name {
@@ -684,11 +708,11 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   }
 }
 /*@-moz-document url-prefix() {
-  aside#right .panel-heading {
+  aside#right .sb-heading {
     line-height: 11px;
     margin-bottom: 1px;
   }
-  aside#right .panel-heading.recent-heading, aside#right .panel-heading.currently-heading, aside#right .panel-heading.primary-contact-heading, aside#right .panel-heading.created-by-heading{
+  aside#right .sb-heading.recent-heading, aside#right .sb-heading.currently-heading, aside#right .sb-heading.primary-contact-heading, aside#right .sb-heading.created-by-heading{
     line-height: 12px;
   }
   aside#right .billing-address .icn-sm {
@@ -737,7 +761,7 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   aside#right .general-devices .avatar{
     margin-top: 10px;
   }
-  aside#right .panel-heading.devices-heading{
+  aside#right .sb-heading.devices-heading{
     padding-bottom: 15px;
   }
   aside#right .general-devices li .user-name{
@@ -756,10 +780,28 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   aside#right .general-users .avatar {
     margin-top: 1px;
   }
-  aside#right .panel-heading.users-heading{
+  aside#right .sb-heading.users-heading{
     padding-bottom: 18px;
   }
   aside#right .general-users .user-name{
     margin-top: 9px;
   }
 }*/
+
+.context-menu.rp-user-popover{
+  padding: 11px 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.context-menu.rp-user-popover > li > a, .rightbar-context-menu > li > a{
+  display: block;
+  padding: 5px 20px;
+  line-height: 20px;
+  color: #4c5c6f;
+}
+
+.context-menu.rp-user-popover > li > a i, .rightbar-context-menu > li > a i{
+  margin-top: 4px;
+  margin-right: 10px;
+}

@@ -316,9 +316,9 @@ a.ha-24{
     height: 6px;
 }
 
-.icn-remove-token {
+/*.icn-remove-token {
     background-position: -696px 0;
-}
+}*/
 
 .icn-back-arrow {
     background-position: -1864px -100px;
@@ -409,6 +409,12 @@ a.ha-24{
     background-position: -2592px -100px;
 }
 
+.icn-tick-blue{
+    background-position: -2592px -100px;
+    width: 14px;
+    height: 10px;
+}
+
 .icn-msg{
     background-position: -458px -206px;
 }
@@ -423,6 +429,9 @@ a.ha-24{
 
 .icn-create-invoice{
     background-position: -3416px -100px;
+}
+.icn-create-invoice.disabled, .disabled > .icn-create-invoice{
+    background-position: -3444px -100px;
 }
 
 .icn-add-company{
@@ -919,8 +928,16 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 /* Star Rating Icons end */
 
 .icn-sb-location {
-    background-position: -2316px 0;
-    width: 10px;
+    background-position: -2315px 0;
+}
+.icn-location-white {
+    background-position: -947px -206px;
+}
+
+.icn-response-time {
+    background-position: -912px -206px;
+    width: 16px;
+    height: 20px;
 }
 
 .icn-email, .icn-email:focus {
@@ -972,6 +989,86 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 :hover > .icn-restart, :active > .icn-restart, :focus:hover > .icn-restart, :focus:active > .icn-restart, :hover:active > .icn-restart, .active > .icn-restart, .open .icn-restart, .open > .btn:hover .icn-restart {
     background-position: -2290px 0;
 }
+
+
+
+.icn-send-alert{
+    background-position: -412px -51px;
+    height: 13px;
+}
+:hover > .icn-send-alert, :active > .icn-send-alert, :focus:hover > .icn-send-alert, :focus:active > .icn-send-alert, :hover:active > .icn-send-alert, .active > .icn-send-alert, .open .icn-send-alert, .open > .btn:hover .icn-send-alert {
+    background-position: -434px -51px;
+}
+.icn-send-alert.disabled, .disabled > .icn-send-alert{
+    background-position: -390px -51px;
+}
+.icn-spec-report{
+    background-position: -475px -51px;
+}
+:hover > .icn-spec-report, :active > .icn-spec-report, :focus:hover > .icn-spec-report, :focus:active > .icn-spec-report, :hover:active > .icn-spec-report, .active > .icn-spec-report, .open .icn-spec-report, .open > .btn:hover .icn-spec-report {
+    background-position: -495px -51px;
+}
+.icn-spec-report.disabled, .disabled > .icn-spec-report{
+    background-position: -455px -51px;
+}
+
+.icn-transfer-file{
+    background-position: -538px -51px;
+}
+:hover > .icn-transfer-file, :active > .icn-transfer-file, :focus:hover > .icn-transfer-file, :focus:active > .icn-transfer-file, :hover:active > .icn-transfer-file, .active > .icn-transfer-file, .open .icn-transfer-file, .open > .btn:hover .icn-transfer-file {
+    background-position: -560px -51px;
+}
+.icn-transfer-file.disabled, .disabled > .icn-transfer-file{
+    background-position: -516px -51px;
+}
+
+.icn-restart-device{
+    background-position: -604px -51px;
+}
+:hover > .icn-restart-device, :active > .icn-restart-device, :focus:hover > .icn-restart-device, :focus:active > .icn-restart-device, :hover:active > .icn-restart-device, .active > .icn-restart-device, .open .icn-restart-device, .open > .btn:hover .icn-restart-device {
+    background-position: -626px -51px;
+}
+.icn-restart-device.disabled, .disabled > .icn-restart-device{
+    background-position: -582px -51px;
+}
+
+.icn-shutdown-device{
+    background-position: -670px -51px;
+}
+:hover > .icn-shutdown-device, :active > .icn-shutdown-device, :focus:hover > .icn-shutdown-device, :focus:active > .icn-shutdown-device, :hover:active > .icn-shutdown-device, .active > .icn-shutdown-device, .open .icn-shutdown-device, .open > .btn:hover .icn-shutdown-device {
+    background-position: -692px -51px;
+}
+.icn-shutdown-device.disabled, .disabled > .icn-shutdown-device{
+    background-position: -648px -51px;
+}
+
+
+.icn-user-privilege{
+    background-position: -713px -51px;
+}
+:hover > .icn-user-privilege, :active > .icn-user-privilege, :focus:hover > .icn-user-privilege, :focus:active > .icn-user-privilege, :hover:active > .icn-user-privilege, .active > .icn-user-privilege, .open .icn-user-privilege, .open > .btn:hover .icn-user-privilege {
+    background-position: -733px -51px;
+}
+.icn-user-subscription{
+    background-position: -754px -51px;
+}
+:hover > .icn-user-subscription, :active > .icn-user-subscription, :focus:hover > .icn-user-subscription, :focus:active > .icn-user-subscription, :hover:active > .icn-user-subscription, .active > .icn-user-subscription, .open .icn-user-subscription, .open > .btn:hover .icn-user-subscription {
+    background-position: -776px -51px;
+}
+
+.icn-archive-user{
+    background-position: -798px -50px;
+}
+:hover > .icn-archive-user, :active > .icn-archive-user, :focus:hover > .icn-archive-user, :focus:active > .icn-archive-user, :hover:active > .icn-archive-user, .active > .icn-archive-user, .open .icn-archive-user, .open > .btn:hover .icn-archive-user {
+    background-position: -820px -50px;
+}
+.icn-archive-company{
+    background-position: -798px -50px;
+}
+:hover > .icn-archive-company, :active > .icn-archive-company, :focus:hover > .icn-archive-company, :focus:active > .icn-archive-company, :hover:active > .icn-archive-company, .active > .icn-archive-company, .open .icn-archive-company, .open > .btn:hover .icn-archive-company {
+    background-position: -842px -50px;
+}
+
 /* Right bar icons end */
 
 
@@ -1317,7 +1414,242 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 .icn-move-service.disabled, .disabled > .icn-move-service{
     background-position: -108px -206px !important;
 }
+/*****/
+.icn-file-server{
+    background-position: -1276px -206px;
+    width: 13px;
+    height: 20px;
+}
+.icn-mail-server{
+    background-position: -1299px -206px;
+    width: 13px;
+    height: 20px;
+}
+.icn-domain-controller{
+    background-position: -1322px -206px;
+    width: 13px;
+    height: 20px;
+}
+.icn-app-server{
+    background-position: -1345px -206px;
+    width: 13px;
+    height: 20px;
+}
+.icn-database-server{
+    background-position: -1368px -206px;
+    width: 13px;
+    height: 20px;
+}
 
+/****/
+.icn-recurring-weekly{
+    background-position: -3584px -100px;
+    width: 14px;
+    height: 14px;
+}
+.icn-recurring-monthly{
+    background-position: -3560px -100px;
+    width: 14px;
+    height: 14px;
+}
+.icn-recurring-yearly{
+    background-position: -3536px -100px;
+    width: 14px;
+    height: 14px;
+}
+.icn-send-statement{
+    background-position: -3699px -206px;
+    width: 16px;
+    height: 15px;
+}
+:hover > .icn-send-statement, :active > .icn-send-statement, :focus:hover > .icn-send-statement, :focus:active > .icn-send-statement, :hover:active > .icn-send-statement, .active > .icn-send-statement, .open > .icn-send-statement, .open .icn-send-statement {
+    background-position: -3725px -206px;
+}
+
+.icn-send-again{
+    background-position: -3482px -100px;
+}
+:hover > .icn-send-again, :active > .icn-send-again, :focus:hover > .icn-send-again, :focus:active > .icn-send-again, :hover:active > .icn-send-again, .active > .icn-send-again, .open > .icn-send-again, .open .icn-send-again {
+    background-position: -3504px -100px;
+}
+
+.icn-export-excel{
+    background-position: -3652px -100px;
+    width: 14px;
+    height: 12px;
+}
+:hover > .icn-export-excel, :active > .icn-export-excel, :focus:hover > .icn-export-excel, :focus:active > .icn-export-excel, :hover:active > .icn-export-excel, .active > .icn-export-excel, .open > .icn-export-excel, .open .icn-export-excel {
+    background-position: -3676px -100px;
+}
+
+.icn-add-category{
+    background-position: -198px -206px;
+    width: 18px;
+    height: 12px;
+}
+.icn-add-category.disabled, .disabled > .icn-add-category{
+    background-position: -226px -206px;
+}
+.icn-product-add{
+    background-position: -264px -206px;
+    width: 20px;
+    height: 12px;
+}
+.icn-product-add.disabled, .disabled > .icn-product-add{
+    background-position: -294px -206px;
+}
+
+.icn-product-cancel{
+    background-position: -696px 0;
+    width: 10px;
+    height: 10px;
+}
+:hover > .icn-product-cancel, :active > .icn-product-cancel, :focus:hover > .icn-product-cancel, :focus:active > .icn-product-cancel, :hover:active > .icn-product-cancel, .active > .icn-product-cancel, .open > .icn-product-cancel, .open .icn-product-cancel {
+    background-position: -736px 0;
+}
+.icn-product-save{
+    background-position: -1720px -100px;
+    width: 14px;
+    height: 10px;
+}
+:hover > .icn-product-save, :active > .icn-product-save, :focus:hover > .icn-product-save, :focus:active > .icn-product-save, :hover:active > .icn-product-save, .active > .icn-product-save, .open > .icn-product-save, .open .icn-product-save {
+    background-position: -1976px -100px;
+}
+.icn-description{
+    width: 10px;
+    height: 12px;
+    background-position: -780px -206px;
+}
+:hover > .icn-description, :active > .icn-description, :focus:hover > .icn-description, :focus:active > .icn-description, :hover:active > .icn-description, .active > .icn-description, .open > .icn-description, .open .icn-description {
+    background-position: -800px -206px;
+}
+.icn-description-white{
+    width: 10px;
+    height: 12px;
+    background-position: -780px -206px;
+}
+:hover > .icn-description-white, :active > .icn-description-white, :focus:hover > .icn-description-white, :focus:active > .icn-description-white, :hover:active > .icn-description-white, .active > .icn-description-white, .open > .icn-description-white, .open .icn-description-white {
+    background-position: -820px -206px;
+}
+
+.icn-add-services{
+    background-position: -64px -206px;
+}
+:hover > .icn-add-services, :active > .icn-add-services, :focus:hover > .icn-add-services, :focus:active > .icn-add-services, :hover:active > .icn-add-services, .active > .icn-add-services, .open > .icn-add-services, .open .icn-add-services {
+    background-position: -86px -206px;
+}
+.icn-add-services.disabled, .disabled > .icn-add-services{
+    background-position: -108px -206px;
+}
+
+.icn-service-add{
+    background-position: -140px -206px;
+    width: 14px;
+    height: 14px;
+}
+.icn-service-add.disabled, .disabled > .icn-service-add{
+    background-position: -164px -206px;
+}
+/***/
+.icn-add-description{
+    background-position: -1697px -206px;
+    width: 12px;
+    height: 14px;
+}
+:hover > .icn-add-description, :active > .icn-add-description, :focus:hover > .icn-add-description, :focus:active > .icn-add-description, :hover:active > .icn-add-description, .active > .icn-add-description, .open > .icn-add-description, .open .icn-add-description {
+    background-position: -1719px -206px;
+}
+.icn-password-key{
+    background-position: -1751px -206px;
+    width: 15px;
+    height: 14px;
+}
+:hover > .icn-password-key, :active > .icn-password-key, :focus:hover > .icn-password-key, :focus:active > .icn-password-key, :hover:active > .icn-password-key, .active > .icn-password-key, .open > .icn-password-key, .open .icn-password-key{
+    background-position: -1801px -206px;
+
+}
+.icn-password-key-unique{
+    background-position: -1776px -206px;
+    width: 15px;
+    height: 14px;
+}
+/***/
+.icn-agent-version-updated{
+    background-position: -1836px -206px;
+}
+.icn-agent-version-old{
+    background-position: -1862px -206px;
+}
+.icn-sort-asc{
+    background-position: -1996px -206px;
+    width: 6px;
+    height: 4px;
+}
+:hover > .icn-sort-asc, :active > .icn-sort-asc, :focus:hover > .icn-sort-asc, :focus:active > .icn-sort-asc, :hover:active > .icn-sort-asc, .active > .icn-sort-asc, .open > .icn-sort-asc, .open .icn-sort-asc{
+    background-position: -2012px -206px;
+}
+.icn-sort-des{
+    background-position: -482px 0;
+    width: 6px;
+    height: 4px;
+}
+:hover > .icn-sort-des, :active > .icn-sort-des, :focus:hover > .icn-sort-des, :focus:active > .icn-sort-des, :hover:active > .icn-sort-des, .active > .icn-sort-des, .open > .icn-sort-des, .open .icn-sort-des{
+    background-position: -466px 0;
+}
+/***/
+.icn-error-power{
+    background-position: -2215px -205px;
+    height: 14px;
+}
+.icn-error-locked{
+    background-position: -2237px -206px;
+    height: 14px;
+}
+.icn-error-firewall{
+    background-position: -2259px -206px;
+    width: 14px;
+    height: 14px;
+}
+/***/
+.icn-cover{
+    background-position: -850px -206px;
+    width: 16px;
+    height: 12px;
+}
+:hover > .icn-cover, :active > .icn-cover, :focus:hover > .icn-cover, :focus:active > .icn-cover, :hover:active > .icn-cover, .active > .icn-cover, .open > .icn-cover, .open .icn-cover {
+    background-position: -876px -206px;
+}
+.icn-timezone{
+    background-position: -1226px -206px;
+}
+
+.icn-expand{
+    background-position: -1110px -206px;
+    height: 7px;
+}
+:hover > .icn-expand, :active > .icn-expand, :focus:hover > .icn-expand, :focus:active > .icn-expand, :hover:active > .icn-expand, .active > .icn-expand, .open > .icn-expand, .open .icn-expand {
+    background-position: -1132px -206px;
+}
+
+.icn-arrow-next{
+    background-position: -1074px -206px;
+}
+.icn-arrow-next:hover, .icn-arrow-next:active, .icn-arrow-next:focus, .icn-arrow-next:focus:hover, .icn-arrow-next:focus:active, .icn-arrow-next:hover:active {
+    background-position: -1091px -206px;
+}
+.icn-arrow-next.disabled, .disabled > .icn-arrow-next{
+    background-position: -1057px -206px;
+}
+
+.icn-arrow-previous{
+    background-position: -1022px -206px;
+}
+.icn-arrow-previous:hover, .icn-arrow-previous:active, .icn-arrow-previous:focus, .icn-arrow-previous:focus:hover, .icn-arrow-previous:focus:active, .icn-arrow-previous:hover:active {
+    background-position: -1039px -206px;
+}
+.icn-arrow-previous.disabled, .disabled > .icn-arrow-previous{
+    background-position: -1005px -206px;
+}
 /*Priority Icons*/
 
 .priority-dot {
@@ -1328,7 +1660,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
     border-radius: 50%;
 }
 
-.priority-dot.low {
+.priority-dot.low, .priority-dot.yearly {
     background-color: #ffa726;
 }
 
@@ -1336,8 +1668,12 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
     background-color: #ef6c00;
 }
 
-.priority-dot.high {
+.priority-dot.high, .priority-dot.weekly {
     background-color: #e53935;
+}
+
+.priority-dot.monthly {
+    background-color: #4caf50;
 }
 
 /*Color Tags*/

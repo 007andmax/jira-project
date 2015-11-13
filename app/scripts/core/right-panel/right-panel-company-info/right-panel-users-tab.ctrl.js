@@ -3,9 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.rightPanel').controller('quicktech.core.rightPanel.rightPanelUsersTabCtrl',
-    ['$scope', 'RightPanelService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
-      'CompaniesService', 'quicktech.common.services.SharedStateService', 'UsersService',
-      function ($scope, RightPanelService, TicketTagsService, $stateParams, PermissionsService, CompaniesService, SharedStateService, UsersService) {
+    ['$scope',
+      function ($scope) {
 
         $scope.selectedUsers = {};
 
@@ -18,34 +17,19 @@
           return true;
         };
 
-        $scope.selectAllUsers = function () {
-          for (var i = 0; i < $scope.companyGroupedData.users.length; i++) {
-            $scope.selectedUsers[$scope.companyGroupedData.users[i].id] = true;
-          }
-        };
+        $scope.$watch('selectedUsers', function(){
+          var count = 0;
 
-        $scope.deleteUsers = function () {
-          var deleteUsersIds = [];
-
-          for (var userId in $scope.selectedUsers) {
-            if ($scope.selectedUsers[userId]) {
-              deleteUsersIds.push(userId)
+          for(var userId in $scope.selectedUsers){
+            if($scope.selectedUsers[userId]){
+              count++;
+              if(count > 1){
+                $scope.selectMoreThanOneUser = true;
+                return
+              }
             }
           }
-
-          UsersService.deleteOrArchiveUser(deleteUsersIds, false)
-
-        };
-
-        $scope.$watch('selectedUsers', function () {
-
-          for (var userId in $scope.selectedUsers) {
-            if ($scope.selectedUsers[userId]) {
-              $scope.isMoreActionsShow = true;
-              return;
-            }
-          }
-          $scope.isMoreActionsShow = false;
+          $scope.selectMoreThanOneUser = false;
         }, true)
 
       }]);

@@ -1,114 +1,203 @@
-<div class="toggle-menu icn-toggle-menu"></div>
+<div class="qt-sidebar-scroll nano">
 
-<div class="scroll-pane" qt-scroll-pane ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
-  <nav class="site-left-nav dashboard clearfix">
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="javascript:void(0)"> <span class="nav-icon icn-dashboard"></span> Dashboard </a></li>
-    </ul>
-  </nav>
-  <nav class="site-left-nav clearfix">
+  <div class="icn-lg icn-toggle-menu"></div>
+
+  <div class="nano-content" ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
+
+    <div class="nav-title first-item">Analytics</div>
+
+    <nav class="clearfix">
+      <ul class="nav">
+        <li>
+          <a href="javascript:void(0)">
+            <i class="nav-icon icn-lg icn-dashboard"></i> Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript:void(0)">
+            <i class="nav-icon icn-lg icn-reports"></i> Reports
+          </a>
+        </li>
+      </ul>
+    </nav>
+
     <div class="clearfix divider"></div>
-    <div class="nav-title panel-heading">Tickets</div>
-    <ul class="nav nav-pills sub-nav nav-stacked">
-      <li ui-sref-active="active">
-        <a ui-sref="tickets({listType: 'unassigned'})">
-          <span class="nav-icon icn-unassigned"></span> Unassigned
-          <span class="badge">{{ ticketCounts.UNASSIGNED }}</span>
-        </a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="tickets({listType: 'user'})">
-          <span class="nav-icon icn-tickets"></span> My Tickets
-        </a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="tickets({listType: 'shared'})">
-          <span class="nav-icon icn-shared"></span> Shared
-          <span class="badge">{{ ticketCounts.SHARED }}</span>
-        </a>
-      </li>
-      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-        <a ui-sref="tickets({listType: 'open'})">
-          <span class="nav-icon icn-open"></span>Open
-        </a>
-      </li>
-      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-        <a ui-sref="tickets({listType: 'closed'})"> <span class="nav-icon icn-closed"></span> Closed
-        </a>
-      </li>
-      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-        <a ui-sref="tickets({listType: 'trash'})"><span class="nav-icon icn-trash"></span> Trash
-        </a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="tickets({listType: 'spam'})"><span class="nav-icon icn-spam"></span> Spam
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div class="clearfix divider"></div>
+    <div class="nav-title">Tickets</div>
 
-  <nav class="site-left-nav clearfix">
-    <div class="nav-title panel-heading">clients</div>
-    <ul class="nav nav-pills sub-nav nav-stacked">
-      <li ui-sref-active="active">
-        <a ui-sref="companies"> <span class="nav-icon icn-companies"></span> Companies</a>
-      </li>
-      <li>
-        <a href="javascript:void(0)"> <span class="nav-icon icn-leads no-icon"></span> Leads <span
-          class="badge">8</span>
-        </a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="users"> <span class="nav-icon icn-users"></span> Users
-        </a>
-      </li>
-      <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-        <a ui-sref="vendors">
-          <span class="nav-icon icn-vendors no-icon"></span> Vendors
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div class="clearfix divider"></div>
-  <nav class="site-left-nav clearfix">
-    <div class="nav-title panel-heading">Accounts</div>
-    <ul class="nav nav-pills sub-nav nav-stacked">
-      <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-        <a ui-sref="accounting"> <span class="nav-icon icn-billable no-icon"></span>Billable
-          <span class="badge">{{ ticketCounts.BILLABLE }}</span>
-        </a>
-      </li>
-      <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-        <a ui-sref="receivable({mode: 'group-by-company'})">
-          <span class="nav-icon icn-receivable no-icon"></span> Receivable
-          <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
-        </a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="ps"> <span class="nav-icon  icn-product-services no-icon"></span> Products & Services
-        </a>
-      </li>
-      <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-        <a ui-sref="receipt-archive({mode: 'group-by-company'})">
-          <span class="nav-icon icn-receipt-archive no-icon"></span> Receipt Archive
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div class="clearfix divider"></div>
+    <nav class="clearfix">
+      <ul class="nav">
 
-  <nav class="site-left-nav clearfix label-nav">
+        <li ui-sref-active="active">
+          <a href="javascript:void(0)" ui-sref="tickets({listType: 'unassigned'})">
+            <i class="nav-icon icn-lg icn-unassigned"></i> Unassigned
+            <span class="badge">{{ ticketCounts.UNASSIGNED }}</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a href="javascript:void(0)" ui-sref="tickets({listType: 'user'})">
+            <i class="nav-icon icn-lg icn-tickets"></i> My Tickets
+          </a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="tickets({listType: 'shared'})">
+          <a href="javascript:void(0)">
+            <i class="nav-icon icn-lg icn-shared"></i> Shared
+            <span class="badge">{{ ticketCounts.SHARED }}</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+          <a href="javascript:void(0)" ui-sref="tickets({listType: 'open'})">
+            <i class="nav-icon icn-lg icn-open"></i>Open
+          </a>
+        </li>
+
+        <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+          <a href="javascript:void(0)" ui-sref="tickets({listType: 'closed'})">
+            <i class="nav-icon icn-lg icn-closed"></i> Closed
+          </a>
+        </li>
+
+        <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+          <a href="javascript:void(0)" ui-sref="tickets({listType: 'trash'})">
+            <i class="nav-icon icn-lg icn-trash"></i> Trash
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a href="javascript:void(0)" ui-sref="tickets({listType: 'spam'})">
+            <i class="nav-icon icn-lg icn-spam"></i> Spam
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="clearfix divider"></div>
+    <div class="nav-title">clients</div>
+
+    <nav class="clearfix">
+      <ul class="nav">
+
+        <li ui-sref-active="active">
+          <a href="javascript:void(0)" ui-sref="companies">
+            <i class="nav-icon icn-lg icn-companies"></i> Companies
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a href="javascript:void(0)" ui-sref="users">
+            <i class="nav-icon icn-lg icn-users"></i> Users
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript:void(0)">
+            <i class="nav-icon icn-lg icn-devices"></i> Devices
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript:void(0)">
+            <i class="nav-icon icn-leads icn-lg"></i> Leads
+            <span class="badge">8</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="clearfix divider"></div>
+    <div class="nav-title">Accounts</div>
+
+    <nav class="clearfix">
+      <ul class="nav">
+
+        <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+          <a href="javascript:void(0)" ui-sref="accounting">
+            <i class="nav-icon icn-billable icn-lg"></i> Billable
+            <span class="badge">{{ ticketCounts.BILLABLE }}</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+          <a href="javascript:void(0)" ui-sref="receivable({mode: 'group-by-company'})">
+            <i class="nav-icon icn-receivable icn-lg"></i> Receivable
+            <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
+          </a>
+        </li>
+
+        <!-- <li>
+         <a href="javascript:void(0)"> <i class="nav-icon  icn-product-services icn-lg no-icon"></i> Products &amp; Services</a>
+       </li>  -->
+
+        <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+          <a href="javascript:void(0)" ui-sref="receipt-archive({mode: 'group-by-company'})">
+            <i class="nav-icon icn-receipt-archive icn-lg"></i> Receipt Archive
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
     <div ng-controller="quicktech.core.leftPanel.leftPanelTagsCtrl"
          ng-if="PermissionsService.isShowLabelsOnLeftPanel(listType)"
          ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-tags.tpl.html'"></div>
-  </nav>
 
-  <div class="clearfix divider" ng-show="PermissionsService.isShowLabelsOnLeftPanel(listType)"></div>
-  <nav class="site-left-nav clearfix">
-    <ul class="nav nav-pills last sub-nav nav-stacked">
-      <li><a href="javascript:void(0)"><span class="nav-icon icn-devices"></span> Devices </a></li>
-      <li><a href="javascript:void(0)"><span class="nav-icon icn-reports"></span> Reports </a></li>
-    </ul>
-  </nav>
+
+    <div class="clearfix divider"></div>
+    <div class="nav-title">Inventry mngt.</div>
+
+    <nav class="clearfix">
+      <ul class="nav">
+
+        <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
+          <a href="javascript:void(0)" ui-sref="vendors">
+            <i class="nav-icon icn-vendors icn-lg"></i> Vendors
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a href="javascript:void(0)" ui-sref="products">
+            <i class="nav-icon icn-products icn-lg"></i> Products
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a href="javascript:void(0)" ui-sref="services">
+            <i class="nav-icon icn-services icn-lg"></i> Services
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="clearfix divider"></div>
+
+    <nav class="clearfix">
+      <ul class="nav">
+        <li>
+          <a href="javascript:void(0)">
+            <i class="nav-icon icn-archive icn-lg"></i> Archive
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="clearfix divider"></div>
+
+    <nav class="clearfix">
+      <ul class="nav">
+        <li class="last-item">
+          <a href="javascript:void(0)">
+            <i class="nav-icon icn-help icn-lg"></i> Help
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
 </div>

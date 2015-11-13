@@ -1,0 +1,84 @@
+<ul class="context-menu rp-user-popover">
+
+  <li>
+    <a tabindex="-1" href="javascript:void(0)" ng-click="sendEmail()">
+      <i class="icn-sm icn-user-mail pull-left"></i>Send Email
+    </a>
+  </li>
+
+  <li ng-hide="selectMoreThanOneUser">
+    <a tabindex="-1" href="javascript:void(0)" ng-click="startChat()">
+      <i class="icn-sm icn-user-chat pull-left"></i>Chat
+    </a>
+  </li>
+
+  <li class="dropdown-submenu left-align" ng-hide="selectMoreThanOneUser">
+
+    <a tabindex="-1" href="javascript:void(0)">
+      <i class="icn-sm icn-user-privilege pull-left"></i>Set {{ user.firstName }} Privilege
+    </a>
+
+    <div class="dropdown-submenu-wrapper">
+
+      <ul class="dropdown-menu dropdown-privilege">
+
+        <li ng-class="{'active': user.role === 'USER'}">
+          <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('USER')"> User </a>
+        </li>
+
+        <li ng-class="{'active': user.role === 'ADMIN'}">
+          <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('ADMIN')"> Administrator </a>
+        </li>
+
+      </ul>
+    </div>
+
+  </li>
+
+  <!-- TODO do subscriptions-->
+  <li class="dropdown-submenu left-align" ng-hide="selectMoreThanOneUser">
+
+    <a tabindex="-1" href="javascript:void(0)">
+      <i class="icn-sm icn-user-subscription pull-left"></i>Subscribe {{ user.firstName }} to...
+    </a>
+
+    <div class="dropdown-submenu-wrapper">
+
+      <ul class="dropdown-menu dropdown-subscribe">
+
+        <li ng-class="{'checked': user.subscriptions[user.id].ticket}">
+          <a tabindex="-1" href="javascript:void(0)">
+            <div class="clearfix">
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-checked="user.subscription.ticket"
+                       ng-click="subscribeUser(user.id, 'ticket')">
+                <span class="control-indicator"></span> Ticket Updates
+              </label>
+            </div>
+          </a>
+        </li>
+
+        <li ng-class="{'checked': user.subscriptions[user.id].invoice}">
+          <a tabindex="-1" href="javascript:void(0)">
+            <div class="clearfix">
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-checked="user.subscription.invoice"
+                       ng-click="subscribeUser(user.id, 'invoice')">
+                <span class="control-indicator"></span> Invoice Updates
+              </label>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </li>
+
+  <li>
+    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveContact()">
+      <i class="icn-sm icn-archive-user pull-left"></i>
+      Archive this Contact
+    </a>
+  </li>
+
+</ul>

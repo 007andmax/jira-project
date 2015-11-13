@@ -68,21 +68,21 @@
 }
 
 /* Left bar scroll color */
-#left.nano > .nano-pane {
+#left .nano-pane {
   display: none !important;
   width      : 30px;
   right      : 0;
   top        : 12px;
   bottom     : 12px;
 }
-#left.opened.nano > .nano-pane {
+#left.opened .nano-pane {
   display: block !important;
 }
-#left.nano > .nano-pane > .nano-slider {
+#left .nano-pane .nano-slider {
   background: #2f3c4c;
   margin: 0 12px;
 }
-#left.nano > .nano-pane > .nano-slider:hover, #left.nano > .nano-pane > .nano-slider:active{
+#left .nano-pane .nano-slider:hover, #left .nano-pane .nano-slider:active{
   background: #4c5c6f;
 }
 /* Left bar scroll color end */

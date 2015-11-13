@@ -16,95 +16,102 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- build:css(.) styles/vendor.css -->
-  <link rel='stylesheet' href='/bower_components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.css'/>
-  <link rel='stylesheet' href='/bower_components/bootstrap-select/dist/css/bootstrap-select.css'/>
-  <link rel='stylesheet'
-        href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'/>
-  <link rel='stylesheet' href='/bower_components/angular-ui-select/dist/select.min.css'/>
-  <link rel='stylesheet' href='/bower_components/angular-bootstrap/ui-bootstrap-csp.css'/>
-  <!-- endbuild -->
-
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/fonts.css"/>
-  <link rel="stylesheet" href="styles/jscrollpane.css"/>
-  <link rel="stylesheet" href="styles/quicktech.css">
-  <link rel="stylesheet" href="styles/quicktech-override.css">
-  <link rel="stylesheet" href="styles/users.css">
-  <link rel="stylesheet" href="styles/companies.css">
-  <link rel="stylesheet" href="styles/company.css">
-  <link rel="stylesheet" href="styles/create-company.css">
-  <link rel='stylesheet' href='styles/editor.css'/>
-  <link rel='stylesheet' href='styles/invoices_model.css'/>
-  <link rel='stylesheet' href='styles/vendors.css'/>
-  <link rel='stylesheet' href='styles/jWindowCrop.css'/>
-  <link rel='stylesheet' href='styles/settings.css'/>
-  <link rel='stylesheet' href='styles/users-settings.css'/>
-  <link rel='stylesheet' href='styles/nouislider.css'/>
-  <link rel='stylesheet' href='styles/common.icons.css'/>
-  <link rel='stylesheet' href='styles/styles.css'/>
-  <link rel='stylesheet' href='styles/admin-tickets.css'/>
-  <link rel='stylesheet' href='styles/nanoscroller.css'/>
-  <link rel='stylesheet' href='styles/common.left.css'/>
-  <link rel='stylesheet' href='styles/common.right.css'/>
+  <link rel="stylesheet" href="styles/admin-tickets.css"/>
+  <link rel="stylesheet" href="styles/bootstrap-datetimepicker.css"/>
+  <link rel="stylesheet" href="styles/common.dropdown.css"/>
   <link rel="stylesheet" href="styles/common.fonts.css"/>
+  <link rel="stylesheet" href="styles/common.icons.css"/>
+  <link rel="stylesheet" href="styles/common.left.css"/>
+  <!--<link rel="stylesheet" href="styles/common.lists - Copy.css"/>-->
+  <link rel="stylesheet" href="styles/common.lists.css"/>
+  <link rel="stylesheet" href="styles/common.right.css"/>
+  <link rel="stylesheet" href="styles/common.tables.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.add.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.alerts.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.attachments.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.email.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.header.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.list.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.updates.css"/>
+  <link rel="stylesheet" href="styles/common.tickets.wells.css"/>
   <link rel="stylesheet" href="styles/common.top.css"/>
+  <link rel="stylesheet" href="styles/companies.css"/>
+  <link rel="stylesheet" href="styles/nanoscroller.css"/>
+  <link rel="stylesheet" href="styles/nouislider.css"/>
+  <link rel="stylesheet" href="styles/settings.css"/>
+  <link rel="stylesheet" href="styles/styles.css"/>
+  <link rel="stylesheet" href="styles/tokenfield.css"/>
+  <link rel="stylesheet" href="styles/users.css"/>
+  <link rel="stylesheet" href="styles/vendors.css"/>
 
-  <!-- endbuild -->
+  <!--<script type="text/javascript">-->
+    <!--if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {-->
+      <!--document.querySelector('[href*="styles/firefox."]').remove();-->
+      <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
+      <!--document.querySelector('[href*="styles/ie."]').remove();-->
 
-  <!-- build:css(.tmp) styles/firefox.css -->
-  <link rel='stylesheet' href='styles/firefox.css'>
-  <!-- endbuild -->
-
-  <!-- build:css(.tmp) styles/firefox-companies.css -->
-  <link rel='stylesheet' href='styles/firefox-companies.css'>
-  <!-- endbuild -->
-
-  <!-- build:css(.tmp) styles/ie.css -->
-  <link rel='stylesheet' href='styles/ie.css'>
-  <!-- endbuild -->
+    <!--} else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);-->
+      <!--document.querySelector('[href*="styles/firefox."]').remove();-->
+      <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
+    <!--} else if (!(window.ActiveXObject || "ActiveXObject" in window)) {-->
+      <!--document.querySelector('[href*="styles/ie."]').remove();-->
+    <!--}-->
+  <!--</script>-->
 
   <script type="text/javascript">
-    if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {
-      document.querySelector('[href*="styles/firefox."]').remove();
-      document.querySelector('[href*="styles/firefox-"]').remove();
-      document.querySelector('[href*="styles/ie."]').remove();
-
-    } else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
-      document.querySelector('[href*="styles/firefox."]').remove();
-      document.querySelector('[href*="styles/firefox-"]').remove();
-    } else if (!(window.ActiveXObject || "ActiveXObject" in window)) {
-      document.querySelector('[href*="styles/ie."]').remove();
+    function shorten(text, maxLength) {
+      var ret = text;
+      if (ret.length > maxLength) {
+        ret = ret.substr(0, maxLength - 3) + "...";
+      }
+      return document.write(ret);
     }
   </script>
 
-</head>
-<body class="unassigned" ng-app="quicktech">
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-  your browser</a> to improve your experience.</p>
-<![endif]-->
-<div id="loading" class="alert-wrapper" user-notification>
-  <center class="animator stop">
-    <div class="alert alert-yellow" ng-bind="message">Loading ...</div>
-  </center>
-</div>
+  <style type="text/css">
+    body{
+      min-width: 1010px;
+    }
+  </style>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-main"
-     ng-include="'/html/scripts/core/header/header.tpl.html'">
-</nav>
-<div class="main-container ">
-  <div class="row">
-    <aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>
-    <aside id="rightPanelElement" class="right scroll-pane" ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'" qt-scroll-pane></aside>
-    <div id="content" class="content-container">
-      <div class="content-wrapper">
-        <div ui-view></div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+</head>
+<body ng-app="quicktech">
+
+<div id="top" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
+
+<aside id="left" qt-sidebar ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
+
+<aside id="right" class="nano" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'">
+
+</aside>
+
+<!--&lt;!&ndash;[if lt IE 7]>-->
+<!--<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade-->
+  <!--your browser</a> to improve your experience.</p>-->
+<!--<![endif]&ndash;&gt;-->
+<!--<div id="loading" class="alert-wrapper" user-notification>-->
+  <!--<center class="animator stop">-->
+    <!--<div class="alert alert-yellow" ng-bind="message">Loading ...</div>-->
+  <!--</center>-->
+<!--</div>-->
+
+<!--<nav class="navbar navbar-default navbar-fixed-top navbar-main"-->
+     <!--ng-include="'/html/scripts/core/header/header.tpl.html'">-->
+<!--</nav>-->
+<!--<div class="main-container ">-->
+  <!--<div class="row">-->
+    <!--<aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>-->
+    <!--<aside id="rightPanelElement" class="right scroll-pane"-->
+           <!--ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'" qt-scroll-pane></aside>-->
+    <!--<div id="content" class="content-container">-->
+      <!--<div class="content-wrapper">-->
+        <!--<div ui-view></div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
 <!-- build:js({.,app}) scripts/vendor.js -->
 <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -135,6 +142,9 @@
 <script src="scripts/js/vendors/jquery.fileUploader.js"></script>
 <script src="scripts/js/vendors/md5-min.js"></script>
 <script src="scripts/js/vendors/nouislider.min.js"></script>
+
+
+<script src="scripts/js/vendors/jquery.nanoscroller.js"></script>
 <!-- endbuild -->
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&language=en"></script>

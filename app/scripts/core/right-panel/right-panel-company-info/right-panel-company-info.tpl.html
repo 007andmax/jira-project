@@ -1,64 +1,69 @@
-<div role="tabpanel" ng-if="companyGroupedData">
+<div ng-if="companyGroupedData" class="sidebar-general" role="tabpanel">
 
-  <ul class="nav nav-pills nav-justified nav-sb-tabs" role="tablist" ng-init="currentTicketInfoTab = 'COMPANY'">
+  <ul class="nav-sb-tabs" role="tablist" open-right-panel
+      ng-init="currentTicketInfoTab = 'COMPANY'">
 
     <li ng-class="{'active': currentTicketInfoTab === 'COMPANY'}">
-      <a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="currentTicketInfoTab = 'COMPANY'">
-        <span class="icon icn-tab-company-info" tooltip-placement="top" tooltip="Company Info"></span>
+      <a href="javascript:void(0)" orp-navigation class="has-tooltip"
+         tooltip-append-to-body="true" tooltip-popup-delay="200"
+         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Company Info"
+         ng-click="currentTicketInfoTab = 'COMPANY'">
+        <i class="icn-lg icn-tab-company-info"></i>
       </a>
     </li>
 
-    <li ng-class="{'active': currentTicketInfoTab === 'DEVICE'}" ng-disabled="true" class="disabled">
-      <a href="javascript:void(0)" role="tab" data-toggle="tab">
+    <li ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
+      <a href="javascript:void(0)" orp-navigation class="has-tooltip disabled" style="cursor: not-allowed"
+         tooltip-append-to-body="true" tooltip-popup-delay="200"
+         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Devices">
         <!--ng-click="currentTicketInfoTab = 'DEVICE'"-->
-        <span class="icon icn-tab-devices" tooltip-placement="top" tooltip="Devices"></span>
+        <i class="icn-lg icn-tab-devices"></i>
       </a>
     </li>
 
     <li ng-class="{'active': currentTicketInfoTab === 'USER'}">
-      <a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="currentTicketInfoTab = 'USER'">
-        <span class="icon icn-tab-users" tooltip-placement="top" tooltip="Users"></span>
+      <a href="javascript:void(0)" orp-navigation class="has-tooltip"
+         tooltip-append-to-body="true" tooltip-popup-delay="200"
+         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Users"
+         ng-click="currentTicketInfoTab = 'USER'">
+        <i class="icn-lg icn-tab-users"></i>
       </a>
     </li>
+
   </ul>
 
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane tab-company-info" ng-class="{'active': currentTicketInfoTab === 'COMPANY'}"
+
+    <div role="tabpanel" class="tab-pane tab-company-info"
+         ng-class="{'active': currentTicketInfoTab === 'COMPANY'}"
          ng-controller="quicktech.core.rightPanel.rightPanelCompanyInfoTabCtrl">
 
-      <div class="wrapper-md">
+      <div class="company-detail">
 
-        <div class="company-detail">
+        <h4>{{ companyGroupedData.company.name }}</h4>
 
-          <h4>{{ companyGroupedData.company.name }}</h4>
+        <!--<ul class="rating rating-5">-->
+        <!--<li class="icn-sm icn-star-full star-1"></li>-->
+        <!--<li class="icn-sm icn-star-full star-2"></li>-->
+        <!--<li class="icn-sm icn-star-full star-3"></li>-->
+        <!--<li class="icn-sm icn-star-half star-4"></li>-->
+        <!--<li class="icn-sm icn-star-empty star-5"></li>-->
+        <!--</ul>-->
 
-          <!--<ul class="rating rating-5">-->
-          <!--<li class="icn-star-full star-1"></li>-->
-          <!--<li class="icn-star-full star-2"></li>-->
-          <!--<li class="icn-star-full star-3"></li>-->
-          <!--<li class="icn-star-half star-4"></li>-->
-          <!--<li class="icn-star-empty star-5"></li>-->
-          <!--</ul>-->
-
-          <!--<a href="javascript:void(0)" class="btn btn-gray btn-download-agent">-->
-          <!--<span class="icon icn-dot"></span>-->
-          <!--</a>-->
-
-        </div>
       </div>
 
-      <div class="panel-heading">Billing Address</div>
+      <div class="sb-heading billing-heading">Billing Address</div>
 
       <div class="billing-address">
 
         <p class="post-address">{{ clientCompanyInfo.billingAddress.address }}</p>
 
-        <div class="site-ref dropdown">
+        <div class="site-ref">
           <!--<div class="btn-location" data-container="body" data-toggle="popover-location" data-placement="bottom">-->
-          <!--<span class="icn-sb-location pull-left"></span>-->
-          <!--Site Ref. "TCL 01"-->
+          <!--<i class="icn-sm icn-sb-location pull-left"></i> Site Ref. “TCL 01”-->
           <!--</div>-->
         </div>
+
         <div class="about-company">
 
           <div class="company-timezone">
@@ -71,48 +76,47 @@
 
           <div class="company-response-time">Avg. Response Time {{ clientCompanyInfo.averageResponseTime }} mins</div>
 
-          <div class="company-phone-number" ng-repeat="phoneNumber in clientCompanyInfo.billingAddress.phoneNumbers">
+          <div class="company-phone-number"
+               ng-repeat="phoneNumber in clientCompanyInfo.billingAddress.phoneNumbers">
             {{ phoneNumber.number }}
           </div>
         </div>
+
       </div>
-      <div class="panel-heading panel-heading-primary-contanct">Primary Contact(s)</div>
+      <div class="sb-heading primary-contact-heading">Primary Contact(s)</div>
 
-      <ul class="list-group no-bg no-borders pull-in primary-contacts">
+      <ul class="primary-contacts">
 
-        <li class="list-group-item list-users" style="padding: 15px 0px;"
-            ng-repeat="companyContact in companyContacts"
-            attach-events="attachEvents">
+        <li class="list-users" style="padding: 0 30px 0 0"
+            ng-repeat="companyContact in companyContacts">
 
-          <div style="width: 100%; padding-left: 40px;"
-               contact-popover contact-name="getUserName(companyContact)" attach-events="attachEvents"
-               send-email-in-popover="sendEmailInPopover" contact-number="companyContact.phoneNumbers"
-               contact-email="companyContact.email" contact-designation="companyContact.designation">
+          <div style="padding: 9px 0 10px 30px"
+               contact-user-popover user-info="companyContact"
+               send-email-in-popover="sendEmailInPopover">
 
-            <a herf="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-              <img ng-src="{{ getContactAvatarUrl(companyContact) }}" alt="..." class="img-circle no-avatar">
-              <i class="b-white bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
+            <a href="javascript:void(0)" class="pull-left avatar">
+              <img ng-src="{{ getContactAvatarUrl(companyContact) }}" alt="..."
+                   class="img-circle no-avatar avatar-38">
+              <i class="bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
             </a>
 
             <div class="clearfix">
-              <div class="user-name"><a href="javascript:void(0)">{{ getUserName(companyContact) }}</a></div>
+              <div class="user-name">
+                <a href="javascript:void(0)">{{ getUserName(companyContact) }}</a>
+              </div>
             </div>
 
           </div>
-
         </li>
       </ul>
 
       <div ng-if="createTicketUser">
-        <div class="panel-heading created-by-heading">Ticket Created By</div>
-
-        <ul class="list-group no-bg no-borders pull-in ticket-created-by">
-
-          <li class="list-group-item list-users">
-
-            <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-              <img ng-src="{{ getUserAvatarUrl(createTicketUser) }}" alt="..." class="img-circle">
-              <i class="b-white bottom" ng-class="{'on': createTicketUser.online, 'off': !createTicketUser.online}"></i>
+        <div class="sb-heading created-by-heading">Ticket Created By</div>
+        <ul class="primary-contacts" style="margin-bottom: 10px;">
+          <li class="list-users">
+            <a href="javascript:void(0)" class="pull-left avatar">
+              <img ng-src="{{ getUserAvatarUrl(createTicketUser) }}" alt="..." class="img-circle avatar-38">
+              <i class="bottom" ng-class="{'on': createTicketUser.online, 'off': !createTicketUser.online}"></i>
             </a>
 
             <div class="clearfix">
@@ -120,239 +124,198 @@
                 <a href="javascript:void(0)">{{ getUserName(createTicketUser) }}</a>
               </div>
             </div>
-
           </li>
-
         </ul>
       </div>
-
-
     </div>
 
     <div role="tabpanel" class="tab-pane tab-devices" ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
-      <div class="wrapper-md">
-        <div class="form-search clearfix">
-          <form class="navbar-form navbar-form-search" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control form-control-round form-control-search"
-                     placeholder="Search device...">
-              <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
-            </div>
-            <div class="dropdown pull-right">
-              <div class="btn btn-white-gray btn-cr dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="icn-caret-gray"></span>
-              </div>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="javascript:void(0)">Select all Devices</a></li>
-                <li><a href="javascript:void(0)">Create Device</a></li>
-                <li><a href="javascript:void(0)">Delete Device(s)</a></li>
-                <li><a href="javascript:void(0)">Scan Network</a></li>
-                <li><a href="javascript:void(0)">Send Message</a></li>
-              </ul>
-
-              <!--- <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Select all Devices</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation" class="dropdown-header more-text">Select a device to see more <br>actions.</li>
-
-
-
-              </ul> -->
-            </div>
-          </form>
-        </div>
-        <div class="panel-heading">Devices <span class="total">7</span></div>
-        <ul class="list-group no-bg no-borders pull-in">
-          <li class="list-group-item list-devices checked">
-            <a href="javascript:void(0)" class="pull-left avatar m-r">
-              <span class="icon icn-tablet"></span>
-              <i class="on b-white right"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox" checked="checked">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name"><a href="javascript:void(0)">Tab.03</a></div>
-              <small class="user-title text-muted">Jack Williams</small>
-            </div>
-          </li>
-          <li class="list-group-item list-devices checked">
-            <a href="javascript:void(0)" class="pull-left avatar m-r">
-              <span class="icon icn-generic-device"></span>
-              <i class="on b-white right"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox" checked="checked">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>
-              <small class="user-title text-muted">Ryan.Burns</small>
-            </div>
-          </li>
-          <li class="list-group-item list-devices">
-            <a href="javascript:void(0)" class="pull-left avatar m-r">
-              <span class="icon icn-server"></span>
-              <i class="off b-white right"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name"><a href="javascript:void(0)">File.Server</a></div>
-              <small class="user-title text-muted">Miles.Mcmillan</small>
-            </div>
-          </li>
-          <li class="list-group-item list-devices">
-            <a href="javascript:void(0)" class="pull-left avatar m-r">
-              <span class="icon icn-printer"></span>
-              <i class="on b-white right"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>
-              <small class="user-title text-muted">Shaun.Pc</small>
-            </div>
-          </li>
-          <li class="list-group-item list-devices" data-container="body" data-toggle="popover-devices"
-              data-placement="left">
-            <a href="javascript:void(0)" class="pull-left avatar m-r">
-              <span class="icon icn-computer"></span>
-              <i class="on b-white right"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>
-              <small class="user-title text-muted">Miles.Mcmillan</small>
-            </div>
-          </li>
-          <li class="list-group-item list-devices">
-            <a href="javascript:void(0)" class="pull-left avatar m-r">
-              <span class="icon icn-mobile"></span>
-              <i class="off b-white right"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>
-              <small class="user-title text-muted">Laurie.Harding</small>
-            </div>
-          </li>
-          <li class="list-group-item list-devices">
-            <a href="javascript:void(0)" class="pull-left avatar m-r">
-              <span class="icon icn-fax"></span>
-              <i class="off b-white right"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>
-              <small class="user-title text-muted">File.Server</small>
-            </div>
-          </li>
-        </ul>
+      <div class="form-search clearfix">
+        <form class="navbar-form navbar-form-search" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control-search" placeholder="Search device...">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+        </form>
       </div>
+      <div class="sb-heading devices-heading">Devices <span class="total">7</span></div>
+      <ul class="general-devices">
+        <li class="list-devices checked">
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <span class="icn-lg icn-tablet"></span>
+            <i class="on right"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox" checked="checked">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name"><a href="javascript:void(0)">Tab.03</a></div>
+            <small class="user-title text-muted">Jack Williams</small>
+          </div>
+          <ul class="context-menu">
+            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remote-access pull-left"></i>Remote
+              Access</a></li>
+            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-send-alert pull-left"></i>Send Alert</a>
+            </li>
+            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-spec-report pull-left"></i>Spec. Report</a>
+            </li>
+            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-transfer-file pull-left"></i>Transfer
+              File</a></li>
+            <li><a tabindex="-1" href="javascript:void(0)"><i
+              class="icn-sm icn-restart-device pull-left"></i>Restart</a></li>
+            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-shutdown-device pull-left"></i>Shutdown</a>
+            </li>
+            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remove-token pull-left"></i>Remove</a>
+            </li>
+          </ul>
+        </li>
+        <li class="list-devices">
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <span class="icn-lg icn-generic-device"></span>
+            <i class="on right"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>
+            <small class="user-title text-muted">Ryan.Burns</small>
+          </div>
+        </li>
+        <li class="list-devices checked">
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <span class="icn-lg icn-server"></span>
+            <i class="off right"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox" checked>
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name"><a href="javascript:void(0)">File.Server</a></div>
+            <small class="user-title text-muted">Miles.Mcmillan</small>
+          </div>
+        </li>
+        <li class="list-devices">
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <span class="icn-lg icn-printer"></span>
+            <i class="on right"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>
+            <small class="user-title text-muted">Shaun.Pc</small>
+          </div>
+        </li>
+        <li class="list-devices" data-container="body" data-toggle="popover-devices" data-placement="left">
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <span class="icn-lg icn-computer"></span>
+            <i class="on right"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>
+            <small class="user-title text-muted">Miles.Mcmillan</small>
+          </div>
+        </li>
+        <li class="list-devices">
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <span class="icn-lg icn-mobile"></span>
+            <i class="off right"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>
+            <small class="user-title text-muted">Laurie.Harding</small>
+          </div>
+        </li>
+        <li class="list-devices">
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <span class="icn-lg icn-fax"></span>
+            <i class="off right"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>
+            <small class="user-title text-muted">File.Server</small>
+          </div>
+        </li>
+      </ul>
     </div>
 
-    <div role="tabpanel" class="tab-pane tab-users" ng-class="{'active': currentTicketInfoTab === 'USER'}"
+    <div role="tabpanel" class="tab-pane tab-users"
+         ng-class="{'active': currentTicketInfoTab === 'USER'}"
          ng-controller="quicktech.core.rightPanel.rightPanelUsersTabCtrl">
-      <div class="wrapper-md">
-        <div class="form-search clearfix">
-          <form class="navbar-form navbar-form-search" role="search">
 
-            <div class="form-group">
-              <input type="text" class="form-control form-control-round form-control-search"
-                     placeholder="Search user..." ng-model="searchUserKeyword">
-              <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"
-                 ng-click="searchUserKeyword = undefined"></a>
-            </div>
-
-            <div class="dropdown pull-right">
-              <div class="btn btn-white-gray btn-cr dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="icn-caret-gray"></span>
-              </div>
-
-              <ul class="dropdown-menu" role="menu">
-
-                <li>
-                  <a href="javascript:void(0)" ng-click="selectAllUsers()">Select all Users</a>
-                </li>
-
-                <li>
-                  <a href="javascript:void(0)" ui-sref="users.create">Create User</a>
-                </li>
-
-                <li role="presentation" class="divider"></li>
-
-                <li ng-show="isMoreActionsShow">
-                  <a href="javascript:void(0)" ng-click="deleteUsers()">Delete User(s)</a>
-                </li>
-
-                <li class="disabled" ng-show="isMoreActionsShow" ng-disabled="true">
-                  <a href="javascript:void(0)">Send Message</a>
-                </li>
-
-                <li ng-hide="isMoreActionsShow" role="presentation"
-                    class="dropdown-header more-text">Select a user to see more <br>actions.
-                </li>
-              </ul>
-
-            </div>
-          </form>
-        </div>
-
-        <div class="panel-heading">Users <span class="total">{{ companyGroupedData.users.length }}</span></div>
-        <ul class="list-group no-bg no-borders pull-in">
-
-          <li class="list-group-item list-users"
-              ng-class="{'checked': selectedUsers[user.id]}"
-              ng-repeat="user in companyGroupedData.users | filter: usersFilter">
-            <a href="javascript:void(0)" class="pull-left avatar-38 avatar m-r">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle">
-              <i class="b-white bottom" ng-class="{'on': user.online, 'off': !user.online}"></i>
-            </a>
-
-            <div class="clearfix">
-              <label class="control checkbox pull-right">
-                <input type="checkbox" ng-model="selectedUsers[user.id]">
-                <span class="control-indicator"></span>
-              </label>
-
-              <div class="user-name">
-                <a href="javascript:void(0)">{{ getUserName(user) }}</a>
-              </div>
-              <small class="user-title text-muted">{{ user.designation }}</small>
-            </div>
-          </li>
-
-        </ul>
+      <div class="form-search clearfix">
+        <form class="navbar-form navbar-form-search" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control-search"
+                   ng-model="searchUserKeyword" placeholder="Search user...">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+        </form>
       </div>
+
+      <div class="sb-heading users-heading">Users
+        <span class="total">{{ companyGroupedData.users.length }}</span>
+      </div>
+
+      <ul class="general-users">
+        <li class="list-users" ng-class="{'checked': selectedUsers[user.id]}" custom-popover-menu
+            popover-trigger="notSpecified"
+            popover-template="'/html/scripts/core/right-panel/custom-popover.tpl.html'"
+            popover-append-to-body="true" popover-is-open="popoverIsOpen" popover-placement="bottom"
+            ng-repeat="user in companyGroupedData.users | filter: usersFilter">
+
+          <a href="javascript:void(0)" class="pull-left avatar">
+            <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+            <i class="bottom" ng-class="{'on': user.online, 'off': !user.online}"></i>
+          </a>
+
+          <div class="clearfix">
+            <label class="control checkbox pull-right">
+              <input type="checkbox" ng-model="selectedUsers[user.id]">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="user-name">
+              <a href="javascript:void(0)">{{ getUserName(user) }}</a>
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
     </div>
+
   </div>
 </div>

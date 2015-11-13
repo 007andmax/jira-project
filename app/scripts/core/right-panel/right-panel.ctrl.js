@@ -3,14 +3,15 @@
 (function () {
 
   angular.module('quicktech.core.rightPanel').controller('quicktech.core.rightPanel.rightPanelCtrl',
-    ['$scope', 'RightPanelService', 'quicktech.common.services.SharedStateService', 'UsersService', 'TicketsService', 'ContactsService',
-      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, ContactsService) {
+    ['$scope', 'RightPanelService', 'quicktech.common.services.SharedStateService', 'UsersService', 'TicketsService',
+      'ContactsService', 'CompaniesService',
+      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, ContactsService, CompaniesService) {
 
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
 
         $scope.workingWithIdsUsers = TicketsService.getCurrentlyWorkingWith($scope);
-        $scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket(function(){
+        $scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
           $scope.vendorContactsLoad = true;
         });
 
@@ -34,23 +35,31 @@
 
               $scope.companyGroupedData = RightPanelService.getOneCompanyGroupedData(companyId);
 
-              if($scope.rightPanelSharedState.createUserId){
+              if ($scope.rightPanelSharedState.createUserId) {
                 $scope.createTicketUser = UsersService.getOneById($scope.rightPanelSharedState.createUserId);
               }
 
               $scope.clientCompanyInfo = RightPanelService.getClientCompanyInfo($scope, companyId)
             }
 
+            //$scope.companyGroupedData = RightPanelService.getOneCompanyGroupedData("d0137bbc-bdd1-4d9c-abee-afbd0f7b2a5d");
+            //
+            //if($scope.rightPanelSharedState.createUserId){
+            //  $scope.createTicketUser = UsersService.getOneById($scope.rightPanelSharedState.createUserId);
+            //}
+            //
+            //$scope.clientCompanyInfo = RightPanelService.getClientCompanyInfo($scope, "d0137bbc-bdd1-4d9c-abee-afbd0f7b2a5d")
+
           });
         });
 
-        function getTimeDifference(time){
-          if(!time){
+        function getTimeDifference(time) {
+          if (!time) {
             $scope.lastUpdateInHours = 'null';
             return;
           }
           var date = new Date();
-          $scope.lastUpdateInHours = ((date - time)/3600000).toFixed(1)
+          $scope.lastUpdateInHours = ((date - time) / 3600000).toFixed(1)
         }
 
       }]);

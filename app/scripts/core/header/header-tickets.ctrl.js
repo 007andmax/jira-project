@@ -30,6 +30,17 @@
             2: 'COMPLETED'
           };
 
+        $scope.showPriorityParamsMap = {
+          0: 'Low',
+          1: 'Medium',
+          2: 'High'
+        };
+        $scope.showStatusParamsMap = {
+          0: 'On Hold',
+          1: 'In Pprogress',
+          2: 'Completed'
+        };
+
         $scope.search = function (value) {
 
           if (!isNaN(parseFloat(value)) && value.length > 2) {
@@ -146,18 +157,13 @@
 
         function setSearchParamsDefault() {
           $scope.searchParams = {
-            priority: {value: 1},
-            status: {value: 1}
+            priority: {value: 0},
+            status: {value: 0}
           };
         }
 
         $scope.$watch('sharedState.checkedTicketsIds', function (data) {
-
-          if (data && data.length > 0) {
-            $scope.isShowBulkAction = true;
-          } else {
-            $scope.isShowBulkAction = false;
-          }
+          $scope.isShowBulkAction = data && data.length > 0;
         })
 
       }]);

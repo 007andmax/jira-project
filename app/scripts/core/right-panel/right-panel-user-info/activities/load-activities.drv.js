@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.rightPanel").directive("loadActivities",
-    ['RightPanelService',
-      function (RightPanelService) {
+    ['RightPanelService', '$timeout',
+      function (RightPanelService, $timeout) {
         return {
           restrict: 'A',
 
@@ -13,15 +13,17 @@
             var params = {keyword: ''},
               loadingMoreActivities,
               scrollListenerInitialize,
-              rightPanel = $('#rightPanelElement'),
-              scrollPane = rightPanel.data('jsp'),
-              $document = $(document),
+              scrollPane = $(".nano"),
               loadSearchActivities = false;
 
             scope.searchActivity = '';
 
             scope.activities = RightPanelService.getActivities(scope, params, function () {
               initScrollListener();
+
+              $timeout(function(){
+                scrollPane.nanoScroller();
+              }, 0);
             });
 
             scope.$watch('searchActivity', function () {
@@ -38,6 +40,10 @@
 
                 params.keyword = scope.searchActivity;
                 scope.activities = RightPanelService.getActivities(scope, params, function () {
+                  $timeout(function(){
+                    scrollPane.nanoScroller();
+                  }, 0);
+
                   if (scope.searchActivity.length === 0) {
                     loadSearchActivities = false;
                   }
@@ -53,29 +59,33 @@
 
               scrollListenerInitialize = true;
 
-              $document.on('jsp-scroll-y', function () {
+              scrollPane.bind("scrollend", function () {
 
-                if (scrollPane.getPercentScrolledY() === 1) {
-
-                  if (loadingMoreActivities) {
-                    return;
-                  }
-
-                  loadingMoreActivities = true;
-
-                  RightPanelService.loadMoreActivities(scope, function (moreActivities) {
-                    loadingMoreActivities = false;
-
-                    if (moreActivities.length === 0) {
-                      $document.off('jsp-scroll-y');
-                    }
-                  })
+                if (loadingMoreActivities) {
+                  return;
                 }
+
+                loadingMoreActivities = true;
+
+                RightPanelService.loadMoreActivities(scope, function (moreActivities) {
+
+                  loadingMoreActivities = false;
+
+                  $timeout(function(){
+                    scrollPane.nanoScroller();
+                  }, 0);
+
+                  if (moreActivities.length === 0) {
+                    $timeout(function(){
+                      scrollPane.off("scrollend");
+                    }, 10);
+                  }
+                });
 
               });
 
               scope.$on('$destroy', function () {
-                $document.off('jsp-scroll-y');
+                scrollPane.off("scrollend");
               });
 
             }

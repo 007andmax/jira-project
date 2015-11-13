@@ -9,9 +9,10 @@
         link: function (scope, element, attrs) {
 
           element.hover(function () {
-            $('body').addClass('opened-sidebar');
+            element.addClass('opened');
+            element.find('.qt-sidebar-scroll').nanoScroller();
           }, function () {
-            $('body').removeClass('opened-sidebar');
+            element.removeClass('opened');
           })
         }
       }

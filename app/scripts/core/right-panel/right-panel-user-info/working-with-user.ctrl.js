@@ -18,21 +18,8 @@
           }
         }
 
-        $scope.getUserRole = function(){
-          if(!$scope.userInfo){
-            return
-          }
-
-          if($scope.isUser){
-            var userRole = $scope.userInfo.company.id === $scope.currentUser.company.id ? 'Team Member' : 'Client User';
-            return userRole;
-          } else {
-            return 'Vendors';
-          }
-        };
-
-        $scope.sendEmailInPopover = function(){
-          console.log('send email')
+        $scope.sendEmailInPopover = function(userId){
+          console.log('send email ' + userId);
         };
 
       }]);

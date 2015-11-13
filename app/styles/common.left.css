@@ -40,7 +40,7 @@ aside#left.opened nav, aside#left.opened .divider, aside#left.opened .nav-title 
 }
 /* Class for Left Navigation first item */
 aside#left .first-item{
-  margin-top: 17px;
+  margin-top: 18px;
 }
 /* Class for Left Navigation last item */
 aside#left .last-item{

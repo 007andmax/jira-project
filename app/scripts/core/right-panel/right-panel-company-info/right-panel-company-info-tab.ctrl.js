@@ -9,9 +9,9 @@
 
         $scope.companyContacts = CompaniesService.getCompanyContacts($scope, $scope.companyGroupedData.company.id);
 
-        $scope.sendEmailInPopover = function () {
-          console.log('send email in popover')
-        }
+        $scope.sendEmailInPopover = function (contactId) {
+          console.log('send email in popover ' + contactId)
+        };
 
       }]);
 

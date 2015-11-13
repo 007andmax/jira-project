@@ -10,7 +10,7 @@
           $scope.searchFilter = {};
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
           $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
-          $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket();
+          $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope);
 
           $scope.openAddUserTab = function (mode) {
 

@@ -33,7 +33,6 @@
     $urlRouterProvider.otherwise('/tickets/unassigned');
 
     $urlRouterProvider.when('/accounting', '/accounting/billable');
-    $urlRouterProvider.when('/ps', '/ps/products');
     $urlRouterProvider.when('/settings', '/settings/myProfile');
 
     $stateProvider
@@ -77,17 +76,12 @@
         templateUrl: '/html/scripts/core/companies/company-profile.tpl.html',
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
-      .state('ps', waitForServices({
-        url: '/ps',
-        template: '<div ui-view></div>',
-        redirectTo: 'ps.products'
-      }))
-      .state('ps.products', waitForServices({
+      .state('products', waitForServices({
         url: '/products',
         templateUrl: '/html/scripts/core/products/products.tpl.html',
         controller: 'quicktech.core.products.productsCtrl'
       }))
-      .state('ps.services', waitForServices({
+      .state('services', waitForServices({
         url: '/services',
         templateUrl: '/html/scripts/core/services/services.tpl.html',
         controller: 'quicktech.core.services.servicesCtrl'

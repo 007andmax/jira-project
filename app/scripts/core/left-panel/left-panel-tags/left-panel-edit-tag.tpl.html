@@ -1,17 +1,16 @@
 <form name="editTagForm">
   <div class="label-edit">
+    <div class="label-heading" ng-class="{'has-error': isShowingErrors(editTagForm, 'editTagName')}">
 
-    <div class="label-heading" ng-class="{'error': isShowingErrors(editTagForm, 'editTagName')}">
-
-      <div ng-messages="editTagForm.editTagName.$error" style="color: red"
+      <div ng-messages="editTagForm.editTagName.$error"
            ng-show="isShowingErrors(editTagForm, 'editTagName')">
-        <div class="qt-error-msg" ng-message="required">Label name is required.</div>
-        <div class="qt-error-msg" ng-message="unique">Label name already occupied.</div>
-        <div class="qt-error-msg" ng-message="maxlength">Label name is too large.</div>
-        <div class="qt-error-msg" ng-message="minlength">Label name is too short.</div>
+        <div class="control-label" ng-message="required">Label name is required.</div>
+        <div class="control-label" ng-message="unique">Label name already occupied.</div>
+        <div class="control-label" ng-message="maxlength">Label name is too large.</div>
+        <div class="control-label" ng-message="minlength">Label name is too short.</div>
       </div>
 
-      <div class="color{{ editTag.color }} tag-color"></div>
+      <div class="color{{ editTag.color }} tag-color tag-color-lg"></div>
 
       <input type="text" class="form-control-edit" placeholder="Name"
              ng-model="editTag.name" name="editTagName" ng-required="true"
@@ -20,34 +19,39 @@
     </div>
 
     <ul class="indctr-list clearfix">
+
       <li ng-repeat="tagColor in tagColors"
           ng-class="{'last': ($index === 4 || $index === 9), 'active': editTag.color === $index }"
           ng-click="editTag.color = $index">
-        <span class="color{{ $index }} tag-color"></span>
+
+        <i class="color{{ $index }} tag-color tag-color-md"></i>
       </li>
     </ul>
 
     <div class="label-actions clearfix">
 
-      <a href="javascript:void(0)" ng-show="editTag.id"
-         ng-click="deleteTag(editTagForm)">
-        <div class="icn icn-label-delete pull-left"
-             tooltip-placement="top" tooltip="delete label">
-        </div>
+      <a href="javascript:void(0)" class="hit-area pull-left has-tooltip"
+         ng-show="editTag.id" ng-click="deleteTag(editTagForm)"
+         tooltip-placement="top" tooltip="delete label">
+        <i class="icn-sm icn-label-delete"></i>
       </a>
 
-      <a href="javascript:void(0)" ng-click="saveTag(editTagForm)">
-        <div class="icn icn-label-save pull-right"
-             tooltip-placement="top" tooltip="save Changes">
-        </div>
-      </a>
+      <div class="pull-right">
 
-      <a href="javascript:void(0)" ng-click="openEditTagForm()">
-        <div class="icn icn-label-cancel pull-right"
-             tooltip-placement="top" tooltip="cancel">
-        </div>
-      </a>
+        <a href="javascript:void(0)" class="hit-area ha-18-16 pull-right has-tooltip"
+           ng-click="saveTag(editTagForm)"
+           tooltip-placement="top" tooltip="save Changes" tooltip-append-to-body="true">
+          <i class="icn-sm icn-label-save"></i>
+        </a>
 
+        <a href="javascript:void(0)" class="hit-area ha-14-16 pull-right has-tooltip"
+           ng-click="openEditTagForm()"
+           tooltip-placement="top" tooltip="cancel">
+          <i class="icn-sm icn-label-cancel"></i>
+        </a>
+
+      </div>
     </div>
   </div>
 </form>
+

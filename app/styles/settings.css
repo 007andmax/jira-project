@@ -62,7 +62,7 @@
     content: "";
     position: absolute;
     top: 9px;
-    left: -18px;
+    left: -19px;
     width: 6px;
     height: 6px;
     border: 1px solid #b7c2d0;
@@ -617,11 +617,4 @@
     .template-form-wrapper .control-label{
         margin-bottom: 5px;
     }
-}
-.shoose-current-address-icn.active{
-  color: #1586e4;
-}
-
-.shoose-current-address-icn.invalid:not(.active){
-  color: #f29c9a;
 }

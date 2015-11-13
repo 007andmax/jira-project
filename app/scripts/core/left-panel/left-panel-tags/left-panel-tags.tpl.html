@@ -1,34 +1,40 @@
 <div>
-  <div class="nav-title panel-heading">labels</div>
-  <ul class="nav nav-pills nav-tags nav-stacked">
-    <li ng-repeat="tag in tags" ng-class="{'edit': tag.id === editTagId}">
 
-      <a href="javascript:void(0)" ng-if="tag.id !== editTagId" ng-click="openEditTagForm(tag.id)">
-        <span class="tag-color color{{ tag.color }}"></span>
-        {{ tag.name }}
-        <span class="icn-edit-tag" tooltip-placement="top" tooltip="edit label"></span>
-        <span class="badge badge-gray">{{ tagsCount[tag.id] }}</span>
-      </a>
+  <div class="clearfix divider"></div>
+  <div class="nav-title">labels</div>
 
-      <div class="label-edit" ng-if="tag.id === editTagId"
-           ng-controller="quicktech.core.leftPanel.leftPanelEditTagCtrl"
-           ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-edit-tag.tpl.html'"></div>
+  <nav class="clearfix label-nav">
 
-    </li>
+    <ul class="nav">
+      <li ng-repeat="tag in tags" ng-class="{'edit': tag.id === editTagId}">
+        <a href="javascript:void(0)" ng-if="tag.id !== editTagId">
 
-    <li class="create-new-label" ng-class="{'edit': editTagId === 'CREATE_TAG'}">
+          <i class="tag-color tag-color-lg color{{ tag.color }}"></i> {{ tag.name }}
 
-      <div class="label-edit" ng-if="editTagId === 'CREATE_TAG'"
-           ng-controller="quicktech.core.leftPanel.leftPanelEditTagCtrl"
-           ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-edit-tag.tpl.html'"></div>
+          <i class="icn-md icn-edit-tag has-tooltip" ng-click="openEditTagForm(tag.id)"
+             tooltip-placement="top" tooltip="edit label"></i>
 
-      <a href="javascript:void(0)" ng-click="openEditTagForm('CREATE_TAG')"
-         ng-disabled="editTagId === 'CREATE_TAG'"
-         ng-class="{'disabled': editTagId === 'CREATE_TAG'}">
-        <span class="tag-color icn-add-new"></span>
-        Create Label
-      </a>
+          <span class="badge badge-gray">{{ tagsCount[tag.id] }}</span>
+        </a>
 
-    </li>
-  </ul>
+        <div ng-if="tag.id === editTagId"
+             ng-controller="quicktech.core.leftPanel.leftPanelEditTagCtrl"
+             ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-edit-tag.tpl.html'"></div>
+
+      </li>
+
+      <li class="edit">
+
+        <div ng-if="editTagId === 'CREATE_TAG'"
+             ng-controller="quicktech.core.leftPanel.leftPanelEditTagCtrl"
+             ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-edit-tag.tpl.html'"></div>
+
+        <a href="javascript:void(0)" ng-click="openEditTagForm('CREATE_TAG')"
+           ng-hide="editTagId === 'CREATE_TAG'">
+          <i class="icn-md pull-left icn-add-new"></i> Create Label
+        </a>
+      </li>
+    </ul>
+
+  </nav>
 </div>
