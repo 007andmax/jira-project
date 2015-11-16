@@ -8,12 +8,38 @@
         restrict: 'A',
         link: function (scope, element, attrs) {
 
+          var windowWidth;
+
+          initLeftPanel();
+
+          $(window).on('resize', initLeftPanel)
+
+          function initLeftPanel() {
+            windowWidth = $(window).width()
+
+            if (windowWidth > 2299) {
+
+              element.addClass('opened');
+              element.css("box-shadow", "none");
+
+              element.find('.qt-sidebar-scroll').nanoScroller();
+
+            } else {
+              element.removeClass('opened');
+            }
+          }
+
           element.hover(function () {
-            element.addClass('opened');
-            element.find('.qt-sidebar-scroll').nanoScroller();
+            if (!(windowWidth > 2299)) {
+              element.addClass('opened');
+              element.find('.qt-sidebar-scroll').nanoScroller();
+            }
           }, function () {
-            element.removeClass('opened');
+            if (!(windowWidth > 2299)) {
+              element.removeClass('opened');
+            }
           })
+
         }
       }
     }]);
