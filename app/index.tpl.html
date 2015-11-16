@@ -46,17 +46,17 @@
   <link rel="stylesheet" href="styles/vendors.css"/>
 
   <!--<script type="text/javascript">-->
-    <!--if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {-->
-      <!--document.querySelector('[href*="styles/firefox."]').remove();-->
-      <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
-      <!--document.querySelector('[href*="styles/ie."]').remove();-->
+  <!--if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {-->
+  <!--document.querySelector('[href*="styles/firefox."]').remove();-->
+  <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
+  <!--document.querySelector('[href*="styles/ie."]').remove();-->
 
-    <!--} else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);-->
-      <!--document.querySelector('[href*="styles/firefox."]').remove();-->
-      <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
-    <!--} else if (!(window.ActiveXObject || "ActiveXObject" in window)) {-->
-      <!--document.querySelector('[href*="styles/ie."]').remove();-->
-    <!--}-->
+  <!--} else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);-->
+  <!--document.querySelector('[href*="styles/firefox."]').remove();-->
+  <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
+  <!--} else if (!(window.ActiveXObject || "ActiveXObject" in window)) {-->
+  <!--document.querySelector('[href*="styles/ie."]').remove();-->
+  <!--}-->
   <!--</script>-->
 
   <script type="text/javascript">
@@ -70,7 +70,7 @@
   </script>
 
   <style type="text/css">
-    body{
+    body {
       min-width: 1010px;
     }
   </style>
@@ -82,34 +82,42 @@
 
 <aside id="left" qt-sidebar ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
-<aside id="right" class="nano" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'">
+<aside id="right" class="nano" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
-</aside>
+<div class="main-container">
+  <div class="row">
+    <div class="content-container">
+      <div class="content-wrapper">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--&lt;!&ndash;[if lt IE 7]>-->
 <!--<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade-->
-  <!--your browser</a> to improve your experience.</p>-->
+<!--your browser</a> to improve your experience.</p>-->
 <!--<![endif]&ndash;&gt;-->
 <!--<div id="loading" class="alert-wrapper" user-notification>-->
-  <!--<center class="animator stop">-->
-    <!--<div class="alert alert-yellow" ng-bind="message">Loading ...</div>-->
-  <!--</center>-->
+<!--<center class="animator stop">-->
+<!--<div class="alert alert-yellow" ng-bind="message">Loading ...</div>-->
+<!--</center>-->
 <!--</div>-->
 
 <!--<nav class="navbar navbar-default navbar-fixed-top navbar-main"-->
-     <!--ng-include="'/html/scripts/core/header/header.tpl.html'">-->
+<!--ng-include="'/html/scripts/core/header/header.tpl.html'">-->
 <!--</nav>-->
 <!--<div class="main-container ">-->
-  <!--<div class="row">-->
-    <!--<aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>-->
-    <!--<aside id="rightPanelElement" class="right scroll-pane"-->
-           <!--ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'" qt-scroll-pane></aside>-->
-    <!--<div id="content" class="content-container">-->
-      <!--<div class="content-wrapper">-->
-        <!--<div ui-view></div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+<!--<div class="row">-->
+<!--<aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>-->
+<!--<aside id="rightPanelElement" class="right scroll-pane"-->
+<!--ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'" qt-scroll-pane></aside>-->
+<!--<div id="content" class="content-container">-->
+<!--<div class="content-wrapper">-->
+<!--<div ui-view></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 <!--</div>-->
 

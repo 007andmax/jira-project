@@ -1,36 +1,51 @@
 <div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader
      ng-if="!(listType === 'spam' && currentUser.role !== 'USER')">
-  <div class="ticket-sidebar tickets-list" tu-tickets-container ng-if="listType && listType !== 'preview'">
+  <div class="container-ticket-list pull-left" tu-tickets-container
+       ng-if="listType && listType !== 'preview'">
 
-    <div ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)"
-         ng-controller="quicktech.core.tickets.ticketCtrl">
-      <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+    <div lass="ticket-list">
+      <ul class="tickets">
+        <li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)"
+            ng-controller="quicktech.core.tickets.ticketCtrl"
+            ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
+            ng-click="srefToDetails($event)">
+          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <div ui-view ticket-fixed-header></div>
+  <div class="container-ticket-content has-scrollbar nano" ui-view ticket-fixed-header></div>
 
 </div>
 
 <div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader
      ng-if="listType === 'spam' && currentUser.role !== 'USER'">
-  <div class="ticket-sidebar tickets-list" tu-tickets-container ng-if="listType">
+  <div class="container-ticket-list pull-left" tu-tickets-container ng-if="listType">
 
-    <div  upload-admin-spam="true">
+    <div class="ticket-list" upload-admin-spam="true">
 
-      <div class="spam-msg" ng-show="markedSpamMesage && tickets.length !== 0">Tickets Marked as Spam</div>
+      <ul class="tickets">
 
-      <div ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)"
-           ng-controller="quicktech.core.tickets.ticketCtrl">
-        <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
-      </div>
+        <li class="ticket-type" ng-show="markedSpamMesage && tickets.length !== 0">
+          <small><b>TICKETS MARKED AS SPAM</b></small>
+        </li>
 
-      <div class="spam-msg-default" ng-show="reportedSpamMesage && reportSpamTickets.length !== 0">Tickets Reported as Spam</div>
+        <li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)"
+             ng-controller="quicktech.core.tickets.ticketCtrl">
+          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+        </li>
 
-      <div ng-repeat="ticket in reportSpamTickets" ng-init="onReportedAsSpamTicketRendering($last)"
-           ng-controller="quicktech.core.tickets.ticketCtrl">
-        <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
-      </div>
+        <li class="ticket-type" ng-show="reportedSpamMesage && reportSpamTickets.length !== 0">
+          <small><b>TICKETS REPORTED AS SPAM</b></small>
+        </li>
+
+        <li class="ticket" ng-repeat="ticket in reportSpamTickets" ng-init="onReportedAsSpamTicketRendering($last)"
+             ng-controller="quicktech.core.tickets.ticketCtrl">
+          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+        </li>
+
+      </ul>
     </div>
   </div>
 

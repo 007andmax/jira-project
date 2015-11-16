@@ -1,161 +1,307 @@
-<div class="ticket has-actions"
-     ng-class="{'selected' : selectedTickets[ticket.id], 'completed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
-     ng-click="srefToDetails($event)">
+<div>
 
-  <div class="ui-checkbox ui-checkbox-warning" ng-click="doNotExpandTicket($event)">
+
+  <!--<div class="ui-checkbox ui-checkbox-warning" ng-click="doNotExpandTicket($event)">-->
+  <!--<label class="control checkbox">-->
+  <!--<input type="checkbox" class="ticketBulkSelection"-->
+  <!--ng-model="selectedTickets[ticket.id]" ng-change="changeSelectedTickets(ticket.id, ticket.status)">-->
+  <!--<span class="control-indicator"></span>-->
+  <!--</label>-->
+  <!--</div>-->
+
+  <div class="ticket-checkbox pull-left" ng-click="doNotExpandTicket($event)">
     <label class="control checkbox">
-      <input type="checkbox" class="ticketBulkSelection"
-             ng-model="selectedTickets[ticket.id]" ng-change="changeSelectedTickets(ticket.id, ticket.status)">
+      <input type="checkbox" ng-model="selectedTickets[ticket.id]"
+             ng-change="changeSelectedTickets(ticket.id, ticket.status)">
       <span class="control-indicator"></span>
     </label>
   </div>
 
-  <div class="ticket-meta clearfix">
+  <!--<div class="ticket-meta clearfix">-->
 
-    <div class="ticket-by-and-when clearfix">
+  <!--<div class="ticket-by-and-when clearfix">-->
 
-      <span class="pull-left">{{ getUserName(user) }}
+  <!--<span class="pull-left">{{ getUserName(user) }}-->
+  <!--<span class="dot-sep"></span>-->
+  <!--<span class="company-name">{{ company.name }}</span>-->
+  <!--</span>-->
+
+  <!--<span class="pull-right"> {{ ticket.createdAt | ticketCreateDate }} </span>-->
+
+  <!--<ul class="nav-tags pull-right" ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)">-->
+  <!--<li ng-repeat="tag in ticket.tags">-->
+  <!--<span class="tag-color color{{ tag.color }}" tooltip="{{ tag.name }}" tooltip-placement="top"></span>-->
+  <!--</li>-->
+  <!--</ul>-->
+
+  <!--</div>-->
+
+  <!--<div class="ticket-title clearfix">-->
+
+  <!--<div class="ticket-title-msg">-->
+  <!--<span class="pull-left">{{ ticket.subject }}</span>-->
+  <!--<span class="ticket-excerpt" ng-show="!currentOpeningTicket"> – {{ ticket.previewNote }}</span>-->
+  <!--</div>-->
+
+  <!--<ul class="ticket-action pull-right" ng-click="doNotExpandTicket($event)">-->
+
+  <!--<li class="more left-align dropdown"-->
+  <!--ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">-->
+
+  <!--<a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true" aria-expanded="false"-->
+  <!--tooltip="More Actions" tooltip-placement="top" data-toggle="dropdown">-->
+  <!--<span class="icn-ticket-more icn"></span>-->
+  <!--</a>-->
+
+  <!--<ul class="dropdown-menu" role="menu">-->
+
+  <!--<li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role, false)">-->
+  <!--<a tabindex="-1" href="javascript:void(0)">Change Priority to...</a>-->
+
+  <!--<div class="dropdown-submenu-wrapper">-->
+  <!--<ul class="dropdown-menu dropdown-priority">-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">-->
+  <!--<span class="priority-dot low"></span>-->
+  <!--Low-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">-->
+  <!--<span class="priority-dot medium"></span>-->
+  <!--Medium-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">-->
+  <!--<span class="priority-dot high"></span>-->
+  <!--High-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--</ul>-->
+  <!--</div>-->
+  <!--</li>-->
+
+  <!--<li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">-->
+  <!--<a tabindex="-1" href="javascript:void(0)">Change Status to...</a>-->
+
+  <!--<div class="dropdown-submenu-wrapper">-->
+
+  <!--<ul class="dropdown-menu dropdown-priority">-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketStatus('IN_PROGRESS')">-->
+  <!--In Progress-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketStatus('ON_HOLD')">-->
+  <!--On Hold-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--</ul>-->
+
+  <!--</div>-->
+  <!--</li>-->
+
+  <!--<li>-->
+  <!--<a ng-click="moveIntoSpam()" tabindex="-1" href="javascript:void(0)">-->
+  <!--<span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>-->
+  <!--<span ng-if="currentUser.role === 'USER' ">Report as Spam</span>-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--</li>-->
+
+  <!--<li ng-if="PermissionsService.isDeleteForeverVisible(listType, currentUser.role, ticket)">-->
+  <!--<a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">-->
+  <!--<span class="icn-ticket-del icn"></span>-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role) && !ticket.hasInvoice">-->
+  <!--<a href="javascript:void(0)" tooltip="move to trash" tooltip-placement="top"-->
+  <!--ng-click="moveToTrash(true)">-->
+  <!--<span class="icn-ticket-del icn"></span>-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li ng-if="listType === 'trash'">-->
+  <!--<a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"-->
+  <!--ng-click="moveToTrash(false)">-->
+  <!--<span class="icn-small-ticket-restore icn"></span>-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li ng-if="PermissionsService.isRestoreFromSpamVisible(listType, currentUser.role)">-->
+  <!--<a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"-->
+  <!--ng-click="restoreFromSpam()">-->
+  <!--<span class="icn-small-ticket-restore icn"></span>-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role, ticket.reportedAsSpamAt,  ticket.markedAsSpamAt)">-->
+  <!--<a href="javascript:void(0);" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"-->
+  <!--tooltip-placement="top" ng-click="moveIntoSpam()">-->
+  <!--<span class="icn-ticket-spam icn"></span>-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li class=" left-align" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, true)">-->
+  <!--<a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true"-->
+  <!--aria-expanded="false" data-toggle="dropdown"-->
+  <!--tooltip="Change Priority to..." tooltip-placement="top">-->
+
+  <!--<span class="icn icn-ticket-priority"></span>-->
+  <!--</a>-->
+
+  <!--<ul class="dropdown-menu dropdown-priority" role="menu">-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">-->
+  <!--<span class="priority-dot low"></span>-->
+  <!--Low-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">-->
+  <!--<span class="priority-dot medium"></span>-->
+  <!--Medium-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--<li>-->
+  <!--<a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">-->
+  <!--<span class="priority-dot high"></span>-->
+  <!--High-->
+  <!--</a>-->
+  <!--</li>-->
+
+  <!--</ul>-->
+  <!--</li>-->
+
+  <!--<li class="left-align" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">-->
+  <!--<a href="javascript:void(0)" class="tooltip-dp" href="javascript:void(0)"-->
+  <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="isShowAssignUser = true"-->
+  <!--tooltip="assign ticket to..." tooltip-placement="top">-->
+
+  <!--<span class="icn-ticket-assign icn"></span>-->
+  <!--</a>-->
+
+  <!--<div class="dropdown-menu" stop-propagation="click" ng-if="isShowAssignUser"-->
+  <!--assign-user-button aub-ticket-id="ticket.id"-->
+  <!--ticket-assigned-user-id="ticket.assignedUser.id"-->
+  <!--aub-ticket-number="ticket.number"-->
+  <!--users="usersCurrentCompany"-->
+  <!--aub-current-user="currentUser">-->
+  <!--</div>-->
+
+  <!--</li>-->
+
+  <!--<li class="left-align" ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">-->
+  <!--<a class="dropdown-toggle tooltip-dp" href="javascript:void(0)" tooltip="Label as..."-->
+  <!--tooltip-placement="top" data-toggle="dropdown" aria-haspopup="true"-->
+  <!--aria-expanded="false" ng-click="setTicketTags()">-->
+  <!--<span class="icn-ticket-label icn"></span>-->
+  <!--</a>-->
+
+  <!--<ul class="tag-list dropdown-menu" role="menu" stop-propagation="click"-->
+  <!--ng-controller="quicktech.core.tickets.ticketTagsCtrl"-->
+  <!--ng-init="ticketId = ticket.id; ticketNumber = ticket.number; ticketTagsUntilApply = ticket.tags"-->
+  <!--ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">-->
+  <!--</ul>-->
+  <!--</li>-->
+
+  <!--<li ng-if="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">-->
+  <!--<a ng-click="claimTicket()" href="javascript:void(0)"-->
+  <!--tooltip="Claim Ticket" tooltip-placement="top">-->
+  <!--<span class="icn-small-ticket-claim icn"></span>-->
+  <!--</a>-->
+  <!--</li>-->
+  <!--</ul>-->
+
+  <!--<a ng-if="ticket.hasAttachments==true" href="javascript:void(0)" class="icn-ticket-attachment pull-right"></a>-->
+  <!--</div>-->
+
+  <!--<div class="ticket-actions">-->
+  <!--<div class="ticket-priority ">-->
+  <!--<span class="icn-priority {{ ticket.priorityLevel.toLowerCase() }}"-->
+  <!--tooltip="{{ ticket.priorityLevel }}" tooltip-placement="top"></span>-->
+  <!--</div>-->
+
+  <!--<div class="ticket-status" ng-if="PermissionsService.isStatusVisible(listType, currentUser.role) && ticket.status">-->
+  <!--<span class="icns icn-status-{{ ticketStatusToCssFormat(ticket.status) }}"-->
+  <!--tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top"></span>-->
+  <!--</div>-->
+
+  <!--<span ng-if="PermissionsService.isInitialsVisible(listType, currentUser.role) && (ticket.assignedUser && ticket.assignedUser.id)"-->
+  <!--class="label label-default label-ticket-assign-user tooltip-dp"-->
+  <!--tooltip="{{ getUserName(assignedUser) }}" tooltip-placement="top">-->
+  <!--{{ assignedUser.initials }}-->
+  <!--</span>-->
+
+  <!--<span class="label label-default label-ticket-number">{{ ticket.number }}</span>-->
+  <!--<span class="icn-load-green pull-right animation-hide" ng-show="ticket.hasNewUpdates"></span>-->
+  <!--<span class="label label-success pull-right" ng-show="ticket.unread">-->
+  <!--new-->
+  <!--</span>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <div class="ticket-meta">
+
+    <div class="ticket-list-header clearfix">
+
+      <p class="pull-left text-muted ellipsis">{{ getUserName(user) }}
         <span class="dot-sep"></span>
         <span class="company-name">{{ company.name }}</span>
-      </span>
+      </p>
 
-      <span class="pull-right"> {{ ticket.createdAt | ticketCreateDate }} </span>
+      <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
 
-      <ul class="nav-tags pull-right" ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)">
+      <ul class="ticket-tags pull-right"
+          ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)">
         <li ng-repeat="tag in ticket.tags">
-          <span class="tag-color color{{ tag.color }}" tooltip="{{ tag.name }}" tooltip-placement="top"></span>
+          <span class="tag-color color{{ tag.color }} persistent-tooltip"
+                tooltip="{{ tag.name }}" tooltip-placement="top">
+          </span>
         </li>
       </ul>
 
     </div>
 
     <div class="ticket-title clearfix">
+      <p class="pull-left ellipsis"><strong>{{ ticket.subject }}</strong>
+        <span class="text-muted">&nbsp;–&nbsp;{{ ticket.previewNote }}</span>
+      </p>
 
-      <div class="ticket-title-msg">
-        <span class="pull-left">{{ ticket.subject }}</span>
-        <span class="ticket-excerpt" ng-show="!currentOpeningTicket"> – {{ ticket.previewNote }}</span>
-      </div>
+      <ul class="ticket-actions pull-right" ng-click="doNotExpandTicket($event)">
 
-      <ul class="ticket-action pull-right" ng-click="doNotExpandTicket($event)">
-
-        <li class="more left-align dropdown"
-            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
-
-          <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true" aria-expanded="false"
-             tooltip="More Actions" tooltip-placement="top" data-toggle="dropdown">
-            <span class="icn-ticket-more icn"></span>
-          </a>
-
-          <ul class="dropdown-menu" role="menu">
-
-            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangePriorityToVisible(listType, currentUser.role, false)">
-              <a tabindex="-1" href="javascript:void(0)">Change Priority to...</a>
-
-              <div class="dropdown-submenu-wrapper">
-                <ul class="dropdown-menu dropdown-priority">
-
-                  <li>
-                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">
-                      <span class="priority-dot low"></span>
-                      Low
-                    </a>
-                  </li>
-
-                  <li>
-                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">
-                      <span class="priority-dot medium"></span>
-                      Medium
-                    </a>
-                  </li>
-
-                  <li>
-                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">
-                      <span class="priority-dot high"></span>
-                      High
-                    </a>
-                  </li>
-
-                </ul>
-              </div>
-            </li>
-
-            <li class="dropdown-submenu left-align" ng-if="PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
-              <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
-
-              <div class="dropdown-submenu-wrapper">
-
-                <ul class="dropdown-menu dropdown-priority">
-
-                  <li>
-                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketStatus('IN_PROGRESS')">
-                      In Progress
-                    </a>
-                  </li>
-
-                  <li>
-                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketStatus('ON_HOLD')">
-                      On Hold
-                    </a>
-                  </li>
-
-                </ul>
-
-              </div>
-            </li>
-
-            <li>
-              <a ng-click="moveIntoSpam()" tabindex="-1" href="javascript:void(0)">
-                <span ng-if="currentUser.role !== 'USER' ">Mark as Spam</span>
-                <span ng-if="currentUser.role === 'USER' ">Report as Spam</span>
-              </a>
-            </li>
-
-            <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
-              <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
-            </li>
-          </ul>
-        </li>
-
-        <li ng-if="PermissionsService.isDeleteForeverVisible(listType, currentUser.role, ticket)">
-          <a href="javascript:void(0)" ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
-            <span class="icn-ticket-del icn"></span>
+        <li class="pull-left" ng-if="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">
+          <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+             tooltip="Claim Ticket" tooltip-placement="top" ng-click="claimTicket()">
+            <i class="icn-sm icn-ticket-claim-small"></i>
           </a>
         </li>
 
-        <li ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role) && !ticket.hasInvoice">
-          <a href="javascript:void(0)" tooltip="move to trash" tooltip-placement="top"
-             ng-click="moveToTrash(true)">
-            <span class="icn-ticket-del icn"></span>
-          </a>
-        </li>
+        <li class="pull-left" dropdown
+            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, true)">
 
-        <li ng-if="listType === 'trash'">
-          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
-             ng-click="moveToTrash(false)">
-            <span class="icn-small-ticket-restore icn"></span>
-          </a>
-        </li>
-
-        <li ng-if="PermissionsService.isRestoreFromSpamVisible(listType, currentUser.role)">
-          <a href="javascript:void(0)" tooltip="Restore" tooltip-placement="top"
-             ng-click="restoreFromSpam()">
-            <span class="icn-small-ticket-restore icn"></span>
-          </a>
-        </li>
-
-        <li ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role, ticket.reportedAsSpamAt,  ticket.markedAsSpamAt)">
-          <a href="javascript:void(0);" tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam':'Mark As Spam' }}"
-             tooltip-placement="top" ng-click="moveIntoSpam()">
-            <span class="icn-ticket-spam icn"></span>
-          </a>
-        </li>
-
-        <li class=" left-align" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, true)">
-          <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true"
-             aria-expanded="false" data-toggle="dropdown"
+          <a href="javascript:void(0)" class="hit-area ha-14-16 has-tooltip" aria-haspopup="true"
+             aria-expanded="false" data-toggle="dropdown" dropdown-toggle
              tooltip="Change Priority to..." tooltip-placement="top">
-
-            <span class="icn icn-ticket-priority"></span>
+            <i class="icn-sm icn-ticket-flag"></i>
           </a>
 
           <ul class="dropdown-menu dropdown-priority" role="menu">
@@ -182,73 +328,176 @@
             </li>
 
           </ul>
-        </li>
-
-        <li class="left-align" ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
-          <a href="javascript:void(0)" class="tooltip-dp" href="javascript:void(0)"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="isShowAssignUser = true"
-             tooltip="assign ticket to..." tooltip-placement="top">
-
-            <span class="icn-ticket-assign icn"></span>
-          </a>
-
-          <div class="dropdown-menu" stop-propagation="click" ng-if="isShowAssignUser"
-               assign-user-button aub-ticket-id="ticket.id"
-               ticket-assigned-user-id="ticket.assignedUser.id"
-               aub-ticket-number="ticket.number"
-               users="usersCurrentCompany"
-               aub-current-user="currentUser">
-          </div>
 
         </li>
 
-        <li class="left-align" ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
-          <a class="dropdown-toggle tooltip-dp" href="javascript:void(0)" tooltip="Label as..."
-             tooltip-placement="top" data-toggle="dropdown" aria-haspopup="true"
-             aria-expanded="false" ng-click="setTicketTags()">
-            <span class="icn-ticket-label icn"></span>
+        <li class="pull-left" dropdown
+            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
+
+          <a href="javascript:void(0)" class="hit-area has-tooltip" dropdown-toogle
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+             tooltip="assign ticket to..." tooltip-placement="top" ng-click="isShowAssignUser = true">
+            <i class="icn-sm icn-user"></i>
           </a>
 
-          <ul class="tag-list dropdown-menu" role="menu" stop-propagation="click"
+          <div class="dropdown-assign-ticket dropdown-menu"
+               stop-propagation="click" ng-if="isShowAssignUser" assign-user-button
+               aub-ticket-id="ticket.id" ticket-assigned-user-id="ticket.assignedUser.id"
+               aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
+
+        </li>
+
+        <li class="pull-left" dropdown
+            ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
+
+          <a href="javascript:void(0)" class="hit-area has-tooltip" dropdown-toogle
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+             tooltip="Label as..." tooltip-placement="top" ng-click="setTicketTags()">
+            <i class="icn-sm icn-label"></i>
+          </a>
+
+          <ul class="dropdown-labels dropdown-menu"
+              role="menu" stop-propagation="click"
               ng-controller="quicktech.core.tickets.ticketTagsCtrl"
               ng-init="ticketId = ticket.id; ticketNumber = ticket.number; ticketTagsUntilApply = ticket.tags"
               ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
           </ul>
+
         </li>
 
-        <li ng-if="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">
-          <a ng-click="claimTicket()" href="javascript:void(0)"
-             tooltip="Claim Ticket" tooltip-placement="top">
-            <span class="icn-small-ticket-claim icn"></span>
+        <li class="pull-left" dropdown
+            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
+
+          <a href="javascript:void(0)" class="hit-area ha-22-16 has-tooltip" dropdown-toogle
+             aria-haspopup="true" aria-expanded="false"
+             data-toggle="dropdown" tooltip-placement="top" tooltip="More">
+            <i class="icn icn-sm icn-more"></i>
+          </a>
+
+          <ul class="dropdown-menu" role="menu">
+
+            <li class="dropdown-submenu left-align"
+                ng-if="PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
+
+              <a tabindex="-1" href="javascript:void(0)">
+                Change Status to...
+              </a>
+
+              <div class="dropdown-submenu-wrapper">
+                <ul class="dropdown-menu dropdown-priority">
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)"
+                       ng-click="changeTicketStatus('IN_PROGRESS')">
+                      In Progress
+                    </a>
+                  </li>
+
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)"
+                       ng-click="changeTicketStatus('ON_HOLD')">
+                      On Hold
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </li>
+
+            <li ng-click="moveIntoSpam()">
+              <a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role !== 'USER' ">
+                Mark as Spam
+              </a>
+              <a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role === 'USER' ">
+                Report as Spam
+              </a>
+            </li>
+
+            <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">
+                Move to Trash
+              </a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="pull-right" ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role) && !ticket.hasInvoice">
+          <a href="javascript:void(0)" class="hit-area"
+             tooltip="move to trash" tooltip-placement="top" ng-click="moveToTrash(true)">
+            <i class="icn icn-sm icn-delete has-tooltip"></i>
           </a>
         </li>
+
+        <li class="pull-left" ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role, ticket.reportedAsSpamAt,  ticket.markedAsSpamAt)">
+          <a href="javascript:void(0)" class="hit-area has-tooltip"
+             tooltip="Mark As Spam" tooltip-placement="top" ng-click="moveIntoSpam()">
+            <i class="icn-sm icn-report-spam"></i>
+          </a>
+        </li>
+
+        <li class="pull-left" ng-if="listType === 'trash'">
+          <a href="javascript:void(0)" class="hit-area ha-18-16 has-tooltip"
+             tooltip="Restore" tooltip-placement="top" ng-click="moveToTrash(false)">
+            <i class="icn-sm icn-restore"></i>
+          </a>
+        </li>
+
+        <li class="pull-right" ng-if="PermissionsService.isDeleteForeverVisible(listType, currentUser.role, ticket)">
+          <a href="javascript:void(0)" class="hit-area has-tooltip"
+             ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
+            <i class="icn icn-sm icn-delete"></i>
+          </a>
+        </li>
+
+        <li class="pull-left" ng-if="PermissionsService.isRestoreFromSpamVisible(listType, currentUser.role)">
+          <a href="javascript:void(0)" class="hit-area ha-18-16 has-tooltip"
+             tooltip="Restore" tooltip-placement="top" ng-click="restoreFromSpam()">
+            <i class="icn-sm icn-restore"></i>
+          </a>
+        </li>
+
       </ul>
 
-      <a ng-if="ticket.hasAttachments==true" href="javascript:void(0)" class="icn-ticket-attachment pull-right"></a>
+      <a href="javascript:void(0)" class="ticket-list-attachment pull-right"
+         ng-show="ticket.hasAttachments === true">
+        <i class="icn-sm icn-ticket-list-attachment"></i>
+      </a>
+
     </div>
 
-    <div class="ticket-actions">
-      <div class="ticket-priority ">
-        <span class="icn-priority {{ ticket.priorityLevel.toLowerCase() }}"
-              tooltip="{{ ticket.priorityLevel }}" tooltip-placement="top"></span>
-      </div>
+    <div class="ticket-labels">
 
-      <div class="ticket-status" ng-if="PermissionsService.isStatusVisible(listType, currentUser.role) && ticket.status">
-        <span class="icns icn-status-{{ ticketStatusToCssFormat(ticket.status) }}"
-              tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top"></span>
-      </div>
-
-      <span ng-if="PermissionsService.isInitialsVisible(listType, currentUser.role) && (ticket.assignedUser && ticket.assignedUser.id)"
-            class="label label-default label-ticket-assign-user tooltip-dp"
-            tooltip="{{ getUserName(assignedUser) }}" tooltip-placement="top">
-        {{ assignedUser.initials }}
+      <span class="label-icn-lg label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"
+            tooltip="{{ ticket.priorityLevel }} priority" tooltip-placement="top">
+        <label class="priority-flag">
+          <i class="icn-sm icn-priority"></i>
+        </label>
       </span>
 
-      <span class="label label-default label-ticket-number">{{ ticket.number }}</span>
-      <span class="icn-load-green pull-right animation-hide" ng-show="ticket.hasNewUpdates"></span>
-      <span class="label label-success pull-right" ng-show="ticket.unread">
-        new
+      <span class="label-icn-lg label-primary persistent-tooltip"
+            ng-if="PermissionsService.isStatusVisible(listType, currentUser.role) && ticket.status"
+            tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top">
+        <label class="status-{{ ticketStatusToCssFormat(ticket.status) }}">
+          <i class="icn-sm icn-ticket-{{ ticketStatusToCssFormat(ticket.status) }}"></i>
+        </label>
       </span>
+
+      <span class="label-transition label-primary persistent-tooltip"
+            ng-if="PermissionsService.isInitialsVisible(listType, currentUser.role) && (ticket.assignedUser && ticket.assignedUser.id)"
+            tooltip="{{ getUserName(assignedUser) }}" tooltip-placement="top">{{ assignedUser.initials }}</span>
+
+      <span class="label label-primary">{{ ticket.number }}</span>
+
+      <div class="ticket-status pull-right">
+        <span class="label label-info pull-left" ng-show="ticket.unread">NEW</span>
+        <span class="ticket-unread-updates pull-left" ng-show="ticket.hasNewUpdates">
+          <i class="icn icn-sm icn-loading"></i>
+        </span>
+      </div>
+
     </div>
+
   </div>
+
 </div>

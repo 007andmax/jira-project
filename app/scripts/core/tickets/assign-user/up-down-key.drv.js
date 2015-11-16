@@ -9,8 +9,7 @@
         require: 'ngModel',
         link: function (scope, element, attrs, ctrl) {
 
-          var scrollElement = element.find('[scroll-pane]'),
-            scrollPane = scrollElement.data('jsp'),
+          var scrollElement = element.find('.scroll-pane'),
             usersCount;
 
           scope.currentAssignUser = -1;
@@ -51,13 +50,9 @@
 
               scope.$apply("currentAssignUser = " + index);
 
-              var elementPosition = assignUsers.height() * index,
-                visibleFrom = scrollPane.getContentPositionY(),
-                visibleTo = scrollElement.height() + scrollPane.getContentPositionY();
+              var elementPosition = assignUsers.height() * index;
 
-              if (elementPosition <= visibleFrom || elementPosition >= visibleTo) {
-                scrollPane.scrollToY(elementPosition);
-              }
+              scrollElement.nanoScroller({ scrollTop: elementPosition });
 
             }
 

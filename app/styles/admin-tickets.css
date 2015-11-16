@@ -80,28 +80,28 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 .ticket-list{
   position: relative;
 }
-.content-wrapper > .container-ticket-content {
+.content-wrapper  .container-ticket-content {
   display: none;
 }
-.opened-ticket .content-wrapper > .container-ticket-content {
+.opened-ticket .content-wrapper  .container-ticket-content {
   display: block;
   float: right;
   width: 100%;
   padding-bottom: 30px;
 }
-.opened-ticket-list.opened-ticket .content-wrapper > .container-ticket-content {
+.opened-ticket-list.opened-ticket .content-wrapper  .container-ticket-content {
   position: fixed;
   width: calc(100% - 777px);
   height: 100%;
   right: 281px !important;
 }
 @media only screen and (min-width: 1800px){
-  .opened-ticket-list.opened-ticket .content-wrapper > .container-ticket-content {
+  .opened-ticket-list.opened-ticket .content-wrapper  .container-ticket-content {
     width: calc(100% - 897px);
   }
 }
 @media only screen and (min-width: 2300px){
-  .opened-ticket-list.opened-ticket .content-wrapper > .container-ticket-content {
+  .opened-ticket-list.opened-ticket .content-wrapper  .container-ticket-content {
     width: calc(100% - 1221px);
   }
 }

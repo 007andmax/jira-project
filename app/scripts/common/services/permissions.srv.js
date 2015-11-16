@@ -72,12 +72,12 @@
         return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared;
       }
 
-      function isChangePriorityToVisible(listType, userRole, option) {
+      function isChangePriorityToVisible(listType, userRole) {
 
-        var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN) && !option;
-        var isTrueForUser = listType === LIST_TYPES.USER && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN) && option;
-        var isTrueForOpen = listType === LIST_TYPES.OPEN && option;
-        var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN) && option;
+        var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
+        var isTrueForUser = listType === LIST_TYPES.USER && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
+        var isTrueForOpen = listType === LIST_TYPES.OPEN;
+        var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
         return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForShared;
       }
@@ -88,10 +88,11 @@
         var isTrueForUser = listType === LIST_TYPES.USER;
         var isTrueForOpen = listType === LIST_TYPES.OPEN;
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
+        var isTrueForSpam = listType === LIST_TYPES.SPAM;
         var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
 
-        return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared;
+        return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForSpam || isTrueForShared;
       }
 
       function isChangeStatusToVisible(listType, userRole) {
@@ -117,8 +118,9 @@
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
         var isTrueForTrash = listType === LIST_TYPES.TRASH;
         var isTrueForShared = listType === LIST_TYPES.SHARED;
+        var isTrueForSpam = listType === LIST_TYPES.SPAM;
 
-        return isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForTrash || isTrueForShared;
+        return isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForTrash || isTrueForShared || isTrueForSpam;
       }
 
       function isUpdateAndCloseVisible(listType, userRole, ticketStatus) {
@@ -137,8 +139,9 @@
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
         var isTrueForTrash = listType === LIST_TYPES.TRASH;
         var isTrueForShared = listType === LIST_TYPES.SHARED;
+        var isTrueForSpam = listType === LIST_TYPES.SPAM;
 
-        return isTrueForOpen || isTrueForClose || isTrueForTrash || isTrueForShared;
+        return isTrueForOpen || isTrueForClose || isTrueForTrash || isTrueForShared || isTrueForSpam;
       }
 
       function isSendToSpamVisible(listType, userRole) {

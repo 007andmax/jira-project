@@ -10,10 +10,6 @@
         $scope.userToAssign = {};
         $scope.assignToModel = '';
 
-        //if ($stateParams.listType !== 'user' && $scope.ticket.assignedUser && $scope.ticket.assignedUser.id !== $scope.currentUser.id) {
-        //  $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);
-        //}
-
         $scope.setUserToAssign = function (user) {
           $scope.userToAssign = user;
         };
@@ -22,10 +18,6 @@
 
           if (item.id === $scope.currentUser.id) {
             return false;
-          }
-
-          if (!$scope.isBulkOperation) {
-            return item.id !== $scope.ticketAssignedUserId;
           }
 
           if ($scope.assignToModel && $scope.assignToModel.length > 0) {
@@ -38,9 +30,14 @@
 
         $scope.$watch('assignToModel', function (typedUserName) {
 
-          var userName = $scope.getUserName($scope.userToAssign);
+          var userName = $scope.getUserName($scope.userToAssign),
+            currentUserName = $scope.getUserName($scope.currentUser);
 
           if (typedUserName && userName && userName.toLowerCase() === typedUserName.toLowerCase()) {
+            return;
+          }
+
+          if(typedUserName && currentUserName && currentUserName.toLowerCase() === typedUserName.toLowerCase()){
             return;
           }
 

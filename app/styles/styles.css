@@ -6722,8 +6722,8 @@ a.label-icn-lg:focus {
 .label-icn-lg label.priority-flag {
   padding-top: 2px;
 }
-.label-icn-lg > div.status-hold,
-.label-icn-lg label.status-hold {
+.label-icn-lg > div.status-onhold,
+.label-icn-lg label.status-onhold {
   padding-top: 2px;
 }
 .label-icn-lg > div.status-progress,

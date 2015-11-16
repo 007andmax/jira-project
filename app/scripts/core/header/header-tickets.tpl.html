@@ -18,7 +18,8 @@
 
     <div class="topNavbar-filter pull-right">
 
-      <div class="dropdown more pull-right">
+      <div class="dropdown more pull-right"
+           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
 
         <a class="hit-area ha-22-38 has-tooltip" tooltip-placement="bottom" tooltip="More"
            aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
@@ -49,12 +50,13 @@
             </div>
           </li>
 
-          <li ng-if="currentUser.role !== 'USER'" ng-click="moveIntoSpam()">
-            <a tabindex="-1" href="javascript:void(0)">Mark as Spam</a>
+          <li ng-click="moveIntoSpam()">
+            <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.role !== 'USER'">Mark as Spam</a>
+            <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.role === 'USER'">Report as Spam</a>
           </li>
 
-          <li ng-if="currentUser.role === 'USER'" ng-click="moveIntoSpam()">
-            <a tabindex="-1" href="javascript:void(0)">Move to Trash</a>
+          <li ng-if="!sharedState.checkedHasInvoiceTicket && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+            <a tabindex="-1" href="javascript:void(0)" ng-click="moveIntoSpam()">Move to Trash</a>
           </li>
 
         </ul>
@@ -68,7 +70,7 @@
 
         <div class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="Label as..."
-             aria-haspopup="true" data-toggle="dropdown">
+             aria-haspopup="true" data-toggle="dropdown" ng-click="createTagsMatrix()">
           <i class="icn-sm icn-label"></i>
         </div>
 
@@ -103,81 +105,19 @@
         </ul>
       </div>
 
-      <div class="dropdown pull-right">
+      <div class="dropdown pull-right"
+           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
 
         <div class="btn btn-default has-tooltip"
-             data-placement="bottom" title="assign ticket to..."
-             aria-haspopup="true" data-toggle="dropdown">
+             tooltip-placement="bottom" tooltip="assign ticket to..."
+             aria-haspopup="true" data-toggle="dropdown" ng-click="isShowAssignUser = true">
           <i class="icn-sm icn-user"></i>
         </div>
 
-        <div class="dropdown-assign-ticket dropdown-menu">
-          <div class="assign-ticket-content">
-            <div class="assign-ticket-header">
-              <div class="clearfix">
-                <div class="form-group">
-                  <input id="settings-tokenfield" type="email" class="form-control tokenfield" placeholder="Add agent"
-                         data-limit="1" value=""/>
-
-                  <div class="label-add-btn">
-                    <div class="btn input-btn-cr btn-success  btn-add-more pull-left disabled"><i
-                      class="icn-sm small-icn-tick"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="scroll-pane">
-              <ul class="users-list custom-scroll" style="height:204px;">
-                <li>
-                  <a href="javascript:void(0)" class="pull-left avatar">
-                    <img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26">
-                  </a>
-
-                  <div class="clearfix">
-                    <div class="user-name"><a href="">Jack Sudiacal “jack.sud97@gmail.com”</a></div>
-                  </div>
-                </li>
-                <li class="active">
-                  <a href="javascript:void(0)" class="pull-left avatar">
-                    <img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26">
-                  </a>
-
-                  <div class="clearfix">
-                    <div class="user-name"><a href="">Dylan Fosket “d.fosket@quicktech.com”</a></div>
-                  </div>
-                </li>
-                <li>
-                  <a href="javascript:void(0)" class="pull-left avatar">
-                    <img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26">
-                  </a>
-
-                  <div class="clearfix">
-                    <div class="user-name"><a href="">JA Perez “ja.perez@yahoo.com”</a></div>
-                  </div>
-                </li>
-                <li>
-                  <a href="javascript:void(0)" class="pull-left avatar">
-                    <img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26">
-                  </a>
-
-                  <div class="clearfix">
-                    <div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>
-                  </div>
-                </li>
-                <li>
-                  <a href="javascript:void(0)" class="pull-left avatar">
-                    <img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26">
-                  </a>
-
-                  <div class="clearfix">
-                    <div class="user-name"><a href="">Esther Heesch “est.heesch@gmail.com”</a></div>
-                  </div>
-                </li>
-              </ul>
-
-            </div>
-          </div>
-        </div>
+        <div class="dropdown-assign-ticket dropdown-menu"
+             stop-propagation="click" ng-if="isShowAssignUser" assign-user-button
+             aub-ticket-id="ticket.id" ticket-assigned-user-id="ticket.assignedUser.id"
+             aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
       </div>
 
       <div class="dropdown pull-right"
@@ -213,6 +153,33 @@
           </li>
 
         </ul>
+      </div>
+
+      <div class="pull-right">
+        <div ng-if="listType === 'trash' || listType === 'spam'"
+             class="btn btn-default has-tooltip"
+             tooltip-placement="bottom" tooltip="Delete Forever"
+             ng-click="deleteForever()">
+          <i class="icn-sm icn-delete"></i>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <div class="btn btn-default has-tooltip"
+             tooltip-placement="bottom" tooltip="Move to Trash"
+             ng-click="moveToTrash(true)"
+             ng-if="(listType === 'closed' || sharedState.checkedCompletedTicket) && !sharedState.checkedHasInvoiceTicket">
+          <i class="icn-sm icn-delete"></i>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <div class="btn btn-default"
+             tooltip-placement="bottom" tooltip="Restore"
+             ng-click="restoreTickets()"
+             ng-if="listType === 'trash' || listType === 'spam'">
+          <i class="icn-sm icn-restore"></i>
+        </div>
       </div>
 
     </div>
