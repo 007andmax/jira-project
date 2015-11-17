@@ -6,8 +6,17 @@
       <div class="clearfix">
         <div class="form-group">
 
-          <input type="text" class="form-control tokenfield" data-limit="1"
-                 placeholder="Add agent" ng-model="assignToModel"/>
+            <div class="tokenfield form-control">
+
+              <input type="text" class="form-control tokenfield" ng-model="assignToModel"
+                     data-limit="1" placeholder="Add agent" tabindex="-1" style="margin:-5px 0 0 -4px;width:340px;">
+
+              <div class="token" ng-class="{'hide': !userToAssign.id}" style="top: -33px;">
+                <span class="token-label" style="max-width: 90px;">{{ assignToModel }}</span>
+                <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1" ng-click="assignToModel = ''"></a>
+              </div>
+
+            </div>
 
           <div class="label-add-btn">
             <a href="javascript:void(0)"
