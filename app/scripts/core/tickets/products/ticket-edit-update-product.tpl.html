@@ -1,86 +1,59 @@
-<div class="table-content service-table edit-table edit-product-table pull-left"
-     ng-controller="quicktech.core.tickets.ticketEditUpdateProductCtrl">
-  <span class="icon-update icn-update-product"></span>
-
+<div class="ticket-update-product-edit" ng-controller="quicktech.core.tickets.ticketEditUpdateProductCtrl">
   <form name="updateTicketProduct">
-    <div class="ticket-form-header">
-      <div class="add-product clearfix">
+    <ul class="qt-table">
+      <li>
+        <div class="edit-col1"
+             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productName') || !editProduct.item.versionedId.id}">
+          <div class="dropdown">
+            <input type="text" class="form-control has-dropdown" ng-model="editProduct.item.name "
+                   placeholder="Product" data-toggle="dropdown" aria-expanded="false"
+                   name="productName" ng-required="true">
+            <i class="icn-sm icn-caret-gray"></i>
 
-        <div class="col-1">
-
-          <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(updateTicketProduct, 'productName')}">
-
-            <div ng-messages="updateTicketProduct.productName.$error"
-                 ng-if="isShowingErrors(updateTicketProduct, 'productName')">
-              <div class="qt-error-msg" ng-message="required">Product is required.</div>
-            </div>
-
-            <input type="text" class="form-control form-control-dropdown dropdown-toggle"
-                   name="productName" ng-reqiured="true"
-                   placeholder="Product" value="" data-toggle="dropdown" aria-expanded="false"
-                   ng-model=" editProduct.item.name ">
-
-            <div class="dropdown-menu dropdown-menu-transparent"
+            <div class="dropdown-menu dropdown-product"
                  ng-include="'/html/scripts/core/tickets/products/choose-product-dropdown.tpl.html'"></div>
 
           </div>
         </div>
 
-        <div class="col-2">
-
-          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketProduct, 'productDescription')}">
-
-            <div ng-messages="updateTicketProduct.productDescription.$error"
-                 ng-if="isShowingErrors(updateTicketProduct, 'productDescription')">
-              <div class="qt-error-msg" ng-message="required">Description is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-              <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
-            </div>
-
-            <input type="text" class="form-control" placeholder="Description"
-                   name="productDescription" ng-requierd="true"ng-minlength="3" ng-maxlength="2000"
-                   ng-model="editProduct.description">
-          </div>
+        <div class="edit-col2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productDescription')}">
+          <input type="text" class="form-control" placeholder="Description"
+                 name="productDescription" ng-required="true" ng-minlength="3" ng-maxlength="2000"
+                 ng-model="editProduct.description">
         </div>
 
-        <div class="col-4">
-          <div class="col-wrapper">
-
-            <input type="text" class="form-control" placeholder="Amount" readonly
-                   value="{{ editProduct.item.sale * editProduct.quantity || '' }}">
-          </div>
+        <div class="edit-col3" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">
+          <input type="text" class="form-control" placeholder="Qty"
+                 ng-model="editProduct.quantity" ng-maxlength="10"
+                 name="productQty" ng-required="true"
+                 hard-reset-pattern="numberPattern">
         </div>
 
-        <div class="col-3">
-
-          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketProduct, 'productQty')}">
-
-            <div ng-messages="updateTicketProduct.productQty.$error"
-                 ng-if="isShowingErrors(updateTicketProduct, 'productQty')">
-              <div class="qt-error-msg" ng-message="required">Qty is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">Qty is too large.</div>
-            </div>
-
-            <input type="text" class="form-control" placeholder="Qty"
-                   ng-model="editProduct.quantity" ng-maxlength="10"
-                   name="productQty" ng-required="true"
-                   hard-reset-pattern="numberPattern">
-          </div>
+        <div class="edit-col4">
+          <input type="text" class="form-control" placeholder="Amount" readonly
+                 value="{{ editProduct.item.sale * editProduct.quantity || '' }}">
         </div>
 
-        <div class="edit-table-actions" ng-if="editProduct.id">
+      </li>
+    </ul>
 
-          <a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-             ng-click="setEditExpenseId()">Cancel</a>
+    <div class="ticket-update-edit-actions clearfix" ng-show="editProduct.id">
 
-          <a href="javascript:void(0);" class="btn btn-sr btn-scooter pull-left"
-             ng-click="saveUpdateProduct(updateTicketProduct)">Save Changes</a>
+      <div class="validation-msg pull-left">{{ validationMessage() }}</div>
 
-        </div>
-
-        <div class="clearfix"></div>
+      <div class="btn btn-lg btn-info pull-right"
+           ng-disabled="updateTicketProduct.$invalid || updateTicketProduct.$pristine || productIsSaving"
+           ng-class="{'disabled': updateTicketProduct.$invalid || updateTicketProduct.$pristine || productIsSaving}"
+           ng-click="saveUpdateProduct(updateTicketProduct)">
+        Save Changes
       </div>
-    </div>
-  </form>
 
+      <div class="btn btn-lg btn-primary pull-right"
+           ng-click="setEditExpenseId()">
+        Cancel
+      </div>
+
+    </div>
+
+  </form>
 </div>

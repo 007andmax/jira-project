@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="container-ticket-content has-scrollbar nano" ui-view ticket-fixed-header></div>
+  <div ui-view ticket-fixed-header></div>
 
 </div>
 
@@ -32,7 +32,8 @@
         </li>
 
         <li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)"
-             ng-controller="quicktech.core.tickets.ticketCtrl">
+            ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
+            ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">
           <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
         </li>
 
@@ -41,7 +42,8 @@
         </li>
 
         <li class="ticket" ng-repeat="ticket in reportSpamTickets" ng-init="onReportedAsSpamTicketRendering($last)"
-             ng-controller="quicktech.core.tickets.ticketCtrl">
+            ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
+            ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">
           <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
         </li>
 

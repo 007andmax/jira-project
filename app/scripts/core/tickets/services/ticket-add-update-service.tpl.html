@@ -1,98 +1,76 @@
 <div ng-init="formName = 'addServiceForm' + $id"></div>
 <form name="addServiceForm">
-  <div class="add-service clearfix">
-    <div class="col-1">
 
-      <div class="col-wrapper dropdown"
-           ng-class="{error: isShowingErrors(addServiceForm, 'serviceName')}">
+  <ul class="qt-table">
+    <li>
 
-        <div ng-messages="addServiceForm.serviceName.$error"
-             ng-show="isShowingErrors(addServiceForm, 'serviceName')">
-          <div class="qt-error-msg" ng-message="required">Select service from dropdown.</div>
-          <div class="qt-error-msg error-msg">Please select the service.</div>
+      <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'service')}">
+        <div class="dropdown">
+
+          <input type="text" class="form-control has-dropdown"
+                 name="serviceName"
+                 placeholder="Service" data-toggle="dropdown" aria-expanded="true"
+                 ng-model="serviceNameFilter"/>
+          <i class="icn-sm icn-caret-gray"></i>
+
+          <input type="hidden" name="service" ng-model="serviceExpense.item.versionedId.id" ng-required="true">
+
+
+          <ul class="dropdown-menu dropdown-menu-services">
+
+            <li role="presentation" ng-repeat="service in serviceList | filter: {name: serviceNameFilter} ">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="setNewService(service)">
+                {{ service.name }}
+              </a>
+            </li>
+
+          </ul>
+
         </div>
-
-        <input type="text" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-               placeholder="Service" name="serviceName"
-               placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-               ng-model="serviceExpense.item" ng-required="true"
-               typeahead="serviceList as serviceList.name for serviceList in serviceList | filter:$viewValue:stateComparator | orderBy:'name'"
-               typeahead-min-length="0" typeahead-editable="false"
-               qt-typeahead-show-on-focus ng-trim="false">
       </div>
-    </div>
 
-    <div class="col-2">
+      <div class="col-2" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
 
-      <div class="col-wrapper dropdown"
-           ng-class="{error: isShowingErrors(addServiceForm, 'serviceTime')}">
-
-        <div ng-messages="addServiceForm.serviceTime.$error"
-             ng-show="isShowingErrors(addServiceForm, 'serviceTime')">
-          <div class="qt-error-msg" ng-message="required">Service quantity is required.</div>
-          <div class="qt-error-msg" ng-message="maxlength">quantity is too large.</div>
-        </div>
-
-        <input type="text" class="form-control" ng-model="serviceExpense.quantity"
+        <input type="text" class="form-control" placeholder="Minutes"
+               ng-model="serviceExpense.quantity"
                name="serviceTime" ng-required="true" ng-maxlength="10"
-               aria-expanded="true" placeholder="Hr : Min"
-               hard-reset-pattern="numberPattern">
-
+               aria-expanded="true" hard-reset-pattern="numberPattern"/>
       </div>
-    </div>
 
-    <div class="col-5">
-      <div class="col-wrapper" ng-if="isAddMode">
-        <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-           tooltip="Add More" tooltip-placement="top"
-           ng-click="addService(addServiceForm)">
-          <span class="icn-add"></span>
-        </a>
-      </div>
-    </div>
+      <div class="col-3" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
 
-    <div class="col-5" ng-if="!isAddMode">
-      <div class="col-wrapper">
-        <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-           tooltip="Remove Service" tooltip-placement="top"
-           ng-click="removeService(index)">
-          <span class="icn-remove-update"></span>
-        </a>
-      </div>
-    </div>
-
-    <div class="col-4">
-
-      <div class="col-wrapper"
-           ng-class="{error: isShowingErrors(addServiceForm, 'serviceDate')}">
-
-        <div ng-messages="addServiceForm.serviceDate.$error"
-             ng-if="isShowingErrors(addServiceForm, 'serviceDate')">
-          <div class="qt-error-msg" ng-message="required">Date is required.</div>
-        </div>
-
-        <input type="text" id="datetimepicker1" class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-               ng-model="serviceExpense.date" name="serviceDate" ng-required="true"
-               data-toggle="dropdown" aria-expanded="true" placeholder="Date"
-               datepicker-popup="dd MMM yyyy" is-open="datepickerIsOpened" show-weeks="false"
-               show-button-bar="false" ng-click="datepickerIsOpened = true" ng-required="true">
-      </div>
-    </div>
-    <div class="col-3">
-
-      <div class="col-wrapper" ng-class="{error: isShowingErrors(addServiceForm, 'serviceDescription')}">
-
-        <div ng-messages="addServiceForm.serviceDescription.$error"
-             ng-if="isShowingErrors(addServiceForm, 'serviceDescription')">
-          <div class="qt-error-msg" ng-message="required">Description is required.</div>
-          <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-          <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
-        </div>
-
-        <input type="text" class="form-control service-description"
+        <input type="text" class="form-control" placeholder="Description"
                ng-model="serviceExpense.description" ng-minlength="3" ng-maxlength="2000"
-               name="serviceDescription" ng-required="true" placeholder="Description">
+               name="serviceDescription" ng-required="true"/>
       </div>
-    </div>
-  </div>
+
+      <div class="col-4" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDate')}">
+
+        <div class="dropdown">
+          <input type="text" value="23 Jan 2015" class="form-control has-dropdown"
+                 data-toggle="dropdown" aria-expanded="false" placeholder="Date"
+                 choose-data-dropdown ng-model="serviceExpense.date"
+                 name="serviceData" ng-required="true">
+          <i class="icn-sm icn-caret-gray"></i>
+        </div>
+
+      </div>
+
+      <div class="col-5" ng-if="isAddMode">
+        <span class="btn btn-dark has-tooltip" tooltip-placement="top" tooltip="Add more"
+              ng-click="addService(addServiceForm)">
+          <i class="icn-sm icn-plus"></i>
+        </span>
+      </div>
+
+      <div class="col-5" ng-if="!isAddMode">
+        <span class="btn btn-primary has-tooltip" tooltip-placement="top" tooltip="Remove"
+              ng-click="removeService(index)">
+          <i class="icn-sm icn-remove-token"></i>
+        </span>
+      </div>
+
+    </li>
+  </ul>
+
 </form>

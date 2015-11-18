@@ -102,7 +102,6 @@
 
                 initScrollListener(paramsToSend, scope);
                 $('body').addClass("opened-ticket-list");
-
               });
             }
 
@@ -164,7 +163,7 @@
             function initDropdown() {
 
               var windowWidth = $(window).width(),
-                dropdownMenu = element.find('.dropdown-menu');
+                dropdownMenu = element.find('.dropdown-menu-custom');
 
               if (windowWidth > 1560) {
                 dropdownMenu.removeClass('dropdown-menu-right');

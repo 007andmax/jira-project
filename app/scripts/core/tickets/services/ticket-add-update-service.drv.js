@@ -28,6 +28,9 @@
             };
 
           } else {
+
+            $scope.serviceNameFilter = $scope.serviceExpense.item.name;
+
             $scope.isShowingErrors = function (form, fieldName) {
               return form[fieldName] && !form[fieldName].$valid;
             };
@@ -35,7 +38,26 @@
 
           $scope.addService = function (form) {
             $scope.addServiceFunc(form);
+            $scope.serviceNameFilter = '';
           };
+
+          $scope.setNewService = function (service) {
+            $scope.serviceNameFilter = service.name;
+            $scope.serviceExpense.item = service.staticCopy()
+          };
+
+          $scope.$watch('serviceNameFilter', function () {
+            for (var i = 0; i < $scope.serviceList.length; i++) {
+              if ($scope.serviceNameFilter.toLowerCase() === $scope.serviceList[i].name.toLowerCase()) {
+                $scope.serviceExpense.item = $scope.serviceList[i].staticCopy();
+                return;
+              } else {
+                if ($scope.serviceExpense.item && $scope.serviceExpense.item.versionedId) {
+                  $scope.serviceExpense.item.versionedId.id = undefined;
+                }
+              }
+            }
+          })
 
         }
       };

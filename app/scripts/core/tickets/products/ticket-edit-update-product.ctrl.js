@@ -20,6 +20,8 @@
 
             if (form.$valid) {
 
+              $scope.productIsSaving = true;
+
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -35,6 +37,7 @@
               }, function () {
                 UserNotificationService.show('The ticket update containing a product has been modified', true);
                 $scope.setEditExpenseId();
+                $scope.productIsSaving = false;
               })
             } else {
               $scope.triedToSaveProduct = true;
@@ -45,6 +48,46 @@
           $scope.isShowingErrors = function (form, fieldName) {
             return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
           };
+
+          $scope.validationMessage = function () {
+            if ($scope.updateTicketProduct.$valid) {
+              return;
+            }
+
+            for (var errorKey in $scope.updateTicketProduct.$error) {
+              if (errorKey === 'required') {
+                return requiredMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
+              } else if (errorKey === 'minlength') {
+                return minlengthMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
+              } else if (errorKey === 'maxlength') {
+                return maxlengthMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
+              }
+            }
+          };
+
+          function requiredMessage(fildName) {
+            if (fildName === 'productName') {
+              return 'Product Name is required.'
+            } else if (fildName === 'productDescription') {
+              return 'Product Description is required.'
+            } else if (fildName === 'productQty') {
+              return 'Product Qty is required.'
+            }
+          }
+
+          function maxlengthMessage(fildName) {
+            if (fildName === 'productDescription') {
+              return 'Product Description is too large.'
+            } else if (fildName === 'productQty') {
+              return 'Product Qty is too large.'
+            }
+          }
+
+          function minlengthMessage(fildName) {
+            if (fildName === 'productDescription') {
+              return 'Product Description is too short.'
+            }
+          }
 
         }]);
   }()

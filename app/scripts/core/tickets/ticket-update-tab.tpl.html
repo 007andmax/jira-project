@@ -1,174 +1,248 @@
 <div class="ticket-post-update-wrapper">
 
-  <div role="tabpanel">
+  <div class="btn btn-primary pull-right has-tooltip" ng-disabled="true"
+       tooltip-placement="top" tooltip="Remote Access" style="width: 92px;">
+    <i class="icn-sm icn-remote-access"></i>
+  </div>
 
-    <ul class="nav nav-pills nav-post-update"
-        ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
+  <ul class="nav nav-ticket-add"
+      ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
 
-      <li role="presentation" ng-class="{'active': currentOpenTab === 'NOTE'}">
-        <a href="javascript:void(0)"
-           ng-click="openedTab('NOTE');">
-          <span class="icon-add icn-add-note"></span>
-          Note
-        </a>
-      </li>
-
-      <li role="presentation" ng-class="{'active': currentOpenTab === 'PRODUCT'}">
-        <a href="javascript:void(0)"
-           ng-click="openedTab('PRODUCT');">
-          <span class="icon-add icn-add-product"></span>
-          Product
-        </a>
-      </li>
-
-      <li role="presentation" ng-class="{'active': currentOpenTab === 'SERVICE'}">
-        <a href="javascript:void(0)"
-           ng-click="openedTab('SERVICE');">
-          <span class="icon-add icn-add-service"></span>
-          Service
-        </a>
-      </li>
-
-      <a href="javascript:void(0)" class="btn btn-gray  btn-remote-access pull-right tp-hide disabled"
-         ng-disabled="true"
-         tooltip="Remote Access" tooltip-placement="top">
-        <img src="images/spacer.gif" class="icn-remote-access">
+    <li ng-class="{'active': currentOpenTab === 'NOTE'}">
+      <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('NOTE')">
+        <i class="icn-lg icn-add-note"></i>Note
       </a>
+    </li>
 
-    </ul>
+    <li ng-class="{'active': currentOpenTab === 'PRODUCT'}">
+      <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
+        <i class="icn-lg icn-add-product"></i>Product
+      </a>
+    </li>
 
-    <div class="tab-content">
+    <li ng-class="{'active': currentOpenTab === 'SERVICE'}">
+      <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('SERVICE')">
+        <i class="icn-lg icn-add-service"></i>Service
+      </a>
+    </li>
 
-      <div role="tabpanel" class="tab-pane tab-add-note active"
-           ng-if="currentOpenTab === 'NOTE'"
-           ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
+  </ul>
 
-        <div class="ticket-update clearfix">
+  <div class="tab-content">
 
-          <div class="ticket-updater pull-left">
-            <div class="pull-left avatar-38 avatar m-r">
-              <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">
+    <div class="tab-pane in active" ng-if="currentOpenTab === 'NOTE'"
+         ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
+
+      <div class="ticket-add clearfix">
+
+        <div class="avator pull-left">
+          <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">
+        </div>
+
+        <div class="ticket-add-content clearfix">
+
+          <div ng-include="'/html/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
+
+          <div class="ticket-add-content-actions pull-left">
+
+            <div class="ticket-add-content-actions-attachment pull-left"
+                 ticket-attachment-files attachment-func="addAttachmentFiles"
+                 ng-model="ticketUpdate.ticketAttachments">
+
+              <a href="javascript:void(0)" class="hit-area ha-16-26 has-tooltip"
+                 tooltip="Attach files" tooltip-placement="top">
+                <i class="icn-sm icn-attachment"></i>
+              </a>
+
+              <input type="file" style="display:none" multiple=""/>
             </div>
-          </div>
 
-          <div class="ticket-update-content pull-left">
-            <div class="update-ticket-form-wrapper">
-              <div ng-include="'/html/scripts/core/tickets/note/ticket-add-note.tpl.html'"></div>
+            <div class="line-sep pull-left"></div>
 
-              <div class="ticket-form-footer clearfix">
-                <div ticket-attachment-files attachment-func="addAttachmentFiles"
-                     ng-model="ticketUpdate.ticketAttachments">
+            <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline">
+              <div class="dropdown pull-left">
 
-                  <a href="javascript:void(0)"
-                     class="btn btn-attach pull-left btn-white-gray btn-cr btn-transparent tp-hide"
-                     tooltip="Attach files" tooltip-placement="top">
-                    <span class="icn-add-attachment"></span>
-                  </a>
+                <a href="javascript:void(0)" class="hit-area ha-16-26 pull-left add-users-plus has-tooltip"
+                   tooltip="add users to this update" tooltip-placement="top"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="icn-sm icn-add-update"></i>
+                </a>
 
-                  <input type="file" style="display:none" multiple=""/>
+                <ul class="dropdown-menu dropdown-menu-tabs">
+                  <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
+                </ul>
 
-                </div>
-
-                <div class="line-sep pull-left"></div>
-
-                <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
               </div>
             </div>
 
-            <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+            <div class="ticket-add-content-actions-users pull-left">
+
+              <a ng-repeat="sharedUser in updateSharedUsersList" ng-click="deleteUpdateSharedUser(sharedUser)"
+                 class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
+                 tooltip-html-unsafe="<p class='tooltip-name'>{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</p>
+                                      <span class='tooltip-designation'>{{  getSharedTitle(sharedUser) }}</span>">
+                <img
+                  ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
+                  alt="..." class="img-circle avatar-26">
+                <i class="icn-sm icn-x"></i>
+              </a>
+
+            </div>
 
           </div>
         </div>
+
+        <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+
       </div>
+    </div>
 
-      <div role="tabpanel" class="tab-pane tab-add-product active"
-           ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'PRODUCT'"
-           ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl">
+    <div class="tab-pane in active"
+         ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'PRODUCT'"
+         ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl">
 
-        <div class="ticket-update clearfix">
+      <div class="ticket-add clearfix">
 
-          <div class="ticket-updater pull-left">
-            <div class="pull-left avatar-38 avatar m-r">
-              <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">
-            </div>
-          </div>
+        <div class="avator pull-left">
+          <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">
+        </div>
+        <div class="ticket-add-content clearfix">
 
-          <div class="ticket-update-content pull-left">
-            <div class="update-ticket-form-wrapper">
 
-              <div ng-form="addProductsForm">
-                <div class="ticket-form-header" ng-repeat="productExpense in ticketUpdate.products">
-                  <div ng-model="productExpense"
-                       ticket-add-product
-                       product-categories="productCategories"
-                       remove-product-func="removeProduct"
-                       index="$index"
-                       number-pattern="numberPattern"
-                       show-errors="true"></div>
-                </div>
-              </div>
-
-              <div class="ticket-form-header" ng-model="productExpenseToAdd"
-                   ticket-add-product enable-add-mode="true" add-product-func="addProduct"
-                   remove-product-func="removeProduct"
+          <div ng-form="addProductsForm">
+            <div ng-repeat="productExpense in ticketUpdate.products">
+              <div ng-model="productExpense"
+                   ticket-add-product
                    product-categories="productCategories"
+                   remove-product-func="removeProduct"
+                   index="$index"
                    number-pattern="numberPattern"
-                   show-errors="triedToAddProduct"></div>
+                   show-errors="true"></div>
+            </div>
+          </div>
 
-              <div class="ticket-form-footer clearfix">
-                <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'">
-                </div>
+          <div ng-model="productExpenseToAdd"
+               ticket-add-product enable-add-mode="true" add-product-func="addProduct"
+               remove-product-func="removeProduct"
+               product-categories="productCategories"
+               number-pattern="numberPattern"
+               show-errors="triedToAddProduct"></div>
+
+          <div class="ticket-add-content-actions pull-left">
+
+            <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline">
+
+              <div class="dropdown pull-left">
+
+                <a href="javascript:void(0)" class="hit-area ha-16-26 pull-left add-users-plus has-tooltip"
+                   data-placement="top" title="Add users to this update" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                  <i class="icn-sm icn-add-update"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-tabs">
+                  <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
+                </ul>
+
               </div>
             </div>
 
-            <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+            <div class="ticket-add-content-actions-users pull-left">
+
+              <a ng-repeat="sharedUser in updateSharedUsersList" ng-click="deleteUpdateSharedUser(sharedUser)"
+                 class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
+                 tooltip-html-unsafe="<p class='tooltip-name'>{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</p>
+                                      <span class='tooltip-designation'>{{  getSharedTitle(sharedUser) }}</span>">
+                <img
+                  ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
+                  alt="..." class="img-circle avatar-26">
+                <i class="icn-sm icn-x"></i>
+              </a>
+
+            </div>
+
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Total amount </span>
+              <strong>{{ productTotalAmount | currency }}</strong>
+            </div>
 
           </div>
         </div>
+
+        <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+
       </div>
+    </div>
 
-      <div role="tabpanel" class="tab-pane tab-add-service active"
-           ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'SERVICE'"
-           ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
+    <div class="tab-pane in active"
+         ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'SERVICE'"
+         ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl">
 
-        <div class="ticket-update clearfix">
+      <div class="ticket-add clearfix">
 
-          <div class="ticket-updater pull-left">
-            <div class="pull-left avatar-38 avatar m-r">
-              <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle">
-            </div>
-          </div>
+        <div class="avator pull-left">
+          <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">
+        </div>
 
-          <div class="ticket-update-content pull-left">
-            <div class="update-ticket-form-wrapper">
+        <div class="ticket-add-content clearfix">
 
-              <div ng-form="addServicesForm">
-                <div class="ticket-form-header" ng-repeat="serviceExpense in ticketUpdate.services">
-                  <div ng-model="serviceExpense"
-                       ticket-add-service
-                       service-list="serviceList"
-                       remove-service-func="removeService"
-                       number-pattern="numberPattern"
-                       index="$index"
-                       show-errors="true"></div>
-                </div>
-              </div>
-
-              <div class="ticket-form-header" ng-model="serviceExpenseToAdd"
-                   ticket-add-service enable-add-mode="true" add-service-func="addService"
-                   remove-service-func="removeService"
+          <div ng-form="addServicesForm">
+            <div ng-repeat="serviceExpense in ticketUpdate.services">
+              <div ng-model="serviceExpense"
+                   ticket-add-service
                    service-list="serviceList"
+                   remove-service-func="removeService"
                    number-pattern="numberPattern"
-                   show-errors="triedToAddService"></div>
+                   index="$index"
+                   show-errors="true"></div>
+            </div>
+          </div>
 
-              <div class="ticket-form-footer clearfix">
-                <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
+          <div ng-model="serviceExpenseToAdd"
+               ticket-add-service enable-add-mode="true" add-service-func="addService"
+               remove-service-func="removeService"
+               service-list="serviceList"
+               number-pattern="numberPattern"
+               show-errors="triedToAddService"></div>
+
+          <div class="ticket-add-content-actions pull-left">
+
+            <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline">
+              <div class="dropdown pull-left">
+
+                <a href="javascript:void(0)" class="hit-area ha-16-26 pull-left add-users-plus has-tooltip"
+                   tooltip-placement="top" tooltip="Add users to this update" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                  <i class="icn-sm icn-add-update"></i>
+                </a>
+
+                <ul id="myTabs" class="dropdown-menu dropdown-menu-tabs">
+                  <div ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
+                </ul>
+
               </div>
             </div>
-            <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+
+            <div class="ticket-add-content-actions-users pull-left">
+
+              <a ng-repeat="sharedUser in updateSharedUsersList" ng-click="deleteUpdateSharedUser(sharedUser)"
+                 class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
+                 tooltip-html-unsafe="<p class='tooltip-name'>{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</p>
+                                      <span class='tooltip-designation'>{{  getSharedTitle(sharedUser) }}</span>">
+                <img
+                  ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
+                  alt="..." class="img-circle avatar-26">
+                <i class="icn-sm icn-x"></i>
+              </a>
+
+            </div>
+
           </div>
         </div>
       </div>
+
+      <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+
     </div>
   </div>
 </div>

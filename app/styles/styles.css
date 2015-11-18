@@ -4514,7 +4514,7 @@ tbody.collapse.in {
 }
 /* Dropdown Time - End */
 /* Dropdown Product - Start*/
-.dropdown-product > .dropdown-menu {
+.dropdown-product .dropdown-menu {
   display: block;
 }
 .dropdown-product {
@@ -8730,4 +8730,15 @@ select.mobile-device {
   width: 100%;
   height: 100% !important;
   opacity: 0;
+}
+.animation-hide.ng-hide-add {
+  -webkit-transition: all linear 3s;
+}
+
+.animation-hide.ng-hide-add.ng-hide-add-active, .animation-hide.ng-hide-remove {
+  opacity: 0;
+}
+
+.animation-hide.ng-hide-add, .animation-hide.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
 }

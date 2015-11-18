@@ -16,12 +16,18 @@
 
             scope.$on('ticketDetailsLoad', function () {
               element.fadeIn(1500, function () {
-                element.css("position", "fixed");
+                element.nanoScroller({
+                  alwaysVisible: false,
+                  flash: true,
+                  flashDelay: 1000,
+                  sliderMinHeight: 98
+                });
               });
             });
 
             scope.$on('$destroy', function () {
               body.removeClass('opened-ticket');
+              body.addClass('opened-ticket-list');
             });
 
             scope.scrollToFirstUpdate = function (last) {
@@ -29,19 +35,35 @@
 
                 $timeout(function () {
 
-                  var scrollPane = element.data('jsp'),
+                  var windowHeight = $(window).height(),
                     ticketUpdates = element.find('[std-update]');
 
                   for (var i = 0; i < ticketUpdates.length; i++) {
                     if (scope.firstUnreadUpdateId === ticketUpdates[i].getAttribute('std-update')) {
-                      scrollPane.scrollToElement(ticketUpdates[i], true, true);
+                      element.nanoScroller({ scrollTo: $(ticketUpdates[i]), scrollTop: windowHeight});
                       return;
                     }
                   }
 
                 }, 2000)
               }
+            };
+
+            controlTicketList();
+            $(window).on('resize', controlTicketList);
+
+            function controlTicketList(){
+              var windowWidth = $(window).width();
+
+              if(windowWidth > 1560){
+                body.addClass("opened-ticket-list");
+                element.addClass('has-scrollbar nano');
+              } else {
+                body.removeClass('opened-ticket-list');
+                element.removeClass('has-scrollbar nano');
+              }
             }
+
           }
         };
       }]);

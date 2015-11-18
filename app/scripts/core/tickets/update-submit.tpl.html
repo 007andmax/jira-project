@@ -1,17 +1,20 @@
-<div class="ticket-actions-footer">
+<div class="ticket-add-footer clearfix">
 
-  <div class="pull-left clearfix" ng-if="!(currentUser.role === 'USER')">
-    <label class="control checkbox">
+  <div class="pull-left" ng-if="!(currentUser.role === 'USER')">
+    <label class="control checkbox pull-left">
       <input type="checkbox" ng-model="ticketUpdate.notifyTicketCreator">
       <span class="control-indicator"></span>
       {{ getUserName(user) }}
     </label>
   </div>
 
-  <a class="btn btn-scooter btn-update pull-right" ng-click="saveTicketUpdate()"
-     ng-class="{ 'disabled': (!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid) && disabledWhenLoadAttachment }"
-     ng-disabled="(!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid) && disabledWhenLoadAttachment"
-     ng-click="saveTicketUpdate()">
-    <div class="icn-send"></div>
-  </a>
+  <div class="pull-right">
+    <div class="btn btn-info"
+         ng-class="{'disabled': (!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid || disabledWhenLoadAttachment)}"
+         ng-disabled="(!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid || disabledWhenLoadAttachment)"
+         ng-click="saveTicketUpdate()">
+      <i class="icn-sm icn-send"></i>
+    </div>
+  </div>
+
 </div>

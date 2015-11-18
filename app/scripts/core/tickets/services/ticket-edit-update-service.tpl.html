@@ -1,99 +1,75 @@
-<div class="table-content service-table edit-table edit-service-table pull-left"
-     ng-controller="quicktech.core.tickets.ticketEditUpdateServiceCtrl">
-  <span class="icon-update icn-update-service"></span>
-
+<div class="ticket-update-service-edit" ng-controller="quicktech.core.tickets.ticketEditUpdateServiceCtrl">
   <form name="updateTicketService">
-    <div class="ticket-form-header">
-      <div class="add-service clearfix">
+    <ul class="qt-table">
+      <li>
 
-        <div class="col-1">
+        <div class="edit-col1" ng-class="{'has-error': !editService.item.versionedId.id}">
+          <div class="dropdown">
 
-          <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(updateTicketService, 'serviceName')}">
+            <input type="text" value="Onsite" class="form-control has-dropdown" placeholder="Service"
+                   data-toggle="dropdown" aria-expanded="false"
+                   name="serviceName" placeholder="Service" data-toggle="dropdown" aria-expanded="true"
+                   ng-model="editService.item.name">
+            <i class="icn-sm icn-caret-gray"></i>
 
-            <div ng-messages="updateTicketService.serviceName.$error"
-                 ng-if="isShowingErrors(updateTicketService, 'serviceName')">
-              <div class="qt-error-msg" ng-message="required">Product is required.</div>
-            </div>
+            <ul class="dropdown-menu dropdown-menu-services">
 
-            <input type="text" name="serviceName" ng-required="true"
-                   class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-                   placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-                   ng-model=" editService.item "
-                   typeahead="companyService as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
-                   typeahead-min-length="0" typeahead-editable="false"
-                   qt-typeahead-show-on-focus ng-trim="false">
+              <li role="presentation"
+                  ng-repeat="companyService in companyServices | filter: {name: editService.item.name}">
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="setNewService(companyService)">
+                  {{ companyService.name }}
+                </a>
+              </li>
+
+            </ul>
           </div>
         </div>
 
-        <div class="col-2">
+        <div class="edit-col2" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
 
-          <div class="col-wrapper dropdown" ng-class="{error: isShowingErrors(updateTicketService, 'serviceTime')}">
+          <input type="text" class="form-control" placeholder="Minutes"
+                 name="serviceTime" ng-required="true"
+                 ng-model="editService.quantity " ng-maxlength="10"
+                 hard-reset-pattern="numberPattern"/>
+        </div>
 
-            <div ng-messages="updateTicketService.serviceTime.$error"
-                 ng-if="isShowingErrors(updateTicketService, 'serviceTime')">
-              <div class="qt-error-msg" ng-message="required">quantity is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">quantity is too large.</div>
-            </div>
+        <div class="edit-col3" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceDescription')}">
 
-            <input type="text" name="serviceTime" ng-required="true"
-                   class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-                   ng-model="editService.quantity " ng-maxlength="10"
-                   aria-expanded="false" placeholder="Hr : Min"
-                   hard-reset-pattern="numberPattern">
+          <input type="text" class="form-control service-description" placeholder="Description"
+                 ng-model="editService.description"
+                 name="serviceDescription" ng-minlength="3" ng-maxlength="2000"
+                 ng-required="true">
+        </div>
 
+        <div class="edit-col4" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
+          <div class="dropdown">
+
+            <input type="text" choose-data-dropdown
+                   class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
+                   placeholder="Date" ng-model="editService.date"
+                   name="serviceData" ng-required="true">
+            <i class="icn-sm icn-caret-gray"></i>
           </div>
         </div>
 
-        <div class="col-4">
+      </li>
+    </ul>
 
-          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketService, 'serviceData')}">
+    <div class="ticket-update-edit-actions clearfix">
 
-            <div ng-messages="updateTicketService.serviceData.$error"
-                 ng-if="isShowingErrors(updateTicketService, 'serviceData')">
-              <div class="qt-error-msg" ng-message="required">Description is required.</div>
-            </div>
+      <div class="validation-msg pull-left">{{ validationMessage() }}</div>
 
-            <input type="text" id="datetimepicker2" name="serviceData" ng-required="true"
-                   class="form-control form-control-dropdown dropdown-toggle has-dropdown"
-                   datepicker-popup="dd MMM yyyy" is-open="datepickerIsOpened" show-weeks="false"
-                   show-button-bar="false" ng-click="datepickerIsOpened = true" ng-required="true"
-                   data-toggle="dropdown" aria-expanded="true" placeholder="Date"
-                   ng-model="editService.date">
-          </div>
-        </div>
-
-        <div class="col-3">
-
-          <div class="col-wrapper" ng-class="{error: isShowingErrors(updateTicketService, 'serviceDescription')}">
-
-            <div ng-messages="updateTicketService.serviceDescription.$error"
-                 ng-if="isShowingErrors(updateTicketService, 'serviceDescription')">
-              <div class="qt-error-msg" ng-message="required">Description is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">Description is too large.</div>
-              <div class="qt-error-msg" ng-message="minlength">Description is too short.</div>
-            </div>
-
-            <input type="text" class="form-control service-description"
-                   ng-model="editService.description"
-                   name="serviceDescription" ng-minlength="3" ng-maxlength="2000"
-                   ng-required="true" placeholder="Description">
-          </div>
-        </div>
-
-        <div class="edit-table-actions">
-
-          <a href="javascript:void(0);" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-             ng-click="setEditExpenseId()">Cancel</a>
-
-          <a href="javascript:void(0);" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-             ng-click="saveUpdateService(updateTicketService)">Save Changes</a>
-
-        </div>
-
-        <div class="clearfix"></div>
-
+      <div class="btn btn-lg btn-info pull-right"
+           ng-disabled="updateTicketService.$invalid || updateTicketService.$pristine || serviceIsSaving"
+           ng-class="{'disabled': updateTicketService.$invalid || updateTicketService.$pristine || serviceIsSaving}"
+           ng-click="saveUpdateService(updateTicketService)">
+        Save Changes
       </div>
+
+      <div class="btn btn-lg btn-primary pull-right" ng-click="setEditExpenseId()">
+        Cancel
+      </div>
+
     </div>
   </form>
-
 </div>
