@@ -3,7 +3,7 @@
   <input type="hidden" ng-model="ticketUpdate.note" ng-maxlength="65000" name="updateNote"/>
 
   <textarea class="form-control" placeholder="Click here to respond to the Ticket"
-       contenteditable="true" ticket-note-fild ng-model="ticketUpdate.note"></textarea>
+            contenteditable="true" ticket-note-fild ng-model="ticketUpdate.note"></textarea>
 
   <div class="form-group">
     <ul class="upload-attachments">
@@ -18,13 +18,16 @@
           <i class="icn-sm icn-remove-token"></i>
         </a>
 
-        <!-- <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload">
+        <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
+           ng-show="file.progress !== 100"
+           tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
           <i class="icn-sm icn-reupload"></i>
-        </a> -->
+        </a>
 
         <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
           <div class="progress-bar" role="progressbar"
-               aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100" ng-style="styleProgressBar(file.progress)">
+               aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
+               ng-style="styleProgressBar(file.progress)">
             <span class="sr-only">{{ file.progress }}% Complete</span>
           </div>
         </div>

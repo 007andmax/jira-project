@@ -5,7 +5,7 @@ aside#left {
   width: 76px;
   height: 100%;
   background-color: #1f2a37;
-  z-index: 1060;
+  z-index: 1039;
 }
 
 aside#left.opened {

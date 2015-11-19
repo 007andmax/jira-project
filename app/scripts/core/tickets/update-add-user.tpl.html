@@ -1,134 +1,151 @@
-<li ng-controller="quicktech.core.tickets.updateAddUserCtrl"
-    ng-show="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)"
-    stop-propagation="click">
+<div class="dropdown pull-left">
 
-  <ul class="nav nav-justified nav-tabs-dropdown" role="tablist">
+  <a href="javascript:void(0)" class="hit-area ha-16-26 pull-left add-users-plus has-tooltip"
+     data-placement="top" title="Add users to this update" data-toggle="dropdown" aria-haspopup="true"
+     aria-expanded="false">
+    <i class="icn-sm icn-add-update"></i>
+  </a>
 
-    <li ng-class="{'active': currentAddUserTab === 'TEAM_MEMBER'}">
-      <a href="javascript:void(0)" role="tab" data-toggle="tab"
-         ng-click="openAddUserTab('TEAM_MEMBER')">
-        Agents
-      </a>
+  <ul class="dropdown-menu dropdown-menu-tabs">
+
+    <li ng-controller="quicktech.core.tickets.updateAddUserCtrl"
+        ng-show="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)"
+        stop-propagation="click">
+
+      <ul class="nav nav-justified nav-tabs-dropdown" role="tablist">
+
+        <li ng-class="{'active': currentAddUserTab === 'TEAM_MEMBER'}">
+          <a href="javascript:void(0)" role="tab" data-toggle="tab"
+             ng-click="openAddUserTab('TEAM_MEMBER')">
+            Agents
+          </a>
+        </li>
+
+        <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
+          <a href="javascript:void(0)" role="tab" data-toggle="tab"
+             ng-click="openAddUserTab('CLIENT_USER')">
+            Client Users
+          </a>
+        </li>
+
+        <li ng-class="{'active': currentAddUserTab === 'VENDOS'}">
+          <a href="javascript:void(0)" role="tab" data-toggle="tab"
+             ng-click="openAddUserTab('VENDOS')">
+            Vendors
+          </a>
+        </li>
+
+      </ul>
+
+      <div class="tab-content">
+
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'">
+
+          <div class="form-group">
+            <input type="text" class="form-control form-control-filter"
+                   placeholder="Search agent..." ng-model="searchFilter.user">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+
+          <div class="scroll-pane">
+            <ul class="users-list custom-scroll">
+
+              <li ng-repeat="agent in agents | filter: filterUpdateUser">
+                <label class="control checkbox">
+
+                  <input type="checkbox" ng-model="selectUpdateSharedUser[agent.id]"
+                         ng-change="addUserToUpdate(agent)">
+
+                  <span class="control-indicator"></span>
+
+                  <a href="" class="pull-left avatar">
+                    <img ng-src="{{ getUserAvatarUrl(getUserById(agent.id)) }}" alt="..." class="img-circle avatar-26">
+                  </a>
+
+                  <span class="user-name">{{ getUserName(getUserById(agent.id), true) }}</span>
+
+                </label>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'">
+
+          <div class="form-group">
+            <input type="text" class="form-control form-control-filter"
+                   placeholder="Search client user..." ng-model="searchFilter.user">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+
+          <div class="scroll-pane">
+            <ul class="users-list custom-scroll">
+
+              <li ng-repeat="client in clients | filter: filterUpdateUser">
+                <label class="control checkbox">
+
+                  <input type="checkbox" ng-model="selectUpdateSharedUser[client.id]"
+                         ng-change="addUserToUpdate(client)">
+
+                  <span class="control-indicator"></span>
+
+                  <a href="" class="pull-left avatar">
+                    <img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}"
+                         alt="..." class="img-circle avatar-26">
+                  </a>
+
+                  <span class="user-name">{{ getUserName(getUserById(client.id), true) }}</span>
+
+                </label>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'">
+
+          <div class="form-group">
+            <input type="text" class="form-control form-control-filter"
+                   placeholder="Search vendor..." ng-model="searchFilter.user">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+
+          <div class="scroll-pane">
+            <ul class="users-list custom-scroll">
+
+              <li ng-repeat="vendor in vendorsContacts | filter: filterUpdateUser">
+                <label class="control checkbox">
+
+                  <input type="checkbox" ng-model="selectUpdateSharedUser[vendor.id]"
+                         ng-change="addContactToUpdate(vendor)">
+
+                  <span class="control-indicator"></span>
+
+                  <a href="" class="pull-left avatar">
+                    <img ng-src="{{ getContactAvatarUrl(vendor) }}"
+                         alt="..." class="img-circle avatar-26">
+                  </a>
+
+                  <span class="user-name">{{ getUserName(vendor) }} "{{ vendor.email }}"</span>
+
+                </label>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
     </li>
-
-    <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
-      <a href="javascript:void(0)" role="tab" data-toggle="tab"
-         ng-click="openAddUserTab('CLIENT_USER')">
-        Client Users
-      </a>
-    </li>
-
-    <li ng-class="{'active': currentAddUserTab === 'VENDOS'}">
-      <a href="javascript:void(0)" role="tab" data-toggle="tab"
-         ng-click="openAddUserTab('VENDOS')">
-        Vendors
-      </a>
-    </li>
-
   </ul>
 
-  <div class="tab-content">
+</div>
 
-    <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'">
 
-      <div class="form-group">
-        <input type="text" class="form-control form-control-filter"
-               placeholder="Search agent..." ng-model="searchFilter.user">
-        <i class="icn-sm icn-search-input" tabindex="-1"></i>
-      </div>
 
-      <div class="scroll-pane">
-        <ul class="users-list custom-scroll">
 
-          <li ng-repeat="agent in agents | filter: filterUpdateUser">
-            <label class="control checkbox">
-
-              <input type="checkbox" ng-model="selectUpdateSharedUser[agent.id]"
-                     ng-change="addUserToUpdate(agent)">
-
-              <span class="control-indicator"></span>
-
-              <a href="" class="pull-left avatar">
-                <img ng-src="{{ getUserAvatarUrl(getUserById(agent.id)) }}" alt="..." class="img-circle avatar-26">
-              </a>
-
-              <span class="user-name">{{ getUserName(getUserById(agent.id), true) }}</span>
-
-            </label>
-          </li>
-
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'">
-
-      <div class="form-group">
-        <input type="text" class="form-control form-control-filter"
-               placeholder="Search client user..." ng-model="searchFilter.user">
-        <i class="icn-sm icn-search-input" tabindex="-1"></i>
-      </div>
-
-      <div class="scroll-pane">
-        <ul class="users-list custom-scroll">
-
-          <li ng-repeat="client in clients | filter: filterUpdateUser">
-            <label class="control checkbox">
-
-              <input type="checkbox" ng-model="selectUpdateSharedUser[client.id]"
-                     ng-change="addUserToUpdate(client)">
-
-              <span class="control-indicator"></span>
-
-              <a href="" class="pull-left avatar">
-                <img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}"
-                     alt="..." class="img-circle avatar-26">
-              </a>
-
-              <span class="user-name">{{ getUserName(getUserById(client.id), true) }}</span>
-
-            </label>
-          </li>
-
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'">
-
-      <div class="form-group">
-        <input type="text" class="form-control form-control-filter"
-               placeholder="Search vendor..." ng-model="searchFilter.user">
-        <i class="icn-sm icn-search-input" tabindex="-1"></i>
-      </div>
-
-      <div class="scroll-pane">
-        <ul class="users-list custom-scroll">
-
-          <li ng-repeat="vendor in vendorsContacts | filter: filterUpdateUser">
-            <label class="control checkbox">
-
-              <input type="checkbox" ng-model="selectUpdateSharedUser[vendor.id]"
-                     ng-change="addContactToUpdate(vendor)">
-
-              <span class="control-indicator"></span>
-
-              <a href="" class="pull-left avatar">
-                <img ng-src="{{ getContactAvatarUrl(vendor) }}"
-                     alt="..." class="img-circle avatar-26">
-              </a>
-
-              <span class="user-name">{{ getUserName(vendor) }} "{{ vendor.email }}"</span>
-
-            </label>
-          </li>
-
-        </ul>
-      </div>
-
-    </div>
-
-  </div>
-</li>

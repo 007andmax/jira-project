@@ -46,6 +46,18 @@
               });
           };
 
+          $scope.reloadAttachment = function (file) {
+            FilesService.create(file,
+              function (progress) {
+                file.progress = 100 * (progress.loaded / progress.total);
+                $scope.$apply();
+              },
+              function (finish) {
+                file.id = finish.id;
+              }, function (error) {
+              });
+          };
+
           $scope.styleProgressBar = function (progress) {
             return {
               width: progress + '%'

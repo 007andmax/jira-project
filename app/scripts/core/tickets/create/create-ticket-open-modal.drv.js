@@ -16,10 +16,9 @@
               }
 
               var modalInstance = $modal.open({
-                animation: false,
-                backdrop: 'static',
                 templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
-                controller: 'quicktech.core.tickets.createTicketCtrl'
+                controller: 'quicktech.core.tickets.createTicketCtrl',
+                windowClass: 'modal-create-ticket'
               });
             });
           }

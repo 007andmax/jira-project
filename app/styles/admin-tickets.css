@@ -7,7 +7,7 @@
       top: 0;
       margin-left: 76px;
       padding: 0;
-      z-index: 1050;
+      z-index: 1038;
       background: transparent;
       box-shadow: 0px 2px 6px 0px rgba(10, 45, 89, 0.15);
 }
@@ -105,3 +105,10 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: calc(100% - 1221px);
   }
 }
+
+.editor[contenteditable][placeholder]:empty:after {  content: attr(placeholder);
+  color: #9fabbb;
+  position: absolute\9;/* IE8 and below */
+  top:0\9;/* IE8 and below */
+  left:0\9;/* IE8 and below */}
+

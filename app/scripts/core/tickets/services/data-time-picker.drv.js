@@ -11,10 +11,11 @@
         link: function (scope, element, attrs, ctrl) {
 
           element.datetimepicker({
+            keepOpen: true,
             format: 'DD MMM YYYY'
           });
 
-          element.bind('dp.change', function(e) {
+          element.bind('dp.change', function (e) {
             ctrl.$setViewValue(e.date._d)
           });
 

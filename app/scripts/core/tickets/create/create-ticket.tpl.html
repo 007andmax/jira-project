@@ -1,212 +1,307 @@
-<div class="modal-create-ticket fade in show">
+<div>
   <form name="ticketForm">
-    <div class="modal-dialog create-ticket">
-      <div class="modal-content">
-        <div class="modal-header clearfix">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                  ng-click="closeCreateTicketForm()">
-            <span aria-hidden="true" class="icn-close-modal"></span></button>
-          <h4 class="modal-title pull-left">Create Ticket <span class="dot-sep"></span></h4><span
-          class="ticket-numer pull-left">TKT# {{ ticketNumber }}</span>
-        </div>
-        <div class="modal-body">
-          <div class="form-group" ng-class="{error: isShowingErrors(ticketForm, 'ticketSubject')}">
-            <div ng-messages="ticketForm.ticketSubject.$error" ng-if="isShowingErrors(ticketForm, 'ticketSubject')">
-              <div class="qt-error-msg" ng-message="required">Subject is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">Subject is too large.</div>
-            </div>
-            <input type="text" class="form-control form-control-subject" placeholder="Subject" name="ticketSubject"
-                   required="true" make-dirty-on-blur
-                   ng-model="ticket.subject" ng-maxlength="300">
-          </div>
-          <div class="form-group" ng-class="{error: isShowingErrors(ticketForm, 'note')}">
-            <div ng-messages="ticketForm.note.$error" ng-if="isShowingErrors(ticketForm, 'note')">
-              <div class="qt-error-msg" ng-message="required">Note is required.</div>
-              <div class="qt-error-msg" ng-message="maxlength">Note is too large.</div>
-            </div>
-            <div text-editor ng-model="ticket.note" te-required="true" te-maxlength="5000" name="note">
-              <div class="scroll-pane create-ticket-scroll" scroll-pane scroll-max-height-px="400">
-                <div class="form-group">
-                  <div te-editor class="editor" contenteditable="true" placeholder="Type your message..."></div>
-                </div>
-                <div class="form-group">
-                  <ul class="note-attachments clearfix">
-                    <li ng-repeat="file in ticketAttachments">
-                      <span class="filename">{{ file.name }}</span>
-                      <span class="filesize">{{ file.size | fileSizeFilter }}</span>
-                      <a href="javascript:void(0)" class="icn-remove-attachment pull-right"
-                         tooltip="Remove file" tooltip-placement="top" ng-click="removeAttachment($index)"></a>
-                      <a href="javascript:void(0)" class="icn-restart-uploading pull-right"
-                         ng-show="file.progress !== 100"
-                         tooltip="Reload file" tooltip-placement="top" ng-click="reloadAttachment(file)"></a>
 
-                      <div class="progress progress-attachment error pull-right" ng-show="file.progress !== 100">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ file.progress }}"
-                             aria-valuemin="0" aria-valuemax="100" ng-style="styleProgressBar(file.progress)">
-                          <span class="sr-only">{{ file.progress }}% Complete</span>
+    <div class="modal-header clearfix">
+      <a href="javascript:void(0)" class="hit-area pull-right" ng-click="closeCreateTicketForm()">
+        <i class="icn-sm icn-remove-token"></i>
+      </a>
+
+      <h4 class="modal-title pull-left">Create Ticket <span class="dot-sep"></span></h4>
+      <span class="ticket-number pull-left">TKT# {{ ticketNumber }}</span>
+
+      <div class="validation-msg pull-left" style="padding-left: 40px;color: rgb(229, 57, 53);margin-top:-2px;">
+        {{ validationMessage(ticketForm) }}
+      </div>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-group" ng-class="{'has-error': ticketForm.ticketSubject.$dirty && !ticket.subject}">
+
+        <input type="text" class="form-control" placeholder="Subject"
+               name="ticketSubject"
+               required="true" make-dirty-on-blur
+               ng-model="ticket.subject">
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': ticketForm.note.$dirty && !ticket.note}"
+           style="margin-bottom: 8px;">
+
+        <div text-editor ng-model="ticket.note" te-required="true" name="note">
+
+          <div te-editor class="form-control editor" contenteditable="true"
+               placeholder="Type your message..." style="min-height: 75px;"></div>
+
+          <div class="form-group">
+            <ul class="upload-attachments">
+              <li ng-repeat="file in ticketAttachments">
+
+                <span class="file-name">{{ file.name }}</span>
+                <span class="file-size">{{ file.size | fileSizeFilter }}</span>
+
+                <a href="javascript:void(0)" class="hit-area pull-right"
+                   tooltip="Remove file" tooltip-placement="top"
+                   ng-click="removeAttachment($index)">
+                  <i class="icn-sm icn-remove-token"></i>
+                </a>
+
+                <a href="javascript:void(0)" class="hit-area pull-right"
+                   ng-show="file.progress !== 100"
+                   tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+                  <i class="icn-sm icn-reupload"></i>
+                </a>
+
+                <div class="progress progress-attachment pull-right" ng-show="file.progress !== 100">
+                  <div class="progress-bar" role="progressbar"
+                       aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100"
+                       ng-style="styleProgressBar(file.progress)">
+                    <span class="sr-only">{{ file.progress }}% Complete</span>
+                  </div>
+                </div>
+
+              </li>
+            </ul>
+          </div>
+
+          <div class="wysiwyg-controls-wrapper clearfix">
+            <div class="control-wrappers pull-left clearfix" data-role="editor-toolbar"
+                 style="width: 318px;">
+
+              <div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="ticketAttachments">
+                <a href="javascript:void(0)" class="pull-left hit-area ha-16-18 has-tooltip"
+                   tooltip-append-to-body="true" tooltip="Attach Files"
+                   tooltip-placement="top">
+                  <i class="icn-sm icn-attachment"></i>
+                </a>
+                <input type="file" style="display:none" multiple=""/>
+              </div>
+
+              <span class="pull-left line-sep"></span>
+
+              <div class="font-styles pull-left">
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="bold"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Bold">
+                  <i class="icn-sm icn-wysiwyg-bold active"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="italic"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Italic">
+                  <i class="icn-sm icn-wysiwyg-italic"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="underline"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Underline">
+                  <i class="icn-sm icn-wysiwyg-underline"></i>
+                </a>
+              </div>
+
+              <div class="text-bullets pull-left">
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="insertorderedlist"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Numbered List">
+                  <i class="icn-sm icn-wysiwyg-ol"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="insertunorderedlist"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Bulleted List">
+                  <i class="icn-sm icn-wysiwyg-ul"></i>
+                </a>
+              </div>
+
+              <div class="text-styles pull-left">
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="justifyleft"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Left Align">
+                  <i class="icn-sm icn-wysiwyg-align-left"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="justifycenter"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Center Align">
+                  <i class="icn-sm icn-wysiwyg-align-center"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="justifyright"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Right Align">
+                  <i class="icn-sm icn-wysiwyg-align-right"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="outdent"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Decrease Indent">
+                  <i class="icn-sm icn-wysiwyg-unindent"></i>
+                </a>
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="indent"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Increase Indent">
+                  <i class="icn-sm icn-wysiwyg-indent"></i>
+                </a>
+              </div>
+
+              <div class="quote-link pull-left">
+
+                <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                   data-edit="cblock"
+                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Quote">
+                  <i class="icn-sm icn-wysiwyg-quote"></i>
+                </a>
+
+                <div class="dropup pull-left">
+
+                  <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
+                     data-toggle="dropdown" data-container="body" data-placement="top" tooltip="Add or Remove Link">
+                    <i class="icn-sm icn-wysiwyg-link"></i>
+                  </a>
+
+                  <ul class="dropdown-menu">
+                    <li>
+                      <div class="add-link-form">
+
+                        <div class="form-group">
+                          <input type="text" placeholder="http://" class="form-control"
+                                 data-edit="createLink" ng-model="ticketEditorLink" ng-change="validateLink()">
                         </div>
+
+                        <div class="form-group">
+                          <div class="btn btn-lg btn-info" ng-disabled="validLink.pattern">Add</div>
+                          <div class="btn btn-lg btn-primary" data-edit="unlink">Cancel</div>
+                        </div>
+
                       </div>
                     </li>
                   </ul>
+
                 </div>
+
               </div>
-              <div class="wysiwyg-controls-wrapper btn-toolbar  clearfix" data-role="editor-toolbar"
-                   data-target="#editor">
-                <div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="ticketAttachments">
-                  <a href="javascript:void(0)" class="pull-left icn-wysiwyg-attachment tp-hide" tooltip="Attach Files"
-                     tooltip-placement="top" type="file">
-                  </a>
-                  <input type="file" style="position:absolute; top:-100px;" multiple=""/>
-                </div>
-                <span class="pull-left line-sep"></span>
+            </div>
 
-                <div class="font-styles pull-left">
-                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-bold " data-edit="bold"
-                     data-toggle="tooltip"
-                     data-placement="top" title="Bold"></a>
-                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-italic " data-edit="italic"
-                     tooltip="Italic" tooltip-placement="top"></a>
-                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-underline  " data-edit="underline"
-                     tooltip="Underline" tooltip-placement="top"></a>
-                </div>
-                <div class="text-bullets pull-left">
-                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-bn " data-edit="insertorderedlist"
-                     tooltip="Numbered List" tooltip-placement="top"></a>
-                  <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-bp " data-edit="insertunorderedlist"
-                     tooltip="Bulleted List" tooltip-placement="top"></a>
-                </div>
+            <a href="javascript:void(0)" class="hit-area ha-14 pull-right disabled has-tooltip"
+               data-edit="removeformat"
+               tooltip-append-to-body="true" tooltip-placement="top" tooltip="Reset Formating">
+              <i class="icn-sm icn-wysiwyg-reset"></i>
+            </a>
 
-                <div class="">
-                  <div class="text-styles pull-left ql-picker-options">
-                    <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-tal" data-edit="justifyleft"
-                       data-value="left"
-                       tooltip="Align Left" tooltip-placement="top"></a>
-                    <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-tac" data-edit="justifycenter"
-                       tooltip="Align Center" tooltip-placement="top"></a>
-                    <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-tar" data-edit="justifyright"
-                       tooltip="Align right" tooltip-placement="top"></a>
-                    <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-iless" data-edit="outdent"
-                       tooltip="Indent less" tooltip-placement="top"></a>
-                    <a href="javascript:void(0)" class="icon pull-left icn-wysiwyg-imore" data-edit="indent"
-                       tooltip="Indent More" tooltip-placement="top"></a>
-                  </div>
-                  <a href="javascript:void(0)" class="pull-left icn-wysiwyg-quote" data-edit="cblock"
-                     tooltip="Quote" tooltip-placement="top"></a>
+          </div>
 
-                  <div class="dropdown">
-                    <a href="javascript:void(0)" class="pull-left icn icn-wysiwyg-link tooltip-dp" data-edit=""
-                       tooltip="Add or Remove Link" tooltip-placement="top" data-toggle="dropdown"></a>
+        </div>
+      </div>
 
-                    <div class="dropdown-menu dropdown-link">
-                      <div class="assign-ticket-header">
-                        <div class="clearfix" ng-class="{error: validLink.required || validLink.pattern}">
-                          <div class="form-group clearfix">
-                            <div class="qt-error-msg" ng-show="validLink.required">Link is required.</div>
-                            <div class="qt-error-msg" ng-show="validLink.pattern && !validLink.required">Please enter a
-                              valid link.
-                            </div>
-                            <input type="text" class="form-control " data-edit="createLink" placeholder="http://"
-                                   ng-model="ticketEditorLink" ng-change="validateLink()">
-                          </div>
-                          <div class="btn-groups clearfix">
-                            <button type="button" class="btn btn-scooter" ng-disabled="validLink.pattern">Add</button>
-                            <button type="button" class="btn btn-gray" data-edit="unlink">Cancel</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+    </div>
 
-                  <a href="javascript:void(0)" class="pull-right icn-wysiwyg-reset" data-edit="removeformat"
-                     tooltip="Reset Formatting" tooltip-placement="top"></a>
-                </div>
-              </div>
+    <div class="modal-footer">
+      <ul class="qt-table">
+        <li>
+
+          <div>
+            <div class="form-group" ng-class="{'has-error': ticketForm.ticketCompany.$dirty && !ticket.company}">
+
+              <label>Company</label>
+
+              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
+                     ng-model="searchCompany" name="ticketCompany" ng-required="true">
+              <ul class="dropdown-menu dropdown-company custom-scroll" role="menu">
+
+                <li ng-repeat="company in clientCompanies | filter: {'name': searchCompany}">
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="chooseCompany(company)">{{ company.name }}</a>
+                </li>
+
+              </ul>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <div class="row-wrapper clearfix">
-            <div class="form-group pull-left" ng-class="{error: isShowingErrors(ticketForm, 'ticketCompany')}">
-              <label>company</label>
 
-              <div ng-messages="ticketForm.ticketCompany.$error" ng-if="isShowingErrors(ticketForm, 'ticketCompany')">
-                <div class="qt-error-msg" ng-message="required">company is required.</div>
-                <div class="qt-error-msg" ng-message="parse">Please select the company.</div>
-              </div>
-              <input type="text"
-                     class="form-control form-control-dropdown form-control-dropdown-company dropdown-toggle"
-                     ng-model="ticketCompany" name="ticketCompany"
-                     typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
-                     typeahead-min-length="0" ng-required="true" typeahead-editable="false"
-                     qt-typeahead-show-on-focus ng-trim="false"
-                     custom-style="{width: '174px', 'max-height': '170px', 'overflow-y': 'scroll'}">
+          <div>
+            <div class="form-group" ng-class="{'has-error': ticketForm.ticketCreated.$dirty && !ticket.createdUser}">
+
+              <label>Created for</label>
+
+              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
+                     ng-model="searchUser" name="ticketCreated" ng-required="true" ng-disabled="!ticket.company">
+
+              <ul class="dropdown-menu dropdown-users custom-scroll" role="menu">
+                <li ng-repeat="user in usersCompany | filter: filterCreatedForUser">
+                  <div class="clearfix" ng-click="chooseUser(user)">
+
+                    <a href="javascript:void(0)" class="pull-left avatar">
+                      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-26">
+                    </a>
+
+                    <div class="user-name">{{ getUserName(user, true) }}</div>
+
+                  </div>
+                </li>
+              </ul>
             </div>
-            <div class="form-group dropdown pull-left created-for"
-                 ng-class="{error: isShowingErrors(ticketForm, 'ticketCreatedUser')}">
-              <label>created for</label>
+          </div>
+          <div>
+            <div class="form-group">
 
-              <div ng-messages="ticketForm.ticketCreatedUser.$error"
-                   ng-if="isShowingErrors(ticketForm, 'ticketCreatedUser')">
-                <div class="qt-error-msg" ng-message="required">created for is reqiured.</div>
-                <div class="qt-error-msg" ng-message="parse">Please select the user.</div>
-              </div>
+              <label>Priority</label>
 
-              <input type="text"
-                     class="form-control form-control-dropdown dropdown-toggle tokenfield form-control-dropdown-user"
-                     ng-model="ticketCreatedUser" name="ticketCreatedUser"
-                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus ng-trim="false" ng-required="true" ng-disabled="!ticketCompany"
-                     custom-style="{width: '382px', 'max-height': '204px', 'overflow-y': 'scroll'}">
-            </div>
+              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
+                     ng-model="ticketPriorityValue[ticket.priorityLevel]" readonly>
 
-            <div class="form-group dropdown  cs-type pull-right prority" ng-model="ticket.priorityLevel"
-                 ng-class="{error: isShowingErrors(ticketForm, 'ticketPriority')}">
-              <label>priority</label>
+              <ul class="dropdown-menu dropdown-priority" role="menu">
 
-              <div ng-messages="ticketForm.ticketPriority.$error" ng-if="isShowingErrors(ticketForm, 'ticketPriority')">
-                <div class="qt-error-msg" ng-message="required">Priority is required.</div>
-              </div>
-              <input type="text" class="form-control  form-control-dropdown dropdown-toggle hide-cursor" value=""
-                     data-toggle="dropdown" aria-expanded="true" ng-model="ticketPriorityValue[ticket.priorityLevel]"
-                     name="ticketPriority" required="true" READONLY>
-
-              <ul class="dropdown-menu dropdown-priority">
                 <li ng-repeat="(priority, label) in ticketPriorityValue" ng-click="ticket.priorityLevel = priority">
                   <a tabindex="-1" href="javascript:void(0)">
                     <span class="priority-dot {{ label.toLowerCase() }}"></span>{{ label }}
                   </a>
                 </li>
+
+              </ul>
+
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div>
+            <div class="form-group">
+
+              <label>Assign to</label>
+
+              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
+                     ng-model="ticketAssignTo">
+
+              <ul class="dropdown-menu dropdown-users custom-scroll" role="menu">
+
+                <li ng-repeat="assignedUser in usersCurrentCompany | filter: filterAssignedToUser"
+                    ng-click="chooseAssignedUser(assignedUser)">
+                  <div class="clearfix">
+
+                    <a href="javascript:void(0)" class="pull-left avatar">
+                      <img ng-src="{{ getUserAvatarUrl(assignedUser) }}" alt="..." class="img-circle avatar-26">
+                    </a>
+
+                    <div class="user-name">{{ getUserName(assignedUser, true) }}</div>
+
+                  </div>
+                </li>
+
               </ul>
             </div>
           </div>
-          <div class="row-wrapper clearfix">
-            <div class="form-group dropdown pull-left"
-                 ng-class="{error: isShowingErrors(ticketForm, 'ticketAssignTo')}">
-              <label>assign to</label>
 
-              <div ng-messages="ticketForm.ticketAssignTo.$error" ng-if="isShowingErrors(ticketForm, 'ticketAssignTo')">
-                <div class="qt-error-msg" ng-message="choose">Please select the user.</div>
-              </div>
-              <input type="text" class="form-control form-control-dropdown dropdown-toggle"
-                     ng-model="ticketAssignTo" name="ticketAssignTo"
-                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
-                     qt-typeahead-show-on-focus assign-to-validation ng-required="false"
-                     custom-style="{width: '382px', 'max-height': '204px', 'overflow-y': 'scroll'}">
-            </div>
+          <div></div>
 
-            <div class="form-group actions-wrapper pull-right">
-              <button type="button" class="btn btn-gray" data-dismiss="modal" ng-click="closeCreateTicketForm()">
+          <div>
+            <div class="actions-wrapper" style="width: 171px;bottom: 0px;">
+
+              <div class="btn btn-lg btn-primary" data-dismiss="modal"
+                   ng-click="closeCreateTicketForm()">
                 Cancel
-              </button>
-              <button type="button" class="btn btn-scooter" ng-click="saveTicket(ticketForm)"
-                      ng-disabled="triedToSaveTicket && (!ticketForm.$valid || savingInProcess)">Create
-              </button>
+              </div>
+
+              <div class="btn btn-lg btn-info" ng-click="saveTicket(ticketForm)"
+                   ng-disabled="ticketForm.$invalid || ticketForm.$pristine || savingInProcess">
+                Create
+              </div>
+
             </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </form>
 </div>
+
