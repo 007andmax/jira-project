@@ -1,0 +1,43 @@
+/*.ticket-content {
+    float: right;
+    width: 65%;
+    height: 100%;
+}
+body.opened-ticket .ticket-content {
+    display: block;
+    position: fixed;
+    float: right;
+    right: 281px;
+    background: #fff;
+}
+.ticket-sidebar {
+    float: left;
+    width: 100%;
+    transition: .3s all ease-in;
+}
+body.opened-ticket .content-wrapper .ticket-sidebar .ticket-list-scroll{
+  position:fixed;
+  width: calc(35% - 140px);    
+  height: 100%;
+  overflow-x:visible !important;
+}
+body.opened-ticket .ticket-sidebar {
+    width: 35%;
+    position: relative;
+    margin-top: -1px;
+    border-right: 1px solid #e7ecf2;
+}
+
+@media (max-width: 1820px){
+    body.opened-ticket .ticket-sidebar {
+        width: 100%;
+        display: none;
+    }
+
+    body.opened-ticket .ticket-content {
+        width: 100%;
+        display: block;
+        border-left: none;
+        border-bottom: 1px solid #e7ecf2;
+    }
+}*/

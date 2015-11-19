@@ -1,0 +1,265 @@
+/*Tickets and Ticket List Setting - Start*/
+.ticket-list{
+    padding: 20px 30px;
+}
+.content-wrapper .ticket-list{
+    padding: 0;
+}
+.tickets{
+    padding: 0;
+    margin: 0;
+}
+.ticket {
+    list-style: none;
+    background-color: #fff;
+    min-height: 135px;
+    padding-top: 29px;
+    padding-right: 30px;
+    position: relative;
+    border-bottom: 1px #e7ecf2 solid;
+    cursor: pointer;
+}
+.ticket:first-child{
+    padding-top: 30px;
+    min-height: 136px;
+}
+
+.ticket-type {
+    list-style: none;
+    background-color: #f1f5fa;
+    min-height: 54px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 16px;
+    border: 1px #e7ecf2 solid;
+}
+.ticket-loading {
+    list-style: none;
+    background-color: #f1f5fa;
+    min-height: 78px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 33px 0;
+}
+
+/*Tickets and Ticket List Setting - End*/
+
+/*Ticket States - Start*/
+.ticket.closed{
+    background-color: #f1f5fa;
+}
+.ticket.active{
+    background-color: #e7ecf2;
+}
+.ticket.selected{
+    background-color: #e2f1fd;
+}
+/*Ticket States - End*/
+
+/*Ticket Hover - Start*/
+.ticket:before, .ticket:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: transparent;
+    content: '';
+}
+.ticket:hover:before {
+    left: 0;
+    background-color: #e7ecf2;
+}
+.ticket:hover:after {
+    right: 0;
+    background-color: #e7ecf2;
+}
+/*Ticket Hover - End*/
+
+/*Ticket Hover Action Ellipse - Start*/
+@media only screen and (max-width: 1800px){
+  body.opened-ticket-list .ticket .ticket-meta .ticket-list-header .dot-sep, body.opened-ticket-list .ticket .ticket-meta .ticket-list-header .company-name {
+    display: none;
+  }
+}
+
+.ticket .ticket-meta .ticket-list-header p.ellipsis {
+    width: calc(100% - 136px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ticket .ticket-meta .ticket-title p.ellipsis {
+    width: calc(100% - 20px);
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flex;
+    display: -o-inline-flex;
+    display: inline-flex;
+}
+.ticket .ticket-meta .ticket-title p.ellipsis strong{
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ticket.closed .ticket-meta .ticket-title p.ellipsis strong{
+    font-weight: normal;
+}
+.ticket .ticket-meta .ticket-title p.ellipsis span{
+    float: left;
+    display: inline-block;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.ticket:hover .ticket-meta .ticket-title p.ellipsis {
+    width: calc(100% - 166px);
+}
+
+.ticket.one-action:hover .ticket-meta .ticket-title p.ellipsis{
+    width: calc(100% - 32px);
+}
+
+.ticket.two-actions:hover .ticket-meta .ticket-title p.ellipsis{
+    width: calc(100% - 66px);
+}
+
+.ticket.three-actions:hover .ticket-meta .ticket-title p.ellipsis{
+    width: calc(100% - 100px);
+}
+
+.ticket.four-actions:hover .ticket-meta .ticket-title p.ellipsis {
+    width: calc(100% - 136px);
+}
+
+/*Ticket Action Hover*/
+
+.ticket:hover .ticket-meta .ticket-title .ticket-actions {
+    display: block;
+}
+
+.ticket:hover .ticket-meta .ticket-title .icn-ticket-list-attachment{
+    display: none;
+}
+
+.ticket:hover.no-action .ticket-meta .ticket-title .icn-ticket-list-attachment{
+    display: block;
+    cursor: default;
+}
+
+/*Ticket Hover Action Ellipse - End*/
+
+
+.ticket .ticket-checkbox{
+    padding-top: 2px;
+    padding-left: 30px;
+    width: 62px;
+}
+
+.ticket .ticket-meta{
+    padding: 0;
+    margin-left: 62px;
+}
+
+.ticket .ticket-meta .ticket-list-header{
+    height: 20px;
+}
+
+.ticket .ticket-meta .ticket-title .ticket-list-attachment{
+    margin-top: 4px;
+}
+
+
+
+/*Ticket Tags*/
+
+.ticket .ticket-meta .ticket-tags {
+    margin: 5px;
+    padding: 0;
+    list-style: none;
+}
+
+.ticket .ticket-meta .ticket-tags > li {
+    float: left;
+}
+
+.ticket .ticket-meta .ticket-tags .tag-color {
+    width: 8px;
+    height: 8px;
+    margin-top: 1px;
+    margin-right: 4px;
+    border-width: 1px;
+}
+
+/*Ticket Body*/
+
+.ticket .ticket-meta .ticket-title {
+    padding: 0 0 11px;
+    color: #1f2a37;
+}
+
+
+
+/*Ticket Actions*/
+
+.ticket .ticket-meta .ticket-actions {
+    margin: 0px;
+    margin-right: -2px;
+    padding: 0px;
+    list-style: none;
+    margin-top: 4px;
+    display: none;
+}
+
+.ticket .ticket-meta .ticket-actions > li {
+    list-style: none;
+    float: right;
+    position: relative;
+    margin-left: 16px;
+}
+
+.ticket .ticket-meta .ticket-actions li > a.hit-area {
+    display: block;
+}
+
+.ticket .ticket-meta .ticket-actions > dropdown-menu{
+    margin-top: 4px;
+}
+
+/*.ticket .ticket-meta .ticket-actions > li a:last-child {
+    margin-left: -2px;
+}*/
+
+/*Ticket Labels*/
+
+.ticket .ticket-meta .ticket-labels span{
+    margin-right: 10px;
+    height: 20px;
+}
+
+.ticket .ticket-meta .ticket-labels .label-primary {
+    font-weight: normal;
+}
+
+.ticket .ticket-meta .ticket-labels span:last-child{
+    margin-right: 0px;
+}
+
+.ticket .ticket-meta .ticket-labels .ticket-unread-updates{
+    margin-top: 3px;
+}
+
+@-moz-document url-prefix() {
+  .ticket p {
+    line-height: 19px;
+    padding-bottom: 1px;
+  }
+}

@@ -1,0 +1,35 @@
+/*Tickets Edit List*/
+
+.qt-table{ /* Apply on UL*/
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.qt-table>li{
+    display: table;
+    width: 100%;
+}
+.qt-table>li+li{
+    margin-top: 10px;
+}
+
+.qt-table>li>div{
+    display: table-cell;
+    padding: 0 5px;
+    vertical-align: top;
+    position: relative;
+}
+
+.qt-table>li>div:first-child{
+	padding-left: 0;
+}
+.qt-table>li>div:last-child{
+	padding-right: 0;
+}
+
+.qt-table>li>div>input{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

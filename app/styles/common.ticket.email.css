@@ -1,0 +1,23 @@
+.ticket-detail {
+	margin: 0 30px 25px;
+}
+.ticket-message ul{
+	padding-left: 16px;
+}
+.ticket-message ol{
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.ticket-message a {
+    color: #3c7dcd;
+    text-decoration: underline;
+}
+
+@-moz-document url-prefix(){
+    .ticket-detail h2{
+      margin-top: 1px;
+    	line-height: 33px;
+    }
+}

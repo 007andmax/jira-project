@@ -1,0 +1,208 @@
+.ticket-post-update-wrapper{
+    border-top: 1px solid #e7ecf2;
+    margin: 0 30px;
+    padding-bottom: 264px;
+    position: relative;
+}
+.opened-ticket-list .ticket-post-update-wrapper {
+    padding-bottom: 374px;
+}
+.ticket-post-update-wrapper > .btn{
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+.ticket-post-update-wrapper > .btn.connected, .ticket-post-update-wrapper > .btn.connected:hover, .ticket-post-update-wrapper > .btn.connected:active:hover, .ticket-post-update-wrapper > .btn.connected:focus:hover, .ticket-post-update-wrapper > .btn.connected:focus, .ticket-post-update-wrapper > .btn.connected:active{
+    border-radius: 19px !important;
+    background-color: #e7ecf2;
+    border-color: #e7ecf2;
+    cursor: default;
+    pointer-events: none;
+}
+.ticket-add-container{
+    margin: 0 30px;
+}
+
+.ticket-add{
+    padding-top: 30px;
+    width: 100%;
+}
+
+.nav-ticket-add{
+    margin-top: 22px;
+}
+
+.ticket-add .qt-table{
+    margin: 20px 20px;
+}
+
+.ticket-add .avator{
+    margin-right: 10px;
+}
+
+.ticket-add-content{
+    margin-left: 48px;
+    border: 1px #e7ecf2 solid;
+}
+
+.ticket-add-content textarea.form-control{
+    background-color: #FFF;
+    resize: none;
+    border: none;
+    min-height: 64px;
+    padding: 15px 20px;
+}
+
+.ticket-add-content-actions{
+    height: 55px;
+    background-color: #f1f5fa;
+    /*    border: 1px #e7ecf2 solid;
+        border-top: none;*/
+    border-top: 1px solid #e7ecf2;
+    padding: 8px 7px;
+    width: 100%;
+}
+.ticket-add-content-actions .hit-area + .tooltip.top{
+    margin-top:  -6px; padding: 0;
+}
+
+.ticket-add-content-actions-attachment{
+    width: 38px;
+    height: 38px;
+    display: inline-block;
+    padding-top: 6px;
+    padding-left: 11px;
+}
+
+.ticket-add-content-actions-dropdown{
+    margin-right: 7px;
+}
+.ticket-add-content-actions-dropdown > div {
+    margin: 6px 11px 0;
+}
+.ticket-add-content-actions-users{
+    padding-top: 6px;
+}
+.ticket-add-content-actions-users .tooltip-inner{
+    height: 60px;
+}
+.ticket-add-content-actions-users a{
+    float: left;
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+}
+.ticket-add-content-actions-users a:after{
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: none;
+    background-color: rgba(21,30,41,.6);
+}
+.ticket-add-content-actions-users a:hover:after{
+    display: block;
+}
+.ticket-add-content-actions-users a i{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 2;
+}
+.ticket-add-content-actions-users a:hover i{
+    display: block;
+}
+/*.add-users-plus {
+    color: white;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 3px;
+}
+.add-users-plus:hover {
+    color: #4c5c6f;
+    background-color: #b2becd;
+    border-color: #b2becd;
+}
+.add-users-plus:active, .open .add-users-plus {
+    color: #4c5c6f;
+    background-color: #94a4b8;
+    border-color: #94a4b8;
+}*/
+.ticket-add-amount {
+    margin-right: 13px;
+    margin-top: 9px;
+}
+@-moz-document url-prefix() {
+  .ticket-add-amount {
+      line-height: 19px;
+  }
+}
+.ticket-add-content-actions-users .tooltip-inner{
+    padding: 18px 20px;
+    text-align: left;
+}
+.ticket-add-content-actions-users .tooltip-name {
+    color: #f1f5fa;
+    line-height: 12px;
+}
+.ticket-add-content-actions-users .tooltip-designation {
+    color: #94a4b8;
+    font-weight: normal;
+    text-transform: none;
+    line-height: 12px;
+}
+
+.ticket-add-footer{
+    margin-left: 48px;
+    margin-top: 20px;
+}
+.ticket-add-footer .checkbox{
+    margin-top: 11px;
+    line-height: 16px;
+    color: #4c5c6f;
+    padding-left: 26px;
+}
+@-moz-document url-prefix() {
+  .ticket-add-footer .checkbox{
+      line-height: 15px;
+  }
+}
+.ticket-add-footer .btn{
+    width: 92px;
+}
+.ticket-add-footer .btn-info.disabled{
+    background-color: #e7ecf2;
+    border-color: #e7ecf2;
+}
+/* Add Product tab */
+#Product .col-1{
+    width: 195px;
+}
+#Product .col-3, #Product .col-4{
+    width: 95px;
+}
+
+#Product .col-5{
+    width: 43px;
+}
+
+
+/* Add Service tab */
+#Service .col-1{
+    width: 145px;
+}
+#Service .col-2{
+    width: 124px;
+}
+#Service .col-4{
+    width: 150px;
+}
+#Service .col-5{
+    width: 43px;
+}
