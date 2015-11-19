@@ -22,7 +22,7 @@
             logo: $scope.editCompany.logo,
             name: $scope.editCompany.name,
             supportMailBox: $scope.companyForSettingPage.supportMailBox,
-            techDomain: $scope.techDomainName + '.quicktech.com',
+            techDomain: $scope.techDomainName,
             businessEmail: $scope.companyForSettingPage.businessEmail,
             description: $scope.editCompany.description
           };
@@ -35,7 +35,7 @@
         };
 
         $scope.validateCompanyDomain = function (ngModelCtrl) {
-          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue + '.quicktech.com', $scope.editCompany.id || '', function () {
+          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
         }
