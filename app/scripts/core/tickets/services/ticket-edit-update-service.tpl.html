@@ -41,13 +41,15 @@
         </div>
 
         <div class="edit-col4" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
+
           <div class="dropdown">
 
+            <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
             <input type="text" choose-data-dropdown
                    class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
                    placeholder="Date" ng-model="editService.date"
                    name="serviceData" ng-required="true">
-            <i class="icn-sm icn-caret-gray"></i>
+
           </div>
         </div>
 

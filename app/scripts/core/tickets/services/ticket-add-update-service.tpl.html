@@ -47,11 +47,13 @@
       <div class="col-4" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
 
         <div class="dropdown">
-          <input type="text" class="form-control has-dropdown"
+
+          <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+          <input type="text" class="form-control has-dropdown" choose-data-dropdown
                  data-toggle="dropdown" aria-expanded="false" placeholder="Date"
-                 choose-data-dropdown ng-model="serviceExpense.date"
+                 ng-model="serviceExpense.date"
                  name="serviceData" ng-required="true">
-          <i class="icn-sm icn-caret-gray"></i>
+
         </div>
 
       </div>
