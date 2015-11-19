@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('ticketAddService',
-    function () {
+    ['$filter', function ($filter) {
       return {
         restrict: 'A',
         require: 'ngModel',
@@ -30,6 +30,7 @@
           } else {
 
             $scope.serviceNameFilter = $scope.serviceExpense.item.name;
+            $scope.serviceExpense.date = $filter('date')($scope.serviceExpense.date, 'd MMM yyyy');
 
             $scope.isShowingErrors = function (form, fieldName) {
               return form[fieldName] && !form[fieldName].$valid;
@@ -61,6 +62,6 @@
 
         }
       };
-    });
+    }]);
 
 })();

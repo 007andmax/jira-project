@@ -40,11 +40,11 @@
       <div class="col-3" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
 
         <input type="text" class="form-control" placeholder="Description"
-               ng-model="serviceExpense.description" ng-minlength="3" ng-maxlength="2000"
-               name="serviceDescription" ng-required="true"/>
+               ng-model="serviceExpense.description" ng-maxlength="2000"
+               name="serviceDescription"/>
       </div>
 
-      <div class="col-4" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDate')}">
+      <div class="col-4" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
 
         <div class="dropdown">
           <input type="text" class="form-control has-dropdown"
