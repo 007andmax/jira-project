@@ -60,27 +60,19 @@
             <div class="line-sep pull-left"></div>
 
             <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline"
-                 ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'">
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'">
             </div>
 
-            <div class="ticket-add-content-actions-users pull-left">
+            <div class="ticket-add-content-actions-users pull-left" ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
 
-              <a ng-repeat="sharedUser in updateSharedUsersList" ng-click="deleteUpdateSharedUser(sharedUser)"
-                 class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
-                 tooltip-html-unsafe="<p class='tooltip-name'>{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</p>
-                                      <span class='tooltip-designation'>{{  getSharedTitle(sharedUser) }}</span>">
-                <img
-                  ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
-                  alt="..." class="img-circle avatar-26">
-                <i class="icn-sm icn-x"></i>
-              </a>
+
 
             </div>
 
           </div>
         </div>
 
-        <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+        <div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>
 
       </div>
     </div>
@@ -108,19 +100,11 @@
           <div class="ticket-add-content-actions pull-left">
 
             <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline"
-                 ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'"></div>
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
-            <div class="ticket-add-content-actions-users pull-left">
+            <div class="ticket-add-content-actions-users pull-left" ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
 
-              <a ng-repeat="sharedUser in updateSharedUsersList" ng-click="deleteUpdateSharedUser(sharedUser)"
-                 class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
-                 tooltip-html-unsafe="<p class='tooltip-name'>{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</p>
-                                      <span class='tooltip-designation'>{{  getSharedTitle(sharedUser) }}</span>">
-                <img
-                  ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
-                  alt="..." class="img-circle avatar-26">
-                <i class="icn-sm icn-x"></i>
-              </a>
+
 
             </div>
 
@@ -132,7 +116,7 @@
           </div>
         </div>
 
-        <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+        <div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>
 
       </div>
     </div>
@@ -161,27 +145,19 @@
           <div class="ticket-add-content-actions pull-left">
 
             <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline"
-                 ng-include="'/html/scripts/core/tickets/update-add-user.tpl.html'">
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'">
             </div>
 
-            <div class="ticket-add-content-actions-users pull-left">
+            <div class="ticket-add-content-actions-users pull-left" ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
 
-              <a ng-repeat="sharedUser in updateSharedUsersList" ng-click="deleteUpdateSharedUser(sharedUser)"
-                 class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
-                 tooltip-html-unsafe="<p class='tooltip-name'>{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</p>
-                                      <span class='tooltip-designation'>{{  getSharedTitle(sharedUser) }}</span>">
-                <img
-                  ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
-                  alt="..." class="img-circle avatar-26">
-                <i class="icn-sm icn-x"></i>
-              </a>
+
 
             </div>
 
           </div>
         </div>
 
-        <div ng-include="'/html/scripts/core/tickets/update-submit.tpl.html'"></div>
+        <div ng-include="'/html/scripts/core/tickets/ticket-update/update-submit.tpl.html'"></div>
       </div>
 
     </div>

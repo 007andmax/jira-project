@@ -14,8 +14,11 @@
           function setTicketUpdateToDefault() {
 
             $scope.setTicketUpdate({
-              services: [{item:{}}]
+              services: [{item:{}}],
+              notifyTicketCreator: true
             });
+
+            $scope.triedToAddService = false;
 
           }
 

@@ -1,0 +1,20 @@
+<div>
+  <a ng-repeat="sharedUser in updateSharedUsersList" ng-click="deleteUpdateSharedUser(sharedUser)"
+     class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
+     tooltip-html-unsafe="<p class='tooltip-name'>{{ sharedUser.user ? getUserName(getUserById(sharedUser.user.id)) : getContactName(sharedUser.contact) }}</p>
+                                      <span class='tooltip-designation'>{{  getSharedTitle(sharedUser) }}</span>">
+    <img
+      ng-src="{{ sharedUser.user ? getUserAvatarUrl(sharedUser.user) : getContactAvatarUrl(sharedUser.contact) }}"
+      alt="..." class="img-circle avatar-26">
+    <i class="icn-sm icn-x"></i>
+  </a>
+
+  <a ng-show="ticketUpdate.notifyTicketCreator" ng-click="ticketUpdate.notifyTicketCreator = false"
+     class="has-tooltip" href="javascript:void(0)" tooltip-placement="top"
+     tooltip-html-unsafe="<p class='tooltip-name'>{{ getUserName(user) }}</p>
+                                      <span class='tooltip-designation'>{{  getSharedTitle(user) }}</span>">
+    <img ng-src="{{ getUserAvatarUrl(user) }}"
+         alt="..." class="img-circle avatar-26">
+    <i class="icn-sm icn-x"></i>
+  </a>
+</div>

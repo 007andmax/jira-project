@@ -13,8 +13,11 @@
           function setTicketUpdateToDefault() {
 
             $scope.setTicketUpdate({
-              products: [{item:{}}]
+              products: [{item:{}}],
+              notifyTicketCreator: true
             });
+
+            $scope.triedToAddProduct = false;
 
           }
 

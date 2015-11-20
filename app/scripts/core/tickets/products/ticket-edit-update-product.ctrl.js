@@ -49,6 +49,10 @@
             return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
           };
 
+          $scope.controlProductQty = function (form){
+            form.productQty.$setValidity('zero', +$scope.editProduct.quantity !== 0);
+          };
+
           $scope.validationMessage = function () {
             if ($scope.updateTicketProduct.$valid) {
               return;
@@ -61,6 +65,8 @@
                 return minlengthMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
               } else if (errorKey === 'maxlength') {
                 return maxlengthMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
+              } else if (errorKey === 'zero'){
+                return 'Product Quantity can not be 0';
               }
             }
           };

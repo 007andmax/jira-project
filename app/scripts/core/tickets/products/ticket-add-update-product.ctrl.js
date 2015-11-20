@@ -18,6 +18,25 @@
             $scope.ticketUpdate.products.splice($scope.$index, 1);
           };
 
+          $scope.controlProductQty = function (form){
+            form.productQty.$setValidity('zero', +$scope.productExpense.quantity !== 0);
+          };
+
+          $scope.isProductNameCorrect = function(){
+            if(!$scope.productExpense.item.name){
+              return;
+            }
+
+            for(var i = 0; i < $scope.productsByCategory.length; i++){
+              if($scope.productExpense.item.name === $scope.productsByCategory[i].name){
+                $scope.productExpense.item = $scope.productsByCategory[i].staticCopy();
+                return;
+              } else {
+                $scope.productExpense.item.versionedId.id = '';
+              }
+            }
+          }
+
         }]);
   }()
 );
