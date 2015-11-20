@@ -10,7 +10,7 @@
           <input type="text" class="form-control has-dropdown"
                  name="serviceName"
                  placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-                 ng-model="serviceNameFilter"/>
+                 ng-model="serviceExpense.item.name"/>
           <i class="icn-sm icn-caret-gray"></i>
 
           <input type="hidden" name="service" ng-model="serviceExpense.item.versionedId.id" ng-required="true">
@@ -58,16 +58,16 @@
 
       </div>
 
-      <div class="col-5" ng-if="isAddMode">
+      <div class="col-5" ng-if="$last">
         <span class="btn btn-dark has-tooltip" tooltip-placement="top" tooltip="Add more"
               ng-click="addService(addServiceForm)">
           <i class="icn-sm icn-plus"></i>
         </span>
       </div>
 
-      <div class="col-5" ng-if="!isAddMode">
+      <div class="col-5" ng-if="!$last">
         <span class="btn btn-primary has-tooltip" tooltip-placement="top" tooltip="Remove"
-              ng-click="removeService(index)">
+              ng-click="removeService()">
           <i class="icn-sm icn-remove-token"></i>
         </span>
       </div>

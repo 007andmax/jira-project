@@ -3,53 +3,20 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketAddUpdateProductCtrl',
-      ['$scope',
-        function ($scope) {
+      ['$scope', 'ProductsService',
+        function ($scope, ProductsService) {
 
-          setTicketUpdateToDefault();
-
-          function setTicketUpdateToDefault() {
-
-            $scope.setTicketUpdate({
-              products: []
-            });
-
-            $scope.productExpenseToAdd = {};
-          }
-
-          $scope.isValidTicketUpdate = function () {
-            return $scope.ticketUpdate.products.length > 0;
+          $scope.loadProductByCategory = function (categoryId) {
+            $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
           };
 
-          $scope.addProduct = function (form) {
-
-            if (form.$valid) {
-
-              $scope.ticketUpdate.products.push($scope.productExpenseToAdd);
-              $scope.productExpenseToAdd = {};
-              form.$setPristine();
-              $scope.triedToAddProduct = false;
-
-            } else {
-              $scope.triedToAddProduct = true;
-            }
+          $scope.selectProduct = function (product) {
+            $scope.productExpense.item = product.staticCopy();
           };
 
-          $scope.removeProduct = function (index) {
-            $scope.ticketUpdate.products.splice(index, 1);
+          $scope.removeProduct = function () {
+            $scope.ticketUpdate.products.splice($scope.$index, 1);
           };
-
-          $scope.$watch('ticketUpdate', function () {
-
-            $scope.productTotalAmount = 0;
-
-            for (var i = 0; i < $scope.ticketUpdate.products.length; i++) {
-              $scope.productTotalAmount += ($scope.ticketUpdate.products[i].item.sale * $scope.ticketUpdate.products[i].quantity);
-            }
-
-          }, true);
-
-          $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault)
 
         }]);
   }()

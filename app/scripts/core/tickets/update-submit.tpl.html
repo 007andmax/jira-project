@@ -10,8 +10,8 @@
 
   <div class="pull-right">
     <div class="btn btn-info"
-         ng-class="{'disabled': (!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid || disabledWhenLoadAttachment)}"
-         ng-disabled="(!isValidTicketUpdate() || addProductsForm.$invalid || addServicesForm.$invalid || disabledWhenLoadAttachment)"
+         ng-class="{'disabled': (updateTicketNote.$invalid || addProductsForm.$invalid || addServicesForm.$invalid || disabledWhenLoadAttachment)}"
+         ng-disabled="(updateTicketNote.$invalid || addProductsForm.$invalid || addServicesForm.$invalid || disabledWhenLoadAttachment)"
          ng-click="saveTicketUpdate()">
       <i class="icn-sm icn-send"></i>
     </div>

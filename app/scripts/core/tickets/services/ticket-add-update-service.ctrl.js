@@ -6,42 +6,38 @@
       ['$scope', 'ServicesService',
         function ($scope, ServicesService) {
 
-          setTicketUpdateToDefault();
-
-          function setTicketUpdateToDefault() {
-
-            $scope.setTicketUpdate({
-              services: []
-            });
-
-            $scope.serviceExpenseToAdd = {};
-          }
-
-          $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.company.id);
-
-          $scope.isValidTicketUpdate = function () {
-            return $scope.ticketUpdate.services.length > 0;
+          $scope.setNewService = function (service) {
+            $scope.serviceExpense.item = service.staticCopy()
           };
 
-          $scope.addService = function (form) {
+          $scope.removeService = function () {
+            $scope.ticketUpdate.services.splice($scope.$index, 1);
+          };
 
-            if (form.$valid) {
-              $scope.ticketUpdate.services.push($scope.serviceExpenseToAdd);
-              $scope.serviceExpenseToAdd = {};
-              form.$setPristine();
-              $scope.triedToAddService = false;
-
-            } else {
-              $scope.triedToAddService = true;
+          $scope.$watch('serviceExpense.item.name', function () {
+            if(!$scope.serviceExpense.item.name){
+              return;
             }
-          };
 
-          $scope.removeService = function (index) {
-            $scope.ticketUpdate.services.splice(index, 1);
-          };
+            for (var i = 0; i < $scope.serviceList.length; i++) {
 
-          $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault)
+              if(!$scope.serviceList[i].name){
+                return;
+              }
+
+              if ($scope.serviceExpense.item.name.toLowerCase() === $scope.serviceList[i].name.toLowerCase()) {
+                $scope.serviceExpense.item = $scope.serviceList[i].staticCopy();
+                return;
+              } else {
+                if ($scope.serviceExpense.item && $scope.serviceExpense.item.versionedId) {
+                  $scope.serviceExpense.item.versionedId.id = undefined;
+                }
+              }
+
+            }
+          });
 
         }]);
   }()
 );
+

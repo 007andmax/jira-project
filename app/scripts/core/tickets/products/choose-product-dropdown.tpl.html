@@ -1,6 +1,6 @@
 <div>
   <ul class="dropdown-menu dropdown-menu-categories custom-scroll" stop-propagation="click">
-    <li role="presentation" ng-repeat=" category in productCategories | filter: {name: productNameFilter}"
+    <li role="presentation" ng-repeat=" category in productCategories"
         ng-click="loadProductByCategory(category.id)">
 
       <a role="menuitem" tabindex="-1" href="javascript:void(0)">
@@ -17,7 +17,7 @@
     <div role="presentation" class="product-dropdown-header">
       <div class="form-group">
         <input type="text" class="form-control-filter" placeholder="Search product..."
-               ng-model="filterProduct" stop-propagation="click">
+               ng-model="filterProduct" stop-propagation="click" style="background-color: #f1f5fa;border: 1px solid #e7ecf2;">
         <i class="icn-sm icn-search-input" tabindex="-1"></i>
       </div>
     </div>

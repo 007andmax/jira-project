@@ -9,7 +9,7 @@
 
           <input type="text" class="form-control has-dropdown" placeholder="Product"
                  name="productName"
-                 data-toggle="dropdown" aria-expanded="true" ng-model="productNameFilter">
+                 data-toggle="dropdown" aria-expanded="true" ng-model="productExpense.item.name">
           <i class="icn-sm icn-caret-gray"></i>
 
           <input type="hidden" name="product" ng-model="productExpense.item.versionedId.id" ng-required="true">
@@ -40,16 +40,16 @@
                value="{{ productExpense.item.sale * productExpense.quantity || '' }}" readonly/>
       </div>
 
-      <div class="col-5" ng-if="isAddMode">
+      <div class="col-5" ng-if="$last">
         <div class="btn btn-dark has-tooltip" tooltip="Add More" tooltip-placement="top"
              ng-click="addProduct(addProductForm)">
           <i class="icn-sm icn-plus"></i>
         </div>
       </div>
 
-      <div class="col-5" ng-if="!isAddMode">
+      <div class="col-5" ng-if="!$last">
         <div class="btn btn-primary has-tooltip" tooltip="Remove" tooltip-placement="top"
-             ng-click="removeProduct(index)">
+             ng-click="removeProduct()">
           <i class="icn-sm icn-remove-token"></i>
         </div>
       </div>

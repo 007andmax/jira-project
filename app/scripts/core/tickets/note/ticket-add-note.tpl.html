@@ -1,6 +1,6 @@
-<form name="updateTicketNote">
+<div>
 
-  <input type="hidden" ng-model="ticketUpdate.note" ng-maxlength="65000" name="updateNote"/>
+  <input type="hidden" ng-model="ticketUpdate.note" ng-required="true" ng-maxlength="65000" name="updateNote"/>
 
   <textarea class="form-control" placeholder="Click here to respond to the Ticket"
             contenteditable="true" ticket-note-fild ng-model="ticketUpdate.note"></textarea>
@@ -36,4 +36,4 @@
 
     </ul>
   </div>
-</form>
+</div>

@@ -18,10 +18,6 @@
             });
           }
 
-          $scope.isValidTicketUpdate = function () {
-            return $scope.ticketUpdate.note.length > 0 && $scope.ticketUpdate.note.length < 65000;
-          };
-
           $scope.addAttachmentFiles = function (file) {
             $scope.ticketUpdate.attachments.push(file);
             $scope.$apply();
