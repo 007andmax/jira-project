@@ -36,6 +36,34 @@
           }
         };
 
+        $scope.getUserSubscribleClass = function () {
+          if (!$scope.subscriptions[$scope.user.id]) {
+            return;
+          }
+
+          if ($scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+            return 'badge-invoice-and-ticket-updates badge-updates';
+          } else if ($scope.subscriptions[$scope.user.id].ticket && !$scope.subscriptions[$scope.user.id].invoice) {
+            return 'badge-ticket-updates badge-updates';
+          } else if (!$scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+            return 'badge-invoice-updates badge-updates';
+          }
+        };
+
+        $scope.getUserSubscribleTooltip = function () {
+          if (!$scope.subscriptions[$scope.user.id]) {
+            return;
+          }
+
+          if ($scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+            return 'subscriber invoice and ticket updates';
+          } else if ($scope.subscriptions[$scope.user.id].ticket && !$scope.subscriptions[$scope.user.id].invoice) {
+            return 'subscriber ticket updates';
+          } else if (!$scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+            return 'subscriber invoice updates';
+          }
+        };
+
       }]);
 
 }());

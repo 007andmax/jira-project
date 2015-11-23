@@ -1,22 +1,60 @@
-<div class="avatar-content default clearfix">
-  <div class="avatar">
+<!--<div class="avatar-content default clearfix">-->
+  <!--<div class="avatar">-->
+    <!--<img ng-src="{{ getUrl() }}" class="no-avatar" ng-if="!model.cropped.id">-->
+    <!--<img ng-src="/file/{{ model.cropped.id }}" class="no-avatar" ng-if="model.cropped.id">-->
+
+    <!--<div class="reposition-wrapper" ng-show="model.origin || getError().loadingInProcess">-->
+      <!--<div class="reposition" ng-show="model.origin && !getError().loadingInProcess" change-position-button>-->
+        <!--REPOSITION...-->
+      <!--</div>-->
+      <!--<div class="loader" ng-show="getError().loadingInProcess"></div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="choose-file">-->
+    <!--<div class="select-file">-->
+      <!--<button type="button" class="btn btn-gray pull-left" change-avatar-button-->
+              <!--ng-disabled="getError().loadingInProcess">-->
+       <!--{{ model.origin ? 'Change': 'Choose' }} {{ isLogo ? 'Logo' : 'Avatar' }}-->
+      <!--</button>-->
+      <!--<span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>-->
+    <!--</div>-->
+    <!--<div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>-->
+
+    <!--<div error-message></div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="create-user-avatar clearfix">
+
+  <div class="avatar pull-left">
+
     <img ng-src="{{ getUrl() }}" class="no-avatar" ng-if="!model.cropped.id">
     <img ng-src="/file/{{ model.cropped.id }}" class="no-avatar" ng-if="model.cropped.id">
 
-    <div class="reposition-wrapper" ng-show="model.origin || getError().loadingInProcess">
-      <div class="reposition" ng-show="model.origin && !getError().loadingInProcess" change-position-button>
-        REPOSITION...
-      </div>
-      <div class="loader" ng-show="getError().loadingInProcess"></div>
+    <div class="reposition" ng-show="model.origin && !getError().loadingInProcess" change-position-button>
+      Reposition...
     </div>
+
   </div>
-  <div class="choose-file">
-    <div class="select-file">
-      <button type="button" class="btn btn-gray pull-left" change-avatar-button
-              ng-disabled="getError().loadingInProcess">
-       {{ model.origin ? 'Change': 'Choose' }} {{ isLogo ? 'Logo' : 'Avatar' }}
-      </button>
+
+  <div class="avatar avatar-loading pull-left" ng-show="getError().loadingInProcess">
+    <div class="loader"></div>
+  </div>
+
+  <div class="choose-file pull-left">
+
+    <div class="select-file clearfix">
+
+      <input type="file">
+
+      <div class="btn btn-lg btn-primary pull-left" change-avatar-button
+           ng-disabled="getError().loadingInProcess">
+        {{ model.origin ? 'Change': 'Choose' }} {{ isLogo ? 'Logo' : 'Avatar' }}
+      </div>
+
+      <!--<span class="file-name pull-left" ng-show="model.origin">or <a href="javascript:void(0)">Restore Default</a></span>-->
       <span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>
+
     </div>
     <div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>
 

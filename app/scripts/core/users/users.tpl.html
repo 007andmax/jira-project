@@ -1,139 +1,183 @@
-<div class="content-body users">
-  <!--<ng-include src="'/html/scripts/core/users/user-edit.tpl.html'"></ng-include>-->
+<div class="users-content">
+
   <div ui-view></div>
+
   <div class="users-list clearfix" count-nodes-in-line="[userNode]" ng-model="usersInLine">
     <div ng-repeat="user in (shownUsers = (users | filter : usersFilter | orderBy: getUserName))"
          ng-controller="quicktech.core.users.userCtrl" on-finish-render="countNodes()">
-      <div class="user" userNode ng-show="editUser.id != user.id">
+
+      <div class="user-card" userNode ng-show="editUser.id != user.id">
+
         <div class="content">
+
           <ul class="user-badges">
-            <li ng-if="subscriptions[user.id].ticket" class="icn icn-ticket-updates tp-hide"
-                tooltip="subscriber ticket updates" tooltip-placement="top" tooltip-append-to-body="true"></li>
-            <li ng-if="subscriptions[user.id].invoice" class="icn icn-invoice-updates tp-hide"
-                tooltip="subscriber invoice updates" tooltip-placement="top" tooltip-append-to-body="true"></li>
-            <li ng-if="user.role === 'ADMIN'" class="icn admin tp-hide" tooltip="admin" data-placement="top"
-                tooltip-append-to-body="true"></li>
+
+            <li class="icn-sm badge-admin persistent-tooltip" ng-show="user.role === 'ADMIN'"
+                tooltip="admin" tooltip-append-to-body="true" tooltip-placement="top"></li>
+
+            <li class="icn-sm {{ getUserSubscribleClass() }} persistent-tooltip"
+                tooltip="{{ getUserSubscribleTooltip() }}" tooltip-append-to-body="true"
+                tooltip-placement="top"></li>
           </ul>
+
           <div class="title pull-left">
+
             <h3 class="name pull-left">
-              {{ user.firstName }} {{ user.lastName }}
+              {{ getUserName(user) }}
             </h3>
-          <span class="pull-left">
-          <a href="javascript:void(0)" class="icn-edit tp-hide" tooltip-placement="top"
-             tooltip="Edit user" ng-click="setEditUserId(user.id)"></a>
-        </span>
+
+            <a href="javascript:void(0)" class="hit-area pull-left has-tooltip"
+               tooltip-placement="top" tooltip="Edit user" ng-click="setEditUserId(user.id); formToCenter()">
+              <i class="icn-sm icn-edit"></i>
+            </a>
+
           </div>
-          <div class="status pull-left"><span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
-            <span class="label label-white label-ticket-number">{{ user.designation }}</span>
+
+          <div class="status pull-left">
+            <span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
+            <span class="label label-primary">{{ user.designation }}</span>
           </div>
+
           <div class="user-actions pull-left">
+
             <div class="dropdown pull-left">
-              <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-                   data-toggle="dropdown" data-placement="top"
-                   tooltip="logged in devices">
-                <span class="icn icn-user-device"></span>
+
+              <div class="btn btn-default pull-left has-tooltip" data-toggle="dropdown"
+                   tooltip-placement="top" tooltip="logged in devices">
+                <i class="icn-sm icn-user-devices"></i>
               </div>
 
-
               <ul class="dropdown-menu devices-menu" role="menu">
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
-                <!--class="icon icn-server"></span>File.Server</a></li>-->
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
-                <!--class="icon icn-computer"></span>Skynet.2013</a></li>-->
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
-                <!--class="icon icn-mobile"></span>Mobile.Jack</a></li>-->
-                <!--<li class="dropdown-submenu"><a tabindex="-1" href="javascript:void(0)"><span-->
-                <!--class="icon icn-fax"></span>Fax.Sublime</a></li>-->
-
-
+                <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-server"></i>File.Server</a></li>-->
+                <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-computer"></i>Skynet.2013</a></li>-->
+                <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-mobile"></i>Mobile.Jack</a></li>-->
+                <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-fax"></i>Fax.Sublime</a></li>-->
               </ul>
+
             </div>
-            <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
+
+            <div class="btn btn-default pull-left has-tooltip"
                  data-placement="top" tooltip="Send Email">
-              <span class="icn icn-user-msg"></span>
+              <i class="icn-sm icn-user-mail"></i>
             </div>
-            <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-                 data-placement="top" tooltip="chat">
-              <span class="icn icn-user-chat"></span>
+
+            <div class="btn btn-default btn-user-chat pull-left has-tooltip"
+                 tooltip-placement="top" tooltip="chat">
+              <i class="icn-sm icn-user-chat"></i>
             </div>
-            <div class="more pull-left dropdown hover-dropdown">
-              <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp" aria-haspopup="true"
-                 aria-expanded="false" data-toggle="dropdown" data-placement="top" title=""
-                 tooltip="More"><span class="icn-ticket-more icn"></span></a>
-              <ul class="dropdown-menu" role="menu" stop-propagation="click">
-               <li class="dropdown-submenu">
-                  <a tabindex="-1" href="javascript:void(0)"> Set {{ user.firstName }} Privilege</a>
+
+            <div class="more pull-left dropdown">
+
+              <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip"
+                 aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
+                 tooltip-placement="top" tooltip="More">
+                <i class="icn-more icn-sm"></i>
+              </a>
+
+              <ul class="dropdown-menu" role="menu">
+
+                <li><a tabindex="-1" href="javascript:void(0)">Chat</a></li>
+
+                <li class="dropdown-submenu">
+
+                  <a tabindex="-1" href="javascript:void(0)">Set Natalie Privilege</a>
 
                   <div class="dropdown-submenu-wrapper">
                     <ul class="dropdown-menu dropdown-privilege">
-                      <li ng-class="{active:user.role==='USER'}" ng-click="changeUserRole(user.id, 'USER')"><a tabindex="-1" href="javascript:void(0)" > User </a></li>
-                      <li ng-class="{active:user.role==='ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')"><a tabindex="-1" href="javascript:void(0)"> Administrator </a>
+
+                      <li ng-class="{active:user.role==='USER'}" ng-click="changeUserRole(user.id, 'USER')">
+                        <a tabindex="-1" href="javascript:void(0)"> User </a>
+                      </li>
+
+                      <li ng-class="{active:user.role==='ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')">
+                        <a tabindex="-1" href="javascript:void(0)"> Administrator </a>
                       </li>
 
                     </ul>
                   </div>
+
                 </li>
+
                 <li class="dropdown-submenu">
+
                   <a tabindex="-1" href="javascript:void(0)">Subscribe {{ user.firstName }} to...</a>
 
                   <div class="dropdown-submenu-wrapper" stop-propagation="click">
                     <ul class="dropdown-menu dropdown-subscribe">
+
                       <li ng-click="subscribeUser(user.id, 'ticket')">
-                        <a tabindex="-1" href>
-                          <div class="clearfix"><label
-                                  class="control checkbox pull-left">
-                            <input type="checkbox" ng-model="subscriptions[user.id].ticket">
-                            <span class="control-indicator"></span>
-                          </label>
-                            Ticket Updates
+                        <a tabindex="-1" href="javascript:void(0)">
+                          <div class="clearfix">
+                            <label class="control checkbox pull-left">
+                              <input type="checkbox" ng-model="subscriptions[user.id].ticket">
+                              <span class="control-indicator"></span>
+                              Ticket Updates
+                            </label>
                           </div>
-                        </a></li>
+                        </a>
+                      </li>
+
                       <li ng-click="subscribeUser(user.id, 'invoice')">
-                        <a tabindex="-1" href>
-                          <div class="clearfix" ><label
-                                  class="control checkbox pull-left">
-                            <input type="checkbox" ng-model="subscriptions[user.id].invoice">
-                            <span class="control-indicator"></span>
-                          </label>
-                            Invoice Updates
+                        <a tabindex="-1" href="javascript:void(0)">
+                          <div class="clearfix">
+                            <label class="control checkbox pull-left">
+                              <input type="checkbox" ng-model="subscriptions[user.id].invoice">
+                              <span class="control-indicator"></span>
+                              Invoice Updates
+                            </label>
                           </div>
-                        </a></li>
+                        </a>
+                      </li>
+
                     </ul>
                   </div>
+
                 </li>
 
-
-                <li><a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role !== 'USER'">Archive this Contact</a></li>
+                <li ng-show="currentUser.role !== 'USER'">
+                  <a tabindex="-1" href="javascript:void(0)">Archive this Contact</a>
+                </li>
 
               </ul>
-
-            </div>
-            <div>
-
             </div>
           </div>
-          <div class="total-tickets pull-left">
-            <span class="icn icn-total-ticket"></span>
-            <span class='bold'>Submitted Tickets</span> {{ submittedTickets[user.id] || 0 }}
+
+          <div class="user-total-tickets pull-left">
+            <i class="icn-sm icn-user-tickets"></i>
+            <span>Sbmt. Tickets</span> {{ submittedTickets[user.id] || 0 }}
           </div>
-          <div class="number pull-left" ng-if="user.phoneNumbers.length > 0">
-            <span class="icn {{ getPhoneNumberCssClass(user.phoneNumbers[user.phoneNumbers.length - 1]) }}"></span>
-            <span>{{ user.phoneNumbers[user.phoneNumbers.length - 1].number }}</span>
+
+          <div class="user-number pull-left">
+            <i class="icn-sm icn-iphone"></i>
+            <span> {{ user.phoneNumbers[user.phoneNumbers.length - 1].number }}</span>
           </div>
-          <div class="company pull-left">
-            <span class="icn icn-company"></span>
+
+          <div class="user-company pull-left has-tooltip"
+               tooltip-placement="bottom" tooltip="South Calgary Periodontal Group of Industries"
+               tooltip-append-to-body="true"
+               tooltip-html-unsafe="<div class='tooltip tooltip-lg'><div class='tooltip-inner'></div></div>">
+            <i class="icn-sm icn-user-company"></i>
             <span> {{ getUserCompanyName(user) }}</span>
           </div>
+
         </div>
 
+        <div class="avatar" ng-class="{'no-avatar': !user.avatar}">
+          <img ng-src="{{ getUserAvatarUrl(user) }}">
+        </div>
 
-        <div class="avatar"><img ng-src="{{ getUserAvatarUrl(user) }}"></div>
       </div>
+
       <div ng-if="checkEditUserId($index, usersInLine)">
         <div class="clearfix"></div>
-        <div ng-include="'/html/scripts/core/users/user-edit.tpl.html'"></div>
+        <div ng-include="'/html/scripts/core/users/user-edit.tpl.html'" style="margin-bottom: 30px;"></div>
       </div>
-    </div>
 
+    </div>
   </div>
+
+  <div class="user-loading">
+    <div class="loader"></div>
+  </div>
+
 </div>

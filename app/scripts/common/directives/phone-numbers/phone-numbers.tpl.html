@@ -1,17 +1,17 @@
 <div ng-form="phoneNumbersForm">
-  <div class="row-wrapper clearfix" ng-repeat="phoneNumber in phoneNumbers">
+  <div class="form-row clearfix" ng-repeat="phoneNumber in phoneNumbers">
 
     <div ng-if="$index !== phoneNumbers.length - 1">
-      <div class="form-group dropdown pull-left"
-           ng-class="{error: !phoneNumbersForm['phoneNumber' + $index].$valid}">
-        <label>contact no.</label>
+      <div class="form-group"
+           ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+        <label class="control-label">contact no.</label>
 
         <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
              ng-if="!phoneNumbersForm['phoneNumber' + $index].$valid">
-          <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
-          <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
-          <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
-          <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+          <div class="control-label" ng-message="required">contact no. is required.</div>
+          <div class="control-label" ng-message="maxlength">contact no. is too large</div>
+          <div class="control-label" ng-message="minlength">contact no. is too short</div>
+          <div class="control-label" ng-message="pattern">invalid no.</div>
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
@@ -19,34 +19,38 @@
                ng-pattern="phoneNumberPattern" hard-reset-pattern="phoneNumberPattern" make-dirty-on-blur>
       </div>
 
-      <div class="form-group dropdown number-type pull-left">
+      <div class="form-group no-label">
+        <div class="pull-left dropdown">
 
-        <input type="text" ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
-               aria-expanded="true"
-               class="form-control form-control-dropdown form-control-number-type dropdown-toggle" READONLY>
+          <input type="text" class="form-control-number has-dropdown"
+                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
+                 aria-expanded="true" READONLY>
 
-        <ul class="dropdown-menu dropdown-account-type">
-          <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
-            <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
-          </li>
-        </ul>
+          <ul class="dropdown-menu dropdown-account-type">
+            <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
+              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
+             tooltip-placement="top" tooltip="Remove">
+          <i class="icn-sm icn-remove-token"></i>
+        </div>
+
       </div>
-
-      <a href="javascript:void(0)" class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-         tooltip="Remove Contact no." tooltip-placement="top" ng-click="removePhoneNumber($index)">
-        <span class="icn-remove-update"></span>
-      </a>
     </div>
 
     <div ng-if="$index === phoneNumbers.length - 1">
-      <div class="form-group dropdown pull-left" ng-class="{error: !phoneNumbersForm['phoneNumber' + $index].$valid}">
-        <label>contact no.</label>
+      <div class="form-group" ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+        <label class="control-label">contact no.</label>
 
         <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
              ng-if="!phoneNumbersForm['phoneNumber' + $index].$valid">
-          <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
-          <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
-          <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+          <div class="control-label" ng-message="maxlength">contact no. is too large</div>
+          <div class="control-label" ng-message="minlength">contact no. is too short</div>
+          <div class="control-label" ng-message="pattern">invalid no.</div>
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
@@ -54,17 +58,34 @@
                make-dirty-on-blur hard-reset-pattern="phoneNumberPattern">
       </div>
 
-      <div class="form-group dropdown number-type pull-left">
+      <div class="form-group no-label">
+        <div class="pull-left dropdown">
 
-        <input type="text" ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
-               aria-expanded="true"
-               class="form-control form-control-dropdown form-control-number-type dropdown-toggle" READONLY>
+          <input type="text" class="form-control-number has-dropdown"
+                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" data-toggle="dropdown"
+                 aria-expanded="true" READONLY>
 
-        <ul class="dropdown-menu dropdown-account-type">
-          <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
-            <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
-          </li>
-        </ul>
+          <ul class="dropdown-menu dropdown-account-type">
+            <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
+              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+            </li>
+          </ul>
+
+        </div>
+
+        <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
+
+          <div cns-if class="btn btn-dark has-tooltip pull-right"
+               tooltip-placement="top" tooltip="Add more" ng-click="addPhoneNumber()">
+            <i class="icn-sm icn-plus"></i>
+          </div>
+
+          <div cns-else class="btn btn-primary has-tooltip pull-right"
+               tooltip-placement="top" title="" tooltip="Remove" ng-click="removePhoneNumber($index)">
+            <i class="icn-sm icn-remove-token"></i>
+          </div>
+
+        </div>
 
       </div>
 
@@ -74,18 +95,6 @@
         <span class="icn-add"></span>
       </a> -->
 
-      <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
-        <a cns-if href="javascript:void(0)"
-           class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-           tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()">
-          <span class="icn-add"></span>
-        </a>
-        <a cns-else href="javascript:void(0)"
-           class="btn btn-cr btn-gray btn-remove-update pull-left tp-hide"
-           tooltip="Remove Contact no." tooltip-placement="top" ng-click="removePhoneNumber($index)">
-          <span class="icn-remove-update"></span>
-        </a>
-      </div>
     </div>
   </div>
 </div>
