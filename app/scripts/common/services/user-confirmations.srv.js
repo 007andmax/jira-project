@@ -10,6 +10,7 @@
           animation: false,
           backdrop: 'static',
           size: 'custom-size-confirmation-pop-up',
+          windowClass: 'modal-spam',
           templateUrl: '/html/scripts/common/services/user-confirmations.tpl.html'
         };
 

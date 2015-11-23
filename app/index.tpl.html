@@ -80,6 +80,8 @@
 </head>
 <body ng-app="quicktech">
 
+<div class="alert alert-yellow" user-notification ng-bind="message" ng-style="getMarginLeft()">Loading ...</div>
+
 <div id="top" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
 
 <aside id="left" qt-sidebar ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>

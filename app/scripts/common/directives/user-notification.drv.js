@@ -11,6 +11,12 @@
 
             element.hide();
 
+            scope.getMarginLeft = function(){
+              return {
+                'margin-left': -element.width()/2 + 25 + 'px'
+              };
+            };
+
             UserNotificationService.setHideListener(function () {
               element.fadeOut();
             });
