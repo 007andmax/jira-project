@@ -38,6 +38,7 @@ module.exports = function(config) {
       'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
       'bower_components/jquery-mousewheel/jquery.mousewheel.js',
       'bower_components/typeahead.js/dist/typeahead.bundle.js',
+      'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
