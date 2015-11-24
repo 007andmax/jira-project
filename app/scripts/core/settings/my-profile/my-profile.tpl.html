@@ -19,50 +19,38 @@
 
           <div edit-avatar ng-model="editUser.avatar" model-name="user" model-id="{{ editUser.id }}"></div>
 
-          <!--<div class="create-user-avatar clearfix">-->
-
-          <!--<div class="avatar pull-left">-->
-          <!--<img ng-src="/html/images/avatars/avatar-xlarge.png" class="no-avatar">-->
-          <!--</div>-->
-
-          <!--<div class="choose-file pull-left">-->
-          <!--<div class="select-file clearfix">-->
-          <!--<input type="file">-->
-
-          <!--<div class="btn btn-lg btn-primary pull-left">Choose Avatar</div>-->
-          <!--<span class="file-name pull-left">No File Selected</span>-->
-          <!--</div>-->
-          <!--<div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>-->
-          <!--</div>-->
-
-          <!--</div>-->
-
           <div class="create-user-form">
 
             <div class="form-row clearfix">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'firstName')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'firstName')}">
 
-                <label class="control-label">First Name</label>
+                <label class="control-label"  ng-class="{'hide': isShowingErrors(basicInfoForm, 'firstName')}">
+                  First Name
+                </label>
 
-                <div ng-messages="basicInfoForm.firstName.$error" ng-if="isShowingErrors(basicInfoForm, 'firstName')">
-                  <div class="qt-error-msg" ng-message="required">First name is required.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">First name is too large.</div>
-                  <div class="qt-error-msg" ng-message="minlength">First name is too short.</div>
+                <div ng-messages="basicInfoForm.firstName.$error"
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'firstName')}">
+                  <div class="control-label" ng-message="required">First name is required.</div>
+                  <div class="control-label" ng-message="maxlength">First name is too large.</div>
+                  <div class="control-label" ng-message="minlength">First name is too short.</div>
                 </div>
 
                 <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
                        name="firstName" ng-model="editUser.firstName" required="true" make-dirty-on-blur>
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'lastName')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'lastName')}">
 
-                <label class="control-label">Last Name</label>
+                <label class="control-label"  ng-class="{'hide': isShowingErrors(basicInfoForm, 'lastName')}">
+                  Last Name
+                </label>
 
-                <div ng-messages="basicInfoForm.lastName.$error" ng-if="isShowingErrors(basicInfoForm, 'lastName')">
-                  <div class="qt-error-msg" ng-message="required">Last name requires at least 1 letter.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">Last name is too large.</div>
-                  <div class="qt-error-msg" ng-message="minlength">Last name is too short.</div>
+                <div ng-messages="basicInfoForm.lastName.$error"
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'lastName')}">
+                  <div class="control-label" ng-message="required">Last name requires at least 1 letter.</div>
+                  <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+                  <div class="control-label" ng-message="minlength">Last name is too short.</div>
                 </div>
 
                 <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
@@ -72,30 +60,34 @@
 
             <div class="form-row clearfix">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'designation')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'designation')}">
 
-                <label class="control-label">Designation</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'designation')}">
+                  Designation
+                </label>
 
                 <div ng-messages="basicInfoForm.designation.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'designation')">
-                  <div class="qt-error-msg" ng-message="required">Please enter a designation.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">Designation is too large</div>
-                  <div class="qt-error-msg" ng-message="minlength">Designation is too short</div>
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'designation')}">
+                  <div class="control-label" ng-message="required">Please enter a designation.</div>
+                  <div class="control-label" ng-message="maxlength">Designation is too large</div>
+                  <div class="control-label" ng-message="minlength">Designation is too short</div>
                 </div>
 
                 <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
                        ng-model="editUser.designation" ng-required="true" ng-minlength="3" ng-maxlength="30">
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'primaryEmail')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'primaryEmail')}">
 
-                <label class="control-label">Email</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'primaryEmail')}">
+                  Email
+                </label>
 
                 <div ng-messages="basicInfoForm.primaryEmail.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'primaryEmail')">
-                  <div class="qt-error-msg" ng-message="required">Email field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
-                  <div class="qt-error-msg" ng-message="unique">This email already occupied.</div>
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'primaryEmail')}">
+                  <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+                  <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+                  <div class="control-label" ng-message="unique">This email already occupied.</div>
                 </div>
 
                 <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
@@ -107,13 +99,15 @@
 
             <div class="form-row clearfix">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(basicInfoForm, 'secondaryEmail')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'secondaryEmail')}">
 
-                <label class="control-label">Secondary Email</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'secondaryEmail')}">
+                  Secondary Email
+                </label>
 
                 <div ng-messages="basicInfoForm.secondaryEmail.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'secondaryEmail')">
-                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid email address.</div>
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'secondaryEmail')}">
+                  <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
                 </div>
 
                 <input type="text" class="form-control" name="secondaryEmail" aria-expanded="true" make-dirty-on-blur
@@ -138,7 +132,8 @@
 
                 <label class="control-label">Signature</label>
 
-                <div te-editor class="editor" contenteditable="true" placeholder="Type your message..."></div>
+                <div id="editor" class="form-control" contenteditable="true"
+                     te-editor class="editor" contenteditable="true" placeholder="Type your message..."></div>
 
                 <div class="wysiwyg-controls-wrapper clearfix">
 
@@ -147,63 +142,80 @@
 
                     <div class="font-styles pull-left">
 
-                      <a data-edit="bold" class="hit-area ha-14 pull-left has-tooltip icn-wysiwyg-bold"
-                         data-edit="bold"
-                         data-placement="top" title="Bold">
-                        <!--<i class="icn-sm " ></i>-->
+                      <a data-edit="bold" class="hit-area ha-14 pull-left has-tooltip active"
+                         tooltip-append-to-body="true" data-placement="top" tooltip="Bold"
+                         tooltip-html-unsafe="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+                        <i class="icn-sm icn-wysiwyg-bold"></i>
                       </a>
 
-                      <a data-edit="italic" class="hit-area ha-14 pull-left has-tooltip icn-wysiwyg-italic"
-                         data-edit="italic"
-                         tooltip="Italic" tooltip-placement="top">
-                        <!--<i class="icn-sm " ></i>-->
+                      <a data-edit="italic" class="hit-area ha-14 pull-left has-tooltip"
+                         tooltip-append-to-body="true" data-placement="top" tooltip="Italic"
+                         tooltip-html-unsafe="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+                        <i class="icn-sm icn-wysiwyg-italic"></i>
                       </a>
 
-                      <a data-edit="underline" class="hit-area ha-14 pull-left has-tooltip icn-wysiwyg-underline"
-                         data-edit="underline"
-                         tooltip="Underline" tooltip-placement="top">
-                        <!--<i class="icn-sm " ></i>-->
+                      <a data-edit="underline" class="hit-area ha-14 pull-left has-tooltip"
+                         tooltip-append-to-body="true" data-placement="top" tooltip="Underline"
+                         tooltip-html-unsafe="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+                        <i class="icn-sm icn-wysiwyg-underline"></i>
                       </a>
 
                     </div>
 
                     <div class="quote-link pull-left">
+                      <div class="dropup pull-left">
 
-                      <div class="dropdown">
-                        <a href="javascript:void(0)" class="pull-left icn icn-wysiwyg-link tooltip-dp"
-                           tooltip="Add Link" tooltip-placement="top" data-toggle="dropdown"></a>
+                        <a class="hit-area ha-19-14 pull-left has-tooltip"
+                           data-toggle="dropdown"
+                           tooltip="Add Link" tooltip-placement="top" tooltip-append-to-body="true"
+                           tooltip-html-unsafe="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+                          <i class="icn-sm icn-wysiwyg-link"></i>
+                        </a>
 
-                        <div class="dropdown-menu dropdown-link">
-                          <div class="assign-ticket-header">
-                            <div class="clearfix" ng-class="{error: validLink.required || validLink.pattern}">
+                        <ul class="dropdown-menu">
+                          <li>
+                            <div class="add-link-form clearfix">
 
-                              <div class="form-group clearfix">
-                                <div class="qt-error-msg" ng-show="validLink.required">Link is required.</div>
-                                <div class="qt-error-msg" ng-show="validLink.pattern && !validLink.required">
-                                  Please enter a valid link.
+                              <div class="form-group" ng-class="{'has-error': validLink.required || validLink.pattern}">
+
+                                <div class="form-group clearfix">
+                                  <div class="control-label" ng-show="validLink.required">Link is required.</div>
+                                  <div class="control-label" ng-show="validLink.pattern && !validLink.required">
+                                    Please enter a valid link.
+                                  </div>
                                 </div>
 
-                                <input type="text" class="form-control " data-edit="createLink" placeholder="http://"
+                                <input type="text" class="form-control"
+                                       data-edit="createLink" placeholder="http://"
                                        ng-model="editorLink" ng-change="validateLink(editorLink)">
-
                               </div>
 
-                              <div class="btn-groups clearfix">
-                                <button type="button" class="btn btn-scooter" ng-disabled="validLink.pattern">Add
-                                </button>
-                                <button type="button" class="btn btn-gray" data-edit="unlink">Cancel</button>
+                              <div class="form-group">
+
+                                <div class="btn btn-lg btn-info pull-left"
+                                     ng-disabled="validLink.pattern">
+                                  Add
+                                </div>
+
+                                <div class="btn btn-lg btn-primary pull-left"
+                                     data-edit="unlink">
+                                  Cancel
+                                </div>
+
                               </div>
 
                             </div>
-                          </div>
-                        </div>
-                      </div>
+                          </li>
+                        </ul>
 
+                      </div>
                     </div>
                   </div>
 
-                  <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip icn-wysiwyg-reset"
-                     tooltip-placement="top" tooltip="Reset Formating">
+                  <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip" data-edit="removeformat"
+                     tooltip-append-to-body="true" data-placement="top" tooltip="Reset Formating"
+                     tooltip-html-unsafe="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+                    <i class="icn-sm icn-wysiwyg-reset"></i>
                   </a>
 
                 </div>
@@ -239,14 +251,16 @@
           <div class="create-user-form">
             <div class="form-row clearfix">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(passwordForm, 'oldPassword')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(passwordForm, 'oldPassword')}">
 
-                <label class="control-label">Old Password</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(passwordForm, 'oldPassword')}">
+                  Old Password
+                </label>
 
                 <div ng-messages="passwordForm.oldPassword.$error"
-                     ng-if="isShowingErrors(passwordForm, 'oldPassword')">
-                  <div class="qt-error-msg" ng-message="minlength">Password is too short</div>
-                  <div class="qt-error-msg" ng-message="notCorrectPass">Old Password is not correct</div>
+                     ng-class="{'hide': !isShowingErrors(passwordForm, 'oldPassword')}">
+                  <div class="control-label" ng-message="minlength">Password is too short</div>
+                  <div class="control-label" ng-message="notCorrectPass">Old Password is not correct</div>
                 </div>
 
                 <input ng-class="{'hide': showOldPasswoprd}" class="form-control show-password" type="password"
@@ -272,13 +286,15 @@
 
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(passwordForm, 'newPassword')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(passwordForm, 'newPassword')}">
 
-                <label class="control-label">New Password</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(passwordForm, 'newPassword')}">
+                  New Password
+                </label>
 
                 <div ng-messages="passwordForm.newPassword.$error"
-                     ng-if="isShowingErrors(passwordForm, 'newPassword')">
-                  <div class="qt-error-msg" ng-message="minlength">Password is too short</div>
+                     ng-class="{'hide': !isShowingErrors(passwordForm, 'newPassword')}">
+                  <div class="control-label" ng-message="minlength">Password is too short</div>
                 </div>
 
                 <input ng-class="{'hide': showNewPasswoprd}" class="form-control show-password" type="password"
@@ -342,16 +358,18 @@
 
             <div class="form-row clearfix" ng-repeat="phoneNumber in userProfile.address.phoneNumbers">
 
-              <div class="form-group" ng-class="{error: !phoneNumbersForm['phoneNumber' + $index].$valid}">
+              <div class="form-group" ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
 
-                <label class="control-label">Contact No.</label>
+                <label class="control-label" ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+                  Contact No.
+                </label>
 
                 <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
-                     ng-if="!phoneNumbersForm['phoneNumber' + $index].$valid">
-                  <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
-                  <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
-                  <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+                     ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
+                  <div class="control-label" ng-message="required">contact no. is required.</div>
+                  <div class="control-label" ng-message="maxlength">contact no. is too large</div>
+                  <div class="control-label" ng-message="minlength">contact no. is too short</div>
+                  <div class="control-label" ng-message="pattern">invalid no.</div>
                 </div>
 
                 <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
@@ -423,15 +441,17 @@
           <div class="create-user-form">
             <div class="form-row clearfix">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(miscInfoForm, 'shiftTiming')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(miscInfoForm, 'shiftTiming')}">
 
-                <label class="control-label">Shift Timings</label>
+                <label class="control-label"  ng-class="{'hide': isShowingErrors(miscInfoForm, 'shiftTiming')}">
+                  Shift Timings
+                </label>
 
                 <div ng-messages="miscInfoForm.shiftTiming.$error"
-                     ng-if="isShowingErrors(miscInfoForm, 'shiftTiming')">
-                  <div class="qt-error-msg" ng-message="required">Shift Timings field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid time. For example 9:00 18:00</div>
-                  <div class="qt-error-msg" ng-message="validShiftTiming">FROM should be less that TO</div>
+                     ng-class="{'hide': !isShowingErrors(miscInfoForm, 'shiftTiming')}">
+                  <div class="control-label" ng-message="required">Shift Timings field cannot be left empty.</div>
+                  <div class="control-label" ng-message="pattern">Please enter a valid time. For example 9:00 18:00</div>
+                  <div class="control-label" ng-message="validShiftTiming">FROM should be less that TO</div>
                 </div>
 
                 <input class="form-control" type="text" name="shiftTiming" placeholder="00:00 to 00:00"
@@ -561,9 +581,7 @@
 
         <div ng-if="editTagId !== tag.id">
 
-          <i class="tag-color tag-color-lg color{{ tag.color }}"></i>
-
-          {{ tag.name }}
+          <i class="tag-color tag-color-lg color{{ tag.color }}"></i> {{ tag.name }}
 
           <a href="javascript:void(0)" class="hit-area delete-label pull-right has-tooltip"
              ng-click="deleteTag(tag.id, tag.name)"
