@@ -1,40 +1,56 @@
-<div class="modal-customize-avatr fade in show" crop ng-model="avatar" is-reposition="isReposition">
-  <div class="modal-dialog ">
-    <div class="modal-content">
-      <div class="modal-header clearfix">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="close()">
-          <span aria-hidden="true" class="icn-close-modal"></span>
-        </button>
-        <h4 class="modal-title pull-left">Select crop size<span class="dot-sep"></span></h4>
-        <span class="ticket-numer pull-left">Drag the photo around or use zoom slider</span>
+<div crop ng-model="avatar" is-reposition="isReposition">
+  <div class="modal-header clearfix">
+
+    <a href="javascript:void(0)" class="hit-area pull-right"
+       data-dismiss="modal" aria-label="Close" ng-click="close()">
+      <i class="icn-sm icn-remove-token"></i>
+    </a>
+
+    <h4 class="modal-title pull-left"><strong>Select crop size</strong><i class="dot-sep"></i>
+      <span>Drag the photo around or use zoom slider</span>
+    </h4>
+
+  </div>
+
+  <div class="modal-body">
+    <div class="avatar-crop-area">
+      <div crop-box style="width:578px; height:420px; display: none"></div>
+      <div class="avatorCropProgressBar hide">
+        <div class="avatorCropProgressDone"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="clearfix">
+
+      <div class="zoom-slider pull-left">
+
+        <a href="javascript:void(0)" class="hit-area pull-left">
+          <i class="icn-sm icn-zoom-minus"></i>
+        </a>
+
+        <div class="range-wrapper pull-left">
+          <input type="range" range-zoom max="130" min="0" disabled="true">
+        </div>
+
+        <a href="javascript:void(0)" class="hit-area pull-right">
+          <i class="icn-sm icn-zoom-plus"></i>
+        </a>
+
       </div>
 
-      <div class="modal-body" style="width:578px; height: 480px">
-        <div class="crop-area avatorCropAreaNew">
-          <div crop-box style="width:578px; height:480px; display: none"></div>
-          <div class="avatorCropProgressBar hide">
-            <div class="avatorCropProgressDone"></div>
-          </div>
+      <div class="form-group pull-right">
+
+        <div class="avatar-preview pull-left">
+          <img ng-src="/file/{{ avatar.origin.id }}" alt="...">
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <div id="cropBoxControls" class="row-wrapper clearfix">
-          <div class="zoom-slider pull-left">
-            <a href="" class="pull-left icn icn-zoom-minus disabled" icn-zoom-minus></a>
-
-            <div class="range-wrapper pull-left">
-              <input range-zoom type="range" max="130" min="0" disabled="true">
-            </div>
-            <a href="" class="pull-right icn icn-zoom-plus disabled" icn-zoom-plus></a>
-          </div>
-
-          <div class="form-group actions-wrapper pull-right">
-            <button type="button" class="btn btn-scooter" ng-click="save()" disabled="true" continue-button>
-              Continue
-            </button>
-          </div>
+        <div class="btn btn-lg btn-info pull-left disabled"
+             ng-click="save()" continue-button>
+          Continue
         </div>
+
       </div>
 
     </div>

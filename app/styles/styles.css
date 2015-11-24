@@ -7588,7 +7588,7 @@ button.close {
 .modal-dialog {
   position: absolute;
   width: 600px;
-  margin-top: -75px;
+  margin-top: -295px;
   top: 50%;
   left: 50%;
   margin-left: -251px;
@@ -7839,9 +7839,9 @@ button.close {
 /***/
 .modal-customize-avatar > .modal-dialog {
   width: 640px;
-  top: 0;
-  left: 0;
-  margin: 0;
+  /*top: 0;*/
+  /*left: 0;*/
+  /*margin: 0;*/
 }
 .modal-customize-avatar .modal-header {
   border-bottom: 0px;

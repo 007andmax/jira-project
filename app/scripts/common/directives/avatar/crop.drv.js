@@ -48,7 +48,7 @@
                   rangeIncreaseElement.removeClass('disabled');
                   rangeSelectElement.prop('disabled', false);
                   rangeDecreaseElement.removeClass('disabled');
-                  continueButton.prop('disabled', false);
+                  continueButton.removeClass('disabled');
                 },
 
                 onChange: function (e) {

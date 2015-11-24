@@ -35,7 +35,7 @@
 
           if (!urlGetters[attrs.modelName]) {
             throw 'model-name must be specified! Available values - ["user", "contact"]';
-          } else if(attrs.modelName === 'company'){
+          } else if (attrs.modelName === 'company') {
             scope.isLogo = true;
           }
 
@@ -87,7 +87,7 @@
             onProgress: function (progress) {
               console.log(progress);
               $('.avatorCropProgressBar').removeClass('hide');
-              $('.avatorCropProgressDone').width(progress+'%');
+              $('.avatorCropProgressDone').width(progress + '%');
             },
             onSuccess: function (data) {
               $('.avatorCropProgressBar').hide();
@@ -134,6 +134,7 @@
             return $modal.open({
               animation: false,
               backdrop: 'static',
+              windowClass: 'modal-customize-avatar',
               templateUrl: '/html/scripts/common/directives/avatar/crop.tpl.html',
               controller: 'quicktech.common.directives.avatar.cropCtrl',
               resolve: {
