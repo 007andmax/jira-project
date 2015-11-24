@@ -17,9 +17,9 @@
             }
           };
 
-        } else {
-          $scope.userCompany = CompaniesService.getOneById($scope.editUser.companyId);
-          $scope.searchCompany = $scope.userCompany ? $scope.userCompany.name : '';
+          $scope.$watch('userCompany', function (userCompany) {
+            $scope.editUser.companyId = userCompany ? userCompany.id : undefined;
+          });
         }
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -30,6 +30,10 @@
         };
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
+
+        $scope.$watch('editUser.companyId', function (companyId) {
+          $scope.userCompany = CompaniesService.getOneById(companyId);
+        });
 
         $scope.cancelEdit = function () {
           if ($scope.editUser && $scope.editUser.id) {
@@ -77,26 +81,26 @@
           });
         };
 
-        $scope.chooseCompany = function (company) {
-          $scope.editUser.companyId = company.id;
-          $scope.searchCompany = company.name;
-        };
-
-        $scope.$watch('searchCompany', function () {
-          if (!$scope.searchCompany || !$scope.clientCompanies) {
-            return;
-          }
-
-          for (var i = 0; i < $scope.clientCompanies.length; i++) {
-            if ($scope.searchCompany.toLowerCase() === $scope.clientCompanies[i].name.toLowerCase()) {
-              $scope.editUser.companyId = $scope.clientCompanies[i].id;
-              $scope.searchCompany = $scope.clientCompanies[i].name;
-              return;
-            } else {
-              $scope.editUser.companyId = '';
-            }
-          }
-        })
+        //$scope.chooseCompany = function (company) {
+        //  $scope.editUser.companyId = company.id;
+        //  $scope.searchCompany = company.name;
+        //};
+        //
+        //$scope.$watch('searchCompany', function () {
+        //  if (!$scope.searchCompany || !$scope.clientCompanies) {
+        //    return;
+        //  }
+        //
+        //  for (var i = 0; i < $scope.clientCompanies.length; i++) {
+        //    if ($scope.searchCompany.toLowerCase() === $scope.clientCompanies[i].name.toLowerCase()) {
+        //      $scope.editUser.companyId = $scope.clientCompanies[i].id;
+        //      $scope.searchCompany = $scope.clientCompanies[i].name;
+        //      return;
+        //    } else {
+        //      $scope.editUser.companyId = '';
+        //    }
+        //  }
+        //})
 
       }]);
 

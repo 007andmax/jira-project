@@ -4,10 +4,14 @@
     <div ng-if="$index !== phoneNumbers.length - 1">
       <div class="form-group"
            ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
-        <label class="control-label">contact no.</label>
+
+        <label class="control-label"
+               ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+          contact no.
+        </label>
 
         <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
-             ng-if="!phoneNumbersForm['phoneNumber' + $index].$valid">
+             ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
           <div class="control-label" ng-message="required">contact no. is required.</div>
           <div class="control-label" ng-message="maxlength">contact no. is too large</div>
           <div class="control-label" ng-message="minlength">contact no. is too short</div>
@@ -44,10 +48,14 @@
 
     <div ng-if="$index === phoneNumbers.length - 1">
       <div class="form-group" ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
-        <label class="control-label">contact no.</label>
+
+        <label class="control-label"
+               ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+          contact no.
+        </label>
 
         <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
-             ng-if="!phoneNumbersForm['phoneNumber' + $index].$valid">
+             ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
           <div class="control-label" ng-message="maxlength">contact no. is too large</div>
           <div class="control-label" ng-message="minlength">contact no. is too short</div>
           <div class="control-label" ng-message="pattern">invalid no.</div>

@@ -123,19 +123,14 @@
 
             <div class="dropdown">
 
-              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
-                     ng-model="searchCompany" name="userCompany">
-              <i class="icn-sm icn-caret-gray"></i>
+              <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
 
-              <ul class="dropdown-menu dropdown-company custom-scroll" role="menu">
-
-                <li ng-repeat="company in clientCompanies | filter:{'name': searchCompany}">
-                  <a tabindex="-1" href="javascript:void(0)" ng-click="chooseCompany(company)">
-                    {{ company.name }}
-                  </a>
-                </li>
-
-              </ul>
+              <input type="text" ng-model="userCompany" class="form-control form-control-dropdown dropdown-toggle"
+                     typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
+                     typeahead-editable="false" typeahead-min-length="0"
+                     qt-typeahead-show-on-focus
+                     name="userCompany" ng-trim="false" ng-required="true"
+                     custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'scroll'}">
 
             </div>
           </div>

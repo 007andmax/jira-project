@@ -205,9 +205,9 @@
   margin-left: 8px;
 }
 
-.user-actions .more .dropdown-menu > li:first-child{
-  display: none;
-}
+/*.user-actions .more .dropdown-menu > li:first-child{*/
+  /*display: none;*/
+/*}*/
 @media only screen and (min-width: 1000px) and (max-width: 1200px) {
   .users-list .user-card {
     min-width: 370px !important;
