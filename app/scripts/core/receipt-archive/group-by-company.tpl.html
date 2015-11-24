@@ -1,53 +1,64 @@
 <div role="tabpanel" class="tab-pane active">
-  <ul class="companies-list">
+  <ul class="qt-list qt-receipt-archive">
 
     <li event-toggle-slider="toggleReceiptArchiveInvoices"
         ng-repeat="company in receiptArchiveCompanies | orderBy: 'name'"
         ng-controller="quicktech.core.receiptArchive.companyCtrl">
-      <a href='javascript:void(0)' ng-click="toggleReceiptArchiveInvoices()">
-        <div class="ui-checkbox ui-checkbox-warning pull-left">
-          <!--<label class="control checkbox">-->
-          <!--<input type="checkbox">-->
-          <!--<span class="control-indicator"></span>-->
-          <!--</label>-->
-        </div>
-        <span class="name">{{ company.name }}</span>
-        <span class=" badge badge-light ">{{ receiptArchiveData.companies[company.id].length }}</span>
-        <span class="amount pull-right">{{ totalCompanySum[company.id] | currency:'$' :0 }}</span>
-    </a>
-      <ul class="invoices recurring receivable  receipt" ets-slider>
-        <li class="head clearfix">
-          <div class="">
+
+      <div class="col-1" ng-click="toggleReceiptArchiveInvoices()">
+        <div class="checkbox-caption">{{ company.name }}</div>
+        <span class="label label-light">{{ receiptArchiveData.companies[company.id].length }}</span>
+      </div>
+
+      <div class="col-2" ng-click="toggleReceiptArchiveInvoices()">
+        <div class="billable-amount">{{ totalCompanySum[company.id] | currency:'$' :0 }}</div>
+      </div>
+
+      <div class="sub-wrapper" ets-slider>
+        <ul class="qt-list qt-invoices">
+
+          <li class="list-heading">
             <div class="col-1">INVOICE NO.</div>
             <div class="col-2">INVOICE DATE</div>
             <div class="col-3">PAID ON</div>
-            <div class="col-5">AMOUNT</div>
-          </div>
-        </li>
-        <li class="clearfix" ng-repeat="invoice in receiptArchiveData.companies[company.id] | orderBy: '-paidOn'"
-            ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
-            show-model-element="{{ 'showInvoice-' + invoice.id }}">
-          <span class="icns calendar" ng-if="invoice.recurring"
-                tooltip="recurring: {{ invoice.frequency }}" tooltip-placement="top"
-                ng-class="{'icn-green-calendar': invoice.frequency === 'MONTHLY',
-                           'icn-orange-calendar': invoice.frequency === 'YEARLY',
-                           'icn-red-calendar': invoice.frequency === 'WEEKLY'}"></span>
-          <div class="hover">
-            <div class="col-1"><span class="name">{{ invoice.number }}</span>
-              <span class=" badge badge-light " ng-if="invoice.invoicesCount">{{ invoice.invoicesCount }}</span></div>
-            <div class="col-2 normal">{{ invoice.date | date:'dd MMM yyyy' }}</div>
-            <div class="col-3"><span class="label label-dark-orange">{{ invoice.paidOn | date:'dd MMM yyyy' }}</span>
+            <div class="col-4">AMOUNT</div>
+          </li>
+
+          <li ng-repeat="invoice in receiptArchiveData.companies[company.id] | orderBy: '-paidOn'"
+              ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
+              show-model-element="{{ 'showInvoice-' + invoice.id }}">
+
+            <div class="col-1">
+              <div class="checkbox-caption">{{ invoice.number }}</div>
+              <span class="label label-light" ng-show="invoice.invoicesCount">{{ invoice.invoicesCount }}</span>
             </div>
-            <div class="col-5 normal">{{ invoice.sum | currency:'$' :0 }}</div>
+
+            <div class="col-2">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+
+            <div class="col-3">
+              <span class="label label-warning">{{ invoice.paidOn | date:'dd MMM yyyy' }}</span>
+            </div>
+
+            <div class="col-4">{{ invoice.sum | currency:'$' :0 }}</div>
+
+            <i class="icn-sm persistent-tooltip" ng-show="invoice.recurring"
+               ng-class="{'icn-recurring-monthly': invoice.frequency === 'MONTHLY',
+                           'icn-recurring-yearly': invoice.frequency === 'YEARLY',
+                           'icn-recurring-weekly': invoice.frequency === 'WEEKLY'}"
+               tooltip-placement="top" tooltip="Recurring: {{ invoice.frequency }}"
+               tooltip-append-to-body="true"></i>
+          </li>
+
+        </ul>
+
+        <div class="send-statemenyt-btn">
+          <div class="btn btn-primary pull-right has-tooltip disabled" style="width: 94px;"
+               tooltip-placement="top" tooltip="Export to Excel" tooltip-append-to-body="true">
+            <i class="icn-sm icn-export-excel"></i>
           </div>
-        </li>
+        </div>
 
-        <!--<li class="clearfix statment-wrapper">-->
-        <!--<a href="#" class="btn btn-gray send-statment" data-toggle="tooltip" data-placement="top" title=""-->
-        <!--data-original-title="Export Report to Excel"><span class="icns icn-export-excel"></span></a></li>-->
-      </ul>
-
+      </div>
     </li>
   </ul>
-
 </div>
