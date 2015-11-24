@@ -38,28 +38,32 @@
             <div class="recepients"><strong>Recipient</strong> {{ ticketTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
-                <label class="control-label">Subject</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+                  Subject
+                </label>
 
                 <div ng-messages="templateForm.templateSubject.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
-                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">subject is too large</div>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
                        ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
 
-                <label class="control-label">Email</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+                  Email
+                </label>
 
                 <div ng-messages="templateForm.templateBody.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateBody')">
-                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
+                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">email is too large</div>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -99,16 +103,18 @@
         <div class="form-row clearfix">
 
           <div class="form-group"
-               ng-class="{error: isShowingErrors(ticketForm, 'ticketCount')}">
+               ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCount')}">
 
-            <label class="control-label">ticket number starts from</label>
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketCount')}">
+              ticket number starts from
+            </label>
 
             <div ng-messages="ticketForm.ticketCount.$error"
-                 ng-if="isShowingErrors(ticketForm, 'ticketCount')">
-              <div class="qt-error-msg" ng-message="required">number starts field cannot be left empty.</div>
-              <div class="qt-error-msg" ng-message="maxlength">number starts is too large</div>
-              <div class="qt-error-msg" ng-message="minlength">number starts is too short</div>
-              <div class="qt-error-msg" ng-message="pattern">Please enter a valid number starts.</div>
+                 ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketCount')}">
+              <div class="control-label" ng-message="required">number starts field cannot be left empty.</div>
+              <div class="control-label" ng-message="maxlength">number starts is too large</div>
+              <div class="control-label" ng-message="minlength">number starts is too short</div>
+              <div class="control-label" ng-message="pattern">Please enter a valid number starts.</div>
             </div>
 
             <input class="form-control" tc-number-input type="text" ng-model="ticketConfig.count"
@@ -116,13 +122,15 @@
                    ng-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
           </div>
 
-          <div class="form-group" ng-class="{error: isShowingErrors(ticketForm, 'ticketPrefix')}">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketPrefix')}">
 
-            <label class="control-label">prefix</label>
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketPrefix')}">
+              prefix
+            </label>
 
             <div ng-messages="ticketForm.ticketPrefix.$error"
-                 ng-if="isShowingErrors(ticketForm, 'ticketPrefix')">
-              <div class="qt-error-msg" ng-message="maxlength">Prefix is too large</div>
+                 ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketPrefix')}">
+              <div class="control-label" ng-message="maxlength">Prefix is too large</div>
             </div>
 
             <input class="form-control" tc-prefix-input type="text" ng-model="ticketConfig.prefix"
@@ -174,28 +182,32 @@
             <div class="recepients"><strong>Recipient</strong> {{ agentTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
-                <label class="control-label">Subject</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+                  Subject
+                </label>
 
                 <div ng-messages="templateForm.templateSubject.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
-                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">subject is too large</div>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
                        ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
 
-                <label class="control-label">Email</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+                  Email
+                </label>
 
                 <div ng-messages="templateForm.templateBody.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateBody')">
-                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
+                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">email is too large</div>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -261,28 +273,32 @@
             <div class="recepients"><strong>Recipient</strong> {{ usersTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
-                <label class="control-label">Subject</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+                  Subject
+                </label>
 
                 <div ng-messages="templateForm.templateSubject.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
-                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">subject is too large</div>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
                        ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
 
-                <label class="control-label">Email</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+                  Email
+                </label>
 
                 <div ng-messages="templateForm.templateBody.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateBody')">
-                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
+                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">email is too large</div>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -350,28 +366,32 @@
             <div class="recepients"><strong>Recipient</strong> {{ companyTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
-                <label class="control-label">Subject</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+                  Subject
+                </label>
 
                 <div ng-messages="templateForm.templateSubject.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
-                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">subject is too large</div>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
                        ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
 
-                <label class="control-label">Email</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+                  Email
+                </label>
 
                 <div ng-messages="templateForm.templateBody.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateBody')">
-                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
+                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">email is too large</div>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -439,28 +459,32 @@
             <div class="recepients"><strong>Recipient</strong> {{ invoiceTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
-                <label class="control-label">Subject</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+                  Subject
+                </label>
 
                 <div ng-messages="templateForm.templateSubject.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
-                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">subject is too large</div>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
                        ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
 
-                <label class="control-label">Email</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+                  Email
+                </label>
 
                 <div ng-messages="templateForm.templateBody.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateBody')">
-                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
+                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">email is too large</div>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -499,16 +523,18 @@
 
         <div class="form-row clearfix">
 
-          <div class="form-group" ng-class="{error: isShowingErrors(invoiceForm, 'invoiceCount')}">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceCount')}">
 
-            <label class="control-label">invoice number starts from</label>
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceCount')}">
+              invoice number starts from
+            </label>
 
             <div ng-messages="invoiceForm.invoiceCount.$error"
-                 ng-if="isShowingErrors(invoiceForm, 'invoiceCount')">
-              <div class="qt-error-msg" ng-message="required">number starts field cannot be left empty.</div>
-              <div class="qt-error-msg" ng-message="maxlength">number starts is too large</div>
-              <div class="qt-error-msg" ng-message="minlength">number starts is too short</div>
-              <div class="qt-error-msg" ng-message="pattern">Please enter a valid number starts.</div>
+                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceCount')}">
+              <div class="control-label" ng-message="required">number starts field cannot be left empty.</div>
+              <div class="control-label" ng-message="maxlength">number starts is too large</div>
+              <div class="control-label" ng-message="minlength">number starts is too short</div>
+              <div class="control-label" ng-message="pattern">Please enter a valid number starts.</div>
             </div>
 
             <input class="form-control" type="text" ic-number-input ng-model="invoiceConfig.count"
@@ -516,15 +542,17 @@
                    ng-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
           </div>
 
-          <div class="form-group" ng-class="{error: isShowingErrors(invoiceForm, 'invoiceTerms')}">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceTerms')}">
 
-            <label class="control-label">default terms on invoice</label>
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceTerms')}">
+              default terms on invoice
+            </label>
 
             <div ng-messages="invoiceForm.invoiceTerms.$error"
-                 ng-if="isShowingErrors(invoiceForm, 'invoiceTerms')">
-              <div class="qt-error-msg" ng-message="required">Terms field cannot be left empty.</div>
-              <div class="qt-error-msg" ng-message="minlength">Terms is too short</div>
-              <div class="qt-error-msg" ng-message="pattern">Please enter a valid Terms.</div>
+                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceTerms')}">
+              <div class="control-label" ng-message="required">Terms field cannot be left empty.</div>
+              <div class="control-label" ng-message="minlength">Terms is too short</div>
+              <div class="control-label" ng-message="pattern">Please enter a valid Terms.</div>
             </div>
 
             <input class="form-control" type="text" ic-terms-input
@@ -536,13 +564,15 @@
 
         <div class="form-row clearfix">
 
-          <div class="form-group full-width" ng-class="{error: isShowingErrors(invoiceForm, 'invoiceConditions')}">
+          <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceConditions')}">
 
-            <label class="control-label">terms &amp; conditions</label>
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceConditions')}">
+              terms &amp; conditions
+            </label>
 
             <div ng-messages="invoiceForm.invoiceConditions.$error"
-                 ng-if="isShowingErrors(invoiceForm, 'invoiceConditions')">
-              <div class="qt-error-msg" ng-message="required">terms &amp; conditions field cannot be left empty.</div>
+                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceConditions')}">
+              <div class="control-label" ng-message="required">terms &amp; conditions field cannot be left empty.</div>
             </div>
 
             <textarea class="form-control" ic-conditions-input ng-model="invoiceConfig.termsAndConditions"
@@ -590,28 +620,32 @@
             <div class="recepients"><strong>Recipient</strong> {{ vendorTemplateInfo.recipient }}</div>
             <form name="templateForm">
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateSubject')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
-                <label class="control-label">Subject</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+                  Subject
+                </label>
 
                 <div ng-messages="templateForm.templateSubject.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateSubject')">
-                  <div class="qt-error-msg" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">subject is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">subject is too large</div>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
                        ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
               </div>
 
-              <div class="form-group" ng-class="{error: isShowingErrors(templateForm, 'templateBody')}">
+              <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
 
-                <label class="control-label">Email</label>
+                <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+                  Email
+                </label>
 
                 <div ng-messages="templateForm.templateBody.$error"
-                     ng-if="isShowingErrors(templateForm, 'templateBody')">
-                  <div class="qt-error-msg" ng-message="required">email field cannot be left empty.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">email is too large</div>
+                     ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
+                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
+                  <div class="control-label" ng-message="maxlength">email is too large</div>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
