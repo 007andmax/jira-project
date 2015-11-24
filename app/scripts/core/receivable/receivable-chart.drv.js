@@ -227,7 +227,7 @@
               numberValue: (dx * dx + dy1 * dy1 < 50) ? 'value1' : 'value2'
             };
 
-            if(circleInfo.onCircle){
+            if (circleInfo.onCircle) {
               tooltipIndex.numberLine = (dx * dx + dy1 * dy1 < 50) ? 1 : 2;
             }
 
@@ -252,8 +252,8 @@
             tooltipContext.fillText(currentDay, 45, 40);
 
             tooltip.css({
-              top: ((numberValue === 'value1' ? circle.y1 : circle.y2) + 50) + 'px',
-              left: (circle.x) + 'px'
+              top: ((numberValue === 'value1' ? circle.y1 : circle.y2) + 30) + 'px',
+              left: (circle.x - 15) + 'px'
             });
 
             tooltip.show();

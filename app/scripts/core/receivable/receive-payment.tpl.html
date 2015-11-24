@@ -1,79 +1,99 @@
-<div class=" modal-receive-payment fade in show" >
-  <div class="modal-dialog payment-received">
-    <div class="modal-content">
-      <div class="modal-header clearfix">
-        <button type="button" class="close" ng-click="close()">
-          <span aria-hidden="true" class="icn-close-modal"></span>
-        </button>
-        <h4 class="modal-title pull-left">Receive Payment(s) </h4>
-      </div>
+<div>
 
+  <div class="modal-header clearfix">
+    <a href="javascript:void(0)" class="hit-area pull-right" ng-click="close()"
+       data-dismiss="modal" aria-label="Close">
+      <i class="icn-sm icn-remove-token"></i>
+    </a>
+    <h4 class="modal-title pull-left">Receive Payment</h4>
+  </div>
 
-      <div class="modal-footer ">
-        <div class="row-wrapper clearfix">
-          <div class="form-group dropdown cs-type pull-left">
-            <label>Payment Method</label>
-            <!--TODO here should be angular ui dropdown-->
-            <input type="text" class="form-control form-method-dropdown form-control-dropdown dropdown-toggle " READONLY
-                   data-toggle="dropdown" aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
-            <ul class="dropdown-menu dropdown-payment-method ">
-              <li ng-repeat="(value, label) in paymentMethod" ng-click="invoiceToReceive.method = value">
-                <a tabindex="-1" href="javascript:void(0)">{{ label }}</a></li>
-            </ul>
-          </div>
+  <div class="modal-body clearfix">
 
+    <div class="invoices-header">
+      <div class="form-group">
+        <label class="control-label">Payment Method</label>
+        <!--TODO here should be angular ui dropdown-->
+        <div class="dropdown">
+          <input class="form-control has-dropdown readonly-normal" type="text" READONLY
+                 data-toggle="dropdown" aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
+          <i class="icn-sm icn-caret-gray"></i>
 
-        </div>
-        <ul class="invoices-sticky invoices">
-          <li class="head clearfix">
-            <div class="">
-              <div class="col-1">
-                <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                  <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
-                  <span class="control-indicator"></span>
-                </label></div>
-                <span class="name">INVOICE NO.</span></div>
-              <div class="col-2">SENT ON</div>
-              <div class="col-3">AMOUNT</div>
-            </div>
-          </li>
-        </ul>
-        <div class="invoices-list" id="invoiceList">
-          <ul class="invoices" qt-scroll-pane qtsp-create-event="invoicesRenderingFinished">
-            <li class="clearfix" ng-repeat="invoice in receivePaymentInvoices" ng-init="checkInvoicesRendering($last)">
-              <span ng-if="invoice.recurringInvoice" class="icns calendar"
-                    data-toggle="tooltip" data-placement="top" title="" data-original-title="recurring: monthly"
-                    ng-class="{'icn-green-calendar': invoice.recurringInvoice.frequency === 'MONTHLY',
-                           'icn-orange-calendar': invoice.recurringInvoice.frequency === 'YEARLY',
-                           'icn-red-calendar': invoice.recurringInvoice.frequency === 'WEEKLY'}"></span>
-
-              <div class="hover">
-                <div class="col-1">
-                  <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-                    <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
-                    <span class="control-indicator"></span>
-                  </label></div>
-                  <span class="name">{{ invoice.number }}</span></div>
-                <div class="col-2 normal">{{ invoice.date | date:'dd MMM yyyy' }}</div>
-                <div class="col-3 normal">{{ invoice.sum | currency: '$': 0 }}</div>
-              </div>
+          <ul class="dropdown-menu">
+            <li ng-repeat="(value, label) in paymentMethod"
+                ng-click="invoiceToReceive.method = value">
+              <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
             </li>
           </ul>
-        </div>
-        <div class="total-amount pull-right">Total amount <span
-          class="bold">{{ receivePaymentSum | currency: '$': 0 }}</span></div>
-        <div class="row-wrapper clearfix">
-          <div class=" actions-wrapper pull-left">
-            <button type="button" class="btn btn-scooter" ng-disabled="!countReceiveInvoice"
-                    ng-click="receivePayment()">Receive
-            </button>
-            <button type="button" class="btn btn-gray"
-                    ng-click="close()" data-dismiss="modal">Cancel
-            </button>
 
-          </div>
         </div>
       </div>
+    </div>
+
+    <ul class="qt-list invoice-list-heading">
+      <li class="list-heading">
+
+        <div class="col-1">
+          <label class="control checkbox pull-left">
+            <input type="checkbox" ng-model="invoiceToReceive.chooseAll" ng-change="changeChooseAll()">
+            <span class="control-indicator"></span>
+          </label>
+          INVOICE NO.
+        </div>
+
+        <div class="col-2">SENT ON</div>
+        <div class="col-3">AMOUNT</div>
+
+      </li>
+    </ul>
+
+    <ul class="qt-list receive-payment-list">
+      <li ng-repeat="invoice in receivePaymentInvoices" ng-init="checkInvoicesRendering($last)">
+
+        <div class="col-1">
+          <label class="control checkbox pull-left">
+            <input type="checkbox" ng-model="invoiceToReceive.invoices[invoice.id]">
+            <span class="control-indicator"></span>
+          </label>
+          {{ invoice.number }}
+        </div>
+
+        <div class="col-2">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+        <div class="col-3">{{ invoice.sum | currency: '$': 0 }}</div>
+
+        <i class="icn-sm icn-recurring-monthly persistent-tooltip" ng-show="invoice.recurringInvoice"
+           ng-class="{'icn-recurring-monthly': invoice.recurringInvoice.frequency === 'MONTHLY',
+                      'icn-recurring-yearly': invoice.recurringInvoice.frequency === 'YEARLY',
+                      'icn-recurring-weekly': invoice.recurringInvoice.frequency === 'WEEKLY'}"
+           tooltip-placement="top" tooltip="Recurring: {{ invoice.recurringInvoice.frequency }}"
+           tooltip-append-to-body="true"></i>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="modal-footer">
+    <div class="clearfix">
+
+      <div class="form-group pull-left">
+
+        <div class="btn btn-info btn-lg"
+             ng-disabled="!countReceiveInvoice"
+             ng-click="receivePayment()">
+          Receive
+        </div>
+
+        <div class="btn btn-primary btn-lg" ng-click="close()">
+          Cancel
+        </div>
+
+      </div>
+
+      <div class="pull-right total-amount">
+        <span class="text-muted">Total amount</span>
+        <strong>{{ receivePaymentSum | currency: '$': 0 }}</strong>
+      </div>
+
     </div>
   </div>
 </div>

@@ -1,46 +1,62 @@
-<div role="tabpanel" class="tab-pane">
-  <ul class="invoices recurring receivable in-number">
-    <li class="head clearfix">
-      <div class="">
-        <div class="col-1-2">CLIENT</div>
-        <div class="col-2">SENT ON</div>
-        <div class="col-3">DUE DATE</div>
-        <div class="col-4">STATUS</div>
-        <div class="col-5">AMOUNT</div>
-      </div>
+<div role="tabpanel" class="tab-pane active">
+  <ul class="qt-list qt-receivable-number">
+
+    <li class="list-heading">
+      <div class="col-1">INVOICE NO.</div>
+      <div class="col-2">COMPANY</div>
+      <div class="col-3">SENT ON</div>
+      <div class="col-4">DUE DATE</div>
+      <div class="col-5">STATUS</div>
+      <div class="col-6">AMOUNT</div>
     </li>
-    <li class="clearfix" ng-repeat="invoice in receivableInvoicesData.list | orderBy: 'number'"
+
+    <li ng-repeat="invoice in receivableInvoicesData.list | orderBy: 'number'"
         ng-controller="quicktech.core.receivable.invoiceCtrl"
         show-model-element="{{ 'showInvoice-' + invoice.id }}">
-      <span ng-if="invoice.frequency" class="icns calendar"
-            tooltip="recurring: {{ invoice.frequency }}" tooltip-placement="top" tooltip-append-to-body="true"
-            ng-class="{'icn-green-calendar': invoice.frequency === 'MONTHLY',
-                           'icn-orange-calendar': invoice.frequency === 'YEARLY',
-                           'icn-red-calendar': invoice.frequency === 'WEEKLY'}"></span>
-      <div class="hover">
-        <div class="col-1">
-          <div class="ui-checkbox ui-checkbox-warning pull-left"><label class="control checkbox">
-            <input type="checkbox"
-                   ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
-                   ng-model="invoiceToSent.invoices[invoice.id]">
-            <span class="control-indicator"></span>
-          </label></div>
-          <span class="name">{{ invoiceProperty('number') }}</span>
-          <span class=" badge badge-light ">{{ invoice.isRecurring ? invoice.invoices.length : '' }}</span></div>
-        <div class="col-1-2 normal">{{ company.name }}</div>
-        <div class="col-2 normal">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
-        <div class="col-3">
-          <span class="label" ng-class="{'label-blue': !dueDate.over, 'label-warning': dueDate.value <= 7,
-                                         'label-green': dueDate.value <= 31, 'label-danger': dueDate.over && dueDate.value > 31}">
-          {{ dueDate.over ? 'OVER DUE BY ' + dueDate.value + (dueDate.value > 1 ? ' DAYS' : ' DAY') : dueDate.value | date:'dd MMM yyyy' }}
-        </span></div>
-        <div class="col-4 normal">
-          {{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}
-          <a href="javascript:void(0)" class="pull-right icn-send icns" ng-click="sentInvoice()"
-             tooltip="Send Again" tooltip-placement="top"></a>
-        </div>
-        <div class="col-5 normal">{{ totalSum.invoices[invoice.id] | currency: '$': 0 }}</div>
+
+      <div class="col-1">
+
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
+                 ng-model="invoiceToSent.invoices[invoice.id]">
+          <span class="control-indicator"></span>
+        </label>
+
+        <div class="checkbox-caption">{{ invoiceProperty('number') }}</div>
+        <span class="label label-light">{{ invoice.isRecurring ? invoice.invoices.length : '' }}</span>
+
       </div>
+
+      <div class="col-2">{{ company.name }}</div>
+      <div class="col-3">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
+
+      <div class="col-4">
+        <span class="label"
+              ng-class="{'label-info': !dueDate.over, 'label-warning': dueDate.value <= 7,
+                               'label-success': dueDate.value <= 31,
+                               'label-danger': dueDate.over && dueDate.value > 31}">
+          {{ dueDate.over ? 'OVER DUE BY ' + dueDate.value + (dueDate.value > 1 ? ' DAYS' : ' DAY') : dueDate.value | date:'dd MMM yyyy' }}
+        </span>
+      </div>
+
+      <div class="col-5">
+        <span class="send-again-txt">{{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}</span>
+
+        <a href="javascript:void(0)" class="hit-area pull-left has-tooltip" ng-click="sentInvoice()"
+           tooltip-placement="top" tooltip="Send Again" tooltip-append-to-body="true">
+          <i class="icn-sm icn-send-again"></i>
+        </a>
+      </div>
+
+      <div class="col-6">{{ totalSum.invoices[invoice.id] | currency: '$': 0 }}</div>
+
+      <i class="icn-sm icn-recurring-monthly persistent-tooltip" ng-show="invoice.frequency"
+         ng-class="{'icn-recurring-monthly': invoice.frequency === 'MONTHLY',
+                           'icn-recurring-yearly': invoice.frequency === 'YEARLY',
+                           'icn-recurring-weekly': invoice.frequency === 'WEEKLY'}"
+         tooltip-placement="top" tooltip="Recurring: {{ invoice.frequency }}" tooltip-append-to-body></i>
     </li>
+
   </ul>
 </div>

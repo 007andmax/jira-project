@@ -156,6 +156,10 @@
               $scope.selectableCompanyId = undefined;
             }
           } else {
+            if (!$scope.invoiceToSent) {
+              return;
+            }
+
             for (var invoiceId in $scope.invoiceToSent.invoices) {
               if ($scope.invoiceToSent.invoices[invoiceId]) {
                 $scope.countInvoice++;

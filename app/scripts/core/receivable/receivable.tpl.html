@@ -1,64 +1,75 @@
-<div class="content-wrapper">
-  <div class="content-head clearfix">
-    <div class="content-stat pull-left">
-      <div class="heading"><span class="bold">total collected</span> LAST 30 DAYS <span class="dot-sep"></span> <span
-        class="amount">{{ totalCollectedLast30Days | currency: '': 0 }} USD</span>
-        <ul class="pull-right report-nav">
-          <li><span class="circle red"></span> RECEIVABLE</li>
-          <li><span class="circle blue"></span> RECEIVED</li>
+<div>
+  <div class="receivable-head clearfix">
 
+    <div class="chart-wrapper">
+      <div class="heading">
+
+        <strong>Total Collected</strong>
+        <span>Last 30 Days</span>
+        <span class="dot-sep"></span>
+        <span>{{ totalCollectedLast30Days | currency: '': 0 }} USD</span>
+
+        <ul class="chart-legend">
+          <li><i class="circle-indicator red"></i>Receivable</li>
+          <li><i class="circle-indicator blue"></i>Received</li>
         </ul>
+
       </div>
 
       <div receivable-chart ng-model="receivableGraphData"></div>
 
     </div>
 
-    <div class="content-all-time-stat pull-left">
-      <div class="heading">
-        <div class="title"><span class="bold">RECEIVED AMOUNT</span> ALL TIME</div>
-        <div class="amount">{{ receivedAmountAllTime.value | currency: '': 0 }} USD</div>
+    <div class="all-time-stats">
+
+      <div class="heading"><strong>RECEIVED AMOUNT <span>ALL TIME</span></strong>
+        <span class="amount">{{ receivedAmountAllTime.value | currency: '': 0 }} USD</span>
       </div>
-      <div class="total-billables">
-        <div pie-chart pie-chart-size="40" pie-chart-color="['#7fd5e0', '#e53935']"
+
+      <div class="total-billable">
+        <div class="pie-chart" pie-chart pie-chart-size="40" pie-chart-color="['#7fd5e0', '#e53935']"
              pie-chart-value="[totalReceivables, totalCollectedLast30Days]"></div>
-        <div class="heading pull-left">
-          <div class="title"><span class="bold">TOTAL RECEIVABLES</span></div>
-          <div class="amount">{{ totalReceivables | currency:'' :0 }} USD</div>
+        <div class="pull-left">
+          <strong>TOTAL RECEIVABLES</strong>
+          <strong class="amount">{{ totalReceivables | currency:'' :0 }} USD</strong>
         </div>
       </div>
+
     </div>
 
   </div>
-  <div class="content-body">
-    <div role="tabpanel" fixed-tab-topbar="400">
-      <div class="tabs-topbar" ftt-topbar-to-be-fixed>
 
-        <a href="javascript:void(0)" class="btn btn-sr btn-create-in btn-scooter pull-right tp-hide"
-           tooltip-placement="top" tooltip="receive payment" ng-disabled="!countInvoice"
+  <div class="receivable-content">
+    <div class="tabs-container">
+
+      <div class="btn btn-info pull-right has-tooltip" style="width: 96px;"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Payment Received"
+           ng-disabled="!countInvoice"
            modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
-          mw-controller="quicktech.core.receivable.receivePaymentCtrl">
-          <span class="icns icn icn-btn-payed "></span>
-        </a>
-
-        <ul class="nav nav-tabs">
-          <li role="presentation" ng-class="{active: mode === 'group-by-company'}">
-            <a ui-sref="receivable({mode: 'group-by-company'})">
-              Invoice by Company
-            </a>
-          </li>
-          <li role="presentation" ng-class="{active: mode === 'list'}">
-            <a ui-sref="receivable({mode: 'list'})">
-              Invoice by Number
-            </a>
-          </li>
-        </ul>
+           window-class="modal-receive-payment"
+           mw-controller="quicktech.core.receivable.receivePaymentCtrl">
+        <i class="icn-sm small-icn-tick"></i>
       </div>
 
-      <div class="tab-content">
-        <div ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>
-      </div>
+      <ul class="nav nav-qt" role="tablist">
+
+        <li role="presentation" ng-class="{active: mode === 'group-by-company'}">
+          <a ui-sref="receivable({mode: 'group-by-company'})">
+            Invoice by Company
+          </a>
+        </li>
+
+        <li role="presentation" ng-class="{active: mode === 'list'}">
+          <a ui-sref="receivable({mode: 'list'})">
+            Invoice by Number
+          </a>
+        </li>
+
+      </ul>
 
     </div>
+
+    <div class="tab-content" ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>
+
   </div>
 </div>

@@ -22,6 +22,7 @@
             var modalInstance = $modal.open({
               animation: false,
               backdrop: 'static',
+              windowClass: attrs.modalWindowClass || '',
               templateUrl: attrs.modalWindowButton,
               controller: attrs.mwController,
               scope: scope,
