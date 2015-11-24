@@ -37,16 +37,18 @@
           <div class="create-user-form">
             <div class="form-row clearfix">
 
-              <div class="form-group full-width" ng-class="{error: isShowingErrors(basicInfoForm, 'companyName')}">
+              <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyName')}">
 
-                <label class="control-label">Name</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyName')}">
+                  Name
+                </label>
 
                 <div ng-messages="basicInfoForm.companyName.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'companyName')">
-                  <div class="qt-error-msg" ng-message="required">Company name is required.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">Company name is too large.</div>
-                  <div class="qt-error-msg" ng-message="minlength">Company name is too short.</div>
-                  <div class="qt-error-msg" ng-message="unique">This company name already occupied.</div>
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'companyName')}">
+                  <div class="control-label" ng-message="required">Company name is required.</div>
+                  <div class="control-label" ng-message="maxlength">Company name is too large.</div>
+                  <div class="control-label" ng-message="minlength">Company name is too short.</div>
+                  <div class="control-label" ng-message="unique">This company name already occupied.</div>
                 </div>
 
                 <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
@@ -58,49 +60,57 @@
 
             <div class="form-row clearfix">
 
-              <div class="form-group full-width" ng-class="{error: isShowingErrors(basicInfoForm, 'supportMailBox')}">
+              <div class="form-group full-width"
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
 
-                <label class="control-label">Support Email</label>
+                <label class="control-label"
+                       ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
+                  Support Email
+                </label>
 
-                <div ng-messages="basicInfoForm.supportMailBox.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'supportMailBox')">
-                  <div class="qt-error-msg" ng-message="required">SUPPORT EMAIL name is required.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">SUPPORT EMAIL name is too large.</div>
-                  <div class="qt-error-msg" ng-message="minlength">SUPPORT EMAIL name is too short.</div>
+                <div ng-messages="basicInfoForm.supportMailBox.$error" style="padding-bottom: 1px;"
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'supportMailBox')}">
+                  <div class="control-label" ng-message="required">SUPPORT EMAIL name is required.</div>
+                  <div class="control-label" ng-message="maxlength">SUPPORT EMAIL name is too large.</div>
+                  <div class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</div>
                 </div>
 
-                <input class="form-control has-addon" type="text"
+                <div ng-messages="basicInfoForm.techDomainName.$error" style="padding-bottom: 1px;"
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">
+                  <div class="control-label" ng-message="required">Domain name is required.</div>
+                  <div class="control-label" ng-message="maxlength">Domain name is too large.</div>
+                  <div class="control-label" ng-message="minlength">Domain name is too short.</div>
+                  <div class="control-label" ng-message="unique">This Domain name already occupied.</div>
+                </div>
+
+                <input class="form-control" type="text"
                        ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
-                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur>
+                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur/>
 
-                <span class="">@</span>
-
-                <div ng-messages="basicInfoForm.techDomainName.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'techDomainName')">
-                  <div class="qt-error-msg" ng-message="required">Domain name is required.</div>
-                  <div class="qt-error-msg" ng-message="maxlength">Domain name is too large.</div>
-                  <div class="qt-error-msg" ng-message="minlength">Domain name is too short.</div>
-                  <div class="qt-error-msg" ng-message="unique">This Domain name already occupied.</div>
-                </div>
+                <span class="email-addon" style="width: 30px;left: 162px;">@</span>
 
                 <input class="form-control has-addon" type="text" ng-model="techDomainName"
                        name="techDomainName" ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
-                       is-uniq-validation validation-func="validateCompanyDomain">
+                       is-uniq-validation validation-func="validateCompanyDomain"
+                       style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;">
 
-                <span class="">.quicktech.com</span>
+                <span class="email-addon" style="width: 120px;">.quicktech.com</span>
+
               </div>
 
             </div>
 
             <div class="form-row clearfix">
 
-              <div class="form-group full-width" ng-class="{error: isShowingErrors(basicInfoForm, 'businessEmail')}">
+              <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
 
-                <label class="control-label">Business Email</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">
+                  Business Email
+                </label>
 
                 <div ng-messages="basicInfoForm.businessEmail.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'businessEmail')">
-                  <div class="qt-error-msg" ng-message="pattern">Please enter a valid email.</div>
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'businessEmail')}">
+                  <div class="control-label" ng-message="pattern">Please enter a valid email.</div>
                 </div>
 
                 <input class="form-control" type="text" name="businessEmail"
@@ -111,13 +121,15 @@
             <div class="form-row clearfix">
 
               <div class="form-group full-width"
-                   ng-class="{error: isShowingErrors(basicInfoForm, 'companyDescription')}">
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyDescription')}">
 
-                <label class="control-label">Description of Business</label>
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyDescription')}">
+                  Description of Business
+                </label>
 
                 <div ng-messages="basicInfoForm.companyDescription.$error"
-                     ng-if="isShowingErrors(basicInfoForm, 'companyDescription')">
-                  <div class="qt-error-msg" ng-message="required">
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'companyDescription')}">
+                  <div class="control-label" ng-message="required">
                     Please enter a brief description of the company’s business.
                   </div>
                 </div>
@@ -244,16 +256,16 @@
               <div class="form-row clearfix"
                    ng-repeat="phoneNumber in address.phoneNumbers">
 
-                <div class="form-group" ng-class="{error: this[addressFormName]['phoneNumber' + $index].$invalid}">
+                <div class="form-group" ng-class="{'has-error': this[addressFormName]['phoneNumber' + $index].$invalid}">
 
                   <label class="control-label">Contact No.</label>
 
                   <div ng-messages="this[addressFormName]['phoneNumber' + $index].$error"
                        ng-if="this[addressFormName]['phoneNumber' + $index].$invalid">
-                    <div class="qt-error-msg" ng-message="required">contact no. is required.</div>
-                    <div class="qt-error-msg" ng-message="maxlength">contact no. is too large</div>
-                    <div class="qt-error-msg" ng-message="minlength">contact no. is too short</div>
-                    <div class="qt-error-msg" ng-message="pattern">invalid no.</div>
+                    <div class="control-label" ng-message="required">contact no. is required.</div>
+                    <div class="control-label" ng-message="maxlength">contact no. is too large</div>
+                    <div class="control-label" ng-message="minlength">contact no. is too short</div>
+                    <div class="control-label" ng-message="pattern">invalid no.</div>
                   </div>
 
                   <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
@@ -294,13 +306,16 @@
               <div class="form-row clearfix">
 
                 <div class="form-group full-width"
-                     ng-class="{error:isShowingErrors(this[addressFormName], 'companyTimezone')}">
+                     ng-class="{'has-error':isShowingErrors(this[addressFormName], 'companyTimezone')}">
 
-                  <label class="control-label">Timezone</label>
+                  <label class="control-label"
+                         ng-class="{'hide': isShowingErrors(this[addressFormName], 'companyTimezone')}">
+                    Timezone
+                  </label>
 
                   <div ng-messages="this[addressFormName].companyTimezone.$error"
-                       ng-if="isShowingErrors(this[addressFormName], 'companyTimezone')">
-                    <div class="qt-error-msg error-msg">Please select the timezone.</div>
+                       ng-class="{'hide': !isShowingErrors(this[addressFormName], 'companyTimezone')}">
+                    <div class="control-label error-msg">Please select the timezone.</div>
                   </div>
 
                   <div class="pull-left dropdown">

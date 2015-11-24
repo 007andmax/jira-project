@@ -36,7 +36,7 @@
 
         $scope.validateCompanyDomain = function (ngModelCtrl) {
           var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
-            ngModelCtrl.$setValidity('unique', validationResult.value);
+            ngModelCtrl.$setValidity('unique', !validationResult.value);
           });
         }
 
