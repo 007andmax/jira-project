@@ -19,25 +19,11 @@
 
           <div edit-avatar ng-model="editCompany.logo" model-name="company" model-id="{{ editCompany.id }}"></div>
 
-          <!--<div class="create-user-avatar clearfix">-->
-          <!--<div class="avatar pull-left">-->
-          <!--<img ng-src="/html/images/logo-xlarge.png" class="no-avatar">-->
-          <!--</div>-->
-          <!--<div class="choose-file pull-left">-->
-          <!--<div class="select-file clearfix">-->
-          <!--<input type="file">-->
-
-          <!--<div class="btn btn-lg btn-primary pull-left">Choose Logo</div>-->
-          <!--<span class="file-name pull-left">Choosing a logo is recommended.</span>-->
-          <!--</div>-->
-          <!--<div class="file-type pull-left ">maximum size of 2 MB in PNG formart is allowed.</div>-->
-          <!--</div>-->
-          <!--</div>-->
-
           <div class="create-user-form">
             <div class="form-row clearfix">
 
-              <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyName')}">
+              <div class="form-group full-width"
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyName')}">
 
                 <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyName')}">
                   Name
@@ -58,13 +44,53 @@
               </div>
             </div>
 
+            <!--<div class="form-row clearfix">-->
+
+            <!--<div class="form-group full-width"-->
+            <!--ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">-->
+
+            <!--<label class="control-label"-->
+            <!--ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">-->
+            <!--Support Email-->
+            <!--</label>-->
+
+            <!--<div ng-messages="basicInfoForm.supportMailBox.$error" style="padding-bottom: 1px;"-->
+            <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
+            <!--<div class="control-label" ng-message="required">SUPPORT EMAIL name is required.</div>-->
+            <!--<div class="control-label" ng-message="maxlength">SUPPORT EMAIL name is too large.</div>-->
+            <!--<div class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</div>-->
+            <!--</div>-->
+
+            <!--<div ng-messages="basicInfoForm.techDomainName.$error" style="padding-bottom: 1px;"-->
+            <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
+            <!--<div class="control-label" ng-message="required">Domain name is required.</div>-->
+            <!--<div class="control-label" ng-message="maxlength">Domain name is too large.</div>-->
+            <!--<div class="control-label" ng-message="minlength">Domain name is too short.</div>-->
+            <!--<div class="control-label" ng-message="unique">This Domain name already occupied.</div>-->
+            <!--</div>-->
+
+            <!--<input class="form-control" type="text"-->
+            <!--ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"-->
+            <!--ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur/>-->
+
+            <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
+
+            <!--<input class="form-control has-addon" type="text" ng-model="techDomainName"-->
+            <!--name="techDomainName" ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur-->
+            <!--is-uniq-validation validation-func="validateCompanyDomain"-->
+            <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;">-->
+
+            <!--<span class="email-addon" style="width: 120px;">.quicktech.com</span>-->
+
+            <!--</div>-->
+
+            <!--</div>-->
+
             <div class="form-row clearfix">
-
               <div class="form-group full-width"
-                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox')}">
 
-                <label class="control-label"
-                       ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
                   Support Email
                 </label>
 
@@ -75,34 +101,18 @@
                   <div class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</div>
                 </div>
 
-                <div ng-messages="basicInfoForm.techDomainName.$error" style="padding-bottom: 1px;"
-                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                  <div class="control-label" ng-message="required">Domain name is required.</div>
-                  <div class="control-label" ng-message="maxlength">Domain name is too large.</div>
-                  <div class="control-label" ng-message="minlength">Domain name is too short.</div>
-                  <div class="control-label" ng-message="unique">This Domain name already occupied.</div>
-                </div>
-
-                <input class="form-control" type="text"
+                <input class="form-control has-addon" type="text"
                        ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
-                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur/>
+                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur>
 
-                <span class="email-addon" style="width: 30px;left: 162px;">@</span>
-
-                <input class="form-control has-addon" type="text" ng-model="techDomainName"
-                       name="techDomainName" ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
-                       is-uniq-validation validation-func="validateCompanyDomain"
-                       style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;">
-
-                <span class="email-addon" style="width: 120px;">.quicktech.com</span>
-
+                <span class="email-addon">@<span>{{ editCompany.name || 'company' }}</span>.quicktech.com</span>
               </div>
-
             </div>
 
             <div class="form-row clearfix">
 
-              <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
+              <div class="form-group full-width"
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
 
                 <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">
                   Business Email
@@ -134,10 +144,10 @@
                   </div>
                 </div>
 
-                <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
-                          required="true" maxlength="80" ng-trim="false" make-dirty-on-blur
-                          popover="Describe the company's business in 80 characters (spaces included)."
-                          popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
+         <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
+                   required="true" maxlength="80" ng-trim="false" make-dirty-on-blur
+                   popover="Describe the company's business in 80 characters (spaces included)."
+                   popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
 
                 <div class="word-count">{{ 80 - editCompany.description.length }}</div>
               </div>
@@ -256,7 +266,8 @@
               <div class="form-row clearfix"
                    ng-repeat="phoneNumber in address.phoneNumbers">
 
-                <div class="form-group" ng-class="{'has-error': this[addressFormName]['phoneNumber' + $index].$invalid}">
+                <div class="form-group"
+                     ng-class="{'has-error': this[addressFormName]['phoneNumber' + $index].$invalid}">
 
                   <label class="control-label">Contact No.</label>
 
