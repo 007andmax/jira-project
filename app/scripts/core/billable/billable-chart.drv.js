@@ -31,7 +31,7 @@
 
           function drawBillableChart(generateCircles) {
 
-            if(!ctrl.$viewValue || ctrl.$viewValue.length === 0){
+            if (!ctrl.$viewValue || ctrl.$viewValue.length === 0) {
               return;
             }
 
@@ -64,7 +64,7 @@
 
               for (var i = 0; i < chartData.length; i++) {
 
-                if(chartData[i].sum === undefined){
+                if (chartData[i].sum === undefined) {
                   graphPoints.push({
                     x: distanceToNextValue,
                     date: chartData[i].date
@@ -123,7 +123,7 @@
 
               for (var i = 0; i < graphPoints.length; i++) {
 
-                if(!graphPoints[i].value && graphPoints[i].value !== 0){
+                if (!graphPoints[i].value && graphPoints[i].value !== 0) {
                   continue;
                 }
 
@@ -240,8 +240,8 @@
             tooltipContext.fillText(currentDay, 45, 40);
 
             tooltip.css({
-              top: (circle.y + 40) + 'px',
-              left: (circle.x) + 'px'
+              top: (circle.y + 30) + 'px',
+              left: (circle.x - 15) + 'px'
             });
 
             tooltip.show();
@@ -284,9 +284,9 @@
             chartContext.closePath();
           }
 
-          function startXCoordinateGrad(data){
-            for(var i = 0; i < data.length; i++){
-              if(data[i].value || data[i].value === 0){
+          function startXCoordinateGrad(data) {
+            for (var i = 0; i < data.length; i++) {
+              if (data[i].value || data[i].value === 0) {
                 return data[i].x;
               }
             }

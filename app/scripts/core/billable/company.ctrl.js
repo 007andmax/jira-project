@@ -8,6 +8,11 @@
 
         $scope.company = CompaniesService.getOneById($scope.billableCompany.company.id);
 
+        $scope.ifCompanyLocked = function(){
+          //TODO get from service
+          return false;
+        };
+
         $scope.toggleBillableTickets = function () {
 
           if ($scope.showTickets) {

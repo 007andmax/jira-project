@@ -9,7 +9,7 @@
         link: function (scope, element, attrs) {
 
           element.find('[qt-ts-toggler]').click(function () {
-            element.toggleClass("opened");
+            element.toggleClass("expanded");
             element.find('[qt-ts-slider]').slideToggle('fast');
           })
         }

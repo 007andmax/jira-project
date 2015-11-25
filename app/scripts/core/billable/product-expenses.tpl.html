@@ -1,17 +1,19 @@
-<li class="product" ng-repeat="product in ticket.productExpenses">
-  <div class="table-wrapper clearfix">
-    <div class="table-content pull-left">
-      <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
-      <!--<div class="col-1 col-0">{{ product.createdAt | date:'dd MMM yyyy' }}</div>-->
-      <div class="col-1">Hard Disk <span class="model">#{{ product.item.code }}</span></div>
-      <div class="col-4">{{ product.sum | currency: '$': 0 }}</div>
-      <div class="col-3">
-        {{ product.price | currency: '$': 0 }} <span class="model">Qty {{ product.billableQuantity }}</span>
-      </div>
-      <div class="col-2 description" popover="{{ product.description }}" popover-trigger="mouseenter"
-           popover-placement="bottom" style="width: calc(100% - 506px);">
-        {{ product.description }}
-      </div>
-    </div>
+<div class="table-content pull-right" ng-repeat="product in ticket.productExpenses">
+  <i class="icn icn-sm icn-update-product"></i>
+
+  <div class="col-1">{{ product.item.name }}
+    <span class="model">#{{ product.item.code }}</span>
   </div>
-</li>
+
+  <div class="col-2 description"
+       popover="{{ product.description }}" popover-placement="bottom">
+    {{ product.description }}
+  </div>
+
+  <div class="col-4">{{ product.sum | currency: '$': 0 }}</div>
+
+  <div class="col-3">{{ product.price | currency: '$': 0 }}
+    <span class="model">Qty {{ product.billableQuantity }}</span>
+  </div>
+
+</div>

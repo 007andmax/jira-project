@@ -456,7 +456,7 @@ hr {
 }
 .avatar-26.remove:hover {
   /*background-image: url('assets/images/avatars/avatar-small.png');*/
-  background-image: url('../../../assets/images/avatars/avatar-small.png');
+  background-image: url('../images/avatars/avatar-small.png');
   background-color: #d2dae4;
 }
 .avatar-38 {

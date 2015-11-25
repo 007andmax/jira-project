@@ -1,108 +1,136 @@
 <div>
+  <div class="billable-head clearfix">
 
-  <div class="content-head clearfix">
-    <div class="content-stat pull-left">
-      <div class="heading"><span class="bold">BILLED AMOUNT</span> LAST 30 DAYS <span class="dot-sep"></span> <span
-        class="amount">{{ billedAmountLast30Days | currency:'' :0 }} USD</span></div>
+    <div class="chart-wrapper">
+      <div class="heading"><strong>Billed Amount</strong>
+        <span>Last 30 Days</span> <span class="dot-sep"></span>
+        <span>{{ billedAmountLast30Days | currency:'' :0 }} USD</span></div>
 
       <div billable-chart ng-model="billableChartData"></div>
 
     </div>
-    <div class="content-all-time-stat pull-left">
-      <div class="heading">
-        <div class="title"><span class="bold">BILLED AMOUNT</span> ALL TIME</div>
-        <div class="amount">{{ totalBilledAmount.value | currency:'' :0 }} usd</div>
+
+    <div class="all-time-stats">
+
+      <div class="heading"><strong>BILLED AMOUNT <span>ALL TIME</span></strong>
+        <span class="amount">{{ totalBilledAmount.value | currency:'' :0 }} USD</span>
       </div>
-      <div class="total-billables">
-        <div pie-chart pie-chart-value="[totalbillables, billedAmountLast30Days]"
+
+      <div class="total-billable">
+        <div class="pie-chart" pie-chart pie-chart-value="[totalbillables, billedAmountLast30Days]"
              pie-chart-size="40" pie-chart-color="['#7fd5e0', '#e53935']"></div>
-        <div class="heading pull-left">
-          <div class="title"><span class="bold">TOTAL BILLABLES</span></div>
-          <div class="amount">{{ totalbillables | currency:'' :0 }} USD</div>
+        <div class="pull-left">
+          <strong>TOTAL BILLABLES</strong>
+          <strong class="amount">{{ totalbillables | currency:'' :0 }} USD</strong>
         </div>
       </div>
+
     </div>
 
   </div>
 
-  <div class="content-body">
-    <div role="tabpanel" fixed-tab-topbar="400">
-      <div class="tabs-topbar" ftt-topbar-to-be-fixed>
+  <div class="billable-content">
+    <div class="tabs-container">
 
-        <a href="javascript:void(0)" class="btn btn-sr btn-create-in btn-scooter pull-right tp-hide"
+      <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
+           ng-disabled="!countTicket"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
            modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
            mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-           mw-controller="quicktech.core.billable.createInvoiceCtrl"
-           tooltip-placement="top" tooltip="Create Invoice" ng-disabled="!countTicket">
-          <span class="icns icn icn-create-invoice "></span>
-        </a>
+           mw-controller="quicktech.core.billable.createInvoiceCtrl">
+        <i class="icn-sm icn-product-add"></i>
+      </div>
 
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active">
-            <a href="javascript:void(0)">
-              Billable Clients
-            </a>
-          </li>
-          <li role="presentation">
-            <a ui-sref="accounting.recurring">
-              Recurring Invoices
-            </a>
+      <ul class="nav nav-qt" role="tablist">
+
+        <li role="presentation" class="active">
+          <a href="javascript:void(0)">Billable Clients</a>
+        </li>
+
+        <li role="presentation">
+          <a ui-sref="accounting.recurring">Recurring Invoices</a>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active">
+        <ul class="qt-list qt-billable-clients" ftt-tab-content>
+
+          <li class="billable-main"
+              event-toggle-slider="toggleBillableTickets"
+              ng-controller="quicktech.core.billable.companyCtrl"
+              ng-repeat="billableCompany in billableCompanies | orderBy:'-ticketsCount'"
+              show-model-element="{{ 'showCompany-' + company.id }}">
+
+            <div class="col-1" ng-click="toggleBillableTickets()">
+
+              <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
+                 ng-show="ifCompanyLocked()">
+                <i class="icn-sm icn-locked"></i>
+              </a>
+
+              <label class="control checkbox pull-left" ng-hide="ifCompanyLocked()" stop-propagation="click">
+                <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
+                       ng-click="changeCompanyCheckbox(company.id)">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="checkbox-caption">{{ company.name }}</div>
+              <span class="label label-light">{{ billableCompany.ticketsCount }}</span>
+            </div>
+
+            <div class="col-2" ng-click="toggleBillableTickets()">
+              <div class="billable-amount">{{ billableCompany.total | currency: '$': 0 }}</div>
+            </div>
+
+            <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets"
+                ng-controller="quicktech.core.billable.companyTicketsCtrl">
+
+              <li class="inventry-details"
+                  ng-repeat="ticket in companyBillableTickets | orderBy:'closedAt'" qt-toggle-slider
+                  show-model-element="{{ 'showTicket-' + ticket.id }}">
+
+                <div class="col-1" qt-ts-toggler>
+                  <div class="clearfix">
+
+                    <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left"
+                       ng-show="disabledTicket(ticket.id)" stop-propagation="click"
+                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="Eric Hoffman">
+                      <i class="icn-sm icn-locked-blue"></i>
+                    </a>
+
+                    <label class="control checkbox pull-left"
+                           ng-hide="disabledTicket(ticket.id)" stop-propagation="click">
+                      <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
+                             ng-change="changeTicketCheckbox(billableCompany)">
+                      <span class="control-indicator"></span>
+                    </label>
+
+                    <div class="checkbox-caption">{{ ticket.subject }}</div>
+                    <span class="label label-primary">Tkt# {{ ticket.number }}</span>
+                  </div>
+                </div>
+
+                <div class="col-2" qt-ts-toggler>
+                  <div class="billable-amount">{{ totalTicketSum[ticket.id] | currency: '$': 0}}</div>
+                </div>
+
+                <div class="table-wrapper clearfix" qt-ts-slider style="display: none;">
+
+                  <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
+                  <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
+
+                </div>
+
+              </li>
+
+            </ul>
           </li>
         </ul>
       </div>
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="billable-clients">
-          <ul class="companies-list" ftt-tab-content>
-
-            <li event-toggle-slider="toggleBillableTickets" ng-controller="quicktech.core.billable.companyCtrl"
-                ng-repeat="billableCompany in billableCompanies | orderBy:'-ticketsCount'"
-                show-model-element="{{ 'showCompany-' + company.id }}">
-              <a href='javascript:void(0)' ng-click="toggleBillableTickets()">
-                <div class="ui-checkbox ui-checkbox-warning pull-left" stop-propagation="click">
-                  <label class="control checkbox">
-                    <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
-                           ng-click="changeCompanyCheckbox(company.id)">
-                    <span class="control-indicator"></span>
-                  </label>
-                </div>
-                <span class="name">{{ company.name }}</span> <span class=" badge badge-light ">{{ billableCompany.ticketsCount }}</span> <span
-                class="amount pull-right">{{ billableCompany.total | currency: '$': 0 }}</span>
-              </a>
-              <ul class="invoices" ets-slider ng-controller="quicktech.core.billable.companyTicketsCtrl"
-                  ng-if="showTickets">
-                <li ng-repeat="ticket in companyBillableTickets | orderBy:'closedAt'" qt-toggle-slider
-                    show-model-element="{{ 'showTicket-' + ticket.id }}">
-                  <a href='javascript:void(0)' qt-ts-toggler>
-                    <div class="ui-checkbox ui-checkbox-warning pull-left" stop-propagation="click">
-                      <label class="control checkbox" ng-class="{disabled: disabledTicket(ticket.id)}"
-                             tooltip="{{ disabledTicket(ticket.id) ? 'Locked' : '' }}" tooltip-placement="top">
-                        <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
-                               ng-disabled="disabledTicket(ticket.id)"
-                               ng-change="changeTicketCheckbox(billableCompany)">
-                        <span class="control-indicator"></span>
-                      </label>
-                    </div>
-                    <span class="name">{{ ticket.subject }}</span> <span
-                    class="label label-default label-ticket-number ">Tkt# {{ ticket.number }}</span> <span
-                    class="amount pull-right">{{ totalTicketSum[ticket.id] | currency: '$': 0}}</span>
-                  </a>
-                  <ul class="updates" qt-ts-slider>
-
-                    <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
-                    <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
-
-                  </ul>
-                </li>
-              </ul>
-            </li>
-
-          </ul>
-
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
