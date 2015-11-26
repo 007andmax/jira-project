@@ -8,6 +8,8 @@
 
           var uploadingAttachmentsCount = 0;
 
+          $scope.fileInfo = {quantityErrorFiles: 0};
+
           setTicketUpdateToDefault();
 
           function setTicketUpdateToDefault() {
@@ -31,6 +33,17 @@
                 $scope.$apply();
               },
               function (finish) {
+
+                if(finish.code === 400){
+
+                  $scope.fileInfo[file.name] = {
+                    error: true,
+                    message: finish.message
+                  };
+
+                  $scope.fileInfo.quantityErrorFiles ++;
+                  $scope.updateTicketNote.$setValidity('errorFile', false);
+                }
 
                 if (--uploadingAttachmentsCount === 0) {
                   $scope.disabledWhenLoadAttachment = false;
@@ -60,7 +73,16 @@
             };
           };
 
-          $scope.removeAttachment = function (index) {
+          $scope.removeAttachment = function (index, isErrorFile) {
+            if(isErrorFile){
+
+              $scope.fileInfo.quantityErrorFiles --;
+
+              if($scope.fileInfo.quantityErrorFiles === 0){
+                $scope.updateTicketNote.$setValidity('errorFile', true);
+              }
+            }
+
             $scope.ticketUpdate.attachments.splice(index, 1);
           };
 
