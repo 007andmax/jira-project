@@ -7,6 +7,7 @@
       'quicktech.common.services.UserNotificationService', '$timeout',
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService, $timeout) {
 
+        $scope.fileInfo = {quantityErrorFiles: 0};
         $scope.ticket = {priorityLevel: 'MEDIUM'};
         $scope.ticketAttachments = [];
         $scope.ticketPriorityValue = {
@@ -35,12 +36,33 @@
               $scope.$apply();
             },
             function (finish) {
+
+              if (finish.code === 400) {
+
+                $scope.fileInfo[file.name] = {
+                  error: true,
+                  message: finish.message
+                };
+
+                $scope.fileInfo.quantityErrorFiles++;
+                $scope.ticketForm.$setValidity('errorFile', false);
+              }
+
               file.id = finish.id;
             }, function (error) {
             });
         };
 
-        $scope.removeAttachment = function (index) {
+        $scope.removeAttachment = function (index, isErrorFile) {
+          if(isErrorFile){
+
+            $scope.fileInfo.quantityErrorFiles --;
+
+            if($scope.fileInfo.quantityErrorFiles === 0){
+              $scope.ticketForm.$setValidity('errorFile', true);
+            }
+          }
+
           $scope.ticketAttachments.splice(index, 1);
         };
 

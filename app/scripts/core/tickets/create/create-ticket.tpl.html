@@ -34,16 +34,20 @@
 
           <div class="form-group">
             <ul class="upload-attachments">
-              <li ng-repeat="file in ticketAttachments">
+              <li ng-repeat="file in ticketAttachments" ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
 
                 <span class="file-name">{{ file.name }}</span>
                 <span class="file-size">{{ file.size | fileSizeFilter }}</span>
 
                 <a href="javascript:void(0)" class="hit-area pull-right"
                    tooltip="Remove file" tooltip-placement="top"
-                   ng-click="removeAttachment($index)">
+                   ng-click="removeAttachment($index, fileInfo[file.name].error)">
                   <i class="icn-sm icn-remove-token"></i>
                 </a>
+
+                 <span class="pull-right" ng-show="fileInfo[file.name].error" style="color:#e53935">
+                   {{ fileInfo[file.name].message }}
+                 </span>
 
                 <a href="javascript:void(0)" class="hit-area pull-right"
                    ng-show="file.progress !== 100"
