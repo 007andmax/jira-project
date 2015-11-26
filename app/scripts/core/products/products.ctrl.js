@@ -6,6 +6,8 @@
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
 
+        $scope.isCreateCategoryShow = false;
+        $scope.newCategory = {};
         $scope.categories = ProductsService.getCategories($scope);
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
 
@@ -20,7 +22,7 @@
         $scope.addCategory = function (form) {
           if (form.$valid) {
             ProductsService.saveCategory($scope.newCategory, function () {
-              $scope.status.isopen = false;
+              $scope.isCreateCategoryShow = false;
               $scope.newCategory = {};
               form.$setPristine();
             });
@@ -41,6 +43,10 @@
 
         $scope.cancelEditForms = function () {
           $rootScope.$broadcast('cancelEditForm');
+        };
+
+        $scope.closeCreateCategoryForm = function(){
+          $scope.isCreateCategoryShow = false;
         }
 
       }]);

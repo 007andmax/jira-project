@@ -9,7 +9,7 @@
         link: function (scope, element, attrs) {
 
           scope.$on(attrs.eventToggleSlider, function () {
-            element.toggleClass("opened");
+            element.toggleClass("expanded");
             element.find('[ets-slider]').slideToggle('fast');
           });
         }

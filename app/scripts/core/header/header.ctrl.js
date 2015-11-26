@@ -13,9 +13,9 @@
             return 'users';
           } else if ($state.includes("companies") || $state.includes("createCompany")) {
             return 'companies';
-          } else if ($state.includes("ps.products")) {
+          } else if ($state.includes("products")) {
             return 'products';
-          } else if ($state.includes("ps.services")) {
+          } else if ($state.includes("services")) {
             return 'services';
           } else if ($state.includes("accounting.billable")) {
             return 'billable';

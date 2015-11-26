@@ -1,71 +1,58 @@
-<form name="editProductForm" ng-controller="quicktech.core.products.editProductCtrl">
-  <li class="clearfix no-border add-new edit-form">
-    <div class="hover">
-      <div class="col-1">{{ product ? product.code : actualCode.value }}</div>
-      <div class="col-2 normal">
-        <div class="col-wrapper one" ng-class="{error: isShowingErrors(editProductForm, 'editProductName')}">
-          <input type="text" class="form-control" placeholder="Product" name="editProductName"
-                 ng-required="true" ng-model="editProduct.name" ng-maxlength="100" ng-minlength="3"
-                 is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
-        </div>
-        <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductForm, 'editProductDescription')}">
-          <input type="text" class="form-control" placeholder="Description"
-                 ng-model="editProduct.description"
-                 ng-maxlength="500" name="editProductDescription">
-        </div>
-      </div>
+<div class="product-form-wrapper" ng-form="editProductForm" ng-controller="quicktech.core.products.editProductCtrl">
 
-      <div class="col-3 normal">
-        <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductForm, 'editProductVendor')}">
-          <input type="text" class="form-control has-dropdown form-control-dropdown dropdown-toggle"
-                 placeholder="Vendor/Supplier"
-                 typeahead-on-select="validateProductName(editProductForm.editProductName, product.versionedId.id)"
-                 ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
-                 typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
-                 typeahead-min-length="0" typeahead-editable="false"
-                 qt-typeahead-show-on-focus ng-trim="false"
-                 custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'scroll'}">
-        </div>
-      </div>
+  <div class="col-1">{{ product ? product.code : actualCode.value }}</div>
 
-      <div class="col-4 normal">
-        <div class="col-wrapper" ng-class="{error: isShowingErrors(editProductForm, 'cost')}">
-          <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
-                 name="cost" ng-change="validateSaleAndCost(editProductForm)"
-                 hard-reset-pattern="decimalNumberPattern" ng-required="true">
-        </div>
-      </div>
+  <div class="col-2" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductName')}">
+    <input type="text" class="form-control" placeholder="Product" name="editProductName"
+           ng-required="true" ng-model="editProduct.name" ng-maxlength="100" ng-minlength="3"
+           is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
+  </div>
 
-      <div class="col-5 normal">
-        <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'sale')}">
-          <input type="text" class="form-control" placeholder="Sale Price" ng-model="editProduct.sale"
-                 name="sale" ng-change="validateSaleAndCost(editProductForm)"
-                 hard-reset-pattern="decimalNumberPattern" ng-required="true">
-        </div>
-      </div>
+  <div class="col-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
+    <div class="dropdown">
 
-      <div class="col-6 normal description">
-        <div class="col-wrapper"
-             ng-class="{error: isShowingErrors(editProductForm, 'editProductDescriptionCopy')}">
-          <input type="text" class="form-control" placeholder="Description"
-                 ng-model="editProduct.description"
-                 ng-maxlength="500" name="editProductDescriptionCopy">
-        </div>
-      </div>
+      <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
+             data-toggle="dropdown" aria-expanded="false"
+             typeahead-on-select="validateProductName(editProductForm.editProductName, product.versionedId.id)"
+             ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
+             typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
+             typeahead-min-length="0" typeahead-editable="false"
+             qt-typeahead-show-on-focus ng-trim="false"
+             custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'scroll'}">
+      <i class="icn-sm icn-caret-gray"></i>
+
+    </div>
+  </div>
+
+  <div class="col-4" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}">
+    <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
+           name="cost" ng-change="validateSaleAndCost(editProductForm)"
+           hard-reset-pattern="decimalNumberPattern" ng-required="true">
+  </div>
+
+  <div class="col-5" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
+    <input type="text" class="form-control" placeholder="S. Price" ng-model="editProduct.sale"
+           name="sale" ng-change="validateSaleAndCost(editProductForm)"
+           hard-reset-pattern="decimalNumberPattern" ng-required="true">
+  </div>
+
+  <div class="col-desc" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+    <input type="text" class="form-control" placeholder="Description"
+           ng-model="editProduct.description"
+           ng-maxlength="500" name="editProductDescription">
+  </div>
+
+  <div class="qt-form-actions">
+
+    <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
+
+    <div class="btn btn-lg btn-info pull-right" ng-click="saveChangeProduct(editProductForm)"
+         ng-disabled="disabledSaveChangeButton" ng-class="{'disabled': disabledSaveChangeButton}">
+      {{ product ? 'Save' : 'Add' }}
     </div>
 
-    <div class="add-more  new clearfix">
-      <div class="product-add-table-message pull-left">
-        <div class="qt-error-msg">{{ getValidationMessage(editProductForm) }}</div>
-      </div>
-      <div class="add-table-actions pull-right">
-        <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-           ng-click="cancelEditProduct()">Cancel</a>
-        <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-           ng-click="saveChangeProduct(editProductForm)"
-           ng-disabled="disabledSaveChangeButton">{{ product ? 'Save Changes' : 'Create' }}</a>
-      </div>
-    </div>
-  </li>
-</form>
+    <div class="btn btn-lg btn-primary pull-right" ng-click="cancelEditProduct()">Cancel</div>
+  </div>
+
+</div>
+
