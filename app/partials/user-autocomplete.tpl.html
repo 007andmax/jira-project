@@ -1,9 +1,12 @@
-<a herf="" class="pull-left avatar-26 avatar m-r">
-  <img ng-init="user = match.model"
-       ng-src="{{ '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '') }}"
-       alt="..." class="img-circle">
-</a>
 <div class="clearfix">
+  <a herf="javascript:void(0)" class="pull-left avatar">
+    <img ng-init="user = match.model"
+         class="img-circle avatar-26"
+         ng-src="{{ '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '') }}"
+         alt="...">
+  </a>
+
   <div class="user-name"
        bind-html-unsafe='(match.label | typeaheadHighlight:query) + " \"" + match.model.primaryEmail + "\""'></div>
+
 </div>

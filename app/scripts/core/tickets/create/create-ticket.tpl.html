@@ -16,7 +16,7 @@
 
     <div class="modal-body">
 
-      <div class="form-group" ng-class="{'has-error': ticketForm.ticketSubject.$dirty && !ticket.subject}">
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}">
 
         <input type="text" class="form-control" placeholder="Subject"
                name="ticketSubject"
@@ -24,7 +24,7 @@
                ng-model="ticket.subject">
       </div>
 
-      <div class="form-group" ng-class="{'has-error': ticketForm.note.$dirty && !ticket.note}"
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'note')}"
            style="margin-bottom: 8px;">
 
         <div text-editor ng-model="ticket.note" te-required="true" name="note">
@@ -197,43 +197,33 @@
         <li>
 
           <div>
-            <div class="form-group" ng-class="{'has-error': ticketForm.ticketCompany.$dirty && !ticket.company}">
+            <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCompany')}">
 
               <label>Company</label>
 
-              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
-                     ng-model="searchCompany" name="ticketCompany" ng-required="true">
-              <ul class="dropdown-menu dropdown-company custom-scroll" role="menu">
+              <input type="text" class="form-control has-dropdown"
+                     ng-model="ticketCompany" name="ticketCompany"
+                     typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
+                     typeahead-min-length="0" ng-required="true" typeahead-editable="false"
+                     qt-typeahead-show-on-focus ng-trim="false"
+                     custom-style="{width: '174px', 'max-height': '170px', 'overflow-y': 'scroll'}">
 
-                <li ng-repeat="company in clientCompanies | filter: {'name': searchCompany}">
-                  <a tabindex="-1" href="javascript:void(0)" ng-click="chooseCompany(company)">{{ company.name }}</a>
-                </li>
-
-              </ul>
             </div>
           </div>
 
           <div>
-            <div class="form-group" ng-class="{'has-error': ticketForm.ticketCreated.$dirty && !ticket.createdUser}">
+            <div class="form-group dropdown-user-parent"
+                 ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCreatedUser')}">
 
               <label>Created for</label>
 
-              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
-                     ng-model="searchUser" name="ticketCreated" ng-required="true" ng-disabled="!ticket.company">
+              <input type="text" class="form-control has-dropdown"
+                     ng-model="ticketCreatedUser" name="ticketCreatedUser"
+                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                     typeahead="user as getUserName(user) for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus ng-trim="false" ng-required="true" ng-disabled="!ticketCompany"
+                     custom-style="{width: '380px', 'max-height': '204px', 'overflow-y': 'scroll'}">
 
-              <ul class="dropdown-menu dropdown-users custom-scroll" role="menu">
-                <li ng-repeat="user in usersCompany | filter: filterCreatedForUser">
-                  <div class="clearfix" ng-click="chooseUser(user)">
-
-                    <a href="javascript:void(0)" class="pull-left avatar">
-                      <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-26">
-                    </a>
-
-                    <div class="user-name">{{ getUserName(user, true) }}</div>
-
-                  </div>
-                </li>
-              </ul>
             </div>
           </div>
           <div>
@@ -260,29 +250,17 @@
 
         <li>
           <div>
-            <div class="form-group">
+            <div class="form-group dropdown-user-parent">
 
               <label>Assign to</label>
 
-              <input type="text" class="form-control has-dropdown" data-toggle="dropdown"
-                     ng-model="ticketAssignTo">
+              <input type="text" class="form-control has-dropdown"
+                     ng-model="ticketAssignTo" name="ticketAssignTo"
+                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     qt-typeahead-show-on-focus assign-to-validation ng-required="false"
+                     custom-style="{width: '380px', 'max-height': '204px', 'overflow-y': 'scroll'}">
 
-              <ul class="dropdown-menu dropdown-users custom-scroll" role="menu">
-
-                <li ng-repeat="assignedUser in usersCurrentCompany | filter: filterAssignedToUser"
-                    ng-click="chooseAssignedUser(assignedUser)">
-                  <div class="clearfix">
-
-                    <a href="javascript:void(0)" class="pull-left avatar">
-                      <img ng-src="{{ getUserAvatarUrl(assignedUser) }}" alt="..." class="img-circle avatar-26">
-                    </a>
-
-                    <div class="user-name">{{ getUserName(assignedUser, true) }}</div>
-
-                  </div>
-                </li>
-
-              </ul>
             </div>
           </div>
 
@@ -297,7 +275,7 @@
               </div>
 
               <div class="btn btn-lg btn-info" ng-click="saveTicket(ticketForm)"
-                   ng-disabled="ticketForm.$invalid || ticketForm.$pristine || savingInProcess">
+                   ng-disabled="(ticketForm.$invalid || ticketForm.$pristine || savingInProcess) && triedToSaveTicket">
                 Create
               </div>
 
