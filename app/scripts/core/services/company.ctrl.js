@@ -9,6 +9,8 @@
         var showServices = false,
           hasServices = false;
 
+        $scope.companyService = true;
+
         $scope.toggleServices = function () {
 
           if (!hasServices && !showServices) {

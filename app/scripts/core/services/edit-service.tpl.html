@@ -1,42 +1,38 @@
-<div ng-controller="quicktech.core.services.editServiceCtrl" class="clearfix no-border add-new opened">
-  <form name="editServiceForm">
-    <div class="hover">
-      <div class="col-1">
-        <div class="col-wrapper one" ng-class="{error: isShowingErrors(editServiceForm, 'editServiceName')}">
-          <input type="text" class="form-control" placeholder="Type" ng-model="editService.name"
-                 name="editServiceName" ng-required="true" ng-disabled="!service.isDefault && service"
-                 is-uniq-validation validation-func="validateServiceName" model-id="service.versionedId.id"
-                 ng-maxlength="100" ng-minlength="3">
-        </div>
-      </div>
-      <div class="col-2 normal">
-        <div class="col-wrapper one" ng-class="{error: isShowingErrors(editServiceForm, 'timeBlock')}">
-          <input type="text" class="form-control" placeholder="Min. Time Slice" ng-model="editService.timeBlock"
-                 ng-disabled="!service.isDefault && service" hard-reset-pattern="numberPattern"
-                 invalid-when="editService.timeBlock <= 0" ng-required="true" name="timeBlock">
-        </div>
-      </div>
+<div class="service-form-wrapper" ng-form="editServiceForm"
+     ng-controller="quicktech.core.services.editServiceCtrl">
 
+  <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
 
-      <div class="col-5 normal">
-        <div class="col-wrapper" ng-class="{error: isShowingErrors(editServiceForm, 'editServiceRate')}">
-          <input type="text" class="form-control" placeholder="Price" ng-model="editService.rate"
-                 name="editServiceRate" ng-required="true" hard-reset-pattern="decimalNumberPattern">
-        </div>
-      </div>
+    <input type="text" class="form-control" placeholder="Service"
+           ng-model="editService.name"
+           name="editServiceName" ng-required="true" ng-disabled="!service.isDefault && service"
+           is-uniq-validation validation-func="validateServiceName" model-id="service.versionedId.id"
+           ng-maxlength="100" ng-minlength="3">
+  </div>
 
+  <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
+
+    <input type="text" class="form-control" placeholder="Min. Time Slice"
+           ng-model="editService.timeBlock"
+           ng-disabled="!service.isDefault && service" hard-reset-pattern="numberPattern"
+           invalid-when="editService.timeBlock <= 0" ng-required="true" name="timeBlock">
+  </div>
+
+  <div class="col-3" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+    <input type="text" class="form-control" placeholder="Rate"
+           ng-model="editService.rate"
+           name="editServiceRate" ng-required="true" hard-reset-pattern="decimalNumberPattern">
+  </div>
+
+  <div class="qt-form-actions">
+    <div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>
+
+    <div class="btn btn-lg btn-info pull-right"
+         ng-click="saveEditService(editServiceForm)"
+         ng-disabled="disabledSaveButton" ng-class="{'disabled': disabledSaveButton}">
+      {{ editService.id ? 'Save' : 'Add' }}
     </div>
-    <div class="add-more  new clearfix">
-      <div class="service-add-table-message pull-left">
-        <div class="qt-error-msg">{{ getValidationMessage(editServiceForm) }}</div>
-      </div>
-      <div class="add-table-actions pull-right">
-        <a href="javascript:void(0)" class="btn btn-sr btn-gray btn-apply-filter pull-left"
-           ng-click="cancelEditForm()">Cancel</a>
-        <a href="javascript:void(0)" class="btn btn-sr btn-scooter btn-reset-filter pull-left"
-           ng-click="saveEditService(editServiceForm)" ng-disabled="disabledSaveButton">
-          {{ editService.id ? 'Save Changes' : 'Create' }}</a>
-      </div>
-    </div>
-  </form>
+
+    <div class="btn btn-lg btn-primary pull-right" ng-click="cancelEditForm()">Cancel</div>
+  </div>
 </div>

@@ -1,15 +1,19 @@
-<div class="nav-left ticket-nav" ng-controller="quicktech.core.header.servicesCtrl">
+<div class="topNavbarLeft-Left pull-left" ng-controller="quicktech.core.header.servicesCtrl">
+  <p class="pull-left" style="white-space: nowrap;"><strong>Services</strong></p>
 
-  <div class="" id="search-and-filter">
-    <h4>Manage Products & Services</h4>
-
-    <div class="form-group search-form pull-left">
-      <input type="text" class="form-control form-control-round form-control-search" placeholder="Search service..."
+  <div class="topNavbar-search pull-left">
+    <div class="input-group-search">
+      <input type="text" class="form-control-top-search user-search" placeholder="Search service..."
              ng-model="service" typeahead-on-select="showService(service)"
              typeahead="service as service.name for service in searchServices($viewValue)"
              typeahead-template-url="/html/scripts/core/header/typeahead-template/service.tpl.html"
              custom-style="{'max-height': '160px', 'overflow-y': 'scroll'}">
-      <a href="#" class="close icn-remove-token" tabindex="-1" ng-click="service = undefined"></a>
+
+      <span class="input-group-addon-search">
+        <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
+      </span>
+
     </div>
   </div>
+
 </div>

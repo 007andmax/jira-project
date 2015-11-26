@@ -45,6 +45,15 @@
           }
         }
 
+        $scope.$watch('checkedServices', function () {
+          $scope.checkedDefaultServices = 0;
+          for (var serviceId in $scope.checkedServices) {
+            if ($scope.checkedServices[serviceId]) {
+              $scope.checkedDefaultServices++
+            }
+          }
+        }, true)
+
       }]);
 
 }());

@@ -107,7 +107,7 @@
                   ng-controller="quicktech.core.products.productCtrl"
                   show-model-element="{{ 'show-' + product.versionedId.id}}">
 
-                <div class="intermediate-product" ng-if="!showEditProduct">
+                <div class="intermediate-parent-elem" ng-if="!showEditProduct">
                   <div class="col-1">{{ product.code}}</div>
 
                   <div class="col-2">
@@ -121,8 +121,8 @@
                   </div>
 
                   <div class="col-3">{{ product.vendor.name}}</div>
-                  <div class="col-4">{{ product.cost | currency }}</div>
-                  <div class="col-5">{{ product.sale | currency }}</div>
+                  <div class="col-4">{{ product.cost | currency: '$': 0 }}</div>
+                  <div class="col-5">{{ product.sale | currency: '$': 0 }}</div>
 
                   <div class="col-6" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
 

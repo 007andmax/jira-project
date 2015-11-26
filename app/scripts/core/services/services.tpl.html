@@ -1,110 +1,97 @@
-<div class="content-body receipt">
-  <div role="tabpanel" fixed-tab-topbar="0">
-    <div class="tabs-topbar" ftt-topbar-to-be-fixed>
-      <div class="dropdown pull-right service-move-to" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
-           ng-controller="quicktech.core.services.servicesMovingCtrl">
-        <a href="javascript:void(0)" class="btn btn-sr btn-create-company  btn-gray dropdown-toggle tooltip-dp"
-           data-placement="top" data-original-title="move service(s) to..." data-toggle="dropdown"
+<div class="services-content">
+  <div class="default-services-header" ng-controller="quicktech.core.services.defaultServicesCtrl">
+
+    <div class="default-service-count">Default Services
+      <span class="text-muted">{{ services.length }}</span>
+    </div>
+
+    <div class="dropdown pull-right" ng-controller="quicktech.core.services.servicesMovingCtrl">
+
+      <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
+           aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
+           tooltip="Move service(s) to..."
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
-           ng-disabled="!hasDefaultServicesChecked" ng-class="{disabled: !hasDefaultServicesChecked}">
-          <span class="icns icn icn-move-services "></span>
-        </a>
+           ng-disabled="!hasDefaultServicesChecked" ng-class="{'disabled': !hasDefaultServicesChecked}">
+        <i class="icn-sm icn-add-services"></i>
+      </div>
 
-        <div class="dropdown-menu assign-ticket-menu" stop-propagation="click">
-          <div class=" assign-ticket service-move-to-menu">
-            <div class="assign-ticket-content">
-              <div class="assign-ticket-header">
-                <div class="clearfix">
-                  <div class="form-group">
-                    <input class="form-control form-control-search form-control-dropdown-input"
-                           placeholder="Search company..." ng-model="searchCompany.name">
-                    <a href="javascript:void(0)" class="close icn-remove-token" tabindex="-1"></a>
-                  </div>
-                </div>
+      <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
+
+        <div role="presentation" class="checkbox-dropdown-header">
+          <div class="form-group">
+            <input type="text" class="form-control-filter" placeholder="Search company..."
+                   ng-model="searchCompany.name">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+        </div>
+
+        <div class="nano">
+          <div class="nano-content">
+            <div class="checkbox-dd-list">
+
+              <div class="checkbox-dd-item"
+                   ng-repeat="company in companies | filter : searchCompany | orderBy: 'name'">
+
+                <label class="control checkbox">
+                  <input type="checkbox" ng-model="movementStates[company.id].checked"
+                         ng-change="updateMovementState(company.id)">
+                  <span class="control-indicator pull-left"
+                        ng-class="{ 'alternate': movementStates[company.id].hasPartOfSelectedServices }"></span>
+                  {{ company.name }}
+                </label>
+
               </div>
-              <div move-services-scroll style="width: 300px !important; max-height: 350px; height: 350px;">
 
-                <ul class="users-list" style="padding-top: 0px;">
-
-                  <li ng-repeat="company in companies | filter : searchCompany | orderBy: 'name'">
-
-                    <div class="clearfix"><label class="control checkbox pull-left">
-                      <input type="checkbox" ng-model="movementStates[company.id].checked"
-                             ng-change="updateMovementState(company.id)">
-                      <span class="control-indicator"
-                            ng-class="{ intermediate: movementStates[company.id].hasPartOfSelectedServices }"></span>
-                    </label>
-                      {{ company.name }}
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="form-group btm-btn">
-                <button type="button" class="btn btn-scooter" ng-click="moveServices()" ng-disabled="disableMoveButton">
-                  Move
-                </button>
-              </div>
             </div>
           </div>
         </div>
+        <div role="presentation" class="checkbox-dropdown-footer clearfix">
+          <div class="number-selected pull-left">
+            <i class="pull-left icn-sm icn-tick-blue"></i>
+            <strong>{{ checkedDefaultServices }}</strong> selected
+          </div>
+          <div class="btn btn-info btn-lg pull-right"
+               ng-click="moveServices()"
+               ng-disabled="disableMoveButton" ng-click="{'disabled': disableMoveButton}">Move
+          </div>
+        </div>
       </div>
-
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation">
-          <a ui-sref="ps.products">Products</a>
-        </li>
-        <li role="presentation" class="active">
-          <a href="">Services & Rates</a>
-        </li>
-      </ul>
     </div>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active">
-        <ul class="companies-list recurring products services-list" ftt-tab-content>
-          <li class="opened default" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
-              ng-controller="quicktech.core.services.defaultServicesCtrl"
-              style="padding-bottom: 100px">
-            <a href='javascript:void(0)'>
-              <span class="name">DEFAULT SERVICES</span>
-              <span class="amount pull-right">{{ services.length }} services</span>
+    <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
 
-              <div class="clearfix"></div>
-            </a>
-
-            <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
-
-            <div ng-if="showCreateService" ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
-
-            <button class="btn btn-sr btn-create-in btn-scooter btn-create-service pull-right"
-                    tooltip-placement="top" tooltip="Add Service" ng-click="showCreateServiceForm()"
-                    ng-disabled="showCreateService" ng-class="{disabled: showCreateService}">
-              <span class="icns icn wt-icn-add-service "></span></button>
-
-          </li>
-          <li class="heading-warraper">
-            <div class="heading"><span class="bold">All Companies</span><span class="dot-sep"></span> Service & Rate
-              Lists
-            </div>
-            <div class="clearfix"></div>
-
-          </li>
-          <li qt-toggle-slider ng-repeat="company in companies | orderBy: 'name'"
-              ng-controller="quicktech.core.services.companyCtrl" event-toggle-slider="toggleServices">
-            <a href='javascript:void(0)' ng-click="toggleServices()">
-              <span class="name">{{ company.name }}</span>
-              <span class="amount pull-right">{{ services.length || 0 }} services</span>
-
-              <div class="clearfix"></div>
-            </a>
-
-            <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
-          </li>
-        </ul>
+    <div class="add-service-btn-wrapper">
+      <div class="btn btn-info has-tooltip"
+           ng-click="showCreateServiceForm()"
+           ng-disabled="showCreateService" ng-class="{disabled: showCreateService}"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
+        <i class="icn-sm icn-service-add"></i>
       </div>
     </div>
 
   </div>
+
+
+  <div class="all-companies-heading">
+    All Companies <span class="text-muted">Service &amp; Rate Lists</span>
+  </div>
+
+  <ul class="qt-list qt-services">
+
+    <li qt-toggle-slider ng-repeat="company in companies | orderBy: 'name'"
+        ng-controller="quicktech.core.services.companyCtrl"
+        event-toggle-slider="toggleServices">
+
+      <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;"
+           ng-click="toggleServices()"></div>
+
+      <div class="col-1">{{ company.name }}</div>
+      <div class="col-2">{{ services.length || 0 }} services</div>
+
+      <div ets-slider style="display: none;"
+           ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
+
+    </li>
+
+  </ul>
 </div>

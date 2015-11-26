@@ -1,36 +1,60 @@
-<ul class="invoices recurring services" ets-slider>
-  <li class="head clearfix" ng-show="services.length > 0">
-    <div class="">
-      <div class="col-1">TYPE</div>
-      <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
-      <div class="col-5" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
-    </div>
+<ul class="qt-list" ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
+
+  <li class="list-heading" ng-show="services.length > 0">
+    <div class="col-1">TYPE</div>
+    <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
+    <div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
+    <div class="col-4">&nbsp;</div>
   </li>
-  <li class="clearfix" ng-repeat="service in services | orderBy : 'createdAt'"
+
+  <li ng-repeat="service in services | orderBy : 'createdAt'"
       ng-controller="quicktech.core.services.serviceCtrl"
-      ng-class="{'no-border': isEditService, 'add-new': isEditService}"
+      ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
       show-model-element="{{ 'show-' + service.versionedId.id }}">
-    <div class="hover" ng-if="!isEditService">
+
+    <div class="intermediate-parent-elem" ng-if="!isEditService">
+
       <div class="col-1">
-        <div class="ui-checkbox ui-checkbox-warning pull-left" ng-if="showCheckboxes">
-          <label class="control checkbox">
-            <input type="checkbox" ng-model="checkedServices[service.versionedId.id]" ng-change="onChangeCheckbox()">
-            <span class="control-indicator"></span>
-          </label>
-        </div>
-        <span class="name">{{ service.name }}</span></div>
-      <div class="col-2 normal" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">{{ service.timeBlock | timeFilter }}</div>
+        <label class="control checkbox pull-left" ng-if="showCheckboxes">
+          <input type="checkbox" ng-model="checkedServices[service.versionedId.id]" ng-change="onChangeCheckbox()">
+          <span class="control-indicator"></span>
+        </label>
 
-      <div class="col-5 normal" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">{{ service.rate | currency }}</div>
-
-      <div class="sub-actions pull-left" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
-        <a href="javascript:void(0)" class="icn-nav-delete delete pull-right tp-hide" tooltip-placement="top"
-           tooltip="Delete Service" ng-click="deleteService()"></a>
-        <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" tooltip-placement="top"
-           tooltip="Edit Service" ng-click="showEditServiceForm()"></a>
+        <div class="checkbox-caption">{{ service.name }}</div>
       </div>
-      <div class="clearfix"></div>
+
+      <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+        {{ service.timeBlock | timeFilter }}
+      </div>
+
+      <div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+        {{ service.rate | currency: '$': 0 }}
+      </div>
+
+      <div class="col-4" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+
+        <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+           ng-click="deleteService()"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+          <i class="icn-sm icn-delete"></i>
+        </a>
+
+        <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+           ng-click="showEditServiceForm()"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">
+          <i class="icn-sm icn-edit"></i>
+        </a>
+
+      </div>
+
     </div>
+
     <div ng-if="isEditService" ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+
   </li>
+
+  <li class="qt-service-form" ng-if="showCreateService">
+    <div ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+  </li>
+
 </ul>

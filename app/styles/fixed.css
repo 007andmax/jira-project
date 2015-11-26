@@ -7,24 +7,28 @@
   margin-top: -225px !important;
 }
 
-/*product page*/
-.qt-list>li>.intermediate-category>[class*="col-"]:first-child {
+/*product page(and some service)*/
+.qt-list > li > .intermediate-category > [class*="col-"]:first-child {
   padding-left: 0;
 }
-.qt-products>li>.intermediate-category>.col-1 {
+
+.qt-products > li > .intermediate-category > .col-1 {
   width: calc(100% - 169px);
 }
-.qt-list>li>.intermediate-category>[class*="col-"] {
+
+.qt-list > li > .intermediate-category > [class*="col-"] {
   float: left;
   padding: 0 5px;
   vertical-align: top;
   position: relative;
 }
-.qt-products>li>.intermediate-category>.col-2 {
+
+.qt-products > li > .intermediate-category > .col-2 {
   width: 169px;
   text-align: right;
 }
-.qt-list>li .sub-wrapper {
+
+.qt-list > li .sub-wrapper {
   margin-top: 25px;
   display: none;
   float: left;
@@ -32,59 +36,70 @@
   cursor: auto;
 }
 
-.qt-list>li>.intermediate-product>[class*="col-"]:first-child {
+.qt-list > li > .intermediate-parent-elem > [class*="col-"]:first-child {
   padding-left: 0;
 }
-@media only screen and (max-width: 1700px){
-  .qt-product-list>li>.intermediate-product>.col-1{
+
+@media only screen and (max-width: 1700px) {
+  .qt-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 113px;
   }
-  .qt-product-list>li>.intermediate-product>.col-2{
+
+  .qt-product-list > li > .intermediate-parent-elem > .col-2 {
     width: calc(100% - 501px);
   }
-  .qt-product-list>li>.intermediate-product>.col-3{
+
+  .qt-product-list > li > .intermediate-parent-elem > .col-3 {
     width: 163px;
   }
-  .qt-product-list>li>.intermediate-product>.col-4{
+
+  .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 75px;
   }
-  .qt-product-list>li>.intermediate-product>.col-5{
+
+  .qt-product-list > li > .intermediate-parent-elem > .col-5 {
     width: 86px;
   }
-  .qt-product-list>li>.intermediate-product>.col-6{
+
+  .qt-product-list > li > .intermediate-parent-elem > .col-6 {
     width: 64px;
   }
 }
-.qt-product-list>li>.intermediate-product>.col-6>.hit-area{
+
+.qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area {
   margin-right: -2px;
   margin-top: 2px;
 }
-.qt-product-list>li>.intermediate-product>.col-6>.hit-area+.hit-area{
+
+.qt-product-list > li > .intermediate-parent-elem > .col-6 > .hit-area + .hit-area {
   margin-right: 16px;
 }
 
-.qt-list>li>.intermediate-product>[class*="col-"]:first-child {
+.qt-list > li > .intermediate-parent-elem > [class*="col-"]:first-child {
   padding-left: 0;
 }
-.qt-product-list>li>.intermediate-product>.col-1 {
+
+.qt-product-list > li > .intermediate-parent-elem > .col-1 {
   width: 183px;
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-.qt-list>li>.intermediate-product>[class*="col-"] {
+
+.qt-list > li > .intermediate-parent-elem > [class*="col-"] {
   float: left;
   padding: 0 5px;
   vertical-align: top;
   position: relative;
 }
 
-.qt-product-list>li>.intermediate-product>.col-2 {
+.qt-product-list > li > .intermediate-parent-elem > .col-2 {
   width: calc(100% - 711px);
   color: #94a4b8;
 }
-.qt-product-list>li>.intermediate-product>.col-3 {
+
+.qt-product-list > li > .intermediate-parent-elem > .col-3 {
   width: 233px;
   color: #94a4b8;
   overflow: hidden;
@@ -92,48 +107,119 @@
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-.qt-product-list>li>.intermediate-product>.col-4 {
+
+.qt-product-list > li > .intermediate-parent-elem > .col-4 {
   width: 125px;
   color: #94a4b8;
 }
-.qt-product-list>li>.intermediate-product>.col-5 {
+
+.qt-product-list > li > .intermediate-parent-elem > .col-5 {
   width: 106px;
   text-align: right;
   color: #94a4b8;
 }
-.qt-product-list>li>.intermediate-product>.col-6 {
+
+.qt-product-list > li > .intermediate-parent-elem > .col-6 {
   width: 64px;
   text-align: right;
   padding-right: 0;
 }
+
+/*service page*/
+.qt-default-services > li > .intermediate-parent-elem > .col-1 {
+  width: calc(100% - 319px);
+}
+
+.qt-default-services > li > .intermediate-parent-elem > .col-2 {
+  width: 133px;
+  color: #94a4b8;
+  padding-top: 9px;
+}
+
+.qt-default-services > li > .intermediate-parent-elem > .col-3 {
+  width: 122px;
+  text-align: right;
+  color: #94a4b8;
+  padding-top: 9px;
+}
+
+.qt-default-services > li > .intermediate-parent-elem > .col-4 {
+  width: 64px;
+  padding-top: 9px;
+}
+
+.qt-default-services > li > .intermediate-parent-elem > .col-4 > .hit-area {
+  margin-right: -2px;
+  margin-top: 2px;
+}
+
+.qt-default-services > li > .intermediate-parent-elem > .col-4 > .hit-area + .hit-area {
+  margin-right: 16px;
+}
+
+.qt-services-list > li > .intermediate-parent-elem > .col-1 {
+  width: calc(100% - 319px);
+}
+
+.qt-services-list > li > .intermediate-parent-elem > .col-2 {
+  width: 133px;
+  color: #94a4b8;
+}
+
+.qt-services-list > li > .intermediate-parent-elem > .col-3 {
+  width: 122px;
+  text-align: right;
+  color: #94a4b8;
+}
+
+.qt-services-list > li > .intermediate-parent-elem > .col-4 {
+  width: 64px;
+}
+
+.qt-services-list > li > .intermediate-parent-elem > .col-4 > .hit-area {
+  margin-right: -2px;
+  margin-top: 2px;
+}
+
+.qt-services-list > li > .intermediate-parent-elem > .col-4 > .hit-area + .hit-area {
+  margin-right: 16px;
+}
+
 /*created for dropdown in create user form*/
-.dropdown-user-parent>.dropdown-menu {
+.dropdown-user-parent > .dropdown-menu {
   width: 380px;
   height: 204px;
 }
-.dropdown-user-parent>.dropdown-menu > li {
+
+.dropdown-user-parent > .dropdown-menu > li {
   padding: 10px 20px;
   cursor: pointer;
 }
+
 @-moz-document url-prefix() {
-  .dropdown-user-parent>.dropdown-menu > li {
+  .dropdown-user-parent > .dropdown-menu > li {
     padding: 9px 20px 11px;
   }
 }
-.dropdown-user-parent>.dropdown-menu > li:hover {
+
+.dropdown-user-parent > .dropdown-menu > li:hover {
   background-color: #e7ecf2;
 }
-.dropdown-user-parent>.dropdown-menu > li .avatar {
+
+.dropdown-user-parent > .dropdown-menu > li .avatar {
   margin-right: 7px !important;
 }
-.dropdown-user-parent>.dropdown-menu > li .user-name {
+
+.dropdown-user-parent > .dropdown-menu > li .user-name {
   margin-top: 3px;
 }
-.dropdown-user-parent>.dropdown-menu > li .user-name a {
+
+.dropdown-user-parent > .dropdown-menu > li .user-name a {
   font-weight: normal;
   color: #4c5c6f;
 }
-.dropdown-user-parent>.dropdown-menu > li:active,
-.dropdown-user-parent>.dropdown-menu > li.active {
+
+.dropdown-user-parent > .dropdown-menu > li:active,
+.dropdown-user-parent > .dropdown-menu > li.active {
   background-color: #e2f1fd;
 }
