@@ -1,32 +1,35 @@
-<div ng-repeat="product in invoice.products" ng-controller="quicktech.core.recurring.productCtrl">
+<div ng-repeat="product in invoice.products"
+     ng-controller="quicktech.core.recurring.productCtrl">
 
-  <li class="product" ng-if="!showEditProduct">
-    <div class="table-wrapper clearfix">
+  <div class="table-content pull-left" ng-if="!showEditProduct">
 
-      <div class="table-content pull-left">
+    <i class="icn icn-sm icn-update-product"></i>
 
-        <div class="update-icon"><span class="icon-update icn-update-product"></span></div>
+    <div class="col-1">{{ product.item.name }}<span class="model">#{{ product.item.code }}</span></div>
 
-        <div class="col-5">
-          <a href="javascript:void(0)" class="icn-nav-delete delete pull-right  delete tp-hide" tooltip-placement="top"
-             tooltip="Delete" ng-click="deleteProductInvoice()"></a>
-          <a href="javascript:void(0)" class="icn-edit tp-hide pull-right delete" tooltip-placement="top"
-             tooltip="Edit Product" ng-click="showEditProductForm()"></a>
-        </div>
-
-        <div class="col-1">{{ product.item.name }}<span class="model">#{{ product.item.code }}</span></div>
-
-        <div class="col-4">{{ product.sum | currency: '$': 2 }}</div>
-
-        <div class="col-3">{{ product.price | currency: '$': 2 }} <span class="model">Qty {{ product.quantity }}</span>
-        </div>
-
-        <div class="col-2 description" popover="{{ product.description }}" popover-trigger="mouseenter"
-             popover-placement="bottom">{{ product.description }}
-        </div>
-      </div>
+    <div class="col-2 description" popover="{{ product.description }}"
+         popover-trigger="mouseenter" popover-placement="bottom">
+      {{ product.description }}
     </div>
-  </li>
+
+    <div class="col-4">{{ product.sum | currency: '$': 0 }}</div>
+    <div class="col-3">{{ product.price | currency: '$': 2 }}
+      <span class="model">Qty {{ product.quantity }}</span>
+    </div>
+
+    <a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"
+       ng-click="showEditProductForm()"
+       tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit product">
+      <i class="icn-sm icn-edit"></i>
+    </a>
+
+    <a href="javascript:void(0)" class="ha-delete hit-area has-tooltip"
+       ng-click="deleteProductInvoice()"
+       tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+      <i class="icn-sm icn-delete"></i>
+    </a>
+
+  </div>
 
   <div ng-if="showEditProduct" ng-include="'/html/scripts/core/recurring/edit-product-invoice.tpl.html'"></div>
 

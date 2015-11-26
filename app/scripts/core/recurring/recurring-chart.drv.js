@@ -7,7 +7,7 @@
       return {
         restrict: 'A',
         require: 'ngModel',
-        template: "<div class='chart'><canvas class='chart' recurring-graph style='width: 100%; height: 100%; background: white'/>" +
+        template: "<div class='chart'><canvas recurring-graph style='width: 100%; height: 100%; background: white'/>" +
         "<canvas tooltip-message width='100px' height='105px' style='position: relative; border-radius: 2px;'></canvas></div>",
         scope: {
           firstGradientColor: "=firstGradientColor",

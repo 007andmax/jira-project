@@ -10,12 +10,16 @@
         scope: {},
         link: function (scope, element, attrs, ctrl) {
 
-          //var dateInput = element.find('input');
-
-          element.datetimepicker({
+          var options = {
             keepOpen: true,
             format: 'DD MMM YYYY'
-          });
+          };
+
+          if(attrs.minDate){
+            options.minDate = new Date(attrs.minDate);
+          }
+
+          element.datetimepicker(options);
 
           //element.on('shown.bs.dropdown', function(){
           //  var dropdown = element.find('.dropdown-menu');

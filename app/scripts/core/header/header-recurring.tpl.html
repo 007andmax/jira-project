@@ -1,15 +1,19 @@
-<div class="nav-left ticket-nav" ng-controller="quicktech.core.header.recurringCtrl">
+<div class="topNavbarLeft-Left pull-left" ng-controller="quicktech.core.header.recurringCtrl">
+  <p class="pull-left" style="white-space: nowrap;"><strong>Billable</strong></p>
 
-  <div class="" id="search-and-filter">
-    <h4>Billable</h4>
+  <div class="topNavbar-search pull-left">
+    <div class="input-group-search">
 
-    <div class="form-group search-form pull-left">
-      <input type="text" class="form-control form-control-round form-control-search"
-             placeholder="Search invoice..."
+      <input type="text" class="form-control-top-search user-search" placeholder="Search invoice..."
              ng-model="invoice" typeahead-on-select="showInvoice(invoice)"
              typeahead="invoice as invoice.number for invoice in searchInvoice($viewValue)"
              custom-style="{'max-height': '160px', 'overflow-y': 'scroll'}">
-      <a href="" class="close icn-remove-token" tabindex="-1" ng-click="invoice = undefined"></a>
+
+      <span class="input-group-addon-search">
+        <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
+      </span>
+
     </div>
   </div>
+
 </div>

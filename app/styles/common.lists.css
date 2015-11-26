@@ -424,7 +424,6 @@ Devices tab
 }
 .qt-billable-sub>li+li{
   min-height: 71px;
-  height: auto;
 }
 .inventry-details .qt-table{
   float: right;

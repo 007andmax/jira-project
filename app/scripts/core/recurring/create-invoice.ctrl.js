@@ -3,15 +3,15 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.createInvoiceCtrl',
-    ['$scope', 'RecurringService', 'BillableService', '$rootScope',
-      function ($scope, RecurringService, BillableService, $rootScope) {
+    ['$scope', 'RecurringService', 'BillableService', '$rootScope', '$filter',
+      function ($scope, RecurringService, BillableService, $rootScope, $filter) {
 
         $scope.actualInvoiceNumber = BillableService.getActualInvoiceNumber($scope, function (value) {
           $scope.actualInvoiceNumber = value;
         });
 
         var day = 1000 * 60 * 60 * 24;
-        $scope.minSentOnDate = new Date(Date.now() + day);
+        $scope.minSentOnDate =  $filter('date')(new Date(Date.now() + day), 'd MMM yyyy');
 
         $scope.frequency = {
           WEEKLY: 'Weekly',
@@ -50,15 +50,17 @@
           if (form.$valid) {
             $scope.disabledCreateButton = true;
 
-            $scope.createInvoice.sentOn.setHours(0);
-            $scope.createInvoice.sentOn.setMinutes(0);
-            $scope.createInvoice.sentOn.setSeconds(0);
-            $scope.createInvoice.sentOn.setMilliseconds(0);
+            var dateSentOn = new Date($scope.createInvoice.sentOn);
+
+            dateSentOn.setHours(0);
+            dateSentOn.setMinutes(0);
+            dateSentOn.setSeconds(0);
+            dateSentOn.setMilliseconds(0);
 
             RecurringService.createRecurringInvoice({
               products: [],
               services: [],
-              sentOn: $scope.createInvoice.sentOn.getTime(),
+              sentOn: dateSentOn.getTime(),
               frequency: $scope.createInvoice.frequency
             }, $scope.recurringCompany.company.id, function () {
               $scope.$emit('cancelEditForm');
