@@ -105,7 +105,7 @@
                        ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
                        ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur>
 
-                <span class="email-addon">@<span>{{ editCompany.name || 'company' }}</span>.quicktech.com</span>
+                <span class="email-addon">@<span>{{ editCompany.name || 'company' }}</span>.{{ currentHost }}</span>
               </div>
             </div>
 
