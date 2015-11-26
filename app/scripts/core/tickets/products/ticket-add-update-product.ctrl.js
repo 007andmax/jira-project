@@ -23,7 +23,7 @@
           };
 
           $scope.isProductNameCorrect = function(){
-            if(!$scope.productExpense.item.name){
+            if(!$scope.productExpense.item.name || !$scope.productsByCategory){
               return;
             }
 
@@ -32,7 +32,9 @@
                 $scope.productExpense.item = $scope.productsByCategory[i].staticCopy();
                 return;
               } else {
-                $scope.productExpense.item.versionedId.id = '';
+                if($scope.productExpense.item.versionedId){
+                  $scope.productExpense.item.versionedId.id = '';
+                }
               }
             }
           }

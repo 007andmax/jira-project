@@ -1,36 +1,36 @@
-<div>
-  <ul class="dropdown-menu dropdown-menu-categories custom-scroll" stop-propagation="click">
-    <li role="presentation" ng-repeat=" category in productCategories"
-        ng-click="loadProductByCategory(category.id)">
+<ul class="dropdown-menu dropdown-menu-categories custom-scroll" stop-propagation="click">
+  <li role="presentation" ng-repeat=" category in productCategories"
+      ng-click="loadProductByCategory(category.id)">
 
-      <a role="menuitem" tabindex="-1" href="javascript:void(0)">
-        <span class="title">  {{ category.name }}</span>
-        <span class="pull-right total-count">{{ category.productsAmount }} items</span>
-        <span class="clearfix"></span>
-      </a>
+    <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+      <span class="title">  {{ category.name }}</span>
+      <span class="pull-right total-count">{{ category.productsAmount }} items</span>
+      <span class="clearfix"></span>
+    </a>
 
-    </li>
-  </ul>
+  </li>
+</ul>
 
-  <div class="dropdown-menu dropdown-menu-products" ng-class="{'hide': !productsByCategory}">
+<div class="dropdown-menu dropdown-menu-products" ng-class="{'hide': !productsByCategory}">
 
-    <div role="presentation" class="product-dropdown-header">
-      <div class="form-group">
-        <input type="text" class="form-control-filter" placeholder="Search product..."
-               ng-model="filterProduct" stop-propagation="click" style="background-color: #f1f5fa;border: 1px solid #e7ecf2;">
-        <i class="icn-sm icn-search-input" tabindex="-1"></i>
-      </div>
-    </div>
-
-    <div class="scroll-pane">
-      <ul class="custom-scroll subdropdown-menu">
-        <li role="presentation" ng-repeat="categoryProduct in productsByCategory | filter: {name: filterProduct}">
-          <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="selectProduct(categoryProduct)">
-            <span class="title"> {{ categoryProduct.name }}</span>
-            <span class="pull-right total-count">#{{ categoryProduct.code }}</span>
-          </a>
-        </li>
-      </ul>
+  <div role="presentation" class="product-dropdown-header">
+    <div class="form-group">
+      <input type="text" class="form-control-filter" placeholder="Search product..."
+             ng-model="filterProduct" stop-propagation="click"
+             style="background-color: #f1f5fa;border: 1px solid #e7ecf2;">
+      <i class="icn-sm icn-search-input" tabindex="-1"></i>
     </div>
   </div>
+
+  <div class="scroll-pane">
+    <ul class="custom-scroll subdropdown-menu">
+      <li role="presentation" ng-repeat="categoryProduct in productsByCategory | filter: {name: filterProduct}">
+        <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="selectProduct(categoryProduct)">
+          <span class="title"> {{ categoryProduct.name }}</span>
+          <span class="pull-right total-count">#{{ categoryProduct.code }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
+
