@@ -31,19 +31,16 @@
                 subsTooltipText,
                 userSubscription = scope.userInfo.subscription;
 
-              //if (userSubscription.ticket && userSubscription.invoice) {
-              //  icnSubscription = 'badge-invoice-and-ticket-updates badge-updates';
-              //  subsTooltipText = 'subscriber invoice and ticket updates';
-              //} else if (userSubscription.ticket && !userSubscription.invoice) {
-              //  icnSubscription = 'badge-ticket-updates badge-updates';
-              //  subsTooltipText = 'subscriber ticket updates';
-              //} else if (!userSubscription.ticket && userSubscription.invoice) {
-              //  icnSubscription = 'badge-invoice-updates badge-updates';
-              //  subsTooltipText = 'subscriber invoice updates';
-              //}
-
-              icnSubscription = 'badge-invoice-updates badge-updates';
+              if (userSubscription && userSubscription.ticket && userSubscription.invoice) {
+                icnSubscription = 'badge-invoice-and-ticket-updates badge-updates';
+                subsTooltipText = 'subscriber invoice and ticket updates';
+              } else if (userSubscription && userSubscription.ticket && !userSubscription.invoice) {
+                icnSubscription = 'badge-ticket-updates badge-updates';
+                subsTooltipText = 'subscriber ticket updates';
+              } else if (userSubscription && !userSubscription.ticket && userSubscription.invoice) {
+                icnSubscription = 'badge-invoice-updates badge-updates';
                 subsTooltipText = 'subscriber invoice updates';
+              }
 
               for (var i = 0; i < scope.userInfo.phoneNumbers.length; i++) {
 

@@ -11,7 +11,7 @@
         $scope.editCompany = $scope.currentCompany.staticCopy();
         $scope.timeRangeAllDays = {};
         $scope.timezones = AddressesService.getAllLocales();
-        $scope.currentHost = $location.$$host;
+        $scope.currentHost = $location.$$host === 'dev.quicktech.com' ? 'dev.quicktech.com': 'quicktech.com';
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function(){
           $scope.emailNotifications = $scope.emailNotifications.staticCopy();

@@ -34,11 +34,16 @@
           })
         };
 
-        $scope.validateCompanyDomain = function (ngModelCtrl) {
-          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
-            ngModelCtrl.$setValidity('unique', !validationResult.value);
+        $scope.$watch('editCompany.name', function(){
+          if(!$scope.editCompany.name){
+            return;
+          }
+
+          var validationResult = CompaniesService.isDomainUnique($scope.editCompany.name, $scope.editCompany.id || '', function () {
+            $scope.basicInfoForm.supportMailBox.$setValidity('uniqueDomain', !validationResult.value);
+            $scope.basicInfoForm.supportMailBox.$setDirty();
           });
-        }
+        })
 
       }]);
 
