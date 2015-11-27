@@ -44,53 +44,13 @@
               </div>
             </div>
 
-            <!--<div class="form-row clearfix">-->
-
-            <!--<div class="form-group full-width"-->
-            <!--ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">-->
-
-            <!--<label class="control-label"-->
-            <!--ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">-->
-            <!--Support Email-->
-            <!--</label>-->
-
-            <!--<div ng-messages="basicInfoForm.supportMailBox.$error" style="padding-bottom: 1px;"-->
-            <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
-            <!--<div class="control-label" ng-message="required">SUPPORT EMAIL name is required.</div>-->
-            <!--<div class="control-label" ng-message="maxlength">SUPPORT EMAIL name is too large.</div>-->
-            <!--<div class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</div>-->
-            <!--</div>-->
-
-            <!--<div ng-messages="basicInfoForm.techDomainName.$error" style="padding-bottom: 1px;"-->
-            <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
-            <!--<div class="control-label" ng-message="required">Domain name is required.</div>-->
-            <!--<div class="control-label" ng-message="maxlength">Domain name is too large.</div>-->
-            <!--<div class="control-label" ng-message="minlength">Domain name is too short.</div>-->
-            <!--<div class="control-label" ng-message="unique">This Domain name already occupied.</div>-->
-            <!--</div>-->
-
-            <!--<input class="form-control" type="text"-->
-            <!--ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"-->
-            <!--ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur/>-->
-
-            <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
-
-            <!--<input class="form-control has-addon" type="text" ng-model="techDomainName"-->
-            <!--name="techDomainName" ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur-->
-            <!--is-uniq-validation validation-func="validateCompanyDomain"-->
-            <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;">-->
-
-            <!--<span class="email-addon" style="width: 120px;">.quicktech.com</span>-->
-
-            <!--</div>-->
-
-            <!--</div>-->
-
             <div class="form-row clearfix">
-              <div class="form-group full-width"
-                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox')}">
 
-                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
+              <div class="form-group full-width"
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
+
+                <label class="control-label"
+                       ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
                   Support Email
                 </label>
 
@@ -99,15 +59,31 @@
                   <div class="control-label" ng-message="required">SUPPORT EMAIL name is required.</div>
                   <div class="control-label" ng-message="maxlength">SUPPORT EMAIL name is too large.</div>
                   <div class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</div>
-                  <div class="control-label" ng-message="uniqueDomain">This Domain name already occupied.</div>
                 </div>
 
-                <input class="form-control has-addon" type="text"
-                       ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
-                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur>
+                <div ng-messages="basicInfoForm.techDomainName.$error" style="padding-bottom: 1px;"
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">
+                  <div class="control-label" ng-message="required">Domain name is required.</div>
+                  <div class="control-label" ng-message="maxlength">Domain name is too large.</div>
+                  <div class="control-label" ng-message="minlength">Domain name is too short.</div>
+                  <div class="control-label" ng-message="unique">This Domain name already occupied.</div>
+                </div>
 
-                <span class="email-addon">@<span>{{ editCompany.name || 'company' }}</span>.{{ currentHost }}</span>
+                <input class="form-control" type="text"
+                       ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
+                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur/>
+
+                <span class="email-addon" style="width: 30px;left: 162px;">@</span>
+
+                <input class="form-control has-addon" type="text" ng-model="techDomainName"
+                       name="techDomainName" ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
+                       is-uniq-validation validation-func="validateCompanyDomain"
+                       style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">
+
+                <span class="email-addon" style="width: 120px;border-left: none">.quicktech.com</span>
+
               </div>
+
             </div>
 
             <div class="form-row clearfix">
