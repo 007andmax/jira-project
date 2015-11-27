@@ -140,7 +140,7 @@
 
         $scope.validationMessage = function (form) {
 
-          if (form.$pristine && !$scope.triedToSaveTicket) {
+          if (!$scope.triedToSaveTicket) {
             return
           }
 
