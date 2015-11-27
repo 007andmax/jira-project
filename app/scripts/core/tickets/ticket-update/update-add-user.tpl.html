@@ -50,7 +50,7 @@
           <div class="scroll-pane">
             <ul class="users-list custom-scroll">
 
-              <li ng-repeat="agent in agents | filter: filterUpdateUser">
+              <li ng-repeat="agent in agents | orderBy: 'firstName' | filter: filterUpdateUser">
                 <label class="control checkbox">
 
                   <input type="checkbox" ng-model="selectUpdateSharedUser[agent.id]"
@@ -83,7 +83,7 @@
           <div class="scroll-pane">
             <ul class="users-list custom-scroll">
 
-              <li ng-repeat="client in clients | filter: filterUpdateUser">
+              <li ng-repeat="client in clients | orderBy: 'firstName' | filter: filterUpdateUser">
                 <label class="control checkbox">
 
                   <input type="checkbox" ng-model="selectUpdateSharedUser[client.id]"
@@ -117,7 +117,7 @@
           <div class="scroll-pane">
             <ul class="users-list custom-scroll">
 
-              <li ng-repeat="vendor in vendorsContacts | filter: filterUpdateUser">
+              <li ng-repeat="vendor in vendorsContacts | orderBy: 'firstName' | filter: filterUpdateUser">
                 <label class="control checkbox">
 
                   <input type="checkbox" ng-model="selectUpdateSharedUser[vendor.id]"
