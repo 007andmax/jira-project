@@ -3,15 +3,26 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.updateAddUserCtrl',
-      ['$scope', 'UsersService', 'CompaniesService', 'ContactsService',
-        function ($scope, UsersService, CompaniesService, ContactsService) {
+      ['$scope', 'UsersService', 'CompaniesService', 'ContactsService', 'Utils',
+        function ($scope, UsersService, CompaniesService, ContactsService, Utils) {
 
           $scope.currentAddUserTab = 'TEAM_MEMBER';
           $scope.searchFilter = {};
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
           $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
-          //$scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope);
-          $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket();
+          $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
+
+            for (var i = $scope.updateSharedUsersList.length - 1; i >= 0; i--) {
+              var share = $scope.updateSharedUsersList[i];
+
+              if (share.contact && !Utils.findById($scope.vendorsContacts, share.contact.id)) {
+                $scope.updateSharedUsersList.splice(i, 1);
+                delete $scope.selectUpdateSharedUser[share.contact.id];
+              }
+            }
+
+          });
+          //$scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket();
 
           $scope.openAddUserTab = function (mode) {
 
@@ -35,7 +46,7 @@
 
           $scope.filterUpdateUser = function (item) {
 
-            if(item.id === $scope.currentUser.id || item.id === $scope.ticketDetails.assignedUser.id){
+            if (item.id === $scope.currentUser.id || item.id === $scope.ticketDetails.assignedUser.id) {
               return false;
             }
 
@@ -80,7 +91,6 @@
 
             }
           };
-
 
 
         }]);

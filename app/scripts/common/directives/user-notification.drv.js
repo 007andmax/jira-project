@@ -13,7 +13,7 @@
 
             scope.getMarginLeft = function(){
               return {
-                'margin-left': -element.width()/2 + 25 + 'px'
+                'margin-left': Math.floor(-element.width()/2 + 25) + 'px'
               };
             };
 

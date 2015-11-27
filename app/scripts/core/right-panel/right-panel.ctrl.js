@@ -11,8 +11,8 @@
         $scope.hourPattern = /\d+\:\d+/;
 
         $scope.workingWithIdsUsers = TicketsService.getCurrentlyWorkingWith($scope);
-        //$scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
-        $scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket(function () {
+        $scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
+        //$scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket(function () {
           $scope.vendorContactsLoad = true;
         });
 
