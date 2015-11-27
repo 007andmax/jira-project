@@ -29,6 +29,10 @@
       <!--<span class="file-name pull-left" ng-show="model.origin">or <a href="javascript:void(0)">Restore Default</a></span>-->
       <span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>
 
+      <span class="file-name pull-left" ng-show="model.origin">or
+        <a href="javascript:void(0)" ng-click="restoreDefaultAvatar()">Restore Default</a>
+      </span>
+
     </div>
     <div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>
 

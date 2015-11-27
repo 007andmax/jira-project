@@ -47,6 +47,11 @@
             return ctrl.$error;
           };
 
+          scope.restoreDefaultAvatar = function(){
+          //  TODO restore default
+            console.log('restore defoult')
+          };
+
           //reposition
           element.on('click', '[change-position-button]', function (e) {
 

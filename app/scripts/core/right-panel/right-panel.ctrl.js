@@ -11,8 +11,7 @@
         $scope.hourPattern = /\d+\:\d+/;
 
         $scope.workingWithIdsUsers = TicketsService.getCurrentlyWorkingWith($scope);
-        $scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
-        //$scope.vendorContacts = ContactsService.getSubscribedContactsOnTicket(function () {
+        $scope.vendorContacts = ContactsService.getSubscribedContacts($scope, function () {
           $scope.vendorContactsLoad = true;
         });
 
@@ -42,14 +41,6 @@
 
               $scope.clientCompanyInfo = RightPanelService.getClientCompanyInfo($scope, companyId)
             }
-
-            //$scope.companyGroupedData = RightPanelService.getOneCompanyGroupedData("d0137bbc-bdd1-4d9c-abee-afbd0f7b2a5d");
-            //
-            //if($scope.rightPanelSharedState.createUserId){
-            //  $scope.createTicketUser = UsersService.getOneById($scope.rightPanelSharedState.createUserId);
-            //}
-            //
-            //$scope.clientCompanyInfo = RightPanelService.getClientCompanyInfo($scope, "d0137bbc-bdd1-4d9c-abee-afbd0f7b2a5d")
 
           });
         });

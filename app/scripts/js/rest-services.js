@@ -1,126 +1,2339 @@
-(function(t,q,r){t.layLoadingPageSize=15;q=angular.module("main.services",[]);q.config(["$provide","$httpProvider",function(g,p){g.factory("myHttpInterceptor",[function(){function g(c){if("unauthorized"===c.data.errorMessage||"unauthorized"===c.data.authMessage)t.location.pathname="/login";else if(c.data.showMessage)return alert(c.data.showMessage),{};return c}return{request:function(c){c.url&&(c.params||(c.params={}),c.url.endsWith(".html")||(c.params.t=(new Date).getTime()));return c},response:g,
-  responseError:g}}]);p.interceptors.push("myHttpInterceptor")}]);q.run(["$http","$rootScope",function(g,p){g.get("/users/current").success(function(g){p.currentUser=g});p.numberCounterDelimiter="-"}]);q.service("Downloader",function(){function g(f){if(/(iP)/g.test(navigator.userAgent))return alert("Your device does not support files downloading. Please try again in desktop browser."),!1;if(p||l||c){var e=document.createElement("a");e.href=f;if(e.download!==r){var b=f.substring(f.lastIndexOf("/")+1,
-  f.length);e.download=b}if(document.createEvent)return f=document.createEvent("MouseEvents"),f.initEvent("click",!0,!0),e.dispatchEvent(f),!0}t.open(f,"_self");return!0}var p=-1<navigator.userAgent.toLowerCase().indexOf("chrome"),l=-1<navigator.userAgent.toLowerCase().indexOf("safari"),c=-1<navigator.userAgent.toLowerCase().indexOf("firefox");return{downloadByUrl:g,downloadTicketAttachments:function(c){g("/v2/tickets/"+c+"/downloadAttachments")},downloadFile:function(c){g("/file/"+c)}}});q.service("Utils",
-  ["$http","$rootScope",function(g,p){function l(a){var d=a;!d&&this.staticCopy&&(d=this);if("[object Array]"===Object.prototype.toString.call(d)){a=[];for(var c=0;c<d.length;c++)a.push(l(d[c]))}else if("[object Object]"===Object.prototype.toString.call(d))for(c in a={},d)"staticCopy"!==c&&"$$hashKey"!=c&&(a[c]=l(d[c]));else return d;return a}function c(a,d){if("[object String]"===Object.prototype.toString.call(a))return a;d=d||a;for(var b in a){var h=a[b];"[object Array]"===Object.prototype.toString.call(h)?
-    f(h):"[object Object]"===Object.prototype.toString.call(h)&&c(h);e(d,b,h)}e(d,"staticCopy",l);return d}function f(a,d){if(d){for(var b=0;b<a.length;b++)d.push(c(a[b]));e(d,"staticCopy",l);return d}for(b=0;b<a.length;b++)a[b]=c(a[b]);e(a,"staticCopy",l);return a}function e(a,d,c){Object.defineProperty(a,d,{value:c,writable:!1,enumerable:!0,configurable:!0})}function b(a,d){for(var c=0;c<a.length;c++){var b=a[c];if(b&&(b=b.versionedId?b.versionedId.id:b.id,b===d))return c}return-1}return{customizeObj:c,
-    customizeArray:f,defineReadOnlyProperty:e,findById:function(a,d){for(var c=0;c<a.length;c++){var b=a[c];if((b.versionedId?b.versionedId.id:b.id)===d)return b}},indexOfId:b,handleCallback:function(a,d){d&&a.then(function(a){d(a.data)},function(a){d(a.data)})},deleteById:function(a,d){var c=b(a,d);-1<c&&a.splice(c,1)},getListByUrl:function(a,d,c){var b=[];c&&(b=f(b));g.get(a).then(function(a){if(c)f(a.data,b),c(b);else for(var m=0;m<a.data.length;m++)b.push(a.data[m]);d&&d(b)},function(a){d&&d(a.data)});
-      return b},getFormattedNumber:function(a,c){var b;if(c)for(b=""+(parseInt(a.numPart)+1);b.length<a.numPart.length;)b="0"+b;else b=a.numPart;return a.charPart?a.charPart+p.numberCounterDelimiter+b:b},getComparatorBy:function(a,b){return function(c,h){return b?h[a]-c[a]:c[a]-h[a]}},formatDate:function(a){return a.getFullYear()+"-"+(a.getMonth()+1)+"-"+a.getDate()}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("AddressesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){return{getAllLocales:function(f){var e=c.customizeArray([]);g.get("/addresses/getAllLocales").then(function(b){c.customizeArray(b.data,e);f&&f(b.data)},function(b){f&&f(b.data)});return e}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("AssociationService",["$http","$rootScope","Utils","$filter",function(g,p,l){return{deleteAssociation:function(c,f){if(!c)throw"id is required!";var e=g({url:"/association/"+c,method:"DELETE"});l.handleCallback(e,f)}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("BillableService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(g,p,l,c,f){return{getTotalBilledAmount:function(e,b){var a=c.customizeObj({});g.get("/billable/totalBilled").then(function(d){c.customizeObj(d.data,a);l.subscribe("/billedTicketsSumAdded",e,function(b){console.log(b);"BILLED_TICKETS_SUM_ADDED"===b.action&&c.defineReadOnlyProperty(a,"value",a.value+b.data)});b&&b(d.data)},function(a){b&&b(a.data)});
-  return a},getBillableChartData:function(e,b){var a=c.customizeArray([]);g.get("/billable/billed/lastDays").then(function(d){c.customizeArray(d.data,a);l.subscribe("/billedTicketsSumAdded",e,function(b){console.log(b);if("BILLED_TICKETS_SUM_ADDED"===b.action){var d=a[a.length-1];c.defineReadOnlyProperty(d,"sum",d.sum+b.data)}});b&&b(a)},function(a){b&&b(a.data)});return a},getBillableCompanies:function(e,b){if(!e||!e.$id)throw"First argument must be Angularjs scope!";var a=c.customizeArray([]);g({url:"/billable/total",
-  method:"GET"}).then(function(d){c.customizeArray(d.data,a);l.subscribe("/billableTotal",e,function(b){console.log(b);if("CLIENT_BILLABLE_TOTAL"==b.action)if(0<b.data.ticketsCount){var d=c.findById(a,b.data.id);d||(d={},a.push(d));c.customizeObj(b.data,d)}else b=c.indexOfId(a,b.data.id),-1<b&&(c.defineReadOnlyProperty(a[b],"total",0),c.defineReadOnlyProperty(a[b],"ticketsCount",0),a.splice(b,1));else if("COMPANY_ARCHIVED"==b.action)for(d=0;d<a.length;d++)a[d].company.id===b.data.id&&(a.splice(d,1),
-  d--)});b&&b(d.data)},function(a){b&&b(a.data)});return a},getCompanyBillableTickets:function(e,b,a){if(!e)throw"companyId is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=[];g.get("/billable/expenses/"+e).then(function(k){c.customizeArray(k.data,d);l.subscribe("/billableExpense?targetId="+e,b,function(a){console.log(a);if("BILLABLE_EXPENSE_ADDED"==a.action){var b=c.findById(d,a.data.id);b||(b={},d.push(b));c.customizeObj(a.data,b)}else"BILLABLE_EXPENSE_REMOVED"==a.action&&
-(a=c.indexOfId(d,a.data),-1<a&&d.splice(a,1))});a&&a(k.data)},function(b){a&&a(b.data)});return d},createInvoice:function(e,b){if(!e)throw"lockId is required!";var a=g.get("/invoice/create/"+e);c.handleCallback(a,b)},getActualInvoiceNumber:function(e,b){g.get("/data/actualNumber?type=INVOICE").success(function(a){b(a.number)});l.subscribe("/number?targetId=INVOICE",e,function(a){console.log(a);"NUMBER_CHANGED"===a.action&&b(c.getFormattedNumber(a.data,!0))})},search:function(c){if(!c)throw"Keyword is required!";
-  return g.get("/billable/search?keyword="+c).then(function(b){return b.data})},getLockedTicketIds:function(e,b){if(!e||!e.$id)throw"First argument must be Angularjs scope!";return c.getListByUrl("/invoice/lock",b,function(a){l.subscribe("/ticketResolution?targetId="+f.getCurrentCompany().id,e,function(b){console.log(b);if("TICKET_LOCKED"==b.action)for(var c=0;c<b.data.length;c++)a.push(b.data[c]);else if("TICKET_UNLOCKED"==b.action)for(c=0;c<a.length;c++)for(var h=0;h<b.data.length;h++)a[c]==b.data[h]&&
-a.splice(c,1)})})},lockTicketIds:function(e,b){if(!e)throw"ticketIds is required!";var a=c.customizeObj({});g({url:"/invoice/lock",method:"POST",data:e}).then(function(d){c.customizeObj(d.data,a);b&&b(d.data)},function(a){b&&b(a.data)});return a},unlockTicketIds:function(e,b){if(!e)throw"lockId is required!";var a=g.get("/invoice/unlock/"+e);c.handleCallback(a,b)},getExistTimeByLockId:function(e,b){if(!e)throw"lockId is required!";var a=g.get("/invoice/lock/timeToUnlock/"+e);c.handleCallback(a,b)},
-  lockTicketsByCompany:function(e,b){if(!e)throw"companyId is required!";var a=g.get("/invoice/lock/lockByCompany/"+e);c.handleCallback(a,b)}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("CompaniesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){function f(){v++;if(2===v){a=!0;for(var b=0;b<d.length;b++)d[b]()}}function e(a,b){if(!a)throw"Keyword is required!";for(var c=[],d=0;d<h.companies.length;d++){var k=h.companies[d];(b||h.currentCompany.id!==k.id)&&-1<k.name.indexOf(a)&&c.push(k)}return c}function b(b){b&&(a?b():d.push(b))}p=p.$new();var a=!1,d=[],k=[],h={companies:[],clientCompanies:[],
-  currentCompany:{}};c.customizeObj(h);g.get("/company/clients").then(function(a){c.customizeArray(a.data,h.clientCompanies);for(a=0;a<h.clientCompanies.length;a++)h.companies.push(h.clientCompanies[a]);f()},function(a){console.error(a);throw"Cannot initialize CompaniesService!";});g.get("/company/current").then(function(a){c.customizeObj(a.data,h.currentCompany);h.companies.push(h.currentCompany);f()},function(a){console.error(a);throw"Cannot initialize CompaniesService!";});var v=0;l.subscribe("/company",
-  p,function(b){console.log(b);if(a)if("COMPANY_SAVED"==b.action){var d=c.findById(h.companies,b.data.id);if(d)c.customizeObj(b.data,d);else for(b=c.customizeObj(b.data),h.companies.push(b),h.clientCompanies.push(b),b=0;b<k.length;b++)k[b]()}else if("COMPANY_ARCHIVED"==b.action)for(c.deleteById(h.companies,b.data.id),c.deleteById(h.clientCompanies,b.data.id),b=0;b<k.length;b++)k[b]();else if("COMPANY_DEARCHIVED"==b.action)for(d=c.customizeObj(b.data),h.clientCompanies.push(d),h.companies.push(d),b=
-    0;b<k.length;b++)k[b]()});return{_addInitListener:b,_addAmountChangeListener:function(a){k.push(a)},_search:e,_isInitialized:function(){return a},getCurrentCompany:function(){return h.currentCompany},getClientCompanies:function(a){b(a);return h.clientCompanies},getAllCompanies:function(){return h.companies},getOneById:function(a){return c.findById(h.companies,a)},searchByAllCompanies:function(a){return e(a,!0)},searchByClientCompanies:function(a){return e(a,!1)},getClientCompaniesInfo:function(a,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       b){if(!a||!a.$id)throw"Second argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/company/clients/info").then(function(a){c.customizeObj(a.data,d);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/clientCompaniesInfo",a,function(a){console.log(a);if("CLIENT_COMPANY_INFO"==a.action){a=JSON.parse(a.data);for(var b in a)c.defineReadOnlyProperty(d,b,c.customizeObj(a[b]))}else"COMPANY_ARCHIVED"==a.action&&delete d[a.data.id]});return d},getCompanyInfo:function(a,b,d){if(!a)throw"companyId is required!";
-  if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var h=c.customizeObj({});g.get("/company/"+a+"/info").then(function(a){c.customizeObj(a.data,h);d&&d(a.data)},function(a){d&&d(a.data)});l.subscribe("/clientCompaniesInfo",b,function(b){console.log(b);if("CLIENT_COMPANY_INFO"==b.action){b=JSON.parse(b.data);for(var d in b)d===a&&c.customizeObj(b[a],h)}});return h},archive:function(a,b){if(!a)throw"companyId is required!";var d=g.get("/company/archive/"+a);c.handleCallback(d,b)},dearchive:function(a,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   b){if(!a)throw"companyId is required!";var d=g.get("/company/dearchive/"+a);c.handleCallback(d,b)},save:function(a,b){if(!a)throw"company is required!";var d="POST";a.id&&(d="PUT");d=g({url:"/company",method:d,data:a});c.handleCallback(d,b)},saveForCompanyProfile:function(a,b,d){if(!a)throw"data is required!";if(!b)throw"toUpdate is required!";b="/settings/companyProfile/"+b.toLowerCase();a=g({url:b,method:"PUT",data:a});c.handleCallback(a,d)},getCompanyForSettingPage:function(a){var b={};g.get("/settings/companyProfile/").then(function(d){c.customizeObj(d.data,
-  b);a&&a(d.data)},function(b){a&&a(b.data)});return b},getCompanyData:function(a,b,d){if(!b)throw"companyId is required!";if(!a||!a.$id)throw"Second argument must be Angularjs scope!";var h=c.customizeObj({});g.get("/company/"+b+"/data").then(function(a){c.customizeObj(a.data,h);d&&d(a.data)},function(a){d&&d(a.data)});l.subscribe("/companyDto?targetId="+b,a,function(a){console.log(a);if("COMPANY_DTO_CHANGED"==a.action){a=JSON.parse(a.data);for(var d in a)d===b&&c.customizeObj(a[b],h)}});return h},
-  isNameUnique:function(a,b,d){if(!a)throw"name is required!";var h=c.customizeObj({});g.get("/company/isCompanyNameUnique?name="+a+"&id="+b).then(function(a){c.customizeObj(a.data,h);d&&d(a.data)},function(a){d&&d(a.data)});return h},isDomainUnique:function(a,b,d){if(!a)throw"domain is required!";var h=c.customizeObj({});g.get("/company/isCompanyDomainUnique?domain="+a+"&id="+b).then(function(a){c.customizeObj(a.data,h);d&&d(a.data)},function(a){d&&d(a.data)});return h},saveCover:function(a,b,d){if(!a)throw"croppedImage is required!";
-    if(!b)throw"companyId is required!";a=g({url:"/company/"+b+"/cover",method:"POST",data:a});c.handleCallback(a,d)},deleteCover:function(a,b){if(!a)throw"companyId is required!";var d=g({url:"/company/"+a+"/cover",method:"DELETE"});c.handleCallback(d,b)},getCompanyContacts:function(a,b,d){if(!a||!a.$id)throw"First argument must be Angularjs scope!";if(!b)throw"Second argument must be companyId!";return c.getListByUrl("/company/"+b+"/contacts",d,function(d){l.subscribe("/companyContact",a,function(a){console.log(a);
-    "COMPANY_CONTACT"==a.action&&(d.splice(0,d.length),c.customizeArray(a.data,d))});l.subscribe("/subscription?targetId="+b,a,function(a){console.log(a);if(a.data.contact){var b=c.findById(d,a.data.contact.id);b&&("SUBSCRIPTION_SAVED"==a.action?c.defineReadOnlyProperty(b,"subscription",c.customizeObj(a.data)):"SUBSCRIPTION_DELETED"==a.action&&delete b.subscription)}})})}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("ContactsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(g,p,l,c,f){return{isEmailUnique:function(e,b,a){if(!e)throw"email is required!";var d=c.customizeObj({});g.get("/contacts/isEmailUnique?email="+e+"&id="+b).then(function(b){c.customizeObj(b.data,d);a&&a(b.data)},function(b){a&&a(b.data)});return d},getSubscribedContactsOnTicket:function(e,b){if(!e||!e.$id)throw"First argument must be Angularjs scope!";
-  var a=c.customizeArray([]);g.get("/contacts/getSubscribedContactsOnTicket/").then(function(d){c.customizeArray(d.data,a);l.subscribe("/subscription?targetId="+f.getCurrentCompany().id,e,function(d){console.log(d);if(d.data.contact){var h=c.findById(a,d.data.contact.id);h&&("SUBSCRIPTION_SAVED"==d.action?(c.defineReadOnlyProperty(h,"subscription",c.customizeObj(d.data)),b&&b()):"SUBSCRIPTION_DELETED"==d.action&&(delete h.subscription,b&&b()))}});l.subscribe("/vendorContacts",e,function(d){console.log(d);
-    if("VENDOR_CONTACTS_SAVE"==d.action){for(var h=0;h<d.data.length;h++){var e=d.data[h],m=c.findById(a,e.id);e.subscription.ticket?m?c.customizeObj(e,m):a.push(c.customizeObj(e)):m&&c.deleteById(a,m.id)}b&&b()}else if("VENDOR_CONTACTS_DELETE"==d.action){for(h=0;h<d.data.length;h++)c.deleteById(a,d.data[h].id);b&&b()}});b&&b(d.data)},function(a){b&&b(a.data)});return a}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("DevicesService",["$http","$rootScope","RealTimeService","Utils","UsersService",function(g,p,l,c,f){p=p.$new();var e={devices:[],devicesByCompanies:{}};c.customizeObj(e);g.get("/devices").then(function(b){c.customizeObj(b.data,e.devicesByCompanies);for(var a in e.devicesByCompanies)if("staticCopy"!==a)for(b=0;b<e.devicesByCompanies[a].length;b++)e.devices.push(e.devicesByCompanies[a][b]);f._addInitListener(function(){for(var a=0;a<e.devices.length;a++)for(var b=
-  0;b<e.devices[a].users.length;b++){var c=f.getOneById(e.devices[a].users[b].id);e.devices[a].users[b]=c}})},function(b){console.error(b);throw"Cannot initialize CompaniesService!";});l.subscribe("/device",p,function(b){console.log(b)});return{getAllDevices:function(){return e.devices},getAllByCompanyId:function(b){return e.devicesByCompanies[b]||[]},getOneById:function(b){return c.findById(e.devices,b)}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("EmailSettingsService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){return{saveNumberForm:function(f,e,b){if(!f)throw"data is required!";if(!e)throw"type is required!";f.type=e;f=g({url:"/settings/emailPages/updateNumberForm",method:"PUT",data:f});c.handleCallback(f,b)},getCompanyEmailNotification:function(f){var e={};g.get("/settings/emailPages/emailNotifications").then(function(b){c.customizeObj(b.data,e);f&&
-f(b.data)},function(b){f&&f(b.data)});return e},getEmailSettingPageDto:function(f,e){if(!f)throw"scope is required!";var b=c.customizeObj({});g.get("/settings/emailPages/").then(function(a){c.customizeObj(a.data,b);e&&e(a.data)},function(a){e&&e(a.data)});l.subscribe("/companyEmailNotification",f,function(a){console.log(a);"COMPANY_EMAIL_NOTIFICATION"==a.action&&c.customizeObj(a.data,b.activeAndNotDefault)});return b},getTermsAndConditions:function(f){var e={};g.get("/settings/emailPages/termsAndConditions").then(function(b){c.customizeObj(b.data,
-  e);f&&f(b.data)},function(b){f&&f(b.data)});return e},setToDefaultTemplate:function(f,e){if(!f)throw"type is required!";var b=g({url:"/settings/emailPages/toDefaultTemplate/"+f,method:"POST"});c.handleCallback(b,e)},getTemplate:function(f,e){if(!f)throw"type is required!";var b={};g.get("/settings/emailPages/byType/"+f).then(function(a){c.customizeObj(a.data,b);e&&e(a.data)},function(a){e&&e(a.data)});return b},saveEmailTemplate:function(f,e,b){if(!f)throw"data is required!";if(!f.subject)throw"data.subject is required!";
-  if(!f.body)throw"data.body is required!";if(!e)throw"type is required!";f=g({url:"/settings/emailPages/updateTemplate/"+e,method:"PUT",data:f});c.handleCallback(f,b)}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("FilesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){return{create:function(c,e,b,a,d){if(!c)throw"file is required!";var k={},h=new FormData;h.append("file",c);c=new XMLHttpRequest;c.upload.addEventListener("progress",e,!1);c.addEventListener("load",function(a){a=angular.fromJson(a.currentTarget.responseText);for(var d in a)k[d]=a[d];b&&b(k)},!1);c.addEventListener("error",a,!1);c.open("POST","/file?isAvatar="+
-  !!d);c.send(h);return k},createImageFromBase64Url:function(c,e){if(!c)throw"base64Url is required!";var b={};g({url:"/base64image",method:"POST",data:c.substring(22,c.length)}).then(function(a){for(var d in a.data)b[d]=a.data[d];e&&e(b)});return b},getMetadata:function(c,e){if(!c)throw"fileId is required!";var b={id:c};g.get("/file/"+c+"/meta").then(function(a){for(var d in a.data)b[d]=a.data[d];e&&e(b)},function(a){e&&e(a.data)});return b},remove:function(c,e){if(!c)throw"fileId is required!";g({url:"/file/"+
-c,method:"DELETE"}).then(function(b){e&&e(b.data)},function(b){e&&e(b.data)})},cropAvatar:function(c,e){if(!c)throw"image is required!";g({url:"/file/cropImage",method:"POST",data:c}).then(function(b){e&&e(b.data)},function(b){e&&e(b.data)})}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("ProductsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(g,p,l,c,f){return{search:function(c){if(!c)throw"Keyword is required!";return g.get("/products/search?keyword="+c).then(function(b){return b.data})},getCategories:function(e,b){if(!e||!e.$id)throw"First argument must be Angularjs scope!";return c.getListByUrl("/products/categories",b,function(a){l.subscribe("/productCategory",e,function(b){console.log(b);
-  if("PRODUCT_CATEGORY_SAVED"==b.action){var k=c.findById(a,b.data.id);k?c.customizeObj(b.data,k):a.push(c.customizeObj(b.data))}else"PRODUCT_CATEGORY_DELETED"==b.action&&(c.deleteById(a,b.data.id),e.$broadcast("product_category_deleted",b.data))})})},saveCategory:function(e,b){if(!e)throw"category is required!";var a="/products/categories",d="POST";e.id&&(a+="/"+e.id,d="PUT");a=g({url:a,method:d,data:e});c.handleCallback(a,b)},deleteCategory:function(e,b){if(!e)throw"categoryId is required argument!";
-  var a=g({url:"/products/categories/"+e,method:"DELETE"});c.handleCallback(a,b)},getAllByCategory:function(e,b,a,d){if(!e||!e.$id)throw"First argument must be Angularjs scope!";if(!b)throw"categoryId is required argument!";var k="/products?categoryId="+b;d&&(k="/products/full?categoryId="+b);return c.getListByUrl(k,a,function(a){l.subscribe("/product?targetId="+b,e,function(b){console.log(b);if("PRODUCT_SAVED"==b.action){var d=c.findById(a,b.data.versionedId.id);d?c.customizeObj(b.data,d):a.push(c.customizeObj(b.data))}else"PRODUCT_DELETED"==
-b.action&&(c.deleteById(a,b.data.versionedId.id),e.$broadcast("product_deleted",b.data))})})},saveProduct:function(e,b){if(!e)throw"product is required!";var a="POST";e.id&&(a="PUT");a=g({url:"/products",method:a,data:e});c.handleCallback(a,b)},deleteProduct:function(e,b){if(!e)throw"productId is required argument!";var a=g({url:"/products/"+e,method:"DELETE"});c.handleCallback(a,b)},isProductNameUnique:function(e,b,a,d){if(!e)throw"name is required!";if(!a)throw"vendorId is required!";var k=c.customizeObj({});
-  g.get("/products/isProductNameUnique?name="+e+"&id="+b+"&vendorId="+a).then(function(a){c.customizeObj(a.data,k);d&&d(a.data)},function(a){d&&d(a.data)});return k},getActualCode:function(e,b){if(!e||!e.$id)throw"Second argument must be Angularjs scope!";var a=c.customizeObj({});g.get("/products/actualCode").then(function(d){c.customizeObj(d.data,a);b&&b(d.data)},function(a){b&&b(a.data)});l.subscribe("/productCode",e,function(b){console.log(b);"PRODUCT_CODE_CHANGED"===b.action&&c.defineReadOnlyProperty(a,
-  "value",b.data)});return a}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("RealTimeService",["$http","$timeout","$rootScope",function(g,p,l){function c(){g.post("/realTime/createWatcher").success(function(b){a=b.id;if(0<d.length){for(b=0;b<d.length;b++){var c=d[b];v.subscribe(c.url,c.scope,c.callback)}d=[]}e()}).error(function(a,b,d,c){console.error("Cannot receive watcher Id !!!",a,b,d,c);throw"Cannot initialize RealTimeService";})}function f(){a=r;for(var b in h){var e=h[b];e&&!e.scope.$$destroyed&&d.push(e)}h=
-{};c()}function e(){0<k?p(e,300):g.post("/realTime/watch/"+a,Object.keys(h)||[]).then(function(a){console.log(a.data);if("timeout"==a.data||"destroyed"==a.data.message||205==a.status)f();else if("unauthorized"===a.data.errorMessage||"unauthorized"===a.data.authMessage)t.location.pathname="/login";else{for(var b in a.data){var d=h[b];if(d&&!d.scope.$$destroyed){var c=a.data[b];if(c)for(var k=0;k<c.length;k++)d.callback(c[k])}}e()}},function(a){a&&0!==a.status?205==a.status?f():(console.log("ERRRORRR!!!!!!!!!!!!",
-  a),p(e,300)):(console.log("ERRRORRR?????",a),p(f,1E3))})}function b(a){for(var d in h){var c=h[d];c&&!c.scope.$$destroyed&&c.callback!==b&&c.callback(a)}"COMPANY_ARCHIVED"!==a.action&&"COMPANY_DEARCHIVED"!==a.action||l.$broadcast(a.action.toLowerCase(),a.data.id)}var a,d=[{url:"/global",scope:l,callback:b}],k=0,h={};c();var v={subscribe:function(b,c,e){a?(k++,g.get("/realTime/subscribe/"+a+b).success(function(a){k--;h[a.id]={url:b,scope:c,callback:e};c.$on("$destroy",function(){delete h[a.id]})}).error(function(a,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       h,v,x){k--;205==h&&(d.push({url:b,scope:c,callback:e}),f());console.error("Cannot subscribe on "+b,a,h,v,x)})):d.push({url:b,scope:c,callback:e})}};return v}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("ReceiptArchiveService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){return{getReceiptArchiveData:function(f,e){if(!f||!f.$id)throw"First argument must be Angularjs scope!";var b=c.customizeObj({list:[],companies:{}});g.get("/receiptArchive").then(function(a){c.customizeArray(a.data,b.list);b.list.forEach(function(a){var e=b.companies[a.companyId];e?e.push(a):c.defineReadOnlyProperty(b.companies,a.companyId,c.customizeArray([a]))});
-  l.subscribe("/receiptArchive",f,function(a){console.log(a);if("RECEIPT_ARCHIVE_ADDED"===a.action){for(var e=[],h=0;h<a.data.length;h++){var f=a.data[h],m;if(f.recurringInvoice){var g=c.findById(b.list,f.recurringInvoice.id);g?(c.defineReadOnlyProperty(g,"invoicesCount",g.invoicesCount+1),c.defineReadOnlyProperty(g,"sum",g.sum+f.sum),f.date>g.date&&(c.defineReadOnlyProperty(g,"date",f.date),c.defineReadOnlyProperty(g,"paidOn",f.paidOn))):m=c.customizeObj({id:f.recurringInvoice.id,isRecurring:!0,frequency:f.recurringInvoice.frequency,
-    number:f.recurringInvoice.number,companyId:f.company.id,date:f.date,paidOn:f.paidOn,sum:f.sum,invoicesCount:1})}else m=c.customizeObj({id:f.id,isRecurring:!1,frequency:null,number:f.number,companyId:f.company.id,date:f.date,paidOn:f.paidOn,sum:f.sum,invoicesCount:null});m&&(b.list.push(m),(f=b.companies[m.companyId])?f.push(m):c.defineReadOnlyProperty(b.companies,m.companyId,c.customizeArray([m])),0>e.indexOf(m.companyId)&&e.push(m.companyId))}b.list.sort(c.getComparatorBy("number"));e.forEach(function(a){b.companies[a].sort(c.getComparatorBy("number"))})}else if("COMPANY_ARCHIVED"===
-    a.action){for(h=0;h<b.list.length;h++)b.list[h].companyId===a.data.id&&(b.list.splice(h,1),h--);delete b.companies[a.data.id]}});e&&e(a.data)},function(a){e&&e(a.data)});return b}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("ReceivableService",["$http","$rootScope","RealTimeService","CompaniesService","Utils","$filter",function(g,p,l,c,f){function e(b,a){if(!b)throw"invoiceIds is required!";var c=g({url:"/receivable/resend",method:"POST",data:b});f.handleCallback(c,a)}return{getReceivedPaymentsSumByCompany:function(b,a,c){if(!b)throw"companyId is required!";if(!a||!a.$id)throw"Second argument must be Angularjs scope!";var e=f.customizeObj({});g.get("/receivable/paymentSum/"+
-  b).then(function(h){f.customizeObj(h.data,e);l.subscribe("/companyPaymentReceived?targetId="+b,a,function(a){console.log(a);"COMPANY_PAYMENT_RECEIVED"===a.action?f.defineReadOnlyProperty(e,"value",e.value+a.data):"RECEIVED_PAYMENTS_SUM"===a.action&&f.defineReadOnlyProperty(e,"value",a.data)});c&&c(h.data)},function(a){c&&c(a.data)});return e},getReceivableGraphData:function(b,a){var d=f.customizeArray([]);g.get("/receivable/chart/lastDays").then(function(e){f.customizeArray(e.data,d);l.subscribe("/todayReceivableChartPoint?targetId="+
-  c.getCurrentCompany().id,b,function(a){console.log(a);if("TODAY_RECEIVABLE_CHART_POINT"===a.action){var b=d[d.length-1],c=new Date(b.date),e=new Date(a.data.date);c.getFullYear()===e.getFullYear()&&c.getMonth()===e.getMonth()&&c.getDate()+1===e.getDate()?(d.push(f.customizeObj(a.data)),d.splice(0,1)):f.customizeObj(a.data,b)}});a&&a(e.data)},function(b){a&&a(b.data)});return d},getReceivableInvoicesData:function(b,a){if(!b||!b.$id)throw"First argument must be Angularjs scope!";var c=f.customizeObj({list:[],
-  companies:{}});g.get("/receivable").then(function(e){for(var h=f.customizeArray([]),g=0;g<e.data.length;g++){var m=f.customizeObj(e.data[g]);if(m.recurringInvoice){var y=f.findById(h,m.recurringInvoice.id);y||(y=m.recurringInvoice,f.defineReadOnlyProperty(y,"isRecurring",!0),f.defineReadOnlyProperty(y,"company",m.company),f.defineReadOnlyProperty(y,"invoices",f.customizeArray([])),h.push(y));f.defineReadOnlyProperty(m,"recurringInvoice",{id:y.id,frequency:y.frequency});y.invoices.push(m)}else h.push(m)}h.sort(f.getComparatorBy("number"));
-  for(g=0;g<h.length;g++)m=h[g],c.companies[m.company.id]||f.defineReadOnlyProperty(c.companies,m.company.id,f.customizeArray([])),c.companies[m.company.id].push(m);f.defineReadOnlyProperty(c,"list",h);l.subscribe("/receivableInvoice",b,function(a){console.log(a);if("INVOICE_SAVED"==a.action){var b=a.data,e;b.recurringInvoice?(a=f.findById(c.list,b.recurringInvoice.id),a||(a=b.recurringInvoice,a.isRecurring=!0,a.company=b.company,a.invoices=[],e=a),b.recurringInvoice={id:a.id,frequency:a.frequency},
-    a.invoices.push(b)):e=b;e&&(e=f.customizeObj(e),c.companies[e.company.id]||f.defineReadOnlyProperty(c.companies,e.company.id,[]),c.companies[e.company.id].push(e),c.list.push(e))}else if("INVOICE_STATUS"===a.action)a.data.recurringInvoice?((b=f.findById(c.list,a.data.recurringInvoice.id))||console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING RECURRING INVOICE-----!!!!!!!"),b=f.findById(b.invoices,a.data.id)):b=f.findById(c.list,a.data.id),b?f.defineReadOnlyProperty(b,"status",a.data.status):
-    console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!");else if("PAYMENT_RECEIVED"===a.action)for(a=a.data,b=0;b<a.length;b++){var h=a[b],x=r;e=r;for(var k=0;k<c.list.length&&!e;k++){var m=c.list[k];if(m.isRecurring)for(var g=0;g<m.invoices.length&&!e;g++){var v=m.invoices[g];h===v.id&&(m.invoices.splice(g,1),e=v.company.id,x=m.id,0===m.invoices.length&&c.list.splice(k,1))}else h===m.id&&(c.list.splice(k,1),e=m.company.id)}e&&c.companies[e]&&(k=c.companies[e],x?(x=f.indexOfId(k,
-    x),-1<x&&(-1<f.indexOfId(k[x].invoices,h)&&k[x].invoices.splice(x,1),0===k[x].invoices.length&&k.splice(x,1))):(h=f.indexOfId(k,h),-1<h&&k.splice(h,1)),0===k.length&&delete c.companies[e])}else if("COMPANY_ARCHIVED"==a.action)for(delete c.companies[a.data.id],b=0;b<c.list.length;b++)c.list[b].company.id===a.data.id&&(c.list.splice(b,1),b--)});a&&a(e.data)},function(b){a&&a(b.data)});return c},receivePayment:function(b,a,c){if(!b)throw"paymentMethod is required!";if(!a||0===a.length)throw"invoiceIds is required!";
-  b=g({url:"/receivable/receivePayment",method:"POST",params:{paymentMethod:b.toUpperCase()},data:a});f.handleCallback(b,c)},resendInvoice:function(b,a){if(!b)throw"invoiceId is required!";e([b],a)},resendInvoices:e,search:function(b){if(!b)throw"Keyword is required!";return g.get("/receivable/search?keyword="+b).then(function(a){return a.data})}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("RecurringService",["$http","$rootScope","RealTimeService","CompaniesService","Utils","$filter",function(g,p,l,c,f){function e(a,b,c,e){if(!b)throw"recurringInvoiceId is required!";if(!c)throw"expense is required!";a={url:"/recurringInvoice/"+b+"/"+a,data:c};c.id?(a.method="PUT",a.url=a.url+"/"+c.id):a.method="POST";c=g(a);f.handleCallback(c,e)}function b(a,b,c){if(!a)throw"recurringInvoiceId is required!";if(!b)throw"expenseId is required!";
-  a=g({url:"/recurringInvoice/"+a+"/expense/"+b,method:"DELETE"});f.handleCallback(a,c)}return{getRecurringGraphData:function(a,b){var c=["WEEKLY","MONTHLY","YEARLY"],e=f.customizeArray([]);g.get("/recurringInvoice/billed/lastDays").then(function(g){f.customizeArray(g.data,e);l.subscribe("/recurringChart",a,function(a){console.log(a);if("RECURRING_CHART"===a.action){for(var b=new Date(a.data.date),d=0;d<e.length;d++){var g=e[d],v=new Date(g[g.length-1].date);v.getFullYear()===b.getFullYear()&&v.getMonth()===
-b.getMonth()&&v.getDate()+1===b.getDate()&&(g.push(f.customizeObj({date:f.formatDate(b),sum:0})),g.splice(0,1))}b=c.indexOf(a.data.type);b=e[b];f.defineReadOnlyProperty(b[b.length-1],"sum",a.data.sum)}});b&&b(g.data)},function(a){b&&b(a.data)});return e},getRecurringCompanies:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var c=[];g({url:"/recurringInvoice/total",method:"GET"}).then(function(e){f.customizeArray(e.data,c);l.subscribe("/recurringTotal",a,function(a){console.log(a);
-  if("CLIENT_RECURRING_TOTAL"===a.action){var b=f.indexOfId(c,a.data.id);if(0===a.data.total)-1<b&&c.splice(b,1);else if(-1<b)f.customizeObj(a.data,c[b]);else{for(var b=!0,d=0;d<c.length;d++)c[d].company.id===a.data.company.id&&(c[d].id=a.data.id,c[d].total=a.data.total,c[d].invoicesCount=a.data.invoicesCount,b=!1);b&&c.push(f.customizeObj(a.data))}}else if("COMPANY_ARCHIVED"==a.action)for(b=0;b<c.length;b++)c[b].company.id===a.data.id&&(c.splice(b,1),b--)});b&&b(e.data)},function(a){b&&b(a.data)});
-  return c},getCompanyRecurringInvoices:function(a,b,c){if(!a)throw"companyId is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var e=[];g.get("/recurringInvoice?companyId="+a).then(function(g){f.customizeArray(g.data,e);l.subscribe("/recurring?targetId="+a,b,function(a){console.log(a);if("RECURRING_SAVED"==a.action){var b=f.findById(e,a.data.id);b?f.customizeObj(a.data,b):e.push(f.customizeObj(a.data))}else"RECURRING_DELETE"==a.action&&(a=f.indexOfId(e,a.data.id),-1<a&&e.splice(a,
-  1))});c&&c(g.data)},function(a){c&&c(a.data)});return e},createRecurringInvoice:function(a,b,c){if(!a)throw"recurringInvoice is required!";if(!b)throw"companyId is required!";a.company={id:b};a=g({url:"/recurringInvoice",method:"POST",data:a});f.handleCallback(a,c)},deleteRecurringInvoice:function(a,b){if(!a)throw"recurringInvoiceId is required!";var c=g({url:"/recurringInvoice/"+a,method:"DELETE"});f.handleCallback(c,b)},deleteAllRecurringInvoicesByCompany:function(a,b,c){if(!a)throw"companyId is required!";
-  var e=g({url:"/recurringInvoice/company/"+a,method:"DELETE"});f.handleCallback(e,function(e){if(b)for(var h=0;h<b.length;h++)b[h].company.id===a&&(b.splice(h,1),h--);c&&c(e.data)})},saveRecInvProductExpense:function(a,b,c){e("productExpense",a,b,c)},saveRecInvServiceExpense:function(a,b,c){e("serviceExpense",a,b,c)},deleteProductExpenseFromRecInv:function(a,c,e){b(a,c,e)},deleteServiceExpenseFromRecInv:function(a,c,e){b(a,c,e)},search:function(a){if(!a)throw"Keyword is required!";return g.get("/recurringInvoice/search?keyword="+
-  a).then(function(a){return a.data})},addCompany:function(a,b){if(!a)throw"recurring is required!";if(!b)throw"companyId is required!";for(var e=0;e<a.length;e++)if(a[e].company.id===b)return;a.push({company:c.getOneById(b),total:0,ticketsCount:0})}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("RightPanelService",["$http","$rootScope","RealTimeService","Utils","CompaniesService","UsersService","DevicesService",function(g,p,l,c,f,e,b){function a(){k.groupedData.splice(0,k.groupedData.length);for(var a=f.getClientCompanies(),c=0;c<a.length;c++){var d=a[c];k.groupedData.push({company:d,users:e.getAllByCompanyId(d.id),devices:b.getAllByCompanyId(d.id)})}}function d(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var d=
-  k.lists[a.$id];if(!d)throw"There is no activities list for scope "+a.$id;d.loadingInProcess?console.log("Loading tickets already in process"):(0<d.list.length&&(d.params.createdAt=d.list[d.list.length-1].createdAt),d.loadingInProcess=!0,g({method:"GET",url:"/activity/",params:d.params}).then(function(a){a&&(c.customizeArray(a.data,d.list),d.loadingInProcess=!1,b&&b(a.data));d.loadingInProcess=!1},function(a){d.loadingInProcess=!1;b&&b(a.data)}))}p.$new();var k={lists:{},recentActivities:{},groupedData:[]};
-  c.customizeObj(k);f._addAmountChangeListener(a);return{getActivities:function(a,b,e){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var f=c.customizeObj([]),g=!k.lists[a.$id];k.lists[a.$id]={params:b,scope:a,list:f};d(a,function(b){g&&l.subscribe("/activity",a,function(b){console.log(b);"ACTIVITY_CREATED"==b.action&&k.lists[a.$id].list.unshift(c.customizeObj(b.data))});e&&e(b)});a.$on("$destroy",function(){delete k.lists[a.$id]});return f},getRecentActivities:function(a,b,d){if(!a||
-    !a.$id)throw"First argument must be Angularjs scope!";b.keyword="";var e=c.customizeObj([]);k.recentActivities[a.$id]={params:b,scope:a,list:e};g({method:"GET",url:"/activity/",params:b}).then(function(a){a&&(c.customizeArray(a.data,e),d&&d(a.data))},function(a){d&&d(a.data)});l.subscribe("/activity",a,function(a){console.log(a);"ACTIVITY_CREATED"==a.action&&(e.unshift(c.customizeObj(a.data)),e.pop())});a.$on("$destroy",function(){delete k.lists[a.$id]});return e},loadMoreActivities:d,getClientCompaniesGroupedData:function(){0==
-  k.groupedData.length&&a();return k.groupedData},getOneCompanyGroupedData:function(a){return{company:f.getOneById(a),users:e.getAllByCompanyId(a),devices:b.getAllByCompanyId(a)}},getCurrentUserInfo:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/userInfo").then(function(a){c.customizeObj(a.data,d);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/rightBarUserInfo",a,function(a){console.log(a);"RB_USER_INFO"==a.action&&c.customizeObj(a.data,
-    d)});return d},getClientCompanyInfo:function(a,b,d){if(!a||!a.$id)throw"First argument must be Angularjs scope!";if(!b)throw"companyId is required!";var e=c.customizeObj({});g.get("/companyInfo/"+b).then(function(a){c.customizeObj(a.data,e);d&&d(a.data)},function(a){d&&d(a.data)});l.subscribe("/rightBarCompanyInfo?targetId="+b,a,function(a){console.log(a);"RB_COMPANY_INFO"==a.action&&c.customizeObj(a.data,e)});return e}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("ServicesService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(g,p,l,c,f){function e(b,a){var d=a.company.id;d===f.getCurrentCompany().id&&(d="default");b[d]||c.defineReadOnlyProperty(b,d,[]);var e=c.findById(b[d],a.id);e?c.customizeObj(a,e):b[d].push(c.customizeObj(a))}return{search:function(b){if(!b)throw"Keyword is required!";return g.get("/services/search?keyword="+b).then(function(a){return a.data})},getAllByCompany:function(b,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           a,d){if(!b||!b.$id)throw"First argument must be Angularjs scope!";if(!a||"[object Function]"===Object.prototype.toString.call(a))throw"companyId is required argument!";return c.getListByUrl("/services/"+a,d,function(a){})},getServicesData:function(b,a){function d(a){var b;a:{b=f;var d=a.versionedId.id,g;for(g in b)if("staticCopy"!=g){var l=c.findById(b[g],d);if(l){b=l;break a}}b=void 0}b?c.customizeObj(a,b):e(f,a)}if(!b||!b.$id)throw"First argument must be Angularjs scope!";var f=c.customizeObj({});
-  g.get("/services").then(function(b){for(var c=0;c<b.data.length;c++)e(f,b.data[c]);a&&a(b.data)},function(b){a&&a(b.data)});l.subscribe("/service",b,function(a){console.log(a);if("SERVICE_SAVED"==a.action)d(a.data);else if("SERVICE_LIST_SAVED"==a.action)for(var b=0;b<a.data.length;b++)d(a.data[b]);else if("SERVICES_MOVED"==a.action)for(b=0;b<a.data.length;b++)e(f,a.data[b]);else if("COMPANY_SERVICES_DELETED"==a.action)delete f[a.data.id];else if("SERVICES_DELETED"==a.action)for(b=0;b<a.data.length;b++){var g=
-    a.data[b].versionedId.id,l=f,n=void 0;for(n in l){var w=c.indexOfId(l[n],g);-1<w&&l[n].splice(w,1)}}else"COMPANY_ARCHIVED"==a.action&&delete f[a.data.id]});return f},save:function(b,a){if(!b)throw"service is required!";var d="/services",e="POST";b.id&&(e="PUT",d=d+"/"+b.id);d=g({url:d,method:e,data:b});c.handleCallback(d,a)},addCompanyToServiceData:function(b,a){if(!b)throw"data argument is required";if(!a)throw"companyId argument is required";b[a]||c.defineReadOnlyProperty(b,a,[])},deleteCompanyFromServiceData:function(b,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  a){if(0<b[a].length)throw"This action cannot be performed on company that has not empty services list! Use deleteCompany() method.";delete b[a]},deleteService:function(b,a){if(!b)throw"serviceId is required argument!";var d=g({url:"/services/"+b,method:"DELETE"});c.handleCallback(d,a)},deleteCompany:function(b,a){if(!b)throw"companyId is required argument!";var d=g({url:"/services/company/"+b,method:"DELETE"});c.handleCallback(d,a)},move:function(b,a){if(!b)throw"mapping is required argument!";var d=
-  g({url:"/services/move",method:"POST",data:b});c.handleCallback(d,a)},getActualMapping:function(b){var a={},c;for(c in b)if("default"!=c&&"staticCopy"!=c){for(var e=[],f=b[c],g=0;g<f.length;g++)e.push(f[g].originService.versionedId.id);a[c]=e}return a}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("StatisticsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(g,p,l,c,f){return{getResolvedTicketsCountByCompany:function(e,b,a){if(!e)throw"companyId is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/statistic/tickets/resolvedCount/"+e).then(function(f){c.customizeObj(f.data,d);l.subscribe("/resolvedTicketsCount?targetId="+e,b,function(a){console.log(a);
-  "RESOLVED_TICKETS_COUNT"===a.action&&c.defineReadOnlyProperty(d,"value",a.data)});a&&a(f.data)},function(b){a&&a(b.data)});return d},getTicketsResolutionTimeChartDataByCompany:function(e,b,a){if(!e)throw"companyId is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/statistic/tickets/resolutionTime/"+e).then(function(f){c.customizeObj(f.data,d);l.subscribe("/ticketsResolutionTimeChart?targetId="+e,b,function(a){console.log(a);"TICKETS_RESOLUTION_TIME_CHART"===
-a.action&&c.customizeObj(a.data,d)});a&&a(f.data)},function(b){a&&a(b.data)});return d},getTimeBilledByCompany:function(e,b,a){if(!e)throw"companyId is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/statistic/billed/time/"+e).then(function(f){c.customizeObj(f.data,d);l.subscribe("/billedTimeStatistic?targetId="+e,b,function(a){console.log(a);"BILLED_TIME_STATISTIC"===a.action&&c.defineReadOnlyProperty(d,"value",a.data)});a&&a(f.data)},function(b){a&&
-a(b.data)});return d},getReceivableAmountByCompany:function(e,b,a){if(!e)throw"companyId is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/statistic/companies/receivable/"+e).then(function(f){c.customizeObj(f.data,d);l.subscribe("/todayReceivableChartPoint?targetId="+e,b,function(a){console.log(a);"TODAY_RECEIVABLE_CHART_POINT"===a.action&&c.defineReadOnlyProperty(d,"value",a.data.receivableLeft)});a&&a(f.data)},function(b){a&&a(b.data)});
-  return d},getContributedToEarningTopCompanies:function(e,b,a){if(!e)throw"topAmount is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/statistic/companies/paymentSum/top/"+e).then(function(e){function f(a){l.subscribe("/companyPaymentReceived?targetId="+a,b,function(b){console.log(b);"COMPANY_PAYMENT_RECEIVED"===b.action&&c.defineReadOnlyProperty(d,a,(d[a]?d[a]:0)+b.data)})}for(var g in e.data)f(g);c.customizeObj(e.data,d);a&&a(e.data)},function(b){a&&
-a(b.data)});return d},getTopCompaniesByResolvedTickets:function(e,b,a){if(!e)throw"topAmount is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/statistic/companies/resolvedTicket/top/"+e).then(function(e){function f(a){l.subscribe("/resolvedTicketsCount?targetId="+a,b,function(b){console.log(b);"RESOLVED_TICKETS_COUNT"===b.action&&c.defineReadOnlyProperty(d,a,b.data)})}for(var g in e.data)f(g);c.customizeObj(e.data,d);a&&a(e.data)},function(b){a&&
-a(b.data)});return d},getTotalEarningsByDays:function(e,b,a,d,f){if(!e)throw"companyId is required!";if(!b)throw"from date is required!";if(!a)throw"to date is required!";if(b.getTime()>a.getTime())throw"from date should be less that to date!";if(!d||!d.$id)throw"Angularjs scope is required!";var h=c.customizeObj({});g.get("/statistic/companies/paymentSum/receivedInterval/"+e+"?from="+c.formatDate(b)+"&to="+c.formatDate(a)).then(function(a){var b,g;for(g in a.data)b?(new Date(g)).getTime()>(new Date(b)).getTime()&&
-(b=g):b=g;var n=new Date(b);c.customizeObj(a.data,h);l.subscribe("/companyPaymentReceived?targetId="+e,d,function(a){console.log(a);if("COMPANY_PAYMENT_RECEIVED"===a.action){var d=new Date;n.getFullYear()===d.getFullYear()&&n.getMonth()===d.getMonth()&&n.getDate()===d.getDate()&&c.defineReadOnlyProperty(h,b,h[b]+a.data)}});f&&f(a.data)},function(a){f&&f(a.data)});return h},getTotalReceivableByDays:function(e,b,a,d,f){if(!e)throw"companyId is required!";if(!b)throw"from date is required!";if(!a)throw"to date is required!";
-  if(b.getTime()>a.getTime())throw"from date should be less that to date!";if(!d||!d.$id)throw"Angularjs scope is required!";var h=c.customizeObj({});g.get("/statistic/companies/receivable/totalInterval/"+e+"?from="+c.formatDate(b)+"&to="+c.formatDate(a)).then(function(a){function b(a){var c=new Date;if(a.getFullYear()===c.getFullYear()&&a.getMonth()===c.getMonth()&&a.getDate()===c.getDate())return!0}var g,n;for(n in a.data)g?(new Date(n)).getTime()>(new Date(g)).getTime()&&(g=n):g=n;c.customizeObj(a.data,
-    h);b(new Date(g))&&l.subscribe("/todayReceivableChartPoint?targetId="+e,d,function(a){console.log(a);"TODAY_RECEIVABLE_CHART_POINT"===a.action&&b(new Date(a.data.date))&&c.defineReadOnlyProperty(h,g,a.data.total)});f&&f(a.data)},function(a){f&&f(a.data)});return h},getTicketsClosedByDays:function(e,b,a,d,f){if(!e)throw"companyId is required!";if(!b)throw"from date is required!";if(!a)throw"to date is required!";if(b.getTime()>a.getTime())throw"from date should be less that to date!";if(!d||!d.$id)throw"Angularjs scope is required!";
-  var h=c.customizeObj({});g.get("/statistic/companies/resolvedTicket/interval/"+e+"?from="+c.formatDate(b)+"&to="+c.formatDate(a)).then(function(a){function b(a){var c,d;for(d in a)if("staticCopy"!=d){c=d;break}if(c){a=new Date(a[c]);for(var e in h)if("staticCopy"!==e&&(c=new Date(e),c.getFullYear()===a.getFullYear()&&c.getMonth()===a.getMonth()&&c.getDate()===a.getDate()))return e}}c.customizeObj(a.data,h);l.subscribe("/ticketResolution?targetId="+e,d,function(a){console.log(a);"TICKET_RESOLVED"===
-  a.action?(a=b(a.data))&&c.defineReadOnlyProperty(h,a,h[a]+1):"TICKET_REOPENED"===a.action&&(a=b(a.data))&&c.defineReadOnlyProperty(h,a,h[a]-1)});f&&f(a.data)},function(a){f&&f(a.data)});return h},getUserSubmittedTicketsByCompany:function(e,b,a){if(!e)throw"companyId is required!";if(!b||!b.$id)throw"Angularjs scope is required!";var d=c.customizeObj({});g.get("/statistic/tickets/submittedTickets/"+e).then(function(f){c.customizeObj(f.data,d);l.subscribe("/userSubmittedTicket?targetId="+e,b,function(a){console.log(a);
-  "USER_SUBMITTED_TICKET"===a.action&&c.defineReadOnlyProperty(d,a.data,(d[a.data]||0)+1)});a&&a(f.data)},function(b){a&&a(b.data)});return d}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("SubscriptionsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(g,p,l,c,f){function e(b,a,d,e,f){var v=c.customizeObj({});g(b).then(function(b){for(var g=0;g<b.data.length;g++){var n=b.data[g];c.defineReadOnlyProperty(v,n.user.id,c.customizeObj(n))}l.subscribe("/subscription?targetId="+a,d,function(a){console.log(a);"SUBSCRIPTION_SAVED"==a.action?a.data.user&&(!f||-1<f.indexOf(a.data.user.id))&&c.defineReadOnlyProperty(v,
-  a.data.user.id,c.customizeObj(a.data)):"SUBSCRIPTION_DELETED"==a.action&&delete v[a.data.user.id]});e&&e(b.data)},function(a){e&&e(a.data)});return v}return{saveUserSubscription:function(b,a){if(!b)throw"userSubscription is required argument!";var d="/subscription",e="POST";b.id&&(d+="/"+b.id,e="PUT");d=g({url:d,method:e,data:b});c.handleCallback(d,a)},deleteUserSubscription:function(b,a){if(!b)throw"userSubscriptionId is required argument!";var d=g({url:"/subscription/"+b,method:"DELETE"});c.handleCallback(d,
-  a)},getUserSubscriptionsByCompanyId:function(b,a,c){if(!b)throw"companyId is required argument!";if(!a||!a.$id)throw"Second argument must be Angularjs scope!";return e({url:"/subscription/company/users/"+b,method:"GET"},b,a,c)},getAllClientUserSubscriptions:function(b,a){if(!b||!b.$id)throw"Second argument must be Angularjs scope!";return e({url:"/subscription/clientUsers",method:"GET"},f.getCurrentCompany().id,b,a)},getUserSubscriptionsByUserIds:function(b,a,c){if(!b||0==b.length)throw"userIds is required argument!";
-  if(!a||!a.$id)throw"Second argument must be Angularjs scope!";Array.isArray(b)||(b=[b]);return e({url:"/subscription/users/",method:"POST",data:b},f.getCurrentCompany().id,a,c,b)}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("TaxRatesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){return{getAllByCompany:function(f,e,b){if(!e||!e.$id)throw"First argument must be Angularjs scope!";if(!f||"[object Function]"===Object.prototype.toString.call(f))throw"companyId is required argument!";return c.getListByUrl("/taxRate/"+f,b,function(a){l.subscribe("/taxRate?targetId="+f,e,function(b){console.log(b);if("TAX_RATE_SAVE"==b.action){var f=
-  c.findById(a,b.data.versionedId.id);f?c.customizeObj(b.data,f):a.push(c.customizeObj(b.data))}else"TAX_RATE_DELETE"==b.action&&(c.deleteById(a,b.data.versionedId.id),e.$broadcast("tax_rate_delete",b.data))})})},save:function(f,e){if(!f)throw"taxRate is required!";var b="/taxRate",a="POST";f.id&&(a="PUT",b=b+"/"+f.id);b=g({url:b,method:a,data:f});c.handleCallback(b,e)},deleteTaxRate:function(f,e){if(!f)throw"taxRateId is required argument!";var b=g({url:"/taxRate/"+f,method:"DELETE"});c.handleCallback(b,
-  e)},isUniqueInCompany:function(f,e,b,a){if(!f)throw"taxRateCode is required!";if(!b)throw"companyId is required!";var d=c.customizeObj({});g.get("/taxRate/isUniqueInCompany?taxRateCode="+f+"&id="+e+"&companyId="+b).then(function(b){c.customizeObj(b.data,d);a&&a(b.data)},function(b){a&&a(b.data)});return d}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("TicketTagsService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){function f(a,b){return b.createdAt-a.createdAt}function e(a){d=p.$new();k.tags=c.customizeArray([]);g.get("/tag").then(function(b){c.customizeArray(b.data,k.tags);k.tags&&(k.tags.sort(f),l.subscribe("/tags",d,function(a){console.log(a);if(k.tags)if("TAG_SAVED"==a.action){var b=c.findById(k.tags,a.data.id);b?c.customizeObj(a.data,b):(k.tags.unshift(c.customizeObj(a.data)),
-  k.tags.sort(f))}else if("TAG_REMOVED"==a.action)for(b in c.deleteById(k.tags,a.data.id),k.dynamicLists)for(var d=k.dynamicLists[b],e=0;e<d.length;e++)c.deleteById(d[e],a.data.id)}),a&&a(b.data))},function(b){console.log("ERROR!!!!!",b);a&&a(b.data)})}function b(){0===k.watchers.length&&q.isEmptyObject(k.dynamicLists)&&(d.$destroy(),k.tags=r)}function a(b,d){if(!d||!d.$id)throw"First argument must be Angularjs scope!";if(k.tags){for(var f=0;f<b.length;f++)b[f]=c.findById(k.tags,b[f].id);for(;-1<(f=
-  b.indexOf(r));)b.splice(f,1);k.addDynamicList(b,d)}else e(function(){a(b,d)})}var d,k={tags:r,watchers:[],dynamicLists:{},addWatcher:function(a){var c=this.watchers;0>c.indexOf(a.$id)&&(c.push(a.$id),a.$on("$destroy",function(){var d=c.indexOf(a.$id);c.splice(d,1);b()}))},addDynamicList:function(a,c){var d=this.dynamicLists;d[c.$id]||(d[c.$id]=[]);d[c.$id].push(a);c.$on("$destroy",function(){delete d[c.$id];b()})}};return{_makeDynamic:a,_merge:function(a,b){a.splice(0,a.length);for(var d=0;d<b.length;d++){var e=
-  c.findById(k.tags,b[d]);e&&a.push(e)}},getList:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";k.tags?b&&setTimeout(function(){b(k.tags.staticCopy())},100):e(b);k.addWatcher(a);return k.tags},save:function(a,b){if(!a)throw"ticketTag is required argument!";var d="/tag",e="POST";a.id&&(d+="/"+a.id,e="PUT");d=g({url:d,method:e,data:a});c.handleCallback(d,b)},deleteTag:function(a,b){if(!a)throw"tagId is required argument!";var d=g({url:"/tag/"+a,method:"DELETE"});c.handleCallback(d,
-  b)},link:function(a,b){if(!a)throw"linkMap is required argument!";var d=g({url:"/tag/link",method:"POST",data:a});c.handleCallback(d,b)},getTicketsCounts:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var d=c.customizeObj({});g.get("/tag/counts").then(function(a){c.customizeObj(a.data,d);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/tagCounts",a,function(a){console.log(a);"TAG_COUNTS"==a.action&&c.customizeObj(a.data,d)});return d}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("TicketsService",["$http","$rootScope","RealTimeService","Utils","TicketTagsService","CompaniesService",function(g,p,l,c,f,e){function b(a){a=angular.extend({},a);a.filter&&(a.filter=a.filter.toUpperCase());a.priority&&(a.priority=a.priority.toUpperCase());a.status&&(a.status=a.status.toUpperCase());return a}function a(a,b){return a.createdAt-b.createdAt}function d(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var d=u.lists[a.$id];
-  if(!d)throw"There is no ticket list for scope "+a.$id;d.loadingInProcess?console.log("Loading tickets already in process"):(0<d.list.length?d.params.lastId=d.list[d.list.length-1].id:delete d.params.lastId,d.loadingInProcess=!0,g({method:"GET",url:"/v2/tickets",params:d.params}).then(function(e){if(e){for(var g=0;g<e.data.length;g++){var h=e.data[g];h.number="Tkt# "+h.number;h.tags&&f._makeDynamic(h.tags,a);var k=c.findById(d.list,h.id);k?c.customizeObj(h,k):d.list.push(c.customizeObj(h))}d.loadingInProcess=
-    !1;b&&b(e.data)}d.loadingInProcess=!1},function(a){d.loadingInProcess=!1;b&&b(a.data)}))}function k(a,b,d,e){d={value:d};"[object Array]"===Object.prototype.toString.call(b)?(a="/v2/tickets/"+a,d.ids=b):a="/v2/tickets/"+b+"/"+a;b=g.put(a,d);c.handleCallback(b,e)}function h(a,b){for(var c in u.lists)for(var d=u.lists[c].list,e=0;e<d.length;e++){var f=d[e];if(f.id===a){b(f);break}}for(c in u.tickets)d=u.tickets[c].ticket,d.id===a&&b(d)}function r(a,b,c){if("USER"===c.filter){if("COMPLETED"===a.status&&
-  "COMPLETED"!==b.status)return 1;if("COMPLETED"===b.status&&"COMPLETED"!==a.status)return-1}return z[c.filter](b)-z[c.filter](a)}function m(a){return a.assignedAt||a.createdAt}function q(a,b){return"URGENT"==b.filter&&("HIGH"!=a.priorityLevel||"COMPLETED"==a.status||"ADMIN"!==p.currentUser.role&&!a.sharedToCurrentUserAt)||"UNASSIGNED"==b.filter&&a.assignedUser&&a.assignedUser.id||"USER"==b.filter&&(!a.assignedUser||a.assignedUser.id!=p.currentUser.id)||"OPEN"==b.filter&&"COMPLETED"==a.status||"CLOSED"==
-b.filter&&("COMPLETED"!=a.status||"ADMIN"!==p.currentUser.role&&"SUPER_TECH_ADMIN"!==p.currentUser.role&&(!a.assignedUser||a.assignedUser.id!=p.currentUser.id))||"SHARED"==b.filter&&!a.sharedToCurrentUserAt||!("USER_SPAM"!=b.filter||a.spamReporter&&a.spamReporter.id&&p.currentUser.id==a.spamReporter.id)||"ADMIN_REPORTED_AS_SPAM"==b.filter&&(!a.spamReporter||!a.spamReporter.id||a.spamMarker&&a.spamMarker.id)||!("ADMIN_MARKED_AS_SPAM"!=b.filter||a.spamMarker&&a.spamMarker.id)||"TRASH"==b.filter&&!a.trash||
-"USER_SPAM"!==b.filter&&"ADMIN_REPORTED_AS_SPAM"!==b.filter&&"ADMIN_MARKED_AS_SPAM"!==b.filter&&"TRASH"!==b.filter&&(a.spamMarker&&a.spamMarker.id||a.spamReporter&&a.spamReporter.id||a.trash)||b.companyId&&b.companyId!=a.company.id||b.status&&b.status!=a.status||b.priority&&b.priority!=a.priorityLevel?!1:!0}var n="ASSIGNED_USER PRIORITY_CHANGED STATUS TRASH REPORT_AS_SPAM RESTORE_FROM_SPAM TICKET_INVOICED TICKET_SHARE".split(" "),w=0,u={lists:{},tickets:{},counts:{}};e=p.$new();l.subscribe("/tickets",
-  e,function(a){console.log(a);a.data&&a.data.number&&(a.data.number="Tkt# "+a.data.number);if("CREATED_TICKET"===a.action){var b=c.customizeObj(a.data,{}),e;for(e in u.lists){var g=u.lists[e];q(a.data,g.params)&&g.list.unshift(b)}}else if("MARKED_AS_SPAM"===a.action)for(e in u.lists){var g=u.lists[e],k=c.indexOfId(g.list,a.data.id),b=-1<k,w=q(a.data,g.params);b&&w?c.customizeObj(a.data,g.list[k]):b&&!w?g.list.splice(k,1):!b&&w&&g.list.unshift(c.customizeObj(a.data))}else if(-1<n.indexOf(a.action)){b=
-    c.customizeObj(a.data,{});for(e in u.lists){g=u.lists[e];w=!1;k=c.indexOfId(g.list,b.id);if(-1<k)q(a.data,g.params)?(c.customizeObj(b,g.list[k]),w=!0):(g.list.splice(k,1),p.$broadcast("ticket_is_not_available_anymore",{ticketId:a.data.id,ticketType:g.params.filter}));else if(q(a.data,g.params))if(0===g.list.length)g.list.push(b);else if(k=g.list[g.list.length-1],15>g.list.length||0>=r(b,k,g.params))g.list.push(b),w=!0;w&&g.list.sort(function(a,b){return r(a,b,g.params)})}for(e in u.tickets)k=u.tickets[e].ticket,
-  k.id===b.id&&c.customizeObj(b,k)}else if("READ"===a.action)h(a.data.id,function(a){c.defineReadOnlyProperty(a,"unread",!1)});else if("TICKET_UPDATES_READ"===a.action)h(a.data.id,function(a){c.defineReadOnlyProperty(a,"hasNewUpdates",!1)});else if("TICKET_COLLAPSED"===a.action||"TICKET_DELETED"===a.action){for(e in u.lists)c.deleteById(u.lists[e].list,a.data.id);for(e in u.tickets)b=u.tickets[e],b.ticket.id===a.data.id&&(delete u.tickets[e],b.scope.$broadcast("ticket_is_not_available_anymore",{ticketId:a.data.id}))}else if("TAG_LINKED"===
-    a.action)for(b in a.data)h(b,function(b){f._merge(b.tags,a.data[b.id])});else if("COMPANY_ARCHIVED"===a.action){for(e in u.lists){k=u.lists[e].list;for(w=0;w<k.length;w++)b=k[w],b.company.id===a.data.id&&(k.splice(w,1),w--);k.length<t.layLoadingPageSize&&d(u.lists[e].scope)}for(e in u.tickets)b=u.tickets[e],k=b.ticket,k.company.id===a.data.id&&(delete u.tickets[e],b.scope.$broadcast("ticket_is_not_available_anymore",{ticketId:a.data.id}))}else"TICKET_BILLABLE"===a.action&&h(a.data.id,function(b){c.defineReadOnlyProperty(b,
-    "isBillable",a.data.isBillable)})});var z={URGENT:m,UNASSIGNED:function(a){return a.createdAt},USER:function(a){return a.closedAt||a.assignedAt},OPEN:function(a){return a.assignedAt},CLOSED:function(a){return a.closedAt},SHARED:function(a){return a.sharedToCurrentUserAt},ALL:m,NOT_SPAM_OR_TRASH:m,USER_SPAM:function(a){return a.reportedAsSpamAt},ADMIN_REPORTED_AS_SPAM:function(a){return a.reportedAsSpamAt},ADMIN_MARKED_AS_SPAM:function(a){return a.markedAsSpamAt},TRASH:function(a){return a.deletedAt}};
-  return{getList:function(a,e,f){if(!a||!a.$id)throw"First argument must be Angularjs scope!";if(!e||!e.filter)throw"'filter' is mandatory parameter that must be counted in second argument";e=b(e);var g=c.customizeObj([]);u.lists[a.$id]={params:e,scope:a,list:g};d(a,f);a.$on("$destroy",function(){delete u.lists[a.$id]});return g},getCurrentlyWorkingWith:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";return c.getListByUrl("/v2/tickets/currentlyWorkingWith",b,function(b){l.subscribe("/tickets",
-    a,function(a){console.log(a);"CURRENTLY_WORKING_WITH"==a.action&&(b.splice(0,b.length),c.customizeArray(a.data,b))})})},loadMore:d,search:function(a,c){if(!a||!a.filter)throw"'filter' is mandatory parameter that must be counted in first argument";if(!a.keyword)throw"'keyword' is mandatory parameter that must be counted in first argument";if(3>a.keyword.length)throw"minimal length of 'keyword' is 3 characters";a=b(a);return g({method:"GET",url:"/v2/tickets/search",params:a}).then(function(a){return a.data})},
-    getCount:function(a,d,e){if(!d||!d.$id)throw"Second argument must be Angularjs scope!";if(!a||!a.filter)throw"'filter' is mandatory parameter that must be counted in first argument";a=b(a);var f=c.customizeObj({});g({method:"GET",url:"/v2/tickets/countByType",params:a}).then(function(a){c.customizeObj(a.data,f);e&&e(a.data)},function(a){e&&e(a.data)});l.subscribe("/ticketsCount",d,function(b){console.log(b);"TICKETS_COUNT_CHANGED"==b.action&&g({method:"GET",url:"/v2/tickets/countByType",params:a}).then(function(a){c.customizeObj(a.data,
-      f);e&&e(a.data)},function(a){e&&e(a.data)})});return f},getCounts:function(a,b){if(!a||!a.$id)throw"Second argument must be Angularjs scope!";var d=w++,e=c.customizeObj({});u.counts[d]=e;a.$on("$destroy",function(){delete u.counts[d]});g.get("/data/getCounters").then(function(a){c.customizeObj(a.data,e);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/leftPanelCounts",a,function(a){console.log(a);"LEFT_PANEL_COUNTS"==a.action&&c.customizeObj(a.data,e)});return e},getCountsByTypesAndCompany:function(a,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    b,d,e){function f(){g({url:"/v2/tickets/counts/",data:{companyId:b,types:d},method:"POST"}).then(function(a){c.customizeObj(a.data,h);e&&e(a.data)},function(a){e&&e(a.data)})}if(!a||!a.$id)throw"Second argument must be Angularjs scope!";if(!b)throw"companyId is required!";if(!d||0==d.length)throw"ticketTypes is required!";var h=c.customizeObj({});f();l.subscribe("/ticketsCount",a,function(a){console.log(a);"TICKETS_COUNT_CHANGED"==a.action&&f()});return h},getOne:function(b,d,e,h,k){if(!b)throw"Id is mandatory argument!";
-      if(!d)throw"ticketsType is mandatory argument!";if(!e||!e.$id)throw"Second argument must be Angularjs scope!";var n=w++,m={id:b};d="SPAM"===d.toUpperCase()?"":d.toUpperCase();var q="/v2/tickets/"+b+"?ticketsType="+d;h&&(q+="&view=extended");u.tickets[n]={ticket:m,scope:e};e.$on("$destroy",function(){delete u.tickets[n]});g.get(q).then(function(b){b.data.number="Tkt# "+b.data.number;c.customizeObj(b.data,m);m.tags&&f._makeDynamic(m.tags,e);h&&m.updates.sort(a);k&&k(b.data)},function(a){k&&k(a.data)});
-      h&&l.subscribe("/ticketUpdates?targetId="+b,e,function(b){console.log(b);if("UPDATE_SAVED"==b.action||"UPDATE_CREATED"==b.action){var e="SHARED"!==d.toUpperCase()||b.data.user.id===p.currentUser.id;if(!e)for(var f=0;f<b.data.shares.length&&!e;f++)e=(e=b.data.shares[f].user)&&e.id===p.currentUser.id;e?(f=c.findById(m.updates,b.data.id))?c.customizeObj(b.data,f):(f=c.customizeObj(b.data),m.updates.push(f)):c.deleteById(m.updates,b.data.id);m.updates.sort(a)}else"UPDATE_DELETED"==b.action&&c.deleteById(m.updates,
-        b.data.id)});return m},changePriority:function(a,b,c){if(!a||!b)throw"ticketId and priority is required arguments!";k("priority",a,b.toUpperCase(),c)},assignTo:function(a,b,c){if(!a||!b)throw"ticketId and userId is required arguments!";k("assign",a,b,c)},changeStatus:function(a,b,c){if(!a||!b)throw"ticketId and status is required arguments!";k("status",a,b.toUpperCase(),c)},markAsSpam:function(a,b){if(!a)throw"ticketId is required arguments!";k("markAsSpam",a,!1,b)},reportAsSpam:function(a,b){if(!a)throw"ticketId is required arguments!";
-      k("reportAsSpam",a,!1,b)},restoreFromSpam:function(a,b){if(!a)throw"ticketId is required arguments!";k("restoreFromSpam",a,!1,b)},changeTrashFlag:function(a,b,c){if(!a)throw"ticketId is required arguments!";k("trash",a,!!b,c)},deleteForever:function(a,b){if(!a)throw"ticketId is required arguments!";var d=a;"[object Array]"!==Object.prototype.toString.call(a)&&(d=[a]);d=g({url:"/v2/tickets/delete/",data:{ids:d},method:"POST"});c.handleCallback(d,b)},claimUser:function(a){g.get("/tickets/claimUser?ticketId="+
-      a)},createTicket:function(a,b){a.priorityLevel&&(a.priorityLevel=a.priorityLevel.toUpperCase());var d=g.post("/v2/tickets",a);c.handleCallback(d,b)},getActualNumber:function(a,b){g.get("/data/actualNumber?type=TICKET").success(function(a){b(a.number)});l.subscribe("/number?targetId=TICKET",a,function(a){console.log(a);"NUMBER_CHANGED"===a.action&&b(c.getFormattedNumber(a.data,!0))})},createTicketUpdate:function(a,b,d){if(!a)throw"ticketUpdate is required arguments!";if(!a.ticket.id)throw"ticketUpdate.ticket.id is required!";
-      if(a.id)throw"TicketUpdate must be new, without ticketUpdate.id!";if(!a.type)throw"ticketUpdate.type is required!";if(!a.note&&!a.products&&!a.services)throw"In TicketUpdate must be or note or products or services!";a=g({url:"/v2/tickets/updates",method:"POST",params:{close:!!b},data:a});c.handleCallback(a,d)},deleteTicketUpdate:function(a,b,d){a=g({url:"/v2/tickets/"+a+"/updates/"+b,method:"DELETE"});c.handleCallback(a,d)},loadRemainingTicketUpdates:function(b,d){if(!b.id||!b.updates)throw"You can load updates only for detailed ticket!";
-      if(0==b.updates.length)throw"There is no updates";for(var e=[],f=0;f<b.updates.length;f++)e.push(b.updates[f].id);g({url:"/v2/tickets/"+b.id+"/updates/fetch",method:"POST",data:e}).then(function(e){c.customizeArray(e.data,b.updates);c.defineReadOnlyProperty(b,"unloadedUpdates",0);b.updates.sort(a);d&&d(e.data)},function(a){d&&d(a.data)})},markUpdateAsRead:function(a,b,d){if(!a||!b)throw"ticketId and updateIds is required parameters";a=g({url:"/v2/tickets/"+a+"/updates/read",method:"POST",data:b});
-      c.handleCallback(a,d)},updateExpenseInTicketUpdate:function(a,b){if(!a)throw"expense is required!";if(!a.ticketUpdateId)throw"ticketUpdateId is required!";if(!a.serviceExpense&&!a.productExpense)throw"serviceExpense or productExpense is required!";var d=g({url:"/v2/tickets/ticketUpdate/updateExpense",method:"PUT",data:a});c.handleCallback(d,b)}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("UsersService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(g,p,l,c,f){function e(a){var d=c.findById(n.users,a.id);d?c.customizeObj(a,d):(a=c.customizeObj(a),n.users.push(a),a.company.id!==f.getCurrentCompany().id&&n.clientUsers.push(a),b(a),n.usersByCompanies[a.company.id]||(n.usersByCompanies[a.company.id]=[]),n.usersByCompanies[a.company.id].push(a))}function b(a){var b=[a.firstName,a.lastName].map(function(a){return a.charAt(0).toUpperCase()}).join("");
-  c.defineReadOnlyProperty(a,"initials",b)}function a(){return d(p.currentUser.id)}function d(a){return c.findById(n.users,a)}function k(b,c,d){if(!b)throw"Keyword is required!";var e=[];d=d?n.usersByCompanies[d]||[]:n.users;for(var f=0;f<d.length;f++){var g=d[f];(c||a().company.id!==g.company.id)&&-1<(g.firstName+" "+g.lastName).toLowerCase().indexOf(b.toLowerCase())&&e.push(g)}return e}var h=p.$new(),q=[],m=!1,t=!1,n={users:[],clientUsers:[],usersByCompanies:{}};c.customizeObj(n);f._addInitListener(function(){t||
-(t=!0,g.get("/users").then(function(a){c.customizeArray(a.data,n.users);for(a=0;a<n.users.length;a++){var d=n.users[a];b(d);n.usersByCompanies[d.company.id]||(n.usersByCompanies[d.company.id]=[]);n.usersByCompanies[d.company.id].push(d);d.company.id!==f.getCurrentCompany().id&&n.clientUsers.push(d)}m=!0;for(a=0;a<q.length;a++)q[a]();q=[]},function(a){console.error(a);throw"Cannot initialize CompaniesService!";}),l.subscribe("/user",h,function(a){console.log(a);if(m)if("USER_SAVED"==a.action)e(a.data);
-else if("USER_DELETED"==a.action){var b=c.findById(n.users,a.data.id);c.deleteById(n.users,a.data.id);c.deleteById(n.clientUsers,a.data.id);b&&c.deleteById(n.usersByCompanies[b.company.id],a.data.id)}else if("USER_ONLINE"==a.action)(b=c.findById(n.users,a.data.id))&&c.defineReadOnlyProperty(b,"online",!!a.data.online);else if("COMPANY_ARCHIVED"==a.action){for(b=0;b<n.users.length;b++)n.users[b].company.id===a.data.id&&(n.users.splice(b,1),b--);for(b=0;b<n.clientUsers.length;b++)n.clientUsers[b].company.id===
-a.data.id&&(n.clientUsers.splice(b,1),b--);delete n.usersByCompanies[a.data.id]}else"USERS_DEARCHIVED"==a.action&&a.data.forEach(e)}),l.subscribe("/subscription?targetId="+f.getCurrentCompany().id,h,function(a){console.log(a);if(a.data.user){var b=c.findById(n.users,a.data.user.id);b&&("SUBSCRIPTION_SAVED"==a.action?c.defineReadOnlyProperty(b,"subscription",c.customizeObj(a.data)):"SUBSCRIPTION_DELETED"==a.action&&delete b.subscription)}}))});return{_addInitListener:function(a){if(!a)throw"callback is required!";
-  m?a():q.push(a)},getCurrentUser:a,getAllUsers:function(){return n.users},getClientUsers:function(){return n.clientUsers},getAllByCompanyId:function(a){return n.usersByCompanies[a]||[]},getOneById:d,getUserProfile:function(a){var b={};g.get("/settings/userProfile/").then(function(d){c.customizeObj(d.data,b);a&&a(d.data)},function(b){a&&a(b.data)});return b},searchByAllUsers:function(a){return k(a,!0)},searchByClientUsers:function(a){return k(a,!1)},searchByUsersFromCompany:function(a,b){return k(a,
-  !1,b)},changeUserRole:function(a,b,d){if(!a)throw"userId is required!";if(!b)throw"roleName is required!";a=g({url:"/users/updateRole/"+a+"?role="+b.toUpperCase(),method:"PUT"});c.handleCallback(a,d)},save:function(a,b){if(!a)throw"user is required!";var d="/users",e="POST";a.id&&(e="PUT",d=d+"/"+a.id);d=g({url:d,method:e,data:a});c.handleCallback(d,b)},saveForUserProfile:function(a,b,d){if(!a)throw"data is required!";if(!b)throw"toUpdate is required!";b="/settings/userProfile/"+b.toLowerCase();a=
-  g({url:b,method:"PUT",data:a});c.handleCallback(a,d)},deleteOrArchiveUser:function(a,b,d){if(!a)throw"ids is required!";if(b===r)throw"isArchive is required!";Array.isArray(a)||(a=[a]);a=g({url:"/users/"+!!b,method:"POST",data:a});c.handleCallback(a,d)},isEmailUnique:function(a,b,d){if(!a)throw"email is required!";var e=c.customizeObj({});g.get("/users/isEmailUnique?email="+a+"&id="+b).then(function(a){c.customizeObj(a.data,e);d&&d(a.data)},function(a){d&&d(a.data)});return e}}}])})(window,jQuery);(function(t,q,r){angular.module("main.services").factory("VendorsService",["$http","$rootScope","RealTimeService","Utils","$filter",function(g,p,l,c){return{save:function(f,e){if(!f)throw"vendor is required!";var b="POST";f.id&&(b="PUT");b=g({url:"/vendor",method:b,data:f});c.handleCallback(b,e)},getAll:function(f,e){if(!f||!f.$id)throw"First argument must be Angularjs scope!";return c.getListByUrl("/vendor",e,function(b){l.subscribe("/vendor",f,function(a){console.log(a);if("VENDOR_SAVE"==a.action){var d=
-  c.findById(b,a.data.id);d?c.customizeObj(a.data,d):b.push(c.customizeObj(a.data))}else if("VENDOR_ARCHIVED"==a.action)c.deleteById(b,a.data.id),f.$broadcast("vendor_archived",a.data);else if("VENDOR_DEARCHIVED"==a.action)b.push(c.customizeObj(a.data)),f.$broadcast("vendor_dearchived",a.data);else if("VENDOR_PRODUCT_SAVE"==a.action){var d=c.findById(b,a.data.id),e=c.findById(d.products,a.data.products[0].versionedId.id);if(d&&e)for(a=0;d.products.length<a;a++);else d&&(d.products[d.products.length]=
-  a.data.products[0])}else"VENDOR_PRODUCT_DELETE"==a.action&&(d=c.findById(b,a.data.id))&&c.deleteById(d.products,a.data.products[0].versionedId.id)})})},getAllForCompanyProfile:function(f,e,b){if(!f||!f.$id)throw"First argument must be Angularjs scope!";if(!e)throw"companyId is required!";return c.getListByUrl("/vendor/companyProfile/"+e,b,function(a){l.subscribe("/vendor",f,function(b){console.log(b);if("VENDOR_SAVE"==b.action){var e=c.findById(a,b.data.id);e?c.customizeObj(b.data,e):a.push(c.customizeObj(b.data))}else if("VENDOR_ARCHIVED"==
-  b.action)c.deleteById(a,b.data.id),f.$broadcast("vendor_archived",b.data);else if("VENDOR_DEARCHIVED"==b.action)a.push(c.customizeObj(b.data)),f.$broadcast("vendor_dearchived",b.data);else if("VENDOR_PRODUCT_SAVE"==b.action){var e=c.findById(a,b.data.id),g=c.findById(e.products,b.data.products[0].versionedId.id);if(e&&g)for(b=0;e.products.length<b;b++);else e&&(e.products[e.products.length]=b.data.products[0])}else"VENDOR_PRODUCT_DELETE"==b.action&&(e=c.findById(a,b.data.id))&&c.deleteById(e.products,
-  b.data.products[0].versionedId.id)})})},getAllForAutocomplete:function(f,e){if(!f||!f.$id)throw"First argument must be Angularjs scope!";return c.getListByUrl("/vendor/autocomplete/list",e,function(b){l.subscribe("/vendor",f,function(a){console.log(a);if("VENDOR_SAVE"==a.action){var d=c.findById(b,a.data.id);d?c.customizeObj(a.data,d):b.push(c.customizeObj(a.data))}else"VENDOR_ARCHIVED"==a.action?(c.deleteById(b,a.data.id),f.$broadcast("vendor_archived",a.data)):"VENDOR_DEARCHIVED"==a.action&&(b.push(c.customizeObj(a.data)),
-  f.$broadcast("vendor_dearchived",a.data))})})},getAllInCompanyForAutocomplete:function(f,e){if(!f)throw"companyId is required!";var b=c.customizeArray([]);g.get("/vendor/getAll/"+f).then(function(a){c.customizeArray(a.data,b);e&&e(a.data)},function(a){e&&e(a.data)});return b},isWebsiteUnique:function(f,e,b){if(!f)throw"website is required!";var a=c.customizeObj({});g.get("/vendor/isWebsiteUnique?website="+f+"&id="+e).then(function(d){c.customizeObj(d.data,a);b&&b(d.data)},function(a){b&&b(a.data)});
-  return a},isNameUnique:function(f,e,b){if(!f)throw"name is required!";var a=c.customizeObj({});g.get("/vendor/isNameUnique?name="+f+"&id="+e).then(function(d){c.customizeObj(d.data,a);b&&b(d.data)},function(a){b&&b(a.data)});return a},archive:function(f,e){if(!f)throw"id is required!";var b=g.get("/vendor/archive/"+f);c.handleCallback(b,e)},dearchive:function(f,e){if(!f)throw"id is required!";var b=g.get("/vendor/dearchive/"+f);c.handleCallback(b,e)},getOneById:function(f,e){if(!f)throw"vendorId is required!";
-  var b=c.customizeObj({});g.get("/vendor/getOneById/"+f).then(function(a){c.customizeObj(a.data,b);e&&e(a.data)},function(a){e&&e(a.data)});return b},search:function(c){if(!c)throw"Keyword is required!";return g.get("/vendor/search?keyword="+c).then(function(c){return c.data})}}}])})(window,jQuery);
+(function (v, r, t) {
+  v.layLoadingPageSize = 15;
+  r = angular.module("main.services", []);
+  r.config(["$provide", "$httpProvider", function (g, m) {
+    g.factory("myHttpInterceptor", [function () {
+      function g(d) {
+        if ("unauthorized" === d.data.errorMessage || "unauthorized" === d.data.authMessage)v.location.pathname = "/login"; else if (d.data.showMessage)return alert(d.data.showMessage), {};
+        return d
+      }
+
+      return {
+        request: function (d) {
+          d.url && (d.params || (d.params = {}), d.url.endsWith(".html") || (d.params.t = (new Date).getTime()));
+          return d
+        }, response: g,
+        responseError: g
+      }
+    }]);
+    m.interceptors.push("myHttpInterceptor")
+  }]);
+  r.run(["$http", "$rootScope", function (g, m) {
+    g.get("/users/current").success(function (g) {
+      m.currentUser = g
+    });
+    m.numberCounterDelimiter = "-"
+  }]);
+  r.service("Downloader", function () {
+    function g(f) {
+      if (/(iP)/g.test(navigator.userAgent))return alert("Your device does not support files downloading. Please try again in desktop browser."), !1;
+      if (m || l || d) {
+        var c = document.createElement("a");
+        c.href = f;
+        if (c.download !== t) {
+          var a = f.substring(f.lastIndexOf("/") + 1,
+            f.length);
+          c.download = a
+        }
+        if (document.createEvent)return f = document.createEvent("MouseEvents"), f.initEvent("click", !0, !0), c.dispatchEvent(f), !0
+      }
+      v.open(f, "_self");
+      return !0
+    }
+
+    var m = -1 < navigator.userAgent.toLowerCase().indexOf("chrome"), l = -1 < navigator.userAgent.toLowerCase().indexOf("safari"), d = -1 < navigator.userAgent.toLowerCase().indexOf("firefox");
+    return {
+      downloadByUrl: g, downloadTicketAttachments: function (d) {
+        g("/v2/tickets/" + d + "/downloadAttachments")
+      }, downloadFile: function (d) {
+        g("/file/" + d)
+      }
+    }
+  });
+  r.service("Utils",
+    ["$http", "$rootScope", function (g, m) {
+      function l(b) {
+        var e = b;
+        !e && this.staticCopy && (e = this);
+        if ("[object Array]" === Object.prototype.toString.call(e)) {
+          b = [];
+          for (var a = 0; a < e.length; a++)b.push(l(e[a]))
+        } else if ("[object Object]" === Object.prototype.toString.call(e))for (a in b = {}, e)"staticCopy" !== a && "$$hashKey" != a && (b[a] = l(e[a])); else return e;
+        return b
+      }
+
+      function d(b, e) {
+        if ("[object String]" === Object.prototype.toString.call(b))return b;
+        e = e || b;
+        for (var a in b) {
+          var h = b[a];
+          "[object Array]" === Object.prototype.toString.call(h) ?
+            f(h) : "[object Object]" === Object.prototype.toString.call(h) && d(h);
+          c(e, a, h)
+        }
+        c(e, "staticCopy", l);
+        return e
+      }
+
+      function f(b, e) {
+        if (e) {
+          for (var a = 0; a < b.length; a++)e.push(d(b[a]));
+          c(e, "staticCopy", l);
+          return e
+        }
+        for (a = 0; a < b.length; a++)b[a] = d(b[a]);
+        c(b, "staticCopy", l);
+        return b
+      }
+
+      function c(b, e, a) {
+        Object.defineProperty(b, e, {value: a, writable: !1, enumerable: !0, configurable: !0})
+      }
+
+      function a(b, e) {
+        for (var a = 0; a < b.length; a++) {
+          var d = b[a];
+          if (d && (d = d.versionedId ? d.versionedId.id : d.id, d === e))return a
+        }
+        return -1
+      }
+
+      return {
+        customizeObj: d,
+        customizeArray: f, defineReadOnlyProperty: c, findById: function (b, e) {
+          for (var a = 0; a < b.length; a++) {
+            var d = b[a];
+            if ((d.versionedId ? d.versionedId.id : d.id) === e)return d
+          }
+        }, indexOfId: a, handleCallback: function (b, a) {
+          a && b.then(function (b) {
+            a(b.data)
+          }, function (b) {
+            a(b.data)
+          })
+        }, deleteById: function (b, e) {
+          var d = a(b, e);
+          -1 < d && b.splice(d, 1)
+        }, getListByUrl: function (b, a, d) {
+          var h = [];
+          d && (h = f(h));
+          g.get(b).then(function (b) {
+            if (d)f(b.data, h), d(h); else for (var p = 0; p < b.data.length; p++)h.push(b.data[p]);
+            a && a(h)
+          }, function (b) {
+            a && a(b.data)
+          });
+          return h
+        }, getFormattedNumber: function (b, a) {
+          var d;
+          if (a)for (d = "" + (parseInt(b.numPart) + 1); d.length < b.numPart.length;)d = "0" + d; else d = b.numPart;
+          return b.charPart ? b.charPart + m.numberCounterDelimiter + d : d
+        }, getComparatorBy: function (b, a) {
+          return function (d, h) {
+            return a ? h[b] - d[b] : d[b] - h[b]
+          }
+        }, formatDate: function (b) {
+          return b.getFullYear() + "-" + (b.getMonth() + 1) + "-" + b.getDate()
+        }
+      }
+    }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("AddressesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    return {
+      getAllLocales: function (f) {
+        var c = d.customizeArray([]);
+        g.get("/addresses/getAllLocales").then(function (a) {
+          d.customizeArray(a.data, c);
+          f && f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return c
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("AssociationService", ["$http", "$rootScope", "Utils", "$filter", function (g, m, l) {
+    return {
+      deleteAssociation: function (d, f) {
+        if (!d)throw"id is required!";
+        var c = g({url: "/association/" + d, method: "DELETE"});
+        l.handleCallback(c, f)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("BillableService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (g, m, l, d, f) {
+    return {
+      getTotalBilledAmount: function (c, a) {
+        var b = d.customizeObj({});
+        g.get("/billable/totalBilled").then(function (e) {
+          d.customizeObj(e.data, b);
+          l.subscribe("/billedTicketsSumAdded", c, function (a) {
+            console.log(a);
+            "BILLED_TICKETS_SUM_ADDED" === a.action && d.defineReadOnlyProperty(b, "value", b.value + a.data)
+          });
+          a && a(e.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, getBillableChartData: function (c, a) {
+        var b = d.customizeArray([]);
+        g.get("/billable/billed/lastDays").then(function (e) {
+          d.customizeArray(e.data, b);
+          l.subscribe("/billedTicketsSumAdded", c, function (a) {
+            console.log(a);
+            if ("BILLED_TICKETS_SUM_ADDED" === a.action) {
+              var e = b[b.length - 1];
+              d.defineReadOnlyProperty(e, "sum", e.sum + a.data)
+            }
+          });
+          a && a(b)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, getBillableCompanies: function (c, a) {
+        if (!c || !c.$id)throw"First argument must be Angularjs scope!";
+        var b = d.customizeArray([]);
+        g({
+          url: "/billable/total",
+          method: "GET"
+        }).then(function (e) {
+          d.customizeArray(e.data, b);
+          l.subscribe("/billableTotal", c, function (a) {
+            console.log(a);
+            if ("CLIENT_BILLABLE_TOTAL" == a.action)if (0 < a.data.ticketsCount) {
+              var e = d.findById(b, a.data.id);
+              e || (e = {}, b.push(e));
+              d.customizeObj(a.data, e)
+            } else a = d.indexOfId(b, a.data.id), -1 < a && (d.defineReadOnlyProperty(b[a], "total", 0), d.defineReadOnlyProperty(b[a], "ticketsCount", 0), b.splice(a, 1)); else if ("COMPANY_ARCHIVED" == a.action)for (e = 0; e < b.length; e++)b[e].company.id === a.data.id && (b.splice(e, 1),
+              e--)
+          });
+          a && a(e.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, getCompanyBillableTickets: function (c, a, b) {
+        if (!c)throw"companyId is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = [];
+        g.get("/billable/expenses/" + c).then(function (k) {
+          d.customizeArray(k.data, e);
+          l.subscribe("/billableExpense?targetId=" + c, a, function (b) {
+            console.log(b);
+            if ("BILLABLE_EXPENSE_ADDED" == b.action) {
+              var a = d.findById(e, b.data.id);
+              a || (a = {}, e.push(a));
+              d.customizeObj(b.data, a)
+            } else"BILLABLE_EXPENSE_REMOVED" == b.action &&
+            (b = d.indexOfId(e, b.data), -1 < b && e.splice(b, 1))
+          });
+          b && b(k.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return e
+      }, createInvoice: function (c, a) {
+        if (!c)throw"lockId is required!";
+        var b = g.get("/invoice/create/" + c);
+        d.handleCallback(b, a)
+      }, getActualInvoiceNumber: function (c, a) {
+        g.get("/data/actualNumber?type=INVOICE").success(function (b) {
+          a(b.number)
+        });
+        l.subscribe("/number?targetId=INVOICE", c, function (b) {
+          console.log(b);
+          "NUMBER_CHANGED" === b.action && a(d.getFormattedNumber(b.data, !0))
+        })
+      }, search: function (d) {
+        if (!d)throw"Keyword is required!";
+        return g.get("/billable/search?keyword=" + d).then(function (a) {
+          return a.data
+        })
+      }, getLockedTicketIds: function (c, a) {
+        if (!c || !c.$id)throw"First argument must be Angularjs scope!";
+        return d.getListByUrl("/invoice/lock", a, function (b) {
+          l.subscribe("/ticketResolution?targetId=" + f.getCurrentCompany().id, c, function (a) {
+            console.log(a);
+            if ("TICKET_LOCKED" == a.action)for (var d = 0; d < a.data.length; d++)b.push(a.data[d]); else if ("TICKET_UNLOCKED" == a.action)for (d = 0; d < b.length; d++)for (var h = 0; h < a.data.length; h++)b[d] == a.data[h] &&
+            b.splice(d, 1)
+          })
+        })
+      }, lockTicketIds: function (c, a) {
+        if (!c)throw"ticketIds is required!";
+        var b = d.customizeObj({});
+        g({url: "/invoice/lock", method: "POST", data: c}).then(function (e) {
+          d.customizeObj(e.data, b);
+          a && a(e.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, unlockTicketIds: function (c, a) {
+        if (!c)throw"lockId is required!";
+        var b = g.get("/invoice/unlock/" + c);
+        d.handleCallback(b, a)
+      }, getExistTimeByLockId: function (c, a) {
+        if (!c)throw"lockId is required!";
+        var b = g.get("/invoice/lock/timeToUnlock/" + c);
+        d.handleCallback(b, a)
+      },
+      lockTicketsByCompany: function (c, a) {
+        if (!c)throw"companyId is required!";
+        var b = g.get("/invoice/lock/lockByCompany/" + c);
+        d.handleCallback(b, a)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("CompaniesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    function f() {
+      q++;
+      if (2 === q) {
+        b = !0;
+        for (var a = 0; a < e.length; a++)e[a]()
+      }
+    }
+
+    function c(b, a) {
+      if (!b)throw"Keyword is required!";
+      for (var d = [], e = 0; e < h.companies.length; e++) {
+        var c = h.companies[e];
+        (a || h.currentCompany.id !== c.id) && -1 < c.name.indexOf(b) && d.push(c)
+      }
+      return d
+    }
+
+    function a(a) {
+      a && (b ? a() : e.push(a))
+    }
+
+    m = m.$new();
+    var b = !1, e = [], k = [], h = {
+      companies: [], clientCompanies: [],
+      currentCompany: {}
+    };
+    d.customizeObj(h);
+    g.get("/company/clients").then(function (b) {
+      d.customizeArray(b.data, h.clientCompanies);
+      for (b = 0; b < h.clientCompanies.length; b++)h.companies.push(h.clientCompanies[b]);
+      f()
+    }, function (b) {
+      console.error(b);
+      throw"Cannot initialize CompaniesService!";
+    });
+    g.get("/company/current").then(function (b) {
+      d.customizeObj(b.data, h.currentCompany);
+      h.companies.push(h.currentCompany);
+      f()
+    }, function (b) {
+      console.error(b);
+      throw"Cannot initialize CompaniesService!";
+    });
+    var q = 0;
+    l.subscribe("/company",
+      m, function (a) {
+        console.log(a);
+        if (b)if ("COMPANY_SAVED" == a.action) {
+          var e = d.findById(h.companies, a.data.id);
+          if (e)d.customizeObj(a.data, e); else for (a = d.customizeObj(a.data), h.companies.push(a), h.clientCompanies.push(a), a = 0; a < k.length; a++)k[a]()
+        } else if ("COMPANY_ARCHIVED" == a.action)for (d.deleteById(h.companies, a.data.id), d.deleteById(h.clientCompanies, a.data.id), a = 0; a < k.length; a++)k[a](); else if ("COMPANY_DEARCHIVED" == a.action)for (e = d.customizeObj(a.data), h.clientCompanies.push(e), h.companies.push(e), a =
+          0; a < k.length; a++)k[a]()
+      });
+    return {
+      _addInitListener: a, _addAmountChangeListener: function (a) {
+        k.push(a)
+      }, _search: c, _isInitialized: function () {
+        return b
+      }, getCurrentCompany: function () {
+        return h.currentCompany
+      }, getClientCompanies: function (b) {
+        a(b);
+        return h.clientCompanies
+      }, getAllCompanies: function () {
+        return h.companies
+      }, getOneById: function (a) {
+        return d.findById(h.companies, a)
+      }, searchByAllCompanies: function (a) {
+        return c(a, !0)
+      }, searchByClientCompanies: function (a) {
+        return c(a, !1)
+      }, getClientCompaniesInfo: function (a,
+                                           b) {
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = d.customizeObj({});
+        g.get("/company/clients/info").then(function (a) {
+          d.customizeObj(a.data, e);
+          b && b(a.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        l.subscribe("/clientCompaniesInfo", a, function (a) {
+          console.log(a);
+          if ("CLIENT_COMPANY_INFO" == a.action) {
+            a = JSON.parse(a.data);
+            for (var b in a)d.defineReadOnlyProperty(e, b, d.customizeObj(a[b]))
+          } else"COMPANY_ARCHIVED" == a.action && delete e[a.data.id]
+        });
+        return e
+      }, getCompanyInfo: function (a, b, e) {
+        if (!a)throw"companyId is required!";
+        if (!b || !b.$id)throw"Second argument must be Angularjs scope!";
+        var h = d.customizeObj({});
+        g.get("/company/" + a + "/info").then(function (a) {
+          d.customizeObj(a.data, h);
+          e && e(a.data)
+        }, function (a) {
+          e && e(a.data)
+        });
+        l.subscribe("/clientCompaniesInfo", b, function (b) {
+          console.log(b);
+          if ("CLIENT_COMPANY_INFO" == b.action) {
+            b = JSON.parse(b.data);
+            for (var e in b)e === a && d.customizeObj(b[a], h)
+          }
+        });
+        return h
+      }, archive: function (a, b) {
+        if (!a)throw"companyId is required!";
+        var e = g.get("/company/archive/" + a);
+        d.handleCallback(e, b)
+      }, dearchive: function (a,
+                              b) {
+        if (!a)throw"companyId is required!";
+        var e = g.get("/company/dearchive/" + a);
+        d.handleCallback(e, b)
+      }, save: function (a, b) {
+        if (!a)throw"company is required!";
+        var e = "POST";
+        a.id && (e = "PUT");
+        e = g({url: "/company", method: e, data: a});
+        d.handleCallback(e, b)
+      }, saveForCompanyProfile: function (a, b, e) {
+        if (!a)throw"data is required!";
+        if (!b)throw"toUpdate is required!";
+        b = "/settings/companyProfile/" + b.toLowerCase();
+        a = g({url: b, method: "PUT", data: a});
+        d.handleCallback(a, e)
+      }, getCompanyForSettingPage: function (a) {
+        var b = {};
+        g.get("/settings/companyProfile/").then(function (e) {
+          d.customizeObj(e.data,
+            b);
+          a && a(e.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, getCompanyData: function (a, b, e) {
+        if (!b)throw"companyId is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var h = d.customizeObj({});
+        g.get("/company/" + b + "/data").then(function (a) {
+          d.customizeObj(a.data, h);
+          e && e(a.data)
+        }, function (a) {
+          e && e(a.data)
+        });
+        l.subscribe("/companyDto?targetId=" + b, a, function (a) {
+          console.log(a);
+          if ("COMPANY_DTO_CHANGED" == a.action) {
+            a = JSON.parse(a.data);
+            for (var e in a)e === b && d.customizeObj(a[b], h)
+          }
+        });
+        return h
+      },
+      isNameUnique: function (a, b, e) {
+        if (!a)throw"name is required!";
+        var h = d.customizeObj({});
+        g.get("/company/isCompanyNameUnique?name=" + a + "&id=" + b).then(function (a) {
+          d.customizeObj(a.data, h);
+          e && e(a.data)
+        }, function (a) {
+          e && e(a.data)
+        });
+        return h
+      }, isDomainUnique: function (a, b, e) {
+        if (!a)throw"domain is required!";
+        var h = d.customizeObj({});
+        g.get("/company/isCompanyDomainUnique?domain=" + a + "&id=" + b).then(function (a) {
+          d.customizeObj(a.data, h);
+          e && e(a.data)
+        }, function (a) {
+          e && e(a.data)
+        });
+        return h
+      }, saveCover: function (a, b, e) {
+        if (!a)throw"croppedImage is required!";
+        if (!b)throw"companyId is required!";
+        a = g({url: "/company/" + b + "/cover", method: "POST", data: a});
+        d.handleCallback(a, e)
+      }, deleteCover: function (a, b) {
+        if (!a)throw"companyId is required!";
+        var e = g({url: "/company/" + a + "/cover", method: "DELETE"});
+        d.handleCallback(e, b)
+      }, getCompanyContacts: function (a, b, e) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        if (!b)throw"Second argument must be companyId!";
+        return d.getListByUrl("/company/" + b + "/contacts", e, function (b) {
+          l.subscribe("/companyContact", a, function (a) {
+            console.log(a);
+            "COMPANY_CONTACT" == a.action && d.customizeArray(a.data, b)
+          })
+        })
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("ContactsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (g, m, l, d) {
+    return {
+      isEmailUnique: function (f, c, a) {
+        if (!f)throw"email is required!";
+        var b = d.customizeObj({});
+        g.get("/contacts/isEmailUnique?email=" + f + "&id=" + c).then(function (e) {
+          d.customizeObj(e.data, b);
+          a && a(e.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, getSubscribedContactsOnTicket: function (f) {
+        var c = d.customizeArray([]);
+        g.get("/contacts/getSubscribedContactsOnTicket/").then(function (a) {
+          d.customizeArray(a.data,
+            c);
+          f && f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return c
+      }, getSubscribedContacts: function (f) {
+        var c = d.customizeArray([]);
+        g.get("/contacts/getSubscribedContacts/").then(function (a) {
+          d.customizeArray(a.data, c);
+          f && f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return c
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("DevicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "UsersService", function (g, m, l, d, f) {
+    m = m.$new();
+    var c = {devices: [], devicesByCompanies: {}};
+    d.customizeObj(c);
+    g.get("/devices").then(function (a) {
+      d.customizeObj(a.data, c.devicesByCompanies);
+      for (var b in c.devicesByCompanies)if ("staticCopy" !== b)for (a = 0; a < c.devicesByCompanies[b].length; a++)c.devices.push(c.devicesByCompanies[b][a]);
+      f._addInitListener(function () {
+        for (var a = 0; a < c.devices.length; a++)for (var b =
+          0; b < c.devices[a].users.length; b++) {
+          var d = f.getOneById(c.devices[a].users[b].id);
+          c.devices[a].users[b] = d
+        }
+      })
+    }, function (a) {
+      console.error(a);
+      throw"Cannot initialize CompaniesService!";
+    });
+    l.subscribe("/device", m, function (a) {
+      console.log(a)
+    });
+    return {
+      getAllDevices: function () {
+        return c.devices
+      }, getAllByCompanyId: function (a) {
+        return c.devicesByCompanies[a] || []
+      }, getOneById: function (a) {
+        return d.findById(c.devices, a)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("EmailSettingsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    return {
+      saveNumberForm: function (f, c, a) {
+        if (!f)throw"data is required!";
+        if (!c)throw"type is required!";
+        f.type = c;
+        f = g({url: "/settings/emailPages/updateNumberForm", method: "PUT", data: f});
+        d.handleCallback(f, a)
+      }, getCompanyEmailNotification: function (f) {
+        var c = {};
+        g.get("/settings/emailPages/emailNotifications").then(function (a) {
+          d.customizeObj(a.data, c);
+          f &&
+          f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return c
+      }, getEmailSettingPageDto: function (f, c) {
+        if (!f)throw"scope is required!";
+        var a = d.customizeObj({});
+        g.get("/settings/emailPages/").then(function (b) {
+          d.customizeObj(b.data, a);
+          c && c(b.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        l.subscribe("/companyEmailNotification", f, function (b) {
+          console.log(b);
+          "COMPANY_EMAIL_NOTIFICATION" == b.action && d.customizeObj(b.data, a.activeAndNotDefault)
+        });
+        return a
+      }, getTermsAndConditions: function (f) {
+        var c = {};
+        g.get("/settings/emailPages/termsAndConditions").then(function (a) {
+          d.customizeObj(a.data,
+            c);
+          f && f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return c
+      }, setToDefaultTemplate: function (f, c) {
+        if (!f)throw"type is required!";
+        var a = g({url: "/settings/emailPages/toDefaultTemplate/" + f, method: "POST"});
+        d.handleCallback(a, c)
+      }, getTemplate: function (f, c) {
+        if (!f)throw"type is required!";
+        var a = {};
+        g.get("/settings/emailPages/byType/" + f).then(function (b) {
+          d.customizeObj(b.data, a);
+          c && c(b.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return a
+      }, saveEmailTemplate: function (f, c, a) {
+        if (!f)throw"data is required!";
+        if (!f.subject)throw"data.subject is required!";
+        if (!f.body)throw"data.body is required!";
+        if (!c)throw"type is required!";
+        f = g({url: "/settings/emailPages/updateTemplate/" + c, method: "PUT", data: f});
+        d.handleCallback(f, a)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("FilesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    return {
+      create: function (d, c, a, b, e) {
+        if (!d)throw"file is required!";
+        var k = {}, h = new FormData;
+        h.append("file", d);
+        d = new XMLHttpRequest;
+        d.upload.addEventListener("progress", c, !1);
+        d.addEventListener("load", function (b) {
+          b = angular.fromJson(b.currentTarget.responseText);
+          for (var e in b)k[e] = b[e];
+          a && a(k)
+        }, !1);
+        d.addEventListener("error", b, !1);
+        d.open("POST", "/file?isAvatar=" + !!e);
+        d.send(h);
+        return k
+      }, createImageFromBase64Url: function (d, c) {
+        if (!d)throw"base64Url is required!";
+        var a = {};
+        g({url: "/base64image", method: "POST", data: d.substring(22, d.length)}).then(function (b) {
+          for (var e in b.data)a[e] = b.data[e];
+          c && c(a)
+        });
+        return a
+      }, getMetadata: function (d, c) {
+        if (!d)throw"fileId is required!";
+        var a = {id: d};
+        g.get("/file/" + d + "/meta").then(function (b) {
+          for (var e in b.data)a[e] = b.data[e];
+          c && c(a)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return a
+      }, remove: function (d, c) {
+        if (!d)throw"fileId is required!";
+        g({
+          url: "/file/" +
+          d, method: "DELETE"
+        }).then(function (a) {
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
+        })
+      }, cropAvatar: function (d, c) {
+        if (!d)throw"image is required!";
+        g({url: "/file/cropImage", method: "POST", data: d}).then(function (a) {
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
+        })
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("ProductsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (g, m, l, d, f) {
+    return {
+      search: function (d) {
+        if (!d)throw"Keyword is required!";
+        return g.get("/products/search?keyword=" + d).then(function (a) {
+          return a.data
+        })
+      }, getCategories: function (c, a) {
+        if (!c || !c.$id)throw"First argument must be Angularjs scope!";
+        return d.getListByUrl("/products/categories", a, function (a) {
+          l.subscribe("/productCategory", c, function (e) {
+            console.log(e);
+            if ("PRODUCT_CATEGORY_SAVED" == e.action) {
+              var k = d.findById(a, e.data.id);
+              k ? d.customizeObj(e.data, k) : a.push(d.customizeObj(e.data))
+            } else"PRODUCT_CATEGORY_DELETED" == e.action && (d.deleteById(a, e.data.id), c.$broadcast("product_category_deleted", e.data))
+          })
+        })
+      }, saveCategory: function (c, a) {
+        if (!c)throw"category is required!";
+        var b = "/products/categories", e = "POST";
+        c.id && (b += "/" + c.id, e = "PUT");
+        b = g({url: b, method: e, data: c});
+        d.handleCallback(b, a)
+      }, deleteCategory: function (c, a) {
+        if (!c)throw"categoryId is required argument!";
+        var b = g({url: "/products/categories/" + c, method: "DELETE"});
+        d.handleCallback(b, a)
+      }, getAllByCategory: function (c, a, b, e) {
+        if (!c || !c.$id)throw"First argument must be Angularjs scope!";
+        if (!a)throw"categoryId is required argument!";
+        var k = "/products?categoryId=" + a;
+        e && (k = "/products/full?categoryId=" + a);
+        return d.getListByUrl(k, b, function (b) {
+          l.subscribe("/product?targetId=" + a, c, function (a) {
+            console.log(a);
+            if ("PRODUCT_SAVED" == a.action) {
+              var e = d.findById(b, a.data.versionedId.id);
+              e ? d.customizeObj(a.data, e) : b.push(d.customizeObj(a.data))
+            } else"PRODUCT_DELETED" ==
+            a.action && (d.deleteById(b, a.data.versionedId.id), c.$broadcast("product_deleted", a.data))
+          })
+        })
+      }, saveProduct: function (c, a) {
+        if (!c)throw"product is required!";
+        var b = "POST";
+        c.id && (b = "PUT");
+        b = g({url: "/products", method: b, data: c});
+        d.handleCallback(b, a)
+      }, deleteProduct: function (c, a) {
+        if (!c)throw"productId is required argument!";
+        var b = g({url: "/products/" + c, method: "DELETE"});
+        d.handleCallback(b, a)
+      }, isProductNameUnique: function (c, a, b, e) {
+        if (!c)throw"name is required!";
+        if (!b)throw"vendorId is required!";
+        var k = d.customizeObj({});
+        g.get("/products/isProductNameUnique?name=" + c + "&id=" + a + "&vendorId=" + b).then(function (a) {
+          d.customizeObj(a.data, k);
+          e && e(a.data)
+        }, function (a) {
+          e && e(a.data)
+        });
+        return k
+      }, getActualCode: function (c, a) {
+        if (!c || !c.$id)throw"Second argument must be Angularjs scope!";
+        var b = d.customizeObj({});
+        g.get("/products/actualCode").then(function (e) {
+          d.customizeObj(e.data, b);
+          a && a(e.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        l.subscribe("/productCode", c, function (a) {
+          console.log(a);
+          "PRODUCT_CODE_CHANGED" === a.action && d.defineReadOnlyProperty(b,
+            "value", a.data)
+        });
+        return b
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("RealTimeService", ["$http", "$timeout", "$rootScope", function (g, m, l) {
+    function d() {
+      g.post("/realTime/createWatcher").success(function (a) {
+        b = a.id;
+        if (0 < e.length) {
+          for (a = 0; a < e.length; a++) {
+            var d = e[a];
+            q.subscribe(d.url, d.scope, d.callback)
+          }
+          e = []
+        }
+        c()
+      }).error(function (a, b, d, e) {
+        console.error("Cannot receive watcher Id !!!", a, b, d, e);
+        throw"Cannot initialize RealTimeService";
+      })
+    }
+
+    function f() {
+      b = t;
+      for (var a in h) {
+        var c = h[a];
+        c && !c.scope.$$destroyed && e.push(c)
+      }
+      h =
+      {};
+      d()
+    }
+
+    function c() {
+      0 < k ? m(c, 300) : g.post("/realTime/watch/" + b, Object.keys(h) || []).then(function (a) {
+        console.log(a.data);
+        if ("timeout" == a.data || "destroyed" == a.data.message || 205 == a.status)f(); else if ("unauthorized" === a.data.errorMessage || "unauthorized" === a.data.authMessage)v.location.pathname = "/login"; else {
+          for (var b in a.data) {
+            var d = h[b];
+            if (d && !d.scope.$$destroyed) {
+              var e = a.data[b];
+              if (e)for (var k = 0; k < e.length; k++)d.callback(e[k])
+            }
+          }
+          c()
+        }
+      }, function (a) {
+        a && 0 !== a.status ? 205 == a.status ? f() : (console.log("ERRRORRR!!!!!!!!!!!!",
+          a), m(c, 300)) : (console.log("ERRRORRR?????", a), m(f, 1E3))
+      })
+    }
+
+    function a(b) {
+      for (var d in h) {
+        var e = h[d];
+        e && !e.scope.$$destroyed && e.callback !== a && e.callback(b)
+      }
+      "COMPANY_ARCHIVED" !== b.action && "COMPANY_DEARCHIVED" !== b.action || l.$broadcast(b.action.toLowerCase(), b.data.id)
+    }
+
+    var b, e = [{url: "/global", scope: l, callback: a}], k = 0, h = {};
+    d();
+    var q = {
+      subscribe: function (a, d, c) {
+        b ? (k++, g.get("/realTime/subscribe/" + b + a).success(function (b) {
+          k--;
+          h[b.id] = {url: a, scope: d, callback: c};
+          d.$on("$destroy", function () {
+            delete h[b.id]
+          })
+        }).error(function (b,
+                           h, q, y) {
+          k--;
+          205 == h && (e.push({url: a, scope: d, callback: c}), f());
+          console.error("Cannot subscribe on " + a, b, h, q, y)
+        })) : e.push({url: a, scope: d, callback: c})
+      }
+    };
+    return q
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("ReceiptArchiveService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    return {
+      getReceiptArchiveData: function (f, c) {
+        if (!f || !f.$id)throw"First argument must be Angularjs scope!";
+        var a = d.customizeObj({list: [], companies: {}});
+        g.get("/receiptArchive").then(function (b) {
+          d.customizeArray(b.data, a.list);
+          a.list.forEach(function (b) {
+            var c = a.companies[b.companyId];
+            c ? c.push(b) : d.defineReadOnlyProperty(a.companies, b.companyId, d.customizeArray([b]))
+          });
+          l.subscribe("/receiptArchive", f, function (b) {
+            console.log(b);
+            if ("RECEIPT_ARCHIVE_ADDED" === b.action) {
+              for (var c = [], h = 0; h < b.data.length; h++) {
+                var f = b.data[h], p;
+                if (f.recurringInvoice) {
+                  var g = d.findById(a.list, f.recurringInvoice.id);
+                  g ? (d.defineReadOnlyProperty(g, "invoicesCount", g.invoicesCount + 1), d.defineReadOnlyProperty(g, "sum", g.sum + f.sum), f.date > g.date && (d.defineReadOnlyProperty(g, "date", f.date), d.defineReadOnlyProperty(g, "paidOn", f.paidOn))) : p = d.customizeObj({
+                    id: f.recurringInvoice.id,
+                    isRecurring: !0,
+                    frequency: f.recurringInvoice.frequency,
+                    number: f.recurringInvoice.number,
+                    companyId: f.company.id,
+                    date: f.date,
+                    paidOn: f.paidOn,
+                    sum: f.sum,
+                    invoicesCount: 1
+                  })
+                } else p = d.customizeObj({
+                  id: f.id,
+                  isRecurring: !1,
+                  frequency: null,
+                  number: f.number,
+                  companyId: f.company.id,
+                  date: f.date,
+                  paidOn: f.paidOn,
+                  sum: f.sum,
+                  invoicesCount: null
+                });
+                p && (a.list.push(p), (f = a.companies[p.companyId]) ? f.push(p) : d.defineReadOnlyProperty(a.companies, p.companyId, d.customizeArray([p])), 0 > c.indexOf(p.companyId) && c.push(p.companyId))
+              }
+              a.list.sort(d.getComparatorBy("number"));
+              c.forEach(function (b) {
+                a.companies[b].sort(d.getComparatorBy("number"))
+              })
+            } else if ("COMPANY_ARCHIVED" ===
+              b.action) {
+              for (h = 0; h < a.list.length; h++)a.list[h].companyId === b.data.id && (a.list.splice(h, 1), h--);
+              delete a.companies[b.data.id]
+            }
+          });
+          c && c(b.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return a
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("ReceivableService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (g, m, l, d, f) {
+    function c(a, b) {
+      if (!a)throw"invoiceIds is required!";
+      var d = g({url: "/receivable/resend", method: "POST", data: a});
+      f.handleCallback(d, b)
+    }
+
+    return {
+      getReceivedPaymentsSumByCompany: function (a, b, d) {
+        if (!a)throw"companyId is required!";
+        if (!b || !b.$id)throw"Second argument must be Angularjs scope!";
+        var c = f.customizeObj({});
+        g.get("/receivable/paymentSum/" +
+          a).then(function (h) {
+          f.customizeObj(h.data, c);
+          l.subscribe("/companyPaymentReceived?targetId=" + a, b, function (a) {
+            console.log(a);
+            "COMPANY_PAYMENT_RECEIVED" === a.action ? f.defineReadOnlyProperty(c, "value", c.value + a.data) : "RECEIVED_PAYMENTS_SUM" === a.action && f.defineReadOnlyProperty(c, "value", a.data)
+          });
+          d && d(h.data)
+        }, function (a) {
+          d && d(a.data)
+        });
+        return c
+      }, getReceivableGraphData: function (a, b) {
+        var e = f.customizeArray([]);
+        g.get("/receivable/chart/lastDays").then(function (c) {
+          f.customizeArray(c.data, e);
+          l.subscribe("/todayReceivableChartPoint?targetId=" +
+            d.getCurrentCompany().id, a, function (a) {
+            console.log(a);
+            if ("TODAY_RECEIVABLE_CHART_POINT" === a.action) {
+              var b = e[e.length - 1], d = new Date(b.date), c = new Date(a.data.date);
+              d.getFullYear() === c.getFullYear() && d.getMonth() === c.getMonth() && d.getDate() + 1 === c.getDate() ? (e.push(f.customizeObj(a.data)), e.splice(0, 1)) : f.customizeObj(a.data, b)
+            }
+          });
+          b && b(c.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return e
+      }, getReceivableInvoicesData: function (a, b) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        var d = f.customizeObj({
+          list: [],
+          companies: {}
+        });
+        g.get("/receivable").then(function (c) {
+          for (var h = f.customizeArray([]), g = 0; g < c.data.length; g++) {
+            var p = f.customizeObj(c.data[g]);
+            if (p.recurringInvoice) {
+              var x = f.findById(h, p.recurringInvoice.id);
+              x || (x = p.recurringInvoice, f.defineReadOnlyProperty(x, "isRecurring", !0), f.defineReadOnlyProperty(x, "company", p.company), f.defineReadOnlyProperty(x, "invoices", f.customizeArray([])), h.push(x));
+              f.defineReadOnlyProperty(p, "recurringInvoice", {id: x.id, frequency: x.frequency});
+              x.invoices.push(p)
+            } else h.push(p)
+          }
+          h.sort(f.getComparatorBy("number"));
+          for (g = 0; g < h.length; g++)p = h[g], d.companies[p.company.id] || f.defineReadOnlyProperty(d.companies, p.company.id, f.customizeArray([])), d.companies[p.company.id].push(p);
+          f.defineReadOnlyProperty(d, "list", h);
+          l.subscribe("/receivableInvoice", a, function (a) {
+            console.log(a);
+            if ("INVOICE_SAVED" == a.action) {
+              var b = a.data, c;
+              b.recurringInvoice ? (a = f.findById(d.list, b.recurringInvoice.id), a || (a = b.recurringInvoice, a.isRecurring = !0, a.company = b.company, a.invoices = [], c = a), b.recurringInvoice = {
+                id: a.id,
+                frequency: a.frequency
+              },
+                a.invoices.push(b)) : c = b;
+              c && (c = f.customizeObj(c), d.companies[c.company.id] || f.defineReadOnlyProperty(d.companies, c.company.id, []), d.companies[c.company.id].push(c), d.list.push(c))
+            } else if ("INVOICE_STATUS" === a.action)a.data.recurringInvoice ? ((b = f.findById(d.list, a.data.recurringInvoice.id)) || console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING RECURRING INVOICE-----!!!!!!!"), b = f.findById(b.invoices, a.data.id)) : b = f.findById(d.list, a.data.id), b ? f.defineReadOnlyProperty(b, "status", a.data.status) :
+              console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!"); else if ("PAYMENT_RECEIVED" === a.action)for (a = a.data, b = 0; b < a.length; b++) {
+              var h = a[b], y = t;
+              c = t;
+              for (var k = 0; k < d.list.length && !c; k++) {
+                var g = d.list[k];
+                if (g.isRecurring)for (var p = 0; p < g.invoices.length && !c; p++) {
+                  var q = g.invoices[p];
+                  h === q.id && (g.invoices.splice(p, 1), c = q.company.id, y = g.id, 0 === g.invoices.length && d.list.splice(k, 1))
+                } else h === g.id && (d.list.splice(k, 1), c = g.company.id)
+              }
+              c && d.companies[c] && (k = d.companies[c], y ? (y = f.indexOfId(k,
+                y), -1 < y && (-1 < f.indexOfId(k[y].invoices, h) && k[y].invoices.splice(y, 1), 0 === k[y].invoices.length && k.splice(y, 1))) : (h = f.indexOfId(k, h), -1 < h && k.splice(h, 1)), 0 === k.length && delete d.companies[c])
+            } else if ("COMPANY_ARCHIVED" == a.action)for (delete d.companies[a.data.id], b = 0; b < d.list.length; b++)d.list[b].company.id === a.data.id && (d.list.splice(b, 1), b--)
+          });
+          b && b(c.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return d
+      }, receivePayment: function (a, b, d) {
+        if (!a)throw"paymentMethod is required!";
+        if (!b || 0 === b.length)throw"invoiceIds is required!";
+        a = g({
+          url: "/receivable/receivePayment",
+          method: "POST",
+          params: {paymentMethod: a.toUpperCase()},
+          data: b
+        });
+        f.handleCallback(a, d)
+      }, resendInvoice: function (a, b) {
+        if (!a)throw"invoiceId is required!";
+        c([a], b)
+      }, resendInvoices: c, search: function (a) {
+        if (!a)throw"Keyword is required!";
+        return g.get("/receivable/search?keyword=" + a).then(function (a) {
+          return a.data
+        })
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("RecurringService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (g, m, l, d, f) {
+    function c(a, d, c, h) {
+      if (!d)throw"recurringInvoiceId is required!";
+      if (!c)throw"expense is required!";
+      a = {url: "/recurringInvoice/" + d + "/" + a, data: c};
+      c.id ? (a.method = "PUT", a.url = a.url + "/" + c.id) : a.method = "POST";
+      c = g(a);
+      f.handleCallback(c, h)
+    }
+
+    function a(a, d, c) {
+      if (!a)throw"recurringInvoiceId is required!";
+      if (!d)throw"expenseId is required!";
+      a = g({url: "/recurringInvoice/" + a + "/expense/" + d, method: "DELETE"});
+      f.handleCallback(a, c)
+    }
+
+    return {
+      getRecurringGraphData: function (a, d) {
+        var c = ["WEEKLY", "MONTHLY", "YEARLY"], h = f.customizeArray([]);
+        g.get("/recurringInvoice/billed/lastDays").then(function (g) {
+          f.customizeArray(g.data, h);
+          l.subscribe("/recurringChart", a, function (a) {
+            console.log(a);
+            if ("RECURRING_CHART" === a.action) {
+              for (var b = new Date(a.data.date), d = 0; d < h.length; d++) {
+                var e = h[d], g = new Date(e[e.length - 1].date);
+                g.getFullYear() === b.getFullYear() && g.getMonth() ===
+                b.getMonth() && g.getDate() + 1 === b.getDate() && (e.push(f.customizeObj({
+                  date: f.formatDate(b),
+                  sum: 0
+                })), e.splice(0, 1))
+              }
+              b = c.indexOf(a.data.type);
+              b = h[b];
+              f.defineReadOnlyProperty(b[b.length - 1], "sum", a.data.sum)
+            }
+          });
+          d && d(g.data)
+        }, function (a) {
+          d && d(a.data)
+        });
+        return h
+      }, getRecurringCompanies: function (a, d) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        var c = [];
+        g({url: "/recurringInvoice/total", method: "GET"}).then(function (h) {
+          f.customizeArray(h.data, c);
+          l.subscribe("/recurringTotal", a, function (a) {
+            console.log(a);
+            if ("CLIENT_RECURRING_TOTAL" === a.action) {
+              var b = f.indexOfId(c, a.data.id);
+              if (0 === a.data.total)-1 < b && c.splice(b, 1); else if (-1 < b)f.customizeObj(a.data, c[b]); else {
+                for (var b = !0, d = 0; d < c.length; d++)c[d].company.id === a.data.company.id && (c[d].id = a.data.id, c[d].total = a.data.total, c[d].invoicesCount = a.data.invoicesCount, b = !1);
+                b && c.push(f.customizeObj(a.data))
+              }
+            } else if ("COMPANY_ARCHIVED" == a.action)for (b = 0; b < c.length; b++)c[b].company.id === a.data.id && (c.splice(b, 1), b--)
+          });
+          d && d(h.data)
+        }, function (a) {
+          d && d(a.data)
+        });
+        return c
+      }, getCompanyRecurringInvoices: function (a, d, c) {
+        if (!a)throw"companyId is required!";
+        if (!d || !d.$id)throw"Second argument must be Angularjs scope!";
+        var h = [];
+        g.get("/recurringInvoice?companyId=" + a).then(function (g) {
+          f.customizeArray(g.data, h);
+          l.subscribe("/recurring?targetId=" + a, d, function (a) {
+            console.log(a);
+            if ("RECURRING_SAVED" == a.action) {
+              var b = f.findById(h, a.data.id);
+              b ? f.customizeObj(a.data, b) : h.push(f.customizeObj(a.data))
+            } else"RECURRING_DELETE" == a.action && (a = f.indexOfId(h, a.data.id), -1 < a && h.splice(a,
+              1))
+          });
+          c && c(g.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return h
+      }, createRecurringInvoice: function (a, d, c) {
+        if (!a)throw"recurringInvoice is required!";
+        if (!d)throw"companyId is required!";
+        a.company = {id: d};
+        a = g({url: "/recurringInvoice", method: "POST", data: a});
+        f.handleCallback(a, c)
+      }, deleteRecurringInvoice: function (a, d) {
+        if (!a)throw"recurringInvoiceId is required!";
+        var c = g({url: "/recurringInvoice/" + a, method: "DELETE"});
+        f.handleCallback(c, d)
+      }, deleteAllRecurringInvoicesByCompany: function (a, d, c) {
+        if (!a)throw"companyId is required!";
+        var h = g({url: "/recurringInvoice/company/" + a, method: "DELETE"});
+        f.handleCallback(h, function (h) {
+          if (d)for (var f = 0; f < d.length; f++)d[f].company.id === a && (d.splice(f, 1), f--);
+          c && c(h.data)
+        })
+      }, saveRecInvProductExpense: function (a, d, f) {
+        c("productExpense", a, d, f)
+      }, saveRecInvServiceExpense: function (a, d, f) {
+        c("serviceExpense", a, d, f)
+      }, deleteProductExpenseFromRecInv: function (b, d, c) {
+        a(b, d, c)
+      }, deleteServiceExpenseFromRecInv: function (b, d, c) {
+        a(b, d, c)
+      }, search: function (a) {
+        if (!a)throw"Keyword is required!";
+        return g.get("/recurringInvoice/search?keyword=" +
+          a).then(function (a) {
+          return a.data
+        })
+      }, addCompany: function (a, c) {
+        if (!a)throw"recurring is required!";
+        if (!c)throw"companyId is required!";
+        for (var f = 0; f < a.length; f++)if (a[f].company.id === c)return;
+        a.push({company: d.getOneById(c), total: 0, ticketsCount: 0})
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("RightPanelService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", "UsersService", "DevicesService", function (g, m, l, d, f, c, a) {
+    function b() {
+      k.groupedData.splice(0, k.groupedData.length);
+      for (var b = f.getClientCompanies(), d = 0; d < b.length; d++) {
+        var e = b[d];
+        k.groupedData.push({company: e, users: c.getAllByCompanyId(e.id), devices: a.getAllByCompanyId(e.id)})
+      }
+    }
+
+    function e(a, b) {
+      if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+      var c =
+        k.lists[a.$id];
+      if (!c)throw"There is no activities list for scope " + a.$id;
+      c.loadingInProcess ? console.log("Loading tickets already in process") : (0 < c.list.length && (c.params.createdAt = c.list[c.list.length - 1].createdAt), c.loadingInProcess = !0, g({
+        method: "GET",
+        url: "/activity/",
+        params: c.params
+      }).then(function (a) {
+        a && (d.customizeArray(a.data, c.list), c.loadingInProcess = !1, b && b(a.data));
+        c.loadingInProcess = !1
+      }, function (a) {
+        c.loadingInProcess = !1;
+        b && b(a.data)
+      }))
+    }
+
+    m.$new();
+    var k = {lists: {}, recentActivities: {}, groupedData: []};
+    d.customizeObj(k);
+    f._addAmountChangeListener(b);
+    return {
+      getActivities: function (a, b, c) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        var f = d.customizeObj([]), g = !k.lists[a.$id];
+        k.lists[a.$id] = {params: b, scope: a, list: f};
+        e(a, function (b) {
+          g && l.subscribe("/activity", a, function (b) {
+            console.log(b);
+            "ACTIVITY_CREATED" == b.action && k.lists[a.$id].list.unshift(d.customizeObj(b.data))
+          });
+          c && c(b)
+        });
+        a.$on("$destroy", function () {
+          delete k.lists[a.$id]
+        });
+        return f
+      }, getRecentActivities: function (a, b, c) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        b.keyword = "";
+        var e = d.customizeObj([]);
+        k.recentActivities[a.$id] = {params: b, scope: a, list: e};
+        g({method: "GET", url: "/activity/", params: b}).then(function (a) {
+          a && (d.customizeArray(a.data, e), c && c(a.data))
+        }, function (a) {
+          c && c(a.data)
+        });
+        l.subscribe("/activity", a, function (a) {
+          console.log(a);
+          "ACTIVITY_CREATED" == a.action && (e.unshift(d.customizeObj(a.data)), e.pop())
+        });
+        a.$on("$destroy", function () {
+          delete k.lists[a.$id]
+        });
+        return e
+      }, loadMoreActivities: e, getClientCompaniesGroupedData: function () {
+        0 ==
+        k.groupedData.length && b();
+        return k.groupedData
+      }, getOneCompanyGroupedData: function (b) {
+        return {company: f.getOneById(b), users: c.getAllByCompanyId(b), devices: a.getAllByCompanyId(b)}
+      }, getCurrentUserInfo: function (a, b) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        var c = d.customizeObj({});
+        g.get("/userInfo").then(function (a) {
+          d.customizeObj(a.data, c);
+          b && b(a.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        l.subscribe("/rightBarUserInfo", a, function (a) {
+          console.log(a);
+          "RB_USER_INFO" == a.action && d.customizeObj(a.data,
+            c)
+        });
+        return c
+      }, getClientCompanyInfo: function (a, b, c) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        if (!b)throw"companyId is required!";
+        var e = d.customizeObj({});
+        g.get("/companyInfo/" + b).then(function (a) {
+          d.customizeObj(a.data, e);
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        l.subscribe("/rightBarCompanyInfo?targetId=" + b, a, function (a) {
+          console.log(a);
+          "RB_COMPANY_INFO" == a.action && d.customizeObj(a.data, e)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("ServicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (g, m, l, d, f) {
+    function c(a, b) {
+      var c = b.company.id;
+      c === f.getCurrentCompany().id && (c = "default");
+      a[c] || d.defineReadOnlyProperty(a, c, []);
+      var g = d.findById(a[c], b.id);
+      g ? d.customizeObj(b, g) : a[c].push(d.customizeObj(b))
+    }
+
+    return {
+      search: function (a) {
+        if (!a)throw"Keyword is required!";
+        return g.get("/services/search?keyword=" + a).then(function (a) {
+          return a.data
+        })
+      }, getAllByCompany: function (a,
+                                    b, c) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        if (!b || "[object Function]" === Object.prototype.toString.call(b))throw"companyId is required argument!";
+        return d.getListByUrl("/services/" + b, c, function (a) {
+        })
+      }, getServicesData: function (a, b) {
+        function e(a) {
+          var b;
+          a:{
+            b = f;
+            var e = a.versionedId.id, g;
+            for (g in b)if ("staticCopy" != g) {
+              var l = d.findById(b[g], e);
+              if (l) {
+                b = l;
+                break a
+              }
+            }
+            b = void 0
+          }
+          b ? d.customizeObj(a, b) : c(f, a)
+        }
+
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        var f = d.customizeObj({});
+        g.get("/services").then(function (a) {
+          for (var d = 0; d < a.data.length; d++)c(f, a.data[d]);
+          b && b(a.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        l.subscribe("/service", a, function (a) {
+          console.log(a);
+          if ("SERVICE_SAVED" == a.action)e(a.data); else if ("SERVICE_LIST_SAVED" == a.action)for (var b = 0; b < a.data.length; b++)e(a.data[b]); else if ("SERVICES_MOVED" == a.action)for (b = 0; b < a.data.length; b++)c(f, a.data[b]); else if ("COMPANY_SERVICES_DELETED" == a.action)delete f[a.data.id]; else if ("SERVICES_DELETED" == a.action)for (b = 0; b < a.data.length; b++) {
+            var g =
+              a.data[b].versionedId.id, l = f, n = void 0;
+            for (n in l) {
+              var w = d.indexOfId(l[n], g);
+              -1 < w && l[n].splice(w, 1)
+            }
+          } else"COMPANY_ARCHIVED" == a.action && delete f[a.data.id]
+        });
+        return f
+      }, save: function (a, b) {
+        if (!a)throw"service is required!";
+        var c = "/services", f = "POST";
+        a.id && (f = "PUT", c = c + "/" + a.id);
+        c = g({url: c, method: f, data: a});
+        d.handleCallback(c, b)
+      }, addCompanyToServiceData: function (a, b) {
+        if (!a)throw"data argument is required";
+        if (!b)throw"companyId argument is required";
+        a[b] || d.defineReadOnlyProperty(a, b, [])
+      }, deleteCompanyFromServiceData: function (a,
+                                                 b) {
+        if (0 < a[b].length)throw"This action cannot be performed on company that has not empty services list! Use deleteCompany() method.";
+        delete a[b]
+      }, deleteService: function (a, b) {
+        if (!a)throw"serviceId is required argument!";
+        var c = g({url: "/services/" + a, method: "DELETE"});
+        d.handleCallback(c, b)
+      }, deleteCompany: function (a, b) {
+        if (!a)throw"companyId is required argument!";
+        var c = g({url: "/services/company/" + a, method: "DELETE"});
+        d.handleCallback(c, b)
+      }, move: function (a, b) {
+        if (!a)throw"mapping is required argument!";
+        var c =
+          g({url: "/services/move", method: "POST", data: a});
+        d.handleCallback(c, b)
+      }, getActualMapping: function (a) {
+        var b = {}, d;
+        for (d in a)if ("default" != d && "staticCopy" != d) {
+          for (var c = [], f = a[d], g = 0; g < f.length; g++)c.push(f[g].originService.versionedId.id);
+          b[d] = c
+        }
+        return b
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("StatisticsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (g, m, l, d, f) {
+    return {
+      getResolvedTicketsCountByCompany: function (c, a, b) {
+        if (!c)throw"companyId is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = d.customizeObj({});
+        g.get("/statistic/tickets/resolvedCount/" + c).then(function (f) {
+          d.customizeObj(f.data, e);
+          l.subscribe("/resolvedTicketsCount?targetId=" + c, a, function (a) {
+            console.log(a);
+            "RESOLVED_TICKETS_COUNT" === a.action && d.defineReadOnlyProperty(e, "value", a.data)
+          });
+          b && b(f.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return e
+      }, getTicketsResolutionTimeChartDataByCompany: function (c, a, b) {
+        if (!c)throw"companyId is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = d.customizeObj({});
+        g.get("/statistic/tickets/resolutionTime/" + c).then(function (f) {
+          d.customizeObj(f.data, e);
+          l.subscribe("/ticketsResolutionTimeChart?targetId=" + c, a, function (a) {
+            console.log(a);
+            "TICKETS_RESOLUTION_TIME_CHART" ===
+            a.action && d.customizeObj(a.data, e)
+          });
+          b && b(f.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return e
+      }, getTimeBilledByCompany: function (c, a, b) {
+        if (!c)throw"companyId is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = d.customizeObj({});
+        g.get("/statistic/billed/time/" + c).then(function (f) {
+          d.customizeObj(f.data, e);
+          l.subscribe("/billedTimeStatistic?targetId=" + c, a, function (a) {
+            console.log(a);
+            "BILLED_TIME_STATISTIC" === a.action && d.defineReadOnlyProperty(e, "value", a.data)
+          });
+          b && b(f.data)
+        }, function (a) {
+          b &&
+          b(a.data)
+        });
+        return e
+      }, getReceivableAmountByCompany: function (c, a, b) {
+        if (!c)throw"companyId is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = d.customizeObj({});
+        g.get("/statistic/companies/receivable/" + c).then(function (f) {
+          d.customizeObj(f.data, e);
+          l.subscribe("/todayReceivableChartPoint?targetId=" + c, a, function (a) {
+            console.log(a);
+            "TODAY_RECEIVABLE_CHART_POINT" === a.action && d.defineReadOnlyProperty(e, "value", a.data.receivableLeft)
+          });
+          b && b(f.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return e
+      }, getContributedToEarningTopCompanies: function (c, a, b) {
+        if (!c)throw"topAmount is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = d.customizeObj({});
+        g.get("/statistic/companies/paymentSum/top/" + c).then(function (c) {
+          function f(b) {
+            l.subscribe("/companyPaymentReceived?targetId=" + b, a, function (a) {
+              console.log(a);
+              "COMPANY_PAYMENT_RECEIVED" === a.action && d.defineReadOnlyProperty(e, b, (e[b] ? e[b] : 0) + a.data)
+            })
+          }
+
+          for (var g in c.data)f(g);
+          d.customizeObj(c.data, e);
+          b && b(c.data)
+        }, function (a) {
+          b &&
+          b(a.data)
+        });
+        return e
+      }, getTopCompaniesByResolvedTickets: function (c, a, b) {
+        if (!c)throw"topAmount is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var e = d.customizeObj({});
+        g.get("/statistic/companies/resolvedTicket/top/" + c).then(function (c) {
+          function f(b) {
+            l.subscribe("/resolvedTicketsCount?targetId=" + b, a, function (a) {
+              console.log(a);
+              "RESOLVED_TICKETS_COUNT" === a.action && d.defineReadOnlyProperty(e, b, a.data)
+            })
+          }
+
+          for (var g in c.data)f(g);
+          d.customizeObj(c.data, e);
+          b && b(c.data)
+        }, function (a) {
+          b &&
+          b(a.data)
+        });
+        return e
+      }, getTotalEarningsByDays: function (c, a, b, e, f) {
+        if (!c)throw"companyId is required!";
+        if (!a)throw"from date is required!";
+        if (!b)throw"to date is required!";
+        if (a.getTime() > b.getTime())throw"from date should be less that to date!";
+        if (!e || !e.$id)throw"Angularjs scope is required!";
+        var h = d.customizeObj({});
+        g.get("/statistic/companies/paymentSum/receivedInterval/" + c + "?from=" + d.formatDate(a) + "&to=" + d.formatDate(b)).then(function (a) {
+          var b, g;
+          for (g in a.data)b ? (new Date(g)).getTime() > (new Date(b)).getTime() &&
+          (b = g) : b = g;
+          var n = new Date(b);
+          d.customizeObj(a.data, h);
+          l.subscribe("/companyPaymentReceived?targetId=" + c, e, function (a) {
+            console.log(a);
+            if ("COMPANY_PAYMENT_RECEIVED" === a.action) {
+              var c = new Date;
+              n.getFullYear() === c.getFullYear() && n.getMonth() === c.getMonth() && n.getDate() === c.getDate() && d.defineReadOnlyProperty(h, b, h[b] + a.data)
+            }
+          });
+          f && f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return h
+      }, getTotalReceivableByDays: function (c, a, b, e, f) {
+        if (!c)throw"companyId is required!";
+        if (!a)throw"from date is required!";
+        if (!b)throw"to date is required!";
+        if (a.getTime() > b.getTime())throw"from date should be less that to date!";
+        if (!e || !e.$id)throw"Angularjs scope is required!";
+        var h = d.customizeObj({});
+        g.get("/statistic/companies/receivable/totalInterval/" + c + "?from=" + d.formatDate(a) + "&to=" + d.formatDate(b)).then(function (a) {
+          function b(a) {
+            var d = new Date;
+            if (a.getFullYear() === d.getFullYear() && a.getMonth() === d.getMonth() && a.getDate() === d.getDate())return !0
+          }
+
+          var g, n;
+          for (n in a.data)g ? (new Date(n)).getTime() > (new Date(g)).getTime() && (g = n) : g = n;
+          d.customizeObj(a.data,
+            h);
+          b(new Date(g)) && l.subscribe("/todayReceivableChartPoint?targetId=" + c, e, function (a) {
+            console.log(a);
+            "TODAY_RECEIVABLE_CHART_POINT" === a.action && b(new Date(a.data.date)) && d.defineReadOnlyProperty(h, g, a.data.total)
+          });
+          f && f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return h
+      }, getTicketsClosedByDays: function (c, a, b, e, f) {
+        if (!c)throw"companyId is required!";
+        if (!a)throw"from date is required!";
+        if (!b)throw"to date is required!";
+        if (a.getTime() > b.getTime())throw"from date should be less that to date!";
+        if (!e || !e.$id)throw"Angularjs scope is required!";
+        var h = d.customizeObj({});
+        g.get("/statistic/companies/resolvedTicket/interval/" + c + "?from=" + d.formatDate(a) + "&to=" + d.formatDate(b)).then(function (a) {
+          function b(a) {
+            var d, c;
+            for (c in a)if ("staticCopy" != c) {
+              d = c;
+              break
+            }
+            if (d) {
+              a = new Date(a[d]);
+              for (var e in h)if ("staticCopy" !== e && (d = new Date(e), d.getFullYear() === a.getFullYear() && d.getMonth() === a.getMonth() && d.getDate() === a.getDate()))return e
+            }
+          }
+
+          d.customizeObj(a.data, h);
+          l.subscribe("/ticketResolution?targetId=" + c, e, function (a) {
+            console.log(a);
+            "TICKET_RESOLVED" ===
+            a.action ? (a = b(a.data)) && d.defineReadOnlyProperty(h, a, h[a] + 1) : "TICKET_REOPENED" === a.action && (a = b(a.data)) && d.defineReadOnlyProperty(h, a, h[a] - 1)
+          });
+          f && f(a.data)
+        }, function (a) {
+          f && f(a.data)
+        });
+        return h
+      }, getUserSubmittedTicketsByCompany: function (c, a, b) {
+        if (!c)throw"companyId is required!";
+        if (!a || !a.$id)throw"Angularjs scope is required!";
+        var e = d.customizeObj({});
+        g.get("/statistic/tickets/submittedTickets/" + c).then(function (f) {
+          d.customizeObj(f.data, e);
+          l.subscribe("/userSubmittedTicket?targetId=" + c, a, function (a) {
+            console.log(a);
+            "USER_SUBMITTED_TICKET" === a.action && d.defineReadOnlyProperty(e, a.data, (e[a.data] || 0) + 1)
+          });
+          b && b(f.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("SubscriptionsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (g, m, l, d, f) {
+    function c(a, b, c, f, h) {
+      var q = d.customizeObj({});
+      g(a).then(function (a) {
+        for (var g = 0; g < a.data.length; g++) {
+          var m = a.data[g];
+          d.defineReadOnlyProperty(q, m.user.id, d.customizeObj(m))
+        }
+        l.subscribe("/subscription?targetId=" + b, c, function (a) {
+          console.log(a);
+          "SUBSCRIPTION_SAVED" == a.action ? a.data.user && (!h || -1 < h.indexOf(a.data.user.id)) && d.defineReadOnlyProperty(q,
+            a.data.user.id, d.customizeObj(a.data)) : "SUBSCRIPTION_DELETED" == a.action && delete q[a.data.user.id]
+        });
+        f && f(a.data)
+      }, function (a) {
+        f && f(a.data)
+      });
+      return q
+    }
+
+    return {
+      saveUserSubscription: function (a, b) {
+        if (!a)throw"userSubscription is required argument!";
+        var c = "/subscription", f = "POST";
+        a.id && (c += "/" + a.id, f = "PUT");
+        c = g({url: c, method: f, data: a});
+        d.handleCallback(c, b)
+      }, deleteUserSubscription: function (a, b) {
+        if (!a)throw"userSubscriptionId is required argument!";
+        var c = g({url: "/subscription/" + a, method: "DELETE"});
+        d.handleCallback(c,
+          b)
+      }, getUserSubscriptionsByCompanyId: function (a, b, d) {
+        if (!a)throw"companyId is required argument!";
+        if (!b || !b.$id)throw"Second argument must be Angularjs scope!";
+        return c({url: "/subscription/company/users/" + a, method: "GET"}, a, b, d)
+      }, getAllClientUserSubscriptions: function (a, b) {
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        return c({url: "/subscription/clientUsers", method: "GET"}, f.getCurrentCompany().id, a, b)
+      }, getUserSubscriptionsByUserIds: function (a, b, d) {
+        if (!a || 0 == a.length)throw"userIds is required argument!";
+        if (!b || !b.$id)throw"Second argument must be Angularjs scope!";
+        Array.isArray(a) || (a = [a]);
+        return c({url: "/subscription/users/", method: "POST", data: a}, f.getCurrentCompany().id, b, d, a)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("TaxRatesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    return {
+      getAllByCompany: function (f, c, a) {
+        if (!c || !c.$id)throw"First argument must be Angularjs scope!";
+        if (!f || "[object Function]" === Object.prototype.toString.call(f))throw"companyId is required argument!";
+        return d.getListByUrl("/taxRate/" + f, a, function (a) {
+          l.subscribe("/taxRate?targetId=" + f, c, function (e) {
+            console.log(e);
+            if ("TAX_RATE_SAVE" == e.action) {
+              var f =
+                d.findById(a, e.data.versionedId.id);
+              f ? d.customizeObj(e.data, f) : a.push(d.customizeObj(e.data))
+            } else"TAX_RATE_DELETE" == e.action && (d.deleteById(a, e.data.versionedId.id), c.$broadcast("tax_rate_delete", e.data))
+          })
+        })
+      }, save: function (f, c) {
+        if (!f)throw"taxRate is required!";
+        var a = "/taxRate", b = "POST";
+        f.id && (b = "PUT", a = a + "/" + f.id);
+        a = g({url: a, method: b, data: f});
+        d.handleCallback(a, c)
+      }, deleteTaxRate: function (f, c) {
+        if (!f)throw"taxRateId is required argument!";
+        var a = g({url: "/taxRate/" + f, method: "DELETE"});
+        d.handleCallback(a,
+          c)
+      }, isUniqueInCompany: function (f, c, a, b) {
+        if (!f)throw"taxRateCode is required!";
+        if (!a)throw"companyId is required!";
+        var e = d.customizeObj({});
+        g.get("/taxRate/isUniqueInCompany?taxRateCode=" + f + "&id=" + c + "&companyId=" + a).then(function (a) {
+          d.customizeObj(a.data, e);
+          b && b(a.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("TicketsService", ["$http", "$rootScope", "RealTimeService", "Utils", "TicketTagsService", "CompaniesService", function (g, m, l, d, f, c) {
+    function a(a) {
+      a = angular.extend({}, a);
+      a.filter && (a.filter = a.filter.toUpperCase());
+      a.priority && (a.priority = a.priority.toUpperCase());
+      a.status && (a.status = a.status.toUpperCase());
+      return a
+    }
+
+    function b(a, b) {
+      return a.createdAt - b.createdAt
+    }
+
+    function e(a, b) {
+      if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+      var c = u.lists[a.$id];
+      if (!c)throw"There is no ticket list for scope " + a.$id;
+      c.loadingInProcess ? console.log("Loading tickets already in process") : (0 < c.list.length ? c.params.lastId = c.list[c.list.length - 1].id : delete c.params.lastId, c.loadingInProcess = !0, g({
+        method: "GET",
+        url: "/v2/tickets",
+        params: c.params
+      }).then(function (e) {
+        if (e) {
+          for (var g = 0; g < e.data.length; g++) {
+            var h = e.data[g];
+            h.number = "Tkt# " + h.number;
+            h.tags && f._makeDynamic(h.tags, a);
+            var k = d.findById(c.list, h.id);
+            k ? d.customizeObj(h, k) : c.list.push(d.customizeObj(h))
+          }
+          c.loadingInProcess = !1;
+          b && b(e.data)
+        }
+        c.loadingInProcess = !1
+      }, function (a) {
+        c.loadingInProcess = !1;
+        b && b(a.data)
+      }))
+    }
+
+    function k(a, b, c, e) {
+      c = {value: c};
+      "[object Array]" === Object.prototype.toString.call(b) ? (a = "/v2/tickets/" + a, c.ids = b) : a = "/v2/tickets/" + b + "/" + a;
+      b = g.put(a, c);
+      d.handleCallback(b, e)
+    }
+
+    function h(a, b) {
+      for (var d in u.lists)for (var c = u.lists[d].list, e = 0; e < c.length; e++) {
+        var f = c[e];
+        if (f.id === a) {
+          b(f);
+          break
+        }
+      }
+      for (d in u.tickets)c = u.tickets[d].ticket, c.id === a && b(c)
+    }
+
+    function q(a, b, d) {
+      if ("USER" === d.filter) {
+        if ("COMPLETED" === a.status &&
+          "COMPLETED" !== b.status)return 1;
+        if ("COMPLETED" === b.status && "COMPLETED" !== a.status)return -1
+      }
+      return z[d.filter](b) - z[d.filter](a)
+    }
+
+    function p(a) {
+      return a.assignedAt || a.createdAt
+    }
+
+    function x(a, b) {
+      return "URGENT" == b.filter && ("HIGH" != a.priorityLevel || "COMPLETED" == a.status || "ADMIN" !== m.currentUser.role && !a.sharedToCurrentUserAt) || "UNASSIGNED" == b.filter && a.assignedUser && a.assignedUser.id || "USER" == b.filter && (!a.assignedUser || a.assignedUser.id != m.currentUser.id) || "OPEN" == b.filter && "COMPLETED" == a.status || "CLOSED" ==
+      b.filter&&("COMPLETED"!=a.status||"ADMIN"!==m.currentUser.role&&"SUPER_TECH_ADMIN"!==m.currentUser.role&&(!a.assignedUser||a.assignedUser.id!=m.currentUser.id))||"SHARED"==b.filter&&!a.sharedToCurrentUserAt||!("USER_SPAM"!=b.filter||a.spamReporter&&a.spamReporter.id&&m.currentUser.id==a.spamReporter.id)||"ADMIN_REPORTED_AS_SPAM"==b.filter&&(!a.spamReporter||!a.spamReporter.id||a.spamMarker&&a.spamMarker.id)||!("ADMIN_MARKED_AS_SPAM"!=b.filter||a.spamMarker&&a.spamMarker.id)||"TRASH"==b.filter&&!a.trash||
+      "USER_SPAM" !== b.filter && "ADMIN_REPORTED_AS_SPAM" !== b.filter && "ADMIN_MARKED_AS_SPAM" !== b.filter && "TRASH" !== b.filter && (a.spamMarker && a.spamMarker.id || a.spamReporter && a.spamReporter.id || a.trash) || b.companyId && b.companyId != a.company.id || b.status && b.status != a.status || b.priority && b.priority != a.priorityLevel ? !1 : !0
+    }
+
+    var n = "ASSIGNED_USER PRIORITY_CHANGED STATUS TRASH REPORT_AS_SPAM RESTORE_FROM_SPAM TICKET_INVOICED TICKET_SHARE".split(" "), w = 0, u = {
+      lists: {},
+      tickets: {},
+      counts: {}
+    };
+    c = m.$new();
+    l.subscribe("/tickets",
+      c, function (a) {
+        console.log(a);
+        a.data && a.data.number && (a.data.number = "Tkt# " + a.data.number);
+        if ("CREATED_TICKET" === a.action) {
+          var b = d.customizeObj(a.data, {}), c;
+          for (c in u.lists) {
+            var g = u.lists[c];
+            x(a.data, g.params) && g.list.unshift(b)
+          }
+        } else if ("MARKED_AS_SPAM" === a.action)for (c in u.lists) {
+          var g = u.lists[c], k = d.indexOfId(g.list, a.data.id), b = -1 < k, w = x(a.data, g.params);
+          b && w ? d.customizeObj(a.data, g.list[k]) : b && !w ? g.list.splice(k, 1) : !b && w && g.list.unshift(d.customizeObj(a.data))
+        } else if (-1 < n.indexOf(a.action)) {
+          b =
+            d.customizeObj(a.data, {});
+          for (c in u.lists) {
+            g = u.lists[c];
+            w = !1;
+            k = d.indexOfId(g.list, b.id);
+            if (-1 < k)x(a.data, g.params) ? (d.customizeObj(b, g.list[k]), w = !0) : (g.list.splice(k, 1), m.$broadcast("ticket_is_not_available_anymore", {
+              ticketId: a.data.id,
+              ticketType: g.params.filter
+            })); else if (x(a.data, g.params))if (0 === g.list.length)g.list.push(b); else if (k = g.list[g.list.length - 1], 15 > g.list.length || 0 >= q(b, k, g.params))g.list.push(b), w = !0;
+            w && g.list.sort(function (a, b) {
+              return q(a, b, g.params)
+            })
+          }
+          for (c in u.tickets)k = u.tickets[c].ticket,
+          k.id === b.id && d.customizeObj(b, k)
+        } else if ("READ" === a.action)h(a.data.id, function (a) {
+          d.defineReadOnlyProperty(a, "unread", !1)
+        }); else if ("TICKET_UPDATES_READ" === a.action)h(a.data.id, function (a) {
+          d.defineReadOnlyProperty(a, "hasNewUpdates", !1)
+        }); else if ("TICKET_COLLAPSED" === a.action || "TICKET_DELETED" === a.action) {
+          for (c in u.lists)d.deleteById(u.lists[c].list, a.data.id);
+          for (c in u.tickets)b = u.tickets[c], b.ticket.id === a.data.id && (delete u.tickets[c], b.scope.$broadcast("ticket_is_not_available_anymore", {ticketId: a.data.id}))
+        } else if ("TAG_LINKED" ===
+          a.action)for (b in a.data)h(b, function (b) {
+          f._merge(b.tags, a.data[b.id])
+        }); else if ("COMPANY_ARCHIVED" === a.action) {
+          for (c in u.lists) {
+            k = u.lists[c].list;
+            for (w = 0; w < k.length; w++)b = k[w], b.company.id === a.data.id && (k.splice(w, 1), w--);
+            k.length < v.layLoadingPageSize && e(u.lists[c].scope)
+          }
+          for (c in u.tickets)b = u.tickets[c], k = b.ticket, k.company.id === a.data.id && (delete u.tickets[c], b.scope.$broadcast("ticket_is_not_available_anymore", {ticketId: a.data.id}))
+        } else"TICKET_BILLABLE" === a.action && h(a.data.id, function (b) {
+          d.defineReadOnlyProperty(b,
+            "isBillable",a.data.isBillable)})});var z={URGENT:p,UNASSIGNED:function(a){return a.createdAt},USER:function(a){return a.closedAt||a.assignedAt},OPEN:function(a){return a.assignedAt},CLOSED:function(a){return a.closedAt},SHARED:function(a){return a.sharedToCurrentUserAt},ALL:p,NOT_SPAM_OR_TRASH:p,USER_SPAM:function(a){return a.reportedAsSpamAt},ADMIN_REPORTED_AS_SPAM:function(a){return a.reportedAsSpamAt},ADMIN_MARKED_AS_SPAM:function(a){return a.markedAsSpamAt},TRASH:function(a){return a.deletedAt}};
+    return {
+      getList: function (b, c, f) {
+        if (!b || !b.$id)throw"First argument must be Angularjs scope!";
+        if (!c || !c.filter)throw"'filter' is mandatory parameter that must be counted in second argument";
+        c = a(c);
+        var g = d.customizeObj([]);
+        u.lists[b.$id] = {params: c, scope: b, list: g};
+        e(b, f);
+        b.$on("$destroy", function () {
+          delete u.lists[b.$id]
+        });
+        return g
+      }, getCurrentlyWorkingWith: function (a, b) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        return d.getListByUrl("/v2/tickets/currentlyWorkingWith", b, function (b) {
+          l.subscribe("/tickets",
+            a, function (a) {
+              console.log(a);
+              "CURRENTLY_WORKING_WITH" == a.action && d.customizeObj(a.data, b)
+            })
+        })
+      }, loadMore: e, search: function (b, d) {
+        if (!b || !b.filter)throw"'filter' is mandatory parameter that must be counted in first argument";
+        if (!b.keyword)throw"'keyword' is mandatory parameter that must be counted in first argument";
+        if (3 > b.keyword.length)throw"minimal length of 'keyword' is 3 characters";
+        b = a(b);
+        return g({method: "GET", url: "/v2/tickets/search", params: b}).then(function (a) {
+          return a.data
+        })
+      }, getCount: function (b,
+                             c, e) {
+        if (!c || !c.$id)throw"Second argument must be Angularjs scope!";
+        if (!b || !b.filter)throw"'filter' is mandatory parameter that must be counted in first argument";
+        b = a(b);
+        var f = d.customizeObj({});
+        g({method: "GET", url: "/v2/tickets/countByType", params: b}).then(function (a) {
+          d.customizeObj(a.data, f);
+          e && e(a.data)
+        }, function (a) {
+          e && e(a.data)
+        });
+        l.subscribe("/ticketsCount", c, function (a) {
+          console.log(a);
+          "TICKETS_COUNT_CHANGED" == a.action && g({
+            method: "GET",
+            url: "/v2/tickets/countByType",
+            params: b
+          }).then(function (a) {
+            d.customizeObj(a.data,
+              f);
+            e && e(a.data)
+          }, function (a) {
+            e && e(a.data)
+          })
+        });
+        return f
+      }, getCounts: function (a, b) {
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var c = w++, e = d.customizeObj({});
+        u.counts[c] = e;
+        a.$on("$destroy", function () {
+          delete u.counts[c]
+        });
+        g.get("/data/getCounters").then(function (a) {
+          d.customizeObj(a.data, e);
+          b && b(a.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        l.subscribe("/leftPanelCounts", a, function (a) {
+          console.log(a);
+          "LEFT_PANEL_COUNTS" == a.action && d.customizeObj(a.data, e)
+        });
+        return e
+      }, getCountsByTypesAndCompany: function (a,
+                                               b, c, e) {
+        function f() {
+          g({url: "/v2/tickets/counts/", data: {companyId: b, types: c}, method: "POST"}).then(function (a) {
+            d.customizeObj(a.data, h);
+            e && e(a.data)
+          }, function (a) {
+            e && e(a.data)
+          })
+        }
+
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        if (!b)throw"companyId is required!";
+        if (!c || 0 == c.length)throw"ticketTypes is required!";
+        var h = d.customizeObj({});
+        f();
+        l.subscribe("/ticketsCount", a, function (a) {
+          console.log(a);
+          "TICKETS_COUNT_CHANGED" == a.action && f()
+        });
+        return h
+      }, getOne: function (a, c, e, h, k) {
+        if (!a)throw"Id is mandatory argument!";
+        if (!c)throw"ticketsType is mandatory argument!";
+        if (!e || !e.$id)throw"Second argument must be Angularjs scope!";
+        var p = w++, q = {id: a};
+        c = "SPAM" === c.toUpperCase() ? "" : c.toUpperCase();
+        var n = "/v2/tickets/" + a + "?ticketsType=" + c;
+        h && (n += "&view=extended");
+        u.tickets[p] = {ticket: q, scope: e};
+        e.$on("$destroy", function () {
+          delete u.tickets[p]
+        });
+        g.get(n).then(function (a) {
+          a.data.number = "Tkt# " + a.data.number;
+          d.customizeObj(a.data, q);
+          q.tags && f._makeDynamic(q.tags, e);
+          h && q.updates.sort(b);
+          k && k(a.data)
+        }, function (a) {
+          k && k(a.data)
+        });
+        h && l.subscribe("/ticketUpdates?targetId=" + a, e, function (a) {
+          console.log(a);
+          if ("UPDATE_SAVED" == a.action || "UPDATE_CREATED" == a.action) {
+            var e = "SHARED" !== c.toUpperCase() || a.data.user.id === m.currentUser.id;
+            if (!e)for (var f = 0; f < a.data.shares.length && !e; f++)e = (e = a.data.shares[f].user) && e.id === m.currentUser.id;
+            e ? (f = d.findById(q.updates, a.data.id)) ? d.customizeObj(a.data, f) : (f = d.customizeObj(a.data), q.updates.push(f)) : d.deleteById(q.updates, a.data.id);
+            q.updates.sort(b)
+          } else"UPDATE_DELETED" == a.action && d.deleteById(q.updates,
+            a.data.id)
+        });
+        return q
+      }, changePriority: function (a, b, d) {
+        if (!a || !b)throw"ticketId and priority is required arguments!";
+        k("priority", a, b.toUpperCase(), d)
+      }, assignTo: function (a, b, d) {
+        if (!a || !b)throw"ticketId and userId is required arguments!";
+        k("assign", a, b, d)
+      }, changeStatus: function (a, b, d) {
+        if (!a || !b)throw"ticketId and status is required arguments!";
+        k("status", a, b.toUpperCase(), d)
+      }, markAsSpam: function (a, b) {
+        if (!a)throw"ticketId is required arguments!";
+        k("markAsSpam", a, !1, b)
+      }, reportAsSpam: function (a, b) {
+        if (!a)throw"ticketId is required arguments!";
+        k("reportAsSpam", a, !1, b)
+      }, restoreFromSpam: function (a, b) {
+        if (!a)throw"ticketId is required arguments!";
+        k("restoreFromSpam", a, !1, b)
+      }, changeTrashFlag: function (a, b, d) {
+        if (!a)throw"ticketId is required arguments!";
+        k("trash", a, !!b, d)
+      }, deleteForever: function (a, b) {
+        if (!a)throw"ticketId is required arguments!";
+        var c = a;
+        "[object Array]" !== Object.prototype.toString.call(a) && (c = [a]);
+        c = g({url: "/v2/tickets/delete/", data: {ids: c}, method: "POST"});
+        d.handleCallback(c, b)
+      }, claimUser: function (a) {
+        g.get("/tickets/claimUser?ticketId=" +
+          a)
+      }, createTicket: function (a, b) {
+        a.priorityLevel && (a.priorityLevel = a.priorityLevel.toUpperCase());
+        var c = g.post("/v2/tickets", a);
+        d.handleCallback(c, b)
+      }, getActualNumber: function (a, b) {
+        g.get("/data/actualNumber?type=TICKET").success(function (a) {
+          b(a.number)
+        });
+        l.subscribe("/number?targetId=TICKET", a, function (a) {
+          console.log(a);
+          "NUMBER_CHANGED" === a.action && b(d.getFormattedNumber(a.data, !0))
+        })
+      }, createTicketUpdate: function (a, b, c) {
+        if (!a)throw"ticketUpdate is required arguments!";
+        if (!a.ticket.id)throw"ticketUpdate.ticket.id is required!";
+        if (a.id)throw"TicketUpdate must be new, without ticketUpdate.id!";
+        if (!a.type)throw"ticketUpdate.type is required!";
+        if (!a.note && !a.products && !a.services)throw"In TicketUpdate must be or note or products or services!";
+        a = g({url: "/v2/tickets/updates", method: "POST", params: {close: !!b}, data: a});
+        d.handleCallback(a, c)
+      }, deleteTicketUpdate: function (a, b, c) {
+        a = g({url: "/v2/tickets/" + a + "/updates/" + b, method: "DELETE"});
+        d.handleCallback(a, c)
+      }, loadRemainingTicketUpdates: function (a, c) {
+        if (!a.id || !a.updates)throw"You can load updates only for detailed ticket!";
+        if (0 == a.updates.length)throw"There is no updates";
+        for (var e = [], f = 0; f < a.updates.length; f++)e.push(a.updates[f].id);
+        g({url: "/v2/tickets/" + a.id + "/updates/fetch", method: "POST", data: e}).then(function (e) {
+          d.customizeArray(e.data, a.updates);
+          d.defineReadOnlyProperty(a, "unloadedUpdates", 0);
+          a.updates.sort(b);
+          c && c(e.data)
+        }, function (a) {
+          c && c(a.data)
+        })
+      }, markUpdateAsRead: function (a, b, c) {
+        if (!a || !b)throw"ticketId and updateIds is required parameters";
+        a = g({url: "/v2/tickets/" + a + "/updates/read", method: "POST", data: b});
+        d.handleCallback(a, c)
+      }, updateExpenseInTicketUpdate: function (a, b) {
+        if (!a)throw"expense is required!";
+        if (!a.ticketUpdateId)throw"ticketUpdateId is required!";
+        if (!a.serviceExpense && !a.productExpense)throw"serviceExpense or productExpense is required!";
+        var c = g({url: "/v2/tickets/ticketUpdate/updateExpense", method: "PUT", data: a});
+        d.handleCallback(c, b)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("TicketTagsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    function f(a, b) {
+      return b.createdAt - a.createdAt
+    }
+
+    function c(a) {
+      e = m.$new();
+      k.tags = d.customizeArray([]);
+      g.get("/tag").then(function (b) {
+        d.customizeArray(b.data, k.tags);
+        k.tags && (k.tags.sort(f), l.subscribe("/tags", e, function (a) {
+          console.log(a);
+          if (k.tags)if ("TAG_SAVED" == a.action) {
+            var b = d.findById(k.tags, a.data.id);
+            b ? d.customizeObj(a.data, b) : (k.tags.unshift(d.customizeObj(a.data)),
+              k.tags.sort(f))
+          } else if ("TAG_REMOVED" == a.action)for (b in d.deleteById(k.tags, a.data.id), k.dynamicLists)for (var c = k.dynamicLists[b], e = 0; e < c.length; e++)d.deleteById(c[e], a.data.id)
+        }), a && a(b.data))
+      }, function (b) {
+        console.log("ERROR!!!!!", b);
+        a && a(b.data)
+      })
+    }
+
+    function a() {
+      0 === k.watchers.length && r.isEmptyObject(k.dynamicLists) && (e.$destroy(), k.tags = t)
+    }
+
+    function b(a, e) {
+      if (!e || !e.$id)throw"First argument must be Angularjs scope!";
+      if (k.tags) {
+        for (var f = 0; f < a.length; f++)a[f] = d.findById(k.tags, a[f].id);
+        for (; -1 < (f =
+          a.indexOf(t));)a.splice(f, 1);
+        k.addDynamicList(a, e)
+      } else c(function () {
+        b(a, e)
+      })
+    }
+
+    var e, k = {
+      tags: t, watchers: [], dynamicLists: {}, addWatcher: function (b) {
+        var d = this.watchers;
+        0 > d.indexOf(b.$id) && (d.push(b.$id), b.$on("$destroy", function () {
+          var c = d.indexOf(b.$id);
+          d.splice(c, 1);
+          a()
+        }))
+      }, addDynamicList: function (b, d) {
+        var c = this.dynamicLists;
+        c[d.$id] || (c[d.$id] = []);
+        c[d.$id].push(b);
+        d.$on("$destroy", function () {
+          delete c[d.$id];
+          a()
+        })
+      }
+    };
+    return {
+      _makeDynamic: b, _merge: function (a, b) {
+        a.splice(0, a.length);
+        for (var c = 0; c < b.length; c++) {
+          var e =
+            d.findById(k.tags, b[c]);
+          e && a.push(e)
+        }
+      }, getList: function (a, b) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        k.tags ? b && setTimeout(function () {
+          b(k.tags.staticCopy())
+        }, 100) : c(b);
+        k.addWatcher(a);
+        return k.tags
+      }, save: function (a, b) {
+        if (!a)throw"ticketTag is required argument!";
+        var c = "/tag", e = "POST";
+        a.id && (c += "/" + a.id, e = "PUT");
+        c = g({url: c, method: e, data: a});
+        d.handleCallback(c, b)
+      }, deleteTag: function (a, b) {
+        if (!a)throw"tagId is required argument!";
+        var c = g({url: "/tag/" + a, method: "DELETE"});
+        d.handleCallback(c,
+          b)
+      }, link: function (a, b) {
+        if (!a)throw"linkMap is required argument!";
+        var c = g({url: "/tag/link", method: "POST", data: a});
+        d.handleCallback(c, b)
+      }, getTicketsCounts: function (a, b) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        var c = d.customizeObj({});
+        g.get("/tag/counts").then(function (a) {
+          d.customizeObj(a.data, c);
+          b && b(a.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        l.subscribe("/tagCounts", a, function (a) {
+          console.log(a);
+          "TAG_COUNTS" == a.action && d.customizeObj(a.data, c)
+        });
+        return c
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("UsersService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (g, m, l, d, f) {
+    function c(b) {
+      var c = d.findById(n.users, b.id);
+      c ? d.customizeObj(b, c) : (b = d.customizeObj(b), n.users.push(b), b.company.id !== f.getCurrentCompany().id && n.clientUsers.push(b), a(b), n.usersByCompanies[b.company.id] || (n.usersByCompanies[b.company.id] = []), n.usersByCompanies[b.company.id].push(b))
+    }
+
+    function a(a) {
+      var b = [a.firstName, a.lastName].map(function (a) {
+        return a.charAt(0).toUpperCase()
+      }).join("");
+      d.defineReadOnlyProperty(a, "initials", b)
+    }
+
+    function b() {
+      return e(m.currentUser.id)
+    }
+
+    function e(a) {
+      return d.findById(n.users, a)
+    }
+
+    function k(a, d, c) {
+      if (!a)throw"Keyword is required!";
+      var e = [];
+      c = c ? n.usersByCompanies[c] || [] : n.users;
+      for (var f = 0; f < c.length; f++) {
+        var g = c[f];
+        (d || b().company.id !== g.company.id) && -1 < (g.firstName + " " + g.lastName).toLowerCase().indexOf(a.toLowerCase()) && e.push(g)
+      }
+      return e
+    }
+
+    var h = m.$new(), q = [], p = !1, r = !1, n = {users: [], clientUsers: [], usersByCompanies: {}};
+    d.customizeObj(n);
+    f._addInitListener(function () {
+      r ||
+      (r = !0, g.get("/users").then(function (b) {
+        d.customizeArray(b.data, n.users);
+        for (b = 0; b < n.users.length; b++) {
+          var c = n.users[b];
+          a(c);
+          n.usersByCompanies[c.company.id] || (n.usersByCompanies[c.company.id] = []);
+          n.usersByCompanies[c.company.id].push(c);
+          c.company.id !== f.getCurrentCompany().id && n.clientUsers.push(c)
+        }
+        p = !0;
+        for (b = 0; b < q.length; b++)q[b]();
+        q = []
+      }, function (a) {
+        console.error(a);
+        throw"Cannot initialize CompaniesService!";
+      }), l.subscribe("/user", h, function (a) {
+        console.log(a);
+        if (p)if ("USER_SAVED" == a.action)c(a.data);
+        else if ("USER_DELETED" == a.action) {
+          var b = d.findById(n.users, a.data.id);
+          d.deleteById(n.users, a.data.id);
+          d.deleteById(n.clientUsers, a.data.id);
+          b && d.deleteById(n.usersByCompanies[b.company.id], a.data.id)
+        } else if ("USER_ONLINE" == a.action)(b = d.findById(n.users, a.data.id)) && d.defineReadOnlyProperty(b, "online", !!a.data.online); else if ("COMPANY_ARCHIVED" == a.action) {
+          for (b = 0; b < n.users.length; b++)n.users[b].company.id === a.data.id && (n.users.splice(b, 1), b--);
+          for (b = 0; b < n.clientUsers.length; b++)n.clientUsers[b].company.id ===
+          a.data.id && (n.clientUsers.splice(b, 1), b--);
+          delete n.usersByCompanies[a.data.id]
+        } else"USERS_DEARCHIVED" == a.action && a.data.forEach(c)
+      }))
+    });
+    return {
+      _addInitListener: function (a) {
+        if (!a)throw"callback is required!";
+        p ? a() : q.push(a)
+      }, getCurrentUser: b, getAllUsers: function () {
+        return n.users
+      }, getClientUsers: function () {
+        return n.clientUsers
+      }, getAllByCompanyId: function (a) {
+        return n.usersByCompanies[a] || []
+      }, getOneById: e, getUserProfile: function (a) {
+        var b = {};
+        g.get("/settings/userProfile/").then(function (c) {
+          d.customizeObj(c.data,
+            b);
+          a && a(c.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, searchByAllUsers: function (a) {
+        return k(a, !0)
+      }, searchByClientUsers: function (a) {
+        return k(a, !1)
+      }, searchByUsersFromCompany: function (a, b) {
+        return k(a, !1, b)
+      }, changeUserRole: function (a, b, c) {
+        if (!a)throw"userId is required!";
+        if (!b)throw"roleName is required!";
+        a = g({url: "/users/updateRole/" + a + "?role=" + b.toUpperCase(), method: "PUT"});
+        d.handleCallback(a, c)
+      }, save: function (a, b) {
+        if (!a)throw"user is required!";
+        var c = "/users", e = "POST";
+        a.id && (e = "PUT", c = c + "/" + a.id);
+        c = g({url: c, method: e, data: a});
+        d.handleCallback(c, b)
+      }, saveForUserProfile: function (a, b, c) {
+        if (!a)throw"data is required!";
+        if (!b)throw"toUpdate is required!";
+        b = "/settings/userProfile/" + b.toLowerCase();
+        a = g({url: b, method: "PUT", data: a});
+        d.handleCallback(a, c)
+      }, deleteOrArchiveUser: function (a, b, c) {
+        if (!a)throw"ids is required!";
+        if (b === t)throw"isArchive is required!";
+        Array.isArray(a) || (a = [a]);
+        a = g({url: "/users/" + !!b, method: "POST", data: a});
+        d.handleCallback(a, c)
+      }, isEmailUnique: function (a, b, c) {
+        if (!a)throw"email is required!";
+        var e = d.customizeObj({});
+        g.get("/users/isEmailUnique?email=" + a + "&id=" + b).then(function (a) {
+          d.customizeObj(a.data, e);
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (v, r, t) {
+  angular.module("main.services").factory("VendorsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (g, m, l, d) {
+    return {
+      save: function (f, c) {
+        if (!f)throw"vendor is required!";
+        var a = "POST";
+        f.id && (a = "PUT");
+        a = g({url: "/vendor", method: a, data: f});
+        d.handleCallback(a, c)
+      }, getAll: function (f, c) {
+        if (!f || !f.$id)throw"First argument must be Angularjs scope!";
+        return d.getListByUrl("/vendor", c, function (a) {
+          l.subscribe("/vendor", f, function (b) {
+            console.log(b);
+            if ("VENDOR_SAVE" == b.action) {
+              var c =
+                d.findById(a, b.data.id);
+              c ? d.customizeObj(b.data, c) : a.push(d.customizeObj(b.data))
+            } else if ("VENDOR_ARCHIVED" == b.action)d.deleteById(a, b.data.id), f.$broadcast("vendor_archived", b.data); else if ("VENDOR_DEARCHIVED" == b.action)a.push(d.customizeObj(b.data)), f.$broadcast("vendor_dearchived", b.data); else if ("VENDOR_PRODUCT_SAVE" == b.action) {
+              var c = d.findById(a, b.data.id), g = d.findById(c.products, b.data.products[0].versionedId.id);
+              if (c && g)for (b = 0; c.products.length < b; b++); else c && (c.products[c.products.length] =
+                b.data.products[0])
+            } else"VENDOR_PRODUCT_DELETE" == b.action && (c = d.findById(a, b.data.id)) && d.deleteById(c.products, b.data.products[0].versionedId.id)
+          })
+        })
+      }, getAllForCompanyProfile: function (f, c, a) {
+        if (!f || !f.$id)throw"First argument must be Angularjs scope!";
+        if (!c)throw"companyId is required!";
+        return d.getListByUrl("/vendor/companyProfile/" + c, a, function (a) {
+          l.subscribe("/vendor", f, function (c) {
+            console.log(c);
+            if ("VENDOR_SAVE" == c.action) {
+              var g = d.findById(a, c.data.id);
+              g ? d.customizeObj(c.data, g) : a.push(d.customizeObj(c.data))
+            } else if ("VENDOR_ARCHIVED" ==
+              c.action)d.deleteById(a, c.data.id), f.$broadcast("vendor_archived", c.data); else if ("VENDOR_DEARCHIVED" == c.action)a.push(d.customizeObj(c.data)), f.$broadcast("vendor_dearchived", c.data); else if ("VENDOR_PRODUCT_SAVE" == c.action) {
+              var g = d.findById(a, c.data.id), h = d.findById(g.products, c.data.products[0].versionedId.id);
+              if (g && h)for (c = 0; g.products.length < c; c++); else g && (g.products[g.products.length] = c.data.products[0])
+            } else"VENDOR_PRODUCT_DELETE" == c.action && (g = d.findById(a, c.data.id)) && d.deleteById(g.products,
+              c.data.products[0].versionedId.id)
+          })
+        })
+      }, getAllForAutocomplete: function (f, c) {
+        if (!f || !f.$id)throw"First argument must be Angularjs scope!";
+        return d.getListByUrl("/vendor/autocomplete/list", c, function (a) {
+          l.subscribe("/vendor", f, function (b) {
+            console.log(b);
+            if ("VENDOR_SAVE" == b.action) {
+              var c = d.findById(a, b.data.id);
+              c ? d.customizeObj(b.data, c) : a.push(d.customizeObj(b.data))
+            } else"VENDOR_ARCHIVED" == b.action ? (d.deleteById(a, b.data.id), f.$broadcast("vendor_archived", b.data)) : "VENDOR_DEARCHIVED" == b.action && (a.push(d.customizeObj(b.data)),
+              f.$broadcast("vendor_dearchived", b.data))
+          })
+        })
+      }, getAllInCompanyForAutocomplete: function (f, c) {
+        if (!f)throw"companyId is required!";
+        var a = d.customizeArray([]);
+        g.get("/vendor/getAll/" + f).then(function (b) {
+          d.customizeArray(b.data, a);
+          c && c(b.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return a
+      }, isWebsiteUnique: function (f, c, a) {
+        if (!f)throw"website is required!";
+        var b = d.customizeObj({});
+        g.get("/vendor/isWebsiteUnique?website=" + f + "&id=" + c).then(function (c) {
+          d.customizeObj(c.data, b);
+          a && a(c.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, isNameUnique: function (f, c, a) {
+        if (!f)throw"name is required!";
+        var b = d.customizeObj({});
+        g.get("/vendor/isNameUnique?name=" + f + "&id=" + c).then(function (c) {
+          d.customizeObj(c.data, b);
+          a && a(c.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, archive: function (f, c) {
+        if (!f)throw"id is required!";
+        var a = g.get("/vendor/archive/" + f);
+        d.handleCallback(a, c)
+      }, dearchive: function (f, c) {
+        if (!f)throw"id is required!";
+        var a = g.get("/vendor/dearchive/" + f);
+        d.handleCallback(a, c)
+      }, getOneById: function (f, c) {
+        if (!f)throw"vendorId is required!";
+        var a = d.customizeObj({});
+        g.get("/vendor/getOneById/" + f).then(function (b) {
+          d.customizeObj(b.data, a);
+          c && c(b.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return a
+      }, search: function (d) {
+        if (!d)throw"Keyword is required!";
+        return g.get("/vendor/search?keyword=" + d).then(function (c) {
+          return c.data
+        })
+      }
+    }
+  }])
+})(window, jQuery);
