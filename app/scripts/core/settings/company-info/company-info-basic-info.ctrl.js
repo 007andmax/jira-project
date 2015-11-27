@@ -27,8 +27,7 @@
             description: $scope.editCompany.description
           };
 
-          CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function (a) {
-            console.log(a);
+          CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function () {
             $scope.savingBasicInfoInProcess = false;
             form.$setPristine();
           })
