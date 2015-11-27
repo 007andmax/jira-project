@@ -7,7 +7,6 @@
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, $timeout, UserConfirmationsService, UserNotificationService) {
 
-        $scope.ticketTags = {};
         $scope.user = UsersService.getOneById($scope.ticket.createdUser.id);
         $scope.company = CompaniesService.getOneById($scope.ticket.company.id);
 
@@ -16,6 +15,9 @@
         }
 
         $scope.setTicketTags = function () {
+
+          $scope.ticketTags = {};
+
           for (var j = 0; j < $scope.ticket.tags.length; j++) {
             $scope.ticketTags[$scope.ticket.tags[j].id] = true;
           }

@@ -12,7 +12,6 @@
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
           rightPanelSharedState.companyId = '';
 
-          $scope.ticketTags = {};
           $scope.allUpdatesLoaded = false;
           $scope.selectUpdateSharedUser = {};
           $scope.updateSharedUsersList = [];
@@ -74,6 +73,9 @@
           });
 
           $scope.setTicketTags = function () {
+
+            $scope.ticketTags = {};
+
             for (var j = 0; j < $scope.ticketDetails.tags.length; j++) {
               $scope.ticketTags[$scope.ticketDetails.tags[j].id] = true;
             }
