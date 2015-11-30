@@ -1,189 +1,201 @@
-<div class="content-body company-profile compaines">
-  <div class="charts-wrapper clearfix hide-fade" ng-hide="showStatistic">
-    <div ng-hide="showStatisticContent">
+<div class="company-profile-content companies-list">
 
-      <div class="charts-row">
-        <!--<div class="chart devices">-->
-        <!--<div class="content">-->
-        <!--<div class="device-circle"></div>-->
+  <div collapse="isCollapsed" class="charts-n-graphs-container">
 
-        <!--<ul class="chart-list report-nav">-->
-        <!--<li><span class="circle blue"></span> Clients</li>-->
-        <!--<li><span class="circle green"></span> Portable Devices</li>-->
-        <!--<li><span class="circle orange"></span> Printers</li>-->
-        <!--<li><span class="circle dark-orange"></span> Member Servers</li>-->
-        <!--<li><span class="circle red"></span> Member Servers</li>-->
+    <div class="devices-chart">
+      <!--<div class="chart-content">-->
+      <!--<div class="chart-circle"></div>-->
+      <!--<ul class="chart-legend">-->
+      <!--<li><i class="circle-indicator blue"></i>Clients</li>-->
+      <!--<li><i class="circle-indicator green"></i>Portable</li>-->
+      <!--<li><i class="circle-indicator yellow"></i>Printers</li>-->
+      <!--<li><i class="circle-indicator orange"></i>Member Servers</li>-->
+      <!--<li><i class="circle-indicator red"></i>Servers</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+    </div>
+
+    <div class="tickets-chart">
+      <div class="chart-content">
+        <div pie-chart
+             pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
+             pie-chart-color="['#1586E4', '#EF6C00']" pie-chart-size="140"></div>
+        <ul class="chart-legend">
+          <li class="legend-heading"><span>Tkt Resolutions</span> All Time</li>
+          <li><i class="circle-indicator blue"></i>Quick</li>
+          <li><i class="circle-indicator orange"></i>DELAYED</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stats-charts">
+      <div class="service-time-billed">
+        <div class="chart-content">
+          <div class="chart-circle">
+            <i class="icn-lg icn-add-service-white"></i>
+          </div>
+          <ul class="chart-legend">
+            <li class="legend-heading">service time billed</li>
+            <li class="legend-stat">{{ timeBilledByCompany.value }} <span>hrs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="online-devices">
+        <!--<div class="chart-content">-->
+        <!--<div class="chart-circle">-->
+        <!--<i class="icn-lg icn-tab-devices active"></i>-->
+        <!--</div>-->
+        <!--<ul class="chart-legend">-->
+        <!--<li class="legend-heading">online devices</li>-->
+        <!--<li class="legend-stat">628</li>-->
         <!--</ul>-->
         <!--</div>-->
+      </div>
+    </div>
+
+    <div class="simple-chart">
+      <div class="chart-wrapper full-width">
+        <div class="heading"><strong>Top 10 Companies</strong> <span>Contributed to Earnings</span>
+          <span class="label label-success pull-right chart-label">{{ contributedToEarnings }} USD</span>
+        </div>
+        <div top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'"
+             second-gradient-color="'#7BAF3F'"></div>
+      </div>
+    </div>
+
+    <div class="simple-chart">
+      <div class="chart-wrapper full-width">
+        <div class="heading"><strong>Top 10 Companies</strong> <span>Most Tickets Resolved</span>
+          <span class="label label-info pull-right chart-label">{{ mostTicketsResolved }} TICKETS</span>
+        </div>
+        <div top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'"
+             second-gradient-color="'#3AA4E5'"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
+    <span><i class="icn-sm icn-collapse"></i></span>
+  </div>
+
+  <div class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">
+    <p class="pull-left">Expand to view overall statistics</p>
+    <i class="icn-sm icn-expand pull-right"></i>
+  </div>
+
+  <div class="company-card" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
+       ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()">
+
+    <div class="company-cover-area" style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
+
+      <div class="btn btn-archive has-tooltip" stop-propagation="click"
+           ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
+        <i class="icn-sm icn-archive-company"></i>
+      </div>
+
+      <div class="name-rating">
+
+        <div class="company-name">{{ company.name }}</div>
+
+        <ul class="rating rating-5">
+          <li class="icn-sm icn-star-full star-1"></li>
+          <li class="icn-sm icn-star-full star-2"></li>
+          <li class="icn-sm icn-star-full star-3"></li>
+          <li class="icn-sm icn-star-half star-4"></li>
+          <li class="icn-sm icn-star-empty star-5"></li>
+        </ul>
+
+        <i class="dot-sep"></i>
+
+        <a href="javascript:void(0)" class="hit-area ha-14-16" description-popover>
+          <i class="icn-sm icn-description-white"></i></a>
+
+        <!--<div class="dropdown pull-left">-->
+
+          <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip" data-toggle="dropdown"-->
+             <!--aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"-->
+             <!--tooltip="{{ company.cover && company.cover.id ? 'change cover' : 'add cover photo' }}">-->
+            <!--<i class="icn-md icn-cover"></i>-->
+          <!--</a>-->
+
+          <!--<ul class="dropdown-menu">-->
+
+            <!--<li role="presentation">-->
+              <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
+                <!--Upload Photo...-->
+              <!--</a>-->
+            <!--</li>-->
+
+            <!--<li role="presentation">-->
+              <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
+                <!--Restore Default Photo...-->
+              <!--</a>-->
+            <!--</li>-->
+
+            <!--<li role="presentation">-->
+              <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
+                <!--Reposition...-->
+              <!--</a>-->
+            <!--</li>-->
+
+          <!--</ul>-->
         <!--</div>-->
 
-        <div class="chart tickets resolution">
-          <div class="content">
+        <a href="javascript:void(0)" class="hit-area has-tooltip"  stop-propagation="click"
+           ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'"
+           ui-sref="editCompany( { companyId: company.id } )"
+           tooltip-placement="top" tooltip="Edit Company info">
+          <i class="icn-md icn-edit-tag"></i>
+        </a>
 
-            <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
-                 pie-chart-color="['#1586E4', '#EF6C00']"
-                 pie-chart-size="140"></div>
-
-            <ul class="chart-list report-nav">
-
-              <div class="hd"><span class="bold">Tkt Resolutions</span>
-                <span class="amount">All Time</span>
-              </div>
-
-              <li><span class="circle blue"></span> Quick</li>
-              <li><span class="circle dark-orange"></span> DELAYED</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="chart timed-online-device">
-          <div class="service">
-            <div class="contents">
-              <div class="icon-wrapper"><span class="icn icn-cservice"></span></div>
-              <div class="status">
-                <h4>service time billed</h4>
-
-                <div class="time"><span class="hour">{{ timeBilledByCompany.value }}</span>hrs</div>
-              </div>
-            </div>
-          </div>
-
-          <!--<div class="devices">-->
-          <!--<div class="contents">-->
-          <!--<div class="icon-wrapper"><span class="icn icn-cdevice"></span></div>-->
-          <!--<div class="status">-->
-          <!--<h4>online devices</h4>-->
-
-          <!--<div class="time"><span class="hour">628 </span></div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-        </div>
-      </div>
-
-      <div class="charts-row">
-        <div class="tchart">
-          <div class="heading">
-            <span class="bold">Top 10 Companies</span>
-            <span class="amount">Contributed to Earnings</span>
-            <span class="label green pull-right">{{ contributedToEarnings }} USD</span>
-          </div>
-          <div top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'"
-               second-gradient-color="'#7BAF3F'"></div>
-        </div>
-
-        <div class="tchart last">
-          <div class="heading">
-            <span class="bold">Top 10 Companies</span>
-            <span class="amount">Most Tickets Resolved</span>
-            <span class="label blue pull-right">{{ mostTicketsResolved }} TICKETS</span>
-          </div>
-          <div top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'"
-               second-gradient-color="'#3AA4E5'"></div>
-        </div>
-      </div>
-
-    </div>
-
-
-  </div>
-
-  <div class="collaps-charts" ng-click="toggleStatistic()">
-    <span class="collaps-pointer"> <span class="icn icn-collapse abc"></span> </span>
-  </div>
-
-  <div class="companies-list clearfix">
-
-    <div class="company clearfix"
-         ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
-         ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()">
-      <div class="company-cover-wrapper" style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
-        <div class="overlay"></div>
-        <div class="archive-btn" stop-propagation="click"
-             ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
-          <a class="black-btn" href="javascript:void(0)" tooltip-placement="top" tooltip="Archive Company"
-             ng-click="archiveCompany(company.id)">
-            <span class="icn archive-company"></span>
-          </a>
-        </div>
-        <div class="company-info">
-          <h3 class="name"> {{ company.name }} </h3>
-
-          <div class="ac-start-wrapper clearfix">
-            <ul class="rating rating-5 clearfix pull-left">
-              <li class="icn-star-full star-1"></li>
-              <li class="icn-star-full star-2"></li>
-              <li class="icn-star-full star-3"></li>
-              <li class="icn-star-full star-4"></li>
-              <li class="icn-star-half star-5"></li>
-            </ul>
-
-            <div class="dot-sep pull-left"></div>
-
-            <a href="javascript:void(0)" class="icn-wrapper pull-left" popover="{{ company.description }}"
-               popover-placement="bottom" popover-trigger="mouseenter">
-              <span class="icn company-detail"></span>
-            </a>
-
-            <a href="javascript:void(0)" class="icn-wrapper tp-hide pull-left"
-               tooltip-placement="top" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'"
-               tooltip="Edit Company info" ui-sref="editCompany( { companyId: company.id } )" stop-propagation="click">
-              <span class="icn icn-edit-tag"></span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="company-information clearfix">
-        <div class="clearfix name-wrpper">
-          <a herf="" class="pull-left thumb avatar m-r">
-            <img ng-src="{{ getContactAvatarUrl(primaryContact) }}" alt="..." class="img-circle">
-          </a>
-
-          <div class="user-inf pull-left">
-            <h4 class="name">{{ primaryContact.firstName }} {{ primaryContact.lastName }}</h4>
-
-            <div class="status pull-left"><span class="dot on"></span> <span
-              class="label label-white pull-left label-ticket-number">{{ primaryContact.designation }}</span>
-
-
-              <ul class="user-badges pull-left">
-                <li class="icn icn-ticket-updates tp-hide" tooltip="subscriber ticket updates" tooltip-placement="top"
-                    ng-show="primaryContact.subscription.ticket" tooltip-append-to-body="true"></li>
-                <li class="icn icn-invoice-updates tp-hide" tooltip-placement="top" tooltip="subscriber invoice updates"
-                    ng-show="primaryContact.subscription.invoice" tooltip-append-to-body="true"></li>
-                <!--<li id="has-admin1" class="icn admin tp-hide" data-title="admin" data-toggle="tooltip"-->
-                <!--data-container="#has-admin1" data-placement="top" data-original-title="" title=""></li>-->
-              </ul>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="clearfix">
-          <div class="ci number clearfix">
-            <span class="icn {{ getPhoneNumberCssClass(primaryPhone) }}"></span>
-            <span class="txt">{{ primaryPhone.number }}</span>
-          </div>
-          <div class="ci location clearfix">
-            <span class="icn icn-sb-location"></span>
-            <span class="txt">{{ primaryAddress.address }}</span>
-          </div>
-        </div>
-
-        <div class="clearfix company-actions" stop-propagation="click">
-          <a href="javascript:void(0)" class="btn btn-scooter btn-update pull-left" style="margin-right: 10px;"
-             tooltip-placement="top"
-             tooltip="Send Email">
-            <div class="icn-white-mail"></div>
-          </a>
-
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp" tooltip-placement="top"
-               tooltip="chat">
-            <span class="icn icn-user-chat"></span>
-          </div>
-        </div>
       </div>
     </div>
+
+    <div class="company-primary-contact">
+      <div class="user-info">
+
+        <div class="avatar">
+          <img ng-src="{{ getContactAvatarUrl(primaryContact) }}" alt="..." class="img-circle avatar-50">
+        </div>
+
+        <div class="name-designation">
+
+          <h4>{{ getUserName(primaryContact) }}</h4>
+
+          <i class="dot on"></i>
+
+          <span class="label label-light">{{ primaryContact.designation }}</span>
+
+          <div class="icn-sm persistent-tooltip {{ getUserSubscribleClass() }}" tooltip-append-to-body="true"
+               tooltip-placement="top" tooltip="{{ getUserSubscribleTooltip() }}"></div>
+        </div>
+      </div>
+
+      <div class="user-contact-no">
+        <i class="icn-sm {{ getPhoneNumberCssClass(primaryPhone) }}"></i>{{ primaryPhone.number }}
+      </div>
+
+      <div class="user-location"><i class="icn-sm icn-sb-location"></i>
+        <span>{{ primaryAddress.address }}</span>
+      </div>
+
+      <div class="user-actions" stop-propagation="clack">
+
+        <div class="btn btn-info has-tooltip"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">
+          <i class="icn-sm icn-email-white"></i>
+        </div>
+
+        <div class="btn btn-default has-tooltip"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Chat">
+          <i class="icn-sm icn-user-chat"></i>
+        </div>
+
+      </div>
+    </div>
+
   </div>
+
 </div>

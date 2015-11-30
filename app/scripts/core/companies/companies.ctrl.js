@@ -9,6 +9,7 @@
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
+        $scope.isCollapsed = false;
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
 
@@ -88,17 +89,8 @@
 
         $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
-        $scope.showStatistic = false;
-        $scope.toggleStatistic = function () {
-          if($scope.showStatistic){
-            $timeout(function(){
-              $scope.showStatisticContent = false;
-            }, 500)
-          } else {
-            $scope.showStatisticContent = !$scope.showStatisticContent;
-          }
-          $scope.showStatistic = !$scope.showStatistic;
-
+        $scope.toggleCollapsed = function(){
+          $scope.isCollapsed = !$scope.isCollapsed;
         }
 
       }]);

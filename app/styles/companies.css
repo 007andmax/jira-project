@@ -61,7 +61,7 @@
   margin-left: -30px;
 }
 .companies-list.company-devices-list .company-card{
-  height: 367px;
+  height: 336px;
 }
 .companies-list .company-card:hover{
   box-shadow: 0 4px 25px 0 rgba(10,45,89,.1);
@@ -81,11 +81,11 @@
   right: 78px;
 }
 .btn-archive{
-  background-color: rgba(21,30,41,.7);
-  border: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  background-color: rgba(21,30,41,.7) !important;
+  border: none !important;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
 }
 .company-cover-area .company-name{
   font-size: 17px;
@@ -234,9 +234,15 @@
 .company-device-stats{
   float: left;
   width: 100%;
-  padding: 25px 30px;
+  padding: 25px 30px 27px;
   border: 1px solid #e7ecf2;
   border-top: none;
+  -webkit-transition: 0.3s ease-out border;
+  -o-transition: 0.3s ease-out border;
+  transition: 0.3s ease-out border;
+}
+.companies-list .company-card:hover .company-device-stats{
+  border-color: #fff;
 }
 .company-tickets, .currently-online-devices{
   float: left;
@@ -271,14 +277,15 @@
 .company-managed-devices{
   float: left;
   width: 100%;
-  border-top: 1px solid #f1f5fa;
-  margin-top: 19px;
-  padding-top: 33px;
+  /*border-top: 1px solid #f1f5fa;*/
+  /*margin-top: 19px;*/
+  padding-top: 19px;
 }
 .total-managed-devices{
   float: left;
   font-size: 26px;
   line-height: 34px;
+  margin-top: 3px;
   color: #4c5c6f;
 }
 @-moz-document url-prefix() {
@@ -297,7 +304,7 @@
 .device-stats-chart{
   float: right;
   width: 100px;
-  height: 50px;
+  height: 46px;
   background-color: #e7ecf2;
 }
 
@@ -859,7 +866,7 @@
 }
 /***/
 .create-company-content {
-  padding: 0 0 80px 0;
+  padding: 0 0 50px 0;
   width: 740px;
   /*margin: 0 auto;*/
 }
@@ -983,6 +990,9 @@
   padding: 37px 0;
   box-shadow: none;
 }
+.contact-info-wrapper .company-create-agent + .company-create-agent form{
+  padding-top: 51px;
+}
 .form-control-time-zone, .form-control-agent-desc {
   width: 452px;
 }
@@ -1032,7 +1042,7 @@
 .create-company-actions{
   border-top: 1px solid #e7ecf2;
   padding-top: 30px;
-  margin-top: 43px;
+  margin-top: 57px;
 }
 .create-company-actions .btn + .btn{
   margin-right: 10px;
@@ -1099,11 +1109,45 @@
 .associate-vendor-wrapper{
   padding: 23px 0;
 }
+.associate-vendor-wrapper .tokenfield{
+  padding: 2px 3px 0;
+  height: auto;
+}
+/*@-moz-document url-prefix() {
+  .associate-vendor-wrapper .tokenfield{
+    padding: 0;
+  }
+}*/
+.associate-vendor-wrapper .tokenfield .token {
+  background-color: #1586e4;
+  border-color: #1586e4;
+  margin: 1px 3px 2px 0;
+}
+.associate-vendor-wrapper .token-input{
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+/*.associate-vendor-wrapper .tokenfield .token{
+  margin-bottom: 4px;
+}*/
+.associate-vendor-wrapper .tokenfield .token .token-label{
+  color: #fff;
+}
+.associate-vendor-wrapper .tokenfield .token .icn-remove-token{
+  background-position: -776px 0 !important;
+}
+/*.associate-vendor-wrapper .form-control{
+  height: auto;
+}*/
 .associate-vendor-wrapper h3{
   font-size: 17px;
   line-height: 24px;
   color: #1f2a37;
   margin: 0 0 19px;
+}
+.associate-vendor-wrapper .dropdown-subscribe{
+  width: 100%;
+  max-width: none;
 }
 .associate-vendor-wrapper p{
   margin: 0 0 5px;

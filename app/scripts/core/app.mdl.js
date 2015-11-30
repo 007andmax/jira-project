@@ -210,11 +210,11 @@
         if (!phoneNumber) {
           return;
         } else if (phoneNumber.typeNumber === 'OFFICE') {
-          return 'icn-telephone';
+          return 'icn-user-phone';
         } else if (phoneNumber.typeNumber === 'MOBILE') {
           return 'icn-iphone';
         } else if (phoneNumber.typeNumber === 'FAX') {
-          return 'icn-fax-machine';
+          return 'icn-user-fax';
         }
       };
 

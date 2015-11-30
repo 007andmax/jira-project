@@ -223,3 +223,9 @@
 .dropdown-user-parent > .dropdown-menu > li.active {
   background-color: #e2f1fd;
 }
+
+/*description popover on companies page*/
+.popover.description-popover {
+  width: 310px !important;
+  margin-left: 151px !important;
+}
