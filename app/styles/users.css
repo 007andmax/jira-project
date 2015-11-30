@@ -342,6 +342,10 @@
 }
 .contact-info-wrapper .create-user-header h3{
   width: 100%;
+  margin-bottom: 18px;
+}
+.contact-info-wrapper .company-create-agent + .company-create-agent .create-user-header h3 {
+  display: none;
 }
 @-moz-document url-prefix() {
   .create-user-header h3{
@@ -487,6 +491,12 @@
 }
 .form-row .form-group.zipcode-field{
   max-width: 100px;
+}
+.form-row .form-group.scan-repeat-days{
+  max-width: 145px;
+}
+.form-row .form-group.scan-time{
+  max-width: 125px;
 }
 @-moz-document url-prefix() {
   .form-row .form-group.no-label{

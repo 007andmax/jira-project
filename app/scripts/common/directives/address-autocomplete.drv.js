@@ -72,6 +72,21 @@
             ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
             ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
 
+            if (place.address_components) {
+              for (var i = place.address_components.length - 1; i >= 0; i--) {
+
+                var isAddressTypesExist = place.address_components[i] && place.address_components[i].types;
+
+                if (isAddressTypesExist && place.address_components[i].types[0] === 'postal_code') {
+                  ngModelCtrl.$viewValue.postalCode = place.address_components[i].short_name;
+                  break;
+                } else {
+                  ngModelCtrl.$viewValue.postalCode = '';
+                }
+
+              }
+            }
+
             $scope.$apply();
 
           });

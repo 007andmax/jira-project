@@ -10,12 +10,12 @@
           contact no.
         </label>
 
-        <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
+        <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error" style="min-height: 20px;"
              ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
-          <div class="control-label" ng-message="required">contact no. is required.</div>
-          <div class="control-label" ng-message="maxlength">contact no. is too large</div>
-          <div class="control-label" ng-message="minlength">contact no. is too short</div>
-          <div class="control-label" ng-message="pattern">invalid no.</div>
+          <label class="control-label" ng-message="required">CONTACT NO. IS REQUIRED.</label>
+          <label class="control-label" ng-message="maxlength">CONTACT NO. IS TOO LARGE</label>
+          <label class="control-label" ng-message="minlength">CONTACT NO. IS TOO SHORT</label>
+          <label class="control-label" ng-message="pattern">INVALID NO.</label>
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
@@ -54,11 +54,11 @@
           contact no.
         </label>
 
-        <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
+        <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error" style="min-height: 20px;"
              ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
-          <div class="control-label" ng-message="maxlength">contact no. is too large</div>
-          <div class="control-label" ng-message="minlength">contact no. is too short</div>
-          <div class="control-label" ng-message="pattern">invalid no.</div>
+          <label class="control-label" ng-message="maxlength">CONTACT NO. IS TOO LARGE</label>
+          <label class="control-label" ng-message="minlength">CONTACT NO. IS TOO SHORT</label>
+          <label class="control-label" ng-message="pattern">INVALID NO.</label>
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"

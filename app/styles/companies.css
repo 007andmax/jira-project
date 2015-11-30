@@ -81,11 +81,11 @@
   right: 78px;
 }
 .btn-archive{
-  background-color: rgba(21,30,41,.7) !important;
-  border: none !important;
-  position: absolute !important;
-  top: 10px !important;
-  right: 10px !important;
+  background-color: rgba(21,30,41,.7);
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 .company-cover-area .company-name{
   font-size: 17px;
@@ -103,12 +103,12 @@
 }
 .company-cover-area .dot-sep{
   float: left;
-  margin: 4px 20px;
+  margin: 4px 18px 4px 20px;
 }
 .company-cover-area .hit-area{
   margin-top: -2px;
-  margin-left: -2px;
-  margin-right: 8px;
+  /*margin-left: -2px;*/
+  margin-right: 6px;
   float: left;
 }
 .company-primary-contact{
