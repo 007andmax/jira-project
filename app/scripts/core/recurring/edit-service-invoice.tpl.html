@@ -4,10 +4,6 @@
       <li class="add-service-item">
 
         <i class="icn icn-sm icn-update-service pull-left"></i>
-        <a href="javascript:void(0)" class="hit-area pull-right has-tooltip" data-placement="top" title=""
-           data-container="body"
-           data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"
-           data-original-title="Delete"><i class="icn-sm icn-delete"></i></a>
 
         <div class="col-1">
           <div class="dropdown" ng-class="{'has-error': isShowingErrors(editServiceInvoiceForm, 'editServiceName')}">
@@ -47,22 +43,11 @@
 
       <li class="qt-form-actions">
 
-        <!--<div class="add-btns pull-left">-->
-        <!--<a href="javascript:void(0)" class="pull-left has-tooltip" -->
-        <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">-->
-        <!--<i class="icn-lg icn-add-product"></i>-->
-        <!--</a>-->
-        <!-- -->
-        <!--<a href="javascript:void(0)" class="pull-left has-tooltip" -->
-        <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Service">-->
-        <!--<i class="icn-lg icn-add-service"></i>-->
-        <!--</a>-->
-        <!-- -->
-        <!--</div>-->
+        <div class="pull-left text-error">{{ getValidationMessage(editServiceInvoiceForm) }}</div>
 
         <div class="btn btn-lg btn-info pull-right" ng-click="saveService(editServiceInvoiceForm)"
              ng-class="{'disabled': disabledCreateServiceButton}">
-          Save
+          {{ service === undefined ? 'Add' : 'Save' }}
         </div>
 
         <div class="btn btn-lg btn-primary pull-right" ng-click="cancelEditService()">Cancel</div>

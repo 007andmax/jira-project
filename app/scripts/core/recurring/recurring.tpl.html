@@ -62,7 +62,7 @@
       <div role="tabpanel" class="tab-pane active">
         <ul class="qt-list qt-recurring-invoices">
 
-          <li event-toggle-slider="toggleRecurringInvoices" ng-class="{'expanded': showInvoices}"
+          <li event-toggle-slider="toggleRecurringInvoices"
               ng-controller="quicktech.core.recurring.companyCtrl"
               ng-repeat="recurringCompany in recurringCompanies | orderBy: 'company.name'">
 
@@ -110,7 +110,7 @@
                   ng-controller="quicktech.core.recurring.invoiceCtrl"
                   show-model-element="{{ 'showInvoice-' + invoice.id }}">
 
-                <div qt-ts-toggler="" style="z-index: 1;position: absolute;width: 98%;height: 70px;top: 0;"></div>
+                <div qt-ts-toggler style="z-index: 1;position: absolute;width: 98%;height: 70px;top: 0;"></div>
 
                 <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left" ng-show="false"
                    data-placement="top" title="" data-container="body"
@@ -144,21 +144,17 @@
 
                 <div class="sub-wrapper clearfix" qt-ts-slider>
 
-                  <div class="table-wrapper clearfix">
+                  <div ng-include="'/html/scripts/core/recurring/product-invoice.tpl.html'"></div>
 
-                    <div ng-include="'/html/scripts/core/recurring/product-invoice.tpl.html'"></div>
+                  <div ng-include="'/html/scripts/core/recurring/service-invoice.tpl.html'"></div>
 
-                    <div ng-include="'/html/scripts/core/recurring/service-invoice.tpl.html'"></div>
+                  <div class="qt-invoice-form-wrapper" ng-if="showCreateProduct"
+                       ng-include="'/html/scripts/core/recurring/edit-product-invoice.tpl.html'"></div>
 
-                    <div ng-if="showCreateProduct"
-                         ng-include="'/html/scripts/core/recurring/edit-product-invoice.tpl.html'"></div>
+                  <div class="qt-invoice-form-wrapper" ng-if="showCreateService"
+                       ng-include="'/html/scripts/core/recurring/edit-service-invoice.tpl.html'"></div>
 
-                    <div ng-if="showCreateService"
-                         ng-include="'/html/scripts/core/recurring/edit-service-invoice.tpl.html'"></div>
-
-                  </div>
-
-                  <div class="add-btns pull-left">
+                  <div class="add-btns pull-left" style="margin-top: 20px;">
 
                     <a href="javascript:void(0)" class="ha-edit hit-area ha-24 pull-left has-tooltip"
                        ng-class="{'disabled': showCreateProduct || showCreateService}"
@@ -175,6 +171,10 @@
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Service">
                       <i class="icn-lg icn-add-service"></i>
                     </a>
+
+                    <span class="pull-left text-muted" ng-show="invoice.products.length < 1 && invoice.services.length < 1">
+                      You can add a product or service to this Invoice
+                    </span>
 
                   </div>
                 </div>

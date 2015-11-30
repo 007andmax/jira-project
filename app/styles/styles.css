@@ -8975,7 +8975,8 @@ button.close {
 }
 .popover.description-popover {
   width: 310px;
-  margin-left: 151px;
+  margin-left: 144px;
+  margin-top: 4px;
 }
 @-moz-document url-prefix() {
   .popover {

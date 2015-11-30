@@ -8,7 +8,7 @@
 
         $scope.editProduct = {};
 
-        $scope.searchProducts = ProductsService.search;
+        $scope.productCategories = ProductsService.getCategories($scope);
 
         if ($scope.product !== undefined) {
 
@@ -26,12 +26,37 @@
           };
         }
 
+        $scope.loadProductByCategory = function (categoryId) {
+          $scope.productsByCategory = ProductsService.getAllByCategory($scope, categoryId)
+        };
+
+        $scope.selectProduct = function (product) {
+          $scope.editProduct.item = product.staticCopy();
+        };
+
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
         $scope.cancelEditProduct = function () {
           $scope.$emit('cancelEditForm');
+        };
+
+        $scope.isProductNameCorrect = function(){
+          if(!$scope.editProduct.item.name || !$scope.productsByCategory){
+            return;
+          }
+
+          for(var i = 0; i < $scope.productsByCategory.length; i++){
+            if($scope.editProduct.item.name === $scope.productsByCategory[i].name){
+              $scope.editProduct.item = $scope.productsByCategory[i].staticCopy();
+              return;
+            } else {
+              if($scope.editProduct.item.versionedId){
+                $scope.editProduct.item.versionedId.id = '';
+              }
+            }
+          }
         };
 
         $scope.saveProduct = function (form) {

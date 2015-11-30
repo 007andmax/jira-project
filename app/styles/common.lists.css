@@ -638,11 +638,11 @@ Devices tab
   cursor: auto;
 }
 .qt-invoices>li>.col-1{
-  width: calc(100% - 503px);
+  width: calc(100% - 504px);
   padding-left: 0;
 }
 .qt-invoices>li>.col-2{
-  width: 182px;
+  width: 183px;
   color: #94a4b8;
 }
 .qt-invoices>li>.col-3{
@@ -662,10 +662,10 @@ Devices tab
 
 @media only screen and (min-width: 2000px){
   .qt-invoices>li>.col-1{
-    width: calc(100% - 783px);
+    width: calc(100% - 784px);
   }
   .qt-invoices>li>.col-2{
-    width: 322px;
+    width: 323px;
   }
   .qt-invoices>li>.col-3{
     width: 348px;
@@ -758,6 +758,12 @@ Devices tab
   margin: 0 0 28px 22px;
   /*cursor: pointer;*/
 }
+.qt-invoices .table-wrapper + .add-btns {
+  margin-top: 20px;
+}
+.qt-invoices .qt-invoice-form-wrapper + .add-btns {
+  margin-top: 20px;
+}
 .qt-invoices .add-btns .hit-area{
   margin: -2px 0 0;
 }
@@ -787,30 +793,70 @@ Devices tab
   margin-top: 9px;
 }
 .qt-invoice-form-wrapper{
+  /*min-height: 166px !important;*/
+  padding: 25px 0 0 !important;
+  border: none !important;
+  cursor: auto !important;
+}
+.sub-wrapper .qt-invoice-form-wrapper{
+  float: left;
+  width: 100%;
+  padding: 0 !important;
+  margin-bottom: 10px;
+}
+/*.sub-wrapper .table-wrapper + .qt-invoice-form-wrapper{
+  margin-top: -6px;
+}*/
+.qt-list .sub-wrapper .table-wrapper{
+  margin-bottom: 5px;
+}
+.qt-create-invoice-form-wrapper{
   min-height: 166px !important;
   padding: 0 !important;
   border: none !important;
   cursor: auto !important;
 }
-.qt-invoice-form-wrapper:before, .qt-invoice-form-wrapper:after, .qt-invoice-form-wrapper .qt-invoices>li:before, .qt-invoice-form-wrapper .qt-invoices>li:after{
+.qt-invoice-form-wrapper:before, .qt-invoice-form-wrapper:after, .qt-invoice-form-wrapper .qt-invoices>li:before, .qt-invoice-form-wrapper .qt-invoices>li:after, .qt-create-invoice-form-wrapper:before, .qt-create-invoice-form-wrapper:after, .qt-create-invoice-form-wrapper .qt-invoices>li:before, .qt-create-invoice-form-wrapper .qt-invoices>li:after{
   display: none !important;
 }
-.qt-create-invoice, .qt-add-product, .qt-add-service{
+.qt-add-product, .qt-add-service{
+  position: relative;
+  background-color: #fff;
+  width: calc(100% + 150px);
+  top: -25px;
+  right: -60px;
+  left: -86px;
+  min-height: 166px;
+  padding: 70px 96px 30px 86px;
+  box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;
+}
+.sub-wrapper .qt-invoice-form-wrapper .qt-add-product, .sub-wrapper .qt-invoice-form-wrapper .qt-add-service {
+  top: 0;
+  padding-top: 30px;
+}
+/*.sub-wrapper .qt-invoice-form-wrapper .qt-add-service{
+  width: calc(100% + 173px);
+}*/
+.qt-create-invoice{
   position: relative;
   background-color: #fff;
   width: calc(100% + 150px);
   right: -60px;
   left: -86px;
+  margin-bottom: 25px;
   min-height: 166px;
   padding: 30px 96px 30px 86px;
   box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 25px 0px;
 }
-.qt-invoice-form-wrapper .qt-invoices{
+.qt-invoice-form-wrapper .qt-invoices, .qt-create-invoice-form-wrapper .qt-invoices{
   padding: 0;
   cursor: auto;
   margin-top: 0;
 }
-.qt-invoice-form-wrapper .qt-invoices > li{
+.qt-invoice-form-wrapper>[class*="col-"]{
+  z-index: 2;
+}
+.qt-invoice-form-wrapper .qt-invoices > li, .qt-create-invoice-form-wrapper .qt-invoices > li{
   padding: 0;
   cursor: auto;
 }
@@ -917,7 +963,7 @@ Devices tab
 .create-invoice-btn, .send-statemenyt-btn{
   float: left;
   width: 100%;
-  padding-top: 30px;
+  padding-top: 5px;
   padding-bottom: 60px;
   cursor: auto;
 }
@@ -967,10 +1013,10 @@ Devices tab
   }
 }
 .qt-receivable .qt-invoices>li>.col-1{
-  width: calc(100% - 601px);
+  width: calc(100% - 603px);
 }
 .qt-receivable .qt-invoices>li>.col-2{
-  width: 182px;
+  width: 183px;
   color: #94a4b8;
   padding-top: 9px;
 }
@@ -979,49 +1025,49 @@ Devices tab
   padding-top: 9px;
 }
 .qt-receivable .qt-invoices>li>.col-4{
-  width: 165px;
+  width: 144px;
   color: #94a4b8;
   text-align: left;
   padding-top: 9px;
 }
 .qt-receivable .qt-invoices>li>.col-5{
   text-align: right;
-  width: 64px;
+  width: 86px;
   padding-right: 0;
   padding-top: 9px;
 }
 @media only screen and (min-width: 2000px){
   .qt-receivable .qt-invoices>li>.col-1{
-    width: calc(100% - 901px);
+    width: calc(100% - 903px);
   }
   .qt-receivable .qt-invoices>li>.col-2{
-    width: 282px;
+    width: 283px;
   }
   .qt-receivable .qt-invoices>li>.col-3{
     width: 290px;
   }
   .qt-receivable .qt-invoices>li>.col-4{
-    width: 265px;
+    width: 244px;
   }
   .qt-receivable .qt-invoices>li>.col-5{
-    width: 64px;
+    width: 86px;
   }
 }
 @media only screen and (max-width: 1500px){
   .qt-receivable .qt-invoices>li>.col-1{
-    width: calc(100% - 511px);
+    width: calc(100% - 513px);
   }
   .qt-receivable .qt-invoices>li>.col-2{
-    width: 152px;
+    width: 153px;
   }
   .qt-receivable .qt-invoices>li>.col-3{
     width: 160px;
   }
   .qt-receivable .qt-invoices>li>.col-4{
-    width: 135px;
+    width: 114px;
   }
   .qt-receivable .qt-invoices>li>.col-5{
-    width: 64px;
+    width: 86px;
   }
 }
 .qt-receivable .qt-invoices>li.list-heading>[class*="col-"]{
@@ -1046,10 +1092,10 @@ Devices tab
   display: none !important;
 }*/
 .qt-receivable-number>li>.col-1{
-  width: 196px;
+  width: 197px;
 }
 .qt-receivable-number>li>.col-2{
-  width: calc(100% - 797px);
+  width: calc(100% - 800px);
   padding-top: 9px;
   color: #94a4b8;
   overflow: hidden;
@@ -1058,7 +1104,7 @@ Devices tab
   text-overflow: ellipsis;
 }
 .qt-receivable-number>li>.col-3{
-  width: 182px;
+  width: 183px;
   color: #94a4b8;
   padding-top: 9px;
 }
@@ -1067,7 +1113,7 @@ Devices tab
   padding-top: 9px;
 }
 .qt-receivable-number>li>.col-5{
-  width: 165px;
+  width: 166px;
   color: #94a4b8;
   text-align: left;
   padding-top: 9px;
@@ -1081,19 +1127,19 @@ Devices tab
 }
 @media only screen and (min-width: 2000px){
   .qt-receivable-number>li>.col-1{
-    width: 256px;
+    width: 257px;
   }
   .qt-receivable-number>li>.col-2{
-    width: calc(100% - 1037px);
+    width: calc(100% - 1040px);
   }
   .qt-receivable-number>li>.col-3{
-    width: 242px;
+    width: 243px;
   }
   .qt-receivable-number>li>.col-4{
     width: 250px;
   }
   .qt-receivable-number>li>.col-5{
-    width: 225px;
+    width: 226px;
   }
   .qt-receivable-number>li>.col-6{
     width: 64px;
@@ -1101,19 +1147,19 @@ Devices tab
 }
 @media only screen and (max-width: 1700px){
   .qt-receivable-number>li>.col-1{
-    width: 166px;
+    width: 167px;
   }
   .qt-receivable-number>li>.col-2{
-    width: calc(100% - 677px);
+    width: calc(100% - 680px);
   }
   .qt-receivable-number>li>.col-3{
-    width: 152px;
+    width: 153px;
   }
   .qt-receivable-number>li>.col-4{
     width: 160px;
   }
   .qt-receivable-number>li>.col-5{
-    width: 135px;
+    width: 136px;
   }
   .qt-receivable-number>li>.col-6{
     width: 64px;
@@ -1121,19 +1167,19 @@ Devices tab
 }
 @media only screen and (max-width: 1500px){
   .qt-receivable-number>li>.col-1{
-    width: 126px;
+    width: 127px;
   }
   .qt-receivable-number>li>.col-2{
-    width: calc(100% - 517px);
+    width: calc(100% - 520px);
   }
   .qt-receivable-number>li>.col-3{
-    width: 112px;
+    width: 113px;
   }
   .qt-receivable-number>li>.col-4{
     width: 120px;
   }
   .qt-receivable-number>li>.col-5{
-    width: 95px;
+    width: 96px;
   }
   .qt-receivable-number>li>.col-6{
     width: 64px;
@@ -1182,7 +1228,7 @@ Devices tab
   display: none !important;
 }
 .qt-receipt-archive .qt-invoices>li>.col-1{
-  width: calc(100% - 442px);
+  width: calc(100% - 443px);
 }
 .qt-receipt-archive .qt-invoices>li>.col-2{
   width: 210px;
@@ -1190,11 +1236,11 @@ Devices tab
   padding-top: 9px;
 }
 .qt-receipt-archive .qt-invoices>li>.col-3{
-  width: 168px;
+  width: 147px;
   padding-top: 9px;
 }
 .qt-receipt-archive .qt-invoices>li>.col-4{
-  width: 64px;
+  width: 86px;
   text-align: right;
   color: #94a4b8;
   padding-top: 9px;
@@ -1202,16 +1248,16 @@ Devices tab
 }
 @media only screen and (min-width: 2000px){
   .qt-receipt-archive .qt-invoices>li>.col-1{
-    width: calc(100% - 642px);
+    width: calc(100% - 643px);
   }
   .qt-receipt-archive .qt-invoices>li>.col-2{
     width: 310px;
   }
   .qt-receipt-archive .qt-invoices>li>.col-3{
-    width: 268px;
+    width: 247px;
   }
   .qt-receipt-archive .qt-invoices>li>.col-4{
-    width: 64px;
+    width: 86px;
   }
 }
 .qt-receipt-archive .qt-invoices>li>.icn-sm{
@@ -1230,10 +1276,10 @@ Devices tab
   display: none !important;
 }
 .qt-receipt-number>li>.col-1{
-  width: 196px;
+  width: 197px;
 }
 .qt-receipt-number>li>.col-2{
-  width: calc(100% - 638px);
+  width: calc(100% - 640px);
   padding-top: 9px;
   color: #94a4b8;
   overflow: hidden;
@@ -1247,13 +1293,13 @@ Devices tab
   padding-top: 9px;
 }
 .qt-receipt-number>li>.col-4{
-  width: 168px;
+  width: 147px;
   padding-top: 9px;
 }
 .qt-receipt-number>li>.col-5{
   text-align: right;
   color: #94a4b8;
-  width: 64px;
+  width: 86px;
   padding-right: 0;
   padding-top: 9px;
 }
@@ -1262,16 +1308,16 @@ Devices tab
     width: 296px;
   }
   .qt-receipt-number>li>.col-2{
-    width: calc(100% - 938px);
+    width: calc(100% - 940px);
   }
   .qt-receipt-number>li>.col-3{
     width: 310px;
   }
   .qt-receipt-number>li>.col-4{
-    width: 268px;
+    width: 247px;
   }
   .qt-receipt-number>li>.col-5{
-    width: 64px;
+    width: 86px;
   }
 }
 @media only screen and (max-width: 1500px){
@@ -1279,16 +1325,16 @@ Devices tab
     width: 156px;
   }
   .qt-receipt-number>li>.col-2{
-    width: calc(100% - 518px);
+    width: calc(100% - 520px);
   }
   .qt-receipt-number>li>.col-3{
     width: 170px;
   }
   .qt-receipt-number>li>.col-4{
-    width: 128px;
+    width: 107px;
   }
   .qt-receipt-number>li>.col-5{
-    width: 64px;
+    width: 86px;
   }
 }
 .qt-receipt-number>li>.icn-sm{
@@ -1425,14 +1471,14 @@ Devices tab
   display: none !important;
 }
 .qt-product-list>li>.col-1{
-  width: 183px;
+  width: 184px;
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
 .qt-product-list>li>.col-2{
-  width: calc(100% - 711px);
+  width: calc(100% - 713px);
   color: #94a4b8;
 }
 /*.qt-product-list>li>.col-2 .icn-description{
@@ -1440,7 +1486,7 @@ Devices tab
   margin-left: 10px;
 }*/
 .qt-product-list>li>.col-3{
-  width: 233px;
+  width: 234px;
   color: #94a4b8;
   overflow: hidden;
   white-space: nowrap;
@@ -1463,13 +1509,13 @@ Devices tab
 }
 @media only screen and (min-width: 2000px){
   .qt-product-list>li>.col-1{
-    width: 243px;
+    width: 244px;
   }
   .qt-product-list>li>.col-2{
-    width: calc(100% - 891px);
+    width: calc(100% - 893px);
   }
   .qt-product-list>li>.col-3{
-    width: 293px;
+    width: 294px;
   }
   .qt-product-list>li>.col-4{
     width: 185px;
@@ -1503,13 +1549,13 @@ Devices tab
 }*/
 @media only screen and (max-width: 1700px){
   .qt-product-list>li>.col-1{
-    width: 113px;
+    width: 114px;
   }
   .qt-product-list>li>.col-2{
-    width: calc(100% - 501px);
+    width: calc(100% - 503px);
   }
   .qt-product-list>li>.col-3{
-    width: 163px;
+    width: 164px;
   }
   .qt-product-list>li>.col-4{
     width: 75px;
@@ -1917,16 +1963,16 @@ Devices tab
   cursor: pointer;
 }
 .qt-devices>li>.col-1{
-  width: calc(100% - 965px);
+  width: calc(100% - 967px);
 }
 .qt-devices>li>.col-2{
   width: 367px;
 }
 .qt-devices>li>.col-3{
-  width: 164px;
+  width: 165px;
 }
 .qt-devices>li>.col-4{
-  width: 139px;
+  width: 140px;
   color: #94a4b8;
 }
 .qt-devices>li>.col-5{
@@ -1940,44 +1986,44 @@ Devices tab
 }
 @media only screen and (min-width: 2000px){
   .qt-devices>li>.col-1{
-    width: calc(100% - 1145px);
+    width: calc(100% - 1147px);
   }
   .qt-devices>li>.col-2{
     width: 427px;
   }
   .qt-devices>li>.col-3{
-    width: 224px;
+    width: 225px;
   }
   .qt-devices>li>.col-4{
-    width: 199px;
+    width: 200px;
   }
 }
 @media only screen and (min-width: 2300px){
   .qt-devices>li>.col-1{
-    width: calc(100% - 1265px);
+    width: calc(100% - 1267px);
   }
   .qt-devices>li>.col-2{
     width: 467px;
   }
   .qt-devices>li>.col-3{
-    width: 264px;
+    width: 265px;
   }
   .qt-devices>li>.col-4{
-    width: 239px;
+    width: 240px;
   }
 }
 @media only screen and (max-width: 1800px){
   .qt-devices>li>.col-1{
-    width: calc(100% - 865px);
+    width: calc(100% - 867px);
   }
   .qt-devices>li>.col-2{
     width: 307px;
   }
   .qt-devices>li>.col-3{
-    width: 144px;
+    width: 145px;
   }
   .qt-devices>li>.col-4{
-    width: 123px;
+    width: 124px;
   }
   .qt-devices>li>.col-5{
     width: 94px;
@@ -1988,7 +2034,7 @@ Devices tab
 }
 @media only screen and (max-width: 1700px){
   .qt-devices>li>.col-1{
-    width: calc(100% - 558px);
+    width: calc(100% - 560px);
   }
   .qt-devices>li>.col-2{
     display: none;
@@ -1999,7 +2045,7 @@ Devices tab
 }
 @media only screen and (max-width: 1500px){
   .qt-devices>li>.col-1{
-    width: calc(100% - 512px);
+    width: calc(100% - 514px);
   }
   .qt-devices>li>.col-6{
     width: 151px;
@@ -2013,7 +2059,7 @@ Devices tab
 }
 @media only screen and (max-width: 1200px){
   .qt-devices>li>.col-1{
-    width: calc(100% - 464px);
+    width: calc(100% - 466px);
   }
   .qt-devices>li>.col-6{
     width: 103px;
@@ -2292,7 +2338,7 @@ Devices tab
   display: none !important;
 }
 .qt-network-scan>li>.col-1{
-  width: calc(100% - 728px);
+  width: calc(100% - 729px);
 }
 .qt-network-scan>li>.col-2{
   width: 164px;
@@ -2301,7 +2347,7 @@ Devices tab
   width: 172px;
 }
 .qt-network-scan>li>.col-4{
-  width: 175px;
+  width: 176px;
 }
 .qt-network-scan>li>.col-5{
   width: 130px;
@@ -2313,7 +2359,7 @@ Devices tab
 }
 @media only screen and (min-width: 2000px){
   .qt-network-scan>li>.col-1{
-    width: calc(100% - 1028px);
+    width: calc(100% - 1029px);
   }
   .qt-network-scan>li>.col-2{
     width: 264px;
@@ -2322,7 +2368,7 @@ Devices tab
     width: 272px;
   }
   .qt-network-scan>li>.col-4{
-    width: 275px;
+    width: 276px;
   }
   .qt-network-scan>li>.col-5{
     width: 130px;
@@ -2333,7 +2379,7 @@ Devices tab
 }
 @media only screen and (max-width: 1700px){
   .qt-network-scan>li>.col-1{
-    width: calc(100% - 608px);
+    width: calc(100% - 609px);
   }
   .qt-network-scan>li>.col-2{
     width: 124px;
@@ -2342,7 +2388,7 @@ Devices tab
     width: 132px;
   }
   .qt-network-scan>li>.col-4{
-    width: 135px;
+    width: 136px;
   }
   .qt-network-scan>li>.col-5{
     width: 130px;
@@ -2353,7 +2399,7 @@ Devices tab
 }
 @media only screen and (max-width: 1500px){
   .qt-network-scan>li>.col-1{
-    width: calc(100% - 548px);
+    width: calc(100% - 549px);
   }
   .qt-network-scan>li>.col-2{
     width: 104px;
@@ -2362,7 +2408,7 @@ Devices tab
     width: 112px;
   }
   .qt-network-scan>li>.col-4{
-    width: 115px;
+    width: 116px;
   }
   .qt-network-scan>li>.col-5{
     width: 130px;
