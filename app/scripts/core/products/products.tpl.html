@@ -1,7 +1,7 @@
 <div class="products-content">
 
   <div class="btn btn-block btn-lg btn-add-category pull-left"
-       ng-class="{'disabled': isCreateCategoryShow}"
+       custom-disabled="{{ isCreateCategoryShow }}"
        ng-click="isCreateCategoryShow = true">
     <i class="icn-sm icn-add-category"></i>
     Add Category
@@ -25,7 +25,7 @@
 
           <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
              tooltip-placement="top" tooltip-append-to-body="true" tooltip="Save"
-             ng-class="{disabled: newCategoryNameForm.$invalid}"
+             custom-disabled="{{ newCategoryNameForm.$invalid }}"
              ng-click="addCategory(newCategoryNameForm)">
             <i class="icn-sm icn-product-save"></i>
           </a>
@@ -158,8 +158,7 @@
             <div class="add-product-btn-wrapper">
               <div class="btn btn-info has-tooltip"
                    ng-click="addProduct()"
-                   ng-disabled="showCreateProduct"
-                   ng-class="{disabled: showCreateProduct}"
+                   custom-disabled="{{ showCreateProduct }}"
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
                 <i class="icn-sm icn-product-add"></i>
               </div>
@@ -183,8 +182,7 @@
           <div class="product-actions">
 
             <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
-               ng-click="saveEditCategory(editCategoryForm)" ng-disabled="disabledSaveButton"
-               ng-class="{'disabled': disabledSaveButton}"
+               ng-click="saveEditCategory(editCategoryForm)" custom-disabled="{{ disabledSaveButton }}"
                tooltip-placement="top" tooltip-append-to-body="true" tooltip="Save">
               <i class="icn-sm icn-product-save"></i>
             </a>

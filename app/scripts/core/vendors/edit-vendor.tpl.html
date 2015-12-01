@@ -381,8 +381,7 @@
         <div class="create-vendor-actions clearfix" id="finish-navs">
 
           <div class="btn btn-lg btn-info pull-right" ng-click="saveVendor(vendorForm)"
-               ng-disabled="triedToSave && (!vendorForm.$valid || savingInProcess) || showSubscribeError"
-               ng-class="{'disabled': triedToSave && (!vendorForm.$valid || savingInProcess) || showSubscribeError}">
+               custom-disabled="{{ triedToSave && (!vendorForm.$valid || savingInProcess) || showSubscribeError }}">
             {{ editVendor.id ? 'Save' : 'Create' }}
           </div>
 

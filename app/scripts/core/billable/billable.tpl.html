@@ -33,7 +33,7 @@
     <div class="tabs-container">
 
       <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
-           ng-disabled="!countTicket"
+           custom-disabled="{{ !countTicket }}"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
            modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
            mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"

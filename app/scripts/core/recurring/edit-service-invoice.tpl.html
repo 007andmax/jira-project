@@ -46,7 +46,7 @@
         <div class="pull-left text-error">{{ getValidationMessage(editServiceInvoiceForm) }}</div>
 
         <div class="btn btn-lg btn-info pull-right" ng-click="saveService(editServiceInvoiceForm)"
-             ng-class="{'disabled': disabledCreateServiceButton}">
+             custom-disabled="{{ disabledCreateServiceButton }}">
           {{ service === undefined ? 'Add' : 'Save' }}
         </div>
 

@@ -73,8 +73,7 @@
               <div class="form-actions clearfix">
 
                 <button class="btn pull-left btn-lg btn-info"
-                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
-                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                         ng-click="saveEmailTemplate(ticketTemplate, templateForm)">Save Changes</button>
 
                 <button class="btn pull-left btn-lg btn-primary"
@@ -83,8 +82,7 @@
 
                 <div class="pull-left restore-link">or
                   <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
-                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault}"
-                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault"
+                     custom-disabled="{{ !emailSettingPageDto.activeAndNotDefault[ticketTemplate].isNotDefault }}"
                      ng-click="restoreDefault(ticketTemplate)">Restore Default</button>
                 </div>
 
@@ -217,8 +215,7 @@
               <div class="form-actions clearfix">
 
                 <button class="btn pull-left btn-lg btn-info"
-                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
-                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                         ng-click="saveEmailTemplate(agentTemplate, templateForm)">Save Changes</button>
 
                 <button class="btn pull-left btn-lg btn-primary"
@@ -227,8 +224,7 @@
 
                 <div class="pull-left restore-link">or
                   <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
-                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault}"
-                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault"
+                     custom-disabled="{{ !emailSettingPageDto.activeAndNotDefault[agentTemplate].isNotDefault }}"
                      ng-click="restoreDefault(agentTemplate)">Restore Default</button>
                 </div>
 
@@ -308,8 +304,7 @@
               <div class="form-actions clearfix">
 
                 <button class="btn pull-left btn-lg btn-info"
-                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
-                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                         ng-click="saveEmailTemplate(usersTemplate, templateForm)">Save Changes</button>
 
                 <button class="btn pull-left btn-lg btn-primary"
@@ -318,8 +313,7 @@
 
                 <div class="pull-left restore-link">or
                   <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
-                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault}"
-                     disabled="!emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault"
+                     custom-disabled="{{ !emailSettingPageDto.activeAndNotDefault[usersTemplate].isNotDefault }}"
                      ng-click="restoreDefault(usersTemplate)">Restore Default</button>
                 </div>
 
@@ -401,8 +395,7 @@
               <div class="form-actions clearfix">
 
                 <button class="btn pull-left btn-lg btn-info"
-                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
-                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                         ng-click="saveEmailTemplate(companyTemplate, templateForm)">Save Changes</button>
 
                 <button class="btn pull-left btn-lg btn-primary"
@@ -411,8 +404,7 @@
 
                 <div class="pull-left restore-link">or
                   <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
-                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault}"
-                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault"
+                     custom-disabled="{{ !emailSettingPageDto.activeAndNotDefault[companyTemplate].isNotDefault }}"
                      ng-click="restoreDefault(companyTemplate)">Restore Default</button>
                 </div>
 
@@ -494,8 +486,7 @@
               <div class="form-actions clearfix">
 
                 <button class="btn pull-left btn-lg btn-info"
-                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
-                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                         ng-click="saveEmailTemplate(invoiceTemplate, templateForm)">Save Changes</button>
 
                 <button class="btn pull-left btn-lg btn-primary"
@@ -504,8 +495,7 @@
 
                 <div class="pull-left restore-link">or
                   <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
-                     ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault}"
-                     ng-disabled="!emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault"
+                     custom-disabled="{{ !emailSettingPageDto.activeAndNotDefault[invoiceTemplate].isNotDefault }}"
                      ng-click="restoreDefault(invoiceTemplate)">Restore Default</button>
                 </div>
 
@@ -655,8 +645,7 @@
               <div class="form-actions clearfix">
 
                 <button class="btn pull-left btn-lg btn-info"
-                        ng-class="{'disabled': !templateForm.$valid || templateForm.$pristine || savingInProcess}"
-                        ng-disabled="!templateForm.$valid || templateForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                         ng-click="saveEmailTemplate(vendorTemplate, templateForm)">Save Changes</button>
 
                 <button class="btn pull-left btn-lg btn-primary"
@@ -665,8 +654,7 @@
 
                 <div class="pull-left restore-link">or
                   <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
-                          ng-class="{'disabled': !emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault}"
-                          ng-disabled="!emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault"
+                          custom-disabled="{{ !emailSettingPageDto.activeAndNotDefault[vendorTemplate].isNotDefault }}"
                           ng-click="restoreDefault(vendorTemplate)">Restore Default
                   </button>
                 </div>

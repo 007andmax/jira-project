@@ -83,8 +83,7 @@
                   <input type="checkbox"
                          ng-model="bulkTicketsTags[tag.id].val"
                          ng-change="changeTagCheckbox(tag.id, bulkTicketsTags[tag.id].val)"
-                         ng-class="{'disabled': disabledTags && !bulkTicketsTags[tag.id].val}"
-                         ng-disabled="disabledTags && !bulkTicketsTags[tag.id].val"/>
+                         custom-disabled="{{ disabledTags && !bulkTicketsTags[tag.id].val }}"/>
 
                   <span class="control-indicator pull-left"
                         ng-click="disabledTags && !bulkTicketsTags[tag.id].val && showNotificationMessage()"

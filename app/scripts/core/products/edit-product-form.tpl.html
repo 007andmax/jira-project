@@ -47,7 +47,7 @@
     <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
 
     <div class="btn btn-lg btn-info pull-right" ng-click="saveChangeProduct(editProductForm)"
-         ng-disabled="disabledSaveChangeButton" ng-class="{'disabled': disabledSaveChangeButton}">
+         custom-disabled="{{ disabledSaveChangeButton }}">
       {{ product ? 'Save' : 'Add' }}
     </div>
 

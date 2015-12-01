@@ -157,16 +157,14 @@
                   <div class="add-btns pull-left" style="margin-top: 20px;">
 
                     <a href="javascript:void(0)" class="ha-edit hit-area ha-24 pull-left has-tooltip"
-                       ng-class="{'disabled': showCreateProduct || showCreateService}"
-                       ng-disabled="showCreateProduct || showCreateService"
+                       custom-disabled="{{ showCreateProduct || showCreateService }}"
                        ng-click="showCreateProductInvoice()"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
                       <i class="icn-lg icn-add-product"></i>
                     </a>
 
                     <a href="javascript:void(0)" class="ha-delete hit-area ha-24 pull-left has-tooltip"
-                       ng-class="{'disabled': showCreateProduct || showCreateService}"
-                       ng-disabled="showCreateProduct || showCreateService"
+                       custom-disabled="{{ showCreateProduct || showCreateService }}"
                        ng-click="showCreateServiceInvoice()"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Service">
                       <i class="icn-lg icn-add-service"></i>

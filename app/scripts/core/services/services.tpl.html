@@ -11,7 +11,7 @@
            aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
            tooltip="Move service(s) to..."
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
-           ng-disabled="!hasDefaultServicesChecked" ng-class="{'disabled': !hasDefaultServicesChecked}">
+           custom-disabled="{{ !hasDefaultServicesChecked }}">
         <i class="icn-sm icn-add-services"></i>
       </div>
 
@@ -52,7 +52,7 @@
           </div>
           <div class="btn btn-info btn-lg pull-right"
                ng-click="moveServices()"
-               ng-disabled="disableMoveButton" ng-click="{'disabled': disableMoveButton}">Move
+               custom-disabled="{{ disableMoveButton }}">Move
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
     <div class="add-service-btn-wrapper">
       <div class="btn btn-info has-tooltip"
            ng-click="showCreateServiceForm()"
-           ng-disabled="showCreateService" ng-class="{disabled: showCreateService}"
+           custom-disabled="{{ showCreateService }}"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
         <i class="icn-sm icn-service-add"></i>
       </div>

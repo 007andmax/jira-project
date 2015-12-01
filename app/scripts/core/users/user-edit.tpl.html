@@ -196,8 +196,7 @@
 
           <div class="form-group no-label">
             <div class="btn btn-lg btn-info pull-right"
-                 ng-disabled="!userForm.$valid || savingInProcess"
-                 ng-class="{'disabled': !userForm.$valid || savingInProcess}"
+                 custom-disabled="{{ !userForm.$valid || savingInProcess }}"
                  ng-click="save(userForm)">
               {{ isCreation ? 'Create' : 'Save Changes' }}
             </div>

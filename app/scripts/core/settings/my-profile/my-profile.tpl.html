@@ -193,7 +193,7 @@
                               <div class="form-group">
 
                                 <div class="btn btn-lg btn-info pull-left"
-                                     ng-disabled="validLink.pattern">
+                                     custom-disabled="{{ validLink.pattern }}">
                                   Add
                                 </div>
 
@@ -225,8 +225,7 @@
             <div class="form-row clearfix">
               <div class="form-group no-label full-width">
                 <button class="btn btn-lg btn-info pull-right"
-                        ng-class="{'disabled': !basicInfoForm.$valid || basicInfoForm.$pristine || savingInProcess}"
-                        ng-disabled="!basicInfoForm.$valid || basicInfoForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !basicInfoForm.$valid || basicInfoForm.$pristine || savingInProcess }}"
                         ng-click="saveBasicInfo(basicInfoForm)">Save Changes
                 </button>
               </div>
@@ -325,8 +324,7 @@
             <div class="form-row clearfix">
               <div class="form-group no-label full-width">
                 <div class="btn btn-lg btn-info pull-right"
-                     ng-class="{'disabled': !passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess}"
-                     ng-disabled="!passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess"
+                     custom-disabled="{{ !passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess }}"
                      ng-click="savePassword(passwordForm)">Save Changes
                 </div>
               </div>
@@ -412,8 +410,7 @@
 
               <div class="form-group no-label full-width">
                 <button class="btn btn-lg btn-info pull-right"
-                        ng-class="{'disabled': !phoneNumbersForm.$valid || phoneNumbersForm.$pristine || savingInProcess}"
-                        ng-disabled="!phoneNumbersForm.$valid || phoneNumbersForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !phoneNumbersForm.$valid || phoneNumbersForm.$pristine || savingInProcess }}"
                         ng-click="saveContactInfo(phoneNumbersForm)">
                   Save Changes
                 </button>
@@ -510,8 +507,7 @@
             <div class="form-row clearfix">
               <div class="form-group no-label full-width">
                 <button class="btn btn-lg btn-info pull-right"
-                        ng-class="{'disabled': !miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess}"
-                        ng-disabled="!miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess"
+                        custom-disabled="{{ !miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess }}"
                         ng-click="saveMiscInfo(miscInfoForm)">
                   Save Changes
                 </button>
@@ -560,8 +556,7 @@
 
       <div class="clearfix">
         <div class="btn btn-lg btn-info pull-right"
-             ng-class="{'disabled': emailNotificationsForm.$pristine || savingEmailInProcess}"
-             ng-disabled="emailNotificationsForm.$pristine || savingEmailInProcess"
+             custom-disabled="{{ emailNotificationsForm.$pristine || savingEmailInProcess }}"
              ng-click="saveEmailNotifications(emailNotificationsForm)">Save Changes
         </div>
       </div>

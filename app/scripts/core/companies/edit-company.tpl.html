@@ -562,8 +562,7 @@
                   </div>
 
                   <div class="btn btn-success pull-right" ng-click="saveTax()"
-                       ng-disabled="isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')"
-                       ng-class="{disabled: isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType')}">
+                       custom-disabled="{{ isShowingErrors(companyForm, 'currentlyTaxRate') || isShowingErrors(companyForm, 'currentlyTaxType') }}">
                     <i class="icn-sm small-icn-tick"></i>
                   </div>
 
@@ -598,7 +597,7 @@
 
                   <div class="btn btn-success pull-right"
                        ng-click="saveNewTax(newTaxRateForm)"
-                       ng-class="{disabled: newTaxRateForm.invalid || !newTaxRate.code || !newTaxRate.rate}">
+                       custom-disabled="{{ newTaxRateForm.invalid || !newTaxRate.code || !newTaxRate.rate }}">
                     <i class="icn-sm small-icn-tick"></i>
                   </div>
 
@@ -656,8 +655,7 @@
 
           <div class="btn btn-lg btn-info pull-right"
                ng-click="save(companyForm)"
-               ng-disabled="triedToSave && (!companyForm.$valid || savingInProcess)"
-               ng-class="{'disabled': triedToSave && (!companyForm.$valid || savingInProcess)}">
+               custom-disabled="{{ triedToSave && (!companyForm.$valid || savingInProcess) }}">
             Create
           </div>
 

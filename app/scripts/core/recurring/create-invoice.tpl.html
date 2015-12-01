@@ -51,7 +51,7 @@
 
         <div class="btn btn-lg btn-info pull-right"
              ng-click="createRecurringInvoice(createInvoiceForm)"
-             ng-disabled="disabledCreateButton" ng-class="{'disabled': disabledCreateButton}">
+             custom-disabled="{{ disabledCreateButton }}">
           Create
         </div>
 

@@ -132,8 +132,7 @@
             <div class="form-row clearfix">
               <div class="form-group no-label full-width">
                 <div class="btn btn-lg btn-info pull-right"
-                     ng-class="{'disabled': basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess}"
-                     ng-disabled="basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess"
+                     custom-disabled="{{ basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess }}"
                      ng-click="saveBasicInfo(basicInfoForm)">Save Changes
                 </div>
               </div>
@@ -201,8 +200,7 @@
       </div>
       <div class="clearfix">
         <button class="btn btn-lg btn-info pull-right"
-                ng-class="{'disabled': businessDaysHoursForm.$pristine || savingDaysHoursInProcess}"
-                ng-disabled="businessDaysHoursForm.$pristine || savingDaysHoursInProcess"
+                custom-disabled="{{ businessDaysHoursForm.$pristine || savingDaysHoursInProcess }}"
                 ng-click="saveBusinessDaysHours(businessDaysHoursForm)">Save Changes
         </button>
       </div>
@@ -353,8 +351,7 @@
               <div class="form-row clearfix">
                 <div class="form-group no-label full-width">
                   <button class="btn btn-lg btn-info pull-right"
-                          ng-class="{'disabled': addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess}"
-                          ng-disabled="addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess"
+                          custom-disabled="{{ addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess }}"
                           ng-click="saveContactInfo(addressesWrapForm)">Save Changes
                   </button>
                 </div>
@@ -725,8 +722,7 @@
 
       <div class="clearfix">
         <div class="btn btn-lg btn-info pull-right"
-             ng-class="{'disabled': notificationForm.$pristine || savingNotifiInProcess}"
-             ng-disabled="notificationForm.$pristine || savingNotifiInProcess"
+             custom-disabled="{{ notificationForm.$pristine || savingNotifiInProcess }}"
              ng-click="saveNotificationDaysHours(notificationForm)">Save Changes
         </div>
       </div>
