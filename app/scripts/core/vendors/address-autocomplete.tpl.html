@@ -1,23 +1,32 @@
-<div class="row-wrapper clearfix" ng-form="addressForm">
-  <div class="form-group form-group-full"
-       ng-class="{error: (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
-    <label>address</label>
+<div class="form-row clearfix" ng-form="addressForm">
 
-    <div ng-messages="addressForm.address.$error" ng-if="addressForm.address.$dirty || showValidationMessages">
-      <div class="qt-error-msg error-msg" ng-message="required">Please enter the vendor’s address.</div>
-      <div class="qt-error-msg error-msg" ng-message="correct">
+  <div class="form-group address-field"
+       ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
+
+    <label class="control-label"
+           ng-class="{'non-visible-label': !(addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
+      Address
+    </label>
+
+    <div class="error-vendor-form-message" ng-messages="addressForm.address.$error"
+         ng-class="{'hide': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
+      <label class="control-label" ng-message="required">Please enter the vendor’s address.</label>
+      <label class="control-label" ng-message="correct">
         Please select address from atocomplete results or set marker on map
-      </div>
+      </label>
     </div>
-    <input type="text" class="form-control" popover="Enter the vendor's full address."
-           name="address"
+
+    <input class="form-control" type="text" popover="Enter the vendor's full address." name="address"
            popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover required="true"
            make-dirty-on-blur
            ng-model="model.address">
   </div>
-</div>
-<div class="row-wrapper  locmap clearfix">
-  <div class="form-group full">
-    <div map style="width: 100%; height: 224px;"></div>
+
+  <div class="form-group zipcode-field">
+    <label class="control-label">Zip</label>
+    <input class="form-control" type="text" ng-model="model.postalCode">
   </div>
+
+  <div class="map-container" map style="width: 100%; height: 224px;"></div>
+
 </div>

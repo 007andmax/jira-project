@@ -271,4 +271,14 @@
   background-size: cover;
 }
 
+/*create/edit vandor*/
+.create-vendor-content .non-visible-label{
+  opacity: 0;
+}
+
+.create-vendor-content .error-vendor-form-message{
+  position: absolute;
+  top: 0;
+}
+
 
