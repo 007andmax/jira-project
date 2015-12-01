@@ -46,7 +46,11 @@
 
           $scope.filterUpdateUser = function (item) {
 
-            if (item.id === $scope.currentUser.id || item.id === $scope.ticketDetails.assignedUser.id) {
+            var isCurrentUser = item.id === $scope.currentUser.id,
+              isAssignedUser = item.id === $scope.ticketDetails.assignedUser.id,
+              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id;
+
+            if (isCurrentUser || isAssignedUser || isCreatedUser) {
               return false;
             }
 
