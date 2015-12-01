@@ -61,8 +61,7 @@
       <div class="validation-msg pull-left">{{ validationMessage() }}</div>
 
       <div class="btn btn-lg btn-info pull-right"
-           ng-disabled="updateTicketService.$invalid || updateTicketService.$pristine || serviceIsSaving"
-           ng-class="{'disabled': updateTicketService.$invalid || updateTicketService.$pristine || serviceIsSaving}"
+           custom-disabled="{{ updateTicketService.$invalid || updateTicketService.$pristine || serviceIsSaving }}"
            ng-click="saveUpdateService(updateTicketService)">
         Save Changes
       </div>

@@ -6,8 +6,7 @@
         <label class="control checkbox">
 
           <input type="checkbox" ng-model="ticketTags[tag.id]" name="ticketTags"
-                 ng-class="{'disabled': disabledTags && !ticketTags[tag.id]}"
-                 ng-disabled="disabledTags && !ticketTags[tag.id]">
+                 custom-disabled="{{ disabledTags && !ticketTags[tag.id] }}">
 
           <span class="control-indicator pull-left"
                 ng-click="disabledTags && !ticketTags[tag.id] && showNotificationMessage()"></span>
@@ -21,7 +20,7 @@
 
   <li class="apply">
     <div class="btn btn-lg btn-block btn-info"
-         ng-disabled="labelsForm.$pristine || disabledApplyButton" ng-click="applyTagsToTicket()">
+         custom-disabled="{{ labelsForm.$pristine || disabledApplyButton }}" ng-click="applyTagsToTicket()">
       Apply
     </div>
   </li>
