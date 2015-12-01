@@ -19,12 +19,11 @@
             </div>
 
           <div class="label-add-btn">
-            <a href="javascript:void(0)"
-               class="btn input-btn-cr btn-success  btn-add-more pull-left"
-               ng-class="{'disabled': !userToAssign.id}" ng-disabled="!userToAssign.id"
+            <div class="btn input-btn-cr btn-success  btn-add-more pull-left"
+               custom-disabled="{{ !(userToAssign && userToAssign.id) || disabledAssignToButton }}"
                ng-click="assignUserToTicket()">
               <i class="icn-sm small-icn-tick"></i>
-            </a>
+            </div>
           </div>
 
         </div>

@@ -242,6 +242,8 @@
 
           $scope.saveTicketUpdate = function () {
 
+            $scope.isSavingUpdate = true;
+
             var currentOpenTab = $scope.currentOpenTab,
               ticketUpdateToSend = {
                 type: currentOpenTab,
@@ -289,6 +291,8 @@
             }
 
             TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
+
+              $scope.isSavingUpdate = false;
 
               switch (ticketUpdateToSend.type) {
 
