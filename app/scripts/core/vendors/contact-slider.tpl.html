@@ -1,31 +1,30 @@
-<div class="user-vendor" ng-class="{active: $index === 0, nactive: $index !== 0}"
-     ng-repeat="contact in contacts | orderBy: contactsOrder" cs-slide ng-show="$index <= 1"
-     ng-init="initializeContact($index)">
-  <div class="clearfix name-wrpper">
-    <a herf="" class="pull-left thumb avatar m-r" ng-click="showNext(contact.id)">
-      <img ng-src="{{ getContactAvatarUrl(contact) }}" alt="..." class="img-circle no-avatar">
-    </a>
+<div class="contact-slider">
 
-    <div class="user-inf pull-left user-finfo" style="display:none" contact-hide-info>
-      <h4 class="name">{{ getUserName(contact) }}</h4>
+  <div class="vendor-contact" ng-class="{active: $index === 0, nactive: $index !== 0}"
+       ng-repeat="contact in contacts | orderBy: contactsOrder" cs-slide ng-show="$index <= 1"
+       ng-init="initializeContact($index)">
 
-      <div class="status pull-left"><span
-        class="label label-white label-ticket-number">{{ contact.designation }}</span>
+    <div class="user-info">
+
+      <div class="avatar" ng-click="showNext(contact.id)">
+        <img ng-src="{{ getContactAvatarUrl(contact) }}" alt="..." class="img-circle avatar-50">
       </div>
 
-
-    </div>
-  </div>
-  <div class="user-finfo" style="display:none" contact-hide-info>
-    <div class="clearfix">
-      <div class="ci number clearfix">
-        <span class="icn"
-              ng-class="{'icn-iphone': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'MOBILE',
-                           'icn-fax-machine': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'FAX',
-                           'icn-telephone': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'OFFICE'}"></span>
-        <span class="txt"> {{ getPhoneWithLowestNumber(contact.phoneNumbers).number }}</span>
+      <div class="name-designation" style="display:none" contact-hide-info>
+        <h4>{{ getUserName(contact) }}</h4>
+        <span class="label label-light">{{ contact.designation }}</span>
       </div>
 
     </div>
+
+    <div class="user-contact-no" style="display:none" contact-hide-info>
+      <i class="icn-sm"
+         ng-class="{'icn-iphone': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'MOBILE',
+                           'icn-user-fax': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'FAX',
+                           'icn-user-phone': getPhoneWithLowestNumber(contact.phoneNumbers).typeNumber === 'OFFICE'}"></i>
+      {{ getPhoneWithLowestNumber(contact.phoneNumbers).number }}
+    </div>
+
   </div>
+
 </div>

@@ -261,3 +261,14 @@
 .default-tax-list>li>.helping-additional-class>.col-2 .form-control {
   width: 197px;
 }
+
+/*vendors page*/
+.popover.vendor-popover {
+  /*width: 310px !important;*/
+  margin-left: 145px !important;
+}
+.vendor-cover-area {
+  background-size: cover;
+}
+
+

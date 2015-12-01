@@ -1,9 +1,10 @@
-<ul class="products-list">
-
-  <li class="clearfix" ng-repeat="associationsCompany in vendor.companyAssociations">
-    <div class="name">{{ associationsCompany.company.name }}</div>
-    <div class="clearfix"></div>
-    <div class="art clearfix">{{ associationsCompany.company.primaryAddress.address }}</div>
-  </li>
-
-</ul>
+<div class="panel-body nano-content">
+  <div class="assc-companies-list">
+    <ul>
+      <li ng-repeat="associationsCompany in vendor.companyAssociations">
+        <div class="vendor-company-name">{{ associationsCompany.company.name }}</div>
+        <div class="vendor-company-address">{{ associationsCompany.company.addresses.[0].address }}</div>
+      </li>
+    </ul>
+  </div>
+</div>

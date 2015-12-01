@@ -1,10 +1,9 @@
-<div class="content-wrapper">
-  <div class="content-body vendors">
+<div class="vendors-content">
+  <div class="vendors-list clearfix">
 
-
-    <div class="companies-list vendors-list  clearfix">
-      <div ng-repeat="vendor in vendors | filter : vendorsFilter | orderBy: 'name'"
-           ng-include="'/html/scripts/core/vendors/vendor.tpl.html'"></div>
+    <div class="vendor-card" ng-repeat="vendor in vendors | filter : vendorsFilter | orderBy: 'name'"
+         ng-include="'/html/scripts/core/vendors/vendor.tpl.html'">
     </div>
+
   </div>
 </div>

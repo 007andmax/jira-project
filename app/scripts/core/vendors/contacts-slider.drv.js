@@ -65,14 +65,14 @@
                 nextSlide = $(slides[1]),
                 curSlideHideData = curSlide.find('[contact-hide-info]'),
                 nextSlideHideData = nextSlide.find('[contact-hide-info]'),
-                right = 22;
+                right = slides.width() - 58;
 
               curSlide.fadeOut(0);
               curSlideHideData.fadeOut(0);
               nextSlide.addClass("un");
 
               nextSlide.animate({right: right}, {
-                duration: 100,
+                duration: 200,
                 complete: function () {
 
                   setTimeout(function () {

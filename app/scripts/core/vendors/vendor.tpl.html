@@ -1,123 +1,146 @@
-<div class="vendor-company company vendors clearfix"
-     ng-class="{
-      product: shownSection === 'products',
-      'company-profile loc': shownSection === 'more',
-     }"
-     ng-controller="quicktech.core.vendors.vendorCtrl">
-  <a href="javascript:void(0)" class="close-btn close " ng-show="shownSection"
-     ng-click="setShownSection()">
-    <span aria-hidden="true" class="icn-close-modal"></span>
+<div ng-controller="quicktech.core.vendors.vendorCtrl" vendor-card>
+
+  <a href="javascript:void(0)" class="btn close-btn">
+    <i class="icn-sm icn-remove-token"></i>
   </a>
 
-  <div class="over-wrapper">
-    <div class="company-wrapper">
-      <div class="company-cover-wrapper" style="background-image:url('images/company/cover.png')">
-        <div class="overlay"></div>
-        <div class="archive-btn thide " ng-hide="(user.role!=='SUPER_TECH_ADMIN') || shownSection">
-          <a class="black-btn " href="javascript:void(0)" ng-click="archiveVendor()"
-             tooltip="Archive Vendor" tooltip-placement="top">
-            <span class="icn archive-company"></span></a>
-        </div>
-        <div class="company-info">
-          <h3 class="name thide " ng-hide="shownSection">{{ vendor.name }}</h3>
+  <div class="vendor-cover-area" style="background-image:url('images/company/cover.png')">
 
-          <div class="ac-start-wrapper clearfix">
-            <div class="product pull-left" ng-click="setShownSection('products')" ng-hide="shownSection === 'more'">
-              <span class="icn product-icn"></span>
-              <span class="bold">Products</span> {{ vendor.products.length }}
-            </div>
+    <div class="product-name-txt">Products {{ vendor.products.length }}</div>
 
-            <div class="dot-sep pull-left thide " ng-hide="shownSection"></div>
-
-            <a href="javascript:void(0)" class="icn-wrapper pull-left thide "
-               ng-hide="shownSection" show-popover>
-              <span class="icn company-detail"></span>
-            </a>
-            <a href="javascript:void(0)" class="tp-hide pull-left icn-wrapper thide "
-               ng-hide="shownSection" tooltip="Change Cover" tooltip-placement="top">
-              <span class="icn camera"></span></a>
-
-            <a href="javascript:void(0)" class="icn-wrapper tp-hide pull-left thide "
-               ng-hide="shownSection" tooltip="Edit info" tooltip-placement="top"
-               ui-sref="editVendor( { vendorId: vendor.id } )">
-              <span class="icn icn-edit-tag"></span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="company-information clearfix thide " ng-hide="shownSection">
-        <div class="users-list" contacts-slider ng-model="vendor.contacts">
-
-        </div>
-        <div class="ci location clearfix">
-          <span class="icn icn-sb-location"></span>
-          <span class="txt">{{ vendor.primaryAddress.address }}</span>
-        </div>
-        <div class="clearfix company-actions">
-          <a href="javascript:void(0)" class="btn btn-scooter btn-update pull-left"
-             style="margin-right: 10px;" ng-click="sendMail()" tooltip="Send Email" tooltip-placement="top">
-            <div class="icn-white-mail"></div>
-          </a>
-
-        </div>
-
-        <a href="javascript:void(0)" class="icn-reset-user more tp-hide" ng-click="setShownSection('more')" tooltip="More" tooltip-placement="top"></a>
-      </div>
+    <div class="btn has-tooltip" ng-click="archiveVendor()" archive-vendor-button
+         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Vendor">
+      <i class="icn-sm icn-archive-company"></i>
     </div>
 
-    <div class="company-profile-wrapper" ng-show="shownSection === 'more'">
-      <div class="primary" ng-init="accordionStatus.openClients = true">
-        <accordion close-others="true">
-          <accordion-group is-open="accordionStatus.openLocations" is-disabled="accordionStatus.openLocations"
-                           ng-class="{active: accordionStatus.openLocations}">
-            <accordion-heading ng-class="{active: accordionStatus.openLocations}">
-              <a class="collapsed" style="padding:0px;" data-toggle="collapse" href="javascript:void(0)">
-                Site/Location(s) <span class="total">{{ vendor.addresses.length }}</span>
-                <span class="expand icn" ng-show="!accordionStatus.openLocations"></span>
-              </a>
+    <div class="name-rating">
 
-              <div class="arrows" ng-show="accordionStatus.openLocations" style="display: block;">
-                <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
-                   ng-class="{disabled: locationIndex <= 0}"
-                   ng-click="changeCurrentLocation(locationIndex - 1)"></button>
-                <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
-                   ng-click="changeCurrentLocation(locationIndex + 1)"
-                   ng-class="{disabled: locationIndex >= vendor.addresses.length - 1 }"></button>
-
-              </div>
-            </accordion-heading>
-
-            <div class="location-slider" ng-include="'/html/scripts/common/templates/location-slider.tpl.html'"></div>
-
-          </accordion-group>
-
-          <accordion-group is-open="accordionStatus.openClients" is-disabled="accordionStatus.openClients"
-                           ng-class="{'active': accordionStatus.openClients}">
-            <accordion-heading ng-class="{'active': accordionStatus.openClients}">
-              <a class="collapsed" style="padding:0px;" data-toggle="collapse" href="javascript:void(0)">
-                Assc. Client Companies <span class="total">{{ vendor.companyAssociations.length }}</span>
-                <span ng-show="!accordionStatus.openClients" class="expand icn"></span>
-              </a>
-            </accordion-heading>
-
-            <div class="products clearfix scroll-pane" qt-scroll-pane
-                 ng-include="'/html/scripts/core/vendors/company-associations-list.tpl.html'">
-            </div>
-          </accordion-group>
-        </accordion>
-
+      <div class="vendor-name">
+        {{ vendor.name }}
       </div>
+
+      <div class="vendor-total-products" vendor-total-products>
+        <span>Products {{ vendor.products.length }}
+          <i class="icn-sm icn-caret-right"></i>
+        </span>
+      </div>
+
+      <i class="dot-sep"></i>
+
+      <a href="javascript:void(0)" class="hit-area ha-14-16" show-popover>
+        <i class="icn-sm icn-description-white"></i>
+      </a>
+
+      <!--<div class="dropdown pull-left">-->
+      <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip" data-toggle="dropdown" aria-expanded="false" data-placement="top" data-container="body" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" title="" data-original-title="add cover photo"><i class="icn-md icn-cover"></i></a>-->
+      <!--<ul class="dropdown-menu">-->
+      <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Upload Photo...</a></li>-->
+      <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Restore Default Photo...</a></li>-->
+      <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Reposition...</a></li>-->
+      <!--</ul>-->
+      <!--</div>-->
+
+      <a href="javascript:void(0)" class="hit-area has-tooltip"
+         ui-sref="editVendor( { vendorId: vendor.id } )"
+         tooltip-placement="top" tooltip="Edit">
+        <i class="icn-md icn-edit-tag"></i>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="vendor-bdr"></div>
+
+  <div class="vendor-contacts">
+
+    <div contacts-slider ng-model="vendor.contacts"></div>
+
+    <div class="user-location">
+      <i class="icn-sm icn-sb-location"></i>
+      <span>{{ vendor.primaryAddress.address }}</span>
     </div>
 
+    <div class="user-actions">
 
-    <div class="product-wrapper" ng-show="shownSection === 'products'">
-      <div class="products clearfix scroll-pane" qt-scroll-pane
-           ng-include="'/html/scripts/core/vendors/product-list.tpl.html'">
+      <div class="btn btn-info has-tooltip" ng-click="sendMail()"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">
+        <i class="icn-sm icn-email-white"></i>
       </div>
+
+      <a href="javascript:void(0)" class="vendor-more-btn hit-area ha-22-38 has-tooltip pull-right"
+         tooltip-placement="top" tooltip="More">
+        <i class="icn-more icn-sm"></i>
+      </a>
+
     </div>
 
   </div>
 
+  <div class="vendor-product-list"
+       ng-include="'/html/scripts/core/vendors/product-list.tpl.html'">
+  </div>
 
+  <div class="vendor-more-wrapper">
+
+    <div class="panel-group" ng-init="currentCollapse = 'COMPANY-ASSOCIATION'">
+
+      <div class="panel panel-default locations-panel" company-location-collapse>
+        <div class="panel-heading">
+
+          <h4 class="panel-title site-locations">
+
+            <a ng-class="{'collapsed': currentCollapse !== 'COMPANY-LOCATION'}"
+               href="javascript:void(0)" ng-click="currentCollapse = 'COMPANY-LOCATION'">
+
+              Site/Locations <span class="text-muted">{{ vendor.addresses.length }}</span>
+              <i class="icn-sm icn-expand pull-right"></i>
+
+              <span class="slider-arrows">
+
+                <i class="icn-sm icn-arrow-previous"
+                   ng-class="{disabled: locationIndex <= 0}"
+                   ng-click="changeCurrentLocation(locationIndex - 1)"></i>
+
+                <i class="icn-sm icn-arrow-next"
+                   ng-click="changeCurrentLocation(locationIndex + 1)"
+                   ng-class="{disabled: locationIndex >= vendor.addresses.length - 1 }"></i>
+
+              </span>
+
+            </a>
+
+          </h4>
+        </div>
+
+        <div class="panel-collapse collapse" collapse="currentCollapse !== 'COMPANY-LOCATION'">
+          <div class="panel-body">
+
+            <div class="location-slider"
+                 ng-include="'/html/scripts/common/templates/location-slider.tpl.html'"></div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="panel panel-default" company-association-list>
+
+        <div class="panel-heading">
+          <h4 class="panel-title assc-client-companies">
+            <a ng-class="{'collapsed': currentCollapse !== 'COMPANY-ASSOCIATION'}"
+               href="javascript:void(0)" ng-click="currentCollapse = 'COMPANY-ASSOCIATION'">
+              Assc. Client Companies
+              <span class="text-muted">{{ vendor.companyAssociations.length }}</span>
+              <i class="icn-sm icn-expand pull-right"></i>
+            </a>
+          </h4>
+        </div>
+
+        <div class="panel-collapse collapse" collapse="currentCollapse !== 'COMPANY-ASSOCIATION'"
+             ng-include="'/html/scripts/core/vendors/company-associations-list.tpl.html'"></div>
+
+      </div>
+
+    </div>
+  </div>
 </div>

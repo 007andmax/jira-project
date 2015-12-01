@@ -36,6 +36,11 @@ a.hit-area i{
   top: 0; left: 0; right: 0; bottom: 0;
 }
 
+a.ha-10-8{
+  width: 10px;
+  height: 8px;
+}
+
 a.ha-12{
   width: 12px;
   height: 12px;
@@ -166,7 +171,9 @@ a.ha-24{
 .icn-user{
   background-position: -3159px 0;
 }
-
+.icn-url{
+  background-position: -1665px -206px;
+}
 .icn-add-product {
   background-position: -237px 0;
 }
@@ -845,7 +852,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 .icn-tab-devices {
   background-position: -3095px 0;
 }
-/*li:hover .icn-tab-devices,*/ a:hover > .icn-tab-devices, a:active > .icn-tab-devices, li.active > a > .icn-tab-devices {
+/*li:hover .icn-tab-devices,*/ a:hover > .icn-tab-devices, a:active > .icn-tab-devices, li.active > a > .icn-tab-devices, .icn-tab-devices.active {
                                  background-position: -3063px 0;
                                }
 
@@ -872,7 +879,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 .icn-caret-gray {
   background-position: -479px 4px;
 }
-:hover > .icn-caret-gray, :active > .icn-caret-gray, :focus:hover > .icn-caret-gray, :focus:active > .icn-caret-gray, :hover:active > .icn-caret-gray, .active > .icn-caret-gray, .open .icn-caret-gray, .open > .btn:hover .icn-caret-gray {
+:hover > .icn-caret-gray, :active > .icn-caret-gray, :focus:hover > .icn-caret-gray, :focus:active > .icn-caret-gray, :hover:active > .icn-caret-gray, .active > .icn-caret-gray, .open > .btn:hover .icn-caret-gray {
   background-position: -463px 4px;
 }
 .icn-caret-right {
@@ -1123,6 +1130,10 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 
 .icn-add-service {
   background-position: -269px 0;
+}
+
+.icn-add-service-white {
+  background-position: -1164px -206px;
 }
 
 
@@ -1613,7 +1624,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   width: 6px;
   height: 4px;
 }
-:hover > .icn-sort-asc, :active > .icn-sort-asc, :focus:hover > .icn-sort-asc, :focus:active > .icn-sort-asc, :hover:active > .icn-sort-asc, .active > .icn-sort-asc, .open > .icn-sort-asc, .open .icn-sort-asc{
+:hover > .icn-sort-asc, :active > .icn-sort-asc, :focus:hover > .icn-sort-asc, :focus:active > .icn-sort-asc, :hover:active > .icn-sort-asc, .active > .icn-sort-asc, .open > .icn-sort-asc{
   background-position: -2012px -206px;
 }
 .icn-sort-des{
@@ -1621,7 +1632,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   width: 6px;
   height: 4px;
 }
-:hover > .icn-sort-des, :active > .icn-sort-des, :focus:hover > .icn-sort-des, :focus:active > .icn-sort-des, :hover:active > .icn-sort-des, .active > .icn-sort-des, .open > .icn-sort-des, .open .icn-sort-des{
+:hover > .icn-sort-des, :active > .icn-sort-des, :focus:hover > .icn-sort-des, :focus:active > .icn-sort-des, :hover:active > .icn-sort-des, .active > .icn-sort-des, .open > .icn-sort-des{
   background-position: -466px 0;
 }
 /***/
@@ -1666,7 +1677,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   background-position: -1091px -206px;
 }
 .icn-arrow-next.disabled, .disabled > .icn-arrow-next{
-  background-position: -1057px -206px;
+  background-position: -1057px -206px !important;
 }
 
 .icn-arrow-previous{
@@ -1676,7 +1687,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   background-position: -1039px -206px;
 }
 .icn-arrow-previous.disabled, .disabled > .icn-arrow-previous{
-  background-position: -1005px -206px;
+  background-position: -1005px -206px !important;
 }
 /***/
 .icn-modify-logon{

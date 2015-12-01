@@ -11,10 +11,6 @@
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
 
-        $scope.setShownSection = function (val) {
-          $scope.shownSection = val;
-        };
-
         //todo get contacts from db
 
         $scope.changeCurrentLocation = function (index) {

@@ -1,27 +1,26 @@
-<div class="location active" animation-change-location ng-model="currentLocation">
-  <div class="panel-heading">Billing Address</div>
-  <div class="billing-address">
-    <p class="post-address">{{ currentLocation.address }}</p>
+<div class="location-wrapper active"  animation-change-location ng-model="currentLocation">
 
-    <div class="site-ref dropdown">
-      <div class="btn-location" data-toggle="popover-location-right" data-container="body"
-           data-placement="bottom" data-original-title="" title="">
-        <span class="icn-sb-location pull-left"></span>
-        Site Ref. “TCL 01”
-      </div>
-    </div>
-    <div class="about-company">
-      <div class="company"><span class="icn time-zone"></span>
-        GMT/{{ currentLocation.locale.description.match(gmtPattern)[0] }}
-        <span class="dot-sep"></span> {{ currentLocation.locale.description.match(hourPattern)[0] }} hour
-      </div>
-      <div class="company" ng-repeat="phoneNumber in currentLocation.phoneNumbers | orderBy: 'priority'">
-                      <span class="icn"
-                            ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
-                           'icn-fax-machine': phoneNumber.typeNumber === 'FAX',
-                           'icn-telephone': phoneNumber.typeNumber === 'OFFICE'}"></span>
-        {{ phoneNumber.number }}
-      </div>
-    </div>
+  <div class="address-heading">Billing Address</div>
+
+  <div class="address-txt">{{ currentLocation.address }}</div>
+
+  <div class="location-map">
+    <span data-toggle="location-popover">
+      <i class="icn-sm icn-sb-location"></i> Site Ref. “TCL 01”
+    </span>
   </div>
+
+  <div class="location-timzone"><i class="icn-sm icn-timezone"></i>
+    GMT/{{ currentLocation.locale.description.match(gmtPattern)[0] }}
+    <span class="dot-sep"></span>
+    {{ currentLocation.locale.description.match(hourPattern)[0] }} hour
+  </div>
+
+  <div class="location-contact-no" ng-repeat="phoneNumber in currentLocation.phoneNumbers | orderBy: 'priority'">
+    <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                           'icn-user-fax': phoneNumber.typeNumber === 'FAX',
+                           'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+    {{ phoneNumber.number }}
+  </div>
+
 </div>

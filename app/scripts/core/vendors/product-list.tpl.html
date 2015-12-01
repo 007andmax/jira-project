@@ -1,11 +1,18 @@
-<ul class="products-list">
+<ul class="custom-scroll" style="max-height: 346px;">
 
-  <li class="clearfix" ng-repeat="product in vendor.products">
-    <div class="name"><span class="product-name">{{ product.name }}</span>
-              <span class="icns icn-description" popover-placement="bottom" popover="{{ product.description }}" popover-trigger="mouseenter" popover-class="product-list-popover" popover-append-to-body="true"></span>
-              <span class="price">{{ product.sale | currency: '$': 2 }}</span>
+  <li ng-repeat="product in vendor.products">
+
+    <div class="vp-price">{{ product.sale | currency: '$': 0 }}</div>
+
+    <div class="vp-name"><span>{{ product.name }}</span>
+      <a href="javascript:void(0)" class="hit-area ha-desc pull-left"
+         popover-placement="bottom" popover="{{ product.description }}"
+         popover-trigger="mouseenter" popover-class="description-popover" popover-append-to-body="true">
+        <i class="icn-sm icn-description"></i>
+      </a>
     </div>
-    <div class="clearfix"></div>
-    <div class="art clearfix">{{ product.category.name }} #{{ product.code }}</div>
+
+    <div class="vp-code">{{ product.category.name }} #{{ product.code }}</div>
   </li>
+
 </ul>
