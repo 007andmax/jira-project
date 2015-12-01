@@ -89,7 +89,7 @@
 
     <div class="company-cover-area" style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
 
-      <div class="btn btn-archive has-tooltip" stop-propagation="click"
+      <div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"
            ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
         <i class="icn-sm icn-archive-company"></i>
