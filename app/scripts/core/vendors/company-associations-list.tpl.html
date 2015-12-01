@@ -1,9 +1,12 @@
-<div class="panel-body nano-content">
+<div class="panel-body">
   <div class="assc-companies-list">
-    <ul>
+    <ul style="height: 345px;">
       <li ng-repeat="associationsCompany in vendor.companyAssociations">
         <div class="vendor-company-name">{{ associationsCompany.company.name }}</div>
-        <div class="vendor-company-address">{{ associationsCompany.company.addresses.[0].address }}</div>
+        <div class="vendor-company-address"
+             ng-if="associationsCompany.company.addresses && associationsCompany.company.addresses[0]">
+          {{ associationsCompany.company.addresses[0].address }}
+        </div>
       </li>
     </ul>
   </div>
