@@ -126,7 +126,7 @@ module.exports = function (grunt) {
           }
         ]
       },
-      beta3Server: {
+      devServer: {
         proxies: [
           {
             context: '/html',
@@ -144,8 +144,8 @@ module.exports = function (grunt) {
               '!/dist',
               '!/bower_components'
             ],
-            host: 'beta3.quicktech.com',
-            port: 80,
+            host: '192.168.1.43',
+            port: 8000,
             https: false,
             xforward: false,
             headers: {
@@ -172,8 +172,8 @@ module.exports = function (grunt) {
               '!/dist',
               '!/bower_components'
             ],
-            host: '192.168.1.46',
-            port: 8081,
+            host: '192.168.1.52',
+            port: 8080,
             https: false,
             xforward: false,
             headers: {
@@ -182,7 +182,7 @@ module.exports = function (grunt) {
           }
         ]
       },
-      beta3DistServer: {
+      devDistServer: {
         proxies: [
           {
             context: '/html',
@@ -200,8 +200,8 @@ module.exports = function (grunt) {
               '!/dist',
               '!/bower_components'
             ],
-            host: 'beta3.quicktech.com',
-            port: 80,
+            host: '192.168.1.43',
+            port: 8000,
             https: false,
             xforward: false,
             headers: {
@@ -681,7 +681,7 @@ module.exports = function (grunt) {
       'clean:server',
       'includeSource',
       'wiredep',
-      'configureProxies:beta3Server',
+      'configureProxies:devServer',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
@@ -713,7 +713,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'build',
-      'configureProxies:beta3DistServer',
+      'configureProxies:devDistServer',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
