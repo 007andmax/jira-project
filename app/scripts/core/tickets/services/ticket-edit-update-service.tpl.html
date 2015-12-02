@@ -28,7 +28,7 @@
         <div class="edit-col2" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}">
 
           <input type="text" class="form-control" placeholder="Minutes"
-                 name="serviceTime" ng-required="true"
+                 name="serviceTime" hard-reset-required="true"
                  ng-model="editService.quantity " ng-maxlength="10"
                  hard-reset-pattern="numberPattern"/>
         </div>

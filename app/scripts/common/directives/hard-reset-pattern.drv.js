@@ -9,7 +9,8 @@
       link: function (scope, element, attr, ctrl) {
 
         var pattern = scope.$eval(attr.hardResetPattern),
-          value = ctrl.$viewValue || '';
+          value = ctrl.$viewValue || '',
+          isRequired = attr.hardResetRequired;
 
         element.on('input', checkAndFix);
         element.on('change', checkAndFix);
@@ -27,6 +28,10 @@
             element.val(value);
           } else {
             value = newValue;
+          }
+
+          if(isRequired){
+            ctrl.$setValidity("required", !!(value && value.length > 0));
           }
         }
       }

@@ -25,7 +25,7 @@
         <div class="edit-col3" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">
           <input type="text" class="form-control" placeholder="Qty"
                  ng-model="editProduct.quantity" ng-maxlength="10"
-                 name="productQty" ng-required="true" ng-change="controlProductQty(updateTicketProduct)"
+                 name="productQty" hard-reset-required="true" ng-change="controlProductQty(updateTicketProduct)"
                  hard-reset-pattern="numberPattern">
         </div>
 

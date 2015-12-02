@@ -29,7 +29,7 @@
       <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
         <input type="text" class="form-control" placeholder="Qty"
-               name="productQty" ng-required="true" ng-change="controlProductQty(addProductForm)"
+               name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
                ng-model="productExpense.quantity" ng-maxlength="10"
                hard-reset-pattern="numberPattern"/>
       </div>

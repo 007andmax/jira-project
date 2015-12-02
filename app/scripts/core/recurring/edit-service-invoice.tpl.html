@@ -22,7 +22,7 @@
         <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
 
           <input type="text" class="form-control" placeholder="Hr(s) : Min(s)"
-                 ng-model="editService.quantity" ng-required="true" name="editServiceQuantity"
+                 ng-model="editService.quantity" hard-reset-required="true" name="editServiceQuantity"
                  hard-reset-pattern="numberPattern">
         </div>
 
@@ -35,7 +35,7 @@
         <div class="col-4" ng-class="{'has-error': isShowingErrors(editServiceInvoiceForm, 'amount')}">
 
           <input type="text" class="form-control" placeholder="Amount"
-                 ng-model="editService.sum" ng-required="true" name="amount"
+                 ng-model="editService.sum" hard-reset-required="true" name="amount"
                  hard-reset-pattern="decimalNumberPattern">
         </div>
 

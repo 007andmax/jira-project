@@ -117,7 +117,7 @@
 
             <input class="form-control" tc-number-input type="text" ng-model="ticketConfig.count"
                    name="ticketCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
-                   ng-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
+                   hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
           </div>
 
           <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketPrefix')}">
@@ -529,7 +529,7 @@
 
             <input class="form-control" type="text" ic-number-input ng-model="invoiceConfig.count"
                    name="invoiceCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
-                   ng-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
+                   hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
           </div>
 
           <div class="form-group" ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceTerms')}">
@@ -548,7 +548,7 @@
             <input class="form-control" type="text" ic-terms-input
                    placeholder="e.g., Net 8" ng-model="invoiceConfig.term"
                    name="invoiceTerms" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
-                   ng-required="true" ng-minlength="1" ng-maxlength="10" hard-reset-pattern="numberPattern">
+                   hard-reset-required="true" ng-minlength="1" ng-maxlength="10" hard-reset-pattern="numberPattern">
           </div>
         </div>
 

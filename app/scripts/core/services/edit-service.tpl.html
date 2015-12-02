@@ -15,13 +15,13 @@
     <input type="text" class="form-control" placeholder="Min. Time Slice"
            ng-model="editService.timeBlock"
            custom-disabled="{{ !service.isDefault && service }}" hard-reset-pattern="numberPattern"
-           invalid-when="editService.timeBlock <= 0" ng-required="true" name="timeBlock">
+           invalid-when="editService.timeBlock <= 0" hard-reset-required="true" name="timeBlock">
   </div>
 
   <div class="col-3" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
     <input type="text" class="form-control" placeholder="Rate"
            ng-model="editService.rate"
-           name="editServiceRate" ng-required="true" hard-reset-pattern="decimalNumberPattern">
+           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
   </div>
 
   <div class="qt-form-actions">
