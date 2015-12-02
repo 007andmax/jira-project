@@ -64,6 +64,31 @@
           }
         };
 
+        $scope.getPriorityNumberInfo = function (option) {
+          var priorityIndex,
+            phoneInfo;
+
+          for (var i = 0; i < $scope.user.phoneNumbers.length; i++) {
+            if (priorityIndex === undefined || $scope.user.phoneNumbers[i].priority < priorityIndex) {
+              priorityIndex = $scope.user.phoneNumbers[i].priority;
+              phoneInfo = $scope.user.phoneNumbers[i].staticCopy();
+            }
+          }
+
+          if (option === 'NUMBER') {
+            return phoneInfo.number;
+          } else {
+            switch (phoneInfo.typeNumber) {
+              case ('MOBILE'):
+                return 'icn-iphone';
+              case ('FAX'):
+                return 'icn-user-fax';
+              case ('OFFICE'):
+                return 'icn-user-phone';
+            }
+          }
+        }
+
       }]);
 
 }());

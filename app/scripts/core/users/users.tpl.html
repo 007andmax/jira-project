@@ -150,8 +150,8 @@
           </div>
 
           <div class="user-number pull-left">
-            <i class="icn-sm icn-iphone"></i>
-            <span> {{ user.phoneNumbers[user.phoneNumbers.length - 1].number }}</span>
+            <i class="icn-sm {{ getPriorityNumberInfo('CLASS') }}"></i>
+            <span> {{ getPriorityNumberInfo('NUMBER') }}</span>
           </div>
 
           <div class="user-company pull-left has-tooltip"
