@@ -281,4 +281,16 @@
   top: 0;
 }
 
+/*ticket*/
+.animation-hide.ng-hide-add {
+  -webkit-transition: all linear 3s;
+}
+
+.animation-hide.ng-hide-add.ng-hide-add-active, .animation-hide.ng-hide-remove {
+  opacity: 0;
+}
+
+.animation-hide.ng-hide-add, .animation-hide.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+}
 

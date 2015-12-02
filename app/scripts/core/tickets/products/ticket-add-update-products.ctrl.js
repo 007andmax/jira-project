@@ -17,8 +17,8 @@
               notifyTicketCreator: true
             });
 
+            $scope.addTicketOwnerToUpdate();
             $scope.triedToAddProduct = false;
-
           }
 
           $scope.addProduct = function (form) {

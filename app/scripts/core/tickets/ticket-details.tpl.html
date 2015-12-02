@@ -445,7 +445,7 @@
 
                 <span class="pull-left">{{ ticketUpdate.createdAt | ticketCreateDate }}
                   <span class="dot-sep"></span>
-                  {{ ticketUpdate.shares.length }} people added to this update
+                  {{ getLengthSharedUsers(ticketUpdate.shares) }} people added to this update
                 </span>
 
                 <div class="pull-left avatar userinfo-tooltip" ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser"

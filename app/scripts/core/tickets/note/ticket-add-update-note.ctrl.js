@@ -18,6 +18,8 @@
               note: '',
               attachments: []
             });
+
+            $scope.addTicketOwnerToUpdate();
           }
 
           $scope.addAttachmentFiles = function (file) {

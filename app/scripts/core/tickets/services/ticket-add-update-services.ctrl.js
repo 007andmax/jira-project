@@ -18,8 +18,8 @@
               notifyTicketCreator: true
             });
 
+            $scope.addTicketOwnerToUpdate();
             $scope.triedToAddService = false;
-
           }
 
           $scope.isShowingErrors = function (form, fieldName) {

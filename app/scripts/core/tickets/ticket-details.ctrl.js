@@ -396,15 +396,44 @@
               user: $scope.ticketDetails.createdUser.staticCopy()
             };
 
+            var firstSharedUser = $scope.updateSharedUsersList[0],
+              createdUserId = $scope.ticketDetails.createdUser.id
+
             if ($scope.ticketUpdate.notifyTicketCreator) {
+
+              if(firstSharedUser && firstSharedUser.user.id === createdUserId){
+                return;
+              }
+
               $scope.updateSharedUsersList.unshift(ticketOwner);
+
             } else {
+
+              if(firstSharedUser && firstSharedUser.user.id !== createdUserId){
+                return;
+              }
+
               $scope.updateSharedUsersList.shift();
+
             }
           };
 
           $scope.filterCurrentUser = function (item) {
+            if (!item.user) {
+              return true;
+            }
             return !(item.user.id === $scope.currentUser.id);
+          };
+
+          $scope.getLengthSharedUsers = function (sharedUsers) {
+
+            for (var i = 0; i < sharedUsers.length; i++) {
+              if (sharedUsers[i].user && sharedUsers[i].user.id === $scope.currentUser.id) {
+                return sharedUsers.length - 1;
+              }
+            }
+
+            return sharedUsers.length;
           };
 
           $scope.$on('ticket_is_not_available_anymore', function (event, data) {

@@ -42,26 +42,26 @@
 
             <div class="dropdown pull-left">
 
-              <div class="btn btn-default pull-left has-tooltip" data-toggle="dropdown"
+              <div class="btn btn-default pull-left has-tooltip disabled" data-toggle="dropdown"
                    tooltip-placement="top" tooltip="logged in devices">
                 <i class="icn-sm icn-user-devices"></i>
               </div>
 
-              <ul class="dropdown-menu devices-menu" role="menu">
+              <!--<ul class="dropdown-menu devices-menu" role="menu">-->
                 <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-server"></i>File.Server</a></li>-->
                 <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-computer"></i>Skynet.2013</a></li>-->
                 <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-mobile"></i>Mobile.Jack</a></li>-->
                 <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-fax"></i>Fax.Sublime</a></li>-->
-              </ul>
+              <!--</ul>-->
 
             </div>
 
-            <div class="btn btn-default pull-left has-tooltip"
+            <div class="btn btn-default pull-left has-tooltip disabled"
                  data-placement="top" tooltip="Send Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
-            <div class="btn btn-default btn-user-chat pull-left has-tooltip"
+            <div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"
                  tooltip-placement="top" tooltip="chat">
               <i class="icn-sm icn-user-chat"></i>
             </div>
@@ -109,7 +109,8 @@
                         <a tabindex="-1" href="javascript:void(0)">
                           <div class="clearfix">
                             <label class="control checkbox pull-left">
-                              <input type="checkbox" ng-model="subscriptions[user.id].ticket">
+                              <input type="checkbox"
+                                     ng-checked="user.subscription.ticket" ng-disabled="disabledCheckbox">
                               <span class="control-indicator"></span>
                               Ticket Updates
                             </label>
@@ -121,7 +122,8 @@
                         <a tabindex="-1" href="javascript:void(0)">
                           <div class="clearfix">
                             <label class="control checkbox pull-left">
-                              <input type="checkbox" ng-model="subscriptions[user.id].invoice">
+                              <input type="checkbox"
+                                     ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
                               <span class="control-indicator"></span>
                               Invoice Updates
                             </label>
@@ -135,7 +137,7 @@
                 </li>
 
                 <li ng-show="currentUser.role !== 'USER'">
-                  <a tabindex="-1" href="javascript:void(0)">Archive this Contact</a>
+                  <a class="disabled" tabindex="-1" href="javascript:void(0)">Archive this Contact</a>
                 </li>
 
               </ul>
@@ -154,8 +156,7 @@
 
           <div class="user-company pull-left has-tooltip"
                tooltip-placement="bottom" tooltip="South Calgary Periodontal Group of Industries"
-               tooltip-append-to-body="true"
-               tooltip-html-unsafe="<div class='tooltip tooltip-lg'><div class='tooltip-inner'></div></div>">
+               tooltip-append-to-body="true">
             <i class="icn-sm icn-user-company"></i>
             <span> {{ getUserCompanyName(user) }}</span>
           </div>
@@ -175,9 +176,5 @@
 
     </div>
   </div>
-
-  <!--<div class="user-loading">-->
-    <!--<div class="loader"></div>-->
-  <!--</div>-->
 
 </div>

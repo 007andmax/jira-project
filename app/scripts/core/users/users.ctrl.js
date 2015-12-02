@@ -78,6 +78,9 @@
         };
 
         $scope.subscribeUser = function (userId, nameSubscription) {
+
+          $scope.disabledCheckbox = true;
+
           var subscription = $scope.subscriptions[userId];
 
           if (subscription) {
@@ -89,7 +92,9 @@
           }
 
           subscription[nameSubscription] = !subscription[nameSubscription];
-          SubscriptionsService.saveUserSubscription(subscription);
+          SubscriptionsService.saveUserSubscription(subscription, function(){
+            $scope.disabledCheckbox = false;
+          });
         };
 
       }]);
