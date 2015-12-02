@@ -448,7 +448,7 @@
                   {{ ticketUpdate.shares.length }} people added to this update
                 </span>
 
-                <div class="pull-left avatar userinfo-tooltip" ng-repeat="share in ticketUpdate.shares"
+                <div class="pull-left avatar userinfo-tooltip" ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser"
                      tooltip-placement="top"
                      tooltip-html-unsafe="<p class='tooltip-name'>
                                           {{ share.user ? getUserName(getUserById(share.user.id)) : getContactName(share.contact) }}

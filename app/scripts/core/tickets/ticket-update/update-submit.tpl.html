@@ -2,7 +2,8 @@
 
   <div class="pull-left" ng-if="!(currentUser.role === 'USER')">
     <label class="control checkbox pull-left">
-      <input type="checkbox" ng-model="ticketUpdate.notifyTicketCreator">
+      <input type="checkbox" ng-model="ticketUpdate.notifyTicketCreator"
+             ng-change="addTicketOwnerToUpdate()">
       <span class="control-indicator"></span>
       {{ getUserName(user) }}
     </label>
