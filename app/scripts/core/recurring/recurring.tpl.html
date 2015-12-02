@@ -75,7 +75,7 @@
               <span class="label label-light">{{ recurringCompany.invoicesCount || 0 }}</span>
             </div>
 
-            <div class="col-2" ng-click="toggleRecurringInvoices()">
+            <div class="col-2">
 
               <div class="billable-amount">{{ recurringCompany.total | currency: '$': 0 }}</div>
 
@@ -85,7 +85,7 @@
                 <i class="icn-sm icn-delete"></i>
               </a>
 
-              <div class="btn btn-info pull-right has-tooltip" style="width: 98px;" scroll-to-form stop-propagation="click"
+              <div class="btn btn-info pull-right has-tooltip" style="width: 98px;" scroll-to-form
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
                    ng-click="showCreateRecurringInvoiceForm(); toggleRecurringInvoices();">
                 <i class="icn-sm icn-create-invoice"></i>
