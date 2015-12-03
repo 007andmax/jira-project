@@ -1,321 +1,329 @@
-<div class="content-wrapper">
+<div class="company-profile-content">
 
-  <div class="content-body company-profile">
-    <div class="cover-wrrapper" ng-if="!isShowEditCover"
-         style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
-      <div class="overlay">
-        <div class="archive-btn" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
-          <a class="black-btn tp-hide" href="javascript:void(0)"
-             tooltip="Archive Company" tooltip-placement="bottom" ng-click="archiveCompany()">
-            <span class="icn archive-company"></span>
+  <div class="company-cover-wrapper" ng-if="!isShowEditCover"
+       style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
+
+    <div class="btn btn-archive has-tooltip" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
+         ng-click="archiveCompany()"
+         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
+      <i class="icn-sm icn-archive-company"></i>
+    </div>
+
+    <div class="company-info">
+
+      <div class="company-name">{{ companyData.name }}</div>
+
+      <div class="company-short-info">
+
+        <div class="company-location"><i class="icn-sm icn-location-white"></i>
+          {{ companyData.primaryAddress.address }}
+        </div>
+
+        <i class="dot-sep"></i>
+
+        <div class="company-speciality">{{ companyData.type }}</div>
+
+        <a href="javascript:void(0)" class="hit-area ha-14-16"
+           custom-popover custom-popover-content="{{ companyData.description }}" custom-popover-placement="bottom">
+          <i class="icn-sm icn-description-white"></i>
+        </a>
+
+        <div class="dropdown" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+
+          <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+             data-toggle="dropdown" aria-expanded="false"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Change Cover">
+            <i class="icn-md icn-cover"></i>
           </a>
-        </div>
-        <div class="company-info">
 
-          <h3 class="name">{{ companyData.name }}</h3>
+          <ul class="dropdown-menu">
 
-          <div class="info clearfix">
-            <div class="address">
-              <span class="icn company-location"></span>
-              <!--Calgary, AB-->
-              {{ companyData.primaryAddress.address }}
-              <span class="dot-sep"></span>
-              {{ companyData.type }}
-            </div>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover(true)">
+                Upload Photo...
+              </a>
+            </li>
 
-            <ul class="actions">
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="restoreDefaultCover()">
+                Restore Default Photo...
+              </a>
+            </li>
 
-              <li><a href="javascript:void(0)" data-html="true"
-                     popover-placement="top" popover="{{ companyData.description }}">
-                <span class="icn company-detail"></span></a></li>
-              <li ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"><a href="javascript:void(0)" class="tp-hide"
-                                                                       ng-click="showEditCover()"
-                                                                       tooltip="Change Cover" tooltip-placement="top">
-                <span class="icn camera"></span></a></li>
-              <li ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"><a href="javascript:void(0)" class="tp-hide"
-                                                                       ui-sref="editCompany( { companyId: company.id } )"
-                                                                       tooltip="Edit Company info"
-                                                                       tooltip-placement="top">
-                <span class="icn icn-edit-tag"></span></a></li>
+            <li role="presentation" ng-show="company.cover">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover()">
+                Reposition...
+              </a>
+            </li>
 
-
-            </ul>
-
-          </div>
-          <ul class="rating rating-5 clearfix">
-            <li class="icn-star-full star-1"></li>
-            <li class="icn-star-full star-2"></li>
-            <li class="icn-star-full star-3"></li>
-            <li class="icn-star-full star-4"></li>
-            <li class="icn-star-half star-5"></li>
           </ul>
-          <div class="since">Client since <span class="date">{{ company.createdAt | date:'dd MMM yyyy' }}</span></div>
-          <div class="time-avg">
-            <!--<div class=" time-clock"><span class="icn clock"></span></div>-->
-            <!--<div class="avg">Avg. Response Time 45 mins</div>-->
-          </div>
         </div>
-        <div class="primary" ng-init="accordionStatus.openContacts = true">
-          <accordion close-others="true">
-            <accordion-group is-open="accordionStatus.openContacts" is-disabled="accordionStatus.openContacts"
-                             ng-class="{active: accordionStatus.openContacts}">
-              <accordion-heading ng-class="{active: accordionStatus.openContacts}">
-                <a class="collapsed" style="padding:0px;" data-toggle="collapse" href="javascript:void(0)">
-                  Primary Contact(s) <span class="total">{{ companyData.contacts.length }}</span>
-                  <span ng-show="!accordionStatus.openContacts" class="expand icn"></span>
-                </a>
 
-                <div class="arrows" ng-show="accordionStatus.openContacts" style="display: block;">
-                  <button href="javascript:void(0)" class="icn left-arrow disabled"
-                          style="border-width: 0px; height: 12px; outline:none"
-                          ng-class="{disabled: contactIndex <= 0}"
-                          ng-click="changeCurrentContact(contactIndex - 1)"></button>
-                  <button href="javascript:void(0)" class="icn right-arrow"
-                          style="border-width: 0px; height: 12px; outline:none"
-                          ng-click="changeCurrentContact(contactIndex + 1)"
-                          ng-class="{disabled: contactIndex >= companyData.contacts.length - 1 }"></button>
-                </div>
-              </accordion-heading>
+        <a href="javascript:void(0)" class="hit-area has-tooltip"
+           ui-sref="editCompany( { companyId: company.id } )"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
+          <i class="icn-md icn-edit-tag"></i>
+        </a>
 
-              <div class="user-slider" ng-include="'/html/scripts/core/companies/contacts-slider.tpl.html'"></div>
+      </div>
 
-            </accordion-group>
+      <div class="company-rating">
+        <ul class="rating rating-5">
+          <li class="icn-sm icn-star-full star-1"></li>
+          <li class="icn-sm icn-star-full star-2"></li>
+          <li class="icn-sm icn-star-full star-3"></li>
+          <li class="icn-sm icn-star-half star-4"></li>
+          <li class="icn-sm icn-star-empty star-5"></li>
+        </ul>
+      </div>
 
-            <accordion-group is-open="accordionStatus.openLocations" is-disabled="accordionStatus.openLocations"
-                             ng-class="{'active': accordionStatus.openLocations}">
-              <accordion-heading ng-class="{'active': accordionStatus.openLocations}">
-                <a class="collapsed" style="padding:0px;" data-toggle="collapse" href="javascript:void(0)">
-                  Site/Location(s) <span class="total">{{ companyData.addresses.length }}</span>
-                  <span ng-show="!accordionStatus.openLocations" class="expand icn"></span>
-                </a>
+      <div class="company-client-since">
+        Client since <span>{{ company.createdAt | date:'dd MMM yyyy' }}</span>
+      </div>
 
-                <div class="arrows" ng-show="accordionStatus.openLocations" style="display: block;">
-                  <button href="javascript:void(0)" class="icn left-arrow"
-                          style="border: none; height: 12px; outline:none"
-                          ng-class="{disabled: locationIndex <= 0}"
-                          ng-click="changeCurrentLocation(locationIndex - 1)"></button>
-                  <button href="javascript:void(0)" class="icn right-arrow"
-                          style="border: none; height: 12px; outline:none"
-                          ng-click="changeCurrentLocation(locationIndex + 1)"
-                          ng-class="{disabled: locationIndex >= companyData.addresses.length - 1 }"></button>
-                </div>
-              </accordion-heading>
+      <!--<div class="average-response-time">-->
+      <!--<div class="icon"><i class="icn-lg icn-response-time"></i></div>-->
+      <!--Avg. Response Time 45 mins-->
+      <!--</div>-->
 
-              <div class="location-slider" ng-include="'/html/scripts/common/templates/location-slider.tpl.html'"></div>
+    </div>
 
-            </accordion-group>
-          </accordion>
+    <div class="company-contact-location-wrapper">
+
+      <div class="panel-group" ng-init="currentCollapse = 'CONTACTS'">
+
+        <div class="panel panel-default contacts-panel" style="top: 0">
+
+          <div class="panel-heading">
+            <h4 class="panel-title company-primary-contacts">
+              <a href="javascript:void(0)" ng-class="{'collapsed': currentCollapse !== 'CONTACTS'}"
+                 ng-click="currentCollapse = 'CONTACTS'">
+
+                Primary Contacts
+
+                <span class="text-muted">{{ companyData.contacts.length }}</span>
+
+                <i class="icn-sm icn-expand pull-right"></i>
+                <span class="slider-arrows">
+
+                  <i class="icn-sm icn-arrow-previous"
+                     custom-disabled="{{ contactIndex <= 0 }}"
+                     ng-click="changeCurrentContact(contactIndex - 1)"></i>
+
+                  <i class="icn-sm icn-arrow-next"
+                     custom-disabled="{{ contactIndex >= companyData.contacts.length - 1 }}"
+                     ng-click="changeCurrentContact(contactIndex + 1)"></i>
+
+                </span>
+              </a>
+            </h4>
+          </div>
+
+          <div class="panel-collapse collapse" collapse="currentCollapse === 'LOCATIONS'"
+               ng-include="'/html/scripts/core/companies/contacts-slider.tpl.html'"></div>
+
+        </div>
+
+        <div class="panel panel-default locations-panel">
+
+          <div class="panel-heading">
+            <h4 class="panel-title site-locations">
+              <a href="javascript:void(0)" ng-class="{'collapsed': currentCollapse !== 'LOCATIONS'}"
+                 ng-click="currentCollapse = 'LOCATIONS'">
+
+                Site / Locations
+
+                <span class="text-muted">{{ companyData.addresses.length }}</span>
+
+                <i class="icn-sm icn-expand pull-right"></i>
+                <span class="slider-arrows">
+
+                  <i class="icn-sm icn-arrow-previous"
+                     custom-disabled="{{ locationIndex <= 0 }}"
+                     ng-click="changeCurrentLocation(locationIndex - 1)"></i>
+
+                  <i class="icn-sm icn-arrow-next"
+                     custom-disabled="{{ locationIndex >= companyData.addresses.length - 1 }}"
+                     ng-click="changeCurrentLocation(locationIndex + 1)"></i>
+
+                </span>
+              </a>
+            </h4>
+          </div>
+
+          <div class="panel-collapse collapse" collapse="currentCollapse === 'CONTACTS'"
+               ng-include="'/html/scripts/common/templates/location-slider.tpl.html'"></div>
+
         </div>
 
       </div>
 
     </div>
-
-    <div edit-cover ng-if="editCover" ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
-         ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
-         ng-model="editCover" model-name="company" model-id="{{ company.id }}"
-         ec-disabled-cover-control="disabledCoverControl"></div>
-
-    <div class="charts-wrapper clearfix">
-      <div class="charts-row">
-
-        <!--<div class="chart devices">-->
-
-        <!--<div class="content">-->
-
-        <!--<div class="device-circle"></div>-->
-
-        <!--<div class="tooltip tooltip-cdevice right">-->
-        <!--<div class="tooltip-arrow"></div>-->
-
-        <!--<ul class="tooltip-inner">-->
-        <!--<li>-->
-        <!--<span class="usertitle">clients</span>-->
-
-        <!--<span class="username">2,236</span>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-
-        <!--<ul class="chart-list report-nav">-->
-
-        <!--<li><span class="circle blue"></span> Clients</li>-->
-        <!--<li><span class="circle green"></span> Portable Devices</li>-->
-        <!--<li><span class="circle orange"></span> Printers</li>-->
-        <!--<li><span class="circle dark-orange"></span> Member Servers</li>-->
-        <!--<li><span class="circle red"></span> Member Servers</li>-->
-
-        <!--</ul>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <div class="chart tickets">
-          <div class="content">
-            <div style='margin-left: -6px;' tickets-donought-chart ng-model="countsByTypesAndCompany"></div>
-            <ul class="chart-list report-nav">
-              <li><span class="circle blue"></span> UNASSIGNED</li>
-              <li><span class="circle orange"></span> OPEN</li>
-            </ul>
-          </div>
-        </div>
-        <div class="chart timed-online-device">
-          <div class="service">
-            <div class="contents">
-              <div class="icon-wrapper"><span class="icn icn-cservice"></span></div>
-              <div class="status"><h4>service time billed</h4>
-
-                <div class="time"><span class="hour">{{ timeBilledByCompany.value }} </span>hrs</div>
-              </div>
-            </div>
-          </div>
-
-          <!--<div class="devices">-->
-          <!--<div class="contents">-->
-          <!--<div class="icon-wrapper"><span class="icn icn-cdevice"></span></div>-->
-          <!--<div class="status"><h4>online devices</h4>-->
-
-          <!--<div class="time"><span class="hour">628 </span></div>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
-
-        </div>
-
-      </div>
-
-      <div class="charts-row">
-
-        <div class="tchart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">
-          <div class="heading"><span class="bold">Total Earnings</span> <span
-            class="dot-sep"></span> <span class="amount">{{ totalEarningValue | currency:'' :0 }} USD</span>
-
-            <div class="arrows">
-              <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
-                      ng-disabled="disabledLeftButton" ng-class="{'disabled': disabledLeftButton}"
-                      ng-click="changeRangeDateToGetTotalEarnings('PREV')"></button>
-              <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
-                      ng-disabled="disabledRightButton" ng-class="{'disabled': disabledRightButton}"
-                      ng-click="changeRangeDateToGetTotalEarnings('NEXT')"></button>
-
-            </div>
-          </div>
-          <div total-charts ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'"
-               second-gradient-color="'#7BAF3F'"></div>
-        </div>
-
-        <div class="tchart last" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
-          <div class="heading"><span class="bold">Total Receivables</span> <span
-            class="dot-sep"></span> <span class="amount">{{ totalReceivablesValue | currency:'' :0 }} USD</span>
-
-            <div class="arrows">
-              <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
-                      ng-disabled="disabledLeftButton" ng-class="{'disabled': disabledLeftButton}"
-                      ng-click="changeRangeDateToGetTotalReceivables('PREV')"></button>
-              <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
-                      ng-disabled="disabledRightButton" ng-class="{'disabled': disabledRightButton}"
-                      ng-click="changeRangeDateToGetTotalReceivables('NEXT')"></button>
-
-            </div>
-          </div>
-          <div total-charts ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'"
-               second-gradient-color="'#E55E36'"></div>
-        </div>
-
-      </div>
-
-      <div class="charts-row" ng-controller="quicktech.core.companies.ticketsClosedChartCtrl">
-        <div class="tchart">
-          <div class="heading"><span class="bold">Tickets Closed</span> <span
-            class="dot-sep"></span> <span class="amount">{{ allTicketsClosedByDays }}</span>
-
-            <div class="arrows">
-              <button href="javascript:void(0)" class="icn left-arrow" style="border: none; height: 12px; outline:none"
-                      ng-disabled="disabledLeftButton" ng-class="{'disabled': disabledLeftButton}"
-                      ng-click="changeRangeDateToGetClosedTkt('PREV')"></button>
-              <button href="javascript:void(0)" class="icn right-arrow" style="border: none; height: 12px; outline:none"
-                      ng-disabled="disabledRightButton" ng-class="{'disabled': disabledRightButton}"
-                      ng-click="changeRangeDateToGetClosedTkt('NEXT')"></button>
-            </div>
-          </div>
-
-          <div ticket-closed-chart ng-model="closedTicketsGraphData"></div>
-        </div>
-
-
-        <div class="tchart last">
-
-          <div class="heading">
-
-            <span class="bold">Ticket Resolutions</span> All Time
-
-            <ul class="pull-right report-nav">
-              <li><span class="circle blue"></span> Quick</li>
-              <li><span class="circle dark-orange"></span> DELAYED</li>
-            </ul>
-
-          </div>
-
-          <div class="content clearfix">
-
-            <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
-                 pie-chart-color="['#2eabbe', '#eca935']"
-                 pie-chart-size="140"></div>
-
-            <ul class="chart-list">
-
-              <li><span class="blue">{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
-                Tickets created &amp; resolved within 2 days
-              </li>
-
-              <li><span class="orange">{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%</span>
-                Tickets created &amp; resolved within 10 days
-              </li>
-
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="tabs-wrapper" ng-init="mode = 'user'">
-
-        <div>
-          <div class="">
-            <ul class="nav nav-tabs">
-
-              <!--<li role="presentation" class="activity" ng-class="{active: mode === 'activity'}">-->
-              <!--<a ng-click="mode = 'activity'">Activity</a>-->
-              <!--<ul class="sub-nav">-->
-              <!--<li><a href="javascript:void(0)" class="active">hour</a></li>-->
-              <!--<li><a href="javascript:void(0)" class="weekly">week</a></li>-->
-              <!--<li><a href="javascript:void(0)" class="monthly">month</a></li>-->
-              <!--</ul>-->
-              <!--</li>-->
-
-              <li role="presentation" class="" ng-class="{active: mode === 'user'}">
-                <a ng-click="mode = 'user'">Users <span class="count">{{ users.length }}</span></a>
-              </li>
-
-              <!--<li role="presentation" class="" ng-class="{active: mode === 'device'}">-->
-              <!--<a ng-click="mode = 'device'">Devices <span class="count">4,665</span></a>-->
-              <!--</li>-->
-
-              <li role="presentation" class="" ng-class="{active: mode === 'vendors'}">
-                <a ng-click="mode = 'vendors'">Assc. Vendors <span
-                  class="count">{{ companyData.companyAssociations.length }}</span></a>
-              </li>
-
-            </ul>
-          </div>
-
-          <div class="tab-pane"
-               ng-include="'/html/scripts/core/companies/'+ mode +'-tab.tpl.html'">
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
   </div>
+
+  <div class="hass-error control-label" style="position:absolute; top: 538px;left: 40px;color: #e53935;"
+       ng-show="isShowErrorMessage">
+    {{ messageError }}
+  </div>
+
+  <div edit-cover ng-if="editCover" ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
+       ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
+       ng-model="editCover" model-name="company" model-id="{{ company.id }}"
+       ec-is-show-loader-on-cover="isShowLoaderOnCover"
+       ec-disabled-cover-control="disabledCoverControl"></div>
+
+  <div class="charts-n-graphs-container" collapse="isCollapsed">
+
+    <div class="simple-chart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">
+      <div class="chart-wrapper full-width">
+
+        <div class="heading"><strong>Total Earnings</strong>
+          <i class="dot-sep"></i> <span>{{ totalEarningValue | currency:'' :0 }} USD</span>
+          <span class="slider-arrows pull-right" style="position: static">
+
+            <i class="icn-sm icn-arrow-previous"
+               custom-disabled="{{ disabledLeftButton }}"
+               ng-click="disabledLeftButton || changeRangeDateToGetTotalEarnings('PREV')"></i>
+
+            <i class="icn-sm icn-arrow-next"
+               custom-disabled="{{ disabledRightButton }}"
+               ng-click="disabledRightButton || changeRangeDateToGetTotalEarnings('NEXT')"></i>
+
+          </span>
+        </div>
+
+        <div total-charts ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'"
+             second-gradient-color="'#7BAF3F'"></div>
+      </div>
+    </div>
+
+    <div class="simple-chart" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
+      <div class="chart-wrapper full-width">
+        <div class="heading"><strong>Total Receivables</strong>
+          <i class="dot-sep"></i> <span>{{ totalReceivablesValue | currency:'' :0 }} USD</span>
+
+          <span class="slider-arrows pull-right" style="position: static">
+
+            <i class="icn-sm icn-arrow-previous"
+               custom-disabled="{{ disabledLeftButton }}"
+               ng-click="disabledLeftButton || changeRangeDateToGetTotalReceivables('PREV')"></i>
+
+            <i class="icn-sm icn-arrow-next"
+               custom-disabled="{{ disabledRightButton }}"
+               ng-click="disabledRightButton || changeRangeDateToGetTotalReceivables('NEXT')"></i>
+
+          </span>
+        </div>
+
+        <div total-charts ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'"
+             second-gradient-color="'#E55E36'"></div>
+      </div>
+    </div>
+
+    <div class="simple-chart" ng-controller="quicktech.core.companies.ticketsClosedChartCtrl">
+      <div class="chart-wrapper full-width">
+        <div class="heading"><strong>Tickets Closed</strong>
+          <i class="dot-sep"></i> <span>{{ allTicketsClosedByDays }}</span>
+
+          <span class="slider-arrows pull-right" style="position: static">
+
+            <i class="icn-sm icn-arrow-previous"
+               custom-disabled="{{ disabledLeftButton }}"
+               ng-click="disabledLeftButton || changeRangeDateToGetClosedTkt('PREV')"></i>
+
+            <i class="icn-sm icn-arrow-next"
+               custom-disabled="{{ disabledRightButton }}"
+               ng-click="disabledRightButton || changeRangeDateToGetClosedTkt('NEXT')"></i>
+
+          </span>
+        </div>
+
+        <div ticket-closed-chart ng-model="closedTicketsGraphData"></div>
+      </div>
+    </div>
+
+    <div class="simple-chart">
+      <div class="chart-wrapper full-width">
+
+        <div class="heading"><strong>Ticket Resolutions</strong> <span>All Time</span>
+          <ul class="chart-legend">
+            <li><i class="circle-indicator blue"></i>Quick</li>
+            <li><i class="circle-indicator orange"></i>DELAYED</li>
+          </ul>
+        </div>
+
+        <div class="chart-content">
+
+          <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
+               pie-chart-color="['#2eabbe', '#eca935']"
+               pie-chart-size="140"></div>
+
+          <ul class="chart-legend">
+
+            <li>
+              <span class="text-info">
+                {{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%
+              </span>
+              Tickets created &amp; resolved within 2 days
+            </li>
+
+            <li>
+              <span class="text-warning">
+                {{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%
+              </span>
+              Tickets created &amp; resolved within 10 days
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
+    <span><i class="icn-sm icn-collapse"></i></span>
+  </div>
+
+  <div class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">
+    <p class="pull-left">Expand to view overall statistics</p>
+    <i class="icn-sm icn-expand pull-right"></i>
+  </div>
+
+  <ul class="nav nav-qt">
+
+    <!--<li class="activity-tab active">-->
+    <!--<a data-toggle="tab" href="javascript:void(0)">Activity</a>-->
+    <!--<div class="activity-nav">-->
+    <!--<a href="javascript:void(0)" class="hourly active">Hour</a>-->
+    <!--<a href="javascript:void(0)" class="weekly">Week</a>-->
+    <!--<a href="javascript:void(0)" class="monthly">Month</a>-->
+    <!--</div>-->
+    <!--</li>-->
+
+    <li ng-class="{active: mode === 'user'}">
+      <a data-toggle="tab" href="javascript:void(0)" ng-click="mode = 'user'">
+        Users
+        <span class="text-muted">{{ users.length }}</span>
+      </a>
+    </li>
+
+    <!--<li>-->
+    <!--<a data-toggle="tab" href="javascript:void(0)">-->
+    <!--Devices -->
+    <!--<span class="text-muted">4,658</span>-->
+    <!--</a>-->
+    <!--</li>-->
+
+    <li ng-class="{active: mode === 'vendors'}">
+      <a data-toggle="tab" href="javascript:void(0)" ng-click="mode = 'vendors'">
+        Assc. Vendors
+        <span class="text-muted">{{ companyData.companyAssociations.length }}</span>
+      </a>
+    </li>
+
+  </ul>
+
+  <div class="tab-content" ng-include="'/html/scripts/core/companies/'+ mode +'-tab.tpl.html'"></div>
+
+</div>

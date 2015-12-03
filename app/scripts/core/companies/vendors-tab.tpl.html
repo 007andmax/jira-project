@@ -1,45 +1,65 @@
-<ul class="users-lists vendors">
-  <li class="head ">
-    <div class="clearfix">
-      <div class="col-1">NAME</div>
-      <div class="col-2">PRIMARY CONTACT</div>
-      <div class="col-3">CONTACT NO.</div>
-      <div class="col-4">PRODUCTS</div>
+<div role="tabpanel" class="tab-pane" style="display: block">
+  <ul class="qt-list qt-assc-vendors">
+
+    <li class="list-heading">
+      <div class="col-1"><span>Name</span></div>
+      <div class="col-2"><span>Primary Contact</span></div>
+      <div class="col-3"><span>Contact No.</span></div>
+      <div class="col-4"><span>Products</span></div>
       <div class="col-5"></div>
-    </div>
-  </li>
-  <li class=" " ng-repeat="association in companyData.companyAssociations | orderBy: 'vendor.name'"
-      ng-controller="quicktech.core.companies.vendorsTabCtrl">
-    <div class="clearfix">
+    </li>
 
-      <div class="col-1"><span class="name">{{ association.vendor.name }}</span></div>
-      <div class="col-2"><a herf="" class="pull-left avatar-38 avatar m-r">
-        <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
+    <li ng-repeat="association in companyData.companyAssociations | orderBy: 'vendor.name'"
+        ng-controller="quicktech.core.companies.vendorsTabCtrl">
 
-      </a><span class="name">{{ getUserName(getPriorityContact()) }}</span><span
-        class=" badge badge-light ">{{ getPriorityContact().designation }}</span></div>
-      <div class="col-3"><span class="icn icn-telephone contact"></span>
-        {{ getPriorityNumber(getPriorityContact()) }}
+      <div class="col-1">
+        <div class="vendor-name pull-left">{{ association.vendor.name }}</div>
       </div>
-      <div class="col-4">{{ association.vendor.products.length }}</div>
-      <div class="col-5">
-        <div class="user-actions pull-right">
 
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="Send Email" ng-click="sendMail()">
-            <span class="icn icn-user-msg"></span>
-          </div>
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="dissociate" ng-click="dissociateVendor()">
-            <span class="icn icn-dissociate"></span>
+      <div class="col-2">
+        <div class="user-bio">
+
+          <div class="pull-left avatar">
+            <img ng-src="{{ getContactAvatarUrl(getPriorityContact()) }}"
+                 alt="..." class="img-circle no-avatar avatar-38">
           </div>
 
-          <div>
+          <div class="user-name pull-left">{{ getUserName(getPriorityContact()) }}</div>
+          <span class="label label-light">{{ getPriorityContact().designation }}</span>
 
-          </div>
         </div>
       </div>
 
-    </div>
-  </li>
-</ul>
+      <div class="col-3">
+        <div class="vendor-contact-no">
+          <i class="icn-sm" ng-class="{'icn-iphone': getPriorityNumber(getPriorityContact(), true) === 'MOBILE',
+                                       'icn-user-fax': getPriorityNumber(getPriorityContact(), true) === 'FAX',
+                                       'icn-user-phone': getPriorityNumber(getPriorityContact(), true) === 'OFFICE'}"></i>
+          {{ getPriorityNumber(getPriorityContact()) }}
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="vendor-products">{{ association.vendor.products.length }}</div>
+      </div>
+
+      <div class="col-5">
+        <div class="list-actions pull-right">
+
+          <div class="btn btn-default pull-left has-tooltip disabled"
+               tooltip-placement="top" tooltip="Email" ng-click="sendMail()">
+            <i class="icn-sm icn-user-mail"></i>
+          </div>
+
+          <div class="btn btn-default pull-left has-tooltip"
+               tooltip-placement="top" tooltip="dissociate" ng-click="dissociateVendor()">
+            <i class="icn-sm icn-remove-token"></i>
+          </div>
+
+        </div>
+      </div>
+
+    </li>
+
+  </ul>
+</div>

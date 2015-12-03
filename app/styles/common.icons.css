@@ -1741,7 +1741,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 .icn-collapse{
   background-position: -1557px -203px;
 }
-:hover > .icn-collapse, :active > .icn-collapse, :focus:hover > .icn-collapse, :focus:active > .icn-collapse, :hover:active > .icn-collapse, .active > .icn-collapse, .open > .icn-collapse, .open .icn-collapse{
+:hover > .icn-collapse, :active > .icn-collapse, :focus:hover > .icn-collapse, :focus:active > .icn-collapse, :hover:active > .icn-collapse, .active > .icn-collapse, .open > .icn-collapse, .open .icn-collapse, .collapse-charts:hover .icn-collapse{
   background-position: -1579px -203px;
 }
 /*Priority Icons*/

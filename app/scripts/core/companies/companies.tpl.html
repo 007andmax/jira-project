@@ -87,7 +87,7 @@
   <div class="company-card" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
        ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()">
 
-    <div class="company-cover-area" style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
+    <div class="company-cover-area" style="background-image:url('{{ getCompanyCoverUrl(company) }}'); background-size: cover;">
 
       <div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"
            ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"
@@ -109,7 +109,8 @@
 
         <i class="dot-sep"></i>
 
-        <a href="javascript:void(0)" class="hit-area ha-14-16" description-popover>
+        <a href="javascript:void(0)" class="hit-area ha-14-16"
+           custom-popover custom-popover-content="{{ company.description }}" custom-popover-placement="bottom">
           <i class="icn-sm icn-description-white"></i></a>
 
         <!--<div class="dropdown pull-left">-->

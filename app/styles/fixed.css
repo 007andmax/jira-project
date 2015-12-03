@@ -235,6 +235,7 @@
   padding: 37px 30px 51px;
   box-shadow: none;
 }
+
 .create-new-user .fixed-form-element {
   position: relative;
   left: -30px;
@@ -243,22 +244,26 @@
   padding: 45px 30px 50px;
 }
 
-.qt-list>li>.helping-additional-class>[class*="col-"]:first-child {
+.qt-list > li > .helping-additional-class > [class*="col-"]:first-child {
   padding-left: 0;
 }
-.default-tax-list>li>.helping-additional-class>.col-1 {
+
+.default-tax-list > li > .helping-additional-class > .col-1 {
   width: calc(100% - 250px);
 }
-.qt-list>li>.helping-additional-class>[class*="col-"] {
+
+.qt-list > li > .helping-additional-class > [class*="col-"] {
   float: left;
   padding: 0 5px;
   vertical-align: top;
   position: relative;
 }
-.default-tax-list>li>.helping-additional-class>.col-2 {
+
+.default-tax-list > li > .helping-additional-class > .col-2 {
   width: 250px;
 }
-.default-tax-list>li>.helping-additional-class>.col-2 .form-control {
+
+.default-tax-list > li > .helping-additional-class > .col-2 .form-control {
   width: 197px;
 }
 
@@ -267,16 +272,17 @@
   /*width: 310px !important;*/
   margin-left: 145px !important;
 }
+
 .vendor-cover-area {
   background-size: cover;
 }
 
 /*create/edit vandor*/
-.create-vendor-content .non-visible-label{
+.create-vendor-content .non-visible-label {
   opacity: 0;
 }
 
-.create-vendor-content .error-vendor-form-message{
+.create-vendor-content .error-vendor-form-message {
   position: absolute;
   top: 0;
 }
@@ -294,3 +300,7 @@
   opacity: 1;
 }
 
+/*company-profile*/
+i.off {
+  background-color: #7c8999;
+}

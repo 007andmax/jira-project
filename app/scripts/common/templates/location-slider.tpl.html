@@ -1,26 +1,29 @@
-<div class="location-wrapper active"  animation-change-location ng-model="currentLocation">
+<div class="panel-body">
+  <div class="location-wrapper active" animation-change-location
+       ng-model="currentLocation" style="display: block;">
 
-  <div class="address-heading">Billing Address</div>
+    <div class="address-heading">{{ currentLocation.isPrimary ? 'Primary Address' : 'Address' }}</div>
 
-  <div class="address-txt">{{ currentLocation.address }}</div>
+    <div class="address-txt">{{ currentLocation.address }}</div>
 
-  <div class="location-map">
-    <span data-toggle="location-popover">
-      <i class="icn-sm icn-sb-location"></i> Site Ref. “TCL 01”
-    </span>
-  </div>
+    <div class="location-map">
+      <span data-toggle="location-popover">
+        <i class="icn-sm icn-sb-location"></i> Site Ref. “TCL 01”</span>
+    </div>
 
-  <div class="location-timzone"><i class="icn-sm icn-timezone"></i>
-    GMT/{{ currentLocation.locale.description.match(gmtPattern)[0] }}
-    <span class="dot-sep"></span>
-    {{ currentLocation.locale.description.match(hourPattern)[0] }} hour
-  </div>
+    <div class="location-timzone"><i class="icn-sm icn-timezone"></i>
+      GMT/{{ currentLocation.locale.description.match(gmtPattern)[0] }}
+      <span class="dot-sep"></span>
+      {{ currentLocation.locale.description.match(hourPattern)[0] }} hour
+    </div>
 
-  <div class="location-contact-no" ng-repeat="phoneNumber in currentLocation.phoneNumbers | orderBy: 'priority'">
-    <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
-                           'icn-user-fax': phoneNumber.typeNumber === 'FAX',
-                           'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
-    {{ phoneNumber.number }}
+    <div class="location-contact-no" ng-repeat="phoneNumber in currentLocation.phoneNumbers | orderBy: 'priority'">
+      <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                                   'icn-user-fax': phoneNumber.typeNumber === 'FAX',
+                                   'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+      {{ phoneNumber.number }}
+    </div>
+
   </div>
 
 </div>

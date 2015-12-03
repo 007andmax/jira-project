@@ -18,14 +18,12 @@
             model: '=ngModel',
             restoreDefaultCover: '=ecResetToDefault',
             cancelEditCover: '=ecCancelEditCover',
-            saveEditCover: '=ecSaveEditCover'
+            saveEditCover: '=ecSaveEditCover',
+            isShowLoaderOnCover: '=ecIsShowLoaderOnCover'
           },
           link: function (scope, element, attrs, ctrl) {
 
-            var progressBar = element.find('[avator-crop-progress-bar]'),
-              progressDone = element.find('[avator-crop-progress-done]'),
-              errorMessage = element.find('[error-message]'),
-              cropBox = element.find('[crop-box]'),
+            var cropBox = element.find('[crop-box]'),
               cropBoxClone = cropBox.clone(),
               rangeZoom = element.find('[range-zoom]'),
               icnZoomPlus = element.find('[icn-zoom-plus]'),
@@ -81,7 +79,7 @@
                 },
                 onImageLoad: function () {
 
-                  progressBar.hide();
+                  scope.isShowLoaderOnCover = false;
 
                   cropBox.show();
 
@@ -102,14 +100,14 @@
                   scope.model.sizeH = e.sizeH;
                 }
               });
-            };
+            }
 
             function setupUploading() {
 
               $(fileUploader).fileUploader({
                 uploadUrl: '/file?isAvatar=true',
                 uploadName: 'file',
-                maxUploadSize: 4 * 1024 * 1024,
+                maxUploadSize: 4194304,
                 accpetType: '.jpg,.png,.gif',
                 allowedExtensions: ['jpg', 'png', 'gif'],
                 minImageWidth: 326,
@@ -117,11 +115,10 @@
 
 
                 onStart: function () {
+
                   scope.$emit('showEditCover');
-                  progressBar.removeClass('hide');
-                  progressBar.show();
+                  scope.isShowLoaderOnCover = false;
                   scope.$apply('disabledCoverControl = true');
-                  errorMessage.hide();
 
                   cropBox.replaceWith(cropBoxClone);
                   cropBox = cropBoxClone;
@@ -129,7 +126,6 @@
 
                 },
                 onProgress: function (progress) {
-                  progressDone.width(progress + '%');
                 },
                 onSuccess: function (data) {
                   ctrl.$setViewValue({
@@ -141,9 +137,7 @@
                   setupCropBoxModel(false);
                 },
                 onFailure: function (message) {
-                  //ctrl.$setValidity('loadingInProcess', true);
-                  errorMessage.show();
-                  errorMessage.text(message);
+                  scope.$emit('showErrorCover', message);
                 }
               });
             }

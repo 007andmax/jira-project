@@ -17,7 +17,7 @@
 
           $scope.$watch('location', function () {
             location.fadeOut(0, function () {
-              location.fadeIn(300, function () {
+              location.fadeIn(600, function () {
               })
             });
           }, true);

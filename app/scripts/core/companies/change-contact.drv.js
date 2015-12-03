@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.companies").directive("animationChangeContact",
+  angular.module("quicktech.core.companies").directive("changeContact",
     [function () {
       return {
         restrict: 'A',
@@ -12,12 +12,11 @@
         },
         link: function ($scope, element) {
 
-          var elem = element.find('[animation-change-contact]'),
-            user = $(elem.context);
+          var user = $(element.context);
 
           $scope.$watch('contacts', function () {
             user.fadeOut(0, function () {
-              user.fadeIn(300, function () {
+              user.fadeIn(600, function () {
               })
             });
           }, true);

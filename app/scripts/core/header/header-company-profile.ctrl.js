@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.companyProfileCtrl',
-    ['$scope', 'CompaniesService',
-      function ($scope, CompaniesService) {
+    ['$scope', 'CompaniesService', '$stateParams',
+      function ($scope, CompaniesService, $stateParams) {
 
-        $scope.companies = CompaniesService.getAllCompanies();
+        $scope.company = CompaniesService.getOneById($stateParams.companyId);
 
       }]);
 

@@ -1,226 +1,361 @@
-<ul class="users-lists devices">
-  <li class="head ">
-    <div class="clearfix">
-      <div class="col-1">NAME</div>
-      <div class="col-2">TYPE</div>
-      <div class="col-3">USERNAME</div>
-      <div class="col-4">LAN IP</div>
-      <div class="col-5"></div>
-    </div>
-  </li>
-  <li class=" ">
-    <div class="clearfix">
-
+<div role="tabpanel" class="tab-pane" id="company-devices">
+  <ul class="qt-list qt-devices">
+    <li class="list-heading">
       <div class="col-1">
-        <i class="on status"></i>
-        <span class="name">Mobile.Jack</span></div>
-      <div class="col-2"><span class="icon icn-mobile"></span></div>
-      <div class="col-3">Ryan.Burns</div>
-      <div class="col-4">192.168.1.14</div>
-      <div class="col-5">
-        <div class="user-actions pull-right">
-          <div class=" pull-left">
-            <div class="btn pull-left btn-white-gray btn-cr tooltip-dp"
-                 data-placement="top"
-                 data-original-title="remote access">
-              <span class="icn icn-remote-access"></span>
+        <!-- <label class="control checkbox pull-left">
+            <input type="checkbox">
+            <span class="control-indicator"></span>
+        </label> -->
+        <span>NAME</span>
+      </div>
+      <div class="col-2"><span>DESCRIPTION</span></div>
+      <div class="col-3"><span>TYPE</span></div>
+      <div class="col-4"><span>USERNAME</span></div>
+      <div class="col-5"><span>LAN IP</span></div>
+      <div class="col-6">&nbsp;</div>
+    </li>
+    <li>
+      <div class="col-1">
+        <div>
+          <i class="device-status on"></i>
+          <label class="control checkbox pull-left">
+            <input type="checkbox">
+            <span class="control-indicator"></span>
+          </label>
+
+          <div class="checkbox-caption"><span>Mobile.Jack</span> <a href="javascript:void(0)"
+                                                                    class="hit-area ha-desc pull-right" data-popover=""
+                                                                    data-placement="bottom" title=""
+                                                                    data-container="body"
+                                                                    data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>"
+                                                                    data-content="The Member Server PC"><i
+            class="icn-sm icn-description"></i></a></div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="device-desc"><span>Mobile, Android 4.04 CLMYUT</span>
+
+          <div class="dropdown pull-right">
+            <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top" title=""
+               data-container="body"
+               data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"
+               data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i class="icn-sm icn-edit"></i></a>
+
+            <div class="dropdown-menu add-description-form clearfix">
+              <textarea class="form-control" rows="1"
+                        placeholder="Add device description">Mobile, Android 4.04 CLMYUT</textarea>
+
+              <div class="qt-form-actions">
+                <div class="btn btn-lg btn-info pull-left">Save</div>
+                <div class="btn btn-lg btn-primary pull-left">Cancel</div>
+                <div class="word-count pull-right">40</div>
+              </div>
             </div>
-
-
-          </div>
-
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="chat">
-            <span class="icn icn-user-chat"></span>
-          </div>
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="Device Report">
-            <span class="icn icn-device-report"></span>
-          </div>
-          <div class="more pull-left left-align dropdown hover-dropdown">
-            <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp"
-               aria-haspopup="true" aria-expanded="false"
-               data-toggle="dropdown" data-placement="top" title=""
-               data-original-title="More"><span
-              class="icn-ticket-more icn"></span></a>
-            <ul class="dropdown-menu  " role="menu">
-
-
-              <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
-              <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
-              <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
-
-            </ul>
-
-          </div>
-          <div>
-
           </div>
         </div>
       </div>
-
-    </div>
-  </li>
-  <li class=" ">
-    <div class="clearfix">
-
-      <div class="col-1">
-        <i class="off status"></i>
-        <span class="name">Fax.Sublime</span></div>
-      <div class="col-2"><span class="icon icn-fax"></span></div>
-      <div class="col-3">Miles.Mcmillan</div>
-      <div class="col-4">192.168.1.10</div>
+      <div class="col-3">
+        <div class="device-type-icons"><i class="icn-lg icn-mobile has-tooltip" data-placement="top"
+                                          data-original-title="Mobile"></i></div>
+      </div>
+      <div class="col-4">
+        <div class="device-user-name"><span>Ryan.Burns</span> <a href="javascript:void(0)"
+                                                                 class="hit-area has-tooltip pull-right"
+                                                                 data-placement="right" title="" data-container="body"
+                                                                 data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"
+                                                                 data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i
+          class="icn-sm icn-password-key"></i></a></div>
+      </div>
       <div class="col-5">
-        <div class="user-actions pull-right">
-          <div class=" pull-left">
-            <div class="btn pull-left btn-white-gray btn-cr tooltip-dp"
-                 data-placement="top"
-                 data-original-title="remote access">
-              <span class="icn icn-remote-access"></span>
-            </div>
-
-
+        <div class="device-lan-ip">192.168.1.14</div>
+      </div>
+      <div class="col-6">
+        <div class="list-actions pull-right">
+          <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+            <i class="icn-sm icn-remote-access"></i>
           </div>
-
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="chat">
-            <span class="icn icn-user-chat"></span>
+          <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top"
+               data-original-title="Send Alert">
+            <i class="icn-sm icn-send-alert"></i>
           </div>
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="Device Report">
-            <span class="icn icn-device-report"></span>
+          <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top"
+               data-original-title="Spec. Report">
+            <i class="icn-sm icn-spec-report"></i>
           </div>
-          <div class="more pull-left left-align dropdown hover-dropdown">
-            <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp"
-               aria-haspopup="true" aria-expanded="false"
-               data-toggle="dropdown" data-placement="top" title=""
-               data-original-title="More"><span
-              class="icn-ticket-more icn"></span></a>
-            <ul class="dropdown-menu  " role="menu">
-
-
+          <div class="more pull-left dropdown">
+            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
+               aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i
+              class="icn-more icn-sm"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
-
             </ul>
-
-          </div>
-          <div>
-
           </div>
         </div>
       </div>
-
-    </div>
-  </li>
-  <li class=" ">
-    <div class="clearfix">
-
+    </li>
+    <li>
       <div class="col-1">
-        <i class="on status"></i>
-        <span class="name">AdminPC</span></div>
-      <div class="col-2"><span class="icon icn-server"></span><span
-        class="icn icn-file-server"></span><span
-        class="icn icn-domain-controller"></span>
-        <span class="icn icn-database-server"></span></div>
-      <div class="col-3">Laurie.Harding</div>
-      <div class="col-4">192.168.1.45</div>
-      <div class="col-5">
-        <div class="user-actions pull-right">
-          <div class=" pull-left">
-            <div class="btn pull-left btn-white-gray btn-cr tooltip-dp"
-                 data-placement="top"
-                 data-original-title="remote access">
-              <span class="icn icn-remote-access"></span>
+        <div>
+          <i class="device-status on"></i>
+          <label class="control checkbox pull-left">
+            <input type="checkbox">
+            <span class="control-indicator"></span>
+          </label>
+
+          <div class="checkbox-caption"><span>DC Printer</span>
+
+            <div class="dropdown">
+              <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip" data-placement="top"
+                 data-container="body"
+                 data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"
+                 data-original-title="Add Description" data-toggle="dropdown"><i class="icn-sm icn-add-description"></i></a>
+
+              <div class="dropdown-menu add-description-form clearfix">
+                <textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>
+
+                <div class="qt-form-actions">
+                  <div class="btn btn-lg btn-info pull-left">Save</div>
+                  <div class="btn btn-lg btn-primary pull-left">Cancel</div>
+                  <div class="word-count pull-right">40</div>
+                </div>
+              </div>
             </div>
-
-
           </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="device-desc no-desc-added" data-toggle="dropdown" aria-expanded="false"><span>Add Description <i
+          class="icn-sm icn-add-description pull-left"></i></span></div>
+        <div class="dropdown-menu add-description-form clearfix">
+          <textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>
 
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="chat">
-            <span class="icn icn-user-chat"></span>
+          <div class="qt-form-actions">
+            <div class="btn btn-lg btn-info pull-left">Save</div>
+            <div class="btn btn-lg btn-primary pull-left">Cancel</div>
+            <div class="word-count pull-right">40</div>
           </div>
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="Device Report">
-            <span class="icn icn-device-report"></span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="device-type-icons"><i class="icn-lg icn-printer has-tooltip" data-placement="top"
+                                          data-original-title="Printer"></i></div>
+      </div>
+      <div class="col-4">
+        <div class="device-user-name no-value"></div>
+      </div>
+      <div class="col-5">
+        <div class="device-lan-ip">192.168.1.10</div>
+      </div>
+      <div class="col-6">
+        <div class="list-actions pull-right">
+          <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+            <i class="icn-sm icn-remote-access"></i>
           </div>
-          <div class="more pull-left left-align dropdown hover-dropdown">
-            <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp"
-               aria-haspopup="true" aria-expanded="false"
-               data-toggle="dropdown" data-placement="top" title=""
-               data-original-title="More"><span
-              class="icn-ticket-more icn"></span></a>
-            <ul class="dropdown-menu  " role="menu">
-
-
+          <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top"
+               data-original-title="Send Alert">
+            <i class="icn-sm icn-send-alert"></i>
+          </div>
+          <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top"
+               data-original-title="Spec. Report">
+            <i class="icn-sm icn-spec-report"></i>
+          </div>
+          <div class="more pull-left dropdown">
+            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
+               aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i
+              class="icn-more icn-sm"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
-
             </ul>
-
-          </div>
-          <div>
-
           </div>
         </div>
       </div>
-
-    </div>
-  </li>
-  <li class=" ">
-    <div class="clearfix">
-
+    </li>
+    <li>
       <div class="col-1">
-        <i class="on status"></i>
-        <span class="name">Skynet.2014</span></div>
-      <div class="col-2"><span class="icon icn-computer"></span></div>
-      <div class="col-3">Jack Williams</div>
-      <div class="col-4">192.168.1.20</div>
-      <div class="col-5">
-        <div class="user-actions pull-right">
-          <div class=" pull-left">
-            <div class="btn pull-left btn-white-gray btn-cr tooltip-dp"
-                 data-placement="top"
-                 data-original-title="remote access">
-              <span class="icn icn-remote-access"></span>
+        <div>
+          <i class="device-status on"></i>
+          <label class="control checkbox pull-left">
+            <input type="checkbox">
+            <span class="control-indicator"></span>
+          </label>
+
+          <div class="checkbox-caption"><span>AdminPC</span> <a href="javascript:void(0)"
+                                                                class="hit-area ha-desc pull-right" data-popover=""
+                                                                data-placement="bottom" title="" data-container="body"
+                                                                data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>"
+                                                                data-content="The Member Server PC"><i
+            class="icn-sm icn-description"></i></a></div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="device-desc"><span>Mail migration in progress, Till thursday</span>
+
+          <div class="dropdown pull-right">
+            <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top" title=""
+               data-container="body"
+               data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"
+               data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i class="icn-sm icn-edit"></i></a>
+
+            <div class="dropdown-menu add-description-form clearfix">
+              <textarea class="form-control" rows="1" placeholder="Add device description">Mail migration in progress, Till thursday</textarea>
+
+              <div class="qt-form-actions">
+                <div class="btn btn-lg btn-info pull-left">Save</div>
+                <div class="btn btn-lg btn-primary pull-left">Cancel</div>
+                <div class="word-count pull-right">40</div>
+              </div>
             </div>
-
-
           </div>
-
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="chat">
-            <span class="icn icn-user-chat"></span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="device-type-icons">
+          <i class="icn-lg icn-server has-tooltip" data-placement="top" data-original-title="Server"></i>
+          <i class="icn-lg icn-file-server has-tooltip" data-placement="top" data-original-title="File Server"></i>
+          <i class="icn-lg icn-mail-server has-tooltip" data-placement="top" data-original-title="Mail Server"></i>
+          <i class="icn-lg icn-domain-controller has-tooltip" data-placement="top"
+             data-original-title="Domain Controller"></i>
+          <i class="icn-lg icn-app-server has-tooltip" data-placement="top"
+             data-original-title="Application Server"></i>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="device-user-name"><span>Laurie.Harding</span> <a href="javascript:void(0)"
+                                                                     class="hit-area has-tooltip pull-right"
+                                                                     data-placement="right" title=""
+                                                                     data-container="body"
+                                                                     data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"
+                                                                     data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i
+          class="icn-sm icn-password-key-unique"></i></a></div>
+      </div>
+      <div class="col-5">
+        <div class="device-lan-ip">192.168.1.45</div>
+      </div>
+      <div class="col-6">
+        <div class="list-actions pull-right">
+          <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+            <i class="icn-sm icn-remote-access"></i>
           </div>
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               data-placement="top" data-original-title="Device Report">
-            <span class="icn icn-device-report"></span>
+          <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top"
+               data-original-title="Send Alert">
+            <i class="icn-sm icn-send-alert"></i>
           </div>
-          <div class="more pull-left left-align dropdown hover-dropdown">
-            <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp"
-               aria-haspopup="true" aria-expanded="false"
-               data-toggle="dropdown" data-placement="top" title=""
-               data-original-title="More"><span
-              class="icn-ticket-more icn"></span></a>
-            <ul class="dropdown-menu  " role="menu">
-
-
+          <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top"
+               data-original-title="Spec. Report">
+            <i class="icn-sm icn-spec-report"></i>
+          </div>
+          <div class="more pull-left dropdown">
+            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
+               aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i
+              class="icn-more icn-sm"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
               <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
-
             </ul>
-
-          </div>
-          <div>
-
           </div>
         </div>
       </div>
+    </li>
+    <li>
+      <div class="col-1">
+        <div>
+          <i class="device-status off"></i>
+          <label class="control checkbox pull-left">
+            <input type="checkbox">
+            <span class="control-indicator"></span>
+          </label>
 
-    </div>
-  </li>
-</ul>
+          <div class="checkbox-caption"><span>Skynet.2014</span> <a href="javascript:void(0)"
+                                                                    class="ha-desc hit-area pull-right" data-popover=""
+                                                                    data-placement="bottom" title=""
+                                                                    data-container="body"
+                                                                    data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>"
+                                                                    data-content="The Member Server PC"><i
+            class="icn-sm icn-description"></i></a></div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="device-desc"><span>Connection to both scanner &amp; printer</span>
+
+          <div class="dropdown pull-right">
+            <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top" title=""
+               data-container="body"
+               data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"
+               data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i class="icn-sm icn-edit"></i></a>
+
+            <div class="dropdown-menu add-description-form clearfix">
+              <textarea class="form-control" rows="1" placeholder="Add device description">Mail migration in progress, Till thursday</textarea>
+
+              <div class="qt-form-actions">
+                <div class="btn btn-lg btn-info pull-left">Save</div>
+                <div class="btn btn-lg btn-primary pull-left">Cancel</div>
+                <div class="word-count pull-right">40</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="device-type-icons"><i class="icn-lg icn-computer has-tooltip" data-placement="top"
+                                          data-original-title="Computer"></i></div>
+      </div>
+      <div class="col-4">
+        <div class="device-user-name"><span>Jack Williams</span> <a href="javascript:void(0)"
+                                                                    class="hit-area has-tooltip pull-right"
+                                                                    data-placement="right" title=""
+                                                                    data-container="body"
+                                                                    data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"
+                                                                    data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i
+          class="icn-sm icn-password-key"></i></a></div>
+      </div>
+      <div class="col-5">
+        <div class="device-lan-ip">192.168.1.20</div>
+      </div>
+      <div class="col-6">
+        <div class="list-actions pull-right">
+          <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+            <i class="icn-sm icn-remote-access"></i>
+          </div>
+          <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top"
+               data-original-title="Send Alert">
+            <i class="icn-sm icn-send-alert"></i>
+          </div>
+          <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top"
+               data-original-title="Spec. Report">
+            <i class="icn-sm icn-spec-report"></i>
+          </div>
+          <div class="more pull-left dropdown">
+            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
+               aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i
+              class="icn-more icn-sm"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="qt-list-loading">
+    <div class="loader"></div>
+  </div>
+</div>

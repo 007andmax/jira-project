@@ -2,40 +2,57 @@
 
 (function () {
 
-  angular.module("quicktech.core.companies").directive("descriptionPopover",
+  angular.module("quicktech.core.companies").directive("customPopover",
     ['$timeout', function ($timeout) {
       return {
         restrict: 'A',
-        replace: true,
-        link: function(scope, element){
+        link: function (scope, element, attrs) {
+
+          if ((attrs.customPopoverContent === undefined) || !attrs.customPopoverPlacement) {
+            throw 'Required custom-popover-content and custom-popover-placement attrs'
+          }
+
+          scope.$watch(function () {
+            return attrs.customPopoverContent
+          }, initPopover);
 
           var isFirstShowing = true;
 
-          element.popover({
-            content: scope.company.description,
-            placement: 'bottom',
-            trigger: 'hover',
-            container: 'body'
-          });
+          function initPopover() {
 
-          element.on('show.bs.popover', function(){
+            if (attrs.customPopoverContent === '') {
+              return
+            }
 
-            $timeout(function(){
+            element.popover("destroy");
+
+            element.popover({
+              content: attrs.customPopoverContent,
+              placement: attrs.customPopoverPlacement,
+              trigger: 'hover',
+              container: 'body'
+            });
+
+            element.on('show.bs.popover', function () {
+
+              $timeout(function () {
+                var popover = $('.popover');
+                popover.addClass('description-popover');
+
+                if (isFirstShowing) {
+                  var leftPosition = parseInt(popover.css('left'));
+                  popover.css({'left': leftPosition + 25 + 'px'});
+                  isFirstShowing = false;
+                }
+              }, 0);
+            });
+
+            element.on('hidden.bs.popover', function () {
               var popover = $('.popover');
-              popover.addClass('description-popover');
+              popover.removeClass('description-popover');
+            })
 
-              if(isFirstShowing){
-                var leftPosition = parseInt(popover.css('left'));
-                popover.css({'left': leftPosition + 25 + 'px'});
-                isFirstShowing = false;
-              }
-            }, 0);
-          });
-
-          element.on('hidden.bs.popover', function(){
-            var popover = $('.popover');
-            popover.removeClass('description-popover');
-          })
+          }
 
         }
       }

@@ -1,96 +1,111 @@
-<ul class="users-lists">
-  <li class="head ">
-    <div class="clearfix">
-      <div class="col-1">NAME</div>
-      <div class="col-2">CONTACT NO.</div>
-      <div class="col-3">TYPE</div>
-      <div class="col-4">TICKETS SUBMITTED</div>
+<div role="tabpanel" class="tab-pane" style="display: block">
+  <ul class="qt-list qt-users">
+
+    <li class="list-heading">
+      <div class="col-1"><span>Name</span></div>
+      <div class="col-2"><span>Contact No.</span></div>
+      <div class="col-3"><span>Type</span></div>
+      <div class="col-4"><span>Tickets</span></div>
       <div class="col-5"></div>
-    </div>
-  </li>
-  <li class=" " ng-repeat="user in users | orderBy: 'firstName'" ng-controller="quicktech.core.companies.userTabCtrl">
-    <div class="clearfix">
+    </li>
+
+    <li ng-repeat="user in users | orderBy: 'firstName'" ng-controller="quicktech.core.companies.userTabCtrl">
 
       <div class="col-1">
-        <a herf="" class="pull-left avatar-38 avatar m-r">
-          <img src="images/avatars/a4.jpg" alt="..." class="img-circle">
-          <i class="on b-white bottom"></i>
-        </a>
-        <span class="name">{{ getUserName(user) }}</span>
-        <span class=" badge badge-light ">{{ user.designation }}</span>
+        <div class="user-bio">
+
+          <label class="control checkbox pull-left">
+            <input type="checkbox">
+            <span class="control-indicator"></span>
+          </label>
+
+          <div class="pull-left avatar">
+            <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+            <i class="on bottom"></i>
+          </div>
+
+          <div class="user-name pull-left">{{ getUserName(user) }}</div>
+          <span class="label label-light">{{ user.designation }}</span>
+
+        </div>
       </div>
 
-      <div class="col-2"><span class="icn icn-telephone contact"></span>
-        {{ getPriorityNumber(user) }}
+      <div class="col-2">
+        <span class="user-contact-no">
+          <i class="icn-sm" ng-class="{'icn-iphone': getPriorityNumber(user, true) === 'MOBILE',
+                      'icn-user-fax': getPriorityNumber(user, true) === 'FAX',
+                      'icn-user-phone': getPriorityNumber(user, true) === 'OFFICE'}"></i>
+          {{ getPriorityNumber(user) }}
+        </span>
       </div>
 
       <div class="col-3">
-        <span class="label"
-              ng-class="{'label-default': user.role === 'USER', 'label-warning': user.role === 'ADMIN'}">
-        {{ user.role }}
-        </span>
-        <ul class="user-badges">
-          <li id="has-ticket-updates1" ng-show="userSubscriptionsByCompanyId[user.id].ticket"
-              class="icn icn-ticket-updates tp-hide"
-              data-title="subscriber ticket updates"
-              data-container="#has-ticket-updates1" data-toggle="tooltip"
-              data-placement="top" data-original-title="" title=""></li>
-          <li id="has-invoice-updates1" ng-show="userSubscriptionsByCompanyId[user.id].invoice"
-              class="icn icn-invoice-updates tp-hide"
-              data-title="subscriber invoice updates"
-              data-container="#has-invoice-updates1" data-toggle="tooltip"
-              data-placement="top"></li>
-        </ul>
+        <div class="user-account-type">
+
+          <div class="label-wrapper">
+            <span class="label"
+                  ng-class="{'label-primary': user.role === 'USER', 'label-warning': user.role === 'ADMIN'}">
+              {{ user.role }}
+            </span>
+          </div>
+
+          <div id="has-invoice-updates1" class="persistent-tooltip pull-left"
+               tooltip="{{ getUserSubscribleTooltip(user) }}" tooltip-placement="top">
+            <i class="icn-sm {{ getUserSubscribleClass(user) }}"></i>
+          </div>
+
+        </div>
       </div>
-      <div class="col-4">{{ submittedTickets[user.id] }}</div>
+
+      <div class="col-4">
+        <span class="user-submitted-tickets">86</span>
+      </div>
+
       <div class="col-5">
-        <div class="user-actions pull-right">
+        <div class="list-actions pull-right">
+
           <div class="dropdown pull-left">
-            <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-                 data-toggle="dropdown"
-                 tooltip="logged in devices" tooltip-placement="top">
-              <span class="icn icn-user-device"></span>
+
+            <div class="btn btn-default pull-left has-tooltip disabled"
+                 data-toggle="dropdown" tooltip-placement="top" tooltip="logged in devices">
+              <i class="icn-sm icn-user-devices"></i>
             </div>
 
-
-            <ul class="dropdown-menu devices-menu" role="menu">
-              <li class="dropdown-submenu"><a tabindex="-1"
-                                              href="javascript:void(0)"><span
-                class="icon icn-server"></span>File.Server</a>
-              </li>
-              <li class="dropdown-submenu"><a tabindex="-1"
-                                              href="javascript:void(0)"><span
-                class="icon icn-computer"></span>Skynet.2013</a>
-              </li>
-              <li class="dropdown-submenu"><a tabindex="-1"
-                                              href="javascript:void(0)"><span
-                class="icon icn-mobile"></span>Mobile.Jack</a>
-              </li>
-              <li class="dropdown-submenu"><a tabindex="-1"
-                                              href="javascript:void(0)"><span
-                class="icon icn-fax"></span>Fax.Sublime</a></li>
-
-
+            <ul class="dropdown-menu devices-menu dropdown-menu-right" role="menu">
+              <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-server"></i>File.Server</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-computer"></i>Skynet.2013</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-mobile"></i>Mobile.Jack</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-fax"></i>Fax.Sublime</a></li>
             </ul>
           </div>
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               tooltip="Send Email" tooltip-placement="top" ng-click="sendMail()">
-            <span class="icn icn-user-msg"></span>
-          </div>
-          <div class="btn pull-left btn-white-gray btn-cr dropdown-toggle tooltip-dp"
-               tooltip="chat" tooltip-placement="top" ng-click="startChat()">
-            <span class="icn icn-user-chat"></span>
-          </div>
-          <div class="more pull-left left-align dropdown hover-dropdown">
-            <a href="javascript:void(0)" class="dropdown-toggle tooltip-dp"
-               aria-haspopup="true" aria-expanded="false"
-               tooltip="More" tooltip-placement="top" data-toggle="dropdown">
-              <span class="icn-ticket-more icn"></span></a>
-            <ul class="dropdown-menu  " role="menu">
 
-              <li class="dropdown-submenu left-align"><a tabindex="-1"
-                                                         href="javascript:void(0)">Set
-                Natalie Privilege</a>
+          <div class="btn btn-default btn-user-mail pull-left has-tooltip disabled"
+               tooltip-placement="top" tooltip="Email" ng-click="sendMail()">
+            <i class="icn-sm icn-user-mail"></i>
+          </div>
+
+          <div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"
+               tooltip-placement="top" tooltip="chat" ng-click="startChat()">
+            <i class="icn-sm icn-user-chat"></i>
+          </div>
+
+          <div class="more pull-left dropdown">
+
+            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip"
+               aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
+               tooltip-placement="top" tooltip="More">
+              <i class="icn-more icn-sm"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+              <li><a tabindex="-1" href="javascript:void(0)" class="disabled">Email</a></li>
+
+              <li><a tabindex="-1" href="javascript:void(0)" class="disabled">Chat</a></li>
+
+              <li class="dropdown-submenu left-align">
+
+                <a tabindex="-1" href="javascript:void(0)">Set {{ user.firstName }} Privilege</a>
 
                 <div class="dropdown-submenu-wrapper">
                   <ul class="dropdown-menu dropdown-privilege">
@@ -109,33 +124,34 @@
 
                   </ul>
                 </div>
-              </li>
-              <li class="dropdown-submenu left-align">
-                <a tabindex="-1" href="javascript:void(0)">Subscribe Miles to...</a>
 
-                <div class="dropdown-submenu-wrapper" stop-propagation="click">
+              </li>
+
+              <li class="dropdown-submenu left-align">
+
+                <a tabindex="-1" href="javascript:void(0)">Subscribe {{ user.firstName }} to...</a>
+
+                <div class="dropdown-submenu-wrapper">
                   <ul class="dropdown-menu dropdown-subscribe">
 
-                    <li class="checked" ng-click="changeUserSubscription('ticket')">
-                      <a tabindex="-1" href>
+                    <li>
+                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
                         <div class="clearfix">
                           <label class="control checkbox pull-left">
-                            <input type="checkbox" ng-model="userSubscriptionsByCompanyId[user.id].ticket">
-                            <span class="control-indicator"></span>
+                            <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
+                            <span class="control-indicator"></span> Ticket Updates
                           </label>
-                          Ticket Updates
                         </div>
                       </a>
                     </li>
 
-                    <li class="checked" ng-click="changeUserSubscription('invoice')">
-                      <a tabindex="-1" href>
+                    <li>
+                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
                         <div class="clearfix">
                           <label class="control checkbox pull-left">
-                            <input type="checkbox" ng-model="userSubscriptionsByCompanyId[user.id].invoice">
-                            <span class="control-indicator"></span>
+                            <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                            <span class="control-indicator"></span> Invoice Updates
                           </label>
-                          Invoice Updates
                         </div>
                       </a>
                     </li>
@@ -143,21 +159,18 @@
                   </ul>
                 </div>
               </li>
+
               <li>
-                <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUser()">
+                <a tabindex="-1" href="javascript:void(0)" class="disabled" ng-click="archiveUser()">
                   Archive this Contact
                 </a>
               </li>
 
             </ul>
-
-          </div>
-          <div>
-
           </div>
         </div>
       </div>
+    </li>
 
-    </div>
-  </li>
-</ul>
+  </ul>
+</div>

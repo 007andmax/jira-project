@@ -1,8 +1,13 @@
-<div class="nav-left ticket-nav" ng-controller="quicktech.core.header.companyProfileCtrl">
+<div class="topNavbarLeft-Left pull-left" ng-controller="quicktech.core.header.companyProfileCtrl">
 
-  <div id="bulk-actions" class="bulk-actions" style="">
-    <div class="back-btn icn icn-back-btn" ui-sref="companies"
-         tooltip="Back" tooltip-placement="bottom"></div>
-    <h4><span class="total-selected">Companies</span> {{ companies.length }}</h4>
+  <div class="pull-left">
+    <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+       style="margin: 11px 8px 0 0;" ui-sref="companies"
+       tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="Back to Companies">
+      <i class="icn-sm icn-back-arrow"></i>
+    </a>
   </div>
+
+  <p class="pull-left" style="white-space: nowrap;"><strong>{{ company.name }}</strong></p>
+
 </div>
