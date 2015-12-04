@@ -244,6 +244,14 @@ a.ha-24{
 :hover > .icn-close-server, :active > .icn-close-server, :focus:hover > .icn-close-server, :focus:active > .icn-close-server, :hover:active > .icn-close-server, .active > .icn-close-server, .open > .icn-close-server {
   background-position: -776px 0;
 }
+.icn-close-sm{
+  background-position: -1972px 0;
+  height: 8px;
+  width: 8px;
+}
+:hover > .icn-close-sm, :active > .icn-close-sm, :focus:hover > .icn-close-sm, :focus:active > .icn-close-sm, :hover:active > .icn-close-sm, .active > .icn-close-sm, .open > .icn-close-sm {
+  background-position: -1990px 0;
+}
 .icn-x{
   background-position: -776px 0;
   width: 8px;
@@ -1082,6 +1090,13 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 :hover > .icn-user-subscription, :active > .icn-user-subscription, :focus:hover > .icn-user-subscription, :focus:active > .icn-user-subscription, :hover:active > .icn-user-subscription, .active > .icn-user-subscription, .open .icn-user-subscription, .open > .btn:hover .icn-user-subscription {
   background-position: -776px -51px;
 }
+/**Inside Button**/
+.btn > i.icn-user-subscription{
+  background-position: -754px -51px;
+  top: -2px;
+  right: -1px;
+}
+/***/
 
 .icn-archive-user{
   background-position: -798px -50px;
