@@ -36,14 +36,14 @@
               },
               function (finish) {
 
-                if(finish.code === 400){
+                if (finish.code === 400 || finish.code === 500) {
 
                   $scope.fileInfo[file.name] = {
                     error: true,
                     message: finish.message
                   };
 
-                  $scope.fileInfo.quantityErrorFiles ++;
+                  $scope.fileInfo.quantityErrorFiles++;
                   $scope.updateTicketNote.$setValidity('errorFile', false);
                 }
 
@@ -76,11 +76,11 @@
           };
 
           $scope.removeAttachment = function (index, isErrorFile) {
-            if(isErrorFile){
+            if (isErrorFile) {
 
-              $scope.fileInfo.quantityErrorFiles --;
+              $scope.fileInfo.quantityErrorFiles--;
 
-              if($scope.fileInfo.quantityErrorFiles === 0){
+              if ($scope.fileInfo.quantityErrorFiles === 0) {
                 $scope.updateTicketNote.$setValidity('errorFile', true);
               }
             }
@@ -92,7 +92,25 @@
             return form[fieldName] && !form[fieldName].$valid;
           };
 
-          $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault)
+          $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault);
+
+          $scope.$watch('ticketUpdate.attachments.length', function () {
+
+            var totalAttachSize = 0;
+
+            for (var i = 0; i < $scope.ticketUpdate.attachments.length; i++) {
+              totalAttachSize += $scope.ticketUpdate.attachments[i].size;
+            }
+
+            if (totalAttachSize > (15 * 1024 * 1024)) {
+              $scope.errorAttachSize = 'Attachments must be less than 15 Megabyte';
+              $scope.disabledWhenLoadAttachment = true;
+            } else {
+              $scope.errorAttachSize = false;
+              $scope.disabledWhenLoadAttachment = false;
+            }
+
+          })
 
         }]);
   }()

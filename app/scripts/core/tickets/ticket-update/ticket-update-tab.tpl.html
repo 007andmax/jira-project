@@ -63,11 +63,12 @@
                  ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'">
             </div>
 
-            <div class="ticket-add-content-actions-users pull-left" ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
+            <span class="pull-right" ng-show="errorAttachSize" style="color: rgb(229, 57, 53);">
+              {{ errorAttachSize }}
+            </span>
 
-
-
-            </div>
+            <div class="ticket-add-content-actions-users pull-left"
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'"></div>
 
           </div>
         </div>
@@ -102,8 +103,8 @@
             <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline"
                  ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
-            <div class="ticket-add-content-actions-users pull-left" ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
-
+            <div class="ticket-add-content-actions-users pull-left"
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
 
 
             </div>
@@ -148,8 +149,8 @@
                  ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'">
             </div>
 
-            <div class="ticket-add-content-actions-users pull-left" ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
-
+            <div class="ticket-add-content-actions-users pull-left"
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
 
 
             </div>

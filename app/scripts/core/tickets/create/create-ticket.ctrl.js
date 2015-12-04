@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
-      'quicktech.common.services.UserNotificationService', '$timeout',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService, $timeout) {
+      'quicktech.common.services.UserNotificationService', '$timeout', '$filter',
+      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService, $timeout, $filter) {
 
         $scope.fileInfo = {quantityErrorFiles: 0};
         $scope.ticket = {priorityLevel: 'MEDIUM'};
@@ -54,12 +54,17 @@
 
           FilesService.create(file,
             function (progress) {
+              $scope.fileLoadOrError = true;
               file.progress = 100 * (progress.loaded / progress.total);
               $scope.$apply();
             },
             function (finish) {
 
-              if (finish.code === 400) {
+              $scope.fileLoadOrError = false;
+
+              if (finish.code === 400 || finish.code === 500) {
+
+                $scope.fileLoadOrError = true;
 
                 $scope.fileInfo[file.name] = {
                   error: true,
@@ -82,6 +87,7 @@
 
             if($scope.fileInfo.quantityErrorFiles === 0){
               $scope.ticketForm.$setValidity('errorFile', true);
+              $scope.fileLoadOrError = false;
             }
           }
 
@@ -91,10 +97,12 @@
         $scope.reloadAttachment = function (file) {
           FilesService.create(file,
             function (progress) {
+              $scope.fileLoadOrError = true;
               file.progress = 100 * (progress.loaded / progress.total);
               $scope.$apply();
             },
             function (finish) {
+              $scope.fileLoadOrError = false;
               file.id = finish.id;
             }, function (error) {
             });
@@ -110,10 +118,12 @@
               $scope.ticket.attachFileIds.push($scope.ticketAttachments[i].id);
             }
 
+            var ticketNumber = $scope.ticketNumber;
+
             TicketsService.createTicket($scope.ticket, function () {
               $scope.savingInProcess = false;
               $modalInstance.dismiss();
-              UserNotificationService.show('New Ticket “' + $scope.ticketNumber + '” has been created', true);
+              UserNotificationService.show('New Ticket “' + ticketNumber + '” has been created', true);
             });
 
           } else {
@@ -153,6 +163,22 @@
             return 'REQUIRED FIELDS CANNOT BE LEFT EMPTY.'
           }
         };
+
+        $scope.$watch('ticketAttachments.length', function(){
+
+          var totalAttachSize = 0;
+
+          for(var i = 0; i < $scope.ticketAttachments.length; i++){
+            totalAttachSize += $scope.ticketAttachments[i].size;
+          }
+
+          if(totalAttachSize > (15 * 1024 * 1024)){
+            $scope.errorFileMessage = 'Attachments must be less than 15 Megabyte';
+          } else {
+            $scope.errorFileMessage = false;
+          }
+
+        })
 
       }]);
 

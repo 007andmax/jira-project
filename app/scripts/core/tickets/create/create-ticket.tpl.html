@@ -9,9 +9,16 @@
       <h4 class="modal-title pull-left">Create Ticket <span class="dot-sep"></span></h4>
       <span class="ticket-number pull-left">TKT# {{ ticketNumber }}</span>
 
-      <div class="validation-msg pull-left" style="padding-left: 40px;color: rgb(229, 57, 53);margin-top:-2px;">
+      <div class="validation-msg pull-left" ng-hide="errorFileMessage"
+           style="padding-left: 40px;color: rgb(229, 57, 53);margin-top:-2px;">
         {{ validationMessage(ticketForm) }}
       </div>
+
+      <div class="validation-msg pull-left" ng-show="errorFileMessage"
+           style="padding-left: 40px;color: rgb(229, 57, 53);margin-top:-2px;">
+        {{ errorFileMessage }}
+      </div>
+
     </div>
 
     <div class="modal-body">
@@ -33,7 +40,7 @@
                placeholder="Type your message..." style="min-height: 75px;"></div>
 
           <div class="form-group">
-            <ul class="upload-attachments">
+            <ul class="upload-attachments" style="max-height: 200px;overflow-y: scroll;">
               <li ng-repeat="file in ticketAttachments"
                   ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
 
@@ -46,7 +53,8 @@
                   <i class="icn-sm icn-remove-token"></i>
                 </a>
 
-                 <span class="pull-right" ng-show="fileInfo[file.name].error" style="color:#e53935">
+                 <span class="pull-right" ng-show="fileInfo[file.name].error"
+                       style="position: absolute;color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 250px;">
                    {{ fileInfo[file.name].message }}
                  </span>
 
@@ -277,7 +285,7 @@
               </div>
 
               <div class="btn btn-lg btn-info" ng-click="saveTicket(ticketForm)"
-                   custom-disabled="{{ (ticketForm.$invalid || ticketForm.$pristine) && triedToSaveTicket || savingInProcess }}">
+                   custom-disabled="{{ ((ticketForm.$invalid || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
                 Create
               </div>
 
