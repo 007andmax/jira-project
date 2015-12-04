@@ -131,6 +131,7 @@
         function setTicketNumber() {
           if ($scope.activity.firstList[0] && $scope.activity.firstList[0].ticketNumber) {
             $scope.ticketNumber = $scope.activity.firstList[0].ticketNumber;
+            $scope.ticketId = $scope.activity.firstList[0].ticketId;
           } else {
             console.error('can not find ticketNumber in activity ' + $scope.activity.action)
           }
