@@ -1,8 +1,7 @@
 .topNavbar{
-  background-color: #FFF;
+  background-color: #FFF !important;
   border-radius: 0px;
-  border: none;
-  /*border-bottom: 1px #e7e7e7 solid;*/
+  border: none !important;
   height:78px;
 }
 
@@ -17,12 +16,10 @@
   padding-top: 9px;
   margin-right: 30px;
   height: 38px;
-  /*background-color: #ABC;*/
 }
 
 
 .topNavbarLeft{
-  /*background-color: #CDE;*/
   width: 100%;
   padding-right: 280px;
 }
@@ -58,7 +55,6 @@
 }
 
 .topNavbarRight{
-  /*background-color: #DEF;*/
   position: fixed;
   right: 0;
   width: 280px;
@@ -67,15 +63,12 @@
 }
 
 .topNavbarLeft-Left{
-  /*background-color: #0074d9;*/
   width: 391px;
   display: flex;
   display: -webkit-flex;
 }
 
 .topNavbarLeft-Left > p{
-  /*background-color: #ABC;*/
-  /*margin-left: 10px;*/
   padding-left: 2px;
   padding-top: 7px;
   font-size: 17px;
@@ -86,15 +79,6 @@
 .topNavbarLeft-Left > p strong{
   font-weight: 400;
 }
-/*body.settings .topNavbarLeft-Left > p {
-    padding-top: 7px;
-    font-size: 17px;
-    line-height: 24px;
-}*/
-
-/*.topNavbarLeft-Left span{
-    cursor: pointer;
-}*/
 
 @-moz-document url-prefix() {
   .topNavbarLeft-Left > p {
@@ -147,12 +131,7 @@
 }
 
 .topNavbar-filter .dropdown.more{
-  /*padding-top: 13px;*/
   cursor: pointer;
   line-height: 0;
   margin-left: 8px;
 }
-
-/*topNavbar-search{
-    margin-left: 30px;
-}*/

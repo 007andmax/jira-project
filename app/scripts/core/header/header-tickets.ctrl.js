@@ -11,12 +11,12 @@
           companies = CompaniesService.getAllCompanies(),
           autocompleteModel,
           labels = {
-            'unassigned': 'Unassigned Tickets',
+            'unassigned': 'Unassigned',
             'user': 'My Tickets',
-            'open': 'Open Tickets',
-            'closed': 'Closed Tickets',
+            'open': 'Open',
+            'closed': 'Closed',
             'trash': 'Trash',
-            'shared': 'Shared Tickets',
+            'shared': 'Shared',
             'spam': 'Spam'
           },
           searchPriorityParamsMap = {

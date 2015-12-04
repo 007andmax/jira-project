@@ -5,14 +5,14 @@
       <div class="ticket-header clearfix ticket-fixed-header">
         <div id="ticket-header-content">
 
-          <a href="javascript:void(0)" class="pull-left ticket-header-avatar">
+          <div class="pull-left ticket-header-avatar">
             <img ng-src="{{ getUserAvatarUrl(ticketDetails.createdUser) }}" class="avatar-38 img-circle" alt="...">
-          </a>
+          </div>
 
           <div class="clearfix pull-left">
 
             <div class="ticket-header-username pull-left">
-              <a href="javascript:void(0)"><strong>{{ getUserName(user) }}</strong></a>
+              <strong>{{ getUserName(user) }}</strong>
             </div>
 
             <div class="ticket-header-status pull-left">
