@@ -300,6 +300,10 @@
   opacity: 1;
 }
 
+.ticket.five-actions:hover .ticket-meta .ticket-title p.ellipsis {
+  width: calc(100% - 170px);
+}
+
 /*company-profile*/
 i.off {
   background-color: #7c8999;

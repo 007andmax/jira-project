@@ -35,7 +35,7 @@
         <span class="text-muted">&nbsp;–&nbsp;{{ ticket.previewNote }}</span>
       </p>
 
-      <ul class="ticket-actions pull-right" ng-click="doNotExpandTicket($event)">
+      <ul class="ticket-actions pull-right" ng-init="ticketActionRendering()" ng-click="doNotExpandTicket($event)">
 
         <li class="pull-left" ng-if="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">
           <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
