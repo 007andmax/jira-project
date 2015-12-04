@@ -19,7 +19,7 @@
     <div class="topNavbar-filter pull-right">
 
       <div class="dropdown more pull-right"
-           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
+           ng-if="!sharedState.checkedCompletedTicket && listType !== 'spam' && listType !== 'trash'">
 
         <a class="hit-area ha-22-38 has-tooltip" tooltip-placement="bottom" tooltip="More"
            aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
@@ -27,7 +27,7 @@
         </a>
 
         <ul class="dropdown-menu" role="menu"
-            ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
+            ng-if="!sharedState.checkedCompletedTicket && listType !== 'spam' && listType !== 'trash'">
 
           <li class="dropdown-submenu">
             <a tabindex="-1" href="javascript:void(0)"

@@ -331,13 +331,12 @@
 
                 <span class="text-muted">added {{ updateType() }}</span>
 
-                <button href="javascript:void(0)" class="hit-area pull-right has-tooltip"
-                        style="border: none;background: white;"
+                <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
                         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete"
                         ng-click="deleteUpdate()"
-                        custom-disabled="{{ ticketDetails.status === 'COMPLETED' || PermissionsService.isDisabledDeleteTicketUpdate(listType, ticketUpdate.user.id, currentUser.id, currentUser.role) }}">
+                        custom-disabled="{{ PermissionsService.isDisabledDeleteTicketUpdate(ticketDetails, ticketUpdate.user.id, currentUser.id, currentUser.role) }}">
                   <i class="icn-sm icn-nav-delete"></i>
-                </button>
+                </a>
 
               </div>
 
@@ -398,13 +397,12 @@
                   </div>
 
                   <div class="table-content-action pull-right">
-                    <button class="hit-area pull-right has-tooltip"
-                            style="border: none;background: white;margin-top: 19px; "
+                    <a class="hit-area pull-right has-tooltip"
                             tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit product"
                             ng-click="setEditExpenseId(product.id)"
-                            custom-disabled="{{ PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role) }}">
+                            custom-disabled="{{ PermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
                       <i class="icn-sm icn-edit"></i>
-                    </button>
+                    </a>
                   </div>
                 </div>
 
@@ -427,13 +425,12 @@
                   <div class="col-3">{{ service.description ? service.description : '&nbsp;' }}</div>
 
                   <div class="table-content-action pull-right">
-                    <button class="hit-area pull-right has-tooltip"
-                            style="border: none;background: white;margin-top: 19px; margin-top: 19px; "
+                    <a class="hit-area pull-right has-tooltip"
                             tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit service"
                             ng-click="setEditExpenseId(service.id)"
-                            custom-disabled="{{ PermissionsService.isEditUpdateDisabled(ticketDetails.status, listType, currentUser.role) }}">
+                            custom-disabled="{{ PermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
                       <i class="icn-sm icn-edit"></i>
-                    </button>
+                    </a>
                   </div>
                 </div>
 

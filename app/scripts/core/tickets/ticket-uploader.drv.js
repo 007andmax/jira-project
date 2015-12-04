@@ -18,13 +18,27 @@
 
             scope.$watch('ticketsHeaderState.searchFilter', function (searchFilter) {
 
-              if ($stateParams.listType.toLowerCase() === 'preview') {
-                $document.off('scroll');
-                return;
-              }
+                if ($stateParams.listType.toLowerCase() === 'preview') {
+                  var cssSettings = {
+                      'width': '80%',
+                      'position': 'fixed',
+                      'height': '100%'
+                    },
+                    conteiner = element.find('[show-ticket-details]');
 
-              getTicketsList(searchFilter);
-            }, true);
+                  conteiner.removeClass('container-ticket-content');
+                  conteiner.css(cssSettings);
+
+                  element.find('.ticket-header').css({'width': '80%'});
+
+
+                  $document.off('scroll');
+                  return;
+                }
+
+                getTicketsList(searchFilter);
+              }, true
+            );
 
             function getTicketsList(params) {
 
@@ -213,6 +227,8 @@
 
           }
         };
-      }]);
+      }])
+  ;
 
-})();
+})
+();

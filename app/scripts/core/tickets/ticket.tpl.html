@@ -116,7 +116,7 @@
         </li>
 
         <li class="pull-left" dropdown
-            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isMoreActionsMenuVisible(listType, currentUser.role)">
+            ng-if="PermissionsService.isMoreActionsMenuVisible(ticket, currentUser)">
 
           <a href="javascript:void(0)" class="hit-area ha-22-16 has-tooltip" dropdown-toogle
              aria-haspopup="true" aria-expanded="false"
@@ -195,14 +195,14 @@
           </a>
         </li>
 
-        <li class="pull-right" ng-if="PermissionsService.isDeleteForeverVisible(listType, currentUser.role, ticket)">
+        <li class="pull-right" ng-if="PermissionsService.isDeleteForeverVisible(ticket, currentUser.role)">
           <a href="javascript:void(0)" class="hit-area has-tooltip"
              ng-click="deleteForever()" tooltip="delete forever" tooltip-placement="top">
             <i class="icn icn-sm icn-delete"></i>
           </a>
         </li>
 
-        <li class="pull-left" ng-if="PermissionsService.isRestoreFromSpamVisible(listType, currentUser.role)">
+        <li class="pull-left" ng-if="PermissionsService.isRestoreFromSpamVisible(ticket)">
           <a href="javascript:void(0)" class="hit-area ha-18-16 has-tooltip"
              tooltip="Restore" tooltip-placement="top" ng-click="restoreFromSpam()">
             <i class="icn-sm icn-restore"></i>

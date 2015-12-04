@@ -21,14 +21,13 @@
         SPAM: 'spam'
       };
 
-      function isMoreActionsMenuVisible(listType, userRole) {
+      function isMoreActionsMenuVisible(ticket, currentUser) {
 
-        var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
-        var isTrueForUser = listType === LIST_TYPES.USER;
-        var isTrueForOpen = listType === LIST_TYPES.OPEN;
-        var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
+        var isShowForAdmin  = (currentUser.role === USER_ROLES.ADMIN || currentUser.role === USER_ROLES.SUPER_ADMIN);
+        var isShowForUser  = ticket.assignedUser && (ticket.assignedUser.id === currentUser.id);
+        var isShow = ticket.status !== 'COMPLETED' && !ticket.reportedAsSpamAt && !ticket.markedAsSpamAt && !ticket.trash;
 
-        return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForShared;
+        return (isShowForAdmin || isShowForUser) && isShow;
       }
 
       function isMoveIntoSpamVisible(listType, userRole, isReport, isMark) {
@@ -171,13 +170,15 @@
         return isTrue;
       }
 
-      function isEditUpdateDisabled(ticketStatus, listType, userRole) {
+      function isEditUpdateDisabled(ticket, userRole) {
 
         var isDisabledForUser = userRole === USER_ROLES.USER;
-        var statusClosed = ticketStatus === 'COMPLETED';
-        var isTrue = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
+        var statusClosed = ticket.status === 'COMPLETED';
+        var isTrash = ticket.trash;
+        var isSpam = ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
+        //var isTrue = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
 
-        return statusClosed || isTrue || isDisabledForUser;
+        return statusClosed || isTrash || isSpam || isDisabledForUser;
       }
 
       function isAditionalActionAccessForUser(ticket, user) {
@@ -187,13 +188,9 @@
         }
       }
 
-      function isTipVisibleOnClosedPage(listType, ticket, option) {
+      function isTipVisibleOnClosedPage(ticket, option) {
 
-        if (listType !== LIST_TYPES.CLOSE && listType !== LIST_TYPES.USER) {
-          return false;
-        }
-
-        if(listType === LIST_TYPES.USER && ticket.status !== "COMPLETED"){
+        if (ticket.status !== 'COMPLETED') {
           return false;
         }
 
@@ -222,9 +219,9 @@
         }
       }
 
-      function isTipVisibleOnSharedPage(listType, ticket, userRole, option) {
+      function isTipVisibleOnSharedPage(ticket, userRole, option) {
 
-        if (listType !== LIST_TYPES.SHARED) {
+        if (!ticket.sharedToCurrentUserAt) {
           return false;
         }
 
@@ -236,9 +233,9 @@
         }
       }
 
-      function isTipVisibleOnSpamPage(listType, ticket, userRole, option) {
+      function isTipVisibleOnSpamPage(ticket, userRole, option) {
 
-        if (listType !== LIST_TYPES.SPAM) {
+        if (!ticket.reportedAsSpamAt && !ticket.markedAsSpamAt) {
           return false;
         }
 
@@ -253,7 +250,7 @@
 
       function isUserMsgTipsVisible(listType, ticket, user, option) {
 
-        if (listType === LIST_TYPES.UNASSIGNED) {
+        if (!ticket.assignedUser) {
           return false
         }
 
@@ -290,6 +287,13 @@
         }
       }
 
+      function isClaimTicketTipVisible(ticket){
+
+        var isShow = !ticket.assignedUser && !ticket.trash && !ticket.reportedAsSpamAt && !ticket.markedAsSpamAt && ticket.status !== "COMPLETED";
+
+        return isShow;
+      }
+
       function isShowLabelsOnLeftPanel(listType) {
         for (var type in LIST_TYPES) {
           if (listType === LIST_TYPES[type]) {
@@ -298,24 +302,27 @@
         }
       }
 
-      function isDisabledDeleteTicketUpdate(listType, creatorId, userId, userRole) {
+      function isDisabledDeleteTicketUpdate(ticket, creatorId, userId, userRole) {
         var isDisabledForUser = userRole === USER_ROLES.USER && creatorId !== userId;
-        var isDisablenOnPage = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
+        //var isDisablenOnPage = listType === LIST_TYPES.CLOSE || listType === LIST_TYPES.TRASH || listType === LIST_TYPES.SPAM;
+        var statusClosed = ticket.status === 'COMPLETED';
+        var isTrash = ticket.trash;
+        var isSpam = ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
 
-        return isDisablenOnPage || isDisabledForUser;
+        return statusClosed || isTrash || isSpam || isDisabledForUser;
       }
 
-      function isRestoreFromSpamVisible(listType) {
+      function isRestoreFromSpamVisible(ticket) {
 
-        var isTrueForSpamList = listType === LIST_TYPES.SPAM;
+        var isTrueForSpamList = ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
 
         return isTrueForSpamList;
       }
 
-      function isDeleteForeverVisible(listType, userRole, ticket) {
+      function isDeleteForeverVisible(ticket, userRole) {
 
-        var isTrueForTrashList = listType === LIST_TYPES.TRASH;
-        var isTrueForSpamList = listType === LIST_TYPES.SPAM && userRole !== USER_ROLES.USER && ticket.markedAsSpamAt;
+        var isTrueForTrashList = ticket.trash;
+        var isTrueForSpamList = userRole !== USER_ROLES.USER && ticket.markedAsSpamAt;
 
         return isTrueForTrashList || isTrueForSpamList;
       }
@@ -345,7 +352,8 @@
         isDisabledDeleteTicketUpdate: isDisabledDeleteTicketUpdate,
         isRestoreFromSpamVisible: isRestoreFromSpamVisible,
         isDeleteForeverVisible: isDeleteForeverVisible,
-        isTipVisibleOnSpamPage: isTipVisibleOnSpamPage
+        isTipVisibleOnSpamPage: isTipVisibleOnSpamPage,
+        isClaimTicketTipVisible: isClaimTicketTipVisible
       }
 
     }]);

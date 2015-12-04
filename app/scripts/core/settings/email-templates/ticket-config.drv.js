@@ -7,9 +7,10 @@
       function (TicketsService, EmailSettingsService) {
         return {
           restrict: 'A',
-          link: function (scope, element, attrs, ctrl) {
+          link: function (scope, element) {
 
-            var numberInput = element.find('[tc-number-input]'),
+            var ticketParams = {},
+              numberInput = element.find('[tc-number-input]'),
               prefixInput = element.find('[tc-prefix-input]');
 
             TicketsService.getActualNumber(scope, function (number) {
@@ -26,20 +27,30 @@
                     prefix: scope.actualTicketNumber.split('-')[0]
                   };
                 }
+
+                ticketParams.count = scope.ticketConfig.count;
+                ticketParams.prefix = scope.ticketConfig.prefix;
               }
             );
 
             numberInput.on('focusout', function () {
-              if (scope.ticketForm.$valid) {
+              if (scope.ticketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
               }
             });
 
             prefixInput.on('focusout', function () {
-              if (scope.ticketForm.$valid) {
+              if (scope.ticketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
               }
-            })
+            });
+
+            function ifInputsChange(){
+              var countChange = ticketParams.count !== scope.ticketConfig.count;
+              var prefixChanhe = ticketParams.prefix !== scope.ticketConfig.prefix;
+
+              return countChange || prefixChanhe;
+            }
 
           }
         }

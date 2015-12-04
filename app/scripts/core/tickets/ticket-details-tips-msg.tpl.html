@@ -1,7 +1,7 @@
 <div ng-if="currentOpenTab"
      ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
 
-  <div class="well ticket-well" ng-if="listType === 'unassigned'">
+  <div class="well ticket-well" ng-show="PermissionsService.isClaimTicketTipVisible(ticketDetails)">
 
     <i class="icn-lg icn-msg-claim"></i>
 
@@ -17,7 +17,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'OPEN')">
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'OPEN')">
 
     <i class="icn-lg icn-msg-open"></i>
 
@@ -33,7 +33,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'OLD')">
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'OLD')">
 
     <i class="icn-lg icn-msg-open"></i>
 
@@ -46,7 +46,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'BILLED')">
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'BILLED')">
     <i class="icn-lg icn-msg-open"></i>
 
     <div class="well-message">
@@ -57,7 +57,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnClosedPage(listType, ticketDetails, 'BILLABLE')">
+       ng-if="PermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'BILLABLE')">
 
     <i class="icn-lg icn-msg-open"></i>
 
@@ -71,7 +71,7 @@
 
   </div>
 
-  <div class="well ticket-well" ng-if="listType === 'trash' && ticketDetails.deletePerformer.id !== currentUser.id">
+  <div class="well ticket-well" ng-if="ticketDetails.trash && ticketDetails.deletePerformer.id !== currentUser.id">
     <i class="icn-lg icn-msg-delete"></i>
 
     <div class="well-message">
@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <div class="well ticket-well" ng-if="listType === 'trash' && ticketDetails.deletePerformer.id === currentUser.id">
+  <div class="well ticket-well" ng-if="ticketDetails.trash && ticketDetails.deletePerformer.id === currentUser.id">
     <i class="icn-lg icn-msg-delete"></i>
 
     <div class="well-message">
@@ -103,7 +103,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_DELETE')">
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(ticketDetails, currentUser.role, 'ADMIN_DELETE')">
     <i class="icn-lg icn-msg-spam"></i>
 
     <div class="well-message">
@@ -120,7 +120,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'USER_SPAM')">
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(ticketDetails, currentUser.role, 'USER_SPAM')">
     <i class="icn-lg icn-msg-spam"></i>
 
     <div class="well-message">
@@ -134,7 +134,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnSpamPage(listType, ticketDetails, currentUser.role, 'ADMIN_SPAM')">
+       ng-if="PermissionsService.isTipVisibleOnSpamPage(ticketDetails, currentUser.role, 'ADMIN_SPAM')">
     <i class="icn-lg icn-msg-spam"></i>
 
     <div class="well-message">
@@ -151,7 +151,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnSharedPage(listType, ticketDetails, currentUser.role, 'ADMIN')">
+       ng-if="PermissionsService.isTipVisibleOnSharedPage(ticketDetails, currentUser.role, 'ADMIN')">
 
     <i class="icn-lg icn-msg-closed"></i>
 
@@ -168,7 +168,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="PermissionsService.isTipVisibleOnSharedPage(listType, ticketDetails, currentUser.role, 'USER')">
+       ng-if="PermissionsService.isTipVisibleOnSharedPage(ticketDetails, currentUser.role, 'USER')">
     <i class="icn-lg icn-msg-closed"></i>
 
     <div class="well-message">
