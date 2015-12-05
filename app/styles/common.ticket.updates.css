@@ -56,7 +56,6 @@
   margin: 10px 0 0;
   padding: 0px;
   list-style: none;
-  /*width: calc(100% - 60px);*/
 }
 .ticket-update-header .shared-users-list > li{
   margin-right: 10px;
@@ -206,9 +205,6 @@
 }
 
 .ticket-update-content  .ticket-update-meta .btn-more-users{
-  /*width: 26px;*/
-  /*height: 26px;*/
-  /*margin-left: 16px;*/
   position: relative;
   margin: 0 0 0 10px;
   padding: 7px 12px;
@@ -225,7 +221,6 @@
   .ticket-update-content  .ticket-update-meta .btn-more-users {
     padding: 7px 12px 8px;
     margin-top: 1px;
-    /*line-height: 11px;*/
   }
 }
 .ticket-update-content  .ticket-update-meta .btn-more-users:hover{
@@ -251,15 +246,15 @@
   margin-top: 10px;
   margin-left: 10px;
 }
-/*.btn-more-users:hover .tooltip-users {
-    opacity: 1;
-    display: block;
-}*/
 
 .table-wrapper {
   float: left;
   width: 100%;
   margin-top: 9px;
+  margin-bottom: 10px;
+}
+.table-wrapper + .table-wrapper{
+  margin-top: 0;
 }
 .qt-list .table-wrapper{
   margin-top: 0px;
@@ -277,12 +272,10 @@
   margin: 0;
   padding: 0;
   position: relative;
-  /*margin-bottom: 10px;*/
   list-style: none;
   color: #4c5c6f;
   background-color: #f1f5fa;
   border: 1px solid #e7ecf2;
-  cursor: auto;
 }
 .table-wrapper > .table-content:last-child{
   margin-bottom: 10px;
@@ -291,6 +284,7 @@
   margin-top: 10px;
 }
 .qt-list .table-wrapper > .table-content{
+  cursor: auto;
   width: calc(100% - 26px);
 }
 .qt-invoices .sub-wrapper .table-wrapper > .table-content{
@@ -380,6 +374,7 @@
 .table-wrapper .table-content-action a.hit-area {
   margin-top: 19px;
   margin-right: -2px;
+  cursor: pointer;
 }
 .ticket-update-content .attachments {
   float: left;
