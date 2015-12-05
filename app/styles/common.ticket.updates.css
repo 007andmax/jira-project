@@ -401,7 +401,10 @@
   float: left;
   width: 100%;
   height: 166px;
-  margin: 10px 0;
+  margin: 10px 0 0;
+}
+.table-content + .ticket-update-edit {
+  margin: 0;
 }
 .ticket-update-edit .icon-edit {
   position: absolute;

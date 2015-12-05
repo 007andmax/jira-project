@@ -331,7 +331,7 @@ a.ha-24{
   left: -4px !important;
 }
 
-.icn-status-completed {
+.icn-ticket-completed {
   background-position: -861px -100px;
   width: 8px;
   height: 6px;
@@ -601,7 +601,7 @@ a.ha-24{
   width: 5px;
 }
 
-.icn-onhold{
+.icn-ticket-onhold{
   background-position: -849px -100px;
   width: 2px;
   height: 8px;
