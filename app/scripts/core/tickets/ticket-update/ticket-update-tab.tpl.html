@@ -30,7 +30,7 @@
 
   <div class="tab-content">
 
-    <div class="tab-pane in active" ng-if="currentOpenTab === 'NOTE'"
+    <div class="tab-pane in active" id="Note" ng-if="currentOpenTab === 'NOTE'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
 
       <div class="ticket-add clearfix" ng-form="updateTicketNote">
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <div class="tab-pane in active"
+    <div class="tab-pane in active" id="Product"
          ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'PRODUCT'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl">
 
@@ -122,7 +122,7 @@
       </div>
     </div>
 
-    <div class="tab-pane in active"
+    <div class="tab-pane in active" id="Service"
          ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'SERVICE'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl">
 
