@@ -552,11 +552,12 @@ Devices tab
 .qt-billable-sub{
   cursor: auto;
 }
-.qt-billable-sub > li {
+.qt-list.qt-billable-sub > li {
   cursor: pointer;
+  height: auto;
+  min-height: 70px;
 }
 .billable-main>.col-1, .qt-billable-sub>li>.col-1{
-  /*max-width: 1px;*/
   width: calc(100% - 98px);
   white-space: nowrap;
 }
@@ -609,11 +610,6 @@ Devices tab
 }
 .qt-billable-sub .billable-amount{
   color: #94a4b8;
-}
-
-.qt-billable-sub>li{
-  min-height: 70px;
-  height: auto;
 }
 .qt-billable-sub>li+li{
   min-height: 71px;

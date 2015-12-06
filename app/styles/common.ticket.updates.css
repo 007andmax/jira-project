@@ -266,7 +266,7 @@
   padding-bottom: 30px;
   cursor: auto;
 }
-.table-wrapper > .table-content {
+.table-wrapper .table-content {
   width: calc(100% - 32px);
   height: 54px;
   margin: 0;
@@ -277,47 +277,47 @@
   background-color: #f1f5fa;
   border: 1px solid #e7ecf2;
 }
-.table-wrapper > .table-content:last-child{
+.table-wrapper .table-content:last-child{
   margin-bottom: 10px;
 }
-.table-wrapper > .table-content + .table-content{
+.table-wrapper .table-content + .table-content{
   margin-top: 10px;
 }
-.qt-list .table-wrapper > .table-content{
+.qt-list .table-wrapper .table-content{
   cursor: auto;
   width: calc(100% - 26px);
 }
-.qt-invoices .sub-wrapper .table-wrapper > .table-content{
+.qt-invoices .sub-wrapper .table-wrapper .table-content{
   width: calc(100% - 88px);
   margin-left: 24px;
   margin-bottom: 0;
   margin-top: 10px;
 }
-.qt-invoices .sub-wrapper .table-wrapper > .table-content:first-child{
+.qt-invoices .sub-wrapper .table-wrapper .table-content:first-child{
   margin-top: 0;
 }
-.qt-invoices .sub-wrapper .table-wrapper > .table-content:last-child{
+.qt-invoices .sub-wrapper .table-wrapper .table-content:last-child{
   margin-bottom: 5px;
 }
-.qt-list .table-wrapper > .table-content>i{
+.qt-list .table-wrapper .table-content>i{
   position: absolute;
   left: -25px;
   top: 20px;
 }
-.qt-invoices .sub-wrapper .table-wrapper > .table-content .ha-edit{
+.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-edit{
   position: absolute;
   right: -33px;
   top: 16px;
 }
-.qt-invoices .sub-wrapper .table-wrapper > .table-content .ha-delete{
+.qt-invoices .sub-wrapper .table-wrapper .table-content .ha-delete{
   position: absolute;
   right: -65px;
   top: 16px;
 }
-.table-wrapper > .table-content .model{
+.table-wrapper .table-content .model{
   padding-left: 7px;
 }
-.table-wrapper > .table-content [class^="col-"]{
+.table-wrapper .table-content [class^="col-"]{
   border-left: 1px solid #e7ecf2;
   padding: 0 21px;
   height: 52px;
@@ -327,42 +327,42 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.table-wrapper > .table-content .col-1 {
+.table-wrapper .table-content .col-1 {
   width: 193px;
   float: left;
   border: 0;
 }
-.table-wrapper > .table-content .description:hover {
+.table-wrapper .table-content .description:hover {
   background-color: #e7ecf2;
 }
-.table-wrapper > .service-table .col-1 {
+.table-wrapper .service-table .col-1 {
   width: 114px;
 }
-.table-wrapper > .table-content .col-2 {
+.table-wrapper .table-content .col-2 {
   width: calc(100% - 430px);
   float: left;
 }
-.table-wrapper > .service-table .col-2 {
+.table-wrapper .service-table .col-2 {
   width: 155px;
 }
-.table-wrapper > .table-content .col-3 {
+.table-wrapper .table-content .col-3 {
   width: 139px;
   float: right;
 }
-.table-wrapper > .service-table .col-3 {
+.table-wrapper .service-table .col-3 {
   width: calc(100% - 409px);
 }
-.inventry-details .table-wrapper > .service-table .col-3 {
+.inventry-details .table-wrapper .service-table .col-3 {
   width: calc(100% - 507px);
 }
-.table-wrapper > .table-content .col-4 {
+.table-wrapper .table-content .col-4 {
   width: 98px;
   float: right;
 }
-.table-wrapper > .service-table .col-4 {
+.table-wrapper .service-table .col-4 {
   width: 140px;
 }
-.inventry-details .table-wrapper > .service-table .col-5 {
+.inventry-details .table-wrapper .service-table .col-5 {
   width: 98px;
   float: right;
 }

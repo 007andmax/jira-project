@@ -1085,7 +1085,7 @@ hr {
   margin: 31px 0 30px;
   cursor: pointer;
 }
-.company-profile-content .expand-charts {
+.companies-list .expand-charts {
   width: calc(100% - 30px);
   margin-left: 30px;
 }

@@ -247,6 +247,9 @@
 .qt-list > li > .helping-additional-class > [class*="col-"]:first-child {
   padding-left: 0;
 }
+.qt-list > li > .helping-additional-class > [class*="col-"]:last-child {
+  padding-right: 0;
+}
 
 .default-tax-list > li > .helping-additional-class > .col-1 {
   width: calc(100% - 250px);

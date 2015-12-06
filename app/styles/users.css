@@ -356,7 +356,6 @@
   }
 }
 .create-user-header h4{
-  /*margin: 20px 0 -4px;*/
   margin: 2px 0 -4px;
   color: #1586e4;
   font-size: 14px;
@@ -418,7 +417,6 @@
 }
 .create-user-avatar .no-avatar{
   background-color: transparent;
-  /*border: 1px solid #e7ecf2;*/
 }
 .create-user-avatar input[type=file]{
   display: none;
@@ -463,11 +461,11 @@
     margin-top: 22px;
   }
 }
-.form-row + .form-row{
+.form-row + .form-row, .phone-number-form .form-row{
   margin-top: 13px;
 }
 @-moz-document url-prefix() {
-  .form-row + .form-row{
+  .form-row + .form-row, .phone-number-form .form-row{
     margin-top: 12px;
   }
 }
@@ -485,6 +483,11 @@
 }
 .form-row .form-group.full-width{
   max-width: none;
+}
+.form-row .form-group .popover{
+  max-width: none;
+  width: 100%;
+  left: 0 !important;
 }
 .form-row .form-group.address-field{
   max-width: 390px;
@@ -537,9 +540,6 @@
   cursor: default;
 }
 
-/*.create-user-form .form-group .btn-info{
-    font-weight: bold;
-}*/
 .create-user-form .form-group .btn-info.disabled{
   color: #b2becd;
 }

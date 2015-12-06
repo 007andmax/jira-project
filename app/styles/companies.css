@@ -289,8 +289,6 @@
 .company-managed-devices{
   float: left;
   width: 100%;
-  /*border-top: 1px solid #f1f5fa;*/
-  /*margin-top: 19px;*/
   padding-top: 19px;
 }
 .total-managed-devices{
@@ -581,7 +579,6 @@
   float: left;
   width: 100%;
   height: 532px;
-  /*background: #748498 url('../../images/company/cover.png') center no-repeat;*/
   -webkit-background-size: cover;
   background-size: cover;
   position: relative;
@@ -950,7 +947,7 @@
 .create-company-content {
   padding: 0 0 50px 0;
   width: 740px;
-  /*margin: 0 auto;*/
+  margin: 0 auto;
 }
 .create-company-sidebar {
   position: fixed;
@@ -1076,7 +1073,7 @@
   padding-top: 51px;
 }
 .form-control-time-zone, .form-control-agent-desc {
-  width: 452px;
+  width: 452px !important;
 }
 .form-control-agent-desc{
   float: left;
@@ -1250,7 +1247,7 @@
   }
 }
 
-.hint-popover{
+.popover.hint-popover{
   font-size: 12px;
   line-height: 16px;
   color: #94a4b8;
@@ -1258,6 +1255,6 @@
   width: 100%;
   max-width: none;
 }
-.hint-popover .popover-content{
+.popover.hint-popover .popover-content{
   padding: 17px 20px 16px;
 }
