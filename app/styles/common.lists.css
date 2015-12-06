@@ -1556,15 +1556,17 @@ Devices tab
 }
 .product-actions .btn{
   width: 100px;
+  z-index: 2;
 }
 .product-actions .hit-area{
   margin-right: -2px;
   margin-top: 11px;
   margin-left: 17px;
+  z-index: 2;
 }
 .qt-product-edit{
   border-bottom: 1px solid #e2f1fd;
-  bottom: -1px;
+  margin-bottom: -1px;
   z-index: 2;
   cursor: auto !important;
   padding: 0 !important;
@@ -1592,6 +1594,7 @@ Devices tab
   background-color: transparent;
   border-color: transparent;
   padding-left: 0;
+  border-left: none;
   height: 70px;
 }
 .qt-product-list{
@@ -1715,6 +1718,9 @@ Devices tab
   height: 214px !important;
   padding: 0 !important;
   border: none !important;
+}
+.qt-product-list>li:last-child.qt-product-form{
+  margin-bottom: 30px;
 }
 
 .qt-product-form:before, .qt-product-form:after{
