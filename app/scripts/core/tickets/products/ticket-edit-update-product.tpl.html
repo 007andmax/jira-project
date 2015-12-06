@@ -1,4 +1,5 @@
 <div class="ticket-update-product-edit" ng-controller="quicktech.core.tickets.ticketEditUpdateProductCtrl">
+  <i class="icon-edit icn-sm icn-update-product"></i>
   <form name="updateTicketProduct">
     <ul class="qt-table">
       <li>
@@ -41,8 +42,12 @@
 
       <div class="validation-msg pull-left">{{ validationMessage() }}</div>
 
-      <div class="btn btn-lg btn-info pull-right"
+      <!-- <div class="btn btn-lg btn-info pull-right"
            custom-disabled="{{ updateTicketProduct.$invalid || updateTicketProduct.$pristine || productIsSaving }}"
+           ng-click="saveUpdateProduct(updateTicketProduct)">
+        Save
+      </div> -->
+      <div class="btn btn-lg btn-info pull-right"
            ng-click="saveUpdateProduct(updateTicketProduct)">
         Save
       </div>

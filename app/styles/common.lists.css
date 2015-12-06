@@ -1854,8 +1854,7 @@ Devices tab
     line-height: 19px;
   }
 }
-.default-services-header .btn{
-  float: right;
+.default-services-header>.dropdown>.btn{
   width: 92px;
 }
 .qt-default-services{
@@ -1919,7 +1918,7 @@ Devices tab
   border: none !important;
   cursor: auto !important;
 }
-.qt-services-list .qt-service-form{
+.qt-services-list>li:last-child.qt-service-form{
   margin-bottom: 35px;
 }
 .qt-service-form:before, .qt-service-form:after{

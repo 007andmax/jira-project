@@ -403,7 +403,7 @@
   height: 166px;
   margin: 10px 0 0;
 }
-.table-content + .ticket-update-edit {
+.table-wrapper + .table-wrapper .table-content + .ticket-update-edit {
   margin: 0;
 }
 .ticket-update-edit .icon-edit {
