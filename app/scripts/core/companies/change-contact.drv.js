@@ -8,16 +8,16 @@
         restrict: 'A',
         require: 'ngModel',
         scope: {
-          contacts: '=ngModel'
+          contacts: '=ngModel',
+          contactIndex: '=contactIndex'
         },
         link: function ($scope, element) {
 
           var user = $(element.context);
 
-          $scope.$watch('contacts', function () {
-            user.fadeOut(0, function () {
-              user.fadeIn(600, function () {
-              })
+          $scope.$watch('contactIndex', function () {
+            user.fadeOut(300, function(){
+              user.fadeIn(300)
             });
           }, true);
         }

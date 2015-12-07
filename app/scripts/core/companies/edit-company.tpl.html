@@ -650,8 +650,8 @@
 
           <div class="btn btn-lg btn-info pull-right"
                ng-click="save(companyForm)"
-               custom-disabled="{{ triedToSave && (!companyForm.$valid || savingInProcess) }}">
-            Create
+               custom-disabled="{{ (triedToSave && companyForm.$invalid) || savingInProcess }}">
+            {{ editCompany.id ? 'Save' : 'Create' }}
           </div>
 
           <div class="btn btn-lg btn-primary pull-right" ui-sref="companies">

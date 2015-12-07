@@ -57,7 +57,9 @@
         $scope.changeCurrentContact = function (index) {
           if (0 <= index && index < $scope.companyData.contacts.length) {
             $scope.contactIndex = index;
-            $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
+            $timeout(function(){
+              $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
+            }, 300)
           }
         };
 

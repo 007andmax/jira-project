@@ -11,7 +11,7 @@
 
             element.click(function () {
 
-              if (!$state.is('tickets') || $state.is('ickets.Detail')) {
+              if (!($state.is('tickets') || $state.is('tickets.details'))) {
                 $state.go('tickets', {listType: 'user'});
               }
 

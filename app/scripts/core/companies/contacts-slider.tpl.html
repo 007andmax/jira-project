@@ -1,7 +1,8 @@
 <div class="panel-body">
   <div class="primary-contacts-wrapper">
 
-    <div class="primary-contact active" change-contact ng-model="currentContact" style="display: block;">
+    <div class="primary-contact active" change-contact
+         contact-index="contactIndex" ng-model="currentContact" style="display: block;">
 
       <div class="avatar">
         <img ng-src="{{ getContactAvatarUrl(currentContact) }}" alt="..." class="img-circle avatar-120">
