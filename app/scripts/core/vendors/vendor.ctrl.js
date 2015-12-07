@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.vendors').controller('quicktech.core.vendors.vendorCtrl',
-    ['$scope', 'CompaniesService', 'VendorsService',
-      function ($scope, CompaniesService, VendorsService) {
+    ['$scope', 'CompaniesService', 'VendorsService', '$timeout',
+      function ($scope, CompaniesService, VendorsService, $timeout) {
 
         $scope.locationIndex = 0;
         $scope.currentLocation = $scope.vendor.addresses[$scope.locationIndex];
@@ -16,7 +16,9 @@
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.vendor.addresses.length) {
             $scope.locationIndex = index;
-            $scope.currentLocation = $scope.vendor.addresses[$scope.locationIndex];
+            $timeout(function(){
+              $scope.currentLocation = $scope.vendor.addresses[$scope.locationIndex];
+            }, 300)
           }
         };
 

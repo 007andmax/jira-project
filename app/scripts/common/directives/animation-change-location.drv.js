@@ -8,16 +8,17 @@
         restrict: 'A',
         require: 'ngModel',
         scope: {
-          location: '=ngModel'
+          location: '=ngModel',
+          locationIndex: '=locationIndex'
         },
-        link: function ($scope, element, attrs, ctrl) {
+        link: function ($scope, element) {
 
           var elem = element.find('[animation-change-location]'),
             location = $(elem.context);
 
-          $scope.$watch('location', function () {
-            location.fadeOut(0, function () {
-              location.fadeIn(600, function () {
+          $scope.$watch('locationIndex', function () {
+            location.fadeOut(300, function () {
+              location.fadeIn(300, function () {
               })
             });
           }, true);

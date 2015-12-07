@@ -50,7 +50,9 @@
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.companyData.addresses.length) {
             $scope.locationIndex = index;
-            $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
+            $timeout(function(){
+              $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
+            }, 300)
           }
         };
 
