@@ -18,7 +18,7 @@
           scope.getTooltipPlacemant = function(){
 
             if (rightPanel.hasClass('collapsed')) {
-              if ($(window).width() > 1320) {
+              if ($(window).width() > 1315) {
                 return "top";
               } else {
                 return "left";

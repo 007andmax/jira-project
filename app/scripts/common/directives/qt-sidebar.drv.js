@@ -12,12 +12,12 @@
 
           initLeftPanel();
 
-          $(window).on('resize', initLeftPanel)
+          $(window).on('resize', initLeftPanel);
 
           function initLeftPanel() {
-            windowWidth = $(window).width()
+            windowWidth = $(window).width();
 
-            if (windowWidth > 2299) {
+            if (windowWidth > 1389) {
 
               element.addClass('opened');
               element.css("box-shadow", "none");
@@ -30,12 +30,12 @@
           }
 
           element.hover(function () {
-            if (!(windowWidth > 2299)) {
+            if (!(windowWidth > 1389)) {
               element.addClass('opened');
               element.find('.qt-sidebar-scroll').nanoScroller();
             }
           }, function () {
-            if (!(windowWidth > 2299)) {
+            if (!(windowWidth > 1389)) {
               element.removeClass('opened');
             }
           })

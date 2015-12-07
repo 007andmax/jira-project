@@ -40,7 +40,7 @@
 
                   for (var i = 0; i < ticketUpdates.length; i++) {
                     if (scope.firstUnreadUpdateId === ticketUpdates[i].getAttribute('std-update')) {
-                      element.nanoScroller({ scrollTo: $(ticketUpdates[i]), scrollTop: windowHeight});
+                      element.nanoScroller({scrollTo: $(ticketUpdates[i]), scrollTop: windowHeight});
                       return;
                     }
                   }
@@ -52,10 +52,10 @@
             controlTicketList();
             $(window).on('resize', controlTicketList);
 
-            function controlTicketList(){
+            function controlTicketList() {
               var windowWidth = $(window).width();
 
-              if(windowWidth > 1560){
+              if (windowWidth > 1700) {
                 body.addClass("opened-ticket-list");
                 element.addClass('has-scrollbar nano');
               } else {

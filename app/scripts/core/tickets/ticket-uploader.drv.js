@@ -115,7 +115,7 @@
                 };
 
                 initScrollListener(paramsToSend, scope);
-                $('body').addClass("opened-ticket-list");
+                openTicketList();
               });
             }
 
@@ -179,51 +179,24 @@
               var windowWidth = $(window).width(),
                 dropdownMenu = element.find('.dropdown-menu-custom');
 
-              if (windowWidth > 1560) {
+              if (windowWidth > 1700) {
                 dropdownMenu.removeClass('dropdown-menu-right');
               } else {
                 dropdownMenu.addClass('dropdown-menu-right');
               }
             }
 
+            function openTicketList() {
+              var windowWidth = $(window).width(),
+                body = $('body');
 
-            //function initTicketList() {
-            //
-            //  var windowWidth = $(window).width();
-            //
-            //  console.log(windowWidth)
-            //
-            //  console.log($('.ticket-list .dropdown-menu'))
-            //
-            //  if (windowWidth > 1560) {
-            //
-            //
-            //    dropdownAssignUser.removeClass('dropdown-menu-right');
-            //    $('.ticket-list .dropdown-menu .dropdown-submenu').removeClass('left-align');
-            //    //$(".container-ticket-content").addClass("nano");
-            //    //$(".container-ticket-content .ticket-header").addClass('ticket-fixed-header');
-            //    //$(".ticket-detail > h2").css("margin-top", "92px");
-            //
-            //
-            //  } else {
-            //
-            //    $('body').addClass("opened-ticket-list");
-            //    dropdownAssignUser.addClass('dropdown-menu-right');
-            //    $('.ticket-list .dropdown-menu .dropdown-submenu').addClass('left-align');
-            //
-            //    //$(".container-ticket-content").removeClass("nano");
-            //    //$(".container-ticket-content .ticket-header").removeClass('ticket-fixed-header');
-            //    //$(".ticket-detail > h2").css("margin-top", "0");
-            //
-            //  }
-            //
-            //  $('.nano').nanoScroller({
-            //    alwaysVisible: false,
-            //    flash: true,
-            //    flashDelay: 1000,
-            //    sliderMinHeight: 98
-            //  });
-            //}
+              if (!$stateParams.ticketId) {
+                body.addClass("opened-ticket-list");
+              } else if (windowWidth > 1700) {
+                body.addClass("opened-ticket-list");
+                element.addClass('has-scrollbar nano');
+              }
+            }
 
           }
         };

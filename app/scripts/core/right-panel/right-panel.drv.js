@@ -14,7 +14,7 @@
 
           element.on('mouseleave', function () {
             $timeout(function () {
-              if ($(window).width() <= 1320 && !$rootScope.insidePopover) {
+              if ($(window).width() <= 1315 && !$rootScope.insidePopover) {
                 element.addClass('collapsed');
               }
             }, 100)
@@ -22,7 +22,7 @@
 
           scope.$on('closeRightPanel', function () {
             $timeout(function () {
-              if (!element.is(":hover") && $(window).width() <= 1320){
+              if (!element.is(":hover") && $(window).width() <= 1315){
                 element.addClass('collapsed');
               }
             }, 100)
@@ -30,7 +30,7 @@
 
           function rightPanelMode() {
 
-            if ($(window).width() > 1320) {
+            if ($(window).width() > 1315) {
               element.removeClass('collapsed');
             } else {
               element.addClass('collapsed');
