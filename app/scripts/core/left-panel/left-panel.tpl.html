@@ -189,10 +189,12 @@
 
     <div class="clearfix divider"></div>
 
-    <nav class="clearfix">
+    // todo rollback when generatePdf feature not needed
+    <nav class="clearfix" ticket-attachment-files attachment-func="generatePdf" ng-model="ticketAttachments">
+      <input type="file" style="display: none">
       <ul class="nav">
-        <li class="last-item" style="cursor: not-allowed">
-          <a class="disabled" href="javascript:void(0)">
+        <li class="last-item">
+          <a class="" href="javascript:void(0)">
             <i class="nav-icon icn-help icn-lg"></i> Help
           </a>
         </li>
