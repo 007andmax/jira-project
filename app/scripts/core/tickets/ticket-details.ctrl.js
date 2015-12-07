@@ -330,9 +330,9 @@
               }
 
               function setCreateUpdateFormToDefault() {
-                $scope.$broadcast('setCreateUpdateFormToDefault');
                 $scope.selectUpdateSharedUser = {};
                 $scope.updateSharedUsersList = [];
+                $scope.$broadcast('setCreateUpdateFormToDefault');
               }
             });
           };
