@@ -5,7 +5,7 @@ aside#left {
   width: 76px;
   height: 100%;
   background-color: #1f2a37;
-  z-index: 1039;
+  z-index: 1060;
 }
 
 aside#left.opened {
@@ -18,11 +18,6 @@ aside#left.opened {
   }
 }
 
-@media only screen and (min-width: 2300px){
-  aside#left.opened {
-    box-shadow: none !important;
-  }
-}
 aside#left .icn-toggle-menu {
   position: absolute;
   top: 31px;
@@ -129,10 +124,17 @@ aside#left .nav > li > a .badge {
   background: none;
   border: 0;
   outline: 0;
-  color: #eceef0;
+  padding: 0;
+  color: #fff;
   font-size: 14px;
   width: 135px;
   height: 20px;
+}
+.label-nav .nav > li.edit .label-edit .form-control-edit::-webkit-input-placeholder {
+  color: #4c5c6f;
+}
+.label-nav .nav > li.edit .label-edit .form-control-edit::-moz-placeholder {
+  color: #4c5c6f;
 }
 .label-nav .nav > li.edit > a > .indctr {
   margin-top: 5px;
@@ -173,7 +175,7 @@ aside#left .nav > li > a .badge {
   margin-right: -2px;
 }
 .label-edit .label-actions div a {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 .label-nav .tag-color, .icn-add-new{
   margin-left: 2px;
@@ -206,6 +208,22 @@ aside#left .nav > li > a .badge {
 }
 .label-nav li > a {
   padding: 0 20px 0 30px !important;
+}
+
+@media only screen and (min-width: 1390px){
+  aside#left.opened {
+    box-shadow: none !important;
+  }
+  /*aside#left {
+    box-shadow: none;
+    width: 240px;
+  }
+  aside#left .icn-toggle-menu {
+    display: none;
+  }
+  aside#left nav, aside#left .divider, aside#left .nav-title {
+    display: block;
+  }*/
 }
 
 @-moz-document url-prefix() {
