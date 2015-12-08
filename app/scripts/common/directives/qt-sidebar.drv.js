@@ -15,7 +15,7 @@
           $(window).on('resize', initLeftPanel);
 
           function initLeftPanel() {
-            windowWidth = $(window).width();
+            windowWidth = window.innerWidth;
 
             if (windowWidth > 1389) {
 
