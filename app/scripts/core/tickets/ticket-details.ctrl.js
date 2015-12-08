@@ -288,14 +288,14 @@
 
                 ticketUpdateToSend.shares.push({
                   user: {id: $scope.updateSharedUsersList[i].user.id},
-                  order: $scope.updateSharedUsersList[i].order
+                  itemOrder: $scope.updateSharedUsersList[i].itemOrder
                 });
 
               } else if ($scope.updateSharedUsersList[i].contact) {
 
                 ticketUpdateToSend.shares.push({
                   contact: {id: $scope.updateSharedUsersList[i].contact.id},
-                  order: $scope.updateSharedUsersList[i].order
+                  itemOrder: $scope.updateSharedUsersList[i].itemOrder
                 })
               }
             }
