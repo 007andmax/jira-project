@@ -286,11 +286,17 @@
 
               if ($scope.updateSharedUsersList[i].user) {
 
-                ticketUpdateToSend.shares.push({user: {id: $scope.updateSharedUsersList[i].user.id}})
+                ticketUpdateToSend.shares.push({
+                  user: {id: $scope.updateSharedUsersList[i].user.id},
+                  order: $scope.updateSharedUsersList[i].order
+                });
 
               } else if ($scope.updateSharedUsersList[i].contact) {
 
-                ticketUpdateToSend.shares.push({contact: {id: $scope.updateSharedUsersList[i].contact.id}})
+                ticketUpdateToSend.shares.push({
+                  contact: {id: $scope.updateSharedUsersList[i].contact.id},
+                  order: $scope.updateSharedUsersList[i].order
+                })
               }
             }
 
@@ -401,7 +407,7 @@
 
             if ($scope.ticketUpdate.notifyTicketCreator) {
 
-              if(firstSharedUser && firstSharedUser.user.id === createdUserId){
+              if (firstSharedUser && firstSharedUser.user.id === createdUserId) {
                 return;
               }
 
@@ -409,7 +415,7 @@
 
             } else {
 
-              if(firstSharedUser && firstSharedUser.user.id !== createdUserId){
+              if (firstSharedUser && firstSharedUser.user.id !== createdUserId) {
                 return;
               }
 

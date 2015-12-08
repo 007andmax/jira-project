@@ -370,7 +370,7 @@
 
               </ul>
 
-              <div class="table-wrapper clearfix" ng-repeat="product in ticketUpdate.products"
+              <div class="table-wrapper clearfix" ng-repeat="product in ticketUpdate.products | orderBy: 'order'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
 
@@ -410,7 +410,7 @@
                      ng-include="'/html/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
               </div>
 
-              <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services"
+              <div class="table-wrapper clearfix" ng-repeat="service in ticketUpdate.services | orderBy: 'order'"
                    ng-if=" ticketUpdate.type === 'SERVICE'">
                 <div class="table-content service-table pull-left" ng-class="{'hide': service.id === editExpenseId}">
 
@@ -450,7 +450,7 @@
                   <div class="added-users-wrapper pull-left">
 
                     <div class="pull-left avatar userinfo-tooltip"
-                         ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | limitTo: 5"
+                         ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | limitTo: 5 | orderBy: 'order'"
                          tooltip-class="avatar-tooltip"
                          tooltip-placement="top" tooltip-html-unsafe="<p class='tooltip-name'>
                                              {{ share.user ? getUserName(getUserById(share.user.id)) : getContactName(share.contact) }}</p>
@@ -470,7 +470,7 @@
                     <div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}">
 
                       <div class="pull-left avatar userinfo-tooltip"
-                           ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser"
+                           ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'order'"
                            tooltip-class="avatar-tooltip" ng-show="$index > 4"
                            ng-style="{'margin-left': $index === 5 ? '190px' : '10px'}"
                            tooltip-placement="top" tooltip-html-unsafe="<p class='tooltip-name'>
