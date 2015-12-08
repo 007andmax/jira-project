@@ -65,6 +65,11 @@
         };
 
         $scope.getPriorityNumberInfo = function (option) {
+
+          if ($scope.user.phoneNumbers.length < 1) {
+            return;
+          }
+
           var priorityIndex,
             phoneInfo;
 

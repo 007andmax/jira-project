@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('showTicketDetails',
-    ['$timeout',
-      function ($timeout) {
+    ['$timeout', '$stateParams',
+      function ($timeout, $stateParams) {
         return {
           restrict: 'A',
           link: function (scope, element) {
@@ -53,6 +53,11 @@
             $(window).on('resize', controlTicketList);
 
             function controlTicketList() {
+
+              if (!$stateParams.ticketId) {
+                return;
+              }
+
               var windowWidth = $(window).width();
 
               if (windowWidth > 1700) {
