@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
-    ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
-      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService) {
+    ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService', 'FilesService', 'Downloader',
+      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService, FilesService, Downloader) {
 
         $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
@@ -18,8 +18,25 @@
 
         }, function () {
           $scope.listType = $stateParams.listType;
-        })
+        });
 
+        // todo remove when generatePdf feature not needed
+        $scope.ticketAttachments = [];
+
+        $scope.generatePdf = function (file) {
+
+          FilesService.create(file,
+            function (progress) {
+
+            },
+            function (finish) {
+
+              Downloader.downloadByUrl('/data/generatePdf?fileId=' + finish.id);
+
+
+            }, function (error) {
+            });
+        }
       }]);
 
 }());
