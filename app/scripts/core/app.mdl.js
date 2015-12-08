@@ -30,7 +30,7 @@
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/tickets/unassigned');
+    $urlRouterProvider.otherwise(getUserDefaultPage());
 
     $urlRouterProvider.when('/accounting', '/accounting/billable');
     $urlRouterProvider.when('/settings', '/settings/myProfile');
@@ -282,5 +282,29 @@
         "");
 
     }]);
+
+  function getUserDefaultPage() {
+
+    var defaultTicketsPage,
+      startPageMap = {
+        UNASSIGNED: 'unassigned',
+        MY_TICKETS: 'user',
+        SHARED: 'shared',
+        OPEN: 'open',
+        CLOSED: 'closed',
+        TRASH: 'trash',
+        SPAM: 'spam'
+      };
+
+    if (window.startPage) {
+      defaultTicketsPage = startPageMap[window.startPage];
+    }
+
+    if(defaultTicketsPage){
+      return '/tickets/' + defaultTicketsPage;
+    }
+
+    return '/tickets/unassigned';
+  }
 
 }());
