@@ -90,7 +90,7 @@
         <div class="ticket-add-content clearfix">
 
           <div>
-            <div ng-repeat="productExpense in ticketUpdate.products" ng-init="productExpense.order = $index">
+            <div ng-repeat="productExpense in ticketUpdate.products" ng-init="productExpense.itemOrder = $index">
 
               <div ng-controller="quicktech.core.tickets.ticketAddUpdateProductCtrl"
                    ng-include="'/html/scripts/core/tickets/products/ticket-add-update-product.tpl.html'"></div>
@@ -135,7 +135,7 @@
         <div class="ticket-add-content clearfix">
 
           <div>
-            <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.order = $index">
+            <div ng-repeat="serviceExpense in ticketUpdate.services" ng-init="serviceExpense.itemOrder = $index">
 
               <div ng-controller="quicktech.core.tickets.ticketAddUpdateServiceCtrl"
                    ng-include="'/html/scripts/core/tickets/services/ticket-add-update-service.tpl.html'"></div>
