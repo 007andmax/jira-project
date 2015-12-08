@@ -87,7 +87,8 @@
   <div class="company-card" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
        ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()">
 
-    <div class="company-cover-area" style="background-image:url('{{ getCompanyCoverUrl(company) }}'); background-size: cover;">
+    <div class="company-cover-area"
+         ng-style="{'background-image':'url(' + getCompanyCoverUrl(company) + ')', 'background-size': 'cover'}">
 
       <div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"
            ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"

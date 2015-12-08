@@ -1,7 +1,7 @@
 <div class="company-profile-content">
 
   <div class="company-cover-wrapper" ng-if="!isShowEditCover"
-       style="background-image:url('{{ getCompanyCoverUrl(company) }}')">
+       ng-style="{'background-image':'url(' + getCompanyCoverUrl(company) + ')'}">
 
     <div class="btn btn-archive has-tooltip" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
          ng-click="archiveCompany()"
