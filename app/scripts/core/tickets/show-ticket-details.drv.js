@@ -9,19 +9,16 @@
           restrict: 'A',
           link: function (scope, element) {
 
-            var body = $('body');
+            var body = $('body'),
+              ifScrollInit = false,
+              ticketNanoContent = element.find('[ticket-nano-content]');
 
             element.hide();
             body.addClass('opened-ticket');
 
             scope.$on('ticketDetailsLoad', function () {
               element.fadeIn(1500, function () {
-                element.nanoScroller({
-                  alwaysVisible: false,
-                  flash: true,
-                  flashDelay: 1000,
-                  sliderMinHeight: 98
-                });
+                controlTicketList();
               });
             });
 
@@ -49,7 +46,6 @@
               }
             };
 
-            controlTicketList();
             $(window).on('resize', controlTicketList);
 
             function controlTicketList() {
@@ -58,15 +54,47 @@
                 return;
               }
 
-              var windowWidth = $(window).width();
+              var windowWidth = window.innerWidth;
 
               if (windowWidth > 1700) {
                 body.addClass("opened-ticket-list");
                 element.addClass('has-scrollbar nano');
+                ticketNanoContent.addClass('nano-content');
+                initializeScroll()
               } else {
                 body.removeClass('opened-ticket-list');
                 element.removeClass('has-scrollbar nano');
+                ticketNanoContent.removeClass('nano-content');
+                destroyScroll()
               }
+            }
+
+            function destroyScroll(){
+
+              if(!ifScrollInit){
+                return;
+              }
+
+              element.nanoScroller({ destroy: true });
+              ifScrollInit = false;
+            }
+
+            function initializeScroll(){
+
+              if(ifScrollInit){
+                return;
+              }
+
+              $timeout(function(){
+                element.nanoScroller({
+                  alwaysVisible: false,
+                  flash: true,
+                  flashDelay: 1000,
+                  sliderMinHeight: 98
+                });
+
+                ifScrollInit = true;
+              }, 0)
             }
 
           }
