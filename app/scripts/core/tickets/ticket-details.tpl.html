@@ -24,7 +24,7 @@
                 <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
               </span>
 
-              <span ng-show="PermissionsService.isStatusVisible(listType, currentUser.role)"
+              <span ng-show="PermissionsService.isStatusVisible(ticketDetails, currentUser.role) && ticketDetails.status"
                     class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
                     tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top">
                 <label><i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i></label>
@@ -63,7 +63,7 @@
           </div>
 
           <div class="dropdown pull-left" dropdown
-               ng-show="PermissionsService.isSettingVisible(listType, currentUser.role)">
+               ng-show="PermissionsService.isSettingVisible(ticketDetails, currentUser.role)">
 
             <div class="btn btn-default pull-left has-tooltip"
                  aria-haspopup="true" aria-expanded="false"

@@ -110,16 +110,13 @@
         return isTrueForUnassigned;
       }
 
-      function isStatusVisible(listType, userRole) {
+      function isStatusVisible(ticket, userRole, isTrueForClosed) {
 
-        var isTrueForUser = listType === LIST_TYPES.USER;
-        var isTrueForOpen = listType === LIST_TYPES.OPEN;
-        var isTrueForClose = listType === LIST_TYPES.CLOSE;
-        var isTrueForTrash = listType === LIST_TYPES.TRASH;
-        var isTrueForShared = listType === LIST_TYPES.SHARED;
-        var isTrueForSpam = listType === LIST_TYPES.SPAM;
+        var isHideWhenClosed =  ticket.status === 'COMPLETED' && !isTrueForClosed;
+        var isHideWhenTrash = ticket.trash;
+        var isHideWhenSpam = ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
 
-        return isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForTrash || isTrueForShared || isTrueForSpam;
+        return !(isHideWhenClosed || isHideWhenTrash || isHideWhenSpam);
       }
 
       function isUpdateAndCloseVisible(listType, userRole, ticketStatus) {
@@ -150,13 +147,15 @@
         return isFalse;
       }
 
-      function isSettingVisible(listType, userRole) {
+      function isSettingVisible(ticket, userRole) {
 
-        var isFalseForTrash = listType === LIST_TYPES.TRASH;
-        var isFalseForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.USER);
-        var isFalseForSpam = listType === LIST_TYPES.SPAM;
+        var isHideWhenClosed =  ticket.status === 'COMPLETED';
+        var isHideWhenTrash = ticket.trash;
+        var isHideWhenSpam = ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
+        var isHideForShares = ticket.sharedToCurrentUserAt && userRole === USER_ROLES.USER;
 
-        return !(isFalseForTrash || isFalseForShared || isFalseForSpam);
+        return !(isHideWhenClosed || isHideWhenTrash || isHideWhenSpam || isHideForShares);
+
       }
 
       function isCreateTicketUpdateVisible(listType, ticketStatus) {

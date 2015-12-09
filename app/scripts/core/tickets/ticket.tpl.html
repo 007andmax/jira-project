@@ -228,7 +228,7 @@
       </span>
 
       <span class="label-icn-lg label-primary persistent-tooltip"
-            ng-if="PermissionsService.isStatusVisible(listType, currentUser.role) && ticket.status"
+            ng-if="PermissionsService.isStatusVisible(ticket, currentUser.role, true) && ticket.status"
             tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top">
         <label class="status-{{ ticketStatusToCssFormat(ticket.status) }}">
           <i class="icn-sm icn-ticket-{{ ticketStatusToCssFormat(ticket.status) }}"></i>
