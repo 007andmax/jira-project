@@ -18,7 +18,14 @@
 
             if (form.$valid) {
 
-              $scope.serviceIsSaving = true;
+              var notEditService = $scope.service.staticCopy();
+              notEditService.quantity = $scope.service.quantity * 60;
+              notEditService.date = $filter('date')($scope.service.date, 'd MMM yyyy');
+
+              if (angular.equals(notEditService, $scope.editService)) {
+                $scope.setEditExpenseId();
+                return;
+              }
 
               var serviceDate = new Date($scope.editService.date);
 
@@ -37,7 +44,6 @@
               }, function () {
                 UserNotificationService.show('The ticket update containing a service has been modified', true);
                 $scope.setEditExpenseId();
-                $scope.serviceIsSaving = false;
               })
             } else {
               $scope.triedToSaveService = true;

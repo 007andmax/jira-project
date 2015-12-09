@@ -24,9 +24,10 @@
                 <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
               </span>
 
-              <span ng-show="PermissionsService.isStatusVisible(ticketDetails, currentUser.role) && ticketDetails.status"
-                    class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
-                    tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top">
+              <span
+                ng-show="PermissionsService.isStatusVisible(ticketDetails, currentUser.role) && ticketDetails.status"
+                class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
+                tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top">
                 <label><i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i></label>
               </span>
 
@@ -378,9 +379,7 @@
                     <span class="model">#{{ product.item.code }}</span>
                   </div>
 
-                  <div class="col-2 description"
-                       popover="{{ product.description }}"
-                       popover-placement="bottom" popover-trigger="mouseenter">
+                  <div class="col-2 description" tu-description-popover>
                     {{ product.description ? product.description : '&nbsp;' }}
                   </div>
 
@@ -422,7 +421,9 @@
                     <span class="model">{{ service.quantity | durationFilter }}</span>
                   </div>
 
-                  <div class="col-3">{{ service.description ? service.description : '&nbsp;' }}</div>
+                  <div class="col-3 description" tu-description-popover>
+                    {{ service.description ? service.description : '&nbsp;' }}
+                  </div>
 
                   <div class="table-content-action pull-right">
                     <a class="hit-area pull-right has-tooltip"

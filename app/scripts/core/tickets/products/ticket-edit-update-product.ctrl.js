@@ -20,7 +20,10 @@
 
             if (form.$valid) {
 
-              $scope.productIsSaving = true;
+              if (angular.equals($scope.product, $scope.editProduct)) {
+                $scope.setEditExpenseId();
+                return;
+              }
 
               TicketsService.updateExpenseInTicketUpdate({
 
@@ -37,7 +40,6 @@
               }, function () {
                 UserNotificationService.show('The ticket update containing a product has been modified', true);
                 $scope.setEditExpenseId();
-                $scope.productIsSaving = false;
               })
             } else {
               $scope.triedToSaveProduct = true;
@@ -49,7 +51,7 @@
             return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
           };
 
-          $scope.controlProductQty = function (form){
+          $scope.controlProductQty = function (form) {
             form.productQty.$setValidity('zero', +$scope.editProduct.quantity !== 0);
           };
 
@@ -65,7 +67,7 @@
                 return minlengthMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
               } else if (errorKey === 'maxlength') {
                 return maxlengthMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
-              } else if (errorKey === 'zero'){
+              } else if (errorKey === 'zero') {
                 return 'Product Quantity can not be 0';
               }
             }
