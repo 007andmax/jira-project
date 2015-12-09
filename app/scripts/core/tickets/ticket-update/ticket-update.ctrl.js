@@ -4,8 +4,8 @@
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketUpdateCtrl',
       ['$scope', 'TicketsService', 'UsersService', 'quicktech.common.services.UserConfirmationsService',
-        'quicktech.common.services.UserNotificationService', '$timeout',
-        function ($scope, TicketsService, UsersService, UserConfirmationsService, UserNotificationService, $timeout) {
+        'quicktech.common.services.UserNotificationService', '$sce',
+        function ($scope, TicketsService, UsersService, UserConfirmationsService, UserNotificationService, $sce) {
 
           $scope.user = UsersService.getOneById($scope.ticketUpdate.user.id);
 
@@ -30,6 +30,10 @@
                   return 'Product';
                 }
             }
+          };
+
+          $scope.getUpdateNote = function(){
+            return $sce.trustAsHtml($scope.ticketUpdate.note);
           };
 
           $scope.deleteUpdate = function () {

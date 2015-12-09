@@ -302,7 +302,7 @@
           </ul>
         </div>
 
-        <div class="ticket-updates-wrapper clearfix" ng-if="listType !== 'unassigned'">
+        <div class="ticket-updates-wrapper clearfix" ng-if="ticketDetails.assignedUser">
 
           <div class="ticket-update clearfix" ng-repeat="ticketUpdate in ticketDetails.updates"
                ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
@@ -340,7 +340,7 @@
 
               </div>
 
-              <p class="ticket-update-message" ng-if="ticketUpdate.type === 'NOTE'">{{ ticketUpdate.note }}</p>
+              <p class="ticket-update-message" ng-if="ticketUpdate.type === 'NOTE'" ng-bind-html="getUpdateNote()"></p>
 
               <ul class="attachments clearfix"
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
@@ -467,7 +467,8 @@
                     {{ ticketUpdate.shares.length - 5 }} More
                   </span>
 
-                    <div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}" style="margin-left: 0px;">
+                    <div class="users-added-to-update pull-left" ng-class="{'hide': !showAllSharedUsers}"
+                         style="margin-left: 0px;">
 
                       <div class="pull-left avatar userinfo-tooltip"
                            ng-repeat="share in ticketUpdate.shares | filter: filterCurrentUser | orderBy: 'itemOrder'"
