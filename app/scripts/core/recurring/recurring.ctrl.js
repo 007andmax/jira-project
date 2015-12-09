@@ -6,6 +6,7 @@
     ['$scope', 'RecurringService', 'CompaniesService', '$rootScope',
       function ($scope, RecurringService, CompaniesService, $rootScope) {
 
+        $scope.isShowAddCompany = false;
         $scope.companySelection = {};
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
@@ -28,7 +29,9 @@
 
             for (var i = 0; i < $scope.recurringCompanies.length; i++) {
               var company = $scope.recurringCompanies[i];
-              company.company.name = CompaniesService.getOneById(company.company.id).name;
+              if (!company.company.name) {
+                company.company.name = CompaniesService.getOneById(company.company.id).name;
+              }
             }
 
             var clientCompanies = CompaniesService.getClientCompanies(),
@@ -54,11 +57,13 @@
         };
 
         $scope.openAddCompanyForm = function () {
+          $scope.isShowAddCompany = true;
           $rootScope.$broadcast('cancelEditForm');
         };
 
         $scope.addCompany = function () {
           RecurringService.addCompany($scope.recurringCompanies, $scope.company.id);
+          $rootScope.$broadcast('cancelEditForm');
           $scope.company = '';
         };
 

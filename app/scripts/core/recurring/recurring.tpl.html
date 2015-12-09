@@ -25,21 +25,29 @@
   <div class="billable-content">
     <div class="tabs-container">
 
-      <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
+      <div class="btn btn-add-company btn-primary pull-right has-tooltip"
+           style="width: 98px;" ng-class="{'hide': isShowAddCompany}"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Company"
            ng-click="openAddCompanyForm()">
         <i class="icn-sm icn-add-company"></i>
       </div>
 
-      <div class="add-company-container pull-right">
-        <div class="btn btn-success disabled"><i class="icn-sm icn-plus-sm"></i></div>
+      <div class="add-company-container pull-right" ng-class="{'hide': !isShowAddCompany}" style="display: block">
+
+        <div class="btn btn-success"
+             custom-disabled="{{ !company.id }}" ng-click="addCompany()">
+          <i class="icn-sm icn-plus-sm"></i>
+        </div>
+
         <div class="dropdown">
           <input class="form-control-search" placeholder="Search company..." type="text"
                  name="addCompany" ng-required="true" ng-trim="false"
-                 ng-model="company" typeahead-on-select="addCompany()" qt-typeahead-show-on-focus
-                 typeahead="company as company.name for company in notRecurringCompaniesArray | filter:$viewValue:stateComparator | orderBy:'name'">
+                 ng-model="company" typeahead-on-select="prepareCompanyToAdd()" qt-typeahead-show-on-focus
+                 typeahead="company as company.name for company in notRecurringCompaniesArray | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                 custom-style="{width: '100%', 'max-height': '170px', 'overflow-y': 'scroll'}">
 
-          <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          <i class="icn-sm icn-search-input" tabindex="-1"
+             style="position: absolute;right: auto;left: 13px;top: 13px;"></i>
 
         </div>
       </div>
@@ -170,7 +178,8 @@
                       <i class="icn-lg icn-add-service"></i>
                     </a>
 
-                    <span class="pull-left text-muted" ng-show="invoice.products.length < 1 && invoice.services.length < 1">
+                    <span class="pull-left text-muted"
+                          ng-show="invoice.products.length < 1 && invoice.services.length < 1">
                       You can add a product or service to this Invoice
                     </span>
 
