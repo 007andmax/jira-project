@@ -183,7 +183,7 @@
         <li class="pull-left"
             ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role, ticket.reportedAsSpamAt,  ticket.markedAsSpamAt)">
           <a href="javascript:void(0)" class="hit-area has-tooltip"
-             tooltip="Mark As Spam" tooltip-placement="top" ng-click="moveIntoSpam()">
+             tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam' : 'Mark As Spam' }}" tooltip-placement="top" ng-click="moveIntoSpam()">
             <i class="icn-sm icn-report-spam"></i>
           </a>
         </li>
