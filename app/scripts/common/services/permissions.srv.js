@@ -60,7 +60,7 @@
         return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared;
       }
 
-      function isMoveToTrashVisible(listType, userRole) {
+      function isMoveToTrashVisible(listType, userRole, ticket) {
 
         var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
         var isTrueForUser = listType === LIST_TYPES.USER && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
@@ -68,7 +68,12 @@
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
         var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
-        return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared;
+        if(!ticket.isBillable || (ticket.isBillable && ticket.hasInvoice)){
+          return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared
+        } else if (ticket.isBillable && !ticket.hasInvoice){
+          return false;
+        }
+
       }
 
       function isChangePriorityToVisible(listType, userRole) {
@@ -324,9 +329,10 @@
       function isDeleteForeverVisible(ticket, userRole) {
 
         var isTrueForTrashList = ticket.trash;
+        var isTrueForNotBillable = !ticket.isBillable;
         var isTrueForSpamList = userRole !== USER_ROLES.USER && ticket.markedAsSpamAt;
 
-        return isTrueForTrashList || isTrueForSpamList;
+        return (isTrueForTrashList || isTrueForSpamList) && isTrueForNotBillable;
       }
 
       return {

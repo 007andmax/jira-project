@@ -186,7 +186,7 @@
               </li>
 
               <li
-                ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)  && !ticketDetails.hasInvoice">
+                ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticketDetails)">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
               </li>
 

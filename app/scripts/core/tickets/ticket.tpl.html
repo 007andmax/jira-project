@@ -162,7 +162,7 @@
               </a>
             </li>
 
-            <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+            <li ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticket)">
               <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">
                 Move to Trash
               </a>
@@ -173,7 +173,7 @@
         </li>
 
         <li class="pull-right"
-            ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role) && !ticket.hasInvoice">
+            ng-if="(ticket.status === 'COMPLETED') && PermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticket)">
           <a href="javascript:void(0)" class="hit-area"
              tooltip="move to trash" tooltip-placement="top" ng-click="moveToTrash(true)">
             <i class="icn icn-sm icn-delete has-tooltip"></i>
