@@ -3,16 +3,16 @@
 (function () {
 
   angular.module("quicktech").directive('logoutBtn',
-    [function () {
+    ['$rootScope', function ($rootScope) {
       return {
         restrict: 'A',
         link: function (scope, element, attrs) {
           element.on('click', function () {
-            location.href = '/logout';
 
-            setTimeout(function () {
-              location.hash = '';
-            }, 0)
+            window.loggingOut = true;
+
+            location.href = '/logout';
+            location.hash = '';
           })
         }
       }
