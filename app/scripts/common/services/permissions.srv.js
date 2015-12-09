@@ -183,7 +183,10 @@
       function isAditionalActionAccessForUser(ticket, user) {
 
         if (ticket && ticket.createdUser && ticket.createdUser.id) {
-          return user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN || ticket.assignedUser.id === user.id;
+          var isUserInShares = (user.role === USER_ROLES.USER) &&  ticket.sharedToCurrentUserAt;
+          var isAdmin = user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN;
+
+          return isAdmin || ticket.assignedUser.id === user.id || isUserInShares;
         }
       }
 

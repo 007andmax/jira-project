@@ -1,4 +1,5 @@
-<div class="dropdown pull-left">
+<div class="dropdown pull-left"
+     ng-show="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
 
   <a href="javascript:void(0)" class="hit-area ha-16-26 pull-left add-users-plus has-tooltip"
      data-placement="top" title="Add users to this update" data-toggle="dropdown" aria-haspopup="true"
@@ -9,7 +10,6 @@
   <ul class="dropdown-menu dropdown-menu-tabs">
 
     <li ng-controller="quicktech.core.tickets.updateAddUserCtrl"
-        ng-show="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)"
         stop-propagation="click">
 
       <ul class="nav nav-justified nav-tabs-dropdown" role="tablist">
@@ -21,14 +21,16 @@
           </a>
         </li>
 
-        <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
+        <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}"
+            ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
           <a href="javascript:void(0)" role="tab" data-toggle="tab"
              ng-click="openAddUserTab('CLIENT_USER')">
             Client Users
           </a>
         </li>
 
-        <li ng-class="{'active': currentAddUserTab === 'VENDOS'}">
+        <li ng-class="{'active': currentAddUserTab === 'VENDOS'}"
+            ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
           <a href="javascript:void(0)" role="tab" data-toggle="tab"
              ng-click="openAddUserTab('VENDOS')">
             Vendors

@@ -20,6 +20,8 @@
 
               $scope.serviceIsSaving = true;
 
+              var serviceDate = new Date($scope.editService.date);
+
               TicketsService.updateExpenseInTicketUpdate({
 
                 ticketUpdateId: $scope.ticketUpdate.id,
@@ -29,7 +31,7 @@
                   item: {versionedId: {id: $scope.editService.item.versionedId.id}},
                   description: $scope.editService.description,
                   quantity: $scope.editService.quantity / 60,
-                  date: new Date($scope.editService.date.getFullYear(), $scope.editService.date.getMonth(), $scope.editService.date.getDate())
+                  date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate())
 
                 }
               }, function () {
