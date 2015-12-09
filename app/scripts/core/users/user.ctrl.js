@@ -37,29 +37,29 @@
         };
 
         $scope.getUserSubscribleClass = function () {
-          if (!$scope.subscriptions[$scope.user.id]) {
+          if (!$scope.user.subscription) {
             return;
           }
 
-          if ($scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+          if ($scope.user.subscription.ticket && $scope.user.subscription.invoice) {
             return 'badge-invoice-and-ticket-updates badge-updates';
-          } else if ($scope.subscriptions[$scope.user.id].ticket && !$scope.subscriptions[$scope.user.id].invoice) {
+          } else if ($scope.user.subscription.ticket && !$scope.user.subscription.invoice) {
             return 'badge-ticket-updates badge-updates';
-          } else if (!$scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+          } else if (!$scope.user.subscription.ticket && $scope.user.subscription.invoice) {
             return 'badge-invoice-updates badge-updates';
           }
         };
 
         $scope.getUserSubscribleTooltip = function () {
-          if (!$scope.subscriptions[$scope.user.id]) {
+          if (!$scope.user.subscription) {
             return;
           }
 
-          if ($scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+          if ($scope.user.subscription.ticket && $scope.user.subscription.invoice) {
             return 'subscriber invoice and ticket updates';
-          } else if ($scope.subscriptions[$scope.user.id].ticket && !$scope.subscriptions[$scope.user.id].invoice) {
+          } else if ($scope.user.subscription.ticket && !$scope.user.subscription.invoice) {
             return 'subscriber ticket updates';
-          } else if (!$scope.subscriptions[$scope.user.id].ticket && $scope.subscriptions[$scope.user.id].invoice) {
+          } else if (!$scope.user.subscription.ticket && $scope.user.subscription.invoice) {
             return 'subscriber invoice updates';
           }
         };
