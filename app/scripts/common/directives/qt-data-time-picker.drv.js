@@ -2,12 +2,15 @@
 
 (function () {
 
-  angular.module("quicktech.common.directives").directive('chooseDataDropdown',
+  angular.module("quicktech.common.directives").directive('qtDataTimePicker',
     function () {
       return {
         restrict: 'A',
         require: 'ngModel',
-        scope: {},
+        scope: {
+          minDate: '=',
+          maxDate: '='
+        },
         link: function (scope, element, attrs, ctrl) {
 
           var options = {
@@ -15,8 +18,12 @@
             format: 'DD MMM YYYY'
           };
 
-          if(attrs.minDate){
-            options.minDate = new Date(attrs.minDate);
+          if (scope.minDate) {
+            options.minDate = scope.minDate;
+          }
+
+          if (scope.maxDate) {
+            options.maxDate = scope.maxDate;
           }
 
           element.datetimepicker(options);

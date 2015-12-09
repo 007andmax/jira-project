@@ -6,6 +6,8 @@
       ['$scope', 'ServicesService',
         function ($scope, ServicesService) {
 
+          $scope.maxServiceDate = new Date();
+
           $scope.setNewService = function (service) {
             $scope.serviceExpense.item = service.staticCopy()
           };
