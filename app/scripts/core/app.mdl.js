@@ -30,7 +30,7 @@
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise(getUserDefaultPage());
+    $urlRouterProvider.otherwise(getUserDefaultPage);
 
     $urlRouterProvider.when('/accounting', '/accounting/billable');
     $urlRouterProvider.when('/settings', '/settings/myProfile');
@@ -295,6 +295,10 @@
         TRASH: 'trash',
         SPAM: 'spam'
       };
+
+    if(!!window.loggingOut || location.href === '/logout'){
+      return '';
+    }
 
     if (window.startPage) {
       defaultTicketsPage = startPageMap[window.startPage];
