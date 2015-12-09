@@ -268,7 +268,7 @@
               ticketUpdateToSend.services = $scope.ticketUpdate.services;
 
               for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
-                var date = ticketUpdateToSend.services[i].date;
+                var date = new Date(ticketUpdateToSend.services[i].date);
 
                 ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
                 ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
