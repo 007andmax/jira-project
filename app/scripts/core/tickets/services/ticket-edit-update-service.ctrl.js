@@ -6,6 +6,8 @@
       ['$scope', 'TicketsService', 'ServicesService', 'quicktech.common.services.UserNotificationService', '$filter',
         function ($scope, TicketsService, ServicesService, UserNotificationService, $filter) {
 
+          $scope.maxServiceDate = new Date();
+
           $scope.editService = $scope.service.staticCopy();
           $scope.editService.quantity = $scope.service.quantity * 60;
           $scope.companyServices = ServicesService.getAllByCompany($scope, $scope.company.id);
@@ -27,7 +29,7 @@
                   item: {versionedId: {id: $scope.editService.item.versionedId.id}},
                   description: $scope.editService.description,
                   quantity: $scope.editService.quantity / 60,
-                  date: new Date($scope.editService.date)
+                  date: new Date($scope.editService.date.getFullYear(), $scope.editService.date.getMonth(), $scope.editService.date.getDate())
 
                 }
               }, function () {
