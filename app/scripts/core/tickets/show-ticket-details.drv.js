@@ -13,13 +13,13 @@
               ifScrollInit = false,
               ticketNanoContent = element.find('[ticket-nano-content]');
 
+            controlTicketList();
+
             element.hide();
             body.addClass('opened-ticket');
 
             scope.$on('ticketDetailsLoad', function () {
-              element.fadeIn(1500, function () {
-                controlTicketList();
-              });
+              element.fadeIn(1500);
             });
 
             scope.$on('$destroy', function () {
