@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.rightPanel").directive("contactUserPopover",
-    ['$timeout', '$rootScope', 'SubscriptionsService',
-      function ($timeout, $rootScope, SubscriptionsService) {
+    ['$timeout', '$rootScope',
+      function ($timeout, $rootScope) {
         return {
           restrict: 'A',
           scope: {
@@ -17,17 +17,17 @@
               return;
             }
 
-            var icnEmail,
-              contactName = $rootScope.getUserName(scope.userInfo),
-              contactEmail = scope.userInfo.primaryEmail ? scope.userInfo.primaryEmail : scope.userInfo.email,
-              contactDesignation = scope.userInfo.designation,
-              phoneTemplateHtml = "";
-
-            initPopover();
+            scope.$watch('userInfo', initPopover, true);
 
             function initPopover() {
 
-              var icnSubscription = '',
+              var icnEmail,
+                contactName = $rootScope.getUserName(scope.userInfo),
+                contactEmail = scope.userInfo.primaryEmail ? scope.userInfo.primaryEmail : scope.userInfo.email,
+                contactDesignation = scope.userInfo.designation,
+                phoneTemplateHtml = "",
+                icnSubscription = '',
+                countPriority = -1,
                 subsTooltipText,
                 userSubscription = scope.userInfo.subscription;
 
@@ -44,15 +44,21 @@
 
               for (var i = 0; i < scope.userInfo.phoneNumbers.length; i++) {
 
-                if (scope.userInfo.phoneNumbers[i].typeNumber === 'MOBILE') {
-                  phoneTemplateHtml += '<div class="user-no"> <i class="icn-sm icn-iphone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+                if ((countPriority === -1) || (countPriority < scope.userInfo.phoneNumbers[i].priority)) {
 
-                } else if (scope.userInfo.phoneNumbers[i].typeNumber === 'FAX') {
-                  phoneTemplateHtml += '<div class="user-no"> <i class="icn-sm icn-user-fax pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+                  countPriority =  scope.userInfo.phoneNumbers[i].priority;
 
-                } else {
-                  phoneTemplateHtml += '<div class="user-no"> <i class="icn-sm icn-user-phone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+                  if (scope.userInfo.phoneNumbers[i].typeNumber === 'MOBILE') {
+                    phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-iphone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+
+                  } else if (scope.userInfo.phoneNumbers[i].typeNumber === 'FAX') {
+                    phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-user-fax pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+
+                  } else {
+                    phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-user-phone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
+                  }
                 }
+
               }
 
               var user_popover_template = '<div class="popover popover-userinfo" role="tooltip">\
@@ -78,6 +84,8 @@
 
               var user_popover_content = '<div class="user-email"> <i class="icn-sm icn-at pull-left"></i> ' + contactEmail + ' </div>' + phoneTemplateHtml;
 
+              element.popover('destroy');
+
               element.popover({
                 content: user_popover_content,
                 template: user_popover_template,
@@ -99,7 +107,7 @@
                 emailTooltip.hide();
                 subsTooltip.hide();
 
-                icnEmail.on('click', function(){
+                icnEmail.on('click', function () {
                   scope.sendEmailInPopover(scope.userInfo.id)
                 });
 
