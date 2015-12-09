@@ -37,7 +37,7 @@
       <div class="col-4">
 
         <input type="text" class="form-control" placeholder="Amount"
-               value="{{ productExpense.item.sale * productExpense.quantity || '' }}" readonly/>
+               value="{{ productExpense.item.sale ? '$ ' + productExpense.item.sale : '' }}" readonly/>
       </div>
 
       <div class="col-5" ng-if="$last">
