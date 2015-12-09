@@ -8,8 +8,11 @@
         restrict: 'A',
         link: function (scope, element, attrs) {
           element.on('click', function () {
-            location.hash = '';
             location.href = '/logout';
+
+            setTimeout(function () {
+              location.hash = '';
+            }, 0)
           })
         }
       }
