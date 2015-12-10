@@ -14,13 +14,15 @@
       </a>
     </li>
 
-    <li ng-class="{'active': currentOpenTab === 'PRODUCT'}">
+    <li ng-class="{'active': currentOpenTab === 'PRODUCT'}"
+        ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
         <i class="icn-lg icn-add-product"></i>Product
       </a>
     </li>
 
-    <li ng-class="{'active': currentOpenTab === 'SERVICE'}">
+    <li ng-class="{'active': currentOpenTab === 'SERVICE'}"
+        ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('SERVICE')">
         <i class="icn-lg icn-add-service"></i>Service
       </a>
