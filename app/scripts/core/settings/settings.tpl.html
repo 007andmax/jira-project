@@ -14,8 +14,8 @@
               navigation-bar="#navigation-content-wrapper">
 
             <li navigate-to="#myProfileBasicInfo"><a href="javascript:void(0)">Basic Info</a></li>
-            <li navigate-to="#myProfileChangePassword"><a href="javascript:void(0)" >Change Password</a></li>
-            <li navigate-to="#myProfileContactInfo"><a href="javascript:void(0)" >Contact Info</a></li>
+            <li navigate-to="#myProfileChangePassword"><a href="javascript:void(0)">Change Password</a></li>
+            <li navigate-to="#myProfileContactInfo"><a href="javascript:void(0)">Contact Info</a></li>
             <li navigate-to="#myProfileMiscInfo"><a href="javascript:void(0)">Misc. Info</a></li>
             <li navigate-to="#myProfileEmailNotifications"><a href="javascript:void(0)">Email Notifications</a></li>
             <li navigate-to="#myProfileManageLabels"><a href="javascript:void(0)">Manage Labels</a></li>
@@ -24,7 +24,7 @@
         </div>
       </li>
 
-      <li class="nav-company-info" ui-sref="settings.companyInfo" ng-show="currentUser.role !== 'USER'">
+      <li class="nav-company-info" ui-sref="settings.companyInfo" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
 
         <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/companyInfo'}">
           <i class="icn-sm icn-settings-company-info pull-left"></i>
