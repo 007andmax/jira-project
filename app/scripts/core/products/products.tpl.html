@@ -115,7 +115,8 @@
                     <div class="product-name">{{ product.name}}</div>
 
                     <a href="javascript:void(0)" class="hit-area ha-desc pull-left"
-                       popover-placement="bottom" popover="{{ product.description}}" popover-trigger="mouseenter">
+                       custom-popover custom-popover-content="{{ product.description}}"
+                       custom-popover-placement="bottom">
                       <i class="icn-sm icn-description"></i>
                     </a>
                   </div>
