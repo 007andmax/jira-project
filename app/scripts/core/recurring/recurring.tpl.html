@@ -194,8 +194,9 @@
 
             </ul>
 
-            <div class="create-invoice-btn" ng-show="showInvoices && !showCreateInvoiceForm">
+            <div class="create-invoice-btn animation-create-invoice-button" ng-show="showInvoices">
               <div class="btn btn-info pull-right has-tooltip" style="width: 98px;"
+                   custom-disabled="{{ showCreateInvoiceForm }}"
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
                    ng-click="showCreateRecurringInvoiceForm()">
                 <i class="icn-sm icn-create-invoice"></i>
