@@ -25,31 +25,36 @@
   <div class="billable-content">
     <div class="tabs-container">
 
-      <div class="btn btn-add-company btn-primary pull-right has-tooltip"
-           style="width: 98px;" ng-class="{'hide': isShowAddCompany}"
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Company"
-           ng-click="openAddCompanyForm()">
-        <i class="icn-sm icn-add-company"></i>
-      </div>
+      <div id="choose-company-form">
 
-      <div class="add-company-container pull-right" ng-class="{'hide': !isShowAddCompany}" style="display: block">
-
-        <div class="btn btn-success"
-             custom-disabled="{{ !company.id }}" ng-click="addCompany()">
-          <i class="icn-sm icn-plus-sm"></i>
+        <div class="btn btn-add-company btn-primary pull-right has-tooltip"
+             style="width: 98px;" ng-class="{'hide': isShowAddCompany}"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Company"
+             ng-click="openAddCompanyForm()">
+          <i class="icn-sm icn-add-company"></i>
         </div>
 
-        <div class="dropdown">
-          <input class="form-control-search" placeholder="Search company..." type="text"
-                 name="addCompany" ng-required="true" ng-trim="false"
-                 ng-model="company" typeahead-on-select="prepareCompanyToAdd()" qt-typeahead-show-on-focus
-                 typeahead="company as company.name for company in notRecurringCompaniesArray | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                 custom-style="{width: '100%', 'max-height': '170px', 'overflow-y': 'scroll'}">
+        <div class="add-company-container pull-right" ng-class="{'hide': !isShowAddCompany}"
+             style="display: block" click-outside="closeChooseCompanyForm()" outside-if-not="choose-company-form">
 
-          <i class="icn-sm icn-search-input" tabindex="-1"
-             style="position: absolute;right: auto;left: 13px;top: 13px;"></i>
+          <div class="btn btn-success"
+               custom-disabled="{{ !company.id }}" ng-click="addCompany()">
+            <i class="icn-sm icn-plus-sm"></i>
+          </div>
 
+          <div class="dropdown">
+            <input class="form-control-search" placeholder="Search company..." type="text"
+                   name="addCompany" ng-required="true" ng-trim="false"
+                   ng-model="company" typeahead-on-select="prepareCompanyToAdd()" qt-typeahead-show-on-focus
+                   typeahead="company as company.name for company in notRecurringCompaniesArray | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                   custom-style="{width: '100%', 'max-height': '170px', 'overflow-y': 'scroll'}">
+
+            <i class="icn-sm icn-search-input" tabindex="-1"
+               style="position: absolute;right: auto;left: 13px;top: 13px;"></i>
+
+          </div>
         </div>
+
       </div>
 
       <ul class="nav nav-qt" role="tablist">

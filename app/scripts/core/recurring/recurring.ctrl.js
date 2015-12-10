@@ -64,8 +64,13 @@
         $scope.addCompany = function () {
           RecurringService.addCompany($scope.recurringCompanies, $scope.company.id);
           $rootScope.$broadcast('cancelEditForm');
+          $scope.isShowAddCompany = false;
           $scope.company = '';
         };
+
+        $scope.closeChooseCompanyForm = function(){
+          $scope.isShowAddCompany = false;
+        }
 
       }]);
 
