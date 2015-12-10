@@ -12,9 +12,10 @@
             return attrs.customDisabled;
           }, function (value) {
 
-            var boolValue = scope.$eval(value);
+            var boolValue = !!scope.$eval(value);
 
             element.attr('ng-disabled', boolValue);
+            element.attr('disabled', boolValue);
 
             if (boolValue) {
               element.addClass("disabled")

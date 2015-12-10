@@ -5,7 +5,7 @@
 
     <input type="text" class="form-control" placeholder="Service"
            ng-model="editService.name"
-           name="editServiceName" ng-required="true" custom-disabled="{{ !service.isDefault && service }}"
+           name="editServiceName" ng-required="true" custom-disabled="{{ !!(!service.isDefault && service) }}"
            is-uniq-validation validation-func="validateServiceName" model-id="service.versionedId.id"
            ng-maxlength="100" ng-minlength="3">
   </div>
@@ -14,7 +14,7 @@
 
     <input type="text" class="form-control" placeholder="Min. Time Slice"
            ng-model="editService.timeBlock"
-           custom-disabled="{{ !service.isDefault && service }}" hard-reset-pattern="numberPattern"
+           custom-disabled="{{ !!(!service.isDefault && service) }}" hard-reset-pattern="numberPattern"
            invalid-when="editService.timeBlock <= 0" hard-reset-required="true" name="timeBlock">
   </div>
 
