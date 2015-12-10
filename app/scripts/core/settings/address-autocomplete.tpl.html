@@ -1,7 +1,7 @@
 <div class="form-row clearfix" ng-form="addressForm">
 
   <div class="form-group full-width"
-       ng-class="{error: (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
+       ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
 
     <label class="control-label">Mailing Address</label>
 
@@ -14,7 +14,7 @@
 
     <input class="form-control" type="text" popover="Enter the user's full address."
            name="address"
-           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover required="true"
+           popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover ng-required="true"
            make-dirty-on-blur
            ng-model="model.address">
   </div>
