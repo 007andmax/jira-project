@@ -21,6 +21,11 @@
           UserNotificationService.show('Loading...');
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {
 
+            if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
+              $state.go('tickets', {listType: $stateParams.listType});
+              return;
+            }
+
             rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
             rightPanelSharedState.createUserId = $scope.ticketDetails.createdUser.id;
 
@@ -31,11 +36,6 @@
             var unreadUpdatesId = [];
 
             $scope.currentOpenTab = 'NOTE';
-
-            if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
-              $state.go('tickets', {listType: $stateParams.listType});
-              return;
-            }
 
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
             $scope.company = CompaniesService.getOneById($scope.ticketDetails.company.id);

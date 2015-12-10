@@ -11,6 +11,7 @@
 
             var body = $('body'),
               ifScrollInit = false,
+              ticketDetailsLoad = false,
               ticketNanoContent = element.find('[ticket-nano-content]');
 
             controlTicketList();
@@ -19,7 +20,10 @@
             body.addClass('opened-ticket');
 
             scope.$on('ticketDetailsLoad', function () {
-              element.fadeIn(1500);
+              element.fadeIn(1500, function () {
+                ticketDetailsLoad = true;
+                initializeScroll();
+              });
             });
 
             scope.$on('$destroy', function () {
@@ -63,29 +67,30 @@
                 initializeScroll()
               } else {
                 body.removeClass('opened-ticket-list');
+                destroyScroll();
                 element.removeClass('has-scrollbar nano');
                 ticketNanoContent.removeClass('nano-content');
-                destroyScroll()
+                ticketNanoContent.removeAttr("style");
               }
             }
 
-            function destroyScroll(){
+            function destroyScroll() {
 
-              if(!ifScrollInit){
+              if (!ifScrollInit) {
                 return;
               }
 
-              element.nanoScroller({ destroy: true });
+              element.nanoScroller({destroy: true});
               ifScrollInit = false;
             }
 
-            function initializeScroll(){
+            function initializeScroll() {
 
-              if(ifScrollInit){
+              if (ifScrollInit || !ticketDetailsLoad) {
                 return;
               }
 
-              $timeout(function(){
+              $timeout(function () {
                 element.nanoScroller({
                   alwaysVisible: false,
                   flash: true,
