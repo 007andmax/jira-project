@@ -28,6 +28,14 @@
 
         $scope.sendMail = function () {
           console.log('send mail ' + $scope.vendor.name);
+        };
+
+        $scope.getPrimaryBillengAddress = function(){
+          for(var i = 0; i < $scope.vendor.addresses.length; i++){
+            if($scope.vendor.addresses[i].isPrimary){
+              return $scope.vendor.addresses[i].address;
+            }
+          }
         }
 
       }]);
