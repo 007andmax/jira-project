@@ -11,8 +11,8 @@
 
             window.loggingOut = true;
 
-            location.href = '/logout';
-            location.hash = '';
+            window.location.href = '/logout';
+            window.location.hash = '';
           })
         }
       }
