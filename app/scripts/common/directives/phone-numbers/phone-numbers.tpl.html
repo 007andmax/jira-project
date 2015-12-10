@@ -48,15 +48,17 @@
     </div>
 
     <div ng-if="$index === phoneNumbers.length - 1">
-      <div class="form-group" ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+      <div class="form-group"
+           ng-class="{'has-error': phoneNumbersForm['phoneNumber' + $index].$invalid && (phoneNumbersForm['phoneNumber' + $index].$dirty || isTryToSave)}">
 
         <label class="control-label"
-               ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+               ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$invalid && (phoneNumbersForm['phoneNumber' + $index].$dirty || isTryToSave)}">
           contact no.
         </label>
 
         <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error" style="min-height: 20px;"
-             ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
+             ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid || (phoneNumbersForm['phoneNumber' + $index].$pristine && !isTryToSave)}">
+          <label class="control-label" ng-message="required">CONTACT NO. IS REQUIRED.</label>
           <label class="control-label" ng-message="maxlength">CONTACT NO. IS TOO LARGE</label>
           <label class="control-label" ng-message="minlength">CONTACT NO. IS TOO SHORT</label>
           <label class="control-label" ng-message="pattern">INVALID NO.</label>
@@ -64,7 +66,7 @@
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"
-               make-dirty-on-blur hard-reset-pattern="phoneNumberPattern">
+               make-dirty-on-blur hard-reset-required="{{ isFirstRequired }}" hard-reset-pattern="phoneNumberPattern">
       </div>
 
       <div class="form-group no-label">

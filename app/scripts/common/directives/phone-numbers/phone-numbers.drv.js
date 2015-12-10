@@ -8,7 +8,9 @@
       require: 'ngModel',
       templateUrl: '/html/scripts/common/directives/phone-numbers/phone-numbers.tpl.html',
       scope: {
-        phoneNumbers: '=ngModel'
+        phoneNumbers: '=ngModel',
+        isFirstRequired: '=isFirstRequired',
+        isTryToSave: '=isTryToSave'
       },
       link: function ($scope, element, attrs, ngModelCtrl) {
         if (!$scope.phoneNumbers) {
