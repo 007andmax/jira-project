@@ -18,11 +18,12 @@
 
             if (form.$valid) {
 
-              var notEditService = $scope.service.staticCopy();
-              notEditService.quantity = $scope.service.quantity * 60;
-              notEditService.date = $filter('date')($scope.service.date, 'd MMM yyyy');
+              var isServiceItemChange = $scope.service.item.versionedId.id != $scope.editService.item.versionedId.id;
+              var isDescriptionChange = $scope.service.description != $scope.editService.description;
+              var isDescriptionQuantity = ($scope.service.quantity * 60) != $scope.editService.quantity;
+              var isDescriptionDate = (new Date($scope.service.date)).getTime() != (new Date($scope.editService.date)).getTime();
 
-              if (angular.equals(notEditService, $scope.editService)) {
+              if (!(isServiceItemChange || isDescriptionChange || isDescriptionQuantity || isDescriptionDate)) {
                 $scope.setEditExpenseId();
                 return;
               }

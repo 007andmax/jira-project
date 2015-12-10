@@ -20,7 +20,11 @@
 
             if (form.$valid) {
 
-              if (angular.equals($scope.product, $scope.editProduct)) {
+              var isProductItemChange = $scope.product.item.versionedId.id != $scope.editProduct.item.versionedId.id;
+              var isDescriptionChange = $scope.product.description != $scope.editProduct.description;
+              var isDescriptionQuantity = $scope.product.quantity != $scope.editProduct.quantity;
+
+              if (!(isProductItemChange || isDescriptionChange || isDescriptionQuantity)) {
                 $scope.setEditExpenseId();
                 return;
               }
