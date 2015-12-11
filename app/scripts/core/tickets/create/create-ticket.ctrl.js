@@ -164,6 +164,23 @@
           }
         };
 
+        $scope.filterUserFullName = function (value) {
+
+          function searchInUsers(item){
+
+            if (value && value.length > 0 && (value !== '[$empty$]')) {
+              var fullSearchFild = $scope.getUserName(item, true).toLowerCase();
+
+              return fullSearchFild.indexOf(value.toLowerCase()) !== -1;
+            }
+
+            return true;
+
+          }
+
+          return searchInUsers;
+        };
+
         $scope.$watch('ticketAttachments.length', function(){
 
           var totalAttachSize = 0;

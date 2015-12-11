@@ -212,7 +212,7 @@
 
               <input type="text" class="form-control has-dropdown"
                      ng-model="ticketCompany" name="ticketCompany"
-                     typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
+                     typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                      typeahead-min-length="0" ng-required="true" typeahead-editable="false"
                      qt-typeahead-show-on-focus ng-trim="false"
                      custom-style="{width: '174px', 'max-height': '170px', 'overflow-y': 'scroll'}">
@@ -229,7 +229,7 @@
               <input type="text" class="form-control has-dropdown"
                      ng-model="ticketCreatedUser" name="ticketCreatedUser"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in usersCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     typeahead="user as getUserName(user) for user in usersCompany | filter: filterUserFullName($viewValue) | orderBy:'name'"
                      qt-typeahead-show-on-focus ng-trim="false" ng-required="true"
                      custom-disabled="{{ !ticketCompany }}"
                      custom-style="{width: '380px', 'max-height': '204px', 'overflow-y': 'scroll'}">
@@ -267,7 +267,7 @@
               <input type="text" class="form-control has-dropdown"
                      ng-model="ticketAssignTo" name="ticketAssignTo"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:$viewValue:stateComparator | orderBy:'name'"
+                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'name'"
                      qt-typeahead-show-on-focus assign-to-validation ng-required="false"
                      custom-style="{width: '380px', 'max-height': '204px', 'overflow-y': 'scroll'}">
 

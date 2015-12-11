@@ -126,7 +126,7 @@
               <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
 
               <input type="text" ng-model="userCompany" class="form-control form-control-dropdown dropdown-toggle"
-                     typeahead="company as company.name for company in clientCompanies | filter:$viewValue:stateComparator | orderBy:'name'"
+                     typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                      typeahead-editable="false" typeahead-min-length="0"
                      qt-typeahead-show-on-focus
                      name="userCompany" ng-trim="false" ng-required="true"
