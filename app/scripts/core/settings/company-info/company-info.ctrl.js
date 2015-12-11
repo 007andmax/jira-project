@@ -10,6 +10,7 @@
         $scope.currentCompany = CompaniesService.getCurrentCompany();
         $scope.editCompany = $scope.currentCompany.staticCopy();
         $scope.timeRangeAllDays = {};
+        $scope.currentAddressIndex = 0;
         $scope.timezones = AddressesService.getAllLocales();
         $scope.currentHost = $location.$$host === 'dev.quicktech.com' ? 'dev.quicktech.com': 'quicktech.com';
 
