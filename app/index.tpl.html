@@ -86,9 +86,10 @@
 
 <div class="alert alert-yellow" user-notification ng-bind="message" ng-style="getMarginLeft()">Loading ...</div>
 
-<div id="top" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
+<div id="top" style="z-index: 1038;" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
 
-<aside id="left" qt-sidebar ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
+<aside id="left" qt-sidebar style="z-index: 1039;"
+       ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
 <aside id="right" class="nano" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
