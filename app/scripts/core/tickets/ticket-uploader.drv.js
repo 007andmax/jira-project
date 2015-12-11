@@ -12,7 +12,8 @@
           link: function (scope, element) {
 
             var $document = $(document),
-              scrollListenerInitialize;
+              scrollListenerInitialize,
+              isTicketsAlreadyLoad = false;
 
             scope.ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
@@ -74,7 +75,20 @@
 
               scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
 
-                scope.ticketsHeaderState.ticketsQuantity = TicketsService.getCount(paramsToSend, scope);
+                scope.ticketsHeaderState.aditionalTicketsQuantity = 0;
+                scope.ticketsHeaderState.ticketsQuantity = TicketsService.getCount(paramsToSend, scope, function () {
+
+                  if (paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
+
+                    var filterReported = {
+                      filter: 'ADMIN_REPORTED_AS_SPAM'
+                    };
+
+                    scope.ticketsHeaderState.aditionalTicketsQuantity = TicketsService.getCount(filterReported, scope.$new())
+
+                  }
+
+                });
 
                 UserNotificationService.hide();
 
@@ -86,10 +100,14 @@
                     scope.markedSpamMesage = true;
                     $timeout(function () {
 
-                      if (ticketConteiner.height() < $(window).height()) {
+                      if ((ticketConteiner.height() < $(window).height()) && !isTicketsAlreadyLoad) {
 
                         UserNotificationService.show('Loading...');
+                        isTicketsAlreadyLoad = true;
+
                         TicketsService.loadMore(scope, function (moreTicket) {
+
+                          isTicketsAlreadyLoad = false;
 
                           if ($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER' && moreTicket.length === 0 && paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
                             getReportSpamTicket(paramsToSend);
@@ -129,12 +147,14 @@
 
               $document.on('scroll', function () {
 
-                if ($document.scrollTop() >= ($document.height() - $(window).height() - 500)) {
+                if (($document.scrollTop() >= ($document.height() - $(window).height() - 500)) && !isTicketsAlreadyLoad) {
 
                   UserNotificationService.show('Loading...');
+                  isTicketsAlreadyLoad = true;
 
                   TicketsService.loadMore($scope, function (moreTicket) {
 
+                    isTicketsAlreadyLoad = false;
                     UserNotificationService.hide();
 
                     if (moreTicket.length === 0) {
