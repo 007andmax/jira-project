@@ -1797,29 +1797,6 @@ Devices tab
 }
 @media only screen and (max-width: 1700px){
   .qt-product-form .text-error{
-    margin-left: 158px;
-  }
-  .product-form-wrapper .col-1{
-    width: 153px;
-  }
-  .product-form-wrapper .col-2{
-    width: calc(100% - 552px);
-  }
-  .product-form-wrapper .col-3{
-    width: 203px;
-  }
-  .product-form-wrapper .col-4{
-    width: 98px;
-  }
-  .product-form-wrapper .col-5{
-    width: 98px;
-  }
-  .product-form-wrapper .col-desc{
-    width: calc(100% - 153px);
-  }
-}
-@media only screen and (max-width: 1500px){
-  .qt-product-form .text-error{
     margin-left: 118px;
   }
   .product-form-wrapper .col-1{
