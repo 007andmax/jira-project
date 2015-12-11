@@ -64,13 +64,14 @@
                 body.addClass("opened-ticket-list");
                 element.addClass('has-scrollbar nano');
                 ticketNanoContent.addClass('nano-content');
-                initializeScroll()
+                initializeScroll();
+                //ticketNanoContent.removeAttr("style");
               } else {
                 body.removeClass('opened-ticket-list');
                 destroyScroll();
                 element.removeClass('has-scrollbar nano');
                 ticketNanoContent.removeClass('nano-content');
-                ticketNanoContent.removeAttr("style");
+                //ticketNanoContent.removeAttr("style");
               }
             }
 
