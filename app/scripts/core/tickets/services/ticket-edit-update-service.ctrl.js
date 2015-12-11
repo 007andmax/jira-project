@@ -20,10 +20,12 @@
 
               var isServiceItemChange = $scope.service.item.versionedId.id != $scope.editService.item.versionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
-              var isDescriptionQuantity = ($scope.service.quantity * 60) != $scope.editService.quantity;
-              var isDescriptionDate = (new Date($scope.service.date)).getTime() != (new Date($scope.editService.date)).getTime();
+              var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
+              var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
 
-              if (!(isServiceItemChange || isDescriptionChange || isDescriptionQuantity || isDescriptionDate)) {
+
+
+              if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange)) {
                 $scope.setEditExpenseId();
                 return;
               }
@@ -102,6 +104,14 @@
             if (fildName === 'serviceDescription') {
               return 'Service Description is too short.'
             }
+          }
+
+          function checkDateOnDifferent(date1, date2){
+
+            var fixDate1 = (new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())).getTime();
+            var fixDate2 = (new Date(date2.getFullYear(), date2.getMonth(), date2.getDate())).getTime();
+
+            return (fixDate1 != fixDate2);
           }
 
           $scope.$watch('editService.item.name', function () {

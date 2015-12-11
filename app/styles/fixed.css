@@ -335,3 +335,9 @@
 i.off {
   background-color: #7c8999;
 }
+
+
+/*settings page*/
+.shoose-current-address-icn.active{
+  color: rgb(21, 134, 228);
+}

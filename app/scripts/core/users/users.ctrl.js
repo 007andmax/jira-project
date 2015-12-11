@@ -17,7 +17,6 @@
           headerSharedState.count = usersCount;
         });
 
-        $scope.subscriptions = SubscriptionsService.getAllClientUserSubscriptions($scope);
         $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany(CompaniesService.getCurrentCompany().id, $scope)
 
         $scope.getUserCompanyName = function (user) {
@@ -53,7 +52,7 @@
 
           if (userId) {
             var user = UsersService.getOneById(userId);
-            var userSubscription = $scope.subscriptions[user.id];
+            var userSubscription = user.subscription;
             var avatar = user.avatar;
 
             userSubscription = userSubscription ? userSubscription.staticCopy() : {};
@@ -77,17 +76,17 @@
           }
         };
 
-        $scope.subscribeUser = function (userId, nameSubscription) {
+        $scope.subscribeUser = function (user, nameSubscription) {
 
           $scope.disabledCheckbox = true;
 
-          var subscription = $scope.subscriptions[userId];
+          var subscription = user.subscription;
 
           if (subscription) {
             subscription = subscription.staticCopy()
           } else {
             subscription = {
-              user: {id: userId}
+              user: {id: user.id}
             }
           }
 
