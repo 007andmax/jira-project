@@ -207,7 +207,7 @@
 
                         <input class="form-control form-control-time-zone has-dropdown" type="text"
                                data-toggle="dropdown" aria-expanded="false" ng-model="location.locale"
-                               ng-required="true" name="companyTimezone"
+                               ng-required="true" name="companyTimezone" autocomplete="off"
                                typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
                                typeahead-editable="false" typeahead-min-length="0"
                                qt-typeahead-show-on-focus ng-trim="false"

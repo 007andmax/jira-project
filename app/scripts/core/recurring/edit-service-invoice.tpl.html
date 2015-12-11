@@ -9,7 +9,7 @@
           <div class="dropdown" ng-class="{'has-error': isShowingErrors(editServiceInvoiceForm, 'editServiceName')}">
 
             <input type="text" class="form-control has-dropdown" placeholder="Service"
-                   data-toggle="dropdown" aria-expanded="true"
+                   data-toggle="dropdown" aria-expanded="true" autocomplete="off"
                    ng-model="editService.item" name="editServiceName" ng-required="true"
                    typeahead="companyService as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
                    typeahead-min-length="0" typeahead-editable="false"

@@ -4,7 +4,7 @@
   <div class="topNavbar-search pull-left">
     <div class="input-group-search">
       <input type="text" class="form-control-top-search user-search" placeholder="Search service..."
-             ng-model="service" typeahead-on-select="showService(service)"
+             ng-model="service" typeahead-on-select="showService(service)" autocomplete="off"
              typeahead="service as service.name for service in searchServices($viewValue)"
              typeahead-template-url="/html/scripts/core/header/typeahead-template/service.tpl.html"
              custom-style="{'max-height': '160px', 'overflow-y': 'scroll'}">

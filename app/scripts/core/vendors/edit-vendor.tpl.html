@@ -179,7 +179,7 @@
                       <div class="pull-left dropdown">
 
                         <input class="form-control form-control-time-zone has-dropdown" ng-required="true"
-                               ng-model="location.locale" name="vendorTimezone"
+                               ng-model="location.locale" name="vendorTimezone" autocomplete="off"
                                typeahead="timezone as timezone.description for timezone in timezones | filter: {description: $viewValue}:stateComparator | orderBy:'description'"
                                typeahead-editable="false" typeahead-min-length="0"
                                qt-typeahead-show-on-focus ng-trim="false"

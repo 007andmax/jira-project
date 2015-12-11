@@ -12,7 +12,7 @@
     <div class="dropdown">
 
       <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
-             data-toggle="dropdown" aria-expanded="false"
+             data-toggle="dropdown" aria-expanded="false" autocomplete="off"
              typeahead-on-select="validateProductName(editProductForm.editProductName, product.versionedId.id)"
              ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
              typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"

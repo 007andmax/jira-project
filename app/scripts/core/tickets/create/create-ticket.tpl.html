@@ -211,7 +211,7 @@
               <label>Company</label>
 
               <input type="text" class="form-control has-dropdown"
-                     ng-model="ticketCompany" name="ticketCompany"
+                     ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
                      typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                      typeahead-min-length="0" ng-required="true" typeahead-editable="false"
                      qt-typeahead-show-on-focus ng-trim="false"
@@ -226,7 +226,7 @@
 
               <label>Created for</label>
 
-              <input type="text" class="form-control has-dropdown"
+              <input type="text" class="form-control has-dropdown" autocomplete="off"
                      ng-model="ticketCreatedUser" name="ticketCreatedUser"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCompany | filter: filterUserFullName($viewValue) | orderBy:'name'"
@@ -264,7 +264,7 @@
 
               <label>Assign to</label>
 
-              <input type="text" class="form-control has-dropdown"
+              <input type="text" class="form-control has-dropdown" autocomplete="off"
                      ng-model="ticketAssignTo" name="ticketAssignTo"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'name'"
