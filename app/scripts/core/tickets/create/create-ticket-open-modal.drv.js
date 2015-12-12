@@ -19,7 +19,8 @@
                 templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
                 controller: 'quicktech.core.tickets.createTicketCtrl',
                 windowClass: 'modal-create-ticket',
-                backdrop: 'static'
+                backdrop: 'static',
+                animation: false
               });
             });
           }
