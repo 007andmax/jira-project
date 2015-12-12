@@ -172,13 +172,64 @@
        ec-is-show-loader-on-cover="isShowLoaderOnCover"
        ec-disabled-cover-control="disabledCoverControl"></div>
 
-  <div class="charts-n-graphs-container" collapse="isCollapsed">
+  <div collapse="isCollapsed">
 
-    <div class="simple-chart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">
-      <div class="chart-wrapper full-width">
+    <div class="charts-n-graphs-container">
+      <div class="devices-chart">
+        <!--<div class="chart-content">-->
+        <!--<div class="chart-circle"></div>-->
+        <!--<ul class="chart-legend">-->
+        <!--<li><i class="circle-indicator blue"></i>Clients</li>-->
+        <!--<li><i class="circle-indicator green"></i>Portable</li>-->
+        <!--<li><i class="circle-indicator yellow"></i>Printers</li>-->
+        <!--<li><i class="circle-indicator orange"></i>Member Servers</li>-->
+        <!--<li><i class="circle-indicator red"></i>Servers</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+      </div>
+      <div class="tickets-chart company-tickets-chart">
+        <div class="chart-content">
+          <div class="chart-circle" pie-chart pie-chart-value="[ticketCounts.OPEN, ticketCounts.UNASSIGNED]"
+               tooltip-placement="right" pie-chart-size="140" pie-chart-color="['#eca935', '#2eabbe']"></div>
+          <ul class="chart-legend">
+            <li><i class="circle-indicator blue"></i>Unassigned</li>
+            <li><i class="circle-indicator yellow"></i>Open</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stats-charts">
+        <div class="service-time-billed">
+          <div class="chart-content">
+            <div class="chart-circle">
+              <i class="icn-lg icn-add-service-white"></i>
+            </div>
+            <ul class="chart-legend">
+              <li class="legend-heading">service time billed</li>
+              <li class="legend-stat">{{ timeBilledByCompany.value }} <span>hrs</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="online-devices">
+          <!--<div class="chart-content">-->
+          <!--<div class="chart-circle">-->
+          <!--<i class="icn-lg icn-tab-devices active"></i>-->
+          <!--</div>-->
+          <!--<ul class="chart-legend">-->
+          <!--<li class="legend-heading">online devices</li>-->
+          <!--<li class="legend-stat">628</li>-->
+          <!--</ul>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
 
-        <div class="heading"><strong>Total Earnings</strong>
-          <i class="dot-sep"></i> <span>{{ totalEarningValue | currency:'' :0 }} USD</span>
+    <div class="charts-n-graphs-container">
+
+      <div class="simple-chart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">
+        <div class="chart-wrapper full-width">
+
+          <div class="heading"><strong>Total Earnings</strong>
+            <i class="dot-sep"></i> <span>{{ totalEarningValue | currency:'' :0 }} USD</span>
           <span class="slider-arrows pull-right" style="position: static">
 
             <i class="icn-sm icn-arrow-previous"
@@ -190,17 +241,17 @@
                ng-click="disabledRightButton || changeRangeDateToGetTotalEarnings('NEXT')"></i>
 
           </span>
+          </div>
+
+          <div total-charts ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'"
+               second-gradient-color="'#7BAF3F'"></div>
         </div>
-
-        <div total-charts ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'"
-             second-gradient-color="'#7BAF3F'"></div>
       </div>
-    </div>
 
-    <div class="simple-chart" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
-      <div class="chart-wrapper full-width">
-        <div class="heading"><strong>Total Receivables</strong>
-          <i class="dot-sep"></i> <span>{{ totalReceivablesValue | currency:'' :0 }} USD</span>
+      <div class="simple-chart" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
+        <div class="chart-wrapper full-width">
+          <div class="heading"><strong>Total Receivables</strong>
+            <i class="dot-sep"></i> <span>{{ totalReceivablesValue | currency:'' :0 }} USD</span>
 
           <span class="slider-arrows pull-right" style="position: static">
 
@@ -213,17 +264,17 @@
                ng-click="disabledRightButton || changeRangeDateToGetTotalReceivables('NEXT')"></i>
 
           </span>
+          </div>
+
+          <div total-charts ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'"
+               second-gradient-color="'#E55E36'"></div>
         </div>
-
-        <div total-charts ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'"
-             second-gradient-color="'#E55E36'"></div>
       </div>
-    </div>
 
-    <div class="simple-chart" ng-controller="quicktech.core.companies.ticketsClosedChartCtrl">
-      <div class="chart-wrapper full-width">
-        <div class="heading"><strong>Tickets Closed</strong>
-          <i class="dot-sep"></i> <span>{{ allTicketsClosedByDays }}</span>
+      <div class="simple-chart" ng-controller="quicktech.core.companies.ticketsClosedChartCtrl">
+        <div class="chart-wrapper full-width">
+          <div class="heading"><strong>Tickets Closed</strong>
+            <i class="dot-sep"></i> <span>{{ allTicketsClosedByDays }}</span>
 
           <span class="slider-arrows pull-right" style="position: static">
 
@@ -236,49 +287,51 @@
                ng-click="disabledRightButton || changeRangeDateToGetClosedTkt('NEXT')"></i>
 
           </span>
-        </div>
+          </div>
 
-        <div ticket-closed-chart ng-model="closedTicketsGraphData"></div>
+          <div ticket-closed-chart ng-model="closedTicketsGraphData"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="simple-chart">
-      <div class="chart-wrapper full-width">
+      <div class="simple-chart">
+        <div class="chart-wrapper full-width">
 
-        <div class="heading"><strong>Ticket Resolutions</strong> <span>All Time</span>
-          <ul class="chart-legend">
-            <li><i class="circle-indicator blue"></i>Quick</li>
-            <li><i class="circle-indicator orange"></i>DELAYED</li>
-          </ul>
-        </div>
+          <div class="heading"><strong>Ticket Resolutions</strong> <span>All Time</span>
+            <ul class="chart-legend">
+              <li><i class="circle-indicator blue"></i>Quick</li>
+              <li><i class="circle-indicator orange"></i>DELAYED</li>
+            </ul>
+          </div>
 
-        <div class="chart-content">
+          <div class="chart-content">
 
-          <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
-               pie-chart-color="['#2eabbe', '#eca935']"
-               pie-chart-size="140"></div>
+            <div pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
+                 pie-chart-color="['#2eabbe', '#eca935']"
+                 pie-chart-size="140"></div>
 
-          <ul class="chart-legend">
+            <ul class="chart-legend">
 
-            <li>
+              <li>
               <span class="text-info">
                 {{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%
               </span>
-              Tickets created &amp; resolved within 2 days
-            </li>
+                Tickets created &amp; resolved within 2 days
+              </li>
 
-            <li>
+              <li>
               <span class="text-warning">
                 {{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%
               </span>
-              Tickets created &amp; resolved within 10 days
-            </li>
+                Tickets created &amp; resolved within 10 days
+              </li>
 
-          </ul>
+            </ul>
+          </div>
+
         </div>
-
       </div>
     </div>
+
   </div>
 
   <div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
