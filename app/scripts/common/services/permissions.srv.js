@@ -190,8 +190,9 @@
         if (ticket && ticket.createdUser && ticket.createdUser.id) {
           var isUserInShares = (user.role === USER_ROLES.USER) &&  ticket.sharedToCurrentUserAt;
           var isAdmin = user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN;
+          var isAssignUser = ticket.assignedUser && (ticket.assignedUser.id === user.id);
 
-          return isAdmin || ticket.assignedUser.id === user.id || isUserInShares;
+          return isAdmin || isAssignUser || isUserInShares;
         }
       }
 

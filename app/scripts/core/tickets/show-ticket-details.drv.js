@@ -62,7 +62,7 @@
                 body.addClass("opened-ticket-list opened-ticket");
                 element.nanoScroller();
                 element.find('.nano-content').css({'position': 'absolute'});
-                ticketHeader.addClass('ticket-fixed-header');
+                //ticketHeader.addClass('ticket-fixed-header');
                 element.find(".ticket-detail > h2").css("margin-top", "92px");
 
               } else {
@@ -70,7 +70,7 @@
                 body.removeClass("opened-ticket-list").addClass("opened-ticket");
                 element.nanoScroller({destroy: true});
                 element.find('.nano-content').css({'position': 'static'});
-                ticketHeader.removeClass('ticket-fixed-header');
+                //ticketHeader.removeClass('ticket-fixed-header');
                 element.find(".ticket-detail > h2").css("margin-top", "0");
 
               }
