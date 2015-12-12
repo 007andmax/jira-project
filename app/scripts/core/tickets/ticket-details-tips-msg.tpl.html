@@ -77,10 +77,10 @@
     <div class="well-message">
       <p>
         <strong class="text-info">
-          {{ ticketDetails.deletePerformer.id === currentUser.id ? 'You' :
-          getUserName(getUserById(ticketDetails.deletePerformer.id)) }}
+          {{ ticketDetails.deletePerformer.id === currentUser.id ? 'You have' :
+          getUserName(getUserById(ticketDetails.deletePerformer.id)) + ' has' }}
         </strong>
-        has moved this ticket to trash.
+        moved this ticket to trash.
         You can either delete the ticket forever or restore the ticket status anytime, using the respective option.</p>
       <span class="text-muted"><strong>TIP:</strong>
         Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
@@ -113,10 +113,10 @@
     <div class="well-message">
       <p>
         <strong class="text-info">
-          {{ ticketDetails.spamMarker.id === currentUser.id ? 'You' :
-          getUserName(getUserById(ticketDetails.spamMarker.id)) }}
+          {{ ticketDetails.spamMarker.id === currentUser.id ? 'You have' :
+          getUserName(getUserById(ticketDetails.spamMarker.id)) + ' has' }}
         </strong>
-        has marked it as spam. You can either delete the ticket forever or restore the ticket status anytime, using
+        marked it as spam. You can either delete the ticket forever or restore the ticket status anytime, using
         the respective option.</p>
       <span class="text-muted"><strong>TIP:</strong>
         Restoring ticket moves the ticket back to its original folder where it was reported as spam. </span>
@@ -148,10 +148,10 @@
     <div class="well-message">
       <p>
         <strong class="text-info">
-          {{ ticketDetails.spamReporter.id === currentUser.id ? 'You' :
-          getUserName(getUserById(ticketDetails.spamReporter.id)) }}
+          {{ ticketDetails.spamReporter.id === currentUser.id ? 'You have' :
+          getUserName(getUserById(ticketDetails.spamReporter.id)) + ' has' }}
         </strong>
-        has reported it as spam. You can either mark the ticket as spam or restore the ticket status anytime, using the
+        reported it as spam. You can either mark the ticket as spam or restore the ticket status anytime, using the
         respective option.</p>
       <span class="text-muted"><strong>TIP:</strong>
         Restoring ticket moves the ticket back to its original folder where it was reported as spam. </span>
