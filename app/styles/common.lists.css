@@ -557,11 +557,11 @@ Devices tab
   height: auto;
   min-height: 70px;
 }
-.billable-main>.col-1, .qt-billable-sub>li>.col-1{
+.qt-list>li.billable-main>.col-1, .qt-billable-sub>li>.col-1{
   width: calc(100% - 98px);
   white-space: nowrap;
 }
-.billable-main>.col-2, .qt-billable-sub>li>.col-2{
+.qt-list>li.billable-main>.col-2, .qt-billable-sub>li>.col-2{
   width: 98px;
   text-align: right;
   padding-right: 0;
