@@ -30,7 +30,8 @@
 
   </ul>
 
-  <div class="tab-content">
+  <div class="tab-content"
+       ng-style="{'margin-top': PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) ? '0' : '68px' }">
 
     <div class="tab-pane in active" id="Note" ng-if="currentOpenTab === 'NOTE'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
