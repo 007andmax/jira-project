@@ -10,9 +10,7 @@
           link: function (scope, element) {
 
             var body = $('body'),
-              ifScrollInit = false,
-              ticketDetailsLoad = false,
-              ticketNanoContent = element.find('[ticket-nano-content]');
+              ticketHeader = element.find('.ticket-header');
 
             controlTicketList();
 
@@ -21,8 +19,7 @@
 
             scope.$on('ticketDetailsLoad', function () {
               element.fadeIn(1500, function () {
-                ticketDetailsLoad = true;
-                initializeScroll();
+                controlTicketList();
               });
             });
 
@@ -61,46 +58,30 @@
               var windowWidth = window.innerWidth;
 
               if (windowWidth > 1700) {
-                body.addClass("opened-ticket-list");
-                element.addClass('has-scrollbar nano');
-                ticketNanoContent.addClass('nano-content');
-                initializeScroll();
-                //ticketNanoContent.removeAttr("style");
+
+                body.addClass("opened-ticket-list opened-ticket");
+                element.nanoScroller();
+                element.find('.nano-content').css({'position': 'absolute'});
+                ticketHeader.addClass('ticket-fixed-header');
+                element.find(".ticket-detail > h2").css("margin-top", "92px");
+
               } else {
-                body.removeClass('opened-ticket-list');
-                destroyScroll();
-                element.removeClass('has-scrollbar nano');
-                ticketNanoContent.removeClass('nano-content');
-                //ticketNanoContent.removeAttr("style");
-              }
-            }
 
-            function destroyScroll() {
+                body.removeClass("opened-ticket-list").addClass("opened-ticket");
+                element.nanoScroller({destroy: true});
+                element.find('.nano-content').css({'position': 'static'});
+                ticketHeader.removeClass('ticket-fixed-header');
+                element.find(".ticket-detail > h2").css("margin-top", "0");
 
-              if (!ifScrollInit) {
-                return;
               }
 
-              element.nanoScroller({destroy: true});
-              ifScrollInit = false;
-            }
+              element.nanoScroller({
+                alwaysVisible: false,
+                flash: true,
+                flashDelay: 1000,
+                sliderMinHeight: 98
+              });
 
-            function initializeScroll() {
-
-              if (ifScrollInit || !ticketDetailsLoad) {
-                return;
-              }
-
-              $timeout(function () {
-                element.nanoScroller({
-                  alwaysVisible: false,
-                  flash: true,
-                  flashDelay: 1000,
-                  sliderMinHeight: 98
-                });
-
-                ifScrollInit = true;
-              }, 0)
             }
 
           }

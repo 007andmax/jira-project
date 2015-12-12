@@ -197,12 +197,15 @@
             function initDropdown() {
 
               var windowWidth = $(window).width(),
-                dropdownMenu = element.find('.dropdown-menu-custom');
+                dropdownMenu = element.find('.dropdown-menu-custom'),
+                dropdownSubmenu = element.find('.dropdown-submenu');
 
               if (windowWidth > 1700) {
                 dropdownMenu.removeClass('dropdown-menu-right');
+                dropdownSubmenu.removeClass('left-align');
               } else {
                 dropdownMenu.addClass('dropdown-menu-right');
+                dropdownSubmenu.addClass('left-align');
               }
             }
 
