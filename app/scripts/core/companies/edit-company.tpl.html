@@ -90,7 +90,7 @@
                          ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
 
                       <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'companyName')}">
-                        Name
+                        Company Name
                       </label>
 
                       <div ng-messages="companyForm.companyName.$error"
@@ -122,9 +122,7 @@
                       </div>
 
                       <input type="text" class="form-control" ng-model="editCompany.type" name="companyType"
-                             ng-maxlength="40"
-                             popover="Enter the company type e.g., Automaker, Hardware Solutions, etc."
-                             popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                             ng-maxlength="40" placeholder="e.g., Hardware Solutions">
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
@@ -139,9 +137,7 @@
                         <label class="control-label" ng-message="pattern">PLEASE ENTER A VALID DOMAIN.</label>
                       </div>
 
-                      <input type="text" class="form-control" ng-model="editCompany.domain"
-                             popover="Enter the company's domain if exists, like samplecompany.com. It will be used to verify users' email addresses."
-                             popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
+                      <input type="text" class="form-control" ng-model="editCompany.domain" placeholder="yourcompany.com"
                              name="companyDomain"
                              is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
                     </div>
@@ -154,10 +150,7 @@
                       <label class="control-label">Description of Business</label>
 
                       <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
-                                maxlength="80" ng-trim="false" make-dirty-on-blur
-                                popover="Describe the company's business in 80 characters (spaces included)."
-                                popover-placement="bottom" popover-trigger="qtCustomPopover"
-                                qt-custom-popover></textarea>
+                                maxlength="80" ng-trim="false" make-dirty-on-blur></textarea>
 
                       <div class="word-count">{{ 80 - editCompany.description.length }}</div>
                     </div>
@@ -453,7 +446,7 @@
 
               </div>
 
-              <input type="text" class="token-input" autocomplete="off" placeholder="Add more..."
+              <input type="text" class="token-input" autocomplete="off" placeholder="Click here to add vendor..."
                      ng-model="vendorFilter" va-input tabindex="0" style="min-width: 60px; width: 221px;">
             </div>
 
@@ -532,9 +525,7 @@
                   <input type="text" class="form-control"
                          ng-model="tax.code" name="currentlyTaxType" ng-required="true"
                          is-uniq-validation validation-func="validateTaxRateCode" model-id="tax.versionedId.id"
-                         ng-maxlength="30" placeholder="Tax Type"
-                         popover="This Tax information will be added to this company's invoices with taxable products and services."
-                         popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                         ng-maxlength="30" placeholder="Tax Type">
                 </div>
 
                 <div class="col-2" ng-class="{'has-error': isShowingErrors(companyForm, 'currentlyTaxRate')}">
@@ -578,9 +569,7 @@
 
                   <input type="text" class="form-control"
                          placeholder="Tax Type" ng-model="newTaxRate.code"
-                         ng-change="validateNewTaxRate(newTaxRateForm)" name="code"
-                         popover="This Tax information will be added to this company's invoices with taxable products and services."
-                         popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover>
+                         ng-change="validateNewTaxRate(newTaxRateForm)" name="code">
                 </div>
 
                 <div class="col-2">
