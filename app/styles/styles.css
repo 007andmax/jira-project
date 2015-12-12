@@ -539,11 +539,25 @@ hr {
   margin: 0;
   padding: 3px 0 0;
 }
+.modal-create-ticket .upload-attachments {
+  padding: 0 10px 10px;
+  background-color: #f1f5fa;
+}
+.modal-create-ticket .upload-attachments:empty{
+  padding: 0 10px !important;
+}
 .upload-attachments li {
   padding: 5px 7px 5px 10px;
   margin: 10px;
   border: 1px solid #e7ecf2;
   background-color: #f1f5fa;
+}
+.modal-create-ticket .upload-attachments li {
+  background-color: #fff;
+  margin: 0;
+}
+.modal-create-ticket .upload-attachments li + li {
+  margin-top: 10px;
 }
 .upload-attachments li .hit-area {
   margin-top: 2px;
@@ -578,6 +592,11 @@ hr {
   height: 58px;
   padding: 10px;
   border: 0;
+}
+.modal-create-ticket .wysiwyg-controls-wrapper{
+  padding: 18px 10px;
+  height: 67px;
+  border-top: 1px solid #e7ecf2;
 }
 .wysiwyg-controls-wrapper .btn-send {
   width: 92px;

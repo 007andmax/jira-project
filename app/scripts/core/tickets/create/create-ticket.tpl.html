@@ -31,17 +31,16 @@
                ng-model="ticket.subject">
       </div>
 
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'note')}"
-           style="margin-bottom: 8px;">
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'note')}">
 
         <div text-editor ng-model="ticket.note" te-required="true" name="note">
 
           <div te-editor class="form-control editor" contenteditable="true"
-               placeholder="Type your message..." style="min-height: 92px;height: auto;border-top: none;"></div>
+               placeholder="Type your message..." style="min-height: 92px;height: auto;border: none;"></div>
 
           <div class="form-group">
-            <ul class="upload-attachments" style="max-height: 200px;overflow-y: scroll;">
-              <li ng-repeat="file in ticketAttachments"
+            <ul class="upload-attachments"><!--
+              --><li ng-repeat="file in ticketAttachments"
                   ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
 
                 <span class="file-name">{{ file.name }}</span>
@@ -72,8 +71,8 @@
                   </div>
                 </div>
 
-              </li>
-            </ul>
+              </li><!--
+            --></ul>
           </div>
 
           <div class="wysiwyg-controls-wrapper clearfix">
