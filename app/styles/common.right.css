@@ -252,6 +252,7 @@ aside#right .recent-activities-by .time-ago {
   margin-bottom: 15px;
   position: relative;
   background-color: #e7ecf2;
+  text-transform: uppercase;
 }
 .popover-userinfo .popover-content{
   clear: both;
