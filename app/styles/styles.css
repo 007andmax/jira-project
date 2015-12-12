@@ -8713,6 +8713,22 @@ button.close {
 .modal-receive-payment .modal-body {
   padding: 0;
 }
+.modal-receive-payment .invoices-header {
+  padding: 0 30px;
+}
+.modal-receive-payment .invoices-header label {
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+@-moz-document url-prefix() {
+  .modal-receive-payment .invoices-header label{
+    margin-bottom: 5px;
+  }
+}
+.modal-receive-payment .invoices-header .dropdown-menu {
+  width: 100%;
+  max-width: none;
+}
 .modal-receive-payment .modal-footer {
   border-top: 1px solid #e7ecf2;
   padding: 30px;
