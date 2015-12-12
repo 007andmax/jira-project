@@ -28,7 +28,7 @@
                 ng-show="PermissionsService.isStatusVisible(ticketDetails, currentUser.role) && ticketDetails.status"
                 class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
                 tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top">
-                <label><i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i></label>
+                <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) }}"><i class="icn-xs icn-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i></label>
               </span>
 
             </div>
