@@ -17,6 +17,8 @@
           $scope.updateSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
           $scope.productCategories = ProductsService.getCategories($scope);
+          //$scope.autocompleteData = ProductsService.getFullListForAutocomplete();
+          $scope.autocompleteData = getFullListForAutocomplete();
 
           UserNotificationService.show('Loading...');
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {
@@ -456,6 +458,110 @@
             rightPanelSharedState.companyId = undefined;
             rightPanelSharedState.createUserId = undefined;
           });
+
+          function getFullListForAutocomplete() {
+            return [{
+              "id": "f9f808cf-d0c2-4978-846b-168e3c3ea7f2",
+              "name": "Other",
+              "deletedAt": null,
+              "products": [{
+                "versionedId": {"id": "195a38b0-b572-4b2e-a22b-2aa1f8ae4351", "version": 0},
+                "createdAt": 1449795006286,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 3,
+                "name": "Scanner",
+                "sale": 120
+              }, {
+                "versionedId": {"id": "dde2bc9e-b521-46ee-80f9-d9992a174d43", "version": 0},
+                "createdAt": 1449795006894,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 4,
+                "name": "keyboard",
+                "sale": 45
+              }, {
+                "versionedId": {"id": "f6307ff3-9427-49f6-9519-bd20253ab240", "version": 0},
+                "createdAt": 1449795007374,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 5,
+                "name": "Xerox",
+                "sale": 300
+              }]
+            }, {
+              "id": "e9ff9971-4e7e-43af-881a-e49b10aad247",
+              "name": "SSD",
+              "deletedAt": null,
+              "products": [{
+                "versionedId": {"id": "6a89cab0-2368-4229-97fe-0d5365423708", "version": 0},
+                "createdAt": 1449795005285,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 2,
+                "name": "A-Data XPG SX900 256GB 2.5 SATAIII MLC",
+                "sale": 120
+              }, {
+                "versionedId": {"id": "ab305f40-0239-4b73-a951-c95929fe51e5", "version": 0},
+                "createdAt": 1449795010363,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 10,
+                "name": "Crucial MX200 500GB 2.5SATAIII MLC",
+                "sale": 250
+              }, {
+                "versionedId": {"id": "e26cd29c-1fd5-4775-a0b9-ea6364321182", "version": 0},
+                "createdAt": 1449795010101,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 9,
+                "name": "Intel 730 480GB 2.5 SATAIII MLC ",
+                "sale": 450
+              }]
+            }, {
+              "id": "5ec1e5b8-9161-428e-a774-0b2d30ac6cf4",
+              "name": "Printers",
+              "deletedAt": null,
+              "products": [{
+                "versionedId": {"id": "dec0776a-4ec8-480a-b2c6-a135f0902d2f", "version": 0},
+                "createdAt": 1449795004265,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 1,
+                "name": "Printer",
+                "sale": 150
+              }]
+            }, {
+              "id": "84f06a4e-6591-4d18-847d-4d73c538cfaa",
+              "name": "Memory Cards",
+              "deletedAt": null,
+              "products": [{
+                "versionedId": {"id": "022baa8b-aed7-4c2b-a539-fe4eb6f73826", "version": 0},
+                "createdAt": 1449795009350,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 8,
+                "name": "Silicon Power Touch 830 32GB",
+                "sale": 59
+              }, {
+                "versionedId": {"id": "4d1b331a-7e2e-4ea9-9d41-b7f53e14b29f", "version": 0},
+                "createdAt": 1449795008840,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 7,
+                "name": "Kingston DataTraveler SE9 16GB",
+                "sale": 84
+              }, {
+                "versionedId": {"id": "dc56fffe-30b1-4337-b002-a5bf6e786969", "version": 0},
+                "createdAt": 1449795008293,
+                "updatedAt": null,
+                "deletedAt": null,
+                "code": 6,
+                "name": "Transcend JetFlash 330 16GB",
+                "sale": 80
+              }]
+            }]
+          }
 
         }]);
   }()
