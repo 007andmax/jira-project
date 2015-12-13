@@ -31,10 +31,10 @@
 
                 <div ng-messages="basicInfoForm.companyName.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'companyName')}">
-                  <div class="control-label" ng-message="required">Company name is required.</div>
-                  <div class="control-label" ng-message="maxlength">Company name is too large.</div>
-                  <div class="control-label" ng-message="minlength">Company name is too short.</div>
-                  <div class="control-label" ng-message="unique">This company name already occupied.</div>
+                  <label class="control-label" ng-message="required" for="">Company name is required.</label>
+                  <label class="control-label" ng-message="maxlength" for="">Company name is too large.</label>
+                  <label class="control-label" ng-message="minlength" for="">Company name is too short.</label>
+                  <label class="control-label" ng-message="unique" for="">This company name already occupied.</label>
                 </div>
 
                 <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
@@ -56,17 +56,17 @@
 
                 <div ng-messages="basicInfoForm.supportMailBox.$error" style="padding-bottom: 1px;"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                  <div class="control-label" ng-message="required">SUPPORT EMAIL name is required.</div>
-                  <div class="control-label" ng-message="maxlength">SUPPORT EMAIL name is too large.</div>
-                  <div class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</div>
+                  <label class="control-label" ng-message="required" for="">SUPPORT EMAIL name is required.</label>
+                  <label class="control-label" ng-message="maxlength" for="">SUPPORT EMAIL name is too large.</label>
+                  <label class="control-label" ng-message="minlength" for="">SUPPORT EMAIL name is too short.</label>
                 </div>
 
                 <div ng-messages="basicInfoForm.techDomainName.$error" style="padding-bottom: 1px;"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                  <div class="control-label" ng-message="required">Domain name is required.</div>
-                  <div class="control-label" ng-message="maxlength">Domain name is too large.</div>
-                  <div class="control-label" ng-message="minlength">Domain name is too short.</div>
-                  <div class="control-label" ng-message="unique">This Domain name already occupied.</div>
+                  <label class="control-label" ng-message="required">Domain name is required.</label>
+                  <label class="control-label" ng-message="maxlength">Domain name is too large.</label>
+                  <label class="control-label" ng-message="minlength">Domain name is too short.</label>
+                  <label class="control-label" ng-message="unique">This Domain name already occupied.</label>
                 </div>
 
                 <input class="form-control" type="text"
@@ -97,7 +97,7 @@
 
                 <div ng-messages="basicInfoForm.businessEmail.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  <div class="control-label" ng-message="pattern">Please enter a valid email.</div>
+                  <label class="control-label" ng-message="pattern">Please enter a valid email.</label>
                 </div>
 
                 <input class="form-control" type="text" name="businessEmail"
@@ -116,9 +116,9 @@
 
                 <div ng-messages="basicInfoForm.companyDescription.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'companyDescription')}">
-                  <div class="control-label" ng-message="required">
+                  <label class="control-label" ng-message="required">
                     Please enter a brief description of the company’s business.
-                  </div>
+                  </label>
                 </div>
 
          <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
@@ -248,10 +248,10 @@
 
                   <div ng-messages="this[addressFormName]['phoneNumber' + $index].$error"
                        ng-if="this[addressFormName]['phoneNumber' + $index].$invalid">
-                    <div class="control-label" ng-message="required">contact no. is required.</div>
-                    <div class="control-label" ng-message="maxlength">contact no. is too large</div>
-                    <div class="control-label" ng-message="minlength">contact no. is too short</div>
-                    <div class="control-label" ng-message="pattern">invalid no.</div>
+                    <label class="control-label" ng-message="required">contact no. is required.</label>
+                    <label class="control-label" ng-message="maxlength">contact no. is too large</label>
+                    <label class="control-label" ng-message="minlength">contact no. is too short</label>
+                    <label class="control-label" ng-message="pattern">invalid no.</label>
                   </div>
 
                   <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"

@@ -31,9 +31,9 @@
 
                 <div ng-messages="basicInfoForm.firstName.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'firstName')}">
-                  <div class="control-label" ng-message="required">First name is required.</div>
-                  <div class="control-label" ng-message="maxlength">First name is too large.</div>
-                  <div class="control-label" ng-message="minlength">First name is too short.</div>
+                  <label class="control-label" ng-message="required">First name is required.</label>
+                  <label class="control-label" ng-message="maxlength">First name is too large.</label>
+                  <label class="control-label" ng-message="minlength">First name is too short.</label>
                 </div>
 
                 <input type="text" class="form-control" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
@@ -48,9 +48,9 @@
 
                 <div ng-messages="basicInfoForm.lastName.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'lastName')}">
-                  <div class="control-label" ng-message="required">Last name requires at least 1 letter.</div>
-                  <div class="control-label" ng-message="maxlength">Last name is too large.</div>
-                  <div class="control-label" ng-message="minlength">Last name is too short.</div>
+                  <label class="control-label" ng-message="required">Last name requires at least 1 letter.</label>
+                  <label class="control-label" ng-message="maxlength">Last name is too large.</label>
+                  <label class="control-label" ng-message="minlength">Last name is too short.</label>
                 </div>
 
                 <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
@@ -68,9 +68,9 @@
 
                 <div ng-messages="basicInfoForm.designation.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'designation')}">
-                  <div class="control-label" ng-message="required">Please enter a designation.</div>
-                  <div class="control-label" ng-message="maxlength">Designation is too large</div>
-                  <div class="control-label" ng-message="minlength">Designation is too short</div>
+                  <label class="control-label" ng-message="required">Please enter a designation.</label>
+                  <label class="control-label" ng-message="maxlength">Designation is too large</label>
+                  <label class="control-label" ng-message="minlength">Designation is too short</label>
                 </div>
 
                 <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
@@ -85,9 +85,9 @@
 
                 <div ng-messages="basicInfoForm.primaryEmail.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'primaryEmail')}">
-                  <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
-                  <div class="control-label" ng-message="unique">This email already occupied.</div>
+                  <label class="control-label" ng-message="required">Email field cannot be left empty.</label>
+                  <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
+                  <label class="control-label" ng-message="unique">This email already occupied.</label>
                 </div>
 
                 <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
@@ -107,7 +107,7 @@
 
                 <div ng-messages="basicInfoForm.secondaryEmail.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'secondaryEmail')}">
-                  <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+                  <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
                 </div>
 
                 <input type="text" class="form-control" name="secondaryEmail" aria-expanded="true" make-dirty-on-blur
@@ -179,10 +179,10 @@
                               <div class="form-group" ng-class="{'has-error': validLink.required || validLink.pattern}">
 
                                 <div class="form-group clearfix">
-                                  <div class="control-label" ng-show="validLink.required">Link is required.</div>
-                                  <div class="control-label" ng-show="validLink.pattern && !validLink.required">
+                                  <label class="control-label" ng-show="validLink.required">Link is required.</label>
+                                  <label class="control-label" ng-show="validLink.pattern && !validLink.required">
                                     Please enter a valid link.
-                                  </div>
+                                  </label>
                                 </div>
 
                                 <input type="text" class="form-control"
@@ -258,8 +258,8 @@
 
                 <div ng-messages="passwordForm.oldPassword.$error"
                      ng-class="{'hide': !isShowingErrors(passwordForm, 'oldPassword')}">
-                  <div class="control-label" ng-message="minlength">Password is too short</div>
-                  <div class="control-label" ng-message="notCorrectPass">Old Password is not correct</div>
+                  <label class="control-label" ng-message="minlength">Password is too short</label>
+                  <label class="control-label" ng-message="notCorrectPass">Old Password is not correct</label>
                 </div>
 
                 <input ng-class="{'hide': showOldPasswoprd}" class="form-control show-password" type="password"
@@ -293,7 +293,7 @@
 
                 <div ng-messages="passwordForm.newPassword.$error"
                      ng-class="{'hide': !isShowingErrors(passwordForm, 'newPassword')}">
-                  <div class="control-label" ng-message="minlength">Password is too short</div>
+                  <label class="control-label" ng-message="minlength">Password is too short</label>
                 </div>
 
                 <input ng-class="{'hide': showNewPasswoprd}" class="form-control show-password" type="password"
@@ -364,10 +364,10 @@
 
                 <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
                      ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
-                  <div class="control-label" ng-message="required">contact no. is required.</div>
-                  <div class="control-label" ng-message="maxlength">contact no. is too large</div>
-                  <div class="control-label" ng-message="minlength">contact no. is too short</div>
-                  <div class="control-label" ng-message="pattern">invalid no.</div>
+                  <label class="control-label" ng-message="required">contact no. is required.</label>
+                  <label class="control-label" ng-message="maxlength">contact no. is too large</label>
+                  <label class="control-label" ng-message="minlength">contact no. is too short</label>
+                  <label class="control-label" ng-message="pattern">invalid no.</label>
                 </div>
 
                 <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
@@ -446,9 +446,9 @@
 
                 <div ng-messages="miscInfoForm.shiftTiming.$error"
                      ng-class="{'hide': !isShowingErrors(miscInfoForm, 'shiftTiming')}">
-                  <div class="control-label" ng-message="required">Shift Timings field cannot be left empty.</div>
-                  <div class="control-label" ng-message="pattern">Please enter a valid time. For example 9:00 18:00</div>
-                  <div class="control-label" ng-message="validShiftTiming">FROM should be less that TO</div>
+                  <label class="control-label" ng-message="required">Shift Timings field cannot be left empty.</label>
+                  <label class="control-label" ng-message="pattern">Please enter a valid time. For example 9:00 18:00</label>
+                  <label class="control-label" ng-message="validShiftTiming">FROM should be less that TO</label>
                 </div>
 
                 <input class="form-control" type="text" name="shiftTiming" placeholder="00:00 to 00:00"

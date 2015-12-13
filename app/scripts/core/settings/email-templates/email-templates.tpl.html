@@ -46,8 +46,8 @@
 
                 <div ng-messages="templateForm.templateSubject.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
-                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">subject is too large</div>
+                  <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
@@ -62,8 +62,8 @@
 
                 <div ng-messages="templateForm.templateBody.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
-                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">email is too large</div>
+                  <label class="control-label" ng-message="required" for="">email field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -109,10 +109,10 @@
 
             <div ng-messages="ticketForm.ticketCount.$error"
                  ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketCount')}">
-              <div class="control-label" ng-message="required">number starts field cannot be left empty.</div>
-              <div class="control-label" ng-message="maxlength">number starts is too large</div>
-              <div class="control-label" ng-message="minlength">number starts is too short</div>
-              <div class="control-label" ng-message="pattern">Please enter a valid number starts.</div>
+              <label class="control-label" ng-message="required" for="">number starts field cannot be left empty.</label>
+              <label class="control-label" ng-message="maxlength" for="">number starts is too large</label>
+              <label class="control-label" ng-message="minlength" for="">number starts is too short</label>
+              <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
             </div>
 
             <input class="form-control" tc-number-input type="text" ng-model="ticketConfig.count"
@@ -128,7 +128,7 @@
 
             <div ng-messages="ticketForm.ticketPrefix.$error"
                  ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketPrefix')}">
-              <div class="control-label" ng-message="maxlength">Prefix is too large</div>
+              <label class="control-label" ng-message="maxlength" for="">Prefix is too large</label>
             </div>
 
             <input class="form-control" tc-prefix-input type="text" ng-model="ticketConfig.prefix"
@@ -188,8 +188,8 @@
 
                 <div ng-messages="templateForm.templateSubject.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
-                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">subject is too large</div>
+                  <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
@@ -204,8 +204,8 @@
 
                 <div ng-messages="templateForm.templateBody.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
-                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">email is too large</div>
+                  <label class="control-label" ng-message="required" for="">email field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -277,8 +277,8 @@
 
                 <div ng-messages="templateForm.templateSubject.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
-                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">subject is too large</div>
+                  <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
@@ -293,8 +293,8 @@
 
                 <div ng-messages="templateForm.templateBody.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
-                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">email is too large</div>
+                  <label class="control-label" ng-message="required" for="">email field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -368,8 +368,8 @@
 
                 <div ng-messages="templateForm.templateSubject.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
-                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">subject is too large</div>
+                  <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
@@ -384,8 +384,8 @@
 
                 <div ng-messages="templateForm.templateBody.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
-                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">email is too large</div>
+                  <label class="control-label" ng-message="required" for="">email field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -459,8 +459,8 @@
 
                 <div ng-messages="templateForm.templateSubject.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
-                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">subject is too large</div>
+                  <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
@@ -475,8 +475,8 @@
 
                 <div ng-messages="templateForm.templateBody.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
-                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">email is too large</div>
+                  <label class="control-label" ng-message="required" for="">email field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
@@ -521,10 +521,10 @@
 
             <div ng-messages="invoiceForm.invoiceCount.$error"
                  ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceCount')}">
-              <div class="control-label" ng-message="required">number starts field cannot be left empty.</div>
-              <div class="control-label" ng-message="maxlength">number starts is too large</div>
-              <div class="control-label" ng-message="minlength">number starts is too short</div>
-              <div class="control-label" ng-message="pattern">Please enter a valid number starts.</div>
+              <label class="control-label" ng-message="required" for="">number starts field cannot be left empty.</label>
+              <label class="control-label" ng-message="maxlength" for="">number starts is too large</label>
+              <label class="control-label" ng-message="minlength" for="">number starts is too short</label>
+              <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
             </div>
 
             <input class="form-control" type="text" ic-number-input ng-model="invoiceConfig.count"
@@ -540,9 +540,9 @@
 
             <div ng-messages="invoiceForm.invoiceTerms.$error"
                  ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceTerms')}">
-              <div class="control-label" ng-message="required">Terms field cannot be left empty.</div>
-              <div class="control-label" ng-message="minlength">Terms is too short</div>
-              <div class="control-label" ng-message="pattern">Please enter a valid Terms.</div>
+              <label class="control-label" ng-message="required" for="">Terms field cannot be left empty.</label>
+              <label class="control-label" ng-message="minlength" for="">Terms is too short</label>
+              <label class="control-label" ng-message="pattern" for="">Please enter a valid Terms.</label>
             </div>
 
             <input class="form-control" type="text" ic-terms-input
@@ -562,7 +562,7 @@
 
             <div ng-messages="invoiceForm.invoiceConditions.$error"
                  ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceConditions')}">
-              <div class="control-label" ng-message="required">terms &amp; conditions field cannot be left empty.</div>
+              <label class="control-label" ng-message="required" for="">terms &amp; conditions field cannot be left empty.</label>
             </div>
 
             <textarea class="form-control" ic-conditions-input ng-model="invoiceConfig.termsAndConditions"
@@ -618,8 +618,8 @@
 
                 <div ng-messages="templateForm.templateSubject.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
-                  <div class="control-label" ng-message="required">subject field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">subject is too large</div>
+                  <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
                 <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
@@ -634,8 +634,8 @@
 
                 <div ng-messages="templateForm.templateBody.$error"
                      ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
-                  <div class="control-label" ng-message="required">email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="maxlength">email is too large</div>
+                  <label class="control-label" ng-message="required" for="">email field cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
                 <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
