@@ -37,7 +37,7 @@
         };
         $scope.showStatusParamsMap = {
           0: 'On Hold',
-          1: 'In Pprogress',
+          1: 'In Progress',
           2: 'Completed'
         };
 
