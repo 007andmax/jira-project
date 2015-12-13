@@ -151,7 +151,7 @@
             <span>Sbmt. Tickets</span> {{ submittedTickets[user.id] || 0 }}
           </div>
 
-          <div class="user-number pull-left">
+          <div class="user-number pull-left" ng-hide="user.phoneNumbers.length < 1">
             <i class="icn-sm {{ getPriorityNumberInfo('CLASS') }}"></i>
             <span> {{ getPriorityNumberInfo('NUMBER') }}</span>
           </div>
