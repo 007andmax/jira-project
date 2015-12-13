@@ -78,6 +78,8 @@
                 return minlengthMessage($scope.updateTicketService.$error[errorKey][0].$name);
               } else if (errorKey === 'maxlength') {
                 return maxlengthMessage($scope.updateTicketService.$error[errorKey][0].$name);
+              } else if (errorKey === 'maxLengthWord') {
+                return 'Words in description should not be more than 30 characters';
               }
             }
           };

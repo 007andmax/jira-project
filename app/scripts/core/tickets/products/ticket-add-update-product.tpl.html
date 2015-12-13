@@ -23,7 +23,8 @@
       <div class="col-2" ng-class="{'has-error': isShowingErrors(addProductForm, 'productDescription')}">
 
         <input type="text" class="form-control" name="productDescription"
-               placeholder="Description" ng-model="productExpense.description" ng-maxlength="2000"/>
+               placeholder="Description" ng-model="productExpense.description"
+               ng-maxlength="2000" max-length-word="30"/>
       </div>
 
       <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">

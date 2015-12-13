@@ -73,6 +73,8 @@
                 return maxlengthMessage($scope.updateTicketProduct.$error[errorKey][0].$name);
               } else if (errorKey === 'zero') {
                 return 'Product Quantity can not be 0';
+              } else if (errorKey === 'maxLengthWord') {
+                return 'Words in description should not be more than 30 characters';
               }
             }
           };

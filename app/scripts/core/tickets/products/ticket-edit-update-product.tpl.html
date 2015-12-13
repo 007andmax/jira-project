@@ -19,7 +19,7 @@
 
         <div class="edit-col2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productDescription')}">
           <input type="text" class="form-control" placeholder="Description"
-                 name="productDescription" ng-maxlength="2000"
+                 name="productDescription" ng-maxlength="2000" max-length-word="30"
                  ng-model="editProduct.description">
         </div>
 

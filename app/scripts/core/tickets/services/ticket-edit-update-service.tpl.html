@@ -37,7 +37,7 @@
         <div class="edit-col3" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceDescription')}">
 
           <input type="text" class="form-control service-description" placeholder="Description"
-                 ng-model="editService.description"
+                 ng-model="editService.description" max-length-word="30"
                  name="serviceDescription" ng-maxlength="2000">
         </div>
 
