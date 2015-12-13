@@ -15,6 +15,25 @@
           });
         };
 
+        $scope.getCorrectUserName = function (userId) {
+
+          if (!userId) {
+            return;
+          }
+
+          if (userId === $scope.currentUser.id) {
+            return 'You';
+          } else {
+            var userName = $scope.getUserName($scope.getUserById(userId));
+            return userName;
+          }
+
+        };
+
+        $scope.isCurrentUser = function (userId) {
+          return $scope.currentUser.id === userId;
+        };
+
         function calculateDays (){
           var now = new Date(),
             msToDaysCof = 86400000;
