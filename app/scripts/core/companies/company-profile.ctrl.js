@@ -50,7 +50,7 @@
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.companyData.addresses.length) {
             $scope.locationIndex = index;
-            $timeout(function(){
+            $timeout(function () {
               $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
             }, 300)
           }
@@ -59,7 +59,7 @@
         $scope.changeCurrentContact = function (index) {
           if (0 <= index && index < $scope.companyData.contacts.length) {
             $scope.contactIndex = index;
-            $timeout(function(){
+            $timeout(function () {
               $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
             }, 300)
           }
@@ -70,6 +70,11 @@
         };
 
         $scope.getPriorityNumber = function (object, returnType) {
+
+          if (!object || !object.phoneNumbers || object.phoneNumbers.length < 1) {
+            return;
+          }
+
           var priority;
           var index;
           for (var i = 0; i < object.phoneNumbers.length; i++) {
