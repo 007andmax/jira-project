@@ -54,14 +54,14 @@
                   Support Email
                 </label>
 
-                <div ng-messages="basicInfoForm.supportMailBox.$error" style="padding-bottom: 1px;"
+                <div ng-messages="basicInfoForm.supportMailBox.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'supportMailBox')}">
                   <label class="control-label" ng-message="required" for="">SUPPORT EMAIL name is required.</label>
                   <label class="control-label" ng-message="maxlength" for="">SUPPORT EMAIL name is too large.</label>
                   <label class="control-label" ng-message="minlength" for="">SUPPORT EMAIL name is too short.</label>
                 </div>
 
-                <div ng-messages="basicInfoForm.techDomainName.$error" style="padding-bottom: 1px;"
+                <div ng-messages="basicInfoForm.techDomainName.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">
                   <label class="control-label" ng-message="required">Domain name is required.</label>
                   <label class="control-label" ng-message="maxlength">Domain name is too large.</label>
