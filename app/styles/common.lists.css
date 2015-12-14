@@ -1758,12 +1758,12 @@ Devices tab
 }
 .product-form-wrapper .col-4{
   float: left;
-  width: 113px;
+  width: 115px;
   padding: 0 5px;
 }
 .product-form-wrapper .col-5{
   float: left;
-  width: 113px;
+  width: 111px;
   padding-left: 5px;
 }
 .product-form-wrapper .col-desc{
@@ -1786,10 +1786,10 @@ Devices tab
     width: 293px;
   }
   .product-form-wrapper .col-4{
-    width: 143px;
+    width: 145px;
   }
   .product-form-wrapper .col-5{
-    width: 143px;
+    width: 141px;
   }
   .product-form-wrapper .col-desc{
     width: calc(100% - 243px);
@@ -1809,10 +1809,10 @@ Devices tab
     width: 163px;
   }
   .product-form-wrapper .col-4{
-    width: 78px;
+    width: 80px;
   }
   .product-form-wrapper .col-5{
-    width: 78px;
+    width: 76px;
   }
   .product-form-wrapper .col-desc{
     width: calc(100% - 113px);
@@ -1920,12 +1920,12 @@ Devices tab
 }
 .service-form-wrapper .col-2{
   float: left;
-  width: 125px;
+  width: 127px;
   padding: 0 5px;
 }
 .service-form-wrapper .col-3{
   float: left;
-  width: 125px;
+  width: 123px;
   padding-left: 5px;
 }
 @media only screen and (min-width: 2000px){
@@ -1933,10 +1933,10 @@ Devices tab
     width: calc(100% - 380px);
   }
   .service-form-wrapper .col-2{
-    width: 190px;
+    width: 192px;
   }
   .service-form-wrapper .col-3{
-    width: 190px;
+    width: 188px;
   }
 }
 .add-service-btn-wrapper{
