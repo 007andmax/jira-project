@@ -31,7 +31,7 @@
          ng-class="{'icn-recurring-monthly': invoice.frequency === 'MONTHLY',
                            'icn-recurring-yearly': invoice.frequency === 'YEARLY',
                            'icn-recurring-weekly': invoice.frequency === 'WEEKLY'}"
-         tooltip-placement="top" tooltip="Recurring: Weekly" tooltip-append-to-body="true"></i>
+         tooltip-placement="top" tooltip="Recurring: {{ invoice.frequency }}" tooltip-append-to-body="true"></i>
     </li>
 
   </ul>
