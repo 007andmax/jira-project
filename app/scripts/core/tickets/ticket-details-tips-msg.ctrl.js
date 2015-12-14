@@ -30,17 +30,25 @@
 
         };
 
-        $scope.isCurrentUser = function (userId) {
-          return $scope.currentUser.id === userId;
+        $scope.getSpamMessages = function (userId, option) {
+
+          if (option === 'MARK') {
+            if ($scope.currentUser.id === userId) {
+              return 'marked this ticket as spam, but you can either delete the ticket forever or restore the ticket status anytime, using the respective option.';
+            } else {
+              return 'has marked it as spam. You can either delete the ticket forever or restore the ticket status anytime, using the respective option.';
+            }
+          }
+
         };
 
-        function calculateDays (){
+        function calculateDays() {
           var now = new Date(),
             msToDaysCof = 86400000;
 
-          var isWithinThirtyDays = (now - $scope.ticketDetails.closedAt)/msToDaysCof;
+          var isWithinThirtyDays = (now - $scope.ticketDetails.closedAt) / msToDaysCof;
 
-          $scope.daysLeftToOpen = Math.ceil(30 -isWithinThirtyDays);
+          $scope.daysLeftToOpen = Math.ceil(30 - isWithinThirtyDays);
         }
 
       }]);
