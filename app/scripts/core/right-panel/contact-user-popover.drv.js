@@ -65,8 +65,8 @@
               <div class="clearfix">\
                 <div class="btn btn-info pull-right">\
                 \
-                  <div class="tooltip fade top in send-email-tooltip" role="tooltip" style="top: -25px;left: -23px;">\
-                    <div class="tooltip-arrow"></div><div class="tooltip-inner">send email</div>\
+                  <div class="tooltip fade top in send-email-tooltip" role="tooltip" style="top: -25px;left: -9px;">\
+                    <div class="tooltip-arrow"></div><div class="tooltip-inner">email</div>\
                   </div>\
                   \
                 <i class="icn-sm icn-email-white"></i></div>\
