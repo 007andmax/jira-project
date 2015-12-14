@@ -351,3 +351,14 @@ i.off {
 .company-address-list + .company-address-list .create-user-header > h3 {
   opacity: 0;
 }
+
+/*right-panel*/
+
+.animate-show-right-panel.ng-hide-remove-active {
+  transition: all linear 1s;
+}
+
+.animate-show-right-panel.ng-hide {
+  opacity: 0;
+}
+
