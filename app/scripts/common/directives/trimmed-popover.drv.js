@@ -2,10 +2,13 @@
 
 (function () {
 
-  angular.module("quicktech.core.tickets").directive('tuDescriptionPopover',
+  angular.module("quicktech.core.tickets").directive('trimmedPopover',
     function () {
       return {
         restrict: 'A',
+        scope: {
+          description: '=trimmedPopoverContent'
+        },
         link: function (scope, element) {
 
           scope.$watch(function () {
@@ -16,22 +19,20 @@
 
             if (element[0].offsetWidth < element[0].scrollWidth) {
 
-              if (scope.product) {
-                var description = scope.product.description;
-              } else if (scope.service) {
-                var description = scope.service.description;
-              }
 
               element.addClass('description');
 
               element.popover({
-                content: description,
+                content: scope.description,
                 placement: "bottom",
                 trigger: "hover"
               })
 
+
             } else {
+
               element.removeClass('description');
+
             }
 
           }

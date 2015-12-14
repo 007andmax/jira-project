@@ -156,11 +156,11 @@
             <span> {{ getPriorityNumberInfo('NUMBER') }}</span>
           </div>
 
-          <div class="user-company pull-left has-tooltip"
-               tooltip-placement="bottom" tooltip="South Calgary Periodontal Group of Industries"
-               tooltip-append-to-body="true">
+          <div class="user-company pull-left has-tooltip" trimmed-tooltip
+               tooltip-placement="bottom" tooltip="{{ getUserCompanyName(user) }}"
+               tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip() }}">
             <i class="icn-sm icn-user-company"></i>
-            <span> {{ getUserCompanyName(user) }}</span>
+            <span trimmed-tooltip-container> {{ getUserCompanyName(user) }}</span>
           </div>
 
         </div>
