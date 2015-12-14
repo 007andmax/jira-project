@@ -461,11 +461,11 @@
     margin-top: 22px;
   }
 }
-.form-row + .form-row, .phone-number-form .form-row{
+.form-row + .form-row{
   margin-top: 13px;
 }
 @-moz-document url-prefix() {
-  .form-row + .form-row, .phone-number-form .form-row{
+  .form-row + .form-row{
     margin-top: 12px;
   }
 }
