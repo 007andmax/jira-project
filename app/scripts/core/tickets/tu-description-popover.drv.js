@@ -22,13 +22,18 @@
                 var description = scope.service.description;
               }
 
+              element.addClass('description');
+
               element.popover({
                 content: description,
                 placement: "bottom",
                 trigger: "hover"
               })
 
+            } else {
+              element.removeClass('description');
             }
+
           }
 
 
