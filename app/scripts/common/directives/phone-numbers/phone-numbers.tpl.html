@@ -10,12 +10,27 @@
           contact no.
         </label>
 
-        <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error" style="min-height: 20px;"
-             ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
-          <label class="control-label" ng-message="required">CONTACT NO. IS REQUIRED.</label>
-          <label class="control-label" ng-message="maxlength">CONTACT NO. IS TOO LARGE</label>
-          <label class="control-label" ng-message="minlength">CONTACT NO. IS TOO SHORT</label>
-          <label class="control-label" ng-message="pattern">INVALID NO.</label>
+        <div style="min-height: 20px;" ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
+
+          <label class="control-label"
+                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['required']}">
+            CONTACT NO. IS REQUIRED.
+          </label>
+
+          <label class="control-label"
+                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['maxlength']}">
+            CONTACT NO. IS TOO LARGE
+          </label>
+
+          <label class="control-label"
+                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['minlength']}">
+            CONTACT NO. IS TOO SHORT
+          </label>
+
+          <label class="control-label" ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
+            INVALID NO.
+          </label>
+
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
@@ -56,12 +71,28 @@
           contact no.
         </label>
 
-        <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error" style="min-height: 20px;"
+        <div style="min-height: 20px;"
              ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid || (phoneNumbersForm['phoneNumber' + $index].$pristine && !isTryToSave)}">
-          <label class="control-label" ng-message="required">CONTACT NO. IS REQUIRED.</label>
-          <label class="control-label" ng-message="maxlength">CONTACT NO. IS TOO LARGE</label>
-          <label class="control-label" ng-message="minlength">CONTACT NO. IS TOO SHORT</label>
-          <label class="control-label" ng-message="pattern">INVALID NO.</label>
+
+          <label class="control-label"
+                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['required']}">
+            CONTACT NO. IS REQUIRED.
+          </label>
+
+          <label class="control-label"
+                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['maxlength']}">
+            CONTACT NO. IS TOO LARGE
+          </label>
+
+          <label class="control-label"
+                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['minlength']}">
+            CONTACT NO. IS TOO SHORT
+          </label>
+
+          <label class="control-label" ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
+            INVALID NO.
+          </label>
+
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"

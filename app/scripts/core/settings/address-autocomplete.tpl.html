@@ -3,11 +3,15 @@
   <div class="form-group full-width"
        ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
 
-    <label class="control-label">Mailing Address</label>
+    <label class="control-label"
+           ng-class="{'hide': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
+      Mailing Address
+    </label>
 
-    <div ng-messages="addressForm.address.$error" ng-if="addressForm.address.$dirty || showValidationMessages">
-      <div class="qt-error-msg error-msg" ng-message="required">Please enter the user’s address.</div>
-      <div class="qt-error-msg error-msg" ng-message="correct">
+    <div ng-messages="addressForm.address.$error"
+         ng-class="{'hide': !((addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid)}">
+      <div class="control-label" ng-message="required">Please enter the user’s address.</div>
+      <div class="control-label" ng-message="correct">
         Please select address from atocomplete results or set marker on map
       </div>
     </div>

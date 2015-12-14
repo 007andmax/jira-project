@@ -210,97 +210,42 @@
 
   <div class="contact-info-wrapper" id="companyInfoContactInfo">
     <div class="create-new-user settings-basic-info clearfix"
-         ng-if="companyForSettingLoad"
+         ng-if="companyForSettingLoad" ng-form="addressesWrapForm"
          ng-controller="quicktech.core.settings.companyInfoContactInfoCtrl">
-      <form name="addressesWrapForm">
-        <div class="create-user-container" addresses-control>
+      <div ng-repeat="address in companyForSettingPage.addresses">
+        <div class="create-user-container">
           <div class="create-user-header clearfix">
 
-            <h3 class="pull-left">Contact Info</h3>
+            <h3 class="pull-left" ng-show="$index === 0">Contact Info</h3>
 
-            <h4 class="pull-left" ng-repeat="location in companyForSettingPage.addresses">
-              <a class="shoose-current-address-icn"
-                 ng-class="{'active disabled': currentAddressIndex === $index, 'invalid': addressesWrapForm['addressForm' + $index].$invalid}"
-                 href="javascript:void(0)" ng-click="showAddress($index)">
+            <h4 class="pull-left">
+              <a class="shoose-current-address-icn" href="javascript:void(0)">
                 <span>0{{ $index + 1 }}</span>
               </a>
             </h4>
 
           </div>
 
-          <div ng-repeat="address in companyForSettingPage.addresses" address-item
-               style="display: none;" on-finish-render="showAddress(currentAddressIndex)">
-            <div class="create-user-form" ng-form="{{ 'addressForm' + $index }}"
-                 ng-init="addressFormName = 'addressForm' + $index">
-              <!--<div ng-if="IsShowMap">-->
+          <div>
+            <div class="create-user-form">
 
-              <div address-autocomplete template-page="settings" is-map-shown="$index === currentAddressIndex"
-                   ng-model="address"
-                   show-validation-messages="triedToSave"></div>
+              <div address-autocomplete template-page="settings"
+                   ng-model="address" show-validation-messages="triedToSave"></div>
 
-              <div class="form-row clearfix"
-                   ng-repeat="phoneNumber in address.phoneNumbers">
+              <div phone-numbers-edit ng-model="address.phoneNumbers"></div>
 
-                <div class="form-group"
-                     ng-class="{'has-error': this[addressFormName]['phoneNumber' + $index].$invalid}">
-
-                  <label class="control-label">Contact No.</label>
-
-                  <div ng-messages="this[addressFormName]['phoneNumber' + $index].$error"
-                       ng-if="this[addressFormName]['phoneNumber' + $index].$invalid">
-                    <label class="control-label" ng-message="required">contact no. is required.</label>
-                    <label class="control-label" ng-message="maxlength">contact no. is too large</label>
-                    <label class="control-label" ng-message="minlength">contact no. is too short</label>
-                    <label class="control-label" ng-message="pattern">invalid no.</label>
-                  </div>
-
-                  <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-                         aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"
-                         make-dirty-on-blur hard-reset-pattern="phoneNumberPattern" hard-reset-required="!$last">
-                </div>
-
-                <div class="form-group no-label">
-                  <div class="pull-left dropdown">
-                    <input class="form-control-number has-dropdown" type="text" make-dirty-on-blur
-                           ng-model="phoneNumberTypes[phoneNumber.typeNumber]" readonly="readonly"
-                           data-toggle="dropdown" aria-expanded="false">
-                    <i class="icn-sm icn-caret-gray"></i>
-
-                    <ul class="dropdown-menu dropdown-account-type">
-                      <li><a ng-click="phoneNumber.typeNumber = 'MOBILE'" href="javascript:void(0)"> Mobile </a></li>
-                      <li><a ng-click="phoneNumber.typeNumber = 'OFFICE'" href="javascript:void(0)"> Office </a></li>
-                      <li><a ng-click="phoneNumber.typeNumber = 'FAX'" href="javascript:void(0)"> Fax </a></li>
-                    </ul>
-
-                  </div>
-
-                  <button class="btn btn-dark has-tooltip pull-right"
-                          ng-class="{'hide': !$last || $index >= 2}"
-                          ng-click="addPhoneNumber(address)" tooltip-placement="top" tooltip="Add more">
-                    <i class="icn-sm icn-plus"></i>
-                  </button>
-
-                  <button class="btn btn-primary has-tooltip pull-right"
-                          ng-class="{'hide': $last && (address.phoneNumbers.length < 3)}"
-                          ng-click="removePhoneNumber(address, $index, addressesWrapForm)"
-                          tooltip-placement="top" tooltip="Remove">
-                    <i class="icn-sm icn-remove-token"></i>
-                  </button>
-
-                </div>
-              </div>
               <div class="form-row clearfix">
 
                 <div class="form-group full-width"
-                     ng-class="{'has-error':isShowingErrors(this[addressFormName], 'companyTimezone')}">
+                     ng-class="{'has-error': isShowingErrors(addressesWrapForm, 'companyTimezone')}">
 
                   <label class="control-label"
-                         ng-class="{'hide': isShowingErrors(this[addressFormName], 'companyTimezone')}">
+                         ng-class="{'hide': isShowingErrors(addressesWrapForm, 'companyTimezone')}">
                     Timezone
                   </label>
 
-                  <div ng-messages="this[addressFormName].companyTimezone.$error"
-                       ng-class="{'hide': !isShowingErrors(this[addressFormName], 'companyTimezone')}">
+                  <div ng-messages="addressesWrapForm.companyTimezone.$error"
+                       ng-class="{'hide': !isShowingErrors(addressesWrapForm, 'companyTimezone')}">
                     <div class="control-label error-msg">Please select the timezone.</div>
                   </div>
 
@@ -348,7 +293,7 @@
                 </div>
               </div>
 
-              <div class="form-row clearfix">
+              <div class="form-row clearfix" ng-show="$last">
                 <div class="form-group no-label full-width">
                   <button class="btn btn-lg btn-info pull-right"
                           custom-disabled="{{ addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess }}"
@@ -361,7 +306,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 
