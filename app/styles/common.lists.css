@@ -1995,6 +1995,9 @@ Devices tab
     padding: 1px 0 0 30px;
   }
 }
+.qt-services-list .checkbox-caption{
+  cursor: auto;
+}
 .qt-services-list>li{
   padding: 25px 0;
 }
