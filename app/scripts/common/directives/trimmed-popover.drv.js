@@ -11,14 +11,11 @@
         },
         link: function (scope, element) {
 
-          scope.$watch(function () {
-            return element[0].offsetWidth;
-          }, initPopover);
+          element.hover(initPopover);
 
           function initPopover() {
 
             if (element[0].offsetWidth < element[0].scrollWidth) {
-
 
               element.addClass('description');
 
@@ -26,17 +23,15 @@
                 content: scope.description,
                 placement: "bottom",
                 trigger: "hover"
-              })
+              });
 
+              element.popover("show")
 
             } else {
-
               element.removeClass('description');
-
             }
 
           }
-
 
         }
       };
