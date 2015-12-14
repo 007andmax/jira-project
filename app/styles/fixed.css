@@ -347,3 +347,7 @@ i.off {
 .shoose-current-address-icn.active{
   color: rgb(21, 134, 228);
 }
+
+.company-address-list + .company-address-list .create-user-header > h3 {
+  opacity: 0;
+}

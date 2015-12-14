@@ -212,11 +212,11 @@
     <div class="create-new-user settings-basic-info clearfix"
          ng-if="companyForSettingLoad" ng-form="addressesWrapForm"
          ng-controller="quicktech.core.settings.companyInfoContactInfoCtrl">
-      <div ng-repeat="address in companyForSettingPage.addresses">
+      <div class="company-address-list" ng-repeat="address in companyForSettingPage.addresses">
         <div class="create-user-container">
           <div class="create-user-header clearfix">
 
-            <h3 class="pull-left" ng-show="$index === 0">Contact Info</h3>
+            <h3 class="pull-left">Contact Info</h3>
 
             <h4 class="pull-left">
               <a class="shoose-current-address-icn" href="javascript:void(0)">
