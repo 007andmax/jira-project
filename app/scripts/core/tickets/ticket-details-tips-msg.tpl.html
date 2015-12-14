@@ -114,9 +114,7 @@
         <strong class="text-info">
           {{ getCorrectUserName(ticketDetails.spamMarker.id) }}
         </strong>
-        {{ isCurrentUser(ticketDetails.spamMarker.id) ? 'have' : 'has' }} marked it as spam.
-        You can either delete the ticket forever or restore the ticket status anytime, using
-        the respective option.</p>
+        {{ getSpamMessages(ticketDetails.spamMarker.id, 'MARK') }}</p>
       <span class="text-muted"><strong>TIP:</strong>
         Restoring ticket moves the ticket back to its original folder where it was reported as spam. </span>
     </div>
@@ -148,8 +146,7 @@
       <p>
         <strong class="text-info">
           {{ getCorrectUserName(ticketDetails.spamReporter.id) }}
-        </strong>
-        {{ isCurrentUser(ticketDetails.spamReporter.id) ? 'have' : 'has' }} reported it as spam.
+        </strong> has reported it as spam.
         You can either mark the ticket as spam or restore the ticket status anytime, using the
         respective option.</p>
       <span class="text-muted"><strong>TIP:</strong>
