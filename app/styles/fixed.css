@@ -1,10 +1,11 @@
 /*create ticket modal window*/
-.modal.in .modal-dialog {
+.modal-create-ticket .modal-dialog {
   position: fixed !important;
   top: 50% !important;
   left: 50% !important;
-  margin-left: -302px !important;
-  margin-top: -225px !important;
+  transform: translate3d(-50%,-50%,0) !important;
+  margin: 0 !important;
+  transition: none !important;
 }
 
 /*product page(and some service)*/
