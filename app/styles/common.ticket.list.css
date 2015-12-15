@@ -96,12 +96,6 @@
 /*Ticket Hover - End*/
 
 /*Ticket Hover Action Ellipse - Start*/
-@media only screen and (max-width: 1800px){
-  body.opened-ticket-list .ticket .ticket-meta .ticket-list-header .dot-sep, body.opened-ticket-list .ticket .ticket-meta .ticket-list-header .company-name {
-    display: none;
-  }
-}
-
 .ticket .ticket-meta .ticket-list-header p.ellipsis {
   width: calc(100% - 136px);
   overflow: hidden;
