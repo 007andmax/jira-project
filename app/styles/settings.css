@@ -368,6 +368,14 @@
 .edit-label-wrapper  .label-color div{
   height: 36px;
 }
+.edit-label-wrapper .label-error{
+  position: absolute;
+  top: -6px;left: 86px;
+  color: #e53935;
+  font-size: 11px;
+  line-height: 12px;
+  text-transform: uppercase;
+}
 .edit-label-wrapper .form-control{
   float: left;
   width: calc(100% - 72px);

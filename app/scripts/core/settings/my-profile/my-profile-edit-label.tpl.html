@@ -20,7 +20,7 @@
 
       </div>
 
-      <div ng-messages="editTagForm.editTagName.$error" style="color: red"
+      <div ng-messages="editTagForm.editTagName.$error" class="label-error"
            ng-show="isShowingErrors(editTagForm, 'editTagName')">
         <div class="qt-error-msg" ng-message="required">Label name is required.</div>
         <div class="qt-error-msg" ng-message="unique">Label name already occupied.</div>
