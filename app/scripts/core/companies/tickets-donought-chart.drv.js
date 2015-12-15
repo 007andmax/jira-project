@@ -160,14 +160,14 @@
 
               chartContext.shadowBlur = 0;
 
-              chartContext.fillStyle = "black";
-              chartContext.font = "italic 18pt Arial";
+              chartContext.fillStyle = "#1f2a37";
+              chartContext.font = "italic 26px myriad-pro";
               chartContext.textAlign = "center";
-              chartContext.fillText(label.num, chartX, chartY - 10);
+              chartContext.fillText(label.num, chartX, chartY);
 
               chartContext.fillStyle = "#8585AD";
-              chartContext.font = "12pt Arial";
-              chartContext.fillText(label.text, chartX, chartY + 25);
+              chartContext.font = "11px myriad-pro";
+              chartContext.fillText(label.text, chartX, chartY + 15);
             }
 
             chartContext.strokeStyle = backgroundColor;
