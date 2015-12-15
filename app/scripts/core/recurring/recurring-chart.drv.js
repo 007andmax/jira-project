@@ -8,7 +8,7 @@
         restrict: 'A',
         require: 'ngModel',
         template: "<div class='chart'><canvas recurring-graph style='width: 100%; height: 100%; background: white'/>" +
-        "<canvas tooltip-message width='100px' height='105px' style='position: relative; border-radius: 2px;'></canvas></div>",
+        "<canvas tooltip-message width='126px' height='118px' style='position: relative; border-radius: 3px; box-shadow: 0 0 5px 0 rgba( 10, 45, 89, .25 );'></canvas></div>",
         scope: {
           firstGradientColor: "=firstGradientColor",
           secondGradientColor: "=secondGradientColor"
@@ -197,8 +197,8 @@
           function showTooltip(rect) {
 
             var date = $filter('date')(rect.date, 'EEE, d MMM yyyy'),
-              leftPaddingCircle = 17,
-              topPaddingCircle = 22;
+              leftPaddingCircle = 23,
+              topPaddingCircle = 25;
 
             tooltipContext.clearRect(0, 0, tooltip.width(), tooltip.height());
 
@@ -206,27 +206,27 @@
             tooltipContext.fillRect(0, 0, tooltip.width(), tooltip.height());
 
             tooltipContext.textAlign = "left";
-            tooltipContext.font = "13Wpx myriad-pro";
+            tooltipContext.font = "14px myriad-pro";
 
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText($filter('currency')(rect.value[2], '', 0) + ' USD', 27, topPaddingCircle + 5);
+            tooltipContext.fillText($filter('currency')(rect.value[2], '', 0) + ' USD', 32, topPaddingCircle + 5);
             drawIdentificationCircle('#F3AE31');
 
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText($filter('currency')(rect.value[1], '', 0) + ' USD', 27, topPaddingCircle + 5);
+            tooltipContext.fillText($filter('currency')(rect.value[1], '', 0) + ' USD', 32, topPaddingCircle + 5);
             drawIdentificationCircle('#68AF4E');
 
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText($filter('currency')(rect.value[0], '', 0) + ' USD', 27, topPaddingCircle + 5);
+            tooltipContext.fillText($filter('currency')(rect.value[0], '', 0) + ' USD', 32, topPaddingCircle + 5);
             drawIdentificationCircle('#E55035');
 
             tooltipContext.textAlign = "center";
-            tooltipContext.font = "12px myriad-pro";
-            tooltipContext.fillStyle = '#616F7F';
-            tooltipContext.fillText(date, tooltip.width() / 2, 90);
+            tooltipContext.font = "11px myriad-pro";
+            tooltipContext.fillStyle = '#94a4b8';
+            tooltipContext.fillText(date.toUpperCase(), tooltip.width() / 2, 98);
 
             tooltip.css({
-              top: ( -(rect.y1 - rect.y2) - 160) + 'px',
+              top: ( -(rect.y1 - rect.y2) - 177) + 'px',
               left: (rect.x1 + interval.widthRect / 2) - (tooltip.width() / 2) + 'px'
             });
 
@@ -240,7 +240,7 @@
               tooltipContext.fill();
               tooltipContext.closePath();
 
-              topPaddingCircle += 18;
+              topPaddingCircle += 20;
             }
           }
 
