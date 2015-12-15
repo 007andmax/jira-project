@@ -8,7 +8,7 @@
         restrict: 'A',
         require: 'ngModel',
         template: "<div class='chart-area'><canvas class='chart' ticket-closed-graph style='width: 100%; height: 100%; background: white'/>" +
-        "<canvas tooltip-message style='position: relative; border-radius: 3px;'></canvas></div>",
+        "<canvas tooltip-message style='position: relative; border-radius: 3px; box-shadow: 0 0 5px 0 rgba( 10, 45, 89, .25 );'></canvas></div>",
         scope: {
           firstGradientColor: "=firstGradientColor",
           secondGradientColor: "=secondGradientColor"
