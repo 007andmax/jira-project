@@ -9,7 +9,7 @@
         require: 'ngModel',
         template: "<div class='chart-area'>" +
         "<canvas class='chart' tickets-donought-graph style='width: 146px; height: 146px; background: #fffaf2'/>" +
-        "<canvas tooltip-message style='position: absolute; border-radius: 4px; background-color: #151E29; width: 70px; height: 70px;'></canvas></div>",
+        "<canvas tooltip-message style='position: absolute; border-radius: 3px; background-color: #151E29; box-shadow: 0 0 5px 0 rgba( 10, 45, 89, .25 ); width: 70px; height: 70px;'></canvas></div>",
         scope: {},
         link: function ($scope, element, attrs, ctrl) {
 

@@ -202,7 +202,7 @@
 
             tooltipContext.clearRect(0, 0, tooltip.width(), tooltip.height());
 
-            tooltipContext.fillStyle = "#141E2A";
+            tooltipContext.fillStyle = "#151e29";
             tooltipContext.fillRect(0, 0, tooltip.width(), tooltip.height());
 
             tooltipContext.textAlign = "left";
@@ -210,15 +210,15 @@
 
             tooltipContext.fillStyle = backgroundColour;
             tooltipContext.fillText($filter('currency')(rect.value[2], '', 0) + ' USD', 32, topPaddingCircle + 5);
-            drawIdentificationCircle('#F3AE31');
+            drawIdentificationCircle('#ffa726');
 
             tooltipContext.fillStyle = backgroundColour;
             tooltipContext.fillText($filter('currency')(rect.value[1], '', 0) + ' USD', 32, topPaddingCircle + 5);
-            drawIdentificationCircle('#68AF4E');
+            drawIdentificationCircle('#4caf50');
 
             tooltipContext.fillStyle = backgroundColour;
             tooltipContext.fillText($filter('currency')(rect.value[0], '', 0) + ' USD', 32, topPaddingCircle + 5);
-            drawIdentificationCircle('#E55035');
+            drawIdentificationCircle('#e53935');
 
             tooltipContext.textAlign = "center";
             tooltipContext.font = "11px myriad-pro";
