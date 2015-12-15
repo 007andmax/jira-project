@@ -180,7 +180,7 @@
 
             var currentValue = parseInt(rect.value),
               companyName = CompaniesService.getOneById(rect.companyId).name,
-              tooltipWidth = companyName.length > 7 ? ((companyName.length * 4.5) + 48) : 84;
+              tooltipWidth = companyName.length > 7 ? ((companyName.length * 5) + 48) : 84;
 
             tooltip.width(tooltipWidth);
             tooltip.height(68);
@@ -193,14 +193,14 @@
             tooltipContext.fillStyle = "#151e29";
             tooltipContext.fillRect(0, 0, tooltip.width(), tooltip.height());
 
-            tooltipContext.textAlign = "center";
+            tooltipContext.textAlign = "left";
             tooltipContext.fillStyle = backgroundColour;
             tooltipContext.font = "14px myriad-pro";
-            tooltipContext.fillText(currentValue, tooltip.width() / 2, 30);
+            tooltipContext.fillText(currentValue, 20, 30);
 
             tooltipContext.fillStyle = '#94a4b8';
             tooltipContext.font = "11px myriad-pro";
-            tooltipContext.fillText(companyName.toUpperCase(), tooltip.width() / 2, 48);
+            tooltipContext.fillText(companyName.toUpperCase(), 20, 48);
 
             tooltip.css({
               top: ( -(rect.y1 - rect.y2) - 90) + 'px',

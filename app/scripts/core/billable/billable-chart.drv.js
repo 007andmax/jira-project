@@ -231,15 +231,15 @@
 
             tooltipContext.fillStyle = "#151e29";
             tooltipContext.fillRect(0, 0, 112, 68);
-            tooltipContext.textAlign = "center";
+            tooltipContext.textAlign = "left";
 
             tooltipContext.fillStyle = backgroundColour;
             tooltipContext.font = "14px myriad-pro";
-            tooltipContext.fillText(currentValue, 56, 30);
+            tooltipContext.fillText(currentValue, 20, 30);
 
             tooltipContext.fillStyle = '#94a4b8';
             tooltipContext.font = "11px myriad-pro";
-            tooltipContext.fillText(currentDay.toUpperCase(), 56, 48);
+            tooltipContext.fillText(currentDay.toUpperCase(), 20, 48);
 
             tooltip.css({
               top: (circle.y + 20) + 'px',
