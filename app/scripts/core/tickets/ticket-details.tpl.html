@@ -406,6 +406,7 @@
                 </div>
 
                 <div class="ticket-update-edit" ng-class="{'hide': product.id !== editExpenseId}"
+                     ng-if="product.id === editExpenseId"
                      ng-include="'/html/scripts/core/tickets/products/ticket-edit-update-product.tpl.html'"></div>
               </div>
 
@@ -436,6 +437,7 @@
                 </div>
 
                 <div class="ticket-update-edit" ng-class="{'hide': service.id !== editExpenseId}"
+                     ng-if="service.id === editExpenseId"
                      ng-include="'/html/scripts/core/tickets/services/ticket-edit-update-service.tpl.html'"></div>
               </div>
 
