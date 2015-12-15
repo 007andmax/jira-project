@@ -8,7 +8,7 @@
         restrict: 'A',
         require: 'ngModel',
         template: "<div class='chart-area'><canvas class='chart' ticket-closed-graph style='width: 100%; height: 100%; background: white'/>" +
-        "<canvas tooltip-message style='position: relative; border-radius: 2px;'></canvas></div>",
+        "<canvas tooltip-message style='position: relative; border-radius: 3px;'></canvas></div>",
         scope: {
           firstGradientColor: "=firstGradientColor",
           secondGradientColor: "=secondGradientColor"
@@ -178,27 +178,29 @@
 
           function showTooltip(rect) {
 
-            var currentValue = rect.value,
+            var currentValue = parseInt(rect.value),
               companyName = CompaniesService.getOneById(rect.companyId).name,
-              tooltipWidth = companyName.length > 7 ? ((companyName.length * 4.5) + 24) : 60;
+              tooltipWidth = companyName.length > 7 ? ((companyName.length * 4.5) + 48) : 84;
 
             tooltip.width(tooltipWidth);
-            tooltip.height(40);
+            tooltip.height(68);
 
             tooltipContext.canvas.width = tooltip.width();
             tooltipContext.canvas.height = tooltip.height();
 
             tooltipContext.clearRect(0, 0, tooltip.width(), tooltip.height());
 
-            tooltipContext.fillStyle = "#141E2A";
+            tooltipContext.fillStyle = "#151e29";
             tooltipContext.fillRect(0, 0, tooltip.width(), tooltip.height());
 
             tooltipContext.textAlign = "center";
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText(currentValue, tooltip.width() / 2, 14);
+            tooltipContext.font = "14px myriad-pro";
+            tooltipContext.fillText(currentValue, tooltip.width() / 2, 30);
 
-            tooltipContext.fillStyle = '#616F7F';
-            tooltipContext.fillText(companyName, tooltip.width() / 2, 30);
+            tooltipContext.fillStyle = '#94a4b8';
+            tooltipContext.font = "11px myriad-pro";
+            tooltipContext.fillText(companyName.toUpperCase(), tooltip.width() / 2, 48);
 
             tooltip.css({
               top: ( -(rect.y1 - rect.y2) - 90) + 'px',
