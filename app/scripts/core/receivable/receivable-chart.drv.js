@@ -243,7 +243,7 @@
 
             tooltipContext.fillStyle = "#141E2A";
             tooltipContext.fillRect(0, 0, 112, 68);
-            // tooltipContext.textAlign = "center";
+            tooltipContext.textAlign = "left";
 
             tooltipContext.fillStyle = backgroundColour;
             tooltipContext.font = "14px myriad-pro";
