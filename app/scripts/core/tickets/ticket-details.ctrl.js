@@ -231,6 +231,7 @@
                 if (sharedUser.user.id === $scope.updateSharedUsersList[i].user.id) {
 
                   $scope.updateSharedUsersList.splice(i, 1);
+                  $scope.selectUpdateSharedUser[sharedUser.user.id ] = false;
 
                   if (sharedUser.user.id === $scope.ticketDetails.createdUser.id) {
                     $scope.ticketUpdate.notifyTicketCreator = false;
@@ -243,6 +244,7 @@
 
                 if (sharedUser.contact.id === $scope.updateSharedUsersList[i].contact.id) {
                   $scope.updateSharedUsersList.splice(i, 1);
+                  $scope.selectUpdateSharedUser[sharedUser.contact.id ] = false;
                   return;
                 }
 
