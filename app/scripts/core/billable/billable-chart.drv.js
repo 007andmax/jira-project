@@ -8,7 +8,7 @@
         restrict: 'A',
         require: 'ngModel',
         template: "<div><canvas class='chart' linear-graph style='background: white'/>" +
-        "<canvas tooltip-message width='90px' height='55px' style='position: absolute; border-radius: 2px;'></canvas></div>",
+        "<canvas tooltip-message width='112px' height='68px' style='position: absolute; border-radius: 3px; box-shadow: 0 0 5px 0 rgba( 10, 45, 89, .25 );'></canvas></div>",
         scope: {},
         link: function ($scope, element, attrs, ctrl) {
 
@@ -229,19 +229,21 @@
 
             tooltipContext.clearRect(0, 0, tooltipContext.canvas.width, tooltipContext.canvas.height);
 
-            tooltipContext.fillStyle = "#141E2A";
-            tooltipContext.fillRect(0, 0, 90, 55);
+            tooltipContext.fillStyle = "#151e29";
+            tooltipContext.fillRect(0, 0, 112, 68);
             tooltipContext.textAlign = "center";
 
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText(currentValue, 45, 20);
+            tooltipContext.font = "14px myriad-pro";
+            tooltipContext.fillText(currentValue, 56, 30);
 
-            tooltipContext.fillStyle = '#616F7F';
-            tooltipContext.fillText(currentDay, 45, 40);
+            tooltipContext.fillStyle = '#94a4b8';
+            tooltipContext.font = "11px myriad-pro";
+            tooltipContext.fillText(currentDay.toUpperCase(), 56, 48);
 
             tooltip.css({
-              top: (circle.y + 30) + 'px',
-              left: (circle.x - 15) + 'px'
+              top: (circle.y + 20) + 'px',
+              left: (circle.x - 26) + 'px'
             });
 
             tooltip.show();
