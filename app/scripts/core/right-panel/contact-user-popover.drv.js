@@ -9,7 +9,8 @@
           restrict: 'A',
           scope: {
             userInfo: "=userInfo",
-            sendEmailInPopover: "=sendEmailInPopover"
+            sendEmailInPopover: "=sendEmailInPopover",
+            customUserPopoverTrigger: "=customUserPopoverTrigger"
           },
           link: function (scope, element) {
 
@@ -86,46 +87,7 @@
 
               element.popover('destroy');
 
-              element.popover({
-                content: user_popover_content,
-                template: user_popover_template,
-                title: contactName,
-                html: true,
-                placement: 'left',
-                container: 'body',
-                animation: false
-              });
-
-              element.on('shown.bs.popover', function () {
-
-                var emailTooltip = $('.popover .send-email-tooltip'),
-                  subsTooltip = $('.popover .subscription-tooltip'),
-                  icnSubs = $('.popover .badge-updates');
-
-                icnEmail = $('.popover .btn-info');
-
-                emailTooltip.hide();
-                subsTooltip.hide();
-
-                icnEmail.on('click', function () {
-                  scope.sendEmailInPopover(scope.userInfo.id)
-                });
-
-                icnEmail.on('mouseenter', function () {
-                  emailTooltip.show()
-                });
-                icnEmail.on('mouseleave', function () {
-                  emailTooltip.hide()
-                });
-
-                icnSubs.on('mouseenter', function () {
-                  subsTooltip.show()
-                });
-                icnSubs.on('mouseleave', function () {
-                  subsTooltip.hide()
-                })
-
-              });
+              initPopover();
 
               element.bind('mouseenter', function () {
                 $timeout(function () {
@@ -161,6 +123,65 @@
                   scope.$emit('closeRightPanel')
                 });
               };
+
+              scope.$watch('customUserPopoverTrigger', function(){
+
+                if(scope.customUserPopoverTrigger === undefined){
+                  return;
+                }
+
+                if(scope.customUserPopoverTrigger){
+                  element.popover('destroy');
+                } else {
+                  initPopover();
+                }
+              });
+
+              function initPopover(){
+
+                element.popover({
+                  content: user_popover_content,
+                  template: user_popover_template,
+                  title: contactName,
+                  html: true,
+                  placement: 'left',
+                  container: 'body',
+                  animation: false
+                });
+
+                element.on('shown.bs.popover', function () {
+
+                  var emailTooltip = $('.popover .send-email-tooltip'),
+                    subsTooltip = $('.popover .subscription-tooltip'),
+                    icnSubs = $('.popover .badge-updates');
+
+                  icnEmail = $('.popover .btn-info');
+
+                  emailTooltip.hide();
+                  subsTooltip.hide();
+
+                  icnEmail.on('click', function () {
+                    scope.sendEmailInPopover(scope.userInfo.id)
+                  });
+
+                  icnEmail.on('mouseenter', function () {
+                    emailTooltip.show()
+                  });
+                  icnEmail.on('mouseleave', function () {
+                    emailTooltip.hide()
+                  });
+
+                  icnSubs.on('mouseenter', function () {
+                    subsTooltip.show()
+                  });
+                  icnSubs.on('mouseleave', function () {
+                    subsTooltip.hide()
+                  })
+
+                });
+
+              }
+
             }
 
           }

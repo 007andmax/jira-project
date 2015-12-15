@@ -21,7 +21,7 @@
               var customPopover = $('.popover');
 
               $('.popover-content').css('padding', 0);
-              customPopover.css({'padding': 0, 'margin-top': '-32px'});
+              customPopover.css({'padding': 0, 'margin-top': attrs.customPopoverMenuMarginTop});
 
               customPopover.bind('mouseleave', function () {
                 scope.$apply('popoverIsOpen = false')
@@ -41,12 +41,12 @@
             });
 
             scope.sendEmail = function () {
-              if(Object.keys(scope.selectedUsers).length !== 0){
+              if (Object.keys(scope.selectedUsers).length !== 0) {
 
                 var usersIds = [];
 
-                for(var userId in scope.selectedUsers){
-                  if(scope.selectedUsers[userId]){
+                for (var userId in scope.selectedUsers) {
+                  if (scope.selectedUsers[userId]) {
                     usersIds.push(userId)
                   }
                 }
@@ -66,12 +66,12 @@
             };
 
             scope.archiveContact = function () {
-              if(Object.keys(scope.selectedUsers).length !== 0){
+              if (Object.keys(scope.selectedUsers).length !== 0) {
 
                 var usersIds = [];
 
-                for(var userId in scope.selectedUsers){
-                  if(scope.selectedUsers[userId]){
+                for (var userId in scope.selectedUsers) {
+                  if (scope.selectedUsers[userId]) {
                     usersIds.push(userId)
                   }
                 }
@@ -98,7 +98,7 @@
 
               subscription[nameSubscription] = !subscription[nameSubscription];
 
-              SubscriptionsService.saveUserSubscription(subscription, function(){
+              SubscriptionsService.saveUserSubscription(subscription, function () {
                 scope.disabledUpdateCheckbox = false;
               });
             };

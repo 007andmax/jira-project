@@ -161,11 +161,14 @@
 
           <div ng-click="openCompanyInfo(companyData.company.id)" style="height: 50px;">
             <div class="company-title">
+
               {{ companyData.company.name }}
-              <a href="javascript:void(0)" stop-propagation="click"
+
+              <a href="javascript:void(0)" stop-propagation="click" ng-show="currentOpenCompany === companyData.company.id"
                  class="close hit-area" tabindex="-1" ng-click="openCompanyInfo()">
                 <i class="icn-sm icn-remove-token"></i>
               </a>
+
             </div>
 
             <div class="company-numbers clearfix" stop-propagation="click">
@@ -190,27 +193,33 @@
             <ul class="company-users" ng-show="currentOpenCompanyMode === ('USERS-' + companyData.company.id)">
 
               <li class="list-users" style="padding: 0 30px 0 0"
-                  ng-repeat="companyUser in companyData.users"
-                  ng-class="{'checked': selectedCompanyUsers[companyUser.id]}">
+                  custom-popover-menu custom-popover-menu-margin-top="197px"
+                  popover-trigger="notSpecified"
+                  popover-template="'/html/scripts/core/right-panel/custom-popover.tpl.html'"
+                  popover-append-to-body="true" popover-is-open="popoverIsOpen"
+                  ng-repeat="user in companyData.users"
+                  ng-class="{'checked': selectedCompanyUsers[user.id]}">
 
-                <div style="padding: 10px 0 10px 30px"
-                     contact-user-popover user-info="companyUser"
+                <div style="padding: 10px 0 10px 30px" custom-user-popover-trigger="popoverIsOpen"
+                     contact-user-popover user-info="user"
                      send-email-in-popover="sendEmailInPopover">
 
                   <a href="javascript:void(0)" class="pull-left avatar">
-                    <img ng-src="{{ getUserAvatarUrl(companyUser) }}" alt="..." class="img-circle avatar-26">
-                    <i class="bottom" ng-class="{'on': companyUser.online, 'off': !companyUser.online}"></i>
+                    <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-26">
+                    <i class="bottom" ng-class="{'on': user.online, 'off': !user.online}"></i>
                   </a>
 
                   <div class="clearfix">
-                    <label class="control checkbox pull-right">
-                      <input type="checkbox" ng-model="selectedCompanyUsers[companyUser.id]">
+
+                    <label class="control checkbox pull-right" stop-propagation="click">
+                      <input type="checkbox" ng-model="selectedCompanyUsers[user.id]">
                       <span class="control-indicator"></span>
                     </label>
 
                     <div class="user-name">
-                      <a href="javascript:void(0)">{{ getUserName(companyUser) }}</a>
+                      <a href="javascript:void(0)">{{ getUserName(user) }}</a>
                     </div>
+
                   </div>
 
                 </div>

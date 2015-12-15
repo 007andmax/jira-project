@@ -291,7 +291,7 @@
 
       <ul class="general-users">
         <li class="list-users" ng-class="{'checked': selectedUsers[user.id]}" custom-popover-menu
-            popover-trigger="notSpecified"
+            popover-trigger="notSpecified" custom-popover-menu-margin-top="-32px"
             popover-template="'/html/scripts/core/right-panel/custom-popover.tpl.html'"
             popover-append-to-body="true" popover-is-open="popoverIsOpen" popover-placement="bottom"
             ng-repeat="user in companyGroupedData.users | filter: usersFilter">
