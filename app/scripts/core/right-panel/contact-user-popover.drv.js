@@ -18,9 +18,9 @@
               return;
             }
 
-            scope.$watch('userInfo', initPopover, true);
+            scope.$watch('userInfo', renderingPopover, true);
 
-            function initPopover() {
+            function renderingPopover() {
 
               var icnEmail,
                 contactName = $rootScope.getUserName(scope.userInfo),
@@ -72,20 +72,18 @@
                   \
                 <i class="icn-sm icn-email-white"></i></div>\
                 \
-                <div class="tooltip fade top in subscription-tooltip" role="tooltip" style="top: -25px;left: -23px;">\
+                <div class="tooltip fade top in subscription-tooltip" role="tooltip" style="top: 5px;">\
                   <div class="tooltip-arrow"></div><div class="tooltip-inner">' + subsTooltipText + '</div>\
                 </div>\
                 \
                 <h3 class="popover-title pull-left"></h3>\
-                <i style="margin-left:9px;margin-top:4px;" class="pull-left icn-sm ' + icnSubscription + ' persistent-tooltip" data-title="subscriber invoice and ticket updates"data-placement="top"></i>\
+                <i style="margin-left:9px;margin-top:4px;" class="pull-left icn-sm persistent-tooltip ' + icnSubscription + ' " data-placement="top"></i>\
               </div>\
               <div class="label" style="height:20px">' + contactDesignation + '</div>\
               <div class="popover-content"></div>\
             </div>';
 
               var user_popover_content = '<div class="user-email"> <i class="icn-sm icn-at pull-left"></i> ' + contactEmail + ' </div>' + phoneTemplateHtml;
-
-              element.popover('destroy');
 
               initPopover();
 
@@ -102,7 +100,7 @@
                 $timeout(function () {
                   if (!$rootScope.insidePopover) {
                     element.popover('hide');
-                    icnEmail.off('click');
+                    //icnEmail.off('click');
                   }
                 }, 50);
               });
@@ -118,7 +116,7 @@
                   $timeout(function () {
                     $rootScope.insidePopover = false;
                     element.popover('hide');
-                    icnEmail.off('click');
+                    //icnEmail.off('click');
                   }, 50);
                   scope.$emit('closeRightPanel')
                 });
@@ -138,6 +136,8 @@
               });
 
               function initPopover(){
+
+                element.popover('destroy');
 
                 element.popover({
                   content: user_popover_content,
