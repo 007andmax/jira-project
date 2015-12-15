@@ -161,7 +161,7 @@
               chartContext.shadowBlur = 0;
 
               chartContext.fillStyle = "#1f2a37";
-              chartContext.font = "italic 26px myriad-pro";
+              chartContext.font = "26px myriad-pro";
               chartContext.textAlign = "center";
               chartContext.fillText(label.num, chartX, chartY);
 
