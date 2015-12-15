@@ -1,0 +1,24 @@
+'use strict';
+
+(function () {
+
+  angular.module('quicktech').controller('quicktech.core.header.editCompanyCtrl',
+    ['$scope', 'CompaniesService', '$stateParams',
+      function ($scope, CompaniesService, $stateParams) {
+
+        $scope.getNameHeader = function(){
+
+          if($stateParams.companyId){
+
+            var company =  CompaniesService.getOneById($stateParams.companyId);
+            return 'Edit ' + company.name;
+
+          } else {
+            return 'Create Company';
+          }
+
+        };
+
+      }]);
+
+}());

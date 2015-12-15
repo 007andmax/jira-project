@@ -11,8 +11,10 @@
             return 'tickets';
           } else if ($state.includes("users")) {
             return 'users';
-          } else if ($state.includes("companies") || $state.includes("createCompany")) {
+          } else if ($state.includes("companies")) {
             return 'companies';
+          } else if ($state.includes("createCompany") || $state.includes("editCompany")) {
+            return 'company-edit';
           } else if ($state.includes("products")) {
             return 'products';
           } else if ($state.includes("services")) {
