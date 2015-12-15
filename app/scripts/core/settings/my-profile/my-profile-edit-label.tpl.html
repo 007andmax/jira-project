@@ -39,7 +39,7 @@
       <div class="btn btn-lg btn-info pull-right"
            custom-disabled="{{ !editTagForm.$valid || disabledSaveEditTag }}"
            ng-click="saveTag(editTagForm)">
-        {{ editTag.id ? 'Save Changes' : 'Save Label' }}
+        {{ editTag.id ? 'Save' : 'Create' }}
       </div>
 
       <div class="btn btn-lg btn-primary pull-right" ng-click="openEditTagForm()">
