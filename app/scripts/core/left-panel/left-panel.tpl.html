@@ -123,7 +123,7 @@
         </li>
 
         <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-          <a href="javascript:void(0)" ui-sref="receivable({mode: 'group-by-company'})">
+          <a href="javascript:void(0)" ui-sref="receivable">
             <i class="nav-icon icn-receivable icn-lg"></i> Receivable
             <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
           </a>
@@ -134,7 +134,7 @@
        </li>  -->
 
         <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-          <a href="javascript:void(0)" ui-sref="receipt-archive({mode: 'group-by-company'})">
+          <a href="javascript:void(0)" ui-sref="receipt-archive">
             <i class="nav-icon icn-receipt-archive icn-lg"></i> Receipt Archive
           </a>
         </li>
