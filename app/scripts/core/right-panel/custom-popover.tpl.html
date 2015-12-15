@@ -47,11 +47,11 @@
       <ul class="dropdown-menu dropdown-subscribe">
 
         <li ng-class="{'checked': user.subscriptions[user.id].ticket}">
-          <a tabindex="-1" href="javascript:void(0)">
+          <a tabindex="-1" href="javascript:void(0)"  ng-click="subscribeUser(user.id, 'ticket')">
             <div class="clearfix">
               <label class="control checkbox pull-left">
                 <input type="checkbox" ng-checked="user.subscription.ticket"
-                       ng-click="subscribeUser(user.id, 'ticket')">
+                       ng-disabled="disabledUpdateCheckbox">
                 <span class="control-indicator"></span> Ticket Updates
               </label>
             </div>
@@ -59,11 +59,11 @@
         </li>
 
         <li ng-class="{'checked': user.subscriptions[user.id].invoice}">
-          <a tabindex="-1" href="javascript:void(0)">
+          <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user.id, 'invoice')">
             <div class="clearfix">
               <label class="control checkbox pull-left">
                 <input type="checkbox" ng-checked="user.subscription.invoice"
-                       ng-click="subscribeUser(user.id, 'invoice')">
+                       ng-disabled="disabledUpdateCheckbox">
                 <span class="control-indicator"></span> Invoice Updates
               </label>
             </div>

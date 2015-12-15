@@ -84,6 +84,8 @@
 
             scope.subscribeUser = function (userId, nameSubscription) {
 
+              scope.disabledUpdateCheckbox = true;
+
               var subscription = scope.user.subscription;
 
               if (subscription) {
@@ -96,7 +98,9 @@
 
               subscription[nameSubscription] = !subscription[nameSubscription];
 
-              SubscriptionsService.saveUserSubscription(subscription);
+              SubscriptionsService.saveUserSubscription(subscription, function(){
+                scope.disabledUpdateCheckbox = false;
+              });
             };
 
           }
