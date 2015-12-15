@@ -37,11 +37,11 @@
             $scope.countsByTypesAndCompany = [{
               label: 'Unassigned',
               value: $scope.countsTicketsCompany['UNASSIGNED'],
-              color: "#00ACC1"
+              color: "#1586e4"
             }, {
               label: 'Open',
               value: $scope.countsTicketsCompany['OPEN'],
-              color: "#FFA726"
+              color: "#ffa726"
             }];
           })
 
