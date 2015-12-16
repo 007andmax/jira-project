@@ -355,6 +355,12 @@
 .inventry-details .table-wrapper .service-table .col-3 {
   width: calc(100% - 507px);
 }
+.inventry-details .table-wrapper:last-child .table-content{
+  margin-bottom: 0;
+}
+.inventry-details .table-wrapper .table-content:last-child{
+  margin-bottom: 10px;
+}
 .table-wrapper .table-content .col-4 {
   width: 98px;
   float: right;
