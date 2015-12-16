@@ -76,6 +76,16 @@
           $scope.listType === 'trash' ? $scope.moveToTrash(false) : $scope.restoreFromSpam();
         };
 
+        $scope.isMoveToTrashVisible = function () {
+          if (!$scope.sharedState.checkedBillableTicket) {
+            return true;
+          } else if ($scope.sharedState.checkedHasInvoiceTicket) {
+            return true;
+          }
+
+          return false;
+        };
+
         $scope.deleteForever = function () {
           var confirmMesage = 'The selected ' + $scope.sharedState.checkedTicketsIds.length + ' tickets will become inaccessible. Continue with permanent deletion?',
             confirmButton = 'Delete';

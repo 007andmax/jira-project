@@ -55,7 +55,7 @@
             <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.role === 'USER'">Report as Spam</a>
           </li>
 
-          <li ng-if="!sharedState.checkedHasInvoiceTicket && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+          <li ng-if="isMoveToTrashVisible() && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
             <a tabindex="-1" href="javascript:void(0)" ng-click="moveIntoSpam()">Move to Trash</a>
           </li>
 
@@ -155,7 +155,7 @@
       </div>
 
       <div class="pull-right">
-        <div ng-if="listType === 'trash' || listType === 'spam'"
+        <div ng-if="(listType === 'trash' || listType === 'spam') && !sharedState.checkedBillableTicket"
              class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="Delete Forever"
              ng-click="deleteForever()">
@@ -167,7 +167,7 @@
         <div class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="Move to Trash"
              ng-click="moveToTrash(true)"
-             ng-if="(listType === 'closed' || sharedState.checkedCompletedTicket) && !sharedState.checkedHasInvoiceTicket">
+             ng-if="(listType === 'closed' || (sharedState.checkedCompletedTicket && listType !== 'trash')) && isMoveToTrashVisible()">
           <i class="icn-sm icn-delete"></i>
         </div>
       </div>
