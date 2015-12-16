@@ -7,7 +7,7 @@
       function ($scope, $state, $stateParams, $location, UsersService) {
 
         $scope.maximalAmountOfPhones = 3;
-        $scope.phoneNumberPattern = /^\+?[0-9]{0,19}$/;
+        $scope.phoneNumberPattern = /^\+?[0-9\s\-]{0,19}$/;
         $scope.phoneNumberTypes = {
           MOBILE: 'Mobile',
           OFFICE: 'Office',
