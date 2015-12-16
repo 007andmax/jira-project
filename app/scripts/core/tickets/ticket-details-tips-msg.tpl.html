@@ -71,7 +71,8 @@
 
   </div>
 
-  <div class="well ticket-well" ng-if="ticketDetails.trash && ticketDetails.deletePerformer.id !== currentUser.id">
+  <div class="well ticket-well"
+       ng-if="ticketDetails.trash && !ticketDetails.isBillable && ticketDetails.deletePerformer.id !== currentUser.id">
     <i class="icn-lg icn-msg-delete"></i>
 
     <div class="well-message">
