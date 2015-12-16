@@ -17,7 +17,7 @@
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
 
-          var defaultZoom = 17,
+          var defaultZoom = 8,
             defaultCenter = new google.maps.LatLng(41.9955835, -93.63813119999998),
             mapOptions = {
               center: defaultCenter,
