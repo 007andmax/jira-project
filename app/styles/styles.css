@@ -8453,8 +8453,10 @@ button.close {
 }
 .modal-spam .modal-dialog {
   width: 422px;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate3d(-50%,-50%,0) !important;
 }
 .modal-spam .modal-body {
   padding: 5px 30px;
@@ -8471,8 +8473,10 @@ button.close {
 }
 .modal-connection-error .modal-dialog {
   width: 420px;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate3d(-50%,-50%,0) !important;
   text-align: center;
 }
 .modal-connection-error .modal-body {
