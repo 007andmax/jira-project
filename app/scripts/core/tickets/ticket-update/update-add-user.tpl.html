@@ -41,9 +41,15 @@
 
       <div class="tab-content">
 
-        <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'">
-
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'" update-add-user>
           <div class="form-group">
+            <input type="email" class="form-control form-control-filter" 
+                    placeholder="Search agent...">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+          <div class="scroll-pane"></div>
+
+          <!-- <div class="form-group">
             <input type="text" class="form-control form-control-filter"
                    placeholder="Search agent..." ng-model="searchFilter.user">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
@@ -70,13 +76,21 @@
               </li>
 
             </ul>
-          </div>
+          </div> -->
+
+          
 
         </div>
 
-        <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'">
-
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'" update-add-user>
           <div class="form-group">
+            <input type="email" class="form-control form-control-filter" 
+                    placeholder="Search agent...">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+          <div class="scroll-pane"></div>
+
+          <!-- <div class="form-group">
             <input type="text" class="form-control form-control-filter"
                    placeholder="Search client user..." ng-model="searchFilter.user">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
@@ -104,13 +118,19 @@
               </li>
 
             </ul>
-          </div>
+          </div> -->
 
         </div>
 
-        <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'">
-
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'" update-add-user>
           <div class="form-group">
+            <input type="email" class="form-control form-control-filter" 
+                    placeholder="Search agent...">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+          <div class="scroll-pane"></div>
+
+          <!-- <div class="form-group">
             <input type="text" class="form-control form-control-filter"
                    placeholder="Search vendor..." ng-model="searchFilter.user">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
@@ -138,7 +158,7 @@
               </li>
 
             </ul>
-          </div>
+          </div> -->
 
         </div>
 
@@ -147,7 +167,3 @@
   </ul>
 
 </div>
-
-
-
-
