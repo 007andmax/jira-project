@@ -56,24 +56,25 @@
     line-height: 27px;
   }
 }
-.tokenfield .token .close {
+/*.tokenfield .token .close {
     margin: 0px;
     float: none;
     margin-top: -4px;
-}
-.token .icn-remove-token {
+}*/
+.token .close {
     display: inline-block;
     background: url('../images/sprites-s76c759f188.png') no-repeat;
     background-position: -1972px 0;
     height: 8px;
     width: 8px;
+    font-size: 0;
 }
-.token .icn-remove-token:hover, .token .icn-remove-token:active, .token .icn-remove-token:focus {
+.token .close:hover, .token .close:active, .token .close:focus {
     background-position: -1990px 0;
 }
-.form-group .tokenfield .icn-remove-token {
+.form-group .tokenfield .close {
     position: absolute;
-    top: 14px;
+    top: 10px;
     right: 10px;
 }
 .tokenfield .token-input {

@@ -68,7 +68,7 @@
               } else {
 
                 body.removeClass("opened-ticket-list").addClass("opened-ticket");
-                element.nanoScroller({destroy: true});
+                // element.nanoScroller({destroy: true});
                 element.find('.nano-content').css({'position': 'static'});
                 //ticketHeader.removeClass('ticket-fixed-header');
                 //element.find(".ticket-detail > h2").css("margin-top", "0");

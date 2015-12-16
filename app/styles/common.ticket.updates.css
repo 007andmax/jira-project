@@ -277,11 +277,11 @@
   background-color: #f1f5fa;
   border: 1px solid #e7ecf2;
 }
-.table-wrapper .table-content:last-child{
-  margin-bottom: 10px;
-}
 .table-wrapper .table-content + .table-content{
   margin-top: 10px;
+}
+.table-wrapper:last-child .table-content{
+  margin-bottom: 10px;
 }
 .qt-list .table-wrapper .table-content{
   cursor: auto;
@@ -354,6 +354,12 @@
 }
 .inventry-details .table-wrapper .service-table .col-3 {
   width: calc(100% - 507px);
+}
+.inventry-details .table-wrapper:last-child .table-content{
+  margin-bottom: 0;
+}
+.inventry-details .table-wrapper .table-content:last-child{
+  margin-bottom: 10px;
 }
 .table-wrapper .table-content .col-4 {
   width: 98px;

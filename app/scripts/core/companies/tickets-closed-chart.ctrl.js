@@ -12,11 +12,7 @@
 
         today.setHours(0, 0, 0, 0);
 
-        $scope.resolvedTicketsCountByCompany = StatisticsService.getResolvedTicketsCountByCompany($stateParams.companyId, $scope, function(obj){
-          $scope.$watch('resolvedTicketsCountByCompany.value', function(){
-            $scope.allTicketsClosedByDays = obj.value;
-          })
-        });
+        $scope.resolvedTicketsCountByCompany = StatisticsService.getResolvedTicketsCountByCompany($stateParams.companyId, $scope);
 
         $scope.changeRangeDateToGetClosedTkt = function (option) {
 

@@ -8613,9 +8613,10 @@ button.close {
 /***/
 .modal-customize-avatar > .modal-dialog {
   width: 640px;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   margin: 0;
+  transform: translate3d(-50%,-50%,0) !important;
 }
 .modal-customize-avatar .modal-header {
   border-bottom: 0px;
@@ -8702,9 +8703,10 @@ button.close {
 /****/
 .modal-receive-payment > .modal-dialog {
   width: 642px;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   margin: 0;
+  transform: translate3d(-50%,-50%,0) !important;
 }
 .modal-receive-payment .modal-header {
   border-bottom: 0px;

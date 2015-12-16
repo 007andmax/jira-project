@@ -8,7 +8,7 @@
         restrict: 'A',
         require: 'ngModel',
         template: "<div class='chart-area'><canvas class='chart' ticket-closed-graph style='width: 100%; height: 100%; background: white'/>" +
-        "<canvas tooltip-message width='84px' height='40px' style='position: relative; border-radius: 2px;'></canvas></div>",
+        "<canvas tooltip-message width='84px' height='40px' style='position: relative; border-radius: 3px;box-shadow: 0 0 5px 0 rgba( 10, 45, 89, .25 );'></canvas></div>",
         scope: {
           firstGradientColor: "=firstGradientColor",
           secondGradientColor: "=secondGradientColor"
@@ -188,14 +188,14 @@
 
             tooltipContext.clearRect(0, 0, tooltip.width(), tooltip.height());
 
-            tooltipContext.fillStyle = "#141E2A";
+            tooltipContext.fillStyle = "#151e29";
             tooltipContext.fillRect(0, 0, tooltip.width(), tooltip.height());
 
             tooltipContext.textAlign = "center";
             tooltipContext.fillStyle = backgroundColour;
             tooltipContext.fillText(currentValue, tooltip.width() / 2, 14);
 
-            tooltipContext.fillStyle = '#616F7F';
+            tooltipContext.fillStyle = '#94a4b8';
             tooltipContext.fillText(date, tooltip.width() / 2, 30);
 
             tooltip.css({

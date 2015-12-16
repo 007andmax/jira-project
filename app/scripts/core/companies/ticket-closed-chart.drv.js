@@ -8,7 +8,7 @@
         restrict: 'A',
         require: 'ngModel',
         template: "<div class='chart-area'><canvas class='chart' ticket-closed-graph style='width: 100%; height: 100%; background: white'/>" +
-        "<canvas tooltip-message width='75px' height='40px' style='position: relative; border-radius: 2px;'></canvas></div>",
+        "<canvas tooltip-message width='75px' height='40px' style='position: relative; border-radius: 3px; box-shadow: 0 0 5px 0 rgba( 10, 45, 89, .25 );'></canvas></div>",
         scope: {},
         link: function ($scope, element, attrs, ctrl) {
 
