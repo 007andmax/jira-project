@@ -93,7 +93,8 @@
         function changeSelectedTickets(id, status) {
 
           ticketsHeaderState.checkedCompletedTicket = false;
-          ticketsHeaderState.checkedHasInvoiceTicket = false;
+          ticketsHeaderState.checkedHasInvoiceTicket = true;
+          ticketsHeaderState.checkedBillableTicket = false;
           ticketsHeaderState.checkedTicketsIds = [];
           ticketsHeaderState.ticketTags = {};
 
@@ -107,9 +108,14 @@
                 ticketsHeaderState.checkedCompletedTicket = true;
               }
 
-              if ($scope.listType !== 'spam' && (!ticketsHeaderState.checkedHasInvoiceTicket && Utils.findById($scope.tickets, ticketId).hasInvoice)) {
-                ticketsHeaderState.checkedHasInvoiceTicket = true;
+              if ($scope.listType !== 'spam' && (ticketsHeaderState.checkedHasInvoiceTicket && !Utils.findById($scope.tickets, ticketId).hasInvoice)) {
+                ticketsHeaderState.checkedHasInvoiceTicket = false;
               }
+
+              if ((!ticketsHeaderState.checkedBillableTicket && Utils.findById($scope.tickets, ticketId).isBillable)) {
+                ticketsHeaderState.checkedBillableTicket = true;
+              }
+
             }
           }
         }

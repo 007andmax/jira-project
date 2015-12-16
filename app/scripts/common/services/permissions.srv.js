@@ -68,6 +68,10 @@
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
         var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
+        if(!ticket){
+          return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared;
+        }
+
         if(!ticket.isBillable || (ticket.isBillable && ticket.hasInvoice)){
           return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared
         } else if (ticket.isBillable && !ticket.hasInvoice){
