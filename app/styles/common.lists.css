@@ -2679,6 +2679,8 @@ Devices tab
   padding: 0 30px;
   background-color: #f1f5fa;
   border-top: 1px solid #e7ecf2;
+  max-height: 55vh;
+  overflow-y: scroll;
 }
 .invoice-list-heading{
   padding: 0 30px;
