@@ -11,6 +11,7 @@
         $scope.invoiceLocks = [];
         $scope.showInvoiceLockIndex = 0;
         $scope.savingInvoiceInProcess = [];
+        $scope.lockInfo = {};
 
         BillableService.getActualInvoiceNumber($scope, function (number) {
           $scope.invoiceNumber = number;
@@ -39,7 +40,7 @@
 
         $scope.$on('modal.closing', function () {
           $scope.invoiceLocks.forEach(function (lock) {
-            BillableService.unlockTicketIds(lock.id);
+            BillableService.unlockTicketIds(lock.lockId);
           })
         });
 
@@ -47,7 +48,7 @@
 
           for (var i = 0; i < $scope.invoiceLocks.length; i++) {
 
-            var lockId = $scope.invoiceLocks[i].id,
+            var lockId = $scope.invoiceLocks[i].lockId,
               xmlhttp = new XMLHttpRequest();
 
             xmlhttp.open("GET", '/invoice/unlock/' + lockId, false); //the false is for making the call synchronous
@@ -70,6 +71,12 @@
           }
 
           $scope.showInvoiceLockIndex = index;
+
+          var currentLockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId;
+          var currentAddressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId;
+          var currentContactAddress = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
+
+          $scope.iFramesUrl = '/invoice/show/lock/' + currentLockId + '/html?isEditable=true&shipTo=' + currentAddressId + '&billTo=' + currentContactAddress;
         };
 
         $scope.close = function () {
@@ -77,8 +84,8 @@
         };
 
         $scope.print = function () {
-          var lockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].id,
-            wnd = window.open('/invoice/showInvoiceByLock/' + lockId);
+          var lockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId,
+            wnd = window.open('/invoice/show/lock/' + lockId + '/pdf');
           wnd.print();
         };
 
@@ -88,7 +95,10 @@
 
             $scope.savingInvoiceInProcess.push(lock.id);
 
-            BillableService.createInvoice(lock.id, function (resp) {
+            var contactId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
+            var addressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId;
+
+            BillableService.createInvoice(lock.lockId, contactId, addressId, function (resp) {
               if (resp.id) {
                 $scope.invoiceLocks.splice($scope.showInvoiceLockIndex, 1);
 
@@ -114,23 +124,29 @@
           if (selectedTickets) {
 
             BillableService.lockTicketIds(selectedTickets, function (resp) {
-              addLock(companyId, resp.lockId)
+              addLock(resp)
             });
 
           } else {
 
             BillableService.lockTicketsByCompany(companyId, function (resp) {
-              addLock(companyId, resp.lockId)
+              addLock(resp)
             });
           }
         }
 
-        function addLock(companyId, lockId) {
-          if (companyId && lockId) {
-            $scope.invoiceLocks.push({
-              id: lockId,
-              company: CompaniesService.getOneById(companyId)
-            });
+        function addLock(lock) {
+
+          var isLockId = lock && lock.lockId,
+            isCompanyId = lock && lock.invoiceDataDto && lock.invoiceDataDto.company && lock.invoiceDataDto.company.id;
+
+          if (isLockId && isCompanyId) {
+
+            var lockObj = angular.copy(lock);
+            lockObj.invoiceDataDto.company = CompaniesService.getOneById(lock.invoiceDataDto.company.id);
+
+            $scope.invoiceLocks.push(lockObj);
+
           }
 
           locksCount--;
@@ -140,6 +156,8 @@
 
             if ($scope.invoiceLocks.length === 0) {
               $scope.close();
+            } else {
+              $scope.iFramesUrl = '/invoice/show/lock/' + $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId + '/html?isEditable=true&shipTo=' + '' + '&billTo=';
             }
           }
         }

@@ -1,61 +1,85 @@
-<div ng-if="locksInitialized" ng-class="{'invoice-list-open': showThumbs}">
-  <div create-invoice="invoiceLocks" show-lock="invoiceLocks[showInvoiceLockIndex]" invoice-scale="invoiceScale">
-    <div class="topbar">
-      <center class="animator stop" style="width: 500px;">
-        <div class="alert alert-danger" expire-notifications-box></div>
-      </center>
-      <center class="animator stop" style="width: 300px;">
-        <div class="alert alert-yellow" notifications-box> Loading invoice</div>
-      </center>
-      <div class="paging" page-number-box style="display: none"></div>
-      <span class="close-ico" ng-click="close()"></span>
-    </div>
+<div class="inv-modal" ng-if="locksInitialized" invoice-modal-window>
 
-    <div class="nav-arrows">
-      <div class="next-arrow" ng-click="setShowInvoiceLockIndex(showInvoiceLockIndex + 1)"></div>
-      <div class="previous-arrow" ng-click="setShowInvoiceLockIndex(showInvoiceLockIndex - 1)"></div>
-    </div>
-
-    <div class="invoice-list">
-      <div class="invoice-titlebar" ng-click="showThumbs = !showThumbs" style="height: 98px">
-        <div class="current-invoice-info" stop-propagation="click">
-          <div class="invoice-icon">
-            <span class="ico"></span>
-          </div>
-          <div class="invoice-info">
-            <h4 class="modal-title pull-left">{{ invoiceLocks[showInvoiceLockIndex].company.name }}<span
-              class="dot-sep"></span>
-            </h4>
-            <span class="ticket-numer pull-left">INVOICE NO. {{ invoiceNumber }}</span>
-
-            <div class="total-invoices">{{ showInvoiceLockIndex + 1 }} of {{ invoiceLocks.length }}</div>
-          </div>
-        </div>
-        <div class="invoice-controls" stop-propagation="click">
-          <div zoom-slider ng-model="invoiceScale"></div>
-          <a href="" ivoice-print-button>
-            <span tooltip="Print" tooltip-placement="top" class="print-ico pull-left tp-hide"></span>
-          </a>
-          <button type="button" class="pull-left btn btn-scooter"
-                  ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
-                  ng-disabled="savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1"
-                  ng-disabled="invoiceLocks[showInvoiceLockIndex].expired"><span class="ico-arrow"></span>
-          </button>
-        </div>
-      </div>
-      <div class="invoice-thumbs" invoice-thumbs>
-        <ul>
-          <li ng-repeat="lock in invoiceLocks" ng-class="{active: showInvoiceLockIndex === $index}"
-              ng-click="setShowInvoiceLockIndex($index)">
-            <span id="invoice-thumb-{{ invoiceLocks[$index].id }}">
-            </span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="inv-container container" invoice-container style="background-color: rgba(0, 0, 0, 0);">
-
-    </div>
+  <div class="expires-in" ng-show="showTimer">
+    <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
+    {{ invoiceTimer > 0 ? 'mins remaining until unlock' : 'Invoice has been expired and it cannot be saved' }}
   </div>
+
+  <div class="topbar">
+
+    <div class="dropdown pull-left company-dropdown">
+
+      <h4 class="inv-company-name" data-toggle="dropdown">
+        {{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.name }}
+        <span>Invoice No. {{ invoiceNumber }} </span>
+        <i class="icn icn-caret-gray"></i>
+      </h4>
+
+      <ul class="dropdown-menu custom-scroll">
+        <li role="presentation" ng-repeat="invoiceLock in invoiceLocks">
+
+          <a role="menuitem" tabindex="-1" href="javascript:void(0)"
+             ng-click="setShowInvoiceLockIndex($index)">
+            <span class="title">{{ invoiceLock.invoiceDataDto.company.name }}</span>
+            <span class="pull-right total-count">{{ invoiceLock.invoiceDataDto.sum | currency:$:0 }} USD</span>
+          </a>
+
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="zoom-slider pull-left" style="margin-top: 0;">
+
+      <a href="javascript:void(0)" class="pull-left icn icn-zoom-minus"></a>
+
+      <div class="range-wrapper pull-left">
+        <input type="range" min="0.5" max="2" step="0.1" ng-model="zoomRange">
+      </div>
+
+      <a href="javascript:void(0)" class="pull-right icn icn-zoom-plus"></a>
+
+    </div>
+
+    <div class="invoice-actions">
+
+      <div class="btn btn-default pull-left"
+           ng-click="print()"
+           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Print">
+        <i class="icn icn-print"></i>
+      </div>
+
+      <div style="width: 92px;margin-left: 10px;"  class="btn btn-info pull-left"
+           ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
+           ng-disabled="savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1"
+           ng-disabled="invoiceLocks[showInvoiceLockIndex].expired"
+           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Send Invoice">
+        <i class="icn icn-send"></i>
+      </div>
+
+      <a href="javascript:void(0)" class="close-icon hit-area pull-left" ng-click="close()">
+        <i class="icn icn-close"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="nav-arrows">
+    <div class="icn next-arrow"
+         custom-disabled="{{ showInvoiceLockIndex >= (invoiceLocks.length - 1)}}"
+         ng-click="(showInvoiceLockIndex >= (invoiceLocks.length - 1)) || setShowInvoiceLockIndex(showInvoiceLockIndex + 1)"></div>
+    <div class="icn previous-arrow"
+         custom-disabled="{{ showInvoiceLockIndex <= 0 }}"
+         ng-click="(showInvoiceLockIndex <= 0) || setShowInvoiceLockIndex(showInvoiceLockIndex - 1)"></div>
+  </div>
+
+  <div style="display: flex; align-items: flex-start; justify-content: center; padding: 98px 0 30px; width: auto;height: 100%;">
+    <iframe name="invoice" frameborder="0" seamless="seamless" scrolling="no" iframe-window
+            ng-src="{{ iFramesUrl }}"
+            ng-style="{'transform-origin': '50% 0px 0px', 'transform': 'scale(' + zoomRange + ') translate(1.5%, 0px)','width': '850px','height': '100%', 'background': 'white'}"></iframe>
+
+  </div>
+
 </div>
+
