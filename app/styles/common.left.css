@@ -63,6 +63,7 @@ aside#left .nav > li > a {
   height: 44px;
   line-height: 44px;
   font-weight: normal;
+  text-decoration: none;
   color: #94a4b8;
   float: left;
   width: 100%;

@@ -337,6 +337,7 @@ aside#right .sidebar-company .primary-contacts .user-name {
 }
 aside#right .user-name a{
   color: #4c5c6f;
+  text-decoration: none;
 }
 aside#right .sidebar-company .primary-contacts .user-title {
   font-size: 13px;
