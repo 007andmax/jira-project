@@ -85,7 +85,9 @@
 
         $scope.print = function () {
           var lockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId,
-            wnd = window.open('/invoice/show/lock/' + lockId + '/pdf');
+            currentAddressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId,
+            currentContactAddress = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId,
+            wnd = window.open('/invoice/show/lock/' + lockId + '/pdf?isEditable=true&shipTo=' + currentAddressId + '&billTo=' + currentContactAddress);
           wnd.print();
         };
 
