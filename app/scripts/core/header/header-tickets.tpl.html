@@ -56,7 +56,7 @@
           </li>
 
           <li ng-if="isMoveToTrashVisible() && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
-            <a tabindex="-1" href="javascript:void(0)" ng-click="moveIntoSpam()">Move to Trash</a>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
           </li>
 
         </ul>
