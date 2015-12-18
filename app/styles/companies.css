@@ -806,13 +806,14 @@
 }
 .primary-contact .status-designation{
   margin: 0 auto 15px;
-  width: 120px;
+  max-width: 240px;
+  text-align: center;
 }
 .primary-contact .status-designation .label-light {
   background-color: #e7ecf2;
   color: #94a4b8;
   font-weight: 400;
-  max-width: calc(100% - 46px);
+  max-width: 194px;
   text-transform: uppercase;
   overflow: hidden;
   -ms-text-overflow: ellipsis;

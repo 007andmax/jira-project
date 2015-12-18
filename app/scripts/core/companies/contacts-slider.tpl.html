@@ -11,6 +11,7 @@
       <div class="person-name">{{ getUserName(currentContact) }}</div>
 
       <div class="status-designation clearfix">
+        <div class="status-inner" style="display: inline-block;">
         <i class="dot" ng-class="{'on': currentContact.online, 'off': !currentContact.online}"></i>
 
         <span class="label label-light">{{ currentContact.designation }}</span>
@@ -18,7 +19,7 @@
         <div class="icn-sm {{ getUserSubscribleClass(currentContact) }} persistent-tooltip"
              tooltip-append-to-body="true" tooltip-placement="top"
              tooltip="{{ getUserSubscribleTooltip(currentContact) }}"></div>
-
+        </div>
       </div>
 
       <div class="contact-number"
