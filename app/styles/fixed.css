@@ -372,3 +372,8 @@ i.off {
   opacity: 0;
 }
 
+/*fixed modal window*/
+
+body.modal-open {
+  overflow: visible;
+}
