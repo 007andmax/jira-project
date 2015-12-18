@@ -40,7 +40,7 @@
         </ul>
       </div>
 
-      <div id="navigation-content-wrapper" class="create-company-main-wrapper">
+      <div id="navigation-content-wrapper" class="create-company-main-wrapper" scroll-to-error-fild>
 
         <div class="help-text">Enter your client company's address, contact details, tax rate, associate vendors, and
           other general information.
@@ -637,9 +637,7 @@
 
         <div id="finish-navs" class="create-company-actions clearfix">
 
-          <div class="btn btn-lg btn-info pull-right"
-               ng-click="save(companyForm)"
-               custom-disabled="{{ (triedToSave && companyForm.$invalid) || savingInProcess }}">
+          <div class="btn btn-lg btn-info pull-right" ng-click="save(companyForm)">
             {{ editCompany.id ? 'Save' : 'Create' }}
           </div>
 

@@ -177,6 +177,7 @@
             })
           } else {
             $scope.triedToSave = true;
+            $scope.$broadcast('scrollToErrorFild')
           }
 
           function processPhoneNumbers(phoneNumbers) {
