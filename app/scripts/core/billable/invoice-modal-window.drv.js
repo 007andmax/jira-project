@@ -10,12 +10,9 @@
 
           var zoomSlider = element.find('.zoom-slider'),
             companyDropdown = element.find('.company-dropdown'),
-            iframeElement = element.find('[iframe-window]'),
             icnZoomPlus = element.find('.icn-zoom-plus'),
             icnZoomMinus = element.find('.icn-zoom-minus'),
-            interval,
-            contactIdInput,
-            addressIdInput;
+            interval;
 
           scope.zoomRange = 1;
 
@@ -32,13 +29,13 @@
           }
 
           icnZoomPlus.click(function(){
-            if(scope.zoomRange < 2){
+            if(scope.zoomRange < 3){
               scope.zoomRange += 0.1;
             }
           });
 
           icnZoomMinus.click(function(){
-            if(scope.zoomRange > 0.5){
+            if(scope.zoomRange > 1){
               scope.zoomRange -= 0.1;
             }
           });
@@ -66,7 +63,11 @@
               interval = setInterval(function(){
 
                 if(scope.invoiceTimer <= 0){
-                  $scope.showLock.expired = true;
+
+                  for(var i = 0; i < scope.invoiceLocks.length; i++){
+                    scope.invoiceLocks[i].expired = true;
+                  }
+
                 }
 
                 scope.invoiceTimer -= 1000;
@@ -75,32 +76,6 @@
 
             });
           }
-
-          iframeElement.on('load', function(){
-            element.height(iframeElement[0].contentWindow.document.body.scrollHeight);
-
-            $timeout(function(){
-
-              contactIdInput = $('.billed > #contact-id', iframeElement.contents());
-              addressIdInput = $('.shipto > #address-id', iframeElement.contents());
-
-              var contactsInDropdown = $('[data-contact-id]', iframeElement.contents());
-              var addressesInDropdown = $('[data-address-id]', iframeElement.contents());
-
-              scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = contactIdInput.val();
-              scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = addressIdInput.val();
-
-              contactsInDropdown.click(function(){
-                scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = this.getAttribute("data-contact-id");
-              });
-
-              addressesInDropdown.click(function(){
-                scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = this.getAttribute("data-address-id");
-              });
-
-            });
-
-          });
 
           scope.$on('$destroy', function() {
             $('html').css('overflow-y', 'scroll');

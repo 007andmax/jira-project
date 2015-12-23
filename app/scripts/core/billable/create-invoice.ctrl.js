@@ -72,11 +72,6 @@
 
           $scope.showInvoiceLockIndex = index;
 
-          var currentLockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId;
-          var currentAddressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId;
-          var currentContactAddress = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
-
-          $scope.iFramesUrl = '/invoice/show/lock/' + currentLockId + '/html?isEditable=true&shipTo=' + currentAddressId + '&billTo=' + currentContactAddress;
         };
 
         $scope.close = function () {
@@ -145,7 +140,7 @@
           if (isLockId && isCompanyId) {
 
             var lockObj = angular.copy(lock);
-            lockObj.invoiceDataDto.company = CompaniesService.getOneById(lock.invoiceDataDto.company.id);
+            lockObj.invoiceDataDto.company.companyInfo = CompaniesService.getOneById(lock.invoiceDataDto.company.id);
 
             $scope.invoiceLocks.push(lockObj);
 
@@ -158,8 +153,6 @@
 
             if ($scope.invoiceLocks.length === 0) {
               $scope.close();
-            } else {
-              $scope.iFramesUrl = '/invoice/show/lock/' + $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId + '/html?isEditable=true&shipTo=' + '' + '&billTo=';
             }
           }
         }

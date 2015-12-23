@@ -1,4 +1,4 @@
-<div class="inv-modal" ng-if="locksInitialized" invoice-modal-window>
+<div class="inv-modal" ng-if="locksInitialized" invoice-modal-window style="background: none">
 
   <div class="expires-in" ng-show="showTimer">
     <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
@@ -10,7 +10,7 @@
     <div class="dropdown pull-left company-dropdown">
 
       <h4 class="inv-company-name" data-toggle="dropdown">
-        {{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.name }}
+        {{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.companyInfo.name }}
         <span>Invoice No. {{ invoiceNumber }} </span>
         <i class="icn icn-caret-gray"></i>
       </h4>
@@ -20,7 +20,7 @@
 
           <a role="menuitem" tabindex="-1" href="javascript:void(0)"
              ng-click="setShowInvoiceLockIndex($index)">
-            <span class="title">{{ invoiceLock.invoiceDataDto.company.name }}</span>
+            <span class="title">{{ invoiceLock.invoiceDataDto.company.companyInfo.name }}</span>
             <span class="pull-right total-count">{{ invoiceLock.invoiceDataDto.sum | currency:$:0 }} USD</span>
           </a>
 
@@ -34,7 +34,7 @@
       <a href="javascript:void(0)" class="pull-left icn icn-zoom-minus"></a>
 
       <div class="range-wrapper pull-left">
-        <input type="range" min="0.5" max="2" step="0.1" ng-model="zoomRange">
+        <input type="range" min="1" max="3" step="0.1" ng-model="zoomRange" ng-change="changeZoom()">
       </div>
 
       <a href="javascript:void(0)" class="pull-right icn icn-zoom-plus"></a>
@@ -45,14 +45,14 @@
 
       <div class="btn btn-default pull-left"
            ng-click="print()"
+           ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Print">
         <i class="icn icn-print"></i>
       </div>
 
-      <div style="width: 92px;margin-left: 10px;"  class="btn btn-info pull-left"
+      <div style="width: 92px;margin-left: 10px;" class="btn btn-info pull-left"
            ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
-           ng-disabled="savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1"
-           ng-disabled="invoiceLocks[showInvoiceLockIndex].expired"
+           ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Send Invoice">
         <i class="icn icn-send"></i>
       </div>
@@ -65,6 +65,12 @@
 
   </div>
 
+  <div class="paging">
+    <div class="tooltip body-tooltip top in" style="display: block;">
+      <div class="tooltip-inner"></div>
+    </div>
+  </div>
+
   <div class="nav-arrows">
     <div class="icn next-arrow"
          custom-disabled="{{ showInvoiceLockIndex >= (invoiceLocks.length - 1)}}"
@@ -74,12 +80,8 @@
          ng-click="(showInvoiceLockIndex <= 0) || setShowInvoiceLockIndex(showInvoiceLockIndex - 1)"></div>
   </div>
 
-  <div style="display: flex; align-items: flex-start; justify-content: center; padding: 98px 0 30px; width: auto;height: 100%;">
-    <iframe name="invoice" frameborder="0" seamless="seamless" scrolling="no" iframe-window
-            ng-src="{{ iFramesUrl }}"
-            ng-style="{'transform-origin': '50% 0px 0px', 'transform': 'scale(' + zoomRange + ') translate(1.5%, 0px)','width': '850px','height': '100%', 'background': 'white'}"></iframe>
-
-  </div>
+  <div class="qt-inv-container" style="background-color: rgba(241,245,250, 0);"
+       ng-model="invoiceLocks[showInvoiceLockIndex].invoiceDataDto" invoice-content></div>
 
 </div>
 

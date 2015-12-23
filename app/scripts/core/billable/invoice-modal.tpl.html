@@ -1,0 +1,259 @@
+<div class="inner-wrapper-all" parent-invoice-page
+     ng-style="{'transform-origin': '50% 0px 0px', 'transform': 'scale(' + zoomRange + ')'}">
+
+  <div class="invoice-page inner-wrapper clearfix">
+
+    <div class="header">
+      <div id="logo">
+        <img ng-src="/companyLogo/{{ currentInvoice.company.parent.id }}"
+             width="64" height="64" alt="{{ currentInvoice.techCompanyName }}">
+      </div>
+      <div class="company-info ">
+        <div class="address">{{ currentInvoice.senderAddress }}</div>
+      </div>
+    </div>
+
+    <div class="sub-header">
+      <div class="billed">
+        <div class="dropdown">
+
+          <h3 class="heading" data-toggle="dropdown">BILL TO
+            <i class="icn icn-caret-gray"></i>
+          </h3>
+
+          <div class="dropdown-menu" ng-if="currentInvoice.billTo.length > 1">
+            <div class="nano">
+              <div class="nano-content" tabindex="0" style="right: -15px;">
+
+                <div ng-repeat-start="billToContact in currentInvoice.billTo | orderBy:'priority'">
+                  <a data-billTo-id="{{ billToContact }}">
+                    <div><h3 class="heading">Primary Contact {{ $index + 1 }}</h3>
+                      <h4 class="company-name">{{ getUserName(billToContact) }}</h4>
+
+                      <div class="number"
+                           ng-repeat="phoneNumber in billToContact.phoneNumbers | orderBy:'priority' | limitTo: 1">
+                        {{ phoneNumber.number }}
+                      </div>
+
+                      <div class="email">{{ billToContact.primaryEmail }}</div>
+                      <div class="address">{{ currentInvoice.billingAddress }}</div>
+                    </div>
+                  </a>
+                </div>
+
+                <div role="separator" class="divider" ng-repeat-end ng-hide="$last"></div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <h4 class="company-name">{{ getUserName(currentBillTo) }}</h4>
+
+        <div class="number" ng-repeat="phoneNumber in currentBillTo.phoneNumbers | orderBy:'priority' | limitTo: 1">
+          {{ phoneNumber.number }}
+        </div>
+
+        <div class="email">{{ currentBillTo.primaryEmail }}</div>
+        <div class="address">{{ currentInvoice.billingAddress }}</div>
+
+      </div>
+
+      <div class="shipto">
+        <div class="dropdown"><h3 class="heading" data-toggle="dropdown">SHIP TO <i class="icn icn-caret-gray"></i></h3>
+
+          <div class="dropdown-menu">
+            <div class="nano">
+              <div class="nano-content" tabindex="0" style="right: -15px;">
+
+                <div ng-repeat-start="shipToAddress in currentInvoice.shipTo | orderBy:'isPrimary':true">
+                  <a data-shipTo-id="{{ shipToAddress }}">
+                    <div>
+                      <h3 class="heading">{{ shipToAddress.isPrimary ? 'Primary address' : 'Billing address' }}</h3>
+                      <h4 class="company-name">{{ currentInvoice.companyName }}</h4>
+
+                      <div class="number" ng-repeat="phoneNumber in shipToAddress.phoneNumbers | orderBy:'priority' | limitTo: 1">
+                        {{ phoneNumber.number }}
+                      </div>
+
+                      <div class="address">{{ shipToAddress.address }}</div>
+                    </div>
+                  </a>
+                </div>
+
+                <div role="separator" class="divider" ng-repeat-end ng-hide="$last"></div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <h4 class="company-name">{{ currentInvoice.companyName }}</h4>
+
+        <div class="number" ng-repeat="phoneNumber in currentShipTo.phoneNumbers | orderBy:'priority' | limitTo: 1">
+          {{ phoneNumber.number }}
+        </div>
+
+        <div class="address">{{ currentShipTo.address }}</div>
+
+      </div>
+
+      <div class="invoice-info">
+        <h3 class="heading">INVOICE NO. <span class="total">{{ currentInvoice.number }}</span></h3>
+
+        <div class="detail">Invoice Date
+          <span class="detail-sub">{{ currentInvoice.date | date: 'dd MMM yyyy' }}</span>
+        </div>
+
+        <div class="detail">Due Date
+          <span class="detail-sub">{{ currentInvoice.dueDate | date: 'dd MMM yyyy' }}</span>
+        </div>
+
+        <div class="detail" ng-repeat="taxRate in currentInvoice.taxRates">
+          {{ taxRate.code }}
+          <span class="detail-sub">
+            {{ taxRate.rate }}%
+          </span>
+        </div>
+
+        <div class="detail amount">Amount Due
+          <span class="detail-sub">{{ currentInvoice.sum | currency: '$':0 }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="inv-ticket-header" ng-repeat-start="ticket in currentInvoice.tickets">
+
+      <h4 class="head"><span class="title">Tkt#</span>{{ ticket.number }}
+        <span class="date">{{ ticket.closedAt | date: 'dd MMM yyyy' }}</span>
+      </h4>
+
+      <h4 class="head">
+        <span class="title">Subj</span>{{ ticket.subject }}
+      </h4>
+
+      <div class="ticket-item items-header">
+        <div class="col-1">ITEM</div>
+        <div class="col-2">description</div>
+        <div class="col-3">quantity</div>
+        <div class="col-4">UNIT price</div>
+        <div class="col-5">total</div>
+      </div>
+
+    </div>
+
+    <div class="ticket-item" ng-repeat="productExpense in ticket.productExpenses">
+
+      <div class="col-1">
+        <span class="name">{{ productExpense.item.name }}</span>
+        #{{ productExpense.item.code }}
+      </div>
+
+      <div class="col-2">{{ productExpense.description }}</div>
+      <div class="col-3">{{ productExpense.billableQuantity }}</div>
+      <div class="col-4">{{ productExpense.item.sale | currency: '$':0 }}</div>
+      <div class="col-5">{{ productExpense.sum | currency: '$':0 }}</div>
+
+    </div>
+
+    <div class="ticket-item" ng-repeat="serviceExpense in ticket.serviceExpenses">
+
+      <div class="col-1">
+        <span class="name">{{ serviceExpense.item.name }}</span>
+      </div>
+
+      <div class="col-2">{{ serviceExpense.description }}</div>
+      <div class="col-3">{{ serviceExpense.billableQuantity | durationFilter }} hr(s)</div>
+      <div class="col-4">{{ serviceExpense.item.rate | currency: '$':0 }}/hr</div>
+      <div class="col-5">{{ serviceExpense.sum | currency: '$':0 }}</div>
+
+    </div>
+
+    <div class="ticket-amount" ng-repeat-end>
+      <div class="updates" style="width:510px">
+
+        <div class="update">
+          <h4>PRODUCT</h4>
+
+          <div class="amount">{{ ticket.productsSum | currency: '$':0 }}</div>
+        </div>
+
+        <div class="plus">
+          <img src="/images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>
+        </div>
+
+        <div class="update">
+          <h4>SERVICE</h4>
+
+          <div class="amount">{{ ticket.servicesSum | currency: '$':0 }}</div>
+        </div>
+
+      </div>
+
+      <div class="total-amount">
+        <div class="totals"><span class="number">TKT# {{ ticket.number }}</span> Total</div>
+        <div class="amount">{{ ticket.totalSum | currency: '$':0 }} USD</div>
+      </div>
+
+    </div>
+
+    <div class="in-total updates">
+      <div style="padding: 0 20px;">
+
+        <div class="update">
+          <h4>subtotal</h4>
+
+          <div class="amount">{{ currentInvoice.sumWithoutTaxRates | currency: '$':0 }}</div>
+        </div>
+
+        <div class="plus" ng-show="currentInvoice.hasTaxRates">
+          <img src="/images/invoice/invoice-plus.png" width="20" height="20" alt="+">
+        </div>
+
+        <div class="update" ng-repeat="taxRate in currentInvoice.taxRates">
+          <h4>{{ taxRate.code }}</h4>
+
+          <div class="amount">{{ taxRate.sum | currency: '$':0 }}</div>
+        </div>
+
+        <div class="amount-due">Amount Due <span class="amount">{{ currentInvoice.sum | currency: '$':0 }} USD</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="message">
+        <div class="thankyou">Thank you!</div>
+        <div class="contact">
+
+          <div class="numbers">
+
+            <div class="telephone" ng-repeat="phoneNumber in currentInvoice.senderUser.phoneNumbers">
+              <img ng-src="/images/invoice/invoice-{{ phoneNumber.typeNumber.toLowerCase() }}.png" width="12"
+                   height="12"
+                   alt="P">
+              {{ phoneNumber.number }}
+            </div>
+
+          </div>
+
+          <div class="email">
+            <div class="name">{{ currentInvoice.senderUser.firstName }} {{ currentInvoice.senderUser.lastName }}</div>
+            <div class="em"><img src="/images/invoice/invoice-mail.png" width="12" height="12" alt="@">
+              {{ currentInvoice.senderUser.primaryEmail }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="terms"><b>Sale Terms &amp; Conditions:</b> {{ currentInvoice.termsAndConditions }}
+      </div>
+    </div>
+  </div>
+</div>
