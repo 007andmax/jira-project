@@ -182,7 +182,7 @@
           if (emailsCount > 1) {
             ngModelCtrl.$setValidity('unique', false);
           } else {
-            var validationResult = ContactsService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', function () {
+            var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, contactId || '', function () {
               ngModelCtrl.$setValidity('unique', validationResult.value);
             });
           }

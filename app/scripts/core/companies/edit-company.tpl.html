@@ -332,15 +332,15 @@
                     </div>
 
                     <div class="form-group"
-                         ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'email')}">
+                         ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'primaryEmail')}">
 
                       <label class="control-label"
-                             ng-class="{'hide': isShowingContactErrors(contact, contactForm, 'email')}">
+                             ng-class="{'hide': isShowingContactErrors(contact, contactForm, 'primaryEmail')}">
                         Email
                       </label>
 
                       <div ng-messages="contactForm.primaryEmail.$error"
-                           ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'email')}">
+                           ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'primaryEmail')}">
                         <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
                         <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
                         <div class="control-label" ng-message="unique">This email already occupied.</div>
