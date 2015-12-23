@@ -15,9 +15,9 @@
             <li class="icn-sm badge-admin persistent-tooltip" ng-show="user.role === 'ADMIN'"
                 tooltip="admin" tooltip-append-to-body="true" tooltip-placement="top"></li>
 
-            <li class="icn-sm {{ getUserSubscribleClass() }} persistent-tooltip"
+            <li class="icn-sm {{ getUserSubscribeClass() }} persistent-tooltip"
                 ng-show="user.subscription && (user.subscription.ticket || user.subscription.invoice)"
-                tooltip="{{ getUserSubscribleTooltip() }}" tooltip-append-to-body="true"
+                tooltip="{{ getUserSubscribeTooltip() }}" tooltip-append-to-body="true"
                 tooltip-placement="top"></li>
 
           </ul>

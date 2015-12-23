@@ -174,7 +174,7 @@
           var emailsCount = 0;
 
           for (var i = 0; i < $scope.editCompany.contacts.length; i++) {
-            if ($scope.editCompany.contacts[i].email === ngModelCtrl.$viewValue) {
+            if ($scope.editCompany.contacts[i].primaryEmail === ngModelCtrl.$viewValue) {
               emailsCount++;
             }
           }

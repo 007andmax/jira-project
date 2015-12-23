@@ -339,15 +339,15 @@
                         Email
                       </label>
 
-                      <div ng-messages="contactForm.email.$error"
+                      <div ng-messages="contactForm.primaryEmail.$error"
                            ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'email')}">
                         <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
                         <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
                         <div class="control-label" ng-message="unique">This email already occupied.</div>
                       </div>
 
-                      <input class="form-control" type="text" name="email" aria-expanded="true" make-dirty-on-blur
-                             ng-model="contact.email" required="true" ng-pattern="emailPattern"
+                      <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                             ng-model="contact.primaryEmail" required="true" ng-pattern="emailPattern"
                              contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
                              model-id="contact.id">
                     </div>

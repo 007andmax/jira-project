@@ -166,12 +166,13 @@
 
           <h4>{{ getUserName(primaryContact) }}</h4>
 
-          <i class="dot on"></i>
+          <i class="dot" ng-class="{'on': primaryContact.online, 'off': !primaryContact.online}"></i>
 
           <span class="label label-light">{{ primaryContact.designation }}</span>
 
-          <div class="icn-sm persistent-tooltip {{ getUserSubscribleClass() }}" tooltip-append-to-body="true"
-               tooltip-placement="top" tooltip="{{ getUserSubscribleTooltip() }}"></div>
+          <div class="icn-sm persistent-tooltip {{ getUserSubscribeClass() }}"
+               tooltip-append-to-body="true"
+               tooltip-placement="top" tooltip="{{ getUserSubscribeTooltip() }}"></div>
         </div>
       </div>
 

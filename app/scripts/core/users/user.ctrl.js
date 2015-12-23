@@ -36,7 +36,7 @@
           }
         };
 
-        $scope.getUserSubscribleClass = function () {
+        $scope.getUserSubscribeClass = function () {
           if (!$scope.user.subscription) {
             return;
           }
@@ -50,7 +50,7 @@
           }
         };
 
-        $scope.getUserSubscribleTooltip = function () {
+        $scope.getUserSubscribeTooltip = function () {
           if (!$scope.user.subscription) {
             return;
           }

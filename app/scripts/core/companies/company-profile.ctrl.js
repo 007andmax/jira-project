@@ -118,7 +118,7 @@
           });
         };
 
-        $scope.getUserSubscribleClass = function (user) {
+        $scope.getUserSubscribeClass = function (user) {
           if (!user || !user.subscription) {
             return;
           }
@@ -132,7 +132,7 @@
           }
         };
 
-        $scope.getUserSubscribleTooltip = function (user) {
+        $scope.getUserSubscribeTooltip = function (user) {
           if (!user || !user.subscription) {
             return;
           }
