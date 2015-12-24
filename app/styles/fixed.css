@@ -377,3 +377,38 @@ i.off {
 body.modal-open {
   overflow: visible;
 }
+
+/*invoice modal window*/
+
+.inv-modal .icn-zoom-plus-invoice:hover, .inv-modal .icn-zoom-plus-invoice:active {
+  background-position: -2211px -100px;
+}
+
+.inv-modal .icn-zoom-plus-invoice {
+  height: 20px;
+  width: 20px;
+  margin-top: -2px;
+}
+
+.icn-zoom-plus-invoice {
+  background-position: -2191px -100px;
+  width: 10px;
+  height: 10px;
+}
+
+.inv-modal .icn-zoom-minus-invoice:hover, .inv-modal .icn-zoom-minus-invoice:active {
+  background-position: -2261px -96px;
+}
+
+.inv-modal .icn-zoom-minus-invoice {
+  height: 20px;
+  width: 20px;
+  margin-top: -2px;
+}
+
+.icn-zoom-minus-invoice {
+  background-position: -2241px -96px;
+  width: 10px;
+  height: 10px;
+}
+

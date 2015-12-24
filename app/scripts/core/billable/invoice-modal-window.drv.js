@@ -10,8 +10,8 @@
 
           var zoomSlider = element.find('.zoom-slider'),
             companyDropdown = element.find('.company-dropdown'),
-            icnZoomPlus = element.find('.icn-zoom-plus'),
-            icnZoomMinus = element.find('.icn-zoom-minus'),
+            icnZoomPlus = element.find('.icn-zoom-plus-invoice'),
+            icnZoomMinus = element.find('.icn-zoom-minus-invoice'),
             interval;
 
           scope.zoomRange = 1;
@@ -30,13 +30,13 @@
 
           icnZoomPlus.click(function(){
             if(scope.zoomRange < 3){
-              scope.zoomRange += 0.1;
+              scope.zoomRange = +scope.zoomRange + 0.1;
             }
           });
 
           icnZoomMinus.click(function(){
             if(scope.zoomRange > 1){
-              scope.zoomRange -= 0.1;
+              scope.zoomRange = +scope.zoomRange - 0.1;
             }
           });
 
