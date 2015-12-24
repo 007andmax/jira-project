@@ -85,6 +85,12 @@
           });
 
           scope.$watch('zoomRange', function () {
+            initHorizontalScroll()
+          });
+
+          $(window).resize(initHorizontalScroll)
+
+          function initHorizontalScroll(){
 
             var invoiceWindowWidth = element.find('[parent-invoice-page]').width(),
               modalTranscludeWidth = (invoiceWindowWidth * scope.zoomRange) + 60,
@@ -101,8 +107,7 @@
               modalTransclude.width(maxModalWithoutScroll);
               modalWindow.css('overflow-x', 'hidden');
             }
-
-          })
+          }
 
 
         }
