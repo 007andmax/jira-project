@@ -38,9 +38,12 @@
 
                 if (finish.code === 400 || finish.code === 500) {
 
+                  var message = finish.code === 500 ? 'Maximum upload size of 4 MB' : finish.message;
+
                   $scope.fileInfo[file.name] = {
                     error: true,
-                    message: finish.message
+                    message: message,
+                    code: finish.code
                   };
 
                   $scope.fileInfo.quantityErrorFiles++;

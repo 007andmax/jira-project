@@ -25,7 +25,7 @@
         </span>
 
         <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
-           ng-show="file.progress !== 100"
+           ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
            tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
           <i class="icn-sm icn-reupload"></i>
         </a>
