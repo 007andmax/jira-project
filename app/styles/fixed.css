@@ -412,3 +412,7 @@ body.modal-open {
   height: 10px;
 }
 
+.modal-open .tooltip{
+  z-index: 112000;
+}
+
