@@ -12,7 +12,9 @@
             companyDropdown = element.find('.company-dropdown'),
             icnZoomPlus = element.find('.icn-zoom-plus-invoice'),
             icnZoomMinus = element.find('.icn-zoom-minus-invoice'),
-            interval;
+            interval,
+            modalWindow = $('.modal-open .modal'),
+            modalTransclude = modalWindow.find('[modal-transclude]');
 
           scope.zoomRange = 1;
 
@@ -28,14 +30,14 @@
             companyDropdown.css("width", zoomMargin);
           }
 
-          icnZoomPlus.click(function(){
-            if(scope.zoomRange < 3){
+          icnZoomPlus.click(function () {
+            if (scope.zoomRange < 3) {
               scope.zoomRange = +scope.zoomRange + 0.1;
             }
           });
 
-          icnZoomMinus.click(function(){
-            if(scope.zoomRange > 1){
+          icnZoomMinus.click(function () {
+            if (scope.zoomRange > 1) {
               scope.zoomRange = +scope.zoomRange - 0.1;
             }
           });
@@ -52,7 +54,7 @@
             }
           }
 
-          function processInvoice(lockId){
+          function processInvoice(lockId) {
             BillableService.getExistTimeByLockId(lockId, function (resp) {
 
               clearInterval(interval);
@@ -60,11 +62,11 @@
               scope.invoiceTimer = resp.time;
               scope.showTimer = true;
 
-              interval = setInterval(function(){
+              interval = setInterval(function () {
 
-                if(scope.invoiceTimer <= 0){
+                if (scope.invoiceTimer <= 0) {
 
-                  for(var i = 0; i < scope.invoiceLocks.length; i++){
+                  for (var i = 0; i < scope.invoiceLocks.length; i++) {
                     scope.invoiceLocks[i].expired = true;
                   }
 
@@ -77,10 +79,31 @@
             });
           }
 
-          scope.$on('$destroy', function() {
+          scope.$on('$destroy', function () {
             $('html').css('overflow-y', 'scroll');
             clearInterval(interval);
           });
+
+          scope.$watch('zoomRange', function () {
+
+            var invoiceWindowWidth = element.find('[parent-invoice-page]').width(),
+              modalTranscludeWidth = (invoiceWindowWidth * scope.zoomRange) + 60,
+              maxModalWithoutScroll = $(window).width() - 15;
+
+            if (maxModalWithoutScroll < modalTranscludeWidth) {
+
+              var scrollLeft = (modalTranscludeWidth - maxModalWithoutScroll) / 2;
+
+              modalWindow.css('overflow-x', 'scroll');
+              modalTransclude.width(modalTranscludeWidth);
+              modalWindow.scrollLeft(scrollLeft);
+            } else {
+              modalTransclude.width(maxModalWithoutScroll);
+              modalWindow.css('overflow-x', 'hidden');
+            }
+
+          })
+
 
         }
       }
