@@ -5962,7 +5962,6 @@ tbody.collapse.in {
 }
 .checkbox-dropdown .nano {
   background-color: #f1f5fa;
-  min-height: 200px;
 }
 .checkbox-dropdown {
   -webkit-user-select: none;
@@ -5975,12 +5974,6 @@ tbody.collapse.in {
 }
 .checkbox-dd-item:hover {
   background-color: #e7ecf2;
-}
-.checkbox-dd-item:first-child {
-  margin-top: 10px;
-}
-.checkbox-dd-item:last-child {
-  margin-bottom: 10px;
 }
 .checkbox-dd-item label {
   display: block;
