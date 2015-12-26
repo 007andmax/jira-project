@@ -10,6 +10,7 @@
           checkedDefaultServices;
 
         $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companyServices = ServicesService.getActualMapping($scope.servicesData);
 
         $scope.generateMovementData = function () {
           moveServicesMap = {};

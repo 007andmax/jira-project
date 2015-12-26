@@ -6,8 +6,16 @@
     </div>
 
     <div class="dropdown pull-right" ng-controller="quicktech.core.services.servicesMovingCtrl">
-
       <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
+           aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
+           tooltip="Move service(s) to..."
+           ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
+           custom-disabled="{{ !hasDefaultServicesChecked }}"
+           services-moving>
+        <i class="icn-sm icn-add-services"></i>
+      </div>
+
+       <!-- <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
            aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
            tooltip="Move service(s) to..."
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
@@ -55,7 +63,7 @@
                custom-disabled="{{ disableMoveButton }}">Move
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
