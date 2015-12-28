@@ -71,7 +71,7 @@
                 <div ng-repeat-start="shipToAddress in currentInvoice.shipTo | orderBy:'isPrimary':true">
                   <a data-shipTo-id="{{ shipToAddress }}">
                     <div>
-                      <h3 class="heading">{{ shipToAddress.isPrimary ? 'Primary address' : 'Billing address' }}</h3>
+                      <h3 class="heading">{{ shipToAddress.isPrimary ? 'Primary address' : 'Billing address ' + $index }}</h3>
                       <h4 class="company-name">{{ currentInvoice.companyName }}</h4>
 
                       <div class="number" ng-repeat="phoneNumber in shipToAddress.phoneNumbers | orderBy:'priority' | limitTo: 1">
