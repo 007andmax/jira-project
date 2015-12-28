@@ -21,6 +21,12 @@
           $('html').css('overflow-y', 'hidden');
           centering();
 
+          element.find('.nano').nanoScroller();
+
+          element.find(".dropdown").on('shown.bs.dropdown', function(){
+            element.find('.nano').nanoScroller();
+          });
+
           function centering() {
 
             var wrapperWidth = window.innerWidth,

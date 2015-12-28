@@ -9,7 +9,7 @@
              width="64" height="64" alt="{{ currentInvoice.techCompanyName }}">
       </div>
       <div class="company-info ">
-        <div class="address" address-filter ng-model="currentInvoice.senderAddress"></div>
+        <div class="address" address-country ng-model="currentInvoice.senderAddress"></div>
       </div>
     </div>
 
@@ -183,7 +183,7 @@
         </div>
 
         <div class="plus">
-          <img src="/images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>
+          <img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+"/>
         </div>
 
         <div class="update">
@@ -211,7 +211,7 @@
         </div>
 
         <div class="plus" ng-show="currentInvoice.hasTaxRates">
-          <img src="/images/invoice/invoice-plus.png" width="20" height="20" alt="+">
+          <img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+">
         </div>
 
         <div class="update" ng-repeat="taxRate in currentInvoice.taxRates">
@@ -234,7 +234,7 @@
           <div class="numbers">
 
             <div class="telephone" ng-repeat="phoneNumber in currentInvoice.senderUser.phoneNumbers">
-              <img ng-src="/images/invoice/invoice-{{ phoneNumber.typeNumber.toLowerCase() }}.png" width="12"
+              <img ng-src="../images/invoice/invoice-{{ phoneNumber.typeNumber.toLowerCase() }}.png" width="12"
                    height="12"
                    alt="P">
               {{ phoneNumber.number }}
@@ -244,7 +244,7 @@
 
           <div class="email">
             <div class="name">{{ currentInvoice.senderUser.firstName }} {{ currentInvoice.senderUser.lastName }}</div>
-            <div class="em"><img src="/images/invoice/invoice-mail.png" width="12" height="12" alt="@">
+            <div class="em"><img src="../images/invoice/invoice-mail.png" width="12" height="12" alt="@">
               {{ currentInvoice.senderUser.primaryEmail }}
             </div>
           </div>

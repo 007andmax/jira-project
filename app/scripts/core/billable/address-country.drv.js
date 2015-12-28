@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.billable").directive("addressFilter",
+  angular.module("quicktech.core.billable").directive("addressCountry",
     [function () {
       return {
         restrict: 'A',
@@ -27,7 +27,7 @@
             var regLastComma = /,(?=[^,]*$)/,
               addressArray = address.split(regLastComma);
 
-            element.html(addressArray[0] + '<br/>' + addressArray[1])
+            element.html(addressArray[0] + ',' + '<br/>' + addressArray[1])
 
           }
 

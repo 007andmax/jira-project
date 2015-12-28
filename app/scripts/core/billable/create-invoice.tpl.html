@@ -11,22 +11,26 @@
     <div class="dropdown pull-left company-dropdown">
 
       <h4 class="inv-company-name" data-toggle="dropdown">
-        {{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.companyInfo.name }}
+        <span>{{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.companyInfo.name }}</span>
         <span>Invoice No. {{ invoiceNumber }} </span>
         <i class="icn icn-caret-gray"></i>
       </h4>
 
-      <ul class="dropdown-menu custom-scroll">
-        <li role="presentation" ng-repeat="invoiceLock in invoiceLocks">
+      <div class="dropdown-menu">
+        <div class="nano" >
+          <ul class="nano-content custom-scroll">
 
-          <a role="menuitem" tabindex="-1" href="javascript:void(0)"
-             ng-click="setShowInvoiceLockIndex($index)">
-            <span class="title">{{ invoiceLock.invoiceDataDto.company.companyInfo.name }}</span>
-            <span class="pull-right total-count">{{ invoiceLock.invoiceDataDto.sum | currency:$:0 }} USD</span>
-          </a>
+            <li role="presentation" ng-repeat="invoiceLock in invoiceLocks">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="active"
+                 ng-click="setShowInvoiceLockIndex($index)">
+                <span class="title active">{{ invoiceLock.invoiceDataDto.company.companyInfo.name }}</span>
+                <span class="pull-right total-count">{{ invoiceLock.invoiceDataDto.sum | currency:$:0 }} USD</span>
+              </a>
+            </li>
 
-        </li>
-      </ul>
+          </ul>
+        </div>
+      </div>
 
     </div>
 
