@@ -214,10 +214,10 @@
           <img src="../images/invoice/invoice-plus.png" width="20" height="20" alt="+">
         </div>
 
-        <div class="update" ng-repeat="taxRate in currentInvoice.taxRates">
-          <h4>{{ taxRate.code }}</h4>
+        <div class="update">
+          <h4>TAX</h4>
 
-          <div class="amount">{{ taxRate.sum | currency: '$':0 }}</div>
+          <div class="amount">{{ currentInvoice.taxRatesSum | currency: '$':0 }}</div>
         </div>
 
         <div class="amount-due">Amount Due <span class="amount">{{ currentInvoice.sum | currency: '$':0 }} USD</span>
