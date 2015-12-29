@@ -1,5 +1,5 @@
 <div class="inv-modal" ng-if="locksInitialized" invoice-modal-window
-     style="background-color: rgba(241,245,250, 0.3);">
+     style="background-color: rgba(241,245,250, 0.18);">
 
   <div class="expires-in" ng-show="showTimer">
     <strong>{{ invoiceTimer | invoiceTimeFilter }}</strong>
@@ -16,9 +16,9 @@
         <i class="icn icn-caret-gray"></i>
       </h4>
 
-      <div class="dropdown-menu">
-        <div class="nano" >
-          <ul class="nano-content custom-scroll">
+      <div class="dropdown-menu custom-scroll">
+        <div class="nano" ng-style="{'height': invoiceLocks.length > 5 ? '170px' : ((+invoiceLocks.length * 30) + 20) + 'px'}">
+          <ul class="nano-content">
 
             <li role="presentation" ng-repeat="invoiceLock in invoiceLocks">
               <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="active"
