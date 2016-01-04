@@ -65,7 +65,10 @@
               ng-repeat="billableCompany in billableCompanies | orderBy:'-ticketsCount'"
               show-model-element="{{ 'showCompany-' + company.id }}">
 
-            <div class="col-1" ng-click="toggleBillableTickets()">
+            <div ng-click="toggleBillableTickets()"
+                 style="position: absolute;width: 100%;height: 100%;top: 0;z-index: 5;"></div>
+
+            <div class="col-1">
 
               <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
                  ng-show="ifCompanyLocked()">
