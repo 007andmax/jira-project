@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.createInvoiceCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', '$modalInstance',
-      function ($scope, BillableService, CompaniesService, $modalInstance) {
+    ['$scope', 'BillableService', 'CompaniesService', '$modalInstance', 'Downloader',
+      function ($scope, BillableService, CompaniesService, $modalInstance, Downloader) {
 
         var locksCount = 0;
 
@@ -84,6 +84,15 @@
             currentContactAddress = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId,
             wnd = window.open('/invoice/show/lock/' + lockId + '/pdf?isEditable=true&shipTo=' + currentAddressId + '&billTo=' + currentContactAddress);
           wnd.print();
+        };
+
+        $scope.download = function () {
+          var lockId = $scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId,
+            currentAddressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId,
+            currentContactAddress = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
+
+          Downloader.downloadByUrl('/invoice/show/lock/' + lockId + '/pdf?isEditable=true&shipTo=' + currentAddressId + '&billTo=' + currentContactAddress)
+
         };
 
         $scope.createInvoice = function (lock) {

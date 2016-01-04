@@ -17,7 +17,8 @@
       </h4>
 
       <div class="dropdown-menu custom-scroll">
-        <div class="nano" ng-style="{'height': invoiceLocks.length > 5 ? '170px' : ((+invoiceLocks.length * 30) + 20) + 'px'}">
+        <div class="nano"
+             ng-style="{'height': invoiceLocks.length > 5 ? '170px' : ((+invoiceLocks.length * 30) + 20) + 'px'}">
           <ul class="nano-content">
 
             <li role="presentation" ng-repeat="invoiceLock in invoiceLocks">
@@ -53,6 +54,11 @@
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Print">
         <i class="icn icn-print"></i>
+      </div>
+
+      <div style="margin-left: 10px;" class="btn btn-default pull-left" ng-click="download()"
+           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Download">
+        <i class="icn icn-download"></i>
       </div>
 
       <div style="width: 92px;margin-left: 10px;" class="btn btn-info pull-left"
