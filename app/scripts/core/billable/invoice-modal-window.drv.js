@@ -20,6 +20,7 @@
 
           $('html').css('overflow-y', 'hidden');
           centering();
+          $('.modal-backdrop.in').css({background: 'none'});
 
           element.find('.nano').nanoScroller();
 
