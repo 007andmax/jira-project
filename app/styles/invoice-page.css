@@ -78,6 +78,12 @@
   margin-right: 10px;
 }
 
+.invoice-page .sub-header .billed .company-name, .invoice-page .sub-header .shipto .company-name, .invoice-page .sub-header .billed .number, .invoice-page .sub-header .shipto .number, .invoice-page .sub-header .billed .email, .invoice-page .sub-header .shipto .email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 .invoice-page .sub-header .heading {
   border-bottom: 1px solid #f1f5fa;
