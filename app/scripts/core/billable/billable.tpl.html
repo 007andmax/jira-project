@@ -62,63 +62,66 @@
           <li class="billable-main"
               event-toggle-slider="toggleBillableTickets"
               ng-controller="quicktech.core.billable.companyCtrl"
-              ng-repeat="billableCompany in billableCompanies | orderBy:'-ticketsCount'"
-              show-model-element="{{ 'showCompany-' + company.id }}">
+              ng-repeat="billableCompany in billableData | filterBillableCompany: true"
+              show-model-element="{{ 'showCompany-' + billableCompany.companyId }}">
 
             <div ng-click="toggleBillableTickets()"
-                 style="position: absolute;width: 100%;height: 100%;top: 0;z-index: 5;"></div>
+                 style="position: absolute;width: 100%;height: 70px;top: 0;z-index: 1;"></div>
 
             <div class="col-1">
 
               <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
-                 ng-show="ifCompanyLocked()">
+                 ng-show="billableCompany.lockType === 'ALL'">
                 <i class="icn-sm icn-locked"></i>
               </a>
 
-              <label class="control checkbox pull-left" ng-hide="ifCompanyLocked()" stop-propagation="click">
+              <label ng-hide="billableCompany.lockType === 'ALL'" class="control checkbox pull-left" ng-hide="ifCompanyLocked()"
+                     stop-propagation="click" style="z-index: 2;">
                 <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
-                       ng-click="changeCompanyCheckbox(company.id)">
+                       ng-click="changeCompanyCheckbox(billableCompany.companyId)">
                 <span class="control-indicator"></span>
               </label>
 
               <div class="checkbox-caption">{{ company.name }}</div>
-              <span class="label label-light">{{ billableCompany.ticketsCount }}</span>
+              <span class="label label-light">{{ billableCompany.tickets.length }}</span>
             </div>
 
             <div class="col-2" ng-click="toggleBillableTickets()">
-              <div class="billable-amount">{{ billableCompany.total | currency: '$': 0 }}</div>
+              <div class="billable-amount">{{ billableCompany.totalSum | currency: '$': 0 }}</div>
             </div>
 
             <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets"
                 ng-controller="quicktech.core.billable.companyTicketsCtrl">
 
               <li class="inventry-details"
-                  ng-repeat="ticket in companyBillableTickets | orderBy:'closedAt'" qt-toggle-slider
+                  ng-repeat="ticket in billableCompany.tickets | orderBy:'sum'" qt-toggle-slider
                   show-model-element="{{ 'showTicket-' + ticket.id }}">
 
-                <div class="col-1" qt-ts-toggler>
+                <div qt-ts-toggler style="position: absolute;height: 70px;width: 100%;top: 0px;left: 30px; z-index: 5"></div>
+
+                <div class="col-1">
                   <div class="clearfix">
 
                     <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left"
-                       ng-show="disabledTicket(ticket.id)" stop-propagation="click"
-                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="Eric Hoffman">
+                       ng-if="ticket.lockedBy" stop-propagation="click"
+                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="{{ getTooltipName(ticket.lockedBy.id) }}">
                       <i class="icn-sm icn-locked-blue"></i>
                     </a>
 
                     <label class="control checkbox pull-left"
-                           ng-hide="disabledTicket(ticket.id)" stop-propagation="click">
+                           ng-hide="ticket.lockedBy" stop-propagation="click">
                       <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
-                             ng-change="changeTicketCheckbox(billableCompany)">
+                             ng-change="changeTicketCheckbox(billableCompany.companyId)">
                       <span class="control-indicator"></span>
                     </label>
 
                     <div class="checkbox-caption">{{ ticket.subject }}</div>
-                    <span class="label label-primary">Tkt# {{ ticket.number }}</span>
+                    <span class="label label-primary">Tkt# {{ ticket.ticketNumber }}</span>
                   </div>
                 </div>
 
-                <div class="col-2" qt-ts-toggler>
-                  <div class="billable-amount">{{ totalTicketSum[ticket.id] | currency: '$': 0}}</div>
+                <div class="col-2">
+                  <div class="billable-amount">{{ ticket.sum | currency: '$': 0}}</div>
                 </div>
 
                 <div class="table-wrapper clearfix" qt-ts-slider style="display: none;">

@@ -3,74 +3,53 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.companyTicketsCtrl',
-    ['$scope', 'BillableService', '$timeout',
-      function ($scope, BillableService, $timeout) {
+    ['$scope', 'BillableService', '$timeout', 'UsersService',
+      function ($scope, BillableService, $timeout, UsersService) {
 
-        $scope.companyBillableTickets = BillableService.getCompanyBillableTickets($scope.billableCompany.company.id, $scope, function () {
+        $scope.$emit('toggleBillableTickets');
 
-          $scope.$emit('toggleBillableTickets');
+        var companyTicketSelection = $scope.ticketsSelection[$scope.billableCompany.companyId];
 
-          var companyTicketSelection = $scope.ticketsSelection[$scope.billableCompany.company.id];
+        if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
+          $scope.ticketsSelection[$scope.billableCompany.companyId].tickets = {};
+          setTicketsCheckboxes(true);
+        } else if (companyTicketSelection === undefined) {
+          $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
+          setTicketsCheckboxes(false);
+        }
 
-          if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
-            $scope.ticketsSelection[$scope.billableCompany.company.id].tickets = {};
-            setTicketsCheckboxes(true);
-          } else if (companyTicketSelection === undefined) {
-            $scope.ticketsSelection[$scope.billableCompany.company.id] = {tickets: {}};
-            setTicketsCheckboxes(false);
-          }
+        $scope.$watch('highlightProductId', function (idTicket) {
+          if (idTicket) {
 
-          $scope.$watch('companyBillableTickets.length', function () {
-            $scope.totalTicketSum = {};
-            for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
-
-              var productExpenses = $scope.companyBillableTickets[i].productExpenses,
-                serviceExpenses = $scope.companyBillableTickets[i].serviceExpenses,
-                ticketId = $scope.companyBillableTickets[i].id;
-
-              $scope.totalTicketSum[ticketId] = calculateTotalTicketSum(productExpenses) + calculateTotalTicketSum(serviceExpenses);
-            }
-          });
-
-          $scope.$watch('highlightProductId', function (idTicket) {
-            if (idTicket) {
-
+            $timeout(function () {
               $scope.$broadcast('showTicket-' + idTicket);
+            }, 100);
 
-              $timeout(function () {
-                $scope.setHighlightTicketId();
-              }, 3000)
-            }
-          })
-
+            $timeout(function () {
+              $scope.setHighlightTicketId();
+            }, 3000)
+          }
         });
 
         function setTicketsCheckboxes(val) {
 
-          var companyId = $scope.billableCompany.company.id;
+          var companyId = $scope.billableCompany.companyId;
 
           $scope.ticketsSelection[companyId].tickets = {};
 
-          for (var i = 0; i < $scope.companyBillableTickets.length; i++) {
-            var ticketId = $scope.companyBillableTickets[i].id;
+          for (var i = 0; i < $scope.billableCompany.tickets.length; i++) {
+            var ticketId = $scope.billableCompany.tickets[i].id;
             $scope.ticketsSelection[companyId].tickets[ticketId] = val && !($scope.lockedTicketIds.indexOf(ticketId) >= 0);
           }
         }
 
-        function calculateTotalTicketSum(calculateArray) {
-
-          var totalTicketSum = 0;
-
-          for (var j = 0; j < calculateArray.length; j++) {
-            totalTicketSum += calculateArray[j].sum;
-          }
-
-          return totalTicketSum;
-
-        }
-
         $scope.disabledTicket = function (ticketId) {
           return $scope.lockedTicketIds.indexOf(ticketId) >= 0;
+        };
+
+        $scope.getTooltipName = function(userId){
+          var user = UsersService.getOneById(userId);
+          return $scope.getUserName(user);
         }
 
       }]);

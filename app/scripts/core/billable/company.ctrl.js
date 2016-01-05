@@ -6,12 +6,7 @@
     ['$scope', 'BillableService', 'CompaniesService', '$timeout', 'quicktech.common.services.SharedStateService',
       function ($scope, BillableService, CompaniesService, $timeout, SharedStateService) {
 
-        $scope.company = CompaniesService.getOneById($scope.billableCompany.company.id);
-
-        $scope.ifCompanyLocked = function(){
-          //TODO get from service
-          return false;
-        };
+        $scope.company = CompaniesService.getOneById($scope.billableCompany.companyId);
 
         $scope.toggleBillableTickets = function () {
 
@@ -30,11 +25,11 @@
           $scope.highlightProductId = ticketId;
         };
 
-        $scope.$on($scope.company.id + '-showCompany', function (event, companyId) {
+        $scope.$on($scope.billableCompany.companyId + '-showCompany', function (event, companyId) {
           $scope.$broadcast('showCompany-' + companyId);
         });
 
-        $scope.$on($scope.company.id + '-showTicket', function (event, ticketId) {
+        $scope.$on($scope.billableCompany.companyId + '-showTicket', function (event, ticketId) {
           if (!$scope.showTickets) {
             $scope.toggleBillableTickets();
           }

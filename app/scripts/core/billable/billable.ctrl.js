@@ -14,6 +14,23 @@
 
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
+        $scope.billableData  = BillableService.getBillablePageDto($scope, function(){
+          console.log($scope.billableData);
+
+          var companies = [];
+          $scope.totalbillables = 0;
+
+          for (var companyId in $scope.billableData) {
+
+            var company = CompaniesService.getOneById(companyId);
+            $scope.totalbillables += $scope.billableData[companyId].totalSum || 0;
+
+            companies.push(company);
+          }
+
+          headerSharedState.companies = companies;
+        });
+
         $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
 
           if ($scope.billableChartData.length < 30) {
@@ -43,24 +60,6 @@
           }
         });
 
-        $scope.billableCompanies = BillableService.getBillableCompanies($scope, function () {
-          $scope.$watch('billableCompanies', function () {
-            var companies = [];
-            $scope.totalbillables = 0;
-
-            for (var i = 0; i < $scope.billableCompanies.length; i++) {
-
-              var companyTotal = $scope.billableCompanies[i],
-                company = CompaniesService.getOneById(companyTotal.company.id);
-
-              $scope.totalbillables += companyTotal.total;
-              companies.push(company);
-            }
-
-            headerSharedState.companies = companies;
-          }, true)
-        });
-
         $scope.changeCompanyCheckbox = function (companyId) {
 
           var ticketsSelection = $scope.ticketsSelection[companyId];
@@ -73,10 +72,10 @@
 
         };
 
-        $scope.changeTicketCheckbox = function (billabledCompany) {
+        $scope.changeTicketCheckbox = function (companyId) {
 
           var countObj = 0,
-            ticketsSelectionCompany = $scope.ticketsSelection[billabledCompany.company.id];
+            ticketsSelectionCompany = $scope.ticketsSelection[companyId];
 
           for (var ticketId in (ticketsSelectionCompany.tickets)) {
             if (ticketsSelectionCompany.tickets[ticketId]) {
@@ -84,7 +83,7 @@
             }
           }
 
-          ticketsSelectionCompany.checked = (billabledCompany.ticketsCount === countObj);
+          ticketsSelectionCompany.checked = ($scope.billableData[companyId].tickets.length === countObj);
         };
 
         $scope.$watch('ticketsSelection', function () {
@@ -111,6 +110,7 @@
             for (var ticketId in  tickets) {
               if (tickets[ticketId] && $scope.lockedTicketIds.indexOf(ticketId) > -1) {
                 tickets[ticketId] = false;
+                $scope.changeTicketCheckbox(companyId)
               }
             }
           }
