@@ -74,7 +74,8 @@ var scroll;
 
 
 
-        that.newCompanyServices = JSON.parse(JSON.stringify(that.options.companyServices));
+        //that.newCompanyServices = JSON.parse(JSON.stringify(that.options.companyServices));
+        that.newCompanyServices = {};
         that.newCompanyServiceStatus = {};
         $.each(that.newCompanyServices, function(key, value){
             that.newCompanyServiceStatus[key] = false;
@@ -120,53 +121,8 @@ var scroll;
     ServicesMoving.prototype = {
         initialize: function() {
             var that = this;
-          //   that.container = $('<div class="dropdown-menu assign-ticket-menu"> \
-          //     <div class=" assign-ticket service-move-to-menu"> \
-          //       <div class="assign-ticket-content"> \
-          //         <div class="assign-ticket-header"> \
-          //           <div class="clearfix"> \
-          //             <div class="form-group"> \
-          //               <input id="searchCompany" type="email" class="form-control form-control-search form-control-dropdown-input" placeholder="Search company..."> \
-          //             </div> \
-          //           </div> \
-          //         </div> \
-          //         <div class="list-container"> \
-          //             <div class="nano"> \
-          //               <div class="nano-content"> \
-          //                 <ul class="users-list"></ul> \
-          //               </div> \
-          //             </div> \
-          //         </div> \
-          //         <div class="form-group btm-btn"> \
-          //           <button type="button" class="disabled btn btn-scooter">Move</button> \
-          //         </div> \
-          //       </div> \
-          //     </div> \
-          //   </div> \
-          // </div>').insertAfter(that.buttonElement);
-            that.container = $('<div class="dropdown-menu dropdown-menu-right checkbox-dropdown"> \
-                  <div role="presentation" class="checkbox-dropdown-header"> \
-                      <div class="form-group"> \
-                          <input type="email" class="form-control-filter" placeholder="Search company..."> \
-                          <i class="icn-sm icn-search-input" tabindex="-1"></i> \
-                      </div> \
-                  </div> \
-                  <div class="list-container"> \
-                      <div class="nano"> \
-                        <div class="nano-content"> \
-                            <div class="checkbox-dd-list"> \
-                            </div> \
-                        </div> \
-                      </div> \
-                  </div> \
-                  <div role="presentation" class="checkbox-dropdown-footer clearfix"> \
-                      <div class="number-selected pull-left"><i class="pull-left icn-sm icn-tick-blue"></i><strong>3</strong> selected</div> \
-                      <div class="btn btn-info btn-lg pull-right disabled">Move</div> \
-                  </div> \
-              </div>').insertAfter(that.buttonElement);
 
-
-                
+            that.container      = that.buttonElement.next('div.checkbox-dropdown');
             that.searchElement  = that.container.find('input');
             that.moveElement    = that.container.find('div.btn');
             that.currentSearch  = that.searchElement.val();
@@ -178,18 +134,6 @@ var scroll;
 
             that.refresh();
 
-            that.buttonElement.on('click.servicesmoving', function(e){
-
-                if(!that.buttonElement.hasClass('disabled')) {
-                    that.buttonElementParent.toggleClass('open');
-                    that.suggest();
-                }
-            });
-
-            that.buttonElementParent.on('click.servicesmoving', function(e){
-                e.stopPropagation();
-            })
-
             that.listContainer.on('mousemove.servicesmoving', '.'+that.classes.suggestion, function () {
                 // if( that.disableMouseHover ) {
                 //     that.disableMouseHover = false;
@@ -200,10 +144,11 @@ var scroll;
             });
             
             that.container.on('click.servicesmoving', '.'+that.classes.suggestion, function(e){ that.onClick(e) });
-            $(document).on('click.servicesmoving', function(){that.buttonElementParent.removeClass('open');});
             that.searchElement.on('keyup.servicesmoving', function (e) { that.onKeyUp(e); });
             that.searchElement.on('keydown.servicesmoving', function (e) { that.onKeyPress(e); });
             that.moveElement.on('click.servicesmoving', function(e){ that.onMove(e)});
+
+            that.suggest();
         },
 
         onKeyUp: function (e) {
@@ -231,30 +176,6 @@ var scroll;
             // }, 200);
 
             switch (e.which) {
-                // case keys.ESC:
-                //     that.el.val(that.lastSelection).blur();
-                //     that.hide();
-                //     break;
-                // case keys.RIGHT:
-                //     if (that.hint && that.options.onHint && that.isCursorAtEnd()) {
-                //         that.selectHint();
-                //         break;
-                //     }
-                //     return;
-                // case keys.TAB:
-                //     if (that.hint && that.options.onHint) {
-                //         that.selectHint();
-                //         return;
-                //     }
-                //     if (that.selectedIndex === -1) {
-                //         that.hide();
-                //         return;
-                //     }
-                //     that.select(that.selectedIndex);
-                //     if (that.options.tabDisabled === false) {
-                //         return;
-                //     }
-                //     break;
                 case keys.RETURN:
                     if (that.selectedIndex !== -1) {
                         that.activate(that.selectedIndex).click();
@@ -365,37 +286,7 @@ var scroll;
             that.adjustScroll(that.selectedIndex + 1);
         },
 
-        adjustScroll2: function (index) {
-            var that = this,
-                activeItem;
-            
-            activeItem = that.activate(index);
-
-            if (!activeItem) {
-                return;
-            }
-
-            var offsetTop,
-                upperBound,
-                lowerBound,
-                heightDelta = $(activeItem).outerHeight();
-
-            offsetTop = activeItem.offsetTop;
-            upperBound = that.container.find('.nano-content').scrollTop();
-            lowerBound = upperBound + that.options.maxHeight - heightDelta;
-
-            if (offsetTop < upperBound) {
-                that.scrollElement.nanoScroller({ scrollTop: offsetTop , flash: true});
-                that.scrollElement.nanoScroller({flash: true});
-
-            } else if (offsetTop > lowerBound) {
-                that.scrollElement.nanoScroller({ scrollTop: offsetTop - that.options.maxHeight + heightDelta,flash: true});
-                that.scrollElement.nanoScroller({flash: true});
-            }
-        },
-
         adjustScroll: function (index, animate) {
-            console.log(index, animate);
             var that = this,
                 activeItem;
 
@@ -521,7 +412,7 @@ var scroll;
                 checkboxIntermediateHtml = '';
 
                 if( company.id in that.options.companyServices ) {
-                    $.each(that.options.companyServices[company.id], function(companyService){
+                    $.each(that.options.companyServices[company.id], function(index, companyService){
                         if( that.options.selectedServices.indexOf( companyService ) ) {
                             associationCount++;
                         }
@@ -581,6 +472,7 @@ var scroll;
                 }
 
                 suggestionsHTML += listItemHTML;
+                that.searchElement.focus();
             });
 
             that.countElement.html(checkedCount);
