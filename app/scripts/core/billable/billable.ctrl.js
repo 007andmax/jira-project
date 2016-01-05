@@ -15,7 +15,6 @@
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
         $scope.billableData  = BillableService.getBillablePageDto($scope, function(){
-          console.log($scope.billableData);
 
           var companies = [];
           $scope.totalbillables = 0;
