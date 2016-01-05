@@ -230,10 +230,6 @@
     };
 
     Autocomplete.isElementInViewport = function(element) {
-        // console.log($(element).parents('.nano')[0].scrollHeight);
-        // console.log(element.scrollWidth);
-
-
         if (element.offsetHeight < element.scrollHeight ||
             element.offsetWidth < element.scrollWidth) {
 
@@ -306,8 +302,6 @@
                 if( $(this).data('index') == that.lastHoveredIndex) {
                     return;
                 }
-
-                console.log("Mouse Move");
 
                 if( that.disableMouseHover ) {
                     that.disableMouseHover = false;
@@ -985,7 +979,6 @@
                 } else {
                     container.css('height', that.options.maxHeight);
                 }
-                console.log('setting height');
                 that.scrollElement = container.find("."+that.classes.nano).nanoScroller({flashDelay: 1000, tabIndex: -1});
             }
 
@@ -1199,7 +1192,6 @@
         },
 
         adjustScroll: function (index, activate, animate) {
-            // console.log(index, activate);
             var that = this,
                 activeItem;
 
@@ -1225,26 +1217,18 @@
                 lowerBound,
                 heightDelta = $(activeItem).outerHeight();
 
-            // console.log("Max Height: ", that.options.maxHeight);
-            // console.log("Entry Height: ", heightDelta);
-            // console.log("Offset Top: ", activeItem.offsetTop);
-            // console.log("Upper Bound: ", $(that.suggestionsContainer).find('.'+that.classes.nanoContent).scrollTop());
-
             offsetTop = activeItem.offsetTop;
-
-            //console.log(parseInt($(activeItem).css('marginTop')) , parseInt($(activeItem).css('marginBottom')));
-
 
             if (that.options.useCustomScroller) {
                 upperBound = $(that.suggestionsContainer).find('.'+that.classes.nanoContent).scrollTop();
             } else {
                 upperBound = $(that.suggestionsContainer).scrollTop();
             }
-            // console.log(that.scrollElement);
+
             lowerBound = upperBound + that.options.maxHeight - heightDelta;
 
             if ((offsetTop+that.options.listPaddingTop) < (upperBound+20)) {
-                // console.log('case 1');
+
                 offsetTop -= that.options.listPaddingTop;
                 if (that.options.useCustomScroller) {
                     if( animate ) {
@@ -1261,7 +1245,7 @@
                 }
 
             } else if ((offsetTop+that.options.listPaddingBottom) > lowerBound) {
-                // console.log('case 2');
+
                 offsetTop += that.options.listPaddingTop;
                 if (that.options.useCustomScroller) {
                     if(animate) {
@@ -1344,7 +1328,7 @@
             $(that.suggestionsContainer).remove();
         },
 
-        resetSelection: function() {console.log('reset');
+        resetSelection: function() {
             var that = this;
             that.lastHoveredIndex = -1;
             that.lastSelectedIndex = -1;
@@ -1378,7 +1362,6 @@
                 if (instance && instance.dispose) {
                     instance.dispose();
                 }
-                console.log("creating new instance");
                 instance = new Autocomplete(this, options);
                 inputElement.data(dataKey, instance);
             }
