@@ -94,7 +94,7 @@
         </li>
 
         <li style="cursor: not-allowed">
-          <a class="disabled" href="javascript:void(0)">
+          <a href="javascript:void(0)" ui-sref="devices">
             <i class="nav-icon icn-lg icn-devices"></i> Devices
           </a>
         </li>
@@ -110,19 +110,19 @@
     </nav>
 
     <div class="clearfix divider"></div>
-    <div class="nav-title">Accounts</div>
+    <div class="nav-title" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Accounts</div>
 
-    <nav class="clearfix">
+    <nav class="clearfix"ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
       <ul class="nav">
 
-        <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+        <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="accounting">
             <i class="nav-icon icn-billable icn-lg"></i> Billable
             <span class="badge">{{ ticketCounts.BILLABLE }}</span>
           </a>
         </li>
 
-        <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+        <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="receivable({mode: 'group-by-company'})">
             <i class="nav-icon icn-receivable icn-lg"></i> Receivable
             <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
@@ -133,7 +133,7 @@
          <a href="javascript:void(0)"> <i class="nav-icon  icn-product-services icn-lg no-icon"></i> Products &amp; Services</a>
        </li>  -->
 
-        <li ui-sref-active="active" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+        <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="receipt-archive({mode: 'group-by-company'})">
             <i class="nav-icon icn-receipt-archive icn-lg"></i> Receipt Archive
           </a>
