@@ -9,6 +9,15 @@
           $scope.isValidNewExpenseOrNote = false;
           $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.company.id);
 
+          $scope.autocompleteServiceList = [];
+          $scope.$watch('serviceList.length', function () {
+            if( $scope.serviceList.length ) {
+              for (var i = 0; i < $scope.serviceList.length; i++) {
+                $scope.autocompleteServiceList.push({'value': $scope.serviceList[i].name, 'data':$scope.serviceList[i]});
+              }
+            }
+          });
+
           setTicketUpdateToDefault();
 
           function setTicketUpdateToDefault() {

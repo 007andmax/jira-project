@@ -1,0 +1,45 @@
+/*Service List for Ticket Update*/
+
+.service-list-container .dropdown-menu {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+
+.dropdown-company{
+  min-width: 100%;
+  max-width: none;
+}
+.company-item a{
+    display: block;
+    padding: 5px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 20px;
+    color: #4c5c6f;
+    white-space: nowrap;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@-moz-document url-prefix() {
+  .company-item a {
+    line-height: 19px;
+    padding: 5px 20px 6px;
+  }
+}
+.company-item.active{
+    background-color: #e7ecf2;
+    cursor: pointer;
+    text-decoration:
+}
+
+.company-item.selected{
+    background-color: #e2f1fd;
+    cursor: pointer;
+    text-decoration:
+}
+
+/*Users in Sidebar */
+
+
