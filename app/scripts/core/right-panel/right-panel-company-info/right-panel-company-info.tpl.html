@@ -289,11 +289,10 @@
         <span class="total">{{ companyGroupedData.users.length }}</span>
       </div>
 
-      <ul class="general-users">
+      <ul class="general-users" custom-selection>
         <li class="list-users" ng-class="{'checked': selectedUsers[user.id]}" custom-popover-menu
-            popover-trigger="notSpecified" custom-popover-menu-margin-top="-32px"
-            popover-template="'/html/scripts/core/right-panel/custom-popover.tpl.html'"
-            popover-append-to-body="true" popover-is-open="popoverIsOpen" popover-placement="bottom"
+            custom-popover-menu-margin-top="-32px"
+            custom-popover-template="/html/scripts/core/right-panel/custom-popover.tpl.html"
             ng-repeat="user in companyGroupedData.users | filter: usersFilter">
 
           <a href="javascript:void(0)" class="pull-left avatar">
