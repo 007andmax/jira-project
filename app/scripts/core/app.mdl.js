@@ -20,6 +20,7 @@
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
+      'quicktech.core.devices',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -153,6 +154,16 @@
         url: '/emailTemplates',
         templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
         controller: 'quicktech.core.settings.emailTemplatesCtrl'
+      }))
+      .state('devices', waitForServices({
+        url: '/devices',
+        templateUrl: '/html/scripts/core/devices/devices.tpl.html',
+        controller: 'quicktech.core.devices.devicesCtrl'
+      }))
+      .state('companyDevices', waitForServices({
+        url: '/companyDevices/:companyId',
+        templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
+        controller: 'quicktech.core.devices.companyDevicesCtrl'
       }));
 
     function waitForServices(conf) {

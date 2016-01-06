@@ -41,7 +41,7 @@
 
                 if (isFirstShowing) {
                   var leftPosition = parseInt(popover.css('left'));
-                  popover.css({'left': leftPosition + 25 + 'px'});
+                  popover.css({'left': leftPosition + +attrs.customPopoverFirstLeft + 'px'});
                   isFirstShowing = false;
                 }
               }, 0);

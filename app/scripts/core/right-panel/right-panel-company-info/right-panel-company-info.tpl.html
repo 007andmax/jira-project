@@ -52,6 +52,51 @@
 
       </div>
 
+      <div class="download-agent-form" ng-form="downloadAgentForm">
+
+        <div class="sb-heading billing-heading">Agent Settings</div>
+
+        <div class="form-group">
+
+          <input class="form-control" type="search" aria-expanded="true" placeholder="Enter user name"
+                 name="Fill" ng-model="downloadAgentUser.name" ng-required="true">
+
+        </div>
+
+        <div class="form-group">
+
+          <input ng-class="{'hide': showPassword}" class="form-control show-password" type="password"
+                 ng-model="downloadAgentUser.password" name="roll"
+                 placeholder="Enter user password" ng-required="true" autocomplete="new-password">
+
+          <input ng-class="{'hide': !showPassword}" class="form-control show-password" type="text"
+                 ng-model="downloadAgentUser.password" placeholder="Enter user password"
+                 ng-required="true" autocomplete="new-password">
+
+          <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
+             class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
+             ng-click="showPassword = true" tooltip-placement="top"
+             tooltip="Show Password">
+            <i class="icn-sm icn-hide-password"></i>
+          </a>
+
+          <a ng-class="{'hide': !showPassword}" href="javascript:void(0)"
+             class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
+             ng-click="showPassword = false" tooltip-placement="top" tooltip="Hide Password"
+             style="position: absolute;right: 12px;">
+            <i class="icn-sm icn-show-password"></i>
+          </a>
+
+        </div>
+
+        <div class="btn btn-lg btn-info download-agent-btn"
+             custom-disabled="{{ downloadAgentForm.$invalid }}"
+             ng-click="downloadAgent(downloadAgentForm)">
+          Download Agent
+        </div>
+
+      </div>
+
       <div class="sb-heading billing-heading">Billing Address</div>
 
       <div class="billing-address">

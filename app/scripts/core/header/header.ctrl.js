@@ -33,6 +33,10 @@
             return 'vendors';
           } else if ($state.includes("settings")) {
             return 'settings';
+          } else if ($state.includes("devices")) {
+            return 'devices';
+          } else if ($state.includes("companyDevices")) {
+            return 'company-devices';
           }
         }
 
