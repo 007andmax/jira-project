@@ -2,29 +2,31 @@
 
 (function () {
 
-  angular.module("quicktech.core.billable").filter('filterBillableCompany', function () {
-    return function (items, reverse) {
+  angular.module("quicktech.core.billable").filter('filterBillableCompany',
+    ['CompaniesService', function (CompaniesService) {
+      return function (items, reverse) {
 
-      var filtered = [];
+        var filtered = [];
 
-      angular.forEach(items, function (item, id) {
-        if (id !== 'staticCopy') {
+        angular.forEach(items, function (item, id) {
+          if (id !== 'staticCopy') {
 
-          item.companyId = id;
-          filtered.push(item);
+            item.companyId = id;
+            filtered.push(item);
 
-        }
-      });
+          }
+        });
 
-      filtered.sort(function (a, b) {
-        return (a.tickets.length > b.tickets.length ? 1 : -1);
-      });
+        filtered.sort(function (a, b) {
+          var company = CompaniesService.getOneById(a.companyId);
+          return (a.tickets.length + '-' + company.name > b.tickets.length + '-' + company.name ? 1 : -1);
+        });
 
-      if (reverse) filtered.reverse();
+        if (reverse) filtered.reverse();
 
-      return filtered;
+        return filtered;
 
-    };
-  });
+      };
+    }]);
 })();
 

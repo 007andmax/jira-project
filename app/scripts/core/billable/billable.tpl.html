@@ -36,6 +36,9 @@
            custom-disabled="{{ !countTicket }}"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
            modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+           modal-window-class="invoice-modal-not-background"
+           modal-window-animation="false"
+           modal-backdrop-class="invoice-modal-not-background"
            mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
            mw-controller="quicktech.core.billable.createInvoiceCtrl">
         <i class="icn-sm icn-product-add"></i>

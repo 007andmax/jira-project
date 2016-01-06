@@ -372,6 +372,22 @@ i.off {
   opacity: 0;
 }
 
+.download-agent-form {
+  padding: 30px;
+}
+
+.download-agent-form .download-agent-btn{
+  width: 100%;
+}
+
+aside#right .download-agent-form .sb-heading{
+  padding-left: 0px;
+}
+
+.download-agent-form  a.hide-password-hit.load-agent-password{
+  top: 10px
+}
+
 /*fixed modal window*/
 
 body.modal-open {
@@ -414,5 +430,15 @@ body.modal-open {
 
 .modal-open .tooltip{
   z-index: 112000;
+}
+
+.invoice-modal-not-background{
+  background: none !important;
+}
+
+/*device*/
+
+.dropdown-menu.add-description-form {
+  padding: 25px 30px 30px;
 }
 
