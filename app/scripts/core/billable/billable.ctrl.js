@@ -10,11 +10,9 @@
 
         $scope.ticketsSelection = {};
 
-        $scope.lockedTicketIds = BillableService.getLockedTicketIds($scope);
-
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
-        $scope.billableData  = BillableService.getBillablePageDto($scope, function(respData){
+        $scope.billableData = BillableService.getBillablePageDto($scope, function (respData) {
 
           $scope.billableData = respData;
 
@@ -30,6 +28,24 @@
           }
 
           headerSharedState.companies = companies;
+
+          for (var companyId in $scope.ticketsSelection) {
+
+            var tickets = $scope.ticketsSelection[companyId].tickets;
+
+            for (var ticketId in  tickets) {
+
+              for (var i = 0; i < $scope.billableData[companyId].tickets.length; i++) {
+                if (ticketId === $scope.billableData[companyId].tickets[i].id) {
+                  if ($scope.billableData[companyId].tickets[i].lockedBy) {
+                    tickets[ticketId] = false;
+                  }
+                }
+              }
+
+            }
+          }
+
         });
 
         $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
@@ -67,7 +83,19 @@
 
           if (ticketsSelection.tickets !== undefined) {
             for (var ticketId in ticketsSelection.tickets) {
-              ticketsSelection.tickets[ticketId] = ticketsSelection.checked && !($scope.lockedTicketIds.indexOf(ticketId) >= 0);
+
+              var isticketLocked;
+
+              for (var i = 0; i < $scope.billableData[companyId].tickets.length; i++) {
+                if (ticketId === $scope.billableData[companyId].tickets[i].id) {
+                  if ($scope.billableData[companyId].tickets[i].lockedBy) {
+                    isticketLocked = true;
+                  }
+                  break;
+                }
+              }
+
+              ticketsSelection.tickets[ticketId] = ticketsSelection.checked && !isticketLocked;
             }
           }
 
@@ -97,21 +125,6 @@
                 if ($scope.ticketsSelection[key].tickets[id]) {
                   $scope.countTicket++;
                 }
-              }
-            }
-          }
-        }, true);
-
-        $scope.$watch('lockedTicketIds', function () {
-
-          for (var companyId in $scope.ticketsSelection) {
-
-            var tickets = $scope.ticketsSelection[companyId].tickets;
-
-            for (var ticketId in  tickets) {
-              if (tickets[ticketId] && $scope.lockedTicketIds.indexOf(ticketId) > -1) {
-                tickets[ticketId] = false;
-                $scope.changeTicketCheckbox(companyId)
               }
             }
           }

@@ -39,7 +39,19 @@
 
           for (var i = 0; i < $scope.billableCompany.tickets.length; i++) {
             var ticketId = $scope.billableCompany.tickets[i].id;
-            $scope.ticketsSelection[companyId].tickets[ticketId] = val && !($scope.lockedTicketIds.indexOf(ticketId) >= 0);
+
+            var isticketLocked;
+
+            for(var i = 0; i < $scope.billableData[companyId].tickets.length; i++){
+              if(ticketId === $scope.billableData[companyId].tickets[i].id){
+                if($scope.billableData[companyId].tickets[i].lockedBy){
+                  isticketLocked = true;
+                }
+                break;
+              }
+            }
+
+            $scope.ticketsSelection[companyId].tickets[ticketId] = val && !isticketLocked;
           }
         }
 

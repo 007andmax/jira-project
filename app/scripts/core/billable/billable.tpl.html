@@ -71,11 +71,11 @@
             <div class="col-1">
 
               <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" stop-propagation="click"
-                 ng-show="billableCompany.lockType === 'ALL'">
+                 ng-show="billableCompany.lockType !== 'NONE'">
                 <i class="icn-sm icn-locked"></i>
               </a>
 
-              <label ng-hide="billableCompany.lockType === 'ALL'" class="control checkbox pull-left" ng-hide="ifCompanyLocked()"
+              <label ng-hide="billableCompany.lockType !== 'NONE'" class="control checkbox pull-left" ng-hide="ifCompanyLocked()"
                      stop-propagation="click" style="z-index: 2;">
                 <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
                        ng-click="changeCompanyCheckbox(billableCompany.companyId)">
