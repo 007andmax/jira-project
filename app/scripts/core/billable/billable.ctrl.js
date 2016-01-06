@@ -31,6 +31,11 @@
 
           for (var companyId in $scope.ticketsSelection) {
 
+            if(!$scope.billableData[companyId]){
+              delete $scope.ticketsSelection[companyId];
+              continue;
+            }
+
             var tickets = $scope.ticketsSelection[companyId].tickets;
 
             for (var ticketId in  tickets) {
