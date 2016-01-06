@@ -3,13 +3,21 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsTipsMsgCtrl',
-    ['$scope', 'TicketsService', '$state', '$stateParams', 'quicktech.common.services.UserNotificationService',
-      function ($scope, TicketsService, $state, $stateParams, UserNotificationService) {
+    ['$scope', 'TicketsService', '$state', '$stateParams', 'UsersService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, TicketsService, $state, $stateParams, UsersService, UserNotificationService) {
 
         calculateDays();
 
         $scope.markAsOpen = function () {
-          TicketsService.changeStatus($scope.ticketDetails.id, 'IN_PROGRESS', function () {
+          TicketsService.changeStatus($scope.ticketDetails.id, 'IN_PROGRESS', function (resp) {
+
+            if (resp.code == 403) {
+
+              var user = UsersService.getOneById(resp.message);
+              alert($scope.getUserName(user) + ' locked this ticket to create invoice!');
+              return;
+            }
+
             UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
             $state.go('tickets', {listType: $stateParams.listType});
           });
