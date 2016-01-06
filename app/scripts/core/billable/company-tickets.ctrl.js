@@ -64,6 +64,16 @@
           return $scope.getUserName(user);
         }
 
+        $scope.$watch('billableData[billableCompany.companyId].tickets.length', function(){
+          if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
+            $scope.ticketsSelection[$scope.billableCompany.companyId].tickets = {};
+            setTicketsCheckboxes(true);
+          } else if (companyTicketSelection === undefined) {
+            $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
+            setTicketsCheckboxes(false);
+          }
+        })
+
       }]);
 
 }());
