@@ -7,25 +7,26 @@
 		  	restrict: 'A',
 		  	link: function ($scope, element, attrs) {
           $timeout(function(){
-  		  		var companies = $scope.companies;
+
+            $(element).servicesmoving({
+              minWidth: 260,
+              companies:      $scope.companies,
+              companyServices:  [],
+              selectedServices:   [],
+              onMoveService:    function(newCompanyServices){
+                $scope.moveServices(newCompanyServices);
+              }
+            });
 
             $scope.$watch("companyServices", function(){
               if(!$.isEmptyObject($scope.companyServices)){
-                $(element).servicesmoving({
-                  minWidth: 260,
-                  companies:      $scope.companies,
-                  companyServices:  $scope.companyServices,
-                  selectedServices:   [],
-                  onMoveService:    function(newCompanyServices){
-                    console.log(newCompanyServices);
-                  }
-                });
-
-                $(element).parent().on('shown.bs.dropdown', function(){
-                    $(element).servicesmoving('setSelectedServices', $scope.getCheckedDefaultServices());
-                    $(element).servicesmoving('suggest');
-                }); 
+                $(element).servicesmoving('setCompanyServices', $scope.companyServices);
               }
+            });
+
+            $(element).parent().on('shown.bs.dropdown', function(){
+                $(element).servicesmoving('setSelectedServices', $scope.getCheckedDefaultServices());
+                $(element).servicesmoving('suggest');
             });
           }, 0);
 	  		}

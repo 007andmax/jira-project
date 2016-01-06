@@ -27,6 +27,16 @@ var scroll;
                     div.style.position = 'absolute';
                     div.style.display = 'none';
                     return div;
+                },
+                arrayUnique : function (array) {
+                    var a = array.concat();
+                    for(var i=0; i<a.length; ++i) {
+                        for(var j=i+1; j<a.length; ++j) {
+                            if(a[i] === a[j])
+                                a.splice(j--, 1);
+                        }
+                    }
+                    return a;
                 }
             };
         }()),
@@ -72,14 +82,10 @@ var scroll;
         that.listWidth = 0;
         that.listWidthCalculated = false;
 
-
-
-        //that.newCompanyServices = JSON.parse(JSON.stringify(that.options.companyServices));
         that.newCompanyServices = {};
         that.newCompanyServiceStatus = {};
-        $.each(that.newCompanyServices, function(key, value){
-            that.newCompanyServiceStatus[key] = false;
-        });
+
+        that.checkedCount = 0;
 
         that.initialize();
     }
@@ -151,6 +157,16 @@ var scroll;
             that.suggest();
         },
 
+        updateServices: function(existingServices){
+            return $.ServicesMoving.utils.arrayUnique(existingServices.concat(this.options.selectedServices));
+        },
+
+        updateCheckedCount: function(difference) {
+            var that = this;
+            that.checkedCount = that.checkedCount + difference;
+            that.countElement.html(that.checkedCount);
+        },
+
         onKeyUp: function (e) {
             var that = this;
 
@@ -209,14 +225,16 @@ var scroll;
             // partial => full
             if(listElement.find('.control-indicator').hasClass('alternate')) {
                 listElement.find('.control-indicator').removeClass('alternate');
-                $.extend(that.newCompanyServices[company_id], that.options.selectedServices);
+                that.newCompanyServices[company_id] = that.updateServices(that.options.companyServices[company_id] || [])
+                that.updateCheckedCount(+1)
                 newState = 'full';
 
             } else {
                 // full => empty
                 if( listElement.find('input[type="checkbox"]')[0].checked ) {
                     listElement.find('input[type="checkbox"]')[0].checked = false;
-                    //that.newCompanyServices[company_id] = [];  // hack as per requirement
+                    that.updateCheckedCount(-1)
+                    delete that.newCompanyServices[company_id];
                     //newState = 'empty'; // hack as per requirement
 
                 // empty => partial | full
@@ -225,10 +243,12 @@ var scroll;
 
                     if( listElement.data('state') == 'partial' ) {
                         listElement.find('.control-indicator').addClass('alternate');
+                        delete that.newCompanyServices[company_id];
                         //that.newCompanyServices[company_id] = that.options.companyServices[company_id];  // hack as per requirement
                         //newState = 'partial';  // hack as per requirement
                     } else {
-                        $.extend(that.newCompanyServices[company_id], that.options.selectedServices);
+                        that.newCompanyServices[company_id] = that.updateServices(that.options.companyServices[company_id] || []);
+                        that.updateCheckedCount(+1)
                         newState = 'full';
                     }
                 }
@@ -250,8 +270,6 @@ var scroll;
             } else {
                 that.moveElement.removeClass('disabled');
             }
-            
-            //console.log(listElement.parent().find('.checkbox-dd-item[data-state="full"]').length);
 
             e.stopPropagation();
             e.preventDefault();
@@ -259,6 +277,7 @@ var scroll;
 
         onMove: function() {
             var that = this;
+            that.moveElement.addClass('disabled');
             that.options.onMoveService.call(that.base, that.newCompanyServices);
         },
 
@@ -301,23 +320,12 @@ var scroll;
                 lowerBound,
                 heightDelta = $(activeItem).outerHeight();
 
-            // console.log("Max Height: ", that.options.maxHeight);
-            // console.log("Entry Height: ", heightDelta);
-            // console.log("Offset Top: ", activeItem.offsetTop);
-            // console.log("Upper Bound: ", $(that.suggestionsContainer).find('.'+that.classes.nanoContent).scrollTop());
-
             offsetTop = activeItem.offsetTop;
 
-            //console.log(parseInt($(activeItem).css('marginTop')) , parseInt($(activeItem).css('marginBottom')));
-
-
             upperBound = that.container.find('.nano-content').scrollTop();
-
-            // console.log(that.scrollElement);
             lowerBound = upperBound + that.options.maxHeight - heightDelta;
 
             if ((offsetTop+that.options.listPaddingTop) < (upperBound+20)) {
-                console.log('case 1');
                 offsetTop -= that.options.listPaddingTop;
 
                 if( animate ) {
@@ -331,7 +339,6 @@ var scroll;
                 that.scrollElement.nanoScroller({flash: true});
 
             } else if ((offsetTop+that.options.listPaddingBottom) > lowerBound) {
-                console.log('case 2');
                 offsetTop += that.options.listPaddingTop;
 
                 if(animate) {
@@ -373,8 +380,12 @@ var scroll;
                 that.buttonElement.addClass('disabled');
             } else {
                 that.buttonElement.removeClass('disabled');
+                that.moveElement.addClass('disabled');
                 that.searchElement.val('');
                 that.currentSearch = '';
+                that.newCompanyServices = {};
+                that.newCompanyServiceStatus = {};
+                that.checkedCount = 0;
                 this.getSuggestions();
             }
         },
@@ -413,7 +424,7 @@ var scroll;
 
                 if( company.id in that.options.companyServices ) {
                     $.each(that.options.companyServices[company.id], function(index, companyService){
-                        if( that.options.selectedServices.indexOf( companyService ) ) {
+                        if( that.options.selectedServices.indexOf( companyService ) != -1 ) {
                             associationCount++;
                         }
                     });
@@ -423,11 +434,11 @@ var scroll;
                     checkboxState = 'partial';
                 } else if( associationCount == that.options.selectedServices.length ) {
                     checkboxState = 'full';
+                    checkedCount += 1;
                 }
 
                 if( checkboxState != 'empty') {
                     checkboxCheckedHtml = 'checked';
-                    checkedCount += 1;
                 }
 
                 if( checkboxState == 'partial' ) {
@@ -440,18 +451,6 @@ var scroll;
                 } else if( index == suggestionsCount-1 && that.options.listPaddingBottom ) {
                     listPaddingStyle = 'style="margin-bottom:'+that.options.listPaddingBottom+'px"'
                 }
-
-
-
-                // listItemHTMLforWidth = '<label class="control checkbox pull-left"> \
-                //     <input type="checkbox" '+checkboxCheckedHtml+'><span class="control-indicator '+checkboxIntermediateHtml+'"></span> \
-                //     </label>'+that.options.formatResult(company.name, that.currentSearch);
-
-                // listItemHTML = '<li class="'+that.classes.suggestion+'" data-company-id="'+company.id+'" data-state="'+checkboxState+'" data-index="' + index + '"> \
-                //     <div class="clearfix"> \
-                //     '+listItemHTMLforWidth+' \
-                //     </li>'; 
-
 
                 listItemHTML = '<div '+listPaddingStyle+' class="'+that.classes.suggestion+'" data-company-id="'+company.id+'" data-state="'+checkboxState+'" data-index="' + index + '"> \
                     <label class="control checkbox"> \
@@ -475,10 +474,11 @@ var scroll;
                 that.searchElement.focus();
             });
 
-            that.countElement.html(checkedCount);
+            that.updateCheckedCount(checkedCount);
 
             that.listWidthCalculated = true;
-            //that.listWidth += 10;
+            // Catter extra required when results are bold on search
+            that.listWidth += 10;
 
             that.listContainer.find('.checkbox-dd-list').html(suggestionsHTML)
 
@@ -583,12 +583,14 @@ var scroll;
             this.refresh();
         },
 
+        setCompanyServices: function(companyServices) {
+            this.options.companyServices = companyServices;
+            this.refresh();
+        },
+
         dispose: function () {
             var that = this;
-            that.el.off('.servicesmoving').removeData('servicesmoving');
-            that.disableKillerFn();
-            $(window).off('resize.servicesmoving', that.fixPositionCapture);
-            //**$(that.suggestionsContainer).remove();
+            that.buttonElement.off('.servicesmoving').removeData('servicesmoving');
         }
     };
 
