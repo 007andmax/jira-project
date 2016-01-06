@@ -61,6 +61,7 @@
         </div>
 
         <a href="javascript:void(0)" class="hit-area has-tooltip"
+           ng-show="currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN'"
            ui-sref="editCompany( { companyId: company.id } )"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
           <i class="icn-md icn-edit-tag"></i>
