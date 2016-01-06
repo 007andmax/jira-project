@@ -39,6 +39,7 @@
                 if (ticketId === $scope.billableData[companyId].tickets[i].id) {
                   if ($scope.billableData[companyId].tickets[i].lockedBy) {
                     tickets[ticketId] = false;
+                    $scope.ticketsSelection[companyId].checked = false;
                   }
                 }
               }
