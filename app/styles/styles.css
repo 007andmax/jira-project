@@ -1249,7 +1249,7 @@ hr {
   border: 1px solid #e7ecf2;
   padding: 24px 30px 30px;
 }
-@media only screen and (min-width: 1660px) {
+@media only screen and (min-width: 1500px) {
   .charts-n-graphs-container .devices-chart,
   .charts-n-graphs-container .mng-vs-online-devices-chart {
     width: calc(100% / 2 - 15px);
@@ -1295,7 +1295,7 @@ hr {
   background-color: #f1fbf1;
   border: 1px solid #e1f3e1;
 }
-@media only screen and (min-width: 2100px) {
+@media only screen and (min-width: 1800px) {
   .charts-n-graphs-container .devices-chart {
     width: 36.3%;
     margin: 0;
@@ -1305,7 +1305,7 @@ hr {
     margin: 0 0 0 30px;
   }
   .charts-n-graphs-container .stats-charts {
-    width: 23.4%;
+    width: 22.4%;
     margin-left: 30px;
   }
   .stats-charts .service-time-billed,
