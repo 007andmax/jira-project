@@ -3,26 +3,26 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.companyDevicesCtrl',
-    ['$scope', 'DevicesService', '$stateParams',
-      function ($scope, DevicesService, $stateParams) {
+    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.SharedStateService',
+      function ($scope, DevicesService, $stateParams, SharedStateService) {
 
-        var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN']
+        var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN'],
+          devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
 
-        $scope.companyId = $stateParams.companyId
+        $scope.selectDevices = {};
+        $scope.companyId = $stateParams.companyId;
         $scope.isCollapsedGraph = true;
         $scope.currentOpenTab = tabs[0];
 
-        $scope.agents = DevicesService.getAgents($scope, $scope.companyId, function () {
+        $scope.agents = DevicesService.getAgentsByCompany($scope, $scope.companyId, function () {
           console.log($scope.agents)
-
-          if ($scope.agents && $scope.agents[$stateParams.companyId][0]) {
-            $scope.scanDevices($scope.agents[$stateParams.companyId][0].agentId, false)
-          }
-
         });
 
-        $scope.scanDevices = function (agentId, refresh) {
-          $scope.scanDevices = DevicesService.scanDevices($scope, $scope.companyId, agentId, refresh, function () {
+        $scope.runScanDevices = function (agentId) {
+          $scope.isScanDevicesLoad = true;
+
+          $scope.scanDevices = DevicesService.runScanDevices($scope, $scope.companyId, agentId, function () {
+            $scope.isScanDevicesLoad = false;
             console.log($scope.scanDevices)
           });
         };
@@ -38,6 +38,24 @@
           } else {
             $scope.currentOpenTab = tabName
           }
+        };
+
+        $scope.saveDescription = function (deviceId, description) {
+          if (deviceId && description) {
+            console.log('save ' + description + '; devicesId =  ' + deviceId);
+          }
+        };
+
+        $scope.changeSelectDevices = function(){
+          var selectDevicesIds = [];
+
+          for(var deviceId in $scope.selectDevices){
+            if($scope.selectDevices[deviceId]){
+              selectDevicesIds.push(deviceId)
+            }
+          }
+
+          devicesHeaderState.checkedDevicesId = selectDevicesIds;
         }
 
       }]);

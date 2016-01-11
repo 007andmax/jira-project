@@ -74,17 +74,25 @@
         <!-- <div role="separator" class="divider"></div> -->
         <div class="modify-logon-form">
           <form action="">
+
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Domain/Username">
             </div>
+
             <div class="form-group">
-              <input type="text" class="form-control show-password" placeholder="Password"><a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip" data-placement="top" title="" data-original-title="Hide Password"><i class="icn-sm icn-show-password"></i></a>
+              <input type="text" class="form-control show-password" placeholder="Password">
+              <a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"
+                 data-placement="top" title="" data-original-title="Hide Password">
+                <i class="icn-sm icn-show-password"></i>
+              </a>
             </div>
+
             <div class="qt-form-actions">
               <div class="btn btn-info btn-lg">Reset</div>
               <span>or</span>
               <a href="javascript:void(0)">Verify Password</a>
             </div>
+
           </form>
         </div>
       </div>
@@ -92,146 +100,152 @@
 
     <div class="dropdown pull-right for-network-tab">
 
-      <div class="btn btn-primary has-tooltip" style="margin-left:10px" data-placement="top" title="" data-container="body" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="schedule network scan" data-toggle="dropdown" aria-expanded="false"><i class="icn-sm icn-schedule-scan"></i></div>
+      <!--<div class="btn btn-primary has-tooltip" style="margin-left:10px" -->
+      <!--data-placement="top" title="" data-container="body" -->
+      <!--data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" -->
+      <!--data-original-title="schedule network scan" data-toggle="dropdown" aria-expanded="false">-->
+      <!--<i class="icn-sm icn-schedule-scan"></i>-->
+      <!--</div>-->
 
-      <div class="dropdown-menu dropdown-menu-right dropdown-schedule-scan">
-        <div class="dropdown-header caption-heading clearfix">
-          <span class="pull-left">Schedule Network Scan</span>
-          <div class="checkbox-toggle pull-right">
-            <!-- <div class="device-management">
-                <div class="toggle-indicator"></div>
-            </div> -->
-            <div class="device-management schedule-scan-toggle">
-              <label>
-                <input type="checkbox">
-                <span class="toggle-bg"></span>
-                <span class="toggle-indicator"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <!-- <div role="separator" class="divider"></div> -->
-        <div class="schedule-scan-form">
-          <form action="">
-            <div class="form-row clearfix">
-              <div class="form-group scan-repeat-days">
-                <label class="control-label">repeat day(s)</label>
-                <div class="dropdown">
-                  <input type="text" class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false">
-                  <i class="icn-sm icn-caret-gray"></i>
-                  <ul class="dropdown-menu dropdown-subscribe">
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox" checked="checked">
-                            <span class="control-indicator"></span> Monday
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox">
-                            <span class="control-indicator"></span> Tuesday
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox">
-                            <span class="control-indicator"></span> Wednesday
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox">
-                            <span class="control-indicator"></span> Thursday
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox">
-                            <span class="control-indicator"></span> Friday
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox">
-                            <span class="control-indicator"></span> Saturday
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox">
-                            <span class="control-indicator"></span> Sunday
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                  <div class="default-value">Monday</div>
-                </div>
-              </div>
-              <div class="form-group scan-time">
-                <label class="control-label">time</label>
-                <input type="text" class="form-control" value="03 : 50 PM">
-                <div class="time-navigator">
-                  <a class="hit-area ha-10-8" href="javascript:void(0)"><i class="icn-sm icn-sort-asc"></i></a>
-                  <a class="hit-area ha-10-8" href="javascript:void(0)"><i class="icn-sm icn-sort-des"></i></a>
-                </div>
-              </div>
-            </div>
-            <div class="form-row clearfix">
-              <div class="form-group full-width">
-                <label class="control-label">select network ip range</label>
-                <div class="dropdown">
-                  <input type="text" class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false">
-                  <i class="icn-sm icn-caret-gray"></i>
-                  <div class="default-value">192.168.15.1 <span class="dot-sep"></span> 254</div>
-                  <ul class="dropdown-menu dropdown-menu-right dropdown-ip-range">
-                    <li><a href="javascript:void(0)"><span class="pull-left">192.168.15.1</span> <span class="pull-right text-muted">254</span></a></li>
-                    <li><a href="javascript:void(0)"><span class="pull-left">10.10.200.1</span> <span class="pull-right text-muted">254</span></a></li>
-                    <li><a href="javascript:void(0)"><span class="pull-left">192.168.210.1</span> <span class="pull-right text-muted">31</span></a></li>
-                    <li><a href="javascript:void(0)"><span class="pull-left">192.168.210.32</span> <span class="pull-right text-muted">63</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="form-group clearfix">
-              <label class="control checkbox pull-left">
-                <input type="checkbox">
-                <span class="control-indicator"></span> Enable new device notification
-              </label>
-            </div>
-            <div class="qt-form-actions clearfix">
-              <div class="btn btn-info btn-lg">Save</div>
-              <div class="btn btn-primary btn-lg">Cancel</div>
-            </div>
-          </form>
-        </div>
-      </div>
+      <!--<div class="dropdown-menu dropdown-menu-right dropdown-schedule-scan">-->
+      <!--<div class="dropdown-header caption-heading clearfix">-->
+      <!--<span class="pull-left">Schedule Network Scan</span>-->
+      <!--<div class="checkbox-toggle pull-right">-->
+      <!--&lt;!&ndash; <div class="device-management">-->
+      <!--<div class="toggle-indicator"></div>-->
+      <!--</div> &ndash;&gt;-->
+      <!--<div class="device-management schedule-scan-toggle">-->
+      <!--<label>-->
+      <!--<input type="checkbox">-->
+      <!--<span class="toggle-bg"></span>-->
+      <!--<span class="toggle-indicator"></span>-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash; <div role="separator" class="divider"></div> &ndash;&gt;-->
+      <!--<div class="schedule-scan-form">-->
+      <!--<form action="">-->
+      <!--<div class="form-row clearfix">-->
+      <!--<div class="form-group scan-repeat-days">-->
+      <!--<label class="control-label">repeat day(s)</label>-->
+      <!--<div class="dropdown">-->
+      <!--<input type="text" class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false">-->
+      <!--<i class="icn-sm icn-caret-gray"></i>-->
+      <!--<ul class="dropdown-menu dropdown-subscribe">-->
+      <!--<li>-->
+      <!--<a tabindex="-1" href="javascript:void(0)">-->
+      <!--<div class="clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox" checked="checked">-->
+      <!--<span class="control-indicator"></span> Monday-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a tabindex="-1" href="javascript:void(0)">-->
+      <!--<div class="clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox">-->
+      <!--<span class="control-indicator"></span> Tuesday-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a tabindex="-1" href="javascript:void(0)">-->
+      <!--<div class="clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox">-->
+      <!--<span class="control-indicator"></span> Wednesday-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a tabindex="-1" href="javascript:void(0)">-->
+      <!--<div class="clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox">-->
+      <!--<span class="control-indicator"></span> Thursday-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a tabindex="-1" href="javascript:void(0)">-->
+      <!--<div class="clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox">-->
+      <!--<span class="control-indicator"></span> Friday-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a tabindex="-1" href="javascript:void(0)">-->
+      <!--<div class="clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox">-->
+      <!--<span class="control-indicator"></span> Saturday-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li>-->
+      <!--<a tabindex="-1" href="javascript:void(0)">-->
+      <!--<div class="clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox">-->
+      <!--<span class="control-indicator"></span> Sunday-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--</ul>-->
+      <!--<div class="default-value">Monday</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group scan-time">-->
+      <!--<label class="control-label">time</label>-->
+      <!--<input type="text" class="form-control" value="03 : 50 PM">-->
+      <!--<div class="time-navigator">-->
+      <!--<a class="hit-area ha-10-8" href="javascript:void(0)"><i class="icn-sm icn-sort-asc"></i></a>-->
+      <!--<a class="hit-area ha-10-8" href="javascript:void(0)"><i class="icn-sm icn-sort-des"></i></a>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-row clearfix">-->
+      <!--<div class="form-group full-width">-->
+      <!--<label class="control-label">select network ip range</label>-->
+      <!--<div class="dropdown">-->
+      <!--<input type="text" class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false">-->
+      <!--<i class="icn-sm icn-caret-gray"></i>-->
+      <!--<div class="default-value">192.168.15.1 <span class="dot-sep"></span> 254</div>-->
+      <!--<ul class="dropdown-menu dropdown-menu-right dropdown-ip-range">-->
+      <!--<li><a href="javascript:void(0)"><span class="pull-left">192.168.15.1</span> <span class="pull-right text-muted">254</span></a></li>-->
+      <!--<li><a href="javascript:void(0)"><span class="pull-left">10.10.200.1</span> <span class="pull-right text-muted">254</span></a></li>-->
+      <!--<li><a href="javascript:void(0)"><span class="pull-left">192.168.210.1</span> <span class="pull-right text-muted">31</span></a></li>-->
+      <!--<li><a href="javascript:void(0)"><span class="pull-left">192.168.210.32</span> <span class="pull-right text-muted">63</span></a></li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group clearfix">-->
+      <!--<label class="control checkbox pull-left">-->
+      <!--<input type="checkbox">-->
+      <!--<span class="control-indicator"></span> Enable new device notification-->
+      <!--</label>-->
+      <!--</div>-->
+      <!--<div class="qt-form-actions clearfix">-->
+      <!--<div class="btn btn-info btn-lg">Save</div>-->
+      <!--<div class="btn btn-primary btn-lg">Cancel</div>-->
+      <!--</div>-->
+      <!--</form>-->
+      <!--</div>-->
+      <!--</div>-->
+
     </div>
 
     <div class="dropdown pull-right for-network-tab">
@@ -244,7 +258,7 @@
 
       <ul class="dropdown-menu dropdown-menu-right dropdown-ip-range">
         <li ng-repeat="agent in agents[companyId]">
-          <a href="javascript:void(0)" ng-click="scanDevices(agent.ip, true)">
+          <a href="javascript:void(0)" ng-click="runScanDevices(agent.agentId)">
             <span class="pull-left">{{ agent.ip }}</span>
             <!--<span class="pull-right text-muted">254</span>-->
           </a>
@@ -266,9 +280,9 @@
       </li>
 
       <!--<li ng-class="{'active': currentOpenTab === 'AGENTS'}">-->
-        <!--<a href="javascript:void(0)" ng-click="openTab('AGENTS')">Agents-->
-          <!--<span class="text-muted">69</span>-->
-        <!--</a>-->
+      <!--<a href="javascript:void(0)" ng-click="openTab('AGENTS')">Agents-->
+      <!--<span class="text-muted">69</span>-->
+      <!--</a>-->
       <!--</li>-->
 
       <li ng-class="{'active': currentOpenTab === 'NETWORK_SCAN'}">
@@ -282,7 +296,9 @@
   <div class="tab-content">
 
     <div class="tab-pane active" ng-show="currentOpenTab === 'DEVICES'">
+
       <ul class="qt-list qt-devices">
+
         <li class="list-heading">
           <div class="col-1">
             <!-- <label class="control checkbox pull-left">
@@ -292,247 +308,424 @@
             <span>NAME</span>
           </div>
           <div class="col-2"><span>DESCRIPTION</span></div>
-          <div class="col-3"><span>TYPE</span></div>
+
+          <div class="col-3" style="width: 145px; height: 12px">
+            <!--<span>TYPE</span>-->
+          </div>
+
           <div class="col-4"><span>USERNAME</span></div>
           <div class="col-5"><span>LAN IP</span></div>
           <div class="col-6">&nbsp;</div>
         </li>
-        <li>
+
+        <li ng-repeat="agent in agents[companyId]"
+            ng-controller="quicktech.core.devices.companyDevicesDeviceCtrl">
           <div class="col-1">
             <div>
+
               <i class="device-status on"></i>
+
               <label class="control checkbox pull-left">
-                <input type="checkbox">
+                <input type="checkbox" ng-model="selectDevices[device.deviceId]" ng-change="changeSelectDevices()">
                 <span class="control-indicator"></span>
               </label>
-              <div class="checkbox-caption"><span>Mobile.Jack</span> <a href="javascript:void(0)" class="hit-area ha-desc pull-right" data-popover="" data-placement="bottom" title="" data-container="body" data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>" data-content="The Member Server PC"><i class="icn-sm icn-description"></i></a></div>
-            </div>
-          </div>
-          <div class="col-2"><div class="device-desc"><span>Mobile, Android 4.04 CLMYUT</span>
-            <div class="dropdown pull-right">
-              <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top" title="" data-container="body" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i class="icn-sm icn-edit"></i></a>
-              <div class="dropdown-menu add-description-form clearfix">
-                <textarea class="form-control" rows="1" placeholder="Add device description">Mobile, Android 4.04 CLMYUT</textarea>
-                <div class="qt-form-actions">
-                  <div class="btn btn-lg btn-info pull-left">Save</div>
-                  <div class="btn btn-lg btn-primary pull-left">Cancel</div>
-                  <div class="word-count pull-right">40</div>
-                </div>
+
+              <div class="checkbox-caption">
+                <span>{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}</span>
               </div>
             </div>
-          </div></div>
-          <div class="col-3">
-            <div class="device-type-icons"><i class="icn-lg icn-mobile has-tooltip" data-placement="top" data-original-title="Mobile"></i></div>
           </div>
-          <div class="col-4"><div class="device-user-name"><span>Ryan.Burns</span> <a href="javascript:void(0)" class="hit-area has-tooltip pull-right" data-placement="right" title="" data-container="body" data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i class="icn-sm icn-password-key"></i></a></div></div>
-          <div class="col-5"><div class="device-lan-ip">192.168.1.14</div></div>
+
+          <!--<div class="col-2" ng-show="device.description | unknownFilter">-->
+            <!--<div class="device-desc"><span>{{ agent.description }}</span>-->
+
+              <!--<div class="dropdown pull-right" dropdown is-open="dropdownStatus.isOpen">-->
+
+                <!--<a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"-->
+                   <!--tooltip-placement="top" tooltip="edit" tooltip-append-to-body="true" dropdown-toggle>-->
+                  <!--<i class="icn-sm icn-edit"></i>-->
+                <!--</a>-->
+
+                <!--<div class="dropdown-menu add-description-form clearfix" dropdown-menu-->
+                     <!--ng-form="deviceDescriptionForm" stop-propagation="click">-->
+
+                  <!--<textarea class="form-control" rows="1" ng-model="deviceDescription"-->
+                            <!--placeholder="Add device description" maxlength="40"></textarea>-->
+
+                  <!--<div class="qt-form-actions">-->
+                    <!--<div class="btn btn-lg btn-info pull-left" ng-click="saveDescription(device.id, deviceDescription)">-->
+                      <!--Save-->
+                    <!--</div>-->
+
+                    <!--<div class="btn btn-lg btn-primary pull-left" ng-click="closeDropdown()">Cancel</div>-->
+
+                    <!--<div class="word-count pull-right">{{ 40 - deviceDescription.length }}</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <!--<div class="col-2" dropdown is-open="dropdownStatus.isopen"-->
+               <!--ng-hide="device.description | unknownFilter">-->
+
+            <!--<div class="device-desc no-desc-added" dropdown-toggle>-->
+              <!--<span>Add Description-->
+                <!--<i class="icn-sm icn-add-description pull-left"></i>-->
+              <!--</span>-->
+            <!--</div>-->
+
+            <!--<div class="dropdown-menu add-description-form clearfix" dropdown-menu-->
+                 <!--ng-form="deviceDescriptionForm" stop-propagation="click">-->
+
+              <!--<textarea class="form-control autosize" rows="1" ng-model="deviceDescription"-->
+                        <!--placeholder="Add device description" maxlength="40"></textarea>-->
+
+              <!--<div class="qt-form-actions">-->
+
+                <!--<div class="btn btn-lg btn-info pull-left" ng-click="saveDescription(device.id, deviceDescription)">-->
+                  <!--Save-->
+                <!--</div>-->
+
+                <!--<div class="btn btn-lg btn-primary pull-left" ng-click="closeDropdown()">Cancel</div>-->
+
+                <!--<div class="word-count pull-right">{{ 40 - deviceDescription.length }}</div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+          <!--</div>-->
+
+          <div class="col-3" style="width: 145px; height: 29px">
+            <!--<div class="device-type-icons">-->
+            <!--<i class="icn-lg icn-mobile has-tooltip" data-placement="top" data-original-title="Mobile"></i>-->
+            <!--</div>-->
+          </div>
+
+          <div class="col-4">
+            <div class="device-user-name" ng-class="{'no-value': !(agent.userName | unknownFilter)}">
+              <span>{{ (agent.userName | unknownFilter) }}</span>
+              <!--<a href="javascript:void(0)" class="hit-area has-tooltip pull-right"-->
+                 <!--tooltip-placement="right" tooltip-append-to-body="true"  ng-show="(agent.userName | unknownFilter)"-->
+                 <!--tooltip-class="tooltip-lg" tooltip-html="keyTooltip">-->
+                <!--<i class="icn-sm icn-password-key"></i>-->
+              <!--</a>-->
+            </div>
+          </div>
+
+          <div class="col-5">
+            <div class="device-lan-ip">{{ agent.ip }}</div>
+          </div>
+
           <div class="col-6">
             <div class="list-actions pull-right">
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+
+              <div class="btn btn-default pull-left has-tooltip" ng-click="remoteAccess()"
+                   tooltip-placement="top" tooltip="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
-              <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top" data-original-title="Send Alert">
+
+              <div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"
+                   tooltip-placement="top" tooltip="Send Alert">
                 <i class="icn-sm icn-send-alert"></i>
               </div>
-              <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top" data-original-title="Spec. Report">
+
+              <div class="btn btn-default btn-spec-report pull-left has-tooltip" ng-click="specReport()"
+                   tooltip-placement="top" tooltip="Spec. Report">
                 <i class="icn-sm icn-spec-report"></i>
               </div>
+
               <div class="more pull-left dropdown">
-                <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i class="icn-more icn-sm"></i></a>
+
+                <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
+                   aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">
+                  <i class="icn-more icn-sm"></i>
+                </a>
+
                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                  <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
+                  <li><a tabindex="-1" href="javascript:void(0)" ng-click="sendAlert()">Send Alert</a></li>
+                  <li><a tabindex="-1" href="javascript:void(0)" ng-click="specReport()">Spec. Report</a></li>
+                  <li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>
+                  <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>
+                  <li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>
+                  <li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">Remove</a></li>
                 </ul>
               </div>
+
             </div>
           </div>
         </li>
-        <li>
-          <div class="col-1">
-            <div>
-              <i class="device-status on"></i>
-              <label class="control checkbox pull-left">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-              <div class="checkbox-caption"><span>DC Printer</span>
-                <div class="dropdown">
-                  <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip" data-placement="top" data-container="body" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="Add Description" data-toggle="dropdown"><i class="icn-sm icn-add-description"></i></a>
-                  <div class="dropdown-menu add-description-form clearfix">
-                    <textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>
-                    <div class="qt-form-actions">
-                      <div class="btn btn-lg btn-info pull-left">Save</div>
-                      <div class="btn btn-lg btn-primary pull-left">Cancel</div>
-                      <div class="word-count pull-right">40</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="device-desc no-desc-added" data-toggle="dropdown" aria-expanded="false"><span>Add Description <i class="icn-sm icn-add-description pull-left"></i></span></div>
-            <div class="dropdown-menu add-description-form clearfix">
-              <textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>
-              <div class="qt-form-actions">
-                <div class="btn btn-lg btn-info pull-left">Save</div>
-                <div class="btn btn-lg btn-primary pull-left">Cancel</div>
-                <div class="word-count pull-right">40</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-3">
-            <div class="device-type-icons"><i class="icn-lg icn-printer has-tooltip" data-placement="top" data-original-title="Printer"></i></div>
-          </div>
-          <div class="col-4"><div class="device-user-name no-value"></div></div>
-          <div class="col-5"><div class="device-lan-ip">192.168.1.10</div></div>
-          <div class="col-6">
-            <div class="list-actions pull-right">
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
-                <i class="icn-sm icn-remote-access"></i>
-              </div>
-              <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top" data-original-title="Send Alert">
-                <i class="icn-sm icn-send-alert"></i>
-              </div>
-              <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top" data-original-title="Spec. Report">
-                <i class="icn-sm icn-spec-report"></i>
-              </div>
-              <div class="more pull-left dropdown">
-                <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i class="icn-more icn-sm"></i></a>
-                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                  <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="col-1">
-            <div>
-              <i class="device-status on"></i>
-              <label class="control checkbox pull-left">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-              <div class="checkbox-caption"><span>AdminPC</span> <a href="javascript:void(0)" class="hit-area ha-desc pull-right" data-popover="" data-placement="bottom" title="" data-container="body" data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>" data-content="The Member Server PC"><i class="icn-sm icn-description"></i></a></div>
-            </div>
-          </div>
-          <div class="col-2"><div class="device-desc"><span>Mail migration in progress, Till thursday</span>
-            <div class="dropdown pull-right">
-              <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top" title="" data-container="body" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i class="icn-sm icn-edit"></i></a>
-              <div class="dropdown-menu add-description-form clearfix">
-                <textarea class="form-control" rows="1" placeholder="Add device description">Mail migration in progress, Till thursday</textarea>
-                <div class="qt-form-actions">
-                  <div class="btn btn-lg btn-info pull-left">Save</div>
-                  <div class="btn btn-lg btn-primary pull-left">Cancel</div>
-                  <div class="word-count pull-right">40</div>
-                </div>
-              </div>
-            </div>
-          </div></div>
-          <div class="col-3">
-            <div class="device-type-icons">
-              <i class="icn-lg icn-server has-tooltip" data-placement="top" data-original-title="Server"></i>
-              <i class="icn-lg icn-file-server has-tooltip" data-placement="top" data-original-title="File Server"></i>
-              <i class="icn-lg icn-mail-server has-tooltip" data-placement="top" data-original-title="Mail Server"></i>
-              <i class="icn-lg icn-domain-controller has-tooltip" data-placement="top" data-original-title="Domain Controller"></i>
-              <i class="icn-lg icn-app-server has-tooltip" data-placement="top" data-original-title="Application Server"></i>
-            </div>
-          </div>
-          <div class="col-4"><div class="device-user-name"><span>Laurie.Harding</span> <a href="javascript:void(0)" class="hit-area has-tooltip pull-right" data-placement="right" title="" data-container="body" data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i class="icn-sm icn-password-key-unique"></i></a></div></div>
-          <div class="col-5"><div class="device-lan-ip">192.168.1.45</div></div>
-          <div class="col-6">
-            <div class="list-actions pull-right">
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
-                <i class="icn-sm icn-remote-access"></i>
-              </div>
-              <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top" data-original-title="Send Alert">
-                <i class="icn-sm icn-send-alert"></i>
-              </div>
-              <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top" data-original-title="Spec. Report">
-                <i class="icn-sm icn-spec-report"></i>
-              </div>
-              <div class="more pull-left dropdown">
-                <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i class="icn-more icn-sm"></i></a>
-                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                  <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="col-1">
-            <div>
-              <i class="device-status off"></i>
-              <label class="control checkbox pull-left">
-                <input type="checkbox">
-                <span class="control-indicator"></span>
-              </label>
-              <div class="checkbox-caption"><span>Skynet.2014</span> <a href="javascript:void(0)" class="ha-desc hit-area pull-right" data-popover="" data-placement="bottom" title="" data-container="body" data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>" data-content="The Member Server PC"><i class="icn-sm icn-description"></i></a></div>
-            </div>
-          </div>
-          <div class="col-2"><div class="device-desc"><span>Connection to both scanner &amp; printer</span>
-            <div class="dropdown pull-right">
-              <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top" title="" data-container="body" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i class="icn-sm icn-edit"></i></a>
-              <div class="dropdown-menu add-description-form clearfix">
-                <textarea class="form-control" rows="1" placeholder="Add device description">Mail migration in progress, Till thursday</textarea>
-                <div class="qt-form-actions">
-                  <div class="btn btn-lg btn-info pull-left">Save</div>
-                  <div class="btn btn-lg btn-primary pull-left">Cancel</div>
-                  <div class="word-count pull-right">40</div>
-                </div>
-              </div>
-            </div>
-          </div></div>
-          <div class="col-3">
-            <div class="device-type-icons"><i class="icn-lg icn-computer has-tooltip" data-placement="top" data-original-title="Computer"></i></div>
-          </div>
-          <div class="col-4"><div class="device-user-name"><span>Jack Williams</span> <a href="javascript:void(0)" class="hit-area has-tooltip pull-right" data-placement="right" title="" data-container="body" data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i class="icn-sm icn-password-key"></i></a></div></div>
-          <div class="col-5"><div class="device-lan-ip">192.168.1.20</div></div>
-          <div class="col-6">
-            <div class="list-actions pull-right">
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
-                <i class="icn-sm icn-remote-access"></i>
-              </div>
-              <div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top" data-original-title="Send Alert">
-                <i class="icn-sm icn-send-alert"></i>
-              </div>
-              <div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top" data-original-title="Spec. Report">
-                <i class="icn-sm icn-spec-report"></i>
-              </div>
-              <div class="more pull-left dropdown">
-                <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" data-placement="top" title="" data-original-title="More"><i class="icn-more icn-sm"></i></a>
-                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                  <li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>
-                  <li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
+
+        <!--<li>-->
+          <!--<div class="col-1">-->
+            <!--<div>-->
+              <!--<i class="device-status on"></i>-->
+              <!--<label class="control checkbox pull-left">-->
+                <!--<input type="checkbox">-->
+                <!--<span class="control-indicator"></span>-->
+              <!--</label>-->
+
+              <!--<div class="checkbox-caption"><span>DC Printer</span>-->
+
+                <!--<div class="dropdown">-->
+                  <!--<a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip" data-placement="top"-->
+                     <!--data-container="body"-->
+                     <!--data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"-->
+                     <!--data-original-title="Add Description" data-toggle="dropdown"><i-->
+                    <!--class="icn-sm icn-add-description"></i></a>-->
+
+                  <!--<div class="dropdown-menu add-description-form clearfix">-->
+                    <!--<textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>-->
+
+                    <!--<div class="qt-form-actions">-->
+                      <!--<div class="btn btn-lg btn-info pull-left">Save</div>-->
+                      <!--<div class="btn btn-lg btn-primary pull-left">Cancel</div>-->
+                      <!--<div class="word-count pull-right">40</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-2">-->
+            <!--<div class="device-desc no-desc-added" data-toggle="dropdown" aria-expanded="false"><span>Add Description <i-->
+              <!--class="icn-sm icn-add-description pull-left"></i></span></div>-->
+            <!--<div class="dropdown-menu add-description-form clearfix">-->
+              <!--<textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>-->
+
+              <!--<div class="qt-form-actions">-->
+                <!--<div class="btn btn-lg btn-info pull-left">Save</div>-->
+                <!--<div class="btn btn-lg btn-primary pull-left">Cancel</div>-->
+                <!--<div class="word-count pull-right">40</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-3">-->
+            <!--<div class="device-type-icons"><i class="icn-lg icn-printer has-tooltip" data-placement="top"-->
+                                              <!--data-original-title="Printer"></i></div>-->
+          <!--</div>-->
+          <!--<div class="col-4">-->
+            <!--<div class="device-user-name no-value"></div>-->
+          <!--</div>-->
+          <!--<div class="col-5">-->
+            <!--<div class="device-lan-ip">192.168.1.10</div>-->
+          <!--</div>-->
+          <!--<div class="col-6">-->
+            <!--<div class="list-actions pull-right">-->
+              <!--<div class="btn btn-default pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Remote Access">-->
+                <!--<i class="icn-sm icn-remote-access"></i>-->
+              <!--</div>-->
+              <!--<div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Send Alert">-->
+                <!--<i class="icn-sm icn-send-alert"></i>-->
+              <!--</div>-->
+              <!--<div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Spec. Report">-->
+                <!--<i class="icn-sm icn-spec-report"></i>-->
+              <!--</div>-->
+              <!--<div class="more pull-left dropdown">-->
+                <!--<a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"-->
+                   <!--aria-expanded="false" data-toggle="dropdown" data-placement="top" title=""-->
+                   <!--data-original-title="More"><i class="icn-more icn-sm"></i></a>-->
+                <!--<ul class="dropdown-menu dropdown-menu-right" role="menu">-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<div class="col-1">-->
+            <!--<div>-->
+              <!--<i class="device-status on"></i>-->
+              <!--<label class="control checkbox pull-left">-->
+                <!--<input type="checkbox">-->
+                <!--<span class="control-indicator"></span>-->
+              <!--</label>-->
+
+              <!--<div class="checkbox-caption"><span>AdminPC</span> <a href="javascript:void(0)"-->
+                                                                    <!--class="hit-area ha-desc pull-right" data-popover=""-->
+                                                                    <!--data-placement="bottom" title=""-->
+                                                                    <!--data-container="body"-->
+                                                                    <!--data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>"-->
+                                                                    <!--data-content="The Member Server PC"><i-->
+                <!--class="icn-sm icn-description"></i></a></div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-2">-->
+            <!--<div class="device-desc"><span>Mail migration in progress, Till thursday</span>-->
+
+              <!--<div class="dropdown pull-right">-->
+                <!--<a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top"-->
+                   <!--title="" data-container="body"-->
+                   <!--data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"-->
+                   <!--data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i-->
+                  <!--class="icn-sm icn-edit"></i></a>-->
+
+                <!--<div class="dropdown-menu add-description-form clearfix">-->
+                  <!--<textarea class="form-control" rows="1" placeholder="Add device description">Mail migration in progress, Till thursday</textarea>-->
+
+                  <!--<div class="qt-form-actions">-->
+                    <!--<div class="btn btn-lg btn-info pull-left">Save</div>-->
+                    <!--<div class="btn btn-lg btn-primary pull-left">Cancel</div>-->
+                    <!--<div class="word-count pull-right">40</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-3">-->
+            <!--<div class="device-type-icons">-->
+              <!--<i class="icn-lg icn-server has-tooltip" data-placement="top" data-original-title="Server"></i>-->
+              <!--<i class="icn-lg icn-file-server has-tooltip" data-placement="top" data-original-title="File Server"></i>-->
+              <!--<i class="icn-lg icn-mail-server has-tooltip" data-placement="top" data-original-title="Mail Server"></i>-->
+              <!--<i class="icn-lg icn-domain-controller has-tooltip" data-placement="top"-->
+                 <!--data-original-title="Domain Controller"></i>-->
+              <!--<i class="icn-lg icn-app-server has-tooltip" data-placement="top"-->
+                 <!--data-original-title="Application Server"></i>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-4">-->
+            <!--<div class="device-user-name"><span>Laurie.Harding</span> <a href="javascript:void(0)"-->
+                                                                         <!--class="hit-area has-tooltip pull-right"-->
+                                                                         <!--data-placement="right" title=""-->
+                                                                         <!--data-container="body"-->
+                                                                         <!--data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"-->
+                                                                         <!--data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i-->
+              <!--class="icn-sm icn-password-key-unique"></i></a></div>-->
+          <!--</div>-->
+          <!--<div class="col-5">-->
+            <!--<div class="device-lan-ip">192.168.1.45</div>-->
+          <!--</div>-->
+          <!--<div class="col-6">-->
+            <!--<div class="list-actions pull-right">-->
+              <!--<div class="btn btn-default pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Remote Access">-->
+                <!--<i class="icn-sm icn-remote-access"></i>-->
+              <!--</div>-->
+              <!--<div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Send Alert">-->
+                <!--<i class="icn-sm icn-send-alert"></i>-->
+              <!--</div>-->
+              <!--<div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Spec. Report">-->
+                <!--<i class="icn-sm icn-spec-report"></i>-->
+              <!--</div>-->
+              <!--<div class="more pull-left dropdown">-->
+                <!--<a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"-->
+                   <!--aria-expanded="false" data-toggle="dropdown" data-placement="top" title=""-->
+                   <!--data-original-title="More"><i class="icn-more icn-sm"></i></a>-->
+                <!--<ul class="dropdown-menu dropdown-menu-right" role="menu">-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<div class="col-1">-->
+            <!--<div>-->
+              <!--<i class="device-status off"></i>-->
+              <!--<label class="control checkbox pull-left">-->
+                <!--<input type="checkbox">-->
+                <!--<span class="control-indicator"></span>-->
+              <!--</label>-->
+
+              <!--<div class="checkbox-caption"><span>Skynet.2014</span> <a href="javascript:void(0)"-->
+                                                                        <!--class="ha-desc hit-area pull-right"-->
+                                                                        <!--data-popover="" data-placement="bottom" title=""-->
+                                                                        <!--data-container="body"-->
+                                                                        <!--data-template="<div class='popover description-popover editable'><a href='javascript:void(0)' class='ha-edit hit-area'><i class='icn-sm icn-edit'></i></a><div class='popover-content'></div></div>"-->
+                                                                        <!--data-content="The Member Server PC"><i-->
+                <!--class="icn-sm icn-description"></i></a></div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-2">-->
+            <!--<div class="device-desc"><span>Connection to both scanner &amp; printer</span>-->
+
+              <!--<div class="dropdown pull-right">-->
+                <!--<a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" data-placement="top"-->
+                   <!--title="" data-container="body"-->
+                   <!--data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"-->
+                   <!--data-original-title="edit" data-toggle="dropdown" aria-expanded="false"> <i-->
+                  <!--class="icn-sm icn-edit"></i></a>-->
+
+                <!--<div class="dropdown-menu add-description-form clearfix">-->
+                  <!--<textarea class="form-control" rows="1" placeholder="Add device description">Mail migration in progress, Till thursday</textarea>-->
+
+                  <!--<div class="qt-form-actions">-->
+                    <!--<div class="btn btn-lg btn-info pull-left">Save</div>-->
+                    <!--<div class="btn btn-lg btn-primary pull-left">Cancel</div>-->
+                    <!--<div class="word-count pull-right">40</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-3">-->
+            <!--<div class="device-type-icons"><i class="icn-lg icn-computer has-tooltip" data-placement="top"-->
+                                              <!--data-original-title="Computer"></i></div>-->
+          <!--</div>-->
+          <!--<div class="col-4">-->
+            <!--<div class="device-user-name"><span>Jack Williams</span> <a href="javascript:void(0)"-->
+                                                                        <!--class="hit-area has-tooltip pull-right"-->
+                                                                        <!--data-placement="right" title=""-->
+                                                                        <!--data-container="body"-->
+                                                                        <!--data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"-->
+                                                                        <!--data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i-->
+              <!--class="icn-sm icn-password-key"></i></a></div>-->
+          <!--</div>-->
+          <!--<div class="col-5">-->
+            <!--<div class="device-lan-ip">192.168.1.20</div>-->
+          <!--</div>-->
+          <!--<div class="col-6">-->
+            <!--<div class="list-actions pull-right">-->
+              <!--<div class="btn btn-default pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Remote Access">-->
+                <!--<i class="icn-sm icn-remote-access"></i>-->
+              <!--</div>-->
+              <!--<div class="btn btn-default btn-alert pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Send Alert">-->
+                <!--<i class="icn-sm icn-send-alert"></i>-->
+              <!--</div>-->
+              <!--<div class="btn btn-default btn-spec-report pull-left has-tooltip" data-placement="top"-->
+                   <!--data-original-title="Spec. Report">-->
+                <!--<i class="icn-sm icn-spec-report"></i>-->
+              <!--</div>-->
+              <!--<div class="more pull-left dropdown">-->
+                <!--<a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"-->
+                   <!--aria-expanded="false" data-toggle="dropdown" data-placement="top" title=""-->
+                   <!--data-original-title="More"><i class="icn-more icn-sm"></i></a>-->
+                <!--<ul class="dropdown-menu dropdown-menu-right" role="menu">-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Send Alert</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Spec. Report</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Transfer File</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Restart</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Shutdown</a></li>-->
+                  <!--<li><a tabindex="-1" href="javascript:void(0)">Remove</a></li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+
       </ul>
-      <div class="qt-list-loading">
+
+      <div class="qt-list-loading" ng-show="isScanDevicesLoad">
         <div class="loader"></div>
       </div>
+
     </div>
 
     <div class="tab-pane active" ng-show="currentOpenTab === 'AGENTS'">
@@ -559,22 +752,37 @@
                 <input type="checkbox">
                 <span class="control-indicator"></span>
               </label>
+
               <div class="checkbox-caption"><i class="icn-lg icn-computer pull-left"></i> Studio.83</div>
             </div>
           </div>
           <div class="col-2">
-            <div class="agent-username"><span>scpinfolab.net/scp</span> <a href="javascript:void(0)" class="hit-area has-tooltip pull-right" data-placement="right" title="" data-container="body" data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i class="icn-sm icn-password-key"></i></a></div>
+            <div class="agent-username"><span>scpinfolab.net/scp</span> <a href="javascript:void(0)"
+                                                                           class="hit-area has-tooltip pull-right"
+                                                                           data-placement="right" title=""
+                                                                           data-container="body"
+                                                                           data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"
+                                                                           data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i
+              class="icn-sm icn-password-key"></i></a></div>
           </div>
-          <div class="col-3"><div class="agent-ip">192.168.1.4</div></div>
-          <div class="col-4"><div class="agent-ip">39.45.23.11</div></div>
-          <div class="col-5"><div class="agent-version">3.4.6 <i class="icn-md icn-agent-version-updated pull-right"></i></div></div>
+          <div class="col-3">
+            <div class="agent-ip">192.168.1.4</div>
+          </div>
+          <div class="col-4">
+            <div class="agent-ip">39.45.23.11</div>
+          </div>
+          <div class="col-5">
+            <div class="agent-version">3.4.6 <i class="icn-md icn-agent-version-updated pull-right"></i></div>
+          </div>
           <div class="col-6">
             <div class="list-actions pull-right">
               <!-- <div class="btn btn-info btn-lg pull-left">Update Agent</div> -->
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Update Agent">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Update Agent">
                 <i class="icn-sm icn-attachments-download"></i>
               </div>
             </div>
@@ -588,22 +796,37 @@
                 <input type="checkbox">
                 <span class="control-indicator"></span>
               </label>
+
               <div class="checkbox-caption"><i class="icn-lg icn-server pull-left"></i>adminSkynet.2015</div>
             </div>
           </div>
           <div class="col-2">
-            <div class="agent-username"><span>scpinfolab.net/scp</span> <a href="javascript:void(0)" class="hit-area has-tooltip pull-right" data-placement="right" title="" data-container="body" data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i class="icn-sm icn-password-key"></i></a></div>
+            <div class="agent-username"><span>scpinfolab.net/scp</span> <a href="javascript:void(0)"
+                                                                           class="hit-area has-tooltip pull-right"
+                                                                           data-placement="right" title=""
+                                                                           data-container="body"
+                                                                           data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"
+                                                                           data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i
+              class="icn-sm icn-password-key"></i></a></div>
           </div>
-          <div class="col-3"><div class="agent-ip">192.168.1.21</div></div>
-          <div class="col-4"><div class="agent-ip">39.45.23.11</div></div>
-          <div class="col-5"><div class="agent-version">3.2.9 <i class="icn-md icn-agent-version-old pull-right"></i></div></div>
+          <div class="col-3">
+            <div class="agent-ip">192.168.1.21</div>
+          </div>
+          <div class="col-4">
+            <div class="agent-ip">39.45.23.11</div>
+          </div>
+          <div class="col-5">
+            <div class="agent-version">3.2.9 <i class="icn-md icn-agent-version-old pull-right"></i></div>
+          </div>
           <div class="col-6">
             <div class="list-actions pull-right">
               <!-- <div class="btn btn-info btn-lg pull-left">Update Agent</div> -->
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Update Agent">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Update Agent">
                 <i class="icn-sm icn-attachments-download"></i>
               </div>
             </div>
@@ -617,22 +840,37 @@
                 <input type="checkbox">
                 <span class="control-indicator"></span>
               </label>
+
               <div class="checkbox-caption"><i class="icn-lg icn-generic-device pull-left"></i>Skynet.2013</div>
             </div>
           </div>
           <div class="col-2">
-            <div class="agent-username"><span>scpadminlab.net/scp</span> <a href="javascript:void(0)" class="hit-area has-tooltip pull-right" data-placement="right" title="" data-container="body" data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i class="icn-sm icn-password-key"></i></a></div>
+            <div class="agent-username"><span>scpadminlab.net/scp</span> <a href="javascript:void(0)"
+                                                                            class="hit-area has-tooltip pull-right"
+                                                                            data-placement="right" title=""
+                                                                            data-container="body"
+                                                                            data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"
+                                                                            data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i
+              class="icn-sm icn-password-key"></i></a></div>
           </div>
-          <div class="col-3"><div class="agent-ip">192.168.1.16</div></div>
-          <div class="col-4"><div class="agent-ip">39.45.23.11</div></div>
-          <div class="col-5"><div class="agent-version">3.4.6 <i class="icn-md icn-agent-version-updated pull-right"></i></div></div>
+          <div class="col-3">
+            <div class="agent-ip">192.168.1.16</div>
+          </div>
+          <div class="col-4">
+            <div class="agent-ip">39.45.23.11</div>
+          </div>
+          <div class="col-5">
+            <div class="agent-version">3.4.6 <i class="icn-md icn-agent-version-updated pull-right"></i></div>
+          </div>
           <div class="col-6">
             <div class="list-actions pull-right">
               <!-- <div class="btn btn-info btn-lg pull-left">Update Agent</div> -->
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Update Agent">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Update Agent">
                 <i class="icn-sm icn-attachments-download"></i>
               </div>
             </div>
@@ -646,22 +884,37 @@
                 <input type="checkbox">
                 <span class="control-indicator"></span>
               </label>
+
               <div class="checkbox-caption"><i class="icn-lg icn-mobile pull-left"></i>Mobile.Jack</div>
             </div>
           </div>
           <div class="col-2">
-            <div class="agent-username"><span>scpinfolab.net/scp</span> <a href="javascript:void(0)" class="hit-area has-tooltip pull-right" data-placement="right" title="" data-container="body" data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>" data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i class="icn-sm icn-password-key"></i></a></div>
+            <div class="agent-username"><span>scpinfolab.net/scp</span> <a href="javascript:void(0)"
+                                                                           class="hit-area has-tooltip pull-right"
+                                                                           data-placement="right" title=""
+                                                                           data-container="body"
+                                                                           data-template="<div class='tooltip tooltip-lg body-tooltip'><div class='tooltip-inner'></div></div>"
+                                                                           data-original-title="<span class='text-muted'>PASSWORD</span><span class='password-txt'>QtY6G</span>"><i
+              class="icn-sm icn-password-key"></i></a></div>
           </div>
-          <div class="col-3"><div class="agent-ip">192.168.1.32</div></div>
-          <div class="col-4"><div class="agent-ip">39.45.23.11</div></div>
-          <div class="col-5"><div class="agent-version">3.4.6 <i class="icn-md icn-agent-version-updated pull-right"></i></div></div>
+          <div class="col-3">
+            <div class="agent-ip">192.168.1.32</div>
+          </div>
+          <div class="col-4">
+            <div class="agent-ip">39.45.23.11</div>
+          </div>
+          <div class="col-5">
+            <div class="agent-version">3.4.6 <i class="icn-md icn-agent-version-updated pull-right"></i></div>
+          </div>
           <div class="col-6">
             <div class="list-actions pull-right">
               <!-- <div class="btn btn-info btn-lg pull-left">Update Agent</div> -->
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Remote Access">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
-              <div class="btn btn-default pull-left has-tooltip" data-placement="top" data-original-title="Update Agent">
+              <div class="btn btn-default pull-left has-tooltip" data-placement="top"
+                   data-original-title="Update Agent">
                 <i class="icn-sm icn-attachments-download"></i>
               </div>
             </div>
@@ -675,7 +928,19 @@
 
     <div class="tab-pane active" ng-show="currentOpenTab === 'NETWORK_SCAN'">
 
-      <ul class="qt-list qt-network-scan">
+      <div class="network-scan-results"
+           ng-show="(!scanDevices.networkScan.devices || scanDevices.networkScan.devices.length < 1) && !isScanDevicesLoad">
+        <div>
+          <i class="icn-lg icn-network-scan-lg"></i>
+
+          <p class="text-center result-heading">No devices to show</p>
+
+          <p class="text-center result-details">Please choose the Network IP Range first, and then click Scan Network to
+            view selected network's active hosts.</p>
+        </div>
+      </div>
+
+      <ul class="qt-list qt-network-scan" ng-if="scanDevices.networkScan.devices && scanDevices.networkScan.devices.length > 0">
 
         <li class="list-heading">
           <div class="col-1"><span>DEVICE</span></div>
@@ -691,7 +956,7 @@
           <div class="col-6">&nbsp;</div>
         </li>
 
-        <li ng-repeat="device in scanDevices.devices"
+        <li ng-repeat="device in scanDevices.networkScan.devices"
             ng-controller="quicktech.core.devices.companyNetworkDeviceCtrl">
 
           <div class="col-1">
@@ -710,22 +975,22 @@
                 </a>
 
                 <!--<div class="dropdown" dropdown is-open="isOpenDropdown"-->
-                     <!--ng-hide="(device.description | unknownFilter)">-->
+                <!--ng-hide="(device.description | unknownFilter)">-->
 
-                  <!--<a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"-->
-                     <!--tooltip-placement="top" tooltip-append-to-body="true"-->
-                     <!--tooltip="Add Description" dropdown-toggle>-->
-                    <!--<i class="icn-sm icn-add-description"></i>-->
-                  <!--</a>-->
+                <!--<a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"-->
+                <!--tooltip-placement="top" tooltip-append-to-body="true"-->
+                <!--tooltip="Add Description" dropdown-toggle>-->
+                <!--<i class="icn-sm icn-add-description"></i>-->
+                <!--</a>-->
 
-                  <!--<div class="dropdown-menu add-description-form clearfix" stop-propagation="click">-->
-                    <!--<textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>-->
-                    <!--<div class="qt-form-actions">-->
-                      <!--<div class="btn btn-lg btn-info pull-left">Save</div>-->
-                      <!--<div class="btn btn-lg btn-primary pull-left" ng-click="isOpenDropdown = false">Cancel</div>-->
-                      <!--<div class="word-count pull-right">40</div>-->
-                    <!--</div>-->
-                  <!--</div>-->
+                <!--<div class="dropdown-menu add-description-form clearfix" stop-propagation="click">-->
+                <!--<textarea class="form-control autosize" rows="1" placeholder="Add device description"></textarea>-->
+                <!--<div class="qt-form-actions">-->
+                <!--<div class="btn btn-lg btn-info pull-left">Save</div>-->
+                <!--<div class="btn btn-lg btn-primary pull-left" ng-click="isOpenDropdown = false">Cancel</div>-->
+                <!--<div class="word-count pull-right">40</div>-->
+                <!--</div>-->
+                <!--</div>-->
                 <!--</div>-->
 
               </div>
@@ -738,32 +1003,38 @@
 
           <div class="col-2" style="width: 164px;height: 9px;">
             <!--<div class="device-type-icons">-->
-              <!--<i class="icn-lg icn-computer has-tooltip" data-placement="top" data-original-title="Computer"></i>-->
+            <!--<i class="icn-lg icn-computer has-tooltip" data-placement="top" data-original-title="Computer"></i>-->
             <!--</div>-->
           </div>
 
-          <div class="col-3"><div class="device-lan-ip">{{ device.ipAddress }}</div></div>
+          <div class="col-3">
+            <div class="device-lan-ip">{{ device.ipAddress }}</div>
+          </div>
 
-          <div class="col-4"><div class="device-manufacturer">{{ device.manufacturer }}</div></div>
+          <div class="col-4">
+            <div class="device-manufacturer">{{ device.manufacturer }}</div>
+          </div>
 
-          <div class="col-5"><div class="device-mac-address">{{ device.macAddress }}</div></div>
+          <div class="col-5">
+            <div class="device-mac-address">{{ device.macAddress }}</div>
+          </div>
 
           <!--<div class="col-6">-->
-            <!--<div class="list-actions pull-right">-->
-              <!--<div class="device-management">-->
-                <!--<label>-->
-                  <!--<input type="checkbox">-->
-                  <!--<span class="toggle-bg"></span>-->
-                  <!--<span class="toggle-indicator"></span>-->
-                <!--</label>-->
-              <!--</div>-->
-            <!--</div>-->
+          <!--<div class="list-actions pull-right">-->
+          <!--<div class="device-management">-->
+          <!--<label>-->
+          <!--<input type="checkbox">-->
+          <!--<span class="toggle-bg"></span>-->
+          <!--<span class="toggle-indicator"></span>-->
+          <!--</label>-->
+          <!--</div>-->
+          <!--</div>-->
           <!--</div>-->
 
         </li>
 
       </ul>
-      <div class="qt-list-loading">
+      <div class="qt-list-loading" ng-show="isScanDevicesLoad">
         <div class="loader"></div>
       </div>
     </div>

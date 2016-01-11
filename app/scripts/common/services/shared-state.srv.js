@@ -33,6 +33,9 @@
         },
         rightPanel: {
           companyId: undefined
+        },
+        devicesHeader: {
+          checkedDevicesId: []
         }
       };
 
