@@ -13,16 +13,18 @@
           return invoice[property] || invoice.invoices[invoice.invoices.length - 1][property];
         };
 
-        if ($scope.invoiceProperty('dueDate') > Date.now()) {
-          $scope.dueDate = {
-            over: false,
-            value: $scope.invoiceProperty('dueDate')
-          }
-        } else {
+        var dueDateDays = Math.floor((Date.now() - $scope.invoiceProperty('dueDate')) / 1000 / 60 / 60 / 24);
+
+        if (($scope.invoiceProperty('dueDate') <= Date.now()) && (dueDateDays > 0)) {
           $scope.$emit('indicatorInvoice');
           $scope.dueDate = {
             over: true,
-            value: Math.floor((Date.now() - $scope.invoiceProperty('dueDate')) / 1000 / 60 / 60 / 24)
+            value: dueDateDays
+          }
+        } else {
+          $scope.dueDate = {
+            over: false,
+            value: $scope.invoiceProperty('dueDate')
           }
         }
 

@@ -67,7 +67,7 @@
         });
 
         $scope.sortInvoice = function (invoice) {
-          return invoice.date || invoice.invoices[invoice.invoices.length - 1].date;
+          return invoice.dueDate || invoice.invoices[invoice.invoices.length - 1].dueDate;
         }
 
       }]);
