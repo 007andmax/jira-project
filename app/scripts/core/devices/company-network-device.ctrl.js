@@ -11,10 +11,7 @@
         $scope.isDeviceOnline = function(){
           if($scope.device.agentStatus && $scope.device.agentStatus !== 'unknown'){
 
-            var spliceIndex = $scope.device.agentStatus.lastIndexOf('_') + 1;
-            var status = ($scope.device.agentStatus).slice(spliceIndex);
-
-            return status === 'online';
+            return $scope.device.agentStatus === 'managed';
 
           } else {
 

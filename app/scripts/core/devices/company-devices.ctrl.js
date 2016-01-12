@@ -12,6 +12,7 @@
         $scope.selectDevices = {};
         $scope.companyId = $stateParams.companyId;
         $scope.isCollapsedGraph = true;
+        $scope.isScanDevicesLoad = false; // change in services
         $scope.currentOpenTab = tabs[0];
 
         $scope.agents = DevicesService.getAgentsByCompany($scope, $scope.companyId, function () {
@@ -19,10 +20,7 @@
         });
 
         $scope.runScanDevices = function (agentId) {
-          $scope.isScanDevicesLoad = true;
-
           $scope.scanDevices = DevicesService.runScanDevices($scope, $scope.companyId, agentId, function () {
-            $scope.isScanDevicesLoad = false;
             console.log($scope.scanDevices)
           });
         };
