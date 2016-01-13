@@ -3,11 +3,12 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.companyDevicesCtrl',
-    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.SharedStateService',
-      function ($scope, DevicesService, $stateParams, SharedStateService) {
+    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.SharedStateService', '$state',
+      function ($scope, DevicesService, $stateParams, SharedStateService, $state) {
 
         var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN'],
-          devicesHeaderState = SharedStateService.getSharedState('devicesHeader');
+          devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
+          agentCallbackCount = 0;
 
         $scope.selectDevices = {};
         $scope.companyId = $stateParams.companyId;
@@ -15,7 +16,14 @@
         $scope.isScanDevicesLoad = false; // change in services
         $scope.currentOpenTab = tabs[0];
 
-        $scope.agents = DevicesService.getAgentsByCompany($scope, $scope.companyId, function () {
+        DevicesService.getAgentsByCompany($scope, $scope.companyId, function (resp) {
+          $scope.agents = resp;
+          if((!$scope.agents || $scope.agents.length === 0) && agentCallbackCount === 0){
+            agentCallbackCount++;
+            alert('The last device was deleted. Redirect to devices page');
+            $state.go('devices');
+            $scope.$destroy();
+          }
           console.log($scope.agents)
         });
 
