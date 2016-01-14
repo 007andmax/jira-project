@@ -307,7 +307,9 @@
             </label> -->
             <span>NAME</span>
           </div>
-          <div class="col-2"><span>DESCRIPTION</span></div>
+          <div class="col-2" style="width: 367px; height: 12px">
+            <!--<span>DESCRIPTION</span>-->
+          </div>
 
           <div class="col-3">
             <!--style="width: 145px; height: 12px"-->
@@ -442,35 +444,35 @@
             <div class="list-actions pull-right">
 
               <!--<div class="btn btn-default pull-left has-tooltip" ng-click="remoteAccess()"-->
-                   <!--tooltip-placement="top" tooltip="Remote Access">-->
-                <!--<i class="icn-sm icn-remote-access"></i>-->
+              <!--tooltip-placement="top" tooltip="Remote Access">-->
+              <!--<i class="icn-sm icn-remote-access"></i>-->
               <!--</div>-->
 
               <!--<div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"-->
-                   <!--tooltip-placement="top" tooltip="Send Alert">-->
-                <!--<i class="icn-sm icn-send-alert"></i>-->
+              <!--tooltip-placement="top" tooltip="Send Alert">-->
+              <!--<i class="icn-sm icn-send-alert"></i>-->
               <!--</div>-->
 
               <!--<div class="btn btn-default btn-spec-report pull-left has-tooltip" ng-click="specReport()"-->
-                   <!--tooltip-placement="top" tooltip="Spec. Report">-->
-                <!--<i class="icn-sm icn-spec-report"></i>-->
+              <!--tooltip-placement="top" tooltip="Spec. Report">-->
+              <!--<i class="icn-sm icn-spec-report"></i>-->
               <!--</div>-->
 
               <!--<div class="more pull-left dropdown">-->
 
-                <!--<a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"-->
-                   <!--aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">-->
-                  <!--<i class="icn-more icn-sm"></i>-->
-                <!--</a>-->
+              <!--<a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"-->
+              <!--aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">-->
+              <!--<i class="icn-more icn-sm"></i>-->
+              <!--</a>-->
 
-                <!--<ul class="dropdown-menu dropdown-menu-right" role="menu">-->
-                  <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="sendAlert()">Send Alert</a></li>-->
-                  <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="specReport()">Spec. Report</a></li>-->
-                  <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>-->
-                  <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>-->
-                  <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>-->
-                  <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">Remove</a></li>-->
-                <!--</ul>-->
+              <!--<ul class="dropdown-menu dropdown-menu-right" role="menu">-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="sendAlert()">Send Alert</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="specReport()">Spec. Report</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">Remove</a></li>-->
+              <!--</ul>-->
               <!--</div>-->
 
             </div>
@@ -774,17 +776,68 @@
             <div class="device-mac-address">{{ device.macAddress }}</div>
           </div>
 
-          <!--<div class="col-6">-->
-          <!--<div class="list-actions pull-right">-->
-          <!--<div class="device-management">-->
-          <!--<label>-->
-          <!--<input type="checkbox">-->
-          <!--<span class="toggle-bg"></span>-->
-          <!--<span class="toggle-indicator"></span>-->
-          <!--</label>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</div>-->
+          <div class="col-6">
+            <div class="list-actions pull-right">
+
+              <div class="device-management" ng-show="device.agentStatus === 'managed'">
+                <label>
+                  <input type="checkbox">
+                  <span class="toggle-bg"></span>
+                  <span class="toggle-indicator"></span>
+                </label>
+              </div>
+
+              <div class="device-management installing-agent" ng-show="false">
+                <div class="loader"></div>
+              </div>
+
+              <div class="device-management installation-error" ng-show="false">
+
+                <label>
+                  <input type="checkbox">
+                  <span class="toggle-bg"></span>
+                  <span class="toggle-indicator"></span>
+                </label>
+
+                <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
+                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="locked">
+                  <i class="icn-sm icn-error-locked"></i>
+                </a>
+
+              </div>
+
+              <div class="device-management installation-error" ng-show="false">
+
+                <label>
+                  <input type="checkbox">
+                  <span class="toggle-bg"></span>
+                  <span class="toggle-indicator"></span>
+                </label>
+
+                <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
+                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Firewall">
+                  <i class="icn-sm icn-error-firewall"></i>
+                </a>
+
+              </div>
+
+              <div class="device-management installation-error" ng-show="false">
+                <label>
+                  <input type="checkbox">
+                  <span class="toggle-bg"></span>
+                  <span class="toggle-indicator"></span>
+                </label>
+
+                <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
+                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="power/internet or unknown problem">
+                  <i class="icn-sm icn-error-power"></i>
+                </a>
+
+              </div>
+
+
+            </div>
+          </div>
 
         </li>
 
