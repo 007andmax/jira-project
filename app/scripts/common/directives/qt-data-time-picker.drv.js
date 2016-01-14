@@ -3,7 +3,8 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtDataTimePicker',
-    function () {
+    ['$timeout',
+    function ($timeout) {
       return {
         restrict: 'A',
         require: 'ngModel',
@@ -15,7 +16,8 @@
 
           var options = {
             keepOpen: true,
-            format: 'DD MMM YYYY'
+            format: 'DD MMM YYYY',
+            defaultDate: 'now'
           };
 
           if (scope.minDate) {
@@ -26,7 +28,9 @@
             options.maxDate = scope.maxDate;
           }
 
-          element.datetimepicker(options);
+          $timeout(function(){
+            element.datetimepicker(options);
+          },0)
 
           //element.on('shown.bs.dropdown', function(){
           //  var dropdown = element.find('.dropdown-menu');
@@ -39,5 +43,5 @@
 
         }
       }
-    });
+    }]);
 })();
