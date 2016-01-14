@@ -21,7 +21,7 @@
             <a href="javascript:void(0)">Primary Contacts</a>
           </li>
 
-          <li navigate-to="#vendors">
+          <li navigate-to="#vendors" ng-if="!currentUser.accountType === 'ROOT'">
             <a href="javascript:void(0)">Vendor</a>
           </li>
 
@@ -427,7 +427,7 @@
           </div>
         </div>
 
-        <div id="vendors" class="associate-vendor-wrapper">
+        <div id="vendors" class="associate-vendor-wrapper" ng-if="!currentUser.accountType === 'ROOT'">
 
           <h3>Vendor</h3>
 

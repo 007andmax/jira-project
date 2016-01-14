@@ -158,6 +158,12 @@
         };
 
         $scope.validateCompanyName = function (ngModelCtrl) {
+
+          if ($scope.currentUser.accountType === "ROOT"){
+            ngModelCtrl.$setValidity('unique', true);
+            return
+          }
+
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
