@@ -23,10 +23,10 @@
             return false;
           }
 
-          if ($scope.assignToModel && $scope.assignToModel.length > 0) {
-            var fullSearchFild = (item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase();
-            return fullSearchFild.indexOf($scope.assignToModel.toLowerCase()) !== -1;
-          }
+          // if ($scope.assignToModel && $scope.assignToModel.length > 0) {
+          //   var fullSearchFild = (item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase();
+          //   return fullSearchFild.indexOf($scope.assignToModel.toLowerCase()) !== -1;
+          // }
 
           return true;
         };

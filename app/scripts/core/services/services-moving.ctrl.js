@@ -10,6 +10,10 @@
           checkedDefaultServices;
 
         $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companyServices = {};
+        $scope.$watch('servicesData["default"].length', function(){
+          $scope.companyServices = ServicesService.getActualMapping($scope.servicesData);
+        });
 
         $scope.generateMovementData = function () {
           moveServicesMap = {};
@@ -29,19 +33,26 @@
           }
         };
 
-        $scope.moveServices = function () {
+        // $scope.moveServices = function () {
 
-          if ($.isEmptyObject(moveServicesMap)) {
-            $scope.$emit('hideMovementDropdown');
-          } else {
+        //   if ($.isEmptyObject(moveServicesMap)) {
+        //     $scope.$emit('hideMovementDropdown');
+        //   } else {
 
-            $scope.disableMoveButton = true;
+        //     $scope.disableMoveButton = true;
 
+        //     ServicesService.move(moveServicesMap, function () {
+        //       $scope.disableMoveButton = false;
+        //       $scope.$emit('hideMovementDropdown');
+        //     });
+        //   }
+        // };
+
+        $scope.moveServices = function (moveServicesMap) {
             ServicesService.move(moveServicesMap, function () {
-              $scope.disableMoveButton = false;
               $scope.$emit('hideMovementDropdown');
+              $scope.servicesData = ServicesService.getServicesData($scope);
             });
-          }
         };
 
         function generateMovementStatesAndMap() {

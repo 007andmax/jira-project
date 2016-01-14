@@ -6,8 +6,36 @@
     </div>
 
     <div class="dropdown pull-right" ng-controller="quicktech.core.services.servicesMovingCtrl">
-
       <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
+           aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
+           tooltip="Move service(s) to..."
+           ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
+           custom-disabled="{{ !hasDefaultServicesChecked }}"
+           services-moving>
+        <i class="icn-sm icn-add-services"></i>
+      </div>
+      <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
+            <div role="presentation" class="checkbox-dropdown-header">
+                <div class="form-group">
+                    <input type="email" class="form-control-filter" placeholder="Search company...">
+                    <i class="icn-sm icn-search-input" tabindex="-1"></i>
+                </div>
+            </div>
+            <div class="list-container">
+                <div class="nano">
+                  <div class="nano-content">
+                      <div class="checkbox-dd-list">
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div role="presentation" class="checkbox-dropdown-footer clearfix">
+                <div class="number-selected pull-left"><i class="pull-left icn-sm icn-tick-blue"></i><strong>3</strong> selected</div>
+                <div class="btn btn-info btn-lg pull-right disabled">Move</div>
+            </div>
+        </div>
+
+       <!-- <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
            aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
            tooltip="Move service(s) to..."
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
@@ -55,7 +83,7 @@
                custom-disabled="{{ disableMoveButton }}">Move
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>

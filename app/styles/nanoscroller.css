@@ -105,13 +105,13 @@
 /* Right bar scroll color end */
 
 /* Ticket content scroll */
-.container-ticket-content  .nano-pane {
+.container-ticket-content > .nano-pane {
   width      : 30px;
   right      : 0;
   top        : 13px;
   bottom     : 90px;
 }
-.container-ticket-content  .nano-pane > .nano-slider {
+.container-ticket-content > .nano-pane > .nano-slider {
   margin: 0 12px;
 }
 /* Ticket content end */

@@ -3,41 +3,92 @@
 (function () {
 
   angular.module("quicktech.core.rightPanel").directive('customPopoverMenu',
-    ['$timeout', 'UsersService', 'SubscriptionsService',
-      function ($timeout, UsersService, SubscriptionsService) {
+    ['$timeout', '$templateRequest', '$compile', 'UsersService', 'SubscriptionsService',
+      function ($timeout, $templateRequest, $compile, UsersService, SubscriptionsService) {
         return {
           restrict: 'A',
           link: function (scope, element, attrs) {
 
-            scope.popoverIsOpen = false;
+            var getMenuPosition = function(popover, mouse, direction, scrollDir) {
+                var win = $(window)[direction](),
+                    scroll = $(window)[scrollDir](),
+                    menu = $(popover)[direction](),
+                    position = mouse;
+                // opening menu would pass the side of the page
+                if (mouse + menu > win && menu < mouse) 
+                    position -= menu;
+                return position;
+            }
+            var hideOtherPopovers = function(){
+              element.siblings().popover('hide');
+            }
 
-            element.bind("contextmenu", function (e) {
-              var mouseOnPopover = false;
+            var hideThisPopover = function(){
+             element.popover('hide');
+            }
 
-              e.preventDefault();
 
-              scope.$apply('popoverIsOpen = true');
+            $templateRequest(attrs.customPopoverTemplate).then(function(html){
+              var template = angular.element(html);
 
-              var customPopover = $('.popover');
-
-              $('.popover-content').css('padding', 0);
-              customPopover.css({'padding': 0, 'margin-top': attrs.customPopoverMenuMarginTop});
-
-              customPopover.bind('mouseleave', function () {
-                scope.$apply('popoverIsOpen = false')
+              element.popover({
+                trigger: 'manual',
+                html: true,
+                content: template,
+                container: 'body'
               });
 
-              element.bind('mouseleave', function () {
+              $compile(template)(scope);
 
-                $timeout(function () {
+              $(document).on('click', function(){
+                // Hide already opened 
+                hideOtherPopovers();
+              })
 
-                  if ($(".popover:hover").length === 0) {
-                    scope.$apply('popoverIsOpen = false');
-                  }
-                  element.off('mouseleave')
-                }, 50)
+              element.bind("contextmenu", function (e) {
+                // Return native menu if pressing control
+                if (e.ctrlKey) return;
 
+                // Hide already opened 
+                hideOtherPopovers();
+
+                var customPopover;
+                var offset = {left: 0, top: 0};
+                // if( typeof(settings.relativeTo) != 'undefined' ) {
+                //     offset = $(settings.relativeTo).offset();
+                // }
+
+                element.one('inserted.bs.popover', function(){
+                  customPopover = $('#'+element.attr('aria-describedby'));
+                  customPopover.find('.popover-content').css('padding', 0);
+                  customPopover.css({
+                    'padding': 0, 
+                    'margin': 0,
+                    // 'margin-top': attrs.customPopoverMenuMarginTop,
+                    'width': 190,
+                    'visibility': 'hidden'
+                  });
+                  customPopover.on('click', function(e){
+                    e.stopPropagation();
+                  })
+                });
+
+                element.one('shown.bs.popover', function(){
+                  var left = getMenuPosition(customPopover, (e.clientX-offset.left), 'width', 'scrollLeft');
+                  var top = getMenuPosition(customPopover, (e.clientY-offset.top), 'height', 'scrollTop');
+                  customPopover.css({
+                        visibility: 'visible',
+                        position: "fixed",
+                        left: left,
+                        top: top
+                    });
+                });
+                
+                element.popover('show');
+
+                return false;
               });
+              
             });
 
             scope.sendEmail = function () {
@@ -51,18 +102,21 @@
                   }
                 }
                 console.log('send email users ' + usersIds);
-
+                hideThisPopover();
                 return;
               }
               console.log('send email ' + scope.user.id);
+              hideThisPopover();
             };
 
             scope.startChat = function () {
               console.log('start chat ' + scope.user.id)
+              hideThisPopover();
             };
 
             scope.changeUserRole = function (userRole) {
               UsersService.changeUserRole(scope.user.id, userRole);
+              hideThisPopover();
             };
 
             scope.archiveContact = function () {
@@ -76,10 +130,11 @@
                   }
                 }
                 console.log('archive users ' + usersIds);
-
+                hideThisPopover();
                 return;
               }
               console.log('archive ' + scope.user.id);
+              hideThisPopover();
             };
 
             scope.subscribeUser = function (userId, nameSubscription) {
@@ -101,6 +156,7 @@
               SubscriptionsService.saveUserSubscription(subscription, function () {
                 scope.disabledUpdateCheckbox = false;
               });
+              hideThisPopover();
             };
 
           }

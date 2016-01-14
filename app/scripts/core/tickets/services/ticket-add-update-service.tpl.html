@@ -9,22 +9,14 @@
 
           <input type="text" class="form-control has-dropdown"
                  name="serviceName"
-                 placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-                 ng-model="serviceExpense.item.name"/>
+                 placeholder="Service"
+                 ng-model="serviceExpense.item.name"
+                 autocomplete-service-list="autocompleteServiceList"
+                 />
           <i class="icn-sm icn-caret-gray"></i>
+          <div class="service-list-container"></div>
 
           <input type="hidden" name="service" ng-model="serviceExpense.item.versionedId.id" ng-required="true">
-
-
-          <ul class="dropdown-menu dropdown-menu-services">
-
-            <li role="presentation" ng-repeat="service in serviceList | filter: {name: serviceNameFilter} ">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="setNewService(service)">
-                {{ service.name }}
-              </a>
-            </li>
-
-          </ul>
 
         </div>
       </div>

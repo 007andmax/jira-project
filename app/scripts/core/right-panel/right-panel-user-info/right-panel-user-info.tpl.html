@@ -190,13 +190,11 @@
           </div>
 
           <div class="lists-wrapper" ng-show="currentOpenCompany === companyData.company.id">
-            <ul class="company-users" ng-show="currentOpenCompanyMode === ('USERS-' + companyData.company.id)">
+            <ul class="company-users" ng-show="currentOpenCompanyMode === ('USERS-' + companyData.company.id)" custom-selection>
 
               <li class="list-users" style="padding: 0 30px 0 0"
-                  custom-popover-menu custom-popover-menu-margin-top="197px"
-                  popover-trigger="notSpecified"
-                  popover-template="'/html/scripts/core/right-panel/custom-popover.tpl.html'"
-                  popover-append-to-body="true" popover-is-open="popoverIsOpen"
+                  custom-popover-menu custom-popover-menu-margin-top="597px"
+                  custom-popover-template="/html/scripts/core/right-panel/custom-popover.tpl.html"
                   ng-repeat="user in companyData.users"
                   ng-class="{'checked': selectedCompanyUsers[user.id]}">
 
@@ -211,7 +209,7 @@
 
                   <div class="clearfix">
 
-                    <label class="control checkbox pull-right" stop-propagation="click">
+                    <label class="control checkbox pull-right">
                       <input type="checkbox" ng-model="selectedCompanyUsers[user.id]">
                       <span class="control-indicator"></span>
                     </label>
