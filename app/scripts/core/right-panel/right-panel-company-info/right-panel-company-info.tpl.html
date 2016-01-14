@@ -54,44 +54,47 @@
 
       <div class="download-agent-form" ng-form="downloadAgentForm">
 
-        <div class="sb-heading billing-heading">Agent Settings</div>
+        <div ng-hide="isCompanyHasUserNameAndPass" class="sb-heading billing-heading">Agent Settings</div>
 
-        <div class="form-group">
+        <div ng-hide="isCompanyHasUserNameAndPass">
 
-          <input class="form-control" type="search" aria-expanded="true" placeholder="Enter user name"
-                 name="Fill" ng-model="downloadAgentUser.name" ng-required="true">
+          <div class="form-group" ng-class="{'has-error': showDownloadError}">
 
-        </div>
+            <input class="form-control" type="search" aria-expanded="true" placeholder="Enter user name"
+                   name="Fill" ng-model="downloadAgentUser.name" ng-required="true">
 
-        <div class="form-group">
+          </div>
 
-          <input ng-class="{'hide': showPassword}" class="form-control show-password" type="password"
-                 ng-model="downloadAgentUser.password" name="roll"
-                 placeholder="Enter user password" ng-required="true" autocomplete="new-password">
+          <div class="form-group" ng-class="{'has-error': showDownloadError}">
 
-          <input ng-class="{'hide': !showPassword}" class="form-control show-password" type="text"
-                 ng-model="downloadAgentUser.password" placeholder="Enter user password"
-                 ng-required="true" autocomplete="new-password">
+            <input ng-class="{'hide': showPassword}" class="form-control show-password" type="password"
+                   ng-model="downloadAgentUser.password" name="roll"
+                   placeholder="Enter user password" ng-required="true" autocomplete="new-password">
 
-          <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
-             class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
-             ng-click="showPassword = true" tooltip-placement="top"
-             tooltip="Show Password">
-            <i class="icn-sm icn-hide-password"></i>
-          </a>
+            <input ng-class="{'hide': !showPassword}" class="form-control show-password" type="text"
+                   ng-model="downloadAgentUser.password" placeholder="Enter user password"
+                   ng-required="true" autocomplete="new-password">
 
-          <a ng-class="{'hide': !showPassword}" href="javascript:void(0)"
-             class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
-             ng-click="showPassword = false" tooltip-placement="top" tooltip="Hide Password"
-             style="position: absolute;right: 12px;">
-            <i class="icn-sm icn-show-password"></i>
-          </a>
+            <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
+               class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
+               ng-click="showPassword = true" tooltip-placement="top"
+               tooltip="Show Password">
+              <i class="icn-sm icn-hide-password"></i>
+            </a>
+
+            <a ng-class="{'hide': !showPassword}" href="javascript:void(0)"
+               class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
+               ng-click="showPassword = false" tooltip-placement="top" tooltip="Hide Password"
+               style="position: absolute;right: 12px;">
+              <i class="icn-sm icn-show-password"></i>
+            </a>
+
+          </div>
 
         </div>
 
         <div class="btn btn-lg btn-info download-agent-btn"
-             custom-disabled="{{ downloadAgentForm.$invalid }}"
-             ng-click="downloadAgent(downloadAgentForm)">
+             ng-click="downloadAgent()">
           Download Agent
         </div>
 
