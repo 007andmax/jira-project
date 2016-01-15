@@ -1,12 +1,15 @@
 <div>
 
   <div class="clearfix divider"></div>
-  <div class="nav-title" style="width: 100%;cursor: pointer"
-       ng-click="toogleCollapse('LABELS')">labels</div>
+  <div class="nav-title" style="width: 100%;cursor: pointer;padding-bottom: 32px;"
+       ng-class="{'collapsed-nav': collapseItem === 'LABELS'}"
+       ng-click="toogleCollapse('LABELS')">
+    labels
+  </div>
 
-  <nav class="clearfix label-nav">
+  <nav class="clearfix label-nav" ng-class="{'collapsed-nav': collapseItem === 'LABELS'}">
 
-    <ul class="nav" collapse="collapseItem !== 'LABELS'">
+    <ul class="nav" collapse="collapseItem !== 'LABELS'" style="width: 100%;">
       <li ng-repeat="tag in tags" ng-class="{'edit': tag.id === editTagId}">
         <a href="javascript:void(0)" ng-if="tag.id !== editTagId">
 

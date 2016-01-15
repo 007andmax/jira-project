@@ -3,18 +3,22 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtSidebar',
-    [function (UserNotificationService) {
+    ['$timeout', function ($timeout) {
       return {
         restrict: 'A',
         link: function (scope, element, attrs) {
 
           var windowWidth;
 
-          initLeftPanel();
+          $timeout(initLeftPanel, 420);
 
           $(window).on('resize', initLeftPanel);
+          $(element).on('click', function () {
+            $timeout(initLeftPanel, 420);
+          });
 
           function initLeftPanel() {
+
             windowWidth = window.innerWidth;
 
             if (windowWidth > 1389) {

@@ -8,8 +8,8 @@
          style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ANALYTICS')">Analytics
     </div>
 
-    <nav class="clearfix">
-      <ul class="nav" collapse="collapseItem !== 'ANALYTICS'">
+    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'ANALYTICS'}">
+      <ul class="nav nav-analytics" ng-hide="collapseItem !== 'ANALYTICS'" style="width: 100%;">
         <li style="cursor: not-allowed">
           <a class="disabled" href="javascript:void(0)">
             <i class="nav-icon icn-lg icn-dashboard"></i> Dashboard
@@ -29,8 +29,8 @@
          ng-click="toogleCollapse('TICKETS')">Tickets
     </div>
 
-    <nav class="clearfix">
-      <ul class="nav" collapse="collapseItem !== 'TICKETS'">
+    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'TICKETS'}">
+      <ul class="nav nav-tickets" ng-hide="collapseItem !== 'TICKETS'" style="width: 100%;">
 
         <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="tickets({listType: 'unassigned'})">
@@ -84,8 +84,8 @@
          ng-click="toogleCollapse('CLIENTS')">clients
     </div>
 
-    <nav class="clearfix">
-      <ul class="nav" collapse="collapseItem !== 'CLIENTS'">
+    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'CLIENTS'}">
+      <ul class="nav nav-clients" ng-hide="collapseItem !== 'CLIENTS'" style="width: 100%;">
 
         <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="companies">
@@ -120,8 +120,9 @@
          ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Accounts
     </div>
 
-    <nav class="clearfix" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-      <ul class="nav" collapse="collapseItem !== 'ACCOUNTS'">
+    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'ACCOUNTS'}"
+         ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+      <ul class="nav nav-accounts" ng-hide="collapseItem !== 'ACCOUNTS'" style="width: 100%;">
 
         <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="accounting">
@@ -161,8 +162,8 @@
          ng-click="toogleCollapse('INVENTRY')">Inventry mngt.
     </div>
 
-    <nav class="clearfix">
-      <ul class="nav" collapse="collapseItem !== 'INVENTRY'">
+    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'INVENTRY'}">
+      <ul class="nav nav-inventry" ng-hide="collapseItem !== 'INVENTRY'" style="width: 100%;">
 
         <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
           <a href="javascript:void(0)" ui-sref="vendors">
