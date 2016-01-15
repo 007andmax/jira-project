@@ -12,7 +12,7 @@
 
 				var users = [];
 				var getName = $scope.getUserName;
-				var getEmail = getEmail = function(user){
+				var getEmail = function(user){
 					return user.primaryEmail;
 				};
 				var getAvatarUrl = $scope.getUserAvatarUrl;
