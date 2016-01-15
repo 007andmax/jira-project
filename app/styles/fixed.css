@@ -512,3 +512,7 @@ aside#left div.nav-title {
 .nav.ng-hide {
   height: 0;
 }
+
+.disabled-not-sign-up {
+  opacity: 0.5;
+}
