@@ -36,7 +36,18 @@
 
             }, function (error) {
             });
+        };
+
+        $scope.toogleCollapse = function(item){
+
+          if(item === $scope.collapseItem){
+            $scope.collapseItem = '';
+            return;
+          }
+
+          $scope.collapseItem = item;
         }
+
       }]);
 
 }());

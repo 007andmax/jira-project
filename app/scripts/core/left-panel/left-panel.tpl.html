@@ -4,10 +4,12 @@
 
   <div class="nano-content" ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
 
-    <div class="nav-title first-item">Analytics</div>
+    <div class="nav-title first-item"
+         style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ANALYTICS')">Analytics
+    </div>
 
     <nav class="clearfix">
-      <ul class="nav">
+      <ul class="nav" collapse="collapseItem !== 'ANALYTICS'">
         <li style="cursor: not-allowed">
           <a class="disabled" href="javascript:void(0)">
             <i class="nav-icon icn-lg icn-dashboard"></i> Dashboard
@@ -23,10 +25,12 @@
     </nav>
 
     <div class="clearfix divider"></div>
-    <div class="nav-title">Tickets</div>
+    <div class="nav-title" style="width: 100%;cursor: pointer"
+         ng-click="toogleCollapse('TICKETS')">Tickets
+    </div>
 
     <nav class="clearfix">
-      <ul class="nav">
+      <ul class="nav" collapse="collapseItem !== 'TICKETS'">
 
         <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="tickets({listType: 'unassigned'})">
@@ -76,10 +80,12 @@
     </nav>
 
     <div class="clearfix divider"></div>
-    <div class="nav-title">clients</div>
+    <div class="nav-title" style="width: 100%;cursor: pointer"
+         ng-click="toogleCollapse('CLIENTS')">clients
+    </div>
 
     <nav class="clearfix">
-      <ul class="nav">
+      <ul class="nav" collapse="collapseItem !== 'CLIENTS'">
 
         <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="companies">
@@ -110,10 +116,12 @@
     </nav>
 
     <div class="clearfix divider"></div>
-    <div class="nav-title" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Accounts</div>
+    <div class="nav-title" style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ACCOUNTS')"
+         ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Accounts
+    </div>
 
-    <nav class="clearfix"ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-      <ul class="nav">
+    <nav class="clearfix" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+      <ul class="nav" collapse="collapseItem !== 'ACCOUNTS'">
 
         <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="accounting">
@@ -149,10 +157,12 @@
 
 
     <div class="clearfix divider"></div>
-    <div class="nav-title">Inventry mngt.</div>
+    <div class="nav-title" style="width: 100%;cursor: pointer"
+         ng-click="toogleCollapse('INVENTRY')">Inventry mngt.
+    </div>
 
     <nav class="clearfix">
-      <ul class="nav">
+      <ul class="nav" collapse="collapseItem !== 'INVENTRY'">
 
         <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
           <a href="javascript:void(0)" ui-sref="vendors">
