@@ -3,9 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
-    ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService', 'FilesService', 'Downloader',
-      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService, FilesService, Downloader) {
+    ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
+      'FilesService', 'Downloader', '$state',
+      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService, FilesService, Downloader, $state) {
 
+        $scope.$state = $state;
         $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
 
@@ -38,15 +40,29 @@
             });
         };
 
-        $scope.toogleCollapse = function(item){
+        $scope.toogleCollapse = function (item) {
 
-          if(item === $scope.collapseItem){
+          if (item === $scope.collapseItem) {
             $scope.collapseItem = '';
             return;
           }
 
           $scope.collapseItem = item;
-        }
+        };
+
+        $scope.$watch(function () {
+          return location.hash
+        }, function (value) {
+
+          var typePage = value.split('/')[1];
+
+          if(typePage !== 'settings'){
+            $scope.collapseItem = typePage.toUpperCase();
+          } else {
+            $scope.collapseItem = '';
+          }
+
+        });
 
       }]);
 

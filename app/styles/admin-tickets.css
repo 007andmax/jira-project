@@ -70,7 +70,7 @@ body.opened-ticket-list .content-wrapper .container-ticket-list{
 body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   width: 420px;
   position: relative;
-  border-right: 1px solid #e7ecf2;
+  /*border-right: 1px solid #e7ecf2;   set border to ticket details content*/
 }
 @media only screen and (min-width: 1930px){
   body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {

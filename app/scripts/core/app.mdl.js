@@ -48,7 +48,7 @@
         controller: 'quicktech.core.tickets.ticketDetailsCtrl'
       }))
       .state('users', waitForServices({
-        url: '/users',
+        url: '/clients/users',
         templateUrl: '/html/scripts/core/users/users.tpl.html',
         controller: 'quicktech.core.users.usersCtrl'
       }))
@@ -58,32 +58,32 @@
         controller: 'quicktech.core.users.createUserCtrl'
       }))
       .state('companies', waitForServices({
-        url: '/companies',
+        url: '/clients/companies',
         templateUrl: '/html/scripts/core/companies/companies.tpl.html',
         controller: 'quicktech.core.companies.companiesCtrl'
       }))
       .state('createCompany', waitForServices({
-        url: '/companies/create',
+        url: '/clients/companies/create',
         templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
         controller: 'quicktech.core.companies.editCompanyCtrl'
       }))
       .state('editCompany', waitForServices({
-        url: '/companies/edit/:companyId',
+        url: '/clients/companies/edit/:companyId',
         templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
         controller: 'quicktech.core.companies.editCompanyCtrl'
       }))
       .state('companyProfile', waitForServices({
-        url: '/companyProfile/:companyId',
+        url: '/clients/companyProfile/:companyId',
         templateUrl: '/html/scripts/core/companies/company-profile.tpl.html',
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
       .state('products', waitForServices({
-        url: '/products',
+        url: '/inventry/products',
         templateUrl: '/html/scripts/core/products/products.tpl.html',
         controller: 'quicktech.core.products.productsCtrl'
       }))
       .state('services', waitForServices({
-        url: '/services',
+        url: '/inventry/services',
         templateUrl: '/html/scripts/core/services/services.tpl.html',
         controller: 'quicktech.core.services.servicesCtrl'
       }))
@@ -103,27 +103,27 @@
         controller: 'quicktech.core.recurring.recurringCtrl'
       }))
       .state('receivable', waitForServices({
-        url: '/receivable/:mode',
+        url: '/accounting/receivable/:mode',
         templateUrl: '/html/scripts/core/receivable/receivable.tpl.html',
         controller: 'quicktech.core.receivable.receivableCtrl'
       }))
       .state('receipt-archive', waitForServices({
-        url: '/receipt-archive/:mode',
+        url: '/accounting/receipt-archive/:mode',
         templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
         controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
       }))
       .state('vendors', waitForServices({
-        url: '/vendors',
+        url: '/inventry/vendors',
         templateUrl: '/html/scripts/core/vendors/vendors.tpl.html',
         controller: 'quicktech.core.vendors.vendorsCtrl'
       }))
       .state('createVendor', waitForServices({
-        url: '/vendors/create',
+        url: '/inventry/vendors/create',
         templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
         controller: 'quicktech.core.vendors.editVendorCtrl'
       }))
       .state('editVendor', waitForServices({
-        url: '/vendors/edit/:vendorId',
+        url: '/inventry/vendors/edit/:vendorId',
         templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
         controller: 'quicktech.core.vendors.editVendorCtrl'
       }))
@@ -156,12 +156,12 @@
         controller: 'quicktech.core.settings.emailTemplatesCtrl'
       }))
       .state('devices', waitForServices({
-        url: '/devices',
+        url: '/clients/devices',
         templateUrl: '/html/scripts/core/devices/devices.tpl.html',
         controller: 'quicktech.core.devices.devicesCtrl'
       }))
       .state('companyDevices', waitForServices({
-        url: '/companyDevices/:companyId',
+        url: '/clients/companyDevices/:companyId',
         templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
         controller: 'quicktech.core.devices.companyDevicesCtrl'
       }));

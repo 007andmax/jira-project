@@ -509,10 +509,25 @@ aside#left div.nav-title {
   overflow: hidden;
 }
 
+.nav-inventry {
+  transition: .4s linear all;
+  height: 132px;
+  overflow: hidden;
+}
+
 .nav.ng-hide {
   height: 0;
 }
 
 .disabled-not-sign-up {
-  opacity: 0.5;
+  opacity: 0;
+  cursor: not-allowed;
+}
+
+.container-ticket-content {
+  border-left: 1px solid #e7ecf2;
+}
+
+.ticket-fixed-header {
+  border-left: 1px solid #e7ecf2;
 }
