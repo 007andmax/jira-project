@@ -38,7 +38,17 @@
 
                   for (var i = 0; i < ticketUpdates.length; i++) {
                     if (scope.firstUnreadUpdateId === ticketUpdates[i].getAttribute('std-update')) {
-                      element.nanoScroller({scrollTo: $(ticketUpdates[i]), scrollTop: windowHeight});
+
+                      var windowWidth = window.innerWidth;
+
+                      if (windowWidth > 1700) {
+                        element.nanoScroller({scrollTo: $(ticketUpdates[i]), scrollTop: windowHeight});
+                      } else {
+                        $('html, body').animate({
+                          scrollTop: ($(ticketUpdates[i]).offset().top - 180) + 'px'
+                        }, 'fast');
+                      }
+
                       return;
                     }
                   }
