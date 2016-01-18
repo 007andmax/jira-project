@@ -40,7 +40,8 @@
 
           <div class="form-group">
             <ul class="upload-attachments"><!--
-              --><li ng-repeat="file in ticketAttachments"
+              -->
+              <li ng-repeat="file in ticketAttachments"
                   ng-style="fileInfo[file.name].error && {'background-color': '#fff2f2'}">
 
                 <span class="file-name">{{ file.name }}</span>
@@ -71,8 +72,9 @@
                   </div>
                 </div>
 
-              </li><!--
-            --></ul>
+              </li>
+              <!--
+                          --></ul>
           </div>
 
           <div class="wysiwyg-controls-wrapper clearfix">
@@ -216,7 +218,10 @@
                        typeahead-min-length="0" ng-required="true" typeahead-editable="false"
                        qt-typeahead-show-on-focus ng-trim="false"
                        custom-style="{'max-height': '170px', 'overflow-y': 'scroll'}">
-                       <i class="icn-sm icn-caret-gray"></i>
+
+                <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
+                   ng-click="ticketCompany = '';ticketCreatedUser = ''" tooltip="clear" tooltip-placement="top"></i>
+
               </div>
 
             </div>
@@ -228,14 +233,16 @@
 
               <label>Created for</label>
 
-                <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
-                       ng-model="ticketCreatedUser" name="ticketCreatedUser"
-                       typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                       typeahead="user as getUserName(user) for user in usersCompany | filter: filterUserFullName($viewValue) | orderBy:'name'"
-                       qt-typeahead-show-on-focus ng-trim="false" ng-required="true"
-                       custom-disabled="{{ !ticketCompany }}"
-                       custom-style="{'max-height': '204px', 'overflow-y': 'scroll'}">
-                       <i class="icn-sm icn-caret-gray" style="top:29px"></i>
+              <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+                     ng-model="ticketCreatedUser" name="ticketCreatedUser"
+                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                     typeahead="user as getUserName(user) for user in usersCompany | filter: filterUserFullName($viewValue) | orderBy:'name'"
+                     qt-typeahead-show-on-focus ng-trim="false" ng-required="true"
+                     custom-disabled="{{ !ticketCompany }}"
+                     custom-style="{'max-height': '204px', 'overflow-y': 'scroll'}">
+
+              <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;top: 29px;"
+                 ng-click="ticketCreatedUser = ''" tooltip="clear" tooltip-placement="top"></i>
 
             </div>
           </div>
@@ -247,7 +254,7 @@
               <div class="dropdown">
                 <input type="text" class="form-control has-dropdown readonly-normal" data-toggle="dropdown"
                        readonly>
-                        <i class="icn-sm icn-caret-gray"></i>
+                <i class="icn-sm icn-caret-gray"></i>
 
                 <ul class="dropdown-menu dropdown-priority" role="menu">
 
@@ -259,7 +266,10 @@
 
                 </ul>
 
-                <div class="default-value"><span class="priority-dot {{ ticketPriorityValue[ticket.priorityLevel].toLowerCase() }}"></span> {{ ticketPriorityValue[ticket.priorityLevel] }}</div>
+                <div class="default-value"><span
+                  class="priority-dot {{ ticketPriorityValue[ticket.priorityLevel].toLowerCase() }}"></span> {{
+                  ticketPriorityValue[ticket.priorityLevel] }}
+                </div>
               </div>
 
             </div>
@@ -272,13 +282,15 @@
 
               <label>Assign to</label>
 
-                <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
-                       ng-model="ticketAssignTo" name="ticketAssignTo"
-                       typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                       typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'name'"
-                       qt-typeahead-show-on-focus assign-to-validation ng-required="false"
-                       custom-style="{'max-height': '204px', 'overflow-y': 'scroll'}">
-                       <i class="icn-sm icn-caret-gray" style="top:29px"></i>
+              <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
+                     ng-model="ticketAssignTo" name="ticketAssignTo"
+                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'name'"
+                     qt-typeahead-show-on-focus assign-to-validation ng-required="false"
+                     custom-style="{'max-height': '204px', 'overflow-y': 'scroll'}">
+
+              <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events:auto;top: 29px;"
+                 ng-click="ticketAssignTo = ''" tooltip="clear" tooltip-placement="top"></i>
 
             </div>
           </div>
