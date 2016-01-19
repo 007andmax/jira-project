@@ -50,6 +50,7 @@
 			var types = ['TEAM_MEMBER', 'CLIENT_USER', 'VENDOS'];
 			var users;
 			var maxProductWidth = 0;
+
 			for(var i in types) {
 				var typeUsers = getUsers(types[i]);
 
@@ -59,12 +60,16 @@
 
 				for(var j=0; j<typeUsers.data.length; j++) {
 					var user = typeUsers.data[j];
+					var avatarUrl = typeUsers.getAvatarUrl($scope.getUserById(user.id));
+					var image = new Image();
+					image.src = avatarUrl;
+
 	 				var width = $.Autocomplete.getHtmlWidth('<div class="user-item"> \
 						<label class="control checkbox"> \
 						  <input type="checkbox"> \
 						  <span class="control-indicator"></span> \
 						  <a href="" class="pull-left avatar"> \
-							<img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26"> \
+							<img src="'+avatarUrl+'" alt="..." class="img-circle avatar-26"> \
 						  </a> \
 						<span class="user-name"><b>'+typeUsers.getName(user)+'</b> “'+typeUsers.getEmail(user)+'”</span> \
 						</label>\
@@ -131,8 +136,6 @@
 				},
 				formatItem: function(result, suggestion) {
 					var avatarUrl = users.getAvatarUrl($scope.getUserById(suggestion.data.id));
-
-					// Preload avatar
 					var image = new Image();
 					image.src = avatarUrl;
 
@@ -146,12 +149,16 @@
 					</label>';
 				},
 				calculateWidth: function(result, suggestion){
+					var avatarUrl = users.getAvatarUrl($scope.getUserById(suggestion.data.id));
+					var image = new Image();
+					image.src = avatarUrl;
+
 					var width = $.Autocomplete.getHtmlWidth('<div class="user-item"> \
 						<label class="control checkbox"> \
 						  <input type="checkbox"> \
 						  <span class="control-indicator"></span> \
 						  <a href="" class="pull-left avatar"> \
-							<img src="assets/images/avatars/a4.jpg" alt="..." class="img-circle avatar-26"> \
+							<img src="'+avatarUrl+'" alt="..." class="img-circle avatar-26"> \
 						  </a> \
 						<span class="user-name"><b>'+result+'</b> “'+users.getEmail(suggestion.data)+'”</span> \
 						</label>\
