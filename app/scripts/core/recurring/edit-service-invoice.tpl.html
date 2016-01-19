@@ -14,7 +14,8 @@
                    typeahead="companyService as companyService.name for companyService in companyServices | filter:$viewValue:stateComparator | orderBy:'name'"
                    typeahead-min-length="0" typeahead-editable="false"
                    qt-typeahead-show-on-focus ng-trim="false">
-            <i class="icn-sm icn-caret-gray"></i>
+
+            <div typeahead-input-icon="editService.item" style="position: absolute;top: 13px;right: 13px;"></div>
 
           </div>
         </div>

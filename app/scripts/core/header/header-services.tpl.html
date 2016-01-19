@@ -7,10 +7,10 @@
              ng-model="service" typeahead-on-select="showService(service)" autocomplete="off"
              typeahead="service as service.name for service in searchServices($viewValue)"
              typeahead-template-url="/html/scripts/core/header/typeahead-template/service.tpl.html"
-             custom-style="{'max-height': '160px', 'overflow-y': 'scroll'}">
+             custom-style="{'max-height': '160px', 'overflow-y': 'auto'}">
 
       <span class="input-group-addon-search">
-        <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
+       <div typeahead-input-icon="service" style="position: absolute;top: 13px;right: 13px;"></div>
       </span>
 
     </div>

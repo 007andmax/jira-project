@@ -47,10 +47,9 @@
                    name="addCompany" ng-required="true" ng-trim="false" autocomplete="off"
                    ng-model="company" typeahead-on-select="prepareCompanyToAdd()" qt-typeahead-show-on-focus
                    typeahead="company as company.name for company in notRecurringCompaniesArray | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                   custom-style="{width: '100%', 'max-height': '170px', 'overflow-y': 'scroll'}">
+                   custom-style="{width: '100%', 'max-height': '170px', 'overflow-y': 'auto'}">
 
-            <i class="icn-sm icn-search-input" tabindex="-1"
-               style="position: absolute;right: auto;left: 13px;top: 13px;"></i>
+            <div typeahead-input-icon="company" style="position: absolute;top: 13px;right: 13px;"></div>
 
           </div>
         </div>

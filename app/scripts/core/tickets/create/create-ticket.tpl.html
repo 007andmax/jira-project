@@ -212,15 +212,16 @@
               <label>Company</label>
 
               <div class="dropdown">
+
                 <input type="text" class="form-control has-dropdown"
                        ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
                        typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                        typeahead-min-length="0" ng-required="true" typeahead-editable="false"
                        qt-typeahead-show-on-focus ng-trim="false"
-                       custom-style="{'max-height': '170px', 'overflow-y': 'scroll'}">
+                       custom-style="{'max-height': '170px', 'overflow-y': 'auto'}">
 
-                <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
-                   ng-click="ticketCompany = '';ticketCreatedUser = ''" tooltip="clear" tooltip-placement="top"></i>
+                <div typeahead-input-icon="ticketCompany, ticketCreatedUser"
+                     style="position: absolute;top: 13px;right: 13px;"></div>
 
               </div>
 
@@ -239,10 +240,9 @@
                      typeahead="user as getUserName(user) for user in usersCompany | filter: filterUserFullName($viewValue) | orderBy:'name'"
                      qt-typeahead-show-on-focus ng-trim="false" ng-required="true"
                      custom-disabled="{{ !ticketCompany }}"
-                     custom-style="{'max-height': '204px', 'overflow-y': 'scroll'}">
+                     custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 
-              <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;top: 29px;"
-                 ng-click="ticketCreatedUser = ''" tooltip="clear" tooltip-placement="top"></i>
+              <div typeahead-input-icon="ticketCreatedUser" style="position: absolute;top: 29px;right: 13px;"></div>
 
             </div>
           </div>
@@ -287,10 +287,9 @@
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'name'"
                      qt-typeahead-show-on-focus assign-to-validation ng-required="false"
-                     custom-style="{'max-height': '204px', 'overflow-y': 'scroll'}">
+                     custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 
-              <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events:auto;top: 29px;"
-                 ng-click="ticketAssignTo = ''" tooltip="clear" tooltip-placement="top"></i>
+              <div typeahead-input-icon="ticketAssignTo" style="position: absolute;top: 29px;right: 13px;"></div>
 
             </div>
           </div>
