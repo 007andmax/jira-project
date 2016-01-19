@@ -234,7 +234,7 @@
         }
 
         function setContactLastName() {
-          if ($scope.activity.firstList[0] && $scope.activity.firstList[0].contactLastName) {
+          if ($scope.activity.firstList[0] && ($scope.activity.firstList[0].contactLastName || $scope.activity.firstList[0].contactLastName === '')) {
             $scope.contactLastName = $scope.activity.firstList[0].contactLastName;
           } else {
             console.error('can not find contactLastName in activity ' + $scope.activity.action)
@@ -266,7 +266,7 @@
         }
 
         function setUserLastName() {
-          if ($scope.activity.firstList[0] && $scope.activity.firstList[0].userLastName) {
+          if ($scope.activity.firstList[0] && ($scope.activity.firstList[0].userLastName || $scope.activity.firstList[0].userLastName === '')) {
             $scope.userLastName = $scope.activity.firstList[0].userLastName;
           } else {
             console.error('can not find userLastName in activity ' + $scope.activity.action)
