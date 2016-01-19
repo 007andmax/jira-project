@@ -13,7 +13,7 @@
           };
 
           $scope.selectProduct = function (product) {
-            $scope.editProduct.item = product.staticCopy();
+            $scope.editProduct.item = product;
           };
 
           $scope.saveUpdateProduct = function (form) {

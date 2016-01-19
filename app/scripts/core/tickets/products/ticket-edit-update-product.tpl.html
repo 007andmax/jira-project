@@ -5,14 +5,13 @@
       <li>
         <div class="edit-col1"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productName') || !editProduct.item.versionedId.id}">
-          <div class="dropdown">
+          <div class="dropdown" product-autocomplete>
             <input type="text" class="form-control has-dropdown" ng-model="editProduct.item.name "
                    placeholder="Product" data-toggle="dropdown" aria-expanded="false"
                    name="productName" ng-required="true">
             <i class="icn-sm icn-caret-gray"></i>
 
-            <div class="dropdown-menu dropdown-product"
-                 ng-include="'/html/scripts/common/templates/choose-product-dropdown.tpl.html'"></div>
+            <div ng-include="'/html/scripts/common/templates/choose-product-dropdown.tpl.html'"></div>
 
           </div>
         </div>

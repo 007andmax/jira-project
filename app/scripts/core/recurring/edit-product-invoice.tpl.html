@@ -5,7 +5,7 @@
         <i class="icn icn-sm icn-update-product pull-left"></i>
 
         <div class="col-1" ng-class="{'has-error': isShowingErrors(editProductInvoiceForm, 'product')}">
-          <div class="dropdown">
+          <div class="dropdown"  product-autocomplete>
 
             <input type="text" class="form-control has-dropdown" placeholder="Product" data-toggle="dropdown"
                    aria-expanded="false" name="productName"
@@ -14,8 +14,7 @@
 
             <input type="hidden" name="product" ng-model="editProduct.item.versionedId.id" ng-required="true">
 
-            <div class="dropdown-menu dropdown-product"
-                 ng-include="'/html/scripts/common/templates/choose-product-dropdown.tpl.html'"></div>
+            <div ng-include="'/html/scripts/common/templates/choose-product-dropdown.tpl.html'"></div>
 
           </div>
         </div>

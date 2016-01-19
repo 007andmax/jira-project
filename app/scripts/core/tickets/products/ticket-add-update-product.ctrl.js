@@ -11,7 +11,7 @@
           };
 
           $scope.selectProduct = function (product) {
-            $scope.productExpense.item = product.staticCopy();
+            $scope.productExpense.item = product;
           };
 
           $scope.removeProduct = function () {
