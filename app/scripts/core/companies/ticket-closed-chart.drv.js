@@ -25,7 +25,12 @@
             }
           });
 
-          function reinitializeGraph() {
+          function reinitializeGraph(){
+
+            if(!$scope.includeCanvas){
+              return;
+            }
+
             var chart = element.find('[ticket-closed-graph]'),
               chartContext = chart[0].getContext("2d"),
               backgroundColour = chart.css('background-color'),
