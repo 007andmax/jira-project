@@ -48,13 +48,11 @@
 
                 <div ng-messages="basicInfoForm.lastName.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'lastName')}">
-                  <label class="control-label" ng-message="required">Last name requires at least 1 letter.</label>
                   <label class="control-label" ng-message="maxlength">Last name is too large.</label>
-                  <label class="control-label" ng-message="minlength">Last name is too short.</label>
                 </div>
 
-                <input type="text" class="form-control" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
-                       name="lastName" ng-model="editUser.lastName" ng-required="true" make-dirty-on-blur>
+                <input type="text" class="form-control" aria-expanded="true" ng-maxlength="15"
+                       name="lastName" ng-model="editUser.lastName" make-dirty-on-blur>
               </div>
             </div>
 
@@ -68,13 +66,12 @@
 
                 <div ng-messages="basicInfoForm.designation.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'designation')}">
-                  <label class="control-label" ng-message="required">Please enter a designation.</label>
                   <label class="control-label" ng-message="maxlength">Designation is too large</label>
                   <label class="control-label" ng-message="minlength">Designation is too short</label>
                 </div>
 
                 <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
-                       ng-model="editUser.designation" ng-required="true" ng-minlength="3" ng-maxlength="30">
+                       ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30">
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'primaryEmail')}">
