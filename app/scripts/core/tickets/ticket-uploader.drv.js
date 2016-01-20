@@ -60,6 +60,7 @@
 
               UserNotificationService.show('Loading...');
 
+              scope.ticketsHeaderState.ticketsQuantity = 0;
               scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
 
                 scope.ticketsHeaderState.aditionalTicketsQuantity = 0;
