@@ -68,7 +68,8 @@
               phoneNumbers: user.phoneNumbers.staticCopy(),
               companyId: user.company.id,
               subscription: userSubscription,
-              avatar: avatar
+              avatar: avatar,
+              userEnabled: user.userEnabled
             };
 
           } else {

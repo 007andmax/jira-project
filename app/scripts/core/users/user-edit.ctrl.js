@@ -6,12 +6,25 @@
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state) {
 
+        var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
+
+        $scope.roles = {
+          USER: 'User',
+          ADMIN: 'Administrator'
+        };
+
+        if (curentUsersCompany.accountType === 'ROOT') {
+          $scope.isTechUser = true;
+          $scope.roles.SUPER_TECH_ADMIN = 'Super Admin'
+        }
+
         if (!$scope.editUser || !$scope.editUser.id) {
           $scope.isCreation = true;
           $scope.editUser = {
             role: 'USER',
             phoneNumbers: [],
             subscription: {},
+            welcomeEmail: true,
             avatar: {
               scale: 50
             }
@@ -20,14 +33,11 @@
           $scope.$watch('userCompany', function (userCompany) {
             $scope.editUser.companyId = userCompany ? userCompany.id : undefined;
           });
+        } else {
+          $scope.isResetPassCollapsed = true;
         }
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-
-        $scope.roles = {
-          USER: 'User',
-          ADMIN: 'Administrator'
-        };
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
@@ -51,20 +61,29 @@
 
         $scope.save = function (form) {
           if (form.$valid) {
+
+            var editUser = angular.copy($scope.editUser);
+
+            delete editUser.confPassword;
+
             $scope.savingInProcess = true;
 
-            var phoneNumbers = $scope.editUser.phoneNumbers,
+            var phoneNumbers = editUser.phoneNumbers,
               lastPhone = phoneNumbers[phoneNumbers.length - 1];
 
             if (!lastPhone.number || lastPhone.number.trim().length === 0) {
               phoneNumbers.splice(phoneNumbers.length - 1, 1);
             }
 
-            if ($scope.editUser.avatar && !$scope.editUser.avatar.id && !$scope.editUser.avatar.origin && !$scope.editUser.avatar.cropped) {
-              $scope.editUser.avatar = undefined;
+            if (editUser.avatar && !editUser.avatar.id && !editUser.avatar.origin && !editUser.avatar.cropped) {
+              editUser.avatar = undefined;
             }
 
-            UsersService.save($scope.editUser, function () {
+            if (editUser.password) {
+              editUser.password = hex_md5(editUser.password);
+            }
+
+            UsersService.save(editUser, function () {
               $scope.savingInProcess = false;
               $scope.cancelEdit();
             })
@@ -81,26 +100,27 @@
           });
         };
 
-        //$scope.chooseCompany = function (company) {
-        //  $scope.editUser.companyId = company.id;
-        //  $scope.searchCompany = company.name;
-        //};
-        //
-        //$scope.$watch('searchCompany', function () {
-        //  if (!$scope.searchCompany || !$scope.clientCompanies) {
-        //    return;
-        //  }
-        //
-        //  for (var i = 0; i < $scope.clientCompanies.length; i++) {
-        //    if ($scope.searchCompany.toLowerCase() === $scope.clientCompanies[i].name.toLowerCase()) {
-        //      $scope.editUser.companyId = $scope.clientCompanies[i].id;
-        //      $scope.searchCompany = $scope.clientCompanies[i].name;
-        //      return;
-        //    } else {
-        //      $scope.editUser.companyId = '';
-        //    }
-        //  }
-        //})
+        $scope.changeConfirmPass = function (form) {
+
+          if (!$scope.editUser.password) {
+            $scope.isConfirmPassError = false;
+            form.$setValidity('password', true);
+            return;
+          }
+
+          if ($scope.editUser.confPassword !== $scope.editUser.password) {
+            $scope.isConfirmPassError = true;
+            form.$setValidity('password', false)
+          } else {
+            $scope.isConfirmPassError = false;
+            form.$setValidity('password', true)
+          }
+        };
+
+        $scope.resetPassword = function () {
+          $scope.isResetPassCollapsed = !$scope.isResetPassCollapsed;
+          $scope.editUser.password = $scope.editUser.confPassword = '';
+        }
 
       }]);
 

@@ -30,7 +30,8 @@
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'TICKETS'}">
-      <ul class="nav nav-tickets" ng-hide="collapseItem !== 'TICKETS'" style="width: 100%;">
+      <ul class="nav nav-tickets" ng-class="{'nav-tickets-users': currentUser.role === 'USER'}"
+          ng-hide="collapseItem !== 'TICKETS'" style="width: 100%;">
 
         <li ui-sref-active="active">
           <a href="javascript:void(0)" ui-sref="tickets({listType: 'unassigned'})">
@@ -163,7 +164,8 @@
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'INVENTRY'}">
-      <ul class="nav nav-inventry" ng-hide="collapseItem !== 'INVENTRY'" style="width: 100%;">
+      <ul class="nav nav-inventry" ng-class="{'nav-inventry-users': currentUser.role === 'USER'}"
+          ng-hide="collapseItem !== 'INVENTRY'" style="width: 100%;">
 
         <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
           <a href="javascript:void(0)" ui-sref="vendors">

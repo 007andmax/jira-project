@@ -31,7 +31,7 @@
             </div>
 
             <input class="form-control" type="text" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
-                   name="firstName" ng-model="editUser.firstName" required="true" make-dirty-on-blur>
+                   name="firstName" ng-model="editUser.firstName" ng-required="true" make-dirty-on-blur>
 
           </div>
 
@@ -39,14 +39,12 @@
 
             <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'lastName')}">Last Name</label>
 
-            <div ng-messages="userForm.lastName.$error"ng-class="{'hide': !isShowingErrors(userForm, 'lastName')}">
-              <div class="control-label" ng-message="required">Last name requires at least 1 letter.</div>
+            <div ng-messages="userForm.lastName.$error" ng-class="{'hide': !isShowingErrors(userForm, 'lastName')}">
               <div class="control-label" ng-message="maxlength">Last name is too large.</div>
-              <div class="control-label" ng-message="minlength">Last name is too short.</div>
             </div>
 
-            <input class="form-control" type="text" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
-                   name="lastName" ng-model="editUser.lastName" required="true" make-dirty-on-blur>
+            <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                   name="lastName" ng-model="editUser.lastName" make-dirty-on-blur>
 
           </div>
 
@@ -56,16 +54,17 @@
 
           <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'designation')}">
 
-            <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'designation')}">Designation</label>
+            <label class="control-label"
+                   ng-class="{'hide': isShowingErrors(userForm, 'designation')}">Designation</label>
 
-            <div ng-messages="userForm.designation.$error" ng-class="{'hide': !isShowingErrors(userForm, 'designation')}">
-              <div class="control-label" ng-message="required">Please enter a designation.</div>
+            <div ng-messages="userForm.designation.$error"
+                 ng-class="{'hide': !isShowingErrors(userForm, 'designation')}">
               <div class="control-label" ng-message="maxlength">Designation is too large</div>
               <div class="control-label" ng-message="minlength">Designation is too short</div>
             </div>
 
             <input class="form-control" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
-                   ng-model="editUser.designation" required="true" ng-minlength="3" ng-maxlength="30">
+                   ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30">
 
           </div>
 
@@ -73,7 +72,8 @@
 
             <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'primaryEmail')}">Email</label>
 
-            <div ng-messages="userForm.primaryEmail.$error" ng-class="{'hide': !isShowingErrors(userForm, 'primaryEmail')}">
+            <div ng-messages="userForm.primaryEmail.$error"
+                 ng-class="{'hide': !isShowingErrors(userForm, 'primaryEmail')}">
               <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
               <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
               <div class="control-label" ng-message="unique">This email already occupied.</div>
@@ -87,7 +87,7 @@
 
         </div>
 
-        <div class="form-row" phone-numbers-edit ng-model="editUser.phoneNumbers"></div>
+        <div ng-hide="isTechUser" class="form-row" phone-numbers-edit ng-model="editUser.phoneNumbers"></div>
 
         <div class="form-row clearfix">
 
@@ -114,7 +114,8 @@
 
           <div class="form-group" ng-class="{'has-error': userForm.userCompany.$dirty && (editUser.companyId === '')}">
 
-            <label class="control-label" ng-class="{'hide': (userForm.userCompany.$dirty && (editUser.companyId === ''))}">Company</label>
+            <label class="control-label"
+                   ng-class="{'hide': (userForm.userCompany.$dirty && (editUser.companyId === ''))}">Company</label>
 
             <div class="control-label"
                  ng-class="{'hide': !(userForm.userCompany.$dirty && (editUser.companyId === ''))}">
@@ -137,7 +138,7 @@
           </div>
         </div>
 
-        <div class="form-row clearfix">
+        <div class="form-row clearfix" ng-hide="isTechUser">
 
           <div class="form-group">
             <label class="control-label">Subscribe to</label>
@@ -194,13 +195,128 @@
 
             </div>
           </div>
+        </div>
 
-          <div class="form-group no-label">
-            <div class="btn btn-lg btn-info pull-right"
-                 custom-disabled="{{ !userForm.$valid || savingInProcess }}"
-                 ng-click="save(userForm)">
-              {{ isCreation ? 'Create' : 'Save' }}
+        <div class="form-row clearfix" ng-if="isCreation">
+          <label class="control checkbox pull-left">
+            <input type="checkbox"
+                   ng-model="editUser.welcomeEmail">
+            <span class="control-indicator" style="margin-top: -2px;"></span>
+            Send Welcome Email
+          </label>
+        </div>
+
+        <div class="form-row clearfix" ng-if="!isCreation && currentUser.role !== 'USER'">
+
+          <label class="control checkbox pull-left" style="height: 20px;">
+
+            <input type="checkbox" ng-model="editUser.userEnabled" ng-change="resetPassword()">
+
+            <span class="control-indicator" style="margin-top: -2px;"></span>Account Enabled
+
+          </label>
+
+          <div class="reset-pass-button" ng-click="resetPassword()"
+               ng-show="editUser.userEnabled" style="cursor: pointer">
+
+            <label class="control checkbox pull-right" style="margin-top: 4px;margin-right: 143px;">
+
+              Reset Password
+
+              <div class="icon-block">
+
+                <i class="icn-sm icn-remove-token" ng-hide="isResetPassCollapsed"
+                   tooltip="Cancel" tooltip-placement="top"></i>
+
+                <i class="icn-sm icn-caret-gray" ng-show="isResetPassCollapsed"
+                   tooltip="Open Form" tooltip-placement="top"></i>
+
+              </div>
+
+            </label>
+
+          </div>
+
+          <div class="form-row clearfix reset-pass-form" style="width: 100%;"
+               ng-show="editUser.userEnabled && !isResetPassCollapsed">
+
+            <div class="form-group" ng-class="{'has-error': isShowingErrors(userForm, 'password')}">
+
+              <label class="control-label" ng-class="{'hide': isShowingErrors(userForm, 'password')}">
+                Password
+              </label>
+
+              <div ng-messages="userForm.password.$error"
+                   ng-class="{'hide': !isShowingErrors(userForm, 'password')}">
+                <label class="control-label" ng-message="minlength">Password is too short</label>
+              </div>
+
+              <input ng-class="{'hide': showPassword}" class="form-control show-password" type="password"
+                     ng-model="editUser.password" name="password" ng-minlength="4"
+                     ng-change="changeConfirmPass(userForm)">
+
+              <input ng-class="{'hide': !showPassword}" class="form-control show-password" type="text"
+                     ng-model="editUser.password" ng-change="changeConfirmPass(userForm)">
+
+              <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
+                 class="hide-password-hit hit-area ha-18 has-tooltip"
+                 ng-click="showPassword = true" tooltip-placement="top"
+                 tooltip="Show Password">
+                <i class="icn-sm icn-hide-password"></i>
+              </a>
+
+              <a ng-class="{'hide': !showPassword}" href="javascript:void(0)"
+                 class="hide-password-hit hit-area ha-18 has-tooltip"
+                 ng-click="showPassword = false" tooltip-placement="top" tooltip="Hide Password"
+                 style="position: absolute;right: 12px;top: 31px;">
+                <i class="icn-sm icn-show-password"></i>
+              </a>
+
             </div>
+
+            <div class="form-group" ng-class="{'has-error': isConfirmPassError || userForm.confirmPassword.$invalid}">
+
+              <label class="control-label" ng-class="{'hide': isConfirmPassError || userForm.confirmPassword.$invalid}">
+                Confirm Password
+              </label>
+
+              <div ng-class="{'hide': !isConfirmPassError && userForm.confirmPassword.$valid}">
+                <label class="control-label">Passwords is different</label>
+              </div>
+
+              <input ng-class="{'hide': showConfirmPassword}" class="form-control show-password" type="password"
+                     ng-model="editUser.confPassword" ng-change="changeConfirmPass(userForm)"
+                     name="confirmPassword" ng-required="editUser.password">
+
+              <input ng-class="{'hide': !showConfirmPassword}" class="form-control show-password" type="text"
+                     ng-model="editUser.confPassword" ng-change="changeConfirmPass(userForm)">
+
+              <a ng-class="{'hide': showConfirmPassword}" href="javascript:void(0)"
+                 class="show-password-hit hit-area ha-18 has-tooltip"
+                 ng-click="showConfirmPassword = true"
+                 tooltip-placement="top" tooltip="Show Password" tooltip-append-to-body="true">
+                <i class="icn-sm icn-hide-password"></i>
+              </a>
+
+              <a ng-class="{'hide': !showConfirmPassword}" href="javascript:void(0)"
+                 class="show-password-hit hit-area ha-18 has-tooltip"
+                 ng-click="showConfirmPassword = false"
+                 tooltip-placement="top" tooltip="Hide Password" tooltip-append-to-body="true"
+                 style="position: absolute;right: 12px;top: 31px;">
+                <i class="icn-sm icn-show-password"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="form-row clearfix">
+          <div class="btn btn-lg btn-info pull-right"
+               custom-disabled="{{ !userForm.$valid || savingInProcess }}"
+               ng-click="save(userForm)">
+            {{ isCreation ? 'Create' : 'Save' }}
           </div>
         </div>
 

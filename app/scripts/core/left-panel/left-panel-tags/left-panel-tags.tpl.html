@@ -7,7 +7,8 @@
     labels
   </div>
 
-  <nav class="clearfix label-nav" ng-class="{'collapsed-nav': collapseItem === 'LABELS'}">
+  <nav class="clearfix label-nav" style="padding-top: 0;"
+       ng-class="{'collapsed-nav': collapseItem === 'LABELS'}">
 
     <ul class="nav" collapse="collapseItem !== 'LABELS'" style="width: 100%;">
       <li ng-repeat="tag in tags" ng-class="{'edit': tag.id === editTagId}">

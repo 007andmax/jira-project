@@ -468,8 +468,7 @@ body.modal-open {
 }
 
 .ng-hide-add, .ng-hide-remove {
-  /* ensure visibility during the transition */
-  display: block !important; /* yes, important */
+  display: block !important;
 }
 
 nav.clearfix {
@@ -497,6 +496,12 @@ aside#left div.nav-title {
   overflow: hidden;
 }
 
+.nav-tickets.nav-tickets-users {
+  transition: .4s linear all;
+  height: 176px;
+  overflow: hidden;
+}
+
 .nav-clients {
   transition: .4s linear all;
   height: 176px;
@@ -512,6 +517,12 @@ aside#left div.nav-title {
 .nav-inventry {
   transition: .4s linear all;
   height: 132px;
+  overflow: hidden;
+}
+
+.nav-inventry-users {
+  transition: .4s linear all;
+  height: 88px;
   overflow: hidden;
 }
 
@@ -535,3 +546,25 @@ aside#left div.nav-title {
 .root-user-company-prof {
   padding-top: 560px;
 }
+
+.create-user-container .reset-pass-button {
+  margin-left: 150px;
+  margin-top: 6px;
+}
+
+.create-user-container .reset-pass-button .icon-block {
+  width: 12px;
+  margin-top: -12px;
+  margin-left: 93px;
+}
+
+.create-user-container .reset-pass-form.ng-hide {
+  height: 0;
+}
+
+.create-user-container .reset-pass-form {
+  transition: .2s linear all;
+  height: 59px;
+  overflow: hidden;
+}
+
