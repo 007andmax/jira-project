@@ -174,13 +174,13 @@
        ec-is-show-loader-on-cover="isShowLoaderOnCover"
        ec-disabled-cover-control="disabledCoverControl"></div>
 
-  <div ng-if="currentUser.accountType !== 'ROOT'" class="collapse-charts" ng-click="toggleCollapsed()"
+  <div ng-if="isChartsAccess()" class="collapse-charts" ng-click="toggleCollapsed()"
        ng-class="{'hide': isCollapsed}"
        style="margin-top: 25px;">
     <span><i class="icn-sm icn-collapse"></i></span>
   </div>
 
-  <div ng-if="currentUser.accountType !== 'ROOT'" collapse="isCollapsed">
+  <div ng-if="isChartsAccess()" collapse="isCollapsed">
 
     <div class="charts-n-graphs-container">
 
@@ -377,18 +377,18 @@
 
   </div>
 
-  <div ng-if="currentUser.accountType !== 'ROOT'" class="collapse-charts" ng-click="toggleCollapsed()"
+  <div ng-if="isChartsAccess()" class="collapse-charts" ng-click="toggleCollapsed()"
        ng-class="{'hide': isCollapsed}">
     <span><i class="icn-sm icn-collapse"></i></span>
   </div>
 
-  <div ng-if="currentUser.accountType !== 'ROOT'" class="expand-charts" ng-click="toggleCollapsed()"
+  <div ng-if="isChartsAccess()" class="expand-charts" ng-click="toggleCollapsed()"
        ng-class="{'hide': !isCollapsed}">
     <p class="pull-left">Expand to view overall statistics</p>
     <i class="icn-sm icn-expand pull-right"></i>
   </div>
 
-  <ul class="nav nav-qt" ng-class="{'root-user-company-prof': currentUser.accountType === 'ROOT'}">
+  <ul class="nav nav-qt" ng-class="{'root-user-company-prof': !isChartsAccess()}">
 
     <!--<li class="activity-tab active">-->
     <!--<a data-toggle="tab" href="javascript:void(0)">Activity</a>-->

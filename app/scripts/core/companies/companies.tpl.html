@@ -1,6 +1,7 @@
-<div class="company-profile-content companies-list">
+<div class="company-profile-content companies-list"
+     ng-class="{'not-charts-companies-page': !isChartsAccess()}">
 
-  <div collapse="isCollapsed" class="charts-n-graphs-container">
+  <div collapse="isCollapsed" class="charts-n-graphs-container" ng-if="isChartsAccess()">
 
     <div class="devices-chart">
       <div class="chart-content">
@@ -90,11 +91,11 @@
 
   </div>
 
-  <div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
+  <div ng-if="isChartsAccess()" class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
     <span><i class="icn-sm icn-collapse"></i></span>
   </div>
 
-  <div class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">
+  <div ng-if="isChartsAccess()" class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">
     <p class="pull-left">Expand to view overall statistics</p>
     <i class="icn-sm icn-expand pull-right"></i>
   </div>
