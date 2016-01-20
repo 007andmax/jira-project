@@ -301,13 +301,11 @@
 
                       <div ng-messages="contactForm.lastName.$error"
                            ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'lastName')}">
-                        <label class="control-label" ng-message="required">Last name requires at least 1 letter.</label>
                         <label class="control-label" ng-message="maxlength">Last name is too large.</label>
-                        <label class="control-label" ng-message="minlength">Last name is too short.</label>
                       </div>
 
-                      <input class="form-control" type="text" aria-expanded="true" ng-minlength="1" ng-maxlength="15"
-                             name="lastName" ng-model="contact.lastName" required="true" make-dirty-on-blur>
+                      <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                             name="lastName" ng-model="contact.lastName" make-dirty-on-blur>
                     </div>
 
                   </div>
@@ -324,14 +322,13 @@
 
                       <div ng-messages="contactForm.designation.$error"
                            ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'designation')}">
-                        <label class="control-label" ng-message="required">Please enter a designation.</label>
                         <label class="control-label" ng-message="maxlength">Designation is too large</label>
                         <label class="control-label" ng-message="minlength">Designation is too short</label>
                       </div>
 
                       <input class="form-control" type="text" name="designation"
                              aria-expanded="true" make-dirty-on-blur
-                             ng-model="contact.designation" required="true" ng-minlength="3" ng-maxlength="30">
+                             ng-model="contact.designation" ng-minlength="3" ng-maxlength="30">
                     </div>
 
                     <div class="form-group"
@@ -358,11 +355,11 @@
                   </div>
 
                   <div class="form-row clearfix">
-                    <div phone-numbers-edit ng-model="contact.phoneNumbers"></div>
+                    <div ng-show="currentUser.accountType !== 'ROOT'" phone-numbers-edit ng-model="contact.phoneNumbers"></div>
                   </div>
 
                   <div class="form-row clearfix">
-                    <div class="form-group">
+                    <div ng-show="currentUser.accountType !== 'ROOT'" class="form-group">
 
                       <label class="control-label">Subscribe to</label>
 
@@ -407,7 +404,7 @@
                       </div>
                     </div>
 
-                    <div class="form-group no-label" style="margin-left: 10px;">
+                    <div class="form-group no-label pull-right" style="margin-left: 10px;">
                       <div custom-ng-show-if="$last && editCompany.contacts.length < contactsMaxCount">
                           <div class="btn btn-dark has-tooltip pull-right" ng-click="addContact()" cns-if
                                tooltip-placement="top" tooltip="Add another contact">
