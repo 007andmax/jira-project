@@ -12,7 +12,14 @@
 
         today.setHours(0, 0, 0, 0);
 
-        $scope.resolvedTicketsCountByCompany = StatisticsService.getResolvedTicketsCountByCompany($stateParams.companyId, $scope);
+        $scope.resolvedTicketsCountByCompany = StatisticsService.getResolvedTicketsCountByCompany($stateParams.companyId, $scope, function () {
+          $scope.$watch('resolvedTicketsCountByCompany.value', function () {
+            if ($scope.resolvedTicketsCountByCompany.value > 0 && !$scope.isChartHasOpen) {
+              $scope.setCollapsedValue(false);
+              $scope.setChartHasOpenValue(true);
+            }
+          })
+        });
 
         $scope.changeRangeDateToGetClosedTkt = function (option) {
 

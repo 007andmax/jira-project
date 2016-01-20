@@ -10,9 +10,10 @@
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
 
+        $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
         $scope.mode = 'user';
-        $scope.isCollapsed = false;
+        $scope.isCollapsed = true;
         $scope.locationIndex = 0;
         $scope.contactIndex = 0;
         $scope.gmtPattern = /\w+/;
@@ -34,6 +35,7 @@
         $scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function () {
 
           $scope.$watch('countsTicketsCompany', function () {
+
             $scope.countsByTypesAndCompany = [{
               label: 'Unassigned',
               value: $scope.countsTicketsCompany['UNASSIGNED'],
@@ -43,6 +45,16 @@
               value: $scope.countsTicketsCompany['OPEN'],
               color: "#ffa726"
             }];
+
+            for (var i = 0; i < $scope.countsByTypesAndCompany.length; i++) {
+              if ($scope.countsByTypesAndCompany[i].value > 0 && !$scope.isChartHasOpen) {
+                $scope.isCollapsed = false;
+                $scope.isChartHasOpen = true;
+                $scope.isCompanyHasTickets = true;
+                return;
+              }
+            }
+
           })
 
         });
@@ -148,6 +160,14 @@
 
         $scope.toggleCollapsed = function () {
           $scope.isCollapsed = !$scope.isCollapsed;
+        };
+
+        $scope.setCollapsedValue = function (value) {
+          $scope.isCollapsed = value;
+        };
+
+        $scope.setChartHasOpenValue = function (value) {
+          $scope.isChartHasOpen = value;
         };
 
         $scope.$on('showEditCover', function () {

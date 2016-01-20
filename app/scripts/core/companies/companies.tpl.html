@@ -3,23 +3,27 @@
   <div collapse="isCollapsed" class="charts-n-graphs-container">
 
     <div class="devices-chart">
-      <!--<div class="chart-content">-->
-      <!--<div class="chart-circle"></div>-->
-      <!--<ul class="chart-legend">-->
-      <!--<li><i class="circle-indicator blue"></i>Clients</li>-->
-      <!--<li><i class="circle-indicator green"></i>Portable</li>-->
-      <!--<li><i class="circle-indicator yellow"></i>Printers</li>-->
-      <!--<li><i class="circle-indicator orange"></i>Member Servers</li>-->
-      <!--<li><i class="circle-indicator red"></i>Servers</li>-->
-      <!--</ul>-->
-      <!--</div>-->
+      <div class="chart-content">
+        <div class="chart-circle"></div>
+        <ul class="chart-legend">
+          <li><i class="circle-indicator blue"></i>Clients</li>
+          <li><i class="circle-indicator green"></i>Portable</li>
+          <li><i class="circle-indicator yellow"></i>Printers</li>
+          <li><i class="circle-indicator orange"></i>Member Servers</li>
+          <li><i class="circle-indicator red"></i>Servers</li>
+        </ul>
+      </div>
     </div>
 
     <div class="tickets-chart">
       <div class="chart-content">
-        <div pie-chart
+
+        <div pie-chart ng-show="ticketsResolution.quick || ticketsResolution.delayed"
              pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
              pie-chart-color="['#1586E4', '#EF6C00']" pie-chart-size="140"></div>
+
+        <div ng-hide="ticketsResolution.quick || ticketsResolution.delayed" class="chart-circle"></div>
+
         <ul class="chart-legend">
           <li class="legend-heading"><span>Tkt Resolutions</span> All Time</li>
           <li><i class="circle-indicator blue"></i>Quick</li>
@@ -36,21 +40,21 @@
           </div>
           <ul class="chart-legend">
             <li class="legend-heading">service time billed</li>
-            <li class="legend-stat">{{ timeBilledByCompany.value }} <span>hrs</span></li>
+            <li class="legend-stat">{{ timeBilledByCompany.value || 0 }} <span>hrs</span></li>
           </ul>
         </div>
       </div>
 
       <div class="online-devices">
-        <!--<div class="chart-content">-->
-        <!--<div class="chart-circle">-->
-        <!--<i class="icn-lg icn-tab-devices active"></i>-->
-        <!--</div>-->
-        <!--<ul class="chart-legend">-->
-        <!--<li class="legend-heading">online devices</li>-->
-        <!--<li class="legend-stat">628</li>-->
-        <!--</ul>-->
-        <!--</div>-->
+        <div class="chart-content">
+          <div class="chart-circle">
+            <i class="icn-lg icn-tab-devices active"></i>
+          </div>
+          <ul class="chart-legend">
+            <li class="legend-heading">online devices</li>
+            <li class="legend-stat">0</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -59,8 +63,13 @@
         <div class="heading"><strong>Top 10 Companies</strong> <span>Contributed to Earnings</span>
           <span class="label label-success pull-right chart-label">{{ contributedToEarnings }} USD</span>
         </div>
-        <div top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'"
+
+        <div ng-class="{'hide': contributedToEarnings <= 0}"
+             top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'"
              second-gradient-color="'#7BAF3F'"></div>
+
+        <div ng-hide="contributedToEarnings > 0" class="chart"></div>
+
       </div>
     </div>
 
@@ -69,10 +78,16 @@
         <div class="heading"><strong>Top 10 Companies</strong> <span>Most Tickets Resolved</span>
           <span class="label label-info pull-right chart-label">{{ mostTicketsResolved }} TICKETS</span>
         </div>
-        <div top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'"
+
+        <div ng-class="{'hide': mostTicketsResolved <= 0}"
+             top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'"
              second-gradient-color="'#3AA4E5'"></div>
+
+        <div ng-hide="mostTicketsResolved > 0" class="chart"></div>
+
       </div>
     </div>
+
   </div>
 
   <div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
@@ -117,36 +132,36 @@
 
         <!--<div class="dropdown pull-left">-->
 
-          <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip" data-toggle="dropdown"-->
-             <!--aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"-->
-             <!--tooltip="{{ company.cover && company.cover.id ? 'change cover' : 'add cover photo' }}">-->
-            <!--<i class="icn-md icn-cover"></i>-->
-          <!--</a>-->
+        <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip" data-toggle="dropdown"-->
+        <!--aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"-->
+        <!--tooltip="{{ company.cover && company.cover.id ? 'change cover' : 'add cover photo' }}">-->
+        <!--<i class="icn-md icn-cover"></i>-->
+        <!--</a>-->
 
-          <!--<ul class="dropdown-menu">-->
+        <!--<ul class="dropdown-menu">-->
 
-            <!--<li role="presentation">-->
-              <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
-                <!--Upload Photo...-->
-              <!--</a>-->
-            <!--</li>-->
+        <!--<li role="presentation">-->
+        <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
+        <!--Upload Photo...-->
+        <!--</a>-->
+        <!--</li>-->
 
-            <!--<li role="presentation">-->
-              <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
-                <!--Restore Default Photo...-->
-              <!--</a>-->
-            <!--</li>-->
+        <!--<li role="presentation">-->
+        <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
+        <!--Restore Default Photo...-->
+        <!--</a>-->
+        <!--</li>-->
 
-            <!--<li role="presentation">-->
-              <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
-                <!--Reposition...-->
-              <!--</a>-->
-            <!--</li>-->
+        <!--<li role="presentation">-->
+        <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
+        <!--Reposition...-->
+        <!--</a>-->
+        <!--</li>-->
 
-          <!--</ul>-->
+        <!--</ul>-->
         <!--</div>-->
 
-        <a href="javascript:void(0)" class="hit-area has-tooltip"  stop-propagation="click"
+        <a href="javascript:void(0)" class="hit-area has-tooltip" stop-propagation="click"
            ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN' && currentUser.role !== 'ADMIN'"
            ui-sref="editCompany( { companyId: company.id } )"
            tooltip-placement="top" tooltip="Edit Company info">

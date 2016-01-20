@@ -8,35 +8,51 @@
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, $timeout) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
+        var isChartHasOpen = false;
 
-        $scope.isCollapsed = false;
+        $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
 
-        $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
+        $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope, function () {
+          if (($scope.ticketsResolution.quick > 0 || $scope.ticketsResolution.delayed > 0) && !isChartHasOpen) {
+            $scope.isCollapsed = false;
+            isChartHasOpen = true;
+          }
+        });
 
-        $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function(){
+        $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function () {
           $scope.mostTicketsResolved = 0;
 
-          for(var companyId in $scope.topCompaniesByResolvedTickets){
-            if(companyId === 'staticCopy'){
+          for (var companyId in $scope.topCompaniesByResolvedTickets) {
+            if (companyId === 'staticCopy') {
               continue;
             }
             $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
           }
+
+          if (($scope.mostTicketsResolved > 0) && !isChartHasOpen) {
+            $scope.isCollapsed = false;
+            isChartHasOpen = true;
+          }
+
         });
-        $scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function(){
+        $scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function () {
           $scope.contributedToEarnings = 0;
 
-          for(var companyId in $scope.contributedToEarningTopCompanies){
-            if(companyId === 'staticCopy'){
+          for (var companyId in $scope.contributedToEarningTopCompanies) {
+            if (companyId === 'staticCopy') {
               continue;
             }
             $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
           }
 
-          if($scope.contributedToEarnings){
+          if ($scope.contributedToEarnings) {
             $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
+            if (!isChartHasOpen) {
+              $scope.isCollapsed = false;
+              isChartHasOpen = true;
+            }
           }
         });
 
@@ -87,10 +103,16 @@
         //  SubscriptionsService.saveUserSubscription(newSubscription);
         //};
 
-        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
+        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope, function () {
+          if ($scope.timeBilledByCompany.value > 0 && !isChartHasOpen) {
+            $scope.isCollapsed = false;
+            isChartHasOpen = true;
+          }
+        });
 
-        $scope.toggleCollapsed = function(){
+        $scope.toggleCollapsed = function () {
           $scope.isCollapsed = !$scope.isCollapsed;
+          isChartHasOpen = true;
         }
 
       }]);

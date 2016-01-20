@@ -12,9 +12,13 @@
 
         today.setHours(0, 0, 0, 0);
 
-        $scope.totalReceivablesObj = StatisticsService.getReceivableAmountByCompany($stateParams.companyId, $scope, function(obj){
-          $scope.$watch('totalReceivablesObj.value', function(){
+        $scope.totalReceivablesObj = StatisticsService.getReceivableAmountByCompany($stateParams.companyId, $scope, function (obj) {
+          $scope.$watch('totalReceivablesObj.value', function () {
             $scope.totalReceivablesValue = obj.value;
+            if ($scope.totalReceivablesValue > 0 && !$scope.isChartHasOpen) {
+              $scope.setCollapsedValue(false);
+              $scope.setChartHasOpenValue(true);
+            }
           })
         });
 

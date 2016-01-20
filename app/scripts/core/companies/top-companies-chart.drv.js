@@ -7,7 +7,7 @@
       return {
         restrict: 'A',
         require: 'ngModel',
-        template: "<div class='chart-area'><canvas class='chart' ticket-closed-graph style='width: 100%; height: 100%; background: white'/>" +
+        template: "<div class='chart-area'><canvas class='chart' ticket-closed-graph style='width: 100%; height: 150px; background: white'/>" +
         "<canvas tooltip-message style='position: relative; border-radius: 3px; box-shadow: 0 0 5px 0 rgba( 10, 45, 89, .25 );'></canvas></div>",
         scope: {
           firstGradientColor: "=firstGradientColor",
@@ -29,7 +29,7 @@
             return ctrl.$viewValue;
           }, drawTotalChart, true);
 
-          $(window).resize(function() {
+          $(window).resize(function () {
             drawTotalChart();
           });
 
@@ -102,12 +102,12 @@
 
             for (var companyId in chartData) {
 
-              if(companyId === 'staticCopy'){
+              if (companyId === 'staticCopy') {
                 continue;
               }
 
               chartContext.fillStyle = linearGradient;
-              chartContext.fillRect(marginLeft, chartHeight * markCoef, widthRectangle, - (chartData[companyId] * heightCoefValue));
+              chartContext.fillRect(marginLeft, chartHeight * markCoef, widthRectangle, -(chartData[companyId] * heightCoefValue));
 
               tooltipMessage.push({
                 x1: marginLeft,
