@@ -12,6 +12,11 @@
 
           $scope.selectProduct = function (product) {
             $scope.productExpense.item = product;
+
+            $scope.$apply(function(){
+              return $scope.productExpense.description = product.description;
+            });
+            
           };
 
           $scope.removeProduct = function () {
