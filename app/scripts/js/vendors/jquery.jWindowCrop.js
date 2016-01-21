@@ -8,14 +8,25 @@
 
 (function ($) {
   function fillContainer(val, targetLength, containerLength) {
-    // ensure that no gaps are between target's edges and container's edges
-    if (val + targetLength < containerLength) val = containerLength - targetLength;
-    if (val > 0) val = 0;
+
+    if (targetLength <= containerLength) {
+      if (val + targetLength < containerLength - (244 - targetLength)) {
+        val = containerLength - 244;
+      }
+      if (val > 244 - targetLength) {
+        val = 244 - targetLength;
+      }
+    } else {
+      if (val + targetLength < containerLength) val = containerLength - targetLength;
+      if (val > 0) val = 0;
+    }
+
     return val;
   }
 
   $.jWindowCrop = function (container, options) {
     var base = this;
+    var startZoom = 0;
 
     base.$container = $(container); // target container jquery element
     base.container = container; // target container dom element
@@ -140,7 +151,6 @@
     };
 
     function initializeDimensions() {
-      var startZoom = 0;
       if (base.originalWidth == 0) {
         base.originalWidth = base.$image.width();
         base.originalHeight = base.$image.height();
@@ -152,39 +162,33 @@
         //base.minPercent = (widthRatio >= heightRatio) ? widthRatio : heightRatio;
         if (widthRatio >= heightRatio) {
           base.minPercent = (base.originalWidth < base.options.cropBoxWidth) ? (base.options.cropBoxWidth / base.originalWidth) : widthRatio;
-        } else {
-          base.minPercent = (base.originalHeight < base.options.cropBoxHeight) ? (base.options.cropBoxHeight / base.originalHeight) : heightRatio;
         }
 
-        // apply user defined cropbox zoom and position
         if (base.options.startWith != null) {
           startZoom = base.options.cropBoxWidth / base.options.startWith.w;
-          //base.focalPoint = {'x':base.options.startWith.x+Math.floor(parseInt(base.options.cropBoxWidth/startZoom)/2), 'y': base.options.startWith.y+Math.ceil(parseInt(base.options.cropBoxHeight/startZoom)/2)};
+          base.focalPoint = {
+            'x': base.options.startWith.x + Math.floor(parseInt(base.options.cropBoxWidth / startZoom) / 2),
+            'y': base.options.startWith.y + Math.ceil(parseInt(base.options.cropBoxHeight / startZoom) / 2)
+          };
           base.focalPoint = {
             'x': base.options.startWith.x + Math.round(base.options.startWith.w / 2),
             'y': base.options.startWith.y + Math.round(base.options.startWith.h / 2)
           };
         } else {
           base.focalPoint = {'x': Math.round(base.originalWidth / 2), 'y': Math.round(base.originalHeight / 2)};
-
-          // if image is larger than container then zoom out to fit into the container
-          if (base.$image.width() >= base.$container.width() && base.$image.height() >= base.$container.height()) {
-            var widthRatio = base.$container.width() / base.originalWidth;
-            var heightRatio = base.$container.height() / base.originalHeight;
-            if (widthRatio >= heightRatio) {
-              startZoom = (base.originalWidth < base.$container.width()) ? (base.$container.width() / base.originalWidth) : widthRatio;
-            } else {
-              startZoom = (base.originalHeight < base.$container.height()) ? (base.$container.height() / base.originalHeight) : heightRatio;
-            }
-          }
         }
-        startZoom = startZoom.toFixed(2);
+
+        var minCropBoxSize = base.options.cropBoxHeight < base.options.cropBoxWidth ? base.options.cropBoxHeight : base.options.cropBoxWidth;
+        var maxOriginSize = base.originalHeight < base.originalWidth ? base.originalWidth : base.originalHeight;
+
+        startZoom = minCropBoxSize / maxOriginSize;
+
         base.setZoom(startZoom);
         base.$image.fadeIn('fast'); //display image now that it has loaded
       }
       if (base.$rangeSelect.length) base.$rangeSelect.prop({
-        'min': Math.floor(base.minPercent * 100),
-        'max': Math.ceil(base.options.maxZoom * 100)
+        'min': Math.floor(startZoom * 100),
+        'max': Math.ceil((startZoom + 1) * 100)
       }).val(Math.floor(startZoom * 100));
     }
 
@@ -254,7 +258,7 @@
     }
 
     function handleRangeSelect() {
-      base.setZoom($(this).val() / 100);
+      base.setZoom($(this).val() / 100 > startZoom ? $(this).val() / 100 : startZoom);
     }
 
     function handleRangeIncrease() {

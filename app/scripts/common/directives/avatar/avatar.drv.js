@@ -73,8 +73,8 @@
             maxUploadSize: 2 * 1024 * 1024,
             accpetType: '.jpg,.png,.gif',
             allowedExtensions: ['jpg', 'png', 'gif'],
-            minImageWidth: 244,
-            minImageHeight: 244,
+            minImageWidth: 100,
+            minImageHeight: 100,
 
             onStart: function () {
               avatar = {};
@@ -90,7 +90,6 @@
               crop(avatar, false);
             },
             onProgress: function (progress) {
-              console.log(progress);
               $('.avatorCropProgressBar').removeClass('hide');
               $('.avatorCropProgressDone').width(progress + '%');
             },
