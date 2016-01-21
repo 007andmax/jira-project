@@ -210,7 +210,7 @@
 
           <label class="control checkbox pull-left" style="height: 20px;">
 
-            <input type="checkbox" ng-model="editUser.userEnabled" ng-change="resetPassword()">
+            <input type="checkbox" ng-model="editUser.userEnabled" ng-change="changeAccountEnabled()">
 
             <span class="control-indicator" style="margin-top: -2px;"></span>Account Enabled
 
@@ -249,25 +249,25 @@
               <div ng-messages="userForm.password.$error"
                    ng-class="{'hide': !isShowingErrors(userForm, 'password')}">
                 <label class="control-label" ng-message="minlength">Password is too short</label>
+                <label class="control-label" ng-message="required">Password is required</label>
               </div>
 
-              <input ng-class="{'hide': showPassword}" class="form-control show-password" type="password"
+              <input ng-class="{'hide': showPassword}" class="form-control show-password"
+                     type="{{ typePasswordInput }}" ng-required="!isResetPassCollapsed"
                      ng-model="editUser.password" name="password" ng-minlength="4"
                      ng-change="changeConfirmPass(userForm)">
 
-              <input ng-class="{'hide': !showPassword}" class="form-control show-password" type="text"
-                     ng-model="editUser.password" ng-change="changeConfirmPass(userForm)">
 
-              <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
+              <a ng-class="{'hide': typePasswordInput === 'text'}" href="javascript:void(0)"
                  class="hide-password-hit hit-area ha-18 has-tooltip"
-                 ng-click="showPassword = true" tooltip-placement="top"
+                 ng-click="typePasswordInput = 'text'" tooltip-placement="top"
                  tooltip="Show Password">
                 <i class="icn-sm icn-hide-password"></i>
               </a>
 
-              <a ng-class="{'hide': !showPassword}" href="javascript:void(0)"
+              <a ng-class="{'hide': typePasswordInput === 'password'}" href="javascript:void(0)"
                  class="hide-password-hit hit-area ha-18 has-tooltip"
-                 ng-click="showPassword = false" tooltip-placement="top" tooltip="Hide Password"
+                 ng-click="typePasswordInput = 'password'" tooltip-placement="top" tooltip="Hide Password"
                  style="position: absolute;right: 12px;top: 31px;">
                 <i class="icn-sm icn-show-password"></i>
               </a>
@@ -284,23 +284,21 @@
                 <label class="control-label">Passwords is different</label>
               </div>
 
-              <input ng-class="{'hide': showConfirmPassword}" class="form-control show-password" type="password"
+              <input ng-class="{'hide': showConfirmPassword}" class="form-control show-password"
+                     type="{{ typeConfPasswordInput }}"
                      ng-model="editUser.confPassword" ng-change="changeConfirmPass(userForm)"
                      name="confirmPassword" ng-required="editUser.password">
 
-              <input ng-class="{'hide': !showConfirmPassword}" class="form-control show-password" type="text"
-                     ng-model="editUser.confPassword" ng-change="changeConfirmPass(userForm)">
-
-              <a ng-class="{'hide': showConfirmPassword}" href="javascript:void(0)"
+              <a ng-class="{'hide': typeConfPasswordInput === 'text'}" href="javascript:void(0)"
                  class="show-password-hit hit-area ha-18 has-tooltip"
-                 ng-click="showConfirmPassword = true"
+                 ng-click="typeConfPasswordInput = 'text'"
                  tooltip-placement="top" tooltip="Show Password" tooltip-append-to-body="true">
                 <i class="icn-sm icn-hide-password"></i>
               </a>
 
-              <a ng-class="{'hide': !showConfirmPassword}" href="javascript:void(0)"
+              <a ng-class="{'hide': typeConfPasswordInput === 'password'}" href="javascript:void(0)"
                  class="show-password-hit hit-area ha-18 has-tooltip"
-                 ng-click="showConfirmPassword = false"
+                 ng-click="typeConfPasswordInput = 'password'"
                  tooltip-placement="top" tooltip="Hide Password" tooltip-append-to-body="true"
                  style="position: absolute;right: 12px;top: 31px;">
                 <i class="icn-sm icn-show-password"></i>

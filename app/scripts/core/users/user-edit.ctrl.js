@@ -8,6 +8,7 @@
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
 
+        $scope.typePasswordInput = $scope.typeConfPasswordInput = 'password';
         $scope.roles = {
           USER: 'User',
           ADMIN: 'Administrator'
@@ -120,7 +121,11 @@
         $scope.resetPassword = function () {
           $scope.isResetPassCollapsed = !$scope.isResetPassCollapsed;
           $scope.editUser.password = $scope.editUser.confPassword = '';
-        }
+        };
+
+        $scope.changeAccountEnabled = function(){
+          $scope.isResetPassCollapsed = true;
+        };
 
       }]);
 
