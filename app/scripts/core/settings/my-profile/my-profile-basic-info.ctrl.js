@@ -41,9 +41,14 @@
               lastName: $scope.editUser.lastName,
               designation: $scope.editUser.designation,
               primaryEmail: $scope.editUser.primaryEmail,
-              secondaryEmail: $scope.editUser.secondaryEmail,
               signature: {content: $scope.userProfile.signature.content}
             };
+
+            if (($scope.editUser.secondaryEmail !== undefined) && ($scope.editUser.secondaryEmail.trim().length < 1)) {
+              userObjToSend.secondaryEmail = undefined;
+            } else {
+              userObjToSend.secondaryEmail = $scope.editUser.secondaryEmail;
+            }
 
             UsersService.saveForUserProfile(userObjToSend, 'basic', function () {
               $scope.savingInProcess = false;
