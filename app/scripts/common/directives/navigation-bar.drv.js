@@ -33,7 +33,7 @@
             var target = $(e.currentTarget),
               selector = target.attr('navigate-to');
 
-            navigateTo($(selector).offset().top - wrapperOffset);
+            navigateTo($(selector).offset().top - wrapperOffset + 20);
 
             activeNav.removeClass('active');
             target.addClass('active');

@@ -234,6 +234,51 @@
     </div>
   </div>
 
+  <div class="change-password-wrapper" id="myProfileAboutMe">
+
+    <div class="create-new-user settings-basic-info clearfix">
+      <form name="aboutMeForm">
+        <div class="create-user-container">
+
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">About Me</h3>
+          </div>
+
+          <div class="create-user-form">
+            <div class="form-row clearfix">
+
+              <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(aboutMeForm, 'aboutMe')}">
+
+                <label class="control-label" ng-class="{'hide': isShowingErrors(aboutMeForm, 'aboutMe')}">
+                  About Me Information
+                </label>
+
+                <div ng-messages="aboutMeForm.aboutMe.$error"
+                     ng-class="{'hide': !isShowingErrors(aboutMeForm, 'aboutMe')}">
+                  <label class="control-label" ng-message="maxlength">About me is too large</label>
+                </div>
+
+                <input type="text" class="form-control" name="aboutMe" ng-model="aboutMe" ng-maxlength="255">
+
+              </div>
+
+            </div>
+
+            <div class="form-row clearfix">
+              <div class="form-group no-label full-width">
+                <div class="btn btn-lg btn-info pull-right"
+                     custom-disabled="{{ !aboutMeForm.$valid || aboutMeForm.$pristine || savingAboutMeInProcess }}"
+                     ng-click="saveAboutMe(aboutMeForm)">Save
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="change-password-wrapper" id="myProfileChangePassword">
 
     <div class="create-new-user settings-basic-info clearfix">

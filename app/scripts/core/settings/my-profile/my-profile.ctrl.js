@@ -6,6 +6,7 @@
     ['$scope', '$state', '$stateParams', '$location', 'UsersService',
       function ($scope, $state, $stateParams, $location, UsersService) {
 
+        $scope.aboutMe = $scope.currentUser.status;
         $scope.password = {
           oldPassword: '',
           newPassword: ''
@@ -58,6 +59,19 @@
               }
               $scope.savingPasswordInProcess = false;
             })
+          }
+        };
+
+        $scope.saveAboutMe = function (form) {
+          if (form.$valid) {
+
+            $scope.savingAboutMeInProcess = true;
+
+            UsersService.saveForUserProfile($scope.aboutMe, 'status', function () {
+              form.$setPristine()
+              $scope.savingAboutMeInProcess = false;
+            });
+
           }
         };
 
