@@ -8,6 +8,20 @@
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
 
+        $scope.clientCompanies = CompaniesService.getClientCompanies();
+
+        if (!clientCompanies || clientCompanies.length < 1) {
+          alert('Create at list one company before adding users');
+
+          if ($scope.editUser && $scope.editUser.id) {
+            $scope.setEditUserId();
+          } else {
+            $state.go('users');
+          }
+
+          return;
+        }
+
         $scope.typePasswordInput = $scope.typeConfPasswordInput = 'password';
         $scope.roles = {
           USER: 'User',
@@ -39,8 +53,6 @@
         }
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-
-        $scope.clientCompanies = CompaniesService.getClientCompanies();
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);

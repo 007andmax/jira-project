@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
-    ['$scope', '$state',
-      function ($scope, $state) {
+    ['$scope', '$state', 'CompaniesService',
+      function ($scope, $state, CompaniesService) {
 
         $scope.getTemplateNameByState = function () {
           if ($state.includes("tickets")) {
@@ -38,6 +38,18 @@
           } else if ($state.includes("companyDevices")) {
             return 'company-devices';
           }
+        }
+
+        $scope.goToCreateUser = function () {
+
+          var clientCompanies = CompaniesService.getClientCompanies();
+
+          if (!clientCompanies || clientCompanies.length < 1) {
+            alert('Create at list one company before adding users');
+            return;
+          }
+
+          $state.go('users.create');
         }
 
       }]);

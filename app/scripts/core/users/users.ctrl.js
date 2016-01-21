@@ -51,6 +51,14 @@
           $rootScope.$broadcast('cancelEditForm');
 
           if (userId) {
+
+            var clientCompanies = CompaniesService.getClientCompanies();
+
+            if (!clientCompanies || clientCompanies.length < 1) {
+              alert('Create at list one company before adding users');
+              return;
+            }
+
             var user = UsersService.getOneById(userId);
             var userSubscription = user.subscription;
             var avatar = user.avatar;

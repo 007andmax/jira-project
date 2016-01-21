@@ -51,12 +51,60 @@ d,method:"DELETE"}).then(function(c){f&&f(c.data)},function(c){f&&f(c.data)})},c
     number:f.recurringInvoice.number,companyId:f.company.id,date:f.date,paidOn:f.paidOn,sum:f.sum,invoicesCount:1})}else m=d.customizeObj({id:f.id,isRecurring:!1,frequency:null,number:f.number,companyId:f.company.id,date:f.date,paidOn:f.paidOn,sum:f.sum,invoicesCount:null});m&&(c.list.push(m),(f=c.companies[m.companyId])?f.push(m):d.defineReadOnlyProperty(c.companies,m.companyId,d.customizeArray([m])),0>e.indexOf(m.companyId)&&e.push(m.companyId))}c.list.sort(d.getComparatorBy("number"));e.forEach(function(a){c.companies[a].sort(d.getComparatorBy("number"))})}else if("COMPANY_ARCHIVED"===
     a.action){for(k=0;k<c.list.length;k++)c.list[k].companyId===a.data.id&&(c.list.splice(k,1),k--);delete c.companies[a.data.id]}});f&&f(a.data)},function(a){f&&f(a.data)});return c}}}])})(window,jQuery);(function(t,v,r){angular.module("main.services").factory("ReceivableService",["$http","$rootScope","RealTimeService","CompaniesService","Utils","$filter",function(h,q,l,d,g){function f(c,a){if(!c)throw"invoiceIds is required!";var b=h({url:"/receivable/resend",method:"POST",data:c});g.handleCallback(b,a)}return{getReceivedPaymentsSumByCompany:function(c,a,b){if(!c)throw"companyId is required!";if(!a||!a.$id)throw"Second argument must be Angularjs scope!";var d=g.customizeObj({});h.get("/receivable/paymentSum/"+
   c).then(function(k){g.customizeObj(k.data,d);l.subscribe("/companyPaymentReceived?targetId="+c,a,function(a){console.log(a);"COMPANY_PAYMENT_RECEIVED"===a.action?g.defineReadOnlyProperty(d,"value",d.value+a.data):"RECEIVED_PAYMENTS_SUM"===a.action&&g.defineReadOnlyProperty(d,"value",a.data)});b&&b(k.data)},function(a){b&&b(a.data)});return d},getReceivableGraphData:function(c,a){var b=g.customizeArray([]);h.get("/receivable/chart/lastDays").then(function(e){g.customizeArray(e.data,b);l.subscribe("/todayReceivableChartPoint?targetId="+
-  d.getCurrentCompany().id,c,function(a){console.log(a);if("TODAY_RECEIVABLE_CHART_POINT"===a.action){var d=b[b.length-1],c=new Date(d.date),e=new Date(a.data.date);c.getFullYear()===e.getFullYear()&&c.getMonth()===e.getMonth()&&c.getDate()+1===e.getDate()?(b.push(g.customizeObj(a.data)),b.splice(0,1)):g.customizeObj(a.data,d)}});a&&a(e.data)},function(b){a&&a(b.data)});return b},getReceivableInvoicesData:function(c,a){if(!c||!c.$id)throw"First argument must be Angularjs scope!";var b=g.customizeObj({list:[],
-  companies:{}});h.get("/receivable").then(function(d){for(var k=g.customizeArray([]),f=0;f<d.data.length;f++){var m=g.customizeObj(d.data[f]);if(m.recurringInvoice){var h=g.findById(k,m.recurringInvoice.id);h||(h=m.recurringInvoice,g.defineReadOnlyProperty(h,"isRecurring",!0),g.defineReadOnlyProperty(h,"company",m.company),g.defineReadOnlyProperty(h,"invoices",g.customizeArray([])),k.push(h));g.defineReadOnlyProperty(m,"recurringInvoice",{id:h.id,frequency:h.frequency});h.invoices.push(m)}else k.push(m)}k.sort(g.getComparatorBy("number"));
-  for(f=0;f<k.length;f++)m=k[f],b.companies[m.company.id]||g.defineReadOnlyProperty(b.companies,m.company.id,g.customizeArray([])),b.companies[m.company.id].push(m);g.defineReadOnlyProperty(b,"list",k);l.subscribe("/receivableInvoice",c,function(a){console.log(a);if("INVOICE_SAVED"==a.action){var d=a.data,c;d.recurringInvoice?(a=g.findById(b.list,d.recurringInvoice.id),a||(a=d.recurringInvoice,a.isRecurring=!0,a.company=d.company,a.invoices=[],c=a),d.recurringInvoice={id:a.id,frequency:a.frequency},
+  d.getCurrentCompany().id, c, function (a) {
+  console.log(a);
+  if ("TODAY_RECEIVABLE_CHART_POINT" === a.action) {
+    var d = b[b.length - 1], c = new Date(d.date), e = new Date(a.data.date);
+    c.getFullYear() === e.getFullYear() && c.getMonth() === e.getMonth() && c.getDate() + 1 === e.getDate() ? (b.push(g.customizeObj(a.data)), b.splice(0, 1)) : g.customizeObj(a.data, d)
+  }
+});
+  a && a(e.data)
+}, function (b) {
+  a && a(b.data)
+});
+  return b
+},
+  getReceivableInvoicesData: function (d, a) {
+    if (!d || !d.$id)throw"First argument must be Angularjs scope!";
+    var b = g.customizeObj({
+      list: [],
+      companies: {}
+    });
+    h.get("/receivable").then(function (e) {
+      for (var k = g.customizeArray([]), f = 0; f < e.data.length; f++) {
+        var m = g.customizeObj(e.data[f]);
+        if (m.recurringInvoice) {
+          var h = g.findById(k, m.recurringInvoice.id);
+          h || (h = m.recurringInvoice, g.defineReadOnlyProperty(h, "isRecurring", !0), g.defineReadOnlyProperty(h, "company", m.company), g.defineReadOnlyProperty(h, "invoices", g.customizeArray([])), k.push(h));
+          g.defineReadOnlyProperty(m, "recurringInvoice", {id: h.id, frequency: h.frequency});
+          h.invoices.push(m)
+        } else k.push(m)
+      }
+      k.sort(g.getComparatorBy("number"));
+      for (f = 0; f < k.length; f++)m = k[f], b.companies[m.company.id] || g.defineReadOnlyProperty(b.companies, m.company.id, g.customizeArray([])), b.companies[m.company.id].push(m);
+      g.defineReadOnlyProperty(b, "list", k);
+      l.subscribe("/receivableInvoice", d, function (a) {
+        console.log(a);
+        if ("INVOICE_SAVED" == a.action) {
+          var d = a.data, c;
+          d.recurringInvoice ? (a = g.findById(b.list, d.recurringInvoice.id), a || (a = d.recurringInvoice, a.isRecurring = !0, a.company = d.company, a.invoices = [], c = a), d.recurringInvoice = {
+            id: a.id,
+            frequency: a.frequency
+          },
     a.invoices.push(d)):c=d;c&&(c=g.customizeObj(c),b.companies[c.company.id]||g.defineReadOnlyProperty(b.companies,c.company.id,[]),b.companies[c.company.id].push(c),b.list.push(c))}else if("INVOICE_STATUS"===a.action)a.data.recurringInvoice?((d=g.findById(b.list,a.data.recurringInvoice.id))||console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING RECURRING INVOICE-----!!!!!!!"),d=g.findById(d.invoices,a.data.id)):d=g.findById(b.list,a.data.id),d?g.defineReadOnlyProperty(d,"status",a.data.status):
     console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!");else if("PAYMENT_RECEIVED"===a.action)for(a=a.data,d=0;d<a.length;d++){var e=a[d],k=r;c=r;for(var f=0;f<b.list.length&&!c;f++){var m=b.list[f];if(m.isRecurring)for(var h=0;h<m.invoices.length&&!c;h++){var p=m.invoices[h];e===p.id&&(m.invoices.splice(h,1),c=p.company.id,k=m.id,0===m.invoices.length&&b.list.splice(f,1))}else e===m.id&&(b.list.splice(f,1),c=m.company.id)}c&&b.companies[c]&&(f=b.companies[c],k?(k=g.indexOfId(f,
-    k),-1<k&&(-1<g.indexOfId(f[k].invoices,e)&&f[k].invoices.splice(k,1),0===f[k].invoices.length&&f.splice(k,1))):(e=g.indexOfId(f,e),-1<e&&f.splice(e,1)),0===f.length&&delete b.companies[c])}else if("COMPANY_ARCHIVED"==a.action)for(delete b.companies[a.data.id],d=0;d<b.list.length;d++)b.list[d].company.id===a.data.id&&(b.list.splice(d,1),d--)});a&&a(d.data)},function(b){a&&a(b.data)});return b},receivePayment:function(d,a,b){if(!d)throw"paymentMethod is required!";if(!a||0===a.length)throw"invoiceIds is required!";
+          k), -1 < k && (-1 < g.indexOfId(f[k].invoices, e) && f[k].invoices.splice(k, 1), 0 === f[k].invoices.length && f.splice(k, 1))) : (e = g.indexOfId(f, e), -1 < e && f.splice(e, 1)), 0 === f.length && delete b.companies[c])
+        } else if ("COMPANY_ARCHIVED" == a.action)for (delete b.companies[a.data.id], d = 0; d < b.list.length; d++)b.list[d].company.id === a.data.id && (b.list.splice(d, 1), d--)
+      });
+      a && a(e.data)
+    }, function (b) {
+      a && a(b.data)
+    });
+    return b
+  },
+  receivePayment: function (d, a, b) {
+    if (!d)throw"paymentMethod is required!";
+    if (!a || 0 === a.length)throw"invoiceIds is required!";
   d=h({url:"/receivable/receivePayment",method:"POST",params:{paymentMethod:d.toUpperCase()},data:a});g.handleCallback(d,b)},resendInvoice:function(d,a){if(!d)throw"invoiceId is required!";f([d],a)},resendInvoices:f,search:function(d){if(!d)throw"Keyword is required!";return h.get("/receivable/search?keyword="+d).then(function(a){return a.data})}}}])})(window,jQuery);(function(t,v,r){angular.module("main.services").factory("RecurringService",["$http","$rootScope","RealTimeService","CompaniesService","Utils","$filter",function(h,q,l,d,g){function f(a,b,d,c){if(!b)throw"recurringInvoiceId is required!";if(!d)throw"expense is required!";a={url:"/recurringInvoice/"+b+"/"+a,data:d};d.id?(a.method="PUT",a.url=a.url+"/"+d.id):a.method="POST";d=h(a);g.handleCallback(d,c)}function c(a,b,d){if(!a)throw"recurringInvoiceId is required!";if(!b)throw"expenseId is required!";
   a=h({url:"/recurringInvoice/"+a+"/expense/"+b,method:"DELETE"});g.handleCallback(a,d)}return{getRecurringGraphData:function(a,b){var d=["WEEKLY","MONTHLY","YEARLY"],c=g.customizeArray([]);h.get("/recurringInvoice/billed/lastDays").then(function(f){g.customizeArray(f.data,c);l.subscribe("/recurringChart",a,function(a){console.log(a);if("RECURRING_CHART"===a.action){for(var b=new Date(a.data.date),f=0;f<c.length;f++){var h=c[f],p=new Date(h[h.length-1].date);p.getFullYear()===b.getFullYear()&&p.getMonth()===
 b.getMonth()&&p.getDate()+1===b.getDate()&&(h.push(g.customizeObj({date:g.formatDate(b),sum:0})),h.splice(0,1))}b=d.indexOf(a.data.type);b=c[b];g.defineReadOnlyProperty(b[b.length-1],"sum",a.data.sum)}});b&&b(f.data)},function(a){b&&b(a.data)});return c},getRecurringCompanies:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var d=[];h({url:"/recurringInvoice/total",method:"GET"}).then(function(c){g.customizeArray(c.data,d);l.subscribe("/recurringTotal",a,function(a){console.log(a);
@@ -118,14 +166,186 @@ b.filter&&("COMPLETED"!=a.status||"ADMIN"!==q.currentUser.role&&"SUPER_TECH_ADMI
   e.tags.sort(g))}else if("TAG_REMOVED"==a.action)for(b in d.deleteById(e.tags,a.data.id),e.dynamicLists)for(var c=e.dynamicLists[b],f=0;f<c.length;f++)d.deleteById(c[f],a.data.id)}),a&&a(c.data))},function(b){console.log("ERROR!!!!!",b);a&&a(b.data)})}function c(){0===e.watchers.length&&v.isEmptyObject(e.dynamicLists)&&(b.$destroy(),e.tags=r)}function a(b,c){if(!c||!c.$id)throw"First argument must be Angularjs scope!";if(e.tags){for(var g=0;g<b.length;g++)b[g]=d.findById(e.tags,b[g].id);for(;-1<(g=
   b.indexOf(r));)b.splice(g,1);e.addDynamicList(b,c)}else f(function(){a(b,c)})}var b,e={tags:r,watchers:[],dynamicLists:{},addWatcher:function(a){var b=this.watchers;0>b.indexOf(a.$id)&&(b.push(a.$id),a.$on("$destroy",function(){var d=b.indexOf(a.$id);b.splice(d,1);c()}))},addDynamicList:function(a,b){var d=this.dynamicLists;d[b.$id]||(d[b.$id]=[]);d[b.$id].push(a);b.$on("$destroy",function(){delete d[b.$id];c()})}};return{_makeDynamic:a,_merge:function(a,b){a.splice(0,a.length);for(var c=0;c<b.length;c++){var f=
   d.findById(e.tags,b[c]);f&&a.push(f)}},getList:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";e.tags?b&&setTimeout(function(){b(e.tags.staticCopy())},100):f(b);e.addWatcher(a);return e.tags},save:function(a,b){if(!a)throw"ticketTag is required argument!";var c="/tag",e="POST";a.id&&(c+="/"+a.id,e="PUT");c=h({url:c,method:e,data:a});d.handleCallback(c,b)},deleteTag:function(a,b){if(!a)throw"tagId is required argument!";var c=h({url:"/tag/"+a,method:"DELETE"});d.handleCallback(c,
-  b)},link:function(a,b){if(!a)throw"linkMap is required argument!";var c=h({url:"/tag/link",method:"POST",data:a});d.handleCallback(c,b)},getTicketsCounts:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var c=d.customizeObj({});h.get("/tag/counts").then(function(a){d.customizeObj(a.data,c);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/tagCounts",a,function(a){console.log(a);"TAG_COUNTS"==a.action&&d.customizeObj(a.data,c)});return c}}}])})(window,jQuery);(function(t,v,r){angular.module("main.services").factory("UsersService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,q,l,d,g){function f(a){var b=d.findById(n.users,a.id);b?d.customizeObj(a,b):(a=d.customizeObj(a),n.users.push(a),a.company.id!==g.getCurrentCompany().id&&n.clientUsers.push(a),c(a),n.usersByCompanies[a.company.id]||(n.usersByCompanies[a.company.id]=[]),n.usersByCompanies[a.company.id].push(a))}function c(a){var b=[a.firstName,a.lastName].map(function(a){return a.charAt(0).toUpperCase()}).join("");
-  d.defineReadOnlyProperty(a,"initials",b)}function a(){return b(q.currentUser.id)}function b(a){return d.findById(n.users,a)}function e(b,c,d){if(!b)throw"Keyword is required!";var e=[];d=d?n.usersByCompanies[d]||[]:n.users;for(var f=0;f<d.length;f++){var g=d[f];(c||a().company.id!==g.company.id)&&-1<(g.firstName+" "+g.lastName).toLowerCase().indexOf(b.toLowerCase())&&e.push(g)}return e}var k=q.$new(),p=[],m=!1,t=!1,n={users:[],clientUsers:[],usersByCompanies:{}};d.customizeObj(n);g._addInitListener(function(){t||
-(t=!0,h.get("/users").then(function(a){d.customizeArray(a.data,n.users);for(a=0;a<n.users.length;a++){var b=n.users[a];c(b);n.usersByCompanies[b.company.id]||(n.usersByCompanies[b.company.id]=[]);n.usersByCompanies[b.company.id].push(b);b.company.id!==g.getCurrentCompany().id&&n.clientUsers.push(b)}m=!0;for(a=0;a<p.length;a++)p[a]();p=[]},function(a){console.error(a);throw"Cannot initialize CompaniesService!";}),l.subscribe("/user",k,function(a){console.log(a);if(m)if("USER_SAVED"==a.action)f(a.data);
-else if("USER_DELETED"==a.action){var b=d.findById(n.users,a.data.id);d.deleteById(n.users,a.data.id);d.deleteById(n.clientUsers,a.data.id);b&&d.deleteById(n.usersByCompanies[b.company.id],a.data.id)}else if("USER_ONLINE"==a.action)(b=d.findById(n.users,a.data.id))&&d.defineReadOnlyProperty(b,"online",!!a.data.online);else if("COMPANY_ARCHIVED"==a.action){for(b=0;b<n.users.length;b++)n.users[b].company.id===a.data.id&&(n.users.splice(b,1),b--);for(b=0;b<n.clientUsers.length;b++)n.clientUsers[b].company.id===
-a.data.id&&(n.clientUsers.splice(b,1),b--);delete n.usersByCompanies[a.data.id]}else"USERS_DEARCHIVED"==a.action&&a.data.forEach(f)}),l.subscribe("/subscription?targetId="+g.getCurrentCompany().id,k,function(a){console.log(a);if(a.data.user){var b=d.findById(n.users,a.data.user.id);b&&("SUBSCRIPTION_SAVED"==a.action?d.defineReadOnlyProperty(b,"subscription",d.customizeObj(a.data)):"SUBSCRIPTION_DELETED"==a.action&&delete b.subscription)}}))});return{_addInitListener:function(a){if(!a)throw"callback is required!";
-  m?a():p.push(a)},getCurrentUser:a,getAllUsers:function(){return n.users},getClientUsers:function(){return n.clientUsers},getAllByCompanyId:function(a){return n.usersByCompanies[a]||[]},getOneById:b,getUserProfile:function(a){var b={};h.get("/settings/userProfile/").then(function(c){d.customizeObj(c.data,b);a&&a(c.data)},function(b){a&&a(b.data)});return b},searchByAllUsers:function(a){return e(a,!0)},searchByClientUsers:function(a){return e(a,!1)},searchByUsersFromCompany:function(a,b){return e(a,
-  !1,b)},changeUserRole:function(a,b,c){if(!a)throw"userId is required!";if(!b)throw"roleName is required!";a=h({url:"/users/updateRole/"+a+"?role="+b.toUpperCase(),method:"PUT"});d.handleCallback(a,c)},save:function(a,b){if(!a)throw"user is required!";var c="/users",e="POST";a.id&&(e="PUT",c=c+"/"+a.id);c=h({url:c,method:e,data:a});d.handleCallback(c,b)},saveForUserProfile:function(a,b,c){if(!a)throw"data is required!";if(!b)throw"toUpdate is required!";b="/settings/userProfile/"+b.toLowerCase();a=
-  h({url:b,method:"PUT",data:a});d.handleCallback(a,c)},deleteOrArchiveUser:function(a,b,c){if(!a)throw"ids is required!";if(b===r)throw"isArchive is required!";Array.isArray(a)||(a=[a]);a=h({url:"/users/"+!!b,method:"POST",data:a});d.handleCallback(a,c)},isEmailUnique:function(a,b,c){if(!a)throw"email is required!";var e=d.customizeObj({});h.get("/users/isEmailUnique?email="+a+"&id="+b).then(function(a){d.customizeObj(a.data,e);c&&c(a.data)},function(a){c&&c(a.data)});return e}}}])})(window,jQuery);(function(t,v,r){angular.module("main.services").factory("VendorsService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,q,l,d){return{save:function(g,f){if(!g)throw"vendor is required!";var c="POST";g.id&&(c="PUT");c=h({url:"/vendor",method:c,data:g});d.handleCallback(c,f)},getAll:function(g,f){if(!g||!g.$id)throw"First argument must be Angularjs scope!";return d.getListByUrl("/vendor",f,function(c){l.subscribe("/vendor",g,function(a){console.log(a);if("VENDOR_SAVE"==a.action){var b=
+  b)
+},
+  link: function (a, b) {
+    if (!a)throw"linkMap is required argument!";
+    var c = h({url: "/tag/link", method: "POST", data: a});
+    d.handleCallback(c, b)
+  },
+  getTicketsCounts: function (a, b) {
+    if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+    var c = d.customizeObj({});
+    h.get("/tag/counts").then(function (a) {
+      d.customizeObj(a.data, c);
+      b && b(a.data)
+    }, function (a) {
+      b && b(a.data)
+    });
+    l.subscribe("/tagCounts", a, function (a) {
+      console.log(a);
+      "TAG_COUNTS" == a.action && d.customizeObj(a.data, c)
+    });
+    return c
+  }
+}
+}])
+})(window, jQuery);
+(function (t, v, r) {
+  angular.module("main.services").factory("UsersService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, q, l, d, g) {
+    function f(a) {
+      var b = d.findById(n.users, a.id);
+      b ? (d.customizeObj(a, b), q.currentUser.id === b.id && d.customizeObj(a, q.currentUser)) : (a = d.customizeObj(a), n.users.push(a), a.company.id !== g.getCurrentCompany().id && n.clientUsers.push(a), c(a), n.usersByCompanies[a.company.id] || (n.usersByCompanies[a.company.id] = []), n.usersByCompanies[a.company.id].push(a))
+    }
+
+    function c(a) {
+      var b = [a.firstName, a.lastName].map(function (a) {
+        return a.charAt(0).toUpperCase()
+      }).join("");
+      d.defineReadOnlyProperty(a, "initials", b)
+    }
+
+    function a() {
+      return b(q.currentUser.id)
+    }
+
+    function b(a) {
+      return d.findById(n.users, a)
+    }
+
+    function e(b, c, d) {
+      if (!b)throw"Keyword is required!";
+      var e = [];
+      d = d ? n.usersByCompanies[d] || [] : n.users;
+      for (var f = 0; f < d.length; f++) {
+        var g = d[f];
+        (c || a().company.id !== g.company.id) && -1 < (g.firstName + " " + g.lastName).toLowerCase().indexOf(b.toLowerCase()) && e.push(g)
+      }
+      return e
+    }
+
+    var k = q.$new(),
+      p = [], m = !1, t = !1, n = {users: [], clientUsers: [], usersByCompanies: {}};
+    d.customizeObj(n);
+    g._addInitListener(function () {
+      t || (t = !0, h.get("/users").then(function (a) {
+        d.customizeArray(a.data, n.users);
+        for (a = 0; a < n.users.length; a++) {
+          var b = n.users[a];
+          c(b);
+          n.usersByCompanies[b.company.id] || (n.usersByCompanies[b.company.id] = []);
+          n.usersByCompanies[b.company.id].push(b);
+          b.company.id !== g.getCurrentCompany().id && n.clientUsers.push(b)
+        }
+        m = !0;
+        for (a = 0; a < p.length; a++)p[a]();
+        p = []
+      }, function (a) {
+        console.error(a);
+        throw"Cannot initialize CompaniesService!";
+      }), l.subscribe("/user", k, function (a) {
+        console.log(a);
+        if (m)if ("USER_SAVED" == a.action)f(a.data); else if ("USER_DELETED" == a.action) {
+          var b = d.findById(n.users, a.data.id);
+          d.deleteById(n.users, a.data.id);
+          d.deleteById(n.clientUsers, a.data.id);
+          b && d.deleteById(n.usersByCompanies[b.company.id], a.data.id)
+        } else if ("USER_ONLINE" == a.action)(b = d.findById(n.users, a.data.id)) && d.defineReadOnlyProperty(b, "online", !!a.data.online); else if ("COMPANY_ARCHIVED" == a.action) {
+          for (b = 0; b < n.users.length; b++)n.users[b].company.id ===
+          a.data.id && (n.users.splice(b, 1), b--);
+          for (b = 0; b < n.clientUsers.length; b++)n.clientUsers[b].company.id === a.data.id && (n.clientUsers.splice(b, 1), b--);
+          delete n.usersByCompanies[a.data.id]
+        } else"USERS_DEARCHIVED" == a.action && a.data.forEach(f)
+      }), l.subscribe("/subscription?targetId=" + g.getCurrentCompany().id, k, function (a) {
+        console.log(a);
+        if (a.data.user) {
+          var b = d.findById(n.users, a.data.user.id);
+          b && ("SUBSCRIPTION_SAVED" == a.action ? d.defineReadOnlyProperty(b, "subscription", d.customizeObj(a.data)) : "SUBSCRIPTION_DELETED" ==
+          a.action && delete b.subscription)
+        }
+      }))
+    });
+    return {
+      _addInitListener: function (a) {
+        if (!a)throw"callback is required!";
+        m ? a() : p.push(a)
+      }, getCurrentUser: a, getAllUsers: function () {
+        return n.users
+      }, getClientUsers: function () {
+        return n.clientUsers
+      }, getAllByCompanyId: function (a) {
+        return n.usersByCompanies[a] || []
+      }, getOneById: b, getUserProfile: function (a) {
+        var b = {};
+        h.get("/settings/userProfile/").then(function (c) {
+          d.customizeObj(c.data, b);
+          a && a(c.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }, searchByAllUsers: function (a) {
+        return e(a,
+          !0)
+      }, searchByClientUsers: function (a) {
+        return e(a, !1)
+      }, searchByUsersFromCompany: function (a, b) {
+        return e(a, !1, b)
+      }, changeUserRole: function (a, b, c) {
+        if (!a)throw"userId is required!";
+        if (!b)throw"roleName is required!";
+        a = h({url: "/users/updateRole/" + a + "?role=" + b.toUpperCase(), method: "PUT"});
+        d.handleCallback(a, c)
+      }, save: function (a, b) {
+        if (!a)throw"user is required!";
+        var c = "/users", e = "POST";
+        a.id && (e = "PUT", c = c + "/" + a.id);
+        c = h({url: c, method: e, data: a});
+        d.handleCallback(c, b)
+      }, saveForUserProfile: function (a, b, c) {
+        if (!a)throw"data is required!";
+        if (!b)throw"toUpdate is required!";
+        b = "/settings/userProfile/" + b.toLowerCase();
+        a = h({url: b, method: "PUT", data: a});
+        d.handleCallback(a, c)
+      }, deleteOrArchiveUser: function (a, b, c) {
+        if (!a)throw"ids is required!";
+        if (b === r)throw"isArchive is required!";
+        Array.isArray(a) || (a = [a]);
+        a = h({url: "/users/" + !!b, method: "POST", data: a});
+        d.handleCallback(a, c)
+      }, isEmailUnique: function (a, b, c) {
+        if (!a)throw"email is required!";
+        var e = d.customizeObj({});
+        h.get("/users/isEmailUnique?email=" + a + "&id=" + b).then(function (a) {
+          d.customizeObj(a.data,
+            e);
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (t, v, r) {
+  angular.module("main.services").factory("VendorsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, q, l, d) {
+    return {
+      save: function (g, f) {
+        if (!g)throw"vendor is required!";
+        var c = "POST";
+        g.id && (c = "PUT");
+        c = h({url: "/vendor", method: c, data: g});
+        d.handleCallback(c, f)
+      },
+      getAll: function (g, f) {
+        if (!g || !g.$id)throw"First argument must be Angularjs scope!";
+        return d.getListByUrl("/vendor", f, function (c) {
+          l.subscribe("/vendor", g, function (a) {
+            console.log(a);
+            if ("VENDOR_SAVE" == a.action) {
+              var b =
   d.findById(c,a.data.id);b?d.customizeObj(a.data,b):c.push(d.customizeObj(a.data))}else if("VENDOR_ARCHIVED"==a.action)d.deleteById(c,a.data.id),g.$broadcast("vendor_archived",a.data);else if("VENDOR_DEARCHIVED"==a.action)c.push(d.customizeObj(a.data)),g.$broadcast("vendor_dearchived",a.data);else if("VENDOR_PRODUCT_SAVE"==a.action){var b=d.findById(c,a.data.id),e=d.findById(b.products,a.data.products[0].versionedId.id);if(b&&e)for(a=0;b.products.length<a;a++);else b&&(b.products[b.products.length]=
   a.data.products[0])}else"VENDOR_PRODUCT_DELETE"==a.action&&(b=d.findById(c,a.data.id))&&d.deleteById(b.products,a.data.products[0].versionedId.id)})})},getAllForCompanyProfile:function(g,f,c){if(!g||!g.$id)throw"First argument must be Angularjs scope!";if(!f)throw"companyId is required!";return d.getListByUrl("/vendor/companyProfile/"+f,c,function(a){l.subscribe("/vendor",g,function(b){console.log(b);if("VENDOR_SAVE"==b.action){var c=d.findById(a,b.data.id);c?d.customizeObj(b.data,c):a.push(d.customizeObj(b.data))}else if("VENDOR_ARCHIVED"==
   b.action)d.deleteById(a,b.data.id),g.$broadcast("vendor_archived",b.data);else if("VENDOR_DEARCHIVED"==b.action)a.push(d.customizeObj(b.data)),g.$broadcast("vendor_dearchived",b.data);else if("VENDOR_PRODUCT_SAVE"==b.action){var c=d.findById(a,b.data.id),f=d.findById(c.products,b.data.products[0].versionedId.id);if(c&&f)for(b=0;c.products.length<b;b++);else c&&(c.products[c.products.length]=b.data.products[0])}else"VENDOR_PRODUCT_DELETE"==b.action&&(c=d.findById(a,b.data.id))&&d.deleteById(c.products,
