@@ -14,10 +14,9 @@
       <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
              data-toggle="dropdown" aria-expanded="false" autocomplete="off"
              typeahead-on-select="validateProductName(editProductForm.editProductName, product.versionedId.id)"
-             ng-model="editProduct.vendor" name="editProductVendor" ng-required="true"
+             ng-model="editProduct.vendor" name="editProductVendor"
              typeahead="vendor as vendor.name for vendor in vendors | filter:$viewValue:stateComparator | orderBy:'name'"
-             typeahead-min-length="0" typeahead-editable="false"
-             qt-typeahead-show-on-focus ng-trim="false"
+             typeahead-editable="true" qt-typeahead-show-on-focus ng-trim="false"
              custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
       <div typeahead-input-icon="editProduct.vendor" style="position: absolute;top: 13px;right: 13px;"></div>

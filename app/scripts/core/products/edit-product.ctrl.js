@@ -27,6 +27,11 @@
         $scope.saveChangeProduct = function (form) {
           if (form.$valid) {
             $scope.disabledSaveChangeButton = true;
+
+            if((typeof $scope.editProduct.vendor) === 'string'){
+              $scope.editProduct.vendor = undefined;
+            }
+
             ProductsService.saveProduct($scope.editProduct, function () {
               $rootScope.$broadcast('cancelEditForm', 'isProductCreation');
               $scope.disabledSaveChangeButton = false;
@@ -80,10 +85,6 @@
           if ((form.editProductDescription && form.editProductDescription.$error && form.editProductDescription.$error.maxlength)
             || (form.editProductDescriptionCopy && form.editProductDescriptionCopy.$error && form.editProductDescriptionCopy.$error.maxlength)) {
             return 'Product description exceeds maximum length.';
-          }
-
-          if (form.editProductVendor && form.editProductVendor.$error && form.editProductVendor.$error.parse) {
-            return 'Please select vendor from dropdown.';
           }
 
           if (form.sale && form.sale.$error && form.sale.$error.smallerThanCost) {
