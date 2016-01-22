@@ -8,6 +8,12 @@
            is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
   </div>
 
+  <div class="col-desc" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+    <input type="text" class="form-control" placeholder="Description"
+           ng-model="editProduct.description"
+           ng-maxlength="500" name="editProductDescription">
+  </div>
+
   <div class="col-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
     <div class="dropdown">
 
@@ -27,19 +33,13 @@
   <div class="col-4" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}">
     <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
            name="cost" ng-change="validateSaleAndCost(editProductForm)"
-           hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
+           hard-reset-pattern="decimalNumberPattern">
   </div>
 
   <div class="col-5" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
     <input type="text" class="form-control" placeholder="S. Price" ng-model="editProduct.sale"
            name="sale" ng-change="validateSaleAndCost(editProductForm)"
            hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
-  </div>
-
-  <div class="col-desc" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
-    <input type="text" class="form-control" placeholder="Description"
-           ng-model="editProduct.description"
-           ng-maxlength="500" name="editProductDescription">
   </div>
 
   <div class="qt-form-actions">

@@ -122,7 +122,11 @@
                   </div>
 
                   <div class="col-3" style="height: 20px">{{ product.vendor.name}}</div>
-                  <div class="col-4">{{ product.cost | currency: '$': 0 }}</div>
+
+                  <div class="col-4" style="height: 20px">
+                    {{ +product.cost !== 0 ? (product.cost | currency: '$': 0) : '' }}
+                  </div>
+
                   <div class="col-5">{{ product.sale | currency: '$': 0 }}</div>
 
                   <div class="col-6" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
