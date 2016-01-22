@@ -10,7 +10,7 @@
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
-        if (!clientCompanies || clientCompanies.length < 1) {
+        if (!$scope.clientCompanies || $scope.clientCompanies.length < 1) {
           alert('Create at list one company before adding users');
 
           if ($scope.editUser && $scope.editUser.id) {
