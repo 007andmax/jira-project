@@ -1748,7 +1748,7 @@ Devices tab
 }
 .product-form-wrapper .col-2{
   float: left;
-  width: 203px; /*  width: calc(100% - 642px);*/
+  width: 233px; /*  width: calc(100% - 642px);*/
   padding: 0 5px;
 }
 .product-form-wrapper .col-3{
@@ -1769,7 +1769,7 @@ Devices tab
 .product-form-wrapper .col-desc{
   float: left; /*float: right;*/
   /*margin-top: 10px;*/
-  width: calc(100% - 815px); /* width: calc(100% - 183px);*/
+  width: calc(100% - 845px); /* width: calc(100% - 183px);*/
   padding-left: 5px;
 }
 @media only screen and (min-width: 2000px){
@@ -1780,7 +1780,7 @@ Devices tab
     width: 243px;
   }
   .product-form-wrapper .col-2{
-    width: 263px; /*width: calc(100% - 822px);*/
+    width: 323px; /*width: calc(100% - 822px);*/
   }
   .product-form-wrapper .col-3{
     width: 263px; /* width: 293px;*/
@@ -1792,7 +1792,7 @@ Devices tab
     width: 141px;
   }
   .product-form-wrapper .col-desc{
-    width: calc(100% - 1055px); /*width: calc(100% - 243px);*/
+    width: calc(100% - 1115px); /*width: calc(100% - 243px);*/
   }
 }
 @media only screen and (max-width: 1700px){
@@ -1803,7 +1803,7 @@ Devices tab
     width: 113px;
   }
   .product-form-wrapper .col-2{
-    width: 153px;  /*width: calc(100% - 432px);*/
+    width: 213px; /*width: calc(100% - 432px);*/
   }
   .product-form-wrapper .col-3{
     width: 153px; /*width: 163px;*/
@@ -1815,7 +1815,7 @@ Devices tab
     width: 76px;
   }
   .product-form-wrapper .col-desc{
-    width: calc(100% - 575px);  /*  width: calc(100% - 113px);*/
+    width: calc(100% - 635px); /*  width: calc(100% - 113px);*/
   }
 }
 .default-services-header{
