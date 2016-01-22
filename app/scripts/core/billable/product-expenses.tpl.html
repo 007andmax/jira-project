@@ -5,13 +5,18 @@
     <span class="model">#{{ product.item.code }}</span>
   </div>
 
-  <div class="col-2" trimmed-popover trimmed-popover-content="product.description">
+  <div class="col-2" ng-class="{'col-2-has-serial-number': product.serialNumber && (product.serialNumber.length > 0)}"
+       trimmed-popover trimmed-popover-content="product.description">
     {{ product.description }}
   </div>
 
-  <div class="col-4">{{ product.sum | currency: '$': 0 }}</div>
+  <div class="col-3" ng-show="product.serialNumber && (product.serialNumber.length > 0)">
+    {{ product.serialNumber }}
+  </div>
 
-  <div class="col-3">{{ product.price | currency: '$': 0 }}
+  <div class="col-5">{{ product.sum | currency: '$': 0 }}</div>
+
+  <div class="col-4">{{ product.price | currency: '$': 0 }}
     <span class="model">Qty {{ product.billableQuantity }}</span>
   </div>
 

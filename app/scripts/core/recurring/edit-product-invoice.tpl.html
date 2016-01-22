@@ -8,13 +8,13 @@
           <div class="dropdown"  product-autocomplete>
 
             <input type="text" class="form-control has-dropdown" placeholder="Product" data-toggle="dropdown"
-                   aria-expanded="false" name="productName"
-                   ng-change="isProductNameCorrect()" ng-model="editProduct.item.name">
+                   aria-expanded="false" name="productName" ng-value="editProduct.item.name">
             <i class="icn-sm icn-caret-gray"></i>
 
             <input type="hidden" name="product" ng-model="editProduct.item.versionedId.id" ng-required="true">
 
-            <div ng-include="'/html/scripts/common/templates/choose-product-dropdown.tpl.html'"></div>
+            <div ng-if="autocompleteDataLoad"
+                 ng-include="'/html/scripts/common/templates/choose-product-dropdown.tpl.html'"></div>
 
           </div>
         </div>
@@ -23,6 +23,12 @@
           <input type="text" class="form-control" placeholder="Description"
                  name="editProductDescription" ng-required="true"
                  ng-model="editProduct.description" ng-maxlength="1000">
+        </div>
+
+        <div class="col-5" ng-class="{'has-error': isShowingErrors(editProductInvoiceForm, 'editProductSerialNumber')}">
+          <input type="text" class="form-control" placeholder="Serial Number"
+                 name="editProductSerialNumber"
+                 ng-model="editProduct.serialNumber" ng-maxlength="36">
         </div>
 
         <div class="col-3" ng-class="{'has-error': isShowingErrors(editProductInvoiceForm, 'editProductQuantity')}">
@@ -44,7 +50,7 @@
 
         <div class="btn btn-lg btn-info pull-right"
              ng-click="saveProduct(editProductInvoiceForm)"
-             custom-disabled="{{ disabledCreateProductButton }}">
+             custom-disabled="{{ disabledCreateProductButton || (editProductInvoiceForm.$invalid && triedToSaveProduct) }}">
           {{ product === undefined ? 'Add' : 'Save' }}
         </div>
 

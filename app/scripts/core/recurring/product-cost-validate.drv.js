@@ -18,7 +18,7 @@
             quantity = scope.product.quantity,
             typedCost = sum / quantity;
 
-          if (!scope.product || !scope.product.item || !sum || !quantity) {
+          if (!scope.product || !scope.product.item || !scope.product.item.cost || !sum || !quantity) {
             ctrl.$setValidity(validityKey, true);
           } else {
             ctrl.$setValidity(validityKey, typedCost >= scope.product.item.cost);

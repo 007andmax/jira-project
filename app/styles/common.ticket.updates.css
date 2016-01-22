@@ -328,7 +328,7 @@
   white-space: nowrap;
 }
 .table-wrapper .table-content .col-1 {
-  width: 193px;
+  width: 163px; /*  width: 193px;*/
   float: left;
   border: 0;
 }
@@ -339,13 +339,27 @@
   width: 114px;
 }
 .table-wrapper .table-content .col-2 {
-  width: calc(100% - 430px);
+  width: calc(100% - 400px); /*width: calc(100% - 430px);*/
+  float: left;
+}
+
+.table-wrapper .table-content .col-2.col-2-has-serial-number {
+  /*new*/
+  width: calc(60% - 163px);
+  float: left;
+}
+
+.table-wrapper .table-content .col-3 {
+  /*new*/
+  width: calc(40% - 237px);
   float: left;
 }
 .table-wrapper .service-table .col-2 {
   width: 155px;
 }
-.table-wrapper .table-content .col-3 {
+
+.table-wrapper .table-content .col-4 {
+  /*.table-wrapper .table-content .col-3 {*/
   width: 139px;
   float: right;
 }
@@ -361,7 +375,9 @@
 .inventry-details .table-wrapper .table-content:last-child{
   margin-bottom: 10px;
 }
-.table-wrapper .table-content .col-4 {
+
+.table-wrapper .table-content .col-5 {
+  /*.table-wrapper .table-content .col-4 {*/
   width: 98px;
   float: right;
 }
@@ -436,12 +452,18 @@
   background-color: #fff;
 }
 .ticket-update-product-edit .edit-col1{
-  width: 195px;
+  width: 165px; /* width: 195px;*/
 }
 .ticket-update-product-edit .edit-col3{
+  width: 200px;
+}
+
+.ticket-update-product-edit .edit-col4 {
+  /*new  increment 3 4 */
   width: 95px;
 }
-.ticket-update-product-edit .edit-col4{
+
+.ticket-update-product-edit .edit-col5 {
   width: 90px;
 }
 .ticket-update-service-edit .edit-col1{

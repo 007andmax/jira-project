@@ -1059,7 +1059,7 @@ Devices tab
   width: 114px;
 }
 .qt-add-service .qt-invoices > li.add-product-item > .col-2{
-  width: calc(100% - 444px);
+  width: calc(100% - 644px); /* width: calc(100% - 444px);*/
 }
 .qt-add-service .qt-invoices > li.add-service-item > .col-3{
   width: calc(100% - 373px);
@@ -1072,6 +1072,11 @@ Devices tab
 }
 .qt-add-service .qt-invoices > li.add-product-item > .col-4{
   width: 90px;
+}
+
+.qt-add-service .qt-invoices > li.add-product-item > .col-5 {
+  /*new*/
+  width: 200px;
 }
 .qt-add-service .icn{
   position: absolute;

@@ -8,8 +8,7 @@
         <div class="dropdown" product-autocomplete>
 
           <input type="text" class="form-control has-dropdown" placeholder="Product"
-                 name="productName" ng-change="isProductNameCorrect()"
-                 data-toggle="dropdown" aria-expanded="true" ng-model="productExpense.item.name">
+                 name="productName" data-toggle="dropdown" aria-expanded="true">
           <i class="icn-sm icn-caret-gray"></i>
 
           <input type="hidden" name="product" ng-model="productExpense.item.versionedId.id" ng-required="true">
@@ -26,28 +25,35 @@
                ng-maxlength="2000" max-length-word="30"/>
       </div>
 
-      <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
+      <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}">
 
-        <input type="text" class="form-control" placeholder="Qty"
+        <input type="text" class="form-control" name="productSerialNumber"
+               placeholder="Serial Number" ng-model="productExpense.serialNumber"
+               ng-maxlength="36"/>
+      </div>
+
+      <div class="col-4" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
+
+      <input type="text" class="form-control" placeholder="Qty"
                name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
                ng-model="productExpense.quantity" ng-maxlength="10"
                hard-reset-pattern="numberPattern"/>
       </div>
 
-      <div class="col-4">
+      <div class="col-5">
 
         <input type="text" class="form-control" placeholder="Amount"
                value="{{ productExpense.item.sale ? '$ ' + productExpense.item.sale : '' }}" readonly/>
       </div>
 
-      <div class="col-5" ng-if="$last">
+      <div class="col-6" ng-if="$last">
         <div class="btn btn-dark has-tooltip" tooltip="Add More" tooltip-placement="top"
              ng-click="addProduct(addProductForm)">
           <i class="icn-sm icn-plus"></i>
         </div>
       </div>
 
-      <div class="col-5" ng-if="!$last">
+      <div class="col-6" ng-if="!$last">
         <div class="btn btn-primary has-tooltip" tooltip="Remove" tooltip-placement="top"
              ng-click="removeProduct()">
           <i class="icn-sm icn-remove-token"></i>

@@ -22,9 +22,10 @@
 
               var isProductItemChange = $scope.product.item.versionedId.id != $scope.editProduct.item.versionedId.id;
               var isDescriptionChange = $scope.product.description != $scope.editProduct.description;
-              var isDescriptionQuantity = $scope.product.quantity != $scope.editProduct.quantity;
+              var isQuantityChange = $scope.product.quantity != $scope.editProduct.quantity;
+              var isSerialNumberQuantity = $scope.product.serialNumber != $scope.editProduct.serialNumber;
 
-              if (!(isProductItemChange || isDescriptionChange || isDescriptionQuantity)) {
+              if (!(isProductItemChange || isDescriptionChange || isQuantityChange || isSerialNumberQuantity)) {
                 $scope.setEditExpenseId();
                 return;
               }
@@ -37,6 +38,7 @@
                   id: $scope.editProduct.id,
                   item: {versionedId: {id: $scope.editProduct.item.versionedId.id}},
                   description: $scope.editProduct.description,
+                  serialNumber: $scope.editProduct.serialNumber,
                   quantity: $scope.editProduct.quantity,
                   date: $scope.editProduct.date
 

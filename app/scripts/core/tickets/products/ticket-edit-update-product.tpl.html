@@ -6,7 +6,7 @@
         <div class="edit-col1"
              ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productName') || !editProduct.item.versionedId.id}">
           <div class="dropdown" product-autocomplete>
-            <input type="text" class="form-control has-dropdown" ng-model="editProduct.item.name "
+            <input type="text" class="form-control has-dropdown" ng-value="editProduct.item.name"
                    placeholder="Product" data-toggle="dropdown" aria-expanded="false"
                    name="productName" ng-required="true">
             <i class="icn-sm icn-caret-gray"></i>
@@ -22,14 +22,20 @@
                  ng-model="editProduct.description">
         </div>
 
-        <div class="edit-col3" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">
+        <div class="edit-col3" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}">
+          <input type="text" class="form-control" placeholder="Serial Number"
+                 name="productSerialNumber" ng-maxlength="36"
+                 ng-model="editProduct.serialNumber">
+        </div>
+
+        <div class="edit-col4" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">
           <input type="text" class="form-control" placeholder="Qty"
                  ng-model="editProduct.quantity" ng-maxlength="10"
                  name="productQty" hard-reset-required="true" ng-change="controlProductQty(updateTicketProduct)"
                  hard-reset-pattern="numberPattern">
         </div>
 
-        <div class="edit-col4">
+        <div class="edit-col5">
           <input type="text" class="form-control" placeholder="Amount" readonly
                  value="{{ editProduct.item.sale * editProduct.quantity || '' }}">
         </div>

@@ -9,7 +9,9 @@
         $scope.editProduct = {};
 
         $scope.productCategories = ProductsService.getCategories($scope);
-        $scope.autocompleteData = ProductsService.getFullListForAutocomplete();
+        $scope.autocompleteData = ProductsService.getFullListForAutocomplete(function () {
+          $scope.autocompleteDataLoad = true;
+        });
 
         if ($scope.product !== undefined) {
 
@@ -33,6 +35,10 @@
 
         $scope.selectProduct = function (product) {
           $scope.editProduct.item = product;
+
+          $scope.$apply(function () {
+            return $scope.editProduct.description = product.description;
+          });
         };
 
         $scope.isShowingErrors = function (form, fieldName) {

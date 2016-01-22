@@ -182,13 +182,20 @@
 }
 /* Add Product tab */
 #Product .col-1{
-    width: 195px;
+  width: 165px; /*  width: 195px;*/
 }
-#Product .col-3, #Product .col-4{
+
+#Product .col-3 {
+  /*new*/
+  width: 200px;
+}
+
+#Product .col-4, #Product .col-5 {
+  /*increment 3 4 5*/
     width: 95px;
 }
 
-#Product .col-5{
+#Product .col-6 {
     width: 43px;
 }
 

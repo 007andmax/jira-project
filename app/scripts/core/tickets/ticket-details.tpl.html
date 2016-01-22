@@ -379,19 +379,24 @@
                     <span class="model">#{{ product.item.code }}</span>
                   </div>
 
-                  <div class="col-2" trimmed-popover trimmed-popover-content="product.description">
+                  <div class="col-2 col-2-has-serial-number"
+                       trimmed-popover trimmed-popover-content="product.description">
                     {{ product.description ? product.description : '&nbsp;' }}
                   </div>
 
-                  <div class="col-4" ng-show="ticketDetails.status === 'COMPLETED'">
+                  <div class="col-3">
+                    {{ product.serialNumber ? product.serialNumber : '&nbsp;' }}
+                  </div>
+
+                  <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'">
                     {{ product.sum | currency }}
                   </div>
 
-                  <div class="col-4" ng-show="ticketDetails.status !== 'COMPLETED'">
+                  <div class="col-5" ng-show="ticketDetails.status !== 'COMPLETED'">
                     {{ product.item.sale * product.quantity || '' | currency : $ : 0 }}
                   </div>
 
-                  <div class="col-3">{{ product.item.sale | currency : $ : 0 }}
+                  <div class="col-4">{{ product.item.sale | currency : $ : 0 }}
                     <span class="model">Qty {{ product.quantity }}</span>
                   </div>
 

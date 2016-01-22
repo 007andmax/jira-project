@@ -16,7 +16,7 @@
             $scope.$apply(function(){
               return $scope.productExpense.description = product.description;
             });
-            
+
           };
 
           $scope.removeProduct = function () {
@@ -26,23 +26,6 @@
           $scope.controlProductQty = function (form){
             form.productQty.$setValidity('zero', +$scope.productExpense.quantity !== 0);
           };
-
-          $scope.isProductNameCorrect = function(){
-            if(!$scope.productExpense.item.name || !$scope.productsByCategory){
-              return;
-            }
-
-            for(var i = 0; i < $scope.productsByCategory.length; i++){
-              if($scope.productExpense.item.name === $scope.productsByCategory[i].name){
-                $scope.productExpense.item = $scope.productsByCategory[i].staticCopy();
-                return;
-              } else {
-                if($scope.productExpense.item.versionedId){
-                  $scope.productExpense.item.versionedId.id = '';
-                }
-              }
-            }
-          }
 
         }]);
   }()
