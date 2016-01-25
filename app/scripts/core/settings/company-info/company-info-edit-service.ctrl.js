@@ -1,0 +1,85 @@
+'use strict';
+
+(function () {
+
+  angular.module('quicktech.core.services').controller('quicktech.core.services.editServiceCtrl',
+    ['$scope', '$rootScope', 'ServicesService',
+      function ($scope, $rootScope, ServicesService) {
+
+        if ($scope.service) {
+          $scope.editService = {
+            id: $scope.service.versionedId.id,
+            name: $scope.service.name,
+            rate: $scope.service.rate,
+            timeBlock: Math.round($scope.service.timeBlock * 60),
+            taxable: true
+          }
+        } else {
+          $scope.editService = {taxable: true};
+        }
+
+        $scope.saveEditService = function (form) {
+          if (form.$valid) {
+            $scope.disabledSaveButton = true;
+            ServicesService.save({
+              id: $scope.editService.id,
+              name: $scope.editService.name,
+              rate: $scope.editService.rate,
+              timeBlock: $scope.editService.timeBlock / 60,
+              taxable: true
+            }, function () {
+              $scope.disabledSaveButton = false;
+              $rootScope.$broadcast('cancelEditForm');
+            })
+          } else {
+            $scope.triedToSaveService = true;
+          }
+        };
+
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form[fieldName] && ($scope.triedToSaveService || form[fieldName].$dirty) && !form[fieldName].$valid;
+        };
+
+        $scope.validateServiceName = function (ngModelCtrl, modelId) {
+          var uniqueNameCount = 0;
+          for (var i = 0; i < $scope.services.length; i++) {
+            if ((ngModelCtrl.$viewValue.toLowerCase() === $scope.services[i].name.toLowerCase()) && (modelId !== $scope.services[i].versionedId.id)) {
+              uniqueNameCount++;
+            }
+          }
+          ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
+        };
+
+        $scope.getValidationMessage = function (form) {
+
+          if (form.$error.required) {
+            for (var i = 0; i < form.$error.required.length; i++) {
+              if ($scope.isShowingErrors(form, form.$error.required[i].$name)) {
+                return 'Please fill in the required field(s).';
+              }
+            }
+          }
+
+          if (form.editServiceName && form.editServiceName.$error) {
+
+            if (form.editServiceName.$error.maxlength) {
+              return 'Service name exceeds maximum length.';
+            }
+
+            if (form.editServiceName.$error.minlength) {
+              return 'Service name is too short!';
+            }
+
+            if (form.editServiceName.$error.unique) {
+              return 'Service name already exists!';
+            }
+          }
+
+          if (form.timeBlock && form.timeBlock.$error && form.timeBlock.$error.invalidwhen) {
+            return 'Minimal Time Slice should be greater than 0.';
+          }
+        };
+
+      }]);
+
+}());

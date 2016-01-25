@@ -312,6 +312,259 @@
     </div>
   </div>
 
+  <div class="services-info-wrapper" id="companyInfoServices"
+       ng-controller="quicktech.core.settings.companyInfoServicesCtrl">
+
+    <div class="default-services-header">
+
+      <h3>Services Info
+        <span class="text-muted" ng-show="services && services.length > 0">{{ services.length }}</span>
+      </h3>
+
+      <ul class="qt-list" ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
+
+        <li class="list-heading" ng-show="services.length > 0">
+          <div class="col-1">TYPE</div>
+          <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
+          <div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
+          <div class="col-4">&nbsp;</div>
+        </li>
+
+        <li ng-repeat="service in services | orderBy : 'createdAt'"
+            ng-controller="quicktech.core.settings.companyInfoServiceCtrl"
+            ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
+            show-model-element="{{ 'show-' + service.versionedId.id }}">
+
+          <div class="intermediate-parent-elem" ng-if="!isEditService">
+
+            <div class="col-1">
+              <label class="control checkbox pull-left" ng-if="showCheckboxes">
+                <input type="checkbox" ng-model="checkedServices[service.versionedId.id]"
+                       ng-change="onChangeCheckbox()">
+                <span class="control-indicator"></span>
+              </label>
+
+              <div class="checkbox-caption">{{ service.name }}</div>
+            </div>
+
+            <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+              {{ service.timeBlock | timeFilter }}
+            </div>
+
+            <div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+              {{ service.rate | currency: '$': 0 }}
+            </div>
+
+            <div class="col-4" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+
+              <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                 ng-click="deleteService()"
+                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+                <i class="icn-sm icn-delete"></i>
+              </a>
+
+              <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+                 ng-click="showEditServiceForm()"
+                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">
+                <i class="icn-sm icn-edit"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+          <div ng-if="isEditService"
+               ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+
+        </li>
+
+        <li class="qt-service-form" ng-if="showCreateService">
+          <div ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+        </li>
+
+      </ul>
+
+
+      <div class="add-service-btn-wrapper">
+
+        <span class="text-muted" ng-show="!services || services.length === 0">No Default Services.</span>
+
+        <div class="btn btn-info has-tooltip"
+             ng-click="showCreateServiceForm()" custom-disabled="{{ showCreateService }}"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
+          <i class="icn-sm icn-service-add"></i>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div id="companyInfoDefaultTax" class="default-tax-wrapper clearfix"
+       ng-controller="quicktech.core.settings.companyInfoDefaultTaxCtrl">
+
+    <div ng-form="companyInfoDefaultTax">
+      <h3>Default Tax</h3>
+
+      <ul class="qt-list default-tax-list">
+
+        <li class="list-heading" ng-show="taxRates.length > 0">
+          <div class="col-1">TAX TYPE</div>
+          <div class="col-2">RATE</div>
+        </li>
+
+        <li class="tax-list" ng-repeat="tax in taxRates" ng-class="{'new-tax': isEditing}"
+            ng-controller="quicktech.core.settings.companyInfoTaxRateCtrl"
+            ng-form="companyInfoEditTax">
+
+          <div class="helping-additional-class" ng-class="{'hide': isEditing}">
+
+            <div class="col-1">{{ tax.code }}</div>
+
+            <div class="col-2">{{ tax.rate }}%</div>
+
+            <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+               ng-click="deleteTaxRate()"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+              <i class="icn-sm icn-delete"></i>
+            </a>
+
+            <a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"
+               ng-click="editTaxRate(companyInfoEditTax)"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">
+              <i class="icn-sm icn-edit"></i>
+            </a>
+
+          </div>
+
+          <div class="helping-additional-class" ng-class="{'hide': !isEditing}">
+
+            <div class="col-1" ng-class="{'has-error': isShowingErrors(companyInfoEditTax, 'currentlyTaxType')}">
+
+              <p ng-style="{ opacity: isShowingErrors(companyInfoEditTax, 'currentlyTaxType') ? '0' : '1' }">Edit Tax
+                Rate</p>
+
+              <div ng-messages="companyInfoEditTax.currentlyTaxType.$error"
+                   style="position: absolute;margin-top: -19px;"
+                   ng-class="{'hide': !isShowingErrors(companyInfoEditTax, 'currentlyTaxType')}">
+
+                <label class="control-label" ng-message="required">
+                  TAX TYPE IS REQUIRED.
+                </label>
+                <label class="control-label" ng-message="maxlength">
+                  TAX TYPE IS TOO LARGE.
+                </label>
+                <label class="control-label" ng-message="unique">
+                  THIS TAX TYPE ALREADY OCCUPIED.
+                </label>
+              </div>
+
+              <input type="text" class="form-control"
+                     ng-model="tax.code" name="currentlyTaxType" ng-required="true"
+                     is-uniq-validation validation-func="validateTaxRateCode" model-id="tax.versionedId.id"
+                     ng-maxlength="30" placeholder="Tax Type">
+            </div>
+
+            <div class="col-2" ng-class="{'has-error': isShowingErrors(companyInfoEditTax, 'currentlyTaxRate')}">
+              <p>&nbsp;</p>
+
+              <div ng-messages="companyInfoEditTax.currentlyTaxRate.$error"
+                   style="position: absolute;margin-top: -19px;"
+                   ng-if="isShowingErrors(companyInfoEditTax, 'currentlyTaxRate')">
+                <label class="control-label" ng-message="required">
+                  RATE IS REQUIRED.
+                </label>
+              </div>
+
+              <input type="text" class="form-control" placeholder="Rate" style="width: 147px;"
+                     ng-model="tax.rate" name="currentlyTaxRate" hard-reset-required="true"
+                     hard-reset-pattern="taxRateNumberPattern">
+
+              <div class="btn btn-primary has-tooltip" ng-click="cancelTax(companyInfoEditTax)" style="margin: 0 8px;"
+                   tooltip-placement="top" tooltip="cancel">
+                <i class="icn-sm icn-remove-token"></i>
+              </div>
+
+              <div class="btn btn-success pull-right" ng-click="saveTax()"
+                   custom-disabled="{{ companyInfoEditTax.$invalid || companyInfoEditTax.$pristine }}">
+                <i class="icn-sm small-icn-tick"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+        </li>
+
+
+        <li class="new-tax" ng-form="newTaxRateForm">
+
+          <div class="helping-additional-class">
+
+            <div class="col-1" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'code')}">
+
+              <p ng-style="{'opacity': isShowingErrors(newTaxRateForm, 'code') ? 0 : 1}">New Tax Rate</p>
+
+              <div ng-messages="newTaxRateForm.code.$error" style="position: absolute;margin-top: -25px;"
+                   ng-class="{'hide': !isShowingErrors(newTaxRateForm, 'code')}">
+
+                <label class="control-label" ng-message="required">
+                  TAX TYPE IS REQUIRED.
+                </label>
+                <label class="control-label" ng-message="maxlength">
+                  TAX TYPE IS TOO LARGE.
+                </label>
+                <label class="control-label" ng-message="unique">
+                  THIS TAX TYPE ALREADY OCCUPIED.
+                </label>
+              </div>
+
+              <input type="text" class="form-control" name="code"
+                     placeholder="Tax Type" ng-model="newTaxRate.code" ng-required="true"
+                     ng-change="validateNewTaxRate(newTaxRateForm)" name="code">
+            </div>
+
+            <div class="col-2" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'rate')}">
+              <p>&nbsp;</p>
+
+              <div ng-messages="newTaxRateForm.rate.$error" style="position: absolute;margin-top: -19px;"
+                   ng-class="{'hide': !isShowingErrors(newTaxRateForm, 'rate')}">
+                <label class="control-label" ng-message="required">
+                  TAX TYPE IS REQUIRED.
+                </label>
+              </div>
+
+              <input type="text" class="form-control" placeholder="Rate" ng-required="true"
+                     ng-model="newTaxRate.rate" name="rate"
+                     hard-reset-pattern="taxRateNumberPattern" ng-maxlength="30">
+
+              <div class="btn btn-success pull-right"
+                   ng-click="saveNewTax(newTaxRateForm)"
+                   custom-disabled="{{ newTaxRateForm.$invalid }}">
+                <i class="icn-sm small-icn-tick"></i>
+              </div>
+
+            </div>
+          </div>
+
+        </li>
+
+      </ul>
+
+      <div class="form-row clearfix">
+        <div class="form-group no-label full-width">
+          <button type="button" class="btn btn-lg btn-info pull-right"
+                  custom-disabled="{{ (!isTaxRatesChanges || isEditing) || savingTaxProcess }}"
+                  ng-click="saveAllTax()">Save
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
   <div class="email-me-wrapper">
     <form name="notificationForm">
       <h3>Send email to all relevant persons when: </h3>

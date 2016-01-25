@@ -8,7 +8,7 @@
 
         $scope.checkedServices = {};
         $scope.companies = CompaniesService.getClientCompanies();
-        $scope.servicesData = ServicesService.getServicesData($scope);
+        $scope.servicesData = ServicesService.getServicesData($scope, false);
 
         $scope.getCheckedDefaultServices = function () {
           var checkedDefaultServices = [];

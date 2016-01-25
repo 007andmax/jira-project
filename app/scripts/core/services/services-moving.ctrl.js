@@ -51,7 +51,7 @@
         $scope.moveServices = function (moveServicesMap) {
             ServicesService.move(moveServicesMap, function () {
               $scope.$emit('hideMovementDropdown');
-              $scope.servicesData = ServicesService.getServicesData($scope);
+              $scope.servicesData = ServicesService.getServicesData($scope, false);
             });
         };
 

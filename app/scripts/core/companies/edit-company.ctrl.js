@@ -82,6 +82,13 @@
             taxRates: [],
             companyAssociations: []
           };
+
+          TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
+            for (var i = 0; i < resp.length; i++) {
+              $scope.editCompany.taxRates.push({code: resp[i].code, rate: resp[i].rate})
+            }
+          });
+
         }
 
         $scope.$on('$destroy', function () {
@@ -159,7 +166,7 @@
 
         $scope.validateCompanyName = function (ngModelCtrl) {
 
-          if ($scope.currentUser.accountType === "ROOT"){
+          if ($scope.currentUser.accountType === "ROOT") {
             ngModelCtrl.$setValidity('unique', true);
             return
           }
@@ -251,7 +258,7 @@
           form.validation.code.invalid = form.validation.code.required || form.validation.code.maxlength || form.validation.code.unique;
           form.validation.rate.invalid = form.validation.rate.required || form.validation.rate.number;
 
-          form.invalid = form.validation.rate.invalid ||  form.validation.code.invalid;
+          form.invalid = form.validation.rate.invalid || form.validation.code.invalid;
         };
 
         $scope.saveNewTax = function (form) {
@@ -262,8 +269,9 @@
             $scope.editCompany.taxRates.push($scope.newTaxRate);
             $scope.newTaxRate = {};
             //$scope.newTaxRateFormShowErrors = false;
-          } /*else {*/
-            //$scope.newTaxRateFormShowErrors = true;
+          }
+          /*else {*/
+          //$scope.newTaxRateFormShowErrors = true;
           //}
         };
 

@@ -1,0 +1,52 @@
+.services-info-wrapper .qt-default-services {
+  padding: 16px 0 30px 0;
+}
+
+.services-info-wrapper h3 {
+  font-size: 17px;
+  line-height: 24px;
+  color: #1f2a37;
+}
+
+.services-info-wrapper .default-services-header {
+  padding-bottom: 57px;
+}
+
+.services-info-wrapper .qt-list > li:hover:before,
+.services-info-wrapper .qt-list > li:hover:after {
+  display: none;
+}
+
+.services-info-wrapper .default-services-header .add-service-btn-wrapper {
+  margin-bottom: 0;
+}
+
+.services-info-wrapper .default-services-header .add-service-btn-wrapper .btn {
+  /*float: left;*/
+}
+
+.services-info-wrapper .service-form-wrapper {
+  padding: 30px 0 0 0;
+  height: 136px;
+  box-shadow: none;
+  left: 0;
+  right: 0;
+}
+
+.services-info-wrapper .service-form-wrapper .qt-form-actions {
+  margin-top: 20px !important;
+}
+
+.settings-main-wrapper .default-tax-wrapper {
+  float: left;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
+  padding-top: 0;
+}
+
+.settings-main-wrapper .services-info-wrapper {
+  float: left;
+}
