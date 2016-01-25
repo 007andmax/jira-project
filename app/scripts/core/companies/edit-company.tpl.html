@@ -359,14 +359,16 @@
                   </div>
 
                   <div class="form-row clearfix">
-                    <div ng-show="currentUser.accountType !== 'ROOT'" class="form-group">
+                    <div ng-show="currentUser.accountType !== 'ROOT'" class="form-group"
+                         ng-class="{'has-error': showSubscribeError}">
 
                       <label class="control-label">Subscribe to</label>
 
                       <div class="dropdown">
 
                         <input class="form-control has-dropdown" type="text" value="" data-toggle="dropdown"
-                               aria-expanded="false" readonly="readonly">
+                               aria-expanded="false" readonly="readonly"
+                               ng-style="{'background-color': showSubscribeError ? '#fff2f2' : '#f1f5fa'}">
                         <i class="icn-sm icn-caret-gray"></i>
 
                         <div class="subscribe-tokens">
@@ -393,7 +395,9 @@
                                ng-model="contact.subscription.invoice">
                               <div class="clearfix">
                                 <label class="control checkbox pull-left">
-                                  <input type="checkbox" ng-model="contact.subscription.invoice">
+                                  <input type="checkbox" ng-model="contact.subscription.invoice"
+                                         ng-change="changeInvoiceSubscription()"
+                                         invalid-when="showSubscribeError">
                                   <span class="control-indicator"></span> Invoice Updates
                                 </label>
                               </div>
@@ -401,6 +405,14 @@
                           </li>
 
                         </ul>
+
+                        <div>
+                          <label class="control-label" ng-show="showSubscribeError"
+                                 style="margin-top: 10px;position: absolute;">
+                            at least one contact should be subscribed on invoice updates.
+                          </label>
+                        </div>
+
                       </div>
                     </div>
 

@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService', 'AddressesService',
-      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService',
+      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService, AddressesService,
-                SharedStateService, $stateParams, $state, VendorsService) {
+                SharedStateService, $stateParams, $state, VendorsService, $timeout) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var currentTimeZone;
@@ -296,14 +296,37 @@
           }
         };
 
+        $scope.changeInvoiceSubscription = function () {
+
+          if ($scope.currentUser.accountType !== "TECH") {
+            return;
+          }
+
+          $timeout(function () {
+
+            var countInvoiceSubscr = 0;
+
+            for (var i = 0; i < $scope.editCompany.contacts.length; i++) {
+              if ($scope.editCompany.contacts[i].subscription.invoice) {
+                countInvoiceSubscr++
+              }
+            }
+
+            $scope.showSubscribeError = countInvoiceSubscr < 1;
+
+          })
+        };
+
+        $scope.$watch('editCompany.contacts.length', $scope.changeInvoiceSubscription);
+
         function getEmptyContact() {
           return {
-            subscription: {},
+            subscription: {invoice: true},
             avatar: {
               scale: 50
             }
           };
-        };
+        }
 
         function setCurrentTimeZone(timeZoneObject) {
           $scope.editCompany.addresses[0].locale = timeZoneObject;
