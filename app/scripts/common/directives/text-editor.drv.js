@@ -3,49 +3,91 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("textEditor",
-    function () {
-        return {
-          restrict: 'A',
-          require: 'ngModel',
-          link: function ($scope, element, attrs, ctrl) {
+    ['$timeout', function ($timeout) {
+      return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function ($scope, element, attrs, ctrl) {
 
-            // NOTE this is unidirectional implementation! All changes are aplying from editor to model
+          // NOTE this is unidirectional implementation! All changes are aplying from editor to model
+          var pressOnElement;
+          var editor = element.find('[te-editor]'),
+            wysiwyg = editor.wysiwyg({
+              hotKeys: {
+                'ctrl+b meta+b': 'bold',
+                'ctrl+i meta+i': 'italic',
+                'ctrl+u meta+u': 'underline',
+                'ctrl+z meta+z': 'undo',
+                'ctrl+y meta+y meta+shift+z': 'redo',
+                'ctrl+l meta+l': 'justifyleft',
+                'ctrl+r meta+r': 'justifyright',
+                'ctrl+e meta+e': 'justifycenter',
+                'ctrl+j meta+j': 'justifyfull',
+                'shift+tab': 'outdent'
+              }
+            });
 
-            var editor = element.find('[te-editor]'),
-              wysiwyg = editor.wysiwyg();
+          if (attrs.teInitialValue) {
+            wysiwyg.html(attrs.teInitialValue);
+          }
 
-            if (attrs.teInitialValue) {
-              wysiwyg.html(attrs.teInitialValue);
+          validateRequired();
+
+          editor.on('DOMSubtreeModified', function () {
+            var html = wysiwyg.html();
+            ctrl.$setViewValue(html);
+
+            if (attrs.teMaxlength) {
+              ctrl.$setValidity('maxlength', html.length <= attrs.teMaxlength);
             }
 
             validateRequired();
+          });
 
-            editor.on('DOMSubtreeModified', function () {
-              var html = wysiwyg.html();
-              ctrl.$setViewValue(html);
+          element.on('click', "a[data-edit='cblock']", function () {
+            document.execCommand('formatBlock', false, '<blockquote>');
+          });
 
-              if (attrs.teMaxlength) {
-                ctrl.$setValidity('maxlength', html.length <= attrs.teMaxlength);
+          element.on('click', "a[data-edit='removeformat']", function () {
+            var cleanText = editor.text();
+            editor.html(cleanText);
+          });
+
+          element.on('keydown', function () {
+            pressOnElement = true;
+          });
+
+          element.on('keyup', function (event) {
+
+            if (pressOnElement) {
+
+              pressOnElement = false;
+
+              if (event.keyCode === 9) {
+
+                var nextFocusInput = $('[next-after-text-editor]');
+
+                if (nextFocusInput.length > 0) {
+
+                  nextFocusInput.change(function (e) {
+                    e.stopImmediatePropagation();
+                    $(this).off("blur");
+                  });
+
+                  nextFocusInput.focus();
+
+                }
               }
+            }
+          });
 
-              validateRequired();
-            });
-
-            element.on('click', "a[data-edit='cblock']", function () {
-              document.execCommand('formatBlock', false, '<blockquote>');
-            });
-
-            element.on('click', "a[data-edit='removeformat']", function () {
-              var cleanText = editor.text();
-              editor.html(cleanText);
-            });
-
-            function validateRequired() {
-              if (attrs.teRequired) {
-                ctrl.$setValidity('required', wysiwyg.text().length > 0);
-              }
+          function validateRequired() {
+            if (attrs.teRequired) {
+              ctrl.$setValidity('required', wysiwyg.text().length > 0);
             }
           }
         }
-      });
+      }
+    }]
+  );
 })();
