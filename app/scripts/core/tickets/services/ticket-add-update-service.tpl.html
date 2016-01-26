@@ -24,7 +24,7 @@
       <div class="col-2" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceTime')}">
 
         <input type="text" class="form-control" placeholder="Minutes"
-               ng-model="serviceExpense.quantity"
+               ng-model="serviceExpense.quantity" autocomplete="off"
                name="serviceTime" hard-reset-required="true" ng-maxlength="10"
                aria-expanded="true" hard-reset-pattern="numberPattern"/>
       </div>
