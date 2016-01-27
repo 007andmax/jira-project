@@ -139,13 +139,13 @@
           function processingColumn(element, target) {
 
             if (dropdownElement['hover' + element + 'Element']) {
-              dropdownElement['hover' + element + 'Element'].css('background-color', '#f1f5fa');
+              dropdownElement['hover' + element + 'Element'].css('background-color', '#ffffff');
             }
 
             dropdownElement['hover' + element + 'Element'] = $(target);
             dropdownElement['hover' + element] = target.text;
 
-            dropdownElement['hover' + element + 'Element'].css('background-color', '#e7ecf2');
+            dropdownElement['hover' + element + 'Element'].css('background-color', '#f1f5fa');
 
           }
 

@@ -608,29 +608,27 @@ aside#left div.nav-title {
 }
 
 .timer-quantity .time_drop_down ul {
+  width: 47px;
   text-align: center;
+  box-shadow: rgba(10, 45, 89, 0.15) 0px 5px 25px 0px;
 }
 
 .timer-quantity .time_drop_down li a {
-  border: solid #e7ecf2;
-  border-width: 0 1px;
+  border: solid #fff;
+  border-width: 0 5px;
   text-decoration: none;
   padding: 5px 10px;
-  background: #f1f5fa;
+  background: #ffffff;
   display: block;
   color: #4c5c6f;
 }
 
 .timer-quantity .time_drop_down li:first-child a {
-  border-width: 1px 1px 0;
+  border-width: 5px 5px 0;
 }
 
 .timer-quantity .time_drop_down li:last-child a {
-  border-width: 0 1px 1px;
-}
-
-.timer-quantity .time_drop_down a:hover {
-  /*background-color: #e7ecf2;*/
+  border-width: 0 5px 5px;
 }
 
 .timer-quantity .time_drop_down .hour_drop_down {
@@ -647,7 +645,7 @@ aside#left div.nav-title {
   display: inline-block;
   position: absolute;
   top: 0;
-  left: 45px;
+  left: 56px;
   padding-left: 0;
 }
 
@@ -655,7 +653,7 @@ aside#left div.nav-title {
   display: inline-block;
   position: absolute;
   top: 0;
-  left: 90px;
+  left: 112px;
   padding-left: 0;
 }
 
