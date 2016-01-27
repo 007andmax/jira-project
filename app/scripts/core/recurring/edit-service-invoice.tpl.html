@@ -20,11 +20,14 @@
           </div>
         </div>
 
-        <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
+        <div class="col-2" service-quantity-picker="editService.quantity" sqp-is-show-format="false"
+             ng-class="{'has-error': isShowingErrors(editServiceInvoiceForm, 'editServiceQuantity')}">
 
-          <input type="text" class="form-control" placeholder="Hr(s) : Min(s)"
-                 ng-model="editService.quantity" hard-reset-required="true" name="editServiceQuantity"
-                 hard-reset-pattern="numberPattern">
+          <input id="service-quantity-picker" type="text" class="form-control"
+                 placeholder="Hr(s) : Min(s)" sqp-input readonly>
+
+          <input type="hidden" name="editServiceQuantity" ng-model="editService.quantity" ng-required="true"/>
+
         </div>
 
         <div class="col-3" ng-class="{'has-error': isShowingErrors(editServiceInvoiceForm, 'editServiceDescription')}">

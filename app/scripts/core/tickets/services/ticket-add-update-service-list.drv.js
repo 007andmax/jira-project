@@ -5,6 +5,11 @@
 	[function () {
 	return {
 	  restrict: 'A',
+    require: 'ngModel',
+    scope: {
+      serviceList: "=",
+      serviceItem: "=autocompleteServiceItem"
+    },
 	  // scope: { simpleAutocompleteData: '=simpleAutocomplete' },
 	  link: function ($scope, element, attrs) {
 
@@ -27,6 +32,7 @@
                         listPaddingTop: 10,
                         listPaddingBottom: 10,
                         onSelect: function (suggestion) {
+                          $scope.serviceItem = angular.copy(suggestion.data);
                             $('#selection').html('You selected: ' + suggestion.value);
                         },
                         showNoSuggestionNotice: true,
@@ -49,7 +55,7 @@
                             return width;
                         },
                     });
-    
+
                 }
             });
 

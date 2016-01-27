@@ -10,11 +10,24 @@
            ng-maxlength="100" ng-minlength="3">
   </div>
 
-  <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
+  <div ng-if="!(!service.isDefault && service)" class="col-2"
+       service-quantity-picker="editService.timeBlock" sqp-is-show-format="false"
+       ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
 
-    <input type="text" class="form-control" placeholder="Min. Time Slice"
+    <input id="service-quantity-picker" type="text" class="form-control" placeholder="Min. Time Slice"
+           sqp-input readonly>
+
+    <input type="hidden" invalid-when="editService.timeBlock <= 0"
+           name="timeBlock" ng-model="editService.timeBlock" hard-reset-required="true"/>
+
+  </div>
+
+  <div ng-if="(!service.isDefault && service)" class="col-2"
+       ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
+
+    <input type="text" class="form-control disabled" placeholder="Min. Time Slice"
            ng-model="editService.timeBlock"
-           custom-disabled="{{ !!(!service.isDefault && service) }}" hard-reset-pattern="numberPattern"
+           ng-disabled="true" hard-reset-pattern="numberPattern"
            invalid-when="editService.timeBlock <= 0" hard-reset-required="true" name="timeBlock">
   </div>
 

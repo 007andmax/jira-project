@@ -568,7 +568,94 @@ aside#left div.nav-title {
   overflow: hidden;
 }
 
-.companies-list.not-charts-companies-page{
+.companies-list.not-charts-companies-page {
   padding-top: 31px;
 }
+
+/*service quantity picker*/
+
+.clearfix-service-quantity {
+  z-index: 10;
+}
+
+.clearfix-service-quantity:before,
+.clearfix-service-quantity:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.timer-quantity {
+  display: inline-block;
+}
+
+.timer-quantity input[readonly] {
+  background-color: #f1f5fa;
+}
+
+.timer-quantity.has-error input[readonly] {
+  background-color: #fff2f2;
+  border-color: #fde9e9;
+}
+
+.timer-quantity .time_drop_down {
+  position: relative;
+  display: none;
+  left: 0;
+  top: 8px;
+}
+
+.timer-quantity .time_drop_down ul {
+  /*border: 1px solid #e7ecf2;*/
+  text-align: center;
+}
+
+.timer-quantity .time_drop_down a {
+  text-decoration: none;
+  padding: 5px 10px;
+  background: #f1f5fa;
+  display: block;
+  color: #4c5c6f;
+}
+
+.timer-quantity .time_drop_down a:hover {
+  /*background-color: #e7ecf2;*/
+}
+
+.timer-quantity .time_drop_down .hour_drop_down {
+  display: inline-block;
+  float: left;
+  padding: 0;
+}
+
+.timer-quantity .time_drop_down .hour_drop_down li {
+  list-style-type: none;
+}
+
+.timer-quantity .time_drop_down .min_drop_down {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 45px;
+  padding-left: 0;
+}
+
+.timer-quantity .time_drop_down .format_drop_down {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 90px;
+  padding-left: 0;
+}
+
+.timer-quantity .time_drop_down .min_drop_down li {
+  list-style-type: none;
+}
+
+.timer-quantity .time_drop_down .format_drop_down li {
+  list-style-type: none;
+}
+
 
