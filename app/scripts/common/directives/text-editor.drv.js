@@ -75,6 +75,7 @@
                   });
 
                   nextFocusInput.focus();
+                  ctrl.$setDirty();
 
                 }
               }

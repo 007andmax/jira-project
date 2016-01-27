@@ -665,4 +665,9 @@ aside#left div.nav-title {
   list-style-type: none;
 }
 
+.modal-body .has-error ul.upload-attachments {
+  background-color: #fff2f2;
+}
+
+
 
