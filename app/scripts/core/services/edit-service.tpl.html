@@ -10,14 +10,14 @@
            ng-maxlength="100" ng-minlength="3">
   </div>
 
-  <div ng-if="!(!service.isDefault && service)" class="col-2"
+  <div ng-if="!(!service.isDefault && service)" class="col-2" style="position: relative;"
        service-quantity-picker="editService.timeBlock" sqp-is-show-format="false"
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
 
     <input id="service-quantity-picker" type="text" class="form-control" placeholder="Min. Time Slice"
            sqp-input readonly>
 
-    <input type="hidden" invalid-when="editService.timeBlock <= 0"
+    <input type="hidden" invalid-when="!editService.timeBlock || editService.timeBlock <= 0"
            name="timeBlock" ng-model="editService.timeBlock" hard-reset-required="true"/>
 
   </div>

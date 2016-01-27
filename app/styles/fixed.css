@@ -601,23 +601,32 @@ aside#left div.nav-title {
 }
 
 .timer-quantity .time_drop_down {
-  position: relative;
+  position: absolute;
   display: none;
-  left: 0;
-  top: 8px;
+  left: 5px;
+  top: 48px;
 }
 
 .timer-quantity .time_drop_down ul {
-  /*border: 1px solid #e7ecf2;*/
   text-align: center;
 }
 
-.timer-quantity .time_drop_down a {
+.timer-quantity .time_drop_down li a {
+  border: solid #e7ecf2;
+  border-width: 0 1px;
   text-decoration: none;
   padding: 5px 10px;
   background: #f1f5fa;
   display: block;
   color: #4c5c6f;
+}
+
+.timer-quantity .time_drop_down li:first-child a {
+  border-width: 1px 1px 0;
+}
+
+.timer-quantity .time_drop_down li:last-child a {
+  border-width: 0 1px 1px;
 }
 
 .timer-quantity .time_drop_down a:hover {
