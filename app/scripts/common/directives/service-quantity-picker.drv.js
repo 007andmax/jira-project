@@ -24,10 +24,6 @@
               hoverMinuteElement: undefined
             };
 
-          if (scope.quantity) {
-            setStartingValue(scope.quantity)
-          }
-
           element.addClass('timer-quantity');
 
           $templateRequest('/html/scripts/common/templates/service-quantity-picker.tpl.html').then(function (html) {
@@ -36,21 +32,26 @@
             element.append(quantityDropdown);
             $compile(quantityDropdown)(scope);
 
-            var minuteDropdown = element.find('[min_drop_down]'),
+            var hourDropdown = element.find('[hour_drop_down]'),
+              minuteDropdown = element.find('[min_drop_down]'),
               formatDropdown = element.find('[format_drop_down]');
+
+            if (scope.quantity) {
+              setStartingValue(scope.quantity, hourDropdown, minuteDropdown, formatDropdown)
+            }
 
             if (isFormatShow) {
 
               formatDropdown.show();
 
-              quantityDropdown.find('[format_drop_down]').bind('mousemove', function (event) {
+              formatDropdown.bind('mousemove', function (event) {
 
                 processingColumn('Format', event.target);
 
               });
             }
 
-            quantityDropdown.find('[hour_drop_down]').bind('mousemove', function (event) {
+            hourDropdown.bind('mousemove', function (event) {
 
               processingColumn('Hour', event.target);
 
@@ -79,15 +80,15 @@
 
             });
 
-            quantityDropdown.find('[min_drop_down]').bind('mousemove', function (event) {
+            minuteDropdown.bind('mousemove', function (event) {
+
+              var top = minuteDropdown.position().top;
 
               processingColumn('Minute', event.target);
 
               if (isFormatShow && +dropdownElement.hoverMinute < 45) {
-                var top = minuteDropdown.position().top;
                 formatDropdown.css('top', (top + (+dropdownElement.hoverMinute * 2)) + 'px');
               } else if (isFormatShow) {
-                var top = minuteDropdown.position().top;
                 formatDropdown.css('top', (top + (30 * 2)) + 'px');
               }
 
@@ -149,17 +150,17 @@
 
           }
 
-          function setStartingValue(value) {
+          function setStartingValue(value, hourDropdown, minuteDropdown, formatDropdown) {
 
             if (isFormatShow) {
 
-              var isPmFormat;
+              var format;
 
               if (value > 525) {
                 value = value / 12 / 60;
-                isPmFormat = 'PM';
+                format = 'PM';
               } else {
-                isPmFormat = 'AM';
+                format = 'AM';
               }
 
             }
@@ -186,9 +187,48 @@
 
             function setValue(hours, minute) {
               if (isFormatShow) {
-                input.val(hours + ' : ' + minute + ' ' + isPmFormat);
+                input.val(hours + ' : ' + minute + ' ' + format);
+
+                dropdownElement.hoverHourElement = hourDropdown.find('li:nth-child(' + (+hours + 1) + ') a');
+                dropdownElement.hoverHourElement.css('background-color', '#f1f5fa');
+
+                dropdownElement.hoverMinuteElement = minuteDropdown.find('li:nth-child(' + (+minute / 15 + 1) + ') a');
+                dropdownElement.hoverMinuteElement.css('background-color', '#f1f5fa');
+
+                dropdownElement.hoverFormatElement = formatDropdown.find('li:nth-child(' + (format === 'AM' ? 1 : 2) + ') a');
+                dropdownElement.hoverFormatElement.css('background-color', '#f1f5fa');
+
+                if (+hours < 6) {
+                  minuteDropdown.css('top', (+hours * 30) + 'px');
+                } else {
+                  var maxTop = (5 * 30);
+                  minuteDropdown.css('top', maxTop + 'px');
+                }
+
+                var topMinuteElement = (+hours * 30);
+
+                if (+minute * 2 > 60) {
+                  formatDropdown.css('top', (+topMinuteElement + 60) + 'px');
+                } else {
+                  formatDropdown.css('top', (topMinuteElement + (+minute * 2)) + 'px');
+                }
+
               } else {
                 input.val(hours + ' : ' + minute);
+
+                dropdownElement.hoverHourElement = hourDropdown.find('li:nth-child(' + (+hours + 1) + ') a');
+                dropdownElement.hoverHourElement.css('background-color', '#f1f5fa');
+
+                dropdownElement.hoverMinuteElement = minuteDropdown.find('li:nth-child(' + (+minute / 15 + 1) + ') a');
+                dropdownElement.hoverMinuteElement.css('background-color', '#f1f5fa');
+
+                if (+hours < 6) {
+                  minuteDropdown.css('top', (+hours * 30) + 'px');
+                } else {
+                  var maxTop = (5 * 30);
+                  minuteDropdown.css('top', maxTop + 'px');
+                }
+
               }
             }
 
