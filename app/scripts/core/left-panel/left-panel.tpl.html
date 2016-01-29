@@ -81,7 +81,23 @@
     </nav>
 
     <div class="clearfix divider"></div>
-    <div class="nav-title" style="width: 100%;cursor: pointer"
+
+    <div class="nav-title" ng-click="toogleCollapse('QUICKSUPPORT')" ui-sref="quickSupport"
+         ng-class="{'collapsed-nav': collapseItem === 'QUICKSUPPORT'}"
+         style="width: 100%;cursor: pointer;padding: 24px 18px 24px 30px;">
+      Quick Support
+
+      <div class="btn btn-success add-session-button has-tooltip" style="position: relative;margin-left: 59px;"
+           ng-click="addQuickSession()"
+           tooltip-placement="top" tooltip="Create">
+        <i class="icn-sm icn-plus"></i>
+      </div>
+
+    </div>
+
+    <div class="clearfix divider"></div>
+
+    <div class="nav-title" style="width: 100%;cursor: pointer;"
          ng-click="toogleCollapse('CLIENTS')">clients
     </div>
 

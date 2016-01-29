@@ -36,6 +36,10 @@
         },
         devicesHeader: {
           checkedDevicesId: []
+        },
+        quickSession: {
+          showAllSession: false,
+          isCreateNew: false
         }
       };
 

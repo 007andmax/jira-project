@@ -37,8 +37,10 @@
             return 'devices';
           } else if ($state.includes("companyDevices")) {
             return 'company-devices';
+          } else if ($state.includes("quickSupport")) {
+            return 'quick-support';
           }
-        }
+        };
 
         $scope.goToCreateUser = function () {
 

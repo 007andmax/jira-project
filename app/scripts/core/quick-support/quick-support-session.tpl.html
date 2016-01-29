@@ -1,0 +1,71 @@
+<div class="support-session-content">
+  <div class="support-session-info pull-left">
+    <h3>Invite Customer</h3>
+
+    <p>Direct your customer to
+      <a href="javascript:void(0)">quickteck.com/support</a>
+      and give them this support key to join your session: XXXXXXXXXXXXXXXXXXXXX</p>
+
+    <!--<div class="pull-left more-action" dropdown>-->
+
+    <!--<a href="javascript:void(0)" class="hit-area ha-22-16 has-tooltip" dropdown-toogle-->
+    <!--aria-haspopup="true" aria-expanded="false"-->
+    <!--data-toggle="dropdown" tooltip-placement="top" tooltip="More">-->
+    <!--<i class="icn icn-sm icn-more"></i>-->
+    <!--</a>-->
+
+    <!--<ul class="dropdown-menu dropdown-menu-custom" role="menu">-->
+
+    <!--<li>-->
+    <!--<a tabindex="-1" href="mailto:user@example.com?subject=Subject&body=message%20goes%20here">-->
+    <!--Email This Info-->
+    <!--</a>-->
+    <!--</li>-->
+
+    <!--<li>-->
+    <!--<a tabindex="-1" href="javascript:void(0)">-->
+    <!--Copy support URL-->
+    <!--</a>-->
+    <!--</li>-->
+
+    <!--</ul>-->
+    <!--</div>-->
+
+    <div class="action-section-control">
+      <div class="session-action" ng-click="connectRemoteAccess()">
+        <span>Email This Info</span>
+      </div>
+
+      <div class="session-action">
+        <span>Copy support URL</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="support-session-graph-content pull-right">
+
+    <div class="avatar pull-right">
+      <img ng-src="{{ getUserAvatarUrl() }}" alt="..." class="img-circle avatar-120">
+
+      <p>One Time User</p>
+    </div>
+
+    <span class="label label-primary admin-to-comp"></span>
+
+    <div class="device-type-icons">
+      <i class="icn-lg icn-computer has-tooltip"
+         data-placement="top" tooltip="Computer"></i>
+    </div>
+
+    <span class="label label-primary comp-to-user"></span>
+
+    <div class="avatar pull-left">
+      <img ng-src="{{ getUserAvatarUrl() }}" alt="..." class="img-circle avatar-120">
+
+      <p>Super Admin</p>
+    </div>
+
+  </div>
+
+</div>

@@ -4,8 +4,11 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
-      'FilesService', 'Downloader', '$state',
-      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService, FilesService, Downloader, $state) {
+      'quicktech.common.services.SharedStateService', 'FilesService', 'Downloader', '$state',
+      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService,
+                SharedStateService, FilesService, Downloader, $state) {
+
+        var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
         $scope.$state = $state;
         $scope.ticketCounts = TicketsService.getCounts($scope);
@@ -42,12 +45,16 @@
 
         $scope.toogleCollapse = function (item) {
 
-          if (item === $scope.collapseItem) {
+          if ((item === $scope.collapseItem) && item !== 'QUICKSUPPORT') {
             $scope.collapseItem = '';
             return;
           }
 
           $scope.collapseItem = item;
+        };
+
+        $scope.addQuickSession = function () {
+          sharedQuickSession.isCreateNew = true;
         };
 
         $scope.$watch(function () {

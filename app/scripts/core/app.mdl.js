@@ -21,6 +21,7 @@
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
       'quicktech.core.devices',
+      'quicktech.core.quickSupport',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -164,6 +165,11 @@
         url: '/clients/companyDevices/:companyId',
         templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
         controller: 'quicktech.core.devices.companyDevicesCtrl'
+      }))
+      .state('quickSupport', waitForServices({
+        url: '/quickSupport',
+        templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
+        controller: 'quicktech.core.quickSupport.quickSupportCtrl'
       }));
 
     function waitForServices(conf) {
