@@ -16,7 +16,7 @@
         }
 
         var realSessionId = DevicesService.getSessionId(sessionId, conectionType, function () {
-          createRemoteAccess(realSessionId)
+          createRemoteAccess(realSessionId.sessionId);
         });
 
         function createRemoteAccess(realSessionId) {
