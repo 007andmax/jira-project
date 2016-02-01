@@ -20,15 +20,15 @@
           'ENDED': 'Agent finished connected'
         };
 
-        $scope.remoteSessions = DevicesService.getRemoteSessions($scope);
-
-        $scope.$watch(function () {
-          return sharedQuickSession.isCreateNew
-        }, function (val) {
-          if (val) {
-            sharedQuickSession.isCreateNew = false;
-            DevicesService.createOneTimeRemoteSession()
-          }
+        $scope.remoteSessions = DevicesService.getRemoteSessions($scope, function () {
+          $scope.$watch(function () {
+            return sharedQuickSession.isCreateNew
+          }, function (val) {
+            if (val) {
+              sharedQuickSession.isCreateNew = false;
+              DevicesService.createOneTimeRemoteSession()
+            }
+          });
         });
 
         $scope.$watch(function () {
@@ -41,6 +41,10 @@
           if (sessionId && conectionType) {
             RemoteAccessService.connectRemoteAccess(sessionId, conectionType);
           }
+        };
+
+        $scope.deleteRemoteSession = function (sessionId) {
+          DevicesService.deleteRemoteSession(sessionId)
         }
 
       }]);

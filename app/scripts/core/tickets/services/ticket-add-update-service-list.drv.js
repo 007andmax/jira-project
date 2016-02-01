@@ -17,7 +17,7 @@
             var autocompleteServiceList = [];
 
             $scope.$watch('serviceList.length', function () {
-                if( $scope.serviceList.length ) {
+              if ($scope.serviceList && $scope.serviceList.length) {
                     for (var i = 0; i < $scope.serviceList.length; i++) {
                         autocompleteServiceList.push({'value': $scope.serviceList[i].name, 'data':$scope.serviceList[i]});
                     }

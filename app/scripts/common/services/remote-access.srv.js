@@ -15,7 +15,7 @@
           throw 'conectionType is required';
         }
 
-        var realSessionId = DevicesService.getSessionId(sessionId, conectionType, function () {
+        DevicesService.getSessionId(sessionId, conectionType, function (realSessionId) {
           createRemoteAccess(realSessionId.sessionId);
         });
 

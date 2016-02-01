@@ -4,8 +4,9 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
-      'quicktech.common.services.UserNotificationService', '$timeout', '$filter',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService, $timeout, $filter) {
+      'quicktech.common.services.UserNotificationService', 'sessionId', 'ServicesService',
+      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
+                UserNotificationService, sessionId, ServicesService) {
 
         $scope.fileInfo = {quantityErrorFiles: 0};
         $scope.ticket = {priorityLevel: 'MEDIUM'};
@@ -20,20 +21,47 @@
         $scope.clientCompanies = CompaniesService.getClientCompanies();
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
+        if (sessionId) {
+          $scope.ticket.remoteSessionId = sessionId;
+          $scope.ticket.serviceExpenses = [{}];
+          $scope.isShowService = true;
+          $scope.maxServiceDate = new Date();
+          $scope.removeService = function (index) {
+            $scope.ticket.serviceExpenses.splice(index, 1);
+          };
+          $scope.isShowingServiceErrors = function (form, fieldName) {
+            return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.triedToAddService);
+          };
+          $scope.addService = function (form) {
+
+            if (form.$valid) {
+              $scope.ticket.serviceExpenses.push({item: {}});
+              $scope.triedToAddService = false;
+
+            } else {
+              $scope.triedToAddService = true;
+            }
+          };
+        }
+
         TicketsService.getActualNumber($scope, function (number) {
             $scope.ticketNumber = number;
           }
         );
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
         $scope.$watch('ticketCompany', function () {
           if ($scope.ticketCompany) {
             delete $scope.ticketCreatedUser;
             $scope.ticket.company = $scope.ticketCompany.id;
+
             $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticketCompany.id);
+
+            $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketCompany.id);
+
           } else {
             $scope.ticket.company = '';
           }
@@ -81,11 +109,11 @@
         };
 
         $scope.removeAttachment = function (index, isErrorFile) {
-          if(isErrorFile){
+          if (isErrorFile) {
 
-            $scope.fileInfo.quantityErrorFiles --;
+            $scope.fileInfo.quantityErrorFiles--;
 
-            if($scope.fileInfo.quantityErrorFiles === 0){
+            if ($scope.fileInfo.quantityErrorFiles === 0) {
               $scope.ticketForm.$setValidity('errorFile', true);
               $scope.fileLoadOrError = false;
             }
@@ -166,7 +194,7 @@
 
         $scope.filterUserFullName = function (value) {
 
-          function searchInUsers(item){
+          function searchInUsers(item) {
 
             if (value && value.length > 0 && (value !== '[$empty$]')) {
               var fullSearchFild = $scope.getUserName(item, true).toLowerCase();
@@ -181,15 +209,15 @@
           return searchInUsers;
         };
 
-        $scope.$watch('ticketAttachments.length', function(){
+        $scope.$watch('ticketAttachments.length', function () {
 
           var totalAttachSize = 0;
 
-          for(var i = 0; i < $scope.ticketAttachments.length; i++){
+          for (var i = 0; i < $scope.ticketAttachments.length; i++) {
             totalAttachSize += $scope.ticketAttachments[i].size;
           }
 
-          if(totalAttachSize > (15 * 1024 * 1024)){
+          if (totalAttachSize > (15 * 1024 * 1024)) {
             $scope.errorFileMessage = 'Attachments must be less than 15 Megabyte';
           } else {
             $scope.errorFileMessage = false;

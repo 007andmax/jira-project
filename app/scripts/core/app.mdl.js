@@ -193,8 +193,8 @@
   }]);
 
   app.run(
-    ['$rootScope', '$templateCache', 'CompaniesService', '$state',
-      function ($rootScope, $templateCache, CompaniesService, $state) {
+    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal',
+      function ($rootScope, $templateCache, CompaniesService, $state, $modal) {
 
         CompaniesService._addInitListener(function () {
           var currentCompany = CompaniesService.getCurrentCompany();
@@ -270,6 +270,28 @@
 
         $rootScope.cancelEditForm = function () {
           $rootScope.$broadcast('cancelEditForm');
+        };
+
+        $rootScope.openCreateTicketForm = function (sessionId) {
+          if (!sessionId) {
+            throw 'SessionId is required'
+          }
+
+          if (!($state.is('tickets') || $state.is('tickets.details'))) {
+            $state.go('tickets', {listType: 'user'});
+          }
+
+          var modalInstance = $modal.open({
+            templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
+            controller: 'quicktech.core.tickets.createTicketCtrl',
+            windowClass: 'modal-create-ticket',
+            backdrop: 'static',
+            resolve: {
+              sessionId: function () {
+                return sessionId;
+              }
+            }
+          });
         };
 
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;

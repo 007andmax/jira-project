@@ -1,14 +1,8 @@
 <div>
-  <div class="">
-
-    <div>
-      <ul class="quick-support-list">
-        <li class="quick-support-session" ng-repeat="remoteSession in remoteSessions | orderBy: createdAt"
-            ng-class="{'hide': showAllSession ? false : remoteSession.performer.id !== currentUser.id}">
-          <div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
-        </li>
-      </ul>
-    </div>
-  </div>
-
+  <ul class="quick-support-list">
+    <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: createdAt"
+        ng-show="showAllSession ? true : (remoteSession.performer.id === currentUser.id)">
+      <div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
+    </li>
+  </ul>
 </div>
