@@ -3,60 +3,10 @@
 
     <div>
       <ul class="quick-support-list">
-        <li class="quick-support-session" ng-repeat="ticket in [0,1]">
+        <li class="quick-support-session" ng-repeat="remoteSession in remoteSessions | orderBy: createdAt"
+            ng-class="{'hide': showAllSession ? false : remoteSession.performer.id !== currentUser.id}">
           <div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
         </li>
-
-        <li class="quick-support-session" ng-repeat="ticket in [0,1]">
-          <div>
-
-            <div class="support-session-content">
-              <div class="support-session-info pull-left">
-                <h3>Invite Customer</h3>
-
-                <p>Direct your customer to
-                  <a href="javascript:void(0)">quickteck.com/support</a>
-                  and give them this support key to join your session: XXXXXXXXXXXXXXXXXXXXX</p>
-
-                <div class="action-section-control">
-                  <div class="session-action connect">
-                    <span>Remote Access</span>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="support-session-graph-content pull-right">
-
-                <div class="avatar pull-right">
-                  <img ng-src="{{ getUserAvatarUrl() }}" alt="..." class="img-circle avatar-120">
-
-                  <p>One Time User</p>
-                </div>
-
-                <span class="label label-primary admin-to-comp"></span>
-
-                <div class="device-type-icons">
-                  <i class="icn-lg icn-computer has-tooltip"
-                     data-placement="top" tooltip="Computer"></i>
-                </div>
-
-                <span class="label label-primary comp-to-user connected-success"></span>
-
-                <div class="avatar pull-left">
-                  <img ng-src="{{ getUserAvatarUrl() }}" alt="..." class="img-circle avatar-120">
-
-                  <p>Super Admin</p>
-                </div>
-
-              </div>
-
-            </div>
-
-
-          </div>
-        </li>
-
       </ul>
     </div>
   </div>

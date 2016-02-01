@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService', 'AddressesService', 'EmailSettingsService',
-      function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService) {
+    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService', 'AddressesService', 'EmailSettingsService', 'ConstantsService',
+      function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService) {
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -12,7 +12,7 @@
         $scope.timeRangeAllDays = {};
         $scope.currentAddressIndex = 0;
         $scope.timezones = AddressesService.getAllLocales();
-        $scope.currentHost = $location.$$host === 'dev.quicktech.com' ? 'dev.quicktech.com': 'quicktech.com';
+        $scope.currentHost = ConstantsService.getConstant('rest.server.address');
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function(){
           $scope.emailNotifications = $scope.emailNotifications.staticCopy();

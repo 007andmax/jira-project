@@ -2,52 +2,18 @@
   t.layLoadingPageSize = 15;
   var h = angular.module("main.services", []);
   h.config(["$provide", "$httpProvider", function (h, l) {
-    h.factory('myHttpInterceptor', [function () {
-
-      function processResponse(response) {
-
-        if (response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized' || response.statusText === 'userDisabled') {
-
-          if (window.location.pathname === "/test") {
-            return;
-      }
-
-          if (response.statusText === 'userDisabled') alert('Your account has been disabled.');
-
-          window.loggingOut = true;
-          window.location.href = '/logout';
-          window.location.hash = '';
-          return;
-        } else if (response.data.showMessage) {
-          alert(response.data.showMessage);
-          return {};
-    }
-
-        return response;
+    h.factory("myHttpInterceptor", [function () {
+      function d(d) {
+        if ("unauthorized" === d.data.errorMessage || "unauthorized" === d.data.authMessage || "userDisabled" === d.statusText)"/test" !== t.location.pathname && ("userDisabled" === d.statusText && alert("Your account has been disabled."), t.loggingOut = !0, t.location.href = "/logout", t.location.hash = ""); else return d.data.showMessage ? (alert(d.data.showMessage),
+        {}) : d
       }
 
       return {
-
-        'request': function (config) {
-
-          if (config.url) {
-
-            if (!config.params) {
-              config.params = {};
-        }
-
-            if ((config.url.indexOf('.tpl.html') >= 0)) {
-              config.params.t = new Date().getTime();
-            }
+        request: function (d) {
+          d.url && (d.params || (d.params = {}), 0 <= d.url.indexOf(".html") || (d.params.t = (new Date).getTime()));
+          return d
+        }, response: d, responseError: d
       }
-
-          return config;
-        },
-
-        'response': processResponse,
-        'responseError': processResponse
-
-      };
     }]);
     l.interceptors.push("myHttpInterceptor")
   }]);
@@ -520,8 +486,7 @@
   angular.module("main.services").factory("ConstantsService", ["$http", function (h) {
     var n;
     h.get("/data/getConstants").then(function (h) {
-      n = h.data;
-      console.log(n)
+      n = h.data
     });
     return {
       getConstant: function (h) {
@@ -724,9 +689,20 @@
         }, function (b) {
           a && a(b.data)
         })
-      }, getRemoteSessions: function (a) {
-        return d.getListByUrl("/devices/getRemoteSessions", a, function (b) {
-          a && a(b)
+      }, getRemoteSessions: function (a, b) {
+        return d.getListByUrl("/devices/getRemoteSessions", b, function (b) {
+          l.subscribe("/oneTimeConnection", a, function (a) {
+            console.log(a);
+            var c = d.findById(b, a.data.id);
+            c ? d.customizeObj(a.data, c) : b.unshift(d.customizeObj(a.data))
+          })
+        })
+      }, getSessionId: function (a, b, c) {
+        h.get("/devices/getSessionId?remoteSessionId=" +
+          a + "&connectionType=" + b).then(function (a) {
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
         })
       }
     }
