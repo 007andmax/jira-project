@@ -9,7 +9,6 @@
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
-        $scope.showAllSession = false;
         $scope.statusMap = {
           'URL_GENERATED': 'Url has been generated',
           'URL_OPENED': 'Url has been opened',

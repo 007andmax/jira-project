@@ -382,7 +382,7 @@
               </div>
 
               <div class="btn btn-lg btn-info" ng-click="saveTicket(ticketForm)"
-                   custom-disabled="{{ ((ticketForm.$invalid || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
+                   custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
                 Create
               </div>
 

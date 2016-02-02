@@ -193,8 +193,8 @@
   }]);
 
   app.run(
-    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal',
-      function ($rootScope, $templateCache, CompaniesService, $state, $modal) {
+    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal', 'quicktech.common.services.UserConfirmationsService',
+      function ($rootScope, $templateCache, CompaniesService, $state, $modal, UserConfirmationsService) {
 
         CompaniesService._addInitListener(function () {
           var currentCompany = CompaniesService.getCurrentCompany();
@@ -277,21 +277,27 @@
             throw 'SessionId is required'
           }
 
-          if (!($state.is('tickets') || $state.is('tickets.details'))) {
-            $state.go('tickets', {listType: 'user'});
-          }
+          var confirmMesage = 'Do you want to create ticket?',
+            confirmButton = 'Yes';
 
-          var modalInstance = $modal.open({
-            templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
-            controller: 'quicktech.core.tickets.createTicketCtrl',
-            windowClass: 'modal-create-ticket',
-            backdrop: 'static',
-            resolve: {
-              sessionId: function () {
-                return sessionId;
-              }
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            if (!($state.is('tickets') || $state.is('tickets.details'))) {
+              $state.go('tickets', {listType: 'user'});
             }
-          });
+
+            var modalInstance = $modal.open({
+              templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
+              controller: 'quicktech.core.tickets.createTicketCtrl',
+              windowClass: 'modal-create-ticket',
+              backdrop: 'static',
+              resolve: {
+                sessionId: function () {
+                  return sessionId;
+                }
+              }
+            });
+          })
+
         };
 
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;

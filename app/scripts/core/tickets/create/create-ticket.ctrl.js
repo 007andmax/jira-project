@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
-      'quicktech.common.services.UserNotificationService', 'sessionId', 'ServicesService',
+      'quicktech.common.services.UserNotificationService', 'sessionId', 'ServicesService', '$timeout',
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
-                UserNotificationService, sessionId, ServicesService) {
+                UserNotificationService, sessionId, ServicesService, $timeout) {
 
         $scope.fileInfo = {quantityErrorFiles: 0};
         $scope.ticket = {priorityLevel: 'MEDIUM'};
@@ -22,16 +22,20 @@
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
         if (sessionId) {
+
           $scope.ticket.remoteSessionId = sessionId;
           $scope.ticket.serviceExpenses = [{}];
           $scope.isShowService = true;
           $scope.maxServiceDate = new Date();
+
           $scope.removeService = function (index) {
             $scope.ticket.serviceExpenses.splice(index, 1);
           };
+
           $scope.isShowingServiceErrors = function (form, fieldName) {
             return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.triedToAddService);
           };
+
           $scope.addService = function (form) {
 
             if (form.$valid) {
@@ -40,6 +44,9 @@
 
             } else {
               $scope.triedToAddService = true;
+              $timeout(function () {
+                $scope.triedToAddService = false;
+              }, 3000);
             }
           };
         }
@@ -59,11 +66,11 @@
             $scope.ticket.company = $scope.ticketCompany.id;
 
             $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticketCompany.id);
-
             $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketCompany.id);
 
           } else {
             $scope.ticket.company = '';
+            $scope.ticket.serviceExpenses = [{}];
           }
         });
 
@@ -137,13 +144,23 @@
         };
 
         $scope.saveTicket = function (form) {
-          if (form.$valid) {
+
+          if (form.$valid || $scope.isTicketFormValid(form)) {
             $scope.savingInProcess = true;
 
             $scope.ticket.attachFileIds = [];
 
             for (var i = 0; i < $scope.ticketAttachments.length; i++) {
               $scope.ticket.attachFileIds.push($scope.ticketAttachments[i].id);
+            }
+
+            for (var j = 0; j < $scope.ticket.serviceExpenses.length; j++) {
+
+              var item = $scope.ticket.serviceExpenses[j].item;
+
+              if (!(item && item.versionedId && item.versionedId.id)) {
+                $scope.ticket.serviceExpenses.splice(j, 1)
+              }
             }
 
             var ticketNumber = $scope.ticketNumber;
@@ -207,6 +224,10 @@
           }
 
           return searchInUsers;
+        };
+
+        $scope.isTicketFormValid = function (form) {
+          return form.$error.required && form.$error.required.length === 1 && form.$error.required[0].$name === 'addServiceForm';
         };
 
         $scope.$watch('ticketAttachments.length', function () {

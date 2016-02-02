@@ -38,7 +38,7 @@
           checkedDevicesId: []
         },
         quickSession: {
-          showAllSession: false,
+          showAllSession: true,
           isCreateNew: false
         }
       };
