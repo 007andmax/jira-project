@@ -14,8 +14,13 @@
         },
         link: function ($scope, element, attrs, ctrl) {
 
+          var watchListener,
+            resizeListener,
+            isGraphDraw = false;
+
           $scope.$watch('isCollapsed', function (val) {
             if (!val) {
+              isGraphDraw = false;
               $scope.includeCanvas = true;
               $timeout(function () {
                 reinitializeGraph();
@@ -27,8 +32,16 @@
 
           function reinitializeGraph(){
 
-            if(!$scope.includeCanvas){
+            if(!$scope.includeCanvas || isGraphDraw){
               return;
+            }
+
+            if (typeof watchListener === "function") {
+              watchListener()
+            }
+
+            if (typeof resizeListener === "function") {
+              resizeListener()
             }
 
             var chart = element.find('[ticket-closed-graph]'),
@@ -41,11 +54,11 @@
 
             tooltip.hide();
 
-            $scope.$watch(function () {
+            watchListener = $scope.$watch(function () {
               return ctrl.$viewValue;
             }, drawticketClosedChart, true);
 
-            $(window).resize(function () {
+            resizeListener = $(window).on('resize', function () {
               drawticketClosedChart();
             });
 
@@ -58,6 +71,8 @@
                   reinitializeGraph();
                 }, 300);
                 return;
+              } else {
+                isGraphDraw = true
               }
 
               chartContext.clearRect(0, 0, chart.width(), chart.height());
