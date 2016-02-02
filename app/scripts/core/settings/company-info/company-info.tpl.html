@@ -321,7 +321,8 @@
         <span class="text-muted" ng-show="services && services.length > 0">{{ services.length }}</span>
       </h3>
 
-      <ul class="qt-list" ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
+      <ul class="qt-list" style="width: 500px"
+          ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
         <li class="list-heading" ng-show="services.length > 0">
           <div class="col-1">TYPE</div>
