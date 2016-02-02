@@ -20,7 +20,7 @@
         $scope.hourPattern = /\d+\:\d+/;
         $scope.company = CompaniesService.getOneById($stateParams.companyId);
 
-        $scope.isChartsAccess = function(){
+        $scope.isChartsAccess = function () {
           return $scope.currentUser.role === 'SUPER_TECH_ADMIN' && $scope.company.accountType === 'CLIENT';
         };
 
@@ -33,7 +33,7 @@
         $scope.users = UsersService.getAllByCompanyId($stateParams.companyId);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($stateParams.companyId, $scope);
 
-        if($scope.isChartsAccess()){
+        if ($scope.isChartsAccess()) {
 
           $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
           $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
@@ -87,6 +87,7 @@
 
         $scope.archiveCompany = function () {
           CompaniesService.archive($scope.company.id);
+          $state.go('companies');
         };
 
         $scope.getPriorityNumber = function (object, returnType) {
@@ -200,6 +201,12 @@
           $scope.editCover = undefined;
           $scope.isShowEditCover = false;
         }
+
+        $scope.$watch('company.deletedAt', function (val) {
+          if (val) {
+            $state.go('companies');
+          }
+        });
 
         $scope.$on('$destroy', function () {
           rightPanelSharedState.companyId = undefined;
