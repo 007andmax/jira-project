@@ -10,6 +10,7 @@
           link: function (scope, element, attrs) {
 
             element.hide();
+            element.removeClass('hide');
 
             scope.getMarginLeft = function(){
               return {
