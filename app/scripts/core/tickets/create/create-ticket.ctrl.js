@@ -165,10 +165,16 @@
 
             var ticketNumber = $scope.ticketNumber;
 
-            TicketsService.createTicket($scope.ticket, function () {
+            TicketsService.createTicket($scope.ticket, function (resp) {
               $scope.savingInProcess = false;
               $modalInstance.dismiss();
-              UserNotificationService.show('New Ticket “' + ticketNumber + '” has been created', true);
+
+              if (resp.code >= 400) {
+                var message = resp.validationResults && resp.validationResults.remoteSessionId ? resp.validationResults.remoteSessionId : resp.message;
+                alert(message)
+              } else {
+                UserNotificationService.show('New Ticket “' + ticketNumber + '” has been created', true);
+              }
             });
 
           } else {

@@ -136,9 +136,10 @@
               ifrm.style.display = "none";
               ifrm.onerror = getProtocol;
               document.body.appendChild(ifrm);
+              ieLaunch(url)
             }
 
-            function ieLaunch() {
+            function ieLaunch(link) {
               document.getElementById('installLink').style.display = 'block';
               document.getElementById('launchLink').href = link;
             }

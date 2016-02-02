@@ -10,8 +10,8 @@
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
         $scope.statusMap = {
-          'URL_GENERATED': 'Url has been generated',
-          'URL_OPENED': 'Url has been opened',
+          'URL_GENERATED': 'URL has been generated',
+          'URL_OPENED': 'URL has been opened',
           'DOWNLOADED': 'Agent has been download',
           'INSTALLED': 'Agent has been installed',
           'UNINSTALLED': 'Agent has been uninstalled',
