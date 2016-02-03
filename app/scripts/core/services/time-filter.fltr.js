@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.core.services").filter('timeFilter', function () {
-    return function (input) {
+    return function (input, toDotFormat) {
       if (!input) {
         return "0 minuts";
       }
@@ -13,17 +13,40 @@
         minutes = Math.round(timeInMinutes - (hours * 60)),
         result = '';
 
-      if (hours === 1) {
-        result += '1 hour ';
-      } else if (hours > 1) {
-        result += hours + ' hours ';
+      if (toDotFormat) {
+
+        if (hours.length > 1) {
+          result += hours
+        } else {
+          result += '0' + hours
+        }
+
+        result += ':';
+
+        if (('' + minutes).length > 1) {
+          result += minutes;
+        } else {
+          result += '0' + minutes;
+        }
+
+        return result;
+
+      } else {
+
+        if (hours === 1) {
+          result += '1 hour ';
+        } else if (hours > 1) {
+          result += hours + ' hours ';
+        }
+
+        if (minutes > 0) {
+          result += minutes + ' minutes';
+        }
+
+        return result;
+
       }
 
-      if (minutes > 0) {
-        result += minutes + ' minutes';
-      }
-
-      return result;
     }
   })
 })();

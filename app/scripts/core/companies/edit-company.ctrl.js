@@ -3,9 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService', 'TaxRatesService', 'AddressesService',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
+      'TaxRatesService', 'AddressesService', 'ServicesService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService, TaxRatesService, AddressesService,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
+                TaxRatesService, AddressesService, ServicesService,
                 SharedStateService, $stateParams, $state, VendorsService, $timeout) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
@@ -19,6 +21,18 @@
         $scope.vendorsSelection = {};
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.vendors = VendorsService.getAllForAutocomplete($scope);
+        $scope.selectedServices = {};
+        $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
+          if (!$stateParams.companyId) {
+           $timeout(function(){
+             for(var i = 0; i < $scope.servicesData.default.length; i++){
+               var service = angular.copy($scope.servicesData.default[i]);
+               $scope.editCompany.services.push(service);
+               $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+             }
+           }, 0)
+          }
+        });
         $scope.timezones = AddressesService.getAllLocales(function () {
 
           var localZone = -(new Date().getTimezoneOffset() / 60),
@@ -71,6 +85,10 @@
               $scope.vendorsSelection[association.vendor.id] = true;
             }
 
+            for (var k = 0; k < companyData.services.length; k++) {
+              $scope.selectedServices[companyData.services[k].name] = true
+            }
+
             $scope.editCompany = companyData.staticCopy();
 
           });
@@ -80,7 +98,8 @@
             addresses: [{isPrimary: true}],
             contacts: [getEmptyContact()],
             taxRates: [],
-            companyAssociations: []
+            companyAssociations: [],
+            services: []
           };
 
           TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
@@ -296,7 +315,11 @@
           }
         };
 
-        $scope.changeInvoiceSubscription = function () {
+        $scope.changeInvoiceSubscription = function (val) {
+
+          if (!val) {
+            return;
+          }
 
           if ($scope.currentUser.accountType !== "TECH") {
             return;
@@ -315,6 +338,31 @@
             $scope.showSubscribeError = countInvoiceSubscr < 1;
 
           })
+        };
+
+        $scope.movingService = function (service) {
+          var service = angular.copy(service);
+
+          if ($scope.selectedServices[service.name]) {
+            $scope.editCompany.services.push(service);
+          } else {
+            $scope.deleteService(service.name);
+          }
+        };
+
+        $scope.deleteService = function (name) {
+
+          if ($scope.selectedServices[name]) {
+            $scope.selectedServices[name] = false;
+          }
+
+          for (var i = 0; i < $scope.editCompany.services.length; i++) {
+            if (name === $scope.editCompany.services[i].name) {
+              $scope.editCompany.services.splice(i, 1);
+              return;
+            }
+          }
+
         };
 
         $scope.$watch('editCompany.contacts.length', $scope.changeInvoiceSubscription);

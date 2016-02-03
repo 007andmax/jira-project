@@ -25,6 +25,10 @@
             <a href="javascript:void(0)">Vendor</a>
           </li>
 
+          <li navigate-to="#companyServices">
+            <a href="javascript:void(0)">Services Info</a>
+          </li>
+
           <li navigate-to="#tax-rates">
             <a href="javascript:void(0)">Default Tax</a>
           </li>
@@ -137,7 +141,8 @@
                         <label class="control-label" ng-message="pattern">PLEASE ENTER A VALID DOMAIN.</label>
                       </div>
 
-                      <input type="text" class="form-control" ng-model="editCompany.domain" placeholder="yourcompany.com"
+                      <input type="text" class="form-control" ng-model="editCompany.domain"
+                             placeholder="yourcompany.com"
                              name="companyDomain"
                              is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
                     </div>
@@ -346,7 +351,8 @@
                         <div class="control-label" ng-message="unique">This email already occupied.</div>
                       </div>
 
-                      <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                      <input class="form-control" type="text" name="primaryEmail" aria-expanded="true"
+                             make-dirty-on-blur
                              ng-model="contact.primaryEmail" required="true" ng-pattern="emailPattern"
                              contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
                              model-id="contact.id">
@@ -355,7 +361,8 @@
                   </div>
 
                   <div class="form-row clearfix">
-                    <div ng-show="currentUser.accountType !== 'ROOT'" phone-numbers-edit ng-model="contact.phoneNumbers"></div>
+                    <div ng-show="currentUser.accountType !== 'ROOT'" phone-numbers-edit
+                         ng-model="contact.phoneNumbers"></div>
                   </div>
 
                   <div class="form-row clearfix">
@@ -418,16 +425,16 @@
 
                     <div class="form-group no-label pull-right" style="margin-left: 10px;">
                       <div custom-ng-show-if="$last && editCompany.contacts.length < contactsMaxCount">
-                          <div class="btn btn-dark has-tooltip pull-right" ng-click="addContact()" cns-if
-                               tooltip-placement="top" tooltip="Add another contact">
-                            <i class="icn-sm icn-plus"></i>
-                          </div>
+                        <div class="btn btn-dark has-tooltip pull-right" ng-click="addContact()" cns-if
+                             tooltip-placement="top" tooltip="Add another contact">
+                          <i class="icn-sm icn-plus"></i>
+                        </div>
 
 
-                          <div class="btn btn-primary has-tooltip pull-right" ng-click="removeContact($index)" cns-else
-                               tooltip-placement="top" tooltip="remove contact" ng-hide="editCompany.id">
-                            <i class="icn-sm icn-remove-token"></i>
-                          </div>
+                        <div class="btn btn-primary has-tooltip pull-right" ng-click="removeContact($index)" cns-else
+                             tooltip-placement="top" tooltip="remove contact" ng-hide="editCompany.id">
+                          <i class="icn-sm icn-remove-token"></i>
+                        </div>
                       </div>
                     </div>
 
@@ -480,6 +487,106 @@
           </div>
         </div>
 
+        <div class="services-info-wrapper" id="companyServices">
+
+          <div class="default-services-header">
+
+            <h3>Services Info</h3>
+
+            <div class="form-row clearfix dropdown">
+
+              <div class="btn btn-primary has-tooltip" data-toggle="dropdown" style="float: right;margin-top: -47px"
+                   aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
+                   tooltip="Move service(s)">
+                <i class="icn-sm icn-add-services"></i>
+              </div>
+
+              <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"
+                   style="margin-top: -8px;">
+
+                <div role="presentation" class="checkbox-dropdown-header">
+                  <div class="form-group" style="float: none">
+                    <input type="text" class="form-control-filter"
+                           placeholder="Search services..." ng-model="searchService">
+                    <i class="icn-sm icn-search-input" tabindex="-1"></i>
+                  </div>
+                </div>
+
+                <div class="list-container">
+                  <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
+
+                    <div class="checkbox-dd-item"
+                         ng-repeat="defaultService in servicesData.default | filter:searchService">
+                      <label class="control checkbox">
+                        <input type="checkbox" ng-model="selectedServices[defaultService.name]"
+                               ng-change="movingService(defaultService)">
+                        <span class="control-indicator pull-left "></span>
+                        {{ defaultService.name }}
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <ul class="qt-list" style="width: 500px"
+                ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
+
+              <li class="list-heading" ng-show="services.length > 0">
+                <div class="col-1">TYPE</div>
+                <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
+                <div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
+                <div class="col-4">&nbsp;</div>
+              </li>
+
+              <li ng-repeat="service in editCompany.services" style="height: 100%;">
+
+                <div class="intermediate-parent-elem">
+
+                  <div class="col-1" style="width: 251px;">
+                    <div class="checkbox-caption">{{ service.name }}</div>
+                  </div>
+
+                  <div class="col-2">
+                    {{ service.timeBlock | timeFilter }}
+                  </div>
+
+                  <div class="col-3" ng-class="{'has-error': isShowingErrors(companyForm, 'editServiceRate')}"
+                       style="margin-top: -8px;width: 92px">
+                    <input type="text" class="form-control" placeholder="Rate"
+                           ng-model="service.rate" ng-required="true"
+                           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+                  </div>
+
+                  <div class="col-4" style="width: 24px">
+
+                    <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                       ng-click="deleteService(service.name)"
+                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+                      <i class="icn-sm icn-delete"></i>
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </li>
+
+            </ul>
+
+            <div class="add-service-btn-wrapper">
+              <span class="text-muted" ng-show="!editCompany.services || editCompany.services.length === 0">
+                No Default Services.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
         <div id="tax-rates" class="default-tax-wrapper clearfix">
 
           <h3>Default Tax</h3>
@@ -507,9 +614,9 @@
                 </a>
 
                 <!--<a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"-->
-                   <!--ng-click="editTaxRate()"-->
-                   <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">-->
-                  <!--<i class="icn-sm icn-edit"></i>-->
+                <!--ng-click="editTaxRate()"-->
+                <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">-->
+                <!--<i class="icn-sm icn-edit"></i>-->
                 <!--</a>-->
 
               </div>
@@ -518,7 +625,8 @@
 
                 <div class="col-1" ng-class="{'has-error': isShowingErrors(companyForm, 'currentlyTaxType')}">
 
-                  <p ng-style="{ opacity: isShowingErrors(companyForm, 'currentlyTaxType') ? '0' : '1' }">Edit Tax Rate</p>
+                  <p ng-style="{ opacity: isShowingErrors(companyForm, 'currentlyTaxType') ? '0' : '1' }">Edit Tax
+                    Rate</p>
 
                   <div ng-messages="companyForm.currentlyTaxType.$error" style="position: absolute;margin-top: -19px;"
                        ng-class="{'hide': !isShowingErrors(companyForm, 'currentlyTaxType')}">
@@ -607,49 +715,50 @@
 
         <div id="create-agents" class="contact-info-wrapper">
           <!--<div class="create-new-user company-create-agent clearfix">-->
-            <!--<div class="fixed-form-element" style="padding: 37px 0">-->
-              <!--<div class="create-user-container">-->
-                <!--<div class="create-user-header clearfix">-->
-                  <!--<h3 class="pull-left">Create Agent</h3>-->
-                  <!--<h4 class="pull-left"><span>01</span></h4>-->
-                <!--</div>-->
-                <!--<div class="create-user-form">-->
-                  <!--<div class="form-row clearfix">-->
-                    <!--<div class="form-group">-->
-                      <!--<label class="control-label">Domain/Username</label>-->
-                      <!--<input class="form-control" type="text" value="" data-hint-popover="true" data-placement="bottom"-->
-                             <!--data-template="<div class='popover hint-popover'><div class='popover-content'></div></div>"-->
-                             <!--data-html="true"-->
-                             <!--data-content="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain"-->
-                             <!--data-original-title="" title="">-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                      <!--<label class="control-label">Password</label>-->
-                      <!--<input class="form-control show-password" type="password" value="">-->
-                      <!--<a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"-->
-                         <!--data-placement="top" title="" data-original-title="Show Password"><i-->
-                        <!--class="icn-sm icn-show-password"></i></a>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                  <!--<div class="form-row clearfix">-->
-                    <!--<div class="form-group full-width">-->
-                      <!--<label class="control-label">Description</label>-->
-                      <!--<input class="form-control form-control-agent-desc" type="text" value="">-->
+          <!--<div class="fixed-form-element" style="padding: 37px 0">-->
+          <!--<div class="create-user-container">-->
+          <!--<div class="create-user-header clearfix">-->
+          <!--<h3 class="pull-left">Create Agent</h3>-->
+          <!--<h4 class="pull-left"><span>01</span></h4>-->
+          <!--</div>-->
+          <!--<div class="create-user-form">-->
+          <!--<div class="form-row clearfix">-->
+          <!--<div class="form-group">-->
+          <!--<label class="control-label">Domain/Username</label>-->
+          <!--<input class="form-control" type="text" value="" data-hint-popover="true" data-placement="bottom"-->
+          <!--data-template="<div class='popover hint-popover'><div class='popover-content'></div></div>"-->
+          <!--data-html="true"-->
+          <!--data-content="Enter full username (with domain name) and password to create an agent. You can install this agent on all supported devices, belonging to the specified domain"-->
+          <!--data-original-title="" title="">-->
+          <!--</div>-->
+          <!--<div class="form-group">-->
+          <!--<label class="control-label">Password</label>-->
+          <!--<input class="form-control show-password" type="password" value="">-->
+          <!--<a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"-->
+          <!--data-placement="top" title="" data-original-title="Show Password"><i-->
+          <!--class="icn-sm icn-show-password"></i></a>-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--<div class="form-row clearfix">-->
+          <!--<div class="form-group full-width">-->
+          <!--<label class="control-label">Description</label>-->
+          <!--<input class="form-control form-control-agent-desc" type="text" value="">-->
 
-                      <!--<div class="word-count">40</div>-->
-                      <!--<div class="btn btn-primary has-tooltip pull-right" data-placement="top" title=""-->
-                           <!--data-original-title="Remove agent"><i class="icn-sm icn-remove-token"></i></div>-->
-                    <!--</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
+          <!--<div class="word-count">40</div>-->
+          <!--<div class="btn btn-primary has-tooltip pull-right" data-placement="top" title=""-->
+          <!--data-original-title="Remove agent"><i class="icn-sm icn-remove-token"></i></div>-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
           <!--</div>-->
         </div>
 
         <div id="finish-navs" class="create-company-actions clearfix">
 
-          <div class="btn btn-lg btn-info pull-right" ng-click="save(companyForm)">
+          <div class="btn btn-lg btn-info pull-right" ng-click="save(companyForm)"
+               custom-disabled="{{ savingInProcess }}">
             {{ editCompany.id ? 'Save' : 'Create' }}
           </div>
 
