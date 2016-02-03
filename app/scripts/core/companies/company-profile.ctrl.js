@@ -18,7 +18,11 @@
         $scope.contactIndex = 0;
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
-        $scope.company = CompaniesService.getOneById($stateParams.companyId);
+        $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
+          if (resp === $scope.company.id) {
+            $state.go('companies');
+          }
+        });
 
         $scope.isChartsAccess = function () {
           return $scope.currentUser.role === 'SUPER_TECH_ADMIN' && $scope.company.accountType === 'CLIENT';
@@ -201,12 +205,6 @@
           $scope.editCover = undefined;
           $scope.isShowEditCover = false;
         }
-
-        $scope.$watch('company.deletedAt', function (val) {
-          if (val) {
-            $state.go('companies');
-          }
-        });
 
         $scope.$on('$destroy', function () {
           rightPanelSharedState.companyId = undefined;
