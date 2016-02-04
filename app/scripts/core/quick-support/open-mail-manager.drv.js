@@ -13,7 +13,7 @@
           link: function (scope, element) {
 
             var currentCompany = CompaniesService.getCurrentCompany();
-            var host = ConstantsService.getConstant('rest.server.address');
+            var host = ConstantsService.getConstant('server.url');
             var link = host + '/oneTimeRemoteSession?remoteSessionId=' + scope.openMailManager;
 
             var subject = currentCompany.name + " remote support agent";
