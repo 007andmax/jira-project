@@ -14,7 +14,7 @@
 
             var currentCompany = CompaniesService.getCurrentCompany();
             var host = ConstantsService.getConstant('server.url');
-            var link = host + '/oneTimeRemoteSession?remoteSessionId=' + scope.openMailManager;
+            var link = host + 'remote?remoteSessionId=' + scope.openMailManager;
 
             var subject = currentCompany.name + " remote support agent";
             var body = "Follow that link(" + link + ") to download agent";
