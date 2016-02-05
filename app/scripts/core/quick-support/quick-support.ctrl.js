@@ -14,7 +14,7 @@
         $scope.statusMap = {
           'URL_GENERATED': 'URL has been generated',
           'URL_OPENED': 'URL has been opened',
-          'DOWNLOADED': 'Agent has been download',
+          'DOWNLOADED': 'Agent has been downloaded',
           'INSTALLED': 'Agent has been installed',
           'UNINSTALLED': 'Agent has been uninstalled',
           'CONNECTED': 'Agent has been connected',
@@ -48,8 +48,8 @@
           DevicesService.deleteRemoteSession(sessionId)
         };
 
-        $scope.isUserOnline = function(status){
-          return status === 'INSTALLED' || status === 'CONNECTED' || status === 'ENDED';
+        $scope.isUserOnline = function(session){
+          return (session.status === 'INSTALLED' || session.status === 'CONNECTED' || session.status === 'ENDED') && session.online;
         }
 
       }]);
