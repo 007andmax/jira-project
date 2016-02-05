@@ -13,10 +13,10 @@
     </li>
 
     <li ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
-      <a href="javascript:void(0)" orp-navigation class="has-tooltip disabled" style="cursor: not-allowed"
+      <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
+         ng-click="currentTicketInfoTab = 'DEVICE'"
          tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Devices">
-        <!--ng-click="currentTicketInfoTab = 'DEVICE'"-->
         <i class="icn-lg icn-tab-devices"></i>
       </a>
     </li>
@@ -177,145 +177,157 @@
       </div>
     </div>
 
-    <div role="tabpanel" class="tab-pane tab-devices" ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
+    <div role="tabpanel" class="tab-pane tab-devices"
+         ng-class="{'active': currentTicketInfoTab === 'DEVICE'}">
+
       <div class="form-search clearfix">
         <form class="navbar-form navbar-form-search" role="search">
           <div class="form-group">
-            <input type="text" class="form-control-search" placeholder="Search device...">
+            <input type="text" class="form-control-search" placeholder="Search device..." ng-model="searchDevices">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
           </div>
         </form>
       </div>
-      <div class="sb-heading devices-heading">Devices <span class="total">7</span></div>
+
+      <div class="sb-heading devices-heading">
+        Devices <span class="total">{{ agents.length }}</span>
+      </div>
+
       <ul class="general-devices">
-        <li class="list-devices checked">
+
+        <li class="list-devices"
+            ng-repeat="agent in companyGroupedData.devices | filter: {'hostName': searchDevices}">
+
           <a href="javascript:void(0)" class="pull-left avatar">
-            <span class="icn-lg icn-tablet"></span>
-            <i class="on right"></i>
+
+            <span ng-show="agent.type === 'tablet'" class="icn-lg icn-tablet"></span>
+            <span ng-show="agent.type === 'workstation'" class="icn-lg icn-computer has-tooltip"></span>
+            <span ng-show="agent.type === 'mobile'" class="icn-lg icn-mobile has-tooltip"></span>
+            <span ng-show="agent.type === 'printer'" class="icn-lg icn-printer has-tooltip"></span>
+            <span ng-show="agent.type === 'server'" class="icn-lg icn-server has-tooltip"></span>
+
+            <i class="right" ng-class="{'on': agent.online, 'off': !agent.online}"></i>
           </a>
 
           <div class="clearfix">
-            <label class="control checkbox pull-right">
-              <input type="checkbox" checked="checked">
-              <span class="control-indicator"></span>
-            </label>
+            <!--<label class="control checkbox pull-right">-->
+              <!--<input type="checkbox">-->
+              <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
 
-            <div class="user-name"><a href="javascript:void(0)">Tab.03</a></div>
-            <small class="user-title text-muted">Jack Williams</small>
+            <div class="user-name">
+              <a href="javascript:void(0)">{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}</a>
+            </div>
+
+            <small class="user-title text-muted">{{ (agent.userName | unknownFilter) }}</small>
           </div>
-          <ul class="context-menu">
-            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remote-access pull-left"></i>Remote
-              Access</a></li>
-            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-send-alert pull-left"></i>Send Alert</a>
-            </li>
-            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-spec-report pull-left"></i>Spec. Report</a>
-            </li>
-            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-transfer-file pull-left"></i>Transfer
-              File</a></li>
-            <li><a tabindex="-1" href="javascript:void(0)"><i
-              class="icn-sm icn-restart-device pull-left"></i>Restart</a></li>
-            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-shutdown-device pull-left"></i>Shutdown</a>
-            </li>
-            <li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remove-token pull-left"></i>Remove</a>
-            </li>
-          </ul>
+          <!--<ul class="context-menu">-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remote-access pull-left"></i>Remote Access</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-send-alert pull-left"></i>Send Alert</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-spec-report pull-left"></i>Spec. Report</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-transfer-file pull-left"></i>Transfer File</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-restart-device pull-left"></i>Restart</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-shutdown-device pull-left"></i>Shutdown</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remove-token pull-left"></i>Remove</a></li>-->
+          <!--</ul>-->
         </li>
-        <li class="list-devices">
-          <a href="javascript:void(0)" class="pull-left avatar">
-            <span class="icn-lg icn-generic-device"></span>
-            <i class="on right"></i>
-          </a>
 
-          <div class="clearfix">
-            <label class="control checkbox pull-right">
-              <input type="checkbox">
-              <span class="control-indicator"></span>
-            </label>
+        <!--<li class="list-devices">-->
+          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+            <!--<span class="icn-lg icn-generic-device"></span>-->
+            <!--<i class="on right"></i>-->
+          <!--</a>-->
 
-            <div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>
-            <small class="user-title text-muted">Ryan.Burns</small>
-          </div>
-        </li>
-        <li class="list-devices checked">
-          <a href="javascript:void(0)" class="pull-left avatar">
-            <span class="icn-lg icn-server"></span>
-            <i class="off right"></i>
-          </a>
+          <!--<div class="clearfix">-->
+            <!--<label class="control checkbox pull-right">-->
+              <!--<input type="checkbox">-->
+              <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
 
-          <div class="clearfix">
-            <label class="control checkbox pull-right">
-              <input type="checkbox" checked>
-              <span class="control-indicator"></span>
-            </label>
+            <!--<div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>-->
+            <!--<small class="user-title text-muted">Ryan.Burns</small>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-devices checked">-->
+          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+            <!--<span class="icn-lg icn-server"></span>-->
+            <!--<i class="off right"></i>-->
+          <!--</a>-->
 
-            <div class="user-name"><a href="javascript:void(0)">File.Server</a></div>
-            <small class="user-title text-muted">Miles.Mcmillan</small>
-          </div>
-        </li>
-        <li class="list-devices">
-          <a href="javascript:void(0)" class="pull-left avatar">
-            <span class="icn-lg icn-printer"></span>
-            <i class="on right"></i>
-          </a>
+          <!--<div class="clearfix">-->
+            <!--<label class="control checkbox pull-right">-->
+              <!--<input type="checkbox" checked>-->
+              <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
 
-          <div class="clearfix">
-            <label class="control checkbox pull-right">
-              <input type="checkbox">
-              <span class="control-indicator"></span>
-            </label>
+            <!--<div class="user-name"><a href="javascript:void(0)">File.Server</a></div>-->
+            <!--<small class="user-title text-muted">Miles.Mcmillan</small>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-devices">-->
+          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+            <!--<span class="icn-lg icn-printer"></span>-->
+            <!--<i class="on right"></i>-->
+          <!--</a>-->
 
-            <div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>
-            <small class="user-title text-muted">Shaun.Pc</small>
-          </div>
-        </li>
-        <li class="list-devices" data-container="body" data-toggle="popover-devices" data-placement="left">
-          <a href="javascript:void(0)" class="pull-left avatar">
-            <span class="icn-lg icn-computer"></span>
-            <i class="on right"></i>
-          </a>
+          <!--<div class="clearfix">-->
+            <!--<label class="control checkbox pull-right">-->
+              <!--<input type="checkbox">-->
+              <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
 
-          <div class="clearfix">
-            <label class="control checkbox pull-right">
-              <input type="checkbox">
-              <span class="control-indicator"></span>
-            </label>
+            <!--<div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>-->
+            <!--<small class="user-title text-muted">Shaun.Pc</small>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-devices" data-container="body" data-toggle="popover-devices" data-placement="left">-->
+          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+            <!--<span class="icn-lg icn-computer"></span>-->
+            <!--<i class="on right"></i>-->
+          <!--</a>-->
 
-            <div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>
-            <small class="user-title text-muted">Miles.Mcmillan</small>
-          </div>
-        </li>
-        <li class="list-devices">
-          <a href="javascript:void(0)" class="pull-left avatar">
-            <span class="icn-lg icn-mobile"></span>
-            <i class="off right"></i>
-          </a>
+          <!--<div class="clearfix">-->
+            <!--<label class="control checkbox pull-right">-->
+              <!--<input type="checkbox">-->
+              <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
 
-          <div class="clearfix">
-            <label class="control checkbox pull-right">
-              <input type="checkbox">
-              <span class="control-indicator"></span>
-            </label>
+            <!--<div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>-->
+            <!--<small class="user-title text-muted">Miles.Mcmillan</small>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-devices">-->
+          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+            <!--<span class="icn-lg icn-mobile"></span>-->
+            <!--<i class="off right"></i>-->
+          <!--</a>-->
 
-            <div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>
-            <small class="user-title text-muted">Laurie.Harding</small>
-          </div>
-        </li>
-        <li class="list-devices">
-          <a href="javascript:void(0)" class="pull-left avatar">
-            <span class="icn-lg icn-fax"></span>
-            <i class="off right"></i>
-          </a>
+          <!--<div class="clearfix">-->
+            <!--<label class="control checkbox pull-right">-->
+              <!--<input type="checkbox">-->
+              <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
 
-          <div class="clearfix">
-            <label class="control checkbox pull-right">
-              <input type="checkbox">
-              <span class="control-indicator"></span>
-            </label>
+            <!--<div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>-->
+            <!--<small class="user-title text-muted">Laurie.Harding</small>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-devices">-->
+          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+            <!--<span class="icn-lg icn-fax"></span>-->
+            <!--<i class="off right"></i>-->
+          <!--</a>-->
 
-            <div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>
-            <small class="user-title text-muted">File.Server</small>
-          </div>
-        </li>
+          <!--<div class="clearfix">-->
+            <!--<label class="control checkbox pull-right">-->
+              <!--<input type="checkbox">-->
+              <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
+
+            <!--<div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>-->
+            <!--<small class="user-title text-muted">File.Server</small>-->
+          <!--</div>-->
+        <!--</li>-->
       </ul>
     </div>
 

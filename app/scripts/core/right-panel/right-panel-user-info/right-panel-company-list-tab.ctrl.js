@@ -16,12 +16,19 @@
           $scope.currentOpenCompanyMode = 'USERS-' + companyId;
         };
 
-        $scope.openCompanyTab = function(mode, companyId){
+        $scope.openCompanyTab = function (mode, companyId) {
+
+          if (mode === 'USERS-' && (!companyData.users || companyData.users.length < 1)) {
+            return
+          } else if (mode === 'DEVICES-' && (!companyData.devices || companyData.devices.length < 1)) {
+            return
+          }
+
           $scope.currentOpenCompanyMode = mode + companyId;
           $scope.currentOpenCompany = companyId;
         };
 
-        $scope.sendEmailInPopover = function(userId){
+        $scope.sendEmailInPopover = function (userId) {
           console.log('send email ' + userId)
         };
 
