@@ -1,6 +1,6 @@
 <div>
   <ul class="quick-support-list">
-    <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: createdAt"
+    <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: createdAt: true"
         ng-show="showAllSession ? true : (remoteSession.performer.id === currentUser.id)">
       <div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
     </li>
