@@ -16,7 +16,11 @@
         }
 
         DevicesService.getSessionId(sessionId, conectionType, function (realSessionId) {
-          createRemoteAccess(realSessionId.sessionId);
+          if(!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1){
+            throw "Not session Id"
+          } else {
+            createRemoteAccess(realSessionId.sessionId);
+          }
         });
 
         function createRemoteAccess(realSessionId) {
