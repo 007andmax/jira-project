@@ -1,13 +1,85 @@
-<div class="topNavbarLeft-Left pull-left" ng-controller="quicktech.core.header.companyProfileCtrl">
+<div ng-controller="quicktech.core.header.companyProfileCtrl">
+  <div class="topNavbarLeft-Left pull-left" ng-hide="bulkOptionMode">
+    <!--ng-hide="selectUsersIds.length > 0"-->
 
-  <div class="pull-left">
-    <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-       style="margin: 11px 8px 0 0;" ui-sref="companies"
-       tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="Back to Companies">
-      <i class="icn-sm icn-back-arrow"></i>
-    </a>
+    <div class="pull-left">
+      <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+         style="margin: 11px 8px 0 0;" ui-sref="companies"
+         tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="Back to Companies">
+        <i class="icn-sm icn-back-arrow"></i>
+      </a>
+    </div>
+
+    <p class="pull-left" style="white-space: nowrap;"><strong>{{ company.name }}</strong></p>
+
   </div>
 
-  <p class="pull-left" style="white-space: nowrap;"><strong>{{ company.name }}</strong></p>
+  <!--<div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'USERS'">-->
+
+    <!--<div class="pull-left">-->
+      <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"-->
+         <!--tooltip-append-to-body="true"-->
+         <!--tooltip-placement="bottom" style="margin: 11px 8px 0 0;"-->
+         <!--tooltip="Reset Selected Items">-->
+        <!--<i class="icn-sm icn-back-arrow"></i>-->
+      <!--</a>-->
+    <!--</div>-->
+
+    <!--<p class="pull-left" style="white-space: nowrap;">-->
+      <!--<strong>{{ selectUsersIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>-->
+    <!--</p>-->
+
+    <!--<div class="topNavbar-filter pull-right">-->
+      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title=""-->
+           <!--data-original-title="Archive"><i class="icn-sm icn-remove-token"></i></div>-->
+      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title=""-->
+           <!--data-original-title="Subscribe to..."><i class="icn-sm icn-user-subscription"></i></div>-->
+      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title=""-->
+           <!--data-original-title="Set Privilege to..."><i class="icn-sm icn-user-privilege"></i></div>-->
+      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title="" data-original-title="Email">-->
+        <!--<i class="icn-sm icn-user-mail"></i></div>-->
+
+    <!--</div>-->
+
+  <!--</div>-->
+
+  <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'DEVICES'">
+
+    <div class="pull-left">
+      <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+         data-container="body" title="Reset Selected Items" data-placement="bottom"
+         style="margin: 11px 8px 0 0;" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+        <i class="icn-sm icn-back-arrow"></i>
+      </a>
+    </div>
+
+    <p class="pull-left" style="white-space: nowrap;">
+      <strong>{{ selectDevicesIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
+    </p>
+
+    <div class="topNavbar-filter pull-right">
+
+      <!--<div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"-->
+      <!--tooltip-placement="bottom" tooltip="Remove">-->
+      <!--<i class="icn-sm icn-remove-token"></i>-->
+      <!--</div>-->
+
+      <!--<div class="btn btn-default has-tooltip pull-right" ng-click="shutdownDevices()"-->
+      <!--tooltip-placement="bottom" tooltip="Shutdown">-->
+      <!--<i class="icn-sm icn-shutdown-device"></i>-->
+      <!--</div>-->
+
+      <!--<div class="btn btn-default has-tooltip pull-right" ng-click="restartDevices()"-->
+      <!--tooltip-placement="bottom" tooltip="Restart">-->
+      <!--<i class="icn-sm icn-restart-device"></i>-->
+      <!--</div>-->
+
+      <!--<div class="btn btn-default has-tooltip pull-right" ng-click="sendAlertDevices()"-->
+      <!--tooltip-placement="bottom" tooltip="Send Alert">-->
+      <!--<i class="icn-sm icn-send-alert"></i>-->
+      <!--</div>-->
+
+    </div>
+  </div>
 
 </div>

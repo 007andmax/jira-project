@@ -4,11 +4,12 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'UsersService', 'TicketsService',
-      'SubscriptionsService', 'VendorsService', 'quicktech.common.services.SharedStateService', '$timeout',
+      'SubscriptionsService', 'VendorsService', 'quicktech.common.services.SharedStateService', '$timeout', 'DevicesService',
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, UsersService, TicketsService,
-                SubscriptionsService, VendorsService, SharedStateService, $timeout) {
+                SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService) {
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
+        var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
 
         $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
@@ -18,10 +19,15 @@
         $scope.contactIndex = 0;
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
+        $scope.selectedUsers = {};
+        $scope.selectDevices = {};
         $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
           if (resp === $scope.company.id) {
             $state.go('companies');
           }
+        });
+        DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
+          $scope.agents = resp;
         });
 
         $scope.isChartsAccess = function () {
@@ -183,8 +189,39 @@
           $scope.isChartHasOpen = value;
         };
 
+        $scope.changeSelectedUsers = function () {
+          var selectUsersIds = [];
+
+          for (var userId in $scope.selectedUsers) {
+            if ($scope.selectedUsers[userId]) {
+              selectUsersIds.push(userId);
+            }
+          }
+
+          companyProfileHeader.selectUsersIds = selectUsersIds;
+        };
+
+        $scope.changeSelectDevices = function () {
+          var selectDevicesIds = [];
+
+          for (var deviceId in $scope.selectDevices) {
+            if ($scope.selectDevices[deviceId]) {
+              selectDevicesIds.push(deviceId)
+            }
+          }
+
+          companyProfileHeader.selectDevicesIds = selectDevicesIds;
+        };
+
         $scope.$on('showEditCover', function () {
           $scope.isShowEditCover = true;
+        });
+
+        $scope.$watch('mode', function () {
+          companyProfileHeader.selectDevicesIds = [];
+          companyProfileHeader.selectUsersIds = [];
+          $scope.selectDevices = {};
+          $scope.selectedUsers = {};
         });
 
         $scope.$on('showErrorCover', function (event, message) {

@@ -40,6 +40,10 @@
         quickSession: {
           showAllSession: true,
           isCreateNew: false
+        },
+        companyProfileHeader: {
+          selectUsersIds: [],
+          selectDevicesIds: []
         }
       };
 
