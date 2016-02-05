@@ -4,11 +4,13 @@
 
   angular.module('quicktech.core.quickSupport').controller('quicktech.core.quickSupport.quickSupportCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.RemoteAccessService',
-      'DevicesService',
-      function ($scope, SharedStateService, RemoteAccessService, DevicesService) {
+      'DevicesService', 'ConstantsService',
+      function ($scope, SharedStateService, RemoteAccessService, DevicesService, ConstantsService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
+        $scope.host = ConstantsService.getConstant('server.url');
+        $scope.showHost = $scope.host.replace(/.*?:\/\//g, "")
         $scope.statusMap = {
           'URL_GENERATED': 'URL has been generated',
           'URL_OPENED': 'URL has been opened',

@@ -2,13 +2,13 @@
 
 (function () {
 
-  angular.module("quicktech.core.quickSupport").directive('copyValue',
+  angular.module("quicktech.core.quickSupport").directive('copyUrl',
     ['ConstantsService', 'quicktech.common.services.UserNotificationService',
       function (ConstantsService, UserNotificationService) {
         return {
           restrict: 'A',
           scope: {
-            copyValue: '='
+            copySessionId: '=copyUrl'
           },
           link: function (scope, element) {
 
@@ -18,7 +18,7 @@
 
               var textArea = document.createElement("textarea");
               textArea.style.opacity = 0;
-              textArea.value = host + 'oneTimeRemoteSession?remoteSessionId=' + scope.copyValue;
+              textArea.value = host + 'remote?remoteSessionId=' + scope.copySessionId;
 
               document.body.appendChild(textArea);
 
