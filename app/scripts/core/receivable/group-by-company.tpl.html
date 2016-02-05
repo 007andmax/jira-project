@@ -23,7 +23,7 @@
       </div>
 
       <div class="col-2" ng-click="toggleReceivableInvoices()">
-        <div class="billable-amount">{{ totalSum.companies[company.id] | currency: '$': 0 }}</div>
+        <div class="billable-amount">{{ totalSum.companies[company.id] | currency: '$': 2 }}</div>
       </div>
 
       <div class="sub-wrapper" ets-slider>
@@ -74,7 +74,7 @@
               </a>
             </div>
 
-            <div class="col-5">{{ totalSum.invoices[invoice.id] | currency: '$': 0 }}</div>
+            <div class="col-5">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
 
             <i class="icn-sm persistent-tooltip" ng-show="invoice.frequency"
                ng-class="{'icn-recurring-monthly': invoice.frequency === 'MONTHLY',

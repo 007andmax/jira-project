@@ -114,7 +114,7 @@
 
             <div class="ticket-add-amount pull-right">
               <span class="text-muted">Total amount </span>
-              <strong>{{ (productTotalAmount | currency: '$': 0) || '$ 0' }}</strong>
+              <strong>{{ (productTotalAmount | currency: '$': 2) || '$ 0' }}</strong>
             </div>
 
           </div>

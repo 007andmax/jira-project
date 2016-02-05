@@ -4,7 +4,7 @@
 
   <div class="col-1">{{ service.createdAt | date:'dd MMM yyyy' }}</div>
   <div class="col-2">{{ service.item.name }}</div>
-  <div class="col-5">{{ service.sum | currency: '$': 0 }}</div>
+  <div class="col-5">{{ service.sum | currency: '$': 2 }}</div>
   <div class="col-4">Duration <span class="model">{{ service.billableQuantity | durationFilter }}</span></div>
 
   <div class="col-3" trimmed-popover trimmed-popover-content="service.description">

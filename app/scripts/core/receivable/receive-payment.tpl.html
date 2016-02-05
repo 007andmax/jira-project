@@ -59,7 +59,7 @@
         </div>
 
         <div class="col-2">{{ invoice.date | date:'dd MMM yyyy' }}</div>
-        <div class="col-3">{{ invoice.sum | currency: '$': 0 }}</div>
+        <div class="col-3">{{ invoice.sum | currency: '$': 2 }}</div>
 
         <i class="icn-sm icn-recurring-monthly persistent-tooltip" ng-show="invoice.recurringInvoice"
            ng-class="{'icn-recurring-monthly': invoice.recurringInvoice.frequency === 'MONTHLY',
@@ -91,7 +91,7 @@
 
       <div class="pull-right total-amount">
         <span class="text-muted">Total amount</span>
-        <strong>{{ receivePaymentSum | currency: '$': 0 }}</strong>
+        <strong>{{ receivePaymentSum | currency: '$': 2 }}</strong>
       </div>
 
     </div>

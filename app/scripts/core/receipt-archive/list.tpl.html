@@ -25,7 +25,7 @@
         <span class="label label-warning">{{ invoice.paidOn | date:'dd MMM yyyy' }}</span>
       </div>
 
-      <div class="col-5">{{ invoice.sum | currency:'$' :0 }}</div>
+      <div class="col-5">{{ invoice.sum | currency:'$' :2 }}</div>
 
       <i class="icn-sm persistent-tooltip" ng-show="invoice.recurring"
          ng-class="{'icn-recurring-monthly': invoice.frequency === 'MONTHLY',

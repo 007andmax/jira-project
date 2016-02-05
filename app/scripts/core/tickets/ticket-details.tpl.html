@@ -389,14 +389,14 @@
                   </div>
 
                   <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'">
-                    {{ product.sum | currency }}
+                    {{ product.sum | currency:'$':2 }}
                   </div>
 
                   <div class="col-5" ng-show="ticketDetails.status !== 'COMPLETED'">
-                    {{ product.item.sale * product.quantity || '' | currency : $ : 0 }}
+                    {{ product.item.sale * product.quantity || '' | currency :'$':2 }}
                   </div>
 
-                  <div class="col-4">{{ product.item.sale | currency : $ : 0 }}
+                  <div class="col-4">{{ product.item.sale | currency:'$':2 }}
                     <span class="model">Qty {{ product.quantity }}</span>
                   </div>
 

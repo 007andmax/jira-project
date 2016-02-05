@@ -209,15 +209,15 @@
             tooltipContext.font = "14px myriad-pro";
 
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText($filter('currency')(rect.value[2], '', 0) + ' USD', 32, topPaddingCircle + 5);
+            tooltipContext.fillText($filter('currency')(rect.value[2], '', 2) + ' USD', 32, topPaddingCircle + 5);
             drawIdentificationCircle('#ffa726');
 
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText($filter('currency')(rect.value[1], '', 0) + ' USD', 32, topPaddingCircle + 5);
+            tooltipContext.fillText($filter('currency')(rect.value[1], '', 2) + ' USD', 32, topPaddingCircle + 5);
             drawIdentificationCircle('#4caf50');
 
             tooltipContext.fillStyle = backgroundColour;
-            tooltipContext.fillText($filter('currency')(rect.value[0], '', 0) + ' USD', 32, topPaddingCircle + 5);
+            tooltipContext.fillText($filter('currency')(rect.value[0], '', 2) + ' USD', 32, topPaddingCircle + 5);
             drawIdentificationCircle('#e53935');
 
             tooltipContext.textAlign = "center";

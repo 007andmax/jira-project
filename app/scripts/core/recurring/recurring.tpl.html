@@ -7,7 +7,7 @@
         <strong>Invoices Recurred</strong>
         <span>Last 30 Days</span>
         <span class="dot-sep"></span>
-        <span>{{ last30DaysValue | currency:'':0 }} USD</span>
+        <span>{{ last30DaysValue | currency:'':2 }} USD</span>
 
         <ul class="chart-legend">
           <li><i class="circle-indicator red"></i>Weekly</li>
@@ -89,7 +89,7 @@
 
             <div class="col-2">
 
-              <div class="billable-amount">{{ recurringCompany.total | currency: '$': 0 }}</div>
+              <div class="billable-amount">{{ recurringCompany.total | currency: '$': 2 }}</div>
 
               <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
                  tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete"
@@ -144,7 +144,7 @@
                   </span>
 
                   <span class="next-date">{{ nextDueDate | date:'dd MMM yyyy' }}</span></div>
-                <div class="col-4">{{ totalInvoiceSum | currency: '$': 0 }}</div>
+                <div class="col-4">{{ totalInvoiceSum | currency: '$': 2 }}</div>
 
                 <div class="col-5">
                   <a href="javascript:void(0)" class="hit-area pull-right has-tooltip" stop-propagation="click"

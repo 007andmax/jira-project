@@ -39,7 +39,7 @@
 
         <div class="col-4" ng-class="{'has-error': isShowingErrors(editProductInvoiceForm, 'amount')}">
           <input type="text" class="form-control" placeholder="Amount" name="amount"
-                 tooltip="Product cost {{ editProduct.item.cost | currency: '$'  }}" product-cost-validate="editProduct"
+                 tooltip="Product cost {{ editProduct.item.cost | currency: '$':2  }}" product-cost-validate="editProduct"
                  hard-reset-required="true" ng-model="editProduct.sum" hard-reset-pattern="decimalNumberPattern">
         </div>
 

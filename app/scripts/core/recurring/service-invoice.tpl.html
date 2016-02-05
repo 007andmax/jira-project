@@ -11,7 +11,7 @@
       {{ service.description }}
     </div>
 
-    <div class="col-5">{{ service.sum | currency: '$': 0 }}</div>
+    <div class="col-5">{{ service.sum | currency: '$': 2 }}</div>
     <div class="col-4">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
 
     <a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"

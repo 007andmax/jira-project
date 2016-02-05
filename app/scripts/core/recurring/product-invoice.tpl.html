@@ -17,9 +17,9 @@
       {{ product.serialNumber }}
     </div>
 
-    <div class="col-5">{{ product.sum | currency: '$': 0 }}</div>
+    <div class="col-5">{{ product.sum | currency: '$': 2 }}</div>
 
-    <div class="col-4">{{ product.price | currency: '$': 0 }}
+    <div class="col-4">{{ product.price | currency: '$': 2 }}
       <span class="model">Qty {{ product.quantity }}</span>
     </div>
 

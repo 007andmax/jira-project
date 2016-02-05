@@ -7,7 +7,7 @@
         <strong>Total Collected</strong>
         <span>Last 30 Days</span>
         <span class="dot-sep"></span>
-        <span>{{ totalCollectedLast30Days | currency: '': 0 }} USD</span>
+        <span>{{ totalCollectedLast30Days | currency: '': 2 }} USD</span>
 
         <ul class="chart-legend">
           <li><i class="circle-indicator red"></i>Receivable</li>
@@ -23,7 +23,7 @@
     <div class="all-time-stats">
 
       <div class="heading"><strong>RECEIVED AMOUNT <span>ALL TIME</span></strong>
-        <span class="amount">{{ receivedAmountAllTime.value | currency: '': 0 }} USD</span>
+        <span class="amount">{{ receivedAmountAllTime.value | currency: '': 2 }} USD</span>
       </div>
 
       <div class="total-billable">
@@ -31,7 +31,7 @@
              pie-chart-value="[totalReceivables, totalCollectedLast30Days]"></div>
         <div class="pull-left">
           <strong>TOTAL RECEIVABLES</strong>
-          <strong class="amount">{{ totalReceivables | currency:'' :0 }} USD</strong>
+          <strong class="amount">{{ totalReceivables | currency:'' :2 }} USD</strong>
         </div>
       </div>
 

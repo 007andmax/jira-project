@@ -4,7 +4,7 @@
     <div class="chart-wrapper">
       <div class="heading"><strong>Billed Amount</strong>
         <span>Last 30 Days</span> <span class="dot-sep"></span>
-        <span>{{ billedAmountLast30Days | currency:'' :0 }} USD</span></div>
+        <span>{{ billedAmountLast30Days | currency:'' :2 }} USD</span></div>
 
       <div billable-chart ng-model="billableChartData"></div>
 
@@ -13,7 +13,7 @@
     <div class="all-time-stats">
 
       <div class="heading"><strong>BILLED AMOUNT <span>ALL TIME</span></strong>
-        <span class="amount">{{ totalBilledAmount.value | currency:'' :0 }} USD</span>
+        <span class="amount">{{ totalBilledAmount.value | currency:'' :2 }} USD</span>
       </div>
 
       <div class="total-billable">
@@ -21,7 +21,7 @@
              pie-chart-size="40" pie-chart-color="['#b7daf7', '#e53935']"></div>
         <div class="pull-left">
           <strong>TOTAL BILLABLES</strong>
-          <strong class="amount">{{ totalbillables | currency:'' :0 }} USD</strong>
+          <strong class="amount">{{ totalbillables | currency:'' :2 }} USD</strong>
         </div>
       </div>
 
@@ -88,7 +88,7 @@
             </div>
 
             <div class="col-2" ng-click="toggleBillableTickets()">
-              <div class="billable-amount">{{ billableCompany.totalSum | currency: '$': 0 }}</div>
+              <div class="billable-amount">{{ billableCompany.totalSum | currency: '$': 2 }}</div>
             </div>
 
             <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets"
@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="col-2">
-                  <div class="billable-amount">{{ ticket.sum | currency: '$': 0}}</div>
+                  <div class="billable-amount">{{ ticket.sum | currency: '$': 2 }}</div>
                 </div>
 
                 <div class="table-wrapper clearfix" qt-ts-slider style="display: none;">
