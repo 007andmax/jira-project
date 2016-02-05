@@ -12,7 +12,7 @@
         $scope.timeRangeAllDays = {};
         $scope.currentAddressIndex = 0;
         $scope.timezones = AddressesService.getAllLocales();
-        $scope.currentHost = ConstantsService.getConstant('rest.server.address');
+        $scope.currentHost = ConstantsService.getConstant('server.url');
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function(){
           $scope.emailNotifications = $scope.emailNotifications.staticCopy();
