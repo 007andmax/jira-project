@@ -44,6 +44,10 @@
 
         $scope.deleteRemoteSession = function (sessionId) {
           DevicesService.deleteRemoteSession(sessionId)
+        };
+
+        $scope.isUserOnline = function(status){
+          return status === 'INSTALLED' || status === 'CONNECTED' || status === 'ENDED';
         }
 
       }]);
