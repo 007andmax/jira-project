@@ -175,14 +175,14 @@
 
               <div class="total-users"
                    ng-class="{'active': currentOpenCompanyMode === ('USERS-' + companyData.company.id)}"
-                   ng-click="openCompanyTab('USERS-', companyData.company.id)">
+                   ng-click="openCompanyTab('USERS-', companyData)">
                 <i class="icn-sm icn-cusers"></i> {{ companyData.users.length || '0' }} Users
               </div>
 
               <div class="total-devices"
                    class="numbers total-devices"
                    ng-class="{'active': currentOpenCompanyMode === ('DEVICES-' + companyData.company.id)}"
-                   ng-click="openCompanyTab('DEVICES-', companyData.company.id)">
+                   ng-click="openCompanyTab('DEVICES-', companyData)">
                 <i class="icn-sm icn-cdevices"></i> {{ companyData.devices.length || '0' }} Devices
               </div>
 

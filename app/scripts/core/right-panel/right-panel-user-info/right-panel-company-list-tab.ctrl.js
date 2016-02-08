@@ -16,7 +16,7 @@
           $scope.currentOpenCompanyMode = 'USERS-' + companyId;
         };
 
-        $scope.openCompanyTab = function (mode, companyId) {
+        $scope.openCompanyTab = function (mode, companyData) {
 
           if (mode === 'USERS-' && (!companyData.users || companyData.users.length < 1)) {
             return
@@ -24,8 +24,8 @@
             return
           }
 
-          $scope.currentOpenCompanyMode = mode + companyId;
-          $scope.currentOpenCompany = companyId;
+          $scope.currentOpenCompanyMode = mode + companyData.company.id;
+          $scope.currentOpenCompany = companyData.company.id;
         };
 
         $scope.sendEmailInPopover = function (userId) {
