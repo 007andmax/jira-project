@@ -16,7 +16,7 @@
         }
 
         DevicesService.getSessionId(sessionId, conectionType, function (realSessionId) {
-          if(!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1){
+          if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
             throw "Not session Id"
           } else {
             createRemoteAccess(realSessionId.sessionId);
@@ -61,11 +61,17 @@
 
           var checkFunc = null;
           //TODO revise this
-          if (navigator.userAgent.indexOf('Firefox') >= 0) checkFunc = checkFirefox;
-          else if (navigator.userAgent.indexOf('Opera') >= 0) checkFunc = checkOpera;
-          else if (navigator.userAgent.indexOf('Chrome') >= 0) checkFunc = checkChrome;
-          else if (navigator.userAgent.indexOf('Safari') >= 0) checkFunc = checkSafari;
-          else checkFunc = checkSafari;
+          if (navigator.userAgent.indexOf('Firefox') >= 0) {
+            checkFunc = checkFirefox;
+          } else if (navigator.userAgent.indexOf('Opera') >= 0) {
+            checkFunc = checkOpera;
+          } else if (navigator.userAgent.indexOf('Chrome') >= 0) {
+            checkFunc = checkChrome;
+          } else if (navigator.userAgent.indexOf('Safari') >= 0) {
+            checkFunc = checkSafari;
+          } else {
+            checkFunc = checkSafari;
+          }
 
           function checkFirefox(url) {
 

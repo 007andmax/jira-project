@@ -18,7 +18,7 @@
 
               var textArea = document.createElement("textarea");
               textArea.style.opacity = 0;
-              textArea.value = host + 'remote?remoteSessionId=' + scope.copySessionId;
+              textArea.value = host + 'remote?key=' + scope.copySessionId;
 
               document.body.appendChild(textArea);
 

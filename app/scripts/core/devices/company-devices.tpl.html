@@ -275,7 +275,7 @@
 
       <li ng-class="{'active': currentOpenTab === 'DEVICES'}">
         <a href="javascript:void(0)" ng-click="openTab('DEVICES')">Devices
-          <span class="text-muted">236</span>
+          <span class="text-muted">{{ agents.length }}</span>
         </a>
       </li>
 
@@ -443,10 +443,28 @@
           <div class="col-6">
             <div class="list-actions pull-right">
 
-              <!--<div class="btn btn-default pull-left has-tooltip" ng-click="remoteAccess()"-->
-              <!--tooltip-placement="top" tooltip="Remote Access">-->
-              <!--<i class="icn-sm icn-remote-access"></i>-->
-              <!--</div>-->
+              <div class="btn btn-default pull-left has-tooltip" ng-show="agent.type !== 'workstation'"
+                   ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
+                <i class="icn-sm icn-remote-access"></i>
+              </div>
+
+              <div class="btn btn-default pull-left has-tooltip" ng-show="agent.type === 'workstation'"
+                   tooltip-placement="top" tooltip="Remote Access"
+                   dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+                <i class="icn-sm icn-remote-access"></i>
+              </div>
+
+              <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+
+                <li ng-click="remoteAccess('CSS')">
+                  <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+                </li>
+
+                <li ng-click="remoteAccess('RDP')">
+                  <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+                </li>
+
+              </ul>
 
               <!--<div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"-->
               <!--tooltip-placement="top" tooltip="Send Alert">-->
@@ -779,30 +797,32 @@
           <div class="col-6">
             <div class="list-actions pull-right">
 
-              <div class="device-management" ng-show="device.agentStatus === 'managed'">
+              <div class="device-management"
+                   ng-show="device.hostName !== 'unknown' && (!device.message || device.message.length < 1) && !changingStatus">
                 <label>
-                  <input type="checkbox">
+                  <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
                   <span class="toggle-bg"></span>
                   <span class="toggle-indicator"></span>
                 </label>
               </div>
 
-              <div class="device-management installing-agent" ng-show="false">
+              <div class="device-management installing-agent" ng-show="changingStatus">
                 <div class="loader"></div>
               </div>
 
-              <div class="device-management installation-error" ng-show="false">
+              <div class="device-management installation-error"
+                   ng-show="device.hostName !== 'unknown' && (device.message && device.message.length > 0) && !changingStatus">
 
                 <label>
-                  <input type="checkbox">
-                  <span class="toggle-bg"></span>
+                  <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
+                  <span class="toggle-bg" tooltip="{{ device.message }}" tooltip-placement="top"></span>
                   <span class="toggle-indicator"></span>
                 </label>
 
-                <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="locked">
-                  <i class="icn-sm icn-error-locked"></i>
-                </a>
+                <!--<a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"-->
+                   <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="locked">-->
+                  <!--<i class="icn-sm icn-error-locked"></i>-->
+                <!--</a>-->
 
               </div>
 

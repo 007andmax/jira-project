@@ -25,7 +25,9 @@
         };
 
         $scope.downloadAgent = function(){
-          DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.name, $scope.downloadAgentUser.password)
+          DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.name, $scope.downloadAgentUser.password, function(){
+            $scope.isCompanyHasUserNameAndPass = true;
+          })
         };
 
       }]);
