@@ -40,7 +40,7 @@
 
         $scope.connectRemoteAccess = function (sessionId, conectionType) {
           if (sessionId && conectionType) {
-            RemoteAccessService.connectRemoteAccess(sessionId, conectionType);
+            RemoteAccessService.connectRemoteAccess(sessionId, conectionType, true);
           }
         };
 
@@ -48,7 +48,7 @@
           DevicesService.deleteRemoteSession(sessionId)
         };
 
-        $scope.isUserOnline = function(session){
+        $scope.isUserOnline = function (session) {
           return (session.status === 'INSTALLED' || session.status === 'CONNECTED' || session.status === 'ENDED') && session.online;
         }
 

@@ -443,12 +443,14 @@
           <div class="col-6">
             <div class="list-actions pull-right">
 
-              <div class="btn btn-default pull-left has-tooltip" ng-show="agent.type !== 'workstation'"
+              <div class="btn btn-default pull-left has-tooltip"
+                   ng-show="(agent.type !== 'workstation') && agent.online"
                    ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
 
-              <div class="btn btn-default pull-left has-tooltip" ng-show="agent.type === 'workstation'"
+              <div class="btn btn-default pull-left has-tooltip"
+                   ng-show="(agent.type === 'workstation') && agent.online"
                    tooltip-placement="top" tooltip="Remote Access"
                    dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
                 <i class="icn-sm icn-remote-access"></i>
@@ -798,7 +800,7 @@
             <div class="list-actions pull-right">
 
               <div class="device-management"
-                   ng-show="device.hostName !== 'unknown' && (!device.message || device.message.length < 1) && !changingStatus">
+                   ng-class="{'hide': !(device.hostName !== 'unknown' && agentInstalled && !changingStatus)}">
                 <label>
                   <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
                   <span class="toggle-bg"></span>
@@ -806,12 +808,22 @@
                 </label>
               </div>
 
-              <div class="device-management installing-agent" ng-show="changingStatus">
+              <div class="device-management"
+                   ng-class="{'hide': !((device.hostName !== 'unknown') && !agentInstalled && (!device.message || device.message.length < 1) && !changingStatus)}">
+                <label>
+                  <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
+                  <span class="toggle-bg"></span>
+                  <span class="toggle-indicator"></span>
+                </label>
+              </div>
+
+              <div class="device-management installing-agent"
+                   ng-show="changingStatus" style="margin-right: 12px;">
                 <div class="loader"></div>
               </div>
 
               <div class="device-management installation-error"
-                   ng-show="device.hostName !== 'unknown' && (device.message && device.message.length > 0) && !changingStatus">
+                   ng-class="{'hide': !((device.hostName !== 'unknown') && !agentInstalled && (device.message && device.message.length > 0) && !changingStatus)}">
 
                 <label>
                   <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
@@ -820,8 +832,8 @@
                 </label>
 
                 <!--<a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"-->
-                   <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="locked">-->
-                  <!--<i class="icn-sm icn-error-locked"></i>-->
+                <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="locked">-->
+                <!--<i class="icn-sm icn-error-locked"></i>-->
                 <!--</a>-->
 
               </div>

@@ -62,7 +62,12 @@
 
         $scope.$watch('ticketCompany', function () {
           if ($scope.ticketCompany) {
-            delete $scope.ticketCreatedUser;
+            if ($scope.ticketCompany.name === 'Unassigned') {
+              $scope.ticketCreatedUser = UsersService.getUnassignedUser($scope.ticketCompany.id);
+            } else {
+              delete $scope.ticketCreatedUser;
+            }
+
             $scope.ticket.company = $scope.ticketCompany.id;
 
             $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticketCompany.id);
@@ -81,6 +86,8 @@
         $scope.$watch('ticketAssignTo', function () {
           $scope.ticket.assignedUser = $scope.ticketAssignTo ? $scope.ticketAssignTo.id : '';
         });
+
+        $scope.ticketCompany = CompaniesService.getUnassignedCompany();
 
         $scope.addAttachmentFiles = function (file) {
 

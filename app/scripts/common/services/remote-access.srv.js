@@ -3,183 +3,168 @@
 (function (window, $, undefined) {
 
   angular.module('quicktech.common.services').factory('quicktech.common.services.RemoteAccessService',
-    ['ConstantsService', 'DevicesService', function (ConstantsService, DevicesService) {
+    ['ConstantsService', 'DevicesService', '$http',
+      function (ConstantsService, DevicesService, $http) {
 
-      function connectRemoteAccess(sessionId, conectionType) {
+        function connectRemoteAccess(sessionId, conectionType, isOneTime) {
 
-        if (!sessionId) {
-          throw 'SessionId is required';
-        }
+          if (!sessionId) {
+            throw 'SessionId is required';
+          }
 
-        if (!conectionType) {
-          throw 'conectionType is required';
-        }
+          if (!conectionType) {
+            throw 'conectionType is required';
+          }
 
-        DevicesService.getSessionId(sessionId, conectionType, function (realSessionId) {
-          if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
-            throw "Not session Id"
+          if (isOneTime) {
+
+            DevicesService.getSessionId(sessionId, conectionType, function (realSessionId) {
+              if (!realSessionId || !realSessionId.sessionId || realSessionId.sessionId.length < 1) {
+                throw "Not session Id"
+              } else {
+                createRemoteAccess(realSessionId.sessionId);
+              }
+            });
+
           } else {
-            createRemoteAccess(realSessionId.sessionId);
+            createRemoteAccess(sessionId);
           }
-        });
 
-        function createRemoteAccess(realSessionId) {
+          function createRemoteAccess(realSessionId) {
 
-          var url;
+            var url;
 
-          var remoteConnectPort = ConstantsService.getConstant('remote.connect.port');
-          var restServerAddress = ConstantsService.getConstant('rest.server.address');
+            var remoteConnectPort = ConstantsService.getConstant('remote.connect.port');
+            var restServerAddress = ConstantsService.getConstant('rest.server.address');
 
-          url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
+            url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
 
-          function viewerNotOpen() {
-            if (confirm("Cannot share screen, probably you have not installed viewer. Would you like to download it?")) {
-
-              console.log('get load viewer');
-
-              //DataService.get({action: 'getLinkToViewer'}, function (resp) {
-              //
-              //  if (resp.link) {
-              //    Downloader.downloadByUrl(resp.link);
-              //  } else {
-              //    alert("Cannot receive link to viewer, please contact your server administrator.");
-              //  }
-              //});
+            function viewerNotOpen() {
+              if (confirm("Cannot share screen, probably you have not installed viewer. Would you like to download it?")) {
+                window.location.href = '/data/connection-viewer';
+              }
             }
-          }
 
-
-          window.isFocused = true;
-
-          $(window).on('focus', function () {
             window.isFocused = true;
-          });
 
-          $(window).on('blur', function () {
-            window.isFocused = false;
-          });
+            $(window).on('focus', function () {
+              window.isFocused = true;
+            });
 
-          var checkFunc = null;
-          //TODO revise this
-          if (navigator.userAgent.indexOf('Firefox') >= 0) {
-            checkFunc = checkFirefox;
-          } else if (navigator.userAgent.indexOf('Opera') >= 0) {
-            checkFunc = checkOpera;
-          } else if (navigator.userAgent.indexOf('Chrome') >= 0) {
-            checkFunc = checkChrome;
-          } else if (navigator.userAgent.indexOf('Safari') >= 0) {
-            checkFunc = checkSafari;
-          } else {
-            checkFunc = checkSafari;
-          }
+            $(window).on('blur', function () {
+              window.isFocused = false;
+            });
 
-          function checkFirefox(url) {
+            var checkFunc = null;
 
-            var f = document.createElement('iframe');
-            f.style.display = 'none';
-            f = document.body.appendChild(f);
-
-            try {
-              f.contentWindow.location = url;
-            } catch (e) {
-              viewerNotOpen();
+            if (navigator.userAgent.indexOf('Firefox') >= 0) {
+              checkFunc = checkFirefox;
+            } else if (navigator.userAgent.indexOf('Opera') >= 0) {
+              checkFunc = checkOpera;
+            } else if (navigator.userAgent.indexOf('Chrome') >= 0) {
+              checkFunc = checkChrome;
+            } else if (navigator.userAgent.indexOf('Safari') >= 0) {
+              checkFunc = checkSafari;
+            } else {
+              checkFunc = checkSafari;
             }
 
-            document.body.removeChild(f);
-          }
+            function checkFirefox(url) {
 
-          function checkSafari(url) {
+              var f = document.createElement('iframe');
+              f.style.display = 'none';
+              f = document.body.appendChild(f);
 
-            if (navigator.userAgent.indexOf('Windows') >= 0) {
+              try {
+                f.contentWindow.location = url;
+              } catch (e) {
+                viewerNotOpen();
+              }
 
-              var w = window.open(url, '', 'width=50, height=50');
+              document.body.removeChild(f);
+            }
+
+            function checkSafari(url) {
+
+              if (navigator.userAgent.indexOf('Windows') >= 0) {
+
+                var w = window.open(url, '', 'width=50, height=50');
+                setTimeout(function () {
+                  try {
+
+                    if (w.location != 'about:blank') {
+                    }
+                    w.close();
+                    window.focus();
+                  }
+                  catch (e) {
+                    w.close();
+                    window.focus();
+                    viewerNotOpen();
+                  }
+                }, 10000);
+
+              } else {
+
+                document.location = url;
+
+                setTimeout(function () {
+                  if (window.isFocused) {
+                    viewerNotOpen();
+                  }
+                }, 10000);
+              }
+            }
+
+            function checkOpera(url) {
+
+              var f = document.createElement('iframe');
+              f.style.display = 'none';
+              f = document.body.appendChild(f);
+              f.contentWindow.location = url;
+
               setTimeout(function () {
                 try {
-
-                  if (w.location != 'about:blank') {
+                  if (f.contentWindow.location != 'something') {
                   }
-                  w.close();
-                  window.focus();
                 }
                 catch (e) {
-                  w.close();
-                  window.focus();
                   viewerNotOpen();
                 }
-              }, 10000);
+                document.body.removeChild(f);
+              }, 0);
+            }
 
-            } else {
-
-              document.location = url;
+            function checkChrome(url) {
 
               setTimeout(function () {
                 if (window.isFocused) {
                   viewerNotOpen();
                 }
-              }, 10000);
-            }
-          }
+              }, 3000);
 
-          function checkOpera(url) {
+              var a = document.createElement("a");
+              a.setAttribute("href", url);
+              a.style.display = "none";
+              a.onerror = getProtocol;
+              a.click();
 
-            var f = document.createElement('iframe');
-            f.style.display = 'none';
-            f = document.body.appendChild(f);
-            f.contentWindow.location = url;
-
-            setTimeout(function () {
-              try {
-                if (f.contentWindow.location != 'something') {
-                }
-              }
-              catch (e) {
+              function getProtocol() {
                 viewerNotOpen();
               }
-              document.body.removeChild(f);
-            }, 0);
-          }
 
-          function checkChrome(url) {
-            function startProtocol() {
-              var ifrm = document.createElement("iframe");
-              ifrm.setAttribute("src", url);
-              ifrm.style.display = "none";
-              ifrm.onerror = getProtocol;
-              document.body.appendChild(ifrm);
-              ieLaunch(url)
             }
 
-            function ieLaunch(link) {
-              document.getElementById('installLink').style.display = 'block';
-              document.getElementById('launchLink').href = link;
-            }
-
-            function getProtocol() {
-              viewerNotOpen();
-           }
-
-            startProtocol();
-            /*
-             document.location = url;
-             setTimeout(function () {
-             if (window.isFocused) {
-             notifyFunc();
-             }
-             }, 3000);
-             */
+            checkFunc(url);
           }
 
-          checkFunc(url);
         }
 
-      }
+        return {
+          connectRemoteAccess: connectRemoteAccess
+        }
 
-
-      return {
-        connectRemoteAccess: connectRemoteAccess
-      }
-
-    }]);
+      }]);
 
 })(window, jQuery);
 

@@ -24,15 +24,15 @@
 
         $scope.changeAgentStatus = function () {
           if ($scope.agentInstalled) {
+
             console.log('installAgent');
             $scope.changingStatus = true;
+
             DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id, function (resp) {
-              if (resp.status === 'INIT') {
-                return;
-              }
               $scope.changingStatus = false;
               $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
             })
+
           } else {
             console.log('deleteAgent');
           }
