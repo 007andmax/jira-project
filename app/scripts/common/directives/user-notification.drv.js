@@ -7,23 +7,17 @@
       function (UserNotificationService) {
         return {
           restrict: 'A',
-          link: function (scope, element, attrs) {
+          link: function (scope, element) {
 
             element.hide();
             element.removeClass('hide');
-
-            scope.getMarginLeft = function(){
-              return {
-                'margin-left': Math.floor(-element.width()/2 + 25) + 'px'
-              };
-            };
 
             UserNotificationService.setHideListener(function () {
               element.fadeOut();
             });
 
             UserNotificationService.setShowListener(function (message) {
-              scope.message = message;
+              element.text(message);
               element.show();
             });
           }

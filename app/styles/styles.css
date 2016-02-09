@@ -8093,7 +8093,7 @@ a.thumbnail.active {
   position: fixed;
   top: 23px;
   left: 50%;
-  margin-left: -125px;
+  transform: translateX(-50%);  /*margin-left: -125px;*/
   z-index: 5555;
   display: inline-block;
   background-color: #ffecb3;

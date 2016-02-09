@@ -4,8 +4,11 @@
 
   angular.module('quicktech.core.quickSupport').controller('quicktech.core.quickSupport.quickSupportCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.RemoteAccessService',
-      'DevicesService', 'ConstantsService',
-      function ($scope, SharedStateService, RemoteAccessService, DevicesService, ConstantsService) {
+      'DevicesService', 'ConstantsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, SharedStateService, RemoteAccessService, DevicesService,
+                ConstantsService, UserNotificationService) {
+
+        UserNotificationService.show('Loading...');
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
@@ -29,6 +32,7 @@
               sharedQuickSession.isCreateNew = false;
               DevicesService.createOneTimeRemoteSession()
             }
+            UserNotificationService.hide();
           });
         });
 
