@@ -23,18 +23,18 @@
         $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
 
         $scope.changeAgentStatus = function () {
+          $scope.changingStatus = true;
+
           if ($scope.agentInstalled) {
-
-            console.log('installAgent');
-            $scope.changingStatus = true;
-
             DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id, function (resp) {
               $scope.changingStatus = false;
               $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
             })
-
           } else {
-            console.log('deleteAgent');
+            DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.deviceId, function (resp) {
+              $scope.changingStatus = false;
+              $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
+            })
           }
         }
 
