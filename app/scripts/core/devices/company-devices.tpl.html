@@ -797,7 +797,7 @@
                    ng-class="{'hide': !(deviceStatus.status === 'success' && !changingStatus)}">
 
                 <label>
-                  <input type="checkbox" ng-checked="deviceStatus.statusValue" ng-click="changeAgentStatus()">
+                  <input type="checkbox" ng-model="deviceStatus.statusValue" ng-click="changeAgentStatus()">
                   <span class="toggle-bg" tooltip="{{ device.message }}" tooltip-placement="top"></span>
                   <span class="toggle-indicator"></span>
                 </label>
@@ -812,7 +812,7 @@
                    ng-class="{'hide': !(deviceStatus.status === 'error' && !changingStatus)}">
 
                 <label>
-                  <input type="checkbox" ng-checked="deviceStatus.statusValue" ng-click="changeAgentStatus()">
+                  <input type="checkbox" ng-model="deviceStatus.statusValue" ng-click="changeAgentStatus()">
                   <span class="toggle-bg" tooltip="{{ device.message }}" tooltip-placement="top"></span>
                   <span class="toggle-indicator"></span>
                 </label>
