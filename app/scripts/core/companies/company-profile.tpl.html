@@ -256,7 +256,7 @@
         <div class="chart-wrapper full-width">
 
           <div class="heading"><strong>Total Earnings</strong>
-            <i class="dot-sep"></i> <span>{{ totalEarningValue | currency:'' :2 }} USD</span>
+            <i class="dot-sep"></i> <span>{{ totalEarningValue | currency:'$' :2 }}</span>
           <span class="slider-arrows pull-right" style="position: static">
 
             <i class="icn-sm icn-arrow-previous"
@@ -282,7 +282,7 @@
       <div class="simple-chart" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
         <div class="chart-wrapper full-width">
           <div class="heading"><strong>Total Receivables</strong>
-            <i class="dot-sep"></i> <span>{{ totalReceivablesValue | currency:'' :2 }} USD</span>
+            <i class="dot-sep"></i> <span>{{ totalReceivablesValue | currency:'$' :2 }}</span>
 
           <span class="slider-arrows pull-right" style="position: static">
 

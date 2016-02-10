@@ -196,7 +196,7 @@
 
       <div class="total-amount">
         <div class="totals"><span class="number">TKT# {{ ticket.number }}</span> Total</div>
-        <div class="amount">{{ ticket.totalSum | currency: '$':2 }} USD</div>
+        <div class="amount">{{ ticket.totalSum | currency: '$' :2 }}</div>
       </div>
 
     </div>
@@ -220,7 +220,7 @@
           <div class="amount">{{ currentInvoice.taxRatesSum | currency: '$':2 }}</div>
         </div>
 
-        <div class="amount-due">Amount Due <span class="amount">{{ currentInvoice.sum | currency: '$':2 }} USD</span>
+        <div class="amount-due">Amount Due <span class="amount">{{ currentInvoice.sum | currency: '$':2 }}</span>
         </div>
 
       </div>

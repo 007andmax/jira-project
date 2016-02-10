@@ -224,7 +224,7 @@
 
           function showTooltip(circle) {
 
-            var currentValue = $filter('currency')(circle.value, '', 2) + ' USD',
+            var currentValue = $filter('currency')(circle.value, '$', 2),
               currentDay = $filter('date')(circle.date, 'EEE, d MMM yyyy');
 
             tooltipContext.clearRect(0, 0, tooltipContext.canvas.width, tooltipContext.canvas.height);

@@ -24,7 +24,7 @@
               <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="active"
                  ng-click="setShowInvoiceLockIndex($index)">
                 <span class="title active">{{ invoiceLock.invoiceDataDto.company.companyInfo.name }}</span>
-                <span class="pull-right total-count">{{ invoiceLock.invoiceDataDto.sum | currency:$:2 }} USD</span>
+                <span class="pull-right total-count">{{ invoiceLock.invoiceDataDto.sum | currency:'$' :2 }}</span>
               </a>
             </li>
 

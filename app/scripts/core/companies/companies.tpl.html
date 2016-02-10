@@ -62,7 +62,7 @@
     <div class="simple-chart">
       <div class="chart-wrapper full-width">
         <div class="heading"><strong>Top 10 Companies</strong> <span>Contributed to Earnings</span>
-          <span class="label label-success pull-right chart-label">{{ contributedToEarnings }} USD</span>
+          <span class="label label-success pull-right chart-label">{{ contributedToEarnings | currency: '$':2 }}</span>
         </div>
 
         <div ng-class="{'hide': contributedToEarnings <= 0}"
