@@ -11,20 +11,19 @@
         $scope.changeAgentStatus = function () {
           $scope.changingStatus = true;
 
-          if ($scope.agentInstalled) {
+          if ($scope.deviceStatus.statusValue) {
             DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id, function (resp) {
               $scope.changingStatus = false;
-              $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
             })
           } else {
             DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.deviceId, function (resp) {
               $scope.changingStatus = false;
-              $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
             })
           }
         };
 
         $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
+
           if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {
 
             $scope.deviceStatus.status = 'success';
