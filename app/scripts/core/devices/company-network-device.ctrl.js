@@ -12,17 +12,9 @@
           $scope.changingStatus = true;
 
           if ($scope.deviceStatus.statusValue) {
-            DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id, function (resp) {
-              if(!($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress')){
-                $scope.changingStatus = false;
-              }
-            })
+            DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id)
           } else {
-            DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.deviceId, function (resp) {
-              if(!($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress')){
-                $scope.changingStatus = false;
-              }
-            })
+            DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.deviceId)
           }
         };
 
@@ -30,17 +22,27 @@
 
           if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {
 
+            $scope.changingStatus = false;
+
             $scope.deviceStatus.status = 'success';
             $scope.deviceStatus.statusValue = true;
             $scope.deviceStatus.online = true;
 
           } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'login error') {
 
+            $scope.changingStatus = false;
+
             $scope.deviceStatus.status = 'error';
             $scope.deviceStatus.statusValue = false;
             $scope.deviceStatus.online = false;
 
+          } else if ($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress'){
+
+            $scope.changingStatus = true;
+
           } else {
+
+            $scope.changingStatus = false;
 
             $scope.deviceStatus.status = 'success';
             $scope.deviceStatus.statusValue = false;
