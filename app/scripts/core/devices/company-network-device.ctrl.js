@@ -13,11 +13,15 @@
 
           if ($scope.deviceStatus.statusValue) {
             DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id, function (resp) {
-              $scope.changingStatus = false;
+              if(!($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress')){
+                $scope.changingStatus = false;
+              }
             })
           } else {
             DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.deviceId, function (resp) {
-              $scope.changingStatus = false;
+              if(!($scope.device.agentStatus === 'init' || $scope.device.agentStatus === 'inProgress')){
+                $scope.changingStatus = false;
+              }
             })
           }
         };
