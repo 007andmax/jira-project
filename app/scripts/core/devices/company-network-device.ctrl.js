@@ -6,21 +6,7 @@
     ['$scope', 'CompaniesService', 'DevicesService',
       function ($scope, CompaniesService, DevicesService) {
 
-        console.log($scope.device)
-
-        $scope.isDeviceOnline = function () {
-          if ($scope.device.agentStatus && $scope.device.agentStatus !== 'unknown') {
-
-            return $scope.device.agentStatus === 'managed';
-
-          } else {
-
-            return false;
-
-          }
-        };
-
-        $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
+        $scope.deviceStatus = {};
 
         $scope.changeAgentStatus = function () {
           $scope.changingStatus = true;
@@ -36,7 +22,29 @@
               $scope.agentInstalled = ($scope.device.agentStatus === 'managed');
             })
           }
-        }
+        };
+
+        $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
+          if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {
+
+            $scope.deviceStatus.status = 'success';
+            $scope.deviceStatus.statusValue = true;
+            $scope.deviceStatus.online = true;
+
+          } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'login error') {
+
+            $scope.deviceStatus.status = 'error';
+            $scope.deviceStatus.statusValue = false;
+            $scope.deviceStatus.online = false;
+
+          } else {
+
+            $scope.deviceStatus.status = 'success';
+            $scope.deviceStatus.statusValue = false;
+            $scope.deviceStatus.online = false;
+
+          }
+        })
 
       }]);
 

@@ -722,14 +722,10 @@
         <li class="list-heading">
           <div class="col-1"><span>DEVICE</span></div>
           <div class="col-desc"><span>DESCRIPTION</span></div>
-
-          <div class="col-2" style="height: 12px;">
-            <!--<span>TYPE</span>-->
-          </div>
-
           <div class="col-3"><span>LAN IP</span></div>
           <div class="col-4"><span>MANUFACTURER</span></div>
           <div class="col-5"><span>MAC ADDRESS</span></div>
+          <div class="col-2" style="height: 12px;"><span class="pull-right">Agent Type</span></div>
           <div class="col-6">&nbsp;</div>
         </li>
 
@@ -739,7 +735,7 @@
           <div class="col-1">
             <div class="device-name">
 
-              <i class="device-status" ng-class="{'on' : isDeviceOnline(), 'off': !isDeviceOnline()}"></i>
+              <i class="device-status" ng-class="{'on' : deviceStatus.online, 'off': !deviceStatus.online}"></i>
 
               <div class="checkbox-caption">
 
@@ -778,12 +774,6 @@
             <!--<div class="device-desc"><span>No description available</span></div>-->
           </div>
 
-          <div class="col-2" style="height: 9px;">
-            <!--<div class="device-type-icons">-->
-            <!--<i class="icn-lg icn-computer has-tooltip" data-placement="top" data-original-title="Computer"></i>-->
-            <!--</div>-->
-          </div>
-
           <div class="col-3">
             <div class="device-lan-ip">{{ device.ipAddress }}</div>
           </div>
@@ -796,37 +786,33 @@
             <div class="device-mac-address">{{ device.macAddress }}</div>
           </div>
 
-          <div class="col-6">
-            <div class="list-actions pull-right">
+          <div class="col-2">
+            <div class="device-mac-address pull-right">{{ device.agentStatus }}</div>
+          </div>
+
+          <div class="col-6" style="height: 9px;">
+            <div class="list-actions pull-right" ng-show="device.hostName !== 'unknown'">
 
               <div class="device-management"
-                   ng-class="{'hide': !(device.hostName !== 'unknown' && agentInstalled && !changingStatus)}">
-                <label>
-                  <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
-                  <span class="toggle-bg"></span>
-                  <span class="toggle-indicator"></span>
-                </label>
-              </div>
+                   ng-class="{'hide': !(deviceStatus.status === 'success' && !changingStatus)}">
 
-              <div class="device-management"
-                   ng-class="{'hide': !((device.hostName !== 'unknown') && !agentInstalled && (!device.message || device.message.length < 1) && !changingStatus)}">
                 <label>
-                  <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
-                  <span class="toggle-bg"></span>
+                  <input type="checkbox" ng-checked="deviceStatus.statusValue" ng-click="changeAgentStatus()">
+                  <span class="toggle-bg" tooltip="{{ device.message }}" tooltip-placement="top"></span>
                   <span class="toggle-indicator"></span>
                 </label>
               </div>
 
               <div class="device-management installing-agent"
-                   ng-show="changingStatus" style="margin-right: 12px;">
+                   ng-class="{'hide': !changingStatus}" style="margin-right: 12px;">
                 <div class="loader"></div>
               </div>
 
               <div class="device-management installation-error"
-                   ng-class="{'hide': !((device.hostName !== 'unknown') && !agentInstalled && (device.message && device.message.length > 0) && !changingStatus)}">
+                   ng-class="{'hide': !(deviceStatus.status === 'error' && !changingStatus)}">
 
                 <label>
-                  <input type="checkbox" ng-model="agentInstalled" ng-click="changeAgentStatus()">
+                  <input type="checkbox" ng-checked="deviceStatus.statusValue" ng-click="changeAgentStatus()">
                   <span class="toggle-bg" tooltip="{{ device.message }}" tooltip-placement="top"></span>
                   <span class="toggle-indicator"></span>
                 </label>
