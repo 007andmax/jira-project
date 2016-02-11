@@ -28,8 +28,12 @@
           if (form.$valid) {
             $scope.disabledSaveChangeButton = true;
 
-            if((typeof $scope.editProduct.vendor) === 'string'){
-              $scope.editProduct.vendor = undefined;
+            if ((typeof $scope.editProduct.vendor) === 'string') {
+              if ($scope.editProduct.vendor.length > 0) {
+                $scope.editProduct.vendor = {name: $scope.editProduct.vendor};
+              } else {
+                $scope.editProduct.vendor = undefined;
+              }
             }
 
             ProductsService.saveProduct($scope.editProduct, function () {
