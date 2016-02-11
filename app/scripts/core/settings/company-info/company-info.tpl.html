@@ -565,6 +565,136 @@
     </div>
   </div>
 
+  <div class="ticket-and-invoice-wrapper" id="ticketAndInvoice">
+
+    <h3>Ticket and Invoice Settings</h3>
+
+    <div class="template-form-wrapper" ticket-config>
+      <form name="ticketForm">
+
+        <div class="form-row">
+
+          <div class="form-group" style="max-width: 118px"
+               ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketPrefix')}">
+
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketPrefix')}">
+              ticket prefix
+            </label>
+
+            <div ng-messages="ticketForm.ticketPrefix.$error"
+                 ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketPrefix')}">
+              <label class="control-label" ng-message="maxlength" for="">too large</label>
+            </div>
+
+            <input class="form-control" tc-prefix-input type="text" ng-model="ticketConfig.prefix"
+                   name="ticketPrefix" aria-expanded="true" ng-maxlength="7">
+          </div>
+
+          <div class="form-group" style="max-width: 117px;"
+               ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCount')}">
+
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketCount')}">
+              ticket number
+            </label>
+
+            <div ng-messages="ticketForm.ticketCount.$error"
+                 ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketCount')}">
+              <label class="control-label" ng-message="required" for="">cannot be left empty</label>
+              <label class="control-label" ng-message="maxlength" for="">too large</label>
+              <label class="control-label" ng-message="minlength" for="">too short</label>
+              <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
+            </div>
+
+            <input class="form-control" tc-number-input type="text" ng-model="ticketConfig.count"
+                   name="ticketCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
+                   hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
+          </div>
+
+          <div class="clearfix">
+            <div class="form-group" style="margin-left: 10px;">
+              <label class="control-label">actual ticket starting number</label>
+              <input class="form-control" type="text" ng-value="actualTicketNumber" readonly="readonly">
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+    <div class="template-form-wrapper" invoice-config style="margin-top: 50px;">
+      <form name="invoiceForm">
+
+        <div class="form-row clearfix">
+
+          <div class="form-group" style="max-width: 118px"
+               ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceCount')}">
+
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceCount')}">
+              invoice number
+            </label>
+
+            <div ng-messages="invoiceForm.invoiceCount.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceCount')}">
+              <label class="control-label" ng-message="required" for="">cannot be left empty.</label>
+              <label class="control-label" ng-message="maxlength" for="">too large</label>
+              <label class="control-label" ng-message="minlength" for="">too short</label>
+              <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
+            </div>
+
+            <input class="form-control" type="text" ic-number-input ng-model="invoiceConfig.count"
+                   name="invoiceCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
+                   hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
+          </div>
+
+          <div class="form-group" style="max-width: 117px"
+               ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceTerms')}">
+
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceTerms')}">
+              terms on invoice
+            </label>
+
+            <div ng-messages="invoiceForm.invoiceTerms.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceTerms')}">
+              <label class="control-label" ng-message="required" for="">cannot be left empty.</label>
+              <label class="control-label" ng-message="minlength" for="">too short</label>
+              <label class="control-label" ng-message="pattern" for="">Please enter a valid Terms.</label>
+            </div>
+
+            <input class="form-control" type="text" ic-terms-input
+                   placeholder="e.g., Net 8" ng-model="invoiceConfig.term"
+                   name="invoiceTerms" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
+                   hard-reset-required="true" ng-minlength="1" ng-maxlength="10" hard-reset-pattern="numberPattern">
+          </div>
+        </div>
+
+        <div class="form-row clearfix">
+
+          <div class="form-group full-width"
+               ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceConditions')}">
+
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceConditions')}">
+              terms &amp; conditions of invoice
+            </label>
+
+            <div ng-messages="invoiceForm.invoiceConditions.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceConditions')}">
+              <label class="control-label" ng-message="required" for="">terms &amp; conditions field cannot be left
+                empty.</label>
+            </div>
+
+            <textarea class="form-control" ic-conditions-input ng-model="invoiceConfig.termsAndConditions"
+                      name="invoiceConditions" aria-expanded="true" make-dirty-on-blur
+                      ng-required="true" maxlength="400" ng-trim="false"></textarea>
+
+            <div class="word-count">{{ 400 - invoiceConfig.termsAndConditions.length }}</div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
 
   <div class="email-me-wrapper">
     <form name="notificationForm">

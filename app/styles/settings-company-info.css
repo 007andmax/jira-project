@@ -43,6 +43,12 @@
   padding-bottom: 80px;
 }
 
+.settings-main-wrapper .ticket-and-invoice-wrapper {
+  float: left;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
 .settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
   padding-top: 0;
 }
