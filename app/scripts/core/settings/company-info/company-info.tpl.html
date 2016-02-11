@@ -80,7 +80,7 @@
                        is-uniq-validation validation-func="validateCompanyDomain"
                        style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">
 
-                <span class="email-addon" style="width: 120px;border-left: none">.{{ currentHost }}</span>
+                <span class="email-addon" style="width: 120px;border-left: none">{{ currentHost }}</span>
 
               </div>
 
@@ -331,7 +331,7 @@
           <div class="col-4">&nbsp;</div>
         </li>
 
-        <li ng-repeat="service in services | orderBy : 'createdAt'"
+        <li ng-repeat="service in services"
             ng-controller="quicktech.core.settings.companyInfoServiceCtrl"
             ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
             show-model-element="{{ 'show-' + service.versionedId.id }}">
@@ -379,22 +379,24 @@
 
         </li>
 
-        <li class="qt-service-form" ng-if="showCreateService">
+        <li class="qt-service-form add-new-service">
           <div ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
         </li>
 
       </ul>
 
 
-      <div class="add-service-btn-wrapper">
+      <div>
 
         <span class="text-muted" ng-show="!services || services.length === 0">No Default Services.</span>
 
-        <div class="btn btn-info has-tooltip"
-             ng-click="showCreateServiceForm()" custom-disabled="{{ showCreateService }}"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
-          <i class="icn-sm icn-service-add"></i>
+        <div class="form-group no-label full-width">
+          <button type="button" class="btn btn-lg btn-info pull-right"
+                  custom-disabled="{{ isServicesChange() || disabledSaveButton }}"
+                  ng-click="saveAllServices()">Save
+          </button>
         </div>
+
       </div>
 
     </div>

@@ -12,9 +12,9 @@
         $scope.timeRangeAllDays = {};
         $scope.currentAddressIndex = 0;
         $scope.timezones = AddressesService.getAllLocales();
-        $scope.currentHost = ConstantsService.getConstant('server.url');
+        $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
 
-        $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function(){
+        $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function () {
           $scope.emailNotifications = $scope.emailNotifications.staticCopy();
         });
 
@@ -22,8 +22,8 @@
 
           $scope.companyForSettingPage = $scope.companyForSettingPage.staticCopy();
 
-          for(var i = 0; i < $scope.companyForSettingPage.addresses.length; i++){
-            if($scope.companyForSettingPage.addresses[i].phoneNumbers.length === 0){
+          for (var i = 0; i < $scope.companyForSettingPage.addresses.length; i++) {
+            if ($scope.companyForSettingPage.addresses[i].phoneNumbers.length === 0) {
               $scope.companyForSettingPage.addresses[i].phoneNumbers.push({typeNumber: 'OFFICE'});
             }
           }
@@ -37,16 +37,16 @@
           return form && form[fieldName] && (form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.saveBusinessDaysHours = function(form){
+        $scope.saveBusinessDaysHours = function (form) {
           $scope.savingDaysHoursInProcess = true;
-          CompaniesService.saveForCompanyProfile($scope.timeRangeAllDays, 'time', function(a){
+          CompaniesService.saveForCompanyProfile($scope.timeRangeAllDays, 'time', function (a) {
             form.$setPristine();
             $scope.savingDaysHoursInProcess = false;
           })
         };
 
-        $scope.saveNotificationDaysHours = function(form){
-          CompaniesService.saveForCompanyProfile($scope.emailNotifications, 'email', function (){
+        $scope.saveNotificationDaysHours = function (form) {
+          CompaniesService.saveForCompanyProfile($scope.emailNotifications, 'email', function () {
             form.$setPristine();
           })
         };

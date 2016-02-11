@@ -26,75 +26,86 @@
 
           element.addClass('timer-quantity');
 
-          $templateRequest('/html/scripts/common/templates/service-quantity-picker.tpl.html').then(function (html) {
-
-            quantityDropdown = angular.element(html);
-            element.append(quantityDropdown);
-            $compile(quantityDropdown)(scope);
-
-            var hourDropdown = element.find('[hour_drop_down]'),
-              minuteDropdown = element.find('[min_drop_down]'),
-              formatDropdown = element.find('[format_drop_down]');
-
-            if (scope.quantity) {
-              setStartingValue(scope.quantity, hourDropdown, minuteDropdown, formatDropdown)
+          scope.$watch('quantity', function (val) {
+            if (!val && input.val()) {
+              initPicker();
+              input.val('')
             }
+          });
 
-            if (isFormatShow) {
+          initPicker();
 
-              formatDropdown.show();
+          function initPicker() {
+            $templateRequest('/html/scripts/common/templates/service-quantity-picker.tpl.html').then(function (html) {
 
-              formatDropdown.bind('mousemove', function (event) {
+              quantityDropdown = angular.element(html);
+              element.append(quantityDropdown);
+              $compile(quantityDropdown)(scope);
 
-                processingColumn('Format', event.target);
+              var hourDropdown = element.find('[hour_drop_down]'),
+                minuteDropdown = element.find('[min_drop_down]'),
+                formatDropdown = element.find('[format_drop_down]');
+
+              if (scope.quantity) {
+                setStartingValue(scope.quantity, hourDropdown, minuteDropdown, formatDropdown)
+              }
+
+              if (isFormatShow) {
+
+                formatDropdown.show();
+
+                formatDropdown.bind('mousemove', function (event) {
+
+                  processingColumn('Format', event.target);
+
+                });
+              }
+
+              hourDropdown.bind('mousemove', function (event) {
+
+                processingColumn('Hour', event.target);
+
+                if (+dropdownElement.hoverHour < 6) {
+
+                  var topMinuteElement = (+dropdownElement.hoverHour * 30);
+                  minuteDropdown.css('top', topMinuteElement + 'px');
+
+                  if (isFormatShow && +dropdownElement.hoverMinute * 2 > 60) {
+                    formatDropdown.css('top', (+topMinuteElement + 60) + 'px');
+                  } else if (isFormatShow) {
+                    formatDropdown.css('top', (topMinuteElement + (+dropdownElement.hoverMinute * 2)) + 'px');
+                  }
+
+                } else {
+
+                  var maxTop = (5 * 30);
+                  minuteDropdown.css('top', maxTop + 'px');
+
+                  if (isFormatShow && +dropdownElement.hoverMinute * 2 > 60) {
+                    formatDropdown.css('top', (+maxTop + 60) + 'px');
+                  } else if (isFormatShow) {
+                    formatDropdown.css('top', (maxTop + (+dropdownElement.hoverMinute * 2)) + 'px');
+                  }
+                }
 
               });
-            }
 
-            hourDropdown.bind('mousemove', function (event) {
+              minuteDropdown.bind('mousemove', function (event) {
 
-              processingColumn('Hour', event.target);
+                var top = minuteDropdown.position().top;
 
-              if (+dropdownElement.hoverHour < 6) {
+                processingColumn('Minute', event.target);
 
-                var topMinuteElement = (+dropdownElement.hoverHour * 30);
-                minuteDropdown.css('top', topMinuteElement + 'px');
-
-                if (isFormatShow && +dropdownElement.hoverMinute * 2 > 60) {
-                  formatDropdown.css('top', (+topMinuteElement + 60) + 'px');
+                if (isFormatShow && +dropdownElement.hoverMinute < 45) {
+                  formatDropdown.css('top', (top + (+dropdownElement.hoverMinute * 2)) + 'px');
                 } else if (isFormatShow) {
-                  formatDropdown.css('top', (topMinuteElement + (+dropdownElement.hoverMinute * 2)) + 'px');
+                  formatDropdown.css('top', (top + (30 * 2)) + 'px');
                 }
 
-              } else {
-
-                var maxTop = (5 * 30);
-                minuteDropdown.css('top', maxTop + 'px');
-
-                if (isFormatShow && +dropdownElement.hoverMinute * 2 > 60) {
-                  formatDropdown.css('top', (+maxTop + 60) + 'px');
-                } else if (isFormatShow) {
-                  formatDropdown.css('top', (maxTop + (+dropdownElement.hoverMinute * 2)) + 'px');
-                }
-              }
+              });
 
             });
-
-            minuteDropdown.bind('mousemove', function (event) {
-
-              var top = minuteDropdown.position().top;
-
-              processingColumn('Minute', event.target);
-
-              if (isFormatShow && +dropdownElement.hoverMinute < 45) {
-                formatDropdown.css('top', (top + (+dropdownElement.hoverMinute * 2)) + 'px');
-              } else if (isFormatShow) {
-                formatDropdown.css('top', (top + (30 * 2)) + 'px');
-              }
-
-            });
-
-          });
+          }
 
           input.click(function () {
             if (!isDropdownShow) {

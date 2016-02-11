@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyCtrl',
-    ['$scope', 'CompaniesService', '$state',
-      function ($scope, CompaniesService, $state) {
+    ['$scope', 'CompaniesService', '$state', 'quicktech.common.services.UserNotificationService',
+      function ($scope, CompaniesService, $state, UserNotificationService) {
 
         $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
           var primaryContact,
@@ -39,11 +39,15 @@
         });
 
         $scope.archiveCompany = function (companyId) {
-          CompaniesService.archive(companyId);
+          CompaniesService.archive(companyId, function (resp) {
+            if (resp.data.code == 403) {
+              UserNotificationService.show(resp.data.message, true);
+            }
+          });
         };
 
         $scope.showCompanyProfile = function () {
-          if($scope.currentUser.role !== 'USER'){
+          if ($scope.currentUser.role !== 'USER') {
             $state.go('companyProfile', {companyId: $scope.company.id});
           }
         };

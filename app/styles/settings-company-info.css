@@ -56,3 +56,7 @@
 .settings-main-wrapper .services-info-wrapper {
   float: left;
 }
+
+.settings-main-wrapper .services-info-wrapper .add-new-service .btn-primary {
+  display: none;
+}

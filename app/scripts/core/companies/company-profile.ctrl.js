@@ -4,9 +4,10 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'UsersService', 'TicketsService',
-      'SubscriptionsService', 'VendorsService', 'quicktech.common.services.SharedStateService', '$timeout', 'DevicesService',
+      'SubscriptionsService', 'VendorsService', 'quicktech.common.services.SharedStateService', '$timeout',
+      'DevicesService', 'quicktech.common.services.UserNotificationService',
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, UsersService, TicketsService,
-                SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService) {
+                SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService, UserNotificationService) {
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
@@ -96,8 +97,13 @@
         };
 
         $scope.archiveCompany = function () {
-          CompaniesService.archive($scope.company.id);
-          $state.go('companies');
+          CompaniesService.archive($scope.company.id, function (resp) {
+            if (resp.data.code == 403) {
+              UserNotificationService.show(resp.data.message, true);
+            } else {
+              $state.go('companies');
+            }
+          });
         };
 
         $scope.getPriorityNumber = function (object, returnType) {

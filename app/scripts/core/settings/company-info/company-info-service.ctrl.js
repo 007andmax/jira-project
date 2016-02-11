@@ -7,7 +7,7 @@
       function ($scope, $rootScope, ServicesService) {
 
         $scope.deleteService = function () {
-          ServicesService.deleteService($scope.service.versionedId.id);
+          $scope.services.splice($scope.$index, 1);
         };
 
         $scope.showEditServiceForm = function () {
