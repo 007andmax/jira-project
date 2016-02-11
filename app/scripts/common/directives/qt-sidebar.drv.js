@@ -14,7 +14,9 @@
 
           $(window).on('resize', initLeftPanel);
           $(element).on('click', function () {
-            $timeout(initLeftPanel, 420);
+            $timeout(function(){
+              element.find('.qt-sidebar-scroll').nanoScroller();
+            }, 420);
           });
 
           function initLeftPanel() {
