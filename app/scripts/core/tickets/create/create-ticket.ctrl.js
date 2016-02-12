@@ -161,12 +161,14 @@
               $scope.ticket.attachFileIds.push($scope.ticketAttachments[i].id);
             }
 
-            for (var j = 0; j < $scope.ticket.serviceExpenses.length; j++) {
+            if ($scope.ticket.serviceExpenses) {
+              for (var j = 0; j < $scope.ticket.serviceExpenses.length; j++) {
 
-              var item = $scope.ticket.serviceExpenses[j].item;
+                var item = $scope.ticket.serviceExpenses[j].item;
 
-              if (!(item && item.versionedId && item.versionedId.id)) {
-                $scope.ticket.serviceExpenses.splice(j, 1)
+                if (!(item && item.versionedId && item.versionedId.id)) {
+                  $scope.ticket.serviceExpenses.splice(j, 1)
+                }
               }
             }
 
