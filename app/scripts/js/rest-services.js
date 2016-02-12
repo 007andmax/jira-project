@@ -1,18 +1,129 @@
-(function(t,w,u){t.layLoadingPageSize=15;var h=angular.module("main.services",[]);h.config(["$provide","$httpProvider",function(h,l){h.factory("myHttpInterceptor",[function(){function d(d){if("unauthorized"===d.data.errorMessage||"unauthorized"===d.data.authMessage||"userDisabled"===d.statusText)"/test"!==t.location.pathname&&("userDisabled"===d.statusText&&alert("Your account has been disabled."),t.loggingOut=!0,t.location.href="/logout",t.location.hash="");else return d.data.showMessage?(alert(d.data.showMessage),
+(function (u, w, t) {
+  u.layLoadingPageSize = 15;
+  var h = angular.module("main.services", []);
+  h.config(["$provide", "$httpProvider", function (h, l) {
+    h.factory("myHttpInterceptor", [function () {
+      function d(d) {
+        if ("unauthorized" === d.data.errorMessage || "unauthorized" === d.data.authMessage || "userDisabled" === d.statusText)"/test" !== u.location.pathname && ("userDisabled" === d.statusText && alert("Your account has been disabled."), u.loggingOut = !0, u.location.href = "/logout", u.location.hash = ""); else return d.data.showMessage ? (alert(d.data.showMessage),
 {}):d}return{request:function(d){d.url&&(d.params||(d.params={}),0<=d.url.indexOf(".html")||(d.params.t=(new Date).getTime()));return d},response:d,responseError:d}}]);l.interceptors.push("myHttpInterceptor")}]);h.run(["$http","$rootScope","ConstantsService",function(h,l,d){h.get("/users/current").success(function(d){l.currentUser=d});l.numberCounterDelimiter="-"}]);h.service("Downloader",function(){function h(e,c){if(/(iP)/g.test(navigator.userAgent))return alert("Your device does not support files downloading. Please try again in desktop browser."),
-  !1;if(l||g){var a=document.createElement("a");a.href=e;a.download!==u&&(c||(c=e.substring(e.lastIndexOf("/")+1,e.length)),a.download=c);if(document.createEvent){var b=document.createEvent("MouseEvents");b.initEvent("click",!0,!0);a.dispatchEvent(b);return!0}}else if(d){w("#pdf").remove();w("body").append("<iframe id='pdf' style='display:none;'></iframe>");document.getElementById("pdf").src=e;return}t.open(e,"_new");return!0}var l=-1<navigator.userAgent.toLowerCase().indexOf("chrome"),d=-1<navigator.userAgent.toLowerCase().indexOf("safari"),
+    !1;
+    if (l || g) {
+      var a = document.createElement("a");
+      a.href = e;
+      a.download !== t && (c || (c = e.substring(e.lastIndexOf("/") + 1, e.length)), a.download = c);
+      if (document.createEvent) {
+        var b = document.createEvent("MouseEvents");
+        b.initEvent("click", !0, !0);
+        a.dispatchEvent(b);
+        return !0
+      }
+    } else if (d) {
+      w("#pdf").remove();
+      w("body").append("<iframe id='pdf' style='display:none;'></iframe>");
+      document.getElementById("pdf").src = e;
+      return
+    }
+    u.open(e, "_new");
+    return !0
+  }
+
+    var l = -1 < navigator.userAgent.toLowerCase().indexOf("chrome"), d = -1 < navigator.userAgent.toLowerCase().indexOf("safari"),
   g=-1<navigator.userAgent.toLowerCase().indexOf("firefox");return{downloadByUrl:h,downloadTicketAttachments:function(d){h("/v2/tickets/"+d+"/downloadAttachments")},downloadFile:function(d){h("/file/"+d)}}});h.service("Utils",["$http","$rootScope",function(h,l){function d(b){var a=b;!a&&this.staticCopy&&(a=this);if("[object Array]"===Object.prototype.toString.call(a)){b=[];for(var c=0;c<a.length;c++)b.push(d(a[c]))}else if("[object Object]"===Object.prototype.toString.call(a))for(c in b={},a)"staticCopy"!==
 c&&"$$hashKey"!=c&&(b[c]=d(a[c]));else return a;return b}function g(b,a){if("[object String]"===Object.prototype.toString.call(b))return b;a=a||b;for(var k in b){var p=b[k];"[object Array]"===Object.prototype.toString.call(p)?e(p):"[object Object]"===Object.prototype.toString.call(p)&&g(p);c(a,k,p)}c(a,"staticCopy",d);return a}function e(b,a){if(a){for(var k=0;k<b.length;k++)a.push(g(b[k]));c(a,"staticCopy",d);return a}for(k=0;k<b.length;k++)b[k]=g(b[k]);c(b,"staticCopy",d);return b}function c(b,
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    a,d){Object.defineProperty(b,a,{value:d,writable:!1,enumerable:!0,configurable:!0})}function a(b,a){for(var d=0;d<b.length;d++){var c=b[d];if(c&&(c=c.versionedId?c.versionedId.id:c.id,c===a))return d}return-1}return{customizeObj:g,customizeArray:e,defineReadOnlyProperty:c,findById:function(b,a){for(var d=0;d<b.length;d++){var c=b[d];if((c.versionedId?c.versionedId.id:c.id)===a)return c}},indexOfId:a,handleCallback:function(b,a){a&&b.then(function(b){a(b.data)},function(b){a(b.data)})},deleteById:function(b,
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  d){var c=a(b,d);-1<c&&b.splice(c,1)},getListByUrl:function(b,a,d){var c=[];d&&(c=e(c));h.get(b).then(function(b){if(d)e(b.data,c),d(c);else for(var r=0;r<b.data.length;r++)c.push(b.data[r]);a&&a(c)},function(b){a&&a(b.data)});return c},getFormattedNumber:function(b,a){var d;if(a)for(d=""+(parseInt(b.numPart)+1);d.length<b.numPart.length;)d="0"+d;else d=b.numPart;return b.charPart?b.charPart+l.numberCounterDelimiter+d:d},getComparatorBy:function(b,a){return function(d,c){return a?c[b]-d[b]:d[b]-c[b]}},
-  formatDate:function(b){return b.getFullYear()+"-"+(b.getMonth()+1)+"-"+b.getDate()}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("AddressesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){return{getAllLocales:function(g){var e=d.customizeArray([]);h.get("/addresses/getAllLocales").then(function(c){d.customizeArray(c.data,e);g&&g(c.data)},function(d){g&&g(d.data)});return e}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("AssociationService",["$http","$rootScope","Utils","$filter",function(h,n,l){return{deleteAssociation:function(d,g){if(!d)throw"id is required!";var e=h({url:"/association/"+d,method:"DELETE"});l.handleCallback(e,g)}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("BillableService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,n,l,d){function g(a){for(var b=0;b<a.tickets.length;b++)a.totalSum+=a.tickets[b].sum}function e(a){for(var b in a)if("staticCopy"!==b)for(var d=0;d<a[b].tickets.length;d++)a[b].totalSum||(a[b].totalSum=0),a[b].totalSum+=a[b].tickets[d].sum}function c(a){for(var b in a)if("staticCopy"!==b){a[b].lockType="NONE";for(var d=0;d<a[b].tickets.length;d++){var c=
+    formatDate: function (b) {
+      return b.getFullYear() + "-" + (b.getMonth() + 1) + "-" + b.getDate()
+    }
+  }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("AddressesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    return {
+      getAllLocales: function (g) {
+        var e = d.customizeArray([]);
+        h.get("/addresses/getAllLocales").then(function (c) {
+          d.customizeArray(c.data, e);
+          g && g(c.data)
+        }, function (d) {
+          g && g(d.data)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("AssociationService", ["$http", "$rootScope", "Utils", "$filter", function (h, n, l) {
+    return {
+      deleteAssociation: function (d, g) {
+        if (!d)throw"id is required!";
+        var e = h({url: "/association/" + d, method: "DELETE"});
+        l.handleCallback(e, g)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("BillableService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, l, d) {
+    function g(a) {
+      for (var b = 0; b < a.tickets.length; b++)a.totalSum += a.tickets[b].sum
+    }
+
+    function e(a) {
+      for (var b in a)if ("staticCopy" !== b)for (var d = 0; d < a[b].tickets.length; d++)a[b].totalSum || (a[b].totalSum = 0), a[b].totalSum += a[b].tickets[d].sum
+    }
+
+    function c(a) {
+      for (var b in a)if ("staticCopy" !== b) {
+        a[b].lockType = "NONE";
+        for (var d = 0; d < a[b].tickets.length; d++) {
+          var c =
   a[b].tickets[d];"NONE"===a[b].lockType&&null!=c.lockedBy?a[b].lockType="ALL":"ALL"==a[b].lockType&&null==c.lockedBy&&(a[b].lockType="NOT_ALL")}}}return{getTotalBilledAmount:function(a,b){var c=d.customizeObj({});h.get("/billable/totalBilled").then(function(k){d.customizeObj(k.data,c);l.subscribe("/billedTicketsSumAdded",a,function(b){console.log(b);"BILLED_TICKETS_SUM_ADDED"===b.action&&d.defineReadOnlyProperty(c,"value",c.value+b.data)});b&&b(k.data)},function(a){b&&b(a.data)});return c},getBillableChartData:function(a,
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               b){var c=d.customizeArray([]);h.get("/billable/billed/lastDays").then(function(k){d.customizeArray(k.data,c);l.subscribe("/billedTicketsSumAdded",a,function(b){console.log(b);if("BILLED_TICKETS_SUM_ADDED"===b.action){var a=c[c.length-1];d.defineReadOnlyProperty(a,"sum",a.sum+b.data)}});b&&b(c)},function(a){b&&b(a.data)});return c},createInvoice:function(a,b,c,k){if(!a)throw"lockId is required!";if(!b)throw"contact is required!";if(!c)throw"address is required!";a=h.get("/invoice/create/"+a+"?&billTo="+
   b+"&shipTo="+c);d.handleCallback(a,k)},getActualInvoiceNumber:function(a,b){h.get("/data/actualNumber?type=INVOICE").success(function(a){b(a.number)});l.subscribe("/number?targetId=INVOICE",a,function(a){console.log(a);"NUMBER_CHANGED"===a.action&&b(d.getFormattedNumber(a.data,!0))})},search:function(a){if(!a)throw"Keyword is required!";return h.get("/billable/search?keyword="+a).then(function(b){return b.data})},getLockedTicketIds:function(a,b){},lockTicketIds:function(a,b){if(!a)throw"ticketIds is required!";
   var c=d.customizeObj({});h({url:"/invoice/lock",method:"POST",data:a}).then(function(a){d.customizeObj(a.data,c);b&&b(a.data)},function(a){b&&b(a.data)});return c},unlockTicketIds:function(a,b){if(!a)throw"lockId is required!";var c=h.get("/invoice/unlock/"+a);d.handleCallback(c,b)},getExistTimeByLockId:function(a,b){if(!a)throw"lockId is required!";var c=h.get("/invoice/lock/timeToUnlock/"+a);d.handleCallback(c,b)},lockTicketsByCompany:function(a,b){if(!a)throw"companyId is required!";var c=h.get("/invoice/lock/lockByCompany/"+
   a);d.handleCallback(c,b)},getBillablePageDto:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var f=d.customizeObj({});h.get("/billable/billablePageInfo").then(function(k){d.customizeObj(k.data,f);e(f);c(f);l.subscribe("/billablePage",a,function(a){console.log(a);if("BILLABLE_EXPENSE_ADDED"==a.action){var m=a.data.companyId;f[m]||(f[m]={},f[m].tickets=[],f[m].totalSum=0,f[m].lockType="NONE");var r=d.findById(f[m].tickets,a.data.id);r||(r={},f[m].tickets.push(r));d.customizeObj(a.data,
   r);g(f[m]);b&&b(f)}else if("BILLABLE_EXPENSE_REMOVED"==a.action)r=f[a.data.companyId].tickets,m=d.indexOfId(r,a.data.ticketId),-1<m&&r.splice(m,1),r&&r.length&&0!==r.length?g(f[a.data.companyId]):delete f[a.data.companyId],b&&b(f);else if("TICKET_LOCKED"==a.action){for(var k=Object.keys(a.data)[0],m=0;m<a.data[k].length;m++)for(var x in f)"staticCopy"!==x&&(r=d.findById(f[x].tickets,a.data[k][m]))&&d.defineReadOnlyProperty(r,"lockedBy",k);c(f);b&&b(f)}else if("TICKET_UNLOCKED"==a.action){for(x in f)if("staticCopy"!==
-  x)for(m=0;m<f[x].tickets.length;m++)for(r=0;r<a.data.length;r++)f[x].tickets[m].id===a.data[r]&&d.defineReadOnlyProperty(f[x].tickets[m],"lockedBy",null);c(f);b&&b(f)}else"COMPANY_ARCHIVED"==a.action&&(delete f[a.data.id],b&&b(f))});b&&b(f)});return f}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("CompaniesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){function g(){m++;if(2===m){a=!0;for(var d=0;d<b.length;d++)b[d]()}}function e(a,b){if(!a)throw"Keyword is required!";for(var d=[],c=0;c<k.companies.length;c++){var f=k.companies[c];(b||k.currentCompany.id!==f.id)&&-1<f.name.indexOf(a)&&d.push(f)}return d}function c(d){d&&(a?d():b.push(d))}n=n.$new();var a=!1,b=[],f=[],k={companies:[],clientCompanies:[],
+      x)for (m = 0; m < f[x].tickets.length; m++)for (r = 0; r < a.data.length; r++)f[x].tickets[m].id === a.data[r] && d.defineReadOnlyProperty(f[x].tickets[m], "lockedBy", null);
+      c(f);
+      b && b(f)
+    } else"COMPANY_ARCHIVED" == a.action && (delete f[a.data.id], b && b(f))
+    });
+      b && b(f)
+    });
+      return f
+    }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("CompaniesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    function g() {
+      m++;
+      if (2 === m) {
+        a = !0;
+        for (var d = 0; d < b.length; d++)b[d]()
+      }
+    }
+
+    function e(a, b) {
+      if (!a)throw"Keyword is required!";
+      for (var d = [], c = 0; c < k.companies.length; c++) {
+        var f = k.companies[c];
+        (b || k.currentCompany.id !== f.id) && -1 < f.name.indexOf(a) && d.push(f)
+      }
+      return d
+    }
+
+    function c(d) {
+      d && (a ? d() : b.push(d))
+    }
+
+    n = n.$new();
+    var a = !1, b = [], f = [], k = {
+      companies: [], clientCompanies: [],
   currentCompany:{}},p;d.customizeObj(k);h.get("/company/clients").then(function(a){d.customizeArray(a.data,k.clientCompanies);for(a=0;a<k.clientCompanies.length;a++)k.companies.push(k.clientCompanies[a]);g()},function(a){console.error(a);throw"Cannot initialize CompaniesService!";});h.get("/company/current").then(function(a){d.customizeObj(a.data,k.currentCompany);k.companies.push(k.currentCompany);g()},function(a){console.error(a);throw"Cannot initialize CompaniesService!";});var m=0;l.subscribe("/company",
   n,function(b){console.log(b);if(a)if("COMPANY_SAVED"==b.action){var c=d.findById(k.companies,b.data.id);if(c)d.customizeObj(b.data,c);else for(b=d.customizeObj(b.data),k.companies.push(b),k.clientCompanies.push(b),b=0;b<f.length;b++)f[b]()}else if("COMPANY_ARCHIVED"==b.action)for(d.deleteById(k.companies,b.data.id),d.deleteById(k.clientCompanies,b.data.id),p&&"function"==typeof p&&p(b.data.id),b=0;b<f.length;b++)f[b]();else if("COMPANY_DEARCHIVED"==b.action)for(c=d.customizeObj(b.data),k.clientCompanies.push(c),
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       k.companies.push(c),b=0;b<f.length;b++)f[b]()});return{_addInitListener:c,_addAmountChangeListener:function(a){f.push(a)},_search:e,_isInitialized:function(){return a},getCurrentCompany:function(){return k.currentCompany},getClientCompanies:function(a){c(a);return k.clientCompanies},getAllCompanies:function(){return k.companies},getOneById:function(a,b){b&&(p=b);return d.findById(k.companies,a)},getUnassignedCompany:function(){for(var a=0;a<k.companies.length;a++)if(k.companies[a].isDefault)return k.companies[a]},
@@ -23,10 +134,92 @@ c&&"$$hashKey"!=c&&(b[c]=d(a[c]));else return a;return b}function g(b,a){if("[ob
     b+"/data").then(function(a){d.customizeObj(a.data,f);c&&c(a.data)},function(a){c&&c(a.data)});l.subscribe("/companyDto?targetId="+b,a,function(a){console.log(a);if("COMPANY_DTO_CHANGED"==a.action){a=JSON.parse(a.data);for(var c in a)c===b&&d.customizeObj(a[b],f)}});return f},isNameUnique:function(a,b,c){if(!a)throw"name is required!";var f=d.customizeObj({});h.get("/company/isCompanyNameUnique?name="+a+"&id="+b).then(function(a){d.customizeObj(a.data,f);c&&c(a.data)},function(a){c&&c(a.data)});return f},
   isDomainUnique:function(a,b,c){if(!a)throw"domain is required!";var f=d.customizeObj({});h.get("/company/isCompanyDomainUnique?domain="+a+"&id="+b).then(function(a){d.customizeObj(a.data,f);c&&c(a.data)},function(a){c&&c(a.data)});return f},saveCover:function(a,b,c){if(!a)throw"croppedImage is required!";if(!b)throw"companyId is required!";a=h({url:"/company/"+b+"/cover",method:"POST",data:a});d.handleCallback(a,c)},deleteCover:function(a,b){if(!a)throw"companyId is required!";var c=h({url:"/company/"+
   a+"/cover",method:"DELETE"});d.handleCallback(c,b)},getCompanyContacts:function(a,b,c){if(!a||!a.$id)throw"First argument must be Angularjs scope!";if(!b)throw"Second argument must be companyId!";return d.getListByUrl("/company/"+b+"/contacts",c,function(c){l.subscribe("/companyContact",a,function(a){console.log(a);"COMPANY_CONTACT"==a.action&&(c.splice(0,c.length),d.customizeArray(a.data,c))});l.subscribe("/subscription?targetId="+b,a,function(a){console.log(a);if(a.data.contact){var b=d.findById(c,
-    a.data.contact.id);b&&("SUBSCRIPTION_SAVED"==a.action?d.defineReadOnlyProperty(b,"subscription",d.customizeObj(a.data)):"SUBSCRIPTION_DELETED"==a.action&&delete b.subscription)}})})}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("ConstantsService",["$http",function(h){var n;h.get("/data/getConstants").then(function(h){n=h.data});return{getConstant:function(h){if(!h)return n;if(Array.isArray(h)){for(var d={},g=0;g<h.length;g++)n.hasOwnProperty(h[g])&&(d[h[g]]=n[h[g]]);return d}if(n.hasOwnProperty(h))return n[h]}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("ContactsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,n,l,d,g){return{isEmailUnique:function(e,c,a){if(!e)throw"email is required!";var b=d.customizeObj({});h.get("/contacts/isEmailUnique?email="+e+"&id="+c).then(function(c){d.customizeObj(c.data,b);a&&a(c.data)},function(b){a&&a(b.data)});return b},getSubscribedContactsOnTicket:function(e,c){if(!e||!e.$id)throw"First argument must be Angularjs scope!";
+        a.data.contact.id);
+        b && ("SUBSCRIPTION_SAVED" == a.action ? d.defineReadOnlyProperty(b, "subscription", d.customizeObj(a.data)) : "SUBSCRIPTION_DELETED" == a.action && delete b.subscription)
+      }
+      })
+      })
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("ConstantsService", ["$http", function (h) {
+    var n;
+    h.get("/data/getConstants").then(function (h) {
+      n = h.data
+    });
+    return {
+      getConstant: function (h) {
+        if (!h)return n;
+        if (Array.isArray(h)) {
+          for (var d = {}, g = 0; g < h.length; g++)n.hasOwnProperty(h[g]) && (d[h[g]] = n[h[g]]);
+          return d
+        }
+        if (n.hasOwnProperty(h))return n[h]
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("ContactsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, l, d, g) {
+    return {
+      isEmailUnique: function (e, c, a) {
+        if (!e)throw"email is required!";
+        var b = d.customizeObj({});
+        h.get("/contacts/isEmailUnique?email=" + e + "&id=" + c).then(function (c) {
+          d.customizeObj(c.data, b);
+          a && a(c.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      },
+      getSubscribedContactsOnTicket: function (e, c) {
+        if (!e || !e.$id)throw"First argument must be Angularjs scope!";
   var a=d.customizeArray([]);h.get("/contacts/getSubscribedContactsOnTicket/").then(function(b){d.customizeArray(b.data,a);l.subscribe("/subscription?targetId="+g.getCurrentCompany().id,e,function(b){console.log(b);if(b.data.contact){var k=d.findById(a,b.data.contact.id);k&&("SUBSCRIPTION_SAVED"==b.action?(d.defineReadOnlyProperty(k,"subscription",d.customizeObj(b.data)),c&&c()):"SUBSCRIPTION_DELETED"==b.action&&(delete k.subscription,c&&c()))}});l.subscribe("/vendorContacts",e,function(b){console.log(b);
     if("VENDOR_CONTACTS_SAVE"==b.action){for(var k=0;k<b.data.length;k++){var e=b.data[k],m=d.findById(a,e.id);e.subscription.ticket?m?d.customizeObj(e,m):a.push(d.customizeObj(e)):m&&d.deleteById(a,m.id)}c&&c()}else if("VENDOR_CONTACTS_DELETE"==b.action){for(k=0;k<b.data.length;k++)d.deleteById(a,b.data[k].id);c&&c()}});c&&c(b.data)},function(a){c&&c(a.data)});return a},getAllVendorsContacts:function(e,c){if(!e||!e.$id)throw"First argument must be Angularjs scope!";var a=d.customizeArray([]);h.get("/contacts/getAllVendorsContacts/").then(function(b){d.customizeArray(b.data,
-  a);l.subscribe("/vendorContacts",e,function(b){console.log(b);if("VENDOR_CONTACTS_SAVE"==b.action){for(var k=0;k<b.data.length;k++){var e=b.data[k],m=d.findById(a,e.id);m?d.customizeObj(e,m):a.push(d.customizeObj(e))}c&&c()}else if("VENDOR_CONTACTS_DELETE"==b.action){for(k=0;k<b.data.length;k++)d.deleteById(a,b.data[k].id);c&&c()}});c&&c(b.data)},function(a){c&&c(a.data)});return a}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("DevicesService",["$http","$rootScope","RealTimeService","Utils","UsersService","Downloader","CompaniesService",function(h,n,l,d,g,e,c){function a(){for(var a in f.callbacks)if("staticCopy"!==a){var b=f.callbacks[a];b&&b.callback&&"function"===typeof b.callback&&b.callback(f.devices[b.companyId])}}function b(){for(var b in f.devices)if("staticCopy"!==b){if(0==f.devices[b].length){delete f.devices[b];delete f.deviceCounter[b];a();return}f.deviceCounter.companyId||
+        a);
+        l.subscribe("/vendorContacts", e, function (b) {
+          console.log(b);
+          if ("VENDOR_CONTACTS_SAVE" == b.action) {
+            for (var k = 0; k < b.data.length; k++) {
+              var e = b.data[k], m = d.findById(a, e.id);
+              m ? d.customizeObj(e, m) : a.push(d.customizeObj(e))
+            }
+            c && c()
+          } else if ("VENDOR_CONTACTS_DELETE" == b.action) {
+            for (k = 0; k < b.data.length; k++)d.deleteById(a, b.data[k].id);
+            c && c()
+          }
+        });
+        c && c(b.data)
+      }, function (a) {
+        c && c(a.data)
+      });
+        return a
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("DevicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "UsersService", "Downloader", "CompaniesService", function (h, n, l, d, g, e, c) {
+    function a() {
+      for (var a in f.callbacks)if ("staticCopy" !== a) {
+        var b = f.callbacks[a];
+        b && b.callback && "function" === typeof b.callback && b.callback(f.devices[b.companyId])
+      }
+    }
+
+    function b() {
+      for (var b in f.devices)if ("staticCopy" !== b) {
+        if (0 == f.devices[b].length) {
+          delete f.devices[b];
+          delete f.deviceCounter[b];
+          a();
+          return
+        }
+        f.deviceCounter.companyId ||
 (f.deviceCounter[b]=d.customizeObj({all:0,online:0}));d.defineReadOnlyProperty(f.deviceCounter[b],"all",f.devices[b].length);for(var c=0,x=0;x<f.devices[b].length;x++)f.devices[b][x].online&&c++;d.defineReadOnlyProperty(f.deviceCounter[b],"online",c)}a()}var f={devices:{},callbacks:{},deviceCounter:{}},k=n.$new(),p={},m={};d.customizeObj(f);c._addInitListener(function(){h.get("/devices?companyId="+c.getCurrentCompany().id).then(function(a){var c=f.devices;d.customizeObj(a.data,c);b();l.subscribe("/device",
   k,function(a){console.log(a);if("DEVICE_ONLINE"===a.action){for(var f in c[a.data.clientCompanyId])c[a.data.clientCompanyId][f].id===a.data.value&&d.defineReadOnlyProperty(c[a.data.clientCompanyId][f],"online",!0);b()}else if("DEVICE_OFFLINE"===a.action){for(f in c[a.data.clientCompanyId])c[a.data.clientCompanyId][f].id===a.data.value&&d.defineReadOnlyProperty(c[a.data.clientCompanyId][f],"online",!1);b()}else if("DEVICE_INSTALLED"===a.action)c[a.data.clientCompanyId]?c[a.data.clientCompanyId].push(d.customizeObj(JSON.parse(a.data.value).device)):
     (f=a.data.clientCompanyId,c[f]=[],c[f].push(JSON.parse(a.data.value).device)),b();else if("DEVICE_UNINSTALLED"===a.action){for(f in c[a.data.clientCompanyId])c[a.data.clientCompanyId][f].id===a.data.value&&c[a.data.clientCompanyId].splice(f,1);b()}});l.subscribe("/oneTimeConnection",n,function(a){"REMOTE_CONNECTION_CLOSED"!==a.action||a.data.id||(console.log(a),n.openCreateTicketForm(a.data))})})});return{downloadAgent:function(a,b,c,d){if(!a)throw"CompanyId is required!";return h.get("/data/prepareDownloadAgent?companyId="+
@@ -38,49 +231,388 @@ y.data.deviceId&&(e=k.networkScan.devices[g]);e&&("MANAGED"===y.data.status?d.de
   if(!c)throw"agentId is required!";Array.isArray(c)||(c=[c]);if(d&&"function"===typeof d)for(var f in c)p[c[f]]=d;h({url:"/devices/sendInstallAgentRequest?companyId="+a+"&agentId="+b,method:"POST",data:c})},sendUninstallAgentRequest:function(a,b,c,d){if(!a)throw"CompanyId is required!";if(!b)throw"agentId is required!";if(!c)throw"agentId is required!";Array.isArray(c)||(c=[c]);if(d&&"function"===typeof d)for(var f in c)m[c[f]]=d;h({url:"/devices/sendUninstallAgentRequest?companyId="+a+"&agentId="+
 b,method:"POST",data:c})},createOneTimeRemoteSession:function(a){h.get("/remote/createOneTimeRemoteSession").then(function(b){a&&a(b.data)},function(b){a&&a(b.data)})},getRemoteSessions:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";return d.getListByUrl("/remote/getRemoteSessions",b,function(b){l.subscribe("/oneTimeConnection",a,function(a){console.log(a);if("ONE_TIME_CONNECTION_CLOSED"!==a.action||a.data.id)if("ONE_TIME_DELETED"===a.action||"ONE_TIME_UNINSTALLED"===a.action)d.deleteById(b,
   a.data);else{var c=d.findById(b,a.data.id);c?d.customizeObj(a.data,c):b.unshift(d.customizeObj(a.data))}})})},getSessionId:function(a,b,c){if(!a)throw"remoteSessionId is required!";if(!b)throw"connectionType is required!";h.get("/devices/getSessionId?remoteSessionId="+a+"&connectionType="+b).then(function(a){c&&c(a.data)},function(a){c&&c(a.data)})},createRemoteSession:function(a,b,c,d){if(!a)throw"deviceId is required!";if(!b)throw"companyId is required!";if(!c)throw"connectionType is required!";
-  h.get("/remote/createRemoteSession?deviceId="+a+"&connectionType="+c+"&companyId="+b).then(function(a){d&&d(a.data)},function(a){d&&d(a.data)})},deleteRemoteSession:function(a,b){if(!a)throw"ids is required!";Array.isArray(a)||(a=[a]);var c=h({url:"/remote/deleteRemoteSession",method:"POST",data:a});d.handleCallback(c,b)}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("EmailSettingsService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){return{saveNumberForm:function(g,e,c){if(!g)throw"data is required!";if(!e)throw"type is required!";g.type=e;g=h({url:"/settings/emailPages/updateNumberForm",method:"PUT",data:g});d.handleCallback(g,c)},getCompanyEmailNotification:function(g){var e={};h.get("/settings/emailPages/emailNotifications").then(function(c){d.customizeObj(c.data,e);g&&
+      h.get("/remote/createRemoteSession?deviceId=" + a + "&connectionType=" + c + "&companyId=" + b).then(function (a) {
+        d && d(a.data)
+      }, function (a) {
+        d && d(a.data)
+      })
+    },
+      deleteRemoteSession: function (a, b) {
+        if (!a)throw"ids is required!";
+        Array.isArray(a) || (a = [a]);
+        var c = h({url: "/remote/deleteRemoteSession", method: "POST", data: a});
+        d.handleCallback(c, b)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("EmailSettingsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    return {
+      saveNumberForm: function (g, e, c) {
+        if (!g)throw"data is required!";
+        if (!e)throw"type is required!";
+        g.type = e;
+        g = h({url: "/settings/emailPages/updateNumberForm", method: "PUT", data: g});
+        d.handleCallback(g, c)
+      },
+      getCompanyEmailNotification: function (g) {
+        var e = {};
+        h.get("/settings/emailPages/emailNotifications").then(function (c) {
+          d.customizeObj(c.data, e);
+          g &&
 g(c.data)},function(c){g&&g(c.data)});return e},getEmailSettingPageDto:function(g,e){if(!g)throw"scope is required!";var c=d.customizeObj({});h.get("/settings/emailPages/").then(function(a){d.customizeObj(a.data,c);e&&e(a.data)},function(a){e&&e(a.data)});l.subscribe("/companyEmailNotification",g,function(a){console.log(a);"COMPANY_EMAIL_NOTIFICATION"==a.action&&d.customizeObj(a.data,c.activeAndNotDefault)});return c},getTermsAndConditions:function(g){var e={};h.get("/settings/emailPages/termsAndConditions").then(function(c){d.customizeObj(c.data,
   e);g&&g(c.data)},function(c){g&&g(c.data)});return e},setToDefaultTemplate:function(g,e){if(!g)throw"type is required!";var c=h({url:"/settings/emailPages/toDefaultTemplate/"+g,method:"POST"});d.handleCallback(c,e)},getTemplate:function(g,e){if(!g)throw"type is required!";var c={};h.get("/settings/emailPages/byType/"+g).then(function(a){d.customizeObj(a.data,c);e&&e(a.data)},function(a){e&&e(a.data)});return c},saveEmailTemplate:function(g,e,c){if(!g)throw"data is required!";if(!g.subject)throw"data.subject is required!";
-  if(!g.body)throw"data.body is required!";if(!e)throw"type is required!";g=h({url:"/settings/emailPages/updateTemplate/"+e,method:"PUT",data:g});d.handleCallback(g,c)}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("FilesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){return{create:function(d,e,c,a,b){if(!d)throw"file is required!";var f={},k=new FormData;k.append("file",d);d=new XMLHttpRequest;d.upload.addEventListener("progress",e,!1);d.addEventListener("load",function(a){a=angular.fromJson(a.currentTarget.responseText);for(var b in a)f[b]=a[b];c&&c(f)},!1);d.addEventListener("error",a,!1);d.open("POST","/file?isAvatar="+
+        if (!g.body)throw"data.body is required!";
+        if (!e)throw"type is required!";
+        g = h({url: "/settings/emailPages/updateTemplate/" + e, method: "PUT", data: g});
+        d.handleCallback(g, c)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("FilesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    return {
+      create: function (d, e, c, a, b) {
+        if (!d)throw"file is required!";
+        var f = {}, k = new FormData;
+        k.append("file", d);
+        d = new XMLHttpRequest;
+        d.upload.addEventListener("progress", e, !1);
+        d.addEventListener("load", function (a) {
+          a = angular.fromJson(a.currentTarget.responseText);
+          for (var b in a)f[b] = a[b];
+          c && c(f)
+        }, !1);
+        d.addEventListener("error", a, !1);
+        d.open("POST", "/file?isAvatar=" +
   !!b);d.send(k);return f},createImageFromBase64Url:function(d,e){if(!d)throw"base64Url is required!";var c={};h({url:"/base64image",method:"POST",data:d.substring(22,d.length)}).then(function(a){for(var b in a.data)c[b]=a.data[b];e&&e(c)});return c},getMetadata:function(d,e){if(!d)throw"fileId is required!";var c={id:d};h.get("/file/"+d+"/meta").then(function(a){for(var b in a.data)c[b]=a.data[b];e&&e(c)},function(a){e&&e(a.data)});return c},remove:function(d,e){if(!d)throw"fileId is required!";h({url:"/file/"+
-d,method:"DELETE"}).then(function(c){e&&e(c.data)},function(c){e&&e(c.data)})},cropAvatar:function(d,e){if(!d)throw"image is required!";h({url:"/file/cropImage",method:"POST",data:d}).then(function(c){e&&e(c.data)},function(c){e&&e(c.data)})}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("ProductsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,n,l,d,g){return{search:function(d){if(!d)throw"Keyword is required!";return h.get("/products/search?keyword="+d).then(function(c){return c.data})},getFullListForAutocomplete:function(d){var c=[];h.get("/products/fullList").then(function(a){a.data.forEach(function(a){c.push(a)});d&&d()});return c},getCategories:function(e,c){if(!e||!e.$id)throw"First argument must be Angularjs scope!";
+      d, method: "DELETE"
+      }).then(function (c) {
+        e && e(c.data)
+      }, function (c) {
+        e && e(c.data)
+      })
+      },
+      cropAvatar: function (d, e) {
+        if (!d)throw"image is required!";
+        h({url: "/file/cropImage", method: "POST", data: d}).then(function (c) {
+          e && e(c.data)
+        }, function (c) {
+          e && e(c.data)
+        })
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("ProductsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, l, d, g) {
+    return {
+      search: function (d) {
+        if (!d)throw"Keyword is required!";
+        return h.get("/products/search?keyword=" + d).then(function (c) {
+          return c.data
+        })
+      },
+      getFullListForAutocomplete: function (d) {
+        var c = [];
+        h.get("/products/fullList").then(function (a) {
+          a.data.forEach(function (a) {
+            c.push(a)
+          });
+          d && d()
+        });
+        return c
+      },
+      getCategories: function (e, c) {
+        if (!e || !e.$id)throw"First argument must be Angularjs scope!";
   return d.getListByUrl("/products/categories",c,function(a){l.subscribe("/productCategory",e,function(b){console.log(b);if("PRODUCT_CATEGORY_SAVED"==b.action){var c=d.findById(a,b.data.id);c?d.customizeObj(b.data,c):a.push(d.customizeObj(b.data))}else"PRODUCT_CATEGORY_DELETED"==b.action&&(d.deleteById(a,b.data.id),e.$broadcast("product_category_deleted",b.data))})})},saveCategory:function(e,c){if(!e)throw"category is required!";var a="/products/categories",b="POST";e.id&&(a+="/"+e.id,b="PUT");a=h({url:a,
   method:b,data:e});d.handleCallback(a,c)},deleteCategory:function(e,c){if(!e)throw"categoryId is required argument!";var a=h({url:"/products/categories/"+e,method:"DELETE"});d.handleCallback(a,c)},getAllByCategory:function(e,c,a,b){if(!e||!e.$id)throw"First argument must be Angularjs scope!";if(!c)throw"categoryId is required argument!";var f="/products?categoryId="+c;b&&(f="/products/full?categoryId="+c);return d.getListByUrl(f,a,function(a){l.subscribe("/product?targetId="+c,e,function(b){console.log(b);
   if("PRODUCT_SAVED"==b.action){var c=d.findById(a,b.data.versionedId.id);c?d.customizeObj(b.data,c):a.push(d.customizeObj(b.data))}else"PRODUCT_DELETED"==b.action&&(d.deleteById(a,b.data.versionedId.id),e.$broadcast("product_deleted",b.data))})})},saveProduct:function(e,c){if(!e)throw"product is required!";var a="POST";e.id&&(a="PUT");a=h({url:"/products",method:a,data:e});d.handleCallback(a,c)},deleteProduct:function(e,c){if(!e)throw"productId is required argument!";var a=h({url:"/products/"+e,method:"DELETE"});
   d.handleCallback(a,c)},isProductNameUnique:function(e,c,a,b){if(!e)throw"name is required!";if(!a)throw"vendorId is required!";var f=d.customizeObj({});h.get("/products/isProductNameUnique?name="+e+"&id="+c+"&vendorId="+a).then(function(a){d.customizeObj(a.data,f);b&&b(a.data)},function(a){b&&b(a.data)});return f},getActualCode:function(e,c){if(!e||!e.$id)throw"Second argument must be Angularjs scope!";var a=d.customizeObj({});h.get("/products/actualCode").then(function(b){d.customizeObj(b.data,a);
-  c&&c(b.data)},function(a){c&&c(a.data)});l.subscribe("/productCode",e,function(b){console.log(b);"PRODUCT_CODE_CHANGED"===b.action&&d.defineReadOnlyProperty(a,"value",b.data)});return a}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("RealTimeService",["$http","$timeout","$rootScope",function(h,n,l){function d(){h.post("/realTime/createWatcher").success(function(c){a=c.id;if(0<b.length){for(c=0;c<b.length;c++){var d=b[c];p.subscribe(d.url,d.scope,d.callback)}b=[]}e()}).error(function(a,b,c,d){console.error("Cannot receive watcher Id !!!",a,b,c,d);throw"Cannot initialize RealTimeService";})}function g(){a=u;for(var c in k){var f=k[c];f&&!f.scope.$$destroyed&&b.push(f)}k=
-{};d()}function e(){0<f?n(e,300):h.post("/realTime/watch/"+a,Object.keys(k)||[],{timeout:22E5}).then(function(a){a.data||console.log("No Date in response!");console.log(a.data);if("timeout"==a.data||"destroyed"==a.data.message||205==a.status)g();else if("unauthorized"===a.data.errorMessage||"unauthorized"===a.data.authMessage||"userDisabled"===a.statusText)"userDisabled"===a.statusText&&alert("Your account has been disabled."),t.location.pathname="/logout";else{for(var b in a.data){var c=k[b];if(c&&
+        c && c(b.data)
+      }, function (a) {
+        c && c(a.data)
+      });
+        l.subscribe("/productCode", e, function (b) {
+          console.log(b);
+          "PRODUCT_CODE_CHANGED" === b.action && d.defineReadOnlyProperty(a, "value", b.data)
+        });
+        return a
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("RealTimeService", ["$http", "$timeout", "$rootScope", function (h, n, l) {
+    function d() {
+      h.post("/realTime/createWatcher").success(function (c) {
+        a = c.id;
+        if (0 < b.length) {
+          for (c = 0; c < b.length; c++) {
+            var d = b[c];
+            p.subscribe(d.url, d.scope, d.callback)
+          }
+          b = []
+        }
+        e()
+      }).error(function (a, b, c, d) {
+        console.error("Cannot receive watcher Id !!!", a, b, c, d);
+        throw"Cannot initialize RealTimeService";
+      })
+    }
+
+    function g() {
+      a = t;
+      for (var c in k) {
+        var f = k[c];
+        f && !f.scope.$$destroyed && b.push(f)
+      }
+      k =
+      {};
+      d()
+    }
+
+    function e() {
+      0 < f ? n(e, 300) : h.post("/realTime/watch/" + a, Object.keys(k) || [], {timeout: 22E5}).then(function (a) {
+        a.data || console.log("No Date in response!");
+        console.log(a.data);
+        if ("timeout" == a.data || "destroyed" == a.data.message || 205 == a.status)g(); else if ("unauthorized" === a.data.errorMessage || "unauthorized" === a.data.authMessage || "userDisabled" === a.statusText)"userDisabled" === a.statusText && alert("Your account has been disabled."), u.location.pathname = "/logout"; else {
+          for (var b in a.data) {
+            var c = k[b];
+            if (c &&
   !c.scope.$$destroyed){var d=a.data[b];if(d)for(var f=0;f<d.length;f++)c.callback(d[f])}}e()}},function(a){a&&0!==a.status?205==a.status?g():(console.log("ERRRORRR!!!!!!!!!!!!",a),n(e,300)):(console.log("ERRRORRR?????",a),n(g,1E3))})}function c(a){for(var b in k){var d=k[b];d&&!d.scope.$$destroyed&&d.callback!==c&&d.callback(a)}"COMPANY_ARCHIVED"!==a.action&&"COMPANY_DEARCHIVED"!==a.action||l.$broadcast(a.action.toLowerCase(),a.data.id)}var a,b=[{url:"/global",scope:l,callback:c}],f=0,k={};d();var p=
-{subscribe:function(c,d,e){a?(f++,h.get("/realTime/subscribe/"+a+c).success(function(a){f--;k[a.id]={url:c,scope:d,callback:e};d.$on("$destroy",function(){delete k[a.id]})}).error(function(a,k,p,y){f--;205==k&&(b.push({url:c,scope:d,callback:e}),g());console.error("Cannot subscribe on "+c,a,k,p,y)})):b.push({url:c,scope:d,callback:e})}};return p}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("ReceiptArchiveService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){return{getReceiptArchiveData:function(g,e){if(!g||!g.$id)throw"First argument must be Angularjs scope!";var c=d.customizeObj({list:[],companies:{}});h.get("/receiptArchive").then(function(a){d.customizeArray(a.data,c.list);c.list.forEach(function(a){var f=c.companies[a.companyId];f?f.push(a):d.defineReadOnlyProperty(c.companies,a.companyId,d.customizeArray([a]))});
+    {
+      subscribe: function (c, d, e) {
+        a ? (f++, h.get("/realTime/subscribe/" + a + c).success(function (a) {
+          f--;
+          k[a.id] = {url: c, scope: d, callback: e};
+          d.$on("$destroy", function () {
+            delete k[a.id]
+          })
+        }).error(function (a, k, p, y) {
+          f--;
+          205 == k && (b.push({url: c, scope: d, callback: e}), g());
+          console.error("Cannot subscribe on " + c, a, k, p, y)
+        })) : b.push({url: c, scope: d, callback: e})
+      }
+    };
+    return p
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("ReceiptArchiveService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    return {
+      getReceiptArchiveData: function (g, e) {
+        if (!g || !g.$id)throw"First argument must be Angularjs scope!";
+        var c = d.customizeObj({list: [], companies: {}});
+        h.get("/receiptArchive").then(function (a) {
+          d.customizeArray(a.data, c.list);
+          c.list.forEach(function (a) {
+            var f = c.companies[a.companyId];
+            f ? f.push(a) : d.defineReadOnlyProperty(c.companies, a.companyId, d.customizeArray([a]))
+          });
   l.subscribe("/receiptArchive",g,function(a){console.log(a);if("RECEIPT_ARCHIVE_ADDED"===a.action){for(var f=[],k=0;k<a.data.length;k++){var e=a.data[k],m;if(e.recurringInvoice){var g=d.findById(c.list,e.recurringInvoice.id);g?(d.defineReadOnlyProperty(g,"invoicesCount",g.invoicesCount+1),d.defineReadOnlyProperty(g,"sum",g.sum+e.sum),e.date>g.date&&(d.defineReadOnlyProperty(g,"date",e.date),d.defineReadOnlyProperty(g,"paidOn",e.paidOn))):m=d.customizeObj({id:e.recurringInvoice.id,isRecurring:!0,frequency:e.recurringInvoice.frequency,
     number:e.recurringInvoice.number,companyId:e.company.id,date:e.date,paidOn:e.paidOn,sum:e.sum,invoicesCount:1})}else m=d.customizeObj({id:e.id,isRecurring:!1,frequency:null,number:e.number,companyId:e.company.id,date:e.date,paidOn:e.paidOn,sum:e.sum,invoicesCount:null});m&&(c.list.push(m),(e=c.companies[m.companyId])?e.push(m):d.defineReadOnlyProperty(c.companies,m.companyId,d.customizeArray([m])),0>f.indexOf(m.companyId)&&f.push(m.companyId))}c.list.sort(d.getComparatorBy("number"));f.forEach(function(a){c.companies[a].sort(d.getComparatorBy("number"))})}else if("COMPANY_ARCHIVED"===
-    a.action){for(k=0;k<c.list.length;k++)c.list[k].companyId===a.data.id&&(c.list.splice(k,1),k--);delete c.companies[a.data.id]}});e&&e(a.data)},function(a){e&&e(a.data)});return c}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("ReceivableService",["$http","$rootScope","RealTimeService","CompaniesService","Utils","$filter",function(h,n,l,d,g){function e(c,a){if(!c)throw"invoiceIds is required!";var b=h({url:"/receivable/resend",method:"POST",data:c});g.handleCallback(b,a)}return{getReceivedPaymentsSumByCompany:function(c,a,b){if(!c)throw"companyId is required!";if(!a||!a.$id)throw"Second argument must be Angularjs scope!";var d=g.customizeObj({});h.get("/receivable/paymentSum/"+
+    a.action) {
+    for (k = 0; k < c.list.length; k++)c.list[k].companyId === a.data.id && (c.list.splice(k, 1), k--);
+    delete c.companies[a.data.id]
+  }
+  });
+          e && e(a.data)
+        }, function (a) {
+          e && e(a.data)
+        });
+        return c
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("ReceivableService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (h, n, l, d, g) {
+    function e(c, a) {
+      if (!c)throw"invoiceIds is required!";
+      var b = h({url: "/receivable/resend", method: "POST", data: c});
+      g.handleCallback(b, a)
+    }
+
+    return {
+      getReceivedPaymentsSumByCompany: function (c, a, b) {
+        if (!c)throw"companyId is required!";
+        if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+        var d = g.customizeObj({});
+        h.get("/receivable/paymentSum/" +
   c).then(function(e){g.customizeObj(e.data,d);l.subscribe("/companyPaymentReceived?targetId="+c,a,function(a){console.log(a);"COMPANY_PAYMENT_RECEIVED"===a.action?(g.defineReadOnlyProperty(d,"value",d.value+a.data),b&&b(d)):"RECEIVED_PAYMENTS_SUM"===a.action&&g.defineReadOnlyProperty(d,"value",a.data)});b&&b(e.data)},function(a){b&&b(a.data)});return d},getReceivableGraphData:function(c,a){var b=g.customizeArray([]);h.get("/receivable/chart/lastDays").then(function(f){g.customizeArray(f.data,b);l.subscribe("/todayReceivableChartPoint?targetId="+
   d.getCurrentCompany().id,c,function(a){console.log(a);if("TODAY_RECEIVABLE_CHART_POINT"===a.action){var c=b[b.length-1],d=new Date(c.date),f=new Date(a.data.date);d.getFullYear()===f.getFullYear()&&d.getMonth()===f.getMonth()&&d.getDate()+1===f.getDate()?(b.push(g.customizeObj(a.data)),b.splice(0,1)):g.customizeObj(a.data,c)}});a&&a(f.data)},function(b){a&&a(b.data)});return b},getReceivableInvoicesData:function(c,a){if(!c||!c.$id)throw"First argument must be Angularjs scope!";var b=g.customizeObj({list:[],
   companies:{}});h.get("/receivable").then(function(d){for(var e=g.customizeArray([]),h=0;h<d.data.length;h++){var m=g.customizeObj(d.data[h]);if(m.recurringInvoice){var r=g.findById(e,m.recurringInvoice.id);r||(r=m.recurringInvoice,g.defineReadOnlyProperty(r,"isRecurring",!0),g.defineReadOnlyProperty(r,"company",m.company),g.defineReadOnlyProperty(r,"invoices",g.customizeArray([])),e.push(r));g.defineReadOnlyProperty(m,"recurringInvoice",{id:r.id,frequency:r.frequency});r.invoices.push(m)}else e.push(m)}e.sort(g.getComparatorBy("number"));
   for(h=0;h<e.length;h++)m=e[h],b.companies[m.company.id]||g.defineReadOnlyProperty(b.companies,m.company.id,g.customizeArray([])),b.companies[m.company.id].push(m);g.defineReadOnlyProperty(b,"list",e);l.subscribe("/receivableInvoice",c,function(a){console.log(a);if("INVOICE_SAVED"==a.action){var c=a.data,d;c.recurringInvoice?(a=g.findById(b.list,c.recurringInvoice.id),a||(a=c.recurringInvoice,a.isRecurring=!0,a.company=c.company,a.invoices=[],d=a),c.recurringInvoice={id:a.id,frequency:a.frequency},
     a.invoices.push(c)):d=c;d&&(d=g.customizeObj(d),b.companies[d.company.id]||g.defineReadOnlyProperty(b.companies,d.company.id,[]),b.companies[d.company.id].push(d),b.list.push(d))}else if("INVOICE_STATUS"===a.action)a.data.recurringInvoice?((c=g.findById(b.list,a.data.recurringInvoice.id))||console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING RECURRING INVOICE-----!!!!!!!"),c=g.findById(c.invoices,a.data.id)):c=g.findById(b.list,a.data.id),c?g.defineReadOnlyProperty(c,"status",a.data.status):
-    console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!");else if("PAYMENT_RECEIVED"===a.action)for(a=a.data,c=0;c<a.length;c++){var f=a[c],e=u;d=u;for(var k=0;k<b.list.length&&!d;k++){var m=b.list[k];if(m.isRecurring)for(var h=0;h<m.invoices.length&&!d;h++){var r=m.invoices[h];f===r.id&&(m.invoices.splice(h,1),d=r.company.id,e=m.id,0===m.invoices.length&&b.list.splice(k,1))}else f===m.id&&(b.list.splice(k,1),d=m.company.id)}d&&b.companies[d]&&(k=b.companies[d],e?(e=g.indexOfId(k,
+          console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!"); else if ("PAYMENT_RECEIVED" === a.action)for (a = a.data, c = 0; c < a.length; c++) {
+          var f = a[c], e = t;
+          d = t;
+          for (var k = 0; k < b.list.length && !d; k++) {
+            var m = b.list[k];
+            if (m.isRecurring)for (var h = 0; h < m.invoices.length && !d; h++) {
+              var r = m.invoices[h];
+              f === r.id && (m.invoices.splice(h, 1), d = r.company.id, e = m.id, 0 === m.invoices.length && b.list.splice(k, 1))
+            } else f === m.id && (b.list.splice(k, 1), d = m.company.id)
+          }
+          d && b.companies[d] && (k = b.companies[d], e ? (e = g.indexOfId(k,
     e),-1<e&&(-1<g.indexOfId(k[e].invoices,f)&&k[e].invoices.splice(e,1),0===k[e].invoices.length&&k.splice(e,1))):(f=g.indexOfId(k,f),-1<f&&k.splice(f,1)),0===k.length&&delete b.companies[d])}else if("COMPANY_ARCHIVED"==a.action)for(delete b.companies[a.data.id],c=0;c<b.list.length;c++)b.list[c].company.id===a.data.id&&(b.list.splice(c,1),c--)});a&&a(d.data)},function(b){a&&a(b.data)});return b},receivePayment:function(c,a,b){if(!c)throw"paymentMethod is required!";if(!a||0===a.length)throw"invoiceIds is required!";
-  c=h({url:"/receivable/receivePayment",method:"POST",params:{paymentMethod:c.toUpperCase()},data:a});g.handleCallback(c,b)},resendInvoice:function(c,a){if(!c)throw"invoiceId is required!";e([c],a)},resendInvoices:e,search:function(c){if(!c)throw"Keyword is required!";return h.get("/receivable/search?keyword="+c).then(function(a){return a.data})}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("RecurringService",["$http","$rootScope","RealTimeService","CompaniesService","Utils","$filter",function(h,n,l,d,g){function e(a,b,c,d){if(!b)throw"recurringInvoiceId is required!";if(!c)throw"expense is required!";a={url:"/recurringInvoice/"+b+"/"+a,data:c};c.id?(a.method="PUT",a.url=a.url+"/"+c.id):a.method="POST";c=h(a);g.handleCallback(c,d)}function c(a,b,c){if(!a)throw"recurringInvoiceId is required!";if(!b)throw"expenseId is required!";
+        c = h({url: "/receivable/receivePayment", method: "POST", params: {paymentMethod: c.toUpperCase()}, data: a});
+        g.handleCallback(c, b)
+      },
+      resendInvoice: function (c, a) {
+        if (!c)throw"invoiceId is required!";
+        e([c], a)
+      },
+      resendInvoices: e,
+      search: function (c) {
+        if (!c)throw"Keyword is required!";
+        return h.get("/receivable/search?keyword=" + c).then(function (a) {
+          return a.data
+        })
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("RecurringService", ["$http", "$rootScope", "RealTimeService", "CompaniesService", "Utils", "$filter", function (h, n, l, d, g) {
+    function e(a, b, c, d) {
+      if (!b)throw"recurringInvoiceId is required!";
+      if (!c)throw"expense is required!";
+      a = {url: "/recurringInvoice/" + b + "/" + a, data: c};
+      c.id ? (a.method = "PUT", a.url = a.url + "/" + c.id) : a.method = "POST";
+      c = h(a);
+      g.handleCallback(c, d)
+    }
+
+    function c(a, b, c) {
+      if (!a)throw"recurringInvoiceId is required!";
+      if (!b)throw"expenseId is required!";
   a=h({url:"/recurringInvoice/"+a+"/expense/"+b,method:"DELETE"});g.handleCallback(a,c)}return{getRecurringGraphData:function(a,b){var c=["WEEKLY","MONTHLY","YEARLY"],d=g.customizeArray([]);h.get("/recurringInvoice/billed/lastDays").then(function(e){g.customizeArray(e.data,d);l.subscribe("/recurringChart",a,function(a){console.log(a);if("RECURRING_CHART"===a.action){for(var b=new Date(a.data.date),e=0;e<d.length;e++){var h=d[e],p=new Date(h[h.length-1].date);p.getFullYear()===b.getFullYear()&&p.getMonth()===
 b.getMonth()&&p.getDate()+1===b.getDate()&&(h.push(g.customizeObj({date:g.formatDate(b),sum:0})),h.splice(0,1))}b=c.indexOf(a.data.type);b=d[b];g.defineReadOnlyProperty(b[b.length-1],"sum",a.data.sum)}});b&&b(e.data)},function(a){b&&b(a.data)});return d},getRecurringCompanies:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var c=[];h({url:"/recurringInvoice/total",method:"GET"}).then(function(d){g.customizeArray(d.data,c);l.subscribe("/recurringTotal",a,function(a){console.log(a);
   if("CLIENT_RECURRING_TOTAL"===a.action){var b=g.indexOfId(c,a.data.id);if(0===a.data.total)-1<b&&c.splice(b,1);else if(-1<b)g.customizeObj(a.data,c[b]);else{for(var b=!0,d=0;d<c.length;d++)c[d].company.id===a.data.company.id&&(c[d].id=a.data.id,c[d].total=a.data.total,c[d].invoicesCount=a.data.invoicesCount,b=!1);b&&c.push(g.customizeObj(a.data))}}else if("COMPANY_ARCHIVED"==a.action)for(b=0;b<c.length;b++)c[b].company.id===a.data.id&&(c.splice(b,1),b--)});b&&b(d.data)},function(a){b&&b(a.data)});
   return c},getCompanyRecurringInvoices:function(a,b,c){if(!a)throw"companyId is required!";if(!b||!b.$id)throw"Second argument must be Angularjs scope!";var d=[];h.get("/recurringInvoice?companyId="+a).then(function(e){g.customizeArray(e.data,d);l.subscribe("/recurring?targetId="+a,b,function(a){console.log(a);if("RECURRING_SAVED"==a.action){var b=g.findById(d,a.data.id);b?g.customizeObj(a.data,b):d.push(g.customizeObj(a.data))}else"RECURRING_DELETE"==a.action&&(a=g.indexOfId(d,a.data.id),-1<a&&d.splice(a,
   1))});c&&c(e.data)},function(a){c&&c(a.data)});return d},createRecurringInvoice:function(a,b,c){if(!a)throw"recurringInvoice is required!";if(!b)throw"companyId is required!";a.company={id:b};a=h({url:"/recurringInvoice",method:"POST",data:a});g.handleCallback(a,c)},deleteRecurringInvoice:function(a,b){if(!a)throw"recurringInvoiceId is required!";var c=h({url:"/recurringInvoice/"+a,method:"DELETE"});g.handleCallback(c,b)},deleteAllRecurringInvoicesByCompany:function(a,b,c){if(!a)throw"companyId is required!";
   var d=h({url:"/recurringInvoice/company/"+a,method:"DELETE"});g.handleCallback(d,function(d){if(b)for(var e=0;e<b.length;e++)b[e].company.id===a&&(b.splice(e,1),e--);c&&c(d.data)})},saveRecInvProductExpense:function(a,b,c){e("productExpense",a,b,c)},saveRecInvServiceExpense:function(a,b,c){e("serviceExpense",a,b,c)},deleteProductExpenseFromRecInv:function(a,b,d){c(a,b,d)},deleteServiceExpenseFromRecInv:function(a,b,d){c(a,b,d)},search:function(a){if(!a)throw"Keyword is required!";return h.get("/recurringInvoice/search?keyword="+
-  a).then(function(a){return a.data})},addCompany:function(a,b){if(!a)throw"recurring is required!";if(!b)throw"companyId is required!";for(var c=0;c<a.length;c++)if(a[c].company.id===b)return;a.push({company:d.getOneById(b),total:0,ticketsCount:0})}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("RightPanelService",["$http","$rootScope","RealTimeService","Utils","CompaniesService","UsersService","DevicesService",function(h,n,l,d,g,e,c){function a(){k.groupedData.splice(0,k.groupedData.length);for(var a=g.getClientCompanies(),b=0;b<a.length;b++){var d=a[b];k.groupedData.push({company:d,users:e.getAllByCompanyId(d.id),devices:c.getAgentsByCompany(f,d.id)})}}function b(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";
+      a).then(function (a) {
+      return a.data
+    })
+    },
+      addCompany: function (a, b) {
+        if (!a)throw"recurring is required!";
+        if (!b)throw"companyId is required!";
+        for (var c = 0; c < a.length; c++)if (a[c].company.id === b)return;
+        a.push({company: d.getOneById(b), total: 0, ticketsCount: 0})
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("RightPanelService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", "UsersService", "DevicesService", function (h, n, l, d, g, e, c) {
+    function a() {
+      k.groupedData.splice(0, k.groupedData.length);
+      for (var a = g.getClientCompanies(), b = 0; b < a.length; b++) {
+        var d = a[b];
+        k.groupedData.push({company: d, users: e.getAllByCompanyId(d.id), devices: c.getAgentsByCompany(f, d.id)})
+      }
+    }
+
+    function b(a, b) {
+      if (!a || !a.$id)throw"First argument must be Angularjs scope!";
   var c=k.lists[a.$id];if(!c)throw"There is no activities list for scope "+a.$id;c.loadingInProcess?console.log("Loading tickets already in process"):(0<c.list.length&&(c.params.createdAt=c.list[c.list.length-1].createdAt),c.loadingInProcess=!0,h({method:"GET",url:"/activity/",params:c.params}).then(function(a){a&&(d.customizeArray(a.data,c.list),c.loadingInProcess=!1,b&&b(a.data));c.loadingInProcess=!1},function(a){c.loadingInProcess=!1;b&&b(a.data)}))}var f=n.$new(),k={lists:{},recentActivities:{},
   groupedData:[]};d.customizeObj(k);g._addAmountChangeListener(a);return{getActivities:function(a,c,e){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var f=d.customizeObj([]),g=!k.lists[a.$id];k.lists[a.$id]={params:c,scope:a,list:f};b(a,function(b){g&&l.subscribe("/activity",a,function(b){console.log(b);"ACTIVITY_CREATED"==b.action&&k.lists[a.$id].list.unshift(d.customizeObj(b.data))});e&&e(b)});a.$on("$destroy",function(){delete k.lists[a.$id]});return f},getRecentActivities:function(a,
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          b,c){if(!a||!a.$id)throw"First argument must be Angularjs scope!";b.keyword="";var e=d.customizeObj([]);k.recentActivities[a.$id]={params:b,scope:a,list:e};h({method:"GET",url:"/activity/",params:b}).then(function(a){a&&(d.customizeArray(a.data,e),c&&c(a.data))},function(a){c&&c(a.data)});l.subscribe("/activity",a,function(a){console.log(a);"ACTIVITY_CREATED"==a.action&&(e.unshift(d.customizeObj(a.data)),e.pop())});a.$on("$destroy",function(){delete k.lists[a.$id]});return e},loadMoreActivities:b,
   getClientCompaniesGroupedData:function(){0==k.groupedData.length&&a();return k.groupedData},getOneCompanyGroupedData:function(a){return{company:g.getOneById(a),users:e.getAllByCompanyId(a),devices:c.getAgentsByCompany(f,a)}},getCurrentUserInfo:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var c=d.customizeObj({});h.get("/userInfo").then(function(a){d.customizeObj(a.data,c);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/rightBarUserInfo",a,function(a){console.log(a);
-    "RB_USER_INFO"==a.action&&d.customizeObj(a.data,c)});return c},getClientCompanyInfo:function(a,b,c){if(!a||!a.$id)throw"First argument must be Angularjs scope!";if(!b)throw"companyId is required!";var e=d.customizeObj({});h.get("/companyInfo/"+b).then(function(a){d.customizeObj(a.data,e);c&&c(a.data)},function(a){c&&c(a.data)});l.subscribe("/rightBarCompanyInfo?targetId="+b,a,function(a){console.log(a);"RB_COMPANY_INFO"==a.action&&d.customizeObj(a.data,e)});return e}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("ServicesService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,n,l,d,g){function e(c,a){var b=a.company.id;b===g.getCurrentCompany().id&&(b="default");c[b]||d.defineReadOnlyProperty(c,b,[]);var e=d.findById(c[b],a.id);e?d.customizeObj(a,e):c[b].push(d.customizeObj(a))}return{search:function(c){if(!c)throw"Keyword is required!";return h.get("/services/search?keyword="+c).then(function(a){return a.data})},getAllByCompany:function(c,
+        "RB_USER_INFO" == a.action && d.customizeObj(a.data, c)
+      });
+        return c
+      },
+      getClientCompanyInfo: function (a, b, c) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        if (!b)throw"companyId is required!";
+        var e = d.customizeObj({});
+        h.get("/companyInfo/" + b).then(function (a) {
+          d.customizeObj(a.data, e);
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        l.subscribe("/rightBarCompanyInfo?targetId=" + b, a, function (a) {
+          console.log(a);
+          "RB_COMPANY_INFO" == a.action && d.customizeObj(a.data, e)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("ServicesService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, l, d, g) {
+    function e(c, a) {
+      var b = a.company.id;
+      b === g.getCurrentCompany().id && (b = "default");
+      c[b] || d.defineReadOnlyProperty(c, b, []);
+      var e = d.findById(c[b], a.id);
+      e ? d.customizeObj(a, e) : c[b].push(d.customizeObj(a))
+    }
+
+    return {
+      search: function (c) {
+        if (!c)throw"Keyword is required!";
+        return h.get("/services/search?keyword=" + c).then(function (a) {
+          return a.data
+        })
+      },
+      getAllByCompany: function (c,
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            a,b){if(!c||!c.$id)throw"First argument must be Angularjs scope!";if(!a||"[object Function]"===Object.prototype.toString.call(a))throw"companyId is required argument!";return d.getListByUrl("/services/"+a,b,function(a){})},getServicesData:function(c,a,b){function f(a){var b;a:{b=k;var c=a.versionedId.id,f;for(f in b)if("staticCopy"!=f){var g=d.findById(b[f],c);if(g){b=g;break a}}b=void 0}b?d.customizeObj(a,b):e(k,a)}if(!c||!c.$id)throw"First argument must be Angularjs scope!";var k=d.customizeObj({}),
   g="/services";a&&(g+="/getDefaultServices");h.get(g).then(function(a){for(var c=0;c<a.data.length;c++)e(k,a.data[c]);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/service",c,function(a){console.log(a);if("SERVICE_SAVED"==a.action)f(a.data);else if("SERVICE_LIST_SAVED"==a.action)for(var b=0;b<a.data.length;b++)f(a.data[b]);else if("SERVICES_MOVED"==a.action)for(b=0;b<a.data.length;b++)e(k,a.data[b]);else if("COMPANY_SERVICES_DELETED"==a.action)delete k[a.data.id];else if("SERVICES_DELETED"==
   a.action)for(b=0;b<a.data.length;b++){var c=a.data[b].versionedId.id,g=k,h=void 0;for(h in g){var p=d.indexOfId(g[h],c);-1<p&&g[h].splice(p,1)}}else"COMPANY_ARCHIVED"==a.action&&delete k[a.data.id]});return k},save:function(c,a){if(!c)throw"service is required!";var b="/services",e="POST";c.id&&(e="PUT",b=b+"/"+c.id);b=h({url:b,method:e,data:c});d.handleCallback(b,a)},saveList:function(c,a,b){if(!c)throw"services is required!";if(!a)throw"companyId is required!";c=h({url:"/services/saveList/"+a,method:"POST",
   data:{serviceDtoList:c}});d.handleCallback(c,b)},addCompanyToServiceData:function(c,a){if(!c)throw"data argument is required";if(!a)throw"companyId argument is required";c[a]||d.defineReadOnlyProperty(c,a,[])},deleteCompanyFromServiceData:function(c,a){if(0<c[a].length)throw"This action cannot be performed on company that has not empty services list! Use deleteCompany() method.";delete c[a]},deleteService:function(c,a){if(!c)throw"serviceId is required argument!";var b=h({url:"/services/"+c,method:"DELETE"});
-  d.handleCallback(b,a)},deleteCompany:function(c,a){if(!c)throw"companyId is required argument!";var b=h({url:"/services/company/"+c,method:"DELETE"});d.handleCallback(b,a)},move:function(c,a){if(!c)throw"mapping is required argument!";var b=h({url:"/services/move",method:"POST",data:c});d.handleCallback(b,a)},getActualMapping:function(c){var a={},b;for(b in c)if("default"!=b&&"staticCopy"!=b){for(var d=[],e=c[b],g=0;g<e.length;g++)d.push(e[g].originService.versionedId.id);a[b]=d}return a}}}])})(window,
-  jQuery);(function(t,w,u){angular.module("main.services").factory("StatisticsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,n,l,d,g){return{getResolvedTicketsCountByCompany:function(e,c,a){if(!e)throw"companyId is required!";if(!c||!c.$id)throw"Second argument must be Angularjs scope!";var b=d.customizeObj({});h.get("/statistic/tickets/resolvedCount/"+e).then(function(f){d.customizeObj(f.data,b);l.subscribe("/resolvedTicketsCount?targetId="+e,c,function(a){console.log(a);
+        d.handleCallback(b, a)
+      },
+      deleteCompany: function (c, a) {
+        if (!c)throw"companyId is required argument!";
+        var b = h({url: "/services/company/" + c, method: "DELETE"});
+        d.handleCallback(b, a)
+      },
+      move: function (c, a) {
+        if (!c)throw"mapping is required argument!";
+        var b = h({url: "/services/move", method: "POST", data: c});
+        d.handleCallback(b, a)
+      },
+      getActualMapping: function (c) {
+        var a = {}, b;
+        for (b in c)if ("default" != b && "staticCopy" != b) {
+          for (var d = [], e = c[b], g = 0; g < e.length; g++)d.push(e[g].originService.versionedId.id);
+          a[b] = d
+        }
+        return a
+      },
+      changeBillableStatus: function (c,
+                                      a, b) {
+        if (!c)throw"ids is required argument!";
+        if (a === t)throw"toBillable is required argument!";
+        Array.isArray(c) || (c = [c]);
+        c = h({url: "/services/changeBillableStatus?toBillable=" + !!a, method: "POST", data: c});
+        d.handleCallback(c, b)
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("StatisticsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, l, d, g) {
+    return {
+      getResolvedTicketsCountByCompany: function (e, c, a) {
+        if (!e)throw"companyId is required!";
+        if (!c || !c.$id)throw"Second argument must be Angularjs scope!";
+        var b = d.customizeObj({});
+        h.get("/statistic/tickets/resolvedCount/" + e).then(function (f) {
+          d.customizeObj(f.data, b);
+          l.subscribe("/resolvedTicketsCount?targetId=" + e, c, function (a) {
+            console.log(a);
   "RESOLVED_TICKETS_COUNT"===a.action&&d.defineReadOnlyProperty(b,"value",a.data)});a&&a(f.data)},function(b){a&&a(b.data)});return b},getTicketsResolutionTimeChartDataByCompany:function(e,c,a){if(!e)throw"companyId is required!";if(!c||!c.$id)throw"Second argument must be Angularjs scope!";var b=d.customizeObj({});h.get("/statistic/tickets/resolutionTime/"+e).then(function(f){d.customizeObj(f.data,b);l.subscribe("/ticketsResolutionTimeChart?targetId="+e,c,function(a){console.log(a);"TICKETS_RESOLUTION_TIME_CHART"===
 a.action&&d.customizeObj(a.data,b)});a&&a(f.data)},function(b){a&&a(b.data)});return b},getTimeBilledByCompany:function(e,c,a){if(!e)throw"companyId is required!";if(!c||!c.$id)throw"Second argument must be Angularjs scope!";var b=d.customizeObj({});h.get("/statistic/billed/time/"+e).then(function(f){d.customizeObj(f.data,b);l.subscribe("/billedTimeStatistic?targetId="+e,c,function(a){console.log(a);"BILLED_TIME_STATISTIC"===a.action&&d.defineReadOnlyProperty(b,"value",a.data)});a&&a(f.data)},function(b){a&&
 a(b.data)});return b},getReceivableAmountByCompany:function(e,c,a){if(!e)throw"companyId is required!";if(!c||!c.$id)throw"Second argument must be Angularjs scope!";var b=d.customizeObj({});h.get("/statistic/companies/receivable/"+e).then(function(f){d.customizeObj(f.data,b);l.subscribe("/todayReceivableChartPoint?targetId="+e,c,function(c){console.log(c);"TODAY_RECEIVABLE_CHART_POINT"===c.action&&d.defineReadOnlyProperty(b,"value",c.data.receivableLeft);a&&a(b)});a&&a(f.data)},function(b){a&&a(b.data)});
@@ -92,21 +624,126 @@ a(b.data)});return b},getTotalEarningsByDays:function(e,c,a,b,f){if(!e)throw"com
     g);c(new Date(h))&&l.subscribe("/todayReceivableChartPoint?targetId="+e,b,function(a){console.log(a);"TODAY_RECEIVABLE_CHART_POINT"===a.action&&c(new Date(a.data.date))&&d.defineReadOnlyProperty(g,h,a.data.total)});f&&f(a.data)},function(a){f&&f(a.data)});return g},getTicketsClosedByDays:function(e,c,a,b,f){if(!e)throw"companyId is required!";if(!c)throw"from date is required!";if(!a)throw"to date is required!";if(c.getTime()>a.getTime())throw"from date should be less that to date!";if(!b||!b.$id)throw"Angularjs scope is required!";
   var g=d.customizeObj({});h.get("/statistic/companies/resolvedTicket/interval/"+e+"?from="+d.formatDate(c)+"&to="+d.formatDate(a)).then(function(a){function c(a){var b,d;for(d in a)if("staticCopy"!=d){b=d;break}if(b){a=new Date(a[b]);for(var e in g)if("staticCopy"!==e&&(b=new Date(e),b.getFullYear()===a.getFullYear()&&b.getMonth()===a.getMonth()&&b.getDate()===a.getDate()))return e}}d.customizeObj(a.data,g);l.subscribe("/ticketResolution?targetId="+e,b,function(a){console.log(a);"TICKET_RESOLVED"===
   a.action?(a=c(a.data))&&d.defineReadOnlyProperty(g,a,g[a]+1):"TICKET_REOPENED"===a.action&&(a=c(a.data))&&d.defineReadOnlyProperty(g,a,g[a]-1);f&&f()});f&&f(a.data)},function(a){f&&f(a.data)});return g},getUserSubmittedTicketsByCompany:function(e,c,a){if(!e)throw"companyId is required!";if(!c||!c.$id)throw"Angularjs scope is required!";var b=d.customizeObj({});h.get("/statistic/tickets/submittedTickets/"+e).then(function(f){d.customizeObj(f.data,b);l.subscribe("/userSubmittedTicket?targetId="+e,c,
-  function(a){console.log(a);"USER_SUBMITTED_TICKET"===a.action&&d.defineReadOnlyProperty(b,a.data,(b[a.data]||0)+1)});a&&a(f.data)},function(b){a&&a(b.data)});return b}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("SubscriptionsService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,n,l,d,g){function e(c,a,b,e,g){var p=d.customizeObj({});h(c).then(function(c){for(var h=0;h<c.data.length;h++){var n=c.data[h];d.defineReadOnlyProperty(p,n.user.id,d.customizeObj(n))}l.subscribe("/subscription?targetId="+a,b,function(a){console.log(a);"SUBSCRIPTION_SAVED"==a.action?a.data.user&&(!g||-1<g.indexOf(a.data.user.id))&&d.defineReadOnlyProperty(p,
+        function (a) {
+          console.log(a);
+          "USER_SUBMITTED_TICKET" === a.action && d.defineReadOnlyProperty(b, a.data, (b[a.data] || 0) + 1)
+        });
+        a && a(f.data)
+      }, function (b) {
+        a && a(b.data)
+      });
+        return b
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("SubscriptionsService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, l, d, g) {
+    function e(c, a, b, e, g) {
+      var p = d.customizeObj({});
+      h(c).then(function (c) {
+        for (var h = 0; h < c.data.length; h++) {
+          var n = c.data[h];
+          d.defineReadOnlyProperty(p, n.user.id, d.customizeObj(n))
+        }
+        l.subscribe("/subscription?targetId=" + a, b, function (a) {
+          console.log(a);
+          "SUBSCRIPTION_SAVED" == a.action ? a.data.user && (!g || -1 < g.indexOf(a.data.user.id)) && d.defineReadOnlyProperty(p,
   a.data.user.id,d.customizeObj(a.data)):"SUBSCRIPTION_DELETED"==a.action&&delete p[a.data.user.id]});e&&e(c.data)},function(a){e&&e(a.data)});return p}return{saveUserSubscription:function(c,a){if(!c)throw"userSubscription is required argument!";var b="/subscription",e="POST";c.id&&(b+="/"+c.id,e="PUT");b=h({url:b,method:e,data:c});d.handleCallback(b,a)},deleteUserSubscription:function(c,a){if(!c)throw"userSubscriptionId is required argument!";var b=h({url:"/subscription/"+c,method:"DELETE"});d.handleCallback(b,
   a)},getUserSubscriptionsByCompanyId:function(c,a,b){if(!c)throw"companyId is required argument!";if(!a||!a.$id)throw"Second argument must be Angularjs scope!";return e({url:"/subscription/company/users/"+c,method:"GET"},c,a,b)},getAllClientUserSubscriptions:function(c,a){if(!c||!c.$id)throw"Second argument must be Angularjs scope!";return e({url:"/subscription/clientUsers",method:"GET"},g.getCurrentCompany().id,c,a)},getUserSubscriptionsByUserIds:function(c,a,b){if(!c||0==c.length)throw"userIds is required argument!";
-  if(!a||!a.$id)throw"Second argument must be Angularjs scope!";Array.isArray(c)||(c=[c]);return e({url:"/subscription/users/",method:"POST",data:c},g.getCurrentCompany().id,a,b,c)}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("TaxRatesService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){return{getAllByCompany:function(g,e,c){if(!e||!e.$id)throw"First argument must be Angularjs scope!";if(!g||"[object Function]"===Object.prototype.toString.call(g))throw"companyId is required argument!";return d.getListByUrl("/taxRate/"+g,c,function(a){l.subscribe("/taxRate?targetId="+g,e,function(b){console.log(b);if("TAX_RATE_SAVE"==b.action){var c=
+      if (!a || !a.$id)throw"Second argument must be Angularjs scope!";
+      Array.isArray(c) || (c = [c]);
+      return e({url: "/subscription/users/", method: "POST", data: c}, g.getCurrentCompany().id, a, b, c)
+    }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("TaxRatesService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    return {
+      getAllByCompany: function (g, e, c) {
+        if (!e || !e.$id)throw"First argument must be Angularjs scope!";
+        if (!g || "[object Function]" === Object.prototype.toString.call(g))throw"companyId is required argument!";
+        return d.getListByUrl("/taxRate/" + g, c, function (a) {
+          l.subscribe("/taxRate?targetId=" + g, e, function (b) {
+            console.log(b);
+            if ("TAX_RATE_SAVE" == b.action) {
+              var c =
   d.findById(a,b.data.versionedId.id);c?d.customizeObj(b.data,c):a.push(d.customizeObj(b.data))}else"TAX_RATE_DELETE"==b.action&&(d.deleteById(a,b.data.versionedId.id),e.$broadcast("tax_rate_delete",b.data))})})},save:function(g,e){if(!g)throw"taxRate is required!";var c="/taxRate",a="POST";g.id&&(a="PUT",c=c+"/"+g.id);c=h({url:c,method:a,data:g});d.handleCallback(c,e)},saveList:function(g,e){if(!g)throw"taxRate is required!";var c=h({url:"/taxRate/saveList",method:"POST",data:{taxRates:g}});d.handleCallback(c,
-  e)},deleteTaxRate:function(g,e){if(!g)throw"taxRateId is required argument!";var c=h({url:"/taxRate/"+g,method:"DELETE"});d.handleCallback(c,e)},isUniqueInCompany:function(g,e,c,a){if(!g)throw"taxRateCode is required!";if(!c)throw"companyId is required!";var b=d.customizeObj({});h.get("/taxRate/isUniqueInCompany?taxRateCode="+g+"&id="+e+"&companyId="+c).then(function(c){d.customizeObj(c.data,b);a&&a(c.data)},function(b){a&&a(b.data)});return b}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("TicketsService",["$http","$rootScope","RealTimeService","Utils","TicketTagsService","CompaniesService",function(h,n,l,d,g,e){function c(a){a=angular.extend({},a);a.filter&&(a.filter=a.filter.toUpperCase());a.priority&&(a.priority=a.priority.toUpperCase());a.status&&(a.status=a.status.toUpperCase());return a}function a(a,b){return a.createdAt-b.createdAt}function b(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var c=v.lists[a.$id];
+        e)
+      },
+      deleteTaxRate: function (g, e) {
+        if (!g)throw"taxRateId is required argument!";
+        var c = h({url: "/taxRate/" + g, method: "DELETE"});
+        d.handleCallback(c, e)
+      },
+      isUniqueInCompany: function (g, e, c, a) {
+        if (!g)throw"taxRateCode is required!";
+        if (!c)throw"companyId is required!";
+        var b = d.customizeObj({});
+        h.get("/taxRate/isUniqueInCompany?taxRateCode=" + g + "&id=" + e + "&companyId=" + c).then(function (c) {
+          d.customizeObj(c.data, b);
+          a && a(c.data)
+        }, function (b) {
+          a && a(b.data)
+        });
+        return b
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("TicketsService", ["$http", "$rootScope", "RealTimeService", "Utils", "TicketTagsService", "CompaniesService", function (h, n, l, d, g, e) {
+    function c(a) {
+      a = angular.extend({}, a);
+      a.filter && (a.filter = a.filter.toUpperCase());
+      a.priority && (a.priority = a.priority.toUpperCase());
+      a.status && (a.status = a.status.toUpperCase());
+      return a
+    }
+
+    function a(a, b) {
+      return a.createdAt - b.createdAt
+    }
+
+    function b(a, b) {
+      if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+      var c = v.lists[a.$id];
   if(!c)throw"There is no ticket list for scope "+a.$id;c.loadingInProcess?console.log("Loading tickets already in process"):(0<c.list.length?c.params.lastId=c.list[c.list.length-1].id:delete c.params.lastId,c.loadingInProcess=!0,h({method:"GET",url:"/v2/tickets",params:c.params}).then(function(e){if(e){for(var f=0;f<e.data.length;f++){var h=e.data[f];h.number="Tkt# "+h.number;h.tags&&g._makeDynamic(h.tags,a);var k=d.findById(c.list,h.id);k?d.customizeObj(h,k):c.list.push(d.customizeObj(h))}c.loadingInProcess=
     !1;b&&b(e.data)}c.loadingInProcess=!1},function(a){c.loadingInProcess=!1;b&&b(a.data)}))}function f(a,b,c,e){c={value:c};"[object Array]"===Object.prototype.toString.call(b)?(a="/v2/tickets/"+a,c.ids=b):a="/v2/tickets/"+b+"/"+a;b=h.put(a,c);d.handleCallback(b,e)}function k(a,b){for(var c in v.lists)for(var d=v.lists[c].list,e=0;e<d.length;e++){var g=d[e];if(g.id===a){b(g);break}}for(c in v.tickets)d=v.tickets[c].ticket,d.id===a&&b(d)}function p(a,b,c){if("USER"===c.filter){if("COMPLETED"===a.status&&
-  "COMPLETED"!==b.status)return 1;if("COMPLETED"===b.status&&"COMPLETED"!==a.status)return-1}return z[c.filter](b)-z[c.filter](a)}function m(a){return a.assignedAt||a.createdAt}function r(a,b){return"URGENT"==b.filter&&("HIGH"!=a.priorityLevel||"COMPLETED"==a.status||"ADMIN"!==n.currentUser.role&&!a.sharedToCurrentUserAt)||"UNASSIGNED"==b.filter&&a.assignedUser&&a.assignedUser.id||"USER"==b.filter&&(!a.assignedUser||a.assignedUser.id!=n.currentUser.id)||"OPEN"==b.filter&&"COMPLETED"==a.status||"CLOSED"==
+      "COMPLETED" !== b.status)return 1;
+      if ("COMPLETED" === b.status && "COMPLETED" !== a.status)return -1
+    }
+      return t[c.filter](b) - t[c.filter](a)
+    }
+
+    function m(a) {
+      return a.assignedAt || a.createdAt
+    }
+
+    function r(a, b) {
+      return "URGENT" == b.filter && ("HIGH" != a.priorityLevel || "COMPLETED" == a.status || "ADMIN" !== n.currentUser.role && !a.sharedToCurrentUserAt) || "UNASSIGNED" == b.filter && a.assignedUser && a.assignedUser.id || "USER" == b.filter && (!a.assignedUser || a.assignedUser.id != n.currentUser.id) || "OPEN" == b.filter && "COMPLETED" == a.status || "CLOSED" ==
 b.filter&&("COMPLETED"!=a.status||"ADMIN"!==n.currentUser.role&&"SUPER_TECH_ADMIN"!==n.currentUser.role&&(!a.assignedUser||a.assignedUser.id!=n.currentUser.id))||"SHARED"==b.filter&&!a.sharedToCurrentUserAt||!("USER_SPAM"!=b.filter||a.spamReporter&&a.spamReporter.id&&n.currentUser.id==a.spamReporter.id)||"ADMIN_REPORTED_AS_SPAM"==b.filter&&(!a.spamReporter||!a.spamReporter.id||a.spamMarker&&a.spamMarker.id)||!("ADMIN_MARKED_AS_SPAM"!=b.filter||a.spamMarker&&a.spamMarker.id)||"TRASH"==b.filter&&!a.trash||
 "USER_SPAM"!==b.filter&&"ADMIN_REPORTED_AS_SPAM"!==b.filter&&"ADMIN_MARKED_AS_SPAM"!==b.filter&&"TRASH"!==b.filter&&(a.spamMarker&&a.spamMarker.id||a.spamReporter&&a.spamReporter.id||a.trash)||b.companyId&&b.companyId!=a.company.id||b.status&&b.status!=a.status||b.priority&&b.priority!=a.priorityLevel?!1:!0}var q="ASSIGNED_USER PRIORITY_CHANGED STATUS TRASH REPORT_AS_SPAM RESTORE_FROM_SPAM TICKET_INVOICED TICKET_SHARE MARKED_AS_SPAM".split(" "),x=0,v={lists:{},tickets:{},counts:{}};e=n.$new();l.subscribe("/tickets",
   e,function(a){console.log(a);a.data&&a.data.number&&(a.data.number="Tkt# "+a.data.number);if("CREATED_TICKET"===a.action){var c=d.customizeObj(a.data,{}),e;for(e in v.lists){var f=v.lists[e];if(r(a.data,f.params)){var h=d.findById(f.list,a.data.id);h?d.customizeObj(a.data,h):f.list.unshift(c)}}}else if(-1<q.indexOf(a.action)){c=d.customizeObj(a.data,{});for(e in v.lists){var f=v.lists[e],h=!1,x=d.indexOfId(f.list,c.id);if(-1<x)r(a.data,f.params)?(d.customizeObj(c,f.list[x]),h=!0):(f.list.splice(x,
     1),n.$broadcast("ticket_is_not_available_anymore",{ticketId:a.data.id,ticketType:f.params.filter}));else if(r(a.data,f.params))if(0===f.list.length)f.list.push(c);else if(x=f.list[f.list.length-1],15>f.list.length||0>=p(c,x,f.params))f.list.push(c),h=!0;h&&f.list.sort(function(a,b){return p(a,b,f.params)})}for(e in v.tickets)h=v.tickets[e].ticket,h.id===c.id&&d.customizeObj(c,h)}else if("READ"===a.action)k(a.data.id,function(a){d.defineReadOnlyProperty(a,"unread",!1)});else if("TICKET_UPDATES_READ"===
     a.action)k(a.data.id,function(a){d.defineReadOnlyProperty(a,"hasNewUpdates",!1)});else if("TICKET_COLLAPSED"===a.action||"TICKET_DELETED"===a.action){for(e in v.lists)d.deleteById(v.lists[e].list,a.data.id);for(e in v.tickets)c=v.tickets[e],c.ticket.id===a.data.id&&(delete v.tickets[e],c.scope.$broadcast("ticket_is_not_available_anymore",{ticketId:a.data.id}))}else if("TAG_LINKED"===a.action)for(c in a.data)k(c,function(b){g._merge(b.tags,a.data[b.id])});else if("COMPANY_ARCHIVED"===a.action){for(e in v.lists){h=
-    v.lists[e].list;for(x=0;x<h.length;x++)c=h[x],c.company.id===a.data.id&&(h.splice(x,1),x--);h.length<t.layLoadingPageSize&&b(v.lists[e].scope)}for(e in v.tickets)c=v.tickets[e],h=c.ticket,h.company.id===a.data.id&&(delete v.tickets[e],c.scope.$broadcast("ticket_is_not_available_anymore",{ticketId:a.data.id}))}else"TICKET_BILLABLE"===a.action&&k(a.data.id,function(b){d.defineReadOnlyProperty(b,"isBillable",a.data.isBillable)})});var z={URGENT:m,UNASSIGNED:function(a){return a.createdAt},USER:function(a){return a.closedAt||
+        v.lists[e].list;
+        for (x = 0; x < h.length; x++)c = h[x], c.company.id === a.data.id && (h.splice(x, 1), x--);
+        h.length < u.layLoadingPageSize && b(v.lists[e].scope)
+      }
+        for (e in v.tickets)c = v.tickets[e], h = c.ticket, h.company.id === a.data.id && (delete v.tickets[e], c.scope.$broadcast("ticket_is_not_available_anymore", {ticketId: a.data.id}))
+      } else"TICKET_BILLABLE" === a.action && k(a.data.id, function (b) {
+        d.defineReadOnlyProperty(b, "isBillable", a.data.isBillable)
+      })
+      });
+    var t = {
+      URGENT: m,
+      UNASSIGNED: function (a) {
+        return a.createdAt
+      },
+      USER: function (a) {
+        return a.closedAt ||
   a.assignedAt},OPEN:function(a){return a.assignedAt},CLOSED:function(a){return a.closedAt},SHARED:function(a){return a.sharedToCurrentUserAt},ALL:m,NOT_SPAM_OR_TRASH:m,USER_SPAM:function(a){return a.reportedAsSpamAt},ADMIN_REPORTED_AS_SPAM:function(a){return a.reportedAsSpamAt},ADMIN_MARKED_AS_SPAM:function(a){return a.markedAsSpamAt},TRASH:function(a){return a.deletedAt}};return{getList:function(a,e,f){if(!a||!a.$id)throw"First argument must be Angularjs scope!";if(!e||!e.filter)throw"'filter' is mandatory parameter that must be counted in second argument";
   e=c(e);var g=d.customizeObj([]);v.lists[a.$id]={params:e,scope:a,list:g};b(a,f);a.$on("$destroy",function(){delete v.lists[a.$id]});return g},getCurrentlyWorkingWith:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";return d.getListByUrl("/v2/tickets/currentlyWorkingWith",b,function(b){l.subscribe("/tickets",a,function(a){console.log(a);"CURRENTLY_WORKING_WITH"==a.action&&(b.splice(0,b.length),d.customizeArray(a.data,b))})})},loadMore:b,search:function(a,b){if(!a||!a.filter)throw"'filter' is mandatory parameter that must be counted in first argument";
   if(!a.keyword)throw"'keyword' is mandatory parameter that must be counted in first argument";if(3>a.keyword.length)throw"minimal length of 'keyword' is 3 characters";a=c(a);var d=[];h({method:"GET",url:"/v2/tickets/search",params:a}).then(function(a){for(var c=0;c<a.data.length;c++)d.push(a.data[c]);b&&b(d);return d},function(a){b&&b(a)});return d},getCount:function(a,b,e){if(!b||!b.$id)throw"Second argument must be Angularjs scope!";if(!a||!a.filter)throw"'filter' is mandatory parameter that must be counted in first argument";
@@ -120,19 +757,167 @@ b.filter&&("COMPLETED"!=a.status||"ADMIN"!==n.currentUser.role&&"SUPER_TECH_ADMI
   var c=h.post("/v2/tickets",a);d.handleCallback(c,b)},getActualNumber:function(a,b){h.get("/data/actualNumber?type=TICKET").success(function(a){b(a.number)});l.subscribe("/number?targetId=TICKET",a,function(a){console.log(a);"NUMBER_CHANGED"===a.action&&b(d.getFormattedNumber(a.data,!0))})},createTicketUpdate:function(a,b,c){if(!a)throw"ticketUpdate is required arguments!";if(!a.ticket.id)throw"ticketUpdate.ticket.id is required!";if(a.id)throw"TicketUpdate must be new, without ticketUpdate.id!";if(!a.type)throw"ticketUpdate.type is required!";
   if(!a.note&&!a.products&&!a.services)throw"In TicketUpdate must be or note or products or services!";a=h({url:"/v2/tickets/updates",method:"POST",params:{close:!!b},data:a});d.handleCallback(a,c)},deleteTicketUpdate:function(a,b,c){a=h({url:"/v2/tickets/"+a+"/updates/"+b,method:"DELETE"});d.handleCallback(a,c)},loadRemainingTicketUpdates:function(b,c){if(!b.id||!b.updates)throw"You can load updates only for detailed ticket!";if(0==b.updates.length)throw"There is no updates";for(var e=[],f=0;f<b.updates.length;f++)e.push(b.updates[f].id);
   h({url:"/v2/tickets/"+b.id+"/updates/fetch",method:"POST",data:e}).then(function(e){d.customizeArray(e.data,b.updates);d.defineReadOnlyProperty(b,"unloadedUpdates",0);b.updates.sort(a);c&&c(e.data)},function(a){c&&c(a.data)})},markUpdateAsRead:function(a,b,c){if(!a||!b)throw"ticketId and updateIds is required parameters";a=h({url:"/v2/tickets/"+a+"/updates/read",method:"POST",data:b});d.handleCallback(a,c)},updateExpenseInTicketUpdate:function(a,b){if(!a)throw"expense is required!";if(!a.ticketUpdateId)throw"ticketUpdateId is required!";
-  if(!a.serviceExpense&&!a.productExpense)throw"serviceExpense or productExpense is required!";var c=h({url:"/v2/tickets/ticketUpdate/updateExpense",method:"PUT",data:a});d.handleCallback(c,b)}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("TicketTagsService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){function g(a,b){return b.createdAt-a.createdAt}function e(a){b=n.$new();f.tags=d.customizeArray([]);h.get("/tag").then(function(c){d.customizeArray(c.data,f.tags);f.tags&&(f.tags.sort(g),l.subscribe("/tags",b,function(a){console.log(a);if(f.tags)if("TAG_SAVED"==a.action){var b=d.findById(f.tags,a.data.id);b?d.customizeObj(a.data,b):(f.tags.unshift(d.customizeObj(a.data)),
-  f.tags.sort(g))}else if("TAG_REMOVED"==a.action)for(b in d.deleteById(f.tags,a.data.id),f.dynamicLists)for(var c=f.dynamicLists[b],e=0;e<c.length;e++)d.deleteById(c[e],a.data.id)}),a&&a(c.data))},function(b){console.log("ERROR!!!!!",b);a&&a(b.data)})}function c(){0===f.watchers.length&&w.isEmptyObject(f.dynamicLists)&&(b.$destroy(),f.tags=u)}function a(b,c){if(!c||!c.$id)throw"First argument must be Angularjs scope!";if(f.tags){for(var g=0;g<b.length;g++)b[g]=d.findById(f.tags,b[g].id);for(;-1<(g=
-  b.indexOf(u));)b.splice(g,1);f.addDynamicList(b,c)}else e(function(){a(b,c)})}var b,f={tags:u,watchers:[],dynamicLists:{},addWatcher:function(a){var b=this.watchers;0>b.indexOf(a.$id)&&(b.push(a.$id),a.$on("$destroy",function(){var d=b.indexOf(a.$id);b.splice(d,1);c()}))},addDynamicList:function(a,b){var d=this.dynamicLists;d[b.$id]||(d[b.$id]=[]);d[b.$id].push(a);b.$on("$destroy",function(){delete d[b.$id];c()})}};return{_makeDynamic:a,_merge:function(a,b){a.splice(0,a.length);for(var c=0;c<b.length;c++){var e=
+      if (!a.serviceExpense && !a.productExpense)throw"serviceExpense or productExpense is required!";
+      var c = h({url: "/v2/tickets/ticketUpdate/updateExpense", method: "PUT", data: a});
+      d.handleCallback(c, b)
+    }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("TicketTagsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    function g(a, b) {
+      return b.createdAt - a.createdAt
+    }
+
+    function e(a) {
+      b = n.$new();
+      f.tags = d.customizeArray([]);
+      h.get("/tag").then(function (c) {
+        d.customizeArray(c.data, f.tags);
+        f.tags && (f.tags.sort(g), l.subscribe("/tags", b, function (a) {
+          console.log(a);
+          if (f.tags)if ("TAG_SAVED" == a.action) {
+            var b = d.findById(f.tags, a.data.id);
+            b ? d.customizeObj(a.data, b) : (f.tags.unshift(d.customizeObj(a.data)),
+              f.tags.sort(g))
+          } else if ("TAG_REMOVED" == a.action)for (b in d.deleteById(f.tags, a.data.id), f.dynamicLists)for (var c = f.dynamicLists[b], e = 0; e < c.length; e++)d.deleteById(c[e], a.data.id)
+        }), a && a(c.data))
+      }, function (b) {
+        console.log("ERROR!!!!!", b);
+        a && a(b.data)
+      })
+    }
+
+    function c() {
+      0 === f.watchers.length && w.isEmptyObject(f.dynamicLists) && (b.$destroy(), f.tags = t)
+    }
+
+    function a(b, c) {
+      if (!c || !c.$id)throw"First argument must be Angularjs scope!";
+      if (f.tags) {
+        for (var g = 0; g < b.length; g++)b[g] = d.findById(f.tags, b[g].id);
+        for (; -1 < (g =
+          b.indexOf(t));)b.splice(g, 1);
+        f.addDynamicList(b, c)
+      } else e(function () {
+        a(b, c)
+      })
+    }
+
+    var b, f = {
+      tags: t, watchers: [], dynamicLists: {}, addWatcher: function (a) {
+        var b = this.watchers;
+        0 > b.indexOf(a.$id) && (b.push(a.$id), a.$on("$destroy", function () {
+          var d = b.indexOf(a.$id);
+          b.splice(d, 1);
+          c()
+        }))
+      }, addDynamicList: function (a, b) {
+        var d = this.dynamicLists;
+        d[b.$id] || (d[b.$id] = []);
+        d[b.$id].push(a);
+        b.$on("$destroy", function () {
+          delete d[b.$id];
+          c()
+        })
+      }
+    };
+    return {
+      _makeDynamic: a,
+      _merge: function (a, b) {
+        a.splice(0, a.length);
+        for (var c = 0; c < b.length; c++) {
+          var e =
   d.findById(f.tags,b[c]);e&&a.push(e)}},getList:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";f.tags?b&&setTimeout(function(){b(f.tags.staticCopy())},100):e(b);f.addWatcher(a);return f.tags},save:function(a,b){if(!a)throw"ticketTag is required argument!";var c="/tag",e="POST";a.id&&(c+="/"+a.id,e="PUT");c=h({url:c,method:e,data:a});d.handleCallback(c,b)},deleteTag:function(a,b){if(!a)throw"tagId is required argument!";var c=h({url:"/tag/"+a,method:"DELETE"});d.handleCallback(c,
-  b)},link:function(a,b){if(!a)throw"linkMap is required argument!";var c=h({url:"/tag/link",method:"POST",data:a});d.handleCallback(c,b)},getTicketsCounts:function(a,b){if(!a||!a.$id)throw"First argument must be Angularjs scope!";var c=d.customizeObj({});h.get("/tag/counts").then(function(a){d.customizeObj(a.data,c);b&&b(a.data)},function(a){b&&b(a.data)});l.subscribe("/tagCounts",a,function(a){console.log(a);"TAG_COUNTS"==a.action&&d.customizeObj(a.data,c)});return c}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("UsersService",["$http","$rootScope","RealTimeService","Utils","CompaniesService",function(h,n,l,d,g){function e(a){var b=d.findById(q.users,a.id);b?(d.customizeObj(a,b),n.currentUser.id===b.id&&d.customizeObj(a,n.currentUser)):(a=d.customizeObj(a),q.users.push(a),a.company.id!==g.getCurrentCompany().id&&q.clientUsers.push(a),c(a),q.usersByCompanies[a.company.id]||(q.usersByCompanies[a.company.id]=[]),q.usersByCompanies[a.company.id].push(a))}
+        b)
+      },
+      link: function (a, b) {
+        if (!a)throw"linkMap is required argument!";
+        var c = h({url: "/tag/link", method: "POST", data: a});
+        d.handleCallback(c, b)
+      },
+      getTicketsCounts: function (a, b) {
+        if (!a || !a.$id)throw"First argument must be Angularjs scope!";
+        var c = d.customizeObj({});
+        h.get("/tag/counts").then(function (a) {
+          d.customizeObj(a.data, c);
+          b && b(a.data)
+        }, function (a) {
+          b && b(a.data)
+        });
+        l.subscribe("/tagCounts", a, function (a) {
+          console.log(a);
+          "TAG_COUNTS" == a.action && d.customizeObj(a.data, c)
+        });
+        return c
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("UsersService", ["$http", "$rootScope", "RealTimeService", "Utils", "CompaniesService", function (h, n, l, d, g) {
+    function e(a) {
+      var b = d.findById(q.users, a.id);
+      b ? (d.customizeObj(a, b), n.currentUser.id === b.id && d.customizeObj(a, n.currentUser)) : (a = d.customizeObj(a), q.users.push(a), a.company.id !== g.getCurrentCompany().id && q.clientUsers.push(a), c(a), q.usersByCompanies[a.company.id] || (q.usersByCompanies[a.company.id] = []), q.usersByCompanies[a.company.id].push(a))
+    }
   function c(a){var b=[a.firstName,a.lastName].map(function(a){return a.charAt(0).toUpperCase()}).join("");d.defineReadOnlyProperty(a,"initials",b)}function a(){return b(n.currentUser.id)}function b(a){return d.findById(q.users,a)}function f(b,c,d){if(!b)throw"Keyword is required!";var e=[];d=d?q.usersByCompanies[d]||[]:q.users;for(var f=0;f<d.length;f++){var g=d[f];(c||a().company.id!==g.company.id)&&-1<(g.firstName+" "+g.lastName).toLowerCase().indexOf(b.toLowerCase())&&e.push(g)}return e}var k=n.$new(),
     p=[],m=!1,r=!1,q={users:[],clientUsers:[],usersByCompanies:{}};d.customizeObj(q);g._addInitListener(function(){r||(r=!0,h.get("/users").then(function(a){d.customizeArray(a.data,q.users);for(a=0;a<q.users.length;a++){var b=q.users[a];c(b);q.usersByCompanies[b.company.id]||(q.usersByCompanies[b.company.id]=[]);q.usersByCompanies[b.company.id].push(b);b.company.id!==g.getCurrentCompany().id&&q.clientUsers.push(b)}m=!0;for(a=0;a<p.length;a++)p[a]();p=[]},function(a){console.error(a);throw"Cannot initialize CompaniesService!";
   }),l.subscribe("/user",k,function(a){console.log(a);if(m)if("USER_SAVED"==a.action)e(a.data);else if("USER_DELETED"==a.action){var b=d.findById(q.users,a.data.id);d.deleteById(q.users,a.data.id);d.deleteById(q.clientUsers,a.data.id);b&&d.deleteById(q.usersByCompanies[b.company.id],a.data.id)}else if("USER_ONLINE"==a.action)(b=d.findById(q.users,a.data.id))&&d.defineReadOnlyProperty(b,"online",!!a.data.online);else if("COMPANY_ARCHIVED"==a.action){for(b=0;b<q.users.length;b++)q.users[b].company.id===
   a.data.id&&(q.users.splice(b,1),b--);for(b=0;b<q.clientUsers.length;b++)q.clientUsers[b].company.id===a.data.id&&(q.clientUsers.splice(b,1),b--);delete q.usersByCompanies[a.data.id]}else"USERS_DEARCHIVED"==a.action&&a.data.forEach(e)}),l.subscribe("/subscription?targetId="+g.getCurrentCompany().id,k,function(a){console.log(a);if(a.data.user){var b=d.findById(q.users,a.data.user.id);b&&("SUBSCRIPTION_SAVED"==a.action?d.defineReadOnlyProperty(b,"subscription",d.customizeObj(a.data)):"SUBSCRIPTION_DELETED"==
   a.action&&delete b.subscription)}}))});return{_addInitListener:function(a){if(!a)throw"callback is required!";m?a():p.push(a)},getCurrentUser:a,getAllUsers:function(){return q.users},getClientUsers:function(){return q.clientUsers},getAllByCompanyId:function(a){return q.usersByCompanies[a]||[]},getOneById:b,getUserProfile:function(a){var b={};h.get("/settings/userProfile/").then(function(c){d.customizeObj(c.data,b);a&&a(c.data)},function(b){a&&a(b.data)});return b},getUnassignedUser:function(a){for(var b=
     0;b<q.usersByCompanies[a].length;b++)if(q.usersByCompanies[a][b].isDefault)return q.usersByCompanies[a][b]},searchByAllUsers:function(a){return f(a,!0)},searchByClientUsers:function(a){return f(a,!1)},searchByUsersFromCompany:function(a,b){return f(a,!1,b)},changeUserRole:function(a,b,c){if(!a)throw"userId is required!";if(!b)throw"roleName is required!";a=h({url:"/users/updateRole/"+a+"?role="+b.toUpperCase(),method:"PUT"});d.handleCallback(a,c)},save:function(a,b){if(!a)throw"user is required!";
-    var c="/users",e="POST";a.id&&(e="PUT",c=c+"/"+a.id);c=h({url:c,method:e,data:a});d.handleCallback(c,b)},saveForUserProfile:function(a,b,c){if(!a)throw"data is required!";if(!b)throw"toUpdate is required!";b="/settings/userProfile/"+b.toLowerCase();a=h({url:b,method:"PUT",data:a});d.handleCallback(a,c)},deleteOrArchiveUser:function(a,b,c){if(!a)throw"ids is required!";if(b===u)throw"isArchive is required!";Array.isArray(a)||(a=[a]);a=h({url:"/users/"+!!b,method:"POST",data:a});d.handleCallback(a,
-    c)},isEmailUnique:function(a,b,c){if(!a)throw"email is required!";var e=d.customizeObj({});h.get("/users/isEmailUnique?email="+a+"&id="+b).then(function(a){d.customizeObj(a.data,e);c&&c(a.data)},function(a){c&&c(a.data)});return e}}}])})(window,jQuery);(function(t,w,u){angular.module("main.services").factory("VendorsService",["$http","$rootScope","RealTimeService","Utils","$filter",function(h,n,l,d){return{save:function(g,e){if(!g)throw"vendor is required!";var c="POST";g.id&&(c="PUT");c=h({url:"/vendor",method:c,data:g});d.handleCallback(c,e)},getAll:function(g,e){if(!g||!g.$id)throw"First argument must be Angularjs scope!";return d.getListByUrl("/vendor",e,function(c){l.subscribe("/vendor",g,function(a){console.log(a);if("VENDOR_SAVE"==a.action){var b=
+      var c = "/users", e = "POST";
+      a.id && (e = "PUT", c = c + "/" + a.id);
+      c = h({url: c, method: e, data: a});
+      d.handleCallback(c, b)
+    },
+      saveForUserProfile: function (a, b, c) {
+        if (!a)throw"data is required!";
+        if (!b)throw"toUpdate is required!";
+        b = "/settings/userProfile/" + b.toLowerCase();
+        a = h({url: b, method: "PUT", data: a});
+        d.handleCallback(a, c)
+      },
+      deleteOrArchiveUser: function (a, b, c) {
+        if (!a)throw"ids is required!";
+        if (b === t)throw"isArchive is required!";
+        Array.isArray(a) || (a = [a]);
+        a = h({url: "/users/" + !!b, method: "POST", data: a});
+        d.handleCallback(a,
+          c)
+      },
+      isEmailUnique: function (a, b, c) {
+        if (!a)throw"email is required!";
+        var e = d.customizeObj({});
+        h.get("/users/isEmailUnique?email=" + a + "&id=" + b).then(function (a) {
+          d.customizeObj(a.data, e);
+          c && c(a.data)
+        }, function (a) {
+          c && c(a.data)
+        });
+        return e
+      }
+    }
+  }])
+})(window, jQuery);
+(function (u, w, t) {
+  angular.module("main.services").factory("VendorsService", ["$http", "$rootScope", "RealTimeService", "Utils", "$filter", function (h, n, l, d) {
+    return {
+      save: function (g, e) {
+        if (!g)throw"vendor is required!";
+        var c = "POST";
+        g.id && (c = "PUT");
+        c = h({url: "/vendor", method: c, data: g});
+        d.handleCallback(c, e)
+      },
+      getAll: function (g, e) {
+        if (!g || !g.$id)throw"First argument must be Angularjs scope!";
+        return d.getListByUrl("/vendor", e, function (c) {
+          l.subscribe("/vendor", g, function (a) {
+            console.log(a);
+            if ("VENDOR_SAVE" == a.action) {
+              var b =
   d.findById(c,a.data.id);b?d.customizeObj(a.data,b):c.push(d.customizeObj(a.data))}else if("VENDOR_ARCHIVED"==a.action)d.deleteById(c,a.data.id),g.$broadcast("vendor_archived",a.data);else if("VENDOR_DEARCHIVED"==a.action)c.push(d.customizeObj(a.data)),g.$broadcast("vendor_dearchived",a.data);else if("VENDOR_PRODUCT_SAVE"==a.action){var b=d.findById(c,a.data.id),e=d.findById(b.products,a.data.products[0].versionedId.id);if(b&&e)for(a=0;b.products.length<a;a++);else b&&(b.products[b.products.length]=
   a.data.products[0])}else"VENDOR_PRODUCT_DELETE"==a.action&&(b=d.findById(c,a.data.id))&&d.deleteById(b.products,a.data.products[0].versionedId.id)})})},getAllForCompanyProfile:function(g,e,c){if(!g||!g.$id)throw"First argument must be Angularjs scope!";if(!e)throw"companyId is required!";return d.getListByUrl("/vendor/companyProfile/"+e,c,function(a){l.subscribe("/vendor",g,function(b){console.log(b);if("VENDOR_SAVE"==b.action){var c=d.findById(a,b.data.id);c?d.customizeObj(b.data,c):a.push(d.customizeObj(b.data))}else if("VENDOR_ARCHIVED"==
   b.action)d.deleteById(a,b.data.id),g.$broadcast("vendor_archived",b.data);else if("VENDOR_DEARCHIVED"==b.action)a.push(d.customizeObj(b.data)),g.$broadcast("vendor_dearchived",b.data);else if("VENDOR_PRODUCT_SAVE"==b.action){var c=d.findById(a,b.data.id),e=d.findById(c.products,b.data.products[0].versionedId.id);if(c&&e)for(b=0;c.products.length<b;b++);else c&&(c.products[c.products.length]=b.data.products[0])}else"VENDOR_PRODUCT_DELETE"==b.action&&(c=d.findById(a,b.data.id))&&d.deleteById(c.products,
