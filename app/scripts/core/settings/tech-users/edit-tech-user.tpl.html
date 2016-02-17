@@ -1,0 +1,117 @@
+<div>
+  <div class="tech-action">
+    <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
+       tooltip-placement="top" tooltip="Close"
+       ng-click="openEditUser()">
+      <i class="icn-sm icn-remove-token"></i>
+    </a>
+  </div>
+
+  <div class="recepients" style="margin-left: 41px;">
+    <strong>{{ editUser.id ? 'Edit' : 'Create' }} Tech User</strong>
+  </div>
+
+  <form name="editUserForm">
+
+    <div class="create-user-container">
+
+      <div class="create-user-form">
+
+        <div class="form-row clearfix">
+
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
+
+            <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First
+              Name</label>
+
+            <div ng-messages="editUserForm.firstName.$error"
+                 ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
+              <div class="control-label" ng-message="required">First name is required.</div>
+              <div class="control-label" ng-message="maxlength">First name is too large.</div>
+              <div class="control-label" ng-message="minlength">First name is too short.</div>
+            </div>
+
+            <input class="form-control" type="text" aria-expanded="true" ng-minlength="3" ng-maxlength="15"
+                   name="firstName" ng-model="editUser.firstName" ng-required="true" make-dirty-on-blur>
+
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
+
+            <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">Last
+              Name</label>
+
+            <div ng-messages="editUserForm.lastName.$error"
+                 ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
+              <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+            </div>
+
+            <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                   name="lastName" ng-model="editUser.lastName" make-dirty-on-blur>
+
+          </div>
+
+        </div>
+
+        <div class="form-row clearfix">
+
+          <div class="form-group">
+
+            <label class="control-label">Account Type</label>
+
+            <div class="dropdown">
+
+              <input class="form-control has-dropdown" type="text"
+                     ng-model="roles[editUser.role]" data-toggle="dropdown" aria-expanded="true"
+                     class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
+              <i class="icn-sm icn-caret-gray"></i>
+
+              <ul class="dropdown-menu dropdown-account-type">
+                <li ng-repeat="(role, label) in roles" ng-click="editUser.role = role; editUserForm.$setDirty()">
+                  <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
+
+            <label class="control-label"
+                   ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
+
+            <div ng-messages="editUserForm.primaryEmail.$error"
+                 ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
+              <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+              <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+              <div class="control-label" ng-message="unique">This email already occupied.</div>
+            </div>
+
+            <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                   ng-model="editUser.primaryEmail" required="true" ng-pattern="emailPattern"
+                   is-uniq-validation validation-func="validateUserEmail">
+
+          </div>
+
+        </div>
+
+        <div class="form-row clearfix">
+
+          <div class="btn btn-lg btn-info pull-right"
+               custom-disabled="{{ !editUserForm.$valid || editUserForm.$pristine || savingInProcess }}"
+               ng-click="save(editUserForm)">
+            {{ editUser.id ? 'Save' : 'Create' }}
+          </div>
+
+          <div class="btn btn-lg btn-primary pull-right" style="margin-right: 10px"
+               ng-click="openEditUser()">
+            Cancel
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

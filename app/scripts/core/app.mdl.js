@@ -146,6 +146,11 @@
         templateUrl: '/html/scripts/core/settings/my-profile/my-profile.tpl.html',
         controller: 'quicktech.core.settings.myProfileCtrl'
       }))
+      .state('settings.techUsers', waitForServices({
+        url: '/techUsers',
+        templateUrl: '/html/scripts/core/settings/tech-users/tech-users.tpl.html',
+        controller: 'quicktech.core.settings.techUsersCtrl'
+      }))
       .state('settings.companyInfo', waitForServices({
         url: '/companyInfo',
         templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',

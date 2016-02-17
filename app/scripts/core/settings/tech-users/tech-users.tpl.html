@@ -1,0 +1,71 @@
+<div class="settings-main-wrapper">
+
+  <div class="tech-user-templates-wrapper">
+
+    <ul class="template-list list-unstyled">
+
+      <li class="template-item tech-user-item new-tech-user"
+          ng-class="{'expanded': editUserId === 'new_user'}">
+
+        <h4 class="template-title ng-binding" ng-click="openEditUser('new_user')"
+            ng-hide="editUserId === 'new_user'">Create New Tech User</h4>
+
+        <div class="clearfix tech-user">
+
+          <div class="template-details pull-left" style="margin-top:10px;margin-left: -21px;"
+               ng-if="editUserId === 'new_user'"
+               ng-include="'/html/scripts/core/settings/tech-users/edit-tech-user.tpl.html'">
+          </div>
+        </div>
+      </li>
+
+      <li class="template-item tech-user-item" ng-repeat="user in users | orderBy: 'firstName'"
+          ng-class="{'expanded': editUserId === user.id}"
+          ng-if="!((user.id === currentUser.id) || (user.role === 'SUPER_TECH_ADMIN'))">
+
+        <div class="clearfix tech-user">
+
+          <div ng-hide="editUserId === user.id">
+            <div class="user-info">
+
+              <div class="avatar">
+                <img ng-src="{{ getContactAvatarUrl(user) }}" alt="..." class="img-circle avatar-50">
+              </div>
+
+              <div class="name-designation">
+                <h4>{{ getUserName(user) }}</h4>
+                <span class="label label-light">{{ user.designation }}</span><br/>
+
+                <div class="user-email"><i class="icn-sm icn-at pull-left"></i> {{ user.primaryEmail }}</div>
+              </div>
+
+            </div>
+
+            <div class="tech-action">
+
+              <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
+                 tooltip-placement="top" tooltip="Archive user"
+                 ng-click="archiveUser(user.id)">
+                <i class="icn-sm icn-remove-token"></i>
+              </a>
+
+              <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
+                 tooltip-placement="top" tooltip="Edit user"
+                 ng-click="openEditUser(user)">
+                <i class="icn-sm icn-edit"></i>
+              </a>
+
+            </div>
+          </div>
+
+          <div class="template-details pull-left" style="margin-top:10px;margin-left: -41px;"
+               ng-if="editUserId === user.id"
+               ng-include="'/html/scripts/core/settings/tech-users/edit-tech-user.tpl.html'">
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+</div>

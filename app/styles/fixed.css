@@ -683,4 +683,66 @@ aside#left div.nav-title {
   padding: 13px;
 }
 
+.settings-content :hover > .icn-cusers {
+  background-position: -3620px 0;
+}
 
+.tech-user-templates-wrapper .tech-user .avatar {
+  float: left;
+  margin-bottom: 19px;
+}
+
+.tech-user-templates-wrapper .tech-user .name-designation h4 {
+  margin-bottom: 7px
+}
+
+.tech-user-templates-wrapper .tech-user .name-designation .user-email {
+  color: #94a4b8;
+}
+
+.tech-user-templates-wrapper .tech-user .name-designation .user-email i {
+  margin-top: 4px;
+}
+
+.tech-user-templates-wrapper .tech-user .tech-action {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.tech-user-templates-wrapper .tech-user .tech-action a {
+  margin: 3px;
+}
+
+.tech-user-templates-wrapper .tech-user-item {
+  background-color: white;
+  margin-bottom: 10px;
+  padding-top: 0;
+  cursor: inherit;
+}
+
+.tech-user-templates-wrapper .tech-user-item.new-tech-user {
+  padding: 0;
+}
+
+.tech-user-templates-wrapper .tech-user-item.new-tech-user .template-title {
+  width: 100%;
+  font-size: 17px;
+  font-weight: 400;
+  text-align: center;
+  padding: 15px 0;
+  cursor: pointer;
+}
+
+.tech-user-templates-wrapper .tech-user-item:hover {
+  border: 1px solid #fff;
+  box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
+}
+
+.tech-user-templates-wrapper .tech-user-item.template-item.expanded {
+  padding-bottom: 13px;
+}
+
+.tech-user-templates-wrapper .tech-user-item .control-label {
+  margin-bottom: 0;
+}
