@@ -29,6 +29,7 @@
 
               if ($scope.serviceExpense.item.name.toLowerCase() === $scope.serviceList[i].name.toLowerCase()) {
                 $scope.serviceExpense.item = $scope.serviceList[i].staticCopy();
+                $scope.serviceExpense.quantity = $scope.serviceList[i].timeBlock * 60;
                 return;
               } else {
                 if ($scope.serviceExpense.item && $scope.serviceExpense.item.versionedId) {

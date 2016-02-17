@@ -27,13 +27,11 @@
           element.addClass('timer-quantity');
 
           scope.$watch('quantity', function (val) {
+            initPicker();
             if (!val && input.val()) {
-              initPicker();
               input.val('')
             }
           });
-
-          initPicker();
 
           function initPicker() {
             $templateRequest('/html/scripts/common/templates/service-quantity-picker.tpl.html').then(function (html) {
