@@ -577,7 +577,7 @@
 
               <li style="padding-top: 28px;" ng-form="newServiceForm" isolate-form ng-init="newService">
 
-                <div class="col-1" ng-class="{'has-error': isShowingErrors(newServiceForm, 'newServiceName')}">
+                <div class="col-1" ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceName')}">
 
                   <input type="text" class="form-control" placeholder="Service"
                          ng-model="newService.name"
@@ -589,7 +589,7 @@
                 <div class="col-2" style="position: relative;padding-top: 0"
                      service-quantity-picker="newService.timeBlock" sqp-is-show-format="false"
                      sqp-form="newServiceForm.timeBlock"
-                     ng-class="{'has-error': isShowingErrors(newServiceForm, 'timeBlock')}">
+                     ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'timeBlock')}">
 
                   <input id="service-quantity-picker" type="text" class="form-control" placeholder="Min. Time Slice"
                          sqp-input readonly>
@@ -600,7 +600,7 @@
                 </div>
 
                 <div class="col-3" style="width: 143px;padding-top: 0"
-                     ng-class="{'has-error': isShowingErrors(newServiceForm, 'newServiceRate')}">
+                     ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceRate')}">
                   <input type="text" class="form-control" placeholder="Rate"
                          ng-model="newService.rate"
                          name="newServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">

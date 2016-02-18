@@ -180,7 +180,11 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
+          return form[fieldName] && (($scope.editCompany && $scope.editCompany.id) || form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
+        };
+
+        $scope.isShowingServiceErrors = function (form, fieldName) {
+          return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
 
         $scope.validateCompanyName = function (ngModelCtrl) {
