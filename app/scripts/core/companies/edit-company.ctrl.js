@@ -344,6 +344,7 @@
           var service = angular.copy(originService);
 
           if (!service.versionedId) {
+            service.timeBlock = service.timeBlock / 60;
             $scope.editCompany.services.push(service);
             form.$setPristine();
             return {};
