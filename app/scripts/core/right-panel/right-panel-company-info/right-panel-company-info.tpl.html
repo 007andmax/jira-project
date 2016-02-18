@@ -61,7 +61,7 @@
           <div class="form-group" ng-class="{'has-error': showDownloadError}">
 
             <input class="form-control" type="search" aria-expanded="true" placeholder="Enter user name"
-                   name="Fill" ng-model="downloadAgentUser.name" ng-required="true">
+                   name="Fill" ng-model="downloadAgentUser.name" ng-required="false">
 
           </div>
 
@@ -69,11 +69,11 @@
 
             <input ng-class="{'hide': showPassword}" class="form-control show-password" type="password"
                    ng-model="downloadAgentUser.password" name="roll"
-                   placeholder="Enter user password" ng-required="true" autocomplete="new-password">
+                   placeholder="Enter user password" ng-required="false" autocomplete="new-password">
 
             <input ng-class="{'hide': !showPassword}" class="form-control show-password" type="text"
                    ng-model="downloadAgentUser.password" placeholder="Enter user password"
-                   ng-required="true" autocomplete="new-password">
+                   ng-required="false" autocomplete="new-password">
 
             <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
                class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
