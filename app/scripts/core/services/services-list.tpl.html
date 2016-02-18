@@ -16,12 +16,14 @@
 
       <div class="col-1">
 
-        <label class="control checkbox pull-left" ng-if="showCheckboxes">
+        <label class="control checkbox pull-left" ng-if="showCheckboxes"
+               tooltip="is billable" tooltip-placement="top">
           <input type="checkbox" ng-model="checkedServices[service.versionedId.id]" ng-change="onChangeCheckbox()">
           <span class="control-indicator"></span>
         </label>
 
-        <label class="control checkbox pull-left" ng-if="!showCheckboxes">
+        <label class="control checkbox pull-left" ng-if="!showCheckboxes"
+               tooltip="is billable" tooltip-placement="top">
           <input type="checkbox" ng-checked="service.billable" custom-disabled="{{ disabledCheckbox }}"
                  ng-click="onChangeBillable()">
           <span class="control-indicator"></span>

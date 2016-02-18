@@ -7,7 +7,8 @@
       return {
         restrict: 'A',
         scope: {
-          quantity: "=serviceQuantityPicker"
+          quantity: "=serviceQuantityPicker",
+          form: '=sqpForm'
         },
         link: function (scope, element, attrs) {
 
@@ -137,13 +138,23 @@
 
             } else {
 
-              input.val(hour + ' : ' + minute);
-              scope.quantity = +((+hour * 60) + +minute) || undefined;
+              if ((parseFloat(hour) + parseFloat(minute)) < 1) {
+                input.val('');
+                scope.quantity = 0;
+              } else {
+                input.val(hour + ' : ' + minute);
+                scope.quantity = +((+hour * 60) + +minute) || undefined;
+              }
 
+            }
+
+            if (scope.form) {
+              scope.form.$setDirty();
             }
 
             quantityDropdown.hide();
             isDropdownShow = false;
+
           };
 
           function processingColumn(element, target) {

@@ -9,18 +9,20 @@
         var modalParams = {
           animation: false,
           backdrop: 'static',
+          keyboard: false,
           size: 'custom-size-confirmation-pop-up',
           windowClass: 'modal-spam',
           templateUrl: '/html/scripts/common/services/user-confirmations.tpl.html'
         };
 
-        this.show = function (message, button) {
+        this.show = function (message, button, hideCancel) {
 
           modalParams.controller = (['$scope', '$modalInstance',
             function ($scope, $modalInstance) {
 
               $scope.messageConfirm = message;
               $scope.buttonConfirm = button;
+              $scope.hideCancel = hideCancel;
 
               $scope.approveConfirm = function (result) {
                 $modalInstance.close(result);

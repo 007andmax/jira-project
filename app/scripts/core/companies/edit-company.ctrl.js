@@ -24,13 +24,13 @@
         $scope.selectedServices = {};
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
-           $timeout(function(){
-             for(var i = 0; i < $scope.servicesData.default.length; i++){
-               var service = angular.copy($scope.servicesData.default[i]);
-               $scope.editCompany.services.push(service);
-               $scope.selectedServices[$scope.servicesData.default[i].name] = true;
-             }
-           }, 0)
+            $timeout(function () {
+              for (var i = 0; i < $scope.servicesData.default.length; i++) {
+                var service = angular.copy($scope.servicesData.default[i]);
+                $scope.editCompany.services.push(service);
+                $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+              }
+            }, 0)
           }
         });
         $scope.timezones = AddressesService.getAllLocales(function () {
@@ -340,8 +340,14 @@
           })
         };
 
-        $scope.movingService = function (service) {
-          var service = angular.copy(service);
+        $scope.movingService = function (originService, form) {
+          var service = angular.copy(originService);
+
+          if (!service.versionedId) {
+            $scope.editCompany.services.push(service);
+            form.$setPristine();
+            return {};
+          }
 
           if ($scope.selectedServices[service.name]) {
             $scope.editCompany.services.push(service);
@@ -365,6 +371,23 @@
 
         };
 
+        $scope.validateServiceName = function (ngModelCtrl) {
+          var uniqueNameCount = 0;
+
+          for (var i = 0; i < $scope.servicesData.default.length; i++) {
+            if (ngModelCtrl.$viewValue.toLowerCase() === $scope.servicesData.default[i].name.toLowerCase()) {
+              uniqueNameCount++;
+            }
+          }
+
+          for (var i = 0; i < $scope.editCompany.services.length; i++) {
+            if (ngModelCtrl.$viewValue.toLowerCase() === $scope.editCompany.services[i].name.toLowerCase()) {
+              uniqueNameCount++;
+            }
+          }
+
+          ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
+        };
         $scope.$watch('editCompany.contacts.length', $scope.changeInvoiceSubscription);
 
         function getEmptyContact() {

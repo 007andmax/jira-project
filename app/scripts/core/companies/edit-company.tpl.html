@@ -575,6 +575,46 @@
 
               </li>
 
+              <li style="padding-top: 28px;" ng-form="newServiceForm" isolate-form ng-init="newService">
+
+                <div class="col-1" ng-class="{'has-error': isShowingErrors(newServiceForm, 'newServiceName')}">
+
+                  <input type="text" class="form-control" placeholder="Service"
+                         ng-model="newService.name"
+                         name="newServiceName" ng-required="true"
+                         is-uniq-validation validation-func="validateServiceName"
+                         ng-maxlength="100" ng-minlength="3">
+                </div>
+
+                <div class="col-2" style="position: relative;padding-top: 0"
+                     service-quantity-picker="newService.timeBlock" sqp-is-show-format="false"
+                     sqp-form="newServiceForm.timeBlock"
+                     ng-class="{'has-error': isShowingErrors(newServiceForm, 'timeBlock')}">
+
+                  <input id="service-quantity-picker" type="text" class="form-control" placeholder="Min. Time Slice"
+                         sqp-input readonly>
+
+                  <input type="hidden" invalid-when="!newService.timeBlock || newService.timeBlock <= 0"
+                         name="timeBlock" ng-model="newService.timeBlock" hard-reset-required="true"/>
+
+                </div>
+
+                <div class="col-3" style="width: 143px;padding-top: 0"
+                     ng-class="{'has-error': isShowingErrors(newServiceForm, 'newServiceRate')}">
+                  <input type="text" class="form-control" placeholder="Rate"
+                         ng-model="newService.rate"
+                         name="newServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+
+                </div>
+
+                <div class="btn btn-success pull-right"
+                     custom-disabled="{{ newServiceForm.$invalid }}"
+                     ng-click="newService = movingService(newService, newServiceForm)">
+                  <i class="icn-sm small-icn-tick"></i>
+                </div>
+
+              </li>
+
             </ul>
 
             <div class="add-service-btn-wrapper">

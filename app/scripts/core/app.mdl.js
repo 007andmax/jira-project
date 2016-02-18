@@ -305,6 +305,23 @@
 
         };
 
+        $rootScope.logOut = function (message) {
+
+          if (!message) {
+            message = 'Now you will be logout';
+          }
+
+          $rootScope.isLogOut = true;
+          var confirmButton = 'OK';
+
+          UserConfirmationsService.show(message, confirmButton, true).then(function () {
+            window.loggingOut = true;
+            window.location.href = '/logout';
+            window.location.hash = '';
+          });
+
+        };
+
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
         $rootScope.numberPattern = /^\d?[0-9]{0,17}$/;
 
