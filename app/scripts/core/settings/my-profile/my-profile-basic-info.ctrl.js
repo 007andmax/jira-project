@@ -41,10 +41,12 @@
               lastName: $scope.editUser.lastName,
               designation: $scope.editUser.designation,
               primaryEmail: $scope.editUser.primaryEmail,
-              signature: {content: $scope.userProfile.signature.content}
+              signature: {
+                content: $scope.userProfile.signature ? $scope.userProfile.signature.content : undefined
+              }
             };
 
-            if (($scope.editUser.secondaryEmail !== undefined) && ($scope.editUser.secondaryEmail.trim().length < 1)) {
+            if (($scope.editUser.secondaryEmail != undefined) && ($scope.editUser.secondaryEmail.trim().length < 1)) {
               userObjToSend.secondaryEmail = undefined;
             } else {
               userObjToSend.secondaryEmail = $scope.editUser.secondaryEmail;

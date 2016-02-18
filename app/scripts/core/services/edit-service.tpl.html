@@ -1,5 +1,4 @@
-<div class="service-form-wrapper" ng-form="editServiceForm"
-     ng-controller="quicktech.core.services.editServiceCtrl">
+<div class="service-form-wrapper" ng-form="editServiceForm">
 
   <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
 
@@ -11,7 +10,7 @@
   </div>
 
   <div ng-if="!(!service.isDefault && service)" class="col-2" style="position: relative;"
-       service-quantity-picker="editService.timeBlock" sqp-is-show-format="false"
+       service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
 
     <input id="service-quantity-picker" type="text" class="form-control" placeholder="Min. Time Slice"

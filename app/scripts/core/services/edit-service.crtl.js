@@ -42,11 +42,15 @@
 
         $scope.validateServiceName = function (ngModelCtrl, modelId) {
           var uniqueNameCount = 0;
-          for (var i = 0; i < $scope.services.length; i++) {
-            if ((ngModelCtrl.$viewValue.toLowerCase() === $scope.services[i].name.toLowerCase()) && (modelId !== $scope.services[i].versionedId.id)) {
-              uniqueNameCount++;
+
+          if ($scope.services) {
+            for (var i = 0; i < $scope.services.length; i++) {
+              if ((ngModelCtrl.$viewValue.toLowerCase() === $scope.services[i].name.toLowerCase()) && (modelId !== $scope.services[i].versionedId.id)) {
+                uniqueNameCount++;
+              }
             }
           }
+
           ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
         };
 
@@ -75,7 +79,7 @@
             }
           }
 
-          if (form.timeBlock && form.timeBlock.$error && form.timeBlock.$error.invalidwhen) {
+          if (form.timeBlock && form.timeBlock.$dirty && form.timeBlock.$error && form.timeBlock.$error.invalidwhen) {
             return 'Minimal Time Slice should be greater than 0.';
           }
         };

@@ -374,13 +374,14 @@
 
           </div>
 
-          <div ng-if="isEditService"
+          <div ng-if="isEditService" ng-controller="quicktech.core.settings.editServiceCtrl"
                ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
 
         </li>
 
         <li class="qt-service-form add-new-service">
-          <div ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+          <div ng-controller="quicktech.core.settings.editServiceCtrl"
+               ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
         </li>
 
       </ul>

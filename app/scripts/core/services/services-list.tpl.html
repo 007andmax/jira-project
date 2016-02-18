@@ -58,12 +58,14 @@
 
     </div>
 
-    <div ng-if="isEditService" ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+    <div ng-if="isEditService" ng-controller="quicktech.core.services.editServiceCtrl"
+         ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
 
   </li>
 
   <li class="qt-service-form" ng-if="showCreateService">
-    <div ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
+    <div ng-controller="quicktech.core.services.editServiceCtrl"
+         ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
   </li>
 
 </ul>
