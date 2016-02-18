@@ -379,15 +379,19 @@
         $scope.validateServiceName = function (ngModelCtrl) {
           var uniqueNameCount = 0;
 
-          for (var i = 0; i < $scope.servicesData.default.length; i++) {
-            if (ngModelCtrl.$viewValue.toLowerCase() === $scope.servicesData.default[i].name.toLowerCase()) {
-              uniqueNameCount++;
+          if ($scope.servicesData && $scope.servicesData.default) {
+            for (var i = 0; i < $scope.servicesData.default.length; i++) {
+              if (ngModelCtrl.$viewValue.toLowerCase() === $scope.servicesData.default[i].name.toLowerCase()) {
+                uniqueNameCount++;
+              }
             }
           }
 
-          for (var i = 0; i < $scope.editCompany.services.length; i++) {
-            if (ngModelCtrl.$viewValue.toLowerCase() === $scope.editCompany.services[i].name.toLowerCase()) {
-              uniqueNameCount++;
+          if ($scope.editCompany.services) {
+            for (var i = 0; i < $scope.editCompany.services.length; i++) {
+              if (ngModelCtrl.$viewValue.toLowerCase() === $scope.editCompany.services[i].name.toLowerCase()) {
+                uniqueNameCount++;
+              }
             }
           }
 
