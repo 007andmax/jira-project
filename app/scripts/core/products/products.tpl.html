@@ -65,7 +65,7 @@
 
           <div class="no-items">{{ category.productsAmount}} items</div>
 
-          <div class="product-actions" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+          <div class="product-actions" ng-show="(currentUser.role === 'SUPER_TECH_ADMIN') && !category.default">
 
             <div class="btn btn-info has-tooltip" ng-click="addProduct();toggleProducts()" scroll-to-form
                  tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
