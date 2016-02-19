@@ -339,13 +339,13 @@
   width: 114px;
 }
 .table-wrapper .table-content .col-2 {
-  width: calc(100% - 400px); /*width: calc(100% - 430px);*/
+  width: calc(100% - 386px); /*width: calc(100% - 430px);*/
   float: left;
 }
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
-  width: calc(60% - 163px);
+  width: calc(60% - 19px);
   float: left;
 }
 

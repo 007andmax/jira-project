@@ -91,11 +91,68 @@
         <div class="sub-wrapper" ets-slider>
           <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
 
+            <!--MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm-->
+
+            <!--<div class="dropdown" move-product>-->
+            <!--<div class="btn btn-primary has-tooltip pull-right" data-toggle="dropdown" style="width: 92px;"-->
+            <!--aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"-->
+            <!--tooltip="Move product(s) to...">-->
+            <!--&lt;!&ndash;ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"&ndash;&gt;-->
+            <!--&lt;!&ndash;custom-disabled="{{ !hasDefaultServicesChecked }}"&ndash;&gt;-->
+            <!--&lt;!&ndash;services-moving&ndash;&gt;-->
+            <!--<i class="icn-sm icn-add-services"></i>-->
+            <!--</div>-->
+
+            <!--<div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"-->
+            <!--style="margin-top: 44px;">-->
+
+            <!--<div role="presentation" class="checkbox-dropdown-header">-->
+            <!--<div class="form-group">-->
+            <!--<input type="text" class="form-control-filter" placeholder="Search category..."-->
+            <!--ng-model="searchCategory">-->
+            <!--<i class="icn-sm icn-search-input" tabindex="-1"></i>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="list-container" style="height: 164px; width: 296px;">-->
+            <!--<div class="nano has-scrollbar">-->
+            <!--<div class="nano-content" tabindex="0">-->
+            <!--<ul class="qt-table">-->
+
+            <!--<li ng-repeat="category in categories | filter: {'name': searchCategory}"-->
+            <!--style="margin-top:0;padding: 5px 12px;"-->
+            <!--ng-style="$first && {'padding-top':'10px'} || $last && {'padding-bottom':'10px'}">-->
+
+            <!--<label class="control checkbox pull-left" style="margin-top: 5px;">-->
+            <!--<input type="radio" name="selectCategory" ng-model="selectCategory.id"-->
+            <!--ng-value="category.id" ng-click="testClick()">-->
+            <!--<span class="control-indicator"></span>-->
+            <!--</label>-->
+
+            <!--<div class="pull-left">{{ category.name }}</div>-->
+
+            <!--</li>-->
+
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<div role="presentation" class="checkbox-dropdown-footer clearfix">-->
+            <!--<div class="btn btn-info btn-lg pull-right" custom-disabled="{{ !selectCategory.id }}">Move</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm-->
+
             <ul class="qt-list qt-product-list">
 
               <li class="list-heading" ng-show="products.length > 0">
-                <div class="col-1">CODE NO.</div>
-                <div class="col-2">PRODUCT</div>
+                <div class="col-1" style="padding-left:30px;">ILC</div>
+                <div class="col-1">Mfg#</div>
+                <div class="col-2">DESCRIPTION</div>
                 <div class="col-3">VENDOR/SUPPLIER</div>
                 <div class="col-4">COST</div>
                 <div class="col-5">SALE PRICE</div>
@@ -108,18 +165,22 @@
                   show-model-element="{{ 'show-' + product.versionedId.id}}">
 
                 <div class="intermediate-parent-elem" ng-if="!showEditProduct">
-                  <div class="col-1">{{ product.code}}</div>
+                  <div class="col-1" style="height: 18px;">
 
-                  <div class="col-2">
+                    <label class="control checkbox pull-left" style="margin-top: 4px">
+                      <input type="checkbox">
+                      <span class="control-indicator"></span>
+                    </label>
 
-                    <div class="product-name">{{ product.name}}</div>
+                    <div>{{ product.ilc}}</div>
 
-                    <a href="javascript:void(0)" class="hit-area ha-desc pull-left"
-                       custom-popover custom-popover-content="{{ product.description}}"
-                       custom-popover-placement="bottom" custom-popover-first-left="25">
-                      <i class="icn-sm icn-description"></i>
-                    </a>
                   </div>
+
+                  <div class="col-1">
+                    <div class="product-name">{{ product.manufacture}}</div>
+                  </div>
+
+                  <div class="col-2">{{ product.description}}</div>
 
                   <div class="col-3" style="height: 20px">{{ product.vendor.name}}</div>
 

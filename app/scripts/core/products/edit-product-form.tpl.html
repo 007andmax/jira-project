@@ -1,16 +1,18 @@
 <div class="product-form-wrapper" ng-form="editProductForm" ng-controller="quicktech.core.products.editProductCtrl">
 
-  <div class="col-1">{{ product ? product.code : actualCode.value }}</div>
+  <div class="col-1" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+    <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
+           ng-required="false" ng-model="editProduct.ilc" ng-maxlength="64">
+  </div>
 
-  <div class="col-2" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductName')}">
-    <input type="text" class="form-control" placeholder="Product" name="editProductName"
-           ng-required="true" ng-model="editProduct.name" ng-maxlength="100" ng-minlength="3"
-           is-uniq-validation validation-func="validateProductName" model-id="product.versionedId.id">
+  <div class="col-2" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
+    <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
+           ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="64">
   </div>
 
   <div class="col-desc" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
     <input type="text" class="form-control" placeholder="Description"
-           ng-model="editProduct.description"
+           ng-model="editProduct.description" ng-required="true"
            ng-maxlength="500" name="editProductDescription">
   </div>
 

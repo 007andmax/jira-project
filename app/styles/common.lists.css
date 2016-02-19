@@ -1618,6 +1618,7 @@ Devices tab
   display: none !important;
 }
 .qt-product-list>li>.col-1{
+  height: 18px;
   width: 184px;
   overflow: hidden;
   white-space: nowrap;
@@ -1625,7 +1626,7 @@ Devices tab
   text-overflow: ellipsis;
 }
 .qt-product-list>li>.col-2{
-  width: calc(100% - 713px);
+  width: calc(100% - 897px);
   color: #94a4b8;
 }
 /*.qt-product-list>li>.col-2 .icn-description{
@@ -1656,10 +1657,11 @@ Devices tab
 }
 @media only screen and (min-width: 2000px){
   .qt-product-list>li>.col-1{
+    height: 18px;
     width: 244px;
   }
   .qt-product-list>li>.col-2{
-    width: calc(100% - 893px);
+    width: calc(100% - 1137px);
   }
   .qt-product-list>li>.col-3{
     width: 294px;
@@ -1676,10 +1678,11 @@ Devices tab
 }
 @media only screen and (max-width: 1700px){
   .qt-product-list>li>.col-1{
+    height: 18px;
     width: 114px;
   }
   .qt-product-list>li>.col-2{
-    width: calc(100% - 503px);
+    width: calc(100% - 617px);
   }
   .qt-product-list>li>.col-3{
     width: 164px;
@@ -2010,7 +2013,10 @@ Devices tab
   display: none !important;
 }
 .qt-services-list>li>.col-1{
-  width: calc(100% - 319px);
+  width: calc(100% - 399px);
+}
+.qt-services-list>li>.col-5{
+  width: 80px;
 }
 .qt-services-list>li>.col-2{
   width: 133px;

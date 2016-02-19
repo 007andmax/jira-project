@@ -11,19 +11,14 @@
           };
 
           $scope.selectProduct = function (product) {
-            $scope.productExpense.item = product;
-
-            $scope.$apply(function(){
-              return $scope.productExpense.description = product.description;
-            });
-
+            $scope.productExpense.item = angular.copy(product);
           };
 
           $scope.removeProduct = function () {
             $scope.ticketUpdate.products.splice($scope.$index, 1);
           };
 
-          $scope.controlProductQty = function (form){
+          $scope.controlProductQty = function (form) {
             form.productQty.$setValidity('zero', +$scope.productExpense.quantity !== 0);
           };
 

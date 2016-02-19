@@ -1,0 +1,46 @@
+<ul class="category-list-container qt-table nano-content">
+
+  <li ng-hide="isCanCreateProduct" class="clear-product" ng-click="chooseProductItem()">
+    <div class="clear-product-cont">
+      <span>Clear Product</span>
+    </div>
+  </li>
+
+  <li ng-show="isCanCreateProduct" class="create-product" ng-click="createNewProduct()">
+    <div class="create-product-cont" style="">
+      <span>Create Product</span>
+    </div>
+  </li>
+
+  <li class="category-conteiner" ng-repeat="category in autocompleteData"
+      ng-show="(category.products | filter:filterProduct).length > 0">
+
+    <div class="category-info">
+      <span><b>{{ category.name }}</b></span>
+      <span class="clearfix"></span>
+      <span><b>{{ category.products.length + (category.products.length > 1 ? ' items' : ' item') }}</b></span>
+    </div>
+
+    <ul class="qt-table product-list-container">
+
+      <li ng-click="chooseProductItem(product)"
+          ng-repeat="product in category.products | filter:filterProduct">
+
+        <div>
+          <span class="title">{{ product.description }}</span>
+          <span class="pull-right total-count">{{ product.sale | currency: '$': 2 }}</span>
+          <span class="clearfix"></span>
+
+          <div style="color:#b2becd;">
+            <span ng-show="product.ilc">ILC: {{ product.ilc }}</span>
+            <span ng-show="product.manufacture" style="margin-left: 15px;">P/N: {{ product.manufacture }}</span>
+          </div>
+        </div>
+
+      </li>
+
+    </ul>
+
+  </li>
+
+</ul>

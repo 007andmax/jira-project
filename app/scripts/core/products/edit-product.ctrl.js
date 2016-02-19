@@ -10,7 +10,6 @@
           $scope.editProduct = $scope.product.staticCopy();
           $scope.editProduct.category = {id: $scope.category.id};
         } else {
-          $scope.actualCode = ProductsService.getActualCode($scope);
           $scope.editProduct = {
             category: {id: $scope.category.id}
           };
@@ -72,10 +71,6 @@
                 return 'Please fill in the required field(s).';
               }
             }
-          }
-
-          if (form.editProductName && form.editProductName.$error && form.editProductName.$error.minlength) {
-            return 'Product name is too short!';
           }
 
           if (form.editProductName && form.editProductName.$error && form.editProductName.$error.maxlength) {

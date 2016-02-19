@@ -53,6 +53,7 @@
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-1 {
+  height: 18px;
   width: 184px;
   overflow: hidden;
   white-space: nowrap;
@@ -61,7 +62,7 @@
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-  width: calc(100% - 713px);
+  width: calc(100% - 897px);
   color: #94a4b8;
 }
 
@@ -93,11 +94,12 @@
 
 @media only screen and (min-width: 2000px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-1 {
+    height: 18px;
     width: 244px;
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-    width: calc(100% - 893px);
+    width: calc(100% - 1137px);
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-3 {
@@ -119,11 +121,12 @@
 
 @media only screen and (max-width: 1700px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-1 {
+    height: 18px;
     width: 114px;
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-    width: calc(100% - 503px);
+    width: calc(100% - 617px);
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-3 {
@@ -750,4 +753,70 @@ aside#left div.nav-title {
 
 .tech-user-templates-wrapper .tech-user-item .control-label {
   margin-bottom: 0;
+}
+
+.custom-product-list {
+  height: 200px;
+  width: 450px;
+}
+
+.custom-product-list .product-list-container > li {
+  padding: 10px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.custom-product-list .product-list-container > li:hover {
+  background-color: #e7ecf2;
+}
+
+.custom-product-list .clear-product {
+  cursor: pointer;
+}
+
+.custom-product-list .clear-product:hover {
+  background-color: #fff2f2;
+}
+
+.custom-product-list .clear-product .clear-product-cont {
+  width: 470px;
+  padding: 10px;
+  text-align: center
+}
+
+.custom-product-list .create-product {
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.custom-product-list .create-product:hover {
+  background-color: #e7ecf2;
+}
+
+.custom-product-list .create-product .create-product-cont {
+  width: 470px;
+  padding: 10px;
+  text-align: center
+}
+
+.custom-product-list .category-list-container {
+  margin: 10px 0;
+  display: block;
+  padding: 0;
+  color: #4c5c6f;
+}
+
+.custom-product-list .category-conteiner {
+  margin: 0;
+}
+
+.custom-product-list .category-conteiner .category-info {
+  display: block;
+  text-align: center;
+  background-color: #f1f5fa;
+  padding: 8px
+}
+
+.custom-product-list .category-conteiner .product-list-container {
+  margin: 0;
 }

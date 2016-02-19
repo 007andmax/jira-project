@@ -29,7 +29,7 @@
 
             <ul class="dropdown-menu dropdown-menu-right">
 
-              <li role="presentation" >
+              <li role="presentation">
                 <a role="menuitem" tabindex="-1" create-ticket-open-modal>Ticket</a>
               </li>
 
@@ -65,7 +65,7 @@
     <div class="topNavbarRight pull-right">
 
       <div class="topNavbar-logout pull-right">
-        <a href="javascript:void(0)" ng-click="logOut()" class="hit-area ha-20-20 has-tooltip"
+        <a href="javascript:void(0)" logout-btn class="hit-area ha-20-20 has-tooltip"
            tooltip="Logout" tooltip-placement="bottom">
           <i class="icn-md icn-logout"></i>
         </a>
@@ -80,19 +80,19 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-avatar">
           <div class="details">
             <div class="details-user clearfix">
-              <i class="on" ></i>
+              <i class="on"></i>
 
               <strong class="pull-left">{{ getUserName(currentUser) }}</strong>
 
               <div class="user-badges pull-right">
                 <i ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
                    class="icn-sm badge-super-admin pull-right persistent-tooltip"
-                   tooltip-placement="top"  tooltip-append-to-body="true"
+                   tooltip-placement="top" tooltip-append-to-body="true"
                    tooltip="You're Super Admin">
                 </i>
                 <i ng-show="currentUser.role === 'ADMIN'"
                    class="icn-sm badge-admin pull-right persistent-tooltip"
-                   tooltip-placement="top"  tooltip-append-to-body="true"
+                   tooltip-placement="top" tooltip-append-to-body="true"
                    tooltip="You're Admin">
                 </i>
               </div>
@@ -119,17 +119,17 @@
           </div>
 
           <!--<div class="notifications custom-scroll">-->
-            <!--<ul class="recent-activities-by">-->
-              <!--<li class="list-users" ng-repeat="activity in activities"-->
-                  <!--ng-controller="quicktech.core.rightPanel.activityCtrl"-->
-                  <!--ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">-->
+          <!--<ul class="recent-activities-by">-->
+          <!--<li class="list-users" ng-repeat="activity in activities"-->
+          <!--ng-controller="quicktech.core.rightPanel.activityCtrl"-->
+          <!--ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">-->
 
-              <!--</li>-->
-            <!--</ul>-->
+          <!--</li>-->
+          <!--</ul>-->
           <!--</div>-->
 
           <!--<div class="bottom">-->
-            <!--<div class="btn btn-block btn-default btn-lg dropdown-avatar-bottom-content">SEE ALL</div>-->
+          <!--<div class="btn btn-block btn-default btn-lg dropdown-avatar-bottom-content">SEE ALL</div>-->
           <!--</div>-->
         </div>
 

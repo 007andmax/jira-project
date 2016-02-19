@@ -27,13 +27,13 @@
         var caseToSetCategoryName = ['PRODUCT_CATEGORY_ADDED', 'PRODUCT_CATEGORY_RENAMED', 'PRODUCT_ADDED', 'PRODUCT_EDITED_SALE', 'PRODUCT_EDITED_DESCRIPTION',
           'PRODUCT_EDITED_COST', 'PRODUCT_CATEGORY_DELETED'];
 
-        var caseToSetProductName = ['PRODUCT_ADDED', 'PRODUCT_EDITED_NAME', 'PRODUCT_EDITED_SALE', 'PRODUCT_EDITED_DESCRIPTION', 'PRODUCT_EDITED_COST', 'PRODUCT_EDITED_VENDOR',
-          'TICKET_UPDATE_PRODUCT_EXPENSE_ADDED'];
+        //var caseToSetProductName = ['PRODUCT_ADDED', 'PRODUCT_EDITED_SALE', 'PRODUCT_EDITED_DESCRIPTION', 'PRODUCT_EDITED_COST', 'PRODUCT_EDITED_VENDOR',
+        //  'TICKET_UPDATE_PRODUCT_EXPENSE_ADDED'];
 
         var caseToSetServiceName = ['SERVICE_ADDED', 'SERVICE_EDITED_NAME', 'SERVICE_EDITED_TIME', 'SERVICE_EDITED_RATE', 'SERVICE_MOVED', 'SERVICE_DELETED',
           'SERVICE_DELETED_DEFAULT', 'TICKET_UPDATE_SERVICE_EXPENSE_EDIT', 'SERVICE_EDITED_RATE_DEFAULT'];
 
-        var caseToSetNewProductName = ['PRODUCT_EDITED_NAME'];
+        //var caseToSetNewProductName = ['PRODUCT_EDITED_NAME'];
         var caseToSetNewCategoryName = ['PRODUCT_CATEGORY_RENAMED'];
         var caseToSetNewServiceName = ['SERVICE_EDITED_NAME'];
 
@@ -77,13 +77,13 @@
           setNewCategoryName();
         }
 
-        if (caseToSetProductName.indexOf($scope.activity.action) !== -1) {
-          setProductName();
-        }
-
-        if (caseToSetNewProductName.indexOf($scope.activity.action) !== -1) {
-          setNewProductName();
-        }
+        //if (caseToSetProductName.indexOf($scope.activity.action) !== -1) {
+        //  setProductName();
+        //}
+        //
+        //if (caseToSetNewProductName.indexOf($scope.activity.action) !== -1) {
+        //  setNewProductName();
+        //}
 
         if (caseToSetServiceName.indexOf($scope.activity.action) !== -1) {
           setServiceName();
@@ -184,21 +184,21 @@
           }
         }
 
-        function setProductName() {
-          if ($scope.activity.firstList[0] && $scope.activity.firstList[0].productName) {
-            $scope.productName = $scope.activity.firstList[0].productName;
-          } else {
-            console.error('can not find productName in activity ' + $scope.activity.action)
-          }
-        }
-
-        function setNewProductName() {
-          if ($scope.activity.firstList[0] && $scope.activity.firstList[0].newProductName) {
-            $scope.newProductName = $scope.activity.firstList[0].newProductName;
-          } else {
-            console.error('can not find newProductName in activity ' + $scope.activity.action)
-          }
-        }
+        //function setProductName() {
+        //  if ($scope.activity.firstList[0] && $scope.activity.firstList[0].productName) {
+        //    $scope.productName = $scope.activity.firstList[0].productName;
+        //  } else {
+        //    console.error('can not find productName in activity ' + $scope.activity.action)
+        //  }
+        //}
+        //
+        //function setNewProductName() {
+        //  if ($scope.activity.firstList[0] && $scope.activity.firstList[0].newProductName) {
+        //    $scope.newProductName = $scope.activity.firstList[0].newProductName;
+        //  } else {
+        //    console.error('can not find newProductName in activity ' + $scope.activity.action)
+        //  }
+        //}
 
         function setServiceName() {
           if ($scope.activity.action === 'SERVICE_MOVED') {
