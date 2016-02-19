@@ -9,8 +9,10 @@
         link: function (scope, element, attrs) {
           element.on('click', function () {
 
-            $rootScope.logOut();
+            window.loggingOut = true;
 
+            window.location.href = '/logout';
+            window.location.hash = '';
           })
         }
       }
