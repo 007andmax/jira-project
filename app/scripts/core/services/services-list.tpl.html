@@ -2,6 +2,7 @@
 
   <li class="list-heading" ng-show="services.length > 0">
     <div class="col-1">TYPE</div>
+    <div class="col-5" ng-show="companyService">IS BILLABLE</div>
     <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
     <div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
     <div class="col-4">&nbsp;</div>
@@ -16,20 +17,20 @@
 
       <div class="col-1">
 
-        <label class="control checkbox pull-left" ng-if="showCheckboxes"
-               tooltip="is billable" tooltip-placement="top">
+        <label class="control checkbox pull-left" ng-if="showCheckboxes">
           <input type="checkbox" ng-model="checkedServices[service.versionedId.id]" ng-change="onChangeCheckbox()">
           <span class="control-indicator"></span>
         </label>
 
-        <label class="control checkbox pull-left" ng-if="!showCheckboxes"
-               tooltip="is billable" tooltip-placement="top">
+        <div ng-class="{'checkbox-caption': showCheckboxes}">{{ service.name }}</div>
+      </div>
+
+      <div class="col-5" ng-show="companyService">
+        <label class="control checkbox pull-left" ng-if="!showCheckboxes" style="margin-top: 4px;left:25px">
           <input type="checkbox" ng-checked="service.billable" custom-disabled="{{ disabledCheckbox }}"
                  ng-click="onChangeBillable()">
           <span class="control-indicator"></span>
         </label>
-
-        <div class="checkbox-caption">{{ service.name }}</div>
       </div>
 
       <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">

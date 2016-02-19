@@ -195,7 +195,11 @@
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 319px);
+  width: calc(100% - 399px);
+}
+
+.qt-services-list > li > .intermediate-parent-elem > .col-5 {
+  width: 80px;
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-2 {
