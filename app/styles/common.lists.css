@@ -877,7 +877,7 @@ Devices tab
   margin-right: -2px;
   margin-top: 2px;
 }
-.qt-invoices .qt-table{
+.qt-invoices .qt-table:not(.category-list-container):not(.product-list-container){
   width: calc(100% - 88px);
   float: right;
   padding-top: 25px;
@@ -1051,7 +1051,7 @@ Devices tab
   padding-left: 0;
 }
 .qt-add-service .qt-invoices > li.add-product-item > .col-1{
-  width: 195px;
+  width: calc(100% - 449px);
   margin-left: 24px;
   padding-left: 0;
 }
@@ -1077,6 +1077,7 @@ Devices tab
 .qt-add-service .qt-invoices > li.add-product-item > .col-5 {
   /*new*/
   width: 200px;
+  padding-right: 5px;
 }
 .qt-add-service .icn{
   position: absolute;
@@ -1541,7 +1542,7 @@ Devices tab
     padding-bottom: 1px;
   }
 }
-.qt-products>li:hover .no-items{
+.qt-products>li:hover .no-items:not(.default-no-items){
   display: none;
 }
 .product-actions{

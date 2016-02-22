@@ -339,13 +339,33 @@
   width: 114px;
 }
 .table-wrapper .table-content .col-2 {
-  width: calc(100% - 386px); /*width: calc(100% - 430px);*/
+  width: calc(100% - 400px);
   float: left;
 }
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
   width: calc(60% - 19px);
+  float: left;
+}
+
+.table-wrapper .table-content .col-2.col-2-has-serial-number.has-ilc-pn{
+  line-height: 40px;
+}
+
+.qt-recurring-invoices .table-wrapper .table-content .col-2 {
+  width: calc(100% - 563px);
+  float: left;
+}
+
+.qt-recurring-invoices .table-wrapper.invoice-srvs-list .table-content .col-2 {
+  width: calc(100% - 400px);
+  float: left;
+}
+
+.qt-recurring-invoices .table-wrapper .table-content .col-2.col-2-has-serial-number {
+  /*new*/
+  width: calc(60% - 326px);
   float: left;
 }
 

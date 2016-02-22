@@ -66,6 +66,7 @@
       <div class="validation-msg pull-left">{{ validationMessage() }}</div>
 
       <div class="btn btn-lg btn-info pull-right"
+           custom-disabled="{{ disabledSave || updateTicketService.$invalid }}"
            ng-click="saveUpdateService(updateTicketService)">
         Save
       </div>

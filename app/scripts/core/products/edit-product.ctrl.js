@@ -25,6 +25,18 @@
 
         $scope.saveChangeProduct = function (form) {
           if (form.$valid) {
+            var isIlcChange = $scope.editProduct.ilc != $scope.product.ilc;
+            var isManufactureChange = $scope.editProduct.manufacture != $scope.product.manufacture;
+            var isDescriptionChange = $scope.editProduct.description != $scope.product.description;
+            var isVendorChange = ($scope.editProduct.vendor && $scope.editProduct.vendor.id) !== ($scope.product.vendor && $scope.product.vendor.id);
+            var isCostChange = $scope.editProduct.cost != $scope.product.cost;
+            var isSaleChange = $scope.editProduct.sale != $scope.product.sale;
+
+            if (!(isIlcChange || isManufactureChange || isDescriptionChange || isVendorChange || isCostChange || isSaleChange)) {
+              $rootScope.$broadcast('cancelEditForm', 'isProductCreation');
+              return;
+            }
+
             $scope.disabledSaveChangeButton = true;
 
             if ((typeof $scope.editProduct.vendor) === 'string') {
@@ -44,15 +56,16 @@
           }
         };
 
-        $scope.validateProductName = function (ngModelCtrl, modelId) {
+        $scope.validateProductIls = function (ngModelCtrl, modelId) {
+          var validationResult = ProductsService.isILCUnique(ngModelCtrl.$viewValue, modelId || '', function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
+        };
 
-          if ($scope.editProduct.vendor) {
-            var validationResult = ProductsService.isProductNameUnique(ngModelCtrl.$viewValue, modelId || '', $scope.editProduct.vendor.id, function () {
-              ngModelCtrl.$setValidity('unique', validationResult.value);
-            });
-          } else {
-            ngModelCtrl.$setValidity('unique', true);
-          }
+        $scope.validateProductMnf = function (ngModelCtrl, modelId) {
+          var validationResult = ProductsService.isMfgUnique(ngModelCtrl.$viewValue, modelId || '', function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
         };
 
         $scope.validateSaleAndCost = function (form) {
@@ -71,6 +84,22 @@
                 return 'Please fill in the required field(s).';
               }
             }
+          }
+
+          if (form.editProductILC && form.editProductILC.$error && form.editProductILC.$error.unique) {
+            return 'Product ILC already exists!';
+          }
+
+          if (form.editProductILC && form.editProductILC.$error && form.editProductILC.$error.maxlength) {
+            return 'Product ILC exceeds maximum length.';
+          }
+
+          if (form.editProductMfg && form.editProductMfg.$error && form.editProductMfg.$error.unique) {
+            return 'Product MFG# already exists!';
+          }
+
+          if (form.editProductMfg && form.editProductMfg.$error && form.editProductMfg.$error.maxlength) {
+            return 'Product MFG# exceeds maximum length.';
           }
 
           if (form.editProductName && form.editProductName.$error && form.editProductName.$error.maxlength) {

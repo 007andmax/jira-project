@@ -5,10 +5,9 @@
 
   <div class="clearfix">
     <div class="user-name"><strong>{{ userName }}</strong>
-      removed {{ activity.firstList.length === 1 ? 'a Service' : activity.firstList.length + ' services' }} from ticket
+      removed {{ activity.firstList.length === 1 ? serviceName : activity.firstList.length + ' services' }} from ticket
       <a class="text-muted ticket-number"
          href="javascript:void(0)">
-         <!--ui-sref="tickets.details({listType: 'preview', ticketId: ticketId})">-->
         Tkt# {{ ticketNumber }}
       </a>
     </div>

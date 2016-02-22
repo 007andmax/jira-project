@@ -2,13 +2,12 @@
 
 (function () {
 
-  angular.module('quicktech.core.billable').controller('quicktech.core.recurring.editProductCtrl',
+  angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editProductCtrl',
     ['$scope', 'RecurringService', 'ProductsService',
       function ($scope, RecurringService, ProductsService) {
 
         $scope.editProduct = {};
 
-        $scope.productCategories = ProductsService.getCategories($scope);
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete(function () {
           $scope.autocompleteDataLoad = true;
         });
@@ -17,14 +16,12 @@
 
           $scope.editProduct = {
             id: $scope.product.id,
-            description: $scope.product.description,
             quantity: $scope.product.quantity,
             serialNumber: $scope.product.serialNumber,
             sum: $scope.product.sum,
             item: {
               versionedId: $scope.product.item.versionedId,
-              name: $scope.product.item.name,
-              cost: $scope.product.item.cost
+              description: $scope.product.item.description
             }
           };
         }
@@ -35,10 +32,6 @@
 
         $scope.selectProduct = function (product) {
           $scope.editProduct.item = product;
-
-          $scope.$apply(function () {
-            return $scope.editProduct.description = product.description;
-          });
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
@@ -47,23 +40,6 @@
 
         $scope.cancelEditProduct = function () {
           $scope.$emit('cancelEditForm');
-        };
-
-        $scope.isProductNameCorrect = function(){
-          if(!$scope.editProduct.item.name || !$scope.productsByCategory){
-            return;
-          }
-
-          for(var i = 0; i < $scope.productsByCategory.length; i++){
-            if($scope.editProduct.item.name === $scope.productsByCategory[i].name){
-              $scope.editProduct.item = $scope.productsByCategory[i].staticCopy();
-              return;
-            } else {
-              if($scope.editProduct.item.versionedId){
-                $scope.editProduct.item.versionedId.id = '';
-              }
-            }
-          }
         };
 
         $scope.saveProduct = function (form) {

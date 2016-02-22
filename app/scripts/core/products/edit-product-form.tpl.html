@@ -2,12 +2,14 @@
 
   <div class="col-1" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
     <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
-           ng-required="false" ng-model="editProduct.ilc" ng-maxlength="64">
+           ng-required="false" ng-model="editProduct.ilc" ng-maxlength="64"
+           is-uniq-validation validation-func="validateProductIls" model-id="product.versionedId.id">
   </div>
 
   <div class="col-2" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
     <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
-           ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="64">
+           ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="64"
+           is-uniq-validation validation-func="validateProductMnf" model-id="product.versionedId.id">
   </div>
 
   <div class="col-desc" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">

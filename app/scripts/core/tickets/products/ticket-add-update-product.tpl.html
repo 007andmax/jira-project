@@ -22,7 +22,7 @@
           <input type="hidden" name="product" ng-model="productExpense.item.description" ng-required="true">
 
           <div class="nano dropdown-menu custom-product-list" pl-conteiner
-               ng-include="'/html/scripts/core/tickets/products/products-list.tpl.html'"></div>
+               ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
 
         </div>
       </div>
@@ -42,7 +42,7 @@
                hard-reset-pattern="numberPattern"/>
       </div>
 
-      <div class="col-5"  ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
+      <div class="col-5" ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
         <input type="text" class="form-control" placeholder="Price"
                name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
                hard-reset-pattern="decimalNumberPattern" hard-reset-required="true"/>

@@ -820,3 +820,12 @@ aside#left div.nav-title {
 .custom-product-list .category-conteiner .product-list-container {
   margin: 0;
 }
+
+.table-wrapper .table-content.accounting-prod-list .col-2 {
+  width: calc(100% - 563px);
+}
+
+.table-wrapper .table-content.accounting-prod-list .col-2.col-2-has-serial-number {
+  width: calc(60% - 326px);
+}
+

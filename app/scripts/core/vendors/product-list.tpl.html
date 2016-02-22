@@ -4,15 +4,13 @@
 
     <div class="vp-price">{{ product.sale | currency: '$': 2 }}</div>
 
-    <div class="vp-name"><span>{{ product.name }}</span>
-      <a href="javascript:void(0)" class="hit-area ha-desc pull-left"
-         popover-placement="bottom" popover="{{ product.description }}"
-         popover-trigger="mouseenter" popover-class="description-popover" popover-append-to-body="true">
-        <i class="icn-sm icn-description"></i>
-      </a>
-    </div>
+    <div class="vp-name"><span>{{ product.description }}</span></div>
 
-    <div class="vp-code">{{ product.category.name }} #{{ product.code }}</div>
+    <div class="vp-code">
+      <span ng-show="product.ilc">ILC: {{ product.ilc }}</span>
+      <span ng-show="product.manufacture" style="margin-left: 15px;">P/N: {{ product.manufacture }}</span>
+    </div>
+    <div class="vp-code">{{ product.category.name }}</div>
   </li>
 
 </ul>

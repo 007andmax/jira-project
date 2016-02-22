@@ -71,10 +71,12 @@
                 <div ng-repeat-start="shipToAddress in currentInvoice.shipTo | orderBy:'isPrimary':true">
                   <a data-shipTo-id="{{ shipToAddress }}">
                     <div>
-                      <h3 class="heading">{{ shipToAddress.isPrimary ? 'Primary address' : 'Billing address ' + $index }}</h3>
+                      <h3 class="heading">{{ shipToAddress.isPrimary ? 'Primary address' : 'Billing address ' + $index
+                        }}</h3>
                       <h4 class="company-name">{{ currentInvoice.companyName }}</h4>
 
-                      <div class="number" ng-repeat="phoneNumber in shipToAddress.phoneNumbers | orderBy:'priority' | limitTo: 1">
+                      <div class="number"
+                           ng-repeat="phoneNumber in shipToAddress.phoneNumbers | orderBy:'priority' | limitTo: 1">
                         {{ phoneNumber.number }}
                       </div>
 
@@ -137,8 +139,7 @@
       </h4>
 
       <div class="ticket-item items-header">
-        <div class="col-1">ITEM</div>
-        <div class="col-2">description</div>
+        <div class="col-1" style="width: 492px">ITEM</div>
         <div class="col-3">quantity</div>
         <div class="col-4">UNIT price</div>
         <div class="col-5">total</div>
@@ -148,12 +149,14 @@
 
     <div class="ticket-item" ng-repeat="productExpense in ticket.productExpenses">
 
-      <div class="col-1">
-        <span class="name">{{ productExpense.item.name }}</span>
-        #{{ productExpense.item.code }}
+      <div class="col-1" style="width: 492px">
+        <span class="name">{{ productExpense.item.description }}</span>
+        <br>
+        <span>ILC: {{ productExpense.item.ilc }}</span>
+        <span style="margin-left: 15px;">P/N: {{ productExpense.item.manufacture }}</span>
+
       </div>
 
-      <div class="col-2">{{ productExpense.description }}</div>
       <div class="col-3">{{ productExpense.billableQuantity }}</div>
       <div class="col-4">{{ productExpense.item.sale | currency: '$':2 }}</div>
       <div class="col-5">{{ productExpense.sum | currency: '$':2 }}</div>

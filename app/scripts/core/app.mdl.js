@@ -308,7 +308,7 @@
         $rootScope.logOut = function (message) {
 
           if (!message) {
-            message = 'Now you will be logout';
+            message = 'Your session has been closed.';
           }
 
           $rootScope.isLogOut = true;

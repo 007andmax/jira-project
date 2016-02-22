@@ -1,43 +1,55 @@
 <div class="ticket-update-product-edit" ng-controller="quicktech.core.tickets.ticketEditUpdateProductCtrl">
   <i class="icon-edit icn-sm icn-update-product"></i>
+
   <form name="updateTicketProduct">
     <ul class="qt-table">
       <li>
         <div class="edit-col1"
-             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productName') || !editProduct.item.versionedId.id}">
-          <div class="dropdown" product-autocomplete>
-            <input type="text" class="form-control has-dropdown" ng-value="editProduct.item.name"
-                   placeholder="Product" data-toggle="dropdown" aria-expanded="false"
-                   name="productName" ng-required="true">
-            <i class="icn-sm icn-caret-gray"></i>
+             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'product') || !editProduct.item.description}">
 
-            <div ng-include="'/html/scripts/common/templates/choose-product-dropdown.tpl.html'"></div>
+          <div products-list="editProduct" id="product-list-cont"
+               click-outside="closeDropdown()" outside-if-not="product-list-cont">
+
+            <div>
+
+              <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
+                     placeholder="Product" autocomplete="off">
+
+              <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
+                     placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct">
+
+              <i class="icn-sm icn-caret-gray"></i>
+            </div>
+
+            <input type="hidden" name="product" ng-model="editProduct.item.description" ng-required="true">
+
+            <div class="nano dropdown-menu custom-product-list" pl-conteiner
+                 ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
 
           </div>
+
         </div>
 
-        <div class="edit-col2" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productDescription')}">
-          <input type="text" class="form-control" placeholder="Description"
-                 name="productDescription" ng-maxlength="2000" max-length-word="30"
-                 ng-model="editProduct.description">
-        </div>
-
-        <div class="edit-col3" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}">
+        <div class="edit-col3" style="width: 74px;"
+             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}">
           <input type="text" class="form-control" placeholder="Serial Number"
                  name="productSerialNumber" ng-maxlength="36"
                  ng-model="editProduct.serialNumber">
         </div>
 
-        <div class="edit-col4" ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">
+        <div class="edit-col4" style="width: 74px;"
+             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}">
           <input type="text" class="form-control" placeholder="Qty"
                  ng-model="editProduct.quantity" ng-maxlength="10"
                  name="productQty" hard-reset-required="true" ng-change="controlProductQty(updateTicketProduct)"
                  hard-reset-pattern="numberPattern">
         </div>
 
-        <div class="edit-col5">
-          <input type="text" class="form-control" placeholder="Amount" readonly
-                 value="{{ editProduct.item.sale * editProduct.quantity || '' }}">
+        <div class="edit-col5" style="width: 74px;"
+             ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productPrice')}">
+          <input type="text" class="form-control" placeholder="Price" name="productPrice"
+                 ng-required="true" ng-model="editProduct.item.sale"
+                 hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
         </div>
 
       </li>
@@ -48,6 +60,7 @@
       <div class="validation-msg pull-left">{{ validationMessage() }}</div>
 
       <div class="btn btn-lg btn-info pull-right"
+           custom-disabled="{{ disabledSave || updateTicketProduct.$invalid }}"
            ng-click="saveUpdateProduct(updateTicketProduct)">
         Save
       </div>

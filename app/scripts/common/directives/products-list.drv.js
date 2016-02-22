@@ -7,11 +7,15 @@
       function ($timeout) {
         return {
           restrict: 'A',
-          link: function (scope, element) {
+          link: function (scope, element, attrs) {
 
             var dropdown;
             var productInput = element.find('[pl-product-input]');
             var searchProductInput = element.find('[pl-search-product-input]');
+
+            if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].item) {
+              productInput.val(scope[attrs.productsList].item.description);
+            }
 
             productInput.click(showDropdown);
 

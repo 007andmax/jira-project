@@ -17,18 +17,17 @@
           $scope.saveUpdateService = function (form) {
 
             if (form.$valid) {
-
               var isServiceItemChange = $scope.service.item.versionedId.id != $scope.editService.item.versionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
               var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
               var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
 
-
-
               if (!(isServiceItemChange || isDescriptionChange || isQuantityChange || isDateChange)) {
                 $scope.setEditExpenseId();
                 return;
               }
+
+              $scope.disabledSave = true;
 
               var serviceDate = new Date($scope.editService.date);
 
@@ -108,7 +107,7 @@
             }
           }
 
-          function checkDateOnDifferent(date1, date2){
+          function checkDateOnDifferent(date1, date2) {
 
             var fixDate1 = (new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())).getTime();
             var fixDate2 = (new Date(date2.getFullYear(), date2.getMonth(), date2.getDate())).getTime();

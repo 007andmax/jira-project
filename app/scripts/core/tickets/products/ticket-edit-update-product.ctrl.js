@@ -17,18 +17,19 @@
           };
 
           $scope.saveUpdateProduct = function (form) {
-
             if (form.$valid) {
 
               var isProductItemChange = $scope.product.item.versionedId.id != $scope.editProduct.item.versionedId.id;
-              var isDescriptionChange = $scope.product.description != $scope.editProduct.description;
               var isQuantityChange = $scope.product.quantity != $scope.editProduct.quantity;
               var isSerialNumberQuantity = $scope.product.serialNumber != $scope.editProduct.serialNumber;
+              var isPriceChange = $scope.product.item.sale != $scope.editProduct.item.sale;
 
-              if (!(isProductItemChange || isDescriptionChange || isQuantityChange || isSerialNumberQuantity)) {
+              if (!(isProductItemChange || isQuantityChange || isSerialNumberQuantity || isPriceChange)) {
                 $scope.setEditExpenseId();
                 return;
               }
+
+              $scope.disabledSave = true;
 
               TicketsService.updateExpenseInTicketUpdate({
 
@@ -36,8 +37,10 @@
                 productExpense: {
 
                   id: $scope.editProduct.id,
-                  item: {versionedId: {id: $scope.editProduct.item.versionedId.id}},
-                  description: $scope.editProduct.description,
+                  item: {
+                    sale: $scope.editProduct.item.sale,
+                    versionedId: {id: $scope.editProduct.item.versionedId.id}
+                  },
                   serialNumber: $scope.editProduct.serialNumber,
                   quantity: $scope.editProduct.quantity,
                   date: $scope.editProduct.date
