@@ -853,3 +853,6 @@ aside#left div.nav-title {
   width: calc(60% - 326px);
 }
 
+.modal-spam {
+  z-index: 9999999 !important;
+}
