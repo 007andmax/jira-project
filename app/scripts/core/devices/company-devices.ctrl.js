@@ -4,7 +4,8 @@
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.companyDevicesCtrl',
     ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.SharedStateService', '$state',
-      function ($scope, DevicesService, $stateParams, SharedStateService, $state) {
+      'quicktech.common.services.UserConfirmationsService',
+      function ($scope, DevicesService, $stateParams, SharedStateService, $state, UserConfirmationsService) {
 
         var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN'],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
