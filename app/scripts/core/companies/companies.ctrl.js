@@ -70,7 +70,7 @@
         }
 
         $scope.$watch('companies.length', function (companiesCount) {
-          headerSharedState.count = companiesCount;
+          headerSharedState.count = companiesCount == 0 ? companiesCount : (companiesCount - 1);
         });
 
         ////TODO fix data loading
