@@ -57,9 +57,10 @@
   <div class="companies-list company-devices-list clearfix">
 
     <div class="company-card" ng-repeat="(companyId, companyCount) in devicesCount"
-         ng-click="srefToCompanyDevices(companyId)" ng-if="companyId !== 'staticCopy'">
+         ng-click="srefToCompanyDevices(companyId)" ng-if="companyId !== 'staticCopy'"
+         ng-init="company = getCompanyById(companyId)" ng-class="{'hide': company.isDefault}">
 
-      <div class="company-cover-area" ng-init="company = getCompanyById(companyId)">
+      <div class="company-cover-area">
 
         <!--<div class="btn btn-archive has-tooltip" data-placement="top" title="" data-container="body" style="position: absolute;"-->
         <!--data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"-->
