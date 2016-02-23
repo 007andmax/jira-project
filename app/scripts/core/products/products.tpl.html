@@ -52,7 +52,7 @@
         ng-controller="quicktech.core.products.categoryCtrl" ng-form="editCategoryForm"
         ng-show="!category.default || category.productsAmount > 0"
         ng-class="{'has-error': isShowingErrors(editCategoryForm, 'editCategoryName'),
-                   'qt-product-edit': isEditCategory}">
+                   'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
 
       <div style="height: 71px;position: absolute;width: 100%;top: 0;z-index: 1;"
            ng-click="toggleProducts()" ng-hide="isEditCategory"></div>
@@ -64,7 +64,7 @@
 
         <div class="col-2">
 
-          <div class="no-items" ng-class="{'default-no-items': category.default}">
+          <div class="no-items">
             {{ category.productsAmount}} items
           </div>
 
@@ -125,7 +125,7 @@
 
                   <div class="col-3" style="height: 20px">{{ product.vendor.name}}</div>
 
-                  <div class="col-4" style="height: 20px">
+                  <div class="col-4">
                     {{ product.cost | currency: '$': 2 }}
                   </div>
 
@@ -144,6 +144,22 @@
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">
                       <i class="icn-sm icn-edit"></i>
                     </a>
+
+                    <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" ng-show="category.default"
+                       aria-expanded="false" data-toggle="dropdown"
+                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="move to other category">
+                      <i class="icn-sm icn-send-again"></i>
+                    </a>
+
+                    <ul class="dropdown-menu move-prod" role="menu">
+
+                      <li ng-repeat="category in categories">
+                        <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
+                          {{ category.name }}
+                        </a>
+                      </li>
+
+                    </ul>
 
                   </div>
                 </div>
