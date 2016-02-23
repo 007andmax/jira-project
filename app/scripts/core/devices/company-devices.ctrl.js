@@ -18,11 +18,17 @@
 
         DevicesService.getAgentsByCompany($scope, $scope.companyId, function (resp) {
           $scope.agents = resp;
-          if((!$scope.agents || $scope.agents.length === 0) && agentCallbackCount === 0){
+          if ((!$scope.agents || $scope.agents.length === 0) && agentCallbackCount === 0) {
             agentCallbackCount++;
-            alert('The last device was deleted. Redirect to devices page');
-            $state.go('devices');
-            $scope.$destroy();
+
+            var message = 'The last device was deleted. Redirect to devices page';
+            var confirmButton = 'OK';
+
+            UserConfirmationsService.show(message, confirmButton, true).then(function () {
+              $state.go('devices');
+              $scope.$destroy();
+            });
+
           }
           console.log($scope.agents)
         });
@@ -52,11 +58,11 @@
           }
         };
 
-        $scope.changeSelectDevices = function(){
+        $scope.changeSelectDevices = function () {
           var selectDevicesIds = [];
 
-          for(var deviceId in $scope.selectDevices){
-            if($scope.selectDevices[deviceId]){
+          for (var deviceId in $scope.selectDevices) {
+            if ($scope.selectDevices[deviceId]) {
               selectDevicesIds.push(deviceId)
             }
           }
