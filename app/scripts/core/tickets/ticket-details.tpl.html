@@ -117,7 +117,7 @@
               </li>
 
               <li
-                ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)"
+                ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">

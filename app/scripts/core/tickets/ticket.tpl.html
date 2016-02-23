@@ -81,7 +81,7 @@
         </li>
 
         <li class="pull-left" dropdown
-            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
+            ng-if="(ticket.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)">
 
           <a href="javascript:void(0)" class="hit-area has-tooltip" dropdown-toogle
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"

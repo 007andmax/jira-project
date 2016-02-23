@@ -23,8 +23,8 @@
 
       function isMoreActionsMenuVisible(ticket, currentUser) {
 
-        var isShowForAdmin  = (currentUser.role === USER_ROLES.ADMIN || currentUser.role === USER_ROLES.SUPER_ADMIN);
-        var isShowForUser  = ticket.assignedUser && (ticket.assignedUser.id === currentUser.id);
+        var isShowForAdmin = (currentUser.role === USER_ROLES.ADMIN || currentUser.role === USER_ROLES.SUPER_ADMIN);
+        var isShowForUser = ticket.assignedUser && (ticket.assignedUser.id === currentUser.id);
         var isShow = ticket.status !== 'COMPLETED' && !ticket.reportedAsSpamAt && !ticket.markedAsSpamAt && !ticket.trash;
 
         return (isShowForAdmin || isShowForUser) && isShow;
@@ -38,7 +38,11 @@
         return isTrueForUnassigned || isTrueForSpam;
       }
 
-      function isAssignTicketToVisible(listType, userRole) {
+      function isAssignTicketToVisible(listType, userRole, users) {
+
+        if (users.length <= 1) {
+          return false;
+        }
 
         var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
         var isTrueForUser = listType === LIST_TYPES.USER;
@@ -68,13 +72,13 @@
         var isTrueForClose = listType === LIST_TYPES.CLOSE;
         var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
-        if(!ticket){
+        if (!ticket) {
           return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared;
         }
 
-        if(!ticket.isBillable || (ticket.isBillable && ticket.hasInvoice)){
+        if (!ticket.isBillable || (ticket.isBillable && ticket.hasInvoice)) {
           return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForShared
-        } else if (ticket.isBillable && !ticket.hasInvoice){
+        } else if (ticket.isBillable && !ticket.hasInvoice) {
           return false;
         }
 
@@ -121,7 +125,7 @@
 
       function isStatusVisible(ticket, userRole, isTrueForClosed) {
 
-        var isHideWhenClosed =  ticket.status === 'COMPLETED' && !isTrueForClosed;
+        var isHideWhenClosed = ticket.status === 'COMPLETED' && !isTrueForClosed;
         var isHideWhenTrash = ticket.trash;
         var isHideWhenSpam = ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
 
@@ -158,7 +162,7 @@
 
       function isSettingVisible(ticket, userRole) {
 
-        var isHideWhenClosed =  ticket.status === 'COMPLETED';
+        var isHideWhenClosed = ticket.status === 'COMPLETED';
         var isHideWhenTrash = ticket.trash;
         var isHideWhenSpam = ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
         var isHideForShares = ticket.sharedToCurrentUserAt && userRole === USER_ROLES.USER;
@@ -192,7 +196,7 @@
       function isAditionalActionAccessForUser(ticket, user) {
 
         if (ticket && ticket.createdUser && ticket.createdUser.id) {
-          var isUserInShares = (user.role === USER_ROLES.USER) &&  ticket.sharedToCurrentUserAt;
+          var isUserInShares = (user.role === USER_ROLES.USER) && ticket.sharedToCurrentUserAt;
           var isAdmin = user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN;
           var isAssignUser = ticket.assignedUser && (ticket.assignedUser.id === user.id);
 
@@ -299,7 +303,7 @@
         }
       }
 
-      function isClaimTicketTipVisible(ticket){
+      function isClaimTicketTipVisible(ticket) {
 
         var isShow = !ticket.assignedUser && !ticket.trash && !ticket.reportedAsSpamAt && !ticket.markedAsSpamAt && ticket.status !== "COMPLETED";
 
