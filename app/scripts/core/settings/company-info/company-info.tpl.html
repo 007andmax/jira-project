@@ -26,7 +26,7 @@
                    ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyName')}">
 
                 <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyName')}">
-                  Name
+                  Campany Name
                 </label>
 
                 <div ng-messages="basicInfoForm.companyName.$error"
@@ -51,7 +51,7 @@
 
                 <label class="control-label"
                        ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
-                  Support Email
+                  Email Inbox (please forward your email to this address)
                 </label>
 
                 <div ng-messages="basicInfoForm.supportMailBox.$error"
@@ -92,7 +92,7 @@
                    ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
 
                 <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  Business Email
+                  Support Email address
                 </label>
 
                 <div ng-messages="basicInfoForm.businessEmail.$error"
