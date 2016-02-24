@@ -202,7 +202,7 @@
               setValue(hour, minute)
 
             } else {
-              setValue('00', value);
+              setValue('00', value < 10 ? '0' + value : value);
             }
 
             function setValue(hours, minute) {
