@@ -277,7 +277,9 @@
           $rootScope.$broadcast('cancelEditForm');
         };
 
-        $rootScope.openCreateTicketForm = function (sessionId) {
+        $rootScope.openCreateTicketForm = function (sessionId, sessionTime) {
+          console.log('sessionId ' + sessionId)
+          console.log('sessionTime ' + sessionTime)
           if (!sessionId) {
             throw 'SessionId is required'
           }
@@ -298,6 +300,9 @@
               resolve: {
                 sessionId: function () {
                   return sessionId;
+                },
+                sessionTime: function () {
+                  return sessionTime
                 }
               }
             });

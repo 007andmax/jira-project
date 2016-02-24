@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
-      'quicktech.common.services.UserNotificationService', 'sessionId', 'ServicesService', '$timeout',
+      'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'ServicesService', '$timeout',
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
-                UserNotificationService, sessionId, ServicesService, $timeout) {
+                UserNotificationService, sessionId, sessionTime, ServicesService, $timeout) {
 
         $scope.fileInfo = {quantityErrorFiles: 0};
         $scope.ticket = {priorityLevel: 'MEDIUM'};
@@ -24,7 +24,9 @@
         if (sessionId) {
 
           $scope.ticket.remoteSessionId = sessionId;
-          $scope.ticket.serviceExpenses = [{}];
+          $scope.ticket.serviceExpenses = [{
+            quantity: (sessionTime * 60).toFixed()
+          }];
           $scope.isShowService = true;
           $scope.maxServiceDate = new Date();
 
