@@ -362,7 +362,7 @@
               <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
                      ng-model="ticketAssignTo" name="ticketAssignTo"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'name'"
+                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
                      qt-typeahead-show-on-focus assign-to-validation ng-required="false"
                      custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 

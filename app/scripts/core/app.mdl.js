@@ -251,7 +251,7 @@
 
         $rootScope.getUserName = function (user, includeImail) {
           if (user) {
-            var username = user.firstName + ' ' + user.lastName;
+            var username = user.firstName + (user.lastName ? ' ' + user.lastName : '');
 
             if (includeImail) {
               username += (' "' + user.primaryEmail + '"')
@@ -263,7 +263,7 @@
 
         $rootScope.getContactName = function (contact, includeImail) {
           if (contact) {
-            var contactname = contact.firstName + ' ' + contact.lastName;
+            var contactname = contact.firstName + (contact.lastName ? ' ' + contact.lastName : '');
 
             if (includeImail) {
               contactname += (' "' + contact.email + '"')
