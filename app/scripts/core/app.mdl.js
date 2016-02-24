@@ -278,8 +278,6 @@
         };
 
         $rootScope.openCreateTicketForm = function (sessionId, sessionTime) {
-          console.log('sessionId ' + sessionId)
-          console.log('sessionTime ' + sessionTime)
           if (!sessionId) {
             throw 'SessionId is required'
           }
