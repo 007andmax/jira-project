@@ -212,8 +212,10 @@
                 dropdownElement.hoverHourElement = hourDropdown.find('li:nth-child(' + (+hours + 1) + ') a');
                 dropdownElement.hoverHourElement.css('background-color', '#f1f5fa');
 
-                dropdownElement.hoverMinuteElement = minuteDropdown.find('li:nth-child(' + (+minute / 15 + 1) + ') a');
-                dropdownElement.hoverMinuteElement.css('background-color', '#f1f5fa');
+                if ((minute % 15) === 0) {
+                  dropdownElement.hoverMinuteElement = minuteDropdown.find('li:nth-child(' + (+minute / 15 + 1) + ') a');
+                  dropdownElement.hoverMinuteElement.css('background-color', '#f1f5fa');
+                }
 
                 dropdownElement.hoverFormatElement = formatDropdown.find('li:nth-child(' + (format === 'AM' ? 1 : 2) + ') a');
                 dropdownElement.hoverFormatElement.css('background-color', '#f1f5fa');
@@ -239,8 +241,10 @@
                 dropdownElement.hoverHourElement = hourDropdown.find('li:nth-child(' + (+hours + 1) + ') a');
                 dropdownElement.hoverHourElement.css('background-color', '#f1f5fa');
 
-                dropdownElement.hoverMinuteElement = minuteDropdown.find('li:nth-child(' + (+minute / 15 + 1) + ') a');
-                dropdownElement.hoverMinuteElement.css('background-color', '#f1f5fa');
+                if ((minute % 15) === 0) {
+                  dropdownElement.hoverMinuteElement = minuteDropdown.find('li:nth-child(' + (+minute / 15 + 1) + ') a');
+                  dropdownElement.hoverMinuteElement.css('background-color', '#f1f5fa');
+                }
 
                 if (+hours < 6) {
                   minuteDropdown.css('top', (+hours * 30) + 'px');
