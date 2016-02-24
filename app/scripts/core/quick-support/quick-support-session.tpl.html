@@ -1,6 +1,7 @@
 <div class="support-session-content">
 
-  <a href="javascript:void(0)" ng-show="remoteSession.performer.id === currentUser.id || currentUser.role !== 'USER'"
+  <a href="javascript:void(0)"
+     ng-show="remoteSession.performer.id === currentUser.id || currentUser.role === 'SUPER_TECH_ADMIN'"
      ng-click="deleteRemoteSession(remoteSession.id)"
      style="position: absolute;right: 10px;top: 8px;">
     <i class="icn-sm icn-remove-token"

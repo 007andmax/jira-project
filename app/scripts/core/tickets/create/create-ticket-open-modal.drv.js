@@ -21,7 +21,8 @@
                 windowClass: 'modal-create-ticket',
                 backdrop: 'static',
                 resolve: {
-                  sessionId: false
+                  sessionId: false,
+                  sessionTime: false
                 }
               });
             });
