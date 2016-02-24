@@ -5,7 +5,8 @@
       <span class="text-muted">{{ services.length }}</span>
     </div>
 
-    <div class="dropdown pull-right" ng-controller="quicktech.core.services.servicesMovingCtrl">
+    <div class="dropdown pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
+         ng-controller="quicktech.core.services.servicesMovingCtrl">
       <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
            aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
            tooltip="Move service(s) to..."
@@ -88,7 +89,7 @@
 
     <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
 
-    <div class="add-service-btn-wrapper">
+    <div class="add-service-btn-wrapper" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
       <div class="btn btn-info has-tooltip"
            ng-click="showCreateServiceForm()"
            custom-disabled="{{ showCreateService }}"
@@ -110,8 +111,7 @@
         ng-controller="quicktech.core.services.companyCtrl"
         event-toggle-slider="toggleServices">
 
-      <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;"
-           ng-click="toggleServices()"></div>
+      <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;" ng-click="toggleServices()"></div>
 
       <div class="col-1">{{ company.name }}</div>
       <div class="col-2">{{ services.length || 0 }} services</div>
