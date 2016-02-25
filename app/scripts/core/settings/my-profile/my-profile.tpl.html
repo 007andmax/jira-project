@@ -94,33 +94,33 @@
 
             </div>
 
-            <div class="form-row clearfix">
+            <!--<div class="form-row clearfix">-->
 
-              <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'secondaryEmail')}">
+              <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'secondaryEmail')}">-->
 
-                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'secondaryEmail')}">
-                  Secondary Email
-                </label>
+                <!--<label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'secondaryEmail')}">-->
+                  <!--Secondary Email-->
+                <!--</label>-->
 
-                <div ng-messages="basicInfoForm.secondaryEmail.$error"
-                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'secondaryEmail')}">
-                  <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
-                </div>
+                <!--<div ng-messages="basicInfoForm.secondaryEmail.$error"-->
+                     <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'secondaryEmail')}">-->
+                  <!--<label class="control-label" ng-message="pattern">Please enter a valid email address.</label>-->
+                <!--</div>-->
 
-                <input type="text" class="form-control" name="secondaryEmail" aria-expanded="true" make-dirty-on-blur
-                       ng-model="editUser.secondaryEmail" ng-pattern="emailPattern">
-              </div>
+                <!--<input type="text" class="form-control" name="secondaryEmail" aria-expanded="true" make-dirty-on-blur-->
+                       <!--ng-model="editUser.secondaryEmail" ng-pattern="emailPattern">-->
+              <!--</div>-->
 
-              <div class="form-group">
+              <!--<div class="form-group">-->
 
-                <label class="control-label">Account Type</label>
+                <!--<label class="control-label">Account Type</label>-->
 
-                <input class="form-control readonly-dark" type="text" ng-value="accountType[editUser.role]"
-                       readonly="readonly">
+                <!--<input class="form-control readonly-dark" type="text" ng-value="accountType[editUser.role]"-->
+                       <!--readonly="readonly">-->
 
-              </div>
+              <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
             <div class="form-row clearfix" ng-if="loadUsertProfile">
 

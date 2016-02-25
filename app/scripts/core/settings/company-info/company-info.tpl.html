@@ -572,36 +572,74 @@
 
     <h3>Ticket and Invoice Settings</h3>
 
-    <div class="template-form-wrapper" ticket-config>
-      <form name="ticketForm">
+    <!--<div class="template-form-wrapper" ticket-config>-->
+    <!--<form name="ticketForm">-->
 
-        <div class="form-row">
+    <!--<div class="form-row">-->
 
-          <div class="form-group" style="max-width: 118px"
-               ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketPrefix')}">
+    <!--<div class="form-group" style="max-width: 118px"-->
+    <!--ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketPrefix')}">-->
 
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketPrefix')}">
-              ticket prefix
+    <!--<label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketPrefix')}">-->
+    <!--ticket prefix-->
+    <!--</label>-->
+
+    <!--<div ng-messages="ticketForm.ticketPrefix.$error"-->
+    <!--ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketPrefix')}">-->
+    <!--<label class="control-label" ng-message="maxlength" for="">too large</label>-->
+    <!--</div>-->
+
+    <!--<input class="form-control" tc-prefix-input type="text" ng-model="ticketConfig.prefix"-->
+    <!--name="ticketPrefix" aria-expanded="true" ng-maxlength="7">-->
+    <!--</div>-->
+
+    <!--<div class="form-group" style="max-width: 117px;"-->
+    <!--ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCount')}">-->
+
+    <!--<label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketCount')}">-->
+    <!--ticket number-->
+    <!--</label>-->
+
+    <!--<div ng-messages="ticketForm.ticketCount.$error"-->
+    <!--ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketCount')}">-->
+    <!--<label class="control-label" ng-message="required" for="">cannot be left empty</label>-->
+    <!--<label class="control-label" ng-message="maxlength" for="">too large</label>-->
+    <!--<label class="control-label" ng-message="minlength" for="">too short</label>-->
+    <!--<label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>-->
+    <!--</div>-->
+
+    <!--<input class="form-control" tc-number-input type="text" ng-model="ticketConfig.count"-->
+    <!--name="ticketCount" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"-->
+    <!--hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">-->
+    <!--</div>-->
+
+    <!--<div class="clearfix">-->
+    <!--<div class="form-group" style="margin-left: 10px;">-->
+    <!--<label class="control-label">actual ticket starting number</label>-->
+    <!--<input class="form-control" type="text" ng-value="actualTicketNumber" readonly="readonly">-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <!--</form>-->
+    <!--</div>-->
+
+    <div class="template-form-wrapper" invoice-config ticket-config>
+      <form name="invoiceForm">
+
+        <div class="form-row clearfix">
+
+
+          <div class="form-group" style="max-width: 160px;"
+               ng-class="{'has-error': isShowingErrors(invoiceForm, 'ticketCount')}">
+
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'ticketCount')}">
+              Starting Ticket Number
             </label>
 
-            <div ng-messages="ticketForm.ticketPrefix.$error"
-                 ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketPrefix')}">
-              <label class="control-label" ng-message="maxlength" for="">too large</label>
-            </div>
-
-            <input class="form-control" tc-prefix-input type="text" ng-model="ticketConfig.prefix"
-                   name="ticketPrefix" aria-expanded="true" ng-maxlength="7">
-          </div>
-
-          <div class="form-group" style="max-width: 117px;"
-               ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketCount')}">
-
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(ticketForm, 'ticketCount')}">
-              ticket number
-            </label>
-
-            <div ng-messages="ticketForm.ticketCount.$error"
-                 ng-class="{ 'hide': !isShowingErrors(ticketForm, 'ticketCount')}">
+            <div ng-messages="invoiceForm.ticketCount.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'ticketCount')}">
               <label class="control-label" ng-message="required" for="">cannot be left empty</label>
               <label class="control-label" ng-message="maxlength" for="">too large</label>
               <label class="control-label" ng-message="minlength" for="">too short</label>
@@ -613,28 +651,12 @@
                    hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
           </div>
 
-          <div class="clearfix">
-            <div class="form-group" style="margin-left: 10px;">
-              <label class="control-label">actual ticket starting number</label>
-              <input class="form-control" type="text" ng-value="actualTicketNumber" readonly="readonly">
-            </div>
-          </div>
 
-        </div>
-
-      </form>
-    </div>
-
-    <div class="template-form-wrapper" invoice-config style="margin-top: 50px;">
-      <form name="invoiceForm">
-
-        <div class="form-row clearfix">
-
-          <div class="form-group" style="max-width: 118px"
+          <div class="form-group" style="max-width: 160px"
                ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceCount')}">
 
             <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceCount')}">
-              invoice number
+              Starting Invoice Number
             </label>
 
             <div ng-messages="invoiceForm.invoiceCount.$error"
@@ -650,11 +672,11 @@
                    hard-reset-required="true" ng-minlength="1" ng-maxlength="7" hard-reset-pattern="numberPattern">
           </div>
 
-          <div class="form-group" style="max-width: 117px"
+          <div class="form-group" style="max-width: 160px"
                ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceTerms')}">
 
             <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceTerms')}">
-              terms on invoice
+              Terms of Invoice (days)
             </label>
 
             <div ng-messages="invoiceForm.invoiceTerms.$error"
@@ -691,6 +713,16 @@
                       ng-required="true" maxlength="400" ng-trim="false"></textarea>
 
             <div class="word-count">{{ 400 - invoiceConfig.termsAndConditions.length }}</div>
+          </div>
+        </div>
+
+        <div class="form-row clearfix">
+          <div class="form-group no-label full-width">
+            <div class="btn btn-lg btn-info pull-right"
+                 custom-disabled="{{ invoiceForm.$invalid }}"
+                 ng-click="previewInvoice(basicInfoForm)">
+              Preview Invoice
+            </div>
           </div>
         </div>
 
