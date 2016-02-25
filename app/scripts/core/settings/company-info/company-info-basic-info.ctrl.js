@@ -22,7 +22,7 @@
             logo: $scope.editCompany.logo,
             name: $scope.editCompany.name,
             supportMailBox: $scope.companyForSettingPage.supportMailBox,
-            techDomain: $scope.techDomainName,
+            //techDomain: $scope.techDomainName,
             businessEmail: $scope.companyForSettingPage.businessEmail,
             description: $scope.editCompany.description
           };

@@ -47,10 +47,12 @@
             <div class="form-row clearfix">
 
               <div class="form-group full-width"
-                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox')}">
+                <!--|| isShowingErrors(basicInfoForm, 'techDomainName')-->
 
                 <label class="control-label"
-                       ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox') || isShowingErrors(basicInfoForm, 'techDomainName')}">
+                       ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
+                  <!--|| isShowingErrors(basicInfoForm, 'techDomainName')-->
                   Email Inbox (please forward your email to this address)
                 </label>
 
@@ -59,28 +61,30 @@
                   <label class="control-label" ng-message="required" for="">SUPPORT EMAIL name is required.</label>
                   <label class="control-label" ng-message="maxlength" for="">SUPPORT EMAIL name is too large.</label>
                   <label class="control-label" ng-message="minlength" for="">SUPPORT EMAIL name is too short.</label>
+                  <label class="control-label" ng-message="pattern">Please enter a valid SUPPORT EMAIL name.</label>
                 </div>
 
-                <div ng-messages="basicInfoForm.techDomainName.$error"
-                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                  <label class="control-label" ng-message="required">Domain name is required.</label>
-                  <label class="control-label" ng-message="maxlength">Domain name is too large.</label>
-                  <label class="control-label" ng-message="minlength">Domain name is too short.</label>
-                  <label class="control-label" ng-message="unique">This Domain name already occupied.</label>
-                </div>
+                <!--<div ng-messages="basicInfoForm.techDomainName.$error"-->
+                     <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
+                  <!--<label class="control-label" ng-message="required">Domain name is required.</label>-->
+                  <!--<label class="control-label" ng-message="maxlength">Domain name is too large.</label>-->
+                  <!--<label class="control-label" ng-message="minlength">Domain name is too short.</label>-->
+                  <!--<label class="control-label" ng-message="unique">This Domain name already occupied.</label>-->
+                <!--</div>-->
 
                 <input class="form-control" type="text"
                        ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
-                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur/>
+                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
+                       ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"/>
 
-                <span class="email-addon" style="width: 30px;left: 162px;">@</span>
+                <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
 
-                <input class="form-control has-addon" type="text" ng-model="techDomainName"
-                       name="techDomainName" ng-minlength="3" ng-maxlength="25" ng-required="true" make-dirty-on-blur
-                       is-uniq-validation validation-func="validateCompanyDomain"
-                       style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">
+                <!--<input class="form-control has-addon" type="text" ng-model="techDomainName"-->
+                       <!--name="techDomainName" ng-minlength="3" ng-maxlength="25" ng-required="true" make-dirty-on-blur-->
+                       <!--is-uniq-validation validation-func="validateCompanyDomain"-->
+                       <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
 
-                <span class="email-addon" style="width: 120px;border-left: none">{{ currentHost }}</span>
+                <span class="email-addon" style="border-left: none;width: initial;">@{{ currentHost }}</span>
 
               </div>
 

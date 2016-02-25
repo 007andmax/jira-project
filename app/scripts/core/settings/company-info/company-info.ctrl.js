@@ -7,6 +7,7 @@
       function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService) {
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $scope.emailNamePattern = /^[a-z0-9]+$/i;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
         $scope.editCompany = $scope.currentCompany.staticCopy();
         $scope.timeRangeAllDays = {};
