@@ -64,6 +64,9 @@
 .qt-product-list > li > .intermediate-parent-elem > .col-2 {
   width: calc(100% - 897px);
   color: #94a4b8;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-3 {
@@ -862,4 +865,9 @@ aside#left div.nav-title {
 
 .modal-spam {
   z-index: 9999999 !important;
+}
+@media screen and (max-width: 1440px) {
+  .table-wrapper .table-content.accounting-prod-list .col-2.col-2-has-serial-number{
+    width: 25%;
+  }
 }
