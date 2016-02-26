@@ -37,6 +37,12 @@
           var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', !validationResult.value);
           });
+        };
+
+        $scope.validateSuppEmailName = function (ngModelCtrl) {
+          var validationResult = CompaniesService.isCompanyInboxUnique(ngModelCtrl.$viewValue, function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
         }
 
       }]);

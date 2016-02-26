@@ -58,10 +58,11 @@
 
                 <div ng-messages="basicInfoForm.supportMailBox.$error"
                      ng-class="{'hide': !isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                  <label class="control-label" ng-message="required" for="">SUPPORT EMAIL name is required.</label>
-                  <label class="control-label" ng-message="maxlength" for="">SUPPORT EMAIL name is too large.</label>
-                  <label class="control-label" ng-message="minlength" for="">SUPPORT EMAIL name is too short.</label>
+                  <label class="control-label" ng-message="required">SUPPORT EMAIL name is required.</label>
+                  <label class="control-label" ng-message="maxlength">SUPPORT EMAIL name is too large.</label>
+                  <label class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</label>
                   <label class="control-label" ng-message="pattern">Please enter a valid SUPPORT EMAIL name.</label>
+                  <label class="control-label" ng-message="unique">SUPPORT EMAIL name already occupied.</label>
                 </div>
 
                 <!--<div ng-messages="basicInfoForm.techDomainName.$error"-->
@@ -75,7 +76,8 @@
                 <input class="form-control" type="text"
                        ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
                        ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
-                       ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"/>
+                       ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"
+                       is-uniq-validation validation-func="validateSuppEmailName"/>
 
                 <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
 
