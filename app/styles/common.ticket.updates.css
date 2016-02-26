@@ -541,3 +541,17 @@
     box-shadow: rgba(10, 45, 89, 0.15) 0px 0px 15px 0px;
   }
 }
+@media screen and (max-width: 1440px){
+  .table-wrapper .table-content .col-1{
+    width: 15%;
+  }
+  .table-wrapper .table-content .col-3{
+    width: 18%;
+  }
+  .table-wrapper .table-content .col-4{
+    width: 15%;
+  }
+  .table-wrapper .table-content .col-5{
+    width: 12%;
+  }
+}
