@@ -17,14 +17,20 @@
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
 
-          var defaultZoom = 8,
+          var defaultZoom = 15,
             defaultCenter = new google.maps.LatLng(41.9955835, -93.63813119999998),
             mapOptions = {
               center: defaultCenter,
-              zoom: defaultZoom
+              zoom: defaultZoom,
+              zoomControl: true,
+              scaleControl: true,
+              scrollwheel: false,
+              zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_TOP
+              }
             },
             mapDiv = element.find('[map]')[0],
-            input = element.find('input'),
+            input = element.find('[map-input]'),
             inputCtrl = input.controller('ngModel'),
             autocomplete = new google.maps.places.Autocomplete(input[0]),
             map,
@@ -34,6 +40,10 @@
           if (hasLocation) {
             mapOptions.center = new google.maps.LatLng(ngModelCtrl.$viewValue.locationLat, ngModelCtrl.$viewValue.locationLng);
           }
+
+          $scope.isShowingErrors = function (form, fieldName) {
+            return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+          };
 
           map = new google.maps.Map(mapDiv, mapOptions);
           marker = new google.maps.Marker({

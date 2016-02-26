@@ -1,4 +1,21 @@
 <div ng-form="addressForm">
+
+  <div class="form-group zipcode-field"
+       ng-class="{'has-error': isShowingErrors(addressForm, 'suiteNumber')}">
+
+    <label class="control-label" ng-class="{'hide': isShowingErrors(addressForm, 'suiteNumber')}">
+      suite number
+    </label>
+
+    <div ng-messages="addressForm.suiteNumber.$error"
+         ng-class="{'hide': !isShowingErrors(addressForm, 'suiteNumber')}">
+      <div class="control-label" ng-message="maxlength">too large</div>
+    </div>
+
+    <input class="form-control" type="text" name="suiteNumber" autocomplete="off"
+           ng-model="model.suiteNumber" ng-maxlength="20">
+  </div>
+
   <div class="form-group address-field"
        ng-class="{'has-error': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
 
@@ -21,7 +38,7 @@
     </div>
 
     <input class="form-control" type="text" ng-model="model.address" autocomplete="off"
-           name="address"
+           name="address" map-input
            required="true" make-dirty-on-blur>
   </div>
 

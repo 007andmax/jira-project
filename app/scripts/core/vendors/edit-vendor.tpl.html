@@ -181,48 +181,48 @@
                                typeahead-editable="false" typeahead-min-length="0"
                                qt-typeahead-show-on-focus ng-trim="false"
                                custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                               style="width:453px;">
+                               style="width:500px;">
 
                         <div typeahead-input-icon="location.locale"
                              style="position: absolute;top: 13px;right: 13px;"></div>
 
                       </div>
 
-                      <div custom-ng-show-if="$last && editVendor.addresses.length < locationsMaxCount">
+                      <!--<div custom-ng-show-if="$last && editVendor.addresses.length < locationsMaxCount">-->
 
-                        <div class="btn btn-dark has-tooltip pull-right" ng-click="addLocation()" cns-if
-                             tooltip-placement="top" tooltip="Add another site/location">
-                          <i class="icn-sm icn-plus"></i>
-                        </div>
+                        <!--<div class="btn btn-dark has-tooltip pull-right" ng-click="addLocation()" cns-if-->
+                             <!--tooltip-placement="top" tooltip="Add another site/location">-->
+                          <!--<i class="icn-sm icn-plus"></i>-->
+                        <!--</div>-->
 
-                        <div class="btn btn-primary has-tooltip pull-right" ng-click="removeLocation($index)" cns-else
-                             tooltip-placement="top" tooltip="Remove site/location">
-                          <i class="icn-sm icn-remove-token"></i>
-                        </div>
+                        <!--<div class="btn btn-primary has-tooltip pull-right" ng-click="removeLocation($index)" cns-else-->
+                             <!--tooltip-placement="top" tooltip="Remove site/location">-->
+                          <!--<i class="icn-sm icn-remove-token"></i>-->
+                        <!--</div>-->
 
-                      </div>
+                      <!--</div>-->
 
                     </div>
                   </div>
 
-                  <div class="form-row clearfix">
-                    <div class="form-group no-label full-width">
-                      <div class="clearfix"
-                           ng-class="{'has-error': (changeRadioButton && editVendor.addresses.length === 1)}">
-                        <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
+                  <!--<div class="form-row clearfix">-->
+                    <!--<div class="form-group no-label full-width">-->
+                      <!--<div class="clearfix"-->
+                           <!--ng-class="{'has-error': (changeRadioButton && editVendor.addresses.length === 1)}">-->
+                        <!--<label class="control checkbox pull-left" ng-click="changeRadioButton = true">-->
 
-                          <input type="radio" ng-checked="location.isPrimary"
-                                 ng-click="changePrimaryAddress(location)">
+                          <!--<input type="radio" ng-checked="location.isPrimary"-->
+                                 <!--ng-click="changePrimaryAddress(location)">-->
 
-                          <span class="control-indicator"></span> Primary Billing Address
+                          <!--<span class="control-indicator"></span> Primary Billing Address-->
 
-                          <label ng-if="changeRadioButton && editVendor.addresses.length === 1"
-                                 class="control-label">Please add multiple site/locations first.</label>
+                          <!--<label ng-if="changeRadioButton && editVendor.addresses.length === 1"-->
+                                 <!--class="control-label">Please add multiple site/locations first.</label>-->
 
-                        </label>
-                      </div>
-                    </div>
-                  </div>
+                        <!--</label>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
 
                 </div>
               </div>

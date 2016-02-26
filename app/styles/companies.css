@@ -1074,7 +1074,7 @@
   padding-top: 51px;
 }
 .form-control-time-zone, .form-control-agent-desc {
-  width: 452px !important;
+  width: 500px !important; /*width: 452px !important;*/
 }
 .form-control-agent-desc{
   float: left;

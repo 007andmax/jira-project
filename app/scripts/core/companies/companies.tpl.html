@@ -101,7 +101,8 @@
   </div>
 
   <div class="company-card" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
-       ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()" ng-class="{'hide': company.isDefault}">
+       ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()"
+       ng-class="{'hide': company.isDefault}">
 
     <div class="company-cover-area"
          ng-style="{'background-image':'url(' + getCompanyCoverUrl(company) + ')', 'background-size': 'cover'}">
@@ -198,7 +199,9 @@
       </div>
 
       <div class="user-location"><i class="icn-sm icn-sb-location"></i>
-        <span>{{ primaryAddress.address }}</span>
+        <span>
+          {{ primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' + primaryAddress.address : primaryAddress.address }}
+        </span>
       </div>
 
       <div class="user-actions" stop-propagation="clack">

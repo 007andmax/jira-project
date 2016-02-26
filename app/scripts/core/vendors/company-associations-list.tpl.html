@@ -3,9 +3,10 @@
     <ul style="height: 345px; overflow-y: scroll">
       <li ng-repeat="associationsCompany in vendor.companyAssociations">
         <div class="vendor-company-name">{{ associationsCompany.company.name }}</div>
-        <div class="vendor-company-address"
+        <div class="vendor-company-address" ng-init="showingAddress = associationsCompany.company.addresses[0]"
              ng-if="associationsCompany.company.addresses && associationsCompany.company.addresses[0]">
-          {{ associationsCompany.company.addresses[0].address }}
+          {{ showingAddress.suiteNumber ? showingAddress.suiteNumber + ',' : '' }}
+          {{ showingAddress.address }}
         </div>
       </li>
     </ul>

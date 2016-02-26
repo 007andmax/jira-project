@@ -57,7 +57,9 @@
             if(!copyAddress[i].phoneNumbers[copyAddress[i].phoneNumbers.length - 1].number){
               copyAddress[i].phoneNumbers.splice([copyAddress[i].phoneNumbers.length - 1], 1);
             }
-          };
+          }
+
+          copyAddress[0].isPrimary = true;
 
           $scope.savingContactInProcess = true;
           CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function(){

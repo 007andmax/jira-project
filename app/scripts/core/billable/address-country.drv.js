@@ -27,7 +27,7 @@
             var regLastComma = /,(?=[^,]*$)/,
               addressArray = address.split(regLastComma);
 
-            element.html(addressArray[0] + ',' + '<br/>' + addressArray[1])
+            element.html(addressArray[0] + (addressArray[1] ? ',' + '<br/>' + addressArray[1] : ''));
 
           }
 

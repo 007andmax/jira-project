@@ -4,7 +4,10 @@
 
     <div class="address-heading">{{ currentLocation.isPrimary ? 'Primary Address' : 'Address' }}</div>
 
-    <div class="address-txt">{{ currentLocation.address }}</div>
+    <div class="address-txt">
+      {{ currentLocation.suiteNumber ? currentLocation.suiteNumber + ',' : '' }}
+      {{  currentLocation.address }}
+    </div>
 
     <div class="location-map">
       <span data-toggle="location-popover">

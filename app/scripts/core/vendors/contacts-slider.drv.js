@@ -34,7 +34,7 @@
             $scope.$watch(function () {
               return shownId
             }, function () {
-              if (ctrl.$viewValue && !shownId) {
+              if ((ctrl.$viewValue && ctrl.$viewValue.length > 0) && !shownId) {
                 shownId = ctrl.$viewValue[0].id;
               }
             });

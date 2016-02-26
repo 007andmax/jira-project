@@ -396,57 +396,59 @@
                  ng-model="userProfile.address"
                  show-validation-messages="triedToSave"></div>
 
-            <div class="form-row clearfix" ng-repeat="phoneNumber in userProfile.address.phoneNumbers">
+            <div phone-numbers-edit ng-model="userProfile.address.phoneNumbers"></div>
 
-              <div class="form-group" ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+            <!--<div class="form-row clearfix" ng-repeat="phoneNumber in userProfile.address.phoneNumbers">-->
 
-                <label class="control-label" ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">
-                  Contact No.
-                </label>
+              <!--<div class="form-group" ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">-->
 
-                <div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"
-                     ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
-                  <label class="control-label" ng-message="required">contact no. is required.</label>
-                  <label class="control-label" ng-message="maxlength">contact no. is too large</label>
-                  <label class="control-label" ng-message="minlength">contact no. is too short</label>
-                  <label class="control-label" ng-message="pattern">invalid no.</label>
-                </div>
+                <!--<label class="control-label" ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">-->
+                  <!--Contact No.-->
+                <!--</label>-->
 
-                <input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-                       aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"
-                       make-dirty-on-blur hard-reset-pattern="phoneNumberPattern" hard-reset-required="!$last">
-              </div>
+                <!--<div ng-messages="phoneNumbersForm['phoneNumber' + $index].$error"-->
+                     <!--ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">-->
+                  <!--<label class="control-label" ng-message="required">contact no. is required.</label>-->
+                  <!--<label class="control-label" ng-message="maxlength">contact no. is too large</label>-->
+                  <!--<label class="control-label" ng-message="minlength">contact no. is too short</label>-->
+                  <!--<label class="control-label" ng-message="pattern">invalid no.</label>-->
+                <!--</div>-->
 
-              <div class="form-group no-label">
-                <div class="pull-left dropdown">
+                <!--<input class="form-control" type="text" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"-->
+                       <!--aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"-->
+                       <!--make-dirty-on-blur hard-reset-pattern="phoneNumberPattern" hard-reset-required="!$last">-->
+              <!--</div>-->
 
-                  <input class="form-control-number has-dropdown" type="text" make-dirty-on-blur
-                         ng-model="phoneNumberTypes[phoneNumber.typeNumber]" readonly="readonly"
-                         data-toggle="dropdown" aria-expanded="false">
-                  <i class="icn-sm icn-caret-gray"></i>
+              <!--<div class="form-group no-label">-->
+                <!--<div class="pull-left dropdown">-->
 
-                  <ul class="dropdown-menu dropdown-account-type">
-                    <li><a ng-click="phoneNumber.typeNumber = 'MOBILE'" href="javascript:void(0)"> Mobile </a></li>
-                    <li><a ng-click="phoneNumber.typeNumber = 'OFFICE'" href="javascript:void(0)"> Office </a></li>
-                    <li><a ng-click="phoneNumber.typeNumber = 'FAX'" href="javascript:void(0)"> Fax </a></li>
-                  </ul>
+                  <!--<input class="form-control-number has-dropdown" type="text" make-dirty-on-blur-->
+                         <!--ng-model="phoneNumberTypes[phoneNumber.typeNumber]" readonly="readonly"-->
+                         <!--data-toggle="dropdown" aria-expanded="false">-->
+                  <!--<i class="icn-sm icn-caret-gray"></i>-->
 
-                </div>
+                  <!--<ul class="dropdown-menu dropdown-account-type">-->
+                    <!--<li><a ng-click="phoneNumber.typeNumber = 'MOBILE'" href="javascript:void(0)"> Mobile </a></li>-->
+                    <!--<li><a ng-click="phoneNumber.typeNumber = 'OFFICE'" href="javascript:void(0)"> Office </a></li>-->
+                    <!--<li><a ng-click="phoneNumber.typeNumber = 'FAX'" href="javascript:void(0)"> Fax </a></li>-->
+                  <!--</ul>-->
 
-                <div class="btn btn-dark has-tooltip pull-right"
-                     ng-if="$last && (userProfile.address.phoneNumbers.length < 3)" ng-click="addPhoneNumber()"
-                     tooltip-placement="top" tooltip="Add more">
-                  <i class="icn-sm icn-plus"></i>
-                </div>
+                <!--</div>-->
 
-                <div class="btn btn-primary has-tooltip pull-right"
-                     ng-if="!$last || $index === 2" ng-click="removePhoneNumber($index, phoneNumbersForm)"
-                     tooltip-placement="top" tooltip="Remove">
-                  <i class="icn-sm icn-remove-token"></i>
-                </div>
+                <!--<div class="btn btn-dark has-tooltip pull-right"-->
+                     <!--ng-if="$last && (userProfile.address.phoneNumbers.length < 3)" ng-click="addPhoneNumber()"-->
+                     <!--tooltip-placement="top" tooltip="Add more">-->
+                  <!--<i class="icn-sm icn-plus"></i>-->
+                <!--</div>-->
 
-              </div>
-            </div>
+                <!--<div class="btn btn-primary has-tooltip pull-right"-->
+                     <!--ng-if="!$last || $index === 2" ng-click="removePhoneNumber($index, phoneNumbersForm)"-->
+                     <!--tooltip-placement="top" tooltip="Remove">-->
+                  <!--<i class="icn-sm icn-remove-token"></i>-->
+                <!--</div>-->
+
+              <!--</div>-->
+            <!--</div>-->
 
             <div class="form-row clearfix">
 

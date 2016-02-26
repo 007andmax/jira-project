@@ -238,7 +238,7 @@
 
               <div phone-numbers-edit ng-model="address.phoneNumbers"></div>
 
-              <div class="form-row clearfix">
+              <div class="form-row clearfix" style="margin-top: 13px;">
 
                 <div class="form-group full-width"
                      ng-class="{'has-error': isShowingErrors(addressesWrapForm, 'companyTimezone')}">
@@ -262,42 +262,42 @@
                            typeahead-editable="false" typeahead-min-length="0"
                            qt-typeahead-show-on-focus ng-trim="false"
                            custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                           style="width:453px;">
+                           style="width:500px;">
 
                     <div typeahead-input-icon="address.locale" style="position: absolute;top: 13px;right: 13px;"></div>
 
                   </div>
 
-                  <button class="btn btn-dark has-tooltip pull-right"
-                          ng-class="{'hide': !$last || companyForSettingPage.addresses.length >= maximalAmountOfAddresses}"
-                          ng-click="addLocations(); showAddress(companyForSettingPage.addresses.length - 1, true)"
-                          tooltip-placement="top" tooltip="Add more">
-                    <i class="icn-sm icn-plus"></i>
-                  </button>
+                  <!--<button class="btn btn-dark has-tooltip pull-right"-->
+                          <!--ng-class="{'hide': !$last || companyForSettingPage.addresses.length >= maximalAmountOfAddresses}"-->
+                          <!--ng-click="addLocations(); showAddress(companyForSettingPage.addresses.length - 1, true)"-->
+                          <!--tooltip-placement="top" tooltip="Add more">-->
+                    <!--<i class="icn-sm icn-plus"></i>-->
+                  <!--</button>-->
 
-                  <button class="btn btn-primary has-tooltip pull-right"
-                          ng-class="{'hide':$last && companyForSettingPage.addresses.length < maximalAmountOfAddresses}"
-                          ng-click="removeLocation($index, addressesWrapForm); showAddress($index - 1)"
-                          tooltip-placement="top"
-                          tooltip="Remove">
-                    <i class="icn-sm icn-remove-token"></i>
-                  </button>
+                  <!--<button class="btn btn-primary has-tooltip pull-right"-->
+                          <!--ng-class="{'hide':$last && companyForSettingPage.addresses.length < maximalAmountOfAddresses}"-->
+                          <!--ng-click="removeLocation($index, addressesWrapForm); showAddress($index - 1)"-->
+                          <!--tooltip-placement="top"-->
+                          <!--tooltip="Remove">-->
+                    <!--<i class="icn-sm icn-remove-token"></i>-->
+                  <!--</button>-->
 
                 </div>
               </div>
 
-              <div class="form-row clearfix">
-                <div class="form-group no-label full-width">
-                  <div class="clearfix">
-                    <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
-                      <input type="checkbox" ng-model="address.isPrimary" ng-click="changePrimaryAddress(address)">
-                      <span class="control-indicator"></span> Primary Address
-                      <span ng-if="changeRadioButton && companyForSettingPage.addresses.length === 1"
-                            class="error-alone">Please add multiple site/locations first.</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
+              <!--<div class="form-row clearfix">-->
+                <!--<div class="form-group no-label full-width">-->
+                  <!--<div class="clearfix">-->
+                    <!--<label class="control checkbox pull-left" ng-click="changeRadioButton = true">-->
+                      <!--<input type="checkbox" ng-model="address.isPrimary" ng-click="changePrimaryAddress(address)">-->
+                      <!--<span class="control-indicator"></span> Primary Address-->
+                      <!--<span ng-if="changeRadioButton && companyForSettingPage.addresses.length === 1"-->
+                            <!--class="error-alone">Please add multiple site/locations first.</span>-->
+                    <!--</label>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
 
               <div class="form-row clearfix" ng-show="$last">
                 <div class="form-group no-label full-width">
@@ -735,7 +735,7 @@
 
   </div>
 
-  <div class="email-me-wrapper">
+  <div class="email-me-wrapper hide">
     <form name="notificationForm">
       <h3>Send email to all relevant persons when: </h3>
 

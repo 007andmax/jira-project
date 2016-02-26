@@ -7,35 +7,38 @@
 
         <label class="control-label"
                ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">
-          contact no.
+          {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
         </label>
 
         <div style="min-height: 20px;" ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
 
           <label class="control-label"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['required']}">
-            CONTACT NO. IS REQUIRED.
+            Phone Number IS REQUIRED.
           </label>
 
           <label class="control-label"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['maxlength']}">
-            CONTACT NO. IS TOO LARGE
+            Phone Number IS TOO LARGE.
           </label>
 
           <label class="control-label"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['minlength']}">
-            CONTACT NO. IS TOO SHORT
+            Phone Number IS TOO SHORT.
           </label>
 
-          <label class="control-label" ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
-            INVALID NO.
+          <label class="control-label"
+                 ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$error['minlength'] ||
+                                    phoneNumbersForm['phoneNumber' + $index].$error['maxlength'] ||
+                                    !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
+            INVALID Phone Number.
           </label>
 
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               aria-expanded="true" hard-reset-required="true" ng-minlength="3" ng-maxlength="20"
-               ng-pattern="phoneNumberPattern" hard-reset-pattern="phoneNumberPattern" make-dirty-on-blur>
+               aria-expanded="true" hard-reset-required="true" ng-minlength="5" ng-maxlength="20"
+               ng-pattern="phoneNumberPattern" hard-reset-pattern="hardPhoneNumberPattern" make-dirty-on-blur>
       </div>
 
       <div class="form-group no-label">
@@ -68,7 +71,7 @@
 
         <label class="control-label"
                ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$invalid && (phoneNumbersForm['phoneNumber' + $index].$dirty || isTryToSave)}">
-          contact no.
+          {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
         </label>
 
         <div style="min-height: 20px;"
@@ -76,28 +79,31 @@
 
           <label class="control-label"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['required']}">
-            CONTACT NO. IS REQUIRED.
+            Phone Number IS REQUIRED.
           </label>
 
           <label class="control-label"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['maxlength']}">
-            CONTACT NO. IS TOO LARGE
+            Phone Number IS TOO LARGE.
           </label>
 
           <label class="control-label"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['minlength']}">
-            CONTACT NO. IS TOO SHORT
+            Phone Number IS TOO SHORT.
           </label>
 
-          <label class="control-label" ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
-            INVALID NO.
+          <label class="control-label"
+                 ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$error['minlength'] ||
+                                    phoneNumbersForm['phoneNumber' + $index].$error['maxlength'] ||
+                                    !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
+            INVALID Phone Number.
           </label>
 
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               aria-expanded="true" ng-minlength="3" ng-maxlength="20" ng-pattern="phoneNumberPattern"
-               make-dirty-on-blur hard-reset-required="{{ isFirstRequired }}" hard-reset-pattern="phoneNumberPattern">
+               aria-expanded="true" ng-minlength="5" ng-maxlength="20" ng-pattern="phoneNumberPattern"
+               make-dirty-on-blur hard-reset-required="{{ isFirstRequired }}" hard-reset-pattern="hardPhoneNumberPattern">
       </div>
 
       <div class="form-group no-label">

@@ -216,42 +216,42 @@
 
                       </div>
 
-                      <div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">
-                        <div class="btn btn-primary has-tooltip pull-right"
-                             ng-click="removeLocation($index)" cns-else
-                             tooltip-placement="top" tooltip="Remove site/location">
-                          <i class="icn-sm icn-remove-token"></i>
-                        </div>
+                      <!--<div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">-->
+                      <!--<div class="btn btn-primary has-tooltip pull-right"-->
+                      <!--ng-click="removeLocation($index)" cns-else-->
+                      <!--tooltip-placement="top" tooltip="Remove site/location">-->
+                      <!--<i class="icn-sm icn-remove-token"></i>-->
+                      <!--</div>-->
 
-                        <div class="btn btn-dark has-tooltip pull-right"
-                             ng-click="addLocation()" ng-show="$last" cns-if
-                             tooltip-placement="top" tooltip="Add another site/location">
-                          <i class="icn-sm icn-plus"></i>
-                        </div>
-                      </div>
+                      <!--<div class="btn btn-dark has-tooltip pull-right"-->
+                      <!--ng-click="addLocation()" ng-show="$last" cns-if-->
+                      <!--tooltip-placement="top" tooltip="Add another site/location">-->
+                      <!--<i class="icn-sm icn-plus"></i>-->
+                      <!--</div>-->
+                      <!--</div>-->
 
                     </div>
                   </div>
 
-                  <div class="form-row clearfix">
-                    <div class="form-group no-label full-width">
-                      <div class="clearfix"
-                           ng-class="{'has-error': (changeRadioButton && editCompany.addresses.length === 1)}">
-                        <label class="control checkbox pull-left" ng-click="changeRadioButton = true">
+                  <!--<div class="form-row clearfix">-->
+                  <!--<div class="form-group no-label full-width">-->
+                  <!--<div class="clearfix"-->
+                  <!--ng-class="{'has-error': (changeRadioButton && editCompany.addresses.length === 1)}">-->
+                  <!--<label class="control checkbox pull-left" ng-click="changeRadioButton = true">-->
 
-                          <input type="radio" name="chooseRadioButton" ng-checked="location.isPrimary"
-                                 ng-click="changePrimaryAddress(location)">
+                  <!--<input type="radio" name="chooseRadioButton" ng-checked="location.isPrimary"-->
+                  <!--ng-click="changePrimaryAddress(location)">-->
 
-                          <span class="control-indicator"></span> Primary Billing Address
+                  <!--<span class="control-indicator"></span> Primary Billing Address-->
 
-                          <span class="control-label" ng-if="changeRadioButton && editCompany.addresses.length === 1">
-                            Please add multiple site/locations first.
-                          </span>
+                  <!--<span class="control-label" ng-if="changeRadioButton && editCompany.addresses.length === 1">-->
+                  <!--Please add multiple site/locations first.-->
+                  <!--</span>-->
 
-                        </label>
-                      </div>
-                    </div>
-                  </div>
+                  <!--</label>-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!--</div>-->
 
                 </div>
               </div>
@@ -487,7 +487,7 @@
           </div>
         </div>
 
-        <div class="services-info-wrapper" id="companyServices">
+        <div id="companyServices" class="services-info-wrapper">
 
           <div class="default-services-header">
 
