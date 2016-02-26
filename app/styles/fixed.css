@@ -634,8 +634,15 @@ aside#left div.nav-title {
 .timer-quantity .time_drop_down {
   position: absolute;
   display: none;
-  left: 5px;
+  left: 10px;
   top: 48px;
+}
+
+.create-company-content .timer-quantity .time_drop_down {
+  top: 63px;
+}
+.settings-main-wrapper .timer-quantity .time_drop_down {
+  top: 63px;
 }
 
 .timer-quantity .time_drop_down ul {

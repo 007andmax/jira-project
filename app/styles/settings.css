@@ -628,3 +628,18 @@
     margin-bottom: 5px;
   }
 }
+
+.new-tax .procent-rate{
+  width: initial;
+  position: absolute;
+  right: 61px;
+  top: 30px;
+  color: #b2becd;
+  padding-left: 13px;
+}
+
+/*.settings-main-wrapper .services-info-wrapper .col-2.timer-quantity {*/
+  /*float: right;*/
+  /*padding-left: 10px;*/
+  /*padding-right: 0;*/
+/*}*/

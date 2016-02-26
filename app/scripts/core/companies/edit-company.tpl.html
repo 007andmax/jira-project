@@ -535,23 +535,35 @@
             <ul class="qt-list" style="width: 500px"
                 ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
-              <li class="list-heading" ng-show="services.length > 0">
-                <div class="col-1">TYPE</div>
-                <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
-                <div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
+              <li class="list-heading" ng-show="editCompany.services.length > 0">
+
+                <div class="col-1" style="width: 183px;">TYPE</div>
+
+                <div class="col-5">IS BILLABLE</div>
+
+                <div class="col-3" style="width: 92px;text-align: left;"
+                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
+
+                <div class="col-2" style="text-align: right;"
+                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
+
                 <div class="col-4">&nbsp;</div>
+
               </li>
 
               <li ng-repeat="service in editCompany.services" style="height: 100%;">
 
                 <div class="intermediate-parent-elem">
 
-                  <div class="col-1" style="width: 251px;">
+                  <div class="col-1" style="width: 183px;">
                     <div class="checkbox-caption">{{ service.name }}</div>
                   </div>
 
-                  <div class="col-2">
-                    {{ service.timeBlock | timeFilter }}
+                  <div class="col-5" style="width: 68px;">
+                    <label class="control checkbox pull-left" style="margin-top: 14px;left:0">
+                      <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()">
+                      <span class="control-indicator"></span>
+                    </label>
                   </div>
 
                   <div class="col-3" ng-class="{'has-error': isShowingErrors(companyForm, 'editServiceRate')}"
@@ -559,6 +571,10 @@
                     <input type="text" class="form-control" placeholder="Rate"
                            ng-model="service.rate" ng-required="true"
                            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+                  </div>
+
+                  <div class="col-2" style="text-align: right">
+                    {{ service.timeBlock | timeFilter }}
                   </div>
 
                   <div class="col-4" style="width: 24px">
@@ -579,11 +595,43 @@
 
                 <div class="col-1" ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceName')}">
 
-                  <input type="text" class="form-control" placeholder="Service"
+                  <label class="control-label"
+                         ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'newServiceName')}">
+                    SERVICE NAME
+                  </label>
+
+                  <div ng-messages="newServiceForm.newServiceName.$error"
+                       ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'newServiceName')}">
+                    <label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>
+                    <label class="control-label" ng-message="maxlength">IS TOO LARGE.</label>
+                    <label class="control-label" ng-message="minlength">IS TOO SHORT.</label>
+                    <label class="control-label" ng-message="unique">ALREADY OCCUPIED.</label>
+                  </div>
+
+                  <input type="text" class="form-control"
                          ng-model="newService.name"
                          name="newServiceName" ng-required="true"
                          is-uniq-validation validation-func="validateServiceName"
                          ng-maxlength="100" ng-minlength="3">
+                </div>
+
+                <div class="col-3" style="width: 143px;padding-top: 0; text-align: left"
+                     ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceRate')}">
+
+                  <label class="control-label"
+                         ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'newServiceRate')}">
+                    PER HOUR
+                  </label>
+
+                  <div ng-messages="newServiceForm.newServiceRate.$error"
+                       ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'newServiceRate')}">
+                    <label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>
+                  </div>
+
+                  <input type="text" class="form-control"
+                         ng-model="newService.rate" name="newServiceRate"
+                         hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+
                 </div>
 
                 <div class="col-2" style="position: relative;padding-top: 0"
@@ -591,7 +639,17 @@
                      sqp-form="newServiceForm.timeBlock"
                      ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'timeBlock')}">
 
-                  <input id="service-quantity-picker" type="text" class="form-control" placeholder="Min. Time Slice"
+                  <label class="control-label"
+                         ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'timeBlock')}">
+                    TIME ALLOTMENT
+                  </label>
+
+                  <div ng-messages="newServiceForm.timeBlock.$error"
+                       ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'timeBlock')}">
+                    <label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>
+                  </div>
+
+                  <input id="service-quantity-picker" type="text" class="form-control"
                          sqp-input readonly>
 
                   <input type="hidden" invalid-when="!newService.timeBlock || newService.timeBlock <= 0"
@@ -599,15 +657,7 @@
 
                 </div>
 
-                <div class="col-3" style="width: 143px;padding-top: 0"
-                     ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceRate')}">
-                  <input type="text" class="form-control" placeholder="Rate"
-                         ng-model="newService.rate"
-                         name="newServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
-
-                </div>
-
-                <div class="btn btn-success pull-right"
+                <div class="btn btn-success pull-right" style="margin-top: 19px;"
                      custom-disabled="{{ newServiceForm.$invalid }}"
                      ng-click="newService = movingService(newService, newServiceForm)">
                   <i class="icn-sm small-icn-tick"></i>
@@ -629,7 +679,7 @@
 
         <div id="tax-rates" class="default-tax-wrapper clearfix">
 
-          <h3>Default Tax</h3>
+          <h3>Tax Description</h3>
 
           <ul class="qt-list default-tax-list">
 
@@ -725,7 +775,7 @@
 
                 <div class="col-1">
 
-                  <p>New Tax Rate</p>
+                  <p>&nbsp;</p>
 
                   <input type="text" class="form-control"
                          placeholder="Tax Type" ng-model="newTaxRate.code"
@@ -738,6 +788,7 @@
                   <input type="text" class="form-control" placeholder="Rate"
                          ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)"
                          hard-reset-pattern="taxRateNumberPattern">
+                  <span class="procent-rate" style="top:33px;">%</span>
 
                   <div class="btn btn-success pull-right"
                        ng-click="saveNewTax(newTaxRateForm)"

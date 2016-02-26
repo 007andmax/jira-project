@@ -1,0 +1,85 @@
+<div class="service-form-wrapper" ng-form="editServiceForm">
+
+  <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
+
+    <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceName')}">
+      SERVICE NAME
+    </label>
+
+    <div ng-messages="editServiceForm.editServiceName.$error"
+         ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceName')}">
+
+      <label class="control-label" ng-message="required">
+        SERVICE NAME IS REQUIRED.
+      </label>
+      <label class="control-label" ng-message="maxlength">
+        SERVICE NAME IS TOO LARGE.
+      </label>
+      <label class="control-label" ng-message="minlength">
+        SERVICE NAME IS TOO SHORT.
+      </label>
+      <label class="control-label" ng-message="unique">
+        THIS SERVICE NAME ALREADY OCCUPIED.
+      </label>
+    </div>
+
+    <input type="text" class="form-control"
+           ng-model="editService.name" name="editServiceName"
+           ng-required="true" custom-disabled="{{ !!(!service.isDefault && service) }}"
+           is-uniq-validation validation-func="validateServiceName" model-id="service.versionedId.id"
+           ng-maxlength="100" ng-minlength="3">
+  </div>
+
+  <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+
+    <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceRate')}">
+      PER HOUR
+    </label>
+
+    <div ng-messages="editServiceForm.editServiceRate.$error"
+         ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceRate')}">
+      <label class="control-label" ng-message="required">
+        PER HOUR IS REQUIRED.
+      </label>
+    </div>
+
+    <input type="text" class="form-control"
+           ng-model="editService.rate"
+           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+  </div>
+
+  <div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;"
+       service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"
+       ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
+
+    <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'code')}">
+      TIME ALLOTMENT
+    </label>
+
+    <div ng-messages="editServiceForm.code.$error"
+         ng-class="{'hide': !isShowingErrors(editServiceForm, 'code')}">
+      <label class="control-label" ng-message="required">
+       IS REQUIRED.
+      </label>
+    </div>
+
+    <input id="service-quantity-picker" type="text" class="form-control"
+           sqp-input readonly>
+
+    <input type="hidden" invalid-when="!editService.timeBlock || editService.timeBlock <= 0"
+           name="timeBlock" ng-model="editService.timeBlock" hard-reset-required="true"/>
+
+  </div>
+
+  <div class="qt-form-actions">
+    <!--<div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>-->
+
+    <div class="btn btn-lg btn-info pull-right"
+         ng-click="saveEditService(editServiceForm)"
+         custom-disabled="{{ disabledSaveButton }}">
+      {{ editService.id ? 'Save' : 'Add' }}
+    </div>
+
+    <div class="btn btn-lg btn-primary pull-right" ng-click="cancelEditForm()">Cancel</div>
+  </div>
+</div>
