@@ -537,7 +537,7 @@
 
               <li class="list-heading" ng-show="editCompany.services.length > 0">
 
-                <div class="col-1" style="width: 183px;">TYPE</div>
+                <div class="col-1" style="width: 183px;">SERVICE NAME</div>
 
                 <div class="col-5">IS BILLABLE</div>
 
@@ -681,13 +681,13 @@
 
         <div id="tax-rates" class="default-tax-wrapper clearfix">
 
-          <h3>Tax Description</h3>
+          <h3>Tax Rates</h3>
 
           <ul class="qt-list default-tax-list">
 
             <li class="list-heading" ng-show="editCompany.taxRates.length > 0">
-              <div class="col-1">TAX TYPE</div>
-              <div class="col-2">RATE</div>
+              <div class="col-1">TAX DESCRIPTION</div>
+              <div class="col-2">TAX PERCENT</div>
             </li>
 
             <li ng-repeat="tax in editCompany.taxRates" ng-class="{'new-tax': isEditing}"
@@ -778,11 +778,11 @@
                 <div class="col-1" ng-class="{'has-error': !(newTaxRate.code || newTaxRateForm.code.$pristine)}">
 
                   <label class="control-label" ng-class="{'hide': !(newTaxRate.code || newTaxRateForm.code.$pristine)}">
-                    TAX TYPE
+                    TAX DESCRIPTION
                   </label>
 
                   <label class="control-label" ng-class="{'hide': newTaxRate.code || newTaxRateForm.code.$pristine}">
-                    TAX TYPE IS REQUIRED
+                    TAX DESCRIPTION IS REQUIRED
                   </label>
 
                   <input type="text" class="form-control" ng-model="newTaxRate.code" name="code"
@@ -793,10 +793,10 @@
 
                   <p style="margin-bottom: 0">
                     <label class="control-label" ng-class="{'hide': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
-                      RATE
+                      TAX PERCENT
                     </label>
                     <label class="control-label" ng-class="{'hide': (newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
-                      RATE IS REQUIRED
+                      TAX PERCENT IS REQUIRED
                     </label>
                   </p>
 

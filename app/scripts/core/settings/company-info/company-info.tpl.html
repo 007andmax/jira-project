@@ -331,7 +331,7 @@
           ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
         <li class="list-heading" ng-show="services.length > 0">
-          <div class="col-1">TYPE</div>
+          <div class="col-1">SERVICE NAME</div>
           <div class="col-2">PER HOUR</div>
           <div class="col-3">TIME ALLOTMENT</div>
           <div class="col-4">&nbsp;</div>
@@ -415,13 +415,13 @@
        ng-controller="quicktech.core.settings.companyInfoDefaultTaxCtrl">
 
     <div ng-form="companyInfoDefaultTax">
-      <h3>Tax Description</h3>
+      <h3>Tax Rates</h3>
 
       <ul class="qt-list default-tax-list">
 
         <li class="list-heading" ng-show="taxRates.length > 0">
-          <div class="col-1">TAX TYPE</div>
-          <div class="col-2">RATE</div>
+          <div class="col-1">TAX DESCRIPTION</div>
+          <div class="col-2">TAX PERCENT</div>
         </li>
 
         <li class="tax-list" ng-repeat="tax in taxRates" ng-class="{'new-tax': isEditing}"
@@ -517,20 +517,20 @@
               <!--<p ng-style="{'opacity': isShowingErrors(newTaxRateForm, 'code') ? 0 : 1}">New Tax Rate</p>-->
 
               <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxRateForm, 'code')}">
-                TAX TYPE
+                TAX DESCRIPTION
               </label>
 
               <div ng-messages="newTaxRateForm.code.$error"
                    ng-class="{'hide': !isShowingErrors(newTaxRateForm, 'code')}">
 
                 <label class="control-label" ng-message="required">
-                  TAX TYPE IS REQUIRED.
+                  TAX DESCRIPTION IS REQUIRED.
                 </label>
                 <label class="control-label" ng-message="maxlength">
-                  TAX TYPE IS TOO LARGE.
+                  TAX DESCRIPTION IS TOO LARGE.
                 </label>
                 <label class="control-label" ng-message="unique">
-                  THIS TAX TYPE ALREADY OCCUPIED.
+                  THIS DESCRIPTION TYPE ALREADY OCCUPIED.
                 </label>
               </div>
 
@@ -543,12 +543,12 @@
 
               <p style="margin-bottom: 0">
                 <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxRateForm, 'rate')}">
-                  RATE
+                  TAX PERCENT
                 </label>
               </p>
 
               <div ng-class="{'hide': !isShowingErrors(newTaxRateForm, 'rate')}">
-                <label class="control-label">TAX TYPE IS REQUIRED.</label>
+                <label class="control-label">TAX PERCENT IS REQUIRED.</label>
               </div>
 
               <input type="text" class="form-control" ng-required="true"
