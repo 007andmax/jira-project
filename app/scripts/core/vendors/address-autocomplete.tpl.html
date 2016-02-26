@@ -27,9 +27,7 @@
     <div class="error-vendor-form-message" ng-messages="addressForm.address.$error"
          ng-class="{'hide': (addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid}">
       <label class="control-label" ng-message="required">Please enter the vendor’s address.</label>
-      <label class="control-label" ng-message="correct">
-        Please select address from atocomplete results or set marker on map
-      </label>
+      <label class="control-label" ng-message="correct">Please select address from atocomplete</label>
     </div>
 
     <input class="form-control" type="text"

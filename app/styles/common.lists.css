@@ -1924,7 +1924,7 @@ Devices tab
 }
 .service-form-wrapper .col-1{
   float: left;
-  width: calc(100% - 250px);
+  width: calc(100% - 300px);
   padding-right: 5px;
 }
 .service-form-wrapper .col-2{
@@ -1934,7 +1934,7 @@ Devices tab
 }
 .service-form-wrapper .col-3{
   float: left;
-  width: 123px;
+  width: 173px;
   padding-left: 5px;
 }
 @media only screen and (min-width: 2000px){

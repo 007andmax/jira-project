@@ -9,11 +9,17 @@
            ng-maxlength="100" ng-minlength="3">
   </div>
 
-  <div ng-if="!(!service.isDefault && service)" class="col-2" style="position: relative;"
+  <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+    <input type="text" class="form-control" placeholder="Per Hour"
+           ng-model="editService.rate"
+           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+  </div>
+
+  <div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;"
        service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
 
-    <input id="service-quantity-picker" type="text" class="form-control" placeholder="Min. Time Slice"
+    <input id="service-quantity-picker" type="text" class="form-control" placeholder="Time Allotment"
            sqp-input readonly>
 
     <input type="hidden" invalid-when="!editService.timeBlock || editService.timeBlock <= 0"
@@ -21,19 +27,12 @@
 
   </div>
 
-  <div ng-if="(!service.isDefault && service)" class="col-2"
+  <div ng-if="(!service.isDefault && service)" class="col-3"
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
 
-    <input type="text" class="form-control disabled" placeholder="Min. Time Slice"
-           ng-model="editService.timeBlock"
-           ng-disabled="true" hard-reset-pattern="numberPattern"
-           invalid-when="editService.timeBlock <= 0" hard-reset-required="true" name="timeBlock">
-  </div>
-
-  <div class="col-3" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
-    <input type="text" class="form-control" placeholder="Rate"
-           ng-model="editService.rate"
-           name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+    <input type="text" class="form-control disabled" placeholder="Time Allotment"
+           ng-value="(editService.timeBlock / 60) | timeFilter"
+           ng-disabled="true">
   </div>
 
   <div class="qt-form-actions">
