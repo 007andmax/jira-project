@@ -184,7 +184,7 @@
         };
 
         $scope.isShowingServiceErrors = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
+          return form[fieldName] && (form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
         $scope.validateCompanyName = function (ngModelCtrl) {
@@ -291,6 +291,7 @@
           if (form.validation && !form.validation.code.invalid && !form.validation.rate.invalid) {
             $scope.editCompany.taxRates.push($scope.newTaxRate);
             $scope.newTaxRate = {};
+            form.$setPristine();
             //$scope.newTaxRateFormShowErrors = false;
           }
           /*else {*/

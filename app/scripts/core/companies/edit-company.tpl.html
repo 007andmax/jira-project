@@ -542,10 +542,10 @@
                 <div class="col-5">IS BILLABLE</div>
 
                 <div class="col-3" style="width: 92px;text-align: left;"
-                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">RATE</div>
+                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">PER HOUR</div>
 
-                <div class="col-2" style="text-align: right;"
-                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">MIN. TIME SLICE</div>
+                <div class="col-2" style="text-align: right;width: 133px;"
+                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT</div>
 
                 <div class="col-4">&nbsp;</div>
 
@@ -573,7 +573,7 @@
                            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
                   </div>
 
-                  <div class="col-2" style="text-align: right">
+                  <div class="col-2" style="text-align: right;width: 133px;">
                     {{ service.timeBlock | timeFilter }}
                   </div>
 
@@ -593,7 +593,8 @@
 
               <li style="padding-top: 28px;" ng-form="newServiceForm" isolate-form ng-init="newService">
 
-                <div class="col-1" ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceName')}">
+                <div class="col-1" style="width: 181px"
+                     ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceName')}">
 
                   <label class="control-label"
                          ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'newServiceName')}">
@@ -634,7 +635,7 @@
 
                 </div>
 
-                <div class="col-2" style="position: relative;padding-top: 0"
+                <div class="col-2" style="position: relative;padding-top: 0;width: 133px"
                      service-quantity-picker="newService.timeBlock" sqp-is-show-format="false"
                      sqp-form="newServiceForm.timeBlock"
                      ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'timeBlock')}">
@@ -647,6 +648,7 @@
                   <div ng-messages="newServiceForm.timeBlock.$error"
                        ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'timeBlock')}">
                     <label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>
+                    <label class="control-label" ng-message="invalidwhen">INVALID VALUE.</label>
                   </div>
 
                   <input id="service-quantity-picker" type="text" class="form-control"
@@ -773,22 +775,34 @@
 
               <div class="helping-additional-class">
 
-                <div class="col-1">
+                <div class="col-1" ng-class="{'has-error': !(newTaxRate.code || newTaxRateForm.code.$pristine)}">
 
-                  <p>&nbsp;</p>
+                  <label class="control-label" ng-class="{'hide': !(newTaxRate.code || newTaxRateForm.code.$pristine)}">
+                    TAX TYPE
+                  </label>
 
-                  <input type="text" class="form-control"
-                         placeholder="Tax Type" ng-model="newTaxRate.code"
-                         ng-change="validateNewTaxRate(newTaxRateForm)" name="code">
+                  <label class="control-label" ng-class="{'hide': newTaxRate.code || newTaxRateForm.code.$pristine}">
+                    TAX TYPE IS REQUIRED
+                  </label>
+
+                  <input type="text" class="form-control" ng-model="newTaxRate.code" name="code"
+                         ng-change="validateNewTaxRate(newTaxRateForm)">
                 </div>
 
-                <div class="col-2">
-                  <p>&nbsp;</p>
+                <div class="col-2" ng-class="{'has-error': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
 
-                  <input type="text" class="form-control" placeholder="Rate"
-                         ng-model="newTaxRate.rate" name="rate" ng-change="validateNewTaxRate(newTaxRateForm)"
-                         hard-reset-pattern="taxRateNumberPattern">
-                  <span class="procent-rate" style="top:33px;">%</span>
+                  <p style="margin-bottom: 0">
+                    <label class="control-label" ng-class="{'hide': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
+                      RATE
+                    </label>
+                    <label class="control-label" ng-class="{'hide': (newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
+                      RATE IS REQUIRED
+                    </label>
+                  </p>
+
+                  <input type="text" class="form-control" ng-model="newTaxRate.rate" name="rate"
+                         ng-change="validateNewTaxRate(newTaxRateForm)" hard-reset-pattern="taxRateNumberPattern">
+                  <span class="procent-rate" style="top:29px;">%</span>
 
                   <div class="btn btn-success pull-right"
                        ng-click="saveNewTax(newTaxRateForm)"
