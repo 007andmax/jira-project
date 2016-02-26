@@ -271,6 +271,38 @@
       </ul>
     </div>
 
+    <div class="dropdown pull-right for-network-tab">
+
+      <div class="btn btn-info has-tooltip" data-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;">
+        <div style="margin-top: 6px;">Change Credential</div>
+      </div>
+
+      <ul class="dropdown-menu" style="margin-left: -176px;">
+        <div class="add-link-form" ng-form="changeCredentialForm">
+
+          <div class="form-group">
+            <input type="text" placeholder="User Name" class="form-control"
+                   data-edit="createLink" ng-model="credential.name">
+          </div>
+
+          <div class="form-group">
+            <input type="text" placeholder="New User Password" class="form-control"
+                   data-edit="createLink" ng-model="credential.pass">
+          </div>
+
+          <div class="form-group">
+            <div class="btn btn-lg btn-info"
+                 custom-disabled="{{ savingCredentional }}" ng-click="saveNewCredentional()">
+              Save
+            </div>
+            <div class="btn btn-lg btn-primary">Cancel</div>
+          </div>
+
+        </div>
+      </ul>
+
+    </div>
+
     <ul class="nav nav-qt">
 
       <li ng-class="{'active': currentOpenTab === 'DEVICES'}">

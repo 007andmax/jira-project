@@ -4,13 +4,18 @@
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.companyDevicesCtrl',
     ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.SharedStateService', '$state',
-      'quicktech.common.services.UserConfirmationsService',
-      function ($scope, DevicesService, $stateParams, SharedStateService, $state, UserConfirmationsService) {
+      'quicktech.common.services.UserConfirmationsService', 'CompaniesService',
+      function ($scope, DevicesService, $stateParams, SharedStateService, $state,
+                UserConfirmationsService, CompaniesService) {
 
         var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN'],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
           agentCallbackCount = 0;
 
+        $scope.credential = {
+          name: '',
+          pass: ''
+        };
         $scope.selectDevices = {};
         $scope.companyId = $stateParams.companyId;
         $scope.isCollapsedGraph = true;
@@ -69,6 +74,17 @@
           }
 
           devicesHeaderState.checkedDevicesId = selectDevicesIds;
+        };
+
+        $scope.saveNewCredentional = function(){
+          $scope.savingCredentional = true;
+          CompaniesService.changeUserAndPass($scope.credential.name, $scope.credential.pass, $scope.companyId, function(){
+            $scope.credential = {
+              name: '',
+              pass: ''
+            };
+            $scope.savingCredentional = false;
+          })
         }
 
       }]);

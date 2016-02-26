@@ -24,7 +24,7 @@
       controller: function ($scope) {
 
         $scope.maximalAmountOfPhones = 3;
-        $scope.hardPhoneNumberPattern = /^\+?([0-9][\s()-]*){0,20}$/;
+        $scope.hardPhoneNumberPattern = /^([0-9 -+()]){0,20}$/;
         $scope.phoneNumberPattern = /^\+?1?(-|\s)?(\()?\d{0,3}(\))?(-|\s)?\d{0,3}(-|\s)?\d{0,4}$/;
         $scope.phoneNumberTypes = {
           MOBILE: 'Mobile',
