@@ -8604,6 +8604,7 @@ button.close {
 }
 .modal-content {
   position: relative;
+  height: 100%;
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -8612,9 +8613,7 @@ button.close {
   background-clip: padding-box;
   outline: 0;
 }
-.modal-content form{
-  overflow: auto;
-}
+
 @-moz-document url-prefix() {
   .modal-content {
     -webkit-box-shadow: 0 6px 15px 0 rgba(21, 30, 41, 0.4);
