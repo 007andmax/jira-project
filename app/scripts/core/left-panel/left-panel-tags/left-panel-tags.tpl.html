@@ -10,7 +10,7 @@
   <nav class="clearfix label-nav" style="padding-top: 0;"
        ng-class="{'collapsed-nav': collapseItem === 'LABELS'}">
 
-    <ul class="nav" collapse="collapseItem !== 'LABELS'" style="width: 100%;">
+    <ul class="nav" collapse="collapseItem !== 'LABELS'">
       <li ng-repeat="tag in tags" ng-class="{'edit': tag.id === editTagId}">
         <a href="javascript:void(0)" ng-if="tag.id !== editTagId">
 
