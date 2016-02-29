@@ -373,7 +373,7 @@
 
               </ul>
 
-              <div class="table-wrapper clearfix" ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
+              <div class="table-wrapper product-upd clearfix" ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
 
