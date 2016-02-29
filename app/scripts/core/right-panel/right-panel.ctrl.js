@@ -29,7 +29,9 @@
                 getTimeDifference($scope.currentUserInfo.lastUpdate)
               });
 
-              $scope.clientCompaniesGroupedData = RightPanelService.getClientCompaniesGroupedData();
+              $scope.clientCompaniesGroupedData = RightPanelService.getClientCompaniesGroupedData(function(resp){
+                $scope.clientCompaniesGroupedData = resp;
+              });
 
             } else if (companyId !== '') {
 
