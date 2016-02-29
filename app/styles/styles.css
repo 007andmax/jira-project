@@ -8612,6 +8612,9 @@ button.close {
   background-clip: padding-box;
   outline: 0;
 }
+.modal-content form{
+  overflow: auto;
+}
 @-moz-document url-prefix() {
   .modal-content {
     -webkit-box-shadow: 0 6px 15px 0 rgba(21, 30, 41, 0.4);
@@ -8808,7 +8811,7 @@ button.close {
 }
 .modal-create-ticket .modal-footer {
   margin: 0 30px;
-  padding: 23px 0 30px;
+  padding: 23px 0 70px;
 }
 .modal-create-ticket .modal-footer .form-group {
   margin-bottom: 0;
