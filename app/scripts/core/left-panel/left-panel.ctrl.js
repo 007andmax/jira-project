@@ -45,6 +45,10 @@
 
         $scope.toogleCollapse = function (item) {
 
+          if (!$scope.isLeftPanelOpen) {
+            return;
+          }
+
           if ((item === $scope.collapseItem) && item !== 'QUICKSUPPORT') {
             $scope.collapseItem = '';
             return;
@@ -57,19 +61,27 @@
           sharedQuickSession.isCreateNew = true;
         };
 
+        $scope.stateGo = function(state, stateParams){
+          if (!$scope.isLeftPanelOpen) {
+            return;
+          }
+
+          $state.go(state, stateParams);
+        };
+
         $scope.$watch(function () {
           return location.hash
         }, function (value) {
 
           var typePage = value.split('/')[1];
 
-          if(typePage !== 'settings'){
+          if (typePage !== 'settings') {
             $scope.collapseItem = typePage.toUpperCase();
           } else {
             $scope.collapseItem = '';
           }
 
-        });
+        })
 
       }]);
 

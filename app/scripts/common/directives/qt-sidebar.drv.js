@@ -6,7 +6,7 @@
     ['$timeout', function ($timeout) {
       return {
         restrict: 'A',
-        link: function (scope, element, attrs) {
+        link: function (scope, element) {
 
           var windowWidth;
 
@@ -24,27 +24,36 @@
             windowWidth = window.innerWidth;
 
             if (windowWidth > 1389) {
-
-              element.addClass('opened');
-              element.css("box-shadow", "none");
-
-              element.find('.qt-sidebar-scroll').nanoScroller();
-
+              openLeftPanel();
             } else {
-              element.removeClass('opened');
+              closeLeftPanel();
             }
           }
 
           element.hover(function () {
             if (!(windowWidth > 1389)) {
-              element.addClass('opened');
-              element.find('.qt-sidebar-scroll').nanoScroller();
+              openLeftPanel();
             }
           }, function () {
             if (!(windowWidth > 1389)) {
-              element.removeClass('opened');
+              closeLeftPanel();
             }
-          })
+          });
+
+          function openLeftPanel(){
+            $timeout(function(){
+              scope.isLeftPanelOpen = true;
+            }, 300);
+
+            element.addClass('opened');
+            element.css("box-shadow", "none");
+            element.find('.qt-sidebar-scroll').nanoScroller();
+          }
+
+          function closeLeftPanel(){
+            scope.isLeftPanelOpen = false;
+            element.removeClass('opened');
+          }
 
         }
       }

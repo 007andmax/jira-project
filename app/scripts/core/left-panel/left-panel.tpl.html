@@ -34,19 +34,19 @@
           ng-hide="collapseItem !== 'TICKETS'" style="width: 100%;">
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="tickets({listType: 'unassigned'})">
+          <a href="javascript:void(0)" ng-click="stateGo('tickets', {listType: 'unassigned'})">
             <i class="nav-icon icn-lg icn-unassigned"></i> Unassigned
             <span class="badge">{{ ticketCounts.UNASSIGNED }}</span>
           </a>
         </li>
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="tickets({listType: 'user'})">
+          <a href="javascript:void(0)" ng-click="stateGo('tickets', {listType: 'user'})">
             <i class="nav-icon icn-lg icn-tickets"></i> My Tickets
           </a>
         </li>
 
-        <li ui-sref-active="active" ui-sref="tickets({listType: 'shared'})">
+        <li ui-sref-active="active" ng-click="stateGo('tickets', {listType: 'shared'})">
           <a href="javascript:void(0)">
             <i class="nav-icon icn-lg icn-shared"></i> Shared
             <span class="badge">{{ ticketCounts.SHARED }}</span>
@@ -54,25 +54,25 @@
         </li>
 
         <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-          <a href="javascript:void(0)" ui-sref="tickets({listType: 'open'})">
+          <a href="javascript:void(0)" ng-click="stateGo('tickets', {listType: 'open'})">
             <i class="nav-icon icn-lg icn-open"></i>Open
           </a>
         </li>
 
         <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-          <a href="javascript:void(0)" ui-sref="tickets({listType: 'closed'})">
+          <a href="javascript:void(0)" ng-click="stateGo('tickets', {listType: 'closed'})">
             <i class="nav-icon icn-lg icn-closed"></i> Closed
           </a>
         </li>
 
         <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-          <a href="javascript:void(0)" ui-sref="tickets({listType: 'trash'})">
+          <a href="javascript:void(0)" ng-click="stateGo('tickets', {listType: 'trash'})">
             <i class="nav-icon icn-lg icn-trash"></i> Trash
           </a>
         </li>
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="tickets({listType: 'spam'})">
+          <a href="javascript:void(0)" ng-click="stateGo('tickets', {listType: 'spam'})">
             <i class="nav-icon icn-lg icn-spam"></i> Spam
           </a>
         </li>
@@ -82,7 +82,7 @@
 
     <div class="clearfix divider"></div>
 
-    <div class="nav-title" ng-click="toogleCollapse('QUICKSUPPORT')" ui-sref="quickSupport"
+    <div class="nav-title" ng-click="toogleCollapse('QUICKSUPPORT'); stateGo('quickSupport');"
          ng-class="{'collapsed-nav': collapseItem === 'QUICKSUPPORT'}"
          style="width: 100%;cursor: pointer;padding: 24px 18px 24px 30px;">
       Quick Support
@@ -105,19 +105,19 @@
       <ul class="nav nav-clients" ng-hide="collapseItem !== 'CLIENTS'" style="width: 100%;">
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="companies">
+          <a href="javascript:void(0)" ng-click="stateGo('companies')">
             <i class="nav-icon icn-lg icn-companies"></i> Companies
           </a>
         </li>
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="users">
+          <a href="javascript:void(0)" ng-click="stateGo('users')">
             <i class="nav-icon icn-lg icn-users"></i> Users
           </a>
         </li>
 
         <li style="cursor: not-allowed">
-          <a href="javascript:void(0)" ui-sref="devices">
+          <a href="javascript:void(0)" ng-click="stateGo('devices')">
             <i class="nav-icon icn-lg icn-devices"></i> Devices
           </a>
         </li>
@@ -142,14 +142,14 @@
       <ul class="nav nav-accounts" ng-hide="collapseItem !== 'ACCOUNTING'" style="width: 100%;">
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="accounting">
+          <a href="javascript:void(0)" ng-click="stateGo('accounting')">
             <i class="nav-icon icn-billable icn-lg"></i> Billable
             <span class="badge">{{ ticketCounts.BILLABLE }}</span>
           </a>
         </li>
 
         <li ng-class="{active: $state.includes('receivable')}">
-          <a href="javascript:void(0)" ui-sref="receivable({mode: 'group-by-company'})">
+          <a href="javascript:void(0)" ng-click="stateGo('receivable', {mode: 'group-by-company'})">
             <i class="nav-icon icn-receivable icn-lg"></i> Receivable
             <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
           </a>
@@ -160,7 +160,7 @@
        </li>  -->
 
         <li ng-class="{active: $state.includes('receipt-archive')}">
-          <a href="javascript:void(0)" ui-sref="receipt-archive({mode: 'group-by-company'})">
+          <a href="javascript:void(0)" ng-click="stateGo('receipt-archive', {mode: 'group-by-company'})">
             <i class="nav-icon icn-receipt-archive icn-lg"></i> Receipt Archive
           </a>
         </li>
@@ -184,19 +184,19 @@
           ng-hide="collapseItem !== 'INVENTRY'" style="width: 100%;">
 
         <li ui-sref-active="active" ng-show="currentUser.role !== 'USER'">
-          <a href="javascript:void(0)" ui-sref="vendors">
+          <a href="javascript:void(0)" ng-click="stateGo('vendors')">
             <i class="nav-icon icn-vendors icn-lg"></i> Vendors
           </a>
         </li>
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="products">
+          <a href="javascript:void(0)" ng-click="stateGo('products')">
             <i class="nav-icon icn-products icn-lg"></i> Products
           </a>
         </li>
 
         <li ui-sref-active="active">
-          <a href="javascript:void(0)" ui-sref="services">
+          <a href="javascript:void(0)" ng-click="stateGo('services')">
             <i class="nav-icon icn-services icn-lg"></i> Services
           </a>
         </li>
