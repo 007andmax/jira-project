@@ -271,36 +271,53 @@
       </ul>
     </div>
 
-    <div class="dropdown pull-right for-network-tab">
+    <div class="pull-right for-network-tab" dropdown is-open="isDropdownOpen">
 
-      <div class="btn btn-info has-tooltip" data-toggle="dropdown" aria-expanded="false" style="margin-right: 10px;">
-        <div style="margin-top: 6px;">Change Credential</div>
+      <div class="btn btn-primary has-tooltip" style="width: 94px;margin-right: 10px;" dropdown-toggle
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="modify logon info">
+        <i class="icn-sm icn-modify-logon"></i>
       </div>
 
-      <ul class="dropdown-menu" style="margin-left: -176px;">
-        <div class="add-link-form" ng-form="changeCredentialForm">
+      <div class="dropdown-menu dropdown-menu-right" dropdown-menu>
+        <div class="dropdown-header caption-heading">Modify Logon Info</div>
+        <div class="modify-logon-form" ng-init="isShowPass = false">
+          <form name="changeCredentialForm">
 
-          <div class="form-group">
-            <input type="text" placeholder="User Name" class="form-control"
-                   data-edit="createLink" ng-model="credential.name">
-          </div>
-
-          <div class="form-group">
-            <input type="password" placeholder="New User Password" class="form-control"
-                   data-edit="createLink" ng-model="credential.pass">
-          </div>
-
-          <div class="form-group">
-            <div class="btn btn-lg btn-info"
-                 custom-disabled="{{ savingCredentional }}" ng-click="saveNewCredentional()">
-              Save
+            <div class="form-group">
+              <input type="text" class="form-control" autocomplete="off"
+                     placeholder="Domain/Username" ng-model="credential.name">
             </div>
-            <div class="btn btn-lg btn-primary">Cancel</div>
-          </div>
 
+            <div class="form-group">
+
+              <input type="{{ isShowPass ? 'text' : 'password' }}"
+                     class="form-control show-password" autocomplete="new-password"
+                     placeholder="Password" ng-model="credential.pass">
+
+              <a href="javascript:void(0)"
+                 class="show-password-hit hit-area ha-18 has-tooltip" ng-click="isShowPass = !isShowPass"
+                 tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password" tooltip-append-to-body="true">
+                <i class="icn-sm icn-{{ isShowPass ? 'hide' : 'show' }}-password"></i>
+              </a>
+
+            </div>
+
+            <div class="qt-form-actions">
+
+              <div class="btn btn-info btn-lg" ng-click="saveNewCredentional(); isDropdownOpen = false"
+                   custom-disabled="{{ savingCredentional }}">Save</div>
+
+              <!--<span>or</span>-->
+
+              <!--<a href="javascript:void(0)">-->
+                <!--Verify Password-->
+              <!--</a>-->
+
+            </div>
+
+          </form>
         </div>
-      </ul>
-
+      </div>
     </div>
 
     <ul class="nav nav-qt">
