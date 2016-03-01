@@ -35,6 +35,7 @@
             if($scope.vendor.addresses[i].isPrimary){
               var address = $scope.vendor.addresses[i].suiteNumber ? $scope.vendor.addresses[i].suiteNumber + ', ' : '';
               address += $scope.vendor.addresses[i].address;
+              address += $scope.vendor.addresses[i].postalCode ? ', ' + $scope.vendor.addresses[i].postalCode : '';
               return address;
             }
           }

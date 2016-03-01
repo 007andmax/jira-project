@@ -200,7 +200,9 @@
 
       <div class="user-location"><i class="icn-sm icn-sb-location"></i>
         <span>
-          {{ primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' + primaryAddress.address : primaryAddress.address }}
+          {{ (primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' : '') +
+          primaryAddress.address +
+          (primaryAddress.postalCode ? ', ' + primaryAddress.postalCode : '') }}
         </span>
       </div>
 

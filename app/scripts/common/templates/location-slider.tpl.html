@@ -5,8 +5,9 @@
     <div class="address-heading">{{ currentLocation.isPrimary ? 'Primary Address' : 'Address' }}</div>
 
     <div class="address-txt">
-      {{ currentLocation.suiteNumber ? currentLocation.suiteNumber + ',' : '' }}
-      {{  currentLocation.address }}
+      {{ (currentLocation.suiteNumber ? currentLocation.suiteNumber + ', ' : '') +
+      currentLocation.address +
+      (currentLocation.postalCode ? ', ' + currentLocation.postalCode : '') }}
     </div>
 
     <div class="location-map">
