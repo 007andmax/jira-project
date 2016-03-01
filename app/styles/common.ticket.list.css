@@ -29,6 +29,9 @@
 .tickets li:last-child{
   border-bottom: none;
 }
+.tickets li.ticket:last-child{
+  border-bottom: 1px #e7ecf2 solid;
+}
 
 
 .tickets li:first-child.ticket-type{
