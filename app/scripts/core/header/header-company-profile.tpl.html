@@ -14,41 +14,100 @@
 
   </div>
 
-  <!--<div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'USERS'">-->
+  <div class="topNavbarLeft-Left pull-left hide" ng-show="bulkOptionMode === 'USERS'">
 
-    <!--<div class="pull-left">-->
-      <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"-->
-         <!--tooltip-append-to-body="true"-->
-         <!--tooltip-placement="bottom" style="margin: 11px 8px 0 0;"-->
-         <!--tooltip="Reset Selected Items">-->
-        <!--<i class="icn-sm icn-back-arrow"></i>-->
-      <!--</a>-->
-    <!--</div>-->
+    <div class="pull-left">
+      <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+         tooltip-append-to-body="true"
+         tooltip-placement="bottom" style="margin: 11px 8px 0 0;"
+         tooltip="Reset Selected Items">
+        <i class="icn-sm icn-back-arrow"></i>
+      </a>
+    </div>
 
-    <!--<p class="pull-left" style="white-space: nowrap;">-->
-      <!--<strong>{{ selectUsersIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>-->
-    <!--</p>-->
+    <p class="pull-left" style="white-space: nowrap;">
+      <strong>{{ selectUsersIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
+    </p>
 
-    <!--<div class="topNavbar-filter pull-right">-->
-      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title=""-->
-           <!--data-original-title="Archive"><i class="icn-sm icn-remove-token"></i></div>-->
-      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title=""-->
-           <!--data-original-title="Subscribe to..."><i class="icn-sm icn-user-subscription"></i></div>-->
-      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title=""-->
-           <!--data-original-title="Set Privilege to..."><i class="icn-sm icn-user-privilege"></i></div>-->
-      <!--<div class="btn btn-default has-tooltip pull-right" data-placement="bottom" title="" data-original-title="Email">-->
-        <!--<i class="icn-sm icn-user-mail"></i></div>-->
+    <div class="topNavbar-filter pull-right">
 
-    <!--</div>-->
+      <div class="btn btn-default has-tooltip pull-right disabled"
+           tooltip-placement="bottom" tooltip="Archive">
+        <i class="icn-sm icn-remove-token"></i>
+      </div>
 
-  <!--</div>-->
+      <div class="dropdown hide">
+        <div class="btn btn-default has-tooltip pull-right" data-toggle="dropdown"
+             tooltip-placement="bottom" tooltip="Subscribe to...">
+          <i class="icn-sm icn-user-subscription"></i>
+        </div>
+
+        <ul class="dropdown-menu dropdown-subscribe">
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
+              <div class="clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
+                  <span class="control-indicator"></span> Ticket Updates
+                </label>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
+              <div class="clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                  <span class="control-indicator"></span> Invoice Updates
+                </label>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <div class="btn btn-default has-tooltip pull-right" data-toggle="dropdown"
+             tooltip-placement="bottom" tooltip="Set Privilege to...">
+          <i class="icn-sm icn-user-privilege"></i>
+        </div>
+
+        <ul class="dropdown-menu dropdown-privilege">
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('USER')">
+              User
+            </a>
+          </li>
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('ADMIN')">
+              Administrator
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="btn btn-default has-tooltip pull-right disabled"
+           tooltip-placement="bottom" tooltip="Email">
+        <i class="icn-sm icn-user-mail"></i>
+      </div>
+
+    </div>
+
+  </div>
 
   <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'DEVICES'">
 
     <div class="pull-left">
       <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
          data-container="body" title="Reset Selected Items" data-placement="bottom"
-         style="margin: 11px 8px 0 0;" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+         style="margin: 11px 8px 0 0;"
+         data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
         <i class="icn-sm icn-back-arrow"></i>
       </a>
     </div>

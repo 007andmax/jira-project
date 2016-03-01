@@ -32,6 +32,16 @@
 
         }, true);
 
+        $scope.changeUserRole = function (role) {
+          console.log('changeUserRole ' + role);
+          console.log($scope.selectUsersIds);
+        };
+
+        $scope.changeUserSubscription = function (subsc) {
+          console.log('changeUserSubscription ' + subsc);
+          console.log($scope.selectUsersIds);
+        }
+
       }]);
 
 }());
