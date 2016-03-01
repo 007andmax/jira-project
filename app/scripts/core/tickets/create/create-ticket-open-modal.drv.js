@@ -7,7 +7,7 @@
       function ($state, $modal) {
         return {
           restrict: 'A',
-          link: function ($scope, element, attrs) {
+          link: function ($scope, element) {
 
             element.click(function () {
 
@@ -25,6 +25,15 @@
                   sessionTime: false
                 }
               });
+
+              modalInstance.opened.then(function () {
+                $('body').addClass('non-body-scroll');
+              });
+
+              modalInstance.result.finally(function () {
+                $('body').addClass('non-body-scroll');
+              });
+
             });
           }
         }

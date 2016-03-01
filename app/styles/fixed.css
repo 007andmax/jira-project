@@ -1,12 +1,19 @@
 /*create ticket modal window*/
 .modal-create-ticket .modal-dialog {
-  position: fixed !important;
+  /*position: fixed !important;*/
   top: 50% !important;
   left: 50% !important;
-  height: 85%;
   transform: translate3d(-50%, -50%, 0) !important;
   margin: 0 !important;
   transition: none !important;
+}
+
+body.non-body-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-create-ticket .dropdown-menu{
+  margin-bottom: 20px;
 }
 
 /*product page(and some service)*/
@@ -270,7 +277,7 @@
 /*created for dropdown in create user form*/
 .dropdown-user-parent > .dropdown-menu {
   width: 380px;
-  height: 100px;
+  height: 204px;
 }
 
 .dropdown-user-parent > .dropdown-menu > li {

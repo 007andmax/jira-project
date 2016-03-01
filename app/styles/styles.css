@@ -8604,7 +8604,6 @@ button.close {
 }
 .modal-content {
   position: relative;
-  height: 100%;
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -8810,7 +8809,7 @@ button.close {
 }
 .modal-create-ticket .modal-footer {
   margin: 0 30px;
-  padding: 23px 0 70px;
+  padding: 23px 0 23px;
 }
 .modal-create-ticket .modal-footer .form-group {
   margin-bottom: 0;
