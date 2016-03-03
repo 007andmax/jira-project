@@ -61,12 +61,18 @@
           sharedQuickSession.isCreateNew = true;
         };
 
-        $scope.stateGo = function(state, stateParams){
+        $scope.stateGo = function (event, state, stateParams) {
           if (!$scope.isLeftPanelOpen) {
             return;
           }
 
-          $state.go(state, stateParams);
+          if (event.button > 0) {
+            var url = $state.href(state, stateParams, {absolute: true});
+            window.open(url, '_blank');
+          } else {
+            $state.go(state, stateParams);
+          }
+
         };
 
         $scope.$watch(function () {

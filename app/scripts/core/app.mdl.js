@@ -22,6 +22,7 @@
       'quicktech.core.settings',
       'quicktech.core.devices',
       'quicktech.core.quickSupport',
+      'quicktech.core.taxRates',
       'ui.router',
       'ui.select',
       'ui.bootstrap',
@@ -175,6 +176,11 @@
         url: '/quickSupport',
         templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
         controller: 'quicktech.core.quickSupport.quickSupportCtrl'
+      }))
+      .state('taxRates', waitForServices({
+        url: '/inventry/taxRates',
+        templateUrl: '/html/scripts/core/tax-rates/tax-rates.tpl.html',
+        controller: 'quicktech.core.taxRates.taxRatesCtrl'
       }));
 
     function waitForServices(conf) {

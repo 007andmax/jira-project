@@ -39,6 +39,8 @@
             return 'company-devices';
           } else if ($state.includes("quickSupport")) {
             return 'quick-support';
+          } else if ($state.includes("taxRates")) {
+            return 'tax-rates';
           }
         };
 

@@ -1,0 +1,140 @@
+.tax-rates-content {
+  float: left;
+  width: 100%;
+  padding: 31px 30px 30px;
+}
+
+.default-tax-rates-header {
+  float: left;
+  width: 100%;
+}
+
+.default-tax-rate-count {
+  float: left;
+  margin-top: 9px;
+}
+
+@-moz-document url-prefix() {
+  .default-tax-rate-count {
+    line-height: 19px;
+  }
+}
+
+.default-tax-rates-header > .dropdown > .btn {
+  width: 92px;
+}
+
+ul.tax-rates-list {
+  padding: 16px 0 30px 26px;
+}
+
+.add-tax-rate-btn-wrapper {
+  float: left;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.add-tax-rate-btn-wrapper .btn {
+  width: 92px;
+  float: right;
+}
+
+.tax-rates-content .qt-list > li .col-1 {
+  width: 50%;
+  padding-top: 9px;
+}
+
+.tax-rates-content .qt-list > li .col-2 {
+  width: calc(50% - 64px);
+  padding-top: 9px;
+}
+
+.tax-rates-content .qt-list > li .col-3 {
+  width: 64px;
+  padding-top: 9px;
+}
+
+.tax-rates-content .qt-tax-rates {
+  padding: 25px 0 0;
+}
+
+@-moz-document url-prefix() {
+  .qt-tax-rates {
+    line-height: 19px;
+  }
+}
+
+.tax-rates-content .qt-tax-rates > li {
+  padding: 25px 0;
+  min-height: 70px;
+  height: auto;
+  cursor: pointer;
+}
+
+.tax-rates-content .qt-tax-rates > li + li {
+  min-height: 71px;
+  height: auto;
+}
+
+.tax-rates-content .qt-tax-rates > li > .col-1 {
+  width: calc(100% - 98px);
+}
+
+.tax-rates-content .qt-tax-rates > li > .col-2 {
+  width: 98px;
+  text-align: right;
+  padding-right: 0;
+}
+
+ul.tax-rates-list > li .col-3 > .hit-area + .hit-area {
+  margin-right: 16px;
+}
+
+ul.tax-rates-list > li.edit-form > .intermediate-parent-elem {
+  display: none;
+}
+
+ul.tax-rates-list > li:not(.edit-form) > .edit-form-content {
+  display: none;
+}
+
+ul.tax-rates-list > li.edit-form {
+  height: 166px !important;
+  padding: 0 !important;
+  border: none !important;
+  cursor: auto !important;
+}
+
+.tax-rates-list li.edit-form .edit-form-content div.col-1 {
+  float: left;
+  width: 50%;
+  padding: 0 5px 0 150px;
+}
+
+.tax-rates-list li.edit-form .edit-form-content div.col-2 {
+  float: left;
+  width: 50%;
+  padding: 0 150px 0 5px;
+}
+
+.tax-rates-list li.edit-form .edit-form-content div.qt-form-actions {
+  padding-right: 150px;
+}
+
+.tax-rates-content .qt-list > li:before {
+  left: -60px;
+}
+
+.tax-rates-content .qt-list > li.edit-form:after {
+  right: -33px;
+}
+
+.tax-rates-content li.edit-form span.procent-rate {
+  width: initial;
+  position: absolute;
+  right: 300px;
+  top: 39px;
+  color: #b2becd;
+  padding-left: 13px;
+}
+

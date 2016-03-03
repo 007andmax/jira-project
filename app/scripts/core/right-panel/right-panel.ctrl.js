@@ -29,7 +29,7 @@
                 getTimeDifference($scope.currentUserInfo.lastUpdate)
               });
 
-              $scope.clientCompaniesGroupedData = RightPanelService.getClientCompaniesGroupedData(function(resp){
+              RightPanelService.getClientCompaniesGroupedData(function (resp) {
                 $scope.clientCompaniesGroupedData = resp;
               });
 

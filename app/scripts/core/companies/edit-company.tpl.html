@@ -775,13 +775,18 @@
 
               <div class="helping-additional-class">
 
-                <div class="col-1" ng-class="{'has-error': !(newTaxRate.code || newTaxRateForm.code.$pristine)}">
+                <div class="col-1"
+                     ng-class="{'has-error': !(newTaxRate.code || newTaxRateForm.code.$pristine) || !(!newTaxRateForm.validation.code.unique || newTaxRateForm.code.$pristine)}">
 
                   <label class="control-label" ng-class="{'hide': !(newTaxRate.code || newTaxRateForm.code.$pristine)}">
                     TAX DESCRIPTION
                   </label>
 
                   <label class="control-label" ng-class="{'hide': newTaxRate.code || newTaxRateForm.code.$pristine}">
+                    TAX DESCRIPTION IS REQUIRED
+                  </label>
+
+                  <label class="control-label" ng-class="{'hide': !newTaxRateForm.validation.code.unique || newTaxRateForm.code.$pristine}">
                     TAX DESCRIPTION IS REQUIRED
                   </label>
 

@@ -701,6 +701,13 @@ li:hover > a > .icn-devices, li.active > a > .icn-devices {
   background-position: -1546px -100px;
 }
 
+.icn-tax-retes {
+  background-position: -1576px -100px;
+}
+li:hover > a > .icn-tax-retes, li.active > a > .icn-tax-retes {
+  background-position: -1606px -100px;
+}
+
 .icn-leads {
   background-position: -2779px -206px;
   height: 16px;

@@ -70,9 +70,10 @@
             $scope.taxRates[i].company = {id: $scope.currentCompany.id};
           }
 
-          TaxRatesService.saveList($scope.taxRates, function () {
+          TaxRatesService.saveList($scope.taxRates, function (resp) {
+            taxRatesCopy = angular.copy(resp);
+            $scope.taxRates = angular.copy(resp);
             $scope.savingTaxProcess = false;
-            taxRatesCopy = angular.copy($scope.taxRates);
             $scope.isTaxRatesChanges = false
           })
 
