@@ -22,6 +22,8 @@
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.vendors = VendorsService.getAllForAutocomplete($scope);
         $scope.selectedServices = {};
+        $scope.selectedTax = {};
+        $scope.techCompanyTax = [];
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
             $timeout(function () {
@@ -91,20 +93,35 @@
 
             $scope.editCompany = companyData.staticCopy();
 
+            TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
+              $scope.techCompanyTax = angular.copy(resp);
+
+              for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
+                $scope.selectedTax[$scope.editCompany.taxRates[i].code] = true;
+              }
+            });
+
           });
 
         } else {
           $scope.editCompany = {
             addresses: [{isPrimary: true}],
             contacts: [getEmptyContact()],
-            taxRates: [],
             companyAssociations: [],
             services: []
           };
 
           TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
+            $scope.techCompanyTax = angular.copy(resp);
+
+            if($scope.editCompany.taxRates){
+              return;
+            }
+
+            $scope.editCompany.taxRates = [];
             for (var i = 0; i < resp.length; i++) {
-              $scope.editCompany.taxRates.push({code: resp[i].code, rate: resp[i].rate})
+              $scope.editCompany.taxRates.push(resp[i]);
+              $scope.selectedTax[resp[i].code] = true;
             }
           });
 
@@ -274,6 +291,12 @@
             }
           }
 
+          for (var i = 0; i < $scope.techCompanyTax.length; i++) {
+            if (($scope.techCompanyTax[i].code).toLowerCase() === (form.code.$viewValue).toLowerCase()) {
+              taxRateCount++;
+            }
+          }
+
           if (taxRateCount >= 1) {
             form.validation.code.unique = true;
           }
@@ -398,6 +421,27 @@
 
           ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
         };
+
+        $scope.movingTax = function (originTax) {
+          var tax = angular.copy(originTax);
+
+          if ($scope.selectedTax[tax.code]) {
+            $scope.editCompany.taxRates.push(tax);
+          } else {
+            $scope.deleteTaxRate(tax.code);
+          }
+        };
+
+        $scope.deleteTaxRate = function (taxCode) {
+          for(var i = 0; i < $scope.editCompany.taxRates.length; i++){
+            if($scope.editCompany.taxRates[i].code.toLowerCase() === taxCode.toLowerCase()){
+              $scope.editCompany.taxRates.splice(i, 1);
+              $scope.selectedTax[taxCode] = false;
+              return;
+            }
+          }
+        };
+
         $scope.$watch('editCompany.contacts.length', $scope.changeInvoiceSubscription);
 
         function getEmptyContact() {

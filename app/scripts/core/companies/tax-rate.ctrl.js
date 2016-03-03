@@ -29,10 +29,6 @@
           $scope.tax.code = $scope.currentTaxRate.code;
         };
 
-        $scope.deleteTaxRate = function () {
-          $scope.editCompany.taxRates.splice($scope.$index, 1);
-        };
-
       }]);
 
 }());

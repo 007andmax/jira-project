@@ -542,10 +542,12 @@
                 <div class="col-5">IS BILLABLE</div>
 
                 <div class="col-3" style="width: 92px;text-align: left;"
-                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">PER HOUR</div>
+                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">PER HOUR
+                </div>
 
                 <div class="col-2" style="text-align: right;width: 133px;"
-                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT</div>
+                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT
+                </div>
 
                 <div class="col-4">&nbsp;</div>
 
@@ -683,6 +685,46 @@
 
           <h3>Tax Rates</h3>
 
+          <div class="form-row clearfix dropdown">
+
+            <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
+                 style="float: right;width:92px;margin-top: -47px"
+                 aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
+                 tooltip="Move Tax Rate(s)">
+              <i class="icn-sm icn-add-services"></i>
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"
+                 style="margin-top: -8px;">
+
+              <div role="presentation" class="checkbox-dropdown-header">
+                <div class="form-group" style="float: none">
+                  <input type="text" class="form-control-filter"
+                         placeholder="Search Tax Rates..." ng-model="searchTax">
+                  <i class="icn-sm icn-search-input" tabindex="-1"></i>
+                </div>
+              </div>
+
+              <div class="list-container">
+                <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
+
+                  <div class="checkbox-dd-item"
+                       ng-repeat="taxRate in techCompanyTax | filter:searchTax">
+                    <label class="control checkbox">
+                      <input type="checkbox" ng-model="selectedTax[taxRate.code]"
+                             ng-change="movingTax(taxRate)">
+                      <span class="control-indicator pull-left "></span>
+                      {{ taxRate.code }}
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
           <ul class="qt-list default-tax-list">
 
             <li class="list-heading" ng-show="editCompany.taxRates.length > 0">
@@ -700,7 +742,7 @@
                 <div class="col-2">{{ tax.rate }}%</div>
 
                 <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
-                   ng-click="deleteTaxRate()"
+                   ng-click="deleteTaxRate(tax.code)"
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
                   <i class="icn-sm icn-delete"></i>
                 </a>
@@ -786,7 +828,8 @@
                     TAX DESCRIPTION IS REQUIRED
                   </label>
 
-                  <label class="control-label" ng-class="{'hide': !newTaxRateForm.validation.code.unique || newTaxRateForm.code.$pristine}">
+                  <label class="control-label"
+                         ng-class="{'hide': !newTaxRateForm.validation.code.unique || newTaxRateForm.code.$pristine}">
                     TAX DESCRIPTION IS REQUIRED
                   </label>
 
@@ -797,10 +840,12 @@
                 <div class="col-2" ng-class="{'has-error': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
 
                   <p style="margin-bottom: 0">
-                    <label class="control-label" ng-class="{'hide': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
+                    <label class="control-label"
+                           ng-class="{'hide': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
                       TAX PERCENT
                     </label>
-                    <label class="control-label" ng-class="{'hide': (newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
+                    <label class="control-label"
+                           ng-class="{'hide': (newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
                       TAX PERCENT IS REQUIRED
                     </label>
                   </p>
