@@ -80,7 +80,11 @@
                         {{ phoneNumber.number }}
                       </div>
 
-                      <div class="address">{{ shipToAddress.address }}</div>
+                      <div class="address">
+                        {{ (shipToAddress.suiteNumber ? shipToAddress.suiteNumber + ', ' : '') +
+                        shipToAddress.address +
+                        (shipToAddress.postalCode ? ', ' + shipToAddress.postalCode : '') }}
+                      </div>
                     </div>
                   </a>
                 </div>
@@ -98,7 +102,11 @@
           {{ phoneNumber.number }}
         </div>
 
-        <div class="address">{{ currentShipTo.address }}</div>
+        <div class="address">
+          {{ (currentShipTo.suiteNumber ? currentShipTo.suiteNumber + ', ' : '') +
+          currentShipTo.address +
+          (currentShipTo.postalCode ? ', ' + currentShipTo.postalCode : '') }}
+        </div>
 
       </div>
 
