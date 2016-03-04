@@ -21,6 +21,13 @@
         $scope.isCollapsedGraph = true;
         $scope.isScanDevicesLoad = false; // change in services
         $scope.currentOpenTab = tabs[0];
+        $scope.orderScanBy = 'hostName';
+
+        $scope.runScanDevices = function (agentId) {
+          $scope.scanDevices = DevicesService.runScanDevices($scope, $scope.companyId, agentId, function () {
+            console.log($scope.scanDevices)
+          });
+        };
 
         DevicesService.getAgentsByCompany($scope, $scope.companyId, function (resp) {
           $scope.agents = resp;
@@ -36,14 +43,22 @@
             });
 
           }
-          console.log($scope.agents)
-        });
 
-        $scope.runScanDevices = function (agentId) {
-          $scope.scanDevices = DevicesService.runScanDevices($scope, $scope.companyId, agentId, function () {
-            console.log($scope.scanDevices)
+          DevicesService.getMasterAgentId($scope.companyId, function (resp) {
+            $scope.masterAgentId = resp.value;
+
+            for (var i = 0; i < $scope.agents.length; i++) {
+              if ($scope.agents[i].id === $scope.masterAgentId) {
+                DevicesService.getLastScanDevices($scope.companyId, $scope.agents[i].agentId, function (resp) {
+                  $scope.scanDevices = resp;
+                });
+                return;
+              }
+            }
+
           });
-        };
+
+        });
 
         $scope.toggleCollapsed = function () {
           $scope.isCollapsedGraph = !$scope.isCollapsedGraph;
@@ -76,16 +91,28 @@
           devicesHeaderState.checkedDevicesId = selectDevicesIds;
         };
 
-        $scope.saveNewCredentional = function(){
+        $scope.saveNewCredentional = function () {
           $scope.savingCredentional = true;
-          CompaniesService.changeUserAndPass($scope.credential.name, $scope.credential.pass, $scope.companyId, function(){
+          CompaniesService.changeUserAndPass($scope.credential.name, $scope.credential.pass, $scope.companyId, function () {
             $scope.credential = {
               name: '',
               pass: ''
             };
             $scope.savingCredentional = false;
           })
-        }
+        };
+
+        $scope.sortNetworkScan = function (option) {
+          if (option === $scope.orderScanBy) {
+            if (option[0] === '-') {
+              $scope.orderScanBy = $scope.orderScanBy.substring(1);
+            } else {
+              $scope.orderScanBy = '-' + $scope.orderScanBy;
+            }
+          } else {
+            $scope.orderScanBy = option;
+          }
+        };
 
       }]);
 

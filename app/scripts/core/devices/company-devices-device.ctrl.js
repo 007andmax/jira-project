@@ -33,17 +33,17 @@
 
         $scope.restart = function () {
           console.log('restart - ' + $scope.agent.agentId);
-          //DevicesService
+          DevicesService.sendPowerAction($scope.companyId, $scope.agent.agentId, 'reboot');
         };
 
         $scope.shutdown = function () {
           console.log('shutdown - ' + $scope.agent.agentId);
-          //DevicesService
+          DevicesService.sendPowerAction($scope.companyId, $scope.agent.agentId, 'shutdown');
         };
 
         $scope.remove = function () {
           console.log('remove - ' + $scope.agent.agentId);
-          //DevicesService
+          DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.agent.id)
         }
 
       }]);

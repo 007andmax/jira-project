@@ -2080,7 +2080,7 @@ Devices tab
   margin-top: 0;
 }
 .qt-devices .list-actions .more .dropdown-menu > li:first-child, .qt-devices .list-actions .more .dropdown-menu > li:nth-child(2){
-  display: none;
+  /*display: none;*/
 }
 .qt-devices>li{
   cursor: pointer;
@@ -2225,7 +2225,7 @@ Devices tab
   cursor: pointer;
 }
 .qt-agents>li>.col-1{
-  width: calc(100% - 791px);
+  width: calc(100% - 839px);
 }
 .qt-agents>li>.col-2{
   width: 242px;
@@ -2234,19 +2234,19 @@ Devices tab
   width: 172px;
 }
 .qt-agents>li>.col-4{
-  width: 172px;
+  width: 72px;
 }
 .qt-agents>li>.col-5{
-  width: 94px;
+  width: 194px;
   text-align: right;
 }
 .qt-agents>li>.col-6{
-  width: 111px;
+  width: 159px;
   text-align: right;
 }
 @media only screen and (min-width: 2000px){
   .qt-agents>li>.col-1{
-    width: calc(100% - 971px);
+    width: calc(100% - 1019px);
   }
   .qt-agents>li>.col-2{
     width: 302px;
@@ -2255,18 +2255,18 @@ Devices tab
     width: 232px;
   }
   .qt-agents>li>.col-4{
-    width: 232px;
+    width: 132px;
   }
   .qt-agents>li>.col-5{
-    width: 94px;
+    width: 194px;
   }
   .qt-agents>li>.col-6{
-    width: 111px;
+    width: 159px;
   }
 }
 @media only screen and (min-width: 2300px){
   .qt-agents>li>.col-1{
-    width: calc(100% - 1101px);
+    width: calc(100% - 1149px);
   }
   .qt-agents>li>.col-2{
     width: 352px;
@@ -2275,18 +2275,18 @@ Devices tab
     width: 272px;
   }
   .qt-agents>li>.col-4{
-    width: 272px;
+    width: 172px;
   }
   .qt-agents>li>.col-5{
-    width: 94px;
+    width: 194px;
   }
   .qt-agents>li>.col-6{
-    width: 111px;
+    width: 159px;
   }
 }
 @media only screen and (max-width: 1800px){
   .qt-agents>li>.col-1{
-    width: calc(100% - 671px);
+    width: calc(100% - 719px);
   }
   .qt-agents>li>.col-2{
     width: 202px;
@@ -2295,18 +2295,18 @@ Devices tab
     width: 132px;
   }
   .qt-agents>li>.col-4{
-    width: 132px;
+    width: 32px;
   }
   .qt-agents>li>.col-5{
-    width: 94px;
+    width: 194px;
   }
   .qt-agents>li>.col-6{
-    width: 111px;
+    width: 159px;
   }
 }
 @media only screen and (max-width: 1600px){
   .qt-agents>li>.col-1{
-    width: calc(100% - 581px);
+    width: calc(100% - 629px);
   }
   .qt-agents>li>.col-2{
     width: 172px;
@@ -2315,18 +2315,18 @@ Devices tab
     width: 102px;
   }
   .qt-agents>li>.col-4{
-    width: 102px;
+    width: 52px;
   }
   .qt-agents>li>.col-5{
-    width: 94px;
+    width: 144px;
   }
   .qt-agents>li>.col-6{
-    width: 111px;
+    width: 159px;
   }
 }
 @media only screen and (max-width: 1315px){
   .qt-agents>li>.col-1{
-    width: calc(100% - 479px);
+    width: calc(100% - 557px);
   }
   .qt-agents>li>.col-2{
     width: 172px;
@@ -2341,10 +2341,10 @@ Devices tab
     cursor: pointer;
   }
   .qt-agents>li>.col-5{
-    width: 94px;
+    width: 124px;
   }
   .qt-agents>li>.col-6{
-    width: 111px;
+    width: 159px;
   }
 }
 .agent-username{
@@ -2401,6 +2401,9 @@ Devices tab
 /***Network**/
 .qt-network-scan{
   padding: 30px 0 0;
+}
+.qt-network-scan .list-heading > div{
+  cursor: pointer;
 }
 .network-scan-results{
   min-height: 400px;
