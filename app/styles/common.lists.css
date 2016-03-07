@@ -131,12 +131,15 @@
     width: 209px;
   }
 }
-.list-actions{
-  display: none;
-}
-.devices-content .list-actions{
-  display: block;
-}
+/*.list-actions{*/
+  /*display: none;*/
+/*}*/
+/*.devices-content .list-actions{*/
+  /*display: block;*/
+/*}*/
+/*.company-profile-content .list-actions{*/
+  /*display: block;*/
+/*}*/
 .qt-users .list-actions .more>.dropdown-menu>li:first-child, .qt-users .list-actions .more>.dropdown-menu>li:nth-child(2){
   display: none;
 }
@@ -198,9 +201,9 @@
   float: left;
   width: 69px;
 }
-.qt-list>li:hover .list-actions{
-  display: block;
-}
+/*.qt-list>li:hover .list-actions{*/
+  /*display: block;*/
+/*}*/
 .list-actions .more{
   margin-left: 18px;
   line-height: 0;
