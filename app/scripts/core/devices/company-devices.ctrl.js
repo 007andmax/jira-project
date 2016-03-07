@@ -22,6 +22,37 @@
         $scope.isScanDevicesLoad = false; // change in services
         $scope.currentOpenTab = tabs[0];
         $scope.orderScanBy = 'hostName';
+        $scope.orderAgentBy = 'hostName';
+        $scope.orderDevicesBy = 'hostName';
+
+        DevicesService.getDefaultCompanyCredentials($scope.companyId, function (resp) {
+          var info = resp.value.split(':');
+          $scope.defaultPass = info[1] || '';
+          $scope.defaultName = info[0] || '';
+        });
+
+        DevicesService.getDeviceSettingsByCompanyIdAndType($scope, $scope.companyId, 'NET_SCAN', function (resp) {
+          $scope.customizeDevices = {};
+
+          for (var i = 0, len = resp.length; i < len; i++) {
+            $scope.customizeDevices[resp[i].deviceId] = {
+              login: resp[i].login,
+              password: resp[i].password
+            }
+          }
+
+        });
+
+        DevicesService.getDeviceSettingsByCompanyIdAndType($scope, $scope.companyId, 'AGENT', function (resp) {
+          $scope.customizeAgents = {};
+
+          for (var i = 0, len = resp.length; i < len; i++) {
+            $scope.customizeAgents[resp[i].deviceId] = {
+              login: resp[i].login,
+              password: resp[i].password
+            }
+          }
+        });
 
         $scope.runScanDevices = function (agentId) {
           $scope.scanDevices = DevicesService.runScanDevices($scope, $scope.companyId, agentId, function () {
@@ -111,6 +142,30 @@
             }
           } else {
             $scope.orderScanBy = option;
+          }
+        };
+
+        $scope.sortAgentTab = function (option) {
+          if (option === $scope.orderAgentBy) {
+            if (option[0] === '-') {
+              $scope.orderAgentBy = $scope.orderAgentBy.substring(1);
+            } else {
+              $scope.orderAgentBy = '-' + $scope.orderAgentBy;
+            }
+          } else {
+            $scope.orderAgentBy = option;
+          }
+        };
+
+        $scope.sortDevicesTab = function (option) {
+          if (option === $scope.orderDevicesBy) {
+            if (option[0] === '-') {
+              $scope.orderDevicesBy = $scope.orderDevicesBy.substring(1);
+            } else {
+              $scope.orderDevicesBy = '-' + $scope.orderDevicesBy;
+            }
+          } else {
+            $scope.orderDevicesBy = option;
           }
         };
 

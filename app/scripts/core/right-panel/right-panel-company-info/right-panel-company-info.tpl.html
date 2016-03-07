@@ -54,9 +54,9 @@
 
       <div class="download-agent-form" ng-form="downloadAgentForm">
 
-        <div class="sb-heading billing-heading">Agent Settings</div>
+        <div class="sb-heading billing-heading" ng-hide="isCompanyHasUserNameAndPass">Agent Settings</div>
 
-        <div>
+        <div ng-hide="isCompanyHasUserNameAndPass">
 
           <div class="form-group" ng-class="{'has-error': showDownloadError}">
 
@@ -214,8 +214,8 @@
 
           <div class="clearfix">
             <!--<label class="control checkbox pull-right">-->
-              <!--<input type="checkbox">-->
-              <!--<span class="control-indicator"></span>-->
+            <!--<input type="checkbox">-->
+            <!--<span class="control-indicator"></span>-->
             <!--</label>-->
 
             <div class="user-name">
@@ -225,111 +225,111 @@
             <small class="user-title text-muted">{{ (agent.userName | unknownFilter) }}</small>
           </div>
           <!--<ul class="context-menu">-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remote-access pull-left"></i>Remote Access</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-send-alert pull-left"></i>Send Alert</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-spec-report pull-left"></i>Spec. Report</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-transfer-file pull-left"></i>Transfer File</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-restart-device pull-left"></i>Restart</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-shutdown-device pull-left"></i>Shutdown</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remove-token pull-left"></i>Remove</a></li>-->
+          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remote-access pull-left"></i>Remote Access</a></li>-->
+          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-send-alert pull-left"></i>Send Alert</a></li>-->
+          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-spec-report pull-left"></i>Spec. Report</a></li>-->
+          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-transfer-file pull-left"></i>Transfer File</a></li>-->
+          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-restart-device pull-left"></i>Restart</a></li>-->
+          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-shutdown-device pull-left"></i>Shutdown</a></li>-->
+          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remove-token pull-left"></i>Remove</a></li>-->
           <!--</ul>-->
         </li>
 
         <!--<li class="list-devices">-->
-          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
-            <!--<span class="icn-lg icn-generic-device"></span>-->
-            <!--<i class="on right"></i>-->
-          <!--</a>-->
+        <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+        <!--<span class="icn-lg icn-generic-device"></span>-->
+        <!--<i class="on right"></i>-->
+        <!--</a>-->
 
-          <!--<div class="clearfix">-->
-            <!--<label class="control checkbox pull-right">-->
-              <!--<input type="checkbox">-->
-              <!--<span class="control-indicator"></span>-->
-            <!--</label>-->
+        <!--<div class="clearfix">-->
+        <!--<label class="control checkbox pull-right">-->
+        <!--<input type="checkbox">-->
+        <!--<span class="control-indicator"></span>-->
+        <!--</label>-->
 
-            <!--<div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>-->
-            <!--<small class="user-title text-muted">Ryan.Burns</small>-->
-          <!--</div>-->
+        <!--<div class="user-name"><a href="javascript:void(0)">Studio.83</a></div>-->
+        <!--<small class="user-title text-muted">Ryan.Burns</small>-->
+        <!--</div>-->
         <!--</li>-->
         <!--<li class="list-devices checked">-->
-          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
-            <!--<span class="icn-lg icn-server"></span>-->
-            <!--<i class="off right"></i>-->
-          <!--</a>-->
+        <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+        <!--<span class="icn-lg icn-server"></span>-->
+        <!--<i class="off right"></i>-->
+        <!--</a>-->
 
-          <!--<div class="clearfix">-->
-            <!--<label class="control checkbox pull-right">-->
-              <!--<input type="checkbox" checked>-->
-              <!--<span class="control-indicator"></span>-->
-            <!--</label>-->
+        <!--<div class="clearfix">-->
+        <!--<label class="control checkbox pull-right">-->
+        <!--<input type="checkbox" checked>-->
+        <!--<span class="control-indicator"></span>-->
+        <!--</label>-->
 
-            <!--<div class="user-name"><a href="javascript:void(0)">File.Server</a></div>-->
-            <!--<small class="user-title text-muted">Miles.Mcmillan</small>-->
-          <!--</div>-->
+        <!--<div class="user-name"><a href="javascript:void(0)">File.Server</a></div>-->
+        <!--<small class="user-title text-muted">Miles.Mcmillan</small>-->
+        <!--</div>-->
         <!--</li>-->
         <!--<li class="list-devices">-->
-          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
-            <!--<span class="icn-lg icn-printer"></span>-->
-            <!--<i class="on right"></i>-->
-          <!--</a>-->
+        <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+        <!--<span class="icn-lg icn-printer"></span>-->
+        <!--<i class="on right"></i>-->
+        <!--</a>-->
 
-          <!--<div class="clearfix">-->
-            <!--<label class="control checkbox pull-right">-->
-              <!--<input type="checkbox">-->
-              <!--<span class="control-indicator"></span>-->
-            <!--</label>-->
+        <!--<div class="clearfix">-->
+        <!--<label class="control checkbox pull-right">-->
+        <!--<input type="checkbox">-->
+        <!--<span class="control-indicator"></span>-->
+        <!--</label>-->
 
-            <!--<div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>-->
-            <!--<small class="user-title text-muted">Shaun.Pc</small>-->
-          <!--</div>-->
+        <!--<div class="user-name"><a href="javascript:void(0)">DC Printer</a></div>-->
+        <!--<small class="user-title text-muted">Shaun.Pc</small>-->
+        <!--</div>-->
         <!--</li>-->
         <!--<li class="list-devices" data-container="body" data-toggle="popover-devices" data-placement="left">-->
-          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
-            <!--<span class="icn-lg icn-computer"></span>-->
-            <!--<i class="on right"></i>-->
-          <!--</a>-->
+        <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+        <!--<span class="icn-lg icn-computer"></span>-->
+        <!--<i class="on right"></i>-->
+        <!--</a>-->
 
-          <!--<div class="clearfix">-->
-            <!--<label class="control checkbox pull-right">-->
-              <!--<input type="checkbox">-->
-              <!--<span class="control-indicator"></span>-->
-            <!--</label>-->
+        <!--<div class="clearfix">-->
+        <!--<label class="control checkbox pull-right">-->
+        <!--<input type="checkbox">-->
+        <!--<span class="control-indicator"></span>-->
+        <!--</label>-->
 
-            <!--<div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>-->
-            <!--<small class="user-title text-muted">Miles.Mcmillan</small>-->
-          <!--</div>-->
+        <!--<div class="user-name"><a href="javascript:void(0)">Skynet.2013</a></div>-->
+        <!--<small class="user-title text-muted">Miles.Mcmillan</small>-->
+        <!--</div>-->
         <!--</li>-->
         <!--<li class="list-devices">-->
-          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
-            <!--<span class="icn-lg icn-mobile"></span>-->
-            <!--<i class="off right"></i>-->
-          <!--</a>-->
+        <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+        <!--<span class="icn-lg icn-mobile"></span>-->
+        <!--<i class="off right"></i>-->
+        <!--</a>-->
 
-          <!--<div class="clearfix">-->
-            <!--<label class="control checkbox pull-right">-->
-              <!--<input type="checkbox">-->
-              <!--<span class="control-indicator"></span>-->
-            <!--</label>-->
+        <!--<div class="clearfix">-->
+        <!--<label class="control checkbox pull-right">-->
+        <!--<input type="checkbox">-->
+        <!--<span class="control-indicator"></span>-->
+        <!--</label>-->
 
-            <!--<div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>-->
-            <!--<small class="user-title text-muted">Laurie.Harding</small>-->
-          <!--</div>-->
+        <!--<div class="user-name"><a href="javascript:void(0)">Mobile.Jack</a></div>-->
+        <!--<small class="user-title text-muted">Laurie.Harding</small>-->
+        <!--</div>-->
         <!--</li>-->
         <!--<li class="list-devices">-->
-          <!--<a href="javascript:void(0)" class="pull-left avatar">-->
-            <!--<span class="icn-lg icn-fax"></span>-->
-            <!--<i class="off right"></i>-->
-          <!--</a>-->
+        <!--<a href="javascript:void(0)" class="pull-left avatar">-->
+        <!--<span class="icn-lg icn-fax"></span>-->
+        <!--<i class="off right"></i>-->
+        <!--</a>-->
 
-          <!--<div class="clearfix">-->
-            <!--<label class="control checkbox pull-right">-->
-              <!--<input type="checkbox">-->
-              <!--<span class="control-indicator"></span>-->
-            <!--</label>-->
+        <!--<div class="clearfix">-->
+        <!--<label class="control checkbox pull-right">-->
+        <!--<input type="checkbox">-->
+        <!--<span class="control-indicator"></span>-->
+        <!--</label>-->
 
-            <!--<div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>-->
-            <!--<small class="user-title text-muted">File.Server</small>-->
-          <!--</div>-->
+        <!--<div class="user-name"><a href="javascript:void(0)">Fax.Sublime</a></div>-->
+        <!--<small class="user-title text-muted">File.Server</small>-->
+        <!--</div>-->
         <!--</li>-->
       </ul>
     </div>

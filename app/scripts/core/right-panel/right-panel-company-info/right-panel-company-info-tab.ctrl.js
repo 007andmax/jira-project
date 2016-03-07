@@ -9,8 +9,8 @@
         $scope.$watch('companyGroupedData.company.id', function () {
           $scope.companyContacts = CompaniesService.getCompanyContacts($scope, $scope.companyGroupedData.company.id);
 
-          DevicesService.isCompanyHasUserNameAndPass($scope.companyGroupedData.company.id, function(resp){
-            $scope.isCompanyHasUserNameAndPass = resp;
+          DevicesService.getDefaultCompanyCredentials($scope.companyGroupedData.company.id, function (resp) {
+            $scope.isCompanyHasUserNameAndPass = resp.value;
           });
 
           $scope.downloadAgentUser = {
@@ -24,8 +24,8 @@
           console.log('send email in popover ' + contactId)
         };
 
-        $scope.downloadAgent = function(){
-          DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.name, $scope.downloadAgentUser.password, function(){
+        $scope.downloadAgent = function () {
+          DevicesService.downloadAgent($scope.downloadAgentUser.companyId, $scope.downloadAgentUser.name, $scope.downloadAgentUser.password, function () {
             $scope.isCompanyHasUserNameAndPass = true;
           })
         };

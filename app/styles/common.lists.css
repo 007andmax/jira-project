@@ -134,6 +134,9 @@
 .list-actions{
   display: none;
 }
+.devices-content .list-actions{
+  display: block;
+}
 .qt-users .list-actions .more>.dropdown-menu>li:first-child, .qt-users .list-actions .more>.dropdown-menu>li:nth-child(2){
   display: none;
 }
@@ -2058,6 +2061,9 @@ Devices tab
 .qt-devices{
   padding: 30px 0 0;
 }
+.qt-devices .list-heading > div[ng-click]{
+  cursor: pointer;
+}
 .qt-devices .checkbox-caption{
   display: flex;
   float: none;
@@ -2220,6 +2226,9 @@ Devices tab
 /**Agents**/
 .qt-agents{
   padding: 30px 0 0;
+}
+.qt-agents .list-heading > div[ng-click]{
+  cursor: pointer;
 }
 .qt-agents>li{
   cursor: pointer;
@@ -2402,7 +2411,7 @@ Devices tab
 .qt-network-scan{
   padding: 30px 0 0;
 }
-.qt-network-scan .list-heading > div{
+.qt-network-scan .list-heading > div[ng-click]{
   cursor: pointer;
 }
 .network-scan-results{
@@ -2469,7 +2478,7 @@ Devices tab
   display: none !important;
 }
 .qt-network-scan>li>.col-1{
-  width: calc(100% - 729px);
+  width: calc(100% - 879px);
 }
 .qt-network-scan>li>.col-2{
   width: 164px;
@@ -2488,9 +2497,12 @@ Devices tab
   width: 87px;
   text-align: right;
 }
+.qt-network-scan>li>.col-7{
+  width: 150px;
+}
 @media only screen and (min-width: 2000px){
   .qt-network-scan>li>.col-1{
-    width: calc(100% - 1029px);
+    width: calc(100% - 1179px);
   }
   .qt-network-scan>li>.col-2{
     width: 264px;
@@ -2507,6 +2519,9 @@ Devices tab
   .qt-network-scan>li>.col-6{
     width: 87px;
   }
+  .qt-network-scan>li>.col-7{
+    width: 150px;
+  }
 }
 @media only screen and (min-width: 2300px){
   .qt-network-scan>li>.col-1{
@@ -2522,7 +2537,7 @@ Devices tab
 }
 @media only screen and (max-width: 1700px){
   .qt-network-scan>li>.col-1{
-    width: calc(100% - 609px);
+    width: calc(100% - 759px);
   }
   .qt-network-scan>li>.col-2{
     width: 124px;
@@ -2539,10 +2554,13 @@ Devices tab
   .qt-network-scan>li>.col-6{
     width: 87px;
   }
+  .qt-network-scan>li>.col-7{
+    width: 150px;
+  }
 }
 @media only screen and (max-width: 1500px){
   .qt-network-scan>li>.col-1{
-    width: calc(100% - 549px);
+    width: calc(100% - 699px);
   }
   .qt-network-scan>li>.col-2{
     width: 104px;
@@ -2558,6 +2576,9 @@ Devices tab
   }
   .qt-network-scan>li>.col-6{
     width: 87px;
+  }
+  .qt-network-scan>li>.col-7{
+    width: 150px;
   }
 }
 .qt-network-scan .device-name{

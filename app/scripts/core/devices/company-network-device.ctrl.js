@@ -6,6 +6,10 @@
     ['$scope', 'CompaniesService', 'DevicesService',
       function ($scope, CompaniesService, DevicesService) {
 
+        $scope.credential = {
+          name: '',
+          pass: ''
+        };
         $scope.deviceStatus = {};
         $scope.deviceDescription = '';
         $scope.isOpenDescrDrpdwn = false;
@@ -35,6 +39,32 @@
             $scope.disableSaveDescr = false;
             $scope.isOpenDescrDrpdwn = false;
           })
+        };
+
+        $scope.saveNewCredentional = function (isTest) {
+          $scope.savingCredentional = true;
+
+          DevicesService.saveNewCredentialsForDevice({
+            company: CompaniesService.getOneById($scope.companyId),
+            deviceId: $scope.device.id,
+            login: $scope.credential.name,
+            password: $scope.credential.pass
+          }, function () {
+            $scope.credential = {
+              name: '',
+              pass: ''
+            };
+            $scope.savingCredentional = false;
+            $scope.isLogOnDrpdwnOpen = false;
+          })
+        };
+
+        $scope.getDeviceUserPass = function () {
+          return $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].password : $scope.defaultPass
+        };
+
+        $scope.getDeviceUserName = function () {
+          return $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].login : $scope.defaultName
         };
 
         $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {

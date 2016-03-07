@@ -12,7 +12,7 @@ body.non-body-scroll::-webkit-scrollbar {
   display: none;
 }
 
-.modal-create-ticket .dropdown-menu{
+.modal-create-ticket .dropdown-menu {
   margin-bottom: 20px;
 }
 
@@ -652,6 +652,7 @@ aside#left div.nav-title {
 .create-company-content .timer-quantity .time_drop_down {
   top: 63px;
 }
+
 .settings-main-wrapper .timer-quantity .time_drop_down {
   top: 63px;
 }
@@ -874,8 +875,29 @@ aside#left div.nav-title {
 .modal-spam {
   z-index: 9999999 !important;
 }
+
 @media screen and (max-width: 1440px) {
-  .table-wrapper .table-content.accounting-prod-list .col-2.col-2-has-serial-number{
+  .table-wrapper .table-content.accounting-prod-list .col-2.col-2-has-serial-number {
     width: 25%;
   }
+}
+
+.devices-content .agent-username .password-txt {
+  display: block;
+  margin-top: 3px;
+  margin-bottom: -3px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.devices-content .agent-username .tooltip-inner {
+  padding: 18px 20px;
+  height: auto;
+  color: #fff;
+  font-weight: normal;
+  text-transform: none;
+  text-align: left;
+  white-space: nowrap;
+  background-color: #151e29;
+  border-radius: 3px;
 }
