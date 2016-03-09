@@ -276,7 +276,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  height: 100%;
   font-family: "myriad-pro", sans-serif;
   font-size: 14px;
   line-height: 20px;
@@ -2850,7 +2849,14 @@ _:-ms-fullscreen,
   background-color: #f1f5fa;
   background-image: none;
   border: 1px solid #e7ecf2;
-  border-radius: 0px;
+  border-radius: 0;
+}
+.form-control.center-align{
+  width: 45%;
+  float: left;
+  text-align: right;
+  border-right: 0;
+  padding-right: 2px;
 }
 .form-control:focus {
   /*border-color: @color;*/
@@ -9539,3 +9545,4 @@ button.close {
     display: none !important;
   }
 }
+

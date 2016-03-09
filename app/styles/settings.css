@@ -158,17 +158,21 @@
   margin-top: 17px;
 }
 .create-user-form .email-addon{
-  position: absolute;
-  right: 13px;
-  top: 30px;
   color: #b2becd;
   border-left: 1px solid #e7ecf2;
-  padding-left: 13px;
-  width: 256px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  position: relative;
+  float: left;
+  width: 55%;
+  display: block;
+  padding: 8px 0 8px;
+  text-align: left;
+  padding-left: 0;
+  background-color: #f1f5fa;
+  border-left: 0;
 }
 .create-user-form .company-url-addon{
   position: absolute;
