@@ -170,6 +170,14 @@
   -ms-user-select: none;
   user-select: none;
 }
+.create-user-form .company-url-addon{
+  position: absolute;
+  top: 30px;
+  color: #b2becd;
+  border-left: none;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .email-addon span{
   color: #4c5c6f;
   -webkit-user-select: auto;
