@@ -63,7 +63,7 @@
         $scope.toogleLogOnDrpdwn = function (isOpen) {
           if (isOpen) {
             $scope.credential = {
-              name: $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].login : $scope.agent.userName,
+              name: $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].login : $scope.defaultName,
               pass: $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].password : $scope.defaultPass
             };
           }
