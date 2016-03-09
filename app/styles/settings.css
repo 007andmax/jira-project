@@ -171,6 +171,7 @@
   padding: 8px 0 8px;
   text-align: left;
   padding-left: 0;
+  border: 1px solid #e7ecf2;
   background-color: #f1f5fa;
   border-left: 0;
 }
