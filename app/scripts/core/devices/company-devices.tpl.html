@@ -639,7 +639,7 @@
             <div class="agent-username" dropdown is-open="isLogOnDrpdwnOpen" on-toggle="toogleLogOnDrpdwn(open)">
 
               <span ng-hide="customizeAgents[agent.id]">
-                {{ (agent.defaultName | unknownFilter) }}
+                {{ defaultName }}
               </span>
 
               <span ng-show="customizeAgents[agent.id]">
