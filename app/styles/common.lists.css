@@ -2109,7 +2109,7 @@ Devices tab
 }
 .qt-devices>li>.col-5{
   width: 98px;
-  text-align: right;
+  /*text-align: right;*/
   color: #94a4b8;
 }
 .qt-devices>li>.col-6{
@@ -2250,7 +2250,7 @@ Devices tab
 }
 .qt-agents>li>.col-5{
   width: 194px;
-  text-align: right;
+  /*text-align: right;*/
 }
 .qt-agents>li>.col-6{
   width: 159px;
@@ -2387,7 +2387,7 @@ Devices tab
 }
 .agent-version{
   margin-top: 9px;
-  float: right;
+  float: left;
   color: #94a4b8;
 }
 .agent-version i{

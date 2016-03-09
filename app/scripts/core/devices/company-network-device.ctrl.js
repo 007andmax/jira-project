@@ -67,6 +67,10 @@
           return $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].login : $scope.defaultName
         };
 
+        $scope.restoreDefault = function () {
+          DevicesService.deleteDeviceSettings( $scope.customizeDevices[$scope.device.id].id)
+        };
+
         $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
 
           if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {

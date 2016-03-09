@@ -56,6 +56,10 @@
             return $scope.defaultPass || '';
           }
           return $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].password : $scope.defaultPass
+        };
+
+        $scope.restoreDefault = function () {
+          DevicesService.deleteDeviceSettings($scope.customizeAgents[$scope.agent.id].id)
         }
 
       }

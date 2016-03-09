@@ -37,7 +37,8 @@
           for (var i = 0, len = resp.length; i < len; i++) {
             $scope.customizeDevices[resp[i].deviceId] = {
               login: resp[i].login,
-              password: resp[i].password
+              password: resp[i].password,
+              id: resp[i].id
             }
           }
 
@@ -49,7 +50,8 @@
           for (var i = 0, len = resp.length; i < len; i++) {
             $scope.customizeAgents[resp[i].deviceId] = {
               login: resp[i].login,
-              password: resp[i].password
+              password: resp[i].password,
+              id: resp[i].id
             }
           }
         });
