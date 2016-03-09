@@ -19,10 +19,6 @@
 
         $scope.savingCredentional = false;
         $scope.isLogOnDrpdwnOpen = false;
-        $scope.credential = {
-          name: '',
-          pass: ''
-        };
 
         $scope.remoteAccess = function (connectionType) {
           if (!$scope.agent.online) {
@@ -39,8 +35,8 @@
 
           DevicesService.sendOrTestCredentials($scope.companyId, $scope.credential.name, $scope.credential.pass, isTest, $scope.agent.id, function () {
             $scope.credential = {
-              name: '',
-              pass: ''
+              name: $scope.credential.name,
+              pass: $scope.credential.pass
             };
             $scope.savingCredentional = false;
             $scope.isLogOnDrpdwnOpen = false;
@@ -59,7 +55,18 @@
         };
 
         $scope.restoreDefault = function () {
-          DevicesService.deleteDeviceSettings($scope.customizeAgents[$scope.agent.id].id)
+          if ($scope.customizeAgents[$scope.agent.id]) {
+            DevicesService.deleteDeviceSettings($scope.customizeAgents[$scope.agent.id].id)
+          }
+        };
+
+        $scope.toogleLogOnDrpdwn = function (isOpen) {
+          if (isOpen) {
+            $scope.credential = {
+              name: $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].login : $scope.agent.userName,
+              pass: $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].password : $scope.defaultPass
+            };
+          }
         }
 
       }

@@ -258,7 +258,7 @@
 
       <ul class="dropdown-menu dropdown-menu-right dropdown-ip-range">
 
-        <li ng-repeat-start="agent in agents" ng-show="agent.agentId && (agent.agentId !== 'unknown')"
+        <li ng-repeat="agent in agents" ng-show="agent.agentId && (agent.agentId !== 'unknown') && agent.online"
             ng-if="agent.id === masterAgentId">
           <a href="javascript:void(0)" ng-click="runScanDevices(agent.agentId)" style="font-weight: bold">
             <span class="pull-left">
@@ -268,7 +268,7 @@
           </a>
         </li>
 
-        <li ng-repeat-end="agent in agents" ng-show="agent.agentId && (agent.agentId !== 'unknown')"
+        <li ng-repeat="agent in agents" ng-show="agent.agentId && (agent.agentId !== 'unknown') && agent.online"
             ng-if="agent.id !== masterAgentId">
           <a href="javascript:void(0)" ng-click="runScanDevices(agent.agentId)">
             <span class="pull-left">
@@ -346,7 +346,7 @@
 
       <li ng-class="{'active': currentOpenTab === 'AGENTS'}">
         <a href="javascript:void(0)" ng-click="openTab('AGENTS')">Agents
-          <span class="text-muted">69</span>
+          <span class="text-muted">{{ agents.length }}</span>
         </a>
       </li>
 
@@ -518,7 +518,7 @@
           </div>
 
           <div class="col-6">
-            <div class="list-actions pull-right">
+            <div class="list-actions pull-right" ng-show="agent.online">
 
               <div class="btn btn-default pull-left has-tooltip"
                    ng-show="(agent.type !== 'workstation') && agent.online"
@@ -636,10 +636,10 @@
           </div>
 
           <div class="col-2">
-            <div class="agent-username" dropdown is-open="isLogOnDrpdwnOpen">
+            <div class="agent-username" dropdown is-open="isLogOnDrpdwnOpen" on-toggle="toogleLogOnDrpdwn(open)">
 
               <span ng-hide="customizeAgents[agent.id]">
-                {{ (agent.userName | unknownFilter) || 'DOMAIN/USERNAME is not defined' }}
+                {{ (agent.userName | unknownFilter) }}
               </span>
 
               <span ng-show="customizeAgents[agent.id]">
@@ -647,18 +647,21 @@
               </span>
 
               <a href="javascript:void(0)"
-                 class="hit-area has-tooltip pull-right" tooltip-placement="right" dropdown-toggle
-                 tooltip-html-unsafe="<span class='text-muted'>PASSWORD</span><span class='password-txt'>{{ getAgentPass() }}</span>">
+                 class="hit-area has-tooltip pull-right" dropdown-toggle>
+                <!--tooltip-html-unsafe="<span class='text-muted'>PASSWORD</span><span class='password-txt'>{{ getAgentPass() }}</span>"-->
+                <!--tooltip-placement="right"-->
 
                 <i ng-hide="customizeAgents[agent.id]" class="icn-sm icn-password-key"></i>
                 <i ng-show="customizeAgents[agent.id]" class="icn-sm icn-password-key-unique"></i>
               </a>
 
-              <div class="dropdown-menu dropdown-menu-right" dropdown-menu ng-form="changeCredentialForm">
+              <div class="dropdown-menu dropdown-menu-right" dropdown-menu
+                   ng-form="changeCredentialForm" stop-propagation="click">
                 <div class="dropdown-header caption-heading">
                   Modify Logon Info
 
                   <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+                     ng-show="customizeAgents[agent.id]"
                      tooltip-placement="top" tooltip="Restore Default" tooltip-append-to-body="true"
                      ng-click="restoreDefault()">
                     <i class="icn-sm icn-settings-restore-default"></i>
@@ -731,7 +734,7 @@
           </div>
 
           <div class="col-6">
-            <div class="list-actions pull-right">
+            <div class="list-actions pull-right" ng-show="agent.online">
 
               <div class="btn btn-default pull-left has-tooltip"
                    ng-show="(agent.type === 'workstation') && agent.online"
@@ -903,6 +906,33 @@
                   <i class="icn-sm icn-description"></i>
                 </a>
 
+                <div class="dropdown" dropdown is-open="isOpenEditDescrDrpdwn"
+                     ng-show="(device.description | unknownFilter)">
+
+                  <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
+                     tooltip-placement="top" tooltip-append-to-body="true"
+                     tooltip="Edit Description" dropdown-toggle>
+                    <i class="icn-sm icn-edit"></i>
+                  </a>
+
+                  <div class="dropdown-menu add-description-form clearfix" stop-propagation="click">
+                    <textarea class="form-control autosize" rows="1" ng-model="deviceEditDescription"
+                              hard-reset-pattern="patternMax40"
+                              placeholder="Edit device description"></textarea>
+
+                    <div class="qt-form-actions">
+                      <div class="btn btn-lg btn-info pull-left" ng-click="saveEditDescription()"
+                           custom-disabled="{{ disableEditSaveDescr }}">
+                        Save
+                      </div>
+
+                      <div class="btn btn-lg btn-primary pull-left" ng-click="saveEditDescription('close')">Cancel</div>
+
+                      <div class="word-count pull-right">{{ 40 - deviceEditDescription.length }}</div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="dropdown" dropdown is-open="isOpenDescrDrpdwn"
                      ng-hide="(device.description | unknownFilter)">
 
@@ -939,24 +969,27 @@
           </div>
 
           <div class="col-7">
-            <div class="agent-username" dropdown is-open="isLogOnDrpdwnOpen">
+            <div class="agent-username" dropdown is-open="isLogOnDrpdwnOpen" on-toggle="toogleLogOnDrpdwn(open)">
 
               <span>{{ getDeviceUserName() }}</span>
 
               <a href="javascript:void(0)" class="has-tooltip"
-                 tooltip-placement="right" dropdown-toggle style="margin-top: 2px;margin-left: 9px;"
-                 tooltip-html-unsafe="<span class='text-muted'>PASSWORD</span><span class='password-txt'>{{ getDeviceUserPass() }}</span>">
+                 dropdown-toggle style="margin-top: 2px;margin-left: 9px;">
+                <!--tooltip-placement="right"-->
+                <!--tooltip-html-unsafe="<span class='text-muted'>PASSWORD</span><span class='password-txt'>{{ getDeviceUserPass() }}</span>"-->
 
                 <i ng-hide="customizeDevices[device.id]" class="icn-sm icn-password-key"></i>
                 <i ng-show="customizeDevices[device.id]" class="icn-sm icn-password-key-unique"></i>
 
               </a>
 
-              <div class="dropdown-menu dropdown-menu-right" dropdown-menu ng-form="changeCredentialForm">
+              <div class="dropdown-menu dropdown-menu-right" dropdown-menu ng-form="changeCredentialForm"
+                   stop-propagation="click">
                 <div class="dropdown-header caption-heading">
                   Modify Logon Info
 
                   <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+                     ng-show="customizeDevices[device.id]"
                      tooltip-placement="top" tooltip="Restore Default" tooltip-append-to-body="true"
                      ng-click="restoreDefault()">
                     <i class="icn-sm icn-settings-restore-default"></i>
