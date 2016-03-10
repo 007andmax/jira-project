@@ -6,6 +6,20 @@
     sends you updates via email.
   </div>
 
+  <div class="settings-button clearfix settings-fixed-button">
+
+    <div class="pull-right">
+      <div class="form-row clearfix">
+        <div class="form-group no-label full-width">
+          <button class="btn btn-lg btn-info pull-right">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <div class="basic-info-wrapper" id="myProfileBasicInfo"
        ng-controller="quicktech.core.settings.myProfileBasicInfoCtrl">
 
@@ -219,14 +233,14 @@
               </div>
             </div>
 
-            <div class="form-row clearfix">
-              <div class="form-group no-label full-width">
-                <button class="btn btn-lg btn-info pull-right"
-                        custom-disabled="{{ !basicInfoForm.$valid || basicInfoForm.$pristine || savingInProcess }}"
-                        ng-click="saveBasicInfo(basicInfoForm)">Save
-                </button>
-              </div>
-            </div>
+            <!--<div class="form-row clearfix">-->
+              <!--<div class="form-group no-label full-width">-->
+                <!--<button class="btn btn-lg btn-info pull-right"-->
+                        <!--custom-disabled="{{ !basicInfoForm.$valid || basicInfoForm.$pristine || savingInProcess }}"-->
+                        <!--ng-click="saveBasicInfo(basicInfoForm)">Save-->
+                <!--</button>-->
+              <!--</div>-->
+            <!--</div>-->
 
           </div>
         </div>
@@ -264,14 +278,14 @@
 
             </div>
 
-            <div class="form-row clearfix">
-              <div class="form-group no-label full-width">
-                <div class="btn btn-lg btn-info pull-right"
-                     custom-disabled="{{ !aboutMeForm.$valid || aboutMeForm.$pristine || savingAboutMeInProcess }}"
-                     ng-click="saveAboutMe(aboutMeForm)">Save
-                </div>
-              </div>
-            </div>
+            <!--<div class="form-row clearfix">-->
+              <!--<div class="form-group no-label full-width">-->
+                <!--<div class="btn btn-lg btn-info pull-right"-->
+                     <!--custom-disabled="{{ !aboutMeForm.$valid || aboutMeForm.$pristine || savingAboutMeInProcess }}"-->
+                     <!--ng-click="saveAboutMe(aboutMeForm)">Save-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
 
           </div>
         </div>
@@ -363,14 +377,14 @@
 
             </div>
 
-            <div class="form-row clearfix">
-              <div class="form-group no-label full-width">
-                <div class="btn btn-lg btn-info pull-right"
-                     custom-disabled="{{ !passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess }}"
-                     ng-click="savePassword(passwordForm)">Save
-                </div>
-              </div>
-            </div>
+            <!--<div class="form-row clearfix">-->
+              <!--<div class="form-group no-label full-width">-->
+                <!--<div class="btn btn-lg btn-info pull-right"-->
+                     <!--custom-disabled="{{ !passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess }}"-->
+                     <!--ng-click="savePassword(passwordForm)">Save-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
 
           </div>
         </div>
@@ -450,17 +464,17 @@
               <!--</div>-->
             <!--</div>-->
 
-            <div class="form-row clearfix">
+            <!--<div class="form-row clearfix">-->
 
-              <div class="form-group no-label full-width">
-                <button class="btn btn-lg btn-info pull-right"
-                        custom-disabled="{{ !phoneNumbersForm.$valid || phoneNumbersForm.$pristine || savingInProcess }}"
-                        ng-click="saveContactInfo(phoneNumbersForm)">
-                  Save
-                </button>
-              </div>
+              <!--<div class="form-group no-label full-width">-->
+                <!--<button class="btn btn-lg btn-info pull-right"-->
+                        <!--custom-disabled="{{ !phoneNumbersForm.$valid || phoneNumbersForm.$pristine || savingInProcess }}"-->
+                        <!--ng-click="saveContactInfo(phoneNumbersForm)">-->
+                  <!--Save-->
+                <!--</button>-->
+              <!--</div>-->
 
-            </div>
+            <!--</div>-->
           </div>
         </div>
       </form>
@@ -548,15 +562,15 @@
               </div>
             </div>
 
-            <div class="form-row clearfix">
-              <div class="form-group no-label full-width">
-                <button class="btn btn-lg btn-info pull-right"
-                        custom-disabled="{{ !miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess }}"
-                        ng-click="saveMiscInfo(miscInfoForm)">
-                  Save
-                </button>
-              </div>
-            </div>
+            <!--<div class="form-row clearfix">-->
+              <!--<div class="form-group no-label full-width">-->
+                <!--<button class="btn btn-lg btn-info pull-right"-->
+                        <!--custom-disabled="{{ !miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess }}"-->
+                        <!--ng-click="saveMiscInfo(miscInfoForm)">-->
+                  <!--Save-->
+                <!--</button>-->
+              <!--</div>-->
+            <!--</div>-->
 
           </div>
         </div>
@@ -598,12 +612,12 @@
         </label>
       </div>
 
-      <div class="clearfix">
-        <div class="btn btn-lg btn-info pull-right"
-             custom-disabled="{{ emailNotificationsForm.$pristine || savingEmailInProcess }}"
-             ng-click="saveEmailNotifications(emailNotificationsForm)">Save
-        </div>
-      </div>
+      <!--<div class="clearfix">-->
+        <!--<div class="btn btn-lg btn-info pull-right"-->
+             <!--custom-disabled="{{ emailNotificationsForm.$pristine || savingEmailInProcess }}"-->
+             <!--ng-click="saveEmailNotifications(emailNotificationsForm)">Save-->
+        <!--</div>-->
+      <!--</div>-->
 
     </form>
   </div>

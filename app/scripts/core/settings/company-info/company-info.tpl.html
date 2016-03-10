@@ -3,6 +3,20 @@
     schedule. Here, you can set when to notify agents, users, and vendors via email.
   </div>
 
+  <div class="settings-button clearfix settings-fixed-button">
+
+    <div class="pull-right">
+      <div class="form-row clearfix">
+        <div class="form-group no-label full-width">
+          <button class="btn btn-lg btn-info pull-right">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <div class="basic-info-wrapper"
        id="companyInfoBasicInfo">
 
@@ -26,7 +40,7 @@
                    ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyName')}">
 
                 <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyName')}">
-                  Campany Name
+                  Company Name
                 </label>
 
                 <div ng-messages="basicInfoForm.companyName.$error"
@@ -149,14 +163,14 @@
             <!--</div>-->
             <!--</div>-->
 
-            <div class="form-row clearfix">
-              <div class="form-group no-label full-width">
-                <div class="btn btn-lg btn-info pull-right"
-                     custom-disabled="{{ basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess }}"
-                     ng-click="saveBasicInfo(basicInfoForm)">Save
-                </div>
-              </div>
-            </div>
+            <!--<div class="form-row clearfix">-->
+              <!--<div class="form-group no-label full-width">-->
+                <!--<div class="btn btn-lg btn-info pull-right"-->
+                     <!--custom-disabled="{{ basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess }}"-->
+                     <!--ng-click="saveBasicInfo(basicInfoForm)">Save-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
         </div>
       </form>
@@ -315,14 +329,14 @@
               <!--</div>-->
               <!--</div>-->
 
-              <div class="form-row clearfix" ng-show="$last">
-                <div class="form-group no-label full-width">
-                  <button class="btn btn-lg btn-info pull-right"
-                          custom-disabled="{{ addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess }}"
-                          ng-click="saveContactInfo(addressesWrapForm)">Save
-                  </button>
-                </div>
-              </div>
+              <!--<div class="form-row clearfix" ng-show="$last">-->
+                <!--<div class="form-group no-label full-width">-->
+                  <!--<button class="btn btn-lg btn-info pull-right"-->
+                          <!--custom-disabled="{{ addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess }}"-->
+                          <!--ng-click="saveContactInfo(addressesWrapForm)">Save-->
+                  <!--</button>-->
+                <!--</div>-->
+              <!--</div>-->
               <!--</div>-->
 
             </div>
@@ -411,12 +425,12 @@
 
         <span class="text-muted" ng-show="!services || services.length === 0">No Default Services.</span>
 
-        <div class="form-group no-label full-width">
-          <button type="button" class="btn btn-lg btn-info pull-right"
-                  custom-disabled="{{ isServicesChange() || disabledSaveButton }}"
-                  ng-click="saveAllServices()">Save
-          </button>
-        </div>
+        <!--<div class="form-group no-label full-width">-->
+          <!--<button type="button" class="btn btn-lg btn-info pull-right"-->
+                  <!--custom-disabled="{{ isServicesChange() || disabledSaveButton }}"-->
+                  <!--ng-click="saveAllServices()">Save-->
+          <!--</button>-->
+        <!--</div>-->
 
       </div>
 
@@ -526,7 +540,7 @@
 
           <div class="helping-additional-class">
 
-            <div class="col-1 form-group" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'code')}">
+            <div class="col-1" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'code')}">
 
               <!--<p ng-style="{'opacity': isShowingErrors(newTaxRateForm, 'code') ? 0 : 1}">New Tax Rate</p>-->
 
@@ -553,7 +567,7 @@
                      ng-change="validateNewTaxRate(newTaxRateForm)" name="code">
             </div>
 
-            <div class="col-2 form-group" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'rate')}">
+            <div class="col-1" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'rate')}">
 
               <p style="margin-bottom: 0">
                 <label class="control-label" ng-class="{'hide': isShowingErrors(newTaxRateForm, 'rate')}">
@@ -571,11 +585,11 @@
 
               <span class="procent-rate">%</span>
 
-              <div class="btn btn-success pull-right"
-                   ng-click="saveNewTax(newTaxRateForm)"
-                   custom-disabled="{{ newTaxRateForm.$invalid }}">
-                <i class="icn-sm small-icn-tick"></i>
-              </div>
+              <!--<div class="btn btn-success pull-right"-->
+                   <!--ng-click="saveNewTax(newTaxRateForm)"-->
+                   <!--custom-disabled="{{ newTaxRateForm.$invalid }}">-->
+                <!--<i class="icn-sm small-icn-tick"></i>-->
+              <!--</div>-->
 
             </div>
           </div>
@@ -584,14 +598,20 @@
 
       </ul>
 
-      <div class="form-row clearfix">
-        <div class="form-group no-label full-width">
-          <button type="button" class="btn btn-lg btn-info pull-right"
-                  custom-disabled="{{ (!isTaxRatesChanges || isEditing) || savingTaxProcess }}"
-                  ng-click="saveAllTax()">Save
-          </button>
-        </div>
+      <div class="btn btn-lg btn-info pull-right"
+           ng-click="saveNewTax(newTaxRateForm)"
+           custom-disabled="{{ newTaxRateForm.$invalid }}">
+        Add
       </div>
+
+      <!--<div class="form-row clearfix">-->
+        <!--<div class="form-group no-label full-width">-->
+          <!--<button type="button" class="btn btn-lg btn-info pull-right"-->
+                  <!--custom-disabled="{{ (!isTaxRatesChanges || isEditing) || savingTaxProcess }}"-->
+                  <!--ng-click="saveAllTax()">Save-->
+          <!--</button>-->
+        <!--</div>-->
+      <!--</div>-->
 
     </div>
   </div>
@@ -710,12 +730,13 @@
             <div ng-messages="invoiceForm.invoiceTerms.$error"
                  ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceTerms')}">
               <label class="control-label" ng-message="required" for="">cannot be left empty.</label>
+              <label class="control-label" ng-message="maxlength" for="">too large</label>
               <label class="control-label" ng-message="minlength" for="">too short</label>
               <label class="control-label" ng-message="pattern" for="">Please enter a valid Terms.</label>
             </div>
 
             <input class="form-control" type="text" ic-terms-input
-                   placeholder="15 days" ng-model="invoiceConfig.term"
+                   placeholder="e.g., Net 8" ng-model="invoiceConfig.term"
                    name="invoiceTerms" aria-expanded="true" make-dirty-on-blur ng-pattern="numberPattern"
                    hard-reset-required="true" ng-minlength="1" ng-maxlength="10" hard-reset-pattern="numberPattern">
           </div>
@@ -1114,12 +1135,12 @@
         </label>
       </div>
 
-      <div class="clearfix">
-        <div class="btn btn-lg btn-info pull-right"
-             custom-disabled="{{ notificationForm.$pristine || savingNotifiInProcess }}"
-             ng-click="saveNotificationDaysHours(notificationForm)">Save
-        </div>
-      </div>
+      <!--<div class="clearfix">-->
+        <!--<div class="btn btn-lg btn-info pull-right"-->
+             <!--custom-disabled="{{ notificationForm.$pristine || savingNotifiInProcess }}"-->
+             <!--ng-click="saveNotificationDaysHours(notificationForm)">Save-->
+        <!--</div>-->
+      <!--</div>-->
     </form>
   </div>
 

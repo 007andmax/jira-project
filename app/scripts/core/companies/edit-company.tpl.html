@@ -597,7 +597,7 @@
 
               <li style="padding-top: 28px;" ng-form="newServiceForm" isolate-form ng-init="newService">
 
-                <div class="col-1" style="width: 181px"
+                <div class="col-1" style="width: 220px"
                      ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceName')}">
 
                   <label class="control-label"
@@ -620,7 +620,7 @@
                          ng-maxlength="100" ng-minlength="3">
                 </div>
 
-                <div class="col-3" style="width: 143px;padding-top: 0; text-align: left"
+                <div class="col-2" style="width: 147px;padding-top: 0; text-align: left"
                      ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'newServiceRate')}">
 
                   <label class="control-label"
@@ -663,15 +663,21 @@
 
                 <!--</div>-->
 
-                <div class="btn btn-success pull-right" style="margin-top: 19px;"
-                     custom-disabled="{{ newServiceForm.$invalid }}"
-                     ng-click="newService = movingService(newService, newServiceForm)">
-                  <i class="icn-sm small-icn-tick"></i>
-                </div>
+                <!--<div class="btn btn-success pull-right" style="margin-top: 19px;"-->
+                     <!--custom-disabled="{{ newServiceForm.$invalid }}"-->
+                     <!--ng-click="newService = movingService(newService, newServiceForm)">-->
+                  <!--<i class="icn-sm small-icn-tick"></i>-->
+                <!--</div>-->
 
               </li>
 
             </ul>
+
+            <div class="btn btn-lg btn-info pull-right"
+                 ng-click="newService = movingService(newService, newServiceForm)"
+                 custom-disabled="{{ newServiceForm.$invalid }}">
+              Add
+            </div>
 
             <div class="add-service-btn-wrapper">
               <span class="text-muted" ng-show="!editCompany.services || editCompany.services.length === 0">
@@ -839,7 +845,7 @@
                          ng-change="validateNewTaxRate(newTaxRateForm)">
                 </div>
 
-                <div class="col-2" ng-class="{'has-error': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
+                <div class="col-1" ng-class="{'has-error': !(newTaxRate.rate || newTaxRateForm.rate.$pristine)}">
 
                   <p style="margin-bottom: 0">
                     <label class="control-label"
@@ -856,11 +862,11 @@
                          ng-change="validateNewTaxRate(newTaxRateForm)" hard-reset-pattern="taxRateNumberPattern">
                   <span class="procent-rate" style="top:29px;">%</span>
 
-                  <div class="btn btn-success pull-right"
-                       ng-click="saveNewTax(newTaxRateForm)"
-                       custom-disabled="{{ newTaxRateForm.invalid || !newTaxRate.code || !newTaxRate.rate }}">
-                    <i class="icn-sm small-icn-tick"></i>
-                  </div>
+                  <!--<div class="btn btn-success pull-right"-->
+                       <!--ng-click="saveNewTax(newTaxRateForm)"-->
+                       <!--custom-disabled="{{ newTaxRateForm.invalid || !newTaxRate.code || !newTaxRate.rate }}">-->
+                    <!--<i class="icn-sm small-icn-tick"></i>-->
+                  <!--</div>-->
 
                 </div>
               </div>
@@ -868,6 +874,12 @@
             </li>
 
           </ul>
+
+          <div class="btn btn-lg btn-info pull-right"
+               ng-click="saveNewTax(newTaxRateForm)"
+               custom-disabled="{{ newTaxRateForm.$invalid || !newTaxRate.code || !newTaxRate.rate }}">
+            Add
+          </div>
         </div>
 
         <div id="create-agents" class="contact-info-wrapper">

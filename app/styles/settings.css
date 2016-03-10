@@ -114,7 +114,7 @@
   color: #94a4b8;
   border-bottom: 1px solid #f1f5fa;
   padding: 15px 0 25px;
-  margin-bottom: 37px;
+  margin: 20px 0 37px 0;
 }
 @-moz-document url-prefix() {
   .settings-main-wrapper .help-text {
@@ -645,7 +645,7 @@
 .new-tax .procent-rate{
   width: initial;
   position: absolute;
-  right: 61px;
+  right: 15px;
   top: 30px;
   color: #b2becd;
   padding-left: 13px;
@@ -656,3 +656,56 @@
   /*padding-left: 10px;*/
   /*padding-right: 0;*/
 /*}*/
+
+/*********************
+*** Fixed Button ***
+**********************/
+
+.settings-button {
+  padding-right: 30px;
+}
+.settings-button.settings-fixed-button {
+  position: fixed;
+  right: 77px;
+  padding-right: 30px;
+  top: 78px;
+  width: calc(100% - 153px);
+  background-color: rgba(255, 255, 255, .9);
+  z-index: 1;
+}
+@media screen and (min-width: 320px){
+  .settings-button.settings-fixed-button {
+    width: 56%;
+  }
+}
+@media screen and (min-width: 1010px){
+  .settings-button.settings-fixed-button {
+    width: 56%;
+  }
+}
+@media screen and (min-width: 1316px){
+  .settings-button.settings-fixed-button {
+    right: 281px !important;
+    width: 47%;
+  }
+}
+@media screen and (min-width: 1390px){
+  .settings-button.settings-fixed-button {
+    width: 43%;
+  }
+}
+@media only screen and (min-width: 1701px){
+  .settings-button.settings-fixed-button {
+    width: 44%;
+  }
+}
+@media only screen and (min-width: 1930px){
+  .settings-button.settings-fixed-button {
+    width: 45%;
+  }
+}
+@media only screen and (min-width: 2510px){
+  .settings-button.settings-fixed-button {
+    width: 46%;
+  }
+}
