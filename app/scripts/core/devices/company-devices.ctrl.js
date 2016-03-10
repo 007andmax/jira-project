@@ -57,9 +57,7 @@
         });
 
         $scope.runScanDevices = function (agentId) {
-          $scope.scanDevices = DevicesService.runScanDevices($scope, $scope.companyId, agentId, function () {
-            console.log($scope.scanDevices)
-          });
+          DevicesService.runScanDevices($scope, $scope.companyId, agentId);
         };
 
         DevicesService.getAgentsByCompany($scope, $scope.companyId, function (resp) {
