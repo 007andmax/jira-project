@@ -73,10 +73,10 @@
                 <!--<label class="control-label" ng-message="unique">This Domain name already occupied.</label>-->
                 <!--</div>-->
 
-                <input class="form-control center-align" type="text"
-                       ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
-                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
-                       is-uniq-validation validation-func="validateSuppEmailName"/>
+                <input class="form-control" type="text" readonly/>
+                <!--ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"-->
+                <!--ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur-->
+                <!--is-uniq-validation validation-func="validateSuppEmailName"-->
                 <!--ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"-->
 
                 <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
@@ -86,7 +86,7 @@
                 <!--is-uniq-validation validation-func="validateCompanyDomain"-->
                 <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
 
-                <span class="email-addon">@{{ currentHost }}</span>
+                <span class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHost }}</span>
 
               </div>
 
@@ -118,7 +118,7 @@
                 <label class="control-label">Company URL</label>
 
                 <input class="form-control" type="text" readonly>
-                <span class="company-url-addon" style="">
+                <span class="company-url-addon">
                   {{ editCompany.name + '.' + currentHost }}
                 </span>
               </div>
