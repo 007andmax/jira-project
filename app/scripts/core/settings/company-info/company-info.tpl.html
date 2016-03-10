@@ -66,27 +66,27 @@
                 </div>
 
                 <!--<div ng-messages="basicInfoForm.techDomainName.$error"-->
-                     <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
-                  <!--<label class="control-label" ng-message="required">Domain name is required.</label>-->
-                  <!--<label class="control-label" ng-message="maxlength">Domain name is too large.</label>-->
-                  <!--<label class="control-label" ng-message="minlength">Domain name is too short.</label>-->
-                  <!--<label class="control-label" ng-message="unique">This Domain name already occupied.</label>-->
+                <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
+                <!--<label class="control-label" ng-message="required">Domain name is required.</label>-->
+                <!--<label class="control-label" ng-message="maxlength">Domain name is too large.</label>-->
+                <!--<label class="control-label" ng-message="minlength">Domain name is too short.</label>-->
+                <!--<label class="control-label" ng-message="unique">This Domain name already occupied.</label>-->
                 <!--</div>-->
 
-                <input class="form-control" type="text"
+                <input class="form-control center-align" type="text"
                        ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
                        ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
-                       ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"
                        is-uniq-validation validation-func="validateSuppEmailName"/>
+                <!--ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"-->
 
                 <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
 
                 <!--<input class="form-control has-addon" type="text" ng-model="techDomainName"-->
-                       <!--name="techDomainName" ng-minlength="3" ng-maxlength="25" ng-required="true" make-dirty-on-blur-->
-                       <!--is-uniq-validation validation-func="validateCompanyDomain"-->
-                       <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
+                <!--name="techDomainName" ng-minlength="3" ng-maxlength="25" ng-required="true" make-dirty-on-blur-->
+                <!--is-uniq-validation validation-func="validateCompanyDomain"-->
+                <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
 
-                <span class="email-addon" style="border-left: none;width: initial;">@{{ currentHost }}</span>
+                <span class="email-addon">@{{ currentHost }}</span>
 
               </div>
 
@@ -113,28 +113,42 @@
 
             <div class="form-row clearfix">
 
-              <div class="form-group full-width"
-                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyDescription')}">
+              <div class="form-group full-width">
 
-                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyDescription')}">
-                  Description of Business
-                </label>
+                <label class="control-label">Company URL</label>
 
-                <div ng-messages="basicInfoForm.companyDescription.$error"
-                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'companyDescription')}">
-                  <label class="control-label" ng-message="required">
-                    Please enter a brief description of the company’s business.
-                  </label>
-                </div>
-
-         <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
-                   maxlength="80" ng-trim="false" make-dirty-on-blur
-                   popover="Describe the company's business in 80 characters (spaces included)."
-                   popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>
-
-                <div class="word-count">{{ 80 - editCompany.description.length }}</div>
+                <input class="form-control" type="text" readonly>
+                <span class="company-url-addon" style="">
+                  {{ editCompany.name + '.' + currentHost }}
+                </span>
               </div>
             </div>
+
+            <!--<div class="form-row clearfix">-->
+
+            <!--<div class="form-group full-width"-->
+            <!--ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyDescription')}">-->
+
+            <!--<label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyDescription')}">-->
+            <!--Description of Business-->
+            <!--</label>-->
+
+            <!--<div ng-messages="basicInfoForm.companyDescription.$error"-->
+            <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'companyDescription')}">-->
+            <!--<label class="control-label" ng-message="required">-->
+            <!--Please enter a brief description of the company’s business.-->
+            <!--</label>-->
+            <!--</div>-->
+            <!---->
+            <!--<textarea class="form-control" ng-model="editCompany.description" name="companyDescription"-->
+            <!--maxlength="80" ng-trim="false" make-dirty-on-blur-->
+            <!--popover="Describe the company's business in 80 characters (spaces included)."-->
+            <!--popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover></textarea>-->
+
+            <!--<div class="word-count">{{ 80 - editCompany.description.length }}</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
             <div class="form-row clearfix">
               <div class="form-group no-label full-width">
                 <div class="btn btn-lg btn-info pull-right"
@@ -271,34 +285,34 @@
                   </div>
 
                   <!--<button class="btn btn-dark has-tooltip pull-right"-->
-                          <!--ng-class="{'hide': !$last || companyForSettingPage.addresses.length >= maximalAmountOfAddresses}"-->
-                          <!--ng-click="addLocations(); showAddress(companyForSettingPage.addresses.length - 1, true)"-->
-                          <!--tooltip-placement="top" tooltip="Add more">-->
-                    <!--<i class="icn-sm icn-plus"></i>-->
+                  <!--ng-class="{'hide': !$last || companyForSettingPage.addresses.length >= maximalAmountOfAddresses}"-->
+                  <!--ng-click="addLocations(); showAddress(companyForSettingPage.addresses.length - 1, true)"-->
+                  <!--tooltip-placement="top" tooltip="Add more">-->
+                  <!--<i class="icn-sm icn-plus"></i>-->
                   <!--</button>-->
 
                   <!--<button class="btn btn-primary has-tooltip pull-right"-->
-                          <!--ng-class="{'hide':$last && companyForSettingPage.addresses.length < maximalAmountOfAddresses}"-->
-                          <!--ng-click="removeLocation($index, addressesWrapForm); showAddress($index - 1)"-->
-                          <!--tooltip-placement="top"-->
-                          <!--tooltip="Remove">-->
-                    <!--<i class="icn-sm icn-remove-token"></i>-->
+                  <!--ng-class="{'hide':$last && companyForSettingPage.addresses.length < maximalAmountOfAddresses}"-->
+                  <!--ng-click="removeLocation($index, addressesWrapForm); showAddress($index - 1)"-->
+                  <!--tooltip-placement="top"-->
+                  <!--tooltip="Remove">-->
+                  <!--<i class="icn-sm icn-remove-token"></i>-->
                   <!--</button>-->
 
                 </div>
               </div>
 
               <!--<div class="form-row clearfix">-->
-                <!--<div class="form-group no-label full-width">-->
-                  <!--<div class="clearfix">-->
-                    <!--<label class="control checkbox pull-left" ng-click="changeRadioButton = true">-->
-                      <!--<input type="checkbox" ng-model="address.isPrimary" ng-click="changePrimaryAddress(address)">-->
-                      <!--<span class="control-indicator"></span> Primary Address-->
-                      <!--<span ng-if="changeRadioButton && companyForSettingPage.addresses.length === 1"-->
-                            <!--class="error-alone">Please add multiple site/locations first.</span>-->
-                    <!--</label>-->
-                  <!--</div>-->
-                <!--</div>-->
+              <!--<div class="form-group no-label full-width">-->
+              <!--<div class="clearfix">-->
+              <!--<label class="control checkbox pull-left" ng-click="changeRadioButton = true">-->
+              <!--<input type="checkbox" ng-model="address.isPrimary" ng-click="changePrimaryAddress(address)">-->
+              <!--<span class="control-indicator"></span> Primary Address-->
+              <!--<span ng-if="changeRadioButton && companyForSettingPage.addresses.length === 1"-->
+              <!--class="error-alone">Please add multiple site/locations first.</span>-->
+              <!--</label>-->
+              <!--</div>-->
+              <!--</div>-->
               <!--</div>-->
 
               <div class="form-row clearfix" ng-show="$last">

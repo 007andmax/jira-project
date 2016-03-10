@@ -901,3 +901,11 @@ aside#left div.nav-title {
   background-color: #151e29;
   border-radius: 3px;
 }
+
+.devices-content .tab-content .list-heading i.icn-collapse {
+  margin-top:-12px;
+}
+
+.devices-content .tab-content .list-heading i.icn-expand {
+  margin-top:-10px;
+}

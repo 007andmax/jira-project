@@ -6,12 +6,9 @@
     ['$scope', 'CompaniesService', 'DevicesService',
       function ($scope, CompaniesService, DevicesService) {
 
-        $scope.credential = {
-          name: '',
-          pass: ''
-        };
         $scope.deviceStatus = {};
         $scope.deviceDescription = '';
+        $scope.deviceEditDescription = $scope.device.description;
         $scope.isOpenDescrDrpdwn = false;
         $scope.patternMax40 = /^.{0,40}$/;
 
@@ -41,6 +38,22 @@
           })
         };
 
+        $scope.saveEditDescription = function (option) {
+          if (option === 'close') {
+            $scope.deviceEditDescription = $scope.device.description;
+            $scope.isOpenEditDescrDrpdwn = false;
+            return;
+          }
+
+          $scope.disableEditSaveDescr = true;
+
+          DevicesService.sendDescription($scope.companyId, $scope.device.id, $scope.deviceEditDescription, function () {
+            $scope.device.description = $scope.deviceEditDescription;
+            $scope.disableEditSaveDescr = false;
+            $scope.isOpenEditDescrDrpdwn = false;
+          })
+        };
+
         $scope.saveNewCredentional = function (isTest) {
           $scope.savingCredentional = true;
 
@@ -51,8 +64,8 @@
             password: $scope.credential.pass
           }, function () {
             $scope.credential = {
-              name: '',
-              pass: ''
+              name: $scope.credential.name,
+              pass: $scope.credential.pass
             };
             $scope.savingCredentional = false;
             $scope.isLogOnDrpdwnOpen = false;
@@ -65,6 +78,10 @@
 
         $scope.getDeviceUserName = function () {
           return $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].login : $scope.defaultName
+        };
+
+        $scope.restoreDefault = function () {
+          DevicesService.deleteDeviceSettings($scope.customizeDevices[$scope.device.id].id)
         };
 
         $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
@@ -98,7 +115,16 @@
             $scope.deviceStatus.online = false;
 
           }
-        })
+        });
+
+        $scope.toogleLogOnDrpdwn = function(isOpen){
+          if(isOpen){
+            $scope.credential = {
+              name: $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].login : $scope.defaultName,
+              pass: $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].password : $scope.defaultPass
+            };
+          }
+        }
 
       }]);
 
