@@ -651,6 +651,21 @@
   padding-left: 13px;
 }
 
+.days {
+  width: initial;
+  position: absolute;
+  right: 15px;
+  top: 30px;
+  color: #b2becd;
+  padding-left: 13px;
+}
+
+input.default-invoice-terms {
+  text-align: end;
+  padding-right: 45px;
+  width: 100%;
+}
+
 /*.settings-main-wrapper .services-info-wrapper .col-2.timer-quantity {*/
   /*float: right;*/
   /*padding-left: 10px;*/
