@@ -169,13 +169,22 @@
           }
         };
 
+        $scope.ifHasAgentToScan = function(){
+          for(var i = 0, len = $scope.agents.length; i < len; i++){
+            if($scope.agents[i].agentId && ($scope.agents[i].agentId !== 'unknown') && $scope.agents[i].online){
+              return true;
+            }
+          }
+          return false;
+        };
+
         $scope.$watch(function(){
           if($scope.scanDevices && $scope.scanDevices.networkScan){
             return $scope.scanDevices.networkScan.netScanStatus;
           }
         }, function(val){
           $scope.isScanDevicesLoad = val !== 'finished';
-      })
+      });
 
       }]);
 
