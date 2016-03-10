@@ -15,17 +15,19 @@
                     menu = $(popover)[direction](),
                     position = mouse;
                 // opening menu would pass the side of the page
-                if (mouse + menu > win && menu < mouse) 
+                if (mouse + menu > win && menu < mouse)
                     position -= menu;
                 return position;
-            }
+            };
             var hideOtherPopovers = function(){
               element.siblings().popover('hide');
-            }
+              $(document).off('click', hideThisPopover);
+            };
 
             var hideThisPopover = function(){
-             element.popover('hide');
-            }
+              element.popover('hide');
+              $(document).off('click', hideThisPopover);
+            };
 
 
             $templateRequest(attrs.customPopoverTemplate).then(function(html){
@@ -40,16 +42,11 @@
 
               $compile(template)(scope);
 
-              $(document).on('click', function(){
-                // Hide already opened 
-                hideOtherPopovers();
-              })
-
               element.bind("contextmenu", function (e) {
                 // Return native menu if pressing control
                 if (e.ctrlKey) return;
 
-                // Hide already opened 
+                // Hide already opened
                 hideOtherPopovers();
 
                 var customPopover;
@@ -62,7 +59,7 @@
                   customPopover = $('#'+element.attr('aria-describedby'));
                   customPopover.find('.popover-content').css('padding', 0);
                   customPopover.css({
-                    'padding': 0, 
+                    'padding': 0,
                     'margin': 0,
                     // 'margin-top': attrs.customPopoverMenuMarginTop,
                     'width': 190,
@@ -83,21 +80,23 @@
                         top: top
                     });
                 });
-                
+
                 element.popover('show');
+
+                $(document).on('click', hideThisPopover);
 
                 return false;
               });
-              
+
             });
 
             scope.sendEmail = function () {
-              if (Object.keys(scope.selectedUsers).length !== 0) {
+              if (Object.keys(scope.selectedCompanyUsers).length !== 0) {
 
                 var usersIds = [];
 
-                for (var userId in scope.selectedUsers) {
-                  if (scope.selectedUsers[userId]) {
+                for (var userId in scope.selectedCompanyUsers) {
+                  if (scope.selectedCompanyUsers[userId]) {
                     usersIds.push(userId)
                   }
                 }
@@ -110,7 +109,7 @@
             };
 
             scope.startChat = function () {
-              console.log('start chat ' + scope.user.id)
+              console.log('start chat ' + scope.user.id);
               hideThisPopover();
             };
 
@@ -120,12 +119,12 @@
             };
 
             scope.archiveContact = function () {
-              if (Object.keys(scope.selectedUsers).length !== 0) {
+              if (Object.keys(scope.selectedCompanyUsers).length !== 0) {
 
                 var usersIds = [];
 
-                for (var userId in scope.selectedUsers) {
-                  if (scope.selectedUsers[userId]) {
+                for (var userId in scope.selectedCompanyUsers) {
+                  if (scope.selectedCompanyUsers[userId]) {
                     usersIds.push(userId)
                   }
                 }

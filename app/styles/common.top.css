@@ -35,6 +35,10 @@
   }
 }
 
+.topNavbar-user img{
+  cursor: pointer;
+}
+
 .topNavbar-logo{
   position: absolute;
   left: 50%;

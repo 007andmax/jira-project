@@ -10,7 +10,8 @@
           scope: {
             userInfo: "=userInfo",
             sendEmailInPopover: "=sendEmailInPopover",
-            customUserPopoverTrigger: "=customUserPopoverTrigger"
+            customUserPopoverTrigger: "=customUserPopoverTrigger",
+            selectedCompanyUsers: "=selectedCompanyUsers"
           },
           link: function (scope, element) {
 
@@ -90,8 +91,12 @@
               element.bind('mouseenter', function () {
                 $timeout(function () {
                   if (!$rootScope.insidePopover) {
+                    for (var prop in scope.selectedCompanyUsers) if (scope.selectedCompanyUsers[prop] === true) return;
+
                     element.popover('show');
                     scope.attachEvents(element);
+
+                    $(document).on('click', hideThisPopover);
                   }
                 }, 50);
               });
@@ -99,6 +104,9 @@
               element.bind('mouseleave', function () {
                 $timeout(function () {
                   if (!$rootScope.insidePopover) {
+                    for (var prop in scope.selectedCompanyUsers) if (scope.selectedCompanyUsers[prop] === true) return;
+
+                    $(document).off('click', hideThisPopover);
                     element.popover('hide');
                     //icnEmail.off('click');
                   }
@@ -180,6 +188,10 @@
 
                 });
 
+              }
+
+              function hideThisPopover(){
+                element.popover('hide');
               }
 
             }

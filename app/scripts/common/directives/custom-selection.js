@@ -13,7 +13,7 @@
             var childElements = $(element).children('li');
 
             var selectionCallback = function(event, inputElement, change_state){
-                
+
                 if( change_state ) {
                     if ( inputElement.prop("checked")) {
                         inputElement.prop("checked", false);
@@ -57,9 +57,9 @@
 
             childElements.click(function(event){
                 if(!$(event.target).is('span.control-indicator') && (event.ctrlKey||event.metaKey) ) {
-                    selectionCallback(event, $(this).find('input'), true);
+                  selectionCallback(event, $(this).find('input'), true);
+                  event.stopPropagation();
                 }
-                event.stopPropagation();
             });
           }, 0);
         }
