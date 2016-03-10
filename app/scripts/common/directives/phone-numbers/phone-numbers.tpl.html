@@ -38,7 +38,7 @@
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                aria-expanded="true" hard-reset-required="true" ng-minlength="5" ng-maxlength="20"
-               ng-pattern="phoneNumberPattern" hard-reset-pattern="hardPhoneNumberPattern" make-dirty-on-blur>
+               ng-pattern="phoneNumberPattern" is-phone-number="true" hard-reset-pattern="hardPhoneNumberPattern" make-dirty-on-blur>
       </div>
 
       <div class="form-group no-label">
@@ -103,7 +103,8 @@
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                aria-expanded="true" ng-minlength="5" ng-maxlength="20" ng-pattern="phoneNumberPattern"
-               make-dirty-on-blur hard-reset-required="{{ isFirstRequired }}" hard-reset-pattern="hardPhoneNumberPattern">
+               make-dirty-on-blur hard-reset-required="{{ isFirstRequired }}" is-phone-number="true"
+               hard-reset-pattern="hardPhoneNumberPattern">
       </div>
 
       <div class="form-group no-label">
