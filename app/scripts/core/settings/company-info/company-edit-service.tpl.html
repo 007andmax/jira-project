@@ -1,6 +1,8 @@
 <div class="service-form-wrapper" ng-form="editServiceForm">
 
-  <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
+  <div class="col-1" style="width: calc(100% - 127px);"
+       ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
+    <!--style for TODO hide timeAllotment-->
 
     <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceName')}">
       SERVICE NAME
@@ -30,7 +32,9 @@
            ng-maxlength="100" ng-minlength="3">
   </div>
 
-  <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+  <div class="col-2" style="padding-right: 0"
+       ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+    <!--style for TODO hide timeAllotment-->
 
     <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceRate')}">
       PER HOUR
@@ -48,28 +52,28 @@
            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
   </div>
 
-  <div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;"
-       service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"
-       ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">
+  <!--<div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;" TODO hide timeAllotment-->
+       <!--service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"-->
+       <!--ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">-->
 
-    <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'code')}">
-      TIME ALLOTMENT
-    </label>
+    <!--<label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'code')}">-->
+      <!--TIME ALLOTMENT-->
+    <!--</label>-->
 
-    <div ng-messages="editServiceForm.code.$error"
-         ng-class="{'hide': !isShowingErrors(editServiceForm, 'code')}">
-      <label class="control-label" ng-message="required">
-       IS REQUIRED.
-      </label>
-    </div>
+    <!--<div ng-messages="editServiceForm.code.$error"-->
+         <!--ng-class="{'hide': !isShowingErrors(editServiceForm, 'code')}">-->
+      <!--<label class="control-label" ng-message="required">-->
+       <!--IS REQUIRED.-->
+      <!--</label>-->
+    <!--</div>-->
 
-    <input id="service-quantity-picker" type="text" class="form-control"
-           sqp-input readonly>
+    <!--<input id="service-quantity-picker" type="text" class="form-control"-->
+           <!--sqp-input readonly>-->
 
-    <input type="hidden" invalid-when="!editService.timeBlock || editService.timeBlock <= 0"
-           name="timeBlock" ng-model="editService.timeBlock" hard-reset-required="true"/>
+    <!--<input type="hidden" invalid-when="!editService.timeBlock || editService.timeBlock <= 0"-->
+           <!--name="timeBlock" ng-model="editService.timeBlock" hard-reset-required="true"/>-->
 
-  </div>
+  <!--</div>-->
 
   <div class="qt-form-actions">
     <!--<div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>-->

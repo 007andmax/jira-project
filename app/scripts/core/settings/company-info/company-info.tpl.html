@@ -347,7 +347,7 @@
         <li class="list-heading" ng-show="services.length > 0">
           <div class="col-1">SERVICE NAME</div>
           <div class="col-2">PER HOUR</div>
-          <div class="col-3">TIME ALLOTMENT</div>
+          <!--<div class="col-3">TIME ALLOTMENT</div> TODO hide timeAllotment-->
           <div class="col-4">&nbsp;</div>
         </li>
 
@@ -372,9 +372,9 @@
               {{ service.rate | currency: '$': 2 }}
             </div>
 
-            <div class="col-3">
-              {{ service.timeBlock | timeFilter }}
-            </div>
+            <!--<div class="col-3 hide"> TODO hide timeAllotment-->
+              <!--{{ service.timeBlock | timeFilter }}-->
+            <!--</div>-->
 
             <div class="col-4">
 

@@ -192,7 +192,8 @@ body.non-body-scroll::-webkit-scrollbar {
 
 /*service page*/
 .qt-default-services > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 319px);
+  width: calc(100% - 202px);
+  /*width: calc(100% - 319px); TODO hide timeAllotment*/
 }
 
 .qt-default-services > li > .intermediate-parent-elem > .col-2 {
@@ -233,7 +234,8 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-1 {
-  width: calc(100% - 399px);
+  width: calc(100% - 277px);
+  /*width: calc(100% - 399px); TODO hide timeAllotment*/
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-5 {
