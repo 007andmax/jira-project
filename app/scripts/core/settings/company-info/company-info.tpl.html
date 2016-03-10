@@ -53,7 +53,7 @@
                 <label class="control-label"
                        ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
                   <!--|| isShowingErrors(basicInfoForm, 'techDomainName')-->
-                  Email Inbox (please forward your email to this address)
+                  Forward your email to:
                 </label>
 
                 <div ng-messages="basicInfoForm.supportMailBox.$error"
@@ -98,7 +98,7 @@
                    ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
 
                 <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  Support Email address
+                  Support Email address (what you want your customers to see)
                 </label>
 
                 <div ng-messages="basicInfoForm.businessEmail.$error"
