@@ -10,7 +10,8 @@
 
         var pattern = scope.$eval(attr.hardResetPattern),
           value = ctrl.$viewValue || '',
-          isRequired = attr.hardResetRequired;
+          isRequired = attr.hardResetRequired,
+          isPhoneNumber = attr.isPhoneNumber;
 
         element.on('input', checkAndFix);
         element.on('change', checkAndFix);
@@ -21,9 +22,11 @@
 
         function checkAndFix(e) {
 
-          var newValue = element.val();
+          var newValue = element.val().trim();
 
-          if (newValue && !newValue.match(pattern)) {
+          if (newValue && pattern.test(newValue)) {
+            value = isPhoneNumber ? newValue.replace(pattern, "($1) $2-$3") : newValue;
+
             ctrl.$setViewValue(value);
             element.val(value);
           } else {
