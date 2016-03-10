@@ -258,8 +258,8 @@
 
       <ul class="dropdown-menu dropdown-menu-right dropdown-ip-range">
 
-        <li ng-repeat="agent in agents" ng-show="agent.agentId && (agent.agentId !== 'unknown') && agent.online"
-            ng-if="agent.id === masterAgentId">
+        <li ng-repeat="agent in agents"
+            ng-if="(agent.id === masterAgentId) && (agent.agentId && (agent.agentId !== 'unknown') && agent.online)">
           <a href="javascript:void(0)" ng-click="runScanDevices(agent.agentId)" style="font-weight: bold">
             <span class="pull-left">
               {{ agent.hostName && agent.hostName !== ('unknown') ? agent.hostName : agent.ip }}
@@ -268,14 +268,18 @@
           </a>
         </li>
 
-        <li ng-repeat="agent in agents" ng-show="agent.agentId && (agent.agentId !== 'unknown') && agent.online"
-            ng-if="agent.id !== masterAgentId">
+        <li ng-repeat="agent in agents"
+            ng-if="(agent.id !== masterAgentId) && (agent.agentId && (agent.agentId !== 'unknown') && agent.online)">
           <a href="javascript:void(0)" ng-click="runScanDevices(agent.agentId)">
             <span class="pull-left">
               {{ agent.hostName && agent.hostName !== ('unknown') ? agent.hostName : agent.ip }}
             </span>
             <!--<span class="pull-right text-muted">254</span>-->
           </a>
+        </li>
+
+        <li ng-hide="ifHasAgentToScan()">
+          <a href="javascript:void(0)"><span class="pull-left">No agents</span></a>
         </li>
 
         <!--<li><a href="javascript:void(0)"><span class="pull-left">10.10.200.1</span> <span class="pull-right text-muted">254</span></a></li>-->
@@ -842,7 +846,7 @@
         </div>
       </div>
 
-      <div class="qt-list-loading" ng-show="isScanDevicesLoad">
+      <div class="qt-list-loading" ng-show="isScanDevicesLoad && (scanDevices.networkScan.devices && scanDevices.networkScan.devices.length > 0)">
         <div class="loader"></div>
       </div>
 

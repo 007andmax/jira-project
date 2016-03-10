@@ -57,9 +57,7 @@
         });
 
         $scope.runScanDevices = function (agentId) {
-          $scope.scanDevices = DevicesService.runScanDevices($scope, $scope.companyId, agentId, function () {
-            console.log($scope.scanDevices)
-          });
+          DevicesService.runScanDevices($scope, $scope.companyId, agentId);
         };
 
         DevicesService.getAgentsByCompany($scope, $scope.companyId, function (resp) {
@@ -82,7 +80,7 @@
 
             for (var i = 0; i < $scope.agents.length; i++) {
               if ($scope.agents[i].id === $scope.masterAgentId) {
-                DevicesService.getLastScanDevices($scope.companyId, $scope.agents[i].agentId, function (resp) {
+                DevicesService.getLastScanDevices($scope, $scope.companyId, $scope.agents[i].agentId, function (resp) {
                   $scope.scanDevices = resp;
                 });
                 return;
@@ -170,6 +168,23 @@
             $scope.orderDevicesBy = option;
           }
         };
+
+        $scope.ifHasAgentToScan = function(){
+          for(var i = 0, len = $scope.agents.length; i < len; i++){
+            if($scope.agents[i].agentId && ($scope.agents[i].agentId !== 'unknown') && $scope.agents[i].online){
+              return true;
+            }
+          }
+          return false;
+        };
+
+        $scope.$watch(function(){
+          if($scope.scanDevices && $scope.scanDevices.networkScan){
+            return $scope.scanDevices.networkScan.netScanStatus;
+          }
+        }, function(val){
+          $scope.isScanDevicesLoad = val !== 'finished';
+      });
 
       }]);
 

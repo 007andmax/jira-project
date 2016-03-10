@@ -537,17 +537,18 @@
 
               <li class="list-heading" ng-show="editCompany.services.length > 0">
 
-                <div class="col-1" style="width: 183px;">SERVICE NAME</div>
+                <div class="col-1" style="width: 316px;">SERVICE NAME</div>
+                <!--style="width: 183px;" TODO hide timeAllotment -->
 
                 <div class="col-5">IS BILLABLE</div>
 
-                <div class="col-3" style="width: 92px;text-align: left;"
+                <div class="col-3" style="width: 92px;text-align: right;"
                      ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">PER HOUR
                 </div>
 
-                <div class="col-2" style="text-align: right;width: 133px;"
-                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT
-                </div>
+                <!--<div class="col-2" style="text-align: right;width: 133px;" TODO hide timeAllotment -->
+                     <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT-->
+                <!--</div>-->
 
                 <div class="col-4">&nbsp;</div>
 
@@ -557,9 +558,10 @@
 
                 <div class="intermediate-parent-elem">
 
-                  <div class="col-1" style="width: 183px;">
+                  <div class="col-1" style="width: 316px;">
                     <div class="checkbox-caption">{{ service.name }}</div>
                   </div>
+                  <!--style="width: 183px;" TODO hide timeAllotment -->
 
                   <div class="col-5" style="width: 68px;">
                     <label class="control checkbox pull-left" style="margin-top: 14px;left:0">
@@ -575,9 +577,9 @@
                            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
                   </div>
 
-                  <div class="col-2" style="text-align: right;width: 133px;">
-                    {{ service.timeBlock | timeFilter }}
-                  </div>
+                  <!--<div class="col-2" style="text-align: right;width: 133px;"> TODO hide timeAllotment-->
+                    <!--{{ service.timeBlock | timeFilter }}-->
+                  <!--</div>-->
 
                   <div class="col-4" style="width: 24px">
 
@@ -637,29 +639,29 @@
 
                 </div>
 
-                <div class="col-2" style="position: relative;padding-top: 0;width: 133px"
-                     service-quantity-picker="newService.timeBlock" sqp-is-show-format="false"
-                     sqp-form="newServiceForm.timeBlock"
-                     ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'timeBlock')}">
+                <!--<div class="col-2" style="position: relative;padding-top: 0;width: 133px" TODO hide timeAllotment-->
+                     <!--service-quantity-picker="newService.timeBlock" sqp-is-show-format="false"-->
+                     <!--sqp-form="newServiceForm.timeBlock"-->
+                     <!--ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
 
-                  <label class="control-label"
-                         ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'timeBlock')}">
-                    TIME ALLOTMENT
-                  </label>
+                  <!--<label class="control-label"-->
+                         <!--ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
+                    <!--TIME ALLOTMENT-->
+                  <!--</label>-->
 
-                  <div ng-messages="newServiceForm.timeBlock.$error"
-                       ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'timeBlock')}">
-                    <label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>
-                    <label class="control-label" ng-message="invalidwhen">INVALID VALUE.</label>
-                  </div>
+                  <!--<div ng-messages="newServiceForm.timeBlock.$error"-->
+                       <!--ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
+                    <!--<label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>-->
+                    <!--<label class="control-label" ng-message="invalidwhen">INVALID VALUE.</label>-->
+                  <!--</div>-->
 
-                  <input id="service-quantity-picker" type="text" class="form-control"
-                         sqp-input readonly>
+                  <!--<input id="service-quantity-picker" type="text" class="form-control"-->
+                         <!--sqp-input readonly>-->
 
-                  <input type="hidden" invalid-when="!newService.timeBlock || newService.timeBlock <= 0"
-                         name="timeBlock" ng-model="newService.timeBlock" hard-reset-required="true"/>
+                  <!--<input type="hidden" invalid-when="!newService.timeBlock || newService.timeBlock <= 0"-->
+                         <!--name="timeBlock" ng-model="newService.timeBlock" hard-reset-required="true"/>-->
 
-                </div>
+                <!--</div>-->
 
                 <div class="btn btn-success pull-right" style="margin-top: 19px;"
                      custom-disabled="{{ newServiceForm.$invalid }}"

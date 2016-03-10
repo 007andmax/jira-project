@@ -1859,7 +1859,8 @@ Devices tab
   left: -56px;
 }
 .qt-default-services>li>.col-1{
-  width: calc(100% - 319px);
+  width: calc(100% - 202px);
+  /*width: calc(100% - 319px); TODO hide timeAllotment*/
 }
 .qt-default-services>li>.col-2{
   width: 133px;
@@ -1930,7 +1931,8 @@ Devices tab
 }
 .service-form-wrapper .col-1{
   float: left;
-  width: calc(100% - 300px);
+  width: calc(100% - 127px);
+  /*width: calc(100% - 300px); TODO hide timeAllotment*/
   padding-right: 5px;
 }
 .service-form-wrapper .col-2{
@@ -2020,7 +2022,8 @@ Devices tab
   display: none !important;
 }
 .qt-services-list>li>.col-1{
-  width: calc(100% - 399px);
+  width: calc(100% - 277px);
+  /*width: calc(100% - 399px); TODO hide timeAllotment*/
 }
 .qt-services-list>li>.col-5{
   width: 80px;

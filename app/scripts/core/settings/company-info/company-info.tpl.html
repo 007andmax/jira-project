@@ -53,7 +53,7 @@
                 <label class="control-label"
                        ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
                   <!--|| isShowingErrors(basicInfoForm, 'techDomainName')-->
-                  Email Inbox (please forward your email to this address)
+                  Forward your email to:
                 </label>
 
                 <div ng-messages="basicInfoForm.supportMailBox.$error"
@@ -73,10 +73,10 @@
                 <!--<label class="control-label" ng-message="unique">This Domain name already occupied.</label>-->
                 <!--</div>-->
 
-                <input class="form-control center-align" type="text"
-                       ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"
-                       ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur
-                       is-uniq-validation validation-func="validateSuppEmailName"/>
+                <input class="form-control" type="text" readonly/>
+                <!--ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"-->
+                <!--ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur-->
+                <!--is-uniq-validation validation-func="validateSuppEmailName"-->
                 <!--ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"-->
 
                 <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
@@ -86,7 +86,7 @@
                 <!--is-uniq-validation validation-func="validateCompanyDomain"-->
                 <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
 
-                <span class="email-addon">@{{ currentHost }}</span>
+                <span class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHost }}</span>
 
               </div>
 
@@ -98,7 +98,7 @@
                    ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
 
                 <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  Support Email address
+                  Support Email address (what you want your customers to see)
                 </label>
 
                 <div ng-messages="basicInfoForm.businessEmail.$error"
@@ -118,7 +118,7 @@
                 <label class="control-label">Company URL</label>
 
                 <input class="form-control" type="text" readonly>
-                <span class="company-url-addon" style="">
+                <span class="company-url-addon">
                   {{ editCompany.name + '.' + currentHost }}
                 </span>
               </div>
@@ -338,7 +338,7 @@
     <div class="default-services-header">
 
       <h3>Services Info
-        <span class="text-muted" ng-show="services && services.length > 0">{{ services.length }}</span>
+        <!--<span class="text-muted" ng-show="services && services.length > 0">{{ services.length }}</span>-->
       </h3>
 
       <ul class="qt-list" style="width: 500px"
@@ -347,7 +347,7 @@
         <li class="list-heading" ng-show="services.length > 0">
           <div class="col-1">SERVICE NAME</div>
           <div class="col-2">PER HOUR</div>
-          <div class="col-3">TIME ALLOTMENT</div>
+          <!--<div class="col-3">TIME ALLOTMENT</div> TODO hide timeAllotment-->
           <div class="col-4">&nbsp;</div>
         </li>
 
@@ -372,9 +372,9 @@
               {{ service.rate | currency: '$': 2 }}
             </div>
 
-            <div class="col-3">
-              {{ service.timeBlock | timeFilter }}
-            </div>
+            <!--<div class="col-3 hide"> TODO hide timeAllotment-->
+              <!--{{ service.timeBlock | timeFilter }}-->
+            <!--</div>-->
 
             <div class="col-4">
 
