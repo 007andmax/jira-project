@@ -82,7 +82,7 @@
 
             for (var i = 0; i < $scope.agents.length; i++) {
               if ($scope.agents[i].id === $scope.masterAgentId) {
-                DevicesService.getLastScanDevices($scope.companyId, $scope.agents[i].agentId, function (resp) {
+                DevicesService.getLastScanDevices($scope, $scope.companyId, $scope.agents[i].agentId, function (resp) {
                   $scope.scanDevices = resp;
                 });
                 return;
@@ -170,6 +170,14 @@
             $scope.orderDevicesBy = option;
           }
         };
+
+        $scope.$watch(function(){
+          if($scope.scanDevices && $scope.scanDevices.networkScan){
+            return $scope.scanDevices.networkScan.netScanStatus;
+          }
+        }, function(val){
+          $scope.isScanDevicesLoad = val !== 'finished';
+      })
 
       }]);
 
