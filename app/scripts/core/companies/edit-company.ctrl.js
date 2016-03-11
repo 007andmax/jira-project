@@ -27,10 +27,12 @@
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
             $timeout(function () {
-              for (var i = 0; i < $scope.servicesData.default.length; i++) {
-                var service = angular.copy($scope.servicesData.default[i]);
-                $scope.editCompany.services.push(service);
-                $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+              if ($scope.servicesData && $scope.servicesData.default) {
+                for (var i = 0; i < $scope.servicesData.default.length; i++) {
+                  var service = angular.copy($scope.servicesData.default[i]);
+                  $scope.editCompany.services.push(service);
+                  $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+                }
               }
             }, 0)
           }
@@ -114,7 +116,7 @@
           TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
             $scope.techCompanyTax = angular.copy(resp);
 
-            if($scope.editCompany.taxRates){
+            if ($scope.editCompany.taxRates) {
               return;
             }
 
@@ -433,8 +435,8 @@
         };
 
         $scope.deleteTaxRate = function (taxCode) {
-          for(var i = 0; i < $scope.editCompany.taxRates.length; i++){
-            if($scope.editCompany.taxRates[i].code.toLowerCase() === taxCode.toLowerCase()){
+          for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
+            if ($scope.editCompany.taxRates[i].code.toLowerCase() === taxCode.toLowerCase()) {
               $scope.editCompany.taxRates.splice(i, 1);
               $scope.selectedTax[taxCode] = false;
               return;

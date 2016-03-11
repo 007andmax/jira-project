@@ -24,6 +24,10 @@
         };
 
         $scope.usersFilter = function (value) {
+          if (value.isDefault) {
+            return false
+          }
+
           if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
             return (value.firstName + ' ' + value.lastName).toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
           }
@@ -100,7 +104,7 @@
           }
 
           subscription[nameSubscription] = !subscription[nameSubscription];
-          SubscriptionsService.saveUserSubscription(subscription, function(){
+          SubscriptionsService.saveUserSubscription(subscription, function () {
             $scope.disabledCheckbox = false;
           });
         };
