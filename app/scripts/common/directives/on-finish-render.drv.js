@@ -11,20 +11,7 @@
             $timeout(function () {
               scope.$apply(attr.onFinishRender);
             });
-          } else if ((scope.$first === true) && isOneInArray()) {
-            $timeout(function () {
-              scope.$apply(attr.onFinishRender);
-            });
           }
-
-          function isOneInArray() {
-            if (attr.ofrIsOneElement) {
-              var arr = scope.$eval(attr.ofrIsOneElement);
-              var arrLength = arr && arr.length - 1;/*unassigned user*/
-              return arrLength === 1;
-            }
-          }
-
         }
       };
     }]);
