@@ -6,13 +6,17 @@
     ['$timeout', function ($timeout) {
       return {
         restrict: 'A',
-        scope:{},
+        scope: {},
         link: function (scope) {
 
-          scope.$on('scrollToErrorFild', function(){
+          scope.$on('scrollToErrorFild', function () {
 
-            $timeout(function(){
-              $('html, body').animate({ scrollTop: $(".has-error").offset().top - 200 }, 500);
+            $timeout(function () {
+              var errors = $(".has-error");
+              if (errors.length === 0) {
+                throw "Can't find error fields";
+              }
+              $('html, body').animate({scrollTop: errors.offset().top - 200}, 500);
             }, 0)
 
           });

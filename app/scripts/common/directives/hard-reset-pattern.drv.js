@@ -27,7 +27,8 @@
 
           if (isPhoneNumber) {
             if (newValue && secondPattern.test(newValue)) {
-              value = newValue.replace(pattern, "($1) $2-$3");
+              if (pattern.test(newValue)) value = newValue.replace(pattern, "($1) $2-$3");
+              else value = newValue;
               ctrl.$setViewValue(value);
               element.val(value);
             } else if(newValue) {

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.myProfileCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'UsersService',
-      function ($scope, $state, $stateParams, $location, UsersService) {
+    ['$scope', '$state', '$stateParams', '$location', 'UsersService', '$timeout',
+      function ($scope, $state, $stateParams, $location, UsersService, $timeout) {
 
         $scope.saveMethods = [];
         $scope.formNames = [
@@ -134,7 +134,10 @@
           for (var index in $scope.formNames) {
             var form = $scope.profileInfoForm[$scope.formNames[index]];
             if (form.$invalid) {
-              $scope.$broadcast('scrollToErrorFild');
+              form.addressForm && form.addressForm.address && form.addressForm.address.$setDirty();
+              $timeout(function () {
+                $scope.$broadcast('scrollToErrorFild');
+              });
               return;
             }
           }
