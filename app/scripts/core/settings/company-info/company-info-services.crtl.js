@@ -43,24 +43,26 @@
 
         $scope.saveMethods.push(function () {
           //if (!$scope.isServicesChange()) {
-            //$scope.disabledSaveButton = true;
-            //services = angular.copy($scope.services);
+          //$scope.disabledSaveButton = true;
+          //services = angular.copy($scope.services);
 
-            return {
-              services: $scope.services,
-              callback: function (form) {
-                initDefaultServices();
-                $rootScope.$broadcast('cancelEditForm');
+          return {
+            services: $scope.services,
+            callback: function (form) {
+              initDefaultServices();
+              $rootScope.$broadcast('cancelEditForm');
+              if (form && form.$setPristine) {
                 form.$setPristine();
-              },
-              formName: 'editServiceForm'
-            };
+              }
+            },
+            formName: 'editServiceForm'
+          };
 
-            //ServicesService.saveList($scope.services, $scope.companyForSettingPage.id, function () {
-            //  initDefaultServices();
-            //  $scope.disabledSaveButton = false;
-            //  $rootScope.$broadcast('cancelEditForm');
-            //})
+          //ServicesService.saveList($scope.services, $scope.companyForSettingPage.id, function () {
+          //  initDefaultServices();
+          //  $scope.disabledSaveButton = false;
+          //  $rootScope.$broadcast('cancelEditForm');
+          //})
           //} else {
           //  $scope.triedToSaveService = true;
           //}
