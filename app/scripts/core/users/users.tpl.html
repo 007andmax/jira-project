@@ -5,6 +5,7 @@
   <div class="users-list clearfix" count-nodes-in-line="[userNode]" ng-model="usersInLine">
     <div ng-repeat="user in (shownUsers = (users | filter : usersFilter | orderBy: getUserName))"
          ng-controller="quicktech.core.users.userCtrl" on-finish-render="countNodes()"
+         ofr-is-one-element="{{ ((shownUsers = (users | filter : usersFilter | orderBy: getUserName))) }}"
          ng-if="!user.isDefault">
 
       <div class="user-card" userNode ng-show="editUser.id != user.id">
