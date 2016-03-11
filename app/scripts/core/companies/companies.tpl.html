@@ -1,4 +1,4 @@
-<div class="company-profile-content companies-list"
+<div class="company-profile-content companies-list clearfix"
      ng-class="{'not-charts-companies-page': !isChartsAccess()}">
 
   <div collapse="isCollapsed" class="charts-n-graphs-container" ng-if="isChartsAccess()">
@@ -100,37 +100,37 @@
     <i class="icn-sm icn-expand pull-right"></i>
   </div>
 
-  <div class="company-card" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
+  <div class="company-card clearfix" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
        ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()"
        ng-class="{'hide': company.isDefault}">
 
     <div class="company-cover-area"
-         ng-style="{'background-image':'url(' + getCompanyCoverUrl(company) + ')', 'background-size': 'cover'}">
+         ng-style="{'background':'url(' + getCompanyCoverUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
 
-      <div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"
-           ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
-        <i class="icn-sm icn-archive-company"></i>
-      </div>
-
+      <!--<div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"-->
+           <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"-->
+           <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">-->
+        <!--<i class="icn-sm icn-archive-company"></i>-->
+      <!--</div>-->
+      <ul class="rating rating-5 clearfix">
+        <li class="icn-sm icn-star-full star-1"></li>
+        <li class="icn-sm icn-star-full star-2"></li>
+        <li class="icn-sm icn-star-full star-3"></li>
+        <li class="icn-sm icn-star-half star-4"></li>
+        <li class="icn-sm icn-star-empty star-5"></li>
+      </ul>
       <div class="name-rating">
 
         <div class="company-name">{{ company.name }}</div>
 
-        <ul class="rating rating-5">
-          <li class="icn-sm icn-star-full star-1"></li>
-          <li class="icn-sm icn-star-full star-2"></li>
-          <li class="icn-sm icn-star-full star-3"></li>
-          <li class="icn-sm icn-star-half star-4"></li>
-          <li class="icn-sm icn-star-empty star-5"></li>
-        </ul>
 
-        <i class="dot-sep"></i>
 
-        <a href="javascript:void(0)" class="hit-area ha-14-16" stop-propagation="click"
-           custom-popover custom-popover-content="{{ company.description }}"
-           custom-popover-placement="bottom" custom-popover-first-left="25">
-          <i class="icn-sm icn-description-white"></i></a>
+        <!--<i class="dot-sep"></i>-->
+
+        <!--<a href="javascript:void(0)" class="hit-area ha-14-16" stop-propagation="click"-->
+           <!--custom-popover custom-popover-content="{{ company.description }}"-->
+           <!--custom-popover-placement="bottom" custom-popover-first-left="25">-->
+          <!--<i class="icn-sm icn-description-white companies-new"></i></a>-->
 
         <!--<div class="dropdown pull-left">-->
 
@@ -163,22 +163,32 @@
         <!--</ul>-->
         <!--</div>-->
 
-        <a href="javascript:void(0)" class="hit-area has-tooltip" stop-propagation="click"
-           ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN' && currentUser.role !== 'ADMIN'"
-           ui-sref="editCompany( { companyId: company.id } )"
-           tooltip-placement="top" tooltip="Edit Company info">
-          <i class="icn-md icn-edit-tag"></i>
-        </a>
+        <!--<a href="javascript:void(0)" class="hit-area has-tooltip" stop-propagation="click"-->
+           <!--ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN' && currentUser.role !== 'ADMIN'"-->
+           <!--ui-sref="editCompany( { companyId: company.id } )"-->
+           <!--tooltip-placement="top" tooltip="Edit Company info">-->
+          <!--<i class="icn-md icn-edit-tag companies-new"></i>-->
+        <!--</a>-->
 
       </div>
     </div>
 
     <div class="company-primary-contact">
+      <div class="user-location"><i class="icn-sm icn-sb-location"></i>
+        <span>
+          {{ (primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' : '') +
+          primaryAddress.address +
+          (primaryAddress.postalCode ? ', ' + primaryAddress.postalCode : '') }}
+        </span>
+      </div>
+      <div class="user-contact-no">
+        <i class="icn-sm {{ getPhoneNumberCssClass(primaryPhone) }}"></i>{{ primaryPhone.number }}
+      </div>
       <div class="user-info">
 
-        <div class="avatar">
-          <img ng-src="{{ getUserAvatarUrl(primaryContact) }}" alt="..." class="img-circle avatar-50">
-        </div>
+        <!--<div class="avatar">-->
+          <!--<img ng-src="{{ getUserAvatarUrl(primaryContact) }}" alt="..." class="img-circle avatar-50">-->
+        <!--</div>-->
 
         <div class="name-designation">
 
@@ -188,39 +198,33 @@
 
           <span class="label label-light">{{ primaryContact.designation }}</span>
 
-          <div class="icn-sm persistent-tooltip {{ getUserSubscribeClass() }}"
-               tooltip-append-to-body="true"
-               tooltip-placement="top" tooltip="{{ getUserSubscribeTooltip() }}"></div>
+          <!--<div class="icn-sm persistent-tooltip {{ getUserSubscribeClass() }}"-->
+               <!--tooltip-append-to-body="true"-->
+               <!--tooltip-placement="top" tooltip="{{ getUserSubscribeTooltip() }}"></div>-->
         </div>
       </div>
 
-      <div class="user-contact-no">
-        <i class="icn-sm {{ getPhoneNumberCssClass(primaryPhone) }}"></i>{{ primaryPhone.number }}
-      </div>
 
-      <div class="user-location"><i class="icn-sm icn-sb-location"></i>
-        <span>
-          {{ (primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' : '') +
-          primaryAddress.address +
-          (primaryAddress.postalCode ? ', ' + primaryAddress.postalCode : '') }}
-        </span>
-      </div>
 
-      <div class="user-actions" stop-propagation="clack">
+      <!--<div class="user-actions" stop-propagation="clack">-->
 
-        <div class="btn btn-info has-tooltip"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">
-          <i class="icn-sm icn-email-white"></i>
-        </div>
+        <!--<div class="btn btn-info has-tooltip"-->
+             <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">-->
+          <!--<i class="icn-sm icn-email-white"></i>-->
+        <!--</div>-->
 
-        <div class="btn btn-default has-tooltip"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Chat">
-          <i class="icn-sm icn-user-chat"></i>
-        </div>
+        <!--<div class="btn btn-default has-tooltip"-->
+             <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Chat">-->
+          <!--<i class="icn-sm icn-user-chat"></i>-->
+        <!--</div>-->
 
-      </div>
+      <!--</div>-->
     </div>
-
+    <ul class="company-numbers clearfix">
+      <li><span>Tickets</span>48</li>
+      <li><span>Users</span>18</li>
+      <li><span>Devices</span>19</li>
+    </ul>
   </div>
 
 </div>

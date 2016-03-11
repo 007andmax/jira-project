@@ -802,7 +802,9 @@ li:hover > a > .icn-add-new, li.active > a > .icn-add-new {
 .icn-edit-tag:hover, .icn-edit-tag:active {
   background-position: -1018px 2px;
 }
-
+.icn-edit-tag.companies-new:hover, .icn-edit-tag:active{
+  background-position: -1040px 2px;
+}
 /*.icn-label-delete, a:focus > .icn-label-delete {*/
 .icn-label-delete {
   background-position: -1614px 0;
@@ -1593,7 +1595,9 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 :hover > .icn-description-white, :active > .icn-description-white, :focus:hover > .icn-description-white, :focus:active > .icn-description-white, :hover:active > .icn-description-white, .active > .icn-description-white, .open > .icn-description-white, .open .icn-description-white {
   background-position: -820px -206px;
 }
-
+:hover > .icn-description-white.companies-new, :active > .icn-description-white, :focus:hover > .icn-description-white, :focus:active > .icn-description-white, :hover:active > .icn-description-white, .active > .icn-description-white, .open > .icn-description-white, .open .icn-description-white{
+  background-position: -780px -206px;
+}
 .icn-add-services{
   background-position: -64px -206px;
 }

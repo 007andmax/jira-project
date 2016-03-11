@@ -4,7 +4,10 @@
   margin-bottom: 30px;
   min-width: 300px;
   width: calc(100% / 2 - 30px);
-  height: 418px;
+  position: relative;
+  height: 290px;
+  border: 1px solid #e7ecf2;
+  padding: 15px;
   cursor: pointer;
   -webkit-transition: 0.3s ease-out box-shadow;
   -o-transition: 0.3s ease-out box-shadow;
@@ -67,18 +70,18 @@
   box-shadow: 0 4px 25px 0 rgba(10,45,89,.1);
 }
 .company-cover-area{
-  float: left;
-  width: 100%;
+  float: right;
+  width: 50%;
   height: 163px;
   background-color: rgba(21,30,41,.7);
-  position: relative;
   padding: 30px;
+  margin-top: 25px;
 }
 .company-cover-area:after{
   content: '';
   position: absolute;
   top: 0;bottom: 0;left: 0;right: 0;
-  background-color: rgba(21,30,41,.7);
+  background-color: rgba(21,30,41,0);
   pointer-events: none;
   z-index: 0;
 }
@@ -90,18 +93,20 @@
   z-index: 1;
 }
 .btn-archive{
-  background-color: rgba(21,30,41,.7);
+  background-color: rgba(21,30,41,0);
   border: none;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 50px;
+  right: 50px;
   z-index: 1;
 }
 .company-cover-area .company-name{
   font-size: 17px;
   line-height: 24px;
-  color: #fff;
-  margin-bottom: 10px;
+  color: #000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 @-moz-document url-prefix() {
   .company-cover-area .company-name{
@@ -123,13 +128,15 @@
 }
 .company-primary-contact{
   float: left;
-  width: 100%;
-  padding: 30px;
-  border: 1px solid #e7ecf2;
+  width: 50%;
+  padding: 25px 0;
+  /*border: 1px solid #e7ecf2;*/
+  border: 1px solid #fff;
   border-top: none;
   -webkit-transition: 0.3s ease-out border;
   -o-transition: 0.3s ease-out border;
   transition: 0.3s ease-out border;
+  /*margin-top: 35px;*/
 }
 .companies-list .company-card:hover .company-primary-contact{
   border-color: #fff;
@@ -138,6 +145,7 @@
   float: left;
   width: 100%;
   margin-bottom: 15px;
+  margin-top: 6px;
 }
 .company-primary-contact .user-info .avatar{
   float: left;
@@ -147,16 +155,33 @@
   float: left;
   width: calc(100% - 60px);
   overflow: hidden;
+  margin-left: 22px;
 }
 .company-primary-contact .user-info .name-designation h4{
   font-size: 14px;
   font-weight: bold;
-  margin: 0 0 5px;
+  margin: 0 0 15px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
+}
+.company-numbers{
+  display: inline-block;
+  width: 100%;
+  padding-left: 0;
+}
+.company-numbers li{
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+  font-weight: bold;
+}
+.company-numbers li span{
+  display: block;
+  color: #94a4b8;
+  font-weight: normal;
 }
 @-moz-document url-prefix() {
   .company-primary-contact .user-info .name-designation h4{
@@ -181,8 +206,9 @@
 .company-primary-contact .user-info .name-designation .label-light{
   background-color: #e7ecf2;
   color: #94a4b8;
+  width: 90px;
   font-weight: 400;
-  max-width: calc(100% - 46px);
+  max-width: calc(100% - 20px);
   text-transform: uppercase;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
@@ -218,7 +244,7 @@
   width: 100%;
   color: #94a4b8;
   min-height: 40px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 .company-primary-contact .user-location .icn-sm{
   float: left;
@@ -228,6 +254,7 @@
 .company-primary-contact .user-location span{
   float: right;
   width: calc(100% - 22px);
+  line-height: 1.5;
 }
 .company-primary-contact .user-actions{
   float: left;

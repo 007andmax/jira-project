@@ -105,9 +105,18 @@
 }
 .name-rating{
   position: absolute;
-  bottom: 30px;
-  left: 31px;
-  right: 78px;
+  bottom: 88%;
+  left: 0;
+  right: 0;
+  display: inline-block;
+  color: #000;
+  top: 8px;
+  width: 70%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: left;
+  margin-left: 20px;
 }
 .vendor-cover-area .btn{
   background-color: rgba(21,30,41,.7);
