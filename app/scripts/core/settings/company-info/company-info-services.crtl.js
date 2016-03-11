@@ -42,7 +42,7 @@
         });
 
         $scope.saveMethods.push(function () {
-          if (!$scope.isServicesChange()) {
+          //if (!$scope.isServicesChange()) {
             //$scope.disabledSaveButton = true;
             //services = angular.copy($scope.services);
 
@@ -61,9 +61,9 @@
             //  $scope.disabledSaveButton = false;
             //  $rootScope.$broadcast('cancelEditForm');
             //})
-          } else {
-            $scope.triedToSaveService = true;
-          }
+          //} else {
+          //  $scope.triedToSaveService = true;
+          //}
         });
 
       }]);

@@ -7,6 +7,14 @@
       function ($scope, $state, $stateParams, $location, UsersService) {
 
         $scope.saveMethods = [];
+        $scope.formNames = [
+          'basicInfoForm',
+          'aboutMeForm',
+          'passwordForm',
+          'phoneNumbersForm',
+          'miscInfoForm',
+          'emailNotificationsForm'
+        ];
 
         $scope.aboutMe = $scope.currentUser.status;
         $scope.password = {
@@ -116,35 +124,42 @@
         });
 
         $scope.saveProfileSettings = function () {
-          if ($scope.profileInfoForm.$invalid) $scope.$broadcast('scrollToErrorFild');
-          else {
-            $scope.savingProfileSettings = true;
 
-            var settings = {},
-              callbacks = [],
-              formNames = [];
-
-            $scope.saveMethods.forEach(function (func) {
-              var obj = func(),
-                key;
-
-              if (obj) {
-                key = Object.keys(obj)[0];
-                if (obj.callback) {
-                  callbacks.push(obj.callback);
-                  formNames.push(obj.formName);
-                }
-                settings[key] = obj[key];
-              }
-            });
-
-            UsersService.saveUserSettingsDto(settings, function (resp) {
-              for (var index in callbacks) {
-                callbacks[index]($scope.profileInfoForm[formNames[index]], resp);
-              }
-              $scope.savingProfileSettings = false;
-            });
+          for (var index in $scope.formNames) {
+            var form = $scope.profileInfoForm[$scope.formNames[index]];
+            if (form.$invalid) {
+              $scope.$broadcast('scrollToErrorFild');
+              return;
+            }
           }
+
+          $scope.savingProfileSettings = true;
+
+          var settings = {},
+            callbacks = [],
+            formNames = [];
+
+          $scope.saveMethods.forEach(function (func) {
+            var obj = func(),
+              key;
+
+            if (obj) {
+              key = Object.keys(obj)[0];
+              if (obj.callback) {
+                callbacks.push(obj.callback);
+                formNames.push(obj.formName);
+              }
+              settings[key] = obj[key];
+            }
+          });
+
+          UsersService.saveUserSettingsDto(settings, function (resp) {
+            for (var index in callbacks) {
+              callbacks[index]($scope.profileInfoForm[formNames[index]], resp);
+            }
+            $scope.savingProfileSettings = false;
+          });
+
         };
 
       }]);

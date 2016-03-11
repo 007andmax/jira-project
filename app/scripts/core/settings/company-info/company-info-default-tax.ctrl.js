@@ -71,13 +71,7 @@
           }
 
           return {
-            taxRates: $scope.taxRates,
-            callback: function (form, resp) {
-              //  taxRatesCopy = angular.copy(resp);
-              //  $scope.taxRates = angular.copy(resp);
-              //  $scope.isTaxRatesChanges = false;
-            },
-            formName: 'companyInfoDefaultTax'
+            taxRates: $scope.taxRates
           };
 
           //TaxRatesService.saveList($scope.taxRates, function (resp) {

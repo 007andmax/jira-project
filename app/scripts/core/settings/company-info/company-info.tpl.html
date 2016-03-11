@@ -479,7 +479,8 @@
 
           <div class="helping-additional-class" ng-class="{'hide': !isEditing}">
 
-            <div class="col-1" ng-class="{'has-error': isShowingErrors(companyInfoEditTax, 'currentlyTaxType')}">
+            <div class="col-1"
+                 ng-class="{'has-error': isShowingErrors(companyInfoEditTax, 'currentlyTaxType')}">
 
               <p ng-style="{ opacity: isShowingErrors(companyInfoEditTax, 'currentlyTaxType') ? '0' : '1' }">Edit Tax
                 Rate</p>
@@ -505,7 +506,7 @@
                      ng-maxlength="30" placeholder="Tax Type">
             </div>
 
-            <div class="col-2" ng-class="{'has-error': isShowingErrors(companyInfoEditTax, 'currentlyTaxRate')}">
+            <div class="col-1" ng-class="{'has-error': isShowingErrors(companyInfoEditTax, 'currentlyTaxRate')}">
               <p>&nbsp;</p>
 
               <div ng-messages="companyInfoEditTax.currentlyTaxRate.$error"
@@ -516,20 +517,21 @@
                 </label>
               </div>
 
-              <input type="text" class="form-control" placeholder="Rate" style="width: 147px;"
+              <input type="text" class="form-control" placeholder="Rate"
                      ng-model="tax.rate" name="currentlyTaxRate" hard-reset-required="true"
                      hard-reset-pattern="taxRateNumberPattern">
 
-              <div class="btn btn-primary has-tooltip" ng-click="cancelTax(companyInfoEditTax)" style="margin: 0 8px;"
-                   tooltip-placement="top" tooltip="cancel">
-                <i class="icn-sm icn-remove-token"></i>
-              </div>
+            </div>
 
-              <div class="btn btn-success pull-right" ng-click="saveTax()"
+            <div style="padding-top: 85px;">
+              <div class="btn btn-lg btn-info pull-right"
+                   ng-click="saveTax()"
                    custom-disabled="{{ companyInfoEditTax.$invalid || companyInfoEditTax.$pristine }}">
-                <i class="icn-sm small-icn-tick"></i>
+                Save
               </div>
 
+              <div class="btn btn-lg btn-primary pull-right" style="margin-right: 10px;"
+                   ng-click="cancelTax(companyInfoEditTax)">Cancel</div>
             </div>
 
           </div>
