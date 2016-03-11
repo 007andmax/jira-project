@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService', 'AddressesService', 'EmailSettingsService', 'ConstantsService',
-      function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService) {
+    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService', 'AddressesService', 'EmailSettingsService', 'ConstantsService', '$timeout',
+      function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService, $timeout) {
 
         $scope.saveMethods = [];
         $scope.formNames = ['basicInfoForm', 'addressesWrapForm'];
@@ -60,7 +60,11 @@
           for (var index in $scope.formNames) {
             var form = $scope.companyInfoForm[$scope.formNames[index]];
             if (form.$invalid) {
-              $scope.$broadcast('scrollToErrorFild');
+              form.addressForm && form.addressForm.address && form.addressForm.address.$setDirty();
+              form.companyTimezone && form.companyTimezone.$setDirty();
+              $timeout(function () {
+                $scope.$broadcast('scrollToErrorFild');
+              }, 50);
               return;
             }
           }
