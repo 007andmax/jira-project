@@ -1,4 +1,4 @@
-<div class="settings-main-wrapper">
+<div class="settings-main-wrapper" ng-form="profileInfoForm" scroll-to-error-fild>
 
   <div class="help-text">
     Manage your basic information and general account settings.
@@ -11,7 +11,8 @@
     <div class="pull-right">
       <div class="form-row clearfix">
         <div class="form-group no-label full-width">
-          <button class="btn btn-lg btn-info pull-right">
+          <button class="btn btn-lg btn-info pull-right" ng-click="saveProfileSettings()"
+                  custom-disabled="{{ savingProfileSettings }}">
             Save
           </button>
         </div>

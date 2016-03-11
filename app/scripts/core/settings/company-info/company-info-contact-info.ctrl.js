@@ -49,7 +49,7 @@
           location.isPrimary = true;
         };
 
-        $scope.saveContactInfo = function(form){
+        $scope.saveMethods.push(function(form){
 
           var copyAddress = angular.copy($scope.companyForSettingPage.addresses);
 
@@ -61,12 +61,20 @@
 
           copyAddress[0].isPrimary = true;
 
-          $scope.savingContactInProcess = true;
-          CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function(){
-            form.$setPristine();
-            $scope.savingContactInProcess = false;
-          });
-        };
+          return {
+            addresses: copyAddress,
+            callback: function (form) {
+              form.$setPristine();
+            },
+            formName: 'addressesWrapForm'
+          };
+
+          //$scope.savingContactInProcess = true;
+          //CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function(){
+          //  form.$setPristine();
+          //  $scope.savingContactInProcess = false;
+          //});
+        });
 
         if($scope.companyForSettingPage.addresses.length === 0){
           $scope.companyForSettingPage.addresses.push({

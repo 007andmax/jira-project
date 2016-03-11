@@ -19,22 +19,30 @@
         $scope.patternShiftTiming = /^\s*([01]?\d|2[0-3]):?([0-5]\d)( +| to )([01]?\d|2[0-3]):?([0-5]\d)\s*$/;
         $scope.pageToOpen = $scope.userProfile.startPage;
 
-        $scope.saveMiscInfo = function (form) {
-          if (form.$valid) {
+        $scope.saveMethods.push(function (form) {
+          //if (form.$valid) {
 
-            $scope.savingInProcess = true;
+            //$scope.savingInProcess = true;
 
             var miscInfo = {
               timeRange: getMinFromTime($scope.shiftTiming),
               startPage: $scope.pageToOpen
             };
 
-            UsersService.saveForUserProfile(miscInfo, 'misc', function () {
-              $scope.savingInProcess = false;
+          return {
+            misc: miscInfo,
+            callback: function (form) {
               form.$setPristine();
-            })
-          }
-        };
+            },
+            formName: 'miscInfoForm'
+          };
+
+            //UsersService.saveForUserProfile(miscInfo, 'misc', function () {
+            //  $scope.savingInProcess = false;
+            //  form.$setPristine();
+            //})
+          //}
+        });
 
         $scope.validShiftTiming = function (form) {
           if ($scope.shiftTiming) {

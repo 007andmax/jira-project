@@ -29,36 +29,44 @@
           });
         };
 
-        $scope.saveBasicInfo = function (form) {
+        $scope.saveMethods.push(function (form) {
 
-          if (form.$valid) {
+          //if (form.$valid) {
 
-            $scope.savingInProcess = true;
+          //$scope.savingInProcess = true;
 
-            var userObjToSend = {
-              avatar: $scope.editUser.avatar,
-              firstName: $scope.editUser.firstName,
-              lastName: $scope.editUser.lastName,
-              designation: $scope.editUser.designation,
-              primaryEmail: $scope.editUser.primaryEmail,
-              signature: {
-                content: $scope.userProfile.signature ? $scope.userProfile.signature.content : undefined
-              }
-            };
-
-            if (($scope.editUser.secondaryEmail != undefined) && ($scope.editUser.secondaryEmail.trim().length < 1)) {
-              userObjToSend.secondaryEmail = undefined;
-            } else {
-              userObjToSend.secondaryEmail = $scope.editUser.secondaryEmail;
+          var userObjToSend = {
+            avatar: $scope.editUser.avatar,
+            firstName: $scope.editUser.firstName,
+            lastName: $scope.editUser.lastName,
+            designation: $scope.editUser.designation,
+            primaryEmail: $scope.editUser.primaryEmail,
+            signature: {
+              content: $scope.userProfile.signature ? $scope.userProfile.signature.content : undefined
             }
+          };
 
-            UsersService.saveForUserProfile(userObjToSend, 'basic', function () {
-              $scope.savingInProcess = false;
-              form.$setPristine();
-            })
+          if (($scope.editUser.secondaryEmail != undefined) && ($scope.editUser.secondaryEmail.trim().length < 1)) {
+            userObjToSend.secondaryEmail = undefined;
+          } else {
+            userObjToSend.secondaryEmail = $scope.editUser.secondaryEmail;
           }
 
-        }
+          return {
+            basic: userObjToSend,
+            callback: function (form) {
+              form.$setPristine();
+            },
+            formName: 'basicInfoForm'
+          };
+
+          //UsersService.saveForUserProfile(userObjToSend, 'basic', function () {
+          //  $scope.savingInProcess = false;
+          //  form.$setPristine();
+          //})
+          //}
+
+        });
 
       }]);
 

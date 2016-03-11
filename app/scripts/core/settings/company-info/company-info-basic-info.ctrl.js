@@ -14,24 +14,30 @@
           });
         };
 
-        $scope.saveBasicInfo = function (form) {
+        $scope.saveMethods.push(function (form) {
 
-          $scope.savingBasicInfoInProcess = true;
+          //$scope.savingBasicInfoInProcess = true;
 
-          var basicInfo = {
-            logo: $scope.editCompany.logo,
-            name: $scope.editCompany.name,
-            supportMailBox: $scope.companyForSettingPage.supportMailBox,
-            //techDomain: $scope.techDomainName,
-            businessEmail: $scope.companyForSettingPage.businessEmail,
-            description: $scope.editCompany.description
+          return {
+            basic: {
+              logo: $scope.editCompany.logo,
+              name: $scope.editCompany.name,
+              supportMailBox: $scope.companyForSettingPage.supportMailBox,
+              //techDomain: $scope.techDomainName,
+              businessEmail: $scope.companyForSettingPage.businessEmail,
+              description: $scope.editCompany.description
+            },
+            callback: function (form) {
+              form.$setPristine();
+            },
+            formName: 'basicInfoForm'
           };
 
-          CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function () {
-            $scope.savingBasicInfoInProcess = false;
-            form.$setPristine();
-          })
-        };
+          //CompaniesService.saveForCompanyProfile(basicInfo, 'basic', function () {
+          //  $scope.savingBasicInfoInProcess = false;
+          //  form.$setPristine();
+          //})
+        });
 
         $scope.validateCompanyDomain = function (ngModelCtrl) {
           var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {

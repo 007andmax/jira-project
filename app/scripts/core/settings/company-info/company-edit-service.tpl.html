@@ -80,7 +80,7 @@
 
     <div class="btn btn-lg btn-info pull-right"
          ng-click="saveEditService(editServiceForm)"
-         custom-disabled="{{ disabledSaveButton }}">
+         custom-disabled="{{ editServiceForm.$pristine || editServiceForm.$invalid || disabledSaveButton }}">
       {{ editService.id ? 'Save' : 'Add' }}
     </div>
 

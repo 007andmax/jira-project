@@ -41,19 +41,30 @@
           $scope.showCreateService = false;
         });
 
-        $scope.saveAllServices = function () {
+        $scope.saveMethods.push(function () {
           if (!$scope.isServicesChange()) {
-            $scope.disabledSaveButton = true;
-            services = angular.copy($scope.services);
-            ServicesService.saveList($scope.services, $scope.companyForSettingPage.id, function () {
-              initDefaultServices();
-              $scope.disabledSaveButton = false;
-              $rootScope.$broadcast('cancelEditForm');
-            })
+            //$scope.disabledSaveButton = true;
+            //services = angular.copy($scope.services);
+
+            return {
+              services: $scope.services,
+              callback: function (form) {
+                initDefaultServices();
+                $rootScope.$broadcast('cancelEditForm');
+                form.$setPristine();
+              },
+              formName: 'editServiceForm'
+            };
+
+            //ServicesService.saveList($scope.services, $scope.companyForSettingPage.id, function () {
+            //  initDefaultServices();
+            //  $scope.disabledSaveButton = false;
+            //  $rootScope.$broadcast('cancelEditForm');
+            //})
           } else {
             $scope.triedToSaveService = true;
           }
-        };
+        });
 
       }]);
 

@@ -6,6 +6,9 @@
     ['$scope', '$state', '$stateParams', '$location', 'CompaniesService', 'AddressesService', 'EmailSettingsService', 'ConstantsService',
       function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService) {
 
+        $scope.saveMethods = [];
+        $scope.formNames = ['basicInfoForm', 'addressesWrapForm'];
+
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.emailNamePattern = /^[a-z0-9]+$/i;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
@@ -50,6 +53,44 @@
           CompaniesService.saveForCompanyProfile($scope.emailNotifications, 'email', function () {
             form.$setPristine();
           })
+        };
+
+        $scope.saveCompanyInfo = function () {
+
+          for (var index in $scope.formNames) {
+            var form = $scope.companyInfoForm[$scope.formNames[index]];
+            if (form.$invalid) {
+              $scope.$broadcast('scrollToErrorFild');
+              return;
+            }
+          }
+
+          $scope.savingCompanyInfo = true;
+
+          var settings = {},
+            callbacks = [],
+            formNames = [];
+
+          $scope.saveMethods.forEach(function (func) {
+            var obj = func(),
+              key;
+
+            if (obj) {
+              key = Object.keys(obj)[0];
+              if (obj.callback) {
+                callbacks.push(obj.callback);
+                formNames.push(obj.formName);
+              }
+              settings[key] = obj[key];
+            }
+          });
+
+          CompaniesService.saveCompanySettingsDto(settings, function (resp) {
+            for (var index in callbacks) {
+              callbacks[index]($scope.companyInfoForm[formNames[index]], resp);
+            }
+            $scope.savingCompanyInfo = false;
+          });
         };
 
       }]);

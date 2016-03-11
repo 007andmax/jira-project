@@ -62,22 +62,32 @@
           }
         };
 
-        $scope.saveAllTax = function () {
+        $scope.saveMethods.push(function () {
 
-          $scope.savingTaxProcess = true;
+          //$scope.savingTaxProcess = true;
 
           for (var i = 0; i < $scope.taxRates.length; i++) {
             $scope.taxRates[i].company = {id: $scope.currentCompany.id};
           }
 
-          TaxRatesService.saveList($scope.taxRates, function (resp) {
-            taxRatesCopy = angular.copy(resp);
-            $scope.taxRates = angular.copy(resp);
-            $scope.savingTaxProcess = false;
-            $scope.isTaxRatesChanges = false
-          })
+          return {
+            taxRates: $scope.taxRates,
+            callback: function (form, resp) {
+              //  taxRatesCopy = angular.copy(resp);
+              //  $scope.taxRates = angular.copy(resp);
+              //  $scope.isTaxRatesChanges = false;
+            },
+            formName: 'companyInfoDefaultTax'
+          };
 
-        };
+          //TaxRatesService.saveList($scope.taxRates, function (resp) {
+          //  taxRatesCopy = angular.copy(resp);
+          //  $scope.taxRates = angular.copy(resp);
+          //  $scope.savingTaxProcess = false;
+          //  $scope.isTaxRatesChanges = false;
+          //})
+
+        });
 
         $scope.$watch('taxRates', function () {
           $scope.isTaxRatesChanges = !angular.equals(taxRatesCopy, $scope.taxRates);

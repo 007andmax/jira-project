@@ -31,9 +31,9 @@
           form.$setDirty();
         };
 
-        $scope.saveContactInfo = function (form) {
+        $scope.saveMethods.push(function (form) {
 
-          $scope.savingInProcess = true;
+          //$scope.savingInProcess = true;
 
           var copyAddress = angular.copy($scope.userProfile.address),
             phoneNumbers = copyAddress.phoneNumbers;
@@ -42,11 +42,19 @@
             phoneNumbers.splice((phoneNumbers.length - 1), 1)
           }
 
-          UsersService.saveForUserProfile(copyAddress, 'contact', function () {
-            $scope.savingInProcess = false;
-            form.$setPristine();
-          });
-        }
+          return {
+            contact: copyAddress,
+            callback: function (form) {
+              form.$setPristine();
+            },
+            formName: 'phoneNumbersForm'
+          };
+
+          //UsersService.saveForUserProfile(copyAddress, 'contact', function () {
+          //  $scope.savingInProcess = false;
+          //  form.$setPristine();
+          //});
+        });
 
       }]);
 
