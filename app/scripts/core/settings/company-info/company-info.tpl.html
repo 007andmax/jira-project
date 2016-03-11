@@ -380,7 +380,10 @@
                 <span class="control-indicator"></span>
               </label>
 
-              <div class="checkbox-caption">{{ service.name }}</div>
+              <div class="checkbox-caption"
+                   style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;width: 100%;">
+                {{ service.name }}
+              </div>
             </div>
 
             <div class="col-2">
