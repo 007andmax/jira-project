@@ -25,6 +25,12 @@
         $scope.userProfile = UsersService.getUserProfile(function (a) {
           $scope.userProfile = $scope.userProfile.staticCopy();
           $scope.loadUsertProfile = true;
+
+          if (!$scope.userProfile.address) {
+            $scope.userProfile.address = {
+              phoneNumbers: []
+            }
+          }
         });
 
         $scope.saveMethods.push(function (form) {
