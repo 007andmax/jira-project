@@ -14,7 +14,7 @@
 
           usersInLine *= 1;
 
-          var isLastInArray = (index + 1) === ($scope.shownUsers.length - 1),
+          var isLastInArray = ((index + 1) === $scope.shownUsers.length) || ($scope.shownUsers.length === 2) ,
             isLastInLine = index > 0 && !(index % usersInLine);
 
           if (isLastInLine || isLastInArray) {

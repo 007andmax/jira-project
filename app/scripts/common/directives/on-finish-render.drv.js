@@ -19,7 +19,7 @@
 
           function isOneInArray() {
             if (attr.ofrIsOneElement) {
-              var arr = JSON.parse(attr.ofrIsOneElement);
+              var arr = scope.$eval(attr.ofrIsOneElement);
               var arrLength = arr && arr.length - 1;/*unassigned user*/
               return arrLength === 1;
             }
