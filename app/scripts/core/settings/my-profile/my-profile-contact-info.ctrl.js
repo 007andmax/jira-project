@@ -38,7 +38,7 @@
           var copyAddress = angular.copy($scope.userProfile.address),
             phoneNumbers = copyAddress.phoneNumbers;
 
-          if (phoneNumbers[phoneNumbers.length - 1].number < 3) {
+          if (!phoneNumbers[phoneNumbers.length - 1].number || phoneNumbers[phoneNumbers.length - 1].number < 3) {
             phoneNumbers.splice((phoneNumbers.length - 1), 1)
           }
 
