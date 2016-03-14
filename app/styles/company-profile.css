@@ -49,6 +49,14 @@
   margin-top: -13px;
 }
 
+.company-profile-content .qt-devices li.list-heading .icn-sm {
+  margin-top: -10px;
+}
+
+.company-profile-content .qt-devices li.list-heading .icn-sm.icn-collapse {
+  margin-top: -13px;
+}
+
 .company-profile-content .qt-users li.list-heading .col-1, .company-profile-content .qt-users li.list-heading .col-3 {
   cursor: pointer;
 }

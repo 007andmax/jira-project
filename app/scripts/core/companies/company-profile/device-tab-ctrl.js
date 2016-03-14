@@ -6,6 +6,19 @@
     ['$scope', 'quicktech.common.services.SharedStateService',
       function ($scope, SharedStateService) {
 
+        $scope.orderDevicesBy = 'hostName';
+        $scope.sortDevicesTab = function (option) {
+          if (option === $scope.orderDevicesBy) {
+            if (option[0] === '-') {
+              $scope.orderDevicesBy = $scope.orderDevicesBy.substring(1);
+            } else {
+              $scope.orderDevicesBy = '-' + $scope.orderDevicesBy;
+            }
+          } else {
+            $scope.orderDevicesBy = option;
+          }
+        };
+
         $scope.sendAlert = function () {
           console.log('sendAlert - ' + $scope.agent.agentId);
           //DevicesService
