@@ -251,13 +251,13 @@
         <div id="primary-contacts" class="basic-info-wrapper">
 
           <div class="create-new-user company-basic-info clearfix"
-               ng-repeat="contact in editCompany.contacts">
+               ng-repeat="contact in editCompany.contacts | limitTo: 1">
             <div class="fixed-form-element" ng-form="contactForm">
               <div class="create-user-container">
 
                 <div class="create-user-header clearfix">
                   <h3 class="pull-left">Primary Contacts</h3>
-                  <h4 class="pull-left"><span>0{{ $index + 1 }}</span></h4>
+                  <!--<h4 class="pull-left"><span>0{{ $index + 1 }}</span></h4>-->
                 </div>
 
                 <div edit-avatar ng-model="contact.avatar" model-name="contact" model-id="{{ contact.id }}"></div>
