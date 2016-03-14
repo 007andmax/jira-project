@@ -15,7 +15,7 @@
 }
 @media (min-width: 1560px) {
   .companies-list .company-card {
-    width: calc(100% / 3 - 30px);
+    width: calc(100% / 2 - 30px);
   }
 }
 
