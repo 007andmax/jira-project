@@ -468,10 +468,10 @@
 
             <div class="form-row clearfix dropdown">
 
-              <div class="btn btn-primary has-tooltip" data-toggle="dropdown" style="float: right;margin-top: -47px"
-                   aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
-                   tooltip="Move service(s)">
-                <i class="icn-sm icn-add-services"></i>
+              <div class="btn btn-lg btn-primary pull-right" data-toggle="dropdown"
+                   style="margin-top: -47px; width: auto; font-weight: bold;"
+                   aria-expanded="false">
+                Add Service
               </div>
 
               <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"
@@ -668,11 +668,10 @@
 
           <div class="form-row clearfix dropdown">
 
-            <div class="btn btn-primary has-tooltip" data-toggle="dropdown"
-                 style="float: right;width:92px;margin-top: -47px"
-                 aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
-                 tooltip="Move Tax Rate(s)">
-              <i class="icn-sm icn-add-services"></i>
+            <div class="btn btn-lg btn-primary pull-right" data-toggle="dropdown"
+                 style="margin-top: -47px; width:auto; font-weight: bold;"
+                 aria-expanded="false">
+              Add Tax
             </div>
 
             <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"
@@ -802,7 +801,7 @@
                      ng-class="{'has-error': !(newTaxRate.code || newTaxRateForm.code.$pristine) || !(!newTaxRateForm.validation.code.unique || newTaxRateForm.code.$pristine)}">
 
                   <label class="control-label" ng-class="{'hide': !(newTaxRate.code || newTaxRateForm.code.$pristine)}">
-                    TAX DESCRIPTION
+                    ADD CUSTOM TAX
                   </label>
 
                   <label class="control-label" ng-class="{'hide': newTaxRate.code || newTaxRateForm.code.$pristine}">

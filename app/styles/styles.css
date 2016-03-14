@@ -3546,7 +3546,7 @@ select[multiple].input-lg {
   width: 18px;
   height: 18px;
   line-height: 18px;
-  background-position: -320px 2px;
+  background-position: -2188px -97px;
 }
 .checkbox .control-indicator {
   border-radius: 1px;
@@ -3560,7 +3560,7 @@ select[multiple].input-lg {
   border-color: #1586e4;
 }
 .control input:checked ~ .control-indicator.plus-circle {
-  background-position: -343px 2px;
+  background-position: -772px 4px;
 }
 .control input:checked ~ .control-indicator.alternate {
   background-image: none;
