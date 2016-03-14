@@ -102,10 +102,10 @@
 
   <div class="company-card clearfix" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
        ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()"
-       ng-class="{'hide': company.isDefault}">
+       ng-class="{'hide': company.isDefault, 'large': location.length > 60}">
 
     <div class="company-cover-area"
-         ng-style="{'background':'url(' + getCompanyCoverUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
+         ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
 
       <!--<div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"-->
            <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"-->
@@ -176,9 +176,7 @@
     <div class="company-primary-contact">
       <div class="user-location"><i class="icn-sm icn-sb-location"></i>
         <span>
-          {{ (primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' : '') +
-          primaryAddress.address +
-          (primaryAddress.postalCode ? ', ' + primaryAddress.postalCode : '') }}
+          {{ location }}
         </span>
       </div>
       <div class="user-contact-no">

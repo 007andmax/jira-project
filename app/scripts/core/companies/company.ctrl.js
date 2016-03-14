@@ -36,6 +36,13 @@
           $scope.primaryAddress = primaryAddress;
           $scope.primaryPhone = primaryPhone;
 
+          if (primaryAddress) {
+            $scope.location = primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' : '';
+            $scope.location += primaryAddress.address;
+            $scope.location += primaryAddress.postalCode ? ', ' + primaryAddress.postalCode : '';
+          } else {
+            $scope.location = '';
+          }
         });
 
         $scope.archiveCompany = function (companyId) {
