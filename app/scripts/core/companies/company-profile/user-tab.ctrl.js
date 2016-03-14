@@ -28,8 +28,7 @@
         };
 
         $scope.archiveUser = function () {
-          //UsersService.archiveUser($scope.user.id);
-          console.log('archive user ' + $scope.user.id);
+          UsersService.deleteOrArchiveUser($scope.user.id, true)
         };
 
         $scope.sendMail = function () {

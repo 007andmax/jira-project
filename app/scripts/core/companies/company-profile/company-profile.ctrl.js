@@ -9,6 +9,8 @@
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, UsersService, TicketsService,
                 SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService, UserNotificationService) {
 
+        UserNotificationService.show('Loading...');
+
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
 
@@ -22,6 +24,10 @@
         $scope.hourPattern = /\d+\:\d+/;
         $scope.selectedUsers = {};
         $scope.selectDevices = {};
+        $scope.orderUsersTab = {
+          fild: 'name',
+          reverse: false
+        };
         $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
           if (resp === $scope.company.id) {
             $state.go('companies');
@@ -40,6 +46,11 @@
         $scope.companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
+
+          $timeout(function () {
+            UserNotificationService.hide();
+          }, 0);
+
         });
         $scope.users = UsersService.getAllByCompanyId($stateParams.companyId);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($stateParams.companyId, $scope);
@@ -252,6 +263,24 @@
         $scope.$on('$destroy', function () {
           rightPanelSharedState.companyId = undefined;
         });
+
+        $scope.setOrderByUsers = function (option) {
+          if (option === $scope.orderUsersTab.fild) {
+            $scope.orderUsersTab.reverse = !$scope.orderUsersTab.reverse;
+          } else {
+            $scope.orderUsersTab.fild = option;
+            $scope.orderUsersTab.reverse = false;
+          }
+        };
+
+        $scope.orderByForUsers = function (item) {
+          if ($scope.orderUsersTab.fild === 'name') {
+            return item.firstName + item.lastName;
+          } else {
+            return item.role;
+          }
+
+        };
 
       }]);
 
