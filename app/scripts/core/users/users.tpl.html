@@ -148,7 +148,7 @@
 
           <div class="user-total-tickets pull-left">
             <i class="icn-sm icn-user-tickets"></i>
-            <span>Sbmt. Tickets</span> {{ submittedTickets[user.id] || 0 }}
+            <span>Sbmt. Tickets</span> {{ user.userStatistic.ticketsSubmitted || 0 }}
           </div>
 
           <div class="user-number pull-left" ng-hide="user.phoneNumbers.length < 1">

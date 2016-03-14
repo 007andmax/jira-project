@@ -14,7 +14,7 @@
 
   </div>
 
-  <div class="topNavbarLeft-Left pull-left hide" ng-show="bulkOptionMode === 'USERS'">
+  <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'USERS'">
 
     <div class="pull-left">
       <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
@@ -31,12 +31,12 @@
 
     <div class="topNavbar-filter pull-right">
 
-      <div class="btn btn-default has-tooltip pull-right disabled"
+      <div class="btn btn-default has-tooltip pull-right" ng-click="archiveUsers()"
            tooltip-placement="bottom" tooltip="Archive">
         <i class="icn-sm icn-remove-token"></i>
       </div>
 
-      <div class="dropdown hide">
+      <div class="dropdown">
         <div class="btn btn-default has-tooltip pull-right" data-toggle="dropdown"
              tooltip-placement="bottom" tooltip="Subscribe to...">
           <i class="icn-sm icn-user-subscription"></i>
@@ -92,10 +92,10 @@
         </ul>
       </div>
 
-      <div class="btn btn-default has-tooltip pull-right disabled"
-           tooltip-placement="bottom" tooltip="Email">
-        <i class="icn-sm icn-user-mail"></i>
-      </div>
+      <!--<div class="btn btn-default has-tooltip pull-right disabled"-->
+      <!--tooltip-placement="bottom" tooltip="Email">-->
+      <!--<i class="icn-sm icn-user-mail"></i>-->
+      <!--</div>-->
 
     </div>
 

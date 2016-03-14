@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.companyProfileCtrl',
-    ['$scope', 'CompaniesService', '$stateParams', 'quicktech.common.services.SharedStateService',
-      function ($scope, CompaniesService, $stateParams, SharedStateService) {
+    ['$scope', 'CompaniesService', '$stateParams', 'quicktech.common.services.SharedStateService', 'UsersService',
+      function ($scope, CompaniesService, $stateParams, SharedStateService, UsersService) {
 
         var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
 
@@ -33,13 +33,24 @@
         }, true);
 
         $scope.changeUserRole = function (role) {
-          console.log('changeUserRole ' + role);
-          console.log($scope.selectUsersIds);
+          var roleMap = {};
+          for (var i = 0, len = $scope.selectUsersIds.length; i < len; i++) {
+            roleMap[$scope.selectUsersIds[i]] = role
+          }
+          UsersService.changeUsersRoles(roleMap);
         };
 
         $scope.changeUserSubscription = function (subsc) {
           console.log('changeUserSubscription ' + subsc);
           console.log($scope.selectUsersIds);
+          //TODO
+          //SubscriptionsService.saveList(userSubscriptions)
+        };
+
+        $scope.archiveUsers = function () {
+          UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function(){
+            companyProfileHeader.unCheckAll();
+          });
         }
 
       }]);

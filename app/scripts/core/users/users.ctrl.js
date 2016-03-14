@@ -17,8 +17,6 @@
           headerSharedState.count = usersCount;
         });
 
-        $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany(CompaniesService.getCurrentCompany().id, $scope)
-
         $scope.getUserCompanyName = function (user) {
           return CompaniesService.getOneById(user.company.id).name;
         };

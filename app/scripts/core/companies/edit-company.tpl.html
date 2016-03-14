@@ -84,9 +84,13 @@
           <div class="create-new-user company-basic-info clearfix">
             <div class="fixed-form-element">
               <div class="create-user-container">
+
                 <div class="create-user-header clearfix">
                   <h3 class="pull-left">Basic Info</h3>
                 </div>
+
+                <div edit-avatar ng-model="editCompany.logo" model-name="company" model-id="{{ editCompany.id }}"></div>
+
                 <div class="create-user-form">
 
                   <div class="form-row clearfix">
@@ -520,7 +524,7 @@
                 <div class="col-5">IS BILLABLE</div>
 
                 <!--<div class="col-2" style="text-align: right;width: 133px;" TODO hide timeAllotment -->
-                     <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT-->
+                <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT-->
                 <!--</div>-->
 
                 <div class="col-4">&nbsp;</div>
@@ -545,7 +549,7 @@
                   </div>
 
                   <!--<div class="col-2" style="text-align: right;width: 133px;"> TODO hide timeAllotment-->
-                    <!--{{ service.timeBlock | timeFilter }}-->
+                  <!--{{ service.timeBlock | timeFilter }}-->
                   <!--</div>-->
 
                   <div class="col-5" style="width: 68px;">
@@ -615,33 +619,33 @@
                 </div>
 
                 <!--<div class="col-2" style="position: relative;padding-top: 0;width: 133px" TODO hide timeAllotment-->
-                     <!--service-quantity-picker="newService.timeBlock" sqp-is-show-format="false"-->
-                     <!--sqp-form="newServiceForm.timeBlock"-->
-                     <!--ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
+                <!--service-quantity-picker="newService.timeBlock" sqp-is-show-format="false"-->
+                <!--sqp-form="newServiceForm.timeBlock"-->
+                <!--ng-class="{'has-error': isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
 
-                  <!--<label class="control-label"-->
-                         <!--ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
-                    <!--TIME ALLOTMENT-->
-                  <!--</label>-->
+                <!--<label class="control-label"-->
+                <!--ng-class="{'hide': isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
+                <!--TIME ALLOTMENT-->
+                <!--</label>-->
 
-                  <!--<div ng-messages="newServiceForm.timeBlock.$error"-->
-                       <!--ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
-                    <!--<label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>-->
-                    <!--<label class="control-label" ng-message="invalidwhen">INVALID VALUE.</label>-->
-                  <!--</div>-->
+                <!--<div ng-messages="newServiceForm.timeBlock.$error"-->
+                <!--ng-class="{'hide': !isShowingServiceErrors(newServiceForm, 'timeBlock')}">-->
+                <!--<label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>-->
+                <!--<label class="control-label" ng-message="invalidwhen">INVALID VALUE.</label>-->
+                <!--</div>-->
 
-                  <!--<input id="service-quantity-picker" type="text" class="form-control"-->
-                         <!--sqp-input readonly>-->
+                <!--<input id="service-quantity-picker" type="text" class="form-control"-->
+                <!--sqp-input readonly>-->
 
-                  <!--<input type="hidden" invalid-when="!newService.timeBlock || newService.timeBlock <= 0"-->
-                         <!--name="timeBlock" ng-model="newService.timeBlock" hard-reset-required="true"/>-->
+                <!--<input type="hidden" invalid-when="!newService.timeBlock || newService.timeBlock <= 0"-->
+                <!--name="timeBlock" ng-model="newService.timeBlock" hard-reset-required="true"/>-->
 
                 <!--</div>-->
 
                 <!--<div class="btn btn-success pull-right" style="margin-top: 19px;"-->
-                     <!--custom-disabled="{{ newServiceForm.$invalid }}"-->
-                     <!--ng-click="newService = movingService(newService, newServiceForm)">-->
-                  <!--<i class="icn-sm small-icn-tick"></i>-->
+                <!--custom-disabled="{{ newServiceForm.$invalid }}"-->
+                <!--ng-click="newService = movingService(newService, newServiceForm)">-->
+                <!--<i class="icn-sm small-icn-tick"></i>-->
                 <!--</div>-->
 
               </li>
@@ -837,9 +841,9 @@
                   <span class="procent-rate" style="top:29px;">%</span>
 
                   <!--<div class="btn btn-success pull-right"-->
-                       <!--ng-click="saveNewTax(newTaxRateForm)"-->
-                       <!--custom-disabled="{{ newTaxRateForm.invalid || !newTaxRate.code || !newTaxRate.rate }}">-->
-                    <!--<i class="icn-sm small-icn-tick"></i>-->
+                  <!--ng-click="saveNewTax(newTaxRateForm)"-->
+                  <!--custom-disabled="{{ newTaxRateForm.invalid || !newTaxRate.code || !newTaxRate.rate }}">-->
+                  <!--<i class="icn-sm small-icn-tick"></i>-->
                   <!--</div>-->
 
                 </div>
