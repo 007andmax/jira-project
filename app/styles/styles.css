@@ -3542,13 +3542,25 @@ select[multiple].input-lg {
   -ms-user-select: none;
   user-select: none;
 }
+.control-indicator.plus-circle {
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  background-position: -320px 2px;
+}
 .checkbox .control-indicator {
   border-radius: 1px;
+}
+.checkbox .control-indicator.plus-circle {
+  border-radius: 50%;
 }
 .control input:checked ~ .control-indicator {
   background-position: -858px -96px;
   background-color: #1586e4;
   border-color: #1586e4;
+}
+.control input:checked ~ .control-indicator.plus-circle {
+  background-position: -343px 2px;
 }
 .control input:checked ~ .control-indicator.alternate {
   background-image: none;

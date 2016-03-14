@@ -520,7 +520,7 @@
                       <label class="control checkbox">
                         <input type="checkbox" ng-model="selectedServices[defaultService.name]"
                                ng-change="movingService(defaultService)">
-                        <span class="control-indicator pull-left "></span>
+                        <span class="control-indicator pull-left plus-circle"></span>
                         {{ defaultService.name }}
                       </label>
                     </div>
@@ -540,11 +540,11 @@
                 <div class="col-1" style="width: 316px;">SERVICE NAME</div>
                 <!--style="width: 183px;" TODO hide timeAllotment -->
 
-                <div class="col-5">IS BILLABLE</div>
-
-                <div class="col-3" style="width: 92px;text-align: right;"
+                <div class="col-3" style="width: 92px;text-align: left;"
                      ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">PER HOUR
                 </div>
+
+                <div class="col-5">IS BILLABLE</div>
 
                 <!--<div class="col-2" style="text-align: right;width: 133px;" TODO hide timeAllotment -->
                      <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT-->
@@ -563,13 +563,6 @@
                   </div>
                   <!--style="width: 183px;" TODO hide timeAllotment -->
 
-                  <div class="col-5" style="width: 68px;">
-                    <label class="control checkbox pull-left" style="margin-top: 14px;left:0">
-                      <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()">
-                      <span class="control-indicator"></span>
-                    </label>
-                  </div>
-
                   <div class="col-3" ng-class="{'has-error': isShowingErrors(companyForm, 'editServiceRate')}"
                        style="margin-top: -8px;width: 92px">
                     <input type="text" class="form-control" placeholder="Rate"
@@ -580,6 +573,13 @@
                   <!--<div class="col-2" style="text-align: right;width: 133px;"> TODO hide timeAllotment-->
                     <!--{{ service.timeBlock | timeFilter }}-->
                   <!--</div>-->
+
+                  <div class="col-5" style="width: 68px;">
+                    <label class="control checkbox pull-right" style="margin-top: 14px;left:0">
+                      <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()">
+                      <span class="control-indicator"></span>
+                    </label>
+                  </div>
 
                   <div class="col-4" style="width: 24px">
 
@@ -721,7 +721,7 @@
                     <label class="control checkbox">
                       <input type="checkbox" ng-model="selectedTax[taxRate.code]"
                              ng-change="movingTax(taxRate)">
-                      <span class="control-indicator pull-left "></span>
+                      <span class="control-indicator pull-left plus-circle"></span>
                       {{ taxRate.code }}
                     </label>
                   </div>

@@ -582,6 +582,9 @@ Devices tab
 .qt-list .checkbox .control-indicator{
   top: -2px;
 }
+.qt-list .checkbox .control-indicator.plus-circle{
+  top: -3px;
+}
 .qt-list .dropdown-submenu-wrapper .checkbox .control-indicator{
   top: 10px;
 }
