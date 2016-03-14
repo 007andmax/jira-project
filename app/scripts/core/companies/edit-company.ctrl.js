@@ -145,14 +145,6 @@
           $scope.editCompany.addresses.splice(index, 1);
         };
 
-        $scope.addContact = function () {
-          $scope.editCompany.contacts.unshift(getEmptyContact());
-        };
-
-        $scope.removeContact = function (index) {
-          $scope.editCompany.contacts.splice(index, 1);
-        };
-
         $scope.isShowingContactErrors = function (contact, form, fieldName) {
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
