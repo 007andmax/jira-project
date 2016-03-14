@@ -76,7 +76,7 @@
       }))
       .state('companyProfile', waitForServices({
         url: '/clients/companyProfile/:companyId',
-        templateUrl: '/html/scripts/core/companies/company-profile.tpl.html',
+        templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
       .state('products', waitForServices({

@@ -1,0 +1,54 @@
+.company-profile-content .company-profile-header {
+  float: left;
+  width: 100%;
+  height: 300px;
+  -webkit-background-size: cover;
+  background-size: cover;
+  position: relative;
+}
+
+.company-profile-header .company-new-cover-wrapper {
+  float: left;
+  width: 37%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+
+.company-profile-header .company-map-wrapper {
+  width: calc(100% - 37%);
+  height: 100%;
+  float: right;
+}
+
+.company-profile-header .company-new-cover-wrapper .btn-archive {
+  right: auto;
+  left: 10px;
+  z-index: 2;
+}
+
+.company-profile-header .company-new-cover-wrapper .company-info {
+  width: 37%;
+  top: 70px;
+  transform: none;
+  margin: 0;
+  left: 0;
+  padding-left: 50px;
+  position: absolute;
+  z-index: 2;
+}
+
+.company-profile-header .address-content .map-container {
+  margin: 0;
+}
+
+.company-profile-content .qt-users li.list-heading .icn-sm {
+  margin-top: -10px;
+}
+
+.company-profile-content .qt-users li.list-heading .icn-sm.icn-collapse {
+  margin-top: -13px;
+}
+
+.company-profile-content .qt-users li.list-heading .col-1, .company-profile-content .qt-users li.list-heading .col-3 {
+  cursor: pointer;
+}
