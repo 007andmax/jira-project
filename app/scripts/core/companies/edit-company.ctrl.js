@@ -171,9 +171,9 @@
               processPhoneNumbers(addresses[i].phoneNumbers);
             }
 
-            CompaniesService.save($scope.editCompany, function () {
+            CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companies');
+              $state.go('companyProfile', { companyId: resp.id });
             })
           } else {
             $scope.triedToSave = true;
