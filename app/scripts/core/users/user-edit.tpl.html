@@ -124,7 +124,7 @@
 
             <div class="dropdown">
 
-              <input type="text" ng-model="userCompany" autocomplete="off"
+              <input type="text" ng-model="userCompany" autocomplete="off" ng-readonly="!isCreation"
                      class="form-control form-control-dropdown dropdown-toggle"
                      typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                      typeahead-editable="false" typeahead-min-length="0"
@@ -132,7 +132,7 @@
                      name="userCompany" ng-trim="false" ng-required="true"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-              <div typeahead-input-icon="userCompany" style="position: absolute;top: 13px;right: 13px;"></div>
+              <div ng-show="isCreation" typeahead-input-icon="userCompany" style="position: absolute;top: 13px;right: 13px;"></div>
 
             </div>
           </div>
