@@ -59,8 +59,6 @@
 
           $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
           $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
-          $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany($stateParams.companyId, $scope);
-
           $scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function () {
 
             $scope.$watch('countsTicketsCompany', function () {
@@ -240,6 +238,13 @@
           $scope.selectDevices = {};
           $scope.selectedUsers = {};
         });
+
+        companyProfileHeader.unCheckAll = function () {
+          $scope.selectDevices = {};
+          $scope.selectedUsers = {};
+          $scope.changeSelectedUsers();
+          $scope.changeSelectDevices();
+        };
 
         $scope.$on('showErrorCover', function (event, message) {
 
