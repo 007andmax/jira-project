@@ -10,22 +10,19 @@
 
         $scope.company = CompaniesService.getOneById($stateParams.companyId);
 
-        $scope.removeDevices = function(){
-          console.log($scope.devicesHeaderState.checkedDevicesId)
-          //DevicesService
+        $scope.removeDevices = function () {
+          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.devicesHeaderState.checkedDevicesId);
         };
 
-        $scope.shutdownDevices = function(){
-          console.log($scope.devicesHeaderState.checkedDevicesId)
-          //DevicesService
+        $scope.shutdownDevices = function () {
+          DevicesService.sendPowerAction($scope.company.id, $scope.devicesHeaderState.checkedDevicesId, 'shutdown');
         };
 
-        $scope.restartDevices = function(){
-          console.log($scope.devicesHeaderState.checkedDevicesId)
-          //DevicesService
+        $scope.restartDevices = function () {
+          DevicesService.sendPowerAction($scope.company.id, $scope.devicesHeaderState.checkedDevicesId, 'reboot');
         };
 
-        $scope.sendAlertDevices = function(){
+        $scope.sendAlertDevices = function () {
           console.log($scope.devicesHeaderState.checkedDevicesId)
           //DevicesService
         };

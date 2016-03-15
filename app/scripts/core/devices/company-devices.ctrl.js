@@ -110,6 +110,20 @@
           }
         };
 
+        $scope.selectAllDevices = function () {
+          $scope.isSelectAllDevices = !$scope.isSelectAllDevices;
+
+          for (var i = 0, len = $scope.agents.length; i < len; i++) {
+            if ($scope.agents[i].online) {
+              $scope.selectDevices[$scope.agents[i].agentId] = $scope.isSelectAllDevices;
+            } else {
+              $scope.selectDevices[$scope.agents[i].agentId] = false
+            }
+          }
+
+          $scope.changeSelectDevices();
+        };
+
         $scope.changeSelectDevices = function () {
           var selectDevicesIds = [];
 
