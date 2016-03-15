@@ -5,9 +5,10 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'UsersService', 'TicketsService',
       'SubscriptionsService', 'VendorsService', 'quicktech.common.services.SharedStateService', '$timeout',
-      'DevicesService', 'quicktech.common.services.UserNotificationService',
+      'DevicesService', 'quicktech.common.services.UserNotificationService', 'Utils',
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, UsersService, TicketsService,
-                SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService, UserNotificationService) {
+                SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService,
+                UserNotificationService, Utils) {
 
         UserNotificationService.show('Loading...');
 
@@ -206,18 +207,49 @@
 
         $scope.changeSelectedUsers = function () {
           var selectUsersIds = [];
+          var selectUsersSbscr = {
+            invoice: 0,
+            ticket: 0
+          };
 
           for (var userId in $scope.selectedUsers) {
             if ($scope.selectedUsers[userId]) {
               selectUsersIds.push(userId);
+
+              var user = Utils.findById($scope.users, userId);
+
+              if (user.subscription.invoice) {
+                selectUsersSbscr.invoice++;
+              }
+              if (user.subscription.ticket) {
+                selectUsersSbscr.ticket++;
+              }
+
             }
           }
 
+          companyProfileHeader.selectUsersSubscr = {
+            invoice: selectUsersSbscr.invoice === selectUsersIds.length,
+            ticket: selectUsersSbscr.ticket === selectUsersIds.length
+          };
+
+          $scope.isSelectAllUsers = (selectUsersIds.length === $scope.users.length);
           companyProfileHeader.selectUsersIds = selectUsersIds;
+        };
+
+        $scope.selectAllUsers = function () {
+          $scope.isSelectAllUsers = !$scope.isSelectAllUsers;
+
+          for (var i = 0, len = $scope.users.length; i < len; i++) {
+            $scope.selectedUsers[$scope.users[i].id] = $scope.isSelectAllUsers;
+          }
+
+          $scope.changeSelectedUsers();
         };
 
         $scope.changeSelectDevices = function () {
           var selectDevicesIds = [];
+          var countOnlineDevices = 0;
 
           for (var deviceId in $scope.selectDevices) {
             if ($scope.selectDevices[deviceId]) {
@@ -225,7 +257,28 @@
             }
           }
 
+          for (var i = 0, len = $scope.agents.length; i < len; i++) {
+            if ($scope.agents[i].online) {
+              countOnlineDevices++
+            }
+          }
+
+          $scope.isSelectAllDevices = (selectDevicesIds.length === countOnlineDevices);
           companyProfileHeader.selectDevicesIds = selectDevicesIds;
+        };
+
+        $scope.selectAllDevices = function () {
+          $scope.isSelectAllDevices = !$scope.isSelectAllDevices;
+
+          for (var i = 0, len = $scope.agents.length; i < len; i++) {
+            if ($scope.agents[i].online) {
+              $scope.selectDevices[$scope.agents[i].agentId] = $scope.isSelectAllDevices;
+            } else {
+              $scope.selectDevices[$scope.agents[i].agentId] = false
+            }
+          }
+
+          $scope.changeSelectDevices();
         };
 
         $scope.$on('showEditCover', function () {

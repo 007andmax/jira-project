@@ -18,7 +18,7 @@
 
     <div class="pull-left">
       <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-         tooltip-append-to-body="true"
+         tooltip-append-to-body="true" ng-click="uncheckSelect()"
          tooltip-placement="bottom" style="margin: 11px 8px 0 0;"
          tooltip="Reset Selected Items">
         <i class="icn-sm icn-back-arrow"></i>
@@ -42,24 +42,24 @@
           <i class="icn-sm icn-user-subscription"></i>
         </div>
 
-        <ul class="dropdown-menu dropdown-subscribe">
+        <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
 
-          <li>
-            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
+          <li ng-click="changeUserSubscription('ticket')">
+            <a tabindex="-1" href="javascript:void(0)">
               <div class="clearfix">
                 <label class="control checkbox pull-left">
-                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
+                  <input type="checkbox" ng-model="usersSbscr['ticket']" ng-disabled="disabledSubscr">
                   <span class="control-indicator"></span> Ticket Updates
                 </label>
               </div>
             </a>
           </li>
 
-          <li>
-            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
+          <li ng-click="changeUserSubscription('invoice')">
+            <a tabindex="-1" href="javascript:void(0)">
               <div class="clearfix">
                 <label class="control checkbox pull-left">
-                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                  <input type="checkbox" ng-model="usersSbscr['invoice']" ng-disabled="disabledSubscr">
                   <span class="control-indicator"></span> Invoice Updates
                 </label>
               </div>
@@ -104,10 +104,9 @@
   <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'DEVICES'">
 
     <div class="pull-left">
-      <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-         data-container="body" title="Reset Selected Items" data-placement="bottom"
-         style="margin: 11px 8px 0 0;"
-         data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
+      <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip" ng-click="uncheckSelect()"
+         tooltip-append-to-body="true" tooltip="Reset Selected Items" tooltip-placement="bottom"
+         style="margin: 11px 8px 0 0;">
         <i class="icn-sm icn-back-arrow"></i>
       </a>
     </div>
@@ -118,20 +117,20 @@
 
     <div class="topNavbar-filter pull-right">
 
-      <!--<div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"-->
-      <!--tooltip-placement="bottom" tooltip="Remove">-->
-      <!--<i class="icn-sm icn-remove-token"></i>-->
-      <!--</div>-->
+      <div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"
+           tooltip-placement="bottom" tooltip="Remove">
+        <i class="icn-sm icn-remove-token"></i>
+      </div>
 
-      <!--<div class="btn btn-default has-tooltip pull-right" ng-click="shutdownDevices()"-->
-      <!--tooltip-placement="bottom" tooltip="Shutdown">-->
-      <!--<i class="icn-sm icn-shutdown-device"></i>-->
-      <!--</div>-->
+      <div class="btn btn-default has-tooltip pull-right" ng-click="shutdownDevices()"
+           tooltip-placement="bottom" tooltip="Shutdown">
+        <i class="icn-sm icn-shutdown-device"></i>
+      </div>
 
-      <!--<div class="btn btn-default has-tooltip pull-right" ng-click="restartDevices()"-->
-      <!--tooltip-placement="bottom" tooltip="Restart">-->
-      <!--<i class="icn-sm icn-restart-device"></i>-->
-      <!--</div>-->
+      <div class="btn btn-default has-tooltip pull-right" ng-click="restartDevices()"
+           tooltip-placement="bottom" tooltip="Restart">
+        <i class="icn-sm icn-restart-device"></i>
+      </div>
 
       <!--<div class="btn btn-default has-tooltip pull-right" ng-click="sendAlertDevices()"-->
       <!--tooltip-placement="bottom" tooltip="Send Alert">-->

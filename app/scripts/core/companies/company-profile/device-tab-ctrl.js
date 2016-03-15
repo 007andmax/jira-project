@@ -3,8 +3,18 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.deviceTabCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService',
-      function ($scope, SharedStateService) {
+    ['$scope', 'DevicesService',
+      function ($scope, DevicesService) {
+
+        $scope.remoteAccess = function (connectionType) {
+          if (!$scope.agent.online) {
+            throw 'agent must be online'
+          }
+
+          DevicesService.createRemoteSession($scope.agent.id, $scope.company.id, connectionType, function (resp) {
+            RemoteAccessService.connectRemoteAccess(resp.sessionId, connectionType);
+          });
+        };
 
         $scope.orderDevicesBy = 'hostName';
         $scope.sortDevicesTab = function (option) {
@@ -35,18 +45,15 @@
         };
 
         $scope.restart = function () {
-          console.log('restart - ' + $scope.agent.agentId);
-          //DevicesService
+          DevicesService.sendPowerAction($scope.company.id, $scope.agent.agentId, 'reboot');
         };
 
         $scope.shutdown = function () {
-          console.log('shutdown - ' + $scope.agent.agentId);
-          //DevicesService
+          DevicesService.sendPowerAction($scope.company.id, $scope.agent.agentId, 'shutdown');
         };
 
         $scope.remove = function () {
-          console.log('remove - ' + $scope.agent.agentId);
-          //DevicesService
+          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id)
         }
 
       }]);

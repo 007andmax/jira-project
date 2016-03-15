@@ -3,8 +3,10 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.companyProfileCtrl',
-    ['$scope', 'CompaniesService', '$stateParams', 'quicktech.common.services.SharedStateService', 'UsersService',
-      function ($scope, CompaniesService, $stateParams, SharedStateService, UsersService) {
+    ['$scope', 'CompaniesService', '$stateParams', 'quicktech.common.services.SharedStateService',
+      'UsersService', 'DevicesService', 'SubscriptionsService',
+      function ($scope, CompaniesService, $stateParams, SharedStateService,
+                UsersService, DevicesService, SubscriptionsService) {
 
         var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
 
@@ -18,6 +20,7 @@
 
             $scope.bulkOptionMode = 'USERS';
             $scope.selectUsersIds = val.selectUsersIds;
+            $scope.usersSbscr = angular.copy(val.selectUsersSubscr);
 
           } else if (val.selectDevicesIds.length > 0) {
 
@@ -33,25 +36,37 @@
         }, true);
 
         $scope.changeUserRole = function (role) {
-          var roleMap = {};
-          for (var i = 0, len = $scope.selectUsersIds.length; i < len; i++) {
-            roleMap[$scope.selectUsersIds[i]] = role
-          }
-          UsersService.changeUsersRoles(roleMap);
+          UsersService.changeUsersRoles($scope.selectUsersIds, role);
         };
 
         $scope.changeUserSubscription = function (subsc) {
-          console.log('changeUserSubscription ' + subsc);
-          console.log($scope.selectUsersIds);
-          //TODO
-          //SubscriptionsService.saveList(userSubscriptions)
+          $scope.disabledSubscr = true;
+          $scope.usersSbscr[subsc] = !$scope.usersSbscr[subsc];
+          SubscriptionsService.changeSubscriptionsForUsers($scope.selectUsersIds, subsc, $scope.usersSbscr[subsc], function () {
+            $scope.disabledSubscr = false;
+          })
         };
 
         $scope.archiveUsers = function () {
-          UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function(){
+          UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function () {
             companyProfileHeader.unCheckAll();
           });
-        }
+        };
+
+        $scope.removeDevices = function () {
+          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.selectDevicesIds);
+          companyProfileHeader.unCheckAll();
+        };
+
+        $scope.shutdownDevices = function () {
+          DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesIds, 'shutdown');
+        };
+
+        $scope.restartDevices = function () {
+          DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesIds, 'reboot');
+        };
+
+        $scope.uncheckSelect = companyProfileHeader.unCheckAll;
 
       }]);
 

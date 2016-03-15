@@ -4,12 +4,15 @@
 
     <li class="list-heading">
       <div class="col-1" ng-click="sortDevicesTab('hostName')">
-        <!-- <label class="control checkbox pull-left">
-            <input type="checkbox">
-            <span class="control-indicator"></span>
-        </label> -->
+
+        <label class="control checkbox pull-left">
+          <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
+                 ng-checked="isSelectAllDevices" ng-click="selectAllDevices()">
+          <span class="control-indicator"></span>
+        </label>
+
         <span>NAME</span>
-        <i class="icn-sm" style="margin-left: 37px;"
+        <i class="icn-sm" style="margin-left: 65px;"
            ng-class="{'icn-collapse': orderDevicesBy === '-hostName', 'icn-expand': orderDevicesBy === 'hostName'}"></i>
       </div>
       <div class="col-2" style="width: 367px; height: 12px">
@@ -44,8 +47,8 @@
           <i class="device-status" ng-class="{'on': agent.online, 'off': !agent.online}"></i>
 
           <label class="control checkbox pull-left">
-            <input type="checkbox" ng-model="selectDevices[device.deviceId]" ng-change="changeSelectDevices()">
-            <span class="control-indicator"></span>
+            <input type="checkbox" ng-model="selectDevices[agent.agentId]" ng-change="changeSelectDevices()">
+            <span class="control-indicator" ng-show="agent.online"></span>
           </label>
 
           <div class="checkbox-caption">
@@ -156,12 +159,32 @@
       </div>
 
       <div class="col-6">
-        <div class="list-actions pull-right">
+        <div class="list-actions pull-right" ng-show="agent.online">
 
-          <!--<div class="btn btn-default pull-left has-tooltip" ng-click="remoteAccess()"-->
-          <!--tooltip-placement="top" tooltip="Remote Access">-->
-          <!--<i class="icn-sm icn-remote-access"></i>-->
-          <!--</div>-->
+          <div class="btn btn-default pull-left has-tooltip"
+               ng-show="(agent.type !== 'workstation') && agent.online"
+               ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
+            <i class="icn-sm icn-remote-access"></i>
+          </div>
+
+          <div class="btn btn-default pull-left has-tooltip"
+               ng-show="(agent.type === 'workstation') && agent.online"
+               tooltip-placement="top" tooltip="Remote Access"
+               dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+            <i class="icn-sm icn-remote-access"></i>
+          </div>
+
+          <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+
+            <li ng-click="remoteAccess('CSS')">
+              <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+            </li>
+
+            <li ng-click="remoteAccess('RDP')">
+              <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+            </li>
+
+          </ul>
 
           <!--<div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"-->
           <!--tooltip-placement="top" tooltip="Send Alert">-->
@@ -173,22 +196,22 @@
           <!--<i class="icn-sm icn-spec-report"></i>-->
           <!--</div>-->
 
-          <!--<div class="more pull-left dropdown">-->
+          <div class="more pull-left dropdown">
 
-          <!--<a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"-->
-          <!--aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">-->
-          <!--<i class="icn-more icn-sm"></i>-->
-          <!--</a>-->
+            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
+               aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">
+              <i class="icn-more icn-sm"></i>
+            </a>
 
-          <!--<ul class="dropdown-menu dropdown-menu-right" role="menu">-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="sendAlert()">Send Alert</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="specReport()">Spec. Report</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">Remove</a></li>-->
-          <!--</ul>-->
-          <!--</div>-->
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="sendAlert()">Send Alert</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="specReport()">Spec. Report</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>-->
+              <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">Remove</a></li>
+            </ul>
+          </div>
 
         </div>
       </div>

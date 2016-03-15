@@ -410,7 +410,7 @@
               <i class="device-status" ng-class="{'on': agent.online, 'off': !agent.online}"></i>
 
               <label class="control checkbox pull-left">
-                <input type="checkbox" ng-model="selectDevices[device.deviceId]" ng-change="changeSelectDevices()">
+                <input type="checkbox" ng-model="selectDevices[agent.agentId]" ng-change="changeSelectDevices()">
                 <span class="control-indicator"></span>
               </label>
 
