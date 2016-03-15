@@ -526,6 +526,10 @@ hr {
   margin: 0;
   padding: 0;
   list-style: none;
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 .rating > li {
   display: inline-block;
