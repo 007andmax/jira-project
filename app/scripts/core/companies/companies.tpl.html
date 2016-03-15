@@ -108,9 +108,9 @@
          ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
 
       <!--<div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"-->
-           <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"-->
-           <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">-->
-        <!--<i class="icn-sm icn-archive-company"></i>-->
+      <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"-->
+      <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">-->
+      <!--<i class="icn-sm icn-archive-company"></i>-->
       <!--</div>-->
       <ul class="rating rating-5 clearfix">
         <li class="icn-sm icn-star-full star-1"></li>
@@ -124,13 +124,12 @@
         <div class="company-name">{{ company.name }}</div>
 
 
-
         <!--<i class="dot-sep"></i>-->
 
         <!--<a href="javascript:void(0)" class="hit-area ha-14-16" stop-propagation="click"-->
-           <!--custom-popover custom-popover-content="{{ company.description }}"-->
-           <!--custom-popover-placement="bottom" custom-popover-first-left="25">-->
-          <!--<i class="icn-sm icn-description-white companies-new"></i></a>-->
+        <!--custom-popover custom-popover-content="{{ company.description }}"-->
+        <!--custom-popover-placement="bottom" custom-popover-first-left="25">-->
+        <!--<i class="icn-sm icn-description-white companies-new"></i></a>-->
 
         <!--<div class="dropdown pull-left">-->
 
@@ -164,10 +163,10 @@
         <!--</div>-->
 
         <!--<a href="javascript:void(0)" class="hit-area has-tooltip" stop-propagation="click"-->
-           <!--ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN' && currentUser.role !== 'ADMIN'"-->
-           <!--ui-sref="editCompany( { companyId: company.id } )"-->
-           <!--tooltip-placement="top" tooltip="Edit Company info">-->
-          <!--<i class="icn-md icn-edit-tag companies-new"></i>-->
+        <!--ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN' && currentUser.role !== 'ADMIN'"-->
+        <!--ui-sref="editCompany( { companyId: company.id } )"-->
+        <!--tooltip-placement="top" tooltip="Edit Company info">-->
+        <!--<i class="icn-md icn-edit-tag companies-new"></i>-->
         <!--</a>-->
 
       </div>
@@ -185,7 +184,7 @@
       <div class="user-info">
 
         <!--<div class="avatar">-->
-          <!--<img ng-src="{{ getUserAvatarUrl(primaryContact) }}" alt="..." class="img-circle avatar-50">-->
+        <!--<img ng-src="{{ getUserAvatarUrl(primaryContact) }}" alt="..." class="img-circle avatar-50">-->
         <!--</div>-->
 
         <div class="name-designation">
@@ -197,31 +196,30 @@
           <span class="label label-light">{{ primaryContact.designation }}</span>
 
           <!--<div class="icn-sm persistent-tooltip {{ getUserSubscribeClass() }}"-->
-               <!--tooltip-append-to-body="true"-->
-               <!--tooltip-placement="top" tooltip="{{ getUserSubscribeTooltip() }}"></div>-->
+          <!--tooltip-append-to-body="true"-->
+          <!--tooltip-placement="top" tooltip="{{ getUserSubscribeTooltip() }}"></div>-->
         </div>
       </div>
 
 
-
       <!--<div class="user-actions" stop-propagation="clack">-->
 
-        <!--<div class="btn btn-info has-tooltip"-->
-             <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">-->
-          <!--<i class="icn-sm icn-email-white"></i>-->
-        <!--</div>-->
+      <!--<div class="btn btn-info has-tooltip"-->
+      <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">-->
+      <!--<i class="icn-sm icn-email-white"></i>-->
+      <!--</div>-->
 
-        <!--<div class="btn btn-default has-tooltip"-->
-             <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Chat">-->
-          <!--<i class="icn-sm icn-user-chat"></i>-->
-        <!--</div>-->
+      <!--<div class="btn btn-default has-tooltip"-->
+      <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Chat">-->
+      <!--<i class="icn-sm icn-user-chat"></i>-->
+      <!--</div>-->
 
       <!--</div>-->
     </div>
     <ul class="company-numbers clearfix">
-      <li><span>Tickets</span>48</li>
-      <li><span>Users</span>18</li>
-      <li><span>Devices</span>19</li>
+      <li><span>Tickets</span>{{ companyComponentsCount.ticketsCount || '0' }}</li>
+      <li><span>Users</span>{{ companyComponentsCount.usersCount || '0' }}</li>
+      <li><span>Devices</span>{{ devicesCount[company.id].all || '0' }}</li>
     </ul>
   </div>
 

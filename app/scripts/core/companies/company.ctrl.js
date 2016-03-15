@@ -4,7 +4,8 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyCtrl',
     ['$scope', 'CompaniesService', '$state', 'quicktech.common.services.UserNotificationService',
-      function ($scope, CompaniesService, $state, UserNotificationService) {
+      'UsersService', 'StatisticsService',
+      function ($scope, CompaniesService, $state, UserNotificationService, UsersService, StatisticsService) {
 
         $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
           var primaryContact,
@@ -43,6 +44,16 @@
           } else {
             $scope.location = '';
           }
+
+          var usersByCompany = UsersService.getAllByCompanyId($scope.company.id);
+
+          $scope.companyComponentsCount = {
+            usersCount: UsersService.getAllByCompanyId($scope.company.id).length
+          };
+
+          StatisticsService.getSubmittedTicketsByCompany($scope.company.id, $scope, function (resp) {
+            $scope.companyComponentsCount.ticketsCount = resp[$scope.company.id];
+          });
         });
 
         $scope.archiveCompany = function (companyId) {

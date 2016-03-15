@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
-      'quicktech.common.services.SharedStateService', '$timeout',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, $timeout) {
+      'quicktech.common.services.SharedStateService', 'DevicesService',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, DevicesService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var isChartHasOpen = false;
@@ -13,6 +13,7 @@
         $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
+        $scope.devicesCount = DevicesService.getDevicesCount($scope);
 
         $scope.isChartsAccess = function(){
           return $scope.currentUser.role === 'SUPER_TECH_ADMIN' || $scope.currentUser.accountType === 'ROOT';
