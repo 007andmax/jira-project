@@ -45,10 +45,8 @@
             $scope.location = '';
           }
 
-          var usersByCompany = UsersService.getAllByCompanyId($scope.company.id);
-
           $scope.companyComponentsCount = {
-            usersCount: UsersService.getAllByCompanyId($scope.company.id).length
+            users: UsersService.getAllByCompanyId($scope.company.id)
           };
 
           StatisticsService.getSubmittedTicketsByCompany($scope.company.id, $scope, function (resp) {
