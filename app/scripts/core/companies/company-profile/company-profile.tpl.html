@@ -166,21 +166,21 @@
       <!--</div>-->
     </div>
 
+    <div class="hass-error control-label" style="position:absolute; top: 538px;left: 40px;color: #e53935;"
+         ng-show="isShowErrorMessage">
+      {{ messageError }}
+    </div>
+
+    <div edit-cover ng-if="editCover" ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
+         ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
+         ng-model="editCover" model-name="company" model-id="{{ company.id }}"
+         ec-is-show-loader-on-cover="isShowLoaderOnCover"
+         ec-disabled-cover-control="disabledCoverControl"></div>
+
     <div class="company-map-wrapper" company-address-autocomplete ng-if="companyData.addresses[0]"
          ng-model="companyData.addresses[0]"></div>
 
   </div>
-
-  <div class="hass-error control-label" style="position:absolute; top: 538px;left: 40px;color: #e53935;"
-       ng-show="isShowErrorMessage">
-    {{ messageError }}
-  </div>
-
-  <div edit-cover ng-if="editCover" ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
-       ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
-       ng-model="editCover" model-name="company" model-id="{{ company.id }}"
-       ec-is-show-loader-on-cover="isShowLoaderOnCover"
-       ec-disabled-cover-control="disabledCoverControl"></div>
 
   <div ng-if="isChartsAccess()" class="collapse-charts" ng-click="toggleCollapsed()"
        ng-class="{'hide': isCollapsed}"

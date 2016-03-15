@@ -61,6 +61,7 @@
             function setupCropBoxModel(isReposition) {
 
               cropBox.jWindowCrop({
+                customTypeCrop: 'cover',
                 cropBoxWidth: cropBox.width(),
                 cropBoxHeight: cropBox.height(),
                 maxZoom: 2,
