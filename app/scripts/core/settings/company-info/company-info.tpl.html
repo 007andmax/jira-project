@@ -165,12 +165,12 @@
             <!--</div>-->
 
             <!--<div class="form-row clearfix">-->
-              <!--<div class="form-group no-label full-width">-->
-                <!--<div class="btn btn-lg btn-info pull-right"-->
-                     <!--custom-disabled="{{ basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess }}"-->
-                     <!--ng-click="saveBasicInfo(basicInfoForm)">Save-->
-                <!--</div>-->
-              <!--</div>-->
+            <!--<div class="form-group no-label full-width">-->
+            <!--<div class="btn btn-lg btn-info pull-right"-->
+            <!--custom-disabled="{{ basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess }}"-->
+            <!--ng-click="saveBasicInfo(basicInfoForm)">Save-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</div>-->
           </div>
         </div>
@@ -254,9 +254,9 @@
             <h3 class="pull-left">Contact Info</h3>
 
             <!--<h4 class="pull-left">-->
-              <!--<a class="shoose-current-address-icn" href="javascript:void(0)">-->
-                <!--<span>0{{ $index + 1 }}</span>-->
-              <!--</a>-->
+            <!--<a class="shoose-current-address-icn" href="javascript:void(0)">-->
+            <!--<span>0{{ $index + 1 }}</span>-->
+            <!--</a>-->
             <!--</h4>-->
 
           </div>
@@ -331,12 +331,12 @@
               <!--</div>-->
 
               <!--<div class="form-row clearfix" ng-show="$last">-->
-                <!--<div class="form-group no-label full-width">-->
-                  <!--<button class="btn btn-lg btn-info pull-right"-->
-                          <!--custom-disabled="{{ addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess }}"-->
-                          <!--ng-click="saveContactInfo(addressesWrapForm)">Save-->
-                  <!--</button>-->
-                <!--</div>-->
+              <!--<div class="form-group no-label full-width">-->
+              <!--<button class="btn btn-lg btn-info pull-right"-->
+              <!--custom-disabled="{{ addressesWrapForm.$invalid || addressesWrapForm.$pristine || savingContactInProcess }}"-->
+              <!--ng-click="saveContactInfo(addressesWrapForm)">Save-->
+              <!--</button>-->
+              <!--</div>-->
               <!--</div>-->
               <!--</div>-->
 
@@ -391,7 +391,7 @@
             </div>
 
             <!--<div class="col-3 hide"> TODO hide timeAllotment-->
-              <!--{{ service.timeBlock | timeFilter }}-->
+            <!--{{ service.timeBlock | timeFilter }}-->
             <!--</div>-->
 
             <div class="col-4">
@@ -430,10 +430,10 @@
         <span class="text-muted" ng-show="!services || services.length === 0">No Default Services.</span>
 
         <!--<div class="form-group no-label full-width">-->
-          <!--<button type="button" class="btn btn-lg btn-info pull-right"-->
-                  <!--custom-disabled="{{ isServicesChange() || disabledSaveButton }}"-->
-                  <!--ng-click="saveAllServices()">Save-->
-          <!--</button>-->
+        <!--<button type="button" class="btn btn-lg btn-info pull-right"-->
+        <!--custom-disabled="{{ isServicesChange() || disabledSaveButton }}"-->
+        <!--ng-click="saveAllServices()">Save-->
+        <!--</button>-->
         <!--</div>-->
 
       </div>
@@ -534,7 +534,8 @@
               </div>
 
               <div class="btn btn-lg btn-primary pull-right" style="margin-right: 10px;"
-                   ng-click="cancelTax(companyInfoEditTax)">Cancel</div>
+                   ng-click="cancelTax(companyInfoEditTax)">Cancel
+              </div>
             </div>
 
           </div>
@@ -592,9 +593,9 @@
               <span class="procent-rate">%</span>
 
               <!--<div class="btn btn-success pull-right"-->
-                   <!--ng-click="saveNewTax(newTaxRateForm)"-->
-                   <!--custom-disabled="{{ newTaxRateForm.$invalid }}">-->
-                <!--<i class="icn-sm small-icn-tick"></i>-->
+              <!--ng-click="saveNewTax(newTaxRateForm)"-->
+              <!--custom-disabled="{{ newTaxRateForm.$invalid }}">-->
+              <!--<i class="icn-sm small-icn-tick"></i>-->
               <!--</div>-->
 
             </div>
@@ -611,12 +612,12 @@
       </div>
 
       <!--<div class="form-row clearfix">-->
-        <!--<div class="form-group no-label full-width">-->
-          <!--<button type="button" class="btn btn-lg btn-info pull-right"-->
-                  <!--custom-disabled="{{ (!isTaxRatesChanges || isEditing) || savingTaxProcess }}"-->
-                  <!--ng-click="saveAllTax()">Save-->
-          <!--</button>-->
-        <!--</div>-->
+      <!--<div class="form-group no-label full-width">-->
+      <!--<button type="button" class="btn btn-lg btn-info pull-right"-->
+      <!--custom-disabled="{{ (!isTaxRatesChanges || isEditing) || savingTaxProcess }}"-->
+      <!--ng-click="saveAllTax()">Save-->
+      <!--</button>-->
+      <!--</div>-->
       <!--</div>-->
 
     </div>
@@ -680,20 +681,20 @@
     <!--</div>-->
 
     <div class="template-form-wrapper" invoice-config ticket-config>
-      <form name="invoiceForm">
+      <form name="invoiceAndTicketForm">
 
         <div class="form-row clearfix">
 
 
           <div class="form-group" style="max-width: 180px;"
-               ng-class="{'has-error': isShowingErrors(invoiceForm, 'ticketCount')}">
+               ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'ticketCount')}">
 
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'ticketCount')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'ticketCount')}">
               Starting Ticket Number
             </label>
 
-            <div ng-messages="invoiceForm.ticketCount.$error"
-                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'ticketCount')}">
+            <div ng-messages="invoiceAndTicketForm.ticketCount.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'ticketCount')}">
               <label class="control-label" ng-message="required" for="">cannot be left empty</label>
               <label class="control-label" ng-message="maxlength" for="">too large</label>
               <label class="control-label" ng-message="minlength" for="">too short</label>
@@ -707,14 +708,14 @@
 
 
           <div class="form-group" style="max-width: 180px"
-               ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceCount')}">
+               ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'invoiceCount')}">
 
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceCount')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'invoiceCount')}">
               Starting Invoice Number
             </label>
 
-            <div ng-messages="invoiceForm.invoiceCount.$error"
-                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceCount')}">
+            <div ng-messages="invoiceAndTicketForm.invoiceCount.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'invoiceCount')}">
               <label class="control-label" ng-message="required" for="">cannot be left empty.</label>
               <label class="control-label" ng-message="maxlength" for="">too large</label>
               <label class="control-label" ng-message="minlength" for="">too short</label>
@@ -727,14 +728,14 @@
           </div>
 
           <div class="form-group" style="max-width: 120px"
-               ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceTerms')}">
+               ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'invoiceTerms')}">
 
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceTerms')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'invoiceTerms')}">
               Default Invoice terms
             </label>
 
-            <div ng-messages="invoiceForm.invoiceTerms.$error"
-                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceTerms')}">
+            <div ng-messages="invoiceAndTicketForm.invoiceTerms.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'invoiceTerms')}">
               <label class="control-label" ng-message="required" for="">cannot be left empty.</label>
               <label class="control-label" ng-message="maxlength" for="">too large</label>
               <label class="control-label" ng-message="minlength" for="">too short</label>
@@ -752,14 +753,15 @@
         <div class="form-row clearfix">
 
           <div class="form-group full-width"
-               ng-class="{'has-error': isShowingErrors(invoiceForm, 'invoiceConditions')}">
+               ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'invoiceConditions')}">
 
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceForm, 'invoiceConditions')}">
+            <label class="control-label"
+                   ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'invoiceConditions')}">
               terms &amp; conditions of invoice
             </label>
 
-            <div ng-messages="invoiceForm.invoiceConditions.$error"
-                 ng-class="{ 'hide': !isShowingErrors(invoiceForm, 'invoiceConditions')}">
+            <div ng-messages="invoiceAndTicketForm.invoiceConditions.$error"
+                 ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'invoiceConditions')}">
               <label class="control-label" ng-message="required" for="">terms &amp; conditions field cannot be left
                 empty.</label>
             </div>
@@ -775,7 +777,7 @@
         <div class="form-row clearfix">
           <div class="form-group no-label full-width">
             <div class="btn btn-lg btn-info pull-right"
-                 custom-disabled="{{ invoiceForm.$invalid }}"
+                 custom-disabled="{{ invoiceAndTicketForm.$invalid }}"
                  ng-click="previewInvoice(basicInfoForm)">
               Preview Invoice
             </div>
@@ -1143,10 +1145,10 @@
       </div>
 
       <!--<div class="clearfix">-->
-        <!--<div class="btn btn-lg btn-info pull-right"-->
-             <!--custom-disabled="{{ notificationForm.$pristine || savingNotifiInProcess }}"-->
-             <!--ng-click="saveNotificationDaysHours(notificationForm)">Save-->
-        <!--</div>-->
+      <!--<div class="btn btn-lg btn-info pull-right"-->
+      <!--custom-disabled="{{ notificationForm.$pristine || savingNotifiInProcess }}"-->
+      <!--ng-click="saveNotificationDaysHours(notificationForm)">Save-->
+      <!--</div>-->
       <!--</div>-->
     </form>
   </div>

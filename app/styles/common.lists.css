@@ -1554,6 +1554,9 @@ Devices tab
 .qt-products>li:hover:not(.default-ctgr-prdcs) .no-items{
   display: none;
 }
+.qt-products>li:hover .no-items.not-hide-labels{
+  display: block;
+}
 .product-actions{
   position: absolute;
   right: 0;

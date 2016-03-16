@@ -61,7 +61,7 @@
 
 
             numberInput.on('focusout', function () {
-              if (scope.invoiceForm.$valid && ifInputsChange()) {
+              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function(){
 
                   invoiceParams.term = scope.invoiceConfig.term;
@@ -72,7 +72,7 @@
             });
 
             termsInput.on('focusout', function () {
-              if (scope.invoiceForm.$valid && ifInputsChange()) {
+              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function(){
 
                   invoiceParams.term = scope.invoiceConfig.term;
@@ -83,7 +83,7 @@
             });
 
             conditionsInput.on('focusout', function () {
-              if (scope.invoiceForm.$valid && ifInputsChange()) {
+              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function(){
 
                   invoiceParams.term = scope.invoiceConfig.term;

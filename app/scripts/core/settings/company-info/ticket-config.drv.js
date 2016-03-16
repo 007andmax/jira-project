@@ -34,13 +34,13 @@
             );
 
             numberInput.on('focusout', function () {
-              if (scope.ticketForm.$valid && ifInputsChange()) {
+              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
               }
             });
 
             prefixInput.on('focusout', function () {
-              if (scope.ticketForm.$valid && ifInputsChange()) {
+              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
               }
             });
