@@ -8,9 +8,13 @@
         restrict: 'A',
         link: function (scope, element) {
 
+          if (!scope.editUser.id) {
+            $('html, body').animate({scrollTop: element.offset().top}, 500);
+          }
+
           formToCenter();
 
-           function formToCenter() {
+          function formToCenter() {
 
             var wrapperWidth = element.width(),
               reqMargin = parseInt((wrapperWidth - 562 ) / 2),
