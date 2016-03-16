@@ -58,14 +58,14 @@
 
                       <div class="error-vendor-form-message" ng-messages="vendorForm.vendorWebsite.$error"
                            ng-class="{'hide': !isShowingErrors(vendorForm, 'vendorWebsite')}">
-                        <label class="control-label" ng-message="unique">This website already occupied.</label>
+                        <!--<label class="control-label" ng-message="unique">This website already occupied.</label>-->
                         <label class="control-label" ng-message="pattern">Please enter a valid website.</label>
                         <label class="control-label" ng-message="required">Vendor website is required.</label>
                       </div>
 
                       <input class="form-control" type="text" ng-model="editVendor.website"
                              aria-expanded="true" name="vendorWebsite" ng-required="true"
-                             is-uniq-validation validation-func="validateVendorWebsite" ng-pattern="websitePattern">
+                             ng-pattern="websitePattern"><!--is-uniq-validation validation-func="validateVendorWebsite"-->
                     </div>
 
                   </div>

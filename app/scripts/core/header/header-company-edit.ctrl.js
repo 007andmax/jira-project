@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.editCompanyCtrl',
-    ['$scope', 'CompaniesService', '$stateParams',
-      function ($scope, CompaniesService, $stateParams) {
+    ['$scope', 'CompaniesService', '$stateParams', '$state',
+      function ($scope, CompaniesService, $stateParams, $state) {
 
         $scope.getNameHeader = function(){
 
@@ -17,6 +17,14 @@
             return 'Create Company';
           }
 
+        };
+
+        $scope.back = function () {
+          if($stateParams.companyId){
+            $state.go('companyProfile', { companyId: $stateParams.companyId });
+          } else {
+            $state.go('companies');
+          }
         };
 
       }]);
