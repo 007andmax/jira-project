@@ -36,7 +36,9 @@
         <li ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
             <i class="nav-icon icn-lg icn-unassigned"></i> Unassigned
-            <span class="badge hide">{{ ticketCounts.UNASSIGNED }}</span><!--TODO remove if not used-->
+            <span class="badge" ng-show="ticketCounts.UNASSIGNED && (ticketCounts.UNASSIGNED > 0)">
+              {{ ticketCounts.UNASSIGNED }}
+            </span>
           </a>
         </li>
 
@@ -49,7 +51,9 @@
         <li ng-class="{active: $state.includes('tickets', {listType: 'shared'})}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'shared'})">
             <i class="nav-icon icn-lg icn-shared"></i> Shared
-            <span class="badge hide">{{ ticketCounts.SHARED }}</span><!--TODO remove if not used-->
+            <span class="badge" ng-show="ticketCounts.SHARED && (ticketCounts.SHARED > 0)">
+              {{ ticketCounts.SHARED }}
+            </span>
           </a>
         </li>
 
