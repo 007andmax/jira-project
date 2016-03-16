@@ -1,6 +1,6 @@
 <div class="products-content">
 
-  <div class="btn btn-block btn-lg btn-add-category pull-left"
+  <div class="btn btn-block btn-lg btn-add-category pull-left" ng-show="currentUser.role !== 'USER'"
        custom-disabled="{{ isCreateCategoryShow }}"
        ng-click="isCreateCategoryShow = true">
     <i class="icn-sm icn-add-category"></i>
@@ -64,7 +64,8 @@
 
         <div class="col-2">
 
-          <div class="no-items">
+          <div class="no-items"
+               ng-class="{'not-hide-labels': !((currentUser.role === 'SUPER_TECH_ADMIN') && !category.default)}">
             {{ category.productsAmount}} items
           </div>
 
@@ -145,7 +146,8 @@
                       <i class="icn-sm icn-edit"></i>
                     </a>
 
-                    <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip" ng-show="category.default"
+                    <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+                       ng-show="category.default"
                        aria-expanded="false" data-toggle="dropdown"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="move to other category">
                       <i class="icn-sm icn-send-again"></i>
@@ -178,7 +180,7 @@
 
             </ul>
 
-            <div class="add-product-btn-wrapper" ng-hide="category.default">
+            <div class="add-product-btn-wrapper" ng-hide="category.default || (currentUser.role !== 'SUPER_TECH_ADMIN')">
               <div class="btn btn-info has-tooltip"
                    ng-click="addProduct()"
                    custom-disabled="{{ showCreateProduct }}"

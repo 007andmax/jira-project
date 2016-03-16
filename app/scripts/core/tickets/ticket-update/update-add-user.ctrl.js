@@ -96,6 +96,14 @@
             }
           };
 
+          $scope.addItemToUpdate = function (item) {
+            if (item.accountType) {
+              $scope.addUserToUpdate(item);
+            } else {
+              $scope.addContactToUpdate(item);
+            }
+          }
+
 
         }]);
   }()

@@ -542,6 +542,9 @@ hr {
   margin: 0;
   padding: 3px 0 0;
 }
+ul.dropdown-menu.dropdown-privilege, ul.dropdown-menu.dropdown-subscribe{
+  top: 40px;
+}
 .modal-create-ticket .upload-attachments {
   padding: 0 10px 10px;
   background-color: #f1f5fa;
