@@ -334,8 +334,10 @@
         $scope.orderByForUsers = function (item) {
           if ($scope.orderUsersTab.fild === 'name') {
             return item.firstName + item.lastName;
-          } else {
+          } else if ($scope.orderUsersTab.fild === 'type') {
             return item.role;
+          } else if ($scope.orderUsersTab.fild === 'ticket') {
+            return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
           }
 
         };

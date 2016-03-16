@@ -25,6 +25,7 @@
                 cropBox = element.find('[crop-box]');
 
               cropBox.jWindowCrop({
+                customTypeCrop: 'avatar',
                 cropBoxWidth: 244,
                 cropBoxHeight: 244,
                 maxZoom: 2,

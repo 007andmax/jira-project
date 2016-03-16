@@ -24,7 +24,11 @@
            ng-class="{'icn-collapse': orderUsersTab.reverse, 'icn-expand': !orderUsersTab.reverse}"></i>
       </div>
 
-      <div class="col-4"><span>Tickets</span></div>
+      <div class="col-4" ng-click="setOrderByUsers('ticket')">
+        <span>Tickets</span>
+        <i class="icn-sm" style="margin-left: 80px;" ng-show="orderUsersTab.fild === 'ticket'"
+           ng-class="{'icn-collapse': orderUsersTab.reverse, 'icn-expand': !orderUsersTab.reverse}"></i>
+      </div>
 
       <div class="col-5"></div>
 

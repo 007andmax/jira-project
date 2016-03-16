@@ -21,9 +21,14 @@
 }
 
 .company-profile-header .company-new-cover-wrapper .btn-archive {
+  top: 10px;
   right: auto;
   left: 10px;
   z-index: 2;
+}
+
+.company-profile-header .rating {
+  position: relative;
 }
 
 .company-profile-header .company-new-cover-wrapper .company-info {
@@ -59,4 +64,13 @@
 
 .company-profile-content .qt-users li.list-heading .col-1, .company-profile-content .qt-users li.list-heading .col-3 {
   cursor: pointer;
+}
+
+.company-profile-content .company-edit-cover-wrapper {
+  float: left;
+  width: 37%;
+  height: 300px;
+  -webkit-background-size: cover;
+  background-size: cover;
+  position: relative;
 }
