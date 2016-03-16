@@ -14,6 +14,11 @@
   background-size: 100% 100%;
 }
 
+.company-profile-header .company-new-cover-wrapper .background-layer {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .company-profile-header .company-map-wrapper {
   width: calc(100% - 37%);
   height: 100%;

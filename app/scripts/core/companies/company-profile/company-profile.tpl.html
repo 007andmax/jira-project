@@ -4,166 +4,168 @@
 
     <div class="company-new-cover-wrapper" ng-if="!isShowEditCover"
          ng-style="{'background-image':'url(' + getCompanyCoverUrl(company) + ')'}">
-      <!--company-cover-wrapper-->
+      <div class="background-layer">
+        <!--company-cover-wrapper-->
 
-      <div class="btn btn-archive has-tooltip" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
-           ng-click="archiveCompany()"
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
-        <i class="icn-sm icn-archive-company"></i>
-      </div>
+        <div class="btn btn-archive has-tooltip" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
+             ng-click="archiveCompany()"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
+          <i class="icn-sm icn-archive-company"></i>
+        </div>
 
-      <div class="company-info">
+        <div class="company-info">
 
-        <div class="company-name">{{ companyData.name }}</div>
+          <div class="company-name">{{ companyData.name }}</div>
 
-        <div class="company-short-info">
+          <div class="company-short-info">
 
-          <div class="company-location"><i class="icn-sm icn-location-white"></i>
-            {{ companyData.primaryAddress.address }}
-          </div>
+            <div class="company-location"><i class="icn-sm icn-location-white"></i>
+              {{ companyData.primaryAddress.address }}
+            </div>
 
-          <i class="dot-sep"></i>
+            <i class="dot-sep"></i>
 
-          <div class="company-speciality">{{ companyData.type }}</div>
+            <div class="company-speciality">{{ companyData.type }}</div>
 
-          <a href="javascript:void(0)" class="hit-area ha-14-16"
-             custom-popover custom-popover-content="{{ companyData.description }}"
-             custom-popover-placement="bottom" custom-popover-first-left="25">
-            <i class="icn-sm icn-description-white"></i>
-          </a>
-
-          <div class="dropdown" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
-
-            <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-               data-toggle="dropdown" aria-expanded="false"
-               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Change Cover">
-              <i class="icn-md icn-cover"></i>
+            <a href="javascript:void(0)" class="hit-area ha-14-16"
+               custom-popover custom-popover-content="{{ companyData.description }}"
+               custom-popover-placement="bottom" custom-popover-first-left="25">
+              <i class="icn-sm icn-description-white"></i>
             </a>
 
-            <ul class="dropdown-menu">
+            <div class="dropdown" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
 
-              <li role="presentation">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover(true)">
-                  Upload Photo...
-                </a>
-              </li>
+              <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+                 data-toggle="dropdown" aria-expanded="false"
+                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="Change Cover">
+                <i class="icn-md icn-cover"></i>
+              </a>
 
-              <li role="presentation">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="restoreDefaultCover()">
-                  Restore Default Photo...
-                </a>
-              </li>
+              <ul class="dropdown-menu">
 
-              <li role="presentation" ng-show="company.cover">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover()">
-                  Reposition...
-                </a>
-              </li>
+                <li role="presentation">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover(true)">
+                    Upload Photo...
+                  </a>
+                </li>
 
+                <li role="presentation">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="restoreDefaultCover()">
+                    Restore Default Photo...
+                  </a>
+                </li>
+
+                <li role="presentation" ng-show="company.cover">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover()">
+                    Reposition...
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+            <a href="javascript:void(0)" class="hit-area has-tooltip"
+               ng-show="currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN'"
+               ui-sref="editCompany( { companyId: company.id } )"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
+              <i class="icn-md icn-edit-tag"></i>
+            </a>
+
+          </div>
+
+          <div class="company-rating">
+            <ul class="rating rating-5">
+              <li class="icn-sm icn-star-full star-1"></li>
+              <li class="icn-sm icn-star-full star-2"></li>
+              <li class="icn-sm icn-star-full star-3"></li>
+              <li class="icn-sm icn-star-half star-4"></li>
+              <li class="icn-sm icn-star-empty star-5"></li>
             </ul>
           </div>
 
-          <a href="javascript:void(0)" class="hit-area has-tooltip"
-             ng-show="currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN'"
-             ui-sref="editCompany( { companyId: company.id } )"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
-            <i class="icn-md icn-edit-tag"></i>
-          </a>
+          <div class="company-client-since">
+            Client since <span>{{ company.createdAt | date:'dd MMM yyyy' }}</span>
+          </div>
+
+          <!--<div class="average-response-time">-->
+          <!--<div class="icon"><i class="icn-lg icn-response-time"></i></div>-->
+          <!--Avg. Response Time 45 mins-->
+          <!--</div>-->
 
         </div>
 
-        <div class="company-rating">
-          <ul class="rating rating-5">
-            <li class="icn-sm icn-star-full star-1"></li>
-            <li class="icn-sm icn-star-full star-2"></li>
-            <li class="icn-sm icn-star-full star-3"></li>
-            <li class="icn-sm icn-star-half star-4"></li>
-            <li class="icn-sm icn-star-empty star-5"></li>
-          </ul>
-        </div>
+        <!--<div class="company-contact-location-wrapper">-->
 
-        <div class="company-client-since">
-          Client since <span>{{ company.createdAt | date:'dd MMM yyyy' }}</span>
-        </div>
+        <!--<div class="panel-group" ng-init="currentCollapse = 'CONTACTS'">-->
 
-        <!--<div class="average-response-time">-->
-        <!--<div class="icon"><i class="icn-lg icn-response-time"></i></div>-->
-        <!--Avg. Response Time 45 mins-->
+        <!--<div class="panel panel-default contacts-panel" style="top: 0">-->
+
+        <!--<div class="panel-heading">-->
+        <!--<h4 class="panel-title company-primary-contacts">-->
+        <!--<a href="javascript:void(0)" ng-class="{'collapsed': currentCollapse !== 'CONTACTS'}"-->
+        <!--ng-click="currentCollapse = 'CONTACTS'">-->
+
+        <!--Primary Contacts-->
+
+        <!--<span class="text-muted">{{ companyData.contacts.length }}</span>-->
+
+        <!--<i class="icn-sm icn-expand pull-right"></i>-->
+        <!--<span class="slider-arrows">-->
+
+        <!--<i class="icn-sm icn-arrow-previous"-->
+        <!--custom-disabled="{{ contactIndex <= 0 }}"-->
+        <!--ng-click="changeCurrentContact(contactIndex - 1)"></i>-->
+
+        <!--<i class="icn-sm icn-arrow-next"-->
+        <!--custom-disabled="{{ contactIndex >= companyData.contacts.length - 1 }}"-->
+        <!--ng-click="changeCurrentContact(contactIndex + 1)"></i>-->
+
+        <!--</span>-->
+        <!--</a>-->
+        <!--</h4>-->
         <!--</div>-->
 
+        <!--<div class="panel-collapse collapse" collapse="currentCollapse === 'LOCATIONS'"-->
+        <!--ng-include="'/html/scripts/core/companies/contacts-slider.tpl.html'"></div>-->
+
+        <!--</div>-->
+
+        <!--<div class="panel panel-default locations-panel">-->
+
+        <!--<div class="panel-heading">-->
+        <!--<h4 class="panel-title site-locations">-->
+        <!--<a href="javascript:void(0)" ng-class="{'collapsed': currentCollapse !== 'LOCATIONS'}"-->
+        <!--ng-click="currentCollapse = 'LOCATIONS'">-->
+
+        <!--Site / Locations-->
+
+        <!--<span class="text-muted">{{ companyData.addresses.length }}</span>-->
+
+        <!--<i class="icn-sm icn-expand pull-right"></i>-->
+        <!--<span class="slider-arrows">-->
+
+        <!--<i class="icn-sm icn-arrow-previous"-->
+        <!--custom-disabled="{{ locationIndex <= 0 }}"-->
+        <!--ng-click="changeCurrentLocation(locationIndex - 1)"></i>-->
+
+        <!--<i class="icn-sm icn-arrow-next"-->
+        <!--custom-disabled="{{ locationIndex >= companyData.addresses.length - 1 }}"-->
+        <!--ng-click="changeCurrentLocation(locationIndex + 1)"></i>-->
+
+        <!--</span>-->
+        <!--</a>-->
+        <!--</h4>-->
+        <!--</div>-->
+
+        <!--<div class="panel-collapse collapse" collapse="currentCollapse === 'CONTACTS'"-->
+        <!--ng-include="'/html/scripts/common/templates/location-slider.tpl.html'"></div>-->
+
+        <!--</div>-->
+
+        <!--</div>-->
+
+        <!--</div>-->
       </div>
-
-      <!--<div class="company-contact-location-wrapper">-->
-
-      <!--<div class="panel-group" ng-init="currentCollapse = 'CONTACTS'">-->
-
-      <!--<div class="panel panel-default contacts-panel" style="top: 0">-->
-
-      <!--<div class="panel-heading">-->
-      <!--<h4 class="panel-title company-primary-contacts">-->
-      <!--<a href="javascript:void(0)" ng-class="{'collapsed': currentCollapse !== 'CONTACTS'}"-->
-      <!--ng-click="currentCollapse = 'CONTACTS'">-->
-
-      <!--Primary Contacts-->
-
-      <!--<span class="text-muted">{{ companyData.contacts.length }}</span>-->
-
-      <!--<i class="icn-sm icn-expand pull-right"></i>-->
-      <!--<span class="slider-arrows">-->
-
-      <!--<i class="icn-sm icn-arrow-previous"-->
-      <!--custom-disabled="{{ contactIndex <= 0 }}"-->
-      <!--ng-click="changeCurrentContact(contactIndex - 1)"></i>-->
-
-      <!--<i class="icn-sm icn-arrow-next"-->
-      <!--custom-disabled="{{ contactIndex >= companyData.contacts.length - 1 }}"-->
-      <!--ng-click="changeCurrentContact(contactIndex + 1)"></i>-->
-
-      <!--</span>-->
-      <!--</a>-->
-      <!--</h4>-->
-      <!--</div>-->
-
-      <!--<div class="panel-collapse collapse" collapse="currentCollapse === 'LOCATIONS'"-->
-      <!--ng-include="'/html/scripts/core/companies/contacts-slider.tpl.html'"></div>-->
-
-      <!--</div>-->
-
-      <!--<div class="panel panel-default locations-panel">-->
-
-      <!--<div class="panel-heading">-->
-      <!--<h4 class="panel-title site-locations">-->
-      <!--<a href="javascript:void(0)" ng-class="{'collapsed': currentCollapse !== 'LOCATIONS'}"-->
-      <!--ng-click="currentCollapse = 'LOCATIONS'">-->
-
-      <!--Site / Locations-->
-
-      <!--<span class="text-muted">{{ companyData.addresses.length }}</span>-->
-
-      <!--<i class="icn-sm icn-expand pull-right"></i>-->
-      <!--<span class="slider-arrows">-->
-
-      <!--<i class="icn-sm icn-arrow-previous"-->
-      <!--custom-disabled="{{ locationIndex <= 0 }}"-->
-      <!--ng-click="changeCurrentLocation(locationIndex - 1)"></i>-->
-
-      <!--<i class="icn-sm icn-arrow-next"-->
-      <!--custom-disabled="{{ locationIndex >= companyData.addresses.length - 1 }}"-->
-      <!--ng-click="changeCurrentLocation(locationIndex + 1)"></i>-->
-
-      <!--</span>-->
-      <!--</a>-->
-      <!--</h4>-->
-      <!--</div>-->
-
-      <!--<div class="panel-collapse collapse" collapse="currentCollapse === 'CONTACTS'"-->
-      <!--ng-include="'/html/scripts/common/templates/location-slider.tpl.html'"></div>-->
-
-      <!--</div>-->
-
-      <!--</div>-->
-
-      <!--</div>-->
     </div>
 
     <div class="hass-error control-label" style="position:absolute; top: 538px;left: 40px;color: #e53935;"
