@@ -173,9 +173,9 @@
       {{ messageError }}
     </div>
 
-    <div edit-cover ng-if="editCover" ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
+    <div edit-cover ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
          ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
-         ng-model="editCover" model-name="company" model-id="{{ company.id }}"
+         ng-model="editCover" model-name="company" model-id="company.id"
          ec-is-show-loader-on-cover="isShowLoaderOnCover"
          ec-disabled-cover-control="disabledCoverControl"></div>
 

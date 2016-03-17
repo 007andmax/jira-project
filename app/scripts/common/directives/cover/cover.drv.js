@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('editCover',
-    ['$modal', 'FilesService', '$rootScope',
-      function ($modal, FilesService, $rootScope) {
+    ['$modal', 'FilesService', '$rootScope', '$timeout',
+      function ($modal, FilesService, $rootScope, $timeout) {
 
         var urlGetters = {
           company: $rootScope.getCompanyCoverUrl
@@ -35,10 +35,41 @@
               throw 'model-name must be specified! Available values - ["company"]';
             }
 
-            setupUploading();
-            initialize();
+            fileUploader.fileUploader({
+              uploadUrl: '/file?isAvatar=true',
+              uploadName: 'file',
+              maxUploadSize: 4194304,
+              accpetType: '.jpg,.png,.gif',
+              allowedExtensions: ['jpg', 'png', 'gif'],
+              minImageWidth: 326,
+              minImageHeight: 163,
 
-            scope.$on('initializeCoverCropper', initialize);
+              onStart: function () {
+
+                scope.$emit('showEditCover');
+                scope.isShowLoaderOnCover = false;
+                scope.$apply('disabledCoverControl = true');
+
+                cropBox.replaceWith(cropBoxClone);
+                cropBox = cropBoxClone;
+                cropBoxClone = cropBox.clone();
+
+              },
+              onProgress: function (progress) {
+              },
+              onSuccess: function (data) {
+                ctrl.$setViewValue({
+                  origin: {
+                    id: data.id
+                  }
+                });
+
+                setupCropBoxModel(false);
+              },
+              onFailure: function (message) {
+                scope.$emit('showErrorCover', message);
+              }
+            });
 
             scope.getUrl = function () {
               return urlGetters[attrs.modelName]({id: attrs.modelId});
@@ -60,97 +91,68 @@
 
             function setupCropBoxModel(isReposition) {
 
-              cropBox.jWindowCrop({
-                customTypeCrop: 'cover',
-                cropBoxWidth: cropBox.width(),
-                cropBoxHeight: cropBox.height(),
-                maxZoom: 2,
-                imageSource: '/file/' + scope.model.origin.id,
-                loadingText: 'Loading ...',
+              $timeout(function () {
 
-                rangeSelectElement: rangeZoom,
-                rangeIncreaseElement: icnZoomPlus,
-                rangeDecreaseElement: icnZoomMinus,
+                cropBox.jWindowCrop({
+                  customTypeCrop: 'cover',
+                  cropBoxWidth: cropBox.width(),
+                  cropBoxHeight: cropBox.height(),
+                  maxZoom: 2,
+                  imageSource: '/file/' + scope.model.origin.id,
+                  loadingText: 'Loading ...',
 
-                startWith: !isReposition ? null : {
-                  x: scope.model.x,
-                  y: scope.model.y,
-                  w: scope.model.w,
-                  h: scope.model.h
-                },
-                onImageLoad: function () {
+                  rangeSelectElement: rangeZoom,
+                  rangeIncreaseElement: icnZoomPlus,
+                  rangeDecreaseElement: icnZoomMinus,
 
-                  scope.isShowLoaderOnCover = false;
+                  startWith: !isReposition ? null : {
+                    x: scope.model.x,
+                    y: scope.model.y,
+                    w: scope.model.w,
+                    h: scope.model.h
+                  },
+                  onImageLoad: function () {
 
-                  cropBox.show();
+                    scope.isShowLoaderOnCover = false;
 
-                  instructionWrap.fadeOut(1000);
+                    cropBox.show();
 
-                  scope.$apply('disabledCoverControl = false');
+                    instructionWrap.fadeOut(1000);
 
-                  icnZoomPlus.removeClass('disabled');
-                  icnZoomMinus.removeClass('disabled');
-                },
+                    scope.disabledCoverControl = false;
+                    icnZoomPlus.removeClass('disabled');
+                    icnZoomMinus.removeClass('disabled');
 
-                onChange: function (e) {
-                  scope.model.x = e.cropX;
-                  scope.model.y = e.cropY;
-                  scope.model.w = e.cropW;
-                  scope.model.h = e.cropH;
-                  scope.model.sizeW = e.sizeW;
-                  scope.model.sizeH = e.sizeH;
-                }
+                    scope.$apply();
+
+                  },
+
+                  onChange: function (e) {
+                    scope.model.x = e.cropX;
+                    scope.model.y = e.cropY;
+                    scope.model.w = e.cropW;
+                    scope.model.h = e.cropH;
+                    scope.model.sizeW = e.sizeW;
+                    scope.model.sizeH = e.sizeH;
+
+                    scope.disabledCoverControl = false;
+                  }
+                });
               });
             }
 
-            function setupUploading() {
+            scope.$on('openEditCover', function (event, data) {
 
-              $(fileUploader).fileUploader({
-                uploadUrl: '/file?isAvatar=true',
-                uploadName: 'file',
-                maxUploadSize: 4194304,
-                accpetType: '.jpg,.png,.gif',
-                allowedExtensions: ['jpg', 'png', 'gif'],
-                minImageWidth: 326,
-                minImageHeight: 163,
-
-
-                onStart: function () {
-
-                  scope.$emit('showEditCover');
-                  scope.isShowLoaderOnCover = false;
-                  scope.$apply('disabledCoverControl = true');
-
-                  cropBox.replaceWith(cropBoxClone);
-                  cropBox = cropBoxClone;
-                  cropBoxClone = cropBox.clone();
-
-                },
-                onProgress: function (progress) {
-                },
-                onSuccess: function (data) {
-                  ctrl.$setViewValue({
-                    origin: {
-                      id: data.id
-                    }
-                  });
-
-                  setupCropBoxModel(false);
-                },
-                onFailure: function (message) {
-                  scope.$emit('showErrorCover', message);
-                }
-              });
-            }
-
-            function initialize() {
-              if (scope.model.origin && scope.model.origin.id) {
+              if (data.origin && data.origin.id) {
+                ctrl.$setViewValue(data);
                 scope.$emit('showEditCover');
                 setupCropBoxModel(true);
               } else {
-                $(fileUploader).trigger(scope.model.noLoadImage ? '' : 'click');
+                ctrl.$setViewValue({});
+                fileUploader.click();
               }
-            }
+
+            });
 
           }
         };
