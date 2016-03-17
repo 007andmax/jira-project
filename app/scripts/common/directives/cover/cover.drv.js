@@ -148,7 +148,7 @@
                 scope.$emit('showEditCover');
                 setupCropBoxModel(true);
               } else {
-                $(fileUploader).trigger('click');
+                $(fileUploader).trigger(scope.model.noLoadImage ? '' : 'click');
               }
             }
 

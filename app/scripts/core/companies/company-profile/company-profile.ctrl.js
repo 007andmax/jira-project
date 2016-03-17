@@ -15,7 +15,7 @@
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
 
-        $scope.editCover = {};/*initialize editCover drv and off*/
+        $scope.editCover = {noLoadImage: true};/*initialize editCover drv and off*/
         $timeout(closeEditCover, 0);
 
         $scope.isChartHasOpen = false;
@@ -144,7 +144,7 @@
         $scope.showEditCover = function (option) {
 
           if ($scope.editCover) {
-            $scope.editCover = undefined;
+            $scope.editCover = false;
           }
 
           $timeout(function () {
@@ -153,7 +153,7 @@
             } else {
               $scope.editCover = $scope.company.cover ? $scope.company.cover.staticCopy() : {};
             }
-          });
+          }, 150);
         };
 
         $scope.cancelEditCover = closeEditCover;
