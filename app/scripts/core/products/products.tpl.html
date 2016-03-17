@@ -98,16 +98,39 @@
             <ul class="qt-list qt-product-list">
 
               <li class="list-heading" ng-show="products.length > 0">
-                <div class="col-1">ILC</div>
-                <div class="col-1">Mfg#</div>
-                <div class="col-2">DESCRIPTION</div>
-                <div class="col-3">VENDOR/SUPPLIER</div>
-                <div class="col-4">COST</div>
-                <div class="col-5">SALE PRICE</div>
+                <div class="col-1" ng-click="setOrderForProducts('ilc')">
+                  ILC
+                  <i class="icn-sm sort-icon" style="margin-left: 25px;" ng-show="orderProducts.field === 'ilc'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-1" ng-click="setOrderForProducts('manufacture')">
+                  Mfg#
+                  <i class="icn-sm sort-icon" style="margin-left: 35px;" ng-show="orderProducts.field === 'manufacture'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-2" ng-click="setOrderForProducts('description')">
+                  DESCRIPTION
+                  <i class="icn-sm sort-icon" style="margin-left: 75px;" ng-show="orderProducts.field === 'description'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-3" ng-click="setOrderForProducts('vendor')">
+                  VENDOR/SUPPLIER
+                  <i class="icn-sm sort-icon" style="margin-left: 100px;" ng-show="orderProducts.field === 'vendor'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i></div>
+                <div class="col-4" ng-click="setOrderForProducts('cost')">
+                  COST
+                  <i class="icn-sm sort-icon" style="margin-left: 35px;" ng-show="orderProducts.field === 'cost'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-5" ng-click="setOrderForProducts('sale')">
+                  SALE PRICE
+                  <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderProducts.field === 'sale'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
                 <div class="col-6">&nbsp;</div>
               </li>
 
-              <li ng-repeat="product in products | orderBy : 'description'"
+              <li ng-repeat="product in products | orderBy : orderByForProducts : orderProducts.reverse"
                   ng-class="{'qt-product-form': showEditProduct}"
                   ng-controller="quicktech.core.products.productCtrl"
                   show-model-element="{{ 'show-' + product.versionedId.id}}">

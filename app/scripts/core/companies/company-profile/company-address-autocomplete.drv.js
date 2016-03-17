@@ -23,6 +23,7 @@
               zoomControl: true,
               scaleControl: true,
               scrollwheel: false,
+              streetViewControl: false,
               zoomControlOptions: {
                 position: google.maps.ControlPosition.LEFT_CENTER
               }

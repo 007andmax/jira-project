@@ -10,6 +10,11 @@
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.servicesData = ServicesService.getServicesData($scope, false);
 
+        $scope.orderServices = {
+          field: 'name',
+          reverse: false
+        };
+
         $scope.getCheckedDefaultServices = function () {
           var checkedDefaultServices = [];
 
@@ -52,7 +57,27 @@
               $scope.checkedDefaultServices++
             }
           }
-        }, true)
+        }, true);
+
+        $scope.setOrderForServices = function (option) {
+          if (option === $scope.orderServices.field) {
+            $scope.orderServices.reverse = !$scope.orderServices.reverse;
+          } else {
+            $scope.orderServices.field = option;
+            $scope.orderServices.reverse = false;
+          }
+        };
+
+        $scope.orderByForServices = function (item) {
+          if ($scope.orderServices.field === 'name') {
+            return item.name;
+          } else if ($scope.orderServices.field === 'billable') {
+            return item.billable;
+          } else if ($scope.orderServices.field === 'rate') {
+            return item.rate;
+          }
+
+        };
 
       }]);
 
