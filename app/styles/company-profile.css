@@ -34,6 +34,7 @@
 
 .company-profile-header .rating {
   position: relative;
+  right: 0;
 }
 
 .company-profile-header .company-new-cover-wrapper .company-info {

@@ -15,6 +15,9 @@
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
 
+        $scope.editCover = {noLoadImage: true};/*initialize editCover drv and off*/
+        $timeout(closeEditCover, 0);
+
         $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
         $scope.mode = 'user';
@@ -140,13 +143,17 @@
 
         $scope.showEditCover = function (option) {
 
-          $scope.isOpenUploadWindow = option;
-
-          if (option) {
-            $scope.editCover = {}
-          } else {
-            $scope.editCover = $scope.company.cover ? $scope.company.cover.staticCopy() : {};
+          if ($scope.editCover) {
+            $scope.editCover = false;
           }
+
+          $timeout(function () {
+            if (option) {
+              $scope.editCover = {}
+            } else {
+              $scope.editCover = $scope.company.cover ? $scope.company.cover.staticCopy() : {};
+            }
+          }, 150);
         };
 
         $scope.cancelEditCover = closeEditCover;
