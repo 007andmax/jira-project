@@ -6,6 +6,11 @@
     ['$scope', 'TaxRatesService', 'CompaniesService',
       function ($scope, TaxRatesService, CompaniesService) {
 
+        $scope.orderTaxRates = {
+          field: 'code',
+          reverse: false
+        };
+
         TaxRatesService.getAllTaxRates($scope, function (resp) {
           var allTaxRates = angular.copy(resp);
 
@@ -21,7 +26,25 @@
 
         $scope.deleteTax = function (taxId) {
           TaxRatesService.deleteTaxRate(taxId)
-        }
+        };
+
+        $scope.setOrderForTaxRates = function (option) {
+          if (option === $scope.orderTaxRates.field) {
+            $scope.orderTaxRates.reverse = !$scope.orderTaxRates.reverse;
+          } else {
+            $scope.orderTaxRates.field = option;
+            $scope.orderTaxRates.reverse = false;
+          }
+        };
+
+        $scope.orderByForTaxRates = function (item) {
+          if ($scope.orderTaxRates.field === 'code') {
+            return item.code;
+          } else if ($scope.orderTaxRates.field === 'rate') {
+            return item.rate;
+          }
+
+        };
 
       }]);
 

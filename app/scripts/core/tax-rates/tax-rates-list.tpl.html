@@ -1,12 +1,20 @@
 <ul class="qt-list tax-rates-list">
 
   <li class="list-heading" ng-show="taxRates.length > 0">
-    <div class="col-1">Tax Description</div>
-    <div class="col-2" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">Tax Percent</div>
+    <div class="col-1" ng-click="setOrderForTaxRates('code')">
+      Tax Description
+      <i class="icn-sm sort-icon" style="margin-left: 95px;" ng-show="orderTaxRates.field === 'code'"
+         ng-class="{'icn-collapse': orderTaxRates.reverse, 'icn-expand': !orderTaxRates.reverse}"></i>
+    </div>
+    <div class="col-2" ng-click="setOrderForTaxRates('rate')" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+      Tax Percent
+      <i class="icn-sm sort-icon" style="margin-left: 70px;" ng-show="orderTaxRates.field === 'rate'"
+         ng-class="{'icn-collapse': orderTaxRates.reverse, 'icn-expand': !orderTaxRates.reverse}"></i>
+    </div>
     <div class="col-3">&nbsp;</div>
   </li>
 
-  <li ng-repeat="taxRate in taxRates"
+  <li ng-repeat="taxRate in taxRates | orderBy : orderByForTaxRates : orderTaxRates.reverse"
       ng-class="{'edit-form': editTaxKey === taxRate.versionedId.id}">
 
     <div class="intermediate-parent-elem" ng-if="editTaxKey !== taxRate.versionedId.id">
