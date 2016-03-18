@@ -81,7 +81,15 @@
         };
 
         $scope.restoreDefault = function () {
-          DevicesService.deleteDeviceSettings($scope.customizeDevices[$scope.device.id].id)
+          if ($scope.customizeDevices[$scope.device.id]) {
+            $scope.savingCredentional = true;
+
+            DevicesService.deleteDeviceSettings($scope.customizeDevices[$scope.device.id].id, function () {
+              $scope.savingCredentional = false;
+              $scope.isLogOnDrpdwnOpen = false;
+            });
+          }
+
         };
 
         $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
@@ -117,8 +125,8 @@
           }
         });
 
-        $scope.toogleLogOnDrpdwn = function(isOpen){
-          if(isOpen){
+        $scope.toogleLogOnDrpdwn = function (isOpen) {
+          if (isOpen) {
             $scope.credential = {
               name: $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].login : $scope.defaultName,
               pass: $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].password : $scope.defaultPass
