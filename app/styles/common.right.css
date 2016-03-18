@@ -807,3 +807,37 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   margin-top: 4px;
   margin-right: 10px;
 }
+
+.device-context-menu{
+  margin: 0;
+  list-style: none;
+  padding: 11px 0;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 4px 20px 0 rgba(10,45,89,.1);
+  z-index: 1000;
+}
+
+.device-context-menu li{
+  padding: 0;
+  display: block;
+  position: relative;
+  border: none;
+  background: none;
+}
+
+.device-context-menu li > a{
+  display: block;
+  padding: 5px 20px;
+  line-height: 20px;
+  color: #4c5c6f;
+}
+
+.device-context-menu li > a > i.icn-sm{
+  margin-top: 4px;
+  margin-right: 10px;
+}
+
+aside#right .sidebar-general .general-devices li .user-name.not-user-name{
+  margin-top: 7px;
+}
