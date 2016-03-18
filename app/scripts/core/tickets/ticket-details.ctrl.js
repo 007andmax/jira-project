@@ -110,6 +110,11 @@
           };
 
           $scope.changeTicketPriority = function (priority) {
+            if($scope.ticketDetails.priorityLevel === priority){
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” priority already set to ' + priority, true);
+              return;
+            }
+
             TicketsService.changePriority($scope.ticketDetails.id, priority, function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” priority has been changed to ' + priority, true);
             });
