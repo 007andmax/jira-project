@@ -911,3 +911,8 @@ aside#left div.nav-title {
 .devices-content .tab-content .list-heading i.icn-expand {
   margin-top:-10px;
 }
+
+[te-editor]:empty:not(:focus):before{
+  content:attr(data-text);
+  color: #c0bfcd;
+}

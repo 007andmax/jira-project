@@ -23,7 +23,8 @@
 
     <div class="modal-body">
 
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}">
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}"
+           style="margin-bottom: 10px;">
 
         <input type="text" class="form-control" placeholder="Subject"
                name="ticketSubject"
@@ -36,7 +37,7 @@
         <div text-editor ng-model="ticket.note" te-required="true" name="note">
 
           <div te-editor class="form-control editor" contenteditable="true"
-               placeholder="Type your message..." style="min-height: 92px;height: auto;border: none;"></div>
+               style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
 
           <div class="form-group">
             <ul class="upload-attachments"><!--
