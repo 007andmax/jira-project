@@ -7,16 +7,13 @@
  */
 
 (function ($) {
-  function fillContainer(val, targetLength, containerLength, type) {
+  function fillContainer(val, targetLength, containerLength, imgType) {
 
-    if (type === 'cover') {
-
+    if (imgType === 'cover') {
       // ensure that no gaps are between target's edges and container's edges
       if (val + targetLength < containerLength) val = containerLength - targetLength;
       if (val > 0) val = 0;
-
     } else {
-
       if (targetLength <= containerLength) {
         if (val + targetLength < containerLength - (244 - targetLength)) {
           val = containerLength - 244;
@@ -28,7 +25,6 @@
         if (val + targetLength < containerLength) val = containerLength - targetLength;
         if (val > 0) val = 0;
       }
-
     }
 
     return val;
@@ -36,8 +32,7 @@
 
   $.jWindowCrop = function (container, options) {
     var base = this;
-    var startZoom = 0;
-    var type;
+    var startZoomAvatar;
 
     base.$container = $(container); // target container jquery element
     base.container = container; // target container dom element
@@ -48,14 +43,13 @@
     base.isDragging = false;
 
     base.init = function () {
+      startZoomAvatar = 0;
 
       base.$container.addClass('jwc_container').css({'margin': '0px auto', 'overflow': 'hidden'});
 
       // extend default optoins with user specified options
       base.options = $.extend({}, $.jWindowCrop.defaultOptions, options);
       if (base.options.zoomSteps < 2) base.options.zoomSteps = 2;
-
-      type = base.options.customTypeCrop;
 
       // setup html elements
       base.$container.append('<div class="jwc_outer">');
@@ -164,15 +158,12 @@
     };
 
     function initializeDimensions() {
-
-      if (base.originalWidth == 0) {
-        base.originalWidth = base.$image.width();
-        base.originalHeight = base.$image.height();
-      }
-
-      if (type === 'cover') {
-
+      if (base.options.customTypeCrop === 'cover') {
         var startZoom = 0;
+        if (base.originalWidth == 0) {
+          base.originalWidth = base.$image.width();
+          base.originalHeight = base.$image.height();
+        }
         if (base.originalWidth > 0) {
           // calculate minimum zoom based on image and cropbox dimensions
           var widthRatio = base.options.cropBoxWidth / base.originalWidth;
@@ -214,46 +205,49 @@
           'min': Math.floor(base.minPercent * 100),
           'max': Math.ceil(base.options.maxZoom * 100)
         }).val(Math.floor(startZoom * 100));
-
-      } else {
-
-        if (base.originalWidth > 0) {
-          // calculate minimum zoom based on image and cropbox dimensions
-          var widthRatio = base.options.cropBoxWidth / base.originalWidth;
-          var heightRatio = base.options.cropBoxHeight / base.originalHeight;
-          //base.minPercent = (widthRatio >= heightRatio) ? widthRatio : heightRatio;
-          if (widthRatio >= heightRatio) {
-            base.minPercent = (base.originalWidth < base.options.cropBoxWidth) ? (base.options.cropBoxWidth / base.originalWidth) : widthRatio;
-          }
-
-          if (base.options.startWith != null) {
-            startZoom = base.options.cropBoxWidth / base.options.startWith.w;
-            base.focalPoint = {
-              'x': base.options.startWith.x + Math.floor(parseInt(base.options.cropBoxWidth / startZoom) / 2),
-              'y': base.options.startWith.y + Math.ceil(parseInt(base.options.cropBoxHeight / startZoom) / 2)
-            };
-            base.focalPoint = {
-              'x': base.options.startWith.x + Math.round(base.options.startWith.w / 2),
-              'y': base.options.startWith.y + Math.round(base.options.startWith.h / 2)
-            };
-          } else {
-            base.focalPoint = {'x': Math.round(base.originalWidth / 2), 'y': Math.round(base.originalHeight / 2)};
-          }
-
-          var minCropBoxSize = base.options.cropBoxHeight < base.options.cropBoxWidth ? base.options.cropBoxHeight : base.options.cropBoxWidth;
-          var maxOriginSize = base.originalHeight < base.originalWidth ? base.originalWidth : base.originalHeight;
-
-          startZoom = minCropBoxSize / maxOriginSize;
-
-          base.setZoom(startZoom);
-          base.$image.fadeIn('fast'); //display image now that it has loaded
-        }
-        if (base.$rangeSelect.length) base.$rangeSelect.prop({
-          'min': Math.floor(startZoom * 100),
-          'max': Math.ceil((startZoom + 1) * 100)
-        }).val(Math.floor(startZoom * 100));
+        return
       }
 
+
+      if (base.originalWidth == 0) {
+        base.originalWidth = base.$image.width();
+        base.originalHeight = base.$image.height();
+      }
+      if (base.originalWidth > 0) {
+        // calculate minimum zoom based on image and cropbox dimensions
+        var widthRatio = base.options.cropBoxWidth / base.originalWidth;
+        var heightRatio = base.options.cropBoxHeight / base.originalHeight;
+        //base.minPercent = (widthRatio >= heightRatio) ? widthRatio : heightRatio;
+        if (widthRatio >= heightRatio) {
+          base.minPercent = (base.originalWidth < base.options.cropBoxWidth) ? (base.options.cropBoxWidth / base.originalWidth) : widthRatio;
+        }
+
+        if (base.options.startWith != null) {
+          startZoomAvatar = base.options.cropBoxWidth / base.options.startWith.w;
+          base.focalPoint = {
+            'x': base.options.startWith.x + Math.floor(parseInt(base.options.cropBoxWidth / startZoomAvatar) / 2),
+            'y': base.options.startWith.y + Math.ceil(parseInt(base.options.cropBoxHeight / startZoomAvatar) / 2)
+          };
+          base.focalPoint = {
+            'x': base.options.startWith.x + Math.round(base.options.startWith.w / 2),
+            'y': base.options.startWith.y + Math.round(base.options.startWith.h / 2)
+          };
+        } else {
+          base.focalPoint = {'x': Math.round(base.originalWidth / 2), 'y': Math.round(base.originalHeight / 2)};
+        }
+
+        var minCropBoxSize = base.options.cropBoxHeight < base.options.cropBoxWidth ? base.options.cropBoxHeight : base.options.cropBoxWidth;
+        var maxOriginSize = base.originalHeight < base.originalWidth ? base.originalWidth : base.originalHeight;
+
+        startZoomAvatar = minCropBoxSize / maxOriginSize;
+
+        base.setZoom(startZoomAvatar);
+        base.$image.fadeIn('fast'); //display image now that it has loaded
+      }
+      if (base.$rangeSelect.length) base.$rangeSelect.prop({
+        'min': Math.floor(startZoomAvatar * 100),
+        'max': Math.ceil((startZoomAvatar + 1) * 100)
+      }).val(Math.floor(startZoomAvatar * 100));
     }
 
     function storeFocalPoint() {
@@ -263,8 +257,8 @@
     }
 
     function focusOnCenter() {
-      var left = fillContainer((Math.round((base.focalPoint.x * base.workingPercent) - base.options.cropBoxWidth / 2) * -1), base.$image.width(), base.options.cropBoxWidth, type);
-      var top = fillContainer((Math.round((base.focalPoint.y * base.workingPercent) - base.options.cropBoxHeight / 2) * -1), base.$image.height(), base.options.cropBoxHeight, type);
+      var left = fillContainer((Math.round((base.focalPoint.x * base.workingPercent) - base.options.cropBoxWidth / 2) * -1), base.$image.width(), base.options.cropBoxWidth, base.options.customTypeCrop);
+      var top = fillContainer((Math.round((base.focalPoint.y * base.workingPercent) - base.options.cropBoxHeight / 2) * -1), base.$image.height(), base.options.cropBoxHeight, base.options.customTypeCrop);
       base.$image.css({'left': (left.toString() + 'px'), 'top': (top.toString() + 'px')})
       storeFocalPoint();
     }
@@ -305,8 +299,8 @@
       if (base.isDragging) {
         var xDif = (event.pageX || event.originalEvent.touches[0].pageX) - base.dragMouseCoords.x;
         var yDif = (event.pageY || event.originalEvent.touches[0].pageY) - base.dragMouseCoords.y;
-        var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width() - 1, base.options.cropBoxWidth, type);
-        var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height() - 1, base.options.cropBoxHeight, type);
+        var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width() - 1, base.options.cropBoxWidth, base.options.customTypeCrop);
+        var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height() - 1, base.options.cropBoxHeight, base.options.customTypeCrop);
         base.$image.css({'left': (newLeft.toString() + 'px'), 'top': (newTop.toString() + 'px')});
         storeFocalPoint();
         updateResult();
@@ -322,11 +316,11 @@
     }
 
     function handleRangeSelect() {
-      if (type === 'cover') {
+      if (base.options.customTypeCrop === 'cover') {
         base.setZoom($(this).val() / 100);
-      } else {
-        base.setZoom($(this).val() / 100 > startZoom ? $(this).val() / 100 : startZoom);
+        return
       }
+      base.setZoom($(this).val() / 100 > startZoomAvatar ? $(this).val() / 100 : startZoomAvatar);
     }
 
     function handleRangeIncrease() {

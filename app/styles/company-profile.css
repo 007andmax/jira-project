@@ -38,7 +38,7 @@
 }
 
 .company-profile-header .company-new-cover-wrapper .company-info {
-  width: 37%;
+  width: 450px;
   top: 70px;
   transform: none;
   margin: 0;
@@ -74,7 +74,7 @@
 
 .company-profile-content .company-edit-cover-wrapper {
   float: left;
-  width: 37%;
+  width: 450px;
   height: 300px;
   -webkit-background-size: cover;
   background-size: cover;

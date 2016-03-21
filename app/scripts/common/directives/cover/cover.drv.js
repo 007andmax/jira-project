@@ -87,6 +87,14 @@
             scope.callSaveEditCover = function (cover) {
               scope.disabledCoverControl = true;
               scope.saveEditCover(cover);
+              $timeout(function () {
+                cropBox.html('')
+              }, 0)
+            };
+
+            scope.callCancelEditCover = function () {
+              scope.cancelEditCover();
+              cropBox.html('')
             };
 
             function setupCropBoxModel(isReposition) {
