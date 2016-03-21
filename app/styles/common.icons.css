@@ -908,7 +908,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   background-position: -694px 1px;
 }
 :hover > .icn-remove-token, :active > .icn-remove-token, :focus:hover > .icn-remove-token, :focus:active > .icn-remove-token, :hover:active > .icn-remove-token, .active > .icn-remove-token, .open .icn-remove-token, .open > .btn:hover .icn-remove-token {
-  background-position: -735px 1px;
+  background-position: -734px 1px;
 }
 
 .icn-remove-token-white, .icn-remove-token-white:focus {

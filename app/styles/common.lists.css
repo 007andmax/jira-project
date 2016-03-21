@@ -103,7 +103,7 @@
   cursor: pointer;
 }
 .qt-users .col-1{
-  width: calc(100% - 631px);
+  width: calc(100% - 731px);
   white-space: nowrap;
 }
 .qt-users .col-2{
@@ -111,6 +111,9 @@
 }
 .qt-users .col-3{
   width: 134px;
+}
+.qt-users .col-3-2{
+  width: 100px;
 }
 .qt-users .col-4{
   width: 80px;
@@ -122,13 +125,16 @@
 }
 @media only screen and (min-width: 2000px){
   .qt-users .col-1{
-    width: calc(100% - 831px);
+    width: calc(100% - 931px);
   }
   .qt-users .col-2{
     width: 308px;
   }
   .qt-users .col-3{
     width: 234px;
+  }
+  .qt-users .col-3-2{
+    width: 100px;
   }
   .qt-users .col-4{
     width: 80px;
@@ -151,13 +157,16 @@
 }
 @media only screen and (max-width: 1600px){
   .qt-users .col-1{
-    width: calc(100% - 503px);
+    width: calc(100% - 603px);
   }
   .qt-users .col-2{
     width: 168px;
   }
   .qt-users .col-3{
     width: 94px;
+  }
+  .qt-users .col-3-2{
+    width: 100px;
   }
   .qt-users .col-4{
     width: 80px;
@@ -174,13 +183,16 @@
 }
 @media only screen and (max-width: 1450px){
   .qt-users .col-1{
-    width: calc(100% - 463px);
+    width: calc(100% - 563px);
   }
   .qt-users .col-2{
     width: 148px;
   }
   .qt-users .col-3{
     width: 94px;
+  }
+  .qt-users .col-3-2{
+    width: 100px;
   }
   .qt-users .col-4{
     width: 60px;
@@ -191,7 +203,7 @@
 }
 @media only screen and (max-width: 1200px){
   .qt-users .col-1{
-    width: calc(100% - 415px);
+    width: calc(100% - 515px);
   }
   .qt-users .col-5{
     width: 113px;

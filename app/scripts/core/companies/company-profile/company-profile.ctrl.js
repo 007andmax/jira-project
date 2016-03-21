@@ -15,9 +15,6 @@
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
 
-        $scope.editCover = {noLoadImage: true};/*initialize editCover drv and off*/
-        $timeout(closeEditCover, 0);
-
         $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
         $scope.mode = 'user';
@@ -142,25 +139,21 @@
         };
 
         $scope.showEditCover = function (option) {
-
-          if ($scope.editCover) {
-            $scope.editCover = false;
+          if (option) {
+            $scope.$broadcast('openEditCover', {})
+          } else {
+            $scope.$broadcast('openEditCover', $scope.company.cover ? $scope.company.cover.staticCopy() : {});
           }
 
-          $timeout(function () {
-            if (option) {
-              $scope.editCover = {}
-            } else {
-              $scope.editCover = $scope.company.cover ? $scope.company.cover.staticCopy() : {};
-            }
-          }, 150);
         };
 
-        $scope.cancelEditCover = closeEditCover;
+        $scope.cancelEditCover = function(){
+          $scope.isShowEditCover = false;
+        };
 
         $scope.restoreDefaultCover = function () {
           CompaniesService.deleteCover($scope.company.id, function () {
-            closeEditCover();
+            $scope.isShowEditCover = false;
           });
         };
 
@@ -168,7 +161,7 @@
           $scope.isShowLoaderOnCover = true;
           CompaniesService.saveCover(editCover, $scope.company.id, function () {
             $scope.isShowLoaderOnCover = false;
-            closeEditCover();
+            $scope.isShowEditCover = false;
           });
         };
 
@@ -310,7 +303,6 @@
 
           $scope.isShowErrorMessage = true;
           $scope.messageError = message;
-          $scope.editCover = undefined;
 
           $scope.$apply();
 
@@ -319,11 +311,6 @@
             $scope.messageError = '';
           }, 3000)
         });
-
-        function closeEditCover() {
-          $scope.editCover = undefined;
-          $scope.isShowEditCover = false;
-        }
 
         $scope.$on('$destroy', function () {
           rightPanelSharedState.companyId = undefined;

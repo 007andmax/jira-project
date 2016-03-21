@@ -56,7 +56,12 @@
 
         $scope.restoreDefault = function () {
           if ($scope.customizeAgents[$scope.agent.id]) {
-            DevicesService.deleteDeviceSettings($scope.customizeAgents[$scope.agent.id].id)
+            $scope.savingCredentional = true;
+
+            DevicesService.deleteDeviceSettings($scope.customizeAgents[$scope.agent.id].id, function () {
+              $scope.savingCredentional = false;
+              $scope.isLogOnDrpdwnOpen = false;
+            })
           }
         };
 
