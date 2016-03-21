@@ -24,6 +24,8 @@
            ng-class="{'icn-collapse': orderUsersTab.reverse, 'icn-expand': !orderUsersTab.reverse}"></i>
       </div>
 
+      <div class="col-3-2">Subscription</div>
+
       <div class="col-4" ng-click="setOrderByUsers('ticket')">
         <span>Tickets</span>
         <i class="icn-sm" style="margin-left: 80px;" ng-show="orderUsersTab.fild === 'ticket'"
@@ -75,11 +77,13 @@
             </span>
           </div>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip pull-left"
-               tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
-            <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
-          </div>
+        </div>
+      </div>
 
+      <div class="col-3-2">
+        <div id="has-invoice-updates1" class="persistent-tooltip"
+             tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
+          <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
         </div>
       </div>
 
