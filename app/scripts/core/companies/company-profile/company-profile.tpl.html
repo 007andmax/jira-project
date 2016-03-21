@@ -3,7 +3,7 @@
   <div class="company-profile-header">
 
     <div class="company-new-cover-wrapper" ng-if="!isShowEditCover"
-         ng-style="{'background-image':'url(' + getCompanyCoverUrl(company) + ')'}">
+         ng-style="{'background': company.cover ? 'url(' + getCompanyCoverUrl(company) + ')' : 'rgba(0,0,0,.8)', 'background-size': 'cover'}">
       <div class="background-layer">
         <!--company-cover-wrapper-->
 
