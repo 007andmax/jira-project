@@ -9,8 +9,8 @@
 
 .company-profile-header .company-new-cover-wrapper {
   float: left;
-  width: 37%;
-  height: 100%;
+  width: 450px;
+  height: 300px;
   background-size: 100% 100%;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .company-profile-header .company-map-wrapper {
-  width: calc(100% - 37%);
-  height: 100%;
+  width: calc(100% - 450px);
+  height: 300px;
   float: right;
 }
 
