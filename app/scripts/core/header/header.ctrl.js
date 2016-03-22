@@ -10,7 +10,6 @@
           $scope.currentUser = UsersService.getCurrentUser();
         });
 
-
         $scope.getTemplateNameByState = function () {
           if ($state.includes("tickets")) {
             return 'tickets';
