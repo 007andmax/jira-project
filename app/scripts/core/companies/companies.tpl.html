@@ -119,6 +119,12 @@
         <li class="icn-sm icn-star-half star-4"></li>
         <li class="icn-sm icn-star-empty star-5"></li>
       </ul>
+
+      <div stop-propagation="click" ng-if="currentUser.role === 'SUPER_TECH_ADMIN'"
+           style="position: absolute;top: 15px;right: 92px;z-index: 10;">
+        <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
+      </div>
+
       <div class="name-rating">
 
         <div class="company-name">{{ company.name }}</div>

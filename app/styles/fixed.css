@@ -916,3 +916,7 @@ aside#left div.nav-title {
   content:attr(data-text);
   color: #c0bfcd;
 }
+
+.icn-cover-not-hover {
+  background-position: -850px -206px;
+}

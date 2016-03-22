@@ -46,9 +46,9 @@
           <img ng-src="/file/{{ avatar.origin.id }}" alt="...">
         </div>
 
-        <div class="btn btn-lg btn-info pull-left disabled"
+        <div class="btn btn-lg btn-info pull-left disabled" custom-disabled="{{ disabledButton }}"
              ng-click="save()" continue-button>
-          Continue
+          {{ cropInfo && cropInfo.type === 'logo-company-card' ? 'Save' : 'Continue' }}
         </div>
 
       </div>
