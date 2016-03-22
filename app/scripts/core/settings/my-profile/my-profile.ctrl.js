@@ -137,7 +137,7 @@
               form.addressForm && form.addressForm.address && form.addressForm.address.$setDirty();
               $timeout(function () {
                 $scope.$broadcast('scrollToErrorFild');
-              });
+              }, 300);
               return;
             }
           }
