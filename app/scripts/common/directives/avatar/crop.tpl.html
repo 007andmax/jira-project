@@ -48,7 +48,7 @@
 
         <div class="btn btn-lg btn-info pull-left disabled"
              ng-click="save()" continue-button>
-          Continue
+          {{ cropInfo && cropInfo.type === 'logo-company-card' ? 'Save' : 'Continue' }}
         </div>
 
       </div>

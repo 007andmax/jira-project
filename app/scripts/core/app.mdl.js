@@ -215,31 +215,31 @@
         });
 
         $rootScope.getUserAvatarUrl = function (user) {
-          if (!user) {
+          if (!(user && user.avatar)) {
             return '/users/default/image'
           }
           return '/users/' + (user.id || 'default') + '/image' + (user.avatar ? '?t=' + user.avatar.updatedAt : '');
         };
 
         $rootScope.getContactAvatarUrl = function (contact) {
-          if (!contact) {
+          if (!(contact && contact.avatar)) {
             return '/contacts/default/image'
           }
           return '/contacts/' + (contact.id || 'default') + '/image' + (contact.avatar ? '?t=' + contact.avatar.updatedAt : '');
         };
 
         $rootScope.getCompanyCoverUrl = function (company) {
-          if (!company) {
+          if (!(company && company.cover)) {
             return '/company/default/cover'
           }
           return '/company/' + (company.id || 'default') + '/cover?t=' + (company.cover ? company.cover.updatedAt : '');
         };
 
         $rootScope.getCompanyLogoUrl = function (company) {
-          if (!company) {
+          if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
             return '/company/default/logo'
           }
-          return '/companyLogo/' + (company.id || 'default') + '?t=' + (company.logo ? company.logo.updatedAt : '');
+          return '/file/' + company.logo.cropped.id + '?t=' + (company.logo ? company.logo.updatedAt : '');
         };
 
         $rootScope.getPhoneNumberCssClass = function (phoneNumber) {

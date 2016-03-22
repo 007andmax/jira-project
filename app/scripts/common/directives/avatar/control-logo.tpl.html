@@ -1,0 +1,29 @@
+<div class="dropdown" dropdown>
+  <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+     aria-expanded="false" dropdown-toggle
+     tooltip-placement="top" tooltip-append-to-body="true" tooltip="Change Logo">
+    <i class="icn-md icn-cover-not-hover"></i>
+  </a>
+
+  <ul class="dropdown-menu">
+
+    <li role="presentation">
+      <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover(true)" change-avatar-button>
+        Upload Photo...
+      </a>
+    </li>
+
+    <li role="presentation" ng-show="model.origin">
+      <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="restoreDefaultAvatar()">
+        Restore Default Photo...
+      </a>
+    </li>
+
+    <li role="presentation" ng-show="model.origin">
+      <a role="menuitem" tabindex="-1" href="javascript:void(0)" change-position-button>
+        Reposition...
+      </a>
+    </li>
+
+  </ul>
+</div>

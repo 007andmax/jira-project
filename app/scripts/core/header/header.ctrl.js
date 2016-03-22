@@ -3,8 +3,12 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
-    ['$scope', '$state', 'CompaniesService',
-      function ($scope, $state, CompaniesService) {
+    ['$scope', '$state', 'CompaniesService', 'UsersService',
+      function ($scope, $state, CompaniesService, UsersService) {
+
+        UsersService._addInitListener(function(){
+          $scope.currentUser = UsersService.getCurrentUser();
+        });
 
         $scope.getTemplateNameByState = function () {
           if ($state.includes("tickets")) {

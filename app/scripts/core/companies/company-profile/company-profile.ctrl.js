@@ -147,7 +147,7 @@
 
         };
 
-        $scope.cancelEditCover = function(){
+        $scope.cancelEditCover = function () {
           $scope.isShowEditCover = false;
         };
 
@@ -257,9 +257,11 @@
             }
           }
 
-          for (var i = 0, len = $scope.agents.length; i < len; i++) {
-            if ($scope.agents[i].online) {
-              countOnlineDevices++
+          if ($scope.agents) {
+            for (var i = 0, len = $scope.agents.length; i < len; i++) {
+              if ($scope.agents[i].online) {
+                countOnlineDevices++
+              }
             }
           }
 
