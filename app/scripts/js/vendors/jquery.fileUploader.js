@@ -113,6 +113,9 @@
               base.options.onFailure.call(base.container, 'Uploading failed');
             }
           }
+
+          //load file more than once
+          base.inputFile.value = '';
         };
 
         // start upload
