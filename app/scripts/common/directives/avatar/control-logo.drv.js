@@ -106,7 +106,6 @@
 
               }, function () {
                 fixScroll();
-                console.log('cancel')
               });
             }
 
