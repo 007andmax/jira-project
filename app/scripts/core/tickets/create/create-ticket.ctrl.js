@@ -216,13 +216,12 @@
             return
           }
 
-          var errorSubject = !$scope.ticket.subject || $scope.ticket.subject.length < 1,
-            errorNote = !$scope.ticket.note || $scope.ticket.note.length < 1,
-            errorUser = !$scope.ticket.createdUser || $scope.ticket.createdUser.length < 1,
-            errorCompany = !$scope.ticket.company || $scope.ticket.company.length < 1;
+          var error = Object.keys(form.$error)[0];
 
-          if (errorSubject || errorNote || errorUser || errorCompany) {
-            return 'REQUIRED FIELDS CANNOT BE LEFT EMPTY.'
+          if (error === 'choose') {
+            return 'PLEASE CHOOSE USER FROM DROP DOWN LIST.';
+          } else if (error) {
+            return 'REQUIRED FIELDS CANNOT BE LEFT EMPTY.';
           }
         };
 
