@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.userCtrl',
-    ['$scope',
-      function ($scope) {
+    ['$scope', 'UsersService',
+      function ($scope, UsersService) {
 
         $scope.checkEditUserId = function (index, usersInLine) {
 
@@ -96,7 +96,11 @@
                 return 'icn-user-phone';
             }
           }
-        }
+        };
+
+        $scope.archiveUsers = function () {
+          UsersService.deleteOrArchiveUser($scope.user.id, true);
+        };
 
       }]);
 

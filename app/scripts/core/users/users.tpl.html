@@ -139,7 +139,9 @@
                 </li>
 
                 <li ng-show="currentUser.role !== 'USER'">
-                  <a class="disabled" tabindex="-1" href="javascript:void(0)">Archive this Contact</a>
+                  <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUsers()">
+                    Archive this Contact
+                  </a>
                 </li>
 
               </ul>
