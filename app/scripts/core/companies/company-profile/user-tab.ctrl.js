@@ -35,10 +35,6 @@
           })
         };
 
-        $scope.sendMail = function () {
-          console.log('send mail ' + $scope.user.id);
-        };
-
         $scope.startChat = function () {
           console.log('start chat ' + $scope.user.id);
         };

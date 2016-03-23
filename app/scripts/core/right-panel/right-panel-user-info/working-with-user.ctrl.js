@@ -9,17 +9,17 @@
         $scope.isUser = true;
         $scope.userInfo = UsersService.getOneById($scope.workingWithIdUser) || getOneContactById($scope.workingWithIdUser);
 
-        function getOneContactById(contactId){
-          for(var i = 0; i < $scope.vendorContacts.length; i++){
-            if(contactId === $scope.vendorContacts[i].id){
+        function getOneContactById(contactId) {
+          for (var i = 0; i < $scope.vendorContacts.length; i++) {
+            if (contactId === $scope.vendorContacts[i].id) {
               $scope.isUser = false;
               return $scope.vendorContacts[i];
             }
           }
         }
 
-        $scope.sendEmailInPopover = function(userId){
-          console.log('send email ' + userId);
+        $scope.sendEmailInPopover = function () {
+          window.open("mailto:" + $scope.userInfo.primaryEmail);
         };
 
       }]);

@@ -91,7 +91,7 @@
             });
 
             scope.sendEmail = function () {
-              if (Object.keys(scope.selectedCompanyUsers).length !== 0) {
+              if (scope.selectedCompanyUsers && Object.keys(scope.selectedCompanyUsers).length !== 0) {
 
                 var usersIds = [];
 
@@ -104,7 +104,7 @@
                 hideThisPopover();
                 return;
               }
-              console.log('send email ' + scope.user.id);
+              window.open("mailto:" + scope.user.primaryEmail);
               hideThisPopover();
             };
 

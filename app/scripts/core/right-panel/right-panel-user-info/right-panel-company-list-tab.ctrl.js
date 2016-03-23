@@ -3,9 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.rightPanel').controller('quicktech.core.rightPanel.rightPanelCompanyListTabCtrl',
-    ['$scope', 'RightPanelService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
-      'CompaniesService', 'quicktech.common.services.SharedStateService', 'UsersService',
-      function ($scope, RightPanelService, TicketTagsService, $stateParams, PermissionsService, CompaniesService, SharedStateService, UsersService) {
+    ['$scope', 'UsersService',
+      function ($scope, UsersService) {
 
         $scope.selectedCompanyUsers = {};
         $scope.currentOpenCompanyMode = '';
@@ -29,7 +28,8 @@
         };
 
         $scope.sendEmailInPopover = function (userId) {
-          console.log('send email ' + userId)
+          var user = UsersService.getOneById(userId);
+          window.open("mailto:" + user.primaryEmail);
         };
 
       }]);

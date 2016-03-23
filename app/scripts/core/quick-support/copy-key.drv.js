@@ -25,10 +25,10 @@
               try {
                 var successful = document.execCommand('copy');
                 if (successful) {
-                  UserNotificationService.show('The KEY has been copy', true);
+                  UserNotificationService.show('The KEY has been copied', true);
                 }
               } catch (err) {
-                UserNotificationService.show('The KEY has not been copy', true);
+                UserNotificationService.show('The KEY has not been copied', true);
                 console.log('Oops, unable to copy');
               }
 
