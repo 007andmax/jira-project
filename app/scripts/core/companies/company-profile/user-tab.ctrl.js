@@ -28,7 +28,11 @@
         };
 
         $scope.archiveUser = function () {
-          UsersService.deleteOrArchiveUser($scope.user.id, true)
+          UsersService.deleteOrArchiveUser($scope.user.id, true, function () {
+            if (delete $scope.selectedUsers[$scope.user.id]) {
+              $scope.changeSelectedUsers();
+            }
+          })
         };
 
         $scope.sendMail = function () {
