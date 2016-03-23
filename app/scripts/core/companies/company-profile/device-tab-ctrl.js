@@ -53,7 +53,11 @@
         };
 
         $scope.remove = function () {
-          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id)
+          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
+            if (delete $scope.selectDevices[$scope.agent.agentId]) {
+              $scope.changeSelectDevices();
+            }
+          })
         }
 
       }]);
