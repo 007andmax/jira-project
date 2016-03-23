@@ -356,7 +356,8 @@
 
         <li>
           <div>
-            <div class="form-group dropdown-user-parent">
+            <div class="form-group dropdown-user-parent"
+                 ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}">
 
               <label>Assign to</label>
 
