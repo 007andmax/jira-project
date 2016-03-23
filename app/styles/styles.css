@@ -3697,6 +3697,9 @@ fieldset[disabled] a.btn {
   right: 0;
   margin: auto;
 }
+.btn > i.icn-remove-token {
+  margin-left: 10px;
+}
 .btn.connected {
   background-color: #e7ecf2;
 }
