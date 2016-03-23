@@ -222,32 +222,30 @@
           base.minPercent = (base.originalWidth < base.options.cropBoxWidth) ? (base.options.cropBoxWidth / base.originalWidth) : widthRatio;
         }
 
-        if (base.options.startWith != null) {
-          startZoomAvatar = base.options.cropBoxWidth / base.options.startWith.w;
-          base.focalPoint = {
-            'x': base.options.startWith.x + Math.floor(parseInt(base.options.cropBoxWidth / startZoomAvatar) / 2),
-            'y': base.options.startWith.y + Math.ceil(parseInt(base.options.cropBoxHeight / startZoomAvatar) / 2)
-          };
-          base.focalPoint = {
-            'x': base.options.startWith.x + Math.round(base.options.startWith.w / 2),
-            'y': base.options.startWith.y + Math.round(base.options.startWith.h / 2)
-          };
-        } else {
-          base.focalPoint = {'x': Math.round(base.originalWidth / 2), 'y': Math.round(base.originalHeight / 2)};
-        }
-
         var minCropBoxSize = base.options.cropBoxHeight < base.options.cropBoxWidth ? base.options.cropBoxHeight : base.options.cropBoxWidth;
         var maxOriginSize = base.originalHeight < base.originalWidth ? base.originalWidth : base.originalHeight;
 
         startZoomAvatar = minCropBoxSize / maxOriginSize;
 
-        base.setZoom(startZoomAvatar);
+        if (base.options.startWith != null) {
+          base.focalPoint = {
+            'x': base.options.startWith.x + Math.round(base.options.startWith.w / 2),
+            'y': base.options.startWith.y + Math.round(base.options.startWith.h / 2)
+          };
+          base.setZoom(base.options.cropBoxWidth / base.options.startWith.w);
+
+        } else {
+          base.focalPoint = {'x': Math.round(base.originalWidth / 2), 'y': Math.round(base.originalHeight / 2)};
+          base.$rangeSelect.val(Math.floor(startZoomAvatar * 100))
+          base.setZoom(startZoomAvatar);
+        }
+
         base.$image.fadeIn('fast'); //display image now that it has loaded
       }
       if (base.$rangeSelect.length) base.$rangeSelect.prop({
         'min': Math.floor(startZoomAvatar * 100),
         'max': Math.ceil((startZoomAvatar + 1) * 100)
-      }).val(Math.floor(startZoomAvatar * 100));
+      });
     }
 
     function storeFocalPoint() {
