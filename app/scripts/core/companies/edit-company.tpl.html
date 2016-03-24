@@ -1,4 +1,5 @@
 <div class="company-profile-content" fixed-margin-left>
+
   <form name="companyForm">
     <div class="create-company-content">
 
@@ -48,6 +49,21 @@
 
         <div class="help-text">Enter your client company's address, contact details, tax rate, associate vendors, and
           other general information.
+        </div>
+
+        <div class="settings-button clearfix settings-fixed-button">
+
+          <div class="pull-right">
+            <div class="form-row clearfix">
+              <div class="form-group no-label full-width">
+                <div class="btn btn-lg btn-info pull-right" ng-click="save(companyForm)"
+                     custom-disabled="{{ savingInProcess }}">
+                  {{ editCompany.id ? 'Save' : 'Create' }}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <div id="owerview" class="company-overview-wrapper clearfix">
@@ -903,11 +919,6 @@
         </div>
 
         <div id="finish-navs" class="create-company-actions clearfix">
-
-          <div class="btn btn-lg btn-info pull-right" ng-click="save(companyForm)"
-               custom-disabled="{{ savingInProcess }}">
-            {{ editCompany.id ? 'Save' : 'Create' }}
-          </div>
 
           <div class="btn btn-lg btn-primary pull-right" ui-sref="companies">
             Cancel

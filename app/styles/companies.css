@@ -1067,12 +1067,12 @@
 .create-company-main-wrapper .help-text {
   color: #94a4b8;
   border-bottom: 1px solid #f1f5fa;
-  padding: 15px 0 25px;
+  padding: 40px 0 25px;
   margin-bottom: 37px;
 }
 @-moz-document url-prefix() {
   .create-company-main-wrapper .help-text {
-    padding: 14px 0 26px;
+    padding: 39px 0 26px;
   }
 }
 .map-container{
