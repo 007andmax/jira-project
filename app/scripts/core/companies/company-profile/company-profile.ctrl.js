@@ -13,7 +13,10 @@
         UserNotificationService.show('Loading...');
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
-        var companyProfileHeader = SharedStateService.getSharedState('companyProfileHeader');
+        $scope.companyProfileHeader = {
+          selectUsersIds: [],
+          selectDevicesIds: []
+        };
 
         $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
@@ -232,13 +235,13 @@
             }
           }
 
-          companyProfileHeader.selectUsersSubscr = {
+          $scope.companyProfileHeader.selectUsersSubscr = {
             invoice: selectUsersSbscr.invoice === selectUsersIds.length,
             ticket: selectUsersSbscr.ticket === selectUsersIds.length
           };
 
           $scope.isSelectAllUsers = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
-          companyProfileHeader.selectUsersIds = selectUsersIds;
+          $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
         };
 
         $scope.selectAllUsers = function () {
@@ -270,7 +273,7 @@
           }
 
           $scope.isSelectAllDevices = (selectDevicesIds.length > 0) && (selectDevicesIds.length === countOnlineDevices);
-          companyProfileHeader.selectDevicesIds = selectDevicesIds;
+          $scope.companyProfileHeader.selectDevicesIds = selectDevicesIds;
         };
 
         $scope.selectAllDevices = function () {
@@ -287,7 +290,7 @@
           $scope.changeSelectDevices();
         };
 
-        companyProfileHeader.unCheckAll = function () {
+        $scope.companyProfileHeader.unCheckAll = function () {
           $scope.selectDevices = {};
           $scope.selectedUsers = {};
           $scope.changeSelectedUsers();
@@ -299,7 +302,7 @@
         });
 
         $scope.$watch('mode', function () {
-          companyProfileHeader.unCheckAll()
+          $scope.companyProfileHeader.unCheckAll()
         });
 
         $scope.$on('showErrorCover', function (event, message) {

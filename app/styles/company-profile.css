@@ -116,3 +116,44 @@
   background-position: -368px -51px;
   -webkit-filter: grayscale(100%);
 }
+
+.company-profile-content .bulk-option {
+  position: absolute;
+  right: 0;
+  padding: 15px 20px 15px 15px;
+  top: 23px;
+  margin-right: -30px;
+}
+
+.company-profile-content .bulk-option.fixed-bulk {
+  z-index: 10;
+  position: fixed;
+  background-color: #fff;
+  box-shadow: 2px 2px 6px 0 rgba(10, 45, 89, 0.15);
+  top: 78px;
+  right: 311px;
+}
+
+.company-profile-content .bulk-option .topNavbarLeft-Left {
+  width: 260px;
+}
+
+.company-profile-content .bulk-option .dropdown-menu {
+  top: 40px;
+}
+
+.company-profile-content .bulk-option .dropdown-privilege {
+  left: -80px;
+}
+
+.company-profile-content .bulk-option .dropdown-subscribe {
+  left: -52px;
+}
+
+.company-profile-content .bulk-option .topNavbar-filter {
+  padding: 0;
+}
+
+.company-profile-content ul.nav-qt {
+  position: relative;
+}

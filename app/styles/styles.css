@@ -542,9 +542,6 @@ hr {
   margin: 0;
   padding: 3px 0 0;
 }
-.company-profile-header ul.dropdown-privilege, .company-profile-header ul.dropdown-subscribe{
-  top: 40px;
-}
 .modal-create-ticket .upload-attachments {
   padding: 0 10px 10px;
   background-color: #f1f5fa;
