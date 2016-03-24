@@ -24,8 +24,6 @@
         $scope.selectedServices = {};
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
-        $scope.newService = { name: '', rate: 0 };
-        $scope.newTaxRate = { code: '', rate: 0 };
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
             $timeout(function () {
@@ -175,7 +173,7 @@
 
             CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companyProfile', { companyId: resp.id });
+              $state.go('companyProfile', {companyId: resp.id});
             })
           } else {
             $scope.triedToSave = true;
@@ -363,13 +361,19 @@
         };
 
         $scope.movingService = function (originService, form) {
-          var service = angular.copy(originService);
 
-          if (!service.versionedId) {
-            $scope.newService = { name: '', rate: 0 };
-            $scope.editCompany.services.push(service);
+          if (originService === 'new-service') {
+            var newService = {
+              name: '',
+              rate: 0,
+              billable: true
+            };
+            $scope.editCompany.services.push(newService);
             form.$setPristine();
+
           } else {
+            var service = angular.copy(originService)
+
             if ($scope.selectedServices[service.name]) {
               $scope.editCompany.services.push(service);
             } else {
@@ -417,13 +421,19 @@
         };
 
         $scope.movingTax = function (originTax, form) {
-          var tax = angular.copy(originTax);
 
-          if (!tax.versionedId) {
-            $scope.newTaxRate = { code: '', rate: 0 };
-            $scope.editCompany.taxRates.push(tax);
+          if (originTax === 'new-tax-rate') {
+            var newTaxRate = {
+              code: '',
+              rate: 0
+            };
+
+            $scope.editCompany.taxRates.push(newTaxRate);
             form.$setPristine();
+
           } else {
+            var tax = angular.copy(originTax);
+
             if ($scope.selectedTax[tax.code]) {
               $scope.editCompany.taxRates.push(tax);
             } else {
