@@ -119,28 +119,6 @@
           });
         };
 
-        $scope.getPriorityNumber = function (object, returnType) {
-
-          if (!object || !object.phoneNumbers || object.phoneNumbers.length < 1) {
-            return;
-          }
-
-          var priority;
-          var index;
-          for (var i = 0; i < object.phoneNumbers.length; i++) {
-            if (priority === undefined || object.phoneNumbers[i].priority < priority) {
-              priority = object.phoneNumbers[i].priority;
-              index = i;
-            }
-          }
-
-          if (returnType) {
-            return object.phoneNumbers[index].typeNumber;
-          }
-
-          return object.phoneNumbers[index].number;
-        };
-
         $scope.showEditCover = function (option) {
           if (option) {
             $scope.$broadcast('openEditCover', {})

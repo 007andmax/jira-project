@@ -52,6 +52,23 @@
   margin: 0;
 }
 
+.company-profile-content .qt-users li:not(.list-heading) .col-2 {
+  height: 71px;
+  top: -16px;
+}
+
+.company-profile-content .qt-users li:not(.list-heading) .col-2 .clearfix {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.company-profile-content .qt-users li:not(.list-heading) .col-2 .user-contact-no {
+  float: left;
+  clear: left;
+  margin-top: 0;
+}
+
 .company-profile-content .qt-users li.list-heading .icn-sm {
   margin-top: -10px;
 }

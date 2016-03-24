@@ -23,7 +23,7 @@
       },
       controller: function ($scope) {
 
-        $scope.maximalAmountOfPhones = 3;
+        $scope.maximalAmountOfPhones = 2;
         $scope.hardPhoneNumberPattern = /^\(?([0-9]{3})\)?[-. ●]?([0-9]{3})[-. ●]?([0-9]{2}[-. ●]?[0-9]{2})$/;
         $scope.phoneNumberPattern = /^\+?1?(-|\s)?(\()?\d{0,3}(\))?(-|\s)?\d{0,3}(-|\s)?\d{0,2}[-.●]?\d{0,4}$/;
         $scope.phoneNumberTypes = {

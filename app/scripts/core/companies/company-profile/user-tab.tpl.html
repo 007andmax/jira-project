@@ -59,12 +59,16 @@
       </div>
 
       <div class="col-2">
-        <span class="user-contact-no">
-          <i class="icn-sm" ng-class="{'icn-iphone': getPriorityNumber(user, true) === 'MOBILE',
-                      'icn-user-fax': getPriorityNumber(user, true) === 'FAX',
-                      'icn-user-phone': getPriorityNumber(user, true) === 'OFFICE'}"></i>
-          {{ getPriorityNumber(user) }}
-        </span>
+        <div class="clearfix">
+
+          <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
+            <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                      'icn-user-fax': phoneNumber.typeNumber === 'FAX',
+                      'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+            {{ phoneNumber.number }}
+          </span>
+
+        </div>
       </div>
 
       <div class="col-3">
