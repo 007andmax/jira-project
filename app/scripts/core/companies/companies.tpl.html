@@ -102,7 +102,7 @@
 
   <div class="company-card clearfix" ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name'"
        ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()"
-       ng-class="{'hide': company.isDefault, 'large': location.length > 60}">
+       ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
 
     <div class="company-cover-area"
          ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') right no-repeat', 'background-size': 'cover'}">

@@ -918,7 +918,7 @@ aside#left div.nav-title {
 }
 
 .icn-cover-not-hover {
-  background-position: -850px -206px;
+  background-position: -841px -198px;
 }
 
 .company-card .company-cover-area .hover-logo{
@@ -943,5 +943,5 @@ aside#left div.nav-title {
   z-index: 10;
 }
 .logo-control .icn-cover-not-hover{
-  zoom: 1.5;
+  /*zoom: 1.5;*/
 }

@@ -5,7 +5,7 @@
   min-width: 300px;
   width: calc(100% / 2 - 30px);
   position: relative;
-  height: 260px;
+  height: 236px;
   border: 1px solid #e7ecf2;
   padding: 15px;
   cursor: pointer;
@@ -81,7 +81,7 @@
 .company-cover-area{
   float: right;
   width: 50%;
-  height: 163px;
+  height: 139px;
   background-color: rgba(21,30,41,.7);
   padding: 0;
   margin-top: 15px;
@@ -141,7 +141,7 @@
 .company-primary-contact{
   float: left;
   width: 50%;
-  padding: 20px 0 10px;
+  padding: 20px 0 0;
   /*border: 1px solid #e7ecf2;*/
   border: 1px solid #fff;
   border-top: none;
@@ -235,7 +235,7 @@
   float: left;
   width: 100%;
   color: #94a4b8;
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
 @-moz-document url-prefix() {
   .company-primary-contact .user-contact-no{
@@ -256,7 +256,7 @@
   width: 100%;
   color: #94a4b8;
   min-height: 40px;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 .company-primary-contact .user-location .icn-sm{
   float: left;

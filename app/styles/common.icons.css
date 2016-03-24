@@ -132,8 +132,8 @@ a.ha-24{
 }
 
 .icn-md{
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 .icn-sm{
@@ -797,10 +797,10 @@ li:hover > a > .icn-add-new, li.active > a > .icn-add-new {
 }*/
 
 .icn-edit-tag {
-  background-position: -1040px 2px;
+  background-position: -1040px 6px;
 }
 .icn-edit-tag:hover, .icn-edit-tag:active {
-  background-position: -1018px 2px;
+  background-position: -1018px 6px;
 }
 .icn-edit-tag.companies-new:hover, .icn-edit-tag:active{
   background-position: -1040px 2px;
@@ -1677,7 +1677,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 }
 /***/
 .icn-cover{
-  background-position: -850px -206px;
+  background-position: -845px -185px;
   width: 16px;
   height: 12px;
 }
