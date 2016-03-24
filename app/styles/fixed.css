@@ -905,18 +905,43 @@ aside#left div.nav-title {
 }
 
 .devices-content .tab-content .list-heading i.icn-collapse {
-  margin-top:-12px;
+  margin-top: -12px;
 }
 
 .devices-content .tab-content .list-heading i.icn-expand {
-  margin-top:-10px;
+  margin-top: -10px;
 }
 
-[te-editor]:empty:not(:focus):before{
-  content:attr(data-text);
+[te-editor]:empty:not(:focus):before {
+  content: attr(data-text);
   color: #c0bfcd;
 }
 
 .icn-cover-not-hover {
   background-position: -850px -206px;
+}
+
+.company-card .company-cover-area .hover-logo{
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.75);
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  transition-delay: 0s;
+  transition-timing-function: linear;
+}
+
+.company-card .company-cover-area .hover-logo:hover {
+  opacity: 1;
+}
+
+.company-card .company-cover-area .logo-control {
+  position: absolute;
+  bottom: 75px;
+  right: 30px;
+  z-index: 10;
+}
+.logo-control .icn-cover-not-hover{
+  zoom: 1.5;
 }

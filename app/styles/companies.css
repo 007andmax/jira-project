@@ -83,7 +83,7 @@
   width: 50%;
   height: 163px;
   background-color: rgba(21,30,41,.7);
-  padding: 15px 30px 30px 30px;
+  padding: 0;
   margin-top: 15px;
 }
 .companies-list .company-card.large .company-primary-contact .user-location span{
