@@ -80,3 +80,39 @@
   background-size: cover;
   position: relative;
 }
+
+.company-profile-content .qt-users .user-account-type .label-wrapper {
+  color: #94a4b8;
+  transition: 0.15s;
+}
+
+.company-profile-content .qt-users .user-account-type .label-wrapper:hover {
+  color: #1f2a37;
+}
+
+.company-profile-content .qt-users .user-account-type .dropdown-privilege {
+  top: 20px;
+  left: -90px;
+}
+
+.company-profile-content .qt-users .dropdown-subscribe {
+  top: 29px;
+  left: -80px;
+}
+
+.company-profile-content .qt-users .dropdown-subscribe .control {
+  padding-left: 46px;
+}
+
+.company-profile-content .qt-users .dropdown-subscribe span.control-indicator {
+  top: 10px
+}
+
+.company-profile-content .qt-users .col-3-2 .persistent-tooltip {
+  margin-top: 13px;
+}
+
+.company-profile-content .qt-users .col-3-2 .persistent-tooltip i.badge-not-updates {
+  background-position: -368px -51px;
+  -webkit-filter: grayscale(100%);
+}

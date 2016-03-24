@@ -176,6 +176,8 @@
             return 'badge-ticket-updates badge-updates';
           } else if (!user.subscription.ticket && user.subscription.invoice) {
             return 'badge-invoice-updates badge-updates';
+          } else {
+            return 'badge-not-updates badge-updates';
           }
         };
 
@@ -190,6 +192,8 @@
             return 'subscriber ticket updates';
           } else if (!user.subscription.ticket && user.subscription.invoice) {
             return 'subscriber invoice updates';
+          } else {
+            return 'click to choose subscriber';
           }
         };
 
@@ -233,7 +237,7 @@
             ticket: selectUsersSbscr.ticket === selectUsersIds.length
           };
 
-          $scope.isSelectAllUsers = (selectUsersIds.length === $scope.users.length);
+          $scope.isSelectAllUsers = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
           companyProfileHeader.selectUsersIds = selectUsersIds;
         };
 
@@ -265,7 +269,7 @@
             }
           }
 
-          $scope.isSelectAllDevices = (selectDevicesIds.length === countOnlineDevices);
+          $scope.isSelectAllDevices = (selectDevicesIds.length > 0) && (selectDevicesIds.length === countOnlineDevices);
           companyProfileHeader.selectDevicesIds = selectDevicesIds;
         };
 
@@ -283,23 +287,20 @@
           $scope.changeSelectDevices();
         };
 
-        $scope.$on('showEditCover', function () {
-          $scope.isShowEditCover = true;
-        });
-
-        $scope.$watch('mode', function () {
-          companyProfileHeader.selectDevicesIds = [];
-          companyProfileHeader.selectUsersIds = [];
-          $scope.selectDevices = {};
-          $scope.selectedUsers = {};
-        });
-
         companyProfileHeader.unCheckAll = function () {
           $scope.selectDevices = {};
           $scope.selectedUsers = {};
           $scope.changeSelectedUsers();
           $scope.changeSelectDevices();
         };
+
+        $scope.$on('showEditCover', function () {
+          $scope.isShowEditCover = true;
+        });
+
+        $scope.$watch('mode', function () {
+          companyProfileHeader.unCheckAll()
+        });
 
         $scope.$on('showErrorCover', function (event, message) {
 

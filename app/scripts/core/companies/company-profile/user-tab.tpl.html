@@ -5,7 +5,7 @@
 
       <div class="col-1" ng-click="setOrderByUsers('name')">
 
-        <label class="control checkbox pull-left">
+        <label class="control checkbox pull-left" ng-show="users.length > 0">
           <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
                  ng-checked="isSelectAllUsers" ng-click="selectAllUsers()">
           <span class="control-indicator"></span>
@@ -68,23 +68,66 @@
       </div>
 
       <div class="col-3">
-        <div class="user-account-type">
+        <div class="user-account-type dropdown">
 
-          <div class="label-wrapper">
-            <span class="label"
-                  ng-class="{'label-primary': user.role === 'USER', 'label-warning': user.role === 'ADMIN'}">
+          <div class="label-wrapper" aria-expanded="false" data-toggle="dropdown">
+            <span>
               {{ user.role }}
             </span>
           </div>
 
+          <ul class="dropdown-menu dropdown-privilege">
+
+            <li ng-class="{'active': user.role === 'USER'}">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('USER')">
+                User
+              </a>
+            </li>
+
+            <li ng-class="{'active': user.role === 'ADMIN'}">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('ADMIN')">
+                Administrator
+              </a>
+            </li>
+
+          </ul>
+
         </div>
       </div>
 
-      <div class="col-3-2">
-        <div id="has-invoice-updates1" class="persistent-tooltip"
+      <div class="col-3-2 dropdown">
+
+        <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" data-toggle="dropdown"
              tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
           <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
         </div>
+
+        <ul class="dropdown-menu dropdown-subscribe">
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
+              <div class="clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
+                  <span class="control-indicator"></span> Ticket Updates
+                </label>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
+              <div class="clearfix">
+                <label class="control checkbox pull-left">
+                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                  <span class="control-indicator"></span> Invoice Updates
+                </label>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+
       </div>
 
       <div class="col-4">
@@ -116,90 +159,16 @@
             <i class="icn-sm icn-user-mail"></i>
           </div>
 
+          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+               tooltip-placement="top" tooltip="Archive this Contact">
+            <i class="icn-sm icn-remove-token"></i>
+          </div>
+
           <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
           <!--tooltip-placement="top" tooltip="chat" ng-click="startChat()">-->
           <!--<i class="icn-sm icn-user-chat"></i>-->
           <!--</div>-->
 
-          <div class="more pull-left dropdown">
-
-            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip"
-               aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
-               tooltip-placement="top" tooltip="More">
-              <i class="icn-more icn-sm"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-
-              <li><a tabindex="-1" href="javascript:void(0)" class="disabled">Email</a></li>
-
-              <li><a tabindex="-1" href="javascript:void(0)" class="disabled">Chat</a></li>
-
-              <li class="dropdown-submenu left-align">
-
-                <a tabindex="-1" href="javascript:void(0)">Set {{ user.firstName }} Privilege</a>
-
-                <div class="dropdown-submenu-wrapper">
-                  <ul class="dropdown-menu dropdown-privilege">
-
-                    <li ng-class="{'active': user.role === 'USER'}">
-                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('USER')">
-                        User
-                      </a>
-                    </li>
-
-                    <li ng-class="{'active': user.role === 'ADMIN'}">
-                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('ADMIN')">
-                        Administrator
-                      </a>
-                    </li>
-
-                  </ul>
-                </div>
-
-              </li>
-
-              <li class="dropdown-submenu left-align">
-
-                <a tabindex="-1" href="javascript:void(0)">Subscribe {{ user.firstName }} to...</a>
-
-                <div class="dropdown-submenu-wrapper">
-                  <ul class="dropdown-menu dropdown-subscribe">
-
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
-                            <span class="control-indicator"></span> Ticket Updates
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
-                        <div class="clearfix">
-                          <label class="control checkbox pull-left">
-                            <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
-                            <span class="control-indicator"></span> Invoice Updates
-                          </label>
-                        </div>
-                      </a>
-                    </li>
-
-                  </ul>
-                </div>
-              </li>
-
-              <li>
-                <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUser()">
-                  Archive this Contact
-                </a>
-              </li>
-
-            </ul>
-          </div>
         </div>
       </div>
     </li>
