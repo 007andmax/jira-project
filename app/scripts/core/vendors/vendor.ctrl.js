@@ -26,10 +26,6 @@
           VendorsService.archive($scope.vendor.id);
         };
 
-        $scope.sendMail = function () {
-          console.log('send mail ' + $scope.vendor.name);
-        };
-
         $scope.getPrimaryBillengAddress = function(){
           for(var i = 0; i < $scope.vendor.addresses.length; i++){
             if($scope.vendor.addresses[i].isPrimary){
@@ -39,6 +35,18 @@
               return address;
             }
           }
+        };
+
+        $scope.getPriorityContact = function(){
+          var priorityContact = $scope.vendor.contacts[0];
+
+          for(var i = 1, len = $scope.vendor.contacts.length; i < len; i++){
+            if($scope.vendor.contacts[i].priority < priorityContact.priority){
+              priorityContact = $scope.vendor.contacts[i]
+            }
+          }
+
+          return priorityContact;
         }
 
       }]);
