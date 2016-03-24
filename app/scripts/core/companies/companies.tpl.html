@@ -107,6 +107,12 @@
     <div class="company-cover-area"
          ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
 
+      <div class="hover-logo">
+        <div class="logo-control" stop-propagation="click" ng-if="currentUser.role === 'SUPER_TECH_ADMIN'">
+          <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
+        </div>
+      </div>
+
       <!--<div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"-->
       <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"-->
       <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">-->
@@ -119,11 +125,6 @@
         <li class="icn-sm icn-star-half star-4"></li>
         <li class="icn-sm icn-star-empty star-5"></li>
       </ul>
-
-      <div stop-propagation="click" ng-if="currentUser.role === 'SUPER_TECH_ADMIN'"
-           style="position: absolute;top: 15px;right: 92px;z-index: 10;">
-        <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
-      </div>
 
       <div class="name-rating">
 
