@@ -24,6 +24,8 @@
         $scope.selectedServices = {};
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
+        $scope.newService = { name: '', rate: 0 };
+        $scope.newTaxRate = { code: '', rate: 0 };
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
             $timeout(function () {
@@ -195,7 +197,7 @@
         };
 
         $scope.isShowingServiceErrors = function (form, fieldName) {
-          return form[fieldName] && (form[fieldName].$dirty) && form[fieldName].$invalid;
+          return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && form[fieldName].$invalid;
         };
 
         $scope.validateCompanyName = function (ngModelCtrl) {
@@ -259,8 +261,6 @@
           location.isPrimary = true;
         };
 
-        $scope.newTaxRate = {};
-
         $scope.validateNewTaxRate = function (form) {
 
           var code = $scope.newTaxRate.code,
@@ -301,20 +301,20 @@
           form.invalid = form.validation.rate.invalid || form.validation.code.invalid;
         };
 
-        $scope.saveNewTax = function (form) {
-
-          $scope.validateNewTaxRate(form);
-
-          if (form.validation && !form.validation.code.invalid && !form.validation.rate.invalid) {
-            $scope.editCompany.taxRates.push($scope.newTaxRate);
-            $scope.newTaxRate = {};
-            form.$setPristine();
-            //$scope.newTaxRateFormShowErrors = false;
-          }
-          /*else {*/
-          //$scope.newTaxRateFormShowErrors = true;
-          //}
-        };
+        //$scope.saveNewTax = function (form) {
+        //
+        //  $scope.validateNewTaxRate(form);
+        //
+        //  if (form.validation && !form.validation.code.invalid && !form.validation.rate.invalid) {
+        //    $scope.editCompany.taxRates.push($scope.newTaxRate);
+        //    $scope.newTaxRate = {};
+        //    form.$setPristine();
+        //    //$scope.newTaxRateFormShowErrors = false;
+        //  }
+        //  /*else {*/
+        //  //$scope.newTaxRateFormShowErrors = true;
+        //  //}
+        //};
 
         $scope.removeAssociation = function (index) {
           var association = $scope.editCompany.companyAssociations[index];
@@ -366,16 +366,15 @@
           var service = angular.copy(originService);
 
           if (!service.versionedId) {
-            service.timeBlock = service.timeBlock / 60;
+            $scope.newService = { name: '', rate: 0 };
             $scope.editCompany.services.push(service);
             form.$setPristine();
-            return {};
-          }
-
-          if ($scope.selectedServices[service.name]) {
-            $scope.editCompany.services.push(service);
           } else {
-            $scope.deleteService(service.name);
+            if ($scope.selectedServices[service.name]) {
+              $scope.editCompany.services.push(service);
+            } else {
+              $scope.deleteService(service.name);
+            }
           }
         };
 
@@ -395,40 +394,49 @@
         };
 
         $scope.validateServiceName = function (ngModelCtrl) {
-          var uniqueNameCount = 0;
+          var defaultDuplicates = 0,
+            newServicesDuplicates = 0;
 
           if ($scope.servicesData && $scope.servicesData.default) {
             for (var i = 0; i < $scope.servicesData.default.length; i++) {
               if (ngModelCtrl.$viewValue.toLowerCase() === $scope.servicesData.default[i].name.toLowerCase()) {
-                uniqueNameCount++;
+                defaultDuplicates++;
               }
             }
           }
 
           if ($scope.editCompany.services) {
             for (var i = 0; i < $scope.editCompany.services.length; i++) {
-              if (ngModelCtrl.$viewValue.toLowerCase() === $scope.editCompany.services[i].name.toLowerCase()) {
-                uniqueNameCount++;
+              if (ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.toLowerCase() === $scope.editCompany.services[i].name.toLowerCase()) {
+                newServicesDuplicates++;
               }
             }
           }
 
-          ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
+          ngModelCtrl.$setValidity('unique', newServicesDuplicates < 2 && defaultDuplicates < 1);
         };
 
-        $scope.movingTax = function (originTax) {
+        $scope.movingTax = function (originTax, form) {
           var tax = angular.copy(originTax);
 
-          if ($scope.selectedTax[tax.code]) {
+          if (!tax.versionedId) {
+            $scope.newTaxRate = { code: '', rate: 0 };
             $scope.editCompany.taxRates.push(tax);
+            form.$setPristine();
           } else {
-            $scope.deleteTaxRate(tax.code);
+            if ($scope.selectedTax[tax.code]) {
+              $scope.editCompany.taxRates.push(tax);
+            } else {
+              $scope.deleteTaxRate(tax.code);
+            }
           }
         };
 
         $scope.deleteTaxRate = function (taxCode) {
           for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
-            if ($scope.editCompany.taxRates[i].code.toLowerCase() === taxCode.toLowerCase()) {
+            if ($scope.editCompany.taxRates[i].code === taxCode ||
+              (taxCode && $scope.editCompany.taxRates[i].code.toLowerCase() === taxCode.toLowerCase())) {
+
               $scope.editCompany.taxRates.splice(i, 1);
               $scope.selectedTax[taxCode] = false;
               return;

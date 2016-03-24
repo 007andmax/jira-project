@@ -6037,6 +6037,10 @@ tbody.collapse.in {
 .checkbox-dd-item:hover, .checkbox-dd-item.selected {
   background-color: #e7ecf2;
 }
+.checkbox-dd-item.create-custom {
+  margin-top: 10px;
+  border-top: solid 1px rgb(231, 236, 242);
+}
 .checkbox-dd-item label {
   display: block;
   padding: 12px 20px 12px 46px;
