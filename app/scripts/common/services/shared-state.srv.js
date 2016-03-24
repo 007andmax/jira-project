@@ -15,7 +15,10 @@
         },
         usersHeader: {
           count: 0,
-          filter: {keyword: ''}
+          filter: {
+            keyword: '',
+            company: {}
+          }
         },
         companiesHeader: {
           count: 0,

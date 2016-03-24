@@ -1,15 +1,23 @@
 <div class="topNavbarLeft-Left pull-left" ng-controller="quicktech.core.header.usersCtrl">
 
-  <p class="pull-left" style="white-space: nowrap;"><strong>Users</strong>&nbsp;<span class="text-muted">{{ sharedState.count - 1 }}</span></p>
+  <p class="pull-left" style="white-space: nowrap;"><strong>Users</strong>&nbsp;<span class="text-muted">{{ sharedState.count - 1 }}</span>
+  </p>
 
   <div class="topNavbar-search pull-left">
-    <div class="input-group-search">
+    <div class="input-group-search" header-search-user>
 
       <input type="text" class="form-control-top-search user-search" placeholder="Search user..."
-             ng-model="sharedState.filter.keyword">
+             ng-model="searchValue" autocomplete="off"
+             typeahead="company as company.name for company in companies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+             typeahead-editable="true" ng-trim="true" qt-typeahead-show-on-focus
+             custom-style="{'max-height': '200px', 'width': '269px', 'overflow-y': 'auto'}">
 
       <span class="input-group-addon-search">
-        <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
+        <i class="icn-sm icn-search form-control-top-search-icn disabled" ng-hide="chooseCompany"></i>
+
+        <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
+           ng-show="chooseCompany" ng-click="clearInput()"
+           tooltip="clear" tooltip-placement="top"></i>
       </span>
 
     </div>

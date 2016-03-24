@@ -26,8 +26,13 @@
             return false
           }
 
+          if (headerSharedState.filter.companyId && headerSharedState.filter.companyId.length > 0) {
+            return headerSharedState.filter.companyId === value.company.id;
+          }
+
           if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
-            return (value.firstName + ' ' + value.lastName).toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
+            var searchText = (value.firstName + ' ' + value.lastName + ' ' + value.primaryEmail).toLowerCase();
+            return searchText.indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
           }
           return true;
         };
