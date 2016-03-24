@@ -4685,8 +4685,10 @@ tbody.collapse.in {
   text-overflow: ellipsis;
 }
 .hit-area ~ .dropdown-menu {
-  left: -4px;
+  left: auto;
   margin: 4px 0 0;
+  right: -30px;
+  top: 15px;
 }
 .hit-area ~ .dropdown-menu.pull-right {
   left: auto;
