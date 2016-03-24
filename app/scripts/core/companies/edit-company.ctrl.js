@@ -123,9 +123,9 @@
             }
 
             $scope.editCompany.taxRates = [];
-            for (var i = 0; i < resp.length; i++) {
-              $scope.editCompany.taxRates.push(resp[i]);
-              $scope.selectedTax[resp[i].code] = true;
+            if (resp.length === 1) {
+              $scope.editCompany.taxRates.push(resp[0]);
+              $scope.selectedTax[resp[0].code] = true;
             }
           });
 
