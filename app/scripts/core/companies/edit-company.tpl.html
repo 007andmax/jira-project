@@ -177,7 +177,7 @@
 
         <div id="site-location" class="contact-info-wrapper">
           <div class="create-new-user company-basic-info clearfix"
-               ng-repeat="location in editCompany.addresses">
+               ng-repeat="location in editCompany.addresses" ng-init="locationIndex = $index">
 
             <div class="fixed-form-element" ng-form="locationForm">
               <div class="create-user-container">
@@ -212,16 +212,59 @@
                       <div class="pull-left dropdown">
 
                         <input class="form-control form-control-time-zone has-dropdown" type="text"
-                               data-toggle="dropdown" aria-expanded="false" ng-model="location.locale"
-                               ng-required="true" name="companyTimezone" autocomplete="off"
-                               typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
-                               typeahead-editable="false" typeahead-min-length="0"
-                               qt-typeahead-show-on-focus ng-trim="false"
-                               custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+                               data-toggle="dropdown" aria-expanded="false"
+                               value="{{formatOffset(location.timeZone.timeOffset) + ' ' + location.timeZone.name}}"
+                               name="companyTimezone" readonly>
 
-                        <div typeahead-input-icon="location.locale"
-                             style="position: absolute;top: 13px;right: 13px;"></div>
+                        <ul class="dropdown-menu time-zone-dropdown">
+                          <li>
+                            <input class="form-control" type="text" placeholder="City" ng-model="filterData.cityFilter"
+                                   name="cityFilter" make-dirty-on-blur>
+                          </li>
+                          <li class="clickable" ng-show="filterData.cityFilter"
+                              ng-click="setTimeZone(timeZone.name, timeZone.offset, locationIndex)"
+                              ng-repeat="timeZone in filteredTimeZones">
+                            <span>{{ formatOffset(timeZone.offset) }}</span>
+                            &nbsp;
+                            <span>{{ timeZone.name }}</span>
+                          </li>
+                          <li ng-if="filterData.cityFilter && !filteredTimeZones.length">
+                            Nothing found for "{{filterData.cityFilter}}"
+                          </li>
 
+                          <li ng-show="!filterData.cityFilter"
+                              ng-repeat="(name, group) in timeZones" ng-init="groupsExpanded[name] = {}">
+                            <div class="groupName" ng-click="expand(groupsExpanded[name], $event)">
+                              {{ name }}
+                              <i class="icn-sm icn-caret-gray pull-right"
+                                 ng-class="{'rotate': groupsExpanded[name].expanded}"></i>
+                            </div>
+
+                            <div class="cities-names"
+                                 ng-show="groupsExpanded[name].expanded"
+                                 ng-repeat="(offset, cities) in group"
+                                 ng-init="citiesExpanded[name + offset] = {}">
+
+                              <div class="ellipsis-overflow"
+                                   ng-click="cities.length > 1
+                                    ? expand(citiesExpanded[name + offset], $event)
+                                    : setTimeZone(name + '/' + cities[0], offset, locationIndex)">
+
+                                <span>{{ formatOffset(offset) }}</span>
+                                &nbsp;
+                                <span>{{ cities.join(', ') }}</span>
+                                <i class="icn-sm icn-caret-gray pull-right" ng-if="cities.length > 1"
+                                   ng-class="{'rotate': citiesExpanded[name + offset].expanded}"></i>
+                              </div>
+
+                              <div class="time-zone" ng-show="cities.length > 1 && citiesExpanded[name + offset].expanded"
+                                   ng-click="setTimeZone(name + '/' + city, offset, locationIndex)"
+                                   ng-repeat="city in cities">
+                                {{ city }}
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
                       </div>
 
                       <!--<div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">-->

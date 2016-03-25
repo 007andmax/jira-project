@@ -3,7 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
+    [
+      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
       'TaxRatesService', 'AddressesService', 'ServicesService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
@@ -11,7 +12,6 @@
                 SharedStateService, $stateParams, $state, VendorsService, $timeout) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
-        var currentTimeZone;
 
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
@@ -24,6 +24,11 @@
         $scope.selectedServices = {};
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
+        $scope.citiesExpanded = [];
+        $scope.groupsExpanded = [];
+        $scope.filteredTimeZones = [];
+        $scope.filterData = {};
+        $scope.filterData.cityFilter = '';
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
             $timeout(function () {
@@ -37,28 +42,8 @@
             }, 0)
           }
         });
-        $scope.timezones = AddressesService.getAllLocales(function () {
-
-          var localZone = -(new Date().getTimezoneOffset() / 60),
-            timeZone;
-
-          for (var i = 0; i < $scope.timezones.length; i++) {
-
-            var timeZoneDescription = $scope.timezones[i].description.match(/\d+/);
-
-            if (timeZoneDescription === null) {
-              timeZone = 0
-            } else {
-              timeZone = timeZoneDescription[0];
-            }
-            if (localZone === +timeZone) {
-              currentTimeZone = $scope.timezones[i];
-              if (!$stateParams.companyId) {
-                setCurrentTimeZone(currentTimeZone);
-              }
-              return;
-            }
-          }
+        AddressesService.getLocales(true, function (response) {
+          $scope.timeZones = response;
         });
 
         $scope.$watch('companies.length', function (companiesCount) {
@@ -107,7 +92,7 @@
 
         } else {
           $scope.editCompany = {
-            addresses: [{isPrimary: true}],
+            addresses: [{ isPrimary: true }],
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: []
@@ -133,10 +118,10 @@
           SharedStateService.clearState('companiesHeader');
         });
 
-        $scope.addLocation = function () {
-          $scope.editCompany.addresses.unshift({});
-          setCurrentTimeZone(currentTimeZone);
-        };
+        //$scope.addLocation = function () {
+        //  $scope.editCompany.addresses.unshift({});
+        //  setCurrentTimeZone(currentTimeZone);
+        //};
 
         $scope.removeLocation = function (index) {
           if ($scope.editCompany.addresses[index].isPrimary) {
@@ -173,7 +158,7 @@
 
             CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companyProfile', {companyId: resp.id});
+              $state.go('companyProfile', { companyId: resp.id });
             })
           } else {
             $scope.triedToSave = true;
@@ -456,19 +441,54 @@
 
         $scope.$watch('editCompany.contacts.length', $scope.changeInvoiceSubscription);
 
+        $scope.formatOffset = function (offset) {
+          var minutesOffset = offset / 60000,
+            sign = Math.sign(offset) === -1 ? '-' : '+',
+            hours = Math.abs(Math.floor(minutesOffset / 60)) || '00',
+            minutes = Math.abs(minutesOffset % 60) || '00';
+
+          return '(' + sign + (hours.toString().length !== 2 ? ('0' + hours) : hours) +
+            ':' + (minutes.toString().length !== 2 ? ('0' + minutes) : minutes) + ') UTC';
+        };
+
         function getEmptyContact() {
           return {
-            subscription: {invoice: true},
+            subscription: { invoice: true },
             avatar: {
               scale: 50
             }
           };
         }
 
-        function setCurrentTimeZone(timeZoneObject) {
-          $scope.editCompany.addresses[0].locale = timeZoneObject;
-        }
+        $scope.setTimeZone = function (timeZoneName, offset, index) {
+          $scope.editCompany.addresses[index].timeZone = $scope.editCompany.addresses[index].timeZone || {};
+          $scope.editCompany.addresses[index].timeZone.name = timeZoneName;
+          $scope.editCompany.addresses[index].timeZone.timeOffset = offset;
+        };
 
-      }]);
+        $scope.expand = function (item, $event) {
+          item.expanded = !item.expanded;
+          $event.stopPropagation();
+        };
+
+        $scope.$watch('filterData.cityFilter', function (filter) {
+          if (filter && $scope.companyForm.locationForm.cityFilter.$dirty) {
+            $scope.filteredTimeZones = [];
+            for (var prop in $scope.timeZones) {
+              var group = $scope.timeZones[prop];
+              for (var timeZone in group) {
+                for (var index in group[timeZone]) {
+                  var city = group[timeZone][index];
+                  if (city.indexOf(filter) !== -1)
+                    $scope.filteredTimeZones.push({ name: prop + '/' + city, offset: timeZone });
+                }
+              }
+            }
+            $scope.companyForm.locationForm.cityFilter.$setPristine();
+          }
+        });
+
+      }
+    ]);
 
 }());
