@@ -15,7 +15,9 @@
         $scope.editCompany = $scope.currentCompany.staticCopy();
         $scope.timeRangeAllDays = {};
         $scope.currentAddressIndex = 0;
-        $scope.timezones = AddressesService.getAllLocales();
+        AddressesService.getLocales(true, function (response) {
+          $scope.timeZones = response;
+        });
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function () {
