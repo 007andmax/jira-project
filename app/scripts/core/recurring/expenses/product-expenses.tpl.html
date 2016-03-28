@@ -1,0 +1,60 @@
+<div class="product-expense">
+
+  <div class="col1">
+    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'product') || !editProduct.item.description}"-->
+
+    <div products-list="expense" id="product-list-cont"
+         click-outside="closeDropdown()" outside-if-not="product-list-cont">
+
+      <div>
+
+        <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
+               placeholder="Product" autocomplete="off">
+
+        <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
+               placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct">
+
+        <i class="icn-sm icn-caret-gray"></i>
+      </div>
+
+      <input type="hidden" name="product" ng-model="expense.item.description" ng-required="true">
+
+      <div class="nano dropdown-menu custom-product-list" pl-conteiner style="margin-left: -97px;"
+           ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+
+    </div>
+
+  </div>
+
+  <div class="col3" style="width: 74px;">
+    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}"-->
+
+    <input type="text" class="form-control" placeholder="Serial Number"
+           name="productSerialNumber" ng-maxlength="36"
+           ng-model="expense.serialNumber">
+  </div>
+
+  <div class="col4" style="width: 74px;">
+    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}"-->
+
+    <input type="text" class="form-control" placeholder="Qty"
+           ng-model="expense.quantity" ng-maxlength="10"
+           name="productQty" hard-reset-required="true" ng-change="controlProductQty(updateTicketProduct)"
+           hard-reset-pattern="numberPattern">
+  </div>
+
+  <div class="col5" style="width: 74px;">
+    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productPrice')}"-->
+
+    <input type="text" class="form-control" placeholder="Price" name="productPrice"
+           ng-required="true" ng-model="expense.item.sale"
+           hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
+  </div>
+
+  <div class="col-6">
+    <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete">
+      <i class="icn-sm icn-delete"></i>
+    </a>
+  </div>
+
+</div>

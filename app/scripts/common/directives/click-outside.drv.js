@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.recurring").directive("clickOutside",
+  angular.module("quicktech.common.directives").directive("clickOutside",
     ['$document', '$parse', function ($document, $parse) {
       return {
         restrict: 'A',

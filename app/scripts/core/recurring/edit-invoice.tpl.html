@@ -1,0 +1,156 @@
+<div class="qt-create-invoice clearfix" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
+  <div class="edit-invoice-form">
+    <form name="editInvoiceForm">
+
+      <fieldset class="half">
+
+        <label class="dropdown">
+
+          <span>Customer</span>
+
+          <input ng-model="searchCompany"
+                 type="text" placeholder="Company" data-toggle="dropdown" aria-expanded="true">
+
+          <div typeahead-input-icon="searchCompany"></div>
+
+          <ul class="dropdown-menu">
+            <li ng-repeat="company in companies | filter: {'name': searchCompany}" ng-click="chooseCompany(company)">
+              <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
+            </li>
+          </ul>
+
+        </label>
+
+        <label>
+          <span>Order title</span>
+          <input type="text" ng-model="editInvoice.title">
+        </label>
+
+        <fieldset class="small" ng-show="editInvoice.isRecurring">
+
+          <label class="for-small">
+            <span>PO</span>
+            <input type="text" class="small" ng-model="editInvoice.po">
+          </label>
+
+          <label class="for-small dropdown">
+            <span>Payments Terms</span>
+
+            <input type="text" class="small" placeholder="Payments Terms" ng-model="paymentsTerms"
+                   data-toggle="dropdown" aria-expanded="true">
+            <i class="icn-sm icn-caret-gray"></i>
+
+            <ul class="dropdown-menu payments-menu">
+              <li ng-repeat="(value, label) in frequency" ng-click="setPaymentTerms(label)">
+                <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+              </li>
+            </ul>
+
+          </label>
+
+        </fieldset>
+
+      </fieldset>
+
+      <fieldset class="half">
+        <label>
+          <span>Memo</span>
+          <textarea ng-model="editInvoice.title"></textarea>
+        </label>
+      </fieldset>
+
+      <fieldset class="full" ng-show="editInvoice.isRecurring">
+
+        <label class="dropdown">
+          <span>Repeating Invoice every</span>
+
+          <input type="text" placeholder="ComboBox"
+                 data-toggle="dropdown" aria-expanded="true" ng-model="repeatingInvoice">
+          <i class="icn-sm icn-caret-gray"></i>
+
+          <ul class="dropdown-menu repeating-menu">
+            <li ng-repeat="(value, label) in frequency" ng-click="setRepeatingInvoice(label)">
+              <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
+            </li>
+          </ul>
+
+        </label>
+
+        <label class="date">
+          <span> Starting Date</span>
+
+          <input type="text" placeholder="../../.." ng-model="editInvoice.startingDay"
+                 qt-data-time-picker>
+          <i class="icn-sm calendar"></i>
+        </label>
+
+        <label class="date">
+          <span>End Date</span>
+          <input type="text" placeholder="../../.." ng-model="editInvoice.endDay"
+                 qt-data-time-picker>
+          <i class="icn-sm calendar"></i>
+        </label>
+
+        <label class="date">
+          <span>Num. to generate</span>
+          <input type="text">
+        </label>
+
+      </fieldset>
+
+      <label>
+        <input type="checkbox" ng-model="editInvoice.isRecurring">
+        Automatically create and send invoice (all other recurring orders will be sent into Billable Items)
+      </label>
+
+      <div class="invoice-update">
+
+        <ul class="nav nav-ticket-add">
+
+          <li>
+            <a href="javascript:void(0)" ng-click="addProduct()">
+              <i class="icn-lg icn-add-product"></i>Product<i class="icn-sm icn-add-update"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="javascript:void(0)" ng-click="addService()">
+              <i class="icn-lg icn-add-service"></i>Service<i class="icn-sm icn-add-update"></i>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="update-content">
+          <ul class="qt-table">
+
+            <li ng-repeat="expense in editInvoice.expenses">
+
+              <div ng-if="expense.type === 'service'"
+                   ng-include="'/html/scripts/core/recurring/expenses/service-expenses.tpl.html'"></div>
+
+              <div ng-if="expense.type === 'product'"
+                   ng-include="'/html/scripts/core/recurring/expenses/product-expenses.tpl.html'"></div>
+
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="ticket-update-edit-actions clearfix">
+
+        <div class="btn btn-lg btn-info pull-right" ng-click="saveInvoice(editInvoiceForm)">
+          {{ editInvoice.id ? 'Save' : 'Create' }}
+        </div>
+
+        <div class="btn btn-lg btn-primary pull-right" ng-click="toogleNewForm(false)">
+          Cancel
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>
