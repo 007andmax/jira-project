@@ -196,92 +196,22 @@
                   <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
                   <div class="form-row clearfix" style="margin-top: 13px;">
-                    <div class="form-group full-width"
-                         ng-class="{'has-error': isShowingErrors(locationForm, 'companyTimezone')}">
+                    <time-zone-autocomplete address="location" time-zones="timeZones"></time-zone-autocomplete>
 
-                      <label class="control-label"
-                             ng-class="{'hide': isShowingErrors(locationForm, 'companyTimezone')}">
-                        Timezone
-                      </label>
+                    <!--<div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">-->
+                    <!--<div class="btn btn-primary has-tooltip pull-right"-->
+                    <!--ng-click="removeLocation($index)" cns-else-->
+                    <!--tooltip-placement="top" tooltip="Remove site/location">-->
+                    <!--<i class="icn-sm icn-remove-token"></i>-->
+                    <!--</div>-->
 
-                      <div ng-messages="locationForm.companyTimezone.$error"
-                           ng-class="{'hide': !isShowingErrors(locationForm, 'companyTimezone')}">
-                        <label class="control-label">PLEASE SELECT THE TIMEZONE.</label>
-                      </div>
+                    <!--<div class="btn btn-dark has-tooltip pull-right"-->
+                    <!--ng-click="addLocation()" ng-show="$last" cns-if-->
+                    <!--tooltip-placement="top" tooltip="Add another site/location">-->
+                    <!--<i class="icn-sm icn-plus"></i>-->
+                    <!--</div>-->
+                    <!--</div>-->
 
-                      <div class="pull-left dropdown">
-
-                        <input class="form-control form-control-time-zone has-dropdown" type="text"
-                               data-toggle="dropdown" aria-expanded="false"
-                               value="{{formatOffset(location.timeZone.timeOffset) + ' ' + location.timeZone.name}}"
-                               name="companyTimezone" readonly>
-
-                        <ul class="dropdown-menu time-zone-dropdown">
-                          <li>
-                            <input class="form-control" type="text" placeholder="City" ng-model="filterData.cityFilter"
-                                   name="cityFilter" make-dirty-on-blur>
-                          </li>
-                          <li class="clickable" ng-show="filterData.cityFilter"
-                              ng-click="setTimeZone(timeZone.name, timeZone.offset, locationIndex)"
-                              ng-repeat="timeZone in filteredTimeZones">
-                            <span>{{ formatOffset(timeZone.offset) }}</span>
-                            &nbsp;
-                            <span>{{ timeZone.name }}</span>
-                          </li>
-                          <li ng-if="filterData.cityFilter && !filteredTimeZones.length">
-                            Nothing found for "{{filterData.cityFilter}}"
-                          </li>
-
-                          <li ng-show="!filterData.cityFilter"
-                              ng-repeat="(name, group) in timeZones" ng-init="groupsExpanded[name] = {}">
-                            <div class="groupName" ng-click="expand(groupsExpanded[name], $event)">
-                              {{ name }}
-                              <i class="icn-sm icn-caret-gray pull-right"
-                                 ng-class="{'rotate': groupsExpanded[name].expanded}"></i>
-                            </div>
-
-                            <div class="cities-names"
-                                 ng-show="groupsExpanded[name].expanded"
-                                 ng-repeat="(offset, cities) in group"
-                                 ng-init="citiesExpanded[name + offset] = {}">
-
-                              <div class="ellipsis-overflow"
-                                   ng-click="cities.length > 1
-                                    ? expand(citiesExpanded[name + offset], $event)
-                                    : setTimeZone(name + '/' + cities[0], offset, locationIndex)">
-
-                                <span>{{ formatOffset(offset) }}</span>
-                                &nbsp;
-                                <span>{{ cities.join(', ') }}</span>
-                                <i class="icn-sm icn-caret-gray pull-right" ng-if="cities.length > 1"
-                                   ng-class="{'rotate': citiesExpanded[name + offset].expanded}"></i>
-                              </div>
-
-                              <div class="time-zone" ng-show="cities.length > 1 && citiesExpanded[name + offset].expanded"
-                                   ng-click="setTimeZone(name + '/' + city, offset, locationIndex)"
-                                   ng-repeat="city in cities">
-                                {{ city }}
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <!--<div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">-->
-                      <!--<div class="btn btn-primary has-tooltip pull-right"-->
-                      <!--ng-click="removeLocation($index)" cns-else-->
-                      <!--tooltip-placement="top" tooltip="Remove site/location">-->
-                      <!--<i class="icn-sm icn-remove-token"></i>-->
-                      <!--</div>-->
-
-                      <!--<div class="btn btn-dark has-tooltip pull-right"-->
-                      <!--ng-click="addLocation()" ng-show="$last" cns-if-->
-                      <!--tooltip-placement="top" tooltip="Add another site/location">-->
-                      <!--<i class="icn-sm icn-plus"></i>-->
-                      <!--</div>-->
-                      <!--</div>-->
-
-                    </div>
                   </div>
 
                   <!--<div class="form-row clearfix">-->
@@ -759,7 +689,8 @@
                   <p ng-style="{ opacity: isShowingErrors(newTaxRateForm, 'currentlyTaxType') ? '0' : '1' }">Edit Tax
                     Rate</p>
 
-                  <div ng-messages="newTaxRateForm.currentlyTaxType.$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm.currentlyTaxType.$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-class="{'hide': !isShowingErrors(newTaxRateForm, 'currentlyTaxType')}">
 
                     <label class="control-label" ng-message="required">
@@ -782,7 +713,8 @@
                 <div class="col-2" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'currentlyTaxRate')}">
                   <p>&nbsp;</p>
 
-                  <div ng-messages="newTaxRateForm.currentlyTaxRate.$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm.currentlyTaxRate.$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-if="isShowingErrors(newTaxRateForm, 'currentlyTaxRate')">
                     <label class="control-label" ng-message="required">
                       RATE IS REQUIRED.
@@ -811,7 +743,8 @@
                 <div class="col-1"
                      ng-class="{'has-error': (newTaxRateForm['taxCode' + $index].$dirty || triedToSave) && isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
 
-                  <div ng-messages="newTaxRateForm['taxCode' + $index].$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm['taxCode' + $index].$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-class="{'hide': (newTaxRateForm['taxCode' + $index].$pristine && !triedToSave) || !isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
 
                     <label class="control-label" ng-message="required">
@@ -833,7 +766,8 @@
 
                 <div class="col-2" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'taxRate' + $index)}">
 
-                  <div ng-messages="newTaxRateForm['taxRate' + $index].$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm['taxRate' + $index].$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-if="isShowingErrors(newTaxRateForm, 'taxRate' + $index)">
                     <label class="control-label" ng-message="required">
                       RATE IS REQUIRED.

@@ -24,11 +24,6 @@
         $scope.selectedServices = {};
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
-        $scope.citiesExpanded = [];
-        $scope.groupsExpanded = [];
-        $scope.filteredTimeZones = [];
-        $scope.filterData = {};
-        $scope.filterData.cityFilter = '';
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
             $timeout(function () {
@@ -123,12 +118,12 @@
         //  setCurrentTimeZone(currentTimeZone);
         //};
 
-        $scope.removeLocation = function (index) {
-          if ($scope.editCompany.addresses[index].isPrimary) {
-            $scope.editCompany.addresses[$scope.editCompany.addresses.length - 1].isPrimary = true;
-          }
-          $scope.editCompany.addresses.splice(index, 1);
-        };
+        //$scope.removeLocation = function (index) {
+        //  if ($scope.editCompany.addresses[index].isPrimary) {
+        //    $scope.editCompany.addresses[$scope.editCompany.addresses.length - 1].isPrimary = true;
+        //  }
+        //  $scope.editCompany.addresses.splice(index, 1);
+        //};
 
         $scope.isShowingContactErrors = function (contact, form, fieldName) {
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
@@ -441,16 +436,6 @@
 
         $scope.$watch('editCompany.contacts.length', $scope.changeInvoiceSubscription);
 
-        $scope.formatOffset = function (offset) {
-          var minutesOffset = offset / 60000,
-            sign = Math.sign(offset) === -1 ? '-' : '+',
-            hours = Math.abs(Math.floor(minutesOffset / 60)) || '00',
-            minutes = Math.abs(minutesOffset % 60) || '00';
-
-          return '(' + sign + (hours.toString().length !== 2 ? ('0' + hours) : hours) +
-            ':' + (minutes.toString().length !== 2 ? ('0' + minutes) : minutes) + ') UTC';
-        };
-
         function getEmptyContact() {
           return {
             subscription: { invoice: true },
@@ -459,34 +444,6 @@
             }
           };
         }
-
-        $scope.setTimeZone = function (timeZoneName, offset, index) {
-          $scope.editCompany.addresses[index].timeZone = $scope.editCompany.addresses[index].timeZone || {};
-          $scope.editCompany.addresses[index].timeZone.name = timeZoneName;
-          $scope.editCompany.addresses[index].timeZone.timeOffset = offset;
-        };
-
-        $scope.expand = function (item, $event) {
-          item.expanded = !item.expanded;
-          $event.stopPropagation();
-        };
-
-        $scope.$watch('filterData.cityFilter', function (filter) {
-          if (filter && $scope.companyForm.locationForm.cityFilter.$dirty) {
-            $scope.filteredTimeZones = [];
-            for (var prop in $scope.timeZones) {
-              var group = $scope.timeZones[prop];
-              for (var timeZone in group) {
-                for (var index in group[timeZone]) {
-                  var city = group[timeZone][index];
-                  if (city.indexOf(filter) !== -1)
-                    $scope.filteredTimeZones.push({ name: prop + '/' + city, offset: timeZone });
-                }
-              }
-            }
-            $scope.companyForm.locationForm.cityFilter.$setPristine();
-          }
-        });
 
       }
     ]);
