@@ -9,15 +9,8 @@
         <span class="dot-sep"></span>
         <span>{{ last30DaysValue | currency:'$' :2 }}</span>
 
-        <!--<ul class="chart-legend">-->
-        <!--<li><i class="circle-indicator red"></i>Weekly</li>-->
-        <!--<li><i class="circle-indicator green"></i>Monthly</li>-->
-        <!--<li><i class="circle-indicator orange"></i>Yearly</li>-->
-        <!--</ul>-->
-
       </div>
 
-      <!--<div recurring-charts ng-model="recurringGraphData"></div>-->
       <div billable-chart ng-model="recurringGraphData"></div>
 
     </div>
@@ -39,7 +32,7 @@
         </li>
 
         <li role="presentation" class="active">
-          <a href="javascript:void(0)">Recurring Invoices</a>
+          <a href="javascript:void(0)">Recurring Orders</a>
         </li>
 
       </ul>
@@ -66,25 +59,30 @@
             </div>
           </li>
 
-          <li class="invoice-table" ng-repeat="invoice in invoices | orderBy: invoicesOrder"
+          <li class="invoice-table" show-model-element="{{ 'showInvoice-' + invoice.id }}" qt-toggle-slider
+              ng-repeat="invoice in invoices | orderBy: invoicesOrder"
               ng-controller="quicktech.core.recurring.invoiceCtrl">
 
             <div class="table-invoice-item clearfix" ng-hide="editInvoiceId === invoice.id">
               <div>{{ companyOfInvocie.name }}</div>
               <div><i class="icn-sm icn-title"></i></div>
-              <div>03/04/2016</div>
-              <div>Monthly</div>
+              <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
+              <div>{{ frequency[invoice.frequency] || invoice.frequency + ' days' }}</div>
               <div>04/04/2016</div>
               <div>2</div>
               <div>$2100.65
-                <i class="icn-sm icn-title"></i>
-                <i class="icn-sm icn-edit"></i>
-                <i class="icn-sm icn-desk"></i>
-                <i class="icn-sm icn-bracket"></i>
+                <a><i class="icn-sm icn-description"></i></a>
+                <a><i class="icn-sm icn-edit"></i></a>
+                <a><i class="icn-sm icn-desk" qt-ts-toggler></i></a>
+                <a><i class="icn-sm icn-delete" ng-click="deleteRecurringInvoice()"></i></a>
               </div>
             </div>
 
-            <div ng-show="editInvoiceId === invoice.id"
+            <div class="sub-wrapper clearfix" qt-ts-slider>
+              <div ng-include="'/html/scripts/core/recurring/expenses/expenses-list.tpl.html'"></div>
+            </div>
+
+            <div ng-if="editInvoiceId === invoice.id"
                  ng-include="'/html/scripts/core/recurring/edit-invoice.tpl.html'"></div>
 
           </li>

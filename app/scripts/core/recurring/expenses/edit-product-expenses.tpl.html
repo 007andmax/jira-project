@@ -1,7 +1,8 @@
-<div class="product-expense">
+<div class="product-expense" ng-init="updateInvoiceProduct = 'updateInvoice-' + $index"
+     ng-form="{{ updateInvoiceProduct }}">
 
-  <div class="col1">
-    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'product') || !editProduct.item.description}"-->
+  <div class="col1"
+       ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceProduct], 'product') || !expense.item.description}">
 
     <div products-list="expense" id="product-list-cont"
          click-outside="closeDropdown()" outside-if-not="product-list-cont">
@@ -26,25 +27,25 @@
 
   </div>
 
-  <div class="col3" style="width: 74px;">
-    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productSerialNumber')}"-->
+  <div class="col3" style="width: 74px;"
+       ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceProduct], 'productSerialNumber')}">
 
     <input type="text" class="form-control" placeholder="Serial Number"
            name="productSerialNumber" ng-maxlength="36"
            ng-model="expense.serialNumber">
   </div>
 
-  <div class="col4" style="width: 74px;">
-    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productQty')}"-->
+  <div class="col4" style="width: 74px;"
+       ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceProduct], 'productQty')}">
 
     <input type="text" class="form-control" placeholder="Qty"
            ng-model="expense.quantity" ng-maxlength="10"
-           name="productQty" hard-reset-required="true" ng-change="controlProductQty(updateTicketProduct)"
+           name="productQty" hard-reset-required="true" ng-change="controlProductQty(editInvoiceForm[updateInvoiceProduct])"
            hard-reset-pattern="numberPattern">
   </div>
 
-  <div class="col5" style="width: 74px;">
-    <!--ng-class="{'has-error': isShowingErrors(updateTicketProduct, 'productPrice')}"-->
+  <div class="col5" style="width: 74px;"
+       ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceProduct], 'productPrice')}">
 
     <input type="text" class="form-control" placeholder="Price" name="productPrice"
            ng-required="true" ng-model="expense.item.sale"
@@ -52,7 +53,7 @@
   </div>
 
   <div class="col-6">
-    <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete">
+    <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete" ng-click="deleteExpense()">
       <i class="icn-sm icn-delete"></i>
     </a>
   </div>
