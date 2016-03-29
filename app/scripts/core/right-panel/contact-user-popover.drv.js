@@ -169,7 +169,7 @@
                   subsTooltip.hide();
 
                   icnEmail.on('click', function () {
-                    scope.sendEmailInPopover(scope.userInfo.id)
+                    scope.sendEmailInPopover(scope.userInfo.id);
                   });
 
                   icnEmail.on('mouseenter', function () {
@@ -192,6 +192,7 @@
 
               function hideThisPopover(){
                 element.popover('hide');
+                $rootScope.insidePopover = false;
               }
 
             }
