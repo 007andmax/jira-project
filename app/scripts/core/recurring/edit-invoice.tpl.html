@@ -98,22 +98,22 @@
 
       </fieldset>
 
-      <label>
+      <label class="invoice-checkbox">
         <input type="checkbox" ng-model="editInvoice.isRecurring">
         Automatically create and send invoice (all other recurring orders will be sent into Billable Items)
       </label>
 
       <div class="invoice-update">
 
-        <ul class="nav nav-ticket-add">
+        <ul class="nav nav-ticket-add invoice-ticket-add">
 
-          <li>
+          <li class="invoice-update-btns">
             <a href="javascript:void(0)" ng-click="addProduct()">
               <i class="icn-lg icn-add-product"></i>Product<i class="icn-sm icn-add-update"></i>
             </a>
           </li>
 
-          <li>
+          <li class="invoice-update-btns">
             <a href="javascript:void(0)" ng-click="addService()">
               <i class="icn-lg icn-add-service"></i>Service<i class="icn-sm icn-add-update"></i>
             </a>
