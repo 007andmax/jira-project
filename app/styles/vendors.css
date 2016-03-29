@@ -112,6 +112,7 @@
   color: #000;
   top: 8px;
   width: 70%;
+  height: 90%;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
