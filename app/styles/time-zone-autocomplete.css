@@ -69,3 +69,6 @@
 .clickable:hover {
   background-color: rgba(0, 0, 0, .12);
 }
+.clickable.time-zone-focused {
+  background-color: rgba(0, 0, 0, .12);
+}

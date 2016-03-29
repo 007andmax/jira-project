@@ -91,6 +91,7 @@
                   AddressesService.getLocaleByName(response.data.timeZoneId, function (timeZoneObj) {
                     ngModelCtrl.$viewValue.locale = timeZoneObj.name;
                     ngModelCtrl.$viewValue.timeZone = timeZoneObj;
+                    ngModelCtrl.$viewValue.fromGoogle = true;
                   })
                 }
               }, function errorCallback(response) {
