@@ -98,11 +98,11 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .default-ctgr-prdcs .qt-product-list > li > .col-4 {
-  width: 106px;
+  width: 70px;
 }
 
 .default-ctgr-prdcs .qt-product-list > li > .intermediate-parent-elem > .col-4 {
-  width: 106px;
+  width: 70px;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-4 {
@@ -944,4 +944,7 @@ aside#left div.nav-title {
 }
 .logo-control .icn-cover-not-hover{
   /*zoom: 1.5;*/
+}
+.col-2.product-description {
+
 }
