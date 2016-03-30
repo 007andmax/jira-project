@@ -85,11 +85,14 @@
                     <i class="icn-sm icn-description"></i>
                   </a>
 
-                  <a><i class="icn-sm icn-edit" ng-click="toogleEditForm(invoice.id)"></i></a>
+                  <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top"
+                        ng-click="toogleEditForm(invoice.id)"></i></a>
 
-                  <a><i class="icn-sm icn-desk" qt-ts-toggler></i></a>
+                  <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top"
+                        qt-ts-toggler></i></a>
 
-                  <a><i class="icn-sm icn-delete" ng-click="deleteRecurringInvoice()"></i></a>
+                  <a><i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top"
+                        ng-click="deleteRecurringInvoice()"></i></a>
 
                 </div>
 
