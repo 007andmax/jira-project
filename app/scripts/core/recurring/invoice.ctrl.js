@@ -8,9 +8,9 @@
 
         $scope.companyOfInvocie = CompaniesService.getOneById($scope.invoice.company.id);
 
-        $scope.$watchGroup(function(){
+        $scope.$watchGroup(function () {
           return [$scope.invoice.products, $scope.invoice.services]
-        }, function(){
+        }, function () {
           $scope.expenses = getArrayExpenses()
         });
 
@@ -18,14 +18,14 @@
           RecurringService.deleteRecurringInvoice($scope.invoice.id);
         };
 
-        function getArrayExpenses(){
+        function getArrayExpenses() {
           var arr = [];
 
-          for(var i = 0, len = $scope.invoice.products.length; i < len; i++){
+          for (var i = 0, len = $scope.invoice.products.length; i < len; i++) {
             arr.push($scope.invoice.products[i])
           }
 
-          for(var i = 0, len = $scope.invoice.services.length; i < len; i++){
+          for (var i = 0, len = $scope.invoice.services.length; i < len; i++) {
             arr.push($scope.invoice.services[i])
           }
 

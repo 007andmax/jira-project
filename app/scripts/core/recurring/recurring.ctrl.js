@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
-    ['$scope', 'RecurringService', 'CompaniesService', '$rootScope',
-      function ($scope, RecurringService, CompaniesService, $rootScope) {
+    ['$scope', 'RecurringService', 'CompaniesService',
+      function ($scope, RecurringService, CompaniesService) {
 
         $scope.editInvoiceId = '';
         $scope.frequency = {
@@ -28,9 +28,9 @@
         });
 
         $scope.toogleEditForm = function (value) {
-          if(!value){
+          if (!value) {
             $scope.editInvoiceId = '';
-          } else if(value === 'new-invoice'){
+          } else if (value === 'new-invoice') {
             $scope.editInvoiceId = 'new-invoice';
           } else {
             $scope.editInvoiceId = value;

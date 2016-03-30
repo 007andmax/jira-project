@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceExpensesCtrl',
-    ['$scope', 'TaxRatesService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
-      function ($scope, TaxRatesService, BillableService, CompaniesService, ServicesService, $filter) {
+    ['$scope', 'TaxRatesService',
+      function ($scope, TaxRatesService) {
 
         var taxRatesCopy;
 
@@ -18,7 +18,7 @@
         $scope.addProduct = function (form) {
           if (isLastUpdateValid(form)) {
             $scope.editInvoice.expenses.push({type: 'product', itemOrder: $scope.editInvoice.expenses.length});
-             $scope.triedToAddUpdate = false;
+            $scope.triedToAddUpdate = false;
           } else {
             $scope.triedToAddUpdate = true;
           }
@@ -27,7 +27,7 @@
         $scope.addService = function (form) {
           if (isLastUpdateValid(form)) {
             $scope.editInvoice.expenses.push({type: 'service', itemOrder: $scope.editInvoice.expenses.length});
-             $scope.triedToAddUpdate = false;
+            $scope.triedToAddUpdate = false;
           } else {
             $scope.triedToAddUpdate = true;
           }
@@ -72,10 +72,10 @@
 
         }, true);
 
-        function isLastUpdateValid(form){
+        function isLastUpdateValid(form) {
           var expensesLength = $scope.editInvoice.expenses.length;
 
-          if(!expensesLength || expensesLength === 0){
+          if (!expensesLength || expensesLength === 0) {
             return true;
           } else {
             return form['updateInvoice-' + (expensesLength - 1)].$valid;

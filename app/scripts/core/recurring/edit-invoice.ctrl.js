@@ -22,25 +22,55 @@
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete();
 
-
         if ($scope.invoice && $scope.invoice.id) {
 
-          $scope.editInvoice = $scope.invoice.staticCopy();
-          $scope.editInvoice.expenses = angular.copy($scope.expenses);
-          $scope.editInvoice.isRecurring = true;
+          $scope.searchCompany = CompaniesService.getOneById($scope.invoice.company.id).name;
+          $scope.actualInvoiceNumber = $scope.invoice.number;
+          $scope.minSentOnDate = new Date($scope.invoice.sentOn);
+          $scope.minEndDate = new Date($scope.invoice.endDate);
 
-          $scope.minSentOnDate = new Date($scope.editInvoice.sentOn);
-          $scope.minEndDate = new Date($scope.editInvoice.sentOn);
-          $scope.searchCompany = CompaniesService.getOneById($scope.editInvoice.company.id).name;
+          $scope.editInvoice = {
+            id: $scope.invoice.id,
+            company: {
+              id: $scope.invoice.company.id
+            },
+            title: $scope.invoice.title,
+            isRecurring: true,
+            purchaseOrder: $scope.invoice.purchaseOrder,
+            paymentTerms: $scope.invoice.paymentTerms,
+            memo: $scope.invoice.memo,
+            sentOn: new Date($scope.invoice.sentOn),
+            endDate: new Date($scope.invoice.endDate),
+            expenses: []
+          };
 
-          $scope.actualInvoiceNumber = $scope.editInvoice.number
+          for (var i = 0, len = $scope.invoice.products.length; i < len; i++) {
+            var product = $scope.invoice.products[i];
+            $scope.editInvoice.expenses.push({
+              type: "product",
+              serialNumber: product.serialNumber,
+              quantity: product.quantity,
+              itemOrder: product.itemOrder,
+              item: angular.copy(product.item)
+            })
+          }
+
+          for (var i = 0, len = $scope.invoice.services.length; i < len; i++) {
+            var service = $scope.invoice.services[i];
+            $scope.editInvoice.expenses.push({
+              type: "service",
+              description: service.description,
+              quantity: service.quantity * 60,
+              itemOrder: service.itemOrder,
+              item: angular.copy(service.item)
+            })
+          }
 
           $timeout(function () {
-
-            if ($scope.editInvoice.frequency) {
-              $scope.paramInvocie.repeatingInvoice = $scope.editInvoice.frequency;
+            if ($scope.invoice.frequency) {
+              $scope.paramInvocie.repeatingInvoice = $scope.invoice.frequency === 'MONTHLY' ? 'Monthly' : 'Yearly';
             } else {
-              $scope.paramInvocie.repeatingInvoice = $scope.editInvoice.customFrequency + ' days'
+              $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency + ' days'
             }
 
             $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms + ' days'
@@ -239,6 +269,7 @@
         $scope.clearInfinity = function () {
           $scope.isNumInfinity = false;
           $scope.paramInvocie.numToGenerate = 1;
+          $scope.changeNumToGenerate();
         };
 
         function numOfMonth(sentOn, endDate) {
@@ -288,6 +319,7 @@
 
         $scope.saveInvoice = function (form) {
           if (form.$valid && !$scope.disabledSaveInvoice) {
+            $scope.hardDisabledSave = true;
 
             var editInvoice = angular.copy($scope.editInvoice);
 
@@ -300,14 +332,15 @@
             editInvoice.endDate = new Date(editInvoice.endDate);
             editInvoice.sentOn = new Date(editInvoice.sentOn);
 
-            console.log($scope.editInvoice);
             if (editInvoice.isRecurring) {
-              RecurringService.saveRecurringOrder(editInvoice, function (resp) {
-                console.log(resp);
+              RecurringService.saveRecurringOrder(editInvoice, function () {
+                $scope.toogleEditForm();
+                $scope.hardDisabledSave = false;
               })
             } else {
-              BillableService.saveRegularOrder(editInvoice, function (resp) {
-                console.log(resp);
+              BillableService.saveRegularOrder(editInvoice, function () {
+                $scope.toogleEditForm();
+                $scope.hardDisabledSave = false;
               })
             }
           } else {

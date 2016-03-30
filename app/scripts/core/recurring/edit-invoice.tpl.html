@@ -220,7 +220,7 @@
       <div class="ticket-update-edit-actions clearfix">
 
         <div class="btn btn-lg btn-info pull-right" ng-click="saveInvoice(editInvoiceForm)"
-             custom-disabled="{{ (editInvoiceForm.$invalid || disabledSaveInvoice) && triedToSaveInvoice }}">
+             custom-disabled="{{ hardDisabledSave || (editInvoiceForm.$invalid || disabledSaveInvoice) && triedToSaveInvoice }}">
           {{ editInvoice.id ? 'Save' : 'Create' }}
         </div>
 

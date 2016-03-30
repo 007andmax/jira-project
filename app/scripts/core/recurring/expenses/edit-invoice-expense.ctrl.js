@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceExpenseCtrl',
-    ['$scope', 'RecurringService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
-      function ($scope, RecurringService, BillableService, CompaniesService, ServicesService, $filter) {
+    ['$scope',
+      function ($scope) {
 
-        $scope.setNewService = function(service){
+        $scope.setNewService = function (service) {
           $scope.expense.item = angular.copy(service);
         };
 
@@ -14,7 +14,7 @@
           $scope.expense.item = angular.copy(product);
         };
 
-        $scope.deleteExpense = function(){
+        $scope.deleteExpense = function () {
           $scope.editInvoice.expenses.splice($scope.$index, 1);
         }
 

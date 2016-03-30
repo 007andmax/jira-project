@@ -19,7 +19,8 @@
   <div class="billable-content">
     <div class="tabs-container">
 
-      <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
+      <div class="btn btn-add-company btn-primary pull-right has-tooltip"
+           style="width: 98px;" ng-hide="editInvoiceId === 'new-invoice'"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
            ng-click="toogleEditForm('new-invoice')">
         <i class="icn-sm icn-add-company"></i>
@@ -66,7 +67,6 @@
               ng-class="{'warning-order': invoice.leftGenerations === 1, 'danger-order': invoice.leftGenerations === 0}">
 
             <div>
-
               <div class="table-invoice-item clearfix" ng-hide="editInvoiceId === invoice.id">
 
                 <div>{{ companyOfInvocie.name }}</div>
@@ -79,23 +79,22 @@
                 <div>{{ invoice.endDate | date:'dd MMM yyyy' }}</div>
                 <div>{{ invoice.generatedCount }}</div>
                 <div class="numbs">{{ invoice.number }}</div>
-                <div>{{ invoice.total }}
+                <div>{{ invoice.total | currency:'$':2 }}
 
                   <a popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter">
                     <i class="icn-sm icn-description"></i>
                   </a>
 
-                  <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top"
+                  <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
                         ng-click="toogleEditForm(invoice.id)"></i></a>
 
-                  <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top"
+                  <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top" tooltip-append-to-body="true"
                         qt-ts-toggler></i></a>
 
-                  <a><i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top"
+                  <a><i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
                         ng-click="deleteRecurringInvoice()"></i></a>
 
                 </div>
-
               </div>
 
               <div class="sub-wrapper clearfix" qt-ts-slider>
