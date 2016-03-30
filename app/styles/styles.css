@@ -9109,7 +9109,7 @@ button.close {
   color: #ffffff;
   text-align: center;
   white-space: nowrap;
-  background-color: #151e29;
+  /*background-color: #151e29;*/
   border-radius: 3px;
 }
 .tooltip-lg .tooltip-inner {

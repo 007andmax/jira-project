@@ -227,7 +227,7 @@
   font-size: 11px;
   color: #748498;
   text-transform: uppercase;
-  width: 11%;
+  width: 14%;
   margin-right: 0.5%;
   float: left;
   padding: 10px;
@@ -259,7 +259,7 @@
 .invoice-table .table-invoice-item div {
   display: inline-block;
   float: left;
-  width: 11%;
+  width: 14%;
   margin-right: 0.5%;
   padding: 10px;
   font-size: 14px;
@@ -267,6 +267,29 @@
   font-weight: 400;
   color: #000;
   text-align: center;
+}
+span.control-label.error-required{
+  position: absolute;
+  top: -20px;
+  right: 0;
+}
+.recurring-icn-btns{
+  display: inline-block;
+}
+.invoice-table .table-invoice-item div.popover-inner{
+  padding-left: 0;
+}
+.invoice-table .ticket-add-amount{
+  width: 100%;
+  float: right;
+  text-align: right;
+}
+.invoice-table .table-wrapper .table-content{
+  width: calc(100% - 70px);
+  margin-left: 45px;
+}
+.invoice-table .table-invoice-item div.popover-inner .popover-content{
+  padding-left: 0;
 }
 .invoice-table-head .invoice-table-head-item div.no-invoice{
   width: 6%;
@@ -297,10 +320,10 @@
   background-position: -1040px 4px;
 }
 .invoice-table .table-invoice-item div .icn-delete{
-  background-position: -1614px 4px;
+  background-position: -1614px 3px;
 }
 .invoice-table .table-invoice-item div :hover > .icn-delete{
-  background-position: -1592px 4px;
+  background-position: -1592px 3px;
 }
 
 .invoice-table .table-invoice-item div :hover > .icn-edit {
@@ -334,8 +357,11 @@
 
 .edit-invoice-form .has-error span.control-label {
   color: #e53935;
+  margin-top: 0;
 }
-
+.edit-invoice-form form fieldset.half label.has-error span{
+  margin-top: 0;
+}
 .edit-invoice-form .has-error input[type="text"] {
   background-color: #fff2f2 !important;
   border-color: #fde9e9 !important;

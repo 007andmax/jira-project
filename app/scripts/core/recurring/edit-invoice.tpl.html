@@ -1,7 +1,7 @@
 <div class="qt-create-invoice clearfix" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
   <div class="edit-invoice-form">
     <form name="editInvoiceForm">
-      <span class="numb-form">{{ actualInvoiceNumber }}</span>
+      <!--<span class="numb-form">{{ actualInvoiceNumber }}</span>-->
       <fieldset class="half">
 
         <label class="dropdown company-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}">
@@ -10,7 +10,7 @@
 
           <span ng-messages="editInvoiceForm.customer.$error"
                 ng-class="{'hide': !isShowingErrors(editInvoiceForm, 'customer')}">
-            <span class="control-label" ng-message="required">Customer is required.</span>
+            <span class="control-label error-required" ng-message="required">Customer is required.</span>
           </span>
 
           <input ng-model="searchCompany"

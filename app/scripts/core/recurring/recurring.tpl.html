@@ -56,7 +56,7 @@
               <div>Recurring</div>
               <div>Finish Date</div>
               <div>Total Created</div>
-              <div class="no-invoice">invoice no</div>
+              <!--<div class="no-invoice">invoice no</div>-->
               <div>Amount</div>
             </div>
           </li>
@@ -78,7 +78,7 @@
                 <div>{{ frequency[invoice.frequency] || invoice.customFrequency + ' days' }}</div>
                 <div>{{ invoice.endDate | date:'dd MMM yyyy' }}</div>
                 <div>{{ invoice.generatedCount }}</div>
-                <div class="numbs">{{ invoice.number }}</div>
+                <!--<div class="numbs">{{ invoice.number }}</div>-->
                 <div>{{ invoice.total | currency:'$':2 }}
 
                   <a popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter">
