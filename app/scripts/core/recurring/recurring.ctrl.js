@@ -3,41 +3,39 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
-    ['$scope', 'RecurringService', 'CompaniesService', '$rootScope',
-      function ($scope, RecurringService, CompaniesService, $rootScope) {
+    ['$scope', 'RecurringService', 'CompaniesService',
+      function ($scope, RecurringService, CompaniesService) {
 
         $scope.editInvoiceId = '';
+        $scope.frequency = {
+          sevenDays: '7 days',
+          fifteenDays: '15 days',
+          thirtyDays: '30 days',
+          MONTHLY: 'Monthly',
+          YEARLY: 'Yearly'
+        };
 
         RecurringService.getAll($scope, function (resp) {
           $scope.invoices = resp;
         });
 
-        var graphData = RecurringService.getRecurringGraphData($scope, function () {
+        $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
           $scope.last30DaysValue = 0;
-          var recurringGraphData = [];
 
-          for (var r = 0; r < graphData.length; r++) {
-
-            var needToSetData = (recurringGraphData.length === 0);
-
-            for (var i = 0; i < graphData[r].length; i++) {
-              $scope.last30DaysValue += graphData[r][i].sum;
-
-              if (needToSetData) {
-                recurringGraphData[i] = {
-                  sum: +graphData[0][i].sum + +graphData[1][i].sum + +graphData[2][i].sum,
-                  date: graphData[0][i].date
-                }
-              }
-            }
+          for (var i = 0; i < $scope.recurringGraphData.length; i++) {
+            $scope.last30DaysValue += $scope.recurringGraphData[i].sum;
           }
-
-          $scope.recurringGraphData = recurringGraphData;
-
         });
 
-        $scope.toogleNewForm = function (isOpen) {
-          $scope.editInvoiceId = isOpen ? 'new-invocie' : '';
+        $scope.toogleEditForm = function (value) {
+          if (!value) {
+            $scope.editInvoiceId = '';
+          } else if (value === 'new-invoice') {
+            $scope.editInvoiceId = 'new-invoice';
+          } else {
+            $scope.editInvoiceId = value;
+          }
+
         };
 
         $scope.invoicesOrder = function (item) {
@@ -46,49 +44,6 @@
             return company.name
           }
         };
-        //$scope.recurringCompanies = RecurringService.getRecurringCompanies($scope, function () {
-        //
-        //  $scope.$watch('recurringCompanies', function () {
-        //
-        //    for (var i = 0; i < $scope.recurringCompanies.length; i++) {
-        //      var company = $scope.recurringCompanies[i];
-        //      if (!company.company.name) {
-        //        company.company.name = CompaniesService.getOneById(company.company.id).name;
-        //      }
-        //    }
-        //
-        //    var clientCompanies = CompaniesService.getClientCompanies(),
-        //      recurringCompaniesId = [];
-        //    $scope.notRecurringCompaniesArray = [];
-        //
-        //    for (var j = 0; j < $scope.recurringCompanies.length; j++) {
-        //      recurringCompaniesId.push($scope.recurringCompanies[j].company.id)
-        //    }
-        //
-        //    for (var i = 0; i < clientCompanies.length; i++) {
-        //      if ((recurringCompaniesId.indexOf(clientCompanies[i].id)) < 0) {
-        //        $scope.notRecurringCompaniesArray.push(clientCompanies[i]);
-        //      }
-        //    }
-        //
-        //  }, true);
-        //});
-
-        //$scope.openAddCompanyForm = function () {
-        //  $scope.isShowAddCompany = true;
-        //  $rootScope.$broadcast('cancelEditForm');
-        //};
-
-        //$scope.addCompany = function () {
-        //  RecurringService.addCompany($scope.recurringCompanies, $scope.company.id);
-        //  $rootScope.$broadcast('cancelEditForm');
-        //  $scope.isShowAddCompany = false;
-        //  $scope.company = '';
-        //};
-        //
-        //$scope.closeChooseCompanyForm = function(){
-        //  $scope.isShowAddCompany = false;
-        //}
 
       }]);
 

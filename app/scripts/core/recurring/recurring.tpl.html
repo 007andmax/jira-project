@@ -9,15 +9,8 @@
         <span class="dot-sep"></span>
         <span>{{ last30DaysValue | currency:'$' :2 }}</span>
 
-        <!--<ul class="chart-legend">-->
-        <!--<li><i class="circle-indicator red"></i>Weekly</li>-->
-        <!--<li><i class="circle-indicator green"></i>Monthly</li>-->
-        <!--<li><i class="circle-indicator orange"></i>Yearly</li>-->
-        <!--</ul>-->
-
       </div>
 
-      <!--<div recurring-charts ng-model="recurringGraphData"></div>-->
       <div billable-chart ng-model="recurringGraphData"></div>
 
     </div>
@@ -26,9 +19,10 @@
   <div class="billable-content">
     <div class="tabs-container">
 
-      <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
+      <div class="btn btn-add-company btn-primary pull-right has-tooltip"
+           style="width: 98px;" ng-hide="editInvoiceId === 'new-invoice'"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
-           ng-click="toogleNewForm(true)">
+           ng-click="toogleEditForm('new-invoice')">
         <i class="icn-sm icn-add-company"></i>
       </div>
 
@@ -39,7 +33,7 @@
         </li>
 
         <li role="presentation" class="active">
-          <a href="javascript:void(0)">Recurring Invoices</a>
+          <a href="javascript:void(0)">Recurring Orders</a>
         </li>
 
       </ul>
@@ -50,7 +44,7 @@
       <div role="tabpanel" class="tab-pane active">
         <ul class="qt-list qt-recurring-invoices">
 
-          <li ng-show="editInvoiceId === 'new-invocie'">
+          <li ng-if="editInvoiceId === 'new-invoice'">
             <div ng-include="'/html/scripts/core/recurring/edit-invoice.tpl.html'"></div>
           </li>
 
@@ -62,29 +56,65 @@
               <div>Recurring</div>
               <div>Finish Date</div>
               <div>Total Created</div>
+              <div class="no-invoice">invoice no</div>
               <div>Amount</div>
             </div>
           </li>
 
-          <li class="invoice-table" ng-repeat="invoice in invoices | orderBy: invoicesOrder"
-              ng-controller="quicktech.core.recurring.invoiceCtrl">
+          <li class="invoice-table" show-model-element="{{ 'showInvoice-' + invoice.id }}" qt-toggle-slider
+              ng-repeat="invoice in invoices | orderBy: invoicesOrder"
+              ng-controller="quicktech.core.recurring.invoiceCtrl"
+              ng-class="{'warning-order': invoice.leftGenerations === 1, 'danger-order': invoice.leftGenerations === 0}">
 
-            <div class="table-invoice-item clearfix" ng-hide="editInvoiceId === invoice.id">
-              <div>{{ companyOfInvocie.name }}</div>
-              <div><i class="icn-sm icn-title"></i></div>
-              <div>03/04/2016</div>
-              <div>Monthly</div>
-              <div>04/04/2016</div>
-              <div>2</div>
-              <div>$2100.65
-                <i class="icn-sm icn-title"></i>
-                <i class="icn-sm icn-edit"></i>
-                <i class="icn-sm icn-desk"></i>
-                <i class="icn-sm icn-bracket"></i>
+            <div>
+              <div class="table-invoice-item clearfix" ng-hide="editInvoiceId === invoice.id">
+
+                <div>{{ companyOfInvocie.name }}</div>
+
+                <div popover="{{ invoice.title }}" popover-placement="bottom" popover-trigger="mouseenter">
+                  <i class="icn-sm  icn-description"></i>
+                </div>
+                <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
+                <div>{{ frequency[invoice.frequency] || invoice.customFrequency + ' days' }}</div>
+                <div>{{ invoice.endDate | date:'dd MMM yyyy' }}</div>
+                <div>{{ invoice.generatedCount }}</div>
+                <div class="numbs">{{ invoice.number }}</div>
+                <div>{{ invoice.total | currency:'$':2 }}
+
+                  <a popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter">
+                    <i class="icn-sm icn-description"></i>
+                  </a>
+
+                  <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
+                        ng-click="toogleEditForm(invoice.id)"></i></a>
+
+                  <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top" tooltip-append-to-body="true"
+                        qt-ts-toggler></i></a>
+
+                  <a><i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+                        ng-click="deleteRecurringInvoice()"></i></a>
+
+                </div>
               </div>
+
+              <div class="sub-wrapper clearfix" qt-ts-slider>
+                <div ng-include="'/html/scripts/core/recurring/expenses/expenses-list.tpl.html'"></div>
+
+                <div class="ticket-add-amount pull-right">
+                  <span class="text-muted">Subtotal </span>
+                  <strong>{{ invoice.subtotal | currency:'$':2 }}</strong>
+                </div>
+
+                <div class="ticket-add-amount pull-right">
+                  <span class="text-muted">Total </span>
+                  <strong>{{ invoice.total | currency:'$':2 }}</strong>
+                </div>
+
+              </div>
+
             </div>
 
-            <div ng-show="editInvoiceId === invoice.id"
+            <div ng-if="editInvoiceId === invoice.id"
                  ng-include="'/html/scripts/core/recurring/edit-invoice.tpl.html'"></div>
 
           </li>

@@ -1,18 +1,20 @@
-<div class="service-expense">
-  <div class="col1">
-    <!--ng-class="{'has-error': !editService.item.versionedId.id}"-->
+<div class="service-expense" ng-init="updateInvoiceService = 'updateInvoice-' + $index"
+     ng-form="{{ updateInvoiceService }}">
+  <div class="col1" ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceService], 'service')}">
+
     <div class="dropdown">
 
-      <input type="text" value="Onsite" class="form-control has-dropdown" placeholder="Service"
+      <input type="text" class="form-control has-dropdown" placeholder="Service" autocomplete="off"
              data-toggle="dropdown" aria-expanded="false"
              name="serviceName" placeholder="Service" data-toggle="dropdown" aria-expanded="true"
-             ng-model="expense.item.name">
+             ng-model="expense.item.name" custom-disabled="{{ !companyServices }}">
       <i class="icn-sm icn-caret-gray"></i>
 
-      <ul class="dropdown-menu dropdown-menu-services" style="margin-left: -102px;">
+      <input type="hidden" name="service" ng-model="expense.item.versionedId.id" ng-required="true">
 
-        <li role="presentation">
-          <!--ng-repeat="companyService in companyServices | filter: {name: editService.item.name}"-->
+      <ul ng-class="{'dropdown-menu dropdown-menu-services': !!companyServices}" style="margin-left: 10px;">
+
+        <li role="presentation" ng-repeat="companyService in companyServices | filter: {name: editService.item.name}">
           <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="setNewService(companyService)">
             {{ companyService.name }}
           </a>
@@ -22,8 +24,9 @@
     </div>
   </div>
 
-  <div class="col2" service-quantity-picker="expense.quantity" sqp-is-show-format="false">
-    <!--ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceTime')}"-->
+  <div class="col2"
+       ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceService], 'serviceTime')}"
+       service-quantity-picker="expense.quantity" sqp-is-show-format="false">
 
     <input id="service-quantity-picker" type="text" class="form-control"
            placeholder="Hr(s) : Min(s)" sqp-input
@@ -33,16 +36,16 @@
 
   </div>
 
-  <div class="col3">
-    <!--ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceDescription')}"-->
+  <div class="col3"
+       ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceService], 'serviceDescription')}">
 
     <input type="text" class="form-control service-description" placeholder="Description"
            ng-model="expense.description" max-length-word="30"
            name="serviceDescription" ng-maxlength="2000">
   </div>
 
-  <div class="col4">
-    <!--ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}"-->
+  <div class="col4"
+       ng-class="{'has-error': isShowingErrors(editInvoiceForm[updateInvoiceService], 'serviceData')}">
 
     <div class="dropdown">
 
@@ -56,7 +59,7 @@
   </div>
 
   <div class="col-5">
-     <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete">
+    <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete" ng-click="deleteExpense()">
       <i class="icn-sm icn-delete"></i>
     </a>
   </div>

@@ -1,19 +1,26 @@
 <div class="qt-create-invoice clearfix" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
   <div class="edit-invoice-form">
     <form name="editInvoiceForm">
-
+      <span class="numb-form">{{ actualInvoiceNumber }}</span>
       <fieldset class="half">
 
-        <label class="dropdown">
+        <label class="dropdown company-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}">
 
-          <span>Customer</span>
+          <span ng-class="{'hide': isShowingErrors(editInvoiceForm, 'customer')}">Customer</span>
+
+          <span ng-messages="editInvoiceForm.customer.$error"
+                ng-class="{'hide': !isShowingErrors(editInvoiceForm, 'customer')}">
+            <span class="control-label" ng-message="required">Customer is required.</span>
+          </span>
 
           <input ng-model="searchCompany"
                  type="text" placeholder="Company" data-toggle="dropdown" aria-expanded="true">
 
+          <input type="hidden" ng-model="editInvoice.company.id" ng-required="true" name="customer">
+
           <div typeahead-input-icon="searchCompany"></div>
 
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu dropdown-menu-right">
             <li ng-repeat="company in companies | filter: {'name': searchCompany}" ng-click="chooseCompany(company)">
               <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
             </li>
@@ -21,27 +28,53 @@
 
         </label>
 
-        <label>
-          <span>Order title</span>
-          <input type="text" ng-model="editInvoice.title">
+        <label ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'orderTitle')}">
+
+          <span ng-class="{'hide': isShowingErrors(editInvoiceForm, 'orderTitle')}">Order title</span>
+
+          <span ng-messages="editInvoiceForm.orderTitle.$error"
+                ng-class="{'hide': !isShowingErrors(editInvoiceForm, 'orderTitle')}">
+            <span class="control-label" ng-message="maxlength">Order title is too large.</span>
+            <span class="control-label" ng-message="required">Order title is required.</span>
+          </span>
+
+          <input type="text" ng-model="editInvoice.title" name="orderTitle" ng-required="true" ng-maxlength="50">
         </label>
 
-        <fieldset class="small" ng-show="editInvoice.isRecurring">
+        <fieldset class="small" ng-if="editInvoice.isRecurring">
 
-          <label class="for-small">
-            <span>PO</span>
-            <input type="text" class="small" ng-model="editInvoice.po">
+          <label class="for-small" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'purchaseOrder')}">
+
+            <span ng-class="{'hide': isShowingErrors(editInvoiceForm, 'purchaseOrder')}">PO</span>
+
+            <span ng-messages="editInvoiceForm.purchaseOrder.$error"
+                  ng-class="{'hide': !isShowingErrors(editInvoiceForm, 'purchaseOrder')}">
+              <span class="control-label" ng-message="maxlength">PO is too large.</span>
+              <span class="control-label" ng-message="required">PO is required.</span>
+            </span>
+
+            <input type="text" class="small"
+                   ng-model="editInvoice.purchaseOrder" name="purchaseOrder" ng-required="false" ng-maxlength="15">
           </label>
 
-          <label class="for-small dropdown">
-            <span>Payments Terms</span>
+          <label class="for-small dropdown" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'paymentTerms')}">
 
-            <input type="text" class="small" placeholder="Payments Terms" ng-model="paymentsTerms"
+            <span ng-class="{'hide': isShowingErrors(editInvoiceForm, 'paymentTerms')}">Payments Terms</span>
+
+             <span ng-messages="editInvoiceForm.paymentTerms.$error"
+                   ng-class="{'hide': !isShowingErrors(editInvoiceForm, 'paymentTerms')}">
+              <span class="control-label" ng-message="required">Terms is required.</span>
+            </span>
+
+            <input type="text" class="small" placeholder="Payments Terms" ng-model="paramInvocie.paymentTerms"
                    data-toggle="dropdown" aria-expanded="true">
             <i class="icn-sm icn-caret-gray"></i>
 
-            <ul class="dropdown-menu payments-menu">
-              <li ng-repeat="(value, label) in frequency" ng-click="setPaymentTerms(label)">
+            <input type="hidden" ng-model="editInvoice.paymentTerms" name="paymentTerms" ng-required="true">
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li ng-repeat="(value, label) in frequency" ng-hide="(value === 'YEARLY') || (value === 'MONTHLY')"
+                  ng-click="setPaymentTerms(label)">
                 <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
               </li>
             </ul>
@@ -53,22 +86,36 @@
       </fieldset>
 
       <fieldset class="half">
-        <label>
-          <span>Memo</span>
-          <textarea ng-model="editInvoice.title"></textarea>
+        <label class="memo-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'memo')}">
+
+          <span ng-class="{'hide': isShowingErrors(editInvoiceForm, 'memo')}">Memo</span>
+
+             <span ng-messages="editInvoiceForm.memo.$error"
+                   ng-class="{'hide': !isShowingErrors(editInvoiceForm, 'memo')}">
+              <span class="control-label" ng-message="maxlength">Memo is too large.</span>
+            </span>
+
+          <textarea ng-model="editInvoice.memo" name="memo" ng-maxlength="250"></textarea>
         </label>
       </fieldset>
 
-      <fieldset class="full" ng-show="editInvoice.isRecurring">
+      <fieldset class="full" ng-if="editInvoice.isRecurring">
 
-        <label class="dropdown">
-          <span>Repeating Invoice every</span>
+        <label class="dropdown" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
 
-          <input type="text" placeholder="ComboBox"
-                 data-toggle="dropdown" aria-expanded="true" ng-model="repeatingInvoice">
+          <span ng-class="{'hide': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">Repeating Invoice every</span>
+
+           <span ng-messages="editInvoiceForm.repeatingInvoice.$error"
+                 ng-class="{'hide': !isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
+              <span class="control-label" ng-message="required">Fild is required.</span>
+            </span>
+
+          <input type="text" data-toggle="dropdown" aria-expanded="true" ng-model="paramInvocie.repeatingInvoice">
           <i class="icn-sm icn-caret-gray"></i>
 
-          <ul class="dropdown-menu repeating-menu">
+          <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice" ng-required="true">
+
+          <ul class="dropdown-menu dropdown-menu-right">
             <li ng-repeat="(value, label) in frequency" ng-click="setRepeatingInvoice(label)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
             </li>
@@ -79,42 +126,55 @@
         <label class="date">
           <span> Starting Date</span>
 
-          <input type="text" placeholder="../../.." ng-model="editInvoice.startingDay"
-                 qt-data-time-picker>
+          <input type="text" placeholder="../../.." ng-model="editInvoice.sentOn" readonly
+                 qt-data-time-picker default-date="editInvoice.sentOn" min-date="minSentOnDate">
           <i class="icn-sm calendar"></i>
         </label>
 
-        <label class="date">
+        <label class="date end-date"
+               tooltip="{{ disabledEndAndNum ? 'First choose Repeating Invoice every' : '' }}" tooltip-position="top">
           <span>End Date</span>
-          <input type="text" placeholder="../../.." ng-model="editInvoice.endDay"
-                 qt-data-time-picker>
+
+          <input type="text" placeholder="../../.." ng-if="reInitEndDate" readonly ng-change="changeEndDate()"
+                 custom-disabled="{{ disabledEndAndNum }}" ng-model="editInvoice.endDate"
+                 qt-data-time-picker default-date="editInvoice.endDate" min-date="minEndDate">
+
+          <i class="icn-sm icn-remove-token"
+             ng-show="editInvoice.endDate && !disabledEndAndNum" ng-click="clearEndDate()"></i>
+
           <i class="icn-sm calendar"></i>
         </label>
 
         <label class="date">
           <span>Num. to generate</span>
-          <input type="text">
+
+          <input class="generate" type="text" ng-model="paramInvocie.numToGenerate" placeholder="&infin;"
+                 custom-disabled="{{ disabledEndAndNum || isNumInfinity }}" ng-change="changeNumToGenerate()">
+
+          <i class="icn-sm icn-remove-token" ng-show="isNumInfinity" ng-click="clearInfinity()"
+             tooltip="Set quantity" tooltip-placement="top"></i>
+
         </label>
 
       </fieldset>
 
-      <label class="invoice-checkbox">
+      <label class="invoice-checkbox" ng-if="!editInvoice.id">
         <input type="checkbox" ng-model="editInvoice.isRecurring">
         Automatically create and send invoice (all other recurring orders will be sent into Billable Items)
       </label>
 
-      <div class="invoice-update">
+      <div class="invoice-update" ng-controller="quicktech.core.recurring.editInvoiceExpensesCtrl">
 
         <ul class="nav nav-ticket-add invoice-ticket-add">
 
           <li class="invoice-update-btns">
-            <a href="javascript:void(0)" ng-click="addProduct()">
+            <a href="javascript:void(0)" ng-click="addProduct(editInvoiceForm)">
               <i class="icn-lg icn-add-product"></i>Product<i class="icn-sm icn-add-update"></i>
             </a>
           </li>
 
           <li class="invoice-update-btns">
-            <a href="javascript:void(0)" ng-click="addService()">
+            <a href="javascript:void(0)" ng-click="addService(editInvoiceForm)">
               <i class="icn-lg icn-add-service"></i>Service<i class="icn-sm icn-add-update"></i>
             </a>
           </li>
@@ -124,14 +184,32 @@
         <div class="update-content">
           <ul class="qt-table">
 
-            <li ng-repeat="expense in editInvoice.expenses">
+            <li ng-repeat="expense in editInvoice.expenses | orderBy: 'itemOrder'"
+                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
-              <div ng-if="expense.type === 'service'"
-                   ng-include="'/html/scripts/core/recurring/expenses/service-expenses.tpl.html'"></div>
+              <div ng-if="expense.type === 'service' || expense.isServiceExpense === true"
+                   ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
 
-              <div ng-if="expense.type === 'product'"
-                   ng-include="'/html/scripts/core/recurring/expenses/product-expenses.tpl.html'"></div>
+              <div ng-if="expense.type === 'product' || expense.isServiceExpense === false"
+                   ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
 
+            </li>
+
+            <li>
+              <div class="ticket-add-amount has-error" ng-show="disabledSaveInvoice && triedToSaveInvoice">
+                <span class="control-label">Order must have expense</span>
+              </div>
+
+              <div class="ticket-add-amount pull-right">
+                <span class="text-muted">Subtotal </span>
+                <strong>{{ subtotal | currency:'$':2 }}</strong>
+              </div>
+              </br>
+              </br>
+              <div class="ticket-add-amount pull-right">
+                <span class="text-muted">Total </span>
+                <strong>{{ total | currency:'$':2 }}</strong>
+              </div>
             </li>
 
           </ul>
@@ -141,11 +219,12 @@
 
       <div class="ticket-update-edit-actions clearfix">
 
-        <div class="btn btn-lg btn-info pull-right" ng-click="saveInvoice(editInvoiceForm)">
+        <div class="btn btn-lg btn-info pull-right" ng-click="saveInvoice(editInvoiceForm)"
+             custom-disabled="{{ hardDisabledSave || (editInvoiceForm.$invalid || disabledSaveInvoice) && triedToSaveInvoice }}">
           {{ editInvoice.id ? 'Save' : 'Create' }}
         </div>
 
-        <div class="btn btn-lg btn-primary pull-right" ng-click="toogleNewForm(false)">
+        <div class="btn btn-lg btn-primary pull-right" ng-click="toogleEditForm(false)">
           Cancel
         </div>
 
