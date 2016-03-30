@@ -8,7 +8,7 @@
 .edit-invoice-form form fieldset label {
   color: #4c5c6f;
   font-family: inherit;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .edit-invoice-form form fieldset label input[type="text"] {
@@ -71,7 +71,7 @@
 }
 
 .invoice-update .update-content .qt-table {
-  margin-left: 20%;
+  /*margin-left: 20%;*/
 }
 
 .invoice-update .update-content .qt-table a.hit-area i {
@@ -96,7 +96,7 @@
 }
 
 .invoice-ticket-add {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .edit-invoice-form form fieldset.half .small {
@@ -132,13 +132,21 @@
 }
 
 .edit-invoice-form form fieldset label span {
+  display: inline-block;
   font-size: 14px;
+  margin-top: 13px;
 }
 
 .edit-invoice-form form fieldset.full label.date input[type="text"] {
-  width: 95px;
+  width: 110px;
 }
-
+.edit-invoice-form .invoice-update{
+  margin-left: 20%;
+}
+.edit-invoice-form form fieldset.full label.date input[type="text"].generate{
+  width: 65px;
+  text-align: center;
+}
 .edit-invoice-form form fieldset.full .date {
   position: relative;
 }
@@ -200,21 +208,29 @@
   padding: 0 5px;
   vertical-align: top;
   position: relative;
+  width: 24%;
 }
 
 .invoice-table-head .invoice-table-head-item {
   background-color: #f1f5fa;
   border: 1px solid #e7ecf2;
 }
+.numb-form{
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  font-family: inherit;
+}
 
 .invoice-table-head .invoice-table-head-item div {
   display: inline-block;
-  color: #000;
-  width: 14%;
+  font-size: 11px;
+  color: #748498;
+  text-transform: uppercase;
+  width: 11%;
   margin-right: 0.5%;
   float: left;
   padding: 10px;
-  font-size: 14px;
   font-family: inherit;
   font-weight: 700;
   text-align: center;
@@ -243,7 +259,7 @@
 .invoice-table .table-invoice-item div {
   display: inline-block;
   float: left;
-  width: 14%;
+  width: 11%;
   margin-right: 0.5%;
   padding: 10px;
   font-size: 14px;
@@ -252,7 +268,12 @@
   color: #000;
   text-align: center;
 }
-
+.invoice-table-head .invoice-table-head-item div.no-invoice{
+  width: 6%;
+}
+.invoice-table .table-invoice-item div.numbs{
+  width: 6%;
+}
 .invoice-table .table-invoice-item div:nth-child(2) {
   width: 10%;
 }
@@ -266,7 +287,25 @@
   width: 16px;
   height: 18px;
 }
+.invoice-table .table-invoice-item div .icn-description{
+  background-position: -777px -202px;
+}
+.invoice-table .table-invoice-item div :hover > .icn-description{
+  background-position: -797px -202px;
+}
+.invoice-table .table-invoice-item div .icn-edit {
+  background-position: -1040px 4px;
+}
+.invoice-table .table-invoice-item div .icn-delete{
+  background-position: -1614px 4px;
+}
+.invoice-table .table-invoice-item div :hover > .icn-delete{
+  background-position: -1592px 4px;
+}
 
+.invoice-table .table-invoice-item div :hover > .icn-edit {
+  background-position: -996px 4px;
+}
 .invoice-table .table-invoice-item div .icn-desk {
   background-position: -1286px -85px;
 }
@@ -293,11 +332,26 @@
   margin-left: 0;
 }
 
-.edit-invoice-form .has-error span {
+.edit-invoice-form .has-error span.control-label {
   color: #e53935;
 }
 
 .edit-invoice-form .has-error input[type="text"] {
   background-color: #fff2f2 !important;
   border-color: #fde9e9 !important;
+}
+@media screen and (max-width: 1680px) {
+  .edit-invoice-form .invoice-update{
+    margin-left: 14.5%;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .edit-invoice-form .invoice-update{
+    margin-left: 11.5%;
+  }
+}
+@media screen and (max-width: 1368px) {
+  .edit-invoice-form .invoice-update{
+    margin-left: 8.5%;
+  }
 }

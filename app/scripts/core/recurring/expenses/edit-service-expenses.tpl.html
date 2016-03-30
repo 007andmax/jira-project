@@ -10,7 +10,7 @@
              ng-model="expense.item.name" custom-disabled="{{ !companyServices }}">
       <i class="icn-sm icn-caret-gray"></i>
 
-      <ul ng-class="{'dropdown-menu dropdown-menu-services': !!companyServices}" style="margin-left: -102px;">
+      <ul ng-class="{'dropdown-menu dropdown-menu-services': !!companyServices}" style="margin-left: 10px;">
 
         <li role="presentation" ng-repeat="companyService in companyServices | filter: {name: editService.item.name}">
           <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="setNewService(companyService)">
