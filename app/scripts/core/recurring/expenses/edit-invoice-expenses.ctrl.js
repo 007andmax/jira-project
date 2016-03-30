@@ -17,7 +17,7 @@
 
         $scope.addProduct = function (form) {
           if (isLastUpdateValid(form)) {
-            $scope.editInvoice.expenses.push({type: 'product'});
+            $scope.editInvoice.expenses.push({type: 'product', itemOrder: $scope.editInvoice.expenses.length});
              $scope.triedToAddUpdate = false;
           } else {
             $scope.triedToAddUpdate = true;
@@ -26,7 +26,7 @@
 
         $scope.addService = function (form) {
           if (isLastUpdateValid(form)) {
-            $scope.editInvoice.expenses.push({type: 'service'});
+            $scope.editInvoice.expenses.push({type: 'service', itemOrder: $scope.editInvoice.expenses.length});
              $scope.triedToAddUpdate = false;
           } else {
             $scope.triedToAddUpdate = true;
@@ -46,7 +46,7 @@
             var expense = $scope.editInvoice.expenses[i];
 
             if (expense.type === "product" && expense.item && expense.quantity) {
-              subtotal += +expense.quantity + +expense.item.sale;
+              subtotal += +expense.quantity * +expense.item.sale;
             } else if (expense.quantity && expense.item) {
               subtotal += expense.item.rate * (expense.quantity / 60);
             }
@@ -67,6 +67,8 @@
           } else {
             $scope.total = subtotal;
           }
+
+          $scope.setDisabledSaveInvoice($scope.total === 0);
 
         }, true);
 

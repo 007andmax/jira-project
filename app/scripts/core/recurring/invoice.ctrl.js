@@ -8,10 +8,6 @@
 
         $scope.companyOfInvocie = CompaniesService.getOneById($scope.invoice.company.id);
 
-        $scope.toogleEditForm = function(isOpen){
-          $scope.editInvoiceId = isOpen ? $scope.invoice.id : '';
-        };
-
         $scope.$watchGroup(function(){
           return [$scope.invoice.products, $scope.invoice.services]
         }, function(){

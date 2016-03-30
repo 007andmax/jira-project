@@ -27,8 +27,15 @@
           }
         });
 
-        $scope.toogleNewForm = function (isOpen) {
-          $scope.editInvoiceId = isOpen ? 'new-invocie' : '';
+        $scope.toogleEditForm = function (value) {
+          if(!value){
+            $scope.editInvoiceId = '';
+          } else if(value === 'new-invoice'){
+            $scope.editInvoiceId = 'new-invoice';
+          } else {
+            $scope.editInvoiceId = value;
+          }
+
         };
 
         $scope.invoicesOrder = function (item) {
