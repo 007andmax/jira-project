@@ -32,11 +32,8 @@
       <div class="col-3">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
 
       <div class="col-4">
-        <span class="label"
-              ng-class="{'label-info': !dueDate.over, 'label-warning': dueDate.value <= 7,
-                               'label-success': dueDate.value <= 31,
-                               'label-danger': dueDate.over && dueDate.value > 31}">
-          {{ dueDate.over ? 'OVER DUE BY ' + dueDate.value + (dueDate.value > 1 ? ' DAYS' : ' DAY') : dueDate.value | date:'dd MMM yyyy' }}
+        <span class="label" ng-class="{'label-info': !dueDate.over, 'label-danger': dueDate.over}">
+          {{ dueDate.value | date:'dd MMM yyyy' }}
         </span>
       </div>
 
@@ -50,12 +47,6 @@
       </div>
 
       <div class="col-6">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
-
-      <i class="icn-sm icn-recurring-monthly persistent-tooltip" ng-show="invoice.frequency"
-         ng-class="{'icn-recurring-monthly': invoice.frequency === 'MONTHLY',
-                           'icn-recurring-yearly': invoice.frequency === 'YEARLY',
-                           'icn-recurring-weekly': invoice.frequency === 'WEEKLY'}"
-         tooltip-placement="top" tooltip="Recurring: {{ invoice.frequency }}" tooltip-append-to-body></i>
     </li>
 
   </ul>
