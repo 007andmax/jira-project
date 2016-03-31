@@ -71,10 +71,7 @@
 
                 <div>{{ companyOfInvocie.name }}</div>
 
-                <div>
-                  <i class="icn-sm  icn-description"
-                     popover="{{ invoice.title }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
-                </div>
+                <div order-title="invoice.title"></div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
                 <div>{{ frequency[invoice.frequency] || invoice.customFrequency + ' days' }}</div>
                 <div>{{ invoice.endDate | date:'dd MMM yyyy' }}</div>
