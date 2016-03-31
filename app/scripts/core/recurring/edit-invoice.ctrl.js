@@ -12,6 +12,7 @@
         var isEditOrderLoad;
 
         $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Monthly)?(Yearly)?$/;
+        $scope.numToGeneratePattern = /^\d{0,3}$/;
         $scope.savedRepeatingInvoice = '';
         $scope.disabledSaveInvoice = true;
         $scope.reInitEndDate = true;
@@ -254,6 +255,10 @@
 
         $scope.changeNumToGenerate = function () {
           var val = $scope.paramInvocie.numToGenerate;
+
+          if (!$scope.numToGeneratePattern.test(val) || val === '') {
+            return;
+          }
 
           if (!(val && $scope.paramInvocie.repeatingInvoice && $scope.editInvoice.sentOn)) {
             return;

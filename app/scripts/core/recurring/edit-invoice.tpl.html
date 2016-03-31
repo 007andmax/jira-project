@@ -124,7 +124,7 @@
 
             <input class="generate" type="text" ng-model="paramInvocie.numToGenerate" placeholder="&infin;"
                    custom-disabled="{{ disabledEndAndNum || isNumInfinity }}"
-                   ng-change="changeNumToGenerate()" hard-reset-pattern="decimalNumberPattern">
+                   ng-change="changeNumToGenerate()" hard-reset-pattern="numToGeneratePattern">
 
             <i class="icn-sm icn-remove-token generate" ng-show="isNumInfinity" ng-click="clearInfinity()"
                tooltip="Set quantity" tooltip-placement="top"></i>
