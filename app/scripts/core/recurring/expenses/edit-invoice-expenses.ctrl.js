@@ -59,10 +59,12 @@
 
         $scope.$watch('editInvoice.products', calculateTotal, true);
         $scope.$watch('editInvoice.services', calculateTotal, true);
+        $scope.$watch(function(){
+          return taxRatesCoef
+        }, calculateTotal);
 
         function calculateTotal() {
           var subtotal = 0;
-          var total = 0;
           var tax = 0;
 
           for (var i = 0, len = $scope.editInvoice.products.length; i < len; i++) {
