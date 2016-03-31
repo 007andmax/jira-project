@@ -57,7 +57,7 @@
             if ($scope.invoice.frequency) {
               $scope.paramInvocie.repeatingInvoice = $scope.invoice.frequency === 'MONTHLY' ? 'Monthly' : 'Yearly';
             } else {
-              $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency + ' days'
+              $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency;
             }
 
             $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms;
