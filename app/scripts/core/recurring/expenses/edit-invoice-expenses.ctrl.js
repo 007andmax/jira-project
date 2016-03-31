@@ -6,79 +6,116 @@
     ['$scope', 'TaxRatesService',
       function ($scope, TaxRatesService) {
 
-        var taxRatesCopy;
+        var taxRatesCoef = 0;
+        var tryToAddProduct = false;
+        var tryToAddService = false;
 
+        $scope.openTab = 'product';
         $scope.subtotal = 0;
         $scope.total = 0;
+        $scope.tax = 0;
 
         TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
-          taxRatesCopy = angular.copy(resp);
+          var taxRatesCopy = angular.copy(resp);
+
+          if (taxRatesCopy && taxRatesCopy.length > 0) {
+            for (var i = 0, len = taxRatesCopy.length; i < len; i++) {
+              taxRatesCoef += (taxRatesCopy[i].rate / 100);
+            }
+          }
         });
 
         $scope.addProduct = function (form) {
-          if (isLastUpdateValid(form)) {
-            $scope.editInvoice.expenses.push({type: 'product', itemOrder: $scope.editInvoice.expenses.length});
-            $scope.triedToAddUpdate = false;
+          if ($scope.openTab !== 'product') {
+            $scope.openTab = 'product';
+          }
+
+          if (isLastProductValid(form)) {
+            $scope.editInvoice.products.push({});
+            tryToAddProduct = false;
           } else {
-            $scope.triedToAddUpdate = true;
+            tryToAddProduct = true;
           }
         };
 
         $scope.addService = function (form) {
-          if (isLastUpdateValid(form)) {
-            $scope.editInvoice.expenses.push({type: 'service', itemOrder: $scope.editInvoice.expenses.length});
-            $scope.triedToAddUpdate = false;
+          if ($scope.openTab !== 'service') {
+            $scope.openTab = 'service';
+          }
+
+          if (isLastServiceValid(form)) {
+            $scope.editInvoice.services.push({});
+            tryToAddService = false;
           } else {
-            $scope.triedToAddUpdate = true;
+            tryToAddService = true;
           }
         };
 
-        $scope.isShowingErrors = function (form, fieldName) {
-          return form && form[fieldName] && ($scope.triedToAddUpdate || form[fieldName].$dirty) && form[fieldName].$invalid;
+        $scope.isShowingProductErrors = function (form, fieldName) {
+          return form && form[fieldName] && (tryToAddProduct || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
-        $scope.$watch('editInvoice.expenses', function () {
+        $scope.isShowingServiceErrors = function (form, fieldName) {
+          return form && form[fieldName] && (tryToAddService || form[fieldName].$dirty) && form[fieldName].$invalid;
+        };
+
+        $scope.$watch('editInvoice.products', calculateTotal, true);
+        $scope.$watch('editInvoice.services', calculateTotal, true);
+
+        function calculateTotal() {
           var subtotal = 0;
           var total = 0;
-          var taxRate = 0;
+          var tax = 0;
 
-          for (var i = 0, len = $scope.editInvoice.expenses.length; i < len; i++) {
-            var expense = $scope.editInvoice.expenses[i];
+          for (var i = 0, len = $scope.editInvoice.products.length; i < len; i++) {
+            var product = $scope.editInvoice.products[i];
 
-            if (expense.type === "product" && expense.item && expense.quantity) {
-              subtotal += +expense.quantity * +expense.item.sale;
-            } else if (expense.quantity && expense.item) {
-              subtotal += expense.item.rate * (expense.quantity / 60);
+            if (product.quantity && product.item && product.item.sale) {
+              subtotal += +product.quantity * +product.item.sale;
+
+              if (product.item.taxable) {
+                tax += subtotal * taxRatesCoef;
+              }
+            }
+          }
+
+          for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
+            var service = $scope.editInvoice.services[i];
+
+            if (service.quantity && service.item && service.item.rate) {
+              subtotal += service.item.rate * (service.quantity / 60);
+
+              if (service.item.taxable) {
+                tax += subtotal * taxRatesCoef;
+              }
             }
           }
 
           $scope.subtotal = subtotal;
-
-          if (taxRatesCopy && taxRatesCopy.length > 0) {
-
-            for (var i = 0, len = taxRatesCopy.length; i < len; i++) {
-              taxRate += taxRatesCopy[i].rate;
-            }
-
-            taxRate = taxRate / 100;
-            total = (subtotal * taxRate) + subtotal;
-            $scope.total = total;
-
-          } else {
-            $scope.total = subtotal;
-          }
+          $scope.tax = tax;
+          $scope.total = subtotal + tax;
 
           $scope.setDisabledSaveInvoice($scope.total === 0);
 
-        }, true);
+        }
 
-        function isLastUpdateValid(form) {
-          var expensesLength = $scope.editInvoice.expenses.length;
+        function isLastProductValid(form) {
+          var expensesLength = $scope.editInvoice.products.length;
 
           if (!expensesLength || expensesLength === 0) {
             return true;
           } else {
-            return form['updateInvoice-' + (expensesLength - 1)].$valid;
+            return form['updateInvoiceProduct-' + (expensesLength - 1)].$valid;
+          }
+        }
+
+        function isLastServiceValid(form) {
+          var expensesLength = $scope.editInvoice.services.length;
+
+          if (!expensesLength || expensesLength === 0) {
+            return true;
+          } else {
+            return form['updateInvoiceService-' + (expensesLength - 1)].$valid;
           }
         }
 

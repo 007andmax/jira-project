@@ -147,11 +147,13 @@
             <i class="icn-sm calendar"></i>
           </label>
 
-          <label class="date">
-            <span>Num. to generate</span>
+        <label class="date num-to-generate"
+               tooltip="{{ disabledEndAndNum ? 'First choose Repeating Invoice every' : '' }}" tooltip-position="top">
+          <span>Num. to generate</span>
 
-            <input class="generate" type="text" ng-model="paramInvocie.numToGenerate" placeholder="&infin;"
-                   custom-disabled="{{ disabledEndAndNum || isNumInfinity }}" ng-change="changeNumToGenerate()">
+          <input class="generate" type="text" ng-model="paramInvocie.numToGenerate" placeholder="&infin;"
+                 custom-disabled="{{ disabledEndAndNum || isNumInfinity }}"
+                 ng-change="changeNumToGenerate()" hard-reset-pattern="decimalNumberPattern">
 
             <i class="icn-sm icn-remove-token" ng-show="isNumInfinity" ng-click="clearInfinity()"
                tooltip="Set quantity" tooltip-placement="top"></i>
@@ -166,55 +168,76 @@
         </label>
       </fieldset>
 
-      <fieldset class="primary-edit-form">
+      <fieldset class="primary-edit-form invoice-update">
         <div class="invoice-update" ng-controller="quicktech.core.recurring.editInvoiceExpensesCtrl">
 
           <ul class="nav nav-ticket-add invoice-ticket-add">
 
-            <li class="invoice-update-btns">
-              <a href="javascript:void(0)" ng-click="addProduct(editInvoiceForm)">
-                <i class="icn-lg icn-add-product"></i>Product<i class="icn-sm icn-add-update"></i>
-              </a>
-            </li>
+          <li class="invoice-update-btns">
+            <a href="javascript:void(0)" ng-click="openTab = 'product'">
+              <i class="icn-lg icn-add-product"></i>Product
+            </a>
 
-            <li class="invoice-update-btns">
-              <a href="javascript:void(0)" ng-click="addService(editInvoiceForm)">
-                <i class="icn-lg icn-add-service"></i>Service<i class="icn-sm icn-add-update"></i>
-              </a>
-            </li>
+            <div class="btn order-add-product has-tooltip"
+                 ng-click="addProduct(editInvoiceForm)" tooltip-placement="top" tooltip="Add Product">
+              <i class="icn-sm icn-plus"></i>
+            </div>
+          </li>
+
+          <li class="invoice-update-btns">
+            <a href="javascript:void(0)" ng-click="openTab = 'service'">
+              <i class="icn-lg icn-add-service"></i>Service
+            </a>
+
+            <div class="btn order-add-service has-tooltip"
+                 ng-click="addService(editInvoiceForm)" tooltip-placement="top" tooltip="Add Service">
+              <i class="icn-sm icn-plus"></i>
+            </div>
+          </li>
 
           </ul>
 
-          <div class="update-content">
+        <div class="update-content">
+
+          <div class="tab-pane in active" ng-show="openTab === 'product'">
             <ul class="qt-table">
 
-              <li ng-repeat="expense in editInvoice.expenses | orderBy: 'itemOrder'"
+              <li ng-show="!editInvoice.products.length">
+                <span class="text-muted">No products.</span>
+              </li>
+
+              <li ng-repeat="product in editInvoice.products | orderBy: 'itemOrder'"
                   ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
-                <div ng-if="expense.type === 'service' || expense.isServiceExpense === true"
-                     ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
-
-                <div ng-if="expense.type === 'product' || expense.isServiceExpense === false"
-                     ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
+                <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
 
               </li>
+            </ul>
+          </div>
 
-              <li>
-                <div class="ticket-add-amount has-error" ng-show="disabledSaveInvoice && triedToSaveInvoice">
-                  <span class="control-label">Order must have expense</span>
-                </div>
+            <li>
+              <div class="ticket-add-amount has-error" ng-show="disabledSaveInvoice && triedToSaveInvoice">
+                <span class="control-label">Order must have expense</span>
+              </div>
 
-                <div class="ticket-add-amount pull-right">
-                  <span class="text-muted">Subtotal </span>
-                  <strong>{{ subtotal | currency:'$':2 }}</strong>
-                </div>
-                </br>
-                </br>
-                <div class="ticket-add-amount pull-right">
-                  <span class="text-muted">Total </span>
-                  <strong>{{ total | currency:'$':2 }}</strong>
-                </div>
-              </li>
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Subtotal </span>
+              <strong>{{ subtotal | currency:'$':2 }}</strong>
+            </div>
+            </br>
+            </br>
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Tax </span>
+              <strong>{{ tax | currency:'$':2 }}</strong>
+            </div>
+            </br>
+            </br>
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Total </span>
+              <strong>{{ total | currency:'$':2 }}</strong>
+            </div>
+            </br>
+          </div>
 
             </ul>
           </div>

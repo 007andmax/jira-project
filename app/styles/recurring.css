@@ -162,7 +162,8 @@
   width: 197px;
 }
 
-.edit-invoice-form form fieldset.full .date.end-date input.disabled {
+.edit-invoice-form form fieldset.full .date.end-date input.disabled,
+.edit-invoice-form form fieldset.full .num-to-generate input.disabled {
   cursor: not-allowed;
 }
 
@@ -210,6 +211,24 @@
   margin: 5px;
 }
 
+.edit-invoice-form .invoice-ticket-add .btn {
+  position: relative;
+  min-width: 22px;
+  height: 22px;
+  top: -5px;
+  margin-left: 10px;
+}
+
+.edit-invoice-form .invoice-ticket-add .btn.order-add-product {
+  border-color: #4caf50;
+  background-color: #4caf50
+}
+
+.edit-invoice-form .invoice-ticket-add .btn.order-add-service {
+  border-color: #ff302a;
+  background-color: #ff302a
+}
+
 .edit-invoice-form .product-expense > div, .edit-invoice-form .service-expense > div {
   display: table-cell;
   padding: 0 5px;
@@ -222,7 +241,8 @@
   /*background-color: #f1f5fa;*/
   border: 2px solid #e7ecf2;
 }
-.numb-form{
+
+.numb-form {
   display: block;
   padding: 10px;
   font-size: 14px;
@@ -283,18 +303,22 @@
 li.invoice-table{
   cursor: auto;
 }
-span.control-label.error-required{
+
+span.control-label.error-required {
   position: absolute;
   top: -15px;
   right: 0;
 }
-.recurring-icn-btns{
+
+.recurring-icn-btns {
   display: inline-block;
 }
-.invoice-table .table-invoice-item div.popover-inner{
+
+.invoice-table .table-invoice-item div.popover-inner {
   padding-left: 0;
 }
-.invoice-table .ticket-add-amount{
+
+.invoice-table .ticket-add-amount {
   width: 100%;
   text-align: right;
   margin-right: 110px;

@@ -6,16 +6,20 @@
     ['$scope',
       function ($scope) {
 
-        $scope.setNewService = function (service) {
-          $scope.expense.item = angular.copy(service);
-        };
-
         $scope.selectProduct = function (product) {
-          $scope.expense.item = angular.copy(product);
+          $scope.product.item = angular.copy(product);
         };
 
-        $scope.deleteExpense = function () {
-          $scope.editInvoice.expenses.splice($scope.$index, 1);
+        $scope.deleteProduct = function () {
+          $scope.editInvoice.products.splice($scope.$index, 1);
+        };
+
+        $scope.setNewService = function (service) {
+          $scope.service.item = angular.copy(service);
+        };
+
+        $scope.deleteService = function () {
+          $scope.editInvoice.services.splice($scope.$index, 1);
         }
 
       }]);

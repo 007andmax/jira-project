@@ -41,30 +41,9 @@
             memo: $scope.invoice.memo,
             sentOn: new Date($scope.invoice.sentOn),
             endDate: new Date($scope.invoice.endDate),
-            expenses: []
+            products: angular.copy($scope.invoice.products),
+            services: angular.copy($scope.invoice.services)
           };
-
-          for (var i = 0, len = $scope.invoice.products.length; i < len; i++) {
-            var product = $scope.invoice.products[i];
-            $scope.editInvoice.expenses.push({
-              type: "product",
-              serialNumber: product.serialNumber,
-              quantity: product.quantity,
-              itemOrder: product.itemOrder,
-              item: angular.copy(product.item)
-            })
-          }
-
-          for (var i = 0, len = $scope.invoice.services.length; i < len; i++) {
-            var service = $scope.invoice.services[i];
-            $scope.editInvoice.expenses.push({
-              type: "service",
-              description: service.description,
-              quantity: service.quantity * 60,
-              itemOrder: service.itemOrder,
-              item: angular.copy(service.item)
-            })
-          }
 
           $timeout(function () {
             if ($scope.invoice.frequency) {
@@ -87,7 +66,8 @@
 
           $scope.editInvoice = {
             isRecurring: true,
-            expenses: [],
+            products: [],
+            services: [],
             sentOn: new Date(Date.now() + day),
             endDate: new Date(Date.now() + day)
           };
@@ -111,9 +91,9 @@
           if (!company) {
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
-            for (var i = 0, len = $scope.editInvoice.expenses.length; i < len; i++) {
-              if ($scope.editInvoice.expenses[i].type === 'service') {
-                delete $scope.editInvoice.expenses[i].item;
+            for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
+              if ($scope.editInvoice.services[i].type === 'service') {
+                delete $scope.editInvoice.services[i].item;
               }
             }
             return;

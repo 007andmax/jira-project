@@ -71,8 +71,9 @@
 
                 <div>{{ companyOfInvocie.name }}</div>
 
-                <div popover="{{ invoice.title }}" popover-placement="bottom" popover-trigger="mouseenter">
-                  <i class="icn-sm  icn-description"></i>
+                <div>
+                  <i class="icn-sm  icn-description"
+                     popover="{{ invoice.title }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
                 </div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
                 <div>{{ frequency[invoice.frequency] || invoice.customFrequency + ' days' }}</div>
@@ -81,8 +82,9 @@
                 <!--<div class="numbs">{{ invoice.number }}</div>-->
                 <div>{{ invoice.total | currency:'$':2 }}
 
-                  <a popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter">
-                    <i class="icn-sm icn-description"></i>
+                  <a>
+                    <i class="icn-sm icn-description"
+                       popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
                   </a>
 
                   <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
