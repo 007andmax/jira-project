@@ -15,6 +15,7 @@
         $scope.savedRepeatingInvoice = '';
         $scope.disabledSaveInvoice = true;
         $scope.reInitEndDate = true;
+        $scope.repeatingInvoiceModel = true;
         $scope.searchCompany = '';
         $scope.paramInvocie = {
           paymentTerms: '',
