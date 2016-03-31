@@ -78,6 +78,7 @@
               ng-controller="quicktech.core.recurring.companyCtrl"
               ng-repeat="recurringCompany in recurringCompanies | orderBy: 'company.name'">
 
+<<<<<<< Updated upstream
             <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon pull-left" ng-show="false">
               <i class="icn-sm icn-locked"></i>
             </a>
@@ -101,6 +102,41 @@
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
                    ng-click="showCreateRecurringInvoiceForm(); toggleRecurringInvoices();">
                 <i class="icn-sm icn-create-invoice"></i>
+=======
+          <li class="invoice-table-head">
+            <div class="invoice-table-head-item clearfix">
+              <div ng-click="setOrderForProducts('company')">
+                Company
+                <i class="icn-sm sort-icon" ng-show="orderInvoices.field === 'company'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <div>Order Title</div>
+              <div ng-click="setOrderForProducts('startDate')">
+                Start Date
+                <i class="icn-sm sort-icon" ng-show="orderInvoices.field === 'startDate'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <div ng-click="setOrderForProducts('recurring')">
+                Recurring
+                <i class="icn-sm sort-icon" ng-show="orderInvoices.field === 'recurring'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <div ng-click="setOrderForProducts('endDate')">
+                Finish Date
+                <i class="icn-sm sort-icon" ng-show="orderInvoices.field === 'endDate'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <div ng-click="setOrderForProducts('totalCreated')">
+                Total Created
+                <i class="icn-sm sort-icon" ng-show="orderInvoices.field === 'totalCreated'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <!--<div class="no-invoice">invoice no</div>-->
+              <div ng-click="setOrderForProducts('amount')">
+                Amount
+                <i class="icn-sm sort-icon" ng-show="orderInvoices.field === 'amount'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+>>>>>>> Stashed changes
               </div>
 
             </div>
