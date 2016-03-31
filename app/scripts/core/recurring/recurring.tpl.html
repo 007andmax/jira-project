@@ -105,6 +105,7 @@
                   <span class="currency-invoice">
                     {{ invoice.total | currency:'$':2 }}
                   </span>
+
                   <div class="currency-icons">
                     <a>
                       <i class="icn-sm icn-description"
@@ -117,8 +118,10 @@
                     <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top" tooltip-append-to-body="true"
                           qt-ts-toggler></i></a>
 
-                    <a><i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
-                          ng-click="deleteRecurringInvoice()"></i></a>
+                    <a custom-disabled="{{ disabledDelete }}">
+                      <i class="icn-sm icn-delete"
+                         tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+                         ng-click="deleteRecurringInvoice()"></i></a>
                   </div>
 
                 </div>

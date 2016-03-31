@@ -6,6 +6,8 @@
     ['$scope', 'CompaniesService', 'RecurringService',
       function ($scope, CompaniesService, RecurringService) {
 
+        $scope.disabledDelete = false;
+
         $scope.companyOfInvocie = CompaniesService.getOneById($scope.invoice.company.id);
 
         $scope.$watchGroup(function () {
@@ -15,7 +17,10 @@
         });
 
         $scope.deleteRecurringInvoice = function () {
-          RecurringService.deleteRecurringInvoice($scope.invoice.id);
+          $scope.disabledDelete = true;
+          RecurringService.deleteRecurringInvoice($scope.invoice.id, function(){
+            $scope.disabledDelete = false;
+          });
         };
 
         function getArrayExpenses() {
