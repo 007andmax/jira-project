@@ -399,6 +399,10 @@ span.control-label.error-required {
   margin-left: 0;
 }
 
+.edit-invoice-form .invoice-ticket-add {
+  margin-bottom: 22px;
+}
+
 .edit-invoice-form .has-error span.control-label {
   color: #e53935;
   margin-top: 0;
