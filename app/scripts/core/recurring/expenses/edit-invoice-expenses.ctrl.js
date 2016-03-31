@@ -7,8 +7,6 @@
       function ($scope, TaxRatesService) {
 
         var taxRatesCoef = 0;
-        var tryToAddProduct = false;
-        var tryToAddService = false;
 
         $scope.openTab = 'product';
         $scope.subtotal = 0;
@@ -32,9 +30,9 @@
 
           if (isLastProductValid(form)) {
             $scope.editInvoice.products.push({});
-            tryToAddProduct = false;
+            $scope.tryAddExpense.tryToAddProduct = false;
           } else {
-            tryToAddProduct = true;
+            $scope.tryAddExpense.tryToAddProduct = true;
           }
         };
 
@@ -45,18 +43,18 @@
 
           if (isLastServiceValid(form)) {
             $scope.editInvoice.services.push({});
-            tryToAddService = false;
+            $scope.tryAddExpense.tryToAddService = false;
           } else {
-            tryToAddService = true;
+            $scope.tryAddExpense.tryToAddService = true;
           }
         };
 
         $scope.isShowingProductErrors = function (form, fieldName) {
-          return form && form[fieldName] && (tryToAddProduct || form[fieldName].$dirty) && form[fieldName].$invalid;
+          return form && form[fieldName] && ($scope.tryAddExpense.tryToAddProduct || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
         $scope.isShowingServiceErrors = function (form, fieldName) {
-          return form && form[fieldName] && (tryToAddService || form[fieldName].$dirty) && form[fieldName].$invalid;
+          return form && form[fieldName] && ($scope.tryAddExpense.tryToAddService || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
         $scope.$watch('editInvoice.products', calculateTotal, true);
@@ -105,6 +103,7 @@
           if (!expensesLength || expensesLength === 0) {
             return true;
           } else {
+            form['updateInvoiceProduct-' + (expensesLength - 1)].$setDirty();
             return form['updateInvoiceProduct-' + (expensesLength - 1)].$valid;
           }
         }
@@ -115,6 +114,7 @@
           if (!expensesLength || expensesLength === 0) {
             return true;
           } else {
+            form['updateInvoiceService-' + (expensesLength - 1)].$setDirty();
             return form['updateInvoiceService-' + (expensesLength - 1)].$valid;
           }
         }

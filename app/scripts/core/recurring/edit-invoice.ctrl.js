@@ -18,6 +18,10 @@
           repeatingInvoice: '',
           numToGenerate: ''
         };
+        $scope.tryAddExpense = {
+          tryToAddProduct: false,
+          tryToAddService: false
+        };
 
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete();
@@ -85,6 +89,39 @@
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form && form[fieldName] && ($scope.triedToSaveInvoice || form[fieldName].$dirty) && form[fieldName].$invalid;
+        };
+
+        $scope.getErrorMessage = function (form) {
+          if (form && $scope.triedToSaveInvoice) {
+            var error = Object.keys(form.$error);
+
+            if (error.indexOf("required") !== -1) {
+
+              for (var i = 0, len = form.$error.required.length; i < len; i++) {
+
+                if (form.$error.required[i].$name.indexOf('updateInvoiceProduct') !== -1) {
+                  if ($scope.tryAddExpense.tryToAddProduct) {
+                    return 'Required fields cannot be left empty.';
+                  }
+
+                } else if (form.$error.required[i].$name.indexOf('updateInvoiceService') !== -1) {
+                  if ($scope.tryAddExpense.tryToAddService) {
+                    return 'Required fields cannot be left empty.';
+                  }
+
+                } else {
+                  return 'Required fields cannot be left empty.';
+                }
+              }
+            } else if (error && error.length > 0) {
+              return 'Form is not valid.';
+            }
+
+            if ($scope.disabledSaveInvoice) {
+              return 'Order must have expense.'
+            }
+
+          }
         };
 
         $scope.chooseCompany = function (company) {
@@ -324,6 +361,8 @@
               })
             }
           } else {
+            $scope.tryAddExpense.tryToAddProduct = true;
+            $scope.tryAddExpense.tryToAddService = true;
             $scope.triedToSaveInvoice = true;
           }
         };
