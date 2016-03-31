@@ -74,7 +74,7 @@
               subtotal += +product.quantity * +product.item.sale;
 
               if (product.item.taxable) {
-                tax += subtotal * taxRatesCoef;
+                tax += (+product.quantity * +product.item.sale) * taxRatesCoef;
               }
             }
           }
@@ -86,7 +86,7 @@
               subtotal += service.item.rate * (service.quantity / 60);
 
               if (service.item.taxable) {
-                tax += subtotal * taxRatesCoef;
+                tax += (service.item.rate * (service.quantity / 60)) * taxRatesCoef;
               }
             }
           }
