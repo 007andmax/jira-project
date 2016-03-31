@@ -221,6 +221,11 @@
             return;
           }
 
+          if(+val === 0){
+            $scope.clearEndDate();
+            return;
+          }
+
           setEndAndNum('endDate');
         };
 
