@@ -355,3 +355,9 @@
     margin-left: 8.5%;
   }
 }
+.suffix-days {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  color: rgba(0, 0, 0, 0.23);
+}

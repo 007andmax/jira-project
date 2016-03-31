@@ -3,13 +3,15 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
-    ['$scope', 'RecurringService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
+    [
+      '$scope', 'RecurringService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
       'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService',
       function ($scope, RecurringService, BillableService, CompaniesService, ServicesService, $filter,
                 ProductsService, EmailSettingsService, $timeout, TicketsService) {
 
         var day = 1000 * 60 * 60 * 24;
 
+        $scope.savedRepeatingInvoice = '';
         $scope.disabledSaveInvoice = true;
         $scope.reInitEndDate = true;
         $scope.searchCompany = '';
@@ -73,7 +75,7 @@
               $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency + ' days'
             }
 
-            $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms + ' days'
+            $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms;
           }, 0)
 
         } else {
@@ -93,8 +95,8 @@
           };
 
           EmailSettingsService.getTermsAndConditions(function (invoiceInfo) {
-            $scope.paramInvocie.paymentTerms = invoiceInfo.term + ' days';
-            $scope.editInvoice.paymentTerms = parseInt(invoiceInfo.term)
+            $scope.paramInvocie.paymentTerms = invoiceInfo.term;
+            $scope.editInvoice.paymentTerms = invoiceInfo.term;
           });
 
         }
@@ -146,7 +148,7 @@
         });
 
         $scope.setPaymentTerms = function (value) {
-          $scope.paramInvocie.paymentTerms = value;
+          $scope.paramInvocie.paymentTerms = parseInt(value);
         };
 
         $scope.$watch('paramInvocie.paymentTerms', function (val) {
@@ -157,7 +159,21 @@
         });
 
         $scope.setRepeatingInvoice = function (value) {
-          $scope.paramInvocie.repeatingInvoice = value;
+          var parsed = parseInt(value);
+          if (parsed) {
+            $scope.paramInvocie.repeatingInvoice = parsed;
+          } else {
+            $scope.paramInvocie.repeatingInvoice = value;
+          }
+        };
+
+        $scope.saveAndClear = function () {
+          $scope.savedRepeatingInvoice = $scope.paramInvocie.repeatingInvoice;
+          $scope.paramInvocie.repeatingInvoice = '';
+        };
+
+        $scope.isNumber = function (value) {
+          return angular.isNumber(value);
         };
 
         $scope.$watchGroup(['paramInvocie.repeatingInvoice', 'editInvoice.sentOn'], function (val) {
@@ -323,6 +339,10 @@
 
             var editInvoice = angular.copy($scope.editInvoice);
 
+            if (!$scope.paramInvocie.repeatingInvoice && $scope.savedRepeatingInvoice) {
+              $scope.paramInvocie.repeatingInvoice = $scope.savedRepeatingInvoice;
+            }
+
             if ($scope.paramInvocie.repeatingInvoice === 'Monthly' || $scope.paramInvocie.repeatingInvoice === 'Yearly') {
               editInvoice.frequency = $scope.paramInvocie.repeatingInvoice === 'Monthly' ? 'MONTHLY' : 'YEARLY'
             } else {
@@ -348,6 +368,7 @@
           }
         };
 
-      }]);
+      }
+    ]);
 
 }());

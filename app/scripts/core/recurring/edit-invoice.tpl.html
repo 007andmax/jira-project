@@ -67,7 +67,8 @@
             </span>
 
             <input type="text" class="small" placeholder="Payments Terms" ng-model="paramInvocie.paymentTerms"
-                   data-toggle="dropdown" aria-expanded="true">
+                   data-toggle="dropdown" aria-expanded="true" hard-reset-pattern="numberPattern">
+            <span class="suffix-days">days</span>
             <i class="icn-sm icn-caret-gray"></i>
 
             <input type="hidden" ng-model="editInvoice.paymentTerms" name="paymentTerms" ng-required="true">
@@ -101,7 +102,7 @@
 
       <fieldset class="full" ng-if="editInvoice.isRecurring">
 
-        <label class="dropdown" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
+        <label class="dropdown restore-disable-area" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
 
           <span ng-class="{'hide': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">Repeating Invoice every</span>
 
@@ -110,7 +111,12 @@
               <span class="control-label" ng-message="required">Fild is required.</span>
             </span>
 
-          <input type="text" data-toggle="dropdown" aria-expanded="true" ng-model="paramInvocie.repeatingInvoice">
+          <input type="text" data-toggle="dropdown" aria-expanded="true"
+                 ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
+                 hard-reset-pattern="numberPattern"
+                 restore-from="{{savedRepeatingInvoice}}">
+          <span class="suffix-days"
+                ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">days</span>
           <i class="icn-sm icn-caret-gray"></i>
 
           <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice" ng-required="true">
@@ -137,7 +143,8 @@
 
           <input type="text" placeholder="../../.." ng-if="reInitEndDate" readonly ng-change="changeEndDate()"
                  custom-disabled="{{ disabledEndAndNum }}" ng-model="editInvoice.endDate"
-                 qt-data-time-picker default-date="editInvoice.endDate" min-date="minEndDate">
+                 qt-data-time-picker
+                 default-date="editInvoice.endDate" min-date="minEndDate" period="paramInvocie.repeatingInvoice">
 
           <i class="icn-sm icn-remove-token"
              ng-show="editInvoice.endDate && !disabledEndAndNum" ng-click="clearEndDate()"></i>
