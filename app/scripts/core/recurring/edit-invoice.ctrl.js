@@ -15,7 +15,6 @@
         $scope.savedRepeatingInvoice = '';
         $scope.disabledSaveInvoice = true;
         $scope.reInitEndDate = true;
-        $scope.repeatingInvoiceModel = true;
         $scope.searchCompany = '';
         $scope.paramInvocie = {
           paymentTerms: '',
@@ -32,6 +31,7 @@
 
         if ($scope.invoice && $scope.invoice.id) {
           isEditOrderLoad = true;
+          $scope.repeatingInvoiceModel = true;
 
           $scope.searchCompany = CompaniesService.getOneById($scope.invoice.company.id).name;
           $scope.actualInvoiceNumber = $scope.invoice.number;
@@ -250,7 +250,7 @@
           $scope.minEndDate = endDay;
           $scope.editInvoice.endDate = endDay;
           reInitEndDate();
-        };
+        }
 
         $scope.changeNumToGenerate = function () {
           var val = $scope.paramInvocie.numToGenerate;
