@@ -172,7 +172,9 @@
   pointer-events: auto;
   right: 34px
 }
-
+.edit-invoice-form form fieldset.full .date .icn-remove-token.generate{
+  right: 8px;
+}
 .edit-invoice-form form fieldset.full label input[type="date"] {
   display: inline-block;
 }
@@ -303,7 +305,13 @@
 li.invoice-table{
   cursor: auto;
 }
-
+.invoice-table .table-invoice-item div.long-text span{
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 span.control-label.error-required {
   position: absolute;
   top: -15px;
@@ -372,13 +380,25 @@ span.control-label.error-required {
   background-position: -996px 4px;
 }
 .invoice-table .table-invoice-item div .icn-desk {
-  background-position: -1286px -85px;
+  background-position: -1288px -83px;
 }
-
+.invoice-table .table-invoice-item div :hover > .icn-desk{
+  background-position: -1288px -58px;
+}
 .invoice-table .table-invoice-item div:first-child {
   width: 17%;
 }
-
+.invoice-table .table-invoice-item div .currency-invoice{
+  display: inline-block;
+  width: 40%;
+  float: left;
+}
+.invoice-table .table-invoice-item div div.currency-icons{
+  display: inline-block;
+  float: right;
+  width: 60%;
+  padding: 0;
+}
 .invoice-table .table-invoice-item div:nth-child(6) {
   width: 11%;
 }
