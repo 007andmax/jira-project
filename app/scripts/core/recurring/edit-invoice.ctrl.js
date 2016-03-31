@@ -54,9 +54,9 @@
             services: angular.copy($scope.invoice.services)
           };
 
-          for(var i = 0, len = $scope.editInvoice.services.length; i < len; i++){
+          for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
             $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
-            $scope.editInvoice.services[i].date =  $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+            $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
           }
 
           $timeout(function () {
@@ -395,6 +395,10 @@
 
             editInvoice.endDate = new Date(editInvoice.endDate);
             editInvoice.sentOn = new Date(editInvoice.sentOn);
+
+            for (var i = 0, len = editInvoice.services.length; i < len; i++) {
+              editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)
+            }
 
             if (editInvoice.isRecurring) {
               RecurringService.saveRecurringOrder(editInvoice, function () {
