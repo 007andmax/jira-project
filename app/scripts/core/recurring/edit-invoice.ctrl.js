@@ -3,13 +3,13 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
-    [
-      '$scope', 'RecurringService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
+    ['$scope', 'RecurringService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
       'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService',
       function ($scope, RecurringService, BillableService, CompaniesService, ServicesService, $filter,
                 ProductsService, EmailSettingsService, $timeout, TicketsService) {
 
         var day = 1000 * 60 * 60 * 24;
+        var isEditOrderLoad;
 
         $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Monthly)?(Yearly)?$/;
         $scope.savedRepeatingInvoice = '';
@@ -30,6 +30,7 @@
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete();
 
         if ($scope.invoice && $scope.invoice.id) {
+          isEditOrderLoad = true;
 
           $scope.searchCompany = CompaniesService.getOneById($scope.invoice.company.id).name;
           $scope.actualInvoiceNumber = $scope.invoice.number;
@@ -176,6 +177,18 @@
           $scope.editInvoice.paymentTerms = parseInt(val);
         });
 
+        $scope.changeRepeatInvoice = function () {
+          changeRepeatAndStart();
+        };
+
+        $scope.changeStartDate = function () {
+          if (isEditOrderLoad) {
+            isEditOrderLoad = false;
+            return;
+          }
+          changeRepeatAndStart();
+        };
+
         $scope.setRepeatingInvoice = function (value) {
           var parsed = parseInt(value);
           if (parsed) {
@@ -183,6 +196,7 @@
           } else {
             $scope.paramInvocie.repeatingInvoice = value;
           }
+          $scope.changeRepeatInvoice();
         };
 
         $scope.saveAndClear = function () {
@@ -194,7 +208,9 @@
           return parseInt(value);
         };
 
-        $scope.$watchGroup(['paramInvocie.repeatingInvoice', 'editInvoice.sentOn'], function (val) {
+        function changeRepeatAndStart() {
+          var val = [$scope.paramInvocie.repeatingInvoice, $scope.editInvoice.sentOn];
+
           if (!(val[0] && val[1])) {
             $scope.disabledEndAndNum = true;
             return;
@@ -228,13 +244,17 @@
           $scope.minEndDate = endDay;
           $scope.editInvoice.endDate = endDay;
           reInitEndDate();
-
-        });
+        };
 
         $scope.changeNumToGenerate = function () {
           var val = $scope.paramInvocie.numToGenerate;
 
           if (!(val && $scope.paramInvocie.repeatingInvoice && $scope.editInvoice.sentOn)) {
+            return;
+          }
+
+          if (+val === 0) {
+            $scope.clearEndDate();
             return;
           }
 
@@ -388,7 +408,6 @@
           }
         };
 
-      }
-    ]);
+      }]);
 
 }());

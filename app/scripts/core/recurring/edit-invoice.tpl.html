@@ -78,13 +78,14 @@
 
             <input type="text" data-toggle="dropdown" aria-expanded="true"
                    ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
-                   hard-reset-pattern="repeatingPattern"
+                   hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"
                    restore-from="{{savedRepeatingInvoice}}">
             <span class="suffix-days"
                   ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">days</span>
             <i class="icn-sm icn-caret-gray"></i>
 
-            <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice" ng-required="true">
+            <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice"
+                   ng-required="true">
 
             <ul class="dropdown-menu dropdown-menu-right">
               <li ng-repeat="(value, label) in frequency" ng-click="setRepeatingInvoice(label)">
@@ -97,7 +98,8 @@
           <label class="date">
             <span> Starting Date</span>
 
-            <input type="text" placeholder="../../.." ng-model="editInvoice.sentOn" readonly
+            <input type="text" placeholder="../../.." ng-model="editInvoice.sentOn"
+                   readonly ng-change="changeStartDate()"
                    qt-data-time-picker default-date="editInvoice.sentOn" min-date="minSentOnDate">
             <i class="icn-sm calendar"></i>
           </label>
