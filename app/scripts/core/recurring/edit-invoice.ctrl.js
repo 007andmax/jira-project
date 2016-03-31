@@ -11,6 +11,7 @@
 
         var day = 1000 * 60 * 60 * 24;
 
+        $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Monthly)?(Yearly)?$/;
         $scope.savedRepeatingInvoice = '';
         $scope.disabledSaveInvoice = true;
         $scope.reInitEndDate = true;
@@ -19,6 +20,10 @@
           paymentTerms: '',
           repeatingInvoice: '',
           numToGenerate: ''
+        };
+        $scope.tryAddExpense = {
+          tryToAddProduct: false,
+          tryToAddService: false
         };
 
         $scope.companies = CompaniesService.getClientCompanies();
@@ -43,30 +48,9 @@
             memo: $scope.invoice.memo,
             sentOn: new Date($scope.invoice.sentOn),
             endDate: new Date($scope.invoice.endDate),
-            expenses: []
+            products: angular.copy($scope.invoice.products),
+            services: angular.copy($scope.invoice.services)
           };
-
-          for (var i = 0, len = $scope.invoice.products.length; i < len; i++) {
-            var product = $scope.invoice.products[i];
-            $scope.editInvoice.expenses.push({
-              type: "product",
-              serialNumber: product.serialNumber,
-              quantity: product.quantity,
-              itemOrder: product.itemOrder,
-              item: angular.copy(product.item)
-            })
-          }
-
-          for (var i = 0, len = $scope.invoice.services.length; i < len; i++) {
-            var service = $scope.invoice.services[i];
-            $scope.editInvoice.expenses.push({
-              type: "service",
-              description: service.description,
-              quantity: service.quantity * 60,
-              itemOrder: service.itemOrder,
-              item: angular.copy(service.item)
-            })
-          }
 
           $timeout(function () {
             if ($scope.invoice.frequency) {
@@ -89,7 +73,8 @@
 
           $scope.editInvoice = {
             isRecurring: true,
-            expenses: [],
+            products: [],
+            services: [],
             sentOn: new Date(Date.now() + day),
             endDate: new Date(Date.now() + day)
           };
@@ -109,13 +94,46 @@
           return form && form[fieldName] && ($scope.triedToSaveInvoice || form[fieldName].$dirty) && form[fieldName].$invalid;
         };
 
+        $scope.getErrorMessage = function (form) {
+          if (form && $scope.triedToSaveInvoice) {
+            var error = Object.keys(form.$error);
+
+            if (error.indexOf("required") !== -1) {
+
+              for (var i = 0, len = form.$error.required.length; i < len; i++) {
+
+                if (form.$error.required[i].$name.indexOf('updateInvoiceProduct') !== -1) {
+                  if ($scope.tryAddExpense.tryToAddProduct) {
+                    return 'Required fields cannot be left empty.';
+                  }
+
+                } else if (form.$error.required[i].$name.indexOf('updateInvoiceService') !== -1) {
+                  if ($scope.tryAddExpense.tryToAddService) {
+                    return 'Required fields cannot be left empty.';
+                  }
+
+                } else {
+                  return 'Required fields cannot be left empty.';
+                }
+              }
+            } else if (error && error.length > 0) {
+              return 'Form is not valid.';
+            }
+
+            if ($scope.disabledSaveInvoice) {
+              return 'Order must have expense.'
+            }
+
+          }
+        };
+
         $scope.chooseCompany = function (company) {
           if (!company) {
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
-            for (var i = 0, len = $scope.editInvoice.expenses.length; i < len; i++) {
-              if ($scope.editInvoice.expenses[i].type === 'service') {
-                delete $scope.editInvoice.expenses[i].item;
+            for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
+              if ($scope.editInvoice.services[i].type === 'service') {
+                delete $scope.editInvoice.services[i].item;
               }
             }
             return;
@@ -173,7 +191,7 @@
         };
 
         $scope.isNumber = function (value) {
-          return angular.isNumber(value);
+          return parseInt(value);
         };
 
         $scope.$watchGroup(['paramInvocie.repeatingInvoice', 'editInvoice.sentOn'], function (val) {
@@ -364,6 +382,8 @@
               })
             }
           } else {
+            $scope.tryAddExpense.tryToAddProduct = true;
+            $scope.tryAddExpense.tryToAddService = true;
             $scope.triedToSaveInvoice = true;
           }
         };

@@ -1,10 +1,13 @@
 .edit-invoice-form {
   display: block;
   margin: 0 auto;
-  width: 100%;
+  width: 900px;
   font-size: 15px;
 }
-
+.main-form{
+  padding: 20px 15px;
+  background: #F1F5FA;
+}
 .edit-invoice-form form fieldset label {
   color: #4c5c6f;
   font-family: inherit;
@@ -14,7 +17,7 @@
 .edit-invoice-form form fieldset label input[type="text"] {
   display: inline-block;
   padding: 10px;
-  background-color: #f1f5fa;
+  background-color: #ffffff;
   border: 1px solid #e7ecf2;
   height: 38px;
   color: #4c5c6f;
@@ -22,7 +25,7 @@
   line-height: 20px;
   font-family: inherit;
   margin-left: 5px;
-  width: 100px;
+  width: 105px;
 }
 
 .edit-invoice-form form fieldset label ::-webkit-input-placeholder {
@@ -60,14 +63,15 @@
 }
 
 .edit-invoice-form form fieldset.half label input[type="text"] {
-  width: 374px;
+  width: 365px;
 }
 
 .invoice-checkbox {
-  display: block;
-  width: 100%;
-  text-align: center;
+  /*display: block;*/
+  /*width: 100%;*/
   font-size: 14px;
+  margin-left: 55px;
+  margin-top: 10px;
 }
 
 .invoice-update .update-content .qt-table {
@@ -85,7 +89,7 @@
   resize: none;
   width: 364px;
   height: 95px;
-  background-color: #f1f5fa;
+  background-color: #ffffff;
   border: 1px solid #e7ecf2;
   padding: 10px;
 }
@@ -113,10 +117,12 @@
 .edit-invoice-form form fieldset.half .small .for-small:nth-child(2n) {
   margin-right: 0;
 }
-
+.edit-invoice-form form fieldset.half .small .for-small .small.payment{
+  width: 105px;
+}
 .edit-invoice-form form fieldset.half .small .for-small .small {
   display: inline-block;
-  width: 133px;
+  width: 150px;
   text-align: left;
 }
 
@@ -140,12 +146,13 @@
 .edit-invoice-form form fieldset.full label.date input[type="text"] {
   width: 110px;
 }
-.edit-invoice-form .invoice-update{
-  margin-left: 20%;
-}
+/*.edit-invoice-form .invoice-update{*/
+  /*margin-left: 20%;*/
+/*}*/
 .edit-invoice-form form fieldset.full label.date input[type="text"].generate{
   width: 65px;
   text-align: center;
+  font-size: 15px;
 }
 .edit-invoice-form form fieldset.full .date {
   position: relative;
@@ -155,7 +162,8 @@
   width: 197px;
 }
 
-.edit-invoice-form form fieldset.full .date.end-date input.disabled {
+.edit-invoice-form form fieldset.full .date.end-date input.disabled,
+.edit-invoice-form form fieldset.full .num-to-generate input.disabled {
   cursor: not-allowed;
 }
 
@@ -164,7 +172,9 @@
   pointer-events: auto;
   right: 34px
 }
-
+.edit-invoice-form form fieldset.full .date .icn-remove-token.generate{
+  right: 8px;
+}
 .edit-invoice-form form fieldset.full label input[type="date"] {
   display: inline-block;
 }
@@ -203,19 +213,38 @@
   margin: 5px;
 }
 
+.edit-invoice-form .invoice-ticket-add .btn {
+  position: relative;
+  min-width: 22px;
+  height: 22px;
+  top: -5px;
+  margin-left: 10px;
+}
+
+.edit-invoice-form .invoice-ticket-add .btn.order-add-product {
+  border-color: #4caf50;
+  background-color: #4caf50
+}
+
+.edit-invoice-form .invoice-ticket-add .btn.order-add-service {
+  border-color: #ff302a;
+  background-color: #ff302a
+}
+
 .edit-invoice-form .product-expense > div, .edit-invoice-form .service-expense > div {
   display: table-cell;
   padding: 0 5px;
   vertical-align: top;
   position: relative;
-  width: 24%;
+  width: 25%;
 }
 
 .invoice-table-head .invoice-table-head-item {
-  background-color: #f1f5fa;
-  border: 1px solid #e7ecf2;
+  /*background-color: #f1f5fa;*/
+  border: 2px solid #e7ecf2;
 }
-.numb-form{
+
+.numb-form {
   display: block;
   padding: 10px;
   font-size: 14px;
@@ -227,13 +256,14 @@
   font-size: 11px;
   color: #748498;
   text-transform: uppercase;
-  width: 11%;
+  width: 14%;
   margin-right: 0.5%;
   float: left;
   padding: 10px;
   font-family: inherit;
   font-weight: 700;
   text-align: center;
+  border-right: 1px solid rgba(231, 236, 242, 0.5);
 }
 
 .invoice-table-head .invoice-table-head-item div:first-child {
@@ -246,12 +276,15 @@
 
 .invoice-table-head .invoice-table-head-item div:last-child {
   width: 19%;
+  border-right: none;
 }
 
 .invoice-table-head .invoice-table-head-item div:nth-child(6) {
-  width: 9%;
+  width: 11%;
 }
-
+.invoice-table-head .invoice-table-head-item div:nth-child(5){
+  width: 12%;
+}
 .invoice-table-head .invoice-table-head-item div:last-child {
   margin-right: 0;
 }
@@ -259,7 +292,7 @@
 .invoice-table .table-invoice-item div {
   display: inline-block;
   float: left;
-  width: 11%;
+  width: 14%;
   margin-right: 0.5%;
   padding: 10px;
   font-size: 14px;
@@ -267,6 +300,44 @@
   font-weight: 400;
   color: #000;
   text-align: center;
+  cursor: auto;
+}
+li.invoice-table{
+  cursor: auto;
+}
+.invoice-table .table-invoice-item div.long-text span{
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+span.control-label.error-required {
+  position: absolute;
+  top: -15px;
+  right: 0;
+}
+
+.recurring-icn-btns {
+  display: inline-block;
+}
+
+.invoice-table .table-invoice-item div.popover-inner {
+  padding-left: 0;
+}
+
+.invoice-table .ticket-add-amount {
+  width: 100%;
+  text-align: right;
+  margin-right: 110px;
+  margin-bottom: 5px;
+}
+.invoice-table .table-wrapper .table-content{
+  width: calc(100% - 200px);
+  margin-left: 90px;
+}
+.invoice-table .table-invoice-item div.popover-inner .popover-content{
+  padding-left: 0;
 }
 .invoice-table-head .invoice-table-head-item div.no-invoice{
   width: 6%;
@@ -276,6 +347,7 @@
 }
 .invoice-table .table-invoice-item div:nth-child(2) {
   width: 10%;
+  cursor: pointer;
 }
 
 .invoice-table .table-invoice-item div .icn-description,
@@ -286,6 +358,7 @@
   vertical-align: top;
   width: 16px;
   height: 18px;
+  cursor: pointer;
 }
 .invoice-table .table-invoice-item div .icn-description{
   background-position: -777px -202px;
@@ -297,27 +370,41 @@
   background-position: -1040px 4px;
 }
 .invoice-table .table-invoice-item div .icn-delete{
-  background-position: -1614px 4px;
+  background-position: -1614px 3px;
 }
 .invoice-table .table-invoice-item div :hover > .icn-delete{
-  background-position: -1592px 4px;
+  background-position: -1592px 3px;
 }
 
 .invoice-table .table-invoice-item div :hover > .icn-edit {
   background-position: -996px 4px;
 }
 .invoice-table .table-invoice-item div .icn-desk {
-  background-position: -1286px -85px;
+  background-position: -1288px -83px;
 }
-
+.invoice-table .table-invoice-item div :hover > .icn-desk{
+  background-position: -1288px -58px;
+}
 .invoice-table .table-invoice-item div:first-child {
   width: 17%;
 }
-
-.invoice-table .table-invoice-item div:nth-child(6) {
-  width: 9%;
+.invoice-table .table-invoice-item div .currency-invoice{
+  display: inline-block;
+  width: 40%;
+  float: left;
 }
-
+.invoice-table .table-invoice-item div div.currency-icons{
+  display: inline-block;
+  float: right;
+  width: 60%;
+  padding: 0;
+}
+.invoice-table .table-invoice-item div:nth-child(6) {
+  width: 11%;
+}
+.invoice-table .table-invoice-item div:nth-child(5){
+  width: 12%;
+}
 .invoice-table .table-invoice-item div:last-child {
   margin-right: 0;
   width: 19%;
@@ -332,28 +419,23 @@
   margin-left: 0;
 }
 
-.edit-invoice-form .has-error span.control-label {
-  color: #e53935;
+.edit-invoice-form .invoice-ticket-add {
+  margin-bottom: 22px;
 }
 
+.edit-invoice-form .has-error span.control-label {
+  color: #e53935;
+  margin-top: 0;
+}
+.edit-invoice-form form fieldset.half label.has-error span{
+  margin-top: 0;
+}
 .edit-invoice-form .has-error input[type="text"] {
   background-color: #fff2f2 !important;
   border-color: #fde9e9 !important;
 }
-@media screen and (max-width: 1680px) {
-  .edit-invoice-form .invoice-update{
-    margin-left: 14.5%;
-  }
-}
-@media screen and (max-width: 1440px) {
-  .edit-invoice-form .invoice-update{
-    margin-left: 11.5%;
-  }
-}
-@media screen and (max-width: 1368px) {
-  .edit-invoice-form .invoice-update{
-    margin-left: 8.5%;
-  }
+fieldset.primary-edit-form{
+  padding: 0 15px 0 55px;
 }
 .suffix-days {
   position: absolute;
@@ -361,3 +443,18 @@
   right: 30px;
   color: rgba(0, 0, 0, 0.23);
 }
+/*@media screen and (max-width: 1680px) {*/
+  /*.edit-invoice-form .invoice-update{*/
+    /*margin-left: 14.5%;*/
+  /*}*/
+/*}*/
+/*@media screen and (max-width: 1440px) {*/
+  /*.edit-invoice-form .invoice-update{*/
+    /*margin-left: 11.5%;*/
+  /*}*/
+/*}*/
+/*@media screen and (max-width: 1368px) {*/
+  /*.edit-invoice-form .invoice-update{*/
+    /*margin-left: 8.5%;*/
+  /*}*/
+/*}*/

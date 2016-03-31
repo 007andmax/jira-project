@@ -56,7 +56,7 @@
               <div>Recurring</div>
               <div>Finish Date</div>
               <div>Total Created</div>
-              <div class="no-invoice">invoice no</div>
+              <!--<div class="no-invoice">invoice no</div>-->
               <div>Amount</div>
             </div>
           </li>
@@ -71,28 +71,31 @@
 
                 <div>{{ companyOfInvocie.name }}</div>
 
-                <div popover="{{ invoice.title }}" popover-placement="bottom" popover-trigger="mouseenter">
-                  <i class="icn-sm  icn-description"></i>
-                </div>
+                <div order-title="invoice.title" class="long-text"></div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
                 <div>{{ frequency[invoice.frequency] || invoice.customFrequency + ' days' }}</div>
                 <div>{{ invoice.endDate | date:'dd MMM yyyy' }}</div>
                 <div>{{ invoice.generatedCount }}</div>
-                <div class="numbs">{{ invoice.number }}</div>
-                <div>{{ invoice.total | currency:'$':2 }}
+                <!--<div class="numbs">{{ invoice.number }}</div>-->
+                <div>
+                  <span class="currency-invoice">
+                    {{ invoice.total | currency:'$':2 }}
+                  </span>
+                  <div class="currency-icons">
+                    <a>
+                      <i class="icn-sm icn-description"
+                         popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
+                    </a>
 
-                  <a popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter">
-                    <i class="icn-sm icn-description"></i>
-                  </a>
+                    <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
+                          ng-click="toogleEditForm(invoice.id)"></i></a>
 
-                  <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
-                        ng-click="toogleEditForm(invoice.id)"></i></a>
+                    <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top" tooltip-append-to-body="true"
+                          qt-ts-toggler></i></a>
 
-                  <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top" tooltip-append-to-body="true"
-                        qt-ts-toggler></i></a>
-
-                  <a><i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
-                        ng-click="deleteRecurringInvoice()"></i></a>
+                    <a><i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+                          ng-click="deleteRecurringInvoice()"></i></a>
+                  </div>
 
                 </div>
               </div>
