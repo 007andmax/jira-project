@@ -78,7 +78,8 @@
             <input type="text" data-toggle="dropdown" aria-expanded="true" ng-model="paramInvocie.repeatingInvoice">
             <i class="icn-sm icn-caret-gray"></i>
 
-            <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice" ng-required="true">
+            <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice"
+                   ng-required="true" ng-change="changeRepeatInvoice()">
 
             <ul class="dropdown-menu dropdown-menu-right">
               <li ng-repeat="(value, label) in frequency" ng-click="setRepeatingInvoice(label)">
@@ -91,7 +92,8 @@
           <label class="date">
             <span> Starting Date</span>
 
-            <input type="text" placeholder="../../.." ng-model="editInvoice.sentOn" readonly
+            <input type="text" placeholder="../../.." ng-model="editInvoice.sentOn"
+                   readonly ng-change="changeStartDate()"
                    qt-data-time-picker default-date="editInvoice.sentOn" min-date="minSentOnDate">
             <i class="icn-sm calendar"></i>
           </label>
