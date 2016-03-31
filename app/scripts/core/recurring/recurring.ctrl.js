@@ -3,75 +3,74 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
-    ['$scope', 'RecurringService', 'CompaniesService', '$rootScope',
-      function ($scope, RecurringService, CompaniesService, $rootScope) {
+    [
+      '$scope', 'RecurringService', 'CompaniesService',
+      function ($scope, RecurringService, CompaniesService) {
 
-        $scope.isShowAddCompany = false;
-        $scope.companySelection = {};
+        $scope.editInvoiceId = '';
+        $scope.frequency = {
+          sevenDays: '7 days',
+          fifteenDays: '15 days',
+          thirtyDays: '30 days',
+          MONTHLY: 'Monthly',
+          YEARLY: 'Yearly'
+        };
+        $scope.orderInvoices = {
+          field: 'company',
+          reverse: false
+        };
+
+        RecurringService.getAll($scope, function (resp) {
+          $scope.invoices = resp;
+        });
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
           $scope.last30DaysValue = 0;
 
-          for (var r = 0; r < $scope.recurringGraphData.length; r++) {
+          for (var i = 0; i < $scope.recurringGraphData.length; i++) {
+            $scope.last30DaysValue += $scope.recurringGraphData[i].sum;
+          }
+        });
 
-            for (var i = 0; i < $scope.recurringGraphData[r].length; i++) {
-
-              $scope.last30DaysValue += $scope.recurringGraphData[r][i].sum;
-            }
+        $scope.toogleEditForm = function (value) {
+          if (!value) {
+            $scope.editInvoiceId = '';
+          } else if (value === 'new-invoice') {
+            $scope.editInvoiceId = 'new-invoice';
+          } else {
+            $scope.editInvoiceId = value;
           }
 
-
-        });
-
-        $scope.recurringCompanies = RecurringService.getRecurringCompanies($scope, function () {
-
-          $scope.$watch('recurringCompanies', function () {
-
-            for (var i = 0; i < $scope.recurringCompanies.length; i++) {
-              var company = $scope.recurringCompanies[i];
-              if (!company.company.name) {
-                company.company.name = CompaniesService.getOneById(company.company.id).name;
-              }
-            }
-
-            var clientCompanies = CompaniesService.getClientCompanies(),
-              recurringCompaniesId = [];
-            $scope.notRecurringCompaniesArray = [];
-
-            for (var j = 0; j < $scope.recurringCompanies.length; j++) {
-              recurringCompaniesId.push($scope.recurringCompanies[j].company.id)
-            }
-
-            for (var i = 0; i < clientCompanies.length; i++) {
-              if ((recurringCompaniesId.indexOf(clientCompanies[i].id)) < 0) {
-                $scope.notRecurringCompaniesArray.push(clientCompanies[i]);
-              }
-            }
-
-          }, true);
-        });
-
-
-        $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.openAddCompanyForm = function () {
-          $scope.isShowAddCompany = true;
-          $rootScope.$broadcast('cancelEditForm');
+        $scope.setOrderForProducts = function (option) {
+          if (option === $scope.orderInvoices.field) {
+            $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
+          } else {
+            $scope.orderInvoices.field = option;
+            $scope.orderInvoices.reverse = false;
+          }
         };
 
-        $scope.addCompany = function () {
-          RecurringService.addCompany($scope.recurringCompanies, $scope.company.id);
-          $rootScope.$broadcast('cancelEditForm');
-          $scope.isShowAddCompany = false;
-          $scope.company = '';
+        $scope.orderByForInvoices = function (item) {
+          if ($scope.orderInvoices.field === 'company' && item.company && item.company.id) {
+            var company = CompaniesService.getOneById(item.company.id);
+            return company.name
+          } else if ($scope.orderInvoices.field === 'startDate') {
+            return item.sentOn;
+          } else if ($scope.orderInvoices.field === 'recurring') {
+            return item.customFrequency || item.frequency;
+          } else if ($scope.orderInvoices.field === 'endDate') {
+            return item.endDate;
+          } else if ($scope.orderInvoices.field === 'totalCreated') {
+            return item.generatedCount;
+          } else if ($scope.orderInvoices.field === 'amount') {
+            return item.total;
+          }
+
         };
 
-        $scope.closeChooseCompanyForm = function(){
-          $scope.isShowAddCompany = false;
-        }
-
-      }]);
+      }
+    ]);
 
 }());

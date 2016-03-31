@@ -3,7 +3,8 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("addressAutocomplete",
-    ['$timeout', function ($timeout) {
+    [
+      '$timeout', '$http', 'AddressesService', function ($timeout, $http, AddressesService) {
       return {
         restrict: 'A',
         require: 'ngModel',
@@ -82,6 +83,21 @@
             ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
             ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
 
+            $http.get('https://maps.googleapis.com/maps/api/timezone/json?location= ' +
+                ngModelCtrl.$viewValue.locationLat + ',' + ngModelCtrl.$viewValue.locationLng +
+                '&timestamp=0&key=AIzaSyCJ40cLJD6gFdZ6j6HXf1D9oh8AK_BlW-Y')
+              .then(function successCallback(response) {
+                if (response.data.timeZoneId) {
+                  AddressesService.getLocaleByName(response.data.timeZoneId, function (timeZoneObj) {
+                    ngModelCtrl.$viewValue.locale = timeZoneObj.name;
+                    ngModelCtrl.$viewValue.timeZone = timeZoneObj;
+                    ngModelCtrl.$viewValue.fromGoogle = true;
+                  })
+                }
+              }, function errorCallback(response) {
+                console.log('error: ' + response.data ? (response.data.message || 'no provided message') : 'empty response');
+              });
+
             if (place.address_components) {
               for (var i = place.address_components.length - 1; i >= 0; i--) {
 
@@ -133,6 +149,7 @@
           }
         }
       }
-    }]);
+    }
+    ]);
 
 })();

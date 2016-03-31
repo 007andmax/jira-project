@@ -301,6 +301,7 @@
 .invoice-table .table-invoice-item div:nth-child(4){
   width: 11%;
 }
+
 .invoice-table .table-invoice-item div {
   display: inline-block;
   float: left;
@@ -388,6 +389,7 @@ span.control-label.error-required {
 ul.qt-recurring-invoices{
   margin-bottom: 150px;
 }
+
 .invoice-table .table-invoice-item div .icn-description,
 .invoice-table .table-invoice-item div .icn-edit,
 .invoice-table .table-invoice-item div .icn-desk,
@@ -440,8 +442,11 @@ ul.qt-recurring-invoices{
 .invoice-table .table-invoice-item div div.currency-icons .popover .popover-inner{
   width: 100%;
 }
-.invoice-table .table-invoice-item div div.currency-icons .popover .arrow{
+.invoice-table .table-invoice-item div div.currency-icons .popover .arrow {
   display: none;
+}
+.invoice-table .table-invoice-item div:nth-child(6) {
+  width: 11%;
 }
 .invoice-table .table-invoice-item div:nth-child(5){
   width: 12%;

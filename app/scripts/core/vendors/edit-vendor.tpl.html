@@ -159,50 +159,7 @@
                   <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
                   <div class="form-row clearfix" style="margin-top: 13px;">
-
-                    <div class="form-group full-width"
-                         ng-class="{'has-error': isShowingErrors(locationForm, 'vendorTimezone')}">
-
-                      <label class="control-label"
-                             ng-class="{'non-visible-label': isShowingErrors(locationForm, 'vendorTimezone')}">
-                        Timezone
-                      </label>
-
-                      <div class="error-vendor-form-message" ng-messages="locationForm.vendorTimezone.$error"
-                           ng-class="{'hide': !isShowingErrors(locationForm, 'vendorTimezone')}">
-                        <div class="control-label error-msg">Please select the timezone.</div>
-                      </div>
-
-                      <div class="pull-left dropdown">
-
-                        <input class="form-control form-control-time-zone has-dropdown" ng-required="true"
-                               ng-model="location.locale" name="vendorTimezone" autocomplete="off"
-                               typeahead="timezone as timezone.description for timezone in timezones | filter: {description: $viewValue}:stateComparator | orderBy:'description'"
-                               typeahead-editable="false" typeahead-min-length="0"
-                               qt-typeahead-show-on-focus ng-trim="false"
-                               custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}"
-                               style="width:500px;">
-
-                        <div typeahead-input-icon="location.locale"
-                             style="position: absolute;top: 13px;right: 13px;"></div>
-
-                      </div>
-
-                      <!--<div custom-ng-show-if="$last && editVendor.addresses.length < locationsMaxCount">-->
-
-                        <!--<div class="btn btn-dark has-tooltip pull-right" ng-click="addLocation()" cns-if-->
-                             <!--tooltip-placement="top" tooltip="Add another site/location">-->
-                          <!--<i class="icn-sm icn-plus"></i>-->
-                        <!--</div>-->
-
-                        <!--<div class="btn btn-primary has-tooltip pull-right" ng-click="removeLocation($index)" cns-else-->
-                             <!--tooltip-placement="top" tooltip="Remove site/location">-->
-                          <!--<i class="icn-sm icn-remove-token"></i>-->
-                        <!--</div>-->
-
-                      <!--</div>-->
-
-                    </div>
+                    <time-zone-autocomplete address="location" time-zones="timeZones"></time-zone-autocomplete>
                   </div>
 
                   <!--<div class="form-row clearfix">-->

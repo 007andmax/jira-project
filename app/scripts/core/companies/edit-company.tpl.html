@@ -177,7 +177,7 @@
 
         <div id="site-location" class="contact-info-wrapper">
           <div class="create-new-user company-basic-info clearfix"
-               ng-repeat="location in editCompany.addresses">
+               ng-repeat="location in editCompany.addresses" ng-init="locationIndex = $index">
 
             <div class="fixed-form-element" ng-form="locationForm">
               <div class="create-user-container">
@@ -196,49 +196,22 @@
                   <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
 
                   <div class="form-row clearfix" style="margin-top: 13px;">
-                    <div class="form-group full-width"
-                         ng-class="{'has-error': isShowingErrors(locationForm, 'companyTimezone')}">
+                    <time-zone-autocomplete address="location" time-zones="timeZones"></time-zone-autocomplete>
 
-                      <label class="control-label"
-                             ng-class="{'hide': isShowingErrors(locationForm, 'companyTimezone')}">
-                        Timezone
-                      </label>
+                    <!--<div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">-->
+                    <!--<div class="btn btn-primary has-tooltip pull-right"-->
+                    <!--ng-click="removeLocation($index)" cns-else-->
+                    <!--tooltip-placement="top" tooltip="Remove site/location">-->
+                    <!--<i class="icn-sm icn-remove-token"></i>-->
+                    <!--</div>-->
 
-                      <div ng-messages="locationForm.companyTimezone.$error"
-                           ng-class="{'hide': !isShowingErrors(locationForm, 'companyTimezone')}">
-                        <label class="control-label">PLEASE SELECT THE TIMEZONE.</label>
-                      </div>
+                    <!--<div class="btn btn-dark has-tooltip pull-right"-->
+                    <!--ng-click="addLocation()" ng-show="$last" cns-if-->
+                    <!--tooltip-placement="top" tooltip="Add another site/location">-->
+                    <!--<i class="icn-sm icn-plus"></i>-->
+                    <!--</div>-->
+                    <!--</div>-->
 
-                      <div class="pull-left dropdown">
-
-                        <input class="form-control form-control-time-zone has-dropdown" type="text"
-                               data-toggle="dropdown" aria-expanded="false" ng-model="location.locale"
-                               ng-required="true" name="companyTimezone" autocomplete="off"
-                               typeahead="timezone as timezone.description for timezone in timezones | filter:$viewValue:stateComparator | orderBy:'description'"
-                               typeahead-editable="false" typeahead-min-length="0"
-                               qt-typeahead-show-on-focus ng-trim="false"
-                               custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
-
-                        <div typeahead-input-icon="location.locale"
-                             style="position: absolute;top: 13px;right: 13px;"></div>
-
-                      </div>
-
-                      <!--<div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">-->
-                      <!--<div class="btn btn-primary has-tooltip pull-right"-->
-                      <!--ng-click="removeLocation($index)" cns-else-->
-                      <!--tooltip-placement="top" tooltip="Remove site/location">-->
-                      <!--<i class="icn-sm icn-remove-token"></i>-->
-                      <!--</div>-->
-
-                      <!--<div class="btn btn-dark has-tooltip pull-right"-->
-                      <!--ng-click="addLocation()" ng-show="$last" cns-if-->
-                      <!--tooltip-placement="top" tooltip="Add another site/location">-->
-                      <!--<i class="icn-sm icn-plus"></i>-->
-                      <!--</div>-->
-                      <!--</div>-->
-
-                    </div>
                   </div>
 
                   <!--<div class="form-row clearfix">-->
@@ -716,7 +689,8 @@
                   <p ng-style="{ opacity: isShowingErrors(newTaxRateForm, 'currentlyTaxType') ? '0' : '1' }">Edit Tax
                     Rate</p>
 
-                  <div ng-messages="newTaxRateForm.currentlyTaxType.$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm.currentlyTaxType.$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-class="{'hide': !isShowingErrors(newTaxRateForm, 'currentlyTaxType')}">
 
                     <label class="control-label" ng-message="required">
@@ -739,7 +713,8 @@
                 <div class="col-2" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'currentlyTaxRate')}">
                   <p>&nbsp;</p>
 
-                  <div ng-messages="newTaxRateForm.currentlyTaxRate.$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm.currentlyTaxRate.$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-if="isShowingErrors(newTaxRateForm, 'currentlyTaxRate')">
                     <label class="control-label" ng-message="required">
                       RATE IS REQUIRED.
@@ -768,7 +743,8 @@
                 <div class="col-1"
                      ng-class="{'has-error': (newTaxRateForm['taxCode' + $index].$dirty || triedToSave) && isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
 
-                  <div ng-messages="newTaxRateForm['taxCode' + $index].$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm['taxCode' + $index].$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-class="{'hide': (newTaxRateForm['taxCode' + $index].$pristine && !triedToSave) || !isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
 
                     <label class="control-label" ng-message="required">
@@ -790,7 +766,8 @@
 
                 <div class="col-2" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'taxRate' + $index)}">
 
-                  <div ng-messages="newTaxRateForm['taxRate' + $index].$error" style="position: absolute;margin-top: -19px;"
+                  <div ng-messages="newTaxRateForm['taxRate' + $index].$error"
+                       style="position: absolute;margin-top: -19px;"
                        ng-if="isShowingErrors(newTaxRateForm, 'taxRate' + $index)">
                     <label class="control-label" ng-message="required">
                       RATE IS REQUIRED.

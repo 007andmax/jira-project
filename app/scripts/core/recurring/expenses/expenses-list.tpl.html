@@ -1,0 +1,50 @@
+<div>
+  <div class="table-wrapper clearfix" ng-repeat="expense in expenses">
+
+    <div class="table-content pull-left" ng-if="!expense.isServiceExpense" ng-init="product = expense">
+
+      <i class="icn icn-sm icn-update-product"></i>
+
+      <div class="col-1">
+        ILC: <span class="model">{{ product.item.ilc }}</span>
+      </div>
+
+      <div class="col-1" style="border-left: 1px solid #e7ecf2;">
+        P/N: <span class="model">#{{ product.item.manufacture }}</span>
+      </div>
+
+      <div class="col-2"
+           ng-class="{'col-2-has-serial-number': product.serialNumber && (product.serialNumber.length > 0)}"
+           trimmed-popover trimmed-popover-content="product.item.description">
+        {{ product.item.description }}
+      </div>
+
+      <div class="col-3" ng-show="product.serialNumber && (product.serialNumber.length > 0)"
+           trimmed-popover trimmed-popover-content="product.serialNumber">
+        {{ product.serialNumber }}
+      </div>
+
+      <div class="col-5">{{ product.sum | currency: '$': 2 }}</div>
+
+      <div class="col-4">{{ product.price | currency: '$': 2 }}
+        <span class="model">Qty {{ product.quantity }}</span>
+      </div>
+
+    </div>
+
+    <div class="table-content pull-left" ng-if="expense.isServiceExpense" ng-init="service = expense">
+      <i class="icn icn-sm icn-update-service"></i>
+
+      <div class="col-1">{{ service.item.name }}</div>
+
+      <div class="col-2" trimmed-popover trimmed-popover-content="service.description">
+        {{ service.description }}
+      </div>
+
+      <div class="col-5">{{ service.sum | currency: '$': 2 }}</div>
+      <div class="col-4">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
+
+    </div>
+
+  </div>
+</div>

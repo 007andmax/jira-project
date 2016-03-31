@@ -1,0 +1,61 @@
+<div class="product-expense" ng-init="updateInvoiceProduct = 'updateInvoiceProduct-' + $index"
+     ng-form="{{ updateInvoiceProduct }}">
+
+  <div class="col1"
+       ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'product')}">
+
+    <div products-list="product" id="product-list-cont"
+         click-outside="closeDropdown()" outside-if-not="product-list-cont">
+      <div>
+
+        <input ng-hide="isPLOpen" type="text" class="form-control has-dropdown" pl-product-input
+               placeholder="Product" autocomplete="off">
+
+        <input ng-show="isPLOpen" type="text" class="form-control has-dropdown" pl-search-product-input
+               placeholder="Search or Add Product" autocomplete="off" ng-model="searchProduct">
+
+        <i class="icn-sm icn-caret-gray"></i>
+      </div>
+
+      <input type="hidden" name="product" ng-model="product.item.description" ng-required="true">
+
+      <div class="nano dropdown-menu custom-product-list" pl-conteiner style="margin-left: -97px;"
+           ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+
+    </div>
+
+  </div>
+
+  <div class="col3"
+       ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'productSerialNumber')}">
+
+    <input type="text" class="form-control" placeholder="Serial Number"
+           name="productSerialNumber" ng-maxlength="36"
+           ng-model="product.serialNumber">
+  </div>
+
+  <div class="col4"
+       ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'productQty')}">
+
+    <input type="text" class="form-control" placeholder="Qty"
+           ng-model="product.quantity" ng-maxlength="10"
+           name="productQty" hard-reset-required="true"
+           ng-change="controlProductQty(editInvoiceForm[updateInvoiceProduct])"
+           hard-reset-pattern="numberPattern">
+  </div>
+
+  <div class="col5"
+       ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'productPrice')}">
+
+    <input type="text" class="form-control" placeholder="Price" name="productPrice"
+           ng-required="true" ng-model="product.item.sale"
+           hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
+  </div>
+
+  <div class="col-6">
+    <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete" ng-click="deleteProduct()">
+      <i class="icn-sm icn-delete"></i>
+    </a>
+  </div>
+
+</div>

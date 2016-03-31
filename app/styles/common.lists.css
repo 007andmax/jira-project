@@ -63,9 +63,15 @@
 .qt-list .list-heading .sort-icon.icn-expand {
   margin-top: -10px;
 }
+.qt-list .invoice-table-head .sort-icon.icn-collapse {
+  margin-top: -16px;
+}
+.qt-list .invoice-table-head .sort-icon.icn-expand {
+  margin-top: -13px;
+}
 .qt-list li.list-heading>[class*="col-"]{
   font-size: 11px;
-  line-height: 12px;
+  line-height: 13px;
   font-weight: bold;
   color: #748498 !important;
   text-transform: uppercase;
