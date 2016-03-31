@@ -17,7 +17,8 @@
             <div typeahead-input-icon="searchCompany"></div>
 
             <ul class="dropdown-menu dropdown-menu-right">
-              <li ng-repeat="company in companies | filter: {'name': searchCompany}" ng-click="chooseCompany(company)">
+              <li ng-repeat="company in companies | filter: {'name': searchCompany}"
+                  ng-click="chooseCompany(company)" ng-if="!company.isDefault">
                 <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
               </li>
             </ul>
