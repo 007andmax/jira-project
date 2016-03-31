@@ -4640,7 +4640,7 @@ tbody.collapse.in {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 25px;
   z-index: 1000;
   display: none;
   float: left;
@@ -9109,7 +9109,7 @@ button.close {
   color: #ffffff;
   text-align: center;
   white-space: nowrap;
-  /*background-color: #151e29;*/
+  background-color: #151e29;
   border-radius: 3px;
 }
 .tooltip-lg .tooltip-inner {
