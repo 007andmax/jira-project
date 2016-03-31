@@ -311,7 +311,11 @@ li.invoice-table.warning-order{
 li.invoice-table.danger-order{
   background-color: rgba(229,57,53,0.1);
 }
-
+.invoice-update .update-content .ticket-add-amount{
+  display: block;
+  width: 100%;
+  text-align: right;
+}
 .invoice-table .table-invoice-item div.long-text span{
   display: block;
   width: 100%;
