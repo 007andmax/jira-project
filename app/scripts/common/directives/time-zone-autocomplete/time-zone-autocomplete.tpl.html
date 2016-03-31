@@ -1,0 +1,65 @@
+<div class="form-group full-width" ng-form="timeZoneForm"
+     ng-class="{'has-error': isShowingErrors(timeZoneForm, 'timeZone')}">
+
+  <label class="control-label"
+         ng-class="{'hide': isShowingErrors(timeZoneForm, 'timeZone')}">
+    Timezone
+  </label>
+
+  <div ng-class="{'hide': !isShowingErrors(timeZoneForm, 'timeZone')}">
+    <label class="control-label">PLEASE SELECT THE TIMEZONE.</label>
+  </div>
+
+  <div class="pull-left dropdown">
+
+    <input class="form-control form-control-time-zone has-dropdown" type="text"
+           data-toggle="dropdown" aria-expanded="false" ng-model="address.locale"
+           name="timeZone" ng-required>
+    <a ng-if="address.locale.length" href="javascript:void(0)" class="erase" aria-label="erase"
+       ng-click="eraseInput($event)">
+      <i class="icn-sm icn-remove-token"></i>
+    </a>
+
+    <ul ng-show="showDropDown()" class="dropdown-menu time-zone-dropdown">
+      <li class="time-zone clickable" ng-show="address.locale.length"
+          ng-repeat="timeZone in filteredTimeZones" offset="{{timeZone.offset}}" locale="{{timeZone.name}}"
+          ng-click="setTimeZone(timeZone.name, timeZone.offset)"
+          ng-class="{'focusable': address.locale.length}">
+
+        <span>{{ formatOffset(timeZone.offset) }}</span>
+        &nbsp;
+        <span>{{ timeZone.name }}</span>
+      </li>
+      <li ng-if="address.locale.length && !filteredTimeZones.length">
+        Nothing found for "{{ address.locale }}"
+      </li>
+
+      <li ng-show="!address.locale.length" ng-repeat="(name, group) in timeZones">
+        <div class="groupName">{{ name }}</div>
+
+        <div class="cities-names"
+             ng-repeat="(offset, cities) in group"
+             ng-init="citiesExpanded[name + offset] = {}">
+
+          <div class="ellipsis-overflow clickable" offset="{{offset}}" locale="{{name + '/' + cities[0]}}"
+               ng-class="{'expandable': cities.length > 1, 'focusable': !address.locale.length}"
+               ng-click="cities.length > 1 ? expand(citiesExpanded[name + offset], $event) : setTimeZone(name + '/' + cities[0], offset)">
+
+            <span>{{ formatOffset(offset) }}</span>
+            &nbsp;
+            <span>{{ cities.join(', ') }}</span>
+            <i class="icn-sm icn-caret-gray pull-right" ng-if="cities.length > 1"
+               ng-class="{'rotate': citiesExpanded[name + offset].expanded}"></i>
+          </div>
+
+          <div class="time-zone clickable" ng-show="cities.length > 1 && citiesExpanded[name + offset].expanded"
+               ng-click="setTimeZone(name + '/' + city, offset)" offset="{{offset}}" locale="{{name + '/' + city}}"
+               ng-repeat="city in cities"
+               ng-class="{'focusable': cities.length > 1 && !address.locale.length && citiesExpanded[name + offset].expanded}">
+            {{ city }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

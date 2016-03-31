@@ -3,7 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
+    [
+      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
       'TaxRatesService', 'AddressesService', 'ServicesService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
@@ -11,7 +12,6 @@
                 SharedStateService, $stateParams, $state, VendorsService, $timeout) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
-        var currentTimeZone;
 
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
@@ -37,28 +37,8 @@
             }, 0)
           }
         });
-        $scope.timezones = AddressesService.getAllLocales(function () {
-
-          var localZone = -(new Date().getTimezoneOffset() / 60),
-            timeZone;
-
-          for (var i = 0; i < $scope.timezones.length; i++) {
-
-            var timeZoneDescription = $scope.timezones[i].description.match(/\d+/);
-
-            if (timeZoneDescription === null) {
-              timeZone = 0
-            } else {
-              timeZone = timeZoneDescription[0];
-            }
-            if (localZone === +timeZone) {
-              currentTimeZone = $scope.timezones[i];
-              if (!$stateParams.companyId) {
-                setCurrentTimeZone(currentTimeZone);
-              }
-              return;
-            }
-          }
+        AddressesService.getLocales(true, function (response) {
+          $scope.timeZones = response;
         });
 
         $scope.$watch('companies.length', function (companiesCount) {
@@ -107,7 +87,7 @@
 
         } else {
           $scope.editCompany = {
-            addresses: [{isPrimary: true}],
+            addresses: [{ isPrimary: true }],
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: []
@@ -133,17 +113,17 @@
           SharedStateService.clearState('companiesHeader');
         });
 
-        $scope.addLocation = function () {
-          $scope.editCompany.addresses.unshift({});
-          setCurrentTimeZone(currentTimeZone);
-        };
+        //$scope.addLocation = function () {
+        //  $scope.editCompany.addresses.unshift({});
+        //  setCurrentTimeZone(currentTimeZone);
+        //};
 
-        $scope.removeLocation = function (index) {
-          if ($scope.editCompany.addresses[index].isPrimary) {
-            $scope.editCompany.addresses[$scope.editCompany.addresses.length - 1].isPrimary = true;
-          }
-          $scope.editCompany.addresses.splice(index, 1);
-        };
+        //$scope.removeLocation = function (index) {
+        //  if ($scope.editCompany.addresses[index].isPrimary) {
+        //    $scope.editCompany.addresses[$scope.editCompany.addresses.length - 1].isPrimary = true;
+        //  }
+        //  $scope.editCompany.addresses.splice(index, 1);
+        //};
 
         $scope.isShowingContactErrors = function (contact, form, fieldName) {
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
@@ -173,7 +153,7 @@
 
             CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companyProfile', {companyId: resp.id});
+              $state.go('companyProfile', { companyId: resp.id });
             })
           } else {
             $scope.triedToSave = true;
@@ -458,17 +438,14 @@
 
         function getEmptyContact() {
           return {
-            subscription: {invoice: true},
+            subscription: { invoice: true },
             avatar: {
               scale: 50
             }
           };
         }
 
-        function setCurrentTimeZone(timeZoneObject) {
-          $scope.editCompany.addresses[0].locale = timeZoneObject;
-        }
-
-      }]);
+      }
+    ]);
 
 }());

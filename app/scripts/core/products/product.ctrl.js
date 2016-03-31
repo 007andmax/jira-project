@@ -24,7 +24,14 @@
           ProductsService.moveProducts(category.id, $scope.product.versionedId.id, function () {
             UserNotificationService.show($scope.product.description + ' has been moved to ' + category.name, true);
           });
-        }
+        };
+
+        $scope.onChangeTaxable = function () {
+          $scope.disabledCheckbox = true;
+          ProductsService.changeTaxableStatus($scope.product.versionedId.id, !$scope.product.taxable, function () {
+            $scope.disabledCheckbox = false;
+          })
+        };
 
       }]);
 
