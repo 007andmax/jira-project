@@ -50,19 +50,43 @@
 
           <li class="invoice-table-head">
             <div class="invoice-table-head-item clearfix">
-              <div>Company</div>
+              <div ng-click="setOrderForProducts('company')">
+                Company
+                <i class="icn-sm sort-icon" style="margin-left: 105px;" ng-show="orderInvoices.field === 'company'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
               <div>Order Title</div>
-              <div>Start Date</div>
-              <div>Recurring</div>
-              <div>Finish Date</div>
-              <div>Total Created</div>
+              <div ng-click="setOrderForProducts('startDate')">
+                Start Date
+                <i class="icn-sm sort-icon" style="margin-left: 95px;" ng-show="orderInvoices.field === 'startDate'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <div ng-click="setOrderForProducts('recurring')">
+                Recurring
+                <i class="icn-sm sort-icon" style="margin-left: 95px;" ng-show="orderInvoices.field === 'recurring'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <div ng-click="setOrderForProducts('endDate')">
+                Finish Date
+                <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderInvoices.field === 'endDate'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
+              <div ng-click="setOrderForProducts('totalCreated')">
+                Total Created
+                <i class="icn-sm sort-icon" style="margin-left: 87px;" ng-show="orderInvoices.field === 'totalCreated'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
               <!--<div class="no-invoice">invoice no</div>-->
-              <div>Amount</div>
+              <div ng-click="setOrderForProducts('amount')">
+                Amount
+                <i class="icn-sm sort-icon" style="margin-left: 115px;" ng-show="orderInvoices.field === 'amount'"
+                   ng-class="{'icn-collapse': orderInvoices.reverse, 'icn-expand': !orderInvoices.reverse}"></i>
+              </div>
             </div>
           </li>
 
           <li class="invoice-table" show-model-element="{{ 'showInvoice-' + invoice.id }}" qt-toggle-slider
-              ng-repeat="invoice in invoices | orderBy: invoicesOrder"
+              ng-repeat="invoice in invoices | orderBy : orderByForInvoices : orderInvoices.reverse"
               ng-controller="quicktech.core.recurring.invoiceCtrl"
               ng-class="{'warning-order': invoice.leftGenerations === 1, 'danger-order': invoice.leftGenerations === 0}">
 

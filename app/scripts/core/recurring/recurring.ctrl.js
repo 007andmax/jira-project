@@ -3,7 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
-    ['$scope', 'RecurringService', 'CompaniesService',
+    [
+      '$scope', 'RecurringService', 'CompaniesService',
       function ($scope, RecurringService, CompaniesService) {
 
         $scope.editInvoiceId = '';
@@ -13,6 +14,10 @@
           thirtyDays: '30 days',
           MONTHLY: 'Monthly',
           YEARLY: 'Yearly'
+        };
+        $scope.orderInvoices = {
+          field: 'company',
+          reverse: false
         };
 
         RecurringService.getAll($scope, function (resp) {
@@ -38,13 +43,34 @@
 
         };
 
-        $scope.invoicesOrder = function (item) {
-          if (item.company && item.company.id) {
-            var company = CompaniesService.getOneById(item.company.id);
-            return company.name
+        $scope.setOrderForProducts = function (option) {
+          if (option === $scope.orderInvoices.field) {
+            $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
+          } else {
+            $scope.orderInvoices.field = option;
+            $scope.orderInvoices.reverse = false;
           }
         };
 
-      }]);
+        $scope.orderByForInvoices = function (item) {
+          if ($scope.orderInvoices.field === 'company' && item.company && item.company.id) {
+            var company = CompaniesService.getOneById(item.company.id);
+            return company.name
+          } else if ($scope.orderInvoices.field === 'startDate') {
+            return item.sentOn;
+          } else if ($scope.orderInvoices.field === 'recurring') {
+            return item.customFrequency || item.frequency;
+          } else if ($scope.orderInvoices.field === 'endDate') {
+            return item.endDate;
+          } else if ($scope.orderInvoices.field === 'totalCreated') {
+            return item.generatedCount;
+          } else if ($scope.orderInvoices.field === 'amount') {
+            return item.total;
+          }
+
+        };
+
+      }
+    ]);
 
 }());
