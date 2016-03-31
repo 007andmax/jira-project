@@ -219,8 +219,8 @@
 }
 
 .invoice-table-head .invoice-table-head-item {
-  background-color: #f1f5fa;
-  border: 1px solid #e7ecf2;
+  /*background-color: #f1f5fa;*/
+  border: 2px solid #e7ecf2;
 }
 .numb-form{
   display: block;
@@ -241,6 +241,7 @@
   font-family: inherit;
   font-weight: 700;
   text-align: center;
+  border-right: 1px solid rgba(231, 236, 242, 0.5);
 }
 
 .invoice-table-head .invoice-table-head-item div:first-child {
@@ -253,12 +254,15 @@
 
 .invoice-table-head .invoice-table-head-item div:last-child {
   width: 19%;
+  border-right: none;
 }
 
 .invoice-table-head .invoice-table-head-item div:nth-child(6) {
-  width: 9%;
+  width: 11%;
 }
-
+.invoice-table-head .invoice-table-head-item div:nth-child(5){
+  width: 12%;
+}
 .invoice-table-head .invoice-table-head-item div:last-child {
   margin-right: 0;
 }
@@ -274,6 +278,10 @@
   font-weight: 400;
   color: #000;
   text-align: center;
+  cursor: auto;
+}
+li.invoice-table{
+  cursor: auto;
 }
 span.control-label.error-required{
   position: absolute;
@@ -289,11 +297,11 @@ span.control-label.error-required{
 .invoice-table .ticket-add-amount{
   width: 100%;
   text-align: right;
-  margin-right: 60px;
+  margin-right: 110px;
   margin-bottom: 5px;
 }
 .invoice-table .table-wrapper .table-content{
-  width: calc(100% - 150px);
+  width: calc(100% - 200px);
   margin-left: 90px;
 }
 .invoice-table .table-invoice-item div.popover-inner .popover-content{
@@ -307,6 +315,7 @@ span.control-label.error-required{
 }
 .invoice-table .table-invoice-item div:nth-child(2) {
   width: 10%;
+  cursor: pointer;
 }
 
 .invoice-table .table-invoice-item div .icn-description,
@@ -317,6 +326,7 @@ span.control-label.error-required{
   vertical-align: top;
   width: 16px;
   height: 18px;
+  cursor: pointer;
 }
 .invoice-table .table-invoice-item div .icn-description{
   background-position: -777px -202px;
@@ -346,9 +356,11 @@ span.control-label.error-required{
 }
 
 .invoice-table .table-invoice-item div:nth-child(6) {
-  width: 9%;
+  width: 11%;
 }
-
+.invoice-table .table-invoice-item div:nth-child(5){
+  width: 12%;
+}
 .invoice-table .table-invoice-item div:last-child {
   margin-right: 0;
   width: 19%;
