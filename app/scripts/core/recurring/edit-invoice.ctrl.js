@@ -53,6 +53,11 @@
             services: angular.copy($scope.invoice.services)
           };
 
+          for(var i = 0, len = $scope.editInvoice.services.length; i < len; i++){
+            $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
+            $scope.editInvoice.services[i].date =  $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+          }
+
           $timeout(function () {
             if ($scope.invoice.frequency) {
               $scope.paramInvocie.repeatingInvoice = $scope.invoice.frequency === 'MONTHLY' ? 'Monthly' : 'Yearly';
