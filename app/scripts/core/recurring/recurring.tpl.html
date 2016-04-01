@@ -97,7 +97,7 @@
 
                 <div order-title="invoice.title" class="long-text"></div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
-                <div>{{ frequency[invoice.frequency] || invoice.customFrequency + ' days' }}</div>
+                <div>{{ frequency[invoice.frequency] || invoice.customFrequency + (invoice.customFrequency == 1 ? ' day' : ' days')}}</div>
                 <div>{{ invoice.endDate | date:'dd MMM yyyy' }}</div>
                 <div>{{ invoice.generatedCount }}</div>
                 <!--<div class="numbs">{{ invoice.number }}</div>-->

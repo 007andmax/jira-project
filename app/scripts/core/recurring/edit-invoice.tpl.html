@@ -46,7 +46,7 @@
 
               <input type="text" class="small payment" ng-model="paramInvocie.paymentTerms"
                      data-toggle="dropdown" aria-expanded="true" maxlength="5" hard-reset-pattern="numberPattern">
-              <span class="suffix-days">days</span>
+              <span class="suffix-days">{{ paramInvocie.paymentTerms == 1 ? 'day' : 'days' }}</span>
               <i class="icn-sm icn-caret-gray"></i>
 
               <input type="hidden" ng-model="editInvoice.paymentTerms" name="paymentTerms" ng-required="true">
@@ -82,7 +82,9 @@
                    hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"
                    restore-from="{{savedRepeatingInvoice}}">
             <span class="suffix-days"
-                  ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">days</span>
+                  ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">
+              {{ paramInvocie.repeatingInvoice == 1 ? 'day' : 'days' }}
+            </span>
             <i class="icn-sm icn-caret-gray"></i>
 
             <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice"
