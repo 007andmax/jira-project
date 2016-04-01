@@ -70,6 +70,10 @@
 
         };
 
+        $scope.$on('showInvoice', function(e, companyId){
+          $scope.showCompanyId = companyId ? companyId : '';
+        })
+
       }
     ]);
 

@@ -85,15 +85,15 @@
             </div>
           </li>
 
-          <li class="invoice-table" show-model-element="{{ 'showInvoice-' + invoice.id }}" qt-toggle-slider
+          <li class="invoice-table" qt-toggle-slider
               ng-repeat="invoice in invoices | orderBy : orderByForInvoices : orderInvoices.reverse"
-              ng-controller="quicktech.core.recurring.invoiceCtrl"
+              ng-controller="quicktech.core.recurring.invoiceCtrl" ng-hide="showCompanyId && (showCompanyId !== invoice.company.id)"
               ng-class="{'warning-order': invoice.leftGenerations === 1, 'danger-order': invoice.leftGenerations === 0}">
 
             <div>
               <div class="table-invoice-item clearfix" ng-hide="editInvoiceId === invoice.id">
 
-                <div>{{ companyOfInvocie.name }}</div>
+                <div style="cursor: initial">{{ companyOfInvocie.name }}</div>
 
                 <div order-title="invoice.title" class="long-text"></div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>

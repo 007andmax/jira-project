@@ -11,7 +11,15 @@
         var day = 1000 * 60 * 60 * 24;
         var isEditOrderLoad;
 
-        $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Monthly)?(Yearly)?$/;
+        $scope.frequency = {
+          sevenDays: '7 days',
+          fifteenDays: '15 days',
+          thirtyDays: '30 days',
+          MONTHLY: 'Month',
+          YEARLY: 'Year'
+        };
+
+        $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Month)?(Year)?$/;
         $scope.numToGeneratePattern = /^\d{0,3}$/;
         $scope.savedRepeatingInvoice = '';
         $scope.disabledSaveInvoice = true;
@@ -62,7 +70,7 @@
 
           $timeout(function () {
             if ($scope.invoice.frequency) {
-              $scope.paramInvocie.repeatingInvoice = $scope.invoice.frequency === 'MONTHLY' ? 'Monthly' : 'Yearly';
+              $scope.paramInvocie.repeatingInvoice = $scope.invoice.frequency === 'MONTHLY' ? 'Month' : 'Year';
             } else {
               $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency;
             }
@@ -232,10 +240,10 @@
             $scope.editInvoiceForm.repeatingInvoice.$setDirty();
           }
 
-          if (repeat === 'Monthly') {
+          if (repeat === 'Month') {
             $scope.repeatingInvoiceModel = true;
             endDay.setMonth(startDay.getMonth() + 1);
-          } else if (repeat === 'Yearly') {
+          } else if (repeat === 'Year') {
             $scope.repeatingInvoiceModel = true;
             endDay.setFullYear(startDay.getFullYear() + 1);
           } else if (parseInt(repeat) > 0) {
@@ -295,9 +303,9 @@
             var endDate = new Date(sentOn);
             var num = parseInt($scope.paramInvocie.numToGenerate);
 
-            if (repeat === 'Monthly') {
+            if (repeat === 'Month') {
               endDate.setMonth(sentOn.getMonth() + num);
-            } else if (repeat === 'Yearly') {
+            } else if (repeat === 'Year') {
               endDate.setFullYear(sentOn.getFullYear() + num);
             } else if (parseInt(repeat) > 0) {
               endDate = +(new Date(sentOn)) + (parseInt(repeat) * day * num);
@@ -312,9 +320,9 @@
             var endDate = new Date($scope.editInvoice.endDate);
             var newNum;
 
-            if (repeat === 'Monthly') {
+            if (repeat === 'Month') {
               newNum = numOfMonth(sentOn, endDate);
-            } else if (repeat === 'Yearly') {
+            } else if (repeat === 'Year') {
               newNum = numOfYear(sentOn, endDate);
             } else if (parseInt(repeat) > 0) {
               newNum = Math.floor((+endDate - +sentOn) / (parseInt(repeat) * day));
@@ -392,8 +400,8 @@
               $scope.paramInvocie.repeatingInvoice = $scope.savedRepeatingInvoice;
             }
 
-            if ($scope.paramInvocie.repeatingInvoice === 'Monthly' || $scope.paramInvocie.repeatingInvoice === 'Yearly') {
-              editInvoice.frequency = $scope.paramInvocie.repeatingInvoice === 'Monthly' ? 'MONTHLY' : 'YEARLY'
+            if ($scope.paramInvocie.repeatingInvoice === 'Month' || $scope.paramInvocie.repeatingInvoice === 'Year') {
+              editInvoice.frequency = $scope.paramInvocie.repeatingInvoice === 'Month' ? 'MONTHLY' : 'YEARLY'
             } else {
               editInvoice.customFrequency = parseInt($scope.paramInvocie.repeatingInvoice)
             }
