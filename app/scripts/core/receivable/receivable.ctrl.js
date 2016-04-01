@@ -110,7 +110,7 @@
             var invoices = $scope.receivableInvoicesData.companies[companyId];
 
             for (var j = 0; j < invoices.length; j++) {
-              invoiceToSentData.invoices[invoices[j].id] = invoiceToSentData.checked
+              invoiceToSentData.invoices[invoices[j].number] = invoiceToSentData.checked
             }
           }
         };
@@ -165,7 +165,7 @@
                 $scope.countInvoice++;
                 disabledCount++;
                 for (var i = 0; i < $scope.receivableInvoicesData.list.length; i++) {
-                  if (invoiceId === $scope.receivableInvoicesData.list[i].id) {
+                  if (invoiceId === $scope.receivableInvoicesData.list[i].number) {
                     $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
                   }
                 }
