@@ -359,7 +359,7 @@ span.control-label.error-required {
 }
 
 .invoice-table .table-invoice-item div.popover-inner {
-  padding-left: 0;
+  padding: 0;
 }
 
 .invoice-table .ticket-add-amount {
@@ -373,7 +373,7 @@ span.control-label.error-required {
   margin-left: 90px;
 }
 .invoice-table .table-invoice-item div.popover-inner .popover-content{
-  padding-left: 0;
+  padding: 0;
   width: 100%;
 }
 .invoice-table-head .invoice-table-head-item div.no-invoice{

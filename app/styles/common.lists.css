@@ -60,8 +60,14 @@
 .qt-list .list-heading .sort-icon.icn-collapse {
   margin-top: -13px;
 }
+.qt-list .list-heading .sort-icon{
+  position: absolute;
+  right: 0;
+}
 .qt-list .list-heading .sort-icon.icn-expand {
   margin-top: -10px;
+  /*position: absolute;*/
+  /*right: 0;*/
 }
 .qt-list .invoice-table-head .sort-icon.icn-collapse {
   margin-top: -16px;
@@ -1642,6 +1648,7 @@ Devices tab
 .qt-product-list{
   padding: 0 0 1px 26px;
   cursor: auto;
+  text-align: center;
 }
 @-moz-document url-prefix() {
   .qt-product-list{
@@ -1663,7 +1670,7 @@ Devices tab
   text-overflow: ellipsis;
 }
 .qt-product-list>li>.col-2{
-  width: calc(100% - 897px);
+  width: calc(100% - 995px);
   color: #94a4b8;
 }
 /*.qt-product-list>li>.col-2 .icn-description{
@@ -1717,15 +1724,16 @@ Devices tab
   .qt-product-list>li>.col-1{
     height: 18px;
     width: 114px;
+    padding-right: 15px;
   }
   .qt-product-list>li>.col-2{
-    width: calc(100% - 617px);
+    width: calc(100% - 675px);
   }
   .qt-product-list>li>.col-3{
     width: 164px;
   }
   .qt-product-list>li>.col-4{
-    width: 75px;
+    width: 85px;
   }
   .qt-product-list>li>.col-5{
     width: 86px;
