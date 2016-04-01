@@ -23,7 +23,7 @@
                 defaultDate: 'now',
                 ignoreReadonly: true
               }, dp,
-              firstDate = '',
+              enabledDates = [],
               lastDate = '',
               year = '';
 
@@ -40,16 +40,18 @@
             }
 
             if (scope.period) {
-              options.enabledDates = getEnabledDates(scope.minDate, scope.period);
-              year = new Date(scope.minDate).getFullYear();
+              enabledDates = getEnabledDates(scope.minDate, scope.period);
+              enabledDates.unshift(scope.minDate);
+              lastDate = enabledDates[enabledDates.length - 1];
+              options.enabledDates = enabledDates;
 
-              element.bind('dp.update', function (e) {
+                element.bind('dp.update', function (e) {
                 var data = dp.data("DateTimePicker"),
                   minDate = new Date(scope.minDate);
 
                 if (e.viewDate._d.getMonth() === minDate.getMonth() &&
                   e.viewDate._d.getFullYear() === minDate.getFullYear()) {
-                  options.minDate = scope.minDate;
+                  options.minDate = minDate;
                 } else {
                   options.minDate = false;
                 }
@@ -57,23 +59,17 @@
                 dp = element.datetimepicker(options);
 
                 if (scope.period === 'Yearly') {
-                  if (e.viewDate._d.getMonth() === minDate.getMonth()) {
-                    if (e.viewDate._d.getFullYear() === year + 1) {
-                      year++;
-                      data.enabledDates(getEnabledDates(new Date(year, minDate.getMonth(), minDate.getDate()),
-                        scope.period));
-                    } else if (e.viewDate._d.getFullYear() === year - 1) {
-                      data.enabledDates(getEnabledDates(new Date(year, minDate.getMonth(), minDate.getDate()),
-                        scope.period, true));
-                      year--;
-                    }
+                  lastDate = new Date(lastDate);
+                  var nextYear = lastDate.getFullYear() + 1;
+                  if (e.viewDate._d.getMonth() === minDate.getMonth() && e.viewDate._d.getFullYear() === nextYear) {
+                    enabledDates.push(new Date(lastDate.setFullYear(nextYear)));
+                    lastDate = enabledDates[enabledDates.length - 1];
+                    data.enabledDates(enabledDates);
                   }
                 } else {
-                  if (e.viewDate._d.getMonth() === new Date(lastDate).getMonth()) {
-                    data.enabledDates(getEnabledDates(lastDate, scope.period));
-                  } else {
-                    data.enabledDates(getEnabledDates(firstDate, scope.period, true));
-                  }
+                  enabledDates = enabledDates.concat(getEnabledDates(lastDate, scope.period));
+                  lastDate = enabledDates[enabledDates.length - 1];
+                  data.enabledDates(enabledDates);
                 }
               });
             }
@@ -92,26 +88,27 @@
             });
 
             element.bind('dp.hide', function (e) {
-              dp.data("DateTimePicker").enabledDates(getEnabledDates(scope.minDate, scope.period));
-              year = new Date(scope.minDate).getFullYear();
+              enabledDates = getEnabledDates(scope.minDate, scope.period);
+              enabledDates.unshift(scope.minDate);
+              lastDate = enabledDates[enabledDates.length - 1];
+              dp.data("DateTimePicker").enabledDates(enabledDates);
             });
 
-            function getEnabledDates(start, period, back) {
-              var dates = [$filter('date')(start, 'd MMM yyyy')],
+            function getEnabledDates(start, period) {
+              var dates = [],
                 date = new Date(start),
-                startMonth = date.getMonth() + (back ? -1 : 0);
+                startMonth = date.getMonth(),
+                parsedPeriod = parseInt(period);
 
-              if (startMonth < 0) startMonth = 11;
-
-              if (back && angular.isNumber(period)) {
-                period = -period;
+              if (parsedPeriod) {
+                period = parsedPeriod;
               }
 
               if (period === 'Monthly') {
-                date.setMonth(date.getMonth() + (back ? -1 : 1));
+                date.setMonth(date.getMonth() + 1);
                 dates.push($filter('date')(date, 'd MMM yyyy'));
               } else if (period === 'Yearly') {
-                date.setFullYear(date.getFullYear() + (back ? -1 : 1));
+                date.setFullYear(date.getFullYear() + 1);
                 dates.push($filter('date')(date, 'd MMM yyyy'));
               } else {
                 do {
@@ -120,12 +117,7 @@
                 } while (startMonth === date.getMonth());
               }
 
-              if (back) {
-                dates.reverse();
-              }
-
-              firstDate = back ? dates[1] : dates[0];
-              lastDate = dates.pop();
+              lastDate = dates[dates.length - 1];
               return dates;
             }
           }
