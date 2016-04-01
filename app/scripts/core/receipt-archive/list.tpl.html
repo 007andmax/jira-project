@@ -15,7 +15,6 @@
 
       <div class="col-1">
         <div class="checkbox-caption">{{ invoice.number }}</div>
-        <span class="label label-light" ng-show="invoice.invoicesCount">{{ invoice.invoicesCount }}</span>
       </div>
 
       <div class="col-2">{{ company.name }}</div>
@@ -26,12 +25,6 @@
       </div>
 
       <div class="col-5">{{ invoice.sum | currency:'$' :2 }}</div>
-
-      <i class="icn-sm persistent-tooltip" ng-show="invoice.recurring"
-         ng-class="{'icn-recurring-monthly': invoice.frequency === 'MONTHLY',
-                           'icn-recurring-yearly': invoice.frequency === 'YEARLY',
-                           'icn-recurring-weekly': invoice.frequency === 'WEEKLY'}"
-         tooltip-placement="top" tooltip="Recurring: {{ invoice.frequency }}" tooltip-append-to-body="true"></i>
     </li>
 
   </ul>
