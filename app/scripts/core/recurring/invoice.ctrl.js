@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.recurring.invoiceCtrl',
-    ['$scope', 'CompaniesService', 'RecurringService',
-      function ($scope, CompaniesService, RecurringService) {
+    ['$scope', 'CompaniesService', 'RecurringService', '$timeout',
+      function ($scope, CompaniesService, RecurringService, $timeout) {
 
         $scope.disabledDelete = false;
 
@@ -18,9 +18,7 @@
 
         $scope.deleteRecurringInvoice = function () {
           $scope.disabledDelete = true;
-          RecurringService.deleteRecurringInvoice($scope.invoice.id, function(){
-            $scope.disabledDelete = false;
-          });
+          RecurringService.deleteRecurringInvoice($scope.invoice.id);
         };
 
         function getArrayExpenses() {

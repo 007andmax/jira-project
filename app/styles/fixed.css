@@ -70,7 +70,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-  width: calc(100% - 897px);
+  width: calc(100% - 995px);
   color: #94a4b8;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -104,7 +104,9 @@ body.non-body-scroll::-webkit-scrollbar {
 .default-ctgr-prdcs .qt-product-list > li > .intermediate-parent-elem > .col-4 {
   width: 70px;
 }
-
+.qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox{
+  left: 50px;
+}
 .qt-product-list > li > .intermediate-parent-elem > .col-4 {
   width: 125px;
   height: 20px;
@@ -159,9 +161,11 @@ body.non-body-scroll::-webkit-scrollbar {
     height: 18px;
     width: 114px;
   }
-
+  .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox{
+    left: 30px;
+  }
   .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-    width: calc(100% - 617px);
+    width: calc(100% - 675px);
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-3 {
@@ -169,7 +173,7 @@ body.non-body-scroll::-webkit-scrollbar {
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-4 {
-    width: 75px;
+    width: 85px;
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-5 {
