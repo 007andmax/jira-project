@@ -110,7 +110,7 @@
             <span>End Date</span>
             <input type="text" placeholder="../../.." ng-if="reInitEndDate" readonly ng-change="changeEndDate()"
                    custom-disabled="{{ disabledEndAndNum }}" ng-model="editInvoice.endDate"
-                   qt-data-time-picker
+                   date-time-picker-with-period
                    default-date="editInvoice.endDate" min-date="minEndDate" period="paramInvocie.repeatingInvoice">
 
             <i class="icn-sm icn-remove-token"

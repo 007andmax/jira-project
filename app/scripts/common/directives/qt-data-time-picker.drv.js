@@ -3,8 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtDataTimePicker',
-    [
-      '$timeout', '$filter',
+    ['$timeout', '$filter',
       function ($timeout, $filter) {
         return {
           restrict: 'A',
@@ -12,20 +11,16 @@
           scope: {
             minDate: '=',
             maxDate: '=',
-            period: '=',
             defaultDate: '='
           },
           link: function (scope, element, attrs, ctrl) {
 
             var options = {
-                keepOpen: true,
-                format: 'DD MMM YYYY',
-                defaultDate: 'now',
-                ignoreReadonly: true
-              }, dp,
-              enabledDates = [],
-              lastDate = '',
-              year = '';
+              keepOpen: true,
+              format: 'DD MMM YYYY',
+              defaultDate: 'now',
+              ignoreReadonly: true
+            };
 
             if (scope.minDate) {
               options.minDate = scope.minDate;
@@ -39,43 +34,8 @@
               options.defaultDate = scope.defaultDate;
             }
 
-            if (scope.period) {
-              enabledDates = getEnabledDates(scope.minDate, scope.period);
-              enabledDates.unshift(scope.minDate);
-              lastDate = enabledDates[enabledDates.length - 1];
-              options.enabledDates = enabledDates;
-
-                element.bind('dp.update', function (e) {
-                var data = dp.data("DateTimePicker"),
-                  minDate = new Date(scope.minDate);
-
-                if (e.viewDate._d.getMonth() === minDate.getMonth() &&
-                  e.viewDate._d.getFullYear() === minDate.getFullYear()) {
-                  options.minDate = minDate;
-                } else {
-                  options.minDate = false;
-                }
-
-                dp = element.datetimepicker(options);
-
-                if (scope.period === 'Yearly') {
-                  lastDate = new Date(lastDate);
-                  var nextYear = lastDate.getFullYear() + 1;
-                  if (e.viewDate._d.getMonth() === minDate.getMonth() && e.viewDate._d.getFullYear() === nextYear) {
-                    enabledDates.push(new Date(lastDate.setFullYear(nextYear)));
-                    lastDate = enabledDates[enabledDates.length - 1];
-                    data.enabledDates(enabledDates);
-                  }
-                } else {
-                  enabledDates = enabledDates.concat(getEnabledDates(lastDate, scope.period));
-                  lastDate = enabledDates[enabledDates.length - 1];
-                  data.enabledDates(enabledDates);
-                }
-              });
-            }
-
             $timeout(function () {
-              dp = element.datetimepicker(options);
+              element.datetimepicker(options);
             }, 0);
 
             //element.on('shown.bs.dropdown', function(){
@@ -84,44 +44,10 @@
             //});
 
             element.bind('dp.change', function (e) {
-              ctrl.$setViewValue(e.date._d);
+              ctrl.$setViewValue(e.date._d)
             });
 
-            element.bind('dp.hide', function (e) {
-              enabledDates = getEnabledDates(scope.minDate, scope.period);
-              enabledDates.unshift(scope.minDate);
-              lastDate = enabledDates[enabledDates.length - 1];
-              dp.data("DateTimePicker").enabledDates(enabledDates);
-            });
-
-            function getEnabledDates(start, period) {
-              var dates = [],
-                date = new Date(start),
-                startMonth = date.getMonth(),
-                parsedPeriod = parseInt(period);
-
-              if (parsedPeriod) {
-                period = parsedPeriod;
-              }
-
-              if (period === 'Monthly') {
-                date.setMonth(date.getMonth() + 1);
-                dates.push($filter('date')(date, 'd MMM yyyy'));
-              } else if (period === 'Yearly') {
-                date.setFullYear(date.getFullYear() + 1);
-                dates.push($filter('date')(date, 'd MMM yyyy'));
-              } else {
-                do {
-                  date.setDate(date.getDate() + period);
-                  dates.push($filter('date')(date, 'd MMM yyyy'));
-                } while (startMonth === date.getMonth());
-              }
-
-              lastDate = dates[dates.length - 1];
-              return dates;
-            }
           }
         }
-      }
-    ]);
+      }]);
 })();
