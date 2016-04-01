@@ -3,25 +3,13 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceExpensesCtrl',
-    ['$scope', 'TaxRatesService',
-      function ($scope, TaxRatesService) {
-
-        var taxRatesCoef = 0;
+    ['$scope',
+      function ($scope) {
 
         $scope.openTab = 'product';
         $scope.subtotal = 0;
         $scope.total = 0;
         $scope.tax = 0;
-
-        TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
-          var taxRatesCopy = angular.copy(resp);
-
-          if (taxRatesCopy && taxRatesCopy.length > 0) {
-            for (var i = 0, len = taxRatesCopy.length; i < len; i++) {
-              taxRatesCoef += (taxRatesCopy[i].rate / 100);
-            }
-          }
-        });
 
         $scope.addProduct = function (form) {
           if ($scope.openTab !== 'product') {
@@ -59,9 +47,7 @@
 
         $scope.$watch('editInvoice.products', calculateTotal, true);
         $scope.$watch('editInvoice.services', calculateTotal, true);
-        $scope.$watch(function(){
-          return taxRatesCoef
-        }, calculateTotal);
+        $scope.$watch('taxRatesCoef', calculateTotal);
 
         function calculateTotal() {
           var subtotal = 0;
@@ -74,7 +60,7 @@
               subtotal += +product.quantity * +product.item.sale;
 
               if (product.item.taxable) {
-                tax += (+product.quantity * +product.item.sale) * taxRatesCoef;
+                tax += (+product.quantity * +product.item.sale) * $scope.taxRatesCoef;
               }
             }
           }
@@ -86,7 +72,7 @@
               subtotal += service.item.rate * (service.quantity / 60);
 
               if (service.item.taxable) {
-                tax += (service.item.rate * (service.quantity / 60)) * taxRatesCoef;
+                tax += (service.item.rate * (service.quantity / 60)) * $scope.taxRatesCoef;
               }
             }
           }

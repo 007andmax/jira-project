@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
     ['$scope', 'RecurringService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
-      'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService',
+      'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'TaxRatesService',
       function ($scope, RecurringService, BillableService, CompaniesService, ServicesService, $filter,
-                ProductsService, EmailSettingsService, $timeout, TicketsService) {
+                ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService) {
 
         var day = 1000 * 60 * 60 * 24;
         var isEditOrderLoad;
@@ -19,6 +19,7 @@
           YEARLY: 'Year'
         };
 
+        $scope.taxRatesCoef = 0;
         $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Month)?(Year)?$/;
         $scope.numToGeneratePattern = /^\d{0,3}$/;
         $scope.savedRepeatingInvoice = '';
@@ -147,6 +148,8 @@
           if (!company) {
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
+            $scope.taxRatesCoef = 0;
+
             for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
               if ($scope.editInvoice.services[i].type === 'service') {
                 delete $scope.editInvoice.services[i].item;
@@ -159,6 +162,17 @@
           $scope.editInvoice.company = {
             id: company.id
           };
+
+          TaxRatesService.getAllByCompany(company.id, $scope, function (resp) {
+            var taxRatesCopy = angular.copy(resp);
+            $scope.taxRatesCoef = 0;
+
+            if (taxRatesCopy && taxRatesCopy.length > 0) {
+              for (var i = 0, len = taxRatesCopy.length; i < len; i++) {
+                $scope.taxRatesCoef += (taxRatesCopy[i].rate / 100);
+              }
+            }
+          });
 
           $scope.companyServices = ServicesService.getAllByCompany($scope, company.id);
         };
