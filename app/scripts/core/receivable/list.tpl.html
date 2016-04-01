@@ -19,12 +19,11 @@
         <label class="control checkbox pull-left">
           <input type="checkbox"
                  ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
-                 ng-model="invoiceToSent.invoices[invoice.id]">
+                 ng-model="invoiceToSent.invoices[invoice.number]">
           <span class="control-indicator"></span>
         </label>
 
         <div class="checkbox-caption">{{ invoiceProperty('number') }}</div>
-        <span class="label label-light">{{ invoice.isRecurring ? invoice.invoices.length : '' }}</span>
 
       </div>
 

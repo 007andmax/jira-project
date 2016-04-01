@@ -31,7 +31,7 @@
 
         if ($stateParams.mode === 'list') {
           for (var i = 0; i < invoiceList.length; i++) {
-            if ($scope.invoiceToSent.invoices[invoiceList[i].id]) {
+            if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
               chosenInvoices.push(invoiceList[i])
             }
           }
@@ -39,7 +39,7 @@
           angular.forEach($scope.invoiceToSent, function (value, key) {
             if (this[key].invoices !== undefined) {
               for (var i = 0; i < invoiceList.length; i++) {
-                if (this[key].invoices[invoiceList[i].id]) {
+                if (this[key].invoices[invoiceList[i].number]) {
                   chosenInvoices.push(invoiceList[i])
                 }
               }
