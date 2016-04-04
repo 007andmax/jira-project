@@ -29,18 +29,17 @@
 
               if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
 
-                var currentContactId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId;
+                var currentBillToId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId;
 
                 for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
-                  if (currentContactId === scope.currentInvoice.billTo[i].id) {
+                  if (currentBillToId === scope.currentInvoice.billTo[i].id) {
                     scope.currentBillTo = scope.currentInvoice.billTo[i];
                   }
                 }
               } else {
 
                 for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
-
-                  if (i === 0 || scope.currentBillTo.priority > scope.currentInvoice.billTo[i].priority) {
+                  if (scope.currentInvoice.billTo[i].isPrimary) {
                     scope.currentBillTo = scope.currentInvoice.billTo[i];
                     scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
                   }

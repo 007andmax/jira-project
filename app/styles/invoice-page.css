@@ -28,7 +28,7 @@
 }
 
 .invoice-page .header .company-info {
-  width: 174px;
+  width: 220px;
   text-align: right;
   float: right;
   line-height: 20px;
@@ -65,8 +65,8 @@
 .invoice-page .sub-header {
   float: left;
   width: 790px;
-  padding-top: 40px;
-  padding-bottom: 54px;
+  padding-top: 15px;
+  padding-bottom: 25px;
   color: #4c5c6f;
   page-break-inside: avoid;
 }
@@ -167,7 +167,7 @@
 .invoice-page .inv-ticket-header {
   float: left;
   width: 790px;
-  padding-top: 56px;
+  padding-top: 35px;
   border-top: 2px solid #f1f5fa;
   page-break-inside: avoid;
 }
@@ -249,12 +249,24 @@
 }
 
 .invoice-page .ticket-amount {
-  float: left;
-  width: 788px;
-  border: 1px solid #e7ecf2;
+  float: right;
   margin-top: 24px;
-  margin-bottom: 60px;
+  margin-bottom: 5px;
   page-break-inside: avoid;
+}
+
+.invoice-page .ticket-amount .label {
+  color: #1f2a37;
+  font-size: 15px;
+  line-height: 12px;
+  text-transform: uppercase;
+  font-weight: initial;
+}
+
+.invoice-page .ticket-amount .value {
+  color: #1586e4;
+  font-size: 15px;
+  margin-top: 6px;
 }
 
 .invoice-page .ticket-amount .updates {
@@ -286,16 +298,21 @@
 .invoice-page .updates .plus {
   font-size: 36px;
   float: left;
-  margin-left: 60px;
-  margin-right: 60px;
+  margin-left: 30px;
+  margin-right: 30px;
   margin-top: 6px;
   color: #1f2a37;
+}
+
+.invoice-page .ticket-amount.inv-total {
+  border: 1px solid #e7ecf2;
+  margin-top: 24px;
 }
 
 .invoice-page .ticket-amount .total-amount {
   float: right;
   background-color: #e7ecf2;
-  padding: 18px 20px 16px;
+  padding: 18px 20px 25px;
   width: 198px;
 }
 
@@ -405,4 +422,10 @@
 .invoice-page .footer .terms b {
   color: #1f2a37;
   text-transform: uppercase;
+}
+
+.invoice-page .header .invoice-label {
+  height: 35px;
+  font-size: 45px;
+  font-weight: 500;
 }

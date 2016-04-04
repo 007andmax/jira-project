@@ -713,12 +713,12 @@
 
             <label class="control-label"
                    ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'invoiceConditions')}">
-              terms &amp; conditions of invoice
+              Memo of invoice
             </label>
 
             <div ng-messages="invoiceAndTicketForm.invoiceConditions.$error"
                  ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'invoiceConditions')}">
-              <label class="control-label" ng-message="required" for="">terms &amp; conditions field cannot be left
+              <label class="control-label" ng-message="required" for="">Memo field cannot be left
                 empty.</label>
             </div>
 
