@@ -16,7 +16,8 @@
         });
 
         $scope.deleteProduct = function () {
-          ProductsService.deleteProduct($scope.product.versionedId.id)
+          ProductsService.deleteProduct($scope.product.versionedId.id);
+          $rootScope.$broadcast('productDeleted', $scope.product.versionedId.id);
         };
 
         $scope.moveToCategory = function (category) {

@@ -12,7 +12,11 @@
              custom-style="{'max-height': '200px', 'width': '269px', 'overflow-y': 'auto'}">
 
       <span class="input-group-addon-search">
-        <div typeahead-input-icon="item" style="position: absolute;top: 13px;right: 13px;"></div>
+        <i class="icn-sm icn-search form-control-top-search-icn disabled" ng-hide="choosedCategory"></i>
+
+        <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
+           ng-show="choosedCategory" ng-click="clearInput()"
+           tooltip="clear" tooltip-placement="top"></i>
       </span>
 
     </div>

@@ -8,14 +8,21 @@
       function ($scope, $rootScope, ProductsService) {
 
         $scope.searchValue = '';
-        $scope.chooseProduct = false;
+        $scope.choosedCategory = false;
         $scope.shownCategories = ProductsService.getFullListForAutocomplete();
+
+        $scope.clearInput = function () {
+          $scope.searchValue = '';
+          $scope.choosedCategory = false;
+          $rootScope.$broadcast('showCategory');
+        };
 
         $scope.onSelect = function (val) {
           if (!val || typeof val === 'string') {
             return;
           }
 
+          $scope.choosedCategory = true;
           if (val.versionedId) {
             $rootScope.$broadcast(val.categoryId + '-showProduct', val.versionedId.id);
           } else {
@@ -23,10 +30,18 @@
           }
         };
 
-        $scope.$watch('searchValue', function (searchValue) {
-          if (!searchValue || typeof searchValue === 'string') {
-            $rootScope.$broadcast('showCategory');
-          }
+        $scope.$on('productDeleted', function (event, id) {
+          $scope.clearInput();
+          $scope.shownCategories = $scope.shownCategories.filter(function (item) {
+            if (item.id !== id) {
+              return item;
+            }
+          })
+        });
+
+        $scope.$on('productAdded', function () {
+          $scope.parsed = false;
+          $scope.shownCategories = ProductsService.getFullListForAutocomplete();
         });
 
         $scope.$watch('shownCategories.length', parseProductCategories);
@@ -45,6 +60,7 @@
             for (var index in category.products) {
               var product = category.products[index];
               result.push({
+                id: product.versionedId.id,
                 categoryId: category.id,
                 name: product.description,
                 versionedId: product.versionedId,

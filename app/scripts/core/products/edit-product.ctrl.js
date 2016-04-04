@@ -52,6 +52,7 @@
 
             ProductsService.saveProduct($scope.editProduct, function () {
               $rootScope.$broadcast('cancelEditForm', 'isProductCreation');
+              $rootScope.$broadcast('productAdded');
               $scope.disabledSaveChangeButton = false;
             });
           } else {

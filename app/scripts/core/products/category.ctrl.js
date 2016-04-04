@@ -33,7 +33,9 @@
 
           if ($scope.showProducts) {
             $scope.$broadcast('toggleProducts');
-            $scope.showProducts = false;
+            $timeout(function () {
+              $scope.showProducts = false;
+            }, 200);
           } else if ($scope.category.productsAmount > 0 || $scope.showCreateProduct) {
             $scope.showProducts = true;
           }
