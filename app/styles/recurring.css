@@ -328,6 +328,7 @@ li.invoice-table.danger-order{
   display: block;
   width: 100%;
   text-align: right;
+  margin-right: 33px;
 }
 .invoice-update .update-content .ticket-add-amount.has-error span.control-label{
   float: left;
@@ -362,11 +363,14 @@ span.control-label.error-required {
   padding: 0;
 }
 
-.invoice-table .ticket-add-amount {
+.invoice-table.expanded  .ticket-add-amount {
   width: 100%;
   text-align: right;
   margin-right: 110px;
   margin-bottom: 5px;
+}
+.invoice-table.expanded .invoice-form-edit .ticket-add-amount {
+  margin-right: 31px;
 }
 .invoice-table .table-wrapper .table-content{
   width: calc(100% - 200px);
@@ -375,6 +379,13 @@ span.control-label.error-required {
 .invoice-table .table-invoice-item div.popover-inner .popover-content{
   padding: 0;
   width: 100%;
+}
+.edit-invoice-form .dropdown-menu{
+  margin-left: 0 !important;
+}
+.edit-invoice-form .dropdown-menu-right{
+  left: auto;
+  right: 0;
 }
 .invoice-table-head .invoice-table-head-item div.no-invoice{
   width: 6%;

@@ -89,7 +89,17 @@ body.non-body-scroll::-webkit-scrollbar {
 .products-content .default-ctgr-prdcs {
   margin-bottom: 160px;
 }
-
+.end-date .bootstrap-datetimepicker-widget .datepicker .table-condensed .day:after{
+  border: 2px solid #E53935;
+  border-radius: 0;
+  -webkit-box-shadow: 2px 2px 5px 2px rgba(107,107,107,0.75);
+  -moz-box-shadow: 2px 2px 5px 2px rgba(107,107,107,0.75);
+  box-shadow: 2px 2px 5px 2px rgba(107,107,107,0.75);
+}
+.end-date .bootstrap-datetimepicker-widget .datepicker .table-condensed .day.disabled:after, .bootstrap-datetimepicker-widget .datepicker .table-condensed .day.active:after{
+  border: none;
+  box-shadow: none;
+}
 .products-content .default-ctgr-prdcs .dropdown-menu.move-prod {
   width: 200px;
   max-height: 150px;

@@ -83,6 +83,12 @@
             ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
             ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
 
+            for (var i = 0, len = place.address_components.length; i < len; i++) {
+              if (place.address_components[i].types.indexOf('country') !== -1) {
+                ngModelCtrl.$viewValue.country = place.address_components[i].long_name;
+              }
+            }
+
             $http.get('https://maps.googleapis.com/maps/api/timezone/json?location= ' +
                 ngModelCtrl.$viewValue.locationLat + ',' + ngModelCtrl.$viewValue.locationLng +
                 '&timestamp=0&key=AIzaSyCJ40cLJD6gFdZ6j6HXf1D9oh8AK_BlW-Y')
