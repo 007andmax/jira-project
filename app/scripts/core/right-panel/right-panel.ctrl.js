@@ -30,7 +30,9 @@
               });
 
               RightPanelService.getClientCompaniesGroupedData(function (resp) {
-                $scope.clientCompaniesGroupedData = resp;
+                $scope.clientCompaniesGroupedData = resp.filter(function (item) {
+                  if (item.company.name !== 'Unassigned') return item;
+                });
               });
 
             } else if (companyId !== '') {

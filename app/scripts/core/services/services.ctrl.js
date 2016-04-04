@@ -7,7 +7,10 @@
       function ($scope, ServicesService, Utils, CompaniesService) {
 
         $scope.checkedServices = {};
-        $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companies = CompaniesService.getClientCompanies().filter(function (item) {
+          if (item.name !== 'Unassigned') return item;
+        });
+
         $scope.servicesData = ServicesService.getServicesData($scope, false);
 
         $scope.orderServices = {

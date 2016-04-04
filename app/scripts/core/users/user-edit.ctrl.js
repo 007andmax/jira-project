@@ -8,7 +8,9 @@
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
 
-        $scope.clientCompanies = CompaniesService.getClientCompanies();
+        $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
+          if (item.name !== 'Unassigned') return item;
+        });
 
         if (!$scope.clientCompanies || $scope.clientCompanies.length < 1) {
           alert('Create at list one company before adding users');
