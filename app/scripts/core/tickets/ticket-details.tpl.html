@@ -136,22 +136,22 @@
                 </div>
               </li>
 
-              <li ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)"
-                  class="dropdown-submenu left-align" stop-propagation="click">
+              <!--<li ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)"-->
+                  <!--class="dropdown-submenu left-align" stop-propagation="click">-->
 
-                <a tabindex="-1" href="javascript:void(0)" data-hover="dropdown">Label as...</a>
+                <!--<a tabindex="-1" href="javascript:void(0)" data-hover="dropdown">Label as...</a>-->
 
-                <div class="dropdown-submenu-wrapper" ng-if="showTicketTags">
+                <!--<div class="dropdown-submenu-wrapper" ng-if="showTicketTags">-->
 
-                  <ul class="dropdown-labels dropdown-menu"
-                      role="menu" stop-propagation="click"
-                      ng-controller="quicktech.core.tickets.ticketTagsCtrl"
-                      ng-init="ticketId = ticketDetails.id; ticketNumber = ticketDetails.number; ticketTagsUntilApply = ticketDetails.tags"
-                      ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
-                  </ul>
+                  <!--<ul class="dropdown-labels dropdown-menu"-->
+                      <!--role="menu" stop-propagation="click"-->
+                      <!--ng-controller="quicktech.core.tickets.ticketTagsCtrl"-->
+                      <!--ng-init="ticketId = ticketDetails.id; ticketNumber = ticketDetails.number; ticketTagsUntilApply = ticketDetails.tags"-->
+                      <!--ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">-->
+                  <!--</ul>-->
 
-                </div>
-              </li>
+                <!--</div>-->
+              <!--</li>-->
 
               <li
                 ng-show="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isChangeStatusToVisible(listType, currentUser.role)"

@@ -16,10 +16,9 @@
 
         $scope.filterAssignUser = function (item) {
 
-          var isCurrentUser = item.id === $scope.currentUser.id,
-            isAssignedUser = item.id === $scope.ticketAssignedUserId;
+          var isAssignedUser = item.id === $scope.ticketAssignedUserId;
 
-          if (isCurrentUser || isAssignedUser) {
+          if (isAssignedUser) {
             return false;
           }
 

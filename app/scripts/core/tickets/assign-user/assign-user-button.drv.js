@@ -2,8 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.tickets").directive('assignUserButton', ['$rootScope',
-    function ($rootScope) {
+  angular.module("quicktech.core.tickets").directive('assignUserButton', function () {
       return {
         restrict: 'A',
         templateUrl: '/html/scripts/core/tickets/assign-user/assign-user.tpl.html',
@@ -15,12 +14,8 @@
           currentUser: '=aubCurrentUser',
           usersCurrentCompany: "=users",
           isBulkOperation: '=aubIsBulkOperation'
-        },
-        link: function (scope) {
-          scope.getUserName = $rootScope.getUserName;
-          scope.getUserAvatarUrl = $rootScope.getUserAvatarUrl;
         }
       };
-    }]);
+    });
 
 })();
