@@ -10,6 +10,7 @@
         $scope.newCategory = {};
         $scope.categories = ProductsService.getCategories($scope);
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
+        $scope.showCategory = '';
 
         $scope.status = {
           isopen: false

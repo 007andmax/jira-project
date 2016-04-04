@@ -33,10 +33,7 @@
 
           if ($scope.showProducts) {
             $scope.$broadcast('toggleProducts');
-
-            $timeout(function () {
-              $scope.showProducts = false;
-            }, 200);
+            $scope.showProducts = false;
           } else if ($scope.category.productsAmount > 0 || $scope.showCreateProduct) {
             $scope.showProducts = true;
           }
@@ -74,6 +71,20 @@
           }
 
           $scope.setHighlightProductId(productId);
+        });
+
+        $scope.$on('showCategory', function (event, categoryId) {
+          if (categoryId) {
+            $scope.showCategory = categoryId;
+            if (!$scope.showProducts) {
+              $scope.toggleProducts();
+            }
+          } else {
+            $scope.showCategory = '';
+            if ($scope.showProducts) {
+              $scope.toggleProducts();
+            }
+          }
         });
 
       }]);
