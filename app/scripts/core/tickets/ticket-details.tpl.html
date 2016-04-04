@@ -58,11 +58,10 @@
         <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
 
           <div ng-show="PermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status)"
-               class="btn btn-info btn-update pull-left has-tooltip"
-               tooltip="Update &amp; Close" tooltip-placement="top"
+               class="btn btn-lg btn-info btn-update pull-left"
                custom-disabled="{{ ticketDetails.status === 'COMPLETED' }}"
-               ng-click="updateAndCloseTicket()" style="width:54px;">
-            <i class="icn-sm icn-tick"></i>
+               ng-click="updateAndCloseTicket()">
+            Update &amp; Close
           </div>
 
           <div class="dropdown pull-left" dropdown
@@ -258,6 +257,11 @@
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
 
+      <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status)"
+           ng-include="'/html/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
+
+      <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
+
       <div class="ticket-updates clearfix">
 
         <div ng-if="listType !== 'unassigned' && ticketDetails.updates.length > 0"
@@ -273,13 +277,6 @@
               SHARED WITH {{ shares.length }}
             </span>
           </h4>
-
-          <div class="btn btn-primary pull-right btn-load-more has-tooltip"
-               tooltip="load more updates" tooltip-placement="top"
-               tooltip-append-to-body="true" ng-click="loadMoreUpdates();"
-               custom-disabled="{{ allUpdatesLoaded || ticketDetails.unloadedUpdates === 0 }}">
-            <i class="icn-load-update icn-sm"></i>
-          </div>
 
           <div class="clearfix"></div>
 
@@ -510,14 +507,15 @@
               </div>
             </div>
           </div>
+
+          <div class="btn btn-lg btn-info btn-load-more"
+               tooltip-append-to-body="true" ng-click="loadMoreUpdates();"
+               custom-disabled="{{ allUpdatesLoaded || ticketDetails.unloadedUpdates === 0 }}">
+            Load More Updates
+          </div>
         </div>
       </div>
     </div>
-
-    <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status)"
-         ng-include="'/html/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
-
-    <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
 
   </div>
 </div>

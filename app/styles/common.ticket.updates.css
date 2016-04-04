@@ -33,24 +33,10 @@
 .ticket-update-header h4 .label:hover{
   border-radius: 3px;
 }
-.ticket-update-header .btn-load-more{
-  min-width: 52px;
-}
-.ticket-update-header .btn-load-more.loading, .ticket-update-header .btn-load-more.loading:hover {
-  padding: 7px 20px;
-  font-weight: bold;
-  color: #b2becd !important;
-  background-color: #e7ecf2;
-  border-color: #e7ecf2;
-  cursor: default;
-  border-radius: 19px;
-  pointer-events:none;
-}
-.btn-load-more.loading i{
-  position: static;
-  display: inline-block;
-  margin-right: 10px;
-  vertical-align: -1px;
+.ticket-updates .btn-load-more{
+  margin: 20px auto;
+  display: block;
+  width: 200px;
 }
 .ticket-update-header .shared-users-list{
   margin: 10px 0 0;

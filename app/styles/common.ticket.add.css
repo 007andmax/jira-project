@@ -1,7 +1,7 @@
 .ticket-post-update-wrapper{
-    border-top: 1px solid #e7ecf2;
-    margin: 0 30px;
-    padding-bottom: 264px;
+    border-bottom: 1px solid #e7ecf2;
+    margin: 20px 30px;
+    padding-bottom: 30px;
     position: relative;
 }
 .opened-ticket-list .ticket-post-update-wrapper {
