@@ -4640,7 +4640,7 @@ tbody.collapse.in {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 25px;
+  /*left: 25px;*/
   z-index: 1000;
   display: none;
   float: left;
@@ -4687,7 +4687,7 @@ tbody.collapse.in {
 .hit-area ~ .dropdown-menu {
   left: auto;
   margin: 4px 0 0;
-  right: -30px;
+  /*right: -30px;*/
   top: 15px;
 }
 .hit-area ~ .dropdown-menu.pull-right {
