@@ -27,6 +27,12 @@
   float: left;
 }
 
+.invoice-page .header .tech-company-name {
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 500;
+}
+
 .invoice-page .header .company-info {
   width: 220px;
   text-align: right;
