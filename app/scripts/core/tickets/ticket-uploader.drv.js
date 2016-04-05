@@ -3,7 +3,14 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
-    ['$modal', 'FilesService', '$rootScope', 'TicketsService', '$stateParams', '$timeout', 'quicktech.common.services.UserNotificationService',
+    [
+      '$modal',
+      'FilesService',
+      '$rootScope',
+      'TicketsService',
+      '$stateParams',
+      '$timeout',
+      'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.SharedStateService',
       function ($modal, FilesService, $rootScope, TicketsService, $stateParams, $timeout, UserNotificationService, SharedStateService) {
 
@@ -19,14 +26,13 @@
 
             scope.$watch('ticketsHeaderState.searchFilter', function (searchFilter) {
 
-                if ($stateParams.listType.toLowerCase() === 'preview') {
-                  $document.off('scroll');
-                  return;
-                }
+              if ($stateParams.listType.toLowerCase() === 'preview') {
+                $document.off('scroll');
+                return;
+              }
 
-                getTicketsList(searchFilter);
-              }, true
-            );
+              getTicketsList(searchFilter);
+            }, true);
 
             function getTicketsList(params) {
 
@@ -211,7 +217,8 @@
 
           }
         };
-      }])
+      }
+    ])
   ;
 
 })

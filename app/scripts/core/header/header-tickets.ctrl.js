@@ -40,6 +40,8 @@
           1: 'In Progress',
           2: 'Completed'
         };
+        $scope.filter = {};
+        $scope.filter.searchItem = '';
 
         $scope.search = function (value) {
 
@@ -91,7 +93,7 @@
 
           $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
 
-          $scope.searchItem = undefined;
+          $scope.filter.searchItem = '';
           setSearchParamsDefault();
           $scope.sharedState.searchFilter = {};
 
@@ -107,6 +109,12 @@
           $scope.listType = filter;
           $scope.headerLabel = labels[filter];
 
+        });
+
+        $scope.$watch('filter.searchItem', function (value) {
+          if (!value) {
+            $scope.cancelSearch();
+          }
         });
 
         $scope.searchByParams = function () {
@@ -130,10 +138,12 @@
           if (item.type === 'USER') {
 
             $scope.sharedState.searchFilter.userId = item.value;
+            $scope.sharedState.searchFilter.companyId = '';
 
           } else if (item.type === 'COMPANY') {
 
             $scope.sharedState.searchFilter.companyId = item.value;
+            $scope.sharedState.searchFilter.userId = '';
 
           } else {
 
@@ -143,6 +153,7 @@
         };
 
         $scope.cancelSearch = function () {
+          $scope.filter.searchItem = '';
 
           if ($scope.sharedState.searchFilter.userId) {
 
