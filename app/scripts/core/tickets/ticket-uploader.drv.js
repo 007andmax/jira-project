@@ -3,15 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
-    [
-      '$modal',
-      'FilesService',
-      '$rootScope',
-      'TicketsService',
-      '$stateParams',
-      '$timeout',
-      'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.SharedStateService',
+    ['$modal', 'FilesService', '$rootScope', 'TicketsService', '$stateParams', '$timeout',
+      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
       function ($modal, FilesService, $rootScope, TicketsService, $stateParams, $timeout, UserNotificationService, SharedStateService) {
 
         return {
@@ -217,8 +210,7 @@
 
           }
         };
-      }
-    ])
+      }])
   ;
 
 })
