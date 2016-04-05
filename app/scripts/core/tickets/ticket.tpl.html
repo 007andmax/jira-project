@@ -16,8 +16,10 @@
          ng-style="{'width': 'calc(100% - ' +
           (PermissionsService.isTagsVisible(listType, currentUser.role) && ticket.tags.length ? ticket.tags.length * 12 + 60 : 60) + 'px)'}">
         {{ getUserName(user) }}
-        <span class="dot-sep"></span>
-        <span class="company-name">{{ company.name }}</span>
+        <span ng-if="company.name !== 'Unassigned'">
+          <span class="dot-sep"></span>
+          <span class="company-name">{{ company.name }}</span>
+        </span>
       </p>
 
       <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
@@ -104,9 +106,9 @@
             ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
 
           <!--<a href="javascript:void(0)" class="hit-area has-tooltip" dropdown-toogle-->
-             <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
-             <!--tooltip="Label as..." tooltip-placement="top" ng-click="setTicketTags()">-->
-            <!--<i class="icn-sm icn-label"></i>-->
+          <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+          <!--tooltip="Label as..." tooltip-placement="top" ng-click="setTicketTags()">-->
+          <!--<i class="icn-sm icn-label"></i>-->
           <!--</a>-->
 
           <ul class="dropdown-labels dropdown-menu dropdown-menu-custom"
@@ -186,7 +188,8 @@
         <li class="pull-left"
             ng-if="PermissionsService.isMoveIntoSpamVisible(listType, currentUser.role, ticket.reportedAsSpamAt,  ticket.markedAsSpamAt)">
           <a href="javascript:void(0)" class="hit-area has-tooltip"
-             tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam' : 'Mark As Spam' }}" tooltip-placement="top" ng-click="moveIntoSpam()">
+             tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam' : 'Mark As Spam' }}" tooltip-placement="top"
+             ng-click="moveIntoSpam()">
             <i class="icn-sm icn-report-spam"></i>
           </a>
         </li>
