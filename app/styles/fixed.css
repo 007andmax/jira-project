@@ -142,13 +142,15 @@ body.non-body-scroll::-webkit-scrollbar {
 @media only screen and (min-width: 2000px) {
   .qt-product-list > li > .intermediate-parent-elem > .col-1 {
     height: 18px;
-    width: 244px;
+    width: 184px;
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-    width: calc(100% - 1137px);
+    width: calc(100% - 1170px);
   }
-
+  .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox{
+    left: 80px;
+  }
   .qt-product-list > li > .intermediate-parent-elem > .col-3 {
     width: 294px;
   }
