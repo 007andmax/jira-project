@@ -12,7 +12,10 @@
 
     <div class="ticket-list-header clearfix">
 
-      <p class="pull-left text-muted ellipsis">{{ getUserName(user) }}
+      <p class="pull-left text-muted ellipsis"
+         ng-style="{'width': 'calc(100% - ' +
+          (PermissionsService.isTagsVisible(listType, currentUser.role) && ticket.tags.length ? ticket.tags.length * 12 + 60 : 60) + 'px)'}">
+        {{ getUserName(user) }}
         <span class="dot-sep"></span>
         <span class="company-name">{{ company.name }}</span>
       </p>
