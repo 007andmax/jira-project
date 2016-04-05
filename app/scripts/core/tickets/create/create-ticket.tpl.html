@@ -294,8 +294,7 @@
                 <input type="text" class="form-control has-dropdown" next-after-text-editor
                        ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
                        typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                       typeahead-min-length="0" ng-required="true" typeahead-editable="false"
-                       qt-typeahead-show-on-focus ng-trim="false"
+                       typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                        custom-style="{'max-height': '170px', 'overflow-y': 'auto'}">
 
                 <div typeahead-input-icon="ticketCompany, ticketCreatedUser"
@@ -313,12 +312,13 @@
               <label>Created for</label>
 
               <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
-                     ng-model="ticketCreatedUser" name="ticketCreatedUser"
-                     typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
+                     ng-model="ticketCreatedUser"
+                     typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCompany | filter: filterUserFullName($viewValue) | orderBy:'name'"
-                     qt-typeahead-show-on-focus ng-trim="false" ng-required="true"
-                     custom-disabled="{{ !ticketCompany }}"
+                     qt-typeahead-show-on-focus ng-trim="false"
                      custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
+
+              <input type="hidden" ng-model="ticket.createdUser.email" name="ticketCreatedUser" ng-required="true">
 
               <div typeahead-input-icon="ticketCreatedUser" style="position: absolute;top: 29px;right: 13px;"></div>
 

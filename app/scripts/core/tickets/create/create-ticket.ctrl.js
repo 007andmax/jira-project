@@ -8,6 +8,8 @@
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
                 UserNotificationService, sessionId, sessionTime, ServicesService, $timeout) {
 
+        var isNeedToDeleteUser = true;
+
         $scope.fileInfo = {quantityErrorFiles: 0};
         $scope.ticket = {priorityLevel: 'MEDIUM'};
         $scope.ticketAttachments = [];
@@ -18,7 +20,9 @@
         };
 
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        $scope.clientCompanies = CompaniesService.getClientCompanies();
+        $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
+          if (!item.isDefault) return item;
+        });
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
         if (sessionId) {
@@ -64,11 +68,12 @@
 
         $scope.$watch('ticketCompany', function () {
           if ($scope.ticketCompany) {
-            if ($scope.ticketCompany.name === 'Unassigned') {
-              $scope.ticketCreatedUser = UsersService.getUnassignedUser($scope.ticketCompany.id);
-            } else {
+
+            if(isNeedToDeleteUser){
               delete $scope.ticketCreatedUser;
             }
+
+            isNeedToDeleteUser = true;
 
             $scope.ticket.company = $scope.ticketCompany.id;
 
@@ -78,18 +83,34 @@
           } else {
             $scope.ticket.company = '';
             $scope.ticket.serviceExpenses = [{}];
+            $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
+              if (!item.isDefault) return item;
+            });
           }
         });
 
-        $scope.$watch('ticketCreatedUser', function () {
-          $scope.ticket.createdUser = $scope.ticketCreatedUser ? $scope.ticketCreatedUser.id : '';
+        $scope.$watch('ticketCreatedUser', function (val) {
+          if((val !== null) && (typeof val === 'object') && (val.id)){
+            $scope.ticket.createdUser = {
+              id: $scope.ticketCreatedUser.id,
+              email: $scope.ticketCreatedUser.primaryEmail
+            };
+            isNeedToDeleteUser = false;
+            $scope.ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
+          } else {
+
+            //TODO check pattern and unique tech users email
+
+            $scope.ticket.createdUser = {
+              email: val
+            };
+          }
+
         });
 
         $scope.$watch('ticketAssignTo', function () {
           $scope.ticket.assignedUser = $scope.ticketAssignTo ? $scope.ticketAssignTo.id : '';
         });
-
-        $scope.ticketCompany = CompaniesService.getUnassignedCompany();
 
         $scope.addAttachmentFiles = function (file) {
 
@@ -230,7 +251,7 @@
           function searchInUsers(item) {
 
             if (value && value.length > 0 && (value !== '[$empty$]')) {
-              var fullSearchFild = $scope.getUserName(item, true).toLowerCase();
+              var fullSearchFild = $scope.getUserName(item).toLowerCase() + ' ' + item.primaryEmail.toLowerCase();
 
               return fullSearchFild.indexOf(value.toLowerCase()) !== -1;
             }
