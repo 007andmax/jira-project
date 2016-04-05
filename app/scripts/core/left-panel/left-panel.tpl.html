@@ -36,9 +36,9 @@
         <li ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
             <i class="nav-icon icn-lg icn-unassigned"></i> Unassigned
-            <span class="badge" ng-show="ticketCounts.UNASSIGNED && (ticketCounts.UNASSIGNED > 0)">
-              {{ ticketCounts.UNASSIGNED }}
-            </span>
+            <!--<span class="badge" ng-show="ticketCounts.UNASSIGNED && (ticketCounts.UNASSIGNED > 0)">-->
+              <!--{{ ticketCounts.UNASSIGNED }}-->
+            <!--</span>-->
           </a>
         </li>
 
@@ -51,9 +51,9 @@
         <li ng-class="{active: $state.includes('tickets', {listType: 'shared'})}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'shared'})">
             <i class="nav-icon icn-lg icn-shared"></i> Shared
-            <span class="badge" ng-show="ticketCounts.SHARED && (ticketCounts.SHARED > 0)">
-              {{ ticketCounts.SHARED }}
-            </span>
+            <!--<span class="badge" ng-show="ticketCounts.SHARED && (ticketCounts.SHARED > 0)">-->
+              <!--{{ ticketCounts.SHARED }}-->
+            <!--</span>-->
           </a>
         </li>
 
@@ -169,9 +169,9 @@
     </nav>
 
 
-    <div ng-controller="quicktech.core.leftPanel.leftPanelTagsCtrl"
-         ng-if="PermissionsService.isShowLabelsOnLeftPanel(listType)"
-         ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-tags.tpl.html'"></div>
+    <!--<div ng-controller="quicktech.core.leftPanel.leftPanelTagsCtrl"-->
+         <!--ng-if="PermissionsService.isShowLabelsOnLeftPanel(listType)"-->
+         <!--ng-include="'/html/scripts/core/left-panel/left-panel-tags/left-panel-tags.tpl.html'"></div>-->
 
 
     <div class="clearfix divider"></div>
