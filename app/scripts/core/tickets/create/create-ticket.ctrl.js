@@ -3,15 +3,16 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
-    ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
+    [
+      '$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'ServicesService', '$timeout',
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
                 UserNotificationService, sessionId, sessionTime, ServicesService, $timeout) {
 
         var isNeedToDeleteUser = true;
 
-        $scope.fileInfo = {quantityErrorFiles: 0};
-        $scope.ticket = {priorityLevel: 'MEDIUM'};
+        $scope.fileInfo = { quantityErrorFiles: 0 };
+        $scope.ticket = { priorityLevel: 'MEDIUM' };
         $scope.ticketAttachments = [];
         $scope.ticketPriorityValue = {
           LOW: 'Low',
@@ -19,18 +20,23 @@
           HIGH: 'High'
         };
 
+        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (!item.isDefault) return item;
+          if (!item.isDefault) {
+            return item;
+          }
         });
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
         if (sessionId) {
 
           $scope.ticket.remoteSessionId = sessionId;
-          $scope.ticket.serviceExpenses = [{
-            quantity: (sessionTime * 60).toFixed()
-          }];
+          $scope.ticket.serviceExpenses = [
+            {
+              quantity: (sessionTime * 60).toFixed()
+            }
+          ];
           $scope.isShowService = true;
           $scope.maxServiceDate = new Date();
 
@@ -45,7 +51,7 @@
           $scope.addService = function (form) {
 
             if (form.$valid) {
-              $scope.ticket.serviceExpenses.push({item: {}});
+              $scope.ticket.serviceExpenses.push({ item: {} });
               $scope.triedToAddService = false;
 
             } else {
@@ -69,7 +75,7 @@
         $scope.$watch('ticketCompany', function () {
           if ($scope.ticketCompany) {
 
-            if(isNeedToDeleteUser){
+            if (isNeedToDeleteUser) {
               delete $scope.ticketCreatedUser;
             }
 
@@ -84,26 +90,38 @@
             $scope.ticket.company = '';
             $scope.ticket.serviceExpenses = [{}];
             $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
-              if (!item.isDefault) return item;
+              if (!item.isDefault) {
+                return item;
+              }
             });
           }
         });
 
         $scope.$watch('ticketCreatedUser', function (val) {
-          if((val !== null) && (typeof val === 'object') && (val.id)){
+          if ((val !== null) && (typeof val === 'object') && (val.id)) {
+            $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
+            $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
             $scope.ticket.createdUser = {
               id: $scope.ticketCreatedUser.id,
               email: $scope.ticketCreatedUser.primaryEmail
             };
             isNeedToDeleteUser = false;
             $scope.ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
-          } else {
+          } else if (val && val.match($scope.emailPattern)) {
+            $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
-            //TODO check pattern and unique tech users email
-
-            $scope.ticket.createdUser = {
-              email: val
-            };
+            UsersService.isEmailUnique(val, '', function (resp) {
+              if (resp.value) {
+                $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
+                $scope.ticket.createdUser = {
+                  email: val
+                };
+              } else {
+                $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
+              }
+            });
+          } else if (val) {
+            $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', false);
           }
 
         });
@@ -237,11 +255,17 @@
             return
           }
 
-          var error = Object.keys(form.$error)[0];
+          var errors = Object.keys(form.$error),
+            error = errors.find(function (item) {
+            return item === 'pattern' || item === 'unique';
+          });
 
-          if (error === 'choose') {
-            return 'PLEASE CHOOSE USER FROM DROP DOWN LIST.';
-          } else if (error) {
+
+          if (error === 'pattern') {
+            return 'INCORRECT EMAIL.';
+          } else if (error === 'unique') {
+            return 'EMAIL NOT UNIQUE.';
+          } else if (!error && errors.indexOf('required') > -1) {
             return 'REQUIRED FIELDS CANNOT BE LEFT EMPTY.';
           }
         };
@@ -283,6 +307,7 @@
 
         })
 
-      }]);
+      }
+    ]);
 
 }());

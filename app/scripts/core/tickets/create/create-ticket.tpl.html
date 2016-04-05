@@ -318,7 +318,8 @@
                      qt-typeahead-show-on-focus ng-trim="false"
                      custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 
-              <input type="hidden" ng-model="ticket.createdUser.email" name="ticketCreatedUser" ng-required="true">
+              <input type="hidden" ng-model="ticket.createdUser.email" name="ticketCreatedUser"
+                     ng-required="true" ng-pattern="emailPattern">
 
               <div typeahead-input-icon="ticketCreatedUser" style="position: absolute;top: 29px;right: 13px;"></div>
 
