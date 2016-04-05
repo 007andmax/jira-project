@@ -5,7 +5,7 @@
     position: relative;
 }
 .opened-ticket-list .ticket-post-update-wrapper {
-    padding-bottom: 374px;
+  padding-bottom: 30px;
 }
 .ticket-post-update-wrapper > .btn{
     position: absolute;

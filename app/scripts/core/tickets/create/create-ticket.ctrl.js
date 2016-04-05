@@ -73,7 +73,7 @@
         };
 
         $scope.$watch('ticketCompany', function () {
-          if ($scope.ticketCompany) {
+          if ($scope.ticketCompany && typeof $scope.ticketCompany === 'object') {
 
             if (isNeedToDeleteUser) {
               delete $scope.ticketCreatedUser;
@@ -87,7 +87,7 @@
             $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketCompany.id);
 
           } else {
-            $scope.ticket.company = '';
+            $scope.ticket.company = CompaniesService.getUnassignedCompany().id;
             $scope.ticket.serviceExpenses = [{}];
             $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
               if (!item.isDefault) {
@@ -103,10 +103,16 @@
             $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
             $scope.ticket.createdUser = {
               id: $scope.ticketCreatedUser.id,
-              email: $scope.ticketCreatedUser.primaryEmail
+              primaryEmail: $scope.ticketCreatedUser.primaryEmail
             };
             isNeedToDeleteUser = false;
-            $scope.ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
+            var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
+
+            if (ticketCompany.id === CompaniesService.getUnassignedCompany().id) {
+              $scope.ticket.company = ticketCompany.id;
+            } else {
+              $scope.ticketCompany = ticketCompany;
+            }
           } else if (val && val.match($scope.emailPattern)) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
@@ -114,8 +120,9 @@
               if (resp.value) {
                 $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
                 $scope.ticket.createdUser = {
-                  email: val
+                  primaryEmail: val
                 };
+                $scope.ticketCompany = '';
               } else {
                 $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
               }
@@ -257,8 +264,8 @@
 
           var errors = Object.keys(form.$error),
             error = errors.find(function (item) {
-            return item === 'pattern' || item === 'unique';
-          });
+              return item === 'pattern' || item === 'unique';
+            });
 
 
           if (error === 'pattern') {
@@ -275,7 +282,8 @@
           function searchInUsers(item) {
 
             if (value && value.length > 0 && (value !== '[$empty$]')) {
-              var fullSearchFild = $scope.getUserName(item).toLowerCase() + ' ' + item.primaryEmail.toLowerCase();
+              var fullSearchFild = $scope.getUserName(item).toLowerCase() +
+              item.primaryEmail ? ' ' + item.primaryEmail.toLowerCase() : '';
 
               return fullSearchFild.indexOf(value.toLowerCase()) !== -1;
             }
