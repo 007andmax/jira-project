@@ -5,10 +5,11 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'UsersService', 'TicketsService',
       'SubscriptionsService', 'VendorsService', 'quicktech.common.services.SharedStateService', '$timeout',
-      'DevicesService', 'quicktech.common.services.UserNotificationService', 'Utils',
+      'DevicesService', 'quicktech.common.services.UserNotificationService',
+      'Utils', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, UsersService, TicketsService,
                 SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService,
-                UserNotificationService, Utils) {
+                UserNotificationService, Utils, UserConfirmationsService) {
 
         UserNotificationService.show('Loading...');
 
@@ -110,13 +111,19 @@
         };
 
         $scope.archiveCompany = function () {
-          CompaniesService.archive($scope.company.id, function (resp) {
-            if (resp.data.code == 403) {
-              UserNotificationService.show(resp.data.message, true);
-            } else {
-              $state.go('companies');
-            }
-          });
+          var company = CompaniesService.getOneById($scope.company.id);
+          var confirmMesage = 'Do you want to archive ' + company.name;
+          var confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            CompaniesService.archive($scope.company.id, function (resp) {
+              if (resp.data.code == 403) {
+                UserNotificationService.show(resp.data.message, true);
+              } else {
+                $state.go('companies');
+              }
+            });
+          })
         };
 
         $scope.showEditCover = function (option) {

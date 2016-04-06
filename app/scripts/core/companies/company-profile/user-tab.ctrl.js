@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.userTabCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService',
-      function ($scope, UsersService, SubscriptionsService) {
+    ['$scope', 'UsersService', 'SubscriptionsService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, UsersService, SubscriptionsService, UserConfirmationsService) {
 
         $scope.changeUserRole = function (role) {
           UsersService.changeUserRole($scope.user.id, role)
@@ -28,11 +28,17 @@
         };
 
         $scope.archiveUser = function () {
-          UsersService.deleteOrArchiveUser($scope.user.id, true, function () {
-            if (delete $scope.selectedUsers[$scope.user.id]) {
-              $scope.changeSelectedUsers();
-            }
-          })
+          var user = UsersService.getOneById($scope.user.id);
+          var confirmMesage = 'Do you want to archive ' + $scope.getUserName(user);
+          var confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            UsersService.deleteOrArchiveUser($scope.user.id, true, function () {
+              if (delete $scope.selectedUsers[$scope.user.id]) {
+                $scope.changeSelectedUsers();
+              }
+            })
+          });
         };
 
         $scope.startChat = function () {

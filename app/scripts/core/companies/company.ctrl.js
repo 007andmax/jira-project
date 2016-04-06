@@ -54,14 +54,6 @@
           });
         });
 
-        $scope.archiveCompany = function (companyId) {
-          CompaniesService.archive(companyId, function (resp) {
-            if (resp.data.code == 403) {
-              UserNotificationService.show(resp.data.message, true);
-            }
-          });
-        };
-
         $scope.showCompanyProfile = function () {
           if ($scope.currentUser.role !== 'USER') {
             $state.go('companyProfile', {companyId: $scope.company.id});

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.bulkOptionCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService',
-      function ($scope, UsersService, SubscriptionsService, DevicesService) {
+    ['$scope', 'UsersService', 'SubscriptionsService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, UsersService, SubscriptionsService, DevicesService, UserConfirmationsService) {
 
         $scope.$watch('companyProfileHeader', function (val) {
 
@@ -40,8 +40,14 @@
         };
 
         $scope.archiveUsers = function () {
-          UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function () {
-            $scope.companyProfileHeader.unCheckAll();
+          var archiver = $scope.selectUsersIds.length === 1 ? '1 user' : $scope.selectUsersIds.length + ' users';
+          var confirmMesage = 'Do you want to archive ' + archiver;
+          var confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function () {
+              $scope.companyProfileHeader.unCheckAll();
+            });
           });
         };
 

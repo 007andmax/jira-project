@@ -36,6 +36,15 @@
           </div>
 
           <div class="status pull-left">
+            <div class="user-company pull-left has-tooltip" trimmed-tooltip
+                 tooltip-placement="bottom" tooltip="{{ getUserCompanyName(user) }}"
+                 tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip() }}">
+              <i class="icn-sm icn-user-company"></i>
+              <span trimmed-tooltip-container> {{ getUserCompanyName(user) }}</span>
+            </div>
+          </div>
+
+          <div class="status pull-left">
             <span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
             <span class="label label-primary">{{ user.designation }}</span>
           </div>
@@ -156,13 +165,6 @@
           <div class="user-number pull-left" ng-hide="user.phoneNumbers.length < 1">
             <i class="icn-sm {{ getPriorityNumberInfo('CLASS') }}"></i>
             <span> {{ getPriorityNumberInfo('NUMBER') }}</span>
-          </div>
-
-          <div class="user-company pull-left has-tooltip" trimmed-tooltip
-               tooltip-placement="bottom" tooltip="{{ getUserCompanyName(user) }}"
-               tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip() }}">
-            <i class="icn-sm icn-user-company"></i>
-            <span trimmed-tooltip-container> {{ getUserCompanyName(user) }}</span>
           </div>
 
         </div>

@@ -241,7 +241,11 @@
 .user-timing {
   width: 100%;
   padding: 0 30px;
-  color: #94a4b8;
+  color: #1f2a37;
+}
+
+.status .user-company {
+  padding: 0;
 }
 
 .user-company span{
