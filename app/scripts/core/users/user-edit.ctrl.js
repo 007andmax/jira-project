@@ -102,7 +102,7 @@
             UsersService.save(editUser, function () {
               $scope.savingInProcess = false;
               $timeout(function () {
-                $rootScope.$broadcast(editUser.id.toString());
+                $rootScope.$broadcast('show-after-save-' + editUser.id.toString());
               });
               $scope.cancelEdit();
             })
