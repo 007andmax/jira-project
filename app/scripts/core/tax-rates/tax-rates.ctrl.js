@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.taxRates').controller('quicktech.core.taxRates.taxRatesCtrl',
-    ['$scope', 'TaxRatesService', 'CompaniesService',
-      function ($scope, TaxRatesService, CompaniesService) {
+    ['$scope', 'TaxRatesService', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, TaxRatesService, CompaniesService, UserConfirmationsService) {
 
         $scope.orderTaxRates = {
           field: 'code',
@@ -24,8 +24,13 @@
 
         $scope.companies = CompaniesService.getClientCompanies();
 
-        $scope.deleteTax = function (taxId) {
-          TaxRatesService.deleteTaxRate(taxId)
+        $scope.deleteTax = function (tax) {
+          var confirmMesage = 'Do you want to delete ' + tax.code + '?',
+            confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            TaxRatesService.deleteTaxRate(tax.versionedId.id)
+          });
         };
 
         $scope.setOrderForTaxRates = function (option) {

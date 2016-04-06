@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.techUsersCtrl',
-    ['$scope', 'UsersService', 'CompaniesService',
-      function ($scope, UsersService, CompaniesService) {
+    ['$scope', 'UsersService', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, UsersService, CompaniesService, UserConfirmationsService) {
 
         $scope.users = UsersService.getTechUsers();
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -51,8 +51,13 @@
           }
         };
 
-        $scope.archiveUser = function (userId) {
-          UsersService.deleteOrArchiveUser(userId, false);
+        $scope.archiveUser = function (user) {
+          var confirmMesage = 'Do you want to archive ' + user.firstName + ' ' + user.lastName + '?',
+            confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            UsersService.deleteOrArchiveUser(user.id, false);
+          });
         }
 
       }]);

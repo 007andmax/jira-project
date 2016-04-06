@@ -4,7 +4,8 @@
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productCtrl',
     ['$scope', 'ProductsService', '$rootScope', 'quicktech.common.services.UserNotificationService',
-      function ($scope, ProductsService, $rootScope, UserNotificationService) {
+      'quicktech.common.services.UserConfirmationsService',
+      function ($scope, ProductsService, $rootScope, UserNotificationService, UserConfirmationsService) {
 
         $scope.openEditProduct = function () {
           $rootScope.$broadcast('cancelEditForm');
@@ -16,8 +17,13 @@
         });
 
         $scope.deleteProduct = function () {
-          ProductsService.deleteProduct($scope.product.versionedId.id);
-          $rootScope.$broadcast('productDeleted', $scope.product.versionedId.id);
+          var confirmMesage = 'Do you want to delete product?',
+            confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            ProductsService.deleteProduct($scope.product.versionedId.id);
+            $rootScope.$broadcast('productDeleted', $scope.product.versionedId.id);
+          });
         };
 
         $scope.moveToCategory = function (category) {
