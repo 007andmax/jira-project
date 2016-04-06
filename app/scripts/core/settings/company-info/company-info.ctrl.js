@@ -19,6 +19,7 @@
           $scope.timeZones = response;
         });
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
+        $scope.currentHostInbox = ConstantsService.getConstant('mandrill.inbox') + '.' + $scope.currentHost;
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function () {
           $scope.emailNotifications = $scope.emailNotifications.staticCopy();
