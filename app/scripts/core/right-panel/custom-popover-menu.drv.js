@@ -105,7 +105,7 @@
                 hideThisPopover();
                 return;
               }
-              window.open("mailto:" + scope.user.primaryEmail);
+              window.open("mailto:" + scope.user.primaryEmail, '_parent');
               hideThisPopover();
             };
 

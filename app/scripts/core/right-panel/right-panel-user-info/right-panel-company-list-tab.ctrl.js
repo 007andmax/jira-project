@@ -29,7 +29,7 @@
 
         $scope.sendEmailInPopover = function (userId) {
           var user = UsersService.getOneById(userId);
-          window.open("mailto:" + user.primaryEmail);
+          window.open("mailto:" + user.primaryEmail, '_parent');
         };
 
       }]);
