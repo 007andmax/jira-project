@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state) {
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
+      '$timeout',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope, $timeout) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
 
@@ -100,6 +101,9 @@
 
             UsersService.save(editUser, function () {
               $scope.savingInProcess = false;
+              $timeout(function () {
+                $rootScope.$broadcast(editUser.id.toString());
+              });
               $scope.cancelEdit();
             })
           }
