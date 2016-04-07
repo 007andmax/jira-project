@@ -122,7 +122,6 @@
                 $scope.ticket.createdUser = {
                   primaryEmail: val
                 };
-                $scope.ticketCompany = '';
               } else {
                 $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
               }

@@ -66,7 +66,7 @@
 
         $scope.getPriorityNumberInfo = function (option) {
 
-          if (!$scope.user.phoneNumbers && ($scope.user.phoneNumbers.length < 1)) {
+          if (!$scope.user.phoneNumbers || ($scope.user.phoneNumbers.length < 1)) {
             return;
           }
 
