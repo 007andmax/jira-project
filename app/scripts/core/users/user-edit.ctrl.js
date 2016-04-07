@@ -10,13 +10,18 @@
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
 
         $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (item.name !== 'Unassigned') return item;
+          if (item.name !== 'Unassigned') {
+            return item;
+          }
         });
 
         CompaniesService.getClientCompaniesInfo($scope, function (resp) {
           $scope.clientCompaniesInfo = resp;
           if ($scope.editUser.companyId) {
-            $scope.userCompanyCountryCode = resp[$scope.editUser.companyId].addresses[0].countryCode;
+            var address = resp[$scope.editUser.companyId].addresses[0];
+            if (address) {
+              $scope.userCompanyCountryCode = address.countryCode;
+            }
           }
         });
 
@@ -66,6 +71,9 @@
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);
+          if ($scope.userCompany.isDefault) {
+            $scope.userCompany = '';
+          }
           if ($scope.editUser.companyId && $scope.clientCompaniesInfo) {
             $scope.userCompanyCountryCode = $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses[0].countryCode;
           }
@@ -81,7 +89,8 @@
 
         $scope.getUserCompanyName = function () {
           if ($scope.editUser.companyId) {
-            return CompaniesService.getOneById($scope.editUser.companyId).name;
+            var company = CompaniesService.getOneById($scope.editUser.companyId);
+            return company.name;
           }
         };
 
@@ -151,7 +160,7 @@
           $scope.editUser.password = $scope.editUser.confPassword = '';
         };
 
-        $scope.changeAccountEnabled = function(){
+        $scope.changeAccountEnabled = function () {
           $scope.isResetPassCollapsed = true;
         };
 

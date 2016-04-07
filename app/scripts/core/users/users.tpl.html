@@ -36,7 +36,7 @@
 
           </div>
 
-          <div class="status pull-left">
+          <div class="status pull-left" ng-if="!user.company.default">
             <div class="user-company pull-left has-tooltip" trimmed-tooltip
                  tooltip-placement="bottom" tooltip="{{ getUserCompanyName(user) }}"
                  tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip() }}">
@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <div class="status pull-left">
+          <div class="status pull-left" ng-if="user.designation">
             <span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
             <span class="label label-primary">{{ user.designation }}</span>
           </div>

@@ -8,7 +8,7 @@
 
         $scope.checkedServices = {};
         $scope.companies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (item.name !== 'Unassigned') return item;
+          if (!item.isDefault) return item;
         });
 
         $scope.servicesData = ServicesService.getServicesData($scope, false);
