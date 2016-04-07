@@ -24,8 +24,9 @@
             return ngModel.$viewValue
           }, checkAndFix);
 
-          scope.$on('set-phone-number-prefix', function (event, country) {
-            setPrefix(country);
+          attr.$observe('country', function () {
+            checkAndFix();
+            scope.phoneNumbersForm.$setPristine();
           });
 
           function checkAndFix(e) {

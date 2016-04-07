@@ -156,7 +156,8 @@
                        ng-model="location" show-validation-messages="triedToSave">
                   </div>
 
-                  <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
+                  <div phone-numbers-edit ng-model="location.phoneNumbers"
+                       country-code="{{location.countryCode}}"></div>
 
                   <div class="form-row clearfix" style="margin-top: 13px;">
                     <time-zone-autocomplete address="location" time-zones="timeZones"></time-zone-autocomplete>
@@ -292,7 +293,8 @@
                   </div>
 
                   <div class="form-row clearfix" phone-numbers-edit is-try-to-save="triedToSave"
-                       ng-model="contact.phoneNumbers" is-first-required="true"></div>
+                       ng-model="contact.phoneNumbers" is-first-required="true"
+                       country-code="{{editVendor.addresses[0].countryCode}}"></div>
 
                   <div class="form-row clearfix">
                     <div class="form-group no-label full-width">

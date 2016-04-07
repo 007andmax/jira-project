@@ -87,7 +87,8 @@
 
         </div>
 
-        <div ng-hide="isTechUser" class="form-row" phone-numbers-edit ng-model="editUser.phoneNumbers"></div>
+        <div ng-hide="isTechUser" class="form-row" phone-numbers-edit
+             country-code="{{userCompanyCountryCode}}" ng-model="editUser.phoneNumbers"></div>
 
         <div class="form-row clearfix">
 

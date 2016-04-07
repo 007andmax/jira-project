@@ -931,7 +931,8 @@
       }
 
       function getFormattedPhone(country, phone) {
-        var countryFormats = this.getCountryFormats(country);
+        var countryFormats = getCountryFormats(country),
+          input;
 
         if (!countryFormats) {
           return phone;
@@ -944,13 +945,20 @@
           length;
 
         if (!phone || phone.substring(0, prefix.length) !== prefix) {
-          return prefix;
+          input = phone.replace(/[\(\)\-]/g, '');
+          if (input[0] === '+' && input.indexOf(' ') > -1) {
+            input = input.slice(phone.indexOf(' '));
+          } else {
+            input = phone.replace(/[\+\s]+/g, '');
+          }
+
+          return getFormattedPhone(country, prefix + input);
         }
 
         if (!format) {
           return phone;
         } else {
-          var input = phone.replace(/[\+\(\)\-\s]/g, '');
+          input = phone.replace(/[\+\(\)\-\s]/g, '');
           for (var index = 0, formatIndex = 0; formatIndex < format.length; formatIndex++) {
             var num = input[index];
             mask = format[formatIndex];

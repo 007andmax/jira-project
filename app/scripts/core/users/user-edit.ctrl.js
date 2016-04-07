@@ -13,6 +13,13 @@
           if (item.name !== 'Unassigned') return item;
         });
 
+        CompaniesService.getClientCompaniesInfo($scope, function (resp) {
+          $scope.clientCompaniesInfo = resp;
+          if ($scope.editUser.companyId) {
+            $scope.userCompanyCountryCode = resp[$scope.editUser.companyId].addresses[0].countryCode;
+          }
+        });
+
         if (!$scope.clientCompanies || $scope.clientCompanies.length < 1) {
           alert('Create at list one company before adding users');
 
@@ -59,6 +66,9 @@
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);
+          if ($scope.editUser.companyId && $scope.clientCompaniesInfo) {
+            $scope.userCompanyCountryCode = $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses[0].countryCode;
+          }
         });
 
         $scope.cancelEdit = function () {

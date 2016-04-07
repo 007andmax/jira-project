@@ -267,7 +267,7 @@
               <div address-autocomplete template-page="settings"
                    ng-model="address" show-validation-messages="triedToSave"></div>
 
-              <div phone-numbers-edit ng-model="address.phoneNumbers"></div>
+              <div phone-numbers-edit ng-model="address.phoneNumbers" country-code="{{address.countryCode}}"></div>
 
               <div class="form-row clearfix" style="margin-top: 13px;">
                 <time-zone-autocomplete address="address" time-zones="timeZones"></time-zone-autocomplete>

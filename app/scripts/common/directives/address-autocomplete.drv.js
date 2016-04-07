@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("addressAutocomplete",
-    ['$timeout', '$http', 'AddressesService', '$rootScope', function ($timeout, $http, AddressesService, $rootScope) {
+    ['$timeout', '$http', 'AddressesService', function ($timeout, $http, AddressesService) {
       return {
         restrict: 'A',
         require: 'ngModel',
@@ -119,8 +119,6 @@
             }
 
             $scope.$apply();
-
-            $rootScope.$broadcast('set-phone-number-prefix', ngModelCtrl.$viewValue.countryCode);
           });
 
           function getCountryCode(place) {
