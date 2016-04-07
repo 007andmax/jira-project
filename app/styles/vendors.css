@@ -740,3 +740,27 @@
 .create-vendor-actions .btn + .btn{
   margin-right: 10px;
 }
+.vendor-card-icons {
+  float: right;
+  margin-top: 10px;
+}
+.vendor-card-icons .hit-area {
+  margin: 1px;
+}
+.vendor-card-icons .hit-area .icn-description-white {
+  background-position: -780px -206px;
+}
+.vendor-card-icons .hit-area .icn-edit-tag {
+  background-position: -1040px 6px;
+}
+.vendor-card-icons .hit-area .icn-archive-company {
+  background-position: -798px -50px;
+}
+.vendor-actions.user-actions {
+  float: left;
+  width: 100%;
+  margin-top: 19px;
+}
+.vendor-actions.user-actions .btn {
+  width: 100px;
+}
