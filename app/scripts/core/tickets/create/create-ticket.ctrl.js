@@ -120,7 +120,8 @@
               if (resp.value) {
                 $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
                 $scope.ticket.createdUser = {
-                  primaryEmail: val
+                  primaryEmail: val,
+                  companyId: $scope.ticketCompany.id
                 };
               } else {
                 $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
