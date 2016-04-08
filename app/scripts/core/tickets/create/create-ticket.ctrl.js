@@ -314,13 +314,13 @@
 
 
           if (error === 'pattern') {
-            return 'INCORRECT EMAIL.';
+            return 'Incorrect email.';
           } else if (error === 'unique') {
-            return 'EMAIL NOT UNIQUE.';
+            return 'Email already occupied by tech user.';
           } else if (error === 'invalidName') {
-            return 'INVALID COMPANY NAME.';
+            return 'Invalid company name.';
           } else if (!error && errors.indexOf('required') > -1) {
-            return 'REQUIRED FIELDS CANNOT BE LEFT EMPTY.';
+            return 'Required fields can\'t be left empty.';
           }
         };
 
