@@ -125,6 +125,8 @@
               });
               $scope.cancelEdit();
             })
+          } else {
+            $scope.triedToSave = true;
           }
         };
 

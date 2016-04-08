@@ -60,6 +60,8 @@
 
         $scope.saveCompanyInfo = function () {
 
+          $scope.isTryToSave = true;
+
           for (var index in $scope.formNames) {
             var form = $scope.companyInfoForm[$scope.formNames[index]];
             if (form.$invalid) {
@@ -71,8 +73,6 @@
               return;
             }
           }
-
-          $scope.savingCompanyInfo = true;
 
           var settings = {},
             callbacks = [],
@@ -96,7 +96,7 @@
             for (var index in callbacks) {
               callbacks[index]($scope.companyInfoForm[formNames[index]], resp);
             }
-            $scope.savingCompanyInfo = false;
+            $scope.isTryToSave = false;
           });
         };
 

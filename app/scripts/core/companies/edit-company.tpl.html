@@ -193,7 +193,8 @@
                        address-autocomplete template-page="companies"
                        ng-model="location" show-validation-messages="triedToSave"></div>
 
-                  <div phone-numbers-edit ng-model="location.phoneNumbers" country-code="{{location.countryCode}}"></div>
+                  <div phone-numbers-edit ng-model="location.phoneNumbers" is-try-to-save="triedToSave"
+                       country-code="{{location.countryCode}}"></div>
 
                   <div class="form-row clearfix" style="margin-top: 13px;">
                     <time-zone-autocomplete address="location" time-zones="timeZones"></time-zone-autocomplete>
@@ -342,7 +343,7 @@
                   </div>
 
                   <div class="form-row clearfix">
-                    <div ng-show="currentUser.accountType !== 'ROOT'"
+                    <div ng-show="currentUser.accountType !== 'ROOT'" is-try-to-save="triedToSave"
                          phone-numbers-edit country-code="{{editCompany.addresses[0].countryCode}}"
                          ng-model="contact.phoneNumbers"></div>
                   </div>
