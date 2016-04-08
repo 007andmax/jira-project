@@ -9,7 +9,8 @@
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
                 UserNotificationService, sessionId, sessionTime, ServicesService, $timeout) {
 
-        var isNeedToDeleteUser = true;
+        var isNeedToDeleteUser = true,
+          unassignedCompany = CompaniesService.getUnassignedCompany();
 
         $scope.fileInfo = { quantityErrorFiles: 0 };
         $scope.ticket = { priorityLevel: 'MEDIUM' };
@@ -132,8 +133,11 @@
             isNeedToDeleteUser = false;
             var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
 
-            if (ticketCompany.id !== CompaniesService.getUnassignedCompany().id) {
+            if (ticketCompany.id !== unassignedCompany.id) {
               $scope.ticketCompany = ticketCompany;
+              $scope.ticket.createdUser.companyId = ticketCompany.id;
+            } else {
+              $scope.ticket.createdUser.companyId = unassignedCompany.id;
             }
           } else if (val && val.match($scope.emailPattern)) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
@@ -148,7 +152,7 @@
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
                   $scope.ticket.createdUser = {
                     primaryEmail: val,
-                    companyId: $scope.ticketCompany ? $scope.ticketCompany.id : undefined
+                    companyId: $scope.ticketCompany ? $scope.ticketCompany.id : unassignedCompany.id
                   };
                   isNeedToDeleteUser = false;
                 } else {
