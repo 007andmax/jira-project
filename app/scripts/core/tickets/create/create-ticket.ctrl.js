@@ -116,17 +116,33 @@
           } else if (val && val.match($scope.emailPattern)) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
-            UsersService.isEmailUnique(val, '', function (resp) {
-              if (resp.value) {
-                $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
-                $scope.ticket.createdUser = {
-                  primaryEmail: val,
-                  companyId: $scope.ticketCompany.id
-                };
-              } else {
-                $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
+            var users = [];
+            for (var prop in $scope.usersCompany) {
+              var user = $scope.usersCompany[prop];
+              if (user.primaryEmail === val) {
+                users.push(user);
+                if (users.length > 1) {
+                  break;
+                }
               }
-            });
+            }
+
+            if (users.length !== 1) {
+              UsersService.isEmailUnique(val, '', function (resp) {
+                if (resp.value) {
+                  $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
+                  $scope.ticket.createdUser = {
+                    primaryEmail: val,
+                    companyId: $scope.ticketCompany.id
+                  };
+                } else {
+                  $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
+                }
+              });
+            } else if (users.length === 1) {
+              $scope.ticketCreatedUser = users[0];
+            }
+
           } else if (val) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', false);
           }
