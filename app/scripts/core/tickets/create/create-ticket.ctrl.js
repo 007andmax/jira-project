@@ -72,22 +72,52 @@
           return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.$watch('ticketCompany', function () {
-          if ($scope.ticketCompany && typeof $scope.ticketCompany === 'object') {
+        $scope.$watch('ticketCompany', function (val) {
+          if (val && typeof val === 'object') {
+            $scope.ticketCompanyChoosen = true;
 
             if (isNeedToDeleteUser) {
               delete $scope.ticketCreatedUser;
             }
-
             isNeedToDeleteUser = true;
 
-            $scope.ticket.company = $scope.ticketCompany.id;
+            if ($scope.ticket.createdUser) {
+              $scope.ticket.createdUser.companyId = val.id;
+            }
 
-            $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticketCompany.id);
-            $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketCompany.id);
+            $scope.usersCompany = UsersService.getAllByCompanyId(val.id);
+            $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
+            $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
+          } else if (val) {
+            $scope.ticketCompanyChoosen = true;
+            var companies = [];
+            if ($scope.ticketCreatedUser && typeof $scope.ticketCreatedUser === 'object' && $scope.ticketCreatedUser.company.name === val) {
+              companies.push($scope.ticketCreatedUser.company);
+            } else {
+              for (var prop in $scope.clientCompanies) {
+                var company = $scope.clientCompanies[prop];
+                if (company.name === val) {
+                  companies.push(company);
+                  if (company.length > 1) {
+                    break;
+                  }
+                }
+              }
+            }
 
+            if (companies.length !== 1) {
+              if ($scope.ticket.createdUser) {
+                $scope.ticket.createdUser.companyId = undefined;
+              }
+              return $scope.ticketForm.ticketCompany.$setValidity('invalidName', false);
+            } else {
+              $scope.ticketCompany = companies[0];
+            }
           } else {
-            $scope.ticket.company = CompaniesService.getUnassignedCompany().id;
+            if ($scope.ticket.createdUser) {
+              $scope.ticket.createdUser.companyId = undefined;
+            }
+            $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
             $scope.ticket.serviceExpenses = [{}];
             $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
               if (!item.isDefault) {
@@ -108,9 +138,7 @@
             isNeedToDeleteUser = false;
             var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
 
-            if (ticketCompany.id === CompaniesService.getUnassignedCompany().id) {
-              $scope.ticket.company = ticketCompany.id;
-            } else {
+            if (ticketCompany.id !== CompaniesService.getUnassignedCompany().id) {
               $scope.ticketCompany = ticketCompany;
             }
           } else if (val && val.match($scope.emailPattern)) {
@@ -135,11 +163,12 @@
                     primaryEmail: val,
                     companyId: $scope.ticketCompany ? $scope.ticketCompany.id : undefined
                   };
+                  isNeedToDeleteUser = false;
                 } else {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
                 }
               });
-            } else if (users.length === 1) {
+            } else {
               $scope.ticketCreatedUser = users[0];
             }
 
@@ -280,7 +309,7 @@
 
           var errors = Object.keys(form.$error),
             error = errors.find(function (item) {
-              return item === 'pattern' || item === 'unique';
+              return item === 'pattern' || item === 'unique' || item === 'invalidName';
             });
 
 
@@ -288,6 +317,8 @@
             return 'INCORRECT EMAIL.';
           } else if (error === 'unique') {
             return 'EMAIL NOT UNIQUE.';
+          } else if (error === 'invalidName') {
+            return 'INVALID COMPANY NAME.';
           } else if (!error && errors.indexOf('required') > -1) {
             return 'REQUIRED FIELDS CANNOT BE LEFT EMPTY.';
           }
@@ -329,8 +360,15 @@
             $scope.errorFileMessage = false;
           }
 
-        })
+        });
 
+        $scope.clearTicketCompany = function () {
+          $scope.ticketCompany = undefined;
+          if ($scope.ticketCreatedUser && $scope.ticketCreatedUser.id) {
+            $scope.ticketCreatedUser = undefined;
+          }
+          $scope.ticketCompanyChoosen = false;
+        };
       }
     ]);
 
