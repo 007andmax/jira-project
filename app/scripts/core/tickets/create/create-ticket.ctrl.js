@@ -90,28 +90,22 @@
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
           } else if (val) {
             $scope.ticketCompanyChoosen = true;
-            var companies = [];
+            var selectedCompany;
             if ($scope.ticketCreatedUser && typeof $scope.ticketCreatedUser === 'object' && $scope.ticketCreatedUser.company.name === val) {
-              companies.push($scope.ticketCreatedUser.company);
+              selectedCompany = $scope.ticketCreatedUser.company;
             } else {
-              for (var prop in $scope.clientCompanies) {
-                var company = $scope.clientCompanies[prop];
-                if (company.name === val) {
-                  companies.push(company);
-                  if (company.length > 1) {
-                    break;
-                  }
-                }
-              }
+              selectedCompany = $scope.clientCompanies.find(function (item) {
+                return item.name === val;
+              });
             }
 
-            if (companies.length !== 1) {
+            if (!selectedCompany) {
               if ($scope.ticket.createdUser) {
                 $scope.ticket.createdUser.companyId = undefined;
               }
               return $scope.ticketForm.ticketCompany.$setValidity('invalidName', false);
             } else {
-              $scope.ticketCompany = companies[0];
+              $scope.ticketCompany = selectedCompany;
             }
           } else {
             if ($scope.ticket.createdUser) {
@@ -144,18 +138,11 @@
           } else if (val && val.match($scope.emailPattern)) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
-            var users = [];
-            for (var prop in $scope.usersCompany) {
-              var user = $scope.usersCompany[prop];
-              if (user.primaryEmail === val) {
-                users.push(user);
-                if (users.length > 1) {
-                  break;
-                }
-              }
-            }
+            var selectedUser = $scope.usersCompany.find(function (item) {
+              return item.primaryEmail === val;
+            });
 
-            if (users.length !== 1) {
+            if (!selectedUser) {
               UsersService.isEmailUnique(val, '', function (resp) {
                 if (resp.value) {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
@@ -169,7 +156,7 @@
                 }
               });
             } else {
-              $scope.ticketCreatedUser = users[0];
+              $scope.ticketCreatedUser = selectedUser;
             }
 
           } else if (val) {
