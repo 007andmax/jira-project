@@ -946,13 +946,19 @@
 
         if (!phone || phone.substring(0, prefix.length) !== prefix) {
           input = phone.replace(/[\(\)\-]/g, '');
+
+
           if (input[0] === '+' && input.indexOf(' ') > -1) {
             input = input.slice(phone.indexOf(' '));
           } else {
             input = phone.replace(/[\+\s]+/g, '');
           }
 
-          return getFormattedPhone(country, prefix + input);
+          if (input.length > 4) {
+            return getFormattedPhone(country, prefix + input);
+          } else {
+            return prefix;
+          }
         }
 
         if (!format) {
