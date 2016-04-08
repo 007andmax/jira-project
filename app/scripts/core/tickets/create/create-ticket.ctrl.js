@@ -133,7 +133,7 @@
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
                   $scope.ticket.createdUser = {
                     primaryEmail: val,
-                    companyId: $scope.ticketCompany.id
+                    companyId: $scope.ticketCompany ? $scope.ticketCompany.id : undefined
                   };
                 } else {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
