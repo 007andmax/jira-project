@@ -153,7 +153,7 @@
 
             CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companyProfile', { companyId: resp.id });
+              $state.go('companyProfile', { companyId: resp.data.id });
             })
           } else {
             $scope.triedToSave = true;
