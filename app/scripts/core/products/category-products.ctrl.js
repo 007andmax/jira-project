@@ -7,7 +7,7 @@
       function ($scope, ProductsService, $timeout) {
 
         $scope.orderProducts = {
-          field: 'ilc',
+          field: 'description',
           reverse: false
         };
 

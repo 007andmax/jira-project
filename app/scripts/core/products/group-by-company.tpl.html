@@ -1,0 +1,274 @@
+<div>
+  <div class="btn btn-block btn-lg btn-add-category pull-left" ng-show="currentUser.role !== 'USER'"
+       custom-disabled="{{ isCreateCategoryShow }}"
+       ng-click="isCreateCategoryShow = true">
+    <i class="icn-sm icn-add-category"></i>
+    Add Category
+  </div>
+
+  <ul class="qt-list qt-products">
+
+    <li class="qt-product-edit" ng-if="isCreateCategoryShow" ng-form="newCategoryNameForm"
+        ng-class="{'has-error': isShowingErrors(newCategoryNameForm, 'newCategoryName')}">
+
+      <div class="col-1">
+        <input type="text" class="form-control" placeholder="Category name..."
+               style="background-color: transparent;border-color: transparent;"
+               ng-model="newCategory.name"
+               name="newCategoryName" ng-required="true" ng-maxlength="100"
+               is-uniq-validation validation-func="isUniqueCategoryName">
+      </div>
+
+      <div class="col-2">
+        <div class="product-actions">
+
+          <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Save"
+             custom-disabled="{{ newCategoryNameForm.$invalid }}"
+             ng-click="addCategory(newCategoryNameForm)">
+            <i class="icn-sm icn-product-save"></i>
+          </a>
+
+          <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Cancel"
+             ng-click="closeCreateCategoryForm()">
+            <i class="icn-sm icn-product-cancel"></i>
+          </a>
+
+        </div>
+      </div>
+
+      <div ng-messages="newCategoryNameForm.newCategoryName.$error"
+           ng-if="isShowingErrors(newCategoryNameForm, 'newCategoryName')">
+        <div class="error-msg" ng-message="required">Name is required.</div>
+        <div class="error-msg" ng-message="maxlength">Name is too large.</div>
+        <div class="error-msg" ng-message="unique">Name already occupied.</div>
+      </div>
+
+    </li>
+
+    <li ng-repeat="category in categories | orderBy: 'default': false" event-toggle-slider="toggleProducts"
+        ng-controller="quicktech.core.products.categoryCtrl" ng-form="editCategoryForm"
+        ng-show="(!category.default || category.productsAmount > 0) && (!showCategory || showCategory === category.id)"
+        ng-class="{'has-error': isShowingErrors(editCategoryForm, 'editCategoryName'),
+                   'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
+
+      <div style="height: 71px;position: absolute;width: 100%;top: 0;z-index: 1;"
+           ng-click="toggleProducts()" ng-hide="isEditCategory"></div>
+
+      <div class="intermediate-category" ng-if="!isEditCategory">
+        <div class="col-1">
+          <div class="category-name">{{ category.name}}</div>
+        </div>
+
+        <div class="col-2">
+
+          <div class="no-items"
+               ng-class="{'not-hide-labels': !((currentUser.role === 'SUPER_TECH_ADMIN') && !category.default)}">
+            {{ category.productsAmount}} items
+          </div>
+
+          <div class="product-actions" ng-show="(currentUser.role === 'SUPER_TECH_ADMIN') && !category.default">
+
+            <div class="btn btn-info has-tooltip" ng-click="addProduct();toggleProducts()" scroll-to-form
+                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
+              <i class="icn-sm icn-product-add"></i>
+            </div>
+
+            <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete"
+               ng-click="deleteCategory()">
+              <i class="icn-sm icn-delete"></i>
+            </a>
+
+            <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit category"
+               ng-click="openEditCategory()">
+              <i class="icn-sm icn-edit"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="sub-wrapper" ets-slider>
+          <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
+
+            <ul class="qt-list qt-product-list">
+
+              <li class="list-heading" ng-show="products.length > 0">
+                <div class="col-1" ng-click="setOrderForProducts('ilc')">
+                  ILC
+                  <i class="icn-sm sort-icon" style="margin-left: 25px;" ng-show="orderProducts.field === 'ilc'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-1" ng-click="setOrderForProducts('manufacture')">
+                  Mfg#
+                  <i class="icn-sm sort-icon" style="margin-left: 35px;"
+                     ng-show="orderProducts.field === 'manufacture'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-2" ng-click="setOrderForProducts('description')">
+                  DESCRIPTION
+                  <i class="icn-sm sort-icon" style="margin-left: 75px;"
+                     ng-show="orderProducts.field === 'description'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-1" ng-click="setOrderForProducts('vendor')">
+                  VENDOR/SUPPLIER
+                  <i class="icn-sm sort-icon" style="margin-left: 100px;" ng-show="orderProducts.field === 'vendor'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-4" ng-click="setOrderForProducts('cost')">
+                  COST
+                  <i class="icn-sm sort-icon" style="margin-left: 35px;" ng-show="orderProducts.field === 'cost'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-4" ng-click="setOrderForProducts('sale')">
+                  SALE PRICE
+                  <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderProducts.field === 'sale'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-4" ng-click="setOrderForProducts('taxable')">
+                  TAXABLE
+                  <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderProducts.field === 'taxable'"
+                     ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+                </div>
+                <div class="col-6">&nbsp;</div>
+              </li>
+
+              <li ng-repeat="product in products | orderBy : orderByForProducts : orderProducts.reverse"
+                  ng-class="{'qt-product-form': showEditProduct}"
+                  ng-controller="quicktech.core.products.productCtrl"
+                  show-model-element="{{ 'show-' + product.versionedId.id}}">
+
+                <div class="intermediate-parent-elem" ng-if="!showEditProduct">
+
+                  <div class="col-1" style="height: 18px;">
+                    {{ product.ilc}}
+                  </div>
+
+                  <div class="col-1">
+                    {{ product.manufacture}}
+                  </div>
+
+                  <div class="col-2" ng-class="{'product-description': category.default}">{{ product.description}}
+                  </div>
+
+                  <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
+
+                  <div class="col-4">
+                    {{ product.cost | currency: '$': 2 }}
+                  </div>
+
+                  <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
+
+                  <div class="col-4" style="width: 50px">
+                    <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
+                      <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
+                             custom-disabled="{{ disabledCheckbox }}">
+                      <span class="control-indicator"></span>
+                    </label>
+                  </div>
+
+                  <div class="col-6 pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+
+                    <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                       ng-click="deleteProduct()"
+                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+                      <i class="icn-sm icn-delete"></i>
+                    </a>
+
+                    <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+                       ng-click="openEditProduct()"
+                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">
+                      <i class="icn-sm icn-edit"></i>
+                    </a>
+
+                    <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+                       aria-expanded="false" data-toggle="dropdown"
+                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="move to other category">
+                      <i class="icn-sm icn-send-again"></i>
+                    </a>
+
+                    <ul class="dropdown-menu move-prod" role="menu">
+
+                      <li ng-repeat="category in categories">
+                        <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
+                          {{ category.name }}
+                        </a>
+                      </li>
+
+                    </ul>
+
+                  </div>
+                </div>
+
+
+                <div ng-if="showEditProduct"
+                     ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'">
+                </div>
+
+              </li>
+
+
+              <li class="qt-product-form" ng-if="showCreateProduct">
+                <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
+              </li>
+
+            </ul>
+
+            <div class="add-product-btn-wrapper"
+                 ng-hide="category.default || (currentUser.role !== 'SUPER_TECH_ADMIN')">
+              <div class="btn btn-info has-tooltip"
+                   ng-click="addProduct()"
+                   custom-disabled="{{ showCreateProduct }}"
+                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
+                <i class="icn-sm icn-product-add"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="intermediate-category" ng-if="isEditCategory">
+
+        <div class="col-1">
+          <input type="text" class="form-control" placeholder="Category name..."
+                 style="background-color: transparent;border-color: transparent;"
+                 ng-model="editCategory.name" focus-on
+                 name="editCategoryName" ng-required="true" ng-maxlength="100"
+                 is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
+        </div>
+
+        <div class="col-2">
+          <div class="product-actions">
+
+            <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
+               ng-click="saveEditCategory(editCategoryForm)" custom-disabled="{{ disabledSaveButton }}"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Save">
+              <i class="icn-sm icn-product-save"></i>
+            </a>
+            <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
+               ng-click="cancelEditCategory()"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Cancel">
+              <i class="icn-sm icn-product-cancel"></i>
+            </a>
+
+          </div>
+        </div>
+
+        <div ng-messages="editCategoryForm.editCategoryName.$error"
+             ng-if="isShowingErrors(editCategoryForm, 'editCategoryName')">
+          <div class="error-msg" ng-message="required">Name is required.</div>
+          <div class="error-msg" ng-message="maxlength">Name is too large.</div>
+          <div class="error-msg" ng-message="unique">Name already occupied.</div>
+        </div>
+
+      </div>
+
+    </li>
+
+  </ul>
+</div>
