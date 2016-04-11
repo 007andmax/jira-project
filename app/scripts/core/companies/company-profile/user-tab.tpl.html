@@ -119,7 +119,7 @@
             </a>
           </li>
 
-          <li>
+          <li ng-hide="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
             <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
               <div class="clearfix">
                 <label class="control checkbox pull-left">
@@ -163,7 +163,7 @@
             <i class="icn-sm icn-user-mail"></i>
           </div>
 
-          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()" ng-if="users.length > 1"
                tooltip-placement="top" tooltip="Archive this Contact">
             <i class="icn-sm icn-remove-token"></i>
           </div>

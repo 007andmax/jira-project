@@ -32,23 +32,37 @@
         };
 
         $scope.changeUserSubscription = function (subsc) {
-          $scope.disabledSubscr = true;
-          $scope.usersSbscr[subsc] = !$scope.usersSbscr[subsc];
-          SubscriptionsService.changeSubscriptionsForUsers($scope.selectUsersIds, subsc, $scope.usersSbscr[subsc], function () {
-            $scope.disabledSubscr = false;
-          })
+          if (subsc === 'invoice' && $scope.selectUsersIds.length === $scope.users.length && $scope.usersSbscr[subsc]) {
+            var confirmMessage = 'At least one user must have invoices update subscription.',
+              confirmButton = 'Ok';
+            UserConfirmationsService.show(confirmMessage, confirmButton, true);
+          } else {
+            $scope.disabledSubscr = true;
+            $scope.usersSbscr[subsc] = !$scope.usersSbscr[subsc];
+            SubscriptionsService.changeSubscriptionsForUsers($scope.selectUsersIds, subsc, $scope.usersSbscr[subsc], function () {
+              $scope.disabledSubscr = false;
+            });
+          }
         };
 
         $scope.archiveUsers = function () {
-          var archiver = $scope.selectUsersIds.length === 1 ? '1 user' : $scope.selectUsersIds.length + ' users';
-          var confirmMesage = 'Do you want to archive ' + archiver;
-          var confirmButton = 'Yes';
+          var confirmMessage = 'Do you want to archive ',
+            confirmButton = 'Yes';
 
-          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function () {
-              $scope.companyProfileHeader.unCheckAll();
+          if ($scope.selectUsersIds.length !== $scope.users.length) {
+
+            confirmMessage += $scope.selectUsersIds.length === 1 ? '1 user' : $scope.selectUsersIds.length + ' users';
+
+            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+              UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function () {
+                $scope.companyProfileHeader.unCheckAll();
+              });
             });
-          });
+          } else {
+            confirmMessage = 'U can\'t archive all users. At least one must remain.';
+            confirmButton = 'Ok';
+            UserConfirmationsService.show(confirmMessage, confirmButton, true);
+          }
         };
 
         $scope.removeDevices = function () {

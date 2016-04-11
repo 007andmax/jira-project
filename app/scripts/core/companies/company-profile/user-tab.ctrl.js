@@ -45,6 +45,23 @@
           console.log('start chat ' + $scope.user.id);
         };
 
+        $scope.isLastUserWithInvoiceSubscription = function (userId) {
+          var users = $scope.userSubscriptionsByCompanyId;
+
+          for (var id in users) {
+            if (id === userId) {
+              continue;
+            }
+
+            var user = users[id];
+
+            if (user.invoice) {
+              return false;
+            }
+          }
+          return true;
+        }
+
       }]);
 
 }());
