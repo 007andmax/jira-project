@@ -1,3 +1,125 @@
 <div>
-  product List
+  <ul class="qt-list qt-product-list">
+
+    <li class="list-heading" ng-show="productsList.length > 0">
+      <div class="col-1" ng-click="setOrderForProducts('ilc')">
+        ILC
+        <i class="icn-sm sort-icon" style="margin-left: 25px;" ng-show="orderProducts.field === 'ilc'"
+           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('manufacture')">
+        Mfg#
+        <i class="icn-sm sort-icon" style="margin-left: 35px;"
+           ng-show="orderProducts.field === 'manufacture'"
+           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+      </div>
+      <div class="col-2" ng-click="setOrderForProducts('description')">
+        DESCRIPTION
+        <i class="icn-sm sort-icon" style="margin-left: 75px;"
+           ng-show="orderProducts.field === 'description'"
+           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('vendor')">
+        VENDOR/SUPPLIER
+        <i class="icn-sm sort-icon" style="margin-left: 100px;" ng-show="orderProducts.field === 'vendor'"
+           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+      </div>
+      <div class="col-4" ng-click="setOrderForProducts('cost')">
+        COST
+        <i class="icn-sm sort-icon" style="margin-left: 35px;" ng-show="orderProducts.field === 'cost'"
+           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+      </div>
+      <div class="col-4" ng-click="setOrderForProducts('sale')">
+        SALE PRICE
+        <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderProducts.field === 'sale'"
+           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+      </div>
+      <div class="col-4" ng-click="setOrderForProducts('taxable')">
+        TAXABLE
+        <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderProducts.field === 'taxable'"
+           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+      </div>
+      <div class="col-6">&nbsp;</div>
+    </li>
+
+    <li ng-repeat="product in productsList | orderBy : orderByForProducts : orderProducts.reverse"
+        ng-class="{'qt-product-form': showEditProduct}"
+        ng-controller="quicktech.core.products.productCtrl"
+        show-model-element="{{ 'show-' + product.versionedId.id}}">
+
+      <div class="intermediate-parent-elem" ng-if="!showEditProduct">
+
+        <div class="col-1" style="height: 18px;">
+          {{ product.ilc}}
+        </div>
+
+        <div class="col-1">
+          {{ product.manufacture}}
+        </div>
+
+        <div class="col-2" ng-class="{'product-description': category.default}">{{ product.description}}
+        </div>
+
+        <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
+
+        <div class="col-4">
+          {{ product.cost | currency: '$': 2 }}
+        </div>
+
+        <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
+
+        <div class="col-4" style="width: 50px">
+          <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
+            <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
+                   custom-disabled="{{ disabledCheckbox }}">
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+
+        <div class="col-6 pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+
+          <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+             ng-click="deleteProduct()"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+            <i class="icn-sm icn-delete"></i>
+          </a>
+
+          <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+             ng-click="openEditProduct()"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">
+            <i class="icn-sm icn-edit"></i>
+          </a>
+
+          <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+             aria-expanded="false" data-toggle="dropdown"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="move to other category">
+            <i class="icn-sm icn-send-again"></i>
+          </a>
+
+          <ul class="dropdown-menu move-prod" role="menu">
+
+            <li ng-repeat="category in categories">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
+                {{ category.name }}
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+
+
+      <div ng-if="showEditProduct"
+           ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'">
+      </div>
+
+    </li>
+
+
+    <li class="qt-product-form" ng-if="showCreateProduct">
+      <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
+    </li>
+
+  </ul>
 </div>
