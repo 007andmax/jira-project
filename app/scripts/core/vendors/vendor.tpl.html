@@ -1,146 +1,64 @@
-<div ng-controller="quicktech.core.vendors.vendorCtrl" vendor-card>
+<div ng-controller="quicktech.core.vendors.vendorCtrl" vendor-card
+     ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
 
-  <a href="javascript:void(0)" class="btn close-btn">
-    <i class="icn-sm icn-remove-token"></i>
-  </a>
+  <div class="company-cover-area"
+       style="background: url('images/company/cover.png') transparent right no-repeat; background-size: cover}">
 
-  <div class="vendor-cover-area" style="background-image:url('images/company/cover.png')">
+    <div class="name-rating" style="height: 10%">
+      <div class="company-name">{{ vendor.name }}</div>
+    </div>
+  </div>
 
-    <div class="product-name-txt">Products {{ vendor.products.length }}</div>
-
-    <div class="btn has-tooltip" ng-click="archiveVendor()" archive-vendor-button
-         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Vendor">
-      <i class="icn-sm icn-archive-company"></i>
+  <div class="company-primary-contact">
+    <div class="user-location"><i class="icn-sm icn-sb-location"></i>
+        <span>
+          {{ getPrimaryBillengAddress() }}
+        </span>
     </div>
 
-    <div class="name-rating">
+    <div class="user-contact-no">
+      <i class="icn-sm {{ getPhoneNumberCssClass(vendor.contacts[0].phoneNumbers[0]) }}"></i>
+      {{ vendor.contacts[0].phoneNumbers[0].number }}
+    </div>
 
-      <div class="vendor-name">
-        {{ vendor.name }}
+    <div class="user-info">
+
+      <div class="name-designation">
+
+        <h4>{{ getUserName(vendor.contacts[0]) }}</h4>
+
+        <i class="dot" ng-class="{'on': vendor.contacts[0].online, 'off': !vendor.contacts[0].online}"></i>
+
+        <span class="label label-light">{{ vendor.contacts[0].designation }}</span>
+
       </div>
+    </div>
+  </div>
 
-      <div class="vendor-total-products" vendor-total-products>
-        <span>Products {{ vendor.products.length }}
-          <i class="icn-sm icn-caret-right"></i>
-        </span>
-      </div>
+  <div class="vendor-actions user-actions">
 
-      <i class="dot-sep"></i>
+    <div class="btn btn-info has-tooltip" email-to="getPriorityContact().email"
+         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">
+      <i class="icn-sm icn-email-white"></i>
+    </div>
 
+    <div class="vendor-card-icons">
       <a href="javascript:void(0)" class="hit-area ha-14-16" show-popover>
-        <i class="icn-sm icn-description-white"></i>
+        <i class="icn-sm icn-description-white" style="background-position: -780px -206px;"></i>
       </a>
-
-      <!--<div class="dropdown pull-left">-->
-      <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip" data-toggle="dropdown" aria-expanded="false" data-placement="top" data-container="body" data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>" title="" data-original-title="add cover photo"><i class="icn-md icn-cover"></i></a>-->
-      <!--<ul class="dropdown-menu">-->
-      <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Upload Photo...</a></li>-->
-      <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Restore Default Photo...</a></li>-->
-      <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)">Reposition...</a></li>-->
-      <!--</ul>-->
-      <!--</div>-->
-
       <a href="javascript:void(0)" class="hit-area has-tooltip"
          ui-sref="editVendor( { vendorId: vendor.id } )"
          tooltip-placement="top" tooltip="Edit">
         <i class="icn-md icn-edit-tag"></i>
       </a>
 
-    </div>
-  </div>
-
-  <div class="vendor-bdr"></div>
-
-  <div class="vendor-contacts">
-
-    <div contacts-slider ng-model="vendor.contacts"></div>
-
-    <div class="user-location">
-      <i class="icn-sm icn-sb-location"></i>
-      <span>{{ getPrimaryBillengAddress() }}</span>
-    </div>
-
-    <div class="user-actions">
-
-      <div class="btn btn-info has-tooltip" email-to="getPriorityContact().email"
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">
-        <i class="icn-sm icn-email-white"></i>
-      </div>
-
-      <a href="javascript:void(0)" class="vendor-more-btn hit-area ha-22-38 has-tooltip pull-right"
-         tooltip-placement="top" tooltip="More">
-        <i class="icn-more icn-sm"></i>
+      <a class="hit-area has-tooltip"
+         ng-click="archiveVendor()" archive-vendor-button
+         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Vendor">
+        <i class="icn-sm icn-archive-company"></i>
       </a>
-
     </div>
 
   </div>
 
-  <div class="vendor-product-list"
-       ng-include="'/html/scripts/core/vendors/product-list.tpl.html'">
-  </div>
-
-  <div class="vendor-more-wrapper">
-
-    <div class="panel-group" ng-init="currentCollapse = 'COMPANY-ASSOCIATION'">
-
-      <div class="panel panel-default locations-panel" company-location-collapse>
-        <div class="panel-heading">
-
-          <h4 class="panel-title site-locations">
-
-            <a ng-class="{'collapsed': currentCollapse !== 'COMPANY-LOCATION'}"
-               href="javascript:void(0)" ng-click="currentCollapse = 'COMPANY-LOCATION'">
-
-              Site/Locations <span class="text-muted">{{ vendor.addresses.length }}</span>
-              <i class="icn-sm icn-expand pull-right"></i>
-
-              <span class="slider-arrows">
-
-                <i class="icn-sm icn-arrow-previous"
-                   custom-disabled="{{ locationIndex <= 0 }}"
-                   ng-click="changeCurrentLocation(locationIndex - 1)"></i>
-
-                <i class="icn-sm icn-arrow-next"
-                   custom-disabled="{{ locationIndex >= vendor.addresses.length - 1 }}"
-                   ng-click="changeCurrentLocation(locationIndex + 1)"></i>
-
-              </span>
-
-            </a>
-
-          </h4>
-        </div>
-
-        <div class="panel-collapse collapse" collapse="currentCollapse !== 'COMPANY-LOCATION'">
-          <div class="panel-body">
-
-            <div class="location-slider"
-                 ng-include="'/html/scripts/common/templates/location-slider.tpl.html'"></div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <div class="panel panel-default" company-association-list>
-
-        <div class="panel-heading">
-          <h4 class="panel-title assc-client-companies">
-            <a ng-class="{'collapsed': currentCollapse !== 'COMPANY-ASSOCIATION'}"
-               href="javascript:void(0)" ng-click="currentCollapse = 'COMPANY-ASSOCIATION'">
-              Assc. Client Companies
-              <span class="text-muted">{{ vendor.companyAssociations.length }}</span>
-              <i class="icn-sm icn-expand pull-right"></i>
-            </a>
-          </h4>
-        </div>
-
-        <div class="panel-collapse collapse" collapse="currentCollapse !== 'COMPANY-ASSOCIATION'"
-             ng-include="'/html/scripts/core/vendors/company-associations-list.tpl.html'"></div>
-
-      </div>
-
-    </div>
-  </div>
 </div>

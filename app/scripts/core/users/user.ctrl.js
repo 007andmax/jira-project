@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.userCtrl',
-    ['$scope', 'UsersService',
-      function ($scope, UsersService) {
+    ['$scope', 'UsersService', '$timeout', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, UsersService, $timeout, UserConfirmationsService) {
 
         $scope.checkEditUserId = function (index, usersInLine) {
 
@@ -66,7 +66,7 @@
 
         $scope.getPriorityNumberInfo = function (option) {
 
-          if (!$scope.user.phoneNumbers && ($scope.user.phoneNumbers.length < 1)) {
+          if (!$scope.user.phoneNumbers || ($scope.user.phoneNumbers.length < 1)) {
             return;
           }
 
@@ -99,7 +99,12 @@
         };
 
         $scope.archiveUsers = function () {
-          UsersService.deleteOrArchiveUser($scope.user.id, true);
+          var confirmMesage = 'Do you want to archive ' + $scope.user.firstName + ' ' + $scope.user.lastName + '?',
+            confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            UsersService.deleteOrArchiveUser($scope.user.id, true);
+          });
         };
 
       }]);

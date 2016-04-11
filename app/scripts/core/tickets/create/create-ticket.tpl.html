@@ -297,8 +297,13 @@
                        typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                        custom-style="{'max-height': '170px', 'overflow-y': 'auto'}">
 
-                <div typeahead-input-icon="ticketCompany, ticketCreatedUser"
-                     style="position: absolute;top: 13px;right: 13px;"></div>
+                <span style="position: absolute; top: 14px; right: 13px;">
+                  <i class="icn-sm icn-caret-gray" ng-hide="ticketCompanyChoosen"></i>
+
+                  <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
+                     ng-show="ticketCompanyChoosen" ng-click="clearTicketCompany()"
+                     tooltip="clear" tooltip-placement="top"></i>
+                </span>
 
               </div>
 

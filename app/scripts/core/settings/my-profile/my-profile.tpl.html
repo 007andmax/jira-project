@@ -411,7 +411,8 @@
                  ng-model="userProfile.address"
                  show-validation-messages="triedToSave"></div>
 
-            <div phone-numbers-edit ng-model="userProfile.address.phoneNumbers"></div>
+            <div phone-numbers-edit ng-model="userProfile.address.phoneNumbers" is-try-to-save="savingProfileSettings"
+                 country-code="{{userProfile.address.countryCode}}"></div>
 
             <!--<div class="form-row clearfix" ng-repeat="phoneNumber in userProfile.address.phoneNumbers">-->
 

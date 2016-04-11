@@ -6,9 +6,9 @@
       <div class="create-company-sidebar">
         <ul navigation-bar="#navigation-content-wrapper">
 
-          <li navigate-to="#owerview">
-            <a href="javascript:void(0)">Overview</a>
-          </li>
+          <!--<li navigate-to="#owerview">-->
+            <!--<a href="javascript:void(0)">Overview</a>-->
+          <!--</li>-->
 
           <li navigate-to="#basic-info">
             <a href="javascript:void(0)">Basic Info</a>
@@ -66,7 +66,7 @@
 
         </div>
 
-        <div id="owerview" class="company-overview-wrapper clearfix">
+        <div ng-if="editCompany.id" id="owerview" class="company-overview-wrapper clearfix">
 
           <h3>Overview</h3>
 
@@ -193,7 +193,8 @@
                        address-autocomplete template-page="companies"
                        ng-model="location" show-validation-messages="triedToSave"></div>
 
-                  <div phone-numbers-edit ng-model="location.phoneNumbers"></div>
+                  <div phone-numbers-edit ng-model="location.phoneNumbers" is-try-to-save="triedToSave"
+                       country-code="{{location.countryCode}}"></div>
 
                   <div class="form-row clearfix" style="margin-top: 13px;">
                     <time-zone-autocomplete address="location" time-zones="timeZones"></time-zone-autocomplete>
@@ -342,7 +343,8 @@
                   </div>
 
                   <div class="form-row clearfix">
-                    <div ng-show="currentUser.accountType !== 'ROOT'" phone-numbers-edit
+                    <div ng-show="currentUser.accountType !== 'ROOT'" is-try-to-save="triedToSave"
+                         phone-numbers-edit country-code="{{editCompany.addresses[0].countryCode}}"
                          ng-model="contact.phoneNumbers"></div>
                   </div>
 

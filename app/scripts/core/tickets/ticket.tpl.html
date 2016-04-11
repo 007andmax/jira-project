@@ -16,7 +16,7 @@
          ng-style="{'width': 'calc(100% - ' +
           (PermissionsService.isTagsVisible(listType, currentUser.role) && ticket.tags.length ? ticket.tags.length * 12 + 60 : 60) + 'px)'}">
         {{ getUserName(user) }}
-        <span ng-if="company.name !== 'Unassigned'">
+        <span ng-if="!company.isDefault">
           <span class="dot-sep"></span>
           <span class="company-name">{{ company.name }}</span>
         </span>

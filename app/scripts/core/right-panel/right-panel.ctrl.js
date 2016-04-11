@@ -31,7 +31,7 @@
 
               RightPanelService.getClientCompaniesGroupedData(function (resp) {
                 $scope.clientCompaniesGroupedData = resp.filter(function (item) {
-                  if (item.company.name !== 'Unassigned') return item;
+                  if (!item.company.isDefault) return item;
                 });
               });
 

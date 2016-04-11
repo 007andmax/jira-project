@@ -22,7 +22,7 @@
 
         $scope.sendEmailInPopover = function (contactId) {
           var user = UsersService.getOneById(contactId);
-          window.open("mailto:" + user.primaryEmail);
+          window.open("mailto:" + user.primaryEmail, '_parent');
         };
 
         $scope.downloadAgent = function () {

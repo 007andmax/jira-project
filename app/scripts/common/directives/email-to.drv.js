@@ -12,7 +12,7 @@
         link: function (scope, element) {
 
           element.click(function () {
-            window.open("mailto:" + scope.emailTo);
+            window.open("mailto:" + scope.emailTo, '_parent');
           });
 
         }

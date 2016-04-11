@@ -3,8 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("addressAutocomplete",
-    [
-      '$timeout', '$http', 'AddressesService', function ($timeout, $http, AddressesService) {
+    ['$timeout', '$http', 'AddressesService', function ($timeout, $http, AddressesService) {
       return {
         restrict: 'A',
         require: 'ngModel',
@@ -120,7 +119,6 @@
             }
 
             $scope.$apply();
-
           });
 
           function getCountryCode(place) {
@@ -155,7 +153,6 @@
           }
         }
       }
-    }
-    ]);
+    }]);
 
 })();

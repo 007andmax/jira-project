@@ -79,9 +79,9 @@
 
 .invoice-page .sub-header .billed,
 .invoice-page .sub-header .shipto {
-  width: 240px;
+  width: 210px;
   float: left;
-  margin-right: 10px;
+  margin-right: 50px;
 }
 
 .invoice-page .sub-header .billed .company-name, .invoice-page .sub-header .shipto .company-name, .invoice-page .sub-header .billed .number, .invoice-page .sub-header .shipto .number, .invoice-page .sub-header .billed .email, .invoice-page .sub-header .shipto .email {

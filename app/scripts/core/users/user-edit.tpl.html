@@ -87,7 +87,8 @@
 
         </div>
 
-        <div ng-hide="isTechUser" class="form-row" phone-numbers-edit ng-model="editUser.phoneNumbers"></div>
+        <div ng-hide="isTechUser" class="form-row" phone-numbers-edit is-try-to-save="triedToSave"
+             country-code="{{userCompanyCountryCode}}" ng-model="editUser.phoneNumbers"></div>
 
         <div class="form-row clearfix">
 
@@ -122,9 +123,12 @@
               Please select the company.
             </div>
 
-            <div class="dropdown">
+            <input type="text" class="form-control" name="userCompany"
+                   value="{{userCompany.name || userCompany}}" ng-readonly="true" ng-hide="isCreation">
 
-              <input type="text" ng-model="userCompany" autocomplete="off" ng-readonly="!isCreation"
+            <div class="dropdown" ng-show="isCreation">
+
+              <input type="text" ng-model="userCompany" autocomplete="off"
                      class="form-control form-control-dropdown dropdown-toggle"
                      typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                      typeahead-editable="false" typeahead-min-length="0"
@@ -132,7 +136,7 @@
                      name="userCompany" ng-trim="false" ng-required="true"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-              <div ng-show="isCreation" typeahead-input-icon="userCompany" style="position: absolute;top: 13px;right: 13px;"></div>
+              <div typeahead-input-icon="userCompany" style="position: absolute;top: 13px;right: 13px;"></div>
 
             </div>
           </div>

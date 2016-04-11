@@ -4,7 +4,8 @@
 
   angular.module("quicktech.core.rightPanel").directive('customPopoverMenu',
     ['$timeout', '$templateRequest', '$compile', 'UsersService', 'SubscriptionsService',
-      function ($timeout, $templateRequest, $compile, UsersService, SubscriptionsService) {
+      'quicktech.common.services.UserConfirmationsService',
+      function ($timeout, $templateRequest, $compile, UsersService, SubscriptionsService, UserConfirmationsService) {
         return {
           restrict: 'A',
           link: function (scope, element, attrs) {
@@ -104,7 +105,7 @@
                 hideThisPopover();
                 return;
               }
-              window.open("mailto:" + scope.user.primaryEmail);
+              window.open("mailto:" + scope.user.primaryEmail, '_parent');
               hideThisPopover();
             };
 
@@ -119,6 +120,9 @@
             };
 
             scope.archiveContact = function () {
+              var confirmMesage = 'Do you want to archive ',
+                confirmButton = 'Yes';
+
               if (Object.keys(scope.selectedCompanyUsers).length !== 0) {
 
                 var usersIds = [];
@@ -128,11 +132,21 @@
                     usersIds.push(userId)
                   }
                 }
-                console.log('archive users ' + usersIds);
+                for (var index in scope.companyData.users) {
+                  var user = scope.companyData.users[index];
+                  confirmMesage += user.firstName + ' ' + user.lastName;
+                  confirmMesage += (index < scope.companyData.users.length - 1) ? ', ' : '?';
+                }
+                UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+                  console.log('archive users ' + usersIds);
+                });
                 hideThisPopover();
                 return;
               }
-              console.log('archive ' + scope.user.id);
+              confirmMesage += scope.user.firstName + ' ' + scope.user.lastName  + '?';
+              UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+                console.log('archive ' + scope.user.id);
+              });
               hideThisPopover();
             };
 

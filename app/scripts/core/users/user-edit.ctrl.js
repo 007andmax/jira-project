@@ -3,13 +3,26 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state) {
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
+      '$timeout',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope, $timeout) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
 
         $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (item.name !== 'Unassigned') return item;
+          if (item.name !== 'Unassigned') {
+            return item;
+          }
+        });
+
+        CompaniesService.getClientCompaniesInfo($scope, function (resp) {
+          $scope.clientCompaniesInfo = resp;
+          if ($scope.editUser.companyId) {
+            var address = resp[$scope.editUser.companyId].addresses[0];
+            if (address) {
+              $scope.userCompanyCountryCode = address.countryCode;
+            }
+          }
         });
 
         if (!$scope.clientCompanies || $scope.clientCompanies.length < 1) {
@@ -58,6 +71,12 @@
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);
+          if ($scope.userCompany.isDefault) {
+            $scope.userCompany = '';
+          }
+          if ($scope.editUser.companyId && $scope.clientCompaniesInfo) {
+            $scope.userCompanyCountryCode = $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses[0].countryCode;
+          }
         });
 
         $scope.cancelEdit = function () {
@@ -70,7 +89,8 @@
 
         $scope.getUserCompanyName = function () {
           if ($scope.editUser.companyId) {
-            return CompaniesService.getOneById($scope.editUser.companyId).name;
+            var company = CompaniesService.getOneById($scope.editUser.companyId);
+            return company.name;
           }
         };
 
@@ -100,8 +120,13 @@
 
             UsersService.save(editUser, function () {
               $scope.savingInProcess = false;
+              $timeout(function () {
+                $rootScope.$broadcast('show-after-save-' + editUser.id.toString());
+              });
               $scope.cancelEdit();
             })
+          } else {
+            $scope.triedToSave = true;
           }
         };
 
@@ -137,7 +162,7 @@
           $scope.editUser.password = $scope.editUser.confPassword = '';
         };
 
-        $scope.changeAccountEnabled = function(){
+        $scope.changeAccountEnabled = function () {
           $scope.isResetPassCollapsed = true;
         };
 

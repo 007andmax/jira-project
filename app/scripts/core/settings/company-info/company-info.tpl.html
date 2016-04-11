@@ -101,7 +101,7 @@
                 <!--is-uniq-validation validation-func="validateCompanyDomain"-->
                 <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
 
-                <span class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHost }}</span>
+                <span class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHostInbox }}</span>
 
               </div>
 
@@ -134,7 +134,7 @@
 
                 <input class="form-control" type="text" readonly>
                 <span class="company-url-addon">
-                  {{ editCompany.name + '.' + currentHost }}
+                  {{ companyForSettingPage.supportMailBox + '.' + currentHost }}
                 </span>
               </div>
             </div>
@@ -267,7 +267,8 @@
               <div address-autocomplete template-page="settings"
                    ng-model="address" show-validation-messages="triedToSave"></div>
 
-              <div phone-numbers-edit ng-model="address.phoneNumbers"></div>
+              <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
+                   country-code="{{address.countryCode}}"></div>
 
               <div class="form-row clearfix" style="margin-top: 13px;">
                 <time-zone-autocomplete address="address" time-zones="timeZones"></time-zone-autocomplete>

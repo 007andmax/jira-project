@@ -9,7 +9,8 @@
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
                 UserNotificationService, sessionId, sessionTime, ServicesService, $timeout) {
 
-        var isNeedToDeleteUser = true;
+        var isNeedToDeleteUser = true,
+          unassignedCompany = CompaniesService.getUnassignedCompany();
 
         $scope.fileInfo = { quantityErrorFiles: 0 };
         $scope.ticket = { priorityLevel: 'MEDIUM' };
@@ -72,22 +73,46 @@
           return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
 
-        $scope.$watch('ticketCompany', function () {
-          if ($scope.ticketCompany && typeof $scope.ticketCompany === 'object') {
+        $scope.$watch('ticketCompany', function (val) {
+          if (val && typeof val === 'object') {
+            $scope.ticketCompanyChoosen = true;
 
             if (isNeedToDeleteUser) {
               delete $scope.ticketCreatedUser;
             }
-
             isNeedToDeleteUser = true;
 
-            $scope.ticket.company = $scope.ticketCompany.id;
+            if ($scope.ticket.createdUser) {
+              $scope.ticket.createdUser.companyId = val.id;
+            }
 
-            $scope.usersCompany = UsersService.getAllByCompanyId($scope.ticketCompany.id);
-            $scope.serviceList = ServicesService.getAllByCompany($scope, $scope.ticketCompany.id);
+            $scope.usersCompany = UsersService.getAllByCompanyId(val.id);
+            $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
+            $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
+          } else if (val) {
+            $scope.ticketCompanyChoosen = true;
+            var selectedCompany;
+            if ($scope.ticketCreatedUser && typeof $scope.ticketCreatedUser === 'object' && $scope.ticketCreatedUser.company.name === val) {
+              selectedCompany = $scope.ticketCreatedUser.company;
+            } else {
+              selectedCompany = $scope.clientCompanies.find(function (item) {
+                return item.name === val;
+              });
+            }
 
+            if (!selectedCompany) {
+              if ($scope.ticket.createdUser) {
+                $scope.ticket.createdUser.companyId = undefined;
+              }
+              return $scope.ticketForm.ticketCompany.$setValidity('invalidName', false);
+            } else {
+              $scope.ticketCompany = selectedCompany;
+            }
           } else {
-            $scope.ticket.company = CompaniesService.getUnassignedCompany().id;
+            if ($scope.ticket.createdUser) {
+              $scope.ticket.createdUser.companyId = undefined;
+            }
+            $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
             $scope.ticket.serviceExpenses = [{}];
             $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
               if (!item.isDefault) {
@@ -108,25 +133,36 @@
             isNeedToDeleteUser = false;
             var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
 
-            if (ticketCompany.id === CompaniesService.getUnassignedCompany().id) {
-              $scope.ticket.company = ticketCompany.id;
-            } else {
+            if (ticketCompany.id !== unassignedCompany.id) {
               $scope.ticketCompany = ticketCompany;
+              $scope.ticket.createdUser.companyId = ticketCompany.id;
+            } else {
+              $scope.ticket.createdUser.companyId = unassignedCompany.id;
             }
           } else if (val && val.match($scope.emailPattern)) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
-            UsersService.isEmailUnique(val, '', function (resp) {
-              if (resp.value) {
-                $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
-                $scope.ticket.createdUser = {
-                  primaryEmail: val
-                };
-                $scope.ticketCompany = '';
-              } else {
-                $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
-              }
+            var selectedUser = $scope.usersCompany.find(function (item) {
+              return item.primaryEmail === val;
             });
+
+            if (!selectedUser) {
+              UsersService.isEmailUnique(val, '', function (resp) {
+                if (resp.value) {
+                  $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
+                  $scope.ticket.createdUser = {
+                    primaryEmail: val,
+                    companyId: $scope.ticketCompany ? $scope.ticketCompany.id : unassignedCompany.id
+                  };
+                  isNeedToDeleteUser = false;
+                } else {
+                  $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
+                }
+              });
+            } else {
+              $scope.ticketCreatedUser = selectedUser;
+            }
+
           } else if (val) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', false);
           }
@@ -264,16 +300,18 @@
 
           var errors = Object.keys(form.$error),
             error = errors.find(function (item) {
-              return item === 'pattern' || item === 'unique';
+              return item === 'pattern' || item === 'unique' || item === 'invalidName';
             });
 
 
           if (error === 'pattern') {
-            return 'INCORRECT EMAIL.';
+            return 'Incorrect email.';
           } else if (error === 'unique') {
-            return 'EMAIL NOT UNIQUE.';
+            return 'Email already occupied by tech user.';
+          } else if (error === 'invalidName') {
+            return 'Invalid company name.';
           } else if (!error && errors.indexOf('required') > -1) {
-            return 'REQUIRED FIELDS CANNOT BE LEFT EMPTY.';
+            return 'Required fields can\'t be left empty.';
           }
         };
 
@@ -313,8 +351,15 @@
             $scope.errorFileMessage = false;
           }
 
-        })
+        });
 
+        $scope.clearTicketCompany = function () {
+          $scope.ticketCompany = undefined;
+          if ($scope.ticketCreatedUser && $scope.ticketCreatedUser.id) {
+            $scope.ticketCreatedUser = undefined;
+          }
+          $scope.ticketCompanyChoosen = false;
+        };
       }
     ]);
 

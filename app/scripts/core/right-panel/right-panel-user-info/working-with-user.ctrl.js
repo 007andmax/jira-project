@@ -19,7 +19,7 @@
         }
 
         $scope.sendEmailInPopover = function () {
-          window.open("mailto:" + $scope.userInfo.primaryEmail);
+          window.open("mailto:" + $scope.userInfo.primaryEmail, '_parent');
         };
 
       }]);

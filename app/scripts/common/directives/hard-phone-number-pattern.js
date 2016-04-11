@@ -2,47 +2,69 @@
 
 (function () {
 
-  angular.module("quicktech.common.directives").directive('hardPhoneNumberPattern', function () {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      link: function (scope, element, attr, ngModel) {
+  angular.module("quicktech.common.directives").directive('hardPhoneNumberPattern',
+    ['quicktech.common.services.PhoneFormats', function (PhoneFormats) {
+      return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModel) {
 
-        if (!attr.pattern && !attr.ngPattern) throw 'Error: ngPattern required by hardPhoneNumberPattern directive!';
-
-        var pattern = scope.$eval(attr.hardPhoneNumberPattern),
-          value = ngModel.$viewValue || '',
-          isRequired = attr.hardResetRequired,
-          softPattern = attr.ngPattern ? scope.$eval(attr.ngPattern) : new RegExp(attr.pattern);
-
-        element.on('input', checkAndFix);
-        element.on('change', checkAndFix);
-
-        scope.$watch(function () {
-          return ngModel.$viewValue
-        }, checkAndFix);
-
-        function checkAndFix(e) {
-
-          var newValue = element.val().trim();
-
-          if (newValue && softPattern.test(newValue)) {
-            if (pattern.test(newValue)) value = newValue.replace(pattern, "($1) $2-$3");
-            else value = newValue;
-            ngModel.$setViewValue(value);
-            element.val(value);
-          } else if (newValue) {
-            ngModel.$setViewValue(value);
-            element.val(value);
-          } else {
-            value = newValue;
+          if (!attr.pattern && !attr.ngPattern) {
+            throw 'Error: ngPattern required by hardPhoneNumberPattern directive!';
           }
 
-          if (isRequired) {
-            ngModel.$setValidity("required", !!(value && value.length > 0));
+          var value = ngModel.$viewValue || '',
+            isRequired = attr.hardResetRequired,
+            softPattern = attr.ngPattern ? scope.$eval(attr.ngPattern) : new RegExp(attr.pattern);
+
+          element.on('input', checkAndFix);
+          element.on('change', checkAndFix);
+
+          scope.$watch(function () {
+            return ngModel.$viewValue
+          }, checkAndFix);
+
+          attr.$observe('country', function () {
+            checkAndFix();
+            scope.phoneNumbersForm.$setPristine();
+          });
+
+          function checkAndFix(e) {
+
+            var newValue = element.val().trim();
+
+            if (newValue && value && newValue.length < value.length) {
+              value = newValue;
+              ngModel.$setViewValue(value);
+              element.val(value);
+            } else {
+              if (!newValue) {
+                setPrefix(attr.country);
+              } else if (softPattern.test(newValue)) {
+                value = PhoneFormats.getFormattedPhone(attr.country, newValue);
+                ngModel.$setViewValue(value);
+                element.val(value);
+              } else {
+                value = newValue;
+              }
+            }
+
+            if (isRequired) {
+              ngModel.$setValidity("required", !!(value && value.length > 0));
+            }
+          }
+
+          function setPrefix(country) {
+            if (country) {
+              var format = PhoneFormats.getCountryFormats(country);
+              if (format) {
+                value = format.prefix;
+                ngModel.$setViewValue(value);
+                element.val(value);
+              }
+            }
           }
         }
-      }
-    };
-  })
+      };
+    }])
 })();

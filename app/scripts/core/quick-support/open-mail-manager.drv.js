@@ -20,7 +20,7 @@
             var body = "Follow that link(" + link + ") to download agent";
 
             element.click(function () {
-              window.open("mailto:?subject=" + subject + "&body=" + body, 'new');
+              window.open("mailto:?subject=" + subject + "&body=" + body, '_parent');
             })
 
           }

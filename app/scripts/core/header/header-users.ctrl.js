@@ -34,6 +34,10 @@
           }
         });
 
+        $scope.$on('$destroy', function () {
+          $scope.clearInput();
+        })
+
       }]);
 
 }());
