@@ -23,15 +23,17 @@
 
           function validate() {
             if (!timeoutId) {
-              timeoutId = $timeout(function () {
-                if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
-                  scope.validationFunc(ngModelCtrl, scope.modelId);
-                }
-              }, 500);
-            } else {
               $timeout.cancel(timeoutId);
-              timeoutId = null;
             }
+            timeoutId = setValidationTimeout();
+          }
+
+          function setValidationTimeout() {
+            $timeout(function () {
+              if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
+                scope.validationFunc(ngModelCtrl, scope.modelId);
+              }
+            }, 700);
           }
         }
       }
