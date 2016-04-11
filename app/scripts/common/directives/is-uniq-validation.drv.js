@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("isUniqValidation",
-    [function () {
+    ['$timeout', function ($timeout) {
       return {
         restrict: 'A',
         require: 'ngModel',
@@ -13,6 +13,8 @@
         },
         link: function (scope, element, attrs, ngModelCtrl) {
 
+          var timeoutId;
+
           validate();
 
           scope.$watch(function () {
@@ -20,8 +22,15 @@
           }, validate);
 
           function validate() {
-            if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
-              scope.validationFunc(ngModelCtrl, scope.modelId);
+            if (!timeoutId) {
+              timeoutId = $timeout(function () {
+                if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
+                  scope.validationFunc(ngModelCtrl, scope.modelId);
+                }
+              }, 500);
+            } else {
+              $timeout.cancel(timeoutId);
+              timeoutId = null;
             }
           }
         }
