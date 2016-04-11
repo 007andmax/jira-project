@@ -45,24 +45,18 @@
 
         $scope.search = function (value) {
 
-          if (!isNaN(parseFloat(value)) && value.length > 2) {
+          if (!isNaN(parseInt(value)) && value.length > 2) {
 
-            var paramsToSend = {
-              filter: $stateParams.listType.toUpperCase(),
-              keyword: value
-            };
+            $scope.sharedState.searchFilter.number = value;
 
             if ($scope.searchParams.priority.enabled) {
-              paramsToSend.priority = searchPriorityParamsMap[$scope.searchParams.priority.value];
+              $scope.sharedState.searchFilter.priority = searchPriorityParamsMap[$scope.searchParams.priority.value];
             }
 
             if ($scope.searchParams.status.enabled) {
-              paramsToSend.status = searchStatusParamsMap[$scope.searchParams.status.value];
+              $scope.sharedState.searchFilter.status = searchStatusParamsMap[$scope.searchParams.status.value];
             }
-
-            return TicketsService.search(paramsToSend);
-
-          } else if (isNaN(parseFloat(value))) {
+          } else if (isNaN(parseInt(value))) {
 
             autocompleteModel = [];
 
@@ -162,6 +156,10 @@
           } else if ($scope.sharedState.searchFilter.companyId) {
 
             delete $scope.sharedState.searchFilter.companyId;
+
+          } else if ($scope.sharedState.searchFilter.number) {
+
+            delete $scope.sharedState.searchFilter.number;
 
           }
         };
