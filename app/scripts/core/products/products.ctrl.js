@@ -5,8 +5,10 @@
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
-        $scope.productsList = [];
+
         var fullList = ProductsService.getFullListForAutocomplete(function () {
+          $scope.productsList = [];
+
           for (var i = 0; i < fullList.length; i++) {
             var products = fullList[i].products;
             for (var j = 0; j < products.length; j++) {

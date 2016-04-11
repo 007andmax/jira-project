@@ -38,7 +38,7 @@
          ng-class="{'active': currentTicketInfoTab === 'COMPANY'}"
          ng-controller="quicktech.core.rightPanel.rightPanelCompanyInfoTabCtrl">
 
-      <div class="company-detail">
+      <div class="company-detail" ng-hide="companyGroupedData.company.default">
 
         <h4>{{ companyGroupedData.company.name }}</h4>
 
@@ -109,15 +109,15 @@
           {{ clientCompanyInfo.billingAddress.address }}
         </p>
 
-        <div class="site-ref">
+        <!--<div class="site-ref">-->
           <!--<div class="btn-location" data-container="body" data-toggle="popover-location" data-placement="bottom">-->
           <!--<i class="icn-sm icn-sb-location pull-left"></i> Site Ref. “TCL 01”-->
           <!--</div>-->
-        </div>
+        <!--</div>-->
 
         <div class="about-company">
 
-          <div class="company-timezone">
+          <div class="company-timezone" ng-show="clientCompanyInfo.billingAddress">
             GMT/{{ clientCompanyInfo.billingAddress.locale.description.match(gmtPattern)[0] }}
             <span class="dot-sep"></span>
             {{ clientCompanyInfo.billingAddress.locale.description.match(hourPattern)[0] }} hour
@@ -134,9 +134,9 @@
         </div>
 
       </div>
-      <div class="sb-heading primary-contact-heading">Primary Contact(s)</div>
+      <div class="sb-heading primary-contact-heading" ng-hide="companyGroupedData.company.default">Primary Contact(s)</div>
 
-      <ul class="primary-contacts">
+      <ul class="primary-contacts" ng-hide="companyGroupedData.company.default">
 
         <li class="list-users" style="padding: 0 30px 0 0"
             ng-repeat="companyContact in companyContacts">
@@ -245,14 +245,15 @@
       </div>
 
       <div class="sb-heading users-heading">Users
-        <span class="total">{{ companyGroupedData.users.length }}</span>
+        <span class="total">
+          {{ companyGroupedData.users.length - (companyGroupedData.company.default ? 1 : 0) }}</span>
       </div>
 
       <ul class="general-users" custom-selection>
         <li class="list-users" ng-class="{'checked': selectedUsers[user.id]}" custom-popover-menu
             custom-popover-menu-margin-top="-32px"
             custom-popover-template="/html/scripts/core/right-panel/custom-popover.tpl.html"
-            ng-repeat="user in companyGroupedData.users | filter: usersFilter">
+            ng-repeat="user in companyGroupedData.users | filter: usersFilter" ng-hide="user.default">
 
           <a href="javascript:void(0)" class="pull-left avatar">
             <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
