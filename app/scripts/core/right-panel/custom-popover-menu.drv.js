@@ -123,7 +123,7 @@
               var confirmMesage = 'Do you want to archive ',
                 confirmButton = 'Yes';
 
-              if (Object.keys(scope.selectedCompanyUsers).length !== 0) {
+              if (scope.selectedCompanyUsers && Object.keys(scope.selectedCompanyUsers).length !== 0) {
 
                 var usersIds = [];
 
