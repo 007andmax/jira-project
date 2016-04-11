@@ -134,7 +134,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-6 {
-  width: 64px;
+  width: 84px;
   text-align: right;
   padding-right: 0;
 }
@@ -164,7 +164,7 @@ body.non-body-scroll::-webkit-scrollbar {
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-6 {
-    width: 64px;
+    width: 84px;
   }
 }
 
@@ -193,7 +193,7 @@ body.non-body-scroll::-webkit-scrollbar {
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-6 {
-    width: 64px;
+    width: 84px;
   }
 }
 
