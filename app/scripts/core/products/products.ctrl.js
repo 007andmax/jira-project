@@ -6,6 +6,7 @@
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
 
+        $scope.pageTab = 'group';
         $scope.isCreateCategoryShow = false;
         $scope.newCategory = {};
         $scope.categories = ProductsService.getCategories($scope);
@@ -14,6 +15,12 @@
 
         $scope.status = {
           isopen: false
+        };
+
+        $scope.setPageTab = function (tab) {
+          if (tab !== $scope.pageTab) {
+            $scope.pageTab = tab;
+          }
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
@@ -46,7 +53,7 @@
           $rootScope.$broadcast('cancelEditForm');
         };
 
-        $scope.closeCreateCategoryForm = function(){
+        $scope.closeCreateCategoryForm = function () {
           $scope.isCreateCategoryShow = false;
         }
 
