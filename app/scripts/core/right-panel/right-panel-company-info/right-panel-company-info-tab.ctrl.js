@@ -7,17 +7,19 @@
       function ($scope, CompaniesService, DevicesService, UsersService) {
 
         $scope.$watch('companyGroupedData.company.id', function () {
-          $scope.companyContacts = CompaniesService.getCompanyContacts($scope, $scope.companyGroupedData.company.id);
+          if ($scope.companyGroupedData.company) {
+            $scope.companyContacts = CompaniesService.getCompanyContacts($scope, $scope.companyGroupedData.company.id);
 
-          DevicesService.getDefaultCompanyCredentials($scope.companyGroupedData.company.id, function (resp) {
-            $scope.isCompanyHasUserNameAndPass = resp.value;
-          });
+            DevicesService.getDefaultCompanyCredentials($scope.companyGroupedData.company.id, function (resp) {
+              $scope.isCompanyHasUserNameAndPass = resp.value;
+            });
 
-          $scope.downloadAgentUser = {
-            name: '',
-            password: '',
-            companyId: $scope.companyGroupedData.company.id
-          };
+            $scope.downloadAgentUser = {
+              name: '',
+              password: '',
+              companyId: $scope.companyGroupedData.company.id
+            };
+          }
         });
 
         $scope.sendEmailInPopover = function (contactId) {

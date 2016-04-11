@@ -33,6 +33,9 @@
           fild: 'name',
           reverse: false
         };
+        $scope.company = {
+          id: $stateParams.companyId
+        };
         $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
           if (resp === $scope.company.id) {
             $state.go('companies');
@@ -43,7 +46,8 @@
         });
 
         $scope.isChartsAccess = function () {
-          return $scope.currentUser.role === 'SUPER_TECH_ADMIN' && $scope.company.accountType === 'CLIENT';
+          return $scope.currentUser.role === 'SUPER_TECH_ADMIN' &&
+            ($scope.company ? $scope.company.accountType === 'CLIENT' : false);
         };
 
         rightPanelSharedState.companyId = $stateParams.companyId;

@@ -22,18 +22,18 @@
           }, validate);
 
           function validate() {
-            if (!timeoutId) {
+            if (timeoutId) {
               $timeout.cancel(timeoutId);
             }
             timeoutId = setValidationTimeout();
           }
 
           function setValidationTimeout() {
-            $timeout(function () {
+            return $timeout(function () {
               if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
                 scope.validationFunc(ngModelCtrl, scope.modelId);
               }
-            }, 700);
+            }, 500);
           }
         }
       }

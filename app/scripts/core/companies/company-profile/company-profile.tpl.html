@@ -392,7 +392,7 @@
     <span><i class="icn-sm icn-collapse"></i></span>
   </div>
 
-  <div ng-if="isChartsAccess()" class="expand-charts" ng-click="toggleCollapsed()"
+  <div ng-if="!company || isChartsAccess()" class="expand-charts" ng-click="toggleCollapsed()"
        ng-class="{'hide': !isCollapsed}">
     <p class="pull-left">Expand to view overall statistics</p>
     <i class="icn-sm icn-expand pull-right"></i>
