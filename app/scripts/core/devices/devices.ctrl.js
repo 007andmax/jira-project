@@ -8,20 +8,19 @@
 
         $scope.isCollapsedGraph = true;
 
-        $scope.devicesCount = DevicesService.getDevicesCount($scope, function(){
+        $scope.devicesCount = DevicesService.getDevicesCount($scope, function () {
           console.log($scope.devicesCount)
         });
 
         $scope.srefToCompanyDevices = function (companyId) {
-          $state.go('companyDevices', {companyId: companyId});
+          $state.go('companyDevices', { companyId: companyId });
         };
 
-        $scope.toggleCollapsed = function(){
+        $scope.toggleCollapsed = function () {
           $scope.isCollapsedGraph = !$scope.isCollapsedGraph;
         };
 
-        $scope.getCompanyById = function(companyId){
-          console.log(CompaniesService)
+        $scope.getCompanyById = function (companyId) {
           return CompaniesService.getOneById(companyId);
         }
 

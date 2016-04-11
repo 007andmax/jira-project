@@ -2,7 +2,7 @@
 
   <div class="icn-lg icn-toggle-menu"></div>
 
-  <div class="nano-content" ng-controller="quicktech.core.leftPanel.leftPanelCtrl">
+  <div class="nano-content" ng-controller="quicktech.core.leftPanel.leftPanelCtrl" style="padding-top: 78px;">
 
     <!--<div class="nav-title first-item"-->
     <!--style="width: 100%;cursor: pointer" ng-click="toogleCollapse('DASHBOARD')">Dashboard-->
@@ -25,6 +25,22 @@
     <!--</nav>-->
 
     <!--<div class="clearfix divider"></div>-->
+
+    <div class="nav-title" ng-click="toogleCollapse('QUICKSUPPORT'); stateGo($event, 'quickSupport');"
+         ng-class="{'collapsed-nav': collapseItem === 'QUICKSUPPORT'}"
+         style="width: 100%;cursor: pointer;padding: 24px 18px 24px 30px;">
+      Quick Support
+
+      <div class="btn btn-success add-session-button has-tooltip" style="position: relative;margin-left: 59px;"
+           ng-click="addQuickSession()"
+           tooltip-placement="top" tooltip="Create">
+        <i class="icn-sm icn-plus"></i>
+      </div>
+
+    </div>
+
+    <div class="clearfix divider"></div>
+
     <div class="nav-title" style="width: 100%;cursor: pointer"
          ng-click="toogleCollapse('TICKETS')">Tickets
     </div>
@@ -86,23 +102,8 @@
 
     <div class="clearfix divider"></div>
 
-    <div class="nav-title" ng-click="toogleCollapse('QUICKSUPPORT'); stateGo($event, 'quickSupport');"
-         ng-class="{'collapsed-nav': collapseItem === 'QUICKSUPPORT'}"
-         style="width: 100%;cursor: pointer;padding: 24px 18px 24px 30px;">
-      Quick Support
-
-      <div class="btn btn-success add-session-button has-tooltip" style="position: relative;margin-left: 59px;"
-           ng-click="addQuickSession()"
-           tooltip-placement="top" tooltip="Create">
-        <i class="icn-sm icn-plus"></i>
-      </div>
-
-    </div>
-
-    <div class="clearfix divider"></div>
-
     <div class="nav-title" style="width: 100%;cursor: pointer;"
-         ng-click="toogleCollapse('CLIENTS')">clients
+         ng-click="toogleCollapse('CLIENTS')">Customer Management
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'CLIENTS'}">
@@ -120,12 +121,6 @@
           </a>
         </li>
 
-        <li ng-class="{active: $state.includes('devices')}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'devices')">
-            <i class="nav-icon icn-lg icn-devices"></i> Devices
-          </a>
-        </li>
-
         <li style="cursor: not-allowed">
           <a class="disabled" href="javascript:void(0)">
             <i class="nav-icon icn-leads icn-lg"></i> Leads
@@ -138,7 +133,7 @@
 
     <div class="clearfix divider"></div>
     <div class="nav-title" style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ACCOUNTING')"
-         ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Accounts
+         ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Billing
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'ACCOUNTING'}"
@@ -176,7 +171,7 @@
 
     <div class="clearfix divider"></div>
     <div class="nav-title" style="width: 100%;cursor: pointer"
-         ng-click="toogleCollapse('INVENTRY')">Inventry mngt.
+         ng-click="toogleCollapse('INVENTRY')">Products
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'INVENTRY'}">
@@ -212,25 +207,18 @@
 
     <div class="clearfix divider"></div>
 
-    <nav class="clearfix">
-      <ul class="nav">
-        <li style="cursor: not-allowed">
-          <a class="disabled" href="javascript:void(0)">
-            <i class="nav-icon icn-archive icn-lg"></i> Archive
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <div class="nav-title" style="width: 100%;cursor: pointer"
+         ng-click="goToDevicePage($event)">Devices
+    </div>
 
-    <div class="clearfix divider"></div>
+    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'DEVICES'}">
+      <ul class="nav nav-inventry" ng-hide="collapseItem !== 'DEVICES'" style="width: 100%;">
 
-    <!-- // todo rollback when generatePdf feature not needed -->
-    <nav class="clearfix" ticket-attachment-files attachment-func="generatePdf" ng-model="ticketAttachments">
-      <input type="file" style="display: none">
-      <ul class="nav">
-        <li class="last-item">
-          <a class="" href="javascript:void(0)">
-            <i class="nav-icon icn-help icn-lg"></i> Help
+        <li ng-class="{active: $state.includes('companyDevices', { companyId: companyId })}"
+            ng-repeat="(companyId, devicesCount) in companiesWithDevices" ng-if="companyId !== 'staticCopy'">
+          <a href="javascript:void(0)" ng-click="stateGo($event, 'companyDevices', { companyId: companyId })">
+            {{ getCompany(companyId).name || ''}}
+            <span class="badge">{{ devicesCount }}</span>
           </a>
         </li>
       </ul>

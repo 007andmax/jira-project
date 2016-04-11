@@ -4,15 +4,19 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
-      'quicktech.common.services.SharedStateService', 'FilesService', 'Downloader', '$state',
+      'quicktech.common.services.SharedStateService', 'FilesService', 'Downloader', '$state', 'DevicesService',
+      'CompaniesService',
       function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService,
-                SharedStateService, FilesService, Downloader, $state) {
+                SharedStateService, FilesService, Downloader, $state, DevicesService, CompaniesService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
         $scope.$state = $state;
         $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
+        $scope.companiesWithDevices = DevicesService.getDevicesCount($scope, function (resp) {
+          console.log(resp);
+        });
 
         $scope.$watch(function () {
 
@@ -67,7 +71,7 @@
           }
 
           if (event.button > 0) {
-            var url = $state.href(state, stateParams, {absolute: true});
+            var url = $state.href(state, stateParams, { absolute: true });
             window.open(url, '_blank');
           } else {
             $state.go(state, stateParams);
@@ -79,15 +83,32 @@
           return location.hash
         }, function (value) {
 
-          var typePage = value.split('/')[1];
+          var pageTypes = value.split('/'),
+            pageType = pageTypes[1];
 
-          if (typePage !== 'settings') {
-            $scope.collapseItem = typePage.toUpperCase();
+          if (pageType !== 'settings') {
+            if (pageType === 'clients' && (pageTypes[2] === 'devices' || pageTypes[2] === 'companyDevices')) {
+              pageType = 'devices';
+            }
+            $scope.collapseItem = pageType.toUpperCase();
           } else {
             $scope.collapseItem = '';
           }
 
-        })
+        });
+
+        $scope.getCompany = function (id) {
+          var company = {};
+          CompaniesService.getOneById(id, function (resp) {
+            Object.assign(company, resp);
+          });
+          return company;
+        };
+
+        $scope.goToDevicePage = function (event) {
+          $scope.toogleCollapse('DEVICES');
+          $scope.stateGo(event, 'devices');
+        };
 
       }]);
 
