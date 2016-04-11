@@ -558,7 +558,7 @@ aside#left div.nav-title {
 
 .nav-tickets.nav-tickets-users {
   transition: .4s linear all;
-  height: 176px;
+  height: 132px;
   overflow: hidden;
 }
 
@@ -583,6 +583,12 @@ aside#left div.nav-title {
 .nav-inventry-users {
   transition: .4s linear all;
   height: 88px;
+  overflow: hidden;
+}
+
+.nav-devices {
+  transition: .4s linear all;
+  height: 100%;
   overflow: hidden;
 }
 
