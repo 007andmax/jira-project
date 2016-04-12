@@ -38,9 +38,7 @@
           $scope.primaryPhone = primaryPhone;
 
           if (primaryAddress) {
-            $scope.location = primaryAddress.suiteNumber ? primaryAddress.suiteNumber + ', ' : '';
-            $scope.location += primaryAddress.address;
-            $scope.location += primaryAddress.postalCode ? ', ' + primaryAddress.postalCode : '';
+            $scope.location = primaryAddress.addressWithSuitNumberAndPostalCode;
           } else {
             $scope.location = '';
           }
