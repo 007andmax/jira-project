@@ -40,22 +40,30 @@
           1: 'In Progress',
           2: 'Completed'
         };
-        $scope.filter = {};
-        $scope.filter.searchItem = '';
+
+        $scope.filter = {
+          searchItem: ''
+        };
 
         $scope.search = function (value) {
 
           if (!isNaN(parseInt(value)) && value.length > 2) {
 
-            $scope.sharedState.searchFilter.number = value;
+            var paramsToSend = {
+              filter: $stateParams.listType.toUpperCase(),
+              keyword: value
+            };
 
             if ($scope.searchParams.priority.enabled) {
-              $scope.sharedState.searchFilter.priority = searchPriorityParamsMap[$scope.searchParams.priority.value];
+              paramsToSend.priority = searchPriorityParamsMap[$scope.searchParams.priority.value];
             }
 
             if ($scope.searchParams.status.enabled) {
-              $scope.sharedState.searchFilter.status = searchStatusParamsMap[$scope.searchParams.status.value];
+              paramsToSend.status = searchStatusParamsMap[$scope.searchParams.status.value];
             }
+
+            return TicketsService.search(paramsToSend);
+
           } else if (isNaN(parseInt(value))) {
 
             autocompleteModel = [];
@@ -87,7 +95,7 @@
 
           $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
 
-          $scope.filter.searchItem = '';
+          $scope.filter.searchItem = undefined;
           setSearchParamsDefault();
           $scope.sharedState.searchFilter = {};
 
