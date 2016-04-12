@@ -90,7 +90,7 @@
 
             $http.get('https://maps.googleapis.com/maps/api/timezone/json?location= ' +
                 ngModelCtrl.$viewValue.locationLat + ',' + ngModelCtrl.$viewValue.locationLng +
-                '&timestamp=0&key=AIzaSyCJ40cLJD6gFdZ6j6HXf1D9oh8AK_BlW-Y')
+                '&timestamp=0&key=AIzaSyB5nHoYDTke8HX_clmZOyCkJB3vAvbRxuI')
               .then(function successCallback(response) {
                 if (response.data.timeZoneId) {
                   AddressesService.getLocaleByName(response.data.timeZoneId, function (timeZoneObj) {
@@ -100,7 +100,13 @@
                   })
                 }
               }, function errorCallback(response) {
-                console.log('error: ' + response.data ? (response.data.message || 'no provided message') : 'empty response');
+                var message;
+                if (response.data) {
+                  message = response.data.message || 'no provided message in response';
+                } else {
+                  message = 'empty response';
+                }
+                console.error('Error: ' + message);
               });
 
             if (place.address_components) {
