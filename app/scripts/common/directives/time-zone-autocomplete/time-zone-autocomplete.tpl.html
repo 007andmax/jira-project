@@ -10,18 +10,18 @@
     <label class="control-label">PLEASE SELECT THE TIMEZONE.</label>
   </div>
 
-  <div class="pull-left dropdown">
+  <div class="pull-left dropdown" open-dropdown-on-model-change>
 
     <input class="form-control form-control-time-zone has-dropdown" type="text"
            data-toggle="dropdown" aria-expanded="false" ng-model="address.locale"
            name="timeZone" ng-required>
-    <a ng-if="address.locale.length" href="javascript:void(0)" class="erase" aria-label="erase"
+    <a ng-show="address.locale.length" href="javascript:void(0)" class="erase" aria-label="erase"
        ng-click="eraseInput($event)">
       <i class="icn-sm icn-remove-token"></i>
     </a>
 
-    <ul ng-show="showDropDown()" class="dropdown-menu time-zone-dropdown">
-      <li class="time-zone clickable" ng-show="address.locale.length"
+    <ul class="dropdown-menu time-zone-dropdown">
+      <li class="time-zone clickable" ng-if="address.locale.length"
           ng-repeat="timeZone in filteredTimeZones" offset="{{timeZone.offset}}" locale="{{timeZone.name}}"
           ng-click="setTimeZone(timeZone.name, timeZone.offset)"
           ng-class="{'focusable': address.locale.length}">
@@ -34,7 +34,7 @@
         Nothing found for "{{ address.locale }}"
       </li>
 
-      <li ng-show="!address.locale.length" ng-repeat="(name, group) in timeZones">
+      <li ng-if="!address.locale.length" ng-repeat="(name, group) in timeZones">
         <div class="groupName">{{ name }}</div>
 
         <div class="cities-names"

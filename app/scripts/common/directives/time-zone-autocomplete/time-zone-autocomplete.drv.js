@@ -176,17 +176,20 @@
           };
 
           function filterTimeZones(name, offset) {
-            $scope.filteredTimeZones = [];
-            for (var prop in $scope.timeZonesMapped) {
-              var obj = $scope.timeZonesMapped[prop],
+            var filteredTimeZones = [];
+
+            for (var i = 0, len = $scope.timeZonesMapped.length; i < len; i++) {
+              var obj = $scope.timeZonesMapped[i],
                 country = obj.country,
                 city = obj.city,
                 offsetValue = obj.offset;
 
               if ((name && city.toLowerCase().indexOf(name.toLowerCase()) !== -1) || (angular.isNumber(offset) && offset === offsetValue)) {
-                $scope.filteredTimeZones.push({ name: country + '/' + city, offset: offsetValue });
+                filteredTimeZones.push({ name: country + '/' + city, offset: offsetValue });
               }
             }
+
+            $scope.filteredTimeZones = filteredTimeZones;
           }
 
           function parseOffset(matches) {
