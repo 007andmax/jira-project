@@ -1696,6 +1696,17 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   background-position: -1132px -206px;
 }
 
+.icn-sort {
+  background-position: -1289px -87px;
+}
+:hover > .icn-sort, :active > .icn-sort, :focus:hover > .icn-sort, :focus:active > .icn-sort, :hover:active > .icn-sort, .active > .icn-sort, .open > .icn-sort, .active.icn-sort {
+  background-position: -1314px -62px;
+}
+.icn-sort.active.rotate {
+  transform: rotate(180deg);
+  background-position: -1314px -62px;
+}
+
 .icn-arrow-next{
   background-position: -1074px -206px;
 }

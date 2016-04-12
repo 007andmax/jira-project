@@ -60,9 +60,13 @@
 .qt-list .list-heading .sort-icon.icn-collapse {
   margin-top: -13px;
 }
-.qt-list .list-heading .sort-icon{
+.qt-list .list-heading .sort-icon {
   position: absolute;
   right: 0;
+  top: 0;
+}
+.qt-users .col-4 .sort-icon {
+  right: -10px;
 }
 .qt-list .list-heading .sort-icon.icn-expand {
   margin-top: -10px;

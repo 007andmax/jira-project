@@ -1,43 +1,46 @@
 <div>
   <ul class="qt-list qt-product-list">
 
-    <li class="list-heading" ng-show="productsList.length > 0">
+    <li class="list-heading" ng-show="productsList.length > 0" style="cursor: pointer !important;">
       <div class="col-1" ng-click="setOrderForProducts('ilc')">
         ILC
-        <i class="icn-sm sort-icon" style="margin-left: 25px;" ng-show="orderProducts.field === 'ilc'"
-           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i>
       </div>
       <div class="col-1" ng-click="setOrderForProducts('manufacture')">
         Mfg#
-        <i class="icn-sm sort-icon" style="margin-left: 35px;"
-           ng-show="orderProducts.field === 'manufacture'"
-           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i>
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('category')">
+        Category
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'category'}"></i>
       </div>
       <div class="col-2" ng-click="setOrderForProducts('description')">
         DESCRIPTION
-        <i class="icn-sm sort-icon" style="margin-left: 75px;"
-           ng-show="orderProducts.field === 'description'"
-           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'description'}"></i>
       </div>
       <div class="col-1" ng-click="setOrderForProducts('vendor')">
         VENDOR/SUPPLIER
-        <i class="icn-sm sort-icon" style="margin-left: 100px;" ng-show="orderProducts.field === 'vendor'"
-           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i>
       </div>
       <div class="col-4" ng-click="setOrderForProducts('cost')">
         COST
-        <i class="icn-sm sort-icon" style="margin-left: 35px;" ng-show="orderProducts.field === 'cost'"
-           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i>
       </div>
       <div class="col-4" ng-click="setOrderForProducts('sale')">
         SALE PRICE
-        <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderProducts.field === 'sale'"
-           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'sale'}"></i>
       </div>
       <div class="col-4" ng-click="setOrderForProducts('taxable')">
         TAXABLE
-        <i class="icn-sm sort-icon" style="margin-left: 85px;" ng-show="orderProducts.field === 'taxable'"
-           ng-class="{'icn-collapse': orderProducts.reverse, 'icn-expand': !orderProducts.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'taxable'}"></i>
       </div>
       <div class="col-6">&nbsp;</div>
     </li>
@@ -55,6 +58,10 @@
 
         <div class="col-1">
           {{ product.manufacture}}
+        </div>
+
+        <div class="col-1">
+          {{ product.category.name}}
         </div>
 
         <div class="col-2" ng-class="{'product-description': category.default}">{{ product.description}}

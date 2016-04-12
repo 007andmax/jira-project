@@ -12,8 +12,8 @@
         </label>
 
         <span>NAME</span>
-        <i class="icn-sm" style="margin-left: 65px;"
-           ng-class="{'icn-collapse': orderDevicesBy === '-hostName', 'icn-expand': orderDevicesBy === 'hostName'}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderDevicesBy === '-hostName', 'active': orderDevicesBy.indexOf('hostName') > -1}"></i>
       </div>
       <div class="col-2" style="width: 367px; height: 12px">
         <!--<span>DESCRIPTION</span>-->
@@ -22,20 +22,20 @@
       <div class="col-3" ng-click="sortDevicesTab('type')">
         <!--style="width: 145px; height: 12px"-->
         <span>TYPE</span>
-        <i class="icn-sm" style="margin-left: 35px;"
-           ng-class="{'icn-collapse': orderDevicesBy === '-type', 'icn-expand': orderDevicesBy === 'type'}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderDevicesBy === '-type', 'active': orderDevicesBy.indexOf('type') > -1}"></i>
       </div>
 
       <div class="col-4" ng-click="sortDevicesTab('userName')">
         <span>USERNAME</span>
-        <i class="icn-sm" style="margin-left: 60px;"
-           ng-class="{'icn-collapse': orderDevicesBy === '-userName', 'icn-expand': orderDevicesBy === 'userName'}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderDevicesBy === '-userName', 'active': orderDevicesBy.indexOf('userName') > -1}"></i>
       </div>
 
       <div class="col-5" ng-click="sortDevicesTab('ip')">
         <span>LAN IP</span>
-        <i class="icn-sm" style="margin-left: 45px;"
-           ng-class="{'icn-collapse': orderDevicesBy === '-ip', 'icn-expand': orderDevicesBy === 'ip'}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderDevicesBy === '-ip', 'active': orderDevicesBy.indexOf('ip') > -1}"></i>
       </div>
       <div class="col-6">&nbsp;</div>
     </li>

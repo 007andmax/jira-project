@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane" style="display: block">
   <ul class="qt-list qt-users" style="margin-bottom: 150px">
 
-    <li class="list-heading">
+    <li class="list-heading" style="cursor: pointer !important;">
 
       <div class="col-1" ng-click="setOrderByUsers('name')">
 
@@ -12,24 +12,24 @@
         </label>
 
         <span>Name</span>
-        <i class="icn-sm" style="margin-left: 70px;" ng-show="orderUsersTab.fild === 'name'"
-           ng-class="{'icn-collapse': orderUsersTab.reverse, 'icn-expand': !orderUsersTab.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i>
       </div>
 
       <div class="col-2"><span>Contact No.</span></div>
 
       <div class="col-3" ng-click="setOrderByUsers('type')">
         <span>Type</span>
-        <i class="icn-sm" style="margin-left: 50px;" ng-show="orderUsersTab.fild === 'type'"
-           ng-class="{'icn-collapse': orderUsersTab.reverse, 'icn-expand': !orderUsersTab.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'type'}"></i>
       </div>
 
       <div class="col-3-2">Subscription</div>
 
       <div class="col-4" ng-click="setOrderByUsers('ticket')">
         <span>Tickets</span>
-        <i class="icn-sm" style="margin-left: 80px;" ng-show="orderUsersTab.fild === 'ticket'"
-           ng-class="{'icn-collapse': orderUsersTab.reverse, 'icn-expand': !orderUsersTab.reverse}"></i>
+        <i class="icn-sm sort-icon icn-sort"
+           ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'ticket'}"></i>
       </div>
 
       <div class="col-5"></div>

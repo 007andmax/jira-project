@@ -378,8 +378,8 @@
             </label>
 
             <span>NAME</span>
-            <i class="icn-sm" style="margin-left: 65px;"
-               ng-class="{'icn-collapse': orderDevicesBy === '-hostName', 'icn-expand': orderDevicesBy === 'hostName'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderDevicesBy === '-hostName', 'active': orderDevicesBy.indexOf('hostName') > -1}"></i>
 
           </div>
 
@@ -390,20 +390,20 @@
           <div class="col-3" ng-click="sortDevicesTab('type')">
             <!--style="width: 145px; height: 12px"-->
             <span>TYPE</span>
-            <i class="icn-sm" style="margin-left: 35px;"
-               ng-class="{'icn-collapse': orderDevicesBy === '-type', 'icn-expand': orderDevicesBy === 'type'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderDevicesBy === '-type', 'active': orderDevicesBy.indexOf('type') > -1}"></i>
           </div>
 
           <div class="col-4" ng-click="sortDevicesTab('userName')">
             <span>USERNAME</span>
-            <i class="icn-sm" style="margin-left: 65px;"
-               ng-class="{'icn-collapse': orderDevicesBy === '-userName', 'icn-expand': orderDevicesBy === 'userName'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderDevicesBy === '-userName', 'active': orderDevicesBy.indexOf('userName') > -1}"></i>
           </div>
 
           <div class="col-5" ng-click="sortDevicesTab('ip')">
             <span>LAN IP</span>
-            <i class="icn-sm" style="margin-left: 45px;"
-               ng-class="{'icn-collapse': orderDevicesBy === '-ip', 'icn-expand': orderDevicesBy === 'ip'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderDevicesBy === '-ip', 'active': orderDevicesBy.indexOf('ip') > -1}"></i>
           </div>
 
           <div class="col-6">&nbsp;</div>
@@ -598,20 +598,20 @@
 
           <div class="col-1" ng-click="sortAgentTab('hostName')">
             <span>INSTALLED ON</span>
-            <i class="icn-sm" style="margin-left: 85px;"
-               ng-class="{'icn-collapse': orderAgentBy === '-hostName', 'icn-expand': orderAgentBy === 'hostName'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderAgentBy === '-hostName', 'active': orderAgentBy.indexOf('hostName') > -1}"></i>
           </div>
 
           <div class="col-2" ng-click="sortAgentTab('userName')">
             <span>DOMAIN/USERNAME</span>
-            <i class="icn-sm" style="margin-left: 115px;"
-               ng-class="{'icn-collapse': orderAgentBy === '-userName', 'icn-expand': orderAgentBy === 'userName'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderAgentBy === '-userName', 'active': orderAgentBy.indexOf('userName') > -1}"></i>
           </div>
 
           <div class="col-3" ng-click="sortAgentTab('ip')">
             <span>LAN IP</span>
-            <i class="icn-sm" style="margin-left: 45px;"
-               ng-class="{'icn-collapse': orderAgentBy === '-ip', 'icn-expand': orderAgentBy === 'ip'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderAgentBy === '-ip', 'active': orderAgentBy.indexOf('ip') > -1}"></i>
           </div>
 
           <div class="col-4"><span>&nbsp;</span></div>
@@ -619,8 +619,8 @@
 
           <div class="col-5" ng-click="sortAgentTab('agentVersion')">
             <span>AGENT VERSION</span>
-            <i class="icn-sm" style="margin-left: 95px;"
-               ng-class="{'icn-collapse': orderAgentBy === '-agentVersion', 'icn-expand': orderAgentBy === 'agentVersion'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderAgentBy === '-agentVersion', 'active': orderAgentBy.indexOf('agentVersion') > -1}"></i>
           </div>
 
           <div class="col-6">&nbsp;</div>
@@ -864,8 +864,8 @@
 
           <div class="col-1" ng-click="sortNetworkScan('hostName')">
             <span>DEVICE</span>
-            <i class="icn-sm" style="margin-left: 50px;"
-               ng-class="{'icn-collapse': orderScanBy === '-hostName', 'icn-expand': orderScanBy === 'hostName'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderScanBy === '-hostName', 'active': orderScanBy.indexOf('hostName') > -1}"></i>
           </div>
 
           <div class="col-desc"><span>DESCRIPTION</span></div>
@@ -874,26 +874,26 @@
 
           <div class="col-3" ng-click="sortNetworkScan('ipAddress')">
             <span>LAN IP</span>
-            <i class="icn-sm" style="margin-left: 45px;"
-               ng-class="{'icn-collapse': orderScanBy === '-ipAddress', 'icn-expand': orderScanBy === 'ipAddress'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderScanBy === '-ipAddress', 'active': orderScanBy.indexOf('ipAddress') > -1}"></i>
           </div>
 
           <div class="col-4" ng-click="sortNetworkScan('manufacturer')">
             <span>MANUFACTURER</span>
-            <i class="icn-sm" style="margin-left: 95px;"
-               ng-class="{'icn-collapse': orderScanBy === '-manufacturer', 'icn-expand': orderScanBy === 'manufacturer'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderScanBy === '-manufacturer', 'active': orderScanBy.indexOf('manufacturer') > -1}"></i>
           </div>
 
           <div class="col-5" ng-click="sortNetworkScan('macAddress')">
             <span>MAC ADDRESS</span>
-            <i class="icn-sm" style="margin-right: -15px;"
-               ng-class="{'icn-collapse': orderScanBy === '-macAddress', 'icn-expand': orderScanBy === 'macAddress'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i>
           </div>
 
           <div class="col-2" ng-click="sortNetworkScan('agentStatus')" style="text-align: center;">
             <span>Agent Status</span>
-            <i class="icn-sm" style="margin-left: 125px;"
-               ng-class="{'icn-collapse': orderScanBy === '-agentStatus', 'icn-expand': orderScanBy === 'agentStatus'}"></i>
+            <i class="icn-sm sort-icon icn-sort"
+               ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
           </div>
 
           <div class="col-6">&nbsp;</div>
