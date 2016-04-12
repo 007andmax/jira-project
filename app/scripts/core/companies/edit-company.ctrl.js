@@ -153,7 +153,7 @@
 
             CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companyProfile', { companyId: resp.data.id });
+              $state.go('companyProfile', { companyId: resp.id || resp });
             })
           } else {
             $scope.triedToSave = true;
@@ -182,7 +182,7 @@
 
           if ($scope.currentUser.accountType === "ROOT") {
             ngModelCtrl.$setValidity('unique', true);
-            return;
+            return
           }
 
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {

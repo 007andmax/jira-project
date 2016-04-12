@@ -11,7 +11,7 @@
           if($stateParams.companyId){
 
             var company =  CompaniesService.getOneById($stateParams.companyId);
-            return 'Edit ' + (company ? company.name : '');
+            return 'Edit ' + company.name;
 
           } else {
             return 'Create Company';
