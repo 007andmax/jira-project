@@ -101,7 +101,8 @@
                 <!--is-uniq-validation validation-func="validateCompanyDomain"-->
                 <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
 
-                <span class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHostInbox }}</span>
+                <span
+                  class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHostInbox }}</span>
 
               </div>
 
@@ -317,7 +318,8 @@
           ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
         <li class="list-heading" ng-show="services.length > 0">
-          <div class="col-1">SERVICE NAME</div>
+          <div class="col-1" style="width: 205px;">SERVICE NAME</div>
+          <div class="col-5" style="margin-right: 28px;">IS BILLABLE</div>
           <div class="col-2">PER HOUR</div>
           <!--<div class="col-3">TIME ALLOTMENT</div> TODO hide timeAllotment-->
           <div class="col-4">&nbsp;</div>
@@ -331,16 +333,18 @@
           <div class="intermediate-parent-elem" ng-if="!isEditService">
 
             <div class="col-1">
-              <label class="control checkbox pull-left" ng-if="showCheckboxes">
-                <input type="checkbox" ng-model="checkedServices[service.versionedId.id]"
-                       ng-change="onChangeCheckbox()">
-                <span class="control-indicator"></span>
-              </label>
-
               <div class="checkbox-caption"
                    style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;width: 100%;">
                 {{ service.name }}
               </div>
+            </div>
+
+            <div class="col-5">
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-checked="service.billable" custom-disabled="{{ disabledCheckbox }}"
+                       ng-click="onChangeBillable()">
+                <span class="control-indicator"></span>
+              </label>
             </div>
 
             <div class="col-2">

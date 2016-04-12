@@ -15,6 +15,13 @@
           $scope.isEditService = true;
         };
 
+        $scope.onChangeBillable = function () {
+          $scope.disabledCheckbox = true;
+          ServicesService.changeBillableStatus($scope.service.id, !$scope.service.billable, function () {
+            $scope.disabledCheckbox = false;
+          })
+        };
+
         $scope.$on('cancelEditForm', function () {
           $scope.isEditService = false;
         })
