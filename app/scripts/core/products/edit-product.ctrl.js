@@ -8,7 +8,9 @@
 
         if ($scope.product) {
           $scope.editProduct = $scope.product.staticCopy();
-          $scope.editProduct.category = {id: $scope.category.id};
+          if (!$scope.editProduct.category && $scope.category) {
+            $scope.editProduct.category = {id: $scope.category.id};
+          }
         } else {
           $scope.editProduct = {
             category: {id: $scope.category.id}

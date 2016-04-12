@@ -6,11 +6,6 @@
     ['$scope', 'ProductsService', '$timeout',
       function ($scope, ProductsService, $timeout) {
 
-        $scope.orderProducts = {
-          field: 'description',
-          reverse: false
-        };
-
         $scope.products = ProductsService.getAllByCategory($scope, $scope.category.id, function () {
           $scope.$emit('toggleProducts');
 
@@ -26,34 +21,6 @@
           })
 
         }, true);
-
-        $scope.setOrderForProducts = function (option) {
-          if (option === $scope.orderProducts.field) {
-            $scope.orderProducts.reverse = !$scope.orderProducts.reverse;
-          } else {
-            $scope.orderProducts.field = option;
-            $scope.orderProducts.reverse = false;
-          }
-        };
-
-        $scope.orderByForProducts = function (item) {
-          if ($scope.orderProducts.field === 'ilc') {
-            return item.ilc;
-          } else if ($scope.orderProducts.field === 'manufacture') {
-            return item.manufacture;
-          } else if ($scope.orderProducts.field === 'description') {
-            return item.description;
-          } else if ($scope.orderProducts.field === 'vendor') {
-            return item.vendor.name;
-          } else if ($scope.orderProducts.field === 'cost') {
-            return item.cost;
-          } else if ($scope.orderProducts.field === 'sale') {
-            return item.sale;
-          } else if ($scope.orderProducts.field === 'taxable') {
-            return item.taxable;
-          }
-
-        };
 
       }]);
 

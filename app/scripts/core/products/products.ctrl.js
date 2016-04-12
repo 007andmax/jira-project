@@ -6,16 +6,14 @@
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
 
-        var fullList = ProductsService.getFullListForAutocomplete(function () {
-          $scope.productsList = [];
-
-          for (var i = 0; i < fullList.length; i++) {
-            var products = fullList[i].products;
-            for (var j = 0; j < products.length; j++) {
-              $scope.productsList.push(products[j]);
-            }
-          }
+        ProductsService.getAllProducts($scope, function (resp) {
+          $scope.productsList = resp;
         });
+
+        $scope.orderProducts = {
+          field: 'description',
+          reverse: false
+        };
 
         $scope.pageTab = 'group';
         $scope.isCreateCategoryShow = false;
@@ -28,8 +26,19 @@
           isopen: false
         };
 
+        $scope.openCreationCategory = function () {
+          $scope.isCreateCategoryShow = true;
+        };
+
         $scope.setPageTab = function (tab) {
           if (tab !== $scope.pageTab) {
+            if (tab === 'group' && $scope.orderProducts.field === 'category') {
+              $scope.orderProducts = {
+                field: 'description',
+                reverse: false
+              };
+            }
+
             $scope.pageTab = tab;
           }
         };
@@ -66,7 +75,37 @@
 
         $scope.closeCreateCategoryForm = function () {
           $scope.isCreateCategoryShow = false;
-        }
+        };
+
+        $scope.setOrderForProducts = function (option) {
+          if (option === $scope.orderProducts.field) {
+            $scope.orderProducts.reverse = !$scope.orderProducts.reverse;
+          } else {
+            $scope.orderProducts.field = option;
+            $scope.orderProducts.reverse = false;
+          }
+        };
+
+        $scope.orderByForProducts = function (item) {
+          if ($scope.orderProducts.field === 'ilc') {
+            return item.ilc;
+          } else if ($scope.orderProducts.field === 'manufacture') {
+            return item.manufacture;
+          } else if ($scope.orderProducts.field === 'category') {
+            return item.category.name;
+          } else if ($scope.orderProducts.field === 'description') {
+            return item.description;
+          } else if ($scope.orderProducts.field === 'vendor') {
+            return item.vendor.name;
+          } else if ($scope.orderProducts.field === 'cost') {
+            return item.cost;
+          } else if ($scope.orderProducts.field === 'sale') {
+            return item.sale;
+          } else if ($scope.orderProducts.field === 'taxable') {
+            return item.taxable;
+          }
+
+        };
 
       }]);
 
