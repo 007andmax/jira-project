@@ -31,10 +31,6 @@
 
               var paramsToSend = {};
 
-              if (params.number) {
-                paramsToSend.keyword = params.number;
-              }
-
               if ($stateParams.listType === 'spam') {
                 if (scope.currentUser.role === 'USER') {
                   paramsToSend.filter = 'USER_SPAM';

@@ -1897,7 +1897,7 @@ Devices tab
   left: -56px;
 }
 .qt-default-services>li>.col-1{
-  width: calc(100% - 202px);
+  width: calc(100% - 265px);
   /*width: calc(100% - 319px); TODO hide timeAllotment*/
 }
 .qt-default-services>li>.col-2{

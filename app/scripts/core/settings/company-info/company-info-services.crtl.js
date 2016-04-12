@@ -19,6 +19,7 @@
                 name: resp[i].name,
                 rate: resp[i].rate,
                 timeBlock: resp[i].timeBlock,
+                billable: resp[i].billable,
                 taxable: true,
                 isDefault: true
               }

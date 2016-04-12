@@ -6,7 +6,7 @@
       <i class="icn-sm sort-icon" style="margin-left: 80px;" ng-show="orderServices.field === 'name'"
          ng-class="{'icn-collapse': orderServices.reverse, 'icn-expand': !orderServices.reverse}"></i>
     </div>
-    <div class="col-5" ng-click="setOrderForServices('billable')" ng-show="companyService">
+    <div class="col-5" ng-click="setOrderForServices('billable')">
       IS BILLABLE
       <i class="icn-sm sort-icon" style="margin-left: 62px;" ng-show="orderServices.field === 'billable'"
          ng-class="{'icn-collapse': orderServices.reverse, 'icn-expand': !orderServices.reverse}"></i>
@@ -37,8 +37,8 @@
         <div ng-class="{'checkbox-caption': showCheckboxes}">{{ service.name }}</div>
       </div>
 
-      <div class="col-5" ng-show="companyService">
-        <label class="control checkbox pull-left" ng-if="!showCheckboxes" style="margin-top: 4px;left:25px">
+      <div class="col-5">
+        <label class="control checkbox pull-left" style="margin-top: 4px;left:25px">
           <input type="checkbox" ng-checked="service.billable" custom-disabled="{{ disabledCheckbox }}"
                  ng-click="onChangeBillable()">
           <span class="control-indicator"></span>
