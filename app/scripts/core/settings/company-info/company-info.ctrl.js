@@ -7,7 +7,7 @@
       function ($scope, $state, $stateParams, $location, CompaniesService, AddressesService, EmailSettingsService, ConstantsService, $timeout) {
 
         $scope.saveMethods = [];
-        $scope.formNames = ['basicInfoForm', 'addressesWrapForm'];
+        $scope.formNames = ['basicInfoForm', 'addressesWrapForm', 'invoiceAndTicketForm'];
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.emailNamePattern = /^[a-z0-9]+$/i;

@@ -437,7 +437,7 @@
 
           </div>
 
-          <div class="helping-additional-class" ng-class="{'hide': !isEditing}">
+          <div class="helping-additional-class" ng-if="isEditing">
 
             <div class="col-1"
                  ng-class="{'has-error': isShowingErrors(companyInfoEditTax, 'currentlyTaxType')}">
