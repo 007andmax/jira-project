@@ -1003,3 +1003,10 @@ aside#left div.nav-title {
 .qt-default-services li .intermediate-parent-elem .is-billable label {
   margin-top: 14px !important;
 }
+.services-info-wrapper .service-form-wrapper.edit-is-billable .col-3{
+  width: 75px;
+  padding-left: 10px;
+}
+.services-info-wrapper .service-form-wrapper.edit-is-billable .col-3 label.checkbox{
+  left: 25px;
+}
