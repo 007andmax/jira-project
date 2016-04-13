@@ -131,8 +131,6 @@
 
         $scope.saveProfileSettings = function () {
 
-          $scope.savingProfileSettings = true;
-
           for (var index in $scope.formNames) {
             var form = $scope.profileInfoForm[$scope.formNames[index]];
             if (form.$invalid) {
@@ -143,6 +141,8 @@
               return;
             }
           }
+
+          $scope.savingProfileSettings = true;
 
           var settings = {},
             callbacks = [],

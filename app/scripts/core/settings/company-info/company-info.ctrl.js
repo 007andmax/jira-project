@@ -99,6 +99,11 @@
               callbacks[index]($scope.companyInfoForm[formNames[index]], resp);
             }
             $scope.savingCompanyInfo = false;
+            if($scope.currentCompany.status === "SIGN_UP"){
+              var startPage = $scope.getUserDefaultPage();
+              startPage.split("/");
+              $state.go('tickets', {listType: startPage[1] || 'unassigned'});
+            }
           });
         };
 
