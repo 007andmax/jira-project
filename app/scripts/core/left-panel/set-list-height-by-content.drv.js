@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.products").directive('setListWidthByContent',
+  angular.module("quicktech.core.products").directive('setListHeightByContent',
     [function ($timeout) {
         return {
           restrict: 'A',

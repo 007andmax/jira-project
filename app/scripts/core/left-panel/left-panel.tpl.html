@@ -213,7 +213,7 @@
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'DEVICES'}">
       <ul class="nav nav-devices" ng-hide="collapseItem !== 'DEVICES'"
-          set-list-width-by-content="44" items-count="{{ getCompaniesWithDevicesLength() }}"><!--44px - height of li-->
+          set-list-height-by-content="44" items-count="{{ getCompaniesWithDevicesLength() }}"><!--44px - height of li-->
 
         <li ng-class="{active: $state.includes('companyDevices', { companyId: companyId })}"
             ng-repeat="(companyId, devicesCount) in companiesWithDevices" ng-if="companyId !== 'staticCopy'">
