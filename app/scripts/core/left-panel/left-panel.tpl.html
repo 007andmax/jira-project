@@ -212,13 +212,14 @@
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'DEVICES'}">
-      <ul class="nav nav-devices" ng-hide="collapseItem !== 'DEVICES'" style="width: 100%;">
+      <ul class="nav nav-devices" ng-hide="collapseItem !== 'DEVICES'"
+          set-list-width-by-content="44" items-count="{{ getCompaniesWithDevicesLength() }}"><!--44px - height of li-->
 
         <li ng-class="{active: $state.includes('companyDevices', { companyId: companyId })}"
             ng-repeat="(companyId, devicesCount) in companiesWithDevices" ng-if="companyId !== 'staticCopy'">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'companyDevices', { companyId: companyId })">
-            {{ getCompany(companyId).name || ''}}
-            <span class="badge">{{ devicesCount }}</span>
+            <i class="nav-icon icn-lg icn-companies"></i>{{ getCompany(companyId).name || ''}}
+            <span class="badge">{{ devicesCount.all }}</span>
           </a>
         </li>
       </ul>

@@ -14,9 +14,7 @@
         $scope.$state = $state;
         $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
-        $scope.companiesWithDevices = DevicesService.getDevicesCount($scope, function (resp) {
-          console.log(resp);
-        });
+        $scope.companiesWithDevices = DevicesService.getDevicesCount($scope);
 
         $scope.$watch(function () {
 
@@ -98,16 +96,18 @@
         });
 
         $scope.getCompany = function (id) {
-          var company = {};
-          CompaniesService.getOneById(id, function (resp) {
-            Object.assign(company, resp);
-          });
-          return company;
+          return CompaniesService.getOneById(id);
         };
 
         $scope.goToDevicePage = function (event) {
           $scope.toogleCollapse('DEVICES');
           $scope.stateGo(event, 'devices');
+        };
+
+        $scope.getCompaniesWithDevicesLength = function () {
+          return Object.keys($scope.companiesWithDevices).filter(function (item) {
+            return item !== 'staticCopy';
+          }).length;
         };
 
       }]);

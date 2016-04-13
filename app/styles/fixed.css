@@ -591,12 +591,12 @@ aside#left div.nav-title {
 
 .nav-devices {
   transition: .4s linear all;
-  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
 .nav.ng-hide {
-  height: 0;
+  height: 0 !important;
 }
 
 .disabled-not-sign-up {

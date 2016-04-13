@@ -8,9 +8,7 @@
 
         $scope.isCollapsedGraph = true;
 
-        $scope.devicesCount = DevicesService.getDevicesCount($scope, function () {
-          console.log($scope.devicesCount)
-        });
+        $scope.devicesCount = DevicesService.getDevicesCount($scope);
 
         $scope.srefToCompanyDevices = function (companyId) {
           $state.go('companyDevices', { companyId: companyId });
