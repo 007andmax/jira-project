@@ -23,51 +23,53 @@
 
             }, function () {
 
-              element.animate({opacity: 0});
+              if (ngModelCtrl.$viewValue) {
+                element.animate({ opacity: 0 });
 
-              scope.currentInvoice = ngModelCtrl.$viewValue;
+                scope.currentInvoice = ngModelCtrl.$viewValue;
 
-              if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
+                if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId) {
 
-                var currentBillToId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId;
+                  var currentBillToId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId;
 
-                for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
-                  if (currentBillToId === scope.currentInvoice.billTo[i].id) {
-                    scope.currentBillTo = scope.currentInvoice.billTo[i];
+                  for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
+                    if (currentBillToId === scope.currentInvoice.billTo[i].id) {
+                      scope.currentBillTo = scope.currentInvoice.billTo[i];
+                    }
+                  }
+                } else {
+
+                  for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
+                    if (scope.currentInvoice.billTo[i].isPrimary) {
+                      scope.currentBillTo = scope.currentInvoice.billTo[i];
+                      scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
+                    }
+                  }
+
+                }
+
+                if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId) {
+
+                  var currentAddressId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId;
+
+                  for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
+                    if (currentAddressId === scope.currentInvoice.shipTo[i].id) {
+                      scope.currentShipTo = scope.currentInvoice.shipTo[i];
+                      break;
+                    }
+                  }
+
+                } else {
+                  for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
+                    if (scope.currentInvoice.shipTo[i].isPrimary) {
+                      scope.currentShipTo = scope.currentInvoice.shipTo[i];
+                      scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = scope.currentShipTo.id;
+                    }
                   }
                 }
-              } else {
-
-                for (var i = 0; i < scope.currentInvoice.billTo.length; i++) {
-                  if (scope.currentInvoice.billTo[i].isPrimary) {
-                    scope.currentBillTo = scope.currentInvoice.billTo[i];
-                    scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].contactId = scope.currentBillTo.id;
-                  }
-                }
-
               }
 
-              if (scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId) {
-
-                var currentAddressId = scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId;
-
-                for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
-                  if (currentAddressId === scope.currentInvoice.shipTo[i].id) {
-                    scope.currentShipTo = scope.currentInvoice.shipTo[i];
-                    break;
-                  }
-                }
-
-              } else {
-                for (var i = 0; i < scope.currentInvoice.shipTo.length; i++) {
-                  if (scope.currentInvoice.shipTo[i].isPrimary) {
-                    scope.currentShipTo = scope.currentInvoice.shipTo[i];
-                    scope.lockInfo[scope.invoiceLocks[scope.showInvoiceLockIndex].lockId].addressId = scope.currentShipTo.id;
-                  }
-                }
-              }
-
-              $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', {cache: $templateCache})
+              $http.get('/html/scripts/core/billable/invoice-modal.tpl.html', { cache: $templateCache })
                 .then(function (response) {
 
                   invoiceTemplate = angular.copy(response);
@@ -119,7 +121,7 @@
 
               initScrollListner(pages.length);
               invoiceModalWindow.trigger("scroll")
-              element.animate({opacity: 1});
+              element.animate({ opacity: 1 });
 
             }
 

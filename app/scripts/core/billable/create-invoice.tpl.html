@@ -7,7 +7,7 @@
 
   <div class="topbar">
 
-    <div class="dropdown pull-left company-dropdown">
+    <div class="dropdown pull-left company-dropdown" ng-if="!invoicePreview">
 
       <h4 class="inv-company-name" data-toggle="dropdown">
         <span>{{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.companyInfo.name }}</span>
@@ -48,19 +48,19 @@
 
     <div class="invoice-actions">
 
-      <div class="btn btn-default pull-left"
+      <div class="btn btn-default pull-left" ng-if="!invoicePreview"
            ng-click="print()"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Print">
         <i class="icn icn-print"></i>
       </div>
 
-      <div style="margin-left: 10px;" class="btn btn-default pull-left" ng-click="download()"
+      <div style="margin-left: 10px;" class="btn btn-default pull-left" ng-click="download()" ng-if="!invoicePreview"
       tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Download">
       <i class="icn icn-download"></i>
       </div>
 
-      <div style="width: 92px;margin-left: 10px;" class="btn btn-info pull-left"
+      <div style="width: 92px;margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview"
            ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Send Invoice">

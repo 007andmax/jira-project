@@ -20,11 +20,11 @@
 
           $('html').css('overflow-y', 'hidden');
           centering();
-          $('.modal-backdrop.in').css({background: 'none'});
+          $('.modal-backdrop.in').css({ background: 'none' });
 
           element.find('.nano').nanoScroller();
 
-          element.find(".dropdown").on('shown.bs.dropdown', function(){
+          element.find(".dropdown").on('shown.bs.dropdown', function () {
             element.find('.nano').nanoScroller();
           });
 
@@ -53,11 +53,13 @@
             centering()
           });
 
-          for (var i = 0; i < scope.invoiceLocks.length; i++) {
-            processInvoice(scope.invoiceLocks[i].lockId);
-            scope.lockInfo[scope.invoiceLocks[i].lockId] = {
-              contactId: '',
-              addressId: ''
+          if (scope.invoiceLocks) {
+            for (var i = 0; i < scope.invoiceLocks.length; i++) {
+              processInvoice(scope.invoiceLocks[i].lockId);
+              scope.lockInfo[scope.invoiceLocks[i].lockId] = {
+                contactId: '',
+                addressId: ''
+              }
             }
           }
 
@@ -97,7 +99,7 @@
 
           $(window).resize(initHorizontalScroll)
 
-          function initHorizontalScroll(){
+          function initHorizontalScroll() {
 
             var invoiceWindowWidth = element.find('[parent-invoice-page]').width(),
               modalTranscludeWidth = (invoiceWindowWidth * scope.zoomRange) + 60,

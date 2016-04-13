@@ -737,7 +737,11 @@
 
         <div class="form-row clearfix">
           <div class="form-group no-label full-width">
-            <div class="btn btn-lg btn-info pull-right" ng-click="previewInvoice(basicInfoForm)">
+            <div class="btn btn-lg btn-info pull-right"
+                 modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+                 modal-window-class="invoice-modal-not-background"
+                 mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+                 mw-controller="quicktech.core.settings.invoicePreviewCtrl">
               Preview Invoice
             </div>
           </div>
