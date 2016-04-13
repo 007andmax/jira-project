@@ -51,10 +51,6 @@
           $scope.showCreateProduct = true;
         };
 
-        $scope.setHighlightProductId = function (productId) {
-          $scope.highlightProductId = productId;
-        };
-
         $scope.$watch('category.productsAmount', function (productsAmount) {
           if (productsAmount === 0 && $scope.showProducts && !$scope.showCreateProduct) {
             $scope.$broadcast('toggleProducts');

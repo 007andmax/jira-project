@@ -44,6 +44,8 @@
           $scope.shownCategories = ProductsService.getFullListForAutocomplete();
         });
 
+        $scope.$on('productsTabChanged', $scope.clearInput);
+
         $scope.$watch('shownCategories.length', parseProductCategories);
 
         function parseProductCategories() {

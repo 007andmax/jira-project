@@ -5,11 +5,6 @@
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
-
-        ProductsService.getAllProducts($scope, function (resp) {
-          $scope.productsList = resp;
-        });
-
         $scope.orderProducts = {
           field: 'description',
           reverse: false
@@ -39,6 +34,7 @@
               };
             }
 
+            $rootScope.$broadcast('productsTabChanged');
             $scope.pageTab = tab;
           }
         };
@@ -75,6 +71,10 @@
 
         $scope.closeCreateCategoryForm = function () {
           $scope.isCreateCategoryShow = false;
+        };
+
+        $scope.setHighlightProductId = function (productId) {
+          $scope.highlightProductId = productId;
         };
 
         $scope.setOrderForProducts = function (option) {

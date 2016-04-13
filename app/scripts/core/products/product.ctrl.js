@@ -16,6 +16,12 @@
           $scope.showEditProduct = false;
         });
 
+        if ($scope.product.category){
+          $scope.$on($scope.product.category.id + '-showProduct', function (event, productId) {
+            $scope.setHighlightProductId(productId);
+          });
+        }
+
         $scope.deleteProduct = function () {
           var confirmMesage = 'Do you want to delete product?',
             confirmButton = 'Yes';
