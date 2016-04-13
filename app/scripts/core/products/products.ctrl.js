@@ -16,7 +16,6 @@
         ProductsService.getAllProducts($scope, function (resp) {
           categories = resp.categories;
           $scope.productsData = resp;
-          $scope.productsData = resp;
         });
 
         $scope.pageTab = 'group';

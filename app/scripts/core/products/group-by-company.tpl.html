@@ -49,7 +49,7 @@
 
     <li ng-repeat="category in productsData.categories | orderBy: 'default': false" event-toggle-slider="toggleProducts"
         ng-controller="quicktech.core.products.categoryCtrl" ng-form="editCategoryForm"
-        ng-show="(!category.default || category.productsList > 0) && (!showCategory || showCategory === category.id)"
+        ng-show="category.productsList.length > 0 && (!showCategory || showCategory === category.id)"
         ng-class="{'has-error': isShowingErrors(editCategoryForm, 'editCategoryName'),
                    'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
 
