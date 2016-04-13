@@ -24,10 +24,7 @@
             return ngModel.$viewValue
           }, checkAndFix);
 
-          attr.$observe('country', function () {
-            checkAndFix();
-            scope.phoneNumbersForm.$setPristine();
-          });
+          attr.$observe('country', checkAndFix);
 
           function checkAndFix(e) {
 

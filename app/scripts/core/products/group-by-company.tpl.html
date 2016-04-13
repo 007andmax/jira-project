@@ -191,7 +191,8 @@
 
                     <ul class="dropdown-menu move-prod" role="menu">
 
-                      <li ng-repeat="category in categories" ng-if="!category.default">
+                      <li ng-repeat="category in categories"
+                          ng-if="!category.default && product.category.id !== category.id">
                         <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
                           {{ category.name }}
                         </a>
