@@ -98,12 +98,20 @@
             for (var index in callbacks) {
               callbacks[index]($scope.companyInfoForm[formNames[index]], resp);
             }
-            $scope.savingCompanyInfo = false;
-            if($scope.currentCompany.status === "SIGN_UP"){
-              var startPage = $scope.getUserDefaultPage();
-              startPage.split("/");
-              $state.go('tickets', {listType: startPage[1] || 'unassigned'});
+            if ($scope.currentCompany.status === "SIGN_UP") {
+              var startPageMap = {
+                UNASSIGNED: 'unassigned',
+                MY_TICKETS: 'user',
+                SHARED: 'shared',
+                OPEN: 'open',
+                CLOSED: 'closed',
+                TRASH: 'trash',
+                SPAM: 'spam'
+              };
+
+              $state.go('tickets', {listType: startPageMap[window.startPage || 'UNASSIGNED']});
             }
+            $scope.savingCompanyInfo = false;
           });
         };
 
