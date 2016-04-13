@@ -15,7 +15,8 @@
 
         ProductsService.getAllProducts($scope, function (resp) {
           categories = resp.categories;
-          $scope.productsData = angular.copy(resp);
+          $scope.productsData = resp;
+          $scope.productsData = resp;
         });
 
         $scope.pageTab = 'group';
