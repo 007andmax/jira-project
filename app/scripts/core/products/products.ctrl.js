@@ -96,7 +96,7 @@
           } else if ($scope.orderProducts.field === 'description') {
             return item.description;
           } else if ($scope.orderProducts.field === 'vendor') {
-            return item.vendor.name;
+            return item.vendor ? item.vendor.name : '';
           } else if ($scope.orderProducts.field === 'cost') {
             return item.cost;
           } else if ($scope.orderProducts.field === 'sale') {
