@@ -5,10 +5,6 @@
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsListCtrl',
     ['$scope', 'ProductsService', '$timeout', function ($scope, ProductsService, $timeout) {
 
-      ProductsService.getAllProducts($scope, function (resp) {
-        $scope.productsList = resp;
-      });
-
       $scope.$on('showCategory', function (event, categoryId) {
         $scope.categoryId = categoryId ? categoryId : undefined;
       });

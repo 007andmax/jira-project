@@ -5,18 +5,24 @@
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
+
+        var categories;
+
         $scope.orderProducts = {
           field: 'description',
           reverse: false
         };
 
+        ProductsService.getAllProducts($scope, function (resp) {
+          categories = resp.categories;
+          $scope.productsData = angular.copy(resp);
+        });
+
         $scope.pageTab = 'group';
         $scope.isCreateCategoryShow = false;
         $scope.newCategory = {};
-        $scope.categories = ProductsService.getCategories($scope);
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
         $scope.showCategory = '';
-
         $scope.status = {
           isopen: false
         };
@@ -56,9 +62,13 @@
         };
 
         $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {
+          if (!categories) {
+            return;
+          }
+
           var uniqueNameCount = 0;
-          for (var i = 0; i < $scope.categories.length; i++) {
-            if ((ngModelCtrl.$viewValue.toLowerCase() === $scope.categories[i].name.toLowerCase()) && (modelId !== $scope.categories[i].id)) {
+          for (var i = 0; i < categories.length; i++) {
+            if ((ngModelCtrl.$viewValue.toLowerCase() === categories[i].name.toLowerCase()) && (modelId !== categories[i].id)) {
               uniqueNameCount++;
             }
           }

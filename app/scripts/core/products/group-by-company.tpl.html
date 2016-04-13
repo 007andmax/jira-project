@@ -47,9 +47,9 @@
 
     </li>
 
-    <li ng-repeat="category in categories | orderBy: 'default': false" event-toggle-slider="toggleProducts"
+    <li ng-repeat="category in productsData.categories | orderBy: 'default': false" event-toggle-slider="toggleProducts"
         ng-controller="quicktech.core.products.categoryCtrl" ng-form="editCategoryForm"
-        ng-show="(!category.default || category.productsAmount > 0) && (!showCategory || showCategory === category.id)"
+        ng-show="(!category.default || category.productsList > 0) && (!showCategory || showCategory === category.id)"
         ng-class="{'has-error': isShowingErrors(editCategoryForm, 'editCategoryName'),
                    'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
 
@@ -65,7 +65,7 @@
 
           <div class="no-items"
                ng-class="{'not-hide-labels': !((currentUser.role === 'SUPER_TECH_ADMIN') && !category.default)}">
-            {{ category.productsAmount}} items
+            {{ category.productsList.length }} items
           </div>
 
           <div class="product-actions" ng-show="(currentUser.role === 'SUPER_TECH_ADMIN') && !category.default">
@@ -96,7 +96,7 @@
 
             <ul class="qt-list qt-product-list">
 
-              <li class="list-heading" ng-show="products.length > 0" style="cursor: pointer !important;">
+              <li class="list-heading" ng-show="category.productsList.length > 0" style="cursor: pointer !important;">
                 <div class="col-1" ng-click="setOrderForProducts('ilc')">
                   ILC
                   <i class="icn-sm sort-icon icn-sort"
@@ -135,7 +135,7 @@
                 <div class="col-6">&nbsp;</div>
               </li>
 
-              <li ng-repeat="product in products | orderBy : orderByForProducts : orderProducts.reverse"
+              <li ng-repeat="product in category.productsList | orderBy : orderByForProducts : orderProducts.reverse"
                   ng-class="{'qt-product-form': showEditProduct}"
                   ng-controller="quicktech.core.products.productCtrl"
                   show-model-element="{{ 'show-' + product.versionedId.id}}">
@@ -191,7 +191,7 @@
 
                     <ul class="dropdown-menu move-prod" role="menu">
 
-                      <li ng-repeat="category in categories"
+                      <li ng-repeat="category in productsData.categories"
                           ng-if="!category.default && product.category.id !== category.id">
                         <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
                           {{ category.name }}
