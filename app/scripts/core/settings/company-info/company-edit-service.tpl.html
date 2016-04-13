@@ -52,6 +52,19 @@
            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
   </div>
 
+  <div class="col-3">
+
+    <label class="control-label">
+      IS BILLABLE
+    </label>
+
+    <label class="control checkbox pull-left">
+      <input type="checkbox" ng-model="editService.billable">
+      <span class="control-indicator"></span>
+    </label>
+
+  </div>
+
   <!--<div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;" TODO hide timeAllotment-->
        <!--service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"-->
        <!--ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">-->

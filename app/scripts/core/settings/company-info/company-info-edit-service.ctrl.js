@@ -12,7 +12,8 @@
         } else {
           $scope.editService = {
             taxable: true,
-            isDefault: true
+            isDefault: true,
+            billable: true
           };
         }
 
