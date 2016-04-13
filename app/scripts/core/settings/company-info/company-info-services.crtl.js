@@ -25,6 +25,21 @@
               }
             }
 
+            if ($scope.currentCompany.status === "SIGN_UP" && $scope.services.length === 0) {
+              var onsiteServices = {
+                name: 'Onsite Service',
+                rate: 75,
+                billable: true
+              };
+              var remoteServices = {
+                name: 'Remote Service',
+                rate: 65,
+                billable: true
+              };
+
+              $scope.services = [onsiteServices, remoteServices];
+            }
+
             services = angular.copy($scope.services);
 
             $scope.isServicesChange = function () {
@@ -43,9 +58,6 @@
         });
 
         $scope.saveMethods.push(function () {
-          //if (!$scope.isServicesChange()) {
-          //$scope.disabledSaveButton = true;
-          //services = angular.copy($scope.services);
 
           return {
             services: $scope.services,
@@ -59,14 +71,6 @@
             formName: 'editServiceForm'
           };
 
-          //ServicesService.saveList($scope.services, $scope.companyForSettingPage.id, function () {
-          //  initDefaultServices();
-          //  $scope.disabledSaveButton = false;
-          //  $rootScope.$broadcast('cancelEditForm');
-          //})
-          //} else {
-          //  $scope.triedToSaveService = true;
-          //}
         });
 
       }]);
