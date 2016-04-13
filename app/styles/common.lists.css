@@ -2911,3 +2911,12 @@ Devices tab
     padding-right: 13px;
   }
 }
+.service-form-wrapper.edit-form-checkbox .col-3{
+  width: 75px;
+}
+.service-form-wrapper.edit-form-checkbox .col-3 label{
+  left: 25px;
+}
+.service-form-wrapper.edit-form-checkbox .col-1{
+  width: calc(100% - 205px);
+}
