@@ -319,8 +319,8 @@
 
         <li class="list-heading" ng-show="services.length > 0">
           <div class="col-1" style="width: 205px;">SERVICE NAME</div>
-          <div class="col-5" style="margin-right: 28px;">IS BILLABLE</div>
           <div class="col-2">PER HOUR</div>
+          <div class="col-5" style="margin-right: 28px;">IS BILLABLE</div>
           <!--<div class="col-3">TIME ALLOTMENT</div> TODO hide timeAllotment-->
           <div class="col-4">&nbsp;</div>
         </li>
@@ -339,6 +339,10 @@
               </div>
             </div>
 
+            <div class="col-2">
+              {{ service.rate | currency: '$': 2 }}
+            </div>
+
             <div class="col-5">
               <label class="control checkbox pull-left">
                 <input type="checkbox" ng-checked="service.billable" custom-disabled="{{ disabledCheckbox }}"
@@ -346,11 +350,6 @@
                 <span class="control-indicator"></span>
               </label>
             </div>
-
-            <div class="col-2">
-              {{ service.rate | currency: '$': 2 }}
-            </div>
-
             <!--<div class="col-3 hide"> TODO hide timeAllotment-->
             <!--{{ service.timeBlock | timeFilter }}-->
             <!--</div>-->
