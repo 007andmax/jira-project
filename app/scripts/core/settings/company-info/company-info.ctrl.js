@@ -74,6 +74,8 @@
             }
           }
 
+          $scope.savingCompanyInfo = true;
+
           var settings = {},
             callbacks = [],
             formNames = [];
@@ -96,7 +98,7 @@
             for (var index in callbacks) {
               callbacks[index]($scope.companyInfoForm[formNames[index]], resp);
             }
-            $scope.isTryToSave = false;
+            $scope.savingCompanyInfo = false;
           });
         };
 
