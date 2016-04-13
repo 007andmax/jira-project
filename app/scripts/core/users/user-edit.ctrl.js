@@ -71,7 +71,7 @@
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);
-          if ($scope.userCompany.isDefault) {
+          if ($scope.userCompany && $scope.userCompany.isDefault) {
             $scope.userCompany = '';
           }
           if ($scope.editUser.companyId && $scope.clientCompaniesInfo) {
