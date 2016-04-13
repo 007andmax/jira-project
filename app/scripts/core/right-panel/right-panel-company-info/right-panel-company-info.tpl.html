@@ -104,10 +104,7 @@
 
       <div class="billing-address">
 
-        <p class="post-address">
-          {{ clientCompanyInfo.billingAddress.suiteNumber ? clientCompanyInfo.billingAddress.suiteNumber + ',' : '' }}
-          {{ clientCompanyInfo.billingAddress.address }}
-        </p>
+        <p class="post-address">{{ clientCompanyInfo.billingAddress.addressWithSuitNumberAndPostalCode }}</p>
 
         <!--<div class="site-ref">-->
           <!--<div class="btn-location" data-container="body" data-toggle="popover-location" data-placement="bottom">-->

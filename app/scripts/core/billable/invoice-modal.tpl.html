@@ -61,9 +61,7 @@
         <!--</div>-->
 
         <div class="address">
-          {{ (currentBillTo.suiteNumber ? currentBillTo.suiteNumber + ', ' : '') +
-          currentBillTo.address +
-          (currentBillTo.postalCode ? ', ' + currentBillTo.postalCode : '') }}
+          {{ currentBillTo.addressWithSuitNumberAndPostalCode }}
         </div>
 
       </div>
@@ -113,9 +111,7 @@
         <!--</div>-->
 
         <div class="address">
-          {{ (currentShipTo.suiteNumber ? currentShipTo.suiteNumber + ', ' : '') +
-          currentShipTo.address +
-          (currentShipTo.postalCode ? ', ' + currentShipTo.postalCode : '') }}
+          {{ currentShipTo.addressWithSuitNumberAndPostalCode }}
         </div>
 
       </div>
