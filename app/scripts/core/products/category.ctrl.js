@@ -41,7 +41,7 @@
             $timeout(function () {
               $scope.showProducts = false;
             }, 200);
-          } else if ($scope.category.productsAmount > 0 || $scope.showCreateProduct) {
+          } else if ($scope.category.productsList.length > 0 || $scope.showCreateProduct) {
             $scope.showProducts = true;
           }
         };
@@ -51,7 +51,7 @@
           $scope.showCreateProduct = true;
         };
 
-        $scope.$watch('category.productsAmount', function (productsAmount) {
+        $scope.$watch('category.productsList.length', function (productsAmount) {
           if (productsAmount === 0 && $scope.showProducts && !$scope.showCreateProduct) {
             $scope.$broadcast('toggleProducts');
             $scope.showProducts = false;
