@@ -12,10 +12,14 @@
             name: $scope.service.name,
             rate: $scope.service.rate,
             timeBlock: Math.round($scope.service.timeBlock * 60),
-            taxable: true
+            taxable: $scope.service.taxable,
+            billable: $scope.service.billable
           }
         } else {
-          $scope.editService = {taxable: true};
+          $scope.editService = {
+            taxable: true,
+            billable: true
+          };
         }
 
         $scope.saveEditService = function (form) {
@@ -26,7 +30,8 @@
               name: $scope.editService.name,
               rate: $scope.editService.rate,
               timeBlock: $scope.editService.timeBlock / 60,
-              taxable: true
+              taxable: $scope.editService.taxable,
+              billable: $scope.editService.billable
             }, function () {
               $scope.disabledSaveButton = false;
               $rootScope.$broadcast('cancelEditForm');

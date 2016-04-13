@@ -6,21 +6,18 @@
     ['$scope', 'ProductsService', '$timeout',
       function ($scope, ProductsService, $timeout) {
 
-        $scope.products = ProductsService.getAllByCategory($scope, $scope.category.id, function () {
-          $scope.$emit('toggleProducts');
+        $scope.$emit('toggleProducts');
 
-          $scope.$watch('highlightProductId', function (productId) {
-            if (productId) {
+        $scope.$watch('highlightProductId', function (productId) {
+          if (productId) {
 
-              $scope.$broadcast('show-' + productId);
+            $scope.$broadcast('show-' + productId);
 
-              $timeout(function () {
-                $scope.setHighlightProductId();
-              }, 3000)
-            }
-          })
-
-        }, true);
+            $timeout(function () {
+              $scope.setHighlightProductId();
+            }, 3000)
+          }
+        });
 
       }]);
 

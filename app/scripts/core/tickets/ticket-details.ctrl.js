@@ -273,7 +273,7 @@
 
             } else if ($scope.ticketUpdate.services) {
 
-              ticketUpdateToSend.services = $scope.ticketUpdate.services;
+              ticketUpdateToSend.services = angular.copy($scope.ticketUpdate.services);
 
               for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
                 var date = new Date(ticketUpdateToSend.services[i].date);

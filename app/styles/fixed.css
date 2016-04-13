@@ -68,7 +68,9 @@ body.non-body-scroll::-webkit-scrollbar {
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-1{
+  width: 145px;
+}
 .qt-product-list > li > .intermediate-parent-elem > .col-2 {
   width: calc(100% - 995px);
   color: #94a4b8;
@@ -76,7 +78,9 @@ body.non-body-scroll::-webkit-scrollbar {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-2{
+  width: calc(100% - 1010px);
+}
 .qt-product-list > li > .intermediate-parent-elem > .col-3 {
   width: 234px;
   color: #94a4b8;
@@ -100,20 +104,14 @@ body.non-body-scroll::-webkit-scrollbar {
   border: none;
   box-shadow: none;
 }
-.products-content .default-ctgr-prdcs .dropdown-menu.move-prod {
+.products-content .dropdown-menu.move-prod {
   width: 200px;
   max-height: 150px;
   overflow-y: scroll;
   margin-left: -150px
 }
 
-.default-ctgr-prdcs .qt-product-list > li > .col-4 {
-  width: 70px;
-}
 
-.default-ctgr-prdcs .qt-product-list > li > .intermediate-parent-elem > .col-4 {
-  width: 70px;
-}
 .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox{
   left: 50px;
 }
@@ -122,15 +120,13 @@ body.non-body-scroll::-webkit-scrollbar {
   height: 20px;
   color: #94a4b8;
 }
-
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-4{
+  width: 115px;
+}
 .qt-product-list > li > .intermediate-parent-elem > .col-5 {
   width: 106px;
   text-align: right;
   color: #94a4b8;
-}
-
-.default-ctgr-prdcs .qt-product-list > li > .intermediate-parent-elem > .col-6 {
-  width: 83px;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-6 {
@@ -144,7 +140,9 @@ body.non-body-scroll::-webkit-scrollbar {
     height: 18px;
     width: 184px;
   }
-
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-1{
+  width: 145px;
+}
   .qt-product-list > li > .intermediate-parent-elem > .col-2 {
     width: calc(100% - 1170px);
   }
@@ -158,7 +156,9 @@ body.non-body-scroll::-webkit-scrollbar {
   .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 185px;
   }
-
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-4{
+  width: 105px;
+}
   .qt-product-list > li > .intermediate-parent-elem > .col-5 {
     width: 106px;
   }
@@ -173,13 +173,18 @@ body.non-body-scroll::-webkit-scrollbar {
     height: 18px;
     width: 114px;
   }
+  .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1{
+    width: 100px;
+  }
   .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox{
     left: 30px;
   }
   .qt-product-list > li > .intermediate-parent-elem > .col-2 {
     width: calc(100% - 675px);
   }
-
+  .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2{
+    width: calc(100% - 760px);
+  }
   .qt-product-list > li > .intermediate-parent-elem > .col-3 {
     width: 164px;
   }
@@ -187,7 +192,9 @@ body.non-body-scroll::-webkit-scrollbar {
   .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 85px;
   }
-
+.with-category .qt-product-list > li > .intermediate-parent-elem > .col-4{
+  width: 85px;
+}
   .qt-product-list > li > .intermediate-parent-elem > .col-5 {
     width: 86px;
   }
@@ -972,4 +979,34 @@ aside#left div.nav-title {
 }
 .col-2.product-description {
 
+}
+
+@media screen and (max-width: 1440px){
+  .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2{
+    width: calc(100% - 715px);
+  }
+  .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1{
+    width: 95px;
+  }
+}
+@media screen and (max-width: 1050px){
+  .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2{
+    width: calc(100% - 675px);
+  }
+  .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4{
+    width: 75px;
+  }
+}
+.is-billable{
+  width: 85px;
+}
+.qt-default-services li .intermediate-parent-elem .is-billable label {
+  margin-top: 14px !important;
+}
+.services-info-wrapper .service-form-wrapper.edit-is-billable .col-3{
+  width: 75px;
+  padding-left: 10px;
+}
+.services-info-wrapper .service-form-wrapper.edit-is-billable .col-3 label.checkbox{
+  left: 25px;
 }

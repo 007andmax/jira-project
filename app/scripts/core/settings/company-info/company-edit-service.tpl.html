@@ -1,6 +1,6 @@
-<div class="service-form-wrapper" ng-form="editServiceForm">
+<div class="service-form-wrapper edit-is-billable" ng-form="editServiceForm">
 
-  <div class="col-1" style="width: calc(100% - 127px);"
+  <div class="col-1" style="width: calc(100% - 205px);"
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
     <!--style for TODO hide timeAllotment-->
 
@@ -50,6 +50,19 @@
     <input type="text" class="form-control"
            ng-model="editService.rate"
            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+  </div>
+
+  <div class="col-3">
+
+    <label class="control-label">
+      IS BILLABLE
+    </label>
+
+    <label class="control checkbox pull-left">
+      <input type="checkbox" ng-model="editService.billable">
+      <span class="control-indicator"></span>
+    </label>
+
   </div>
 
   <!--<div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;" TODO hide timeAllotment-->

@@ -1673,9 +1673,15 @@ Devices tab
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
+.with-category .qt-product-list>li>.col-1{
+  width: 145px;
+}
 .qt-product-list>li>.col-2{
   width: calc(100% - 995px);
   color: #94a4b8;
+}
+.with-category .qt-product-list>li>.col-2{
+  width: calc(100% - 1010px);
 }
 /*.qt-product-list>li>.col-2 .icn-description{
   margin-top: 4px;
@@ -1693,6 +1699,9 @@ Devices tab
   width: 125px;
   color: #94a4b8;
 }
+.with-category .qt-product-list>li>.col-4{
+  width: 115px;
+}
 .qt-product-list>li>.col-5{
   width: 106px;
   text-align: right;
@@ -1708,6 +1717,9 @@ Devices tab
     height: 18px;
     width: 184px;
   }
+  .with-category .qt-product-list>li>.col-1{
+    width: 145px;
+  }
   .qt-product-list>li>.col-2{
     width: calc(100% - 1170px);
   }
@@ -1716,6 +1728,9 @@ Devices tab
   }
   .qt-product-list>li>.col-4{
     width: 185px;
+  }
+  .with-category .qt-product-list>li>.col-4{
+    width: 115px;
   }
   .qt-product-list>li>.col-5{
     width: 106px;
@@ -1730,13 +1745,22 @@ Devices tab
     width: 114px;
     padding-right: 15px;
   }
+  .with-category .qt-product-list>li>.col-1{
+    width: 100px;
+  }
   .qt-product-list>li>.col-2{
     width: calc(100% - 675px);
+  }
+  .with-category .qt-product-list>li>.col-2{
+    width: calc(100% - 760px);
   }
   .qt-product-list>li>.col-3{
     width: 164px;
   }
   .qt-product-list>li>.col-4{
+    width: 85px;
+  }
+  .with-category .qt-product-list>li>.col-4{
     width: 85px;
   }
   .qt-product-list>li>.col-5{
@@ -2869,4 +2893,30 @@ Devices tab
   width: 100%;
   padding: 20px 0;
   height: 50px;
+}
+@media screen and (max-width: 1440px) {
+  .with-category .qt-product-list>li>.col-2{
+    width: calc(100% - 715px);
+  }
+  .with-category .qt-product-list>li>.col-1{
+    width: 95px;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .with-category .qt-product-list>li>.col-2 {
+    width: calc(100% - 675px);
+  }
+  .with-category .qt-product-list>li>.col-4{
+    width: 75px;
+    padding-right: 13px;
+  }
+}
+.service-form-wrapper.edit-form-checkbox .col-3{
+  width: 75px;
+}
+.service-form-wrapper.edit-form-checkbox .col-3 label{
+  left: 25px;
+}
+.service-form-wrapper.edit-form-checkbox .col-1{
+  width: calc(100% - 205px);
 }

@@ -1,4 +1,4 @@
-<div class="service-form-wrapper" ng-form="editServiceForm">
+<div class="service-form-wrapper edit-form-checkbox" ng-form="editServiceForm">
 
   <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
 
@@ -13,6 +13,13 @@
     <input type="text" class="form-control" placeholder="Per Hour"
            ng-model="editService.rate"
            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+  </div>
+
+  <div class="col-3">
+    <label class="control checkbox pull-left" tooltip="Is Billable" toltip-placement="top">
+      <input type="checkbox" ng-model="editService.billable">
+      <span class="control-indicator"></span>
+    </label>
   </div>
 
   <!--<div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;" TODO hide timeAllotment-->

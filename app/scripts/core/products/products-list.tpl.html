@@ -1,7 +1,7 @@
-<div ng-controller="quicktech.core.products.productsListCtrl">
+<div class="with-category" ng-controller="quicktech.core.products.productsListCtrl">
   <ul class="qt-list qt-product-list">
 
-    <li class="list-heading" ng-show="productsList.length > 0" style="cursor: pointer !important;">
+    <li class="list-heading" ng-show="productsData.list.length > 0" style="cursor: pointer !important;">
       <div class="col-1" ng-click="setOrderForProducts('ilc')">
         ILC
         <i class="icn-sm sort-icon icn-sort"
@@ -45,7 +45,7 @@
       <div class="col-6">&nbsp;</div>
     </li>
 
-    <li ng-repeat="product in productsList | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse"
+    <li ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse"
         ng-class="{'qt-product-form': showEditProduct}"
         ng-controller="quicktech.core.products.productCtrl"
         show-model-element="{{ 'show-' + product.versionedId.id}}">
@@ -105,7 +105,7 @@
 
           <ul class="dropdown-menu move-prod" role="menu">
 
-            <li ng-repeat="category in categories" ng-if="!category.default && product.category.id !== category.id">
+            <li ng-repeat="category in productsData.categories" ng-if="!category.default && product.category.id !== category.id">
               <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
                 {{ category.name }}
               </a>
