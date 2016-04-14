@@ -13,7 +13,6 @@
               $scope.$broadcast('show-' + productId);
             });
 
-
             $timeout(function () {
               $scope.setHighlightProductId();
             }, 3000);

@@ -13,13 +13,13 @@
           link: function (scope, element, attrs) {
             var listItemHeight = parseInt(attrs['setListHeightByContent']);
 
-            scope.$watch('[itemsCount, offset]', function (value) {
+            scope.$watchCollection('[itemsCount, offset]', function (value) {
               if (value) {
                 element.height((listItemHeight * value[0] + (parseInt(value[1]) || 0)) + 'px');
               } else {
                 element.height('100%');
               }
-            }, true);
+            });
           }
         }
       }]);

@@ -9573,16 +9573,17 @@ button.close {
 
 .slide-category-content {
   opacity: 1;
+  max-height: 9999px;
   margin-top: 25px;
   overflow: hidden;
   float: left;
   width: 100%;
   cursor: auto;
-  -webkit-transition:all ease-in-out 0.3s;
-  transition:all ease-in-out 0.3s;
+  -webkit-transition:all ease-in-out 0.4s;
+  transition:all ease-in-out 0.4s;
 }
 
 .slide-category-content.ng-hide {
-  height: 0 !important;
+  max-height: 0 !important;
   opacity: 0 !important;
 }
