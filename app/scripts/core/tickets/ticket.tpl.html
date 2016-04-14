@@ -241,11 +241,10 @@
         </label>
       </span>
 
-      <span class="label-transition label-primary persistent-tooltip"
-            ng-if="PermissionsService.isInitialsVisible(listType, currentUser.role) && (ticket.assignedUser && ticket.assignedUser.id)"
-            tooltip="{{ getUserName(assignedUser) }}" tooltip-placement="top">{{ assignedUser.initials }}</span>
-
       <span class="label label-primary">{{ ticket.number }}</span>
+
+      <div class="text-muted"
+            ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(assignedUser) }}</div>
 
       <div class="ticket-status pull-right">
         <span class="label label-info pull-left" ng-show="ticket.unread">NEW</span>
