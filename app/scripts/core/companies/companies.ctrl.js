@@ -8,7 +8,6 @@
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, DevicesService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
-        var isChartHasOpen = false;
 
         $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies();
@@ -20,12 +19,7 @@
         };
 
         if($scope.isChartsAccess()){
-          $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope, function () {
-            if (($scope.ticketsResolution.quick > 0 || $scope.ticketsResolution.delayed > 0) && !isChartHasOpen) {
-              $scope.isCollapsed = false;
-              isChartHasOpen = true;
-            }
-          });
+          $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
           $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function () {
             $scope.mostTicketsResolved = 0;
@@ -35,11 +29,6 @@
                 continue;
               }
               $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
-            }
-
-            if (($scope.mostTicketsResolved > 0) && !isChartHasOpen) {
-              $scope.isCollapsed = false;
-              isChartHasOpen = true;
             }
 
           });
@@ -55,19 +44,10 @@
 
             if ($scope.contributedToEarnings) {
               $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
-              if (!isChartHasOpen) {
-                $scope.isCollapsed = false;
-                isChartHasOpen = true;
-              }
             }
           });
 
-          $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope, function () {
-            if ($scope.timeBilledByCompany.value > 0 && !isChartHasOpen) {
-              $scope.isCollapsed = false;
-              isChartHasOpen = true;
-            }
-          });
+          $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
         }
 
         $scope.$watch('companies.length', function (companiesCount) {
@@ -118,7 +98,6 @@
 
         $scope.toggleCollapsed = function () {
           $scope.isCollapsed = !$scope.isCollapsed;
-          isChartHasOpen = true;
         }
 
       }]);
