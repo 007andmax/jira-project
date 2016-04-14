@@ -10,6 +10,7 @@
         $scope.openEditProduct = function () {
           $rootScope.$broadcast('cancelEditForm');
           $scope.showEditProduct = true;
+          $scope.setOffset(300);
         };
 
         $scope.$on('cancelEditForm', function () {

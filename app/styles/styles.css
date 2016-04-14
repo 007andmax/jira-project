@@ -9571,3 +9571,18 @@ button.close {
   }
 }
 
+.slide-category-content {
+  opacity: 1;
+  margin-top: 25px;
+  overflow: hidden;
+  float: left;
+  width: 100%;
+  cursor: auto;
+  -webkit-transition:all ease-in-out 0.3s;
+  transition:all ease-in-out 0.3s;
+}
+
+.slide-category-content.ng-hide {
+  height: 0 !important;
+  opacity: 0 !important;
+}

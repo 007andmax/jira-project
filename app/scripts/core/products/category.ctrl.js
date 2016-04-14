@@ -5,6 +5,15 @@
   angular.module('quicktech.core.products').controller('quicktech.core.products.categoryCtrl',
     ['$scope', '$rootScope', 'ProductsService', '$timeout', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, $rootScope, ProductsService, $timeout, UserConfirmationsService) {
+        var offset = 120;
+
+        $scope.getOffset = function () {
+          return offset;
+        };
+
+        $scope.setOffset = function (value) {
+          offset = value;
+        };
 
         $scope.openEditCategory = function () {
           $rootScope.$broadcast('cancelEditForm');
@@ -34,59 +43,50 @@
           });
         };
 
-        $scope.toggleProducts = function () {
+        $scope.addProduct = function (id) {
+          $rootScope.$broadcast('cancelEditForm', id);
+          $scope.showCreateProduct = true;
+          offset = 300;
+        };
 
-          if ($scope.showProducts) {
-            $scope.$broadcast('toggleProducts');
-            $timeout(function () {
-              $scope.showProducts = false;
-            }, 200);
-          } else if ($scope.category.productsList.length > 0 || $scope.showCreateProduct) {
-            $scope.showProducts = true;
+        $scope.addProductAndOpenCategory = function (id) {
+          $scope.addProduct(id);
+          if (id !== $scope.expandedCategoryId) {
+            $scope.setExpandedCategoryId(id);
           }
         };
 
-        $scope.addProduct = function () {
-          $rootScope.$broadcast('cancelEditForm');
-          $scope.showCreateProduct = true;
-        };
-
         $scope.$watch('category.productsList.length', function (productsAmount) {
-          if (productsAmount === 0 && $scope.showProducts && !$scope.showCreateProduct) {
-            $scope.$broadcast('toggleProducts');
-            $scope.showProducts = false;
+          if (productsAmount === 0 && !$scope.showCreateProduct) {
+            $scope.setExpandedCategoryId($scope.category.id);
           }
         });
 
         $scope.$on('cancelEditForm', function (event, data) {
           $scope.cancelEditCategory();
           $scope.showCreateProduct = false;
+          offset = 120;
 
-          if (data != 'isProductCreation' && $scope.category.productsAmount === 0 && $scope.showProducts) {
-            $scope.$broadcast('toggleProducts');
-            $scope.showProducts = false;
+          if (data && data != 'isProductCreation'
+            && $scope.category.productsList.length === 0
+            && data !== $scope.expandedCategoryId) {
+
+            $scope.setExpandedCategoryId($scope.category.id);
           }
         });
 
         $scope.$on($scope.category.id + '-showProduct', function (event, productId) {
-          if (!$scope.showProducts) {
-            $scope.toggleProducts();
+          if ($scope.category.id !== $scope.expandedCategoryId) {
+            $scope.setExpandedCategoryId($scope.category.id);
           }
 
           $scope.setHighlightProductId(productId);
         });
 
-        $scope.$on('showCategory', function (event, categoryId) {
-          if (categoryId) {
-            $scope.showCategory = categoryId;
-            if (!$scope.showProducts) {
-              $scope.toggleProducts();
-            }
-          } else {
-            $scope.showCategory = '';
-            if ($scope.showProducts) {
-              $scope.toggleProducts();
-            }
+        $scope.$on($scope.category.id + '-showCategory', function (event, categoryId) {
+          $scope.setShowingCategory(categoryId);
+          if (categoryId !== $scope.expandedCategoryId) {
+            $scope.setExpandedCategoryId(categoryId);
           }
         });
 

@@ -14,7 +14,7 @@
         $scope.clearInput = function () {
           $scope.searchValue = '';
           $scope.choosedCategory = false;
-          $rootScope.$broadcast('showCategory');
+          $rootScope.$broadcast('showAllCategories');
         };
 
         $scope.onSelect = function (val) {
@@ -26,7 +26,7 @@
           if (val.versionedId) {
             $rootScope.$broadcast(val.categoryId + '-showProduct', val.versionedId.id);
           } else {
-            $rootScope.$broadcast('showCategory', val.id);
+            $rootScope.$broadcast(val.id + '-showCategory', val.id);
           }
         };
 

@@ -7,18 +7,19 @@
         return {
           restrict: 'A',
           scope: {
-            itemsCount: '@'
+            itemsCount: '@',
+            offset: '@?'
           },
           link: function (scope, element, attrs) {
-            var listItemHeight = parseInt(attrs['setListWidthByContent']);
+            var listItemHeight = parseInt(attrs['setListHeightByContent']);
 
-            scope.$watch('itemsCount', function (value) {
+            scope.$watch('[itemsCount, offset]', function (value) {
               if (value) {
-                element.height((listItemHeight * value) + 'px');
+                element.height((listItemHeight * value[0] + (parseInt(value[1]) || 0)) + 'px');
               } else {
                 element.height('100%');
               }
-            });
+            }, true);
           }
         }
       }]);

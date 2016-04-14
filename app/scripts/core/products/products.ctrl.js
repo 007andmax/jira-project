@@ -22,10 +22,11 @@
         $scope.isCreateCategoryShow = false;
         $scope.newCategory = {};
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
-        $scope.showCategory = '';
         $scope.status = {
           isopen: false
         };
+        $scope.expandedCategoryId = '';
+        $scope.showCategory = '';
 
         $scope.openCreationCategory = function () {
           $scope.isCreateCategoryShow = true;
@@ -117,6 +118,17 @@
 
         };
 
+        $scope.setExpandedCategoryId = function (id) {
+          if (id === $scope.expandedCategoryId) {
+            $scope.expandedCategoryId = '';
+          } else {
+            $scope.expandedCategoryId = id;
+          }
+        };
+
+        $scope.setShowingCategory = function (id) {
+          $scope.showCategory = id;
+        };
       }]);
 
 }());

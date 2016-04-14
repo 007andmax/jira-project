@@ -6,17 +6,22 @@
     ['$scope', 'ProductsService', '$timeout',
       function ($scope, ProductsService, $timeout) {
 
-        $scope.$emit('toggleProducts');
-
         $scope.$watch('highlightProductId', function (productId) {
           if (productId) {
 
-            $scope.$broadcast('show-' + productId);
+            $timeout(function () {
+              $scope.$broadcast('show-' + productId);
+            });
+
 
             $timeout(function () {
               $scope.setHighlightProductId();
-            }, 3000)
+            }, 3000);
           }
+        });
+
+        $scope.$on('showAllCategories', function (event) {
+          $scope.setShowingCategory('');
         });
 
       }]);

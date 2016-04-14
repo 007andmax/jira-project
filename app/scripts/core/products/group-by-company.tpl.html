@@ -47,14 +47,14 @@
 
     </li>
 
-    <li ng-repeat="category in productsData.categories | orderBy: 'default': false" event-toggle-slider="toggleProducts"
+    <li ng-repeat="category in productsData.categories | orderBy: 'default': false"
         ng-controller="quicktech.core.products.categoryCtrl" ng-form="editCategoryForm"
         ng-show="(!category.default || category.productsList.length > 0) && (!showCategory || showCategory === category.id)"
         ng-class="{'has-error': isShowingErrors(editCategoryForm, 'editCategoryName'),
                    'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
 
       <div style="height: 71px;position: absolute;width: 100%;top: 0;z-index: 1;"
-           ng-click="toggleProducts()" ng-hide="isEditCategory"></div>
+           ng-click="setExpandedCategoryId(category.id)" ng-hide="isEditCategory"></div>
 
       <div class="intermediate-category" ng-if="!isEditCategory">
         <div class="col-1">
@@ -70,7 +70,8 @@
 
           <div class="product-actions" ng-show="(currentUser.role === 'SUPER_TECH_ADMIN') && !category.default">
 
-            <div class="btn btn-info has-tooltip" ng-click="addProduct();toggleProducts()" scroll-to-form
+            <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
+                 scroll-to-form
                  tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
               <i class="icn-sm icn-product-add"></i>
             </div>
@@ -91,8 +92,9 @@
 
         </div>
 
-        <div class="sub-wrapper" ets-slider>
-          <div ng-controller="quicktech.core.products.categoryProductsCtrl" ng-if="showProducts">
+        <div class="slide-category-content" ng-show="category.id === expandedCategoryId"
+             set-list-height-by-content="71" items-count="{{ category.productsList.length }}" offset="{{ getOffset() }}">
+          <div ng-controller="quicktech.core.products.categoryProductsCtrl">
 
             <ul class="qt-list qt-product-list">
 
@@ -220,7 +222,7 @@
             <div class="add-product-btn-wrapper"
                  ng-hide="category.default || (currentUser.role !== 'SUPER_TECH_ADMIN')">
               <div class="btn btn-info has-tooltip"
-                   ng-click="addProduct()"
+                   ng-click="addProduct(category.id)"
                    custom-disabled="{{ showCreateProduct }}"
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
                 <i class="icn-sm icn-product-add"></i>
