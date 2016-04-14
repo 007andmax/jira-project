@@ -2,20 +2,20 @@
 
   <li class="list-heading" ng-show="services.length > 0" style="cursor: pointer !important;">
     <div class="col-1" ng-click="setOrderForServices('name')">
-      SERVICE NAME
-      <i class="icn-sm sort-icon icn-sort"
-         ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'name'}"></i>
+      <span class="sort-span">SERVICE NAME<i class="icn-sm sort-icon icn-sort"
+                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'name'}"></i></span>
+
     </div>
 
     <div class="col-2" ng-click="setOrderForServices('rate')" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
-      PER HOUR
-      <i class="icn-sm sort-icon icn-sort"
-         ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'rate'}"></i>
+      <span class="sort-span">PER HOUR<i class="icn-sm sort-icon icn-sort"
+                                         ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'rate'}"></i></span>
+
     </div>
     <div class="col-5 is-billable" ng-click="setOrderForServices('billable')">
-      IS BILLABLE
-      <i class="icn-sm sort-icon icn-sort"
-         ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i>
+      <span class="sort-span">IS BILLABLE<i class="icn-sm sort-icon icn-sort"
+                                            ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
+
     </div>
     <!--<div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT</div> TODO hide timeAllotment-->
     <div class="col-4">&nbsp;</div>

@@ -242,6 +242,7 @@
 .invoice-table-head .invoice-table-head-item {
   /*background-color: #f1f5fa;*/
   border: 2px solid #e7ecf2;
+  line-height: 1;
 }
 
 .numb-form {
@@ -268,11 +269,11 @@
 }
 .invoice-table-head .invoice-table-head-item div .sort-icon{
   position: absolute;
-  top: 14px;
-  right: 10px;
+  top: 0;
+  right: 0;
 }
 .invoice-table-head .invoice-table-head-item div:first-child {
-  width: 17%;
+  width: 16%;
 }
 
 .invoice-table-head .invoice-table-head-item div:nth-child(2) {
@@ -287,7 +288,7 @@
 }
 
 .invoice-table-head .invoice-table-head-item div:nth-child(6) {
-  width: 13%;
+  width: 14%;
   padding-right: 20px;
 }
 .invoice-table-head .invoice-table-head-item div:nth-child(5){
@@ -297,7 +298,7 @@
   margin-right: 0;
 }
 .invoice-table .table-invoice-item div:nth-child(6){
-  width: 13%;
+  width: 14%;
 }
 .invoice-table .table-invoice-item div:nth-child(4){
   width: 11%;
@@ -438,7 +439,7 @@ ul.qt-recurring-invoices{
   background-position: -1288px -58px;
 }
 .invoice-table .table-invoice-item div:first-child {
-  width: 17%;
+  width: 16%;
 }
 .invoice-table .table-invoice-item div .currency-invoice{
   display: inline-block;
