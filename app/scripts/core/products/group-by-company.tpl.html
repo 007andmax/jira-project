@@ -54,7 +54,8 @@
                    'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
 
       <div style="height: 71px;position: absolute;width: 100%;top: 0;z-index: 1;"
-           ng-click="setExpandedCategoryId(category.id)" ng-hide="isEditCategory"></div>
+           ng-click="category.productsList.length > 0 ? setExpandedCategoryId(category.id) : null"
+           ng-hide="isEditCategory"></div>
 
       <div class="intermediate-category" ng-if="!isEditCategory">
         <div class="col-1">
