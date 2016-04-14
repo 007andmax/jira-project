@@ -115,6 +115,12 @@
           });
         };
 
+        $scope.$on('$locationChangeStart', function(event){
+          if ($scope.currentCompany.status === "SIGN_UP") {
+            event.preventDefault();
+          }
+        })
+
       }]);
 
 }());
