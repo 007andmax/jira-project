@@ -29,15 +29,16 @@
           $scope.disableAddButton = true;
 
           var serviceMap = $scope.addServiceDropdown.serviceMap;
-          var servicesArr = [];
+          var companyServices = {};
+          companyServices[$scope.company.id] = [];
 
           for (var serviceId in serviceMap) {
             if (serviceMap[serviceId]) {
-              servicesArr.push(serviceId)
+              companyServices[$scope.company.id].push(serviceId)
             }
           }
-
-          ServicesService.saveList(servicesArr, $scope.company.id, function () {
+          
+          ServicesService.move(companyServices, function () {
             $scope.addServiceDropdown.isOpen = false;
             $scope.disableAddButton = false;
           });
