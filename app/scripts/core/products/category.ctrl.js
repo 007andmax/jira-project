@@ -5,15 +5,6 @@
   angular.module('quicktech.core.products').controller('quicktech.core.products.categoryCtrl',
     ['$scope', '$rootScope', 'ProductsService', '$timeout', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, $rootScope, ProductsService, $timeout, UserConfirmationsService) {
-        var offset = 120;
-
-        $scope.getOffset = function () {
-          return offset;
-        };
-
-        $scope.setOffset = function (value) {
-          offset = value;
-        };
 
         $scope.openEditCategory = function () {
           $rootScope.$broadcast('cancelEditForm');
@@ -46,7 +37,6 @@
         $scope.addProduct = function (id) {
           $rootScope.$broadcast('cancelEditForm', id);
           $scope.showCreateProduct = true;
-          offset = 300;
         };
 
         $scope.addProductAndOpenCategory = function (id) {
@@ -63,16 +53,7 @@
         });
 
         $scope.$on('cancelEditForm', function (event, data) {
-          $scope.cancelEditCategory();
           $scope.showCreateProduct = false;
-          offset = 120;
-
-          if (data && data != 'isProductCreation'
-            && $scope.category.productsList.length === 0
-            && data !== $scope.expandedCategoryId) {
-
-            $scope.setExpandedCategoryId($scope.category.id);
-          }
         });
 
         $scope.$on($scope.category.id + '-showProduct', function (event, productId) {
@@ -83,10 +64,10 @@
           $scope.setHighlightProductId(productId);
         });
 
-        $scope.$on($scope.category.id + '-showCategory', function (event, categoryId) {
-          $scope.setShowingCategory(categoryId);
-          if (categoryId !== $scope.expandedCategoryId && $scope.category.productsList.length > 0) {
-            $scope.setExpandedCategoryId(categoryId);
+        $scope.$on($scope.category.id + '-showCategory', function () {
+          $scope.setShowingCategory($scope.category.id);
+          if ($scope.category.id !== $scope.expandedCategoryId && $scope.category.productsList.length > 0) {
+            $scope.setExpandedCategoryId($scope.category.id);
           }
         });
 

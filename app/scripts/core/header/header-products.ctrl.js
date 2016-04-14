@@ -26,7 +26,7 @@
           if (val.versionedId) {
             $rootScope.$broadcast(val.categoryId + '-showProduct', val.versionedId.id);
           } else {
-            $rootScope.$broadcast(val.id + '-showCategory', val.id);
+            $rootScope.$broadcast(val.id + '-showCategory');
           }
         };
 
