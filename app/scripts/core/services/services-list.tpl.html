@@ -29,12 +29,6 @@
     <div class="intermediate-parent-elem" ng-if="!isEditService">
 
       <div class="col-1">
-
-        <label class="control checkbox pull-left" ng-if="showCheckboxes">
-          <input type="checkbox" ng-model="checkedServices[service.versionedId.id]" ng-change="onChangeCheckbox()">
-          <span class="control-indicator"></span>
-        </label>
-
         <div ng-class="{'checkbox-caption': showCheckboxes}">{{ service.name }}</div>
       </div>
 
