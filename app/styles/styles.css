@@ -1487,6 +1487,7 @@ mark,
   text-transform: capitalize;
 }
 .text-muted {
+  display: inline-block;
   color: #94A4B8;
 }
 .text-primary {
