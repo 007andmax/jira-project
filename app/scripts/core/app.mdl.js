@@ -259,7 +259,7 @@
           if (user) {
             var username = user.firstName + (user.lastName ? ' ' + user.lastName : '');
 
-            if (includeImail) {
+            if (includeImail && user.primaryEmail && user.primaryEmail) {
               username += (' "' + user.primaryEmail + '"')
             }
 

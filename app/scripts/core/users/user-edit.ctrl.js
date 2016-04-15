@@ -118,11 +118,12 @@
               editUser.password = hex_md5(editUser.password);
             }
 
-            UsersService.save(editUser, function () {
+            UsersService.save(editUser, function (resp) {
+              var userId = resp.id;
               $scope.savingInProcess = false;
               $timeout(function () {
-                $rootScope.$broadcast('show-after-save-' + editUser.id.toString());
-              });
+                $rootScope.$broadcast('show-after-save-' + userId);
+              }, 0);
               $scope.cancelEdit();
             })
           } else {

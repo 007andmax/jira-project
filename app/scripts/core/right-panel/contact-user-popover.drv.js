@@ -48,7 +48,7 @@
 
                 if ((countPriority === -1) || (countPriority < scope.userInfo.phoneNumbers[i].priority)) {
 
-                  countPriority =  scope.userInfo.phoneNumbers[i].priority;
+                  countPriority = scope.userInfo.phoneNumbers[i].priority;
 
                   if (scope.userInfo.phoneNumbers[i].typeNumber === 'MOBILE') {
                     phoneTemplateHtml = '<div class="user-no"> <i class="icn-sm icn-iphone pull-left"></i>' + scope.userInfo.phoneNumbers[i].number + '</div>';
@@ -84,7 +84,8 @@
               <div class="popover-content"></div>\
             </div>';
 
-              var user_popover_content = '<div class="user-email"> <i class="icn-sm icn-at pull-left"></i> ' + contactEmail + ' </div>' + phoneTemplateHtml;
+              var user_popover_content = '<div class="user-email">' +
+                ((contactEmail && contactEmail.length > 0) ? '<i class="icn-sm icn-at pull-left"></i> ' + contactEmail : '') + '</div>' + phoneTemplateHtml;
 
               initPopover();
 
@@ -130,20 +131,20 @@
                 });
               };
 
-              scope.$watch('customUserPopoverTrigger', function(){
+              scope.$watch('customUserPopoverTrigger', function () {
 
-                if(scope.customUserPopoverTrigger === undefined){
+                if (scope.customUserPopoverTrigger === undefined) {
                   return;
                 }
 
-                if(scope.customUserPopoverTrigger){
+                if (scope.customUserPopoverTrigger) {
                   element.popover('destroy');
                 } else {
                   initPopover();
                 }
               });
 
-              function initPopover(){
+              function initPopover() {
 
                 element.popover('destroy');
 
@@ -164,6 +165,10 @@
                     icnSubs = $('.popover .badge-updates');
 
                   icnEmail = $('.popover .btn-info');
+
+                  if (!(scope.userInfo.primaryEmail && scope.userInfo.primaryEmail.length > 0)) {
+                    icnEmail.addClass('disabled');
+                  }
 
                   emailTooltip.hide();
                   subsTooltip.hide();
@@ -190,7 +195,7 @@
 
               }
 
-              function hideThisPopover(){
+              function hideThisPopover() {
                 element.popover('hide');
                 $rootScope.insidePopover = false;
               }

@@ -321,7 +321,7 @@
 
             if (value && value.length > 0 && (value !== '[$empty$]')) {
               var fullSearchFild = $scope.getUserName(item).toLowerCase() +
-              item.primaryEmail ? ' ' + item.primaryEmail.toLowerCase() : '';
+                (item.primaryEmail && item.primaryEmail.length > 0) ? ' ' + item.primaryEmail.toLowerCase() : '';
 
               return fullSearchFild.indexOf(value.toLowerCase()) !== -1;
             }

@@ -31,7 +31,8 @@
           }
 
           if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
-            var searchText = (value.firstName + ' ' + value.lastName + ' ' + value.primaryEmail).toLowerCase();
+            var email = (value.primaryEmail && value.primaryEmail.length) > 0 ? value.primaryEmail : '';
+            var searchText = (value.firstName + ' ' + value.lastName + ' ' + email).toLowerCase();
             return searchText.indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
           }
           return true;
