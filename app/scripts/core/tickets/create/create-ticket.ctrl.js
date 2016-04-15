@@ -127,6 +127,7 @@
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
             $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
             $scope.ticket.createdUser = {
+              firstName: $scope.ticketCreatedUser.firstName,
               id: $scope.ticketCreatedUser.id,
               primaryEmail: $scope.ticketCreatedUser.primaryEmail
             };
@@ -150,8 +151,10 @@
               UsersService.isEmailUnique(val, '', function (resp) {
                 if (resp.value) {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
+                  var firstName = val.split('@')[0];
                   $scope.ticket.createdUser = {
                     primaryEmail: val,
+                    firstName: firstName,
                     companyId: $scope.ticketCompany ? $scope.ticketCompany.id : unassignedCompany.id
                   };
                   isNeedToDeleteUser = false;
