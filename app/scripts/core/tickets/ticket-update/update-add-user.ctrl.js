@@ -55,7 +55,8 @@
             }
 
             if ($scope.searchFilter.user && $scope.searchFilter.user.length > 0) {
-              return ((item.firstName + ' ' + item.lastName + ' ' + item.primaryEmail).toLowerCase()).indexOf($scope.searchFilter.user.toLowerCase()) !== -1;
+              var searchFild = item.firstName + ' ' + item.lastName + ' ' + (item.primaryEmail && item.primaryEmail.length > 0) ? item.primaryEmail : '';
+              return (searchFild.toLowerCase()).indexOf($scope.searchFilter.user.toLowerCase()) !== -1;
             }
 
             return true;

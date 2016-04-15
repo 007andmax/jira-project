@@ -68,8 +68,8 @@
 
             </div>
 
-            <div class="btn btn-default pull-left has-tooltip" email-to="user.primaryEmail"
-                 data-placement="top" tooltip="Send Email">
+            <div class="btn btn-default pull-left has-tooltip" ng-show="user.primaryEmail && user.primaryEmail.length > 0"
+                 email-to="user.primaryEmail" data-placement="top" tooltip="Send Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 

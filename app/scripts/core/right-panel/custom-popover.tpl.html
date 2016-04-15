@@ -1,7 +1,8 @@
 <ul class="context-menu rp-user-popover">
 
   <li>
-    <a tabindex="-1" href="javascript:void(0)" ng-click="sendEmail()">
+    <a tabindex="-1" href="javascript:void(0)"
+       ng-show="user.primaryEmail && user.primaryEmail.length > 0" ng-click="sendEmail()">
       <i class="icn-sm icn-user-mail pull-left"></i>Email
     </a>
   </li>

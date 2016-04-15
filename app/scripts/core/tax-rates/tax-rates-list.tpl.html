@@ -2,14 +2,14 @@
 
   <li class="list-heading" ng-show="taxRates.length > 0">
     <div class="col-1" ng-click="setOrderForTaxRates('code')">
-      Tax Description
-      <i class="icn-sm sort-icon icn-sort"
-         ng-class="{'rotate': orderTaxRates.reverse, 'active': orderTaxRates.field === 'code'}"></i>
+      <span class="sort-span">Tax Description<i class="icn-sm sort-icon icn-sort"
+                                                ng-class="{'rotate': orderTaxRates.reverse, 'active': orderTaxRates.field === 'code'}"></i></span>
+
     </div>
     <div class="col-2" ng-click="setOrderForTaxRates('rate')" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
-      Tax Percent
-      <i class="icn-sm sort-icon icn-sort"
-         ng-class="{'rotate': orderTaxRates.reverse, 'active': orderTaxRates.field === 'rate'}"></i>
+      <span class="sort-span">Tax Percent<i class="icn-sm sort-icon icn-sort"
+                                            ng-class="{'rotate': orderTaxRates.reverse, 'active': orderTaxRates.field === 'rate'}"></i></span>
+
     </div>
     <div class="col-3">&nbsp;</div>
   </li>
