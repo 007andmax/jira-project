@@ -51,36 +51,36 @@
           <li class="invoice-table-head">
             <div class="invoice-table-head-item clearfix">
               <div ng-click="setOrderForProducts('company')">
-                Company
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'company'}"></i>
+                <span class="sort-span">Company<i class="icn-sm sort-icon icn-sort"
+                                                  ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'company'}"></i></span>
+
               </div>
               <div>Order Title</div>
               <div ng-click="setOrderForProducts('startDate')">
-                Start Date
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'startDate'}"></i>
+                <span class="sort-span">Start Date<i class="icn-sm sort-icon icn-sort"
+                                                     ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'startDate'}"></i></span>
+
               </div>
               <div ng-click="setOrderForProducts('recurring')">
-                Recurring
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'recurring'}"></i>
+                <span class="sort-span">Recurring<i class="icn-sm sort-icon icn-sort"
+                                                    ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'recurring'}"></i></span>
+
               </div>
               <div ng-click="setOrderForProducts('endDate')">
-                Finish Date
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'endDate'}"></i>
+                <span class="sort-span">Finish Date<i class="icn-sm sort-icon icn-sort"
+                                                      ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'endDate'}"></i></span>
+
               </div>
               <div ng-click="setOrderForProducts('totalCreated')">
-                Total Created
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'totalCreated'}"></i>
+                <span class="sort-span">Total Created<i class="icn-sm sort-icon icn-sort"
+                                                        ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'totalCreated'}"></i></span>
+
               </div>
               <!--<div class="no-invoice">invoice no</div>-->
               <div ng-click="setOrderForProducts('amount')">
-                Amount
-                <i class="icn-sm sort-icon icn-sort"
-                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'amount'}"></i>
+                <span class="sort-span">Amount<i class="icn-sm sort-icon icn-sort"
+                                                 ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'amount'}"></i></span>
+
               </div>
             </div>
           </li>

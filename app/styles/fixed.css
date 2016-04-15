@@ -1046,3 +1046,31 @@ aside#left div.nav-title {
 .services-content span.plus-circle {
   border-radius: 50%;
 }
+.move-services{
+  padding: 15px;
+}
+.move-services .control{
+  padding-left: 1.5rem;
+}
+.move-services .btn-lg, .btn-group-lg > .btn{
+  margin-left: 15px;
+}
+.move-services .add-label label{
+  font-size: 14px;
+}
+.move-services .add-label{
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F1F5FA;
+}
+.move-services .custom-scroll{
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F1F5FA;
+}
+.move-services .checkbox-dropdown-footer{
+  padding: 10px 0 0;
+}
+span.sort-span {
+  display: inline-block;
+  position: relative;
+  padding-right: 15px;
+}
