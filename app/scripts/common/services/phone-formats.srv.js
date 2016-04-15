@@ -934,7 +934,7 @@
         var countryFormats = getCountryFormats(country),
           input;
 
-        if (!countryFormats) {
+        if (!countryFormats || !phone) {
           return phone;
         }
 
@@ -944,7 +944,7 @@
           mask,
           length;
 
-        if (!phone || phone.substring(0, prefix.length) !== prefix) {
+        if (phone.substring(0, prefix.length) !== prefix) {
           input = phone.replace(/[\(\)\-]/g, '');
 
 

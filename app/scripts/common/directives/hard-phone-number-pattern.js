@@ -31,13 +31,10 @@
             var newValue = element.val().trim();
 
             if (newValue && value && newValue.length < value.length) {
-              value = newValue;
-              ngModel.$setViewValue(value);
-              element.val(value);
+              ngModel.$setViewValue(newValue);
+              element.val(newValue);
             } else {
-              if (!newValue) {
-                setPrefix(attr.country);
-              } else if (softPattern.test(newValue)) {
+              if (newValue && softPattern.test(newValue)) {
                 value = PhoneFormats.getFormattedPhone(attr.country, newValue);
                 ngModel.$setViewValue(value);
                 element.val(value);
@@ -48,17 +45,6 @@
 
             if (isRequired) {
               ngModel.$setValidity("required", !!(value && value.length > 0));
-            }
-          }
-
-          function setPrefix(country) {
-            if (country) {
-              var format = PhoneFormats.getCountryFormats(country);
-              if (format) {
-                value = format.prefix;
-                ngModel.$setViewValue(value);
-                element.val(value);
-              }
             }
           }
         }
