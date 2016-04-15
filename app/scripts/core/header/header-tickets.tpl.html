@@ -64,47 +64,6 @@
       </div>
 
       <div class="dropdown pull-right"
-           ng-controller="quicktech.core.tickets.headerTicketTagsCtrl"
-           ng-init="ticketId = ticket.id"
-           ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
-
-        <div class="btn btn-default has-tooltip"
-             tooltip-placement="bottom" tooltip="Label as..."
-             aria-haspopup="true" data-toggle="dropdown" ng-click="createTagsMatrix()">
-          <i class="icn-sm icn-label"></i>
-        </div>
-
-        <ul class="dropdown-labels dropdown-menu" role="menu" stop-propagation="click">
-          <li>
-            <ul class="custom-scroll">
-              <li ng-repeat="tag in tags">
-                <label class="control checkbox">
-
-                  <input type="checkbox"
-                         ng-model="bulkTicketsTags[tag.id].val"
-                         ng-change="changeTagCheckbox(tag.id, bulkTicketsTags[tag.id].val)"
-                         custom-disabled="{{ disabledTags && !bulkTicketsTags[tag.id].val }}"/>
-
-                  <span class="control-indicator pull-left"
-                        ng-click="disabledTags && !bulkTicketsTags[tag.id].val && showNotificationMessage()"
-                        ng-class="{'intermediate': bulkTicketsTags[tag.id].isHalf}"></span>
-                  <span class="tag-color color{{tag.color}}"></span>
-                  {{tag.name}}
-                </label>
-              </li>
-            </ul>
-          </li>
-
-          <li class="apply">
-            <div class="btn btn-lg btn-block btn-info"
-                 ng-click="bulkApplyTagsToTicket()">Apply
-            </div>
-          </li>
-
-        </ul>
-      </div>
-
-      <div class="dropdown pull-right"
            ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)">
 
         <div class="btn btn-default has-tooltip"

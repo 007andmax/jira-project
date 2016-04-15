@@ -281,6 +281,9 @@ a.ha-24{
 :hover > .icn-label, :active > .icn-label, :focus:hover > .icn-label, :focus:active > .icn-label, :hover:active > .icn-label, .active > .icn-label, .open .icn-label {
   background-position: -1692px 0;
 }
+.icn-label-static {
+  background-position: -1714px 0;
+}
 
 .icn-more{background-position: -1664px 0px; width: 18px; height: 4px;}
 :hover > .icn-more, :active > .icn-more, :focus:hover > .icn-more, :focus:active > .icn-more, :hover:active > .icn-more, .active > .icn-more, .open .icn-more {

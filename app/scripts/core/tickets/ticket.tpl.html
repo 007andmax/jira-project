@@ -12,9 +12,7 @@
 
     <div class="ticket-list-header clearfix">
 
-      <p class="pull-left text-muted ellipsis"
-         ng-style="{'width': 'calc(100% - ' +
-          (PermissionsService.isTagsVisible(listType, currentUser.role) && ticket.tags.length ? ticket.tags.length * 12 + 60 : 60) + 'px)'}">
+      <p class="pull-left text-muted ellipsis">
         {{ getUserName(user) }}
         <span ng-if="!company.isDefault">
           <span class="dot-sep"></span>
@@ -24,14 +22,14 @@
 
       <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
 
-      <ul class="ticket-tags pull-right"
-          ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)">
-        <li ng-repeat="tag in ticket.tags">
-          <span class="tag-color color{{ tag.color }} persistent-tooltip"
-                tooltip="{{ tag.name }}" tooltip-placement="top">
-          </span>
-        </li>
-      </ul>
+      <!--<ul class="ticket-tags pull-right"-->
+          <!--ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)">-->
+        <!--<li ng-repeat="tag in ticket.tags">-->
+          <!--<span class="tag-color color{{ tag.color }} persistent-tooltip"-->
+                <!--tooltip="{{ tag.name }}" tooltip-placement="top">-->
+          <!--</span>-->
+        <!--</li>-->
+      <!--</ul>-->
 
     </div>
 
@@ -99,24 +97,6 @@
                stop-propagation="click" ng-if="isShowAssignUser" assign-user-button
                aub-ticket-id="ticket.id" ticket-assigned-user-id="ticket.assignedUser.id"
                aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
-
-        </li>
-
-        <li class="pull-left" dropdown
-            ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)">
-
-          <!--<a href="javascript:void(0)" class="hit-area has-tooltip" dropdown-toogle-->
-          <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
-          <!--tooltip="Label as..." tooltip-placement="top" ng-click="setTicketTags()">-->
-          <!--<i class="icn-sm icn-label"></i>-->
-          <!--</a>-->
-
-          <ul class="dropdown-labels dropdown-menu dropdown-menu-custom"
-              role="menu" stop-propagation="click"
-              ng-controller="quicktech.core.tickets.ticketTagsCtrl"
-              ng-init="ticketId = ticket.id; ticketNumber = ticket.number; ticketTagsUntilApply = ticket.tags"
-              ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">
-          </ul>
 
         </li>
 

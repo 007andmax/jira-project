@@ -22,6 +22,8 @@
           UserNotificationService.show('Loading...');
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {
 
+            $scope.ticketDetails = details;
+
             if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
               $state.go('tickets', {listType: $stateParams.listType});
               return;
@@ -69,18 +71,8 @@
 
             $timeout(function () {
               $scope.$broadcast('ticketDetailsLoad');
-              $scope.showTicketTags = true;
             }, 0)
           });
-
-          $scope.setTicketTags = function () {
-
-            $scope.ticketTags = {};
-
-            for (var j = 0; j < $scope.ticketDetails.tags.length; j++) {
-              $scope.ticketTags[$scope.ticketDetails.tags[j].id] = true;
-            }
-          };
 
           $scope.setTicketUpdate = function (value) {
             $scope.ticketUpdate = value;

@@ -10,7 +10,6 @@
       var defaultStates = {
         ticketsHeader: {
           searchFilter: {},
-          allTags: [],
           count: 0
         },
         usersHeader: {

@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
-    ['$scope', 'TicketsService', 'TicketTagsService', '$stateParams', 'quicktech.common.services.PermissionsService',
+    ['$scope', 'TicketsService', '$stateParams', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', 'FilesService', 'Downloader', '$state', 'DevicesService',
       'CompaniesService',
-      function ($scope, TicketsService, TicketTagsService, $stateParams, PermissionsService,
+      function ($scope, TicketsService, $stateParams, PermissionsService,
                 SharedStateService, FilesService, Downloader, $state, DevicesService, CompaniesService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');

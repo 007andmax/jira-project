@@ -14,15 +14,6 @@
           $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);
         }
 
-        $scope.setTicketTags = function () {
-
-          $scope.ticketTags = {};
-
-          for (var j = 0; j < $scope.ticket.tags.length; j++) {
-            $scope.ticketTags[$scope.ticket.tags[j].id] = true;
-          }
-        };
-
         $scope.srefToDetails = function (event) {
           if (!event.originalEvent.notOpenTicketDetails) {
             $state.go('tickets.details', {ticketId: $scope.ticket.id});

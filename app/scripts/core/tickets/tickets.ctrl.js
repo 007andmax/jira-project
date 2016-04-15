@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
-    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', 'TicketTagsService',
+    ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
       'quicktech.common.services.PermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
       'quicktech.common.services.UserNotificationService', '$timeout',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, TicketTagsService,
+      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
                 PermissionsService, SharedStateService, Utils, UserNotificationService, $timeout) {
 
         var availableTypes = ['unassigned', 'user', 'shared', 'spam', 'preview'],
@@ -14,7 +14,6 @@
 
         $scope.selectedTickets = {};
         $scope.PermissionsService = PermissionsService;
-        $scope.tags = TicketTagsService.getList($scope);
         $scope.users = UsersService.getAllUsers();
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
         $scope.attachmentTypePattern = /[0-9a-z]+$/i;
@@ -96,12 +95,10 @@
           ticketsHeaderState.checkedHasInvoiceTicket = true;
           ticketsHeaderState.checkedBillableTicket = false;
           ticketsHeaderState.checkedTicketsIds = [];
-          ticketsHeaderState.ticketTags = {};
 
           for (var ticketId in $scope.selectedTickets) {
             if ($scope.selectedTickets[ticketId]) {
 
-              ticketsHeaderState.ticketTags[ticketId] = (Utils.findById($scope.tickets, ticketId) || Utils.findById($scope.reportSpamTickets, ticketId)).tags;
               ticketsHeaderState.checkedTicketsIds.push(ticketId);
 
               if ($scope.listType !== 'spam' && (!ticketsHeaderState.checkedCompletedTicket && (Utils.findById($scope.tickets, ticketId).status === 'COMPLETED'))) {

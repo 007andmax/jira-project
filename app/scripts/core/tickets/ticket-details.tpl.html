@@ -35,12 +35,12 @@
 
             </div>
 
-            <div ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)"
-                 class="ticket-header-labels pull-left">
-              <span ng-repeat="tag in ticketDetails.tags"
-                    class="tag-color tag-color-sm color{{ tag.color }} persistent-tooltip"
-                    tooltip="{{ tag.name }}" tooltip-placement="top"></span>
-            </div>
+            <!--<div ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)"-->
+                 <!--class="ticket-header-labels pull-left">-->
+              <!--<span ng-repeat="tag in ticketDetails.tags"-->
+                    <!--class="tag-color tag-color-sm color{{ tag.color }} persistent-tooltip"-->
+                    <!--tooltip="{{ tag.name }}" tooltip-placement="top"></span>-->
+            <!--</div>-->
 
             <div class="ticket-header-details text-muted">
 
@@ -135,23 +135,6 @@
                 </div>
               </li>
 
-              <!--<li ng-if="PermissionsService.isLabelAsVisible(listType, currentUser.role)"-->
-                  <!--class="dropdown-submenu left-align" stop-propagation="click">-->
-
-                <!--<a tabindex="-1" href="javascript:void(0)" data-hover="dropdown">Label as...</a>-->
-
-                <!--<div class="dropdown-submenu-wrapper" ng-if="showTicketTags">-->
-
-                  <!--<ul class="dropdown-labels dropdown-menu"-->
-                      <!--role="menu" stop-propagation="click"-->
-                      <!--ng-controller="quicktech.core.tickets.ticketTagsCtrl"-->
-                      <!--ng-init="ticketId = ticketDetails.id; ticketNumber = ticketDetails.number; ticketTagsUntilApply = ticketDetails.tags"-->
-                      <!--ng-include="'/html/scripts/core/tickets/tags/ticket-tags.tpl.html'">-->
-                  <!--</ul>-->
-
-                <!--</div>-->
-              <!--</li>-->
-
               <li
                 ng-show="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isChangeStatusToVisible(listType, currentUser.role)"
                 class="dropdown-submenu left-align">
@@ -206,7 +189,10 @@
         <h2>{{ ticketDetails.subject }}</h2>
 
         <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
+
+        <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
       </div>
+
 
       <div class="ticket-attachment clearfix" ng-if="ticketDetails.attachments.length > 0">
 

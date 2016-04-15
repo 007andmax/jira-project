@@ -94,19 +94,6 @@
         return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForShared;
       }
 
-      function isTagsVisible(listType, userRole) {
-
-        var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
-        var isTrueForUser = listType === LIST_TYPES.USER;
-        var isTrueForOpen = listType === LIST_TYPES.OPEN;
-        var isTrueForClose = listType === LIST_TYPES.CLOSE;
-        var isTrueForSpam = listType === LIST_TYPES.SPAM;
-        var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
-
-
-        return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForClose || isTrueForSpam || isTrueForShared;
-      }
-
       function isChangeStatusToVisible(listType, userRole) {
 
         var isTrueForUser = listType === LIST_TYPES.USER;
@@ -351,7 +338,6 @@
         isLabelAsVisible: isLabelAsVisible,
         isChangePriorityToVisible: isChangePriorityToVisible,
         isMoveToTrashVisible: isMoveToTrashVisible,
-        isTagsVisible: isTagsVisible,
         isChangeStatusToVisible: isChangeStatusToVisible,
         isClaimTicketVisible: isClaimTicketVisible,
         isStatusVisible: isStatusVisible,

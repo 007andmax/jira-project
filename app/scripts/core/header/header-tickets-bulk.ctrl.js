@@ -3,14 +3,13 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.ticketsBulkCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', 'TicketTagsService',
+    ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
       '$timeout', 'UsersService', 'CompaniesService', 'TicketsService', '$rootScope',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, SharedStateService, PermissionsService, TicketTagsService, $timeout, UsersService,
+      function ($scope, SharedStateService, PermissionsService, $timeout, UsersService,
                 CompaniesService, TicketsService, $rootScope, UserConfirmationsService, UserNotificationService) {
 
         $scope.PermissionsService = PermissionsService;
-        $scope.tags = TicketTagsService.getList($scope);
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
         $scope.ticketStatus = {
           IN_PROGRESS: 'IN PROGRESS',
