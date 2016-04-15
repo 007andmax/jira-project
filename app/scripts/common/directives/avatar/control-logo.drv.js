@@ -51,8 +51,8 @@
               uploadUrl: '/file?isAvatar=true',
               uploadName: 'file',
               maxUploadSize: 2 * 1024 * 1024,
-              accpetType: '.jpg,.png,.gif',
-              allowedExtensions: ['jpg', 'png', 'gif'],
+              accpetType: '.jpg,.png,.gif,.jpeg,.JPG,.PNG,.GIF,.JPEG',
+              allowedExtensions: ['jpg', 'png', 'gif', 'jpeg', 'JPG', 'PNG', 'GIF', 'JPEG'],
               minImageWidth: 100,
               minImageHeight: 100,
 

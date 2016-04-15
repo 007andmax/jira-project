@@ -400,6 +400,10 @@
                                  style="margin-top: 10px;position: absolute;">
                             at least one contact should be subscribed on invoice updates.
                           </label>
+
+                          <input type="hidden" name="subscribe"
+                                 ng-model="contact.subscription.invoice" invalid-when="showSubscribeError">
+
                         </div>
 
                       </div>

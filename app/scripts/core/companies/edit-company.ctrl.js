@@ -317,11 +317,7 @@
 
         $scope.changeInvoiceSubscription = function (val) {
 
-          if (!val) {
-            return;
-          }
-
-          if ($scope.currentUser.accountType !== "TECH") {
+          if(!($scope.editCompany && $scope.editCompany.contacts && $scope.editCompany.contacts.length > 0)){
             return;
           }
 
