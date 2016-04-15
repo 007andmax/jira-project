@@ -25,6 +25,8 @@
               windowScrollTop,
               avatar;
 
+            errorMessage.hide();
+
             if (!urlGetters[attrs.modelName]) {
               throw 'model-name must be specified! Available values - ["user", "contact"]';
             } else if (attrs.modelName === 'company') {
