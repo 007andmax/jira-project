@@ -1,15 +1,6 @@
 'use strict';
 
 (function () {
-
-  var maxFileSize = 2 * 1024 * 1024; // 2 mb
-  var allowedExtensions = [
-    'jpg',
-    'jpeg',
-    'gif',
-    'png'
-  ];
-
   angular.module("quicktech.common.directives").directive('editAvatar',
     ['$modal', 'FilesService', '$rootScope',
       function ($modal, FilesService, $rootScope) {
@@ -72,7 +63,7 @@
               uploadName: 'file',
               maxUploadSize: 2 * 1024 * 1024,
               accpetType: '.jpg,.png,.gif',
-              allowedExtensions: ['jpg', 'png', 'gif'],
+              allowedExtensions: ['jpg', 'png', 'gif', 'jpeg', 'JPG', 'PNG', 'GIF', 'JPEG'],
               minImageWidth: 100,
               minImageHeight: 100,
 
@@ -163,20 +154,5 @@
           }
         }
       }]);
-
-  function validate(file, ctrl, scope) {
-
-    ctrl.$setValidity('maxsize', file.size <= maxFileSize);
-    ctrl.$setValidity('filetype', allowedExtensions.indexOf(getExtension().toLowerCase()) >= 0);
-
-    scope.$digest();
-
-    return ctrl.$valid;
-
-    function getExtension() {
-      var arr = file.name.split('.');
-      return arr[arr.length - 1];
-    }
-  }
 
 })();
