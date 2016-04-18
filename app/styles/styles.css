@@ -9588,3 +9588,14 @@ button.close {
   max-height: 0 !important;
   opacity: 0 !important;
 }
+.form-left-column {
+  width: 50%;
+  float: left;
+}
+.form-right-column {
+  width: 45%;
+  height: 210px;
+  float: right;
+  border: 1px solid;
+  border-radius: 15px;
+}

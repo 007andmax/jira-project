@@ -358,6 +358,10 @@
         <a href="javascript:void(0)" ng-click="openTab('NETWORK_SCAN')">Network Scan </a>
       </li>
 
+      <li ng-class="{'active': currentOpenTab === 'SETTINGS'}">
+        <a href="javascript:void(0)" ng-click="openTab('SETTINGS')">Settings</a>
+      </li>
+
     </ul>
 
   </div>
@@ -1146,6 +1150,73 @@
 
       <div class="qt-list-loading" ng-show="isScanDevicesLoad">
         <div class="loader"></div>
+      </div>
+    </div>
+
+    <div class="tab-pane active" ng-show="currentOpenTab === 'SETTINGS'">
+      <div ng-form="deviceSettings" ng-controller="quicktech.core.devices.deviceSettingsCtrl">
+        <div>Network Credentials</div>
+
+        <div class="form-left-column">
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettings, 'username')}">
+
+            <label class="control-label"  ng-class="{'hide': isShowingErrors(deviceSettings, 'username')}">
+              Username &nbsp;<span class="text-muted">domain\username</span>
+            </label>
+
+            <div ng-messages="deviceSettings.username.$error"
+                 ng-class="{'hide': !isShowingErrors(deviceSettings, 'username')}">
+              <label class="control-label" ng-message="required">Username is required.</label>
+            </div>
+
+            <input type="text" class="form-control" name="username" ng-model="newCredential.username" required make-dirty-on-blur>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettings, 'password')}">
+
+            <label class="control-label"  ng-class="{'hide': isShowingErrors(deviceSettings, 'password')}">
+              Password
+            </label>
+
+            <div ng-messages="deviceSettings.password.$error"
+                 ng-class="{'hide': !isShowingErrors(deviceSettings, 'password')}">
+              <label class="control-label" ng-message="required">Password is required.</label>
+            </div>
+
+            <input type="text" class="form-control" name="password" ng-model="newCredential.password" required make-dirty-on-blur>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettings, 'passwordConfirm')}">
+
+            <label class="control-label"  ng-class="{'hide': isShowingErrors(deviceSettings, 'passwordConfirm')}">
+              Confirm Password
+            </label>
+
+            <div ng-messages="deviceSettings.passwordConfirm.$error"
+                 ng-class="{'hide': !isShowingErrors(deviceSettings, 'passwordConfirm')}">
+              <label class="control-label" ng-message="required">Password are not equal.</label>
+            </div>
+
+            <input type="text" class="form-control" name="passwordConfirm" ng-model="newCredential.passwordConfirm" required make-dirty-on-blur>
+          </div>
+
+          <div class="btn btn-lg btn-info" ng-click="updateCredentials()">Update</div>
+        </div>
+
+        <div class="form-right-column">
+          <ul>
+            <li>
+              <span>Domain/Username</span>
+              <span>Password</span>
+              <span ng-click="togglePasswordShown()"><i class="icn-sm icn-hide-password"></i></span>
+            </li>
+            <li ng-repeat="credential in credentials">
+              <span>{{credential.username}}</span>
+              <span>{{credential.password}}</span>
+              <span ng-click="togglePasswordShown()"><i class="icn-sm icn-hide-password"></i></span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 

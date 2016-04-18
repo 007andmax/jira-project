@@ -8,7 +8,7 @@
       function ($scope, DevicesService, $stateParams, SharedStateService, $state,
                 UserConfirmationsService, CompaniesService) {
 
-        var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN'],
+        var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN', 'SETTINGS'],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
           agentCallbackCount = 0;
 
