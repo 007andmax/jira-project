@@ -1154,8 +1154,8 @@
     </div>
 
     <div class="tab-pane active" ng-show="currentOpenTab === 'SETTINGS'">
-      <div ng-form="deviceSettings" ng-controller="quicktech.core.devices.deviceSettingsCtrl">
-        <div>Network Credentials</div>
+      <div class="device-settings-tab" ng-form="deviceSettings" ng-controller="quicktech.core.devices.deviceSettingsCtrl">
+        <h3 class="devices-settings-title">Network Credentials</h3>
 
         <div class="form-left-column">
           <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettings, 'username')}">
@@ -1207,7 +1207,12 @@
           <ul>
             <li>
               <span>Domain/Username</span>
-              <span>Password</span>
+              <span class="device-settings-tab-password">Password</span>
+              <span ng-click="togglePasswordShown()"><i class="icn-sm icn-hide-password"></i></span>
+            </li>
+            <li>
+              <span>Domain/Username</span>
+              <span class="device-settings-tab-password">Password</span>
               <span ng-click="togglePasswordShown()"><i class="icn-sm icn-hide-password"></i></span>
             </li>
             <li ng-repeat="credential in credentials">

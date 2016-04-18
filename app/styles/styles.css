@@ -9594,8 +9594,6 @@ button.close {
 }
 .form-right-column {
   width: 45%;
-  height: 210px;
+  min-height: 185px;
   float: right;
-  border: 1px solid;
-  border-radius: 15px;
 }
