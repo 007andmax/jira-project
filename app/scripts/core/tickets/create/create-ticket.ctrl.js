@@ -95,9 +95,13 @@
             if ($scope.ticketCreatedUser && typeof $scope.ticketCreatedUser === 'object' && $scope.ticketCreatedUser.company.name === val) {
               selectedCompany = $scope.ticketCreatedUser.company;
             } else {
-              selectedCompany = $scope.clientCompanies.find(function (item) {
-                return item.name === val;
-              });
+              for (var i = 0, len = $scope.clientCompanies.length; i < len; i++) {
+                var company = $scope.clientCompanies[i];
+                if (company.name === val) {
+                  selectedCompany = company;
+                  break;
+                }
+              }
             }
 
             if (!selectedCompany) {
@@ -143,9 +147,14 @@
           } else if (val && val.match($scope.emailPattern)) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
-            var selectedUser = $scope.usersCompany.find(function (item) {
-              return item.primaryEmail === val;
-            });
+            var selectedUser = null;
+            for (var i = 0, len = $scope.usersCompany.length; i < len; i++) {
+              var user = $scope.usersCompany[i];
+              if (user.primaryEmail === val) {
+                selectedUser = user;
+                break;
+              }
+            }
 
             if (!selectedUser) {
               UsersService.isEmailUnique(val, '', function (resp) {
@@ -302,18 +311,23 @@
           }
 
           var errors = Object.keys(form.$error),
-            error = errors.find(function (item) {
-              return item === 'pattern' || item === 'unique' || item === 'invalidName';
-            });
+            primaryError;
 
+          for (var i = 0, len = errors.length; i < len; i++) {
+            var error = errors[i];
+            if (error === 'pattern' || error === 'unique' || error === 'invalidName') {
+              primaryError = error;
+              break;
+            }
+          }
 
-          if (error === 'pattern') {
+          if (primaryError === 'pattern') {
             return 'Incorrect email.';
-          } else if (error === 'unique') {
+          } else if (primaryError === 'unique') {
             return 'Email already occupied by tech user.';
-          } else if (error === 'invalidName') {
+          } else if (primaryError === 'invalidName') {
             return 'Invalid company name.';
-          } else if (!error && errors.indexOf('required') > -1) {
+          } else if (!primaryError && errors.indexOf('required') > -1) {
             return 'Required fields can\'t be left empty.';
           }
         };
