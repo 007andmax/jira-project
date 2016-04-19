@@ -1138,6 +1138,15 @@ span.sort-span {
 .device-settings-tab ul{
   padding-left: 10px;
 }
+.qt-network-scan.network-scan-tab>li>.col-3{
+  text-align: center;
+}
+.qt-network-scan.network-scan-tab>li>.col-5{
+  text-align: center;
+}
+.qt-network-scan.network-scan-tab>li>.col-4{
+  text-align: center;
+}
 .device-settings-actions {
   position: absolute;
   display: inline-block;
