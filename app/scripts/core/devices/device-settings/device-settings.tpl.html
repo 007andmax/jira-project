@@ -1,6 +1,42 @@
 <div class="tab-pane active">
-  <div class="device-settings-tab" ng-form="deviceSettingsForm"
+  <div class="device-settings-tab clearfix" ng-form="deviceSettingsForm"
        ng-controller="quicktech.core.devices.deviceSettingsCtrl">
+    <h3 class="devices-settings-title">Agent Deployment Settings</h3>
+    <ul class="deployment-settings clearfix">
+      <li>
+        <label>
+          Maximum agents install for this client
+          <input type="number">
+        </label>
+      </li>
+      <li>
+        <label class="control checkbox">
+          <input type="checkbox">
+          Automaticly Scan Network
+          <span class="control-indicator"></span>
+        </label>
+      </li>
+      <li>
+        <label>
+          Rescan network for new devices every
+          <select>
+            <option value="1 hour">1 hour</option>
+            <option value="2 hour">2 hour</option>
+            <option value="3 hour">3 hour</option>
+          </select>
+        </label>
+      </li>
+      <li>
+        <label class="control checkbox">
+          <input type="checkbox">
+          <span class="control-indicator"></span>
+          Automaticly remove device if offline for more then
+          <input type="number">
+          days
+
+        </label>
+      </li>
+    </ul>
     <h3 class="devices-settings-title">Network Credentials</h3>
 
     <div class="form-left-column">
