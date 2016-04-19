@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.deviceSettingsCtrl',
-    ['$scope', 'DevicesService',
-      function ($scope, DevicesService) {
+    ['$scope', 'DevicesService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, DevicesService, UserConfirmationsService) {
         $scope.triedToSave = false;
 
         $scope.newCredential = {};
@@ -22,6 +22,20 @@
             $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', $scope.newCredential.password === value);
           }
         });
+
+        $scope.removeCredential = function (index) {
+          var confirmMesage = 'Do you want to delete ' + $scope.credentials[index].login + '?',
+            confirmButton = 'Delete';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            $scope.updating = true;
+            $scope.credentials.splice(index, 1);
+
+            DevicesService.saveCredentials($scope.credentials, $scope.companyId, function () {
+              $scope.updating = false;
+            });
+          });
+        };
 
         $scope.updateCredentials = function (form) {
           if (form.$valid) {

@@ -1119,10 +1119,16 @@ span.sort-span {
   right: 15px;
   cursor: pointer;
 }
+.device-settings-actions .icn-remove-token {
+  position: absolute;
+  top: 5px;
+  right: -5px;
+  cursor: pointer;
+}
 .device-settings-tab-password {
   display: inline-block;
   position: absolute;
-  right: 50px;
+  right: 65px;
   top: 0;
 }
 .device-settings-tab ul li{
@@ -1131,4 +1137,10 @@ span.sort-span {
 }
 .device-settings-tab ul{
   padding-left: 10px;
+}
+.device-settings-actions {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 15px;
 }

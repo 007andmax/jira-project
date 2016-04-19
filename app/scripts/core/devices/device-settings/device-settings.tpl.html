@@ -1,11 +1,12 @@
 <div class="tab-pane active">
-  <div class="device-settings-tab" ng-form="deviceSettingsForm" ng-controller="quicktech.core.devices.deviceSettingsCtrl">
+  <div class="device-settings-tab" ng-form="deviceSettingsForm"
+       ng-controller="quicktech.core.devices.deviceSettingsCtrl">
     <h3 class="devices-settings-title">Network Credentials</h3>
 
     <div class="form-left-column">
       <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'login')}">
 
-        <label class="control-label"  ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'login')}">
+        <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'login')}">
           Username &nbsp;<span class="text-muted">domain\username</span>
         </label>
 
@@ -20,7 +21,7 @@
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'password')}">
 
-        <label class="control-label"  ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'password')}">
+        <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'password')}">
           Password
         </label>
 
@@ -35,7 +36,7 @@
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
 
-        <label class="control-label"  ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
+        <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
           Confirm Password
         </label>
 
@@ -56,16 +57,39 @@
 
     <div class="form-right-column">
       <ul>
+        <li>
+          <span>login</span>
+          <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
+            {{credential.password}}
+          </span>
+          <span class="device-settings-tab-password" ng-hide="passwordShown[$index]">
+            &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
+          </span>
+
+          <span class="device-settings-actions">
+            <span ng-show="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
+              <i class="icn-sm icn-hide-password"></i></span>
+            <span ng-hide="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
+              <i class="icn-sm icn-show-password"></i></span>
+            <span ng-click="removeCredential($index)"><i class="icn-sm icn-remove-token"></i></span>
+          </span>
+        </li>
         <li ng-repeat="credential in credentials">
           <span>{{credential.login}}</span>
-          <span class="device-settings-tab-password" ng-show="passwordShown[$index]">{{credential.password}}</span>
-              <span class="device-settings-tab-password" ng-hide="passwordShown[$index]">
-                &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
-              </span>
-              <span ng-show="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
-                <i class="icn-sm icn-hide-password"></i></span>
-              <span ng-hide="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
-                <i class="icn-sm icn-show-password"></i></span>
+          <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
+            {{credential.password}}
+          </span>
+          <span class="device-settings-tab-password" ng-hide="passwordShown[$index]">
+            &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
+          </span>
+
+          <span class="device-settings-actions">
+            <span ng-show="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
+              <i class="icn-sm icn-hide-password"></i></span>
+            <span ng-hide="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
+              <i class="icn-sm icn-show-password"></i></span>
+            <span ng-click="removeCredential($index)"><i class="icn-sm icn-remove-token"></i></span>
+          </span>
         </li>
       </ul>
     </div>
