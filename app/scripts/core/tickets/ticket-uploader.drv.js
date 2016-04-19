@@ -106,7 +106,7 @@
                       }
 
                       $timeout(function () {
-                        var dropdown = element.find('[dropdown]');
+                        var dropdown = element.find('.container-ticket-list [dropdown]');
 
                         dropdown.on('show.bs.dropdown', function () {
                           initDropdown();
@@ -184,8 +184,8 @@
             function initDropdown() {
 
               var windowWidth = $(window).width(),
-                dropdownMenu = element.find('.dropdown-menu-custom'),
-                dropdownSubmenu = element.find('.dropdown-submenu');
+                dropdownMenu = element.find('.container-ticket-list  .dropdown-menu-custom'),
+                dropdownSubmenu = element.find('.container-ticket-list  .dropdown-submenu');
 
               if (windowWidth > 1700) {
                 dropdownMenu.removeClass('dropdown-menu-right');
