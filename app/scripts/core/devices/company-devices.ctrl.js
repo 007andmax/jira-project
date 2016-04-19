@@ -26,9 +26,8 @@
         $scope.orderDevicesBy = 'hostName';
 
         DevicesService.getDefaultCompanyCredentials($scope.companyId, function (resp) {
-          var info = resp.value.split(':');
-          $scope.defaultPass = info[1] || '';
-          $scope.defaultName = info[0] || '';
+          $scope.defaultPass = resp.password || '';
+          $scope.defaultName = resp.login || '';
         });
 
         DevicesService.getDeviceSettingsByCompanyIdAndType($scope, $scope.companyId, 'NET_SCAN', function (resp) {
