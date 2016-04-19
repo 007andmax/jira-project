@@ -16,7 +16,7 @@
 
         $scope.srefToDetails = function (event) {
           if (!event.originalEvent.notOpenTicketDetails) {
-            $state.go('tickets.details', {ticketId: $scope.ticket.id});
+            $state.go('tickets.details', { ticketId: $scope.ticket.id });
           }
         };
 
@@ -25,13 +25,13 @@
         };
 
         $scope.changeTicketPriority = function (priority) {
-          TicketsService.changePriority($scope.ticket.id, priority, function(){
+          TicketsService.changePriority($scope.ticket.id, priority, function () {
             UserNotificationService.show('The ticket “' + $scope.ticket.number + '” priority has been changed to ' + priority, true);
           });
         };
 
         $scope.changeTicketStatus = function (status) {
-          TicketsService.changeStatus($scope.ticket.id, status, function(){
+          TicketsService.changeStatus($scope.ticket.id, status, function () {
             UserNotificationService.show('The ticket “' + $scope.ticket.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"', true);
           });
         };
@@ -45,28 +45,31 @@
 
             if ($scope.currentUser.role === "USER") {
 
-              TicketsService.reportAsSpam($scope.ticket.id, function(){
-                UserNotificationService.show('The ticket “' + $scope.ticket.number  + '” has been reported as spam', true);
+              TicketsService.reportAsSpam($scope.ticket.id, function () {
+                UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been reported as spam', true);
               });
 
             } else {
 
-              TicketsService.markAsSpam($scope.ticket.id, function(){
-                UserNotificationService.show('The ticket “' + $scope.ticket.number  + '” has been marked as spam', true);
+              TicketsService.markAsSpam($scope.ticket.id, function () {
+                UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been marked as spam', true);
               });
             }
+            uncheckTicket($scope.ticket.id);
           });
         };
 
         $scope.restoreFromSpam = function () {
           TicketsService.restoreFromSpam($scope.ticket.id);
+          uncheckTicket($scope.ticket.id);
         };
 
         $scope.moveToTrash = function (movedWay) {
-          TicketsService.changeTrashFlag($scope.ticket.id, movedWay, function(){
-            if(movedWay){
+          TicketsService.changeTrashFlag($scope.ticket.id, movedWay, function () {
+            if (movedWay) {
 
               UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been moved to Trash', true);
+              uncheckTicket($scope.ticket.id);
             }
           });
         };
@@ -76,9 +79,10 @@
             confirmButton = 'Delete';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            TicketsService.deleteForever($scope.ticket.id, function(){
+            TicketsService.deleteForever($scope.ticket.id, function () {
 
               UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been deleted', true);
+              uncheckTicket($scope.ticket.id);
             });
           });
         };
@@ -88,11 +92,20 @@
 
             UserNotificationService.show('Ticket “' + $scope.ticket.number + '” has been assigned to ' + $scope.getUserName($scope.currentUser), true);
 
-            $state.go('tickets', {listType: 'user'}).then(function () {
-              $state.go('tickets.details', {ticketId: $scope.ticket.id});
+            $state.go('tickets', { listType: 'user' }).then(function () {
+              $state.go('tickets.details', { ticketId: $scope.ticket.id });
             });
           });
         };
+
+        $scope.uncheckTicket = uncheckTicket;
+
+        function uncheckTicket(id) {
+          if ($scope.selectedTickets[id]) {
+            $scope.selectedTickets[id] = false;
+            $scope.changeSelectedTickets(id);
+          }
+        }
 
       }]);
 

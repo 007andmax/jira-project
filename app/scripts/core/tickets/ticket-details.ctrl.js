@@ -3,10 +3,10 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsCtrl',
-      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader',
+      ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
-        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $state,
+        function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
@@ -81,6 +81,7 @@
           $scope.updateAndCloseTicket = function () {
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
+              $scope.uncheckTicket($scope.ticketDetails.id);
               $state.go('tickets', {listType: $stateParams.listType});
             });
           };
@@ -129,6 +130,7 @@
                 TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam', true);
+                  $scope.uncheckTicket($scope.ticketDetails.id);
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
 
@@ -137,6 +139,7 @@
                 TicketsService.markAsSpam($scope.ticketDetails.id, function () {
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
+                  $scope.uncheckTicket($scope.ticketDetails.id);
                   $state.go('tickets', {listType: $stateParams.listType});
                 });
               }
@@ -145,6 +148,7 @@
 
           $scope.restoreFromSpam = function () {
             TicketsService.restoreFromSpam($scope.ticketDetails.id);
+            $scope.uncheckTicket($scope.ticketDetails.id);
           };
 
           $scope.moveToTrash = function (movedWay) {
@@ -152,6 +156,7 @@
               if (movedWay) {
                 UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been moved to Trash', true);
               }
+              $scope.uncheckTicket($scope.ticketDetails.id);
               $state.go('tickets', {listType: $stateParams.listType});
             });
           };
@@ -359,6 +364,7 @@
 
                 UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been deleted', true);
 
+                $scope.uncheckTicket($scope.ticketDetails.id);
                 $state.go('tickets', {listType: $stateParams.listType});
               });
             });

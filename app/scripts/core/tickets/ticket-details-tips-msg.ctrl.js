@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsTipsMsgCtrl',
-    ['$scope', 'TicketsService', '$state', '$stateParams', 'UsersService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, TicketsService, $state, $stateParams, UsersService, UserNotificationService) {
+    ['$scope', 'TicketsService', '$state', '$stateParams', 'UsersService', '$rootScope',
+      'quicktech.common.services.UserNotificationService',
+      function ($scope, TicketsService, $state, $stateParams, UsersService, $rootScope, UserNotificationService) {
 
         calculateDays();
 
@@ -19,6 +20,7 @@
             }
 
             UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
+            $scope.uncheckTicket($scope.ticketDetails.id);
             $state.go('tickets', {listType: $stateParams.listType});
           });
         };
