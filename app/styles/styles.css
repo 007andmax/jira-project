@@ -8628,6 +8628,7 @@ button.close {
 .modal-dialog {
   position: absolute;
   width: 600px;
+  max-height: 100%;
   margin-top: -75px;
   top: 50%;
   left: 50%;
