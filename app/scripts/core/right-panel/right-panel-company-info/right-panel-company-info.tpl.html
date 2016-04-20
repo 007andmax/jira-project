@@ -114,10 +114,9 @@
 
         <div class="about-company">
 
-          <div class="company-timezone" ng-show="clientCompanyInfo.billingAddress">
-            GMT/{{ clientCompanyInfo.billingAddress.locale.description.match(gmtPattern)[0] }}
-            <span class="dot-sep"></span>
-            {{ clientCompanyInfo.billingAddress.locale.description.match(hourPattern)[0] }} hour
+          <div class="company-timezone" ng-show="clientCompanyInfo.billingAddress.timeZone">
+            {{ formatOffset(clientCompanyInfo.billingAddress.timeZone.timeOffset) }}
+            {{ clientCompanyInfo.billingAddress.timeZone.name }}
           </div>
 
           <div class="company-open-tickets">Open Tickets {{ clientCompanyInfo.openTickets }}</div>
