@@ -6,7 +6,7 @@
       <li>
         <label>
           Maximum agents install for this client
-          <input type="number" min="0" ng-model="settings.maxAgents">
+          <input type="number" min="0" ng-model="settings.maxAgents" execute-when-outfocused="saveDeploymentSettings()">
         </label>
       </li>
       <li>
@@ -28,7 +28,8 @@
           <input type="checkbox" ng-model="settings.autoRemoveDevice" ng-change="saveDeploymentSettings()">
           <span class="control-indicator"></span>
           Automatically remove device if offline for more then
-          <input type="number" min="0" ng-model="settings.removeOfflineTime">
+          <input type="number" min="0" ng-model="settings.removeOfflineTime"
+                 execute-when-outfocused="saveDeploymentSettings()">
           days
 
         </label>

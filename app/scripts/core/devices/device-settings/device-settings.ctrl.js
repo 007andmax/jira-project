@@ -69,10 +69,22 @@
         };
 
         $scope.saveDeploymentSettings = function () {
+
+          if(!$scope.settings.maxAgents || $scope.settings.maxAgents < 0) {
+            $scope.settings.maxAgents = 0;
+          }
+
+          if (!$scope.settings.removeOfflineTime || $scope.settings.removeOfflineTime < 0) {
+            $scope.settings.removeOfflineTime = 0;
+          }
+
           var settings = angular.copy($scope.settings);
 
           settings.rescanTime = settings.rescanTime.value;
-          DevicesService.updateAgentSettings($scope.settings, $scope.companyId);
+          settings.company = {
+            id:  $scope.companyId
+          };
+          DevicesService.updateAgentSettings(settings);
         };
 
       }]);
