@@ -37,7 +37,7 @@
                 <a role="menuitem" tabindex="-1" ng-click="goToCreateUser()">User</a>
               </li>
 
-              <li role="presentation" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+              <li role="presentation" ng-show="currentUser.role !== 'USER'">
                 <a role="menuitem" tabindex="-1" ui-sref="createCompany">Company</a>
               </li>
 
