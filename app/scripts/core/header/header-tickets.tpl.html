@@ -126,7 +126,8 @@
         <div class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="Move to Trash"
              ng-click="moveToTrash(true)"
-             ng-if="(listType === 'closed' || (sharedState.checkedCompletedTicket && listType !== 'trash')) && isMoveToTrashVisible()">
+             ng-if="(listType === 'closed' || (sharedState.checkedCompletedTicket && listType !== 'trash')) &&
+                    PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
           <i class="icn-sm icn-delete"></i>
         </div>
       </div>
