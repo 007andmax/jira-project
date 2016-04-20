@@ -1,0 +1,116 @@
+<div class="tab-pane active">
+  <div class="device-settings-tab clearfix"
+       ng-controller="quicktech.core.devices.deviceSettingsCtrl">
+    <h3 class="devices-settings-title">Agent Deployment Settings</h3>
+    <ul class="deployment-settings clearfix">
+      <li>
+        <label>
+          Maximum agents install for this client
+          <input type="number" min="0" ng-model="settings.maxAgents">
+        </label>
+      </li>
+      <li>
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="settings.autoScanNetwork" ng-change="saveDeploymentSettings()">
+          Automatically Scan Network
+          <span class="control-indicator"></span>
+        </label>
+      </li>
+      <li>
+        <label>
+          Rescan network for new devices every
+          <select ng-model="settings.rescanTime" ng-change="saveDeploymentSettings()"
+                  ng-options="item.label for item in rescanIntervals"></select>
+        </label>
+      </li>
+      <li>
+        <label class="control checkbox">
+          <input type="checkbox" ng-model="settings.autoRemoveDevice" ng-change="saveDeploymentSettings()">
+          <span class="control-indicator"></span>
+          Automatically remove device if offline for more then
+          <input type="number" min="0" ng-model="settings.removeOfflineTime">
+          days
+
+        </label>
+      </li>
+    </ul>
+
+    <div ng-form="deviceSettingsForm">
+      <h3 class="devices-settings-title">Network Credentials</h3>
+
+      <div class="form-left-column">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'login')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'login')}">
+            Username &nbsp;<span class="text-muted">domain\username</span>
+          </label>
+
+          <div ng-messages="deviceSettingsForm.username.$error"
+               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'login')}">
+            <label class="control-label" ng-message="required">Username is required.</label>
+          </div>
+
+          <input type="text" class="form-control" name="login" ng-model="newCredential.login"
+                 required make-dirty-on-blur>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'password')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'password')}">
+            Password
+          </label>
+
+          <div ng-messages="deviceSettingsForm.password.$error"
+               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'password')}">
+            <label class="control-label" ng-message="required">Password is required.</label>
+          </div>
+
+          <input type="text" class="form-control" name="password" ng-model="newCredential.password"
+                 required make-dirty-on-blur>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
+            Confirm Password
+          </label>
+
+          <div ng-messages="deviceSettingsForm.passwordConfirm.$error"
+               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
+            <label class="control-label" ng-message="required || equal">Passwords are not equal.</label>
+          </div>
+
+          <input type="text" class="form-control" name="passwordConfirm" ng-model="newCredential.passwordConfirm"
+                 required make-dirty-on-blur>
+        </div>
+
+        <div class="btn btn-lg btn-info" ng-click="updateCredentials(deviceSettingsForm)"
+             custom-disabled="{{!!(deviceSettingsForm.$pristine || (triedToSave && deviceSettingsForm.$invalid) || updating)}}">
+          Update
+        </div>
+      </div>
+
+      <div class="form-right-column">
+        <ul>
+          <li ng-repeat="credential in credentials">
+            <span>{{credential.login}}</span>
+          <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
+            {{credential.password}}
+          </span>
+          <span class="device-settings-tab-password" ng-hide="passwordShown[$index]">
+            &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
+          </span>
+
+          <span class="device-settings-actions">
+            <span ng-show="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
+              <i class="icn-sm icn-hide-password"></i></span>
+            <span ng-hide="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
+              <i class="icn-sm icn-show-password"></i></span>
+            <span ng-click="removeCredential($index)"><i class="icn-sm icn-remove-token"></i></span>
+          </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

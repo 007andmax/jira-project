@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.devices').controller('quicktech.core.devices.companyAgentDeviceCtrl',
+  angular.module('quicktech.core.devices').controller('quicktech.core.devices.companyAgentDevicesCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService',
       function ($scope, DevicesService, RemoteAccessService, ConstantsService) {
 
