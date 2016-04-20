@@ -211,9 +211,9 @@
 
         <li ng-class="{active: $state.includes('companyDevices', { companyId: companyId })}"
             ng-repeat="(companyId, devicesCount) in companiesWithDevices" ng-if="companyId !== 'staticCopy'">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'companyDevices', { companyId: companyId })">
+          <a class="ellipsis" href="javascript:void(0)"
+             ng-click="stateGo($event, 'companyDevices', { companyId: companyId })">
             <i class="nav-icon icn-lg icn-companies"></i>{{ getCompany(companyId).name || ''}}
-            <span class="badge">{{ devicesCount.all }}</span>
           </a>
         </li>
       </ul>

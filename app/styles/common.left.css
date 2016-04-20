@@ -81,6 +81,11 @@ aside#left .nav > li > a:hover {
   background-color: transparent;
   outline: none;
 }
+aside#left .nav > li > a.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 aside#left .nav > li.active,
 aside#left .nav > li.active > a,
 aside#left .nav > li.active > a:hover,
