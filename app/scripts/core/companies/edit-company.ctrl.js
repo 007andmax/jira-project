@@ -5,10 +5,10 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
     [
       '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
-      'TaxRatesService', 'AddressesService', 'ServicesService',
+      'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
-                TaxRatesService, AddressesService, ServicesService,
+                TaxRatesService, AddressesService, ServicesService, PhoneFormats,
                 SharedStateService, $stateParams, $state, VendorsService, $timeout) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
@@ -161,10 +161,19 @@
           }
 
           function processPhoneNumbers(phoneNumbers) {
-            var lastPhone = phoneNumbers[phoneNumbers.length - 1];
+            var firstPhone = phoneNumbers[0].number,
+              lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 
-            if (!lastPhone.number || lastPhone.number.trim().length === 0) {
+            if (!lastPhone || lastPhone.trim().length === 0 ||
+              (lastPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(lastPhone))) {
+
               phoneNumbers.splice(phoneNumbers.length - 1, 1);
+
+              if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+                phoneNumbers[0].number = '';
+              }
+            } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+              phoneNumbers.shift();
             }
           }
 

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.myProfileContactInfoCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'UsersService',
-      function ($scope, $state, $stateParams, $location, UsersService) {
+    ['$scope', 'quicktech.common.services.PhoneFormats',
+      function ($scope, PhoneFormats) {
 
         $scope.maximalAmountOfPhones = 3;
         $scope.phoneNumberPattern = /^\+?[0-9\s\-]{0,19}$/;
@@ -36,10 +36,20 @@
           //$scope.savingInProcess = true;
 
           var copyAddress = angular.copy($scope.userProfile.address),
-            phoneNumbers = copyAddress.phoneNumbers;
+            phoneNumbers = copyAddress.phoneNumbers,
+            firstPhone = phoneNumbers[0].number,
+            lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 
-          if (!phoneNumbers[phoneNumbers.length - 1].number || phoneNumbers[phoneNumbers.length - 1].number < 3) {
-            phoneNumbers.splice((phoneNumbers.length - 1), 1)
+          if (!lastPhone || lastPhone.trim().length === 0 ||
+            (lastPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(lastPhone))) {
+
+            phoneNumbers.splice(phoneNumbers.length - 1, 1);
+
+            if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+              phoneNumbers[0].number = '';
+            }
+          } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+            phoneNumbers.shift();
           }
 
           return {

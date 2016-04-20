@@ -24,17 +24,24 @@
             return ngModel.$viewValue
           }, checkAndFix);
 
-          attr.$observe('country', checkAndFix);
+          attr.$observe('country', function (country) {
+            if (!ngModel.$viewValue || (ngModel.$viewValue.split(' ').length === 1 && PhoneFormats.isPrefixValid(value))) {
+              setPrefix(country);
+            } else {
+              checkAndFix(false);
+            }
+          });
 
-          function checkAndFix(e) {
+          function checkAndFix(valueChanged) {
 
             var newValue = element.val().trim();
 
-            if (newValue && value && newValue.length < value.length) {
-              ngModel.$setViewValue(newValue);
-              element.val(newValue);
+            if (valueChanged && newValue && value && newValue.length <= value.length) {
+              value = newValue;
+              ngModel.$setViewValue(value);
+              element.val(value);
             } else {
-              if (newValue && softPattern.test(newValue)) {
+              if (softPattern.test(newValue)) {
                 value = PhoneFormats.getFormattedPhone(attr.country, newValue);
                 ngModel.$setViewValue(value);
                 element.val(value);
@@ -45,6 +52,17 @@
 
             if (isRequired) {
               ngModel.$setValidity("required", !!(value && value.length > 0));
+            }
+          }
+
+          function setPrefix(country) {
+            if (country) {
+              var format = PhoneFormats.getCountryFormats(country);
+              if (format) {
+                value = format.prefix;
+                ngModel.$setViewValue(value);
+                element.val(value);
+              }
             }
           }
         }

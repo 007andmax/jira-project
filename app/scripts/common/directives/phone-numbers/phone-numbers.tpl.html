@@ -22,22 +22,23 @@
             Phone Number IS TOO LARGE.
           </label>
 
-          <label class="control-label"
-                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['minlength']}">
+          <label class="control-label" ng-show="!phoneNumbersForm['phoneNumber' + $index].$error['required'] &&
+                                                phoneNumber.number.length < 5 && !isPrefixValid(phoneNumber.number)">
             Phone Number IS TOO SHORT.
           </label>
 
           <label class="control-label"
-                 ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$error['minlength'] ||
+                 ng-class="{'hide': phoneNumber.number.length >= 5 ||
                                     phoneNumbersForm['phoneNumber' + $index].$error['maxlength'] ||
-                                    !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
+                                    !phoneNumbersForm['phoneNumber' + $index].$error['pattern'] ||
+                                    isPrefixValid(phoneNumber.number)}">
             INVALID Phone Number.
           </label>
 
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               aria-expanded="true" hard-reset-required="true" ng-minlength="5" ng-maxlength="20"
+               aria-expanded="true" hard-reset-required="true" ng-maxlength="20"
                ng-pattern="phoneNumberPattern" hard-phone-number-pattern country="{{countryCode}}"
                make-dirty-on-blur>
       </div>
@@ -88,24 +89,25 @@
             Phone Number IS TOO LARGE.
           </label>
 
-          <label class="control-label"
-                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['minlength']}">
+          <label class="control-label" ng-show="!phoneNumbersForm['phoneNumber' + $index].$error['required'] &&
+                                                phoneNumber.number.length < 5 && !isPrefixValid(phoneNumber.number)">
             Phone Number IS TOO SHORT.
           </label>
 
           <label class="control-label"
-                 ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$error['minlength'] ||
+                 ng-class="{'hide': phoneNumber.number.length >= 5 ||
                                     phoneNumbersForm['phoneNumber' + $index].$error['maxlength'] ||
-                                    !phoneNumbersForm['phoneNumber' + $index].$error['pattern']}">
+                                    !phoneNumbersForm['phoneNumber' + $index].$error['pattern'] ||
+                                    isPrefixValid(phoneNumber.number)}">
             INVALID Phone Number.
           </label>
 
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               aria-expanded="true" ng-minlength="5" ng-maxlength="20" ng-pattern="phoneNumberPattern"
+               aria-expanded="true" ng-maxlength="20" ng-pattern="phoneNumberPattern"
                make-dirty-on-blur
-               hard-reset-required="{{ isFirstRequired }}"hard-phone-number-pattern country="{{countryCode}}">
+               hard-reset-required="{{ isFirstRequired }}" hard-phone-number-pattern country="{{countryCode}}">
       </div>
 
       <div class="form-group no-label">

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoContactInfoCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService',
-      function ($scope, $state, $stateParams, $location, CompaniesService) {
+    ['$scope', 'quicktech.common.services.PhoneFormats',
+      function ($scope, PhoneFormats) {
 
         $scope.currentAddressIndex = 0;
         $scope.maximalAmountOfPhones = 3;
@@ -27,9 +27,9 @@
           form.$setDirty();
         };
 
-        $scope.addLocations = function(){
+        $scope.addLocations = function () {
           $scope.companyForSettingPage.addresses.push({
-            phoneNumbers: [{ typeNumber: 'OFFICE'}]
+            phoneNumbers: [{ typeNumber: 'OFFICE' }]
           });
         };
 
@@ -49,13 +49,25 @@
           location.isPrimary = true;
         };
 
-        $scope.saveMethods.push(function(form){
+        $scope.saveMethods.push(function (form) {
 
           var copyAddress = angular.copy($scope.companyForSettingPage.addresses);
 
-          for(var i = 0; i < copyAddress.length; i++){
-            if(!copyAddress[i].phoneNumbers[copyAddress[i].phoneNumbers.length - 1].number){
-              copyAddress[i].phoneNumbers.splice([copyAddress[i].phoneNumbers.length - 1], 1);
+          for (var i = 0; i < copyAddress.length; i++) {
+            var phoneNumbers = copyAddress[i].phoneNumbers,
+              firstPhone = phoneNumbers[0].number,
+              lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
+
+            if (!lastPhone || lastPhone.trim().length === 0 ||
+              (lastPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(lastPhone))) {
+
+              phoneNumbers.splice(phoneNumbers.length - 1, 1);
+
+              if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+                phoneNumbers[0].number = '';
+              }
+            } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+              phoneNumbers.shift();
             }
           }
 
@@ -76,10 +88,10 @@
           //});
         });
 
-        if($scope.companyForSettingPage.addresses.length === 0){
+        if ($scope.companyForSettingPage.addresses.length === 0) {
           $scope.companyForSettingPage.addresses.push({
             isPrimary: true,
-            phoneNumbers: [{ typeNumber: 'OFFICE'}]
+            phoneNumbers: [{ typeNumber: 'OFFICE' }]
           });
         }
 

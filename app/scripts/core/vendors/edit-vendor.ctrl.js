@@ -4,7 +4,8 @@
 
   angular.module('quicktech.core.vendors').controller('quicktech.core.vendors.editVendorCtrl',
     ['$scope', '$stateParams', 'AddressesService', 'VendorsService', 'ContactsService', '$state',
-      function ($scope, $stateParams, AddressesService, VendorsService, ContactsService, $state) {
+      'quicktech.common.services.PhoneFormats',
+      function ($scope, $stateParams, AddressesService, VendorsService, ContactsService, $state, PhoneFormats) {
 
         var currentTimeZone;
 
@@ -161,10 +162,19 @@
           }
 
           function processPhoneNumbers(phoneNumbers) {
-            var lastPhone = phoneNumbers[phoneNumbers.length - 1];
+            var firstPhone = phoneNumbers[0].number,
+              lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 
-            if (!lastPhone.number || lastPhone.number.trim().length === 0) {
+            if (!lastPhone || lastPhone.trim().length === 0 ||
+              (lastPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(lastPhone))) {
+
               phoneNumbers.splice(phoneNumbers.length - 1, 1);
+
+              if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+                phoneNumbers[0].number = '';
+              }
+            } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+              phoneNumbers.shift();
             }
           }
         };

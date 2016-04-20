@@ -7,7 +7,8 @@
       var formats = generateFormats();
       return {
         getCountryFormats: getCountryFormats,
-        getFormattedPhone: getFormattedPhone
+        getFormattedPhone: getFormattedPhone,
+        isPrefixValid: isPrefixValid
       };
 
       function generateFormats() {
@@ -934,7 +935,7 @@
         var countryFormats = getCountryFormats(country),
           input;
 
-        if (!countryFormats || !phone) {
+        if (!countryFormats) {
           return phone;
         }
 
@@ -944,7 +945,7 @@
           mask,
           length;
 
-        if (phone.substring(0, prefix.length) !== prefix) {
+        if (!phone || phone.substring(0, prefix.length) !== prefix) {
           input = phone.replace(/[\(\)\-]/g, '');
 
 
@@ -954,11 +955,7 @@
             input = phone.replace(/[\+\s]+/g, '');
           }
 
-          if (input.length > 4) {
             return getFormattedPhone(country, prefix + input);
-          } else {
-            return prefix;
-          }
         }
 
         if (!format) {
@@ -992,6 +989,24 @@
         }
 
         return result;
+      }
+
+      function isPrefixValid(phone) {
+        if (!phone || phone[0] !== '+') {
+          return false;
+        } else {
+          var prefix = phone.split(' ')[0];
+
+          for(var code in formats) {
+            var formatPrefix = formats[code].prefix;
+
+            if (formatPrefix === prefix) {
+              return true;
+            }
+          }
+
+          return false;
+        }
       }
 
     });

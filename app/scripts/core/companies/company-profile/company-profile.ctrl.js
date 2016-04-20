@@ -48,7 +48,7 @@
 
         rightPanelSharedState.companyId = $scope.company.id;
 
-        $scope.companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
+        $scope.companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
 

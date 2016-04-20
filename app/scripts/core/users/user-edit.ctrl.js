@@ -4,8 +4,9 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
-      '$timeout',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope, $timeout) {
+      '$timeout', 'quicktech.common.services.PhoneFormats',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
+                $timeout, PhoneFormats) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
 
@@ -104,10 +105,19 @@
             $scope.savingInProcess = true;
 
             var phoneNumbers = editUser.phoneNumbers,
-              lastPhone = phoneNumbers[phoneNumbers.length - 1];
+              firstPhone = phoneNumbers[0].number,
+              lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 
-            if (!lastPhone.number || lastPhone.number.trim().length === 0) {
+            if (!lastPhone || lastPhone.trim().length === 0 ||
+              (lastPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(lastPhone))) {
+
               phoneNumbers.splice(phoneNumbers.length - 1, 1);
+
+              if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+                phoneNumbers[0].number = '';
+              }
+            } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+              phoneNumbers.shift();
             }
 
             if (editUser.avatar && !editUser.avatar.id && !editUser.avatar.origin && !editUser.avatar.cropped) {
