@@ -1100,7 +1100,6 @@ span.sort-span {
 }
 .device-settings-tab .form-right-column{
   background-color: #f1f5fa;
-  padding: 10px;
   border: 1px solid #e7ecf2;
   color: #94A4B8;
   margin-top: 20px;
@@ -1108,20 +1107,20 @@ span.sort-span {
 .device-settings-tab .icn-hide-password {
   display: inline-block;
   position: absolute;
-  top: 3px;
+  top: 14px;
   right: 15px;
   cursor: pointer;
 }
 .device-settings-tab .icn-show-password {
   display: inline-block;
   position: absolute;
-  top: 6px;
+  top: 16px;
   right: 15px;
   cursor: pointer;
 }
 .device-settings-actions .icn-remove-token {
   position: absolute;
-  top: 5px;
+  top: 15px;
   right: -5px;
   cursor: pointer;
 }
@@ -1129,17 +1128,19 @@ span.sort-span {
   display: inline-block;
   position: absolute;
   right: 65px;
-  top: 0;
+  top: 10px;
 }
 .device-settings-tab ul li{
   position: relative;
   list-style-type: none;
 }
 .device-settings-tab ul{
-  padding-left: 15px;
+  padding-left: 0;
 }
 
-.device-settings-tab .deployment-settings .control input[type="number"]{
+.device-settings-tab .deployment-settings .control input[type="number"],
+.device-settings-tab .deployment-settings .control input[type="text"],
+.device-settings-tab .deployment-settings .control input[type="password"]{
   position: relative;
   opacity: 1;
   z-index: 1;
@@ -1153,7 +1154,9 @@ span.sort-span {
   top: 50%;
   margin-top: -8px;
 }
-.device-settings-tab .deployment-settings label input[type="number"]{
+.device-settings-tab .deployment-settings label input[type="number"],
+.device-settings-tab .deployment-settings label input[type="text"],
+.device-settings-tab .deployment-settings label input[type="password"]{
   padding: 10px;
   font-size: 14px;
   margin: 0 5px;
@@ -1191,4 +1194,37 @@ span.sort-span {
   top: 0;
   right: 15px;
 }
+.device-settings-tab-assigned {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  float: right;
+  padding-right: 20px;
+}
+.device-settings-tab-assigned i{
+  display: inline-block;
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+.right-column-head {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e7ecf2;
+}
+.form-right-column li.right-column-head, .form-right-column li.right-column-content{
+  padding: 10px 130px 10px 10px;
+}
+.device-settings-tab-assigned .dropdown-menu{
+  /*padding: 15px;*/
 
+}
+.device-settings-tab-assigned .dropdown-menu-tabs .nav-tabs-dropdown{
+  padding: 15px;
+  border-bottom: 1px solid #e7ecf2;
+  color: #1f2a37;
+}
+.device-settings-tab-assigned .dropdown-menu .tab-content{
+  margin-top: 50px;
+  padding: 15px;
+  color: #4c5c6f;
+}

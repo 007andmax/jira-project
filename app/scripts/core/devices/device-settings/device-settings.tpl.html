@@ -34,6 +34,15 @@
 
         </label>
       </li>
+      <li>
+        <label class="control checkbox">
+          <input type="checkbox">
+          Automatically create a local administrator account on the computer
+          <input type="text" placeholder="Username">
+          <input type="password" placeholder="Password">
+          <span class="control-indicator"></span>
+        </label>
+      </li>
     </ul>
 
     <div ng-form="deviceSettingsForm">
@@ -93,15 +102,50 @@
 
       <div class="form-right-column">
         <ul>
-          <li ng-repeat="credential in credentials">
+          <li class="right-column-head">
+            <span>Account</span>
+            <span class="device-settings-tab-assigned">Assigned</span>
+            <span class="device-settings-tab-password">Password</span>
+          </li>
+          <li class="right-column-content" ng-repeat="credential in credentials">
             <span>{{credential.login}}</span>
           <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
             {{credential.password}}
           </span>
+            <div class="device-settings-tab-assigned">Assigned
+              <i class="icn-sm icn-caret-gray"></i>
+              <div class="dropdown-menu dropdown-menu-tabs"  style="display: block;">
+                <ul class="nav nav-justified nav-tabs-dropdown">
+                  <li>Device Tab</li>
+                  <li>Device</li>
+                </ul>
+                <div class="tab-content">
+                  <ul class="tab-pane" style="display: block;">
+                    <li>Domain</li>
+                    <li>Router</li>
+                  </ul>
+                  <ul class="tab-pane"  style="display: block;">
+                    <li>
+                      <label class="control checkbox">
+                        <input type="checkbox">
+                        HVServer
+                        <span class="control-indicator"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="control checkbox">
+                        <input type="checkbox">
+                        Computer1
+                        <span class="control-indicator"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           <span class="device-settings-tab-password" ng-hide="passwordShown[$index]">
             &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
           </span>
-
           <span class="device-settings-actions">
             <span ng-show="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
               <i class="icn-sm icn-hide-password"></i></span>
