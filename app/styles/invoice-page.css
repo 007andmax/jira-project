@@ -25,6 +25,7 @@
 
 .invoice-page .header #logo {
   float: left;
+  margin-top: -35px;
 }
 
 .invoice-page .header .tech-company-name {
