@@ -7,7 +7,6 @@
 }
 .readonly-tags-wrap {
   position: relative;
-  margin: 20px 0 0 0;
   cursor: text;
 }
 .tags-action {
@@ -35,6 +34,8 @@
   padding: 5px 25px 5px 5px;
 }
 .readonly-tags {
+  height: 30px;
+  overflow: hidden;
   display: inline-block;
   padding: 5px 0;
 }
