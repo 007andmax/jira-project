@@ -1196,35 +1196,42 @@ span.sort-span {
 }
 .device-settings-tab-assigned {
   display: inline-block;
-  cursor: pointer;
   position: relative;
   float: right;
   padding-right: 20px;
 }
-.device-settings-tab-assigned i{
-  display: inline-block;
-  position: absolute;
-  top: 5px;
-  right: 0;
+.device-settings-button-assigned {
+  margin: 0 0 15px 15px;
+}
+.device-settings-button-assigned button {
+  width: 30%;
 }
 .right-column-head {
   padding-bottom: 10px;
   border-bottom: 1px solid #e7ecf2;
 }
-.form-right-column li.right-column-head, .form-right-column li.right-column-content{
+.form-right-column li.right-column-head, .form-right-column li.right-column-content {
   padding: 10px 130px 10px 10px;
 }
-.device-settings-tab-assigned .dropdown-menu{
-  /*padding: 15px;*/
-
-}
-.device-settings-tab-assigned .dropdown-menu-tabs .nav-tabs-dropdown{
-  padding: 15px;
+.device-settings-button-assigned .dropdown-menu-tabs .nav-tabs-dropdown {
   border-bottom: 1px solid #e7ecf2;
   color: #1f2a37;
 }
-.device-settings-tab-assigned .dropdown-menu .tab-content{
+.device-settings-button-assigned .dropdown-menu .tab-content {
   margin-top: 51px;
-  padding: 15px;
   color: #4c5c6f;
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane li {
+  padding: 10px;
+  cursor: pointer;
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane.device-type li:hover {
+  background-color: rgba(231, 236, 242, .36);
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane li.disabled {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, .54);
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane.device-type li.disabled:hover {
+  background-color: white;
 }
