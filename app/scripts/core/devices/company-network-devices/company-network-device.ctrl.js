@@ -16,7 +16,7 @@
           $scope.changingStatus = true;
 
           if ($scope.deviceStatus.statusValue) {
-            DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id)
+            DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id, $scope.agentForInstallId)
           } else {
             DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.device.deviceId)
           }

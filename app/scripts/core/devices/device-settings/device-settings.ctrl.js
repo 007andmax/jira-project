@@ -125,7 +125,7 @@
         };
 
         $scope.hasEnableDevice = function (credential, agentsAllowedForCredential) {
-          return agentsAllowedForCredential.length || !credential.agents || credential.agents.length;
+          return agentsAllowedForCredential.length || credential.agents || credential.agents.length;
         };
 
         $scope.setTabOpened = function (tab) {
@@ -137,8 +137,15 @@
           }
         };
 
-        $scope.$watchCollection('[newCredential.passwordConfirm, editCredential.passwordConfirm]', function (value) {
-          var credential = value[1] || value[0];
+        $scope.$watchCollection('[newCredential.passwordConfirm, editCredential.passwordConfirm]', function (values) {
+          var value, credential;
+          if ($scope.editedCredential) {
+            value = values[1];
+            credential = $scope.editedCredential;
+          } else {
+            value = values[0];
+            credential = $scope.newCredential;
+          }
           if ($scope.deviceSettingsForm.password && $scope.deviceSettingsForm.passwordConfirm) {
             if ($scope.deviceSettingsForm.password.$dirty && $scope.deviceSettingsForm.passwordConfirm.$dirty) {
               $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', credential.password === value);
@@ -159,7 +166,6 @@
         $scope.updateCredentials = function (form) {
           if (form.$valid) {
             $scope.updating = true;
-            setCredentialAssign();
 
             if (!$scope.editedCredential) {
               delete $scope.newCredential.passwordConfirm;

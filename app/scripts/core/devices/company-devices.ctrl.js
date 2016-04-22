@@ -55,7 +55,8 @@
           }
         });
 
-        $scope.runScanDevices = function (agentId) {
+        $scope.runScanDevices = function (agentId, id) {
+          $scope.agentForInstallId = id;
           DevicesService.runScanDevices($scope, $scope.companyId, agentId);
         };
 
@@ -79,6 +80,7 @@
 
             for (var i = 0; i < $scope.agents.length; i++) {
               if ($scope.agents[i].id === $scope.masterAgentId) {
+                $scope.agentForInstallId = $scope.masterAgentId;
                 DevicesService.getLastScanDevices($scope, $scope.companyId, $scope.agents[i].agentId, function (resp) {
                   $scope.scanDevices = resp;
                 });
