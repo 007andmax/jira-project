@@ -56,9 +56,8 @@
 
   <div class="companies-list company-devices-list clearfix">
 
-    <div class="company-card" ng-repeat="(companyId, companyCount) in devicesCount"
-         ng-click="srefToCompanyDevices(companyId)" ng-if="companyId !== 'staticCopy'"
-         ng-init="company = getCompanyById(companyId)" ng-class="{'hide': company.isDefault}">
+    <div class="company-card" ng-repeat="company in companies" ng-click="srefToCompanyDevices(company.id)"
+         ng-class="{'hide': company.isDefault}">
 
       <div class="company-cover-area">
 
@@ -120,11 +119,11 @@
 
         <div class="currently-online-devices">
           <i class="dot on"></i>
-          <span>Online Devices</span> {{ companyCount.online }}
+          <span>Online Devices</span> {{ company.devicesCounts.online }}
         </div>
 
         <div class="company-managed-devices">
-          <div class="total-managed-devices"><span>mng. devices</span> {{ companyCount.all }}</div>
+          <div class="total-managed-devices"><span>mng. devices</span> {{ company.devicesCounts.all }}</div>
           <div class="device-stats-chart"></div>
         </div>
 

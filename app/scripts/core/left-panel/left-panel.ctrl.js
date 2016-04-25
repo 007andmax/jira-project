@@ -5,9 +5,9 @@
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'TicketsService', '$stateParams', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', 'FilesService', 'Downloader', '$state', 'DevicesService',
-      'CompaniesService',
+      'CompaniesService', '$filter',
       function ($scope, TicketsService, $stateParams, PermissionsService,
-                SharedStateService, FilesService, Downloader, $state, DevicesService, CompaniesService) {
+                SharedStateService, FilesService, Downloader, $state, DevicesService, CompaniesService, $filter) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
@@ -15,6 +15,12 @@
         $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
         $scope.companiesWithDevices = DevicesService.getDevicesCount($scope);
+
+        $scope.$watch('companiesWithDevices', function (value) {
+          if (value) {
+            $scope.companies = sortByCompanyName(value);
+          }
+        }, true);
 
         $scope.$watch(function () {
 
@@ -109,6 +115,20 @@
             return item !== 'staticCopy';
           }).length;
         };
+
+        function sortByCompanyName(value) {
+          var companies = [];
+          for (var id in value) {
+            if (id !== 'staticCopy') {
+              var devices = value[id],
+                company = CompaniesService.getOneById(id);
+              company.devicesCounts = devices;
+              companies.push(company);
+            }
+          }
+
+          return $filter('orderBy')(companies, 'name');
+        }
 
       }]);
 

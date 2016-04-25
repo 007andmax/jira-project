@@ -209,11 +209,11 @@
       <ul class="nav nav-devices" ng-hide="collapseItem !== 'DEVICES'"
           set-list-height-by-content="44" items-count="{{ getCompaniesWithDevicesLength() }}"><!--44px - height of li-->
 
-        <li ng-class="{active: $state.includes('companyDevices', { companyId: companyId })}"
-            ng-repeat="(companyId, devicesCount) in companiesWithDevices" ng-if="companyId !== 'staticCopy'">
+        <li ng-class="{active: $state.includes('companyDevices', { companyId: company.id })}"
+            ng-repeat="company in companies">
           <a class="ellipsis" href="javascript:void(0)"
-             ng-click="stateGo($event, 'companyDevices', { companyId: companyId })">
-            <i class="nav-icon icn-lg icn-companies"></i>{{ getCompany(companyId).name || ''}}
+             ng-click="stateGo($event, 'companyDevices', { companyId: company.id })">
+            <i class="nav-icon icn-lg icn-companies"></i>{{ company.name || ''}}
           </a>
         </li>
       </ul>
