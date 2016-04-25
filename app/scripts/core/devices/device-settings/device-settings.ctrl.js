@@ -117,7 +117,10 @@
         };
 
         $scope.setSelectedDevices = function (open) {
-          if (!open) {
+          if (!open && $scope.needSetAssign) {
+            setCredentialAssign();
+          } else {
+            $scope.needSetAssign = true;
           }
         };
 
@@ -166,7 +169,7 @@
             $scope.editedCredential = {
               deviceType: 'NONE'
             };
-            $scope.selectedCredentialIndex = undefined;
+            delete $scope.selectedCredentialIndex;
             saveCredentials();
           });
         };
@@ -187,18 +190,18 @@
 
               $scope.credentials.push($scope.editedCredential);
             } else {
-              if (!$scope.editedCredential.password) {
-                $scope.editedCredential.password = $scope.credentials[$scope.selectedCredentialIndex].password;
-              }
+              var credential = $scope.credentials[$scope.selectedCredentialIndex];
 
-              $scope.credentials[$scope.selectedCredentialIndex] = $scope.editedCredential;
+              for (var prop in $scope.editedCredential) {
+                credential[prop] = $scope.editedCredential[prop];
+              }
             }
 
             saveCredentials(function () {
               $scope.editedCredential = {
                 deviceType: 'NONE'
               };
-              $scope.selectedCredentialIndex = undefined;
+              delete $scope.selectedCredentialIndex;
               $scope.required = true;
               form.$setPristine();
             });
@@ -299,7 +302,7 @@
           $scope.editedCredential = {
             deviceType: 'NONE'
           };
-          $scope.selectedCredentialIndex = undefined;
+          delete $scope.selectedCredentialIndex;
           $scope.required = true;
           form.$setPristine();
         };
@@ -337,6 +340,7 @@
 
             $scope.selectedAgents = {};
           }
+          $scope.needSetAssign = false;
         }
 
         function getAllowedAgentsForCredential(credential) {
