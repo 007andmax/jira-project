@@ -1089,39 +1089,50 @@ span.sort-span {
 }
 .device-settings-tab .form-group{
   margin-left: 15px;
-  width: 60%;
-  display: inline-block;
-}
-.device-settings-tab .form-group:first-child{
   width: 70%;
+  display: block;
 }
 .device-settings-tab .btn-info{
-  margin-left: 15%;
+  margin-left: 15px;
+  display: inline-block;
+  width: 80px;
 }
 .device-settings-tab .form-right-column{
   background-color: #f1f5fa;
-  padding: 10px;
   border: 1px solid #e7ecf2;
   color: #94A4B8;
-  margin-top: 20px;
 }
-.device-settings-tab .icn-hide-password {
+.device-settings-tab .right-column-content .icn-hide-password {
   display: inline-block;
   position: absolute;
-  top: 3px;
+  top: 14px;
   right: 15px;
   cursor: pointer;
 }
-.device-settings-tab .icn-show-password {
+.device-settings-tab .right-column-content .icn-show-password {
   display: inline-block;
   position: absolute;
-  top: 6px;
+  top: 16px;
+  right: 15px;
+  cursor: pointer;
+}
+.device-settings-tab .form-left-column .icn-hide-password {
+  display: inline-block;
+  position: absolute;
+  top: 32px;
+  right: 15px;
+  cursor: pointer;
+}
+.device-settings-tab .form-left-column .icn-show-password {
+  display: inline-block;
+  position: absolute;
+  top: 34px;
   right: 15px;
   cursor: pointer;
 }
 .device-settings-actions .icn-remove-token {
   position: absolute;
-  top: 5px;
+  top: 15px;
   right: -5px;
   cursor: pointer;
 }
@@ -1129,17 +1140,19 @@ span.sort-span {
   display: inline-block;
   position: absolute;
   right: 65px;
-  top: 0;
+  top: 10px;
 }
 .device-settings-tab ul li{
   position: relative;
   list-style-type: none;
 }
 .device-settings-tab ul{
-  padding-left: 15px;
+  padding-left: 0;
 }
 
-.device-settings-tab .deployment-settings .control input[type="number"]{
+.device-settings-tab .deployment-settings .control input[type="number"],
+.device-settings-tab .deployment-settings .control input[type="text"],
+.device-settings-tab .deployment-settings .control input[type="password"]{
   position: relative;
   opacity: 1;
   z-index: 1;
@@ -1153,7 +1166,9 @@ span.sort-span {
   top: 50%;
   margin-top: -8px;
 }
-.device-settings-tab .deployment-settings label input[type="number"]{
+.device-settings-tab .deployment-settings label input[type="number"],
+.device-settings-tab .deployment-settings label input[type="text"],
+.device-settings-tab .deployment-settings label input[type="password"]{
   padding: 10px;
   font-size: 14px;
   margin: 0 5px;
@@ -1191,4 +1206,61 @@ span.sort-span {
   top: 0;
   right: 15px;
 }
-
+.device-settings-tab-assigned {
+  display: inline-block;
+  position: relative;
+  float: right;
+  padding-right: 20px;
+}
+.device-settings-button-assigned {
+  width: 70%;
+  margin: 0 0 15px 15px;
+}
+.device-settings-button-assigned button {
+  width: 250px;
+  margin-left: 15px;
+  background-color: #e7ecf2;
+}
+.right-column-head {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e7ecf2;
+}
+.form-right-column li.right-column-head, .form-right-column li.right-column-content {
+  padding: 10px 130px 10px 10px;
+}
+.form-right-column li.right-column-content{
+  cursor: pointer;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+}
+.form-right-column li.right-column-content:hover{
+  color: #1f2a37;
+}
+.device-settings-button-assigned .dropdown-menu-tabs .nav-tabs-dropdown {
+  border-bottom: 1px solid #e7ecf2;
+  color: #1f2a37;
+}
+.device-settings-button-assigned .dropdown-menu .tab-content {
+  margin-top: 51px;
+  color: #4c5c6f;
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane li {
+  padding: 10px;
+  cursor: pointer;
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane.device-type li:hover {
+  background-color: rgba(231, 236, 242, .36);
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane li.disabled {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, .54);
+}
+.device-settings-button-assigned .dropdown-menu .tab-content .tab-pane.device-type li.disabled:hover {
+  background-color: white;
+}
+.device-settings-button-assigned .nav-tabs-dropdown .disabled {
+  cursor: not-allowed;
+}

@@ -25,42 +25,27 @@
         $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
 
-        DevicesService.getDefaultCompanyCredentials($scope.companyId, function (resp) {
-          $scope.defaultPass = resp.password || '';
-          $scope.defaultName = resp.login || '';
-        });
-
-        DevicesService.getDeviceSettingsByCompanyIdAndType($scope, $scope.companyId, 'NET_SCAN', function (resp) {
-          $scope.customizeDevices = {};
-
-          for (var i = 0, len = resp.length; i < len; i++) {
-            $scope.customizeDevices[resp[i].deviceId] = {
-              login: resp[i].login,
-              password: resp[i].password,
-              id: resp[i].id
-            }
-          }
-
-        });
-
-        DevicesService.getDeviceSettingsByCompanyIdAndType($scope, $scope.companyId, 'AGENT', function (resp) {
-          $scope.customizeAgents = {};
-
-          for (var i = 0, len = resp.length; i < len; i++) {
-            $scope.customizeAgents[resp[i].deviceId] = {
-              login: resp[i].login,
-              password: resp[i].password,
-              id: resp[i].id
-            }
-          }
-        });
-
-        $scope.runScanDevices = function (agentId) {
+        $scope.runScanDevices = function (agentId, id) {
+          $scope.agentForInstallId = id;
           DevicesService.runScanDevices($scope, $scope.companyId, agentId);
         };
 
         DevicesService.getAgentsByCompany($scope, $scope.companyId, function (resp) {
           $scope.agents = resp;
+
+          if (resp && resp.length) {
+            DevicesService.getAllAgentsAndLogin($scope.companyId, function (logins) {
+              for (var i = 0; i < $scope.agents.length; i++) {
+                var agent = $scope.agents[i];
+                for (var id in logins) {
+                  if (agent.id === id) {
+                    agent.login = logins[id];
+                  }
+                }
+              }
+            });
+          }
+
           if ((!$scope.agents || $scope.agents.length === 0) && agentCallbackCount === 0) {
             agentCallbackCount++;
 
@@ -79,6 +64,7 @@
 
             for (var i = 0; i < $scope.agents.length; i++) {
               if ($scope.agents[i].id === $scope.masterAgentId) {
+                $scope.agentForInstallId = $scope.masterAgentId;
                 DevicesService.getLastScanDevices($scope, $scope.companyId, $scope.agents[i].agentId, function (resp) {
                   $scope.scanDevices = resp;
                 });

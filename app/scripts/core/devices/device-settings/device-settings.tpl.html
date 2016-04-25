@@ -34,25 +34,78 @@
 
         </label>
       </li>
+      <li class="hide">
+        <label class="control checkbox">
+          <input type="checkbox">
+          Automatically create a local administrator account on the computer
+          <input type="text" placeholder="Username">
+          <input type="password" placeholder="Password">
+          <span class="control-indicator"></span>
+        </label>
+      </li>
     </ul>
 
     <div ng-form="deviceSettingsForm">
       <h3 class="devices-settings-title">Network Credentials</h3>
 
       <div class="form-left-column">
+
+        <div class="device-settings-button-assigned" dropdown>
+
+          <label class="control-label" style="vertical-align: middle">
+            Assign
+          </label>
+
+          <button type="button" class="btn btn-default" dropdown-toggle ng-click="openDropdown()"
+                  ng-disabled="!hasEnabledType(deviceTypes) && !hasEnabledDevice(editedCredential, agentsAllowedForCredential)
+                              || editedCredential.isDefault || editedCredential.deviceType === 'DOMAIN'">
+            {{ userReadable() || 'None' }}
+            <span ng-if="!(editedCredential.isDefault || editedCredential.deviceType === 'DOMAIN') &&
+                        (hasEnabledType(deviceTypes) || hasEnabledDevice(editedCredential, agentsAllowedForCredential))"
+                  class="caret"></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-tabs" dropdown-menu style="left: 56px">
+            <ul class="nav nav-justified nav-tabs-dropdown" stop-propagation="click">
+              <li ng-class="{'active': assignedTabOpened === 'DEVICE',
+                            'disabled': !hasEnabledDevice(editedCredential, agentsAllowedForCredential)}"
+                  ng-click="setTabOpened('DEVICE')">Device
+              </li>
+              <li ng-class="{'active': assignedTabOpened === 'TYPE', 'disabled': !hasEnabledType(deviceTypes)}"
+                  ng-click="setTabOpened('TYPE')">Device Type
+              </li>
+            </ul>
+            <div class="tab-content">
+              <ul class="tab-pane device-type" ng-show="assignedTabOpened === 'TYPE'">
+                <li ng-repeat="type in deviceTypes"
+                    ng-class="{'disabled': type.disabled}"
+                    ng-click="setDeviceType($index, type.disabled, $event)">{{ type.label }}
+                </li>
+              </ul>
+              <ul class="tab-pane" ng-show="assignedTabOpened === 'DEVICE'" stop-propagation="click">
+                <li ng-repeat="agent in agentsAllowedForCredential | orderBy: 'hostName'">
+                  <label class="control checkbox">
+                    <input type="checkbox" ng-model="selectedAgents[agent.id]">
+                    {{ (agent.hostName | unknownFilter) || 'Name is not defined' }}
+                    <span class="control-indicator"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'login')}">
 
           <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'login')}">
             Username &nbsp;<span class="text-muted">domain\username</span>
           </label>
 
-          <div ng-messages="deviceSettingsForm.username.$error"
+          <div ng-messages="deviceSettingsForm.login.$error"
                ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'login')}">
             <label class="control-label" ng-message="required">Username is required.</label>
           </div>
 
-          <input type="text" class="form-control" name="login" ng-model="newCredential.login"
-                 required make-dirty-on-blur>
+          <input type="text" class="form-control" name="login" ng-model="editedCredential.login" required>
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'password')}">
@@ -66,8 +119,12 @@
             <label class="control-label" ng-message="required">Password is required.</label>
           </div>
 
-          <input type="text" class="form-control" name="password" ng-model="newCredential.password"
-                 required make-dirty-on-blur>
+          <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" name="password"
+                 ng-model="editedCredential.password" ng-required="required">
+
+          <span ng-click="showPassword = !showPassword" ng-show="editedCredential.password">
+                <i class="icn-sm {{ showPassword ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+          </span>
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
@@ -81,34 +138,46 @@
             <label class="control-label" ng-message="required || equal">Passwords are not equal.</label>
           </div>
 
-          <input type="text" class="form-control" name="passwordConfirm" ng-model="newCredential.passwordConfirm"
-                 required make-dirty-on-blur>
+          <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" name="passwordConfirm"
+                 ng-model="editedCredential.passwordConfirm" ng-required="required">
         </div>
 
         <div class="btn btn-lg btn-info" ng-click="updateCredentials(deviceSettingsForm)"
              custom-disabled="{{!!(deviceSettingsForm.$pristine || (triedToSave && deviceSettingsForm.$invalid) || updating)}}">
-          Update
+          {{ selectedCredentialIndex !== undefined ? 'Save' : 'Create' }}
+        </div>
+        <div class="btn btn-lg btn-info" ng-if="selectedCredentialIndex !== undefined"
+             ng-click="cancelEdit(deviceSettingsForm)">
+          Cancel
         </div>
       </div>
 
       <div class="form-right-column">
         <ul>
-          <li ng-repeat="credential in credentials">
-            <span>{{credential.login}}</span>
-          <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
-            {{credential.password}}
-          </span>
-          <span class="device-settings-tab-password" ng-hide="passwordShown[$index]">
-            &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
-          </span>
-
-          <span class="device-settings-actions">
-            <span ng-show="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
-              <i class="icn-sm icn-hide-password"></i></span>
-            <span ng-hide="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
-              <i class="icn-sm icn-show-password"></i></span>
-            <span ng-click="removeCredential($index)"><i class="icn-sm icn-remove-token"></i></span>
-          </span>
+          <li class="right-column-head">
+            <span>Account</span>
+            <span class="device-settings-tab-assigned">Assigned</span>
+            <span class="device-settings-tab-password">Password</span>
+          </li>
+          <li class="right-column-content" ng-repeat="credential in credentials"
+              ng-click="editCredential($index, deviceSettingsForm)">
+            <span>{{credential.login || '\<' + 'unknown' + '\>'}}</span>
+            <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
+              {{credential.password}}
+            </span>
+            <span class="device-settings-tab-password" ng-hide="passwordShown[$index]">
+              &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
+            </span>
+            <div class="device-settings-tab-assigned">
+              {{ userReadable($index) || 'None' }}
+            </div>
+            <span class="device-settings-actions" stop-propagation="click">
+              <span ng-click="passwordShown[$index] = !passwordShown[$index]">
+                <i class="icn-sm {{ passwordShown[$index] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+              </span>
+              <span ng-if="!credential.isDefault" ng-click="removeCredential($index)">
+                <i class="icn-sm icn-remove-token"></i></span>
+            </span>
           </li>
         </ul>
       </div>

@@ -235,7 +235,8 @@
 
     </div>
 
-    <ticket-tags ticket-id="{{ticket.id}}" ticket-tags="ticket.tags" readonly-tags="{{true}}"></ticket-tags>
+    <ticket-tags ng-if="ticket.tags && ticket.tags.length"
+                 ticket-id="{{ticket.id}}" ticket-tags="ticket.tags" readonly-tags="{{true}}"></ticket-tags>
 
   </div>
 
