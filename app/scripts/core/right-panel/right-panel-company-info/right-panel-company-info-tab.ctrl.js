@@ -9,10 +9,6 @@
         $scope.$watch('companyGroupedData.company.id', function () {
           $scope.companyContacts = CompaniesService.getCompanyContacts($scope, $scope.companyGroupedData.company.id);
 
-          DevicesService.getDefaultCompanyCredentials($scope.companyGroupedData.company.id, function (resp) {
-            $scope.isCompanyHasUserNameAndPass = (resp.login || resp.password);
-          });
-
           $scope.downloadAgentUser = {
             name: '',
             password: '',
