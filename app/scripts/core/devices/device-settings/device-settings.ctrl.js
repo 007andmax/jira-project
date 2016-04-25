@@ -41,7 +41,7 @@
           var allAgentsFromCredentials = [],
             isInCredentials = false;
 
-          $scope.credentials = resp;
+          $scope.credentials = angular.copy(resp);
 
           for (var i = 0, len = $scope.credentials.length; i < len; i++) {
             var credential = $scope.credentials[i],

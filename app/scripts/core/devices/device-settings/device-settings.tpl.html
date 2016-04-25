@@ -161,7 +161,8 @@
           </li>
           <li class="right-column-content" ng-repeat="credential in credentials"
               ng-click="editCredential($index, deviceSettingsForm)">
-            <span>{{credential.login || '\<' + 'unknown' + '\>'}}</span>
+            <span ng-show="credential.login">{{ credential.login }}</span>
+            <span ng-hide="credential.login">&lt;unknown&gt;</span>
             <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
               {{credential.password}}
             </span>
