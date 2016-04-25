@@ -8,6 +8,7 @@
         var copySelectedAgents = {};
 
         $scope.deviceTypeUpdated = false;
+        $scope.required = true;
 
         $scope.triedToSave = false;
         $scope.rescanIntervals = [
@@ -27,9 +28,8 @@
           label: 'Nas',
           disabled: false
         }];
-        $scope.test = {};
 
-        $scope.newCredential = {
+        $scope.editedCredential = {
           deviceType: 'NONE'
         };
         $scope.passwordShown = [];
@@ -46,6 +46,9 @@
               agents = credential.agents;
             if (agents && agents.length) {
               for (var j = 0; j < agents.length; j++) {
+                if (credential.isDefault || credential.deviceType === 'DOMAIN') {
+                  continue;
+                }
                 allAgentsFromCredentials.push(agents[j]);
               }
             }
@@ -63,6 +66,7 @@
             isInCredentials = false;
             for (var i = 0; i < allAgentsFromCredentials.length; i++) {
               var agentFromCredentials = allAgentsFromCredentials[i];
+
               if (agentFromCredentials === agent.id) {
                 isInCredentials = true;
                 break;
@@ -88,19 +92,18 @@
         });
 
         $scope.isShowingErrors = function (form, field) {
-          return !form[field] || (form[field].$dirty || $scope.triedToSave) && form[field].$invalid;
+          return !$scope.updating && (!form[field] || (form[field].$dirty || $scope.triedToSave) && form[field].$invalid);
         };
 
         $scope.setDeviceType = function (typeIndex, disabled, event) {
           if (!disabled) {
-            var type = $scope.deviceTypes[typeIndex],
-              credential = $scope.editedCredential ? $scope.editedCredential : $scope.newCredential;
+            var type = $scope.deviceTypes[typeIndex];
 
-            if (credential.deviceType !== 'NONE' && credential.deviceType !== 'WORKSTATION') {
-              findDeviceType(credential.deviceType).disabled = false;
+            if ($scope.editedCredential.deviceType !== 'NONE' && $scope.editedCredential.deviceType !== 'WORKSTATION') {
+              findDeviceType($scope.editedCredential.deviceType).disabled = false;
             }
 
-            credential.deviceType = type.label.toUpperCase();
+            $scope.editedCredential.deviceType = type.label.toUpperCase();
             type.disabled = true;
             $scope.deviceTypeUpdated = true;
             $scope.deviceSettingsForm.$setDirty();
@@ -117,38 +120,29 @@
 
         $scope.hasEnabledType = function (deviceTypes) {
           for (var i = 0, len = deviceTypes.length; i < len; i++) {
-            if (!deviceTypes.disabled) {
+            if (!deviceTypes[i].disabled) {
               return true;
             }
           }
           return false;
         };
 
-        $scope.hasEnableDevice = function (credential, agentsAllowedForCredential) {
-          return agentsAllowedForCredential.length || credential.agents || credential.agents.length;
+        $scope.hasEnabledDevice = function (credential, agentsAllowedForCredential) {
+          return agentsAllowedForCredential.length || (credential.agents && credential.agents.length);
         };
 
         $scope.setTabOpened = function (tab) {
           if (tab === 'TYPE' && $scope.hasEnabledType($scope.deviceTypes)) {
             $scope.assignedTabOpened = 'TYPE';
-          } else if ($scope.hasEnableDevice($scope.editedCredential ||
-              $scope.newCredential, $scope.agentsAllowedForCredential)) {
+          } else if ($scope.hasEnabledDevice($scope.editedCredential, $scope.agentsAllowedForCredential)) {
             $scope.assignedTabOpened = 'DEVICE';
           }
         };
 
-        $scope.$watchCollection('[newCredential.passwordConfirm, editCredential.passwordConfirm]', function (values) {
-          var value, credential;
-          if ($scope.editedCredential) {
-            value = values[1];
-            credential = $scope.editedCredential;
-          } else {
-            value = values[0];
-            credential = $scope.newCredential;
-          }
+        $scope.$watchCollection('[editedCredential.passwordConfirm, editedCredential.password]', function (values) {
           if ($scope.deviceSettingsForm.password && $scope.deviceSettingsForm.passwordConfirm) {
             if ($scope.deviceSettingsForm.password.$dirty && $scope.deviceSettingsForm.passwordConfirm.$dirty) {
-              $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', credential.password === value);
+              $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', values[0] === values[1]);
             }
           }
         });
@@ -165,36 +159,30 @@
 
         $scope.updateCredentials = function (form) {
           if (form.$valid) {
-            $scope.updating = true;
 
-            if (!$scope.editedCredential) {
-              delete $scope.newCredential.passwordConfirm;
-              $scope.newCredential.company = {
+            delete $scope.editedCredential.passwordConfirm;
+
+            if (!$scope.selectedCredentialIndex) {
+              $scope.editedCredential.company = {
                 id: $scope.companyId
               };
 
-              $scope.credentials.push($scope.newCredential);
+              $scope.credentials.push($scope.editedCredential);
             } else {
-              delete $scope.editedCredential.passwordConfirm;
-              var credential = $scope.credentials[$scope.selectedCredentialIndex];
-              for (var prop in $scope.editedCredential) {
-                if (prop === 'password') {
-                  if ($scope.editedCredential[prop]) {
-                    credential[prop] = $scope.editedCredential[prop];
-                  }
-                } else {
-                  credential[prop] = $scope.editedCredential[prop];
-                }
+              if (!$scope.editedCredential.password) {
+                $scope.editedCredential.password = $scope.credentials[$scope.selectedCredentialIndex].password;
               }
+
+              $scope.credentials[$scope.selectedCredentialIndex] = $scope.editedCredential;
             }
 
             saveCredentials(function () {
               form.$setPristine();
-              $scope.newCredential = {
+              $scope.editedCredential = {
                 deviceType: 'NONE'
               };
-              $scope.editedCredential = undefined;
               $scope.selectedCredentialIndex = undefined;
+              $scope.required = true;
             });
           } else {
             $scope.triedToSave = true;
@@ -236,17 +224,15 @@
         };
 
         $scope.userReadable = function (index) {
-          var str, credential;
-          if ($scope.editedCredential && !(index || index === 0)) {
-            credential = $scope.editedCredential;
-          } else if (index || index === 0) {
+          var type, credential;
+          if (index || index === 0) {
             credential = $scope.credentials[index];
           } else {
-            credential = $scope.newCredential;
+            credential = $scope.editedCredential;
           }
 
-          str = credential.deviceType;
-          if (str === 'WORKSTATION') {
+          type = credential.deviceType;
+          if (type === 'WORKSTATION') {
             if (credential.agents && credential.agents.length < 2) {
 
               return $filter('unknownFilter')(getAgentNameById(credential.agents[0])) || 'Name is not defined';
@@ -254,7 +240,7 @@
               return credential.agents ? credential.agents.length : '';
             }
           } else {
-            return str.slice(0, 1) + str.slice(1).toLowerCase();
+            return type.slice(0, 1) + type.slice(1).toLowerCase();
           }
         };
 
@@ -277,45 +263,47 @@
         };
 
         $scope.openDropdown = function () {
-          if ($scope.editedCredential) {
-            $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
-          } else {
-            $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.newCredential);
-          }
+          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
           $scope.setTabOpened($scope.hasEnabledType($scope.deviceTypes) ? 'TYPE' : 'DEVICE');
           $scope.deviceTypeUpdated = false;
         };
 
-        $scope.editCredential = function (index) {
+        $scope.editCredential = function (index, form) {
           $scope.selectedCredentialIndex = index;
           $scope.editedCredential = angular.copy($scope.credentials[index]);
           delete $scope.editedCredential.password;
+          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
+          $scope.required = false;
+          form.$setPristine();
         };
 
-        $scope.cancelEdit = function () {
-          $scope.editedCredential = undefined;
+        $scope.cancelEdit = function (form) {
+          $scope.editedCredential = {
+            deviceType: 'NONE'
+          };
+          $scope.required = true;
+          form.$setPristine();
         };
 
         function setCredentialAssign() {
-          var credential = $scope.editedCredential ? $scope.editedCredential : $scope.newCredential;
           if ($scope.deviceTypeUpdated) {
-            if (credential.agents && credential.agents.length) {
+            if ($scope.editedCredential.agents && $scope.editedCredential.agents.length) {
               $scope.allowedAgents = angular.copy($scope.agentsAllowedForCredential);
-              credential.agents = [];
+              $scope.editedCredential.agents = [];
             }
 
             $scope.selectedAgents = {};
           } else if (!angular.equals(copySelectedAgents, $scope.selectedAgents)) {
-            credential.agents = getSelectedAgents($scope.selectedAgents);
+            $scope.editedCredential.agents = getSelectedAgentsIds($scope.selectedAgents);
 
-            var deviceType = findDeviceType(credential.deviceType);
+            var deviceType = findDeviceType($scope.editedCredential.deviceType);
             if (deviceType && deviceType.disabled) {
               deviceType.disabled = false;
             }
-            if (credential.agents && credential.agents.length) {
-              credential.deviceType = 'WORKSTATION';
+            if ($scope.editedCredential.agents && $scope.editedCredential.agents.length) {
+              $scope.editedCredential.deviceType = 'WORKSTATION';
             } else {
-              credential.deviceType = 'NONE';
+              $scope.editedCredential.deviceType = 'NONE';
             }
 
             for (var i = 0; i < $scope.agentsAllowedForCredential.length; i++) {
@@ -350,7 +338,7 @@
           return agentsAllowedForCredential;
         }
 
-        function getSelectedAgents(selected) {
+        function getSelectedAgentsIds(selected) {
           var result = [];
           for (var agentId in selected) {
             if (selected[agentId]) {

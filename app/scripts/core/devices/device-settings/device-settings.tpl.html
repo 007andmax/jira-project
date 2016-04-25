@@ -60,22 +60,20 @@
             <label class="control-label" ng-message="required">Username is required.</label>
           </div>
 
-          <input ng-if="!editedCredential" type="text" class="form-control"
-                 name="login" ng-model="newCredential.login" required>
-          <input ng-if="editedCredential" type="text" class="form-control"
-                 name="login" ng-model="editedCredential.login" required>
+          <input type="text" class="form-control" name="login" ng-model="editedCredential.login" required>
         </div>
 
-        <div class="device-settings-button-assigned" dropdown
-             on-toggle="setSelectedDevices(open)">
-          <button type="button" class="btn btn-default" dropdown-toggle
-                  ng-click="openDropdown()">
+        <div class="device-settings-button-assigned" dropdown on-toggle="setSelectedDevices(open)">
+          <button type="button" class="btn btn-default" dropdown-toggle ng-click="openDropdown()"
+                  ng-disabled="!hasEnabledType(deviceTypes) && !hasEnabledDevice(editedCredential, agentsAllowedForCredential)">
             {{ userReadable() || 'None' }}
-            <span class="caret"></span>
+            <span ng-if="hasEnabledType(deviceTypes) || hasEnabledDevice(editedCredential, agentsAllowedForCredential)"
+                   class="caret"></span>
           </button>
           <div class="dropdown-menu dropdown-menu-tabs" dropdown-menu>
             <ul class="nav nav-justified nav-tabs-dropdown" stop-propagation="click">
-              <li ng-class="{'active': assignedTabOpened === 'DEVICE'}"
+              <li ng-class="{'active': assignedTabOpened === 'DEVICE',
+                            'disabled': !hasEnabledDevice(editedCredential, agentsAllowedForCredential)}"
                   ng-click="setTabOpened('DEVICE')">Device
               </li>
               <li ng-class="{'active': assignedTabOpened === 'TYPE', 'disabled': !hasEnabledType(deviceTypes)}"
@@ -113,10 +111,8 @@
             <label class="control-label" ng-message="required">Password is required.</label>
           </div>
 
-          <input ng-if="!editedCredential" type="password"
-                 class="form-control" name="password" ng-model="newCredential.password" required>
-          <input ng-if="editedCredential" type="password" class="form-control"
-                 name="password" ng-model="editedCredential.password">
+          <input type="password" class="form-control" name="password"
+                 ng-model="editedCredential.password" ng-required="required">
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
@@ -130,20 +126,16 @@
             <label class="control-label" ng-message="required || equal">Passwords are not equal.</label>
           </div>
 
-          <input ng-if="!editedCredential"
-                 type="password" class="form-control" name="passwordConfirm"
-                 ng-model="newCredential.passwordConfirm" required>
-          <input ng-if="editedCredential"
-                 type="password" class="form-control" name="passwordConfirm"
-                 ng-model="editedCredential.passwordConfirm">
+          <input type="password" class="form-control" name="passwordConfirm"
+                 ng-model="editedCredential.passwordConfirm" ng-required="required">
         </div>
 
         <div class="btn btn-lg btn-info" ng-click="updateCredentials(deviceSettingsForm)"
              custom-disabled="{{!!(deviceSettingsForm.$pristine || (triedToSave && deviceSettingsForm.$invalid) || updating)}}">
-          {{ editedCredential ? 'Save' : 'Create' }}
+          {{ selectedCredentialIndex !== undefined ? 'Save' : 'Create' }}
         </div>
-        <div class="btn btn-lg btn-info" ng-if="editedCredential"
-             ng-click="cancelEdit()">
+        <div class="btn btn-lg btn-info" ng-if="selectedCredentialIndex !== undefined"
+             ng-click="cancelEdit(deviceSettingsForm)">
           Cancel
         </div>
       </div>
@@ -155,7 +147,8 @@
             <span class="device-settings-tab-assigned">Assigned</span>
             <span class="device-settings-tab-password">Password</span>
           </li>
-          <li class="right-column-content" ng-repeat="credential in credentials" ng-click="editCredential($index)">
+          <li class="right-column-content" ng-repeat="credential in credentials"
+              ng-click="editCredential($index, deviceSettingsForm)">
             <span>{{credential.login || '\<' + 'unknown' + '\>'}}</span>
             <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
               {{credential.password}}

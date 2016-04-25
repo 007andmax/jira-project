@@ -1235,3 +1235,6 @@ span.sort-span {
 .device-settings-button-assigned .dropdown-menu .tab-content .tab-pane.device-type li.disabled:hover {
   background-color: white;
 }
+.device-settings-button-assigned .nav-tabs-dropdown .disabled {
+  cursor: not-allowed;
+}
