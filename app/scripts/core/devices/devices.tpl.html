@@ -59,7 +59,8 @@
     <div class="company-card" ng-repeat="company in companies" ng-click="srefToCompanyDevices(company.id)"
          ng-class="{'hide': company.isDefault}">
 
-      <div class="company-cover-area">
+      <div class="company-cover-area"
+           ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
 
         <!--<div class="btn btn-archive has-tooltip" data-placement="top" title="" data-container="body" style="position: absolute;"-->
         <!--data-template="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>"-->
@@ -78,10 +79,6 @@
           <div class="company-name">
             <div>{{ company.name }}</div>
           </div>
-
-
-
-
 
           <!--<a href="javascript:void(0)" class="hit-area ha-14-16" stop-propagation="click"-->
              <!--custom-popover custom-popover-content="{{ company.description }}" custom-popover-placement="bottom">-->
