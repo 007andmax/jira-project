@@ -72,6 +72,11 @@
               }
             }
 
+            $scope.agentForInstallId = $scope.agents[0].id;
+            DevicesService.getLastScanDevices($scope, $scope.companyId, $scope.agents[0].agentId, function (resp) {
+              $scope.scanDevices = resp;
+            });
+
           });
 
         });
