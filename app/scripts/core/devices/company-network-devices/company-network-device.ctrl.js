@@ -54,44 +54,6 @@
           })
         };
 
-        $scope.saveNewCredentional = function (isTest) {
-          $scope.savingCredentional = true;
-
-          DevicesService.saveNewCredentialsForDevice({
-            company: CompaniesService.getOneById($scope.companyId),
-            deviceId: $scope.device.id,
-            login: $scope.credential.name,
-            password: $scope.credential.pass
-          }, function () {
-            $scope.credential = {
-              name: $scope.credential.name,
-              pass: $scope.credential.pass
-            };
-            $scope.savingCredentional = false;
-            $scope.isLogOnDrpdwnOpen = false;
-          })
-        };
-
-        $scope.getDeviceUserPass = function () {
-          return $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].password : $scope.defaultPass
-        };
-
-        $scope.getDeviceUserName = function () {
-          return $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].login : $scope.defaultName
-        };
-
-        $scope.restoreDefault = function () {
-          if ($scope.customizeDevices[$scope.device.id]) {
-            $scope.savingCredentional = true;
-
-            DevicesService.deleteDeviceSettings($scope.customizeDevices[$scope.device.id].id, function () {
-              $scope.savingCredentional = false;
-              $scope.isLogOnDrpdwnOpen = false;
-            });
-          }
-
-        };
-
         $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
 
           if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {
@@ -124,15 +86,6 @@
 
           }
         });
-
-        $scope.toogleLogOnDrpdwn = function (isOpen) {
-          if (isOpen) {
-            $scope.credential = {
-              name: $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].login : $scope.defaultName,
-              pass: $scope.customizeDevices[$scope.device.id] ? $scope.customizeDevices[$scope.device.id].password : $scope.defaultPass
-            };
-          }
-        }
 
       }]);
 

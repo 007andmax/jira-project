@@ -53,83 +53,17 @@
       </div>
 
       <div class="col-2">
-        <div class="agent-username" dropdown is-open="isLogOnDrpdwnOpen" on-toggle="toogleLogOnDrpdwn(open)">
+        <div class="agent-username" ng-class="{'no-value': !agent.login}">
 
-              <span ng-hide="customizeAgents[agent.id]">
-                {{ defaultName }}
-              </span>
+          <span>
+            {{ agent.login }}
+          </span>
 
-              <span ng-show="customizeAgents[agent.id]">
-                {{ customizeAgents[agent.id].login || 'USERNAME is not defined' }}
-              </span>
+          <!--<a href="javascript:void(0)" class="hit-area has-tooltip pull-right">-->
+            <!--<i class="icn-sm icn-password-key"></i>-->
+            <!--<i class="icn-sm icn-password-key-unique"></i>-->
+          <!--</a>-->
 
-          <a href="javascript:void(0)"
-             class="hit-area has-tooltip pull-right" dropdown-toggle>
-            <!--tooltip-html-unsafe="<span class='text-muted'>PASSWORD</span><span class='password-txt'>{{ getAgentPass() }}</span>"-->
-            <!--tooltip-placement="right"-->
-
-            <i ng-hide="customizeAgents[agent.id]" class="icn-sm icn-password-key"></i>
-            <i ng-show="customizeAgents[agent.id]" class="icn-sm icn-password-key-unique"></i>
-          </a>
-
-          <div class="dropdown-menu dropdown-menu-right" dropdown-menu
-               ng-form="changeCredentialForm" stop-propagation="click">
-            <div class="dropdown-header caption-heading">
-              Modify Logon Info
-
-              <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
-                 ng-show="customizeAgents[agent.id]"
-                 tooltip-placement="top" tooltip="Restore Default" tooltip-append-to-body="true"
-                 ng-click="restoreDefault()">
-                <i class="icn-sm icn-settings-restore-default"></i>
-              </a>
-
-            </div>
-            <div class="modify-logon-form" ng-init="isShowPass = false">
-
-              <div class="form-group">
-                <input type="text" class="form-control" autocomplete="off"
-                       placeholder="Domain/Username" ng-model="credential.name">
-              </div>
-
-              <div class="form-group">
-
-                <input type="{{ isShowPass ? 'text' : 'password' }}"
-                       class="form-control show-password" autocomplete="new-password"
-                       placeholder="Password" ng-model="credential.pass">
-
-                <a href="javascript:void(0)"
-                   class="show-password-hit hit-area ha-18 has-tooltip" ng-click="isShowPass = !isShowPass"
-                   tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"
-                   tooltip-append-to-body="true">
-                  <i class="icn-sm icn-{{ isShowPass ? 'hide' : 'show' }}-password"></i>
-                </a>
-
-              </div>
-
-              <div class="qt-form-actions">
-
-                <div class="btn btn-info btn-lg" ng-click="saveNewCredentional(false)"
-                     custom-disabled="{{ savingCredentional }}">Reset
-                </div>
-
-                <span>or</span>
-
-                <a href="javascript:void(0)" ng-class="{'hide': savingCredentional}"
-                   ng-click="saveNewCredentional(true)">
-                  Verify Password
-                </a>
-
-                <div class="device-management installing-agent"
-                     style="position: absolute;top: 196px;left: 150px;"
-                     ng-class="{'hide': !savingCredentional}">
-                  <div class="loader"></div>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
 
         </div>
       </div>

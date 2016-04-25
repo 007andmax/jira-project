@@ -17,9 +17,6 @@
           }
         }
 
-        $scope.savingCredentional = false;
-        $scope.isLogOnDrpdwnOpen = false;
-
         $scope.remoteAccess = function (connectionType) {
           if (!$scope.agent.online) {
             throw 'agent must be online'
@@ -30,49 +27,9 @@
           });
         };
 
-        $scope.saveNewCredentional = function (isTest) {
-          $scope.savingCredentional = true;
-
-          DevicesService.sendOrTestCredentials($scope.companyId, $scope.credential.name, $scope.credential.pass, isTest, $scope.agent.id, function () {
-            $scope.credential = {
-              name: $scope.credential.name,
-              pass: $scope.credential.pass
-            };
-            $scope.savingCredentional = false;
-            $scope.isLogOnDrpdwnOpen = false;
-          })
-        };
-
         $scope.updateAgent = function () {
           DevicesService.sendAgentUpdateRequest($scope.companyId, $scope.agent.id)
         };
-
-        $scope.getAgentPass = function () {
-          if (!$scope.customizeAgents) {
-            return $scope.defaultPass || '';
-          }
-          return $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].password : $scope.defaultPass
-        };
-
-        $scope.restoreDefault = function () {
-          if ($scope.customizeAgents[$scope.agent.id]) {
-            $scope.savingCredentional = true;
-
-            DevicesService.deleteDeviceSettings($scope.customizeAgents[$scope.agent.id].id, function () {
-              $scope.savingCredentional = false;
-              $scope.isLogOnDrpdwnOpen = false;
-            })
-          }
-        };
-
-        $scope.toogleLogOnDrpdwn = function (isOpen) {
-          if (isOpen) {
-            $scope.credential = {
-              name: $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].login : $scope.defaultName,
-              pass: $scope.customizeAgents[$scope.agent.id] ? $scope.customizeAgents[$scope.agent.id].password : $scope.defaultPass
-            };
-          }
-        }
 
       }
     ]);
