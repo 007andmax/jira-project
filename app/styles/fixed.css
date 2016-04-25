@@ -1090,13 +1090,15 @@ span.sort-span {
 .device-settings-tab .form-group{
   margin-left: 15px;
   width: 60%;
-  display: inline-block;
+  display: block;
 }
 .device-settings-tab .form-group:first-child{
   width: 70%;
 }
 .device-settings-tab .btn-info{
-  margin-left: 15%;
+  margin-left: 15px;
+  display: inline-block;
+  width: 80px;
 }
 .device-settings-tab .form-right-column{
   background-color: #f1f5fa;
@@ -1204,7 +1206,8 @@ span.sort-span {
   margin: 0 0 15px 15px;
 }
 .device-settings-button-assigned button {
-  width: 30%;
+  width: 160px;
+  background-color: #e7ecf2;
 }
 .right-column-head {
   padding-bottom: 10px;
@@ -1212,6 +1215,17 @@ span.sort-span {
 }
 .form-right-column li.right-column-head, .form-right-column li.right-column-content {
   padding: 10px 130px 10px 10px;
+}
+.form-right-column li.right-column-content{
+  cursor: pointer;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+}
+.form-right-column li.right-column-content:hover{
+  color: #1f2a37;
 }
 .device-settings-button-assigned .dropdown-menu-tabs .nav-tabs-dropdown {
   border-bottom: 1px solid #e7ecf2;

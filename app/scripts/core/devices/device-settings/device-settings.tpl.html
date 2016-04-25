@@ -47,7 +47,41 @@
 
     <div ng-form="deviceSettingsForm">
       <h3 class="devices-settings-title">Network Credentials</h3>
-
+      <div class="device-settings-button-assigned" dropdown
+           on-toggle="setSelectedDevices(open)">
+        <button type="button" class="btn btn-default" dropdown-toggle
+                ng-click="openDropdown()">
+          {{ userReadable() || 'None' }}
+          <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-tabs" dropdown-menu>
+          <ul class="nav nav-justified nav-tabs-dropdown" stop-propagation="click">
+            <li ng-class="{'active': assignedTabOpened === 'DEVICE'}"
+                ng-click="setTabOpened('DEVICE')">Device
+            </li>
+            <li ng-class="{'active': assignedTabOpened === 'TYPE', 'disabled': !hasEnabledType(deviceTypes)}"
+                ng-click="setTabOpened('TYPE')">Device Type
+            </li>
+          </ul>
+          <div class="tab-content">
+            <ul class="tab-pane device-type" ng-show="assignedTabOpened === 'TYPE'">
+              <li ng-repeat="type in deviceTypes"
+                  ng-class="{'disabled': type.disabled}"
+                  ng-click="setDeviceType($index, type.disabled, $event)">{{ type.label }}
+              </li>
+            </ul>
+            <ul class="tab-pane" ng-show="assignedTabOpened === 'DEVICE'" stop-propagation="click">
+              <li ng-repeat="agent in agentsAllowedForCredential | orderBy: 'hostName'">
+                <label class="control checkbox">
+                  <input type="checkbox" ng-model="selectedAgents[agent.id]">
+                  {{ (agent.hostName | unknownFilter) || 'Name is not defined' }}
+                  <span class="control-indicator"></span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="form-left-column">
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'login')}">
 
@@ -66,41 +100,7 @@
                  name="login" ng-model="editedCredential.login" required>
         </div>
 
-        <div class="device-settings-button-assigned" dropdown
-             on-toggle="setSelectedDevices(open)">
-          <button type="button" class="btn btn-default" dropdown-toggle
-                  ng-click="openDropdown()">
-            {{ userReadable() || 'None' }}
-            <span class="caret"></span>
-          </button>
-          <div class="dropdown-menu dropdown-menu-tabs" dropdown-menu>
-            <ul class="nav nav-justified nav-tabs-dropdown" stop-propagation="click">
-              <li ng-class="{'active': assignedTabOpened === 'DEVICE'}"
-                  ng-click="setTabOpened('DEVICE')">Device
-              </li>
-              <li ng-class="{'active': assignedTabOpened === 'TYPE', 'disabled': !hasEnabledType(deviceTypes)}"
-                  ng-click="setTabOpened('TYPE')">Device Type
-              </li>
-            </ul>
-            <div class="tab-content">
-              <ul class="tab-pane device-type" ng-show="assignedTabOpened === 'TYPE'">
-                <li ng-repeat="type in deviceTypes"
-                    ng-class="{'disabled': type.disabled}"
-                    ng-click="setDeviceType($index, type.disabled, $event)">{{ type.label }}
-                </li>
-              </ul>
-              <ul class="tab-pane" ng-show="assignedTabOpened === 'DEVICE'" stop-propagation="click">
-                <li ng-repeat="agent in agentsAllowedForCredential | orderBy: 'hostName'">
-                  <label class="control checkbox">
-                    <input type="checkbox" ng-model="selectedAgents[agent.id]">
-                    {{ (agent.hostName | unknownFilter) || 'Name is not defined' }}
-                    <span class="control-indicator"></span>
-                  </label>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'password')}">
 
