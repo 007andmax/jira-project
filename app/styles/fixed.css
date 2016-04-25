@@ -1089,11 +1089,8 @@ span.sort-span {
 }
 .device-settings-tab .form-group{
   margin-left: 15px;
-  width: 60%;
-  display: block;
-}
-.device-settings-tab .form-group:first-child{
   width: 70%;
+  display: block;
 }
 .device-settings-tab .btn-info{
   margin-left: 15px;
@@ -1104,19 +1101,32 @@ span.sort-span {
   background-color: #f1f5fa;
   border: 1px solid #e7ecf2;
   color: #94A4B8;
-  margin-top: 20px;
 }
-.device-settings-tab .icn-hide-password {
+.device-settings-tab .right-column-content .icn-hide-password {
   display: inline-block;
   position: absolute;
   top: 14px;
   right: 15px;
   cursor: pointer;
 }
-.device-settings-tab .icn-show-password {
+.device-settings-tab .right-column-content .icn-show-password {
   display: inline-block;
   position: absolute;
   top: 16px;
+  right: 15px;
+  cursor: pointer;
+}
+.device-settings-tab .form-left-column .icn-hide-password {
+  display: inline-block;
+  position: absolute;
+  top: 32px;
+  right: 15px;
+  cursor: pointer;
+}
+.device-settings-tab .form-left-column .icn-show-password {
+  display: inline-block;
+  position: absolute;
+  top: 34px;
   right: 15px;
   cursor: pointer;
 }
@@ -1203,10 +1213,12 @@ span.sort-span {
   padding-right: 20px;
 }
 .device-settings-button-assigned {
+  width: 70%;
   margin: 0 0 15px 15px;
 }
 .device-settings-button-assigned button {
-  width: 160px;
+  width: 250px;
+  margin-left: 15px;
   background-color: #e7ecf2;
 }
 .right-column-head {

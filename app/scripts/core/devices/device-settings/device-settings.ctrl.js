@@ -41,14 +41,19 @@
           var allAgentsFromCredentials = [],
             isInCredentials = false;
 
-          for (var i = 0; i < resp.length; i++) {
-            var credential = resp[i],
+          $scope.credentials = resp;
+
+          for (var i = 0, len = $scope.credentials.length; i < len; i++) {
+            var credential = $scope.credentials[i],
               agents = credential.agents;
+
+            if (credential.isDefault || credential.deviceType === 'DOMAIN') {
+              agents = undefined;
+              delete credential.agents;
+            }
+
             if (agents && agents.length) {
               for (var j = 0; j < agents.length; j++) {
-                if (credential.isDefault || credential.deviceType === 'DOMAIN') {
-                  continue;
-                }
                 allAgentsFromCredentials.push(agents[j]);
               }
             }
@@ -77,7 +82,6 @@
             }
           }
 
-          $scope.credentials = resp;
         });
 
         DevicesService.getAgentSettingsByCompany($scope.companyId, function (resp) {
@@ -114,7 +118,6 @@
 
         $scope.setSelectedDevices = function (open) {
           if (!open) {
-            setCredentialAssign();
           }
         };
 
@@ -141,7 +144,7 @@
 
         $scope.$watchCollection('[editedCredential.passwordConfirm, editedCredential.password]', function (values) {
           if ($scope.deviceSettingsForm.password && $scope.deviceSettingsForm.passwordConfirm) {
-            if ($scope.deviceSettingsForm.password.$dirty && $scope.deviceSettingsForm.passwordConfirm.$dirty) {
+            if ($scope.deviceSettingsForm.password.$dirty || $scope.deviceSettingsForm.passwordConfirm.$dirty) {
               $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', values[0] === values[1]);
             }
           }
@@ -152,17 +155,32 @@
             confirmButton = 'Delete';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            var agents = $scope.credentials[index].agents;
+
+            for (var i = 0; i < agents.length; i++) {
+              var agentId = agents[i];
+              $scope.allowedAgents.push(getAgentById(agentId));
+            }
+
             $scope.credentials.splice(index, 1);
+            $scope.editedCredential = {
+              deviceType: 'NONE'
+            };
+            $scope.selectedCredentialIndex = undefined;
             saveCredentials();
           });
         };
 
         $scope.updateCredentials = function (form) {
+          $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal',
+            $scope.editedCredential.passwordConfirm === $scope.editedCredential.password);
           if (form.$valid) {
+            $scope.triedToSave = false;
+            setCredentialAssign();
 
             delete $scope.editedCredential.passwordConfirm;
 
-            if (!$scope.selectedCredentialIndex) {
+            if ($scope.selectedCredentialIndex === undefined) {
               $scope.editedCredential.company = {
                 id: $scope.companyId
               };
@@ -177,12 +195,12 @@
             }
 
             saveCredentials(function () {
-              form.$setPristine();
               $scope.editedCredential = {
                 deviceType: 'NONE'
               };
               $scope.selectedCredentialIndex = undefined;
               $scope.required = true;
+              form.$setPristine();
             });
           } else {
             $scope.triedToSave = true;
@@ -235,7 +253,7 @@
           if (type === 'WORKSTATION') {
             if (credential.agents && credential.agents.length < 2) {
 
-              return $filter('unknownFilter')(getAgentNameById(credential.agents[0])) || 'Name is not defined';
+              return $filter('unknownFilter')(getAgentById(credential.agents[0]).hostName) || 'Name is not defined';
             } else {
               return credential.agents ? credential.agents.length : '';
             }
@@ -271,7 +289,7 @@
         $scope.editCredential = function (index, form) {
           $scope.selectedCredentialIndex = index;
           $scope.editedCredential = angular.copy($scope.credentials[index]);
-          delete $scope.editedCredential.password;
+          $scope.editedCredential.passwordConfirm = $scope.editedCredential.password;
           $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
           $scope.required = false;
           form.$setPristine();
@@ -281,6 +299,7 @@
           $scope.editedCredential = {
             deviceType: 'NONE'
           };
+          $scope.selectedCredentialIndex = undefined;
           $scope.required = true;
           form.$setPristine();
         };
@@ -348,11 +367,11 @@
           return result;
         }
 
-        function getAgentNameById(id) {
+        function getAgentById(id) {
           for (var i = 0, len = $scope.agents.length; i < len; i++) {
             var agent = $scope.agents[i];
             if (agent.id === id) {
-              return agent.hostName;
+              return agent;
             }
           }
         }

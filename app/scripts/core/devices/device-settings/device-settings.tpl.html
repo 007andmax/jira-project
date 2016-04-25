@@ -49,28 +49,22 @@
       <h3 class="devices-settings-title">Network Credentials</h3>
 
       <div class="form-left-column">
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'login')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'login')}">
-            Username &nbsp;<span class="text-muted">domain\username</span>
+        <div class="device-settings-button-assigned" dropdown>
+
+          <label class="control-label" style="vertical-align: middle">
+            Assign
           </label>
 
-          <div ng-messages="deviceSettingsForm.login.$error"
-               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'login')}">
-            <label class="control-label" ng-message="required">Username is required.</label>
-          </div>
-
-          <input type="text" class="form-control" name="login" ng-model="editedCredential.login" required>
-        </div>
-
-        <div class="device-settings-button-assigned" dropdown on-toggle="setSelectedDevices(open)">
           <button type="button" class="btn btn-default" dropdown-toggle ng-click="openDropdown()"
-                  ng-disabled="!hasEnabledType(deviceTypes) && !hasEnabledDevice(editedCredential, agentsAllowedForCredential)">
+                  ng-disabled="!hasEnabledType(deviceTypes) && !hasEnabledDevice(editedCredential, agentsAllowedForCredential)
+                              || editedCredential.isDefault || editedCredential.deviceType === 'DOMAIN'">
             {{ userReadable() || 'None' }}
-            <span ng-if="hasEnabledType(deviceTypes) || hasEnabledDevice(editedCredential, agentsAllowedForCredential)"
-                   class="caret"></span>
+            <span ng-if="!(editedCredential.isDefault || editedCredential.deviceType === 'DOMAIN') &&
+                        (hasEnabledType(deviceTypes) || hasEnabledDevice(editedCredential, agentsAllowedForCredential))"
+                  class="caret"></span>
           </button>
-          <div class="dropdown-menu dropdown-menu-tabs" dropdown-menu>
+          <div class="dropdown-menu dropdown-menu-tabs" dropdown-menu style="left: 56px">
             <ul class="nav nav-justified nav-tabs-dropdown" stop-propagation="click">
               <li ng-class="{'active': assignedTabOpened === 'DEVICE',
                             'disabled': !hasEnabledDevice(editedCredential, agentsAllowedForCredential)}"
@@ -100,6 +94,20 @@
           </div>
         </div>
 
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'login')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'login')}">
+            Username &nbsp;<span class="text-muted">domain\username</span>
+          </label>
+
+          <div ng-messages="deviceSettingsForm.login.$error"
+               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'login')}">
+            <label class="control-label" ng-message="required">Username is required.</label>
+          </div>
+
+          <input type="text" class="form-control" name="login" ng-model="editedCredential.login" required>
+        </div>
+
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'password')}">
 
           <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'password')}">
@@ -111,8 +119,12 @@
             <label class="control-label" ng-message="required">Password is required.</label>
           </div>
 
-          <input type="password" class="form-control" name="password"
+          <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" name="password"
                  ng-model="editedCredential.password" ng-required="required">
+
+          <span ng-click="showPassword = !showPassword" ng-show="editedCredential.password">
+                <i class="icn-sm {{ showPassword ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+          </span>
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
@@ -126,7 +138,7 @@
             <label class="control-label" ng-message="required || equal">Passwords are not equal.</label>
           </div>
 
-          <input type="password" class="form-control" name="passwordConfirm"
+          <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" name="passwordConfirm"
                  ng-model="editedCredential.passwordConfirm" ng-required="required">
         </div>
 
@@ -160,10 +172,9 @@
               {{ userReadable($index) || 'None' }}
             </div>
             <span class="device-settings-actions" stop-propagation="click">
-              <span ng-show="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
-                <i class="icn-sm icn-hide-password"></i></span>
-              <span ng-hide="passwordShown[$index]" ng-click="passwordShown[$index] = !passwordShown[$index]">
-                <i class="icn-sm icn-show-password"></i></span>
+              <span ng-click="passwordShown[$index] = !passwordShown[$index]">
+                <i class="icn-sm {{ passwordShown[$index] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+              </span>
               <span ng-if="!credential.isDefault" ng-click="removeCredential($index)">
                 <i class="icn-sm icn-remove-token"></i></span>
             </span>

@@ -9584,12 +9584,12 @@ button.close {
   opacity: 0 !important;
 }
 .form-left-column {
-  width: 50%;
+  width: 43%;
   float: left;
 }
 .form-right-column {
-  width: 45%;
-  min-height: 185px;
+  width: 57%;
+  min-height: 257px;
   float: right;
 }
 .device-settings-button-assigned .dropdown-menu-tabs {
