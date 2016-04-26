@@ -819,8 +819,9 @@
                       <input class="form-control show-password" type="{{ isShowPass ? 'text' : 'password' }}"
                              ng-model="editCompany.credential.password">
                       <a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"
-                         tooltip-placement="top" tooltip="Show Password" ng-click="isShowPass = !isShowPass">
-                        <i class="icn-sm icn-show-password"></i></a>
+                         tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password" ng-click="isShowPass = !isShowPass">
+                        <i class="icn-sm" ng-class="{'icn-hide-password': isShowPass, 'icn-show-password': !isShowPass}"></i>
+                      </a>
                     </div>
                   </div>
 
