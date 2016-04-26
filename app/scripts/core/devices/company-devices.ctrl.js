@@ -12,6 +12,9 @@
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
           agentCallbackCount = 0;
 
+        var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
+        rightPanelSharedState.companyId = $stateParams.companyId;
+
         $scope.credential = {
           name: '',
           pass: ''
@@ -191,6 +194,11 @@
         }, function (val) {
           $scope.isScanDevicesLoad = val !== 'finished';
         });
+
+        $scope.$on('$destroy', function () {
+          rightPanelSharedState.companyId = undefined;
+        });
+
 
       }]);
 
