@@ -1264,3 +1264,49 @@ span.sort-span {
 .device-settings-button-assigned .nav-tabs-dropdown .disabled {
   cursor: not-allowed;
 }
+
+@media screen and (min-width: 2000px){
+  .qt-network-scan.network-scan-tab>li>.col-1{
+    width: calc(100% - 890px);
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .qt-network-scan.network-scan-tab>li>.col-3{
+    width: 200px;
+  }
+  .qt-network-scan.network-scan-tab>li>.col-4{
+    width: 200px;
+  }
+  .qt-network-scan.network-scan-tab>li>.col-5{
+    width: 200px;
+  }
+  .qt-network-scan.network-scan-tab>li>.col-2{
+    width: 180px;
+  }
+}
+
+@media screen and (max-width: 1700px){
+  .qt-network-scan.network-scan-tab>li>.col-3{
+    width: 180px;
+  }
+  .qt-network-scan.network-scan-tab>li>.col-4{
+    width: 180px;
+  }
+  .qt-network-scan.network-scan-tab>li>.col-5{
+    width: 180px;
+  }
+}
+
+@media screen and (max-width: 1500px){
+  .qt-network-scan.network-scan-tab>li>.col-3{
+    width: 160px;
+  }
+  .qt-network-scan.network-scan-tab>li>.col-4{
+    width: 170px;
+  }
+  .qt-network-scan.network-scan-tab>li>.col-5{
+    width: 170px;
+  }
+}
+
