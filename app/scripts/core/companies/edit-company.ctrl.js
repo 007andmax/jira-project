@@ -75,6 +75,13 @@
 
             $scope.editCompany = companyData.staticCopy();
 
+            if (!$scope.editCompany.credential) {
+              $scope.editCompany.credential = {
+                login: '',
+                password: ''
+              }
+            }
+
             TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
               $scope.techCompanyTax = angular.copy(resp);
 
@@ -87,10 +94,14 @@
 
         } else {
           $scope.editCompany = {
-            addresses: [{ isPrimary: true }],
+            addresses: [{isPrimary: true}],
             contacts: [getEmptyContact()],
             companyAssociations: [],
-            services: []
+            services: [],
+            credential: {
+              login: '',
+              password: ''
+            }
           };
 
           TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
@@ -153,7 +164,7 @@
 
             CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companyProfile', { companyId: resp.id || resp });
+              $state.go('companyProfile', {companyId: resp.id || resp});
             })
           } else {
             $scope.triedToSave = true;
@@ -326,7 +337,7 @@
 
         $scope.changeInvoiceSubscription = function (val) {
 
-          if(!($scope.editCompany && $scope.editCompany.contacts && $scope.editCompany.contacts.length > 0)){
+          if (!($scope.editCompany && $scope.editCompany.contacts && $scope.editCompany.contacts.length > 0)) {
             return;
           }
 
@@ -443,7 +454,7 @@
 
         function getEmptyContact() {
           return {
-            subscription: { invoice: true },
+            subscription: {invoice: true},
             avatar: {
               scale: 50
             }
