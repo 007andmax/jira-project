@@ -9593,13 +9593,11 @@ button.close {
   width: 43%;
   float: left;
 }
-.form-right-column {
-  width: 57%;
-  min-height: 257px;
-  float: right;
+.form-right-column .right-column-content.selected {
+  background-color: #f1f5fa;
 }
 .device-settings-button-assigned .dropdown-menu-tabs {
-  width: 250px;
+  width: 100%;
 }
 .device-settings-button-assigned .nav-tabs-dropdown li {
   padding: 15px;
@@ -9615,4 +9613,7 @@ button.close {
 }
 .device-settings-button-assigned .nav-tabs-dropdown li.active {
   background-color: white;
+}
+.device-settings-button-assigned .tab-content .tab-pane {
+  display: unset;
 }

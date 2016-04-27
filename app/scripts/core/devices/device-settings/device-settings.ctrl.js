@@ -5,10 +5,12 @@
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.deviceSettingsCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$filter',
       function ($scope, DevicesService, UserConfirmationsService, $filter) {
-        var copySelectedAgents = {};
+        var copySelectedAgents = {},
+          copySelectedDevices = {},
+          scannedDevices = $scope.scanDevices.networkScan.devices;
 
-        $scope.deviceTypeUpdated = false;
-        $scope.required = true;
+        $scope.credentialTypeUpdated = false;
+        $scope.assignRequiredError = false;
 
         $scope.triedToSave = false;
         $scope.rescanIntervals = [
@@ -18,7 +20,13 @@
           { label: '7 days', value: 604800000 },
           { label: '30 days', value: 18144000000 }
         ];
-        $scope.deviceTypes = [{
+        $scope.credentialTypes = [{
+          label: 'Domain',
+          disabled: false
+        }, {
+          label: 'User',
+          disabled: false
+        }, {
           label: 'Router',
           disabled: false
         }, {
@@ -29,59 +37,18 @@
           disabled: false
         }];
 
-        $scope.editedCredential = {
-          deviceType: 'NONE'
-        };
+        $scope.editedCredential = {};
         $scope.passwordShown = [];
         $scope.agentsAllowedForCredential = [];
+        $scope.devicesAllowedForCredential = [];
         $scope.allowedAgents = [];
+        $scope.allowedDevices = [];
         $scope.selectedAgents = {};
+        $scope.selectedDevices = {};
 
         DevicesService.getCredentialsByCompany($scope.companyId, function (resp) {
-          var allAgentsFromCredentials = [],
-            isInCredentials = false;
-
           $scope.credentials = angular.copy(resp);
-
-          for (var i = 0, len = $scope.credentials.length; i < len; i++) {
-            var credential = $scope.credentials[i],
-              agents = credential.agents;
-
-            if (credential.isDefault || credential.deviceType === 'DOMAIN') {
-              agents = undefined;
-              delete credential.agents;
-            }
-
-            if (agents && agents.length) {
-              for (var j = 0; j < agents.length; j++) {
-                allAgentsFromCredentials.push(agents[j]);
-              }
-            }
-
-            if (credential.deviceType !== 'DOMAIN') {
-              var type = findDeviceType(credential.deviceType);
-              if (type && !type.disabled) {
-                type.disabled = true;
-              }
-            }
-          }
-
-          for (var k = 0, len = $scope.agents.length; k < len; k++) {
-            var agent = $scope.agents[k];
-            isInCredentials = false;
-            for (var i = 0; i < allAgentsFromCredentials.length; i++) {
-              var agentFromCredentials = allAgentsFromCredentials[i];
-
-              if (agentFromCredentials === agent.id) {
-                isInCredentials = true;
-                break;
-              }
-            }
-            if (!isInCredentials) {
-              $scope.allowedAgents.push(agent);
-            }
-          }
-
+          resetPermissions();
         });
 
         DevicesService.getAgentSettingsByCompany($scope.companyId, function (resp) {
@@ -101,15 +68,20 @@
 
         $scope.setDeviceType = function (typeIndex, disabled, event) {
           if (!disabled) {
-            var type = $scope.deviceTypes[typeIndex];
+            var type = $scope.credentialTypes[typeIndex];
 
-            if ($scope.editedCredential.deviceType !== 'NONE' && $scope.editedCredential.deviceType !== 'WORKSTATION') {
-              findDeviceType($scope.editedCredential.deviceType).disabled = false;
+            if ($scope.editedCredential.credentialType !== 'USER' && $scope.editedCredential.credentialType !== 'WORKSTATION') {
+              var credentialType = findDeviceType($scope.editedCredential.credentialType);
+              if (credentialType && credentialType.disabled) {
+                credentialType.disabled = false;
+              }
             }
 
-            $scope.editedCredential.deviceType = type.label.toUpperCase();
-            type.disabled = true;
-            $scope.deviceTypeUpdated = true;
+            $scope.editedCredential.credentialType = type.label.toUpperCase();
+            if ($scope.editedCredential.credentialType !== 'USER') {
+              type.disabled = true;
+            }
+            $scope.credentialTypeUpdated = true;
             $scope.deviceSettingsForm.$setDirty();
           } else {
             event.stopPropagation();
@@ -124,21 +96,22 @@
           }
         };
 
-        $scope.hasEnabledType = function (deviceTypes) {
-          for (var i = 0, len = deviceTypes.length; i < len; i++) {
-            if (!deviceTypes[i].disabled) {
+        $scope.hasEnabledType = function (credentialTypes) {
+          for (var i = 0, len = credentialTypes.length; i < len; i++) {
+            if (!credentialTypes[i].disabled) {
               return true;
             }
           }
           return false;
         };
 
-        $scope.hasEnabledDevice = function (credential, agentsAllowedForCredential) {
-          return agentsAllowedForCredential.length || (credential.agents && credential.agents.length);
+        $scope.hasEnabledDevice = function (credential) {
+          return $scope.agentsAllowedForCredential.length || $scope.devicesAllowedForCredential.length
+            || (credential.devices && credential.devices.length);
         };
 
         $scope.setTabOpened = function (tab) {
-          if (tab === 'TYPE' && $scope.hasEnabledType($scope.deviceTypes)) {
+          if (tab === 'TYPE' && $scope.hasEnabledType($scope.credentialTypes)) {
             $scope.assignedTabOpened = 'TYPE';
           } else if ($scope.hasEnabledDevice($scope.editedCredential, $scope.agentsAllowedForCredential)) {
             $scope.assignedTabOpened = 'DEVICE';
@@ -154,22 +127,33 @@
         });
 
         $scope.removeCredential = function (index) {
-          var confirmMesage = 'Do you want to delete ' + $scope.credentials[index].login + '?',
+          var confirmMessage = 'Do you want to delete ' + $scope.credentials[index].login + '?',
             confirmButton = 'Delete';
 
-          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            var agents = $scope.credentials[index].agents;
+          UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+            var devices = $scope.credentials[index].devices;
 
-            for (var i = 0; i < agents.length; i++) {
-              var agentId = agents[i];
-              $scope.allowedAgents.push(getAgentById(agentId));
+            if (devices && devices.length) {
+              for (var i = 0; i < devices.length; i++) {
+                var device = devices[i];
+
+                if (device.deviceId) {
+                  $scope.allowedAgents.push(getAgentById(device.deviceId));
+                } else {
+                  $scope.allowedDevices.push(getDeviceById(device.netscanId));
+                }
+              }
             }
 
             $scope.credentials.splice(index, 1);
-            $scope.editedCredential = {
-              deviceType: 'NONE'
-            };
+
+            $scope.selectedAgents = {};
+            copySelectedAgents = {};
+            $scope.selectedDevices = {};
+            copySelectedDevices = {};
+            $scope.editedCredential = {};
             delete $scope.selectedCredentialIndex;
+            $scope.triedToSave = false;
             saveCredentials();
           });
         };
@@ -177,7 +161,8 @@
         $scope.updateCredentials = function (form) {
           $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal',
             $scope.editedCredential.passwordConfirm === $scope.editedCredential.password);
-          if (form.$valid) {
+          $scope.assignRequiredError = !$scope.editedCredential.credentialType;
+          if (form.$valid && !$scope.assignRequiredError) {
             $scope.triedToSave = false;
             setCredentialAssign();
 
@@ -198,11 +183,8 @@
             }
 
             saveCredentials(function () {
-              $scope.editedCredential = {
-                deviceType: 'NONE'
-              };
+              $scope.editedCredential = {};
               delete $scope.selectedCredentialIndex;
-              $scope.required = true;
               form.$setPristine();
             });
           } else {
@@ -229,46 +211,332 @@
           DevicesService.updateAgentSettings(settings);
         };
 
-        $scope.isInCredential = function (credential, agentId) {
-          var agentsFromCredential = credential.agents;
-
-          if (agentsFromCredential) {
-            for (var i = 0; i < agentsFromCredential.length; i++) {
-              var id = agentsFromCredential[i];
-              if (id === agentId) {
-                return true;
-              }
-            }
-          }
-
-          return false;
-        };
-
         $scope.userReadable = function (index) {
           var type, credential;
-          if (index || index === 0) {
+          if (index !== undefined) {
             credential = $scope.credentials[index];
           } else {
             credential = $scope.editedCredential;
           }
 
-          type = credential.deviceType;
+          type = credential.credentialType;
           if (type === 'WORKSTATION') {
-            if (credential.agents && credential.agents.length < 2) {
+            if (index === undefined || credential.devices.length < 2) {
+              var result = '';
 
-              return $filter('unknownFilter')(getAgentById(credential.agents[0]).hostName) || 'Name is not defined';
+              if (credential.devices) {
+                for (var i = 0, len = credential.devices.length; i < len;) {
+                  var deviceIds = credential.devices[i];
+
+                  if (deviceIds.netscanId) {
+                    var device = getDeviceById(deviceIds.netscanId);
+                    result += $filter('unknownFilter')(device.hostName) || device.ipAddress;
+                    if (++i !== len) {
+                      result += '; ';
+                    }
+                  } else {
+                    var agent = getAgentById(deviceIds.deviceId);
+                    result += $filter('unknownFilter')(agent.hostName) || agent.ip;
+                    if (++i !== len) {
+                      result += '; ';
+                    }
+                  }
+
+                }
+              }
+
+              return result || 'Assign';
             } else {
-              return credential.agents ? credential.agents.length : '';
+              return credential.devices.length;
             }
-          } else {
+          } else if (type) {
             return type.slice(0, 1) + type.slice(1).toLowerCase();
           }
         };
 
-        $scope.getAgentsByIds = function (agentsIds) {
+        $scope.openDropdown = function () {
+          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
+          $scope.devicesAllowedForCredential = getAllowedDevicesForCredential($scope.editedCredential);
+          $scope.setTabOpened($scope.hasEnabledType($scope.credentialTypes) ? 'TYPE' : 'DEVICE');
+          $scope.credentialTypeUpdated = false;
+        };
+
+        $scope.editCredential = function (index, form) {
+          resetPermissions();
+
+          $scope.selectedAgents = {};
+          copySelectedAgents = {};
+          $scope.selectedDevices = {};
+          copySelectedDevices = {};
+
+          $scope.selectedCredentialIndex = index;
+          $scope.editedCredential = angular.copy($scope.credentials[index]);
+          $scope.editedCredential.passwordConfirm = $scope.editedCredential.password;
+          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
+          $scope.devicesAllowedForCredential = getAllowedDevicesForCredential($scope.editedCredential);
+          $scope.triedToSave = true;
+          form.$setPristine();
+        };
+
+        $scope.cancelEdit = function (form) {
+          copySelectedAgents = {};
+          copySelectedDevices = {};
+          $scope.selectedAgents = {};
+          $scope.selectedDevices = {};
+          $scope.editedCredential = {};
+          delete $scope.selectedCredentialIndex;
+
+          resetPermissions();
+          $scope.triedToSave = false;
+          form.$setPristine();
+        };
+
+        function setCredentialAssign() {
+          var selectedAgentsChanged = !angular.equals(copySelectedAgents, $scope.selectedAgents),
+            selectedDevicesChanged = !angular.equals(copySelectedDevices, $scope.selectedDevices);
+
+          if ($scope.credentialTypeUpdated) {
+
+            if ($scope.editedCredential.devices && $scope.editedCredential.devices.length) {
+              $scope.allowedAgents = angular.copy($scope.agentsAllowedForCredential);
+              $scope.allowedDevices = angular.copy($scope.devicesAllowedForCredential);
+              $scope.editedCredential.devices = [];
+            }
+            $scope.assignRequiredError = false;
+
+          } else if (selectedAgentsChanged || selectedDevicesChanged) {
+
+            $scope.editedCredential.devices = getSelectedDevices($scope.selectedAgents, $scope.selectedDevices);
+
+            var credentialType = findDeviceType($scope.editedCredential.credentialType);
+            if (credentialType && credentialType.disabled) {
+              credentialType.disabled = false;
+            }
+
+            for (var i = 0; i < $scope.agentsAllowedForCredential.length; i++) {
+              var agent = $scope.agentsAllowedForCredential[i],
+                isAgentSelected = $scope.selectedAgents[agent.id],
+                isAgentWasSelected = copySelectedAgents[agent.id];
+
+              if (isAgentSelected && !isAgentWasSelected) {
+                $scope.allowedAgents.splice($scope.allowedAgents.indexOf(agent), 1);
+              } else if (!isAgentSelected && isAgentWasSelected) {
+                $scope.allowedAgents.push(agent);
+              }
+            }
+
+            for (var i = 0; i < $scope.devicesAllowedForCredential.length; i++) {
+              var device = $scope.devicesAllowedForCredential[i],
+                isDeviceSelected = $scope.selectedDevices[device.id],
+                isDeviceWasSelected = copySelectedDevices[device.id];
+
+              if (isDeviceSelected && !isDeviceWasSelected) {
+                $scope.allowedDevices.splice($scope.allowedDevices.indexOf(device), 1);
+              } else if (!isDeviceSelected && isDeviceWasSelected) {
+                $scope.allowedDevices.push(device);
+              }
+            }
+
+
+            if ($scope.editedCredential.devices && $scope.editedCredential.devices.length) {
+              $scope.editedCredential.credentialType = 'WORKSTATION';
+              $scope.assignRequiredError = false;
+            } else {
+              delete $scope.editedCredential.credentialType;
+            }
+          }
+
+          copySelectedAgents = {};
+          copySelectedDevices = {};
+          $scope.selectedAgents = {};
+          $scope.selectedDevices = {};
+          $scope.needSetAssign = false;
+        }
+
+        function resetPermissions() {
+          var allAgentsFromCredentials = [],
+            excludedDevices = [],
+            isAgentInCredentials = false,
+            isDeviceInCredentials = false;
+
+          $scope.allowedAgents = [];
+          $scope.allowedDevices = [];
+
+          for (var i = 0, len = $scope.credentialTypes.length; i < len; i++) {
+            var type = $scope.credentialTypes[i];
+            type.disabled = false;
+          }
+
+          for (var i = 0, len = $scope.credentials.length; i < len; i++) {
+            var credential = $scope.credentials[i],
+              devices = credential.devices;
+
+            if (credential.isDefault || credential.credentialType === 'DOMAIN') {
+              devices = undefined;
+              delete credential.devices;
+            }
+
+            if (devices && devices.length) {
+              for (var j = 0; j < devices.length; j++) {
+                var device = devices[j];
+                if (device.deviceId) {
+                  allAgentsFromCredentials.push(device.deviceId);
+                } else {
+                  excludedDevices.push(device.netscanId);
+                }
+              }
+            }
+
+            if (credential.credentialType !== 'USER') {
+              var type = findDeviceType(credential.credentialType);
+              if (type && !type.disabled) {
+                type.disabled = true;
+              }
+            }
+          }
+
+          for (var k = 0, len = $scope.agents.length; k < len; k++) {
+            var agent = $scope.agents[k];
+            isAgentInCredentials = false;
+            for (var i = 0; i < allAgentsFromCredentials.length; i++) {
+              var agentFromCredentials = allAgentsFromCredentials[i];
+
+              if (agentFromCredentials === agent.id) {
+                isAgentInCredentials = true;
+                break;
+              }
+            }
+
+            for (var j = 0; j < scannedDevices.length; j++) {
+              var device = scannedDevices[j];
+
+              if (device.deviceId === agent.id) {
+                excludedDevices.push(device.id)
+              }
+            }
+
+            if (!isAgentInCredentials) {
+              $scope.allowedAgents.push(agent);
+            }
+          }
+
+          for (var i = 0; i < scannedDevices.length; i++) {
+            var device = scannedDevices[i];
+            isDeviceInCredentials = false;
+
+            for (var j = 0; j < excludedDevices.length; j++) {
+              var deviceFromCredentials = excludedDevices[j];
+
+              if (deviceFromCredentials === device.id) {
+                isDeviceInCredentials = true;
+                break;
+              }
+            }
+            if (!isDeviceInCredentials) {
+              $scope.allowedDevices.push(device);
+            }
+          }
+        }
+
+        function getAllowedAgentsForCredential(credential) {
+          var agentIds = [];
+
+          if (credential.devices) {
+            for (var i = 0, len = credential.devices.length; i < len; i++) {
+              var id = credential.devices[i].deviceId;
+              if (id) {
+                agentIds.push(id);
+              }
+            }
+          }
+
+          var agentsAllowedForCredential = $scope.allowedAgents.concat(getAgentsByIds(agentIds)),
+            len = agentsAllowedForCredential.length;
+
+          if (len) {
+            for (var i = 0; i < len; i++) {
+              var agent = agentsAllowedForCredential[i],
+                isInCredential = isAgentInCredential(agentIds, agent.id);
+              if (isInCredential) {
+                $scope.selectedAgents[agent.id] = isInCredential;
+                copySelectedAgents[agent.id] = isInCredential;
+              }
+            }
+          } else {
+            copySelectedAgents = {};
+            $scope.selectedAgents = {};
+          }
+
+          return agentsAllowedForCredential;
+        }
+
+        function getAllowedDevicesForCredential(credential) {
+          var netscansIds = [];
+
+          if (credential.devices) {
+            for (var i = 0, len = credential.devices.length; i < len; i++) {
+              var id = credential.devices[i].netscanId;
+              if (id) {
+                netscansIds.push(id);
+              }
+            }
+          }
+
+          var devicesAllowedForCredential = $scope.allowedDevices.concat(getDevicesByIds(netscansIds)),
+            len = devicesAllowedForCredential.length;
+
+          if (len) {
+            for (var i = 0; i < len; i++) {
+              var device = devicesAllowedForCredential[i],
+                isInCredential = isDeviceInCredential(netscansIds, device.id);
+              if (isInCredential) {
+                $scope.selectedDevices[device.id] = isInCredential;
+                copySelectedDevices[device.id] = isInCredential;
+              }
+            }
+          } else {
+            copySelectedDevices = {};
+            $scope.selectedDevices = {};
+          }
+
+          return devicesAllowedForCredential;
+        }
+
+        function getSelectedDevices(selectedAgents, selectedNetScans) {
+          var result = [],
+            agentIds = [],
+            agents;
+
+          for (var id in selectedAgents) {
+            if (selectedAgents[id]) {
+              agentIds.push(id);
+            }
+          }
+
+          agents = getAgentsByIds(agentIds);
+          for (var i = 0; i < agents.length; i++) {
+            var agent = agents[i];
+            result.push({
+              agentId: agent.agentId,
+              deviceId: agent.id
+            });
+          }
+
+          for (var id in selectedNetScans) {
+            if (selectedNetScans[id]) {
+              result.push({
+                netscanId: id
+              });
+            }
+          }
+
+          return result;
+        }
+
+        function getAgentsByIds(agentsIds) {
           var result = [];
 
-          if (agentsIds) {
+          if (agentsIds && agentsIds.length) {
             for (var i = 0; i < agentsIds.length; i++) {
               var id = agentsIds[i];
               for (var j = 0, len = $scope.agents.length; j < len; j++) {
@@ -281,93 +549,23 @@
           }
 
           return result;
-        };
+        }
 
-        $scope.openDropdown = function () {
-          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
-          $scope.setTabOpened($scope.hasEnabledType($scope.deviceTypes) ? 'TYPE' : 'DEVICE');
-          $scope.deviceTypeUpdated = false;
-        };
+        function getDevicesByIds(devicesIds) {
+          var result = [];
 
-        $scope.editCredential = function (index, form) {
-          $scope.selectedCredentialIndex = index;
-          $scope.editedCredential = angular.copy($scope.credentials[index]);
-          $scope.editedCredential.passwordConfirm = $scope.editedCredential.password;
-          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
-          $scope.required = false;
-          form.$setPristine();
-        };
-
-        $scope.cancelEdit = function (form) {
-          $scope.editedCredential = {
-            deviceType: 'NONE'
-          };
-          delete $scope.selectedCredentialIndex;
-          $scope.required = true;
-          form.$setPristine();
-        };
-
-        function setCredentialAssign() {
-          if ($scope.deviceTypeUpdated) {
-            if ($scope.editedCredential.agents && $scope.editedCredential.agents.length) {
-              $scope.allowedAgents = angular.copy($scope.agentsAllowedForCredential);
-              $scope.editedCredential.agents = [];
-            }
-
-            $scope.selectedAgents = {};
-          } else if (!angular.equals(copySelectedAgents, $scope.selectedAgents)) {
-            $scope.editedCredential.agents = getSelectedAgentsIds($scope.selectedAgents);
-
-            var deviceType = findDeviceType($scope.editedCredential.deviceType);
-            if (deviceType && deviceType.disabled) {
-              deviceType.disabled = false;
-            }
-            if ($scope.editedCredential.agents && $scope.editedCredential.agents.length) {
-              $scope.editedCredential.deviceType = 'WORKSTATION';
-            } else {
-              $scope.editedCredential.deviceType = 'NONE';
-            }
-
-            for (var i = 0; i < $scope.agentsAllowedForCredential.length; i++) {
-              var agent = $scope.agentsAllowedForCredential[i];
-
-              if ($scope.selectedAgents[agent.id]) {
-                $scope.allowedAgents.splice($scope.allowedAgents.indexOf(agent), 1);
-              } else {
-                $scope.allowedAgents.push(agent);
+          if (devicesIds && devicesIds.length) {
+            for (var i = 0; i < devicesIds.length; i++) {
+              var id = devicesIds[i];
+              for (var j = 0, len = scannedDevices.length; j < len; j++) {
+                var device = scannedDevices[j];
+                if (id === device.id) {
+                  result.push(device);
+                }
               }
             }
-
-            $scope.selectedAgents = {};
-          }
-          $scope.needSetAssign = false;
-        }
-
-        function getAllowedAgentsForCredential(credential) {
-          var agentsAllowedForCredential = $scope.allowedAgents.concat($scope.getAgentsByIds(credential.agents));
-
-          var len = agentsAllowedForCredential.length;
-          if (len) {
-            for (var i = 0; i < len; i++) {
-              var agent = agentsAllowedForCredential[i];
-              $scope.selectedAgents[agent.id] = $scope.isInCredential(credential, agent.id);
-              copySelectedAgents[agent.id] = $scope.selectedAgents[agent.id];
-            }
-          } else {
-            copySelectedAgents = {};
-            $scope.selectedAgents = {};
           }
 
-          return agentsAllowedForCredential;
-        }
-
-        function getSelectedAgentsIds(selected) {
-          var result = [];
-          for (var agentId in selected) {
-            if (selected[agentId]) {
-              result.push(agentId);
-            }
-          }
           return result;
         }
 
@@ -380,11 +578,48 @@
           }
         }
 
+        function getDeviceById(id) {
+          for (var i = 0, len = scannedDevices.length; i < len; i++) {
+            var device = scannedDevices[i];
+            if (device.id === id) {
+              return device;
+            }
+          }
+        }
+
+        function isAgentInCredential(agentIds, agentId) {
+          if (agentIds && agentIds.length) {
+            for (var i = 0; i < agentIds.length; i++) {
+              var id = agentIds[i];
+              if (id === agentId) {
+                return true;
+              }
+            }
+          }
+
+          return false;
+        }
+
+        function isDeviceInCredential(netscansIds, deviceId) {
+          if (netscansIds && netscansIds.length) {
+            for (var i = 0; i < netscansIds.length; i++) {
+              var id = netscansIds[i];
+              if (id === deviceId) {
+                return true;
+              }
+            }
+          }
+
+          return false;
+        }
+
         function findDeviceType(name) {
-          for (var i = 0, len = $scope.deviceTypes.length; i < len; i++) {
-            var type = $scope.deviceTypes[i];
-            if (type.label.toLowerCase() === name.toLowerCase()) {
-              return type;
+          if (name) {
+            for (var i = 0, len = $scope.credentialTypes.length; i < len; i++) {
+              var type = $scope.credentialTypes[i];
+              if (type.label.toLowerCase() === name.toLowerCase()) {
+                return type;
+              }
             }
           }
         }

@@ -1098,9 +1098,11 @@ span.sort-span {
   width: 80px;
 }
 .device-settings-tab .form-right-column{
-  background-color: #f1f5fa;
   border: 1px solid #e7ecf2;
   color: #94A4B8;
+  width: 57%;
+  min-height: 277px;
+  float: right;
 }
 .device-settings-tab .right-column-content .icn-hide-password {
   display: inline-block;
@@ -1217,13 +1219,21 @@ span.sort-span {
   margin: 0 0 15px 15px;
 }
 .device-settings-button-assigned button {
-  width: 250px;
-  margin-left: 15px;
+  width: 100%;
   background-color: #e7ecf2;
+}
+.device-settings-button-assigned button .ellipsis {
+  display: inline-block;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }
 .right-column-head {
   padding-bottom: 10px;
   border-bottom: 1px solid #e7ecf2;
+  background-color: #f1f5fa;
 }
 .form-right-column li.right-column-head, .form-right-column li.right-column-content {
   padding: 10px 130px 10px 10px;
