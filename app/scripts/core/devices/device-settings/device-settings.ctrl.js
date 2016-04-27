@@ -221,7 +221,7 @@
 
           type = credential.credentialType;
           if (type === 'WORKSTATION') {
-            if (index === undefined || credential.devices.length < 2) {
+            if ((index === undefined && credential.devices.length < 4) || (index !== undefined && credential.devices.length < 2)) {
               var result = '';
 
               if (credential.devices) {
@@ -247,7 +247,7 @@
 
               return result || 'Assign';
             } else {
-              return credential.devices.length;
+              return credential.devices.length + ' devices';
             }
           } else if (type) {
             return type.slice(0, 1) + type.slice(1).toLowerCase();

@@ -1254,6 +1254,8 @@ span.sort-span {
   color: #1f2a37;
 }
 .device-settings-button-assigned .dropdown-menu .tab-content {
+  max-height: 260px;
+  overflow: auto;
   margin-top: 51px;
   color: #4c5c6f;
 }
