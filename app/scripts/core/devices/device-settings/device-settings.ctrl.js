@@ -11,6 +11,7 @@
 
         $scope.credentialTypeUpdated = false;
         $scope.assignRequiredError = false;
+        $scope.deviceSearchQuery = '';
 
         $scope.triedToSave = false;
         $scope.rescanIntervals = [
@@ -90,6 +91,7 @@
 
         $scope.setSelectedDevices = function (open) {
           if (!open && $scope.needSetAssign) {
+            $scope.deviceSearchQuery = '';
             setCredentialAssign();
           } else {
             $scope.needSetAssign = true;
@@ -289,6 +291,29 @@
           resetPermissions();
           $scope.triedToSave = false;
           form.$setPristine();
+        };
+
+        $scope.searchDevice = function (value) {
+          var keyword = $scope.deviceSearchQuery.toLowerCase();
+          if (keyword) {
+            if (value.hostName !== 'unknown') {
+              return value.hostName.toLowerCase().indexOf(keyword) > -1;
+            }
+
+            if (value.ipAddress) {
+              if (value.ipAddress.toLowerCase().indexOf(keyword) > -1) {
+                return true;
+              }
+            } else {
+              if (value.ip.toLowerCase().indexOf(keyword) > -1) {
+                return true;
+              }
+            }
+
+            return false;
+          } else {
+            return true;
+          }
         };
 
         function setCredentialAssign() {

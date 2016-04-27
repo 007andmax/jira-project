@@ -80,14 +80,18 @@
                 </li>
               </ul>
               <ul class="tab-pane" ng-show="assignedTabOpened === 'DEVICE'" stop-propagation="click">
-                <li ng-repeat="agent in agentsAllowedForCredential | orderBy: 'hostName'">
+                <li class="device-search">
+                  <input type="search" class="form-control" ng-model="deviceSearchQuery" placeholder="Search...">
+                  <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
+                </li>
+                <li ng-repeat="agent in agentsAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="selectedAgents[agent.id]">
                     {{ (agent.hostName | unknownFilter) || agent.ip }}
                     <span class="control-indicator"></span>
                   </label>
                 </li>
-                <li ng-repeat="device in devicesAllowedForCredential | orderBy: 'hostName'">
+                <li ng-repeat="device in devicesAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="selectedDevices[device.id]">
                     {{ (device.hostName | unknownFilter) || device.ipAddress }}

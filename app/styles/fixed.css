@@ -1230,6 +1230,11 @@ span.sort-span {
   text-overflow: ellipsis;
   vertical-align: middle;
 }
+.device-settings-button-assigned .device-search .icn-search {
+  position: absolute;
+  top: 23px;
+  right: 25px;
+}
 .right-column-head {
   padding-bottom: 10px;
   border-bottom: 1px solid #e7ecf2;
