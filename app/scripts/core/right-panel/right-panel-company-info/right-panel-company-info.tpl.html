@@ -54,9 +54,9 @@
 
       <div class="download-agent-form" ng-form="downloadAgentForm">
 
-        <div class="sb-heading billing-heading">Agent Settings</div>
+        <div class="sb-heading billing-heading" ng-hide="hideLoginPass">Agent Settings</div>
 
-        <div>
+        <div ng-hide="hideLoginPass">
 
           <div class="form-group" ng-class="{'has-error': showDownloadError}">
 

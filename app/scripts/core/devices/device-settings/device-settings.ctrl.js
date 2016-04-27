@@ -7,6 +7,7 @@
       function ($scope, DevicesService, UserConfirmationsService, $filter) {
         var copySelectedAgents = {},
           copySelectedDevices = {},
+          credentialsForSend = [],
           scannedDevices = $scope.scanDevices.networkScan.devices;
 
         $scope.credentialTypeUpdated = false;
@@ -147,7 +148,8 @@
               }
             }
 
-            $scope.credentials.splice(index, 1);
+            credentialsForSend = angular.copy($scope.credentials);
+            credentialsForSend.splice(index, 1);
 
             $scope.selectedAgents = {};
             copySelectedAgents = {};
@@ -169,19 +171,15 @@
             setCredentialAssign();
 
             delete $scope.editedCredential.passwordConfirm;
+            credentialsForSend = angular.copy($scope.credentials);
 
             if ($scope.selectedCredentialIndex === undefined) {
               $scope.editedCredential.company = {
                 id: $scope.companyId
               };
-
-              $scope.credentials.push($scope.editedCredential);
+              credentialsForSend.push($scope.editedCredential);
             } else {
-              var credential = $scope.credentials[$scope.selectedCredentialIndex];
-
-              for (var prop in $scope.editedCredential) {
-                credential[prop] = $scope.editedCredential[prop];
-              }
+              credentialsForSend[$scope.selectedCredentialIndex] = $scope.editedCredential;
             }
 
             saveCredentials(function () {
@@ -662,7 +660,7 @@
 
         function saveCredentials(callback) {
           $scope.updating = true;
-          DevicesService.saveCredentials($scope.credentials, $scope.companyId, function () {
+          DevicesService.saveCredentials(credentialsForSend, $scope.companyId, function () {
             callback && callback();
             $scope.updating = false;
           });

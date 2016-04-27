@@ -171,7 +171,7 @@
             <span class="device-settings-tab-assigned">Assigned</span>
             <span class="device-settings-tab-password">Password</span>
           </li>
-          <li class="right-column-content" ng-repeat="credential in credentials"
+          <li class="right-column-content" ng-repeat="credential in credentials track by $index"
               ng-click="editCredential($index, deviceSettingsForm)"
               ng-class="{'selected': selectedCredentialIndex === $index}">
             <span ng-show="credential.login">{{ credential.login }}</span>
