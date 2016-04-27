@@ -230,18 +230,17 @@
                 for (var i = 0, len = credential.devices.length; i < len;) {
                   var deviceIds = credential.devices[i];
 
+                  if (deviceIds.label) {
+                    result = addToName(result, deviceIds.label, ++i, len);
+                    continue;
+                  }
+
                   if (deviceIds.netscanId) {
                     var device = getDeviceById(deviceIds.netscanId);
-                    result += $filter('unknownFilter')(device.hostName) || device.ipAddress;
-                    if (++i !== len) {
-                      result += '; ';
-                    }
+                    result = addToName(result, $filter('unknownFilter')(device.hostName) || device.ipAddress, ++i, len);
                   } else {
                     var agent = getAgentById(deviceIds.deviceId);
-                    result += $filter('unknownFilter')(agent.hostName) || agent.ip;
-                    if (++i !== len) {
-                      result += '; ';
-                    }
+                    result = addToName(result, $filter('unknownFilter')(agent.hostName) || agent.ip, ++i, len);
                   }
 
                 }
@@ -277,6 +276,7 @@
           $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
           $scope.devicesAllowedForCredential = getAllowedDevicesForCredential($scope.editedCredential);
           $scope.triedToSave = true;
+          $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', true);
           form.$setPristine();
         };
 
@@ -543,14 +543,17 @@
             var agent = agents[i];
             result.push({
               agentId: agent.agentId,
-              deviceId: agent.id
+              deviceId: agent.id,
+              label: $filter('unknownFilter')(agent.hostName) || agent.ip
             });
           }
 
           for (var id in selectedNetScans) {
+            var device = getDeviceById(id);
             if (selectedNetScans[id]) {
               result.push({
-                netscanId: id
+                netscanId: id,
+                label: $filter('unknownFilter')(device.hostName) || device.ipAddress
               });
             }
           }
@@ -647,6 +650,14 @@
               }
             }
           }
+        }
+
+        function addToName(str, addition, counter, len) {
+          var result = str + addition;
+          if (counter !== len) {
+            result += '; ';
+          }
+          return result;
         }
 
         function saveCredentials(callback) {
