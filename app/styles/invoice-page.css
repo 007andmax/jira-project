@@ -18,7 +18,7 @@
 
 .invoice-page .header {
   border-bottom: 2px solid #f1f5fa;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   float: left;
   width: 790px;
 }
@@ -29,6 +29,8 @@
 }
 
 .invoice-page .header .tech-company-name {
+  width: 300px;
+  margin-left: -80px;
   font-size: 20px;
   line-height: 23px;
   font-weight: 400;

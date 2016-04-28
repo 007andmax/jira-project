@@ -9,7 +9,8 @@
         require: 'ngModel',
         scope: {
           model: '=ngModel',
-          isReposition: '='
+          isReposition: '=',
+          cropInfo: '='
         },
         link: function (scope, element, attrs, ctrl) {
 
@@ -25,9 +26,9 @@
                 cropBox = element.find('[crop-box]');
 
               cropBox.jWindowCrop({
-                customTypeCrop: 'avatar',
-                cropBoxWidth: 244,
-                cropBoxHeight: 244,
+                customTypeCrop: scope.cropInfo === 'tech-logo' ? 'tech-logo' : 'avatar',
+                cropBoxWidth: scope.cropInfo === 'tech-logo' ? 450 : 244,
+                cropBoxHeight: scope.cropInfo === 'tech-logo' ? 200 : 244,
                 maxZoom: 2,
                 imageSource: '/file/' + scope.model.origin.id,
                 loadingText: '  ',

@@ -14,12 +14,14 @@
       if (val + targetLength < containerLength) val = containerLength - targetLength;
       if (val > 0) val = 0;
     } else {
+      var isTechLogo = imgType === 'tech-logo';
+
       if (targetLength <= containerLength) {
-        if (val + targetLength < containerLength - (244 - targetLength)) {
-          val = containerLength - 244;
+        if (val + targetLength < containerLength - ( (isTechLogo ? 450: 244) - targetLength)) {
+          val = containerLength - (isTechLogo ? 450: 244);
         }
-        if (val > 244 - targetLength) {
-          val = 244 - targetLength;
+        if (val > (isTechLogo ? 450: 244) - targetLength) {
+          val = (isTechLogo ? 450: 244) - targetLength;
         }
       } else {
         if (val + targetLength < containerLength) val = containerLength - targetLength;
