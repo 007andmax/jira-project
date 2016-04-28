@@ -47,7 +47,7 @@
 
           <div class="checkbox-caption">
             <i class="icn-lg icn-computer pull-left"></i>
-            {{ (agent.hostName | unknownFilter) || 'Name is not defined' }}
+            {{ (agent.hostName | unknownFilter) || agent.ip }}
           </div>
         </div>
       </div>
