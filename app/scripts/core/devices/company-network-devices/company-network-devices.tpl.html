@@ -67,7 +67,7 @@
 
           <div class="checkbox-caption">
 
-            <span>{{ (device.hostName | unknownFilter) || 'Name is not defined' }}</span>
+            <span>{{ (device.hostName | unknownFilter) || device.ipAddress }}</span>
 
             <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
                popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">
