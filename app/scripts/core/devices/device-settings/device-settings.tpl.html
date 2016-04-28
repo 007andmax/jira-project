@@ -43,6 +43,13 @@
           <span class="control-indicator"></span>
         </label>
       </li>
+      <li>
+        <label style="display: block">
+          Choose master agent
+          <select class="select-master-id" ng-model="settings.masterAgentId" ng-change="saveDeploymentSettings()"
+                  ng-options="agent.agentId as {{ 'agent.hostName' || 'agent.ip' }} for agent in agents"></select>
+        </label>
+      </li>
     </ul>
 
     <div ng-form="deviceSettingsForm">
@@ -51,7 +58,7 @@
       <div class="form-left-column">
 
         <div class="device-settings-button-assigned" ng-class="{'has-error': assignRequiredError}"
-             dropdown on-toggle="setSelectedDevices(open)">
+             dropdown on-toggle="eraseSearch(open)">
 
           <label class="control-label">
             {{ assignRequiredError ? 'Assign is required.' : 'Assign' }}
@@ -86,14 +93,16 @@
                 </li>
                 <li ng-repeat="agent in agentsAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
                   <label class="control checkbox">
-                    <input type="checkbox" ng-model="selectedAgents[agent.id]">
+                    <input type="checkbox" ng-model="selectedAgents[agent.id]"
+                           ng-change="setCredentialAssign(agent.id, selectedAgents)">
                     {{ (agent.hostName | unknownFilter) || agent.ip }}
                     <span class="control-indicator"></span>
                   </label>
                 </li>
                 <li ng-repeat="device in devicesAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
                   <label class="control checkbox">
-                    <input type="checkbox" ng-model="selectedDevices[device.id]">
+                    <input type="checkbox" ng-model="selectedDevices[device.id]"
+                           ng-change="setCredentialAssign(device.id, selectedDevices)">
                     {{ (device.hostName | unknownFilter) || device.ipAddress }}
                     <span class="control-indicator"></span>
                   </label>
@@ -151,15 +160,16 @@
                  ng-model="editedCredential.passwordConfirm" required>
 
           <span ng-click="showPasswordConfirm = !showPasswordConfirm" ng-show="editedCredential.passwordConfirm">
-                <i class="icn-sm {{ showPasswordConfirm ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+            <i class="icn-sm {{ showPasswordConfirm ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+          </span>
         </div>
 
         <div class="btn btn-lg btn-info" ng-click="updateCredentials(deviceSettingsForm)"
              custom-disabled="{{!!(deviceSettingsForm.$pristine || (triedToSave && deviceSettingsForm.$invalid) || updating)}}">
-          {{ selectedCredentialIndex !== undefined ? 'Update' : 'Create' }}
+          {{ selectedCredentialId !== undefined ? 'Update' : 'Create' }}
         </div>
         <div class="btn btn-lg btn-info" ng-click="cancelEdit(deviceSettingsForm)"
-             custom-disabled="{{ deviceSettingsForm.$pristine && selectedCredentialIndex === undefined }}">
+             custom-disabled="{{ deviceSettingsForm.$pristine && selectedCredentialId === undefined }}">
           Cancel
         </div>
       </div>
@@ -171,9 +181,10 @@
             <span class="device-settings-tab-assigned">Assigned</span>
             <span class="device-settings-tab-password">Password</span>
           </li>
-          <li class="right-column-content" ng-repeat="credential in credentials track by $index"
-              ng-click="editCredential($index, deviceSettingsForm)"
-              ng-class="{'selected': selectedCredentialIndex === $index}">
+          <li class="right-column-content"
+              ng-repeat="credential in credentials | orderBy: 'isDefault': true track by $index"
+              ng-click="editCredential(credential.id, deviceSettingsForm)"
+              ng-class="{'selected': selectedCredentialId === $index}">
             <span ng-show="credential.login">{{ credential.login }}</span>
             <span ng-hide="credential.login">&lt;unknown&gt;</span>
             <span class="device-settings-tab-password" ng-show="passwordShown[$index]">
@@ -183,13 +194,13 @@
               &#8226&#8226&#8226&#8226&#8226&#8226&#8226&#8226
             </span>
             <div class="device-settings-tab-assigned">
-              {{ userReadable($index) || 'Assign' }}
+              {{ userReadable(credential.id) || 'Assign' }}
             </div>
             <span class="device-settings-actions" stop-propagation="click">
               <span ng-click="passwordShown[$index] = !passwordShown[$index]">
                 <i class="icn-sm {{ passwordShown[$index] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
               </span>
-              <span ng-click="removeCredential($index)">
+              <span ng-click="removeCredential(credential.id)">
                 <i class="icn-sm icn-remove-token"></i></span>
             </span>
           </li>

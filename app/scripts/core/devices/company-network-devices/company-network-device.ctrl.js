@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.companyNetworkDeviceCtrl',
-    ['$scope', 'CompaniesService', 'DevicesService',
-      function ($scope, CompaniesService, DevicesService) {
+    ['$scope', 'CompaniesService', 'DevicesService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, CompaniesService, DevicesService, UserConfirmationsService) {
 
         $scope.deviceStatus = {};
         $scope.deviceDescription = '';
@@ -16,7 +16,7 @@
           $scope.changingStatus = true;
 
           if ($scope.deviceStatus.statusValue) {
-            DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id, $scope.agentForInstallId)
+            DevicesService.sendInstallAgentRequest($scope.companyId, $scope.device.discoveredByAgentId, $scope.device.id)
           } else {
             DevicesService.sendUninstallAgentRequest($scope.companyId, $scope.device.deviceId)
           }
