@@ -8,7 +8,8 @@
         var urlGetters = {
           user: $rootScope.getUserAvatarUrl,
           contact: $rootScope.getContactAvatarUrl,
-          company: $rootScope.getCompanyLogoUrl
+          company: $rootScope.getCompanyLogoUrl,
+          techCompanyLogo: $rootScope.getCompanyLogoUrl
         };
 
         return {
@@ -31,6 +32,8 @@
               throw 'model-name must be specified! Available values - ["user", "contact"]';
             } else if (attrs.modelName === 'company') {
               scope.isLogo = true;
+            } else if(attrs.modelName === 'techCompanyLogo'){
+              scope.isTechLogo = true;
             }
 
             scope.getUrl = function () {
@@ -141,7 +144,7 @@
                     return avatar;
                   },
                   cropInfo: function(){
-                    return {type: scope.isLogo ? 'logo' : 'avatar'};
+                    return {type: scope.isLogo ? 'logo' : scope.isTechLogo ? 'tech-logo' : 'avatar'};
                   }
                 }
               });

@@ -9,11 +9,11 @@
       </div>
       <div id="logo">
         <img ng-src="{{ currentInvoice.company.parent.id ? '/companyLogo/' + currentInvoice.company.parent.id : currentInvoice.company.parent.logo }}"
-             width="128" height="128" alt="{{ currentInvoice.techCompanyName }}">
+             width="450" height="200" alt="{{ currentInvoice.techCompanyName }}">
       </div>
       <div class="company-info ">
         <div class="tech-company-name">{{ currentInvoice.techCompanyName }}</div>
-        <div class="address" address-country ng-model="currentInvoice.senderAddress"></div>
+        <div class="address">{{ currentInvoice.senderAddress }}</div>
       </div>
     </div>
 

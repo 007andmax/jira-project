@@ -1327,3 +1327,16 @@ span.sort-span {
   }
 }
 
+.tech-company-logo .create-user-avatar .avatar {
+  width: 315px;
+  height: 141px;
+  margin-bottom: 15px;
+}
+
+.tech-company-logo .create-user-avatar .avatar img {
+  max-width: 315px;
+}
+
+.tech-company-logo .create-user-avatar .avatar .reposition {
+  width: 315px;
+}

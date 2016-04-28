@@ -78,13 +78,24 @@
             }
 
             ngModelCtrl.$viewValue.address = input.val();
-            ngModelCtrl.$viewValue.countryCode = getCountryCode(place);
             ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
             ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
+
+            ngModelCtrl.$viewValue.postalCode = '';
 
             for (var i = 0, len = place.address_components.length; i < len; i++) {
               if (place.address_components[i].types.indexOf('country') !== -1) {
                 ngModelCtrl.$viewValue.country = place.address_components[i].long_name;
+                ngModelCtrl.$viewValue.countryCode = place.address_components[i].short_name;
+              }
+              if (place.address_components[i].types.indexOf('postal_code') !== -1) {
+                ngModelCtrl.$viewValue.postalCode = place.address_components[i].short_name;
+              }
+              if (place.address_components[i].types.indexOf('locality') !== -1) {
+                ngModelCtrl.$viewValue.city = place.address_components[i].long_name;
+              }
+              if (place.address_components[i].types.indexOf('administrative_area_level_1') !== -1) {
+                ngModelCtrl.$viewValue.state = place.address_components[i].long_name;
               }
             }
 
@@ -109,32 +120,8 @@
                 console.error('Error: ' + message);
               });
 
-            if (place.address_components) {
-              for (var i = place.address_components.length - 1; i >= 0; i--) {
-
-                var isAddressTypesExist = place.address_components[i] && place.address_components[i].types;
-
-                if (isAddressTypesExist && place.address_components[i].types[0] === 'postal_code') {
-                  ngModelCtrl.$viewValue.postalCode = place.address_components[i].short_name;
-                  break;
-                } else {
-                  ngModelCtrl.$viewValue.postalCode = '';
-                }
-
-              }
-            }
-
             $scope.$apply();
           });
-
-          function getCountryCode(place) {
-            for (var i = 0; i < place.address_components.length; i++) {
-              var addressType = place.address_components[i].types[0];
-              if (addressType === 'country') {
-                return place.address_components[i].short_name;
-              }
-            }
-          }
 
           function resetMap(google, map, marker, inputCtrl) {
 
