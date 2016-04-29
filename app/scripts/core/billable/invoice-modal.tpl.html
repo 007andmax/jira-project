@@ -11,7 +11,7 @@
         <img ng-src="{{ currentInvoice.company.parent.id ? '/companyLogo/' + currentInvoice.company.parent.id : currentInvoice.company.parent.logo }}"
              width="450" height="200" alt="{{ currentInvoice.techCompanyName }}">
       </div>
-      <div class="company-info ">
+      <div class="company-info">
         <div class="tech-company-name">{{ currentInvoice.techCompanyName }}</div>
         <div class="address">{{ currentInvoice.senderAddress }}</div>
       </div>
@@ -60,9 +60,7 @@
         <!--{{ phoneNumber.number }}-->
         <!--</div>-->
 
-        <div class="address">
-          {{ currentBillTo.addressWithSuitNumberAndPostalCode }}
-        </div>
+        <div class="address">{{ currentBillTo.addressWithSuitNumberAndPostalCode }}</div>
 
       </div>
 
@@ -110,9 +108,7 @@
         <!--{{ phoneNumber.number }}-->
         <!--</div>-->
 
-        <div class="address">
-          {{ currentShipTo.addressWithSuitNumberAndPostalCode }}
-        </div>
+        <div class="address">{{ currentShipTo.addressWithSuitNumberAndPostalCode }}</div>
 
       </div>
 

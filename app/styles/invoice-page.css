@@ -44,6 +44,16 @@
   margin-top: 3px;
 }
 
+.invoice-page .header .company-info .address {
+  padding-top: 5px;
+}
+
+.invoice-page .header .company-info .address,
+.invoice-page .sub-header .billed .address,
+.invoice-page .sub-header .shipto .address {
+  white-space: pre-wrap;
+}
+
 .invoice-page .heading {
   font-size: 11px;
   line-height: 12px;
