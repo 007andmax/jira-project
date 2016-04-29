@@ -8,7 +8,7 @@
         var credentialsForSend = [],
           scannedDevices;
 
-        if (!$scope.scanDevices || !$scope.scanDevices.networkScan || $scope.scanDevices.networkScan.devices) {
+        if (!$scope.scanDevices || !$scope.scanDevices.networkScan || !$scope.scanDevices.networkScan.devices) {
           scannedDevices = []
         } else {
           scannedDevices = $scope.scanDevices.networkScan.devices;
@@ -137,13 +137,6 @@
             if ($scope.deviceSettingsForm.password.$dirty || $scope.deviceSettingsForm.passwordConfirm.$dirty) {
               $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', values[0] === values[1]);
             }
-          }
-        });
-
-        $scope.$watch('scanDevices', function (value) {
-          if (value && $scope.credentials) {
-            scannedDevices = value;
-            resetPermissions();
           }
         });
 
