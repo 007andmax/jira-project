@@ -92,10 +92,12 @@
                 ngModelCtrl.$viewValue.postalCode = place.address_components[i].short_name;
               }
               if (place.address_components[i].types.indexOf('locality') !== -1) {
-                ngModelCtrl.$viewValue.city = place.address_components[i].long_name;
+                ngModelCtrl.$viewValue.longCity = place.address_components[i].long_name;
+                ngModelCtrl.$viewValue.shortCity = place.address_components[i].short_name;
               }
               if (place.address_components[i].types.indexOf('administrative_area_level_1') !== -1) {
-                ngModelCtrl.$viewValue.state = place.address_components[i].long_name;
+                ngModelCtrl.$viewValue.longState = place.address_components[i].long_name;
+                ngModelCtrl.$viewValue.shortState = place.address_components[i].short_name;
               }
             }
 
