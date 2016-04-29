@@ -9621,3 +9621,9 @@ button.close {
   margin: 10px 5px;
   width: 19%;
 }
+.master-agent-offline-message {
+  margin-top: 20px;
+}
+.master-agent-offline-message .text-center {
+  color: #e53935;
+}

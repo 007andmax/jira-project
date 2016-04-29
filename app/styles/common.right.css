@@ -515,7 +515,7 @@ aside#right .list-devices .user-title {
 
 /***General right sidebar***/
 aside#right .company-detail{
-  padding: 0 30px 58px;
+  padding: 0 30px 20px;
   float: left;
 }
 aside#right .company-detail > h4{

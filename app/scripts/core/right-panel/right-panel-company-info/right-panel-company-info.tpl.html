@@ -54,9 +54,9 @@
 
       <div class="download-agent-form" ng-form="downloadAgentForm">
 
-        <div class="sb-heading billing-heading" ng-hide="hideLoginPass">Agent Settings</div>
+        <div class="sb-heading billing-heading" ng-hide="isDomainPresent">Agent Settings</div>
 
-        <div ng-hide="hideLoginPass">
+        <div ng-hide="isDomainPresent">
 
           <div class="form-group" ng-class="{'has-error': showDownloadError}">
 
@@ -93,9 +93,12 @@
 
         </div>
 
-        <div class="btn btn-lg btn-info download-agent-btn"
-             ng-click="downloadAgent()">
-          Download Agent
+        <div tooltip-placement="top" tooltip-append-to-body="true"
+             tooltip="{{ !allowAgentInstall ? 'Maximum installed agent amount reached' : '' }}">
+          <div class="btn btn-lg btn-info download-agent-btn"
+               ng-click="downloadAgent()" custom-disabled="{{ !allowAgentInstall }}">
+            Download Agent
+          </div>
         </div>
 
       </div>

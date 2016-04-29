@@ -6,13 +6,20 @@
       <i class="icn-lg icn-network-scan-lg"></i>
 
       <p class="text-center result-heading">No devices to show</p>
-
-      <p class="text-center result-details">Please choose the Network IP Range first, and then click Scan Network to
-        view selected network's active hosts.</p>
+      <p class="text-center result-details" style="color: #e53935" ng-show="masterAgentOffline">
+        Network scan and remote install is available only when master agent is online.
+      </p>
     </div>
   </div>
 
-  <div class="qt-list-loading" ng-show="isScanDevicesLoad && (scanDevices.networkScan.devices && scanDevices.networkScan.devices.length > 0)">
+  <div class="master-agent-offline-message"
+       ng-show="masterAgentOffline && scanDevices.networkScan.devices && scanDevices.networkScan.devices.length">
+    <p class="text-center">
+      Network scan and remote install is available only when master agent is online.
+    </p>
+  </div>
+
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad">
     <div class="loader"></div>
   </div>
 
@@ -156,7 +163,7 @@
         <div class="list-actions pull-right" ng-show="device.hostName !== 'unknown'">
 
           <div class="device-management"
-               ng-class="{'hide': !(deviceStatus.status === 'success' && !changingStatus)}">
+               ng-class="{'hide': !(deviceStatus.status === 'success' && !changingStatus) || !allowAgentInstall}">
 
             <label>
               <input type="checkbox" ng-model="deviceStatus.statusValue" ng-click="changeAgentStatus()">
@@ -171,11 +178,15 @@
           </div>
 
           <div class="device-management installation-error"
-               ng-class="{'hide': !(deviceStatus.status === 'error' && !changingStatus)}">
+               ng-class="{'hide': !(deviceStatus.status === 'error' && !changingStatus) && allowAgentInstall}">
 
             <label>
-              <input type="checkbox" ng-model="deviceStatus.statusValue" ng-click="changeAgentStatus()">
-              <span class="toggle-bg" tooltip="{{ device.message }}" tooltip-placement="top"></span>
+              <input type="checkbox" ng-model="deviceStatus.statusValue"
+                     custom-disabled="{{ !allowAgentInstall }}"
+                     ng-click="changeAgentStatus()">
+              <span class="toggle-bg"
+                    tooltip="{{ allowAgentInstall ? device.message : 'Maximum installed agent amount reached'}}"
+                    tooltip-placement="top"></span>
               <span class="toggle-indicator"></span>
             </label>
 

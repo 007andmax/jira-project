@@ -10,7 +10,8 @@
 
         var tabs = ['DEVICES', 'AGENTS', 'NETWORK_SCAN', 'SETTINGS'],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
-          agentCallbackCount = 0;
+          agentCallbackCount = 0,
+          lastMasterAgentId;
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
         rightPanelSharedState.companyId = $stateParams.companyId;
@@ -30,9 +31,7 @@
 
         $scope.runScanDevices = function () {
           DevicesService.runScanDevices($scope, $scope.companyId, function (resp) {
-            if (resp.code === 400) {
-              UserConfirmationsService.show(resp.message, 'OK', true);
-            }
+            $scope.masterAgentOffline = resp.code === 400;
           });
         };
 
@@ -65,10 +64,17 @@
 
           }
 
-          DevicesService.getLastScanDevices($scope, $scope.companyId, function (resp) {
-            $scope.scanDevices = resp;
-          });
+        });
 
+        DevicesService.getSomeInfoForDevices($scope.companyId, function (resp) {
+          $scope.allowAgentInstall = resp.allowAgentInstall;
+          if (resp.masterAgentId !== lastMasterAgentId) {
+            lastMasterAgentId = resp.masterAgentId;
+
+            DevicesService.getLastScanDevices($scope, $scope.companyId, function (resp) {
+              $scope.scanDevices = resp;
+            });
+          }
         });
 
         $scope.toggleCollapsed = function () {
@@ -88,10 +94,10 @@
 
                 if (isAutoRescanEnable) {
                   DevicesService.runScanDevices($scope, $scope.companyId, function (resp) {
-                    if (resp.code === 400) {
-                      UserConfirmationsService.show(resp.message, 'OK', true);
-                    }
+                    $scope.masterAgentOffline = resp.code === 400;
                   });
+                } else {
+                  $scope.masterAgentOffline = false;
                 }
               });
             }
@@ -199,7 +205,6 @@
         $scope.$on('$destroy', function () {
           rightPanelSharedState.companyId = undefined;
         });
-
 
       }]);
 

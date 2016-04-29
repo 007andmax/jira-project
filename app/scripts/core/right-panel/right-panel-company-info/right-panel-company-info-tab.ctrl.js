@@ -7,11 +7,14 @@
       function ($scope, CompaniesService, DevicesService, UsersService) {
 
         $scope.$watch('companyGroupedData.company.id', function (value) {
-          $scope.companyContacts = CompaniesService.getCompanyContacts($scope, value);
+          if (value) {
+            $scope.companyContacts = CompaniesService.getCompanyContacts($scope, value);
 
-          DevicesService.isDomainPresent(value, function (resp) {
-            $scope.hideLoginPass = resp;
-          });
+            DevicesService.getSomeInfoForDevices(value, function (resp) {
+              $scope.isDomainPresent = resp.isDomainPresent;
+              $scope.allowAgentInstall = resp.allowAgentInstall;
+            });
+          }
 
           $scope.downloadAgentUser = {
             name: '',

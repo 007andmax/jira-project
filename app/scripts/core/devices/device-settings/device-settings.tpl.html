@@ -53,7 +53,8 @@
       <li>
         <label style="display: block">
           Choose master agent
-          <select class="select-master-id" ng-model="settings.masterAgentId" ng-change="saveDeploymentSettings()"
+          <select class="select-master-id" ng-model="settings.masterAgentId"
+                  ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
                   ng-options="agent.agentId as {{ 'agent.hostName' || 'agent.ip' }} for agent in agents"></select>
         </label>
       </li>
