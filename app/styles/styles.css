@@ -9617,3 +9617,7 @@ button.close {
 .device-settings-button-assigned .tab-content .tab-pane {
   display: unset;
 }
+.device-settings-tab .deployment-settings .select-master-id {
+  margin: 10px 5px;
+  width: 19%;
+}

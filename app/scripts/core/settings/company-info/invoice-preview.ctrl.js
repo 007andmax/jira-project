@@ -21,7 +21,7 @@
         },
         company: {
           parent: {
-            logo: '/file/' + $scope.editCompany.logo.cropped.id
+            logo: $rootScope.getCompanyLogoUrl($scope.editCompany)
           },
           default: false,
           companyInfo: {

@@ -239,7 +239,7 @@
           if (!(company && company.logo && company.logo.cropped && company.logo.cropped.id)) {
             return '/company/default/logo'
           }
-          return '/file/' + company.logo.cropped.id + '?t=' + (company.logo ? company.logo.updatedAt : '');
+          return '/file/' + company.logo.cropped.id + '?t=' + (company.logo.updatedAt ? company.logo.updatedAt : '');
         };
 
         $rootScope.getPhoneNumberCssClass = function (phoneNumber) {

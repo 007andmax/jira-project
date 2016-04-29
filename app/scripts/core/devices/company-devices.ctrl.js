@@ -28,9 +28,12 @@
         $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
 
-        $scope.runScanDevices = function (agentId, id) {
-          $scope.agentForInstallId = id;
-          DevicesService.runScanDevices($scope, $scope.companyId, agentId);
+        $scope.runScanDevices = function () {
+          DevicesService.runScanDevices($scope, $scope.companyId, function (resp) {
+            if (resp.code === 400) {
+              UserConfirmationsService.show(resp.message, 'OK', true);
+            }
+          });
         };
 
         DevicesService.getAgentsByCompany($scope, $scope.companyId, function (resp) {
@@ -62,24 +65,8 @@
 
           }
 
-          DevicesService.getMasterAgentId($scope.companyId, function (resp) {
-            $scope.masterAgentId = resp.value;
-
-            for (var i = 0; i < $scope.agents.length; i++) {
-              if ($scope.agents[i].id === $scope.masterAgentId) {
-                $scope.agentForInstallId = $scope.masterAgentId;
-                DevicesService.getLastScanDevices($scope, $scope.companyId, $scope.agents[i].agentId, function (resp) {
-                  $scope.scanDevices = resp;
-                });
-                return;
-              }
-            }
-
-            $scope.agentForInstallId = $scope.agents[0].id;
-            DevicesService.getLastScanDevices($scope, $scope.companyId, $scope.agents[0].agentId, function (resp) {
-              $scope.scanDevices = resp;
-            });
-
+          DevicesService.getLastScanDevices($scope, $scope.companyId, function (resp) {
+            $scope.scanDevices = resp;
           });
 
         });
@@ -93,7 +80,21 @@
           if (tabs.indexOf(tabName) < 0) {
             $scope.currentOpenTab = tabs[0];
           } else {
-            $scope.currentOpenTab = tabName
+            $scope.currentOpenTab = tabName;
+
+            if (tabs.indexOf(tabName) === 2) {
+              DevicesService.getAgentSettingsByCompany($scope.companyId, function (resp) {
+                var isAutoRescanEnable = resp.autoScanNetwork;
+
+                if (isAutoRescanEnable) {
+                  DevicesService.runScanDevices($scope, $scope.companyId, function (resp) {
+                    if (resp.code === 400) {
+                      UserConfirmationsService.show(resp.message, 'OK', true);
+                    }
+                  });
+                }
+              });
+            }
           }
         };
 

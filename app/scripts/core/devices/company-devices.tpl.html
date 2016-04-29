@@ -250,43 +250,11 @@
 
     <div class="dropdown pull-right for-network-tab">
 
-      <div class="btn btn-info has-tooltip" style="width: 62px;"
+      <div class="btn btn-info has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
            tooltip-placement="top" tooltip-append-to-body="true"
            tooltip="scan network" data-toggle="dropdown" aria-expanded="false">
         <i class="icn-sm icn-scan-network"></i>
       </div>
-
-      <ul class="dropdown-menu dropdown-menu-right dropdown-ip-range">
-
-        <li ng-repeat="agent in agents"
-            ng-if="(agent.id === masterAgentId) && (agent.agentId && (agent.agentId !== 'unknown') && agent.online)">
-          <a href="javascript:void(0)" ng-click="runScanDevices(agent.agentId, agent.id)" style="font-weight: bold">
-            <span class="pull-left">
-              {{ agent.hostName && agent.hostName !== ('unknown') ? agent.hostName : agent.ip }}
-            </span>
-            <!--<span class="pull-right text-muted">254</span>-->
-          </a>
-        </li>
-
-        <li ng-repeat="agent in agents"
-            ng-if="(agent.id !== masterAgentId) && (agent.agentId && (agent.agentId !== 'unknown') && agent.online)">
-          <a href="javascript:void(0)" ng-click="runScanDevices(agent.agentId)">
-            <span class="pull-left">
-              {{ agent.hostName && agent.hostName !== ('unknown') ? agent.hostName : agent.ip }}
-            </span>
-            <!--<span class="pull-right text-muted">254</span>-->
-          </a>
-        </li>
-
-        <li ng-hide="ifHasAgentToScan()">
-          <a href="javascript:void(0)"><span class="pull-left">No agents</span></a>
-        </li>
-
-        <!--<li><a href="javascript:void(0)"><span class="pull-left">10.10.200.1</span> <span class="pull-right text-muted">254</span></a></li>-->
-        <!--<li><a href="javascript:void(0)"><span class="pull-left">192.168.210.1</span> <span class="pull-right text-muted">31</span></a></li>-->
-        <!--<li><a href="javascript:void(0)"><span class="pull-left">192.168.210.32</span> <span class="pull-right text-muted">63</span></a></li>-->
-
-      </ul>
     </div>
 
     <div class="pull-right for-network-tab hide" dropdown is-open="isDropdownOpen">
