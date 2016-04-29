@@ -64,7 +64,7 @@
             $scope.deviceStatus.statusValue = true;
             $scope.deviceStatus.online = true;
 
-          } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'login error') {
+          } else if ($scope.device.agentStatus === 'error' || $scope.device.agentStatus === 'loginError') {
 
             $scope.changingStatus = false;
 

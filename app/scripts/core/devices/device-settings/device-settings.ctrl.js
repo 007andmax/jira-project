@@ -8,7 +8,7 @@
         var credentialsForSend = [],
           scannedDevices;
 
-        if (!$scope.scanDevices || !$scope.scanDevices.networkScan || !$scope.scanDevices.networkScan.devices) {
+        if (!$scope.scanDevices || !$scope.scanDevices.networkScan || $scope.scanDevices.networkScan.devices) {
           scannedDevices = []
         } else {
           scannedDevices = $scope.scanDevices.networkScan.devices;
@@ -215,24 +215,22 @@
           }
         };
 
-        $scope.saveDeploymentSettings = function () {
-
-          if (!$scope.settings.maxAgents || $scope.settings.maxAgents < 0) {
-            $scope.settings.maxAgents = 0;
-          }
+        $scope.saveDeploymentSettings = function (form) {
 
           if (!$scope.settings.removeOfflineTime || $scope.settings.removeOfflineTime < 0) {
             $scope.settings.removeOfflineTime = 0;
           }
 
-          var settings = angular.copy($scope.settings);
+          if (form.$valid) {
+            var settings = angular.copy($scope.settings);
 
-          settings.rescanTime = settings.rescanTime.value;
-          settings.company = {
-            id: $scope.companyId
-          };
-          settings.masterAgent = { agentId: settings.masterAgentId };
-          DevicesService.updateAgentSettings(settings);
+            settings.rescanTime = settings.rescanTime.value;
+            settings.company = {
+              id: $scope.companyId
+            };
+            settings.masterAgent = { agentId: settings.masterAgentId };
+            DevicesService.updateAgentSettings(settings);
+          }
         };
 
         $scope.userReadable = function (id) {

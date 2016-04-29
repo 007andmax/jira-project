@@ -2,16 +2,22 @@
   <div class="device-settings-tab clearfix"
        ng-controller="quicktech.core.devices.deviceSettingsCtrl">
     <h3 class="devices-settings-title">Agent Deployment Settings</h3>
-    <ul class="deployment-settings clearfix">
+    <ul class="deployment-settings clearfix" ng-form="agentDeploymentSettingsFrom">
       <li>
         <label>
           Maximum agents install for this client
-          <input type="number" min="0" ng-model="settings.maxAgents" execute-when-outfocused="saveDeploymentSettings()">
+          <input type="number" min="{{agents.length}}" name="maxAgents"
+                 ng-model="settings.maxAgents"
+                 execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
+          <span ng-if="agentDeploymentSettingsFrom.maxAgents.$invalid" style="color: #e53935">
+            The maximum number of agents may be bigger than the number of already installed!
+          </span>
         </label>
       </li>
       <li>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="settings.autoScanNetwork" ng-change="saveDeploymentSettings()">
+          <input type="checkbox" ng-model="settings.autoScanNetwork"
+                 ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)">
           Automatically Scan Network
           <span class="control-indicator"></span>
         </label>
@@ -19,17 +25,18 @@
       <li>
         <label>
           Rescan network for new devices every
-          <select ng-model="settings.rescanTime" ng-change="saveDeploymentSettings()"
+          <select ng-model="settings.rescanTime" ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
                   ng-options="item.label for item in rescanIntervals"></select>
         </label>
       </li>
       <li>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="settings.autoRemoveDevice" ng-change="saveDeploymentSettings()">
+          <input type="checkbox" ng-model="settings.autoRemoveDevice"
+                 ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)">
           <span class="control-indicator"></span>
           Automatically remove device if offline for more then
           <input type="number" min="0" ng-model="settings.removeOfflineTime"
-                 execute-when-outfocused="saveDeploymentSettings()">
+                 execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
           days
 
         </label>
