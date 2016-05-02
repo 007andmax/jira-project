@@ -71,9 +71,13 @@
           if (resp.masterAgentId !== lastMasterAgentId) {
             lastMasterAgentId = resp.masterAgentId;
 
-            DevicesService.getLastScanDevices($scope, $scope.companyId, function (resp) {
-              $scope.scanDevices = resp;
-            });
+            if (lastMasterAgentId) {
+              DevicesService.getLastScanDevices($scope, $scope.companyId, function (resp) {
+                $scope.scanDevices = resp;
+              });
+            } else {
+              $scope.scanDevices = undefined;
+            }
           }
         });
 
