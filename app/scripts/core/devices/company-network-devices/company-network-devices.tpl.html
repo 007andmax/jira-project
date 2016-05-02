@@ -13,13 +13,14 @@
   </div>
 
   <div class="master-agent-offline-message"
-       ng-show="masterAgentOffline && scanDevices.networkScan.devices && scanDevices.networkScan.devices.length">
+       ng-show="masterAgentOffline">
+       <!--ng-show="masterAgentOffline && scanDevices.networkScan.devices && scanDevices.networkScan.devices.length">-->
     <p class="text-center">
       Network scan and remote install is available only when master agent is online.
     </p>
   </div>
 
-  <div class="qt-list-loading" ng-show="isScanDevicesLoad">
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
     <div class="loader"></div>
   </div>
 
@@ -234,7 +235,7 @@
 
   </ul>
 
-  <div class="qt-list-loading" ng-show="isScanDevicesLoad">
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
     <div class="loader"></div>
   </div>
 </div>
