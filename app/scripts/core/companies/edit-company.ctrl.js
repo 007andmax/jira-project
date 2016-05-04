@@ -13,6 +13,7 @@
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
+        $scope.loadingInProgress = true;
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -88,6 +89,8 @@
               for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
                 $scope.selectedTax[$scope.editCompany.taxRates[i].code] = true;
               }
+
+              $scope.loadingInProgress = false;
             });
 
           });

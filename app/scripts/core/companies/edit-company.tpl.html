@@ -1,4 +1,4 @@
-<div class="company-profile-content" fixed-margin-left>
+<div class="company-profile-content" ng-if="!loadingInProgress" fixed-margin-left>
 
   <form name="companyForm">
     <div class="create-company-content">
@@ -842,3 +842,4 @@
     </div>
   </form>
 </div>
+<loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
