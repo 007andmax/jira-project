@@ -8,7 +8,7 @@
         <span class="pull-right">INVOICE</span>
       </div>
       <div id="logo">
-        <img ng-src="{{ currentInvoice.company.parent.id ? '/companyLogo/' + currentInvoice.company.parent.id : currentInvoice.company.parent.logo }}"
+        <img ng-src="{{ (currentInvoice.company.parent.id ? '/companyLogo/' + currentInvoice.company.parent.id : currentInvoice.company.parent.logo) + '?t=' + currentTime }}"
              width="450" height="200" alt="{{ currentInvoice.techCompanyName }}">
       </div>
       <div class="company-info">
