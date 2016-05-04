@@ -343,11 +343,13 @@ Devices tab
 .qt-company-devices .col-5{
   width: 207px;
 }
-.device-name, .device-type-icons, .device-user-name, .device-lan-ip, .device-desc, .device-manufacturer, .device-mac-address{
+.device-name, .device-type-icons, .device-user-name, .device-lan-ip, .device-desc, .device-manufacturer,
+.device-mac-address, .last-seen-date {
   margin-top: 9px;
 }
 @-moz-document url-prefix() {
-  .device-name, .device-type-icons, .device-user-name, .device-lan-ip, .device-desc, .device-manufacturer, .device-mac-address{
+  .device-name, .device-type-icons, .device-user-name, .device-lan-ip, .device-desc, .device-manufacturer,
+  .device-mac-address, .last-seen-date {
     line-height: 19px;
   }
 }
@@ -360,7 +362,7 @@ Devices tab
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-.device-lan-ip, .device-user-name, .device-desc, .device-manufacturer, .device-mac-address{
+.device-lan-ip, .device-user-name, .device-desc, .device-manufacturer, .device-mac-address, .last-seen-date {
   color: #94a4b8;
 }
 .device-manufacturer{

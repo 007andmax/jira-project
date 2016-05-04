@@ -11,7 +11,7 @@
             $scope.companyContacts = CompaniesService.getCompanyContacts($scope, value);
 
             DevicesService.getSomeInfoForDevices(value, function (resp) {
-              $scope.isDomainPresent = resp.isDomainPresent;
+              $scope.isDomainPresent = resp.domainPresent;
               $scope.allowAgentInstall = resp.allowAgentInstall;
             });
           }

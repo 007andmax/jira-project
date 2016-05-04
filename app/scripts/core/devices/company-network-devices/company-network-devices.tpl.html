@@ -24,41 +24,53 @@
     <div class="loader"></div>
   </div>
 
-  <ul class="qt-list qt-network-scan network-scan-tab"
+  <ul class="qt-list qt-network-scan"
       ng-if="scanDevices.networkScan.devices && scanDevices.networkScan.devices.length > 0">
 
     <li class="list-heading">
 
       <div class="col-1" ng-click="sortNetworkScan('hostName')">
-            <span class="sort-span">DEVICE<i class="icn-sm sort-icon icn-sort"
-                                             ng-class="{'rotate': orderScanBy === '-hostName', 'active': orderScanBy.indexOf('hostName') > -1}"></i></span>
-
+            <span class="sort-span">DEVICE
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-hostName', 'active': orderScanBy.indexOf('hostName') > -1}"></i>
+            </span>
       </div>
 
       <div class="col-desc"><span>DESCRIPTION</span></div>
 
       <div class="col-3" ng-click="sortNetworkScan('ipAddress')">
-            <span class="sort-span">LAN IP<i class="icn-sm sort-icon icn-sort"
-                                             ng-class="{'rotate': orderScanBy === '-ipAddress', 'active': orderScanBy.indexOf('ipAddress') > -1}"></i></span>
-
+            <span class="sort-span">LAN IP
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-ipAddress', 'active': orderScanBy.indexOf('ipAddress') > -1}"></i>
+            </span>
       </div>
 
       <div class="col-4" ng-click="sortNetworkScan('manufacturer')">
-            <span class="sort-span">MANUFACTURER<i class="icn-sm sort-icon icn-sort"
-                                                   ng-class="{'rotate': orderScanBy === '-manufacturer', 'active': orderScanBy.indexOf('manufacturer') > -1}"></i></span>
-
+            <span class="sort-span">MANUFACTURER
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-manufacturer', 'active': orderScanBy.indexOf('manufacturer') > -1}"></i>
+            </span>
       </div>
 
       <div class="col-5" ng-click="sortNetworkScan('macAddress')">
-            <span class="sort-span">MAC ADDRESS<i class="icn-sm sort-icon icn-sort"
-                                                  ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i></span>
-
+            <span class="sort-span">MAC ADDRESS
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-macAddress', 'active': orderScanBy.indexOf('macAddress') > -1}"></i>
+            </span>
       </div>
 
       <div class="col-2" ng-click="sortNetworkScan('agentStatus')" style="text-align: center;">
-            <span class="sort-span">Agent Status<i class="icn-sm sort-icon icn-sort"
-                                                   ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i></span>
+            <span class="sort-span">Agent Status
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-agentStatus', 'active': orderScanBy.indexOf('agentStatus') > -1}"></i>
+            </span>
+      </div>
 
+      <div class="col-7" ng-click="sortNetworkScan('updatedAt')" style="text-align: center;">
+            <span class="sort-span">LAST SEEN DATE
+              <i class="icn-sm sort-icon icn-sort"
+                 ng-class="{'rotate': orderScanBy === '-updatedAt', 'active': orderScanBy.indexOf('updatedAt') > -1}"></i>
+            </span>
       </div>
 
       <div class="col-6">&nbsp;</div>
@@ -159,6 +171,8 @@
       <div class="col-2" style="text-align: center">
         <div class="device-mac-address">{{ device.agentStatus }}</div>
       </div>
+
+      <div class="col-7 last-seen-date" style="text-align: center">{{ device.updatedAt | date: 'dd MMM yyyy' }}</div>
 
       <div class="col-6" style="height: 9px;">
         <div class="list-actions pull-right" ng-show="device.hostName !== 'unknown'">
