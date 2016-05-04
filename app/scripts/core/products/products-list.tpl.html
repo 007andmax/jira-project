@@ -61,7 +61,7 @@
         </div>
 
         <div class="col-1">
-          {{ product.category.name}}
+          {{ product.category.default ? '' : product.category.name}}
         </div>
 
         <div class="col-2" ng-class="{'product-description': category.default}">{{ product.description}}
