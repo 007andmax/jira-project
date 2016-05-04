@@ -8,6 +8,7 @@
 
         var headerSharedState = SharedStateService.getSharedState('billableClientsHeader');
 
+        $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
@@ -51,6 +52,8 @@
 
             }
           }
+
+          $scope.loadingInProgress = false;
 
         });
 
