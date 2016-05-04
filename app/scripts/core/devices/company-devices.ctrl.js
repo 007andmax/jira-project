@@ -30,8 +30,12 @@
         $scope.orderDevicesBy = 'hostName';
 
         $scope.runScanDevices = function () {
+          $scope.isScanDevicesLoad = true;
           DevicesService.runScanDevices($scope, $scope.companyId, function (resp) {
             $scope.masterAgentOffline = resp.code === 400;
+            if ($scope.masterAgentOffline) {
+              $scope.isScanDevicesLoad = false;
+            }
           });
         };
 
@@ -96,12 +100,12 @@
               DevicesService.getAgentSettingsByCompany($scope.companyId, function (resp) {
                 var isAutoRescanEnable = resp.autoScanNetwork;
 
+                $scope.masterAgentOffline = false;
                 if (isAutoRescanEnable) {
+                  $scope.isScanDevicesLoad = true;
                   DevicesService.runScanDevices($scope, $scope.companyId, function (resp) {
                     $scope.masterAgentOffline = resp.code === 400;
                   });
-                } else {
-                  $scope.masterAgentOffline = false;
                 }
               });
             }
