@@ -42,7 +42,7 @@
 
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active">
-        <ul class="qt-list qt-recurring-invoices">
+        <ul class="qt-list qt-recurring-invoices" ng-if="!loadingInProgress">
 
           <li ng-if="editInvoiceId === 'new-invoice'">
             <div ng-include="'/html/scripts/core/recurring/edit-invoice.tpl.html'"></div>
@@ -151,6 +151,7 @@
           </li>
 
         </ul>
+        <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
       </div>
     </div>
   </div>

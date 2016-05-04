@@ -58,7 +58,7 @@
 
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active">
-        <ul class="qt-list qt-billable-clients" ftt-tab-content>
+        <ul class="qt-list qt-billable-clients" ng-if="!loadingInProgress" ftt-tab-content>
 
           <li class="billable-main"
               event-toggle-slider="toggleBillableTickets"

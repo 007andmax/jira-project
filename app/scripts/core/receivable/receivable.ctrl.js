@@ -12,6 +12,7 @@
           companies: {},
           invoices: {}
         };
+        $scope.loadingInProgress = true;
 
         $scope.receivedAmountAllTime = ReceivableService.getReceivedPaymentsSumByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
@@ -22,7 +23,7 @@
           }
         });
 
-        $scope.receivableInvoicesData = ReceivableService.getReceivableInvoicesData($scope, function () {
+        $scope.receivableInvoicesData = ReceivableService.getReceivableInvoicesData($scope, function (resp) {
 
           var invoicesData = $scope.receivableInvoicesData;
 
@@ -84,6 +85,7 @@
               }
             }
 
+            $scope.loadingInProgress = false;
           }, true);
 
 

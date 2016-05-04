@@ -7,6 +7,7 @@
       '$scope', 'RecurringService', 'CompaniesService',
       function ($scope, RecurringService, CompaniesService) {
 
+        $scope.loadingInProgress = true;
         $scope.editInvoiceId = '';
         $scope.frequency = {
           sevenDays: '7 days',
@@ -22,6 +23,7 @@
 
         RecurringService.getAll($scope, function (resp) {
           $scope.invoices = resp;
+          $scope.loadingInProgress = false;
         });
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {

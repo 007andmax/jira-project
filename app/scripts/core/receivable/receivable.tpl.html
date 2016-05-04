@@ -69,7 +69,8 @@
 
     </div>
 
-    <div class="tab-content" ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>
+    <div class="tab-content" ng-if="!loadingInProgress" ng-include="'/html/scripts/core/receivable/'+ mode +'.tpl.html'"></div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 
   </div>
 </div>
