@@ -43,6 +43,7 @@
 
             $rootScope.$broadcast('productsTabChanged');
             $scope.pageTab = tab;
+            $scope.expandedCategoryId = '';
           }
         };
 
