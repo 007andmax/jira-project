@@ -98,15 +98,6 @@
           });
         };
 
-        $scope.uncheckTicket = uncheckTicket;
-
-        function uncheckTicket(id) {
-          if ($scope.selectedTickets[id]) {
-            $scope.selectedTickets[id] = false;
-            $scope.changeSelectedTickets(id);
-          }
-        }
-
       }]);
 
 }());

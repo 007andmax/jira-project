@@ -84,6 +84,7 @@
         $scope.$watch('tickets', changeSelectedTickets);
 
         $scope.changeSelectedTickets = changeSelectedTickets;
+        $scope.uncheckTicket = uncheckTicket;
 
         $scope.$on('uncheckAllTickets', function () {
           $scope.selectedTickets = {};
@@ -114,6 +115,13 @@
               }
 
             }
+          }
+        }
+
+        function uncheckTicket(id) {
+          if ($scope.selectedTickets[id]) {
+            $scope.selectedTickets[id] = false;
+            changeSelectedTickets(id);
           }
         }
 
