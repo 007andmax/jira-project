@@ -55,13 +55,13 @@
                 UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been marked as spam', true);
               });
             }
-            uncheckTicket($scope.ticket.id);
+            $scope.uncheckTicket($scope.ticket.id);
           });
         };
 
         $scope.restoreFromSpam = function () {
           TicketsService.restoreFromSpam($scope.ticket.id);
-          uncheckTicket($scope.ticket.id);
+          $scope.uncheckTicket($scope.ticket.id);
         };
 
         $scope.moveToTrash = function (movedWay) {
@@ -69,7 +69,7 @@
             if (movedWay) {
 
               UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been moved to Trash', true);
-              uncheckTicket($scope.ticket.id);
+              $scope.uncheckTicket($scope.ticket.id);
             }
           });
         };
@@ -82,7 +82,7 @@
             TicketsService.deleteForever($scope.ticket.id, function () {
 
               UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been deleted', true);
-              uncheckTicket($scope.ticket.id);
+              $scope.uncheckTicket($scope.ticket.id);
             });
           });
         };
