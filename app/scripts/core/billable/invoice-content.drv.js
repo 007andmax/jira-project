@@ -13,6 +13,8 @@
             var invoiceTemplate,
               invoiceModalWindow = $('.modal-open .modal');
 
+            scope.currentTime = +(new Date());
+
             scope.$watch(function () {
 
               var invoiceDto = ngModelCtrl.$viewValue;
