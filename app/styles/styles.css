@@ -9627,3 +9627,7 @@ button.close {
 .master-agent-offline-message .text-center {
   color: #e53935;
 }
+.input-error {
+  background-color: #fff2f2 !important;
+  border-color: #fde9e9 !important;
+}

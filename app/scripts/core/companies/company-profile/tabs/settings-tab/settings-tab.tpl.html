@@ -6,11 +6,15 @@
       <li>
         <label>
           Maximum agents install for this client
-          <input type="number" min="{{agents.length}}" name="maxAgents"
+          <input type="number" min="{{ agents && agents.length ? agents.length : 0 }}" name="maxAgents"
                  ng-model="settings.maxAgents"
+                 ng-class="{'input-error': agentDeploymentSettingsFrom.maxAgents.$invalid}"
                  execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
-          <span ng-if="agentDeploymentSettingsFrom.maxAgents.$invalid" style="color: #e53935">
+          <span ng-if="agentDeploymentSettingsFrom.maxAgents.$error.min && settings.maxAgents !== 0" style="color: #e53935">
             The maximum number of agents may be bigger than the number of already installed!
+          </span>
+          <span ng-if="agentDeploymentSettingsFrom.maxAgents.$error.number" style="color: #e53935">
+            Invalid value!
           </span>
         </label>
       </li>
@@ -99,7 +103,7 @@
                   <input type="search" class="form-control" ng-model="deviceSearchQuery" placeholder="Search...">
                   <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
                 </li>
-                <li ng-repeat="agent in agentsAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
+                <li ng-repeat="agent in agentsAllowedForCredential | filter: searchDevice | orderBy: orderDeviceBy">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="selectedAgents[agent.id]"
                            ng-change="setCredentialAssign(agent.id, selectedAgents)">
@@ -107,7 +111,7 @@
                     <span class="control-indicator"></span>
                   </label>
                 </li>
-                <li ng-repeat="device in devicesAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
+                <li ng-repeat="device in devicesAllowedForCredential | filter: searchDevice | orderBy: orderDeviceBy">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="selectedDevices[device.id]"
                            ng-change="setCredentialAssign(device.id, selectedDevices)">
@@ -190,7 +194,7 @@
             <span class="device-settings-tab-password">Password</span>
           </li>
           <li class="right-column-content"
-              ng-repeat="credential in credentials | orderBy: 'isDefault': true track by $index"
+              ng-repeat="credential in credentials | orderBy:  ['isDefault', '-login']: true track by $index"
               ng-click="editCredential(credential.id, deviceSettingsForm)"
               ng-class="{'selected': selectedCredentialId === $index}">
             <span ng-show="credential.login">{{ credential.login }}</span>

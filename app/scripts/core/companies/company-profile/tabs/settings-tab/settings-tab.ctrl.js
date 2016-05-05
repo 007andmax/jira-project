@@ -214,6 +214,10 @@
 
         $scope.saveDeploymentSettings = function (form) {
 
+          if ($scope.settings.maxAgents === 0) {
+            form.$setValidity('min', true);
+          }
+
           if (!$scope.settings.removeOfflineTime || $scope.settings.removeOfflineTime < 0) {
             $scope.settings.removeOfflineTime = 0;
           }
@@ -329,6 +333,14 @@
             return false;
           } else {
             return true;
+          }
+        };
+
+        $scope.orderDeviceBy = function (device) {
+          if (device.hostName === 'unknown') {
+            return undefined;
+          } else {
+            return device.hostName;
           }
         };
 
