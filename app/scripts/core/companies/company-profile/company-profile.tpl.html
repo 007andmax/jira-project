@@ -75,11 +75,11 @@
 
           <div class="company-rating">
             <!--<ul class="rating rating-5">-->
-              <!--<li class="icn-sm icn-star-full star-1"></li>-->
-              <!--<li class="icn-sm icn-star-full star-2"></li>-->
-              <!--<li class="icn-sm icn-star-full star-3"></li>-->
-              <!--<li class="icn-sm icn-star-half star-4"></li>-->
-              <!--<li class="icn-sm icn-star-empty star-5"></li>-->
+            <!--<li class="icn-sm icn-star-full star-1"></li>-->
+            <!--<li class="icn-sm icn-star-full star-2"></li>-->
+            <!--<li class="icn-sm icn-star-full star-3"></li>-->
+            <!--<li class="icn-sm icn-star-half star-4"></li>-->
+            <!--<li class="icn-sm icn-star-empty star-5"></li>-->
             <!--</ul>-->
           </div>
 
@@ -398,147 +398,6 @@
     <i class="icn-sm icn-expand pull-right"></i>
   </div>
 
-  <ul class="nav nav-qt clearfix" style="padding-top: 50px"
-      ng-class="{'root-user-company-prof': isChartsAccess()}" company-bulk-option>
-
-    <!--<li class="activity-tab active">-->
-    <!--<a data-toggle="tab" href="javascript:void(0)">Activity</a>-->
-    <!--<div class="activity-nav">-->
-    <!--<a href="javascript:void(0)" class="hourly active">Hour</a>-->
-    <!--<a href="javascript:void(0)" class="weekly">Week</a>-->
-    <!--<a href="javascript:void(0)" class="monthly">Month</a>-->
-    <!--</div>-->
-    <!--</li>-->
-
-    <li ng-class="{active: mode === 'user'}">
-      <a data-toggle="tab" href="javascript:void(0)" ng-click="mode = 'user'">
-        Users
-        <span class="text-muted">{{ users.length }}</span>
-      </a>
-    </li>
-
-    <li>
-      <a data-toggle="tab" href="javascript:void(0)" ng-click="mode = 'device'">
-        Devices
-        <span class="text-muted">{{ agents.length }}</span>
-      </a>
-    </li>
-
-    <!--<li ng-class="{active: mode === 'vendors'}">-->
-    <!--<a data-toggle="tab" href="javascript:void(0)" ng-click="mode = 'vendors'">-->
-    <!--Assc. Vendors-->
-    <!--<span class="text-muted">{{ companyData.companyAssociations.length }}</span>-->
-    <!--</a>-->
-    <!--</li>-->
-
-    <li class="bulk-option" bulk-option-content
-        ng-class="{'hide': !(bulkOptionMode === 'USERS') && !(bulkOptionMode === 'DEVICES')}"
-        ng-controller="quicktech.core.companies.bulkOptionCtrl">
-
-      <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'USERS'">
-
-        <p class="pull-left" style="white-space: nowrap;">
-          <strong>{{ selectUsersIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
-        </p>
-
-        <div class="topNavbar-filter pull-right">
-
-          <div class="btn btn-default has-tooltip pull-right" ng-click="archiveUsers()"
-               tooltip-placement="bottom" tooltip="Archive">
-            <i class="icn-sm icn-remove-token"></i>
-          </div>
-
-          <div class="dropdown">
-            <div class="btn btn-default has-tooltip pull-right" data-toggle="dropdown"
-                 tooltip-placement="bottom" tooltip="Subscribe to...">
-              <i class="icn-sm icn-user-subscription"></i>
-            </div>
-
-            <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
-
-              <li ng-click="changeUserSubscription('ticket')">
-                <a tabindex="-1" href="javascript:void(0)">
-                  <div class="clearfix">
-                    <label class="control checkbox pull-left">
-                      <input type="checkbox" ng-model="usersSbscr['ticket']" ng-disabled="disabledSubscr">
-                      <span class="control-indicator"></span> Ticket Updates
-                    </label>
-                  </div>
-                </a>
-              </li>
-
-              <li ng-click="changeUserSubscription('invoice')">
-                <a tabindex="-1" href="javascript:void(0)">
-                  <div class="clearfix">
-                    <label class="control checkbox pull-left">
-                      <input type="checkbox" ng-model="usersSbscr['invoice']" ng-disabled="disabledSubscr">
-                      <span class="control-indicator"></span> Invoice Updates
-                    </label>
-                  </div>
-                </a>
-              </li>
-
-            </ul>
-          </div>
-
-          <div class="dropdown">
-            <div class="btn btn-default has-tooltip pull-right" data-toggle="dropdown"
-                 tooltip-placement="bottom" tooltip="Set Privilege to...">
-              <i class="icn-sm icn-user-privilege"></i>
-            </div>
-
-            <ul class="dropdown-menu dropdown-privilege">
-
-              <li>
-                <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('USER')">
-                  User
-                </a>
-              </li>
-
-              <li>
-                <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('ADMIN')">
-                  Administrator
-                </a>
-              </li>
-
-            </ul>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'DEVICES'">
-
-        <p class="pull-left" style="white-space: nowrap;">
-          <strong>{{ selectDevicesIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
-        </p>
-
-        <div class="topNavbar-filter pull-right">
-
-          <div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"
-               tooltip-placement="bottom" tooltip="Remove">
-            <i class="icn-sm icn-remove-token"></i>
-          </div>
-
-          <div class="btn btn-default has-tooltip pull-right" ng-click="shutdownDevices()"
-               tooltip-placement="bottom" tooltip="Shutdown">
-            <i class="icn-sm icn-shutdown-device"></i>
-          </div>
-
-          <div class="btn btn-default has-tooltip pull-right" ng-click="restartDevices()"
-               tooltip-placement="bottom" tooltip="Restart">
-            <i class="icn-sm icn-restart-device"></i>
-          </div>
-
-        </div>
-      </div>
-
-
-    </li>
-
-  </ul>
-
-  <div class="tab-content clearfix" ng-include="'/html/scripts/core/companies/company-profile/'+ mode +'-tab.tpl.html'"></div>
+  <div ng-include="'/html/scripts/core/companies/company-profile/tabs/company-profile-tabs.tpl.html'"></div>
 
 </div>

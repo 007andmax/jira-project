@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.companies').controller('quicktech.core.companies.deviceTabCtrl',
+  angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
     ['$scope', 'DevicesService',
       function ($scope, DevicesService) {
 

@@ -201,23 +201,24 @@
 
     <div class="clearfix divider"></div>
 
-    <div class="nav-title" style="width: 100%;cursor: pointer"
-         ng-click="goToDevicePage($event)">Devices
-    </div>
+    <!--<div class="nav-title" style="width: 100%;cursor: pointer"-->
+         <!--ng-click="goToDevicePage($event)">Devices-->
+    <!--</div>-->
 
-    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'DEVICES'}">
-      <ul class="nav nav-devices" ng-hide="collapseItem !== 'DEVICES'"
-          set-list-height-by-content="44" items-count="{{ getCompaniesWithDevicesLength() }}"><!--44px - height of li-->
+    <!--<nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'DEVICES'}">-->
+      <!--<ul class="nav nav-devices" ng-hide="collapseItem !== 'DEVICES'"-->
+          <!--set-list-height-by-content="44" items-count="{{ getCompaniesWithDevicesLength() }}">&lt;!&ndash;44px - height of li&ndash;&gt;-->
 
-        <li ng-class="{active: $state.includes('companyDevices', { companyId: company.id })}"
-            ng-repeat="company in companies">
-          <a class="ellipsis" href="javascript:void(0)"
-             ng-click="stateGo($event, 'companyDevices', { companyId: company.id })">
-            <i class="nav-icon icn-lg icn-companies"></i>{{ company.name || ''}}
-          </a>
-        </li>
-      </ul>
-    </nav>
+        <!--<li ng-class="{active: $state.includes('companyDevices', { companyId: company.id })}"-->
+            <!--ng-repeat="company in companies">-->
+          <!--<a class="ellipsis" href="javascript:void(0)"-->
+             <!--ng-click="stateGo($event, 'companyDevices', { companyId: company.id })">-->
+            <!--<i class="nav-icon icn-lg icn-companies"></i>{{ company.name || ''}}-->
+          <!--</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</nav>-->
+
   </div>
 
 </div>

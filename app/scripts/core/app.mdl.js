@@ -162,16 +162,16 @@
         templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
         controller: 'quicktech.core.settings.emailTemplatesCtrl'
       }))
-      .state('devices', waitForServices({
-        url: '/clients/devices',
-        templateUrl: '/html/scripts/core/devices/devices.tpl.html',
-        controller: 'quicktech.core.devices.devicesCtrl'
-      }))
-      .state('companyDevices', waitForServices({
-        url: '/clients/companyDevices/:companyId',
-        templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
-        controller: 'quicktech.core.devices.companyDevicesCtrl'
-      }))
+      //.state('devices', waitForServices({
+      //  url: '/clients/devices',
+      //  templateUrl: '/html/scripts/core/devices/devices.tpl.html',
+      //  controller: 'quicktech.core.devices.devicesCtrl'
+      //}))
+      //.state('companyDevices', waitForServices({
+      //  url: '/clients/companyDevices/:companyId',
+      //  templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
+      //  controller: 'quicktech.core.devices.companyDevicesCtrl'
+      //}))
       .state('quickSupport', waitForServices({
         url: '/quickSupport',
         templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
