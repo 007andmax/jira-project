@@ -61,7 +61,11 @@
         DevicesService.getAgentSettingsByCompany($scope.company.id, function (resp) {
           $scope.settings = resp;
 
-          $scope.settings.masterAgentId = $scope.settings.masterAgent.agentId;
+          if ($scope.settings.masterAgent && $scope.settings.masterAgent.agentId) {
+            $scope.settings.masterAgentId = $scope.settings.masterAgent.agentId;
+          } else {
+            $scope.settings.masterAgentId = '';
+          }
 
           for (var i = 0, len = $scope.rescanIntervals.length; i < len; i++) {
             var obj = $scope.rescanIntervals[i];
@@ -417,28 +421,30 @@
             }
           }
 
-          for (var k = 0, len = $scope.agents.length; k < len; k++) {
-            var agent = $scope.agents[k];
-            isAgentInCredentials = false;
-            for (var i = 0; i < allAgentsFromCredentials.length; i++) {
-              var agentFromCredentials = allAgentsFromCredentials[i];
+          if ($scope.agents && $scope.agents.length) {
+            for (var k = 0, len = $scope.agents.length; k < len; k++) {
+              var agent = $scope.agents[k];
+              isAgentInCredentials = false;
+              for (var i = 0; i < allAgentsFromCredentials.length; i++) {
+                var agentFromCredentials = allAgentsFromCredentials[i];
 
-              if (agentFromCredentials === agent.id) {
-                isAgentInCredentials = true;
-                break;
+                if (agentFromCredentials === agent.id) {
+                  isAgentInCredentials = true;
+                  break;
+                }
               }
-            }
 
-            for (var j = 0; j < scannedDevices.length; j++) {
-              var device = scannedDevices[j];
+              for (var j = 0; j < scannedDevices.length; j++) {
+                var device = scannedDevices[j];
 
-              if (device.deviceId === agent.id) {
-                excludedDevices.push(device.id)
+                if (device.deviceId === agent.id) {
+                  excludedDevices.push(device.id)
+                }
               }
-            }
 
-            if (!isAgentInCredentials) {
-              $scope.allowedAgents.push(agent);
+              if (!isAgentInCredentials) {
+                $scope.allowedAgents.push(agent);
+              }
             }
           }
 
