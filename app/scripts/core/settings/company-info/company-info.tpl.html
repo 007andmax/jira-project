@@ -326,7 +326,7 @@
           <div class="col-4">&nbsp;</div>
         </li>
 
-        <li ng-repeat="service in services"
+        <li ng-repeat="service in services | orderBy: 'name'"
             ng-controller="quicktech.core.settings.companyInfoServiceCtrl"
             ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
             show-model-element="{{ 'show-' + service.versionedId.id }}">
@@ -417,7 +417,7 @@
           <div class="col-2">TAX PERCENT</div>
         </li>
 
-        <li class="tax-list" ng-repeat="tax in taxRates" ng-class="{'new-tax': isEditing}"
+        <li class="tax-list" ng-repeat="tax in taxRates | orderBy: 'code'" ng-class="{'new-tax': isEditing}"
             ng-controller="quicktech.core.settings.companyInfoTaxRateCtrl"
             ng-form="companyInfoEditTax">
 

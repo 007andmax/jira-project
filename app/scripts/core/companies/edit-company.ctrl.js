@@ -119,6 +119,7 @@
               $scope.editCompany.taxRates.push(resp[i]);
               $scope.selectedTax[resp[i].code] = true;
             }
+            $scope.loadingInProgress = false;
           });
 
         }

@@ -22,6 +22,10 @@
           return true;
         };
 
+        $scope.orderCompaniesBy = function (associationsCompany) {
+          return associationsCompany.company.name;
+        };
+
         $scope.$on('$destroy', function () {
           SharedStateService.clearState('vendorsHeader');
         });

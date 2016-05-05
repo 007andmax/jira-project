@@ -19,7 +19,7 @@
         </div>
       </li>
 
-      <li class="template-item tech-user-item" ng-repeat="user in users | orderBy: 'firstName'"
+      <li class="template-item tech-user-item" ng-repeat="user in users | orderBy: getUserName"
           ng-class="{'expanded': editUserId === user.id}"
           ng-if="!((user.id === currentUser.id) || (user.role === 'SUPER_TECH_ADMIN'))">
 

@@ -1,5 +1,5 @@
 <div>
-  <div class="table-wrapper clearfix" ng-repeat="expense in expenses">
+  <div class="table-wrapper clearfix" ng-repeat="expense in expenses | orderBy: ['isServiceExpense', 'sum']">
 
     <div class="table-content pull-left" ng-if="!expense.isServiceExpense" ng-init="product = expense">
 

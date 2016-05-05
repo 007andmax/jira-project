@@ -1,6 +1,6 @@
 <ul class="custom-scroll" style="max-height: 346px;">
 
-  <li ng-repeat="product in vendor.products">
+  <li ng-repeat="product in vendor.products | orderBy: 'description'">
 
     <div class="vp-price">{{ product.sale | currency: '$': 2 }}</div>
 

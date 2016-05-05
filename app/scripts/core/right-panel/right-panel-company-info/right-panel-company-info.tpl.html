@@ -138,7 +138,7 @@
       <ul class="primary-contacts" ng-hide="companyGroupedData.company.default">
 
         <li class="list-users" style="padding: 0 30px 0 0"
-            ng-repeat="companyContact in companyContacts">
+            ng-repeat="companyContact in companyContacts | orderBy: getUserName">
 
           <div style="padding: 9px 0 10px 30px"
                contact-user-popover user-info="companyContact"
@@ -198,7 +198,7 @@
       <ul class="general-devices">
 
         <li class="list-devices" device-context-menu
-            ng-repeat="agent in companyGroupedData.devices | filter: {'hostName': searchDevices}">
+            ng-repeat="agent in companyGroupedData.devices | filter: {'hostName': searchDevices} | orderBy: 'hostName'">
 
           <a href="javascript:void(0)" class="pull-left avatar">
 
@@ -252,7 +252,7 @@
         <li class="list-users" ng-class="{'checked': selectedUsers[user.id]}" custom-popover-menu
             custom-popover-menu-margin-top="-32px"
             custom-popover-template="/html/scripts/core/right-panel/custom-popover.tpl.html"
-            ng-repeat="user in companyGroupedData.users | filter: usersFilter" ng-hide="user.default">
+            ng-repeat="user in companyGroupedData.users | filter: usersFilter | orderBy: getUserName" ng-hide="user.default">
 
           <a href="javascript:void(0)" class="pull-left avatar">
             <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">

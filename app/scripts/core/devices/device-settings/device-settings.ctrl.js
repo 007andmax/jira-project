@@ -328,6 +328,14 @@
           }
         };
 
+        $scope.orderDeviceBy = function (device) {
+            if (device.hostName === 'unknown') {
+              return undefined;
+            } else {
+              return device.hostName;
+            }
+        };
+
         $scope.setCredentialAssign = function (selectedId, source) {
 
           var isSelected = source[selectedId],

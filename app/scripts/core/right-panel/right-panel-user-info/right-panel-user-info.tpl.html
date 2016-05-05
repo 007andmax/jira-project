@@ -195,7 +195,7 @@
               <li class="list-users" style="padding: 0 30px 0 0"
                   custom-popover-menu custom-popover-menu-margin-top="597px"
                   custom-popover-template="/html/scripts/core/right-panel/custom-popover.tpl.html"
-                  ng-repeat="user in companyData.users"
+                  ng-repeat="user in companyData.users | orderBy: getUserName"
                   ng-class="{'checked': selectedCompanyUsers[user.id]}">
 
                 <div style="padding: 10px 0 10px 30px" custom-user-popover-trigger="popoverIsOpen"
@@ -229,7 +229,7 @@
             <ul class="company-devices"
                 ng-show="currentOpenCompanyMode === ('DEVICES-' + companyData.company.id)">
 
-              <li class="list-devices checked" ng-repeat="agent in companyData.devices">
+              <li class="list-devices checked" ng-repeat="agent in companyData.devices | orderBy: 'hostName'">
 
                 <a href="javascript:void(0)" class="pull-left avatar">
 

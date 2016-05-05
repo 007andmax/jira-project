@@ -99,7 +99,7 @@
                   <input type="search" class="form-control" ng-model="deviceSearchQuery" placeholder="Search...">
                   <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
                 </li>
-                <li ng-repeat="agent in agentsAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
+                <li ng-repeat="agent in agentsAllowedForCredential | filter: searchDevice | orderBy: orderDeviceBy">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="selectedAgents[agent.id]"
                            ng-change="setCredentialAssign(agent.id, selectedAgents)">
@@ -107,7 +107,7 @@
                     <span class="control-indicator"></span>
                   </label>
                 </li>
-                <li ng-repeat="device in devicesAllowedForCredential | filter: searchDevice | orderBy: 'hostName'">
+                <li ng-repeat="device in devicesAllowedForCredential | filter: searchDevice | orderBy: orderDeviceBy">
                   <label class="control checkbox">
                     <input type="checkbox" ng-model="selectedDevices[device.id]"
                            ng-change="setCredentialAssign(device.id, selectedDevices)">
@@ -190,7 +190,7 @@
             <span class="device-settings-tab-password">Password</span>
           </li>
           <li class="right-column-content"
-              ng-repeat="credential in credentials | orderBy: 'isDefault': true track by $index"
+              ng-repeat="credential in credentials | orderBy: ['isDefault', '-login']: true track by $index"
               ng-click="editCredential(credential.id, deviceSettingsForm)"
               ng-class="{'selected': selectedCredentialId === $index}">
             <span ng-show="credential.login">{{ credential.login }}</span>

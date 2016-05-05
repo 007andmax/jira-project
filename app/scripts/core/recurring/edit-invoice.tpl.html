@@ -17,7 +17,7 @@
             <div typeahead-input-icon="searchCompany"></div>
 
             <ul class="dropdown-menu dropdown-menu-right">
-              <li ng-repeat="company in companies | filter: {'name': searchCompany}"
+              <li ng-repeat="company in companies | filter: {'name': searchCompany} | orderBy: 'name'"
                   ng-click="chooseCompany(company)" ng-if="!company.isDefault">
                 <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
               </li>
@@ -178,7 +178,7 @@
                   <span class="text-muted">No products.</span>
                 </li>
 
-                <li ng-repeat="product in editInvoice.products | orderBy: 'itemOrder'"
+                <li ng-repeat="product in editInvoice.products"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
                   <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
@@ -194,7 +194,7 @@
                   <span class="text-muted">No services.</span>
                 </li>
 
-                <li ng-repeat="service in editInvoice.services | orderBy: 'itemOrder'"
+                <li ng-repeat="service in editInvoice.services"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
                   <div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
