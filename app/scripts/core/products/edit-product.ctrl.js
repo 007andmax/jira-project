@@ -7,7 +7,7 @@
       function ($scope, $rootScope, ProductsService) {
 
         if ($scope.product) {
-          $scope.editProduct = $scope.product.staticCopy();
+          $scope.editProduct = angular.copy($scope.product);
           if (!$scope.editProduct.category && $scope.category) {
             $scope.editProduct.category = {id: $scope.category.id};
           }

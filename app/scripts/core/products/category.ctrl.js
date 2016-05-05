@@ -46,12 +46,6 @@
           }
         };
 
-        $scope.$watch('category.productsList.length', function (productsAmount) {
-          if (productsAmount !== 0 && !$scope.showCreateProduct) {
-            $scope.setExpandedCategoryId($scope.category.id);
-          }
-        });
-
         $scope.$on('cancelEditForm', function (event, data) {
           $scope.showCreateProduct = false;
         });
