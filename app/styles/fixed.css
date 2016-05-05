@@ -1273,15 +1273,17 @@ span.sort-span {
   cursor: not-allowed;
 }
 .tech-company-logo .create-user-avatar .avatar {
-  width: 315px;
-  height: 141px;
+  width: 450px;
+  height: 200px;
   margin-bottom: 15px;
 }
-
 .tech-company-logo .create-user-avatar .avatar img {
-  max-width: 315px;
+  max-width: 450px;
+  width: 100%;
 }
-
+.tech-company-logo .create-user-avatar .avatar .no-avatar {
+  width: auto;
+}
 .tech-company-logo .create-user-avatar .avatar .reposition {
-  width: 315px;
+  width: 100%;
 }
