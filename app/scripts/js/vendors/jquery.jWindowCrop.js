@@ -259,7 +259,17 @@
     function focusOnCenter() {
       var left = fillContainer((Math.round((base.focalPoint.x * base.workingPercent) - base.options.cropBoxWidth / 2) * -1), base.$image.width(), base.options.cropBoxWidth, base.options.customTypeCrop);
       var top = fillContainer((Math.round((base.focalPoint.y * base.workingPercent) - base.options.cropBoxHeight / 2) * -1), base.$image.height(), base.options.cropBoxHeight, base.options.customTypeCrop);
-      base.$image.css({'left': (left.toString() + 'px'), 'top': (top.toString() + 'px')})
+
+      if(base.options.customTypeCrop === 'tech-logo'){
+        if(left > 0){
+          left = 0;
+        }
+
+        base.$image.css({'left': (left.toString() + 'px')});
+      } else {
+        base.$image.css({'left': (left.toString() + 'px'), 'top': (top.toString() + 'px')});
+      }
+
       storeFocalPoint();
     }
 
@@ -301,6 +311,15 @@
         var yDif = (event.pageY || event.originalEvent.touches[0].pageY) - base.dragMouseCoords.y;
         var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width() - 1, base.options.cropBoxWidth, base.options.customTypeCrop);
         var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height() - 1, base.options.cropBoxHeight, base.options.customTypeCrop);
+
+        if(base.options.customTypeCrop === 'tech-logo' && newLeft > 0){
+          newLeft = 0
+        }
+
+        if(base.options.customTypeCrop === 'tech-logo' && newTop > 0){
+          newTop = 0
+        }
+
         base.$image.css({'left': (newLeft.toString() + 'px'), 'top': (newTop.toString() + 'px')});
         storeFocalPoint();
         updateResult();
