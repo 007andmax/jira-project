@@ -305,7 +305,10 @@
             $scope.isHasDevices = true;
           } else {
             $scope.isHasDevices = false;
-            $scope.openTab('USERS');
+            if (!($scope.currentOpenTab === 'USERS') && !($scope.currentOpenTab === 'SETTINGS')) {
+              $scope.openTab('USERS');
+            }
+
           }
         })
 
