@@ -13,7 +13,7 @@
 
           angular.element($window).on("scroll", scrollListner);
 
-          function scrollListner(){
+          function scrollListner() {
             var viewableOffset = element.offset().top - $(window).scrollTop();
 
             if (!isBulkFixed && (viewableOffset < 58)) {
@@ -29,7 +29,7 @@
 
           }
 
-          scope.$on('$destroy', function() {
+          scope.$on('$destroy', function () {
             angular.element($window).off('scroll', scrollListner);
           });
 

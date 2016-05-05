@@ -3,21 +3,15 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
-    ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'UsersService', 'TicketsService',
-      'SubscriptionsService', 'VendorsService', 'quicktech.common.services.SharedStateService', '$timeout',
-      'DevicesService', 'quicktech.common.services.UserNotificationService',
-      'Utils', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, $state, $stateParams, CompaniesService, StatisticsService, UsersService, TicketsService,
-                SubscriptionsService, VendorsService, SharedStateService, $timeout, DevicesService,
-                UserNotificationService, Utils, UserConfirmationsService) {
+    ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'TicketsService',
+      'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
+      'quicktech.common.services.UserConfirmationsService',
+      function ($scope, $state, $stateParams, CompaniesService, StatisticsService, TicketsService, SharedStateService,
+                $timeout, UserNotificationService, UserConfirmationsService) {
 
         UserNotificationService.show('Loading...');
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
-        $scope.companyProfileHeader = {
-          selectUsersIds: [],
-          selectDevicesIds: []
-        };
 
         $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
@@ -38,9 +32,6 @@
             $state.go('companies');
           }
         });
-        DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
-          $scope.agents = resp;
-        });
 
         $scope.isChartsAccess = function () {
           return $scope.currentUser.role === 'SUPER_TECH_ADMIN' && $scope.company.accountType === 'CLIENT';
@@ -57,8 +48,6 @@
           }, 0);
 
         });
-        $scope.users = UsersService.getAllByCompanyId($stateParams.companyId);
-        $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($stateParams.companyId, $scope);
 
         if ($scope.isChartsAccess()) {
 
@@ -197,97 +186,8 @@
           $scope.isChartHasOpen = value;
         };
 
-        $scope.changeSelectedUsers = function () {
-          var selectUsersIds = [];
-          var selectUsersSbscr = {
-            invoice: 0,
-            ticket: 0
-          };
-
-          for (var userId in $scope.selectedUsers) {
-            if ($scope.selectedUsers[userId]) {
-              selectUsersIds.push(userId);
-
-              var user = Utils.findById($scope.users, userId);
-
-              if (user.subscription.invoice) {
-                selectUsersSbscr.invoice++;
-              }
-              if (user.subscription.ticket) {
-                selectUsersSbscr.ticket++;
-              }
-
-            }
-          }
-
-          $scope.companyProfileHeader.selectUsersSubscr = {
-            invoice: selectUsersSbscr.invoice === selectUsersIds.length,
-            ticket: selectUsersSbscr.ticket === selectUsersIds.length
-          };
-
-          $scope.isSelectAllUsers = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
-          $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
-        };
-
-        $scope.selectAllUsers = function () {
-          $scope.isSelectAllUsers = !$scope.isSelectAllUsers;
-
-          for (var i = 0, len = $scope.users.length; i < len; i++) {
-            $scope.selectedUsers[$scope.users[i].id] = $scope.isSelectAllUsers;
-          }
-
-          $scope.changeSelectedUsers();
-        };
-
-        $scope.changeSelectDevices = function () {
-          var selectDevicesIds = [];
-          var countOnlineDevices = 0;
-
-          for (var deviceId in $scope.selectDevices) {
-            if ($scope.selectDevices[deviceId]) {
-              selectDevicesIds.push(deviceId)
-            }
-          }
-
-          if ($scope.agents) {
-            for (var i = 0, len = $scope.agents.length; i < len; i++) {
-              if ($scope.agents[i].online) {
-                countOnlineDevices++
-              }
-            }
-          }
-
-          $scope.isSelectAllDevices = (selectDevicesIds.length > 0) && (selectDevicesIds.length === countOnlineDevices);
-          $scope.companyProfileHeader.selectDevicesIds = selectDevicesIds;
-        };
-
-        $scope.selectAllDevices = function () {
-          $scope.isSelectAllDevices = !$scope.isSelectAllDevices;
-
-          for (var i = 0, len = $scope.agents.length; i < len; i++) {
-            if ($scope.agents[i].online) {
-              $scope.selectDevices[$scope.agents[i].agentId] = $scope.isSelectAllDevices;
-            } else {
-              $scope.selectDevices[$scope.agents[i].agentId] = false
-            }
-          }
-
-          $scope.changeSelectDevices();
-        };
-
-        $scope.companyProfileHeader.unCheckAll = function () {
-          $scope.selectDevices = {};
-          $scope.selectedUsers = {};
-          $scope.changeSelectedUsers();
-          $scope.changeSelectDevices();
-        };
-
         $scope.$on('showEditCover', function () {
           $scope.isShowEditCover = true;
-        });
-
-        $scope.$watch('mode', function () {
-          $scope.companyProfileHeader.unCheckAll()
         });
 
         $scope.$on('showErrorCover', function (event, message) {

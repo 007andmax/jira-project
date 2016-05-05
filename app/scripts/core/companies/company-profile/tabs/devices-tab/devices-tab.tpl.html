@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" style="display: block;">
 
-  <ul class="qt-list qt-devices" style="margin-bottom: 150px" ng-controller="quicktech.core.companies.deviceTabCtrl">
+  <ul class="qt-list qt-devices" style="margin-bottom: 150px" ng-controller="quicktech.core.companies.devicesTabCtrl">
 
     <li class="list-heading">
       <div class="col-1" ng-click="sortDevicesTab('hostName')">
@@ -11,8 +11,10 @@
           <span class="control-indicator"></span>
         </label>
 
-        <span class="sort-span">NAME<i class="icn-sm sort-icon icn-sort"
-                     ng-class="{'rotate': orderDevicesBy === '-hostName', 'active': orderDevicesBy.indexOf('hostName') > -1}"></i></span>
+        <span class="sort-span">NAME
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderDevicesBy === '-hostName', 'active': orderDevicesBy.indexOf('hostName') > -1}"></i>
+        </span>
 
       </div>
       <div class="col-2" style="width: 367px; height: 12px">
@@ -21,20 +23,26 @@
 
       <div class="col-3" ng-click="sortDevicesTab('type')">
         <!--style="width: 145px; height: 12px"-->
-        <span class="sort-span">TYPE<i class="icn-sm sort-icon icn-sort"
-                     ng-class="{'rotate': orderDevicesBy === '-type', 'active': orderDevicesBy.indexOf('type') > -1}"></i></span>
+        <span class="sort-span">TYPE
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderDevicesBy === '-type', 'active': orderDevicesBy.indexOf('type') > -1}"></i>
+        </span>
 
       </div>
 
       <div class="col-4" ng-click="sortDevicesTab('userName')">
-        <span class="sort-span">USERNAME<i class="icn-sm sort-icon icn-sort"
-                         ng-class="{'rotate': orderDevicesBy === '-userName', 'active': orderDevicesBy.indexOf('userName') > -1}"></i></span>
+        <span class="sort-span">USERNAME
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderDevicesBy === '-userName', 'active': orderDevicesBy.indexOf('userName') > -1}"></i>
+        </span>
 
       </div>
 
       <div class="col-5" ng-click="sortDevicesTab('ip')">
-        <span class="sort-span">LAN IP<i class="icn-sm sort-icon icn-sort"
-                       ng-class="{'rotate': orderDevicesBy === '-ip', 'active': orderDevicesBy.indexOf('ip') > -1}"></i></span>
+        <span class="sort-span">LAN IP
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderDevicesBy === '-ip', 'active': orderDevicesBy.indexOf('ip') > -1}"></i>
+        </span>
 
       </div>
       <div class="col-6">&nbsp;</div>
