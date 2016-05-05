@@ -113,9 +113,9 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .products-content .dropdown-menu.move-prod {
   width: 200px;
-  max-height: 150px;
+  max-height: 120px;
   overflow-y: scroll;
-  margin-left: -150px
+  margin-left: -150px;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
