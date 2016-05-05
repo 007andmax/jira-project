@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module("quicktech.core.devices").filter('unknownFilter', function () {
+  angular.module("quicktech.core.companies").filter('unknownFilter', function () {
     return function (input) {
 
       if(!input){
