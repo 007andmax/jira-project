@@ -238,7 +238,7 @@
 
         } else {
           base.focalPoint = {'x': Math.round(base.originalWidth / 2), 'y': Math.round(base.originalHeight / 2)};
-          base.$rangeSelect.val(Math.floor(startZoomAvatar * 100))
+          base.$rangeSelect.val(Math.floor(startZoomAvatar * 100));
           base.setZoom(startZoomAvatar);
         }
 
@@ -265,7 +265,11 @@
           left = 0;
         }
 
-        base.$image.css({'left': (left.toString() + 'px')});
+        if(base.$image.height() < base.options.cropBoxHeight){
+          top = 0
+        }
+
+        base.$image.css({'left': (left.toString() + 'px'), 'top': (top.toString() + 'px')});
       } else {
         base.$image.css({'left': (left.toString() + 'px'), 'top': (top.toString() + 'px')});
       }
@@ -312,12 +316,18 @@
         var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width() - 1, base.options.cropBoxWidth, base.options.customTypeCrop);
         var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height() - 1, base.options.cropBoxHeight, base.options.customTypeCrop);
 
-        if(base.options.customTypeCrop === 'tech-logo' && newLeft > 0){
-          newLeft = 0
-        }
+        if(base.options.customTypeCrop === 'tech-logo'){
+          if(newLeft > 0){
+            newLeft = 0
+          }
 
-        if(base.options.customTypeCrop === 'tech-logo' && newTop > 0){
-          newTop = 0
+          if(newTop > 0){
+            newTop = 0
+          }
+
+          if(newTop < (base.$image.height() * -1)){
+            newTop = base.$image.height() * -1;
+          }
         }
 
         base.$image.css({'left': (newLeft.toString() + 'px'), 'top': (newTop.toString() + 'px')});
