@@ -38,7 +38,7 @@
 
             var unreadUpdatesId = [];
 
-            $scope.currentOpenTab = 'NOTE';
+            $scope.currentOpenTab = $scope.currentOpenTab || 'NOTE';
 
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
             $scope.company = CompaniesService.getOneById($scope.ticketDetails.company.id);
