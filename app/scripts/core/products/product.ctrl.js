@@ -9,6 +9,7 @@
 
         $scope.openEditProduct = function () {
           $rootScope.$broadcast('cancelEditForm');
+          $scope.setShowCreateProductInList(false);
           $scope.showEditProduct = true;
         };
 

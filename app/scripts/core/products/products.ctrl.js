@@ -6,7 +6,8 @@
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
 
-        var categories;
+        var categories,
+          showCreateProductInList = false;
 
         $scope.orderProducts = {
           field: 'description',
@@ -129,6 +130,19 @@
 
         $scope.setShowingCategory = function (id) {
           $scope.showCategory = id;
+        };
+
+        $scope.setShowCreateProductInList = function (trigger) {
+          showCreateProductInList = trigger;
+        };
+
+        $scope.isCreationFormShown = function () {
+          return showCreateProductInList;
+        };
+
+        $scope.openCreationForm = function () {
+          showCreateProductInList = true;
+          $scope.$broadcast('cancelEditForm');
         };
       }]);
 

@@ -45,6 +45,10 @@
       <div class="col-6">&nbsp;</div>
     </li>
 
+    <li class="qt-product-form" ng-if="isCreationFormShown()">
+      <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
+    </li>
+
     <li ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse"
         ng-class="{'qt-product-form': showEditProduct}"
         ng-controller="quicktech.core.products.productCtrl"
@@ -122,11 +126,6 @@
            ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'">
       </div>
 
-    </li>
-
-
-    <li class="qt-product-form" ng-if="showCreateProduct">
-      <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
     </li>
 
   </ul>
