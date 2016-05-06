@@ -2599,14 +2599,14 @@ Devices tab
 }
 @media only screen and (min-width: 2300px){
   .qt-network-scan>li>.col-1{
-    width: calc(100% - 1456px);
+    width: calc(100% - 1520px);
   }
   .qt-network-scan .checkbox-caption .hit-area{
     display: none;
   }
   .qt-network-scan>li>.col-desc{
     display: block;
-    width: 427px;
+    width: 340px;
   }
 }
 @media only screen and (max-width: 1700px){
