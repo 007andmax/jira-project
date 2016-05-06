@@ -5,7 +5,8 @@
       <span class="text-muted">{{ services.length }}</span>
     </div>
 
-    <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
+    <div ng-include="'/html/scripts/core/services/services-list.tpl.html'" ng-if="!loadingInProgress"></div>
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 
     <div class="add-service-btn-wrapper" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
       <div class="btn btn-success has-tooltip" ng-show="!showCreateService"
@@ -45,7 +46,7 @@
 
             <div class="custom-scroll" style="max-height: 164px">
 
-              <div class="" ng-repeat="service in servicesData.default | orderBy: 'name'">
+              <div ng-repeat="service in servicesData.default | orderBy: 'name'">
                 <label class="control checkbox">
                   <input type="checkbox" ng-model="addServiceDropdown.serviceMap[service.versionedId.id]">
                   <span class="control-indicator pull-left"></span>
@@ -73,6 +74,5 @@
            ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
 
     </li>
-
   </ul>
 </div>

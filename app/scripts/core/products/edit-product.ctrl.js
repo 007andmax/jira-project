@@ -88,7 +88,7 @@
         $scope.validateSaleAndCost = function (form) {
 
           var valid = (!$scope.editProduct.sale || !$scope.editProduct.cost)
-            || ($scope.editProduct.sale * 1) > ($scope.editProduct.cost * 1);
+            || ($scope.editProduct.sale * 1) >= ($scope.editProduct.cost * 1);
           form.sale.$setValidity('smallerThanCost', valid);
           form.cost.$setValidity('biggerThanSale', valid);
 

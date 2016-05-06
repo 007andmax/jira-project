@@ -57,7 +57,7 @@
 
                 dp = element.datetimepicker(options);
 
-                if (scope.period === 'Yearly') {
+                if (scope.period === 'Year') {
                   lastDate = new Date(lastDate);
                   var nextYear = lastDate.getFullYear() + 1;
                   if (e.viewDate._d.getMonth() === minDate.getMonth() && e.viewDate._d.getFullYear() === nextYear) {
@@ -100,10 +100,10 @@
                 period = parsedPeriod;
               }
 
-              if (period === 'Monthly') {
+              if (period === 'Month') {
                 date.setMonth(date.getMonth() + 1);
                 dates.push($filter('date')(date, 'd MMM yyyy'));
-              } else if (period === 'Yearly') {
+              } else if (period === 'Year') {
                 date.setFullYear(date.getFullYear() + 1);
                 dates.push($filter('date')(date, 'd MMM yyyy'));
               } else {
