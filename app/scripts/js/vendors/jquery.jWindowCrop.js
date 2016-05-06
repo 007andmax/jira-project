@@ -325,8 +325,8 @@
             newTop = 0
           }
 
-          if(base.$image.height() < base.options.cropBoxHeight){
-            newTop = 0
+          if(newTop < (base.$image.height() * -1)){
+            newTop = base.$image.height() * -1;
           }
         }
 
