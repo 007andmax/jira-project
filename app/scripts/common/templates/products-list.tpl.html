@@ -12,7 +12,7 @@
     </div>
   </li>
 
-  <li class="category-conteiner" ng-repeat="category in autocompleteData"
+  <li class="category-conteiner" ng-repeat="category in autocompleteData | orderBy: 'name'"
       ng-show="(category.products | filter:filterProduct).length > 0">
 
     <div class="category-info">
@@ -24,7 +24,7 @@
     <ul class="qt-table product-list-container">
 
       <li ng-click="chooseProductItem(product)"
-          ng-repeat="product in category.products | filter:filterProduct">
+          ng-repeat="product in category.products | filter: filterProduct | orderBy: 'description'">
 
         <div>
           <span class="title">{{ product.description }}</span>

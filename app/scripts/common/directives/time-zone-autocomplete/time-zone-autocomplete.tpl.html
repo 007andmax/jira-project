@@ -47,7 +47,7 @@
 
             <span>{{ formatOffset(offset) }}</span>
             &nbsp;
-            <span>{{ cities.join(', ') }}</span>
+            <span>{{ cities.sort().join(', ') }}</span>
             <i class="icn-sm icn-caret-gray pull-right" ng-if="cities.length > 1"
                ng-class="{'rotate': citiesExpanded[name + offset].expanded}"></i>
           </div>
