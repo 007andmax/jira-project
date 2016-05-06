@@ -6,6 +6,7 @@
     ['$scope', 'ServicesService', 'Utils', 'CompaniesService',
       function ($scope, ServicesService, Utils, CompaniesService) {
 
+        $scope.loadingInProgress = true;
         $scope.checkedServices = {};
         $scope.companies = CompaniesService.getClientCompanies().filter(function (item) {
           if (!item.isDefault) return item;
@@ -80,6 +81,10 @@
             return item.rate;
           }
 
+        };
+
+        $scope.setLoadingInProgress = function (trigger) {
+          $scope.loadingInProgress = trigger;
         };
 
       }]);
