@@ -256,7 +256,13 @@
       base.focalPoint = {'x': Math.round(x), 'y': Math.round(y)};
     }
 
-    function focusOnCenter() {
+    var oldZoom;
+
+    function focusOnCenter(changeZoom) {
+      if(!oldZoom){
+        oldZoom = base.workingPercent;
+      }
+
       var left = fillContainer((Math.round((base.focalPoint.x * base.workingPercent) - base.options.cropBoxWidth / 2) * -1), base.$image.width(), base.options.cropBoxWidth, base.options.customTypeCrop);
       var top = fillContainer((Math.round((base.focalPoint.y * base.workingPercent) - base.options.cropBoxHeight / 2) * -1), base.$image.height(), base.options.cropBoxHeight, base.options.customTypeCrop);
 
@@ -265,16 +271,20 @@
           left = 0;
         }
 
-        if(base.$image.height() < base.options.cropBoxHeight){
-          top = 0
+        base.$image.css({'left': (left.toString() + 'px')});
+
+        if((base.$image.height() < base.options.cropBoxHeight) && ((top + base.$image.height()) < 13 )){
+          if(oldZoom >= base.workingPercent){
+            base.$image.css({'top': ((base.$image.height() * -1).toString() + 'px')});
+          }
         }
 
-        base.$image.css({'left': (left.toString() + 'px'), 'top': (top.toString() + 'px')});
       } else {
         base.$image.css({'left': (left.toString() + 'px'), 'top': (top.toString() + 'px')});
       }
 
       storeFocalPoint();
+      oldZoom = base.workingPercent
     }
 
     function updateResult() {
