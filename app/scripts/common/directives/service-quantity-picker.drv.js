@@ -46,6 +46,10 @@
                 minuteDropdown = element.find('[min_drop_down]'),
                 formatDropdown = element.find('[format_drop_down]');
 
+              hourDropdown.bind('mousedown', chooseQuantity);
+              minuteDropdown.bind('mousedown', chooseQuantity);
+              formatDropdown.bind('mousedown', chooseQuantity);
+
               if (scope.quantity) {
                 setStartingValue(scope.quantity, hourDropdown, minuteDropdown, formatDropdown)
               }
@@ -107,7 +111,7 @@
             });
           }
 
-          input.bind('input', function (e) {
+          input.bind('input', function () {
             quantityDropdown.hide();
             isDropdownShow = false;
 
@@ -125,7 +129,7 @@
                 }
               }
 
-              if (value[lastIndex] === ':' || value[lastIndex] === ' ') {
+              if (value[lastIndex] === ':' || (value[lastIndex] === ' ' && value[lastIndex - 1] !== ':')) {
                 savedValue = value.split(' ')[0];
               } else {
                 savedValue = splited.join('');
@@ -138,17 +142,22 @@
             if (value) {
               var newSymbol = value[lastIndex],
                 oldPart = value.substring(0, lastIndex),
-                isNumber = !!parseInt(newSymbol) || parseInt(newSymbol) === 0;
+                isNumber = !!parseInt(newSymbol) || parseInt(newSymbol) === 0,
+                minutes = value.split(' : ')[1];
 
               if ((newSymbol === ':' || newSymbol === ' ') && oldPart.length && oldPart.indexOf(newSymbol) === -1) {
                 savedValue = oldPart + ' : ';
-                input.val(savedValue);
-              } else if (!isNumber) {
+              } else if (!isNumber || (minutes && minutes.length > 2)) {
                 savedValue = oldPart;
-                input.val(savedValue);
+              } else if (parseInt(minutes) > 60) {
+                value = value.split(' : ');
+                value[1] = '60';
+                savedValue = value.join(' : ');
               } else {
                 savedValue = value;
               }
+
+              input.val(savedValue);
             }
           });
 
@@ -163,8 +172,7 @@
             }
 
             if (!minutes) {
-              minutes = hours;
-              hours = '00';
+              minutes = '0';
             }
 
             hours = parseInt(hours);
@@ -188,12 +196,14 @@
             }
           });
 
+          element.find('[hour_drop_down] [min_drop_down] [format_drop_down]')
+
           scope.closeDropdown = function () {
             quantityDropdown.hide();
             isDropdownShow = false;
           };
 
-          scope.chooseQuantity = function () {
+          function chooseQuantity(event) {
 
             var hour = dropdownElement.hoverHour,
               minute = dropdownElement.hoverMinute;
