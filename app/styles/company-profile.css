@@ -158,5 +158,9 @@
 .company-profile-content ul.nav-qt {
   position: relative;
   float: left;
-  width: 100%;
+  width: 93%;
+}
+.for-network-tab{
+  width: 7%;
+  margin-top: 58px;
 }
