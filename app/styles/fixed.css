@@ -1080,6 +1080,8 @@ span.sort-span {
   color: #e53935;
 }
 .devices-settings-title{
+  display: inline-block;
+  margin-top: 30px;
   font-size: 17px;
   color: #4c5c6f;
   font-weight: 400;

@@ -6715,7 +6715,7 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 .nav-qt > li > a {
   /*      border-radius: @nav-pills-border-radius;*/
   height: 54px;
-  min-width: 190px;
+  min-width: 145px;
   background-color: #f1f5fa;
   text-decoration: none;
   text-align: left;
@@ -9625,6 +9625,8 @@ button.close {
   margin-top: 20px;
 }
 .master-agent-offline-message .text-center {
+  display: inline-block;
+  width: 100%;
   color: #e53935;
 }
 .input-error {
