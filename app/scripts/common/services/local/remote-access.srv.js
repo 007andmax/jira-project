@@ -57,16 +57,23 @@
 
             var checkFunc = null;
 
+            console.log('check browser to get checkFunc');
+
             if (navigator.userAgent.indexOf('Firefox') >= 0) {
               checkFunc = checkFirefox;
+              console.log('Firefox');
             } else if (navigator.userAgent.indexOf('Opera') >= 0) {
               checkFunc = checkOpera;
+              console.log('Opera');
             } else if (navigator.userAgent.indexOf('Chrome') >= 0) {
               checkFunc = checkChrome;
+              console.log('Chrome');
             } else if (navigator.userAgent.indexOf('Safari') >= 0) {
               checkFunc = checkSafari;
+              console.log('Safari');
             } else {
               checkFunc = checkSafari;
+              console.log('Default');
             }
 
             function checkFirefox(url) {
@@ -155,6 +162,7 @@
 
             }
 
+            console.log('call func ', url);
             checkFunc(url);
           }
 
