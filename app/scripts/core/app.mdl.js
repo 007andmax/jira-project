@@ -31,7 +31,10 @@
       'ngAnimate'
     ]);
 
-  app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  app.config(['$stateProvider', '$urlRouterProvider', '$compileProvider', function ($stateProvider, $urlRouterProvider, $compileProvider) {
+
+    //uncomment this line for increasing angularjs performance (when debugging will not need)
+    //$compileProvider.debugInfoEnabled(false);
 
     $urlRouterProvider.otherwise(getUserDefaultPage);
 
