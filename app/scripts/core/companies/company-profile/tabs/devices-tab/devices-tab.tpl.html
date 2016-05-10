@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" style="display: block;">
 
-  <ul class="qt-list qt-devices" style="margin-bottom: 150px" ng-controller="quicktech.core.companies.devicesTabCtrl">
+  <ul class="qt-list qt-devices" style="margin-bottom: 150px">
 
     <li class="list-heading">
       <div class="col-1" ng-click="sortDevicesTab('hostName')">
@@ -48,7 +48,7 @@
       <div class="col-6">&nbsp;</div>
     </li>
 
-    <li ng-repeat="agent in agents | orderBy: orderDevicesBy">
+    <li ng-repeat="agent in agents | orderBy: orderDevicesBy" ng-controller="quicktech.core.companies.devicesTabCtrl">
       <div class="col-1">
         <div>
 

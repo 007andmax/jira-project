@@ -69,7 +69,7 @@
 
               for (var i = 0; i < $scope.countsByTypesAndCompany.length; i++) {
                 if ($scope.countsByTypesAndCompany[i].value > 0 && !$scope.isChartHasOpen) {
-                  $scope.isCollapsed = false;
+                  //$scope.isCollapsed = false;
                   $scope.isChartHasOpen = true;
                   $scope.isCompanyHasTickets = true;
                   return;

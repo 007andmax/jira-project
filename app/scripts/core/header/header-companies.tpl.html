@@ -7,10 +7,7 @@
     <div class="input-group-search">
 
       <input type="text" class="form-control-top-search user-search" placeholder="Search company..."
-             ng-model="searchValue" autocomplete="off"
-             typeahead="company.name for company in companies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-             typeahead-editable="true" ng-trim="true" qt-typeahead-show-on-focus
-             custom-style="{'max-height': '200px', 'width': '228px', 'overflow-y': 'auto'}">
+             ng-model="searchValue">
 
       <span class="input-group-addon-search">
         <i class="icn-sm icn-search form-control-top-search-icn disabled" ng-hide="searchValue"></i>

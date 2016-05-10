@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
-    ['$scope', 'DevicesService',
-      function ($scope, DevicesService) {
+    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
+      function ($scope, DevicesService, RemoteAccessService) {
 
         $scope.remoteAccess = function (connectionType) {
           if (!$scope.agent.online) {
