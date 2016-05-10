@@ -15,7 +15,7 @@
           throw 'Keyword is required!'
         }
 
-        return $http.get("/products/search?keyword=" + keyword).then(function (response) {
+        return $http.get("/products/search?keyword=" + keyword.toLowerCase()).then(function (response) {
           return response.data;
         });
 

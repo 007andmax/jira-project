@@ -8,13 +8,13 @@
 
   services.factory('TagsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, Utils) {
 
-    function search(word, callback) {
+    function search(keyword, callback) {
 
-      if (!word) {
-        throw 'First argument must be word!'
+      if (!keyword) {
+        throw 'Keyword is required!';
       }
 
-      $http.get("/tags/search?word=" + word).then(function (response) {
+      $http.get("/tags/search?word=" + keyword.toLowerCase()).then(function (response) {
 
         if (callback) {
           callback(response.data);

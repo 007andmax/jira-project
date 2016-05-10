@@ -243,7 +243,8 @@
         }
 
         var searchUsers,
-          searchResult = [];
+          searchResult = [],
+          keywordLowerCase = keyword.toLowerCase();
 
         if (companyId) {
           searchUsers = storage.usersByCompanies[companyId] || [];
@@ -258,7 +259,7 @@
             continue;
           }
 
-          if ((user.firstName + ' ' + user.lastName).toLowerCase().indexOf(keyword.toLowerCase()) > -1) {
+          if ((user.firstName + ' ' + user.lastName).toLowerCase().indexOf(keywordLowerCase) > -1) {
             searchResult.push(user);
           }
         }

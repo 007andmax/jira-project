@@ -25,6 +25,9 @@
 
         params = angular.extend({}, params);
 
+        if (params.keyword) {
+          params.keyword = params.keyword.toUpperCase();
+        }
         if (params.filter) {
           params.filter = params.filter.toUpperCase();
         }

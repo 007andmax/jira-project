@@ -359,7 +359,7 @@
         throw 'Keyword is required!'
       }
 
-      return $http.get("/receivable/search?keyword=" + keyword).then(function (response) {
+      return $http.get("/receivable/search?keyword=" + keyword.toLowerCase()).then(function (response) {
         return response.data;
       });
     }

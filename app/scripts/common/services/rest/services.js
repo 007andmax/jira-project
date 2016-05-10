@@ -12,10 +12,10 @@
       function search(keyword) {
 
         if (!keyword) {
-          throw 'Keyword is required!'
+          throw 'Keyword is required!';
         }
 
-        return $http.get("/services/search?keyword=" + keyword).then(function (response) {
+        return $http.get("/services/search?keyword=" + keyword.toLowerCase()).then(function (response) {
           return response.data;
         });
 

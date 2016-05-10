@@ -164,7 +164,8 @@
         throw 'Keyword is required!'
       }
 
-      var searchResult = [];
+      var searchResult = [],
+        keywordLowerCase = keyword.toLowerCase();
 
       for (var i = 0; i < storage.companies.length; i++) {
 
@@ -173,7 +174,7 @@
           continue;
         }
 
-        if (company.name.indexOf(keyword) > -1) {
+        if (company.name.toLowerCase().indexOf(keywordLowerCase) > -1) {
           searchResult.push(company);
         }
       }

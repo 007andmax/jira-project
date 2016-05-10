@@ -44,11 +44,13 @@
               if (lastPointDate.getFullYear() === date.getFullYear()
                 && lastPointDate.getMonth() === date.getMonth()
                 && lastPointDate.getDate() + 1 === date.getDate()) {
+
                 points.push(Utils.customizeObj({
                   date: Utils.formatDate(date),
                   sum: 0
                 }));
                 points.splice(0, 1);
+                i--;
               }
             }
           }
@@ -383,7 +385,7 @@
         throw 'Keyword is required!'
       }
 
-      return $http.get("/recurringInvoice/search?keyword=" + keyword).then(function (response) {
+      return $http.get("/recurringInvoice/search?keyword=" + keyword.toLowerCase()).then(function (response) {
         return response.data;
       });
 
