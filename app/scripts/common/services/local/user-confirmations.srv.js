@@ -12,7 +12,7 @@
           keyboard: false,
           size: 'custom-size-confirmation-pop-up',
           windowClass: 'modal-spam',
-          templateUrl: '/html/scripts/common/services/user-confirmations.tpl.html'
+          templateUrl: '/html/scripts/common/services/local/user-confirmations.tpl.html'
         };
 
         this.show = function (message, button, hideCancel) {

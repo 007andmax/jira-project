@@ -1,0 +1,165 @@
+'use strict';
+
+/* Services */
+
+(function (window, $, undefined) {
+
+  var services = angular.module('main.services');
+
+  services.factory('EmailSettingsService', ['$http', '$rootScope', 'RealTimeService', 'Utils', '$filter', function ($http, $rootScope, RealTimeService, Utils) {
+
+    function saveNumberForm(data, type, callback) {
+
+      if (!data) {
+        throw 'data is required!';
+      }
+      if (!type) throw 'type is required!';
+
+      data.type = type;
+
+      var url = '/settings/emailPages/updateNumberForm',
+        method = 'PUT';
+
+      var future = $http({
+        url: url,
+        method: method,
+        data: data
+      });
+      Utils.handleCallback(future, callback);
+    }
+
+    function getCompanyEmailNotification(callback) {
+
+      var info = {};
+
+      $http.get('/settings/emailPages/emailNotifications').then(function (resp) {
+        Utils.customizeObj(resp.data, info);
+
+        if (callback) {
+          callback(resp.data);
+        }
+
+      }, function (resp) {
+        if (callback) {
+          callback(resp.data);
+        }
+      });
+      return info;
+    }
+
+    function getTermsAndConditions(callback) {
+
+      var info = {};
+
+      $http.get('/settings/emailPages/termsAndConditions').then(function (resp) {
+        Utils.customizeObj(resp.data, info);
+
+        if (callback) {
+          callback(resp.data);
+        }
+
+      }, function (resp) {
+        if (callback) {
+          callback(resp.data);
+        }
+      });
+      return info;
+    }
+
+    function getTemplate(type, callback) {
+
+      if (!type) throw 'type is required!';
+
+      var info = {};
+
+      $http.get('/settings/emailPages/byType/' + type).then(function (resp) {
+        Utils.customizeObj(resp.data, info);
+
+        if (callback) {
+          callback(resp.data);
+        }
+
+      }, function (resp) {
+        if (callback) {
+          callback(resp.data);
+        }
+      });
+      return info;
+    }
+
+    function getEmailSettingPageDto(scope, callback) {
+
+      if (!scope) throw 'scope is required!';
+
+      var info = Utils.customizeObj({});
+
+      $http.get('/settings/emailPages/').then(function (resp) {
+
+        Utils.customizeObj(resp.data, info);
+
+        if (callback) {
+          callback(resp.data);
+        }
+
+      }, function (resp) {
+        if (callback) {
+          callback(resp.data);
+        }
+      });
+
+      RealTimeService.subscribe('/companyEmailNotification', scope, function (newChange) {
+
+        console.log(newChange);
+
+        if (newChange.action == 'COMPANY_EMAIL_NOTIFICATION') {
+          Utils.customizeObj(newChange.data, info.activeAndNotDefault);
+        }
+      });
+
+      return info;
+    }
+
+    function setToDefaultTemplate(type, callback) {
+
+      if (!type) throw 'type is required!';
+
+      var url = '/settings/emailPages/toDefaultTemplate/' + type,
+        method = 'POST';
+
+      var future = $http({
+        url: url,
+        method: method
+      });
+      Utils.handleCallback(future, callback);
+    }
+
+    function saveEmailTemplate(data, type, callback) {
+
+      if (!data) throw 'data is required!';
+      if (!data.subject) throw 'data.subject is required!';
+      if (!data.body) throw 'data.body is required!';
+      if (!type) throw 'type is required!';
+
+      var url = '/settings/emailPages/updateTemplate/' + type,
+        method = 'PUT';
+
+      var future = $http({
+        url: url,
+        method: method,
+        data: data
+      });
+      Utils.handleCallback(future, callback);
+    }
+
+    return {
+      saveNumberForm: saveNumberForm,
+      getCompanyEmailNotification: getCompanyEmailNotification,
+      getEmailSettingPageDto: getEmailSettingPageDto,
+      getTermsAndConditions: getTermsAndConditions,
+      setToDefaultTemplate: setToDefaultTemplate,
+      getTemplate: getTemplate,
+      saveEmailTemplate: saveEmailTemplate
+    }
+  }
+  ]);
+})(window, jQuery);
