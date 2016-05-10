@@ -46,7 +46,7 @@
 .settings-main-wrapper .ticket-and-invoice-wrapper {
   float: left;
   width: 100%;
-  padding-bottom: 200px;
+  padding-bottom: 80px;
 }
 
 .settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
@@ -59,4 +59,10 @@
 
 .settings-main-wrapper .services-info-wrapper .add-new-service .btn-primary {
   display: none;
+}
+
+.tags-management {
+  float: left;
+  width: 100%;
+  padding-bottom: 200px;
 }

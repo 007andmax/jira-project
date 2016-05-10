@@ -345,9 +345,8 @@
             </div>
 
             <div class="col-5">
-              <label class="control checkbox pull-left">
-                <input type="checkbox" ng-checked="service.billable" custom-disabled="{{ disabledCheckbox }}"
-                       ng-click="onChangeBillable()">
+              <label class="control checkbox">
+                <input type="checkbox">
                 <span class="control-indicator"></span>
               </label>
             </div>
@@ -748,6 +747,50 @@
         </div>
 
       </form>
+    </div>
+
+  </div>
+
+  <div class="tags-management" id="companyInfoManageTags">
+    <h3>Tags</h3>
+
+    <div>
+      <span>Allow user to create custom Tags</span>
+      <div class="control checkbox pull-right">
+        <input type="checkbox">
+        <span class="control-indicator"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="search" class="form-control" placeholder="Search Tags...">
+    </div>
+
+    <div>
+      <ul class="qt-list">
+
+        <li class="list-heading">
+          <div class="col-1">TAG NAME</div>
+          <div class="col-2">COLOR PICKER</div>
+          <div class="col-3">NUMBER USER</div>
+          <div class="col-4">&nbsp;</div>
+        </li>
+
+        <li>
+          <div class="col-1">Printer</div>
+          <div class="col-2">
+            <span class="colored-circle"></span>
+            <i></i>
+          </div>
+          <div class="col-3">23</div>
+          <div class="col-4"><i class="icn-sm icn-delete"></i></div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div>
+      <a href="">Add tag</a>
     </div>
 
   </div>
