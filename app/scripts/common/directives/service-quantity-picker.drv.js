@@ -179,8 +179,23 @@
             minutes = parseInt(minutes);
 
             var isHoursInvalid = (hours || hours === 0) && hours < 10,
-              isMinutesInvalid = minutes < 10;
-            input.val((isHoursInvalid ? '0' : '') + hours + ' : ' + (isMinutesInvalid ? '0' : '') + minutes);
+              isMinutesInvalid = minutes < 10,
+              formattedHours = (isHoursInvalid ? '0' : '') + hours,
+              formattedMinutes = (isMinutesInvalid ? '0' : '') + minutes;
+
+            input.val(formattedHours + ' : ' + formattedMinutes);
+
+            if (hours <= 8) {
+              dropdownElement.hoverHour = formattedHours;
+            } else {
+              dropdownElement.hoverHour = '08';
+            }
+
+            if (minutes === 0 || minutes === 15 || minutes === 30 || minutes === 45) {
+              dropdownElement.hoverMinute = formattedMinutes;
+            } else {
+              dropdownElement.hoverMinute = '00';
+            }
 
             scope.quantity = hours * 60 + minutes;
             scope.$apply();
@@ -195,8 +210,6 @@
               isDropdownShow = false;
             }
           });
-
-          element.find('[hour_drop_down] [min_drop_down] [format_drop_down]')
 
           scope.closeDropdown = function () {
             quantityDropdown.hide();
