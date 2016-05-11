@@ -30,7 +30,7 @@
 
           function setValidationTimeout() {
             return $timeout(function () {
-              if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique)) {
+              if (ngModelCtrl.$viewValue && (ngModelCtrl.$valid || ngModelCtrl.$error.unique) && scope.validationFunc) {
                 scope.validationFunc(ngModelCtrl, scope.modelId);
               }
             }, 500);

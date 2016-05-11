@@ -3,7 +3,8 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("ticketTags",
-    ['$document', 'TagsService', function ($document, TagsService) {
+    ['$document', 'TagsService', 'CompaniesService', 'UsersService',
+      function ($document, TagsService, CompaniesService, UsersService) {
       return {
         restrict: 'E',
         templateUrl: '/html/scripts/common/directives/ticket-tags/ticket-tags.tpl.html',
@@ -13,6 +14,9 @@
           readonlyTags: '@?'
         },
         link: function ($scope, $element) {
+          $scope.currentCompany = CompaniesService.getCurrentCompany();
+          $scope.currentUser = UsersService.getCurrentUser();
+
           if (!$scope.readonlyTags) {
             var input = $element.find('input');
             input.on('keydown', function (e) {
@@ -39,6 +43,10 @@
 
             $scope.addTag = function (value) {
               if (typeof value === 'string') {
+                if (!$scope.currentCompany.allowCreateTags && $scope.currentUser.role === 'USER') {
+                  return;
+                }
+
                 $scope.ticketTags.push({
                   word: value
                 });

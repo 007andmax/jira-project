@@ -46,7 +46,7 @@
 .settings-main-wrapper .ticket-and-invoice-wrapper {
   float: left;
   width: 100%;
-  padding-bottom: 80px;
+  padding-bottom: 110px;
 }
 
 .settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
@@ -64,7 +64,7 @@
 .tags-management {
   float: left;
   width: 100%;
-  padding-bottom: 200px;
+  padding-bottom: 240px;
 }
 .tags-management .form-group{
   margin-top: 15px;
@@ -84,6 +84,7 @@
 }
 .tags-management .qt-list .list-heading{
   padding: 10px 0;
+  cursor: pointer !important;
 }
 .tags-management .qt-list .col-1, .tags-management .qt-list .col-2, .tags-management .qt-list .col-3{
   text-align: center;
@@ -92,6 +93,9 @@
 .tags-management .qt-list .col-1{
   text-align: left;
 }
+.tags-management .qt-list .col-2 {
+  cursor: pointer;
+}
 .tags-management .qt-list .col-2 .colored-circle{
   display: inline-block;
   width: 12px;
@@ -99,16 +103,22 @@
   border-radius: 50%;
   overflow: hidden;
   margin-right: 5px;
-  background: #748498;
 }
 .tags-management .qt-list .col-2 .icn-picker{
   display: inline-block;
   background: url("../images/sprites-s76c759f188.png") -1077px -1px no-repeat;
 }
-.tags-management .qt-list .col-4 .icn-refresh{
-  background-position: -1336px 0;
+.tags-management .qt-list .col-4 {
+  cursor: pointer;
+  float: right;
+}
+.tags-management .qt-list .col-4 .icn-replace{
+  background-position: -424px -98px;
   width: 14px;
   height: 14px;
+}
+.tags-management .qt-list .col-4 .icn-replace:hover{
+  background-position: -474px -98px;
 }
 .tags-management .tag-add{
   display: inline-block;

@@ -619,6 +619,14 @@
       });
     }
 
+    function saveAllowingCreateCustomTags(value) {
+      if (value === undefined) {
+        throw 'First parameter required!'
+      }
+
+      $http.put('/settings/companyProfile/allowUsersCreateTags?allow=' + value, {});
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -648,7 +656,8 @@
       saveLogo: saveLogo,
       deleteCover: deleteCover,
       deleteLogo: deleteLogo,
-      getCompanyContacts: getCompanyContacts
+      getCompanyContacts: getCompanyContacts,
+      saveAllowingCreateCustomTags: saveAllowingCreateCustomTags
     }
 
   }]);

@@ -40,6 +40,7 @@ module.exports = function(config) {
       'bower_components/jquery-mousewheel/jquery.mousewheel.js',
       'bower_components/typeahead.js/dist/typeahead.bundle.js',
       'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
+      'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
