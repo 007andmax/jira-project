@@ -754,9 +754,9 @@
   <div class="tags-management" id="companyInfoManageTags">
     <h3>Tags</h3>
 
-    <div>
+    <div class="clearfix">
       <span>Allow user to create custom Tags</span>
-      <div class="control checkbox pull-right">
+      <div class="control checkbox">
         <input type="checkbox">
         <span class="control-indicator"></span>
       </div>
@@ -766,31 +766,33 @@
       <input type="search" class="form-control" placeholder="Search Tags...">
     </div>
 
-    <div>
-      <ul class="qt-list">
+    <div class="clearfix">
+      <ul class="qt-list clearfix">
 
         <li class="list-heading">
-          <div class="col-1">TAG NAME</div>
-          <div class="col-2">COLOR PICKER</div>
-          <div class="col-3">NUMBER USER</div>
+          <div class="col-1"><span class="sort-span">TAG NAME<i class="icn-sm sort-icon icn-sort active"></i></span></div>
+          <div class="col-2"><span class="sort-span">COLOR PICKER<i class="icn-sm sort-icon icn-sort"></i></span></div>
+          <div class="col-3"><span class="sort-span">NUMBER USER<i class="icn-sm sort-icon icn-sort"></i></span></div>
           <div class="col-4">&nbsp;</div>
+          <div class="col-5">&nbsp;</div>
         </li>
 
         <li>
           <div class="col-1">Printer</div>
           <div class="col-2">
             <span class="colored-circle"></span>
-            <i></i>
+            <i class="icn-sm icn-picker"></i>
           </div>
           <div class="col-3">23</div>
           <div class="col-4"><i class="icn-sm icn-delete"></i></div>
+          <div class="col-4"><i class="icn-sm icn-refresh"></i></div>
         </li>
 
       </ul>
     </div>
 
     <div>
-      <a href="">Add tag</a>
+      <a href="" class="tag-add">Add tag</a>
     </div>
 
   </div>

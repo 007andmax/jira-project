@@ -66,3 +66,51 @@
   width: 100%;
   padding-bottom: 200px;
 }
+.tags-management .form-group{
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+.tags-management .qt-list{
+  padding: 10px;
+}
+.tags-management .qt-list>li + li{
+  height: auto;
+}
+.tags-management .qt-list>li{
+  padding: 10px 0;
+}
+.tags-management .qt-list>li:hover:before, .tags-management .qt-list>li:hover:after{
+  display: none;
+}
+.tags-management .qt-list .list-heading{
+  padding: 10px 0;
+}
+.tags-management .qt-list .col-1, .tags-management .qt-list .col-2, .tags-management .qt-list .col-3{
+  text-align: center;
+  width: 30%;
+}
+.tags-management .qt-list .col-1{
+  text-align: left;
+}
+.tags-management .qt-list .col-2 .colored-circle{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+  background: #748498;
+}
+.tags-management .qt-list .col-2 .icn-picker{
+  display: inline-block;
+  background: url("../images/sprites-s76c759f188.png") -1077px -1px no-repeat;
+}
+.tags-management .qt-list .col-4 .icn-refresh{
+  background-position: -1336px 0;
+  width: 14px;
+  height: 14px;
+}
+.tags-management .tag-add{
+  display: inline-block;
+  color: #1586E4;
+}
