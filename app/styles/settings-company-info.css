@@ -94,11 +94,18 @@
 .tags-management .qt-list .col-1{
   text-align: left;
   margin-top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 16px;
 }
 .tags-management .qt-list .col-1 .icn-edit{
   visibility: hidden;
   margin-top: 14px;
   cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 0;
 }
 .tags-management .qt-list .col-1:hover .icn-edit{
   visibility: visible;
