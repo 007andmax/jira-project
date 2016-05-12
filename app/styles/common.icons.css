@@ -1843,56 +1843,6 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   border-width: 1px;
 }
 
-.color0 {
-  background-color: rgba(241, 83, 72, 0.5);
-  border-color: #f15348;
-}
-
-.color1 {
-  background-color: rgba(66, 165, 245, 0.5);
-  border-color: #42a5f5;
-}
-
-.color2 {
-  background-color: rgba(124, 179, 66, 0.5);
-  border-color: #7cb342;
-}
-
-.color3 {
-  background-color: rgba(234, 61, 120, 0.5);
-  border-color: #ea3d78;
-}
-
-.color4 {
-  background-color: rgba(152, 93, 255, 0.5);
-  border-color: #985dff;
-}
-
-.color5 {
-  background-color: rgba(12, 222, 170, 0.5);
-  border-color: #0cdeaa;
-}
-
-.color6 {
-  background-color: rgba(224, 64, 251, 0.5);
-  border-color: #e040fb;
-}
-
-.color7 {
-  background-color: rgba(252, 221, 82, 0.5);
-  border-color: #fcdd52;
-}
-
-.color8{
-  background-color: rgba(243, 137, 28, 0.5);
-  border-color: #f3891c;
-}
-
-.color9 {
-  background-color: rgba(77, 208, 225, 0.5);
-  border-color: #4dd0e1;
-}
-
 /*Seprator Dot*/
 
 .dot-sep {
@@ -1903,7 +1853,6 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   background-color: #b2becd;
   border-radius: 50%;
 }
-
 
 /* Badges */
 

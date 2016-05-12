@@ -153,7 +153,7 @@
       var instCopy,
         copyProps = inst;
 
-      if (!copyProps && this.staticCopy) {
+      if (!copyProps && this && this.staticCopy) {
         copyProps = this;
       }
 

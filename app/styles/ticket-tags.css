@@ -53,7 +53,7 @@
   border-radius: 10px;
   float: left;
   cursor: inherit;
-  background-color: #c5cfdb;
+  border: 1px solid transparent;
   color: #4C5C6F;
 }
 .tags .tag-label span {

@@ -298,7 +298,7 @@
 
             console.log(newChange);
 
-            if (newChange.action == 'TAG_TICKET_SPECIFYING_SAVED') {
+            if (newChange.action === 'TAG_TICKET_SPECIFYING_SAVED') {
               ticket.tags.splice(0, ticket.tags.length);
               for (var i = 0; i < newChange.data.length; i++) {
                 ticket.tags.push(newChange.data[i]);
@@ -630,7 +630,6 @@
       var newScope = $rootScope.$new();
 
       RealTimeService.subscribe('/tags', newScope, function (newChange) {
-        console.log(newChange);
 
         if (newChange.action === 'TAG_TICKET_SAVED') {
           for (var key in storage.lists) {

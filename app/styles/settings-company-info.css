@@ -46,7 +46,7 @@
 .settings-main-wrapper .ticket-and-invoice-wrapper {
   float: left;
   width: 100%;
-  padding-bottom: 200px;
+  padding-bottom: 110px;
 }
 
 .settings-main-wrapper .default-tax-wrapper .tax-list.new-tax {
@@ -59,4 +59,105 @@
 
 .settings-main-wrapper .services-info-wrapper .add-new-service .btn-primary {
   display: none;
+}
+
+.tags-management {
+  float: left;
+  width: 100%;
+  padding-bottom: 240px;
+}
+.tags-management .form-group{
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+.tags-management .qt-list{
+  padding: 10px;
+}
+.tags-management .qt-list>li + li{
+  height: 60px;
+  line-height: 45px;
+}
+.tags-management .qt-list>li{
+  padding: 10px 0;
+}
+.tags-management .qt-list>li:hover:before, .tags-management .qt-list>li:hover:after{
+  display: none;
+}
+.tags-management .qt-list .list-heading{
+  padding: 10px 0;
+  cursor: pointer !important;
+}
+.tags-management .qt-list .col-1, .tags-management .qt-list .col-2, .tags-management .qt-list .col-3{
+  text-align: center;
+  width: 30%;
+}
+.tags-management .qt-list .col-1{
+  text-align: left;
+  margin-top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 16px;
+}
+.tags-management .qt-list .col-1 .icn-edit{
+  visibility: hidden;
+  margin-top: 14px;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 0;
+}
+.tags-management .qt-list .col-1:hover .icn-edit{
+  visibility: visible;
+}
+.tags-management .qt-list .col-2 {
+  cursor: pointer;
+}
+.tags-management .qt-list .col-2 .colored-circle{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  overflow: hidden;
+  margin-right: 5px;
+}
+.tags-management .qt-list .col-2 .icn-picker{
+  display: inline-block;
+  background: url("../images/sprites-s76c759f188.png") -1077px -1px no-repeat;
+}
+.tags-management .qt-list .col-4 {
+  cursor: pointer;
+  float: right;
+  padding-right: 5px;
+}
+.tags-management .qt-list .col-4:last-child{
+  padding-right: 5px;
+}
+.tags-management .qt-list .col-4 .icn-replace{
+  background-position: -424px -98px;
+  width: 14px;
+  height: 14px;
+  margin-top: 14px;
+}
+.tags-management .qt-list .col-4 .icn-delete{
+  margin-top: 14px;
+}
+.tags-management .qt-list .col-4 .icn-replace:hover{
+  background-position: -474px -98px;
+}
+.tags-management .tag-add{
+  display: inline-block;
+  color: #1586E4;
+}
+.tags-management .qt-list .col-4 .icn-product-save{
+  margin-top: 14px;
+}
+.tags-management .qt-list .col-4 .icn-remove-token{
+  margin-top: 14px;
+}
+.tags-management .qt-list .col-4 .move-services .custom-scroll label{
+  font-size: 15px;
+  height: 20px;
+  line-height: 20px;
 }
