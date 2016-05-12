@@ -28,8 +28,7 @@
       'ui.bootstrap',
       'ngSanitize',
       'ngMessages',
-      'ngAnimate',
-      'colorpicker.module'
+      'ngAnimate'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', '$compileProvider', function ($stateProvider, $urlRouterProvider, $compileProvider) {
