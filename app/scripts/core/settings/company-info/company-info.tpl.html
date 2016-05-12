@@ -769,9 +769,12 @@
     </div>
 
     <div class="clearfix">
-      <ul class="qt-list clearfix">
+      <ul class="qt-list clearfix" ng-init="filteredTags = []">
 
-        <li class="list-heading">
+        <li ng-if="!tags.length && editingId !== 'new'">There is no tags yet.</li>
+        <li ng-if="!filteredTags.length && tags.length">No tags responding to this query.</li>
+
+        <li class="list-heading" ng-show="filteredTags.length">
           <div class="col-1" ng-click="setOrderForTags('word')">
             <span class="sort-span">
               TAG NAME
@@ -789,22 +792,34 @@
           <div class="col-5">&nbsp;</div>
         </li>
 
-        <li ng-repeat="tag in tags | filter: {word: keyword} | orderBy: orderByForTags: orderTags.reverse track by tag.id"
+        <li ng-repeat="tag in filteredTags = (tags | filter: {word: keyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
             ng-form="updateTagForm">
           <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
             {{ tag.word }}
             <i class="icn-sm icn-edit pull-right" tooltip="Edit" tooltip-placement="top" tooltip-append-to-body="true"></i>
           </div>
           <div class="col-1 form-group" ng-if="editingId === tag.id"
-               ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
+               ng-class="{'has-error': (triedToSave || updateTagForm.word.$dirty) && updateTagForm.$invalid}">
             <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..." required>
           </div>
 
-          <div class="col-2">
-            <span colorpicker ng-model="tag.color">
-              <span class="colored-circle" ng-style="{'background-color': tag.color}"></span>
+          <div class="col-2" dropdown on-toggle="changeColor(open, tag)">
+            <span dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[tag.colorCode].backgroundColor,
+                              'border-color': tagColors[tag.colorCode].borderColor}"></span>
               <i class="icn-sm icn-picker"></i>
             </span>
+
+            <ul class="dropdown-menu dropdown-tag-colors">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': tag.colorCode === $index}"
+                  ng-click="tag.colorCode = $index">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
           </div>
 
           <div class="col-3">{{ tag.usedCounter }}</div>
@@ -865,11 +880,23 @@
                ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
             <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..." required>
           </div>
-          <div class="col-2">
-            <span colorpicker ng-model="editedTag.color">
-              <span class="colored-circle" ng-style="{'background-color': editedTag.color}"></span>
+          <div class="col-2" dropdown>
+            <span dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[editedTag.colorCode].backgroundColor,
+                              'border-color': tagColors[editedTag.colorCode].borderColor}"></span>
               <i class="icn-sm icn-picker"></i>
             </span>
+
+            <ul class="dropdown-menu dropdown-tag-colors">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': editedTag.colorCode === $index}"
+                  ng-click="editedTag.colorCode = $index">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
           </div>
           <div class="col-3">{{ editedTag.usedCounter }}</div>
           <div class="col-4" ng-click="cancel()"

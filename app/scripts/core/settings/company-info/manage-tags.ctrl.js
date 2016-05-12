@@ -9,6 +9,7 @@
         field: 'word',
         reverse: false
       };
+      $scope.tagColors = TagsService.getColors();
       $scope.replaceDropdown = {};
       $scope.allowCreateTags = CompaniesService.getCurrentCompany().allowCreateTags;
       $scope.remove = TagsService.remove;
@@ -16,14 +17,14 @@
       $scope.saveAllowingCreateCustomTags = CompaniesService.saveAllowingCreateCustomTags;
 
       TagsService.getAll($scope, function (resp) {
-        $scope.tags = resp;
+        $scope.tags = angular.copy(resp);
       });
 
-      $scope.$on('colorpicker-closed', function (event, data) {
-        if (event.targetScope && event.targetScope.tag && event.targetScope.tag.id) {
-          TagsService.changeColor(event.targetScope.tag.id, event.targetScope.tag.color);
+      $scope.changeColor = function (open, tag) {
+        if (!open) {
+          TagsService.changeColor(tag.id, tag.colorCode);
         }
-      });
+      };
 
       $scope.createOrEdit = function (tag) {
         if (tag) {
@@ -31,7 +32,7 @@
           $scope.editingId = tag.id;
         } else {
           $scope.editedTag = {
-            color: '#C5CFDB',
+            colorCode: 0,
             usedCounter: 0
           };
           $scope.editingId = 'new';
@@ -39,7 +40,9 @@
       };
 
       $scope.saveOrUpdate = function (form) {
-        if (form.$valid) {
+        if (form.$valid && !$scope.saveInProgress) {
+
+          $scope.saveInProgress = true;
 
           if ($scope.editedTag.id) {
             TagsService.changeWord($scope.editedTag.id, $scope.editedTag.word, function (resp) {
@@ -50,8 +53,6 @@
               $scope.cancel();
             });
           }
-
-          $scope.triedToSave = false;
         } else {
           $scope.triedToSave = true;
         }
@@ -59,6 +60,7 @@
 
       $scope.cancel = function () {
         $scope.triedToSave = false;
+        $scope.saveInProgress = false;
         $scope.editingId = '';
       };
 

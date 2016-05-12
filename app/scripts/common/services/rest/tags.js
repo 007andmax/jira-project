@@ -8,6 +8,19 @@
 
   services.factory('TagsService', ['$http', 'RealTimeService', 'Utils', function ($http, RealTimeService, Utils) {
 
+    var tagsColors = [];
+
+    $http.get('/data/getColors').then(function (resp) {
+      for (var i = 0; i < resp.data.length; i++) {
+        var color = resp.data[i];
+        tagsColors.push(color);
+      }
+    });
+
+    function getColors() {
+      return tagsColors;
+    }
+
     function search(keyword, callback) {
 
       if (!keyword) {
@@ -63,17 +76,19 @@
         }
 
         RealTimeService.subscribe('/tagManagement', scope, function (newChange) {
-          if (newChange.action === 'TAG_ADDED') {
-            tags.push(newChange.data);
-            if (callback) {
-              callback(tags);
-            }
-          } else if (newChange.action === 'TAG_SAVED') {
+          console.log(newChange);
+
+          if (newChange.action === 'TAG_SAVED') {
             var tagForUpdate = Utils.findById(tags, newChange.data.id);
 
             if (tagForUpdate) {
               Utils.customizeObj(newChange.data, tagForUpdate);
 
+              if (callback) {
+                callback(tags);
+              }
+            } else {
+              tags.push(newChange.data);
               if (callback) {
                 callback(tags);
               }
@@ -92,16 +107,20 @@
       return tags;
     }
 
-    function changeColor(tagId, color, callback) {
+    function changeColor(tagId, colorCode, callback) {
       if (!tagId) {
         throw 'Tag id required!';
       }
 
-      if (!color || color[0] !== '#' || color.length !== 7) {
-        throw 'Wrong color format!';
+      if (!colorCode) {
+        throw 'Color code is required';
       }
 
-      var future = $http.put('/tags/changeColorForTag?tagId=' + tagId + '&color=%23' + color.substring(1).toUpperCase(), {});
+      if (colorCode <= 0 || colorCode >= 9) {
+        throw 'Color code should be less then 10 and greater or equal then 0';
+      }
+
+      var future = $http.put('/tags/changeColorForTag?tagId=' + tagId + '&colorCode=' + colorCode, {});
 
       Utils.handleCallback(future, callback);
     }
@@ -166,7 +185,8 @@
       changeWord: changeWord,
       remove: remove,
       removeAndReplace: removeAndReplace,
-      save: save
+      save: save,
+      getColors: getColors
     }
 
   }]);

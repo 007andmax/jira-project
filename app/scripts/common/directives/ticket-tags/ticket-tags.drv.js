@@ -16,6 +16,7 @@
         link: function ($scope, $element) {
           $scope.currentCompany = CompaniesService.getCurrentCompany();
           $scope.currentUser = UsersService.getCurrentUser();
+          $scope.tagColors = TagsService.getColors();
 
           if (!$scope.readonlyTags) {
             var input = $element.find('input');
@@ -48,7 +49,8 @@
                 }
 
                 $scope.ticketTags.push({
-                  word: value
+                  word: value,
+                  colorCode: 0
                 });
               } else {
                 $scope.ticketTags.push(value);

@@ -118,6 +118,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  border: 2px solid transparent;
   overflow: hidden;
   margin-right: 5px;
 }
