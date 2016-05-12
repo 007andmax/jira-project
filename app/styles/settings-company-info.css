@@ -74,7 +74,8 @@
   padding: 10px;
 }
 .tags-management .qt-list>li + li{
-  height: auto;
+  height: 60px;
+  line-height: 45px;
 }
 .tags-management .qt-list>li{
   padding: 10px 0;
@@ -92,6 +93,15 @@
 }
 .tags-management .qt-list .col-1{
   text-align: left;
+  margin-top: 0;
+}
+.tags-management .qt-list .col-1 .icn-edit{
+  visibility: hidden;
+  margin-top: 14px;
+  cursor: pointer;
+}
+.tags-management .qt-list .col-1:hover .icn-edit{
+  visibility: visible;
 }
 .tags-management .qt-list .col-2 {
   cursor: pointer;
@@ -111,11 +121,19 @@
 .tags-management .qt-list .col-4 {
   cursor: pointer;
   float: right;
+  padding-right: 5px;
+}
+.tags-management .qt-list .col-4:last-child{
+  padding-right: 5px;
 }
 .tags-management .qt-list .col-4 .icn-replace{
   background-position: -424px -98px;
   width: 14px;
   height: 14px;
+  margin-top: 14px;
+}
+.tags-management .qt-list .col-4 .icn-delete{
+  margin-top: 14px;
 }
 .tags-management .qt-list .col-4 .icn-replace:hover{
   background-position: -474px -98px;
@@ -123,4 +141,15 @@
 .tags-management .tag-add{
   display: inline-block;
   color: #1586E4;
+}
+.tags-management .qt-list .col-4 .icn-product-save{
+  margin-top: 14px;
+}
+.tags-management .qt-list .col-4 .icn-remove-token{
+  margin-top: 14px;
+}
+.tags-management .qt-list .col-4 .move-services .custom-scroll label{
+  font-size: 15px;
+  height: 20px;
+  line-height: 20px;
 }
