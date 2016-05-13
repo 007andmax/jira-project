@@ -53,14 +53,7 @@
 
       </div>
 
-      <div class="col-5" ng-if="$last">
-        <span class="btn btn-dark has-tooltip" tooltip-placement="top" tooltip="Add more"
-              ng-click="addService(addServiceForm)">
-          <i class="icn-sm icn-plus"></i>
-        </span>
-      </div>
-
-      <div class="col-5" ng-if="!$last">
+      <div class="col-5" ng-if="!$first">
         <span class="btn btn-primary has-tooltip" tooltip-placement="top" tooltip="Remove"
               ng-click="removeService()">
           <i class="icn-sm icn-remove-token"></i>

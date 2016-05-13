@@ -1,4 +1,4 @@
-<div class="ticket-post-update-wrapper">
+<div class="ticket-post-update-wrapper" ng-form="ticketUpdateForm">
 
   <div class="btn btn-primary pull-right has-tooltip" custom-disabled="{{ true }}"
        tooltip-placement="top" tooltip="Remote Access" style="width: 92px;">
@@ -19,6 +19,11 @@
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
         <i class="icn-lg icn-add-product"></i>Product
       </a>
+
+      <div ng-if="currentOpenTab === 'PRODUCT'" class="btn btn-dark has-tooltip" tooltip="Add Product" tooltip-placement="top"
+           ng-click="addProduct(ticketUpdateForm.addProductsForm)">
+        <i class="icn-sm icn-plus"></i>
+      </div>
     </li>
 
     <li ng-class="{'active': currentOpenTab === 'SERVICE'}"
@@ -26,6 +31,11 @@
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('SERVICE')">
         <i class="icn-lg icn-add-service"></i>Service
       </a>
+
+      <div ng-if="currentOpenTab === 'SERVICE'" class="btn btn-dark has-tooltip" tooltip="Add Service" tooltip-placement="top"
+           ng-click="addService(ticketUpdateForm.addServicesForm)">
+        <i class="icn-sm icn-plus"></i>
+      </div>
     </li>
 
   </ul>

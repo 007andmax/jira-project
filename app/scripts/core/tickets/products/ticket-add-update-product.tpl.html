@@ -48,14 +48,7 @@
                hard-reset-pattern="decimalNumberPattern" hard-reset-required="true"/>
       </div>
 
-      <div class="col-6" ng-if="$last">
-        <div class="btn btn-dark has-tooltip" tooltip="Add More" tooltip-placement="top"
-             ng-click="addProduct(addProductForm)">
-          <i class="icn-sm icn-plus"></i>
-        </div>
-      </div>
-
-      <div class="col-6" ng-if="!$last">
+      <div class="col-6" ng-if="!$first">
         <div class="btn btn-primary has-tooltip" tooltip="Remove" tooltip-placement="top"
              ng-click="removeProduct()">
           <i class="icn-sm icn-remove-token"></i>

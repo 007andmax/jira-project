@@ -451,6 +451,29 @@
             return sharedUsers.length;
           };
 
+          $scope.addProduct = function (form) {
+
+            if (form.$valid) {
+
+              $scope.ticketUpdate.products.push({item:{}});
+              $scope.triedToAddProduct = false;
+
+            } else {
+              $scope.triedToAddProduct = true;
+            }
+          };
+
+          $scope.addService = function (form) {
+
+            if (form.$valid) {
+              $scope.ticketUpdate.services.push({item:{}});
+              $scope.triedToAddService = false;
+
+            } else {
+              $scope.triedToAddService = true;
+            }
+          };
+
           $scope.$on('ticket_is_not_available_anymore', function (event, data) {
 
             if (data.ticketId === $scope.ticketDetails.id

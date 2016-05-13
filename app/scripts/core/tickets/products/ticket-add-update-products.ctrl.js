@@ -21,18 +21,6 @@
             $scope.triedToAddProduct = false;
           }
 
-          $scope.addProduct = function (form) {
-
-            if (form.$valid) {
-
-              $scope.ticketUpdate.products.push({item:{}});
-              $scope.triedToAddProduct = false;
-
-            } else {
-              $scope.triedToAddProduct = true;
-            }
-          };
-
           $scope.isShowingErrors = function (form, fieldName) {
             return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.triedToAddProduct);
           };

@@ -35,17 +35,6 @@
             return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.triedToAddService);
           };
 
-          $scope.addService = function (form) {
-
-            if (form.$valid) {
-              $scope.ticketUpdate.services.push({item:{}});
-              $scope.triedToAddService = false;
-
-            } else {
-              $scope.triedToAddService = true;
-            }
-          };
-
 
 
           $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault)
