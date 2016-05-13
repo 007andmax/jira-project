@@ -79,6 +79,7 @@ body.non-body-scroll::-webkit-scrollbar {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  text-align: left;
 }
 
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-2 {

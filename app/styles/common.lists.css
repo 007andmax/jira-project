@@ -1681,6 +1681,7 @@ Devices tab
 .qt-product-list>li>.col-2{
   width: calc(100% - 995px);
   color: #94a4b8;
+  text-align: left;
 }
 .with-category .qt-product-list>li>.col-2{
   width: calc(100% - 1010px);
