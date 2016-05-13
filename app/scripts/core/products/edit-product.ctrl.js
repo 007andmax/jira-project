@@ -6,10 +6,18 @@
     ['$scope', '$rootScope', 'ProductsService',
       function ($scope, $rootScope, ProductsService) {
 
+        if ($scope.pageTab === 'list') {
+          $scope.withCategory = true;
+        }
+
         if ($scope.product) {
           $scope.editProduct = angular.copy($scope.product);
-          if (!$scope.editProduct.category && $scope.category) {
+          if ($scope.category) {
             $scope.editProduct.category = { id: $scope.category.id };
+          }
+
+          if ($scope.editCategory.category.default) {
+            $scope.editCategory.category.name = '';
           }
         } else if ($scope.category) {
           $scope.editProduct = {
@@ -17,7 +25,6 @@
           };
         } else {
           $scope.editProduct = {};
-          $scope.withCategory = true;
         }
 
         $scope.isShowingErrors = function (form, fieldName) {

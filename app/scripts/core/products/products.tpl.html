@@ -1,34 +1,36 @@
-<div class="products-content">
+<div>
+  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+  <div class="products-content" ng-show="!loadingInProgress">
 
-  <div class="tabs-container" style="padding-bottom: 25px;">
-    <ul class="nav nav-qt" role="tablist">
+    <div class="tabs-container" style="padding-bottom: 25px;">
+      <ul class="nav nav-qt" role="tablist">
 
-      <li role="presentation" ng-class="{'active': pageTab === 'group'}">
-        <a href="javascript:void(0)" ng-click="setPageTab('group')">Product by Category</a>
-      </li>
+        <li role="presentation" ng-class="{'active': pageTab === 'group'}">
+          <a href="javascript:void(0)" ng-click="setPageTab('group')">Product by Category</a>
+        </li>
 
-      <li role="presentation" ng-class="{'active': pageTab === 'list'}">
-        <a href="javascript:void(0)" ng-click="setPageTab('list')">Products List</a>
-      </li>
+        <li role="presentation" ng-class="{'active': pageTab === 'list'}">
+          <a href="javascript:void(0)" ng-click="setPageTab('list')">Products List</a>
+        </li>
 
-      <li class="product-create-btn-form">
-        <div class="btn btn-info has-tooltip" ng-if="pageTab === 'list'" ng-click="openCreationForm()"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
-          <i class="icn-sm icn-product-add"></i>
-        </div>
-      </li>
+        <li class="product-create-btn-form">
+          <div class="btn btn-info has-tooltip" ng-if="pageTab === 'list'" ng-click="openCreationForm()"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
+            <i class="icn-sm icn-product-add"></i>
+          </div>
+        </li>
 
-    </ul>
+      </ul>
+
+    </div>
+
+    <div>
+
+      <div ng-if="pageTab === 'group'" ng-include="'/html/scripts/core/products/group-by-company.tpl.html'"></div>
+
+      <div ng-if="pageTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>
+
+    </div>
 
   </div>
-
-  <div>
-
-    <div ng-if="pageTab === 'group'" ng-include="'/html/scripts/core/products/group-by-company.tpl.html'"></div>
-
-    <div ng-if="pageTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>
-
-  </div>
-
-
 </div>

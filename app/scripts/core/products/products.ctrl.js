@@ -13,10 +13,12 @@
           field: 'description',
           reverse: false
         };
+        $scope.loadingInProgress = true;
 
         ProductsService.getAllProducts($scope, function (resp) {
           categories = resp.categories;
           $scope.productsData = resp;
+          $scope.loadingInProgress = false;
         });
 
         $scope.pageTab = 'group';

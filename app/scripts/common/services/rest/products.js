@@ -58,9 +58,59 @@
             data.categories.push(categories[i]);
           }
 
-          if (callback) {
-            callback(data);
-          }
+          $http.get('/products/full').then(function (resp) {
+
+            data.list = resp.data;
+
+            for (var i = 0; i < data.list.length; i++) {
+              var category = Utils.findById(data.categories, data.list[i].category.id);
+              category.productsList.push(data.list[i]);
+            }
+
+            if (callback) {
+              callback(Utils.customizeObj(data));
+            }
+
+            RealTimeService.subscribe('/product', scope, function (newChange) {
+
+              console.log(newChange);
+
+              if (newChange.action == 'PRODUCT_SAVED') {
+
+                var product = Utils.findById(data.list, newChange.data.versionedId.id);
+
+                if (product) {
+                  if (product.category.id !== newChange.data.category.id) {
+                    var categoryMoveFrom = Utils.findById(data.categories, product.category.id);
+                    Utils.deleteById(categoryMoveFrom.productsList, product.versionedId.id);
+
+                    var categoryMoveTo = Utils.findById(data.categories, newChange.data.category.id);
+                    categoryMoveTo.productsList.push(product);
+                  }
+                  Utils.customizeObj(newChange.data, product);
+                } else {
+                  var sourceCategory = Utils.findById(data.categories, newChange.data.category.id);
+                  sourceCategory.productsList.push(newChange.data);
+                  data.list.push(newChange.data);
+                }
+
+              } else if (newChange.action == 'PRODUCT_DELETED') {
+                Utils.deleteById(data.list, newChange.data.versionedId.id);
+                category = Utils.findById(data.categories, newChange.data.category.id);
+                Utils.deleteById(category.productsList, newChange.data.versionedId.id);
+
+                scope.$broadcast("product_deleted", newChange.data);
+              }
+              if (callback) {
+                callback(data);
+              }
+            });
+
+          }, function (resp) {
+            if (callback) {
+              callback(resp.data);
+            }
+          });
 
           RealTimeService.subscribe('/productCategory', scope, function (newChange) {
 
@@ -98,63 +148,11 @@
               }
             }
 
-            if (callback) callback(data);
-          });
-        });
-
-        $http.get('/products/full').then(function (resp) {
-
-          data.list = resp.data;
-
-          for (var i = 0; i < data.list.length; i++) {
-            var category = Utils.findById(data.categories, data.list[i].category.id);
-            category.productsList.push(data.list[i]);
-          }
-
-          if (callback) callback(Utils.customizeObj(data));
-
-          RealTimeService.subscribe('/product', scope, function (newChange) {
-
-            console.log(newChange);
-
-            if (newChange.action == 'PRODUCT_SAVED') {
-
-              var product = Utils.findById(data.list, newChange.data.versionedId.id);
-
-              if (product) {
-                if (product.category.id !== newChange.data.category.id) {
-                  var categoryMoveFrom = Utils.findById(data.categories, product.category.id);
-                  Utils.deleteById(categoryMoveFrom.productsList, product.versionedId.id);
-
-                  var categoryMoveTo = Utils.findById(data.categories, newChange.data.category.id);
-                  categoryMoveTo.productsList.push(product);
-                }
-                Utils.customizeObj(newChange.data, product);
-              } else {
-                var sourceCategory = Utils.findById(data.categories, newChange.data.category.id);
-                sourceCategory.productsList.push(newChange.data);
-                data.list.push(newChange.data);
-              }
-
-            } else if (newChange.action == 'PRODUCT_DELETED') {
-              Utils.deleteById(data.list, newChange.data.versionedId.id);
-              category = Utils.findById(data.categories, newChange.data.category.id);
-              Utils.deleteById(category.productsList, newChange.data.versionedId.id);
-
-              scope.$broadcast("product_deleted", newChange.data);
+            if (callback) {
+              callback(data);
             }
-            if (callback) callback(data);
           });
-
-        }, function (resp) {
-          if (callback) {
-            callback(resp.data);
-          }
         });
-
-        if (callback) {
-          callback(data);
-        }
       }
 
       function getCategories(scope, callback) {
