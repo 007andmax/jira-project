@@ -87,7 +87,7 @@
           </label>
         </div>
 
-        <div class="col-6 pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+        <div class="col-6 pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN'">
 
           <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
              ng-click="deleteProduct()"

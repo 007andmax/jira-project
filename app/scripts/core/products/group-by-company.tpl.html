@@ -65,11 +65,12 @@
         <div class="col-2">
 
           <div class="no-items"
-               ng-class="{'not-hide-labels': !((currentUser.role === 'SUPER_TECH_ADMIN') && !category.default)}">
+               ng-class="{'not-hide-labels': !((currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN') && !category.default)}">
             {{ category.productsList.length }} items
           </div>
 
-          <div class="product-actions" ng-show="(currentUser.role === 'SUPER_TECH_ADMIN') && !category.default">
+          <div class="product-actions"
+               ng-show="(currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN') && !category.default">
 
             <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
                  scroll-to-form
@@ -171,7 +172,8 @@
                     </label>
                   </div>
 
-                  <div class="col-6 pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">
+                  <div class="col-6 pull-right"
+                       ng-show="currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN'">
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                        ng-click="deleteProduct()"
@@ -220,7 +222,7 @@
             </ul>
 
             <div class="add-product-btn-wrapper"
-                 ng-hide="category.default || (currentUser.role !== 'SUPER_TECH_ADMIN')">
+                 ng-show="(currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN') && !category.default">
               <div class="btn btn-info has-tooltip"
                    ng-click="addProduct(category.id)"
                    custom-disabled="{{ showCreateProduct }}"
