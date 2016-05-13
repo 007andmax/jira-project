@@ -9633,3 +9633,10 @@ button.close {
   background-color: #fff2f2 !important;
   border-color: #fde9e9 !important;
 }
+.remote-access-header {
+  padding: 25px 27px 5px 30px;
+  border: 0;
+}
+.remote-access-header .title {
+  font-weight: bold;
+}

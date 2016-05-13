@@ -12,7 +12,8 @@
       var storage = { devices: {}, callbacks: {}, deviceCounter: {} },
         serviceScope = $rootScope.$new(),
         callbacksForRemoteInstall = {},
-        callbacksForRemoteUninstall = {};
+        callbacksForRemoteUninstall = {},
+        callbackForRemoteConnection = {};
 
       var initListeners = [],
         initialized = false;
@@ -60,6 +61,10 @@
                 }
               }
               calculateDevicesCountersAndCallCallbacks();
+            } else if (newChange.action === 'REMOTE_CONNECTION') {
+              if (callbackForRemoteConnection[newChange.data.sessionId]) {
+                callbackForRemoteConnection[newChange.data.sessionId]();
+              }
             }
           });
 
@@ -243,6 +248,10 @@
             callback(resp.data);
           }
         });
+      }
+
+      function subscribeToRemoteConnection(sessionId, callback) {
+        callbackForRemoteConnection[sessionId] = callback;
       }
 
       function sendInstallAgentRequest(companyId, agentId, devicesIds, agentIfForType, callback) {
@@ -635,6 +644,7 @@
         getRemoteSessions: getRemoteSessions,
         getSessionId: getSessionId,
         createRemoteSession: createRemoteSession,
+        subscribeToRemoteConnection: subscribeToRemoteConnection,
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
         _addInitListener: _addInitListener
