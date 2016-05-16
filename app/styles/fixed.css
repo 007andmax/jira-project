@@ -1324,4 +1324,9 @@ span.sort-span {
     width: calc(100% - 670px);
   }
 }
-
+.ticket-post-update-wrapper .btn-dark{
+  min-width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  margin-top: -13px;
+}
