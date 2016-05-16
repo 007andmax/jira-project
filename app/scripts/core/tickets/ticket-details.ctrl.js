@@ -456,10 +456,10 @@
             if (form.$valid) {
 
               $scope.ticketUpdate.products.push({item:{}});
-              $scope.triedToAddProduct = false;
+              $scope.triedToAddItem = false;
 
             } else {
-              $scope.triedToAddProduct = true;
+              $scope.triedToAddItem = true;
             }
           };
 
@@ -467,11 +467,18 @@
 
             if (form.$valid) {
               $scope.ticketUpdate.services.push({item:{}});
-              $scope.triedToAddService = false;
+              $scope.triedToAddItem = false;
 
             } else {
-              $scope.triedToAddService = true;
+              $scope.triedToAddItem = true;
             }
+          };
+
+          $scope.getTriedToAddItem = function () {
+            return $scope.triedToAddItem;
+          };
+          $scope.setTriedToAddItem = function (value) {
+            $scope.triedToAddItem = value;
           };
 
           $scope.$on('ticket_is_not_available_anymore', function (event, data) {

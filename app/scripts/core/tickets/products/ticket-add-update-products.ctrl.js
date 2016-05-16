@@ -18,11 +18,11 @@
             });
 
             $scope.addTicketOwnerToUpdate();
-            $scope.triedToAddProduct = false;
+            $scope.setTriedToAddItem(false);
           }
 
           $scope.isShowingErrors = function (form, fieldName) {
-            return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.triedToAddProduct);
+            return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.getTriedToAddItem());
           };
 
           $scope.$watch('ticketUpdate', function () {
