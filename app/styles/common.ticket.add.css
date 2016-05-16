@@ -32,6 +32,14 @@
     margin-top: 22px;
 }
 
+.nav-ticket-add .add-expense-btn {
+  display: none;
+}
+
+.nav-ticket-add .active .add-expense-btn {
+  display: inline-block;
+}
+
 .ticket-add .qt-table{
     margin: 20px 20px;
 }

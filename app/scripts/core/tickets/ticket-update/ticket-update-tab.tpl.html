@@ -15,24 +15,24 @@
     </li>
 
     <li ng-class="{'active': currentOpenTab === 'PRODUCT'}"
-        ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
+        ng-if="currentUser.role !== 'USER' || !ticketDetails.sharedToCurrentUserAt">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
         <i class="icn-lg icn-add-product"></i>Product
       </a>
 
-      <div ng-if="currentOpenTab === 'PRODUCT'" class="btn btn-dark has-tooltip" tooltip="Add Product" tooltip-placement="top"
+      <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Product" tooltip-placement="top"
            ng-click="addProduct(ticketUpdateForm.addProductsForm)">
         <i class="icn-sm icn-plus"></i>
       </div>
     </li>
 
     <li ng-class="{'active': currentOpenTab === 'SERVICE'}"
-        ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
+        ng-if="currentUser.role !== 'USER' || !ticketDetails.sharedToCurrentUserAt">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('SERVICE')">
         <i class="icn-lg icn-add-service"></i>Service
       </a>
 
-      <div ng-if="currentOpenTab === 'SERVICE'" class="btn btn-dark has-tooltip" tooltip="Add Service" tooltip-placement="top"
+      <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Service" tooltip-placement="top"
            ng-click="addService(ticketUpdateForm.addServicesForm)">
         <i class="icn-sm icn-plus"></i>
       </div>
