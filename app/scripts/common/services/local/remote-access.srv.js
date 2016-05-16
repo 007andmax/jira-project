@@ -3,8 +3,8 @@
 (function (window, $, undefined) {
 
   angular.module('quicktech.common.services').factory('quicktech.common.services.RemoteAccessService',
-    ['ConstantsService', 'DevicesService', '$modal', '$interval',
-      function (ConstantsService, DevicesService, $modal, $interval) {
+    ['ConstantsService', 'DevicesService', '$modal', '$interval', '$rootScope',
+      function (ConstantsService, DevicesService, $modal, $interval, $rootScope) {
 
         var modalParams = {
           animation: true,
@@ -67,6 +67,8 @@
               if (promise) {
                 $interval.cancel(promise);
               }
+
+              $rootScope.currentRemoteSessionId = realSessionId;
             });
 
             window.open(url, '_self');

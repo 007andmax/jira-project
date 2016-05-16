@@ -291,29 +291,33 @@
             throw 'SessionId is required'
           }
 
-          var confirmMesage = 'Do you want to create ticket?',
-            confirmButton = 'Yes';
+          if (sessionId === $rootScope.currentRemoteSessionId) {
+            var confirmMesage = 'Do you want to create ticket?',
+              confirmButton = 'Yes';
 
-          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            if (!($state.is('tickets') || $state.is('tickets.details'))) {
-              $state.go('tickets', {listType: 'user'});
-            }
-
-            var modalInstance = $modal.open({
-              templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
-              controller: 'quicktech.core.tickets.createTicketCtrl',
-              windowClass: 'modal-create-ticket',
-              backdrop: 'static',
-              resolve: {
-                sessionId: function () {
-                  return sessionId;
-                },
-                sessionTime: function () {
-                  return sessionTime
-                }
+            UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+              if (!($state.is('tickets') || $state.is('tickets.details'))) {
+                $state.go('tickets', { listType: 'user' });
               }
+
+              var modalInstance = $modal.open({
+                templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
+                controller: 'quicktech.core.tickets.createTicketCtrl',
+                windowClass: 'modal-create-ticket',
+                backdrop: 'static',
+                resolve: {
+                  sessionId: function () {
+                    return sessionId;
+                  },
+                  sessionTime: function () {
+                    return sessionTime
+                  }
+                }
+              });
             });
-          })
+
+            $rootScope.currentRemoteSessionId = '';
+          }
 
         };
 

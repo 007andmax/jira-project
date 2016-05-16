@@ -71,7 +71,7 @@
           RealTimeService.subscribe('/oneTimeConnection', $rootScope, function (newChange) {
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
               console.log(newChange);
-              $rootScope.openCreateTicketForm(newChange.data.id, newChange.data.duration);
+              $rootScope.openCreateTicketForm(newChange.data.sessionId, newChange.data.duration);
             }
           })
         });
