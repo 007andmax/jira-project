@@ -269,13 +269,13 @@
           method = 'PUT';
         }
 
-        var future = $http({
+        $http({
           url: url,
           method: method,
           data: product
+        }).then(function (resp) {
+          callback(resp.data, method === 'POST');
         });
-
-        Utils.handleCallback(future, callback);
       }
 
       function changeTaxableStatus(ids, toTaxable, callback) {

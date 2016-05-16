@@ -58,10 +58,10 @@
           $scope.setHighlightProductId(productId);
         });
 
-        $scope.$on($scope.category.id + '-showCategory', function () {
-          $scope.setShowingCategory($scope.category.id);
-          if ($scope.category.id !== $scope.expandedCategoryId && $scope.category.productsList.length > 0) {
-            $scope.setExpandedCategoryId($scope.category.id);
+        $scope.$on('showCategory', function (categoryId) {
+          $scope.setShowingCategory(categoryId);
+          if (categoryId !== $scope.expandedCategoryId && $scope.category.productsList.length > 0) {
+            $scope.setExpandedCategoryId(categoryId);
           }
         });
 

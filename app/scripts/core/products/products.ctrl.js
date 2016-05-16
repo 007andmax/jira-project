@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
-    ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService',
-      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService) {
+    ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService', '$timeout',
+      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout) {
 
         var categories,
           showCreateProductInList = false;
@@ -30,6 +30,37 @@
         };
         $scope.expandedCategoryId = '';
         $scope.showCategory = '';
+
+        $scope.$watch('highlightProductId', function (productId) {
+          if (productId) {
+
+            $timeout(function () {
+              $scope.$broadcast('show-' + productId);
+
+              $timeout(function () {
+                $scope.setHighlightProductId();
+              }, 2000);
+            });
+          }
+        });
+
+        $scope.$watch('highlightCreatedProductId', function (createdProductId) {
+          if (createdProductId && $scope.createdProductId && $scope.createdProductId == createdProductId) {
+
+            $scope.setCreatedProductId();
+            $timeout(function () {
+              $scope.$broadcast('show-' + createdProductId);
+
+              $timeout(function () {
+                $scope.setHighlightCreatedProductId();
+              }, 2000);
+            });
+          }
+        });
+
+        $scope.$on('showAllCategories', function (event) {
+          $scope.setShowingCategory('');
+        });
 
         $scope.openCreationCategory = function () {
           $scope.isCreateCategoryShow = true;
@@ -90,6 +121,16 @@
 
         $scope.setHighlightProductId = function (productId) {
           $scope.highlightProductId = productId;
+        };
+
+        $scope.setHighlightCreatedProductId = function (productId) {
+          if ($scope.highlightCreatedProductId != productId) {
+            $scope.highlightCreatedProductId = productId;
+          }
+        };
+
+        $scope.setCreatedProductId = function (productId) {
+          $scope.createdProductId = productId;
         };
 
         $scope.setOrderForProducts = function (option) {

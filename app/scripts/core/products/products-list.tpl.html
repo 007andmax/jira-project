@@ -49,10 +49,11 @@
       <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
     </li>
 
-    <li ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse"
+    <li ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
         ng-class="{'qt-product-form': showEditProduct}"
         ng-controller="quicktech.core.products.productCtrl"
-        show-model-element="{{ 'show-' + product.versionedId.id}}">
+        show-model-element="{{ 'show-' + product.versionedId.id}}"
+        ng-init="setHighlightCreatedProductId(product.versionedId.id)">
 
       <div class="intermediate-parent-elem" ng-if="!showEditProduct">
 

@@ -70,10 +70,13 @@
               }
             }
 
-            ProductsService.saveProduct($scope.editProduct, function () {
+            ProductsService.saveProduct($scope.editProduct, function (versionedId, isCreated) {
               $scope.cancelEditProduct();
               $rootScope.$broadcast('productAdded');
               $scope.disabledSaveChangeButton = false;
+              if (isCreated) {
+                $scope.setCreatedProductId(versionedId.id);
+              }
             });
           } else {
             $scope.triedToSaveProduct = true;

@@ -28,8 +28,13 @@
             confirmButton = 'Yes';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            ProductsService.deleteProduct($scope.product.versionedId.id);
-            $rootScope.$broadcast('productDeleted', $scope.product.versionedId.id);
+            ProductsService.deleteProduct($scope.product.versionedId.id, function () {
+              $rootScope.$broadcast('productDeleted', $scope.product.versionedId.id);
+            });
+
+            if ($scope.expandedCategoryId && findCategoryById($scope.expandedCategoryId).productsList.length < 2) {
+              $scope.setExpandedCategoryId();
+            }
           });
         };
 
@@ -46,6 +51,18 @@
             $scope.disabledCheckbox = false;
           })
         };
+
+        function findCategoryById(id) {
+          for (var i = 0, len = $scope.productsData.categories.length; i < len; i++) {
+            var category = $scope.productsData.categories[i];
+
+            if (category.id == id) {
+              return category;
+            }
+          }
+
+          return [];
+        }
 
       }]);
 
