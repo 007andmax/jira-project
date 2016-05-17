@@ -97,7 +97,7 @@
         <div class="slide-category-content" ng-show="category.id === expandedCategoryId">
           <div>
 
-            <ul class="qt-list qt-product-list">
+            <ul class="qt-list qt-product-list" ng-class="{'qt-user-product-list': currentUser.role === 'USER'}">
 
               <li class="list-heading" ng-show="category.productsList.length > 0" style="cursor: pointer !important;">
                 <div class="col-1" ng-click="setOrderForProducts('ilc')">
@@ -120,7 +120,7 @@
                                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
                 </div>
-                <div class="col-4" ng-click="setOrderForProducts('cost')">
+                <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="currentUser.role !== 'USER'">
                   <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
 
@@ -159,7 +159,7 @@
 
                   <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
 
-                  <div class="col-4">
+                  <div class="col-4" ng-if="currentUser.role !== 'USER'">
                     {{ product.cost | currency: '$': 2 }}
                   </div>
 

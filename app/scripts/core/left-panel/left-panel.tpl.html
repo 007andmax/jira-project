@@ -172,7 +172,7 @@
       <ul class="nav nav-inventry" ng-class="{'nav-inventry-users': currentUser.role === 'USER'}"
           ng-hide="collapseItem !== 'INVENTRY'" style="width: 100%;">
 
-        <li ng-class="{active: $state.includes('vendors')}" ng-show="currentUser.role !== 'USER'">
+        <li ng-class="{active: $state.includes('vendors')}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'vendors')">
             <i class="nav-icon icn-vendors icn-lg"></i> Vendors
           </a>
@@ -184,7 +184,7 @@
           </a>
         </li>
 
-        <li ng-class="{active: $state.includes('services')}">
+        <li ng-class="{active: $state.includes('services')}" ng-show="currentUser.role !== 'USER'">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'services')">
             <i class="nav-icon icn-services icn-lg"></i> Services
           </a>

@@ -15,8 +15,9 @@
                 menu = $(popover)[direction](),
                 position = mouse;
               // opening menu would pass the side of the page
-              if (mouse + menu > win && menu < mouse)
+              if (mouse + menu > win && menu < mouse) {
                 position -= menu;
+              }
               return position;
             };
             var hideOtherPopovers = function () {
@@ -44,13 +45,15 @@
 
               element.bind("contextmenu", function (e) {
                 // Return native menu if pressing control
-                if (e.ctrlKey) return;
+                if (e.ctrlKey) {
+                  return;
+                }
 
                 // Hide already opened
                 hideOtherPopovers();
 
                 var customPopover;
-                var offset = {left: 0, top: 0};
+                var offset = { left: 0, top: 0 };
                 // if( typeof(settings.relativeTo) != 'undefined' ) {
                 //     offset = $(settings.relativeTo).offset();
                 // }
@@ -101,8 +104,10 @@
             };
 
             scope.remove = function () {
-              DevicesService.sendUninstallAgentRequest(scope.companyGroupedData.company.id, scope.agent.id);
-              hideThisPopover();
+              if ($scope.currentUser.role !== 'USER') {
+                DevicesService.sendUninstallAgentRequest(scope.companyGroupedData.company.id, scope.agent.id);
+                hideThisPopover();
+              }
             }
 
           }

@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyCtrl',
-    ['$scope', 'CompaniesService', '$state', 'quicktech.common.services.UserNotificationService',
+    ['$scope', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
       'UsersService', 'StatisticsService',
-      function ($scope, CompaniesService, $state, UserNotificationService, UsersService, StatisticsService) {
+      function ($scope, CompaniesService, UserNotificationService, UsersService, StatisticsService) {
 
         $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
           var primaryContact,
@@ -51,12 +51,6 @@
             $scope.companyComponentsCount.ticketsCount = resp[$scope.company.id];
           });
         });
-
-        $scope.showCompanyProfile = function () {
-          if ($scope.currentUser.role !== 'USER') {
-            $state.go('companyProfile', {companyId: $scope.company.id});
-          }
-        };
 
         $scope.getUserSubscribeClass = function () {
           if (!$scope.primaryContact || !$scope.primaryContact.subscription) {

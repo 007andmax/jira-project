@@ -100,9 +100,9 @@
     <i class="icn-sm icn-expand pull-right"></i>
   </div>
 
-  <div class="company-card clearfix"
+  <div class="company-card clearfix" ui-sref="companyProfile({companyId: company.id})"
        ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name' track by company.id"
-       ng-controller="quicktech.core.companies.companyCtrl" ng-click="showCompanyProfile()"
+       ng-controller="quicktech.core.companies.companyCtrl"
        ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
 
     <div class="company-cover-area"
