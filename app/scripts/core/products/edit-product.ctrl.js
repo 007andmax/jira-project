@@ -16,8 +16,8 @@
             $scope.editProduct.category = { id: $scope.category.id };
           }
 
-          if ($scope.editCategory.category.default) {
-            $scope.editCategory.category.name = '';
+          if ($scope.editProduct.category.default) {
+            $scope.editProduct.category.name = '';
           }
         } else if ($scope.category) {
           $scope.editProduct = {
@@ -34,9 +34,8 @@
         $scope.cancelEditProduct = function () {
           if ($scope.withCategory) {
             $scope.setShowCreateProductInList(false);
-          } else {
-            $rootScope.$broadcast('cancelEditForm');
           }
+          $rootScope.$broadcast('cancelEditForm');
         };
 
         $scope.saveChangeProduct = function (form) {
