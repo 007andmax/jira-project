@@ -165,8 +165,8 @@
             Downloader.downloadTicketAttachments($scope.ticketDetails.id);
           };
 
-          $scope.downloadAttachment = function (attachmentId) {
-            Downloader.downloadFile(attachmentId)
+          $scope.downloadAttachment = function (attachmentId, fileName) {
+            Downloader.downloadFile(attachmentId, fileName)
           };
 
           $scope.loadMoreUpdates = function () {

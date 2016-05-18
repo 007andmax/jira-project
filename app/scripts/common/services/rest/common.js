@@ -135,8 +135,8 @@
 
     }
 
-    function downloadFile(fileId) {
-      downloadByUrl('/file/' + fileId);
+    function downloadFile(fileId, fileName) {
+      downloadByUrl('/file/' + fileId, fileName);
     }
 
     return {
