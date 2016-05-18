@@ -83,7 +83,7 @@
         <div class="col-4" style="width: 50px">
           <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
             <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
-                   custom-disabled="{{ disabledCheckbox }}">
+                   custom-disabled="{{ disabledCheckbox || currentUser.role === 'USER' }}">
             <span class="control-indicator"></span>
           </label>
         </div>

@@ -131,37 +131,39 @@
       </ul>
     </nav>
 
-    <div class="clearfix divider"></div>
-    <div class="nav-title" style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ACCOUNTING')"
-         ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Billing
+    <div ng-if="currentUser.role !== 'USER'">
+      <div class="clearfix divider"></div>
+      <div class="nav-title" style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ACCOUNTING')"
+           ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">Billing
+      </div>
+
+      <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'ACCOUNTING'}"
+           ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+        <ul class="nav nav-accounts" ng-hide="collapseItem !== 'ACCOUNTING'" style="width: 100%;">
+
+          <li ng-class="{active: $state.includes('accounting')}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'accounting')">
+              <i class="nav-icon icn-billable icn-lg"></i> Billable
+              <span class="badge">{{ ticketCounts.BILLABLE }}</span>
+            </a>
+          </li>
+
+          <li ng-class="{active: $state.includes('receivable')}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
+              <i class="nav-icon icn-receivable icn-lg"></i> Receivable
+              <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
+            </a>
+          </li>
+
+          <li ng-class="{active: $state.includes('receipt-archive')}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
+              <i class="nav-icon icn-receipt-archive icn-lg"></i> Receipt Archive
+            </a>
+          </li>
+
+        </ul>
+      </nav>
     </div>
-
-    <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'ACCOUNTING'}"
-         ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
-      <ul class="nav nav-accounts" ng-hide="collapseItem !== 'ACCOUNTING'" style="width: 100%;">
-
-        <li ng-class="{active: $state.includes('accounting')}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'accounting')">
-            <i class="nav-icon icn-billable icn-lg"></i> Billable
-            <span class="badge">{{ ticketCounts.BILLABLE }}</span>
-          </a>
-        </li>
-
-        <li ng-class="{active: $state.includes('receivable')}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
-            <i class="nav-icon icn-receivable icn-lg"></i> Receivable
-            <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
-          </a>
-        </li>
-
-        <li ng-class="{active: $state.includes('receipt-archive')}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
-            <i class="nav-icon icn-receipt-archive icn-lg"></i> Receipt Archive
-          </a>
-        </li>
-
-      </ul>
-    </nav>
 
     <div class="clearfix divider"></div>
     <div class="nav-title" style="width: 100%;cursor: pointer"
