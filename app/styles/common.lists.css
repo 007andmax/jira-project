@@ -1669,7 +1669,7 @@ Devices tab
 }
 .qt-product-list>li>.col-1{
   height: 18px;
-  width: 184px;
+  width: 210px;
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
@@ -1699,7 +1699,7 @@ Devices tab
   text-overflow: ellipsis;
 }
 .qt-product-list>li>.col-4{
-  width: 125px;
+  width: 145px;
   color: #94a4b8;
 }
 .with-category .qt-product-list>li>.col-4{
@@ -1720,6 +1720,9 @@ Devices tab
     height: 18px;
     width: 184px;
   }
+  .qt-user-product-list>li>.col-1{
+    width: 225px;
+  }
   .with-category .qt-product-list>li>.col-1{
     width: 145px;
   }
@@ -1731,6 +1734,9 @@ Devices tab
   }
   .qt-product-list>li>.col-4{
     width: 185px;
+  }
+  .qt-user-product-list>li>.col-4{
+    width: 225px;
   }
   .with-category .qt-product-list>li>.col-4{
     width: 115px;
@@ -1748,6 +1754,9 @@ Devices tab
     width: 114px;
     padding-right: 15px;
   }
+  .qt-user-product-list>li>.col-1{
+    width: 145px;
+  }
   .with-category .qt-product-list>li>.col-1{
     width: 100px;
   }
@@ -1762,6 +1771,9 @@ Devices tab
   }
   .qt-product-list>li>.col-4{
     width: 85px;
+  }
+  .qt-user-product-list>li>.col-4{
+    width: 110px;
   }
   .with-category .qt-product-list>li>.col-4{
     width: 85px;
