@@ -33,7 +33,7 @@
                 <a role="menuitem" tabindex="-1" create-ticket-open-modal>Ticket</a>
               </li>
 
-              <li role="presentation" ng-show="currentUser.role !== 'USER'">
+              <li role="presentation">
                 <a role="menuitem" tabindex="-1" ng-click="goToCreateUser()">User</a>
               </li>
 
@@ -41,11 +41,11 @@
                 <a role="menuitem" tabindex="-1" ui-sref="createCompany">Company</a>
               </li>
 
-              <li role="presentation" ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN'">
+              <li role="presentation" ng-show="currentUser.role !== 'USER'">
                 <a role="menuitem" tabindex="-1" ui-sref="createVendor">Vendor</a>
               </li>
 
-              <li role="presentation" ng-show="currentUser.role !== 'USER'">
+              <li role="presentation">
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">Lead</a>
               </li>
 

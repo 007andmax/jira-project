@@ -13,10 +13,10 @@
           <a href="javascript:void(0)" ng-click="setPageTab('list')">Products List</a>
         </li>
 
-        <li class="product-create-btn-form">
+        <li class="product-create-btn-form" ng-if="currentUser.role !== 'USER'">
           <div class="btn btn-info has-tooltip" ng-if="pageTab === 'list'" ng-click="openCreationForm()"
                tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
-            <i class="icn-sm icn-product-add"></i>
+            <i class="icn-sm icn-product-add"></i>1
           </div>
         </li>
 

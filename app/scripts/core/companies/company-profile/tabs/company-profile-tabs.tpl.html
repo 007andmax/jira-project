@@ -33,13 +33,13 @@
       </a>
     </li>
 
-    <li ng-class="{'active': currentOpenTab === 'NETWORK_SCAN', 'hide': !isHasDevices}">
+    <li ng-class="{'active': currentOpenTab === 'NETWORK_SCAN', 'hide': !isHasDevices}" ng-show="currentUser.role !== 'USER'">
       <a data-toggle="tab" href="javascript:void(0)" ng-click="openTab('NETWORK_SCAN')">
         Network Scan
       </a>
     </li>
 
-    <li ng-class="{'active': currentOpenTab === 'SETTINGS'}">
+    <li ng-class="{'active': currentOpenTab === 'SETTINGS'}" ng-show="currentUser.role !== 'USER'">
       <a data-toggle="tab" href="javascript:void(0)" ng-click="openTab('SETTINGS')">
         Settings
       </a>

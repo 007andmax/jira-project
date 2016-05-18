@@ -62,7 +62,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-product-list > li > .intermediate-parent-elem > .col-1 {
   height: 18px;
-  width: 184px;
+  width: 210px;
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
@@ -124,7 +124,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-4 {
-  width: 125px;
+  width: 145px;
   height: 20px;
   color: #94a4b8;
 }
@@ -150,7 +150,9 @@ body.non-body-scroll::-webkit-scrollbar {
     height: 18px;
     width: 184px;
   }
-
+  .qt-user-product-list > li > .intermediate-parent-elem > .col-1{
+    width: 225px;
+  }
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {
     width: 145px;
   }
@@ -162,13 +164,18 @@ body.non-body-scroll::-webkit-scrollbar {
   .qt-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
     left: 80px;
   }
-
+  .slide-category-content .qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox {
+    left: 95px;
+  }
   .qt-product-list > li > .intermediate-parent-elem > .col-3 {
     width: 294px;
   }
 
   .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 185px;
+  }
+  .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
+    width: 225px;
   }
 
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
@@ -188,6 +195,9 @@ body.non-body-scroll::-webkit-scrollbar {
   .qt-product-list > li > .intermediate-parent-elem > .col-1 {
     height: 18px;
     width: 114px;
+  }
+  .qt-user-product-list > li > .intermediate-parent-elem > .col-1{
+    width: 145px;
   }
 
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-1 {
@@ -212,6 +222,9 @@ body.non-body-scroll::-webkit-scrollbar {
 
   .qt-product-list > li > .intermediate-parent-elem > .col-4 {
     width: 85px;
+  }
+  .qt-user-product-list > li > .intermediate-parent-elem > .col-4{
+    width: 110px;
   }
 
   .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
@@ -592,7 +605,7 @@ aside#left div.nav-title {
 
 .nav-tickets.nav-tickets-users {
   transition: .4s linear all;
-  height: 132px;
+  height: 176px;
   overflow: hidden;
 }
 
@@ -1330,3 +1343,36 @@ span.sort-span {
   margin-left: 5px;
   margin-top: -13px;
 }
+.with-category .qt-user-product-list li .col-1{
+  width: 120px;
+}
+.with-category .qt-user-product-list li .col-4{
+  width: 115px;
+}
+.with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-1{
+  width: 120px;
+}
+.with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-4{
+  width: 115px;
+}
+.qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox{
+  left: 50px;
+}
+@media screen and (min-width: 1920px) {
+  .with-category .qt-user-product-list li .col-1{
+    width: 170px;
+  }
+  .with-category .qt-user-product-list li .col-4{
+    width: 165px;
+  }
+  .with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-1{
+    width: 170px;
+  }
+  .with-category .qt-user-product-list > li > .intermediate-parent-elem > .col-4 {
+    width: 165px;
+  }
+  .qt-user-product-list > li > .intermediate-parent-elem > .col-4 label.control.checkbox{
+    left: 75px;
+  }
+}
+

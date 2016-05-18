@@ -1,5 +1,5 @@
 <div class="with-category" ng-controller="quicktech.core.products.productsListCtrl">
-  <ul class="qt-list qt-product-list">
+  <ul class="qt-list qt-product-list" ng-class="{'qt-user-product-list': currentUser.role === 'USER'}">
 
     <li class="list-heading" ng-show="productsData.list.length > 0" style="cursor: pointer !important;">
       <div class="col-1" ng-click="setOrderForProducts('ilc')">
@@ -27,7 +27,7 @@
                                                    ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
       </div>
-      <div class="col-4" ng-click="setOrderForProducts('cost')">
+      <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="currentUser.role !== 'USER'">
         <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
                                        ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
 
@@ -74,7 +74,7 @@
 
         <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
 
-        <div class="col-4">
+        <div class="col-4" ng-if="currentUser.role !== 'USER'">
           {{ product.cost | currency: '$': 2 }}
         </div>
 
@@ -83,7 +83,7 @@
         <div class="col-4" style="width: 50px">
           <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
             <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
-                   custom-disabled="{{ disabledCheckbox }}">
+                   custom-disabled="{{ disabledCheckbox || currentUser.role === 'USER' }}">
             <span class="control-indicator"></span>
           </label>
         </div>

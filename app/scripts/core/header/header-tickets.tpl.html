@@ -114,7 +114,7 @@
       </div>
 
       <div class="pull-right">
-        <div ng-if="(listType === 'trash' || listType === 'spam') && !sharedState.checkedBillableTicket"
+        <div ng-if="((listType === 'trash' || listType === 'spam') && !sharedState.checkedBillableTicket) && currentUser.role !== 'USER'"
              class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="Delete Forever"
              ng-click="deleteForever()">
