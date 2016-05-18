@@ -150,7 +150,7 @@
 }
 
 .ticket.two-actions:hover .ticket-meta .ticket-title p.ellipsis{
-  width: calc(100% - 66px);
+  width: calc(100% - 70px);
 }
 
 .ticket.three-actions:hover .ticket-meta .ticket-title p.ellipsis{
