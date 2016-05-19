@@ -6,11 +6,11 @@
       <li>
         <label>
           Maximum agents install for this client
-          <input type="number" min="{{ agents && agents.length ? agents.length : 0 }}" name="maxAgents"
+          <input type="number" name="maxAgents"
                  ng-model="settings.maxAgents"
-                 ng-class="{'input-error': agentDeploymentSettingsFrom.maxAgents.$invalid}"
+                 ng-class="{'input-error': settings.maxAgents < 0}"
                  execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
-          <span ng-if="agentDeploymentSettingsFrom.maxAgents.$error.min && settings.maxAgents !== 0" style="color: #e53935">
+          <span ng-if="agents && settings.maxAgents < agents.length && settings.maxAgents !== 0" style="color: #e53935">
             The maximum number of agents may be bigger than the number of already installed!
           </span>
           <span ng-if="agentDeploymentSettingsFrom.maxAgents.$error.number" style="color: #e53935">

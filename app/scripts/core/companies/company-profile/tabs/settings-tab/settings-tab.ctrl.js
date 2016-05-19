@@ -214,7 +214,10 @@
 
         $scope.saveDeploymentSettings = function (form) {
 
-          if ($scope.settings.maxAgents === 0) {
+          if ($scope.settings.maxAgents < 0 ||
+            ($scope.agents && $scope.settings.maxAgents < $scope.agents.length && $scope.settings.maxAgents !== 0)) {
+            form.$setValidity('min', false);
+          } else {
             form.$setValidity('min', true);
           }
 
