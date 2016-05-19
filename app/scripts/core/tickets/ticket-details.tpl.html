@@ -69,8 +69,7 @@
 
             <div class="btn btn-default pull-left has-tooltip"
                  aria-haspopup="true" aria-expanded="false"
-                 dropdown-toggle ng-click="setTicketTags()"
-                 tooltip="Settings" tooltip-placement="top">
+                 dropdown-toggle tooltip="Settings" tooltip-placement="top">
               <i class="icn-sm icn-settings"></i>
             </div>
 
@@ -243,14 +242,14 @@
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
 
-      <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status)"
+      <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status) || ticketClaimed"
            ng-include="'/html/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
 
       <div class="ticket-updates clearfix">
 
-        <div ng-if="listType !== 'unassigned' && ticketDetails.updates.length > 0"
+        <div ng-if="(ticketClaimed || listType !== 'unassigned') && ticketDetails.updates.length > 0"
              class="ticket-update-header clearfix">
 
           <h4>
@@ -288,7 +287,7 @@
           </ul>
         </div>
 
-        <div class="ticket-updates-wrapper clearfix" ng-if="ticketDetails.assignedUser">
+        <div class="ticket-updates-wrapper clearfix" ng-if="ticketDetails.assignedUser || ticketClaimed">
 
           <div class="ticket-update clearfix" ng-repeat="ticketUpdate in ticketDetails.updates"
                ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"

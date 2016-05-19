@@ -24,7 +24,7 @@
 
             $scope.ticketDetails = details;
 
-            if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
+            if (!$scope.ticketClaimed && details.message !== undefined && (details.code === 400 || details.code === 403)) {
               $state.go('tickets', {listType: $stateParams.listType});
               return;
             }
@@ -92,9 +92,7 @@
 
           $scope.claimTicket = function () {
             TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id, function () {
-              $state.go('tickets', {listType: 'user'}).then(function () {
-                $state.go('tickets.details', {ticketId: $scope.ticketDetails.id});
-              });
+              $scope.ticketClaimed = true;
             });
           };
 
@@ -483,7 +481,7 @@
 
           $scope.$on('ticket_is_not_available_anymore', function (event, data) {
 
-            if (data.ticketId === $scope.ticketDetails.id
+            if (!$scope.ticketClaimed && data.ticketId === $scope.ticketDetails.id
               && (!data.ticketType || data.ticketType.toUpperCase() === $stateParams.listType.toUpperCase()))
               $state.go('tickets', {listType: $stateParams.listType});
           });
