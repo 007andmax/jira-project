@@ -20,7 +20,7 @@
             windowScrollTop = wind.scrollTop();
 
             var modalInstance = $modal.open({
-              animation: false,
+              animation: true,
               backdrop: 'static',
               windowClass: attrs.modalWindowClass || '',
               templateUrl: attrs.modalWindowButton,

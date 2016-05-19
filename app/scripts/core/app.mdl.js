@@ -305,6 +305,7 @@
                 controller: 'quicktech.core.tickets.createTicketCtrl',
                 windowClass: 'modal-create-ticket',
                 backdrop: 'static',
+                animation: true,
                 resolve: {
                   sessionId: function () {
                     return sessionId;

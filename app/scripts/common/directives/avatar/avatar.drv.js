@@ -131,7 +131,7 @@
               windowScrollTop = wind.scrollTop();
 
               return $modal.open({
-                animation: false,
+                animation: true,
                 backdrop: 'static',
                 windowClass: 'modal-customize-avatar',
                 templateUrl: '/html/scripts/common/directives/avatar/crop.tpl.html',

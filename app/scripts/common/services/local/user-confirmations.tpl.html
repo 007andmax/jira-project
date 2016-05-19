@@ -1,10 +1,12 @@
-<div class="modal-body">
-  <p>{{ messageConfirm }}</p>
-</div>
-<div class="modal-footer">
-  <div class="btn btn-lg btn-primary" ng-class="{'hide': hideCancel}"
-       data-dismiss='modal' ng-click=cancelConfirm()>
-    Cancel
+<div>
+  <div class="modal-body">
+    <p>{{ messageConfirm }}</p>
   </div>
-  <div class="btn btn-lg btn-info" ng-click=approveConfirm()>{{ buttonConfirm }}</div>
+  <div class="modal-footer">
+    <div class="btn btn-lg btn-primary" ng-class="{'hide': hideCancel}"
+         data-dismiss='modal' ng-click=cancelConfirm()>
+      Cancel
+    </div>
+    <div class="btn btn-lg btn-info" ng-click=approveConfirm()>{{ buttonConfirm }}</div>
+  </div>
 </div>

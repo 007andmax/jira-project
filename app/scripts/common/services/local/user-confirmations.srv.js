@@ -7,7 +7,7 @@
       function ($modal) {
 
         var modalParams = {
-          animation: false,
+          animation: true,
           backdrop: 'static',
           keyboard: false,
           size: 'custom-size-confirmation-pop-up',
