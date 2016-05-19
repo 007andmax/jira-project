@@ -95,7 +95,7 @@
 
         };
 
-        $scope.createInvoice = function (lock) {
+        $scope.createInvoice = function (lock, callback) {
 
           if (!lock.expired) {
 
@@ -103,9 +103,15 @@
 
             var contactId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].contactId;
             var addressId = $scope.lockInfo[$scope.invoiceLocks[$scope.showInvoiceLockIndex].lockId].addressId;
+            var isSend = !callback;
 
-            BillableService.createInvoice(lock.lockId, contactId, addressId, function (resp) {
+            if (callback) {
+              callback();
+            }
+
+            BillableService.createInvoice(lock.lockId, isSend, contactId, addressId, function (resp) {
               if (resp.id) {
+
                 $scope.invoiceLocks.splice($scope.showInvoiceLockIndex, 1);
 
                 if ($scope.invoiceLocks.length === 0) {

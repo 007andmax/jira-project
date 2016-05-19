@@ -183,13 +183,13 @@ only screen and (min-device-pixel-ratio: 1.5) {
   }
 }
 .inv-modal .icn-print{
-  background-position: -3791px -206px;
+  background-position: -3835px -206px;
   width: 12px;
   height: 12px;
 }
-.inv-modal .icn-print:hover,.inv-modal .icn-print:active, .inv-modal :hover > .icn-print, .inv-modal :active > .icn-print{
-  background-position: -3813px -206px;
-}
+/*.inv-modal .icn-print:hover,.inv-modal .icn-print:active, .inv-modal :hover > .icn-print, .inv-modal :active > .icn-print{*/
+  /*background-position: -3813px -206px;*/
+/*}*/
 .inv-modal .icn-download{
   background-position: -412px 0;
   width: 12px;

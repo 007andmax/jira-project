@@ -288,7 +288,7 @@
       //    return tickets;
       //}
 
-      function createInvoice(lockId, contact, address, callback) {
+      function createInvoice(lockId, isSend, contact, address, callback) {
         if (!lockId) {
           throw 'lockId is required!'
         }
@@ -298,7 +298,7 @@
         if (!address) {
           throw 'address is required!'
         }
-        var future = $http.get('/invoice/create/' + lockId + '?&billTo=' + contact + '&shipTo=' + address);
+        var future = $http.get('/invoice/create/' + lockId + '?isSendNotification=' + isSend + '&billTo=' + contact + '&shipTo=' + address);
         Utils.handleCallback(future, callback);
 
       }

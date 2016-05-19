@@ -48,19 +48,20 @@
 
     <div class="invoice-actions">
 
-      <div class="btn btn-default pull-left" ng-if="!invoicePreview"
-           ng-click="print()"
+      <div class="btn btn-info pull-left" ng-if="!invoicePreview"
+           ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex], print)"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
-           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Print">
+           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Print Invoice">
         <i class="icn icn-print"></i>
       </div>
 
-      <div style="margin-left: 10px;" class="btn btn-default pull-left" ng-click="download()" ng-if="!invoicePreview"
-      tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Download">
-      <i class="icn icn-download"></i>
+      <div style="margin-left: 10px;" class="btn btn-info pull-left"
+           ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex], download)" ng-if="!invoicePreview"
+           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Download Invoice">
+      <i class="icn icn-download-white"></i>
       </div>
 
-      <div style="width: 92px;margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview"
+      <div style="margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview"
            ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Send Invoice">
