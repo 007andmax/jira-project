@@ -1,5 +1,6 @@
 <div class="{{readonlyTags ? 'readonly-tags-wrap' : 'tags-wrap'}}" ng-click="focusInput = !focusInput; $event.stopPropagation()">
   <div class="{{readonlyTags ? 'readonly-tags' : 'tags'}}">
+    <span class="tags-title" ng-hide="readonlyTags">Tags: </span>
     <span class="tag-label"
           ng-style="{'background-color': tagColors[tag.colorCode].backgroundColor,
                     'border-color': tagColors[tag.colorCode].borderColor}"
