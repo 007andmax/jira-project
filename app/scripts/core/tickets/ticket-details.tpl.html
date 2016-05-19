@@ -332,22 +332,23 @@
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
 
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
-                    ng-repeat="updateUttachment in ticketUpdate.attachments">
+                    ng-repeat="updateAttachment in ticketUpdate.attachments">
 
                   <div class="file-icon-name">
                     <span class="file-icon icn-lg"></span>
                     <span class="file-ext">
-                      {{ updateUttachment.file.name.match(attachmentTypePattern)[0] || attachmentType[updateUttachment.file.contentType] }}
+                      {{ updateAttachment.file.name.match(attachmentTypePattern)[0] || attachmentType[updateAttachment.file.contentType] }}
                     </span>
                   </div>
 
-                  <div class="file-name" ng-bind="updateUttachment.file.name"></div>
+                  <div class="file-name" ng-bind="updateAttachment.file.name"></div>
 
                   <div class="onhover">
-                    <span class="file-name" ng-bind="updateUttachment.file.name"></span>
-                    <span class="file-size">{{ updateUttachment.file.size | fileSizeFilter }}</span>
+                    <span class="file-name" ng-bind="updateAttachment.file.name"></span>
+                    <span class="file-size">{{ updateAttachment.file.size | fileSizeFilter }}</span>
                     <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
-                       data-placement="top" tooltip="Download">
+                       data-placement="top" tooltip="Download"
+                       ng-click="downloadAttachment(updateAttachment.file.id, updateAttachment.file.name)">
                       <span class="icn-sm icn-attachments-download"></span>
                     </a>
                   </div>
