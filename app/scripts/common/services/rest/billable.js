@@ -394,7 +394,7 @@
         getTotalBilledAmount: getTotalBilledAmount,
         getBillableChartData: getBillableChartData,
         createInvoice: createInvoice,
-        saveRegularOrder: saveRegularOrder,
+        //saveRegularOrder: saveRegularOrder,
         getActualInvoiceNumber: getActualInvoiceNumber,
         search: search,
         getLockedTicketIds: getLockedTicketIds,

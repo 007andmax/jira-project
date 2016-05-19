@@ -408,6 +408,16 @@
       recurring.push({ company: CompaniesService.getOneById(companyId), total: 0, ticketsCount: 0 });
     }
 
+    function forceCreate(id, callback) {
+      if (!id) {
+        throw 'Id of the invoice required!'
+      }
+
+      var future = $http.get('/recurringInvoice/' + id + '/forceCreate');
+
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       getRecurringGraphData: getRecurringGraphData,
       getRecurringCompanies: getRecurringCompanies,
@@ -422,7 +432,8 @@
       deleteProductExpenseFromRecInv: deleteProductExpenseFromRecInv,
       deleteServiceExpenseFromRecInv: deleteServiceExpenseFromRecInv,
       search: search,
-      addCompany: addCompany
+      addCompany: addCompany,
+      forceCreate: forceCreate
     }
   }]);
 

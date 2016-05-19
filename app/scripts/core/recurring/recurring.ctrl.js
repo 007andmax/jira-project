@@ -45,6 +45,10 @@
 
         };
 
+        $scope.forceCreate = function (id) {
+          RecurringService.forceCreate(id);
+        };
+
         $scope.setOrderForProducts = function (option) {
           if (option === $scope.orderInvoices.field) {
             $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
