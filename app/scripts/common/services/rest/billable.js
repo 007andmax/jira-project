@@ -50,17 +50,17 @@
         }
       }
 
-      function saveRegularOrder(order, callback) {
-        if (!order)throw 'order must be!';
-
-        var future = $http({
-          url: '/billable/saveRegularOrder',
-          method: 'POST',
-          data: order
-        });
-
-        Utils.handleCallback(future, callback);
-      }
+      //function saveRegularOrder(order, callback) {
+      //  if (!order)throw 'order must be!';
+      //
+      //  var future = $http({
+      //    url: '/billable/saveRegularOrder',
+      //    method: 'POST',
+      //    data: order
+      //  });
+      //
+      //  Utils.handleCallback(future, callback);
+      //}
 
       function getBillablePageDto(scope, callback) {
 

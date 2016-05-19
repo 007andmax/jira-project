@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
-    ['$scope', 'RecurringService', 'BillableService', 'CompaniesService', 'ServicesService', '$filter',
+    ['$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter',
       'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'TaxRatesService',
-      function ($scope, RecurringService, BillableService, CompaniesService, ServicesService, $filter,
+      function ($scope, RecurringService, CompaniesService, ServicesService, $filter,
                 ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService) {
 
         var day = 1000 * 60 * 60 * 24;
@@ -54,7 +54,7 @@
               id: $scope.invoice.company.id
             },
             title: $scope.invoice.title,
-            isRecurring: true,
+            autoCreate: true,
             purchaseOrder: $scope.invoice.purchaseOrder,
             paymentTerms: $scope.invoice.paymentTerms,
             memo: $scope.invoice.memo,
@@ -89,7 +89,7 @@
           });
 
           $scope.editInvoice = {
-            isRecurring: true,
+            autoCreate: true,
             products: [],
             services: [],
             sentOn: new Date(Date.now() + day),
@@ -427,17 +427,10 @@
               editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)
             }
 
-            if (editInvoice.isRecurring) {
-              RecurringService.saveRecurringOrder(editInvoice, function () {
-                $scope.toogleEditForm();
-                $scope.hardDisabledSave = false;
-              })
-            } else {
-              BillableService.saveRegularOrder(editInvoice, function () {
-                $scope.toogleEditForm();
-                $scope.hardDisabledSave = false;
-              })
-            }
+            RecurringService.saveRecurringOrder(editInvoice, function () {
+              $scope.toogleEditForm();
+              $scope.hardDisabledSave = false;
+            })
           } else {
             $scope.tryAddExpense.tryToAddProduct = true;
             $scope.tryAddExpense.tryToAddService = true;

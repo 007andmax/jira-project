@@ -31,7 +31,7 @@
             <input type="text" ng-model="editInvoice.title" name="orderTitle" ng-required="true" ng-maxlength="50">
           </label>
 
-          <fieldset class="small" ng-if="editInvoice.isRecurring">
+          <fieldset class="small" ng-if="editInvoice.autoCreate">
 
             <label class="for-small" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'purchaseOrder')}">
               <span>PO</span>
@@ -136,7 +136,7 @@
         </fieldset>
 
         <label class="invoice-checkbox" ng-if="!editInvoice.id">
-          <input type="checkbox" ng-model="editInvoice.isRecurring">
+          <input type="checkbox" ng-model="editInvoice.autoCreate">
           Automatically create and send invoice (all other recurring orders will be sent into Billable Items)
         </label>
       </fieldset>
