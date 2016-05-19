@@ -48,6 +48,8 @@
               restServerAddress = ConstantsService.getConstant('rest.server.address'),
               url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
 
+
+            console.log(url);
             var modalInstance = $modal.open(modalParams),
               promise = $interval(function () {
                 counter++;

@@ -310,7 +310,7 @@
                     return sessionId;
                   },
                   sessionTime: function () {
-                    return sessionTime
+                    return sessionTime;
                   }
                 }
               });

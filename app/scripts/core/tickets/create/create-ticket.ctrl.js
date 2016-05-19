@@ -117,7 +117,6 @@
               $scope.ticket.createdUser.companyId = undefined;
             }
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
-            $scope.ticket.serviceExpenses = [{}];
             $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
               if (!item.isDefault) {
                 return item;
