@@ -54,7 +54,7 @@
               id: $scope.invoice.company.id
             },
             title: $scope.invoice.title,
-            autoCreate: true,
+            autoCreate: $scope.invoice.autoCreate,
             purchaseOrder: $scope.invoice.purchaseOrder,
             paymentTerms: $scope.invoice.paymentTerms,
             memo: $scope.invoice.memo,
