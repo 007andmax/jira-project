@@ -108,9 +108,9 @@
                   </span>
 
                   <div class="currency-icons">
-                    <div class="btn btn-primary" ng-click="forceCreate(invoice.id)">
-                      Force Create
-                    </div>
+                    <button-with-loading-indicator class="btn btn-primary"
+                                                   label="Force Create" loading="forceCreating[invoice.id]"
+                                                   ng-click="forceCreate(invoice.id)"></button-with-loading-indicator>
 
                     <a>
                       <i class="icn-sm icn-description"

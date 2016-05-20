@@ -4,10 +4,11 @@
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
     [
-      '$scope', 'RecurringService', 'CompaniesService',
-      function ($scope, RecurringService, CompaniesService) {
+      '$scope', 'RecurringService', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, RecurringService, CompaniesService, UserNotificationService) {
 
         $scope.loadingInProgress = true;
+        $scope.forceCreating = [];
         $scope.editInvoiceId = '';
         $scope.frequency = {
           sevenDays: '7 days',
@@ -46,7 +47,11 @@
         };
 
         $scope.forceCreate = function (id) {
-          RecurringService.forceCreate(id);
+          $scope.forceCreating[id] = true;
+          RecurringService.forceCreate(id, function () {
+            $scope.forceCreating[id] = false;
+            UserNotificationService.show('Invoice sent', true);
+          });
         };
 
         $scope.setOrderForProducts = function (option) {
