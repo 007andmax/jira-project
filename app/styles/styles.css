@@ -9640,3 +9640,7 @@ button.close {
 .remote-access-header .title {
   font-weight: bold;
 }
+.dropdown-menu-child-focused {
+  color: #4c5c6f;
+  background-color: #e7ecf2;
+}

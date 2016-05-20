@@ -6,7 +6,8 @@
       <fieldset class="main-form">
         <fieldset class="half">
 
-          <label class="dropdown company-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}">
+          <label class="dropdown company-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}"
+                 dropdown-arrow-navigation on-enter="chooseCompany" dropdown-data-item-name="company">
             <span>Customer</span>
 
             <input ng-model="searchCompany"
