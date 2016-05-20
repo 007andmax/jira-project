@@ -10,14 +10,10 @@
 
       $scope.currentInvoice = {
         billTo: {
-          address: 'Winipeg Street, Manitou Beach, SK, Canada',
-          suiteNumber: '44R',
-          addressWithSuitNumberAndPostalCode: '44R, Winipeg Street, Manitou Beach, SK, Canada'
+          addressWithSuitNumberAndPostalCode: '67,  Cartage Systems Ltd, 69 Avenue Southeast\nCalgary, AB\nT2C 4Y7'
         },
         shipTo: {
-          address: 'Winipeg Street, Manitou Beach, SK, Canada',
-          suiteNumber: '44R',
-          addressWithSuitNumberAndPostalCode: '44R, Winipeg Street, Manitou Beach, SK, Canada'
+          addressWithSuitNumberAndPostalCode: '67,  Cartage Systems Ltd, 69 Avenue Southeast\nCalgary, AB\nT2C 4Y7'
         },
         company: {
           parent: {
@@ -31,8 +27,6 @@
         },
         companyName: 'Client Company',
         techCompanyName: $scope.editCompany.name,
-        billingAddress: '44R, Winipeg Street, Manitou Beach, SK, Canada',
-        shippingAddress: '44R, Winipeg Street, Manitou Beach, SK, Canada',
         senderAddress: $scope.companyForSettingPage.addresses[0].addressWithSuitNumberAndPostalCode,
         number: $scope.invoiceConfig ? $scope.invoiceConfig.count : '0001',
         date: 1460552903659,
