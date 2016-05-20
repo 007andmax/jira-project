@@ -346,7 +346,8 @@
 
             <div class="col-5">
               <label class="control checkbox">
-                <input type="checkbox">
+                <input type="checkbox" ng-model="service.billable"
+                       ng-change="onChangeBillable()" custom-disabled="{{ disabledCheckbox }}">
                 <span class="control-indicator"></span>
               </label>
             </div>
