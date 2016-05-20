@@ -946,7 +946,11 @@ aside#left div.nav-title {
   cursor: pointer;
 }
 .custom-product-list .category-conteiner .category-info .icn-caret-gray{
-  margin-top: 5px;
+  margin-top: 2px;
+}
+.custom-product-list .category-conteiner .category-info .icn-caret-gray.rotated{
+  transform: rotate(180deg);
+  margin-top: 0;
 }
 .custom-product-list .category-conteiner .product-list-container {
   margin: 0;
