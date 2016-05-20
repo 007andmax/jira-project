@@ -39,9 +39,7 @@
 
           var emailObjToSend = {
             newDevice: $scope.userProfile.emailNotifications.newDevice,
-            scheduleChanged: $scope.userProfile.emailNotifications.scheduleChanged,
-            clientCompanyUpdated: $scope.userProfile.emailNotifications.clientCompanyUpdated,
-            vendorUpdated: $scope.userProfile.emailNotifications.vendorUpdated
+            ticketCreated: $scope.userProfile.emailNotifications.ticketCreated
           };
 
           return {
