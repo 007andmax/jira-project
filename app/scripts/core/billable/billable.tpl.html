@@ -63,7 +63,7 @@
           <li class="billable-main"
               event-toggle-slider="toggleBillableTickets"
               ng-controller="quicktech.core.billable.companyCtrl"
-              ng-repeat="billableCompany in billableData | filterBillableCompany: true"
+              ng-repeat="billableCompany in billableData | filterBillableCompany"
               show-model-element="{{ 'showCompany-' + billableCompany.companyId }}">
 
             <div ng-click="toggleBillableTickets()"
