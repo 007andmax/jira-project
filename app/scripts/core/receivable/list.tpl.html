@@ -4,6 +4,7 @@
     <li class="list-heading">
       <div class="col-1">INVOICE NO.</div>
       <div class="col-2">COMPANY</div>
+      <div class="col-3">READ ON</div>
       <div class="col-3">SENT ON</div>
       <div class="col-4">DUE DATE</div>
       <div class="col-5">STATUS</div>
@@ -28,6 +29,7 @@
       </div>
 
       <div class="col-2">{{ company.name }}</div>
+      <div class="col-2">{{ invoiceProperty('readedAt') | date:'dd MMM yyyy' }}</div>
       <div class="col-3">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
 
       <div class="col-4">
