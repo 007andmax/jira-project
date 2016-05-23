@@ -18,6 +18,7 @@
           MONTHLY: 'Month',
           YEARLY: 'Year'
         };
+        $scope.openTab = 'product';
 
         $scope.taxRatesCoef = 0;
         $scope.repeatingPattern = /^(\d?[0-9]{0,17})?(Month)?(Year)?$/;

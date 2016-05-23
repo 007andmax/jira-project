@@ -1,7 +1,24 @@
 <div>
-  <div class="table-wrapper clearfix" ng-repeat="expense in expenses | orderBy: ['isServiceExpense', 'sum']">
+  <div class="table-wrapper clearfix" ng-repeat="service in invoice.services | orderBy: 'sum'">
 
-    <div class="table-content pull-left" ng-if="!expense.isServiceExpense" ng-init="product = expense">
+    <div class="table-content pull-left">
+      <i class="icn icn-sm icn-update-service"></i>
+
+      <div class="col-1">{{ service.item.name }}</div>
+
+      <div class="col-2" trimmed-popover trimmed-popover-content="service.description">
+        {{ service.description }}
+      </div>
+
+      <div class="col-5">{{ service.sum | currency: '$': 2 }}</div>
+      <div class="col-4">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
+
+    </div>
+
+  </div>
+  <div class="table-wrapper clearfix" ng-repeat="product in invoice.products | orderBy: 'sum'">
+
+    <div class="table-content pull-left">
 
       <i class="icn icn-sm icn-update-product"></i>
 
@@ -29,20 +46,6 @@
       <div class="col-4">{{ product.price | currency: '$': 2 }}
         <span class="model">Qty {{ product.quantity }}</span>
       </div>
-
-    </div>
-
-    <div class="table-content pull-left" ng-if="expense.isServiceExpense" ng-init="service = expense">
-      <i class="icn icn-sm icn-update-service"></i>
-
-      <div class="col-1">{{ service.item.name }}</div>
-
-      <div class="col-2" trimmed-popover trimmed-popover-content="service.description">
-        {{ service.description }}
-      </div>
-
-      <div class="col-5">{{ service.sum | currency: '$': 2 }}</div>
-      <div class="col-4">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
 
     </div>
 
