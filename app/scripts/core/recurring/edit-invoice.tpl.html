@@ -146,8 +146,8 @@
 
           <ul class="nav nav-ticket-add invoice-ticket-add">
 
-            <li class="invoice-update-btns">
-              <a href="javascript:void(0)" ng-click="openTab = 'product'">
+            <li class="invoice-update-btns" ng-click="setOpenedTab('product')">
+              <a href="javascript:void(0)">
                 <i class="icn-lg icn-add-product"></i>Product
               </a>
 
@@ -157,8 +157,9 @@
               </div>
             </li>
 
-            <li class="invoice-update-btns">
-              <a href="javascript:void(0)" ng-click="openTab = 'service'">
+            <li class="invoice-update-btns" ng-click="setOpenedTab('service')"
+                ng-show="companyServices && companyServices.length">
+              <a href="javascript:void(0)">
                 <i class="icn-lg icn-add-service"></i>Service
               </a>
 
@@ -172,7 +173,7 @@
 
           <div class="update-content">
 
-            <div class="tab-pane in active" ng-show="openTab === 'product'">
+            <div class="tab-pane in active" ng-show="isTabOpened('product')">
               <ul class="qt-table">
 
                 <li ng-show="!editInvoice.products.length">
@@ -188,7 +189,7 @@
               </ul>
             </div>
 
-            <div class="tab-pane in active" ng-show="openTab === 'service'">
+            <div class="tab-pane in active" ng-show="isTabOpened('service')">
               <ul class="qt-table">
 
                 <li ng-show="!editInvoice.services.length">

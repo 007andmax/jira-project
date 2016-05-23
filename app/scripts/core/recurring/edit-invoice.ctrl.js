@@ -9,7 +9,7 @@
                 ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService) {
 
         var day = 1000 * 60 * 60 * 24;
-        var isEditOrderLoad;
+        var form;
 
         $scope.frequency = {
           sevenDays: '7 days',
@@ -40,7 +40,7 @@
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete();
 
         if ($scope.invoice && $scope.invoice.id) {
-          isEditOrderLoad = true;
+          form = true;
           $scope.repeatingInvoiceModel = true;
 
           $scope.searchCompany = CompaniesService.getOneById($scope.invoice.company.id).name;
@@ -149,12 +149,7 @@
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
             $scope.taxRatesCoef = 0;
-
-            for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
-              if ($scope.editInvoice.services[i].type === 'service') {
-                delete $scope.editInvoice.services[i].item;
-              }
-            }
+            $scope.editInvoice.services = [];
             return;
           }
 
@@ -162,6 +157,7 @@
           $scope.editInvoice.company = {
             id: company.id
           };
+          $scope.editInvoice.services = [];
 
           TaxRatesService.getAllByCompany(company.id, $scope, function (resp) {
             var taxRatesCopy = angular.copy(resp);
@@ -211,8 +207,8 @@
         };
 
         $scope.changeStartDate = function () {
-          if (isEditOrderLoad) {
-            isEditOrderLoad = false;
+          if (form) {
+            form = false;
             return;
           }
           changeRepeatAndStart();
@@ -435,7 +431,26 @@
             $scope.tryAddExpense.tryToAddProduct = true;
             $scope.tryAddExpense.tryToAddService = true;
             $scope.triedToSaveInvoice = true;
+
+            for (var i = 0; form['updateInvoiceProduct-' + i] || form['updateInvoiceService-' + i]; i++) {
+              var productForm = form['updateInvoiceProduct-' + i],
+                serviceForm = form['updateInvoiceService-' + i];
+
+              if (productForm && productForm.$invalid && $scope.openTab !== 'product') {
+                $scope.openTab = 'product';
+              } else if (serviceForm && serviceForm.$invalid && $scope.openTab !== 'service') {
+                $scope.openTab = 'service';
+              }
+            }
           }
+        };
+
+        $scope.setOpenedTab = function (tab) {
+          $scope.openTab = tab;
+        };
+
+        $scope.isTabOpened = function (tab) {
+          return $scope.openTab === tab;
         };
 
       }]);
