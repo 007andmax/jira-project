@@ -32,7 +32,7 @@
               });
 
               modalInstance.result.finally(function () {
-                $('body').addClass('non-body-scroll');
+                $('body').removeClass('non-body-scroll');
               });
 
             });

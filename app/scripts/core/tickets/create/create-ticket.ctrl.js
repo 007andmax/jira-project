@@ -33,11 +33,10 @@
         if (sessionId) {
 
           $scope.ticket.remoteSessionId = sessionId;
-          $scope.ticket.serviceExpenses = [
-            {
-              quantity: (sessionTime * 60).toFixed()
-            }
-          ];
+          $scope.ticket.serviceExpenses = [{}];
+
+          var quantity = parseFloat(sessionTime);
+          $scope.ticket.serviceExpenses[0].quantity = quantity ? quantity.toFixed() : undefined;
           $scope.isShowService = true;
           $scope.maxServiceDate = new Date();
 
@@ -116,6 +115,12 @@
             if ($scope.ticket.createdUser) {
               $scope.ticket.createdUser.companyId = undefined;
             }
+
+            if ($scope.ticket.serviceExpenses && $scope.ticket.serviceExpenses.length) {
+              $scope.ticket.serviceExpenses[0].item = undefined;
+              $scope.ticket.serviceExpenses.splice(1);
+            }
+
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
             $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
               if (!item.isDefault) {

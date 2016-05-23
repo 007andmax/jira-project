@@ -24,12 +24,16 @@
               hoverHourElement: undefined,
               hoverMinuteElement: undefined
             },
-            savedValue = '';
+            savedValue = '',
+            inited = false;
 
           element.addClass('timer-quantity');
 
           scope.$watch('quantity', function (val) {
-            initPicker();
+            if (!inited) {
+              initPicker();
+              inited = true;
+            }
             if (!val && input.val()) {
               input.val('')
             }

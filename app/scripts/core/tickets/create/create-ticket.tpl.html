@@ -201,17 +201,17 @@
       </div>
 
       <div class="services-in-create-tkt" ng-if="isShowService" ng-repeat="serviceExpense in ticket.serviceExpenses"
-           ng-init="serviceExpense.itemOrder = $index" ng-form="addServiceForm">
+           ng-init="serviceExpense.itemOrder = $index; isServiceListOpened = []" ng-form="addServiceForm">
 
         <div>
           <ul class="qt-table">
             <li>
 
               <div class="col-1" ng-class="{'has-error': isShowingServiceErrors(addServiceForm, 'service')}">
-                <div class="dropdown">
+                <div dropdown is-open="!!isServiceListOpened[serviceExpense.itemOrder]">
 
                   <input type="text" class="form-control has-dropdown"
-                         name="serviceName" autocomplete="off"
+                         name="serviceName" autocomplete="off" dropdown-toggle
                          custom-disabled="{{ !ticketCompany || serviceList.length < 1 }}"
                          placeholder="Service" autocomplete-service-item="serviceExpense.item"
                          ng-model="serviceExpense.item.name" service-list="serviceList"
@@ -246,11 +246,11 @@
 
               <div class="col-4" ng-class="{'has-error': isShowingServiceErrors(addServiceForm, 'serviceData')}">
 
-                <div class="dropdown">
+                <div dropdown>
 
-                  <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                  <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 12px;z-index: 1;"></i>
                   <input type="text" class="form-control has-dropdown" qt-data-time-picker max-date="maxServiceDate"
-                         data-toggle="dropdown" aria-expanded="false" placeholder="Date"
+                         dropdown-toggle aria-expanded="false" placeholder="Date"
                          ng-model="serviceExpense.date"
                          name="serviceData" ng-required="true">
 
@@ -334,8 +334,8 @@
 
               <label>Priority</label>
 
-              <div class="dropdown">
-                <input type="text" class="form-control has-dropdown readonly-normal" data-toggle="dropdown"
+              <div dropdown>
+                <input type="text" class="form-control has-dropdown readonly-normal" dropdown-toggle
                        readonly>
                 <i class="icn-sm icn-caret-gray"></i>
 

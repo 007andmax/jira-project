@@ -315,6 +315,14 @@
                   }
                 }
               });
+
+              modalInstance.opened.then(function () {
+                $('body').addClass('non-body-scroll');
+              });
+
+              modalInstance.result.finally(function () {
+                $('body').removeClass('non-body-scroll');
+              });
             });
 
             $rootScope.currentRemoteSessionId = '';
