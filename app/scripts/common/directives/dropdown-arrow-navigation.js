@@ -61,10 +61,12 @@
 
             if (direction === 'next' && list.index(el) >= list.length - 1) {
               tempElement = angular.element(list.first());
-            } else if  (direction === 'prev' && list.index(el) <= 0) {
+            } else if (direction === 'prev' && list.index(el) <= 0) {
               tempElement = angular.element(list.last());
-            } else {
+            } else if (list.index(el) > -1) {
               tempElement = angular.element(el[direction]());
+            } else {
+              tempElement = angular.element(list[direction === 'next' ? 'first' : 'last']());
             }
           } else {
             tempElement = angular.element(list[direction === 'next' ? 'first' : 'last']());
@@ -76,8 +78,10 @@
 
         function closeDropdown() {
           element.removeClass('open');
-          currentFocused.removeClass($scope.focusedClass);
-          currentFocused = undefined;
+          if (currentFocused) {
+            currentFocused.removeClass($scope.focusedClass);
+            currentFocused = undefined;
+          }
         }
       }
     }
