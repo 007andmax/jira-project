@@ -10,7 +10,7 @@
 
         $scope.invoiceProperty = function (property) {
           var invoice = $scope.invoice;
-          return invoice[property] || invoice.invoices[invoice.invoices.length - 1][property];
+          return invoice[property] || (invoice.invoices && invoice.invoices[invoice.invoices.length - 1][property]);
         };
 
         var dueDate = $scope.invoiceProperty('dueDate');
