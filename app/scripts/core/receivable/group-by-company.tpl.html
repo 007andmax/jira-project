@@ -74,9 +74,9 @@
 
             <div class="col-5">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
             <div class="col-6 group-btns">
-              <i class="icn-sm icn-show-password"></i>
-              <i class="icn-sm icn-remove-token"></i>
-              <i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"></i>
+              <i class="icn-sm icn-show-password" ng-click="invoicePreview(invoice)"></i>
+              <i class="icn-sm icn-remove-token hide"></i>
+              <i class="icn-sm icn-delete hide" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"></i>
             </div>
 
           </li>
