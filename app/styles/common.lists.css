@@ -1203,7 +1203,7 @@ Devices tab
   }
 }
 .qt-receivable .qt-invoices>li>.col-1{
-  width: calc(100% - 603px);
+  width: calc(100% - 845px);
 }
 .qt-receivable .qt-invoices>li>.col-2{
   width: 183px;
@@ -1221,7 +1221,7 @@ Devices tab
   padding-top: 9px;
 }
 .qt-receivable .qt-invoices>li>.col-5{
-  text-align: right;
+  text-align: left;
   width: 86px;
   padding-right: 0;
   padding-top: 9px;
@@ -1245,7 +1245,7 @@ Devices tab
 }
 @media only screen and (max-width: 1500px){
   .qt-receivable .qt-invoices>li>.col-1{
-    width: calc(100% - 513px);
+    width: calc(100% - 725px);
   }
   .qt-receivable .qt-invoices>li>.col-2{
     width: 153px;
@@ -1282,10 +1282,10 @@ Devices tab
   display: none !important;
 }*/
 .qt-receivable-number>li>.col-1{
-  width: 197px;
+  width: 120px;
 }
 .qt-receivable-number>li>.col-2{
-  width: calc(100% - 800px);
+  width: calc(100% - 1070px);
   padding-top: 9px;
   color: #94a4b8;
   overflow: hidden;
@@ -1309,9 +1309,9 @@ Devices tab
   padding-top: 9px;
 }
 .qt-receivable-number>li>.col-6{
-  text-align: right;
+  text-align: left;
   color: #94a4b8;
-  width: 64px;
+  width: 110px;
   padding-right: 0;
   padding-top: 9px;
 }
@@ -1337,22 +1337,22 @@ Devices tab
 }
 @media only screen and (max-width: 1700px){
   .qt-receivable-number>li>.col-1{
-    width: 167px;
+    width: 100px;
   }
   .qt-receivable-number>li>.col-2{
-    width: calc(100% - 680px);
+    width: calc(100% - 780px);
   }
   .qt-receivable-number>li>.col-3{
-    width: 153px;
+    width: 115px;
   }
   .qt-receivable-number>li>.col-4{
-    width: 160px;
+    width: 130px;
   }
   .qt-receivable-number>li>.col-5{
     width: 136px;
   }
   .qt-receivable-number>li>.col-6{
-    width: 64px;
+    width: 90px;
   }
 }
 @media only screen and (max-width: 1500px){
@@ -1360,7 +1360,7 @@ Devices tab
     width: 127px;
   }
   .qt-receivable-number>li>.col-2{
-    width: calc(100% - 520px);
+    width: calc(100% - 750px);
   }
   .qt-receivable-number>li>.col-3{
     width: 113px;
@@ -1372,7 +1372,8 @@ Devices tab
     width: 96px;
   }
   .qt-receivable-number>li>.col-6{
-    width: 64px;
+    width: 90px;
+    text-align: left;
   }
 }
 .qt-receivable-number>li>.icn-sm{

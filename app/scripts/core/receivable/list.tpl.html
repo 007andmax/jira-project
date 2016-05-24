@@ -9,6 +9,7 @@
       <div class="col-4">DUE DATE</div>
       <div class="col-5">STATUS</div>
       <div class="col-6">AMOUNT</div>
+      <div class="col-6"></div>
     </li>
 
     <li ng-repeat="invoice in receivableInvoicesData.list | orderBy: 'number'"
@@ -29,7 +30,7 @@
       </div>
 
       <div class="col-2">{{ company.name }}</div>
-      <div class="col-2">{{ invoiceProperty('readedAt') | date:'dd MMM yyyy' }}</div>
+      <div class="col-3">{{ invoiceProperty('readedAt') | date:'dd MMM yyyy' }}</div>
       <div class="col-3">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
 
       <div class="col-4">
@@ -48,6 +49,11 @@
       </div>
 
       <div class="col-6">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
+      <div class="col-6 group-btns">
+        <i class="icn-sm icn-show-password"></i>
+        <i class="icn-sm icn-remove-token"></i>
+        <i class="icn-sm icn-delete" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"></i>
+      </div>
     </li>
 
   </ul>

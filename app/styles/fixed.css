@@ -1396,4 +1396,12 @@ span.sort-span {
     left: 75px;
   }
 }
-
+.col-6.group-btns{
+  padding-top: 5px !important;
+}
+.col-6.group-btns i {
+  display: inline-block;
+  margin-top: 5px;
+  vertical-align: middle;
+  margin-left: 2px;
+}
