@@ -22,7 +22,6 @@
         });
 
         function setTicketsCheckboxes() {
-          console.log('setTicketsCheckboxes start');
 
           var companyId = $scope.billableCompany.companyId,
             companyTicketSelection = $scope.ticketsSelection[$scope.billableCompany.companyId];
@@ -37,15 +36,12 @@
           //fill in ticket selection
           for (var i = 0; i < $scope.billableCompany.tickets.length; i++) {
 
-            console.log('setTicketsCheckboxes process ticket' + $scope.billableCompany.tickets[i].id + '       ' + i + ' of ' + $scope.billableCompany.tickets.length);
-
             var ticketId = $scope.billableCompany.tickets[i].id,
               ticketsData = $scope.billableData[companyId].tickets,
               ticketData = Utils.findById(ticketsData, ticketId);
 
             companyTicketSelection.tickets[ticketId] = !!companyTicketSelection.checked && !ticketData.lockedBy;
           }
-          console.log('setTicketsCheckboxes end');
         }
 
         $scope.disabledTicket = function (ticketId) {
