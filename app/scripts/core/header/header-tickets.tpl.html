@@ -31,7 +31,7 @@
 
           <li class="dropdown-submenu">
             <a tabindex="-1" href="javascript:void(0)"
-               ng-if="PermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
+               ng-if="TicketsPermissionsService.isChangeStatusToVisible(listType, currentUser.role)">
               Change Status to...
             </a>
 
@@ -55,7 +55,7 @@
             <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.role === 'USER'">Report as Spam</a>
           </li>
 
-          <li ng-if="isMoveToTrashVisible() && PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+          <li ng-if="isMoveToTrashVisible() && TicketsPermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
             <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
           </li>
 
@@ -64,7 +64,7 @@
       </div>
 
       <div class="dropdown pull-right"
-           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)">
+           ng-if="!sharedState.checkedCompletedTicket && TicketsPermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)">
 
         <div class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="assign ticket to..."
@@ -79,7 +79,7 @@
       </div>
 
       <div class="dropdown pull-right"
-           ng-if="!sharedState.checkedCompletedTicket && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))">
+           ng-if="!sharedState.checkedCompletedTicket && TicketsPermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))">
 
         <div class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="Change Priority to..."
@@ -127,7 +127,7 @@
              tooltip-placement="bottom" tooltip="Move to Trash"
              ng-click="moveToTrash(true)"
              ng-if="(listType === 'closed' || (sharedState.checkedCompletedTicket && listType !== 'trash')) &&
-                    PermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
+                    TicketsPermissionsService.isMoveToTrashVisible(listType, currentUser.role)">
           <i class="icn-sm icn-delete"></i>
         </div>
       </div>

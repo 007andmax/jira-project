@@ -4,11 +4,13 @@
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService', '$timeout',
-      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout) {
+      'quicktech.common.services.PermissionsService',
+      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout, PermissionsService) {
 
         var categories,
           showCreateProductInList = false;
 
+        $scope.PermissionsService = PermissionsService;
         $scope.orderProducts = {
           field: 'description',
           reverse: false

@@ -25,7 +25,7 @@
               </span>
 
               <span
-                ng-show="PermissionsService.isStatusVisible(ticketDetails, currentUser.role) && ticketDetails.status"
+                ng-show="TicketsPermissionsService.isStatusVisible(ticketDetails, currentUser.role) && ticketDetails.status"
                 class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
                 tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top">
                 <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) }}">
@@ -35,7 +35,7 @@
 
             </div>
 
-            <!--<div ng-if="PermissionsService.isTagsVisible(listType, currentUser.role)"-->
+            <!--<div ng-if="TicketsPermissionsService.isTagsVisible(listType, currentUser.role)"-->
                  <!--class="ticket-header-labels pull-left">-->
               <!--<span ng-repeat="tag in ticketDetails.tags"-->
                     <!--class="tag-color tag-color-sm color{{ tag.color }} persistent-tooltip"-->
@@ -57,7 +57,7 @@
 
         <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
 
-          <div ng-show="PermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status)"
+          <div ng-show="TicketsPermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status)"
                class="btn btn-lg btn-info btn-update pull-left"
                custom-disabled="{{ ticketDetails.status === 'COMPLETED' }}"
                ng-click="updateAndCloseTicket()">
@@ -65,7 +65,7 @@
           </div>
 
           <div class="dropdown pull-left" dropdown
-               ng-show="PermissionsService.isSettingVisible(ticketDetails, currentUser.role)">
+               ng-show="TicketsPermissionsService.isSettingVisible(ticketDetails, currentUser.role)">
 
             <div class="btn btn-default pull-left has-tooltip"
                  aria-haspopup="true" aria-expanded="false"
@@ -75,12 +75,12 @@
 
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
 
-              <li ng-show="PermissionsService.isClaimTicketVisible(listType, currentUser.role)">
+              <li ng-show="TicketsPermissionsService.isClaimTicketVisible(listType, currentUser.role)">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
               </li>
 
               <li
-                ng-show="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))"
+                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">Change Priority to...</a>
@@ -115,7 +115,7 @@
               </li>
 
               <li
-                ng-if="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)"
+                ng-if="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">
@@ -135,7 +135,7 @@
               </li>
 
               <li
-                ng-show="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isChangeStatusToVisible(listType, currentUser.role)"
+                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isChangeStatusToVisible(listType, currentUser.role)"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
@@ -158,7 +158,7 @@
               </li>
 
               <li
-                ng-show="(ticketDetails.status !== 'COMPLETED') && PermissionsService.isSendToSpamVisible(listType, currentUser.role)">
+                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isSendToSpamVisible(listType, currentUser.role)">
 
                 <a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role !== 'USER'"
                    ng-click="moveIntoSpam()">Mark as Spam</a>
@@ -169,7 +169,7 @@
               </li>
 
               <li
-                ng-if="PermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticketDetails)">
+                ng-if="TicketsPermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticketDetails)">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
               </li>
 
@@ -242,7 +242,7 @@
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
 
-      <div ng-if="PermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status) || ticketClaimed"
+      <div ng-if="TicketsPermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status) || ticketClaimed"
            ng-include="'/html/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
@@ -319,7 +319,7 @@
                 <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete"
                    ng-click="deleteUpdate()"
-                   custom-disabled="{{ PermissionsService.isDisabledDeleteTicketUpdate(ticketDetails, ticketUpdate.user.id, currentUser.id, currentUser.role) }}">
+                   custom-disabled="{{ TicketsPermissionsService.isDisabledDeleteTicketUpdate(ticketDetails, ticketUpdate.user.id, currentUser.id, currentUser.role) }}">
                   <i class="icn-sm icn-delete"></i>
                 </a>
 
@@ -393,7 +393,7 @@
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit product"
                        ng-click="setEditExpenseId(product.id)"
-                       custom-disabled="{{ PermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
+                       custom-disabled="{{ TicketsPermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
                       <i class="icn-sm icn-edit"></i>
                     </a>
                   </div>
@@ -424,7 +424,7 @@
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit service"
                        ng-click="setEditExpenseId(service.id)"
-                       custom-disabled="{{ PermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
+                       custom-disabled="{{ TicketsPermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
                       <i class="icn-sm icn-edit"></i>
                     </a>
                   </div>

@@ -542,15 +542,15 @@
                       <a href="javascript:void(0)" ng-click="pageToOpen = 'SHARED'">Shared</a>
                     </li>
 
-                    <li ng-show="currentUser.role !== 'USER'">
+                    <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'open_tickets')">
                       <a href="javascript:void(0)" ng-click="pageToOpen = 'OPEN'">Open</a>
                     </li>
 
-                    <li ng-show="currentUser.role !== 'USER'">
+                    <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'closed_tickets')">
                       <a href="javascript:void(0)" ng-click="pageToOpen = 'CLOSED'">Closed</a>
                     </li>
 
-                    <li ng-show="currentUser.role !== 'USER'">
+                    <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'trash_tickets')">
                       <a href="javascript:void(0)" ng-click="pageToOpen = 'TRASH'">Trash</a>
                     </li>
 

@@ -3,9 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.myProfileCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'UsersService', '$timeout',
-      function ($scope, $state, $stateParams, $location, UsersService, $timeout) {
+    ['$scope', '$state', '$stateParams', '$location', 'UsersService', '$timeout', 'quicktech.common.services.PermissionsService',
+      function ($scope, $state, $stateParams, $location, UsersService, $timeout, PermissionsService) {
 
+        $scope.PermissionsService = PermissionsService;
         $scope.saveMethods = [];
         $scope.formNames = [
           'basicInfoForm',

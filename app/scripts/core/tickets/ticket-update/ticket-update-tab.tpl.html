@@ -6,7 +6,7 @@
   </div>
 
   <ul class="nav nav-ticket-add"
-      ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
+      ng-if="TicketsPermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
 
     <li ng-class="{'active': currentOpenTab === 'NOTE'}">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('NOTE')">
@@ -14,8 +14,7 @@
       </a>
     </li>
 
-    <li ng-class="{'active': currentOpenTab === 'PRODUCT'}"
-        ng-if="currentUser.role !== 'USER' || !ticketDetails.sharedToCurrentUserAt">
+    <li ng-class="{'active': currentOpenTab === 'PRODUCT'}">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
         <i class="icn-lg icn-add-product"></i>Product
       </a>
@@ -26,8 +25,7 @@
       </div>
     </li>
 
-    <li ng-class="{'active': currentOpenTab === 'SERVICE'}"
-        ng-if="currentUser.role !== 'USER' || !ticketDetails.sharedToCurrentUserAt">
+    <li ng-class="{'active': currentOpenTab === 'SERVICE'}">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('SERVICE')">
         <i class="icn-lg icn-add-service"></i>Service
       </a>
@@ -41,7 +39,7 @@
   </ul>
 
   <div class="tab-content"
-       ng-style="{'margin-top': PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) ? '0' : '68px' }">
+       ng-style="{'margin-top': TicketsPermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) ? '0' : '68px' }">
 
     <div class="tab-pane in active" id="Note" ng-if="currentOpenTab === 'NOTE'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateNoteCtrl">
@@ -92,7 +90,7 @@
     </div>
 
     <div class="tab-pane in active" id="Product"
-         ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'PRODUCT'"
+         ng-if="TicketsPermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'PRODUCT'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateProductsCtrl">
 
       <div class="ticket-add clearfix" ng-form="addProductsForm">
@@ -136,7 +134,7 @@
     </div>
 
     <div class="tab-pane in active" id="Service"
-         ng-if="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'SERVICE'"
+         ng-if="TicketsPermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser) && currentOpenTab === 'SERVICE'"
          ng-controller="quicktech.core.tickets.ticketAddUpdateServicesCtrl">
 
       <div class="ticket-add clearfix" ng-form="addServicesForm">

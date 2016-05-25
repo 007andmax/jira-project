@@ -7,12 +7,14 @@
       '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
       'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
+      'quicktech.common.services.PermissionsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats,
-                SharedStateService, $stateParams, $state, VendorsService, $timeout) {
+                SharedStateService, $stateParams, $state, VendorsService, $timeout, PermissionsService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
+        $scope.PermissionsService = PermissionsService;
         $scope.loadingInProgress = true;
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;

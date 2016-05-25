@@ -34,7 +34,7 @@
 
 
 
-      <div class="col-2" ng-show="currentUser.role !== 'USER'">
+      <div class="col-2">
         {{ service.rate | currency: '$': 2 }}
       </div>
       <div class="col-5 is-billable">
@@ -48,7 +48,7 @@
       <!--{{ service.timeBlock | timeFilter }}-->
       <!--</div>-->
 
-      <div class="col-4" ng-show="currentUser.role !== 'USER'">
+      <div class="col-4">
 
         <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
            ng-click="deleteService()"

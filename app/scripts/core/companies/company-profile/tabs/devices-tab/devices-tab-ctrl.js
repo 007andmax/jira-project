@@ -3,8 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
-    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
-      function ($scope, DevicesService, RemoteAccessService) {
+    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'quicktech.common.services.PermissionsService',
+      function ($scope, DevicesService, RemoteAccessService, PermissionsService) {
+
+        $scope.PermissionsService = PermissionsService;
 
         $scope.remoteAccess = function (connectionType) {
           if (!$scope.agent.online) {
@@ -53,7 +55,7 @@
         };
 
         $scope.remove = function () {
-          if ($scope.currentUser.role !== 'USER') {
+          if (PermissionsService.isAllowed('client/companyProfile', $scope.currentUser.role, 'd_device')) {
             DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
               if (delete $scope.selectDevices[$scope.agent.agentId]) {
                 $scope.changeSelectDevices();

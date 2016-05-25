@@ -4,8 +4,9 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
     ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
-      'quicktech.common.services.SharedStateService',
-      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService) {
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
+      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
+                SharedStateService, PermissionsService) {
 
         $scope.editUser = undefined;
 

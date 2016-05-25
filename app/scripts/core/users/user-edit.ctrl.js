@@ -4,11 +4,13 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
-      '$timeout', 'quicktech.common.services.PhoneFormats',
+      '$timeout', 'quicktech.common.services.PhoneFormats', 'quicktech.common.services.PermissionsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
-                $timeout, PhoneFormats) {
+                $timeout, PhoneFormats, PermissionsService) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
+
+        $scope.PermissionsService = PermissionsService;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
           if (item.name !== 'Unassigned') {

@@ -109,7 +109,8 @@
          ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
 
       <div class="hover-logo">
-        <div class="logo-control" stop-propagation="click" ng-if="currentUser.role === 'SUPER_TECH_ADMIN'">
+        <div class="logo-control" stop-propagation="click"
+             ng-if="PermissionsService.isAllowed('client/companies', currentUser.role, 'u')">
           <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
         </div>
       </div>

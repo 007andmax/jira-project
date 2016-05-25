@@ -136,14 +136,17 @@
         url: '/settings',
         templateUrl: '/html/scripts/core/settings/settings.tpl.html',
         redirectTo: 'settings.myProfile',
-        controller: ['$scope', '$state', function ($scope, $state) {
+        controller: ['$scope', '$state',  'quicktech.common.services.PermissionsService',
+          function ($scope, $state, PermissionsService) {
+            $scope.PermissionsService = PermissionsService;
 
-          $scope.$watch(function () {
-            return $state.current.url;
-          }, function (url) {
-            $scope.settingMode = url;
-          });
-        }]
+            $scope.$watch(function () {
+              return $state.current.url;
+            }, function (url) {
+              $scope.settingMode = url;
+            });
+          }
+        ]
       }))
       .state('settings.myProfile', waitForServices({
         url: '/myProfile',

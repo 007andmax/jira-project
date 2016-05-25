@@ -163,7 +163,8 @@
             <i class="icn-sm icn-user-mail"></i>
           </div>
 
-          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()" ng-if="users.length > 1"
+          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+               ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_user') && users.length > 1"
                tooltip-placement="top" tooltip="Archive this Contact">
             <i class="icn-sm icn-remove-token"></i>
           </div>

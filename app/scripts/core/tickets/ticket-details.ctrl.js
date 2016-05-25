@@ -25,7 +25,11 @@
             $scope.ticketDetails = details;
 
             if (!$scope.ticketClaimed && details.message !== undefined && (details.code === 400 || details.code === 403)) {
-              $state.go('tickets', {listType: $stateParams.listType});
+              if ($stateParams.ticketId) {
+                $state.go('tickets', { listType: $stateParams.listType, ticketId: $stateParams.ticketId });
+              } else {
+                $state.go('tickets', { listType: $stateParams.listType });
+              }
               return;
             }
 
@@ -82,12 +86,12 @@
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', {listType: $stateParams.listType});
+              $state.go('tickets', { listType: $stateParams.listType });
             });
           };
 
           $scope.collapseTicket = function () {
-            $state.go('tickets', {listType: $stateParams.listType});
+            $state.go('tickets', { listType: $stateParams.listType });
           };
 
           $scope.claimTicket = function () {
@@ -101,7 +105,7 @@
           };
 
           $scope.changeTicketPriority = function (priority) {
-            if($scope.ticketDetails.priorityLevel === priority){
+            if ($scope.ticketDetails.priorityLevel === priority) {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” priority already set to ' + priority, true);
               return;
             }
@@ -129,7 +133,7 @@
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam', true);
                   $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', {listType: $stateParams.listType});
+                  $state.go('tickets', { listType: $stateParams.listType });
                 });
 
               } else {
@@ -138,7 +142,7 @@
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
                   $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', {listType: $stateParams.listType});
+                  $state.go('tickets', { listType: $stateParams.listType });
                 });
               }
             });
@@ -155,7 +159,7 @@
                 UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been moved to Trash', true);
               }
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', {listType: $stateParams.listType});
+              $state.go('tickets', { listType: $stateParams.listType });
             });
           };
 
@@ -230,7 +234,7 @@
                 if (sharedUser.user.id === $scope.updateSharedUsersList[i].user.id) {
 
                   $scope.updateSharedUsersList.splice(i, 1);
-                  $scope.selectUpdateSharedUser[sharedUser.user.id ] = false;
+                  $scope.selectUpdateSharedUser[sharedUser.user.id] = false;
 
                   if (sharedUser.user.id === $scope.ticketDetails.createdUser.id) {
                     $scope.ticketUpdate.notifyTicketCreator = false;
@@ -243,7 +247,7 @@
 
                 if (sharedUser.contact.id === $scope.updateSharedUsersList[i].contact.id) {
                   $scope.updateSharedUsersList.splice(i, 1);
-                  $scope.selectUpdateSharedUser[sharedUser.contact.id ] = false;
+                  $scope.selectUpdateSharedUser[sharedUser.contact.id] = false;
                   return;
                 }
 
@@ -259,7 +263,7 @@
               ticketUpdateToSend = {
                 type: currentOpenTab,
                 shares: [],
-                ticket: {id: $scope.ticketDetails.id}
+                ticket: { id: $scope.ticketDetails.id }
               };
 
             if ($scope.ticketUpdate.products) {
@@ -283,7 +287,7 @@
               ticketUpdateToSend.attachments = [];
 
               for (var i = 0; i < $scope.ticketUpdate.attachments.length; i++) {
-                ticketUpdateToSend.attachments.push({file: {id: $scope.ticketUpdate.attachments[i].id}})
+                ticketUpdateToSend.attachments.push({ file: { id: $scope.ticketUpdate.attachments[i].id } })
               }
 
             }
@@ -293,14 +297,14 @@
               if ($scope.updateSharedUsersList[i].user) {
 
                 ticketUpdateToSend.shares.push({
-                  user: {id: $scope.updateSharedUsersList[i].user.id},
+                  user: { id: $scope.updateSharedUsersList[i].user.id },
                   itemOrder: $scope.updateSharedUsersList[i].itemOrder
                 });
 
               } else if ($scope.updateSharedUsersList[i].contact) {
 
                 ticketUpdateToSend.shares.push({
-                  contact: {id: $scope.updateSharedUsersList[i].contact.id},
+                  contact: { id: $scope.updateSharedUsersList[i].contact.id },
                   itemOrder: $scope.updateSharedUsersList[i].itemOrder
                 })
               }
@@ -363,7 +367,7 @@
                 UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been deleted', true);
 
                 $scope.uncheckTicket($scope.ticketDetails.id);
-                $state.go('tickets', {listType: $stateParams.listType});
+                $state.go('tickets', { listType: $stateParams.listType });
               });
             });
           };
@@ -453,7 +457,7 @@
 
             if (form.$valid) {
 
-              $scope.ticketUpdate.products.push({item:{}});
+              $scope.ticketUpdate.products.push({ item: {} });
               $scope.triedToAddItem = false;
 
             } else {
@@ -464,7 +468,7 @@
           $scope.addService = function (form) {
 
             if (form.$valid) {
-              $scope.ticketUpdate.services.push({item:{}});
+              $scope.ticketUpdate.services.push({ item: {} });
               $scope.triedToAddItem = false;
 
             } else {
@@ -482,8 +486,9 @@
           $scope.$on('ticket_is_not_available_anymore', function (event, data) {
 
             if (!$scope.ticketClaimed && data.ticketId === $scope.ticketDetails.id
-              && (!data.ticketType || data.ticketType.toUpperCase() === $stateParams.listType.toUpperCase()))
-              $state.go('tickets', {listType: $stateParams.listType});
+              && (!data.ticketType || data.ticketType.toUpperCase() === $stateParams.listType.toUpperCase())) {
+              $state.go('tickets', { listType: $stateParams.listType });
+            }
           });
 
           $scope.$on('$destroy', function () {

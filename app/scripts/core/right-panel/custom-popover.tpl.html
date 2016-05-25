@@ -76,7 +76,8 @@
   </li>
 
   <li>
-    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveContact()">
+    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveContact()"
+       ng-if="PermissionsService.isAllowed('right_panel', currentUser.role, 'd_user')">
       <i class="icn-sm icn-archive-user pull-left"></i>
       Archive this Contact
     </a>

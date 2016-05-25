@@ -1,5 +1,6 @@
 <div>
-  <div class="btn btn-block btn-lg btn-add-category pull-left" ng-show="currentUser.role !== 'USER'"
+  <div class="btn btn-block btn-lg btn-add-category pull-left"
+       ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c')"
        custom-disabled="{{ isCreateCategoryShow }}"
        ng-click="openCreationCategory()">
     <i class="icn-sm icn-add-category"></i>
@@ -64,13 +65,12 @@
 
         <div class="col-2">
 
-          <div class="no-items"
-               ng-class="{'not-hide-labels': !((currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN') && !category.default)}">
+          <div class="no-items not-hide-labels">
             {{ category.productsList.length }} items
           </div>
 
           <div class="product-actions"
-               ng-show="(currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN') && !category.default">
+               ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'cu') && !category.default">
 
             <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
                  scroll-to-form
@@ -120,7 +120,8 @@
                                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
                 </div>
-                <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="currentUser.role !== 'USER'">
+                <div class="col-4" ng-click="setOrderForProducts('cost')"
+                     ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'r_cost')">
                   <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
 
@@ -159,7 +160,7 @@
 
                   <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
 
-                  <div class="col-4" ng-if="currentUser.role !== 'USER'">
+                  <div class="col-4" ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'r_cost')">
                     {{ product.cost | currency: '$': 2 }}
                   </div>
 
@@ -168,13 +169,13 @@
                   <div class="col-4" style="width: 50px">
                     <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
                       <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
-                             custom-disabled="{{ disabledCheckbox }}">
+                             custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('inventry/products', currentUser.role, 'u') }}">
                       <span class="control-indicator"></span>
                     </label>
                   </div>
 
                   <div class="col-6 pull-right"
-                       ng-show="currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN'">
+                       ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'ud')">
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                        ng-click="deleteProduct()"
@@ -223,7 +224,7 @@
             </ul>
 
             <div class="add-product-btn-wrapper"
-                 ng-show="(currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN') && !category.default">
+                 ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c') && !category.default">
               <div class="btn btn-info has-tooltip"
                    ng-click="addProduct(category.id)"
                    custom-disabled="{{ showCreateProduct }}"

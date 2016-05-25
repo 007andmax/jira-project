@@ -148,7 +148,7 @@
 
                 </li>
 
-                <li ng-show="currentUser.role !== 'USER'">
+                <li ng-show="PermissionsService.isAllowed('client/users', currentUser.role, 'd')">
                   <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUsers()">
                     Archive this Contact
                   </a>

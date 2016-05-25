@@ -7,6 +7,14 @@
       'UsersService', 'StatisticsService',
       function ($scope, CompaniesService, UserNotificationService, UsersService, StatisticsService) {
 
+        $scope.companyComponentsCount = {
+          users: UsersService.getAllByCompanyId($scope.company.id)
+        };
+
+        StatisticsService.getSubmittedTicketsByCompany($scope.company.id, $scope, function (resp) {
+          $scope.companyComponentsCount.ticketsCount = resp[$scope.company.id];
+        });
+
         $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
           var primaryContact,
             primaryAddress,
@@ -42,14 +50,6 @@
           } else {
             $scope.location = '';
           }
-
-          $scope.companyComponentsCount = {
-            users: UsersService.getAllByCompanyId($scope.company.id)
-          };
-
-          StatisticsService.getSubmittedTicketsByCompany($scope.company.id, $scope, function (resp) {
-            $scope.companyComponentsCount.ticketsCount = resp[$scope.company.id];
-          });
         });
 
         $scope.getUserSubscribeClass = function () {

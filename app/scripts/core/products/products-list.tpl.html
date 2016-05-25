@@ -27,7 +27,8 @@
                                                    ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
       </div>
-      <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="currentUser.role !== 'USER'">
+      <div class="col-4" ng-click="setOrderForProducts('cost')"
+           ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'r_cost')">
         <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
                                        ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
 
@@ -74,7 +75,7 @@
 
         <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
 
-        <div class="col-4" ng-if="currentUser.role !== 'USER'">
+        <div class="col-4" ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'r_cost')">
           {{ product.cost | currency: '$': 2 }}
         </div>
 
@@ -83,12 +84,12 @@
         <div class="col-4" style="width: 50px">
           <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
             <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
-                   custom-disabled="{{ disabledCheckbox || currentUser.role === 'USER' }}">
+                   custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('inventry/products', currentUser.role, 'u') }}">
             <span class="control-indicator"></span>
           </label>
         </div>
 
-        <div class="col-6 pull-right" ng-show="currentUser.role === 'SUPER_TECH_ADMIN' || currentUser.role === 'ADMIN'">
+        <div class="col-6 pull-right" ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'ud')">
 
           <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
              ng-click="deleteProduct()"

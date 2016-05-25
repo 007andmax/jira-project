@@ -6,7 +6,8 @@
     </div>
   </li>
 
-  <li ng-show="isCanCreateProduct" class="create-product" ng-click="createNewProduct()">
+  <li ng-show="isCanCreateProduct" class="create-product" ng-click="createNewProduct()"
+      ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c')">
     <div class="create-product-cont" style="">
       <span>Create Product</span>
     </div>

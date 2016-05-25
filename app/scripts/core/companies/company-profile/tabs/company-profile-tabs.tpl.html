@@ -65,6 +65,7 @@
         <div class="topNavbar-filter pull-right">
 
           <div class="btn btn-default has-tooltip pull-right" ng-click="archiveUsers()"
+               ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_user')"
                tooltip-placement="bottom" tooltip="Archive">
             <i class="icn-sm icn-remove-token"></i>
           </div>
@@ -138,6 +139,7 @@
         <div class="topNavbar-filter pull-right">
 
           <div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"
+               ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
                tooltip-placement="bottom" tooltip="Remove">
             <i class="icn-sm icn-remove-token"></i>
           </div>

@@ -8,7 +8,7 @@
     <div ng-include="'/html/scripts/core/services/services-list.tpl.html'" ng-if="!loadingInProgress"></div>
     <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 
-    <div class="add-service-btn-wrapper" ng-show="currentUser.role !== 'USER'">
+    <div class="add-service-btn-wrapper">
       <div class="btn btn-success has-tooltip" ng-show="!showCreateService"
            ng-click="showCreateServiceForm()"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">

@@ -520,7 +520,7 @@
                 <!--style="width: 183px;" TODO hide timeAllotment -->
 
                 <div class="col-3" style="width: 92px;text-align: left;"
-                     ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">PER HOUR
+                     ng-show="PermissionsService.isAllowed('client/companyProfile', currentUser.role, 'r')">PER HOUR
                 </div>
 
                 <div class="col-5">IS BILLABLE</div>

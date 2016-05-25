@@ -1,5 +1,5 @@
 <div class="dropdown pull-left"
-     ng-show="PermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
+     ng-show="TicketsPermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
 
   <a href="javascript:void(0)" class="hit-area ha-16-26 pull-left add-users-plus has-tooltip"
      data-placement="top" title="Add users to this update" data-toggle="dropdown" aria-haspopup="true"
@@ -21,16 +21,14 @@
           </a>
         </li>
 
-        <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}"
-            ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
+        <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
           <a href="javascript:void(0)" role="tab" data-toggle="tab"
              ng-click="openAddUserTab('CLIENT_USER')">
             Client Users
           </a>
         </li>
 
-        <li ng-class="{'active': currentAddUserTab === 'VENDOS'}"
-            ng-hide="(currentUser.role === 'USER') && ticketDetails.sharedToCurrentUserAt">
+        <li ng-class="{'active': currentAddUserTab === 'VENDOS'}">
           <a href="javascript:void(0)" role="tab" data-toggle="tab"
              ng-click="openAddUserTab('VENDOS')">
             Vendors
@@ -43,7 +41,7 @@
 
         <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'" update-add-user>
           <div class="form-group">
-            <input type="email" class="form-control form-control-filter" 
+            <input type="email" class="form-control form-control-filter"
                     placeholder="Search agent...">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
           </div>
@@ -77,14 +75,11 @@
 
             </ul>
           </div> -->
-
-          
-
         </div>
 
         <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER'" update-add-user>
           <div class="form-group">
-            <input type="email" class="form-control form-control-filter" 
+            <input type="email" class="form-control form-control-filter"
                     placeholder="Search agent...">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
           </div>
@@ -124,7 +119,7 @@
 
         <div class="tab-pane active" ng-if="currentAddUserTab === 'VENDOS'" update-add-user>
           <div class="form-group">
-            <input type="email" class="form-control form-control-filter" 
+            <input type="email" class="form-control form-control-filter"
                     placeholder="Search agent...">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
           </div>

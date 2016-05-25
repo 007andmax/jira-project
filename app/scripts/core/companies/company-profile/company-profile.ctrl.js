@@ -5,14 +5,15 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
     ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'TicketsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, TicketsService, SharedStateService,
-                $timeout, UserNotificationService, UserConfirmationsService) {
+                $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
 
         UserNotificationService.show('Loading...');
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
 
+        $scope.PermissionsService = PermissionsService;
         $scope.isChartHasOpen = false;
         $scope.isShowLoaderOnCover = false;
         $scope.mode = 'user';
@@ -34,7 +35,7 @@
         });
 
         $scope.isChartsAccess = function () {
-          return $scope.currentUser.role === 'SUPER_TECH_ADMIN' && $scope.company.accountType === 'CLIENT';
+          return PermissionsService.isAllowed('client/companyProfile', $scope.currentUser.role, 'r_chart') && $scope.company.accountType === 'CLIENT';
         };
 
         rightPanelSharedState.companyId = $scope.company.id;

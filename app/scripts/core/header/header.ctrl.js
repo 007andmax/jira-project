@@ -3,8 +3,10 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
-    ['$scope', '$state', 'CompaniesService', 'UsersService',
-      function ($scope, $state, CompaniesService, UsersService) {
+    ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
+      function ($scope, $state, CompaniesService, UsersService, PermissionsService) {
+
+        $scope.PermissionsService = PermissionsService;
 
         UsersService._addInitListener(function(){
           $scope.currentUser = UsersService.getCurrentUser();

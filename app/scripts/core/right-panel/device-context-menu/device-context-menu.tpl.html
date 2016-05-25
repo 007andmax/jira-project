@@ -26,7 +26,8 @@
     </li>
 
     <li ng-click="remove()">
-      <a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role !== 'USER'">
+      <a tabindex="-1" href="javascript:void(0)"
+         ng-show="PermissionsService.isAllowed('right_panel', currentUser.role, 'd_device')">
         <i class="icn-sm icn-remove-token pull-left"></i>Remove</a>
     </li>
 

@@ -5,7 +5,9 @@
   angular.module('quicktech').controller('quicktech.core.header.ticketsCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService',
       '$stateParams', 'UsersService', 'CompaniesService', '$filter', 'TicketsService', '$state',
-      function ($scope, SharedStateService, $stateParams, UsersService, CompaniesService, $filter, TicketsService, $state) {
+      'quicktech.common.services.PermissionsService',
+      function ($scope, SharedStateService, $stateParams, UsersService, CompaniesService, $filter, TicketsService,
+                $state, PermissionsService) {
 
         var users,
           companies = CompaniesService.getAllCompanies(),
@@ -44,6 +46,8 @@
         $scope.filter = {
           searchItem: ''
         };
+
+        $scope.PermissionsService = PermissionsService;
 
         $scope.search = function (value) {
 

@@ -4,16 +4,16 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
-      'quicktech.common.services.PermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
-      'quicktech.common.services.UserNotificationService', '$timeout',
+      'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
+      'quicktech.common.services.PermissionsService',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
-                PermissionsService, SharedStateService, Utils, UserNotificationService, $timeout) {
+                TicketsPermissionsService, SharedStateService, Utils, PermissionsService) {
 
         var availableTypes = ['unassigned', 'user', 'shared', 'spam', 'preview'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
         $scope.selectedTickets = {};
-        $scope.PermissionsService = PermissionsService;
+        $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.users = UsersService.getAllUsers();
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
         $scope.attachmentTypePattern = /[0-9a-z]+$/i;
@@ -47,9 +47,13 @@
           'image/bmp': 'not-viewable'
         };
 
-        if ($scope.currentUser.role === 'ADMIN' || $scope.currentUser.role === 'SUPER_TECH_ADMIN') {
+        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'open_tickets')) {
           availableTypes.push('open');
+        }
+        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'closed_tickets')) {
           availableTypes.push('closed');
+        }
+        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'trash_tickets')) {
           availableTypes.push('trash');
         }
 

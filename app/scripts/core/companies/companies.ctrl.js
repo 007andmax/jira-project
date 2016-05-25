@@ -4,18 +4,19 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
-      'quicktech.common.services.SharedStateService', 'DevicesService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, DevicesService) {
+      'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, DevicesService, PermissionsService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
 
+        $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
 
         $scope.isChartsAccess = function(){
-          return $scope.currentUser.role === 'SUPER_TECH_ADMIN' || $scope.currentUser.accountType === 'ROOT';
+          return PermissionsService.isAllowed('client/companyProfile', $scope.currentUser.role, 'r_chart') || $scope.currentUser.accountType === 'ROOT';
         };
 
         if($scope.isChartsAccess()){
