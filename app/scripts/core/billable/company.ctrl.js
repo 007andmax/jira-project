@@ -11,7 +11,7 @@
         $scope.toggleBillableTickets = function () {
 
           if ($scope.showTickets) {
-            $scope.$broadcast('toggleBillableTickets');
+            //$scope.$broadcast('toggleBillableTickets');
 
             $timeout(function () {
               $scope.showTickets = false;
