@@ -22,16 +22,16 @@
         });
 
         function setTicketsCheckboxes() {
-console.log('setTicketsCheckboxes start');
+          console.log('setTicketsCheckboxes start');
 
           var companyId = $scope.billableCompany.companyId,
             companyTicketSelection = $scope.ticketsSelection[$scope.billableCompany.companyId];
 
           //reset tickets selection
           if (companyTicketSelection) {
-            companyTicketSelection = $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
-          } else{
             companyTicketSelection.tickets = {};
+          } else {
+            companyTicketSelection = $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
           }
 
           //fill in ticket selection
