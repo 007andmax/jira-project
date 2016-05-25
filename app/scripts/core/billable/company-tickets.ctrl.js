@@ -10,26 +10,26 @@
 
         var companyTicketSelection = $scope.ticketsSelection[$scope.billableCompany.companyId];
 
-        if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
-          $scope.ticketsSelection[$scope.billableCompany.companyId].tickets = {};
-          setTicketsCheckboxes(true);
-        } else if (companyTicketSelection === undefined) {
-          $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
-          setTicketsCheckboxes(false);
-        }
+        //if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
+        //  $scope.ticketsSelection[$scope.billableCompany.companyId].tickets = {};
+        //  setTicketsCheckboxes(true);
+        //} else if (companyTicketSelection === undefined) {
+        //  $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
+        //  setTicketsCheckboxes(false);
+        //}
 
-        $scope.$watch('highlightProductId', function (idTicket) {
-          if (idTicket) {
-
-            $timeout(function () {
-              $scope.$broadcast('showTicket-' + idTicket);
-            }, 100);
-
-            $timeout(function () {
-              $scope.setHighlightTicketId();
-            }, 3000)
-          }
-        });
+        //$scope.$watch('highlightProductId', function (idTicket) {
+        //  if (idTicket) {
+        //
+        //    $timeout(function () {
+        //      $scope.$broadcast('showTicket-' + idTicket);
+        //    }, 100);
+        //
+        //    $timeout(function () {
+        //      $scope.setHighlightTicketId();
+        //    }, 3000)
+        //  }
+        //});
 
         function setTicketsCheckboxes(val) {
 
@@ -62,17 +62,17 @@
         $scope.getTooltipName = function(userId){
           var user = UsersService.getOneById(userId);
           return $scope.getUserName(user);
-        }
+        };
 
-        $scope.$watch('billableData[billableCompany.companyId].tickets.length', function(){
-          if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
-            $scope.ticketsSelection[$scope.billableCompany.companyId].tickets = {};
-            setTicketsCheckboxes(true);
-          } else if (companyTicketSelection === undefined) {
-            $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
-            setTicketsCheckboxes(false);
-          }
-        })
+        //$scope.$watch('billableData[billableCompany.companyId].tickets.length', function(){
+        //  if (companyTicketSelection !== undefined && companyTicketSelection.checked) {
+        //    $scope.ticketsSelection[$scope.billableCompany.companyId].tickets = {};
+        //    setTicketsCheckboxes(true);
+        //  } else if (companyTicketSelection === undefined) {
+        //    $scope.ticketsSelection[$scope.billableCompany.companyId] = {tickets: {}};
+        //    setTicketsCheckboxes(false);
+        //  }
+        //})
 
       }]);
 
