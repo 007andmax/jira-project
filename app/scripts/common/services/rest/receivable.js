@@ -310,6 +310,16 @@
 
     }
 
+    function getInvoiceDataForPreview(invoiceId, callback) {
+      if (!invoiceId) {
+        throw 'Invoice id required!';
+      }
+
+      var future = $http.get('/invoice/getDataByInvoiceId?invoiceId=' + invoiceId);
+
+      Utils.handleCallback(future, callback);
+    }
+
     function receivePayment(paymentMethod, invoiceIds, callback) {
 
       if (!paymentMethod) {
@@ -368,11 +378,11 @@
       getReceivedPaymentsSumByCompany: getReceivedPaymentsSumByCompany,
       getReceivableGraphData: getReceivableGraphData,
       getReceivableInvoicesData: getReceivableInvoicesData,
+      getInvoiceDataForPreview: getInvoiceDataForPreview,
       receivePayment: receivePayment,
       resendInvoice: resendInvoice,
       resendInvoices: resendInvoices,
       search: search
-
     }
   }]);
 

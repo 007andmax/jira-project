@@ -125,14 +125,6 @@
           return $scope.receivableInvoicesData.companies[company.id].length;
         };
 
-        $scope.invoicePreview = function (invoice) {
-          if (invoice.invoices && invoice.invoices.length) {
-            window.open('/invoice/show/' + invoice.invoices[0].id + '/pdf');
-          } else {
-            window.open('/invoice/show/' + invoice.id + '/pdf');
-          }
-        };
-
         $scope.$watch('invoiceToSent', function () {
 
           $scope.countInvoice = 0;

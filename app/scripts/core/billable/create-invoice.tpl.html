@@ -7,7 +7,7 @@
 
   <div class="topbar">
 
-    <div class="dropdown pull-left company-dropdown" ng-if="!invoicePreview">
+    <div class="dropdown pull-left company-dropdown" ng-if="!invoicePreview && !receivablePreview">
 
       <h4 class="inv-company-name" data-toggle="dropdown">
         <span>{{ invoiceLocks[showInvoiceLockIndex].invoiceDataDto.company.companyInfo.name }}</span>
@@ -49,19 +49,22 @@
     <div class="invoice-actions">
 
       <div class="btn btn-info pull-left" ng-if="!invoicePreview"
-           ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex], print)"
+           ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
-           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Print Invoice">
+           tooltip-placement="bottom" tooltip-append-to-body="true"
+           tooltip="{{ receivablePreview ? 'Print Invoice' : 'Create and Print Invoice' }}">
         <i class="icn icn-print"></i>
       </div>
 
       <div style="margin-left: 10px;" class="btn btn-info pull-left"
-           ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex], download)" ng-if="!invoicePreview"
-           tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Download Invoice">
-      <i class="icn icn-download-white"></i>
+           ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
+           ng-if="!invoicePreview"
+           tooltip-placement="bottom" tooltip-append-to-body="true"
+           tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
+        <i class="icn icn-download-white"></i>
       </div>
 
-      <div style="margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview"
+      <div style="margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview && !receivablePreview"
            ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="Create and Send Invoice">
