@@ -91,14 +91,14 @@
               <div class="billable-amount">{{ billableCompany.totalSum | currency: '$': 2 }}</div>
             </div>
 
-            <ul class="qt-list qt-billable-sub" ets-slider ng-if="false"
+            <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets"
                 ng-controller="quicktech.core.billable.companyTicketsCtrl">
+<li>Hello</li>
+              <!--<li class="inventry-details"-->
+                  <!--ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider-->
+                  <!--show-model-element="{{ 'showTicket-' + ticket.id }}">-->
 
-              <li class="inventry-details"
-                  ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider
-                  show-model-element="{{ 'showTicket-' + ticket.id }}">
-
-                <div qt-ts-toggler style="position: absolute;height: 70px;width: 100%;top: 0px;left: 30px; z-index: 5"></div>
+                <!--<div qt-ts-toggler style="position: absolute;height: 70px;width: 100%;top: 0px;left: 30px; z-index: 5"></div>
 
                 <div class="col-1">
                   <div class="clearfix">
@@ -130,9 +130,9 @@
                   <div ng-include="'/html/scripts/core/billable/product-expenses.tpl.html'"></div>
                   <div ng-include="'/html/scripts/core/billable/service-expenses.tpl.html'"></div>
 
-                </div>
+                </div>-->
 
-              </li>
+              <!--</li>-->
 
             </ul>
           </li>
