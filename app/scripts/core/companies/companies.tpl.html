@@ -226,7 +226,7 @@
       <!--</div>-->
     </div>
     <ul class="company-numbers clearfix">
-      <li><span>Tickets</span>{{ companyComponentsCount.ticketsCount || '0' }}</li>
+      <li><span>Tickets</span>{{ company.companyStatistic.ticketsSubmitted || '0' }}</li>
       <li><span>Users</span>{{ companyComponentsCount.users.length || '0' }}</li>
       <li><span>Devices</span>{{ devicesCount[company.id].all || '0' }}</li>
     </ul>

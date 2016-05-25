@@ -3,17 +3,12 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyCtrl',
-    ['$scope', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
-      'UsersService', 'StatisticsService',
-      function ($scope, CompaniesService, UserNotificationService, UsersService, StatisticsService) {
+    ['$scope', 'CompaniesService', 'quicktech.common.services.UserNotificationService', 'UsersService',
+      function ($scope, CompaniesService, UserNotificationService, UsersService) {
 
         $scope.companyComponentsCount = {
           users: UsersService.getAllByCompanyId($scope.company.id)
         };
-
-        StatisticsService.getSubmittedTicketsByCompany($scope.company.id, $scope, function (resp) {
-          $scope.companyComponentsCount.ticketsCount = resp[$scope.company.id];
-        });
 
         $scope.$watch('companiesInfo["' + $scope.company.id + '"]', function (newInfo) {
           var primaryContact,

@@ -498,6 +498,7 @@
       }
 
       function getSubmittedTicketsByCompany(companyId, scope, callback) {
+        console.warn('Deprecated! Use companyStatistic field in company object.');
         var result = {};
         if (CompaniesService.getCurrentCompany() === companyId) {
           var clientUsers = UsersService.getClientUsers;
