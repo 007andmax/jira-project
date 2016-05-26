@@ -6,12 +6,15 @@
       ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
+        'quicktech.common.services.TicketsPermissionsService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
-                  ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService) {
+                  ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
+                  TicketsPermissionsService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
           rightPanelSharedState.companyId = '';
 
+          $scope.TicketsPermissionsService = TicketsPermissionsService;
           $scope.allUpdatesLoaded = false;
           $scope.selectUpdateSharedUser = {};
           $scope.updateSharedUsersList = [];

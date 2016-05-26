@@ -72,7 +72,7 @@
             $scope.disabledAssignToButton = false;
 
             if ($scope.isBulkOperation) {
-              UserNotificationService.show('The selected ' + $scope.ticketNumber + ' tickets have been assigned to ' + $scope.getUserName($scope.userToAssign), true);
+              UserNotificationService.show('The selected tickets have been assigned to ' + $scope.getUserName($scope.userToAssign), true);
               $rootScope.$broadcast('uncheckAllTickets')
 
             } else {

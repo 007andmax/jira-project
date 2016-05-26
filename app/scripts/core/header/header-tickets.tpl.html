@@ -74,7 +74,7 @@
 
         <div class="dropdown-assign-ticket dropdown-menu"
              stop-propagation="click" ng-if="isShowAssignUser" assign-user-button
-             aub-ticket-id="ticket.id" ticket-assigned-user-id="ticket.assignedUser.id"
+             aub-ticket-id="sharedState.checkedTicketsIds" ticket-assigned-user-id="ticket.assignedUser.id" aub-is-bulk-operation="true"
              aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
       </div>
 

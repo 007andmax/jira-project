@@ -6,8 +6,9 @@
     [
       '$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'ServicesService', '$timeout',
+      'quicktech.common.services.TicketsPermissionsService',
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
-                UserNotificationService, sessionId, sessionTime, ServicesService, $timeout) {
+                UserNotificationService, sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService) {
 
         var isNeedToDeleteUser = true,
           unassignedCompany = CompaniesService.getUnassignedCompany();

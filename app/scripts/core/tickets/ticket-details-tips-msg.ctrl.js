@@ -4,8 +4,10 @@
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsTipsMsgCtrl',
     ['$scope', 'TicketsService', '$state', '$stateParams', 'UsersService', '$rootScope',
-      'quicktech.common.services.UserNotificationService',
-      function ($scope, TicketsService, $state, $stateParams, UsersService, $rootScope, UserNotificationService) {
+      'quicktech.common.services.UserNotificationService', 'quicktech.common.services.TicketsPermissionsService',
+      function ($scope, TicketsService, $state, $stateParams, UsersService, $rootScope, UserNotificationService, TicketsPermissionsService) {
+
+        $scope.TicketsPermissionsService = TicketsPermissionsService;
 
         calculateDays();
 
