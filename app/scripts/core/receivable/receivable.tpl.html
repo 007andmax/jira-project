@@ -42,13 +42,15 @@
   <div class="receivable-content">
     <div class="tabs-container">
 
-      <div class="btn btn-info pull-right has-tooltip" style="width: 96px;"
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Payment Received"
-           custom-disabled="{{ !countInvoice }}"
-           modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
-           modal-window-class="modal-receive-payment"
-           mw-controller="quicktech.core.receivable.receivePaymentCtrl">
-        <i class="icn-sm small-icn-tick"></i>
+      <div class="payment-receive-fixed" fixed-block-top>
+        <div class="btn btn-info pull-right has-tooltip" style="width: 96px; margin: 16px 40px 0 0;"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Payment Received"
+             custom-disabled="{{ !countInvoice }}"
+             modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
+             modal-window-class="modal-receive-payment"
+             mw-controller="quicktech.core.receivable.receivePaymentCtrl">
+          <i class="icn-sm small-icn-tick"></i>
+        </div>
       </div>
 
       <ul class="nav nav-qt" role="tablist">

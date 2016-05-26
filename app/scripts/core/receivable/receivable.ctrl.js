@@ -8,6 +8,10 @@
 
         var availableMods = ['group-by-company', 'list'];
 
+        $scope.orderInvoices = {
+          field: 'number',
+          reverse: false
+        };
         $scope.totalSum = {
           companies: {},
           invoices: {}
@@ -121,10 +125,6 @@
           $scope.highlightInvoiceId = invoiceId;
         };
 
-        $scope.getInvoicesCount = function (company) {
-          return $scope.receivableInvoicesData.companies[company.id].length;
-        };
-
         $scope.$watch('invoiceToSent', function () {
 
           $scope.countInvoice = 0;
@@ -178,6 +178,47 @@
             }
           }
         }, true);
+
+        $scope.getInvoiceId = function (invoice) {
+          if (invoice.invoices && invoice.invoices.length) {
+            return invoice.invoices[0].id;
+          } else {
+            return invoice.id;
+          }
+        };
+
+        $scope.setOrderForInvoices = function (option) {
+          if (option === $scope.orderInvoices.field) {
+            $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
+          } else {
+            $scope.orderInvoices.field = option;
+            $scope.orderInvoices.reverse = false;
+          }
+        };
+
+        $scope.orderByForInvoices = function (item) {
+          if ($scope.orderInvoices.field === 'number') {
+            return getInvoiceProperty(item, 'number');
+          } else if ($scope.orderInvoices.field === 'company') {
+            return CompaniesService.getOneById(getInvoiceProperty(item, 'company').id).name;
+          } else if ($scope.orderInvoices.field === 'readedAt') {
+            return getInvoiceProperty(item, 'readedAt');
+          } else if ($scope.orderInvoices.field === 'date') {
+            return getInvoiceProperty(item, 'date');
+          } else if ($scope.orderInvoices.field === 'dueDate') {
+            return getInvoiceProperty(item, 'dueDate').value;
+          } else if ($scope.orderInvoices.field === 'amount') {
+            return $scope.totalSum.invoices[item.id];
+          }
+        };
+
+        function getInvoiceProperty(invoice, property) {
+          if (invoice.invoices && invoice.invoices[0] && invoice.invoices[0][property]) {
+            return invoice.invoices[0][property];
+          } else {
+            return invoice[property];
+          }
+        }
 
       }]);
 

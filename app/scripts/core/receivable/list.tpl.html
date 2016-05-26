@@ -1,18 +1,50 @@
 <div role="tabpanel" class="tab-pane active">
   <ul class="qt-list qt-receivable-number">
 
-    <li class="list-heading">
-      <div class="col-1">INVOICE NO.</div>
-      <div class="col-2">COMPANY</div>
-      <div class="col-3">READ ON</div>
-      <div class="col-3">SENT ON</div>
-      <div class="col-4">DUE DATE</div>
-      <div class="col-5">STATUS</div>
-      <div class="col-6">AMOUNT</div>
+    <li class="list-heading" style="cursor: pointer !important;">
+      <div class="col-1" ng-click="setOrderForInvoices('number')">
+        <span class="sort-span">
+          INVOICE NO.
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'number'}"></i></span>
+      </div>
+      <div class="col-2" ng-click="setOrderForInvoices('company')">
+        <span class="sort-span">
+          COMPANY
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'company'}"></i></span>
+      </div>
+      <div class="col-3" ng-click="setOrderForInvoices('readedAt')">
+        <span class="sort-span">
+          READ ON
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'readedAt'}"></i></span>
+      </div>
+      <div class="col-3" ng-click="setOrderForInvoices('date')">
+        <span class="sort-span">
+          SENT ON
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'date'}"></i></span>
+      </div>
+      <div class="col-4" ng-click="setOrderForInvoices('dueDate')">
+        <span class="sort-span">
+          DUE DATE
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'dueDate'}"></i></span>
+      </div>
+      <div class="col-5">
+        STATUS
+      </div>
+      <div class="col-6" ng-click="setOrderForInvoices('amount')">
+        <span class="sort-span">
+          AMOUNT
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'amount'}"></i></span>
+      </div>
       <div class="col-6"></div>
     </li>
 
-    <li ng-repeat="invoice in receivableInvoicesData.list | orderBy: 'number'"
+    <li ng-repeat="invoice in receivableInvoicesData.list | orderBy: orderByForInvoices : orderInvoices.reverse track by getInvoiceId(invoice)"
         ng-controller="quicktech.core.receivable.invoiceCtrl"
         show-model-element="{{ 'showInvoice-' + invoice.id }}">
 

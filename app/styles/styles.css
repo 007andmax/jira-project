@@ -756,6 +756,7 @@ hr {
 }
 .billable-content,
 .receivable-content {
+  position: relative;
   float: left;
   width: 100%;
   padding-bottom: 30px;
@@ -9643,4 +9644,10 @@ button.close {
 .dropdown-menu-child-focused {
   color: #4c5c6f;
   background-color: #e7ecf2;
+}
+.payment-receive-fixed {
+  height: 70px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
