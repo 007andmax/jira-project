@@ -70,7 +70,7 @@
           </div>
 
           <div class="product-actions"
-               ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'cu') && !category.default">
+               ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c u') && !category.default">
 
             <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
                  scroll-to-form
@@ -175,7 +175,7 @@
                   </div>
 
                   <div class="col-6 pull-right"
-                       ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'ud')">
+                       ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'u d')">
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                        ng-click="deleteProduct()"

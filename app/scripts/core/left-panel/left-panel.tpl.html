@@ -74,21 +74,21 @@
         </li>
 
         <li ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
-            ng-show="PermissionsService.isAllowed('tickets/open', currentUser.role, 'crud')">
+            ng-show="PermissionsService.isAllowed('tickets/open', currentUser.role, 'c r u d')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'open'})">
             <i class="nav-icon icn-lg icn-open"></i>Open
           </a>
         </li>
 
         <li ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"
-            ng-show="PermissionsService.isAllowed('tickets/closed', currentUser.role, 'crud')">
+            ng-show="PermissionsService.isAllowed('tickets/closed', currentUser.role, 'c r u d')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
             <i class="nav-icon icn-lg icn-closed"></i> Closed
           </a>
         </li>
 
         <li ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
-            ng-show="PermissionsService.isAllowed('tickets/trash', currentUser.role, 'crud')">
+            ng-show="PermissionsService.isAllowed('tickets/trash', currentUser.role, 'c r u d')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
             <i class="nav-icon icn-lg icn-trash"></i> Trash
           </a>
@@ -134,7 +134,7 @@
       </ul>
     </nav>
 
-    <div ng-if="PermissionsService.isAllowed('accounting', currentUser.role, 'crud')">
+    <div ng-if="PermissionsService.isAllowed('accounting', currentUser.role, 'c r u d')">
       <div class="clearfix divider"></div>
       <div class="nav-title" style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ACCOUNTING')">Billing
       </div>
@@ -188,7 +188,7 @@
         </li>
 
         <li ng-class="{active: $state.includes('services')}"
-            ng-if="PermissionsService.isAllowed('inventry/services', currentUser.role, 'crud')">
+            ng-if="PermissionsService.isAllowed('inventry/services', currentUser.role, 'c r u d')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'services')">
             <i class="nav-icon icn-services icn-lg"></i> Services
           </a>

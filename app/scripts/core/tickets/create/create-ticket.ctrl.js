@@ -272,6 +272,10 @@
               }
             }
 
+            if ($scope.ticket.isAssignToMe) {
+              $scope.ticket.assignedUser = $scope.currentUser.id;
+            }
+
             var ticketNumber = $scope.ticketNumber;
 
             TicketsService.createTicket($scope.ticket, function (resp) {

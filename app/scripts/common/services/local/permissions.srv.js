@@ -173,7 +173,7 @@
         return item.toUpperCase();
       });
       var uRole = role.toUpperCase();
-      var uActions = actions.split('').map(function (item) {
+      var uActions = actions.split(' ').map(function (item) {
         return item.toUpperCase();
       });
 
