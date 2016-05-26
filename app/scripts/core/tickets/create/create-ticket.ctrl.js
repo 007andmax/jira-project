@@ -13,6 +13,7 @@
         var isNeedToDeleteUser = true,
           unassignedCompany = CompaniesService.getUnassignedCompany();
 
+        $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
         $scope.ticket = { priorityLevel: 'MEDIUM' };
         $scope.ticketAttachments = [];

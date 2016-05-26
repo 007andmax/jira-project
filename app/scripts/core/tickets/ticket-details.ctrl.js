@@ -27,6 +27,12 @@
 
             $scope.ticketDetails = details;
 
+            if (details.assignedUser && details.assignedUser.id && $stateParams.listType === 'unassigned' && !$scope.ticketClaimed) {
+              $state.go('tickets', {listType: 'user'}).then(function () {
+                $state.go('tickets.details', { ticketId: $scope.ticketDetails.id });
+              });
+            }
+
             if (!$scope.ticketClaimed && details.message !== undefined && (details.code === 400 || details.code === 403)) {
               if ($stateParams.ticketId) {
                 $state.go('tickets', { listType: $stateParams.listType, ticketId: $stateParams.ticketId });

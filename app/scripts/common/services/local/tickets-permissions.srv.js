@@ -45,8 +45,8 @@
         }
 
         var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
-        var isTrueForUser = listType === LIST_TYPES.USER;
-        var isTrueForOpen = listType === LIST_TYPES.OPEN;
+        var isTrueForUser = listType === LIST_TYPES.USER && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
+        var isTrueForOpen = listType === LIST_TYPES.OPEN && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
         var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
         return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForShared;
@@ -94,13 +94,14 @@
         return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForShared;
       }
 
-      function isChangeStatusToVisible(listType, userRole) {
+      function isChangeStatusToVisible(listType, userRole, isAssigned) {
 
+        var isTrueForUnassigned = listType === LIST_TYPES.UNASSIGNED && isAssigned;
         var isTrueForUser = listType === LIST_TYPES.USER;
         var isTrueForOpen = listType === LIST_TYPES.OPEN;
         var isTrueForShared = listType === LIST_TYPES.SHARED && (userRole === USER_ROLES.ADMIN || userRole === USER_ROLES.SUPER_ADMIN);
 
-        return isTrueForUser || isTrueForOpen || isTrueForShared;
+        return isTrueForUnassigned || isTrueForUser || isTrueForOpen || isTrueForShared;
       }
 
       function isClaimTicketVisible(listType, userRole) {

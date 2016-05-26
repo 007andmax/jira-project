@@ -378,7 +378,8 @@
 
             </div>
 
-            <div class="clearfix" style="height: 50px;">
+            <div class="clearfix" style="height: 50px;"
+                 ng-if="!TicketsPermissionsService.isAssignTicketToVisible('unassigned', currentUser.role, usersCurrentCompany)">
               <label class="control checkbox pull-left" style="margin-top: 15px;">
                 <input type="checkbox" ng-model="ticket.isAssignToMe">
                 <span class="control-indicator"></span>

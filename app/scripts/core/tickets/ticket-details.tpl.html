@@ -57,7 +57,7 @@
 
         <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
 
-          <div ng-show="TicketsPermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status)"
+          <div ng-show="TicketsPermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status) || ticketClaimed"
                class="btn btn-lg btn-info btn-update pull-left"
                custom-disabled="{{ ticketDetails.status === 'COMPLETED' }}"
                ng-click="updateAndCloseTicket()">
@@ -75,7 +75,7 @@
 
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
 
-              <li ng-show="TicketsPermissionsService.isClaimTicketVisible(listType, currentUser.role)">
+              <li ng-show="TicketsPermissionsService.isClaimTicketVisible(listType, currentUser.role) && !ticketClaimed">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
               </li>
 
@@ -135,7 +135,7 @@
               </li>
 
               <li
-                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isChangeStatusToVisible(listType, currentUser.role)"
+                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isChangeStatusToVisible(listType, currentUser.role, ticketClaimed)"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
@@ -169,7 +169,7 @@
               </li>
 
               <li
-                ng-if="TicketsPermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticketDetails)">
+                ng-if="TicketsPermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticketDetails) && !ticketClaimed">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
               </li>
 
