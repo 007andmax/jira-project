@@ -5066,6 +5066,10 @@ tbody.collapse.in {
   margin: -1px 0 0;
   list-style: none;
   border-radius: 0 0 3px 3px;
+  height: auto !important;
+  max-height: 204px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .dropdown-submenu-wrapper .dropdown-assign-ticket .scroll-pane {
   margin-top: 79px;
