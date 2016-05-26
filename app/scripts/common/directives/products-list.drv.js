@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('productsList',
-    ['$timeout',
-      function ($timeout) {
+    ['$timeout', 'quicktech.common.services.PermissionsService',
+      function ($timeout, PermissionsService) {
         return {
           restrict: 'A',
           link: function (scope, element, attrs) {
@@ -16,6 +16,8 @@
             if (attrs.productsList && scope[attrs.productsList] && scope[attrs.productsList].item) {
               productInput.val(scope[attrs.productsList].item.description);
             }
+
+            scope.PermissionsService = PermissionsService;
 
             productInput.click(showDropdown);
 
