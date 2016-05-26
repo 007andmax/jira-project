@@ -4,8 +4,8 @@
 
   angular.module("quicktech.core.rightPanel").directive('customPopoverMenu',
     ['$timeout', '$templateRequest', '$compile', 'UsersService', 'SubscriptionsService',
-      'quicktech.common.services.UserConfirmationsService',
-      function ($timeout, $templateRequest, $compile, UsersService, SubscriptionsService, UserConfirmationsService) {
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
+      function ($timeout, $templateRequest, $compile, UsersService, SubscriptionsService, UserConfirmationsService, PermissionsService) {
         return {
           restrict: 'A',
           link: function (scope, element, attrs) {
@@ -30,6 +30,7 @@
               $(document).off('click', hideThisPopover);
             };
 
+            scope.PermissionsService = PermissionsService;
 
             $templateRequest(attrs.customPopoverTemplate).then(function(html){
               var template = angular.element(html);

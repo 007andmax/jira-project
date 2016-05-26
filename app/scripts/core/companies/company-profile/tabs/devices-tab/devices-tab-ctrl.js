@@ -55,7 +55,7 @@
         };
 
         $scope.remove = function () {
-          if (PermissionsService.isAllowed('client/companyProfile', $scope.currentUser.role, 'd_device')) {
+          if (PermissionsService.isAllowed('clients/companyProfile', $scope.currentUser.role, 'd_device')) {
             DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
               if (delete $scope.selectDevices[$scope.agent.agentId]) {
                 $scope.changeSelectDevices();

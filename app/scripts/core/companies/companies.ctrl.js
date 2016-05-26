@@ -16,7 +16,7 @@
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
 
         $scope.isChartsAccess = function(){
-          return PermissionsService.isAllowed('client/companyProfile', $scope.currentUser.role, 'r_chart') || $scope.currentUser.accountType === 'ROOT';
+          return PermissionsService.isAllowed('clients/companyProfile', $scope.currentUser.role, 'r_chart') || $scope.currentUser.accountType === 'ROOT';
         };
 
         if($scope.isChartsAccess()){

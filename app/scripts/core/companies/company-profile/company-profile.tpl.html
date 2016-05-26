@@ -8,7 +8,7 @@
         <!--company-cover-wrapper-->
 
         <div class="btn btn-archive has-tooltip"
-             ng-show="PermissionsService.isAllowed('client/companyProfile', currentUser.role, 'd')"
+             ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd')"
              ng-click="archiveCompany()"
              tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
           <i class="icn-sm icn-archive-company"></i>
@@ -34,7 +34,7 @@
               <i class="icn-sm icn-description-white"></i>
             </a>
 
-            <div class="dropdown" ng-show="PermissionsService.isAllowed('client/companyProfile', currentUser.role, 'r')">
+            <div class="dropdown" ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'r')">
 
               <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
                  data-toggle="dropdown" aria-expanded="false"
@@ -66,7 +66,7 @@
             </div>
 
             <a href="javascript:void(0)" class="hit-area has-tooltip"
-               ng-show="PermissionsService.isAllowed('client/companyProfile', currentUser.role, 'u')"
+               ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'u')"
                ui-sref="editCompany( { companyId: company.id } )"
                tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
               <i class="icn-md icn-edit-tag"></i>

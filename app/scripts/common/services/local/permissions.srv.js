@@ -66,7 +66,7 @@
           U: ADMIN,
           D: ADMIN
         },
-        COMPANY_PROFILE: {
+        COMPANYPROFILE: {
           C: TECH,
           R: FULL,
           R_CHART: ADMIN,

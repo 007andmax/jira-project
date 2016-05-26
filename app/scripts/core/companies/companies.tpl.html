@@ -110,7 +110,7 @@
 
       <div class="hover-logo">
         <div class="logo-control" stop-propagation="click"
-             ng-if="PermissionsService.isAllowed('client/companies', currentUser.role, 'u')">
+             ng-if="PermissionsService.isAllowed('clients/companies', currentUser.role, 'u')">
           <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
         </div>
       </div>

@@ -65,7 +65,8 @@
 
         <div class="col-2">
 
-          <div class="no-items not-hide-labels">
+          <div class="no-items"
+               ng-class="{'not-hide-labels': currentUser.role === 'USER' || category.default}">
             {{ category.productsList.length }} items
           </div>
 
