@@ -7,6 +7,10 @@
   padding-top: 30px;
   width: 100%;
   padding-right: 30px;
+  height: auto !important;
+  max-height: 204px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .users-list .user-card {

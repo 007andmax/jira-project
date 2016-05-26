@@ -62,6 +62,7 @@
             // minWidth:          100,
             // width:             maxProductWidth+40,
             forceFixPosition: false,
+            useCustomScroller: false,
             //listMarginTop:      6,
             listPaddingTop: 10,
             listPaddingBottom: 10,
@@ -88,7 +89,7 @@
             alwaysShow: true,
 
             classes: {
-              containerClass: 'users-list',
+              containerClass: 'users-list custom-scroll',
               suggestion: 'user-item',
               selected: 'hovered',
               lastSelected: 'active'
