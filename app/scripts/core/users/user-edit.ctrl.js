@@ -18,6 +18,8 @@
           }
         });
 
+        $scope.getUsersByCompany = UsersService.getAllByCompanyId;
+
         CompaniesService.getClientCompaniesInfo($scope, function (resp) {
           $scope.clientCompaniesInfo = resp;
           if ($scope.editUser.companyId) {
