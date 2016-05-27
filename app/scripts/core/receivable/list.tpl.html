@@ -46,6 +46,7 @@
 
     <li ng-repeat="invoice in receivableInvoicesData.list | orderBy: orderByForInvoices : orderInvoices.reverse track by getInvoiceId(invoice)"
         ng-controller="quicktech.core.receivable.invoiceCtrl"
+        on-finish-render="hideLoadingIndicator()"
         show-model-element="{{ 'showInvoice-' + invoice.id }}">
 
       <div class="col-1">

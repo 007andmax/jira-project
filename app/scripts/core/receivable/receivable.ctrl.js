@@ -89,7 +89,6 @@
               }
             }
 
-            $scope.loadingInProgress = false;
           }, true);
 
 
@@ -179,6 +178,10 @@
           }
         }, true);
 
+        $scope.hideLoadingIndicator = function () {
+          $scope.loadingInProgress = false;
+        };
+
         $scope.getInvoiceId = function (invoice) {
           if (invoice.invoices && invoice.invoices.length) {
             return invoice.invoices[0].id;
@@ -219,6 +222,7 @@
             return invoice[property];
           }
         }
+
 
       }]);
 
