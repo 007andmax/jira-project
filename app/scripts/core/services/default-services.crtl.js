@@ -20,7 +20,6 @@
         $scope.$watch("servicesData.default.length", function (count) {
           if (count) {
             $scope.services = $scope.servicesData.default;
-            $scope.setLoadingInProgress(false);
           }
         });
 

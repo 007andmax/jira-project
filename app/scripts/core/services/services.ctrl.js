@@ -6,7 +6,11 @@
     ['$scope', 'ServicesService', 'Utils', 'CompaniesService',
       function ($scope, ServicesService, Utils, CompaniesService) {
 
-        $scope.loadingInProgress = true;
+        $scope.loadingInProgress = {
+          all: true,
+          default: true,
+          companies: true
+        };
         $scope.checkedServices = {};
         $scope.companies = CompaniesService.getClientCompanies().filter(function (item) {
           if (!item.isDefault) return item;
@@ -83,8 +87,11 @@
 
         };
 
-        $scope.setLoadingInProgress = function (trigger) {
-          $scope.loadingInProgress = trigger;
+        $scope.loadingFinished = function (list) {
+          $scope.loadingInProgress[list] = false;
+          if (!$scope.loadingInProgress.default && !$scope.loadingInProgress.companies) {
+            $scope.loadingInProgress.all = false;
+          }
         };
 
       }]);

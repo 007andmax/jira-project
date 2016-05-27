@@ -23,6 +23,7 @@
 
   <li ng-repeat="service in services | orderBy : orderByForServices : orderServices.reverse"
       ng-controller="quicktech.core.services.serviceCtrl"
+      on-finish-render="loadingFinished('default')"
       ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
       show-model-element="{{ 'show-' + service.versionedId.id }}">
 

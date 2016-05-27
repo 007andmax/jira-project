@@ -20,7 +20,6 @@
         ProductsService.getAllProducts($scope, function (resp) {
           categories = resp.categories;
           $scope.productsData = resp;
-          $scope.loadingInProgress = false;
         });
 
         $scope.pageTab = 'group';
@@ -63,6 +62,10 @@
         $scope.$on('showAllCategories', function (event) {
           $scope.setShowingCategory('');
         });
+
+        $scope.loadingFinished = function () {
+          $scope.loadingInProgress = false;
+        };
 
         $scope.openCreationCategory = function () {
           $scope.isCreateCategoryShow = true;

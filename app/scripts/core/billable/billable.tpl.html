@@ -58,12 +58,13 @@
 
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active">
-        <ul class="qt-list qt-billable-clients" ng-if="!loadingInProgress" ftt-tab-content>
+        <ul class="qt-list qt-billable-clients" ng-hide="loadingInProgress" ftt-tab-content>
 
           <li class="billable-main"
               event-toggle-slider="toggleBillableTickets"
               ng-controller="quicktech.core.billable.companyCtrl"
               ng-repeat="billableCompany in billableData | filterBillableCompany"
+              on-finish-render="loadingFinished()"
               show-model-element="{{ 'showCompany-' + billableCompany.companyId }}">
 
             <div ng-click="toggleBillableTickets()"

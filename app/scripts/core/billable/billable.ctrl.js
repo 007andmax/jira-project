@@ -52,10 +52,11 @@
 
             }
           }
-
-          $scope.loadingInProgress = false;
-
         });
+
+        $scope.loadingFinished = function () {
+          $scope.loadingInProgress = false;
+        };
 
         $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
 

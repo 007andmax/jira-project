@@ -24,7 +24,6 @@
 
         RecurringService.getAll($scope, function (resp) {
           $scope.invoices = resp;
-          $scope.loadingInProgress = false;
         });
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {
@@ -34,6 +33,10 @@
             $scope.last30DaysValue += $scope.recurringGraphData[i].sum;
           }
         });
+
+        $scope.loadingFinished = function () {
+          $scope.loadingInProgress = false;
+        };
 
         $scope.toogleEditForm = function (value) {
           if (!value) {

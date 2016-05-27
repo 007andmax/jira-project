@@ -42,7 +42,7 @@
 
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active">
-        <ul class="qt-list qt-recurring-invoices" ng-if="!loadingInProgress">
+        <ul class="qt-list qt-recurring-invoices" ng-hide="loadingInProgress">
 
           <li ng-if="editInvoiceId === 'new-invoice'">
             <div ng-include="'/html/scripts/core/recurring/edit-invoice.tpl.html'"></div>
@@ -89,6 +89,7 @@
               ng-repeat="invoice in invoices | orderBy : orderByForInvoices : orderInvoices.reverse"
               ng-controller="quicktech.core.recurring.invoiceCtrl"
               ng-hide="showCompanyId && (showCompanyId !== invoice.company.id)"
+              on-finish-render="loadingFinished()"
               ng-class="{'warning-order': invoice.leftGenerations === 1, 'danger-order': invoice.leftGenerations === 0}">
 
             <div>

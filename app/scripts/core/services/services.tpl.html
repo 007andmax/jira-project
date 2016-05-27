@@ -1,12 +1,14 @@
 <div class="services-content">
-  <div class="default-services-header" ng-controller="quicktech.core.services.defaultServicesCtrl">
+
+  <loading-indicator loading-trigger="loadingInProgress['all']"></loading-indicator>
+
+  <div class="default-services-header" ng-hide="loadingInProgress['all']" ng-controller="quicktech.core.services.defaultServicesCtrl">
 
     <div class="default-service-count">Default Services
       <span class="text-muted">{{ services.length }}</span>
     </div>
 
-    <div ng-include="'/html/scripts/core/services/services-list.tpl.html'" ng-if="!loadingInProgress"></div>
-    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
+    <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
 
     <div class="add-service-btn-wrapper">
       <div class="btn btn-success has-tooltip" ng-show="!showCreateService"
@@ -18,14 +20,15 @@
 
   </div>
 
-  <div class="all-companies-heading">
+  <div class="all-companies-heading" ng-hide="loadingInProgress['all']">
     All Companies <span class="text-muted">Service &amp; Rate Lists</span>
   </div>
 
-  <ul class="qt-list qt-services">
+  <ul class="qt-list qt-services" ng-hide="loadingInProgress['all']">
 
     <li qt-toggle-slider ng-repeat="company in companies | orderBy: 'name'"
         ng-controller="quicktech.core.services.companyCtrl"
+        on-finish-render="loadingFinished('companies')"
         event-toggle-slider="toggleServices">
 
       <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;" ng-click="toggleServices()"></div>
