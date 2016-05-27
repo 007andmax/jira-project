@@ -16,7 +16,7 @@
             TicketsService.getActualNumber(scope, function (number) {
                 scope.actualTicketNumber = number;
 
-                if(scope.actualTicketNumber.split('-').length === 1){
+                if (scope.actualTicketNumber.split('-').length === 1) {
                   scope.ticketConfig = {
                     count: scope.actualTicketNumber.split('-')[0],
                     prefix: ''
@@ -43,11 +43,10 @@
 
             scope.saveTicketNumber = function (source) {
               source.count = source.nextValid;
-              scope.invoiceAndTicketForm.ticketCount.$setValidity('used', true);
               saveTicketNumber();
             };
 
-            function ifInputsChange(){
+            function ifInputsChange() {
               var countChange = ticketParams.count !== scope.ticketConfig.count;
               var prefixChanhe = ticketParams.prefix !== scope.ticketConfig.prefix;
 
@@ -55,13 +54,17 @@
             }
 
             function saveTicketNumber() {
-              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
-                EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET', function (resp) {
-                  scope.invoiceAndTicketForm.ticketCount.$setValidity('used', resp.code !== 409);
-                  if (resp.code === 409) {
-                    scope.ticketConfig.nextValid = resp.message;
-                  }
-                });
+              if (ifInputsChange()) {
+                scope.invoiceAndTicketForm.ticketCount.$setValidity('used', true);
+                if (scope.invoiceAndTicketForm.$valid) {
+                  EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET', function (resp) {
+                    scope.invoiceAndTicketForm.ticketCount.$setValidity('used', resp.code !== 409);
+                    if (resp.code === 409) {
+                      scope.ticketConfig.nextValid = resp.message;
+                      ticketParams.count = scope.ticketConfig.count
+                    }
+                  });
+                }
               }
             }
           }

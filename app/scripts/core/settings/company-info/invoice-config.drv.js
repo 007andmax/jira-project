@@ -65,7 +65,6 @@
 
             scope.saveInvoiceNumber = function (source) {
               source.count = source.nextValid;
-              scope.invoiceAndTicketForm.invoiceCount.$setValidity('used', true);
               saveInvoiceConfig();
             };
 
@@ -78,19 +77,23 @@
             }
 
             function saveInvoiceConfig() {
-              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
-                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function (resp) {
+              if (ifInputsChange()) {
+                scope.invoiceAndTicketForm.invoiceCount.$setValidity('used', true);
+                if (scope.invoiceAndTicketForm.$valid) {
+                  EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function (resp) {
 
-                  scope.invoiceAndTicketForm.invoiceCount.$setValidity('used', resp.code !== 409);
+                    scope.invoiceAndTicketForm.invoiceCount.$setValidity('used', resp.code !== 409);
 
-                  if (resp.code === 409) {
-                    scope.invoiceConfig.nextValid = resp.message;
-                  } else {
-                    invoiceParams.term = scope.invoiceConfig.term;
-                    invoiceParams.termsAndConditions = scope.invoiceConfig.termsAndConditions;
-                    invoiceParams.count = scope.invoiceConfig.count;
-                  }
-                })
+                    if (resp.code === 409) {
+                      scope.invoiceConfig.nextValid = resp.message;
+                      invoiceParams.count = scope.invoiceConfig.count;
+                    } else {
+                      invoiceParams.term = scope.invoiceConfig.term;
+                      invoiceParams.termsAndConditions = scope.invoiceConfig.termsAndConditions;
+                      invoiceParams.count = scope.invoiceConfig.count;
+                    }
+                  })
+                }
               }
             }
 
