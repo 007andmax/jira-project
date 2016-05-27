@@ -19,13 +19,11 @@
             //todo: allow to set styles
             if (top > 0) {
               element.css({
-                'width': '100%',
                 'background-color': 'rgba(255, 255, 255, 0.87)',
-                'z-index': 9999
+                'z-index': 999
               });
             } else {
               element.css({
-                'width': 'auto',
                 'background-color': 'transparent',
                 'z-index': 1
               });
