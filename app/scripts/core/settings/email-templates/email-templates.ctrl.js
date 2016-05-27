@@ -290,7 +290,8 @@
 
             $scope.templatesData = {
               subject: data.subject,
-              body: data.body
+              body: data.body,
+              keywords: data.keywords
             };
 
             $scope.currentOpenTemplate = templatesKey;

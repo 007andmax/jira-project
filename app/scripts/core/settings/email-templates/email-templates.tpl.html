@@ -89,9 +89,9 @@
               </div>
             </form>
 
-            <div class="clearfix hide" style="padding-top: 15px;">
-              <span>Available keywords: </span>
-              <span></span>
+            <div class="clearfix" style="padding-top: 15px;">
+              <span style="font-weight: 600;">Available keywords: </span>
+              <span ng-repeat="keyword in templatesData.keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
             </div>
             <div class="template-footer pull-left">{{ ticketTemplateInfo.description }}</div>
           </div>
@@ -184,6 +184,11 @@
 
               </div>
             </form>
+
+            <div class="clearfix" style="padding-top: 15px;">
+              <span style="font-weight: 600;">Available keywords: </span>
+              <span ng-repeat="keyword in templatesData.keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            </div>
             <div class="template-footer pull-left">{{ agentTemplateInfo.description }}</div>
           </div>
         </div>
@@ -273,6 +278,11 @@
 
               </div>
             </form>
+
+            <div class="clearfix" style="padding-top: 15px;">
+              <span style="font-weight: 600;">Available keywords: </span>
+              <span ng-repeat="keyword in templatesData.keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            </div>
             <div class="template-footer pull-left">{{ usersTemplateInfo.description }}</div>
           </div>
         </div>
@@ -364,6 +374,11 @@
 
               </div>
             </form>
+
+            <div class="clearfix" style="padding-top: 15px;">
+              <span style="font-weight: 600;">Available keywords: </span>
+              <span ng-repeat="keyword in templatesData.keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            </div>
             <div class="template-footer pull-left">{{ companyTemplateInfo.description }}</div>
           </div>
         </div>
@@ -455,6 +470,11 @@
 
               </div>
             </form>
+
+            <div class="clearfix" style="padding-top: 15px;">
+              <span style="font-weight: 600;">Available keywords: </span>
+              <span ng-repeat="keyword in templatesData.keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            </div>
             <div class="template-footer pull-left">{{ invoiceTemplateInfo.description }}</div>
           </div>
         </div>
@@ -547,6 +567,11 @@
 
               </div>
             </form>
+
+            <div class="clearfix" style="padding-top: 15px;">
+              <span style="font-weight: 600;">Available keywords: </span>
+              <span ng-repeat="keyword in templatesData.keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            </div>
             <div class="template-footer pull-left">{{ vendorTemplateInfo.description }}</div>
           </div>
         </div>
