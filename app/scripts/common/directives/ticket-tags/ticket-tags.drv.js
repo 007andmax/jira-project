@@ -17,6 +17,7 @@
           $scope.currentCompany = CompaniesService.getCurrentCompany();
           $scope.currentUser = UsersService.getCurrentUser();
           $scope.tagColors = TagsService.getColors();
+          $scope.savedTicketTags = angular.copy($scope.ticketTags);
 
           if (!$scope.readonlyTags) {
             var input = $element.find('input');
@@ -37,8 +38,7 @@
         },
         controller: function ($scope) {
           if (!$scope.readonlyTags) {
-            var savedTicketTags = angular.copy($scope.ticketTags),
-              lastQuery;
+            var lastQuery;
 
             $scope.$watch('newTag', searchTag);
 
@@ -65,10 +65,10 @@
             };
 
             $scope.saveTags = function () {
-              if (!angular.equals(savedTicketTags, $scope.ticketTags)) {
+              if (!angular.equals($scope.savedTicketTags, $scope.ticketTags)) {
                 $scope.saving = true;
                 TagsService.setTagsInTicket($scope.ticketTags, $scope.ticketId, function () {
-                  savedTicketTags = angular.copy($scope.ticketTags);
+                  $scope.savedTicketTags = angular.copy($scope.ticketTags);
                   $scope.saving = false;
                 });
               }

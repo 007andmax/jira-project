@@ -549,7 +549,7 @@
         RealTimeService.subscribe('/number?targetId=TICKET', scope, function (change) {
           console.log(change);
           if (change.action === 'NUMBER_CHANGED') {
-            callback(Utils.getFormattedNumber(change.data, true));
+            callback(Utils.getFormattedNumber(change.data));
           }
         });
       }

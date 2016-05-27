@@ -63,6 +63,12 @@
 
               pressOnElement = false;
 
+              if (event.ctrlKey && event.keyCode === 86) {
+                var cleanText = editor.text();
+                editor.html(cleanText);
+                $timeout(validateRequired);
+              }
+
               if (event.keyCode === 9) {
 
                 var nextFocusInput = $('[next-after-text-editor]');
