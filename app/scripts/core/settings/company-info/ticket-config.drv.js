@@ -33,17 +33,19 @@
               }
             );
 
-            numberInput.on('focusout', function () {
-              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
-                EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
-              }
-            });
+            numberInput.on('focusout', saveTicketNumber);
 
             prefixInput.on('focusout', function () {
               if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
                 EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET')
               }
             });
+
+            scope.saveTicketNumber = function (source) {
+              source.count = source.nextValid;
+              scope.invoiceAndTicketForm.ticketCount.$setValidity('used', true);
+              saveTicketNumber();
+            };
 
             function ifInputsChange(){
               var countChange = ticketParams.count !== scope.ticketConfig.count;
@@ -52,6 +54,16 @@
               return countChange || prefixChanhe;
             }
 
+            function saveTicketNumber() {
+              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
+                EmailSettingsService.saveNumberForm(scope.ticketConfig, 'TICKET', function (resp) {
+                  scope.invoiceAndTicketForm.ticketCount.$setValidity('used', resp.code !== 409);
+                  if (resp.code === 409) {
+                    scope.ticketConfig.nextValid = resp.message;
+                  }
+                });
+              }
+            }
           }
         }
       }]);

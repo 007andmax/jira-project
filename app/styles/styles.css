@@ -9659,3 +9659,10 @@ button.close {
 .assign-ticket {
   min-width: 200px;
 }
+.free-number-link {
+cursor: pointer;
+color: blue;
+}
+.free-number-link:hover {
+  color: blueviolet;
+}

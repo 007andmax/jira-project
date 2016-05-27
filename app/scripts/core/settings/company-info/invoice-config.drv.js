@@ -20,10 +20,10 @@
               termsAndConditions: ''
             };
 
-            scope.previewInvoice = function(){
+            scope.previewInvoice = function () {
               $templateRequest('/html/scripts/core/settings/company-info/preview-invoice.tpl.html').then(function (html) {
 
-                var body =  $("body");
+                var body = $("body");
 
                 body.append(html);
                 body.css('overflow-y', 'hidden');
@@ -38,7 +38,7 @@
 
                 invoiceElem.fadeIn();
 
-                invoiceElem.find('.close-icon').click(function(){
+                invoiceElem.find('.close-icon').click(function () {
                   body.css('overflow-y', 'visible');
                   window.scroll(0, element.offset().top - 200);
                   invoiceElem.fadeOut();
@@ -59,39 +59,15 @@
               }
             );
 
+            numberInput.on('focusout', saveInvoiceConfig);
+            termsInput.on('focusout', saveInvoiceConfig);
+            conditionsInput.on('focusout', saveInvoiceConfig);
 
-            numberInput.on('focusout', function () {
-              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
-                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function(){
-
-                  invoiceParams.term = scope.invoiceConfig.term;
-                  invoiceParams.termsAndConditions = scope.invoiceConfig.termsAndConditions;
-                  invoiceParams.count = scope.invoiceConfig.count;
-                })
-              }
-            });
-
-            termsInput.on('focusout', function () {
-              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
-                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function(){
-
-                  invoiceParams.term = scope.invoiceConfig.term;
-                  invoiceParams.termsAndConditions = scope.invoiceConfig.termsAndConditions;
-                  invoiceParams.count = scope.invoiceConfig.count;
-                })
-              }
-            });
-
-            conditionsInput.on('focusout', function () {
-              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
-                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function(){
-
-                  invoiceParams.term = scope.invoiceConfig.term;
-                  invoiceParams.termsAndConditions = scope.invoiceConfig.termsAndConditions;
-                  invoiceParams.count = scope.invoiceConfig.count;
-                })
-              }
-            });
+            scope.saveInvoiceNumber = function (source) {
+              source.count = source.nextValid;
+              scope.invoiceAndTicketForm.invoiceCount.$setValidity('used', true);
+              saveInvoiceConfig();
+            };
 
             function ifInputsChange() {
               var termChange = invoiceParams.term !== scope.invoiceConfig.term;
@@ -99,6 +75,23 @@
               var countChange = invoiceParams.count !== scope.invoiceConfig.count;
 
               return termChange || termsAndConditionsChange || countChange;
+            }
+
+            function saveInvoiceConfig() {
+              if (scope.invoiceAndTicketForm.$valid && ifInputsChange()) {
+                EmailSettingsService.saveNumberForm(scope.invoiceConfig, 'INVOICE', function (resp) {
+
+                  scope.invoiceAndTicketForm.invoiceCount.$setValidity('used', resp.code !== 409);
+
+                  if (resp.code === 409) {
+                    scope.invoiceConfig.nextValid = resp.message;
+                  } else {
+                    invoiceParams.term = scope.invoiceConfig.term;
+                    invoiceParams.termsAndConditions = scope.invoiceConfig.termsAndConditions;
+                    invoiceParams.count = scope.invoiceConfig.count;
+                  }
+                })
+              }
             }
 
           }

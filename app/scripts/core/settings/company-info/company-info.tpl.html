@@ -660,6 +660,11 @@
               <label class="control-label" ng-message="maxlength" for="">too large</label>
               <label class="control-label" ng-message="minlength" for="">too short</label>
               <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
+              <label class="control-label" ng-message="used">
+                Already used. Next free is
+                <span class="free-number-link" ng-click="saveTicketNumber(ticketConfig)">
+                  {{ ticketConfig.nextValid }}</span>.
+              </label>
             </div>
 
             <input class="form-control" tc-number-input type="text" ng-model="ticketConfig.count"
@@ -677,10 +682,15 @@
 
             <div ng-messages="invoiceAndTicketForm.invoiceCount.$error"
                  ng-class="{ 'hide': !isShowingErrors(invoiceAndTicketForm, 'invoiceCount')}">
-              <label class="control-label" ng-message="required" for="">cannot be left empty.</label>
-              <label class="control-label" ng-message="maxlength" for="">too large</label>
-              <label class="control-label" ng-message="minlength" for="">too short</label>
-              <label class="control-label" ng-message="pattern" for="">Please enter a valid number starts.</label>
+              <label class="control-label" ng-message="required">cannot be left empty.</label>
+              <label class="control-label" ng-message="maxlength">too large</label>
+              <label class="control-label" ng-message="minlength">too short</label>
+              <label class="control-label" ng-message="pattern">Please enter a valid number starts.</label>
+              <label class="control-label" ng-message="used">
+                Already used. Next free is
+                <span class="free-number-link" ng-click="saveInvoiceNumber(invoiceConfig)">
+                  {{ invoiceConfig.nextValid }}</span>.
+              </label>
             </div>
 
             <input class="form-control" type="text" ic-number-input ng-model="invoiceConfig.count"
