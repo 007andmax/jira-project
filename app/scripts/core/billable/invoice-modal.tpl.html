@@ -140,11 +140,11 @@
 
     <div class="inv-ticket-header" ng-repeat-start="ticket in currentInvoice.tickets">
 
-      <h4 class="head"><span class="title">Tkt#</span>{{ ticket.number }}
+      <h4 class="head"><span class="title" ng-show="ticket.number">Tkt#</span>{{ ticket.number }}
         <span class="date">{{ ticket.closedAt | date: 'dd MMM yyyy' }}</span>
       </h4>
 
-      <h4 class="head">
+      <h4 class="head" ng-show="ticket.subject">
         <span class="title">Subj</span>{{ ticket.subject }}
       </h4>
 
@@ -162,7 +162,7 @@
       <div class="col-1" style="width: 492px">
         <span class="name">{{ productExpense.item.description }}</span>
         <br>
-        <span>P/N: {{ productExpense.item.manufacture }}</span>
+        <span ng-show="productExpense.item.manufacture">P/N: {{ productExpense.item.manufacture }}</span>
         <span style="margin-left: 15px;" ng-show="productExpense.serialNumber">S/N: {{ productExpense.serialNumber }}</span>
 
       </div>

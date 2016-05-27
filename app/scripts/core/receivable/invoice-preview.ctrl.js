@@ -18,6 +18,15 @@
           $scope.currentShipTo = {
             addressWithSuitNumberAndPostalCode: resp.shippingAddress
           };
+
+          if (!$scope.currentInvoice.tickets || !$scope.currentInvoice.tickets.length) {
+            $scope.currentInvoice.tickets = [{
+              productExpenses: $scope.currentInvoice.productExpenses,
+              serviceExpenses: $scope.currentInvoice.serviceExpenses,
+              totalSum: $scope.currentInvoice.productsSum + $scope.currentInvoice.servicesSum
+            }];
+          }
+
           $scope.locksInitialized = true;
         });
 
