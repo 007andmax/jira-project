@@ -17,7 +17,7 @@
 }
 
 .invoice-page .header {
-  border-bottom: 2px solid grey;
+  border-bottom: 2px solid gray;
   padding-bottom: 10px;
   float: left;
   width: 790px;
@@ -106,7 +106,7 @@
 
 
 .invoice-page .sub-header .heading {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid gray;
 }
 .invoice-page .sub-header .heading[data-toggle]{
   cursor: pointer;
@@ -188,7 +188,7 @@
   float: left;
   width: 790px;
   padding-top: 35px;
-  border-top: 2px solid grey;
+  border-top: 2px solid gray;
   page-break-inside: avoid;
 }
 
@@ -201,7 +201,7 @@
 }
 
 .invoice-page .inv-ticket-header .head + .head {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid gray;
   padding-bottom: 14px;
   page-break-inside: avoid;
 }
@@ -359,8 +359,8 @@
 .invoice-page .in-total {
   float: left;
   width: 790px;
-  border-top: 2px solid grey;
-  border-bottom: 2px solid grey;
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
   padding: 58px 0 56px;
   page-break-inside: avoid;
 }
@@ -385,7 +385,7 @@
 .invoice-page .footer .message {
   float: left;
   width: 750px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid gray;
   padding: 55px 20px;
 }
 
