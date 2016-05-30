@@ -841,7 +841,8 @@
           </div>
           <div class="col-4" dropdown is-open="replaceDropdown[tag.id].isOpen"
                tooltip="Replace with..." tooltip-placement="top" tooltip-append-to-body="true"
-               on-toggle="initReplace(open, tag, replaceTagForm)" ng-if="tag.usedCounter > 0 && editingId !== tag.id">
+               on-toggle="initReplace(open, tag, replaceTagForm)"
+               ng-if="tags.length > 1 && tag.usedCounter > 0 && editingId !== tag.id">
             <i class="icn-sm icn-replace" dropdown-toggle></i>
             <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
 
