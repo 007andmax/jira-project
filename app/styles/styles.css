@@ -9672,3 +9672,15 @@ color: blue;
 .available-keywords-wrap .available-keywords-label {
   font-weight: 600;
 }
+.form-actions .show-keywords-description {
+  margin-top: 15px;
+  margin-right: 10px;
+}
+#template-subject {
+  min-height: unset;
+  height: 38px;
+  overflow: hidden;
+}
+.available-keywords-wrap .available-keyword {
+  cursor: pointer;
+}

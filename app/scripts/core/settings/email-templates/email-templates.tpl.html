@@ -36,7 +36,7 @@
 
           <div class="template-details pull-left" ng-if="ticketTemplate === currentOpenTemplate">
             <div class="recepients"><strong>Recipient</strong> {{ ticketTemplateInfo.recipient }}</div>
-            <form name="templateForm">
+            <form name="templateForm" insert-keyword>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
@@ -50,8 +50,9 @@
                   <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
-                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
-                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+                <textarea id="template-subject" class="form-control insert-field"
+                          name="templateSubject" ng-model="templatesData.subject"
+                          ng-required="true" ng-maxlength="100" wrap="off" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
@@ -66,8 +67,9 @@
                   <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
-                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
-                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+                <textarea id="template-body" class="form-control insert-field"
+                          name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-actions clearfix">
@@ -86,12 +88,32 @@
                      ng-click="restoreDefault(ticketTemplate)">Restore Default</button>
                 </div>
 
+                <div class="pull-right show-keywords-description">
+                  <a href="javascript:void(0)" class="hit-area has-tooltip"
+                     tooltip-placement="top" tooltip="Show Keywords Description">
+                    <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+                  </a>
+                </div>
+
               </div>
             </form>
 
-            <div class="clearfix" style="padding-top: 15px;" ng-if="keywords && keywords.length">
-              <span style="font-weight: 600;">Available keywords: </span>
-              <span ng-repeat="keyword in keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            <div class="clearfix available-keywords-wrap" ng-if="keywords && keywords.length">
+              <span class="available-keywords-label">Available keywords: </span>
+              <span class="available-keyword" ng-repeat="keyword in keywords" ng-if="!isShowingDescription"
+                    ng-click="insertAtCaret(keyword.keyName)">
+                {{ keyword.keyName }}{{ $last ? '.' : ', ' }}
+              </span>
+
+              <div ng-if="isShowingDescription">
+                <ul>
+                  <li ng-repeat="keyword in keywords">
+                    <span class="available-keyword" ng-click="insertAtCaret(keyword.keyName)">{{ keyword.keyName }}</span>
+                    -
+                    <span>{{ keyword.description }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="template-footer pull-left">{{ ticketTemplateInfo.description }}</div>
           </div>
@@ -132,7 +154,7 @@
 
           <div class="template-details pull-left" ng-if="agentTemplate === currentOpenTemplate">
             <div class="recepients"><strong>Recipient</strong> {{ agentTemplateInfo.recipient }}</div>
-            <form name="templateForm">
+            <form name="templateForm" insert-keyword>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
@@ -146,8 +168,9 @@
                   <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
-                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
-                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+                <textarea id="template-subject" class="form-control insert-field"
+                          name="templateSubject" ng-model="templatesData.subject"
+                          ng-required="true" ng-maxlength="100" wrap="off" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
@@ -162,8 +185,9 @@
                   <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
-                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
-                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+                <textarea id="template-body" class="form-control insert-field"
+                          name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-actions clearfix">
@@ -182,12 +206,32 @@
                      ng-click="restoreDefault(agentTemplate)">Restore Default</button>
                 </div>
 
+                <div class="pull-right show-keywords-description">
+                  <a href="javascript:void(0)" class="hit-area has-tooltip"
+                     tooltip-placement="top" tooltip="Show Keywords Description">
+                    <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+                  </a>
+                </div>
+
               </div>
             </form>
 
-            <div class="clearfix" style="padding-top: 15px;" ng-if="keywords && keywords.length">
-              <span style="font-weight: 600;">Available keywords: </span>
-              <span ng-repeat="keyword in keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            <div class="clearfix available-keywords-wrap" ng-if="keywords && keywords.length">
+              <span class="available-keywords-label">Available keywords: </span>
+              <span class="available-keyword" ng-repeat="keyword in keywords" ng-if="!isShowingDescription"
+                    ng-click="insertAtCaret(keyword.keyName)">
+                {{ keyword.keyName }}{{ $last ? '.' : ', ' }}
+              </span>
+
+              <div ng-if="isShowingDescription">
+                <ul>
+                  <li ng-repeat="keyword in keywords">
+                    <span class="available-keyword" ng-click="insertAtCaret(keyword.keyName)">{{ keyword.keyName }}</span>
+                    -
+                    <span>{{ keyword.description }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="template-footer pull-left">{{ agentTemplateInfo.description }}</div>
           </div>
@@ -226,7 +270,7 @@
 
           <div class="template-details pull-left" ng-if="usersTemplate === currentOpenTemplate">
             <div class="recepients"><strong>Recipient</strong> {{ usersTemplateInfo.recipient }}</div>
-            <form name="templateForm">
+            <form name="templateForm" insert-keyword>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
@@ -240,8 +284,9 @@
                   <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
-                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
-                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+                <textarea id="template-subject" class="form-control insert-field"
+                          name="templateSubject" ng-model="templatesData.subject"
+                          ng-required="true" ng-maxlength="100" wrap="off" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
@@ -256,8 +301,9 @@
                   <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
-                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
-                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+                <textarea id="template-body" class="form-control insert-field"
+                          name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-actions clearfix">
@@ -276,12 +322,32 @@
                      ng-click="restoreDefault(usersTemplate)">Restore Default</button>
                 </div>
 
+                <div class="pull-right show-keywords-description">
+                  <a href="javascript:void(0)" class="hit-area has-tooltip"
+                     tooltip-placement="top" tooltip="Show Keywords Description">
+                    <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+                  </a>
+                </div>
+
               </div>
             </form>
 
-            <div class="clearfix" style="padding-top: 15px;" ng-if="keywords && keywords.length">
-              <span style="font-weight: 600;">Available keywords: </span>
-              <span ng-repeat="keyword in keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            <div class="clearfix available-keywords-wrap" ng-if="keywords && keywords.length">
+              <span class="available-keywords-label">Available keywords: </span>
+              <span class="available-keyword" ng-repeat="keyword in keywords" ng-if="!isShowingDescription"
+                    ng-click="insertAtCaret(keyword.keyName)">
+                {{ keyword.keyName }}{{ $last ? '.' : ', ' }}
+              </span>
+
+              <div ng-if="isShowingDescription">
+                <ul>
+                  <li ng-repeat="keyword in keywords">
+                    <span class="available-keyword" ng-click="insertAtCaret(keyword.keyName)">{{ keyword.keyName }}</span>
+                    -
+                    <span>{{ keyword.description }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="template-footer pull-left">{{ usersTemplateInfo.description }}</div>
           </div>
@@ -322,7 +388,7 @@
 
           <div class="template-details pull-left" ng-if="companyTemplate === currentOpenTemplate">
             <div class="recepients"><strong>Recipient</strong> {{ companyTemplateInfo.recipient }}</div>
-            <form name="templateForm">
+            <form name="templateForm" insert-keyword>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
@@ -336,8 +402,9 @@
                   <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
-                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
-                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+                <textarea id="template-subject" class="form-control insert-field"
+                          name="templateSubject" ng-model="templatesData.subject"
+                          ng-required="true" ng-maxlength="100" wrap="off" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
@@ -352,8 +419,9 @@
                   <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
-                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
-                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+                <textarea id="template-body" class="form-control insert-field"
+                          name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-actions clearfix">
@@ -372,12 +440,32 @@
                      ng-click="restoreDefault(companyTemplate)">Restore Default</button>
                 </div>
 
+                <div class="pull-right show-keywords-description">
+                  <a href="javascript:void(0)" class="hit-area has-tooltip"
+                     tooltip-placement="top" tooltip="Show Keywords Description">
+                    <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+                  </a>
+                </div>
+
               </div>
             </form>
 
-            <div class="clearfix" style="padding-top: 15px;" ng-if="keywords && keywords.length">
-              <span style="font-weight: 600;">Available keywords: </span>
-              <span ng-repeat="keyword in keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            <div class="clearfix available-keywords-wrap" ng-if="keywords && keywords.length">
+              <span class="available-keywords-label">Available keywords: </span>
+              <span class="available-keyword" ng-repeat="keyword in keywords" ng-if="!isShowingDescription"
+                    ng-click="insertAtCaret(keyword.keyName)">
+                {{ keyword.keyName }}{{ $last ? '.' : ', ' }}
+              </span>
+
+              <div ng-if="isShowingDescription">
+                <ul>
+                  <li ng-repeat="keyword in keywords">
+                    <span class="available-keyword" ng-click="insertAtCaret(keyword.keyName)">{{ keyword.keyName }}</span>
+                    -
+                    <span>{{ keyword.description }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="template-footer pull-left">{{ companyTemplateInfo.description }}</div>
           </div>
@@ -418,7 +506,7 @@
 
           <div class="template-details pull-left" ng-if="invoiceTemplate === currentOpenTemplate">
             <div class="recepients"><strong>Recipient</strong> {{ invoiceTemplateInfo.recipient }}</div>
-            <form name="templateForm">
+            <form name="templateForm" insert-keyword>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
@@ -432,8 +520,9 @@
                   <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
-                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
-                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+                <textarea id="template-subject" class="form-control insert-field"
+                          name="templateSubject" ng-model="templatesData.subject"
+                          ng-required="true" ng-maxlength="100" wrap="off" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
@@ -448,8 +537,9 @@
                   <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
-                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
-                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+                <textarea id="template-body" class="form-control insert-field"
+                          name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-actions clearfix">
@@ -468,12 +558,32 @@
                      ng-click="restoreDefault(invoiceTemplate)">Restore Default</button>
                 </div>
 
+                <div class="pull-right show-keywords-description">
+                  <a href="javascript:void(0)" class="hit-area has-tooltip"
+                     tooltip-placement="top" tooltip="Show Keywords Description">
+                    <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+                  </a>
+                </div>
+
               </div>
             </form>
 
-            <div class="clearfix" style="padding-top: 15px;" ng-if="keywords && keywords.length">
-              <span style="font-weight: 600;">Available keywords: </span>
-              <span ng-repeat="keyword in keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            <div class="clearfix available-keywords-wrap" ng-if="keywords && keywords.length">
+              <span class="available-keywords-label">Available keywords: </span>
+              <span class="available-keyword" ng-repeat="keyword in keywords" ng-if="!isShowingDescription"
+                    ng-click="insertAtCaret(keyword.keyName)">
+                {{ keyword.keyName }}{{ $last ? '.' : ', ' }}
+              </span>
+
+              <div ng-if="isShowingDescription">
+                <ul>
+                  <li ng-repeat="keyword in keywords">
+                    <span class="available-keyword" ng-click="insertAtCaret(keyword.keyName)">{{ keyword.keyName }}</span>
+                    -
+                    <span>{{ keyword.description }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="template-footer pull-left">{{ invoiceTemplateInfo.description }}</div>
           </div>
@@ -514,7 +624,7 @@
 
           <div class="template-details pull-left" ng-if="vendorTemplate === currentOpenTemplate">
             <div class="recepients"><strong>Recipient</strong> {{ vendorTemplateInfo.recipient }}</div>
-            <form name="templateForm">
+            <form name="templateForm" insert-keyword>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
 
@@ -528,8 +638,9 @@
                   <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
                 </div>
 
-                <input type="text" class="form-control" name="templateSubject" ng-model="templatesData.subject"
-                       ng-required="true" ng-maxlength="100" aria-expanded="true" make-dirty-on-blur>
+                <textarea id="template-subject" class="form-control insert-field"
+                          name="templateSubject" ng-model="templatesData.subject"
+                          ng-required="true" ng-maxlength="100" wrap="off" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
@@ -544,8 +655,9 @@
                   <label class="control-label" ng-message="maxlength" for="">email is too large</label>
                 </div>
 
-                <textarea class="form-control" name="templateBody" ng-model="templatesData.body"
-                          ng-required="true" ng-maxlength="5000" aria-expanded="true" make-dirty-on-blur></textarea>
+                <textarea id="template-body" class="form-control insert-field"
+                          name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" make-dirty-on-blur></textarea>
               </div>
 
               <div class="form-actions clearfix">
@@ -565,12 +677,32 @@
                   </button>
                 </div>
 
+                <div class="pull-right show-keywords-description">
+                  <a href="javascript:void(0)" class="hit-area has-tooltip"
+                     tooltip-placement="top" tooltip="Show Keywords Description">
+                    <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+                  </a>
+                </div>
+
               </div>
             </form>
 
-            <div class="clearfix" style="padding-top: 15px;" ng-if="keywords && keywords.length">
-              <span style="font-weight: 600;">Available keywords: </span>
-              <span ng-repeat="keyword in keywords">{{ keyword.keyName }}{{ $last ? '.' : ',' }} </span>
+            <div class="clearfix available-keywords-wrap" ng-if="keywords && keywords.length">
+              <span class="available-keywords-label">Available keywords: </span>
+              <span class="available-keyword" ng-repeat="keyword in keywords" ng-if="!isShowingDescription"
+                    ng-click="insertAtCaret(keyword.keyName)">
+                {{ keyword.keyName }}{{ $last ? '.' : ', ' }}
+              </span>
+
+              <div ng-if="isShowingDescription">
+                <ul>
+                  <li ng-repeat="keyword in keywords">
+                    <span class="available-keyword" ng-click="insertAtCaret(keyword.keyName)">{{ keyword.keyName }}</span>
+                    -
+                    <span>{{ keyword.description }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="template-footer pull-left">{{ vendorTemplateInfo.description }}</div>
           </div>
