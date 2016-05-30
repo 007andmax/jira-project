@@ -66,9 +66,10 @@
         }
 
         TicketsService.getActualNumber($scope, function (number) {
+          if (!$scope.savingInProcess) {
             $scope.ticketNumber = number;
           }
-        );
+        });
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form && form[fieldName] && ($scope.triedToSaveTicket || form[fieldName].$dirty) && !form[fieldName].$valid;
