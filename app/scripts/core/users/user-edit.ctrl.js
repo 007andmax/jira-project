@@ -12,10 +12,8 @@
 
         $scope.PermissionsService = PermissionsService;
 
-        $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (item.name !== 'Unassigned') {
-            return item;
-          }
+        $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (company) {
+          return !company.isDefault;
         });
 
         $scope.getUsersByCompany = UsersService.getAllByCompanyId;

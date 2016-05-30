@@ -9,7 +9,9 @@
           $scope.currentAddUserTab = 'TEAM_MEMBER';
           $scope.searchFilter = {};
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
-          $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
+          $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id).filter(function (user) {
+            return !user.isDefault;
+          });
           $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
 
             for (var i = $scope.updateSharedUsersList.length - 1; i >= 0; i--) {

@@ -9,7 +9,9 @@
         $scope.searchValue = '';
         $scope.chooseCompany = false;
         $scope.sharedState = SharedStateService.getSharedState('usersHeader');
-        $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companies = CompaniesService.getClientCompanies().filter(function (company) {
+          return !company.isDefault;
+        });
 
         $scope.clearInput = function () {
           $scope.searchValue = '';
