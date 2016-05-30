@@ -63,12 +63,6 @@
 
               pressOnElement = false;
 
-              if (event.ctrlKey && event.keyCode === 86) {
-                var cleanText = editor.text();
-                editor.html(cleanText);
-                $timeout(validateRequired);
-              }
-
               if (event.keyCode === 9) {
 
                 var nextFocusInput = $('[next-after-text-editor]');
@@ -86,6 +80,13 @@
                 }
               }
             }
+          });
+
+          element.on('paste', function (e) {
+            e.preventDefault();
+            var cleanText = e.originalEvent.clipboardData.getData("text/plain");
+            document.execCommand('insertText', false, cleanText);
+            $timeout(validateRequired);
           });
 
           function validateRequired() {
