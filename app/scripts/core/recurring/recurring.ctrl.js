@@ -24,6 +24,10 @@
 
         RecurringService.getAll($scope, function (resp) {
           $scope.invoices = resp;
+
+          if (resp && !resp.length) {
+            $scope.loadingInProgress = false;
+          }
         });
 
         $scope.recurringGraphData = RecurringService.getRecurringGraphData($scope, function () {

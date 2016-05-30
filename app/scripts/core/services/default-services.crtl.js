@@ -20,6 +20,8 @@
         $scope.$watch("servicesData.default.length", function (count) {
           if (count) {
             $scope.services = $scope.servicesData.default;
+          } else if (count === 0) {
+            $scope.loadingFinished('default');
           }
         });
 

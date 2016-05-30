@@ -9666,3 +9666,9 @@ color: blue;
 .free-number-link:hover {
   color: blueviolet;
 }
+.available-keywords-wrap {
+  padding-top: 15px;
+}
+.available-keywords-wrap .available-keywords-label {
+  font-weight: 600;
+}

@@ -17,6 +17,14 @@
 
           $scope.billableData = respData;
 
+          var companyIds = Object.keys(respData).filter(function (id) {
+            return id !== 'staticCopy' && !CompaniesService.getOneById(id).isDefault;
+          });
+
+          if (respData && !companyIds.length) {
+            $scope.loadingInProgress = false;
+          }
+
           var companies = [];
           $scope.totalbillables = 0;
 

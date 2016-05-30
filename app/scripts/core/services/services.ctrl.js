@@ -16,6 +16,10 @@
           if (!item.isDefault) return item;
         });
 
+        if ($scope.companies && !$scope.companies.length) {
+          $scope.loadingFinished('companies');
+        }
+
         $scope.servicesData = ServicesService.getServicesData($scope, false);
 
         $scope.orderServices = {

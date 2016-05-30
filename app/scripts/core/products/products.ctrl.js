@@ -20,6 +20,10 @@
         ProductsService.getAllProducts($scope, function (resp) {
           categories = resp.categories;
           $scope.productsData = resp;
+
+          if (resp && resp.categories && !resp.categories.length) {
+            $scope.loadingInProgress = false;
+          }
         });
 
         $scope.pageTab = 'group';
