@@ -1,0 +1,107 @@
+<div>
+  <div class="template-usage-indicator"
+       ng-show="emailSettingPageDto.activeAndNotDefault[template].isActive"></div>
+
+  <div class="clearfix">
+
+    <h4 class="template-title">{{ templateInfo.title }}</h4>
+
+    <div stop-propagation="click"
+         ng-show="emailSettingPageDto.activeAndNotDefault[template].isNotDefault">
+
+      <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
+         tooltip-placement="top" tooltip="Restore Default">
+        <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(template)"></i>
+      </a>
+
+    </div>
+
+    <a href="javascript:void(0)" class="hit-area close pull-right" ng-click="openEmailTemplate('CLOSE', $event)">
+      <i class="icn-sm icn-remove-token"></i>
+    </a>
+
+    <div class="template-details pull-left" ng-if="template === currentOpenTemplate">
+      <div class="recepients"><strong>Recipient</strong> {{ templateInfo.recipient }}</div>
+      <form name="templateForm" insert-keyword>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
+
+          <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateSubject')}">
+            Subject
+          </label>
+
+          <div ng-messages="templateForm.templateSubject.$error"
+               ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
+            <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
+            <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
+          </div>
+
+                <textarea id="template-subject" class="form-control insert-field"
+                          name="templateSubject" ng-model="templatesData.subject"
+                          ng-required="true" ng-maxlength="100" wrap="off" make-dirty-on-blur></textarea>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateBody')}">
+
+          <label class="control-label" ng-class="{ 'hide': isShowingErrors(templateForm, 'templateBody')}">
+            Email
+          </label>
+
+          <div ng-messages="templateForm.templateBody.$error"
+               ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateBody')}">
+            <label class="control-label" ng-message="required" for="">email field cannot be left empty.</label>
+            <label class="control-label" ng-message="maxlength" for="">email is too large</label>
+          </div>
+
+                <textarea id="template-body" class="form-control insert-field"
+                          name="templateBody" ng-model="templatesData.body"
+                          ng-required="true" ng-maxlength="5000" make-dirty-on-blur></textarea>
+        </div>
+
+        <div class="form-actions clearfix">
+
+          <button class="btn pull-left btn-lg btn-info"
+                  custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
+                  ng-click="saveEmailTemplate(template, templateForm)">Save</button>
+
+          <button class="btn pull-left btn-lg btn-primary"
+                  ng-click="openEmailTemplate('CLOSE', $event)">Cancel
+          </button>
+
+          <div class="pull-left restore-link">or
+            <button href="javascript:void(0)" style="border: none;background: none;color: #4c5c6f;"
+                    custom-disabled="{{ !emailSettingPageDto.activeAndNotDefault[template].isNotDefault }}"
+                    ng-click="restoreDefault(template)">Restore Default</button>
+          </div>
+
+          <div class="pull-right show-keywords-description">
+            <a href="javascript:void(0)" class="hit-area has-tooltip"
+               tooltip-placement="top" tooltip="Show Keywords Description">
+              <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+            </a>
+          </div>
+
+        </div>
+      </form>
+
+      <div class="clearfix available-keywords-wrap" ng-if="keywords && keywords.length">
+        <span class="available-keywords-label">Available keywords: </span>
+              <span class="available-keyword" ng-repeat="keyword in keywords" ng-if="!isShowingDescription"
+                    ng-click="insertAtCaret(keyword.keyName)">
+                {{ keyword.keyName }}{{ $last ? '.' : ', ' }}
+              </span>
+
+        <div ng-if="isShowingDescription">
+          <ul>
+            <li ng-repeat="keyword in keywords">
+              <span class="available-keyword" ng-click="insertAtCaret(keyword.keyName)">{{ keyword.keyName }}</span>
+              -
+              <span>{{ keyword.description }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="template-footer pull-left">{{ templateInfo.description }}</div>
+    </div>
+  </div>
+</div>
