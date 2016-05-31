@@ -158,7 +158,17 @@
           $scope.editInvoice.company = {
             id: company.id
           };
-          $scope.editInvoice.services = [];
+
+          if ($scope.invoice && $scope.invoice.id && company.id === $scope.invoice.company.id) {
+            $scope.editInvoice.services = angular.copy($scope.invoice.services);
+
+            for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
+              $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
+              $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+            }
+          } else {
+            $scope.editInvoice.services = [];
+          }
 
           TaxRatesService.getAllByCompany(company.id, $scope, function (resp) {
             var taxRatesCopy = angular.copy(resp);
