@@ -585,6 +585,15 @@
           url: '/devices/getAgentSettingsByCompany?companyId=' + companyId,
           method: 'GET'
         });
+
+        RealTimeService.subscribe('/device', serviceScope, function (newChange) {
+          console.log(newChange);
+
+          if (newChange.action === 'AGENT_SETTINGS_SAVED') {
+            if (callback) callback(newChange.data);
+          }
+        });
+
         Utils.handleCallback(future, callback);
       }
 
