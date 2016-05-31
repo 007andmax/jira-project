@@ -35,7 +35,12 @@
           } else {
             idInvoiceToSend = ($scope.invoice.id);
           }
-          ReceivableService.resendInvoice(idInvoiceToSend);
+
+          $scope.sending[idInvoiceToSend] = true;
+
+          ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {
+            $scope.sending[idInvoiceToSend] = false;
+          });
         };
 
         $scope.$watch('highlightInvoiceId', function (invoiceId) {

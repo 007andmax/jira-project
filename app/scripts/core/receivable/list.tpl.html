@@ -75,15 +75,16 @@
       <div class="col-5">
         <span class="send-again-txt">{{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}</span>
 
-        <a href="javascript:void(0)" class="hit-area pull-left has-tooltip" ng-click="sentInvoice()"
-           tooltip-placement="top" tooltip="Send Again" tooltip-append-to-body="true">
-          <i class="icn-sm icn-send-again"></i>
-        </a>
+        <button-with-loading-indicator class="pull-left has-tooltip resend-button"
+                                       icn-classes="icn-sm icn-send-again" ng-click="sentInvoice()"
+                                       tooltip-placement="top" tooltip="Send Again"
+                                       loading="sending[getInvoiceId(invoice)]"></button-with-loading-indicator>
       </div>
 
       <div class="col-6">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
       <div class="col-6 group-btns">
         <i class="icn-sm icn-show-password"
+           tooltip-placement="top" tooltip="Invoice Preview"
            modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
            modal-window-class="invoice-modal-not-background"
            mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"

@@ -1,21 +1,24 @@
-<button ng-disabled="!animationFinished">
-    <span ng-if="animationFinished">{{label}}</span>
-    <span ng-if="loading && !loaded" class="windows8">
-        <span class="wBall" id="wBall_1">
-            <span class="wInnerBall"></span>
-        </span>
-        <span class="wBall" id="wBall_2">
-            <span class="wInnerBall"></span>
-        </span>
-        <span class="wBall" id="wBall_3">
-            <span class="wInnerBall"></span>
-        </span>
-        <span class="wBall" id="wBall_4">
-            <span class="wInnerBall"></span>
-        </span>
-        <span class="wBall" id="wBall_5">
-            <span class="wInnerBall"></span>
-        </span>
+<div ng-disabled="!animationFinished">
+  <span ng-if="animationFinished && label">{{label}}</span>
+
+  <i ng-if="animationFinished && !label" class="icn-sm {{ icnClasses }}"></i>
+
+  <span ng-if="loading && !loaded" class="windows8">
+    <span class="wBall" id="wBall_1">
+        <span class="wInnerBall"></span>
     </span>
-    <span ng-if="loaded && !loading && !animationFinished" class="green-checkmark">&#10004;</span>
-</button>
+    <span class="wBall" id="wBall_2">
+        <span class="wInnerBall"></span>
+    </span>
+    <span class="wBall" id="wBall_3">
+        <span class="wInnerBall"></span>
+    </span>
+    <span class="wBall" id="wBall_4">
+        <span class="wInnerBall"></span>
+    </span>
+    <span class="wBall" id="wBall_5">
+        <span class="wInnerBall"></span>
+    </span>
+  </span>
+  <span ng-if="loaded && !loading && !animationFinished" class="green-checkmark">&#10004;</span>
+</div>

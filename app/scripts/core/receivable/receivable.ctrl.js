@@ -17,6 +17,7 @@
           invoices: {}
         };
         $scope.loadingInProgress = true;
+        $scope.sending = [];
 
         $scope.receivedAmountAllTime = ReceivableService.getReceivedPaymentsSumByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
