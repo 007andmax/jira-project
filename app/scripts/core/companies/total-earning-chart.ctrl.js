@@ -16,7 +16,7 @@
           $scope.$watch('totalEarningObj.value', function () {
             $scope.totalEarningValue = obj.value;
             if ($scope.totalEarningValue > 0 && !$scope.isChartHasOpen) {
-              $scope.setCollapsedValue(false);
+              //$scope.setCollapsedValue(false);
               $scope.setChartHasOpenValue(true);
             }
           })

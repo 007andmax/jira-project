@@ -16,7 +16,7 @@
           $scope.$watch('totalReceivablesObj.value', function () {
             $scope.totalReceivablesValue = obj.value;
             if ($scope.totalReceivablesValue > 0 && !$scope.isChartHasOpen) {
-              $scope.setCollapsedValue(false);
+              //$scope.setCollapsedValue(false);
               $scope.setChartHasOpenValue(true);
             }
           })
