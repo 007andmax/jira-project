@@ -80,7 +80,7 @@
           R: FULL,
           U: FULL,
           D: ADMIN,
-          U_ACCOUNT_ENABLED: ADMIN
+          U_ACCOUNT_ENABLED: ['ROOT']
         },
         LEADS: {
           C: ADMIN,
