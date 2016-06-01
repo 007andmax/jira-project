@@ -1422,3 +1422,7 @@ span.sort-span {
   position: absolute;
   top: 10px;
 }
+.image-preview-tpl {
+  width: 150px;
+  height: 150px;
+}

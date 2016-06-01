@@ -23,6 +23,7 @@
           'image/jpeg': 'jpeg',
           'image/bmp': 'bmp',
           'image/gif': 'gif',
+          'image/png': 'png',
           'application/vnd.oasis.opendocument.text': 'odt',
           'application/vnd.oasis.opendocument.spreadsheet': 'ods',
           'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',

@@ -209,15 +209,18 @@
 
         </div>
 
-        <ul class="attachments clearfix">
+        <ul class="attachments clearfix" style="position: relative;">
 
           <li ng-repeat="attachment in ticketDetails.attachments"
+              ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
+              popover-template="'/html/scripts/common/templates/image-preview.tpl.html'"
+              popover-trigger="mouseenter" popover-enable="{{ !!attachmentType['image/' + type] }}"
               class="{{ attachmentImageClass[attachment.file.contentType] }}">
 
             <div class="file-icon-name">
               <span class="file-icon icn-lg"></span>
               <span class="file-ext">
-                {{ attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType] }}
+                {{ type }}
               </span>
             </div>
 
@@ -327,27 +330,30 @@
 
               <p class="ticket-update-message" ng-if="ticketUpdate.type === 'NOTE'" ng-bind-html="getUpdateNote()"></p>
 
-              <ul class="attachments clearfix"
+              <ul class="attachments clearfix" style="position: relative;"
                   ng-if="ticketUpdate.type === 'NOTE' && ticketUpdate.attachments.length > 0">
 
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
-                    ng-repeat="updateAttachment in ticketUpdate.attachments">
+                    ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
+                    popover-template="'/html/scripts/common/templates/image-preview.tpl.html'"
+                    popover-trigger="mouseenter" popover-enable="{{ !!attachmentType['image/' + type] }}"
+                    ng-repeat="attachment in ticketUpdate.attachments">
 
                   <div class="file-icon-name">
                     <span class="file-icon icn-lg"></span>
                     <span class="file-ext">
-                      {{ updateAttachment.file.name.match(attachmentTypePattern)[0] || attachmentType[updateAttachment.file.contentType] }}
+                      {{ type }}
                     </span>
                   </div>
 
-                  <div class="file-name" ng-bind="updateAttachment.file.name"></div>
+                  <div class="file-name" ng-bind="attachment.file.name"></div>
 
                   <div class="onhover">
-                    <span class="file-name" ng-bind="updateAttachment.file.name"></span>
-                    <span class="file-size">{{ updateAttachment.file.size | fileSizeFilter }}</span>
+                    <span class="file-name" ng-bind="attachment.file.name"></span>
+                    <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
                     <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
                        data-placement="top" tooltip="Download"
-                       ng-click="downloadAttachment(updateAttachment.file.id, updateAttachment.file.name)">
+                       ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                       <span class="icn-sm icn-attachments-download"></span>
                     </a>
                   </div>
