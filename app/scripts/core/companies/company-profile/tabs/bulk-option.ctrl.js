@@ -32,37 +32,30 @@
         };
 
         $scope.changeUserSubscription = function (subsc) {
-          if (subsc === 'invoice' && $scope.selectUsersIds.length === $scope.users.length && $scope.usersSbscr[subsc]) {
-            var confirmMessage = 'At least one user must have invoices update subscription.',
-              confirmButton = 'Ok';
-            UserConfirmationsService.show(confirmMessage, confirmButton, true);
-          } else {
-            $scope.disabledSubscr = true;
-            $scope.usersSbscr[subsc] = !$scope.usersSbscr[subsc];
-            SubscriptionsService.changeSubscriptionsForUsers($scope.selectUsersIds, subsc, $scope.usersSbscr[subsc], function () {
-              $scope.disabledSubscr = false;
-            });
-          }
+          $scope.disabledSubscr = true;
+          $scope.usersSbscr[subsc] = !$scope.usersSbscr[subsc];
+          SubscriptionsService.changeSubscriptionsForUsers($scope.selectUsersIds, subsc, $scope.usersSbscr[subsc], function () {
+            $scope.disabledSubscr = false;
+          });
         };
 
         $scope.archiveUsers = function () {
           var confirmMessage = 'Do you want to archive ',
             confirmButton = 'Yes';
 
-          if ($scope.selectUsersIds.length !== $scope.users.length) {
+          confirmMessage += $scope.selectUsersIds.length === 1 ? '1 user' : $scope.selectUsersIds.length + ' users';
 
-            confirmMessage += $scope.selectUsersIds.length === 1 ? '1 user' : $scope.selectUsersIds.length + ' users';
-
-            UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+          UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
+            try {
               UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function () {
                 $scope.companyProfileHeader.unCheckAll();
               });
-            });
-          } else {
-            confirmMessage = 'U can\'t archive all users. At least one must remain.';
-            confirmButton = 'Ok';
-            UserConfirmationsService.show(confirmMessage, confirmButton, true);
-          }
+            } catch (err) {
+              confirmButton = 'Ok';
+              UserConfirmationsService.show(err, confirmButton, true);
+            }
+          });
+
         };
 
         $scope.removeDevices = function () {
@@ -79,6 +72,14 @@
         };
 
         $scope.uncheckSelect = $scope.companyProfileHeader.unCheckAll;
+
+        $scope.isInvoiceSubscriptionForbidden = function () {
+          return $scope.users.filter(function (user) {
+              return user.subscription.invoice;
+            }).length === $scope.selectUsersIds.filter(function (id) {
+              return UsersService.getOneById(id).subscription.invoice;
+            }).length;
+        };
 
       }]);
 

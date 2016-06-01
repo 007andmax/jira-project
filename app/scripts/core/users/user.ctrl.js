@@ -103,7 +103,12 @@
             confirmButton = 'Yes';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            UsersService.deleteOrArchiveUser($scope.user.id, true);
+            try {
+              UsersService.deleteOrArchiveUser($scope.user.id, true);
+            } catch (err) {
+              confirmButton = 'Ok';
+              UserConfirmationsService.show(err, confirmButton, true);
+            }
           });
         };
 

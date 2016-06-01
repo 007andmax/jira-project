@@ -67,6 +67,11 @@
               companyData.contacts = [getEmptyContact()];
             }
 
+            $scope.isLastInvoiceSubsciption = companyData.contacts[0].subscription.invoice &&
+              UsersService.getAllByCompanyId($stateParams.companyId).filter(function (user) {
+                return user.subscription.invoice;
+              }).length <= 1;
+
             for (var i = 0; i < companyData.companyAssociations.length; i++) {
               var association = companyData.companyAssociations[i];
               $scope.vendorsSelection[association.vendor.id] = true;
@@ -98,8 +103,9 @@
           });
 
         } else {
+          $scope.isLastInvoiceSubsciption = true;
           $scope.editCompany = {
-            addresses: [{isPrimary: true}],
+            addresses: [{ isPrimary: true }],
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: [],
@@ -170,7 +176,7 @@
 
             CompaniesService.save($scope.editCompany, function (resp) {
               $scope.savingInProcess = false;
-              $state.go('companyProfile', {companyId: resp.id || resp});
+              $state.go('companyProfile', { companyId: resp.id || resp });
             })
           } else {
             $scope.triedToSave = true;
@@ -341,27 +347,6 @@
           }
         };
 
-        $scope.changeInvoiceSubscription = function (val) {
-
-          if (!($scope.editCompany && $scope.editCompany.contacts && $scope.editCompany.contacts.length > 0)) {
-            return;
-          }
-
-          $timeout(function () {
-
-            var countInvoiceSubscr = 0;
-
-            for (var i = 0; i < $scope.editCompany.contacts.length; i++) {
-              if ($scope.editCompany.contacts[i].subscription.invoice) {
-                countInvoiceSubscr++
-              }
-            }
-
-            $scope.showSubscribeError = countInvoiceSubscr < 1;
-
-          })
-        };
-
         $scope.movingService = function (originService, form) {
 
           if (originService === 'new-service') {
@@ -456,11 +441,9 @@
           }
         };
 
-        $scope.$watch('editCompany.contacts.length', $scope.changeInvoiceSubscription);
-
         function getEmptyContact() {
           return {
-            subscription: {invoice: true},
+            subscription: { invoice: true },
             avatar: {
               scale: 50
             }

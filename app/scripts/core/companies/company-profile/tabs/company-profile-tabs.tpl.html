@@ -89,7 +89,7 @@
                 </a>
               </li>
 
-              <li ng-click="changeUserSubscription('invoice')">
+              <li ng-click="changeUserSubscription('invoice')" ng-if="!isInvoiceSubscriptionForbidden()">
                 <a tabindex="-1" href="javascript:void(0)">
                   <div class="clearfix">
                     <label class="control checkbox pull-left">

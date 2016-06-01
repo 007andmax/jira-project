@@ -89,6 +89,11 @@
               userEnabled: user.userEnabled
             };
 
+            $scope.isLastInvoiceSubsciption = userSubscription.invoice &&
+              UsersService.getAllByCompanyId(user.company.id).filter(function (user) {
+                return user.subscription.invoice;
+              }).length <= 1;
+
           } else {
             $scope.editUser = undefined;
           }

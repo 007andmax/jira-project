@@ -398,11 +398,23 @@
 
       function deleteOrArchiveUser(ids, isArchive, callback) {
 
-        if (!ids) throw 'ids is required!';
+        if (!ids) {
+          throw 'ids is required!';
+        }
 
-        if (isArchive === undefined)  throw 'isArchive is required!';
+        if (isArchive === undefined) {
+          throw 'isArchive is required!';
+        }
 
-        if (!Array.isArray(ids)) ids = [ids];
+        if (!Array.isArray(ids)){
+          ids = [ids];
+        }
+
+        var errorMessage = isArchiveUsersAllowed(ids);
+
+        if (errorMessage) {
+          throw errorMessage;
+        }
 
         var future = $http({
           url: '/users/' + !!isArchive,
@@ -423,6 +435,35 @@
         });
 
         Utils.handleCallback(future, callback);
+      }
+
+      function isArchiveUsersAllowed(ids) {
+        var companyId = getOneById(ids[0]).company.id,
+          users = storage.usersByCompanies[companyId],
+          errorMessage = '';
+
+        var isAllUsersSelected = ids.length === users.length;
+
+        var isPrimaryContactSelected = ids.filter(function (id) {
+          return getOneById(id).isContact;
+        }).length;
+
+        var isAllWithInvoiceSubscriptionSelected =
+          users.filter(function (user) {
+            return user.subscription.invoice;
+          }).length === ids.filter(function (id) {
+            return getOneById(id).subscription.invoice;
+          }).length;
+
+        if (isAllUsersSelected) {
+          errorMessage = 'U can\'t archive all users. At least one must remain.';
+        } else if (isPrimaryContactSelected) {
+          errorMessage = 'U can\'t archive primary contact.';
+        } else if (isAllWithInvoiceSubscriptionSelected) {
+          errorMessage = 'U can\'t archive all user with invoice subscription. At least one must remain.';
+        }
+
+        return errorMessage;
       }
 
       return {

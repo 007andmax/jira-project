@@ -33,11 +33,16 @@
           var confirmButton = 'Yes';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            UsersService.deleteOrArchiveUser($scope.user.id, true, function () {
-              if (delete $scope.selectedUsers[$scope.user.id]) {
-                $scope.changeSelectedUsers();
-              }
-            })
+            try {
+              UsersService.deleteOrArchiveUser($scope.user.id, true, function () {
+                if (delete $scope.selectedUsers[$scope.user.id]) {
+                  $scope.changeSelectedUsers();
+                }
+              });
+            } catch (err) {
+              confirmButton = 'Ok';
+              UserConfirmationsService.show(err, confirmButton, true);
+            }
           });
         };
 

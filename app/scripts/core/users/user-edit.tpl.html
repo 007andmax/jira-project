@@ -181,7 +181,7 @@
                   </a>
                 </li>
 
-                <li ng-if="getUsersByCompany(userCompany.id).length > 1">
+                <li ng-if="isCreation || !isLastInvoiceSubsciption">
                   <a tabindex="-1" href="javascript:void(0)"
                      qt-checkbox ng-model="editUser.subscription.invoice">
 

@@ -56,7 +56,12 @@
             confirmButton = 'Yes';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            UsersService.deleteOrArchiveUser(user.id, false);
+            try {
+              UsersService.deleteOrArchiveUser(user.id, false);
+            } catch (err) {
+              confirmButton = 'Ok';
+              UserConfirmationsService.show(err, confirmButton, true);
+            }
           });
         }
 
