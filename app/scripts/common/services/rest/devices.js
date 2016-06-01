@@ -435,7 +435,7 @@
             Utils.defineReadOnlyProperty(info, "networkScan", JSON.parse(info.networkScan));
           }
 
-          RealTimeService.subscribe('/netScan', scope, function (newChange) {
+          RealTimeService.subscribe('/netScan?targetId=' + companyId, scope, function (newChange) {
             console.log(newChange);
             if (newChange.action === 'NETWORK_SCAN') {
               if (newChange.data === "finished") {
@@ -581,20 +581,34 @@
           throw "companyId is required!"
         }
 
-        var future = $http({
-          url: '/devices/getAgentSettingsByCompany?companyId=' + companyId,
-          method: 'GET'
-        });
+        var agentSettings = {};
 
-        RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-          console.log(newChange);
+        $http.get('/devices/getAgentSettingsByCompany?companyId=' + companyId).then(function (resp) {
+          agentSettings = resp.data;
 
-          if (newChange.action === 'AGENT_SETTINGS_SAVED') {
-            if (callback) callback(newChange.data);
+          if (callback) {
+            callback(agentSettings);
           }
         });
 
-        Utils.handleCallback(future, callback);
+        RealTimeService.subscribe('/agentSettings?targetId=' + companyId, serviceScope, function (newChange) {
+          console.log(newChange);
+
+          if (newChange.action === 'MASTER_AGENT_CHANGED') {
+
+            agentSettings.masterAgent = newChange.data;
+
+            if (callback) {
+              callback(agentSettings);
+            }
+          }
+        });
+
+        if (callback) {
+          callback(agentSettings);
+        }
+
+        return agentSettings;
       }
 
       function getAllAgentsAndLogin(companyId, callback) {
