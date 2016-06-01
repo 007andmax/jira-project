@@ -201,13 +201,17 @@
             var invoice;
 
             if (newChange.data.recurringInvoice) {
-              var recurringinvoice = Utils.findById(data.list, newChange.data.recurringInvoice.id);
+              var recurringInvoice = Utils.findById(data.list, newChange.data.recurringInvoice.id);
 
-              if (!recurringinvoice) {
+              if (!recurringInvoice) {
                 console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING RECURRING INVOICE-----!!!!!!!")
               }
 
-              invoice = Utils.findById(recurringinvoice.invoices, newChange.data.id);
+              invoice = Utils.findById(recurringInvoice.invoices, newChange.data.id);
+
+              if (!invoice) {
+                invoice = recurringInvoice;
+              }
 
             } else {
               invoice = Utils.findById(data.list, newChange.data.id);
@@ -320,7 +324,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function receivePayment(paymentMethod, invoiceIds, callback) {
+    function receivePayment(paymentMethod, invoiceIds, isSendNotification, callback) {
 
       if (!paymentMethod) {
         throw 'paymentMethod is required!'
@@ -330,10 +334,14 @@
         throw 'invoiceIds is required!'
       }
 
+      if (isSendNotification === undefined) {
+        throw 'isSendNotification is required!';
+      }
+
       var future = $http({
         url: '/receivable/receivePayment',
         method: 'POST',
-        params: { paymentMethod: paymentMethod.toUpperCase() },
+        params: { paymentMethod: paymentMethod.toUpperCase(), isSendNotification: isSendNotification },
         data: invoiceIds
       });
 
