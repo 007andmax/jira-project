@@ -85,7 +85,7 @@
             </div>
           </li>
 
-          <li class="invoice-table" qt-toggle-slider
+          <li class="invoice-table" qt-toggle-slider qt-ts-toggler style="cursor: pointer;"
               ng-repeat="invoice in invoices | orderBy : orderByForInvoices : orderInvoices.reverse"
               ng-controller="quicktech.core.recurring.invoiceCtrl"
               ng-hide="showCompanyId && (showCompanyId !== invoice.company.id)"
@@ -95,7 +95,7 @@
             <div>
               <div class="table-invoice-item clearfix" ng-hide="editInvoiceId === invoice.id">
 
-                <div style="cursor: initial">{{ companyOfInvocie.name }}</div>
+                <div>{{ companyOfInvocie.name }}</div>
 
                 <div order-title="invoice.title" class="long-text"></div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
@@ -108,21 +108,18 @@
                     {{ invoice.total | currency:'$':2 }}
                   </span>
 
-                  <div class="currency-icons">
+                  <div class="currency-icons" stop-propagation="click">
                     <button-with-loading-indicator class="btn btn-primary force-create"
                                                    label="Force Create" loading="forceCreating[invoice.id]"
                                                    ng-click="forceCreate(invoice.id)"></button-with-loading-indicator>
 
                     <a>
                       <i class="icn-sm icn-description"
-                         popover="{{ invoice.memo }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
+                         popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
                     </a>
 
                     <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
                           ng-click="toogleEditForm(invoice.id)"></i></a>
-
-                    <a><i class="icn-sm icn-desk" tooltip="open" tooltip-placement="top" tooltip-append-to-body="true"
-                          qt-ts-toggler></i></a>
 
                     <a custom-disabled="{{ disabledDelete }}">
                       <i class="icn-sm icn-delete"

@@ -315,7 +315,7 @@
   font-weight: 400;
   color: #000;
   text-align: center;
-  cursor: auto;
+  /*cursor: auto;*/
 }
 li.invoice-table{
   cursor: auto;
