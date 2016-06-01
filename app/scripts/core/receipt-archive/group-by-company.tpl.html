@@ -29,7 +29,12 @@
               show-model-element="{{ 'showInvoice-' + invoice.id }}">
 
             <div class="col-1">
-              <div class="checkbox-caption">{{ invoice.number }}</div>
+              <div class="checkbox-caption free-number-link"
+                   tooltip-placement="top" tooltip="Invoice Preview"
+                   modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+                   modal-window-class="invoice-modal-not-background"
+                   mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+                   mw-controller="quicktech.core.receivable.invoicePreviewCtrl">{{ invoice.number }}</div>
             </div>
 
             <div class="col-2">{{ invoice.date | date:'dd MMM yyyy' }}</div>

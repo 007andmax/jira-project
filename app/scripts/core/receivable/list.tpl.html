@@ -58,7 +58,14 @@
           <span class="control-indicator"></span>
         </label>
 
-        <div class="checkbox-caption">{{ invoiceProperty('number') }}</div>
+        <a class="checkbox-caption free-number-link"
+             tooltip-placement="top" tooltip="Invoice Preview" tooltip-append-to-body="true"
+             modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+             modal-window-class="invoice-modal-not-background"
+             mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+             mw-controller="quicktech.core.receivable.invoicePreviewCtrl">
+          {{ invoiceProperty('number') }}
+        </a>
 
       </div>
 
@@ -77,18 +84,12 @@
 
         <button-with-loading-indicator class="pull-left has-tooltip resend-button"
                                        icn-classes="icn-sm icn-send-again" ng-click="sentInvoice()"
-                                       tooltip-placement="top" tooltip="Send Again"
+                                       tooltip-placement="top" tooltip="Send Again" tooltip-append-to-body="true"
                                        loading="sending[getInvoiceId(invoice)]"></button-with-loading-indicator>
       </div>
 
       <div class="col-6">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
       <div class="col-6 group-btns">
-        <i class="icn-sm icn-show-password"
-           tooltip-placement="top" tooltip="Invoice Preview"
-           modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
-           modal-window-class="invoice-modal-not-background"
-           mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-           mw-controller="quicktech.core.receivable.invoicePreviewCtrl"></i>
         <i class="icn-sm icn-remove-token hide"></i>
         <i class="icn-sm icn-delete hide" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"></i>
       </div>

@@ -80,7 +80,14 @@
                 <span class="control-indicator"></span>
               </label>
 
-              <div class="checkbox-caption">{{ invoiceProperty('number') }}</div>
+              <div class="checkbox-caption free-number-link"
+                   tooltip-placement="top" tooltip="Invoice Preview"
+                   modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+                   modal-window-class="invoice-modal-not-background"
+                   mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+                   mw-controller="quicktech.core.receivable.invoicePreviewCtrl">
+                {{ invoiceProperty('number') }}
+              </div>
 
             </div>
 
@@ -104,12 +111,6 @@
 
             <div class="col-5">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
             <div class="col-6 group-btns">
-              <i class="icn-sm icn-show-password"
-                 tooltip-placement="top" tooltip="Invoice Preview"
-                 modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
-                 modal-window-class="invoice-modal-not-background"
-                 mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-                 mw-controller="quicktech.core.receivable.invoicePreviewCtrl"></i>
               <i class="icn-sm icn-remove-token hide"></i>
               <i class="icn-sm icn-delete hide" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"></i>
             </div>
