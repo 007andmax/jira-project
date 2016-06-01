@@ -9030,7 +9030,7 @@ button.close {
   margin-bottom: 0;
 }
 .modal-receive-payment .modal-footer .total-amount {
-  margin-top: 9px;
+  margin-top: 3px;
 }
 @-moz-document url-prefix() {
   .modal-receive-payment .modal-header {

@@ -84,8 +84,17 @@
       </div>
 
       <div class="pull-right total-amount">
-        <span class="text-muted">Total amount</span>
-        <strong>{{ receivePaymentSum | currency: '$': 2 }}</strong>
+        <div style="display: inline-block; margin-right: 30px;">
+          <label class="control checkbox pull-left">
+            <input type="checkbox" ng-model="invoiceToReceive.isSendNotification">
+            <span class="control-indicator"></span>
+          </label>
+          <div class="checkbox-caption">Send Notification</div>
+        </div>
+        <div style="display: inline-block; float: right; margin-top: 9px;">
+          <span class="text-muted">Total amount</span>
+          <strong class="ng-binding">{{ receivePaymentSum | currency: '$': 2 }}</strong>
+        </div>
       </div>
 
     </div>
