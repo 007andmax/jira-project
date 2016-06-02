@@ -188,9 +188,9 @@
 
         });
 
-        $scope.$watch('ticketAssignTo', function () {
-          $scope.ticket.assignedUser = $scope.ticketAssignTo ? $scope.ticketAssignTo.id : '';
-        });
+        $scope.setAssignedUser = function (user) {
+          $scope.ticket.assignedUser = user.id;
+        };
 
         $scope.addAttachmentFiles = function (file) {
 
