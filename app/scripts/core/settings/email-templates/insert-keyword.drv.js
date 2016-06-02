@@ -6,7 +6,7 @@
     function () {
       return {
         restrict: 'A',
-        link: function (scope, element) {
+        link: function (scope) {
           var fieldsForInsert = document.querySelectorAll('.insert-field'),
             lastSelected = fieldsForInsert[fieldsForInsert.length - 1];
 
@@ -47,6 +47,7 @@
               lastSelected.focus();
             }
             lastSelected.scrollTop = scrollPos;
+            angular.element(lastSelected).data('$ngModelController').$setViewValue(lastSelected.value);
             return false;
           }
         }

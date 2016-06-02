@@ -76,8 +76,9 @@
 
           <div class="pull-right show-keywords-description">
             <a href="javascript:void(0)" class="hit-area has-tooltip"
-               tooltip-placement="top" tooltip="Show Keywords Description">
-              <i class="icn-sm icn-show-password" ng-click="isShowingDescription = !isShowingDescription"></i>
+               tooltip-placement="top" tooltip="{{ (isShowingDescription ? 'Hide' : 'Show') }} Keywords Description">
+              <i class="icn-sm {{ 'icn-' + (isShowingDescription ? 'hide' : 'show') + '-password' }}" 
+                 ng-click="isShowingDescription = !isShowingDescription"></i>
             </a>
           </div>
 
