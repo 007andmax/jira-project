@@ -54,12 +54,23 @@
   margin-right: 1px;
 }
 
+.topNavbar-create .create-new-wrap {
+  display: flex;
+  margin: 0 5px;
+  height: 100%;
+}
+
+.topNavbar-create .create-new-label {
+  color: white !important;
+  margin: auto 10px auto 0;
+}
+
 .topNavbar-create .dropdown-menu{
   min-width: 116px;
 }
 
 .topNavbarRight{
-  position: fixed;
+  position: fixed !important;
   right: 0;
   width: 280px;
   z-index: 2;
@@ -106,9 +117,22 @@
 }
 
 .topNavbar-logout{
-  margin-left: 29px;
-  padding-top: 10px;
-  margin-right: 28px;
+  padding: 0 28px 0 15px;
+}
+
+.topNavbar-logout > a {
+  padding: unset !important;
+  display: inline !important;
+}
+
+.topNavbar-logout > a > i {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-left: 10px;
+}
+
+.topNavbar-logout > a > span {
+  line-height: 30px;
 }
 
 .topNavbar-filter{
@@ -138,4 +162,67 @@
   cursor: pointer;
   line-height: 0;
   margin-left: 8px;
+}
+
+.topNavbarRight .dropdown .dropdown-menu > li {
+
+}
+
+.topNavbarRight .dropdown:not(.open) .icn-expand{
+  display: inline-block;
+}
+
+.topNavbarRight .dropdown:not(.open) .icn-collapse{
+  display: none;
+}
+
+.topNavbarRight .dropdown.open .icn-expand {
+  display: none;
+}
+
+.topNavbarRight .dropdown.open .icn-collapse {
+  display: inline-block;
+}
+
+.topNavbarRight .dropdown {
+  display: inline-block;
+  float: right;
+}
+
+.topNavbarRight .nickname-wrap {
+  cursor: pointer;
+  float: right;
+  margin: 0 40px;
+}
+
+.topNavbarRight .nickname-wrap .nickname {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 16px;
+  line-height: 38px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.topNavbarRight .nickname-wrap .on,
+.topNavbarRight .nickname-wrap .busy {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.topNavbarRight .settings-href {
+  display: inline-block;
+  float: right;
+  padding: 5px;
+  margin: 7px;
+  border: rgba(128, 128, 128, 0.5) 1px solid;
+  border-radius: 2px;
+}
+
+.topNavbarRight .settings-href:hover {
+  border: gray 1px solid;
 }
