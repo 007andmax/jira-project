@@ -143,8 +143,7 @@
               if ($scope.invoiceToSent[companyId].checked) {
                 disabledCount++;
                 $scope.selectableCompanyId = companyId;
-              }
-              else {
+              } else {
                 for (var invoiceId in $scope.invoiceToSent[companyId].invoices) {
                   if ($scope.invoiceToSent[companyId].invoices[invoiceId]) {
                     disabledCount++;

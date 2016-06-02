@@ -145,14 +145,14 @@
           <li ng-class="{active: $state.includes('accounting')}">
             <a href="javascript:void(0)" ng-click="stateGo($event, 'accounting')">
               <i class="nav-icon icn-billable icn-lg"></i> Billable
-              <span class="badge">{{ ticketCounts.BILLABLE }}</span>
+              <span class="badge" ng-if="ticketCounts.BILLABLE">{{ ticketCounts.BILLABLE }}</span>
             </a>
           </li>
 
           <li ng-class="{active: $state.includes('receivable')}">
             <a href="javascript:void(0)" ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
               <i class="nav-icon icn-receivable icn-lg"></i> Receivable
-              <span class="badge">{{ ticketCounts.RECEIVABLE }}</span>
+              <span class="badge" ng-if="ticketCounts.RECEIVABLE">{{ ticketCounts.RECEIVABLE }}</span>
             </a>
           </li>
 

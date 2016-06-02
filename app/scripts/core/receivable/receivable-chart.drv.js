@@ -48,7 +48,7 @@
               chartHeight = chart.height(),
               maxValue = getMaxValue(chartData),
               coef = Math.pow(10, ((maxValue.toFixed(0)).length - 2)),
-              maxMark = (Math.ceil(maxValue / coef)) * coef,
+              maxMark = Math.round(Math.ceil(maxValue / coef) * coef),
               heightValueCoef = 0.8 * chartHeight / maxMark;
 
             interval = {
@@ -105,7 +105,7 @@
                 y2: (interval.bottomNullMark - (heightValueCoef * chartData[i].receivedOnDay)),
                 value1: chartData[i].total,
                 value2: chartData[i].receivedOnDay,
-                date: chartData[i].date,
+                date: chartData[i].date
               });
 
               interval.leftCircle += interval.betweenCircle;
