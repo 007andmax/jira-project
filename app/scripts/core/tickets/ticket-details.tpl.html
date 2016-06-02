@@ -215,6 +215,7 @@
               ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
               popover-template="'/html/scripts/common/templates/image-preview.tpl.html'"
               popover-trigger="mouseenter" popover-enable="{{ !!attachmentType['image/' + type] }}"
+              popover-append-to-body="true"
               class="{{ attachmentImageClass[attachment.file.contentType] }}">
 
             <div class="file-icon-name">
@@ -337,6 +338,7 @@
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
                     popover-template="'/html/scripts/common/templates/image-preview.tpl.html'"
                     popover-trigger="mouseenter" popover-enable="{{ !!attachmentType['image/' + type] }}"
+                    popover-append-to-body="true"
                     ng-repeat="attachment in ticketUpdate.attachments">
 
                   <div class="file-icon-name">

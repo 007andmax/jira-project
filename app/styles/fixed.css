@@ -1423,6 +1423,6 @@ span.sort-span {
   top: 10px;
 }
 .image-preview-tpl {
-  width: 150px;
-  height: 150px;
+  width: 100% !important;
+  height: 100% !important;
 }
