@@ -65,23 +65,23 @@
                 }
               }
             });
-
-            DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
-              $scope.allowAgentInstall = resp.allowAgentInstall;
-              if (resp.masterAgentId !== lastMasterAgentId) {
-                lastMasterAgentId = resp.masterAgentId;
-
-                if (lastMasterAgentId) {
-                  DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
-                    $scope.scanDevices = resp;
-                  });
-                } else {
-                  $scope.scanDevices = undefined;
-                }
-              }
-            });
           }
 
+        });
+
+        DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
+          $scope.allowAgentInstall = resp.allowAgentInstall;
+          if (resp.masterAgentId !== lastMasterAgentId) {
+            lastMasterAgentId = resp.masterAgentId;
+
+            if (lastMasterAgentId) {
+              DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
+                $scope.scanDevices = resp;
+              });
+            } else {
+              $scope.scanDevices = undefined;
+            }
+          }
         });
 
         $scope.toggleCollapsed = function () {
