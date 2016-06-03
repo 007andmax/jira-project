@@ -120,9 +120,9 @@
 
 .company-profile-content .bulk-option {
   position: absolute;
-  right: 0;
+  right: -75px;
   padding: 15px 20px 15px 15px;
-  top: 23px;
+  top: 50px;
   margin-right: -30px;
 }
 
