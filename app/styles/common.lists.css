@@ -1317,19 +1317,19 @@ Devices tab
 }
 @media only screen and (min-width: 2000px){
   .qt-receivable-number>li>.col-1{
-    width: 257px;
+    width: 225px;
   }
   .qt-receivable-number>li>.col-2{
-    width: calc(100% - 1040px);
+    width: calc(100% - 1125px);
   }
   .qt-receivable-number>li>.col-3{
-    width: 243px;
+    width: 220px;
   }
   .qt-receivable-number>li>.col-4{
-    width: 250px;
+    width: 200px;
   }
   .qt-receivable-number>li>.col-5{
-    width: 226px;
+    width: 180px;
   }
   .qt-receivable-number>li>.col-6{
     width: 64px;

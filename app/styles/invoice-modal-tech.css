@@ -183,6 +183,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
   }
 }
 .inv-modal .icn-print{
+  background-image: url('../images/sprites-s76c759f188.png');
   background-position: -3835px -206px;
   width: 12px;
   height: 12px;
@@ -194,6 +195,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
   background-position: -412px 0;
   width: 12px;
   height: 14px;
+}
+.inv-modal .icn-download-white{
+  background-image: url('../images/sprites-s76c759f188.png');
 }
 .inv-modal .icn-download:hover,.inv-modal .icn-download:active, .inv-modal :hover > .icn-download, .inv-modal :active > .icn-download{
   background-position: -390px 0;
