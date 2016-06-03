@@ -506,7 +506,8 @@ hr {
   top: auto;
   bottom: 0;
 }
-.avatar > i.on {
+.avatar > i.on,
+.nickname-wrap i.on {
   background-color: #4caf50;
 }
 .avatar > i.new-notification {
@@ -515,7 +516,8 @@ hr {
 .avatar > i.off {
   background-color: #7c8999;
 }
-.avatar > i.busy {
+.avatar > i.busy,
+.nickname-wrap i.busy  {
   background-color: #e53935;
 }
 .avatar > i.away {

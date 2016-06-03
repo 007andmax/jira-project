@@ -21,10 +21,11 @@
         <div class="topNavbar-create pull-right">
           <div class="dropdown">
 
-            <div class="btn btn-success has-tooltip"
-                 tooltip-placement="bottom" tooltip="Create..."
-                 data-toggle="dropdown" aria-haspopup="true">
-              <i class="icn-sm icn-plus"></i>
+            <div class="btn btn-success has-tooltip" data-toggle="dropdown">
+              <div class="create-new-wrap">
+                <span class="create-new-label">Create New</span>
+                <i class="icn-sm icn-plus"></i>
+              </div>
             </div>
 
             <ul class="dropdown-menu dropdown-menu-right">
@@ -66,76 +67,31 @@
 
     <div class="topNavbarRight pull-right">
 
-      <div class="topNavbar-logout pull-right">
-        <a href="javascript:void(0)" logout-btn class="hit-area ha-20-20 has-tooltip"
-           tooltip="Logout" tooltip-placement="bottom">
-          <i class="icn-md icn-logout"></i>
-        </a>
-      </div>
+      <div dropdown>
+        <div class="nickname-wrap" dropdown-toggle>
+          <i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"
+             ng-click="currentUser.online = !currentUser.online"></i>
 
-      <div class="topNavbar-user avatar pull-right dropdown">
+          <div class="nickname">{{ getUserName(currentUser) }}</div>
 
-        <img ng-src="{{ getUserAvatarUrl(currentUser) }}" class="avatar-38 img-circle radius"
-             alt="..." data-toggle="dropdown" aria-haspopup="true">
-        <i class="new-notification right transition"></i>
-
-        <div class="dropdown-menu dropdown-menu-right dropdown-avatar">
-          <div class="details">
-            <div class="details-user clearfix">
-              <i class="on"></i>
-
-              <strong class="pull-left">{{ getUserName(currentUser) }}</strong>
-
-              <div class="user-badges pull-right">
-                <i ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"
-                   class="icn-sm badge-super-admin pull-right persistent-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true"
-                   tooltip="You're Super Admin">
-                </i>
-                <i ng-show="currentUser.role === 'ADMIN'"
-                   class="icn-sm badge-admin pull-right persistent-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true"
-                   tooltip="You're Admin">
-                </i>
-              </div>
-
-            </div>
-
-            <div class="details-email">
-              <span class="text-muted">{{ currentUser.primaryEmail }}</span>
-            </div>
-
-            <div class="details-setting">
-              <a href="javascript:void(0)">Agents</a>
-              <span class="dot-sep"></span>
-              <a href="javascript:void(0)" ui-sref="settings">Account Setting</a>
-            </div>
-
-            <div class="details-download-agent">
-              <div class="btn btn-info has-tooltip" style="width:98px;"
-                   tooltip-placement="top" tooltip="Download Agent">
-                <i class="icn-lg icn-download-agent"></i>
-              </div>
-            </div>
-
-          </div>
-
-          <!--<div class="notifications custom-scroll">-->
-          <!--<ul class="recent-activities-by">-->
-          <!--<li class="list-users" ng-repeat="activity in activities"-->
-          <!--ng-controller="quicktech.core.rightPanel.activityCtrl"-->
-          <!--ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">-->
-
-          <!--</li>-->
-          <!--</ul>-->
-          <!--</div>-->
-
-          <!--<div class="bottom">-->
-          <!--<div class="btn btn-block btn-default btn-lg dropdown-avatar-bottom-content">SEE ALL</div>-->
-          <!--</div>-->
+          <i class="icn-sm icn-expand"></i>
+          <i class="icn-sm icn-collapse"></i>
         </div>
 
+        <ul class="dropdown-menu tag-list">
+          <li class="topNavbar-logout" logout-btn>
+            <a href="javascript:void(0)" class="ha-20-16">
+              <i class="icn-md icn-logout" style="margin-top: 6px;"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
       </div>
+
+      <a ui-sref="settings" class="settings-href has-tooltip"
+         tooltip="Settings" tooltip-placement="bottom">
+        <i class="icn-sm icn-settings"></i>
+      </a>
 
     </div>
 
