@@ -6,6 +6,7 @@
     ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService) {
 
+        $scope.clientCompanies = CompaniesService.getClientCompanies();
         $scope.PermissionsService = PermissionsService;
 
         UsersService._addInitListener(function(){
@@ -49,18 +50,6 @@
             return 'tax-rates';
           }
         };
-
-        $scope.goToCreateUser = function () {
-
-          var clientCompanies = CompaniesService.getClientCompanies();
-
-          if (!clientCompanies || clientCompanies.length < 1) {
-            alert('Create at list one company before adding users');
-            return;
-          }
-
-          $state.go('users.create');
-        }
 
       }]);
 

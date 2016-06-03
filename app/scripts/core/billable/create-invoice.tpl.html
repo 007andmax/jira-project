@@ -56,9 +56,9 @@
         <i class="icn icn-print"></i>
       </div>
 
-      <div style="margin-left: 10px;" class="btn btn-info pull-left"
+      <div style="margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview"
            ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
-           ng-if="!invoicePreview"
+           ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true"
            tooltip="{{ receivablePreview ? 'Download Invoice' : 'Create and Download Invoice' }}">
         <i class="icn icn-download-white"></i>

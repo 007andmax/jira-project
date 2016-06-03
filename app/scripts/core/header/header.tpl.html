@@ -35,7 +35,7 @@
               </li>
 
               <li role="presentation">
-                <a role="menuitem" tabindex="-1" ng-click="goToCreateUser()">User</a>
+                <a role="menuitem" tabindex="-1" ng-if="clientCompanies.length" ui-sref="users.create">User</a>
               </li>
 
               <li role="presentation"
