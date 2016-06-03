@@ -12,6 +12,7 @@
 
         var headerSharedState = SharedStateService.getSharedState('usersHeader');
 
+        $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
 
         $scope.$watch('users.length', function (usersCount) {
