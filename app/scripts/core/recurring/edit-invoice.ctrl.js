@@ -263,13 +263,13 @@
 
           if (repeat === 'Month') {
             $scope.repeatingInvoiceModel = true;
-            endDay.setMonth(startDay.getMonth() + 1);
+            endDay.setMonth(startDay.getMonth());
           } else if (repeat === 'Year') {
             $scope.repeatingInvoiceModel = true;
-            endDay.setFullYear(startDay.getFullYear() + 1);
+            endDay.setFullYear(startDay.getFullYear());
           } else if (parseInt(repeat) > 0) {
             $scope.repeatingInvoiceModel = true;
-            endDay = +(new Date(startDay)) + (parseInt(repeat) * day);
+            endDay = new Date(startDay);
           } else {
             $scope.repeatingInvoiceModel = undefined;
             endDay = undefined
@@ -322,7 +322,7 @@
 
           if (option === 'endDate') {
             var endDate = new Date(sentOn);
-            var num = parseInt($scope.paramInvocie.numToGenerate);
+            var num = parseInt($scope.paramInvocie.numToGenerate) - 1;
 
             if (repeat === 'Month') {
               endDate.setMonth(sentOn.getMonth() + num);
@@ -342,11 +342,11 @@
             var newNum;
 
             if (repeat === 'Month') {
-              newNum = numOfMonth(sentOn, endDate);
+              newNum = numOfMonth(sentOn, endDate) + 1;
             } else if (repeat === 'Year') {
-              newNum = numOfYear(sentOn, endDate);
+              newNum = numOfYear(sentOn, endDate) + 1;
             } else if (parseInt(repeat) > 0) {
-              newNum = Math.floor((+endDate - +sentOn) / (parseInt(repeat) * day));
+              newNum = Math.floor((+endDate - +sentOn) / (parseInt(repeat) * day)) + 1;
             } else {
               console.error('Unsupported Repeating Invoice every')
             }
@@ -392,7 +392,7 @@
 
           setCount();
 
-          return count
+          return count;
 
           function setCount() {
             sentOn = new Date(sentOn.setFullYear(sentOn.getFullYear() + 1));
