@@ -69,31 +69,32 @@
 
       <div dropdown>
         <div class="nickname-wrap" dropdown-toggle>
-          <i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"
-             ng-click="currentUser.online = !currentUser.online"></i>
+          <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
+             <!--ng-click="currentUser.online = !currentUser.online"></i>-->
+          <i class="on"></i>
 
-          <div class="nickname">{{ getUserName(currentUser) }}</div>
+         <div class="nickname">{{ getUserName(currentUser) }}</div>
 
-          <i class="icn-sm icn-expand"></i>
-          <i class="icn-sm icn-collapse"></i>
-        </div>
+         <i class="icn-sm icn-expand"></i>
+         <i class="icn-sm icn-collapse"></i>
+       </div>
 
-        <ul class="dropdown-menu tag-list">
-          <li class="topNavbar-logout" logout-btn>
-            <a href="javascript:void(0)" class="ha-20-16">
-              <i class="icn-md icn-logout" style="margin-top: 6px;"></i>
-              <span>Logout</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+       <ul class="dropdown-menu tag-list">
+         <li class="topNavbar-logout" logout-btn>
+           <a href="javascript:void(0)" class="ha-20-16">
+             <i class="icn-md icn-logout" style="margin-top: 6px;"></i>
+             <span>Logout</span>
+           </a>
+         </li>
+       </ul>
+     </div>
 
-      <a ui-sref="settings" class="settings-href has-tooltip"
-         tooltip="Settings" tooltip-placement="bottom">
-        <i class="icn-sm icn-settings"></i>
-      </a>
+     <a ui-sref="settings" class="settings-href has-tooltip"
+        tooltip="Settings" tooltip-placement="bottom" append-to-body="true">
+       <i class="icn-sm icn-settings"></i>
+     </a>
 
-    </div>
+   </div>
 
-  </div>
+ </div>
 </nav>

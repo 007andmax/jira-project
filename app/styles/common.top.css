@@ -236,10 +236,15 @@
   float: right;
   padding: 5px;
   margin: 7px;
-  border: rgba(128, 128, 128, 0.5) 1px solid;
+  border: 1px rgba(128, 128, 128, 0.5) solid;
   border-radius: 2px;
 }
 
 .topNavbarRight .settings-href:hover {
-  border: gray 1px solid;
+  border: 1px gray solid;
+}
+
+.topNavbarRight .dropdown-menu {
+  width: 200px;
+  right: 35px;
 }
