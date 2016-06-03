@@ -21,7 +21,7 @@
 
 .topNavbarLeft{
   width: 100%;
-  padding-right: 280px;
+  padding-right: 310px;
 }
 
 @media screen and (max-width: 1600px) {
@@ -84,7 +84,7 @@
 .topNavbarRight{
   position: fixed !important;
   right: 0;
-  width: 310px;
+  width: 340px;
   z-index: 2;
   height: 38px;
 }
@@ -209,6 +209,11 @@
 
 .topNavbarRight .nickname-wrap .nickname {
   display: inline-block;
+  max-width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
   margin: 0 10px;
   font-size: 16px;
   line-height: 38px;
