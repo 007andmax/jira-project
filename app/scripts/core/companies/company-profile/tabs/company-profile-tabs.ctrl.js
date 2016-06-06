@@ -28,6 +28,7 @@
         $scope.orderScanBy = 'hostName';
         $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
+        $scope.editedUser = {};
 
         $scope.credential = {
           name: '',
@@ -310,7 +311,11 @@
             }
 
           }
-        })
+        });
+
+        $scope.setEditedUser = function (user) {
+          $scope.editedUser = angular.copy(user);
+        };
 
       }]);
 }());

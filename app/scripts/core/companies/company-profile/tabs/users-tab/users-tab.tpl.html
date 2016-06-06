@@ -12,7 +12,7 @@
         </label>
 
         <span class="sort-span">Name<i class="icn-sm sort-icon icn-sort"
-                     ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
+                                       ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
 
       </div>
 
@@ -20,7 +20,7 @@
 
       <div class="col-3" ng-click="setOrderByUsers('type')">
         <span class="sort-span">Type<i class="icn-sm sort-icon icn-sort"
-                     ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'type'}"></i></span>
+                                       ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'type'}"></i></span>
 
       </div>
 
@@ -28,7 +28,7 @@
 
       <div class="col-4" ng-click="setOrderByUsers('ticket')">
         <span class="sort-span">Tickets<i class="icn-sm sort-icon icn-sort"
-                        ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'ticket'}"></i></span>
+                                          ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'ticket'}"></i></span>
 
       </div>
 
@@ -36,8 +36,8 @@
 
     </li>
 
-    <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse"
-        ng-controller="quicktech.core.companies.usersTabCtrl">
+    <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
+        ng-controller="quicktech.core.companies.usersTabCtrl" ng-show="editedUser.id !== user.id">
 
       <div class="col-1">
         <div class="user-bio">
@@ -61,12 +61,12 @@
       <div class="col-2">
         <div class="clearfix">
 
-          <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
-            <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
-                      'icn-user-fax': phoneNumber.typeNumber === 'FAX',
-                      'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
-            {{ phoneNumber.number }}
-          </span>
+            <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
+              <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+                        'icn-user-fax': phoneNumber.typeNumber === 'FAX',
+                        'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+              {{ phoneNumber.number }}
+            </span>
 
         </div>
       </div>
@@ -75,9 +75,9 @@
         <div class="user-account-type dropdown">
 
           <div class="label-wrapper" aria-expanded="false" data-toggle="dropdown">
-            <span>
-              {{ user.role }}
-            </span>
+              <span>
+                {{ user.role }}
+              </span>
           </div>
 
           <ul class="dropdown-menu dropdown-privilege">
@@ -135,9 +135,9 @@
       </div>
 
       <div class="col-4">
-        <span class="user-submitted-tickets">
-          {{ user.userStatistic.ticketsSubmitted || '0' }}
-        </span>
+          <span class="user-submitted-tickets">
+            {{ user.userStatistic.ticketsSubmitted || '0' }}
+          </span>
       </div>
 
       <div class="col-5">
@@ -158,6 +158,11 @@
           <!--</ul>-->
           <!--</div>-->
 
+          <div class="btn btn-default pull-left has-tooltip" ng-click="setEditedUser(user)"
+               tooltip-placement="top" tooltip="Edit">
+            <i class="icn-sm icn-edit"></i>
+          </div>
+
           <div class="btn btn-default btn-user-mail pull-left has-tooltip" ng-show="user.primaryEmail"
                email-to="user.primaryEmail" tooltip-placement="top" tooltip="Email">
             <i class="icn-sm icn-user-mail"></i>
@@ -165,8 +170,8 @@
 
           <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
                ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_user')
-                      && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
-               tooltip-placement="top" tooltip="Archive this Contact">
+                        && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
+               tooltip-placement="top" tooltip="Archive this User">
             <i class="icn-sm icn-remove-token"></i>
           </div>
 
@@ -175,6 +180,87 @@
           <!--<i class="icn-sm icn-user-chat"></i>-->
           <!--</div>-->
 
+        </div>
+      </div>
+    </li>
+
+    <li class="inline-user-edit" ng-if="editedUser && editedUser.id">
+      <div class="" ng-controller="quicktech.core.companies.editUserCtrl" ng-form="editUserForm">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First Name</label>
+
+          <div ng-messages="editUserForm.firstName.$error"
+               ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
+            <div class="control-label" ng-message="required">First name is required.</div>
+            <div class="control-label" ng-message="maxlength">First name is too large.</div>
+            <div class="control-label" ng-message="minlength">First name is too short.</div>
+          </div>
+
+          <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
+                 name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">Last Name</label>
+
+          <div ng-messages="editUserForm.lastName.$error" ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
+            <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+          </div>
+
+          <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                 name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'designation')}">
+
+          <label class="control-label"
+                 ng-class="{'hide': isShowingErrors(editUserForm, 'designation')}">Designation</label>
+
+          <div ng-messages="editUserForm.designation.$error"
+               ng-class="{'hide': !isShowingErrors(editUserForm, 'designation')}">
+            <div class="control-label" ng-message="maxlength">Designation is too large</div>
+            <div class="control-label" ng-message="minlength">Designation is too short</div>
+          </div>
+
+          <input class="form-control" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
+                 ng-model="editedUser.designation" ng-minlength="3" ng-maxlength="30">
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
+
+          <div ng-messages="editUserForm.primaryEmail.$error"
+               ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
+            <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+            <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+            <div class="control-label" ng-message="unique">This email already occupied.</div>
+          </div>
+
+          <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                 ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
+                 is-uniq-validation validation-func="validateUserEmail">
+
+        </div>
+
+        <div class="form-row" phone-numbers-edit is-try-to-save="triedToSave"
+             country-code="{{userCompanyCountryCode}}" ng-model="editedUser.phoneNumbers"></div>
+
+        <div class="inline-user-edit-action">
+          <div class="btn btn-default pull-left has-tooltip" ng-click="saveUser(editUserForm)"
+               tooltip-placement="top" tooltip="Save">
+            <i class="icn-sm icn-label-save"></i>
+          </div>
+
+          <div class="btn btn-default pull-left has-tooltip" ng-click="cancelEditing()"
+               tooltip-placement="top" tooltip="Cancel">
+            <i class="icn-sm icn-remove-token"></i>
+          </div>
         </div>
       </div>
     </li>
