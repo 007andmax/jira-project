@@ -67,7 +67,7 @@
             <div class="col-6"></div>
           </li>
 
-          <li ng-repeat="invoice in receivableInvoicesData.companies[company.id] | orderBy: orderByForInvoices : orderInvoices.reverse track by getInvoiceId(invoice)"
+          <li ng-repeat="invoice in receivableInvoicesData.companies[company.id] | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
               ng-controller="quicktech.core.receivable.invoiceCtrl"
               show-model-element="{{ 'showInvoice-' + invoice.id }}">
 
@@ -106,7 +106,7 @@
               <button-with-loading-indicator class="pull-left has-tooltip resend-button"
                                              icn-classes="icn-sm icn-send-again" ng-click="sentInvoice()"
                                              tooltip-placement="top" tooltip="Send Again"
-                                             loading="sending[getInvoiceId(invoice)]"></button-with-loading-indicator>
+                                             loading="sending[invoice.id]"></button-with-loading-indicator>
             </div>
 
             <div class="col-5">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>

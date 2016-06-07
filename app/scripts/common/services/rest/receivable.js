@@ -100,10 +100,10 @@
         throw 'First argument must be Angularjs scope!'
       }
 
-      var data = Utils.customizeObj({
+      var data = {
         list: [],
         companies: {}
-      });
+      };
 
       $http.get('/receivable').then(function (resp) {
 
@@ -117,6 +117,10 @@
           } else {
             data.companies[invoice.company.id] = [invoice];
           }
+        }
+
+        if (callback) {
+          callback(data);
         }
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
@@ -193,19 +197,19 @@
            }
            }
            }*/
+
+          if (callback) {
+            callback(data);
+          }
         });
 
+      }, function (err) {
         if (callback) {
-          callback(resp.data);
-        }
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
+          callback(err.code, err.message);
         }
       });
 
       return data;
-
     }
 
     function getInvoiceDataForPreview(invoiceId, callback) {
