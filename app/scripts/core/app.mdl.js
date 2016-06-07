@@ -295,7 +295,7 @@
           }
 
           if (sessionId === $rootScope.currentRemoteSessionId) {
-            var confirmMesage = 'Do you want to create ticket?',
+            var confirmMesage = 'Remote access session has been completed. Do you want to create ticket?',
               confirmButton = 'Yes';
 
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
