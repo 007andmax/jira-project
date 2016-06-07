@@ -7,7 +7,8 @@
       return {
         restrict: 'A',
         scope: {
-          image: '='
+          image: '=',
+          download: '=downloadFunc'
         },
         link: function ($scope, $element) {
           var imagePreviewTpl,

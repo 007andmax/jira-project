@@ -9688,7 +9688,7 @@ color: blue;
 }
 .image-preview-body{
   display: block;
-  margin: 0 auto;
+  margin: 15px auto;
   width: 70%;
   height: 85%;
   text-align: center;
@@ -9704,11 +9704,13 @@ color: blue;
   color: #ffffff;
   text-align: center;
 }
+.image-preview-download {
+  cursor: pointer;
+}
 .image-preview-download .icn-attachments-download{
   background-position: -428px 0;
   height: 14px;
   display: inline-block;
-  cursor: pointer;
 }
 .image-preview-close-btn{
   margin: 10px;

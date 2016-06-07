@@ -235,7 +235,7 @@
               </a>
               <a href="javascript:void(0)" class="tp-hide image-preview has-tooltip"
                  tooltip="Preview" tooltip-placement="bottom" ng-if="attachmentType['image/' + type]"
-                 image-preview image="attachment.file">
+                 image-preview image="attachment.file" download-func="downloadAttachment">
                 <span class="icn-sm icn-show-password"></span>
               </a>
             </div>
@@ -356,6 +356,11 @@
                        data-placement="top" tooltip="Download"
                        ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                       <span class="icn-sm icn-attachments-download"></span>
+                    </a>
+                    <a href="javascript:void(0)" class="tp-hide image-preview has-tooltip"
+                       tooltip="Preview" tooltip-placement="bottom" ng-if="attachmentType['image/' + type]"
+                       image-preview image="attachment.file" download-func="downloadAttachment">
+                      <span class="icn-sm icn-show-password"></span>
                     </a>
                   </div>
 
