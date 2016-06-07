@@ -13,7 +13,6 @@
     <div class="invoices-header">
       <div class="form-group">
         <label class="control-label">Payment Method</label>
-        <!--TODO here should be angular ui dropdown-->
         <div class="dropdown">
           <input class="form-control has-dropdown readonly-normal" type="text" READONLY
                  data-toggle="dropdown" aria-expanded="true" ng-model="paymentMethod[invoiceToReceive.method]">
@@ -48,7 +47,7 @@
     </ul>
 
     <ul class="qt-list receive-payment-list">
-      <li ng-repeat="invoice in receivePaymentInvoices" ng-init="checkInvoicesRendering($last)">
+      <li ng-repeat="invoice in receivePaymentInvoices">
 
         <div class="col-1">
           <label class="control checkbox pull-left">

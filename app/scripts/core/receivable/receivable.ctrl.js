@@ -110,8 +110,8 @@
               invoices = invoiceToSent.invoices;
 
               if (invoices) {
-                for (var invoiceId in invoices) {
-                  if (invoices[invoiceId]) {
+                for (var invoiceNumber in invoices) {
+                  if (invoices[invoiceNumber]) {
                     $scope.selectedInvoiceCount++;
                     if (!companyChecked) {
                       disabledCount++;
@@ -135,12 +135,12 @@
 
             invoices = $scope.invoiceToSent.invoices;
 
-            for (var invoiceId in invoices) {
-              if (invoices[invoiceId]) {
+            for (var invoiceNumber in invoices) {
+              if (invoices[invoiceNumber]) {
                 $scope.selectedInvoiceCount++;
                 disabledCount++;
                 for (var i = 0; i < $scope.receivableInvoicesData.list.length; i++) {
-                  if (invoiceId === $scope.receivableInvoicesData.list[i].number) {
+                  if (invoiceNumber === $scope.receivableInvoicesData.list[i].number) {
                     $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id;
                     break;
                   }

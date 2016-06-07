@@ -6,16 +6,13 @@
     ['$scope', '$modalInstance', '$stateParams', 'ReceivableService',
       function ($scope, $modalInstance, $stateParams, ReceivableService) {
 
+        var invoiceList = $scope.receivableInvoicesData.list;
+
         $scope.invoiceToReceive = {
           invoices: {},
           method: 'CHEQUE'
         };
-
-        var chosenInvoices = [];
-
         $scope.receivePaymentInvoices = [];
-
-        var invoiceList = $scope.receivableInvoicesData.list;
 
         $scope.paymentMethod = {
           CASH: 'Cash',
@@ -32,28 +29,18 @@
         if ($stateParams.mode === 'list') {
           for (var i = 0; i < invoiceList.length; i++) {
             if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
-              chosenInvoices.push(invoiceList[i])
+              $scope.receivePaymentInvoices.push(invoiceList[i]);
             }
           }
         } else {
-          angular.forEach($scope.invoiceToSent, function (value, key) {
-            if (this[key].invoices !== undefined) {
-              for (var i = 0; i < invoiceList.length; i++) {
-                if (this[key].invoices[invoiceList[i].number]) {
-                  chosenInvoices.push(invoiceList[i])
-                }
+          for (var companyId in $scope.invoiceToSent) {
+            var invoices = $scope.invoiceToSent[companyId].invoices;
+
+            for (var i = 0; i < invoiceList.length; i++) {
+              if (invoices[invoiceList[i].number]) {
+                $scope.receivePaymentInvoices.push(invoiceList[i]);
               }
             }
-          }, $scope.invoiceToSent);
-        }
-
-        for (var i = 0; i < chosenInvoices.length; i++) {
-          if (chosenInvoices[i].isRecurring) {
-            for (var j = 0; j < chosenInvoices[i].invoices.length; j++) {
-              $scope.receivePaymentInvoices.push(chosenInvoices[i].invoices[j])
-            }
-          } else {
-            $scope.receivePaymentInvoices.push(chosenInvoices[i]);
           }
         }
 
@@ -63,60 +50,50 @@
 
         $scope.$watch('invoiceToReceive.invoices', function () {
 
-          var countObj = 0;
+          var counter = 0,
+            invoices = $scope.invoiceToReceive.invoices;
 
-          for (var invoiceId in $scope.invoiceToReceive.invoices) {
-            if ($scope.invoiceToReceive.invoices[invoiceId]) {
-              countObj++;
+          for (var invoiceId in invoices) {
+            if (invoices[invoiceId]) {
+              counter++;
             }
           }
 
-          $scope.invoiceToReceive.chooseAll = ($scope.receivePaymentInvoices.length === countObj );
+          $scope.countReceiveInvoice = counter;
+          $scope.invoiceToReceive.chooseAll = ($scope.receivePaymentInvoices.length === counter);
+          $scope.receivePaymentSum = 0;
+
+          for (var i = 0, len = $scope.receivePaymentInvoices.length; i < len; i++) {
+            var invoice = $scope.receivePaymentInvoices[i];
+            if (invoices[invoice.id]) {
+              $scope.receivePaymentSum += invoice.sum;
+            }
+          }
 
         }, true);
 
         $scope.changeChooseAll = function () {
-          for (var invoice in $scope.invoiceToReceive.invoices) {
-            $scope.invoiceToReceive.invoices[invoice] = $scope.invoiceToReceive.chooseAll;
+          var invoices = $scope.invoiceToReceive.invoices;
+          for (var invoice in invoices) {
+            invoices[invoice] = $scope.invoiceToReceive.chooseAll;
           }
         };
 
-        $scope.$watch('invoiceToReceive.invoices', function () {
-          $scope.receivePaymentSum = 0;
-          for (var i = 0; i < $scope.receivePaymentInvoices.length; i++) {
-            if ($scope.invoiceToReceive.invoices[$scope.receivePaymentInvoices[i].id]) {
-              $scope.receivePaymentSum += $scope.receivePaymentInvoices[i].sum;
-            }
-          }
-        }, true);
-
         $scope.receivePayment = function () {
-          var invoiceIdPayment = [];
-          for (var id in $scope.invoiceToReceive.invoices) {
-            if ($scope.invoiceToReceive.invoices[id]) {
+          var invoiceIdPayment = [],
+            invoices = $scope.invoiceToReceive.invoices;
+
+          for (var id in invoices) {
+            if (invoices[id]) {
               invoiceIdPayment.push(id)
             }
           }
+
           ReceivableService.receivePayment(
             $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification,
             function () { $modalInstance.dismiss('cancel'); }
           );
         };
-
-        $scope.checkInvoicesRendering = function (finished) {
-          if (finished) {
-            $scope.$emit('invoicesRenderingFinished');
-          }
-        };
-
-        $scope.$watch('invoiceToReceive.invoices', function () {
-          $scope.countReceiveInvoice = 0;
-          for (var id in $scope.invoiceToReceive.invoices) {
-            if ($scope.invoiceToReceive.invoices[id]) {
-              $scope.countReceiveInvoice++;
-            }
-          }
-        }, true);
 
       }]);
 
