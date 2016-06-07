@@ -121,6 +121,13 @@
     display: block;
     height: 14px;
 }
+.attachments li > .onhover .image-preview {
+  right: 32px;
+  bottom: 10px;
+  position: absolute;
+  display: block;
+  height: 14px;
+}
 
 @-moz-document url-prefix() {
     .ticket-attachment .download-all {
