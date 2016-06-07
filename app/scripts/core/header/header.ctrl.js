@@ -9,7 +9,15 @@
         $scope.clientCompanies = CompaniesService.getClientCompanies();
         $scope.PermissionsService = PermissionsService;
 
-        UsersService._addInitListener(function(){
+        $scope.$watch('clientCompanies.length', function (count) {
+          if (count) {
+            $scope.clientCompanies = $scope.clientCompanies.filter(function (company) {
+              return !company.isDefault;
+            });
+          }
+        });
+
+        UsersService._addInitListener(function () {
           $scope.currentUser = UsersService.getCurrentUser();
         });
 

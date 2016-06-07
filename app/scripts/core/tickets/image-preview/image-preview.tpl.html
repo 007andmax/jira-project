@@ -1,0 +1,21 @@
+<div class="image-preview-tpl">
+  <div class="image-preview-header">
+    <div class="image-preview-close-btn pull-right" ng-click="closePreview()"
+         tooltip="Close" tooltip-placement="bottom" append-to-body="true">
+      <i class="icn-sm icn-remove-token"></i>
+    </div>
+  </div>
+
+  <div class="image-preview-body">
+    <img ng-src="{{ '/file/' + image.id }}" alt="{{ image.name }}" width="70%">
+  </div>
+
+  <div class="image-preview-footer">
+    <span class="image-preview-file-name">{{ image.name }}</span>
+
+    <div class="image-preview-download" ng-click="download(image.id, image.name)">
+      <i class="icn-sm icn-attachments-download"></i>
+      <span>download</span>
+    </div>
+  </div>
+</div>
