@@ -23,11 +23,7 @@
 
     function search(keyword, callback) {
 
-      if (!keyword) {
-        throw 'Keyword is required!';
-      }
-
-      $http.get("/tags/search?word=" + keyword.toLowerCase()).then(function (response) {
+      $http.get('/tags/search?word=' + (keyword ? keyword.toLowerCase() : '')).then(function (response) {
 
         if (callback) {
           callback(response.data);

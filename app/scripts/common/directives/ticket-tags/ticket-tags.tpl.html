@@ -1,4 +1,4 @@
-<div class="{{readonlyTags ? 'readonly-tags-wrap' : 'tags-wrap'}}" ng-click="focusInput = !focusInput; $event.stopPropagation()">
+<div class="{{readonlyTags ? 'readonly-tags-wrap' : 'tags-wrap'}}" ng-click="setFocus($event)">
   <div class="{{readonlyTags ? 'readonly-tags' : 'tags'}}">
     <span class="tags-title" ng-hide="readonlyTags">Tags: </span>
     <span class="tag-label"
@@ -10,15 +10,16 @@
          tooltip="remove" tooltip-placement="top"></i>
     </span>
 
-    <div ng-show="!readonlyTags" class="tags-action" dropdown is-open="!!result.length">
-      <input type="text" class="tags-input" ng-model="newTag" placeholder="..."
-             set-focus-on-var-change="focusInput">
+    <div ng-show="!readonlyTags" class="tags-action"
+         dropdown is-open="dropdownOpened && result.length" on-toggle="setDropdownOpened(open)"
+         dropdown-arrow-navigation on-enter="addTag" dropdown-data-item-name="tag">
+      <input type="text" class="tags-input" ng-model="newTag" placeholder="..." set-focus-on-var-change="focusInput">
 
       <ul class="tag-autocomplete dropdown-menu" dropdown-menu>
-        <li class="autocomplete-item" ng-repeat="item in result | orderBy:'word'"
-            ng-click="addTag(item)">
-          <span class="tag-name">{{item.word}}</span>
-          <span class="pull-right">{{item.usedCounter}}</span>
+        <li class="autocomplete-item" ng-repeat="tag in result | orderBy:'word'"
+            ng-click="addTag(tag)">
+          <span class="tag-name">{{tag.word}}</span>
+          <span class="pull-right">{{tag.usedCounter}}</span>
         </li>
       </ul>
     </div>
