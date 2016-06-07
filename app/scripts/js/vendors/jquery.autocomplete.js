@@ -378,7 +378,7 @@
             }
             this.enableKillerFn();
         },
-        
+
         abortAjax: function () {
             var that = this;
             if (that.currentRequest) {
@@ -617,7 +617,7 @@
                         that.select(that.selectedIndex);
                         that.el.blur();
                     }
-                    
+
                     break;
                 case keys.UP:
                     that.moveUp();
@@ -917,9 +917,9 @@
 
 
                 if( $.isFunction(that.options.formatItem) ) {
-                    html += '<div '+listPaddingStyle+' class="' + suggestionClasses + '" data-index="' + i + '">' + 
-                            that.options.formatItem.call(that.element, formattedResult, suggestion) + 
-                            '</div>';    
+                    html += '<div '+listPaddingStyle+' class="' + suggestionClasses + '" data-index="' + i + '">' +
+                            that.options.formatItem.call(that.element, formattedResult, suggestion) +
+                            '</div>';
                 } else {
                     html += '<div '+listPaddingStyle+' class="' + suggestionClasses + '" data-index="' + i + '">' + formattedResult + '</div>';
                 }
@@ -944,7 +944,7 @@
             this.adjustContainerWidth();
 
             noSuggestionsContainer.detach();
-            
+
             if (that.options.useCustomScroller) {
                 container.html('<div class="'+that.classes.nano+'"><div class="'+that.classes.nanoContent+'">'+html+'</div></div>');
                 container.css('overflow','hidden');
@@ -986,7 +986,7 @@
                 that.adjustScroll(that.lastSelectedIndex, false);
             } else if( that.options.preserveLastHovered && that.lastHoveredIndex !== -1 && (value == '' || showAll ) ) {
                 that.adjustScroll(that.lastHoveredIndex, false);
-            } 
+            }
 
             // Select first value by default:
             if (options.autoSelectFirst) {
@@ -1279,8 +1279,12 @@
 
             that.currentValue = that.getValue(suggestion.value);
             that.lastSelected = that.currentValue;
-            that.lastSelectedScrollTop = that.scrollElement.find('.'+that.classes.nanoContent).scrollTop();
-            
+            if (that.options.useCustomScroller) {
+              that.lastSelectedScrollTop = that.scrollElement.find('.'+that.classes.nanoContent).scrollTop();
+            } else {
+              $(that.suggestionsContainer).scrollTop();
+            }
+
             $(that.suggestionsContainer).find('.' + lastSelected).removeClass(lastSelected);
             $(activeItem).addClass(lastSelected);
 
