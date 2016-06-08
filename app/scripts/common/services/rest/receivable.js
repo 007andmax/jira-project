@@ -222,7 +222,7 @@
       Utils.handleCallback(future, callback);
     }
 
-    function receivePayment(paymentMethod, invoiceIds, isSendNotification, callback) {
+    function receivePayment(paymentMethod, invoiceIds, isSendNotification, note, callback) {
 
       if (!paymentMethod) {
         throw 'paymentMethod is required!'
@@ -239,8 +239,12 @@
       var future = $http({
         url: '/receivable/receivePayment',
         method: 'POST',
-        params: { paymentMethod: paymentMethod.toUpperCase(), isSendNotification: isSendNotification },
-        data: invoiceIds
+        data: {
+          paymentMethod: paymentMethod.toUpperCase(),
+          isSendNotification: isSendNotification,
+          invoiceIds: invoiceIds,
+          note: note
+        }
       });
 
       Utils.handleCallback(future, callback);

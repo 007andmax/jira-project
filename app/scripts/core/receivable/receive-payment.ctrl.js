@@ -89,10 +89,19 @@
             }
           }
 
+          $scope.disableReceiveButton = true;
+
           ReceivableService.receivePayment(
-            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification,
-            function () { $modalInstance.dismiss('cancel'); }
+            $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note,
+            function () {
+              $modalInstance.dismiss('cancel');
+              $scope.disableReceiveButton = false;
+            }
           );
+        };
+
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
         };
 
       }]);
