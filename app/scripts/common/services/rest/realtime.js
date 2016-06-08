@@ -65,7 +65,7 @@
       if (!isInitialized)
         return;
 
-      var subscription = stompClient.subscribeConfig(
+      var subscription = stompClient.subscribe(
         "/user/watch" + config.url,
         function (message) {
           //console.log(message);
