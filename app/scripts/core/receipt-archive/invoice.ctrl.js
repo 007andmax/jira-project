@@ -6,7 +6,7 @@
     ['$scope', 'CompaniesService', '$timeout',
       function ($scope, CompaniesService, $timeout) {
 
-        $scope.company = CompaniesService.getOneById($scope.invoice.companyId);
+        $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
         $scope.$watch('highlightInvoiceId', function (invoiceId) {
           if (invoiceId) {
@@ -19,7 +19,7 @@
           }
         });
 
-        $scope.$on($scope.company.id + '-showInvoiceInList', function (event, invoiceId) {
+        $scope.$on($scope.invoice.company.id + '-showInvoiceInList', function (event, invoiceId) {
           $scope.setHighlightInvoiceId(invoiceId);
         });
 

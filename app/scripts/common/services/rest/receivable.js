@@ -145,7 +145,7 @@
 
           } else if (newChange.action === 'INVOICE_STATUS') {
 
-            var invoice = Utils.findById(data.list);
+            var invoice = Utils.findById(data.list, newChange.data.id);
 
             if (invoice) {
               Utils.defineReadOnlyProperty(invoice, 'status', newChange.data.status);

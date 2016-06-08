@@ -24,13 +24,17 @@
         Utils.customizeArray(resp.data, data.list);
 
         for (var i = 0; i < resp.data.length; i++) {
-          var invoice = resp[i];
+          var invoice = resp.data[i];
 
-          if (data.companies[invoice.companyId]) {
-            data.companies[invoice.companyId].push(invoice);
+          if (data.companies[invoice.company.id]) {
+            data.companies[invoice.company.id].push(invoice);
           } else {
-            data.companies[invoice.companyId] = [invoice];
+            data.companies[invoice.company.id] = [invoice];
           }
+        }
+
+        if (callback) {
+          callback(data);
         }
 
         RealTimeService.subscribe('/receiptArchive', scope, function (newChange) {
@@ -44,17 +48,17 @@
 
               data.list.push(invoice);
 
-              if (data.companies[invoice.companyId]) {
-                data.companies[invoice.companyId].push(invoice);
+              if (data.companies[invoice.company.id]) {
+                data.companies[invoice.company.id].push(invoice);
               } else {
-                data.companies[invoice.companyId] = [invoice];
+                data.companies[invoice.company.id] = [invoice];
               }
             }
 
           } else if (newChange.action === 'COMPANY_ARCHIVED') {
 
             for (var i = 0; i < data.list.length; i++) {
-              if (data.list[i].companyId === newChange.data.id) {
+              if (data.list[i].company.id === newChange.data.id) {
                 data.list.splice(i, 1);
                 i--;
               }
@@ -62,15 +66,15 @@
 
             delete data.companies[newChange.data.id];
           }
+
+          if (callback) {
+            callback(data);
+          }
         });
 
+      }, function (err) {
         if (callback) {
-          callback(resp.data);
-        }
-
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
+          callback(err.code, err.message);
         }
       });
 
