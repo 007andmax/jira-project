@@ -21,14 +21,15 @@
     </p>
   </div>
 
-  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline">
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 70px;">
     <div class="loader"></div>
   </div>
 
   <ul class="qt-list qt-network-scan"
+      ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '30px' : '60px'}"
       ng-if="scanDevices.networkScan.devices && scanDevices.networkScan.devices.length > 0">
 
-    <li class="list-heading">
+    <li class="list-heading" fixed-block-top offset-top="148">
 
       <div class="col-1" ng-click="sortNetworkScan('hostName')">
             <span class="sort-span">DEVICE

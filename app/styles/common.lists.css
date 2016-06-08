@@ -1656,6 +1656,7 @@ Devices tab
   padding: 0 0 1px 26px;
   cursor: auto;
   text-align: center;
+  position: relative;
 }
 @-moz-document url-prefix() {
   .qt-product-list{
@@ -2146,7 +2147,7 @@ Devices tab
 }
 /**Devices**/
 .qt-devices{
-  padding: 30px 0 0;
+  padding: 60px 0 0;
 }
 .qt-devices .list-heading > div[ng-click]{
   cursor: pointer;
@@ -2312,7 +2313,7 @@ Devices tab
 }
 /**Agents**/
 .qt-agents{
-  padding: 30px 0 0;
+  padding: 60px 0 0;
 }
 .qt-agents .list-heading > div[ng-click]{
   cursor: pointer;

@@ -101,7 +101,8 @@
 
             <ul class="qt-list qt-product-list" ng-class="{'qt-user-product-list': currentUser.role === 'USER'}">
 
-              <li class="list-heading" ng-show="category.productsList.length > 0" style="cursor: pointer !important;">
+              <li class="list-heading" ng-show="category.productsList.length > 0 && category.id === expandedCategoryId" style="cursor: pointer !important;"
+                  fixed-block-top offset-top="148">
                 <div class="col-1" ng-click="setOrderForProducts('ilc')">
                   <span class="sort-span">ILC<i class="icn-sm sort-icon icn-sort"
                                                 ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
