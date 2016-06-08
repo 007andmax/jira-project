@@ -8,38 +8,21 @@
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
-        $scope.invoiceProperty = function (property) {
-          var invoice = $scope.invoice;
-          if (invoice.invoices && invoice.invoices[0] && invoice.invoices[0][property]) {
-            return invoice.invoices[0][property];
-          } else {
-            return invoice[property];
-          }
-        };
-
-        var dueDate = $scope.invoiceProperty('dueDate');
-
-        if (dueDate <= Date.now()) {
+        if ($scope.invoice.dueDate <= Date.now()) {
           $scope.$emit('indicatorInvoice');
           $scope.dueDate = {
             over: true,
-            value: dueDate
+            value: $scope.invoice.dueDate
           }
         } else {
           $scope.dueDate = {
             over: false,
-            value: dueDate
+            value: $scope.invoice.dueDate
           }
         }
 
         $scope.sentInvoice = function () {
-          var idInvoiceToSend;
-          if ($scope.invoice.isRecurring) {
-            idInvoiceToSend = ($scope.invoice.invoices[$scope.invoice.invoices.length - 1].id);
-          } else {
-            idInvoiceToSend = ($scope.invoice.id);
-          }
-
+          var idInvoiceToSend = $scope.invoice.id;
           $scope.sending[idInvoiceToSend] = true;
 
           ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {
@@ -48,17 +31,9 @@
         };
 
         $scope.$watch('highlightInvoiceId', function (invoiceId) {
-          if (invoiceId) {
+          if (invoiceId && invoiceId === $scope.invoice.id) {
 
-            if ($scope.invoice.isRecurring) {
-              for (var i = 0; i < $scope.invoice.invoices.length; i++) {
-                if (invoiceId === $scope.invoice.invoices[i].id) {
-                  $scope.$broadcast('showInvoice-' + ($scope.invoice.invoices[i].recurringInvoice.id));
-                }
-              }
-            } else if (invoiceId === $scope.invoice.id) {
-              $scope.$broadcast('showInvoice-' + invoiceId);
-            }
+            $scope.$broadcast('showInvoice-' + invoiceId);
             $timeout(function () {
               $scope.setHighlightInvoiceId();
             }, 3000)

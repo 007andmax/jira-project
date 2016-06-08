@@ -100,57 +100,28 @@
         throw 'First argument must be Angularjs scope!'
       }
 
-      var data = Utils.customizeObj({
+      var data = {
         list: [],
         companies: {}
-      });
+      };
 
       $http.get('/receivable').then(function (resp) {
 
-        //invoices should be grouped by recurring
-        var groupedList = Utils.customizeArray([]);
+        Utils.customizeArray(resp.data, data.list);
 
         for (var i = 0; i < resp.data.length; i++) {
+          var invoice = resp.data[i];
 
-          var invoice = Utils.customizeObj(resp.data[i]);
-
-          if (!invoice.recurringInvoice) {
-            groupedList.push(invoice);
+          if (data.companies[invoice.company.id]) {
+            data.companies[invoice.company.id].push(invoice);
           } else {
-
-            var recurring = Utils.findById(groupedList, invoice.recurringInvoice.id);
-
-            if (!recurring || recurring.invoices.length == 1) {
-              recurring = invoice.recurringInvoice;
-              Utils.defineReadOnlyProperty(recurring, "isRecurring", true);
-              Utils.defineReadOnlyProperty(recurring, "company", invoice.company);
-              Utils.defineReadOnlyProperty(recurring, "number", invoice.number);
-              Utils.defineReadOnlyProperty(recurring, "invoices", Utils.customizeArray([]));
-              groupedList.push(recurring);
-            }
-
-            Utils.defineReadOnlyProperty(invoice, "recurringInvoice", {
-              id: recurring.id,
-              frequency: recurring.frequency
-            });
-
-            recurring.invoices.push(invoice);
+            data.companies[invoice.company.id] = [invoice];
           }
         }
 
-        groupedList.sort(Utils.getComparatorBy('number'));
-
-        for (var i = 0; i < groupedList.length; i++) {
-          var invoice = groupedList[i];
-
-          if (!data.companies[invoice.company.id]) {
-            Utils.defineReadOnlyProperty(data.companies, invoice.company.id, Utils.customizeArray([]));
-          }
-
-          data.companies[invoice.company.id].push(invoice);
+        if (callback) {
+          callback(data);
         }
-
-        Utils.defineReadOnlyProperty(data, "list", groupedList);
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
 
@@ -158,70 +129,30 @@
 
           if (newChange.action == 'INVOICE_SAVED') {
 
-            var invoice = newChange.data,
-              addInvoice;
+            var invoice = Utils.findById(data.list, newChange.data.id);
 
-            if (!invoice.recurringInvoice) {
-              addInvoice = invoice;
+            if (invoice) {
+              Utils.customizeObj(newChange.data, invoice);
             } else {
+              data.list.push(newChange.data);
 
-              var recurring = Utils.findById(data.list, invoice.recurringInvoice.id);
-
-              if (!recurring) {
-                recurring = invoice.recurringInvoice;
-                recurring.isRecurring = true;
-                recurring.company = invoice.company;
-                recurring.invoices = [];
-
-                addInvoice = recurring;
+              if (data.companies[newChange.data.company.id]) {
+                data.companies[newChange.data.company.id].push(newChange.data);
+              } else {
+                data.companies[newChange.data.company.id] = [newChange.data];
               }
-
-              invoice.recurringInvoice = {
-                id: recurring.id,
-                frequency: recurring.frequency
-              };
-
-              recurring.invoices.push(invoice);
-            }
-
-            if (addInvoice) {
-
-              addInvoice = Utils.customizeObj(addInvoice);
-
-              if (!data.companies[addInvoice.company.id]) {
-                Utils.defineReadOnlyProperty(data.companies, addInvoice.company.id, []);
-              }
-
-              data.companies[addInvoice.company.id].push(addInvoice);
-              data.list.push(addInvoice);
             }
 
           } else if (newChange.action === 'INVOICE_STATUS') {
 
-            var invoice;
-
-            if (newChange.data.recurringInvoice) {
-              var recurringInvoice = Utils.findById(data.list, newChange.data.recurringInvoice.id);
-
-              if (!recurringInvoice) {
-                console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING RECURRING INVOICE-----!!!!!!!")
-              }
-
-              invoice = Utils.findById(recurringInvoice.invoices, newChange.data.id);
-
-              if (!invoice) {
-                invoice = recurringInvoice;
-              }
-
-            } else {
-              invoice = Utils.findById(data.list, newChange.data.id);
-            }
+            var invoice = Utils.findById(data.list, newChange.data.id);
 
             if (invoice) {
               Utils.defineReadOnlyProperty(invoice, 'status', newChange.data.status);
             } else {
-              console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!")
+              console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!");
             }
+
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
 
             var invoiceIds = newChange.data;
@@ -229,61 +160,28 @@
             for (var i = 0; i < invoiceIds.length; i++) {
 
               var invoiceId = invoiceIds[i],
-                recurringId = undefined,
                 invoiceCompanyId = undefined;
 
-              for (var d = 0; d < data.list.length && !invoiceCompanyId; d++) {
+              for (var j = 0; j < data.list.length; j++) {
 
-                var inv = data.list[d];
+                var inv = data.list[j];
 
-                if (inv.isRecurring) {
-                  for (var r = 0; r < inv.invoices.length && !invoiceCompanyId; r++) {
-                    var invoiceUnderRecurring = inv.invoices[r];
-                    if (invoiceId === invoiceUnderRecurring.id) {
-                      inv.invoices.splice(r, 1);
-                      invoiceCompanyId = invoiceUnderRecurring.company.id;
-                      recurringId = inv.id;
-
-                      if (inv.invoices.length === 0) {
-                        data.list.splice(d, 1);
-                      }
-                    }
-                  }
-                } else if (invoiceId === inv.id) {
-                  data.list.splice(d, 1);
+                if (invoiceId === inv.id) {
+                  data.list.splice(j, 1);
                   invoiceCompanyId = inv.company.id;
+                  break;
                 }
               }
 
               if (invoiceCompanyId && data.companies[invoiceCompanyId]) {
 
-                var invoices = data.companies[invoiceCompanyId];
+                var invoices = data.companies[invoiceCompanyId],
+                  index = Utils.indexOfId(invoices, invoiceId);
 
-                if (recurringId) {
-                  var recIndex = Utils.indexOfId(invoices, recurringId);
-
-                  if (recIndex > -1) {
-
-                    var invIndex = Utils.indexOfId(invoices[recIndex].invoices, invoiceId);
-
-                    if (invIndex > -1) {
-                      invoices[recIndex].invoices.splice(recIndex, 1);
-                    }
-
-                    if (invoices[recIndex].invoices.length === 0) {
-                      invoices.splice(recIndex, 1);
-                    }
-                  }
-                } else {
-                  var index = Utils.indexOfId(invoices, invoiceId);
-
-                  if (index > -1) {
-                    invoices.splice(index, 1);
-                  }
-                }
-
-                if (invoices.length === 0) {
+                if (invoices.length <= 1) {
                   delete data.companies[invoiceCompanyId];
+                } else if (index > -1) {
+                  invoices.splice(index, 1);
                 }
               }
             }
@@ -299,19 +197,19 @@
            }
            }
            }*/
+
+          if (callback) {
+            callback(data);
+          }
         });
 
+      }, function (err) {
         if (callback) {
-          callback(resp.data);
-        }
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
+          callback(err.code, err.message);
         }
       });
 
       return data;
-
     }
 
     function getInvoiceDataForPreview(invoiceId, callback) {

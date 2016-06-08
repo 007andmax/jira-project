@@ -25,41 +25,38 @@
           }
         });
 
-        $scope.receiptArchiveData = ReceiptArchiveService.getReceiptArchiveData($scope, function () {
-          $scope.$watch('receiptArchiveData', function () {
+        ReceiptArchiveService.getReceiptArchiveData($scope, function (resp) {
+          $scope.receiptArchiveData = resp;
 
-            for (var companyId in $scope.receiptArchiveData.companies) {
-              if (companyId !== 'staticCopy' && !Utils.findById($scope.receiptArchiveCompanies, companyId)) {
+          var invoicesByCompany = $scope.receiptArchiveData.companies;
 
+          for (var companyId in invoicesByCompany) {
+
+            if (companyId !== 'staticCopy') {
+              if (!Utils.findById($scope.receiptArchiveCompanies, companyId) && invoicesByCompany[companyId]) {
                 $scope.receiptArchiveCompanies.push({
                   id: companyId,
                   name: CompaniesService.getOneById(companyId).name
                 });
               }
             }
+          }
 
-            for (var i = $scope.receiptArchiveCompanies - 1; i >= 0; i--) {
-              if (!$scope.receiptArchiveData.companies[$scope.receiptArchiveCompanies[i]]) {
-                $scope.receiptArchiveCompanies.splice(i, 1);
+          if ($stateParams.mode === 'group-by-company') {
+
+            for (var i = 0; i < $scope.receiptArchiveCompanies.length; i++) {
+
+              var companyId = $scope.receiptArchiveCompanies[i].id,
+                invoices = invoicesByCompany[companyId],
+                sumByCompany = 0;
+
+              for (var j = 0; j < invoices.length; j++) {
+                sumByCompany += invoices[j].sum;
               }
+
+              $scope.totalCompanySum[companyId] = sumByCompany;
             }
-
-            if ($stateParams.mode === 'group-by-company') {
-
-              for (var i = 0; i < $scope.receiptArchiveCompanies.length; i++) {
-
-                var companyId = $scope.receiptArchiveCompanies[i].id,
-                  invoices = $scope.receiptArchiveData.companies[companyId];
-
-                $scope.totalCompanySum[companyId] = 0;
-
-                for (var j = 0; j < invoices.length; j++) {
-                  $scope.totalCompanySum[companyId] += invoices[j].sum;
-                }
-              }
-            }
-
-          }, true);
+          }
 
           headerSharedState.invoices = $scope.receiptArchiveData.list
 

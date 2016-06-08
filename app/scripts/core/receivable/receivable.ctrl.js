@@ -28,70 +28,40 @@
           }
         });
 
-        $scope.receivableInvoicesData = ReceivableService.getReceivableInvoicesData($scope, function (resp) {
+        ReceivableService.getReceivableInvoicesData($scope, function (resp) {
 
-          var invoicesData = $scope.receivableInvoicesData;
+          var invoicesData = $scope.receivableInvoicesData = resp;
 
-          $scope.$watch('receivableInvoicesData', function () {
-            $scope.totalReceivables = 0;
-            $scope.receivableCompanies = [];
-            $scope.invoiceToSent = {};
+          $scope.totalReceivables = 0;
+          $scope.receivableCompanies = [];
+          $scope.invoiceToSent = {};
 
-            angular.forEach(invoicesData.companies, function (value, key) {
+          for (var id in invoicesData.companies) {
+            var invoices = invoicesData.companies[id];
+            $scope.totalSum.companies[id] = 0;
 
-              if (key === 'staticCopy') {
-                return
-              }
+            for (var i = 0; i < invoices.length; i++) {
+              var invoice = invoices[i];
 
-              var companyInvoices = invoicesData.companies[key];
-              this.companies[key] = 0;
-
-              for (var i = 0; i < companyInvoices.length; i++) {
-
-                var invoice = companyInvoices[i],
-                  invoiceSum = 0;
-
-                if (invoice.isRecurring) {
-                  for (var j = 0; j < invoice.invoices.length; j++) {
-                    invoiceSum += invoice.invoices[j].sum;
-                  }
-                } else {
-                  invoiceSum += invoice.sum;
-                }
-
-                this.invoices[invoice.id] = invoiceSum;
-                this.companies[key] += invoiceSum;
-              }
-
-              $scope.totalReceivables += this.companies[key];
-
-            }, $scope.totalSum);
-
-            angular.forEach($scope.receivableInvoicesData.companies, function (val, key) {
-              if (key !== 'staticCopy') {
-                $scope.receivableCompanies.push(CompaniesService.getOneById(key));
-              }
-            });
-
-            if ($stateParams.mode === 'group-by-company') {
-
-              for (var companyId in invoicesData.companies) {
-                if (companyId !== 'staticCopy') {
-                  $scope.invoiceToSent[companyId] = {
-                    checked: false,
-                    invoices: {}
-                  };
-                }
-              }
-            } else {
-              $scope.invoiceToSent.invoices = {};
-              for (var i = 0; i < invoicesData.list.length; i++) {
-                $scope.invoiceToSent.invoices[invoicesData.list[i].id] = false;
-              }
+              $scope.totalSum.invoices[invoice.id] = invoice.sum;
+              $scope.totalSum.companies[id] += invoice.sum;
             }
 
-          }, true);
+            $scope.totalReceivables += $scope.totalSum.companies[id];
+            $scope.receivableCompanies.push(CompaniesService.getOneById(id));
+          }
 
+          if ($stateParams.mode === 'group-by-company') {
+
+            for (var companyId in invoicesData.companies) {
+              $scope.invoiceToSent[companyId] = {
+                checked: false,
+                invoices: {}
+              };
+            }
+          } else {
+            $scope.invoiceToSent.invoices = {};
+          }
 
         });
 
@@ -116,7 +86,7 @@
             var invoices = $scope.receivableInvoicesData.companies[companyId];
 
             for (var j = 0; j < invoices.length; j++) {
-              invoiceToSentData.invoices[invoices[j].number] = invoiceToSentData.checked
+              invoiceToSentData.invoices[invoices[j].number] = invoiceToSentData.checked;
             }
           }
         };
@@ -127,67 +97,66 @@
 
         $scope.$watch('invoiceToSent', function () {
 
-          $scope.countInvoice = 0;
-          var disabledCount = 0;
+          $scope.selectedInvoiceCount = 0;
+          var disabledCount = 0,
+            invoices;
 
           if ($stateParams.mode === 'group-by-company') {
+
             for (var companyId in $scope.invoiceToSent) {
-              if ($scope.invoiceToSent[companyId].invoices) {
-                for (var invoiceId in $scope.invoiceToSent[companyId].invoices) {
-                  if ($scope.invoiceToSent[companyId].invoices[invoiceId]) {
-                    $scope.countInvoice++;
+              var invoiceToSent = $scope.invoiceToSent[companyId],
+                companyChecked = invoiceToSent.checked;
+
+              invoices = invoiceToSent.invoices;
+
+              if (invoices) {
+                for (var invoiceNumber in invoices) {
+                  if (invoices[invoiceNumber]) {
+                    $scope.selectedInvoiceCount++;
+                    if (!companyChecked) {
+                      disabledCount++;
+                      $scope.selectableCompanyId = companyId;
+                    }
                   }
                 }
               }
 
-              if ($scope.invoiceToSent[companyId].checked) {
+              if (companyChecked) {
                 disabledCount++;
                 $scope.selectableCompanyId = companyId;
-              } else {
-                for (var invoiceId in $scope.invoiceToSent[companyId].invoices) {
-                  if ($scope.invoiceToSent[companyId].invoices[invoiceId]) {
-                    disabledCount++;
-                    $scope.selectableCompanyId = companyId;
-                  }
-                }
               }
             }
 
-            if (disabledCount === 0) {
-              $scope.selectableCompanyId = undefined;
-            }
           } else {
+
             if (!$scope.invoiceToSent) {
               return;
             }
 
-            for (var invoiceId in $scope.invoiceToSent.invoices) {
-              if ($scope.invoiceToSent.invoices[invoiceId]) {
-                $scope.countInvoice++;
+            invoices = $scope.invoiceToSent.invoices;
+
+            for (var invoiceNumber in invoices) {
+              if (invoices[invoiceNumber]) {
+                $scope.selectedInvoiceCount++;
                 disabledCount++;
                 for (var i = 0; i < $scope.receivableInvoicesData.list.length; i++) {
-                  if (invoiceId === $scope.receivableInvoicesData.list[i].number) {
-                    $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id
+                  if (invoiceNumber === $scope.receivableInvoicesData.list[i].number) {
+                    $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id;
+                    break;
                   }
                 }
               }
             }
-            if (disabledCount === 0) {
-              $scope.selectableCompanyId = undefined;
-            }
+
+          }
+
+          if (disabledCount === 0) {
+            $scope.selectableCompanyId = undefined;
           }
         }, true);
 
         $scope.hideLoadingIndicator = function () {
           $scope.loadingInProgress = false;
-        };
-
-        $scope.getInvoiceId = function (invoice) {
-          if (invoice.invoices && invoice.invoices.length) {
-            return invoice.invoices[0].id;
-          } else {
-            return invoice.id;
-          }
         };
 
         $scope.setOrderForInvoices = function (option) {
@@ -201,28 +170,19 @@
 
         $scope.orderByForInvoices = function (item) {
           if ($scope.orderInvoices.field === 'number') {
-            return getInvoiceProperty(item, 'number');
+            return item.number;
           } else if ($scope.orderInvoices.field === 'company') {
-            return CompaniesService.getOneById(getInvoiceProperty(item, 'company').id).name;
+            return CompaniesService.getOneById(item.id).name;
           } else if ($scope.orderInvoices.field === 'readedAt') {
-            return getInvoiceProperty(item, 'readedAt');
+            return item.readedAt;
           } else if ($scope.orderInvoices.field === 'date') {
-            return getInvoiceProperty(item, 'date');
+            return item.date;
           } else if ($scope.orderInvoices.field === 'dueDate') {
-            return getInvoiceProperty(item, 'dueDate').value;
+            return item.dueDate.value;
           } else if ($scope.orderInvoices.field === 'amount') {
             return $scope.totalSum.invoices[item.id];
           }
         };
-
-        function getInvoiceProperty(invoice, property) {
-          if (invoice.invoices && invoice.invoices[0] && invoice.invoices[0][property]) {
-            return invoice.invoices[0][property];
-          } else {
-            return invoice[property];
-          }
-        }
-
 
       }]);
 

@@ -25,35 +25,26 @@
 
           $scope.countInvoicesInCompany = 0;
 
-          var countObj = 0,
+          var checkedCounter = 0,
             companyInvoices = $scope.invoiceToSent[$scope.company.id];
 
-          for (var invoiceId in (companyInvoices.invoices)) {
+          for (var invoiceId in companyInvoices.invoices) {
 
             $scope.countInvoicesInCompany++;
-
             if (companyInvoices.invoices[invoiceId]) {
-              countObj++;
+              checkedCounter++;
             }
           }
-          companyInvoices.checked = ($scope.receivableInvoicesData.companies[$scope.company.id].length === countObj);
+          companyInvoices.checked = ($scope.receivableInvoicesData.companies[$scope.company.id].length === checkedCounter);
         }, true);
 
         $scope.sentInvoices = function () {
-          var companyInvoices = $scope.invoiceToSent[$scope.company.id].invoices;
-          var invoiceToSentId = [];
-          var listInvoices = $scope.receivableInvoicesData.list;
+          var companyInvoices = $scope.invoiceToSent[$scope.company.id].invoices,
+            invoiceToSentId = [];
+
           for (var invoice in companyInvoices) {
             if (companyInvoices[invoice]) {
-              for (var i = 0; i < listInvoices.length; i++) {
-                if (invoice === listInvoices[i].id) {
-                  if (listInvoices[i].isRecurring) {
-                    invoiceToSentId.push(listInvoices[i].invoices[listInvoices[i].invoices.length - 1].id);
-                  } else {
-                    invoiceToSentId.push(invoice);
-                  }
-                }
-              }
+              invoiceToSentId.push(invoice);
             }
           }
           ReceivableService.resendInvoices(invoiceToSentId);

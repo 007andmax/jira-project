@@ -9,7 +9,7 @@
       <div class="col-5">AMOUNT</div>
     </li>
 
-    <li ng-repeat="invoice in receiptArchiveData.list | orderBy: 'number'"
+    <li ng-repeat="invoice in receiptArchiveData.list | orderBy: 'number' track by invoice.id"
         ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
         show-model-element="{{ 'showInvoice-' + invoice.id }}">
 

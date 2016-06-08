@@ -6,11 +6,9 @@
     ['$scope', '$modalInstance', 'CompaniesService', 'ReceivableService', 'Downloader',
       function ($scope, $modalInstance, CompaniesService, ReceivableService, Downloader) {
 
-        var invoice = $scope.invoice.invoices ? $scope.invoice.invoices[0] : $scope.invoice;
-
         $scope.receivablePreview = true;
 
-        ReceivableService.getInvoiceDataForPreview(invoice.id, function (resp) {
+        ReceivableService.getInvoiceDataForPreview($scope.invoice.id, function (resp) {
           $scope.currentInvoice = resp;
           $scope.currentBillTo = {
             addressWithSuitNumberAndPostalCode: resp.billingAddress
@@ -35,14 +33,14 @@
         };
 
         $scope.print = function () {
-          var wnd = window.open('/invoice/show/' + invoice.id + '/pdf');
+          var wnd = window.open('/invoice/show/' + $scope.invoice.id + '/pdf');
           wnd.print();
         };
 
         $scope.download = function () {
           Downloader.downloadByUrl(
-            '/invoice/show/' + invoice.id + '/pdf',
-            CompaniesService.getOneById(invoice.company.id).name + '-' + invoice.number + '.pdf'
+            '/invoice/show/' + $scope.invoice.id + '/pdf',
+            CompaniesService.getOneById($scope.invoice.company.id).name + '-' + $scope.invoice.number + '.pdf'
           );
         };
       }]);

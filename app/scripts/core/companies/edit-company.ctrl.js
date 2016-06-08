@@ -84,10 +84,8 @@
             $scope.editCompany = companyData.staticCopy();
 
             if (!$scope.editCompany.credential) {
-              $scope.editCompany.credential = {
-                login: '',
-                password: ''
-              }
+              $scope.editCompany.login = '';
+              $scope.editCompany.password = '';
             }
 
             TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
@@ -109,10 +107,8 @@
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: [],
-            credential: {
-              login: '',
-              password: ''
-            }
+            login: '',
+            password: ''
           };
 
           TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {

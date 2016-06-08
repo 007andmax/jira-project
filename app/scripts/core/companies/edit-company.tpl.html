@@ -796,13 +796,13 @@
                   <div class="form-row clearfix">
                     <div class="form-group">
                       <label class="control-label">Domain/Username</label>
-                      <input class="form-control" type="text" ng-model="editCompany.credential.login">
+                      <input class="form-control" type="text" ng-model="editCompany.login">
                     </div>
                     <div class="form-group">
                       <label class="control-label">Password</label>
 
                       <input class="form-control show-password" type="{{ isShowPass ? 'text' : 'password' }}"
-                             ng-model="editCompany.credential.password">
+                             ng-model="editCompany.password">
                       <a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"
                          tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password" ng-click="isShowPass = !isShowPass">
                         <i class="icn-sm" ng-class="{'icn-hide-password': isShowPass, 'icn-show-password': !isShowPass}"></i>

@@ -67,7 +67,7 @@
             <div class="col-6"></div>
           </li>
 
-          <li ng-repeat="invoice in receivableInvoicesData.companies[company.id] | orderBy: orderByForInvoices : orderInvoices.reverse track by getInvoiceId(invoice)"
+          <li ng-repeat="invoice in receivableInvoicesData.companies[company.id] | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
               ng-controller="quicktech.core.receivable.invoiceCtrl"
               show-model-element="{{ 'showInvoice-' + invoice.id }}">
 
@@ -86,13 +86,13 @@
                    modal-window-class="invoice-modal-not-background"
                    mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
                    mw-controller="quicktech.core.receivable.invoicePreviewCtrl">
-                {{ invoiceProperty('number') }}
+                {{ invoice.number }}
               </div>
 
             </div>
 
-            <div class="col-2">{{ invoiceProperty('readedAt') | date:'dd MMM yyyy' }}</div>
-            <div class="col-2">{{ invoiceProperty('date') | date:'dd MMM yyyy' }}</div>
+            <div class="col-2">{{ invoice.readedAt | date:'dd MMM yyyy' }}</div>
+            <div class="col-2">{{ invoice.date | date:'dd MMM yyyy' }}</div>
 
             <div class="col-3">
               <span class="label" ng-class="{'label-info': !dueDate.over, 'label-danger': dueDate.over}">
@@ -101,12 +101,12 @@
             </div>
 
             <div class="col-4">
-              <span class="send-again-txt">{{ invoiceProperty('status') === 'SENT' ? 'Sent' : 'Resent' }}</span>
+              <span class="send-again-txt">{{ invoice.status === 'SENT' ? 'Sent' : 'Resent' }}</span>
 
               <button-with-loading-indicator class="pull-left has-tooltip resend-button"
                                              icn-classes="icn-sm icn-send-again" ng-click="sentInvoice()"
                                              tooltip-placement="top" tooltip="Send Again"
-                                             loading="sending[getInvoiceId(invoice)]"></button-with-loading-indicator>
+                                             loading="sending[invoice.id]"></button-with-loading-indicator>
             </div>
 
             <div class="col-5">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
