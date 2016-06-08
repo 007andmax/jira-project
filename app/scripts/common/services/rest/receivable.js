@@ -24,7 +24,7 @@
 
         Utils.customizeObj(resp.data, result);
 
-        RealTimeService.subscribe('/companyPaymentReceived?targetId=' + companyId, scope, function (newChange) {
+        RealTimeService.subscribe('/companyPaymentReceived/' + companyId, scope, function (newChange) {
 
           console.log(newChange);
 
@@ -60,7 +60,7 @@
 
         Utils.customizeArray(resp.data, result);
 
-        RealTimeService.subscribe('/todayReceivableChartPoint?targetId=' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
+        RealTimeService.subscribe('/todayReceivableChartPoint/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
 
           console.log(newChange);
 

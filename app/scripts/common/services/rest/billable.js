@@ -370,7 +370,7 @@
           callback(ticketNumber.number);
         });
 
-        RealTimeService.subscribe('/number?targetId=INVOICE', scope, function (change) {
+        RealTimeService.subscribe('/number/INVOICE', scope, function (change) {
           console.log(change);
           if (change.action === 'NUMBER_CHANGED') {
             callback(Utils.getFormattedNumber(change.data, false));

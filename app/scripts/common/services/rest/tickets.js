@@ -253,7 +253,7 @@
         });
 
         if (detailed) {
-          RealTimeService.subscribe('/ticketUpdates?targetId=' + id, scope, function (newChange) {
+          RealTimeService.subscribe('/ticketUpdates/' + id, scope, function (newChange) {
 
             console.log(newChange);
 
@@ -294,7 +294,7 @@
             }
           });
 
-          RealTimeService.subscribe('/tagsSpecifying?targetId=' + id, scope, function (newChange) {
+          RealTimeService.subscribe('/tagsSpecifying/' + id, scope, function (newChange) {
 
             console.log(newChange);
 
@@ -546,7 +546,7 @@
           callback(ticketNumber.number);
         });
 
-        RealTimeService.subscribe('/number?targetId=TICKET', scope, function (change) {
+        RealTimeService.subscribe('/number/TICKET', scope, function (change) {
           console.log(change);
           if (change.action === 'NUMBER_CHANGED') {
             callback(Utils.getFormattedNumber(change.data));

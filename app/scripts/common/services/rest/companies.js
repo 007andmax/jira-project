@@ -310,7 +310,7 @@
         }
       });
 
-      RealTimeService.subscribe('/companyDto?targetId=' + companyId, scope, function (newChange) {
+      RealTimeService.subscribe('/companyDto/' + companyId, scope, function (newChange) {
 
         console.log(newChange);
 
@@ -596,7 +596,7 @@
           }
         });
 
-        RealTimeService.subscribe('/subscription?targetId=' + companyId, scope, function (newChange) {
+        RealTimeService.subscribe('/subscription/' + companyId, scope, function (newChange) {
 
           console.log(newChange);
 

@@ -20,7 +20,7 @@
 
       return Utils.getListByUrl('/taxRate/' + companyId, callback, function (list) {
 
-        RealTimeService.subscribe('/taxRate?targetId=' + companyId, scope, function (newChange) {
+        RealTimeService.subscribe('/taxRate/' + companyId, scope, function (newChange) {
 
           console.log(newChange);
 

@@ -25,7 +25,7 @@
 
           Utils.customizeObj(resp.data, result);
 
-          RealTimeService.subscribe('/resolvedTicketsCount?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/resolvedTicketsCount/' + companyId, scope, function (newChange) {
 
             console.log(newChange);
 
@@ -63,7 +63,7 @@
 
           Utils.customizeObj(resp.data, result);
 
-          RealTimeService.subscribe('/ticketsResolutionTimeChart?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/ticketsResolutionTimeChart/' + companyId, scope, function (newChange) {
 
             console.log(newChange);
 
@@ -101,7 +101,7 @@
 
           Utils.customizeObj(resp.data, result);
 
-          RealTimeService.subscribe('/billedTimeStatistic?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/billedTimeStatistic/' + companyId, scope, function (newChange) {
 
             console.log(newChange);
 
@@ -139,7 +139,7 @@
 
           Utils.customizeObj(resp.data, result);
 
-          RealTimeService.subscribe('/todayReceivableChartPoint?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/todayReceivableChartPoint/' + companyId, scope, function (newChange) {
 
             console.log(newChange);
 
@@ -179,7 +179,7 @@
         $http.get('/statistic/companies/paymentSum/top/' + topAmount).then(function (resp) {
 
           function realTimeCompanyResults(companyId) {
-            RealTimeService.subscribe('/companyPaymentReceived?targetId=' + companyId, scope, function (newChange) {
+            RealTimeService.subscribe('/companyPaymentReceived/' + companyId, scope, function (newChange) {
 
               console.log(newChange);
 
@@ -225,7 +225,7 @@
         $http.get('/statistic/companies/resolvedTicket/top/' + topAmount).then(function (resp) {
 
           function realTimeCompanyResults(companyId) {
-            RealTimeService.subscribe('/resolvedTicketsCount?targetId=' + companyId, scope, function (newChange) {
+            RealTimeService.subscribe('/resolvedTicketsCount/' + companyId, scope, function (newChange) {
 
               console.log(newChange);
 
@@ -296,7 +296,7 @@
 
           Utils.customizeObj(resp.data, result);
 
-          RealTimeService.subscribe('/companyPaymentReceived?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/companyPaymentReceived/' + companyId, scope, function (newChange) {
 
             console.log(newChange);
 
@@ -364,7 +364,7 @@
             Utils.customizeObj(resp.data, result);
 
             if (itCurrentDay(new Date(latestDayStr))) {
-              RealTimeService.subscribe('/todayReceivableChartPoint?targetId=' + companyId, scope, function (newChange) {
+              RealTimeService.subscribe('/todayReceivableChartPoint/' + companyId, scope, function (newChange) {
 
                 console.log(newChange);
 
@@ -428,7 +428,7 @@
 
           Utils.customizeObj(resp.data, result);
 
-          RealTimeService.subscribe('/ticketResolution?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/ticketResolution/' + companyId, scope, function (newChange) {
 
             console.log(newChange);
 

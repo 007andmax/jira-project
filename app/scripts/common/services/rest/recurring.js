@@ -214,7 +214,7 @@
 
         Utils.customizeArray(resp.data, invoices);
 
-        RealTimeService.subscribe('/recurring?targetId=' + companyId, scope, function (newChange) {
+        RealTimeService.subscribe('/recurring/' + companyId, scope, function (newChange) {
 
           console.log(newChange);
 

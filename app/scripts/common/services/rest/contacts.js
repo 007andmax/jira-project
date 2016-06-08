@@ -43,7 +43,7 @@
         $http.get('/contacts/getSubscribedContactsOnTicket/').then(function (resp) {
           Utils.customizeArray(resp.data, info);
 
-          RealTimeService.subscribe('/subscription?targetId=' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
+          RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
 
             console.log(newChange);
 

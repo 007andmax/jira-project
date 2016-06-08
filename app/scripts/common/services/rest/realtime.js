@@ -6,129 +6,88 @@
 
   var services = angular.module('main.services');
 
-  services.factory('RealTimeService', ['$http', '$timeout', '$rootScope', function ($http, $timeout, $rootScope) {
+  services.factory('RealTimeService', ['$timeout', '$rootScope', function ($timeout, $rootScope) {
 
-    var watcherId,
-      defeeredSubscribers = [{
-        url: '/global',
-        scope: $rootScope,
-        callback: globalNotify
-      }],
-      subscribingInProcess = 0,
-      subscribers = {};
+    var stompClient,
+      isInitialized,
+      stompEndpoint = "/realtime",
+      subscriptionConfigs = {},
+      globalSubscriptionId = guid(),
+      reconnectDelay = 5000;
+
+    subscriptionConfigs[globalSubscriptionId] = {
+      url: '/global',
+      scope: $rootScope,
+      callback: globalNotify,
+      id: globalSubscriptionId
+    };
 
     init();
 
     function init() {
-      $http.post("/realTime/createWatcher").success(function (resp) {
 
-        watcherId = resp.id;
+      stompClient = Stomp.over(new SockJS(stompEndpoint));
 
-        if (defeeredSubscribers.length > 0) {
+      stompClient.connect({}, function (frame) {
+        isInitialized = true;
 
-          for (var i = 0; i < defeeredSubscribers.length; i++) {
-            var item = defeeredSubscribers[i];
-            factory.subscribe(item.url, item.scope, item.callback);
-          }
+        for (var id in subscriptionConfigs) {
+          var config = subscriptionConfigs[id];
 
-          defeeredSubscribers = [];
-        }
-
-        watch();
-      }).error(function (data, status, headers, config) {
-        console.error("Cannot receive watcher Id !!!", data, status, headers, config);
-        throw "Cannot initialize RealTimeService";
-      });
-    }
-
-    function reinitialize() {
-      watcherId = undefined;
-
-      //TODO: This "for" relies on response from backend. ToDo: make enum through list, not the fields
-      for (var subscriberId in subscribers) {
-
-        var subscriberData = subscribers[subscriberId];
-
-        if (subscriberData && !subscriberData.scope.$$destroyed) {
-          defeeredSubscribers.push(subscriberData);
-        }
-      }
-
-      subscribers = {};
-
-      init();
-    }
-
-    function watch() {
-
-      if (subscribingInProcess > 0) {
-        $timeout(watch, 300);
-        return;
-      }
-
-      $http.post("/realTime/watch/" + watcherId, Object.keys(subscribers) || [], { timeout: 2200000 }).then(function (response) {
-
-        if (!response.data) {
-          console.log('No Date in response!')
-        }
-
-        console.log(response.data);
-
-        if (response.data == 'timeout' || response.data.message == 'destroyed' || response.status == 205) {
-          reinitialize();
-          return;
-        }
-
-        if (response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized' || response.statusText === 'userDisabled') {
-          if (response.statusText === 'userDisabled') {
-            alert('Your account has been disabled.');
-          }
-          window.location.pathname = '/logout';
-          return;
-        }
-
-        //TODO: This "for" relies on response from backend. ToDo: make enum through list, not the fields
-        for (var subscriberId in response.data) {
-
-          var subscriberData = subscribers[subscriberId];
-
-          if (subscriberData && !subscriberData.scope.$$destroyed) {
-
-            var changes = response.data[subscriberId];
-
-            if (changes) {
-              for (var i = 0; i < changes.length; i++) {
-                subscriberData.callback(changes[i]);
-              }
-            }
+          if (!config.scope.$$destroyed) {
+            subscribeConfig(config);
           }
         }
 
-        watch();
+        //return frame.headers['user-name'];
+      }, function (error) {
 
-      }, function (response) {
+        if (stompClient)
+          stompClient.disconnect();
 
-        if (!response || response.status === 0) {
-//                $window.location.reload();
-          console.log("ERRRORRR?????", response);
-          $timeout(reinitialize, 1000);
-        } else if (response.status == 205) {
-          reinitialize();
+        if (isInitialized) {
+          console.log("Lost connection!! Trying to reconnect", error);
+          init();
+
         } else {
-          console.log("ERRRORRR!!!!!!!!!!!!", response);
-          $timeout(watch, 300);
+          console.error("Cannot establish web socket connection", error);
+          setTimeout(init, reconnectDelay);
         }
+
+        isInitialized = false;
+        console.log('erease stompClient')
+        stompClient = undefined;
       });
     }
 
+    function subscribeConfig(config) {
+
+      if (!isInitialized)
+        return;
+
+      var subscription = stompClient.subscribeConfig(
+        "/user/watch" + config.url,
+        function (message) {
+          //console.log(message);
+          config.callback(JSON.parse(message.body));
+        });
+
+      config.scope.$on('$destroy', function () {
+        subscription.unsubscribe();
+        delete subscriptionConfigs[config.id];
+      });
+
+    }
+
+    //global notification should be broadcasted to all subscribers
     function globalNotify(newChange) {
 
-      for (var subscriberId in subscribers) {
+      for (var id in subscriptionConfigs) {
 
-        var subscriberData = subscribers[subscriberId];
+        var config = subscriptionConfigs[id];
 
-        if (subscriberData && !subscriberData.scope.$$destroyed && subscriberData.callback !== globalNotify) {
-          subscriberData.callback(newChange);
+        if (!config.scope.$$destroyed && config.callback !== globalNotify) {
+          config.callback(newChange);
         }
       }
 
@@ -138,58 +97,35 @@
       }
     }
 
-    var factory = {
-      subscribe: function (url, scope, callback) {
+    function addSubscription(url, scope, callback) {
+      var subscriberId = guid();
 
-        if (watcherId) {
+      return subscriptionConfigs[subscriberId] = {
+        url: url,
+        scope: scope,
+        callback: callback,
+        id: subscriberId
+      };
+    }
 
-          subscribingInProcess++;
-
-          $http.get("/realTime/subscribe/" + watcherId + url).success(function (resp) {
-
-            subscribingInProcess--;
-
-            subscribers[resp.id] = {
-              url: url,
-              scope: scope,
-              callback: callback
-            };
-
-            scope.$on('$destroy', function () {
-              delete subscribers[resp.id];
-            });
-
-          }).error(function (data, status, headers, config) {
-
-            subscribingInProcess--;
-
-            if (status == 205) {
-
-              defeeredSubscribers.push({
-                url: url,
-                scope: scope,
-                callback: callback
-              });
-
-              if (!$rootScope.isLogOut) {
-                reinitialize();
-              }
-            }
-
-            console.error("Cannot subscribe on " + url, data, status, headers, config);
-          });
-
-        } else {
-          defeeredSubscribers.push({
-            url: url,
-            scope: scope,
-            callback: callback
-          });
-        }
+    function guid() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
       }
-    };
 
-    return factory;
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+    }
+
+    return {
+      subscribe: function (url, scope, callback) {
+        subscribeConfig(
+          addSubscription(url, scope, callback)
+        );
+      }
+    }
 
   }]);
 

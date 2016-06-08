@@ -276,7 +276,7 @@
           }
         });
 
-        RealTimeService.subscribe('/rightBarCompanyInfo?targetId=' + companyId, scope, function (newChange) {
+        RealTimeService.subscribe('/rightBarCompanyInfo/' + companyId, scope, function (newChange) {
 
           console.log(newChange);
 

@@ -435,7 +435,7 @@
             Utils.defineReadOnlyProperty(info, "networkScan", JSON.parse(info.networkScan));
           }
 
-          RealTimeService.subscribe('/netScan?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
             console.log(newChange);
             if (newChange.action === 'NETWORK_SCAN') {
               if (newChange.data === "finished") {
@@ -591,7 +591,7 @@
           }
         });
 
-        RealTimeService.subscribe('/agentSettings?targetId=' + companyId, serviceScope, function (newChange) {
+        RealTimeService.subscribe('/agentSettings/' + companyId, serviceScope, function (newChange) {
           console.log(newChange);
 
           if (newChange.action === 'MASTER_AGENT_CHANGED') {

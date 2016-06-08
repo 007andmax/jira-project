@@ -123,7 +123,7 @@
             Utils.defineReadOnlyProperty(user.userStatistic, 'ticketsSubmitted', prevValue + 1);
           }
         });
-        RealTimeService.subscribe('/subscription?targetId=' + CompaniesService.getCurrentCompany().id, serviceScope, function (newChange) {
+        RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, serviceScope, function (newChange) {
 
           console.log(newChange);
 

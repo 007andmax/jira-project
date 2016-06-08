@@ -113,7 +113,7 @@
             Utils.defineReadOnlyProperty(userSubscriptions, subscription.user.id, Utils.customizeObj(subscription));
           }
 
-          RealTimeService.subscribe('/subscription?targetId=' + companyId, scope, function (newChange) {
+          RealTimeService.subscribe('/subscription/' + companyId, scope, function (newChange) {
 
             console.log(newChange);
 
