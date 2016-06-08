@@ -6,11 +6,11 @@
     ['$scope', 'ReceivableService',
       function ($scope, ReceivableService) {
 
-        var showInvoices;
+        $scope.showInvoices = false;
 
         $scope.toggleReceivableInvoices = function () {
           $scope.$broadcast('toggleReceivableInvoices');
-          showInvoices = !showInvoices;
+          $scope.showInvoices = !$scope.showInvoices;
         };
 
         $scope.$on('indicatorInvoice', function () {
@@ -51,7 +51,7 @@
         };
 
         $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
-          if (!showInvoices) {
+          if (!$scope.showInvoices) {
             $scope.toggleReceivableInvoices();
           }
           $scope.setHighlightInvoiceId(invoiceId);

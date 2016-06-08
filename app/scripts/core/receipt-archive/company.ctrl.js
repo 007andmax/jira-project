@@ -6,15 +6,15 @@
     ['$scope',
       function ($scope) {
 
-        var showInvoices;
+        $scope.showInvoices = false;
 
         $scope.toggleReceiptArchiveInvoices = function () {
           $scope.$broadcast('toggleReceiptArchiveInvoices');
-          showInvoices = !showInvoices;
+          $scope.showInvoices = !$scope.showInvoices;
         };
 
         $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
-          if (!showInvoices) {
+          if (!$scope.showInvoices) {
             $scope.toggleReceiptArchiveInvoices();
           }
           $scope.setHighlightInvoiceId(invoiceId);
