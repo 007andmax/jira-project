@@ -18,12 +18,9 @@
             $scope.currentUser = UsersService.getCurrentUser();
             $scope.tagColors = TagsService.getColors();
 
-            TagsService.search('', function (resp) {
-              $scope.result = resp;
-            });
-
             if (!$scope.readonlyTags) {
               var input = $element.find('input');
+
               input.on('keydown', function (e) {
                 $scope.dropdownOpened = true;
 
@@ -34,6 +31,10 @@
                 }
 
                 $scope.$apply();
+              });
+
+              TagsService.search('', function (resp) {
+                $scope.result = resp;
               });
 
               $document.on('click', $scope.saveTags);
