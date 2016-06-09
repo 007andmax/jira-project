@@ -91,7 +91,8 @@
     </div>
   </div>
 
-  <div class="well ticket-well" ng-if="ticketDetails.trash && ticketDetails.deletePerformer.id === currentUser.id">
+  <div class="well ticket-well"
+       ng-if="ticketDetails.trash && ticketDetails.deletePerformer.id === currentUser.id">
     <i class="icn-lg icn-msg-delete"></i>
 
     <div class="well-message">
@@ -101,7 +102,7 @@
         Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-click="deleteForever()">Delete Forever</div>
+      <div class="btn btn-danger btn-lg" ng-if="!ticketDetails.isBillable" ng-click="deleteForever()">Delete Forever</div>
       <div class="btn btn-dark btn-lg" ng-click="moveToTrash(false)">Restore</div>
     </div>
   </div>
@@ -120,7 +121,7 @@
         Restoring ticket moves the ticket back to its original folder where it was reported as spam. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-click="deleteForever()">Delete Forever</div>
+      <div class="btn btn-danger btn-lg" ng-if="!ticketDetails.isBillable" ng-click="deleteForever()">Delete Forever</div>
       <div class="btn btn-dark btn-lg" ng-click="restoreFromSpam()">Restore</div>
     </div>
   </div>

@@ -166,8 +166,10 @@
           };
 
           $scope.restoreFromSpam = function () {
-            TicketsService.restoreFromSpam($scope.ticketDetails.id);
-            $scope.uncheckTicket($scope.ticketDetails.id);
+            TicketsService.restoreFromSpam($scope.ticketDetails.id, function () {
+              $scope.uncheckTicket($scope.ticketDetails.id);
+              $state.go('tickets', { listType: $stateParams.listType });
+            });
           };
 
           $scope.moveToTrash = function (movedWay) {
@@ -505,7 +507,6 @@
 
           function closeTicket() {
             $scope.ticketClosing = true;
-
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.uncheckTicket($scope.ticketDetails.id);
