@@ -1,9 +1,9 @@
 <div class="ticket-post-update-wrapper" ng-form="ticketUpdateForm">
 
-  <div class="btn btn-primary pull-right has-tooltip" custom-disabled="{{ true }}"
-       tooltip-placement="top" tooltip="Remote Access" style="width: 92px;">
-    <i class="icn-sm icn-remote-access"></i>
-  </div>
+  <!--<div class="btn btn-primary pull-right has-tooltip" custom-disabled="{{ true }}"-->
+       <!--tooltip-placement="top" tooltip="Remote Access" style="width: 92px;">-->
+    <!--<i class="icn-sm icn-remote-access"></i>-->
+  <!--</div>-->
 
   <ul class="nav nav-ticket-add"
       ng-if="TicketsPermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
@@ -18,22 +18,12 @@
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
         <i class="icn-lg icn-add-product"></i>Product
       </a>
-
-      <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Product" tooltip-placement="top"
-           ng-click="addProduct(ticketUpdateForm.addProductsForm)">
-        <i class="icn-sm icn-plus"></i>
-      </div>
     </li>
 
     <li ng-class="{'active': currentOpenTab === 'SERVICE'}">
       <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('SERVICE')">
         <i class="icn-lg icn-add-service"></i>Service
       </a>
-
-      <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Service" tooltip-placement="top"
-           ng-click="addService(ticketUpdateForm.addServicesForm)">
-        <i class="icn-sm icn-plus"></i>
-      </div>
     </li>
 
   </ul>
@@ -115,9 +105,11 @@
                  ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
             <div class="ticket-add-content-actions-users pull-left"
-                 ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'"></div>
 
-
+            <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Product" tooltip-placement="top"
+                 ng-click="addProduct()">
+              <i class="icn-sm icn-plus"></i>
             </div>
 
             <div class="ticket-add-amount pull-right">
@@ -157,13 +149,14 @@
           <div class="ticket-add-content-actions pull-left">
 
             <div class="ticket-add-content-actions-dropdown pull-left" style="display: inline"
-                 ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'">
-            </div>
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
             <div class="ticket-add-content-actions-users pull-left"
-                 ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'">
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'"></div>
 
-
+            <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Service" tooltip-placement="top"
+                 ng-click="addService()">
+              <i class="icn-sm icn-plus"></i>
             </div>
 
           </div>

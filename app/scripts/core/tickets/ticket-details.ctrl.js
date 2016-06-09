@@ -28,7 +28,7 @@
             $scope.ticketDetails = details;
 
             if (details.assignedUser && details.assignedUser.id && $stateParams.listType === 'unassigned' && !$scope.ticketClaimed) {
-              $state.go('tickets', {listType: 'user'}).then(function () {
+              $state.go('tickets', { listType: 'user' }).then(function () {
                 $state.go('tickets.details', { ticketId: $scope.ticketDetails.id });
               });
             }
@@ -91,12 +91,20 @@
             $scope.ticketUpdate = value;
           };
 
-          $scope.updateAndCloseTicket = function () {
-            TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
-              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
-              $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', { listType: $stateParams.listType });
-            });
+          $scope.updateAndCloseTicket = function (form) {
+            if (haveUnsavedUpdate($scope.ticketUpdate)) {
+              var saveFailed = $scope.saveTicketUpdate(form);
+              if (!saveFailed) {
+                var unwatch = $scope.$watch('isSavingUpdate', function (value) {
+                  if (value === false) {
+                    closeTicket();
+                    unwatch();
+                  }
+                });
+              }
+            } else {
+              closeTicket()
+            }
           };
 
           $scope.collapseTicket = function () {
@@ -264,102 +272,115 @@
             }
           };
 
-          $scope.saveTicketUpdate = function () {
+          $scope.getTriedToSaveUpdate = function () {
+            return $scope.triedToSaveUpdate;
+          };
 
-            $scope.isSavingUpdate = true;
+          $scope.setTriedToSaveUpdate = function (value) {
+            $scope.triedToSaveUpdate = value;
+          };
 
-            var currentOpenTab = $scope.currentOpenTab,
-              ticketUpdateToSend = {
-                type: currentOpenTab,
-                shares: [],
-                ticket: { id: $scope.ticketDetails.id }
-              };
+          $scope.saveTicketUpdate = function (form) {
+            if (form.$valid) {
+              $scope.isSavingUpdate = true;
+              $scope.triedToSaveUpdate = false;
 
-            if ($scope.ticketUpdate.products) {
+              var currentOpenTab = $scope.currentOpenTab,
+                ticketUpdateToSend = {
+                  type: currentOpenTab,
+                  shares: [],
+                  ticket: { id: $scope.ticketDetails.id }
+                };
 
-              ticketUpdateToSend.products = $scope.ticketUpdate.products;
+              if ($scope.ticketUpdate.products) {
 
-            } else if ($scope.ticketUpdate.services) {
+                ticketUpdateToSend.products = $scope.ticketUpdate.products;
 
-              ticketUpdateToSend.services = angular.copy($scope.ticketUpdate.services);
+              } else if ($scope.ticketUpdate.services) {
 
-              for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
-                var date = new Date(ticketUpdateToSend.services[i].date);
+                ticketUpdateToSend.services = angular.copy($scope.ticketUpdate.services);
 
-                ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
-                ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                for (var i = 0; i < ticketUpdateToSend.services.length; i++) {
+                  var date = new Date(ticketUpdateToSend.services[i].date);
+
+                  ticketUpdateToSend.services[i].quantity = $scope.ticketUpdate.services[i].quantity / 60;
+                  ticketUpdateToSend.services[i].date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                }
+
+              } else if ($scope.ticketUpdate.note !== undefined) {
+
+                ticketUpdateToSend.note = $scope.ticketUpdate.note;
+                ticketUpdateToSend.attachments = [];
+
+                for (var i = 0; i < $scope.ticketUpdate.attachments.length; i++) {
+                  ticketUpdateToSend.attachments.push({ file: { id: $scope.ticketUpdate.attachments[i].id } })
+                }
+
               }
 
-            } else if ($scope.ticketUpdate.note !== undefined) {
+              for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
 
-              ticketUpdateToSend.note = $scope.ticketUpdate.note;
-              ticketUpdateToSend.attachments = [];
+                if ($scope.updateSharedUsersList[i].user) {
 
-              for (var i = 0; i < $scope.ticketUpdate.attachments.length; i++) {
-                ticketUpdateToSend.attachments.push({ file: { id: $scope.ticketUpdate.attachments[i].id } })
+                  ticketUpdateToSend.shares.push({
+                    user: { id: $scope.updateSharedUsersList[i].user.id },
+                    itemOrder: $scope.updateSharedUsersList[i].itemOrder
+                  });
+
+                } else if ($scope.updateSharedUsersList[i].contact) {
+
+                  ticketUpdateToSend.shares.push({
+                    contact: { id: $scope.updateSharedUsersList[i].contact.id },
+                    itemOrder: $scope.updateSharedUsersList[i].itemOrder
+                  })
+                }
               }
 
+              if ($scope.ticketUpdate.notifyTicketCreator) {
+                ticketUpdateToSend.notifyTicketCreator = $scope.ticketUpdate.notifyTicketCreator;
+              }
+
+              TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
+
+                $scope.isSavingUpdate = false;
+
+                switch (ticketUpdateToSend.type) {
+
+                  case 'NOTE':
+
+                    UserNotificationService.show('New ticket update containing a note has been posted', true);
+                    setCreateUpdateFormToDefault();
+                    return;
+
+                  case 'SERVICE':
+                    if (ticketUpdateToSend.services.length > 1) {
+                      UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
+                    } else {
+                      UserNotificationService.show('New ticket update containing a service has been posted', true);
+                    }
+                    setCreateUpdateFormToDefault();
+                    return;
+
+                  case 'PRODUCT':
+                    if ($scope.ticketUpdate.products.length > 1) {
+                      UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.products.length + ' products has been posted', true);
+                    } else {
+                      UserNotificationService.show('New ticket update containing a product has been posted', true);
+                    }
+                    setCreateUpdateFormToDefault();
+                    return;
+                }
+
+                function setCreateUpdateFormToDefault() {
+                  $scope.selectUpdateSharedUser = {};
+                  $scope.updateSharedUsersList = [];
+                  $scope.$broadcast('setCreateUpdateFormToDefault');
+                }
+              });
+            } else {
+              $scope.triedToSaveUpdate = true;
+              return true;
             }
-
-            for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
-
-              if ($scope.updateSharedUsersList[i].user) {
-
-                ticketUpdateToSend.shares.push({
-                  user: { id: $scope.updateSharedUsersList[i].user.id },
-                  itemOrder: $scope.updateSharedUsersList[i].itemOrder
-                });
-
-              } else if ($scope.updateSharedUsersList[i].contact) {
-
-                ticketUpdateToSend.shares.push({
-                  contact: { id: $scope.updateSharedUsersList[i].contact.id },
-                  itemOrder: $scope.updateSharedUsersList[i].itemOrder
-                })
-              }
-            }
-
-            if ($scope.ticketUpdate.notifyTicketCreator) {
-              ticketUpdateToSend.notifyTicketCreator = $scope.ticketUpdate.notifyTicketCreator;
-            }
-
-            TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
-
-              $scope.isSavingUpdate = false;
-
-              switch (ticketUpdateToSend.type) {
-
-                case 'NOTE':
-
-                  UserNotificationService.show('New ticket update containing a note has been posted', true);
-                  setCreateUpdateFormToDefault();
-                  return;
-
-                case 'SERVICE':
-                  if (ticketUpdateToSend.services.length > 1) {
-                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
-                  } else {
-                    UserNotificationService.show('New ticket update containing a service has been posted', true);
-                  }
-                  setCreateUpdateFormToDefault();
-                  return;
-
-                case 'PRODUCT':
-                  if ($scope.ticketUpdate.products.length > 1) {
-                    UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.products.length + ' products has been posted', true);
-                  } else {
-                    UserNotificationService.show('New ticket update containing a product has been posted', true);
-                  }
-                  setCreateUpdateFormToDefault();
-                  return;
-              }
-
-              function setCreateUpdateFormToDefault() {
-                $scope.selectUpdateSharedUser = {};
-                $scope.updateSharedUsersList = [];
-                $scope.$broadcast('setCreateUpdateFormToDefault');
-              }
-            });
           };
 
           $scope.setEditExpenseId = function (id) {
@@ -462,29 +483,6 @@
             return sharedUsers.length;
           };
 
-          $scope.addProduct = function (form) {
-
-            if (form.$valid) {
-
-              $scope.ticketUpdate.products.push({ item: {} });
-              $scope.triedToAddItem = false;
-
-            } else {
-              $scope.triedToAddItem = true;
-            }
-          };
-
-          $scope.addService = function (form) {
-
-            if (form.$valid) {
-              $scope.ticketUpdate.services.push({ item: {} });
-              $scope.triedToAddItem = false;
-
-            } else {
-              $scope.triedToAddItem = true;
-            }
-          };
-
           $scope.getTriedToAddItem = function () {
             return $scope.triedToAddItem;
           };
@@ -504,6 +502,44 @@
             rightPanelSharedState.companyId = undefined;
             rightPanelSharedState.createUserId = undefined;
           });
+
+          function closeTicket() {
+            $scope.ticketClosing = true;
+
+            TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
+              $scope.uncheckTicket($scope.ticketDetails.id);
+              $state.go('tickets', { listType: $stateParams.listType });
+            });
+          }
+
+          function haveUnsavedUpdate(update) {
+            return (
+              !!update.note ||
+              (update.products && update.products.length > 1) ||
+              (update.services && update.services.length > 1) ||
+              isNotEmpty(update.products) ||
+              isNotEmpty(update.services)
+            );
+          }
+
+          function isNotEmpty(object) {
+            for (var prop in object) {
+              if (object.hasOwnProperty(prop) && prop !== 'itemOrder' && prop !== '$$hashKey') {
+                var item = object[prop];
+
+                if (typeof item === 'object') {
+                  if (isNotEmpty(item)) {
+                    return true;
+                  }
+                } else if (item) {
+                  return true;
+                }
+              }
+            }
+
+            return false;
+          }
 
         }]);
   }()

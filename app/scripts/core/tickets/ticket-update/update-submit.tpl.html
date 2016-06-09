@@ -11,10 +11,16 @@
   </div>
 
   <div class="pull-right">
-    <div class="btn btn-info"
-         custom-disabled="{{ updateTicketNote.$invalid || addProductsForm.$invalid || addServicesForm.$invalid || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize }}"
-         ng-click="saveTicketUpdate()">
-      <i class="icn-sm icn-send"></i>
+    <div class="btn btn-lg btn-info"
+         custom-disabled="{{ updateTicketNote.$invalid || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+         ng-click="saveTicketUpdate(ticketUpdateForm)">
+      Update
+    </div>
+    <div ng-show="TicketsPermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status) || ticketClaimed"
+         class="btn btn-lg btn-info btn-update"
+         custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
+         ng-click="updateAndCloseTicket(ticketUpdateForm)">
+      Update &amp; Close
     </div>
   </div>
 

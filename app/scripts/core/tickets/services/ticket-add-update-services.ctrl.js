@@ -28,14 +28,16 @@
             });
 
             $scope.addTicketOwnerToUpdate();
-            $scope.setTriedToAddItem(false);
+            $scope.setTriedToSaveUpdate(false);
           }
 
           $scope.isShowingErrors = function (form, fieldName) {
-            return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.getTriedToAddItem());
+            return form[fieldName] && !form[fieldName].$valid && (form[fieldName].$dirty || $scope.getTriedToSaveUpdate());
           };
 
-
+          $scope.addService = function () {
+            $scope.ticketUpdate.services.push({ item: {} });
+          };
 
           $scope.$on('setCreateUpdateFormToDefault', setTicketUpdateToDefault)
 

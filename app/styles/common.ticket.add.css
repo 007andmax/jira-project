@@ -32,12 +32,10 @@
     margin-top: 22px;
 }
 
-.nav-ticket-add .add-expense-btn {
-  display: none;
-}
-
-.nav-ticket-add .active .add-expense-btn {
-  display: inline-block;
+.add-expense-btn {
+  margin-right: 20px;
+  margin-top: 7px !important;
+  float: right;
 }
 
 .ticket-add .qt-table{
@@ -143,7 +141,7 @@
     border-color: #94a4b8;
 }*/
 .ticket-add-amount {
-    margin-right: 13px;
+    margin-right: 20px;
     margin-top: 9px;
 }
 @-moz-document url-prefix() {
@@ -187,6 +185,10 @@
 .ticket-add-footer .btn-info.disabled{
     background-color: #e7ecf2;
     border-color: #e7ecf2;
+}
+.btn-update {
+  width: auto !important;
+  margin-left: 10px;
 }
 /* Add Product tab */
 #Product .col-1{

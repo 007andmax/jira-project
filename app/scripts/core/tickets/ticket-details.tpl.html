@@ -57,13 +57,6 @@
 
         <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
 
-          <div ng-show="TicketsPermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status) || ticketClaimed"
-               class="btn btn-lg btn-info btn-update pull-left"
-               custom-disabled="{{ ticketDetails.status === 'COMPLETED' }}"
-               ng-click="updateAndCloseTicket()">
-            Update &amp; Close
-          </div>
-
           <div class="dropdown pull-left" dropdown
                ng-show="TicketsPermissionsService.isSettingVisible(ticketDetails, currentUser.role)">
 

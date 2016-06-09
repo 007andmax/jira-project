@@ -39,13 +39,13 @@
         <input type="text" class="form-control" placeholder="Qty"
                name="productQty" hard-reset-required="true" ng-change="controlProductQty(addProductForm)"
                ng-model="productExpense.quantity" ng-maxlength="10"
-               hard-reset-pattern="numberPattern"/>
+               hard-reset-pattern="quantityPattern">
       </div>
 
       <div class="col-5" ng-class="{'has-error': isShowingErrors(addProductForm, 'productPrice')}">
         <input type="text" class="form-control" placeholder="Price"
                name="productPrice" ng-required="true" ng-model="productExpense.item.sale"
-               hard-reset-pattern="decimalNumberPattern" hard-reset-required="true"/>
+               hard-reset-pattern="pricePattern" hard-reset-required="true"/>
       </div>
 
       <div class="col-6" ng-if="ticketUpdate.products.length > 1">
