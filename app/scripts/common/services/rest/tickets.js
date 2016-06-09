@@ -289,6 +289,16 @@
 
               ticket.updates.sort(sortTicketUpdateList);
 
+              var attachments = newChange.data.attachments;
+
+              if (attachments && attachments.length) {
+
+                for (var i = 0; i < attachments.length; i++) {
+                  var attachment = attachments[i];
+                  ticket.attachments.push(attachment);
+                }
+              }
+
             } else if (newChange.action == 'UPDATE_DELETED') {
               Utils.deleteById(ticket.updates, newChange.data.id);
             }
