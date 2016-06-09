@@ -14,21 +14,21 @@
             recipient: 'All persons added to Ticket Update',
             description: 'This message will be sent when a person is added to the Ticket Update.'
           },
-          'TU_EDITED': {
-            title: 'A Ticket Update is edited',
-            recipient: 'All persons added to Ticket Update',
-            description: 'This message will be sent when a ticket update is edited.'
-          },
-          'TU_DELETED': {
-            title: 'A Ticket Update is deleted',
-            recipient: 'All persons added to Ticket Update',
-            description: 'This message will be sent when a ticket update is deleted.'
-          },
-          'TICKET_ASSIGNED': {
-            title: 'A Ticket is assigned/re-assigned',
-            recipient: 'User',
-            description: 'This message will inform the client user about the ticket assignee. It may include the assignee contact details.'
-          },
+          //'TU_EDITED': {
+          //  title: 'A Ticket Update is edited',
+          //  recipient: 'All persons added to Ticket Update',
+          //  description: 'This message will be sent when a ticket update is edited.'
+          //},
+          //'TU_DELETED': {
+          //  title: 'A Ticket Update is deleted',
+          //  recipient: 'All persons added to Ticket Update',
+          //  description: 'This message will be sent when a ticket update is deleted.'
+          //},
+          //'TICKET_ASSIGNED': {
+          //  title: 'A Ticket is assigned/re-assigned',
+          //  recipient: 'User',
+          //  description: 'This message will inform the client user about the ticket assignee. It may include the assignee contact details.'
+          //},
           'TICKET_CREATED': {
             title: 'A new Ticket is created',
             recipient: 'User',
@@ -38,22 +38,22 @@
             title: 'A Ticket is closed',
             recipient: 'User',
             description: 'This message will be sent to inform client user that ticket has been closed.'
-          },
-          'TICKET_OPENED': {
-            title: 'A Ticket is marked as Open',
-            recipient: 'User',
-            description: 'This message will be sent when a previously closed ticket is marked as open.'
-          },
-          'TICKET_SPAM': {
-            title: 'A Ticket is marked/reported as Spam',
-            recipient: 'User',
-            description: 'This message will be sent when a ticket is marked/reported as spam.'
-          },
-          'TICKET_TRASH': {
-            title: 'A Ticket is moved to Trash',
-            recipient: 'User',
-            description: 'This message will be sent when a ticket is moved to trash.'
           }
+          //'TICKET_OPENED': {
+          //  title: 'A Ticket is marked as Open',
+          //  recipient: 'User',
+          //  description: 'This message will be sent when a previously closed ticket is marked as open.'
+          //},
+          //'TICKET_SPAM': {
+          //  title: 'A Ticket is marked/reported as Spam',
+          //  recipient: 'User',
+          //  description: 'This message will be sent when a ticket is marked/reported as spam.'
+          //},
+          //'TICKET_TRASH': {
+          //  title: 'A Ticket is moved to Trash',
+          //  recipient: 'User',
+          //  description: 'This message will be sent when a ticket is moved to trash.'
+          //}
         };
 
         $scope.agentTemplates = {
