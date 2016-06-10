@@ -1,21 +1,6 @@
-<div class="settings-main-wrapper" ng-form="companyInfoForm" scroll-to-error-fild>
+<div class="settings-main-wrapper">
   <div class="help-text">Manage your company's information, enter support &amp; business email addresses, and set weekly
     schedule. Here, you can set when to notify agents, users, and vendors via email.
-  </div>
-
-  <div class="settings-button clearfix settings-fixed-button">
-
-    <div class="pull-right">
-      <div class="form-row clearfix">
-        <div class="form-group no-label full-width">
-          <button class="btn btn-lg btn-info pull-right" ng-click="saveCompanyInfo()"
-                  custom-disabled="{{ savingCompanyInfo }}">
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <div class="basic-info-wrapper"
@@ -55,7 +40,8 @@
 
                 <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
                        ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
-                       is-uniq-validation validation-func="validateCompanyName" model-id="editCompany.name">
+                       is-uniq-validation validation-func="validateCompanyName" model-id="editCompany.name"
+                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
 
               </div>
             </div>
@@ -124,7 +110,8 @@
                 </div>
 
                 <input class="form-control" type="text" name="businessEmail"
-                       ng-model="companyForSettingPage.businessEmail" ng-pattern="emailPattern">
+                       ng-model="companyForSettingPage.businessEmail" ng-pattern="emailPattern"
+                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
               </div>
             </div>
 
@@ -266,11 +253,11 @@
           <div>
             <div class="create-user-form">
 
-              <div address-autocomplete template-page="settings"
+              <div address-autocomplete template-page="settings" save-func="saveContactInfo"
                    ng-model="address" show-validation-messages="triedToSave"></div>
 
               <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
-                   country-code="{{address.countryCode}}"></div>
+                   country-code="{{address.countryCode}}" on-lost-focus="saveContactInfo"></div>
 
               <div class="form-row clearfix" style="margin-top: 13px;">
                 <time-zone-autocomplete address="address" time-zones="timeZones"></time-zone-autocomplete>
@@ -326,7 +313,7 @@
           <div class="col-4">&nbsp;</div>
         </li>
 
-        <li ng-repeat="service in services | orderBy: 'name'"
+        <li ng-repeat="service in services['default'] | orderBy: 'name'"
             ng-controller="quicktech.core.settings.companyInfoServiceCtrl"
             ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
             show-model-element="{{ 'show-' + service.versionedId.id }}">

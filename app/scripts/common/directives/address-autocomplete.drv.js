@@ -10,7 +10,8 @@
         scope: {
           model: '=ngModel',
           showValidationMessages: '=showValidationMessages',
-          isMapShown: "="
+          isMapShown: '=',
+          saveFunc: '=?'
         },
         templateUrl: function (elem, attr) {
           return '/html/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';

@@ -40,7 +40,7 @@
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                aria-expanded="true" hard-reset-required="true" ng-maxlength="20"
                ng-pattern="phoneNumberPattern" hard-phone-number-pattern country="{{countryCode}}"
-               make-dirty-on-blur>
+               make-dirty-on-blur execute-when-outfocused="onLostFocus(phoneNumbersForm)">
       </div>
 
       <div class="form-group no-label">
@@ -51,7 +51,8 @@
                  aria-expanded="true" READONLY>
 
           <ul class="dropdown-menu dropdown-account-type">
-            <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
+            <li ng-repeat="(type, label) in phoneNumberTypes"
+                ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
             </li>
           </ul>
@@ -106,7 +107,7 @@
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                aria-expanded="true" ng-maxlength="20" ng-pattern="phoneNumberPattern"
-               make-dirty-on-blur
+               make-dirty-on-blur execute-when-outfocused="onLostFocus(phoneNumbersForm)"
                hard-reset-required="{{ isFirstRequired }}" hard-phone-number-pattern country="{{countryCode}}">
       </div>
 
@@ -118,7 +119,8 @@
                  aria-expanded="true" READONLY>
 
           <ul class="dropdown-menu dropdown-account-type">
-            <li ng-repeat="(type, label) in phoneNumberTypes" ng-click="phoneNumber.typeNumber = type">
+            <li ng-repeat="(type, label) in phoneNumberTypes"
+                ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
             </li>
           </ul>

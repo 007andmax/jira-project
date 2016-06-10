@@ -3,13 +3,13 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoTaxRateCtrl',
-    ['$scope',
-      function ($scope) {
+    ['$scope', 'TaxRatesService',
+      function ($scope, TaxRatesService) {
 
         $scope.editTaxRate = function (form) {
           $scope.currentTaxRate = {
-            "rate": $scope.tax.rate,
-            "code": $scope.tax.code
+            rate: $scope.tax.rate,
+            code: $scope.tax.code
           };
           $scope.isEditing = true;
           form.$setPristine();
@@ -17,11 +17,7 @@
 
         $scope.saveTax = function () {
           $scope.isEditing = false;
-          $scope.taxRates[$scope.$index] = {
-            "versionedId": $scope.tax.versionedId,
-            "rate": $scope.tax.rate,
-            "code": $scope.tax.code
-          };
+          TaxRatesService.save($scope.tax);
         };
 
         $scope.cancelTax = function () {
@@ -31,7 +27,7 @@
         };
 
         $scope.deleteTaxRate = function () {
-          $scope.taxRates.splice($scope.$index, 1);
+          TaxRatesService.deleteTaxRate($scope.tax.versionedId.id);
         };
 
 

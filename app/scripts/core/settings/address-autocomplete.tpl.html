@@ -13,7 +13,8 @@
     </div>
 
     <input class="form-control" type="text" name="suiteNumber" autocomplete="off"
-           ng-model="model.suiteNumber" ng-maxlength="20">
+           ng-model="model.suiteNumber" ng-maxlength="20"
+           execute-when-outfocused="saveFunc(addressForm)">
   </div>
 
   <div class="form-group address-field"
@@ -39,7 +40,8 @@
 
   <div class="form-group zipcode-field">
     <label class="control-label">Zip</label>
-    <input class="form-control" type="text" ng-model="model.postalCode">
+    <input class="form-control" type="text" ng-model="model.postalCode"
+           execute-when-outfocused="saveFunc(addressForm)">
   </div>
 
   <div class="map-container">

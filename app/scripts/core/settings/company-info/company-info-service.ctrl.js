@@ -7,7 +7,7 @@
       function ($scope, $rootScope, ServicesService) {
 
         $scope.deleteService = function () {
-          $scope.services.splice($scope.$index, 1);
+          ServicesService.deleteService($scope.service.versionedId.id);
         };
 
         $scope.showEditServiceForm = function () {
@@ -17,7 +17,8 @@
 
         $scope.onChangeBillable = function () {
           $scope.disabledCheckbox = true;
-          ServicesService.changeBillableStatus($scope.service.id, $scope.service.billable, function () {
+          var service = angular.copy($scope.service);
+          ServicesService.changeBillableStatus(service.versionedId.id, service.billable, function () {
             $scope.disabledCheckbox = false;
           })
         };

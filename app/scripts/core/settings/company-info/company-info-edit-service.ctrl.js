@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.editServiceCtrl',
-    ['$scope', '$rootScope',
-      function ($scope, $rootScope) {
+    ['$scope', '$rootScope', 'ServicesService',
+      function ($scope, $rootScope, ServicesService) {
 
         if ($scope.service) {
           $scope.editService = angular.copy($scope.service);
@@ -21,23 +21,15 @@
           if (form.$valid) {
             $scope.triedToSaveService = false;
 
-            if ($scope.service) {
+            ServicesService.save($scope.editService, function (resp) {
+              if ($scope.service) {
+                $rootScope.$broadcast('cancelEditForm');
+              } else {
+                $scope.editService = {taxable: true};
+              }
 
-              var saveService = angular.copy($scope.editService);
-              saveService.timeBlock = saveService.timeBlock / 60;
-              $scope.services[$scope.$index] = angular.copy(saveService);
-              $rootScope.$broadcast('cancelEditForm');
-
-            } else {
-
-              var saveService = angular.copy($scope.editService);
-              saveService.timeBlock = saveService.timeBlock / 60;
-              $scope.services.push(saveService);
-              $scope.editService = {taxable: true};
-            }
-
-            form.$setPristine();
-
+              form.$setPristine();
+            });
           } else {
             $scope.triedToSaveService = true;
           }

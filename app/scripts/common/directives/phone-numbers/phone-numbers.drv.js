@@ -12,7 +12,8 @@
           phoneNumbers: '=ngModel',
           isFirstRequired: '=isFirstRequired',
           isTryToSave: '=isTryToSave',
-          countryCode: '@?'
+          countryCode: '@?',
+          onLostFocus: '=?'
         },
         link: function ($scope, element, attrs, ngModelCtrl) {
           if (!$scope.phoneNumbers) {

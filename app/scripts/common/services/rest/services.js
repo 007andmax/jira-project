@@ -273,7 +273,7 @@
         }
 
         if (!data[key]) {
-          Utils.defineReadOnlyProperty(data, key, []);
+          data[key] = [];
         }
 
         var services = data[key],

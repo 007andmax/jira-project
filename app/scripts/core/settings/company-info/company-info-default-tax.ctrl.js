@@ -6,15 +6,11 @@
     ['$scope', 'TaxRatesService',
       function ($scope, TaxRatesService) {
 
-        var taxRatesCopy;
-
         TaxRatesService.getAllByCompany($scope.currentCompany.id, $scope, function (resp) {
-          taxRatesCopy = angular.copy(resp);
           $scope.taxRates = angular.copy(resp);
         });
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.newTaxRate = {};
-        $scope.savingTaxProcess = false;
 
         $scope.validateTaxRateCode = function (ngModelCtrl) {
 
@@ -53,39 +49,21 @@
 
         };
 
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form && form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
+        };
+
         $scope.saveNewTax = function (form) {
 
           if (form.$valid) {
-            $scope.taxRates.push($scope.newTaxRate);
-            $scope.newTaxRate = {};
-            form.$setPristine()
+            $scope.newTaxRate.company = {};
+            $scope.newTaxRate.company.id = $scope.currentCompany.id;
+            TaxRatesService.save($scope.newTaxRate, function (resp) {
+              $scope.newTaxRate = {};
+              form.$setPristine();
+            })
           }
         };
-
-        $scope.saveMethods.push(function () {
-
-          //$scope.savingTaxProcess = true;
-
-          for (var i = 0; i < $scope.taxRates.length; i++) {
-            $scope.taxRates[i].company = {id: $scope.currentCompany.id};
-          }
-
-          return {
-            taxRates: $scope.taxRates
-          };
-
-          //TaxRatesService.saveList($scope.taxRates, function (resp) {
-          //  taxRatesCopy = angular.copy(resp);
-          //  $scope.taxRates = angular.copy(resp);
-          //  $scope.savingTaxProcess = false;
-          //  $scope.isTaxRatesChanges = false;
-          //})
-
-        });
-
-        $scope.$watch('taxRates', function () {
-          $scope.isTaxRatesChanges = !angular.equals(taxRatesCopy, $scope.taxRates);
-        }, true)
 
       }
     ])
