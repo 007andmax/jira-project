@@ -6,6 +6,8 @@
     ['$scope', '$rootScope', 'ServicesService',
       function ($scope, $rootScope, ServicesService) {
 
+        $scope.isBillable = $scope.service.billable;
+
         $scope.deleteService = function () {
           ServicesService.deleteService($scope.service.versionedId.id);
         };
@@ -17,8 +19,7 @@
 
         $scope.onChangeBillable = function () {
           $scope.disabledCheckbox = true;
-          var service = angular.copy($scope.service);
-          ServicesService.changeBillableStatus(service.versionedId.id, service.billable, function () {
+          ServicesService.changeBillableStatus($scope.service.versionedId.id, !$scope.isBillable, function () {
             $scope.disabledCheckbox = false;
           })
         };

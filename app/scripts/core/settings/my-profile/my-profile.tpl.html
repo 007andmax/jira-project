@@ -1,24 +1,9 @@
-<div class="settings-main-wrapper" ng-form="profileInfoForm" scroll-to-error-fild>
+<div class="settings-main-wrapper">
 
   <div class="help-text">
     Manage your basic information and general account settings.
     Here, you can set when HelpPro
     sends you updates via email.
-  </div>
-
-  <div class="settings-button clearfix settings-fixed-button">
-
-    <div class="pull-right">
-      <div class="form-row clearfix">
-        <div class="form-group no-label full-width">
-          <button class="btn btn-lg btn-info pull-right" ng-click="saveProfileSettings()"
-                  custom-disabled="{{ savingProfileSettings }}">
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <div class="basic-info-wrapper" id="myProfileBasicInfo"
@@ -52,7 +37,8 @@
                 </div>
 
                 <input type="text" class="form-control" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
-                       name="firstName" ng-model="editUser.firstName" required="true" make-dirty-on-blur>
+                       name="firstName" ng-model="editUser.firstName" required="true" make-dirty-on-blur
+                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'lastName')}">
@@ -67,7 +53,8 @@
                 </div>
 
                 <input type="text" class="form-control" aria-expanded="true" ng-maxlength="15"
-                       name="lastName" ng-model="editUser.lastName" make-dirty-on-blur>
+                       name="lastName" ng-model="editUser.lastName" make-dirty-on-blur
+                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
               </div>
             </div>
 
@@ -86,7 +73,8 @@
                 </div>
 
                 <input type="text" class="form-control " name="designation" aria-expanded="true" make-dirty-on-blur
-                       ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30">
+                       ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30"
+                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
               </div>
 
               <div class="form-group" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'primaryEmail')}">
@@ -104,7 +92,8 @@
 
                 <input type="text" class="form-control" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
                        ng-model="editUser.primaryEmail" ng-required="true" ng-pattern="emailPattern"
-                       is-uniq-validation validation-func="validateUserEmail">
+                       is-uniq-validation validation-func="validateUserEmail"
+                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
               </div>
 
             </div>
@@ -137,7 +126,7 @@
 
             <!--</div>-->
 
-            <div class="form-row clearfix" ng-if="loadUsertProfile">
+            <div class="form-row clearfix" ng-if="loadUserProfile">
 
               <div class="form-group full-width" text-editor ng-model="userProfile.signature.content"
                    te-initial-value="{{ userProfile.signature.content }}">
@@ -145,7 +134,8 @@
                 <label class="control-label">Signature</label>
 
                 <div id="editor" class="form-control" contenteditable="true"
-                     te-editor class="editor" contenteditable="true" placeholder="Type your message..."></div>
+                     te-editor class="editor" contenteditable="true" placeholder="Type your message..."
+                     execute-when-outfocused="saveBasicInfo(basicInfoForm)"></div>
 
                 <div class="wysiwyg-controls-wrapper clearfix">
 
@@ -273,7 +263,8 @@
                   <label class="control-label" ng-message="maxlength">About me is too large</label>
                 </div>
 
-                <input type="text" class="form-control" name="aboutMe" ng-model="aboutMe" ng-maxlength="255">
+                <input type="text" class="form-control" name="aboutMe" ng-model="aboutMe" ng-maxlength="255"
+                       execute-when-outfocused="saveAboutMe(aboutMeForm)">
 
               </div>
 
@@ -294,104 +285,104 @@
     </div>
   </div>
 
-  <div class="change-password-wrapper" id="myProfileChangePassword">
+  <!--<div class="change-password-wrapper" id="myProfileChangePassword">-->
 
-    <div class="create-new-user settings-basic-info clearfix">
-      <form name="passwordForm">
-        <div class="create-user-container">
+    <!--<div class="create-new-user settings-basic-info clearfix">-->
+      <!--<form name="passwordForm">-->
+        <!--<div class="create-user-container">-->
 
-          <div class="create-user-header clearfix">
-            <h3 class="pull-left">Change Password</h3>
-          </div>
+          <!--<div class="create-user-header clearfix">-->
+            <!--<h3 class="pull-left">Change Password</h3>-->
+          <!--</div>-->
 
-          <div class="create-user-form">
-            <div class="form-row clearfix">
-
-              <div class="form-group" ng-class="{'has-error': isShowingErrors(passwordForm, 'oldPassword')}">
-
-                <label class="control-label" ng-class="{'hide': isShowingErrors(passwordForm, 'oldPassword')}">
-                  Old Password
-                </label>
-
-                <div ng-messages="passwordForm.oldPassword.$error"
-                     ng-class="{'hide': !isShowingErrors(passwordForm, 'oldPassword')}">
-                  <label class="control-label" ng-message="minlength">Password is too short</label>
-                  <label class="control-label" ng-message="notCorrectPass">Old Password is not correct</label>
-                </div>
-
-                <input ng-class="{'hide': showOldPasswoprd}" class="form-control show-password" type="password"
-                       ng-model="password.oldPassword" name="oldPassword">
-
-                <input ng-class="{'hide': !showOldPasswoprd}" class="form-control show-password" type="text"
-                       ng-model="password.oldPassword">
-                <!--ng-minlength="5"-->
-
-                <a ng-class="{'hide': showOldPasswoprd}" href="javascript:void(0)"
-                   class="hide-password-hit hit-area ha-18 has-tooltip"
-                   ng-click="showOldPasswoprd = passwordForm.$valid ? true : false" tooltip-placement="top"
-                   tooltip="Show Password">
-                  <i class="icn-sm icn-hide-password"></i>
-                </a>
-
-                <a ng-class="{'hide': !showOldPasswoprd}" href="javascript:void(0)"
-                   class="hide-password-hit hit-area ha-18 has-tooltip"
-                   ng-click="showOldPasswoprd = false" tooltip-placement="top" tooltip="Hide Password"
-                   style="position: absolute;right: 12px;top: 31px;">
-                  <i class="icn-sm icn-show-password"></i>
-                </a>
-
-              </div>
-
-              <div class="form-group" ng-class="{'has-error': isShowingErrors(passwordForm, 'newPassword')}">
-
-                <label class="control-label" ng-class="{'hide': isShowingErrors(passwordForm, 'newPassword')}">
-                  New Password
-                </label>
-
-                <div ng-messages="passwordForm.newPassword.$error"
-                     ng-class="{'hide': !isShowingErrors(passwordForm, 'newPassword')}">
-                  <label class="control-label" ng-message="minlength">Password is too short</label>
-                </div>
-
-                <input ng-class="{'hide': showNewPasswoprd}" class="form-control show-password" type="password"
-                       ng-model="password.newPassword" name="newPassword"
-                       ng-minlength="5">
-
-                <input ng-class="{'hide': !showNewPasswoprd}" class="form-control show-password" type="text"
-                       ng-model="password.newPassword">
-
-                <a ng-class="{'hide': showNewPasswoprd}" href="javascript:void(0)"
-                   class="show-password-hit hit-area ha-18 has-tooltip"
-                   ng-click="showNewPasswoprd = passwordForm.$valid ? true : false" tooltip-placement="top"
-                   tooltip="Show Password">
-                  <i class="icn-sm icn-hide-password"></i>
-                </a>
-
-                <a ng-class="{'hide': !showNewPasswoprd}" href="javascript:void(0)"
-                   class="show-password-hit hit-area ha-18 has-tooltip"
-                   ng-click="showNewPasswoprd = false" tooltip-placement="top" tooltip="Hide Password"
-                   style="position: absolute;right: 12px;top: 31px;">
-                  <i class="icn-sm icn-show-password"></i>
-                </a>
-
-              </div>
-
-            </div>
-
+          <!--<div class="create-user-form">-->
             <!--<div class="form-row clearfix">-->
-              <!--<div class="form-group no-label full-width">-->
-                <!--<div class="btn btn-lg btn-info pull-right"-->
-                     <!--custom-disabled="{{ !passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess }}"-->
-                     <!--ng-click="savePassword(passwordForm)">Save-->
+
+              <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(passwordForm, 'oldPassword')}">-->
+
+                <!--<label class="control-label" ng-class="{'hide': isShowingErrors(passwordForm, 'oldPassword')}">-->
+                  <!--Old Password-->
+                <!--</label>-->
+
+                <!--<div ng-messages="passwordForm.oldPassword.$error"-->
+                     <!--ng-class="{'hide': !isShowingErrors(passwordForm, 'oldPassword')}">-->
+                  <!--<label class="control-label" ng-message="minlength">Password is too short</label>-->
+                  <!--<label class="control-label" ng-message="notCorrectPass">Old Password is not correct</label>-->
                 <!--</div>-->
+
+                <!--<input ng-class="{'hide': showOldPasswoprd}" class="form-control show-password" type="password"-->
+                       <!--ng-model="password.oldPassword" name="oldPassword">-->
+
+                <!--<input ng-class="{'hide': !showOldPasswoprd}" class="form-control show-password" type="text"-->
+                       <!--ng-model="password.oldPassword">-->
+                <!--&lt;!&ndash;ng-minlength="5"&ndash;&gt;-->
+
+                <!--<a ng-class="{'hide': showOldPasswoprd}" href="javascript:void(0)"-->
+                   <!--class="hide-password-hit hit-area ha-18 has-tooltip"-->
+                   <!--ng-click="showOldPasswoprd = passwordForm.$valid ? true : false" tooltip-placement="top"-->
+                   <!--tooltip="Show Password">-->
+                  <!--<i class="icn-sm icn-hide-password"></i>-->
+                <!--</a>-->
+
+                <!--<a ng-class="{'hide': !showOldPasswoprd}" href="javascript:void(0)"-->
+                   <!--class="hide-password-hit hit-area ha-18 has-tooltip"-->
+                   <!--ng-click="showOldPasswoprd = false" tooltip-placement="top" tooltip="Hide Password"-->
+                   <!--style="position: absolute;right: 12px;top: 31px;">-->
+                  <!--<i class="icn-sm icn-show-password"></i>-->
+                <!--</a>-->
+
               <!--</div>-->
+
+              <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(passwordForm, 'newPassword')}">-->
+
+                <!--<label class="control-label" ng-class="{'hide': isShowingErrors(passwordForm, 'newPassword')}">-->
+                  <!--New Password-->
+                <!--</label>-->
+
+                <!--<div ng-messages="passwordForm.newPassword.$error"-->
+                     <!--ng-class="{'hide': !isShowingErrors(passwordForm, 'newPassword')}">-->
+                  <!--<label class="control-label" ng-message="minlength">Password is too short</label>-->
+                <!--</div>-->
+
+                <!--<input ng-class="{'hide': showNewPasswoprd}" class="form-control show-password" type="password"-->
+                       <!--ng-model="password.newPassword" name="newPassword"-->
+                       <!--ng-minlength="5">-->
+
+                <!--<input ng-class="{'hide': !showNewPasswoprd}" class="form-control show-password" type="text"-->
+                       <!--ng-model="password.newPassword">-->
+
+                <!--<a ng-class="{'hide': showNewPasswoprd}" href="javascript:void(0)"-->
+                   <!--class="show-password-hit hit-area ha-18 has-tooltip"-->
+                   <!--ng-click="showNewPasswoprd = passwordForm.$valid ? true : false" tooltip-placement="top"-->
+                   <!--tooltip="Show Password">-->
+                  <!--<i class="icn-sm icn-hide-password"></i>-->
+                <!--</a>-->
+
+                <!--<a ng-class="{'hide': !showNewPasswoprd}" href="javascript:void(0)"-->
+                   <!--class="show-password-hit hit-area ha-18 has-tooltip"-->
+                   <!--ng-click="showNewPasswoprd = false" tooltip-placement="top" tooltip="Hide Password"-->
+                   <!--style="position: absolute;right: 12px;top: 31px;">-->
+                  <!--<i class="icn-sm icn-show-password"></i>-->
+                <!--</a>-->
+
+              <!--</div>-->
+
             <!--</div>-->
 
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+            <!--&lt;!&ndash;<div class="form-row clearfix">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div class="form-group no-label full-width">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="btn btn-lg btn-info pull-right"&ndash;&gt;-->
+                     <!--&lt;!&ndash;custom-disabled="{{ !passwordForm.$valid || passwordForm.$pristine || savingPasswordInProcess }}"&ndash;&gt;-->
+                     <!--&lt;!&ndash;ng-click="savePassword(passwordForm)">Save&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--</div>-->
+        <!--</div>-->
+      <!--</form>-->
+    <!--</div>-->
+  <!--</div>-->
 
   <div class="contact-info-wrapper" id="myProfileContactInfo"
        ng-controller="quicktech.core.settings.myProfileContactInfoCtrl">
@@ -408,11 +399,11 @@
 
 
             <div address-autocomplete template-page="settings"
-                 ng-model="userProfile.address"
+                 ng-model="userProfile.address" save-func="saveContactInfo"
                  show-validation-messages="triedToSave"></div>
 
             <div phone-numbers-edit ng-model="userProfile.address.phoneNumbers" is-try-to-save="savingProfileSettings"
-                 country-code="{{userProfile.address.countryCode}}"></div>
+                 country-code="{{userProfile.address.countryCode}}" on-lost-focus="saveContactInfo"></div>
 
             <!--<div class="form-row clearfix" ng-repeat="phoneNumber in userProfile.address.phoneNumbers">-->
 
@@ -486,7 +477,7 @@
   <div class="misc-info-wrapper" id="myProfileMiscInfo">
 
     <div class="create-new-user settings-basic-info clearfix"
-         ng-if="loadUsertProfile"
+         ng-if="loadUserProfile"
          ng-controller="quicktech.core.settings.myProfileMiscInfoCtrl">
       <form name="miscInfoForm">
         <div class="create-user-container">
@@ -513,7 +504,8 @@
 
                 <input class="form-control" type="text" name="shiftTiming" placeholder="00:00 to 00:00"
                        ng-model="shiftTiming" make-dirty-on-blur ng-change="validShiftTiming(miscInfoForm)"
-                       ng-required="true" ng-pattern="patternShiftTiming">
+                       ng-required="true" ng-pattern="patternShiftTiming"
+                       execute-when-outfocused="saveMiscInfo(miscInfoForm)">
               </div>
 
               <div class="form-group">
@@ -531,31 +523,31 @@
                   <ul class="dropdown-menu">
 
                     <li>
-                      <a href="javascript:void(0)" ng-click="pageToOpen = 'UNASSIGNED'">Unassigned</a>
+                      <a href="javascript:void(0)" ng-click="setPageToOpen('UNASSIGNED')">Unassigned</a>
                     </li>
 
                     <li>
-                      <a href="javascript:void(0)" ng-click="pageToOpen = 'MY_TICKETS'">My Tickets</a>
+                      <a href="javascript:void(0)" ng-click="setPageToOpen('MY_TICKETS')">My Tickets</a>
                     </li>
 
                     <li>
-                      <a href="javascript:void(0)" ng-click="pageToOpen = 'SHARED'">Shared</a>
+                      <a href="javascript:void(0)" ng-click="setPageToOpen('SHARED')">Shared</a>
                     </li>
 
                     <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'open_tickets')">
-                      <a href="javascript:void(0)" ng-click="pageToOpen = 'OPEN'">Open</a>
+                      <a href="javascript:void(0)" ng-click="setPageToOpen('OPEN')">Open</a>
                     </li>
 
                     <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'closed_tickets')">
-                      <a href="javascript:void(0)" ng-click="pageToOpen = 'CLOSED'">Closed</a>
+                      <a href="javascript:void(0)" ng-click="setPageToOpen('CLOSED')">Closed</a>
                     </li>
 
                     <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'trash_tickets')">
-                      <a href="javascript:void(0)" ng-click="pageToOpen = 'TRASH'">Trash</a>
+                      <a href="javascript:void(0)" ng-click="setPageToOpen('TRASH')">Trash</a>
                     </li>
 
                     <li>
-                      <a href="javascript:void(0)" ng-click="pageToOpen = 'SPAM'">Spam</a>
+                      <a href="javascript:void(0)" ng-click="setPageToOpen('SPAM')">Spam</a>
                     </li>
 
                   </ul>
@@ -588,14 +580,16 @@
 
       <div class="clearfix">
         <label class="control checkbox pull-left">
-          <input type="checkbox" ng-model="userProfile.emailNotifications.newDevice">
+          <input type="checkbox" ng-model="userProfile.emailNotifications.newDevice"
+                 ng-change="saveEmailNotifications(emailNotificationsForm)">
           <span class="control-indicator"></span> my account is logged in from a new device
         </label>
       </div>
 
       <div class="clearfix">
         <label class="control checkbox pull-left">
-          <input type="checkbox" ng-model="userProfile.emailNotifications.ticketCreated">
+          <input type="checkbox" ng-model="userProfile.emailNotifications.ticketCreated"
+                 ng-change="saveEmailNotifications(emailNotificationsForm)">
           <span class="control-indicator"></span> new ticket created
         </label>
       </div>

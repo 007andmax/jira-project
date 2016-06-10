@@ -5,7 +5,6 @@
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoContactInfoCtrl',
     ['$scope', 'quicktech.common.services.PhoneFormats', 'CompaniesService',
       function ($scope, PhoneFormats, CompaniesService) {
-        var initialized = false;
 
         $scope.currentAddressIndex = 0;
         $scope.maximalAmountOfPhones = 3;
@@ -25,21 +24,21 @@
         }
 
         $scope.$watch(function () {
-          var address = $scope.companyForSettingPage.addresses[0];
-          return [
-            address.country,
-            address.countryCode,
-            address.longCity,
-            address.shortCity,
-            address.longState,
-            address.shortState,
-            address.timeZone
-          ];
+          if ($scope.companyForSettingLoad) {
+            var address = $scope.companyForSettingPage.addresses[0];
+            return [
+              address.country,
+              address.countryCode,
+              address.longCity,
+              address.shortCity,
+              address.longState,
+              address.shortState,
+              address.timeZone
+            ];
+          }
         }, function (value) {
-          if (value && $scope.companyForSettingLoad && initialized) {
+          if (value) {
             $scope.saveContactInfo($scope.addressesWrapForm);
-          } else {
-            initialized = true;
           }
         }, true);
 

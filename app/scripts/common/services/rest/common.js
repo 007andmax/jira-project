@@ -206,7 +206,7 @@
           customizeObj(value);
         }
 
-        targetObj[prop] = value;
+        defineReadOnlyProperty(targetObj, prop, value);
       }
 
       defineReadOnlyProperty(targetObj, 'staticCopy', staticCopy);

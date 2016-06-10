@@ -15,7 +15,7 @@
         };
 
         $scope.$watch('editCompany.logo', function (newValue) {
-          if (newValue && $scope.companyForSettingLoad) {
+          if (newValue !== undefined && $scope.companyForSettingLoad) {
             $scope.saveBasicInfo($scope.basicInfoForm);
           }
         }, true);
