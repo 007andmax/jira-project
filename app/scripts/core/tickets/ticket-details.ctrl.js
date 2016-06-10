@@ -19,8 +19,7 @@
           $scope.selectUpdateSharedUser = {};
           $scope.updateSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
-          $scope.productCategories = ProductsService.getCategories($scope);
-          $scope.autocompleteData = ProductsService.getFullListForAutocomplete();
+          $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
           UserNotificationService.show('Loading...');
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {

@@ -9,7 +9,7 @@
 
         $scope.searchValue = '';
         $scope.choosedCategory = false;
-        $scope.shownCategories = ProductsService.getFullListForAutocomplete();
+        $scope.shownCategories = ProductsService.getFullListForAutocomplete($scope);
 
         $scope.clearInput = function () {
           $scope.searchValue = '';
@@ -37,11 +37,6 @@
               return item;
             }
           })
-        });
-
-        $scope.$on('productAdded', function () {
-          $scope.parsed = false;
-          $scope.shownCategories = ProductsService.getFullListForAutocomplete();
         });
 
         $scope.$on('productsTabChanged', $scope.clearInput);

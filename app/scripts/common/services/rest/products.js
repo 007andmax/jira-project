@@ -21,21 +21,94 @@
 
       }
 
-      function getFullListForAutocomplete(callback) {
+      function getFullListForAutocomplete(scope, callback) {
 
-        var catecories = [];
+        if (!scope || ! scope.$id) {
+          throw 'First argument must be Angularjs scope!';
+        }
+
+        var categories = [];
 
         $http.get("/products/fullList").then(function (response) {
           response.data.forEach(function (c) {
-            catecories.push(c)
+            categories.push(c)
+          });
+
+          RealTimeService.subscribe('/productCategory', scope, function (newChange) {
+
+            if (newChange.action == 'PRODUCT_CATEGORY_SAVED') {
+
+              var category = Utils.findById(categories, newChange.data.id);
+
+              if (category) {
+                Utils.customizeObj(newChange.data, category);
+              } else {
+                newChange.data.products = [];
+                categories.push(Utils.customizeObj(newChange.data));
+              }
+
+            } else if (newChange.action == 'PRODUCT_CATEGORY_DELETED') {
+              Utils.deleteById(categories, newChange.data.id);
+              scope.$broadcast("product_category_deleted", newChange.data);
+            }
+
+            if (callback) {
+              callback(categories);
+            }
+          });
+
+          RealTimeService.subscribe('/product', scope, function (newChange) {
+            if (newChange.action === 'PRODUCT_SAVED') {
+              var category = Utils.findById(categories, newChange.data.category.id);
+
+              if (!category) {
+                throw 'Attempt to add product to nonexistent category!!!';
+              }
+
+              var product = Utils.findById(category.products, newChange.data.versionedId.id);
+
+              if (product) {
+                Utils.customizeObj(newChange.data, product);
+              } else {
+                var categoryMoveFrom;
+
+                for (var i = 0; i < categories.length; i++) {
+                  var checkCategory = categories[i];
+
+                  if (category.id === checkCategory.id) {
+                    continue;
+                  }
+
+                  var checkProduct = Utils.findById(checkCategory, newChange.data.versionedId.id);
+
+                  if (checkProduct) {
+                    categoryMoveFrom = checkCategory;
+                  }
+                }
+
+                if (categoryMoveFrom) {
+                  Utils.deleteById(categoryMoveFrom.products, newChange.data.versionedId.id);
+                }
+                category.products.push(newChange.data);
+              }
+            } else if (newChange.action == 'PRODUCT_DELETED') {
+              category = Utils.findById(categories, newChange.data.category.id);
+              Utils.deleteById(category.products, newChange.data.versionedId.id);
+
+              scope.$broadcast("product_deleted", newChange.data);
+            }
+
+            if (callback) {
+              callback(categories);
+            }
           });
 
           if (callback) {
-            callback();
+            callback(categories);
           }
         });
 
-        return catecories;
+        return categories;
       }
 
       function getAllProducts(scope, callback) {

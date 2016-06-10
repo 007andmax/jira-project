@@ -4,7 +4,7 @@
   <div class="col1"
        ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'product')}">
 
-    <div products-list="product" id="product-list-cont"
+    <div products-list="product" id="product-list-cont" autocomplete-data="autocompleteData"
          click-outside="closeDropdown()" outside-if-not="product-list-cont">
       <div>
 

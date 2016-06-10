@@ -13,7 +13,7 @@
     </div>
   </li>
 
-  <li class="category-conteiner" ng-repeat="category in autocompleteData | orderBy: 'name'"
+  <li class="category-conteiner" ng-repeat="category in autocompleteData | orderBy: 'name' track by category.id"
       ng-show="(category.products | filter:filterProduct).length > 0" ng-init="categoryExpanded[category.id] = false">
 
     <div class="category-info" ng-click="categoryExpanded[category.id] = !categoryExpanded[category.id]">
@@ -22,10 +22,10 @@
       <i class="icn-sm icn-caret-gray pull-right" ng-class="{'rotated': categoryExpanded[category.id]}"></i>
     </div>
 
-    <ul class="qt-table product-list-container" ng-show="categoryExpanded[category.id]">
+    <ul class="qt-table product-list-container" ng-if="categoryExpanded[category.id]">
 
       <li ng-click="chooseProductItem(product)"
-          ng-repeat="product in category.products | filter: filterProduct | orderBy: 'description'">
+          ng-repeat="product in category.products | filter: filterProduct | orderBy: 'description' track by product.versionedId.id">
 
         <div>
           <span class="title">{{ product.description }}</span>

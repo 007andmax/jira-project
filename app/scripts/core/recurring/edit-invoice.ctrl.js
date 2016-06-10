@@ -38,7 +38,7 @@
         };
 
         $scope.companies = CompaniesService.getClientCompanies();
-        $scope.autocompleteData = ProductsService.getFullListForAutocomplete();
+        $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
         if ($scope.invoice && $scope.invoice.id) {
           form = true;

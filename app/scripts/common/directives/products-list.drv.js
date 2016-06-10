@@ -7,6 +7,9 @@
       function ($timeout, PermissionsService) {
         return {
           restrict: 'A',
+          scope: {
+            autocompleteData: '='
+          },
           link: function (scope, element, attrs) {
 
             var dropdown;
