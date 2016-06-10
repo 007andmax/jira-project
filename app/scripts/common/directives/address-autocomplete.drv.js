@@ -56,7 +56,9 @@
           $scope.$watch(function () {
             return ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address;
           }, function () {
-            resetMap(google, map, marker, inputCtrl);
+            if (inputCtrl) {
+              resetMap(google, map, marker, inputCtrl);
+            }
           });
 
           $scope.$watch('isMapShown', function (val) {
@@ -78,7 +80,7 @@
               return;
             }
 
-            ngModelCtrl.$viewValue.address = input.val();
+            ngModelCtrl.$viewValue.address = $scope.savedAddress = input.val();
             ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
             ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
 
@@ -128,7 +130,8 @@
 
           function resetMap(google, map, marker, inputCtrl) {
 
-            var hasMark = ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
+            var hasMark = ngModelCtrl.$viewValue && $scope.savedAddress === ngModelCtrl.$viewValue &&
+              ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
 
             inputCtrl.$setValidity('correct', !!hasMark);
 

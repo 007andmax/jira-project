@@ -49,6 +49,7 @@
 
           $scope.removePhoneNumber = function (index) {
             $scope.phoneNumbers.splice(index, 1);
+            $scope.onLostFocus && $scope.onLostFocus();
           };
         }
       }

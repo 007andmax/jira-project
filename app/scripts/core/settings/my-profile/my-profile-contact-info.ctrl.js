@@ -51,7 +51,7 @@
 
         $scope.saveContactInfo = function (form) {
 
-          if (form.$valid) {
+          if (form && form.$valid || $scope.phoneNumbersForm.$valid) {
             var copyAddress = angular.copy($scope.userProfile.address),
               phoneNumbers = copyAddress.phoneNumbers,
               firstPhone = phoneNumbers[0].number,
@@ -70,7 +70,11 @@
             }
 
             UsersService.saveForUserProfile(copyAddress, 'contact', function () {
-              form.$setPristine();
+              if (form) {
+                form.$setPristine();
+              } else {
+                $scope.phoneNumbersForm.$setPristine();
+              }
             });
           }
         }

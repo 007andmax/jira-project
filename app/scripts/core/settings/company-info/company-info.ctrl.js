@@ -18,8 +18,8 @@
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
         $scope.currentUrl = ConstantsService.getConstant('website.dns');
 
-        if ($scope.currentCompany.status !== 'SIGN_UP') {
-          var showRequiredFields = true;
+        if ($scope.currentCompany.status === 'SIGN_UP') {
+          $scope.showRequiredFields = true;
         }
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function () {
@@ -42,7 +42,7 @@
         });
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form && form[fieldName] && (form[fieldName].$dirty || showRequiredFields) && form[fieldName].$invalid;
+          return form && form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFields) && form[fieldName].$invalid;
         };
 
         $scope.saveBusinessDaysHours = function (form) {

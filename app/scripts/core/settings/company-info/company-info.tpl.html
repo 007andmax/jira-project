@@ -254,7 +254,7 @@
             <div class="create-user-form">
 
               <div address-autocomplete template-page="settings" save-func="saveContactInfo"
-                   ng-model="address" show-validation-messages="triedToSave"></div>
+                   ng-model="address" show-validation-messages="showRequiredFields"></div>
 
               <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
                    country-code="{{address.countryCode}}" on-lost-focus="saveContactInfo"></div>

@@ -6,8 +6,13 @@
     [function () {
       return {
         restrict: 'A',
+        scope: {
+          enabled: '=focusOn'
+        },
         link: function ($scope, element, attrs) {
-          element.focus();
+          if ($scope.enabled === undefined || $scope.enabled) {
+            element.focus();
+          }
         }
       }
     }]);

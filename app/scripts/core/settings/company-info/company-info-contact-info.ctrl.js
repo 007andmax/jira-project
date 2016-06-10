@@ -77,7 +77,7 @@
 
         $scope.saveContactInfo = function (form) {
 
-          if (form.$valid) {
+          if (form && form.$valid || $scope.addressesWrapForm.$valid) {
             var copyAddress = angular.copy($scope.companyForSettingPage.addresses);
 
             for (var i = 0; i < copyAddress.length; i++) {
@@ -101,7 +101,11 @@
             copyAddress[0].isPrimary = true;
 
             CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function () {
-              form.$setPristine();
+              if (form) {
+                form.$setPristine();
+              } else {
+                $scope.addressesWrapForm.$setPristine();
+              }
             });
           }
         };

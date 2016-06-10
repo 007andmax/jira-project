@@ -934,9 +934,9 @@
           }
         }
 
-        if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {
-          return false;
-        }
+        //if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {
+        //  return false;
+        //}
 
         if (params.filter == 'USER' && (!ticket.assignedUser || ticket.assignedUser.id != $rootScope.currentUser.id)) {
           return false;
