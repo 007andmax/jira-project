@@ -67,7 +67,9 @@
           }
           if (newChange.action == 'USER_SAVED') {
 
-            if (getCurrentUser().id === newChange.data.id) window.startPage = newChange.data.startPage;
+            if (getCurrentUser().id === newChange.data.id) {
+              window.startPage = newChange.data.startPage;
+            }
 
             if (newChange.data.company.id !== getCurrentUser().company.id) {
               addOrUpdateClientUser(newChange.data);
@@ -305,7 +307,9 @@
 
       function save(user, callback) {
 
-        if (!user) throw 'user is required!';
+        if (!user) {
+          throw 'user is required!';
+        }
 
         var url = '/users',
           method = 'POST';
@@ -327,7 +331,9 @@
 
       function saveUserSettingsDto(userDto, callback) {
 
-        if (!userDto) throw 'userDto is required!';
+        if (!userDto) {
+          throw 'userDto is required!';
+        }
 
         var future = $http({
           url: '/settings/userProfile/',
@@ -340,8 +346,12 @@
 
       function saveForUserProfile(data, toUpdate, callback) {
 
-        if (!data) throw 'data is required!';
-        if (!toUpdate) throw 'toUpdate is required!';
+        if (!data) {
+          throw 'data is required!';
+        }
+        if (!toUpdate) {
+          throw 'toUpdate is required!';
+        }
 
         var url = '/settings/userProfile/' + toUpdate.toLowerCase(),
           method = 'PUT';
@@ -406,14 +416,16 @@
           throw 'isArchive is required!';
         }
 
-        if (!Array.isArray(ids)){
+        if (!Array.isArray(ids)) {
           ids = [ids];
         }
 
-        var errorMessage = isArchiveUsersAllowed(ids);
+        if (getOneById(ids[0]).accountType !== 'TECH') {
+          var errorMessage = isArchiveUsersAllowed(ids);
 
-        if (errorMessage) {
-          throw errorMessage;
+          if (errorMessage) {
+            throw errorMessage;
+          }
         }
 
         var future = $http({
@@ -427,7 +439,9 @@
 
       function deleteAvatar(userId, callback) {
 
-        if (!userId) throw 'companyId is required!';
+        if (!userId) {
+          throw 'companyId is required!';
+        }
 
         var future = $http({
           url: '/users/' + userId + '/',

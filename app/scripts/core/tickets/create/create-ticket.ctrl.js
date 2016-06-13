@@ -217,6 +217,8 @@
                 };
 
                 $scope.fileInfo.quantityErrorFiles++;
+                $scope.ticketForm.$setValidity('errorFile', true);
+              } else {
                 $scope.ticketForm.$setValidity('errorFile', false);
               }
 

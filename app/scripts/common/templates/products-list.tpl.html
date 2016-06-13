@@ -14,18 +14,19 @@
   </li>
 
   <li class="category-conteiner" ng-repeat="category in autocompleteData | orderBy: 'name' track by category.id"
-      ng-show="(category.products | filter:filterProduct).length > 0" ng-init="categoryExpanded[category.id] = false">
+      ng-show="(filteredProducts[category.id] = (category.products | filter:filterProduct)).length > 0"
+      ng-init="categoryExpanded[category.id] = false">
 
     <div class="category-info" ng-click="categoryExpanded[category.id] = !categoryExpanded[category.id]">
       <span><b>{{ category.name }}</b></span>
-      <span><b>{{ category.products.length + (category.products.length > 1 ? ' items' : ' item') }}</b></span>
+      <span><b>{{ filteredProducts[category.id].length + (category.products.length > 1 ? ' items' : ' item') }}</b></span>
       <i class="icn-sm icn-caret-gray pull-right" ng-class="{'rotated': categoryExpanded[category.id]}"></i>
     </div>
 
     <ul class="qt-table product-list-container" ng-if="categoryExpanded[category.id]">
 
       <li ng-click="chooseProductItem(product)"
-          ng-repeat="product in category.products | filter: filterProduct | orderBy: 'description' track by product.versionedId.id">
+          ng-repeat="product in filteredProducts[category.id] | orderBy: 'description' track by product.versionedId.id">
 
         <div>
           <span class="title">{{ product.description }}</span>

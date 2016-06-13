@@ -7,9 +7,6 @@
       function ($timeout, PermissionsService) {
         return {
           restrict: 'A',
-          scope: {
-            autocompleteData: '='
-          },
           link: function (scope, element, attrs) {
 
             var dropdown;
@@ -21,6 +18,7 @@
             }
 
             scope.PermissionsService = PermissionsService;
+            scope.filteredProducts = {};
 
             productInput.click(showDropdown);
 
