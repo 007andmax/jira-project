@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoBasicInfoCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'CompaniesService',
-      function ($scope, $state, $stateParams, $location, CompaniesService) {
+    ['$scope', 'CompaniesService',
+      function ($scope, CompaniesService) {
 
         $scope.techDomainName = $scope.companyForSettingPage.techDomain.split('.')[0];
 

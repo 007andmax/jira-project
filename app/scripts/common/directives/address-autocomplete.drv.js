@@ -35,7 +35,8 @@
             inputCtrl = input.controller('ngModel'),
             autocomplete = new google.maps.places.Autocomplete(input[0]),
             map,
-            marker;
+            marker,
+            savedAddress = ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address;
 
           var hasLocation = ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
           if (hasLocation) {
@@ -57,6 +58,10 @@
             return ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address;
           }, function () {
             if (inputCtrl) {
+              if (!savedAddress && ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address) {
+                savedAddress = ngModelCtrl.$viewValue.address;
+              }
+
               resetMap(google, map, marker, inputCtrl);
             }
           });
@@ -80,7 +85,7 @@
               return;
             }
 
-            ngModelCtrl.$viewValue.address = $scope.savedAddress = input.val();
+            ngModelCtrl.$viewValue.address = savedAddress = input.val();
             ngModelCtrl.$viewValue.locationLat = place.geometry.location.lat();
             ngModelCtrl.$viewValue.locationLng = place.geometry.location.lng();
 
@@ -126,12 +131,15 @@
               });
 
             $scope.$apply();
+            $scope.saveFunc();
           });
 
           function resetMap(google, map, marker, inputCtrl) {
 
-            var hasMark = ngModelCtrl.$viewValue && $scope.savedAddress === ngModelCtrl.$viewValue &&
-              ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
+            var hasMark = ngModelCtrl.$viewValue &&
+              ngModelCtrl.$viewValue.locationLat &&
+              ngModelCtrl.$viewValue.locationLng &&
+              savedAddress === ngModelCtrl.$viewValue.address;
 
             inputCtrl.$setValidity('correct', !!hasMark);
 

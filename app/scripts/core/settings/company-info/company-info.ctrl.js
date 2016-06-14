@@ -18,9 +18,7 @@
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
         $scope.currentUrl = ConstantsService.getConstant('website.dns');
 
-        if ($scope.currentCompany.status === 'SIGN_UP') {
-          $scope.showRequiredFields = true;
-        }
+        $scope.showRequiredFields = $scope.currentCompany.status === 'SIGN_UP';
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function () {
           $scope.emailNotifications = $scope.emailNotifications.staticCopy();
