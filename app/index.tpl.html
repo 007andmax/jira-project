@@ -92,11 +92,11 @@
 <aside id="left" qt-sidebar style="z-index: 1039;"
        ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
-<aside id="right" class="nano" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
+<aside id="right" class="nano" ng-if="!isRightPanelHided" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
 <div class="main-container">
   <div class="row">
-    <div class="content-container">
+    <div class="content-container" ng-class="{'large': isRightPanelHided}">
       <div class="content-wrapper">
         <div ui-view></div>
       </div>
