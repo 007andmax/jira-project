@@ -64,7 +64,7 @@
       </div>
 
       <div class="dropdown pull-right"
-           ng-if="!sharedState.checkedCompletedTicket && TicketsPermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)">
+           ng-if="!sharedState.checkedCompletedTicket && TicketsPermissionsService.isAssignTicketToVisible(listType, currentUser.role)">
 
         <div class="btn btn-default has-tooltip"
              tooltip-placement="bottom" tooltip="assign ticket to..."

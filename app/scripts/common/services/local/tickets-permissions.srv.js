@@ -40,7 +40,7 @@
 
       function isAssignTicketToVisible(listType, userRole, users) {
 
-        if (users.length <= 1) {
+        if (users && users.length <= 1) {
           return false;
         }
 

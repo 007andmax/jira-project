@@ -1,7 +1,7 @@
 <div ng-if="currentOpenTab"
      ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
 
-  <div class="well ticket-well" ng-show="TicketsPermissionsService.isClaimTicketTipVisible(ticketDetails)">
+  <div class="well ticket-well" ng-show="TicketsPermissionsService.isClaimTicketTipVisible(ticketDetails) && !ticketClaimed">
 
     <i class="icn-lg icn-msg-claim"></i>
 

@@ -18,7 +18,8 @@
       var storage = {
         lists: {},
         tickets: {},
-        counts: {}
+        counts: {},
+        callbacks: []
       };
 
       function normalizeAndCopyParams(params) {
@@ -472,6 +473,11 @@
 
       function assignTo(ticketId, userId, callback) {
         if (!ticketId || !userId) throw 'ticketId and userId is required arguments!';
+
+        if (callback) {
+          storage.callbacks.push(callback);
+        }
+
         changeTicket('assign', ticketId, userId, callback);
       }
 
@@ -727,6 +733,11 @@
             var ticketIndex = Utils.indexOfId(listData.list, ticket.id);
 
             if (ticketIndex > -1) {
+              for (var i = 0, len = storage.callbacks.length; i < len; i++) {
+                var callback = storage.callbacks[i];
+                callback();
+              }
+
               if (isTicketMatchesFilters(newChange.data, listData.params)) {
                 Utils.customizeObj(ticket, listData.list[ticketIndex]);
                 needSort = true;
@@ -934,9 +945,9 @@
           }
         }
 
-        //if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {
-        //  return false;
-        //}
+        if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {
+          return false;
+        }
 
         if (params.filter == 'USER' && (!ticket.assignedUser || ticket.assignedUser.id != $rootScope.currentUser.id)) {
           return false;
