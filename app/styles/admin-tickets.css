@@ -42,6 +42,9 @@
   width: calc(100% - 357px);
   margin-left: 76px;
 }
+.content-container.large{
+  width: calc(100% - 80px);
+}
 @media only screen and (max-width: 1315px){
   .content-container {
     width: calc(100% - 153px);
