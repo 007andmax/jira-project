@@ -45,16 +45,45 @@
 .content-container.large{
   width: calc(100% - 80px);
 }
+
+@media only screen and (min-width: 1710px){
+  .opened-ticket-list.opened-ticket .large .content-wrapper .container-ticket-content{
+    right: 0 !important;
+    width: calc(100% - 680px);
+  }
+}
+@media only screen and (min-width: 1930px){
+  .opened-ticket-list.opened-ticket .large .content-wrapper .container-ticket-content{
+    width: calc(100% - 780px);
+  }
+}
+@media only screen and (min-width: 2510px){
+  .opened-ticket-list.opened-ticket .large .content-wrapper .container-ticket-content{
+    width: calc(100% - 940px);
+  }
+}
+@media only screen and (max-width: 1390px){
+  .content-container.large{
+    width: calc(100% - 80px);
+  }
+}
 @media only screen and (max-width: 1315px){
   .content-container {
     width: calc(100% - 153px);
     margin-left: 76px;
   }
 }
+.content-container.large{
+  width: calc(100% - 80px);
+}
+
 @media only screen and (min-width: 1390px){
   .content-container {
     width: calc(100% - 521px);
     margin-left: 240px;
+  }
+  .content-container.large {
+    width: calc(100% - 250px);
   }
 }
 .content-wrapper {
