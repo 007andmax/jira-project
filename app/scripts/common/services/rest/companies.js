@@ -380,13 +380,11 @@
       if (!data) throw 'data is required!';
       if (!toUpdate) throw 'toUpdate is required!';
 
-      var target = toUpdate.toLowerCase();
-
-      if (target === 'addresses') {
+      if (toUpdate === 'addresses') {
         data = { addresses: data }
       }
 
-      var url = '/settings/companyProfile/' + target,
+      var url = '/settings/companyProfile/' + toUpdate,
         method = 'PUT';
 
       var future = $http({
@@ -627,6 +625,22 @@
       $http.put('/settings/companyProfile/allowUsersCreateTags?allow=' + value, {});
     }
 
+    function getCompanySMTPSettings(callback) {
+      $http.get('/settings/companyProfile/SMTPSettings').then(function (resp) {
+        if (callback) {
+          callback(resp.data);
+        }
+      })
+    }
+
+    function testSMTPConnection(smtpSettings, callback) {
+      $http.put('/settings/companyProfile/testSMTPSettings', smtpSettings).then(function (resp) {
+        if (callback) {
+          callback(resp.data);
+        }
+      });
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -657,7 +671,9 @@
       deleteCover: deleteCover,
       deleteLogo: deleteLogo,
       getCompanyContacts: getCompanyContacts,
-      saveAllowingCreateCustomTags: saveAllowingCreateCustomTags
+      saveAllowingCreateCustomTags: saveAllowingCreateCustomTags,
+      getCompanySMTPSettings: getCompanySMTPSettings,
+      testSMTPConnection: testSMTPConnection
     }
 
   }]);

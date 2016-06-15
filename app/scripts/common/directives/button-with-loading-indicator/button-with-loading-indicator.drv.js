@@ -18,20 +18,26 @@
       },
       link: function (scope, element, attrs) {
 
-        var initializing = true;
+        var initializing = true,
+          promise;
+
         scope.$watch('loading', function (loading) {
           if (initializing) {
             initializing = false;
             scope.animationFinished = true;
           } else {
             if (loading) {
+              if (promise) {
+                $timeout.cancel(promise);
+              }
+
               scope.loaded = false;
               scope.animationFinished = false;
             } else {
               scope.loaded = true;
-              $timeout(function () {
+              promise = $timeout(function () {
                 scope.animationFinished = true;
-              }, 1000);
+              }, 2000);
             }
           }
         });

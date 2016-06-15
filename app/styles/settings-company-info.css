@@ -64,7 +64,7 @@
 .tags-management {
   float: left;
   width: 100%;
-  padding-bottom: 240px;
+  padding-bottom: 120px;
 }
 .tags-management .form-group{
   margin-top: 15px;
@@ -160,4 +160,78 @@
   font-size: 15px;
   height: 20px;
   line-height: 20px;
+}
+.smtp-wrap {
+  float: left;
+  width: 100%;
+  padding-bottom: 120px;
+}
+.smtp-wrap .full-width .icn-hide-password {
+  display: inline-block;
+  position: absolute;
+  top: 32px;
+  right: 15px;
+  cursor: pointer;
+}
+.smtp-wrap .full-width .icn-show-password {
+  display: inline-block;
+  position: absolute;
+  top: 34px;
+  right: 15px;
+  cursor: pointer;
+}
+.smtp-wrap .domain {
+  width: 55%;
+  max-width: none;
+}
+.smtp-wrap .port {
+  width: 20%;
+}
+.smtp-wrap .port > input {
+  padding: 8px;
+}
+.smtp-wrap .encryption-type {
+  width: 21%;
+}
+.smtp-wrap .encryption-type > select {
+  padding: 8px;
+}
+.smtp-wrap .smtp-domains > span > a {
+  cursor: pointer;
+  color: blue;
+  vertical-align: middle;
+}
+.smtp-wrap .smtp-domains > span > a:hover {
+  color: blueviolet;
+}
+.smtp-wrap .smtp-domains > span {
+  cursor: pointer;
+}
+.smtp-wrap .smtp-domains > span:not(:first-child) {
+  margin-left: 28px;
+}
+.smtp-wrap .error-msg {
+  vertical-align: middle;
+  color: red;
+}
+.test-smtp-connection .loading-indicator-wrap {
+  display: inline-block;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+.hint-tooltip .tooltip-inner {
+  white-space: pre-wrap;
+  height: auto;
+}
+.hint-icon {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  border: solid 1px grey;
+  border-radius: 50%;
+  margin-left: 20px;
+  color: grey;
+  padding-top: 2px;
+  cursor: help;
 }
