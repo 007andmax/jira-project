@@ -9723,3 +9723,13 @@ color: blue;
 .image-preview-close-btn:hover .icn-remove-token{
   background-position: -694px 1px;
 }
+.ticket-add-content .qt-table li{
+  display: block;
+}
+.ticket-add-content .qt-table li .col-1{
+  display: inline-block;
+  width: calc(100% - 385px);
+}
+.ticket-add-content .qt-table li .col-3, .ticket-add-content .qt-table li .col-4, .ticket-add-content .qt-table li .col-5{
+  display: inline-block;
+}
