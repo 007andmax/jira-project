@@ -19,9 +19,11 @@
           $scope.smtp = resp;
         });
 
-        $scope.checkSMTPLoginUnique = function (model, field) {
+        $scope.checkSMTPLoginUnique = function (model) {
+          $scope.checkLoginUniqueInProgress = true;
           CompaniesService.checkSMTPLoginUnique(model.$viewValue, function (resp) {
             $scope.smtpForm.login.$setValidity('unique', !!resp);
+            $scope.checkLoginUniqueInProgress = false;
           })
         };
 
@@ -35,9 +37,12 @@
             promise = $timeout(function () {
               CompaniesService.saveForCompanyProfile($scope.smtp, 'SMTPSettings', function (resp) {
                 $scope.smtp.isValid = resp.valid;
-                $scope.smtp.errorMessage = resp.message;
+                $scope.smtp.exeption = resp.code >= 400;
+                $scope.smtp.errorMessage = resp.errorMessage;
                 $scope.testingConnection = false;
-                form.$setPristine();
+                if (resp.code < 400) {
+                  form.$setPristine();
+                }
               });
             }, 300);
           } else if (!$scope.smtp.useSMTP) {

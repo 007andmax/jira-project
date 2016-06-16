@@ -1053,7 +1053,8 @@
           Test connection
         </div>
         <div class="loading-indicator-wrap">
-          <button-with-loading-indicator loading="testingConnection" ng-show="smtp.useSMTP && (testingConnection || smtp.isValid)">
+          <button-with-loading-indicator loading="testingConnection"
+                                         ng-show="smtp.useSMTP && !smtp.exeption && (testingConnection || smtp.isValid)">
           </button-with-loading-indicator>
         </div>
         <span class="error-msg" ng-if="smtp.useSMTP && !testingConnection && !smtp.isValid">
