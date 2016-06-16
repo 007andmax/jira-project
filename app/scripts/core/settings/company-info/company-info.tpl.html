@@ -95,25 +95,25 @@
 
             </div>
 
-            <div class="form-row clearfix">
+            <!--<div class="form-row clearfix">-->
 
-              <div class="form-group full-width"
-                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
+              <!--<div class="form-group full-width"-->
+                   <!--ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">-->
 
-                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  Support Email address (what you want your customers to see)
-                </label>
+                <!--<label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">-->
+                  <!--Support Email address (what you want your customers to see)-->
+                <!--</label>-->
 
-                <div ng-messages="basicInfoForm.businessEmail.$error"
-                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  <label class="control-label" ng-message="pattern">Please enter a valid email.</label>
-                </div>
+                <!--<div ng-messages="basicInfoForm.businessEmail.$error"-->
+                     <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'businessEmail')}">-->
+                  <!--<label class="control-label" ng-message="pattern">Please enter a valid email.</label>-->
+                <!--</div>-->
 
-                <input class="form-control" type="text" name="businessEmail"
-                       ng-model="companyForSettingPage.businessEmail" ng-pattern="emailPattern"
-                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
-              </div>
-            </div>
+                <!--<input class="form-control" type="text" name="businessEmail"-->
+                       <!--ng-model="companyForSettingPage.businessEmail" ng-pattern="emailPattern"-->
+                       <!--execute-when-outfocused="saveBasicInfo(basicInfoForm)">-->
+              <!--</div>-->
+            <!--</div>-->
 
             <div class="form-row clearfix">
 
