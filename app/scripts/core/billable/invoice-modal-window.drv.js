@@ -3,10 +3,11 @@
 (function () {
 
   angular.module("quicktech.core.billable").directive("invoiceModalWindow",
-    ['$timeout', 'BillableService', function ($timeout, BillableService) {
+    ['$timeout', 'BillableService', '$location', function ($timeout, BillableService, $location) {
       return {
         restrict: 'A',
         link: function (scope, element) {
+          $location.search('modal', 'true');
 
           var zoomSlider = element.find('.zoom-slider'),
             companyDropdown = element.find('.company-dropdown'),
@@ -91,6 +92,7 @@
           scope.$on('$destroy', function () {
             $('html').css('overflow-y', 'scroll');
             clearInterval(interval);
+            $location.search('modal', null);
           });
 
           scope.$watch('zoomRange', function () {
