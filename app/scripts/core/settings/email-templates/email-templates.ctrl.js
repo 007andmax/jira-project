@@ -8,51 +8,70 @@
 
         $scope.numberPattern = /^\d+$/;
 
+
         $scope.ticketTemplates = {
           'TU_ADDED': {
             title: 'A new Ticket Update is added',
             recipient: 'All persons added to Ticket Update',
-            description: 'This message will be sent when a person is added to the Ticket Update.'
+            description: 'This message will be sent when a person is added to the Ticket Update.',
+            requiredKeywords: ['$Ticket_Number'],
+            requiredKeywordsRegExp: /\$Ticket_Number/
           },
           //'TU_EDITED': {
           //  title: 'A Ticket Update is edited',
           //  recipient: 'All persons added to Ticket Update',
-          //  description: 'This message will be sent when a ticket update is edited.'
+          //  description: 'This message will be sent when a ticket update is edited.',
+          //  requiredKeywords: ['$Ticket_Number'],
+          //  requiredKeywordsRegExp: /\$Ticket_Number/
           //},
           //'TU_DELETED': {
           //  title: 'A Ticket Update is deleted',
           //  recipient: 'All persons added to Ticket Update',
-          //  description: 'This message will be sent when a ticket update is deleted.'
+          //  description: 'This message will be sent when a ticket update is deleted.',
+          //  requiredKeywords: ['$Ticket_Number'],
+          //  requiredKeywordsRegExp: /\$Ticket_Number/
           //},
           //'TICKET_ASSIGNED': {
           //  title: 'A Ticket is assigned/re-assigned',
           //  recipient: 'User',
-          //  description: 'This message will inform the client user about the ticket assignee. It may include the assignee contact details.'
+          //  description: 'This message will inform the client user about the ticket assignee. It may include the assignee contact details.',
+          //  requiredKeywords: ['$Ticket_Number'],
+          //  requiredKeywordsRegExp: /\$Ticket_Number/
           //},
           'TICKET_CREATED': {
             title: 'A new Ticket is created',
             recipient: 'User',
-            description: 'This message will confirm the ticket details that client user conveyed to the agent for creating the ticket.'
+            description: 'This message will confirm the ticket details that client user conveyed to the agent for creating the ticket.',
+            requiredKeywords: ['$Ticket_Number'],
+            requiredKeywordsRegExp: /\$Ticket_Number/
           },
           'TICKET_CLOSED': {
             title: 'A Ticket is closed',
             recipient: 'User',
-            description: 'This message will be sent to inform client user that ticket has been closed.'
+            description: 'This message will be sent to inform client user that ticket has been closed.',
+            requiredKeywords: ['$Ticket_Number'],
+            requiredKeywordsRegExp: /\$Ticket_Number/
           }
           //'TICKET_OPENED': {
           //  title: 'A Ticket is marked as Open',
           //  recipient: 'User',
-          //  description: 'This message will be sent when a previously closed ticket is marked as open.'
+          //  description: 'This message will be sent when a previously closed ticket is marked as open.',
+          //  requiredKeywords: ['$Ticket_Number'],
+          //  requiredKeywordsRegExp: /\$Ticket_Number/
           //},
           //'TICKET_SPAM': {
           //  title: 'A Ticket is marked/reported as Spam',
           //  recipient: 'User',
-          //  description: 'This message will be sent when a ticket is marked/reported as spam.'
+          //  description: 'This message will be sent when a ticket is marked/reported as spam.',
+          //  requiredKeywords: ['$Ticket_Number'],
+          //  requiredKeywordsRegExp: /\$Ticket_Number/
           //},
           //'TICKET_TRASH': {
           //  title: 'A Ticket is moved to Trash',
           //  recipient: 'User',
-          //  description: 'This message will be sent when a ticket is moved to trash.'
+          //  description: 'This message will be sent when a ticket is moved to trash.',
+          //  requiredKeywords: ['$Ticket_Number'],
+          //  requiredKeywordsRegExp: /\$Ticket_Number/
           //}
         };
 
@@ -316,12 +335,15 @@
         $scope.saveEmailTemplate = function (templateKey, form) {
           if (form.$valid) {
             $scope.savingInProcess = true;
+            $scope.triedToSave = false;
 
             EmailSettingsService.saveEmailTemplate($scope.templatesData, templateKey, function () {
               $scope.openEmailTemplate('CLOSE');
               form.$setPristine();
               $scope.savingInProcess = false;
             })
+          } else {
+            $scope.triedToSave = true;
           }
         }
 

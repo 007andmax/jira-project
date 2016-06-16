@@ -34,10 +34,11 @@
                ng-class="{ 'hide': !isShowingErrors(templateForm, 'templateSubject')}">
             <label class="control-label" ng-message="required" for="">subject field cannot be left empty.</label>
             <label class="control-label" ng-message="maxlength" for="">subject is too large</label>
+            <label class="control-label" ng-message="pattern" for="">subject require keywords: {{ templateInfo.requiredKeywords.join(', ') }}</label>
           </div>
 
           <input id="template-subject" class="form-control insert-field"
-                 name="templateSubject" ng-model="templatesData.subject"
+                 name="templateSubject" ng-model="templatesData.subject" ng-pattern="templateInfo.requiredKeywordsRegExp"
                  required ng-maxlength="150" make-dirty-on-blur>
         </div>
 
