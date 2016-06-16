@@ -9662,8 +9662,8 @@ button.close {
   min-width: 200px;
 }
 .free-number-link {
-cursor: pointer;
-color: blue;
+  cursor: pointer !important;
+  color: blue;
 }
 .free-number-link:hover {
   color: blueviolet;

@@ -58,8 +58,7 @@
             }
           }
 
-          headerSharedState.invoices = $scope.receiptArchiveData.list
-
+          headerSharedState.invoices = $scope.receiptArchiveData.list;
         });
 
         $scope.setHighlightInvoiceId = function (invoiceId) {

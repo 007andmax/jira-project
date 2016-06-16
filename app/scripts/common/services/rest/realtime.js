@@ -70,6 +70,7 @@
         function (message) {
           //console.log(message);
           config.callback(JSON.parse(message.body));
+          config.scope.$apply();
         });
 
       config.scope.$on('$destroy', function () {
