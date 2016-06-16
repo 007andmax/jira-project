@@ -17,14 +17,35 @@
       <div class="sub-wrapper" ets-slider>
         <ul class="qt-list qt-invoices">
 
-          <li class="list-heading" ng-show="showInvoices" fixed-block-top offset-top="148" disable-stick="!$first">
-            <div class="col-1">INVOICE NO.</div>
-            <div class="col-2">INVOICE DATE</div>
-            <div class="col-3">PAID ON</div>
-            <div class="col-4">AMOUNT</div>
+          <li class="list-heading" ng-show="showInvoices" style="cursor: pointer !important;"
+              fixed-block-top offset-top="148" disable-stick="!$first">
+            <div class="col-1" ng-click="setOrderForInvoices('number')">
+              <span class="sort-span">
+                INVOICE NO.
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'number'}"></i></span>
+            </div>
+            <div class="col-2" ng-click="setOrderForInvoices('date')">
+              <span class="sort-span">
+                INVOICE DATE
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'date'}"></i></span>
+            </div>
+            <div class="col-3" ng-click="setOrderForInvoices('paidOn')">
+              <span class="sort-span">
+                PAID ON
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'paidOn'}"></i></span>
+            </div>
+            <div class="col-4" ng-click="setOrderForInvoices('amount')">
+              <span class="sort-span">
+                AMOUNT
+                <i class="icn-sm sort-icon icn-sort"
+                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'amount'}"></i></span>
+            </div>
           </li>
 
-          <li ng-repeat="invoice in receiptArchiveData.companies[company.id] | orderBy: '-paidOn' track by invoice.id"
+          <li ng-repeat="invoice in receiptArchiveData.companies[company.id] | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
               ng-controller="quicktech.core.receiptArchive.invoiceCtrl"
               show-model-element="{{ 'showInvoice-' + invoice.id }}">
 
@@ -34,7 +55,8 @@
                    modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
                    modal-window-class="invoice-modal-not-background"
                    mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-                   mw-controller="quicktech.core.receivable.invoicePreviewCtrl">{{ invoice.number }}</div>
+                   mw-controller="quicktech.core.receivable.invoicePreviewCtrl">{{ invoice.number }}
+              </div>
             </div>
 
             <div class="col-2">{{ invoice.date | date:'dd MMM yyyy' }}</div>

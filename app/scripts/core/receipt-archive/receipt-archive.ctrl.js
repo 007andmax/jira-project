@@ -12,6 +12,10 @@
 
         $scope.receiptArchiveCompanies = [];
         $scope.totalCompanySum = {};
+        $scope.orderInvoices = {
+          field: 'paidOn',
+          reverse: true
+        };
 
         $scope.$watch(function () {
           return $stateParams.mode;
@@ -63,6 +67,29 @@
 
         $scope.setHighlightInvoiceId = function (invoiceId) {
           $scope.highlightInvoiceId = invoiceId;
+        };
+
+        $scope.setOrderForInvoices = function (option) {
+          if (option === $scope.orderInvoices.field) {
+            $scope.orderInvoices.reverse = !$scope.orderInvoices.reverse;
+          } else {
+            $scope.orderInvoices.field = option;
+            $scope.orderInvoices.reverse = false;
+          }
+        };
+
+        $scope.orderByForInvoices = function (item) {
+          if ($scope.orderInvoices.field === 'number') {
+            return item.number;
+          } else if ($scope.orderInvoices.field === 'company') {
+            return CompaniesService.getOneById(item.company.id).name;
+          } else if ($scope.orderInvoices.field === 'date') {
+            return item.date;
+          } else if ($scope.orderInvoices.field === 'paidOn') {
+            return item.paidOn;
+          } else if ($scope.orderInvoices.field === 'amount') {
+            return item.sum;
+          }
         };
 
         $scope.$on('$destroy', function () {

@@ -172,7 +172,7 @@
           if ($scope.orderInvoices.field === 'number') {
             return item.number;
           } else if ($scope.orderInvoices.field === 'company') {
-            return CompaniesService.getOneById(item.id).name;
+            return CompaniesService.getOneById(item.company.id).name;
           } else if ($scope.orderInvoices.field === 'readedAt') {
             return item.readedAt;
           } else if ($scope.orderInvoices.field === 'date') {
