@@ -626,19 +626,13 @@
     }
 
     function getCompanySMTPSettings(callback) {
-      $http.get('/settings/companyProfile/SMTPSettings').then(function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      })
+      var future = $http.get('/settings/companyProfile/SMTPSettings');
+      Utils.handleCallback(future, callback);
     }
 
-    function testSMTPConnection(smtpSettings, callback) {
-      $http.put('/settings/companyProfile/testSMTPSettings', smtpSettings).then(function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
+    function checkSMTPLoginUnique(email, callback) {
+      var future = $http.get('/settings/companyProfile/SMTPSettings/checkEmailUnique?email=' + email);
+      Utils.handleCallback(future, callback);
     }
 
     return {
@@ -673,7 +667,7 @@
       getCompanyContacts: getCompanyContacts,
       saveAllowingCreateCustomTags: saveAllowingCreateCustomTags,
       getCompanySMTPSettings: getCompanySMTPSettings,
-      testSMTPConnection: testSMTPConnection
+      checkSMTPLoginUnique: checkSMTPLoginUnique
     }
 
   }]);

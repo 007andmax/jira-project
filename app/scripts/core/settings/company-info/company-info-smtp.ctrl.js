@@ -19,6 +19,12 @@
           $scope.smtp = resp;
         });
 
+        $scope.checkSMTPLoginUnique = function (model, field) {
+          CompaniesService.checkSMTPLoginUnique(model.$viewValue, function (resp) {
+            $scope.smtpForm.login.$setValidity('unique', !!resp);
+          })
+        };
+
         $scope.saveSMTP = function (form) {
           if (form.$valid && $scope.smtp.useSMTP) {
             if (promise) {

@@ -1012,10 +1012,12 @@
           <div ng-messages="smtpForm.login.$error"
                ng-class="{'hide': !isShowingErrors(smtpForm, 'login')}">
             <label class="control-label" ng-message="required">Login is required.</label>
+            <label class="control-label" ng-message="unique">Login is not unique.</label>
           </div>
 
           <input type="text" class="form-control" name="login" ng-model="smtp.login"
-                 required execute-when-outfocused="saveSMTP(smtpForm)" custom-disabled="{{ !smtp.useSMTP }}">
+                 required execute-when-outfocused="saveSMTP(smtpForm)" custom-disabled="{{ !smtp.useSMTP }}"
+                 is-uniq-validation validation-func="checkSMTPLoginUnique">
 
         </div>
       </div>
