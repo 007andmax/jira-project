@@ -385,14 +385,19 @@
       }
 
       var url = '/settings/companyProfile/' + toUpdate,
-        method = 'PUT';
+        method = 'PUT',
+        saveData = angular.copy(data);
 
-      var future = $http({
+      $http({
         url: url,
         method: method,
         data: data
-      });
-      Utils.handleCallback(future, callback);
+      }).then(function (resp) {
+        if (callback) {
+          callback(resp.data, saveData);
+        }
+      })
+
     }
 
     function getCompanyForSettingPage(callback) {

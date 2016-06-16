@@ -27,6 +27,11 @@
           })
         };
 
+        $scope.setDomain = function (value, form) {
+          $scope.smtp.domain = value;
+          $scope.saveSMTP(form);
+        };
+
         $scope.saveSMTP = function (form) {
           if (form.$valid && $scope.smtp.useSMTP) {
             if (promise) {
@@ -35,16 +40,19 @@
             $scope.testingConnection = true;
 
             promise = $timeout(function () {
-              CompaniesService.saveForCompanyProfile($scope.smtp, 'SMTPSettings', function (resp) {
-                $scope.smtp.isValid = resp.valid;
-                $scope.smtp.exeption = resp.code >= 400;
-                $scope.smtp.errorMessage = resp.errorMessage;
+              CompaniesService.saveForCompanyProfile($scope.smtp, 'SMTPSettings', function (resp, oldSettings) {
+                if (angular.equals($scope.smtp, oldSettings)) {
+                  $scope.smtp.isValid = resp.valid;
+                  $scope.smtp.exeption = resp.code >= 400;
+                  $scope.smtp.errorMessage = resp.errorMessage;
+                }
                 $scope.testingConnection = false;
                 if (resp.code < 400) {
                   form.$setPristine();
                 }
+                promise = undefined;
               });
-            }, 300);
+            }, 500);
           } else if (!$scope.smtp.useSMTP) {
             CompaniesService.saveForCompanyProfile($scope.smtp, 'SMTPSettings');
           }

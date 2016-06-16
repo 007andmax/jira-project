@@ -929,15 +929,15 @@
     </div>
 
     <div class="form-row clearfix smtp-domains" style="margin-bottom: 20px;" ng-if="smtp.useSMTP">
-      <span ng-click="smtp.domain = 'smtp.gmail.com'">
+      <span ng-click="setDomain('smtp.gmail.com', smtpForm)">
         <img src="./images/input-icons/gmail-logo.png" alt="gmail-logo" width="24">
         <a>Gmail</a>
       </span>
-      <span ng-click="smtp.domain = 'smtp.mail.yahoo.com'">
+      <span ng-click="setDomain('smtp.mail.yahoo.com', smtpForm)">
         <img src="./images/input-icons/yahoo-logo.png" alt="yahoo-logo" width="24">
         <a>Yahoo</a>
       </span>
-      <span ng-click="smtp.domain = 'smtp-mail.outlook.com'">
+      <span ng-click="setDomain('smtp-mail.outlook.com', smtpForm)">
         <img src="./images/input-icons/outlook-logo.png" alt="outlook-logo" width="24">
         <a>Outlook</a>
       </span>
