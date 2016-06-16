@@ -5,7 +5,27 @@
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.smtpCtrl',
     ['$scope', 'CompaniesService', '$timeout',
       function ($scope, CompaniesService, $timeout) {
-        var promise;
+        var promise,
+          initialized = false,
+          portIsEmpty = false,
+          portToTypes = {
+            'NONE': 25,
+            'TLS': 587,
+            'SSL': 465
+          },
+          preinitializedDomains = {
+            GMAIL: {
+              domain: 'smtp.gmail.com'
+            },
+            YAHOO: {
+              domain: 'smtp.mail.yahoo.com'
+            },
+            OUTLOOK: {
+              domain: 'smtp-mail.outlook.com',
+              port: 587,
+              encryptionType: 'TLS'
+            }
+          };
 
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.smtp = {};
@@ -17,6 +37,20 @@
 
         CompaniesService.getCompanySMTPSettings(function (resp) {
           $scope.smtp = resp;
+          portIsEmpty = !resp.port;
+        });
+
+        $scope.$watch('smtp.encryptionType', function (value) {
+          if (value) {
+            if (initialized || portIsEmpty) {
+              var port = portToTypes[value];
+              if (port) {
+                $scope.smtp.port = port;
+              }
+            } else {
+              initialized = true;
+            }
+          }
         });
 
         $scope.checkSMTPLoginUnique = function (model) {
@@ -28,7 +62,19 @@
         };
 
         $scope.setDomain = function (value, form) {
-          $scope.smtp.domain = value;
+          var domain = preinitializedDomains[value],
+            port = portToTypes[$scope.smtp.encryptionType];
+
+          if (domain) {
+            for (var prop in domain) {
+              $scope.smtp[prop] = domain[prop];
+            }
+          }
+
+          if (port && !domain.port) {
+            $scope.smtp.port = port;
+          }
+
           $scope.saveSMTP(form);
         };
 

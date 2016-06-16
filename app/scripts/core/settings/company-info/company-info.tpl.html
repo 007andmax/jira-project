@@ -929,15 +929,15 @@
     </div>
 
     <div class="form-row clearfix smtp-domains" style="margin-bottom: 20px;" ng-if="smtp.useSMTP">
-      <span ng-click="setDomain('smtp.gmail.com', smtpForm)">
+      <span ng-click="setDomain('GMAIL', smtpForm)">
         <img src="./images/input-icons/gmail-logo.png" alt="gmail-logo" width="24">
         <a>Gmail</a>
       </span>
-      <span ng-click="setDomain('smtp.mail.yahoo.com', smtpForm)">
+      <span ng-click="setDomain('YAHOO', smtpForm)">
         <img src="./images/input-icons/yahoo-logo.png" alt="yahoo-logo" width="24">
         <a>Yahoo</a>
       </span>
-      <span ng-click="setDomain('smtp-mail.outlook.com', smtpForm)">
+      <span ng-click="setDomain('OUTLOOK', smtpForm)">
         <img src="./images/input-icons/outlook-logo.png" alt="outlook-logo" width="24">
         <a>Outlook</a>
       </span>
@@ -1012,10 +1012,11 @@
           <div ng-messages="smtpForm.login.$error"
                ng-class="{'hide': !isShowingErrors(smtpForm, 'login')}">
             <label class="control-label" ng-message="required">Login is required.</label>
+            <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
             <label class="control-label" ng-message="unique">Login is not unique.</label>
           </div>
 
-          <input type="text" class="form-control" name="login" ng-model="smtp.login"
+          <input type="text" class="form-control" name="login" ng-model="smtp.login" ng-pattern="emailPattern"
                  required execute-when-outfocused="saveSMTP(smtpForm)" custom-disabled="{{ !smtp.useSMTP }}"
                  is-uniq-validation validation-func="checkSMTPLoginUnique">
 
