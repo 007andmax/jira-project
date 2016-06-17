@@ -30,8 +30,8 @@
       <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}">
 
         <input type="text" class="form-control" name="productSerialNumber"
-               placeholder="Serial Number" ng-model="productExpense.serialNumber"
-               ng-maxlength="36"/>
+               placeholder="Serial Number" ng-model="productExpense.serialNumber" ng-maxlength="36"
+               tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
       </div>
 
       <div class="col-4" ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
