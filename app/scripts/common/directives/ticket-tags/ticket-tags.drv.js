@@ -82,6 +82,10 @@
                     $scope.savedTicketTags = angular.copy($scope.ticketTags);
                     $scope.saving = false;
                     tagsChanged = false;
+
+                    var searchQuery = lastQuery;
+                    lastQuery = undefined;
+                    searchTag(searchQuery);
                   });
                 }
               };
