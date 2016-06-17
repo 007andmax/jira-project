@@ -3,28 +3,19 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.companies.companyProfileTabsCtrl',
-    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.SharedStateService',
+    ['$scope', 'DevicesService', '$state', '$stateParams', 'quicktech.common.services.SharedStateService',
       'quicktech.common.services.UserConfirmationsService', 'CompaniesService', 'UsersService', 'SubscriptionsService', 'Utils',
-      function ($scope, DevicesService, $stateParams, SharedStateService,
+      function ($scope, DevicesService, $state, $stateParams, SharedStateService,
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService, Utils) {
 
-        var tabs = ['USERS', 'DEVICES', 'AGENTS', 'NETWORK_SCAN', 'SETTINGS'], /*... ['VENDORS', 'ACTIVITIES']*/
+        var tabs = ['users', 'devices', 'agents', 'network-scan', 'settings'], /*... ['VENDORS', 'ACTIVITIES']*/
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
-          agentCallbackCount = 0,
-          lastMasterAgentId,
-          tabsPathMap = {
-            USERS: 'users-tab/users-tab.tpl.html',
-            DEVICES: 'devices-tab/devices-tab.tpl.html',
-            AGENTS: 'agents-tab/agents-tab.tpl.html',
-            NETWORK_SCAN: 'network-scan-tab/network-scan-tab.tpl.html',
-            SETTINGS: 'settings-tab/settings-tab.tpl.html'
-          };
+          lastMasterAgentId;
 
         $scope.selectDevices = {};
         $scope.isCollapsedGraph = true;
         $scope.isScanDevicesLoad = false; // change in services
         $scope.currentOpenTab = tabs[0];
-        $scope.tabPath = tabsPathMap[$scope.currentOpenTab];
         $scope.orderScanBy = 'hostName';
         $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
@@ -84,13 +75,31 @@
           }
         });
 
-        $scope.toggleCollapsed = function () {
-          $scope.isCollapsedGraph = !$scope.isCollapsedGraph;
-        };
+        $scope.$watch('agents.length', function (val) {
+          if (val && (val > 0)) {
+            $scope.isHasDevices = true;
+          } else {
+            $scope.isHasDevices = false;
+            if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings') {
+              $state.go('companyProfile.tab', { tabName: 'users' });
+            }
 
-        $scope.openTab = function (tabName) {
-          if ($scope.currentOpenTab === tabName) {
-            return
+          }
+        });
+
+        $scope.$watch(function () {
+          if ($scope.scanDevices && $scope.scanDevices.networkScan) {
+            return $scope.scanDevices.networkScan.netScanStatus;
+          }
+        }, function (val) {
+          $scope.isScanDevicesLoad = val !== 'finished';
+        });
+
+        $scope.$watch(function () {
+          return $stateParams.tabName;
+        }, function (tabName) {
+          if (!tabName || $scope.currentOpenTab === tabName) {
+            return;
           }
 
           if (tabs.indexOf(tabName) < 0) {
@@ -98,7 +107,7 @@
           } else {
             $scope.currentOpenTab = tabName;
 
-            if (tabName === 'NETWORK_SCAN') {
+            if (tabName === 'network-scan') {
               DevicesService.getAgentSettingsByCompany($scope.company.id, function (resp) {
                 var isAutoRescanEnable = resp.autoScanNetwork;
 
@@ -114,7 +123,10 @@
           }
 
           $scope.companyProfileHeader.unCheckAll();
-          $scope.tabPath = tabsPathMap[$scope.currentOpenTab];
+        });
+
+        $scope.toggleCollapsed = function () {
+          $scope.isCollapsedGraph = !$scope.isCollapsedGraph;
         };
 
         $scope.saveDescription = function (deviceId, description) {
@@ -207,14 +219,6 @@
           return false;
         };
 
-        $scope.$watch(function () {
-          if ($scope.scanDevices && $scope.scanDevices.networkScan) {
-            return $scope.scanDevices.networkScan.netScanStatus;
-          }
-        }, function (val) {
-          $scope.isScanDevicesLoad = val !== 'finished';
-        });
-
         $scope.changeSelectedUsers = function () {
           var selectUsersIds = [];
           var selectUsersSbscr = {
@@ -299,18 +303,6 @@
           $scope.changeSelectedUsers();
           $scope.changeSelectDevices();
         };
-
-        $scope.$watch('agents.length', function (val) {
-          if (val && (val > 0)) {
-            $scope.isHasDevices = true;
-          } else {
-            $scope.isHasDevices = false;
-            if (!($scope.currentOpenTab === 'USERS') && !($scope.currentOpenTab === 'SETTINGS')) {
-              $scope.openTab('USERS');
-            }
-
-          }
-        })
 
       }]);
 }());

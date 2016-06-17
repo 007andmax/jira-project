@@ -9597,6 +9597,7 @@ button.close {
   opacity: 0 !important;
 }
 .form-left-column {
+  margin-top: 50px;
   width: 43%;
   float: left;
 }

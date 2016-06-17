@@ -82,6 +82,14 @@
         templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
+      .state('companyProfile.tab', waitForServices({
+        url: '/:tabName',
+        templateUrl: function (params) {
+          var path = params.tabName.toLowerCase() + '-tab';
+          return '/html/scripts/core/companies/company-profile/tabs/' + path + '/' + path + '.tpl.html';
+        },
+        controller: 'quicktech.core.companies.companyProfileCtrl'
+      }))
       .state('products', waitForServices({
         url: '/inventry/products',
         templateUrl: '/html/scripts/core/products/products.tpl.html',

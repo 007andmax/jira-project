@@ -10,13 +10,13 @@
 
           if (val.selectUsersIds.length > 0) {
 
-            $scope.bulkOptionMode = 'USERS';
+            $scope.bulkOptionMode = 'users';
             $scope.selectUsersIds = val.selectUsersIds;
             $scope.usersSbscr = angular.copy(val.selectUsersSubscr);
 
           } else if (val.selectDevicesIds.length > 0) {
 
-            $scope.bulkOptionMode = 'DEVICES';
+            $scope.bulkOptionMode = 'devices';
             $scope.selectDevicesIds = val.selectDevicesIds;
 
           } else {

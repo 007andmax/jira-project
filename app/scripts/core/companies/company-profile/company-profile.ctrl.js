@@ -82,6 +82,8 @@
           });
         }
 
+        $state.go('companyProfile.tab', { tabName: $stateParams.tabName || 'users' });
+
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.companyData.addresses.length) {
             $scope.locationIndex = index;

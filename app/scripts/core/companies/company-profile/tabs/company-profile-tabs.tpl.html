@@ -1,7 +1,7 @@
 <div ng-controller="quicktech.core.companies.companyProfileTabsCtrl">
 
   <div class="tabs-container">
-    <div class="payment-receive-fixed" style="margin-top: 433px;" fixed-block-top>
+    <div class="payment-receive-fixed" ng-style="{'margin-top': isCollapsed ? '433px' : '1511px'}" fixed-block-top>
       <ul class="nav nav-qt clearfix" style="padding-top: 0; margin-left: 30px;"
           ng-class="{'root-user-company-prof': isChartsAccess()}" company-bulk-option>
 
@@ -14,35 +14,35 @@
         <!--</div>-->
         <!--</li>-->
 
-        <li ng-class="{'active': currentOpenTab === 'USERS'}">
-          <a data-toggle="tab" href="javascript:void(0)" ng-click="openTab('USERS')">
+        <li ng-class="{'active': currentOpenTab === 'users'}">
+          <a ui-sref="companyProfile.tab({ tabName: 'users' })">
             Users
             <span class="text-muted">{{ users.length }}</span>
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'DEVICES', 'hide': !isHasDevices}">
-          <a data-toggle="tab" href="javascript:void(0)" ng-click="openTab('DEVICES')">
+        <li ng-class="{'active': currentOpenTab === 'devices', 'hide': !isHasDevices}">
+          <a ui-sref="companyProfile.tab({ tabName: 'devices' })">
             Devices
             <span class="text-muted">{{ agents.length }}</span>
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'AGENTS', 'hide': !isHasDevices}">
-          <a data-toggle="tab" href="javascript:void(0)" ng-click="openTab('AGENTS')">
+        <li ng-class="{'active': currentOpenTab === 'agents', 'hide': !isHasDevices}">
+          <a ui-sref="companyProfile.tab({ tabName: 'agents' })">
             Agents
             <span class="text-muted">{{ agents.length }}</span>
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'NETWORK_SCAN', 'hide': !isHasDevices}">
-          <a data-toggle="tab" href="javascript:void(0)" ng-click="openTab('NETWORK_SCAN')">
+        <li ng-class="{'active': currentOpenTab === 'network-scan', 'hide': !isHasDevices}">
+          <a ui-sref="companyProfile.tab({ tabName: 'network-scan' })">
             Network Scan
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'SETTINGS'}">
-          <a data-toggle="tab" href="javascript:void(0)" ng-click="openTab('SETTINGS')">
+        <li ng-class="{'active': currentOpenTab === 'settings'}">
+          <a ui-sref="companyProfile.tab({ tabName: 'settings' })">
             Settings
           </a>
         </li>
@@ -55,10 +55,10 @@
         <!--</li>-->
 
         <li class="bulk-option" bulk-option-content
-            ng-class="{'hide': !(bulkOptionMode === 'USERS') && !(bulkOptionMode === 'DEVICES')}"
+            ng-class="{'hide': !(bulkOptionMode === 'users') && !(bulkOptionMode === 'devices')}"
             ng-controller="quicktech.core.companies.bulkOptionCtrl">
 
-          <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'USERS'">
+          <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'users'">
 
             <p class="pull-left" style="white-space: nowrap;">
               <strong>{{ selectUsersIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
@@ -132,7 +132,7 @@
 
           </div>
 
-          <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'DEVICES'">
+          <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'devices'">
 
             <p class="pull-left" style="white-space: nowrap;">
               <strong>{{ selectDevicesIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
@@ -165,7 +165,7 @@
       </ul>
 
       <div class="pull-right for-network-tab" tooltip-placement="top" tooltip-append-to-body="true"
-           ng-show="currentOpenTab === 'NETWORK_SCAN'"
+           ng-show="currentOpenTab === 'network-scan'"
            tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
         <div class="btn btn-info has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
              custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}"
@@ -176,7 +176,8 @@
     </div>
   </div>
 
-  <div class="tab-content clearfix"
-       ng-include="'/html/scripts/core/companies/company-profile/tabs/' + tabPath"></div>
+  <div class="tab-content clearfix" ui-view></div>
+  <!--<div class="tab-content clearfix"-->
+       <!--ng-include="'/html/scripts/core/companies/company-profile/tabs/' + tabPath"></div>-->
 
 </div>
