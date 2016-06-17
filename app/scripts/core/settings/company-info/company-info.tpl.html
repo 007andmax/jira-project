@@ -1049,7 +1049,7 @@
       </div>
 
       <div class="form-row clearfix test-smtp-connection">
-        <div class="btn btn-lg btn-info" ng-click="saveSMTP(smtpForm)"
+        <div class="btn btn-lg btn-info" ng-click="saveSMTP(smtpForm, true)"
              custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}">
           Test connection
         </div>

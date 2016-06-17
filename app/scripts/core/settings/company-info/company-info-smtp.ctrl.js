@@ -6,6 +6,7 @@
     ['$scope', 'CompaniesService', '$timeout',
       function ($scope, CompaniesService, $timeout) {
         var promise,
+          savedSMTPSettings,
           initialized = false,
           portIsEmpty = false,
           portToTypes = {
@@ -37,6 +38,7 @@
 
         CompaniesService.getCompanySMTPSettings(function (resp) {
           $scope.smtp = resp;
+          savedSMTPSettings = angular.copy(resp);
           portIsEmpty = !resp.port;
         });
 
@@ -78,8 +80,8 @@
           $scope.saveSMTP(form);
         };
 
-        $scope.saveSMTP = function (form) {
-          if (form.$valid && $scope.smtp.useSMTP) {
+        $scope.saveSMTP = function (form, isTest) {
+          if (form.$valid && (isTest || !angular.equals($scope.smtp, savedSMTPSettings)) && $scope.smtp.useSMTP) {
             if (promise) {
               $timeout.cancel(promise);
             }
@@ -91,6 +93,7 @@
                   $scope.smtp.isValid = resp.valid;
                   $scope.smtp.exeption = resp.code >= 400;
                   $scope.smtp.errorMessage = resp.errorMessage;
+                  savedSMTPSettings = angular.copy($scope.smtp);
                 }
                 $scope.testingConnection = false;
                 if (resp.code < 400) {
