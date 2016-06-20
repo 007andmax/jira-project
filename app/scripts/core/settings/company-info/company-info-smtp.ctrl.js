@@ -38,6 +38,7 @@
 
         CompaniesService.getCompanySMTPSettings(function (resp) {
           $scope.smtp = resp;
+          $scope.smtp.testEmail = resp.login;
           savedSMTPSettings = angular.copy(resp);
           portIsEmpty = !resp.port;
         });
@@ -64,20 +65,22 @@
         };
 
         $scope.setDomain = function (value, form) {
-          var domain = preinitializedDomains[value],
-            port = portToTypes[$scope.smtp.encryptionType];
+          if (!$scope.disableFields) {
+            var domain = preinitializedDomains[value],
+              port = portToTypes[$scope.smtp.encryptionType];
 
-          if (domain) {
-            for (var prop in domain) {
-              $scope.smtp[prop] = domain[prop];
+            if (domain) {
+              for (var prop in domain) {
+                $scope.smtp[prop] = domain[prop];
+              }
             }
-          }
 
-          if (port && !domain.port) {
-            $scope.smtp.port = port;
-          }
+            if (port && !domain.port) {
+              $scope.smtp.port = port;
+            }
 
-          $scope.saveSMTP(form);
+            $scope.saveSMTP(form);
+          }
         };
 
         $scope.saveSMTP = function (form, isTest) {
@@ -86,8 +89,10 @@
               $timeout.cancel(promise);
             }
             $scope.testingConnection = true;
+            $scope.disableFields = !!isTest;
 
             promise = $timeout(function () {
+              $scope.smtp.sendTestEmail = !!isTest;
               CompaniesService.saveForCompanyProfile($scope.smtp, 'SMTPSettings', function (resp, oldSettings) {
                 if (angular.equals($scope.smtp, oldSettings)) {
                   $scope.smtp.isValid = resp.valid;
@@ -96,6 +101,7 @@
                   savedSMTPSettings = angular.copy($scope.smtp);
                 }
                 $scope.testingConnection = false;
+                $scope.disableFields = false;
                 if (resp.code < 400) {
                   form.$setPristine();
                 }

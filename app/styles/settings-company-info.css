@@ -166,32 +166,34 @@
   width: 100%;
   padding-bottom: 120px;
 }
-.smtp-wrap .full-width .icn-hide-password {
+.smtp-wrap .show-password .icn-hide-password {
   display: inline-block;
   position: absolute;
   top: 32px;
   right: 15px;
   cursor: pointer;
 }
-.smtp-wrap .full-width .icn-show-password {
+.smtp-wrap .show-password .icn-show-password,
+.smtp-wrap .restore-test-email .icn-restore {
   display: inline-block;
   position: absolute;
   top: 34px;
   right: 15px;
+  left: unset !important;
   cursor: pointer;
 }
 .smtp-wrap .domain {
-  width: 55%;
+  width: 49%;
   max-width: none;
 }
 .smtp-wrap .port {
-  width: 20%;
+  width: 23%;
 }
 .smtp-wrap .port > input {
   padding: 8px;
 }
 .smtp-wrap .encryption-type {
-  width: 21%;
+  width: 24%;
 }
 .smtp-wrap .encryption-type > select {
   padding: 8px;
