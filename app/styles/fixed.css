@@ -1434,3 +1434,6 @@ span.sort-span {
   height: 100%;
   overflow: auto;
 }
+.company-address-formatting {
+  white-space: pre-line;
+}

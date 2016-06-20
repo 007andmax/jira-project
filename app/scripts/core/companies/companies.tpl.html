@@ -183,9 +183,7 @@
 
     <div class="company-primary-contact">
       <div class="user-location"><i class="icn-sm icn-sb-location"></i>
-        <span>
-          {{ location }}
-        </span>
+        <span class="company-address-formatting">{{ location }}</span>
       </div>
       <div class="user-contact-no">
         <i class="icn-sm {{ getPhoneNumberCssClass(primaryPhone) }}"></i>{{ primaryPhone.number }}
