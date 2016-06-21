@@ -546,11 +546,6 @@ Devices tab
 .qt-list>li.billable-main {
   height: auto;
   min-height: 70px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
   cursor: pointer;
 }
 .qt-list .control{
