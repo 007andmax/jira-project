@@ -299,13 +299,13 @@
 
       <div class="form-row clearfix test-smtp-connection">
         <div class="form-group full-width">
-          <div class="btn btn-lg btn-info test-email-popup-btn" ng-click="openPopover(true)"
-               custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}"
-               popover-template="'/html/scripts/core/settings/company-info/send-test-email-popup.tpl.html'"
-               popover-placement="top" popover-append-to-body="true" popover-is-open="popoverOpened"
-               click-outside="openPopover(false)" outside-if-not="test-email-popup-btn, test-email-wrap">
-            Send test email
-          </div>
+          <!--<div class="btn btn-lg btn-info test-email-popup-btn" ng-click="openPopover(true)"-->
+               <!--custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}"-->
+               <!--popover-template="'/html/scripts/core/settings/company-info/send-test-email-popup.tpl.html'"-->
+               <!--popover-placement="top" popover-append-to-body="true" popover-is-open="popoverOpened"-->
+               <!--click-outside="openPopover(false)" outside-if-not="test-email-popup-btn, test-email-wrap">-->
+            <!--Send test email-->
+          <!--</div>-->
           <div class="loading-indicator-wrap">
             <button-with-loading-indicator loading="testingConnection"
                                            ng-show="smtp.useSMTP && !smtp.exeption && (testingConnection || smtp.isValid)">
