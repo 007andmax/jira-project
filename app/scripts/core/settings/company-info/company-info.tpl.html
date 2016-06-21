@@ -297,35 +297,13 @@
         </div>
       </div>
 
-      <div class="form-row clearfix">
-        <div class="form-group full-width"
-             ng-class="{'has-error': isShowingErrors(smtpForm, 'testEmail')}">
-
-          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'testEmail')}">
-            Test Email
-          </label>
-
-          <div ng-messages="smtpForm.testEmail.$error"
-               ng-class="{'hide': !isShowingErrors(smtpForm, 'testEmail')}">
-            <label class="control-label" ng-message="required">Enter the target email address please.</label>
-            <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
-          </div>
-
-          <input type="text" class="form-control" name="testEmail" ng-model="smtp.testEmail" ng-pattern="emailPattern"
-                 required custom-disabled="{{ !smtp.useSMTP || disableFields }}">
-
-          <span class="restore-test-email"
-                ng-click="smtp.testEmail = smtp.login" ng-show="smtp.testEmail !== smtp.login">
-            <i class="icn-sm icn-restore"></i>
-          </span>
-
-        </div>
-      </div>
-
       <div class="form-row clearfix test-smtp-connection">
         <div class="form-group full-width">
-          <div class="btn btn-lg btn-info" ng-click="saveSMTP(smtpForm, true)"
-               custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}">
+          <div class="btn btn-lg btn-info test-email-popup-btn" ng-click="openPopover(true)"
+               custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}"
+               popover-template="'/html/scripts/core/settings/company-info/send-test-email-popup.tpl.html'"
+               popover-placement="top" popover-append-to-body="true" popover-is-open="popoverOpened"
+               click-outside="openPopover(false)" outside-if-not="test-email-popup-btn, test-email-wrap">
             Send test email
           </div>
           <div class="loading-indicator-wrap">

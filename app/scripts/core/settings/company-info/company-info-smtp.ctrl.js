@@ -28,6 +28,7 @@
             }
           };
 
+        $scope.popoverOpened = false;
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.smtp = {};
         $scope.smtpHintMessage = 'You can use your custom SMTP server for sending email notifications.\n' +
@@ -38,7 +39,6 @@
 
         CompaniesService.getCompanySMTPSettings(function (resp) {
           $scope.smtp = resp;
-          $scope.smtp.testEmail = resp.login;
           savedSMTPSettings = angular.copy(resp);
           portIsEmpty = !resp.port;
         });
@@ -55,6 +55,10 @@
             }
           }
         });
+
+        $scope.openPopover = function (value) {
+          $scope.popoverOpened = value;
+        };
 
         $scope.checkSMTPLoginUnique = function (model) {
           $scope.checkLoginUniqueInProgress = true;
@@ -81,6 +85,11 @@
 
             $scope.saveSMTP(form);
           }
+        };
+
+        $scope.sendTestEmail = function (form, isTest) {
+          $scope.openPopover(false);
+          $scope.saveSMTP(form, isTest);
         };
 
         $scope.saveSMTP = function (form, isTest) {

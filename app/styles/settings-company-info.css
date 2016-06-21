@@ -237,3 +237,11 @@
   padding-top: 2px;
   cursor: help;
 }
+.test-email-wrap .input-btn-cr {
+  margin-top: -32px;
+  margin-left: 15px;
+}
+.test-email-wrap .form-row {
+  display: inline-block;
+  width: 200px;
+}
