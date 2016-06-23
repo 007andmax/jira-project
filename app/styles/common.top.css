@@ -1,68 +1,102 @@
-.topNavbar{
+.topNavbar {
   background-color: #FFF !important;
   border-radius: 0px;
   border: none !important;
-  height:78px;
+  height: 78px;
 }
 
-.topNavbar-content{
+.topNavbar-content {
   height: 78px;
   padding: 20px 0px;
   margin: 0 30px 0 28px;
 }
 
-.topNavbar-title{
+.topNavbar-title {
   min-width: 85px;
   padding-top: 9px;
   margin-right: 30px;
   height: 38px;
 }
 
-
-.topNavbarLeft{
+.topNavbarLeft {
   width: 100%;
   padding-right: 310px;
 }
 
+.topNavbarLeft .searchField {
+  display: inline-block;
+  width: 280px;
+  float: left;
+}
+
+.global-search-trigger {
+  position: relative;
+  display: inline-block;
+  width: 65px;
+  float: left;
+  margin-top: 14px;
+}
+
+.global-search-trigger .toggle-bg {
+  top: -7px;
+}
+.global-search-trigger .toggle-indicator {
+  top: -2px;
+}
+
+.global-search-trigger .toggle-bg,
+.global-search-trigger .toggle-indicator {
+  cursor: pointer;
+}
+
+.global-search-trigger > input {
+  display: none;
+}
+
 @media screen and (max-width: 1600px) {
-  .topNavbar-logo .logo{
+  .topNavbar-logo .logo {
     right: -155px !important;
   }
 }
-@media only screen and (max-width: 1315px){
-  .topNavbarLeft{
+
+@media only screen and (max-width: 1315px) {
+  .topNavbarLeft {
     padding-right: 320px;
   }
-  .topNavbarRight{
+
+  .topNavbarRight {
     width: auto !important;
   }
-  .topNavbar-user{
+
+  .topNavbar-user {
     margin-right: 30px;
   }
-  .form-control-top-search{
+
+  .form-control-top-search {
     width: 140px !important;
   }
-  .topNavbar-logo .logo{
+
+  .topNavbar-logo .logo {
     right: 0 !important;
   }
 }
 
-.topNavbar-user img{
+.topNavbar-user img {
   cursor: pointer;
 }
 
-.topNavbar-logo{
+.topNavbar-logo {
   position: absolute;
   left: 50%;
   margin-top: 1px;
   margin-left: -16px;
 }
 
-.topNavbar-content{
+.topNavbar-content {
   position: relative;
 }
 
-.topNavbar-create{
+.topNavbar-create {
   margin-right: 1px;
 }
 
@@ -77,11 +111,11 @@
   margin: auto 10px auto 0;
 }
 
-.topNavbar-create .dropdown-menu{
+.topNavbar-create .dropdown-menu {
   min-width: 116px;
 }
 
-.topNavbarRight{
+.topNavbarRight {
   position: fixed !important;
   right: 0;
   width: 340px;
@@ -89,13 +123,12 @@
   height: 38px;
 }
 
-.topNavbarLeft-Left{
-  width: 391px;
+.topNavbarLeft-Left {
   display: flex;
   display: -webkit-flex;
 }
 
-.topNavbarLeft-Left > p{
+.topNavbarLeft > p {
   padding-left: 2px;
   padding-top: 7px;
   font-size: 17px;
@@ -103,32 +136,34 @@
   margin-right: 30px;
   color: #4c5c6f;
 }
-.topNavbarLeft-Left > p strong{
+
+.topNavbarLeft > p strong {
   font-weight: 400;
 }
 
 @-moz-document url-prefix() {
-  .topNavbarLeft-Left > p {
+  .topNavbarLeft > p {
     line-height: 19px;
   }
 }
 
-.topNavbarLeft-Right{
+.topNavbarLeft-Right {
   height: 38px;
 }
 
 @media only screen and (min-width: 1930px) {
-  .topNavbarLeft-Left{
+  ..topNavbarLeft .searchField {
     width: 511px;
   }
 }
+
 @media only screen and (min-width: 2510px) {
-  .topNavbarLeft-Left{
+  ..topNavbarLeft .searchField {
     width: 671px;
   }
 }
 
-.topNavbar-logout{
+.topNavbar-logout {
   padding: 0 28px 0 15px;
 }
 
@@ -147,7 +182,7 @@
   line-height: 30px;
 }
 
-.topNavbar-filter{
+.topNavbar-filter {
   padding-right: 30px;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -158,7 +193,7 @@
   margin-right: 10px;
 }
 
-.topNavbar-search{
+.topNavbar-search {
   position: relative;
   padding-right: 30px;
   -webkit-flex: 1;
@@ -166,11 +201,11 @@
   flex: 1;
 }
 
-.topNavbar-filter .btn{
+.topNavbar-filter .btn {
   margin-right: 10px;
 }
 
-.topNavbar-filter .dropdown.more{
+.topNavbar-filter .dropdown.more {
   cursor: pointer;
   line-height: 0;
   margin-left: 8px;
@@ -180,11 +215,11 @@
 
 }
 
-.topNavbarRight .dropdown:not(.open) .icn-expand{
+.topNavbarRight .dropdown:not(.open) .icn-expand {
   display: inline-block;
 }
 
-.topNavbarRight .dropdown:not(.open) .icn-collapse{
+.topNavbarRight .dropdown:not(.open) .icn-collapse {
   display: none;
 }
 
@@ -248,12 +283,14 @@
   width: 200px;
   right: 35px;
 }
-.topNavbarRight .open > .dropdown-menu{
+
+.topNavbarRight .open > .dropdown-menu {
   min-width: 115px;
   width: 115px;
   margin-top: 0;
   padding: 0;
 }
-.topNavbarRight .open > .dropdown-menu li{
+
+.topNavbarRight .open > .dropdown-menu li {
   padding: 10px;
 }

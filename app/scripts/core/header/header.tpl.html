@@ -9,9 +9,37 @@
 
     <div class="topNavbarLeft pull-left">
 
-      <div ng-if="getTemplateNameByState()">
-        <div ng-include="'/html/scripts/core/header/header-' + getTemplateNameByState() + '.tpl.html'">
-        </div>
+      <div class="pull-left" ng-if="goBack.isEnabled">
+        <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+           style="margin: 11px 8px 0 0;" ng-click="goBack.func()"
+           tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{ goBack.tooltip }}">
+          <i class="icn-sm icn-back-arrow"></i>
+        </a>
+      </div>
+
+      <p class="pull-left" style="white-space: nowrap;"
+         ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getTemplateNameByState())">
+        <strong>{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getTemplateNameByState()) }}</strong>
+        <span class="text-muted" ng-if="count = getCurrentCount()">
+          &nbsp;{{ count }}
+        </span>
+      </p>
+
+      <p class="pull-left" style="white-space: nowrap;" ng-if="globalSearch.selectedItemsCount">
+        <strong>{{ globalSearch.selectedItemsCount }}</strong>&nbsp;
+        <span class="text-muted">Selected</span>
+      </p>
+
+      <label class="global-search-trigger" ng-click="changeSearchStatus()">
+        <input type="checkbox" ng-model="globalSearch.isGlobalSearchOn">
+        <span class="toggle-bg" tooltip="{{ globalSearch.isGlobalSearchOn ? 'Off' : 'On'}} global search"
+              tooltip-placement="bottom" tooltip-append-to-body="true"></span>
+        <span class="toggle-indicator"></span>
+      </label>
+
+      <div ng-if="getTemplateNameByState() || globalSearch.isGlobalSearchOn" class="searchField">
+        <div ng-include="'/html/scripts/core/header/' + (globalSearch.isGlobalSearchOn ? 'global-search/global-search.tpl.html'
+                         : 'header-' + getTemplateNameByState() + '.tpl.html')"></div>
       </div>
 
       <div class="topNavbarLeft-Right pull-right">

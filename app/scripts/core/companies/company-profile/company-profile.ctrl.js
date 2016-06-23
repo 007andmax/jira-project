@@ -12,6 +12,7 @@
         UserNotificationService.show('Loading...');
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.PermissionsService = PermissionsService;
         $scope.isChartHasOpen = false;
@@ -33,6 +34,8 @@
             $state.go('companies');
           }
         });
+
+        globalSearch.openedItemName = $scope.company.name;
 
         $scope.isChartsAccess = function () {
           return PermissionsService.isAllowed('clients/companyProfile', $scope.currentUser.role, 'r_chart') && $scope.company.accountType === 'CLIENT';

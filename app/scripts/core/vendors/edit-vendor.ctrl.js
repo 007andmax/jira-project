@@ -4,10 +4,11 @@
 
   angular.module('quicktech.core.vendors').controller('quicktech.core.vendors.editVendorCtrl',
     ['$scope', '$stateParams', 'AddressesService', 'VendorsService', 'ContactsService', '$state',
-      'quicktech.common.services.PhoneFormats',
-      function ($scope, $stateParams, AddressesService, VendorsService, ContactsService, $state, PhoneFormats) {
+      'quicktech.common.services.PhoneFormats', 'quicktech.common.services.SharedStateService',
+      function ($scope, $stateParams, AddressesService, VendorsService, ContactsService, $state, PhoneFormats, SharedStateService) {
 
         var currentTimeZone;
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
@@ -40,6 +41,8 @@
 
             $scope.editVendor = vendor.staticCopy();
 
+            globalSearch.openedItemName = 'Edit ' + vendor.name;
+
           });
 
         } else {
@@ -48,6 +51,8 @@
             contacts: [getEmptyContact(true)],
             products: []
           };
+
+          globalSearch.openedItemName = 'Create Vendor';
         }
 
         $scope.isShowingErrors = function (form, fieldName) {

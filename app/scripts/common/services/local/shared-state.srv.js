@@ -8,6 +8,10 @@
     [function () {
 
       var defaultStates = {
+        globalSearch: {
+          isGlobalSearchOn: true,
+          counts: []
+        },
         ticketsHeader: {
           searchFilter: {},
           count: 0

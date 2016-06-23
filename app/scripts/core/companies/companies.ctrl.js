@@ -8,6 +8,7 @@
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, DevicesService, PermissionsService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
@@ -52,7 +53,7 @@
         }
 
         $scope.$watch('companies.length', function (companiesCount) {
-          headerSharedState.count = companiesCount == 0 ? companiesCount : (companiesCount - 1);
+          globalSearch.counts.push({ count: companiesCount == 0 ? companiesCount : (companiesCount - 1) });
         });
 
         ////TODO fix data loading

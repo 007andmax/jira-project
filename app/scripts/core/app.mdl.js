@@ -144,7 +144,7 @@
         url: '/settings',
         templateUrl: '/html/scripts/core/settings/settings.tpl.html',
         redirectTo: 'settings.myProfile',
-        controller: ['$scope', '$state',  'quicktech.common.services.PermissionsService',
+        controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService',
           function ($scope, $state, PermissionsService) {
             $scope.PermissionsService = PermissionsService;
 
@@ -218,8 +218,22 @@
   }]);
 
   app.run(
-    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal', 'quicktech.common.services.UserConfirmationsService',
-      function ($rootScope, $templateCache, CompaniesService, $state, $modal, UserConfirmationsService) {
+    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService',
+      function ($rootScope, $templateCache, CompaniesService, $state, $modal, UserConfirmationsService, SharedStateService) {
+
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
+          if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
+
+            if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
+              return;
+            }
+
+            var globalSearch = SharedStateService.getSharedState('globalSearch');
+            globalSearch.counts = [];
+            globalSearch.openedItemName = undefined;
+          }
+        });
 
         CompaniesService._addInitListener(function () {
           var currentCompany = CompaniesService.getCurrentCompany();
