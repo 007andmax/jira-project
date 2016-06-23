@@ -1424,7 +1424,8 @@ span.sort-span {
   position: absolute;
   top: 10px;
 }
-.image-preview-tpl {
+.image-preview-tpl,
+.email-preview-tpl {
   position: fixed;
   top: 0;
   left: 0;

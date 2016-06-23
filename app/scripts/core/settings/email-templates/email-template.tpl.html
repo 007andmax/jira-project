@@ -65,6 +65,11 @@
                   custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                   ng-click="saveEmailTemplate(template, templateForm)">Save</button>
 
+          <button class="btn pull-left btn-lg btn-default" ng-click="emailPreview(template)" ng-if="templateInfo.showPreview"
+                  append-html-to-body url="/html/scripts/core/settings/email-templates/email-preview.tpl.html"
+                  data="emailPreviewHtml" first-node-class="email-preview-tpl">Preview
+          </button>
+
           <button class="btn pull-left btn-lg btn-primary"
                   ng-click="openEmailTemplate('CLOSE', $event)">Cancel
           </button>

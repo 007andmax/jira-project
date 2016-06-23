@@ -1,0 +1,21 @@
+<div class="image-preview-tpl" prevent-hash-change="close()">
+  <div class="image-preview-header">
+    <div class="image-preview-close-btn pull-right" ng-click="close()"
+         tooltip="Close" tooltip-placement="bottom" append-to-body="true">
+      <i class="icn-sm icn-remove-token"></i>
+    </div>
+  </div>
+
+  <div class="image-preview-body">
+    <img ng-src="{{ '/file/' + data.id }}" alt="{{ data.name }}">
+  </div>
+
+  <div class="image-preview-footer">
+    <span class="image-preview-file-name">{{ data.name }} - {{ data.size | fileSizeFilter }}</span>
+
+    <div class="image-preview-download" ng-click="func(data.id, data.name)">
+      <i class="icn-sm icn-attachments-download"></i>
+      <span>download</span>
+    </div>
+  </div>
+</div>

@@ -151,6 +151,23 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getHtmlForPreview(data, type, callback) {
+      if (!data) throw 'data is required!';
+      if (!data.subject) throw 'data.subject is required!';
+      if (!data.body) throw 'data.body is required!';
+      if (!type) throw 'type is required!';
+
+      var url = '/settings/emailPages/preview/' + type,
+        method = 'POST';
+
+      var future = $http({
+        url: url,
+        method: method,
+        data: data
+      });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       saveNumberForm: saveNumberForm,
       getCompanyEmailNotification: getCompanyEmailNotification,
@@ -158,7 +175,8 @@
       getTermsAndConditions: getTermsAndConditions,
       setToDefaultTemplate: setToDefaultTemplate,
       getTemplate: getTemplate,
-      saveEmailTemplate: saveEmailTemplate
+      saveEmailTemplate: saveEmailTemplate,
+      getHtmlForPreview: getHtmlForPreview
     }
   }
   ]);

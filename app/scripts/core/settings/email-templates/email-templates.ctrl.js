@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.emailTemplatesCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'EmailSettingsService',
-      function ($scope, $state, $stateParams, $location, EmailSettingsService) {
+    ['$scope', '$state', '$stateParams', '$location', 'EmailSettingsService', '$sce',
+      function ($scope, $state, $stateParams, $location, EmailSettingsService, $sce) {
 
         $scope.numberPattern = /^\d+$/;
 
@@ -15,7 +15,8 @@
             recipient: 'All persons added to Ticket Update',
             description: 'This message will be sent when a person is added to the Ticket Update.',
             requiredKeywords: ['$Ticket_Number'],
-            requiredKeywordsRegExp: /\$Ticket_Number/
+            requiredKeywordsRegExp: /\$Ticket_Number/,
+            showPreview: true
           },
           //'TU_EDITED': {
           //  title: 'A Ticket Update is edited',
@@ -43,14 +44,16 @@
             recipient: 'User',
             description: 'This message will confirm the ticket details that client user conveyed to the agent for creating the ticket.',
             requiredKeywords: ['$Ticket_Number'],
-            requiredKeywordsRegExp: /\$Ticket_Number/
+            requiredKeywordsRegExp: /\$Ticket_Number/,
+            showPreview: true
           },
           'TICKET_CLOSED': {
             title: 'A Ticket is closed',
             recipient: 'User',
             description: 'This message will be sent to inform client user that ticket has been closed.',
             requiredKeywords: ['$Ticket_Number'],
-            requiredKeywordsRegExp: /\$Ticket_Number/
+            requiredKeywordsRegExp: /\$Ticket_Number/,
+            showPreview: true
           }
           //'TICKET_OPENED': {
           //  title: 'A Ticket is marked as Open',
@@ -223,22 +226,26 @@
           'COMPANY_INV_SENT': {
             title: "An Invoice is sent",
             recipient: "Company’s First Primary Contact",
-            description: "This message will be sent when an invoice is created and sent."
+            description: "This message will be sent when an invoice is created and sent.",
+            showPreview: true
           },
           'COMPANY_INV_RESENT': {
             title: "An Invoice is re-sent",
             recipient: "Company’s First Primary Contact",
-            description: "This message will be sent when an invoice is re-sent."
+            description: "This message will be sent when an invoice is re-sent.",
+            showPreview: true
           },
           'COMPANY_OVERDUE_INV_SENT': {
             title: "An Overdue Invoice is sent",
             recipient: "Company’s First Primary Contact",
-            description: "This message will be sent when an overdue invoice is re-sent."
+            description: "This message will be sent when an overdue invoice is re-sent.",
+            showPreview: true
           },
           'COMPANY_PAYMENT_RECEIVED': {
             title: "A payment is received",
             recipient: "Company’s First Primary Contact",
-            description: "This message will be sent to acknowledge the payment made against the invoices sent to company."
+            description: "This message will be sent to acknowledge the payment made against the invoices sent to company.",
+            showPreview: true
           }
         };
 
@@ -330,6 +337,13 @@
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && (form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
+        };
+
+        $scope.emailPreview = function (templateKey) {
+          $scope.emailPreviewHtml = undefined;
+          EmailSettingsService.getHtmlForPreview($scope.templatesData, templateKey, function (resp) {
+            $scope.emailPreviewHtml = $sce.trustAsHtml(resp);
+          })
         };
 
         $scope.saveEmailTemplate = function (templateKey, form) {

@@ -228,7 +228,8 @@
               </a>
               <a href="javascript:void(0)" class="tp-hide image-preview has-tooltip"
                  tooltip="Preview" tooltip-placement="bottom" ng-if="attachmentType['image/' + type]"
-                 image-preview image="attachment.file" download-func="downloadAttachment">
+                 append-html-to-body url="/html/scripts/core/tickets/image-preview.tpl.html"
+                 data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
                 <span class="icn-sm icn-show-password"></span>
               </a>
             </div>
@@ -352,7 +353,8 @@
                     </a>
                     <a href="javascript:void(0)" class="tp-hide image-preview has-tooltip"
                        tooltip="Preview" tooltip-placement="bottom" ng-if="attachmentType['image/' + type]"
-                       image-preview image="attachment.file" download-func="downloadAttachment">
+                       append-html-to-body url="/html/scripts/core/tickets/image-preview.tpl.html"
+                       data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
                       <span class="icn-sm icn-show-password"></span>
                     </a>
                   </div>

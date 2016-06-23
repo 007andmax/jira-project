@@ -6,12 +6,14 @@
       return {
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
-          $timeout(function () {
+          var promise = $timeout(function () {
             window.onhashchange = preventHashChange;
-          });
+            $timeout.cancel(promise);
+          }, 100);
 
-          $scope.$on('$destroy', function () {
+          var unbind = $scope.$on('$destroy', function () {
             window.onhashchange = undefined;
+            unbind();
           });
 
           function preventHashChange() {
