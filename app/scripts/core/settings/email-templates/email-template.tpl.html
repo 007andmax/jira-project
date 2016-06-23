@@ -21,7 +21,12 @@
     </a>
 
     <div class="template-details pull-left" ng-if="template === currentOpenTemplate">
-      <div class="recepients"><strong>Recipient</strong> {{ templateInfo.recipient }}</div>
+      <div class="recepients">
+        <span class="pull-right email-preview-btn" ng-click="emailPreview(template)" ng-if="templateInfo.showPreview"
+              append-html-to-body url="/html/scripts/core/settings/email-templates/email-preview.tpl.html"
+              data="emailPreviewHtml" first-node-class="email-preview-tpl">show preview</span>
+        <span><strong>Recipient</strong> {{ templateInfo.recipient }}</span>
+      </div>
       <form name="templateForm" insert-keyword>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(templateForm, 'templateSubject')}">
@@ -64,11 +69,6 @@
           <button class="btn pull-left btn-lg btn-info"
                   custom-disabled="{{ !templateForm.$valid || templateForm.$pristine || savingInProcess }}"
                   ng-click="saveEmailTemplate(template, templateForm)">Save</button>
-
-          <button class="btn pull-left btn-lg btn-default" ng-click="emailPreview(template)" ng-if="templateInfo.showPreview"
-                  append-html-to-body url="/html/scripts/core/settings/email-templates/email-preview.tpl.html"
-                  data="emailPreviewHtml" first-node-class="email-preview-tpl">Preview
-          </button>
 
           <button class="btn pull-left btn-lg btn-primary"
                   ng-click="openEmailTemplate('CLOSE', $event)">Cancel

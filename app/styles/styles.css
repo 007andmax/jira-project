@@ -9713,7 +9713,7 @@ button.close {
 .email-preview-body {
   display: block;
   margin: 50px auto;
-  width: 70%;
+  width: 50%;
 }
 .image-preview-body img{
   display: inline-block;
@@ -9766,4 +9766,9 @@ button.close {
 }
 #companyInfoContactInfo {
   display: inline-block;
+}
+.template-details .email-preview-btn {
+  padding-left: 10px;
+  cursor: pointer;
+  text-decoration: underline;
 }
