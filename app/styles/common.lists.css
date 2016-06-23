@@ -2684,7 +2684,8 @@ Devices tab
   -o-user-select: none;
   user-select: none;
 }
-.device-management .toggle-bg{
+.device-management .toggle-bg,
+.global-search-trigger .toggle-bg{
   position: absolute;
   left: 0;
   top: 0;
@@ -2702,7 +2703,8 @@ Devices tab
   display: block;
   cursor: pointer;
 }
-.device-management .toggle-indicator{
+.device-management .toggle-indicator,
+.global-search-trigger .toggle-indicator{
   position: absolute;
   left: 0;
   top: 5px;
@@ -2716,12 +2718,14 @@ Devices tab
   -o-transition: margin .2s ease-out;
   transition: margin .2s ease-out;
 }
-.device-management input:checked ~ .toggle-indicator{
+.device-management input:checked ~ .toggle-indicator,
+.global-search-trigger input:checked ~ .toggle-indicator{
   background-color: #4caf50;
   box-shadow: 0px 2px 6px 0px rgba( 76, 175, 80, .45 );
   margin-left: 5px;
 }
-.device-management input:checked ~ .toggle-bg{
+.device-management input:checked ~ .toggle-bg,
+.global-search-trigger input:checked ~ .toggle-bg{
   background-color: #e1f3e1;
 }
 .device-management.installing-agent{

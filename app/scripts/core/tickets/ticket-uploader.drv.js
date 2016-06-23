@@ -16,6 +16,7 @@
               isTicketsAlreadyLoad = false;
 
             scope.ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
+            scope.globalSearch = SharedStateService.getSharedState('globalSearch');
 
             scope.$watch('ticketsHeaderState.searchFilter', function (searchFilter) {
 
@@ -59,11 +60,12 @@
 
               UserNotificationService.show('Loading...');
 
+              scope.globalSearch.counts = [];
               scope.ticketsHeaderState.ticketsQuantity = 0;
               scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
 
                 scope.ticketsHeaderState.aditionalTicketsQuantity = 0;
-                scope.ticketsHeaderState.ticketsQuantity = TicketsService.getCount(paramsToSend, scope, function () {
+                scope.globalSearch.counts.push(TicketsService.getCount(paramsToSend, scope, function () {
 
                   if (paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
 
@@ -71,11 +73,10 @@
                       filter: 'ADMIN_REPORTED_AS_SPAM'
                     };
 
-                    scope.ticketsHeaderState.aditionalTicketsQuantity = TicketsService.getCount(filterReported, scope.$new())
-
+                    scope.globalSearch.counts.push(TicketsService.getCount(filterReported, scope.$new()));
                   }
 
-                });
+                }));
 
                 UserNotificationService.hide();
 

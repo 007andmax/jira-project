@@ -12,7 +12,14 @@
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats,
                 SharedStateService, $stateParams, $state, VendorsService, $timeout, PermissionsService) {
 
-        var headerSharedState = SharedStateService.getSharedState('companiesHeader');
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+
+        if($stateParams.companyId){
+          var company = CompaniesService.getOneById($stateParams.companyId);
+          globalSearch.openedItemName = 'Edit ' + company.name;
+        } else {
+          globalSearch.openedItemName = 'Create Company';
+        }
 
         $scope.PermissionsService = PermissionsService;
         $scope.loadingInProgress = true;
@@ -44,13 +51,7 @@
           $scope.timeZones = response;
         });
 
-        $scope.$watch('companies.length', function (companiesCount) {
-          headerSharedState.count = companiesCount;
-        });
-
         if ($stateParams.companyId) {
-
-          var company = CompaniesService.getOneById($stateParams.companyId);
 
           if (!company) {
             $state.go('companies');

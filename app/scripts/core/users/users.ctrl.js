@@ -11,12 +11,13 @@
         $scope.editUser = undefined;
 
         var headerSharedState = SharedStateService.getSharedState('usersHeader');
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
 
         $scope.$watch('users.length', function (usersCount) {
-          headerSharedState.count = usersCount;
+          globalSearch.counts.push({ count: usersCount - 1});
         });
 
         $scope.getUserCompanyName = function (user) {
