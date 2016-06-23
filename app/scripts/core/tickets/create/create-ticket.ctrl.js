@@ -188,10 +188,6 @@
 
         });
 
-        $scope.setAssignedUser = function (user) {
-          $scope.ticket.assignedUser = user.id;
-        };
-
         $scope.addAttachmentFiles = function (file) {
 
           $scope.ticketAttachments.push(file);
@@ -281,8 +277,11 @@
               $scope.ticket.assignedUser = $scope.currentUser.id;
             }
 
-            if (!$scope.ticketAssignTo) {
+            if (!$scope.ticket.ticketAssignTo) {
               $scope.ticket.assignedUser = undefined;
+            } else {
+              $scope.ticket.assignedUser = $scope.ticket.ticketAssignTo.id;
+              $scope.ticket.ticketAssignTo = undefined;
             }
 
             var ticketNumber = $scope.ticketNumber;
