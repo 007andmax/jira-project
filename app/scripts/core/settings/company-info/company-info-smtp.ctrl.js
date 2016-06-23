@@ -87,9 +87,12 @@
           }
         };
 
-        $scope.sendTestEmail = function (form, isTest) {
-          $scope.openPopover(false);
-          $scope.saveSMTP(form, isTest);
+        $scope.sendTestEmail = function (formForSave, formForTest, isTest) {
+          $scope.showError = formForTest.$invalid;
+          if (formForTest.$valid) {
+            $scope.openPopover(false);
+            $scope.saveSMTP(formForSave, isTest);
+          }
         };
 
         $scope.saveSMTP = function (form, isTest) {
