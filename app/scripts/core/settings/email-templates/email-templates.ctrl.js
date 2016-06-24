@@ -232,7 +232,8 @@
           'COMPANY_INV_RESENT': {
             title: "An Invoice is re-sent",
             recipient: "Company’s First Primary Contact",
-            description: "This message will be sent when an invoice is re-sent."
+            description: "This message will be sent when an invoice is re-sent.",
+            showPreview: true
           },
           'COMPANY_OVERDUE_INV_SENT': {
             title: "An Overdue Invoice is sent",
