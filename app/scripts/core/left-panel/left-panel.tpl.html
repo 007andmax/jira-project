@@ -74,21 +74,21 @@
         </li>
 
         <li ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
-            ng-show="PermissionsService.isAllowed('tickets/open', currentUser.role, 'c r u d')">
+            ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'open_tickets')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'open'})">
             <i class="nav-icon icn-lg icn-open"></i>Open
           </a>
         </li>
 
         <li ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"
-            ng-show="PermissionsService.isAllowed('tickets/closed', currentUser.role, 'c r u d')">
+            ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'closed_tickets')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
             <i class="nav-icon icn-lg icn-closed"></i> Closed
           </a>
         </li>
 
         <li ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
-            ng-show="PermissionsService.isAllowed('tickets/trash', currentUser.role, 'c r u d')">
+            ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'trash_tickets')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
             <i class="nav-icon icn-lg icn-trash"></i> Trash
           </a>
