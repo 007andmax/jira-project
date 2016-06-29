@@ -111,7 +111,7 @@
 
             $http.get('https://maps.googleapis.com/maps/api/timezone/json?location= ' +
                 ngModelCtrl.$viewValue.locationLat + ',' + ngModelCtrl.$viewValue.locationLng +
-                '&timestamp=0&key=AIzaSyB5nHoYDTke8HX_clmZOyCkJB3vAvbRxuI')
+                '&timestamp=0&key=AIzaSyAgGwfeFw-YYwcH600VwXs7uwoPp-wMHyI')
               .then(function successCallback(response) {
                 if (response.data.timeZoneId) {
                   AddressesService.getLocaleByName(response.data.timeZoneId, function (timeZoneObj) {
@@ -131,7 +131,7 @@
               });
 
             $scope.$apply();
-            $scope.saveFunc();
+            $scope.saveFunc && $scope.saveFunc();
           });
 
           function resetMap(google, map, marker, inputCtrl) {
