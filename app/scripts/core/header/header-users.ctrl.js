@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.usersCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', 'CompaniesService',
-      function ($scope, SharedStateService, CompaniesService) {
+    ['$scope', 'quicktech.common.services.SharedStateService', 'CompaniesService', 'UsersService',
+      function ($scope, SharedStateService, CompaniesService, UsersService) {
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.searchValue = '';
         $scope.chooseCompany = false;
@@ -12,6 +13,12 @@
         $scope.companies = CompaniesService.getClientCompanies().filter(function (company) {
           return !company.isDefault;
         });
+
+        if (globalSearch.userFilter) {
+          var selectedUser = UsersService.getOneById(globalSearch.userFilter);
+          $scope.searchValue = selectedUser.firstName + ' ' + selectedUser.lastName;
+          globalSearch.userFilter = undefined;
+        }
 
         $scope.clearInput = function () {
           $scope.searchValue = '';

@@ -4,13 +4,22 @@
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.techUsersCtrl',
     ['$scope', 'UsersService', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, UsersService, CompaniesService, UserConfirmationsService) {
+      'quicktech.common.services.SharedStateService',
+      function ($scope, UsersService, CompaniesService, UserConfirmationsService, SharedStateService) {
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.users = UsersService.getTechUsers();
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.roles = {
           USER: 'User',
           ADMIN: 'Administrator'
+        };
+
+        $scope.highlightTechUser = function () {
+          if (globalSearch.techUserFilter) {
+            $scope.$broadcast('showTechUser-' + globalSearch.techUserFilter);
+            globalSearch.techUserFilter = undefined;
+          }
         };
 
         $scope.openEditUser = function (user) {
