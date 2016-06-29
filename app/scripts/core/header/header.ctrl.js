@@ -21,17 +21,23 @@
           }
         });
 
+        $scope.$watch('globalSearch.isGlobalSearchOn', function (newValue) {
+          if (newValue === false) {
+            SharedStateService.clearAllExceptGlobalSearch();
+          }
+        });
+
         $scope.changeSearchStatus = function () {
           $scope.globalSearch.isGlobalSearchOn = !$scope.globalSearch.isGlobalSearchOn;
         };
 
         $scope.userReadable = function (text) {
-          var words = text.split('-'),
+          var words = text.split(/[-_]/),
             result = '';
 
           for (var i = 0, len = words.length; i < len; i++) {
             var word = words[i];
-            result += word[0].toUpperCase() + word.slice(1);
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
 
             if (i !== len - 1) {
               result += ' ';

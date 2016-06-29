@@ -3,13 +3,23 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.productsCtrl',
-    [
-      '$scope', '$rootScope', 'ProductsService',
-      function ($scope, $rootScope, ProductsService) {
+    ['$scope', '$rootScope', 'ProductsService', 'quicktech.common.services.SharedStateService', '$timeout',
+      function ($scope, $rootScope, ProductsService, SharedStateService, $timeout) {
+        var globalSearch = SharedStateService.getSharedState('globalSearch'),
+          globalFilter = globalSearch.productFilter;
 
         $scope.searchValue = '';
         $scope.choosedCategory = false;
         $scope.shownCategories = ProductsService.getFullListForAutocomplete($scope);
+
+        if (globalFilter) {
+          $scope.searchValue = globalFilter.name;
+          $scope.choosedCategory = true;
+          $timeout(function () {
+            $rootScope.$broadcast(globalFilter.category + '-showProduct', globalFilter.id);
+          });
+          globalSearch.productFilter = undefined;
+        }
 
         $scope.clearInput = function () {
           $scope.searchValue = '';
@@ -74,7 +84,5 @@
           $scope.shownCategories = result;
         }
 
-      }
-    ]);
-
+      }]);
 }());

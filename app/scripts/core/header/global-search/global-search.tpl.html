@@ -1,13 +1,57 @@
 <div class="topNavbarLeft-Left pull-left" ng-controller="quicktech.core.header.globalSearchCtrl">
 
-  <div class="topNavbar-search pull-left">
-    <div class="input-group-search">
+  <div class="topNavbar-search global-search pull-left">
+    <div class="input-group-search" dropdown open-dropdown-on-model-change
+         dropdown-arrow-navigation on-enter="selectItem" dropdown-data-item-name="item"
+         two-levels="true" on-expand="expandCategory" focused-class="focused" refresh-on="refreshNavigationDirective">
 
       <input type="text" class="form-control-top-search" placeholder="Global search..."
-             ng-model="searchValue" ng-model-options="{debounce: 500}">
+             ng-model="searchValue" ng-model-options="{debounce: 250}" dropdown-toggle>
+
+      <ul class="dropdown-menu custom-scroll" ng-show="resultCount">
+        <li class="category expandable" ng-repeat="items in searchResult"
+            ng-class="{'expanded': categoryExpanded[$index]}"
+            ng-click="expandCategory($index, !categoryExpanded[$index], $event)"
+            ng-init="categoryExpanded[$index] = items.list.length <= 10">
+
+          <div class="category-name">{{ userReadable(items.type) }} ({{ items.list.length }})</div>
+          <i class="icn-sm icn-caret-gray"
+             ng-class="{'rotate': categoryExpanded[$index]}"></i>
+
+          <div ng-repeat="item in items.list track by item.id" class="item focusable" ng-click="selectItem(item)">
+            <div class="item-name">
+              <span highlight-text="{{ item.name }}" substring="{{ searchValue }}"></span>
+              <i class="icn-sm icn-ticket-filter" style="display: inline-block;" ng-if="items.type === 'COMPANIES'"
+                 ng-click="filterByType(item)" stop-propagation="click"></i>
+              <div class="dropdown" stop-propagation="click">
+                <i class="icn-sm icn-remote-access" style="display: inline-block;" ng-if="items.type === 'DEVICES'"
+                   data-toggle="dropdown"></i>
+
+                <ul class="dropdown-menu">
+
+                  <li ng-click="remoteAccess('CSS', item)">
+                    <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+                  </li>
+
+                  <li ng-click="remoteAccess('RDP', item)">
+                    <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+            <span class="item-info text-muted" ng-if="item.info">&nbsp;&ndash;&nbsp;{{ item.info.replace('_', ' ').toLowerCase() }}</span>
+          </div>
+        </li>
+      </ul>
 
       <span class="input-group-addon-search">
-        <i class="icn-sm icn-search form-control-top-search-icn disabled"></i>
+        <i class="icn-sm icn-search form-control-top-search-icn disabled" ng-show="!searchValue"></i>
+
+        <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
+           ng-show="searchValue" ng-click="searchValue = ''"
+           tooltip="clear" tooltip-placement="top"></i>
       </span>
 
     </div>
