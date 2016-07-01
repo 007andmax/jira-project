@@ -30,8 +30,18 @@
         billableClientsHeader: {
           companies: []
         },
+        receivableHeader: {
+          companies: [],
+          filter: {
+            companyId: ''
+          }
+        },
         receiptArchiveInvoicesHeader: {
-          invoices: []
+          invoices: [],
+          companies: [],
+          filter: {
+            companyId: ''
+          }
         },
         vendorsHeader: {
           count: 0,

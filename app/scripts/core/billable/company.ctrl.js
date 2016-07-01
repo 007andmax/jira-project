@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.companyCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', '$timeout', 'quicktech.common.services.SharedStateService',
-      function ($scope, BillableService, CompaniesService, $timeout, SharedStateService) {
+    ['$scope', 'BillableService', 'CompaniesService', '$timeout',
+      function ($scope, BillableService, CompaniesService, $timeout) {
 
         $scope.company = CompaniesService.getOneById($scope.billableCompany.companyId);
 
@@ -25,8 +25,11 @@
           $scope.highlightProductId = ticketId;
         };
 
-        $scope.$on($scope.billableCompany.companyId + '-showCompany', function (event, companyId) {
-          $scope.$broadcast('showCompany-' + companyId);
+        $scope.$on($scope.billableCompany.companyId + '-showCompany', function (event) {
+          $scope.$broadcast('showCompany-' + $scope.billableCompany.companyId);
+          if (!$scope.showTickets) {
+            $scope.toggleBillableTickets();
+          }
         });
 
         $scope.$on($scope.billableCompany.companyId + '-showTicket', function (event, ticketId) {

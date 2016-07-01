@@ -5,8 +5,9 @@
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
     ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$rootScope',
+      'quicktech.common.services.TicketsPermissionsService',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
-                $stateParams, $rootScope) {
+                $stateParams, $rootScope, TicketsPermissionsService) {
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
         $scope.PermissionsService = PermissionsService;
@@ -117,6 +118,19 @@
             $scope.globalSearch.openedItemName = 'Tax Rates';
           }
         };
+
+        $scope.$watch(function () {
+          return $stateParams.listType;
+        }, function (value) {
+          $scope.listType = value;
+          if (value) {
+            $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
+          }
+        });
+
+        $scope.$watch('ticketsSharedState.checkedTicketsIds', function (data) {
+          $scope.isShowBulkAction = data && data.length > 0;
+        });
 
       }]);
 

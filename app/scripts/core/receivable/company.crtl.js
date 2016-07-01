@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.companyCtrl',
-    ['$scope', 'ReceivableService',
-      function ($scope, ReceivableService) {
+    ['$scope', 'ReceivableService', '$timeout',
+      function ($scope, ReceivableService, $timeout) {
 
         $scope.showInvoices = false;
 
@@ -49,6 +49,17 @@
           }
           ReceivableService.resendInvoices(invoiceToSentId);
         };
+
+        $scope.$on($scope.company.id + '-showReceivableCompany', function () {
+          $scope.$broadcast('showReceivableCompany-' + $scope.company.id);
+          $timeout(function () {
+            $scope.setHighlightInvoiceId();
+          }, 3000);
+
+          if (!$scope.showInvoices) {
+            $scope.toggleReceivableInvoices();
+          }
+        });
 
         $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
           if (!$scope.showInvoices) {

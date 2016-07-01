@@ -18,6 +18,14 @@
           var selectedUser = UsersService.getOneById(globalSearch.userFilter);
           $scope.searchValue = selectedUser.firstName + ' ' + selectedUser.lastName;
           globalSearch.userFilter = undefined;
+        } else if (globalSearch.usersByCompanyFilter) {
+          var companyId = globalSearch.usersByCompanyFilter,
+            filterFromGlobalSearch = true;
+
+          $scope.sharedState.filter.companyId = companyId;
+          $scope.searchValue = CompaniesService.getOneById(companyId).name;
+          $scope.chooseCompany = true;
+          globalSearch.usersByCompanyFilter = undefined;
         }
 
         $scope.clearInput = function () {
@@ -30,6 +38,11 @@
         $scope.$watch('searchValue', function (val) {
           if (!val) {
             return
+          }
+
+          if (filterFromGlobalSearch) {
+            filterFromGlobalSearch = false;
+            return;
           }
 
           if (typeof val === 'object') {
