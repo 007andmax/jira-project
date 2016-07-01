@@ -4,10 +4,14 @@
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivableCtrl',
     ['$scope', '$state', '$stateParams', 'ReceivableService', 'CompaniesService',
-      function ($scope, $state, $stateParams, ReceivableService, CompaniesService) {
+      'quicktech.common.services.SharedStateService', '$timeout',
+      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, SharedStateService, $timeout) {
 
         var availableMods = ['group-by-company', 'list'];
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var sharedState;
 
+        $scope.mode = availableMods[0];
         $scope.orderInvoices = {
           field: 'number',
           reverse: false
@@ -51,6 +55,8 @@
             $scope.receivableCompanies.push(CompaniesService.getOneById(id));
           }
 
+          sharedState.companies = $scope.receivableCompanies;
+
           if ($stateParams.mode === 'group-by-company') {
 
             for (var companyId in invoicesData.companies) {
@@ -75,6 +81,8 @@
           } else {
             $scope.mode = mode;
           }
+
+          sharedState = SharedStateService.getSharedState('receivableHeader');
         });
 
         $scope.changeCompanyCheckbox = function (companyId) {
@@ -157,6 +165,16 @@
 
         $scope.hideLoadingIndicator = function () {
           $scope.loadingInProgress = false;
+          if (globalSearch.receivableByCompanyFilter) {
+            $timeout(function () {
+              $scope.$broadcast(globalSearch.receivableByCompanyFilter + '-showReceivableCompany');
+              globalSearch.receivableByCompanyFilter = undefined;
+            });
+          }
+        };
+
+        $scope.filterByCompany = function (invoice) {
+          return !sharedState.filter.companyId || invoice.company.id === sharedState.filter.companyId;
         };
 
         $scope.setOrderForInvoices = function (option) {

@@ -11,11 +11,13 @@
         dropdownDataItemName: '@',
         focusedClass: '@?',
         twoLevels: '=?',
-        refreshOn: '@?'
+        refreshOn: '@?',
+        withHeader: '@?'
       },
       link: function ($scope, element, attrs) {
         var currentFocused;
-        var dropdownMenu = element.find('.dropdown-menu');
+        var dropdownMenu;
+        var destroy;
 
         $scope.focusedClass = $scope.focusedClass || 'dropdown-menu-child-focused';
 
@@ -25,9 +27,26 @@
           oneLevelNavigation();
         }
 
-        function oneLevelNavigation() {
+        if ($scope.refreshOn) {
+          $scope.$on($scope.refreshOn, function (e, oneLevel) {
+            destroy && destroy();
 
-          element.on('keydown', function (e) {
+            if (oneLevel) {
+              oneLevelNavigation();
+            } else {
+              twoLevelsNavigation();
+            }
+          });
+        }
+
+
+        function oneLevelNavigation() {
+          element.on('keydown', onKeyDown);
+
+          function onKeyDown(e) {
+
+            dropdownMenu = element.find('.dropdown-menu:not(.ng-hide)');
+
             if (element.hasClass('open')) {
               switch (e.which || e.keyCode) {
                 case 13://enter
@@ -61,11 +80,15 @@
               }
               e.preventDefault();
             }
-          });
+          }
 
           function changeFocus(el, direction) {
             var tempElement,
               list = dropdownMenu.children();
+
+            if ($scope.$eval($scope.withHeader)) {
+              list.splice(0, 1);
+            }
 
             if (el) {
               el.removeClass($scope.focusedClass);
@@ -86,6 +109,15 @@
             tempElement[0].scrollIntoViewIfNeeded(false);
             return tempElement;
           }
+
+          destroy = function () {
+            if (currentFocused) {
+              currentFocused.removeClass($scope.focusedClass);
+              currentFocused = undefined;
+            }
+            element.off('keydown', onKeyDown);
+          }
+
         }
 
         function twoLevelsNavigation() {
@@ -95,21 +127,12 @@
             saveIndex,
             firstIndex;
 
-          if ($scope.refreshOn) {
-            $scope.$on($scope.refreshOn, function () {
-              isOnFirstLevel = true;
-              firstLevel = [];
-              secondLevel = [];
-              saveIndex = 0;
-              firstIndex = undefined;
-              if (currentFocused) {
-                currentFocused.removeClass($scope.focusedClass);
-                currentFocused = undefined;
-              }
-            });
-          }
+          element.on('keydown', onKeyDown);
 
-          element.on('keydown', function (e) {
+          function onKeyDown(e) {
+
+            dropdownMenu = element.find('.dropdown-menu:not(.ng-hide)');
+
             if (element.hasClass('open')) {
               firstLevel = dropdownMenu.children();
 
@@ -185,7 +208,7 @@
             } else {
               element.addClass('open');
             }
-          });
+          }
 
           function changeFocus(current, array, index) {
             var temp;
@@ -199,6 +222,20 @@
             current[0].scrollIntoViewIfNeeded(false);
             return current;
           }
+
+          destroy = function () {
+            isOnFirstLevel = true;
+            firstLevel = [];
+            secondLevel = [];
+            saveIndex = 0;
+            firstIndex = undefined;
+            if (currentFocused) {
+              currentFocused.removeClass($scope.focusedClass);
+              currentFocused = undefined;
+            }
+            element.off('keydown', onKeyDown);
+          }
+
         }
 
         function closeDropdown() {

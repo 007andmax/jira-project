@@ -13,8 +13,14 @@
       Utils.handleCallback(future, callback);
     }
 
+    function filterByType(id, type, callback) {
+      var future = $http.get('/globalSearch/filter?id=' + id + '&type=' + type);
+      Utils.handleCallback(future, callback);
+    }
+
     return {
-      search: search
+      search: search,
+      filterByType: filterByType
     }
 
   }]);

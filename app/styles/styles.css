@@ -9143,9 +9143,6 @@ button.close {
   border-color: transparent;
   border-style: solid;
 }
-.open .tooltip {
-  display: none !important;
-}
 .popover {
   position: absolute;
   top: 0;

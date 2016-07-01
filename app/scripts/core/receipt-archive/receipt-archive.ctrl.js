@@ -3,19 +3,23 @@
 (function () {
 
   angular.module('quicktech.core.receiptArchive').controller('quicktech.core.receiptArchive.receiptArchiveCtrl',
-    ['$scope', '$state', '$stateParams', 'ReceiptArchiveService', 'quicktech.common.services.SharedStateService', 'CompaniesService', 'Utils',
-      function ($scope, $state, $stateParams, ReceiptArchiveService, SharedStateService, CompaniesService, Utils) {
+    ['$scope', '$state', '$stateParams', 'ReceiptArchiveService', 'quicktech.common.services.SharedStateService',
+      'CompaniesService', 'Utils', '$timeout',
+      function ($scope, $state, $stateParams, ReceiptArchiveService, SharedStateService, CompaniesService, Utils, $timeout) {
 
-        var headerSharedState = SharedStateService.getSharedState('receiptArchiveInvoicesHeader');
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var headerSharedState;
 
         var availableMods = ['group-by-company', 'list'];
 
+        $scope.mode = availableMods[0];
         $scope.receiptArchiveCompanies = [];
         $scope.totalCompanySum = {};
         $scope.orderInvoices = {
           field: 'paidOn',
           reverse: true
         };
+        $scope.loadingInProgress = true;
 
         $scope.$watch(function () {
           return $stateParams.mode;
@@ -27,6 +31,8 @@
           } else {
             $scope.mode = mode;
           }
+
+          headerSharedState = SharedStateService.getSharedState('receiptArchiveInvoicesHeader');
         });
 
         ReceiptArchiveService.getReceiptArchiveData($scope, function (resp) {
@@ -62,6 +68,7 @@
             }
           }
 
+          headerSharedState.companies = $scope.receiptArchiveCompanies;
           headerSharedState.invoices = $scope.receiptArchiveData.list;
         });
 
@@ -90,6 +97,20 @@
           } else if ($scope.orderInvoices.field === 'amount') {
             return item.sum;
           }
+        };
+
+        $scope.hideLoadingIndicator = function () {
+          $scope.loadingInProgress = false;
+          if (globalSearch.archivedByCompanyFilter) {
+            $timeout(function () {
+              $scope.$broadcast(globalSearch.archivedByCompanyFilter + '-showReceiptArchiveCompany');
+              globalSearch.archivedByCompanyFilter = undefined;
+            });
+          }
+        };
+
+        $scope.filterByCompany = function (invoice) {
+          return !headerSharedState.filter.companyId || invoice.company.id === headerSharedState.filter.companyId;
         };
 
         $scope.$on('$destroy', function () {

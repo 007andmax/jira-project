@@ -183,10 +183,6 @@
           };
         }
 
-        $scope.$watch('sharedState.checkedTicketsIds', function (data) {
-          $scope.isShowBulkAction = data && data.length > 0;
-        })
-
       }]);
 
 }());
