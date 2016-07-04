@@ -190,7 +190,6 @@
   .topNavbarLeft {
     padding-right: 320px;
   }
-
   .topNavbarRight {
     width: auto !important;
   }
@@ -214,7 +213,7 @@
 
 .topNavbar-logo {
   position: absolute;
-  left: 50%;
+  left: 55%;
   margin-top: 1px;
   margin-left: -16px;
 }

@@ -6509,6 +6509,9 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 .input-group-addon-search input[type="checkbox"] {
   margin-top: 0;
 }
+.topNavbar-search  .input-group-search{
+  width: 315px;
+}
 .input-group-search .form-control-top-search:first-child,
 .input-group-addon-search:first-child,
 .input-group-btn-search:first-child > .btn-search,
@@ -6909,6 +6912,22 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 .nav-justified > .dropdown .dropdown-menu {
   top: auto;
   left: auto;
+}
+@media only screen and (max-width: 1315px){
+  .input-group-addon-search{
+    float: left;
+    padding-bottom: 13px;
+  }
+  .topNavbar-logo{
+    left: 58%;
+  }
+  .topNavbarLeft-Right{
+    width: 125px;
+    margin-right: -100px;
+  }
+  .input-group-btn-search{
+    width: 60px;
+  }
 }
 @media (min-width: 768px) {
   .nav-justified > li {
