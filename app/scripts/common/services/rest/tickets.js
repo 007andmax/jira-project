@@ -57,17 +57,17 @@
           throw "'filter' is mandatory parameter that must be counted in second argument"
         }
 
-        params = normalizeAndCopyParams(params);
+        var normalizedParams = normalizeAndCopyParams(params);
 
         var list = Utils.customizeObj([]);
 
         storage.lists[scope.$id] = {
-          params: params,
+          params: normalizedParams,
           scope: scope,
           list: list
         };
 
-        loadMore(scope, callback);
+        loadMore(scope, callback, params);
 
         scope.$on('$destroy', function () {
           delete storage.lists[scope.$id];
@@ -77,7 +77,7 @@
 
       }
 
-      function loadMore(scope, callback) {
+      function loadMore(scope, callback, paramsForCheck) {
 
         if (!scope || !scope.$id) {
           throw 'First argument must be Angularjs scope!'
@@ -136,7 +136,7 @@
             listData.loadingInProcess = false;
 
             if (callback) {
-              callback(response.data);
+              callback(response.data, paramsForCheck);
             }
           }
 

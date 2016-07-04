@@ -9,7 +9,7 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
                 TicketsPermissionsService, SharedStateService, Utils, PermissionsService) {
 
-        var availableTypes = ['unassigned', 'user', 'shared', 'spam', 'preview'],
+        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'preview'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
@@ -94,6 +94,7 @@
 
         $scope.$on('uncheckAllTickets', function () {
           $scope.selectedTickets = {};
+          globalSearch.selectedItemsCount = undefined;
         });
 
         function changeSelectedTickets(id, status) {

@@ -168,8 +168,11 @@ a.ha-24{
   background-position: -205px 0;
 }
 
-.icn-user{
+.icn-user-lg{
   background-position: -3159px 0;
+}
+:hover > .icn-user-lg, :active > .icn-user-lg, :focus:hover > .icn-user-lg, :focus:active > .icn-user-lg, :hover:active > .icn-user-lg, .active .icn-user-lg, .open .icn-user-lg, .open > .btn:hover .icn-user-lg {
+  background-position: -3159px -33px;
 }
 .icn-url{
   background-position: -1665px -206px;

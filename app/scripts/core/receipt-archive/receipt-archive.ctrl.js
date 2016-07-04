@@ -70,6 +70,10 @@
 
           headerSharedState.companies = $scope.receiptArchiveCompanies;
           headerSharedState.invoices = $scope.receiptArchiveData.list;
+
+          if (!resp.list.length) {
+            $scope.loadingInProgress = false;
+          }
         });
 
         $scope.setHighlightInvoiceId = function (invoiceId) {
