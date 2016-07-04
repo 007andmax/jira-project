@@ -6476,7 +6476,6 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 }
 .input-group-addon-search,
 .input-group-btn-search {
-  width: 1%;
   white-space: nowrap;
   vertical-align: middle;
 }
