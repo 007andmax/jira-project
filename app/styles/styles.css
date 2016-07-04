@@ -1492,6 +1492,8 @@ mark,
 .text-muted {
   display: inline-block;
   color: #94A4B8;
+}
+.topNavbar-search .text-muted{
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
