@@ -88,12 +88,13 @@
 .global-search .dropdown-menu .category .category-name {
   padding-left: 10px;
   padding-top: 0;
+  padding-bottom: 5px;
   cursor: pointer;
 }
 
 .global-search .dropdown-menu .category .item {
   display: none;
-  padding-left: 30px;
+  padding-left: 15px;
   cursor: pointer;
 }
 
@@ -119,6 +120,7 @@
 .global-search .dropdown-menu .category .item-name > span {
   display: inline-block;
   max-width: 85%;
+  padding: 3px;
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -128,7 +130,9 @@
   width: 12px;
   margin-left: 5px;
 }
-
+.global-search .dropdown-menu .category .item-name .icn-sm:hover{
+  opacity: .8;
+}
 .global-search .filter-by-type .list-head {
   margin-bottom: 5px;
 }
@@ -172,7 +176,7 @@
 }
 
 .global-search .filter-by-type > li:not(.list-head) {
-  padding: 0 40px;
+  padding: 5px 40px;
   cursor: pointer;
 }
 
