@@ -1492,6 +1492,10 @@ mark,
 .text-muted {
   display: inline-block;
   color: #94A4B8;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .text-primary {
   color: #e7ecf2;
