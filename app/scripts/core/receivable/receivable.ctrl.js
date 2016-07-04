@@ -69,6 +69,10 @@
             $scope.invoiceToSent.invoices = {};
           }
 
+          if (!resp.list.length) {
+            $scope.loadingInProgress = false;
+          }
+
         });
 
         $scope.$watch(function () {

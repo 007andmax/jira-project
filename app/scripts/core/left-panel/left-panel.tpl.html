@@ -49,6 +49,12 @@
       <ul class="nav nav-tickets" ng-class="{'nav-tickets-users': currentUser.role === 'USER'}"
           ng-hide="collapseItem !== 'TICKETS'" style="width: 100%;">
 
+        <li ng-class="{active: $state.includes('tickets', {listType: 'all'})}">
+          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'all'})">
+            <i class="nav-icon icn-lg icn-tickets"></i> All Tickets
+          </a>
+        </li>
+
         <li ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
             <i class="nav-icon icn-lg icn-unassigned"></i> Unassigned
@@ -60,7 +66,7 @@
 
         <li ng-class="{active: $state.includes('tickets', {listType: 'user'})}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'user'})">
-            <i class="nav-icon icn-lg icn-tickets"></i> My Tickets
+            <i class="nav-icon icn-lg icn-user-lg"></i> My Tickets
           </a>
         </li>
 

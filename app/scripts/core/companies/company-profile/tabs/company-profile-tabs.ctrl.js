@@ -219,15 +219,15 @@
           return false;
         };
 
-        $scope.changeSelectedUsers = function () {
+        $scope.changeSelectedUsers = function (selectedUsers) {
           var selectUsersIds = [];
           var selectUsersSbscr = {
             invoice: 0,
             ticket: 0
           };
 
-          for (var userId in $scope.selectedUsers) {
-            if ($scope.selectedUsers[userId]) {
+          for (var userId in selectedUsers) {
+            if (selectedUsers[userId]) {
               selectUsersIds.push(userId);
 
               var user = Utils.findById($scope.users, userId);

@@ -13,7 +13,8 @@
 
             var $document = $(document),
               scrollListenerInitialize,
-              isTicketsAlreadyLoad = false;
+              isTicketsAlreadyLoad = false,
+              saveParams;
 
             scope.ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
             scope.globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -60,23 +61,26 @@
 
               UserNotificationService.show('Loading...');
 
-              scope.globalSearch.counts = [];
+              saveParams = paramsToSend;
               scope.ticketsHeaderState.ticketsQuantity = 0;
-              scope.tickets = TicketsService.getList(scope, paramsToSend, function () {
+              scope.tickets = TicketsService.getList(scope, paramsToSend, function (uploadedTickets, params) {
 
-                scope.ticketsHeaderState.aditionalTicketsQuantity = 0;
-                scope.globalSearch.counts.push(TicketsService.getCount(paramsToSend, scope, function () {
+                if (params === saveParams) {
+                  scope.globalSearch.counts = {};
+                  scope.ticketsHeaderState.aditionalTicketsQuantity = 0;
+                  scope.globalSearch.counts['quantity'] = TicketsService.getCount(paramsToSend, scope, function () {
 
-                  if (paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
+                    if (paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
 
-                    var filterReported = {
-                      filter: 'ADMIN_REPORTED_AS_SPAM'
-                    };
+                      var filterReported = {
+                        filter: 'ADMIN_REPORTED_AS_SPAM'
+                      };
 
-                    scope.globalSearch.counts.push(TicketsService.getCount(filterReported, scope.$new()));
-                  }
+                      scope.globalSearch.counts['additionalQuantity'] = TicketsService.getCount(filterReported, scope.$new());
+                    }
 
-                }));
+                  });
+                }
 
                 UserNotificationService.hide();
 

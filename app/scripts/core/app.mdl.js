@@ -223,16 +223,18 @@
       function ($rootScope, $templateCache, CompaniesService, $state, $modal, UserConfirmationsService, SharedStateService) {
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
+
+          var globalSearch = SharedStateService.getSharedState('globalSearch');
+
           if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
 
             if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
               return;
             }
-
-            var globalSearch = SharedStateService.getSharedState('globalSearch');
-            globalSearch.counts = [];
-            globalSearch.openedItemName = undefined;
+            globalSearch.counts = {};
+            globalSearch.selectedItemsCount = undefined;
           }
+          globalSearch.openedItemName = undefined;
         });
 
         CompaniesService._addInitListener(function () {

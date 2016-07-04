@@ -134,6 +134,8 @@
               return function (filterType) {
                 switch (filterType) {
                   case 'TICKETS':
+                    $scope.globalSearch.ticketsByCompanyFilter = item.id;
+                    $state.go('tickets', { listType: 'all' });
                     break;
                   case 'USERS':
                     $scope.globalSearch.usersByCompanyFilter = item.id;

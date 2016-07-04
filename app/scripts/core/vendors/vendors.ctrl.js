@@ -15,7 +15,7 @@
         $scope.user = UsersService.getCurrentUser();
 
         $scope.$watch('vendors.length', function (vendorsCount) {
-          globalSearch.counts.push({ count: vendorsCount });
+          globalSearch.counts['quantity'] = { count: vendorsCount };
         });
 
         $scope.vendorsFilter = function (value) {

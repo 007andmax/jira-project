@@ -52,8 +52,12 @@
           var counts = $scope.globalSearch.counts,
             result = 0;
 
-          for (var i = 0; i < counts.length; i++) {
-            result += counts[i].count;
+          if (counts['quantity'] && counts['quantity'].count) {
+            result += counts['quantity'].count;
+          }
+
+          if (counts['additionalQuantity'] && counts['additionalQuantity'].count) {
+            result += counts['additionalQuantity'].count;
           }
 
           return result;
