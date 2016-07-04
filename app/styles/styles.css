@@ -6921,6 +6921,12 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   .topNavbar-logo{
     left: 58%;
   }
+  .global-search .custom-scroll.dropdown-menu{
+    width: 175px !important;
+  }
+  .topNavbar-search .dropdown-menu{
+    width: 175px !important;
+  }
   .topNavbarLeft-Right{
     width: 125px;
     margin-right: -100px;
