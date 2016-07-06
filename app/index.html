@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/admin-tickets.css"/>
+  <link rel="stylesheet" href="styles/bootstrap-datetimepicker.css"/>
+  <link rel="stylesheet" href="styles/common.dropdown.css"/>
+  <link rel="stylesheet" href="styles/common.fonts.css"/>
+  <link rel="stylesheet" href="styles/common.icons.css"/>
+  <link rel="stylesheet" href="styles/common.left.css"/>
+  <link rel="stylesheet" href="styles/common.lists.css"/>
+  <link rel="stylesheet" href="styles/common.right.css"/>
+  <link rel="stylesheet" href="styles/common.tables.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.add.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.alerts.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.attachments.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.email.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.header.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.list.css"/>
+  <link rel="stylesheet" href="styles/common.ticket.updates.css"/>
+  <link rel="stylesheet" href="styles/common.tickets.wells.css"/>
+  <link rel="stylesheet" href="styles/common.top.css"/>
+  <link rel="stylesheet" href="styles/companies.css"/>
+  <link rel="stylesheet" href="styles/nanoscroller.css"/>
+  <link rel="stylesheet" href="styles/nouislider.css"/>
+  <link rel="stylesheet" href="styles/settings.css"/>
+  <link rel="stylesheet" href="styles/styles.css"/>
+  <link rel="stylesheet" href="styles/tokenfield.css"/>
+  <link rel="stylesheet" href="styles/users.css"/>
+  <link rel="stylesheet" href="styles/vendors.css"/>
+  <link rel='stylesheet' href='styles/jWindowCrop.css'/>
+  <link rel='stylesheet' href='styles/fixed.css'/>
+  <link rel='stylesheet' href='styles/invoice-modal-tech.css'/>
+  <link rel='stylesheet' href='styles/invoice-page.css'/>
+  <link rel='stylesheet' href='styles/settings-company-info.css'/>
+  <link rel='stylesheet' href='styles/quick-support.css'/>
+  <link rel='stylesheet' href='styles/tax-rates.css'/>
+  <link rel='stylesheet' href='styles/company-profile.css'/>
+  <link rel='stylesheet' href='styles/time-zone-autocomplete.css'/>
+  <link rel='stylesheet' href='styles/recurring.css'/>
+  <link rel='stylesheet' href='styles/ticket-tags.css'/>
+  <link rel='stylesheet' href='styles/loading-indicator.css'/>
+  <link rel='stylesheet' href='styles/button-with-loading-indicator.css'/>
+  <!-- endbuild -->
+
+  <script src="../configs.js"></script>
+
+  <!--<link rel="stylesheet" href="/bower_components/nanoscroller/bin/css/nanoscroller.css"/>-->
+
+  <!--<script type="text/javascript">-->
+  <!--if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) && !(window.ActiveXObject || "ActiveXObject" in window)) {-->
+  <!--document.querySelector('[href*="styles/firefox."]').remove();-->
+  <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
+  <!--document.querySelector('[href*="styles/ie."]').remove();-->
+
+  <!--} else if (!(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) { //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);-->
+  <!--document.querySelector('[href*="styles/firefox."]').remove();-->
+  <!--document.querySelector('[href*="styles/firefox-"]').remove();-->
+  <!--} else if (!(window.ActiveXObject || "ActiveXObject" in window)) {-->
+  <!--document.querySelector('[href*="styles/ie."]').remove();-->
+  <!--}-->
+  <!--</script>-->
+
+  <style type="text/css">
+    body {
+      min-width: 1010px;
+    }
+  </style>
+
+</head>
+<body ng-app="quicktech">
+
+<div class="alert alert-yellow hide" user-notification style="z-index: 1039;"></div>
+
+<div id="top" style="z-index: 1038;" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
+
+<aside id="left" qt-sidebar style="z-index: 1039;"
+       ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
+
+<aside id="right" class="nano" ng-if="!isRightPanelHided" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
+
+<div class="main-container">
+  <div class="row">
+    <div class="content-container" ng-class="{'large': isRightPanelHided}">
+      <div class="content-wrapper">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--&lt;!&ndash;[if lt IE 7]>-->
+<!--<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade-->
+<!--your browser</a> to improve your experience.</p>-->
+<!--<![endif]&ndash;&gt;-->
+<!--<div id="loading" class="alert-wrapper" user-notification>-->
+<!--<center class="animator stop">-->
+<!--<div class="alert alert-yellow" ng-bind="message">Loading ...</div>-->
+<!--</center>-->
+<!--</div>-->
+
+<!--<nav class="navbar navbar-default navbar-fixed-top navbar-main"-->
+<!--ng-include="'/html/scripts/core/header/header.tpl.html'">-->
+<!--</nav>-->
+<!--<div class="main-container ">-->
+<!--<div class="row">-->
+<!--<aside class="left" ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'" qt-sidebar></aside>-->
+<!--<aside id="rightPanelElement" class="right scroll-pane"-->
+<!--ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'" qt-scroll-pane></aside>-->
+<!--<div id="content" class="content-container">-->
+<!--<div class="content-wrapper">-->
+<!--<div ui-view></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!-- build:js({.,app}) scripts/vendor.js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-messages/angular-messages.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/bower_components/angular-ui-select/dist/select.min.js"></script>
+<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
+<script src="/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js"></script>
+<script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="/bower_components/moment/min/moment-with-locales.js"></script>
+<script src="/bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+<script src="/bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+<script src="/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js"></script>
+<script src="/bower_components/sockjs-client/dist/sockjs.min.js"></script>
+<script src="/bower_components/stomp-websocket/lib/stomp.min.js"></script>
+<!--<script src="/bower_components/quicktech-angularjs-services/rest-services.js"></script>-->
+<script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
+<script src="scripts/js/vendors/modernizr.js"></script>
+<script src="scripts/js/vendors/editor/jquery.hotkeys.js"></script>
+<script src="scripts/js/vendors/editor/editor.js"></script>
+<script src="scripts/js/vendors/pie-chart.js"></script>
+<script src="scripts/js/vendors/easeljs-0.6.1.min.js"></script>
+<script src="scripts/js/vendors/jquery.jWindowCrop.js"></script>
+<script src="scripts/js/vendors/jquery.fileUploader.js"></script>
+<script src="scripts/js/vendors/jquery.autocomplete.js"></script>
+<script src="scripts/js/vendors/jquery.servicesMoving.js"></script>
+<script src="scripts/js/vendors/jquery.productAutocomplete.js"></script>
+<script src="scripts/js/vendors/md5-min.js"></script>
+<script src="scripts/js/vendors/nouislider.min.js"></script>
+<!-- endbuild -->
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&language=en"></script>
+
+<!-- build:js({.tmp,app}) scripts/custom.js -->
+<script src="scripts/js/handlebars-v3.0.3.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/common/directives/directives.mdl.js"></script>
+<script src="scripts/common/services/local/local-services.mdl.js"></script>
+<script src="scripts/common/services/rest/rest-services.mdl.js"></script>
+<script src="scripts/core/app.mdl.js"></script>
+<script src="scripts/core/billable/billable.mdl.js"></script>
+<script src="scripts/core/companies/companies.mdl.js"></script>
+<script src="scripts/core/devices/devices.mdl.js"></script>
+<script src="scripts/core/left-panel/left-panel.mdl.js"></script>
+<script src="scripts/core/products/products.mdl.js"></script>
+<script src="scripts/core/quick-support/quick-support.mdl.js"></script>
+<script src="scripts/core/receipt-archive/receipt-archive.mdl.js"></script>
+<script src="scripts/core/receivable/receivable.mdl.js"></script>
+<script src="scripts/core/recurring/recurring.mdl.js"></script>
+<script src="scripts/core/right-panel/right-panel.mdl.js"></script>
+<script src="scripts/core/services/services.mdl.js"></script>
+<script src="scripts/core/settings/settings.mdl.js"></script>
+<script src="scripts/core/tax-rates/tax-rates.mdl.js"></script>
+<script src="scripts/core/tickets/tickets.mdl.js"></script>
+<script src="scripts/core/users/users.mdl.js"></script>
+<script src="scripts/core/vendors/vendors.mdl.js"></script>
+<script src="scripts/common/directives/address-autocomplete.drv.js"></script>
+<script src="scripts/common/directives/animation-change-location.drv.js"></script>
+<script src="scripts/common/directives/append-html-to-body.drv.js"></script>
+<script src="scripts/common/directives/array-maxlength.drv.js"></script>
+<script src="scripts/common/directives/array-minlength.drv.js"></script>
+<script src="scripts/common/directives/avatar/avatar.drv.js"></script>
+<script src="scripts/common/directives/avatar/canvas-crop.drv.js"></script>
+<script src="scripts/common/directives/avatar/control-logo.drv.js"></script>
+<script src="scripts/common/directives/avatar/crop.ctrl.js"></script>
+<script src="scripts/common/directives/avatar/crop.drv.js"></script>
+<script src="scripts/common/directives/button-with-loading-indicator/button-with-loading-indicator.drv.js"></script>
+<script src="scripts/common/directives/click-outside.drv.js"></script>
+<script src="scripts/common/directives/count-nodes-in-line.drv.js"></script>
+<script src="scripts/common/directives/cover/cover.drv.js"></script>
+<script src="scripts/common/directives/custom-disabled.drv.js"></script>
+<script src="scripts/common/directives/custom-ng-show-if.drv.js"></script>
+<script src="scripts/common/directives/custom-popover.drv.js"></script>
+<script src="scripts/common/directives/custom-selection.js"></script>
+<script src="scripts/common/directives/dropdown-arrow-navigation.js"></script>
+<script src="scripts/common/directives/duration-filter.fltr.js"></script>
+<script src="scripts/common/directives/email-to.drv.js"></script>
+<script src="scripts/common/directives/event-toggle-slider.drv.js"></script>
+<script src="scripts/common/directives/execute-when-outfocused.js"></script>
+<script src="scripts/common/directives/file-size-filter.js"></script>
+<script src="scripts/common/directives/fixed-block-top.js"></script>
+<script src="scripts/common/directives/fixed-tab-topbar.drv.js"></script>
+<script src="scripts/common/directives/focus-on.drv.js"></script>
+<script src="scripts/common/directives/hard-phone-number-pattern.js"></script>
+<script src="scripts/common/directives/hard-reset-pattern.drv.js"></script>
+<script src="scripts/common/directives/invalid-when.drv.js"></script>
+<script src="scripts/common/directives/is-uniq-validation.drv.js"></script>
+<script src="scripts/common/directives/isolated-form.drv.js"></script>
+<script src="scripts/common/directives/loading-indicator/loading-indicator.ctrl.js"></script>
+<script src="scripts/common/directives/make-dirty-on-blur.drv.js"></script>
+<script src="scripts/common/directives/max-length-word.drv.js"></script>
+<script src="scripts/common/directives/modal-window-button.drv.js"></script>
+<script src="scripts/common/directives/navigation-bar.drv.js"></script>
+<script src="scripts/common/directives/on-finish-render.drv.js"></script>
+<script src="scripts/common/directives/open-dropdown-on-model-change.js"></script>
+<script src="scripts/common/directives/phone-numbers/phone-numbers.drv.js"></script>
+<script src="scripts/common/directives/pie-chart.drv.js"></script>
+<script src="scripts/common/directives/product-autocomplete.drv.js"></script>
+<script src="scripts/common/directives/products-list.drv.js"></script>
+<script src="scripts/common/directives/qt-checkbox.drv.js"></script>
+<script src="scripts/common/directives/qt-custom-popover.drv.js"></script>
+<script src="scripts/common/directives/qt-data-time-picker.drv.js"></script>
+<script src="scripts/common/directives/qt-hide-dropdown.drv.js"></script>
+<script src="scripts/common/directives/qt-scroll-pane.drv.js"></script>
+<script src="scripts/common/directives/qt-sidebar.drv.js"></script>
+<script src="scripts/common/directives/qt-toggle-slider.drv.js"></script>
+<script src="scripts/common/directives/qt-typeahead-show-on-focus.drv.js"></script>
+<script src="scripts/common/directives/qt-typeahead-styler.drv.js"></script>
+<script src="scripts/common/directives/restore-from.js"></script>
+<script src="scripts/common/directives/scroll-pane.js"></script>
+<script src="scripts/common/directives/scroll-to-error-fild.drv.js"></script>
+<script src="scripts/common/directives/scroll-to-form.drv.js"></script>
+<script src="scripts/common/directives/service-quantity-picker.drv.js"></script>
+<script src="scripts/common/directives/show-model-element.drv.js"></script>
+<script src="scripts/common/directives/stop-propagation.drv.js"></script>
+<script src="scripts/common/directives/text-editor.drv.js"></script>
+<script src="scripts/common/directives/ticket-tags/set-focus-on-var-change.drv.js"></script>
+<script src="scripts/common/directives/ticket-tags/ticket-tags.drv.js"></script>
+<script src="scripts/common/directives/time-zone-autocomplete/time-zone-autocomplete.drv.js"></script>
+<script src="scripts/common/directives/trimmed-popover.drv.js"></script>
+<script src="scripts/common/directives/typeahead-input-icon.drv.js"></script>
+<script src="scripts/common/directives/user-notification.drv.js"></script>
+<script src="scripts/common/directives/zoom-slider/zoom-slider.drv.js"></script>
+<script src="scripts/common/services/local/permissions.srv.js"></script>
+<script src="scripts/common/services/local/phone-formats.srv.js"></script>
+<script src="scripts/common/services/local/remote-access.srv.js"></script>
+<script src="scripts/common/services/local/shared-state.srv.js"></script>
+<script src="scripts/common/services/local/tickets-permissions.srv.js"></script>
+<script src="scripts/common/services/local/user-confirmations.srv.js"></script>
+<script src="scripts/common/services/local/user-notification.srv.js"></script>
+<script src="scripts/common/services/rest/address.js"></script>
+<script src="scripts/common/services/rest/associations.js"></script>
+<script src="scripts/common/services/rest/billable.js"></script>
+<script src="scripts/common/services/rest/common.js"></script>
+<script src="scripts/common/services/rest/companies.js"></script>
+<script src="scripts/common/services/rest/constants.js"></script>
+<script src="scripts/common/services/rest/contacts.js"></script>
+<script src="scripts/common/services/rest/devices.js"></script>
+<script src="scripts/common/services/rest/email.js"></script>
+<script src="scripts/common/services/rest/files.js"></script>
+<script src="scripts/common/services/rest/global-search.js"></script>
+<script src="scripts/common/services/rest/products.js"></script>
+<script src="scripts/common/services/rest/realtime.js"></script>
+<script src="scripts/common/services/rest/receipt-archive.js"></script>
+<script src="scripts/common/services/rest/receivable.js"></script>
+<script src="scripts/common/services/rest/recurring.js"></script>
+<script src="scripts/common/services/rest/right-panel.js"></script>
+<script src="scripts/common/services/rest/services.js"></script>
+<script src="scripts/common/services/rest/statistics.js"></script>
+<script src="scripts/common/services/rest/subscriptions.js"></script>
+<script src="scripts/common/services/rest/tags.js"></script>
+<script src="scripts/common/services/rest/tax-rates.js"></script>
+<script src="scripts/common/services/rest/ticket-tags.js"></script>
+<script src="scripts/common/services/rest/tickets.js"></script>
+<script src="scripts/common/services/rest/users.js"></script>
+<script src="scripts/common/services/rest/vendors.js"></script>
+<script src="scripts/core/billable/billable-chart.drv.js"></script>
+<script src="scripts/core/billable/billable.ctrl.js"></script>
+<script src="scripts/core/billable/company-tickets.ctrl.js"></script>
+<script src="scripts/core/billable/company.ctrl.js"></script>
+<script src="scripts/core/billable/create-invoice.ctrl.js"></script>
+<script src="scripts/core/billable/filter-billable-company.fltr.js"></script>
+<script src="scripts/core/billable/invoice-content.drv.js"></script>
+<script src="scripts/core/billable/invoice-modal-window.drv.js"></script>
+<script src="scripts/core/billable/invoice-time-filter.flt.js"></script>
+<script src="scripts/core/billable/prevent-hash-change.drv.js"></script>
+<script src="scripts/core/companies/change-contact.drv.js"></script>
+<script src="scripts/core/companies/companies.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/company-address-autocomplete.drv.js"></script>
+<script src="scripts/core/companies/company-profile/company-profile.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/agents-tab/agents-tab.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/bulk-option.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/company-bulk-option.drv.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/company-profile-tabs.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/devices-tab/devices-tab-ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/network-scan-tab/network-scan-tab.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/settings-tab/settings-tab.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/unknownFilter.fltr.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/users-tab/users-tab.ctrl.js"></script>
+<script src="scripts/core/companies/company-profile/tabs/vendors-tab/vendors-tab.ctrl.js"></script>
+<script src="scripts/core/companies/company.ctrl.js"></script>
+<script src="scripts/core/companies/edit-company.ctrl.js"></script>
+<script src="scripts/core/companies/fixed-margin-left.drv.js"></script>
+<script src="scripts/core/companies/tax-rate.ctrl.js"></script>
+<script src="scripts/core/companies/ticket-closed-chart.drv.js"></script>
+<script src="scripts/core/companies/tickets-closed-chart.ctrl.js"></script>
+<script src="scripts/core/companies/tickets-donought-chart.drv.js"></script>
+<script src="scripts/core/companies/top-companies-chart.drv.js"></script>
+<script src="scripts/core/companies/total-charts.drv.js"></script>
+<script src="scripts/core/companies/total-earning-chart.ctrl.js"></script>
+<script src="scripts/core/companies/total-receivables-chart.ctrl.js"></script>
+<script src="scripts/core/companies/vendor-association.drv.js"></script>
+<script src="scripts/core/devices/company-agent-devices/company-agent-devices.ctrl.js"></script>
+<script src="scripts/core/devices/company-device-devices/company-device-devices.ctrl.js"></script>
+<script src="scripts/core/devices/company-devices.ctrl.js"></script>
+<script src="scripts/core/devices/company-network-devices/company-network-device.ctrl.js"></script>
+<script src="scripts/core/devices/device-settings/device-settings.ctrl.js"></script>
+<script src="scripts/core/devices/devices.ctrl.js"></script>
+<script src="scripts/core/header/global-search/global-search.ctrl.js"></script>
+<script src="scripts/core/header/global-search/highlight-text.drv.js"></script>
+<script src="scripts/core/header/header-billable.ctrl.js"></script>
+<script src="scripts/core/header/header-companies.ctrl.js"></script>
+<script src="scripts/core/header/header-company-devices.ctrl.js"></script>
+<script src="scripts/core/header/header-devices.ctrl.js"></script>
+<script src="scripts/core/header/header-products.ctrl.js"></script>
+<script src="scripts/core/header/header-quick-support.ctrl.js"></script>
+<script src="scripts/core/header/header-receipt-archive.ctrl.js"></script>
+<script src="scripts/core/header/header-receivable.ctrl.js"></script>
+<script src="scripts/core/header/header-recurring.ctrl.js"></script>
+<script src="scripts/core/header/header-services.ctrl.js"></script>
+<script src="scripts/core/header/header-tickets-bulk.ctrl.js"></script>
+<script src="scripts/core/header/header-tickets.ctrl.js"></script>
+<script src="scripts/core/header/header-users.ctrl.js"></script>
+<script src="scripts/core/header/header-vendors.ctrl.js"></script>
+<script src="scripts/core/header/header.ctrl.js"></script>
+<script src="scripts/core/header/logout-btn.drv.js"></script>
+<script src="scripts/core/header/search-user.drv.js"></script>
+<script src="scripts/core/left-panel/left-panel.ctrl.js"></script>
+<script src="scripts/core/left-panel/set-list-height-by-content.drv.js"></script>
+<script src="scripts/core/products/category.ctrl.js"></script>
+<script src="scripts/core/products/edit-product.ctrl.js"></script>
+<script src="scripts/core/products/move-product.drv.js"></script>
+<script src="scripts/core/products/product.ctrl.js"></script>
+<script src="scripts/core/products/products-list.ctrl.js"></script>
+<script src="scripts/core/products/products.ctrl.js"></script>
+<script src="scripts/core/quick-support/copy-key.drv.js"></script>
+<script src="scripts/core/quick-support/copy-url.drv.js"></script>
+<script src="scripts/core/quick-support/open-mail-manager.drv.js"></script>
+<script src="scripts/core/quick-support/quick-support.ctrl.js"></script>
+<script src="scripts/core/receipt-archive/company.ctrl.js"></script>
+<script src="scripts/core/receipt-archive/invoice.ctrl.js"></script>
+<script src="scripts/core/receipt-archive/receipt-archive.ctrl.js"></script>
+<script src="scripts/core/receivable/company.crtl.js"></script>
+<script src="scripts/core/receivable/invoice-preview.ctrl.js"></script>
+<script src="scripts/core/receivable/invoice.ctrl.js"></script>
+<script src="scripts/core/receivable/receivable-chart.drv.js"></script>
+<script src="scripts/core/receivable/receivable.ctrl.js"></script>
+<script src="scripts/core/receivable/receive-payment.ctrl.js"></script>
+<script src="scripts/core/recurring/date-time-picker-with-period.js"></script>
+<script src="scripts/core/recurring/edit-invoice.ctrl.js"></script>
+<script src="scripts/core/recurring/expenses/edit-invoice-expense.ctrl.js"></script>
+<script src="scripts/core/recurring/expenses/edit-invoice-expenses.ctrl.js"></script>
+<script src="scripts/core/recurring/invoice.ctrl.js"></script>
+<script src="scripts/core/recurring/order-title.drv.js"></script>
+<script src="scripts/core/recurring/product-cost-validate.drv.js"></script>
+<script src="scripts/core/recurring/recurring.ctrl.js"></script>
+<script src="scripts/core/right-panel/contact-user-popover.drv.js"></script>
+<script src="scripts/core/right-panel/custom-popover-menu.drv.js"></script>
+<script src="scripts/core/right-panel/device-context-menu/device-context-menu.drv.js"></script>
+<script src="scripts/core/right-panel/open-right-panel.drv.js"></script>
+<script src="scripts/core/right-panel/right-panel-company-info/right-panel-company-info-tab.ctrl.js"></script>
+<script src="scripts/core/right-panel/right-panel-company-info/right-panel-users-tab.ctrl.js"></script>
+<script src="scripts/core/right-panel/right-panel-user-info/activities/activities-time.fltr.js"></script>
+<script src="scripts/core/right-panel/right-panel-user-info/activities/activity.ctrl.js"></script>
+<script src="scripts/core/right-panel/right-panel-user-info/activities/load-activities.drv.js"></script>
+<script src="scripts/core/right-panel/right-panel-user-info/activities/recent-activities.ctrl.js"></script>
+<script src="scripts/core/right-panel/right-panel-user-info/right-panel-company-list-tab.ctrl.js"></script>
+<script src="scripts/core/right-panel/right-panel-user-info/working-with-user.ctrl.js"></script>
+<script src="scripts/core/right-panel/right-panel.ctrl.js"></script>
+<script src="scripts/core/right-panel/right-panel.drv.js"></script>
+<script src="scripts/core/services/company.ctrl.js"></script>
+<script src="scripts/core/services/default-services.crtl.js"></script>
+<script src="scripts/core/services/edit-service.crtl.js"></script>
+<script src="scripts/core/services/move-services-scroll.drv.js"></script>
+<script src="scripts/core/services/service.crtl.js"></script>
+<script src="scripts/core/services/services-moving.ctrl.js"></script>
+<script src="scripts/core/services/services-moving.drv.js"></script>
+<script src="scripts/core/services/services.ctrl.js"></script>
+<script src="scripts/core/services/time-filter.fltr.js"></script>
+<script src="scripts/core/settings/company-info/addresses-control.drv.js"></script>
+<script src="scripts/core/settings/company-info/business-days-hours.drv.js"></script>
+<script src="scripts/core/settings/company-info/company-info-basic-info.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-contact-info.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-default-tax.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-edit-service.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-manage-tags.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-service.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-services.crtl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-smtp.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info-tax-rate.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/company-info.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/invoice-config.drv.js"></script>
+<script src="scripts/core/settings/company-info/invoice-preview.ctrl.js"></script>
+<script src="scripts/core/settings/company-info/ticket-config.drv.js"></script>
+<script src="scripts/core/settings/control-margin-content.drv.js"></script>
+<script src="scripts/core/settings/deactivate-button.drv.js"></script>
+<script src="scripts/core/settings/email-templates/email-templates.ctrl.js"></script>
+<script src="scripts/core/settings/email-templates/insert-keyword.drv.js"></script>
+<script src="scripts/core/settings/my-profile/my-profile-basic-info.ctrl.js"></script>
+<script src="scripts/core/settings/my-profile/my-profile-contact-info.ctrl.js"></script>
+<script src="scripts/core/settings/my-profile/my-profile-misc-info.ctrl.js"></script>
+<script src="scripts/core/settings/my-profile/my-profile.ctrl.js"></script>
+<script src="scripts/core/settings/tech-users/tech-users.ctrl.js"></script>
+<script src="scripts/core/tax-rates/company-tax-rates.ctrl.js"></script>
+<script src="scripts/core/tax-rates/default-tax-rates.ctrl.js"></script>
+<script src="scripts/core/tax-rates/edit-tax-rates.ctrl.js"></script>
+<script src="scripts/core/tax-rates/tax-moving.ctrl.js"></script>
+<script src="scripts/core/tax-rates/tax-rates.ctrl.js"></script>
+<script src="scripts/core/tickets/assign-user/assign-user-button.drv.js"></script>
+<script src="scripts/core/tickets/assign-user/assign-user.ctrl.js"></script>
+<script src="scripts/core/tickets/assign-user/assign-user.drv.js"></script>
+<script src="scripts/core/tickets/assign-user/up-down-key.drv.js"></script>
+<script src="scripts/core/tickets/create/assign-to-validation.drv.js"></script>
+<script src="scripts/core/tickets/create/create-ticket-open-modal.drv.js"></script>
+<script src="scripts/core/tickets/create/create-ticket.ctrl.js"></script>
+<script src="scripts/core/tickets/create/ticket-attachment-files.drv.js"></script>
+<script src="scripts/core/tickets/note/ticket-add-update-note.ctrl.js"></script>
+<script src="scripts/core/tickets/products/ticket-add-update-product.ctrl.js"></script>
+<script src="scripts/core/tickets/products/ticket-add-update-products.ctrl.js"></script>
+<script src="scripts/core/tickets/products/ticket-edit-update-product.ctrl.js"></script>
+<script src="scripts/core/tickets/services/ticket-add-update-service-list.drv.js"></script>
+<script src="scripts/core/tickets/services/ticket-add-update-service.ctrl.js"></script>
+<script src="scripts/core/tickets/services/ticket-add-update-services.ctrl.js"></script>
+<script src="scripts/core/tickets/services/ticket-edit-update-service.ctrl.js"></script>
+<script src="scripts/core/tickets/show-ticket-details.drv.js"></script>
+<script src="scripts/core/tickets/ticket-create-date.fltr.js"></script>
+<script src="scripts/core/tickets/ticket-details-tips-msg.ctrl.js"></script>
+<script src="scripts/core/tickets/ticket-details.ctrl.js"></script>
+<script src="scripts/core/tickets/ticket-fixed-header.drv.js"></script>
+<script src="scripts/core/tickets/ticket-review-size.drv.js"></script>
+<script src="scripts/core/tickets/ticket-update/ticket-update.ctrl.js"></script>
+<script src="scripts/core/tickets/ticket-update/update-add-user.ctrl.js"></script>
+<script src="scripts/core/tickets/ticket-update/update-add-user.drv.js"></script>
+<script src="scripts/core/tickets/ticket-uploader.drv.js"></script>
+<script src="scripts/core/tickets/ticket.ctrl.js"></script>
+<script src="scripts/core/tickets/tickets.ctrl.js"></script>
+<script src="scripts/core/users/edit-user-form-position.drv.js"></script>
+<script src="scripts/core/users/trimmed-tooltip.drv.js"></script>
+<script src="scripts/core/users/user-create.ctrl.js"></script>
+<script src="scripts/core/users/user-edit.ctrl.js"></script>
+<script src="scripts/core/users/user.ctrl.js"></script>
+<script src="scripts/core/users/users.ctrl.js"></script>
+<script src="scripts/core/vendors/contacts-slider.drv.js"></script>
+<script src="scripts/core/vendors/edit-vendor.ctrl.js"></script>
+<script src="scripts/core/vendors/show-popover.drv.js"></script>
+<script src="scripts/core/vendors/vendor-card.drv.js"></script>
+<script src="scripts/core/vendors/vendor.ctrl.js"></script>
+<script src="scripts/core/vendors/vendors.ctrl.js"></script>
+<!-- endbuild -->
+</body>
+</html>

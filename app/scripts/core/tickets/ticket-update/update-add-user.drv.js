@@ -80,10 +80,10 @@
 				}
 			}
 
-			$(element).parents('ul.dropdown-menu').css({
-				'width': 	maxProductWidth + 10,
-				'max-width':maxProductWidth + 10
-			});
+			// $(element).parents('ul.dropdown-menu').css({
+			// 	'width': 	maxProductWidth + 10,
+			// 	'max-width':maxProductWidth + 10
+			// });
 
 			var inputElement = $(element).find('input');
 			var actionElement = inputElement.parents('.form-group').find('div.label-add-btn > div');

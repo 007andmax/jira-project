@@ -907,7 +907,7 @@ aside#left div.nav-title {
 }
 
 .custom-product-list .clear-product .clear-product-cont {
-  width: 470px;
+  display: block;
   padding: 10px;
   text-align: center
 }
@@ -1328,6 +1328,8 @@ span.sort-span {
 }
 .nav-qt > li.product-create-btn-form{
   float: right;
+  margin-top: 16px;
+  padding-right: 25px;
 }
 .product-create-btn-form .btn{
   width: 100px;
