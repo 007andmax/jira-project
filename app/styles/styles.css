@@ -1149,8 +1149,8 @@ hr {
 }
 .tabs-container .btn,
 .tabs-container .add-company-container {
-  margin-right: 30px;
-  margin-top: 8px;
+  /*margin-right: 30px;*/
+  margin-top: -8px;
 }
 .tabs-container .add-company-container {
   position: relative;

@@ -28,7 +28,7 @@
       <li ng-click="chooseProductItem(product)"
           ng-repeat="product in filteredProducts[category.id] | orderBy: 'description' track by product.versionedId.id">
 
-        <div>
+        <div style="display: block">
           <span class="title">{{ product.description }}</span>
           <span class="pull-right total-count">{{ product.sale | currency: '$': 2 }}</span>
           <span class="clearfix"></span>
