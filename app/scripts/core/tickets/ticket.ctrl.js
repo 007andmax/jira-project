@@ -91,10 +91,6 @@
           TicketsService.assignTo($scope.ticket.id, $scope.currentUser.id, function () {
 
             UserNotificationService.show('Ticket “' + $scope.ticket.number + '” has been assigned to ' + $scope.getUserName($scope.currentUser), true);
-
-            $state.go('tickets', { listType: 'user' }).then(function () {
-              $state.go('tickets.details', { ticketId: $scope.ticket.id });
-            });
           });
         };
 

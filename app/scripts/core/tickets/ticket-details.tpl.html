@@ -24,12 +24,11 @@
                 <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
               </span>
 
-              <span
-                ng-show="TicketsPermissionsService.isStatusVisible(ticketDetails, currentUser.role) && ticketDetails.status"
+              <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                 class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
                 tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top">
                 <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) }}">
-                  <i class="icn-xs icn-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i>
+                  <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i>
                 </label>
               </span>
 
@@ -58,7 +57,7 @@
         <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
 
           <div class="dropdown pull-left" dropdown
-               ng-show="TicketsPermissionsService.isSettingVisible(ticketDetails, currentUser.role)">
+               ng-show="TicketsPermissionsService.isActionVisible('claim_ticket,change_status,change_priority,assign,send_to_spam,send_to_trash', ticketDetails)">
 
             <div class="btn btn-default pull-left has-tooltip"
                  aria-haspopup="true" aria-expanded="false"
@@ -68,12 +67,11 @@
 
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
 
-              <li ng-show="TicketsPermissionsService.isClaimTicketVisible(listType, currentUser.role) && !ticketClaimed">
+              <li ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
               </li>
 
-              <li
-                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isChangePriorityToVisible(listType, currentUser.role, (listType === 'unassigned' ? false : true))"
+              <li ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">Change Priority to...</a>
@@ -107,8 +105,7 @@
 
               </li>
 
-              <li
-                ng-if="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isAssignTicketToVisible(listType, currentUser.role, usersCurrentCompany)"
+              <li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">
@@ -127,8 +124,7 @@
                 </div>
               </li>
 
-              <li
-                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isChangeStatusToVisible(listType, currentUser.role, ticketClaimed)"
+              <li ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketDetails)"
                 class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
@@ -150,8 +146,7 @@
                 </div>
               </li>
 
-              <li
-                ng-show="(ticketDetails.status !== 'COMPLETED') && TicketsPermissionsService.isSendToSpamVisible(listType, currentUser.role)">
+              <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketDetails)">
 
                 <a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role !== 'USER'"
                    ng-click="moveIntoSpam()">Mark as Spam</a>
@@ -161,8 +156,7 @@
 
               </li>
 
-              <li
-                ng-if="TicketsPermissionsService.isMoveToTrashVisible(listType, currentUser.role, ticketDetails) && !ticketClaimed">
+              <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketDetails)">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
               </li>
 
@@ -242,14 +236,14 @@
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-user-msg.tpl.html'"></div>
 
-      <div ng-if="TicketsPermissionsService.isCreateTicketUpdateVisible(listType, ticketDetails.status) || ticketClaimed"
+      <div ng-if="TicketsPermissionsService.isActionVisible('update', ticketDetails)"
            ng-include="'/html/scripts/core/tickets/ticket-update/ticket-update-tab.tpl.html'"></div>
 
       <div ng-include="'/html/scripts/core/tickets/ticket-details-tips-msg.tpl.html'"></div>
 
       <div class="ticket-updates clearfix">
 
-        <div ng-if="(ticketClaimed || listType !== 'unassigned') && ticketDetails.updates.length > 0"
+        <div ng-if="ticketDetails.updates.length > 0"
              class="ticket-update-header clearfix">
 
           <h4>
@@ -287,7 +281,7 @@
           </ul>
         </div>
 
-        <div class="ticket-updates-wrapper clearfix" ng-if="ticketDetails.updates && ticketDetails.updates.length || ticketClaimed">
+        <div class="ticket-updates-wrapper clearfix" ng-if="ticketDetails.updates && ticketDetails.updates.length">
 
           <div class="ticket-update clearfix" ng-repeat="ticketUpdate in ticketDetails.updates"
                ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
@@ -319,7 +313,7 @@
                 <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete"
                    ng-click="deleteUpdate()"
-                   custom-disabled="{{ TicketsPermissionsService.isDisabledDeleteTicketUpdate(ticketDetails, ticketUpdate.user.id, currentUser.id, currentUser.role) }}">
+                   custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
                   <i class="icn-sm icn-delete"></i>
                 </a>
 
@@ -400,7 +394,7 @@
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit product"
                        ng-click="setEditExpenseId(product.id)"
-                       custom-disabled="{{ TicketsPermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
+                       custom-disabled="{{ TicketsPermissionsService.isActionVisible('edit_update', ticketDetails) }}">
                       <i class="icn-sm icn-edit"></i>
                     </a>
                   </div>
@@ -431,7 +425,7 @@
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit service"
                        ng-click="setEditExpenseId(service.id)"
-                       custom-disabled="{{ TicketsPermissionsService.isEditUpdateDisabled(ticketDetails, currentUser.role) }}">
+                       custom-disabled="{{ TicketsPermissionsService.isActionVisible('edit_update', ticketDetails) }}">
                       <i class="icn-sm icn-edit"></i>
                     </a>
                   </div>

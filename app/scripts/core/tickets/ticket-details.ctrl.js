@@ -26,13 +26,7 @@
 
             $scope.ticketDetails = details;
 
-            if (details.assignedUser && details.assignedUser.id && $stateParams.listType === 'unassigned' && !$scope.ticketClaimed) {
-              $state.go('tickets', { listType: 'user' }).then(function () {
-                $state.go('tickets.details', { ticketId: $scope.ticketDetails.id });
-              });
-            }
-
-            if (!$scope.ticketClaimed && details.message !== undefined && (details.code === 400 || details.code === 403)) {
+            if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
               if ($stateParams.ticketId) {
                 $state.go('tickets', { listType: $stateParams.listType, ticketId: $stateParams.ticketId });
               } else {
@@ -115,9 +109,7 @@
           };
 
           $scope.claimTicket = function () {
-            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id, function () {
-              $scope.ticketClaimed = true;
-            });
+            TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id);
           };
 
           $scope.openSetting = function () {
@@ -497,7 +489,15 @@
 
           $scope.$on('ticket_is_not_available_anymore', function (event, data) {
 
-            if (!$scope.ticketClaimed && data.ticketId === $scope.ticketDetails.id
+            var ticket = data.ticket;
+
+            if (data.action === 'ASSIGNED_USER' && ticket.assignedUser.id === $scope.currentUser.id &&
+              ticket.assignPerformer.id === $scope.currentUser.id) {
+              $scope.ticketDetails = ticket;
+              return;
+            }
+
+            if (ticket.id === $scope.ticketDetails.id
               && (!data.ticketType || data.ticketType.toUpperCase() === $stateParams.listType.toUpperCase())) {
               $state.go('tickets', { listType: $stateParams.listType });
             }

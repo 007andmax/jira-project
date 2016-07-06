@@ -1,13 +1,13 @@
 <div>
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'MY_TICKET')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'MY_TICKET')">
     <div class="alert alert-info">
       <strong>You </strong>Claimed this ticket on {{ ticketDetails.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}
     </div>
   </div>
 
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'ASSIGNED_TO_ME')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'ASSIGNED_TO_ME')">
     <div class="alert alert-info">
       <strong>{{ getUserName(assignPerformer) }}</strong>
       assigned this ticket to <strong>You</strong> on
@@ -16,7 +16,7 @@
   </div>
 
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'RE-ASSIGNED_TO_ME')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'RE-ASSIGNED_TO_ME')">
     <div class="alert alert-info">
       <strong>{{ getUserName(assignPerformer) }}</strong>
       re-assigned this ticket to <strong>You</strong> on
@@ -25,7 +25,7 @@
   </div>
 
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'USER_RE-ASSIGNED_USER')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'USER_RE-ASSIGNED_USER')">
     <div class="alert alert-info">
       <strong>{{ getUserName(assignPerformer) }}</strong>
       re-assigned this ticket to
@@ -35,7 +35,7 @@
   </div>
 
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'USER_ASSIGNED_USER')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'USER_ASSIGNED_USER')">
     <div class="alert alert-info">
       <strong>{{ getUserName(assignPerformer) }}</strong>
       assigned this ticket to
@@ -45,7 +45,7 @@
   </div>
 
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'I_ASSIGNED_TO_USER')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'I_ASSIGNED_TO_USER')">
     <div class="alert alert-info">
       <strong>You</strong> assigned this ticket to
       <strong>{{ getUserName(assignedUser) }}</strong> on
@@ -54,7 +54,7 @@
   </div>
 
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'I_RE-ASSIGNED_TO_USER')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'I_RE-ASSIGNED_TO_USER')">
     <div class="alert alert-info">
       <strong>You</strong> re-assigned this ticket to
       <strong>{{ getUserName(assignedUser) }}</strong> on
@@ -63,7 +63,7 @@
   </div>
 
   <div class="ticket-alert-msg"
-       ng-show="TicketsPermissionsService.isUserMsgTipsVisible(listType, ticketDetails, currentUser, 'USER_CLAIMED')">
+       ng-show="TicketsPermissionsService.isActionVisible('user_tip', ticketDetails, 'USER_CLAIMED')">
     <div class="alert alert-info">
       <strong>{{ getUserName(assignedUser) }}</strong>
       Claimed this ticket on {{ ticketDetails.assignedAt | date: 'EEE, d MMM yyyy, h:mm a' }}

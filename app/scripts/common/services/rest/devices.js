@@ -647,6 +647,10 @@
         });
       }
 
+      function getOneById(id) {
+        return storage.devices[id];
+      }
+
       return {
         downloadAgent: downloadAgent,
         runScanDevices: runScanDevices,
@@ -670,6 +674,7 @@
         subscribeToRemoteConnection: subscribeToRemoteConnection,
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
+        getOneById: getOneById,
         _addInitListener: _addInitListener
       }
     }

@@ -18,8 +18,7 @@
       var storage = {
         lists: {},
         tickets: {},
-        counts: {},
-        callbacks: []
+        counts: {}
       };
 
       function normalizeAndCopyParams(params) {
@@ -473,11 +472,6 @@
 
       function assignTo(ticketId, userId, callback) {
         if (!ticketId || !userId) throw 'ticketId and userId is required arguments!';
-
-        if (callback) {
-          storage.callbacks.push(callback);
-        }
-
         changeTicket('assign', ticketId, userId, callback);
       }
 
@@ -733,10 +727,6 @@
             var ticketIndex = Utils.indexOfId(listData.list, ticket.id);
 
             if (ticketIndex > -1) {
-              for (var i = 0, len = storage.callbacks.length; i < len; i++) {
-                var callback = storage.callbacks[i];
-                callback();
-              }
 
               if (isTicketMatchesFilters(newChange.data, listData.params)) {
                 Utils.customizeObj(ticket, listData.list[ticketIndex]);
@@ -745,8 +735,9 @@
                 listData.list.splice(ticketIndex, 1);
                 $rootScope.$broadcast("ticket_is_not_available_anymore",
                   {
-                    ticketId: newChange.data.id,
-                    ticketType: listData.params.filter
+                    ticket: newChange.data,
+                    ticketType: listData.params.filter,
+                    action: newChange.action
                   })
               }
             } else if (isTicketMatchesFilters(newChange.data, listData.params)) {
@@ -802,7 +793,7 @@
 
             if (storageTicketData.ticket.id === newChange.data.id) {
               delete storage.tickets[key];
-              storageTicketData.scope.$broadcast("ticket_is_not_available_anymore", { ticketId: newChange.data.id })
+              storageTicketData.scope.$broadcast("ticket_is_not_available_anymore", { ticket: newChange.data })
             }
           }
 
@@ -945,7 +936,7 @@
           }
         }
 
-        if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {
+        if ((params.filter == 'ALL' || params.filter == 'UNASSIGNED') && (ticket.assignedUser && ticket.assignedUser.id)) {
           return false;
         }
 

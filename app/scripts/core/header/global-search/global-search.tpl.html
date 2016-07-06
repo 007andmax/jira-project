@@ -26,7 +26,8 @@
                    tooltip="Filter by {{ item.name }} {{ ::getType(item.type) }}"  tooltip-append-to-body="true">
                 <i class="icn-sm icn-ticket-filter" style="display: inline-block;"></i>
               </div>
-              <div dropdown stop-propagation="click" ng-if="items.type === 'DEVICES'" dropdown-append-to-body="true">
+              <div dropdown stop-propagation="click" dropdown-append-to-body="true"
+                   ng-if="items.type === 'DEVICES' && getDeviceById(item.id, item.extraInfo).online">
                 <div dropdown-toggle style="display: inline-block;">
                   <i class="icn-sm icn-remote-access" style="display: inline-block;"></i>
                 </div>
@@ -45,7 +46,7 @@
 
               </div>
             </div>
-            <span class="item-info text-muted" ng-if="item.info">({{ item.info.replace('_', ' ').toLowerCase() }})</span>
+            <span class="item-info text-muted" ng-if="item.info">{{ item.info.replace('_', ' ').toLowerCase() }}</span>
           </div>
         </li>
       </ul>
@@ -65,7 +66,7 @@
             <div class="apply-filter">Apply filter:</div>
           </div>
         </li>
-        <li class="filter" ng-repeat="filter in filterResult" ng-click="select(filter.type)">
+        <li class="filter" ng-repeat="filter in filterResult" ng-click="select(filter)">
           <div>{{ userReadable(filter.type) }} ({{ filter.count }})</div>
         </li>
       </ul>

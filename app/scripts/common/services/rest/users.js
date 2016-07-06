@@ -211,7 +211,11 @@
       }
 
       function getTechUsers() {
-        return storage.usersByCompanies[getCurrentUser().company.id] || [];
+        if (!$rootScope.currentUser) {
+          return [];
+        }
+
+        return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
       }
 
       function getOneById(userId) {

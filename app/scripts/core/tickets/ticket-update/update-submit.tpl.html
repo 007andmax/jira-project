@@ -16,7 +16,7 @@
          ng-click="saveTicketUpdate(ticketUpdateForm)">
       Update
     </div>
-    <div ng-show="TicketsPermissionsService.isUpdateAndCloseVisible(listType, currentUser.role, ticketDetails.status) || ticketClaimed"
+    <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
          class="btn btn-lg btn-info btn-update"
          custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
          ng-click="updateAndCloseTicket(ticketUpdateForm)">

@@ -1,7 +1,7 @@
 <div ng-if="currentOpenTab"
      ng-controller="quicktech.core.tickets.ticketDetailsTipsMsgCtrl">
 
-  <div class="well ticket-well" ng-show="TicketsPermissionsService.isClaimTicketTipVisible(ticketDetails) && !ticketClaimed">
+  <div class="well ticket-well" ng-if="TicketsPermissionsService.isActionVisible('claim_ticket', ticketDetails)">
 
     <i class="icn-lg icn-msg-claim"></i>
 
@@ -17,7 +17,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'OPEN')">
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'open')">
 
     <i class="icn-lg icn-msg-open"></i>
 
@@ -33,7 +33,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'OLD')">
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'old')">
 
     <i class="icn-lg icn-msg-open"></i>
 
@@ -46,7 +46,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'BILLED')">
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billed')">
     <i class="icn-lg icn-msg-open"></i>
 
     <div class="well-message">
@@ -57,7 +57,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnClosedPage(ticketDetails, 'BILLABLE')">
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'billable')">
 
     <i class="icn-lg icn-msg-open"></i>
 
@@ -72,27 +72,27 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="ticketDetails.trash && !ticketDetails.isBillable && ticketDetails.deletePerformer.id !== currentUser.id">
+       ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_trash') && ticketDetails.deletePerformer.id !== currentUser.id">
     <i class="icn-lg icn-msg-delete"></i>
 
     <div class="well-message">
       <p>
         <strong class="text-info">
           {{ getCorrectUserName(ticketDetails.deletePerformer.id) }}
-        </strong>
-        {{ isCurrentUser(ticketDetails.deletePerformer.id) ? 'have' : 'has' }} moved this ticket to trash.
+        </strong> has moved this ticket to trash.
         You can either delete the ticket forever or restore the ticket status anytime, using the respective option.</p>
       <span class="text-muted"><strong>TIP:</strong>
         Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-click="deleteForever()">Delete Forever</div>
+      <div class="btn btn-danger btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+           ng-click="deleteForever()">Delete Forever</div>
       <div class="btn btn-dark btn-lg" ng-click="moveToTrash(false)">Restore</div>
     </div>
   </div>
 
   <div class="well ticket-well"
-       ng-if="ticketDetails.trash && ticketDetails.deletePerformer.id === currentUser.id">
+       ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_trash') && ticketDetails.deletePerformer.id === currentUser.id">
     <i class="icn-lg icn-msg-delete"></i>
 
     <div class="well-message">
@@ -102,13 +102,14 @@
         Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-if="!ticketDetails.isBillable" ng-click="deleteForever()">Delete Forever</div>
+      <div class="btn btn-danger btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+           ng-click="deleteForever()">Delete Forever</div>
       <div class="btn btn-dark btn-lg" ng-click="moveToTrash(false)">Restore</div>
     </div>
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnSpamPage(ticketDetails, currentUser.role, 'ADMIN_DELETE')">
+       ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_spam', 'admin_delete')">
     <i class="icn-lg icn-msg-spam"></i>
 
     <div class="well-message">
@@ -121,13 +122,14 @@
         Restoring ticket moves the ticket back to its original folder where it was reported as spam. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-if="!ticketDetails.isBillable" ng-click="deleteForever()">Delete Forever</div>
+      <div class="btn btn-danger btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+           ng-click="deleteForever()">Delete Forever</div>
       <div class="btn btn-dark btn-lg" ng-click="restoreFromSpam()">Restore</div>
     </div>
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnSpamPage(ticketDetails, currentUser.role, 'USER_SPAM')">
+       ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_spam', 'user_spam')">
     <i class="icn-lg icn-msg-spam"></i>
 
     <div class="well-message">
@@ -141,7 +143,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnSpamPage(ticketDetails, currentUser.role, 'ADMIN_SPAM')">
+       ng-if="TicketsPermissionsService.isActionVisible('restore', ticketDetails, 'from_spam', 'admin_spam')">
     <i class="icn-lg icn-msg-spam"></i>
 
     <div class="well-message">
@@ -161,7 +163,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnSharedPage(ticketDetails, currentUser.role, 'ADMIN')">
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'shared_for_admin')">
 
     <i class="icn-lg icn-msg-closed"></i>
 
@@ -178,7 +180,7 @@
   </div>
 
   <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isTipVisibleOnSharedPage(ticketDetails, currentUser.role, 'USER')">
+       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'shared_for_user')">
     <i class="icn-lg icn-msg-closed"></i>
 
     <div class="well-message">
@@ -187,7 +189,7 @@
     </div>
   </div>
 
-  <div class="alert alert-yellow ng-binding" ng-show="showLockedError"
+  <div class="alert alert-yellow ng-binding" ng-if="showLockedError"
        style="display: none; margin-left: -141px;color:red">
     The ticket “Tkt# 0011” priority has been changed to HIGH
   </div>

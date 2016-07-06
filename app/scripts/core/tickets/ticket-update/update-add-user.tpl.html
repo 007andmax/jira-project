@@ -1,5 +1,5 @@
 <div class="dropdown pull-left"
-     ng-show="TicketsPermissionsService.isAditionalActionAccessForUser(ticketDetails, currentUser)">
+     ng-show="TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)">
 
   <a href="javascript:void(0)" class="hit-area ha-16-26 pull-left add-users-plus has-tooltip"
      data-placement="top" title="Add users to this update" data-toggle="dropdown" aria-haspopup="true"

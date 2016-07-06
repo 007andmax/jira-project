@@ -362,7 +362,7 @@
         <li>
           <div>
             <div class="form-group dropdown-user-parent"
-                 ng-if="TicketsPermissionsService.isAssignTicketToVisible('unassigned', currentUser.role, usersCurrentCompany)"
+                 ng-if="TicketsPermissionsService.isActionVisible('assign', ticket)"
                  ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketAssignTo')}">
 
               <label>Assign to</label>
@@ -379,7 +379,7 @@
             </div>
 
             <div class="clearfix" style="height: 50px;"
-                 ng-if="!TicketsPermissionsService.isAssignTicketToVisible('unassigned', currentUser.role, usersCurrentCompany)">
+                 ng-if="!TicketsPermissionsService.isActionVisible('assign', ticket)">
               <label class="control checkbox pull-left" style="margin-top: 15px;">
                 <input type="checkbox" ng-model="ticket.isAssignToMe">
                 <span class="control-indicator"></span>

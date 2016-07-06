@@ -4,8 +4,8 @@
 
   angular.module('quicktech').controller('quicktech.core.header.globalSearchCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'GlobalSearch', '$state', 'TicketsService',
-      'DevicesService', 'quicktech.common.services.RemoteAccessService',
-      function ($scope, SharedStateService, GlobalSearch, $state, TicketsService, DevicesService, RemoteAccessService) {
+      'DevicesService', 'quicktech.common.services.RemoteAccessService', 'Utils',
+      function ($scope, SharedStateService, GlobalSearch, $state, TicketsService, DevicesService, RemoteAccessService, Utils) {
 
         $scope.categoryExpanded = [];
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -65,14 +65,19 @@
           event && event.stopPropagation();
         };
 
+        $scope.getDeviceById = function (id, companyId) {
+          var devices = DevicesService.getOneById(companyId);
+          return Utils.findById(devices, id);
+        };
+
         function selectItem(item) {
           $scope.globalSearch.isGlobalSearchOn = false;
           getFuncByItemType(item.type)(item.id, item.name, item.extraInfo);
         }
 
-        function selectFilter(filterType) {
+        function selectFilter(filter) {
           $scope.globalSearch.isGlobalSearchOn = false;
-          getFilterByItemType($scope.selectedItem)(filterType);
+          getFilterByItemType($scope.selectedItem)(filter);
         }
 
         function getFuncByItemType(type) {
@@ -131,8 +136,8 @@
         function getFilterByItemType(item) {
           switch (item.type) {
             case 'COMPANIES':
-              return function (filterType) {
-                switch (filterType) {
+              return function (filter) {
+                switch (filter.type) {
                   case 'TICKETS':
                     $scope.globalSearch.ticketsByCompanyFilter = item.id;
                     $state.go('tickets', { listType: 'all' });
