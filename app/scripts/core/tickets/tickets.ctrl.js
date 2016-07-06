@@ -9,8 +9,9 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
                 TicketsPermissionsService, SharedStateService, Utils, PermissionsService) {
 
-        var availableTypes = ['unassigned', 'user', 'shared', 'spam', 'preview'],
-          ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
+        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'preview'],
+          ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
+          globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.selectedTickets = {};
         $scope.TicketsPermissionsService = TicketsPermissionsService;
@@ -93,6 +94,7 @@
 
         $scope.$on('uncheckAllTickets', function () {
           $scope.selectedTickets = {};
+          globalSearch.selectedItemsCount = undefined;
         });
 
         function changeSelectedTickets(id, status) {
@@ -101,11 +103,13 @@
           ticketsHeaderState.checkedHasInvoiceTicket = true;
           ticketsHeaderState.checkedBillableTicket = false;
           ticketsHeaderState.checkedTicketsIds = [];
+          globalSearch.selectedItemsCount = 0;
 
           for (var ticketId in $scope.selectedTickets) {
             if ($scope.selectedTickets[ticketId]) {
 
               ticketsHeaderState.checkedTicketsIds.push(ticketId);
+              globalSearch.selectedItemsCount++;
 
               if ($scope.listType !== 'spam' && (!ticketsHeaderState.checkedCompletedTicket && (Utils.findById($scope.tickets, ticketId).status === 'COMPLETED'))) {
                 ticketsHeaderState.checkedCompletedTicket = true;

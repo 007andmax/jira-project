@@ -8,13 +8,14 @@
       function ($scope, VendorsService, UsersService, SharedStateService, $rootScope, PermissionsService) {
 
         var headerSharedState = SharedStateService.getSharedState('vendorsHeader');
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.PermissionsService = PermissionsService;
         $scope.vendors = VendorsService.getAll($scope);
         $scope.user = UsersService.getCurrentUser();
 
         $scope.$watch('vendors.length', function (vendorsCount) {
-          headerSharedState.count = vendorsCount;
+          globalSearch.counts['quantity'] = { count: vendorsCount };
         });
 
         $scope.vendorsFilter = function (value) {

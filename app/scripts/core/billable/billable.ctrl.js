@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      function ($scope, BillableService, CompaniesService, SharedStateService) {
+    ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService', '$timeout',
+      function ($scope, BillableService, CompaniesService, SharedStateService, $timeout) {
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         var headerSharedState = SharedStateService.getSharedState('billableClientsHeader');
 
@@ -64,6 +65,12 @@
 
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
+          if (globalSearch.billableByCompanyFilter) {
+            $timeout(function () {
+              $scope.$broadcast(globalSearch.billableByCompanyFilter + '-showCompany');
+              globalSearch.billableByCompanyFilter = undefined;
+            });
+          }
         };
 
         $scope.billableChartData = BillableService.getBillableChartData($scope, function () {

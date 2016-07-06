@@ -3,6 +3,8 @@
 
     <li event-toggle-slider="toggleReceiptArchiveInvoices"
         ng-repeat="company in receiptArchiveCompanies | orderBy: 'name' track by company.id"
+        show-model-element="{{ 'showReceiptArchiveCompany-' + company.id }}"
+        on-finish-render="hideLoadingIndicator()"
         ng-controller="quicktech.core.receiptArchive.companyCtrl">
 
       <div class="col-1" ng-click="toggleReceiptArchiveInvoices()">

@@ -1493,6 +1493,12 @@ mark,
   display: inline-block;
   color: #94A4B8;
 }
+.topNavbar-search .text-muted{
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .text-primary {
   color: #e7ecf2;
 }
@@ -6476,7 +6482,6 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 }
 .input-group-addon-search,
 .input-group-btn-search {
-  width: 1%;
   white-space: nowrap;
   vertical-align: middle;
 }
@@ -6509,6 +6514,9 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 .input-group-addon-search input[type="radio"],
 .input-group-addon-search input[type="checkbox"] {
   margin-top: 0;
+}
+.topNavbar-search  .input-group-search{
+  width: 315px;
 }
 .input-group-search .form-control-top-search:first-child,
 .input-group-addon-search:first-child,
@@ -6910,6 +6918,28 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
 .nav-justified > .dropdown .dropdown-menu {
   top: auto;
   left: auto;
+}
+@media only screen and (max-width: 1315px){
+  .input-group-addon-search{
+    float: left;
+    padding-bottom: 13px;
+  }
+  .topNavbar-logo{
+    left: 58%;
+  }
+  .global-search .custom-scroll.dropdown-menu{
+    width: 175px !important;
+  }
+  .topNavbar-search .dropdown-menu{
+    width: 175px !important;
+  }
+  .topNavbarLeft-Right{
+    width: 125px;
+    margin-right: -100px;
+  }
+  .input-group-btn-search{
+    width: 60px;
+  }
 }
 @media (min-width: 768px) {
   .nav-justified > li {
@@ -9142,9 +9172,6 @@ button.close {
   height: 0;
   border-color: transparent;
   border-style: solid;
-}
-.open .tooltip {
-  display: none !important;
 }
 .popover {
   position: absolute;

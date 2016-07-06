@@ -9,6 +9,12 @@
       function ($scope, SharedStateService, $stateParams, UsersService, CompaniesService, $filter, TicketsService,
                 $state, TicketsPermissionsService) {
 
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+
+        $scope.filter = {
+          searchItem: ''
+        };
+
         var users,
           companies = CompaniesService.getAllCompanies(),
           autocompleteModel,
@@ -41,10 +47,6 @@
           0: 'On Hold',
           1: 'In Progress',
           2: 'Completed'
-        };
-
-        $scope.filter = {
-          searchItem: ''
         };
 
         $scope.TicketsPermissionsService = TicketsPermissionsService;
@@ -100,8 +102,15 @@
           $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
 
           $scope.filter.searchItem = undefined;
-          setSearchParamsDefault();
           $scope.sharedState.searchFilter = {};
+
+          if (globalSearch.ticketsByCompanyFilter) {
+            $scope.sharedState.searchFilter.companyId = globalSearch.ticketsByCompanyFilter;
+            $scope.filter.searchItem = CompaniesService.getOneById(globalSearch.ticketsByCompanyFilter).name;
+            globalSearch.ticketsByCompanyFilter = undefined;
+          }
+
+          setSearchParamsDefault();
 
           if ($stateParams.listType === 'unassigned' || $stateParams.listType === 'user') {
             users = UsersService.getClientUsers();
@@ -182,10 +191,6 @@
             status: {value: 0}
           };
         }
-
-        $scope.$watch('sharedState.checkedTicketsIds', function (data) {
-          $scope.isShowBulkAction = data && data.length > 0;
-        })
 
       }]);
 

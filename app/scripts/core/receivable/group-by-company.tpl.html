@@ -4,6 +4,7 @@
     <li class="expanded" event-toggle-slider="toggleReceivableInvoices"
         ng-repeat="company in receivableCompanies | orderBy: 'name' track by company.id"
         on-finish-render="hideLoadingIndicator()"
+        show-model-element="{{ 'showReceivableCompany-' + company.id }}"
         ng-controller="quicktech.core.receivable.companyCtrl">
 
       <div class="col-1" ng-click="toggleReceivableInvoices()">

@@ -1,22 +1,16 @@
 <div class="topNavbarLeft-Left pull-left" ng-controller="quicktech.core.header.recurringCtrl">
-  <p class="pull-left" style="white-space: nowrap;"><strong>Billable</strong></p>
 
   <div class="topNavbar-search pull-left">
     <div class="input-group-search">
 
       <input type="text" class="form-control-top-search user-search" placeholder="Search orders..."
-             ng-model="company" typeahead-on-select="showInvoice(company)" autocomplete="off"
+             ng-model="company" typeahead-on-select="filterByCompany(company)" autocomplete="off"
              typeahead="company as company.name for company in companies | filter: {name: $viewValue}:stateComparator | orderBy:'name'"
              typeahead-editable="false" qt-typeahead-show-on-focus ng-trim="false"
              custom-style="{'max-height': '160px', 'overflow-y': 'auto', 'width': '267px', 'left': '0px'}">
 
-      <!--<input type="text" class="form-control-top-search user-search" placeholder="Search invoice..."-->
-             <!--ng-model="invoice" typeahead-on-select="showInvoice(invoice)" autocomplete="off"-->
-             <!--typeahead="invoice as invoice.number for invoice in searchInvoice($viewValue)"-->
-             <!--custom-style="{'max-height': '160px', 'overflow-y': 'auto'}">-->
-
       <span class="input-group-addon-search">
-        <div typeahead-input-icon="invoice" style="position: absolute;top: 13px;right: 13px;"></div>
+        <div typeahead-input-icon="company" style="position: absolute;top: 13px;right: 13px;"></div>
       </span>
 
     </div>

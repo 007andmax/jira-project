@@ -8,6 +8,10 @@
     [function () {
 
       var defaultStates = {
+        globalSearch: {
+          isGlobalSearchOn: true,
+          counts: []
+        },
         ticketsHeader: {
           searchFilter: {},
           count: 0
@@ -26,8 +30,18 @@
         billableClientsHeader: {
           companies: []
         },
+        receivableHeader: {
+          companies: [],
+          filter: {
+            companyId: ''
+          }
+        },
         receiptArchiveInvoicesHeader: {
-          invoices: []
+          invoices: [],
+          companies: [],
+          filter: {
+            companyId: ''
+          }
         },
         vendorsHeader: {
           count: 0,
@@ -45,7 +59,7 @@
         }
       };
 
-      var sharedStates = angular.extend({}, defaultStates);
+      var sharedStates = angular.copy(defaultStates);
 
       return {
         getSharedState: function (name) {
@@ -65,6 +79,15 @@
         },
         clearState: function (name) {
           sharedStates[name] = angular.extend({}, defaultStates[name]);
+        },
+        clearAllExceptGlobalSearch: function () {
+          for (var name in sharedStates) {
+            if (name === 'globalSearch' || name === 'quickSession') {
+              continue;
+            }
+
+            sharedStates[name].filter = angular.copy(defaultStates[name].filter);
+          }
         }
       }
 

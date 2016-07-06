@@ -43,7 +43,7 @@
         <div class="user-bio">
 
           <label class="control checkbox pull-left">
-            <input type="checkbox" ng-change="changeSelectedUsers()" ng-model="selectedUsers[user.id]">
+            <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
             <span class="control-indicator"></span>
           </label>
 
