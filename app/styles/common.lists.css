@@ -1666,7 +1666,7 @@ Devices tab
 }
 .qt-product-list>li>.col-1{
   height: 18px;
-  width: 210px;
+  width: 200px;
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
@@ -1676,7 +1676,7 @@ Devices tab
   width: 145px;
 }
 .qt-product-list>li>.col-2{
-  width: calc(100% - 995px);
+  width: calc(100% - 1105px);
   color: #94a4b8;
   text-align: left;
 }

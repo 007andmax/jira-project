@@ -5,3 +5,5 @@ dist
 bower_components
 .sublime-project
 .sublime-workspace
+index.html
+Gruntfile.js
