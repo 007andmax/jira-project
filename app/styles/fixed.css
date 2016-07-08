@@ -62,7 +62,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-product-list > li > .intermediate-parent-elem > .col-1 {
   height: 18px;
-  width: 210px;
+  width: 200px;
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
@@ -74,7 +74,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-2 {
-  width: calc(100% - 995px);
+  width: calc(100% - 1090px);
   color: #94a4b8;
   white-space: nowrap;
   text-overflow: ellipsis;
