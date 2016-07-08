@@ -9,7 +9,7 @@
   services.factory('GlobalSearch', ['$http', '$rootScope', 'Utils', function ($http, $rootScope, Utils) {
 
     function search(word, callback) {
-      var future = $http.get('/globalSearch?word=' + word);
+      var future = $http.get('/globalSearch', { params: { word: word } });
       Utils.handleCallback(future, callback);
     }
 

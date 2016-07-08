@@ -82,6 +82,7 @@
         templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
+      //todo: remove this state; make it like on products page
       .state('companyProfile.tab', waitForServices({
         url: '/:tabName',
         templateUrl: function (params) {
@@ -91,7 +92,7 @@
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
       .state('products', waitForServices({
-        url: '/inventry/products',
+        url: '/inventry/products/:tabName',
         templateUrl: '/html/scripts/core/products/products.tpl.html',
         controller: 'quicktech.core.products.productsCtrl'
       }))
@@ -235,6 +236,7 @@
             globalSearch.selectedItemsCount = undefined;
           }
           globalSearch.openedItemName = undefined;
+          globalSearch.searchValue = '';
         });
 
         CompaniesService._addInitListener(function () {

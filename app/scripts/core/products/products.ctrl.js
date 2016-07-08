@@ -4,12 +4,16 @@
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService', '$timeout',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout, PermissionsService) {
+      'quicktech.common.services.PermissionsService', 'quicktech.common.services.SharedStateService', '$stateParams', '$state',
+      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout, PermissionsService,
+                SharedStateService, $stateParams, $state) {
 
         var categories,
-          showCreateProductInList = false;
+          availableTabs = ['category', 'list'],
+          showCreateProductInList = false,
+          globalSearch = SharedStateService.getSharedState('globalSearch');
 
+        $scope.$state = $state;
         $scope.PermissionsService = PermissionsService;
         $scope.orderProducts = {
           field: 'description',
@@ -23,18 +27,27 @@
 
           if (resp && resp.categories && !resp.categories.length) {
             $scope.loadingInProgress = false;
+            $scope.$broadcast('loadingFinished');
           }
         });
 
-        $scope.pageTab = 'group';
         $scope.isCreateCategoryShow = false;
         $scope.newCategory = {};
         $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
         $scope.status = {
           isopen: false
         };
+        $scope.pageTab = $stateParams.tabName;
         $scope.expandedCategoryId = '';
         $scope.showCategory = '';
+
+        $scope.$watch(function () {
+          return $stateParams.tabName;
+        }, function (tab) {
+          if (tab && availableTabs.indexOf(tab) !== -1) {
+            $scope.pageTab = tab;
+          }
+        });
 
         $scope.$watch('highlightProductId', function (productId) {
           if (productId) {
@@ -69,25 +82,18 @@
 
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
+          $scope.$broadcast('loadingFinished');
+          var globalFilter = globalSearch.productFilter;
+          if (globalFilter) {
+            $timeout(function () {
+              $rootScope.$broadcast(globalFilter.category + '-showProduct', globalFilter.id);
+            });
+            globalSearch.productFilter = undefined;
+          }
         };
 
         $scope.openCreationCategory = function () {
           $scope.isCreateCategoryShow = true;
-        };
-
-        $scope.setPageTab = function (tab) {
-          if (tab !== $scope.pageTab) {
-            if (tab === 'group' && $scope.orderProducts.field === 'category') {
-              $scope.orderProducts = {
-                field: 'description',
-                reverse: false
-              };
-            }
-
-            $rootScope.$broadcast('productsTabChanged');
-            $scope.pageTab = tab;
-            $scope.expandedCategoryId = '';
-          }
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
@@ -196,6 +202,7 @@
           showCreateProductInList = true;
           $scope.$broadcast('cancelEditForm');
         };
+
       }]);
 
 }());

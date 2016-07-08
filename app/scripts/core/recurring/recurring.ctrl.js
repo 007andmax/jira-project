@@ -3,9 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
-    [
-      '$scope', 'RecurringService', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, RecurringService, CompaniesService, UserNotificationService) {
+    ['$scope', 'RecurringService', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
+      'quicktech.common.services.SharedStateService',
+      function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService) {
+
+        var headerSharedState = SharedStateService.getSharedState('recurringHeader');
 
         $scope.loadingInProgress = true;
         $scope.forceCreating = [];
@@ -88,11 +90,10 @@
 
         };
 
-        $scope.$on('showInvoice', function(e, companyId){
-          $scope.showCompanyId = companyId ? companyId : '';
-        })
+        $scope.filterInvoicesByCompany = function (invoice) {
+          return !headerSharedState.filter.companyId || invoice.company.id === headerSharedState.filter.companyId;
+        };
 
-      }
-    ]);
+      }]);
 
 }());

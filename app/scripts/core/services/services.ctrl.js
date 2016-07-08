@@ -3,9 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.services').controller('quicktech.core.services.servicesCtrl',
-    ['$scope', 'ServicesService', 'Utils', 'CompaniesService',
-      function ($scope, ServicesService, Utils, CompaniesService) {
+    ['$scope', 'ServicesService', 'Utils', 'CompaniesService', 'quicktech.common.services.SharedStateService', '$timeout',
+      function ($scope, ServicesService, Utils, CompaniesService, SharedStateService, $timeout) {
+        var globalSearch = SharedStateService.getSharedState('globalSearch'), promise;
 
+        $scope.headerSharedState = SharedStateService.getSharedState('servicesHeader');
         $scope.loadingInProgress = {
           all: true,
           default: true,
@@ -20,7 +22,9 @@
           $scope.loadingFinished('companies');
         }
 
-        $scope.servicesData = ServicesService.getServicesData($scope, false);
+        $scope.servicesData = ServicesService.getServicesData($scope, false, function (data) {
+          $scope.loadingFinished('default');
+        });
 
         $scope.orderServices = {
           field: 'name',
@@ -95,6 +99,18 @@
           $scope.loadingInProgress[list] = false;
           if (!$scope.loadingInProgress.default && !$scope.loadingInProgress.companies) {
             $scope.loadingInProgress.all = false;
+
+            if (globalSearch.serviceFilter) {
+              if (promise) {
+                $timeout.cancel(promise);
+              }
+
+              promise = $timeout(function () {
+                $scope.$broadcast(globalSearch.serviceFilter.company + '-showService', globalSearch.serviceFilter.id);
+                globalSearch.serviceFilter = undefined;
+                $timeout.cancel(promise);
+              });
+            }
           }
         };
 

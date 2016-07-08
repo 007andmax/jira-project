@@ -1,17 +1,16 @@
 <div>
-  <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
-  <div class="products-content" ng-show="!loadingInProgress">
+  <div class="products-content">
 
     <div class="tabs-container" style="margin-top: 60px; margin-left: 15px">
       <div class="payment-receive-fixed" style="margin-top: 40px;" fixed-block-top>
         <ul class="nav nav-qt" role="tablist" style="margin-left: 20px">
 
-          <li role="presentation" ng-class="{'active': pageTab === 'group'}">
-            <a href="javascript:void(0)" ng-click="setPageTab('group')">Product by Category</a>
+          <li role="presentation" ng-class="{'active': pageTab === 'category'}">
+            <a href="javascript:void(0)" ng-click="pageTab = 'category'">Product by Category</a>
           </li>
 
           <li role="presentation" ng-class="{'active': pageTab === 'list'}">
-            <a href="javascript:void(0)" ng-click="setPageTab('list')">Products List</a>
+            <a href="javascript:void(0)" ng-click="pageTab = 'list'">Products List</a>
           </li>
 
           <li class="product-create-btn-form" ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c')">
@@ -26,13 +25,15 @@
 
     </div>
 
-    <div>
+    <div ng-hide="loadingInProgress" style="display: inline-block; margin-top: 20px;">
 
-      <div ng-if="pageTab === 'group'" ng-include="'/html/scripts/core/products/group-by-company.tpl.html'"></div>
+      <div ng-if="pageTab === 'category'" ng-include="'/html/scripts/core/products/group-by-category.tpl.html'"></div>
 
       <div ng-if="pageTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>
 
     </div>
+
+    <loading-indicator loading-trigger="loadingInProgress"></loading-indicator>
 
   </div>
 </div>

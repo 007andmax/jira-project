@@ -248,6 +248,10 @@
     }
 
     function findById(arrayObj, id) {
+      if (!arrayObj || !arrayObj.length) {
+        return;
+      }
+
       for (var i = 0; i < arrayObj.length; i++) {
 
         var item = arrayObj[i],

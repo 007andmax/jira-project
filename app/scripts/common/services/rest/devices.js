@@ -647,7 +647,7 @@
         });
       }
 
-      function getOneById(id) {
+      function getByCompanyId(id) {
         return storage.devices[id];
       }
 
@@ -674,7 +674,7 @@
         subscribeToRemoteConnection: subscribeToRemoteConnection,
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
-        getOneById: getOneById,
+        getByCompanyId: getByCompanyId,
         _addInitListener: _addInitListener
       }
     }

@@ -2,8 +2,7 @@
   <ul class="qt-list qt-receipt-archive">
 
     <li event-toggle-slider="toggleReceiptArchiveInvoices"
-        ng-repeat="company in receiptArchiveCompanies | orderBy: 'name' track by company.id"
-        show-model-element="{{ 'showReceiptArchiveCompany-' + company.id }}"
+        ng-repeat="company in receiptArchiveCompanies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name' track by company.id"
         on-finish-render="hideLoadingIndicator()"
         ng-controller="quicktech.core.receiptArchive.companyCtrl">
 

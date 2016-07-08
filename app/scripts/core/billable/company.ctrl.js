@@ -21,6 +21,12 @@
           }
         };
 
+        $scope.$watch('headerSharedState.filter.companyId', function (value) {
+          if (value && !$scope.showTickets) {
+            $scope.toggleBillableTickets();
+          }
+        });
+
         $scope.setHighlightTicketId = function (ticketId) {
           $scope.highlightProductId = ticketId;
         };

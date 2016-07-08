@@ -21,7 +21,7 @@
 
           function highlightText(value) {
             var text = $attrs.highlightText,
-              regExp = new RegExp(value, 'gi');
+              regExp = new RegExp(value.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1"), 'gi');
 
             $element.html(text.replace(regExp, function (str) {
               return '<strong>' + str + '</strong>';

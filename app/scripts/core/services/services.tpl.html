@@ -2,7 +2,7 @@
 
   <loading-indicator loading-trigger="loadingInProgress['all']"></loading-indicator>
 
-  <div class="default-services-header" ng-hide="loadingInProgress['all']"
+  <div class="default-services-header" ng-hide="loadingInProgress['all'] || headerSharedState.filter.companyId"
        ng-controller="quicktech.core.services.defaultServicesCtrl">
 
     <div class="default-service-count">Default Services
@@ -27,7 +27,7 @@
 
   <ul class="qt-list qt-services" ng-hide="loadingInProgress['all']">
 
-    <li qt-toggle-slider ng-repeat="company in companies | orderBy: 'name'"
+    <li qt-toggle-slider ng-repeat="company in companies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name'"
         ng-controller="quicktech.core.services.companyCtrl"
         on-finish-render="loadingFinished('companies')"
         event-toggle-slider="toggleServices">

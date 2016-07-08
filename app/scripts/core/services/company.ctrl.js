@@ -37,7 +37,7 @@
               companyServices[$scope.company.id].push(serviceId)
             }
           }
-          
+
           ServicesService.move(companyServices, function () {
             $scope.addServiceDropdown.isOpen = false;
             $scope.disableAddButton = false;
@@ -65,14 +65,6 @@
 
         $scope.$watch("servicesData[company.id]", function (services) {
           $scope.services = services;
-        });
-
-        $scope.$on($scope.company.id + '-showService', function (event, serviceId) {
-          if (!showServices) {
-            $scope.toggleServices();
-          }
-
-          $scope.$broadcast('show-' + serviceId);
         });
 
 

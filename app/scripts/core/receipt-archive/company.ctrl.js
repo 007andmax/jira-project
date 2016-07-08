@@ -3,34 +3,21 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receiptArchive.companyCtrl',
-    ['$scope', '$timeout',
-      function ($scope, $timeout) {
+    ['$scope', function ($scope) {
 
-        $scope.showInvoices = false;
+      $scope.showInvoices = false;
 
-        $scope.toggleReceiptArchiveInvoices = function () {
-          $scope.$broadcast('toggleReceiptArchiveInvoices');
-          $scope.showInvoices = !$scope.showInvoices;
-        };
+      $scope.toggleReceiptArchiveInvoices = function () {
+        $scope.$broadcast('toggleReceiptArchiveInvoices');
+        $scope.showInvoices = !$scope.showInvoices;
+      };
 
-        $scope.$on($scope.company.id + '-showReceiptArchiveCompany', function () {
-          $scope.$broadcast('showReceiptArchiveCompany-' + $scope.company.id);
-          $timeout(function () {
-            $scope.setHighlightInvoiceId();
-          }, 3000);
+      $scope.$watch('headerSharedState.filter.companyId', function (value) {
+        if (value && !$scope.showInvoices) {
+          $scope.toggleReceiptArchiveInvoices();
+        }
+      });
 
-          if (!$scope.showInvoices) {
-            $scope.toggleReceiptArchiveInvoices();
-          }
-        });
-
-        $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
-          if (!$scope.showInvoices) {
-            $scope.toggleReceiptArchiveInvoices();
-          }
-          $scope.setHighlightInvoiceId(invoiceId);
-        });
-
-      }]);
+    }]);
 
 }());

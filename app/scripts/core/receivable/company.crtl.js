@@ -17,6 +17,13 @@
           $scope.showIndicator = true;
         });
 
+
+        $scope.$watch('headerSharedState.filter.companyId', function (value) {
+          if (value && !$scope.showInvoices) {
+            $scope.toggleReceivableInvoices();
+          }
+        });
+
         $scope.$watch('invoiceToSent[company.id]', function (invoices) {
 
           if (!invoices) {
@@ -49,24 +56,6 @@
           }
           ReceivableService.resendInvoices(invoiceToSentId);
         };
-
-        $scope.$on($scope.company.id + '-showReceivableCompany', function () {
-          $scope.$broadcast('showReceivableCompany-' + $scope.company.id);
-          $timeout(function () {
-            $scope.setHighlightInvoiceId();
-          }, 3000);
-
-          if (!$scope.showInvoices) {
-            $scope.toggleReceivableInvoices();
-          }
-        });
-
-        $scope.$on($scope.company.id + '-showInvoiceInCompany', function (event, invoiceId) {
-          if (!$scope.showInvoices) {
-            $scope.toggleReceivableInvoices();
-          }
-          $scope.setHighlightInvoiceId(invoiceId);
-        });
 
       }]);
 

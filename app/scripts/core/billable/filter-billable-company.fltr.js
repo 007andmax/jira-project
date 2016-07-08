@@ -3,16 +3,19 @@
 (function () {
 
   angular.module("quicktech.core.billable").filter('filterBillableCompany',
-    ['CompaniesService', function (CompaniesService) {
+    ['CompaniesService', 'quicktech.common.services.SharedStateService', function (CompaniesService, SharedStateService) {
       return function (items, reverse) {
 
         var filtered = [];
+        var headerSharedState = SharedStateService.getSharedState('billableHeader');
 
         angular.forEach(items, function (item, id) {
           if (id !== 'staticCopy' && !CompaniesService.getOneById(id).isDefault) {
 
-            item.companyId = id;
-            filtered.push(item);
+            if (!headerSharedState.filter.companyId || headerSharedState.filter.companyId === id) {
+              item.companyId = id;
+              filtered.push(item);
+            }
 
           }
         });

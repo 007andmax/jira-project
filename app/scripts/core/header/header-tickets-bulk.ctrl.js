@@ -71,20 +71,6 @@
           });
         };
 
-        $scope.restoreTickets = function () {
-          $scope.listType === 'trash' ? $scope.moveToTrash(false) : $scope.restoreFromSpam();
-        };
-
-        $scope.isMoveToTrashVisible = function () {
-          if (!$scope.ticketsSharedState.checkedBillableTicket) {
-            return true;
-          } else if ($scope.ticketsSharedState.checkedHasInvoiceTicket) {
-            return true;
-          }
-
-          return false;
-        };
-
         $scope.deleteForever = function () {
           var confirmMesage = 'The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets will become inaccessible. Continue with permanent deletion?',
             confirmButton = 'Delete';
@@ -100,6 +86,7 @@
 
         $scope.$on('uncheckAllTickets', function () {
           $scope.ticketsSharedState.checkedTicketsIds = [];
+          $scope.ticketsHeaderState.selectedTickets = [];
         });
 
       }]);

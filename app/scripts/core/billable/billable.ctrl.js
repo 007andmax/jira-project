@@ -3,12 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService', '$timeout',
-      function ($scope, BillableService, CompaniesService, SharedStateService, $timeout) {
-        var globalSearch = SharedStateService.getSharedState('globalSearch');
+    ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
+      function ($scope, BillableService, CompaniesService, SharedStateService) {
 
-        var headerSharedState = SharedStateService.getSharedState('billableClientsHeader');
-
+        $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
 
@@ -31,17 +29,17 @@
 
           for (var companyId in $scope.billableData) {
 
-            var company = CompaniesService.getOneById(companyId);
-            $scope.totalbillables += $scope.billableData[companyId].totalSum || 0;
+            if (companyId !== 'staticCopy') {
+              var company = CompaniesService.getOneById(companyId);
+              $scope.totalbillables += $scope.billableData[companyId].totalSum || 0;
 
-            companies.push(company);
+              companies.push(company);
+            }
           }
-
-          headerSharedState.companies = companies;
 
           for (var companyId in $scope.ticketsSelection) {
 
-            if(!$scope.billableData[companyId]){
+            if (!$scope.billableData[companyId]) {
               delete $scope.ticketsSelection[companyId];
               continue;
             }
@@ -65,12 +63,6 @@
 
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
-          if (globalSearch.billableByCompanyFilter) {
-            $timeout(function () {
-              $scope.$broadcast(globalSearch.billableByCompanyFilter + '-showCompany');
-              globalSearch.billableByCompanyFilter = undefined;
-            });
-          }
         };
 
         $scope.billableChartData = BillableService.getBillableChartData($scope, function () {
@@ -154,10 +146,6 @@
             }
           }
         }, true);
-
-        $scope.$on('$destroy', function () {
-          SharedStateService.clearState('billableClientsHeader');
-        });
 
       }]);
 

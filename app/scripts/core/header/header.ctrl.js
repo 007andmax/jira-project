@@ -10,6 +10,7 @@
                 $stateParams, $rootScope, TicketsPermissionsService) {
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
+        $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.goBack = {};
@@ -21,16 +22,6 @@
             });
           }
         });
-
-        $scope.$watch('globalSearch.isGlobalSearchOn', function (newValue) {
-          if (newValue === false) {
-            SharedStateService.clearAllExceptGlobalSearch();
-          }
-        });
-
-        $scope.changeSearchStatus = function () {
-          $scope.globalSearch.isGlobalSearchOn = !$scope.globalSearch.isGlobalSearchOn;
-        };
 
         $scope.userReadable = function (text) {
           var words = text.split(/[-_]/),
@@ -67,7 +58,7 @@
           $scope.currentUser = UsersService.getCurrentUser();
         });
 
-        $scope.getTemplateNameByState = function () {
+        $scope.getPageNameByState = function () {
           $scope.goBack.isEnabled = false;
           if ($state.includes("tickets")) {
             if ($scope.globalSearch.selectedItemsCount) {
@@ -129,12 +120,14 @@
           $scope.listType = value;
           if (value) {
             $scope.ticketsSharedState = SharedStateService.getSharedState('ticketsHeader');
+          } else {
+            $scope.ticketsSharedState = undefined;
           }
         });
 
-        $scope.$watch('ticketsSharedState.checkedTicketsIds', function (data) {
-          $scope.isShowBulkAction = data && data.length > 0;
-        });
+        $scope.isShowBulkAction = function () {
+          return $scope.ticketsSharedState && $scope.ticketsSharedState.checkedTicketsIds.length;
+        };
 
       }]);
 

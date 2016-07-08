@@ -101,7 +101,7 @@
   </div>
 
   <div class="company-card clearfix" ui-sref="companyProfile({companyId: company.id})"
-       ng-repeat="company in companies | filter : companiesFilter | orderBy: 'name' track by company.id"
+       ng-repeat="company in companies | orderBy: 'name' track by company.id"
        ng-controller="quicktech.core.companies.companyCtrl"
        ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
 

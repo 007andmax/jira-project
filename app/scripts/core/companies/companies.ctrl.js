@@ -7,7 +7,6 @@
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, DevicesService, PermissionsService) {
 
-        var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.PermissionsService = PermissionsService;
@@ -68,13 +67,6 @@
         //
 
 
-        $scope.companiesFilter = function (value) {
-          if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
-            return value.name.toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
-          }
-          return true;
-        };
-
         //
         //$scope.getUserName = function (user) {
         //  return user.firstName + ' ' + user.lastName;
@@ -83,10 +75,6 @@
         //$scope.setEditUserId = function (userId) {
         //  $scope.editUserId = userId;
         //};
-
-        $scope.$on('$destroy', function () {
-          SharedStateService.clearState('companiesHeader');
-        });
 
         //$scope.changeUserRole = function (userId, userRole) {
         //  UsersService.changeUserRole(userId, userRole);

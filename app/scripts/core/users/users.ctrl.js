@@ -16,8 +16,8 @@
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
 
-        $scope.$watch('users.length', function (usersCount) {
-          globalSearch.counts['quantity'] = { count: usersCount - 1};
+        $scope.$watch('shownUsers.length', function (usersCount) {
+          globalSearch.counts['quantity'] = { count: usersCount };
         });
 
         $scope.getUserCompanyName = function (user) {
@@ -26,17 +26,15 @@
 
         $scope.usersFilter = function (value) {
           if (value.isDefault) {
-            return false
+            return false;
           }
 
-          if (headerSharedState.filter.companyId && headerSharedState.filter.companyId.length > 0) {
+          if (headerSharedState.filter.userId) {
+            return headerSharedState.filter.userId === value.id;
+          }
+
+          if (headerSharedState.filter.companyId) {
             return headerSharedState.filter.companyId === value.company.id;
-          }
-
-          if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
-            var email = (value.primaryEmail && value.primaryEmail.length) > 0 ? value.primaryEmail : '';
-            var searchText = (value.firstName + ' ' + value.lastName + ' ' + email).toLowerCase();
-            return searchText.indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
           }
           return true;
         };

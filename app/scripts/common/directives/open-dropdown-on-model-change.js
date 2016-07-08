@@ -13,7 +13,7 @@
           scope.$watch(function () {
             return input.val();
           }, function (value) {
-            if (value) {
+            if (value && !scope.preventDropDownOpening) {
               if (initialized && !element.hasClass('open')) {
                 element.addClass('open');
               } else {

@@ -7,21 +7,47 @@
          focused-class="focused" refresh-on="refreshNavigationDirective">
 
       <input type="text" class="form-control-top-search" placeholder="Global search..."
-             ng-model="searchValue" ng-model-options="{debounce: 250}" data-toggle="dropdown">
+             ng-model="globalSearch.searchValue" ng-model-options="{debounce: 250}" data-toggle="dropdown">
 
-      <ul class="dropdown-menu custom-scroll" ng-show="resultCount && !filterResultCount">
+      <ul class="dropdown-menu custom-scroll" adjust-height="adjustGlobalDropDownHeight" max-height="300"
+          ng-show="resultCount && !filterResultCount">
+        <li class="local-search-header expandable" ng-if="localSearchResult.length"
+            ng-class="{'expanded': categoryExpanded[$index]}"
+            ng-init="categoryExpanded[undefined] = localSearchResult.length <= 5">
+
+          <div class="content" ng-click="expandCategory(undefined, !categoryExpanded[undefined], $event)">
+            <span>
+              Filter&nbsp;
+              {{ getPageNameByState() === 'tickets' ? getTicketsListName() + ' ' + getPageNameByState() : getPageNameByState().replace('-', ' ') }}
+              &nbsp;by
+            </span>
+            <i class="icn-sm icn-caret-gray pull-right"
+               ng-class="{'rotate': categoryExpanded[undefined]}"></i>
+          </div>
+
+          <div class="local-search-result focusable"
+               ng-repeat="item in localSearchResult | orderBy: ['itemType', 'label']" ng-click="select(item)">
+            <span>{{ item.label }}</span>
+            <span class="text-muted"> {{ item.itemType.toLowerCase() }}</span>
+          </div>
+        </li>
+
         <li class="category expandable" ng-repeat="items in searchResult"
             ng-class="{'expanded': categoryExpanded[$index]}"
-            ng-click="expandCategory($index, !categoryExpanded[$index], $event)"
-            ng-init="categoryExpanded[$index] = items.list.length <= 10">
+            ng-init="categoryExpanded[$index] = searchResult.length === 1">
 
-          <div class="category-name">{{ userReadable(items.type) }} ({{ items.list.length }})</div>
-          <i class="icn-sm icn-caret-gray"
-             ng-class="{'rotate': categoryExpanded[$index]}"></i>
+          <div ng-click="expandCategory($index, !categoryExpanded[$index], $event)" style="cursor: pointer;">
+            <div class="category-name">
+              <i class="icn-lg {{ 'icn-gs-' + items.type.replace('_', '-').toLowerCase() }}"></i>
+              {{ userReadable(items.type) }} ({{ items.list.length }})
+            </div>
+            <i class="icn-sm icn-caret-gray"
+               ng-class="{'rotate': categoryExpanded[$index]}"></i>
+          </div>
 
           <div ng-repeat="item in items.list track by item.id" class="item focusable" ng-click="select(item)">
             <div class="item-name">
-              <span highlight-text="{{ item.name }}" substring="{{ searchValue }}"></span>
+              <span highlight-text="{{ item.name }}" substring="{{ globalSearch.searchValue }}"></span>
               <div style="display: inline-block;" ng-if="items.type === 'COMPANIES'" ng-click="filterByType(item, $event)"
                    tooltip="Filter by {{ item.name }} {{ ::getType(item.type) }}"  tooltip-append-to-body="true">
                 <i class="icn-sm icn-ticket-filter" style="display: inline-block;"></i>
@@ -51,7 +77,8 @@
         </li>
       </ul>
 
-      <ul class="dropdown-menu filter-by-type" ng-if="filterResultCount">
+      <ul class="dropdown-menu filter-by-type" ng-if="filterResultCount"
+          adjust-height="adjustFilterDropDownHeight" max-height="300">
         <li class="list-head">
           <div class="filter-header">
             <div class="pull-left" ng-click="closeFilters($event)">
@@ -66,16 +93,17 @@
             <div class="apply-filter">Apply filter:</div>
           </div>
         </li>
-        <li class="filter" ng-repeat="filter in filterResult" ng-click="select(filter)">
+        <li class="filter" ng-repeat="filter in filterResult" ng-click="select(filter)"
+            on-finish-render="dropDownRendered('adjustFilterDropDownHeight')">
           <div>{{ userReadable(filter.type) }} ({{ filter.count }})</div>
         </li>
       </ul>
 
       <span class="input-group-addon-search">
-        <i class="icn-sm icn-search form-control-top-search-icn disabled" ng-show="!searchValue"></i>
+        <i class="icn-sm icn-search form-control-top-search-icn disabled" ng-show="!globalSearch.searchValue"></i>
 
         <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
-           ng-show="searchValue" ng-click="searchValue = ''"
+           ng-show="globalSearch.searchValue" ng-click="globalSearch.searchValue = ''"
            tooltip="clear" tooltip-placement="top"></i>
       </span>
 

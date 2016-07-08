@@ -14,7 +14,11 @@
           width: '100%',
           height: '100%',
           display: 'inline-block'
-        })
+        });
+
+        $scope.$on('loadingFinished', function () {
+          $scope.loadingTrigger = false;
+        });
       }
     }
   });

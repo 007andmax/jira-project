@@ -9,49 +9,50 @@
 
       var defaultStates = {
         globalSearch: {
-          isGlobalSearchOn: true,
           counts: []
         },
         ticketsHeader: {
           searchFilter: {},
+          checkedTicketsIds: [],
           count: 0
         },
         usersHeader: {
-          count: 0,
-          filter: {
-            keyword: '',
-            company: {}
-          }
-        },
-        companiesHeader: {
-          count: 0,
-          filter: {keyword: ''}
-        },
-        billableClientsHeader: {
-          companies: []
-        },
-        receivableHeader: {
-          companies: [],
           filter: {
             companyId: ''
           }
         },
-        receiptArchiveInvoicesHeader: {
-          invoices: [],
-          companies: [],
+        billableHeader: {
+          filter: {
+            companyId: ''
+          }
+        },
+        recurringHeader: {
+          filter: {
+            companyId: ''
+          }
+        },
+        receivableHeader: {
+          filter: {
+            companyId: ''
+          }
+        },
+        receiptArchiveHeader: {
           filter: {
             companyId: ''
           }
         },
         vendorsHeader: {
-          count: 0,
-          filter: {keyword: ''}
+          filter: {
+            vendorId: ''
+          }
+        },
+        servicesHeader: {
+          filter: {
+            companyId: ''
+          }
         },
         rightPanel: {
           companyId: undefined
-        },
-        devicesHeader: {
-          checkedDevicesId: []
         },
         quickSession: {
           showAllSession: true,

@@ -61,15 +61,17 @@
             switch (action) {
               case 'user_spam':
                 return $rootScope.currentUser.role === USER_ROLES.USER && ticket.reportedAsSpamAt;
-              case 'admin_spam':
-                return $rootScope.currentUser.role !== USER_ROLES.USER && ticket.markedAsSpamAt;
               case 'admin_delete':
+                return $rootScope.currentUser.role !== USER_ROLES.USER && ticket.markedAsSpamAt;
+              case 'admin_spam':
                 return $rootScope.currentUser.role !== USER_ROLES.USER && !ticket.markedAsSpamAt && ticket.reportedAsSpamAt;
               default:
                 return ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
             }
           } else if (option === 'from_trash') {
             return ticket.trash;
+          } else {
+            return true;
           }
         },
         'DELETE_FOREVER': function (ticket) {
@@ -120,16 +122,14 @@
         'UPDATE': isUpdateVisible,
         'UPDATE_AND_CLOSE': isForCurrentUser,
         'DELETE_UPDATE': function (ticket, updateCreator) {
-          var user = $rootScope.currentUser;
-
           if (!isUpdateVisible(ticket)) {
             return false;
           }
 
-          return user.role !== USER_ROLES.USER || updateCreator.id === user.id;
+          return $rootScope.currentUser.role !== USER_ROLES.USER || updateCreator.id === user.id;
         },
         'EDIT_UPDATE': function (ticket) {
-          return isUpdateVisible(ticket) && $rootScope.user.role !== USER_ROLES.USER;
+          return isUpdateVisible(ticket) && $rootScope.currentUser.role !== USER_ROLES.USER;
         },
         'ADD_EXPENSE': function (ticket) {
           return $rootScope.currentUser.role !== USER_ROLES.USER || isForCurrentUser(ticket);
@@ -169,13 +169,27 @@
       }
 
       return {
-        isActionVisible: function (actions, ticket, option, additionalAction) {
-          var arrActions = actions.split(',');
+        isActionVisible: function (actions, tickets, option, additionalAction) {
+          var arrActions = actions.split(','),
+            result;
 
           for (var i = 0; i < arrActions.length; i++) {
-            var action = arrActions[i];
+            var action = arrActions[i].toUpperCase();
 
-            if (ACTIONS[action.toUpperCase()](ticket, option, additionalAction)) {
+            if (Array.isArray(tickets)) {
+              result = true;
+              for (var j = 0; j < tickets.length; j++) {
+                if (!ACTIONS[action](tickets[j], option, additionalAction)) {
+                  result = false;
+                  break;
+                }
+              }
+
+              if (result) {
+                return true;
+              }
+
+            } else if (ACTIONS[action](tickets, option, additionalAction)) {
               return true;
             }
           }

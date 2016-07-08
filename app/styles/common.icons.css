@@ -168,7 +168,7 @@ a.ha-24{
   background-position: -205px 0;
 }
 
-.icn-user-lg{
+.icn-user-lg, .icn-gs-tech-users {
   background-position: -3159px 0;
 }
 :hover > .icn-user-lg, :active > .icn-user-lg, :focus:hover > .icn-user-lg, :focus:active > .icn-user-lg, :hover:active > .icn-user-lg, .active .icn-user-lg, .open .icn-user-lg, .open > .btn:hover .icn-user-lg {
@@ -650,6 +650,10 @@ li:hover > a > .icn-unassigned, li.active > a > .icn-unassigned {
   background-position: -1025px -100px;
 }
 
+.icn-gs-tickets {
+  background-position: -1052px -128px;
+}
+
 .icn-tickets {
   background-position: -1052px -100px;
 }
@@ -750,6 +754,10 @@ li:hover > a > .icn-receipt-archive, li.active > a > .icn-receipt-archive {
   background-position: -2983px -206px;
 }
 
+.icn-gs-vendors {
+  background-position: -3011px -236px;
+}
+
 .icn-vendors {
   background-position: -3011px -206px;
   height: 16px;
@@ -758,11 +766,19 @@ li:hover > a > .icn-vendors, li.active > a > .icn-vendors {
   background-position: -3041px -206px;
 }
 
+.icn-gs-products {
+  background-position: -3071px -236px;
+}
+
 .icn-products {
   background-position: -3071px -206px;
 }
 li:hover > a > .icn-products, li.active > a > .icn-products {
   background-position: -3101px -206px;
+}
+
+.icn-gs-services {
+  background-position: -3131px -236px;
 }
 
 .icn-services {
@@ -864,7 +880,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
                                     background-position: -2871px 0;
                                   }
 
-.icn-tab-companies {
+.icn-tab-companies, .icn-gs-companies {
   background-position: -2967px 0;
 }
 /*li:hover .icn-tab-companies,*/ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .icn-tab-companies {
@@ -878,14 +894,14 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
                                       background-position: -2999px 0;
                                     }
 
-.icn-tab-devices {
+.icn-tab-devices, .icn-gs-devices {
   background-position: -3095px 0;
 }
 /*li:hover .icn-tab-devices,*/ a:hover > .icn-tab-devices, a:active > .icn-tab-devices, li.active > a > .icn-tab-devices, .icn-tab-devices.active {
                                  background-position: -3063px 0;
                                }
 
-.icn-tab-users {
+.icn-tab-users, .icn-gs-users {
   background-position: -3223px 0;
 }
 /*li:hover .icn-tab-users,*/ a:hover > .icn-tab-users, a:active > .icn-tab-users, li.active > a > .icn-tab-users {

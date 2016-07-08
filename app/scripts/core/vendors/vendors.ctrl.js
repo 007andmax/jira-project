@@ -14,13 +14,17 @@
         $scope.vendors = VendorsService.getAll($scope);
         $scope.user = UsersService.getCurrentUser();
 
-        $scope.$watch('vendors.length', function (vendorsCount) {
+        $scope.$watch('shownVendors.length', function (vendorsCount) {
           globalSearch.counts['quantity'] = { count: vendorsCount };
         });
 
         $scope.vendorsFilter = function (value) {
-          if (headerSharedState.filter.keyword && headerSharedState.filter.keyword.length > 0) {
-            return value.name.toLowerCase().indexOf(headerSharedState.filter.keyword.toLowerCase()) > -1;
+          if (headerSharedState.filter.vendorId) {
+            return headerSharedState.filter.vendorId === value.id;
+          }
+
+          if (headerSharedState.filter.companyId) {
+            return headerSharedState.filter.companyId === value.company.id;
           }
           return true;
         };
