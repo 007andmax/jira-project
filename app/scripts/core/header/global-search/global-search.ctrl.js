@@ -141,7 +141,6 @@
         function selectItem(item) {
           if (item.type) {
             getFuncByItemType(item.type)(item.id, item.name, item.extraInfo);
-            $scope.globalSearch.searchValue = item.name;
             preventSearch = true;
           } else {
             $scope.localSearchResultHandler(item);
@@ -167,10 +166,12 @@
               };
             case 'USERS':
               return function (id, name) {
-                $scope.sharedState = SharedStateService.getSharedState('usersHeader');
-                $scope.sharedState.filter.userId = id;
-                $scope.clearLocalFilter = clearLocalFilter;
-                $state.go('users');
+                $state.go('users').then(function () {
+                  $scope.sharedState = SharedStateService.getSharedState('usersHeader');
+                  $scope.sharedState.filter.userId = id;
+                  $scope.globalSearch.searchValue = name;
+                  $scope.clearLocalFilter = clearLocalFilter;
+                });
               };
             case 'TECH_USERS':
               return function (id) {
@@ -179,16 +180,19 @@
               };
             case 'VENDORS':
               return function (id, name) {
-                $scope.sharedState = SharedStateService.getSharedState('vendorsHeader');
-                $scope.sharedState.filter.vendorId = id;
-                $scope.clearLocalFilter = clearLocalFilter;
-                $state.go('vendors');
+                $state.go('vendors').then(function () {
+                  $scope.sharedState = SharedStateService.getSharedState('vendorsHeader');
+                  $scope.sharedState.filter.vendorId = id;
+                  $scope.globalSearch.searchValue = name;
+                  $scope.clearLocalFilter = clearLocalFilter;
+                });
               };
             case 'DEVICES':
               return function (id, name, companyId) {
                 $state.go('companyProfile', { companyId: companyId }).then(function () {
-                  $scope.globalSearch.deviceFilter = id;
-                  $state.go('companyProfile.tab', { tabName: 'devices' });
+                  $state.go('companyProfile.tab', { tabName: 'devices' }).then(function () {
+                    $scope.globalSearch.deviceFilter = id;
+                  });
                 });
               };
             case 'PRODUCTS':
@@ -196,8 +200,9 @@
                 if ($state.includes('products', { tabName: 'category' }) || $state.includes('products', { tabName: 'list' })) {
                   $rootScope.$broadcast(categoryId + '-showProduct', id);
                 } else {
-                  $scope.globalSearch.productFilter = { id: id, category: categoryId };
-                  $state.go('products', { tabName: 'category' });
+                  $state.go('products', { tabName: 'category' }).then(function () {
+                    $scope.globalSearch.productFilter = { id: id, category: categoryId };
+                  });
                 }
               };
             case 'SERVICES':
@@ -205,8 +210,9 @@
                 if ($state.includes('services')) {
                   $rootScope.$broadcast(companyId + '-showService', id);
                 } else {
-                  $scope.globalSearch.serviceFilter = { id: id, name: name, company: companyId };
-                  $state.go('services');
+                  $state.go('services').then(function () {
+                    $scope.globalSearch.serviceFilter = { id: id, name: name, company: companyId };
+                  });
                 }
               };
             default:
