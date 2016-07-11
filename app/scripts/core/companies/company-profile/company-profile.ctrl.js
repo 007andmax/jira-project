@@ -231,8 +231,6 @@
 
         };
 
-        $state.go('companyProfile.tab', { tabName: $stateParams.tabName || 'users' });
-
       }]);
 
 }());

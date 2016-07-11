@@ -189,10 +189,8 @@
               };
             case 'DEVICES':
               return function (id, name, companyId) {
-                $state.go('companyProfile', { companyId: companyId }).then(function () {
-                  $state.go('companyProfile.tab', { tabName: 'devices' }).then(function () {
-                    $scope.globalSearch.deviceFilter = id;
-                  });
+                $state.go('companyProfile', { companyId: companyId, tabName: 'devices' }).then(function () {
+                  $scope.globalSearch.deviceFilter = id;
                 });
               };
             case 'PRODUCTS':

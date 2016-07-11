@@ -171,7 +171,7 @@ a.ha-24{
 .icn-user-lg, .icn-gs-tech-users {
   background-position: -3159px 0;
 }
-:hover > .icn-user-lg, :active > .icn-user-lg, :focus:hover > .icn-user-lg, :focus:active > .icn-user-lg, :hover:active > .icn-user-lg, .active .icn-user-lg, .open .icn-user-lg, .open > .btn:hover .icn-user-lg {
+:hover > .icn-user-lg, .active .icn-user-lg {
   background-position: -3159px -33px;
 }
 .icn-url{

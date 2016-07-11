@@ -1,7 +1,8 @@
 <div ng-controller="quicktech.core.companies.companyProfileTabsCtrl">
 
   <div class="tabs-container">
-    <div class="payment-receive-fixed" ng-style="{'margin-top': isCollapsed ? '433px' : '1511px'}" fixed-block-top>
+    <div class="payment-receive-fixed" fixed-block-top
+         ng-style="{'margin-top': isCollapsed ? (currentUser.role !== 'USER' ? '433px' : '340px') : '1511px'}">
       <ul class="nav nav-qt clearfix" style="padding-top: 0; margin-left: 30px;"
           ng-class="{'root-user-company-prof': isChartsAccess()}" company-bulk-option>
 
@@ -14,35 +15,35 @@
         <!--</div>-->
         <!--</li>-->
 
-        <li ng-class="{'active': currentOpenTab === 'users'}">
-          <a ui-sref="companyProfile.tab({ tabName: 'users' })">
+        <li ng-class="{'active': currentOpenTab === 'users'}" style="cursor: pointer;">
+          <a ng-click="currentOpenTab = 'users'">
             Users
             <span class="text-muted">{{ users.length }}</span>
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'devices', 'hide': !isHasDevices}">
-          <a ui-sref="companyProfile.tab({ tabName: 'devices' })">
+        <li ng-class="{'active': currentOpenTab === 'devices', 'hide': !isHasDevices}" style="cursor: pointer;">
+          <a ng-click="currentOpenTab = 'devices'">
             Devices
             <span class="text-muted">{{ agents.length }}</span>
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'agents', 'hide': !isHasDevices}">
-          <a ui-sref="companyProfile.tab({ tabName: 'agents' })">
+        <li ng-class="{'active': currentOpenTab === 'agents', 'hide': !isHasDevices}" style="cursor: pointer;">
+          <a ng-click="currentOpenTab = 'agents'">
             Agents
             <span class="text-muted">{{ agents.length }}</span>
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'network-scan', 'hide': !isHasDevices}">
-          <a ui-sref="companyProfile.tab({ tabName: 'network-scan' })">
+        <li ng-class="{'active': currentOpenTab === 'network-scan', 'hide': !isHasDevices}" style="cursor: pointer;">
+          <a ng-click="currentOpenTab = 'network-scan'">
             Network Scan
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'settings'}">
-          <a ui-sref="companyProfile.tab({ tabName: 'settings' })">
+        <li ng-class="{'active': currentOpenTab === 'settings'}" style="cursor: pointer;">
+          <a ng-click="currentOpenTab = 'settings'">
             Settings
           </a>
         </li>
@@ -176,8 +177,7 @@
     </div>
   </div>
 
-  <div class="tab-content clearfix" ui-view></div>
-  <!--<div class="tab-content clearfix"-->
-       <!--ng-include="'/html/scripts/core/companies/company-profile/tabs/' + tabPath"></div>-->
+  <div class="tab-content clearfix"
+       ng-include="'/html/scripts/core/companies/company-profile/tabs/'  + currentOpenTab + '-tab/' + currentOpenTab + '-tab.tpl.html'"></div>
 
 </div>

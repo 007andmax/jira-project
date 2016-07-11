@@ -78,17 +78,8 @@
         controller: 'quicktech.core.companies.editCompanyCtrl'
       }))
       .state('companyProfile', waitForServices({
-        url: '/clients/companyProfile/:companyId',
+        url: '/clients/companyProfile/:companyId/:tabName',
         templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
-        controller: 'quicktech.core.companies.companyProfileCtrl'
-      }))
-      //todo: remove this state; make it like on products page
-      .state('companyProfile.tab', waitForServices({
-        url: '/:tabName',
-        templateUrl: function (params) {
-          var path = params.tabName.toLowerCase() + '-tab';
-          return '/html/scripts/core/companies/company-profile/tabs/' + path + '/' + path + '.tpl.html';
-        },
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
       .state('products', waitForServices({

@@ -15,7 +15,7 @@
         $scope.selectDevices = {};
         $scope.isCollapsedGraph = true;
         $scope.isScanDevicesLoad = false; // change in services
-        $scope.currentOpenTab = tabs[0];
+        $scope.currentOpenTab = tabs.indexOf($stateParams.tabName) > -1 ? $stateParams.tabName : tabs[0];
         $scope.orderScanBy = 'hostName';
         $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
@@ -81,7 +81,7 @@
           } else {
             $scope.isHasDevices = false;
             if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings') {
-              $state.go('companyProfile.tab', { tabName: 'users' });
+              $state.go('companyProfile', { companyId: $stateParams.companyId, tabName: 'users' });
             }
 
           }

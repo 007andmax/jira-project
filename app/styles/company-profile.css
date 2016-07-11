@@ -121,7 +121,7 @@
 .company-profile-content .bulk-option {
   /*position: absolute;*/
   /*right: -35px;*/
-  
+
   /*top: 50px;*/
   margin-right: 50px;
   padding: 15px 0;
@@ -164,6 +164,6 @@
 }
 .for-network-tab{
   width: 7%;
-  margin-top: -50px;
+  margin-top: -35px;
   margin-right: 11px;
 }

@@ -1,5 +1,6 @@
 <div class="tab-pane active">
-  <div class="device-settings-tab clearfix"
+  <div class="device-settings-tab clearfix" style="display: inline-block"
+       ng-style="{'margin-top': currentUser.role !== 'USER' ? '40px' : '80px'}"
        ng-controller="quicktech.core.devices.settingsTabCtrl">
     <h3 class="devices-settings-title">Agent Deployment Settings</h3>
     <ul class="deployment-settings clearfix" ng-form="agentDeploymentSettingsFrom">

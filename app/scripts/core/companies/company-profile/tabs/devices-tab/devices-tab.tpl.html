@@ -1,6 +1,7 @@
 <div role="tabpanel" class="tab-pane" style="display: block;">
 
-  <ul class="qt-list qt-devices" style="margin-bottom: 150px">
+  <ul class="qt-list qt-devices" style="margin-bottom: 150px"
+      ng-style="{'margin-top': currentUser.role !== 'USER' ? '0px' : '34px'}">
 
     <li class="list-heading" fixed-block-top offset-top="148">
       <div class="col-1" ng-click="sortDevicesTab('hostName')">
