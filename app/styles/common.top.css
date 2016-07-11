@@ -33,7 +33,7 @@
 .global-search .filter-by-type.dropdown-menu {
   width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 400px;
   overflow: auto;
   padding: 5px 0;
 }
@@ -417,7 +417,6 @@
   padding: 10px;
 }
 .head-list{
-  font-weight: 600;
   font-size: larger;
   padding: 0 10px;
   line-height: 2.6em;
