@@ -647,6 +647,11 @@
         });
       }
 
+      function devicePasswordShown(credentialId, callback) {
+        var future = $http.get('/devices/getPassword?credentialAgentId=' + credentialId);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         runScanDevices: runScanDevices,
@@ -670,6 +675,7 @@
         subscribeToRemoteConnection: subscribeToRemoteConnection,
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
+        devicePasswordShown: devicePasswordShown,
         _addInitListener: _addInitListener
       }
     }
