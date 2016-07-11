@@ -203,7 +203,7 @@
               class="{{ attachmentImageClass[attachment.file.contentType] }}" append-html-to-body
               url="/html/scripts/core/tickets/image-preview.tpl.html"
               data="attachment.file" func="downloadAttachment"
-              first-node-class="image-preview-tpl" work-if="{{ !!attachmentType['image/' + type] }}">
+              first-node-class="image-preview-tpl" disable-if="{{ !attachmentType['image/' + type] }}">
 
             <div class="file-icon-name">
               <span class="file-icon icn-lg"></span>
@@ -324,7 +324,7 @@
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
                     ng-repeat="attachment in ticketUpdate.attachments" append-html-to-body
-                    url="/html/scripts/core/tickets/image-preview.tpl.html" work-if="{{ !!attachmentType['image/' + type] }}"
+                    url="/html/scripts/core/tickets/image-preview.tpl.html" disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
 
                   <div class="file-icon-name">

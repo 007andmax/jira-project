@@ -14,16 +14,20 @@
           companies: true
         };
         $scope.checkedServices = {};
+        $scope.loadingFinished = loadingFinished;
+
         $scope.companies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (!item.isDefault) return item;
+          if (!item.isDefault) {
+            return item;
+          }
         });
 
         if ($scope.companies && !$scope.companies.length) {
-          $scope.loadingFinished('companies');
+          loadingFinished('companies');
         }
 
         $scope.servicesData = ServicesService.getServicesData($scope, false, function (data) {
-          $scope.loadingFinished('default');
+          loadingFinished('default');
         });
 
         $scope.orderServices = {
@@ -95,7 +99,7 @@
 
         };
 
-        $scope.loadingFinished = function (list) {
+        function loadingFinished(list) {
           $scope.loadingInProgress[list] = false;
           if (!$scope.loadingInProgress.default && !$scope.loadingInProgress.companies) {
             $scope.loadingInProgress.all = false;

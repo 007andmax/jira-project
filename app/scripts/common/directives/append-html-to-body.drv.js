@@ -47,7 +47,7 @@
           });
 
           function showPreview() {
-            if ($scope.$eval($attrs.workIf)) {
+            if (!$scope.$eval($attrs.disableIf)) {
               if (template) {
                 newScope = $scope.$new();
                 $location.search('modal', 'true');

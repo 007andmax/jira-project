@@ -19,6 +19,7 @@
 
             scope.PermissionsService = PermissionsService;
             scope.filteredProducts = {};
+            scope.categoryExpanded = {};
 
             productInput.click(showDropdown);
 
@@ -53,6 +54,14 @@
                 }
               }
             };
+
+            scope.$watch('categoryExpanded', function () {
+              if (dropdown) {
+                $timeout(function () {
+                  dropdown.nanoScroller();
+                });
+              }
+            }, true);
 
             scope.$watch('searchProduct', function (val) {
               scope.isCanCreateProduct = val && val.length > 0;

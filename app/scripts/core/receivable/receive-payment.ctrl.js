@@ -10,7 +10,8 @@
 
         $scope.invoiceToReceive = {
           invoices: {},
-          method: 'CHEQUE'
+          method: 'CHEQUE',
+          isSendNotification: true
         };
         $scope.receivePaymentInvoices = [];
 
