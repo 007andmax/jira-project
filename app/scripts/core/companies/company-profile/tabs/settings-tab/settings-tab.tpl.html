@@ -210,7 +210,7 @@
               {{ userReadable(credential.id) || 'Assign' }}
             </div>
             <span class="device-settings-actions" stop-propagation="click">
-              <span ng-click="passwordShown[$index] = !passwordShown[$index]">
+              <span ng-click="showPassword(passwordShown, $index, credential.id)">
                 <i class="icn-sm {{ passwordShown[$index] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
               </span>
               <span ng-click="removeCredential(credential.id)">

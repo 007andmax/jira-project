@@ -164,7 +164,7 @@
             }
 
             if (!selectedUser) {
-              UsersService.isEmailUnique(val, '', function (resp) {
+              UsersService.isEmailUnique(val, '', false, function (resp) {
                 if (resp.value) {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
                   var firstName = val.split('@')[0];

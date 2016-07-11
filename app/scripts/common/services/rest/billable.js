@@ -10,8 +10,9 @@
     function ($http, $rootScope, RealTimeService, Utils) {
 
       function recalculateTotalSumForCompany(company) {
+        company.totalSum = 0;
         for (var i = 0; i < company.tickets.length; i++) {
-          company.totalSum = company.totalSum + company.tickets[i].sum;
+          company.totalSum += company.tickets[i].sum;
         }
       }
 
@@ -21,11 +22,10 @@
             continue;
           }
 
+          info[key].totalSum = 0;
+
           for (var i = 0; i < info[key].tickets.length; i++) {
-
-            if (!info[key].totalSum) info[key].totalSum = 0;
-
-            info[key].totalSum = info[key].totalSum + info[key].tickets[i].sum;
+            info[key].totalSum += info[key].tickets[i].sum;
           }
         }
       }

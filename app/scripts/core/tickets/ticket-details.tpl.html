@@ -200,7 +200,10 @@
 
           <li ng-repeat="attachment in ticketDetails.attachments"
               ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-              class="{{ attachmentImageClass[attachment.file.contentType] }}">
+              class="{{ attachmentImageClass[attachment.file.contentType] }}" append-html-to-body
+              url="/html/scripts/core/tickets/image-preview.tpl.html"
+              data="attachment.file" func="downloadAttachment"
+              first-node-class="image-preview-tpl" work-if="{{ !!attachmentType['image/' + type] }}">
 
             <div class="file-icon-name">
               <span class="file-icon icn-lg"></span>
@@ -219,12 +222,6 @@
                  tooltip="Download" tooltip-placement="bottom"
                  ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                 <span class="icn-sm icn-attachments-download"></span>
-              </a>
-              <a href="javascript:void(0)" class="tp-hide image-preview has-tooltip"
-                 tooltip="Preview" tooltip-placement="bottom" ng-if="attachmentType['image/' + type]"
-                 append-html-to-body url="/html/scripts/core/tickets/image-preview.tpl.html"
-                 data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
-                <span class="icn-sm icn-show-password"></span>
               </a>
             </div>
 
@@ -326,7 +323,9 @@
 
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
-                    ng-repeat="attachment in ticketUpdate.attachments">
+                    ng-repeat="attachment in ticketUpdate.attachments" append-html-to-body
+                    url="/html/scripts/core/tickets/image-preview.tpl.html" work-if="{{ !!attachmentType['image/' + type] }}"
+                    data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
 
                   <div class="file-icon-name">
                     <span class="file-icon icn-lg"></span>
@@ -344,12 +343,6 @@
                        data-placement="top" tooltip="Download"
                        ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                       <span class="icn-sm icn-attachments-download"></span>
-                    </a>
-                    <a href="javascript:void(0)" class="tp-hide image-preview has-tooltip"
-                       tooltip="Preview" tooltip-placement="bottom" ng-if="attachmentType['image/' + type]"
-                       append-html-to-body url="/html/scripts/core/tickets/image-preview.tpl.html"
-                       data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
-                      <span class="icn-sm icn-show-password"></span>
                     </a>
                   </div>
 

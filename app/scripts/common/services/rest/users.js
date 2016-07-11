@@ -387,7 +387,7 @@
         return info;
       }
 
-      function isEmailUnique(email, id, callback) {
+      function isEmailUnique(email, id, isTechUser, callback) {
 
         if (!email) {
           throw 'email is required!'
@@ -395,7 +395,7 @@
 
         var info = Utils.customizeObj({});
 
-        $http.get('/users/isEmailUnique?email=' + email + '&id=' + id).then(function (resp) {
+        $http.get('/users/isEmailUnique?email=' + email + '&id=' + id + '&isTechUser=' + isTechUser).then(function (resp) {
           Utils.customizeObj(resp.data, info);
 
           if (callback) {

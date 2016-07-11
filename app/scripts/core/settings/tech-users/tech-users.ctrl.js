@@ -40,7 +40,7 @@
         };
 
         $scope.validateUserEmail = function (ngModelCtrl) {
-          var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editUser.id || '', function () {
+          var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editUser.id || '', true, function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
         };

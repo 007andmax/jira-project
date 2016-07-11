@@ -651,6 +651,11 @@
         return storage.devices[id];
       }
 
+      function devicePasswordShown(credentialId, callback) {
+        var future = $http.get('/devices/getPassword?credentialAgentId=' + credentialId);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         runScanDevices: runScanDevices,
@@ -675,6 +680,7 @@
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
         getByCompanyId: getByCompanyId,
+        devicePasswordShown: devicePasswordShown,
         _addInitListener: _addInitListener
       }
     }

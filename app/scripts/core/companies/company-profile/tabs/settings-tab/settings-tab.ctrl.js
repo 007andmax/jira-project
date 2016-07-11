@@ -80,6 +80,18 @@
           return !$scope.updating && (!form[field] || (form[field].$dirty || $scope.triedToSave) && form[field].$invalid);
         };
 
+        $scope.showPassword = function (array, index, id) {
+          array[index] = !array[index];
+
+          if (array[index]) {
+            DevicesService.devicePasswordShown(id, function (resp) {
+              $scope.credentials[index].password = resp.password;
+            });
+          } else {
+            $scope.credentials[index].password = undefined;
+          }
+        };
+
         $scope.setDeviceType = function (typeIndex, disabled, event) {
           if (!disabled) {
             var type = $scope.credentialTypes[typeIndex];

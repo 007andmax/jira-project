@@ -12,7 +12,7 @@
           func: '=?',
           firstNodeClass: '@?'
         },
-        link: function ($scope, $element) {
+        link: function ($scope, $element, $attrs) {
           var template,
             templateContainer,
             waitForTplLoaded = false,
@@ -47,16 +47,18 @@
           });
 
           function showPreview() {
-            if (template) {
-              newScope = $scope.$new();
-              $location.search('modal', 'true');
-              $compile(template)(newScope, function (compiledHtml) {
-                templateContainer = $body.append(compiledHtml).find('.' + $scope.firstNodeClass);
-                $body.on('keydown', closeIfEscape);
-                $body.addClass('non-body-scroll');
-              });
-            } else {
-              waitForTplLoaded = true;
+            if ($scope.$eval($attrs.workIf)) {
+              if (template) {
+                newScope = $scope.$new();
+                $location.search('modal', 'true');
+                $compile(template)(newScope, function (compiledHtml) {
+                  templateContainer = $body.append(compiledHtml).find('.' + $scope.firstNodeClass);
+                  $body.on('keydown', closeIfEscape);
+                  $body.addClass('non-body-scroll');
+                });
+              } else {
+                waitForTplLoaded = true;
+              }
             }
           }
 
