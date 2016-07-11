@@ -4659,7 +4659,7 @@ tbody.collapse.in {
   display: none;
   float: left;
   min-width: 140px;
-  max-width: 382px;
+  /*max-width: 382px;*/
   padding: 10px 0;
   margin: 6px 0 0;
   list-style: none;
@@ -6520,7 +6520,7 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
   margin-top: 0;
 }
 .topNavbar-search  .input-group-search{
-  width: 315px;
+  width: 415px;
 }
 .input-group-search .form-control-top-search:first-child,
 .input-group-addon-search:first-child,
