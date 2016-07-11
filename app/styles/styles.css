@@ -1494,10 +1494,14 @@ mark,
   color: #94A4B8;
 }
 .topNavbar-search .text-muted{
-  width: 100%;
+  /*line-height: 2.5em;*/
   white-space: nowrap;
-  overflow: hidden;
+  /*overflow: hidden;*/
   text-overflow: ellipsis;
+  float: right;
+}
+.topNavbar-search .item-info{
+  float: none;
 }
 .text-primary {
   color: #e7ecf2;
@@ -9370,6 +9374,9 @@ button.close {
 }
 .pull-right {
   float: right !important;
+}
+.head-triangle{
+  margin-top: 5%; 
 }
 .pull-left {
   float: left !important;

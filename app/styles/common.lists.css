@@ -1572,7 +1572,9 @@ Devices tab
 }
 
 .category-name{
-  padding-top: 9px;
+  /*padding-top: 9px;*/
+  line-height: 2.6em;
+  padding: 0 10px;
 }
 .no-items{
   padding-top: 9px;
