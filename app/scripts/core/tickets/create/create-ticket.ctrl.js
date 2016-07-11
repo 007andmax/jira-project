@@ -273,12 +273,12 @@
               }
             }
 
-            if ($scope.ticket.isAssignToMe) {
-              $scope.ticket.assignedUser = $scope.currentUser.id;
-            }
-
             if (!$scope.ticket.ticketAssignTo) {
-              $scope.ticket.assignedUser = undefined;
+              if ($scope.ticket.isAssignToMe) {
+                $scope.ticket.assignedUser = $scope.currentUser.id;
+              } else {
+                $scope.ticket.assignedUser = undefined;
+              }
             } else {
               $scope.ticket.assignedUser = $scope.ticket.ticketAssignTo.id;
               $scope.ticket.ticketAssignTo = undefined;

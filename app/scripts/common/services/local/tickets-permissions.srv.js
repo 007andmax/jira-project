@@ -13,7 +13,7 @@
 
       var ACTIONS = {
         'CLAIM_TICKET': function (ticket) {
-          return isTicketOpen && !ticket.assignedUser;
+          return isTicketOpen(ticket) && !ticket.assignedUser;
         },
         'CHANGE_STATUS': isTicketOpenAndAssigned,
         'CHANGE_PRIORITY': isTicketOpen,
@@ -122,7 +122,7 @@
         'UPDATE': isUpdateAllowed,
         'UPDATE_AND_CLOSE': isUpdateAllowed,
         'DELETE_UPDATE': function (ticket, updateCreator) {
-          return isUpdateAllowed || updateCreator.id === $rootScope.currentUser.id;
+          return isUpdateAllowed(ticket) || updateCreator.id === $rootScope.currentUser.id;
         },
         'EDIT_UPDATE': isUpdateAllowed,
         'ADD_EXPENSE': isUpdateAllowed
