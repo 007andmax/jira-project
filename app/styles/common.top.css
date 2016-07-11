@@ -78,6 +78,9 @@
   padding:0 10px;
   cursor: pointer;
 }
+.local-search-header{
+  border-bottom: 2px solid rgba(0, 0, 0, 0.40);
+}
 
 .global-search .dropdown-menu .local-search-header .local-search-result {
   display: none;
