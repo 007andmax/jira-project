@@ -119,21 +119,13 @@
         'STATUS_VISIBLE': function (ticket) {
           return !isSpamOrTrash(ticket) && ticket.status;
         },
-        'UPDATE': isUpdateVisible,
-        'UPDATE_AND_CLOSE': isForCurrentUser,
+        'UPDATE': isUpdateAllowed,
+        'UPDATE_AND_CLOSE': isUpdateAllowed,
         'DELETE_UPDATE': function (ticket, updateCreator) {
-          if (!isUpdateVisible(ticket)) {
-            return false;
-          }
-
-          return $rootScope.currentUser.role !== USER_ROLES.USER || updateCreator.id === user.id;
+          return isUpdateAllowed || updateCreator.id === $rootScope.currentUser.id;
         },
-        'EDIT_UPDATE': function (ticket) {
-          return isUpdateVisible(ticket) && $rootScope.currentUser.role !== USER_ROLES.USER;
-        },
-        'ADD_EXPENSE': function (ticket) {
-          return $rootScope.currentUser.role !== USER_ROLES.USER || isForCurrentUser(ticket);
-        }
+        'EDIT_UPDATE': isUpdateAllowed,
+        'ADD_EXPENSE': isUpdateAllowed
       };
 
       function isTicketOpen(ticket) {
@@ -160,12 +152,9 @@
         return ticket.closedAt >= (now - thirtyDaysInMs);
       }
 
-      function isUpdateVisible(ticket) {
-        return isTicketOpenAndAssigned(ticket) && (ticket.assignedUser.id === $rootScope.currentUser.id || ticket.sharedToCurrentUserAt);
-      }
-
-      function isForCurrentUser(ticket) {
-        return isTicketOpenAndAssigned(ticket) && ticket.assignedUser.id === $rootScope.currentUser.id || ticket.sharedToCurrentUserAt;
+      function isUpdateAllowed(ticket) {
+        return isTicketOpenAndAssigned(ticket) && ($rootScope.currentUser.role !== USER_ROLES.USER ||
+          ticket.assignedUser.id === $rootScope.currentUser.id || ticket.sharedToCurrentUserAt);
       }
 
       return {
