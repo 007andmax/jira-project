@@ -16,34 +16,34 @@
         <!--</li>-->
 
         <li ng-class="{'active': currentOpenTab === 'users'}" style="cursor: pointer;">
-          <a ng-click="currentOpenTab = 'users'">
+          <a ui-sref="companyProfile({ tabName: 'users' })">
             Users
             <span class="text-muted">{{ users.length }}</span>
           </a>
         </li>
 
         <li ng-class="{'active': currentOpenTab === 'devices', 'hide': !isHasDevices}" style="cursor: pointer;">
-          <a ng-click="currentOpenTab = 'devices'">
+          <a ui-sref="companyProfile({ tabName: 'devices' })">
             Devices
             <span class="text-muted">{{ agents.length }}</span>
           </a>
         </li>
 
         <li ng-class="{'active': currentOpenTab === 'agents', 'hide': !isHasDevices}" style="cursor: pointer;">
-          <a ng-click="currentOpenTab = 'agents'">
+          <a ui-sref="companyProfile({ tabName: 'agents' })">
             Agents
             <span class="text-muted">{{ agents.length }}</span>
           </a>
         </li>
 
         <li ng-class="{'active': currentOpenTab === 'network-scan', 'hide': !isHasDevices}" style="cursor: pointer;">
-          <a ng-click="currentOpenTab = 'network-scan'">
+          <a ui-sref="companyProfile({ tabName: 'network-scan' })">
             Network Scan
           </a>
         </li>
 
         <li ng-class="{'active': currentOpenTab === 'settings'}" style="cursor: pointer;">
-          <a ng-click="currentOpenTab = 'settings'">
+          <a ui-sref="companyProfile({ tabName: 'settings' })">
             Settings
           </a>
         </li>

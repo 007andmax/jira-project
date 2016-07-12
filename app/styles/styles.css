@@ -5008,7 +5008,7 @@ tbody.collapse.in {
 }
 .dropdown-priority {
   min-width: 114px;
-  width: 100%;
+  /*width: 100%;*/
 }
 .dropdown-priority .active a,
 .dropdown-priority .active a:hover,
@@ -9376,7 +9376,7 @@ button.close {
   float: right !important;
 }
 .head-triangle{
-  margin-top: 5%; 
+  margin-top: 5%;
 }
 .pull-left {
   float: left !important;

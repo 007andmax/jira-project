@@ -7,7 +7,7 @@
 
         <label class="control checkbox pull-left" ng-show="users.length > 0">
           <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
-                 ng-checked="isSelectAllUsers" ng-click="selectAllUsers()">
+                 ng-model="selectedUsers['all']" ng-click="selectAllUsers(selectedUsers['all'])">
           <span class="control-indicator"></span>
         </label>
 

@@ -203,6 +203,9 @@
       }
 
       function getCurrentUser() {
+        if (!$rootScope.currentUser) {
+          return {};
+        }
         return getOneById($rootScope.currentUser.id);
       }
 

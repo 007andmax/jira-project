@@ -227,6 +227,10 @@
           };
 
           for (var userId in selectedUsers) {
+            if (userId === 'all') {
+              continue;
+            }
+
             if (selectedUsers[userId]) {
               selectUsersIds.push(userId);
 
@@ -247,18 +251,17 @@
             ticket: selectUsersSbscr.ticket === selectUsersIds.length
           };
 
-          $scope.isSelectAllUsers = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
+          $scope.selectedUsers['all'] = (selectUsersIds.length > 0) && (selectUsersIds.length === $scope.users.length);
           $scope.companyProfileHeader.selectUsersIds = selectUsersIds;
         };
 
-        $scope.selectAllUsers = function () {
-          $scope.isSelectAllUsers = !$scope.isSelectAllUsers;
+        $scope.selectAllUsers = function (isSelectAllUsers) {
 
           for (var i = 0, len = $scope.users.length; i < len; i++) {
-            $scope.selectedUsers[$scope.users[i].id] = $scope.isSelectAllUsers;
+            $scope.selectedUsers[$scope.users[i].id] = isSelectAllUsers;
           }
 
-          $scope.changeSelectedUsers();
+          $scope.changeSelectedUsers($scope.selectedUsers);
         };
 
         $scope.changeSelectDevices = function () {

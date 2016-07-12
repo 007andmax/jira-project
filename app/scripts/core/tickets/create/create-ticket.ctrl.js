@@ -281,7 +281,6 @@
               }
             } else {
               $scope.ticket.assignedUser = $scope.ticket.ticketAssignTo.id;
-              $scope.ticket.ticketAssignTo = undefined;
             }
 
             var ticketNumber = $scope.ticketNumber;

@@ -39,7 +39,7 @@
             } else {
               element.css({
                 'background-color': 'transparent',
-                'z-index': 1
+                'z-index': 'unset'
               });
             }
 
