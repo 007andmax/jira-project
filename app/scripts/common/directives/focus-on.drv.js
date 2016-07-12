@@ -6,11 +6,9 @@
     [function () {
       return {
         restrict: 'A',
-        scope: {
-          enabled: '=focusOn'
-        },
         link: function ($scope, element, attrs) {
-          if ($scope.enabled === undefined || $scope.enabled) {
+          var isEnabled = $scope.$eval(attrs.focusOn);
+          if (isEnabled === undefined || isEnabled) {
             element.focus();
           }
         }

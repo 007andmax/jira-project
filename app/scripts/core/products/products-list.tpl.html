@@ -54,6 +54,7 @@
         ng-class="{'qt-product-form': showEditProduct}"
         ng-controller="quicktech.core.products.productCtrl"
         show-model-element="{{ 'show-' + product.versionedId.id}}"
+        on-finish-render="loadingFinished()"
         ng-init="setHighlightCreatedProductId(product.versionedId.id)">
 
       <div class="intermediate-parent-elem" ng-if="!showEditProduct">
@@ -89,7 +90,8 @@
           </label>
         </div>
 
-        <div class="col-6 pull-right" ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'u d')">
+        <div class="col-6 pull-right" dropdown dropdown-append-to-body="true" keyboard-nav="true"
+             ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'u d')">
 
           <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
              ng-click="deleteProduct()"
@@ -104,7 +106,7 @@
           </a>
 
           <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
-             aria-expanded="false" data-toggle="dropdown"
+             aria-expanded="false" dropdown-toggle
              tooltip-placement="top" tooltip-append-to-body="true" tooltip="move to other category">
             <i class="icn-sm icn-send-again"></i>
           </a>

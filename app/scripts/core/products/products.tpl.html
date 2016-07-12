@@ -6,11 +6,11 @@
         <ul class="nav nav-qt" role="tablist" style="margin-left: 20px">
 
           <li role="presentation" ng-class="{'active': pageTab === 'category'}">
-            <a href="javascript:void(0)" ng-click="pageTab = 'category'">Product by Category</a>
+            <a ui-sref="products({ tabName: 'category' })">Product by Category</a>
           </li>
 
           <li role="presentation" ng-class="{'active': pageTab === 'list'}">
-            <a href="javascript:void(0)" ng-click="pageTab = 'list'">Products List</a>
+            <a ui-sref="products({ tabName: 'list' })">Products List</a>
           </li>
 
           <li class="product-create-btn-form" ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c')">
@@ -27,9 +27,7 @@
 
     <div ng-hide="loadingInProgress" style="width: 100%; display: inline-block; margin-top: 20px;">
 
-      <div ng-if="pageTab === 'category'" ng-include="'/html/scripts/core/products/group-by-category.tpl.html'"></div>
-
-      <div ng-if="pageTab === 'list'" ng-include="'/html/scripts/core/products/products-list.tpl.html'"></div>
+      <div ng-include="'/html/scripts/core/products/' + (pageTab === 'list' ? 'products-' : 'group-by-') + pageTab + '.tpl.html'"></div>
 
     </div>
 

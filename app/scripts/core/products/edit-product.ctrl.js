@@ -17,7 +17,7 @@
           }
 
           if ($scope.editProduct.category.default) {
-            $scope.editProduct.category.name = '';
+            $scope.editProduct.category.name = null;
           }
         } else if ($scope.category) {
           $scope.editProduct = {

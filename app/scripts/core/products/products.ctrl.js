@@ -27,7 +27,6 @@
 
           if (resp && resp.categories && !resp.categories.length) {
             $scope.loadingInProgress = false;
-            $scope.$broadcast('loadingFinished');
           }
         });
 
@@ -82,7 +81,6 @@
 
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
-          $scope.$broadcast('loadingFinished');
           var globalFilter = globalSearch.productFilter;
           if (globalFilter) {
             $timeout(function () {

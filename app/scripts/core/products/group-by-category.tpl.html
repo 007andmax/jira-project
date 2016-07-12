@@ -177,7 +177,7 @@
                     </label>
                   </div>
 
-                  <div class="col-6 pull-right"
+                  <div class="col-6 pull-right" dropdown keyboard-nav="true" dropdown-append-to-body="true"
                        ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'u d')">
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
@@ -193,12 +193,12 @@
                     </a>
 
                     <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
-                       aria-expanded="false" data-toggle="dropdown"
+                       aria-expanded="false" dropdown-toggle
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="move to other category">
                       <i class="icn-sm icn-send-again"></i>
                     </a>
 
-                    <ul class="dropdown-menu move-prod" role="menu">
+                    <ul class="move-prod dropdown-menu">
 
                       <li ng-repeat="category in productsData.categories | orderBy: 'name'"
                           ng-if="!category.default && product.category.id !== category.id">
