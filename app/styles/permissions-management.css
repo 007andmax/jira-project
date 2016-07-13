@@ -1,0 +1,18 @@
+.permission-headline{
+	text-align: center;
+}
+.permission-box{
+	transform: translateX(50%);
+	top: -4px;
+}
+.permission-item{
+	padding-left: 20%;
+}
+@media (max-width: 768px) {
+	.permission-item{
+		padding-left: 15px;
+	}
+}
+.category-head{
+	margin-bottom: 10px;
+}

@@ -163,6 +163,10 @@
         templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',
         controller: 'quicktech.core.settings.companyInfoCtrl'
       }))
+      .state('settings.permissionsManagement', waitForServices({
+        url: '/permissionsManagement',
+        templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html'
+      }))
       .state('settings.emailTemplates', waitForServices({
         url: '/emailTemplates',
         templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',

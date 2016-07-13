@@ -63,6 +63,12 @@
         </div>
       </li>
 
+      <li>
+        <a ui-sref="settings.permissionsManagement">
+          Permissions Management
+        </a>
+      </li>
+
       <li class="nav-email-templates" ui-sref="settings.emailTemplates"
           ng-show="PermissionsService.isAllowed('settings', currentUser.role, 'email_templates')">
 
