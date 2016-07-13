@@ -158,7 +158,7 @@ module.exports = function (grunt) {
         proxies: [
           {
             context: '/html',
-            host: 'localhost',
+            host: '127.0.0.1',
             port: 9000,
             rewrite: {
               '^/html': '/app'
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
               '!/dist',
               '!/bower_components'
             ],
-            host: '192.168.1.46',
+            host: '192.168.199.206',
             port: 8080,
             https: false,
             xforward: false,

@@ -186,7 +186,10 @@
 
     <li class="inline-user-edit" ng-if="editedUser && editedUser.id">
       <div class="" ng-controller="quicktech.core.companies.editUserCtrl" ng-form="editUserForm">
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
+        <div class="row">
+        <div class="col-md-6 col-xs-6">
+          <div class="row">
+                <div class=" col-md-6 " ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
 
           <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First Name</label>
 
@@ -202,20 +205,7 @@
 
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
-
-          <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">Last Name</label>
-
-          <div ng-messages="editUserForm.lastName.$error" ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
-            <div class="control-label" ng-message="maxlength">Last name is too large.</div>
-          </div>
-
-          <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
-                 name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
-
-        </div>
-
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'designation')}">
+        <div class=" col-md-6" ng-class="{'has-error': isShowingErrors(editUserForm, 'designation')}">
 
           <label class="control-label"
                  ng-class="{'hide': isShowingErrors(editUserForm, 'designation')}">Designation</label>
@@ -230,26 +220,45 @@
                  ng-model="editedUser.designation" ng-minlength="3" ng-maxlength="30">
 
         </div>
-
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
-
-          <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
-
-          <div ng-messages="editUserForm.primaryEmail.$error"
-               ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
-            <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
-            <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
-            <div class="control-label" ng-message="unique">This email already occupied.</div>
+         <div class=" col-md-6" ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
+        
+                  <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">Last Name</label>
+        
+                  <div ng-messages="editUserForm.lastName.$error" ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
+                    <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+                  </div>
+        
+                  <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                         name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
+        
+                </div>
+        
+                <div class=" col-md-6" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
+        
+                  <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
+        
+                  <div ng-messages="editUserForm.primaryEmail.$error"
+                       ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
+                    <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+                    <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+                    <div class="control-label" ng-message="unique">This email already occupied.</div>
+                  </div>
+        
+                  <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                         ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
+                         is-uniq-validation validation-func="validateUserEmail">
+        
+                </div>
           </div>
-
-          <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-                 ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
-                 is-uniq-validation validation-func="validateUserEmail">
-
         </div>
-
-        <div class="form-row" phone-numbers-edit is-try-to-save="triedToSave"
-             country-code="{{userCompanyCountryCode}}" ng-model="editedUser.phoneNumbers"></div>
+          
+        <div class="col-md-6 col-xs-6">
+        <div class="row">
+               <div class="form-row col-md-10" phone-numbers-edit is-try-to-save="triedToSave"
+                     country-code="{{userCompanyCountryCode}}" ng-model="editedUser.phoneNumbers"></div>
+                      </div>
+                      </div>
+                      </div>
 
         <div class="inline-user-edit-action">
           <div class="btn btn-default pull-left has-tooltip" ng-click="saveUser(editUserForm)"

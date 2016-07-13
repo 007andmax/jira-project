@@ -9686,3 +9686,6 @@ color: blue;
 .available-keywords-wrap .available-keyword {
   cursor: pointer;
 }
+.ui{
+  width: 75%;
+}
