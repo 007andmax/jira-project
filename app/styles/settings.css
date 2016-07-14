@@ -668,6 +668,12 @@ input.default-invoice-terms {
 .center-btn{
   text-align: center;
   margin: 20px auto;
+  float: right;
+}
+@media screen and (min-width: 320px){
+  .center-btn{
+    float: none;
+  }
 }
 
 /*.settings-main-wrapper .services-info-wrapper .col-2.timer-quantity {*/

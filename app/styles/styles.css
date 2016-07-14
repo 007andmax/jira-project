@@ -9692,3 +9692,8 @@ color: blue;
 .half-3-col{
   width: 13%;
 }
+@media screen and (max-width: 768px){
+  .half-3-col{
+  width: inherit;
+  }
+}
