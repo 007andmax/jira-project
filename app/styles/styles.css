@@ -9687,5 +9687,8 @@ color: blue;
   cursor: pointer;
 }
 .ui{
-  width: 75%;
+  padding: 0 5px;
+}
+.half-3-col{
+  width: 13%;
 }
