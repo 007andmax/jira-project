@@ -1150,7 +1150,7 @@ hr {
 .tabs-container .btn,
 .tabs-container .add-company-container {
   /*margin-right: 30px;*/
-  margin-top: -8px;
+  margin-top: 8px;
 }
 .tabs-container .add-company-container {
   position: relative;
@@ -6932,14 +6932,14 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
     left: 58%;
   }
   .global-search .custom-scroll.dropdown-menu{
-    width: 175px !important;
+    width: 305px !important;
   }
   .topNavbar-search .dropdown-menu{
-    width: 175px !important;
+    width: 305px !important;
   }
   .topNavbarLeft-Right{
     width: 125px;
-    margin-right: -100px;
+    margin-right: -80px;
   }
   .input-group-btn-search{
     width: 60px;

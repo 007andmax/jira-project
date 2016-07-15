@@ -19,13 +19,6 @@
   <div class="billable-content">
     <div class="tabs-container" style="margin-top: 40px">
       <div class="payment-receive-fixed" fixed-block-top>
-        <div class="btn btn-add-company btn-primary pull-right has-tooltip"
-             style="width: 98px;" ng-hide="editInvoiceId === 'new-invoice'"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
-             ng-click="toogleEditForm('new-invoice')">
-          <i class="icn-sm icn-add-company"></i>
-        </div>
-
         <ul class="nav nav-qt" role="tablist">
 
           <li role="presentation">
@@ -35,6 +28,13 @@
           <li role="presentation" class="active">
             <a href="javascript:void(0)">Recurring Orders</a>
           </li>
+          <div class="btn btn-add-company btn-primary pull-right has-tooltip"
+             style="width: 98px;" ng-hide="editInvoiceId === 'new-invoice'"
+             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
+             ng-click="toogleEditForm('new-invoice')">
+          <i class="icn-sm icn-add-company"></i>
+        </div>
+
 
         </ul>
       </div>
