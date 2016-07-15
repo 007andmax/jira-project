@@ -98,10 +98,6 @@
         $scope.$watch(function () {
           return $stateParams.tabName;
         }, function (tabName) {
-          if (!tabName || $scope.currentOpenTab === tabName) {
-            return;
-          }
-
           if (tabs.indexOf(tabName) < 0) {
             $scope.currentOpenTab = tabs[0];
           } else {
