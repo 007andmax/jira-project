@@ -665,6 +665,19 @@ input.default-invoice-terms {
   padding-right: 45px;
   width: 100%;
 }
+<<<<<<< Updated upstream
+=======
+.center-btn{
+  text-align: center;
+  margin: 20px auto;
+  float: right;
+}
+@media screen and (max-width: 768px){
+  .center-btn{
+    float: none;
+  }
+}
+>>>>>>> Stashed changes
 
 /*.settings-main-wrapper .services-info-wrapper .col-2.timer-quantity {*/
   /*float: right;*/

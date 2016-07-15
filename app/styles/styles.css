@@ -799,7 +799,7 @@ hr {
 .billable-content .nav-qt,
 .receipt-archive-content .nav-qt,
 .receivable-content .nav-qt {
-  margin: 0 30px;
+  /*margin: 0 30px;*/
 }
 .billable-head,
 .receivable-head {

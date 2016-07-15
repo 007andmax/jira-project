@@ -33,7 +33,7 @@
 }
 @media screen and (min-width: 1390px){
   .ticket-header.ticket-fixed-header {
-    width: calc(100% - 521px);
+    width: calc(100% - 357px);
   }
   .large .ticket-header.ticket-fixed-header{
     width: calc(100% - 240px);
@@ -42,7 +42,7 @@
 }
 @media only screen and (min-width: 1701px){
   .ticket-header.ticket-fixed-header {
-    width: calc(100% - 941px);
+    width: calc(100% - 856px);
   }
 }
 @media only screen and (min-width: 1930px){
