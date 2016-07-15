@@ -757,9 +757,9 @@
   background-position: -798px -50px;
 }
 .vendor-actions.user-actions {
-  float: left;
-  width: 100%;
-  margin-top: 19px;
+  width: 90%;
+  position: absolute;
+  bottom: 15px;
 }
 .vendor-actions.user-actions .btn {
   width: 100px;
