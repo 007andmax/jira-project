@@ -9791,7 +9791,7 @@ button.close {
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-1{
   display: inline-block;
-  width: calc(100% - 385px);
+  width: calc(100% - 315px);
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-3,
 .ticket-add-content .ticket-add-product .qt-table li .col-4,
