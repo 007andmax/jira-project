@@ -5338,6 +5338,7 @@ tbody.collapse.in {
   padding: 0;
   margin-top: 6px !important;
   overflow: hidden;
+  margin-bottom: 100px;
 }
 .dropdown-menu-tabs .nav-tabs-dropdown {
   position: absolute;

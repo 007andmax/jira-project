@@ -64,6 +64,7 @@
 }
 .ticket-updates-wrapper {
   position: relative;
+  margin-bottom: 100px;
 }
 .ticket-update {
   padding-top: 30px;
