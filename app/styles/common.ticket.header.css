@@ -42,7 +42,7 @@
 }
 @media only screen and (min-width: 1701px){
   .ticket-header.ticket-fixed-header {
-    width: calc(100% - 856px);
+    width: calc(100% - 1096px);
   }
 }
 @media only screen and (min-width: 1930px){

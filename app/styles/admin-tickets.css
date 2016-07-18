@@ -5,7 +5,7 @@
   right: 0;
   left: 0;
   top: 0;
-  margin-left: 76px;
+  margin-left: 316px;
   padding: 0;
   z-index: 1050;
   background: transparent;
@@ -40,7 +40,7 @@
 .content-container {
   position: relative;
   width: calc(100% - 357px);
-  margin-left: 76px;
+  margin-left: 316px;
 }
 .content-container.large{
   width: calc(100% - 80px);
@@ -134,7 +134,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 }
 .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   position: fixed;
-  width: calc(100% - 856px);
+  width: calc(100% - 1096px); /*856*/
   height: 100%;
   right: 281px !important;
 }
