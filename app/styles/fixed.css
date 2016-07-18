@@ -1363,10 +1363,10 @@ span.sort-span {
   }
 }
 .ticket-post-update-wrapper .btn-dark{
-  min-width: 24px;
-  height: 24px;
+  min-width: 38px;
+  height: 38px;
   margin-left: 5px;
-  margin-top: -13px;
+  /*margin-top: -13px;*/
 }
 .with-category .qt-user-product-list li .col-1{
   width: 120px;

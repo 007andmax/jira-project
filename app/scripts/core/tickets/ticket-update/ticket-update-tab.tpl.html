@@ -36,9 +36,9 @@
 
       <div class="ticket-add clearfix" ng-form="updateTicketNote">
 
-        <div class="avator pull-left">
+       <!--  <div class="avator pull-left">
           <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">
-        </div>
+        </div> -->
 
         <div class="ticket-add-content clearfix">
 
@@ -85,9 +85,9 @@
 
       <div class="ticket-add clearfix" ng-form="addProductsForm">
 
-        <div class="avator pull-left">
+        <!-- <div class="avator pull-left">
           <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">
-        </div>
+        </div> -->
         <div class="ticket-add-content clearfix">
 
           <div>
@@ -107,10 +107,7 @@
             <div class="ticket-add-content-actions-users pull-left"
                  ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'"></div>
 
-            <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Product" tooltip-placement="top"
-                 ng-click="addProduct()">
-              <i class="icn-sm icn-plus"></i>
-            </div>
+            
 
             <div class="ticket-add-amount pull-right">
               <span class="text-muted">Total amount </span>
@@ -131,9 +128,9 @@
 
       <div class="ticket-add clearfix" ng-form="addServicesForm">
 
-        <div class="avator pull-left">
+       <!--  <div class="avator pull-left">
           <img ng-src="{{ getUserAvatarUrl(currentUser) }}" alt="..." class="img-circle avatar-38">
-        </div>
+        </div> -->
 
         <div class="ticket-add-content clearfix">
 
@@ -153,11 +150,6 @@
 
             <div class="ticket-add-content-actions-users pull-left"
                  ng-include="'/html/scripts/core/tickets/ticket-update/update-shared-users.tpl.html'"></div>
-
-            <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Service" tooltip-placement="top"
-                 ng-click="addService()">
-              <i class="icn-sm icn-plus"></i>
-            </div>
 
           </div>
         </div>

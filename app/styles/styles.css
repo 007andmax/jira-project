@@ -9788,11 +9788,11 @@ button.close {
   background-position: -714px 1px;
 }
 .ticket-add-content .ticket-add-product .qt-table li{
-  display: block;
+  /*display: block;*/
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-1{
   display: inline-block;
-  width: calc(100% - 315px);
+  width: calc(100% - 400px);
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-3,
 .ticket-add-content .ticket-add-product .qt-table li .col-4,
