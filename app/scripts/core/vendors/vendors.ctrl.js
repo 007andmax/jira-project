@@ -4,13 +4,11 @@
 
   angular.module('quicktech.core.vendors').controller('quicktech.core.vendors.vendorsCtrl',
     ['$scope', 'VendorsService', 'UsersService', 'quicktech.common.services.SharedStateService', '$rootScope',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, VendorsService, UsersService, SharedStateService, $rootScope, PermissionsService) {
+      function ($scope, VendorsService, UsersService, SharedStateService, $rootScope) {
 
         var headerSharedState = SharedStateService.getSharedState('vendorsHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        $scope.PermissionsService = PermissionsService;
         $scope.vendors = VendorsService.getAll($scope);
         $scope.user = UsersService.getCurrentUser();
 

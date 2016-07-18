@@ -8,7 +8,7 @@
         <!--company-cover-wrapper-->
 
         <div class="btn btn-archive has-tooltip"
-             ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd')"
+             ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
              ng-click="archiveCompany()"
              tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
           <i class="icn-sm icn-archive-company"></i>
@@ -34,7 +34,7 @@
               <i class="icn-sm icn-description-white"></i>
             </a>
 
-            <div class="dropdown" ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'r')">
+            <div class="dropdown">
 
               <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
                  data-toggle="dropdown" aria-expanded="false"
@@ -66,7 +66,7 @@
             </div>
 
             <a href="javascript:void(0)" class="hit-area has-tooltip"
-               ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'u')"
+               ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
                ui-sref="editCompany( { companyId: company.id } )"
                tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
               <i class="icn-md icn-edit-tag"></i>
@@ -185,219 +185,219 @@
 
   </div>
 
-  <div ng-if="isChartsAccess()" class="collapse-charts" ng-click="toggleCollapsed()"
-       ng-class="{'hide': isCollapsed}"
-       style="margin-top: 25px;">
-    <span><i class="icn-sm icn-collapse"></i></span>
-  </div>
+  <!--<div class="collapse-charts" ng-click="toggleCollapsed()"-->
+       <!--ng-class="{'hide': isCollapsed}"-->
+       <!--style="margin-top: 25px;">-->
+    <!--<span><i class="icn-sm icn-collapse"></i></span>-->
+  <!--</div>-->
 
-  <div class="clearfix" ng-if="isChartsAccess()" collapse="isCollapsed">
+  <!--<div class="clearfix" collapse="isCollapsed">-->
 
-    <div class="charts-n-graphs-container">
+    <!--<div class="charts-n-graphs-container">-->
 
-      <div class="devices-chart">
-        <div class="chart-content">
-          <div class="chart-circle"></div>
-          <ul class="chart-legend">
-            <li><i class="circle-indicator blue"></i>Clients</li>
-            <li><i class="circle-indicator green"></i>Portable</li>
-            <li><i class="circle-indicator yellow"></i>Printers</li>
-            <li><i class="circle-indicator orange"></i>Member Servers</li>
-            <li><i class="circle-indicator red"></i>Servers</li>
-          </ul>
-        </div>
-      </div>
+      <!--<div class="devices-chart">-->
+        <!--<div class="chart-content">-->
+          <!--<div class="chart-circle"></div>-->
+          <!--<ul class="chart-legend">-->
+            <!--<li><i class="circle-indicator blue"></i>Clients</li>-->
+            <!--<li><i class="circle-indicator green"></i>Portable</li>-->
+            <!--<li><i class="circle-indicator yellow"></i>Printers</li>-->
+            <!--<li><i class="circle-indicator orange"></i>Member Servers</li>-->
+            <!--<li><i class="circle-indicator red"></i>Servers</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
 
-      <div class="tickets-chart company-tickets-chart">
-        <div class="chart-content">
+      <!--<div class="tickets-chart company-tickets-chart">-->
+        <!--<div class="chart-content">-->
 
-          <div ng-class="{'hide': !isCompanyHasTickets}" class="chart-circle" tickets-donought-chart="isCollapsed"
-               ng-model="countsByTypesAndCompany"></div>
+          <!--<div ng-class="{'hide': !isCompanyHasTickets}" class="chart-circle" tickets-donought-chart="isCollapsed"-->
+               <!--ng-model="countsByTypesAndCompany"></div>-->
 
-          <div ng-class="{'hide': isCompanyHasTickets}" class="chart-circle"
-               style="background-color: transparent;border: 6px solid #1586e4;">
-            <div class="number"
-                 style="color: #1f2a37; font-size: 26px; position: relative; top:45px; width: 128px; text-align:center;">
-              0
-            </div>
-            <div
-              style="color: #748498; font-size: 11px; position: relative; text-transform:uppercase; top:48px; width: 128px; text-align:center;">
-              tickets
-            </div>
-          </div>
+          <!--<div ng-class="{'hide': isCompanyHasTickets}" class="chart-circle"-->
+               <!--style="background-color: transparent;border: 6px solid #1586e4;">-->
+            <!--<div class="number"-->
+                 <!--style="color: #1f2a37; font-size: 26px; position: relative; top:45px; width: 128px; text-align:center;">-->
+              <!--0-->
+            <!--</div>-->
+            <!--<div-->
+              <!--style="color: #748498; font-size: 11px; position: relative; text-transform:uppercase; top:48px; width: 128px; text-align:center;">-->
+              <!--tickets-->
+            <!--</div>-->
+          <!--</div>-->
 
-          <ul class="chart-legend">
-            <li><i class="circle-indicator blue"></i>Unassigned</li>
-            <li><i class="circle-indicator yellow"></i>Open</li>
-          </ul>
-        </div>
-      </div>
+          <!--<ul class="chart-legend">-->
+            <!--<li><i class="circle-indicator blue"></i>Unassigned</li>-->
+            <!--<li><i class="circle-indicator yellow"></i>Open</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+      <!--</div>-->
 
-      <div class="stats-charts">
-        <div class="service-time-billed">
-          <div class="chart-content">
-            <div class="chart-circle">
-              <i class="icn-lg icn-add-service-white"></i>
-            </div>
-            <ul class="chart-legend">
-              <li class="legend-heading">service time billed</li>
-              <li class="legend-stat">{{ timeBilledByCompany.value || 0 }} <span>hrs</span></li>
-            </ul>
-          </div>
-        </div>
+      <!--<div class="stats-charts">-->
+        <!--<div class="service-time-billed">-->
+          <!--<div class="chart-content">-->
+            <!--<div class="chart-circle">-->
+              <!--<i class="icn-lg icn-add-service-white"></i>-->
+            <!--</div>-->
+            <!--<ul class="chart-legend">-->
+              <!--<li class="legend-heading">service time billed</li>-->
+              <!--<li class="legend-stat">{{ timeBilledByCompany.value || 0 }} <span>hrs</span></li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="online-devices">
-          <div class="chart-content">
-            <div class="chart-circle">
-              <i class="icn-lg icn-tab-devices active"></i>
-            </div>
-            <ul class="chart-legend">
-              <li class="legend-heading">online devices</li>
-              <li class="legend-stat">0</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        <!--<div class="online-devices">-->
+          <!--<div class="chart-content">-->
+            <!--<div class="chart-circle">-->
+              <!--<i class="icn-lg icn-tab-devices active"></i>-->
+            <!--</div>-->
+            <!--<ul class="chart-legend">-->
+              <!--<li class="legend-heading">online devices</li>-->
+              <!--<li class="legend-stat">0</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
-    <div class="charts-n-graphs-container">
+    <!--<div class="charts-n-graphs-container">-->
 
-      <div class="simple-chart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">
-        <div class="chart-wrapper full-width">
+      <!--<div class="simple-chart" ng-controller="quicktech.core.companies.totalEarningChartCtrl">-->
+        <!--<div class="chart-wrapper full-width">-->
 
-          <div class="heading"><strong>Total Earnings</strong>
-            <i class="dot-sep"></i> <span>{{ totalEarningValue | currency:'$' :2 }}</span>
-          <span class="slider-arrows pull-right" style="position: static">
+          <!--<div class="heading"><strong>Total Earnings</strong>-->
+            <!--<i class="dot-sep"></i> <span>{{ totalEarningValue | currency:'$' :2 }}</span>-->
+          <!--<span class="slider-arrows pull-right" style="position: static">-->
 
-            <i class="icn-sm icn-arrow-previous"
-               custom-disabled="{{ disabledLeftButton }}"
-               ng-click="disabledLeftButton || changeRangeDateToGetTotalEarnings('PREV')"></i>
+            <!--<i class="icn-sm icn-arrow-previous"-->
+               <!--custom-disabled="{{ disabledLeftButton }}"-->
+               <!--ng-click="disabledLeftButton || changeRangeDateToGetTotalEarnings('PREV')"></i>-->
 
-            <i class="icn-sm icn-arrow-next"
-               custom-disabled="{{ disabledRightButton }}"
-               ng-click="disabledRightButton || changeRangeDateToGetTotalEarnings('NEXT')"></i>
+            <!--<i class="icn-sm icn-arrow-next"-->
+               <!--custom-disabled="{{ disabledRightButton }}"-->
+               <!--ng-click="disabledRightButton || changeRangeDateToGetTotalEarnings('NEXT')"></i>-->
 
-          </span>
-          </div>
+          <!--</span>-->
+          <!--</div>-->
 
-          <div ng-class="{'hide': !totalEarningValue || totalEarningValue <= 0}"
-               total-charts="isCollapsed" ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'"
-               second-gradient-color="'#7BAF3F'"></div>
+          <!--<div ng-class="{'hide': !totalEarningValue || totalEarningValue <= 0}"-->
+               <!--total-charts="isCollapsed" ng-model="totalEarningsByDays" first-gradient-color="'#4B9D2B'"-->
+               <!--second-gradient-color="'#7BAF3F'"></div>-->
 
-          <div ng-class="{'hide': totalEarningValue > 0}" class="chart"></div>
+          <!--<div ng-class="{'hide': totalEarningValue > 0}" class="chart"></div>-->
 
-        </div>
-      </div>
+        <!--</div>-->
+      <!--</div>-->
 
-      <div class="simple-chart" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">
-        <div class="chart-wrapper full-width">
-          <div class="heading"><strong>Total Receivables</strong>
-            <i class="dot-sep"></i> <span>{{ totalReceivablesValue | currency:'$' :2 }}</span>
+      <!--<div class="simple-chart" ng-controller="quicktech.core.companies.totalReceivablesChartCtrl">-->
+        <!--<div class="chart-wrapper full-width">-->
+          <!--<div class="heading"><strong>Total Receivables</strong>-->
+            <!--<i class="dot-sep"></i> <span>{{ totalReceivablesValue | currency:'$' :2 }}</span>-->
 
-          <span class="slider-arrows pull-right" style="position: static">
+          <!--<span class="slider-arrows pull-right" style="position: static">-->
 
-            <i class="icn-sm icn-arrow-previous"
-               custom-disabled="{{ disabledLeftButton }}"
-               ng-click="disabledLeftButton || changeRangeDateToGetTotalReceivables('PREV')"></i>
+            <!--<i class="icn-sm icn-arrow-previous"-->
+               <!--custom-disabled="{{ disabledLeftButton }}"-->
+               <!--ng-click="disabledLeftButton || changeRangeDateToGetTotalReceivables('PREV')"></i>-->
 
-            <i class="icn-sm icn-arrow-next"
-               custom-disabled="{{ disabledRightButton }}"
-               ng-click="disabledRightButton || changeRangeDateToGetTotalReceivables('NEXT')"></i>
+            <!--<i class="icn-sm icn-arrow-next"-->
+               <!--custom-disabled="{{ disabledRightButton }}"-->
+               <!--ng-click="disabledRightButton || changeRangeDateToGetTotalReceivables('NEXT')"></i>-->
 
-          </span>
-          </div>
+          <!--</span>-->
+          <!--</div>-->
 
-          <div ng-class="{'hide': !totalReceivablesValue || totalReceivablesValue <= 0}"
-               total-charts="isCollapsed" ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'"
-               second-gradient-color="'#E55E36'"></div>
+          <!--<div ng-class="{'hide': !totalReceivablesValue || totalReceivablesValue <= 0}"-->
+               <!--total-charts="isCollapsed" ng-model="totalReceivableByDays" first-gradient-color="'#D54B3C'"-->
+               <!--second-gradient-color="'#E55E36'"></div>-->
 
-          <div ng-class="{'hide': totalReceivablesValue > 0}" class="chart"></div>
+          <!--<div ng-class="{'hide': totalReceivablesValue > 0}" class="chart"></div>-->
 
-        </div>
-      </div>
+        <!--</div>-->
+      <!--</div>-->
 
-      <div class="simple-chart" ng-controller="quicktech.core.companies.ticketsClosedChartCtrl">
-        <div class="chart-wrapper full-width">
-          <div class="heading"><strong>Tickets Closed</strong>
-            <i class="dot-sep"></i> <span>{{ resolvedTicketsCountByCompany.value }}</span>
+      <!--<div class="simple-chart" ng-controller="quicktech.core.companies.ticketsClosedChartCtrl">-->
+        <!--<div class="chart-wrapper full-width">-->
+          <!--<div class="heading"><strong>Tickets Closed</strong>-->
+            <!--<i class="dot-sep"></i> <span>{{ resolvedTicketsCountByCompany.value }}</span>-->
 
-          <span class="slider-arrows pull-right" style="position: static">
+          <!--<span class="slider-arrows pull-right" style="position: static">-->
 
-            <i class="icn-sm icn-arrow-previous"
-               custom-disabled="{{ disabledLeftButton }}"
-               ng-click="disabledLeftButton || changeRangeDateToGetClosedTkt('PREV')"></i>
+            <!--<i class="icn-sm icn-arrow-previous"-->
+               <!--custom-disabled="{{ disabledLeftButton }}"-->
+               <!--ng-click="disabledLeftButton || changeRangeDateToGetClosedTkt('PREV')"></i>-->
 
-            <i class="icn-sm icn-arrow-next"
-               custom-disabled="{{ disabledRightButton }}"
-               ng-click="disabledRightButton || changeRangeDateToGetClosedTkt('NEXT')"></i>
+            <!--<i class="icn-sm icn-arrow-next"-->
+               <!--custom-disabled="{{ disabledRightButton }}"-->
+               <!--ng-click="disabledRightButton || changeRangeDateToGetClosedTkt('NEXT')"></i>-->
 
-          </span>
-          </div>
+          <!--</span>-->
+          <!--</div>-->
 
-          <div ng-class="{'hide': !resolvedTicketsCountByCompany.value || resolvedTicketsCountByCompany.value <= 0}"
-               ticket-closed-chart="isCollapsed" ng-model="closedTicketsGraphData"></div>
+          <!--<div ng-class="{'hide': !resolvedTicketsCountByCompany.value || resolvedTicketsCountByCompany.value <= 0}"-->
+               <!--ticket-closed-chart="isCollapsed" ng-model="closedTicketsGraphData"></div>-->
 
-          <div ng-class="{'hide': resolvedTicketsCountByCompany.value > 0}" class="chart"></div>
+          <!--<div ng-class="{'hide': resolvedTicketsCountByCompany.value > 0}" class="chart"></div>-->
 
-        </div>
-      </div>
+        <!--</div>-->
+      <!--</div>-->
 
-      <div class="simple-chart">
-        <div class="chart-wrapper full-width">
+      <!--<div class="simple-chart">-->
+        <!--<div class="chart-wrapper full-width">-->
 
-          <div class="heading"><strong>Ticket Resolutions</strong> <span>All Time</span>
-            <ul class="chart-legend">
-              <li><i class="circle-indicator blue"></i>Quick</li>
-              <li><i class="circle-indicator orange"></i>DELAYED</li>
-            </ul>
-          </div>
+          <!--<div class="heading"><strong>Ticket Resolutions</strong> <span>All Time</span>-->
+            <!--<ul class="chart-legend">-->
+              <!--<li><i class="circle-indicator blue"></i>Quick</li>-->
+              <!--<li><i class="circle-indicator orange"></i>DELAYED</li>-->
+            <!--</ul>-->
+          <!--</div>-->
 
-          <div class="chart-content">
+          <!--<div class="chart-content">-->
 
-            <div ng-class="{'hide': ticketsResolution.quick <= 0 && ticketsResolution.delayed <= 0}"
-                 pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"
-                 pie-chart-color="['#2eabbe', '#eca935']"
-                 pie-chart-size="140"></div>
+            <!--<div ng-class="{'hide': ticketsResolution.quick <= 0 && ticketsResolution.delayed <= 0}"-->
+                 <!--pie-chart pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"-->
+                 <!--pie-chart-color="['#2eabbe', '#eca935']"-->
+                 <!--pie-chart-size="140"></div>-->
 
-            <div ng-class="{'hide': ticketsResolution.quick > 0 || ticketsResolution.delayed > 0}"
-                 class="chart-circle"></div>
+            <!--<div ng-class="{'hide': ticketsResolution.quick > 0 || ticketsResolution.delayed > 0}"-->
+                 <!--class="chart-circle"></div>-->
 
-            <ul class="chart-legend">
+            <!--<ul class="chart-legend">-->
 
-              <li>
-              <span class="text-info">
-                {{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%
-              </span>
-                Tickets created &amp; resolved within 2 days
-              </li>
+              <!--<li>-->
+              <!--<span class="text-info">-->
+                <!--{{ ticketsResolution.quick/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%-->
+              <!--</span>-->
+                <!--Tickets created &amp; resolved within 2 days-->
+              <!--</li>-->
 
-              <li>
-              <span class="text-warning">
-                {{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%
-              </span>
-                Tickets created &amp; resolved within 10 days
-              </li>
+              <!--<li>-->
+              <!--<span class="text-warning">-->
+                <!--{{ ticketsResolution.delayed/(ticketsResolution.quick + ticketsResolution.delayed)*100 || 0 }}%-->
+              <!--</span>-->
+                <!--Tickets created &amp; resolved within 10 days-->
+              <!--</li>-->
 
-            </ul>
-          </div>
+            <!--</ul>-->
+          <!--</div>-->
 
-        </div>
-      </div>
-    </div>
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
 
-  </div>
+  <!--</div>-->
 
-  <div ng-if="isChartsAccess()" class="collapse-charts" ng-click="toggleCollapsed()"
-       ng-class="{'hide': isCollapsed}">
-    <span><i class="icn-sm icn-collapse"></i></span>
-  </div>
+  <!--<div class="collapse-charts" ng-click="toggleCollapsed()"-->
+       <!--ng-class="{'hide': isCollapsed}">-->
+    <!--<span><i class="icn-sm icn-collapse"></i></span>-->
+  <!--</div>-->
 
-  <div ng-if="isChartsAccess()" class="expand-charts" ng-click="toggleCollapsed()"
-       ng-class="{'hide': !isCollapsed}">
-    <p class="pull-left">Expand to view overall statistics</p>
-    <i class="icn-sm icn-expand pull-right"></i>
-  </div>
+  <!--<div class="expand-charts" ng-click="toggleCollapsed()"-->
+       <!--ng-class="{'hide': !isCollapsed}">-->
+    <!--<p class="pull-left">Expand to view overall statistics</p>-->
+    <!--<i class="icn-sm icn-expand pull-right"></i>-->
+  <!--</div>-->
 
   <div ng-include="'/html/scripts/core/companies/company-profile/tabs/company-profile-tabs.tpl.html'"></div>
 

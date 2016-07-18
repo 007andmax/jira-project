@@ -3,13 +3,11 @@
 (function () {
 
   angular.module("quicktech.core.rightPanel").directive('deviceContextMenu',
-    ['$timeout', '$templateRequest', '$compile', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      function ($timeout, $templateRequest, $compile, DevicesService, PermissionsService) {
+    ['$timeout', '$templateRequest', '$compile', 'DevicesService',
+      function ($timeout, $templateRequest, $compile, DevicesService) {
         return {
           restrict: 'A',
           link: function (scope, element, attrs) {
-
-            scope.PermissionsService = PermissionsService;
 
             var getMenuPosition = function (popover, mouse, direction, scrollDir) {
               var win = $(window)[direction](),
@@ -106,10 +104,8 @@
             };
 
             scope.remove = function () {
-              if (PermissionsService.isAllowed('right_panel', scope.currentUser.role, 'd_device')) {
-                DevicesService.sendUninstallAgentRequest(scope.companyGroupedData.company.id, scope.agent.id);
-                hideThisPopover();
-              }
+              DevicesService.sendUninstallAgentRequest(scope.companyGroupedData.company.id, scope.agent.id);
+              hideThisPopover();
             }
 
           }

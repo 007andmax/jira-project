@@ -954,8 +954,7 @@
             return false;
           }
 
-          if ($rootScope.currentUser.role !== 'ADMIN' && $rootScope.currentUser.role !== 'SUPER_TECH_ADMIN'
-            && (!ticket.assignedUser || ticket.assignedUser.id != $rootScope.currentUser.id)) {
+          if (!$rootScope.currentUser.isOwner && (!ticket.assignedUser || ticket.assignedUser.id != $rootScope.currentUser.id)) {
             return false;
           }
         }

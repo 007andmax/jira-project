@@ -139,7 +139,6 @@
         controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService',
           function ($scope, $state, PermissionsService) {
             $scope.PermissionsService = PermissionsService;
-
             $scope.$watch(function () {
               return $state.current.url;
             }, function (url) {
@@ -165,7 +164,8 @@
       }))
       .state('settings.permissionsManagement', waitForServices({
         url: '/permissionsManagement',
-        templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html'
+        templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html',
+        controller: 'quicktech.core.settings.permissionsManagement'
       }))
       .state('settings.emailTemplates', waitForServices({
         url: '/emailTemplates',

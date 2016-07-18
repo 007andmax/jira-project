@@ -38,7 +38,7 @@
 
         $scope.moveIntoSpam = function () {
 
-          var confirmMesage = 'Do you want to ' + ($scope.currentUser.role === 'USER' ? 'report' : 'mark') + ' the ticket as spam?',
+          var confirmMesage = 'Do you want to ' + ($scope.currentUser.isOwner ? 'mark' : 'report') + ' the ticket as spam?',
             confirmButton = 'Spam';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {

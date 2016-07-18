@@ -45,7 +45,7 @@
       <div class="payment-receive-fixed" fixed-block-top>
         <div class="btn btn-info pull-right has-tooltip" style="width: 96px; margin: 16px 40px 0 0;"
              tooltip-placement="top" tooltip-append-to-body="true" tooltip="Payment Received"
-             custom-disabled="{{ !selectedInvoiceCount }}"
+             custom-disabled="{{ !selectedInvoiceCount }}" ng-if="PermissionsService.isAllowed('VOID_INVOICE')"
              modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
              modal-window-class="modal-receive-payment"
              mw-controller="quicktech.core.receivable.receivePaymentCtrl">

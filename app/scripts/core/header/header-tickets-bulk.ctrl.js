@@ -3,13 +3,12 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.ticketsBulkCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
+    ['$scope', 'quicktech.common.services.SharedStateService',
       '$timeout', 'UsersService', 'CompaniesService', 'TicketsService', '$rootScope',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, SharedStateService, PermissionsService, $timeout, UsersService,
+      function ($scope, SharedStateService, $timeout, UsersService,
                 CompaniesService, TicketsService, $rootScope, UserConfirmationsService, UserNotificationService) {
 
-        $scope.PermissionsService = PermissionsService;
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
         $scope.ticketStatus = {
           IN_PROGRESS: 'IN PROGRESS',
@@ -36,7 +35,7 @@
         };
 
         $scope.moveIntoSpam = function () {
-          var confirmMesage = 'Do you want to ' + ($scope.currentUser.role === 'USER' ? 'report' : 'mark') + ' ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets as spam?',
+          var confirmMesage = 'Do you want to ' + ($scope.currentUser.isOwner ? 'mark' : 'report') + ' ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets as spam?',
             confirmButton = 'Spam';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {

@@ -34,10 +34,10 @@
               var paramsToSend = {};
 
               if ($stateParams.listType === 'spam') {
-                if (scope.currentUser.role === 'USER') {
-                  paramsToSend.filter = 'USER_SPAM';
-                } else {
+                if (scope.currentUser.isOwner) {
                   paramsToSend.filter = 'ADMIN_MARKED_AS_SPAM';
+                } else {
+                  paramsToSend.filter = 'USER_SPAM';
                 }
               } else {
                 paramsToSend.filter = $stateParams.listType.toUpperCase();
@@ -101,7 +101,7 @@
 
                           isTicketsAlreadyLoad = false;
 
-                          if ($stateParams.listType === 'spam' && scope.currentUser.role !== 'USER' && moreTicket.length === 0 && paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
+                          if ($stateParams.listType === 'spam' && scope.currentUser.isOwner && moreTicket.length === 0 && paramsToSend.filter === 'ADMIN_MARKED_AS_SPAM') {
                             getReportSpamTicket(paramsToSend);
                           }
 
@@ -153,7 +153,7 @@
 
                       $document.off('scroll');
 
-                      if (paramsToSend.filter !== 'ADMIN_REPORTED_AS_SPAM' && $stateParams.listType === 'spam' && $scope.currentUser.role !== 'USER') {
+                      if (paramsToSend.filter !== 'ADMIN_REPORTED_AS_SPAM' && $stateParams.listType === 'spam' && $scope.currentUser.isOwner) {
                         getReportSpamTicket(paramsToSend);
                       }
                     }

@@ -50,7 +50,7 @@
 
       <div class="col-1">
 
-        <label class="control checkbox pull-left">
+        <label class="control checkbox pull-left" ng-if="PermissionsService.isAllowed('VOID_INVOICE')">
           <input type="checkbox"
                  ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === invoice.company.id)"
                  ng-model="invoiceToSent.invoices[invoice.number]">

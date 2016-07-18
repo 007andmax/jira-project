@@ -1,5 +1,5 @@
 <div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader
-     ng-if="!(listType === 'spam' && currentUser.role !== 'USER')">
+     ng-if="!(listType === 'spam' && !currentUser.isOwner)">
   <div class="container-ticket-list pull-left" tu-tickets-container
        ng-if="listType && listType !== 'preview'">
 
@@ -20,7 +20,7 @@
 </div>
 
 <div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader
-     ng-if="listType === 'spam' && currentUser.role !== 'USER'">
+     ng-if="listType === 'spam' && currentUser.isOwner">
   <div class="container-ticket-list pull-left" tu-tickets-container ng-if="listType">
 
     <div class="ticket-list" upload-admin-spam="true">

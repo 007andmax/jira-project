@@ -1,7 +1,7 @@
-<div class="company-profile-content companies-list clearfix"
-     ng-class="{'not-charts-companies-page': !isChartsAccess()}">
+<div class="company-profile-content companies-list clearfix">
+     <!--ng-class="{'not-charts-companies-page': !isChartsAccess()}"-->
 
-  <div collapse="isCollapsed" class="charts-n-graphs-container" ng-if="isChartsAccess()">
+  <div collapse="isCollapsed" class="charts-n-graphs-container">
 
     <div class="devices-chart">
       <div class="chart-content">
@@ -91,16 +91,17 @@
 
   </div>
 
-  <div ng-if="isChartsAccess()" class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
+  <div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">
     <span><i class="icn-sm icn-collapse"></i></span>
   </div>
 
-  <div ng-if="isChartsAccess()" class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">
+  <div class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">
     <p class="pull-left">Expand to view overall statistics</p>
     <i class="icn-sm icn-expand pull-right"></i>
   </div>
 
-  <div class="company-card clearfix" ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })"
+  <div class="company-card clearfix"
+       ui-sref="companyProfile({ companyId: company.id, tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' })"
        ng-repeat="company in companies | orderBy: 'name' track by company.id"
        ng-controller="quicktech.core.companies.companyCtrl"
        ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
@@ -109,8 +110,7 @@
          ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') right no-repeat', 'background-size': 'cover'}">
 
       <div class="hover-logo">
-        <div class="logo-control" stop-propagation="click"
-             ng-if="PermissionsService.isAllowed('clients/companies', currentUser.role, 'u')">
+        <div class="logo-control" stop-propagation="click">
           <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
         </div>
       </div>

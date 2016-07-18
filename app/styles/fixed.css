@@ -1141,7 +1141,6 @@ span.sort-span {
   color: #94A4B8;
   width: 57%;
   min-height: 277px;
-  float: right;
 }
 .device-settings-tab .right-column-content .icn-hide-password {
   display: inline-block;
@@ -1190,7 +1189,11 @@ span.sort-span {
 .device-settings-tab ul{
   padding-left: 0;
 }
-
+.device-settings-tab .deployment-settings.modify-not-allowed input,
+.device-settings-tab .deployment-settings.modify-not-allowed .control-indicator,
+.device-settings-tab .deployment-settings.modify-not-allowed select {
+  cursor: not-allowed;
+}
 .device-settings-tab .deployment-settings .control input[type="number"],
 .device-settings-tab .deployment-settings .control input[type="text"],
 .device-settings-tab .deployment-settings .control input[type="password"]{

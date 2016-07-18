@@ -26,7 +26,7 @@
             <a href="javascript:void(0)">Vendor</a>
           </li>
 
-          <li navigate-to="#companyServices">
+          <li navigate-to="#companyServices" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
             <a href="javascript:void(0)">Services Info</a>
           </li>
 
@@ -443,7 +443,8 @@
           </div>
         </div>
 
-        <div id="companyServices" class="services-info-wrapper clearfix">
+        <div id="companyServices" class="services-info-wrapper clearfix"
+             ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
           <div class="default-services-header">
 
@@ -504,9 +505,7 @@
                 <div class="col-1" style="width: 316px;">SERVICE NAME</div>
                 <!--style="width: 183px;" TODO hide timeAllotment -->
 
-                <div class="col-3" style="width: 92px;text-align: left;"
-                     ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'r')">PER HOUR
-                </div>
+                <div class="col-3" style="width: 92px;text-align: left;">PER HOUR</div>
 
                 <div class="col-5">IS BILLABLE</div>
 

@@ -9,6 +9,10 @@
       function ($scope, $state, $stateParams, CompaniesService, StatisticsService, TicketsService, SharedStateService,
                 $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
 
+        if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
+          $state.go('tickets');
+        }
+
         UserNotificationService.show('Loading...');
 
         var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
@@ -36,11 +40,6 @@
         });
 
         globalSearch.openedItemName = $scope.company.name;
-
-        $scope.isChartsAccess = function () {
-          return PermissionsService.isAllowed('clients/companyProfile', $scope.currentUser.role, 'r_chart') && $scope.company.accountType === 'CLIENT';
-        };
-
         rightPanelSharedState.companyId = $scope.company.id;
 
         $scope.companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function (resp) {
@@ -53,37 +52,34 @@
 
         });
 
-        if ($scope.isChartsAccess()) {
+        $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
+        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
+        $scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function () {
 
-          $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
-          $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
-          $scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function () {
+          $scope.$watch('countsTicketsCompany', function () {
 
-            $scope.$watch('countsTicketsCompany', function () {
+            $scope.countsByTypesAndCompany = [{
+              label: 'Unassigned',
+              value: $scope.countsTicketsCompany['UNASSIGNED'],
+              color: "#1586e4"
+            }, {
+              label: 'Open',
+              value: $scope.countsTicketsCompany['OPEN'],
+              color: "#ffa726"
+            }];
 
-              $scope.countsByTypesAndCompany = [{
-                label: 'Unassigned',
-                value: $scope.countsTicketsCompany['UNASSIGNED'],
-                color: "#1586e4"
-              }, {
-                label: 'Open',
-                value: $scope.countsTicketsCompany['OPEN'],
-                color: "#ffa726"
-              }];
-
-              for (var i = 0; i < $scope.countsByTypesAndCompany.length; i++) {
-                if ($scope.countsByTypesAndCompany[i].value > 0 && !$scope.isChartHasOpen) {
-                  //$scope.isCollapsed = false;
-                  $scope.isChartHasOpen = true;
-                  $scope.isCompanyHasTickets = true;
-                  return;
-                }
+            for (var i = 0; i < $scope.countsByTypesAndCompany.length; i++) {
+              if ($scope.countsByTypesAndCompany[i].value > 0 && !$scope.isChartHasOpen) {
+                //$scope.isCollapsed = false;
+                $scope.isChartHasOpen = true;
+                $scope.isCompanyHasTickets = true;
+                return;
               }
+            }
 
-            })
+          })
 
-          });
-        }
+        });
 
         $scope.changeCurrentLocation = function (index) {
           if (0 <= index && index < $scope.companyData.addresses.length) {

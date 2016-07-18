@@ -21,7 +21,7 @@
       </a>
     </li>
 
-    <li ng-class="{'active': currentTicketInfoTab === 'USER'}">
+    <li ng-class="{'active': currentTicketInfoTab === 'USER'}" ng-show="PermissionsService.isAllowed('VIEW_USERS')">
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
          tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Users"
@@ -133,32 +133,34 @@
         </div>
 
       </div>
-      <div class="sb-heading primary-contact-heading" ng-hide="companyGroupedData.company.default">Primary Contact(s)</div>
+      <div ng-if="PermissionsService.isAllowed('VIEW_USERS')">
+        <div class="sb-heading primary-contact-heading" ng-hide="companyGroupedData.company.default">Primary Contact(s)</div>
 
-      <ul class="primary-contacts" ng-hide="companyGroupedData.company.default">
+        <ul class="primary-contacts" ng-hide="companyGroupedData.company.default">
 
-        <li class="list-users" style="padding: 0 30px 0 0"
-            ng-repeat="companyContact in companyContacts | orderBy: getUserName">
+          <li class="list-users" style="padding: 0 30px 0 0"
+              ng-repeat="companyContact in companyContacts | orderBy: getUserName">
 
-          <div style="padding: 9px 0 10px 30px"
-               contact-user-popover user-info="companyContact"
-               send-email-in-popover="sendEmailInPopover">
+            <div style="padding: 9px 0 10px 30px"
+                 contact-user-popover user-info="companyContact"
+                 send-email-in-popover="sendEmailInPopover">
 
-            <a href="javascript:void(0)" class="pull-left avatar">
-              <img ng-src="{{ getContactAvatarUrl(companyContact) }}" alt="..."
-                   class="img-circle no-avatar avatar-38">
-              <i class="bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
-            </a>
+              <a href="javascript:void(0)" class="pull-left avatar">
+                <img ng-src="{{ getContactAvatarUrl(companyContact) }}" alt="..."
+                     class="img-circle no-avatar avatar-38">
+                <i class="bottom" ng-class="{'on': companyContact.online, 'off': !companyContact.online}"></i>
+              </a>
 
-            <div class="clearfix">
-              <div class="user-name">
-                <a href="javascript:void(0)">{{ getUserName(companyContact) }}</a>
+              <div class="clearfix">
+                <div class="user-name">
+                  <a href="javascript:void(0)">{{ getUserName(companyContact) }}</a>
+                </div>
               </div>
-            </div>
 
-          </div>
-        </li>
-      </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
 
       <div ng-if="createTicketUser">
         <div class="sb-heading created-by-heading">Ticket Created By</div>

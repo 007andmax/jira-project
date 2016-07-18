@@ -34,7 +34,7 @@
       <div class="payment-receive-fixed" fixed-block-top>
 
         <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
-             custom-disabled="{{ !countTicket }}"
+             custom-disabled="{{ !countTicket }}" ng-if="PermissionsService.isAllowed('CREATE_INVOICE')"
              tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
              modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
              modal-window-class="invoice-modal-not-background"
@@ -77,7 +77,7 @@
                 <i class="icn-sm icn-locked"></i>
               </a>
 
-              <label ng-hide="billableCompany.lockType !== 'NONE'" class="control checkbox pull-left"
+              <label ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')" class="control checkbox pull-left"
                      stop-propagation="click" style="z-index: 2;">
                 <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
                        ng-click="changeCompanyCheckbox(billableCompany.companyId)">
@@ -111,7 +111,7 @@
                     </a>
 
                     <label class="control checkbox pull-left"
-                           ng-hide="ticket.lockedBy" stop-propagation="click">
+                           ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')" stop-propagation="click">
                       <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
                              ng-change="changeTicketCheckbox(billableCompany.companyId)">
                       <span class="control-indicator"></span>

@@ -5,7 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsTipsMsgCtrl',
     ['$scope', 'TicketsService', '$state', '$stateParams', 'UsersService', '$rootScope',
       'quicktech.common.services.UserNotificationService', 'quicktech.common.services.TicketsPermissionsService',
-      function ($scope, TicketsService, $state, $stateParams, UsersService, $rootScope, UserNotificationService, TicketsPermissionsService) {
+      'quicktech.common.services.PermissionsService',
+      function ($scope, TicketsService, $state, $stateParams, UsersService, $rootScope, UserNotificationService,
+                TicketsPermissionsService, PermissionsService) {
 
         $scope.TicketsPermissionsService = TicketsPermissionsService;
 
@@ -48,7 +50,11 @@
             if ($scope.currentUser.id === userId) {
               return 'marked this ticket as spam, but you can either delete the ticket forever or restore the ticket status anytime, using the respective option.';
             } else {
-              return 'has marked it as spam. You can either delete the ticket forever or restore the ticket status anytime, using the respective option.';
+              if (PermissionsService.isAllowed('DELETE_TICKETS')) {
+                return 'has marked it as spam. You can either delete the ticket forever or restore the ticket status anytime, using the respective option.';
+              } else {
+                return 'has marked it as spam. You can restore the ticket status anytime, using the respective option.';
+              }
             }
           }
 

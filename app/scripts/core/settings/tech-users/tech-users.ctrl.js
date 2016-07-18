@@ -10,10 +10,10 @@
 
         $scope.users = UsersService.getTechUsers();
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        $scope.roles = {
-          USER: 'User',
-          ADMIN: 'Administrator'
-        };
+
+        CompaniesService.getTechRoles(function (resp) {
+          $scope.techRoles = resp;
+        });
 
         $scope.highlightTechUser = function () {
           if (globalSearch.techUserFilter) {

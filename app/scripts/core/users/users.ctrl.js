@@ -4,9 +4,13 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
     ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
-      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
       function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
-                SharedStateService, PermissionsService) {
+                SharedStateService, PermissionsService, $state) {
+
+        if (!PermissionsService.isAllowed('VIEW_USERS')) {
+          $state.go('tickets');
+        }
 
         $scope.editUser = undefined;
 

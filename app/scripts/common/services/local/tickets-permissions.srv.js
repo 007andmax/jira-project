@@ -3,13 +3,7 @@
 (function (window, $, undefined) {
 
   angular.module('quicktech.common.services').factory('quicktech.common.services.TicketsPermissionsService',
-    ['$rootScope', 'UsersService', function ($rootScope, UsersService) {
-
-      var USER_ROLES = {
-        USER: 'USER',
-        ADMIN: 'ADMIN',
-        SUPER_ADMIN: 'SUPER_TECH_ADMIN'
-      };
+    ['$rootScope', 'UsersService', 'quicktech.common.services.PermissionsService', function ($rootScope, UsersService, PermissionsService) {
 
       var ACTIONS = {
         'CLAIM_TICKET': function (ticket) {
@@ -23,7 +17,7 @@
         },
         'ASSIGN': function (ticket) {
           var techUsers = UsersService.getTechUsers();
-          return techUsers && techUsers.length > 1 && $rootScope.currentUser.role !== USER_ROLES.USER && isTicketOpen(ticket);
+          return techUsers && techUsers.length > 1 && isTicketOpen(ticket);
         },
         'REOPEN': function (ticket, option) {
           if (ticket.status !== 'COMPLETED' || isSpamOrTrash(ticket)) {
@@ -42,11 +36,8 @@
           } else if (option === 'billable') {
             return ticket.isBillable && !ticket.hasInvoice;
 
-          } else if (option === 'shared_for_admin') {
-            return ticket.sharedToCurrentUserAt && $rootScope.currentUser.role !== USER_ROLES.USER;
-
-          } else if (option === 'shared_for_user') {
-            return ticket.sharedToCurrentUserAt && $rootScope.currentUser.role === USER_ROLES.USER;
+          } else if (option === 'shared') {
+            return ticket.sharedToCurrentUserAt;
 
           } else {
             return true;
@@ -75,7 +66,7 @@
           }
         },
         'DELETE_FOREVER': function (ticket) {
-          return isSpamOrTrash(ticket) && !isBillable(ticket);
+          return isSpamOrTrash(ticket) && !isBillable(ticket) && PermissionsService.isAllowed('DELETE_TICKETS');
         },
         'USER_TIP': function (ticket, type) {
 
@@ -86,7 +77,6 @@
           if (ticket && ticket.assignPerformer && ticket.assignPerformer.id && ticket.assignedUser && ticket.assignedUser.id) {
 
             var user = $rootScope.currentUser,
-              isUserAdminOrSAdmin = user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN,
               otherAPerformerAndAUser = ticket.assignPerformer.id !== ticket.assignedUser.id;
 
             switch (type) {
@@ -97,19 +87,19 @@
                 return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === user.id) && ticket.isReassigned;
 
               case 'I_ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && !ticket.isReassigned && isUserAdminOrSAdmin;
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && !ticket.isReassigned;
 
               case 'I_RE-ASSIGNED_TO_USER':
-                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && ticket.isReassigned && isUserAdminOrSAdmin;
+                return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id !== user.id) && ticket.isReassigned;
 
               case 'USER_CLAIMED':
                 return (ticket.assignPerformer.id !== user.id) && (ticket.assignedUser.id === ticket.assignPerformer.id);
 
               case 'USER_RE-ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned && isUserAdminOrSAdmin;
+                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && ticket.isReassigned;
 
               case 'USER_ASSIGNED_USER':
-                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned && isUserAdminOrSAdmin;
+                return ticket.assignPerformer.id !== user.id && ticket.assignedUser.id !== user.id && otherAPerformerAndAUser && !ticket.isReassigned;
 
               case 'MY_TICKET':
                 return (ticket.assignPerformer.id === user.id) && (ticket.assignedUser.id === user.id);
@@ -153,8 +143,7 @@
       }
 
       function isUpdateAllowed(ticket) {
-        return isTicketOpenAndAssigned(ticket) && ($rootScope.currentUser.role !== USER_ROLES.USER ||
-          ticket.assignedUser.id === $rootScope.currentUser.id || ticket.sharedToCurrentUserAt);
+        return isTicketOpenAndAssigned(ticket) || ticket.sharedToCurrentUserAt;
       }
 
       return {

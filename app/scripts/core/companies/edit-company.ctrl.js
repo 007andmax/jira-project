@@ -12,6 +12,10 @@
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats,
                 SharedStateService, $stateParams, $state, VendorsService, $timeout, PermissionsService) {
 
+        if ($stateParams.companyId && !PermissionsService.isAllowed('VIEW_COMPANIES')) {
+          $state.go('tickets');
+        }
+
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         if($stateParams.companyId){
@@ -34,19 +38,23 @@
         $scope.selectedServices = {};
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
-        $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
-          if (!$stateParams.companyId) {
-            $timeout(function () {
-              if ($scope.servicesData && $scope.servicesData.default) {
-                for (var i = 0; i < $scope.servicesData.default.length; i++) {
-                  var service = angular.copy($scope.servicesData.default[i]);
-                  $scope.editCompany.services.push(service);
-                  $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+
+        if (PermissionsService.isAllowed('MANAGE_SERVICES')) {
+          $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
+            if (!$stateParams.companyId) {
+              $timeout(function () {
+                if ($scope.servicesData && $scope.servicesData.default) {
+                  for (var i = 0; i < $scope.servicesData.default.length; i++) {
+                    var service = angular.copy($scope.servicesData.default[i]);
+                    $scope.editCompany.services.push(service);
+                    $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+                  }
                 }
-              }
-            }, 0)
-          }
-        });
+              }, 0)
+            }
+          });
+        }
+
         AddressesService.getLocales(true, function (response) {
           $scope.timeZones = response;
         });

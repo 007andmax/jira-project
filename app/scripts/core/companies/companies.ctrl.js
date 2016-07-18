@@ -3,53 +3,51 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, SharedStateService, DevicesService, PermissionsService) {
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state,
+                SharedStateService, DevicesService, PermissionsService) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        $scope.PermissionsService = PermissionsService;
+        if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
+          $state.go('tickets');
+        }
+
         $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
 
-        $scope.isChartsAccess = function(){
-          return PermissionsService.isAllowed('clients/companyProfile', $scope.currentUser.role, 'r_chart') || $scope.currentUser.accountType === 'ROOT';
-        };
+        $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
-        if($scope.isChartsAccess()){
-          $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
+        $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function () {
+          $scope.mostTicketsResolved = 0;
 
-          $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function () {
-            $scope.mostTicketsResolved = 0;
-
-            for (var companyId in $scope.topCompaniesByResolvedTickets) {
-              if (companyId === 'staticCopy') {
-                continue;
-              }
-              $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
+          for (var companyId in $scope.topCompaniesByResolvedTickets) {
+            if (companyId === 'staticCopy') {
+              continue;
             }
+            $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
+          }
 
-          });
-          $scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function () {
-            $scope.contributedToEarnings = 0;
+        });
+        $scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function () {
+          $scope.contributedToEarnings = 0;
 
-            for (var companyId in $scope.contributedToEarningTopCompanies) {
-              if (companyId === 'staticCopy') {
-                continue;
-              }
-              $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
+          for (var companyId in $scope.contributedToEarningTopCompanies) {
+            if (companyId === 'staticCopy') {
+              continue;
             }
+            $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
+          }
 
-            if ($scope.contributedToEarnings) {
-              $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
-            }
-          });
+          if ($scope.contributedToEarnings) {
+            $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
+          }
+        });
 
-          $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
-        }
+        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
         $scope.$watch('companies.length', function (companiesCount) {
           globalSearch.counts['quantity'] = { count: companiesCount == 0 ? companiesCount : (companiesCount - 1) };

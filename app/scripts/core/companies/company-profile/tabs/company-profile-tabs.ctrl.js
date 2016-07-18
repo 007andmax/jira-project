@@ -4,21 +4,27 @@
 
   angular.module('quicktech.core.devices').controller('quicktech.core.companies.companyProfileTabsCtrl',
     ['$scope', 'DevicesService', '$state', '$stateParams', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.UserConfirmationsService', 'CompaniesService', 'UsersService', 'SubscriptionsService', 'Utils',
+      'quicktech.common.services.UserConfirmationsService', 'CompaniesService', 'UsersService', 'SubscriptionsService',
+      'Utils', 'quicktech.common.services.PermissionsService',
       function ($scope, DevicesService, $state, $stateParams, SharedStateService,
-                UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService, Utils) {
+                UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
+                Utils, PermissionsService) {
 
         var tabs = ['users', 'devices', 'agents', 'network-scan', 'settings'], /*... ['VENDORS', 'ACTIVITIES']*/
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
           lastMasterAgentId;
 
+        $scope.PermissionsService = PermissionsService;
         $scope.selectDevices = {};
         $scope.isCollapsedGraph = true;
         $scope.isScanDevicesLoad = false; // change in services
-        $scope.currentOpenTab = tabs.indexOf($stateParams.tabName) > -1 ? $stateParams.tabName : tabs[0];
+        if (tabs.indexOf($stateParams.tabName) === -1) {
+          $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
+        }
         $scope.orderScanBy = 'hostName';
         $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
+
 
         $scope.credential = {
           name: '',
@@ -65,7 +71,7 @@
           if (resp.masterAgentId !== lastMasterAgentId) {
             lastMasterAgentId = resp.masterAgentId;
 
-            if (lastMasterAgentId) {
+            if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
                 $scope.scanDevices = resp;
               });
@@ -81,7 +87,8 @@
           } else {
             $scope.isHasDevices = false;
             if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings') {
-              $state.go('companyProfile', { companyId: $stateParams.companyId, tabName: 'users' });
+              $state.go('companyProfile', { companyId: $stateParams.companyId,
+                tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
             }
 
           }
@@ -107,7 +114,7 @@
           } else {
             $scope.currentOpenTab = tabName;
 
-            if (tabName === 'network-scan') {
+            if (tabName === 'network-scan' && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getAgentSettingsByCompany($scope.company.id, function (resp) {
                 var isAutoRescanEnable = resp.autoScanNetwork;
 
