@@ -3,11 +3,13 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.myProfileCtrl',
-    ['$scope', '$state', '$stateParams', '$location', 'UsersService', '$timeout', 'quicktech.common.services.PermissionsService',
-      function ($scope, $state, $stateParams, $location, UsersService, $timeout, PermissionsService) {
+    ['$scope', '$state', '$stateParams', '$location', 'UsersService', '$timeout',
+      'quicktech.common.services.PermissionsService', 'Utils',
+      function ($scope, $state, $stateParams, $location, UsersService, $timeout, PermissionsService, Utils) {
+        var currentDevice;
 
         $scope.PermissionsService = PermissionsService;
-
+        $scope.selectedDevice = {};
         $scope.aboutMe = $scope.currentUser.status;
         //$scope.password = {
         //  oldPassword: '',
@@ -23,6 +25,13 @@
             }
           }
           $scope.loadUserProfile = true;
+        });
+
+        UsersService.getActivityHistory(function (resp) {
+          $scope.activityHistory = resp;
+          $scope.selectedDevice = currentDevice = resp.find(function (device) {
+            return device.current;
+          })
         });
 
         $scope.saveEmailNotifications = function (form) {
@@ -76,6 +85,37 @@
             });
 
           }
+        };
+
+        $scope.closeSession = function (device, event) {
+          var idsForDelete;
+
+          if (device) {
+            if ($scope.selectedDevice.id === device.id) {
+              $scope.selectedDevice = currentDevice;
+            }
+
+            idsForDelete = [device.id];
+            Utils.deleteById($scope.activityHistory, device.id);
+          } else {
+            idsForDelete = [];
+            for (var i = 0; i < $scope.activityHistory.length; i++) {
+              var deviceId = $scope.activityHistory[i].id;
+              if (deviceId !== currentDevice.id) {
+                idsForDelete.push(deviceId);
+              } else {
+                $scope.activityHistory = [currentDevice];
+                $scope.selectedDevice = currentDevice;
+              }
+            }
+          }
+
+          UsersService.closeSessions(idsForDelete);
+          event.stopPropagation();
+        };
+
+        $scope.selectDevice = function (device) {
+          $scope.selectedDevice = device;
         };
 
         //$scope.$watch('password.oldPassword', function () {

@@ -1,27 +1,28 @@
-<div class="row">
-	<div class="col-md-12">
-		<div class="col-md-6">
-			<h4>Devices</h4>
-		</div>
-		<div class="col-md-6">
-			<p class="remove">
-				remove all devices
-			</p>
-		</div>
-		<div class="col-md-12 logged">
-			<div class="device-id">
-				<p>
-				Chrome, Windows (Kiev, Ukraine, 192.168.1.1)
-				<span class="current">current</span>
-				<i class="icn-sm icn-remove-token unlog"></i>
-				</p>
-			</div>
-			<div class="device-id">
-				<p>
-				Chrome, Windows (Kiev, Ukraine, 192.168.1.1)
-				<i class="icn-sm icn-remove-token unlog"></i>
-				</p>
-			</div>
-		</div>
-	</div>
+<div class="row" id="myProfileTrackingDevices">
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <h4>Activity History</h4>
+    </div>
+    <div google-map latitude="selectedDevice.latitude" longitude="selectedDevice.longitude"></div>
+    <div class="col-md-12">
+      <p class="remove">
+        <span ng-click="closeSession($event)" ng-if="activityHistory.length > 1">remove all devices</span>
+      </p>
+    </div>
+    <div class="col-md-12 logged">
+      <div class="device-id" ng-repeat="device in activityHistory | orderBy: 'lastAccessDate' track by device.id"
+           ng-click="selectDevice(device)" ng-class="{'selected': selectedDevice.id === device.id}">
+        <p>
+          <span ng-if="device.browserName">{{ device.browserName + ', ' }}</span>
+          <span ng-if="device.osName">{{ device.osName + ' ' }}</span>
+          (<span ng-if="device.city">{{ device.city + ', ' }}</span><span ng-if="device.country">{{ device.country + ', ' }}</span><span
+          ng-if="device.ipAddress">{{ device.ipAddress }}</span>)&nbsp;
+          <span ng-if="device.current || device.lastAccessDate" class="current">
+            last seen: {{ device.current ? 'now' : (device.lastAccessDate | date) }}
+          </span>
+          <i class="icn-sm icn-remove-token unlog" ng-click="closeSession(device, $event)" ng-if="!device.current"></i>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
