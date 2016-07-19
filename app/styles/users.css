@@ -21,6 +21,7 @@
   -o-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
 }
+
 .users-list .user-card:hover{
   border: 1px solid #fff;
   box-shadow: 0 4px 25px 0 rgba(10,45,89,.1);

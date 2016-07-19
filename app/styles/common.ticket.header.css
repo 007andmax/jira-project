@@ -17,6 +17,18 @@
   /*box-shadow: rgba(9, 59, 121, 0.1) 0px 1px 0px 0px;*/
   z-index: 1;
 }
+.left-panel-closed.ticket-header.ticket-fixed-header{
+  position: fixed;
+  /*right: 77px;*/
+  padding: 30px;
+  padding-bottom: 24px;
+  top: 78px;
+  width: calc(100% - 153px);
+  background-color: rgba(255, 255, 255, 0.94);
+  /*box-shadow: rgba(9, 59, 121, 0.1) 0px 1px 0px 0px;*/
+  z-index: 1;
+}
+
 .large .ticket-header.ticket-fixed-header{
   right: 0;
   width: calc(100% - 80px);
@@ -24,7 +36,7 @@
 @media screen and (min-width: 1316px){
   .ticket-header.ticket-fixed-header {
     right: 281px !important;
-    width: calc(100% - 357px);
+    width: calc(100% - 597px);
   }
   .large .ticket-header.ticket-fixed-header{
     width: calc(100% - 80px);
@@ -33,7 +45,7 @@
 }
 @media screen and (min-width: 1390px){
   .ticket-header.ticket-fixed-header {
-    width: calc(100% - 357px);
+    width: calc(100% - 597px);
   }
   .large .ticket-header.ticket-fixed-header{
     width: calc(100% - 240px);
@@ -45,6 +57,12 @@
     width: calc(100% - 1096px);
   }
 }
+@media only screen and (min-width: 1701px){
+  .left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 856px);
+  }
+}
+
 @media only screen and (min-width: 1930px){
   .ticket-header.ticket-fixed-header {
     width: calc(100% - 1061px);

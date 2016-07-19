@@ -56,15 +56,12 @@
   <link rel='stylesheet' href='styles/ticket-tags.css'/>
   <link rel='stylesheet' href='styles/loading-indicator.css'/>
   <link rel='stylesheet' href='styles/button-with-loading-indicator.css'/>
-<<<<<<< Updated upstream
   <!-- endbuild -->
-=======
   <link rel="stylesheet" href="styles/settings.css"/>
   <link rel='stylesheet' href='styles/permissions-management.css'/>
   <link rel='stylesheet' href='styles/tracking-devices.css'/>
   <link rel='stylesheet' href='styles/left-panel-test.css'/>
    <!-- endbuild -->
->>>>>>> Stashed changes
 
   <script src="../configs.js"></script>
 
@@ -91,11 +88,11 @@
   </style>
 
 </head>
-<body ng-app="quicktech">
+<body class="left-panel-closed" ng-app="quicktech">
 
 <div class="alert alert-yellow hide" user-notification style="z-index: 1039;"></div>
 
-<div id="top" style="z-index: 1038;" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
+<div class="top-bar" style="z-index: 1038;" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
 
 <aside id="left" qt-sidebar style="z-index: 1039;"
        ng-include="'/html/scripts/core/left-panel/left-panel-test.tpl.html'"></aside>
