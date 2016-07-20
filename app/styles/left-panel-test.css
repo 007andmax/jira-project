@@ -71,7 +71,7 @@
 }
 .center-category .active{
 	color: #fff;
-    background: #24303f;
+  background: rgba(255, 255, 255, 0.12);
 }
 .fu{
 	position: absolute;
