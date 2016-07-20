@@ -9,7 +9,9 @@
         'CLAIM_TICKET': function (ticket) {
           return isTicketOpen(ticket) && !ticket.assignedUser;
         },
-        'CHANGE_STATUS': isTicketOpenAndAssigned,
+        'CHANGE_STATUS': function (ticket) {
+          return isTicketOpen(ticket) && ticket.assignedUser;
+        },
         'CHANGE_PRIORITY': isTicketOpen,
         'SEND_TO_SPAM': isTicketOpen,
         'SEND_TO_TRASH': function (ticket) {
@@ -122,10 +124,6 @@
         return ticket.status !== 'COMPLETED' && !isSpamOrTrash(ticket);
       }
 
-      function isTicketOpenAndAssigned(ticket) {
-        return ticket.assignedUser && isTicketOpen(ticket);
-      }
-
       function isSpamOrTrash(ticket) {
         return ticket.reportedAsSpamAt || ticket.markedAsSpamAt || ticket.trash;
       }
@@ -143,7 +141,9 @@
       }
 
       function isUpdateAllowed(ticket) {
-        return isTicketOpenAndAssigned(ticket) || ticket.sharedToCurrentUserAt;
+        return isTicketOpen(ticket) &&
+          ((ticket.assignedUser && $rootScope.currentUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
+          ticket.sharedToCurrentUserAt);
       }
 
       return {
