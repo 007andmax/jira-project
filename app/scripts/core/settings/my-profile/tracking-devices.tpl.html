@@ -1,10 +1,10 @@
 <div class="row" id="myProfileTrackingDevices">
   <div class="col-md-12">
-    <div class="col-md-12">
+    <div class="col-md-12" style="padding: 0px">
       <h4>Activity History</h4>
     </div>
     <div google-map latitude="selectedDevice.latitude" longitude="selectedDevice.longitude"></div>
-    <div class="col-md-12">
+    <div class="col-md-12 col-xs-12">
       <p class="remove">
         <span ng-click="closeSession($event)" ng-if="activityHistory.length > 1">remove all devices</span>
       </p>

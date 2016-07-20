@@ -11,6 +11,9 @@
 .current{
 	color: #94a4b8;
 }
+.logged{
+padding: 0;
+}
 .unlog{
 	float: right;
 	transform: translateY(50%);
@@ -22,4 +25,14 @@
 }
 .device-id {
   cursor: pointer;
+  padding: 0 15px;
+}
+.device-id>p{
+	line-height: 2em;
+}
+.device-id:hover{
+	background-color: #e5e3df;
+}
+.selected{
+	background-color: #e5e3df;
 }
