@@ -290,6 +290,15 @@
 .invoice-table-head .invoice-table-head-item div:nth-child(6) {
   width: 11%;
 }
+@media only screen and (max-width: 1450px) {
+  .invoice-table-head .invoice-table-head-item div:nth-child(6) {
+    padding: 0;
+    transform: translateY(30%);
+  }
+  .invoice-table-head .invoice-table-head-item div:nth-child(6) .sort-icon {
+    top: 4px;
+  }
+}
 .invoice-table-head .invoice-table-head-item div:nth-child(5){
   width: 12%;
 }

@@ -1150,7 +1150,7 @@ hr {
 .tabs-container .btn,
 .tabs-container .add-company-container {
   /*margin-right: 30px;*/
-  margin-top: -8px;
+  margin-top: 8px;
 }
 .tabs-container .add-company-container {
   position: relative;
@@ -5338,6 +5338,7 @@ tbody.collapse.in {
   padding: 0;
   margin-top: 6px !important;
   overflow: hidden;
+  margin-bottom: 100px;
 }
 .dropdown-menu-tabs .nav-tabs-dropdown {
   position: absolute;
@@ -6932,14 +6933,14 @@ select[multiple].input-group-sm > .input-group-btn-search > .btn-search {
     left: 58%;
   }
   .global-search .custom-scroll.dropdown-menu{
-    width: 175px !important;
+    width: 305px !important;
   }
   .topNavbar-search .dropdown-menu{
-    width: 175px !important;
+    width: 305px !important;
   }
   .topNavbarLeft-Right{
     width: 125px;
-    margin-right: -100px;
+    margin-right: -80px;
   }
   .input-group-btn-search{
     width: 60px;
@@ -9787,11 +9788,11 @@ button.close {
   background-position: -714px 1px;
 }
 .ticket-add-content .ticket-add-product .qt-table li{
-  display: block;
+  /*display: block;*/
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-1{
   display: inline-block;
-  width: calc(100% - 385px);
+  width: calc(100% - 400px);
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-3,
 .ticket-add-content .ticket-add-product .qt-table li .col-4,

@@ -178,6 +178,11 @@
   padding: 5px 40px;
   cursor: pointer;
 }
+/*@media only screen and (max-width: 1100px) {
+  .form-control-top-search {
+    width: 270px !important;
+  }
+}*/
 
 @media screen and (max-width: 1600px) {
   .topNavbar-logo .logo {
@@ -198,7 +203,7 @@
   }
 
   .form-control-top-search {
-    width: 300px !important;
+    width: 270px !important;
   }
 
   .topNavbar-logo .logo {
@@ -261,7 +266,6 @@
   margin-right: 30px;
   color: #4c5c6f;
 }
-
 .topNavbarLeft > p strong {
   font-weight: 400;
 }

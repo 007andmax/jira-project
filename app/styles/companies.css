@@ -12,6 +12,7 @@
   -webkit-transition: 0.3s ease-out box-shadow;
   -o-transition: 0.3s ease-out box-shadow;
   transition: 0.3s ease-out box-shadow;
+  min-height: 290px;
 }
 @media (max-width: 1100px) {
   .companies-list .company-card{

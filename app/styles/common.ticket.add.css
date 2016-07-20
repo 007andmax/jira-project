@@ -33,9 +33,9 @@
 }
 
 .add-expense-btn {
-  margin-right: 20px;
-  margin-top: 7px !important;
-  float: right;
+  /*margin-right: 20px;*/
+  /*margin-top: 7px !important;*/
+  /*float: right;*/
 }
 
 .ticket-add .qt-table{
@@ -47,7 +47,7 @@
 }
 
 .ticket-add-content{
-    margin-left: 48px;
+    /*margin-left: 48px;*/
     border: 1px #e7ecf2 solid;
 }
 
@@ -165,7 +165,7 @@
 }
 
 .ticket-add-footer{
-    margin-left: 48px;
+    /*margin-left: 48px;*/
     margin-top: 20px;
 }
 .ticket-add-footer .checkbox{

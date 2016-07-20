@@ -11,7 +11,8 @@ only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
 
   .icn-xs, .icn-sm, .icn-md, .icn-lg, .control-indicator{
-    background-image: url('../images/sprites-retina-s9f68249a71.png');
+    /*background-image: url('../images/sprites-retina-s9f68249a71.png');*/
+    background-image: url('../images/sprites-s76c759f188.png');
     background-repeat: no-repeat;
     -webkit-background-size: 4000px 800px;
     background-size: 4000px 800px;
