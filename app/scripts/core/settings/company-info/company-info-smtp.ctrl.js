@@ -28,6 +28,14 @@
             }
           };
 
+        $scope.emailVia = [{
+          value: true,
+          label: 'your own SMTP server'
+        }, {
+          value: false,
+          label: 'Quicktech mail server'
+        }];
+
         $scope.popoverOpened = false;
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.smtp = {};
@@ -41,6 +49,7 @@
           $scope.smtp = resp;
           savedSMTPSettings = angular.copy(resp);
           portIsEmpty = !resp.port;
+          $scope.usedEmailVia = resp.useSMTP ? $scope.emailVia[0] : $scope.emailVia[1];
         });
 
         $scope.$watch('smtp.encryptionType', function (value) {
@@ -66,6 +75,11 @@
             $scope.smtpForm.login.$setValidity('unique', !!resp);
             $scope.checkLoginUniqueInProgress = false;
           })
+        };
+
+        $scope.changeEmailVia = function (form) {
+          $scope.smtp.useSMTP = $scope.usedEmailVia.value;
+          $scope.saveSMTP(form);
         };
 
         $scope.setDomain = function (value, form) {

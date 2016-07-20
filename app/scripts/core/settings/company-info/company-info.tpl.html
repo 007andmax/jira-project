@@ -48,75 +48,6 @@
 
             <div class="form-row clearfix">
 
-              <div class="form-group full-width"
-                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                <!--|| isShowingErrors(basicInfoForm, 'techDomainName')-->
-
-                <label class="control-label"
-                       ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                  <!--|| isShowingErrors(basicInfoForm, 'techDomainName')-->
-                  Forward your email to:
-                </label>
-
-                <div ng-messages="basicInfoForm.supportMailBox.$error"
-                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'supportMailBox')}">
-                  <label class="control-label" ng-message="required">SUPPORT EMAIL name is required.</label>
-                  <label class="control-label" ng-message="maxlength">SUPPORT EMAIL name is too large.</label>
-                  <label class="control-label" ng-message="minlength">SUPPORT EMAIL name is too short.</label>
-                  <label class="control-label" ng-message="pattern">Please enter a valid SUPPORT EMAIL name.</label>
-                  <label class="control-label" ng-message="unique">SUPPORT EMAIL name already occupied.</label>
-                </div>
-
-                <!--<div ng-messages="basicInfoForm.techDomainName.$error"-->
-                <!--ng-class="{'hide': !isShowingErrors(basicInfoForm, 'techDomainName') || isShowingErrors(basicInfoForm, 'supportMailBox')}">-->
-                <!--<label class="control-label" ng-message="required">Domain name is required.</label>-->
-                <!--<label class="control-label" ng-message="maxlength">Domain name is too large.</label>-->
-                <!--<label class="control-label" ng-message="minlength">Domain name is too short.</label>-->
-                <!--<label class="control-label" ng-message="unique">This Domain name already occupied.</label>-->
-                <!--</div>-->
-
-                <input class="form-control" type="text" readonly/>
-                <!--ng-model="companyForSettingPage.supportMailBox" name="supportMailBox"-->
-                <!--ng-minlength="3" ng-maxlength="20" ng-required="true" make-dirty-on-blur-->
-                <!--is-uniq-validation validation-func="validateSuppEmailName"-->
-                <!--ng-pattern="emailNamePattern" hard-reset-pattern="emailNamePattern"-->
-
-                <!--<span class="email-addon" style="width: 30px;left: 162px;">@</span>-->
-
-                <!--<input class="form-control has-addon" type="text" ng-model="techDomainName"-->
-                <!--name="techDomainName" ng-minlength="3" ng-maxlength="25" ng-required="true" make-dirty-on-blur-->
-                <!--is-uniq-validation validation-func="validateCompanyDomain"-->
-                <!--style="position: absolute;top: 21px;width: 168px;padding-right: 0;left: 200px;border-right: none;border-left: none;text-align: center;">-->
-
-                <span
-                  class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHost }}</span>
-
-              </div>
-
-            </div>
-
-            <div class="form-row clearfix">
-
-              <div class="form-group full-width"
-                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'businessEmail')}">
-
-                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  Support Email address (what you want your customers to see)
-                </label>
-
-                <div ng-messages="basicInfoForm.businessEmail.$error"
-                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'businessEmail')}">
-                  <label class="control-label" ng-message="pattern">Please enter a valid email.</label>
-                </div>
-
-                <input class="form-control" type="text" name="businessEmail"
-                       ng-model="companyForSettingPage.businessEmail" ng-pattern="emailPattern"
-                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
-              </div>
-            </div>
-
-            <div class="form-row clearfix">
-
               <div class="form-group full-width">
 
                 <label class="control-label">Company URL</label>
@@ -152,50 +83,76 @@
             <!--<div class="word-count">{{ 80 - editCompany.description.length }}</div>-->
             <!--</div>-->
             <!--</div>-->
-
-            <!--<div class="form-row clearfix">-->
-            <!--<div class="form-group no-label full-width">-->
-            <!--<div class="btn btn-lg btn-info pull-right"-->
-            <!--custom-disabled="{{ basicInfoForm.$invalid || basicInfoForm.$pristine || savingBasicInfoInProcess }}"-->
-            <!--ng-click="saveBasicInfo(basicInfoForm)">Save-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
           </div>
         </div>
       </form>
     </div>
   </div>
 
-  <div class="smtp-wrap" id="smtpSettings"
+  <div class="smtp-wrap create-user-form" id="smtpSettings"
        ng-form="smtpForm" ng-controller="quicktech.core.settings.smtpCtrl">
     <h3>SMTP Info
-      <span class="hint-icon" tooltip-class="hint-tooltip" tooltip-placement="bottom" tooltip="{{ smtpHintMessage }}">?</span>
+      <span class="hint-icon" tooltip-class="hint-tooltip" tooltip-placement="bottom"
+            tooltip="{{ smtpHintMessage }}">?</span>
     </h3>
     <div class="form-row clearfix" style="margin-bottom: 20px;">
-      <label class="control checkbox">
-        <input type="checkbox" name="useSMTP" ng-model="smtp.useSMTP" ng-change="saveSMTP(smtpForm)">
-        <span class="control-indicator"></span>
-      </label>
-      <span>send emails via my own custom SMTP server</span>
+      <div class="form-group">
+        <label class="control-label">Send emails via</label>
+        <select class="form-control" ng-model="usedEmailVia" ng-change="changeEmailVia(smtpForm)"
+                ng-options="item.label for item in emailVia"></select>
+      </div>
     </div>
 
-    <div class="form-row clearfix smtp-domains" style="margin-bottom: 20px;" ng-if="smtp.useSMTP">
-      <span ng-click="setDomain('GMAIL', smtpForm)">
-        <img src="./images/input-icons/gmail-logo.png" alt="gmail-logo" width="24">
-        <a>Gmail</a>
-      </span>
-      <span ng-click="setDomain('YAHOO', smtpForm)">
-        <img src="./images/input-icons/yahoo-logo.png" alt="yahoo-logo" width="24">
-        <a>Yahoo</a>
-      </span>
-      <span ng-click="setDomain('OUTLOOK', smtpForm)">
-        <img src="./images/input-icons/outlook-logo.png" alt="outlook-logo" width="24">
-        <a>Outlook</a>
-      </span>
+    <div ng-if="!smtp.useSMTP">
+      <div class="form-row clearfix">
+        <div class="form-group full-width">
+          <label class="control-label">
+            Your support email address:
+          </label>
+
+          <input class="form-control" type="text" readonly/>
+          <span class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHost }}</span>
+        </div>
+
+      </div>
+
+      <div class="form-row clearfix">
+
+        <div class="form-group full-width"
+             ng-class="{'has-error': isShowingErrors(smtpForm, 'businessEmail')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'businessEmail')}">
+            Alias for your email (clients will see this instead of the original):
+          </label>
+
+          <div ng-messages="smtpForm.businessEmail.$error"
+               ng-class="{'hide': !isShowingErrors(smtpForm, 'businessEmail')}">
+            <label class="control-label" ng-message="pattern">Please enter a valid email.</label>
+          </div>
+
+          <input class="form-control" type="text" name="businessEmail"
+                 ng-model="businessEmail" ng-pattern="emailPattern"
+                 execute-when-outfocused="">
+        </div>
+      </div>
     </div>
 
-    <div ng-show="smtp.useSMTP">
+    <div ng-if="smtp.useSMTP">
+      <div class="form-row clearfix smtp-domains" style="margin-bottom: 20px;">
+        <span ng-click="setDomain('GMAIL', smtpForm)">
+          <img src="./images/input-icons/gmail-logo.png" alt="gmail-logo" width="24">
+          <a>Gmail</a>
+        </span>
+        <span ng-click="setDomain('YAHOO', smtpForm)">
+          <img src="./images/input-icons/yahoo-logo.png" alt="yahoo-logo" width="24">
+          <a>Yahoo</a>
+        </span>
+        <span ng-click="setDomain('OUTLOOK', smtpForm)">
+          <img src="./images/input-icons/outlook-logo.png" alt="outlook-logo" width="24">
+          <a>Outlook</a>
+        </span>
+      </div>
+
       <div class="form-row clearfix">
 
         <div class="form-group domain"
@@ -212,7 +169,8 @@
           </div>
 
           <input type="text" class="form-control" ng-pattern="domainPattern" name="domain" ng-model="smtp.domain"
-                 required execute-when-outfocused="saveSMTP(smtpForm)" custom-disabled="{{ !smtp.useSMTP || disableFields }}">
+                 required execute-when-outfocused="saveSMTP(smtpForm)"
+                 custom-disabled="{{ !smtp.useSMTP || disableFields }}">
 
         </div>
 
@@ -232,7 +190,8 @@
           </div>
 
           <input type="number" min="0" max="65535" class="form-control" name="port" ng-model="smtp.port"
-                 required execute-when-outfocused="saveSMTP(smtpForm)" custom-disabled="{{ !smtp.useSMTP || disableFields }}">
+                 required execute-when-outfocused="saveSMTP(smtpForm)"
+                 custom-disabled="{{ !smtp.useSMTP || disableFields }}">
 
         </div>
 
@@ -269,7 +228,8 @@
           </div>
 
           <input type="text" class="form-control" name="login" ng-model="smtp.login" ng-pattern="emailPattern"
-                 required execute-when-outfocused="saveSMTP(smtpForm)" custom-disabled="{{ !smtp.useSMTP || disableFields }}"
+                 required execute-when-outfocused="saveSMTP(smtpForm)"
+                 custom-disabled="{{ !smtp.useSMTP || disableFields }}"
                  is-uniq-validation validation-func="checkSMTPLoginUnique" ng-change="smtp.testEmail = smtp.login">
 
         </div>
@@ -295,6 +255,18 @@
           </span>
 
         </div>
+      </div>
+
+      <div class="form-row clearfix">
+        <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox')}">
+          <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
+            Forward your email to:
+          </label>
+
+          <input class="form-control" type="text" readonly/>
+          <span class="company-url-addon">{{ companyForSettingPage.supportMailBox + '@' + currentHost }}</span>
+        </div>
+
       </div>
 
       <div class="form-row clearfix test-smtp-connection">
@@ -942,15 +914,18 @@
           <div class="col-5">&nbsp;</div>
         </li>
 
-        <li ng-repeat="tag in filteredTags = (tags | filter: {word: keyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
-            ng-form="updateTagForm">
+        <li
+          ng-repeat="tag in filteredTags = (tags | filter: {word: keyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
+          ng-form="updateTagForm">
           <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
             {{ tag.word }}
-            <i class="icn-sm icn-edit pull-right" tooltip="Edit" tooltip-placement="top" tooltip-append-to-body="true"></i>
+            <i class="icn-sm icn-edit pull-right" tooltip="Edit" tooltip-placement="top"
+               tooltip-append-to-body="true"></i>
           </div>
           <div class="col-1 form-group" ng-if="editingId === tag.id"
                ng-class="{'has-error': (triedToSave || updateTagForm.word.$dirty) && updateTagForm.$invalid}">
-            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..." required>
+            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
+                   required>
           </div>
 
           <div class="col-2" dropdown on-toggle="changeColor(open, tag)">
@@ -1029,7 +1004,8 @@
         <li ng-if="editingId === 'new'" ng-form="createTagForm">
           <div class="col-1 form-group"
                ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
-            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..." required>
+            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
+                   required>
           </div>
           <div class="col-2" dropdown>
             <span dropdown-toggle>
@@ -1068,367 +1044,367 @@
   </div>
 
   <!--<div class="email-me-wrapper">-->
-    <!--<form name="notificationForm">-->
-      <!--<h3>Send email to all relevant persons when: </h3>-->
+  <!--<form name="notificationForm">-->
+  <!--<h3>Send email to all relevant persons when: </h3>-->
 
-      <!--<h4 id="companyInfoTicket">Ticket Notifications</h4>-->
+  <!--<h4 id="companyInfoTicket">Ticket Notifications</h4>-->
 
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TU_ADDED">-->
-          <!--<span class="control-indicator"></span> a new Ticket Update is added-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TU_EDITED">-->
-          <!--<span class="control-indicator"></span> a Ticket Update is edited-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TU_DELETED">-->
-          <!--<span class="control-indicator"></span> a Ticket Update is deleted-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TICKET_ASSIGNED">-->
-          <!--<span class="control-indicator"></span> a ticket is assigned/re-assigned-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TICKET_CREATED">-->
-          <!--<span class="control-indicator"></span> a new ticket is created-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TICKET_CLOSED">-->
-          <!--<span class="control-indicator"></span> a ticket is closed-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TICKET_OPENED">-->
-          <!--<span class="control-indicator"></span> a ticket is marked as Open-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TICKET_SPAM">-->
-          <!--<span class="control-indicator"></span> a ticket is marked/reported as Spam-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.TICKET_TRASH">-->
-          <!--<span class="control-indicator"></span> a ticket is moved to Trash-->
-        <!--</label>-->
-      <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TU_ADDED">-->
+  <!--<span class="control-indicator"></span> a new Ticket Update is added-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TU_EDITED">-->
+  <!--<span class="control-indicator"></span> a Ticket Update is edited-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TU_DELETED">-->
+  <!--<span class="control-indicator"></span> a Ticket Update is deleted-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TICKET_ASSIGNED">-->
+  <!--<span class="control-indicator"></span> a ticket is assigned/re-assigned-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TICKET_CREATED">-->
+  <!--<span class="control-indicator"></span> a new ticket is created-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TICKET_CLOSED">-->
+  <!--<span class="control-indicator"></span> a ticket is closed-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TICKET_OPENED">-->
+  <!--<span class="control-indicator"></span> a ticket is marked as Open-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TICKET_SPAM">-->
+  <!--<span class="control-indicator"></span> a ticket is marked/reported as Spam-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.TICKET_TRASH">-->
+  <!--<span class="control-indicator"></span> a ticket is moved to Trash-->
+  <!--</label>-->
+  <!--</div>-->
 
-      <!--<h4 id="companyInfoAgent">Agent Notifications</h4>-->
+  <!--<h4 id="companyInfoAgent">Agent Notifications</h4>-->
 
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.AGENT_CREATED">-->
-          <!--<span class="control-indicator"></span> a new agent is created-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.AGENT_CONTACT_MODIFIED">-->
-          <!--<span class="control-indicator"></span> agent's contact information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.AGENT_ARCHIVED">-->
-          <!--<span class="control-indicator"></span> an agent is archived-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.AGENT_TICKET_RESTORE">-->
-          <!--<span class="control-indicator"></span> a ticket is restored to its original folder from either Spam or Trash-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.AGENT_ROLE_UPGRADED">-->
-          <!--<span class="control-indicator"></span> agent's privilege is upgraded to either Administrator or Super Admin-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.AGENT_ROLE_DOWNGRADED">-->
-          <!--<span class="control-indicator"></span> agent's privilege is downgraded to either Administrator or User-->
-        <!--</label>-->
-      <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.AGENT_CREATED">-->
+  <!--<span class="control-indicator"></span> a new agent is created-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.AGENT_CONTACT_MODIFIED">-->
+  <!--<span class="control-indicator"></span> agent's contact information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.AGENT_ARCHIVED">-->
+  <!--<span class="control-indicator"></span> an agent is archived-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.AGENT_TICKET_RESTORE">-->
+  <!--<span class="control-indicator"></span> a ticket is restored to its original folder from either Spam or Trash-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.AGENT_ROLE_UPGRADED">-->
+  <!--<span class="control-indicator"></span> agent's privilege is upgraded to either Administrator or Super Admin-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.AGENT_ROLE_DOWNGRADED">-->
+  <!--<span class="control-indicator"></span> agent's privilege is downgraded to either Administrator or User-->
+  <!--</label>-->
+  <!--</div>-->
 
-      <!--<h4 id="companyInfoUser">User Notifications</h4>-->
+  <!--<h4 id="companyInfoUser">User Notifications</h4>-->
 
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.USER_CREATED">-->
-          <!--<span class="control-indicator"></span> a new user is created-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.USER_CONTACT_INFO_CHANGED">-->
-          <!--<span class="control-indicator"></span> user's contact information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.USER_CONTACT_INFO_CHANGED">-->
-          <!--<span class="control-indicator"></span> a user is archived-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.USER_SUBS_TKT">-->
-          <!--<span class="control-indicator"></span> a user is subscribed to Ticket Updates-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.USER_SUBS_INV">-->
-          <!--<span class="control-indicator"></span> a user is subscribed to Invoice Updates-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.USER_ROLE_UPGRADED">-->
-          <!--<span class="control-indicator"></span> user's privilege is upgraded to Administrator-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.USER_ROLE_DOWNGRADED">-->
-          <!--<span class="control-indicator"></span> user's privilege is downgraded to User-->
-        <!--</label>-->
-      <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.USER_CREATED">-->
+  <!--<span class="control-indicator"></span> a new user is created-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.USER_CONTACT_INFO_CHANGED">-->
+  <!--<span class="control-indicator"></span> user's contact information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.USER_CONTACT_INFO_CHANGED">-->
+  <!--<span class="control-indicator"></span> a user is archived-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.USER_SUBS_TKT">-->
+  <!--<span class="control-indicator"></span> a user is subscribed to Ticket Updates-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.USER_SUBS_INV">-->
+  <!--<span class="control-indicator"></span> a user is subscribed to Invoice Updates-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.USER_ROLE_UPGRADED">-->
+  <!--<span class="control-indicator"></span> user's privilege is upgraded to Administrator-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.USER_ROLE_DOWNGRADED">-->
+  <!--<span class="control-indicator"></span> user's privilege is downgraded to User-->
+  <!--</label>-->
+  <!--</div>-->
 
-      <!--<h4 id="companyInfoCompany">Company Notifications</h4>-->
+  <!--<h4 id="companyInfoCompany">Company Notifications</h4>-->
 
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_CREATED">-->
-          <!--<span class="control-indicator"></span> a new company is created-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_BASIC_INFO">-->
-          <!--<span class="control-indicator"></span> company’s basic information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_ARCHIVED">-->
-          <!--<span class="control-indicator"></span> a company is archived-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_PRIMARY_CONTACT_ADDED">-->
-          <!--<span class="control-indicator"></span> a new primary contact is added-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_PRIMARY_CONTACT_INFO">-->
-          <!--<span class="control-indicator"></span> a primary contact information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_LOCATION_ADDED">-->
-          <!--<span class="control-indicator"></span> a new site/location is added-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_LOCATION_EDITED">-->
-          <!--<span class="control-indicator"></span> a site/location is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_TAX_ADDED">-->
-          <!--<span class="control-indicator"></span> tax information is added-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_TAX_EDITED">-->
-          <!--<span class="control-indicator"></span> tax information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_AGENT_APP_CREATED">-->
-          <!--<span class="control-indicator"></span> a new agent application is created-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_AGENT_APP_LOGIN">-->
-          <!--<span class="control-indicator"></span> agent application's login information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_AGENT_APP_UPDATED">-->
-          <!--<span class="control-indicator"></span> agent application is updated to latest available version-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_DEVICE_ADDED">-->
-          <!--<span class="control-indicator"></span> a new device is added-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_DEVICE_REMOVED">-->
-          <!--<span class="control-indicator"></span> a device is removed-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_INV_SENT">-->
-          <!--<span class="control-indicator"></span> an Invoice is sent-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_INV_RESENT">-->
-          <!--<span class="control-indicator"></span> an Invoice is re-sent-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_OVERDUE_INV_SENT">-->
-          <!--<span class="control-indicator"></span> an Overdue Invoice is sent-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.COMPANY_PAYMENT_RECEIVED">-->
-          <!--<span class="control-indicator"></span> a payment is received-->
-        <!--</label>-->
-      <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_CREATED">-->
+  <!--<span class="control-indicator"></span> a new company is created-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_BASIC_INFO">-->
+  <!--<span class="control-indicator"></span> company’s basic information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_ARCHIVED">-->
+  <!--<span class="control-indicator"></span> a company is archived-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_PRIMARY_CONTACT_ADDED">-->
+  <!--<span class="control-indicator"></span> a new primary contact is added-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_PRIMARY_CONTACT_INFO">-->
+  <!--<span class="control-indicator"></span> a primary contact information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_LOCATION_ADDED">-->
+  <!--<span class="control-indicator"></span> a new site/location is added-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_LOCATION_EDITED">-->
+  <!--<span class="control-indicator"></span> a site/location is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_TAX_ADDED">-->
+  <!--<span class="control-indicator"></span> tax information is added-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_TAX_EDITED">-->
+  <!--<span class="control-indicator"></span> tax information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_AGENT_APP_CREATED">-->
+  <!--<span class="control-indicator"></span> a new agent application is created-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_AGENT_APP_LOGIN">-->
+  <!--<span class="control-indicator"></span> agent application's login information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_AGENT_APP_UPDATED">-->
+  <!--<span class="control-indicator"></span> agent application is updated to latest available version-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_DEVICE_ADDED">-->
+  <!--<span class="control-indicator"></span> a new device is added-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_DEVICE_REMOVED">-->
+  <!--<span class="control-indicator"></span> a device is removed-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_INV_SENT">-->
+  <!--<span class="control-indicator"></span> an Invoice is sent-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_INV_RESENT">-->
+  <!--<span class="control-indicator"></span> an Invoice is re-sent-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_OVERDUE_INV_SENT">-->
+  <!--<span class="control-indicator"></span> an Overdue Invoice is sent-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.COMPANY_PAYMENT_RECEIVED">-->
+  <!--<span class="control-indicator"></span> a payment is received-->
+  <!--</label>-->
+  <!--</div>-->
 
-      <!--<h4 id="companyInfoVendor">Vendor Notifications</h4>-->
+  <!--<h4 id="companyInfoVendor">Vendor Notifications</h4>-->
 
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_CREATED">-->
-          <!--<span class="control-indicator"></span> a new vendor is created-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_BASIC_INFO">-->
-          <!--<span class="control-indicator"></span> vendor’s basic information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_ARCHIVED">-->
-          <!--<span class="control-indicator"></span> a vendor is archived-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_NEW_PRIMARY_CONTACT">-->
-          <!--<span class="control-indicator"></span> a new primary contact is added-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_PRIMARY_CONTACT_EDITED">-->
-          <!--<span class="control-indicator"></span> primary contact’s information is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_LOCATION_ADDED">-->
-          <!--<span class="control-indicator"></span> a new site/location is added-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_LOCATION_EDITED">-->
-          <!--<span class="control-indicator"></span> a site/location is modified-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div class="clearfix">-->
-        <!--<label class="control checkbox pull-left">-->
-          <!--<input type="checkbox"-->
-                 <!--ng-model="emailNotifications.VENDOR_PRIM_CONTACT_SUBS_TU">-->
-          <!--<span class="control-indicator"></span> vendor's primary contact is subscribed to Ticket Updates-->
-        <!--</label>-->
-      <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_CREATED">-->
+  <!--<span class="control-indicator"></span> a new vendor is created-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_BASIC_INFO">-->
+  <!--<span class="control-indicator"></span> vendor’s basic information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_ARCHIVED">-->
+  <!--<span class="control-indicator"></span> a vendor is archived-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_NEW_PRIMARY_CONTACT">-->
+  <!--<span class="control-indicator"></span> a new primary contact is added-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_PRIMARY_CONTACT_EDITED">-->
+  <!--<span class="control-indicator"></span> primary contact’s information is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_LOCATION_ADDED">-->
+  <!--<span class="control-indicator"></span> a new site/location is added-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_LOCATION_EDITED">-->
+  <!--<span class="control-indicator"></span> a site/location is modified-->
+  <!--</label>-->
+  <!--</div>-->
+  <!--<div class="clearfix">-->
+  <!--<label class="control checkbox pull-left">-->
+  <!--<input type="checkbox"-->
+  <!--ng-model="emailNotifications.VENDOR_PRIM_CONTACT_SUBS_TU">-->
+  <!--<span class="control-indicator"></span> vendor's primary contact is subscribed to Ticket Updates-->
+  <!--</label>-->
+  <!--</div>-->
 
-      <!--&lt;!&ndash;<div class="clearfix">&ndash;&gt;-->
-      <!--&lt;!&ndash;<div class="btn btn-lg btn-info pull-right"&ndash;&gt;-->
-      <!--&lt;!&ndash;custom-disabled="{{ notificationForm.$pristine || savingNotifiInProcess }}"&ndash;&gt;-->
-      <!--&lt;!&ndash;ng-click="saveNotificationDaysHours(notificationForm)">Save&ndash;&gt;-->
-      <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--</form>-->
+  <!--&lt;!&ndash;<div class="clearfix">&ndash;&gt;-->
+  <!--&lt;!&ndash;<div class="btn btn-lg btn-info pull-right"&ndash;&gt;-->
+  <!--&lt;!&ndash;custom-disabled="{{ notificationForm.$pristine || savingNotifiInProcess }}"&ndash;&gt;-->
+  <!--&lt;!&ndash;ng-click="saveNotificationDaysHours(notificationForm)">Save&ndash;&gt;-->
+  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--</form>-->
   <!--</div>-->
 
 </div>
