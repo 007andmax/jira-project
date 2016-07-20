@@ -6,9 +6,9 @@
     [
       '$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'ServicesService', '$timeout',
-      'quicktech.common.services.TicketsPermissionsService',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService,
-                UserNotificationService, sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService) {
+      'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.PermissionsService',
+      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService,
+                sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService, PermissionsService) {
 
         var isNeedToDeleteUser = true,
           unassignedCompany = CompaniesService.getUnassignedCompany();
@@ -134,9 +134,12 @@
         });
 
         $scope.$watch('ticketCreatedUser', function (val) {
+
           if ((val !== null) && (typeof val === 'object') && (val.id)) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
             $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
+            $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', true);
+
             $scope.ticket.createdUser = {
               firstName: $scope.ticketCreatedUser.firstName,
               id: $scope.ticketCreatedUser.id,
@@ -152,6 +155,7 @@
               $scope.ticket.createdUser.companyId = unassignedCompany.id;
             }
           } else if (val && val.match($scope.emailPattern)) {
+
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
             var selectedUser = null;
@@ -164,6 +168,13 @@
             }
 
             if (!selectedUser) {
+
+              if (!PermissionsService.isAllowed('CREATE_USERS')) {
+                $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', false);
+              } else {
+                $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', true);
+              }
+
               UsersService.isEmailUnique(val, '', false, function (resp) {
                 if (resp.value) {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
@@ -180,6 +191,7 @@
               });
             } else {
               $scope.ticketCreatedUser = selectedUser;
+              $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', true);
             }
 
           } else if (val) {
@@ -330,7 +342,7 @@
 
           for (var i = 0, len = errors.length; i < len; i++) {
             var error = errors[i];
-            if (error === 'pattern' || error === 'unique' || error === 'invalidName') {
+            if (error === 'pattern' || error === 'unique' || error === 'invalidName' || error === 'permissions') {
               primaryError = error;
               break;
             }
@@ -342,6 +354,8 @@
             return 'Email already occupied by tech user.';
           } else if (primaryError === 'invalidName') {
             return 'Invalid company name.';
+          } else if (primaryError === 'permissions') {
+            return 'You have no permissions to create new user.';
           } else if (!primaryError && errors.indexOf('required') > -1) {
             return 'Required fields can\'t be left empty.';
           }
