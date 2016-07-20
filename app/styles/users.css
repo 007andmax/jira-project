@@ -466,7 +466,7 @@
   }
 }
 .form-row + .form-row, .phone-number-form .form-row{
-  margin-top: 13px;
+  /*margin-top: 13px;*/
 }
 @-moz-document url-prefix() {
   .form-row + .form-row, .phone-number-form .form-row{
@@ -476,11 +476,12 @@
 .form-row .form-group {
   float: left;
   width: 100%;
-  max-width: 245px;
+  max-width: 45%; /*experemental*/
   margin: 0;
 }
 .form-row .form-group.no-label{
   margin-top: 21px;
+  max-width: 50%; /*experemental*/
 }
 .settings-main-wrapper .form-row .form-group.full-width.no-label {
   margin-top: 17px;
@@ -507,7 +508,8 @@
 }
 @-moz-document url-prefix() {
   .form-row .form-group.no-label{
-    margin-top: 22px;
+    /*margin-top: 22px;*/
+    transform: translateY(50%);
   }
   .settings-main-wrapper .form-row .form-group.full-width.no-label {
     margin-top: 18px;
