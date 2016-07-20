@@ -5,9 +5,8 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketDetailsTipsMsgCtrl',
     ['$scope', 'TicketsService', '$state', '$stateParams', 'UsersService', '$rootScope',
       'quicktech.common.services.UserNotificationService', 'quicktech.common.services.TicketsPermissionsService',
-      'quicktech.common.services.PermissionsService',
       function ($scope, TicketsService, $state, $stateParams, UsersService, $rootScope, UserNotificationService,
-                TicketsPermissionsService, PermissionsService) {
+                TicketsPermissionsService) {
 
         $scope.TicketsPermissionsService = TicketsPermissionsService;
 
@@ -25,7 +24,7 @@
 
             UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
             $scope.uncheckTicket($scope.ticketDetails.id);
-            $state.go('tickets', {listType: $stateParams.listType});
+            $state.go('tickets', { listType: $stateParams.listType });
           });
         };
 
@@ -45,19 +44,37 @@
         };
 
         $scope.getSpamMessages = function (userId, option) {
+          var isCanMarkAsSpam = $scope.currentUser.isOwner && !$scope.ticketDetails.spamMarker;
 
-          if (option === 'MARK') {
-            if ($scope.currentUser.id === userId) {
-              return 'marked this ticket as spam, but you can either delete the ticket forever or restore the ticket status anytime, using the respective option.';
+          if ($scope.currentUser.id === userId) {
+            if (option === 'MARK') {
+              return 'marked this ticket as spam, but you can ' +
+                (TicketsPermissionsService.isActionVisible('delete_forever', $scope.ticketDetails) ? 'either delete the ticket forever or ' : '') +
+                'restore the ticket status anytime, using the respective option.';
             } else {
-              if (PermissionsService.isAllowed('DELETE_TICKETS')) {
+              return 'reported this ticket as spam, but you can ' +
+                (TicketsPermissionsService.isActionVisible('delete_forever', $scope.ticketDetails) ? 'either delete the ticket forever or ' : '') +
+                'restore the ticket status anytime, using the respective option.';
+            }
+          } else {
+            if (option === 'MARK') {
+              if (TicketsPermissionsService.isActionVisible('delete_forever', $scope.ticketDetails)) {
                 return 'has marked it as spam. You can either delete the ticket forever or restore the ticket status anytime, using the respective option.';
               } else {
                 return 'has marked it as spam. You can restore the ticket status anytime, using the respective option.';
               }
+            } else {
+              if (TicketsPermissionsService.isActionVisible('delete_forever', $scope.ticketDetails)) {
+                return 'has reported it as spam. You can either ' +
+                  (isCanMarkAsSpam ? 'mark it as spam or ' : '') +
+                  'delete the ticket forever or restore the ticket status anytime, using the respective option.';
+              } else {
+                return 'has reported it as spam. You can ' +
+                  (isCanMarkAsSpam ? 'mark it as spam or ' : '') +
+                  'restore the ticket status anytime, using the respective option.';
+              }
             }
           }
-
         };
 
         function calculateDays() {

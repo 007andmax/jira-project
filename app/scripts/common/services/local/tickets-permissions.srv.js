@@ -9,9 +9,7 @@
         'CLAIM_TICKET': function (ticket) {
           return isTicketOpen(ticket) && !ticket.assignedUser;
         },
-        'CHANGE_STATUS': function (ticket) {
-          return isTicketOpen(ticket) && ticket.assignedUser;
-        },
+        'CHANGE_STATUS': isUpdateAllowed,
         'CHANGE_PRIORITY': isTicketOpen,
         'SEND_TO_SPAM': isTicketOpen,
         'SEND_TO_TRASH': function (ticket) {
@@ -45,21 +43,18 @@
             return true;
           }
         },
-        'RESTORE': function (ticket, option, action) {
+        'RESTORE': function (ticket, option) {
           if (!isSpamOrTrash(ticket)) {
             return false;
           }
 
           if (option === 'from_spam') {
-            switch (action) {
-              case 'user_spam':
-                return $rootScope.currentUser.role === USER_ROLES.USER && ticket.reportedAsSpamAt;
-              case 'admin_delete':
-                return $rootScope.currentUser.role !== USER_ROLES.USER && ticket.markedAsSpamAt;
-              case 'admin_spam':
-                return $rootScope.currentUser.role !== USER_ROLES.USER && !ticket.markedAsSpamAt && ticket.reportedAsSpamAt;
-              default:
+            if ($rootScope.currentUser) {
+              if ($rootScope.currentUser.isOwner) {
                 return ticket.markedAsSpamAt || ticket.reportedAsSpamAt;
+              } else {
+                return ticket.reportedAsSpamAt && !ticket.markedAsSpamAt;
+              }
             }
           } else if (option === 'from_trash') {
             return ticket.trash;
@@ -141,6 +136,10 @@
       }
 
       function isUpdateAllowed(ticket) {
+        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && isTicketOpen(ticket)) {
+          return true;
+        }
+
         return isTicketOpen(ticket) &&
           ((ticket.assignedUser && $rootScope.currentUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
           ticket.sharedToCurrentUserAt);
