@@ -75,9 +75,10 @@
 
         $scope.isInvoiceSubscriptionForbidden = function () {
           return $scope.users.filter(function (user) {
-              return user.subscription.invoice;
+              return user.subscription && user.subscription.invoice;
             }).length === $scope.selectUsersIds.filter(function (id) {
-              return UsersService.getOneById(id).subscription.invoice;
+              var user = UsersService.getOneById(id);
+              return user.subscription && user.subscription.invoice;
             }).length;
         };
 

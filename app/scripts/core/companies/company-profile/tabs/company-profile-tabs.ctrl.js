@@ -308,5 +308,17 @@
           $scope.editedUser = angular.copy(user);
         };
 
+        $scope.createUser = function (event) {
+          $scope.editedUser = {
+            newUser: true,
+            company: { id: $scope.company.id },
+            role: 'USER',
+            phoneNumbers: [{ phoneType: 'Office' }],
+            subscription: {}
+          };
+
+          event.stopPropagation();
+        };
+
       }]);
 }());

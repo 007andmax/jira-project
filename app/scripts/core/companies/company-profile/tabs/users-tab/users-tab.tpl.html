@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" style="display: block">
-  <ul class="qt-list qt-users" style="margin-bottom: 150px">
-    <li class="list-heading" style="cursor: pointer !important;">
+  <ul class="qt-list qt-users" style="margin-bottom: 150px; margin-top: 30px">
+    <li class="list-heading" style="cursor: pointer !important;" fixed-block-top offset-top="148">
       <div class="col-1" ng-click="setOrderByUsers('name')">
         <label class="control checkbox pull-left" ng-show="users.length > 0">
           <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
@@ -9,312 +9,289 @@
         </label>
 
         <span class="sort-span">Name<i class="icn-sm sort-icon icn-sort"
-        ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
+                                       ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
+
+        <div ng-click="createUser($event)">
+          <i class="icn-sm icn-plus-dark"></i>
+        </div>
       </div>
 
       <div class="col-2"><span>Contact No.</span></div>
 
       <div class="col-3" ng-click="setOrderByUsers('type')">
         <span class="sort-span">Type<i class="icn-sm sort-icon icn-sort"
-        ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'type'}"></i></span>
+                                       ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'type'}"></i></span>
       </div>
 
       <div class="col-3-2">Subscription</div>
 
       <div class="col-4" ng-click="setOrderByUsers('ticket')">
         <span class="sort-span">Tickets<i class="icn-sm sort-icon icn-sort"
-        ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'ticket'}"></i></span>
+                                          ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'ticket'}"></i></span>
       </div>
 
       <div class="col-5"></div>
 
     </li>
 
-    <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
-      ng-controller="quicktech.core.companies.usersTabCtrl" ng-show="editedUser.id !== user.id">
-      <div class="col-1">
-        <div class="user-bio">
+    <li ng-if="editedUser && editedUser.newUser" style="min-height: 100px" qt-scroll-to="center">
+      <div class="row" ng-controller="quicktech.core.companies.editUserCtrl" ng-form="editUserForm">
+        <div class="col-md-2 ui">
+          <div ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
+            <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First
+              Name</label>
+            <div ng-messages="editUserForm.firstName.$error"
+                 ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
+              <div class="control-label" ng-message="required">First name is required.</div>
+              <div class="control-label" ng-message="maxlength">First name is too large.</div>
+              <div class="control-label" ng-message="minlength">First name is too short.</div>
+            </div>
+            <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
+                   name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
+          </div>
+        </div>
+        <div class="col-md-2 ui">
+          <div ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
+            <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">
+              Last Name
+            </label>
+            <div ng-messages="editUserForm.lastName.$error"
+                 ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
+              <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+            </div>
+            <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                   name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
+          </div>
+        </div>
+        <div class="col-md-2 ui half-3-col" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
+          <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
 
-          <label class="control checkbox pull-left">
-            <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
-            <span class="control-indicator"></span>
-          </label>
-
-          <div class="pull-left avatar">
-            <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
-            <i class="on bottom"></i>
+          <div ng-messages="editUserForm.primaryEmail.$error"
+               ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
+            <div class="control-label" ng-message="pattern">Invalid email address.</div>
+            <div class="control-label" ng-message="unique">Already occupied.</div>
           </div>
 
-          <div class="user-name pull-left">{{ getUserName(user) }}</div>
-          <span class="label label-light">{{ user.designation }}</span>
-
+          <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                 ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
+                 is-uniq-validation validation-func="validateUserEmail">
         </div>
-      </div>
+        <div class="col-md-2 ui half-3-col">
+          <div ng-class="{'has-error': isShowingErrors(editUserForm, 'phoneNumber')}">
 
-      <div class="col-2">
-        <div class="clearfix">
-          <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
-            <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
-            'icn-user-fax': phoneNumber.typeNumber === 'FAX',
-            'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
-            {{ phoneNumber.number }}
-          </span>
-        </div>
-      </div>
+            <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'phoneNumber')}">
+              Phone Number
+            </label>
 
-      <div class="col-3">
-        <div class="user-account-type dropdown">
+            <div ng-messages="editUserForm.phoneNumber.$error"
+                 ng-class="{'hide': !isShowingErrors(editUserForm, 'phoneNumber')}">
+              <div class="control-label" ng-message="pattern">Invalid number</div>
+              <div class="control-label" ng-message="maxlength">Too large.</div>
+            </div>
 
-          <div class="label-wrapper" aria-expanded="false" data-toggle="dropdown">
-            <span>
-              {{ user.role }}
-            </span>
+            <input type="text" class="form-control" name="phoneNumber" ng-model="editedUser.phoneNumbers[0].number"
+                   aria-expanded="true" ng-maxlength="20" ng-pattern="phoneNumberPattern" hard-phone-number-pattern
+                   country="{{companyData.addresses[0].countryCode}}" make-dirty-on-blur>
           </div>
-
-          <ul class="dropdown-menu dropdown-privilege">
-
-            <li ng-class="{'active': user.role === 'USER'}">
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('USER')">
-                User
-              </a>
-            </li>
-
-            <li ng-class="{'active': user.role === 'ADMIN'}">
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('ADMIN')">
-                Administrator
-              </a>
-            </li>
-
-          </ul>
-
         </div>
-      </div>
+        <div class="col-md-2 ui half-3-col">
+          <div class="form-group">
 
-      <div class="col-3-2 dropdown">
+            <label class="control-label">Account Type</label>
 
-        <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" data-toggle="dropdown"
-          tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
-          <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
+            <div class="dropdown">
+
+              <input class="form-control has-dropdown" type="text"
+                     ng-model="roles[editedUser.role]" data-toggle="dropdown" aria-expanded="true"
+                     class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
+              <i class="icn-sm icn-caret-gray"></i>
+
+              <ul class="dropdown-menu dropdown-account-type">
+                <li ng-repeat="(role, label) in roles" ng-click="editedUser.role = role">
+                  <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
         </div>
+        <div class="col-md-2 ui">
+          <label class="control-label">Subscribe to</label>
 
-        <ul class="dropdown-menu dropdown-subscribe">
+          <div class="dropdown">
+            <input class="form-control has-dropdown" type="text" value=""
+                   data-toggle="dropdown" aria-expanded="false" readonly="readonly">
+            <i class="icn-sm icn-caret-gray"></i>
 
-          <li>
-            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
-              <div class="clearfix">
-                <label class="control checkbox pull-left">
-                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
-                  <span class="control-indicator"></span> Ticket Updates
-                </label>
+            <div class="subscribe-tokens">
+
+              <div class="invoice-update-token"
+                   ng-show="editedUser.subscription.invoice">
+                Inv. Updates
               </div>
-            </a>
-          </li>
 
-          <li ng-hide="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
-            <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
-              <div class="clearfix">
-                <label class="control checkbox pull-left">
-                  <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
-                  <span class="control-indicator"></span> Invoice Updates
-                </label>
+              <div class="ticket-update-token"
+                   ng-show="editedUser.subscription.ticket">
+                Tkt Updates
               </div>
-            </a>
-          </li>
+            </div>
 
-        </ul>
+            <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
 
-      </div>
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+                   ng-model="editedUser.subscription.ticket">
 
-      <div class="col-4">
-        <span class="user-submitted-tickets">
-          {{ user.userStatistic.ticketsSubmitted || '0' }}
-        </span>
-      </div>
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-model="editedUser.subscription.ticket">
+                      <span class="control-indicator"></span> Ticket Updates
+                    </label>
+                  </div>
 
-      <div class="col-5">
-        <div class="list-actions pull-right">
+                </a>
+              </li>
 
-          <!--<div class="dropdown pull-left">-->
+              <li ng-if="!isLastInvoiceSubsciption">
+                <a tabindex="-1" href="javascript:void(0)"
+                   qt-checkbox ng-model="editedUser.subscription.invoice">
 
-          <!--<div class="btn btn-default pull-left has-tooltip disabled"-->
-          <!--data-toggle="dropdown" tooltip-placement="top" tooltip="logged in devices">-->
-          <!--<i class="icn-sm icn-user-devices"></i>-->
-          <!--</div>-->
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-model="editedUser.subscription.invoice">
+                      <span class="control-indicator"></span> Invoice Updates
+                    </label>
+                  </div>
 
-          <!--<ul class="dropdown-menu devices-menu dropdown-menu-right" role="menu">-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-server"></i>File.Server</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-computer"></i>Skynet.2013</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-mobile"></i>Mobile.Jack</a></li>-->
-          <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-fax"></i>Fax.Sublime</a></li>-->
-          <!--</ul>-->
-          <!--</div>-->
+                </a>
+              </li>
 
-          <div class="btn btn-default pull-left has-tooltip" ng-click="setEditedUser(user)"
-            tooltip-placement="top" tooltip="Edit">
-            <i class="icn-sm icn-edit"></i>
+            </ul>
+
           </div>
 
-          <div class="btn btn-default btn-user-mail pull-left has-tooltip" ng-show="user.primaryEmail"
-            email-to="user.primaryEmail" tooltip-placement="top" tooltip="Email">
-            <i class="icn-sm icn-user-mail"></i>
+        </div>
+        <div class="ui">
+          <div class="inline-user-edit-action center-btn">
+            <div class="btn btn-default distance has-tooltip" ng-click="saveUser(editUserForm)"
+                 tooltip-placement="top" tooltip="Save" ng-disabled="savingInProcess">
+              <i class="icn-sm icn-label-save"></i>
+            </div>
+            <div class="btn btn-default distance has-tooltip" ng-click="cancelEditing()"
+                 tooltip-placement="top" tooltip="Cancel" ng-disabled="savingInProcess">
+              <i class="icn-sm icn-remove-token"></i>
+            </div>
           </div>
-
-          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
-            ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_user')
-            && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
-            tooltip-placement="top" tooltip="Archive this User">
-            <i class="icn-sm icn-remove-token"></i>
-          </div>
-
-          <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
-          <!--tooltip-placement="top" tooltip="chat" ng-click="startChat()">-->
-          <!--<i class="icn-sm icn-user-chat"></i>-->
-          <!--</div>-->
-
         </div>
       </div>
     </li>
 
-    <li class="inline-user-edit" ng-if="editedUser && editedUser.id">
-      <!--  <div class="" ng-controller="quicktech.core.companies.editUserCtrl" ng-form="editUserForm">
-        <div class="row">
-          <div class="col-md-6 col-xs-6">
-            <div class="row">
-              <div class=" col-md-6 " ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
-                <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First Name</label>
-                <div ng-messages="editUserForm.firstName.$error"
-                  ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
-                  <div class="control-label" ng-message="required">First name is required.</div>
-                  <div class="control-label" ng-message="maxlength">First name is too large.</div>
-                  <div class="control-label" ng-message="minlength">First name is too short.</div>
-                </div>
-                <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
-                name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
-              </div>
-              <div class=" col-md-6" ng-class="{'has-error': isShowingErrors(editUserForm, 'designation')}">
-                <label class="control-label"
-                ng-class="{'hide': isShowingErrors(editUserForm, 'designation')}">Designation</label>
-                <div ng-messages="editUserForm.designation.$error"
-                  ng-class="{'hide': !isShowingErrors(editUserForm, 'designation')}">
-                  <div class="control-label" ng-message="maxlength">Designation is too large</div>
-                  <div class="control-label" ng-message="minlength">Designation is too short</div>
-                </div>
-                <input class="form-control" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
-                ng-model="editedUser.designation" ng-minlength="3" ng-maxlength="30">
-              </div>
-              <div class=" col-md-6" ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
-                <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">Last Name</label>
-                <div ng-messages="editUserForm.lastName.$error" ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
-                  <div class="control-label" ng-message="maxlength">Last name is too large.</div>
-                </div>
+    <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
+        ng-controller="quicktech.core.companies.usersTabCtrl"
+        show-model-element="{{ 'show-user-on-save-' + user.id }}"
+        ng-style="{'min-height': editedUser && editedUser.id === user.id ? '100px' : 'unset'}">
 
-                <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
-                name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
-
-              </div>
-
-              <div class=" col-md-6" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
-
-                <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
-
-                <div ng-messages="editUserForm.primaryEmail.$error"
-                  ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
-                  <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
-                  <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
-                  <div class="control-label" ng-message="unique">This email already occupied.</div>
-                </div>
-
-                <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-                ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
-                is-uniq-validation validation-func="validateUserEmail">
-
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-xs-6">
-            <div class="row">
-              <div class="form-row col-md-10" phone-numbers-edit is-try-to-save="triedToSave"
-              country-code="{{userCompanyCountryCode}}" ng-model="editedUser.phoneNumbers"></div>
-            </div>
-          </div>
-        </div>
-        <div class="inline-user-edit-action col-md-12 center-btn">
-          <div class="btn btn-default distance has-tooltip" ng-click="saveUser(editUserForm)"
-            tooltip-placement="top" tooltip="Save">
-            <i class="icn-sm icn-label-save"></i>
-          </div>
-          <div class="btn btn-default distance has-tooltip" ng-click="cancelEditing()"
-            tooltip-placement="top" tooltip="Cancel">
-            <i class="icn-sm icn-remove-token"></i>
-          </div>
-        </div> -->
-        <div class="row">
+      <div ng-if="editedUser && editedUser.id === user.id">
+        <div class="row" ng-controller="quicktech.core.companies.editUserCtrl" ng-form="editUserForm">
           <div class="col-md-2 ui">
             <div ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
-              <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First Name</label>
+              <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First
+                Name</label>
               <div ng-messages="editUserForm.firstName.$error"
-                ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
+                   ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
                 <div class="control-label" ng-message="required">First name is required.</div>
                 <div class="control-label" ng-message="maxlength">First name is too large.</div>
                 <div class="control-label" ng-message="minlength">First name is too short.</div>
               </div>
               <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
-              name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
+                     name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
             </div>
           </div>
           <div class="col-md-2 ui">
             <div ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
-              <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">Last Name</label>
-              <div ng-messages="editUserForm.lastName.$error" ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
+              <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">
+                Last Name
+              </label>
+              <div ng-messages="editUserForm.lastName.$error"
+                   ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
                 <div class="control-label" ng-message="maxlength">Last name is too large.</div>
               </div>
               <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
-              name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
+                     name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
+            </div>
+          </div>
+          <div class="col-md-2 ui half-3-col" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
+            <label class="control-label"
+                   ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
+
+            <div ng-messages="editUserForm.primaryEmail.$error"
+                 ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
+              <div class="control-label" ng-message="pattern">Invalid email address.</div>
+              <div class="control-label" ng-message="unique">Already occupied.</div>
+            </div>
+
+            <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+                   ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
+                   is-uniq-validation validation-func="validateUserEmail">
+          </div>
+          <div class="col-md-2 ui half-3-col">
+            <div ng-class="{'has-error': isShowingErrors(editUserForm, 'phoneNumber')}">
+
+              <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'phoneNumber')}">
+                Phone Number
+              </label>
+
+              <div ng-messages="editUserForm.phoneNumber.$error"
+                   ng-class="{'hide': !isShowingErrors(editUserForm, 'phoneNumber')}">
+                <div class="control-label" ng-message="pattern">Invalid number</div>
+                <div class="control-label" ng-message="maxlength">Too large.</div>
+              </div>
+
+              <input type="text" class="form-control" name="phoneNumber" ng-model="editedUser.phoneNumbers[0].number"
+                     aria-expanded="true" ng-maxlength="20" ng-pattern="phoneNumberPattern" hard-phone-number-pattern
+                     country="{{companyData.addresses[0].countryCode}}" make-dirty-on-blur>
             </div>
           </div>
           <div class="col-md-2 ui half-3-col">
-          <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
-            <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
-                is-uniq-validation validation-func="validateUserEmail">
-          </div>
-          <div class="col-md-2 ui half-3-col">
-            <label class="control-label ng-binding" ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$invalid &amp;&amp; (phoneNumbersForm['phoneNumber' + $index].$dirty || isTryToSave)}">
-          Phone Number
-        </label>
-          <input type="text" class="form-control ng-untouched ng-valid ng-valid-pattern ng-valid-maxlength ng-not-empty ng-dirty ng-valid-parse" name="phoneNumber0" ng-model="phoneNumber.number" aria-expanded="true" ng-maxlength="20" ng-pattern="/^[\+\d\(\)\-\s]+$/" make-dirty-on-blur="" hard-reset-required="" hard-phone-number-pattern="" country="PK">
+            <div class="form-group">
 
-          </div>
-          <div class="col-md-2 ui half-3-col">
-            <label class="control-label">Account Type</label>
-            <div class="dropdown">
+              <label class="control-label">Account Type</label>
 
-              <input class="form-control has-dropdown ng-pristine ng-valid ng-not-empty ng-touched" type="text" ng-model="roles[editUser.role]" data-toggle="dropdown" aria-expanded="false" readonly="">
-              <i class="icn-sm icn-caret-gray"></i>
+              <div class="dropdown">
 
-              <ul class="dropdown-menu dropdown-account-type">
-                <!-- ngRepeat: (role, label) in roles --><li ng-repeat="(role, label) in roles" ng-click="editUser.role = role" class="ng-scope">
-                  <a tabindex="-1" href="javascript:void(0)" class="ng-binding"> User </a>
-                </li><!-- end ngRepeat: (role, label) in roles --><li ng-repeat="(role, label) in roles" ng-click="editUser.role = role" class="ng-scope">
-                  <a tabindex="-1" href="javascript:void(0)" class="ng-binding"> Administrator </a>
-                </li><!-- end ngRepeat: (role, label) in roles -->
-              </ul>
+                <input class="form-control has-dropdown" type="text"
+                       ng-model="roles[editedUser.role]" data-toggle="dropdown" aria-expanded="true"
+                       class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
+                <i class="icn-sm icn-caret-gray"></i>
+
+                <ul class="dropdown-menu dropdown-account-type">
+                  <li ng-repeat="(role, label) in roles" ng-click="editedUser.role = role">
+                    <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+                  </li>
+                </ul>
+
+              </div>
 
             </div>
           </div>
           <div class="col-md-2 ui">
             <label class="control-label">Subscribe to</label>
+
             <div class="dropdown">
-              <input class="form-control has-dropdown" type="text" value="" data-toggle="dropdown" aria-expanded="false" readonly="readonly">
+              <input class="form-control has-dropdown" type="text" value=""
+                     data-toggle="dropdown" aria-expanded="false" readonly="readonly">
               <i class="icn-sm icn-caret-gray"></i>
 
               <div class="subscribe-tokens">
 
-                <div class="invoice-update-token" ng-show="editUser.subscription.invoice">
+                <div class="invoice-update-token"
+                     ng-show="editedUser.subscription.invoice">
                   Inv. Updates
                 </div>
 
-                <div class="ticket-update-token ng-hide" ng-show="editUser.subscription.ticket">
+                <div class="ticket-update-token"
+                     ng-show="editedUser.subscription.ticket">
                   Tkt Updates
                 </div>
               </div>
@@ -322,30 +299,193 @@
               <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
 
                 <li>
-                  <a tabindex="-1" href="javascript:void(0)" qt-checkbox="" ng-model="editUser.subscription.ticket" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                  <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+                     ng-model="editedUser.subscription.ticket">
 
                     <div class="clearfix">
                       <label class="control checkbox pull-left">
-                        <input type="checkbox" ng-model="editUser.subscription.ticket" class="ng-pristine ng-untouched ng-valid ng-empty">
+                        <input type="checkbox" ng-model="editedUser.subscription.ticket">
                         <span class="control-indicator"></span> Ticket Updates
                       </label>
                     </div>
+
                   </a>
                 </li>
+
+                <li ng-if="!isLastInvoiceSubsciption">
+                  <a tabindex="-1" href="javascript:void(0)"
+                     qt-checkbox ng-model="editedUser.subscription.invoice">
+
+                    <div class="clearfix">
+                      <label class="control checkbox pull-left">
+                        <input type="checkbox" ng-model="editedUser.subscription.invoice">
+                        <span class="control-indicator"></span> Invoice Updates
+                      </label>
+                    </div>
+
+                  </a>
+                </li>
+
               </ul>
+
+            </div>
+
+          </div>
+          <div class="ui">
+            <div class="inline-user-edit-action center-btn">
+              <div class="btn btn-default distance has-tooltip" ng-click="saveUser(editUserForm)"
+                   tooltip-placement="top" tooltip="Save" ng-disabled="savingInProcess">
+                <i class="icn-sm icn-label-save"></i>
+              </div>
+              <div class="btn btn-default distance has-tooltip" ng-click="cancelEditing()"
+                   tooltip-placement="top" tooltip="Cancel" ng-disabled="savingInProcess">
+                <i class="icn-sm icn-remove-token"></i>
+              </div>
             </div>
           </div>
-          <div class="ui ">
-            <div class="inline-user-edit-action center-btn">
-          <div class="btn btn-default distance has-tooltip" ng-click="saveUser(editUserForm)"
-            tooltip-placement="top" tooltip="Save">
-            <i class="icn-sm icn-label-save"></i>
-          </div>
-          <div class="btn btn-default distance has-tooltip" ng-click="cancelEditing()"
-            tooltip-placement="top" tooltip="Cancel">
-            <i class="icn-sm icn-remove-token"></i>
+        </div>
+      </div>
+
+      <div ng-if="!editedUser || editedUser.id !== user.id" style="display: flex;">
+        <div class="col-1">
+          <div class="user-bio">
+
+            <label class="control checkbox pull-left">
+              <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
+              <span class="control-indicator"></span>
+            </label>
+
+            <div class="pull-left avatar">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+              <i class="on bottom"></i>
+            </div>
+
+            <div class="user-name pull-left">{{ getUserName(user) }}</div>
+            <span class="label label-light">{{ user.designation }}</span>
+
           </div>
         </div>
+
+        <div class="col-2">
+          <div class="clearfix">
+          <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
+            <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+            'icn-user-fax': phoneNumber.typeNumber === 'FAX',
+            'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+            {{ phoneNumber.number }}
+          </span>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="user-account-type dropdown">
+
+            <div class="label-wrapper" aria-expanded="false" data-toggle="dropdown">
+            <span>
+              {{ user.role }}
+            </span>
+            </div>
+
+            <ul class="dropdown-menu dropdown-privilege">
+
+              <li ng-class="{'active': user.role === 'USER'}">
+                <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('USER')">
+                  User
+                </a>
+              </li>
+
+              <li ng-class="{'active': user.role === 'ADMIN'}">
+                <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole('ADMIN')">
+                  Administrator
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="col-3-2 dropdown">
+
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" data-toggle="dropdown"
+               tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
+            <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
+          </div>
+
+          <ul class="dropdown-menu dropdown-subscribe">
+
+            <li>
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
+                <div class="clearfix">
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
+                    <span class="control-indicator"></span> Ticket Updates
+                  </label>
+                </div>
+              </a>
+            </li>
+
+            <li ng-hide="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
+                <div class="clearfix">
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                    <span class="control-indicator"></span> Invoice Updates
+                  </label>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <div class="col-4">
+        <span class="user-submitted-tickets">
+          {{ user.userStatistic.ticketsSubmitted || '0' }}
+        </span>
+        </div>
+
+        <div class="col-5">
+          <div class="list-actions pull-right">
+
+            <!--<div class="dropdown pull-left">-->
+
+            <!--<div class="btn btn-default pull-left has-tooltip disabled"-->
+            <!--data-toggle="dropdown" tooltip-placement="top" tooltip="logged in devices">-->
+            <!--<i class="icn-sm icn-user-devices"></i>-->
+            <!--</div>-->
+
+            <!--<ul class="dropdown-menu devices-menu dropdown-menu-right" role="menu">-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-server"></i>File.Server</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-computer"></i>Skynet.2013</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-mobile"></i>Mobile.Jack</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-fax"></i>Fax.Sublime</a></li>-->
+            <!--</ul>-->
+            <!--</div>-->
+
+            <div class="btn btn-default pull-left has-tooltip" ng-click="setEditedUser(user)"
+                 tooltip-placement="top" tooltip="Edit">
+              <i class="icn-sm icn-edit"></i>
+            </div>
+
+            <div class="btn btn-default btn-user-mail pull-left has-tooltip" ng-show="user.primaryEmail"
+                 email-to="user.primaryEmail" tooltip-placement="top" tooltip="Email">
+              <i class="icn-sm icn-user-mail"></i>
+            </div>
+
+            <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+                 ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_user')
+            && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
+                 tooltip-placement="top" tooltip="Archive this User">
+              <i class="icn-sm icn-remove-token"></i>
+            </div>
+
+            <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
+            <!--tooltip-placement="top" tooltip="chat" ng-click="startChat()">-->
+            <!--<i class="icn-sm icn-user-chat"></i>-->
+            <!--</div>-->
+
           </div>
         </div>
       </div>
@@ -353,3 +493,4 @@
 
   </ul>
 </div>
+

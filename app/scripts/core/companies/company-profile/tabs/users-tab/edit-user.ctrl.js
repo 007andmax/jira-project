@@ -3,61 +3,64 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editUserCtrl',
-    ['$scope', 'UsersService', 'CompaniesService', 'quicktech.common.services.PhoneFormats',
-      function ($scope, UsersService, CompaniesService, PhoneFormats) {
+    ['$scope', 'UsersService', 'CompaniesService', 'quicktech.common.services.PhoneFormats', '$rootScope',
+      function ($scope, UsersService, CompaniesService, PhoneFormats, $rootScope) {
+        var userSubscription = $scope.editedUser.subscription;
 
-      CompaniesService.getCompanyInfo($scope.editedUser.company.id, $scope, function (resp) {
-        $scope.userCompanyCountryCode = resp.addresses[0].countryCode;
-      });
+        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $scope.phoneNumberPattern = /^[\+\d\(\)\-\s]+$/;
+        $scope.isPrefixValid = PhoneFormats.isPrefixValid;
+        $scope.roles = {
+          USER: 'User',
+          ADMIN: 'Administrator'
+        };
+        $scope.isLastInvoiceSubsciption = userSubscription.invoice && $scope.users.filter(function (user) {
+            return user.subscription.invoice;
+          }).length <= 1;
 
-      $scope.isShowingErrors = function (form, fieldName) {
-        return form[fieldName] && (($scope.editedUser && $scope.editedUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
-      };
+        $scope.isShowingErrors = function (form, fieldName) {
+          return form[fieldName] && ($scope.triedToSave || form[fieldName].$dirty) && form[fieldName].$invalid;
+        };
 
-      $scope.validateUserEmail = function (ngModelCtrl) {
-        var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editedUser.id || '', function () {
-          ngModelCtrl.$setValidity('unique', validationResult.value);
-        });
-      };
+        $scope.validateUserEmail = function (ngModelCtrl) {
+          var validationResult = UsersService.isEmailUnique(ngModelCtrl.$viewValue, $scope.editedUser.id || '', false, function () {
+            ngModelCtrl.$setValidity('unique', validationResult.value);
+          });
+        };
 
-      $scope.cancelEditing = function () {
-        $scope.setEditedUser({});
-      };
+        $scope.cancelEditing = function () {
+          $scope.setEditedUser({});
+        };
 
-      $scope.saveUser = function (form) {
-        if (form.$valid) {
+        $scope.saveUser = function (form) {
+          if (form.$valid) {
 
-          var editedUser = angular.copy($scope.editedUser);
+            var editedUser = angular.copy($scope.editedUser);
 
-          $scope.savingInProcess = true;
+            $scope.savingInProcess = true;
 
-          var phoneNumbers = editedUser.phoneNumbers,
-            firstPhone = phoneNumbers[0].number,
-            lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
+            var phoneNumbers = editedUser.phoneNumbers,
+              firstPhone = phoneNumbers[0].number,
+              lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
 
-          if (!lastPhone || lastPhone.trim().length === 0 ||
-            (lastPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(lastPhone))) {
+            phoneNumbers[0].phoneType = phoneNumbers[0].phoneType || 'Office';
 
-            phoneNumbers.splice(phoneNumbers.length - 1, 1);
-
-            if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
+            if (firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
               phoneNumbers[0].number = '';
             }
-          } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
-            phoneNumbers.shift();
+
+            editedUser.companyId = editedUser.company.id;
+
+            UsersService.save(editedUser, function (resp) {
+              $scope.savingInProcess = false;
+              $scope.cancelEditing();
+              $rootScope.$broadcast('show-user-on-save-' + resp.id);
+            })
+          } else {
+            $scope.triedToSave = true;
           }
+        };
 
-          editedUser.companyId = editedUser.company.id;
-
-          UsersService.save(editedUser, function (resp) {
-            $scope.savingInProcess = false;
-            $scope.cancelEditing();
-          })
-        } else {
-          $scope.triedToSave = true;
-        }
-      };
-
-    }]);
+      }]);
 
 }());

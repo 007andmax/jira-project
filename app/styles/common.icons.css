@@ -371,6 +371,13 @@ a.ha-24{
   background-position: -345px 0px;
 }
 
+.icn-plus-dark{
+  background-position: -322px 0px;
+}
+:hover > .icn-plus-dark{
+  background-position: -300px 0px;
+}
+
 .icn-filter{
   background-position: -1820px -100px;
   height: 10px;
