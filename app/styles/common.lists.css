@@ -1760,7 +1760,7 @@ Devices tab
     width: 100px;
   }
   .qt-product-list>li>.col-2{
-    width: calc(100% - 675px);
+    width: calc(100% - 670px);
   }
   .with-category .qt-product-list>li>.col-2{
     width: calc(100% - 760px);

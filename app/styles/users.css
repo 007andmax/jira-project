@@ -16,7 +16,7 @@
   margin-left: 30px;
   margin-bottom: 30px;
   width: calc(100% / 1 - 30px);
-  min-width: 405px !important;
+  /*min-width: 405px !important;*/
   -webkit-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   -o-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
