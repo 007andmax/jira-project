@@ -1,0 +1,152 @@
+<div class="row" ng-controller="quicktech.core.companies.editUserCtrl" ng-form="editUserForm">
+  <div class="col-md-2 ui">
+    <div ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
+      <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First
+        Name</label>
+      <div ng-messages="editUserForm.firstName.$error"
+           ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
+        <div class="control-label" ng-message="required">First name is required.</div>
+        <div class="control-label" ng-message="maxlength">First name is too large.</div>
+        <div class="control-label" ng-message="minlength">First name is too short.</div>
+      </div>
+      <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
+             name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
+    </div>
+  </div>
+  <div class="col-md-2 ui">
+    <div ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
+      <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">
+        Last Name
+      </label>
+      <div ng-messages="editUserForm.lastName.$error"
+           ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
+        <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+      </div>
+      <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+             name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
+    </div>
+  </div>
+
+  <div class="col-md-2 ui half-3-col" ng-class="{'has-error': isShowingErrors(editUserForm, 'primaryEmail')}">
+    <label class="control-label"
+           ng-class="{'hide': isShowingErrors(editUserForm, 'primaryEmail')}">Email</label>
+
+    <div ng-messages="editUserForm.primaryEmail.$error"
+         ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
+      <div class="control-label" ng-message="pattern">Invalid email address.</div>
+      <div class="control-label" ng-message="unique">Already occupied.</div>
+    </div>
+
+    <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
+           ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
+           is-uniq-validation validation-func="validateUserEmail">
+  </div>
+  <div class="col-md-2 ui half-3-col">
+    <div ng-class="{'has-error': isShowingErrors(editUserForm, 'phoneNumber')}">
+
+      <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'phoneNumber')}">
+        Phone Number
+      </label>
+
+      <div ng-messages="editUserForm.phoneNumber.$error"
+           ng-class="{'hide': !isShowingErrors(editUserForm, 'phoneNumber')}">
+        <div class="control-label" ng-message="pattern">Invalid number</div>
+        <div class="control-label" ng-message="maxlength">Too large.</div>
+      </div>
+
+      <input type="text" class="form-control" name="phoneNumber" ng-model="editedUser.phoneNumbers[0].number"
+             aria-expanded="true" ng-maxlength="20" ng-pattern="phoneNumberPattern" hard-phone-number-pattern
+             country="{{companyData.addresses[0].countryCode}}" make-dirty-on-blur>
+    </div>
+  </div>
+  <div class="col-md-2 ui half-3-col">
+    <div class="form-group">
+
+      <label class="control-label">Account Type</label>
+
+      <div class="dropdown">
+
+        <input class="form-control has-dropdown" type="text"
+               ng-model="roles[editedUser.role]" data-toggle="dropdown" aria-expanded="true"
+               class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
+        <i class="icn-sm icn-caret-gray"></i>
+
+        <ul class="dropdown-menu dropdown-account-type">
+          <li ng-repeat="(role, label) in roles" ng-click="editedUser.role = role">
+            <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-2 ui">
+    <label class="control-label">Subscribe to</label>
+
+    <div class="dropdown">
+      <input class="form-control has-dropdown" type="text" value=""
+             data-toggle="dropdown" aria-expanded="false" readonly="readonly">
+      <i class="icn-sm icn-caret-gray"></i>
+
+      <div class="subscribe-tokens">
+
+        <div class="invoice-update-token"
+             ng-show="editedUser.subscription.invoice">
+          Inv. Updates
+        </div>
+
+        <div class="ticket-update-token"
+             ng-show="editedUser.subscription.ticket">
+          Tkt Updates
+        </div>
+      </div>
+
+      <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
+
+        <li>
+          <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+             ng-model="editedUser.subscription.ticket">
+
+            <div class="clearfix">
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-model="editedUser.subscription.ticket">
+                <span class="control-indicator"></span> Ticket Updates
+              </label>
+            </div>
+
+          </a>
+        </li>
+
+        <li ng-if="!isLastInvoiceSubsciption">
+          <a tabindex="-1" href="javascript:void(0)"
+             qt-checkbox ng-model="editedUser.subscription.invoice">
+
+            <div class="clearfix">
+              <label class="control checkbox pull-left">
+                <input type="checkbox" ng-model="editedUser.subscription.invoice">
+                <span class="control-indicator"></span> Invoice Updates
+              </label>
+            </div>
+
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+  <div class="ui">
+    <div class="inline-user-edit-action center-btn">
+      <div class="btn btn-default distance has-tooltip" ng-click="saveUser(editUserForm)"
+           tooltip-placement="top" tooltip="Save" ng-disabled="savingInProcess">
+        <i class="icn-sm icn-label-save"></i>
+      </div>
+      <div class="btn btn-default distance has-tooltip" ng-click="cancelEditing()"
+           tooltip-placement="top" tooltip="Cancel" ng-disabled="savingInProcess">
+        <i class="icn-sm icn-remove-token"></i>
+      </div>
+    </div>
+  </div>
+</div>
