@@ -1,5 +1,5 @@
 <div class="row" ng-controller="quicktech.core.companies.editUserCtrl" ng-form="editUserForm">
-  <div class="col-md-2 ui">
+  <div class="col-md-2 ui half-3-col">
     <div ng-class="{'has-error': isShowingErrors(editUserForm, 'firstName')}">
       <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'firstName')}">First
         Name</label>
@@ -13,7 +13,7 @@
              name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
     </div>
   </div>
-  <div class="col-md-2 ui">
+  <div class="col-md-2 ui half-3-col">
     <div ng-class="{'has-error': isShowingErrors(editUserForm, 'lastName')}">
       <label class="control-label" ng-class="{'hide': isShowingErrors(editUserForm, 'lastName')}">
         Last Name
@@ -81,7 +81,7 @@
 
     </div>
   </div>
-  <div class="col-md-2 ui">
+  <div style="min-width: 190px;" class="col-md-2 ui">
     <label class="control-label">Subscribe to</label>
 
     <div class="dropdown">

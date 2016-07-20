@@ -19,7 +19,6 @@
         $scope.orderScanBy = 'hostName';
         $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
-        $scope.editedUser = {};
 
         $scope.credential = {
           name: '',
@@ -308,7 +307,7 @@
           $scope.editedUser = angular.copy(user);
         };
 
-        $scope.createUser = function (event) {
+        $scope.createUser = function () {
           $scope.editedUser = {
             newUser: true,
             company: { id: $scope.company.id },
@@ -316,8 +315,6 @@
             phoneNumbers: [{ phoneType: 'Office' }],
             subscription: {}
           };
-
-          event.stopPropagation();
         };
 
       }]);

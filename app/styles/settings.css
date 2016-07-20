@@ -670,7 +670,7 @@ input.default-invoice-terms {
   margin: 20px auto;
   float: right;
 }
-@media screen and (min-width: 320px){
+@media screen and (max-width: 768px){
   .center-btn{
     float: none;
   }

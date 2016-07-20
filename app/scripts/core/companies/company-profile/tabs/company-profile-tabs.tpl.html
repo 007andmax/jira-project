@@ -19,6 +19,10 @@
           <a ui-sref="companyProfile({ tabName: 'users' })">
             Users
             <span class="text-muted">{{ users.length }}</span>
+            <div class="create-user-from-company" ng-click="createUser()" 
+            ng-if="currentOpenTab === 'users'">
+              <i class="icn-sm icn-plus-dark"></i>
+            </div>
           </a>
         </li>
 
