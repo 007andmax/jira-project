@@ -28,8 +28,12 @@
         };
 
         $scope.updateAgent = function () {
-          DevicesService.sendAgentUpdateRequest($scope.company.id, $scope.agent.id)
+          DevicesService.sendAgentUpdateRequest($scope.company.id, $scope.agent.id);
         };
+
+        $scope.remove = function () {
+          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id);
+        }
 
       }
     ]);
