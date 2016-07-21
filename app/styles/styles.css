@@ -9722,22 +9722,6 @@ button.close {
 .available-keywords-wrap .available-keyword {
   cursor: pointer;
 }
-.inline-user-edit .form-group {
-  display: inline-block;
-  float: left;
-  width: 21%;
-  margin-right: 1%;
-}
-.edit-user-form {
-  position: relative;
-}
-.inline-user-edit-action{
-  display: inline-block;
-  position: absolute;
-  width: 9%;
-  right: 0;
-  top: 20px;
-}
 .image-preview-body{
   display: block;
   margin: 15px auto;
@@ -9806,4 +9790,15 @@ button.close {
   padding-left: 10px;
   cursor: pointer;
   text-decoration: underline;
+}
+.ui{
+  padding: 0 5px;
+}
+.half-3-col{
+  width: 13%;
+}
+@media screen and (max-width: 768px){
+  .half-3-col{
+  width: inherit;
+  }
 }

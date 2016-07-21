@@ -10,7 +10,7 @@
 
           $scope.$on(attrs.showModelElement, function () {
             var $body = $("body"),
-              offset = parseInt(attrs.scrollOffset) || 300,
+              offset = parseInt(attrs.scrollOffset) || window.screen.height / 2,
               scrollPosition = element.offset().top - offset;
 
             $body.animate({scrollTop: scrollPosition}, "slow");

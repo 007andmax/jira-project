@@ -665,6 +665,16 @@ input.default-invoice-terms {
   padding-right: 45px;
   width: 100%;
 }
+.center-btn{
+  text-align: center;
+  margin: 20px auto;
+  float: right;
+}
+@media screen and (max-width: 768px){
+  .center-btn{
+    float: none;
+  }
+}
 
 /*.settings-main-wrapper .services-info-wrapper .col-2.timer-quantity {*/
   /*float: right;*/
@@ -678,6 +688,9 @@ input.default-invoice-terms {
 
 .settings-button {
   padding-right: 30px;
+}
+.distance{
+  margin: auto 2px;
 }
 .settings-button.settings-fixed-button {
   position: fixed;
