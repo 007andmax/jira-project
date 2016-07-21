@@ -195,7 +195,7 @@
 .smtp-wrap .encryption-type {
   width: 24%;
 }
-.smtp-wrap .encryption-type > select {
+.smtp-wrap select {
   padding: 8px;
 }
 .smtp-wrap .smtp-domains > span > a {
