@@ -511,11 +511,19 @@
 
           function closeTicket() {
             $scope.ticketClosing = true;
+
+            var recipientsIds = [];
+            for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
+              var shared = $scope.updateSharedUsersList[i];
+
+              recipientsIds.push(shared.user ? shared.user.id : shared.contact.id);
+            }
+
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.uncheckTicket($scope.ticketDetails.id);
               $state.go('tickets', { listType: $stateParams.listType });
-            });
+            }, recipientsIds);
           }
 
           function haveUnsavedUpdate(update) {
