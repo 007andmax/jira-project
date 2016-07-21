@@ -58,7 +58,7 @@
 
           <label class="control checkbox pull-left">
             <input type="checkbox" ng-model="selectDevices[agent.agentId]" ng-change="changeSelectDevices()">
-            <span class="control-indicator" ng-show="agent.online"></span>
+            <span class="control-indicator"></span>
           </label>
 
           <div class="checkbox-caption">
@@ -169,16 +169,16 @@
       </div>
 
       <div class="col-6">
-        <div class="list-actions pull-right" ng-show="agent.online">
+        <div class="list-actions pull-right">
 
           <div class="btn btn-default pull-left has-tooltip"
-               ng-show="(agent.type !== 'workstation') && agent.online"
+               ng-if="(agent.type !== 'workstation') && agent.online"
                ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
             <i class="icn-sm icn-remote-access"></i>
           </div>
 
           <div class="btn btn-default pull-left has-tooltip"
-               ng-show="(agent.type === 'workstation') && agent.online"
+               ng-if="(agent.type === 'workstation') && agent.online"
                tooltip-placement="top" tooltip="Remote Access"
                dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
             <i class="icn-sm icn-remote-access"></i>
@@ -196,6 +196,12 @@
 
           </ul>
 
+          <div class="btn btn-default has-tooltip pull-right" ng-click="remove()"
+               ng-if="!agent.online && PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
+               tooltip-placement="top" tooltip="Remove">
+            <i class="icn-sm icn-remove-token"></i>
+          </div>
+
           <!--<div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"-->
           <!--tooltip-placement="top" tooltip="Send Alert">-->
           <!--<i class="icn-sm icn-send-alert"></i>-->
@@ -206,7 +212,7 @@
           <!--<i class="icn-sm icn-spec-report"></i>-->
           <!--</div>-->
 
-          <div class="more pull-left dropdown">
+          <div class="more pull-left dropdown" ng-if="agent.online">
 
             <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
                aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">

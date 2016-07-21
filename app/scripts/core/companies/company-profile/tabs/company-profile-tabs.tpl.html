@@ -59,7 +59,7 @@
             ng-class="{'hide': !(bulkOptionMode === 'users') && !(bulkOptionMode === 'devices')}"
             ng-controller="quicktech.core.companies.bulkOptionCtrl">
 
-          <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'users'">
+          <div class="topNavbarLeft-Left pull-left" ng-if="bulkOptionMode === 'users'">
 
             <p class="pull-left" style="white-space: nowrap;">
               <strong>{{ selectUsersIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
@@ -133,7 +133,7 @@
 
           </div>
 
-          <div class="topNavbarLeft-Left pull-left" ng-show="bulkOptionMode === 'devices'">
+          <div class="topNavbarLeft-Left pull-left" ng-if="bulkOptionMode === 'devices'">
 
             <p class="pull-left" style="white-space: nowrap;">
               <strong>{{ selectDevicesIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
@@ -148,12 +148,12 @@
               </div>
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="shutdownDevices()"
-                   tooltip-placement="bottom" tooltip="Shutdown">
+                   tooltip-placement="bottom" tooltip="Shutdown" ng-if="!companyProfileHeader.isOfflineDeviceSelected">
                 <i class="icn-sm icn-shutdown-device"></i>
               </div>
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="restartDevices()"
-                   tooltip-placement="bottom" tooltip="Restart">
+                   tooltip-placement="bottom" tooltip="Restart" ng-if="!companyProfileHeader.isOfflineDeviceSelected">
                 <i class="icn-sm icn-restart-device"></i>
               </div>
 
