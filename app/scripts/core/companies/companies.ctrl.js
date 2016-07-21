@@ -14,6 +14,7 @@
           $state.go('tickets');
         }
 
+        $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
