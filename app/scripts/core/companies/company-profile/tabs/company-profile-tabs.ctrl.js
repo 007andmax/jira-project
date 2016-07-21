@@ -65,7 +65,7 @@
           if (resp.masterAgentId !== lastMasterAgentId) {
             lastMasterAgentId = resp.masterAgentId;
 
-            if (lastMasterAgentId) {
+            if (lastMasterAgentId && $scope.currentOpenTab === 'network-scan') {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
                 $scope.scanDevices = resp;
               });
@@ -81,15 +81,15 @@
           } else {
             $scope.isHasDevices = false;
             if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings') {
-              $state.go('companyProfile', { companyId: $stateParams.companyId, tabName: 'users' });
+              $state.go('companyProfile', { companyId: $stateParams.companyId, tabName: 'settings' });
             }
 
           }
         });
 
         $scope.$watch(function () {
-          if ($scope.scanDevices && $scope.scanDevices.networkScan) {
-            return $scope.scanDevices.networkScan.netScanStatus;
+          if ($scope.scanDevices) {
+            return $scope.scanDevices.status;
           }
         }, function (val) {
           $scope.isScanDevicesLoad = val !== 'finished';

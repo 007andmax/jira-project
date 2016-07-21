@@ -18,6 +18,8 @@
       var initListeners = [],
         initialized = false;
 
+      var scannedDevices = Utils.customizeObj({});
+
       Utils.customizeObj(storage);
 
       CompaniesService._addInitListener(init);
@@ -98,7 +100,9 @@
 
       function callCallbacks() {
         for (var scopeId in storage.callbacks) {
-          if (scopeId === 'staticCopy') continue;
+          if (scopeId === 'staticCopy') {
+            continue;
+          }
           var callback = storage.callbacks[scopeId];
           if (callback && callback.callback && typeof callback.callback === "function") {
             callback.callback(storage.devices[callback.companyId]);
@@ -108,7 +112,9 @@
 
       function destroyCallbackByScope(scope) {
         for (var scopeId in storage.callbacks) {
-          if (companyId === 'staticCopy') continue;
+          if (companyId === 'staticCopy') {
+            continue;
+          }
           if (scopeId === scope.$id) {
             delete storage.callbacks[scopeId]
           }
@@ -117,7 +123,9 @@
 
       function calculateDevicesCountersAndCallCallbacks() {
         for (var companyId in storage.devices) {
-          if (companyId === 'staticCopy') continue;
+          if (companyId === 'staticCopy') {
+            continue;
+          }
 
           if (storage.devices[companyId].length == 0) {
             delete storage.devices[companyId];
@@ -199,9 +207,13 @@
       }
 
       function deleteRemoteSession(ids, callback) {
-        if (!ids) throw 'ids is required!';
+        if (!ids) {
+          throw 'ids is required!';
+        }
 
-        if (!Array.isArray(ids)) ids = [ids];
+        if (!Array.isArray(ids)) {
+          ids = [ids];
+        }
 
         var future = $http({
           url: '/remote/deleteRemoteSession',
@@ -215,9 +227,13 @@
       //one time connection
       function getSessionId(remoteSessionId, connectionType, callback) {
 
-        if (!remoteSessionId) throw 'remoteSessionId is required!';
+        if (!remoteSessionId) {
+          throw 'remoteSessionId is required!';
+        }
 
-        if (!connectionType) throw 'connectionType is required!';
+        if (!connectionType) {
+          throw 'connectionType is required!';
+        }
 
         $http.get('/devices/getSessionId?remoteSessionId=' + remoteSessionId + '&connectionType=' + connectionType).then(function (resp) {
           if (callback) {
@@ -233,11 +249,17 @@
       //regular connection
       function createRemoteSession(deviceId, companyId, connectionType, callback) {
 
-        if (!deviceId) throw 'deviceId is required!';
+        if (!deviceId) {
+          throw 'deviceId is required!';
+        }
 
-        if (!companyId) throw 'companyId is required!';
+        if (!companyId) {
+          throw 'companyId is required!';
+        }
 
-        if (!connectionType) throw 'connectionType is required!';
+        if (!connectionType) {
+          throw 'connectionType is required!';
+        }
 
         $http.get('/remote/createRemoteSession?deviceId=' + deviceId + '&connectionType=' + connectionType + '&companyId=' + companyId).then(function (resp) {
           if (callback) {
@@ -265,7 +287,9 @@
           throw "agentId is required!"
         }
 
-        if (!Array.isArray(devicesIds)) devicesIds = [devicesIds];
+        if (!Array.isArray(devicesIds)) {
+          devicesIds = [devicesIds];
+        }
 
         if (callback && typeof callback === "function") {
           for (var i in devicesIds) {
@@ -288,7 +312,9 @@
           throw "agentId is required!"
         }
 
-        if (!Array.isArray(devicesIds)) devicesIds = [devicesIds];
+        if (!Array.isArray(devicesIds)) {
+          devicesIds = [devicesIds];
+        }
 
         if (callback && typeof callback === "function") {
           for (var i in devicesIds) {
@@ -330,7 +356,9 @@
           throw "agentId is required!"
         }
 
-        if (!Array.isArray(agentIds)) agentIds = [agentIds];
+        if (!Array.isArray(agentIds)) {
+          agentIds = [agentIds];
+        }
 
         var future = $http({
           url: '/devices/sendPowerAction?companyId=' + companyId + '&action=' + action,
@@ -348,7 +376,9 @@
           throw "agentId is required!"
         }
 
-        if (!Array.isArray(agentIds)) agentIds = [agentIds];
+        if (!Array.isArray(agentIds)) {
+          agentIds = [agentIds];
+        }
 
         var future = $http({
           url: '/devices/sendAgentUpdateRequest?companyId=' + companyId,
@@ -408,12 +438,16 @@
           throw "CompanyId is required!"
         }
 
+        scannedDevices.devices = [];
+
         $http.get('/devices/refreshNetworkScan?companyId=' + companyId).success(function (resp) {
           if (callback) {
             callback(resp);
           }
         }).error(function (resp) {
-          if (callback) callback(resp);
+          if (callback) {
+            callback(resp);
+          }
         });
       }
 
@@ -426,46 +460,47 @@
           throw "CompanyId is required!"
         }
 
-        var info = Utils.customizeObj({});
-
         $http.get('/devices/networkScan?companyId=' + companyId).then(function (resp) {
-          Utils.customizeObj(resp.data, info);
+          var networkScan = JSON.parse(resp.data.networkScan);
 
-          if (info.networkScan) {
-            Utils.defineReadOnlyProperty(info, "networkScan", JSON.parse(info.networkScan));
+          if (networkScan) {
+            Utils.defineReadOnlyProperty(scannedDevices, "status", networkScan.netScanStatus.toLowerCase());
+            scannedDevices.devices = networkScan.devices;
           }
 
           RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
             console.log(newChange);
             if (newChange.action === 'NETWORK_SCAN') {
-              if (newChange.data === "finished") {
-                Utils.defineReadOnlyProperty(info.networkScan, "netScanStatus", newChange.data);
-              } else {
-                var data = JSON.parse(newChange.data),
-                  oldDevices = info.networkScan.devices,
-                  newDevices = data.devices;
-                Utils.defineReadOnlyProperty(info.networkScan, "netScanStatus", data.netScanStatus);
-                Utils.defineReadOnlyProperty(info.networkScan, "lastScanDate", data.lastScanDate);
 
-                for (var i in newDevices) {
-                  var newDevice = newDevices[i];
-                  var findById = Utils.findById(oldDevices, newDevice.id);
-                  if (findById) {
-                    Utils.customizeObj(newDevice, findById);
-                  } else {
-                    info.networkScan.devices.push(newDevice);
-                  }
+              var data = newChange.data,
+                newDevices = data.deviceList,
+                status = data.status.toLowerCase();
+
+              if (!scannedDevices.devices || (scannedDevices.status === 'finished' && status !== 'finished')) {
+                scannedDevices.devices = [];
+              }
+
+              Utils.defineReadOnlyProperty(scannedDevices, "status", status);
+
+              for (var i = 0; i < newDevices.length; i++) {
+                var newDevice = newDevices[i],
+                  dublicatedDevice = Utils.findById(scannedDevices.devices, newDevice.id);
+
+                if (!dublicatedDevice) {
+                  scannedDevices.devices.push(newDevice);
+                } else {
+                  Utils.customizeObj(newDevice, dublicatedDevice);
                 }
               }
 
             } else if (newChange.action === 'REMOTE_INSTALL') {
 
-              var device = Utils.findById(info.networkScan.devices, newChange.data.netScanId);
+              var device = Utils.findById(scannedDevices.devices, newChange.data.netScanId);
 
               if (!device) {
-                for (var i in info.networkScan.devices) {
-                  if (info.networkScan.devices[i].deviceId === newChange.data.deviceId) {
-                    device = info.networkScan.devices[i];
+                for (var i in scannedDevices.devices) {
+                  if (scannedDevices.devices[i].deviceId === newChange.data.deviceId) {
+                    device = scannedDevices.devices[i];
                   }
                 }
               }
@@ -500,19 +535,19 @@
               }
             }
             if (callback) {
-              callback(info);
+              callback(scannedDevices);
             }
           });
 
           if (callback) {
-            callback(info);
+            callback(scannedDevices);
           }
 
         }, function () {
           if (callback) {
-            callback(info);
+            callback(scannedDevices);
           }
-          return info;
+          return scannedDevices;
         });
       }
 
@@ -548,7 +583,9 @@
 
           if (newChange.action === 'CREDENTIALS_SAVED') {
             //Utils.customizeArray(newChange.data, info);
-            if (callback) callback(newChange.data);
+            if (callback) {
+              callback(newChange.data);
+            }
           }
         });
 
@@ -642,7 +679,9 @@
         RealTimeService.subscribe('/device', serviceScope, function (newChange) {
 
           if (newChange.action === 'SOME_INFO_FOR_DEVICES') {
-            if (callback) callback(newChange.data);
+            if (callback) {
+              callback(newChange.data);
+            }
           }
         });
       }

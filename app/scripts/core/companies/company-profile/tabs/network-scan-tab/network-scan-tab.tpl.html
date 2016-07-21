@@ -1,7 +1,7 @@
 <div class="tab-pane active">
 
   <div class="network-scan-results"
-       ng-show="(!scanDevices.networkScan.devices || scanDevices.networkScan.devices.length < 1) && !isScanDevicesLoad">
+       ng-if="(!scanDevices.devices || scanDevices.devices.length < 1) && !isScanDevicesLoad">
     <div>
       <i class="icn-lg icn-network-scan-lg"></i>
 
@@ -14,8 +14,7 @@
   </div>
 
   <div class="master-agent-offline-message"
-       ng-show="masterAgentOffline">
-    <!--ng-show="masterAgentOffline && scanDevices.networkScan.devices && scanDevices.networkScan.devices.length">-->
+       ng-if="masterAgentOffline">
     <p class="text-center">
       Network scan and remote install is available only when master agent is online.
     </p>
@@ -28,7 +27,7 @@
 
   <ul class="qt-list qt-network-scan"
       ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : (currentUser.role !== 'USER' ? '60px' : '94px')}"
-      ng-if="scanDevices.networkScan.devices && scanDevices.networkScan.devices.length > 0">
+      ng-if="scanDevices.devices && scanDevices.devices.length > 0">
 
     <li class="list-heading" fixed-block-top offset-top="148">
 
@@ -80,7 +79,7 @@
 
     </li>
 
-    <li ng-repeat="device in scanDevices.networkScan.devices | orderBy: orderScanBy"
+    <li ng-repeat="device in scanDevices.devices | orderBy: orderScanBy"
         ng-controller="quicktech.core.devices.networkScanTabCtrl">
 
       <div class="col-1">

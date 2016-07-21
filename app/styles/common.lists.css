@@ -2500,10 +2500,11 @@ Devices tab
   cursor: pointer;
 }
 .network-scan-results{
-  min-height: 400px;
+  float: left;
+  margin-top: 150px;
+  width: 100%;
+  min-height: 100px;
   text-align: center;
-  display: -webkit-flex;
-  display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
   -webkit-align-items: center;

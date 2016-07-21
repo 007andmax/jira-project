@@ -8,10 +8,10 @@
         var credentialsForSend = [],
           scannedDevices;
 
-        if (!$scope.scanDevices || !$scope.scanDevices.networkScan || !$scope.scanDevices.networkScan.devices) {
-          scannedDevices = []
+        if (!$scope.scanDevices || !$scope.scanDevices.devices) {
+          scannedDevices = [];
         } else {
-          scannedDevices = $scope.scanDevices.networkScan.devices;
+          scannedDevices = $scope.scanDevices.devices;
         }
 
         $scope.assignRequiredError = false;
