@@ -4,7 +4,8 @@
 
   angular.module("quicktech.core.rightPanel").directive('deviceContextMenu',
     ['$timeout', '$templateRequest', '$compile', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      function ($timeout, $templateRequest, $compile, DevicesService, PermissionsService) {
+      'quicktech.common.services.RemoteAccessService',
+      function ($timeout, $templateRequest, $compile, DevicesService, PermissionsService, RemoteAccessService) {
         return {
           restrict: 'A',
           link: function (scope, element, attrs) {
@@ -94,6 +95,16 @@
               });
 
             });
+
+            scope.remoteAccess = function (connectionType) {
+              var deviceId = scope.agent.id,
+                companyId = scope.companyGroupedData.company.id;
+
+              hideThisPopover();
+              DevicesService.createRemoteSession(deviceId, companyId, connectionType, function (resp) {
+                RemoteAccessService.connectRemoteAccess(resp.sessionId, connectionType);
+              });
+            };
 
             scope.restart = function () {
               DevicesService.sendPowerAction(scope.companyGroupedData.company.id, scope.agent.agentId, 'reboot');

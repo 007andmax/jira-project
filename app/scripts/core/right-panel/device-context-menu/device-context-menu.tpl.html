@@ -1,9 +1,21 @@
 <div>
   <ul class="device-context-menu">
 
-    <!--<li >-->
-      <!--<a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-remote-access pull-left"></i>Remote Access</a>-->
-    <!--</li>-->
+    <li dropdown>
+      <a tabindex="-1" href="javascript:void(0)" dropdown-toggle>
+        <i class="icn-sm icn-remote-access pull-left"></i>
+        Remote Access
+      </a>
+      <ul class="dropdown-menu remote-access-menu">
+        <li ng-click="remoteAccess('CSS', item)">
+          <a tabindex="-1" href="javascript:void(0)">Custom Share Screen</a>
+        </li>
+
+        <li ng-click="remoteAccess('RDP', item)">
+          <a tabindex="-1" href="javascript:void(0)">Remote desktop protocol</a>
+        </li>
+      </ul>
+    </li>
 
     <!--<li>-->
       <!--<a tabindex="-1" href="javascript:void(0)"><i class="icn-sm icn-send-alert pull-left"></i>Send Alert</a>-->

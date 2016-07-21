@@ -826,6 +826,11 @@ aside#right .companies-list-wrapper > li.opened-list .close {
   background: none;
 }
 
+.device-context-menu li .remote-access-menu {
+  right: 195px;
+  top: -17px;
+}
+
 .device-context-menu li > a{
   display: block;
   padding: 5px 20px;
