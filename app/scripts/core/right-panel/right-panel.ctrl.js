@@ -4,9 +4,10 @@
 
   angular.module('quicktech.core.rightPanel').controller('quicktech.core.rightPanel.rightPanelCtrl',
     ['$scope', 'RightPanelService', 'quicktech.common.services.SharedStateService', 'UsersService', 'TicketsService',
-      'ContactsService', 'CompaniesService',
-      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, ContactsService, CompaniesService) {
+      'ContactsService', 'quicktech.common.services.PermissionsService',
+      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, ContactsService, PermissionsService) {
 
+        $scope.PermissionsService = PermissionsService;
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
 

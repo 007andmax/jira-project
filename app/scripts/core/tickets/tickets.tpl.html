@@ -1,7 +1,5 @@
-<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader
-     ng-if="!(listType === 'spam' && currentUser.role !== 'USER')">
-  <div class="container-ticket-list pull-left" tu-tickets-container
-       ng-if="listType && listType !== 'preview'">
+<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader ng-if="!currentUser.isOwner">
+  <div class="container-ticket-list pull-left" tu-tickets-container>
 
     <div class="ticket-list">
       <ul class="tickets">
@@ -19,15 +17,14 @@
 
 </div>
 
-<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader
-     ng-if="listType === 'spam' && currentUser.role !== 'USER'">
-  <div class="container-ticket-list pull-left" tu-tickets-container ng-if="listType">
+<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader ng-if="currentUser.isOwner">
+  <div class="container-ticket-list pull-left" tu-tickets-container>
 
     <div class="ticket-list" upload-admin-spam="true">
 
       <ul class="tickets">
 
-        <li class="ticket-type" ng-show="markedSpamMesage && tickets.length !== 0">
+        <li class="ticket-type" ng-if="listType === 'spam' && tickets && tickets.length">
           <small><b>TICKETS MARKED AS SPAM</b></small>
         </li>
 
@@ -37,7 +34,7 @@
           <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
         </li>
 
-        <li class="ticket-type" ng-show="reportedSpamMesage && reportSpamTickets.length !== 0">
+        <li class="ticket-type" ng-if="reportSpamTickets && reportSpamTickets.length">
           <small><b>TICKETS REPORTED AS SPAM</b></small>
         </li>
 

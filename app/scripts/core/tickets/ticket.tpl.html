@@ -139,12 +139,7 @@
             </li>
 
             <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticket)" ng-click="moveIntoSpam()">
-              <a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role !== 'USER' ">
-                Mark as Spam
-              </a>
-              <a tabindex="-1" href="javascript:void(0)" ng-show="currentUser.role === 'USER' ">
-                Report as Spam
-              </a>
+              <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam' }}</a>
             </li>
 
             <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticket)">

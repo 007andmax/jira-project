@@ -2,9 +2,8 @@
 
   <div class="tabs-container">
     <div class="payment-receive-fixed" fixed-block-top
-         ng-style="{'margin-top': isCollapsed ? (currentUser.role !== 'USER' ? '433px' : '340px') : '1511px'}">
-      <ul class="nav nav-qt clearfix" style="padding-top: 0; margin-left: 30px;"
-          ng-class="{'root-user-company-prof': isChartsAccess()}" company-bulk-option>
+         style="margin-top: 340px">
+      <ul class="nav nav-qt clearfix" style="padding-top: 0; margin-left: 30px;" company-bulk-option>
 
         <!--<li class="activity-tab active">-->
         <!--<a data-toggle="tab" href="javascript:void(0)">Activity</a>-->
@@ -15,7 +14,7 @@
         <!--</div>-->
         <!--</li>-->
 
-        <li ng-class="{'active': currentOpenTab === 'users'}" style="cursor: pointer;">
+        <li ng-class="{'active': currentOpenTab === 'users'}" style="cursor: pointer;" ng-if="PermissionsService.isAllowed('VIEW_USERS')">
           <a ui-sref="companyProfile({ tabName: 'users' })">
             Users
             <span class="text-muted">{{ users.length }}</span>
@@ -40,7 +39,9 @@
           </a>
         </li>
 
-        <li ng-class="{'active': currentOpenTab === 'network-scan', 'hide': !isHasDevices}" style="cursor: pointer;">
+        <li ng-class="{'active': currentOpenTab === 'network-scan', 'hide': !isHasDevices}"
+            ng-if="PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')"
+            style="cursor: pointer;">
           <a ui-sref="companyProfile({ tabName: 'network-scan' })">
             Network Scan
           </a>
@@ -72,7 +73,6 @@
             <div class="topNavbar-filter pull-right">
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="archiveUsers()"
-                   ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_user')"
                    tooltip-placement="bottom" tooltip="Archive">
                 <i class="icn-sm icn-remove-token"></i>
               </div>
@@ -146,7 +146,6 @@
             <div class="topNavbar-filter pull-right">
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"
-                   ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
                    tooltip-placement="bottom" tooltip="Remove">
                 <i class="icn-sm icn-remove-token"></i>
               </div>

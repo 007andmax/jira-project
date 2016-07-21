@@ -210,8 +210,7 @@
           </label>
         </div>
 
-        <div class="form-row clearfix"
-             ng-if="!isCreation && PermissionsService.isAllowed('clients/users', currentUser.accountType, 'u_account_enabled')">
+        <div class="form-row clearfix" ng-if="!isCreation">
 
           <label class="control checkbox pull-left" style="height: 20px;">
 

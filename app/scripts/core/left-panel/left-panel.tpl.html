@@ -24,19 +24,21 @@
     <!--</ul>-->
     <!--</nav>-->
 
-    <div class="clearfix divider"></div>
+    <div ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
+      <div class="clearfix divider"></div>
 
-    <div class="nav-title" ng-click="toogleCollapse('QUICKSUPPORT'); stateGo($event, 'quickSupport');"
-         ng-class="{'collapsed-nav': collapseItem === 'QUICKSUPPORT'}"
-         style="width: 100%;cursor: pointer;padding: 24px 18px 24px 30px;">
-      Quick Support
+      <div class="nav-title" ng-click="toogleCollapse('QUICKSUPPORT'); stateGo($event, 'quickSupport');"
+           ng-class="{'collapsed-nav': collapseItem === 'QUICKSUPPORT'}"
+           style="width: 100%;cursor: pointer;padding: 24px 18px 24px 30px;">
+        Quick Support
 
-      <div class="btn btn-success add-session-button has-tooltip" style="position: relative;margin-left: 59px;"
-           ng-click="addQuickSession()"
-           tooltip-placement="top" tooltip="Create">
-        <i class="icn-sm icn-plus"></i>
+        <div class="btn btn-success add-session-button has-tooltip" style="position: relative;margin-left: 59px;"
+             ng-click="addQuickSession()"
+             tooltip-placement="top" tooltip="Create">
+          <i class="icn-sm icn-plus"></i>
+        </div>
+
       </div>
-
     </div>
 
     <div class="clearfix divider"></div>
@@ -46,65 +48,61 @@
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'TICKETS'}">
-      <ul class="nav nav-tickets" ng-class="{'nav-tickets-users': currentUser.role === 'USER'}"
-          ng-hide="collapseItem !== 'TICKETS'" style="width: 100%;">
+      <ul class="nav nav-tickets" ng-hide="collapseItem !== 'TICKETS'" style="width: 100%;">
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'all'})}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'all'})">
-            <i class="nav-icon icn-lg icn-tickets"></i> All Tickets
-          </a>
-        </li>
+          <li ng-class="{active: $state.includes('tickets', {listType: 'all'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'all'})">
+              <i class="nav-icon icn-lg icn-tickets"></i> All Tickets
+            </a>
+          </li>
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
-            <i class="nav-icon icn-lg icn-unassigned"></i> Unassigned
-            <!--<span class="badge" ng-show="ticketCounts.UNASSIGNED && (ticketCounts.UNASSIGNED > 0)">-->
+          <li ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
+              <i class="nav-icon icn-lg icn-unassigned"></i> Unassigned
+              <!--<span class="badge" ng-show="ticketCounts.UNASSIGNED && (ticketCounts.UNASSIGNED > 0)">-->
               <!--{{ ticketCounts.UNASSIGNED }}-->
-            <!--</span>-->
-          </a>
-        </li>
+              <!--</span>-->
+            </a>
+          </li>
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'user'})}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'user'})">
-            <i class="nav-icon icn-lg icn-user-lg"></i> My Tickets
-          </a>
-        </li>
+          <li ng-class="{active: $state.includes('tickets', {listType: 'user'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'user'})">
+              <i class="nav-icon icn-lg icn-user-lg"></i> My Tickets
+            </a>
+          </li>
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'shared'})}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'shared'})">
-            <i class="nav-icon icn-lg icn-shared"></i> Shared
-            <!--<span class="badge" ng-show="ticketCounts.SHARED && (ticketCounts.SHARED > 0)">-->
+          <li ng-class="{active: $state.includes('tickets', {listType: 'shared'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'shared'})">
+              <i class="nav-icon icn-lg icn-shared"></i> Shared
+              <!--<span class="badge" ng-show="ticketCounts.SHARED && (ticketCounts.SHARED > 0)">-->
               <!--{{ ticketCounts.SHARED }}-->
-            <!--</span>-->
-          </a>
-        </li>
+              <!--</span>-->
+            </a>
+          </li>
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
-            ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'open_tickets')">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'open'})">
-            <i class="nav-icon icn-lg icn-open"></i>Open
-          </a>
-        </li>
+          <li ng-class="{active: $state.includes('tickets', {listType: 'open'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'open'})">
+              <i class="nav-icon icn-lg icn-open"></i>Open
+            </a>
+          </li>
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"
-            ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'closed_tickets')">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
-            <i class="nav-icon icn-lg icn-closed"></i> Closed
-          </a>
-        </li>
+          <li ng-class="{active: $state.includes('tickets', {listType: 'closed'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
+              <i class="nav-icon icn-lg icn-closed"></i> Closed
+            </a>
+          </li>
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
-            ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'trash_tickets')">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
-            <i class="nav-icon icn-lg icn-trash"></i> Trash
-          </a>
-        </li>
+          <li ng-class="{active: $state.includes('tickets', {listType: 'trash'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
+              <i class="nav-icon icn-lg icn-trash"></i> Trash
+            </a>
+          </li>
 
-        <li ng-class="{active: $state.includes('tickets', {listType: 'spam'})}">
-          <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'spam'})">
-            <i class="nav-icon icn-lg icn-spam"></i> Spam
-          </a>
-        </li>
+          <li ng-class="{active: $state.includes('tickets', {listType: 'spam'})}">
+            <a href="javascript:void(0)" ng-click="stateGo($event, 'tickets', {listType: 'spam'})">
+              <i class="nav-icon icn-lg icn-spam"></i> Spam
+            </a>
+          </li>
 
       </ul>
     </nav>
@@ -118,13 +116,13 @@
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'CLIENTS'}">
       <ul class="nav nav-clients" ng-hide="collapseItem !== 'CLIENTS'" style="width: 100%;">
 
-        <li ng-class="{active: $state.includes('companies')}">
+        <li ng-class="{active: $state.includes('companies')}" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'companies')">
             <i class="nav-icon icn-lg icn-companies"></i> Companies
           </a>
         </li>
 
-        <li ng-class="{active: $state.includes('users')}">
+        <li ng-class="{active: $state.includes('users')}" ng-if="PermissionsService.isAllowed('VIEW_USERS')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'users')">
             <i class="nav-icon icn-lg icn-users"></i> Users
           </a>
@@ -140,7 +138,7 @@
       </ul>
     </nav>
 
-    <div ng-if="PermissionsService.isAllowed('accounting', currentUser.role, 'c r u d')">
+    <div ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
       <div class="clearfix divider"></div>
       <div class="nav-title" style="width: 100%;cursor: pointer" ng-click="toogleCollapse('ACCOUNTING')">Billing
       </div>
@@ -178,8 +176,7 @@
     </div>
 
     <nav class="clearfix" ng-class="{'collapsed-nav': collapseItem === 'INVENTRY'}">
-      <ul class="nav nav-inventry" ng-class="{'nav-inventry-users': currentUser.role === 'USER'}"
-          ng-hide="collapseItem !== 'INVENTRY'" style="width: 100%;">
+      <ul class="nav nav-inventry" ng-hide="collapseItem !== 'INVENTRY'" style="width: 100%;">
 
         <li ng-class="{active: $state.includes('vendors')}">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'vendors')">
@@ -187,14 +184,13 @@
           </a>
         </li>
 
-        <li ng-class="{active: $state.includes('products')}">
+        <li ng-class="{active: $state.includes('products')}" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'products', { tabName: 'category' })">
             <i class="nav-icon icn-products icn-lg"></i> Products
           </a>
         </li>
 
-        <li ng-class="{active: $state.includes('services')}"
-            ng-if="PermissionsService.isAllowed('inventry/services', currentUser.role, 'c r u d')">
+        <li ng-class="{active: $state.includes('services')}" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
           <a href="javascript:void(0)" ng-click="stateGo($event, 'services')">
             <i class="nav-icon icn-services icn-lg"></i> Services
           </a>

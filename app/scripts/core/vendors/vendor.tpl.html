@@ -46,13 +46,11 @@
       </a>
       <a href="javascript:void(0)" class="hit-area has-tooltip"
          ui-sref="editVendor( { vendorId: vendor.id } )"
-         tooltip-placement="top" tooltip="Edit"
-         ng-show="PermissionsService.isAllowed('inventry/vendors', currentUser.role, 'u')">
+         tooltip-placement="top" tooltip="Edit">
         <i class="icn-md icn-edit-tag"></i>
       </a>
 
-      <a class="hit-area has-tooltip" ng-show="PermissionsService.isAllowed('inventry/vendors', currentUser.role, 'd')"
-         ng-click="archiveVendor()" archive-vendor-button
+      <a class="hit-area has-tooltip" ng-click="archiveVendor()" archive-vendor-button
          tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Vendor">
         <i class="icn-sm icn-archive-company"></i>
       </a>

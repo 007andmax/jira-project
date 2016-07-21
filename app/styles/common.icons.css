@@ -1661,6 +1661,14 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 :hover > .icn-add-description, :active > .icn-add-description, :focus:hover > .icn-add-description, :focus:active > .icn-add-description, :hover:active > .icn-add-description, .active > .icn-add-description, .open > .icn-add-description, .open .icn-add-description {
   background-position: -1719px -206px;
 }
+.icn-permissions-key {
+  background-position: -1801px -232px;
+  width: 15px;
+  height: 14px;
+}
+:hover > .icn-permissions-key {
+  background-position: -1801px -206px;
+}
 .icn-password-key{
   background-position: -1751px -206px;
   width: 15px;

@@ -1,6 +1,5 @@
 <div>
   <div class="btn btn-block btn-lg btn-add-category pull-left"
-       ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c')"
        custom-disabled="{{ isCreateCategoryShow }}"
        ng-click="openCreationCategory()">
     <i class="icn-sm icn-add-category"></i>
@@ -67,12 +66,11 @@
         <div class="col-2">
 
           <div class="no-items"
-               ng-class="{'not-hide-labels': currentUser.role === 'USER' || category.default}">
+               ng-class="{'not-hide-labels': category.default}">
             {{ category.productsList.length }} items
           </div>
 
-          <div class="product-actions"
-               ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c u') && !category.default">
+          <div class="product-actions" ng-if="!category.default">
 
             <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
                  scroll-to-form
@@ -99,7 +97,7 @@
         <div class="slide-category-content" ng-show="category.id === expandedCategoryId">
           <div>
 
-            <ul class="qt-list qt-product-list" ng-class="{'qt-user-product-list': currentUser.role === 'USER'}">
+            <ul class="qt-list qt-product-list">
 
               <li class="list-heading" ng-show="category.productsList.length > 0 && category.id === expandedCategoryId" style="cursor: pointer !important;"
                   fixed-block-top offset-top="148">
@@ -123,8 +121,7 @@
                                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
                 </div>
-                <div class="col-4" ng-click="setOrderForProducts('cost')"
-                     ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'r_cost')">
+                <div class="col-4" ng-click="setOrderForProducts('cost')">
                   <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
 
@@ -163,7 +160,7 @@
 
                   <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
 
-                  <div class="col-4" ng-if="PermissionsService.isAllowed('inventry/products', currentUser.role, 'r_cost')">
+                  <div class="col-4">
                     {{ product.cost | currency: '$': 2 }}
                   </div>
 
@@ -172,13 +169,12 @@
                   <div class="col-4" style="width: 50px">
                     <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
                       <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
-                             custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('inventry/products', currentUser.role, 'u') }}">
+                             custom-disabled="{{ disabledCheckbox }}">
                       <span class="control-indicator"></span>
                     </label>
                   </div>
 
-                  <div class="col-6 pull-right" dropdown keyboard-nav="true" dropdown-append-to-body="true"
-                       ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'u d')">
+                  <div class="col-6 pull-right" dropdown keyboard-nav="true" dropdown-append-to-body="true">
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                        ng-click="deleteProduct()"
@@ -227,7 +223,7 @@
             </ul>
 
             <div class="add-product-btn-wrapper"
-                 ng-show="PermissionsService.isAllowed('inventry/products', currentUser.role, 'c') && !category.default">
+                 ng-if="!category.default">
               <div class="btn btn-info has-tooltip"
                    ng-click="addProduct(category.id)"
                    custom-disabled="{{ showCreateProduct }}"

@@ -20,13 +20,12 @@
     </p>
   </div>
 
-  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline"
-       ng-style="{'padding-top': currentUser.role !== 'USER' ? '70px' : '120px'}">
+  <div class="qt-list-loading" ng-show="isScanDevicesLoad && !masterAgentOffline" style="padding-top: 120px">
     <div class="loader"></div>
   </div>
 
   <ul class="qt-list qt-network-scan"
-      ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : (currentUser.role !== 'USER' ? '60px' : '94px')}"
+      ng-style="{'padding-top': isScanDevicesLoad && !masterAgentOffline ? '0' : '94px'}"
       ng-if="scanDevices.devices && scanDevices.devices.length > 0">
 
     <li class="list-heading" fixed-block-top offset-top="148">

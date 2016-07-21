@@ -21,7 +21,7 @@
       </a>
     </li>
 
-    <li>
+    <li ng-show="PermissionsService.isAllowed('VIEW_COMPANIES')">
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
          tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="companies"
@@ -173,14 +173,13 @@
 
             <div class="company-numbers clearfix" stop-propagation="click">
 
-              <div class="total-users"
+              <div class="total-users" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
                    ng-class="{'active': currentOpenCompanyMode === ('USERS-' + companyData.company.id)}"
                    ng-click="openCompanyTab('USERS-', companyData)">
                 <i class="icn-sm icn-cusers"></i> {{ companyData.users.length || '0' }} Users
               </div>
 
-              <div class="total-devices"
-                   class="numbers total-devices"
+              <div class="total-devices numbers total-devices"
                    ng-class="{'active': currentOpenCompanyMode === ('DEVICES-' + companyData.company.id)}"
                    ng-click="openCompanyTab('DEVICES-', companyData)">
                 <i class="icn-sm icn-cdevices"></i> {{ companyData.devices.length || '0' }} Devices

@@ -4,15 +4,14 @@
 
   angular.module('quicktech.core.quickSupport').controller('quicktech.core.quickSupport.quickSupportCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.RemoteAccessService',
-      'DevicesService', 'ConstantsService', 'quicktech.common.services.UserNotificationService',  'quicktech.common.services.PermissionsService',
+      'DevicesService', 'ConstantsService', 'quicktech.common.services.UserNotificationService',
       function ($scope, SharedStateService, RemoteAccessService, DevicesService,
-                ConstantsService, UserNotificationService, PermissionsService) {
+                ConstantsService, UserNotificationService) {
 
         UserNotificationService.show('Loading...');
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
-        $scope.PermissionsService = PermissionsService;
         $scope.host = ConstantsService.getConstant('server.url');
         $scope.showHost = $scope.host.replace(/.*?:\/\//g, "");
         $scope.statusMap = {

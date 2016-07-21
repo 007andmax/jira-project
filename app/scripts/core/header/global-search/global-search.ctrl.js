@@ -5,16 +5,17 @@
   angular.module('quicktech').controller('quicktech.core.header.globalSearchCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', 'GlobalSearch', '$state', 'TicketsService',
       'DevicesService', 'quicktech.common.services.RemoteAccessService', 'Utils', '$rootScope', '$filter',
-      'UsersService', 'CompaniesService', '$timeout',
+      'UsersService', 'CompaniesService', '$timeout', 'quicktech.common.services.PermissionsService',
       function ($scope, SharedStateService, GlobalSearch, $state, TicketsService,
                 DevicesService, RemoteAccessService, Utils, $rootScope, $filter,
-                UsersService, CompaniesService, $timeout) {
+                UsersService, CompaniesService, $timeout, PermissionsService) {
 
         var allUsers = [],
           clientUsers = [],
           clientCompanies = [],
           preventSearch = false;
 
+        $scope.PermissionsService = PermissionsService;
         $scope.preventDropDownOpening = false;
         $scope.categoryExpanded = {};
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');

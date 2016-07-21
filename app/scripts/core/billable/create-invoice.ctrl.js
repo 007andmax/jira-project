@@ -62,6 +62,12 @@
           window.onbeforeunload = undefined;
         });
 
+        $scope.$watch('currentUser.permissions', function (permissions) {
+          if (permissions && permissions.indexOf('CREATE_INVOICE') === -1) {
+            $modalInstance.dismiss();
+          }
+        });
+
         $scope.setShowInvoiceLockIndex = function (index) {
 
           if (index < 0) {

@@ -445,7 +445,7 @@
     </div>
   </div>
 
-  <div class="services-info-wrapper" id="companyInfoServices"
+  <div class="services-info-wrapper" id="companyInfoServices" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
        ng-controller="quicktech.core.settings.companyInfoServicesCtrl">
 
     <div class="default-services-header">

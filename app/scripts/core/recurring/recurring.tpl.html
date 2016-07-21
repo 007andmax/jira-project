@@ -1,22 +1,22 @@
 <div>
 
-  <div class="billable-head clearfix">
-    <div class="chart-wrapper full-width">
-      <div class="heading">
+  <!--<div class="billable-head clearfix">-->
+    <!--<div class="chart-wrapper full-width">-->
+      <!--<div class="heading">-->
 
-        <strong>Invoices Recurred</strong>
-        <span>Last 30 Days</span>
-        <span class="dot-sep"></span>
-        <span>{{ last30DaysValue | currency:'$' :2 }}</span>
+        <!--<strong>Invoices Recurred</strong>-->
+        <!--<span>Last 30 Days</span>-->
+        <!--<span class="dot-sep"></span>-->
+        <!--<span>{{ last30DaysValue | currency:'$' :2 }}</span>-->
 
-      </div>
+      <!--</div>-->
 
-      <div billable-chart ng-model="recurringGraphData"></div>
+      <!--<div billable-chart ng-model="recurringGraphData"></div>-->
 
-    </div>
-  </div>
+    <!--</div>-->
+  <!--</div>-->
 
-  <div class="billable-content">
+  <div class="billable-content" style="margin-top: 20px;">
     <div class="tabs-container" style="margin-top: 40px">
       <div class="payment-receive-fixed" fixed-block-top>
         <ul class="nav nav-qt" role="tablist">
@@ -28,13 +28,12 @@
           <li role="presentation" class="active">
             <a href="javascript:void(0)">Recurring Orders</a>
           </li>
-          <div class="btn btn-add-company btn-primary pull-right has-tooltip"
-             style="width: 98px;" ng-hide="editInvoiceId === 'new-invoice'"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
-             ng-click="toogleEditForm('new-invoice')">
-          <i class="icn-sm icn-add-company"></i>
-        </div>
-
+          <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
+               ng-if="editInvoiceId === 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
+               ng-click="toogleEditForm('new-invoice')">
+            <i class="icn-sm icn-add-company"></i>
+          </div>
 
         </ul>
       </div>
@@ -110,6 +109,7 @@
 
                   <div class="currency-icons" stop-propagation="click">
                     <button-with-loading-indicator class="btn btn-primary force-create"
+                                                   ng-if="PermissionsService.isAllowed('CREATE_INVOICE')"
                                                    label="Force Create" loading="forceCreating[invoice.id]"
                                                    ng-click="forceCreate(invoice.id)"></button-with-loading-indicator>
 
@@ -118,8 +118,10 @@
                          popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
                     </a>
 
-                    <a><i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
-                          ng-click="toogleEditForm(invoice.id)"></i></a>
+                    <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE')">
+                      <i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
+                         ng-click="toogleEditForm(invoice.id)"></i>
+                    </a>
 
                     <a custom-disabled="{{ disabledDelete }}">
                       <i class="icn-sm icn-delete"

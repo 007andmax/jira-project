@@ -9,12 +9,13 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
                 TicketsPermissionsService, SharedStateService, Utils, PermissionsService) {
 
-        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'preview'],
+        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.selectedTickets = {};
         $scope.TicketsPermissionsService = TicketsPermissionsService;
+        $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getAllUsers();
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
         $scope.attachmentTypePattern = /[0-9a-z]+$/i;
@@ -48,16 +49,6 @@
           'archive/zip': 'zip',
           'image/bmp': 'not-viewable'
         };
-
-        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'open_tickets')) {
-          availableTypes.push('open');
-        }
-        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'closed_tickets')) {
-          availableTypes.push('closed');
-        }
-        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'trash_tickets')) {
-          availableTypes.push('trash');
-        }
 
         $scope.$watch(function () {
           return $stateParams;

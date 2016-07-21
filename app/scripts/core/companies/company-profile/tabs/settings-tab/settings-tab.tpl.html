@@ -1,14 +1,14 @@
 <div class="tab-pane active">
-  <div class="device-settings-tab clearfix" style="width: 100%; display: inline-block"
-       ng-style="{'margin-top': currentUser.role !== 'USER' ? '40px' : '80px'}"
+  <div class="device-settings-tab clearfix" style="width: 100%; display: inline-block; margin-top: 80px"
        ng-controller="quicktech.core.devices.settingsTabCtrl">
     <h3 class="devices-settings-title">Agent Deployment Settings</h3>
-    <ul class="deployment-settings clearfix" ng-form="agentDeploymentSettingsFrom">
+    <ul class="deployment-settings clearfix" ng-form="agentDeploymentSettingsFrom"
+        ng-class="{'modify-not-allowed': !PermissionsService.isAllowed('MODIFY_SETTINGS')}">
       <li>
         <label>
           Maximum agents install for this client
           <input type="number" name="maxAgents"
-                 ng-model="settings.maxAgents"
+                 ng-model="settings.maxAgents" ng-readonly="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
                  ng-class="{'input-error': settings.maxAgents < 0}"
                  execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
           <span ng-if="agents && settings.maxAgents < agents.length && settings.maxAgents !== 0" style="color: #e53935">
@@ -21,7 +21,7 @@
       </li>
       <li>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="settings.autoScanNetwork"
+          <input type="checkbox" ng-model="settings.autoScanNetwork" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
                  ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)">
           Automatically Scan Network
           <span class="control-indicator"></span>
@@ -30,17 +30,19 @@
       <li>
         <label>
           Rescan network for new devices every
-          <select ng-model="settings.rescanTime" ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
+          <select ng-model="settings.rescanTime" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
+                  ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
                   ng-options="item.label for item in rescanIntervals"></select>
         </label>
       </li>
       <li>
         <label class="control checkbox">
-          <input type="checkbox" ng-model="settings.autoRemoveDevice"
+          <input type="checkbox" ng-model="settings.autoRemoveDevice" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
                  ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)">
           <span class="control-indicator"></span>
           Automatically remove device if offline for more then
           <input type="number" min="0" ng-model="settings.removeOfflineTime"
+                 ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
                  execute-when-outfocused="saveDeploymentSettings(agentDeploymentSettingsFrom)">
           days
 
@@ -58,7 +60,7 @@
       <li>
         <label style="display: block">
           Choose master agent
-          <select class="select-master-id" ng-model="settings.masterAgentId"
+          <select class="select-master-id" ng-model="settings.masterAgentId" ng-disabled="!PermissionsService.isAllowed('MODIFY_SETTINGS')"
                   ng-change="saveDeploymentSettings(agentDeploymentSettingsFrom)"
                   ng-options="agent.agentId as {{ 'agent.hostName' || 'agent.ip' }} for agent in agents"></select>
         </label>
@@ -68,7 +70,7 @@
     <div ng-form="deviceSettingsForm">
       <h3 class="devices-settings-title">Network Credentials</h3>
 
-      <div class="form-left-column">
+      <div class="form-left-column" ng-if="PermissionsService.isAllowed('MODIFY_SETTINGS')">
 
         <div class="device-settings-button-assigned" ng-class="{'has-error': assignRequiredError}"
              dropdown on-toggle="eraseSearch(open)">
@@ -127,53 +129,59 @@
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'login')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'login')}">
+          <label class="control-label" ng-show="!isShowingErrors(deviceSettingsForm, 'login')">
             Username &nbsp;<span class="text-muted">domain\username</span>
           </label>
 
           <div ng-messages="deviceSettingsForm.login.$error"
-               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'login')}">
+               ng-show="isShowingErrors(deviceSettingsForm, 'login')">
             <label class="control-label" ng-message="required">Username is required.</label>
           </div>
 
           <input type="text" class="form-control" name="login" ng-model="editedCredential.login" required>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'password')}">
+        <div class="form-group"
+             ng-if="!selectedCredentialId || selectedCredentialId && PermissionsService.isAllowed('VIEW_PASSWORDS')"
+             ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'password')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'password')}">
+          <label class="control-label" ng-show="!isShowingErrors(deviceSettingsForm, 'password')">
             Password
           </label>
 
           <div ng-messages="deviceSettingsForm.password.$error"
-               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'password')}">
+               ng-show="isShowingErrors(deviceSettingsForm, 'password')">
             <label class="control-label" ng-message="required">Password is required.</label>
           </div>
 
-          <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" name="password"
+          <input type="{{ passwordShown['showPassword'] ? 'text' : 'password' }}" class="form-control" name="password"
                  ng-model="editedCredential.password" required>
 
-          <span ng-click="showPassword = !showPassword" ng-show="editedCredential.password">
-                <i class="icn-sm {{ showPassword ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+          <span ng-click="passwordShown['showPassword'] = !passwordShown['showPassword']"
+                ng-show="editedCredential.password">
+                <i class="icn-sm {{ passwordShown['showPassword'] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
           </span>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
+        <div class="form-group"
+             ng-if="!selectedCredentialId || selectedCredentialId && PermissionsService.isAllowed('VIEW_PASSWORDS')"
+             ng-class="{'has-error': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
+          <label class="control-label" ng-show="!isShowingErrors(deviceSettingsForm, 'passwordConfirm')">
             Confirm Password
           </label>
 
           <div ng-messages="deviceSettingsForm.passwordConfirm.$error"
-               ng-class="{'hide': !isShowingErrors(deviceSettingsForm, 'passwordConfirm')}">
+               ng-show="isShowingErrors(deviceSettingsForm, 'passwordConfirm')">
             <label class="control-label" ng-message="required || equal">Passwords are not equal.</label>
           </div>
 
-          <input type="{{ showPasswordConfirm ? 'text' : 'password' }}" class="form-control" name="passwordConfirm"
+          <input type="{{ passwordShown['showPasswordConfirm'] ? 'text' : 'password' }}" class="form-control" name="passwordConfirm"
                  ng-model="editedCredential.passwordConfirm" required>
 
-          <span ng-click="showPasswordConfirm = !showPasswordConfirm" ng-show="editedCredential.passwordConfirm">
-            <i class="icn-sm {{ showPasswordConfirm ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+          <span ng-click="passwordShown['showPasswordConfirm'] = !passwordShown['showPasswordConfirm']"
+                ng-show="editedCredential.passwordConfirm">
+            <i class="icn-sm {{ passwordShown['showPasswordConfirm'] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
           </span>
         </div>
 
@@ -187,7 +195,7 @@
         </div>
       </div>
 
-      <div class="form-right-column">
+      <div class="form-right-column" ng-class="{'pull-right': PermissionsService.isAllowed('MODIFY_SETTINGS')}">
         <ul>
           <li class="right-column-head">
             <span>Account</span>
@@ -211,7 +219,8 @@
               {{ userReadable(credential.id) || 'Assign' }}
             </div>
             <span class="device-settings-actions" stop-propagation="click">
-              <span ng-click="showPassword(passwordShown, $index, credential.id)">
+              <span ng-click="showPassword(passwordShown, $index, credential.id)"
+                    ng-if="PermissionsService.isAllowed('VIEW_PASSWORDS')">
                 <i class="icn-sm {{ passwordShown[$index] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
               </span>
               <span ng-click="removeCredential(credential.id)">

@@ -61,14 +61,13 @@
 
             <div class="dropdown">
 
-              <input class="form-control has-dropdown" type="text"
-                     ng-model="roles[editUser.role]" data-toggle="dropdown" aria-expanded="true"
-                     class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
+              <input type="text"class="form-control has-dropdown form-control-dropdown dropdown-toggle no-cursor"
+                     ng-model="editUser.techRole" data-toggle="dropdown" aria-expanded="true" READONLY>
               <i class="icn-sm icn-caret-gray"></i>
 
               <ul class="dropdown-menu dropdown-account-type">
-                <li ng-repeat="(role, label) in roles" ng-click="editUser.role = role; editUserForm.$setDirty()">
-                  <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+                <li ng-repeat="role in techRoles" ng-click="editUser.techRole = role; editUserForm.$setDirty()">
+                  <a tabindex="-1" href="javascript:void(0)"> {{ role }} </a>
                 </li>
               </ul>
 

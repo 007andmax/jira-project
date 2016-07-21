@@ -4,13 +4,11 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
-      '$timeout', 'quicktech.common.services.PhoneFormats', 'quicktech.common.services.PermissionsService',
+      '$timeout', 'quicktech.common.services.PhoneFormats',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
-                $timeout, PhoneFormats, PermissionsService) {
+                $timeout, PhoneFormats) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
-
-        $scope.PermissionsService = PermissionsService;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (company) {
           return !company.isDefault;
@@ -71,6 +69,12 @@
         }
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
+        $scope.$watch('currentUser.permissions', function (permissions) {
+          if (permissions && permissions.indexOf('EDIT_USERS') === -1) {
+            $scope.cancelEdit();
+          }
+        });
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);

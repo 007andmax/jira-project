@@ -8,7 +8,8 @@
 
       <div class="col-1" ng-click="toggleReceivableInvoices()">
 
-        <label class="control checkbox pull-left" stop-propagation="click">
+        <label class="control checkbox pull-left" stop-propagation="click"
+               ng-if="PermissionsService.isAllowed('VOID_INVOICE')">
           <input type="checkbox"
                  ng-model="invoiceToSent[company.id].checked"
                  ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === company.id)"
@@ -74,7 +75,7 @@
 
             <div class="col-1">
 
-              <label class="control checkbox pull-left">
+              <label class="control checkbox pull-left" ng-if="PermissionsService.isAllowed('VOID_INVOICE')">
                 <input type="checkbox"
                        ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === company.id)"
                        ng-model="invoiceToSent[company.id].invoices[invoice.number]">

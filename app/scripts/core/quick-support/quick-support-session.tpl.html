@@ -1,7 +1,7 @@
 <div class="support-session-content">
 
   <a href="javascript:void(0)"
-     ng-show="remoteSession.performer.id === currentUser.id || PermissionsService.isAllowed('quickSupport', currentUser.role, 'd')"
+     ng-show="remoteSession.performer.id === currentUser.id"
      ng-click="deleteRemoteSession(remoteSession.id)"
      style="position: absolute;right: 10px;top: 8px;">
     <i class="icn-sm icn-remove-token"

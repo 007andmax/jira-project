@@ -19,11 +19,11 @@
 
         $scope.triedToSave = false;
         $scope.rescanIntervals = [
-          {label: '1 hour', value: 3600000},
-          {label: '4 hour', value: 14400000},
-          {label: '1 day', value: 86400000},
-          {label: '7 days', value: 604800000},
-          {label: '30 days', value: 18144000000}
+          { label: '1 hour', value: 3600000 },
+          { label: '4 hour', value: 14400000 },
+          { label: '1 day', value: 86400000 },
+          { label: '7 days', value: 604800000 },
+          { label: '30 days', value: 18144000000 }
         ];
         $scope.credentialTypes = [{
           label: 'Domain',
@@ -72,6 +72,29 @@
             if (obj.value === resp.rescanTime) {
               $scope.settings.rescanTime = obj;
               break;
+            }
+          }
+        });
+
+        $scope.$watch('currentUser.permissions', function (permissions) {
+          if (!permissions) {
+            return;
+          }
+
+          if ($scope.selectedCredentialId && permissions.indexOf('MODIFY_SETTINGS') === -1) {
+            $scope.cancelEdit($scope.deviceSettingsForm);
+          }
+
+          if ($scope.credentials && permissions.indexOf('VIEW_PASSWORDS') === -1) {
+            for (var i = 0; i < $scope.credentials.length; i++) {
+              var credential = $scope.credentials[i];
+              credential.password = undefined;
+              $scope.passwordShown[i] = false;
+            }
+
+            if ($scope.selectedCredentialId) {
+              $scope.passwordShown['showPassword'] = false;
+              $scope.passwordShown['showPasswordConfirm'] = false;
             }
           }
         });
@@ -244,7 +267,7 @@
             settings.company = {
               id: $scope.company.id
             };
-            settings.masterAgent = {agentId: settings.masterAgentId};
+            settings.masterAgent = { agentId: settings.masterAgentId };
             DevicesService.updateAgentSettings(settings);
           }
         };
@@ -307,7 +330,16 @@
 
           $scope.selectedCredentialId = id;
           $scope.editedCredential = angular.copy(getCredentialById(id));
-          $scope.editedCredential.passwordConfirm = $scope.editedCredential.password;
+
+          if ($scope.currentUser.permissions.indexOf('VIEW_PASSWORDS') > -1) {
+            DevicesService.devicePasswordShown(id, function (resp) {
+              $scope.editedCredential.password = resp.password;
+              $scope.editedCredential.passwordConfirm = resp.password;
+              $scope.passwordShown['showPassword'] = true;
+              $scope.passwordShown['showPasswordConfirm'] = true;
+            });
+          }
+
           $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
           $scope.devicesAllowedForCredential = getAllowedDevicesForCredential($scope.editedCredential);
           $scope.triedToSave = true;

@@ -1,5 +1,6 @@
-<div role="tabpanel" class="tab-pane" style="display: block">
-  <ul class="qt-list qt-users" style="margin-bottom: 150px; margin-top: 30px">
+<div role="tabpanel" class="tab-pane" style="display: block" ng-if="PermissionsService.isAllowed('VIEW_USERS')">
+  <ul class="qt-list qt-users" style="margin-bottom: 150px; margin-top: 70px">
+
     <li class="list-heading" style="cursor: pointer !important;" fixed-block-top offset-top="148">
       <div class="col-1" ng-click="setOrderByUsers('name')">
         <label class="control checkbox pull-left" ng-show="users.length > 0">
@@ -169,12 +170,12 @@
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
-            <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
-                 ng-if="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_user')
-            && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
-                 tooltip-placement="top" tooltip="Archive this User">
-              <i class="icn-sm icn-remove-token"></i>
-            </div>
+          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+               ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
+                      && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
+               tooltip-placement="top" tooltip="Archive this User">
+            <i class="icn-sm icn-remove-token"></i>
+          </div>
 
             <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
             <!--tooltip-placement="top" tooltip="chat" ng-click="startChat()">-->

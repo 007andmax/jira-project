@@ -4,8 +4,10 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      function ($scope, BillableService, CompaniesService, SharedStateService) {
+      'quicktech.common.services.PermissionsService',
+      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService) {
 
+        $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
         $scope.loadingInProgress = true;
         $scope.ticketsSelection = {};
