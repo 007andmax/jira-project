@@ -4,13 +4,13 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
-      'quicktech.common.services.SharedStateService',
-      function ($scope, DevicesService, RemoteAccessService, SharedStateService) {
+      'quicktech.common.services.SharedStateService', '$rootScope',
+      function ($scope, DevicesService, RemoteAccessService, SharedStateService, $rootScope) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.highlightDevice = function () {
           if (globalSearch.deviceFilter) {
-            $scope.$broadcast('showFilteredDevice-' + globalSearch.deviceFilter);
+            $rootScope.$broadcast('showFilteredDevice-' + globalSearch.deviceFilter);
             globalSearch.deviceFilter = undefined;
           }
         };

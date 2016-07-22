@@ -78,7 +78,11 @@
         controller: 'quicktech.core.companies.editCompanyCtrl'
       }))
       .state('companyProfile', waitForServices({
-        url: '/clients/companyProfile/:companyId/:tabName',
+        url: '/clients/companyProfile/:companyId?tabName',
+        params: {
+          tabName: ''
+        },
+        reloadOnSearch: false,
         templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
