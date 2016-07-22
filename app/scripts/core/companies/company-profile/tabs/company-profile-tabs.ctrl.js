@@ -32,7 +32,8 @@
         };
         $scope.companyProfileHeader = {
           selectUsersIds: [],
-          selectDevicesIds: []
+          selectDevicesIds: [],
+          isOfflineDeviceSelected: false
         };
 
         $scope.users = UsersService.getAllByCompanyId($scope.company.id);
@@ -285,7 +286,8 @@
             }
           }
 
-          $scope.isSelectAllDevices = (selectDevicesIds.length > 0) && (selectDevicesIds.length === countOnlineDevices);
+          $scope.isSelectAllDevices = (selectDevicesIds.length > 0) && (selectDevicesIds.length === $scope.agents.length);
+          $scope.companyProfileHeader.isOfflineDeviceSelected = selectDevicesIds.length !== countOnlineDevices;
           $scope.companyProfileHeader.selectDevicesIds = selectDevicesIds;
         };
 
@@ -293,11 +295,7 @@
           $scope.isSelectAllDevices = !$scope.isSelectAllDevices;
 
           for (var i = 0, len = $scope.agents.length; i < len; i++) {
-            if ($scope.agents[i].online) {
-              $scope.selectDevices[$scope.agents[i].agentId] = $scope.isSelectAllDevices;
-            } else {
-              $scope.selectDevices[$scope.agents[i].agentId] = false
-            }
+            $scope.selectDevices[$scope.agents[i].agentId] = $scope.isSelectAllDevices;
           }
 
           $scope.changeSelectDevices();
