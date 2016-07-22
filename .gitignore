@@ -8,4 +8,4 @@ bower_components
 index.html
 .idea
 terminal.glue
-dist.tar.gz
+dist.*
