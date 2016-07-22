@@ -477,7 +477,7 @@
 .form-row .form-group {
   float: left;
   width: 100%;
-  max-width: 45%; /*experemental*/
+  max-width: 48%; /*experemental*/
   margin: 0;
 }
 .form-row .form-group.no-label{
@@ -496,16 +496,16 @@
   left: 0 !important;
 }
 .form-row .form-group.address-field{
-  max-width: 280px;
+  max-width: 280px !important;
 }
 .form-row .form-group.zipcode-field{
-  max-width: 100px;
+  max-width: 100px !important;
 }
 .form-row .form-group.scan-repeat-days{
-  max-width: 145px;
+  max-width: 145px !important;
 }
 .form-row .form-group.scan-time{
-  max-width: 125px;
+  max-width: 125px !important;
 }
 @-moz-document url-prefix() {
   .form-row .form-group.no-label{
@@ -518,6 +518,7 @@
 }
 .form-row .form-group + .form-group {
   margin-left: 10px;
+  max-width: 50%;
 }
 .create-user-form label{
   text-transform: uppercase;
@@ -604,4 +605,10 @@
 }
 .zoom-slider{
   margin-top: 14px;
+}
+.user-edit-tab{
+  z-index: 2000;
+  position: relative;
+  background: #fff;
+  padding: 0 10px;
 }
