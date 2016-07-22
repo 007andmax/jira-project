@@ -1,4 +1,18 @@
-#top{
+@media only screen and (min-width: 1025px){
+.top-bar{
+  width: calc(100% - 316px);
+  height: 78px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  margin-left: 316px;
+  padding: 0;
+  z-index: 1050;
+  background: transparent;
+  box-shadow: 0px 2px 6px 0px rgba(10, 45, 89, 0.15);
+}
+.left-panel-closed .top-bar{
   width: calc(100% - 76px);
   height: 78px;
   position: fixed;
@@ -11,20 +25,51 @@
   background: transparent;
   box-shadow: 0px 2px 6px 0px rgba(10, 45, 89, 0.15);
 }
-@media only screen and (min-width: 1390px){
+}
+@media only screen and (max-width: 1024px){
+
+.left-panel-closed .top-bar{
+ width: calc(100% - 76px);
+ margin-left: 76px;
+ height: 78px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  padding: 0;
+  z-index: 1050;
+  background: transparent;
+  box-shadow: 0px 2px 6px 0px rgba(10, 45, 89, 0.15);
+}
+.top-bar{
+  width: calc(100% - 76px);
+  height: 78px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  margin-left: 76px;
+  padding: 0;
+  z-index: 1050;
+  background: transparent;
+  box-shadow: 0px 2px 6px 0px rgba(10, 45, 89, 0.15);
+}
+}
+
+/*@media only screen and (min-width: 1390px){
   #top{
     width: calc(100% - 240px);
     margin-left: 240px;
-  }
-}
+  }*/
+/*}*/
 @-moz-document url-prefix() {
-  #top{
+  .top-bar{
     box-shadow: 0px 1px 4px 0px rgba(10, 45, 89, 0.15);
   }
 }
 
 .main-container {
-  padding-top: 78px;
+  padding-top: 85px;
   margin: 0px 15px;
   padding-bottom: 150px;
 }
@@ -37,8 +82,15 @@
     min-width: 1000px;
   }
 }
+@media only screen and (min-width: 1025px){
+
 .content-container {
   position: relative;
+  width: calc(100% - 600px);
+  margin-left: 316px;
+}
+}
+.left-panel-closed .content-container {
   width: calc(100% - 357px);
   margin-left: 76px;
 }
@@ -68,6 +120,10 @@
   }
 }
 @media only screen and (max-width: 1315px){
+  .left-panel-closed .content-container {
+    width: calc(100% - 153px);
+    margin-left: 76px;
+  }
   .content-container {
     width: calc(100% - 153px);
     margin-left: 76px;
@@ -78,9 +134,12 @@
 }
 
 @media only screen and (min-width: 1390px){
-  .content-container {
+  /*.content-container {
     width: calc(100% - 521px);
     margin-left: 240px;
+  }*/
+  .content-container.large {
+    width: calc(100% - 250px);
   }
   .content-container.large {
     width: calc(100% - 250px);
@@ -101,10 +160,11 @@ body.opened-ticket-list .content-wrapper .container-ticket-list{
 }
 
 body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
-  width: 420px;
+  width: 500px;
   position: relative;
   /*border-right: 1px solid #e7ecf2;   set border to ticket details content*/
 }
+
 @media only screen and (min-width: 1930px){
   body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: 540px;
@@ -112,9 +172,17 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 }
 @media only screen and (min-width: 2510px){
   body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
-    width: 700px;
+    width: 624px;
+  }
+  body.left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
+    width: 500px;
   }
 }
+@media only screen and (min-width: 2510px){
+ .left-panel-closed .content-wrapper .container-ticket-list {
+    width: 700px;
+  }
+}             /*closed*/
 
 /*ticket content*/
 .ticket-list{
@@ -131,10 +199,17 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
 }
 .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   position: fixed;
-  width: calc(100% - 941px);
+  width: calc(100% - 1096px); 
   height: 100%;
   right: 281px !important;
 }
+.left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
+  position: fixed;
+  width: calc(100% - 856px); /**/
+  height: 100%;
+  right: 281px !important;
+}
+
 @media only screen and (min-width: 1930px){
   .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
     width: calc(100% - 1061px);

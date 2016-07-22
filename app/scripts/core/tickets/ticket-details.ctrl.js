@@ -36,7 +36,7 @@
             }
 
             if (CompaniesService.getOneById($scope.ticketDetails.company.id).isDefault) {
-              $rootScope.isRightPanelHided = true;
+              $rootScope.isRightPanelHidden = true;
             }
 
             rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
@@ -506,7 +506,7 @@
           $scope.$on('$destroy', function () {
             rightPanelSharedState.companyId = undefined;
             rightPanelSharedState.createUserId = undefined;
-            $rootScope.isRightPanelHided = false;
+            $rootScope.isRightPanelHidden = false;
           });
 
           function closeTicket() {

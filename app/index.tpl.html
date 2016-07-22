@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="styles/companies.css"/>
   <link rel="stylesheet" href="styles/nanoscroller.css"/>
   <link rel="stylesheet" href="styles/nouislider.css"/>
+  <link rel="stylesheet" href="styles/settings.css"/>
   <link rel="stylesheet" href="styles/styles.css"/>
   <link rel="stylesheet" href="styles/tokenfield.css"/>
   <link rel="stylesheet" href="styles/users.css"/>
@@ -55,9 +56,11 @@
   <link rel='stylesheet' href='styles/ticket-tags.css'/>
   <link rel='stylesheet' href='styles/loading-indicator.css'/>
   <link rel='stylesheet' href='styles/button-with-loading-indicator.css'/>
+  <!-- endbuild -->
   <link rel="stylesheet" href="styles/settings.css"/>
   <link rel='stylesheet' href='styles/permissions-management.css'/>
   <link rel='stylesheet' href='styles/tracking-devices.css'/>
+  <link rel='stylesheet' href='styles/left-panel.css'/>
    <!-- endbuild -->
 
   <script src="../configs.js"></script>
@@ -85,20 +88,20 @@
   </style>
 
 </head>
-<body ng-app="quicktech">
+<body ng-app="quicktech" ng-class="{'left-panel-closed': isLeftPanelHidden}">
 
 <div class="alert alert-yellow hide" user-notification style="z-index: 1039;"></div>
 
-<div id="top" style="z-index: 1038;" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
+<div class="top-bar" style="z-index: 1038;" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
 
 <aside id="left" qt-sidebar style="z-index: 1039;"
        ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
-<aside id="right" class="nano" ng-if="!isRightPanelHided" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
+<aside id="right" class="nano" ng-if="!isRightPanelHidden" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
 <div class="main-container">
   <div class="row">
-    <div class="content-container" ng-class="{'large': isRightPanelHided}">
+    <div class="content-container" ng-class="{'large': isRightPanelHidden}">
       <div class="content-wrapper">
         <div ui-view></div>
       </div>

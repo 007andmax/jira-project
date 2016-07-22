@@ -116,13 +116,17 @@
   position: absolute;
 }
 
-aside#left .nav-title .add-session-button {
+.center-category__category .add-session-button {
   height: 28px;
   min-width: 28px;
   background: none;
   border-color: #4C5C6B;
 }
 
-aside#left .nav-title .add-session-button:hover {
+.center-category__category .add-session-button:hover,
+.center-category__category .add-session-button:focus,
+.center-category__category .add-session-button:active  {
   border-color: #1586E4;
+  background: none;
+
 }
