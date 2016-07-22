@@ -170,7 +170,25 @@
       <div class="col-6">
         <div class="list-actions pull-right">
 
-          <div ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
+          <div class="more pull-right dropdown" ng-if="agent.online">
+
+            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
+               aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">
+              <i class="icn-more icn-sm"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="sendAlert()">Send Alert</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="specReport()">Spec. Report</a></li>-->
+              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>-->
+              <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>
+              <li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">
+                Remove</a></li>
+            </ul>
+          </div>
+
+          <div class="pull-right" ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
             <div class="btn btn-default pull-left has-tooltip"
                  ng-if="(agent.type !== 'workstation') && agent.online"
                  ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
@@ -201,34 +219,6 @@
                ng-if="!agent.online && PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
                tooltip-placement="top" tooltip="Remove">
             <i class="icn-sm icn-remove-token"></i>
-          </div>
-
-          <!--<div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"-->
-          <!--tooltip-placement="top" tooltip="Send Alert">-->
-          <!--<i class="icn-sm icn-send-alert"></i>-->
-          <!--</div>-->
-
-          <!--<div class="btn btn-default btn-spec-report pull-left has-tooltip" ng-click="specReport()"-->
-          <!--tooltip-placement="top" tooltip="Spec. Report">-->
-          <!--<i class="icn-sm icn-spec-report"></i>-->
-          <!--</div>-->
-
-          <div class="more pull-left dropdown" ng-if="agent.online">
-
-            <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
-               aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">
-              <i class="icn-more icn-sm"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="sendAlert()">Send Alert</a></li>-->
-              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="specReport()">Spec. Report</a></li>-->
-              <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>-->
-              <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>
-              <li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>
-              <li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">
-                Remove</a></li>
-            </ul>
           </div>
 
         </div>
