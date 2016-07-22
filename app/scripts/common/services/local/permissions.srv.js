@@ -27,7 +27,7 @@
           $state.includes("editCompany") && permissions.indexOf('EDIT_COMPANIES') === -1 ||
           $state.includes("products") && permissions.indexOf('MANAGE_PRODUCTS') === -1 ||
           $state.includes("services") && permissions.indexOf('MANAGE_SERVICES') === -1 ||
-          $state.includes("accounting") && permissions.indexOf('VIEW_ACCOUNTING') === -1 ||
+          $state.current.url.indexOf("accounting") && permissions.indexOf('VIEW_ACCOUNTING') === -1 ||
           $state.includes("quickSupport") && permissions.indexOf('ALLOW_QUICK_CONNECT') === -1;
       }
 
