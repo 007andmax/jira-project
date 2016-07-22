@@ -46,7 +46,7 @@
 
         function getOpenedCategory(url) {
           if (url.indexOf('quickSupport') > -1) {
-            return 'quickSupport';
+            return 'dashboard';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';
           } else if (url.indexOf('clients') > -1 || url.indexOf('users') > -1) {
