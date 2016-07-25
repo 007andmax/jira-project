@@ -766,7 +766,7 @@
             var storageTicket = storage.tickets[key].ticket;
 
             if (storageTicket.id === ticket.id) {
-              Utils.customizeObj(ticket, storageTicket);
+              Utils.customizeObj(ticket, storage.tickets[key].scope.ticketDetails);
             }
           }
 

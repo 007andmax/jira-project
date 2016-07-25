@@ -61,8 +61,6 @@
               $scope.assignedUser = UsersService.getOneById($scope.ticketDetails.assignedUser.id);
             }
 
-            $scope.ticketSharedUsersList = getDefaultSharedList();
-
             for (var i = 0; i < $scope.ticketDetails.updates.length; i++) {
 
               if ($scope.ticketDetails.updates[i].unread) {
@@ -344,7 +342,6 @@
 
                 function setCreateUpdateFormToDefault() {
                   $scope.selectUpdateSharedUser = {};
-                  $scope.ticketSharedUsersList = getDefaultSharedList();
                   $scope.$broadcast('setCreateUpdateFormToDefault');
                 }
               });
@@ -382,18 +379,27 @@
             }
 
             var processedShares = [];
+            $scope.ticketSharedUsersList = getDefaultSharedList();
 
             for (var i = 0; i < shares.length; i++) {
 
               var share = shares[i],
-                id = share.user ? share.user.id : share.contact.id;
+                sharedId = share.user ? share.user.id : share.contact.id,
+                isAlreadyAdded = $scope.ticketSharedUsersList.findIndex(function (shared) {
+                  return (shared.user ? shared.user.id : shared.contact.id) === this;
+                }, sharedId);
 
+              if (isAlreadyAdded === -1) {
+                var itemForPush = share.user ? { user: share.user } : { contact: share.contact };
+                itemForPush.notify = false;
+                $scope.ticketSharedUsersList.push(itemForPush);
+              }
 
-              if (processedShares.indexOf(id) > -1) {
+              if (processedShares.indexOf(sharedId) > -1) {
                 continue;
               }
 
-              processedShares.push(id);
+              processedShares.push(sharedId);
 
               $scope.shares.push({
                 name: share.user ? $scope.getUserName($scope.getUserById(share.user.id)) : $scope.getContactName(share.contact),
@@ -402,7 +408,7 @@
               })
             }
 
-          });
+          }, true);
 
           $scope.addSharedUser = function () {
 
@@ -508,6 +514,7 @@
             if ($scope.user) {
               result.push({ user: $scope.user, notify: false });
             }
+
             if ($scope.assignedUser && $scope.user && $scope.user.id !== $scope.assignedUser.id) {
               result.push({ user: $scope.assignedUser, notify: false });
             }

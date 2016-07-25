@@ -47,12 +47,16 @@
           };
 
           $scope.filterUpdateUser = function (item) {
+            var shares = $scope.ticketDetails.shares;
 
             var isCurrentUser = item.id === $scope.currentUser.id,
               isAssignedUser = item.id === $scope.ticketDetails.assignedUser.id,
-              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id;
+              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id,
+              isAlreadyShared = shares.find(function (shared) {
+                return (shared.user ? shared.user.id : shared.contact.id) === item.id;
+              });
 
-            if (isCurrentUser || isAssignedUser || isCreatedUser) {
+            if (isCurrentUser || isAssignedUser || isCreatedUser || isAlreadyShared) {
               return false;
             }
 
@@ -69,7 +73,7 @@
 
             if ($scope.selectUpdateSharedUser[user.id]) {
 
-              $scope.ticketSharedUsersList.push({user: user});
+              $scope.ticketSharedUsersList.push({ user: user, notify: true });
 
             } else {
 
@@ -86,7 +90,7 @@
 
             if ($scope.selectUpdateSharedUser[contact.id]) {
 
-              $scope.ticketSharedUsersList.push({contact: contact});
+              $scope.ticketSharedUsersList.push({ contact: contact, notify: true });
 
             } else {
 
@@ -105,7 +109,7 @@
             } else {
               $scope.addContactToUpdate(item);
             }
-          }
+          };
 
 
         }]);
