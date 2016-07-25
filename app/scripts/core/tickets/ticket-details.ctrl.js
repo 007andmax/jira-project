@@ -396,11 +396,11 @@
                 $scope.ticketSharedUsersList.push(itemForPush);
               }
 
-              if (processedShares.indexOf(sharedId) > -1) {
+              if (processedShares.indexOf(sharedUser.id) > -1) {
                 continue;
               }
 
-              processedShares.push(sharedId);
+              processedShares.push(sharedUser.id);
 
               $scope.shares.push({
                 name: share.user ? $scope.getUserName($scope.getUserById(share.user.id)) : $scope.getContactName(share.contact),
