@@ -110,6 +110,7 @@
 
           $scope.claimTicket = function () {
             TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id);
+            $scope.ticketSharedUsersList.push({ user: $scope.currentUser, notify: false });
           };
 
           $scope.openSetting = function () {
@@ -460,6 +461,18 @@
             rightPanelSharedState.createUserId = undefined;
             $rootScope.isRightPanelHided = false;
           });
+
+          $scope.isAllSharedSelected = function (shares) {
+            $scope.ticketDetails.notifyAll = shares.reduce(function (counter, shared) {
+              return shared.notify ? ++counter : counter;
+            }, 0) === $scope.ticketSharedUsersList.length;
+          };
+
+          $scope.toggleAllShared = function (isNotifyAll) {
+            for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+              $scope.ticketSharedUsersList[i].notify = isNotifyAll;
+            }
+          };
 
           function closeTicket() {
             $scope.ticketClosing = true;
