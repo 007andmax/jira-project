@@ -1,12 +1,13 @@
 <div class="ticket-add-footer clearfix">
 
+  <div class="ticket-add-content-actions-dropdown pull-left"
+       ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
+
   <div class="pull-left">
-    <!--ng-if="!(currentUser.role === 'USER')"-->
-    <label class="control checkbox pull-left">
-      <input type="checkbox" ng-model="ticketUpdate.notifyTicketCreator"
-             ng-change="addTicketOwnerToUpdate()">
+    <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList">
+      <input type="checkbox" ng-model="sharedUser.notify">
       <span class="control-indicator"></span>
-      {{ getUserName(user) }}
+      {{ getUserName(sharedUser.user) }}
     </label>
   </div>
 

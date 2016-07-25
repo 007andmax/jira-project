@@ -95,7 +95,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0',
+        hostname: 'localhost',
         livereload: 35729
       },
       localServer: {
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
               '!/dist',
               '!/bower_components'
             ],
-            host: '192.168.199.161',
+            host: '192.168.199.205',
             port: 8080,
             https: false,
             xforward: false,
