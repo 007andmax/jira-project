@@ -467,7 +467,7 @@
   }
 }
 .form-row + .form-row, .phone-number-form .form-row{
-  /*margin-top: 13px;*/
+  margin-top: 13px;
 }
 @-moz-document url-prefix() {
   .form-row + .form-row, .phone-number-form .form-row{
@@ -612,3 +612,6 @@
   background: #fff;
   padding: 0 10px;
 }
+/*.test-smtp-connection{
+  margin-top: 10px;
+}*/

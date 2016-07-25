@@ -9812,3 +9812,12 @@ button.close {
   width: inherit;
   }
 }
+.onhold-ticket{
+  background-color: #03A9F4;
+}
+.completed-ticket{
+  background-color: #009688;
+}
+.progress-ticket{
+  background-color: #FF5722;
+}

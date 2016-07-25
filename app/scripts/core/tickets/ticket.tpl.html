@@ -208,7 +208,7 @@
         </label>
       </span>
 
-      <span class="label-icn-lg label-primary persistent-tooltip"
+      <span class="label-icn-lg label-primary persistent-tooltip {{ ticketStatusToCssFormat(ticket.status)}}-ticket"
             ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)"
             tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top">
         <label class="status-{{ ticketStatusToCssFormat(ticket.status) }}">
