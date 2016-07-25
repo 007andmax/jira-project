@@ -5,9 +5,9 @@
         Name</label>
       <div ng-messages="editUserForm.firstName.$error"
            ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
-        <div class="control-label" ng-message="required">First name is required.</div>
-        <div class="control-label" ng-message="maxlength">First name is too large.</div>
-        <div class="control-label" ng-message="minlength">First name is too short.</div>
+        <div class="control-label" ng-message="required">Field is required.</div>
+        <div class="control-label" ng-message="maxlength">Too large.</div>
+        <div class="control-label" ng-message="minlength">Too short.</div>
       </div>
       <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
              name="firstName" ng-model="editedUser.firstName" ng-required="true" make-dirty-on-blur>
@@ -20,7 +20,7 @@
       </label>
       <div ng-messages="editUserForm.lastName.$error"
            ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
-        <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+        <div class="control-label" ng-message="maxlength">Too large.</div>
       </div>
       <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
              name="lastName" ng-model="editedUser.lastName" make-dirty-on-blur>
@@ -33,8 +33,8 @@
 
     <div ng-messages="editUserForm.primaryEmail.$error"
          ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
-      <div class="control-label" ng-message="pattern">Invalid email address.</div>
-      <div class="control-label" ng-message="unique">Already occupied.</div>
+      <div class="control-label" ng-message="pattern">Invalid email.</div>
+      <div class="control-label" ng-message="unique">Not unique.</div>
     </div>
 
     <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur

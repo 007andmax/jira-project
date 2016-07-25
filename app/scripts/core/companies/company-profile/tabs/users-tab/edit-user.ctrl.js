@@ -5,7 +5,8 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editUserCtrl',
     ['$scope', 'UsersService', 'CompaniesService', 'quicktech.common.services.PhoneFormats', '$rootScope',
       function ($scope, UsersService, CompaniesService, PhoneFormats, $rootScope) {
-        var userSubscription = $scope.editedUser.subscription;
+        var userSubscription = $scope.editedUser.subscription,
+          action = $scope.editedUser.newUser ? 'CREATE_USERS' : 'EDIT_USERS';
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.phoneNumberPattern = /^[\+\d\(\)\-\s]+$/;
@@ -17,6 +18,12 @@
         $scope.isLastInvoiceSubsciption = userSubscription.invoice && $scope.users.filter(function (user) {
             return user.subscription.invoice;
           }).length <= 1;
+  
+        $scope.$watch('currentUser.permissions', function (permissions) {
+          if (permissions && permissions.indexOf(action) === -1) {
+            $scope.cancelEditing();
+          }
+        });
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSave || form[fieldName].$dirty) && form[fieldName].$invalid;

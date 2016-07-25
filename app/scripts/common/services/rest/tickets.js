@@ -940,7 +940,7 @@
           }
         }
 
-        if ((params.filter == 'ALL' || params.filter == 'UNASSIGNED') && (ticket.assignedUser && ticket.assignedUser.id)) {
+        if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {
           return false;
         }
 

@@ -24,7 +24,7 @@
           categories = resp.categories;
           $scope.productsData = resp;
 
-          if (resp && resp.categories && !resp.categories.length) {
+          if (resp && resp.list && !resp.list.length) {
             $scope.loadingInProgress = false;
           }
         });

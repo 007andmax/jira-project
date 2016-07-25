@@ -85,7 +85,7 @@
           }
         };
 
-        $scope.closeSession = function (device, event) {
+        $scope.closeSession = function (event, device) {
           var idsForDelete;
 
           if (device) {

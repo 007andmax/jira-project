@@ -210,7 +210,7 @@
           </label>
         </div>
 
-        <div class="form-row clearfix" ng-if="!isCreation">
+        <div class="form-row clearfix" ng-if="!isCreation && currentUser.accountType === 'ROOT'">
 
           <label class="control checkbox pull-left" style="height: 20px;">
 

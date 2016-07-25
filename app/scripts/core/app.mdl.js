@@ -227,7 +227,9 @@
           var globalSearch = SharedStateService.getSharedState('globalSearch');
 
           if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
+
               $rootScope.isRightPanelHidden = true;
+              
             if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
               return;
             }

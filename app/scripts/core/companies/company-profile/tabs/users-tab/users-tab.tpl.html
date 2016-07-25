@@ -161,6 +161,7 @@
             <!--</div>-->
 
             <div class="btn btn-default pull-left has-tooltip" ng-click="setEditedUser(user)"
+                 ng-if="PermissionsService.isAllowed('EDIT_USERS')"
                  tooltip-placement="top" tooltip="Edit">
               <i class="icn-sm icn-edit"></i>
             </div>

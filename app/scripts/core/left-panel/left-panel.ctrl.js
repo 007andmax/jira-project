@@ -4,12 +4,13 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, SharedStateService, $state, $rootScope, PermissionsService) {
+      'quicktech.common.services.PermissionsService', 'TicketsService',
+      function ($scope, SharedStateService, $state, $rootScope, PermissionsService, TicketsService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
         $scope.$state = $state;
+        $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
 
@@ -18,6 +19,10 @@
         }, function (value) {
           if (value && value !== '^ ') {
             $scope.openedCategory = getOpenedCategory(value);
+            
+            if (!$scope.openedCategory) {
+              $rootScope.isLeftPanelHidden = true;
+            }
           }
         });
 
