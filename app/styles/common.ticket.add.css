@@ -6,6 +6,7 @@
 }
 .opened-ticket-list .ticket-post-update-wrapper {
   padding-bottom: 30px;
+  margin-bottom: 400px;
 }
 .ticket-post-update-wrapper > .btn{
     position: absolute;
@@ -173,6 +174,7 @@
     line-height: 16px;
     color: #4c5c6f;
     padding-left: 26px;
+    margin-left: 10px;
 }
 @-moz-document url-prefix() {
   .ticket-add-footer .checkbox{
@@ -223,4 +225,7 @@
 }
 #Service .col-5{
     width: 43px;
+}
+.shared-user-add{
+    width: 60%;
 }
