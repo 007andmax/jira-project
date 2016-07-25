@@ -385,10 +385,10 @@
             for (var i = 0; i < shares.length; i++) {
 
               var share = shares[i],
-                sharedId = share.user ? share.user.id : share.contact.id,
+                sharedUser = share.user || share.contact,
                 isAlreadyAdded = $scope.ticketSharedUsersList.findIndex(function (shared) {
-                  return (shared.user ? shared.user.id : shared.contact.id) === this;
-                }, sharedId);
+                  return (shared.user ? shared.user.id : shared.contact.id) === this.id;
+                }, sharedUser);
 
               if (isAlreadyAdded === -1) {
                 var itemForPush = share.user ? { user: share.user } : { contact: share.contact };
@@ -531,6 +531,8 @@
             if ($scope.assignedUser && $scope.user && $scope.user.id !== $scope.assignedUser.id) {
               result.push({ user: $scope.assignedUser, notify: false });
             }
+
+            $scope.ticketDetails.notifyAll = false;
 
             return result;
           }
