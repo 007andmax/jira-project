@@ -89,24 +89,6 @@
           </ul>
 
         </li>
-
-        <!--<li class="pull-right"-->
-        <!--ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticket)">-->
-        <!--<a href="javascript:void(0)" class="hit-area"-->
-        <!--tooltip="move to trash" tooltip-placement="top" ng-click="moveToTrash(true)">-->
-        <!--<i class="icn icn-sm icn-delete has-tooltip"></i>-->
-        <!--</a>-->
-        <!--</li>-->
-
-        <!--<li class="pull-left"-->
-        <!--ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticket)">-->
-        <!--<a href="javascript:void(0)" class="hit-area has-tooltip"-->
-        <!--tooltip="{{ currentUser.role === 'USER' ? 'Report As Spam' : 'Mark As Spam' }}" tooltip-placement="top"-->
-        <!--ng-click="moveIntoSpam()">-->
-        <!--<i class="icn-sm icn-report-spam"></i>-->
-        <!--</a>-->
-        <!--</li>-->
-
         <li class="pull-left" ng-if="TicketsPermissionsService.isActionVisible('restore', ticket, 'from_trash')">
           <a href="javascript:void(0)" class="hit-area ha-18-16 has-tooltip"
              tooltip="Restore" tooltip-placement="top" ng-click="moveToTrash(false)">

@@ -6,237 +6,129 @@
   padding: 30px;
   padding-bottom: 24px;
 }
-/*@media only screen and (min-width: 1025px){
 
 .ticket-header.ticket-fixed-header {
   position: fixed;
-  right: 77px;
-  padding: 30px;
-  padding-bottom: 24px;
-  top: 78px;
-  width: calc(100% - 153px);
-  background-color: rgba(255, 255, 255, 0.94);
   z-index: 1;
-}
-}*/
-
-
-.ticket-header.ticket-fixed-header{
-  position: fixed;
-  padding: 30px;
-  padding-bottom: 24px;
   top: 78px;
+
   width: calc(100% - 1137px);
+  padding: 30px;
+  padding-bottom: 24px;
+
   background-color: rgba(255, 255, 255, 0.94);
-  z-index: 1;
 }
-.left-panel-closed .ticket-header.ticket-fixed-header{
+.left-panel-closed .ticket-header.ticket-fixed-header {
   width: calc(100% - 897px);
 }
-.right-panel-closed .ticket-header.ticket-fixed-header{
+.right-panel-closed .ticket-header.ticket-fixed-header {
   width: calc(100% - 856px);
 }
-.right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header{
+.right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
   width: calc(100% - 616px);
 }
 
-@media only screen and (max-width: 1650px){
-  .ticket-header.ticket-fixed-header{
-  width: calc(100% - 595px);
-}
-.left-panel-closed .ticket-header.ticket-fixed-header{
-  width: calc(100% - 347px);
-}
-.right-panel-closed .ticket-header.ticket-fixed-header{
-  width: calc(100% - 317px);
-}
-.right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header{
-  width: calc(100% - 77px);
-}
-}
-@media only screen and (min-width: 1025px) and (max-width: 1315px){
-  .ticket-header.ticket-fixed-header{
-  width: calc(100% - 397px);
-}
-.left-panel-closed .ticket-header.ticket-fixed-header{
-  width: calc(100% - 157px);
-}
-}
-@media only screen and (max-width: 1024px){
-    .ticket-header.ticket-fixed-header{
-  width: calc(100% - 153px);
-  left: 76px;
-  }
-  .left-panel-closed .ticket-header.ticket-fixed-header{
-  width: calc(100% - 153px);
-  }
-  .right-panel-closed .ticket-header.ticket-fixed-header{
-  width: calc(100% - 77px);
-  }
-  .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header{
-  width: calc(100% - 77px);
-}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*.large .ticket-header.ticket-fixed-header{
-  right: 0;
-}*/
-/*@media screen and (min-width: 1316px){
+@media only screen and (max-width: 1650px) {
   .ticket-header.ticket-fixed-header {
-    right: 281px !important;
-    width: calc(100% - 597px);
+    width: calc(100% - 595px);
   }
-  .large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 80px);
-    right: 0 !important;
-  }
-}
-@media screen and (max-width: 1025px){
-    .large .ticket-header.ticket-fixed-header{
-  width: 100%;
-}
-}
-@media screen and (min-width: 1390px){
   .left-panel-closed .ticket-header.ticket-fixed-header {
-    width: calc(100% - 357px);
+    width: calc(100% - 347px);
   }
-  .large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 816px);
-    right: 0 !important;
+  .right-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 317px);
   }
-  .right-panel-closed.large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 816px);
-    right: 0 !important;
-  }
-  .left-panel-closed .large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 76px);
-    right: 0 !important;
-  }
-  .right-panel-closed.left-panel-closed .large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 76px);
-    right: 0 !important;
-  }
-  .ticket-header.ticket-fixed-header {
-    width: calc(100% - 597px);
+  .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 77px);
   }
 }
-@media only screen and (min-width: 1701px){
+@media only screen and (min-width: 1025px) and (max-width: 1315px) {
   .ticket-header.ticket-fixed-header {
-    width: calc(100% - 1096px);
+    width: calc(100% - 397px);
   }
-
-}
-@media only screen and (min-width: 1701px){
   .left-panel-closed .ticket-header.ticket-fixed-header {
-    width: calc(100% - 856px);
+    width: calc(100% - 157px);
   }
 }
-
-@media only screen and (min-width: 1930px){
+@media only screen and (max-width: 1024px) {
   .ticket-header.ticket-fixed-header {
-    width: calc(100% - 1061px);
+    left: 76px;
+
+    width: calc(100% - 153px);
+  }
+  .left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 153px);
+  }
+  .right-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 77px);
+  }
+  .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 77px);
   }
 }
-@media only screen and (min-width: 2510px){
-  .ticket-header.ticket-fixed-header {
-    width: calc(100% - 1221px);
-  }
-  .large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 940px);
-    right: 0 !important;
-  }
-}*/
-/*New Classes*/
-
-.ticket-header-avatar{
-  margin-right: 10px;
+.ticket-header-avatar {
   margin-top: 1px;
-}
-
-.ticket-header-username{
   margin-right: 10px;
 }
 
-.ticket-header-status{
+.ticket-header-username {
+  margin-right: 10px;
+}
+
+.ticket-header-status {
   margin-top: 2px;
 }
 
-.ticket-header-status .label-icn-sm{
+.ticket-header-status .label-icn-sm {
   margin-right: 4px;
 }
-
-.ticket-header-labels{
+.ticket-header-status .progress-big-size {
+  margin-right: 4px;
+}
+.ticket-header-status .priority-big-size {
+  margin-right: 4px;
+}
+.ticket-header-labels {
   padding-top: 6px;
 }
-.ticket-header-labels .tooltip{
+.ticket-header-labels .tooltip {
   margin-top: -10px;
 }
-.ticket-header-labels .tag-color{
+.ticket-header-labels .tag-color {
   margin-right: 4px;
 }
 
-.ticket-header-details{
+.ticket-header-details {
+  display: block;
   float: left;
   clear: left;
-  display: block;
 }
 
 .ticket-header-details .icn-ticket-attachment {
   margin-top: 4px;
   margin-right: 10px;
 }
-.ticket-header-details .dot-sep{
+.ticket-header-details .dot-sep {
   margin: 3px 7px;
 }
 
-.ticket-header-actions{
+.ticket-header-actions {
   margin-top: 1px;
 }
 
-.ticket-header-actions > .btn, .ticket-header-actions > .dropdown > .btn{
+.ticket-header-actions > .btn,
+.ticket-header-actions > .dropdown > .btn {
   margin-left: 10px;
 }
 
-@-moz-document url-prefix(){
-  .ticket-header.ticket-fixed-header{
+@-moz-document url-prefix() {
+  .ticket-header.ticket-fixed-header {
     padding-bottom: 30px;
   }
-  .ticket-header-username{
+  .ticket-header-username {
     line-height: 19px;
   }
-  .ticket-header-details a{
+  .ticket-header-details a {
     margin-top: 5px;
   }
 }
