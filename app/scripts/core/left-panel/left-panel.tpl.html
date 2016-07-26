@@ -32,7 +32,7 @@
       <div class="center-category collapsed-nav">
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')"
              ng-click="stateGo($event, 'quickSupport');">
-          <div class="btn btn-success add-session-button has-tooltip fu" style="top: 11px" ng-click="addQuickSession()"
+          <div class="btn btn-success add-session-button has-tooltip icon-pos" style="top: 11px" ng-click="addQuickSession()"
                tooltip-placement="top" tooltip="Create">
             <i class="icn-sm icn-plus"></i>
           </div>
@@ -48,42 +48,42 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'all'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'all'})">
-          <i class="nav-icon icn-lg icn-tickets fu"></i> All Tickets
+          <i class="nav-icon icn-lg icn-tickets icon-pos"></i> All Tickets
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
-          <i class="nav-icon icn-lg icn-unassigned fu"></i> Unassigned
+          <i class="nav-icon icn-lg icn-unassigned icon-pos"></i> Unassigned
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'user'})">
-          <i class="nav-icon icn-lg icn-user-lg fu"></i> My Tickets
+          <i class="nav-icon icn-lg icn-user-lg icon-pos"></i> My Tickets
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'shared'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'shared'})">
-          <i class="nav-icon icn-lg icn-shared fu"></i> Shared
+          <i class="nav-icon icn-lg icn-shared icon-pos"></i> Shared
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'open'})">
-          <i class="nav-icon icn-lg icn-open fu"></i> Open
+          <i class="nav-icon icn-lg icn-open icon-pos"></i> Open
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
-          <i class="nav-icon icn-lg icn-closed fu"></i> Closed
+          <i class="nav-icon icn-lg icn-closed icon-pos"></i> Closed
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
-          <i class="nav-icon icn-lg icn-trash fu"></i> Trash
+          <i class="nav-icon icn-lg icn-trash icon-pos"></i> Trash
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'spam'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'spam'})">
-          <i class="nav-icon icn-lg icn-spam fu"></i> Spam
+          <i class="nav-icon icn-lg icn-spam icon-pos"></i> Spam
         </div>
       </div>
     </div>
@@ -95,15 +95,15 @@
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
              ng-class="{active: $state.includes('companies')}"
              ng-click="stateGo($event, 'companies')">
-          <i class="nav-icon icn-lg icn-companies fu"></i> Companies
+          <i class="nav-icon icn-lg icn-companies icon-pos"></i> Companies
         </div>
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
              ng-class="{active: $state.includes('users')}"
              ng-click="stateGo($event, 'users')">
-          <i class="nav-icon icn-lg icn-users fu"></i> Users
+          <i class="nav-icon icn-lg icn-users icon-pos"></i> Users
         </div>
         <!--<div class="center-category__category">-->
-        <!--<i class="nav-icon icn-lg icn-leads fu"></i> Leads-->
+        <!--<i class="nav-icon icn-lg icn-leads icon-pos"></i> Leads-->
         <!--</div>-->
       </div>
     </div>
@@ -115,17 +115,19 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('accounting')}"
              ng-click="stateGo($event, 'accounting')">
-          <i class="nav-icon icn-billable icn-lg fu"></i> Billiable
+          <i class="nav-icon icn-billable icn-lg icon-pos"></i> Billiable
+          <span class="badge ng-binding badge-pos ng-scope" ng-if="ticketCounts.BILLABLE">{{ ticketCounts.BILLABLE }}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"
              ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
-          <i class="nav-icon icn-lg icn-receivable fu"></i> Receivable
+          <i class="nav-icon icn-lg icn-receivable icon-pos"></i> Receivable
+          <span class="badge ng-binding badge-pos ng-scope" ng-if="ticketCounts.RECEIVABLE">{{ ticketCounts.RECEIVABLE }}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receipt-archive')}"
              ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
-          <i class="nav-icon icn-lg icn-receipt-archive fu"></i> Receipt Archive
+          <i class="nav-icon icn-lg icn-receipt-archive icon-pos"></i> Receipt Archive
         </div>
       </div>
     </div>
@@ -137,17 +139,17 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('vendors')}"
              ng-click="stateGo($event, 'vendors')">
-          <i class="nav-icon icn-vendors icn-lg fu"></i> Vendors
+          <i class="nav-icon icn-vendors icn-lg icon-pos"></i> Vendors
         </div>
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')"
              ng-class="{active: $state.includes('products')}"
              ng-click="stateGo($event, 'products', { tabName: 'category' })">
-          <i class="nav-icon icn-lg icn-products fu"></i> Products
+          <i class="nav-icon icn-lg icn-products icon-pos"></i> Products
         </div>
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
              ng-class="{active: $state.includes('services')}"
              ng-click="stateGo($event, 'services')">
-          <i class="nav-icon icn-lg icn-services fu"></i> Services
+          <i class="nav-icon icn-lg icn-services icon-pos"></i> Services
         </div>
       </div>
     </div>

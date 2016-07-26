@@ -67,7 +67,7 @@
 
               var windowWidth = window.innerWidth;
 
-              if (windowWidth > 1600) {
+              if (windowWidth > 1650) {
 
                 body.addClass("opened-ticket-list opened-ticket");
                 element.nanoScroller();
