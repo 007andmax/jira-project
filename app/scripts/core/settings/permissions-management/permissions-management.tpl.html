@@ -18,7 +18,8 @@
       <div class="col-md-2 col-sm-3 col-xs-3" ng-repeat="role in roles">
         <label class="control checkbox permission-box">
           <input type="checkbox" ng-checked="role.permissions.indexOf(permission) > -1"
-                 ng-click="togglePermission(role, permission)">
+                 ng-click="togglePermission(role, permission)"
+                 ng-disabled="isPermissionDisabled(permission, role)">
           <span class="control-indicator permission-box"></span>
         </label>
       </div>
