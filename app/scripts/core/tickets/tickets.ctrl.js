@@ -39,11 +39,6 @@
           'text/plain': 'txt',
           'text/csv': 'cvs'
         };
-        $scope.ticketStatus = {
-          IN_PROGRESS: 'IN PROGRESS',
-          ON_HOLD: 'ON HOLD',
-          COMPLETED: 'CLOSED'
-        };
         $scope.attachmentImageClass = {
           'image/jpg': 'viewable',
           'archive/zip': 'zip',

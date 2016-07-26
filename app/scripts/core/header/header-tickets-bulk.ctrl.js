@@ -85,7 +85,7 @@
 
         $scope.$on('uncheckAllTickets', function () {
           $scope.ticketsSharedState.checkedTicketsIds = [];
-          $scope.ticketsHeaderState.selectedTickets = [];
+          $scope.ticketsSharedState.selectedTickets = [];
         });
 
       }]);

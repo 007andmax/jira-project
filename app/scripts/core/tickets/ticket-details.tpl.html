@@ -17,28 +17,75 @@
 
             <div class="ticket-header-status pull-left">
 
-              <span
-                class="label-icn-sm label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }} persistent-tooltip"
-                tooltip="{{ ticketDetails.priorityLevel }} priority" tooltip-placement="top"
-                tooltip-append-to-body="true">
-                <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
-              </span>
+              <div dropdown style="display: inline">
+                <span
+                  class="label-icn-sm label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }} persistent-tooltip"
+                  tooltip="{{ ticketDetails.priorityLevel }} priority" tooltip-placement="top"
+                  tooltip-append-to-body="true" dropdown-toggle>
+                  <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
+                </span>
 
-              <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
-                class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
-                tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top">
-                <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) }}">
-                  <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i>
-                </label>
-              </span>
+                <ul class="dropdown-menu dropdown-menu-custom dropdown-priority" role="menu"
+                    ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)">
+
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">
+                      <span class="priority-dot low"></span>
+                      Low
+                    </a>
+                  </li>
+
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">
+                      <span class="priority-dot medium"></span>
+                      Medium
+                    </a>
+                  </li>
+
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">
+                      <span class="priority-dot high"></span>
+                      High
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+
+              <div dropdown style="display: inline">
+                <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
+                      class="label-icn-sm label-primary persistent-tooltip" tooltip-append-to-body="true"
+                      tooltip="{{ ticketStatus[ticketDetails.status] }}" tooltip-placement="top" dropdown-toggle>
+                  <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) }}">
+                    <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i>
+                  </label>
+                </span>
+
+                <ul class="dropdown-menu dropdown-priority"
+                    ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketDetails)">
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)"
+                       ng-click="changeTicketStatus('IN_PROGRESS')">
+                      In Progress
+                    </a>
+                  </li>
+
+                  <li>
+                    <a tabindex="-1" href="javascript:void(0)"
+                       ng-click="changeTicketStatus('ON_HOLD')">
+                      On Hold
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
             </div>
 
             <!--<div ng-if="TicketsPermissionsService.isTagsVisible(listType, currentUser.role)"-->
-                 <!--class="ticket-header-labels pull-left">-->
-              <!--<span ng-repeat="tag in ticketDetails.tags"-->
-                    <!--class="tag-color tag-color-sm color{{ tag.color }} persistent-tooltip"-->
-                    <!--tooltip="{{ tag.name }}" tooltip-placement="top"></span>-->
+            <!--class="ticket-header-labels pull-left">-->
+            <!--<span ng-repeat="tag in ticketDetails.tags"-->
+            <!--class="tag-color tag-color-sm color{{ tag.color }} persistent-tooltip"-->
+            <!--tooltip="{{ tag.name }}" tooltip-placement="top"></span>-->
             <!--</div>-->
 
             <div class="ticket-header-details text-muted">
@@ -57,7 +104,7 @@
         <div class="ticket-header-actions pull-right" ng-show="listType !== 'preview'">
 
           <div class="dropdown pull-left" dropdown
-               ng-show="TicketsPermissionsService.isActionVisible('claim_ticket,change_status,change_priority,assign,send_to_spam,send_to_trash', ticketDetails)">
+               ng-show="TicketsPermissionsService.isActionVisible('claim_ticket,assign,send_to_spam,send_to_trash', ticketDetails)">
 
             <div class="btn btn-default pull-left has-tooltip"
                  aria-haspopup="true" aria-expanded="false"
@@ -71,42 +118,8 @@
                 <a tabindex="-1" href="javascript:void(0)" ng-click="claimTicket()">Claim Ticket</a>
               </li>
 
-              <li ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)"
-                class="dropdown-submenu left-align">
-
-                <a tabindex="-1" href="javascript:void(0)">Change Priority to...</a>
-
-                <div class="dropdown-submenu-wrapper ">
-                  <ul class="dropdown-menu dropdown-priority">
-
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('LOW')">
-                        <span class="priority-dot low"></span>
-                        Low
-                      </a>
-                    </li>
-
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('MEDIUM')">
-                        <span class="priority-dot medium"></span>
-                        Medium
-                      </a>
-                    </li>
-
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)" ng-click="changeTicketPriority('HIGH')">
-                        <span class="priority-dot high"></span>
-                        High
-                      </a>
-                    </li>
-
-                  </ul>
-                </div>
-
-              </li>
-
               <li ng-if="TicketsPermissionsService.isActionVisible('assign', ticketDetails)"
-                class="dropdown-submenu left-align">
+                  class="dropdown-submenu left-align">
 
                 <a tabindex="-1" href="javascript:void(0)">
                   {{ ticketDetails.assignedUser.id ? 'Reassign' : 'Assign' }} Ticket to...
@@ -121,28 +134,6 @@
                        users="usersCurrentCompany"
                        aub-current-user="currentUser">
                   </div>
-                </div>
-              </li>
-
-              <li ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketDetails)"
-                class="dropdown-submenu left-align">
-
-                <a tabindex="-1" href="javascript:void(0)">Change Status to...</a>
-
-                <div class="dropdown-submenu-wrapper ">
-                  <ul class="dropdown-menu dropdown-priority">
-
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)"
-                         ng-click="changeTicketStatus('IN_PROGRESS')">In Progress</a>
-                    </li>
-
-                    <li>
-                      <a tabindex="-1" href="javascript:void(0)"
-                         ng-click="changeTicketStatus('ON_HOLD')">On Hold</a>
-                    </li>
-
-                  </ul>
                 </div>
               </li>
 
@@ -324,7 +315,8 @@
                 <li class="{{ attachmentImageClass[attachment.file.contentType] }}"
                     ng-init="type = attachment.file.name.match(attachmentTypePattern)[0] || attachmentType[attachment.file.contentType]"
                     ng-repeat="attachment in ticketUpdate.attachments" append-html-to-body
-                    url="/html/scripts/core/tickets/image-preview.tpl.html" disable-if="{{ !attachmentType['image/' + type] }}"
+                    url="/html/scripts/core/tickets/image-preview.tpl.html"
+                    disable-if="{{ !attachmentType['image/' + type] }}"
                     data="attachment.file" func="downloadAttachment" first-node-class="image-preview-tpl">
 
                   <div class="file-icon-name">
@@ -350,7 +342,8 @@
 
               </ul>
 
-              <div class="table-wrapper product-upd clearfix" ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
+              <div class="table-wrapper product-upd clearfix"
+                   ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
 

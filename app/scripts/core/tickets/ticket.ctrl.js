@@ -24,16 +24,18 @@
           event.originalEvent.notOpenTicketDetails = true;
         };
 
-        $scope.changeTicketPriority = function (priority) {
+        $scope.changeTicketPriority = function (priority, dropdowns) {
           TicketsService.changePriority($scope.ticket.id, priority, function () {
             UserNotificationService.show('The ticket “' + $scope.ticket.number + '” priority has been changed to ' + priority, true);
           });
+          dropdowns[$scope.ticket.id]['priority'] = false;
         };
 
-        $scope.changeTicketStatus = function (status) {
+        $scope.changeTicketStatus = function (status, dropdowns) {
           TicketsService.changeStatus($scope.ticket.id, status, function () {
             UserNotificationService.show('The ticket “' + $scope.ticket.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"', true);
           });
+          dropdowns[$scope.ticket.id]['status'] = false;
         };
 
         $scope.moveIntoSpam = function () {

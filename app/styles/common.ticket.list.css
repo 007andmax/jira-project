@@ -276,10 +276,6 @@
   font-weight: normal;
 }
 
-.ticket .ticket-meta .ticket-labels span:last-child{
-  margin-right: 0px;
-}
-
 .ticket .ticket-meta .ticket-labels .ticket-unread-updates{
   margin-top: 3px;
 }
