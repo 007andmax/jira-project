@@ -5,6 +5,11 @@
 .content-wrapper .ticket-list{
   padding: 0;
 }
+@media only screen and (max-width: 1024px){
+  .content-wrapper .ticket-list{
+    margin-right: 76px;
+  }
+}
 .tickets{
   margin: 0;
   padding: 0 0 240px;
@@ -72,7 +77,7 @@
   background-color: #f1f5fa;
 }
 .ticket.active{
-  background-color: #e7ecf2;
+  border: 2px solid #08a8dd !important;
 }
 .ticket.selected{
   background-color: #e2f1fd;
@@ -146,7 +151,7 @@
 }
 
 .ticket.one-action:hover .ticket-meta .ticket-title p.ellipsis{
-  width: calc(100% - 32px);
+  width: calc(100% - 50px);
 }
 
 .ticket.two-actions:hover .ticket-meta .ticket-title p.ellipsis{

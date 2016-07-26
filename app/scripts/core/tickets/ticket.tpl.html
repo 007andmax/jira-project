@@ -201,19 +201,25 @@
 
     <div class="ticket-labels clearfix">
 
-      <span class="label-icn-lg label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"
+      <span class="label-icn-lg priority-small-size label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"
             tooltip="{{ ticket.priorityLevel }} priority" tooltip-placement="top">
         <label class="priority-flag">
           <i class="icn-sm icn-priority"></i>
         </label>
       </span>
 
-      <span class="label-icn-lg label-primary persistent-tooltip {{ ticketStatusToCssFormat(ticket.status)}}-ticket"
+      <span class="label label-primary priority-big-size label-priority-{{ ticket.priorityLevel.toLowerCase() }}"> {{ userReadable(ticket.priorityLevel) }} </span>
+
+      <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status)}}-ticket"
             ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)"
             tooltip="{{ ticketStatus[ticket.status] }}" tooltip-placement="top">
         <label class="status-{{ ticketStatusToCssFormat(ticket.status) }}">
           <i class="icn-sm icn-ticket-{{ ticketStatusToCssFormat(ticket.status) }}"></i>
         </label>
+      </span>
+
+      <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status)}}-ticket" ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)">
+        {{ userReadable(ticket.status) }}
       </span>
 
       <span class="label label-primary">{{ ticket.number }}</span>

@@ -7929,14 +7929,14 @@ a.label-icn-sm:focus {
   background-color: #cd1e1a;
 }
 .label-priority-low {
-  background-color: #ffa726;
+  background-color: #CDDC39;
 }
 .label-priority-low[href]:hover,
 .label-priority-low[href]:focus {
   background-color: #f29000;
 }
 .label-priority-medium {
-  background-color: #ef6c00;
+  background-color: #FFC107;
 }
 .label-priority-medium[href]:hover,
 .label-priority-medium[href]:focus {
@@ -9820,4 +9820,30 @@ button.close {
 }
 .progress-ticket{
   background-color: #FF5722;
+}
+.priority-big-size{
+  color: #FFF;
+}
+.progress-big-size{
+  color: #fff;
+}
+@media screen and (max-width: 1024px){
+  .priority-big-size{
+  display: none;
+  }
+}
+@media screen and (min-width: 1026px){
+  .priority-small-size{
+    display: none;
+  }
+}
+@media screen and (max-width: 1024px){
+  .progress-big-size{
+  display: none;
+  }
+}
+@media screen and (min-width: 1026px){
+  .progress-small-size{
+    display: none;
+  }
 }

@@ -1881,11 +1881,11 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 }
 
 .priority-dot.low, .priority-dot.yearly {
-  background-color: #ffa726;
+  background-color: #CDDC39;
 }
 
 .priority-dot.medium {
-  background-color: #ef6c00;
+  background-color: #FFC107;
 }
 
 .priority-dot.high, .priority-dot.weekly {
