@@ -135,12 +135,6 @@ body.opened-ticket-list .content-wrapper .container-ticket-list{
   display: block;
   width: calc(100% - 280px);
 }
-/*@media screen and (max-width: 1025px){
-  body.opened-ticket-list .content-wrapper .container-ticket-list{
-    width: 100%;
-  }
-}*/
-
 
 body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   width: 540px;
@@ -196,14 +190,31 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   width: calc(100% - 856px);
   right: 0;
 }
-@media screen and (max-width: 1440px){
+@media screen and (max-width: 1600px){
   .opened-ticket .content-wrapper .container-ticket-content {
-  width: 75%;
+  width: calc(100% - 277px);
   }
   .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
-  width: 80%;
+  width: calc(100% - 277px);
   }
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+  width: 100%;
+  right: 0;
+  }
+}
+@media screen and (max-width: 1315px){
+  body.opened-ticket-list .content-wrapper .container-ticket-list{
+  width: calc(100% - 77px);
+}
+ .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
+  width: calc(100% - 77px);
+  right: 77px;
+  }
+  .opened-ticket .content-wrapper .container-ticket-content {
+  width: calc(100% - 77px);
+  right: 77px;
+  }
+    .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
   width: 100%;
   right: 0;
   }

@@ -40,7 +40,7 @@
   width: calc(100% - 616px);
 }
 
-@media only screen and (max-width: 1440px){
+@media only screen and (max-width: 1600px){
   .ticket-header.ticket-fixed-header{
   width: calc(100% - 595px);
 }
@@ -54,7 +54,14 @@
   width: calc(100% - 77px);
 }
 }
-
+@media only screen and (min-width: 1025px) and (max-width: 1315px){
+  .ticket-header.ticket-fixed-header{
+  width: calc(100% - 397px);
+}
+.left-panel-closed .ticket-header.ticket-fixed-header{
+  width: calc(100% - 157px);
+}
+}
 @media only screen and (max-width: 1024px){
     .ticket-header.ticket-fixed-header{
   width: calc(100% - 154px);

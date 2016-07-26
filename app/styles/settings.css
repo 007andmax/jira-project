@@ -694,46 +694,9 @@ input.default-invoice-terms {
 }
 .settings-button.settings-fixed-button {
   position: fixed;
-  right: 77px;
-  padding-right: 30px;
-  top: 78px;
-  width: calc(100% - 153px);
+  padding-right: 20px;
+  top: 75px;
   background-color: rgba(255, 255, 255, .9);
   z-index: 1;
-}
-@media screen and (min-width: 320px){
-  .settings-button.settings-fixed-button {
-    width: 56%;
-  }
-}
-@media screen and (min-width: 1010px){
-  .settings-button.settings-fixed-button {
-    width: 56%;
-  }
-}
-@media screen and (min-width: 1316px){
-  .settings-button.settings-fixed-button {
-    right: 281px !important;
-    width: 47%;
-  }
-}
-@media screen and (min-width: 1390px){
-  .settings-button.settings-fixed-button {
-    width: 43%;
-  }
-}
-@media only screen and (min-width: 1701px){
-  .settings-button.settings-fixed-button {
-    width: 44%;
-  }
-}
-@media only screen and (min-width: 1930px){
-  .settings-button.settings-fixed-button {
-    width: 45%;
-  }
-}
-@media only screen and (min-width: 2510px){
-  .settings-button.settings-fixed-button {
-    width: 46%;
-  }
+  width: 500px;
 }
