@@ -26,7 +26,7 @@
       </li>
 
       <li class="nav-deactivate" ui-sref="settings.techUsers"
-          ng-if="currentUser.accountType !== 'ROOT'">
+          ng-if="currentUser.accountType !== 'ROOT' && currentUser.isOwner">
         <a href="javascript:void(0)" ng-class="{'active': settingMode === '/techUsers'}">
           <i class="icn-sm icn-cusers pull-left"></i>
           Tech Users
@@ -45,7 +45,7 @@
               navigation-bar="#navigation-content-wrapper">
 
             <li navigate-to="#companyInfoBasicInfo"><a href="javascript:void(0)">Basic Info</a></li>
-            <li navigate-to="#smtpSettings"><a href="javascript:void(0)">SMTP Info</a></li>
+            <li navigate-to="#smtpSettings"><a href="javascript:void(0)">Email Settings</a></li>
             <!--<li navigate-to="#companyInfoBusinessTime"><a href="javascript:void(0)">Business Days &amp; Hours</a></li>-->
             <li navigate-to="#companyInfoContactInfo"><a href="javascript:void(0)">Contact Info</a></li>
             <li navigate-to="#companyInfoServices"

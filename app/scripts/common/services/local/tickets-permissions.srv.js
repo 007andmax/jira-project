@@ -136,7 +136,7 @@
       }
 
       function isUpdateAllowed(ticket) {
-        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && isTicketOpen(ticket)) {
+        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && isTicketOpen(ticket)) {
           return true;
         }
 

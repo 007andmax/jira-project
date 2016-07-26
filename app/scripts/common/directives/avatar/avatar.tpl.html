@@ -3,7 +3,7 @@
   <div class="avatar pull-left" ng-hide="getError().loadingInProcess">
 
     <img ng-src="{{ getUrl() }}" class="no-avatar" ng-class="{'hide': model.cropped.id}">
-    <img ng-src="/file/{{ model.cropped.id }}" ng-class="{'hide': !model.cropped.id}">
+    <img ng-src="/file/{{ model.cropped.id }}" ng-class="{'hide': !model.cropped.id}" style="max-height: 100%">
 
     <div class="reposition" ng-show="model.origin && !getError().loadingInProcess" change-position-button>
       Reposition...

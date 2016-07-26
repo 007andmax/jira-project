@@ -29,7 +29,7 @@
             <a href="javascript:void(0)">Recurring Orders</a>
           </li>
           <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
-               ng-if="editInvoiceId === 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
+               ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
                tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
                ng-click="toogleEditForm('new-invoice')">
             <i class="icn-sm icn-add-company"></i>

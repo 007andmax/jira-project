@@ -91,7 +91,7 @@
 
   <div class="smtp-wrap create-user-form" id="smtpSettings"
        ng-form="smtpForm" ng-controller="quicktech.core.settings.smtpCtrl">
-    <h3>SMTP Info
+    <h3>Email settings
       <span class="hint-icon" tooltip-class="hint-tooltip" tooltip-placement="bottom"
             tooltip="{{ smtpHintMessage }}">?</span>
     </h3>
@@ -119,20 +119,20 @@
       <div class="form-row clearfix">
 
         <div class="form-group full-width"
-             ng-class="{'has-error': isShowingErrors(smtpForm, 'businessEmail')}">
+             ng-class="{'has-error': isShowingErrors(smtpForm, 'emailAlias')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'businessEmail')}">
-            Alias for your email (clients will see this instead of the original):
+          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'emailAlias')}">
+            Alias for your email (customers will see it in the field "from" in e-mail):
           </label>
 
-          <div ng-messages="smtpForm.businessEmail.$error"
-               ng-class="{'hide': !isShowingErrors(smtpForm, 'businessEmail')}">
-            <label class="control-label" ng-message="pattern">Please enter a valid email.</label>
+          <div ng-messages="smtpForm.emailAlias.$error"
+               ng-class="{'hide': !isShowingErrors(smtpForm, 'emailAlias')}">
+            <label class="control-label" ng-message="maxlenght">Alias is too long.</label>
           </div>
 
-          <input class="form-control" type="text" name="businessEmail"
-                 ng-model="businessEmail" ng-pattern="emailPattern"
-                 execute-when-outfocused="">
+          <input class="form-control" type="text" name="emailAlias"
+                 ng-model="emailAlias" maxlength="50"
+                 execute-when-outfocused="saveEmailAlias(emailAlias, smtpForm.emailAlias)">
         </div>
       </div>
     </div>
@@ -230,7 +230,7 @@
           <input type="text" class="form-control" name="login" ng-model="smtp.login" ng-pattern="emailPattern"
                  required execute-when-outfocused="saveSMTP(smtpForm)"
                  custom-disabled="{{ !smtp.useSMTP || disableFields }}"
-                 is-uniq-validation validation-func="checkSMTPLoginUnique" ng-change="smtp.testEmail = smtp.login">
+                 is-uniq-validation validation-func="checkSMTPLoginUnique">
 
         </div>
 
@@ -271,16 +271,16 @@
 
       <div class="form-row clearfix test-smtp-connection">
         <div class="form-group full-width">
-          <div class="btn btn-lg btn-info test-email-popup-btn" ng-click="openPopover(true)"
-               custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}"
-               popover-template="'/html/scripts/core/settings/company-info/send-test-email-popup.tpl.html'"
-               popover-placement="top" popover-append-to-body="true" popover-is-open="popoverOpened"
-               click-outside="openPopover(false)" outside-if-not="test-email-popup-btn, test-email-wrap">
-            Send test email
+          <div qt-custom-popover-template="/html/scripts/core/settings/company-info/send-test-email-popup.tpl.html"
+               style="display: inline-block;">
+            <div class="btn btn-lg btn-info test-email-popup-btn" qt-popover-trigger="outsideClick"
+                 custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}">
+              Send test email
+            </div>
           </div>
           <div class="loading-indicator-wrap">
             <button-with-loading-indicator loading="testingConnection"
-                                           ng-show="smtp.useSMTP && !smtp.exeption && (testingConnection || smtp.isValid)">
+                                           ng-show="!smtp.exeption && (testingConnection || smtp.isValid)">
             </button-with-loading-indicator>
           </div>
           <span class="error-msg" ng-if="smtp.useSMTP && !testingConnection && !smtp.isValid">

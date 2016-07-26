@@ -396,7 +396,11 @@
         if (callback) {
           callback(resp.data, saveData);
         }
-      })
+      }, function (resp) {
+        if (callback) {
+          callback(resp.data, saveData);
+        }
+      });
 
     }
 
@@ -654,6 +658,16 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getEmailAlias(callback) {
+      var future = $http.get('/settings/companyProfile/emailAlias');
+      Utils.handleCallback(future, callback);
+    }
+
+    function saveEmailAlias(emailAlias, callback) {
+      var future = $http.post('/settings/companyProfile/emailAlias', { emailAlias: emailAlias });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -689,7 +703,9 @@
       checkSMTPLoginUnique: checkSMTPLoginUnique,
       getPermissions: getPermissions,
       savePermissions: savePermissions,
-      getTechRoles: getTechRoles
+      getTechRoles: getTechRoles,
+      getEmailAlias: getEmailAlias,
+      saveEmailAlias: saveEmailAlias
     }
 
   }]);
