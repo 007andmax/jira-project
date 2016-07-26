@@ -74,11 +74,17 @@
 	color: #fff;
   background: rgba(255, 255, 255, 0.12);
 }
-.fu{
+.icon-pos{
 	position: absolute;
 	left:20px;
 	top: 15px;
 }
 .left-panel-full-wrapper{
 	width: 100%;
+}
+.badge-pos{
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  background-color: #e53935;
 }

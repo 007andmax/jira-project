@@ -190,7 +190,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   width: calc(100% - 856px);
   right: 0;
 }
-@media screen and (max-width: 1600px){
+@media screen and (max-width: 1650px){
   .opened-ticket .content-wrapper .container-ticket-content {
   width: calc(100% - 277px);
   }
@@ -224,15 +224,15 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
     width: 100%;
   }
    .opened-ticket .content-wrapper .container-ticket-content {
-     width: 123%;
-      right: 76px;
+ width: calc(134.5% - 76px);
+  right: 76px;
   }
   .left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
   width: calc(100% - 76px);
   right: 76px;
   }
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
-  width: 134%;
+  width: 134.5%;
   right: 0;
   }
   .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
