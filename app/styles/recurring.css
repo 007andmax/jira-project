@@ -408,14 +408,14 @@ span.control-label.error-required {
 }
 
 .invoice-table.expanded  .ticket-add-amount {
-  width: 100%;
+  width: auto;
   margin-right: 110px;
   margin-bottom: 5px;
 
   text-align: right;
 }
 .invoice-table.expanded .invoice-form-edit .ticket-add-amount {
-  margin-right: 31px;
+  margin-right: 33px;
 }
 .invoice-table .table-wrapper .table-content {
   width: calc(100% - 200px);

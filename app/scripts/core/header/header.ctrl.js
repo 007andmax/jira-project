@@ -9,19 +9,22 @@
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
                 $stateParams, $rootScope, TicketsPermissionsService) {
 
-        $scope.clientCompanies = CompaniesService.getClientCompanies();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.goBack = {};
 
-        $scope.$watch('clientCompanies.length', function (count) {
-          if (count) {
-            $scope.clientCompanies = $scope.clientCompanies.filter(function (company) {
+        $scope.getClientCompanies = function () {
+          var clientCompanies = CompaniesService.getClientCompanies();
+
+          if (clientCompanies.length) {
+            clientCompanies = clientCompanies.filter(function (company) {
               return !company.isDefault;
             });
           }
-        });
+
+          return clientCompanies;
+        };
 
         $scope.userReadable = function (text) {
           var words = text.split(/[-_]/),

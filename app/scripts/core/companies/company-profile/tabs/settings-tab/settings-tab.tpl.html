@@ -138,7 +138,7 @@
             <label class="control-label" ng-message="required">Username is required.</label>
           </div>
 
-          <input type="text" class="form-control" name="login" ng-model="editedCredential.login" required>
+          <input type="text" class="form-control" name="login" ng-model="editedCredential.login" required autocomplete="off">
         </div>
 
         <div class="form-group"
@@ -155,7 +155,7 @@
           </div>
 
           <input type="{{ passwordShown['showPassword'] ? 'text' : 'password' }}" class="form-control" name="password"
-                 ng-model="editedCredential.password" required>
+                 ng-model="editedCredential.password" required autocomplete="off">
 
           <span ng-click="passwordShown['showPassword'] = !passwordShown['showPassword']"
                 ng-show="editedCredential.password">
@@ -177,7 +177,7 @@
           </div>
 
           <input type="{{ passwordShown['showPasswordConfirm'] ? 'text' : 'password' }}" class="form-control" name="passwordConfirm"
-                 ng-model="editedCredential.passwordConfirm" required>
+                 ng-model="editedCredential.passwordConfirm" required autocomplete="off">
 
           <span ng-click="passwordShown['showPasswordConfirm'] = !passwordShown['showPasswordConfirm']"
                 ng-show="editedCredential.passwordConfirm">
@@ -223,7 +223,7 @@
                     ng-if="PermissionsService.isAllowed('VIEW_PASSWORDS')">
                 <i class="icn-sm {{ passwordShown[$index] ? 'icn-hide-password' : 'icn-show-password' }}"></i>
               </span>
-              <span ng-click="removeCredential(credential.id)">
+              <span ng-click="removeCredential(credential.id)" ng-if="PermissionsService.isAllowed('MODIFY_SETTINGS')">
                 <i class="icn-sm icn-remove-token"></i></span>
             </span>
           </li>

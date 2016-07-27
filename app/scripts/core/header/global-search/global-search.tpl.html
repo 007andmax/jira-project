@@ -6,7 +6,7 @@
          two-levels="true" on-expand="expandCategory" with-header="{{ !!filterResultCount }}"
          focused-class="focused" refresh-on="refreshNavigationDirective">
 
-      <input type="text" class="form-control-top-search" placeholder="Global search..."
+      <input type="text" class="form-control-top-search" placeholder="Global search..." autocomplete="off"
              ng-model="globalSearch.searchValue" ng-model-options="{debounce: 250}" data-toggle="dropdown">
 
       <ul class="dropdown-menu custom-scroll" adjust-height="adjustGlobalDropDownHeight" max-height="300"

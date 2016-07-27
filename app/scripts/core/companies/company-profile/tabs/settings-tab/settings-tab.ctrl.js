@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.devices').controller('quicktech.core.devices.settingsTabCtrl',
-    ['$scope', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$filter',
-      function ($scope, DevicesService, UserConfirmationsService, $filter) {
+    ['$scope', 'DevicesService', 'quicktech.common.services.UserConfirmationsService', '$filter', '$timeout',
+      function ($scope, DevicesService, UserConfirmationsService, $filter, $timeout) {
         var credentialsForSend = [],
           scannedDevices;
 
@@ -81,11 +81,11 @@
             return;
           }
 
-          if ($scope.selectedCredentialId && permissions.indexOf('MODIFY_SETTINGS') === -1) {
+          if ($scope.selectedCredentialId && !$scope.PermissionsService.isAllowed('MODIFY_SETTINGS')) {
             $scope.cancelEdit($scope.deviceSettingsForm);
           }
 
-          if ($scope.credentials && permissions.indexOf('VIEW_PASSWORDS') === -1) {
+          if ($scope.credentials && !$scope.PermissionsService.isAllowed('VIEW_PASSWORDS')) {
             for (var i = 0; i < $scope.credentials.length; i++) {
               var credential = $scope.credentials[i];
               credential.password = undefined;
@@ -214,6 +214,11 @@
         };
 
         $scope.updateCredentials = function (form) {
+
+          if (!$scope.PermissionsService.isAllowed('MODIFY_SETTINGS')) {
+            return;
+          }
+
           $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal',
             $scope.editedCredential.passwordConfirm === $scope.editedCredential.password);
           $scope.assignRequiredError = !$scope.editedCredential.credentialType;
@@ -248,6 +253,10 @@
         };
 
         $scope.saveDeploymentSettings = function (form) {
+
+          if (!$scope.PermissionsService.isAllowed('MODIFY_SETTINGS')) {
+            return;
+          }
 
           if ($scope.settings.maxAgents < 0 ||
             ($scope.agents && $scope.settings.maxAgents < $scope.agents.length && $scope.settings.maxAgents !== 0)) {
@@ -323,6 +332,10 @@
         };
 
         $scope.editCredential = function (id, form) {
+          if (!$scope.PermissionsService.isAllowed('MODIFY_SETTINGS')) {
+            return;
+          }
+
           resetPermissions();
 
           $scope.selectedAgents = {};
@@ -331,23 +344,32 @@
           $scope.selectedCredentialId = id;
           $scope.editedCredential = angular.copy(getCredentialById(id));
 
+
+          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
+          $scope.devicesAllowedForCredential = getAllowedDevicesForCredential($scope.editedCredential);
+          form.$setPristine();
+
           if ($scope.currentUser.permissions.indexOf('VIEW_PASSWORDS') > -1) {
             DevicesService.devicePasswordShown(id, function (resp) {
               $scope.editedCredential.password = resp.password;
               $scope.editedCredential.passwordConfirm = resp.password;
               $scope.passwordShown['showPassword'] = true;
               $scope.passwordShown['showPasswordConfirm'] = true;
+              $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', true);
+              form.$setPristine();
+              $timeout(function () {
+                $scope.triedToSave = true;
+              });
+            });
+          } else {
+            $timeout(function () {
+              $scope.triedToSave = true;
             });
           }
-
-          $scope.agentsAllowedForCredential = getAllowedAgentsForCredential($scope.editedCredential);
-          $scope.devicesAllowedForCredential = getAllowedDevicesForCredential($scope.editedCredential);
-          $scope.triedToSave = true;
-          $scope.deviceSettingsForm.passwordConfirm.$setValidity('equal', true);
-          form.$setPristine();
         };
 
         $scope.cancelEdit = function (form) {
+          form.$setPristine();
           $scope.selectedAgents = {};
           $scope.selectedDevices = {};
           $scope.editedCredential = {
@@ -356,8 +378,9 @@
           delete $scope.selectedCredentialId;
 
           resetPermissions();
-          $scope.triedToSave = false;
-          form.$setPristine();
+          $timeout(function () {
+            $scope.triedToSave = false;
+          })
         };
 
         $scope.searchDevice = function (value) {

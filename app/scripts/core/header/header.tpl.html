@@ -175,7 +175,7 @@
 
               <li role="presentation">
                 <a role="menuitem" tabindex="-1"
-                   ng-if="clientCompanies.length && PermissionsService.isAllowed('CREATE_USERS')"
+                   ng-if="getClientCompanies().length && PermissionsService.isAllowed('CREATE_USERS')"
                    ui-sref="users.create">User</a>
               </li>
 
