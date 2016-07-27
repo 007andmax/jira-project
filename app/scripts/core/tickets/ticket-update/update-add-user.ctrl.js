@@ -14,11 +14,11 @@
           });
           $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
 
-            for (var i = $scope.updateSharedUsersList.length - 1; i >= 0; i--) {
-              var share = $scope.updateSharedUsersList[i];
+            for (var i = $scope.ticketSharedUsersList.length - 1; i >= 0; i--) {
+              var share = $scope.ticketSharedUsersList[i];
 
               if (share.contact && !Utils.findById($scope.vendorsContacts, share.contact.id)) {
-                $scope.updateSharedUsersList.splice(i, 1);
+                $scope.ticketSharedUsersList.splice(i, 1);
                 delete $scope.selectUpdateSharedUser[share.contact.id];
               }
             }
@@ -47,12 +47,16 @@
           };
 
           $scope.filterUpdateUser = function (item) {
+            var shares = $scope.ticketDetails.shares;
 
             var isCurrentUser = item.id === $scope.currentUser.id,
               isAssignedUser = $scope.ticketDetails.assignedUser && item.id === $scope.ticketDetails.assignedUser.id,
-              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id;
+              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id,
+              isAlreadyShared = shares.find(function (shared) {
+                return (shared.user ? shared.user.id : shared.contact.id) === item.id;
+              });
 
-            if (isCurrentUser || isAssignedUser || isCreatedUser) {
+            if (isCurrentUser || isAssignedUser || isCreatedUser || isAlreadyShared) {
               return false;
             }
 
@@ -69,13 +73,13 @@
 
             if ($scope.selectUpdateSharedUser[user.id]) {
 
-              $scope.updateSharedUsersList.push({user: user});
+              $scope.ticketSharedUsersList.push({ user: user, notify: true });
 
             } else {
 
-              for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
-                if ($scope.updateSharedUsersList[i].user && $scope.updateSharedUsersList[i].user.id === user.id) {
-                  $scope.updateSharedUsersList.splice(i, 1);
+              for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+                if ($scope.ticketSharedUsersList[i].user && $scope.ticketSharedUsersList[i].user.id === user.id) {
+                  $scope.ticketSharedUsersList.splice(i, 1);
                 }
               }
 
@@ -86,13 +90,13 @@
 
             if ($scope.selectUpdateSharedUser[contact.id]) {
 
-              $scope.updateSharedUsersList.push({contact: contact});
+              $scope.ticketSharedUsersList.push({ contact: contact, notify: true });
 
             } else {
 
-              for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
-                if ($scope.updateSharedUsersList[i].contact && $scope.updateSharedUsersList[i].contact.id === contact.id) {
-                  $scope.updateSharedUsersList.splice(i, 1);
+              for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+                if ($scope.ticketSharedUsersList[i].contact && $scope.ticketSharedUsersList[i].contact.id === contact.id) {
+                  $scope.ticketSharedUsersList.splice(i, 1);
                 }
               }
 
@@ -105,7 +109,7 @@
             } else {
               $scope.addContactToUpdate(item);
             }
-          }
+          };
 
 
         }]);

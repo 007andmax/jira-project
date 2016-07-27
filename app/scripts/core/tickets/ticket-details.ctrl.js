@@ -17,7 +17,7 @@
           $scope.TicketsPermissionsService = TicketsPermissionsService;
           $scope.allUpdatesLoaded = false;
           $scope.selectUpdateSharedUser = {};
-          $scope.updateSharedUsersList = [];
+          $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
@@ -89,8 +89,8 @@
           };
 
           $scope.updateAndCloseTicket = function (form) {
-            if (haveUnsavedUpdate($scope.ticketUpdate)) {
-              var saveFailed = $scope.saveTicketUpdate(form);
+            if (hasUnsavedUpdate($scope.ticketUpdate)) {
+              var saveFailed = $scope.saveTicketUpdate(form, true);
               if (!saveFailed) {
                 var unwatch = $scope.$watch('isSavingUpdate', function (value) {
                   if (value === false) {
@@ -110,6 +110,7 @@
 
           $scope.claimTicket = function () {
             TicketsService.assignTo($scope.ticketDetails.id, $scope.currentUser.id);
+            $scope.ticketSharedUsersList.push({ user: $scope.currentUser, notify: false });
           };
 
           $scope.openSetting = function () {
@@ -239,36 +240,6 @@
             return $sce.trustAsHtml($scope.ticketDetails.note);
           };
 
-          $scope.deleteUpdateSharedUser = function (sharedUser) {
-
-            for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
-
-              if (sharedUser.user && $scope.updateSharedUsersList[i].user) {
-
-                if (sharedUser.user.id === $scope.updateSharedUsersList[i].user.id) {
-
-                  $scope.updateSharedUsersList.splice(i, 1);
-                  $scope.selectUpdateSharedUser[sharedUser.user.id] = false;
-
-                  if (sharedUser.user.id === $scope.ticketDetails.createdUser.id) {
-                    $scope.ticketUpdate.notifyTicketCreator = false;
-                  }
-
-                  return;
-                }
-
-              } else if (sharedUser.contact && $scope.updateSharedUsersList[i].contact) {
-
-                if (sharedUser.contact.id === $scope.updateSharedUsersList[i].contact.id) {
-                  $scope.updateSharedUsersList.splice(i, 1);
-                  $scope.selectUpdateSharedUser[sharedUser.contact.id] = false;
-                  return;
-                }
-
-              }
-            }
-          };
-
           $scope.getTriedToSaveUpdate = function () {
             return $scope.triedToSaveUpdate;
           };
@@ -277,7 +248,7 @@
             $scope.triedToSaveUpdate = value;
           };
 
-          $scope.saveTicketUpdate = function (form) {
+          $scope.saveTicketUpdate = function (form, disableRestoringDefaults) {
             if (form.$valid) {
               $scope.isSavingUpdate = true;
               $scope.triedToSaveUpdate = false;
@@ -315,62 +286,63 @@
 
               }
 
-              for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
+              for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
 
-                if ($scope.updateSharedUsersList[i].user) {
+                var ticketSharedUser = $scope.ticketSharedUsersList[i];
+
+                if (!ticketSharedUser.notify) {
+                  continue;
+                }
+
+                if (ticketSharedUser.user) {
 
                   ticketUpdateToSend.shares.push({
-                    user: { id: $scope.updateSharedUsersList[i].user.id },
-                    itemOrder: $scope.updateSharedUsersList[i].itemOrder
+                    user: { id: ticketSharedUser.user.id }
                   });
 
-                } else if ($scope.updateSharedUsersList[i].contact) {
+                } else if (ticketSharedUser.contact) {
 
                   ticketUpdateToSend.shares.push({
-                    contact: { id: $scope.updateSharedUsersList[i].contact.id },
-                    itemOrder: $scope.updateSharedUsersList[i].itemOrder
+                    contact: { id: ticketSharedUser.contact.id }
                   })
                 }
-              }
-
-              if ($scope.ticketUpdate.notifyTicketCreator) {
-                ticketUpdateToSend.notifyTicketCreator = $scope.ticketUpdate.notifyTicketCreator;
               }
 
               TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
 
                 $scope.isSavingUpdate = false;
 
-                switch (ticketUpdateToSend.type) {
+                if (!disableRestoringDefaults) {
+                  switch (ticketUpdateToSend.type) {
 
-                  case 'NOTE':
+                    case 'NOTE':
 
-                    UserNotificationService.show('New ticket update containing a note has been posted', true);
-                    setCreateUpdateFormToDefault();
-                    return;
+                      UserNotificationService.show('New ticket update containing a note has been posted', true);
+                      setCreateUpdateFormToDefault();
+                      return;
 
-                  case 'SERVICE':
-                    if (ticketUpdateToSend.services.length > 1) {
-                      UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
-                    } else {
-                      UserNotificationService.show('New ticket update containing a service has been posted', true);
-                    }
-                    setCreateUpdateFormToDefault();
-                    return;
+                    case 'SERVICE':
+                      if (ticketUpdateToSend.services.length > 1) {
+                        UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.services.length + ' services has been posted', true);
+                      } else {
+                        UserNotificationService.show('New ticket update containing a service has been posted', true);
+                      }
+                      setCreateUpdateFormToDefault();
+                      return;
 
-                  case 'PRODUCT':
-                    if ($scope.ticketUpdate.products.length > 1) {
-                      UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.products.length + ' products has been posted', true);
-                    } else {
-                      UserNotificationService.show('New ticket update containing a product has been posted', true);
-                    }
-                    setCreateUpdateFormToDefault();
-                    return;
+                    case 'PRODUCT':
+                      if ($scope.ticketUpdate.products.length > 1) {
+                        UserNotificationService.show('New ticket update containing ' + ticketUpdateToSend.products.length + ' products has been posted', true);
+                      } else {
+                        UserNotificationService.show('New ticket update containing a product has been posted', true);
+                      }
+                      setCreateUpdateFormToDefault();
+                      return;
+                  }
                 }
 
                 function setCreateUpdateFormToDefault() {
                   $scope.selectUpdateSharedUser = {};
-                  $scope.updateSharedUsersList = [];
                   $scope.$broadcast('setCreateUpdateFormToDefault');
                 }
               });
@@ -408,18 +380,27 @@
             }
 
             var processedShares = [];
+            $scope.ticketSharedUsersList = getDefaultSharedList();
 
             for (var i = 0; i < shares.length; i++) {
 
               var share = shares[i],
-                id = share.user ? share.user.id : share.contact.id;
+                sharedUser = share.user || share.contact,
+                isAlreadyAdded = $scope.ticketSharedUsersList.findIndex(function (shared) {
+                  return (shared.user ? shared.user.id : shared.contact.id) === this.id;
+                }, sharedUser);
 
+              if (isAlreadyAdded === -1) {
+                var itemForPush = share.user ? { user: share.user } : { contact: share.contact };
+                itemForPush.notify = false;
+                $scope.ticketSharedUsersList.push(itemForPush);
+              }
 
-              if (processedShares.indexOf(id) > -1) {
+              if (processedShares.indexOf(sharedUser.id) > -1) {
                 continue;
               }
 
-              processedShares.push(id);
+              processedShares.push(sharedUser.id);
 
               $scope.shares.push({
                 name: share.user ? $scope.getUserName($scope.getUserById(share.user.id)) : $scope.getContactName(share.contact),
@@ -428,38 +409,10 @@
               })
             }
 
-          });
+          }, true);
 
-          $scope.addTicketOwnerToUpdate = function () {
+          $scope.addSharedUser = function () {
 
-            if (!$scope.ticketDetails && !$scope.ticketDetails.createdUser) {
-              return;
-            }
-
-            var ticketOwner = {
-              user: $scope.ticketDetails.createdUser.staticCopy()
-            };
-
-            var firstSharedUser = $scope.updateSharedUsersList[0],
-              createdUserId = $scope.ticketDetails.createdUser.id
-
-            if ($scope.ticketUpdate.notifyTicketCreator) {
-
-              if (firstSharedUser && firstSharedUser.user.id === createdUserId) {
-                return;
-              }
-
-              $scope.updateSharedUsersList.unshift(ticketOwner);
-
-            } else {
-
-              if (firstSharedUser && firstSharedUser.user.id !== createdUserId) {
-                return;
-              }
-
-              $scope.updateSharedUsersList.shift();
-
-            }
           };
 
           $scope.filterCurrentUser = function (item) {
@@ -508,14 +461,28 @@
             rightPanelSharedState.createUserId = undefined;
           });
 
+          $scope.isAllSharedSelected = function (shares) {
+            $scope.ticketDetails.notifyAll = shares.reduce(function (counter, shared) {
+              return shared.notify ? ++counter : counter;
+            }, 0) === $scope.ticketSharedUsersList.length;
+          };
+
+          $scope.toggleAllShared = function (isNotifyAll) {
+            for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+              $scope.ticketSharedUsersList[i].notify = isNotifyAll;
+            }
+          };
+
           function closeTicket() {
             $scope.ticketClosing = true;
 
             var recipientsIds = [];
-            for (var i = 0; i < $scope.updateSharedUsersList.length; i++) {
-              var shared = $scope.updateSharedUsersList[i];
+            for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+              var shared = $scope.ticketSharedUsersList[i];
 
-              recipientsIds.push(shared.user ? shared.user.id : shared.contact.id);
+              if (shared.notify) {
+                recipientsIds.push(shared.user ? shared.user.id : shared.contact.id);
+              }
             }
 
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
@@ -525,7 +492,7 @@
             }, recipientsIds);
           }
 
-          function haveUnsavedUpdate(update) {
+          function hasUnsavedUpdate(update) {
             return (
               !!update.note ||
               (update.products && update.products.length > 1) ||
@@ -551,6 +518,22 @@
             }
 
             return false;
+          }
+
+          function getDefaultSharedList() {
+            var result = [];
+
+            if ($scope.user) {
+              result.push({ user: $scope.user, notify: false });
+            }
+
+            if ($scope.assignedUser && $scope.user && $scope.user.id !== $scope.assignedUser.id) {
+              result.push({ user: $scope.assignedUser, notify: false });
+            }
+
+            $scope.ticketDetails.notifyAll = false;
+
+            return result;
           }
 
         }]);

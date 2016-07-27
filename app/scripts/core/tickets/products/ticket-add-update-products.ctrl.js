@@ -13,11 +13,9 @@
           function setTicketUpdateToDefault() {
 
             $scope.setTicketUpdate({
-              products: [{item:{}}],
-              notifyTicketCreator: true
+              products: [{item:{}}]
             });
 
-            $scope.addTicketOwnerToUpdate();
             $scope.setTriedToSaveUpdate(false);
           }
 
