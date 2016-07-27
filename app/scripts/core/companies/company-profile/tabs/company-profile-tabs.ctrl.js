@@ -42,7 +42,7 @@
         $scope.runScanDevices = function () {
           $scope.isScanDevicesLoad = true;
           DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
-            $scope.masterAgentOffline = resp.code === 400;
+            $scope.masterAgentOffline = true;
             if ($scope.masterAgentOffline) {
               $scope.isScanDevicesLoad = false;
             }
@@ -72,12 +72,13 @@
           if (resp.masterAgentId !== lastMasterAgentId) {
             lastMasterAgentId = resp.masterAgentId;
 
-            if (lastMasterAgentId && $scope.currentOpenTab === 'network-scan' && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
+            if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
                 $scope.scanDevices = resp;
               });
             } else {
               $scope.scanDevices = undefined;
+              $scope.isScanDevicesLoad = false;
             }
           }
         });
@@ -88,8 +89,10 @@
           } else {
             $scope.isHasDevices = false;
             if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings') {
-              $state.go('companyProfile', { companyId: $stateParams.companyId,
-                tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
+              $state.go('companyProfile', {
+                companyId: $stateParams.companyId,
+                tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings'
+              });
             }
 
           }
@@ -313,13 +316,15 @@
         };
 
         $scope.createUser = function () {
-          $scope.editedUser = {
-            newUser: true,
-            company: { id: $scope.company.id },
-            role: 'USER',
-            phoneNumbers: [{ phoneType: 'Office' }],
-            subscription: {}
-          };
+          if (!$scope.editedUser || !$scope.editedUser.newUser) {
+            $scope.editedUser = {
+              newUser: true,
+              company: { id: $scope.company.id },
+              role: 'USER',
+              phoneNumbers: [{ phoneType: 'Office' }],
+              subscription: {}
+            };
+          }
         };
 
       }]);

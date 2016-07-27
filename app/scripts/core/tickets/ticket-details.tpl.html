@@ -1,5 +1,5 @@
 <div class="container-ticket-content nano" show-ticket-details>
-  <div class="nano-content">
+  <div class="nano-content" style="height: 100%">
     <div class="ticket-content" style="margin-bottom: 200px;">
       <div class="ticket-header clearfix ticket-fixed-header">
         <div id="ticket-header-content">
@@ -11,7 +11,7 @@
               <strong>{{ getUserName(user) }}</strong>
             </div>
             <div class="ticket-header-status pull-left">
-              <div dropdown style="display: inline">
+              <div class="pull-left" dropdown>
                 <span
                   class="label-icn-sm priority-small-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }} persistent-tooltip"
                   tooltip="{{ userReadable(ticketDetails.priorityLevel) }} priority" tooltip-placement="top"
@@ -41,7 +41,7 @@
                   </li>
                 </ul>
               </div>
-              <div dropdown style="display: inline">
+              <div class="pull-left" dropdown>
                 <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                   class="label-icn-sm progress-small-size label-primary persistent-tooltip" tooltip-append-to-body="true"
                   tooltip="{{ userReadable(ticketDetails.status) }}" tooltip-placement="top" dropdown-toggle>

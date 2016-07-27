@@ -7,7 +7,7 @@
         <ul navigation-bar="#navigation-content-wrapper">
 
           <!--<li navigate-to="#owerview">-->
-            <!--<a href="javascript:void(0)">Overview</a>-->
+          <!--<a href="javascript:void(0)">Overview</a>-->
           <!--</li>-->
 
           <li navigate-to="#basic-info">
@@ -26,7 +26,7 @@
             <a href="javascript:void(0)">Vendor</a>
           </li>
 
-          <li navigate-to="#companyServices" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+          <li navigate-to="#companyServices">
             <a href="javascript:void(0)">Services Info</a>
           </li>
 
@@ -443,14 +443,13 @@
           </div>
         </div>
 
-        <div id="companyServices" class="services-info-wrapper clearfix"
-             ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+        <div id="companyServices" class="services-info-wrapper clearfix">
 
           <div class="default-services-header">
 
             <h3>Services Info</h3>
 
-            <div class="form-row clearfix dropdown">
+            <div class="form-row clearfix dropdown" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
               <div class="btn btn-lg btn-primary pull-right" data-toggle="dropdown"
                    style="margin-top: -47px; width: auto; font-weight: bold;"
@@ -542,24 +541,20 @@
                            is-uniq-validation validation-func="validateServiceName"
                            ng-maxlength="100" ng-minlength="3">
                   </div>
-                  <!--style="width: 183px;" TODO hide timeAllotment -->
 
                   <div class="col-3" ng-class="{'has-error': isShowingErrors(servicesForm, 'editServiceRate' + $index)}"
                        style="margin-top: -8px;width: 92px">
                     <input type="text" class="form-control" placeholder="Rate"
-                           ng-model="service.rate" ng-required="true"
-                           name="{{'editServiceRate' + $index}}"
+                           ng-model="service.rate" ng-required="true" name="{{'editServiceRate' + $index}}"
+                           ng-readonly="!PermissionsService.isAllowed('MANAGE_SERVICES')"
                            hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
                     <span class="days" style="top: 18px;">$</span>
                   </div>
 
-                  <!--<div class="col-2" style="text-align: right;width: 133px;"> TODO hide timeAllotment-->
-                  <!--{{ service.timeBlock | timeFilter }}-->
-                  <!--</div>-->
-
                   <div class="col-5" style="width: 68px;">
                     <label class="control checkbox pull-right" style="margin-top: 14px;left:0">
-                      <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()">
+                      <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()"
+                             ng-disabled="!PermissionsService.isAllowed('MANAGE_SERVICES')">
                       <span class="control-indicator"></span>
                     </label>
                   </div>
@@ -567,7 +562,7 @@
                   <div class="col-4" style="width: 24px">
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
-                       ng-click="deleteService(service.name)"
+                       ng-click="deleteService(service.name)" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
                       <i class="icn-sm icn-delete"></i>
                     </a>
@@ -803,8 +798,10 @@
                       <input class="form-control show-password" type="{{ isShowPass ? 'text' : 'password' }}"
                              ng-model="editCompany.password">
                       <a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"
-                         tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password" ng-click="isShowPass = !isShowPass">
-                        <i class="icn-sm" ng-class="{'icn-hide-password': isShowPass, 'icn-show-password': !isShowPass}"></i>
+                         tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"
+                         ng-click="isShowPass = !isShowPass">
+                        <i class="icn-sm"
+                           ng-class="{'icn-hide-password': isShowPass, 'icn-show-password': !isShowPass}"></i>
                       </a>
                     </div>
                   </div>

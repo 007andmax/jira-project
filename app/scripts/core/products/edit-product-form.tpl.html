@@ -49,7 +49,8 @@
     </div>
   </div>
 
-  <div class="col-4" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}">
+  <div class="col-4" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
+       ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
     <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
            name="cost" ng-change="validateSaleAndCost(editProductForm)"
            hard-reset-pattern="decimalNumberPattern">

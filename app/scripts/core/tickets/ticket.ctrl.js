@@ -45,17 +45,17 @@
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
 
-            if ($scope.currentUser.role === "USER") {
+            if ($scope.currentUser.isOwner) {
+
+              TicketsService.markAsSpam($scope.ticket.id, function () {
+                UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been marked as spam', true);
+              });
+            } else {
 
               TicketsService.reportAsSpam($scope.ticket.id, function () {
                 UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been reported as spam', true);
               });
 
-            } else {
-
-              TicketsService.markAsSpam($scope.ticket.id, function () {
-                UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been marked as spam', true);
-              });
             }
             $scope.uncheckTicket($scope.ticket.id);
           });

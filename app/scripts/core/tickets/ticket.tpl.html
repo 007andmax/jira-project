@@ -122,7 +122,7 @@
     <div class="ticket-labels clearfix"
          ng-init="dropdowns[ticket.id] = {}; dropdowns[ticket.id]['priority'] = false; dropdowns[ticket.id]['status'] = false;">
 
-      <div dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['priority']">
+      <div class="pull-left" dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['priority']">
         <span
           class="label-icn-lg priority-small-size label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"
           tooltip="{{ userReadable(ticket.priorityLevel) }} priority" tooltip-placement="top" dropdown-toggle>
@@ -136,7 +136,7 @@
           {{ userReadable(ticket.priorityLevel) }}
         </span>
 
-        <ul class="dropdown-menu dropdown-menu-custom dropdown-priority" role="menu"
+        <ul class="dropdown-menu dropdown-menu-custom" role="menu"
             ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticket)">
 
           <li>
@@ -163,7 +163,7 @@
         </ul>
       </div>
 
-      <div dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
+      <div class="pull-left" dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
         <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status)}}-ticket"
           ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)"
           tooltip="{{ userReadable(ticket.status) }}" tooltip-placement="top" dropdown-toggle>
@@ -177,7 +177,7 @@
           {{ userReadable(ticket.status) }}
         </span>
 
-        <ul class="dropdown-menu dropdown-priority"
+        <ul class="dropdown-menu"
             ng-if="TicketsPermissionsService.isActionVisible('change_status', ticket)">
           <li>
             <a tabindex="-1" href="javascript:void(0)"

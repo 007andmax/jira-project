@@ -33,23 +33,19 @@
         <div ng-class="{'checkbox-caption': showCheckboxes}">{{ service.name }}</div>
       </div>
 
-
-
       <div class="col-2">
         {{ service.rate | currency: '$': 2 }}
       </div>
       <div class="col-5 is-billable">
         <label class="control checkbox pull-left" style="margin-top: 4px;left:25px">
-          <input type="checkbox" ng-checked="service.billable" custom-disabled="{{ disabledCheckbox }}"
+          <input type="checkbox" ng-checked="service.billable"
+                 custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_SERVICES') }}"
                  ng-click="onChangeBillable()">
           <span class="control-indicator"></span>
         </label>
       </div>
-      <!--<div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'"> TODO hide timeAllotment-->
-      <!--{{ service.timeBlock | timeFilter }}-->
-      <!--</div>-->
 
-      <div class="col-4">
+      <div class="col-4" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
         <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
            ng-click="deleteService()"

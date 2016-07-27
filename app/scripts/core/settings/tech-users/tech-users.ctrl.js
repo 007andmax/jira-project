@@ -24,7 +24,7 @@
 
         $scope.openEditUser = function (user) {
           if (user === 'new_user') {
-            $scope.editUser = {role: "USER"};
+            $scope.editUser = { techRole: $scope.techRoles ? $scope.techRoles[0] : 'Help desk user' };
             $scope.editUserId = 'new_user';
           } else if (user) {
             $scope.editUserId = user.id;

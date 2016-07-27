@@ -49,12 +49,6 @@
           $scope.invoiceToReceive.invoices[$scope.receivePaymentInvoices[i].id] = true;
         }
 
-        $scope.$watch('currentUser.permissions', function (permissions) {
-          if (permissions && permissions.indexOf('VOID_INVOICE') === -1) {
-            $modalInstance.dismiss();
-          }
-        });
-
         $scope.$watch('invoiceToReceive.invoices', function () {
 
           var counter = 0,

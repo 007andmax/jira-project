@@ -19,7 +19,7 @@
         }, function (value) {
           if (value && value !== '^ ') {
             $scope.openedCategory = getOpenedCategory(value);
-            
+
             if (!$scope.openedCategory) {
               $rootScope.isLeftPanelHidden = true;
             }
@@ -29,6 +29,7 @@
         $scope.toggleLeftPanel = function (section) {
           if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
             $rootScope.isLeftPanelHidden = true;
+            $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
           } else {
             $scope.openedCategory = section;
             $rootScope.isLeftPanelHidden = false;

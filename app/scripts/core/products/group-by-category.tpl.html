@@ -1,7 +1,7 @@
 <div>
   <div class="btn btn-block btn-lg btn-add-category pull-left"
        custom-disabled="{{ isCreateCategoryShow }}"
-       ng-click="openCreationCategory()">
+       ng-click="openCreationCategory()" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
     <i class="icn-sm icn-add-category"></i>
     Add Category
   </div>
@@ -66,11 +66,11 @@
         <div class="col-2">
 
           <div class="no-items"
-               ng-class="{'not-hide-labels': category.default}">
+               ng-class="{'not-hide-labels': category.default || !PermissionsService.isAllowed('MANAGE_PRODUCTS')}">
             {{ category.productsList.length }} items
           </div>
 
-          <div class="product-actions" ng-if="!category.default">
+          <div class="product-actions" ng-if="!category.default && PermissionsService.isAllowed('MANAGE_PRODUCTS')">
 
             <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
                  scroll-to-form
@@ -121,7 +121,7 @@
                                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
                 </div>
-                <div class="col-4" ng-click="setOrderForProducts('cost')">
+                <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
                   <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
 
@@ -160,7 +160,7 @@
 
                   <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
 
-                  <div class="col-4">
+                  <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
                     {{ product.cost | currency: '$': 2 }}
                   </div>
 
@@ -169,12 +169,13 @@
                   <div class="col-4" style="width: 50px">
                     <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
                       <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
-                             custom-disabled="{{ disabledCheckbox }}">
+                             custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_PRODUCTS') }}">
                       <span class="control-indicator"></span>
                     </label>
                   </div>
 
-                  <div class="col-6 pull-right" dropdown keyboard-nav="true" dropdown-append-to-body="true">
+                  <div class="col-6 pull-right" dropdown keyboard-nav="true" dropdown-append-to-body="true"
+                       ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                        ng-click="deleteProduct()"
@@ -223,7 +224,7 @@
             </ul>
 
             <div class="add-product-btn-wrapper"
-                 ng-if="!category.default">
+                 ng-if="!category.default && PermissionsService.isAllowed('MANAGE_PRODUCTS')">
               <div class="btn btn-info has-tooltip"
                    ng-click="addProduct(category.id)"
                    custom-disabled="{{ showCreateProduct }}"

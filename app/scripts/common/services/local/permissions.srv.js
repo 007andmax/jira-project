@@ -25,9 +25,7 @@
           $state.includes("companyProfile", { tabName: 'network-scan' }) && permissions.indexOf('NETWORK_SCAN_CLIENTS') === -1 ||
           $state.includes("createCompany") && permissions.indexOf('CREATE_COMPANIES') === -1 ||
           $state.includes("editCompany") && permissions.indexOf('EDIT_COMPANIES') === -1 ||
-          $state.includes("products") && permissions.indexOf('MANAGE_PRODUCTS') === -1 ||
-          $state.includes("services") && permissions.indexOf('MANAGE_SERVICES') === -1 ||
-          $state.current.url.indexOf("accounting") && permissions.indexOf('VIEW_ACCOUNTING') === -1 ||
+          ($state.current.url + ' ' + $state.current.name).indexOf("accounting") > -1 && permissions.indexOf('VIEW_ACCOUNTING') === -1 ||
           $state.includes("quickSupport") && permissions.indexOf('ALLOW_QUICK_CONNECT') === -1;
       }
 

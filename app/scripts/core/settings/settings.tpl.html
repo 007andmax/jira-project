@@ -33,7 +33,7 @@
         </a>
       </li>
 
-      <li class="nav-company-info" ui-sref="settings.companyInfo">
+      <li class="nav-company-info" ui-sref="settings.companyInfo" ng-if="currentUser.isOwner">
 
         <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/companyInfo'}">
           <i class="icn-sm icn-settings-company-info pull-left"></i>
@@ -48,8 +48,7 @@
             <li navigate-to="#smtpSettings"><a href="javascript:void(0)">Email Settings</a></li>
             <!--<li navigate-to="#companyInfoBusinessTime"><a href="javascript:void(0)">Business Days &amp; Hours</a></li>-->
             <li navigate-to="#companyInfoContactInfo"><a href="javascript:void(0)">Contact Info</a></li>
-            <li navigate-to="#companyInfoServices"
-                ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"><a href="javascript:void(0)">Services Info</a></li>
+            <li navigate-to="#companyInfoServices"><a href="javascript:void(0)">Services Info</a></li>
             <li navigate-to="#companyInfoDefaultTax"><a href="javascript:void(0)">Default Tax</a></li>
             <li navigate-to="#ticketAndInvoice"><a href="javascript:void(0)">Ticket &amp; Invoice</a></li>
             <li navigate-to="#companyInfoManageTags"><a href="javascript:void(0)">Manage Tags</a></li>
@@ -71,7 +70,7 @@
         </a>
       </li>
 
-      <li class="nav-email-templates" ui-sref="settings.emailTemplates">
+      <li class="nav-email-templates" ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner">
 
         <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/emailTemplates'}">
           <i class="icn-sm icn-settings-email-templates pull-left"></i>

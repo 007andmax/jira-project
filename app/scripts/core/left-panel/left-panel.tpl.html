@@ -141,12 +141,12 @@
              ng-click="stateGo($event, 'vendors')">
           <i class="nav-icon icn-vendors icn-lg icon-pos"></i> Vendors
         </div>
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')"
+        <div class="center-category__category"
              ng-class="{active: $state.includes('products')}"
              ng-click="stateGo($event, 'products', { tabName: 'category' })">
           <i class="nav-icon icn-lg icn-products icon-pos"></i> Products
         </div>
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
+        <div class="center-category__category"
              ng-class="{active: $state.includes('services')}"
              ng-click="stateGo($event, 'services')">
           <i class="nav-icon icn-lg icn-services icon-pos"></i> Services

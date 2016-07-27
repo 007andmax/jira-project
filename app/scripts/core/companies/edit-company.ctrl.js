@@ -18,7 +18,7 @@
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        if($stateParams.companyId){
+        if ($stateParams.companyId) {
           var company = CompaniesService.getOneById($stateParams.companyId);
           globalSearch.openedItemName = 'Edit ' + company.name;
         } else {
@@ -39,21 +39,20 @@
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
 
-        if (PermissionsService.isAllowed('MANAGE_SERVICES')) {
-          $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
-            if (!$stateParams.companyId) {
-              $timeout(function () {
-                if ($scope.servicesData && $scope.servicesData.default) {
-                  for (var i = 0; i < $scope.servicesData.default.length; i++) {
-                    var service = angular.copy($scope.servicesData.default[i]);
-                    $scope.editCompany.services.push(service);
-                    $scope.selectedServices[$scope.servicesData.default[i].name] = true;
-                  }
+
+        $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
+          if (!$stateParams.companyId) {
+            $timeout(function () {
+              if ($scope.servicesData && $scope.servicesData.default) {
+                for (var i = 0; i < $scope.servicesData.default.length; i++) {
+                  var service = angular.copy($scope.servicesData.default[i]);
+                  $scope.editCompany.services.push(service);
+                  $scope.selectedServices[$scope.servicesData.default[i].name] = true;
                 }
-              }, 0)
-            }
-          });
-        }
+              }
+            }, 0)
+          }
+        });
 
         AddressesService.getLocales(true, function (response) {
           $scope.timeZones = response;

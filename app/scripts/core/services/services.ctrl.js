@@ -4,9 +4,11 @@
 
   angular.module('quicktech.core.services').controller('quicktech.core.services.servicesCtrl',
     ['$scope', 'ServicesService', 'Utils', 'CompaniesService', 'quicktech.common.services.SharedStateService', '$timeout',
-      function ($scope, ServicesService, Utils, CompaniesService, SharedStateService, $timeout) {
+      'quicktech.common.services.PermissionsService',
+      function ($scope, ServicesService, Utils, CompaniesService, SharedStateService, $timeout, PermissionsService) {
         var globalSearch = SharedStateService.getSharedState('globalSearch'), promise;
 
+        $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('servicesHeader');
         $scope.loadingInProgress = {
           all: true,
@@ -116,7 +118,7 @@
               });
             }
           }
-        };
+        }
 
       }]);
 

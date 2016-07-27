@@ -934,10 +934,6 @@
           if ((ticket.priorityLevel != 'HIGH' || ticket.status == 'COMPLETED')) {
             return false;
           }
-
-          if ($rootScope.currentUser.role !== 'ADMIN' && !ticket.sharedToCurrentUserAt) {
-            return false;
-          }
         }
 
         if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {

@@ -8,7 +8,7 @@
       var companiesRelatedPermissions = ['CREATE_COMPANIES', 'EDIT_COMPANIES', 'ARCHIVE_COMPANIES'];
       var userRelatedPermissions = ['CREATE_USERS', 'EDIT_USERS', 'ARCHIVE_USERS'];
       var accountingRelatedPermissions = ['CREATE_INVOICE'];
-      var productsRelatedPermissions = ['VIEW_PRODUCT_COST'];
+      var productsRelatedPermissions = ['MANAGE_PRODUCTS'];
 
       $scope.sections = {
         'Tickets Area': ['DELETE_TICKETS', 'REOPEN_CLOSED_TICKETS'],
@@ -50,10 +50,24 @@
           return true;
         } else if (role.permissions.indexOf('VIEW_ACCOUNTING') === -1 && accountingRelatedPermissions.indexOf(permission) > -1) {
           return true;
-        } else if (role.permissions.indexOf('MANAGE_PRODUCTS') === -1 && productsRelatedPermissions.indexOf(permission) > -1) {
+        } else if (role.permissions.indexOf('VIEW_PRODUCT_COST') === -1 && productsRelatedPermissions.indexOf(permission) > -1) {
           return true;
         } else {
           return false;
+        }
+      };
+
+      $scope.getRelatedPermission = function (permission) {
+        if (companiesRelatedPermissions.indexOf(permission) > -1) {
+          return 'View Companies';
+        } else if (userRelatedPermissions.indexOf(permission) > -1) {
+          return 'View Users';
+        } else if (accountingRelatedPermissions.indexOf(permission) > -1) {
+          return 'View Accounting';
+        } else if (productsRelatedPermissions.indexOf(permission) > -1) {
+          return 'View Product Cost';
+        } else {
+          return 'required permission';
         }
       };
 
@@ -70,7 +84,7 @@
             relatedPermissions = userRelatedPermissions;
           } else if (permission === 'VIEW_ACCOUNTING') {
             relatedPermissions = accountingRelatedPermissions;
-          } else if (permission === 'MANAGE_PRODUCTS') {
+          } else if (permission === 'VIEW_PRODUCT_COST') {
             relatedPermissions = productsRelatedPermissions;
           }
 

@@ -139,7 +139,15 @@
 
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
 
-              if ($scope.currentUser.role === "USER") {
+              if ($scope.currentUser.isOwner) {
+
+                TicketsService.markAsSpam($scope.ticketDetails.id, function () {
+
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
+                  $scope.uncheckTicket($scope.ticketDetails.id);
+                  $state.go('tickets', { listType: $stateParams.listType });
+                });
+              } else {
 
                 TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
 
@@ -148,14 +156,6 @@
                   $state.go('tickets', { listType: $stateParams.listType });
                 });
 
-              } else {
-
-                TicketsService.markAsSpam($scope.ticketDetails.id, function () {
-
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
-                  $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', { listType: $stateParams.listType });
-                });
               }
             });
           };
@@ -506,7 +506,6 @@
           $scope.$on('$destroy', function () {
             rightPanelSharedState.companyId = undefined;
             rightPanelSharedState.createUserId = undefined;
-            $rootScope.isRightPanelHidden = false;
           });
 
           function closeTicket() {

@@ -4,15 +4,16 @@
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService', '$timeout',
-      'quicktech.common.services.SharedStateService', '$stateParams', '$state',
+      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'quicktech.common.services.PermissionsService',
       function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout,
-                SharedStateService, $stateParams, $state) {
+                SharedStateService, $stateParams, $state, PermissionsService) {
 
         var categories,
           availableTabs = ['category', 'list'],
           showCreateProductInList = false,
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
+        $scope.PermissionsService = PermissionsService;
         $scope.$state = $state;
         $scope.orderProducts = {
           field: 'description',

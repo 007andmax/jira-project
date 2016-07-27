@@ -40,19 +40,19 @@
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
 
-            if ($scope.currentUser.role === "USER") {
+            if ($scope.currentUser.isOwner) {
+
+              TicketsService.markAsSpam($scope.ticketsSharedState.checkedTicketsIds, function () {
+                UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets have been marked as spam', true);
+                $scope.uncheckAllTickets();
+              });
+            } else {
 
               TicketsService.reportAsSpam($scope.ticketsSharedState.checkedTicketsIds, function () {
                 UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets have been reported as spam', true);
                 $scope.uncheckAllTickets();
               });
 
-            } else {
-
-              TicketsService.markAsSpam($scope.ticketsSharedState.checkedTicketsIds, function () {
-                UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets have been marked as spam', true);
-                $scope.uncheckAllTickets();
-              });
             }
           });
         };
