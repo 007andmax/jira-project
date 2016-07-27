@@ -2292,6 +2292,8 @@ Devices tab
   }
 }
 .qt-services > li {
+  padding: 25px 0 !important;
+  min-height: 70px;
   height: auto;
   min-height: 70px;
   padding: 25px 0;

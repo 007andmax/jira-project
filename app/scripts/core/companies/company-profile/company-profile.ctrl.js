@@ -30,7 +30,7 @@
         $scope.selectedUsers = {};
         $scope.selectDevices = {};
         $scope.orderUsersTab = {
-          fild: 'name',
+          field: 'name',
           reverse: false
         };
         $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
@@ -208,20 +208,20 @@
         });
 
         $scope.setOrderByUsers = function (option) {
-          if (option === $scope.orderUsersTab.fild) {
+          if (option === $scope.orderUsersTab.field) {
             $scope.orderUsersTab.reverse = !$scope.orderUsersTab.reverse;
           } else {
-            $scope.orderUsersTab.fild = option;
+            $scope.orderUsersTab.field = option;
             $scope.orderUsersTab.reverse = false;
           }
         };
 
         $scope.orderByForUsers = function (item) {
-          if ($scope.orderUsersTab.fild === 'name') {
+          if ($scope.orderUsersTab.field === 'name') {
             return item.firstName + item.lastName;
-          } else if ($scope.orderUsersTab.fild === 'type') {
+          } else if ($scope.orderUsersTab.field === 'type') {
             return item.role;
-          } else if ($scope.orderUsersTab.fild === 'ticket') {
+          } else if ($scope.orderUsersTab.field === 'ticket') {
             return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
           }
 

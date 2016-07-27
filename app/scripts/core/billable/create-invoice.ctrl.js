@@ -63,7 +63,7 @@
         });
 
         $scope.$watch('currentUser.permissions', function (permissions) {
-          if (permissions && permissions.indexOf('CREATE_INVOICE') === -1) {
+          if (permissions && !$scope.PermissionsService.isAllowed('CREATE_INVOICE')) {
             $modalInstance.dismiss();
           }
         });

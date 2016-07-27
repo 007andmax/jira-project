@@ -18,9 +18,9 @@
         $scope.isLastInvoiceSubsciption = userSubscription.invoice && $scope.users.filter(function (user) {
             return user.subscription.invoice;
           }).length <= 1;
-  
+
         $scope.$watch('currentUser.permissions', function (permissions) {
-          if (permissions && permissions.indexOf(action) === -1) {
+          if (permissions && !$scope.PermissionsService.isAllowed(action)) {
             $scope.cancelEditing();
           }
         });
