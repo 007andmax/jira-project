@@ -1875,7 +1875,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 .priority-dot {
   display: inline-block;
   width: 6px;
-  height: 6px;
+  height: 6px !important;
   margin: 2px 10px 2px 0px;
   border-radius: 50%;
 }

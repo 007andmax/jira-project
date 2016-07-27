@@ -185,7 +185,7 @@ body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   .right-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;
 
-    width: 134.5%;
+    width: 100%;
   }
   .right-panel-closed.left-panel-closed.opened-ticket .content-wrapper .container-ticket-content {
     right: 0;

@@ -5013,7 +5013,7 @@ tbody.collapse.in {
 }
 .dropdown-priority {
   min-width: 114px;
-  /*width: 100%;*/
+  margin-top: 25px;
 }
 .dropdown-priority .active a,
 .dropdown-priority .active a:hover,
@@ -9823,9 +9823,11 @@ button.close {
 }
 .priority-big-size{
   color: #FFF;
+  cursor: pointer;
 }
 .progress-big-size{
   color: #fff;
+  cursor: pointer;
 }
 @media screen and (max-width: 1024px){
   .priority-big-size{
