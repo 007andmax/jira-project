@@ -11,7 +11,7 @@
   position: fixed;
   z-index: 1;
   top: 78px;
-
+  transition: .2s ease all .3s;
   width: calc(100% - 1137px);
   padding: 30px;
   padding-bottom: 24px;
@@ -20,6 +20,8 @@
 }
 .left-panel-closed .ticket-header.ticket-fixed-header {
   width: calc(100% - 897px);
+  transition: .2s ease all 0s;
+
 }
 .right-panel-closed .ticket-header.ticket-fixed-header {
   width: calc(100% - 856px);
@@ -28,12 +30,12 @@
   width: calc(100% - 616px);
 }
 
-@media only screen and (max-width: 1650px) {
+@media only screen and (max-width: 1700px) {
   .ticket-header.ticket-fixed-header {
-    width: calc(100% - 595px);
+    width: calc(100% - 594px);
   }
   .left-panel-closed .ticket-header.ticket-fixed-header {
-    width: calc(100% - 347px);
+    width: calc(100% - 354px);
   }
   .right-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 317px);

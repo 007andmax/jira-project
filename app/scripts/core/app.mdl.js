@@ -225,19 +225,14 @@
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
           var globalSearch = SharedStateService.getSharedState('globalSearch');
+          $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
-          if (toState.name !== 'tickets') {
-            if (toState.name !== 'tickets.details') {
-              $rootScope.isRightPanelHidden = true;
-
-              if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
-                return;
-              }
-              globalSearch.counts = {};
-              globalSearch.selectedItemsCount = undefined;
-            } else {
-              $rootScope.isRightPanelHidden = false;
+          if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
+            if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
+              return;
             }
+            globalSearch.counts = {};
+            globalSearch.selectedItemsCount = undefined;
           }
           globalSearch.openedItemName = undefined;
           globalSearch.searchValue = '';

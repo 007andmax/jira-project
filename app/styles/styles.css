@@ -778,6 +778,7 @@ hr {
   float: left;
   width: 100%;
   padding: 0 30px 30px;
+  overflow: hidden;
 }
 .company-profile-content.companies-list {
   padding-left: 0;
