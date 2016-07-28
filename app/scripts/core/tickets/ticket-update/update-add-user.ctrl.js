@@ -50,7 +50,7 @@
             var shares = $scope.ticketDetails.shares;
 
             var isCurrentUser = item.id === $scope.currentUser.id,
-              isAssignedUser = item.id === $scope.ticketDetails.assignedUser.id,
+              isAssignedUser = $scope.ticketDetails.assignedUser && item.id === $scope.ticketDetails.assignedUser.id,
               isCreatedUser = item.id === $scope.ticketDetails.createdUser.id,
               isAlreadyShared = shares.find(function (shared) {
                 return (shared.user ? shared.user.id : shared.contact.id) === item.id;

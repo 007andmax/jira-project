@@ -1,4 +1,4 @@
-<div class="settings-main-wrapper">
+<div class="settings-main-wrapper" ng-if="currentUser.accountType !== 'ROOT' && currentUser.isOwner">
 
   <div class="tech-user-templates-wrapper">
 
@@ -23,7 +23,7 @@
           ng-class="{'expanded': editUserId === user.id}"
           show-model-element="{{ 'showTechUser-' + user.id}}"
           on-finish-render="highlightTechUser()"
-          ng-if="!((user.id === currentUser.id) || (user.role === 'SUPER_TECH_ADMIN'))">
+          ng-if="user.id !== currentUser.id">
 
         <div class="clearfix tech-user">
 
@@ -36,7 +36,7 @@
 
               <div class="name-designation">
                 <h4>{{ getUserName(user) }}</h4>
-                <span class="label label-light">{{ roles[user.role] }}</span><br/>
+                <span class="label label-light">{{ user.techRole }}</span><br/>
 
                 <div class="user-email"><i class="icn-sm icn-at pull-left"></i> {{ user.primaryEmail }}</div>
               </div>

@@ -4,29 +4,18 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
-      '$timeout', 'quicktech.common.services.PhoneFormats', 'quicktech.common.services.PermissionsService',
+      '$timeout', 'quicktech.common.services.PhoneFormats',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
-                $timeout, PhoneFormats, PermissionsService) {
+                $timeout, PhoneFormats) {
 
-        var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id);
-
-        $scope.PermissionsService = PermissionsService;
+        var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),
+          action;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (company) {
           return !company.isDefault;
         });
 
         $scope.getUsersByCompany = UsersService.getAllByCompanyId;
-
-        CompaniesService.getClientCompaniesInfo($scope, function (resp) {
-          $scope.clientCompaniesInfo = resp;
-          if ($scope.editUser.companyId) {
-            var address = resp[$scope.editUser.companyId].addresses[0];
-            if (address) {
-              $scope.userCompanyCountryCode = address.countryCode;
-            }
-          }
-        });
 
         if (!$scope.clientCompanies || $scope.clientCompanies.length < 1) {
           alert('Create at list one company before adding users');
@@ -66,11 +55,30 @@
           $scope.$watch('userCompany', function (userCompany) {
             $scope.editUser.companyId = userCompany ? userCompany.id : undefined;
           });
+
+          action = 'CREATE_USERS';
         } else {
           $scope.isResetPassCollapsed = true;
+          action = 'EDIT_USERS';
         }
 
+        CompaniesService.getClientCompaniesInfo($scope, function (resp) {
+          $scope.clientCompaniesInfo = resp;
+          if ($scope.editUser.companyId) {
+            var address = resp[$scope.editUser.companyId].addresses[0];
+            if (address) {
+              $scope.userCompanyCountryCode = address.countryCode;
+            }
+          }
+        });
+
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
+        $scope.$watch('currentUser.permissions', function (permissions) {
+          if (permissions && !$scope.PermissionsService.isAllowed(action)) {
+            $scope.cancelEdit();
+          }
+        });
 
         $scope.$watch('editUser.companyId', function (companyId) {
           $scope.userCompany = CompaniesService.getOneById(companyId);

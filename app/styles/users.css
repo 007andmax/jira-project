@@ -16,11 +16,12 @@
   margin-left: 30px;
   margin-bottom: 30px;
   width: calc(100% / 1 - 30px);
-  min-width: 405px !important;
+  /*min-width: 405px !important;*/
   -webkit-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   -o-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
 }
+
 .users-list .user-card:hover{
   border: 1px solid #fff;
   box-shadow: 0 4px 25px 0 rgba(10,45,89,.1);
@@ -476,11 +477,12 @@
 .form-row .form-group {
   float: left;
   width: 100%;
-  max-width: 245px;
+  max-width: 48%; /*experemental*/
   margin: 0;
 }
 .form-row .form-group.no-label{
   margin-top: 21px;
+  max-width: 50%; /*experemental*/
 }
 .settings-main-wrapper .form-row .form-group.full-width.no-label {
   margin-top: 17px;
@@ -494,20 +496,21 @@
   left: 0 !important;
 }
 .form-row .form-group.address-field{
-  max-width: 280px;
+  max-width: 280px !important;
 }
 .form-row .form-group.zipcode-field{
-  max-width: 100px;
+  max-width: 100px !important;
 }
 .form-row .form-group.scan-repeat-days{
-  max-width: 145px;
+  max-width: 145px !important;
 }
 .form-row .form-group.scan-time{
-  max-width: 125px;
+  max-width: 125px !important;
 }
 @-moz-document url-prefix() {
   .form-row .form-group.no-label{
-    margin-top: 22px;
+    /*margin-top: 22px;*/
+    transform: translateY(50%);
   }
   .settings-main-wrapper .form-row .form-group.full-width.no-label {
     margin-top: 18px;
@@ -515,6 +518,7 @@
 }
 .form-row .form-group + .form-group {
   margin-left: 10px;
+  max-width: 50%;
 }
 .create-user-form label{
   text-transform: uppercase;
@@ -602,3 +606,12 @@
 .zoom-slider{
   margin-top: 14px;
 }
+.user-edit-tab{
+  z-index: 2000;
+  position: relative;
+  background: #fff;
+  padding: 0 10px;
+}
+/*.test-smtp-connection{
+  margin-top: 10px;
+}*/

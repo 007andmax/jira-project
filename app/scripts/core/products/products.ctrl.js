@@ -4,17 +4,17 @@
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
     ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService', '$timeout',
-      'quicktech.common.services.PermissionsService', 'quicktech.common.services.SharedStateService', '$stateParams', '$state',
-      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout, PermissionsService,
-                SharedStateService, $stateParams, $state) {
+      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'quicktech.common.services.PermissionsService',
+      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout,
+                SharedStateService, $stateParams, $state, PermissionsService) {
 
         var categories,
           availableTabs = ['category', 'list'],
           showCreateProductInList = false,
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        $scope.$state = $state;
         $scope.PermissionsService = PermissionsService;
+        $scope.$state = $state;
         $scope.orderProducts = {
           field: 'description',
           reverse: false
@@ -25,7 +25,7 @@
           categories = resp.categories;
           $scope.productsData = resp;
 
-          if (resp && resp.categories && !resp.categories.length) {
+          if (resp && resp.list && !resp.list.length) {
             $scope.loadingInProgress = false;
           }
         });

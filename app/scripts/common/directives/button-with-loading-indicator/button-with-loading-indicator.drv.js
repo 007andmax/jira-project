@@ -22,10 +22,11 @@
           promise;
 
         scope.$watch('loading', function (loading) {
-          if (initializing) {
+          if (initializing && !loading) {
             initializing = false;
             scope.animationFinished = true;
           } else {
+            initializing = false;
             if (loading) {
               if (promise) {
                 $timeout.cancel(promise);

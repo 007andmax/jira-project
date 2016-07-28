@@ -1,7 +1,6 @@
 <div class="test-email-wrap">
-  <div class="form-row clearfix" ng-form="testEmailForm">
-    <div class="form-group"
-         ng-class="{'has-error': showError && testEmailForm.$invalid}">
+  <div class="form-row clearfix" ng-form="testEmailForm" isolate-form>
+    <div class="form-group" style="max-width: 100%" ng-class="{'has-error': showError && testEmailForm.$invalid}">
 
       <label class="control-label" ng-class="{'hide': showError && testEmailForm.$invalid}">
         Target Email
@@ -18,7 +17,7 @@
 
     </div>
   </div>
-  <div class="btn input-btn-cr btn-success" ng-click="sendTestEmail(smtpForm, testEmailForm, true)">
+  <div class="btn input-btn-cr btn-success" ng-click="sendTestEmail(smtpForm, testEmailForm, true, hidePopover)">
     <i class="icn-sm small-icn-tick"></i>
   </div>
 </div>

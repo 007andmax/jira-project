@@ -6,114 +6,131 @@
   padding: 30px;
   padding-bottom: 24px;
 }
+
 .ticket-header.ticket-fixed-header {
   position: fixed;
-  right: 77px;
+  z-index: 1;
+  top: 78px;
+  transition: .2s ease all .3s;
+  width: calc(100% - 1137px);
   padding: 30px;
   padding-bottom: 24px;
-  top: 78px;
-  width: calc(100% - 153px);
+
   background-color: rgba(255, 255, 255, 0.94);
-  /*box-shadow: rgba(9, 59, 121, 0.1) 0px 1px 0px 0px;*/
-  z-index: 1;
 }
-.large .ticket-header.ticket-fixed-header{
-  right: 0;
-  width: calc(100% - 80px);
-}
-@media screen and (min-width: 1316px){
-  .ticket-header.ticket-fixed-header {
-    right: 281px !important;
-    width: calc(100% - 357px);
-  }
-  .large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 80px);
-    right: 0 !important;
-  }
-}
-@media screen and (min-width: 1390px){
-  .ticket-header.ticket-fixed-header {
-    width: calc(100% - 521px);
-  }
-  .large .ticket-header.ticket-fixed-header{
-    width: calc(100% - 240px);
-    right: 0 !important;
-  }
-}
-@media only screen and (min-width: 1701px){
-  .ticket-header.ticket-fixed-header {
-    width: calc(100% - 941px);
-  }
-}
-@media only screen and (min-width: 1930px){
-  .ticket-header.ticket-fixed-header {
-    width: calc(100% - 1061px);
-  }
-}
-@media only screen and (min-width: 2510px){
-  .ticket-header.ticket-fixed-header {
-    width: calc(100% - 1221px);
-  }
-}
-/*New Classes*/
+.left-panel-closed .ticket-header.ticket-fixed-header {
+  width: calc(100% - 897px);
+  transition: .2s ease all 0s;
 
-.ticket-header-avatar{
-  margin-right: 10px;
+}
+.right-panel-closed .ticket-header.ticket-fixed-header {
+  width: calc(100% - 856px);
+}
+.right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
+  width: calc(100% - 616px);
+}
+
+@media only screen and (max-width: 1700px) {
+  .ticket-header.ticket-fixed-header {
+    width: calc(100% - 594px);
+  }
+  .left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 354px);
+  }
+  .right-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 317px);
+  }
+  .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 77px);
+  }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1315px) {
+  .ticket-header.ticket-fixed-header {
+    width: calc(100% - 397px);
+  }
+  .left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 157px);
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .ticket-header.ticket-fixed-header {
+    left: 76px;
+
+    width: calc(100% - 153px);
+  }
+  .left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 153px);
+  }
+  .right-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 77px);
+  }
+  .right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
+    width: calc(100% - 77px);
+  }
+}
+.ticket-header-avatar {
   margin-top: 1px;
-}
-
-.ticket-header-username{
   margin-right: 10px;
 }
 
-.ticket-header-status{
+.ticket-header-username {
+  margin-right: 10px;
+}
+
+.ticket-header-status {
   margin-top: 2px;
 }
 
-.ticket-header-status .label-icn-sm{
+.ticket-header-status .label-icn-sm {
   margin-right: 4px;
 }
-
-.ticket-header-labels{
+.ticket-header-status .progress-big-size {
+  margin-right: 4px;
+}
+.ticket-header-status .priority-big-size {
+  margin-right: 4px;
+}
+.ticket-header-labels {
   padding-top: 6px;
 }
-.ticket-header-labels .tooltip{
+.ticket-header-labels .tooltip {
   margin-top: -10px;
 }
-.ticket-header-labels .tag-color{
+.ticket-header-labels .tag-color {
   margin-right: 4px;
 }
 
-.ticket-header-details{
+.ticket-header-details {
+  display: block;
   float: left;
   clear: left;
-  display: block;
 }
 
 .ticket-header-details .icn-ticket-attachment {
   margin-top: 4px;
   margin-right: 10px;
 }
-.ticket-header-details .dot-sep{
+.ticket-header-details .dot-sep {
   margin: 3px 7px;
 }
 
-.ticket-header-actions{
+.ticket-header-actions {
   margin-top: 1px;
 }
 
-.ticket-header-actions > .btn, .ticket-header-actions > .dropdown > .btn{
+.ticket-header-actions > .btn,
+.ticket-header-actions > .dropdown > .btn {
   margin-left: 10px;
 }
 
-@-moz-document url-prefix(){
-  .ticket-header.ticket-fixed-header{
+@-moz-document url-prefix() {
+  .ticket-header.ticket-fixed-header {
     padding-bottom: 30px;
   }
-  .ticket-header-username{
+  .ticket-header-username {
     line-height: 19px;
   }
-  .ticket-header-details a{
+  .ticket-header-details a {
     margin-top: 5px;
   }
 }

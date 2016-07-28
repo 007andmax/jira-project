@@ -1,0 +1,30 @@
+<div class="settings-main-wrapper row">
+	<div class="col-md-6 col-sm-3 col-xs-3">
+		<p class="permission-headline">
+			Permissions
+		</p>
+	</div>
+	<div class="col-md-2 col-sm-3  col-xs-3 wrap-category" ng-repeat="role in roles">
+		<p class="permission-headline">{{ role.name }}</p>
+	</div>
+	<div ng-repeat="(sectionName, permissions) in sections">
+    <div class="col-md-12">
+      <p class="category-head">{{ sectionName }}</p>
+    </div>
+    <div class="permission-line" ng-repeat="permission in permissions">
+      <div class="col-md-6 col-sm-3 col-xs-3">
+        <p class="permission-item">{{ userReadable(permission) }}</p>
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-3" ng-repeat="role in roles">
+        <label class="control checkbox permission-box" tooltip-placement="top"
+               tooltip-enable="isPermissionDisabled(permission, role)"
+               tooltip="You should enable {{ getRelatedPermission(permission) }} firstly">
+          <input type="checkbox" ng-checked="role.permissions.indexOf(permission) > -1"
+                 ng-click="togglePermission(role, permission)"
+                 ng-disabled="isPermissionDisabled(permission, role)">
+          <span class="control-indicator permission-box"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

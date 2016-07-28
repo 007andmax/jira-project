@@ -3,16 +3,14 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
-    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'quicktech.common.services.PermissionsService',
-      'quicktech.common.services.SharedStateService',
-      function ($scope, DevicesService, RemoteAccessService, PermissionsService, SharedStateService) {
+    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
+      'quicktech.common.services.SharedStateService', '$rootScope',
+      function ($scope, DevicesService, RemoteAccessService, SharedStateService, $rootScope) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
-
-        $scope.PermissionsService = PermissionsService;
 
         $scope.highlightDevice = function () {
           if (globalSearch.deviceFilter) {
-            $scope.$broadcast('showFilteredDevice-' + globalSearch.deviceFilter);
+            $rootScope.$broadcast('showFilteredDevice-' + globalSearch.deviceFilter);
             globalSearch.deviceFilter = undefined;
           }
         };
@@ -64,13 +62,11 @@
         };
 
         $scope.remove = function () {
-          if (PermissionsService.isAllowed('clients/companyProfile', $scope.currentUser.role, 'd_device')) {
-            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
-              if (delete $scope.selectDevices[$scope.agent.agentId]) {
-                $scope.changeSelectDevices();
-              }
-            })
-          }
+          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
+            if (delete $scope.selectDevices[$scope.agent.agentId]) {
+              $scope.changeSelectDevices();
+            }
+          })
         }
 
       }]);

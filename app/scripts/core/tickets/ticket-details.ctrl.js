@@ -36,7 +36,7 @@
             }
 
             if (CompaniesService.getOneById($scope.ticketDetails.company.id).isDefault) {
-              $rootScope.isRightPanelHided = true;
+              $rootScope.isRightPanelHidden = true;
             }
 
             rightPanelSharedState.companyId = $scope.ticketDetails.company.id;
@@ -135,12 +135,20 @@
           };
 
           $scope.moveIntoSpam = function () {
-            var confirmMesage = 'Do you want to ' + ($scope.currentUser.role === 'USER' ? 'report' : 'mark') + ' the ticket as spam?',
+            var confirmMesage = 'Do you want to ' + ($scope.currentUser.isOwner ? 'mark' : 'report') + ' the ticket as spam?',
               confirmButton = 'Spam';
 
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
 
-              if ($scope.currentUser.role === "USER") {
+              if ($scope.currentUser.isOwner) {
+
+                TicketsService.markAsSpam($scope.ticketDetails.id, function () {
+
+                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
+                  $scope.uncheckTicket($scope.ticketDetails.id);
+                  $state.go('tickets', { listType: $stateParams.listType });
+                });
+              } else {
 
                 TicketsService.reportAsSpam($scope.ticketDetails.id, function () {
 
@@ -149,14 +157,6 @@
                   $state.go('tickets', { listType: $stateParams.listType });
                 });
 
-              } else {
-
-                TicketsService.markAsSpam($scope.ticketDetails.id, function () {
-
-                  UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
-                  $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', { listType: $stateParams.listType });
-                });
               }
             });
           };
@@ -459,7 +459,6 @@
           $scope.$on('$destroy', function () {
             rightPanelSharedState.companyId = undefined;
             rightPanelSharedState.createUserId = undefined;
-            $rootScope.isRightPanelHided = false;
           });
 
           $scope.isAllSharedSelected = function (shares) {
@@ -490,7 +489,7 @@
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.uncheckTicket($scope.ticketDetails.id);
               $state.go('tickets', { listType: $stateParams.listType });
-            });
+            }, recipientsIds);
           }
 
           function hasUnsavedUpdate(update) {

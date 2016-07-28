@@ -1,45 +1,45 @@
 <div>
-  <div class="receivable-head clearfix">
+  <!--<div class="receivable-head clearfix">-->
 
-    <div class="chart-wrapper">
-      <div class="heading">
+    <!--<div class="chart-wrapper">-->
+      <!--<div class="heading">-->
 
-        <strong>Total Collected</strong>
-        <span>Last 30 Days</span>
-        <span class="dot-sep"></span>
-        <span>{{ totalCollectedLast30Days | currency: '$': 2 }}</span>
+        <!--<strong>Total Collected</strong>-->
+        <!--<span>Last 30 Days</span>-->
+        <!--<span class="dot-sep"></span>-->
+        <!--<span>{{ totalCollectedLast30Days | currency: '$': 2 }}</span>-->
 
-        <ul class="chart-legend">
-          <li><i class="circle-indicator red"></i>Receivable</li>
-          <li><i class="circle-indicator blue"></i>Received</li>
-        </ul>
+        <!--<ul class="chart-legend">-->
+          <!--<li><i class="circle-indicator red"></i>Receivable</li>-->
+          <!--<li><i class="circle-indicator blue"></i>Received</li>-->
+        <!--</ul>-->
 
-      </div>
+      <!--</div>-->
 
-      <div receivable-chart ng-model="receivableGraphData"></div>
+      <!--<div receivable-chart ng-model="receivableGraphData"></div>-->
 
-    </div>
+    <!--</div>-->
 
-    <div class="all-time-stats">
+    <!--<div class="all-time-stats">-->
 
-      <div class="heading"><strong>RECEIVED AMOUNT <span>ALL TIME</span></strong>
-        <span class="amount">{{ receivedAmountAllTime.value | currency: '$': 2 }}</span>
-      </div>
+      <!--<div class="heading"><strong>RECEIVED AMOUNT <span>ALL TIME</span></strong>-->
+        <!--<span class="amount">{{ receivedAmountAllTime.value | currency: '$': 2 }}</span>-->
+      <!--</div>-->
 
-      <div class="total-billable">
-        <div class="pie-chart" pie-chart pie-chart-size="40" pie-chart-color="['#7fd5e0', '#e53935']"
-             pie-chart-value="[totalReceivables, totalCollectedLast30Days]"></div>
-        <div class="pull-left">
-          <strong>TOTAL RECEIVABLES</strong>
-          <strong class="amount">{{ totalReceivables | currency:'$' :2 }}</strong>
-        </div>
-      </div>
+      <!--<div class="total-billable">-->
+        <!--<div class="pie-chart" pie-chart pie-chart-size="40" pie-chart-color="['#7fd5e0', '#e53935']"-->
+             <!--pie-chart-value="[totalReceivables, totalCollectedLast30Days]"></div>-->
+        <!--<div class="pull-left">-->
+          <!--<strong>TOTAL RECEIVABLES</strong>-->
+          <!--<strong class="amount">{{ totalReceivables | currency:'$' :2 }}</strong>-->
+        <!--</div>-->
+      <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
-  </div>
+  <!--</div>-->
 
-  <div class="receivable-content">
+  <div class="receivable-content" style="margin-top: 20px;">
     <div class="tabs-container" style="height: 55px">
 
       <div class="payment-receive-fixed" fixed-block-top>

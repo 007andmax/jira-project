@@ -68,8 +68,7 @@
 
               <li ng-click="moveIntoSpam()"
                   ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketsSharedState.selectedTickets)">
-                <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.role !== 'USER'">Mark as Spam</a>
-                <a tabindex="-1" href="javascript:void(0)" ng-if="currentUser.role === 'USER'">Report as Spam</a>
+                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam' }}</a>
               </li>
 
               <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketsSharedState.selectedTickets)">
@@ -175,16 +174,18 @@
               </li>
 
               <li role="presentation">
-                <a role="menuitem" tabindex="-1" ng-if="clientCompanies.length" ui-sref="users.create">User</a>
+                <a role="menuitem" tabindex="-1"
+                   ng-if="getClientCompanies().length && PermissionsService.isAllowed('CREATE_USERS')"
+                   ui-sref="users.create">User</a>
               </li>
 
-              <li role="presentation"
-                  ng-show="PermissionsService.isAllowed('header', currentUser.role, 'c_company')">
-                <a role="menuitem" tabindex="-1" ui-sref="createCompany">Company</a>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1"
+                   ng-if="PermissionsService.isAllowed('CREATE_COMPANIES')"
+                   ui-sref="createCompany">Company</a>
               </li>
 
-              <li role="presentation"
-                  ng-show="PermissionsService.isAllowed('header', currentUser.role, 'c_vendor')">
+              <li role="presentation">
                 <a role="menuitem" tabindex="-1" ui-sref="createVendor">Vendor</a>
               </li>
 

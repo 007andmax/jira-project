@@ -534,15 +534,15 @@
                       <a href="javascript:void(0)" ng-click="setPageToOpen('SHARED')">Shared</a>
                     </li>
 
-                    <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'open_tickets')">
+                    <li>
                       <a href="javascript:void(0)" ng-click="setPageToOpen('OPEN')">Open</a>
                     </li>
 
-                    <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'closed_tickets')">
+                    <li>
                       <a href="javascript:void(0)" ng-click="setPageToOpen('CLOSED')">Closed</a>
                     </li>
 
-                    <li ng-show="PermissionsService.isAllowed('left_panel', currentUser.role, 'trash_tickets')">
+                    <li>
                       <a href="javascript:void(0)" ng-click="setPageToOpen('TRASH')">Trash</a>
                     </li>
 
@@ -603,5 +603,7 @@
 
     </form>
   </div>
+
+  <div ng-include="'/html/scripts/core/settings/my-profile/tracking-devices.tpl.html'"></div>
 
 </div>

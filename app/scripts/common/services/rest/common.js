@@ -72,9 +72,14 @@
 
   }]);
 
-  services.run(['$http', '$rootScope', 'ConstantsService', function ($http, $rootScope, ConstantsService) {
+  services.run(['$http', '$rootScope', 'RealTimeService', function ($http, $rootScope, RealTimeService) {
     $http.get('/users/current').success(function (resp) {
       $rootScope.currentUser = resp;
+      RealTimeService.subscribe('/permissions', $rootScope.$new(), function (newChange) {
+        if (newChange.action === 'PERMISSIONS_UPDATE') {
+          $rootScope.currentUser.permissions = newChange.data.permissions;
+        }
+      })
     });
 
     $rootScope.numberCounterDelimiter = '-';

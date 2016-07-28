@@ -1,7 +1,6 @@
 <div role="tabpanel" class="tab-pane" style="display: block;">
 
-  <ul class="qt-list qt-devices" style="margin-bottom: 150px"
-      ng-style="{'margin-top': currentUser.role !== 'USER' ? '0px' : '34px'}">
+  <ul class="qt-list qt-devices" style="margin-bottom: 150px; margin-top: 34px">
 
     <li class="list-heading" fixed-block-top offset-top="148">
       <div class="col-1" ng-click="sortDevicesTab('hostName')">
@@ -171,48 +170,7 @@
       <div class="col-6">
         <div class="list-actions pull-right">
 
-          <div class="btn btn-default pull-left has-tooltip"
-               ng-if="(agent.type !== 'workstation') && agent.online"
-               ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
-            <i class="icn-sm icn-remote-access"></i>
-          </div>
-
-          <div class="btn btn-default pull-left has-tooltip"
-               ng-if="(agent.type === 'workstation') && agent.online"
-               tooltip-placement="top" tooltip="Remote Access"
-               dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-            <i class="icn-sm icn-remote-access"></i>
-          </div>
-
-          <ul class="dropdown-menu dropdown-menu-custom" role="menu">
-
-            <li ng-click="remoteAccess('CSS')">
-              <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
-            </li>
-
-            <li ng-click="remoteAccess('RDP')">
-              <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
-            </li>
-
-          </ul>
-
-          <div class="btn btn-default has-tooltip pull-right" ng-click="remove()"
-               ng-if="!agent.online && PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
-               tooltip-placement="top" tooltip="Remove">
-            <i class="icn-sm icn-remove-token"></i>
-          </div>
-
-          <!--<div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"-->
-          <!--tooltip-placement="top" tooltip="Send Alert">-->
-          <!--<i class="icn-sm icn-send-alert"></i>-->
-          <!--</div>-->
-
-          <!--<div class="btn btn-default btn-spec-report pull-left has-tooltip" ng-click="specReport()"-->
-          <!--tooltip-placement="top" tooltip="Spec. Report">-->
-          <!--<i class="icn-sm icn-spec-report"></i>-->
-          <!--</div>-->
-
-          <div class="more pull-left dropdown" ng-if="agent.online">
+          <div class="more pull-right dropdown" ng-if="agent.online">
 
             <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
                aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">
@@ -225,10 +183,42 @@
               <!--<li><a tabindex="-1" href="javascript:void(0)" ng-click="transferFile()">Transfer File</a></li>-->
               <li><a tabindex="-1" href="javascript:void(0)" ng-click="restart()">Restart</a></li>
               <li><a tabindex="-1" href="javascript:void(0)" ng-click="shutdown()">Shutdown</a></li>
-              <li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()"
-                     ng-show="PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')">
+              <li><a tabindex="-1" href="javascript:void(0)" ng-click="remove()">
                 Remove</a></li>
             </ul>
+          </div>
+
+          <div class="pull-right" ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
+            <div class="btn btn-default pull-left has-tooltip"
+                 ng-if="(agent.type !== 'workstation') && agent.online"
+                 ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
+              <i class="icn-sm icn-remote-access"></i>
+            </div>
+
+            <div class="btn btn-default pull-left has-tooltip"
+                 ng-if="(agent.type === 'workstation') && agent.online"
+                 tooltip-placement="top" tooltip="Remote Access"
+                 dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+              <i class="icn-sm icn-remote-access"></i>
+            </div>
+
+            <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+
+              <li ng-click="remoteAccess('CSS')">
+                <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+              </li>
+
+              <li ng-click="remoteAccess('RDP')">
+                <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="btn btn-default has-tooltip pull-right" ng-click="remove()"
+               ng-if="!agent.online && PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
+               tooltip-placement="top" tooltip="Remove">
+            <i class="icn-sm icn-remove-token"></i>
           </div>
 
         </div>

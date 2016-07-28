@@ -6,7 +6,6 @@
 }
 .opened-ticket-list .ticket-post-update-wrapper {
   padding-bottom: 30px;
-  margin-bottom: 400px;
 }
 .ticket-post-update-wrapper > .btn{
     position: absolute;
@@ -31,12 +30,6 @@
 
 .nav-ticket-add{
     margin-top: 22px;
-}
-
-.add-expense-btn {
-  /*margin-right: 20px;*/
-  /*margin-top: 7px !important;*/
-  /*float: right;*/
 }
 
 .ticket-add .qt-table{

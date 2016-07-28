@@ -1,0 +1,131 @@
+.left-panel {
+  display: flex;
+
+  height: 100%;
+
+  flex-flow: row wrap;
+  -ms-align-content: flex-start;
+      align-content: flex-start;
+}
+.left-panel-head {
+  width: 100%;
+  height: 78px;
+
+  background-color: #30bef1;
+}
+.left-panel__category {
+  display: flex;
+
+  width: 100%;
+  height: 50px;
+
+  cursor: pointer;
+
+  color: #ffffff;
+}
+.left-panel__category:hover {
+  background-color: rgba(31, 42, 55, 0.5);
+}
+.left-panel .active {
+  background-color: #182734;
+}
+.left-panel-full {
+  position: fixed;
+  top: 0;
+  left: 76px;
+
+  display: flex;
+
+  width: 240px;
+  height: 100%;
+
+  background-color: #1f2a37;
+
+  flex-flow: row wrap;
+  transition: .2s ease width .0s;
+
+}
+@media only screen and (max-width: 1024px) {
+  .left-panel-full {
+    -webkit-box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
+       -moz-box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
+            box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
+  }
+}
+.left-panel-full.ng-hide {
+  width: 0 !important;
+}
+.left-panel-full.ng-hide-add { 
+  width: 240px;
+ }
+.left-panel-full.ng-hide-remove { 
+  width: 0;
+ }
+.center-category__category {
+  position: relative;
+
+  display: flex;
+
+  width: 100%;
+  height: 50px;
+  padding-left: 55px;
+
+  cursor: pointer;
+
+  color: #94a4b8;
+
+  align-items: center;
+  justify-content: flex-start;
+}
+.center-category__category:hover {
+  color: #ffffff;
+}
+.left-panel-full__head {
+  display: -webkit-flex;
+  display:    -moz-flex;
+  display:     -ms-flex;
+  display:      -o-flex;
+  display:         flex;
+
+  width: 100%;
+  height: 78px;
+
+  text-align: center;
+
+  color: #ffffff;
+
+  align-items: center;
+  justify-content: center;
+}
+.center-category {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+
+  align-content: flex-start;
+  flex-flow: row wrap;
+}
+.left-panel-full__head--header {
+  font-size: 2.2em;
+}
+.center-category .active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+.icon-pos {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+}
+.left-panel-full-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+.badge-pos {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+
+  background-color: #e53935;
+}

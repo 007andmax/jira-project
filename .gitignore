@@ -7,3 +7,5 @@ bower_components
 .sublime-workspace
 index.html
 .idea
+terminal.glue
+dist.*

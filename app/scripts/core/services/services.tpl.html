@@ -11,7 +11,7 @@
 
     <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
 
-    <div class="add-service-btn-wrapper">
+    <div class="add-service-btn-wrapper" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
       <div class="btn btn-success has-tooltip" ng-show="!showCreateService"
            ng-click="showCreateServiceForm()"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
@@ -35,7 +35,7 @@
       <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;" ng-click="toggleServices()"></div>
 
       <div class="col-1">{{ company.name }}</div>
-      <div class="col-2" dropdown is-open="addServiceDropdown.isOpen">
+      <div class="col-2" dropdown is-open="addServiceDropdown.isOpen" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
         {{ services.length || 0 }} services
         <span class="control-indicator pull-left plus-circle" style="z-index: 5" dropdown-toggle ng-click="initAddServiceDropdown()"
               tooltip="Add Services" tooltip-placement="top"></span>

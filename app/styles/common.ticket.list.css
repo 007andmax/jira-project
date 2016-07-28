@@ -72,7 +72,7 @@
   background-color: #f1f5fa;
 }
 .ticket.active{
-  background-color: #e7ecf2;
+  border: 2px solid #08a8dd !important;
 }
 .ticket.selected{
   background-color: #e2f1fd;
@@ -146,11 +146,11 @@
 }
 
 .ticket.one-action:hover .ticket-meta .ticket-title p.ellipsis{
-  width: calc(100% - 32px);
+  width: calc(100% - 50px);
 }
 
 .ticket.two-actions:hover .ticket-meta .ticket-title p.ellipsis{
-  width: calc(100% - 70px);
+  width: calc(100% - 100px);
 }
 
 .ticket.three-actions:hover .ticket-meta .ticket-title p.ellipsis{
@@ -269,10 +269,6 @@
 
 .ticket .ticket-meta .ticket-labels .label-primary {
   font-weight: normal;
-}
-
-.ticket .ticket-meta .ticket-labels span:last-child{
-  margin-right: 0px;
 }
 
 .ticket .ticket-meta .ticket-labels .ticket-unread-updates{

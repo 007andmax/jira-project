@@ -396,7 +396,11 @@
         if (callback) {
           callback(resp.data, saveData);
         }
-      })
+      }, function (resp) {
+        if (callback) {
+          callback(resp.data, saveData);
+        }
+      });
 
     }
 
@@ -640,6 +644,30 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getPermissions(callback) {
+      var future = $http.get('/settings/companyProfile/permissions');
+      Utils.handleCallback(future, callback);
+    }
+
+    function savePermissions(permissions, callback) {
+      $http.post('/settings/companyProfile/permissions', permissions);
+    }
+
+    function getTechRoles(callback) {
+      var future = $http.get('/settings/companyProfile/getRoleNames');
+      Utils.handleCallback(future, callback);
+    }
+
+    function getEmailAlias(callback) {
+      var future = $http.get('/settings/companyProfile/emailAlias');
+      Utils.handleCallback(future, callback);
+    }
+
+    function saveEmailAlias(emailAlias, callback) {
+      var future = $http.post('/settings/companyProfile/emailAlias', { emailAlias: emailAlias });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -672,7 +700,12 @@
       getCompanyContacts: getCompanyContacts,
       saveAllowingCreateCustomTags: saveAllowingCreateCustomTags,
       getCompanySMTPSettings: getCompanySMTPSettings,
-      checkSMTPLoginUnique: checkSMTPLoginUnique
+      checkSMTPLoginUnique: checkSMTPLoginUnique,
+      getPermissions: getPermissions,
+      savePermissions: savePermissions,
+      getTechRoles: getTechRoles,
+      getEmailAlias: getEmailAlias,
+      saveEmailAlias: saveEmailAlias
     }
 
   }]);

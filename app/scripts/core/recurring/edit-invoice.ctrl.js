@@ -104,6 +104,12 @@
 
         }
 
+        $scope.$watch('currentUser.permissions', function (permissions) {
+          if (permissions && !$scope.PermissionsService.isAllowed('CREATE_INVOICE')) {
+            $scope.toogleEditForm();
+          }
+        });
+
         $scope.setDisabledSaveInvoice = function (value) {
           $scope.disabledSaveInvoice = !!value;
         };

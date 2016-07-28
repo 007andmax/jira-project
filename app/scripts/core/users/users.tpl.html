@@ -30,6 +30,7 @@
             </h3>
 
             <a href="javascript:void(0)" class="hit-area pull-left has-tooltip"
+               ng-if="PermissionsService.isAllowed('EDIT_USERS')"
                tooltip-placement="top" tooltip="Edit user" ng-click="setEditUserId(user.id); formToCenter()">
               <i class="icn-sm icn-edit"></i>
             </a>
@@ -148,7 +149,7 @@
 
                 </li>
 
-                <li ng-if="PermissionsService.isAllowed('clients/users', currentUser.role, 'd')">
+                <li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')">
                   <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUsers()">
                     Archive this Contact
                   </a>

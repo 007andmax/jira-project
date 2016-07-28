@@ -12,9 +12,13 @@
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats,
                 SharedStateService, $stateParams, $state, VendorsService, $timeout, PermissionsService) {
 
+        if ($stateParams.companyId && !PermissionsService.isAllowed('VIEW_COMPANIES')) {
+          $state.go('tickets');
+        }
+
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        if($stateParams.companyId){
+        if ($stateParams.companyId) {
           var company = CompaniesService.getOneById($stateParams.companyId);
           globalSearch.openedItemName = 'Edit ' + company.name;
         } else {
@@ -34,6 +38,8 @@
         $scope.selectedServices = {};
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
+
+
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {
             $timeout(function () {
@@ -47,6 +53,7 @@
             }, 0)
           }
         });
+
         AddressesService.getLocales(true, function (response) {
           $scope.timeZones = response;
         });

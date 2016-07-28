@@ -475,9 +475,9 @@
         changeTicket('assign', ticketId, userId, callback);
       }
 
-      function changeStatus(ticketId, status, callback) {
+      function changeStatus(ticketId, status, callback, recipientsIds) {
         if (!ticketId || !status) throw 'ticketId and status is required arguments!';
-        changeTicket('status', ticketId, status.toUpperCase(), callback);
+        changeTicket('status', ticketId, status.toUpperCase(), callback, recipientsIds);
       }
 
       function markAsSpam(ticketId, callback) {
@@ -500,7 +500,7 @@
         changeTicket('trash', ticketId, !!value, callback);
       }
 
-      function changeTicket(action, id, value, callback) {
+      function changeTicket(action, id, value, callback, recipientsIds) {
         var url, data = { value: value };
 
         if (Object.prototype.toString.call(id) === '[object Array]') {
@@ -508,6 +508,10 @@
           data.ids = id;
         } else {
           url = '/v2/tickets/' + id + '/' + action;
+        }
+
+        if (value === 'COMPLETED') {
+          data.recipientsIds = recipientsIds;
         }
 
         var future = $http.put(url, data);
@@ -930,13 +934,9 @@
           if ((ticket.priorityLevel != 'HIGH' || ticket.status == 'COMPLETED')) {
             return false;
           }
-
-          if ($rootScope.currentUser.role !== 'ADMIN' && !ticket.sharedToCurrentUserAt) {
-            return false;
-          }
         }
 
-        if ((params.filter == 'ALL' || params.filter == 'UNASSIGNED') && (ticket.assignedUser && ticket.assignedUser.id)) {
+        if (params.filter == 'UNASSIGNED' && (ticket.assignedUser && ticket.assignedUser.id)) {
           return false;
         }
 
@@ -954,8 +954,7 @@
             return false;
           }
 
-          if ($rootScope.currentUser.role !== 'ADMIN' && $rootScope.currentUser.role !== 'SUPER_TECH_ADMIN'
-            && (!ticket.assignedUser || ticket.assignedUser.id != $rootScope.currentUser.id)) {
+          if (!$rootScope.currentUser.isOwner && (!ticket.assignedUser || ticket.assignedUser.id != $rootScope.currentUser.id)) {
             return false;
           }
         }

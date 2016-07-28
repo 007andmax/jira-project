@@ -45,14 +45,14 @@
               scope.isLeftPanelOpen = true;
             }, 300);
 
-            element.addClass('opened');
+            // element.addClass('opened');
             element.css("box-shadow", "none");
             element.find('.qt-sidebar-scroll').nanoScroller();
           }
 
           function closeLeftPanel(){
             scope.isLeftPanelOpen = false;
-            element.removeClass('opened');
+            // element.removeClass('opened');
           }
 
         }

@@ -487,6 +487,16 @@
         return errorMessage;
       }
 
+      function getActivityHistory(callback) {
+        var future = $http.get('/settings/userProfile/device');
+        Utils.handleCallback(future, callback);
+      }
+
+      function closeSessions(ids, callback) {
+        var future = $http.post('/settings/userProfile/device', ids);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -507,7 +517,9 @@
         saveForUserProfile: saveForUserProfile,
         deleteOrArchiveUser: deleteOrArchiveUser,
         isEmailUnique: isEmailUnique,
-        deleteAvatar: deleteAvatar
+        deleteAvatar: deleteAvatar,
+        getActivityHistory: getActivityHistory,
+        closeSessions: closeSessions
       }
 
     }]);

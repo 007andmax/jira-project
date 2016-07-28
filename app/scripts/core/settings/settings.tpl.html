@@ -1,4 +1,4 @@
-<div class="settings-content" control-margin-content>
+<div class="settings-content" >
 
   <div class="settings-sidebar">
     <ul class="list-unstyled">
@@ -19,21 +19,21 @@
             <li navigate-to="#myProfileContactInfo"><a href="javascript:void(0)">Contact Info</a></li>
             <li navigate-to="#myProfileMiscInfo"><a href="javascript:void(0)">Misc. Info</a></li>
             <li navigate-to="#myProfileEmailNotifications"><a href="javascript:void(0)">Email Notifications</a></li>
+            <li navigate-to="#myProfileTrackingDevices"><a href="javascript:void(0)">Activity History</a></li>
 
           </ul>
         </div>
       </li>
 
       <li class="nav-deactivate" ui-sref="settings.techUsers"
-          ng-show="PermissionsService.isAllowed('settings', currentUser.role, 'tech_users') && currentUser.accountType !== 'ROOT'">
+          ng-if="currentUser.accountType !== 'ROOT' && currentUser.isOwner">
         <a href="javascript:void(0)" ng-class="{'active': settingMode === '/techUsers'}">
           <i class="icn-sm icn-cusers pull-left"></i>
           Tech Users
         </a>
       </li>
 
-      <li class="nav-company-info" ui-sref="settings.companyInfo"
-          ng-show="PermissionsService.isAllowed('settings', currentUser.role, 'company_info')">
+      <li class="nav-company-info" ui-sref="settings.companyInfo" ng-if="currentUser.isOwner">
 
         <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/companyInfo'}">
           <i class="icn-sm icn-settings-company-info pull-left"></i>
@@ -45,7 +45,7 @@
               navigation-bar="#navigation-content-wrapper">
 
             <li navigate-to="#companyInfoBasicInfo"><a href="javascript:void(0)">Basic Info</a></li>
-            <li navigate-to="#smtpSettings"><a href="javascript:void(0)">SMTP Info</a></li>
+            <li navigate-to="#smtpSettings"><a href="javascript:void(0)">Email Settings</a></li>
             <!--<li navigate-to="#companyInfoBusinessTime"><a href="javascript:void(0)">Business Days &amp; Hours</a></li>-->
             <li navigate-to="#companyInfoContactInfo"><a href="javascript:void(0)">Contact Info</a></li>
             <li navigate-to="#companyInfoServices"><a href="javascript:void(0)">Services Info</a></li>
@@ -63,8 +63,14 @@
         </div>
       </li>
 
-      <li class="nav-email-templates" ui-sref="settings.emailTemplates"
-          ng-show="PermissionsService.isAllowed('settings', currentUser.role, 'email_templates')">
+      <li ng-if="currentUser.isOwner">
+        <a ui-sref="settings.permissionsManagement">
+          <i class="icn-sm icn-permissions-key pull-left" style="margin-right: 7px;"></i>
+          Permissions Management
+        </a>
+      </li>
+
+      <li class="nav-email-templates" ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner">
 
         <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/emailTemplates'}">
           <i class="icn-sm icn-settings-email-templates pull-left"></i>
@@ -86,7 +92,7 @@
         </div>
       </li>
 
-      <li class="nav-deactivate" ng-show="PermissionsService.isAllowed('settings', currentUser.role, 'deactivate_account')">
+      <li class="nav-deactivate">
         <a href="javascript:void(0)" deactivate-button>
           <i class="icn-sm icn-settings-deactivate pull-left"></i>
           Deactivate Account

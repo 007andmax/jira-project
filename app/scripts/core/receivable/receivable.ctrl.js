@@ -4,11 +4,12 @@
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivableCtrl',
     ['$scope', '$state', '$stateParams', 'ReceivableService', 'CompaniesService',
-      'quicktech.common.services.SharedStateService',
-      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, SharedStateService) {
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
+      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, SharedStateService, PermissionsService) {
 
         var availableMods = ['group-by-company', 'list'];
 
+        $scope.PermissionsService = PermissionsService;
         $scope.mode = availableMods[0];
         $scope.orderInvoices = {
           field: 'number',

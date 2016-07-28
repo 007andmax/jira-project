@@ -3,13 +3,12 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.core.header.ticketsBulkCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
+    ['$scope', 'quicktech.common.services.SharedStateService',
       '$timeout', 'UsersService', 'CompaniesService', 'TicketsService', '$rootScope',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, SharedStateService, PermissionsService, $timeout, UsersService,
+      function ($scope, SharedStateService, $timeout, UsersService,
                 CompaniesService, TicketsService, $rootScope, UserConfirmationsService, UserNotificationService) {
 
-        $scope.PermissionsService = PermissionsService;
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
         $scope.ticketStatus = {
           IN_PROGRESS: 'IN PROGRESS',
@@ -36,24 +35,24 @@
         };
 
         $scope.moveIntoSpam = function () {
-          var confirmMesage = 'Do you want to ' + ($scope.currentUser.role === 'USER' ? 'report' : 'mark') + ' ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets as spam?',
+          var confirmMesage = 'Do you want to ' + ($scope.currentUser.isOwner ? 'mark' : 'report') + ' ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets as spam?',
             confirmButton = 'Spam';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
 
-            if ($scope.currentUser.role === "USER") {
+            if ($scope.currentUser.isOwner) {
+
+              TicketsService.markAsSpam($scope.ticketsSharedState.checkedTicketsIds, function () {
+                UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets have been marked as spam', true);
+                $scope.uncheckAllTickets();
+              });
+            } else {
 
               TicketsService.reportAsSpam($scope.ticketsSharedState.checkedTicketsIds, function () {
                 UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets have been reported as spam', true);
                 $scope.uncheckAllTickets();
               });
 
-            } else {
-
-              TicketsService.markAsSpam($scope.ticketsSharedState.checkedTicketsIds, function () {
-                UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets have been marked as spam', true);
-                $scope.uncheckAllTickets();
-              });
             }
           });
         };
@@ -86,7 +85,7 @@
 
         $scope.$on('uncheckAllTickets', function () {
           $scope.ticketsSharedState.checkedTicketsIds = [];
-          $scope.ticketsHeaderState.selectedTickets = [];
+          $scope.ticketsSharedState.selectedTickets = [];
         });
 
       }]);

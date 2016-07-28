@@ -9,12 +9,13 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
                 TicketsPermissionsService, SharedStateService, Utils, PermissionsService) {
 
-        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'preview'],
+        var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.selectedTickets = {};
         $scope.TicketsPermissionsService = TicketsPermissionsService;
+        $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getAllUsers();
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
         $scope.attachmentTypePattern = /[0-9a-z]+$/i;
@@ -38,26 +39,11 @@
           'text/plain': 'txt',
           'text/csv': 'cvs'
         };
-        $scope.ticketStatus = {
-          IN_PROGRESS: 'IN PROGRESS',
-          ON_HOLD: 'ON HOLD',
-          COMPLETED: 'CLOSED'
-        };
         $scope.attachmentImageClass = {
           'image/jpg': 'viewable',
           'archive/zip': 'zip',
           'image/bmp': 'not-viewable'
         };
-
-        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'open_tickets')) {
-          availableTypes.push('open');
-        }
-        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'closed_tickets')) {
-          availableTypes.push('closed');
-        }
-        if (PermissionsService.isAllowed('left_panel', $scope.currentUser.role, 'trash_tickets')) {
-          availableTypes.push('trash');
-        }
 
         $scope.$watch(function () {
           return $stateParams;
@@ -96,6 +82,26 @@
           $scope.selectedTickets = {};
           globalSearch.selectedItemsCount = undefined;
         });
+
+        $scope.userReadable = function (text) {
+          if (!text) {
+            return '';
+          }
+
+          var words = text.split('_'),
+            result = '';
+
+          for (var i = 0, len = words.length; i < len; i++) {
+            var word = words[i];
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+
+            if (i !== len - 1) {
+              result += ' ';
+            }
+          }
+
+          return result;
+        };
 
         function changeSelectedTickets(id, status) {
 

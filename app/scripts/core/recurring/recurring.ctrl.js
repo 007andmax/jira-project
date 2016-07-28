@@ -4,11 +4,12 @@
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.recurringCtrl',
     ['$scope', 'RecurringService', 'CompaniesService', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.SharedStateService',
-      function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService) {
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
+      function ($scope, RecurringService, CompaniesService, UserNotificationService, SharedStateService, PermissionsService) {
 
         var headerSharedState = SharedStateService.getSharedState('recurringHeader');
 
+        $scope.PermissionsService = PermissionsService;
         $scope.loadingInProgress = true;
         $scope.forceCreating = [];
         $scope.editInvoiceId = '';

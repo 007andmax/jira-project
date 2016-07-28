@@ -1,39 +1,39 @@
 <div>
-  <div class="billable-head clearfix">
+  <!--<div class="billable-head clearfix">-->
 
-    <div class="chart-wrapper">
-      <div class="heading"><strong>Billed Amount</strong>
-        <span>Last 30 Days</span> <span class="dot-sep"></span>
-        <span>{{ billedAmountLast30Days | currency:'$' :2 }}</span></div>
+    <!--<div class="chart-wrapper">-->
+      <!--<div class="heading"><strong>Billed Amount</strong>-->
+        <!--<span>Last 30 Days</span> <span class="dot-sep"></span>-->
+        <!--<span>{{ billedAmountLast30Days | currency:'$' :2 }}</span></div>-->
 
-      <div billable-chart ng-model="billableChartData"></div>
+      <!--<div billable-chart ng-model="billableChartData"></div>-->
 
-    </div>
+    <!--</div>-->
 
-    <div class="all-time-stats">
+    <!--<div class="all-time-stats">-->
 
-      <div class="heading"><strong>BILLED AMOUNT <span>ALL TIME</span></strong>
-        <span class="amount">{{ totalBilledAmount.value | currency:'$' :2 }}</span>
-      </div>
+      <!--<div class="heading"><strong>BILLED AMOUNT <span>ALL TIME</span></strong>-->
+        <!--<span class="amount">{{ totalBilledAmount.value | currency:'$' :2 }}</span>-->
+      <!--</div>-->
 
-      <div class="total-billable">
-        <div class="pie-chart" pie-chart pie-chart-value="[totalbillables, billedAmountLast30Days]"
-             pie-chart-size="40" pie-chart-color="['#b7daf7', '#e53935']"></div>
-        <div class="pull-left">
-          <strong>TOTAL BILLABLES</strong>
-          <strong class="amount">{{ totalbillables | currency:'$' :2 }}</strong>
-        </div>
-      </div>
+      <!--<div class="total-billable">-->
+        <!--<div class="pie-chart" pie-chart pie-chart-value="[totalbillables, billedAmountLast30Days]"-->
+             <!--pie-chart-size="40" pie-chart-color="['#b7daf7', '#e53935']"></div>-->
+        <!--<div class="pull-left">-->
+          <!--<strong>TOTAL BILLABLES</strong>-->
+          <!--<strong class="amount">{{ totalbillables | currency:'$' :2 }}</strong>-->
+        <!--</div>-->
+      <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
-  </div>
+  <!--</div>-->
 
-  <div class="billable-content">
+  <div class="billable-content" style="margin-top: 20px;">
     <div class="tabs-container" style="margin-top: 23px">
       <div class="payment-receive-fixed" fixed-block-top>
 
-       
+
 
         <ul class="nav nav-qt" role="tablist">
 
@@ -44,16 +44,15 @@
           <li role="presentation">
             <a ui-sref="accounting.recurring">Recurring Orders</a>
           </li>
-           <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
-             custom-disabled="{{ !countTicket }}"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
-             modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
-             modal-window-class="invoice-modal-not-background"
-             mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-             mw-controller="quicktech.core.billable.createInvoiceCtrl">
-          <i class="icn-sm icn-create-invoice"></i>
-        </div>
-
+          <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
+               custom-disabled="{{ !countTicket }}" ng-if="PermissionsService.isAllowed('CREATE_INVOICE')"
+               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
+               modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+               modal-window-class="invoice-modal-not-background"
+               mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+               mw-controller="quicktech.core.billable.createInvoiceCtrl">
+            <i class="icn-sm icn-create-invoice"></i>
+          </div>
         </ul>
       </div>
 
@@ -78,7 +77,7 @@
                 <i class="icn-sm icn-locked"></i>
               </a>
 
-              <label ng-hide="billableCompany.lockType !== 'NONE'" class="control checkbox pull-left"
+              <label ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')" class="control checkbox pull-left"
                      stop-propagation="click" style="z-index: 2;">
                 <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
                        ng-click="changeCompanyCheckbox(billableCompany.companyId)">
@@ -112,7 +111,7 @@
                     </a>
 
                     <label class="control checkbox pull-left"
-                           ng-hide="ticket.lockedBy" stop-propagation="click">
+                           ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')" stop-propagation="click">
                       <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
                              ng-change="changeTicketCheckbox(billableCompany.companyId)">
                       <span class="control-indicator"></span>

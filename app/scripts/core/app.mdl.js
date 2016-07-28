@@ -78,7 +78,11 @@
         controller: 'quicktech.core.companies.editCompanyCtrl'
       }))
       .state('companyProfile', waitForServices({
-        url: '/clients/companyProfile/:companyId/:tabName',
+        url: '/clients/companyProfile/:companyId?tabName',
+        params: {
+          tabName: ''
+        },
+        reloadOnSearch: false,
         templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
@@ -139,7 +143,6 @@
         controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService',
           function ($scope, $state, PermissionsService) {
             $scope.PermissionsService = PermissionsService;
-
             $scope.$watch(function () {
               return $state.current.url;
             }, function (url) {
@@ -162,6 +165,11 @@
         url: '/companyInfo',
         templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',
         controller: 'quicktech.core.settings.companyInfoCtrl'
+      }))
+      .state('settings.permissionsManagement', waitForServices({
+        url: '/permissionsManagement',
+        templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html',
+        controller: 'quicktech.core.settings.permissionsManagement'
       }))
       .state('settings.emailTemplates', waitForServices({
         url: '/emailTemplates',
@@ -217,9 +225,9 @@
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
           var globalSearch = SharedStateService.getSharedState('globalSearch');
+          $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
           if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
-
             if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
               return;
             }

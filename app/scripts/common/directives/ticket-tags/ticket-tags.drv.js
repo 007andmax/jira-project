@@ -15,7 +15,6 @@
           },
           link: function ($scope, $element) {
             $scope.currentCompany = CompaniesService.getCurrentCompany();
-            $scope.currentUser = UsersService.getCurrentUser();
             $scope.tagColors = TagsService.getColors();
 
             if (!$scope.readonlyTags) {
@@ -52,7 +51,7 @@
 
               $scope.addTag = function (value) {
                 if (typeof value === 'string') {
-                  if (!$scope.currentCompany.allowCreateTags && $scope.currentUser.role === 'USER') {
+                  if (!$scope.currentCompany.allowCreateTags) {
                     return;
                   }
 
