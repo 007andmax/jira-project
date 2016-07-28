@@ -5,9 +5,10 @@
 }
 .settings-sidebar {
   position: fixed;
-  width: 180px;
+  width: 200px;
   height: 300px;
   padding-top: 35px;
+  padding-left: 20px;
 }
 .settings-sidebar > ul > li {
   padding: 5px 0;

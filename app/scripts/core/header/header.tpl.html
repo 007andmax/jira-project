@@ -1,15 +1,8 @@
-<nav class="navbar navbar-default topNavbar">
+<nav class="topNavbar row">
   <div class="topNavbar-content" ng-controller="quicktech.core.header.headerCtrl">
-
-    <div class="topNavbar-logo pull-left" style="position: fixed">
-      <a href="javascript:void(0)" class="hit-area ha-36-36">
-        <i class="icn-lg logo"></i>
-      </a>
-    </div>
-
-    <div class="topNavbarLeft pull-left">
-
-      <div class="pull-left" ng-if="goBack.isEnabled">
+  
+  <div class="col-xs-1 topNavbarLeft">
+    <div class="" ng-if="goBack.isEnabled">
         <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
            style="margin: 11px 8px 0 0;" ng-click="goBack.func()"
            tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{ goBack.tooltip }}">
@@ -17,25 +10,24 @@
         </a>
       </div>
 
-      <p class="pull-left" style="white-space: nowrap;"
-         ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
-        <strong>{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}</strong>
-        <span class="text-muted" ng-if="count = getCurrentCount()">
-          &nbsp;{{ count }}
-        </span>
+    <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
+    <strong>{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}</strong>
+    <span class="text-muted" ng-if="count = getCurrentCount()">
+    &nbsp;{{ count }} </span>
       </p>
 
-      <p class="pull-left" style="white-space: nowrap;" ng-if="globalSearch.selectedItemsCount">
+      <p ng-if="globalSearch.selectedItemsCount">
         <strong>{{ globalSearch.selectedItemsCount }}</strong>&nbsp;
         <span class="text-muted">Selected</span>
       </p>
+  </div>
+  <div class="col-xs-3">
+    <div class="topNavbarLeft-Left" ng-if="isShowBulkAction()"
+         ng-controller="quicktech.core.header.ticketsBulkCtrl">
 
-      <div class="topNavbarLeft-Left pull-left" ng-if="isShowBulkAction()"
-           ng-controller="quicktech.core.header.ticketsBulkCtrl">
+        <div class="topNavbar-filter ">
 
-        <div class="topNavbar-filter pull-right">
-
-          <div class="dropdown more pull-right"
+          <div class="dropdown more"
                ng-if="TicketsPermissionsService.isActionVisible('change_status,send_to_spam,send_to_trash,restore', ticketsSharedState.selectedTickets)">
 
             <a class="hit-area ha-22-38 has-tooltip" tooltip-placement="bottom" tooltip="More"
@@ -87,7 +79,7 @@
 
           </div>
 
-          <div class="dropdown pull-right"
+          <div class="dropdown "
                ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
 
             <div class="btn btn-default has-tooltip"
@@ -103,7 +95,7 @@
                  aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
           </div>
 
-          <div class="dropdown pull-right"
+          <div class="dropdown "
                ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
 
             <div class="btn btn-default has-tooltip"
@@ -138,7 +130,7 @@
             </ul>
           </div>
 
-          <div class="pull-right">
+          <div class="">
             <div ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketsSharedState.selectedTickets)"
                  class="btn btn-default has-tooltip"
                  tooltip-placement="bottom" tooltip="Delete Forever"
@@ -152,12 +144,14 @@
       <div ng-if="!isShowBulkAction()" class="searchField">
         <div ng-include="'/html/scripts/core/header/global-search/global-search.tpl.html'"></div>
       </div>
-
-      <div class="topNavbarLeft-Right pull-right">
-
-        <div class="topNavbar-filter pull-left"></div>
-
-        <div class="topNavbar-create pull-right">
+  </div>
+  <div class="col-xs-3">
+    <a href="javascript:void(0)" class="ha-36-36">
+        <i class="icn-lg logo"></i>
+      </a>
+  </div>
+  <div class="col-md-2 col-sm-1">
+    <div class="topNavbar-create">
           <div class="dropdown">
 
             <div class="btn btn-success has-tooltip" data-toggle="dropdown">
@@ -201,14 +195,15 @@
 
           </div>
         </div>
-
-      </div>
-
-    </div>
-
-    <div class="topNavbarRight pull-right">
-
-      <div dropdown>
+  </div>
+  <div class="col-xs-1 topNavbarRight">
+     <a ui-sref="settings" class="settings-href has-tooltip"
+        tooltip="Settings" tooltip-placement="bottom" append-to-body="true">
+       <i class="icn-sm icn-settings"></i>
+     </a>
+  </div>
+  <div class="col-xs-2 topNavbarRight">
+    <div dropdown>
         <div class="nickname-wrap" dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
              <!--ng-click="currentUser.online = !currentUser.online"></i>-->
@@ -229,13 +224,6 @@
          </li>
        </ul>
      </div>
-
-     <a ui-sref="settings" class="settings-href has-tooltip"
-        tooltip="Settings" tooltip-placement="bottom" append-to-body="true">
-       <i class="icn-sm icn-settings"></i>
-     </a>
-
-   </div>
-
- </div>
+  </div>
+  </div>
 </nav>
