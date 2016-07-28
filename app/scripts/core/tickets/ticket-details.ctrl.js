@@ -130,7 +130,7 @@
 
           $scope.changeTicketStatus = function (status) {
             TicketsService.changeStatus($scope.ticketDetails.id, status, function () {
-              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"', true);
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.userReadable(status) + '"', true);
             });
           };
 

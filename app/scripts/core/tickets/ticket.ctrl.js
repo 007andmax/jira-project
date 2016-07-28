@@ -33,7 +33,7 @@
 
         $scope.changeTicketStatus = function (status, dropdowns) {
           TicketsService.changeStatus($scope.ticket.id, status, function () {
-            UserNotificationService.show('The ticket “' + $scope.ticket.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"', true);
+            UserNotificationService.show('The ticket “' + $scope.ticket.number + '” status has been changed to "' + $scope.userReadable(status) + '"', true);
           });
           dropdowns[$scope.ticket.id]['status'] = false;
         };

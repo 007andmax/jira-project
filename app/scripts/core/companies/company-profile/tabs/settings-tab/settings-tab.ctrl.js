@@ -104,14 +104,15 @@
         };
 
         $scope.showPassword = function (array, index, id) {
+          var credential = getCredentialById(id);
           array[index] = !array[index];
 
           if (array[index]) {
             DevicesService.devicePasswordShown(id, function (resp) {
-              $scope.credentials[index].password = resp.password;
+              credential.password = resp.password;
             });
           } else {
-            $scope.credentials[index].password = undefined;
+            credential.password = undefined;
           }
         };
 
