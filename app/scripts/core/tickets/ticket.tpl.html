@@ -69,11 +69,11 @@
 
           <a href="javascript:void(0)" class="hit-area ha-22-16 has-tooltip" dropdown-toogle
              aria-haspopup="true" aria-expanded="false"
-             data-toggle="dropdown" tooltip-placement="top" tooltip="More">
+             dropdown-toggle tooltip-placement="top" tooltip="More">
             <i class="icn icn-sm icn-more"></i>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+          <ul class="dropdown-menu dropdown-menu-custom" role="menu" style="right: 0">
 
             <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticket)" ng-click="moveIntoSpam()">
               <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam'
