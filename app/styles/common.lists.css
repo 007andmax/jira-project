@@ -1013,15 +1013,9 @@ Devices tab
   top: 0;
   padding-top: 30px;
 }
-/*.sub-wrapper .qt-invoice-form-wrapper .qt-add-service{
-  width: calc(100% + 173px);
-}*/
-.qt-create-invoice{
-  position: relative;
-  background-color: #fff;
-  width: calc(100% + 150px);
-  right: -60px;
-  left: -86px;
+
+.qt-create-invoice {
+  min-height: 166px;
   margin-bottom: 25px;
   min-height: 166px;
   padding: 30px 96px 30px 86px;
