@@ -8,14 +8,12 @@
          ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
     <div class="pull-left shared-user-add">
-      <label class="control checkbox pull-left" style="width: 100%;">
-        <input type="checkbox" ng-model="ticketDetails.notifyAll" ng-change="toggleAllShared(ticketDetails.notifyAll)">
-        <span class="control-indicator"></span>
-        <span style="font-weight: bold;">Everyone</span>
-      </label>
+      <div>
+        <span ng-click="toggleAllShared(true)">Select Everyone</span> | <span ng-click="toggleAllShared(false)">Select none</span>
+      </div>
 
       <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList">
-        <input type="checkbox" ng-model="sharedUser.notify" ng-change="isAllSharedSelected(ticketSharedUsersList)">
+        <input type="checkbox" ng-model="sharedUser.notify">
         <span class="control-indicator"></span>
         {{ getUserName(sharedUser.user || sharedUser.contact) }}
       </label>

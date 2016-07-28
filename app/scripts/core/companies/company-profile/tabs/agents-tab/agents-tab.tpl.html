@@ -86,25 +86,31 @@
 
       <div class="col-6">
         <div class="list-actions pull-right">
+          <div class="pull-left" ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
+            <div class="btn btn-default pull-left has-tooltip"
+                 ng-if="(agent.type !== 'workstation') && agent.online"
+                 ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
+              <i class="icn-sm icn-remote-access"></i>
+            </div>
+            <div class="btn btn-default pull-left has-tooltip"
+                 ng-if="(agent.type === 'workstation') && agent.online"
+                 tooltip-placement="top" tooltip="Remote Access"
+                 dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+              <i class="icn-sm icn-remote-access"></i>
+            </div>
 
-          <div class="btn btn-default pull-left has-tooltip"
-               ng-if="(agent.type === 'workstation') && agent.online"
-               tooltip-placement="top" tooltip="Remote Access"
-               dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-            <i class="icn-sm icn-remote-access"></i>
+            <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+
+              <li ng-click="remoteAccess('CSS')">
+                <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
+              </li>
+
+              <li ng-click="remoteAccess('RDP')">
+                <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
+              </li>
+
+            </ul>
           </div>
-
-          <ul class="dropdown-menu dropdown-menu-custom" role="menu">
-
-            <li ng-click="remoteAccess('CSS')">
-              <a tabindex="-1" href="javascript:void(0)">CSS – Custom Share Screen</a>
-            </li>
-
-            <li ng-click="remoteAccess('RDP')">
-              <a tabindex="-1" href="javascript:void(0)">RDP – Remote desktop protocol</a>
-            </li>
-
-          </ul>
 
           <div class="btn btn-default pull-left has-tooltip" tooltip-placement="top" ng-if="agentDeprecated && agent.online"
                tooltip="Update Agent" ng-click="updateAgent()">
