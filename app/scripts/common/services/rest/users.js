@@ -497,6 +497,16 @@
         Utils.handleCallback(future, callback);
       }
 
+      function get2FA(callback) {
+        var future = $http.get('/users/twoFactorAuth');
+        Utils.handleCallback(future, callback);
+      }
+
+      function toggle2FA(isEnabled, callback) {
+        var future = $http.post('/users/twoFactorAuth?enable=' + isEnabled, {});
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -519,7 +529,9 @@
         isEmailUnique: isEmailUnique,
         deleteAvatar: deleteAvatar,
         getActivityHistory: getActivityHistory,
-        closeSessions: closeSessions
+        closeSessions: closeSessions,
+        toggle2FA: toggle2FA,
+        get2FA: get2FA
       }
 
     }]);

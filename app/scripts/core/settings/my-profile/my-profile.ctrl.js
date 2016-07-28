@@ -32,6 +32,10 @@
           })
         });
 
+        UsersService.get2FA(function (resp) {
+          $scope.enableTwoFactorAuthentication = resp;
+        });
+
         $scope.saveEmailNotifications = function (form) {
 
           if (form.$valid) {
@@ -114,6 +118,10 @@
 
         $scope.selectDevice = function (device) {
           $scope.selectedDevice = device;
+        };
+
+        $scope.toggle2FA = function (isEnabled) {
+          UsersService.toggle2FA(isEnabled);
         };
 
         //$scope.$watch('password.oldPassword', function () {

@@ -3,6 +3,15 @@
     <div class="col-md-12" style="padding: 0px">
       <h4>Activity History</h4>
     </div>
+
+    <div class="clearfix" style="margin-bottom: 15px;">
+      <label class="control checkbox pull-left">
+        <input type="checkbox" ng-model="enableTwoFactorAuthentication"
+               ng-change="toggle2FA(enableTwoFactorAuthentication)">
+        <span class="control-indicator"></span> two-factor authentication
+      </label>
+    </div>
+
     <div google-map latitude="selectedDevice.latitude" longitude="selectedDevice.longitude"
          title="{{ (selectedDevice.city ? selectedDevice.city + ', ' : '') + selectedDevice.country }}"></div>
     <div class="col-md-12 col-xs-12">
