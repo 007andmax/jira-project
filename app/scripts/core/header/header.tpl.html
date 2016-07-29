@@ -1,7 +1,7 @@
 <nav class="topNavbar row">
   <div class="topNavbar-content" ng-controller="quicktech.core.header.headerCtrl">
   
-  <div class="col-xs-1 topNavbarLeft">
+  <div class="col-md-1 col-sm-2 col-xs-2 topNavbarLeft">
     <div class="" ng-if="goBack.isEnabled">
         <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
            style="margin: 11px 8px 0 0;" ng-click="goBack.func()"
@@ -21,7 +21,7 @@
         <span class="text-muted">Selected</span>
       </p>
   </div>
-  <div class="col-xs-3">
+  <div class="col-sm-3 col-xs-3">
     <div class="topNavbarLeft-Left" ng-if="isShowBulkAction()"
          ng-controller="quicktech.core.header.ticketsBulkCtrl">
 
@@ -145,12 +145,12 @@
         <div ng-include="'/html/scripts/core/header/global-search/global-search.tpl.html'"></div>
       </div>
   </div>
-  <div class="col-xs-3">
+  <div class="col-sm-3 col-xs-3">
     <a href="javascript:void(0)" class="ha-36-36">
         <i class="icn-lg logo"></i>
       </a>
   </div>
-  <div class="col-md-2 col-sm-1">
+  <div class="col-md-2 col-sm-1 col-xs-1">
     <div class="topNavbar-create">
           <div class="dropdown">
 
@@ -196,13 +196,13 @@
           </div>
         </div>
   </div>
-  <div class="col-xs-1 topNavbarRight">
+  <div class="col-sm-1 col-xs-1 topNavbarRight">
      <a ui-sref="settings" class="settings-href has-tooltip"
         tooltip="Settings" tooltip-placement="bottom" append-to-body="true">
        <i class="icn-sm icn-settings"></i>
      </a>
   </div>
-  <div class="col-xs-2 topNavbarRight">
+  <div class="col-sm-2 col-xs-2 topNavbarRight">
     <div dropdown>
         <div class="nickname-wrap" dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
