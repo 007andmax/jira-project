@@ -19,7 +19,8 @@
           $scope.saveUpdateProduct = function (form) {
             if (form.$valid) {
 
-              var isProductItemChange = $scope.product.item.versionedId.id != $scope.editProduct.item.versionedId.id;
+              var editVersionedId = $scope.editProduct.item.versionedId;
+              var isProductItemChange = $scope.product.item.versionedId.id != editVersionedId.id;
               var isQuantityChange = $scope.product.quantity != $scope.editProduct.quantity;
               var isSerialNumberQuantity = $scope.product.serialNumber != $scope.editProduct.serialNumber;
               var isPriceChange = $scope.product.item.sale != $scope.editProduct.item.sale;
@@ -39,7 +40,7 @@
                   id: $scope.editProduct.id,
                   item: {
                     sale: $scope.editProduct.item.sale,
-                    versionedId: {id: $scope.editProduct.item.versionedId.id}
+                    versionedId: { id: editVersionedId.id, version: editVersionedId.version }
                   },
                   serialNumber: $scope.editProduct.serialNumber,
                   quantity: $scope.editProduct.quantity,

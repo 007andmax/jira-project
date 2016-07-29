@@ -17,7 +17,8 @@
           $scope.saveUpdateService = function (form) {
 
             if (form.$valid) {
-              var isServiceItemChange = $scope.service.item.versionedId.id != $scope.editService.item.versionedId.id;
+              var editVersionedId = $scope.editService.item.versionedId;
+              var isServiceItemChange = $scope.service.item.versionedId.id != editVersionedId.id;
               var isDescriptionChange = $scope.service.description != $scope.editService.description;
               var isQuantityChange = ($scope.service.quantity * 60) != $scope.editService.quantity;
               var isDateChange = checkDateOnDifferent(new Date($scope.service.date), new Date($scope.editService.date));
@@ -37,7 +38,7 @@
                 serviceExpense: {
 
                   id: $scope.editService.id,
-                  item: {versionedId: {id: $scope.editService.item.versionedId.id}},
+                  item: { versionedId: { id: editVersionedId.id, version: editVersionedId.version } },
                   description: $scope.editService.description,
                   quantity: $scope.editService.quantity / 60,
                   date: new Date(serviceDate.getFullYear(), serviceDate.getMonth(), serviceDate.getDate())
