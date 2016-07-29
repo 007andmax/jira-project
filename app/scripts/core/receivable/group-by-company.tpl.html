@@ -16,7 +16,7 @@
           <span class="control-indicator"></span>
         </label>
 
-        <div class="checkbox-caption">{{ company.name }}</div>
+        <div class="checkbox-caption bold">{{ company.name }}</div>
         <span class="label label-light">{{ receivableInvoicesData.companies[company.id].length }}</span>
 
         <i class="priority-dot high" ng-show="showIndicator"></i>
@@ -24,7 +24,7 @@
       </div>
 
       <div class="col-2" ng-click="toggleReceivableInvoices()">
-        <div class="billable-amount">{{ totalSum.companies[company.id] | currency: '$': 2 }}</div>
+        <div class="billable-amount bold">{{ totalSum.companies[company.id] | currency: '$': 2 }}</div>
       </div>
 
       <div class="sub-wrapper" ets-slider>
@@ -110,7 +110,7 @@
                                              loading="sending[invoice.id]"></button-with-loading-indicator>
             </div>
 
-            <div class="col-5">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
+            <div class="col-5 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
             <div class="col-6 group-btns">
               <i class="icn-sm icn-remove-token hide"></i>
               <i class="icn-sm icn-delete hide" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"></i>
