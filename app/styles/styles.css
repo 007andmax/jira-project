@@ -774,7 +774,7 @@ hr {
   float: left;
   width: calc(100% - 277px);
   padding: 0 30px 30px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 .right-panel-closed .company-profile-content {
   float: left;
