@@ -11,6 +11,9 @@
         },
         'CHANGE_STATUS': isUpdateAllowed,
         'CHANGE_PRIORITY': isTicketOpen,
+        'LINK_AGENT': function (ticket, companyId) {
+          return isTicketOpen(ticket) && ticket.company.id === companyId;
+        },
         'SEND_TO_SPAM': isTicketOpen,
         'SEND_TO_TRASH': function (ticket) {
           return !isSpamOrTrash(ticket) && !isBillable(ticket);

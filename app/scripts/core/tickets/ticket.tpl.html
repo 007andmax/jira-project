@@ -64,8 +64,7 @@
 
         </li>
 
-        <li class="pull-left" dropdown
-            ng-if="TicketsPermissionsService.isActionVisible('send_to_spam,send_to_trash', ticket)">
+        <li class="pull-left" dropdown>
 
           <a href="javascript:void(0)" class="hit-area ha-22-16 has-tooltip" dropdown-toogle
              aria-haspopup="true" aria-expanded="false"
@@ -74,6 +73,17 @@
           </a>
 
           <ul class="dropdown-menu dropdown-menu-custom" role="menu" style="right: 0">
+            <li class="dropdown-submenu left-align dropdown linked-agent-dropdown">
+              <a tabindex="-1" href="javascript:void(0)" data-toggle="dropdown">
+                {{ ticket.agent && ticket.agent.deviceId ? 'Relink with another' : 'Link with' }} Agent
+              </a>
+              <ul class="dropdown-submenu-wrapper dropdown-menu">
+                <li ng-repeat="agent in agentList" ng-click="linkAgent(ticket.id, agent.id)"
+                    ng-if="!ticket.agent || agent.id !== ticket.agent.deviceId">
+                  {{ agent.hostName || agent.ip }}
+                </li>
+              </ul>
+            </li>
 
             <li ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticket)" ng-click="moveIntoSpam()">
               <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam'

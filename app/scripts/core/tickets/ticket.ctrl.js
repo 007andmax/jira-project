@@ -5,10 +5,16 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams', '$timeout',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, $timeout, UserConfirmationsService, UserNotificationService) {
+      'DevicesService',
+      function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, $timeout,
+                UserConfirmationsService, UserNotificationService, DevicesService) {
 
         $scope.user = UsersService.getOneById($scope.ticket.createdUser.id);
         $scope.company = CompaniesService.getOneById($scope.ticket.company.id);
+
+        DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
+          $scope.agentList = resp;
+        });
 
         if ($scope.ticket.assignedUser && $scope.ticket.assignedUser.id) {
           $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);

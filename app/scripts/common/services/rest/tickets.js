@@ -500,6 +500,11 @@
         changeTicket('trash', ticketId, !!value, callback);
       }
 
+      function changeLinkedAgent(ticketId, agentId, callback) {
+        if (!ticketId) throw 'ticketId is required arguments!';
+        changeTicket('linkedAgent', ticketId, agentId, callback);
+      }
+
       function changeTicket(action, id, value, callback, recipientsIds) {
         var url, data = { value: value };
 
@@ -663,7 +668,6 @@
       });
 
       RealTimeService.subscribe('/tickets', newScope, function (newChange) {
-        console.log(newChange);
 
         if (newChange.data && newChange.data.number) {
           newChange.data.number = numberPrefix + newChange.data.number;
@@ -844,6 +848,12 @@
           applyChangeToTicket(newChange.data.id, function (ticket) {
             Utils.defineReadOnlyProperty(ticket, 'isBillable', newChange.data.isBillable);
           })
+        } else if (newChange.action === 'LINKED_AGENT_CHANGED') {
+          for (var i = 0; i < newChange.data.ticketIds.length; i++) {
+            applyChangeToTicket(newChange.data.ticketIds[i], function (ticket) {
+              Utils.defineReadOnlyProperty(ticket, 'agent', { deviceId: newChange.data.deviceId });
+            })
+          }
         }
       });
 
@@ -867,7 +877,7 @@
           var storageTicket = storage.tickets[key].ticket;
 
           if (storageTicket.id === ticketId) {
-            callback(storageTicket);
+            callback(storage.tickets[key].scope.ticketDetails);
           }
         }
       }
@@ -1061,7 +1071,8 @@
         deleteTicketUpdate: deleteTicketUpdate,
         loadRemainingTicketUpdates: loadRemainingTicketUpdates,
         markUpdateAsRead: markUpdateAsRead,
-        updateExpenseInTicketUpdate: updateExpenseInTicketUpdate
+        updateExpenseInTicketUpdate: updateExpenseInTicketUpdate,
+        changeLinkedAgent: changeLinkedAgent
       }
 
     }]);

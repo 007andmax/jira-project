@@ -5,9 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.ticketsCtrl',
     ['$scope', 'TicketsService', 'CompaniesService', 'UsersService', '$state', '$stateParams',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.SharedStateService', 'Utils',
-      'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.PermissionsService', 'DevicesService',
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams,
-                TicketsPermissionsService, SharedStateService, Utils, PermissionsService) {
+                TicketsPermissionsService, SharedStateService, Utils, PermissionsService, DevicesService) {
 
         var availableTypes = ['all', 'unassigned', 'user', 'shared', 'spam', 'open', 'closed', 'trash'],
           ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader'),
@@ -59,6 +59,10 @@
           }
         }, true);
 
+        $scope.linkAgent = function (ticketId, agentId) {
+          TicketsService.changeLinkedAgent(ticketId, agentId);
+        };
+
         $scope.ticketStatusToCssFormat = function (status) {
           if (status === 'IN_PROGRESS') {
             return 'progress';
@@ -81,6 +85,7 @@
         $scope.$on('uncheckAllTickets', function () {
           $scope.selectedTickets = {};
           globalSearch.selectedItemsCount = undefined;
+          ticketsHeaderState.agentList = undefined;
         });
 
         $scope.userReadable = function (text) {
@@ -107,6 +112,7 @@
 
           ticketsHeaderState.checkedTicketsIds = [];
           ticketsHeaderState.selectedTickets = [];
+          ticketsHeaderState.agentList = undefined;
           globalSearch.selectedItemsCount = 0;
 
           for (var ticketId in $scope.selectedTickets) {
@@ -114,6 +120,11 @@
 
               ticketsHeaderState.checkedTicketsIds.push(ticketId);
               var ticket = Utils.findById($scope.tickets, ticketId) || Utils.findById($scope.reportSpamTickets, ticketId);
+
+              DevicesService.getAgentsByCompany($scope, ticket.company.id, function (resp) {
+                ticketsHeaderState.agentList = resp;
+              });
+
               ticketsHeaderState.selectedTickets.push(ticket);
               globalSearch.selectedItemsCount++;
             }

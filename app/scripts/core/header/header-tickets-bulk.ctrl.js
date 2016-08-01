@@ -83,6 +83,13 @@
           });
         };
 
+        $scope.bulkLinkAgent = function (ids, agentId, agentName) {
+          TicketsService.changeLinkedAgent(ids, agentId, function () {
+            UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets linked agents have been change to ' + agentName, true);
+            $scope.uncheckAllTickets();
+          });
+        };
+
         $scope.$on('uncheckAllTickets', function () {
           $scope.ticketsSharedState.checkedTicketsIds = [];
           $scope.ticketsSharedState.selectedTickets = [];

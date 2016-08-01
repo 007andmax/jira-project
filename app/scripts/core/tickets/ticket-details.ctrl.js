@@ -6,10 +6,10 @@
       ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
-        'quicktech.common.services.TicketsPermissionsService',
+        'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService) {
+                  TicketsPermissionsService, DevicesService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
           rightPanelSharedState.companyId = '';
@@ -77,6 +77,10 @@
                 TicketsService.markUpdateAsRead($scope.ticketDetails.id, unreadUpdatesId)
               }, 1000);
             }
+
+            DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
+              $scope.agentList = resp;
+            });
 
 
             $timeout(function () {
