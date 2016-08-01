@@ -3,58 +3,45 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtSidebar',
-    ['$timeout', function ($timeout) {
+    ['$rootScope', '$document', function ($rootScope, $document) {
       return {
         restrict: 'A',
-        link: function (scope, element) {
+        link: function ($scope, $element) {
+          var $win = $(window);
 
-          var windowWidth;
+          initLeftPanel();
 
-          $timeout(initLeftPanel, 420);
+          $win.on('resize', initLeftPanel);
 
-          $(window).on('resize', initLeftPanel);
-          $(element).on('click', function () {
-            $timeout(function(){
-              element.find('.qt-sidebar-scroll').nanoScroller();
-            }, 420);
+          $scope.$on('$destroy', function () {
+            $document.off('click', closeLeftPanelOnSmallScreen);
+            $win.off('resize', initLeftPanel);
           });
 
-          function initLeftPanel() {
+          function initLeftPanel(e) {
+            var windowWidth = window.outerWidth;
+            $rootScope.isLeftPanelHidden = windowWidth <= 1024;
 
-            windowWidth = window.innerWidth;
-
-            if (windowWidth > 1389) {
-              openLeftPanel();
-            } else {
-              closeLeftPanel();
+            if ($rootScope.isLeftPanelHidden) {
+              $scope.$broadcast('leftPanelClosedFromQTSidebar');
             }
+
+            if (e) {
+              $scope.$apply();
+            }
+
+            $document.off('click', closeLeftPanelOnSmallScreen);
+            $document.on('click', closeLeftPanelOnSmallScreen);
           }
 
-          element.hover(function () {
-            if (!(windowWidth > 1389)) {
-              openLeftPanel();
+          function closeLeftPanelOnSmallScreen(e) {
+            var isClickOutside = !angular.element(e.target).closest($element[0]).length;
+            if (window.outerWidth <= 1024 && isClickOutside) {
+              $rootScope.isLeftPanelHidden = true;
+              $scope.$broadcast('leftPanelClosedFromQTSidebar');
+              $scope.$apply();
             }
-          }, function () {
-            if (!(windowWidth > 1389)) {
-              closeLeftPanel();
-            }
-          });
-
-          function openLeftPanel(){
-            $timeout(function(){
-              scope.isLeftPanelOpen = true;
-            }, 300);
-
-            // element.addClass('opened');
-            element.css("box-shadow", "none");
-            element.find('.qt-sidebar-scroll').nanoScroller();
           }
-
-          function closeLeftPanel(){
-            scope.isLeftPanelOpen = false;
-            // element.removeClass('opened');
-          }
-
         }
       }
     }]);
