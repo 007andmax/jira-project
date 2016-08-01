@@ -130,7 +130,7 @@
 
           $scope.changeTicketStatus = function (status) {
             TicketsService.changeStatus($scope.ticketDetails.id, status, function () {
-              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.ticketStatus[status] + '"', true);
+              UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” status has been changed to "' + $scope.userReadable(status) + '"', true);
             });
           };
 
@@ -461,12 +461,6 @@
             rightPanelSharedState.createUserId = undefined;
           });
 
-          $scope.isAllSharedSelected = function (shares) {
-            $scope.ticketDetails.notifyAll = shares.reduce(function (counter, shared) {
-              return shared.notify ? ++counter : counter;
-            }, 0) === $scope.ticketSharedUsersList.length;
-          };
-
           $scope.toggleAllShared = function (isNotifyAll) {
             for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
               $scope.ticketSharedUsersList[i].notify = isNotifyAll;
@@ -530,8 +524,6 @@
             if ($scope.assignedUser && $scope.user && $scope.user.id !== $scope.assignedUser.id) {
               result.push({ user: $scope.assignedUser, notify: false });
             }
-
-            $scope.ticketDetails.notifyAll = false;
 
             return result;
           }

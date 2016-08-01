@@ -27,7 +27,10 @@
   <div class="left-panel-full" ng-hide="isLeftPanelHidden">
     <div class="left-panel-full-wrapper" ng-if="openedCategory === 'dashboard' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
-        <span class="left-panel-full__head--header">My Dashboard</span>
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
+          <i class="icn-sm icn-expand-back"></i>
+        </div>
+        <span class="left-panel-full__head--header">Dashboard</span>
       </div>
       <div class="center-category collapsed-nav">
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')"
@@ -42,6 +45,9 @@
     </div>
     <div class="left-panel-full-wrapper" ng-if="openedCategory === 'tickets' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
+          <i class="icn-sm icn-expand-back"></i>
+        </div>
         <span class="left-panel-full__head--header">Tickets</span>
       </div>
       <div class="center-category collapsed-nav">
@@ -89,6 +95,9 @@
     </div>
     <div class="left-panel-full-wrapper" ng-if="openedCategory === 'clients' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
+          <i class="icn-sm icn-expand-back"></i>
+        </div>
         <span class="left-panel-full__head--header">Clients</span>
       </div>
       <div class="center-category collapsed-nav">
@@ -109,6 +118,9 @@
     </div>
     <div class="left-panel-full-wrapper" ng-if="openedCategory === 'accounting' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
+          <i class="icn-sm icn-expand-back"></i>
+        </div>
         <span class="left-panel-full__head--header">Billing</span>
       </div>
       <div class="center-category collapsed-nav">
@@ -133,6 +145,9 @@
     </div>
     <div class="left-panel-full-wrapper" ng-if="openedCategory === 'products' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
+          <i class="icn-sm icn-expand-back"></i>
+        </div>
         <span class="left-panel-full__head--header">Product</span>
       </div>
       <div class="center-category collapsed-nav">

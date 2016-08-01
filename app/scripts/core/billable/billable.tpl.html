@@ -1,39 +1,7 @@
 <div>
-  <!--<div class="billable-head clearfix">-->
-
-    <!--<div class="chart-wrapper">-->
-      <!--<div class="heading"><strong>Billed Amount</strong>-->
-        <!--<span>Last 30 Days</span> <span class="dot-sep"></span>-->
-        <!--<span>{{ billedAmountLast30Days | currency:'$' :2 }}</span></div>-->
-
-      <!--<div billable-chart ng-model="billableChartData"></div>-->
-
-    <!--</div>-->
-
-    <!--<div class="all-time-stats">-->
-
-      <!--<div class="heading"><strong>BILLED AMOUNT <span>ALL TIME</span></strong>-->
-        <!--<span class="amount">{{ totalBilledAmount.value | currency:'$' :2 }}</span>-->
-      <!--</div>-->
-
-      <!--<div class="total-billable">-->
-        <!--<div class="pie-chart" pie-chart pie-chart-value="[totalbillables, billedAmountLast30Days]"-->
-             <!--pie-chart-size="40" pie-chart-color="['#b7daf7', '#e53935']"></div>-->
-        <!--<div class="pull-left">-->
-          <!--<strong>TOTAL BILLABLES</strong>-->
-          <!--<strong class="amount">{{ totalbillables | currency:'$' :2 }}</strong>-->
-        <!--</div>-->
-      <!--</div>-->
-
-    <!--</div>-->
-
-  <!--</div>-->
-
   <div class="billable-content" style="margin-top: 20px;">
     <div class="tabs-container" style="margin-top: 23px">
       <div class="payment-receive-fixed" fixed-block-top>
-
-
 
         <ul class="nav nav-qt" role="tablist">
 
@@ -77,19 +45,20 @@
                 <i class="icn-sm icn-locked"></i>
               </a>
 
-              <label ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')" class="control checkbox pull-left"
+              <label ng-if="billableCompany.lockType === 'NONE' && PermissionsService.isAllowed('CREATE_INVOICE')"
+                     class="control checkbox pull-left"
                      stop-propagation="click" style="z-index: 2;">
                 <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
                        ng-click="changeCompanyCheckbox(billableCompany.companyId)">
                 <span class="control-indicator"></span>
               </label>
 
-              <div class="checkbox-caption">{{ company.name }}</div>
+              <div class="checkbox-caption bold">{{ company.name }}</div>
               <span class="label label-light">{{ billableCompany.tickets.length }}</span>
             </div>
 
             <div class="col-2">
-              <div class="billable-amount">{{ billableCompany.totalSum | currency: '$': 2 }}</div>
+              <div class="billable-amount bold">{{ billableCompany.totalSum | currency: '$': 2 }}</div>
             </div>
 
             <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets"
@@ -99,19 +68,22 @@
                   ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider
                   show-model-element="{{ 'showTicket-' + ticket.id }}">
 
-                <div qt-ts-toggler style="position: absolute;height: 70px;width: 100%;top: 0px;left: 30px; z-index: 5"></div>
+                <div qt-ts-toggler
+                     style="position: absolute;height: 70px;width: 100%;top: 0px;left: 30px; z-index: 5"></div>
 
                 <div class="col-1">
                   <div class="clearfix">
 
                     <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left"
                        ng-if="ticket.lockedBy" stop-propagation="click"
-                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="{{ getTooltipName(ticket.lockedBy) }}">
+                       tooltip-placement="top" tooltip-append-to-body="true"
+                       tooltip="{{ getTooltipName(ticket.lockedBy) }}">
                       <i class="icn-sm icn-locked-blue"></i>
                     </a>
 
                     <label class="control checkbox pull-left"
-                           ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')" stop-propagation="click">
+                           ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"
+                           stop-propagation="click">
                       <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
                              ng-change="changeTicketCheckbox(billableCompany.companyId)">
                       <span class="control-indicator"></span>
@@ -123,7 +95,7 @@
                 </div>
 
                 <div class="col-2">
-                  <div class="billable-amount">{{ ticket.sum | currency: '$': 2 }}</div>
+                  <div class="billable-amount bold">{{ ticket.sum | currency: '$': 2 }}</div>
                 </div>
 
                 <div class="table-wrapper clearfix" qt-ts-slider style="display: none;">

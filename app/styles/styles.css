@@ -770,12 +770,14 @@ hr {
 .devices-content {
   padding: 30px 30px 0;
 }
-.company-profile-content-closed {
-  float: left;
-  width: 100%;
-  padding: 0 30px 30px;
-}
+
 .company-profile-content {
+  float: left;
+  width: calc(100% - 277px);
+  padding: 0 30px 30px;
+  /*overflow: hidden;*/
+}
+.right-panel-closed .company-profile-content {
   float: left;
   width: 100%;
   padding: 0 30px 30px;
@@ -9846,4 +9848,7 @@ button.close {
   .progress-small-size{
     display: none;
   }
+}
+.bold{
+  font-weight: 700;
 }

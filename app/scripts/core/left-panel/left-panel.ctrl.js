@@ -26,6 +26,10 @@
           }
         });
 
+        $scope.$on('leftPanelClosedFromQTSidebar', function () {
+          $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+        });
+
         $scope.toggleLeftPanel = function (section) {
           if ($scope.openedCategory === section && !$rootScope.isLeftPanelHidden) {
             $rootScope.isLeftPanelHidden = true;

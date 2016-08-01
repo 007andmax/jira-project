@@ -137,7 +137,7 @@
 .qt-users,
 .qt-company-devices,
 .qt-assc-vendors {
-  padding: 30px 50px;
+  /*padding: 30px 50px;*/
 }
 .qt-users > li {
   cursor: pointer;

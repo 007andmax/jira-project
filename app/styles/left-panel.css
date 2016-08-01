@@ -96,6 +96,7 @@
 
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .center-category {
   display: flex;
@@ -117,6 +118,7 @@
   position: absolute;
   top: 15px;
   left: 20px;
+  cursor: pointer;
 }
 .left-panel-full-wrapper {
   width: 100%;
