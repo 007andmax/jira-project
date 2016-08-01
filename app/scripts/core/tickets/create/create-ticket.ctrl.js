@@ -5,10 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'companyId',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'ServicesService', '$timeout',
-      'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.PermissionsService',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, companyId,
-                UserNotificationService, sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService,
-                PermissionsService) {
+      'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.PermissionsService', 'DevicesService',
+      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService,
+                sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService, PermissionsService, DevicesService) {
 
         var isNeedToDeleteUser = true,
           unassignedCompany = CompaniesService.getUnassignedCompany();
@@ -37,6 +36,19 @@
             $scope.ticketCompany = CompaniesService.getOneById(companyId);
           });
         }
+
+        DevicesService.getDevicesCount($scope, function (agents) {
+          var agentsList = [];
+          for (var companyId in agents) {
+            if (companyId !== 'staticCopy') {
+              agentsList = agentsList.concat(agents[companyId].map(function (agent) {
+                agent.companyId = companyId;
+                return agent;
+              }));
+            }
+          }
+          $scope.agentsList = angular.copy(agentsList);
+        });
 
         if (sessionId) {
 
@@ -204,6 +216,25 @@
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', false);
           }
 
+        });
+
+        $scope.$watch('ticketAgent', function (val) {
+          if (val && typeof val === 'object') {
+            $scope.ticket.linkedAgentId = val.id;
+            $scope.ticketCompany = CompaniesService.getOneById(val.companyId);
+          } else if (val) {
+            var filteredAgents = $scope.agentsList.filter(function (agent) {
+              return agent.hostName === val || agent.ip === val;
+            });
+
+            if (filteredAgents.length === 1) {
+              $scope.ticketAgent = filteredAgents.pop();
+            } else {
+              $scope.ticket.linkedAgentId = '';
+            }
+          } else {
+            $scope.ticket.linkedAgentId = '';
+          }
         });
 
         $scope.addAttachmentFiles = function (file) {
@@ -383,6 +414,24 @@
           }
 
           return searchInUsers;
+        };
+
+        $scope.filterAgents = function (value) {
+          return function (item) {
+            if ($scope.ticketCompany && typeof $scope.ticketCompany === 'object') {
+              return item.companyId === $scope.ticketCompany.id;
+            }
+
+            if (!value || value === '[$empty$]') {
+              return true;
+            }
+
+            if (item.hostName) {
+              return item.hostName.toLowerCase().indexOf(value.toLowerCase()) !== -1 || item.ip.indexOf(value) !== -1;
+            } else {
+              return item.ip.indexOf(value) !== -1;
+            }
+          }
         };
 
         $scope.isTicketFormValid = function (form) {

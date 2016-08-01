@@ -340,10 +340,10 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 /*created for dropdown in create user form*/
-.dropdown-user-parent > .dropdown-menu {
-  width: 380px;
-  height: 204px;
-}
+/*.dropdown-user-parent > .dropdown-menu {*/
+  /*width: 380px;*/
+  /*height: 204px;*/
+/*}*/
 
 .dropdown-user-parent > .dropdown-menu > li {
   padding: 10px 20px;
