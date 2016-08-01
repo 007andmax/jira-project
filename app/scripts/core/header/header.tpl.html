@@ -1,7 +1,7 @@
 <nav class="topNavbar row">
   <div class="topNavbar-content" ng-controller="quicktech.core.header.headerCtrl">
-  
-  <div class="col-md-1 col-sm-2 col-xs-2 topNavbarLeft">
+
+  <div class="col-md-2 col-sm-2 col-xs-2 topNavbarLeft">
     <div class="" ng-if="goBack.isEnabled">
         <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
            style="margin: 11px 8px 0 0;" ng-click="goBack.func()"
@@ -145,23 +145,23 @@
         <div ng-include="'/html/scripts/core/header/global-search/global-search.tpl.html'"></div>
       </div>
   </div>
-  <div class="col-sm-3 col-xs-3">
+  <div class="col-md-2 col-sm-2 col-xs-2">
     <a href="javascript:void(0)" class="ha-36-36">
         <i class="icn-lg logo"></i>
       </a>
   </div>
   <div class="col-md-2 col-sm-1 col-xs-1">
     <div class="topNavbar-create">
-          <div class="dropdown">
+          <div dropdown style="display: inline-block;">
 
-            <div class="btn btn-success has-tooltip" data-toggle="dropdown">
+            <div class="btn btn-success has-tooltip" dropdown-toggle>
               <div class="create-new-wrap">
                 <span class="create-new-label">Create New</span>
                 <i class="icn-sm icn-plus"></i>
               </div>
             </div>
 
-            <ul class="dropdown-menu dropdown-menu-right">
+            <ul class="dropdown-menu">
 
               <li role="presentation">
                 <a role="menuitem" tabindex="-1" create-ticket-open-modal>Ticket</a>
@@ -202,7 +202,7 @@
        <i class="icn-sm icn-settings"></i>
      </a>
   </div>
-  <div class="col-sm-2 col-xs-2 topNavbarRight">
+  <div class="col-md-2 col-sm-3 col-xs-3 topNavbarRight">
     <div dropdown>
         <div class="nickname-wrap" dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
