@@ -332,6 +332,10 @@
   -ms-flex: 1;
   flex: 1;
 }
+.topNavbar-filter > div{
+  float: left;
+}
+
 
 .topNavbar-filter button {
   margin-right: 10px;
@@ -353,6 +357,7 @@
   cursor: pointer;
   line-height: 0;
   margin-left: 8px;
+  margin-right: 8px;
 }
 
 .topNavbarRight .dropdown .dropdown-menu > li {

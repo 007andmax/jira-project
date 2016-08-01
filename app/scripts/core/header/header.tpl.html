@@ -27,57 +27,7 @@
 
         <div class="topNavbar-filter ">
 
-          <div class="dropdown more"
-               ng-if="TicketsPermissionsService.isActionVisible('change_status,send_to_spam,send_to_trash,restore', ticketsSharedState.selectedTickets)">
 
-            <a class="hit-area ha-22-38 has-tooltip" tooltip-placement="bottom" tooltip="More"
-               aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-              <i class="icn-sm icn-more"></i>
-            </a>
-
-            <ul class="dropdown-menu" role="menu">
-
-              <li class="dropdown-submenu">
-                <a tabindex="-1" href="javascript:void(0)"
-                   ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketsSharedState.selectedTickets)">
-                  Change Status to...
-                </a>
-
-                <div class="dropdown-submenu-wrapper">
-                  <ul class="dropdown-menu dropdown-priority">
-
-                    <li ng-click="changeTicketStatus('IN_PROGRESS')">
-                      <a tabindex="-1" href="javascript:void(0)"> In Progress </a>
-                    </li>
-
-                    <li ng-click="changeTicketStatus('ON_HOLD')">
-                      <a tabindex="-1" href="javascript:void(0)"> On Hold </a>
-                    </li>
-
-                  </ul>
-                </div>
-              </li>
-
-              <li ng-click="moveIntoSpam()"
-                  ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketsSharedState.selectedTickets)">
-                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam' }}</a>
-              </li>
-
-              <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketsSharedState.selectedTickets)">
-                <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
-              </li>
-
-              <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_spam')">
-                <a tabindex="-1" href="javascript:void(0)" ng-click="restoreFromSpam()">Restore from Spam</a>
-              </li>
-
-              <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_trash')">
-                <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(false)">Restore from Trash</a>
-              </li>
-
-            </ul>
-
-          </div>
 
           <div class="dropdown "
                ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
@@ -128,6 +78,58 @@
               </li>
 
             </ul>
+          </div>
+
+          <div class="dropdown more"
+               ng-if="TicketsPermissionsService.isActionVisible('change_status,send_to_spam,send_to_trash,restore', ticketsSharedState.selectedTickets)">
+
+            <a class="hit-area ha-22-38 has-tooltip" tooltip-placement="bottom" tooltip="More"
+               aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+              <i class="icn-sm icn-more"></i>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="javascript:void(0)"
+                   ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketsSharedState.selectedTickets)">
+                  Change Status to...
+                </a>
+
+                <div class="dropdown-submenu-wrapper">
+                  <ul class="dropdown-menu dropdown-priority">
+
+                    <li ng-click="changeTicketStatus('IN_PROGRESS')">
+                      <a tabindex="-1" href="javascript:void(0)"> In Progress </a>
+                    </li>
+
+                    <li ng-click="changeTicketStatus('ON_HOLD')">
+                      <a tabindex="-1" href="javascript:void(0)"> On Hold </a>
+                    </li>
+
+                  </ul>
+                </div>
+              </li>
+
+              <li ng-click="moveIntoSpam()"
+                  ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketsSharedState.selectedTickets)">
+                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam' }}</a>
+              </li>
+
+              <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketsSharedState.selectedTickets)">
+                <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
+              </li>
+
+              <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_spam')">
+                <a tabindex="-1" href="javascript:void(0)" ng-click="restoreFromSpam()">Restore from Spam</a>
+              </li>
+
+              <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_trash')">
+                <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(false)">Restore from Trash</a>
+              </li>
+
+            </ul>
+
           </div>
 
           <div class="">
