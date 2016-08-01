@@ -7,93 +7,86 @@
       <div class="background-layer">
         <!--company-cover-wrapper-->
 
-        <div class="btn btn-archive has-tooltip"
-             ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
-             ng-click="archiveCompany()"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
-          <i class="icn-sm icn-archive-company"></i>
-        </div>
+        <div class="container company-info">
+          <ul class="company-name">
+            <div class="company-short-info">
+              <div class="dropdown" style="transform: translateY(50%)"
+                   ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
+                   ng-click="archiveCompany()"
+                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
+                <i class="icn-sm icn-archive-company"></i>
+              </div>
 
-        <div class="company-info">
+              <div class="dropdown">
 
-          <div class="company-name">{{ companyData.name }}</div>
+                <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
+                   data-toggle="dropdown" aria-expanded="false"
+                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Change Cover">
+                  <i class="icn-md icn-cover"></i>
+                </a>
 
-          <div class="company-short-info">
+                <ul class="dropdown-menu">
 
-            <div class="company-location"><i class="icn-sm icn-location-white"></i>
-              {{ companyData.primaryAddress.address }}
-            </div>
+                  <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover(true)">
+                      Upload Photo...
+                    </a>
+                  </li>
 
-            <i class="dot-sep"></i>
+                  <li role="presentation" ng-show="company.cover">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="restoreDefaultCover()">
+                      Restore Default Photo...
+                    </a>
+                  </li>
 
-            <div class="company-speciality">{{ companyData.type }}</div>
+                  <li role="presentation" ng-show="company.cover">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover()">
+                      Reposition...
+                    </a>
+                  </li>
 
-            <a href="javascript:void(0)" class="hit-area ha-14-16"
-               custom-popover custom-popover-content="{{ companyData.description }}"
-               custom-popover-placement="bottom" custom-popover-first-left="25">
-              <i class="icn-sm icn-description-white"></i>
-            </a>
+                </ul>
+              </div>
 
-            <div class="dropdown">
-
-              <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-                 data-toggle="dropdown" aria-expanded="false"
-                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="Change Cover">
-                <i class="icn-md icn-cover"></i>
+              <a href="javascript:void(0)" class="hit-area has-tooltip"
+                 ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
+                 ui-sref="editCompany( { companyId: company.id } )"
+                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
+                <i class="icn-md icn-edit-tag"></i>
               </a>
 
-              <ul class="dropdown-menu">
-
-                <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover(true)">
-                    Upload Photo...
-                  </a>
-                </li>
-
-                <li role="presentation" ng-show="company.cover">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="restoreDefaultCover()">
-                    Restore Default Photo...
-                  </a>
-                </li>
-
-                <li role="presentation" ng-show="company.cover">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover()">
-                    Reposition...
-                  </a>
-                </li>
-
-              </ul>
             </div>
+            {{ companyData.name }}
+            <li class="info-type">Address:</li>
+            <li class="info-type">Phone:</li>
+          </ul>
 
-            <a href="javascript:void(0)" class="hit-area has-tooltip"
-               ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
-               ui-sref="editCompany( { companyId: company.id } )"
-               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
-              <i class="icn-md icn-edit-tag"></i>
-            </a>
 
+
+          <div class="avatar company-user-avatar img-circle" ng-hide="getError().loadingInProcess">
+
+          <img style="width: 100%;" ng-src="/users/default/image" class="no-avatar img-circle" ng-class="{'hide': model.cropped.id}" src="/users/default/image">
+          <img style="width: 100%;" ng-class="{'hide': !model.cropped.id}" style="max-height: 100%;" class="hide img-circle">
+
+          <div class="reposition ng-hide" ng-show="model.origin &amp;&amp; !getError().loadingInProcess" change-position-button="">
+            Reposition...
           </div>
-
-          <div class="company-rating">
-            <!--<ul class="rating rating-5">-->
-            <!--<li class="icn-sm icn-star-full star-1"></li>-->
-            <!--<li class="icn-sm icn-star-full star-2"></li>-->
-            <!--<li class="icn-sm icn-star-full star-3"></li>-->
-            <!--<li class="icn-sm icn-star-half star-4"></li>-->
-            <!--<li class="icn-sm icn-star-empty star-5"></li>-->
-            <!--</ul>-->
-          </div>
-
-          <div class="company-client-since">
-            Client since <span>{{ company.createdAt | date:'dd MMM yyyy' }}</span>
-          </div>
-
-          <!--<div class="average-response-time">-->
-          <!--<div class="icon"><i class="icn-lg icn-response-time"></i></div>-->
-          <!--Avg. Response Time 45 mins-->
-          <!--</div>-->
 
         </div>
+            <ul class="user-company-contact clearfix">
+              <li class="info-type">Primary contact:</li>
+              <li class="info-type">Contact email:</li>
+              <li class="info-type">Contact phone:</li>
+            </ul>
+
+
+        <div class="button-container">
+          <i class="icn-retina new-ticket pull-left"></i>
+          <i class="icn-retina new-user pull-left"></i>
+          <i class="icn-retina save-download pull-right"></i>
+        </div>
+        </div>
+
 
         <!--<div class="company-contact-location-wrapper">-->
 

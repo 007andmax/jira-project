@@ -21,7 +21,43 @@ only screen and (min-device-pixel-ratio: 1.5) {
   }
 
 }
-
+.icn-retina{
+  background-image: url('../images/sprites-retina-s9f68249a71.png');
+  background-repeat: no-repeat;
+  -webkit-background-size: 8000px 1600px;
+  background-size: 8000px 1600px;
+  display: block;
+}
+.new-ticket{
+  background-position: -7689px -223px;
+  width: 32px;
+  height: 25px;
+}
+.new-ticket:hover{
+  background-position: -7655px -223px;
+  width: 32px;
+  height: 25px;
+}
+.new-user{
+   background-position: -7615px -223px;
+   width: 32px;
+   height: 25px;
+ }
+.new-user:hover{
+  background-position: -7583px -223px;
+  width: 32px;
+  height: 25px;
+}
+.save-download{
+  background-position: -7757px -223px;
+  width: 13px;
+  height: 22px;
+}
+.save-download:hover{
+  background-position: -7729px -223px;
+  width: 13px;
+  height: 22px;
+}
 /* Hit Area Start */
 
 a.hit-area{

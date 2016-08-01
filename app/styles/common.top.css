@@ -394,6 +394,12 @@
   height: 10px;
   border-radius: 50%;
 }
+.button-container > i {
+  cursor: pointer;
+}
+.company-short-info > div > i {
+  cursor: pointer;
+}
 
 .topNavbarRight .settings-href {
   display: inline-block;

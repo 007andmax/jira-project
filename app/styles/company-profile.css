@@ -36,18 +36,31 @@
   position: relative;
   right: 0;
 }
-
-.company-profile-header .company-new-cover-wrapper .company-info {
-  width: 450px;
-  top: 70px;
-  transform: none;
-  margin: 0;
-  left: 0;
-  padding-left: 50px;
+.button-container{
+  width: 100%;
   position: absolute;
-  z-index: 2;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
 }
-
+.company-profile-header .company-new-cover-wrapper .company-info {
+  width: 100%;
+  padding: 20px;
+  height: 100%;
+  position: relative;
+}
+.info-type{
+  font-size: medium;
+  list-style-type: none;
+  line-height:  1.8em;
+  color: #fff;
+  padding-left: 10px;
+  font-weight: 300;
+}
+.company-user-avatar{
+  width: 100px;
+  float: left;
+}
 .company-profile-header .address-content .map-container {
   margin: 0;
 }

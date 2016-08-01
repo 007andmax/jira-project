@@ -655,6 +655,10 @@
   transform: translate3d(0,-50%,0);
   z-index: 2;
 }
+.user-company-contact{
+  float: left;
+  padding-left: 0;
+}
 .company-info .company-name{
   float: left;
   width: 100%;
@@ -662,7 +666,8 @@
   line-height: 38px;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding-left: 0;
 }
 @-moz-document url-prefix() {
   .company-info .company-name{
@@ -671,10 +676,10 @@
   }
 }
 .company-info .company-short-info{
-  float: left;
+  /*float: left;*/
   width: 100%;
   color: #fff;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 @-moz-document url-prefix() {
   .company-info .company-short-info{
@@ -682,7 +687,7 @@
   }
 }
 .company-short-info .company-location, .company-short-info .company-speciality, .company-short-info .dot-sep, .company-short-info .hit-area, .company-short-info .dropdown{
-  float: left;
+  float: right;
 }
 .company-short-info .dot-sep{
   margin: 8px 10px;
