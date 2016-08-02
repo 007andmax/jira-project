@@ -1,52 +1,80 @@
 .wrapper {
-  width: 300px;
+  width: 350px;
   margin: 50px;
-  border: 1px solid black;
-}
-.wrapper .row .col-md-12 {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  text-align: center;
-}
-.wrapper .row .agent-head {
-  text-align: left;
-}
-.wrapper .row .agent-head__description {
-  line-height: 2em;
-  font-size: 1.4em;
-}
-.wrapper .row .icons-container .svg-icn {
-  width: 70%;
-  cursor: pointer;
-}
-.wrapper .row .icons-container .svg-icn:hover {
-  border: 2px solid grey;
-  border-radius: 10px;
-}
-.wrapper .row .icons-container:after {
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  width: 80%;
-  height: 1px;
-  background: #4c5c6f;
-  content: " ";
-}
-.wrapper .row .form-container:after {
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  width: 80%;
-  height: 1px;
-  background: #4c5c6f;
-  content: " ";
-}
-.wrapper .row .form-container .form-group {
-  margin-bottom: 0;
-}
+  border: 1px solid black; }
+  .wrapper .row .interior {
+    display: block; }
+    .wrapper .row .interior .col-md-12 {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-align: center; }
+    .wrapper .row .interior .agent-head__description {
+      line-height: 2em;
+      font-size: 1.4em; }
+    .wrapper .row .interior .icons-container .svg-icn {
+      width: 70%;
+      cursor: pointer; }
+      .wrapper .row .interior .icons-container .svg-icn:hover {
+        border: 2px solid grey;
+        border-radius: 10px; }
+    .wrapper .row .interior .icons-container:after {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: #4c5c6f;
+      content: " "; }
+    .wrapper .row .interior .form-container:after {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: #4c5c6f;
+      content: " "; }
+    .wrapper .row .interior .form-container .form-group {
+      margin-bottom: 0; }
+
 .underline-link {
   color: #1586e4;
   text-decoration: underline;
-  cursor: pointer;
-}
+  cursor: pointer; }
+
+.internal-wrap {
+  max-height: 470px; }
+  .internal-wrap .col-md-12 .form-group {
+    margin: 0; }
+    .internal-wrap .col-md-12 .form-group .control-label {
+      text-transform: uppercase;
+      margin-bottom: 4px; }
+    .internal-wrap .col-md-12 .form-group textarea {
+      height: 200px; }
+  .internal-wrap .col-md-12 .available-keywords-label {
+    font-weight: bold; }
+  .internal-wrap .agent-head {
+    text-align: center; }
+    .internal-wrap .agent-head__description {
+      line-height: 2em;
+      font-size: 1.4em;
+      position: relative; }
+      .internal-wrap .agent-head__description .back-in-black {
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        position: absolute;
+        left: 20px; }
+        .internal-wrap .agent-head__description .back-in-black .icn-expand {
+          transform: rotate(90deg) translateX(150%); }
+  .internal-wrap .template-actions {
+    margin: 10px 0; }
+    .internal-wrap .template-actions .btn:not(:first-child) {
+      margin-left: 5px; }
+    .internal-wrap .template-actions .restore-default-wrap {
+      display: inline-block;
+      vertical-align: middle; }
+    .internal-wrap .template-actions .or {
+      color: #b2becd;
+      margin-left: 5px; }
+
 /*# sourceMappingURL=agent-install.css.map */
