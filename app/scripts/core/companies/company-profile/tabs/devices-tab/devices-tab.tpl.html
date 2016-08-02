@@ -188,7 +188,7 @@
             </ul>
           </div>
 
-          <div class="pull-right" ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
+          <div class="pull-right dropdown" ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
             <div class="btn btn-default pull-left has-tooltip"
                  ng-if="(agent.type !== 'workstation') && agent.online"
                  ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
@@ -198,7 +198,7 @@
             <div class="btn btn-default pull-left has-tooltip"
                  ng-if="(agent.type === 'workstation') && agent.online"
                  tooltip-placement="top" tooltip="Remote Access"
-                 dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+                 aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
               <i class="icn-sm icn-remote-access"></i>
             </div>
 

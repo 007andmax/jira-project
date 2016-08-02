@@ -11,8 +11,8 @@
         },
         'CHANGE_STATUS': isUpdateAllowed,
         'CHANGE_PRIORITY': isTicketOpen,
-        'LINK_AGENT': function (ticket, companyId) {
-          return isTicketOpen(ticket) && ticket.company.id === companyId;
+        'LINK_AGENT': function (ticket, company) {
+          return isTicketOpen(ticket) && !company.default && ticket.company.id === company.id;
         },
         'SEND_TO_SPAM': isTicketOpen,
         'SEND_TO_TRASH': function (ticket) {

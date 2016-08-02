@@ -121,9 +121,11 @@
               ticketsHeaderState.checkedTicketsIds.push(ticketId);
               var ticket = Utils.findById($scope.tickets, ticketId) || Utils.findById($scope.reportSpamTickets, ticketId);
 
-              DevicesService.getAgentsByCompany($scope, ticket.company.id, function (resp) {
-                ticketsHeaderState.agentList = resp;
-              });
+              if (!ticketsHeaderState.agentList) {
+                DevicesService.getAgentsByCompany($scope, ticket.company.id, function (resp) {
+                  ticketsHeaderState.agentList = resp;
+                });
+              }
 
               ticketsHeaderState.selectedTickets.push(ticket);
               globalSearch.selectedItemsCount++;

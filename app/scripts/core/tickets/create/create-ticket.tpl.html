@@ -395,7 +395,8 @@
 
             <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
                    ng-model="ticketAgent" name="ticketAgent"
-                   typeahead="agent as (agent.hostName || agent.ip) for agent in agentsList | filter:filterAgents($viewValue) | orderBy:'hostName'"
+                   ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
+                   typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgents | filter:filterAgents($viewValue) | orderBy:'hostName'"
                    qt-typeahead-show-on-focus custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 
             <div typeahead-input-icon="ticketAgent" style="position: absolute;top: 29px;right: 13px;"></div>

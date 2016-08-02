@@ -9,9 +9,9 @@
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService,
                 sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService, PermissionsService, DevicesService) {
 
-        var isNeedToDeleteUser = true,
-          unassignedCompany = CompaniesService.getUnassignedCompany();
+        var isNeedToDeleteUser = true, agentsByCompany = [];
 
+        $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
         $scope.ticket = { priorityLevel: 'MEDIUM' };
@@ -38,6 +38,8 @@
         }
 
         DevicesService.getDevicesCount($scope, function (agents) {
+          agentsByCompany = agents;
+
           var agentsList = [];
           for (var companyId in agents) {
             if (companyId !== 'staticCopy') {
@@ -94,6 +96,7 @@
         };
 
         $scope.$watch('ticketCompany', function (val) {
+          $scope.filteredAgentList = $scope.agentsList;
           if (val && typeof val === 'object') {
             $scope.ticketCompanyChoosen = true;
 
@@ -106,6 +109,7 @@
               $scope.ticket.createdUser.companyId = val.id;
             }
 
+            $scope.filteredAgentList = agentsByCompany[val.id];
             $scope.usersCompany = UsersService.getAllByCompanyId(val.id);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
@@ -126,7 +130,7 @@
 
             if (!selectedCompany) {
               if ($scope.ticket.createdUser) {
-                $scope.ticket.createdUser.companyId = undefined;
+                $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
               }
               return $scope.ticketForm.ticketCompany.$setValidity('invalidName', false);
             } else {
@@ -134,7 +138,7 @@
             }
           } else {
             if ($scope.ticket.createdUser) {
-              $scope.ticket.createdUser.companyId = undefined;
+              $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
             }
 
             if ($scope.ticket.serviceExpenses && $scope.ticket.serviceExpenses.length) {
@@ -148,6 +152,8 @@
                 return item;
               }
             });
+
+            $scope.ticketAgent = '';
           }
         });
 
@@ -166,11 +172,12 @@
             isNeedToDeleteUser = false;
             var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
 
-            if (ticketCompany.id !== unassignedCompany.id) {
+            if (ticketCompany.id !== $scope.unassignedCompany.id) {
               $scope.ticketCompany = ticketCompany;
               $scope.ticket.createdUser.companyId = ticketCompany.id;
             } else {
-              $scope.ticket.createdUser.companyId = unassignedCompany.id;
+              $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
+              $scope.ticketAgent = '';
             }
           } else if (val && val.match($scope.emailPattern)) {
 
@@ -200,8 +207,9 @@
                   $scope.ticket.createdUser = {
                     primaryEmail: val,
                     firstName: firstName,
-                    companyId: $scope.ticketCompany ? $scope.ticketCompany.id : unassignedCompany.id
+                    companyId: $scope.ticketCompany ? $scope.ticketCompany.id : $scope.unassignedCompany.id
                   };
+                  $scope.ticketAgent = $scope.ticketCompany ? $scope.ticketAgent : '';
                   isNeedToDeleteUser = false;
                 } else {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
@@ -214,6 +222,8 @@
 
           } else if (val) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', false);
+          } else {
+            $scope.ticket.createdUser = undefined;
           }
 
         });
@@ -418,10 +428,6 @@
 
         $scope.filterAgents = function (value) {
           return function (item) {
-            if ($scope.ticketCompany && typeof $scope.ticketCompany === 'object') {
-              return item.companyId === $scope.ticketCompany.id;
-            }
-
             if (!value || value === '[$empty$]') {
               return true;
             }

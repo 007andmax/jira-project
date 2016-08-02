@@ -28,12 +28,11 @@
 
         <div class="topNavbar-filter">
 
-          <div class="dropdown"
-               ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
+          <div dropdown ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
 
             <div class="btn btn-default has-tooltip"
                  tooltip-placement="bottom" tooltip="assign ticket to..."
-                 aria-haspopup="true" data-toggle="dropdown" ng-click="isShowAssignUser = true">
+                 aria-haspopup="true" dropdown-toggle ng-click="isShowAssignUser = true">
               <i class="icn-sm icn-user"></i>
             </div>
 
@@ -44,12 +43,11 @@
                  aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
           </div>
 
-          <div class="dropdown"
-               ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
+          <div dropdown ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
 
             <div class="btn btn-default has-tooltip"
                  tooltip-placement="bottom" tooltip="Change Priority to..."
-                 aria-haspopup="true" data-toggle="dropdown">
+                 aria-haspopup="true" dropdown-toggle>
               <i class="icn-sm icn-ticket-flag"></i>
             </div>
 
@@ -112,7 +110,7 @@
 
               <li class="dropdown-submenu dropdown linked-agent-dropdown"
                   ng-if="ticketsSharedState.agentList && ticketsSharedState.agentList.length &&
-                        TicketsPermissionsService.isActionVisible('link_agent', ticketsSharedState.selectedTickets, ticketsSharedState.selectedTickets[0].company.id)">
+                        TicketsPermissionsService.isActionVisible('link_agent', ticketsSharedState.selectedTickets, ticketsSharedState.selectedTickets[0].company)">
                 <a tabindex="-1" href="javascript:void(0)" data-toggle="dropdown">
                   Link with Agent
                 </a>

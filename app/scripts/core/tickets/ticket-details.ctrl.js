@@ -6,10 +6,10 @@
       ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
-        'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
+        'quicktech.common.services.TicketsPermissionsService', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
           rightPanelSharedState.companyId = '';
@@ -80,6 +80,11 @@
 
             DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
               $scope.agentList = resp;
+              if ($scope.ticketDetails.agent && !$scope.ticketAgent) {
+                $scope.ticketAgent = resp.find(function (agent) {
+                  return agent.id === $scope.ticketDetails.agent.deviceId;
+                });
+              }
             });
 
 
@@ -106,6 +111,20 @@
             } else {
               closeTicket()
             }
+          };
+
+          $scope.$watch('ticketDetails.agent', function (value) {
+            if (value && $scope.agentList) {
+              $scope.ticketAgent = $scope.agentList.find(function (agent) {
+                return agent.id === value.deviceId;
+              });
+            }
+          });
+
+          $scope.remoteAccess = function (connectionType) {
+            DevicesService.createRemoteSession($scope.ticketAgent.id, $scope.company.id, connectionType, function (resp) {
+              RemoteAccessService.connectRemoteAccess(resp.sessionId, connectionType);
+            });
           };
 
           $scope.collapseTicket = function () {
