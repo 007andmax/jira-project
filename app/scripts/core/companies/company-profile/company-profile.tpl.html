@@ -56,12 +56,15 @@
               </a>
 
             </div>
-            {{ companyData.name }}
+            <p class="company-head">{{ companyData.name }}</p>
             <li class="info-type">
-              Address: {{ companyData.addresses[0].addressWithSuitNumberAndPostalCode }}
               <i class="icn-sm icn-location-white"></i>
+              Address: {{ companyData.addresses[0].addressWithSuitNumberAndPostalCode }}
             </li>
             <li class="info-type" ng-if="companyData.addresses[0].phoneNumbers && companyData.addresses[0].phoneNumbers.length">
+              <i class="icn-sm" ng-class="{'icn-iphone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'MOBILE',
+            'icn-user-fax': companyData.contacts[0].phoneNumbers[0].typeNumber === 'FAX',
+            'icn-user-phone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
               Phone: {{ companyData.addresses[0].phoneNumbers[0].number }}
               <!--todo: add icon for showing phone type; add element with class: icn-{{ companyData.addresses[0].phoneNumbers[0].type.toLowerCase() }} - it can be 'office', 'mobile' and 'fax'-->
             </li>
@@ -77,8 +80,13 @@
               Contact email: {{ companyData.contacts[0].primaryEmail }}
             </li>
             <li class="info-type" ng-if="companyData.contacts[0].phoneNumbers && companyData.contacts[0].phoneNumbers.length">
+              <i class="icn-sm" ng-class="{'icn-iphone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'MOBILE',
+            'icn-user-fax': companyData.contacts[0].phoneNumbers[0].typeNumber === 'FAX',
+            'icn-user-phone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
               Contact phone: {{ companyData.contacts[0].phoneNumbers[0].number }}
-              <!--todo: add icon for showing phone type; add element with class: icn-{{ phoneNumber.type.toLowerCase() }} - it can be 'office', 'mobile' and 'fax'-->
+              <!--ng-class="{'icn-iphone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'MOBILE',
+            'icn-user-fax': companyData.contacts[0].phoneNumbers[0].typeNumber === 'FAX',
+            'icn-user-phone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'OFFICE'}"-->
             </li>
           </ul>
 

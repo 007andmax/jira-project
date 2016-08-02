@@ -52,10 +52,17 @@
 .info-type{
   font-size: medium;
   list-style-type: none;
-  line-height:  1.8em;
+  line-height:  1.7em;
   color: #fff;
   padding-left: 10px;
   font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info-type i{
+  margin: 0;
+  display: inline-block;
 }
 .company-user-avatar{
   width: 100px;

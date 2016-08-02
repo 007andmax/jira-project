@@ -658,6 +658,10 @@
 .user-company-contact{
   float: left;
   padding-left: 0;
+  width: 310px;
+}
+.user-company-contact .info-type{
+  font-size: 14px;
 }
 .company-info .company-name{
   float: left;
@@ -668,6 +672,20 @@
   color: #fff;
   margin-bottom: 10px;
   padding-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-height: 100px;
+}
+.company-head{
+  width: 80%;
+  font-size: 38px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  line-height: 38px;
+
 }
 @-moz-document url-prefix() {
   .company-info .company-name{
