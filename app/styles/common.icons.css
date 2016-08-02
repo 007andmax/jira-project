@@ -623,6 +623,13 @@ a.ha-24{
   background-position: -998px 0;
 }
 
+.icn-edit-white {
+  background-position: -1042px 0;
+}
+:hover > .icn-edit-white, :active > .icn-edit-white, :focus:hover > .icn-edit-white, :focus:active > .icn-edit-white, :hover:active > .icn-edit-white, .active > .icn-edit-white, .open .icn-edit-white, .open > .btn:hover .icn-edit-white {
+  background-position: -1020px 0;
+}
+
 .icn-edit.disabled, .disabled > .icn-edit{
   background-position: -976px 0;
 }

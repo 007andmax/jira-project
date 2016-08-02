@@ -227,6 +227,24 @@
 
         };
 
+        $scope.setEditedUser = function (user) {
+          $scope.editedUser = angular.copy(user);
+        };
+
+        $scope.createUser = function () {
+          if (!$scope.editedUser || !$scope.editedUser.newUser) {
+            $state.go('companyProfile', { tabName: 'user' }).then(function () {
+              $scope.editedUser = {
+                newUser: true,
+                company: { id: $scope.company.id },
+                role: 'USER',
+                phoneNumbers: [{ phoneType: 'Office' }],
+                subscription: {}
+              };
+            });
+          }
+        };
+
       }]);
 
 }());

@@ -3,12 +3,12 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
-    [
-      '$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService',
+    ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'companyId',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'ServicesService', '$timeout',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.PermissionsService',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService,
-                sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService, PermissionsService) {
+      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, companyId,
+                UserNotificationService, sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService,
+                PermissionsService) {
 
         var isNeedToDeleteUser = true,
           unassignedCompany = CompaniesService.getUnassignedCompany();
@@ -31,6 +31,12 @@
           }
         });
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
+
+        if (companyId) {
+          $timeout(function () {
+            $scope.ticketCompany = CompaniesService.getOneById(companyId);
+          });
+        }
 
         if (sessionId) {
 
@@ -406,7 +412,6 @@
           }
           $scope.ticketCompanyChoosen = false;
         };
-      }
-    ]);
+      }]);
 
 }());

@@ -324,9 +324,6 @@
               confirmButton = 'Yes';
 
             UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-              if (!($state.is('tickets') || $state.is('tickets.details'))) {
-                $state.go('tickets', { listType: 'user' });
-              }
 
               var modalInstance = $modal.open({
                 templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
