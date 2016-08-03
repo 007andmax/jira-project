@@ -53,12 +53,12 @@
        ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
     <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
            name="cost" ng-change="validateSaleAndCost(editProductForm)"
-           hard-reset-pattern="decimalNumberPattern">
+           hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
   </div>
 
   <div class="col-5" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
     <input type="text" class="form-control" placeholder="S. Price" ng-model="editProduct.sale"
-           name="sale" ng-change="validateSaleAndCost(editProductForm)"
+           name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
            hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
   </div>
 
