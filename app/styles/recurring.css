@@ -253,6 +253,12 @@
   background-color: #ff302a;
 }
 
+.edit-invoice-form .invoice-ticket-add .btn.order-add-service[disabled] {
+  border-color: #90959b;
+  background-color: #90959b;
+  cursor: not-allowed;
+}
+
 .edit-invoice-form .product-expense > div,
 .edit-invoice-form .service-expense > div {
   position: relative;
