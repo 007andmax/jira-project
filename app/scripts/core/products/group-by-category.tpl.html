@@ -80,7 +80,7 @@
 
             <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete"
-               ng-click="deleteCategory()">
+               ng-click="deleteCategory()" ng-if="!(category.productsList && category.productsList.length)">
               <i class="icn-sm icn-delete"></i>
             </a>
 

@@ -109,19 +109,6 @@
             <i class="icn-sm calendar"></i>
           </label>
 
-          <label class="date end-date"
-                 tooltip="{{ disabledEndAndNum ? 'First choose Repeating Invoice every' : '' }}" tooltip-position="top">
-            <span>End Date</span>
-            <input type="text" placeholder="../../.." ng-if="reInitEndDate" readonly ng-change="changeEndDate()"
-                   custom-disabled="{{ disabledEndAndNum }}" ng-model="editInvoice.endDate"
-                   date-time-picker-with-period
-                   default-date="editInvoice.endDate" min-date="minEndDate" period="paramInvocie.repeatingInvoice">
-
-            <i class="icn-sm icn-remove-token"
-               ng-show="editInvoice.endDate && !disabledEndAndNum" ng-click="clearEndDate()"></i>
-
-            <i class="icn-sm calendar"></i>
-          </label>
           <label class="date num-to-generate"
                  tooltip="{{ disabledEndAndNum ? 'First choose Repeating Invoice every' : '' }}" tooltip-position="top">
             <span>Num. to generate</span>
@@ -135,6 +122,19 @@
 
           </label>
 
+          <label class="date end-date"
+                 tooltip="{{ disabledEndAndNum ? 'First choose Repeating Invoice every' : '' }}" tooltip-position="top">
+            <span>End Date</span>
+            <input type="text" placeholder="../../.." ng-if="reInitEndDate" readonly ng-change="changeEndDate()"
+                   custom-disabled="{{ disabledEndAndNum }}" ng-model="editInvoice.endDate"
+                   date-time-picker-with-period
+                   default-date="editInvoice.endDate" min-date="minEndDate" period="paramInvocie.repeatingInvoice">
+
+            <i class="icn-sm icn-remove-token"
+               ng-show="editInvoice.endDate && !disabledEndAndNum" ng-click="clearEndDate()"></i>
+
+            <i class="icn-sm calendar"></i>
+          </label>
         </fieldset>
 
         <label class="invoice-checkbox">
@@ -158,14 +158,14 @@
               </div>
             </li>
 
-            <li class="invoice-update-btns" ng-click="setOpenedTab('service')"
-                ng-show="companyServices && companyServices.length">
+            <li class="invoice-update-btns" ng-click="setOpenedTab('service')">
               <a href="javascript:void(0)">
                 <i class="icn-lg icn-add-service"></i>Service
               </a>
 
-              <div class="btn order-add-service has-tooltip"
-                   ng-click="addService(editInvoiceForm)" tooltip-placement="top" tooltip="Add Service">
+              <div class="btn order-add-service has-tooltip" ng-disabled="!companyServices || !companyServices.length"
+                   ng-click="addService(editInvoiceForm)" tooltip-placement="top"
+                   tooltip="{{ companyServices && companyServices.length ? 'Add Service' : 'Company has no services' }}">
                 <i class="icn-sm icn-plus"></i>
               </div>
             </li>
