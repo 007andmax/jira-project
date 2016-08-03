@@ -544,7 +544,7 @@
 
                   <div class="col-3" ng-class="{'has-error': isShowingErrors(servicesForm, 'editServiceRate' + $index)}"
                        style="margin-top: -8px;width: 92px">
-                    <input type="text" class="form-control" placeholder="Rate"
+                    <input type="text" class="form-control" placeholder="Rate" qt-to-fixed="2"
                            ng-model="service.rate" ng-required="true" name="{{'editServiceRate' + $index}}"
                            ng-readonly="!PermissionsService.isAllowed('MANAGE_SERVICES')"
                            hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">

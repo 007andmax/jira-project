@@ -8,7 +8,7 @@
   </div>
 
   <div class="col-2" ng-class="{'has-error': isShowingErrors(editTaxForm, 'editTaxRate')}">
-    <input type="text" class="form-control" placeholder="Tax Percent" ng-model="editTax.rate"
+    <input type="text" class="form-control" placeholder="Tax Percent" ng-model="editTax.rate" qt-to-fixed="2"
            name="editTaxRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
     <span class="procent-rate">%</span>
   </div>
