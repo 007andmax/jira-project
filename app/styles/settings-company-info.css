@@ -238,7 +238,7 @@
   cursor: help;
 }
 .test-email-wrap .input-btn-cr {
-  margin-top: -32px;
+  align-self: flex-end;
   margin-left: 15px;
 }
 .test-email-wrap .form-row {

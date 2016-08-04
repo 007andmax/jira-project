@@ -11,6 +11,8 @@
             newScope = $scope.$new(),
             trigger = $("[qt-popover-trigger]");
 
+          $element.css('position', 'relative');
+
           $templateRequest($attrs.qtCustomPopoverTemplate).then(function (resp) {
             template = angular.copy(resp);
             createPopover();
@@ -24,14 +26,17 @@
           };
 
           function togglePopover(e) {
-            if (popoverShown) {
-              newScope.hidePopover();
-            } else {
-              popoverShown = true;
-              popover.show();
-            }
+            if (!$element[0].hasAttribute('disabled')) {
+              if (popoverShown) {
+                newScope.hidePopover();
+              } else {
+                popoverShown = true;
+                popover.show();
+                calcPosition($attrs.qtPopoverPosition);
+              }
 
-            e.stopPropagation();
+              e.stopPropagation();
+            }
           }
 
           var unbind = newScope.$on('$destroy', function () {
@@ -50,23 +55,34 @@
               $document.on('click', hideOnOutsideClick);
 
               popover.addClass('popover');
-
-              var triggerHeight = +trigger.css('height').replace('px', ''),
-                left = -popover.css('width').replace('px', '') / 2 + +trigger.css('width').replace('px', '') + 30,
-                top = -triggerHeight - popover.css('height').replace('px', '') + 5;
-
               popover.css({
-                display: 'block',
                 position: 'absolute',
                 width: 'auto',
                 padding: '15px 25px',
-                top: top + 'px'
+                'z-index': 1001
               });
-
-              popover.attr('style', popover.attr('style') + ' left: ' + left + 'px !important;');
+              calcPosition($attrs.qtPopoverPosition);
 
               popover.hide();
             });
+          }
+
+          function calcPosition(position) {
+            var left, top;
+
+            if (position === 'top') {
+
+              left = -popover.outerWidth() / 2 + trigger.outerWidth() / 2;
+              top = -(popover.outerHeight() + 10);
+              popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
+
+            } else if (position === 'bottom') {
+
+              left = -popover.outerWidth() / 2 + trigger.outerWidth() / 2;
+              top = trigger.outerHeight() + 10;
+              popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
+
+            }
           }
 
           function hideOnOutsideClick(e) {

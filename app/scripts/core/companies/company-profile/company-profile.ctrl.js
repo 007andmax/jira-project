@@ -3,11 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
-    ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'TicketsService',
+    ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'TicketsService', 'DevicesService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
-      function ($scope, $state, $stateParams, CompaniesService, StatisticsService, TicketsService, SharedStateService,
-                $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
+      function ($scope, $state, $stateParams, CompaniesService, StatisticsService, TicketsService, DevicesService,
+                SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -50,6 +50,11 @@
             UserNotificationService.hide();
           }, 0);
 
+        });
+
+        DevicesService.getSomeInfoForDevices($scope.company.id, function (resp) {
+          $scope.isDomainPresent = resp.domainPresent;
+          $scope.allowAgentInstall = resp.allowAgentInstall;
         });
 
         $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);

@@ -433,8 +433,8 @@
               editInvoice.customFrequency = parseInt($scope.paramInvocie.repeatingInvoice)
             }
 
-            editInvoice.endDate = (new Date(editInvoice.endDate)).setHours(0, 0, 0);
-            editInvoice.sentOn = (new Date(editInvoice.sentOn)).setHours(0, 0, 0);
+            editInvoice.endDate = $filter('date')(new Date(editInvoice.endDate), 'yyyy-MM-dd');
+            editInvoice.sentOn = $filter('date')(new Date(editInvoice.sentOn), 'yyyy-MM-dd');
 
             for (var i = 0, len = editInvoice.services.length; i < len; i++) {
               editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)

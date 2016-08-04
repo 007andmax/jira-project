@@ -25,11 +25,12 @@
               try {
                 var successful = document.execCommand('copy');
                 if (successful) {
-                  UserNotificationService.show('The KEY has been copied', true);
+                  UserNotificationService.show('Copied successfully', true);
+                } else {
+                  UserNotificationService.show('Copy failed', true);
                 }
               } catch (err) {
-                UserNotificationService.show('The KEY has not been copied', true);
-                console.log('Oops, unable to copy');
+                UserNotificationService.show('Copy failed', true);
               }
 
               document.body.removeChild(textArea);

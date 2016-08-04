@@ -168,6 +168,16 @@
         });
       }
 
+      function sendDownloadAgentLink(agentDownloadDto, callback) {
+        var future = $http.post('/data/sendAgent', agentDownloadDto);
+        Utils.handleCallback(future, callback);
+      }
+
+      function getDownloadAgentLink(agentDownloadDto, callback) {
+        var future = $http.post('/data/getAgentDownloadLink', agentDownloadDto);
+        Utils.handleCallback(future, callback);
+      }
+
       function createOneTimeRemoteSession(callback) {
         $http.get('/remote/createOneTimeRemoteSession').then(function (resp) {
           if (callback) {
@@ -697,6 +707,8 @@
 
       return {
         downloadAgent: downloadAgent,
+        sendDownloadAgentLink: sendDownloadAgentLink,
+        getDownloadAgentLink: getDownloadAgentLink,
         runScanDevices: runScanDevices,
         getDevicesCount: getDevicesCount,
         getAgentsByCompany: getAgentsByCompany,

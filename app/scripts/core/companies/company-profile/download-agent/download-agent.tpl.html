@@ -1,0 +1,178 @@
+<div class="wrapper container" ng-controller="quicktech.core.companies.downloadAgent">
+  <div class="row">
+    <div class="interior create-user-form" ng-form="downloadAgentForm">
+      <div class="col-md-12 agent-head">
+        <p class="agent-head__description">Agent Install</p>
+      </div>
+      <div class="col-md-12 icons-container">
+        <div class="col-md-6" ng-class="{'active': currentType === 'download'}"
+             ng-click="setAgentDownloadType('download')">
+          <img class="svg-icn download-icn" src="images/input-icons/monitor-symbol-with-download-down-arrow.svg"
+               alt="download">
+        </div>
+        <div class="col-md-6" ng-class="{'active': currentType === 'email'}"
+             ng-click="setAgentDownloadType('email')">
+          <img class="svg-icn letter-icn" src="images/input-icons/envelope.svg" alt="letter">
+        </div>
+      </div>
+      <div class="form-container col-md-12" ng-if="currentType === 'email'">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="control-label">User Name</label>
+            <input type="text" class="form-control" name="userName" typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
+                   typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
+                   placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
+                   autocomplete="off" qt-scroll-to="center">
+
+            <div typeahead-input-icon="downloadAgentUser.userName" style="position: absolute;top: 35px;right: 13px;"></div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'email')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'email')}">
+              Email
+            </label>
+
+            <div ng-messages="downloadAgentForm.email.$error"
+                 ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'email')}">
+              <label class="control-label" ng-message="required">Email field is required if u want to send email</label>
+              <label class="control-label" ng-message="pattern">Email should be valid</label>
+            </div>
+
+            <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
+                   typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
+                   placeholder="Email Address" ng-model="downloadAgentUser.email" qt-typeahead-show-on-focus>
+
+            <input type="hidden" ng-model="downloadAgentUser.email" name="email"
+                   ng-pattern="emailPattern" ng-required="true">
+
+            <div typeahead-input-icon="downloadAgentUser.email" style="position: absolute;top: 35px;right: 13px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-container col-md-12" ng-if="currentType && !isDomainPresent">
+        <div class="col-md-12">
+          <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'agentName')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'agentName')}">
+              Admin Name
+            </label>
+
+            <div ng-messages="downloadAgentForm.agentName.$error"
+                 ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'agentName')}">
+              <label class="control-label" ng-message="required">Admin name can't be left empty</label>
+            </div>
+
+            <input type="text" class="form-control" name="agentName" ng-model="downloadAgentUser.agentName"
+                   placeholder="Admin Name" ng-required="!downloadAgentUser.agentName && downloadAgentUser.agentPassword">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group" ng-class="{ 'has-error': isShowingErrors(downloadAgentForm, 'agentPassword')}">
+            <label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentForm, 'agentPassword')}">
+              Password
+            </label>
+
+            <div ng-messages="downloadAgentForm.agentPassword.$error"
+                 ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'agentPassword')}">
+              <label class="control-label" ng-message="required">Password can't be left empty</label>
+            </div>
+
+            <input type="text" class="form-control" name="agentPassword" ng-model="downloadAgentUser.agentPassword"
+                   placeholder="Admin Password" ng-required="!downloadAgentUser.agentPassword && downloadAgentUser.agentName">
+          </div>
+        </div>
+      </div>
+      <!--<div class="col-md-12">-->
+        <!--<span class="underline-link">View and edit default email content</span>-->
+      <!--</div>-->
+      <div ng-if="currentType === 'email'">
+        <div class="col-md-12">
+          <div class="btn btn-lg btn-info download-agent-btn" ng-click="sendEmailWithAgent(downloadAgentForm)"
+               custom-disabled="{{ savingInProcess }}">
+            Send Email
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="btn btn-lg btn-info download-agent-btn" copy-key="downloadLink"
+               custom-disabled="{{ gettingLink }}">
+            Copy Link to Clipboard
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12" ng-if="currentType === 'download'">
+        <div class="btn btn-lg btn-info download-agent-btn" ng-click="downloadAgent(downloadAgentForm)"
+             custom-disabled="{{ savingInProcess }}">
+          {{ isDomainPresent ? 'Download' : 'Save and Download' }}
+        </div>
+      </div>
+    </div>
+    <!--<div class="internal-wrap">-->
+      <!--<div class="col-md-12 agent-head">-->
+        <!--<p class="agent-head__description">-->
+          <!--<span class="back-in-black">-->
+            <!--<i class="icn-sm icn-expand"></i>-->
+          <!--</span>-->
+          <!--Email Template-->
+        <!--</p>-->
+      <!--</div>-->
+      <!--<div class="form-container col-md-12" ng-form="downloadAgentTemplateForm" insert-keyword>-->
+        <!--<div class="col-md-12">-->
+          <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(downloadAgentTemplateForm, 'templateSubject')}">-->
+
+            <!--<label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentTemplateForm, 'templateSubject')}">-->
+              <!--Subject-->
+            <!--</label>-->
+
+            <!--<div ng-messages="downloadAgentTemplateForm.templateSubject.$error"-->
+                 <!--ng-class="{ 'hide': !isShowingErrors(downloadAgentTemplateForm, 'templateSubject')}">-->
+              <!--<label class="control-label" ng-message="required">Subject field cannot be left empty</label>-->
+              <!--<label class="control-label" ng-message="maxlength">Subject is too large</label>-->
+            <!--</div>-->
+
+            <!--<input id="template-subject" class="form-control insert-field"-->
+                   <!--name="templateSubject" ng-model="emailTemplate.subject"-->
+                   <!--required ng-maxlength="150" make-dirty-on-blur>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-md-12">-->
+          <!--<div class="form-group" ng-class="{'has-error': isShowingErrors(downloadAgentTemplateForm, 'templateBody')}">-->
+
+            <!--<label class="control-label" ng-class="{ 'hide': isShowingErrors(downloadAgentTemplateForm, 'templateBody')}">-->
+              <!--Email-->
+            <!--</label>-->
+
+            <!--<div ng-messages="downloadAgentTemplateForm.templateBody.$error"-->
+                 <!--ng-class="{ 'hide': !isShowingErrors(downloadAgentTemplateForm, 'templateBody')}">-->
+              <!--<label class="control-label" ng-message="required">Body cannot be left empty</label>-->
+              <!--<label class="control-label" ng-message="maxlength">Body is too large</label>-->
+            <!--</div>-->
+
+          <!--<textarea id="template-body" class="form-control insert-field"-->
+                    <!--name="templateBody" ng-model="emailTemplate.body"-->
+                    <!--required ng-maxlength="5000" make-dirty-on-blur></textarea>-->
+          <!--</div>-->
+          <!--<div class="template-actions">-->
+            <!--<div class="btn btn-lg btn-info download-agent-btn">-->
+              <!--Save-->
+            <!--</div>-->
+            <!--<div class="btn btn-lg btn-primary download-agent-btn">-->
+              <!--Cancel-->
+            <!--</div>-->
+            <!--<div class="restore-default-wrap">-->
+              <!--<span class="or">or</span>-->
+              <!--<a href="#" ng-click="restoreDefault()">Restore Default</a>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <!--<div style="padding-bottom: 10px;" ng-if="keywords && keywords.length">-->
+            <!--<span class="available-keywords-label">Available keywords: </span>-->
+              <!--<span class="available-keyword" ng-repeat="keyword in keywords" ng-click="insertAtCaret(keyword.keyName)">-->
+                <!--{{ keyword.keyName }}{{ $last ? '.' : ', ' }}-->
+              <!--</span>-->
+          <!--</div>-->
+
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>

@@ -58,40 +58,46 @@
             <p class="company-head">{{ companyData.name }}</p>
             <li class="info-type">
               <i class="icn-sm icn-location-white"></i>
-              Address: {{ companyData.addresses[0].addressWithSuitNumberAndPostalCode }}
+              Address: {{ currentLocation.address }}
             </li>
-            <li class="info-type" ng-if="companyData.addresses[0].phoneNumbers && companyData.addresses[0].phoneNumbers.length">
-              <i class="icn-sm" ng-class="{'icn-iphone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'MOBILE',
-            'icn-user-fax': companyData.contacts[0].phoneNumbers[0].typeNumber === 'FAX',
-            'icn-user-phone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
-              Phone: {{ companyData.addresses[0].phoneNumbers[0].number }}
-              <!--todo: add icon for showing phone type; add element with class: icn-{{ companyData.addresses[0].phoneNumbers[0].type.toLowerCase() }} - it can be 'office', 'mobile' and 'fax'-->
+            <li class="info-type" ng-if="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length">
+              <i class="icn-sm" ng-class="{'icn-iphone': currentLocation.phoneNumbers[0].typeNumber === 'MOBILE',
+            'icn-user-fax': currentLocation.phoneNumbers[0].typeNumber === 'FAX',
+            'icn-user-phone': currentLocation.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
+              Phone: {{ currentLocation.phoneNumbers[0].number }}
             </li>
           </ul>
 
           <div class="avatar company-user-avatar img-circle" ng-hide="getError().loadingInProcess">
-            <img style="width: 100%;" ng-src="{{ getUserAvatarUrl(companyData.contacts[0]) }}" class="img-circle">
+            <img style="width: 100%;" ng-src="{{ getUserAvatarUrl(currentContact) }}" class="img-circle">
           </div>
 
           <ul class="user-company-contact clearfix">
-            <li class="info-type">Primary contact: {{ getUserName(companyData.contacts[0]) }}</li>
-            <li class="info-type" ng-if="companyData.contacts[0].primaryEmail">
-              Contact email: {{ companyData.contacts[0].primaryEmail }}
+            <li class="info-type">Primary contact: {{ getUserName(currentContact) }}</li>
+            <li class="info-type" ng-if="currentContact.primaryEmail">
+              Contact email: {{ currentContact.primaryEmail }}
             </li>
-            <li class="info-type" ng-if="companyData.contacts[0].phoneNumbers && companyData.contacts[0].phoneNumbers.length">
-              <i class="icn-sm" ng-class="{'icn-iphone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'MOBILE',
-            'icn-user-fax': companyData.contacts[0].phoneNumbers[0].typeNumber === 'FAX',
-            'icn-user-phone': companyData.contacts[0].phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
-              Contact phone: {{ companyData.contacts[0].phoneNumbers[0].number }}
+            <li class="info-type" ng-if="currentContact.phoneNumbers && currentContact.phoneNumbers.length">
+              <i class="icn-sm" ng-class="{'icn-iphone': currentContact.phoneNumbers[0].typeNumber === 'MOBILE',
+            'icn-user-fax': currentContact.phoneNumbers[0].typeNumber === 'FAX',
+            'icn-user-phone': currentContact.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
+              Contact phone: {{ currentContact.phoneNumbers[0].number }}
             </li>
           </ul>
 
 
           <div class="button-container">
-            <i class="icn-retina new-ticket pull-left" create-ticket-open-modal="{{ company.id }}"></i>
+            <i class="icn-retina new-ticket pull-left" create-ticket-open-modal="{{ company.id }}"
+               tooltip="Create Ticket" tooltip-placement="top"></i>
             <i class="icn-retina new-user pull-left" style="margin-left: 5px;" ng-click="createUser()"
-               ng-if="PermissionsService.isAllowed('CREATE_USERS')"></i>
-            <i class="icn-retina save-download pull-right"></i>
+               ng-if="PermissionsService.isAllowed('CREATE_USERS')"
+               tooltip="Create User" tooltip-placement="top"></i>
+            <div qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
+                 qt-popover-position="bottom" custom-disabled="{{ !allowAgentInstall }}"
+                 class="pull-right" style="cursor: pointer">
+              <i class="icn-retina save-download pull-right" qt-popover-trigger tooltip-placement="top"
+                 tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></i>
+            </div>
           </div>
         </div>
 
@@ -109,7 +115,7 @@
          ec-is-show-loader-on-cover="isShowLoaderOnCover"
          ec-disabled-cover-control="disabledCoverControl"></div>
 
-    <div class="company-map-wrapper" company-address-autocomplete ng-if="companyData.addresses[0]"
+    <div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation"
          ng-model="companyData.addresses[0]"></div>
 
   </div>
