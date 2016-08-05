@@ -85,14 +85,14 @@
             </div>
           </li>
 
-          <li class="invoice-table" qt-toggle-slider qt-ts-toggler style="cursor: pointer;"
+          <li class="invoice-table" qt-toggle-slider style="cursor: pointer;"
               ng-repeat="invoice in invoices | filter: filterInvoicesByCompany | orderBy : orderByForInvoices : orderInvoices.reverse"
               ng-controller="quicktech.core.recurring.invoiceCtrl"
               on-finish-render="loadingFinished()"
               ng-class="{'warning-order': invoice.leftGenerations === 1, 'danger-order': invoice.leftGenerations === 0}">
 
-            <div>
-              <div class="table-invoice-item clearfix" ng-hide="editInvoiceId === invoice.id">
+            <div qt-ts-toggler ng-hide="editInvoiceId === invoice.id">
+              <div class="table-invoice-item clearfix">
 
                 <div>{{ companyOfInvocie.name }}</div>
 
@@ -132,7 +132,7 @@
                 </div>
               </div>
 
-              <div class="sub-wrapper clearfix" qt-ts-slider ng-hide="editInvoiceId === invoice.id">
+              <div class="sub-wrapper clearfix" qt-ts-slider>
                 <div ng-include="'/html/scripts/core/recurring/expenses/expenses-list.tpl.html'"></div>
 
                 <div class="ticket-add-amount pull-right">

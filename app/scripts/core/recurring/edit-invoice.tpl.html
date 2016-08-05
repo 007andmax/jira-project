@@ -1,4 +1,4 @@
-<div class="qt-create-invoice clearfix" stop-propagation="click" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
+<div class="qt-create-invoice clearfix" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
   <div class="edit-invoice-form">
     <form name="editInvoiceForm">
       <!--<span class="numb-form">{{ actualInvoiceNumber }}</span>-->
@@ -80,9 +80,11 @@
             <span>Repeating Invoice every</span>
 
             <input type="text" data-toggle="dropdown" aria-expanded="true"
+                   ng-readonly="hasGeneratedInvoices(editInvoice.sentOn)"
                    ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
                    hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"
-                   restore-from="{{savedRepeatingInvoice}}">
+                   restore-from="{{ savedRepeatingInvoice }}"
+                   custom-disabled="{{ hasGeneratedInvoices(editInvoice.sentOn) }}">
             <span class="suffix-days"
                   ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">
               {{ paramInvocie.repeatingInvoice == 1 ? 'day' : 'days' }}
@@ -105,6 +107,7 @@
 
             <input type="text" placeholder="../../.." ng-model="editInvoice.sentOn"
                    readonly ng-change="changeStartDate()"
+                   custom-disabled="{{ hasGeneratedInvoices(editInvoice.sentOn) }}"
                    qt-data-time-picker default-date="editInvoice.sentOn" min-date="minSentOnDate">
             <i class="icn-sm calendar"></i>
           </label>

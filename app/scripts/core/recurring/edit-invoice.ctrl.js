@@ -245,6 +245,10 @@
           $scope.savedRepeatingInvoice = $scope.paramInvocie.repeatingInvoice;
           $scope.paramInvocie.repeatingInvoice = '';
         };
+  
+        $scope.hasGeneratedInvoices = function (sentOn) {
+          return (new Date(sentOn)).getTime() <= Date.now();
+        };
 
         $scope.isNumber = function (value) {
           return parseInt(value);
