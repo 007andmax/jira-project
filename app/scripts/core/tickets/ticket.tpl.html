@@ -34,7 +34,7 @@
     </div>
 
     <div class="ticket-title clearfix">
-      <p class="pull-left ellipsis"><strong>{{ ticket.subject }}</strong>
+      <p class="pull-left ellipsis"><strong>{{ ticket.number + ' \u2014 ' + ticket.subject }}</strong>
         <span class="text-muted">&nbsp;–&nbsp;{{ ticket.previewNote }}</span>
       </p>
 
@@ -206,7 +206,7 @@
         </ul>
       </div>
 
-      <span class="label label-primary">{{ ticket.number }}</span>
+      <span class="label label-primary">{{ userReadable(ticket.ticketSource) }}</span>
 
       <div class="text-muted"
            ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(assignedUser) }}

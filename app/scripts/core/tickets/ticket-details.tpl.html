@@ -84,7 +84,7 @@
                  class="icn-sm icn-ticket-attachment pull-left"></i>
               {{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}
               <i class="dot-sep"></i>
-              {{ticketDetails.number}}
+              {{ userReadable(ticketDetails.ticketSource) }}
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@
         </div>
       </div>
       <div class="ticket-detail" style="padding-top: 92px;">
-        <h2>{{ ticketDetails.subject }}</h2>
+        <h2>{{ ticketDetails.number + ' \u2014 ' + ticketDetails.subject }}</h2>
         <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
         <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
       </div>
