@@ -6,10 +6,11 @@
       ['$scope', 'TicketsService', '$stateParams', 'UsersService', 'CompaniesService', 'Downloader', '$rootScope',
         '$state', 'ProductsService', '$sce', '$timeout', 'quicktech.common.services.UserConfirmationsService',
         'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
-        'quicktech.common.services.TicketsPermissionsService', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
+        'quicktech.common.services.TicketsPermissionsService', 'DevicesService',
+        'quicktech.common.services.RemoteAccessService', 'ServicesService',
         function ($scope, TicketsService, $stateParams, UsersService, CompaniesService, Downloader, $rootScope, $state,
                   ProductsService, $sce, $timeout, UserConfirmationsService, UserNotificationService, SharedStateService,
-                  TicketsPermissionsService, DevicesService, RemoteAccessService) {
+                  TicketsPermissionsService, DevicesService, RemoteAccessService, ServicesService) {
 
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
           rightPanelSharedState.companyId = '';
@@ -20,6 +21,23 @@
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
+    
+          var params = $state.params.remoteParams;
+          if(params && (params.deviceId || params.companyId || params.connectionDuration)) {
+            
+            $scope.ticketUpdate = { services: [{}] };
+            $scope.ticketUpdate.services[0].quantity = params.connectionDuration ? params.connectionDuration.toFixed() : undefined;
+            
+            ServicesService.getAllByCompany($scope, params.companyId, function (resp) {
+              $scope.ticketUpdate.services[0].item = resp.find(function (service) {
+                return service.name === 'Remote Service';
+              });
+            });
+  
+            $scope.linkAgent($stateParams.ticketId, params.deviceId);
+            
+            $scope.currentOpenTab = 'SERVICE';
+          }
 
           UserNotificationService.show('Loading...');
           $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {

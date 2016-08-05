@@ -3,11 +3,12 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
-    ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'companyId',
-      'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'ServicesService', '$timeout',
-      'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.PermissionsService', 'DevicesService',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, UserNotificationService,
-                sessionId, sessionTime, ServicesService, $timeout, TicketsPermissionsService, PermissionsService, DevicesService) {
+    ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
+      'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'fromRemoteCompanyId', 'fromRemoteDeviceId',
+      'ServicesService', '$timeout', 'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.PermissionsService',
+      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
+                UserNotificationService, sessionId, sessionTime, fromRemoteCompanyId, fromRemoteDeviceId, ServicesService,
+                $timeout, TicketsPermissionsService, PermissionsService) {
 
         var isNeedToDeleteUser = true, agentsByCompany = [];
 
@@ -31,12 +32,6 @@
         });
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
-        if (companyId) {
-          $timeout(function () {
-            $scope.ticketCompany = CompaniesService.getOneById(companyId);
-          });
-        }
-
         DevicesService.getDevicesCount($scope, function (agents) {
           agentsByCompany = agents;
 
@@ -45,6 +40,13 @@
             if (companyId !== 'staticCopy') {
               agentsList = agentsList.concat(agents[companyId].map(function (agent) {
                 agent.companyId = companyId;
+
+                if (fromRemoteCompanyId === companyId && fromRemoteDeviceId === agent.id) {
+                  $timeout(function () {
+                    $scope.ticketAgent = agent;
+                  })
+                }
+
                 return agent;
               }));
             }
@@ -52,7 +54,17 @@
           $scope.agentsList = angular.copy(agentsList);
         });
 
+        if (fromRemoteCompanyId) {
+          $timeout(function () {
+            $scope.ticketCompany = CompaniesService.getOneById(fromRemoteCompanyId);
+          });
+        }
+
         if (sessionId) {
+
+          $timeout(function () {
+            $scope.ticket.ticketAssignTo = $scope.currentUser;
+          });
 
           $scope.ticket.remoteSessionId = sessionId;
           $scope.ticket.serviceExpenses = [{}];
@@ -61,6 +73,12 @@
           $scope.ticket.serviceExpenses[0].quantity = quantity ? quantity.toFixed() : undefined;
           $scope.isShowService = true;
           $scope.maxServiceDate = new Date();
+
+          ServicesService.getAllByCompany($scope, fromRemoteCompanyId, function (resp) {
+            $scope.ticket.serviceExpenses[0].item = resp.find(function (service) {
+              return service.name === 'Remote Service';
+            });
+          });
 
           $scope.removeService = function (index) {
             $scope.ticket.serviceExpenses.splice(index, 1);

@@ -22,7 +22,7 @@
 
         $scope.srefToDetails = function (event) {
           if (!event.originalEvent.notOpenTicketDetails) {
-            $state.go('tickets.details', { ticketId: $scope.ticket.id });
+            $state.go('tickets.details', { ticketId: $scope.ticket.id, remoteParams: null });
           }
         };
 

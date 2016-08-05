@@ -17,9 +17,11 @@
               }
             }
           });
-
-          setTicketUpdateToDefault();
-
+  
+          if (!($scope.ticketUpdate && $scope.ticketUpdate.services && $scope.ticketUpdate.services.length)) {
+            setTicketUpdateToDefault();
+          }
+  
           function setTicketUpdateToDefault() {
 
             $scope.setTicketUpdate({

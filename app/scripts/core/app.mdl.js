@@ -49,6 +49,10 @@
       }))
       .state('tickets.details', waitForServices({
         url: '/:ticketId',
+        params: {
+          ticketId: '',
+          remoteParams: null
+        },
         templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
         controller: 'quicktech.core.tickets.ticketDetailsCtrl'
       }))
@@ -218,9 +222,9 @@
   }]);
 
   app.run(
-    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal',
+    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal', 'TicketsService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService',
-      function ($rootScope, $templateCache, CompaniesService, $state, $modal, UserConfirmationsService, SharedStateService) {
+      function ($rootScope, $templateCache, CompaniesService, $state, $modal, TicketsService, UserConfirmationsService, SharedStateService) {
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
@@ -314,40 +318,107 @@
           $rootScope.$broadcast('cancelEditForm');
         };
 
-        $rootScope.openCreateTicketForm = function (sessionId, sessionTime) {
+        $rootScope.openCreateTicketForm = function (sessionId, sessionTime, companyId, deviceId) {
           if (!sessionId) {
             throw 'SessionId is required'
           }
 
           if (sessionId === $rootScope.currentRemoteSessionId) {
-            var confirmMesage = 'Remote access session has been completed. Do you want to create ticket?',
-              confirmButton = 'Yes';
+            $modal.open({
+              templateUrl: '/html/scripts/common/templates/remote-connection-complete.tpl.html',
+              controller: ['$scope', '$modalInstance', 'TicketsService', function ($scope, $modalInstance, TicketsService) {
+                $scope.selectTicket = false;
+                $scope.selectedTicket = {};
+                $scope.searchTickets = TicketsService.search.bind(this, function (resp) {
+                  $scope.filteredTickets = resp;
+                });
 
-            UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-
-              var modalInstance = $modal.open({
-                templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
-                controller: 'quicktech.core.tickets.createTicketCtrl',
-                windowClass: 'modal-create-ticket',
-                backdrop: 'static',
-                animation: true,
-                resolve: {
-                  sessionId: function () {
-                    return sessionId;
-                  },
-                  sessionTime: function () {
-                    return sessionTime;
+                $scope.getTicketLabel = function (ticket) {
+                  if (ticket && ticket.number && ticket.subject) {
+                    return ticket.number + ' - ' + ticket.subject;
+                  } else {
+                    return '';
                   }
+                };
+
+                $scope.selectTicket = function (isTUCreating) {
+                  $scope.selectingTicket = isTUCreating;
+                };
+
+                $scope.onTicketSelect = function (value) {
+                  var ticketNumber = value.split(' - ')[0];
+
+                  $scope.selectedTicket.item = $scope.filteredTickets.find(function (ticket) {
+                    return ticket.number === ticketNumber;
+                  })
+                };
+
+                $scope.createTicket = function () {
+                  $modalInstance.close();
+                };
+
+                $scope.createTicketUpdate = function () {
+                  $modalInstance.close($scope.selectedTicket.item);
+                };
+
+                $scope.cancelConfirm = function (isGoBack) {
+                  if (isGoBack) {
+                    $scope.selectingTicket = false;
+                  } else {
+                    $modalInstance.dismiss(false);
+                  }
+                };
+
+              }],
+              keyboard: false,
+              size: 'custom-size-confirmation-pop-up',
+              windowClass: 'modal-spam',
+              backdrop: 'static',
+              animation: true
+
+            }).result.then(function (ticket) {
+              if (ticket) {
+                var params = {
+                  listType: 'all',
+                  ticketId: ticket.id,
+                  remoteParams: {
+                    connectionDuration: sessionTime,
+                    companyId: companyId,
+                    deviceId: deviceId
+                  }
+                };
+
+                if (!ticket.assignedUser || !ticket.assignedUser.id) {
+                  TicketsService.assignTo(ticket.id, $rootScope.currentUser.id, function () {
+                    $state.go('tickets.details', params);
+                  })
+                } else {
+                  $state.go('tickets.details', params);
                 }
-              });
+              } else if (ticket === undefined) {
 
-              modalInstance.opened.then(function () {
-                $('body').addClass('non-body-scroll');
-              });
+                var modalInstance = $modal.open({
+                  templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
+                  controller: 'quicktech.core.tickets.createTicketCtrl',
+                  windowClass: 'modal-create-ticket',
+                  backdrop: 'static',
+                  animation: true,
+                  resolve: {
+                    sessionId: function () { return sessionId; },
+                    sessionTime: function () { return sessionTime; },
+                    fromRemoteCompanyId: function () { return companyId; },
+                    fromRemoteDeviceId: function () { return deviceId; }
+                  }
+                });
 
-              modalInstance.result.finally(function () {
-                $('body').removeClass('non-body-scroll');
-              });
+                modalInstance.opened.then(function () {
+                  $('body').addClass('non-body-scroll');
+                });
+
+                modalInstance.result.finally(function () {
+                  $('body').removeClass('non-body-scroll');
+                });
+              }
             });
 
             $rootScope.currentRemoteSessionId = '';

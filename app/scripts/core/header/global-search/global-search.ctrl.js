@@ -158,7 +158,7 @@
             case 'TICKETS':
               return function (id) {
                 $state.go('tickets', { listType: 'all' }).then(function () {
-                  $state.go('tickets.details', { ticketId: id })
+                  $state.go('tickets.details', { ticketId: id, remoteParams: null })
                 });
               };
             case 'COMPANIES':

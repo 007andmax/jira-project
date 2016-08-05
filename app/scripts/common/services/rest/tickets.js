@@ -148,45 +148,18 @@
         });
       }
 
-      function search(params, callback) {
-
-        if (!params || !params.filter) {
-          throw "'filter' is mandatory parameter that must be counted in first argument"
+      function search(callback, keyword, companyId) {
+        if (!keyword || keyword === '[$empty$]' || keyword === 'undefined') {
+          return [];
         }
 
-        if (!params.keyword) {
-          throw "'keyword' is mandatory parameter that must be counted in first argument"
-        }
-
-        if (params.keyword.length < 3) {
-          throw "minimal length of 'keyword' is 3 characters"
-        }
-
-        params = normalizeAndCopyParams(params);
-
-        var result = [];
-
-        return $http({
-          method: 'GET',
-          url: '/v2/tickets/search',
-          params: params
-        }).then(function (response) {
-
-          for (var i = 0; i < response.data.length; i++) {
-            result.push(response.data[i]);
-          }
-
-          if (callback) {
-            callback(result);
-          }
-
-          return result;
-
-        }, function (response) {
-          if (callback) {
-            callback(response);
-          }
-        });
+        return $http.get('/v2/tickets/searchByKeyword?keyword=' + keyword + '&companyId=' + (companyId || ''))
+          .then(function (resp) {
+            if (callback) {
+              callback(resp.data);
+            }
+            return resp.data;
+          });
       }
 
 

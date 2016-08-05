@@ -19,7 +19,8 @@
               resolve: {
                 sessionId: false,
                 sessionTime: false,
-                companyId: function () {
+                fromRemoteDeviceId: false,
+                fromRemoteCompanyId: function () {
                   return attrs.createTicketOpenModal;
                 }
               }
