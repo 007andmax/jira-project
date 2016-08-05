@@ -59,8 +59,8 @@
             purchaseOrder: $scope.invoice.purchaseOrder,
             paymentTerms: $scope.invoice.paymentTerms,
             memo: $scope.invoice.memo,
-            sentOn: new Date($scope.invoice.sentOn),
-            endDate: new Date($scope.invoice.endDate),
+            sentOn: $filter('date')($scope.invoice.sentOn, 'dd MMM yyyy'),
+            endDate: $filter('date')($scope.invoice.endDate, 'dd MMM yyyy'),
             products: angular.copy($scope.invoice.products),
             services: angular.copy($scope.invoice.services)
           };
@@ -70,15 +70,13 @@
             $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
           }
 
-          $timeout(function () {
-            if ($scope.invoice.frequency) {
-              $scope.paramInvocie.repeatingInvoice = $scope.invoice.frequency === 'MONTHLY' ? 'Month' : 'Year';
-            } else {
-              $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency;
-            }
+          if ($scope.invoice.frequency) {
+            $scope.paramInvocie.repeatingInvoice = $scope.invoice.frequency === 'MONTHLY' ? 'Month' : 'Year';
+          } else {
+            $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency;
+          }
 
-            $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms;
-          }, 0)
+          $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms;
 
         } else {
 

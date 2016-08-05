@@ -20,22 +20,22 @@
             var options = {
                 keepOpen: true,
                 format: 'DD MMM YYYY',
-                defaultDate: 'now',
+                defaultDate: $filter('date')(Date.now(), 'dd MMM yyyy'),
                 ignoreReadonly: true
               }, dp,
               enabledDates = [],
               lastDate = '';
-
+  
             if (scope.minDate) {
-              options.minDate = scope.minDate;
+              options.minDate = $filter('date')(scope.minDate, 'dd MMM yyyy');
             }
-
+  
             if (scope.maxDate) {
-              options.maxDate = scope.maxDate;
+              options.maxDate = $filter('date')(scope.maxDate, 'dd MMM yyyy');
             }
-
+  
             if (scope.defaultDate) {
-              options.defaultDate = scope.defaultDate;
+              options.defaultDate = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
             }
 
             if (scope.period) {
