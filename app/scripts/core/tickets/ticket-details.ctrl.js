@@ -21,21 +21,21 @@
           $scope.ticketSharedUsersList = [];
           $scope.disabledWhenLoadAttachment = false;
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
-    
+
           var params = $state.params.remoteParams;
           if(params && (params.deviceId || params.companyId || params.connectionDuration)) {
-            
+
             $scope.ticketUpdate = { services: [{}] };
             $scope.ticketUpdate.services[0].quantity = params.connectionDuration ? params.connectionDuration.toFixed() : undefined;
-            
+
             ServicesService.getAllByCompany($scope, params.companyId, function (resp) {
               $scope.ticketUpdate.services[0].item = resp.find(function (service) {
                 return service.name === 'Remote Service';
               });
             });
-  
+
             $scope.linkAgent($stateParams.ticketId, params.deviceId);
-            
+
             $scope.currentOpenTab = 'SERVICE';
           }
 
@@ -451,10 +451,6 @@
             }
 
           }, true);
-
-          $scope.addSharedUser = function () {
-
-          };
 
           $scope.filterCurrentUser = function (item) {
             if (!item.user) {

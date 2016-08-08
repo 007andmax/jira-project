@@ -9,9 +9,11 @@
           $scope.currentAddUserTab = 'TEAM_MEMBER';
           $scope.searchFilter = {};
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
-          $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id).filter(function (user) {
-            return !user.isDefault;
-          });
+          if ($scope.ticketDetails) {
+            $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id).filter(function (user) {
+              return !user.isDefault;
+            });
+          }
           $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
 
             for (var i = $scope.ticketSharedUsersList.length - 1; i >= 0; i--) {
@@ -47,14 +49,33 @@
           };
 
           $scope.filterUpdateUser = function (item) {
-            var shares = $scope.ticketDetails.shares;
-
             var isCurrentUser = item.id === $scope.currentUser.id,
-              isAssignedUser = $scope.ticketDetails.assignedUser && item.id === $scope.ticketDetails.assignedUser.id,
-              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id,
+              isAssignedUser,
+              isCreatedUser,
+              isAlreadyShared;
+
+            if ($scope.ticketDetails) {
+              var shares = $scope.ticketDetails.shares;
+
+              isAssignedUser = $scope.ticketDetails.assignedUser && item.id === $scope.ticketDetails.assignedUser.id;
+              isCreatedUser = item.id === $scope.ticketDetails.createdUser.id;
               isAlreadyShared = shares.find(function (shared) {
                 return (shared.user ? shared.user.id : shared.contact.id) === item.id;
               });
+            } else {
+              var assignedUserId;
+
+              if (!$scope.ticket.ticketAssignTo) {
+                if ($scope.ticket.isAssignToMe) {
+                  assignedUserId = $scope.currentUser.id;
+                }
+              } else {
+                assignedUserId = $scope.ticket.ticketAssignTo.id;
+              }
+
+              isAssignedUser = assignedUserId && item.id === assignedUserId;
+              isCreatedUser = item.id === $scope.currentUser.id;
+            }
 
             if (isCurrentUser || isAssignedUser || isCreatedUser || isAlreadyShared) {
               return false;

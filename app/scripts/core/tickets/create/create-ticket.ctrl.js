@@ -5,10 +5,11 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'fromRemoteCompanyId', 'fromRemoteDeviceId',
-      'ServicesService', '$timeout', 'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.PermissionsService',
+      'ServicesService', '$timeout', 'quicktech.common.services.TicketsPermissionsService', '$state',
+      'quicktech.common.services.PermissionsService',
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
                 UserNotificationService, sessionId, sessionTime, fromRemoteCompanyId, fromRemoteDeviceId, ServicesService,
-                $timeout, TicketsPermissionsService, PermissionsService) {
+                $timeout, TicketsPermissionsService, $state, PermissionsService) {
 
         var isNeedToDeleteUser = true, agentsByCompany = [];
 
@@ -22,6 +23,8 @@
           MEDIUM: 'Medium',
           HIGH: 'High'
         };
+        $scope.ticketSharedUsersList = [{ user: $scope.currentUser, notify: true }];
+        $scope.selectUpdateSharedUser = {};
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -128,7 +131,7 @@
             }
 
             $scope.filteredAgentList = agentsByCompany[val.id];
-            $scope.usersCompany = UsersService.getAllByCompanyId(val.id);
+            $scope.clients = UsersService.getAllByCompanyId(val.id);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
           } else if (val) {
@@ -165,7 +168,7 @@
             }
 
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
-            $scope.usersCompany = UsersService.getClientUsers().filter(function (item) {
+            $scope.clients = UsersService.getClientUsers().filter(function (item) {
               if (!item.isDefault) {
                 return item;
               }
@@ -202,8 +205,8 @@
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
             var selectedUser = null;
-            for (var i = 0, len = $scope.usersCompany.length; i < len; i++) {
-              var user = $scope.usersCompany[i];
+            for (var i = 0, len = $scope.clients.length; i < len; i++) {
+              var user = $scope.clients[i];
               if (user.primaryEmail === val) {
                 selectedUser = user;
                 break;
@@ -328,7 +331,7 @@
             });
         };
 
-        $scope.saveTicket = function (form) {
+        $scope.saveTicket = function (form, isOpenAfterCreation) {
 
           if (form.$valid || $scope.isTicketFormValid(form)) {
             $scope.savingInProcess = true;
@@ -358,9 +361,37 @@
               }
             } else {
               $scope.ticket.assignedUser = $scope.ticket.ticketAssignTo.id;
+              $scope.ticketSharedUsersList.unshift({
+                user: $scope.ticket.ticketAssignTo,
+                notify: $scope.ticket.notifyTicketAssignedUser
+              });
+              $scope.ticket.ticketAssignTo = undefined;
             }
 
             var ticketNumber = $scope.ticketNumber;
+
+            $scope.ticket.shares = [];
+            for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+
+              var ticketSharedUser = $scope.ticketSharedUsersList[i];
+
+              if (!ticketSharedUser.notify) {
+                continue;
+              }
+
+              if (ticketSharedUser.user) {
+
+                $scope.ticket.shares.push({
+                  user: { id: ticketSharedUser.user.id }
+                });
+
+              } else if (ticketSharedUser.contact) {
+
+                $scope.ticket.shares.push({
+                  contact: { id: ticketSharedUser.contact.id }
+                })
+              }
+            }
 
             TicketsService.createTicket($scope.ticket, function (resp) {
               $scope.savingInProcess = false;
@@ -371,6 +402,9 @@
                 alert(message)
               } else {
                 UserNotificationService.show('New Ticket “' + ticketNumber + '” has been created', true);
+                if (isOpenAfterCreation) {
+                  $state.go('tickets.details', { listType: 'all', ticketId: resp.id, remoteParams: null });
+                }
               }
             });
 
@@ -485,6 +519,17 @@
           }
           $scope.ticketCompanyChoosen = false;
         };
+
+        $scope.getUserById = function (userId) {
+          return UsersService.getOneById(userId);
+        };
+
+        $scope.toggleAllShared = function (isNotifyAll) {
+          for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+            $scope.ticketSharedUsersList[i].notify = isNotifyAll;
+          }
+        };
+
       }]);
 
 }());

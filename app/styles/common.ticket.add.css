@@ -222,3 +222,6 @@
 .shared-user-add{
     width: 90%;
 }
+.shared-user-add .checkbox {
+  margin-left: 10px;
+}

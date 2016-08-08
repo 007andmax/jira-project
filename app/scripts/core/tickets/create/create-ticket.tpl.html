@@ -319,7 +319,7 @@
               <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
                      ng-model="ticketCreatedUser"
                      typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in usersCompany | filter: filterUserFullName($viewValue) | orderBy:'name'"
+                     typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'name'"
                      qt-typeahead-show-on-focus ng-trim="false"
                      custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 
@@ -368,7 +368,7 @@
               <label>Assign to</label>
 
               <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
-                     ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
+                     ng-model="ticket.ticketAssignTo" name="ticketAssignTo" typeahead-on-select="userAssigned(ticketAssignTo)"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
                      qt-typeahead-show-on-focus assign-to-validation ng-required="false"
@@ -378,13 +378,13 @@
 
             </div>
 
-            <div class="clearfix" style="height: 50px;"
+            <div class="clearfix" style="height: 54px;"
                  ng-if="!TicketsPermissionsService.isActionVisible('assign', ticket)">
-              <label class="control checkbox pull-left" style="margin-top: 15px;">
+              <label class="control checkbox pull-left" style="margin-top: 28px;">
                 <input type="checkbox" ng-model="ticket.isAssignToMe">
                 <span class="control-indicator"></span>
+                <span style="margin-top: 27px; text-transform: none">Assign To Me</span>
               </label>
-              <div style="margin-top: 13px;">Assign To Me</div>
             </div>
           </div>
 
@@ -403,19 +403,52 @@
 
           </div>
 
-          <div>
-            <div class="actions-wrapper" style="width: 171px;bottom: 0px;">
+          <div></div>
+        </li>
 
-              <div class="btn btn-lg btn-primary" data-dismiss="modal"
-                   ng-click="closeCreateTicketForm()">
-                Cancel
+        <li>
+          <div class="pull-left" style="width: 100%;">
+            <div style="font-weight: bold;">Notify</div>
+            <div>The people you select will get an email when you add this update. They'll also be notified every time a
+              comment is added.
+            </div>
+
+            <div class="ticket-add-content-actions-dropdown pull-left"
+                 ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
+
+            <div class="pull-left shared-user-add">
+              <div class="notify-select">
+                <span ng-click="toggleAllShared(true)">Select Everyone</span> | <span ng-click="toggleAllShared(false)">Select None</span>
               </div>
 
-              <div class="btn btn-lg btn-info" ng-click="saveTicket(ticketForm)"
-                   custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
-                Create
-              </div>
+              <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList">
+                <input type="checkbox" ng-model="sharedUser.notify">
+                <span class="control-indicator"></span>
+                <span style="text-transform: none">{{ getUserName(sharedUser.user || sharedUser.contact) }}</span>
+              </label>
 
+              <label class="control checkbox pull-left"
+                     ng-if="ticket.ticketAssignTo && ticket.ticketAssignTo.id && ticket.ticketAssignTo.id !== currentUser.id"
+                     ng-init="ticket.notifyTicketAssignedUser = true">
+                <input type="checkbox" ng-model="ticket.notifyTicketAssignedUser">
+                <span class="control-indicator"></span>
+                <span style="text-transform: none">{{ getUserName(ticket.ticketAssignTo) }}</span>
+              </label>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div></div>
+          <div style="padding-top: 10px;">
+            <div class="btn btn-lg btn-info pull-right" ng-click="saveTicket(ticketForm, true)" style="margin-left: 7px;"
+                 custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
+              Create and Open
+            </div>
+
+            <div class="btn btn-lg btn-info pull-right" ng-click="saveTicket(ticketForm)"
+                 custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
+              Create
             </div>
           </div>
         </li>
