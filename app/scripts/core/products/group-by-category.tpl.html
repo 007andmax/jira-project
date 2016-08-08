@@ -73,7 +73,6 @@
           <div class="product-actions" ng-if="!category.default && PermissionsService.isAllowed('MANAGE_PRODUCTS')">
 
             <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
-                 scroll-to-form
                  tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
               <i class="icn-sm icn-product-add"></i>
             </div>
@@ -137,6 +136,10 @@
 
                 </div>
                 <div class="col-6">&nbsp;</div>
+              </li>
+
+              <li class="qt-product-form" ng-if="showCreateProduct === 'start'">
+                <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
               </li>
 
               <li ng-repeat="product in category.productsList | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
@@ -216,8 +219,7 @@
 
               </li>
 
-
-              <li class="qt-product-form" ng-if="showCreateProduct">
+              <li class="qt-product-form" ng-if="showCreateProduct === 'end'">
                 <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
               </li>
 
@@ -226,8 +228,7 @@
             <div class="add-product-btn-wrapper"
                  ng-if="!category.default && PermissionsService.isAllowed('MANAGE_PRODUCTS')">
               <div class="btn btn-info has-tooltip"
-                   ng-click="addProduct(category.id)"
-                   custom-disabled="{{ showCreateProduct }}"
+                   ng-click="addProduct(category.id, 'end')"
                    tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Product">
                 <i class="icn-sm icn-product-add"></i>
               </div>

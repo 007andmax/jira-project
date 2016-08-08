@@ -34,19 +34,19 @@
           });
         };
 
-        $scope.addProduct = function (id) {
+        $scope.addProduct = function (id, place) {
           $rootScope.$broadcast('cancelEditForm', id);
-          $scope.showCreateProduct = true;
+          $scope.showCreateProduct = place;
         };
 
         $scope.addProductAndOpenCategory = function (id) {
-          $scope.addProduct(id);
+          $scope.addProduct(id, 'start');
           if (id !== $scope.expandedCategoryId) {
             $scope.setExpandedCategoryId(id);
           }
         };
 
-        $scope.$on('cancelEditForm', function (event, data) {
+        $scope.$on('cancelEditForm', function () {
           $scope.showCreateProduct = false;
         });
 
