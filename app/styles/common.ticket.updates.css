@@ -332,7 +332,7 @@
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
-  width: calc(60% - 19px);
+  width: calc(100% - 350px);
   float: left;
 }
 
