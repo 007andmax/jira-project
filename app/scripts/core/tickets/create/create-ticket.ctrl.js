@@ -13,6 +13,25 @@
 
         var isNeedToDeleteUser = true, agentsByCompany = [];
 
+        $scope.allowedTypes = [
+          "image/jpg",
+          "image/jpeg",
+          "image/bmp",
+          "image/gif",
+          "image/png",
+          "application/vnd.oasis.opendocument.text",
+          "application/vnd.oasis.opendocument.spreadsheet",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "application/vnd.ms-powerpoint",
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "application/msword",
+          "application/msxls",
+          "application/rtf",
+          "application/x-rtf",
+          "text/csv"
+        ];
+
         $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
@@ -278,8 +297,7 @@
               $scope.fileLoadOrError = true;
               file.progress = 100 * (progress.loaded / progress.total);
               $scope.$apply();
-            },
-            function (finish) {
+            }, function (finish) {
 
               $scope.fileLoadOrError = false;
 
@@ -289,7 +307,7 @@
 
                 $scope.fileInfo[file.name] = {
                   error: true,
-                  message: finish.message
+                  message: finish.message.split(';')[0]
                 };
 
                 $scope.fileInfo.quantityErrorFiles++;
@@ -299,6 +317,7 @@
               }
 
               file.id = finish.id;
+              $scope.$apply();
             }, function (error) {
             });
         };

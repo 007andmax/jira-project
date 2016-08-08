@@ -22,6 +22,13 @@
     </div>
 
     <div class="modal-body">
+      <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
+        <span class="drop-area-subwrapper">
+          <span class="drop-area">
+            Drop Files Here
+          </span>
+        </span>
+      </div>
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}"
            style="margin-bottom: 10px;">
@@ -54,11 +61,6 @@
                   <i class="icn-sm icn-remove-token"></i>
                 </a>
 
-                 <span class="pull-right" ng-show="fileInfo[file.name].error"
-                       style="position: absolute;color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 250px;">
-                   {{ fileInfo[file.name].message }}
-                 </span>
-
                 <a href="javascript:void(0)" class="hit-area pull-right"
                    ng-show="file.progress !== 100"
                    tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
@@ -72,6 +74,12 @@
                     <span class="sr-only">{{ file.progress }}% Complete</span>
                   </div>
                 </div>
+
+                <span class="pull-right" ng-show="fileInfo[file.name].error" tooltip="{{ fileInfo[file.name].message }}"
+                      tooltip-append-to-body tooltip-placement="top"
+                      style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 250px;text-overflow: ellipsis">
+                  {{ fileInfo[file.name].message }}
+                </span>
 
               </li>
             </ul>
@@ -368,7 +376,8 @@
               <label>Assign to</label>
 
               <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
-                     ng-model="ticket.ticketAssignTo" name="ticketAssignTo" typeahead-on-select="userAssigned(ticketAssignTo)"
+                     ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
+                     typeahead-on-select="userAssigned(ticketAssignTo)"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
                      qt-typeahead-show-on-focus assign-to-validation ng-required="false"
@@ -441,7 +450,8 @@
         <li>
           <div></div>
           <div style="padding-top: 10px;">
-            <div class="btn btn-lg btn-info pull-right" ng-click="saveTicket(ticketForm, true)" style="margin-left: 7px;"
+            <div class="btn btn-lg btn-info pull-right" ng-click="saveTicket(ticketForm, true)"
+                 style="margin-left: 7px;"
                  custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
               Create and Open
             </div>
