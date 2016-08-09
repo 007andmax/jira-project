@@ -4,10 +4,17 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope',
-      'quicktech.common.services.PermissionsService', 'TicketsService',
-      function ($scope, SharedStateService, $state, $rootScope, PermissionsService, TicketsService) {
+      'quicktech.common.services.PermissionsService', 'TicketsService', 'CompaniesService', 'UsersService',
+      function ($scope, SharedStateService, $state, $rootScope, PermissionsService, TicketsService,
+                CompaniesService, UsersService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
+
+        $scope.companiesExpanded = false;
+        $scope.usersExpanded = false;
+
+        $scope.clientCompanies = CompaniesService.getClientCompanies;
+        $scope.clientUsers = UsersService.getClientUsers;
 
         $scope.$state = $state;
         $scope.ticketCounts = TicketsService.getCounts($scope);
@@ -52,6 +59,29 @@
             $state.go(state, stateParams);
           }
 
+        };
+
+        $scope.goToCompany = function (company) {
+          $state.go('companyProfile', { companyId: company.id });
+        };
+
+        $scope.goToUser = function (user) {
+          $state.go('users').then(function () {
+            SharedStateService.getSharedState('usersHeader').filter.userId = user.id;
+            SharedStateService.getSharedState('globalSearch').searchValue = $scope.getUserName(user);
+          });
+        };
+
+        $scope.toggleCompanies = function (oldValue, $event) {
+          $scope.companiesExpanded = !oldValue;
+          $scope.usersExpanded = false;
+          $event.stopPropagation();
+        };
+
+        $scope.toggleUsers = function (oldValue, $event) {
+          $scope.usersExpanded = !oldValue;
+          $scope.companiesExpanded = false;
+          $event.stopPropagation();
         };
 
         function getOpenedCategory(url) {

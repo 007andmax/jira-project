@@ -105,12 +105,33 @@
              ng-class="{active: $state.includes('companies')}"
              ng-click="stateGo($event, 'companies')">
           <i class="nav-icon icn-lg icn-companies icon-pos"></i> Companies
+          <div ng-click="toggleCompanies(companiesExpanded, $event)">
+            <i class="icn-sm {{ companiesExpanded ? 'icn-collapse' : 'icn-expand' }}"></i>
+          </div>
         </div>
+        <div ng-show="companiesExpanded">
+          <div ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
+               ng-click="goToCompany(company)" ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}">
+            {{ company.name }}
+          </div>
+        </div>
+
+
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
              ng-class="{active: $state.includes('users')}"
              ng-click="stateGo($event, 'users')">
           <i class="nav-icon icn-lg icn-users icon-pos"></i> Users
+          <div ng-click="toggleUsers(usersExpanded, $event)">
+            <i class="icn-sm {{ usersExpanded ? 'icn-collapse' : 'icn-expand' }}"></i>
+          </div>
         </div>
+        <div ng-show="usersExpanded">
+          <div ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
+               ng-click="goToUser(user)">
+            {{ getUserName(user) }}
+          </div>
+        </div>
+
         <!--<div class="center-category__category">-->
         <!--<i class="nav-icon icn-lg icn-leads icon-pos"></i> Leads-->
         <!--</div>-->
