@@ -2,19 +2,19 @@
   <div class="topNavbar-content" ng-controller="quicktech.core.header.headerCtrl">
 
     <div class="col-md-2 col-sm-2 col-xs-2 topNavbarLeft">
-      <div class="" ng-if="goBack.isEnabled">
+      <div ng-if="globalSearch.goBack.isEnabled">
         <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-           style="margin: 11px 8px 0 0;" ng-click="goBack.func()"
-           tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{ goBack.tooltip }}">
+           style="margin: 5px 8px 0 0;" ng-click="globalSearch.goBack.func()"
+           tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{ globalSearch.goBack.tooltip }}">
           <i class="icn-sm icn-back-arrow"></i>
         </a>
       </div>
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
-        <strong>{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState())
-          }}</strong>
-    <span class="text-muted" ng-if="count = getCurrentCount()">
-    &nbsp;{{ count }} </span>
+        <strong>
+          {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
+        </strong>
+        <span class="text-muted" ng-if="count = getCurrentCount()">&nbsp;{{ count }}</span>
       </p>
 
       <p ng-if="globalSearch.selectedItemsCount">
@@ -43,7 +43,8 @@
                  aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
           </div>
 
-          <div dropdown ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
+          <div dropdown
+               ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
 
             <div class="btn btn-default has-tooltip"
                  tooltip-placement="bottom" tooltip="Change Priority to..."
@@ -124,18 +125,22 @@
 
               <li ng-click="moveIntoSpam()"
                   ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketsSharedState.selectedTickets)">
-                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam' }}</a>
+                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam'
+                  }}</a>
               </li>
 
-              <li ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketsSharedState.selectedTickets)">
+              <li
+                ng-if="TicketsPermissionsService.isActionVisible('send_to_trash', ticketsSharedState.selectedTickets)">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
               </li>
 
-              <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_spam')">
+              <li
+                ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_spam')">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="restoreFromSpam()">Restore from Spam</a>
               </li>
 
-              <li ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_trash')">
+              <li
+                ng-if="TicketsPermissionsService.isActionVisible('restore', ticketsSharedState.selectedTickets, 'from_trash')">
                 <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(false)">Restore from Trash</a>
               </li>
 

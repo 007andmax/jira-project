@@ -12,7 +12,6 @@
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
-        $scope.goBack = {};
 
         $scope.getClientCompanies = function () {
           var clientCompanies = CompaniesService.getClientCompanies();
@@ -62,26 +61,12 @@
         });
 
         $scope.getPageNameByState = function () {
-          $scope.goBack.isEnabled = false;
           if ($state.includes("tickets")) {
-            if ($scope.globalSearch.selectedItemsCount) {
-              $scope.goBack.isEnabled = true;
-              $scope.goBack.func = $rootScope.$broadcast.bind($rootScope, 'uncheckAllTickets');
-              $scope.goBack.tooltip = 'reset selected items';
-            }
             return 'tickets';
           } else if ($state.includes("users")) {
             return 'users';
           } else if ($state.includes("companies")) {
             return 'companies';
-          } else if ($state.includes("createCompany")) {
-            $scope.goBack.isEnabled = true;
-            $scope.goBack.func = $state.go.bind($state, 'companies');
-            $scope.goBack.tooltip = 'back to companies';
-          } else if ($state.includes("editCompany")) {
-            $scope.goBack.isEnabled = true;
-            $scope.goBack.func = $state.go.bind($state, 'companyProfile', { companyId: $stateParams.companyId });
-            $scope.goBack.tooltip = 'back to company profile';
           } else if ($state.includes("products")) {
             return 'products';
           } else if ($state.includes("services")) {
@@ -94,16 +79,8 @@
             return 'receivable';
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
-          } else if ($state.includes("companyProfile")) {
-            $scope.goBack.isEnabled = true;
-            $scope.goBack.func = $state.go.bind($state, 'companies');
-            $scope.goBack.tooltip = 'back to companies';
           } else if ($state.includes("vendors")) {
             return 'vendors';
-          } else if ($state.includes("createVendor") || $state.includes("editVendor")) {
-            $scope.goBack.isEnabled = true;
-            $scope.goBack.func = $state.go.bind($state, 'vendors');
-            $scope.goBack.tooltip = 'back to vendors';
           } else if ($state.includes("settings")) {
             $scope.globalSearch.openedItemName = 'Account Settings';
           } else if ($state.includes("devices")) {

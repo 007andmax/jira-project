@@ -240,6 +240,25 @@
           }
           globalSearch.openedItemName = undefined;
           globalSearch.searchValue = '';
+
+          if (toState.name === 'tickets' || toState.name === 'tickets.details') {
+            globalSearch.goBack.func = $rootScope.$broadcast.bind($rootScope, 'uncheckAllTickets');
+            globalSearch.goBack.tooltip = 'reset selected items';
+          } else if (toState.name ===  'editCompany') {
+            globalSearch.goBack.isEnabled = true;
+            globalSearch.goBack.func = $state.go.bind($state, 'companyProfile', { companyId: $stateParams.companyId });
+            globalSearch.goBack.tooltip = 'back to company profile';
+          } else if (toState.name ===  'companyProfile' || toState.name === 'createCompany') {
+            globalSearch.goBack.isEnabled = true;
+            globalSearch.goBack.func = $state.go.bind($state, 'companies');
+            globalSearch.goBack.tooltip = 'back to companies';
+          } else if (toState.name ===  'createVendor' || toState.name ===  'editVendor') {
+            globalSearch.goBack.isEnabled = true;
+            globalSearch.goBack.func = $state.go.bind($state, 'vendors');
+            globalSearch.goBack.tooltip = 'back to vendors';
+          } else {
+            globalSearch.goBack.isEnabled = false;
+          }
         });
 
         CompaniesService._addInitListener(function () {

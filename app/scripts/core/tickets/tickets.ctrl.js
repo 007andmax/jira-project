@@ -85,6 +85,7 @@
         $scope.$on('uncheckAllTickets', function () {
           $scope.selectedTickets = {};
           globalSearch.selectedItemsCount = undefined;
+          globalSearch.goBack.isEnabled = false;
           ticketsHeaderState.agentList = undefined;
         });
 
@@ -131,6 +132,8 @@
               globalSearch.selectedItemsCount++;
             }
           }
+
+          globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
         }
 
         function uncheckTicket(id) {
