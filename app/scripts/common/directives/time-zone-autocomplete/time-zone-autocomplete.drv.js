@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("timeZoneAutocomplete", [
-    '$document', function ($document) {
+    '$document', '$timeout', function ($document, $timeout) {
       return {
         restrict: 'E',
         templateUrl: '/html/scripts/common/directives/time-zone-autocomplete/time-zone-autocomplete.tpl.html',
@@ -11,13 +11,15 @@
           timeZones: '=',
           address: '='
         },
-        link: function ($scope) {
+        link: function ($scope, element) {
           var currentFocused,
+            isOnFirstLevel = true,
             firstLevel = [],
             secondLevel = [],
-            expanded = false,
-            saveIndex = 0,
-            firstIndex = 0;
+            saveIndex,
+            firstIndex,
+            dropdown,
+            anotherDropdown = false;
 
           $scope.timeZonesMapped = [];
 
@@ -35,82 +37,103 @@
             }
           }
 
-          $document.on('keydown', function (e) {
-            if ($document.find('.dropdown').hasClass('open')) {
-              if (!firstLevel.length){
-                firstLevel = angular.element($document.find('.time-zone-dropdown .cities-names')).children('.focusable');
-                currentFocused = angular.element(firstLevel[0]);
+          $scope.$on('$destroy', function () {
+            $document.off('keydown', onKeyDown);
+          });
+
+          $document.on('keydown', onKeyDown);
+
+          function onKeyDown(e) {
+            dropdown = element.find('.dropdown');
+
+            if (dropdown.hasClass('open')) {
+              if ($scope.filteredTimeZones && $scope.filteredTimeZones.length) {
+                isOnFirstLevel = false;
+                anotherDropdown = true;
+                secondLevel = element.find('.time-zone-dropdown .time-zone.focusable');
+              } else {
+                firstLevel = element.find('.time-zone-dropdown .cities-names').children('.focusable');
+                if (anotherDropdown) {
+                  isOnFirstLevel = true;
+                  anotherDropdown = false;
+                  firstIndex = undefined;
+                  saveIndex = 0;
+                }
               }
 
               switch (e.which || e.keyCode) {
-                case 13:
+                case 13://enter
                 {
                   if (currentFocused) {
-                    currentFocused.removeClass('time-zone-focused');
-                    if (currentFocused.hasClass('expandable')) {
+                    if (isOnFirstLevel && currentFocused.hasClass('expandable')) {
+                      currentFocused.removeClass('time-zone-focused');
+                      currentFocused.addClass('expanded');
                       $scope.expand($scope.citiesExpanded[currentFocused.attr('locale').split('/')[0] + currentFocused.attr('offset')], e);
                       secondLevel = currentFocused.siblings();
                       currentFocused = angular.element(secondLevel[0]);
                       currentFocused.addClass('time-zone-focused');
-                      expanded = true;
                       saveIndex = firstIndex;
                       firstIndex = 0;
-                    }
-                    else {
+                      isOnFirstLevel = false;
+                    } else {
                       $scope.setTimeZone(currentFocused.attr('locale'), currentFocused.attr('offset'));
-                      firstIndex = 0;
+                      firstIndex = undefined;
                       saveIndex = 0;
-                      currentFocused = angular.element(firstLevel[0]);
+                      isOnFirstLevel = true;
+                      $timeout(closeDropdown);
                     }
-
                     $scope.$apply();
                   }
-
                   break;
                 }
-                case 27:
+                case 27://escape
                 {
-                  currentFocused.removeClass('time-zone-focused');
-                  currentFocused = angular.element(firstLevel[saveIndex]);
-                  if (currentFocused.hasClass('expandable')) {
-                    $scope.expand($scope.citiesExpanded[currentFocused.attr('locale').split('/')[0] + currentFocused.attr('offset')], e);
+                  var currentParent = currentFocused.parent();
+                  if (currentParent.hasClass('expandable')) {
+                    currentFocused.removeClass('time-zone-focused');
+                    currentParent.removeClass('expanded');
+                    $scope.expand($scope.citiesExpanded[currentFocused.attr('locale').split('/')[0] + currentFocused.attr('offset')], e, false);
                     $scope.$apply();
-                    currentFocused.addClass('time-zone-focused');
-                    expanded = false;
                     firstIndex = saveIndex;
+                    currentFocused = changeFocus(currentFocused, firstLevel, firstIndex);
                     saveIndex = 0;
+                  } else {
+                    firstIndex = undefined;
+                    saveIndex = 0;
+                    closeDropdown();
                   }
+                  isOnFirstLevel = true;
                   break;
                 }
-                case 38:
+                case 38://up
                 {
-                  if (!expanded) {
-                    if (--firstIndex < 0) firstIndex = firstLevel.length - 1;
-                    currentFocused = changeFocus(currentFocused, firstLevel, firstIndex);
+                  if (!firstIndex) {
+                    firstIndex = (isOnFirstLevel ? firstLevel.length : secondLevel.length) - 1;
                   } else {
-                    if (--firstIndex < 0) firstIndex = secondLevel.length - 1;
-                    currentFocused = changeFocus(currentFocused, secondLevel, firstIndex);
+                    firstIndex--;
                   }
+                  currentFocused = changeFocus(currentFocused, isOnFirstLevel ? firstLevel : secondLevel, firstIndex);
                   break;
                 }
-                case 40:
+                case 40://down
                 {
-                  if (!expanded) {
-                    if (++firstIndex >= firstLevel.length) firstIndex = 0;
-                    currentFocused = changeFocus(currentFocused, firstLevel, firstIndex);
+                  if (firstIndex === undefined || firstIndex === (isOnFirstLevel ? firstLevel.length : secondLevel.length) - 1) {
+                    firstIndex = 0;
                   } else {
-                    if (++firstIndex >= secondLevel.length) firstIndex = 0;
-                    currentFocused = changeFocus(currentFocused, secondLevel, firstIndex);
+                    firstIndex++;
                   }
+                  currentFocused = changeFocus(currentFocused, isOnFirstLevel ? firstLevel : secondLevel, firstIndex);
                   break;
                 }
 
                 default:
                   return;
               }
-              e.preventDefault();
+              e.stopPropagation();
+            } else {
+              dropdown.addClass('open');
             }
-          });
+          }
 
           function changeFocus(current, array, index) {
             var temp;
@@ -124,6 +147,15 @@
             current[0].scrollIntoViewIfNeeded(false);
             return current;
           }
+
+          function closeDropdown() {
+            dropdown.removeClass('open');
+            if (currentFocused) {
+              currentFocused.removeClass('time-zone-focused');
+              currentFocused = undefined;
+            }
+          }
+
         },
         controller: function ($scope) {
           var offsetPattern = /(\+|\-)?(\d{1,2}):?(\d{1,2})?/;
@@ -151,8 +183,8 @@
             return form[field] && form[field].$dirty && !$scope.address.fromGoogle;
           };
 
-          $scope.expand = function (item, event) {
-            item.expanded = !item.expanded;
+          $scope.expand = function (item, event, isClose) {
+            item.expanded = isClose !== undefined ? isClose : !item.expanded;
             event.stopPropagation();
           };
 
@@ -160,7 +192,24 @@
             if (locale && locale.length) {
               var matches = offsetPattern.exec(locale);
               matches ? filterTimeZones(null, parseOffset(matches)) : filterTimeZones(locale.split('/').pop());
-              if ($scope.address.timeZone && locale !== $scope.address.timeZone.name) $scope.address.fromGoogle = false;
+              if ($scope.address.timeZone && locale !== $scope.address.timeZone.name) {
+                $scope.address.fromGoogle = false;
+              }
+            } else if ($scope.address && $scope.address.country) {
+              var filteredTimeZones = [];
+              for (var i = 0; i < $scope.timeZonesMapped.length; i++) {
+                var timeZone = $scope.timeZonesMapped[i],
+                  country = timeZone.country;
+
+                if (!Object.keys($scope.timeZones[$scope.address.country] || {}).length) {
+                  break;
+                }
+
+                if (country === $scope.address.country) {
+                  filteredTimeZones.push({ name: country + '/' + timeZone.city, offset: timeZone.offset });
+                }
+              }
+              $scope.filteredTimeZones = filteredTimeZones;
             }
           });
 
@@ -182,9 +231,18 @@
               var obj = $scope.timeZonesMapped[i],
                 country = obj.country,
                 city = obj.city,
-                offsetValue = obj.offset;
+                offsetValue = obj.offset,
+                isCityFound = name && city.toLowerCase().indexOf(name.toLowerCase()) !== -1,
+                isOffsetFound = angular.isNumber(offset) && offset === offsetValue,
+                isCountryFound = name && country.toLowerCase().indexOf(name.toLowerCase()) !== -1;
 
-              if ((name && city.toLowerCase().indexOf(name.toLowerCase()) !== -1) || (angular.isNumber(offset) && offset === offsetValue)) {
+              if ($scope.address && $scope.address.country) {
+                if (Object.keys($scope.timeZones[$scope.address.country] || {}).length && country !== $scope.address.country) {
+                  continue;
+                }
+              }
+
+              if (isCityFound || isCountryFound || isOffsetFound) {
                 filteredTimeZones.push({ name: country + '/' + city, offset: offsetValue });
               }
             }
