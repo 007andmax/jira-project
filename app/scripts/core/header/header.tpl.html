@@ -11,8 +11,11 @@
       </div>
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
-        <strong>
-          {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
+        <strong tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}"
+                tooltip-placement="bottom" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+          <span trimmed-tooltip-container>
+            {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
+          </span>
         </strong>
         <span class="text-muted" ng-if="count = getCurrentCount()">&nbsp;{{ count }}</span>
       </p>
@@ -225,7 +228,9 @@
           <!--ng-click="currentUser.online = !currentUser.online"></i>-->
           <i class="on"></i>
 
-          <div class="nickname">{{ getUserName(currentUser) }}</div>
+          <div class="nickname" tooltip="{{ getUserName(currentUser) }}" tooltip-placement="bottom">
+            {{ getUserName(currentUser) }}
+          </div>
 
           <i class="icn-sm icn-expand"></i>
           <i class="icn-sm icn-collapse"></i>

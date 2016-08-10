@@ -34,11 +34,13 @@
         //  $scope.keywords = data.keywords;
         //});
 
-        $scope.$watch('downloadAgentUser', function () {
+        $scope.$watch(function () {
+          return $scope.downloadAgentUser.agentName + ' ' + $scope.downloadAgentUser.agentPassword;
+        }, function () {
           $timeout.cancel(timeout);
           $scope.gettingLink = true;
           timeout = $timeout(copyLinkToClipboard, 500);
-        }, true);
+        });
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveTemplate || $scope.triedToDownload || form[fieldName].$dirty) && form[fieldName].$invalid;
@@ -135,10 +137,15 @@
         };
 
         function copyLinkToClipboard() {
-          DevicesService.getDownloadAgentLink($scope.downloadAgentUser, function (resp) {
-            $scope.gettingLink = false;
-            $scope.downloadLink = resp.downloadLink;
-          });
+          var agentName = $scope.downloadAgentUser.agentName;
+          var agentPassword = $scope.downloadAgentUser.agentPassword;
+
+          if (agentName && agentPassword || !agentName && !agentPassword) {
+            DevicesService.getDownloadAgentLink($scope.downloadAgentUser, function (resp) {
+              $scope.gettingLink = false;
+              $scope.downloadLink = resp.downloadLink;
+            });
+          }
         }
 
       }]);

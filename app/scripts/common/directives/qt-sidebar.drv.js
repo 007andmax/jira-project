@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtSidebar',
-    ['$rootScope', '$document', function ($rootScope, $document) {
+    ['$rootScope', '$document', '$state', function ($rootScope, $document, $state) {
       return {
         restrict: 'A',
         link: function ($scope, $element) {
@@ -21,6 +21,9 @@
           function initLeftPanel(e) {
             var windowWidth = window.outerWidth;
             $rootScope.isLeftPanelHidden = windowWidth <= 1024;
+            if ($state.includes('settings')) {
+              $rootScope.isLeftPanelHidden = true;
+            }
 
             if ($rootScope.isLeftPanelHidden) {
               $scope.$broadcast('leftPanelClosedFromQTSidebar');

@@ -34,8 +34,8 @@
     </div>
 
     <div class="ticket-title clearfix">
-      <p class="pull-left ellipsis"><strong>{{ ticket.number + ' \u2014 ' + ticket.subject }}</strong>
-        <span class="text-muted">&nbsp;–&nbsp;{{ ticket.previewNote }}</span>
+      <p class="pull-left ellipsis"><strong>{{ ticket.number + ' - ' + ticket.subject }}</strong>
+        <span class="text-muted">&nbsp;&nbsp;{{ ticket.previewNote }}</span>
       </p>
 
       <ul class="ticket-actions pull-right" ng-init="ticketActionRendering()" ng-click="doNotExpandTicket($event)">

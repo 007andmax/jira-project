@@ -174,7 +174,7 @@
         </div>
       </div>
       <div class="ticket-detail" style="padding-top: 92px;">
-        <h2>{{ ticketDetails.number + ' \u2014 ' + ticketDetails.subject }}</h2>
+        <h2>{{ ticketDetails.number + ' - ' + ticketDetails.subject }}</h2>
         <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
         <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
       </div>
@@ -306,32 +306,41 @@
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
-                  <div class="col-2 col-2-has-serial-number" style="border-left: 0;"
+                  <div class="col-2 col-2-has-serial-number" style="border-left: 0;" tooltip="{{ product.item.description }}"
+                       tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0"
                        ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
-                    <span>{{ product.item.description }}</span>
+                    <span trimmed-tooltip-container>{{ product.item.description }}</span>
                     <div style="color:#b2becd;position: absolute;top: 14px;font-size: 13px;">
                       <span ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span>
                       <span ng-show="product.item.manufacture && product.item.manufacture.length > 0"
                             style="margin-left: 15px;">P/N: {{ product.item.manufacture }}</span>
                     </div>
                   </div>
-                  <div class="col-3">
-                    {{ product.serialNumber ? product.serialNumber : '&nbsp;' }}
+                  <div class="col-3" ng-if="product.serialNumber" tooltip="{{ product.serialNumber }}"
+                       tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+                    <span trimmed-tooltip-container>{{ product.serialNumber }}</span>
                   </div>
-                  <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'">
-                    {{ product.sum | currency:'$':2 }}
+                  <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'"
+                       tooltip="{{ product.sum | currency :'$':2 }}"
+                       tooltip-enable="{{ isShowTooltip[2]() }}" trimmed-tooltip="2">
+                    <span trimmed-tooltip-container>{{ product.sum | currency:'$':2 }}</span>
                   </div>
-                  <div class="col-5" ng-show="ticketDetails.status !== 'COMPLETED'">
-                    {{ product.item.sale * product.quantity || '' | currency :'$':2 }}
+                  <div class="col-5" ng-show="ticketDetails.status !== 'COMPLETED'"
+                       tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
+                       tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
+                    <span trimmed-tooltip-container>{{ product.item.sale * product.quantity || '' | currency :'$':2 }}</span>
                   </div>
-                  <div class="col-4">{{ product.item.sale | currency:'$':2 }}
-                    <span class="model">Qty {{ product.quantity }}</span>
+                  <div class="col-4" tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
+                       tooltip-enable="{{ isShowTooltip[4]() }}" trimmed-tooltip="4">
+                    <span trimmed-tooltip-container>
+                      {{ product.item.sale | currency:'$':2 }}<span class="model">Qty {{ product.quantity }}</span>
+                    </span>
                   </div>
                   <div class="table-content-action pull-right">
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit product"
                        ng-click="setEditExpenseId(product.id)"
-                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails) }}">
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icn-sm icn-edit"></i>
                     </a>
                   </div>
@@ -355,7 +364,7 @@
                     <a class="hit-area pull-right has-tooltip"
                        tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit service"
                        ng-click="setEditExpenseId(service.id)"
-                       custom-disabled="{{ TicketsPermissionsService.isActionVisible('edit_update', ticketDetails) }}">
+                       custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icn-sm icn-edit"></i>
                     </a>
                   </div>

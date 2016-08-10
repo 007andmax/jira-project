@@ -88,7 +88,10 @@
 
           <div class="checkbox-caption">
 
-            <span>{{ (device.hostName | unknownFilter) || device.ipAddress }}</span>
+            <span tooltip="{{ (device.hostName | unknownFilter) || device.ipAddress }}"
+                  trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
+              <span trimmed-tooltip-container>{{ (device.hostName | unknownFilter) || device.ipAddress }}</span>
+            </span>
 
             <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
                popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">
@@ -165,7 +168,10 @@
       </div>
 
       <div class="col-4">
-        <div class="device-manufacturer">{{ (device.manufacturer | unknownFilter) || 'not defined' }}</div>
+        <div class="device-manufacturer" tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
+             tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+          <span trimmed-tooltip-container>{{ (device.manufacturer | unknownFilter) || 'not defined' }}</span>
+        </div>
       </div>
 
       <div class="col-5">

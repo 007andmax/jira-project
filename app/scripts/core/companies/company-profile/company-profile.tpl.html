@@ -55,10 +55,14 @@
               </a>
 
             </div>
-            <p class="company-head">{{ companyData.name }}</p>
-            <li class="info-type">
+            <p class="company-head" tooltip="{{ companyData.name }}" tooltip-enable="{{ isShowTooltip[0]() }}"
+               trimmed-tooltip="0">
+              <span trimmed-tooltip-container>{{ companyData.name }}</span>
+            </p>
+            <li class="info-type" tooltip="{{ currentLocation.address }}" tooltip-enable="{{ isShowTooltip[1]() }}"
+                trimmed-tooltip="1">
               <i class="icn-sm icn-location-white"></i>
-              Address: {{ currentLocation.address }}
+              Address: <span trimmed-tooltip-container>{{ currentLocation.address }}</span>
             </li>
             <li class="info-type" ng-if="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length">
               <i class="icn-sm" ng-class="{'icn-iphone': currentLocation.phoneNumbers[0].typeNumber === 'MOBILE',
@@ -73,9 +77,13 @@
           </div>
 
           <ul class="user-company-contact clearfix">
-            <li class="info-type">Primary contact: {{ getUserName(currentContact) }}</li>
-            <li class="info-type" ng-if="currentContact.primaryEmail">
-              Contact email: {{ currentContact.primaryEmail }}
+            <li class="info-type" tooltip="{{ getUserName(currentContact) }}" tooltip-enable="{{ isShowTooltip[2]() }}"
+                trimmed-tooltip="2">
+              Primary contact: <span trimmed-tooltip-container>{{ getUserName(currentContact) }}</span>
+            </li>
+            <li class="info-type" ng-if="currentContact.primaryEmail" tooltip="{{ currentContact.primaryEmail }}"
+                tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
+              Contact email: <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
             </li>
             <li class="info-type" ng-if="currentContact.phoneNumbers && currentContact.phoneNumbers.length">
               <i class="icn-sm" ng-class="{'icn-iphone': currentContact.phoneNumbers[0].typeNumber === 'MOBILE',

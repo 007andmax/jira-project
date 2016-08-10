@@ -47,10 +47,9 @@
             $scope.savingInProcess = true;
 
             var phoneNumbers = editedUser.phoneNumbers,
-              firstPhone = phoneNumbers[0].number,
-              lastPhone = phoneNumbers[phoneNumbers.length - 1].number;
+              firstPhone = phoneNumbers[0].number;
 
-            phoneNumbers[0].phoneType = phoneNumbers[0].phoneType || 'Office';
+            phoneNumbers[0].typeNumber = phoneNumbers[0].typeNumber || 'OFFICE';
 
             if (firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
               phoneNumbers[0].number = '';

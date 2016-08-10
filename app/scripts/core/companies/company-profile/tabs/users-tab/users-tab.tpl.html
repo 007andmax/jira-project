@@ -56,7 +56,10 @@
               <i class="on bottom"></i>
             </div>
 
-            <div class="user-name pull-left">{{ getUserName(user) }}</div>
+            <div class="user-name pull-left" trimmed-tooltip="0"
+                 tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
+              <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
+            </div>
             <span class="label label-light">{{ user.designation }}</span>
 
           </div>

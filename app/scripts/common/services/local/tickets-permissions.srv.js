@@ -111,10 +111,8 @@
         },
         'UPDATE': isUpdateAllowed,
         'UPDATE_AND_CLOSE': isUpdateAllowed,
-        'DELETE_UPDATE': function (ticket, updateCreator) {
-          return isUpdateAllowed(ticket) || updateCreator.id === $rootScope.currentUser.id;
-        },
-        'EDIT_UPDATE': isUpdateAllowed,
+        'DELETE_UPDATE': editTicketUpdate,
+        'EDIT_UPDATE': editTicketUpdate,
         'ADD_EXPENSE': isUpdateAllowed
       };
 
@@ -146,6 +144,14 @@
         return isTicketOpen(ticket) &&
           ((ticket.assignedUser && $rootScope.currentUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
           ticket.sharedToCurrentUserAt);
+      }
+
+      function editTicketUpdate(ticket, updateCreator) {
+        if ($rootScope.currentUser && $rootScope.currentUser.isOwner && ticket.assignedUser && isTicketOpen(ticket)) {
+          return true;
+        }
+
+        return isTicketOpen(ticket) && updateCreator.id === $rootScope.currentUser.id;
       }
 
       return {

@@ -130,7 +130,10 @@
 
       <div class="name-rating">
 
-        <div class="company-name">{{ company.name }}</div>
+        <div class="company-name" tooltip="{{ company.name }}" tooltip-enable="{{ isShowTooltip[0]() }}"
+             trimmed-tooltip="0">
+          <span trimmed-tooltip-container>{{ company.name }}</span>
+        </div>
 
 
         <!--<i class="dot-sep"></i>-->
@@ -196,9 +199,10 @@
 
         <div class="name-designation">
 
-          <h4>{{ getUserName(primaryContact) }}</h4>
-
-          <i class="dot" ng-class="{'on': primaryContact.online, 'off': !primaryContact.online}"></i>
+          <h4 tooltip="{{ getUserName(primaryContact) }}"  tooltip-enable="{{ isShowTooltip[1]() }}"
+              trimmed-tooltip="1">
+            <span trimmed-tooltip-container>{{ getUserName(primaryContact) }}</span>
+          </h4>
 
           <span class="label label-light">{{ primaryContact.designation }}</span>
 

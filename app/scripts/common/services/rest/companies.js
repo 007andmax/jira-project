@@ -312,16 +312,19 @@
 
       RealTimeService.subscribe('/companyDto/' + companyId, scope, function (newChange) {
 
-        console.log(newChange);
-
         if (newChange.action == 'COMPANY_DTO_CHANGED') {
 
           var data = JSON.parse(newChange.data);
+          if (data[companyId]) {
+            Utils.customizeObj(data[companyId], companyDto);
+          }
+        }
+      });
 
-          for (var key in  data) {
-            if (key === companyId) {
-              Utils.customizeObj(data[companyId], companyDto);
-            }
+      RealTimeService.subscribe('/user', serviceScope, function (newChange) {
+        if (newChange.action === 'USER_SAVED') {
+          if (newChange.data.id === companyDto.contacts[0].id) {
+            Utils.customizeObj(newChange.data, companyDto.contacts[0]);
           }
         }
       });

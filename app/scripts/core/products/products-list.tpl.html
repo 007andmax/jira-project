@@ -70,7 +70,9 @@
           {{ product.category.default ? '' : product.category.name}}
         </div>
 
-        <div class="col-2" ng-class="{'product-description': category.default}">{{ product.description}}
+        <div class="col-2" ng-class="{'product-description': category.default}"
+             tooltip="{{ product.description }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+          <span trimmed-tooltip-container>{{ product.description }}</span>
         </div>
 
         <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>

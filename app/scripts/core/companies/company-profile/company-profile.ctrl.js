@@ -86,24 +86,6 @@
 
         });
 
-        $scope.changeCurrentLocation = function (index) {
-          if (0 <= index && index < $scope.companyData.addresses.length) {
-            $scope.locationIndex = index;
-            $timeout(function () {
-              $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
-            }, 300)
-          }
-        };
-
-        $scope.changeCurrentContact = function (index) {
-          if (0 <= index && index < $scope.companyData.contacts.length) {
-            $scope.contactIndex = index;
-            $timeout(function () {
-              $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
-            }, 300)
-          }
-        };
-
         $scope.archiveCompany = function () {
           var company = CompaniesService.getOneById($scope.company.id);
           var confirmMesage = 'Do you want to archive ' + company.name;
@@ -243,7 +225,7 @@
                 newUser: true,
                 company: { id: $scope.company.id },
                 role: 'USER',
-                phoneNumbers: [{ phoneType: 'Office' }],
+                phoneNumbers: [{ typeNumber: 'OFFICE' }],
                 subscription: {}
               };
             });

@@ -5,7 +5,9 @@
        style="background: url('images/company/cover.png') transparent right no-repeat; background-size: cover}">
 
     <div class="name-rating" style="height: 10%">
-      <div class="company-name">{{ vendor.name }}</div>
+      <div class="company-name" tooltip="{{ vendor.name }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+        <span trimmed-tooltip-container>{{ vendor.name }}</span>
+      </div>
     </div>
   </div>
 

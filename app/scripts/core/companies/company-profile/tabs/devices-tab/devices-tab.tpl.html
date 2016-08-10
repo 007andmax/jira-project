@@ -60,8 +60,9 @@
             <span class="control-indicator"></span>
           </label>
 
-          <div class="checkbox-caption">
-            <span>{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}</span>
+          <div class="checkbox-caption" tooltip="{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}"
+               trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
+            <span trimmed-tooltip-container>{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}</span>
           </div>
         </div>
       </div>
