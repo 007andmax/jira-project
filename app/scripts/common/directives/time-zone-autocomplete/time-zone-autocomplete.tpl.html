@@ -34,7 +34,7 @@
         Nothing found for "{{ address.locale }}"
       </li>
 
-      <li ng-if="!address.locale && !address.country || !filteredTimeZones.length" ng-repeat="(name, group) in timeZones">
+      <li ng-if="!address.locale && !address.country" ng-repeat="(name, group) in timeZones">
         <div class="groupName">{{ name }}</div>
 
         <div class="cities-names"

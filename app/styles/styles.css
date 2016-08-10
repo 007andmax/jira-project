@@ -5487,6 +5487,7 @@ tbody.collapse.in {
 }
 .user-item .user-name {
   margin-top: 3px;
+  text-transform: none;
 }
 .user-item .user-name a {
   font-weight: normal;
