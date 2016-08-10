@@ -99,7 +99,7 @@
           ServicesService.getAllByCompany($scope, fromRemoteCompanyId, function (resp) {
             $scope.ticket.serviceExpenses[0].item = resp.find(function (service) {
               return service.name === 'Remote Service';
-            });
+            }) || resp[0];
           });
 
           $scope.removeService = function (index) {
@@ -406,16 +406,16 @@
               }
             } else {
               $scope.ticket.assignedUser = $scope.ticket.ticketAssignTo.id;
-              $scope.ticketSharedUsersList.unshift({
-                user: $scope.ticket.ticketAssignTo,
-                notify: $scope.ticket.notifyTicketAssignedUser
-              });
-              $scope.ticket.ticketAssignTo = undefined;
             }
 
             var ticketNumber = $scope.ticketNumber;
 
-            $scope.ticket.shares = [];
+            if ($scope.ticket.notifyTicketAssignedUser) {
+              $scope.ticket.shares = [{ user: { id: $scope.ticket.ticketAssignTo.id } }];
+            } else {
+              $scope.ticket.shares = [];
+            }
+
             for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
 
               var ticketSharedUser = $scope.ticketSharedUsersList[i];
@@ -577,7 +577,7 @@
 
         $scope.isAlreadyInShares = function (user) {
           return $scope.ticketSharedUsersList.find(function (share) {
-            return share.user && share.user.id !== user.id;
+            return !share.user || share.user.id === user.id;
           });
         };
 

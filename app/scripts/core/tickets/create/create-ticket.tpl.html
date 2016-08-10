@@ -435,7 +435,7 @@
               </label>
 
               <label class="control checkbox pull-left"
-                     ng-if="ticket.ticketAssignTo && ticket.ticketAssignTo.id && !isAlreadyInShares(ticket.ticketAssignTo)"
+                     ng-if="ticket.ticketAssignTo && ticket.ticketAssignTo.id && ticket.ticketAssignTo.id !== currentUser.id && !isAlreadyInShares(ticket.ticketAssignTo)"
                      ng-init="ticket.notifyTicketAssignedUser = true">
                 <input type="checkbox" ng-model="ticket.notifyTicketAssignedUser">
                 <span class="control-indicator"></span>

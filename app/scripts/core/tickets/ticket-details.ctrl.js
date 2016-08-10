@@ -31,7 +31,7 @@
             ServicesService.getAllByCompany($scope, params.companyId, function (resp) {
               $scope.ticketUpdate.services[0].item = resp.find(function (service) {
                 return service.name === 'Remote Service';
-              });
+              }) || resp[0];
             });
 
             $scope.linkAgent($stateParams.ticketId, params.deviceId);
