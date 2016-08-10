@@ -42,7 +42,7 @@
           MEDIUM: 'Medium',
           HIGH: 'High'
         };
-        $scope.ticketSharedUsersList = [{ user: $scope.currentUser, notify: true }];
+        $scope.ticketSharedUsersList = [];
         $scope.selectUpdateSharedUser = {};
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -209,6 +209,18 @@
               id: $scope.ticketCreatedUser.id,
               primaryEmail: $scope.ticketCreatedUser.primaryEmail
             };
+
+            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
+              return !share.user || (share.user.id !== 'new' && share.user.id !== $scope.ticketCreatedUser.id);
+            });
+
+            $scope.ticketSharedUsersList.push({
+              user: $scope.ticketCreatedUser,
+              notify: true
+            });
+
+            $scope.selectUpdateSharedUser[$scope.ticketCreatedUser.id] = true;
+
             isNeedToDeleteUser = false;
             var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
 
@@ -249,6 +261,20 @@
                     firstName: firstName,
                     companyId: $scope.ticketCompany ? $scope.ticketCompany.id : $scope.unassignedCompany.id
                   };
+
+                  $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
+                    return share.user.id !== 'new';
+                  });
+
+                  $scope.ticketSharedUsersList.push({
+                    user: {
+                      id: 'new',
+                      primaryEmail: val,
+                      firstName: val
+                    },
+                    notify: true
+                  });
+
                   $scope.ticketAgent = $scope.ticketCompany ? $scope.ticketAgent : '';
                   isNeedToDeleteUser = false;
                 } else {
@@ -547,6 +573,12 @@
           for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
             $scope.ticketSharedUsersList[i].notify = isNotifyAll;
           }
+        };
+
+        $scope.isAlreadyInShares = function (user) {
+          return $scope.ticketSharedUsersList.find(function (share) {
+            return share.user && share.user.id !== user.id;
+          });
         };
 
       }]);

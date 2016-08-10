@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
-    ['$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter',
+    ['$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter', 'UsersService',
       'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'TaxRatesService',
-      function ($scope, RecurringService, CompaniesService, ServicesService, $filter,
+      function ($scope, RecurringService, CompaniesService, ServicesService, $filter, UsersService,
                 ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService) {
 
         var day = 1000 * 60 * 60 * 24;
@@ -36,6 +36,8 @@
           tryToAddProduct: false,
           tryToAddService: false
         };
+        $scope.ticketSharedUsersList = [];
+        $scope.selectUpdateSharedUser = {};
 
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
@@ -155,9 +157,13 @@
             delete $scope.companyServices;
             $scope.taxRatesCoef = 0;
             $scope.editInvoice.services = [];
+            $scope.clients = UsersService.getClientUsers();
             return;
           }
 
+          $scope.ticketSharedUsersList = [];
+          $scope.selectUpdateSharedUser = {};
+          $scope.clients = UsersService.getAllByCompanyId(company.id);
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
             id: company.id
@@ -243,7 +249,7 @@
           $scope.savedRepeatingInvoice = $scope.paramInvocie.repeatingInvoice;
           $scope.paramInvocie.repeatingInvoice = '';
         };
-  
+
         $scope.hasGeneratedInvoices = function (sentOn) {
           return (new Date(sentOn)).getTime() <= Date.now();
         };
@@ -442,6 +448,29 @@
               editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)
             }
 
+            editInvoice.shares = [];
+            for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+
+              var ticketSharedUser = $scope.ticketSharedUsersList[i];
+
+              if (!ticketSharedUser.notify) {
+                continue;
+              }
+
+              if (ticketSharedUser.user) {
+
+                editInvoice.shares.push({
+                  user: { id: ticketSharedUser.user.id }
+                });
+
+              } else if (ticketSharedUser.contact) {
+
+                editInvoice.shares.push({
+                  contact: { id: ticketSharedUser.contact.id }
+                })
+              }
+            }
+
             RecurringService.saveRecurringOrder(editInvoice, function () {
               $scope.toogleEditForm();
               $scope.hardDisabledSave = false;
@@ -470,6 +499,16 @@
 
         $scope.isTabOpened = function (tab) {
           return $scope.openTab === tab;
+        };
+
+        $scope.getUserById = function (userId) {
+          return UsersService.getOneById(userId);
+        };
+
+        $scope.toggleAllShared = function (isNotifyAll) {
+          for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+            $scope.ticketSharedUsersList[i].notify = isNotifyAll;
+          }
         };
 
       }]);

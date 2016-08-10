@@ -1,4 +1,4 @@
-<div class="qt-create-invoice clearfix" stop-propagation="click" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
+<div class="qt-create-invoice clearfix" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
   <div class="edit-invoice-form">
     <form name="editInvoiceForm">
       <!--<span class="numb-form">{{ actualInvoiceNumber }}</span>-->
@@ -144,6 +144,26 @@
           <input type="checkbox" ng-model="editInvoice.autoCreate">
           Automatically create and send invoice (all other recurring orders will be sent into Billable Items)
         </label>
+
+        <div ng-if="editInvoice.autoCreate">
+          <div style="font-weight: bold;">Notify</div>
+          <div>The people you select will get an email when you create this invoice.</div>
+
+          <div class="ticket-add-content-actions-dropdown pull-left"
+               ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
+
+          <div class="pull-left shared-user-add">
+            <div class="notify-select">
+              <span ng-click="toggleAllShared(true)">Select Everyone</span> | <span ng-click="toggleAllShared(false)">Select None</span>
+            </div>
+
+            <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList">
+              <input type="checkbox" ng-model="sharedUser.notify">
+              <span class="control-indicator"></span>
+              <span style="text-transform: none">{{ getUserName(sharedUser.user || sharedUser.contact) }}</span>
+            </label>
+          </div>
+        </div>
       </fieldset>
       <fieldset class="primary-edit-form invoice-update">
         <div class="invoice-update" ng-controller="quicktech.core.recurring.editInvoiceExpensesCtrl">

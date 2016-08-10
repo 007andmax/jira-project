@@ -90,7 +90,7 @@
 
 			// A fix to re-calculate height and focus the input
 			inputElement.parents('div.dropdown').on('shown.bs.dropdown', function () {
-				inputElement.val('').autocomplete('onValueChange', true).focus();
+				inputElement.val('').autocomplete('onValueChange', true);
 			});
 
 			// Initialize autocomplete plugin
@@ -174,7 +174,7 @@
 						updateAddUser(suggestion.data);
 					});
 				},
-			}).autocomplete('onValueChange', true).focus();
+			}).autocomplete('onValueChange', true);
 		}
 	}
   }]);
