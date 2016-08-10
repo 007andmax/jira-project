@@ -33,7 +33,10 @@
 
   color: #4c5c6f;
   border: 1px solid #e7ecf2;
-  background-color: #ffffff;
+}
+
+.edit-invoice-form form fieldset label input[type='text'][readonly]:not([disabled]) {
+  background-color: white;
 }
 
 .edit-invoice-form form fieldset label ::-webkit-input-placeholder {

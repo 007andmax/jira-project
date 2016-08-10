@@ -79,10 +79,12 @@
           <label class="dropdown" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
             <span>Repeating Invoice every</span>
 
-            <input type="text" data-toggle="dropdown" aria-expanded="true"
+            <input class="form-control" type="text" data-toggle="dropdown" aria-expanded="true"
+                   ng-readonly="hasGeneratedInvoices(editInvoice.sentOn)"
                    ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
                    hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"
-                   restore-from="{{savedRepeatingInvoice}}">
+                   restore-from="{{ savedRepeatingInvoice }}"
+                   custom-disabled="{{ hasGeneratedInvoices(editInvoice.sentOn) }}">
             <span class="suffix-days"
                   ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">
               {{ paramInvocie.repeatingInvoice == 1 ? 'day' : 'days' }}
@@ -103,8 +105,9 @@
           <label class="date">
             <span> Starting Date</span>
 
-            <input type="text" placeholder="../../.." ng-model="editInvoice.sentOn"
-                   readonly ng-change="changeStartDate()"
+            <input class="form-control" type="text" ng-model="editInvoice.sentOn" placeholder="../../.."
+                   readonly ng-change="changeStartDate()" name="sentOn"
+                   custom-disabled="{{ hasGeneratedInvoices(editInvoice.sentOn) }}"
                    qt-data-time-picker default-date="editInvoice.sentOn" min-date="minSentOnDate">
             <i class="icn-sm calendar"></i>
           </label>
@@ -114,7 +117,7 @@
             <span>Num. to generate</span>
 
             <input class="generate" type="text" ng-model="paramInvocie.numToGenerate" placeholder="&infin;"
-                   custom-disabled="{{ disabledEndAndNum || isNumInfinity }}"
+                   custom-disabled="{{ disabledEndAndNum || isNumInfinity }}" name="numToGenerate"
                    ng-change="changeNumToGenerate()" hard-reset-pattern="numToGeneratePattern">
 
             <i class="icn-sm icn-remove-token generate" ng-show="isNumInfinity" ng-click="clearInfinity()"
@@ -127,7 +130,7 @@
             <span>End Date</span>
             <input type="text" placeholder="../../.." ng-if="reInitEndDate" readonly ng-change="changeEndDate()"
                    custom-disabled="{{ disabledEndAndNum }}" ng-model="editInvoice.endDate"
-                   date-time-picker-with-period
+                   date-time-picker-with-period name="endDate"
                    default-date="editInvoice.endDate" min-date="minEndDate" period="paramInvocie.repeatingInvoice">
 
             <i class="icn-sm icn-remove-token"
