@@ -1,44 +1,54 @@
 .report-device-wrapper {
-  background-color: #eee; }
-  .report-device-wrapper__title {
-    text-align: center;
-    background: #fff;
-    margin: 0 -15px 15px;
-    box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
-    position: relative; }
-    .report-device-wrapper__title .close {
-      position: absolute;
-      right: 25px;
-      top: 25px;
-      cursor: pointer;
-      width: 20px;
-      height: 20px; }
-    .report-device-wrapper__title h2 {
-      margin: 0;
-      line-height: 2em; }
-  .report-device-wrapper .table-wrap {
-    padding: 0 20px;
-    background: #fff;
-    margin: 0 100px;
-    box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15); }
-  .report-device-wrapper .table-content {
-    width: 100%;
-    margin-bottom: 20px;
-    background: #fff;
-    border: none; }
-    .report-device-wrapper .table-content tr {
-      border-bottom: 1px solid #eee; }
-      .report-device-wrapper .table-content tr td {
-        width: 50%; }
-        .report-device-wrapper .table-content tr td p {
-          margin-left: 150px; }
-    .report-device-wrapper .table-content .table-header {
-      font-size: 1.6em;
-      font-weight: 600;
-      margin: 10px 50px; }
-    .report-device-wrapper .table-content .table-subheader {
-      font-size: 1.4em;
-      font-weight: 500;
-      margin: 5px 100px; }
-
+  background-color: #eee;
+}
+.report-device-wrapper__title {
+  text-align: center;
+  background: #fff;
+  margin: 0 -15px 15px;
+  box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
+  position: relative;
+}
+.report-device-wrapper__title .close {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+.report-device-wrapper__title h2 {
+  margin: 0;
+  line-height: 2em;
+}
+.report-device-wrapper .table-wrap {
+  padding: 0 20px;
+  background: #fff;
+  margin: 0 100px;
+  box-shadow: 0 2px 6px 0 rgba(10, 45, 89, 0.15);
+}
+.report-device-wrapper .table-content {
+  width: 100%;
+  margin-bottom: 20px;
+  background: #fff;
+  border: none;
+}
+.report-device-wrapper .table-content tr {
+  border-bottom: 1px solid #eee;
+}
+.report-device-wrapper .table-content tr td {
+  width: 50%;
+}
+.report-device-wrapper .table-content tr td p {
+  margin-left: 150px;
+}
+.report-device-wrapper .table-content .table-header {
+  font-size: 1.6em;
+  font-weight: 600;
+  margin: 10px 50px;
+}
+.report-device-wrapper .table-content .table-subheader {
+  font-size: 1.4em;
+  font-weight: 500;
+  margin: 5px 100px;
+}
 /*# sourceMappingURL=report-device-name.css.map */

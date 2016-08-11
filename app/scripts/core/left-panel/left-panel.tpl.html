@@ -105,12 +105,12 @@
              ng-class="{active: $state.includes('companies')}"
              ng-click="stateGo($event, 'companies')">
           <i class="nav-icon icn-lg icn-companies icon-pos"></i> Companies
-          <div ng-click="toggleCompanies(companiesExpanded, $event)">
+          <div class="slider-pos" ng-click="toggleCompanies(companiesExpanded, $event)">
             <i class="icn-sm {{ companiesExpanded ? 'icn-collapse' : 'icn-expand' }}"></i>
           </div>
         </div>
-        <div ng-show="companiesExpanded">
-          <div ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
+        <div ng-show="companiesExpanded" class="category-expanded">
+          <div class="category-expanded-paragraph" ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
                ng-click="goToCompany(company)" ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}">
             {{ company.name }}
           </div>
@@ -121,12 +121,13 @@
              ng-class="{active: $state.includes('users')}"
              ng-click="stateGo($event, 'users')">
           <i class="nav-icon icn-lg icn-users icon-pos"></i> Users
-          <div ng-click="toggleUsers(usersExpanded, $event)">
+          <div class="slider-pos " ng-click="toggleUsers(usersExpanded, $event)">
             <i class="icn-sm {{ usersExpanded ? 'icn-collapse' : 'icn-expand' }}"></i>
           </div>
         </div>
-        <div ng-show="usersExpanded">
-          <div ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
+
+        <div ng-show="usersExpanded" class="category-expanded">
+          <div class="category-expanded-paragraph" ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
                ng-click="goToUser(user)">
             {{ getUserName(user) }}
           </div>
@@ -149,13 +150,13 @@
              ng-class="{active: $state.includes('accounting')}"
              ng-click="stateGo($event, 'accounting')">
           <i class="nav-icon icn-billable icn-lg icon-pos"></i> Billiable
-          <span class="badge ng-binding badge-pos ng-scope" ng-if="ticketCounts.BILLABLE">{{ ticketCounts.BILLABLE }}</span>
+          <span class="badge badge-red ng-binding badge-pos ng-scope" ng-if="ticketCounts.BILLABLE">{{ ticketCounts.BILLABLE }}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"
              ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
           <i class="nav-icon icn-lg icn-receivable icon-pos"></i> Receivable
-          <span class="badge ng-binding badge-pos ng-scope" ng-if="ticketCounts.RECEIVABLE">{{ ticketCounts.RECEIVABLE }}</span>
+          <span class="badge badge-red ng-binding badge-pos ng-scope" ng-if="ticketCounts.RECEIVABLE">{{ ticketCounts.RECEIVABLE }}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receipt-archive')}"
