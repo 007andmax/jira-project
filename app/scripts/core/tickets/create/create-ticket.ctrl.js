@@ -288,8 +288,14 @@
 
           } else if (val) {
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', false);
+            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
+              return share.user.id !== 'new';
+            });
           } else {
             $scope.ticket.createdUser = undefined;
+            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
+              return share.user.id !== 'new';
+            });
           }
 
         });

@@ -10,7 +10,7 @@
         var tooltipConteiner = element.find('[trimmed-tooltip-container]');
         scope.isShowTooltip = scope.isShowTooltip || [];
         scope.isShowTooltip[attrs.trimmedTooltip] = function () {
-          return element.width() < tooltipConteiner.width();
+          return element.width() + 1 < tooltipConteiner.width();
         }
 
       }

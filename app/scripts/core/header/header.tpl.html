@@ -228,8 +228,9 @@
           <!--ng-click="currentUser.online = !currentUser.online"></i>-->
           <i class="on"></i>
 
-          <div class="nickname" tooltip="{{ getUserName(currentUser) }}" tooltip-placement="bottom">
-            {{ getUserName(currentUser) }}
+          <div class="nickname" tooltip="{{ getUserName(currentUser) }}" tooltip-placement="bottom"
+               tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+            <span trimmed-tooltip-container>{{ getUserName(currentUser) }}</span>
           </div>
 
           <i class="icn-sm icn-expand"></i>

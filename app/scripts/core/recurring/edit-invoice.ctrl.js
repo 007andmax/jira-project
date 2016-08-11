@@ -511,6 +511,12 @@
           }
         };
 
+        $scope.hasNotifyRecipients = function (shares) {
+          return shares.some(function (share) {
+            return share.notify;
+          });
+        };
+
       }]);
 
 }());

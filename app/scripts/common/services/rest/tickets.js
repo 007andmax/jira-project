@@ -149,8 +149,8 @@
       }
 
       function search(callback, keyword, companyId) {
-        if (!keyword || keyword === '[$empty$]' || keyword === 'undefined') {
-          return [];
+        if (keyword === '[$empty$]' || keyword === 'undefined') {
+          keyword = '';
         }
 
         return $http.get('/v2/tickets/searchByKeyword?keyword=' + keyword + '&companyId=' + (companyId || ''))

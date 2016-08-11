@@ -162,6 +162,10 @@
               <span class="control-indicator"></span>
               <span style="text-transform: none">{{ getUserName(sharedUser.user || sharedUser.contact) }}</span>
             </label>
+
+            <label ng-if="triedToSaveInvoice && !hasNotifyRecipients(ticketSharedUsersList)">
+              At least one user must be selected!
+            </label>
           </div>
         </div>
       </fieldset>

@@ -21,7 +21,7 @@
     </a>
 
     <ul class="dropdown-menu time-zone-dropdown">
-      <li class="time-zone clickable" ng-if="address.locale || address.country"
+      <li class="time-zone clickable" ng-if="(address.locale || address.country) && filteredTimeZones.length"
           ng-repeat="timeZone in filteredTimeZones" offset="{{timeZone.offset}}" locale="{{timeZone.name}}"
           ng-click="setTimeZone(timeZone.name, timeZone.offset)"
           ng-class="{'focusable': address.locale || address.country}">
@@ -30,11 +30,11 @@
         &nbsp;
         <span>{{ timeZone.name }}</span>
       </li>
-      <li ng-if="address.locale && !filteredTimeZones.length">
+      <li ng-if="(address.locale || address.country && Object.keys(timeZones[address.country] || {}).length) && !filteredTimeZones.length">
         Nothing found for "{{ address.locale }}"
       </li>
 
-      <li ng-if="!address.locale && !address.country" ng-repeat="(name, group) in timeZones">
+      <li ng-if="(!address.locale || !address.country) && !filteredTimeZones.length" ng-repeat="(name, group) in timeZones">
         <div class="groupName">{{ name }}</div>
 
         <div class="cities-names"
