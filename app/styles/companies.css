@@ -684,7 +684,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-bottom: 10px;
-  line-height: 38px;
+  line-height: 1.4em;
 
 }
 @-moz-document url-prefix() {
