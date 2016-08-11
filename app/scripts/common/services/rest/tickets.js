@@ -149,7 +149,7 @@
       }
 
       function search(callback, keyword, companyId) {
-        if (keyword === '[$empty$]' || keyword === 'undefined') {
+        if (!keyword || keyword === '[$empty$]' || keyword === 'undefined') {
           keyword = '';
         }
 

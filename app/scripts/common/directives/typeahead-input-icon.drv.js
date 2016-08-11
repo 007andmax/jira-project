@@ -30,10 +30,16 @@
             var deleteItems = attrs.typeaheadInputIcon.split(',');
 
             for (var i = 0; i < deleteItems.length; i++) {
-              scope.$parent[deleteItems[i].trim()] = undefined;
+              scope.$parent[deleteItems[i].trim()] = '';
             }
 
-            input.val(undefined);
+            input.val('');
+
+            var model = input.controller('ngModel');
+            if (model) {
+              model.$setViewValue('');
+            }
+
             input.focus();
           }
 

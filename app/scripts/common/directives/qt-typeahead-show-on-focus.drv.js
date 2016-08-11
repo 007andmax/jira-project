@@ -11,15 +11,19 @@
 
           var secretEmptyKey = '[$empty$]';
 
-          element.on('focus', function () {
-            $timeout(function () {
-              if (!scope.$eval(attrs.ngModel)) {
-                modelCtrl.$setViewValue(modelCtrl.$viewValue + ' ');
-              }
-              $(element).trigger('input');
-              $(element).trigger('change'); // for IE
-            });
-          });
+          element.bind('click', triggerFunc);
+
+          function triggerFunc() {
+            var prev = modelCtrl.$modelValue || '';
+            if (prev) {
+              modelCtrl.$setViewValue('');
+              $timeout(function() {
+                modelCtrl.$setViewValue(prev);
+              });
+            } else {
+              modelCtrl.$setViewValue(' ');
+            }
+          }
 
           // this parser run before typeahead's parser
           modelCtrl.$parsers.unshift(function (inputValue) {

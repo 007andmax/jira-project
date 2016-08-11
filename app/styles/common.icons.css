@@ -1831,7 +1831,7 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   background-position: -1023px -206px;
   height: 14px;
 }
-:hover > .icn-expand-back, :active > .icn-expand, :focus:hover > .icn-expand, :focus:active > .icn-expand, :hover:active > .icn-expand, .active > .icn-expand, .open > .icn-expand, .open .icn-expand {
+:hover > .icn-expand-back, :active > .icn-expand-back, :focus:hover > .icn-expand-back, :focus:active > .icn-expand-back, :hover:active > .icn-expand-back, .active > .icn-expand-back, .open > .icn-expand-back, .open .icn-expand-back {
   background-position: -1006px -206px;
 }
 .icn-sort {
