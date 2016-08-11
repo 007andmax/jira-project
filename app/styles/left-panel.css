@@ -157,6 +157,9 @@
   color: #94a4b8;
   line-height: 2.5em;
   padding-left: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .category-expanded-paragraph:hover{
   color: #fff;

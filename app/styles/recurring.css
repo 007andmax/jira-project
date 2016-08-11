@@ -578,3 +578,17 @@ fieldset.primary-edit-form {
 
   color: rgba(0, 0, 0, 0.23);
 }
+.edit-invoice-auto{
+  font-family: inherit;
+  margin-right: 5px;
+  font-size: 14px;
+  color: #4c5c6f;
+  padding-top: 10px;
+}
+.edit-invoice-auto > div:nth-child(-n+2){
+  padding-left: 55px;
+}
+.edit-invoice-auto > .shared-user-add > label > span:nth-child(3){
+  margin-left: 5px;
+  margin-top: 10px;
+}

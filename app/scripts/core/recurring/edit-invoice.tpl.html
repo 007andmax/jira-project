@@ -145,7 +145,7 @@
           Automatically create and send invoice (all other recurring orders will be sent into Billable Items)
         </label>
 
-        <div ng-if="editInvoice.autoCreate">
+        <div class="edit-invoice-auto" ng-if="editInvoice.autoCreate">
           <div style="font-weight: bold;">Notify</div>
           <div>The people you select will get an email when you create this invoice.</div>
 
@@ -162,10 +162,14 @@
               <span class="control-indicator"></span>
               <span style="text-transform: none">{{ getUserName(sharedUser.user || sharedUser.contact) }}</span>
             </label>
+          </div>
+          <br>
+          <br>
 
-            <label ng-if="triedToSaveInvoice && !hasNotifyRecipients(ticketSharedUsersList)">
-              At least one user must be selected!
-            </label>
+          <div class="has-error">
+            <span style="padding-left: 55px;" class="control-label" ng-if="triedToSaveInvoice && !hasNotifyRecipients(ticketSharedUsersList)">
+            At least one user must be selected!
+          </span>
           </div>
         </div>
       </fieldset>

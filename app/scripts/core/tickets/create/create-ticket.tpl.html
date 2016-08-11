@@ -329,7 +329,7 @@
                      typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'name'"
                      qt-typeahead-show-on-focus ng-trim="false"
-                     custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
+                     custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': 'auto'}">
 
               <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
 
