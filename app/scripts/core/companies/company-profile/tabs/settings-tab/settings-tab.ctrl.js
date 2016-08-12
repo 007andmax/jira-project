@@ -350,7 +350,7 @@
           $scope.devicesAllowedForCredential = getAllowedDevicesForCredential($scope.editedCredential);
           form.$setPristine();
 
-          if ($scope.currentUser.permissions.indexOf('VIEW_PASSWORDS') > -1) {
+          if ($scope.PermissionsService.isAllowed('VIEW_PASSWORDS')) {
             DevicesService.devicePasswordShown(id, function (resp) {
               $scope.editedCredential.password = resp.password;
               $scope.editedCredential.passwordConfirm = resp.password;

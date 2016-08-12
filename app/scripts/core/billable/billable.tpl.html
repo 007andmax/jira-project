@@ -90,7 +90,11 @@
                     </label>
 
                     <div class="checkbox-caption">{{ ticket.subject }}</div>
-                    <span class="label label-primary">Tkt# {{ ticket.ticketNumber }}</span>
+                    <span class="label label-primary" stop-propagation="click"
+                          style="cursor: pointer; position: absolute; z-index: 10"
+                          ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
+                      Tkt# {{ ticket.ticketNumber }}
+                    </span>
                   </div>
                 </div>
 

@@ -7,7 +7,7 @@
           ng-repeat="tag in ticketTags track by $index">
       <span>{{ tag.word }}</span>
       <i ng-show="!readonlyTags" class="icn-xs remove-tag" ng-click="removeTag($index)"
-         tooltip="remove" tooltip-placement="top"></i>
+         tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
     </span>
 
     <div ng-show="!readonlyTags" class="tags-action"

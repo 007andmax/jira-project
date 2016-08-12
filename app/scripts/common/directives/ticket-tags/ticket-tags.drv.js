@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("ticketTags",
-    ['$document', 'TagsService', 'CompaniesService', 'UsersService',
-      function ($document, TagsService, CompaniesService, UsersService) {
+    ['$document', 'TagsService', 'CompaniesService', '$rootScope',
+      function ($document, TagsService, CompaniesService, $rootScope) {
         return {
           restrict: 'E',
           templateUrl: '/html/scripts/common/directives/ticket-tags/ticket-tags.tpl.html',
@@ -51,7 +51,7 @@
 
               $scope.addTag = function (value) {
                 if (typeof value === 'string') {
-                  if (!$scope.currentCompany.allowCreateTags) {
+                  if (!$scope.currentCompany.allowCreateTags && !$rootScope.currentUser.isOwner) {
                     return;
                   }
 
@@ -77,6 +77,7 @@
               $scope.saveTags = function () {
                 if (tagsChanged) {
                   $scope.saving = true;
+                  $scope.dropdownOpened = false;
                   TagsService.setTagsInTicket($scope.ticketTags, $scope.ticketId, function () {
                     $scope.savedTicketTags = angular.copy($scope.ticketTags);
                     $scope.saving = false;

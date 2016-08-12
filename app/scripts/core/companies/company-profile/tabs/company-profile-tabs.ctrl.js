@@ -103,7 +103,7 @@
             return $scope.scanDevices.status;
           }
         }, function (val) {
-          $scope.isScanDevicesLoad = val !== 'finished';
+          $scope.isScanDevicesLoad = val && val !== 'disabled' && val !== 'finished';
         });
 
         $scope.$watch(function () {
