@@ -672,9 +672,6 @@
   color: #fff;
   margin-bottom: 10px;
   padding-left: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   min-height: 100px;
 }
 .company-head{
