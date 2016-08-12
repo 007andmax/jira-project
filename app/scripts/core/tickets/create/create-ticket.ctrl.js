@@ -396,7 +396,10 @@
             if ($scope.ticket.serviceExpenses) {
               for (var j = 0; j < $scope.ticket.serviceExpenses.length; j++) {
 
-                var item = $scope.ticket.serviceExpenses[j].item;
+                var serviceExpense = $scope.ticket.serviceExpenses[j];
+                var item = serviceExpense.item;
+
+                serviceExpense.quantity = serviceExpense.quantity / 60;
 
                 if (!(item && item.versionedId && item.versionedId.id)) {
                   $scope.ticket.serviceExpenses.splice(j, 1)
