@@ -6,7 +6,8 @@
   <div class="modal-body">
     <p ng-show="!selectingTicket">Remote access session has been completed. Do you want to create ticket or ticket update?</p>
     <div class="form-group" ng-if="selectingTicket">
-      <input type="text" class="form-control" autocomplete="off" ng-model="selectedTicket.label" qt-typeahead-show-on-focus
+      <input type="text" class="form-control" autocomplete="off" ng-model="selectedTicket.label"
+             qt-typeahead-async-show-on-focus
              typeahead="getTicketLabel(ticket) for ticket in searchTickets($viewValue)" ng-trim="false"
              typeahead-on-select="onTicketSelect(selectedTicket.label)" typeahead-min-length="0"
              custom-style="{'max-height': '200px', 'width': '100%', 'overflow-y': 'auto'}">
