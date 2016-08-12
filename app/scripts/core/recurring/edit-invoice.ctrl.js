@@ -426,7 +426,9 @@
         }
 
         $scope.saveInvoice = function (form) {
-          if (form.$valid && !$scope.disabledSaveInvoice) {
+          if (form.$valid && !$scope.disabledSaveInvoice &&
+            (!$scope.editInvoice.autoCreate || $scope.hasNotifyRecipients($scope.ticketSharedUsersList))) {
+
             $scope.hardDisabledSave = true;
 
             var editInvoice = angular.copy($scope.editInvoice);

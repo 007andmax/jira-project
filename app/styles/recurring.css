@@ -35,7 +35,8 @@
   border: 1px solid #e7ecf2;
 }
 
-.edit-invoice-form form fieldset label input[type='text'][readonly]:not([disabled]) {
+.edit-invoice-form form fieldset label input[type='text'][readonly]:not([disabled]),
+.edit-invoice-form form fieldset label input[type='text']:not([readonly]):not([disabled]){
   background-color: white;
 }
 
