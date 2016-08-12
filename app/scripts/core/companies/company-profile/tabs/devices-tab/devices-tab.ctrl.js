@@ -67,6 +67,31 @@
               $scope.changeSelectDevices();
             }
           })
+        };
+
+        $scope.getDeviceReport = function (agentId) {
+          DevicesService.getDeviceReports([agentId], $scope.company.id, function (resp) {
+            var report = resp.reports[0],
+              agentId = report.agentId;
+            delete report.agentId;
+            groupSingleFields(report);
+
+            $scope.deviceReport = {};
+            $scope.deviceReport[agentId] = report;
+
+          });
+        };
+
+        function groupSingleFields(report) {
+          report['General'] = {};
+          for (var prop in report) {
+            var value = report[prop];
+
+            if (typeof value !== 'object') {
+              report['General'][prop] = value;
+              delete report[prop];
+            }
+          }
         }
 
       }]);

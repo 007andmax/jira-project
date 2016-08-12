@@ -705,6 +705,11 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getDeviceReports(agentIds, companyId, callback) {
+        var future = $http.post('/devices/report?companyId=' + companyId, agentIds);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         sendDownloadAgentLink: sendDownloadAgentLink,
@@ -732,6 +737,7 @@
         getSomeInfoForDevices: getSomeInfoForDevices,
         getByCompanyId: getByCompanyId,
         devicePasswordShown: devicePasswordShown,
+        getDeviceReports: getDeviceReports,
         _addInitListener: _addInitListener
       }
     }

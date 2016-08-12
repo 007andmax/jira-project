@@ -1,55 +1,55 @@
-<div class="report-device-wrapper">
-  <div class="report-device-wrapper__title">
-    <div class="close"><i class="icn-sm icn-remove-token"></i></div>
-    <h2>Report Device Name</h2>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="table-wrap">
-        <table class="table-content table-condensed">
-          <tbody>
-          <tr>
-            <td ><p>Privet Andrey</p></td>
-            <td ><p>Privet Andrey</p></td>
-          </tr>
-          <tr>
-            <td colspan="2"><p class="table-header">Bios</p></td>
-          </tr>
-          <tr>
-            <td ><p>Privet Andrey</p></td>
-            <td ><p>Privet Andrey</p></td>
-          </tr>
-          <tr>
-            <td ><p>Privet Andrey</p></td>
-            <td ><p>Privet Andrey</p></td>
-          </tr>
-          <tr>
-            <td colspan="2"><p class="table-header">H-P</p></td>
-          </tr>
-          <tr>
-            <td colspan="2"><p class="table-subheader">#1</p></td>
-          </tr>
-          <tr>
-            <td ><p>Privet Andrey</p></td>
-            <td ><p>Privet Andrey</p></td>
-          </tr>
-          <tr>
-            <td ><p>Privet Andrey</p></td>
-            <td ><p>Privet Andrey</p></td>
-          </tr>
-          <tr>
-            <td colspan="2"><p class="table-subheader">#2</p></td>
-          </tr>
-          <tr>
-            <td ><p>Privet Andrey</p></td>
-            <td ><p>Privet Andrey</p></td>
-          </tr>
-          <tr>
-            <td ><p>Privet Andrey</p></td>
-            <td ><p>Privet Andrey</p></td>
-          </tr>
-          </tbody>
-        </table>
+<div class="report-device-wrapper" prevent-hash-change="close()"
+     ng-controller="quicktech.core.companies.deviceReports">
+  <div ng-repeat="(agentId, report) in data" ng-if="!isReportClosed[$index]"
+       ng-init="reportNotEmpty = isNotEmptyObject(report); isReportClosed[$index] = false">
+    <div class="report-device-wrapper__title" fixed-block-top=".report-device-wrapper"
+         offset-top="0" background-color="#fff">
+      <div class="close" ng-click="closeReport($index)"><i class="icn-sm icn-remove-token"></i></div>
+      <h2>#{{$index + 1}} Report {{ getDeviceNameByAgentId(agentId) }}</h2>
+    </div>
+    <div class="row" style="margin-bottom: 40px">
+      <div class="col-xs-12">
+        <div class="table-wrap">
+          <table class="table-content table-condensed" ng-if="!reportNotEmpty">
+            <tr><td><p class="table-header">Report has no information to display.</p></td></tr>
+          </table>
+          <table class="table-content table-condensed" ng-if="reportNotEmpty">
+
+            <tbody ng-init="general = report['General']" ng-if="isNotEmptyObject(report['General'])">
+            <tr>
+              <td colspan="2"><p class="table-header">General</p></td>
+            </tr>
+            <tr ng-repeat="(deepName, deepValue) in general" ng-if="deepValue">
+              <td><p>{{ userReadable(deepName) }}</p></td>
+              <td><p>{{ deepValue }}</p></td>
+            </tr>
+            </tbody>
+
+            <tbody ng-repeat-start="(name, value) in report"
+                   ng-if="name !== 'General' && qtIsObject(value) && isNotEmptyObject(value)">
+            <tr>
+              <td colspan="2"><p class="table-header">{{ userReadable(name) }}</p></td>
+            </tr>
+            <tr ng-repeat="(deepName, deepValue) in value" ng-if="deepValue">
+              <td><p>{{ userReadable(deepName) }}</p></td>
+              <td><p>{{ formatValueIfNeeded(deepValue, deepName) }}</p></td>
+            </tr>
+            </tbody>
+
+            <tbody ng-repeat-end ng-if="name !== 'General' && qtIsArray(value) && value.length">
+            <tr>
+              <td colspan="2"><p class="table-header">{{ userReadable(name) }}</p></td>
+            </tr>
+            <tr ng-repeat-start="obj in value">
+              <td colspan="2"><p class="table-subheader">#{{ $index + 1 }}</p></td>
+            </tr>
+            <tr ng-repeat-end ng-repeat="(deepName, deepValue) in obj" ng-if="deepValue">
+              <td><p>{{ userReadable(deepName) }}</p></td>
+              <td><p>{{ formatValueIfNeeded(deepValue, deepName) }}</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

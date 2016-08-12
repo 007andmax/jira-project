@@ -2,24 +2,25 @@
 
 (function () {
 
-  angular.module("quicktech.core.billable").directive("preventHashChange", ['$timeout', function ($timeout) {
-      return {
-        restrict: 'A',
-        link: function ($scope, $element, $attrs) {
-          var promise = $timeout(function () {
-            window.onhashchange = preventHashChange;
-            $timeout.cancel(promise);
-          }, 100);
+  angular.module("quicktech.core.billable").directive("preventHashChange", function () {
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attrs) {
+        var initialized = false;
+        window.onhashchange = preventHashChange;
 
-          var unbind = $scope.$on('$destroy', function () {
-            window.onhashchange = undefined;
-            unbind();
-          });
+        var unbind = $scope.$on('$destroy', function () {
+          window.onhashchange = undefined;
+          unbind();
+        });
 
-          function preventHashChange() {
-            $scope.$apply($attrs.preventHashChange);
+        function preventHashChange() {
+          if (!initialized) {
+            return initialized = true;
           }
+          $scope.$apply($attrs.preventHashChange);
         }
       }
-    }]);
+    }
+  });
 })();

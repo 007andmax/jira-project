@@ -71,6 +71,22 @@
           DevicesService.sendPowerAction($scope.company.id, $scope.selectDevicesIds, 'reboot');
         };
 
+        $scope.getDeviceReport = function (agentIds) {
+          DevicesService.getDeviceReports(agentIds, $scope.company.id, function (resp) {
+            $scope.deviceReport = {};
+
+            for (var i = 0; i < resp.reports.length; i++) {
+              var report = resp.reports[i],
+                agentId = report.agentId;
+
+              delete report.agentId;
+              groupSingleFields(report);
+              $scope.deviceReport[agentId] = report;
+            }
+
+          });
+        };
+
         $scope.uncheckSelect = $scope.companyProfileHeader.unCheckAll;
 
         $scope.isInvoiceSubscriptionForbidden = function () {
@@ -81,6 +97,18 @@
               return user.subscription && user.subscription.invoice;
             }).length;
         };
+
+        function groupSingleFields(report) {
+          report['General'] = {};
+          for (var prop in report) {
+            var value = report[prop];
+
+            if (typeof value !== 'object') {
+              report['General'][prop] = value;
+              delete report[prop];
+            }
+          }
+        }
 
       }]);
 

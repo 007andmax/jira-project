@@ -229,7 +229,7 @@
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
           var globalSearch = SharedStateService.getSharedState('globalSearch');
-          $rootScope.isRightPanelHidden = toState.name !== 'tickets.details' && toState.name !== 'companyProfile';
+          $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
           if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
             if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {

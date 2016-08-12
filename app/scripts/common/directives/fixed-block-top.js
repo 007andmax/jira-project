@@ -2,21 +2,26 @@
 
 (function () {
 
-  angular.module("quicktech.common.directives").directive('fixedBlockTop', function () {
+  angular.module("quicktech.common.directives").directive('fixedBlockTop', ['$document', function ($document) {
     return {
       restrict: 'A',
       scope: {
         offsetTop: '@?',
-        disableStick: '=?'
+        disableStick: '=?',
+        backgroundColor: '@?'
       },
       link: function (scope, element, attrs) {
 
         if (!scope.disableStick) {
-          var $win = $(window);
+          var elementWithScroll = $document.find(attrs.fixedBlockTop);
 
-          $win.scroll(onScroll);
+          if (!elementWithScroll.length) {
+            elementWithScroll = $(window);
+          }
+
+          elementWithScroll.on('scroll', onScroll);
           scope.$on('$destroy', function () {
-            $win.off('scroll', onScroll);
+            elementWithScroll.off('scroll', onScroll);
           });
         }
 
@@ -33,12 +38,12 @@
             //todo: allow to adjust styles
             if (top > 0) {
               element.css({
-                'background-color': 'rgba(255, 255, 255, 0.87)',
+                'background-color': scope.backgroundColor || 'rgba(255, 255, 255, 0.87)',
                 'z-index': 999
               });
             } else {
               element.css({
-                'background-color': 'transparent',
+                'background-color': scope.backgroundColor || 'transparent',
                 'z-index': 'unset'
               });
             }
@@ -49,5 +54,5 @@
 
       }
     }
-  });
+  }]);
 })();

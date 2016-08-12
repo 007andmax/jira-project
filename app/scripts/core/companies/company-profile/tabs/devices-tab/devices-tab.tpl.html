@@ -171,6 +171,12 @@
       <div class="col-6">
         <div class="list-actions pull-right">
 
+          <div class="btn btn-default has-tooltip pull-left" append-html-to-body data="deviceReport"
+               url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
+               tooltip-placement="top" tooltip="Open Report" ng-click="getDeviceReport(agent.agentId)">
+            <i class="icn-sm icn-description"></i>
+          </div>
+
           <div class="more pull-right dropdown" ng-if="agent.online">
 
             <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"

@@ -8,8 +8,10 @@
         return Math.ceil(input * 10) / 10 + ' B';
       } else if (input / 1024 < 1000) {
         return Math.ceil((input / 1024) * 10) / 10 + ' KB';
+      } else if (input / 1024 < 1000000) {
+        return Math.ceil((input / 1048576) * 10) / 10 + ' MB';
       } else {
-        return Math.ceil((input / 1048576) * 10) / 10 + " MB";
+        return Math.ceil((input / 1073741824) * 10) / 10 + ' GB';
       }
     }
   })

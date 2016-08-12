@@ -139,7 +139,7 @@
               <strong>{{ selectDevicesIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
             </p>
 
-            <div class="topNavbar-filter pull-right">
+            <div class="topNavbar-filter pull-right" style="transform: translateY(-40%);">
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"
                    tooltip-placement="bottom" tooltip="Remove">
@@ -154,6 +154,12 @@
               <div class="btn btn-default has-tooltip pull-right" ng-click="restartDevices()"
                    tooltip-placement="bottom" tooltip="Restart" ng-if="!companyProfileHeader.isOfflineDeviceSelected">
                 <i class="icn-sm icn-restart-device"></i>
+              </div>
+
+              <div class="btn btn-default has-tooltip pull-left" append-html-to-body data="deviceReport"
+                   url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
+                   tooltip-placement="top" tooltip="Open Report" ng-click="getDeviceReport(selectDevicesIds)">
+                <i class="icn-sm icn-description"></i>
               </div>
 
             </div>

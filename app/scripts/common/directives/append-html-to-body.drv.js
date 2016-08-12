@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('appendHtmlToBody',
-    ['$templateRequest', '$compile', '$location', function ($templateRequest, $compile, $location) {
+    ['$templateRequest', '$compile', '$location', '$document', function ($templateRequest, $compile, $location, $document) {
       return {
         restrict: 'A',
         scope: {
@@ -38,7 +38,7 @@
           };
 
           var unbind = $scope.$on('$destroy', function () {
-            $body.off('keydown', closeIfEscape);
+            $document.off('keydown', closeIfEscape);
             $element.off('click', showPreview);
             if (newScope) {
               newScope.$destroy();
@@ -50,10 +50,11 @@
             if (!$scope.$eval($attrs.disableIf)) {
               if (template) {
                 newScope = $scope.$new();
-                $location.search('modal', 'true');
                 $compile(template)(newScope, function (compiledHtml) {
-                  templateContainer = $body.append(compiledHtml).find('.' + $scope.firstNodeClass);
-                  $body.on('keydown', closeIfEscape);
+                  $location.search('modal', 'true');
+                  $body.append(compiledHtml);
+                  templateContainer = compiledHtml;
+                  $document.on('keydown', closeIfEscape);
                   $body.addClass('non-body-scroll');
                 });
               } else {
