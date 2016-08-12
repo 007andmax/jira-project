@@ -142,8 +142,8 @@
   /*right: -35px;*/
 
   /*top: 50px;*/
-  /*margin-right: 50px;*/
-  transform: translateY(50%);
+  margin-right: 20px;
+  /*transform: translateY(50%);*/
   float: right;
 }
 
@@ -189,4 +189,8 @@
 .create-user-from-company {
   float: right;
   transform: translateY(50%);
+}
+.select{
+  white-space: nowrap;
+  transform: translateY(80%)
 }

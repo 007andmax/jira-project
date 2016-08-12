@@ -14,6 +14,7 @@ html {
 body {
   margin: 0;
   min-width: 768px;
+  overflow: hidden;
 }
 article,
 aside,
@@ -780,7 +781,7 @@ hr {
   float: left;
   width: 100%;
   padding: 0 30px 30px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 .company-profile-content.companies-list {
   padding-left: 0;

@@ -226,15 +226,15 @@
         <div class="nickname-wrap" dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
           <!--ng-click="currentUser.online = !currentUser.online"></i>-->
-          <i class="on"></i>
-
           <div class="nickname" tooltip="{{ getUserName(currentUser) }}" tooltip-placement="bottom"
                tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
-            <span trimmed-tooltip-container>{{ getUserName(currentUser) }}</span>
+            <i class="on"></i>
+            <span style="margin: 0 5px;" trimmed-tooltip-container>{{ getUserName(currentUser) }}</span>
+            <i class="icn-sm icn-expand"></i>
+            <i class="icn-sm icn-collapse"></i>
           </div>
 
-          <i class="icn-sm icn-expand"></i>
-          <i class="icn-sm icn-collapse"></i>
+
         </div>
 
         <ul class="dropdown-menu tag-list">
