@@ -85,7 +85,11 @@
 
         $scope.bulkLinkAgent = function (ids, agentId, agentName) {
           TicketsService.changeLinkedAgent(ids, agentId, function () {
-            UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets linked agents have been change to ' + agentName, true);
+            if (agentName) {
+              UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets linked agents have been change to ' + agentName, true);
+            } else {
+              UserNotificationService.show('The selected ' + $scope.ticketsSharedState.checkedTicketsIds.length + ' tickets agents have been unlinked', true);
+            }
             $scope.uncheckAllTickets();
           });
         };

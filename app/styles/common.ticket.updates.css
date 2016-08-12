@@ -247,7 +247,7 @@
   margin-top: 0px;
   margin-bottom: 21px;
 }
-.inventry-details .table-wrapper{
+.inventory-details .table-wrapper{
   margin-top: 25px;
   margin-bottom: 0;
   padding-bottom: 30px;
@@ -373,13 +373,13 @@
 .table-wrapper .service-table .col-3 {
   width: calc(100% - 409px);
 }
-.inventry-details .table-wrapper .service-table .col-3 {
+.inventory-details .table-wrapper .service-table .col-3 {
   width: calc(100% - 507px);
 }
-.inventry-details .table-wrapper:last-child .table-content{
+.inventory-details .table-wrapper:last-child .table-content{
   margin-bottom: 0;
 }
-.inventry-details .table-wrapper .table-content:last-child{
+.inventory-details .table-wrapper .table-content:last-child{
   margin-bottom: 10px;
 }
 
@@ -391,7 +391,7 @@
 .table-wrapper .service-table .col-4 {
   width: 140px;
 }
-.inventry-details .table-wrapper .service-table .col-5 {
+.inventory-details .table-wrapper .service-table .col-5 {
   width: 98px;
   float: right;
 }

@@ -159,6 +159,7 @@
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
           } else if (val) {
+            $scope.ticketAgent = '';
             $scope.ticketCompanyChoosen = true;
             var selectedCompany;
             if ($scope.ticketCreatedUser && typeof $scope.ticketCreatedUser === 'object' && $scope.ticketCreatedUser.company.name === val) {

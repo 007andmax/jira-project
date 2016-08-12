@@ -64,7 +64,7 @@
             <ul class="qt-list qt-billable-sub" ets-slider ng-if="showTickets"
                 ng-controller="quicktech.core.billable.companyTicketsCtrl">
 
-              <li class="inventry-details"
+              <li class="inventory-details"
                   ng-repeat="ticket in billableCompany.tickets | orderBy:'closedAt'" qt-toggle-slider
                   show-model-element="{{ 'showTicket-' + ticket.id }}">
 

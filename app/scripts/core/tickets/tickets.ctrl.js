@@ -109,6 +109,16 @@
           return result;
         };
 
+        $scope.isDeviceToLink = function (agents, agentFromTicket) {
+          if (!agentFromTicket || !agentFromTicket.deviceId) {
+            return true;
+          }
+
+          return agents.filter(function (agent) {
+            return agent.id !== agentFromTicket.deviceId;
+          }).length;
+        };
+
         function changeSelectedTickets(id, status) {
 
           ticketsHeaderState.checkedTicketsIds = [];

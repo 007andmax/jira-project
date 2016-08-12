@@ -36,7 +36,6 @@
           tryToAddProduct: false,
           tryToAddService: false
         };
-        $scope.ticketSharedUsersList = [];
         $scope.selectUpdateSharedUser = {};
 
         $scope.companies = CompaniesService.getClientCompanies();
@@ -50,6 +49,23 @@
           $scope.actualInvoiceNumber = $scope.invoice.number;
           $scope.minSentOnDate = new Date($scope.invoice.sentOn);
           $scope.minEndDate = new Date($scope.invoice.endDate);
+
+          $scope.ticketSharedUsersList = $scope.invoice.shares.map(function (share) {
+            if (share.user) {
+              return { user: share.user, notify: true };
+            } else {
+              return { contact: share.user, notify: true };
+            }
+          });
+
+          for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+            var share = $scope.ticketSharedUsersList[i];
+            if (share.user) {
+              $scope.selectUpdateSharedUser[share.user.id] = true;
+            } else {
+              $scope.selectUpdateSharedUser[share.contact.id] = true;
+            }
+          }
 
           $scope.editInvoice = {
             id: $scope.invoice.id,
@@ -81,6 +97,8 @@
           $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms;
 
         } else {
+
+          $scope.ticketSharedUsersList = [];
 
           $scope.minSentOnDate = new Date(Date.now() + day);
           $scope.minEndDate = new Date(Date.now() + day);
@@ -161,8 +179,7 @@
             return;
           }
 
-          $scope.ticketSharedUsersList = [];
-          $scope.selectUpdateSharedUser = {};
+          resetSharedUsers(company);
           $scope.clients = UsersService.getAllByCompanyId(company.id);
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
@@ -518,6 +535,31 @@
             return share.notify;
           });
         };
+
+        function resetSharedUsers(company) {
+          if (!company) {
+            $scope.ticketSharedUsersList = [];
+            $scope.selectUpdateSharedUser = {};
+          }
+
+          var users = UsersService.getAllByCompanyId(company.id);
+
+          for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+            var shares = $scope.ticketSharedUsersList[i];
+
+            if (!shares.user || UsersService.getOneById(shares.user.id).accountType === 'TECH') {
+              continue;
+            }
+
+            if (!users.find(function (user) {
+                return user.id === shares.user.id;
+              })) {
+              $scope.ticketSharedUsersList.splice(i, 1);
+              i--;
+              $scope.selectUpdateSharedUser[shares.user.id] = false;
+            }
+          }
+        }
 
       }]);
 

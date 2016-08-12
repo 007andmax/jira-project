@@ -621,13 +621,13 @@ aside#left div.nav-title {
   overflow: hidden;
 }
 
-.nav-inventry {
+.nav-inventory {
   transition: .4s linear all;
   height: 132px;
   overflow: hidden;
 }
 
-.nav-inventry-users {
+.nav-inventory-users {
   transition: .4s linear all;
   height: 88px;
   overflow: hidden;

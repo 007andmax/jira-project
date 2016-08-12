@@ -93,7 +93,7 @@
             return 'clients';
           } else if (url.indexOf('accounting') > -1) {
             return 'accounting';
-          } else if (url.indexOf('inventry') > -1) {
+          } else if (url.indexOf('inventory') > -1) {
             return 'products';
           } else {
             return undefined;

@@ -91,12 +91,12 @@
         controller: 'quicktech.core.companies.companyProfileCtrl'
       }))
       .state('products', waitForServices({
-        url: '/inventry/products/:tabName',
+        url: '/inventory/products/:tabName',
         templateUrl: '/html/scripts/core/products/products.tpl.html',
         controller: 'quicktech.core.products.productsCtrl'
       }))
       .state('services', waitForServices({
-        url: '/inventry/services',
+        url: '/inventory/services',
         templateUrl: '/html/scripts/core/services/services.tpl.html',
         controller: 'quicktech.core.services.servicesCtrl'
       }))
@@ -126,17 +126,17 @@
         controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
       }))
       .state('vendors', waitForServices({
-        url: '/inventry/vendors',
+        url: '/inventory/vendors',
         templateUrl: '/html/scripts/core/vendors/vendors.tpl.html',
         controller: 'quicktech.core.vendors.vendorsCtrl'
       }))
       .state('createVendor', waitForServices({
-        url: '/inventry/vendors/create',
+        url: '/inventory/vendors/create',
         templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
         controller: 'quicktech.core.vendors.editVendorCtrl'
       }))
       .state('editVendor', waitForServices({
-        url: '/inventry/vendors/edit/:vendorId',
+        url: '/inventory/vendors/edit/:vendorId',
         templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
         controller: 'quicktech.core.vendors.editVendorCtrl'
       }))
@@ -196,7 +196,7 @@
         controller: 'quicktech.core.quickSupport.quickSupportCtrl'
       }))
       .state('taxRates', waitForServices({
-        url: '/inventry/taxRates',
+        url: '/inventory/taxRates',
         templateUrl: '/html/scripts/core/tax-rates/tax-rates.tpl.html',
         controller: 'quicktech.core.taxRates.taxRatesCtrl'
       }));

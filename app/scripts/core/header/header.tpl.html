@@ -126,10 +126,14 @@
                 </ul>
               </li>
 
+              <li>
+                <a tabindex="-1" href="javascript:void(0)"
+                   ng-click="bulkLinkAgent(ticketsSharedState.checkedTicketsIds, '')">Unlink Agent</a>
+              </li>
+
               <li ng-click="moveIntoSpam()"
                   ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketsSharedState.selectedTickets)">
-                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam'
-                  }}</a>
+                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam' }}</a>
               </li>
 
               <li

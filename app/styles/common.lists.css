@@ -741,7 +741,7 @@ Devices tab
 .qt-billable-sub > li + li {
   min-height: 71px;
 }
-.inventry-details .qt-table {
+.inventory-details .qt-table {
   display: none;
   float: right;
 
