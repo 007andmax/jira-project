@@ -523,7 +523,7 @@
                 } else if (newChange.data.status === 'ERROR') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'error');
                 } else if (newChange.data.status === 'LOGIN_ERROR') {
-                  Utils.defineReadOnlyProperty(device, "agentStatus", 'login error');
+                  Utils.defineReadOnlyProperty(device, "agentStatus", 'loginError');
                 } else if (newChange.data.status === 'UNKNOWN') {
                   Utils.defineReadOnlyProperty(device, "agentStatus", 'unknown');
                 } else if (newChange.data.status === 'INIT') {

@@ -179,7 +179,7 @@
       </div>
 
       <div class="col-2" style="text-align: center">
-        <div class="device-mac-address">{{ device.agentStatus }}</div>
+        <div class="device-mac-address">{{ userReadable(device.agentStatus) }}</div>
       </div>
 
       <div class="col-7 last-seen-date" style="text-align: center">{{ device.updatedAt | date: 'dd MMM yyyy' }}</div>
@@ -211,7 +211,7 @@
                      ng-click="changeAgentStatus()">
               <span class="toggle-bg"
                     tooltip="{{ allowAgentInstall ? device.message : 'Maximum installed agent amount reached'}}"
-                    tooltip-placement="top"></span>
+                    tooltip-placement="left" tooltip-append-to-body></span>
               <span class="toggle-indicator"></span>
             </label>
 
