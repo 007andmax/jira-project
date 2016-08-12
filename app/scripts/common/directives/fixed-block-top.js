@@ -44,7 +44,7 @@
             } else {
               element.css({
                 'background-color': scope.backgroundColor || 'transparent',
-                'z-index': 'unset'
+                'z-index': 'initial'
               });
             }
 

@@ -85,7 +85,12 @@
         if (sessionId) {
 
           $timeout(function () {
-            $scope.ticket.ticketAssignTo = $scope.currentUser;
+            var techUsers = UsersService.getTechUsers();
+            if (techUsers.length > 1) {
+              $scope.ticket.ticketAssignTo = $scope.currentUser;
+            } else {
+              $scope.ticket.isAssignToMe = true;
+            }
           });
 
           $scope.ticket.remoteSessionId = sessionId;
@@ -98,8 +103,8 @@
 
           ServicesService.getAllByCompany($scope, fromRemoteCompanyId, function (resp) {
             $scope.ticket.serviceExpenses[0].item = resp.find(function (service) {
-              return service.name === 'Remote Service';
-            }) || resp[0];
+                return service.name === 'Remote Service';
+              }) || resp[0];
           });
 
           $scope.removeService = function (index) {

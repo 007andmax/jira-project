@@ -9689,7 +9689,8 @@ button.close {
   color: #4c5c6f;
   background-color: #e7ecf2;
 }
-.payment-receive-fixed {
+.payment-receive-fixed,
+.fixed-block-top {
   width: 100%;
   height: 70px;
   position: absolute;

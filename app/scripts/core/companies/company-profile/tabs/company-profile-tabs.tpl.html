@@ -1,7 +1,7 @@
 <div ng-controller="quicktech.core.companies.companyProfileTabsCtrl">
 
   <div class="tabs-container">
-    <div class="payment-receive-fixed" fixed-block-top
+    <div class="fixed-block-top" fixed-block-top
          style="margin-top: 340px">
       <ul class="nav nav-qt clearfix" style="padding: 0 30px;" company-bulk-option>
 
@@ -133,7 +133,8 @@
 
           </div>
 
-          <div class="topNavbarLeft-Left pull-left" ng-if="bulkOptionMode === 'devices'">
+          <div class="topNavbarLeft-Left pull-left" ng-if="bulkOptionMode === 'devices'"
+               style="transform: translateY(50%);">
 
             <p class="pull-left" style="white-space: nowrap;">
               <strong>{{ selectDevicesIds.length }}</strong>&nbsp;<span class="text-muted">Selected</span>
