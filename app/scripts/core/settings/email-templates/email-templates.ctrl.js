@@ -79,36 +79,42 @@
         };
 
         $scope.agentTemplates = {
-          'AGENT_CREATED': {
-            title: "A new Agent is created",
-            recipient: "New Agent",
-            description: "This message will be sent to greet the new agent. It may also include a link to verify the agent's email address."
-          },
-          'AGENT_ARCHIVED': {
-            title: "An Agent is archived",
-            recipient: "Agent",
-            description: "This message will be sent when the agent is archived."
-          },
-          'AGENT_CONTACT_MODIFIED': {
-            title: "Agent's contact information is modified",
-            recipient: "Agent",
-            description: "This message will be sent when the agent’s contact information is modified."
-          },
-          'AGENT_TICKET_RESTORE': {
-            title: "A Ticket is restored to its original folder from either Spam or Trash",
-            recipient: "Agent",
-            description: "This message will be sent when a ticket is restored from either Spam or Trash to its original folder."
-          },
-          'AGENT_ROLE_UPGRADED': {
-            title: "Agent's privilege is upgraded to either Administrator or Super Admin",
-            recipient: "Agent",
-            description: "This message will be sent when agent’s user access privileges are upgraded."
-          },
-          'AGENT_ROLE_DOWNGRADED': {
-            title: "Agent's privilege is downgraded to either Administrator or User",
-            recipient: "Agent",
-            description: "This message will be sent when agent’s access privileges are downgraded."
+          'DOWNLOAD_AGENT': {
+            title: "Agent Download",
+            recipient: "Client User",
+            description: "This message will be sent to client user with agent download link.",
+            showPreview: true
           }
+          //'AGENT_CREATED': {
+          //  title: "A new Agent is created",
+          //  recipient: "New Agent",
+          //  description: "This message will be sent to greet the new agent. It may also include a link to verify the agent's email address."
+          //},
+          //'AGENT_ARCHIVED': {
+          //  title: "An Agent is archived",
+          //  recipient: "Agent",
+          //  description: "This message will be sent when the agent is archived."
+          //},
+          //'AGENT_CONTACT_MODIFIED': {
+          //  title: "Agent's contact information is modified",
+          //  recipient: "Agent",
+          //  description: "This message will be sent when the agent’s contact information is modified."
+          //},
+          //'AGENT_TICKET_RESTORE': {
+          //  title: "A Ticket is restored to its original folder from either Spam or Trash",
+          //  recipient: "Agent",
+          //  description: "This message will be sent when a ticket is restored from either Spam or Trash to its original folder."
+          //},
+          //'AGENT_ROLE_UPGRADED': {
+          //  title: "Agent's privilege is upgraded to either Administrator or Super Admin",
+          //  recipient: "Agent",
+          //  description: "This message will be sent when agent’s user access privileges are upgraded."
+          //},
+          //'AGENT_ROLE_DOWNGRADED': {
+          //  title: "Agent's privilege is downgraded to either Administrator or User",
+          //  recipient: "Agent",
+          //  description: "This message will be sent when agent’s access privileges are downgraded."
+          //}
         };
 
         $scope.usersTemplates = {
@@ -341,8 +347,10 @@
 
         $scope.emailPreview = function (templateKey) {
           $scope.emailPreviewHtml = undefined;
+          $scope.gettingEmailTemplatePreview = true;
           EmailSettingsService.getHtmlForPreview($scope.templatesData, templateKey, function (resp) {
             $scope.emailPreviewHtml = $sce.trustAsHtml(resp);
+            $scope.gettingEmailTemplatePreview = false;
           })
         };
 

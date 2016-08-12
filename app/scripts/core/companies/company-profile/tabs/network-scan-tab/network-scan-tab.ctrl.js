@@ -54,6 +54,12 @@
           })
         };
 
+        $scope.userReadable = function (str) {
+          return str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
+            return str.toUpperCase();
+          })
+        };
+
         $scope.$watchGroup(['device.agentStatus', 'device.message'], function () {
 
           if ($scope.device.agentStatus === 'installed' || $scope.device.agentStatus === 'managed') {

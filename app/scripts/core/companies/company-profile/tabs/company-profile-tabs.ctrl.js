@@ -42,7 +42,7 @@
         $scope.runScanDevices = function () {
           $scope.isScanDevicesLoad = true;
           DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
-            $scope.masterAgentOffline = true;
+            $scope.masterAgentOffline = resp.code === 400;
             if ($scope.masterAgentOffline) {
               $scope.isScanDevicesLoad = false;
             }

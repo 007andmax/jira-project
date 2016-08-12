@@ -60,6 +60,11 @@
               } else {
                 waitForTplLoaded = true;
               }
+            } else {
+              var unwatch = $scope.$observe('disableIf', function () {
+                showPreview();
+                unwatch();
+              })
             }
           }
 
