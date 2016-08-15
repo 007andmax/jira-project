@@ -10,6 +10,7 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
@@ -9810,13 +9811,13 @@ button.close {
   }
 }
 .onhold-ticket {
-  background-color: #03A9F4;
+  background-color: #F44336;
 }
 .completed-ticket {
   background-color: #4caf50;
 }
 .progress-ticket {
-  background-color: #FF5722;
+  background-color: #FFC107;
 }
 .priority-big-size {
   color: #FFF;

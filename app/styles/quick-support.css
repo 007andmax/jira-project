@@ -4,7 +4,8 @@
 }
 
 .quick-support-session {
-  margin: 20px;
+  margin: 20px auto;
+  width: 93%;
   list-style: none;
   background-color: #fff;
   min-height: 135px;
@@ -15,6 +16,11 @@
   /*cursor: pointer;*/
   transition: 0.3s ease-out box-shadow;
 }
+@media screen and (max-width: 950px) {
+  .quick-support-session {
+    height: 175px;
+    }
+  }
 
 .quick-support-session:hover {
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
