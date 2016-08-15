@@ -542,8 +542,6 @@
             $scope.selectUpdateSharedUser = {};
           }
 
-          var users = UsersService.getAllByCompanyId(company.id);
-
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
@@ -551,12 +549,10 @@
               continue;
             }
 
-            if (!users.find(function (user) {
-                return user.id === shares.user.id;
-              })) {
+            if (shares.user.company.id !== company.id) {
               $scope.ticketSharedUsersList.splice(i, 1);
-              i--;
               $scope.selectUpdateSharedUser[shares.user.id] = false;
+              i--;
             }
           }
         }

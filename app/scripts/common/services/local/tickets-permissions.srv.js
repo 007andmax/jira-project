@@ -107,7 +107,7 @@
           }
         },
         'STATUS_VISIBLE': function (ticket) {
-          return !isSpamOrTrash(ticket) && ticket.status;
+          return !isSpamOrTrash(ticket);
         },
         'UPDATE': isUpdateAllowed,
         'UPDATE_AND_CLOSE': isUpdateAllowed,

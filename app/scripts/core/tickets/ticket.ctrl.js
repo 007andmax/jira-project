@@ -44,64 +44,6 @@
           dropdowns[$scope.ticket.id]['status'] = false;
         };
 
-        $scope.moveIntoSpam = function () {
-
-          var confirmMesage = 'Do you want to ' + ($scope.currentUser.isOwner ? 'mark' : 'report') + ' the ticket as spam?',
-            confirmButton = 'Spam';
-
-          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-
-            if ($scope.currentUser.isOwner) {
-
-              TicketsService.markAsSpam($scope.ticket.id, function () {
-                UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been marked as spam', true);
-              });
-            } else {
-
-              TicketsService.reportAsSpam($scope.ticket.id, function () {
-                UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been reported as spam', true);
-              });
-
-            }
-            $scope.uncheckTicket($scope.ticket.id);
-          });
-        };
-
-        $scope.restoreFromSpam = function () {
-          TicketsService.restoreFromSpam($scope.ticket.id);
-          $scope.uncheckTicket($scope.ticket.id);
-        };
-
-        $scope.moveToTrash = function (movedWay) {
-          TicketsService.changeTrashFlag($scope.ticket.id, movedWay, function () {
-            if (movedWay) {
-
-              UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been moved to Trash', true);
-              $scope.uncheckTicket($scope.ticket.id);
-            }
-          });
-        };
-
-        $scope.deleteForever = function () {
-          var confirmMesage = 'The ticket will become inaccessible. Continue with permanent deletion?',
-            confirmButton = 'Delete';
-
-          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            TicketsService.deleteForever($scope.ticket.id, function () {
-
-              UserNotificationService.show('The ticket “' + $scope.ticket.number + '” has been deleted', true);
-              $scope.uncheckTicket($scope.ticket.id);
-            });
-          });
-        };
-
-        $scope.claimTicket = function () {
-          TicketsService.assignTo($scope.ticket.id, $scope.currentUser.id, function () {
-
-            UserNotificationService.show('Ticket “' + $scope.ticket.number + '” has been assigned to ' + $scope.getUserName($scope.currentUser), true);
-          });
-        };
-
       }]);
 
 }());

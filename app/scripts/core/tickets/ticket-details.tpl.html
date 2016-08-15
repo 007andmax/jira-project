@@ -52,12 +52,13 @@
                     <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i>
                   </label>
                 </span>
-                <span
-                  class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) }}-ticket"
-                  ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)" dropdown-toggle> {{ userReadable(ticketDetails.status)  }}
+
+                <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+                  ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)" dropdown-toggle>
+                  {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
                 </span>
                 <ul class="dropdown-menu dropdown-priority"
-                    ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketDetails)">
+                    ng-if="TicketsPermissionsService.isActionVisible('change_status', ticketDetails) && ticketDetails.status">
                   <li>
                     <a tabindex="-1" href="javascript:void(0)"
                        ng-click="changeTicketStatus('IN_PROGRESS')">

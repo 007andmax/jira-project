@@ -11,7 +11,7 @@
                 UserNotificationService, sessionId, sessionTime, fromRemoteCompanyId, fromRemoteDeviceId, ServicesService,
                 $timeout, TicketsPermissionsService, $state, PermissionsService) {
 
-        var isNeedToDeleteUser = true, agentsByCompany = [];
+        var agentsByCompany = [];
 
         $scope.allowedTypes = [
           "image/jpg",
@@ -145,17 +145,19 @@
           if (val && typeof val === 'object') {
             $scope.ticketCompanyChoosen = true;
 
-            if (isNeedToDeleteUser) {
-              delete $scope.ticketCreatedUser;
-            }
-            isNeedToDeleteUser = true;
-
             if ($scope.ticket.createdUser) {
+              var ticketUserId = $scope.ticket.createdUser.id,
+                ticketCompanyId = $scope.ticket.createdUser.companyId;
+              if (ticketUserId && ticketCompanyId !== val.id && ticketCompanyId !== $scope.unassignedCompany.id) {
+                delete $scope.ticketCreatedUser;
+              }
+
               $scope.ticket.createdUser.companyId = val.id;
             }
 
             $scope.filteredAgentList = agentsByCompany[val.id];
             $scope.clients = UsersService.getAllByCompanyId(val.id);
+            resetSharedUsers(val);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
           } else if (val) {
@@ -175,16 +177,15 @@
             }
 
             if (!selectedCompany) {
-              if ($scope.ticket.createdUser) {
-                $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
-              }
               return $scope.ticketForm.ticketCompany.$setValidity('invalidName', false);
             } else {
               $scope.ticketCompany = selectedCompany;
+              resetSharedUsers(selectedCompany);
             }
           } else {
             if ($scope.ticket.createdUser) {
               $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
+              resetSharedUsers($scope.unassignedCompany);
             }
 
             if ($scope.ticket.serviceExpenses && $scope.ticket.serviceExpenses.length) {
@@ -222,12 +223,11 @@
 
             $scope.ticketSharedUsersList.push({
               user: $scope.ticketCreatedUser,
-              notify: true
+              notify: false
             });
 
             $scope.selectUpdateSharedUser[$scope.ticketCreatedUser.id] = true;
 
-            isNeedToDeleteUser = false;
             var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
 
             if (ticketCompany.id !== $scope.unassignedCompany.id) {
@@ -235,6 +235,7 @@
               $scope.ticket.createdUser.companyId = ticketCompany.id;
             } else {
               $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
+              resetSharedUsers($scope.unassignedCompany);
               $scope.ticketAgent = '';
             }
           } else if (val && val.match($scope.emailPattern)) {
@@ -261,13 +262,16 @@
               UsersService.isEmailUnique(val, '', false, function (resp) {
                 if (resp.value) {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
-                  var firstName = val.split('@')[0];
+                  var firstName = val.split('@')[0],
+                    selectedCompany = $scope.ticketCompany ? $scope.ticketCompany : $scope.unassignedCompany;
+
                   $scope.ticket.createdUser = {
                     primaryEmail: val,
                     firstName: firstName,
-                    companyId: $scope.ticketCompany ? $scope.ticketCompany.id : $scope.unassignedCompany.id
+                    companyId: selectedCompany.id
                   };
 
+                  resetSharedUsers(selectedCompany);
                   $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
                     return share.user.id !== 'new';
                   });
@@ -278,11 +282,10 @@
                       primaryEmail: val,
                       firstName: val
                     },
-                    notify: true
+                    notify: false
                   });
 
                   $scope.ticketAgent = $scope.ticketCompany ? $scope.ticketAgent : '';
-                  isNeedToDeleteUser = false;
                 } else {
                   $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
                 }
@@ -595,6 +598,22 @@
             return !share.user || share.user.id === user.id;
           });
         };
+
+        function resetSharedUsers(company) {
+          for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+            var shares = $scope.ticketSharedUsersList[i];
+
+            if (!shares.user || shares.user.id === 'new' || UsersService.getOneById(shares.user.id).accountType === 'TECH') {
+              continue;
+            }
+
+            if (!shares.user.company || shares.user.company.id !== company.id) {
+              $scope.ticketSharedUsersList.splice(i, 1);
+              $scope.selectUpdateSharedUser[shares.user.id] = false;
+              i--;
+            }
+          }
+        }
 
       }]);
 

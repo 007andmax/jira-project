@@ -9,9 +9,15 @@
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
                 $stateParams, $rootScope, TicketsPermissionsService) {
 
+        var sharedQuickSession = SharedStateService.getSharedState('quickSession');
+
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
+
+        $scope.addQuickSession = function () {
+          sharedQuickSession.isCreateNew = true;
+        };
 
         $scope.getClientCompanies = function () {
           var clientCompanies = CompaniesService.getClientCompanies();
