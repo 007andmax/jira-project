@@ -12,7 +12,7 @@
     <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
 
     <div class="add-service-btn-wrapper" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
-      <div class="btn btn-success has-tooltip" ng-show="!showCreateService"
+      <div class="btn btn-info has-tooltip" ng-show="!showCreateService"
            ng-click="showCreateServiceForm()"
            tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
         <i class="icn-sm icn-plus"></i>

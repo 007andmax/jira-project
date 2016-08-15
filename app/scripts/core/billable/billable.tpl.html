@@ -49,7 +49,8 @@
                      class="control checkbox pull-left"
                      stop-propagation="click" style="z-index: 2;">
                 <input type="checkbox" ng-model="ticketsSelection[company.id].checked"
-                       ng-click="changeCompanyCheckbox(billableCompany.companyId)">
+                       ng-click="changeCompanyCheckbox(billableCompany.companyId)"
+                       ng-disabled="anotherCompanySelected(billableCompany.companyId)">
                 <span class="control-indicator"></span>
               </label>
 
@@ -85,7 +86,8 @@
                            ng-if="!ticket.lockedBy && PermissionsService.isAllowed('CREATE_INVOICE')"
                            stop-propagation="click">
                       <input type="checkbox" ng-model="ticketsSelection[company.id].tickets[ticket.id]"
-                             ng-change="changeTicketCheckbox(billableCompany.companyId)">
+                             ng-change="changeTicketCheckbox(billableCompany.companyId)"
+                             ng-disabled="anotherCompanySelected(billableCompany.companyId)">
                       <span class="control-indicator"></span>
                     </label>
 

@@ -112,7 +112,7 @@ body.non-body-scroll::-webkit-scrollbar {
   box-shadow: none;
 }
 
-.products-content .dropdown-menu.move-prod {
+.dropdown-menu.move-prod {
   width: 200px;
   max-height: 120px;
   overflow-y: scroll;

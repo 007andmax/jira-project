@@ -222,9 +222,10 @@
   }]);
 
   app.run(
-    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal', 'TicketsService',
+    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal', 'TicketsService', '$stateParams',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService',
-      function ($rootScope, $templateCache, CompaniesService, $state, $modal, TicketsService, UserConfirmationsService, SharedStateService) {
+      function ($rootScope, $templateCache, CompaniesService, $state, $modal, TicketsService, $stateParams,
+                UserConfirmationsService, SharedStateService) {
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
@@ -244,15 +245,15 @@
           if (toState.name === 'tickets' || toState.name === 'tickets.details') {
             globalSearch.goBack.func = $rootScope.$broadcast.bind($rootScope, 'uncheckAllTickets');
             globalSearch.goBack.tooltip = 'reset selected items';
-          } else if (toState.name ===  'editCompany') {
+          } else if (toState.name === 'editCompany') {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'companyProfile', { companyId: $stateParams.companyId });
             globalSearch.goBack.tooltip = 'back to company profile';
-          } else if (toState.name ===  'companyProfile' || toState.name === 'createCompany') {
+          } else if (toState.name === 'companyProfile' || toState.name === 'createCompany') {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'companies');
             globalSearch.goBack.tooltip = 'back to companies';
-          } else if (toState.name ===  'createVendor' || toState.name ===  'editVendor') {
+          } else if (toState.name === 'createVendor' || toState.name === 'editVendor') {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'vendors');
             globalSearch.goBack.tooltip = 'back to vendors';
@@ -423,10 +424,18 @@
                   backdrop: 'static',
                   animation: true,
                   resolve: {
-                    sessionId: function () { return sessionId; },
-                    sessionTime: function () { return sessionTime; },
-                    fromRemoteCompanyId: function () { return companyId; },
-                    fromRemoteDeviceId: function () { return deviceId; }
+                    sessionId: function () {
+                      return sessionId;
+                    },
+                    sessionTime: function () {
+                      return sessionTime;
+                    },
+                    fromRemoteCompanyId: function () {
+                      return companyId;
+                    },
+                    fromRemoteDeviceId: function () {
+                      return deviceId;
+                    }
                   }
                 });
 

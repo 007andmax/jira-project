@@ -96,6 +96,26 @@
           }
         });
 
+        $scope.anotherCompanySelected = function (companyId) {
+          if ($scope.ticketsSelection[companyId] && $scope.ticketsSelection[companyId].checked) {
+            return  false;
+          }
+
+          for (var id in $scope.ticketsSelection) {
+            var selectionByCompany = $scope.ticketsSelection[id];
+
+            if (selectionByCompany.checked) {
+              return true;
+            } else {
+              for (var ticketId in selectionByCompany.tickets) {
+                if (selectionByCompany.tickets[ticketId]) {
+                  return id !== companyId;
+                }
+              }
+            }
+          }
+        };
+
         $scope.changeCompanyCheckbox = function (companyId) {
 
           var ticketsSelection = $scope.ticketsSelection[companyId];

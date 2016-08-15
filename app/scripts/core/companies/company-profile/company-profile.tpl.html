@@ -64,7 +64,8 @@
               <i class="icn-sm icn-location-white"></i>
               Address: <span trimmed-tooltip-container>{{ currentLocation.address }}</span>
             </li>
-            <li class="info-type" ng-if="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length">
+            <li class="info-type"
+                ng-if="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">
               <i class="icn-sm" ng-class="{'icn-iphone': currentLocation.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': currentLocation.phoneNumbers[0].typeNumber === 'FAX',
             'icn-user-phone': currentLocation.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
@@ -85,7 +86,8 @@
                 tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
               Contact email: <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
             </li>
-            <li class="info-type" ng-if="currentContact.phoneNumbers && currentContact.phoneNumbers.length">
+            <li class="info-type"
+                ng-if="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">
               <i class="icn-sm" ng-class="{'icn-iphone': currentContact.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': currentContact.phoneNumbers[0].typeNumber === 'FAX',
             'icn-user-phone': currentContact.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
