@@ -11,7 +11,11 @@
   width: 100%;
   height: 78px;
 
-  background-color: #30bef1;
+  background-color: rgba(77, 199, 243, 0.72);
+  z-index: 2;
+}
+.left-panel__category-wrap {
+  padding-top: 78px;
 }
 .left-panel__category {
   display: flex;
@@ -93,10 +97,12 @@
   text-align: center;
 
   color: #ffffff;
+  background-color: rgba(24,39,52,0.72);
 
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 2;
 }
 .center-category {
   display: flex;
@@ -106,6 +112,8 @@
 
   align-content: flex-start;
   flex-flow: row wrap;
+
+  padding-top: 78px;
 }
 .left-panel-full__head--header {
   font-size: 2.2em;
