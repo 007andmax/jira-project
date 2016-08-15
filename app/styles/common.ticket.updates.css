@@ -332,7 +332,7 @@
 
 .table-wrapper .table-content .col-2.col-2-has-serial-number {
   /*new*/
-  width: calc(100% - 350px);
+  width: 40%;
   float: left;
 }
 
@@ -358,7 +358,7 @@
 
 .table-wrapper .table-content .col-3 {
   /*new*/
-  width: calc(40% - 237px);
+  width: 20%;
   float: left;
 }
 .table-wrapper .service-table .col-2 {
@@ -367,7 +367,7 @@
 
 .table-wrapper .table-content .col-4 {
   /*.table-wrapper .table-content .col-3 {*/
-  width: 139px;
+  width: 20%;
   float: right;
 }
 .table-wrapper .service-table .col-3 {
@@ -385,7 +385,7 @@
 
 .table-wrapper .table-content .col-5 {
   /*.table-wrapper .table-content .col-4 {*/
-  width: 98px;
+  width: 20%;
   float: right;
 }
 .table-wrapper .service-table .col-4 {
