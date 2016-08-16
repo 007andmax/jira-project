@@ -50,20 +50,22 @@
           $scope.minSentOnDate = new Date($scope.invoice.sentOn);
           $scope.minEndDate = new Date($scope.invoice.endDate);
 
-          $scope.ticketSharedUsersList = $scope.invoice.shares.map(function (share) {
-            if (share.user) {
-              return { user: share.user, notify: true };
-            } else {
-              return { contact: share.user, notify: true };
-            }
-          });
+          if ($scope.invoice.shares) {
+            $scope.ticketSharedUsersList = $scope.invoice.shares.map(function (share) {
+              if (share.user) {
+                return { user: share.user, notify: true };
+              } else {
+                return { contact: share.user, notify: true };
+              }
+            });
 
-          for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
-            var share = $scope.ticketSharedUsersList[i];
-            if (share.user) {
-              $scope.selectUpdateSharedUser[share.user.id] = true;
-            } else {
-              $scope.selectUpdateSharedUser[share.contact.id] = true;
+            for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+              var share = $scope.ticketSharedUsersList[i];
+              if (share.user) {
+                $scope.selectUpdateSharedUser[share.user.id] = true;
+              } else {
+                $scope.selectUpdateSharedUser[share.contact.id] = true;
+              }
             }
           }
 
@@ -549,7 +551,7 @@
               continue;
             }
 
-            if (shares.user.company.id !== company.id) {
+            if (!shares.user.company || shares.user.company.id !== company.id) {
               $scope.ticketSharedUsersList.splice(i, 1);
               $scope.selectUpdateSharedUser[shares.user.id] = false;
               i--;
