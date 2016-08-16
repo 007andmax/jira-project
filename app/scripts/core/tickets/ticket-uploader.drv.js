@@ -13,22 +13,35 @@
 
             var $win = $(window),
               lastListType,
-              loadingOrRendering = false;
+              loadingOrRendering = false,
+              ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
             scope.globalSearch = SharedStateService.getSharedState('globalSearch');
 
-            getTicketsList();
+            scope.$watch(function () {
+              if (ticketsHeaderState.searchFilter) {
+                return {
+                  userId: ticketsHeaderState.searchFilter.userId,
+                  companyId: ticketsHeaderState.searchFilter.companyId
+                };
+              }
+            }, getTicketsList, true);
+
 
             scope.onFinishRendering = function () {
               loadingOrRendering = false;
             };
 
-            function getTicketsList() {
+            function getTicketsList(filter) {
+              if (!filter) {
+                return;
+              }
+
               UserNotificationService.show('Loading...');
 
               loadingOrRendering = true;
               lastListType = $stateParams.listType.toUpperCase();
-              TicketsService.getList(lastListType, function (uploadedTickets, listType) {
+              TicketsService.getList(lastListType, filter.userId, filter.companyId, function (uploadedTickets, listType) {
 
                 if (listType === lastListType) {
                   scope.tickets = uploadedTickets;

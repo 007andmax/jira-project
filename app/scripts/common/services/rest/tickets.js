@@ -167,11 +167,34 @@
         };
       }
 
-      function fetchTickets(listType, callback) {
-        if (queries[listType.toUpperCase()]) {
-
+      function fetchTickets(listType, userId, companyId, callback) {
+        var query = queries[listType.toUpperCase()];
+        if (query) {
           storage.tickets = [];
-          storage.lastParams = queries[listType.toUpperCase()];
+          storage.lastParams = angular.copy(query);
+
+          if (userId) {
+            storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
+            storage.lastParams.groupFieldFilters.push({
+              fieldFilterDtos: [{
+                path: 'createdUser.id',
+                operator: 'EQ',
+                values: [userId]
+              }]
+            });
+          }
+
+          if (companyId) {
+            storage.lastParams.groupFieldFilters = storage.lastParams.groupFieldFilters || [];
+            storage.lastParams.groupFieldFilters.push({
+              fieldFilterDtos: [{
+                path: 'company.id',
+                operator: 'EQ',
+                values: [companyId]
+              }]
+            });
+          }
+
           loadMore(listType, callback);
         }
       }
@@ -611,7 +634,6 @@
           }
 
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
-
 
 
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {

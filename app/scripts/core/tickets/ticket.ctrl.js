@@ -21,13 +21,7 @@
         }
 
         $scope.srefToDetails = function (event) {
-          if (!event.originalEvent.notOpenTicketDetails) {
-            $state.go('tickets.details', { ticketId: $scope.ticket.id, remoteParams: null });
-          }
-        };
-
-        $scope.doNotExpandTicket = function (event) {
-          event.originalEvent.notOpenTicketDetails = true;
+          $state.go('tickets.details', { ticketId: $scope.ticket.id, remoteParams: null });
         };
 
         $scope.changeTicketPriority = function (priority, dropdowns) {
