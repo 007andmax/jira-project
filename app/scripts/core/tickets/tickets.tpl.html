@@ -1,10 +1,10 @@
-<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader ng-if="!currentUser.isOwner">
+<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader>
 
-  <div class="container-ticket-list pull-left" tu-tickets-container>
+  <div class="container-ticket-list pull-left">
 
     <div class="ticket-list">
-      <ul class="tickets">
-        <li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)"
+      <ul class="tickets" tu-tickets-container>
+        <li class="ticket" ng-repeat="ticket in tickets track by ticket.id" on-finish-render="onFinishRendering()"
             ng-controller="quicktech.core.tickets.ticketCtrl" ticket-review-size
             ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
             ng-click="srefToDetails($event)">
@@ -18,38 +18,38 @@
 
 </div>
 
-<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader ng-if="currentUser.isOwner">
-  <div class="container-ticket-list pull-left" tu-tickets-container>
+<!--<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader ng-if="currentUser.isOwner">-->
+  <!--<div class="container-ticket-list pull-left" tu-tickets-container>-->
 
-    <div class="ticket-list" upload-admin-spam="true">
+    <!--<div class="ticket-list" upload-admin-spam="true">-->
 
-      <ul class="tickets">
+      <!--<ul class="tickets">-->
 
-        <li class="ticket-type" ng-if="listType === 'spam' && tickets && tickets.length">
-          <small><b>TICKETS MARKED AS SPAM</b></small>
-        </li>
+        <!--<li class="ticket-type" ng-if="listType === 'spam' && tickets && tickets.length">-->
+          <!--<small><b>TICKETS MARKED AS SPAM</b></small>-->
+        <!--</li>-->
 
-        <li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)" ticket-review-size
-            ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
-            ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">
-          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
-        </li>
+        <!--<li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)" ticket-review-size-->
+            <!--ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"-->
+            <!--ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">-->
+          <!--<div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>-->
+        <!--</li>-->
 
-        <li class="ticket-type" ng-if="reportSpamTickets && reportSpamTickets.length">
-          <small><b>TICKETS REPORTED AS SPAM</b></small>
-        </li>
+        <!--<li class="ticket-type" ng-if="reportSpamTickets && reportSpamTickets.length">-->
+          <!--<small><b>TICKETS REPORTED AS SPAM</b></small>-->
+        <!--</li>-->
 
-        <li class="ticket" ng-repeat="ticket in reportSpamTickets"
-            ng-init="onReportedAsSpamTicketRendering($last)" ticket-review-size
-            ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
-            ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">
-          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
-        </li>
+        <!--<li class="ticket" ng-repeat="ticket in reportSpamTickets"-->
+            <!--ng-init="onReportedAsSpamTicketRendering($last)" ticket-review-size-->
+            <!--ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"-->
+            <!--ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">-->
+          <!--<div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>-->
+        <!--</li>-->
 
-      </ul>
-    </div>
-  </div>
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
 
-  <div ui-view ticket-fixed-header></div>
+  <!--<div ui-view ticket-fixed-header></div>-->
 
-</div>
+<!--</div>-->

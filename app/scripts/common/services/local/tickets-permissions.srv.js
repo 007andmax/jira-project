@@ -163,7 +163,7 @@
             var action = arrActions[i].toUpperCase();
 
             if (Array.isArray(tickets)) {
-              result = true;
+              result = !!tickets.length;
               for (var j = 0; j < tickets.length; j++) {
                 if (!ACTIONS[action](tickets[j], option, additionalAction)) {
                   result = false;
@@ -175,7 +175,7 @@
                 return true;
               }
 
-            } else if (ACTIONS[action](tickets, option, additionalAction)) {
+            } else if (tickets && ACTIONS[action](tickets, option, additionalAction)) {
               return true;
             }
           }

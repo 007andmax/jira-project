@@ -47,21 +47,6 @@
           return result;
         };
 
-        $scope.getCurrentCount = function () {
-          var counts = $scope.globalSearch.counts,
-            result = 0;
-
-          if (counts['quantity'] && counts['quantity'].count) {
-            result += counts['quantity'].count;
-          }
-
-          if (counts['additionalQuantity'] && counts['additionalQuantity'].count) {
-            result += counts['additionalQuantity'].count;
-          }
-
-          return result;
-        };
-
         UsersService._addInitListener(function () {
           $scope.currentUser = UsersService.getCurrentUser();
         });
