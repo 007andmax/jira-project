@@ -30,7 +30,11 @@
             return;
           }
 
-          $scope.clearLocalFilter && $scope.clearLocalFilter();
+          if (!$scope.globalSearch.preventClearing) {
+            $scope.clearLocalFilter && $scope.clearLocalFilter();
+          } else {
+            $scope.globalSearch.preventClearing = false;
+          }
 
           if (!allUsers.length) {
             allUsers = UsersService.getAllUsers().filter(function (user) {

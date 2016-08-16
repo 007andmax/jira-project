@@ -8,7 +8,8 @@
       function ($scope, SharedStateService, $state, $rootScope, PermissionsService, TicketsService,
                 CompaniesService, UsersService) {
 
-        var sharedQuickSession = SharedStateService.getSharedState('quickSession');
+        var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
+          globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.companiesExpanded = false;
         $scope.usersExpanded = false;
@@ -68,7 +69,8 @@
         $scope.goToUser = function (user) {
           $state.go('users').then(function () {
             SharedStateService.getSharedState('usersHeader').filter.userId = user.id;
-            SharedStateService.getSharedState('globalSearch').searchValue = $scope.getUserName(user);
+            globalSearch.searchValue = $scope.getUserName(user);
+            globalSearch.preventClearing = true;
           });
         };
 
