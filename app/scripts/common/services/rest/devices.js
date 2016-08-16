@@ -200,16 +200,18 @@
           RealTimeService.subscribe('/oneTimeConnection', scope, function (newChange) {
             console.log(newChange);
 
-            if (newChange.action === 'ONE_TIME_CONNECTION_CLOSED' && !newChange.data.id) {
-              //do nothing
-            } else if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
-              Utils.deleteById(list, newChange.data);
-            } else {
-              var session = Utils.findById(list, newChange.data.id);
-              if (session) {
-                Utils.customizeObj(newChange.data, session);
+            if (newChange.data.isOneTime) {
+              if (newChange.action === 'ONE_TIME_CONNECTION_CLOSED' && !newChange.data.id) {
+                //do nothing
+              } else if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
+                Utils.deleteById(list, newChange.data);
               } else {
-                list.unshift(Utils.customizeObj(newChange.data));
+                var session = Utils.findById(list, newChange.data.id);
+                if (session) {
+                  Utils.customizeObj(newChange.data, session);
+                } else {
+                  list.unshift(Utils.customizeObj(newChange.data));
+                }
               }
             }
           })
