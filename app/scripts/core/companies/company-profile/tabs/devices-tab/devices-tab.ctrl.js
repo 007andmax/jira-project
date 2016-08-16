@@ -4,8 +4,8 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
-      'quicktech.common.services.SharedStateService', '$rootScope',
-      function ($scope, DevicesService, RemoteAccessService, SharedStateService, $rootScope) {
+      'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, DevicesService, RemoteAccessService, SharedStateService, $rootScope, UserConfirmationsService) {
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.highlightDevice = function () {
@@ -62,11 +62,16 @@
         };
 
         $scope.remove = function () {
-          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
-            if (delete $scope.selectDevices[$scope.agent.agentId]) {
-              $scope.changeSelectDevices();
-            }
-          })
+          var confirmMesage = 'Do you want to remove ' + ($scope.agent.hostName || $scope.agent.ip) + ' device?';
+          var confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id, function () {
+              if (delete $scope.selectDevices[$scope.agent.agentId]) {
+                $scope.changeSelectDevices();
+              }
+            });
+          });
         };
 
         $scope.getDeviceReport = function (agentId) {

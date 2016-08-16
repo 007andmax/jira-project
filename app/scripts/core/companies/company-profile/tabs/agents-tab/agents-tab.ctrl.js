@@ -4,7 +4,8 @@
 
   angular.module('quicktech.core.devices').controller('quicktech.core.companies.agentsTabsCtrl',
     ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService',
-      function ($scope, DevicesService, RemoteAccessService, ConstantsService) {
+      'quicktech.common.services.UserConfirmationsService',
+      function ($scope, DevicesService, RemoteAccessService, ConstantsService, UserConfirmationsService) {
 
         var lastAgent = ConstantsService.getConstant('rest.server.agent.version');
         var lastAgentArr = lastAgent.split('.');
@@ -32,7 +33,12 @@
         };
 
         $scope.remove = function () {
-          DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id);
+          var confirmMesage = 'Do you want to remove ' + ($scope.agent.hostName || $scope.agent.ip) + ' device?';
+          var confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            DevicesService.sendUninstallAgentRequest($scope.company.id, $scope.agent.id);
+          });
         }
 
       }
