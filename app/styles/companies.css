@@ -661,7 +661,7 @@
   width: 310px;
 }
 .user-company-contact .info-type{
-  font-size: 14px;
+  font-size: 12px;
 }
 .company-info .company-name{
   float: left;
@@ -676,7 +676,7 @@
 }
 .company-head{
   width: 80%;
-  font-size: 38px;
+  font-size: 28px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

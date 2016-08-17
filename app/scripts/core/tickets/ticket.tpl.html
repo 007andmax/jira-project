@@ -90,11 +90,11 @@
       </div>
 
       <div class="pull-left" dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
-        <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status) }}-ticket"
+        <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket"
           ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)"
-          tooltip="{{ userReadable(ticket.status) }}" tooltip-placement="top" dropdown-toggle>
-          <label class="status-{{ ticketStatusToCssFormat(ticket.status) }}">
-            <i class="icn-sm icn-ticket-{{ ticketStatusToCssFormat(ticket.status) }}"></i>
+          tooltip="{{ userReadable(ticket.status) || 'Unclaimed' }}" tooltip-placement="top" dropdown-toggle>
+          <label class="status-{{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}">
+            <i class="icn-sm icn-ticket-{{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}"></i>
           </label>
         </span>
 

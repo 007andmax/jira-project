@@ -137,9 +137,9 @@
 }
 
 
-.ticket:hover .ticket-meta .ticket-title p.ellipsis {
-  width: calc(100% - 166px);
-}
+/*.ticket:hover .ticket-meta .ticket-title p.ellipsis {*/
+  /*width: calc(100% - 166px);*/
+/*}*/
 
 .ticket.no-action:hover .ticket-meta .ticket-title p.ellipsis {
   width: calc(100% - 20px);;

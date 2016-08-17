@@ -9819,6 +9819,9 @@ button.close {
 .progress-ticket {
   background-color: #FFC107;
 }
+.Unclaimed-ticket{
+  background: #1586e4;
+}
 .priority-big-size {
   color: #FFF;
   cursor: pointer;
