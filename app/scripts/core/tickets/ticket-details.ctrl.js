@@ -46,11 +46,7 @@
             $scope.ticketDetails = details;
 
             if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
-              if ($stateParams.ticketId) {
-                $state.go('tickets', { listType: $stateParams.listType, ticketId: $stateParams.ticketId });
-              } else {
-                $state.go('tickets', { listType: $stateParams.listType });
-              }
+              $state.go('tickets', { listType: $stateParams.listType });
               return;
             }
 
@@ -190,7 +186,6 @@
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
                   $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', { listType: $stateParams.listType });
                 });
               } else {
 
@@ -198,7 +193,6 @@
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam', true);
                   $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', { listType: $stateParams.listType });
                 });
 
               }
@@ -208,7 +202,6 @@
           $scope.restoreFromSpam = function () {
             TicketsService.restoreFromSpam($scope.ticketDetails.id, function () {
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', { listType: $stateParams.listType });
             });
           };
 
@@ -218,7 +211,6 @@
                 UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been moved to Trash', true);
               }
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', { listType: $stateParams.listType });
             });
           };
 
@@ -516,7 +508,6 @@
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', { listType: $stateParams.listType });
             }, recipientsIds);
           }
 

@@ -124,7 +124,7 @@
       <span class="label label-primary">{{ userReadable(ticket.ticketSource) }}</span>
 
       <div class="text-muted"
-           ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(assignedUser) }}
+           ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(ticket.assignedUser) }}
       </div>
 
       <div class="ticket-status pull-right">

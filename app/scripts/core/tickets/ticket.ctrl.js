@@ -16,14 +16,6 @@
           $scope.agentList = resp;
         });
 
-        if ($scope.ticket.assignedUser && $scope.ticket.assignedUser.id) {
-          $scope.assignedUser = UsersService.getOneById($scope.ticket.assignedUser.id);
-        }
-
-        $scope.srefToDetails = function (event) {
-          $state.go('tickets.details', { ticketId: $scope.ticket.id, remoteParams: null });
-        };
-
         $scope.changeTicketPriority = function (priority, dropdowns) {
           TicketsService.changePriority($scope.ticket.id, priority, function () {
             UserNotificationService.show('The ticket “' + $scope.ticket.number + '” priority has been changed to ' + priority, true);

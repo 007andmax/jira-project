@@ -90,6 +90,13 @@
                 path: 'assignedUser.id',
                 operator: 'EQ',
                 values: [currentUserId]
+              }, {
+                path: 'status',
+                operator: 'NOT_NULL'
+              }, {
+                path: 'status',
+                operator: 'NOT_EQ',
+                values: ['COMPLETED']
               }]
             }]
           },
@@ -644,7 +651,7 @@
 
             if (ticketById) {
               Utils.customizeObj(newChange.data, ticketById);
-            } else if (storage.tickets.length < 15) {
+            } else {
               insertToFitOrdering(newChange.data, storage.tickets);
             }
 
@@ -654,23 +661,26 @@
 
         } else if (newChange.action === 'READ') {
           Utils.defineReadOnlyProperty(ticketById, 'unread', false);
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket) {
+          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.defineReadOnlyProperty(storage.openedTicket, 'unread', false);
           }
 
         } else if (newChange.action === 'TICKET_UPDATES_READ') {
           Utils.defineReadOnlyProperty(ticketById, 'hasNewUpdates', false);
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket) {
+          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.defineReadOnlyProperty(storage.openedTicket, 'hasNewUpdates', false);
           }
 
         } else if (newChange.action === 'TICKET_DELETED') {
           Utils.deleteById(storage.tickets, newChange.data.id);
-          $rootScope.$broadcast('ticket_is_not_available_anymore', newChange.data)
+          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+            $rootScope.$broadcast('ticket_is_not_available_anymore', newChange.data);
+            storage.openedTicket = undefined;
+          }
 
         } else if (newChange.action === 'TICKET_BILLABLE') {
           Utils.defineReadOnlyProperty(ticketById, 'isBillable', newChange.data.isBillable);
-          if (storage.openedTicket && newChange.data.id === storage.openedTicket) {
+          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.defineReadOnlyProperty(storage.openedTicket, 'isBillable', newChange.data.isBillable);
           }
 
@@ -684,7 +694,7 @@
               Utils.defineReadOnlyProperty(ticket, 'agent', null);
             }
 
-            if (storage.openedTicket && ticketId === storage.openedTicket) {
+            if (storage.openedTicket && ticketId === storage.openedTicket.id) {
               if (newChange.data.deviceId) {
                 Utils.defineReadOnlyProperty(storage.openedTicket, 'agent', { deviceId: newChange.data.deviceId });
               } else {
@@ -698,7 +708,7 @@
       //is need to insert ticket now or it will be received later by lazy loading
       function insertToFitOrdering(newTicket, list) {
         var lastParams = storage.lastParams,
-          orderByList = lastParams.orderByFilter;
+          orderByList = angular.copy(lastParams.orderByFilters);
 
         var orderByCreatedAt = {
           path: 'createdAt',
@@ -714,7 +724,7 @@
         }
 
         var insertIndex = getIndexToInsert(newTicket, list, orderByList);
-        if (insertIndex < list.length) {
+        if (insertIndex < list.length || list.length < 15) {
           list.splice(insertIndex, 0, newTicket);
         }
       }
@@ -801,34 +811,49 @@
 
         valueFromTicket = getValueByPath(valueFromTicket, path);
 
-        if (operator === 'IN') {
+        if (Array.isArray(valueFromTicket)) {
+          for (var j = 0; j < valueFromTicket.length; j++) {
+            var value = getValueByPath(valueFromTicket[j], valueFromTicket.path.split('.'));
 
+            if (checkValueByOperator(value, operator, values)) {
+              return true;
+            }
+          }
+          return false
+        } else {
+          return checkValueByOperator(valueFromTicket, operator, values);
+        }
+      }
+
+      function checkValueByOperator(valueToCheck, operator, values) {
+        if (operator === 'IN') {
           if (values) {
             for (var i = 0; i < values.length; i++) {
               var value = values[i];
-
-              if (value === valueFromTicket) {
+              if (value === valueToCheck) {
                 return true;
               }
             }
           }
           return false;
-
         } else {
           if (values) {
-            return operators[operator](valueFromTicket, values[0]);
+            return operators[operator](valueToCheck, values[0]);
           } else {
-            return operators[operator](valueFromTicket);
+            return operators[operator](valueToCheck);
           }
         }
       }
 
       function getValueByPath(source, path) {
-        var result = source;
+        var result = angular.copy(source);
 
         for (var i = 0; i < path.length; i++) {
           result = result[path[i]];
           if (result === null || result === undefined) {
+            return result;
+          } else if (Array.isArray(result)) {
+            result.path = path.slice(i + 1).join('.');
             return result;
           }
         }

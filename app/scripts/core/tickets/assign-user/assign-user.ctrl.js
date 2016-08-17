@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.assignUserCtrl',
-    ['$scope', 'TicketsService', 'UsersService', '$stateParams', '$state', '$rootScope',
-      'quicktech.common.services.UserNotificationService', '$timeout',
-      function ($scope, TicketsService, UsersService, $stateParams, $state, $rootScope, UserNotificationService, $timeout) {
+    ['$scope', 'TicketsService', 'UsersService', '$stateParams', '$rootScope',
+      'quicktech.common.services.UserNotificationService',
+      function ($scope, TicketsService, UsersService, $stateParams, $rootScope, UserNotificationService) {
 
         $scope.userToAssign = {};
         $scope.assignToModel = '';
@@ -78,8 +78,6 @@
             } else {
               UserNotificationService.show('Ticket “' + $scope.ticketNumber + '” has been assigned to ' + $scope.getUserName($scope.userToAssign), true);
             }
-
-            $state.go('tickets', {listType: $stateParams.listType});
           });
         };
 
