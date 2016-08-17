@@ -4,9 +4,10 @@
 
   angular.module('quicktech.core.services').controller('quicktech.core.services.servicesCtrl',
     ['$scope', 'ServicesService', 'Utils', 'CompaniesService', 'quicktech.common.services.SharedStateService', '$timeout',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, ServicesService, Utils, CompaniesService, SharedStateService, $timeout, PermissionsService) {
-        var globalSearch = SharedStateService.getSharedState('globalSearch'), promise;
+      'quicktech.common.services.PermissionsService', '$stateParams',
+      function ($scope, ServicesService, Utils, CompaniesService, SharedStateService, $timeout, PermissionsService, $stateParams) {
+        var globalSearch = SharedStateService.getSharedState('globalSearch'), promise,
+          availableTabs = ['default', 'company'];
 
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('servicesHeader');
@@ -17,6 +18,15 @@
         };
         $scope.checkedServices = {};
         $scope.loadingFinished = loadingFinished;
+        $scope.pageTab = $stateParams.tabName || 'default';
+
+        $scope.$watch(function () {
+          return $stateParams.tabName;
+        }, function (tab) {
+          if (tab && availableTabs.indexOf(tab) !== -1) {
+            $scope.pageTab = tab;
+          }
+        });
 
         $scope.companies = CompaniesService.getClientCompanies().filter(function (item) {
           if (!item.isDefault) {
@@ -105,18 +115,18 @@
           $scope.loadingInProgress[list] = false;
           if (!$scope.loadingInProgress.default && !$scope.loadingInProgress.companies) {
             $scope.loadingInProgress.all = false;
+          }
 
-            if (globalSearch.serviceFilter) {
-              if (promise) {
-                $timeout.cancel(promise);
-              }
-
-              promise = $timeout(function () {
-                $scope.$broadcast(globalSearch.serviceFilter.company + '-showService', globalSearch.serviceFilter.id);
-                globalSearch.serviceFilter = undefined;
-                $timeout.cancel(promise);
-              });
+          if (globalSearch.serviceFilter && !$scope.loadingInProgress.default) {
+            if (promise) {
+              $timeout.cancel(promise);
             }
+
+            promise = $timeout(function () {
+              $scope.$broadcast(globalSearch.serviceFilter.company + '-showService', globalSearch.serviceFilter.id);
+              globalSearch.serviceFilter = undefined;
+              $timeout.cancel(promise);
+            });
           }
         }
 

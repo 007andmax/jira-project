@@ -1,82 +1,20 @@
 <div class="services-content">
+  <div class="tabs-container" style="margin-top: 60px; margin-left: 15px">
+    <div class="fixed-block-top" style="margin-top: 40px;" fixed-block-top>
+      <ul class="nav nav-qt" role="tablist" style="margin-left: 20px">
 
-  <loading-indicator loading-trigger="loadingInProgress['all']"></loading-indicator>
+        <li role="presentation" ng-class="{'active': pageTab === 'default'}">
+          <a ui-sref="services({ tabName: 'default' })">Default Services</a>
+        </li>
 
-  <div class="default-services-header" ng-hide="loadingInProgress['all'] || headerSharedState.filter.companyId"
-       ng-controller="quicktech.core.services.defaultServicesCtrl">
+        <li role="presentation" ng-class="{'active': pageTab === 'company'}">
+          <a ui-sref="services({ tabName: 'company' })">Services by Company</a>
+        </li>
 
-    <div class="default-service-count">Default Services
-      <span class="text-muted">{{ services.length }}</span>
-    </div>
-
-    <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
-
-    <div class="add-service-btn-wrapper" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
-      <div class="btn btn-info has-tooltip" ng-show="!showCreateService"
-           ng-click="showCreateServiceForm()"
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
-        <i class="icn-sm icn-plus"></i>
-      </div>
+      </ul>
     </div>
 
   </div>
 
-  <div class="all-companies-heading" ng-hide="loadingInProgress['all']">
-    All Companies <span class="text-muted">Service &amp; Rate Lists</span>
-  </div>
-
-  <ul class="qt-list qt-services" ng-hide="loadingInProgress['all']">
-
-    <li qt-toggle-slider ng-repeat="company in companies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name'"
-        ng-controller="quicktech.core.services.companyCtrl"
-        on-finish-render="loadingFinished('companies')"
-        event-toggle-slider="toggleServices">
-
-      <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;" ng-click="toggleServices()"></div>
-
-      <div class="col-1">{{ company.name }}</div>
-      <div class="col-2" dropdown is-open="addServiceDropdown.isOpen" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
-        {{ services.length || 0 }} services
-        <span class="control-indicator pull-left plus-circle" style="z-index: 5" dropdown-toggle ng-click="initAddServiceDropdown()"
-              tooltip="Add Services" tooltip-placement="top"></span>
-
-        <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
-
-          <div class="move-services">
-
-            <div class="add-label">
-              <label>Add Services</label>
-            </div>
-
-            <div class="custom-scroll" style="max-height: 164px">
-
-              <div ng-repeat="service in servicesData.default | orderBy: 'name'">
-                <label class="control checkbox">
-                  <input type="checkbox" ng-model="addServiceDropdown.serviceMap[service.versionedId.id]">
-                  <span class="control-indicator pull-left"></span>
-                  {{ service.name }}
-                </label>
-              </div>
-
-            </div>
-
-            <div role="presentation" class="checkbox-dropdown-footer clearfix">
-              <div class="btn btn-info btn-lg pull-right"
-                   ng-click="addServices()" custom-disabled="{{ disableAddButton }}">
-                Save
-              </div>
-              <div class="btn btn-primary btn-lg pull-right" ng-click="addServiceDropdown.isOpen = false">
-                Cancel
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div ets-slider style="display: none;"
-           ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
-
-    </li>
-  </ul>
+  <div ng-include="'/html/scripts/core/services/' + (pageTab === 'default' ? 'default-services' : 'group-by-company') + '.tpl.html'"></div>
 </div>

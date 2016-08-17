@@ -209,12 +209,12 @@
                 }
               };
             case 'SERVICES':
-              return function (id, name, companyId) {
-                if ($state.includes('services')) {
-                  $rootScope.$broadcast(companyId + '-showService', id);
+              return function (id, name) {
+                if ($state.includes('services', { tabName: 'default' })) {
+                  $rootScope.$broadcast(CompaniesService.getCurrentCompany().id + '-showService', id);
                 } else {
-                  $state.go('services').then(function () {
-                    $scope.globalSearch.serviceFilter = { id: id, name: name, company: companyId };
+                  $state.go('services', { tabName: 'default' }).then(function () {
+                    $scope.globalSearch.serviceFilter = { id: id, name: name, company: CompaniesService.getCurrentCompany().id };
                   });
                 }
               };

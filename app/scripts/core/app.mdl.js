@@ -96,7 +96,7 @@
         controller: 'quicktech.core.products.productsCtrl'
       }))
       .state('services', waitForServices({
-        url: '/inventory/services',
+        url: '/inventory/services/:tabName',
         templateUrl: '/html/scripts/core/services/services.tpl.html',
         controller: 'quicktech.core.services.servicesCtrl'
       }))

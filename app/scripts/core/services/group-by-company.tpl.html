@@ -1,0 +1,57 @@
+<div>
+  <ul class="qt-list qt-services" ng-hide="loadingInProgress['all']">
+
+    <li qt-toggle-slider ng-repeat="company in companies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name' track by company.id"
+        ng-controller="quicktech.core.services.companyCtrl"
+        on-finish-render="loadingFinished('companies')"
+        event-toggle-slider="toggleServices">
+
+      <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;" ng-click="toggleServices()"></div>
+
+      <div class="col-1">{{ company.name }}</div>
+      <div class="col-2" dropdown is-open="addServiceDropdown.isOpen" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+        {{ services.length || 0 }} services
+        <span class="control-indicator pull-left plus-circle" style="z-index: 5" dropdown-toggle ng-click="initAddServiceDropdown()"
+              tooltip="Add Services" tooltip-placement="top"></span>
+
+        <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
+
+          <div class="move-services">
+
+            <div class="add-label">
+              <label>Add Services</label>
+            </div>
+
+            <div class="custom-scroll" style="max-height: 164px">
+
+              <div ng-repeat="service in servicesData.default | orderBy: 'name'">
+                <label class="control checkbox">
+                  <input type="checkbox" ng-model="addServiceDropdown.serviceMap[service.versionedId.id]">
+                  <span class="control-indicator pull-left"></span>
+                  {{ service.name }}
+                </label>
+              </div>
+
+            </div>
+
+            <div role="presentation" class="checkbox-dropdown-footer clearfix">
+              <div class="btn btn-info btn-lg pull-right"
+                   ng-click="addServices()" custom-disabled="{{ disableAddButton }}">
+                Save
+              </div>
+              <div class="btn btn-primary btn-lg pull-right" ng-click="addServiceDropdown.isOpen = false">
+                Cancel
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div ets-slider style="display: none;"
+           ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
+
+    </li>
+  </ul>
+  <loading-indicator loading-trigger="loadingInProgress['all']"></loading-indicator>
+</div>
