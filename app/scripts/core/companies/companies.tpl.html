@@ -1,4 +1,4 @@
-<div class="company-profile-content companies-list not-charts-companies-page clearfix">
+<div class="company-profile-content companies-list not-charts-companies-page clearfix" style="display: none;">
      <!--ng-class="{'not-charts-companies-page': !isChartsAccess()}"-->
 
   <!--<div collapse="isCollapsed" class="charts-n-graphs-container">-->
@@ -235,3 +235,103 @@
   </div>
 
 </div>
+
+<ul class="qt-list" style="margin-bottom: 150px; padding: 0 25px;">
+
+  <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
+    <div class="col-xs-3" ng-click="setOrderByUsers('name')">
+      <label class="control checkbox pull-left" ng-show="users.length > 0">
+        <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
+               ng-model="selectedUsers['all']" ng-click="selectAllUsers(selectedUsers['all'])">
+        <span class="control-indicator"></span>
+      </label>
+
+        <span class="sort-span">Address-City-Province<i class="icn-sm sort-icon icn-sort"
+                                       ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
+    </div>
+
+    <div class="col-xs-2"><span>Contact No.</span></div>
+
+    <div class="col-xs-2"><span>Email Address</span></div>
+
+    <div class="col-xs-2">
+        <span>Primary Contact</span>
+    </div>
+
+    <div class="col-xs-1">Tickets</div>
+
+    <div class="col-xs-1">
+        <span>Devices</span>
+    </div>
+
+    <div class="col-xs-1">
+        <span>Users</span>
+    </div>
+  </li>
+
+  <li style="display: flex; align-items: center; cursor: pointer;">
+    <div class="col-xs-3">
+      <label class="control checkbox pull-left">
+        <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
+        <span class="control-indicator"></span>
+      </label>
+        <span class="list-company-name">Apple</span>
+      <span trimmed-tooltip-container>{{ currentLocation.address }}Palo Alto Avenue, Palo Alto, CA, United States</span>
+    </div>
+    <div class="col-xs-2">
+        <span> +380 95 456 7778</span>
+    </div>
+    <div class="col-xs-2">
+        <span> of1mjke.e@gmail.com</span>
+    </div>
+    <div class="col-xs-2">
+        <span>AndreyNasa OfimNasa</span>
+    </div>
+    <div class="col-xs-1">
+       <span><i class="nav-icon icn-lg icn-unassigned" style="margin: 0;"></i></span>
+        <span class="badge badge-red list-company-badge">2</span>
+    </div>
+    <div class="col-xs-1">
+        <span><a href=""><i class="icn-lg icn-tab-devices" style="margin: 0;"></a></i></span>
+        <span class="badge badge-red list-company-badge">2</span>
+    </div>
+    <div class="col-xs-1">
+        <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
+        <span class="badge badge-red list-company-badge">2</span>
+    </div>
+  </li>
+
+  <li style="display: flex; align-items: center; cursor: pointer;">
+    <div class="col-xs-3">
+      <label class="control checkbox pull-left">
+        <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
+        <span class="control-indicator"></span>
+      </label>
+      <span class="list-company-name">Apple</span>
+      <span trimmed-tooltip-container>{{ currentLocation.address }}Palo Alto Avenue, Palo Alto, CA, United States</span>
+    </div>
+    <div class="col-xs-2">
+      <span> +380 95 456 7778</span>
+    </div>
+    <div class="col-xs-2">
+      <span> of1mjke.e@gmail.com</span>
+    </div>
+    <div class="col-xs-2">
+      <span>AndreyNasa OfimNasa</span>
+    </div>
+    <div class="col-xs-1">
+      <span><i class="nav-icon icn-lg icn-unassigned" style="margin: 0;"></i></span>
+      <span class="badge badge-red list-company-badge">2</span>
+    </div>
+    <div class="col-xs-1">
+      <span><a href=""><i class="icn-lg icn-tab-devices" style="margin: 0;"></a></i></span>
+      <span class="badge badge-red list-company-badge">2</span>
+    </div>
+    <div class="col-xs-1">
+      <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
+      <span class="badge badge-red list-company-badge">2</span>
+    </div>
+  </li>
+
+
+</ul>

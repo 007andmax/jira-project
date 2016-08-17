@@ -1,3 +1,17 @@
+.quick-support-helper{
+  text-align: center;
+  height: 50vh;
+  transform: translateY(50%);
+  font-size: 2.6em;
+  line-height: 3em;
+  display: none;
+}
+.quick-support-helper .btn{
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+}
+
 .quick-support-list {
   padding: 0;
   margin: 0;
