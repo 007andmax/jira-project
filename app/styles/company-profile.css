@@ -50,9 +50,9 @@
   position: relative;
 }
 .info-type{
-  font-size: medium;
+  font-size: 14px;
   list-style-type: none;
-  line-height:  1.7em;
+  line-height:  1.4em;
   color: #fff;
   padding-left: 10px;
   overflow: hidden;
@@ -64,7 +64,7 @@
   display: inline-block;
 }
 .company-user-avatar{
-  width: 100px;
+  width: 50px;
   float: left;
 }
 .company-profile-header .address-content .map-container {
@@ -193,4 +193,7 @@
 .select{
   white-space: nowrap;
   transform: translateY(80%)
+}
+.dropdown-menu-custom{
+  right: 0;
 }
