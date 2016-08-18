@@ -71,6 +71,12 @@
             'icn-user-phone': currentLocation.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
               Phone: {{ currentLocation.phoneNumbers[0].number }}
             </li>
+            <li class="info-type">
+              Service type:
+            </li>
+            <li class="info-type">
+              Client type:
+            </li>
           </ul>
 
           <div class="avatar company-user-avatar img-circle" ng-hide="getError().loadingInProcess">
@@ -99,7 +105,7 @@
           <div class="button-container">
             <i class="icn-retina new-ticket pull-left" create-ticket-open-modal="{{ company.id }}"
                tooltip="Create Ticket" tooltip-placement="top"></i>
-            <i class="icn-retina new-user pull-left" style="margin-left: 5px;" ng-click="createUser()"
+            <i class="icn-retina new-user pull-left" style="margin-left: 15px;" ng-click="createUser()"
                ng-if="PermissionsService.isAllowed('CREATE_USERS')"
                tooltip="Create User" tooltip-placement="top"></i>
             <div qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"

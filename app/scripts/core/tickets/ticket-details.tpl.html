@@ -47,9 +47,9 @@
                 <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                       class="label-icn-sm progress-small-size label-primary persistent-tooltip"
                       tooltip-append-to-body="true"
-                      tooltip="{{ userReadable(ticketDetails.status) }}" tooltip-placement="top" dropdown-toggle>
-                  <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) }}">
-                    <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) }}"></i>
+                      tooltip="{{ userReadable(ticketDetails.status) || 'Unclaimed' }}" tooltip-placement="top" dropdown-toggle>
+                  <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}">
+                    <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}"></i>
                   </label>
                 </span>
 

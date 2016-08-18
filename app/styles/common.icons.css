@@ -2023,3 +2023,11 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
   margin-left: 7px;
   background-color: #e7ecf2;
 }
+.icn-ticket-Unclaimed:before{
+  content: "?";
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  position: absolute;
+  left: 38%;
+}
