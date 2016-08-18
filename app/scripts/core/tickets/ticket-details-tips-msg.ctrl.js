@@ -24,7 +24,6 @@
 
             UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as open', true);
             $scope.uncheckTicket($scope.ticketDetails.id);
-            $state.go('tickets', { listType: $stateParams.listType });
           });
         };
 
