@@ -134,19 +134,19 @@
 
                   <div class="form-row clearfix">
 
-                    <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'companyType')}">
+                    <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'industry')}">
 
-                      <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'companyType')}">
-                        Type
+                      <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'industry')}">
+                        Industry
                       </label>
 
-                      <div ng-messages="companyForm.companyType.$error"
-                           ng-class="{'hide': !isShowingErrors(companyForm, 'companyType')}">
-                        <label class="control-label" ng-message="maxlength">TYPE IS TOO LARGE.</label>
+                      <div ng-messages="companyForm.industry.$error"
+                           ng-class="{'hide': !isShowingErrors(companyForm, 'industry')}">
+                        <label class="control-label" ng-message="maxlength">INDUSTRY IS TOO LARGE.</label>
                       </div>
 
-                      <input type="text" class="form-control" ng-model="editCompany.type" name="companyType"
-                             ng-maxlength="40" placeholder="e.g., Hardware Solutions">
+                      <input type="text" class="form-control" ng-model="editCompany.industryName" name="industry"
+                             ng-maxlength="40" typeahead="industry for industry in industries" qt-typeahead-async-show-on-focus>
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
@@ -167,10 +167,32 @@
                              is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
                     </div>
 
+                  </div>
+
+                  <div class="form-row clearfix">
+
+                    <div class="form-group">
+
+                      <label>Client Type</label>
+
+                      <input type="text" class="form-control" ng-model="editCompany.clientType" name="clientType"
+                             typeahead="clientType for clientType in clientTypes"
+                             readonly qt-typeahead-async-show-on-focus>
+                    </div>
+
+                    <div class="form-group">
+
+                      <label class="control-label">Service Type</label>
+
+                      <input type="text" class="form-control" ng-model="editCompany.serviceType" name="serviceType"
+                             typeahead="serviceType for serviceType in serviceTypes"
+                             readonly qt-typeahead-async-show-on-focus>
+                    </div>
+
                     <div class="form-row clearfix">
                       <div class="form-group full-width">
 
-                        <label class="control-label">Note</label>
+                      <label class="control-label">Note</label>
 
                       <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
                                 maxlength="80" ng-trim="false" make-dirty-on-blur></textarea>
