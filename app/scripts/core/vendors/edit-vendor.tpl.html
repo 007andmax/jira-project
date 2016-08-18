@@ -114,23 +114,12 @@
                   </div>
 
                   <div class="form-row clearfix">
-                    <div class="form-group full-width"
-                         ng-class="{'has-error': isShowingErrors(vendorForm, 'vendorDescription')}">
+                    <div class="form-group full-width">
 
-                      <label class="control-label"
-                             ng-class="{'non-visible-label': isShowingErrors(vendorForm, 'vendorDescription')}">
-                        Description of Business
-                      </label>
-
-                      <div class="error-vendor-form-message" ng-messages="vendorForm.vendorDescription.$error"
-                           ng-class="{'hide': !isShowingErrors(vendorForm, 'vendorDescription')}">
-                        <label class="control-label" ng-message="required">
-                          Please enter a brief description of the company’s business.
-                        </label>
-                      </div>
+                      <label class="control-label">Note</label>
 
                       <textarea class="form-control" ng-model="editVendor.description" name="vendorDescription"
-                                ng-required="false" maxlength="120" ng-trim="false" make-dirty-on-blur></textarea>
+                                maxlength="120" make-dirty-on-blur></textarea>
 
                       <div class="word-count">{{ 120 - editVendor.description.length }}</div>
                     </div>
@@ -189,12 +178,12 @@
         </div>
 
         <div id="primary-contacts" class="basic-info-wrapper">
-          <div class="create-new-user vendor-basic-info clearfix" ng-repeat="contact in editVendor.contacts">
+          <div class="create-new-user vendor-basic-info clearfix" ng-repeat="contact in editVendor.contacts | limitTo: 1">
             <div style="padding: 37px 0 51px;" ng-form="contactForm">
               <div class="create-user-container">
 
                 <div class="create-user-header clearfix">
-                  <h3 class="pull-left">Primary Contacts</h3>
+                  <h3 class="pull-left">Primary Contact</h3>
                   <!--<h4 class="pull-left"><span>0{{ $index + 1 }}</span></h4>-->
                 </div>
 
@@ -295,42 +284,6 @@
                   <div class="form-row clearfix" phone-numbers-edit is-try-to-save="triedToSave"
                        ng-model="contact.phoneNumbers" is-first-required="true"
                        country-code="{{editVendor.addresses[0].countryCode}}"></div>
-
-                  <div class="form-row clearfix">
-                    <div class="form-group no-label full-width">
-                      <div class="clearfix" ng-class="{'has-error': showSubscribeError}">
-                        <label class="control checkbox pull-left">
-
-                          <input type="checkbox" ng-model="contact.subscription.ticket"
-                                 invalid-when="showSubscribeError">
-                          <span class="control-indicator"></span>
-
-                          Subscribe to ticket updates
-
-                          <label ng-show="showSubscribeError" class="control-label"
-                                 style="margin-left: -20px; margin-top: 10px;position: absolute;">
-                            at least one contact should be subscribed on ticket updates.
-                          </label>
-
-                        </label>
-
-                        <div custom-ng-show-if="$last && editVendor.contacts.length < contactsMaxCount">
-
-                          <div class="btn btn-dark has-tooltip pull-right" ng-click="addContact()" cns-if
-                               tooltip-placement="top" tooltip="Add another contact">
-                            <i class="icn-sm icn-plus"></i>
-                          </div>
-
-                          <div class="btn btn-primary has-tooltip pull-right" ng-click="removeContact($index)" cns-else
-                               tooltip-placement="top" tooltip="Remove contact">
-                            <i class="icn-sm icn-remove-token"></i>
-                          </div>
-
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
