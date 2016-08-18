@@ -979,9 +979,16 @@ a:hover > .icn-label-cancel, a:active > .icn-label-cancel {
 .icn-tab-companies, .icn-gs-companies {
   background-position: -2967px 0;
 }
-/*li:hover .icn-tab-companies,*/ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .icn-tab-companies {
-                                   background-position: -2935px 0;
-                                 }
+a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .icn-tab-companies {
+ background-position: -2935px 0;
+}
+
+.icn-company-info {
+  background-position: -3031px -34px;
+}
+:hover > .icn-company-info {
+  background-position: -2999px -34px;
+}
 
 .icn-tab-company-info {
   background-position: -3031px 0;

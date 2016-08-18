@@ -11,9 +11,6 @@
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        $scope.companiesExpanded = false;
-        $scope.usersExpanded = false;
-
         $scope.clientCompanies = CompaniesService.getClientCompanies;
         $scope.clientUsers = UsersService.getClientUsers;
 
@@ -74,25 +71,15 @@
           });
         };
 
-        $scope.toggleCompanies = function (oldValue, $event) {
-          $scope.companiesExpanded = !oldValue;
-          $scope.usersExpanded = false;
-          $event.stopPropagation();
-        };
-
-        $scope.toggleUsers = function (oldValue, $event) {
-          $scope.usersExpanded = !oldValue;
-          $scope.companiesExpanded = false;
-          $event.stopPropagation();
-        };
-
         function getOpenedCategory(url) {
           if (url.indexOf('quickSupport') > -1) {
             return 'dashboard';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';
-          } else if (url.indexOf('clients') > -1 || url.indexOf('users') > -1) {
-            return 'clients';
+          } else if (url.indexOf('companies') > -1 || url.indexOf('companyProfile') > -1) {
+            return 'companies';
+          } else if (url.indexOf('users') > -1) {
+            return 'users';
           } else if (url.indexOf('accounting') > -1) {
             return 'accounting';
           } else if (url.indexOf('inventory') > -1) {

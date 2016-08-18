@@ -11,10 +11,15 @@
            ng-click="toggleLeftPanel('tickets')">
         <i class="nav-icon icn-lg icn-tickets"></i>
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'clients'}"
-           ng-click="toggleLeftPanel('clients')"
-           ng-if="PermissionsService.isAllowed('VIEW_COMPANIES') || PermissionsService.isAllowed('VIEW_USERS')">
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
+           ng-click="toggleLeftPanel('companies')" ui-sref="companies"
+           ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
         <i class="nav-icon icn-lg icn-companies"></i>
+      </div>
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
+           ng-click="toggleLeftPanel('users')" ui-sref="users"
+           ng-if="PermissionsService.isAllowed('VIEW_USERS')">
+        <i class="nav-icon icn-lg icn-users"></i>
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'accounting'}"
            ng-click="toggleLeftPanel('accounting')" ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
@@ -95,49 +100,34 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'clients' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'companies' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
         </div>
-        <span class="left-panel-full__head--header">Clients</span>
+        <span class="left-panel-full__head--header">Companies</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
-             ng-class="{active: $state.includes('companies')}"
-             ng-click="stateGo($event, 'companies')">
-          <i class="nav-icon icn-lg icn-companies icon-pos"></i> Companies
-          <div class="slider-pos" ng-click="toggleCompanies(companiesExpanded, $event)">
-            <i class="icn-sm {{ companiesExpanded ? 'icn-collapse' : 'icn-expand' }}"></i>
-          </div>
+             ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
+             ng-click="goToCompany(company)" ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}">
+          <i class="nav-icon icn-lg icn-company-info icon-pos"></i> {{ company.name }}
         </div>
-        <div ng-show="companiesExpanded" class="category-expanded">
-          <div class="category-expanded-paragraph" ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
-               ng-click="goToCompany(company)" ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}">
-            {{ company.name }}
-          </div>
+      </div>
+    </div>
+    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'users' && !isLeftPanelHidden">
+      <div class="left-panel-full__head">
+        <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
+          <i class="icn-sm icn-expand-back"></i>
         </div>
-
-
+        <span class="left-panel-full__head--header">Users</span>
+      </div>
+      <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
-             ng-class="{active: $state.includes('users')}"
-             ng-click="stateGo($event, 'users')">
-          <i class="nav-icon icn-lg icn-users icon-pos"></i> Users
-          <div class="slider-pos " ng-click="toggleUsers(usersExpanded, $event)">
-            <i class="icn-sm {{ usersExpanded ? 'icn-collapse' : 'icn-expand' }}"></i>
-          </div>
+             ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
+             ng-click="goToUser(user)">
+          <i class="nav-icon icn-lg icn-user-lg icon-pos"></i> {{ getUserName(user) }}
         </div>
-
-        <div ng-show="usersExpanded" class="category-expanded">
-          <div class="category-expanded-paragraph" ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
-               ng-click="goToUser(user)">
-            {{ getUserName(user) }}
-          </div>
-        </div>
-
-        <!--<div class="center-category__category">-->
-        <!--<i class="nav-icon icn-lg icn-leads icon-pos"></i> Leads-->
-        <!--</div>-->
       </div>
     </div>
     <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'accounting' && !isLeftPanelHidden">
