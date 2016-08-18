@@ -2415,13 +2415,13 @@ Devices tab
   width: calc(100% - 967px);
 }
 .qt-devices > li > .col-2 {
-  width: 367px;
+  width: 200px;
 }
 .qt-devices > li > .col-3 {
   width: 165px;
 }
 .qt-devices > li > .col-4 {
-  width: 140px;
+  width: 307px;
 
   color: #94a4b8;
 }
@@ -2435,26 +2435,12 @@ Devices tab
 
   text-align: right;
 }
-@media only screen and (min-width: 2000px) {
-  .qt-devices > li > .col-1 {
-    width: calc(100% - 1147px);
-  }
-  .qt-devices > li > .col-2 {
-    width: 427px;
-  }
-  .qt-devices > li > .col-3 {
-    width: 225px;
-  }
-  .qt-devices > li > .col-4 {
-    width: 200px;
-  }
-}
 @media only screen and (min-width: 2300px) {
   .qt-devices > li > .col-1 {
     width: calc(100% - 1267px);
   }
   .qt-devices > li > .col-2 {
-    width: 467px;
+    width: 300px;
   }
   .qt-devices > li > .col-3 {
     width: 265px;
@@ -2463,12 +2449,26 @@ Devices tab
     width: 240px;
   }
 }
-@media only screen and (max-width: 1800px) {
+@media only screen and (min-width: 2000px) {
   .qt-devices > li > .col-1 {
-    width: calc(100% - 867px);
+    width: calc(100% - 1147px);
   }
   .qt-devices > li > .col-2 {
+    width: 320px;
+  }
+  .qt-devices > li > .col-3 {
+    width: 225px;
+  }
+  .qt-devices > li > .col-4 {
     width: 307px;
+  }
+}
+@media only screen and (max-width: 1800px) {
+  .qt-devices > li > .col-1 {
+    width: calc(100% - 760px);
+  }
+  .qt-devices > li > .col-2 {
+    width: 200px;
   }
   .qt-devices > li > .col-3 {
     width: 145px;
@@ -2485,10 +2485,7 @@ Devices tab
 }
 @media only screen and (max-width: 1700px) {
   .qt-devices > li > .col-1 {
-    width: calc(100% - 560px);
-  }
-  .qt-devices > li > .col-2 {
-    display: none;
+    width: calc(100% - 760px);
   }
   .qt-devices .checkbox-caption a {
     display: block;
@@ -2496,10 +2493,10 @@ Devices tab
 }
 @media only screen and (max-width: 1500px) {
   .qt-devices > li > .col-1 {
-    width: calc(100% - 514px);
+    width: calc(100% - 752px);
   }
   .qt-devices > li > .col-6 {
-    width: 151px;
+    width: 189px;
   }
   .qt-devices .list-actions .more .dropdown-menu > li:nth-child(2) {
     display: block;
@@ -2510,16 +2507,33 @@ Devices tab
 }
 @media only screen and (max-width: 1200px) {
   .qt-devices > li > .col-1 {
-    width: calc(100% - 466px);
+    width: calc(100% - 690px);
   }
-  .qt-devices > li > .col-6 {
-    width: 103px;
+  .qt-devices > li > .col-2 {
+    width: 140px;
+  }
+  .qt-devices > li > .col-3 {
+    width: 120px;
   }
   .qt-devices .list-actions .more .dropdown-menu > li:first-child {
     display: block;
   }
   .qt-devices .list-actions .btn-alert {
     display: none;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .qt-devices > li > .col-1 {
+    width: calc(100% - 530px);
+  }
+  .qt-devices > li > .col-2 {
+    width: 110px;
+  }
+  .qt-devices > li > .col-3 {
+    width: 50px;
+  }
+  .qt-devices > li > .col-4 {
+    width: 87px;
   }
 }
 .qt-devices .device-name {

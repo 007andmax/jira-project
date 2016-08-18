@@ -22,7 +22,6 @@
           $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
         }
         $scope.orderScanBy = 'hostName';
-        $scope.orderAgentBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
 
 
@@ -191,18 +190,6 @@
           }
         };
 
-        $scope.sortAgentTab = function (option) {
-          if (option === $scope.orderAgentBy) {
-            if (option[0] === '-') {
-              $scope.orderAgentBy = $scope.orderAgentBy.substring(1);
-            } else {
-              $scope.orderAgentBy = '-' + $scope.orderAgentBy;
-            }
-          } else {
-            $scope.orderAgentBy = option;
-          }
-        };
-
         $scope.sortDevicesTab = function (option) {
           if (option === $scope.orderDevicesBy) {
             if (option[0] === '-') {
@@ -213,17 +200,6 @@
           } else {
             $scope.orderDevicesBy = option;
           }
-        };
-
-        $scope.ifHasAgentToScan = function () {
-          if ($scope.agents) {
-            for (var i = 0, len = $scope.agents.length; i < len; i++) {
-              if ($scope.agents[i].agentId && ($scope.agents[i].agentId !== 'unknown') && $scope.agents[i].online) {
-                return true;
-              }
-            }
-          }
-          return false;
         };
 
         $scope.changeSelectedUsers = function (selectedUsers) {
