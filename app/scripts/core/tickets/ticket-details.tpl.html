@@ -172,9 +172,9 @@
               </li>
             </ul>
           </div>
-          <div class="btn btn-default btn-collapse pull-left has-tooltip"
-               ng-click="collapseTicket()" tooltip="collapse" tooltip-placement="top">
-            <i class="icn-sm icn-minimize"></i>
+          <div class="btn btn-default btn-collapse pull-left has-tooltip" ng-click="toggleTicketsList()"
+               tooltip="{{ ticketListOpened ? 'Collapse List' : 'Expand List'}}" tooltip-placement="top">
+            <i class="icn-lg {{ ticketListOpened ? 'icn-increase' : 'icn-decrease' }}"></i>
           </div>
         </div>
       </div>

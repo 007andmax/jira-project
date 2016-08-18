@@ -242,9 +242,16 @@
           globalSearch.openedItemName = undefined;
           globalSearch.searchValue = '';
 
-          if (toState.name === 'tickets' || toState.name === 'tickets.details') {
+          if (toState.name === 'tickets' || (toState.name === 'tickets.details' && globalSearch.selectedItemsCount)) {
             globalSearch.goBack.func = $rootScope.$broadcast.bind($rootScope, 'uncheckAllTickets');
             globalSearch.goBack.tooltip = 'reset selected items';
+          } else if (toState.name === 'tickets.details') {
+            globalSearch.goBack.isEnabled = true;
+            globalSearch.goBack.func = function () {
+              $state.go('tickets');
+              globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
+            };
+            globalSearch.goBack.tooltip = 'collapse ticket';
           } else if (toState.name === 'editCompany') {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'companyProfile', { companyId: $stateParams.companyId });

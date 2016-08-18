@@ -127,7 +127,6 @@
                     element.popover('hide');
                     //icnEmail.off('click');
                   }, 50);
-                  scope.$emit('closeRightPanel')
                 });
               };
 

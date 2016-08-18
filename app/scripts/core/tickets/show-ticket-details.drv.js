@@ -9,8 +9,7 @@
           restrict: 'A',
           link: function (scope, element) {
 
-            var body = $('body'),
-              ticketHeader = element.find('.ticket-header');
+            var body = $('body');
 
             controlTicketList();
 
@@ -21,6 +20,18 @@
               element.fadeIn(1500, function () {
                 controlTicketList();
               });
+            });
+
+            scope.$on('toggleTicketsList', function () {
+              if (scope.ticketListOpened) {
+                body.removeClass("opened-ticket-list").addClass("opened-ticket");
+                element.find('.nano-content').css({ 'position': 'static' });
+              } else {
+                body.addClass("opened-ticket-list opened-ticket");
+                element.nanoScroller();
+                element.find('.nano-content').css({ 'position': 'absolute' });
+              }
+              scope.ticketListOpened = !scope.ticketListOpened;
             });
 
             scope.$on('$destroy', function () {
@@ -68,6 +79,7 @@
               var windowWidth = window.innerWidth;
 
               if (windowWidth > 1700) {
+                scope.ticketListOpened = true;
 
                 body.addClass("opened-ticket-list opened-ticket");
                 element.nanoScroller();
@@ -76,6 +88,7 @@
                 //element.find(".ticket-detail > h2").css("margin-top", "92px");
 
               } else {
+                scope.ticketListOpened = false;
 
                 body.removeClass("opened-ticket-list").addClass("opened-ticket");
                 // element.nanoScroller({destroy: true});

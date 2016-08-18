@@ -2038,3 +2038,10 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
   position: absolute;
   left: 38%;
 }
+
+.icn-increase {
+  background-position: -2844px 0;
+}
+.icn-decrease {
+  background-position: -2816px 0;
+}

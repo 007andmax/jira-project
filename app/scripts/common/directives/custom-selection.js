@@ -47,7 +47,7 @@
                 } else {
                     inputElement.parents('li').removeClass('checked');
                 }
-                $(document).click();
+                //$(document).click();
             };
 
             childElements.find('input').click(function(event){

@@ -144,8 +144,8 @@
             });
           };
 
-          $scope.collapseTicket = function () {
-            $state.go('tickets', { listType: $stateParams.listType });
+          $scope.toggleTicketsList = function () {
+            $scope.$broadcast('toggleTicketsList');
           };
 
           $scope.claimTicket = function () {

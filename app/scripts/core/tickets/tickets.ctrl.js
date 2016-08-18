@@ -82,12 +82,7 @@
         $scope.changeSelectedTickets = changeSelectedTickets;
         $scope.uncheckTicket = uncheckTicket;
 
-        $scope.$on('uncheckAllTickets', function () {
-          $scope.selectedTickets = {};
-          globalSearch.selectedItemsCount = undefined;
-          globalSearch.goBack.isEnabled = false;
-          ticketsHeaderState.agentList = undefined;
-        });
+        $scope.$on('uncheckAllTickets', uncheckAllTickets);
 
         $scope.userReadable = function (text) {
           if (!text) {
@@ -143,7 +138,19 @@
             }
           }
 
-          globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
+
+          if ($state.includes('tickets.details') && !globalSearch.selectedItemsCount) {
+            globalSearch.goBack.isEnabled = true;
+            globalSearch.goBack.func = function () {
+              $state.go('tickets');
+              globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
+            };
+            globalSearch.goBack.tooltip = 'collapse ticket';
+          } else {
+            globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
+            globalSearch.goBack.func = uncheckAllTickets;
+            globalSearch.goBack.tooltip = 'reset selected items';
+          }
         }
 
         function uncheckTicket(id) {
@@ -151,6 +158,12 @@
             $scope.selectedTickets[id] = false;
             changeSelectedTickets(id);
           }
+        }
+
+        function uncheckAllTickets() {
+          $scope.selectedTickets = {};
+          changeSelectedTickets();
+          ticketsHeaderState.agentList = undefined;
         }
 
         $scope.$on('$destroy', function () {

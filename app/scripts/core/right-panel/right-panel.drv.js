@@ -3,39 +3,23 @@
 (function () {
 
   angular.module("quicktech.core.rightPanel").directive('rightPanel',
-    ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+    ['$rootScope', '$document', function ($rootScope, $document) {
       return {
         restrict: 'A',
-        link: function (scope, element, attrs) {
+        link: function (scope, element) {
 
-          rightPanelMode();
+          $document.on('click', collapse);
 
-          $(window).resize(rightPanelMode);
-
-          element.on('mouseleave', function () {
-            $timeout(function () {
-              if ($(window).width() <= 1315 && !$rootScope.insidePopover) {
-                element.addClass('collapsed');
-              }
-            }, 100)
-          });
-
-          scope.$on('closeRightPanel', function () {
-            $timeout(function () {
-              if (!element.is(":hover") && $(window).width() <= 1315){
-                element.addClass('collapsed');
-              }
-            }, 100)
-          });
-
-          function rightPanelMode() {
-
-            if ($(window).width() > 1315) {
-              element.removeClass('collapsed');
-            } else {
+          function collapse(e) {
+            var isClickedInside = angular.element(e.target).closest(element).length;
+            if (!$rootScope.insidePopover && !isClickedInside) {
               element.addClass('collapsed');
             }
           }
+
+          scope.$on('$destroy', function () {
+            $document.off('click', collapse);
+          });
 
         }
       }
