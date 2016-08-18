@@ -21,7 +21,7 @@
         $scope.users = UsersService.getClientUsers();
 
         $scope.$watch('shownUsers.length', function (usersCount) {
-          globalSearch.counts['quantity'] = { count: usersCount };
+          globalSearch.count = usersCount;
         });
 
         $scope.getUserCompanyName = function (user) {

@@ -51,7 +51,7 @@
         $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
         $scope.$watch('companies.length', function (companiesCount) {
-          globalSearch.counts['quantity'] = { count: companiesCount == 0 ? companiesCount : (companiesCount - 1) };
+          globalSearch.count = companiesCount == 0 ? companiesCount : (companiesCount - 1);
         });
 
         ////TODO fix data loading

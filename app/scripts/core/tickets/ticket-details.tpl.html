@@ -120,6 +120,7 @@
           <div class="pull-left" dropdown>
             <div class="btn btn-default pull-left has-tooltip"
                  aria-haspopup="true" aria-expanded="false"
+                 ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"
                  dropdown-toggle tooltip="Settings" tooltip-placement="top">
               <i class="icn-sm icn-settings"></i>
             </div>

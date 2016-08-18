@@ -23,15 +23,15 @@
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
           var params = $state.params.remoteParams;
-          if(params && (params.deviceId || params.companyId || params.connectionDuration)) {
+          if (params && (params.deviceId || params.companyId || params.connectionDuration)) {
 
             $scope.ticketUpdate = { services: [{}] };
             $scope.ticketUpdate.services[0].quantity = params.connectionDuration ? params.connectionDuration.toFixed() : undefined;
 
             ServicesService.getAllByCompany($scope, params.companyId, function (resp) {
               $scope.ticketUpdate.services[0].item = resp.find(function (service) {
-                return service.name === 'Remote Service';
-              }) || resp[0];
+                  return service.name === 'Remote Service';
+                }) || resp[0];
             });
 
             $scope.linkAgent($stateParams.ticketId, params.deviceId);
@@ -40,16 +40,13 @@
           }
 
           UserNotificationService.show('Loading...');
-          $scope.ticketDetails = TicketsService.getOne($stateParams.ticketId, $stateParams.listType, $scope, true, function (details) {
+          $scope.ticketDetails = { id: $stateParams.ticketId };
+          TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
 
             $scope.ticketDetails = details;
 
             if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
-              if ($stateParams.ticketId) {
-                $state.go('tickets', { listType: $stateParams.listType, ticketId: $stateParams.ticketId });
-              } else {
-                $state.go('tickets', { listType: $stateParams.listType });
-              }
+              $state.go('tickets', { listType: $stateParams.listType });
               return;
             }
 
@@ -79,14 +76,16 @@
               $scope.assignedUser = UsersService.getOneById($scope.ticketDetails.assignedUser.id);
             }
 
-            for (var i = 0; i < $scope.ticketDetails.updates.length; i++) {
+            if ($scope.ticketDetails.updates) {
+              for (var i = 0; i < $scope.ticketDetails.updates.length; i++) {
 
-              if ($scope.ticketDetails.updates[i].unread) {
-                if (unreadUpdatesId.length === 0) {
-                  $scope.firstUnreadUpdateId = $scope.ticketDetails.updates[i].id;
+                if ($scope.ticketDetails.updates[i].unread) {
+                  if (unreadUpdatesId.length === 0) {
+                    $scope.firstUnreadUpdateId = $scope.ticketDetails.updates[i].id;
+                  }
+
+                  unreadUpdatesId.push($scope.ticketDetails.updates[i].id);
                 }
-
-                unreadUpdatesId.push($scope.ticketDetails.updates[i].id);
               }
             }
 
@@ -187,7 +186,6 @@
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as spam', true);
                   $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', { listType: $stateParams.listType });
                 });
               } else {
 
@@ -195,7 +193,6 @@
 
                   UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been reported as spam', true);
                   $scope.uncheckTicket($scope.ticketDetails.id);
-                  $state.go('tickets', { listType: $stateParams.listType });
                 });
 
               }
@@ -205,7 +202,6 @@
           $scope.restoreFromSpam = function () {
             TicketsService.restoreFromSpam($scope.ticketDetails.id, function () {
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', { listType: $stateParams.listType });
             });
           };
 
@@ -215,7 +211,6 @@
                 UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been moved to Trash', true);
               }
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', { listType: $stateParams.listType });
             });
           };
 
@@ -278,7 +273,11 @@
           };
 
           $scope.getTicketNote = function () {
-            return $sce.trustAsHtml($scope.ticketDetails.note);
+            if ($scope.ticketDetails) {
+              return $sce.trustAsHtml($scope.ticketDetails.note);
+            } else {
+              return '';
+            }
           };
 
           $scope.getTriedToSaveUpdate = function () {
@@ -478,17 +477,7 @@
           };
 
           $scope.$on('ticket_is_not_available_anymore', function (event, data) {
-
-            var ticket = data.ticket;
-
-            if (data.action === 'ASSIGNED_USER' && ticket.assignedUser.id === $scope.currentUser.id &&
-              ticket.assignPerformer.id === $scope.currentUser.id) {
-              $scope.ticketDetails = ticket;
-              return;
-            }
-
-            if (ticket.id === $scope.ticketDetails.id
-              && (!data.ticketType || data.ticketType.toUpperCase() === $stateParams.listType.toUpperCase())) {
+            if (data.id === $scope.ticketDetails.id) {
               $state.go('tickets', { listType: $stateParams.listType });
             }
           });
@@ -519,7 +508,6 @@
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.uncheckTicket($scope.ticketDetails.id);
-              $state.go('tickets', { listType: $stateParams.listType });
             }, recipientsIds);
           }
 

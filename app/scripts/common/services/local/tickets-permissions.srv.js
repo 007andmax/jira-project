@@ -15,9 +15,7 @@
           return isTicketOpen(ticket) && !company.default && ticket.company.id === company.id;
         },
         'SEND_TO_SPAM': isTicketOpen,
-        'SEND_TO_TRASH': function (ticket) {
-          return !isSpamOrTrash(ticket) && !isBillable(ticket);
-        },
+        'SEND_TO_TRASH': isTicketOpen,
         'ASSIGN': function (ticket) {
           var techUsers = UsersService.getTechUsers();
           return techUsers && techUsers.length > 1 && isTicketOpen(ticket);
@@ -37,7 +35,7 @@
             return !ticket.isBillable && isCanBeReOpened(ticket);
 
           } else if (option === 'billable') {
-            return ticket.isBillable && !ticket.hasInvoice;
+            return isBillable(ticket);
 
           } else if (option === 'shared') {
             return ticket.sharedToCurrentUserAt;
@@ -163,7 +161,7 @@
             var action = arrActions[i].toUpperCase();
 
             if (Array.isArray(tickets)) {
-              result = true;
+              result = !!tickets.length;
               for (var j = 0; j < tickets.length; j++) {
                 if (!ACTIONS[action](tickets[j], option, additionalAction)) {
                   result = false;
@@ -175,7 +173,7 @@
                 return true;
               }
 
-            } else if (ACTIONS[action](tickets, option, additionalAction)) {
+            } else if (tickets && ACTIONS[action](tickets, option, additionalAction)) {
               return true;
             }
           }

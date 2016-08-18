@@ -55,7 +55,7 @@
               isAlreadyShared;
 
             if ($scope.ticketDetails) {
-              var shares = $scope.ticketDetails.shares;
+              var shares = $scope.ticketDetails.shares || [];
 
               isAssignedUser = $scope.ticketDetails.assignedUser && item.id === $scope.ticketDetails.assignedUser.id;
               isCreatedUser = item.id === $scope.ticketDetails.createdUser.id;
