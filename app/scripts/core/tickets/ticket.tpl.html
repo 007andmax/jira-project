@@ -33,11 +33,10 @@
 
     </div>
 
-    <div class="ticket-title clearfix">
+    <div class="ticket-title ellipsis clearfix">
       <p class="pull-left ellipsis"><strong>{{ ticket.number + ' - ' + ticket.subject }}</strong>
-        <span class="text-muted">&nbsp;&nbsp;{{ ticket.previewNote }}</span>
       </p>
-
+      <span class="text-muted ellipsis">{{ ticket.previewNote }}</span>
       <a href="javascript:void(0)" class="ticket-list-attachment pull-right"
          ng-show="ticket.hasAttachments === true">
         <i class="icn-sm icn-ticket-list-attachment"></i>
@@ -49,18 +48,18 @@
          ng-init="dropdowns[ticket.id] = {}; dropdowns[ticket.id]['priority'] = false; dropdowns[ticket.id]['status'] = false;">
 
       <div class="pull-left" dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['priority']">
-        <span
-          class="label-icn-lg priority-small-size label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"
-          tooltip="{{ userReadable(ticket.priorityLevel) }} priority" tooltip-placement="top" dropdown-toggle>
-          <label class="priority-flag">
-            <i class="icn-sm icn-priority"></i>
-          </label>
-        </span>
+        <!--<span-->
+          <!--class="label-icn-lg priority-small-size label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"-->
+          <!--tooltip="{{ userReadable(ticket.priorityLevel) }} priority" tooltip-placement="top" dropdown-toggle>-->
+          <!--<label class="priority-flag">-->
+            <!--<i class="icn-sm icn-priority"></i>-->
+          <!--</label>-->
+        <!--</span>-->
 
-        <span class="label label-primary priority-big-size label-priority-{{ ticket.priorityLevel.toLowerCase() }}"
-              dropdown-toggle>
-          {{ userReadable(ticket.priorityLevel) }}
-        </span>
+        <!--<span class="label label-primary priority-big-size label-priority-{{ ticket.priorityLevel.toLowerCase() }}"-->
+              <!--dropdown-toggle>-->
+          <!--{{ userReadable(ticket.priorityLevel) }}-->
+        <!--</span>-->
 
         <ul class="dropdown-menu dropdown-menu-custom" role="menu"
             ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticket)">
@@ -121,7 +120,7 @@
         </ul>
       </div>
 
-      <span class="label label-primary">{{ userReadable(ticket.ticketSource) }}</span>
+      <span style="float: right; margin-right: 0;">{{ userReadable(ticket.ticketSource) }}</span>
 
       <div class="text-muted"
            ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(assignedUser) }}

@@ -72,7 +72,7 @@
   background-color: #f1f5fa;
 }
 .ticket.active{
-  border: 2px solid #08a8dd !important;
+  border: 1px solid #08a8dd;
 }
 .ticket.selected{
   background-color: #e2f1fd;
@@ -141,25 +141,25 @@
   /*width: calc(100% - 166px);*/
 /*}*/
 
-.ticket.no-action:hover .ticket-meta .ticket-title p.ellipsis {
-  width: calc(100% - 20px);;
-}
+/*.ticket.no-action:hover .ticket-meta .ticket-title p.ellipsis {*/
+  /*width: calc(100% - 20px);;*/
+/*}*/
 
-.ticket.one-action:hover .ticket-meta .ticket-title p.ellipsis{
-  width: calc(100% - 50px);
-}
+/*.ticket.one-action:hover .ticket-meta .ticket-title p.ellipsis{*/
+  /*width: calc(100% - 50px);*/
+/*}*/
 
-.ticket.two-actions:hover .ticket-meta .ticket-title p.ellipsis{
-  width: calc(100% - 100px);
-}
+/*.ticket.two-actions:hover .ticket-meta .ticket-title p.ellipsis{*/
+  /*width: calc(100% - 100px);*/
+/*}*/
 
-.ticket.three-actions:hover .ticket-meta .ticket-title p.ellipsis{
-  width: calc(100% - 120px);
-}
+/*.ticket.three-actions:hover .ticket-meta .ticket-title p.ellipsis{*/
+  /*width: calc(100% - 120px);*/
+/*}*/
 
-.ticket.four-actions:hover .ticket-meta .ticket-title p.ellipsis {
-  width: calc(100% - 136px);
-}
+/*.ticket.four-actions:hover .ticket-meta .ticket-title p.ellipsis {*/
+  /*width: calc(100% - 136px);*/
+/*}*/
 
 /*Ticket Action Hover*/
 
@@ -280,4 +280,23 @@
     line-height: 19px;
     padding-bottom: 1px;
   }
+}
+.low-priority-border{
+  border-left:10px solid #4caf50 !important;
+}
+.medium-priority-border{
+  border-left:10px solid #FFC107 !important;
+}
+.high-priority-border{
+  border-left:10px solid #e53935 !important;
+}
+.ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+.ticket-title > .text-muted{
+  float: left;
+  width: calc(100% - 20px);
 }

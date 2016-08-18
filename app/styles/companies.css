@@ -1331,3 +1331,8 @@
   top: 10px;
   left: 20px;
 }
+.list-company-row{
+  display: flex !important;
+  align-items: center;
+  cursor: pointer;
+}
