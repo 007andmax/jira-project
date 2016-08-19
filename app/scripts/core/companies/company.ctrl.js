@@ -47,10 +47,6 @@
           }
         });
 
-        $scope.createUser = function () {
-          //todo: implement user creation on modal window
-        };
-
         $scope.getUserSubscribeClass = function () {
           if (!$scope.primaryContact || !$scope.primaryContact.subscription) {
             return;

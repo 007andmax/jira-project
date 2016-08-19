@@ -104,7 +104,13 @@
 
         $scope.toggleCollapsed = function () {
           $scope.isCollapsed = !$scope.isCollapsed;
-        }
+        };
+
+        $scope.createUser = function (companyId) {
+          if (PermissionsService.isAllowed('CREATE_USERS')) {
+            //todo: implement user creation on modal window
+          }
+        };
 
       }]);
 

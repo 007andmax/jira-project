@@ -329,7 +329,7 @@
         </div>
       </div>
       <div class="col-xs-1">
-        <div ng-click="createUser()" ng-if="PermissionsService.isAllowed('CREATE_USERS')"
+        <div ng-click="createUser(company.id)"
              tooltip="Create User" tooltip-placement="top">
           <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
           <span class="badge badge-red list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
