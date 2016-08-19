@@ -8,17 +8,34 @@
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state,
                 SharedStateService, DevicesService, PermissionsService) {
 
-        var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var globalSearch = SharedStateService.getSharedState('globalSearch'),
+          availableViews = ['list', 'grid'];
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
         }
 
+        $scope.companiesView = $state.params.view || 'grid';
         $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
-        $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companies = CompaniesService.getClientCompanies().filter(function (company) {
+          return !company.default;
+        });
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
+
+        $scope.orderCompanies = {
+          field: 'name',
+          reverse: false
+        };
+
+        $scope.$watch(function () {
+          return $state.params.view;
+        }, function (value) {
+          if (availableViews.indexOf(value) !== -1) {
+            $scope.companiesView = value;
+          }
+        });
 
         $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
@@ -54,36 +71,36 @@
           globalSearch.counts['quantity'] = { count: companiesCount == 0 ? companiesCount : (companiesCount - 1) };
         });
 
-        ////TODO fix data loading
-        //UsersService._addInitListener(function () {
-        //  $scope.subscriptions = SubscriptionsService.getAllClientUserSubscriptions($scope);
-        //  $scope.submittedTickets = StatisticsService.getUserSubmittedTicketsByCompany(CompaniesService.getCurrentCompany().id, $scope)
-        //
-        //  $scope.getUserCompanyName = function (user) {
-        //    return CompaniesService.getOneById(user.company.id).legalName;
-        //  };
-        //});
-        //
+        $scope.setOrderByCompanies = function (option) {
+          if (option === $scope.orderCompanies.field) {
+            $scope.orderCompanies.reverse = !$scope.orderCompanies.reverse;
+          } else {
+            $scope.orderCompanies.field = option;
+            $scope.orderCompanies.reverse = false;
+          }
+        };
 
+        $scope.orderByForCompanies = function (item) {
+          if ($scope.orderCompanies.field === 'name') {
+            return item.name;
+          } else if ($scope.orderCompanies.field === 'phone') {
+            var phoneNumbers = $scope.companiesInfo[item.id].addresses[0].phoneNumbers;
+            if (phoneNumbers && phoneNumbers.length) {
+              return phoneNumbers[0].number || '';
+            }
+          } else if ($scope.orderCompanies.field === 'email') {
+            return $scope.companiesInfo[item.id].contacts[0].primaryEmail || '';
+          } else if ($scope.orderCompanies.field === 'contact') {
+            return $scope.getUserName($scope.companiesInfo[item.id].contacts[0]);
+          } else if ($scope.orderCompanies.field === 'tickets') {
+            return item.companyStatistic.ticketsSubmitted;
+          } else if ($scope.orderCompanies.field === 'devices') {
+            return $scope.devicesCount[item.id] ? $scope.devicesCount[item.id].all : 0;
+          } else if ($scope.orderCompanies.field === 'users') {
+            return UsersService.getAllByCompanyId(item.id).length;
+          }
 
-        //
-        //$scope.getUserName = function (user) {
-        //  return user.firstName + ' ' + user.lastName;
-        //};
-        //
-        //$scope.setEditUserId = function (userId) {
-        //  $scope.editUserId = userId;
-        //};
-
-        //$scope.changeUserRole = function (userId, userRole) {
-        //  UsersService.changeUserRole(userId, userRole);
-        //};
-        //
-        //$scope.subscribeUser = function (userId, nameSubscription) {
-        //  var newSubscription = $scope.subscriptions[userId].staticCopy();
-        //  newSubscription[nameSubscription] = !newSubscription[nameSubscription];
-        //  SubscriptionsService.saveUserSubscription(newSubscription);
-        //};
+        };
 
         $scope.toggleCollapsed = function () {
           $scope.isCollapsed = !$scope.isCollapsed;

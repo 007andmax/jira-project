@@ -12,13 +12,29 @@
           $state.go('tickets');
         }
 
-        $scope.editUser = undefined;
-
         var headerSharedState = SharedStateService.getSharedState('usersHeader');
-        var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var globalSearch = SharedStateService.getSharedState('globalSearch'),
+          availableViews = ['list', 'grid'];
+
+        $scope.usersView = $state.params.view || 'grid';
+        $scope.editUser = undefined;
+        $scope.orderUsers = {
+          field: 'name',
+          reverse: false
+        };
 
         $scope.PermissionsService = PermissionsService;
-        $scope.users = UsersService.getClientUsers();
+        $scope.users = UsersService.getClientUsers().filter(function (user) {
+          return !user.default;
+        });
+
+        $scope.$watch(function () {
+          return $state.params.view;
+        }, function (value) {
+          if (availableViews.indexOf(value) !== -1) {
+            $scope.usersView = value;
+          }
+        });
 
         $scope.$watch('shownUsers.length', function (usersCount) {
           globalSearch.counts['quantity'] = { count: usersCount };
@@ -113,7 +129,7 @@
             subscription = subscription.staticCopy()
           } else {
             subscription = {
-              user: {id: user.id}
+              user: { id: user.id }
             }
           }
 
@@ -121,6 +137,54 @@
           SubscriptionsService.saveUserSubscription(subscription, function () {
             $scope.disabledCheckbox = false;
           });
+        };
+
+        $scope.setOrderByUsers = function (option) {
+          if (option === $scope.orderUsers.field) {
+            $scope.orderUsers.reverse = !$scope.orderUsers.reverse;
+          } else {
+            $scope.orderUsers.field = option;
+            $scope.orderUsers.reverse = false;
+          }
+        };
+
+        $scope.orderByForUsers = function (item) {
+          if ($scope.orderUsers.field === 'name') {
+            return item.firstName + ' ' + item.lastName;
+          } else if ($scope.orderUsers.field === 'type') {
+            return item.role || '';
+          } else if ($scope.orderUsers.field === 'company') {
+            return CompaniesService.getOneById(item.company.id).name;
+          } else if ($scope.orderUsers.field === 'phone') {
+            var phoneNumbers = item.phoneNumbers;
+            if (phoneNumbers && phoneNumbers.length) {
+              return phoneNumbers[0].number || '';
+            }
+          } else if ($scope.orderUsers.field === 'ticket') {
+            return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
+          }
+
+        };
+
+        $scope.setEditedUser = function (user) {
+          $scope.editedUser = angular.copy(user);
+        };
+
+        $scope.isLastUserWithInvoiceSubscription = function (userId) {
+          var users = $scope.userSubscriptionsByCompanyId;
+
+          for (var id in users) {
+            if (id === userId) {
+              continue;
+            }
+
+            var user = users[id];
+
+            if (user.invoice) {
+              return false;
+            }
+          }
+          return true;
         };
 
       }]);

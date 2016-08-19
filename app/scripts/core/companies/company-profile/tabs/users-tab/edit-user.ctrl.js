@@ -6,8 +6,12 @@
     ['$scope', 'UsersService', 'CompaniesService', 'quicktech.common.services.PhoneFormats', '$rootScope',
       function ($scope, UsersService, CompaniesService, PhoneFormats, $rootScope) {
         var userSubscription = $scope.editedUser.subscription,
-          action = $scope.editedUser.newUser ? 'CREATE_USERS' : 'EDIT_USERS';
+          action = $scope.editedUser.newUser ? 'CREATE_USERS' : 'EDIT_USERS',
+          companyId = $scope.editedUser.company.id;
 
+        CompaniesService.getCompanyData($scope, companyId, function (resp) {
+          $scope.companyAddress = resp.addresses[0];
+        });
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.phoneNumberPattern = /^[\+\d\(\)\-\s]+$/;
         $scope.isPrefixValid = PhoneFormats.isPrefixValid;
@@ -15,7 +19,7 @@
           USER: 'User',
           ADMIN: 'Administrator'
         };
-        $scope.isLastInvoiceSubsciption = userSubscription.invoice && $scope.users.filter(function (user) {
+        $scope.isLastInvoiceSubsciption = userSubscription.invoice && UsersService.getAllByCompanyId(companyId).filter(function (user) {
             return user.subscription.invoice;
           }).length <= 1;
 
@@ -53,6 +57,10 @@
 
             if (firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
               phoneNumbers[0].number = '';
+            }
+
+            if (!phoneNumbers[0].number) {
+              editedUser.phoneNumbers.shift();
             }
 
             editedUser.companyId = editedUser.company.id;
