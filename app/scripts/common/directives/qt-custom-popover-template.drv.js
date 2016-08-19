@@ -3,13 +3,14 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtCustomPopoverTemplate',
-    ['$templateRequest', '$compile', '$document', function ($templateRequest, $compile, $document) {
+    ['$templateRequest', '$compile', '$document', '$timeout', function ($templateRequest, $compile, $document, $timeout) {
       return {
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
-          var template, popover, popoverShown,
+          var template, popover, popoverShown, promise,
             newScope = $scope.$new(),
-            trigger = $("[qt-popover-trigger]");
+            trigger = $element.find('[qt-popover-trigger]'),
+            toggleTrigger = trigger.attr('qt-popover-trigger') || 'click';
 
           $element.css('position', 'relative');
 
@@ -18,7 +19,11 @@
             createPopover();
           });
 
-          trigger.on('click', togglePopover);
+          if (toggleTrigger === 'click') {
+            trigger.on(toggleTrigger, togglePopover);
+          } else if (toggleTrigger === 'mouseenter') {
+            trigger.on(toggleTrigger, openPopover);
+          }
 
           newScope.hidePopover = function () {
             popoverShown = false;
@@ -39,10 +44,32 @@
             }
           }
 
+          function openPopover(e) {
+            if (!$element[0].hasAttribute('disabled')) {
+              if (!popoverShown) {
+                popoverShown = true;
+                popover.show();
+                calcPosition($attrs.qtPopoverPosition);
+              }
+
+              e.stopPropagation();
+            }
+          }
+
           var unbind = newScope.$on('$destroy', function () {
-            $document.off('keydown', closeIfEscape);
-            trigger.off('click', togglePopover);
-            $document.off('click', hideOnOutsideClick);
+            if (toggleTrigger === 'click') {
+              trigger.on(toggleTrigger, togglePopover);
+            } else if (toggleTrigger === 'mouseenter') {
+              trigger.on(toggleTrigger, openPopover);
+            }
+
+            if (toggleTrigger === 'click') {
+              $document.off('keydown', closeIfEscape);
+              $document.off('click', hideOnOutsideClick);
+            } else if (toggleTrigger === 'mouseenter') {
+              $element.on('mouseleave', hideOnMouseLeave);
+            }
+
             unbind();
           });
 
@@ -51,15 +78,19 @@
               $element.append(compiledHtml);
               popover = compiledHtml;
 
-              $document.on('keydown', closeIfEscape);
-              $document.on('click', hideOnOutsideClick);
+              if (toggleTrigger === 'click') {
+                $document.on('keydown', closeIfEscape);
+                $document.on('click', hideOnOutsideClick);
+              } else if (toggleTrigger === 'mouseenter') {
+                $element.on('mouseleave', hideOnMouseLeave);
+              }
 
               popover.addClass('popover');
               popover.css({
                 position: 'absolute',
                 width: 'auto',
                 padding: '15px 25px',
-                'z-index': 1001
+                'z-index': $attrs.zIndex || 1001
               });
               calcPosition($attrs.qtPopoverPosition);
 
@@ -70,7 +101,7 @@
           function calcPosition(position) {
             var left, top;
 
-            if (position === 'top') {
+            if (position === 'top' || !position) {
 
               left = -popover.outerWidth() / 2 + trigger.outerWidth() / 2;
               top = -(popover.outerHeight() + 10);
@@ -79,6 +110,12 @@
             } else if (position === 'bottom') {
 
               left = -popover.outerWidth() / 2 + trigger.outerWidth() / 2;
+              top = trigger.outerHeight() + 10;
+              popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
+
+            } else if (position === 'bottom-left-align') {
+
+              left = 0;
               top = trigger.outerHeight() + 10;
               popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
 
@@ -91,6 +128,27 @@
             if (!isInside.length) {
               newScope.hidePopover();
             }
+          }
+
+          function hideOnMouseLeave() {
+            if (promise) {
+              $timeout.cancel(promise);
+            }
+
+            promise = $timeout(function () {
+              newScope.hidePopover();
+              popover.off('mouseenter', cancelHiding)
+            }, 200);
+            popover.on('mouseenter', cancelHiding);
+          }
+
+          function cancelHiding(e) {
+            var isInside = e.target === popover[0] || angular.element(e.target).closest(popover);
+
+            if (promise && isInside) {
+              $timeout.cancel(promise);
+            }
+            popover.off('mouseenter', cancelHiding);
           }
 
           function closeIfEscape(e) {

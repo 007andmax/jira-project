@@ -1,0 +1,21 @@
+<div>
+  <div>
+    <!--<img ng-src="{{ getUserAvatarUrl(user) }}" alt="...">-->
+    <p>{{ getUserName(user) }}</p>
+    <div ng-if="!company.default">
+      Company: <span>{{ company.name }}</span>
+    </div>
+    <div ng-if="user.primaryEmail">
+      Email: <span>{{ user.primaryEmail }}</span>
+    </div>
+    <div ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0].number">
+      <i class="icn-sm" ng-class="{'icn-iphone': user.phoneNumbers[0].typeNumber === 'MOBILE',
+            'icn-user-fax': user.phoneNumbers[0].typeNumber === 'FAX',
+            'icn-user-phone': user.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
+      Phone: {{ user.phoneNumbers[0].number }}
+    </div>
+    <div ng-if="user.role">
+      Role: {{ userReadable(user.role) }}
+    </div>
+  </div>
+</div>

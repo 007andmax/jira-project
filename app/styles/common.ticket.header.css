@@ -134,3 +134,10 @@
     margin-top: 5px;
   }
 }
+.ticket-company-info {
+  width: 100%;
+  margin-top: 10px;
+}
+.ticket-company-info .ticket-company-address {
+  color: #94A4B8;
+}

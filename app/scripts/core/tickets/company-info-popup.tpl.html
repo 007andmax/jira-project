@@ -1,0 +1,26 @@
+<div>
+  <div>
+    <!--<img ng-src="{{ getCompanyLogoUrl(company) }}" alt="...">-->
+    <p>{{ company.name }}</p>
+    <div style="white-space: nowrap">
+      <i class="icn-sm icn-sb-location"></i>
+      Address: <span>{{ companyAddress.addressWithSuitNumberAndPostalCode }}</span>
+    </div>
+    <div>
+      <span>{{ formatOffset(companyAddress.timeZone.timeOffset) }}</span>
+      <span>{{ companyAddress.timeZone.name }}</span>
+    </div>
+    <div ng-if="companyAddress.phoneNumbers && companyAddress.phoneNumbers.length && companyPhoneNumber">
+      <i class="icn-sm" ng-class="{'icn-iphone': companyAddress.phoneNumbers[0].typeNumber === 'MOBILE',
+            'icn-user-fax': companyAddress.phoneNumbers[0].typeNumber === 'FAX',
+            'icn-user-phone': companyAddress.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
+      Phone: {{ companyPhoneNumber }}
+    </div>
+    <div ng-if="company.serviceType">
+      Service type: {{ company.serviceType }}
+    </div>
+    <div ng-if="company.clientType">
+      Client type: {{ company.clientType }}
+    </div>
+  </div>
+</div>

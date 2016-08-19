@@ -3,8 +3,10 @@
     <div class="ticket-content" style="margin-bottom: 200px;">
       <div class="ticket-header clearfix ticket-fixed-header">
         <div id="ticket-header-content">
-          <div class="pull-left ticket-header-avatar">
-            <img ng-src="{{ getUserAvatarUrl(ticketDetails.createdUser) }}" class="avatar-38 img-circle" alt="...">
+          <div class="pull-left ticket-header-avatar" qt-popover-position="bottom-left-align"
+               qt-custom-popover-template="/html/scripts/core/tickets/user-info-popup.tpl.html">
+            <img qt-popover-trigger="mouseenter"
+                 ng-src="{{ getUserAvatarUrl(ticketDetails.createdUser) }}" class="avatar-38 img-circle" alt="...">
           </div>
           <div class="clearfix pull-left">
             <div class="ticket-header-username pull-left">
@@ -47,13 +49,15 @@
                 <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                       class="label-icn-sm progress-small-size label-primary persistent-tooltip"
                       tooltip-append-to-body="true"
-                      tooltip="{{ userReadable(ticketDetails.status) || 'Unclaimed' }}" tooltip-placement="top" dropdown-toggle>
+                      tooltip="{{ userReadable(ticketDetails.status) || 'Unclaimed' }}" tooltip-placement="top"
+                      dropdown-toggle>
                   <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}">
                     <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}"></i>
                   </label>
                 </span>
 
-                <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
+                <span
+                  class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
                   ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)" dropdown-toggle>
                   {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
                 </span>
@@ -177,8 +181,22 @@
             <i class="icn-lg {{ ticketListOpened ? 'icn-increase' : 'icn-decrease' }}"></i>
           </div>
         </div>
+        <div class="pull-left ticket-company-info" ng-if="!company.default">
+          <div class="pull-left ticket-header-avatar" qt-popover-position="bottom-left-align"
+               qt-custom-popover-template="/html/scripts/core/tickets/company-info-popup.tpl.html">
+            <img qt-popover-trigger="mouseenter"
+                 ng-src="{{ getCompanyLogoUrl(company) }}" class="avatar-38 img-circle" alt="...">
+          </div>
+          <div style="display: inline-block;">
+            <strong>{{ company.name }}</strong>
+              <span class="text-muted" ng-if="companyPhoneNumber" style="margin-left: 5px">
+                {{ companyPhoneNumber }}
+              </span>
+            <div class="ticket-company-address">{{ companyAddress.address }}</div>
+          </div>
+        </div>
       </div>
-      <div class="ticket-detail" style="padding-top: 92px;">
+      <div class="ticket-detail" style="padding-top: 150px;">
         <h2>{{ ticketDetails.number + ' - ' + ticketDetails.subject }}</h2>
         <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
         <ticket-tags ticket-tags="ticketDetails.tags" ticket-id="{{ticketDetails.id}}"></ticket-tags>
@@ -311,7 +329,8 @@
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
-                  <div class="col-2 col-2-has-serial-number" style="border-left: 0;" tooltip="{{ product.item.description }}"
+                  <div class="col-2 col-2-has-serial-number" style="border-left: 0;"
+                       tooltip="{{ product.item.description }}"
                        tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0"
                        ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
                     <span trimmed-tooltip-container>{{ product.item.description }}</span>
@@ -333,7 +352,8 @@
                   <div class="col-5" ng-show="ticketDetails.status !== 'COMPLETED'"
                        tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
                        tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
-                    <span trimmed-tooltip-container>{{ product.item.sale * product.quantity || '' | currency :'$':2 }}</span>
+                    <span
+                      trimmed-tooltip-container>{{ product.item.sale * product.quantity || '' | currency :'$':2 }}</span>
                   </div>
                   <div class="col-4" tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
                        tooltip-enable="{{ isShowTooltip[4]() }}" trimmed-tooltip="4">

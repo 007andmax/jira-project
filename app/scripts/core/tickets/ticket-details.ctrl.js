@@ -66,7 +66,13 @@
             $scope.currentOpenTab = $scope.currentOpenTab || 'NOTE';
 
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
-            $scope.company = CompaniesService.getOneById($scope.ticketDetails.company.id);
+            CompaniesService.getCompanyData($scope, $scope.ticketDetails.company.id, function (resp) {
+              $scope.company = resp;
+              $scope.companyAddress = resp.addresses[0];
+              if ($scope.companyAddress.phoneNumbers && $scope.companyAddress.phoneNumbers.length) {
+                $scope.companyPhoneNumber = $scope.companyAddress.phoneNumbers[0].number;
+              }
+            });
 
             if ($scope.ticketDetails.assignPerformer && $scope.ticketDetails.assignPerformer.id) {
               $scope.assignPerformer = UsersService.getOneById($scope.ticketDetails.assignPerformer.id);
@@ -95,7 +101,7 @@
               }, 1000);
             }
 
-            DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
+            DevicesService.getAgentsByCompany($scope, $scope.ticketDetails.company.id, function (resp) {
               $scope.agentList = resp;
               if ($scope.ticketDetails.agent && !$scope.ticketAgent) {
                 $scope.ticketAgent = resp.find(function (agent) {
@@ -456,6 +462,16 @@
               return true;
             }
             return !(item.user.id === $scope.currentUser.id);
+          };
+
+          $scope.formatOffset = function (offset) {
+            var minutesOffset = offset / 60000,
+              sign = Math.sign(offset) === -1 ? '-' : '+',
+              hours = Math.abs(Math.floor(minutesOffset / 60)) || '00',
+              minutes = Math.abs(minutesOffset % 60) || '00';
+
+            return '(UTC ' + sign + (hours.toString().length !== 2 ? ('0' + hours) : hours) +
+              ':' + (minutes.toString().length !== 2 ? ('0' + minutes) : minutes) + ') ';
           };
 
           $scope.getLengthSharedUsers = function (sharedUsers) {
