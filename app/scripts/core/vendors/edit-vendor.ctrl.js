@@ -48,7 +48,7 @@
         } else {
           $scope.editVendor = {
             addresses: [{isPrimary: true}],
-            contacts: [getEmptyContact(true)],
+            contacts: [getEmptyContact()],
             products: []
           };
 
@@ -82,20 +82,12 @@
           location.isPrimary = true;
         };
 
-        $scope.addContact = function () {
-          $scope.editVendor.contacts.unshift(getEmptyContact(false));
-        };
-
-        $scope.removeContact = function (index) {
-          $scope.editVendor.contacts.splice(index, 1);
-        };
-
-        function getEmptyContact(value) {
+        function getEmptyContact() {
           return {
             avatar: {
             },
             phoneNumbers: [{typeNumber: "MOBILE"}],
-            subscription: {ticket: value}
+            subscription: {ticket: true}
           };
         }
 
@@ -183,22 +175,6 @@
             }
           }
         };
-
-        $scope.$watch('editVendor.contacts', function () {
-          if ($scope.editVendor) {
-            var countSubscription = 0;
-            for (var i = 0; i < $scope.editVendor.contacts.length; i++) {
-              if ($scope.editVendor.contacts[i].subscription.ticket) {
-                countSubscription++;
-              }
-            }
-            if (countSubscription < 1) {
-              $scope.showSubscribeError = true
-            } else {
-              $scope.showSubscribeError = false
-            }
-          }
-        }, true);
 
         function setCurrentTimeZone(timeZoneObject) {
           $scope.editVendor.addresses[0].locale = timeZoneObject;
