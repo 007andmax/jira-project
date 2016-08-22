@@ -39,6 +39,11 @@
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
 
+        $scope.clientTypes = ['Clinic', 'Dental'];
+        $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
+        CompaniesService.getIndustries(function (resp) {
+          $scope.industries = resp;
+        });
 
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
           if (!$stateParams.companyId) {

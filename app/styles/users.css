@@ -27,7 +27,12 @@
   box-shadow: 0 4px 25px 0 rgba(10,45,89,.1);
 }
 
-@media (min-width: 1000px) {
+@media (max-width: 1440px) {
+  .users-list .user-card {
+    width: calc(100% / 3 - 30px);
+  }
+}
+@media (max-width: 1025px) {
   .users-list .user-card {
     width: calc(100% / 2 - 30px);
   }
@@ -35,7 +40,7 @@
 
 @media (min-width: 1880px) {
   .users-list .user-card {
-    width: calc(100% / 3 - 30px);
+    width: calc(100% / 4 - 30px);
   }
 }
 
@@ -191,7 +196,7 @@
 }
 
 .users-list .user-actions {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 0 30px;
 }
 
@@ -222,7 +227,7 @@
 }
 @media only screen and (min-width: 1380px) and (max-width: 1500px) {
   .users-list .user-card {
-    min-width: 370px !important;
+    /*min-width: 370px !important;*/
   }
   .users-list .user-actions .btn-user-chat{
     display: none;
@@ -241,7 +246,7 @@
 .user-company,
 .user-timing {
   width: 100%;
-  padding: 0 30px;
+  padding: 0 20px;
   color: #1f2a37;
 }
 

@@ -17,8 +17,12 @@
         </span>
 
       </div>
-      <div class="col-2" style="width: 367px; height: 12px">
-        <!--<span>DESCRIPTION</span>-->
+      <div class="col-2" ng-click="sortDevicesTab('agentVersion')">
+        <span class="sort-span">AGENT VERSION
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderDevicesBy === '-agentVersion', 'active': orderDevicesBy.indexOf('agentVersion') > -1}"></i>
+        </span>
+
       </div>
 
       <div class="col-3" ng-click="sortDevicesTab('type')">
@@ -60,14 +64,20 @@
             <span class="control-indicator"></span>
           </label>
 
-          <div class="checkbox-caption" tooltip="{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}"
+          <div class="checkbox-caption" tooltip="{{ (agent.hostName | unknownFilter) || agent.ip }}"
                trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
-            <span trimmed-tooltip-container>{{ (agent.hostName | unknownFilter) || 'Name is not defined' }}</span>
+            <span trimmed-tooltip-container>{{ (agent.hostName | unknownFilter) || agent.ip }}</span>
           </div>
         </div>
       </div>
 
-      <div class="col-2" style="width: 367px;height: 29px"></div>
+      <div class="col-2">
+        <div class="agent-version">
+          {{ agent.agentVersion }}
+          <i class="icn-md icn-agent-version-updated pull-right" ng-show="!agentDeprecated"></i>
+          <i class="icn-md icn-agent-version-old pull-right" ng-show="agentDeprecated"></i>
+        </div>
+      </div>
 
       <!--<div class="col-2" ng-show="device.description | unknownFilter">-->
       <!--<div class="device-desc"><span>{{ agent.description }}</span>-->
@@ -220,6 +230,11 @@
               </li>
 
             </ul>
+          </div>
+
+          <div class="btn btn-default pull-left has-tooltip" tooltip-placement="top" ng-show="agentDeprecated"
+               tooltip="Update Agent" ng-click="updateAgent()">
+            <i class="icn-sm icn-attachments-download"></i>
           </div>
 
           <div class="btn btn-default has-tooltip pull-right" ng-click="remove()"

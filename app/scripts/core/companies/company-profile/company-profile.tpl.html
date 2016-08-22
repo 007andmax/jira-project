@@ -71,11 +71,11 @@
             'icn-user-phone': currentLocation.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
               Phone: {{ currentLocation.phoneNumbers[0].number }}
             </li>
-            <li class="info-type">
-              Service type:
+            <li class="info-type" ng-if="companyData.serviceType">
+              Service type: {{ companyData.serviceType }}
             </li>
-            <li class="info-type">
-              Client type:
+            <li class="info-type" ng-if="companyData.clientType">
+              Client type: {{ companyData.clientType }}
             </li>
           </ul>
 

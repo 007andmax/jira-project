@@ -671,6 +671,11 @@
       Utils.handleCallback(future, callback);
     }
 
+    function getIndustries(callback) {
+      var future = $http.get('/company/getIndustries');
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -708,7 +713,8 @@
       savePermissions: savePermissions,
       getTechRoles: getTechRoles,
       getEmailAlias: getEmailAlias,
-      saveEmailAlias: saveEmailAlias
+      saveEmailAlias: saveEmailAlias,
+      getIndustries: getIndustries
     }
 
   }]);

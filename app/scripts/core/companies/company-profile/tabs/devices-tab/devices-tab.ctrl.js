@@ -3,16 +3,30 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
-    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService',
+    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService',
       'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, DevicesService, RemoteAccessService, SharedStateService, $rootScope, UserConfirmationsService) {
+      function ($scope, DevicesService, RemoteAccessService, ConstantsService, SharedStateService, $rootScope, UserConfirmationsService) {
+
         var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var lastAgentArr = ConstantsService.getConstant('rest.server.agent.version').split('.');
+        var currentAgentArr = $scope.agent.agentVersion.split('.');
+
+        for (var i = 0; i < lastAgentArr.length; i++) {
+          if (lastAgentArr[i] > currentAgentArr[i]) {
+            $scope.agentDeprecated = true;
+            break;
+          }
+        }
 
         $scope.highlightDevice = function () {
           if (globalSearch.deviceFilter) {
             $rootScope.$broadcast('showFilteredDevice-' + globalSearch.deviceFilter);
             globalSearch.deviceFilter = undefined;
           }
+        };
+
+        $scope.updateAgent = function () {
+          DevicesService.sendAgentUpdateRequest($scope.company.id, $scope.agent.id);
         };
 
         $scope.remoteAccess = function (connectionType) {

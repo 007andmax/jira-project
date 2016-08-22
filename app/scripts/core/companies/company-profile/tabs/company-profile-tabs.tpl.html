@@ -23,13 +23,6 @@
 
         <li ng-class="{'active': currentOpenTab === 'devices', 'hide': !isHasDevices}" style="cursor: pointer;">
           <a ui-sref="companyProfile({ tabName: 'devices' })">
-            Devices
-            <span class="text-muted">{{ agents.length }}</span>
-          </a>
-        </li>
-
-        <li ng-class="{'active': currentOpenTab === 'agents', 'hide': !isHasDevices}" style="cursor: pointer;">
-          <a ui-sref="companyProfile({ tabName: 'agents' })">
             Agents
             <span class="text-muted">{{ agents.length }}</span>
           </a>
