@@ -142,6 +142,8 @@
               $scope.ticketAgent = $scope.agentList.find(function (agent) {
                 return agent.id === value.deviceId;
               });
+            } else {
+              $scope.ticketAgent = null;
             }
           });
 
