@@ -138,7 +138,14 @@
   right: 20px;
 }
 .badge-red{
+  font-weight: bold;
+  color: white;
   background-color: #e53935;
+}
+.badge-orange{
+  font-weight: bold;
+  color: white;
+  background-color: #FFC107;
 }
 .slider-pos{
   width: 50px;

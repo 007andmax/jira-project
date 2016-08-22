@@ -88,8 +88,7 @@
           <li class="invoice-table" qt-toggle-slider style="cursor: pointer;"
               ng-repeat="invoice in invoices | filter: filterInvoicesByCompany | orderBy : orderByForInvoices : orderInvoices.reverse"
               ng-controller="quicktech.core.recurring.invoiceCtrl"
-              on-finish-render="loadingFinished()"
-              ng-class="{'warning-order': invoice.leftGenerations === 1, 'danger-order': invoice.leftGenerations === 0}">
+              on-finish-render="loadingFinished()">
 
             <div qt-ts-toggler ng-hide="editInvoiceId === invoice.id">
               <div class="table-invoice-item clearfix">
@@ -99,7 +98,12 @@
                 <div order-title="invoice.title" class="long-text"></div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
                 <div>{{ frequency[invoice.frequency] || invoice.customFrequency + (invoice.customFrequency == 1 ? ' day' : ' days')}}</div>
-                <div>{{ invoice.endDate | date:'dd MMM yyyy' }}</div>
+                <div>
+                  <span class="badge"
+                        ng-class="{'badge-orange': invoice.leftGenerations === 1, 'badge-red': invoice.leftGenerations === 0}">
+                    {{ invoice.endDate | date:'dd MMM yyyy' }}
+                  </span>
+                </div>
                 <div>{{ invoice.generatedCount }}</div>
                 <!--<div class="numbs">{{ invoice.number }}</div>-->
                 <div>

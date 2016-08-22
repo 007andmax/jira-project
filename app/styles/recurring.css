@@ -368,12 +368,6 @@
 li.invoice-table {
   cursor: auto;
 }
-li.invoice-table.warning-order {
-  background-color: rgba(255,167,38,0.1);
-}
-li.invoice-table.danger-order {
-  background-color: rgba(229,57,53,0.1);
-}
 .invoice-update .update-content .ticket-add-amount {
   display: block;
 
