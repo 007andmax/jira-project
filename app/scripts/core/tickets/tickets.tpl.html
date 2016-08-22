@@ -4,7 +4,7 @@
 
     <div class="ticket-list">
       <ul class="tickets" tu-tickets-container>
-        <li class="ticket" ng-repeat="ticket in tickets track by ticket.id" on-finish-render="onFinishRendering()"
+        <li class="ticket {{ ticket.priorityLevel.toLowerCase() }}-priority-border" ng-repeat="ticket in tickets track by ticket.id" on-finish-render="onFinishRendering()"
             ng-controller="quicktech.core.tickets.ticketCtrl" ticket-review-size
             ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
             ui-sref="tickets.details({ ticketId: ticket.id, remoteParams: null })">

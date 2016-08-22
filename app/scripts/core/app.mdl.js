@@ -57,7 +57,10 @@
         controller: 'quicktech.core.tickets.ticketDetailsCtrl'
       }))
       .state('users', waitForServices({
-        url: '/clients/users',
+        url: '/clients/users?view',
+        params: {
+          view: 'grid'
+        },
         templateUrl: '/html/scripts/core/users/users.tpl.html',
         controller: 'quicktech.core.users.usersCtrl'
       }))
@@ -67,7 +70,10 @@
         controller: 'quicktech.core.users.createUserCtrl'
       }))
       .state('companies', waitForServices({
-        url: '/clients/companies',
+        url: '/clients/companies?view',
+        params: {
+          view: 'grid'
+        },
         templateUrl: '/html/scripts/core/companies/companies.tpl.html',
         controller: 'quicktech.core.companies.companiesCtrl'
       }))

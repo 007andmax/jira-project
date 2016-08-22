@@ -1,58 +1,66 @@
 <div class="users-content">
+  <div class="change-view-actions">
+    <div class="btn btn-lg btn-primary" ui-sref="users({ view: 'grid' })"
+         ng-class="{'active': usersView === 'grid'}">Grid View
+    </div>
+    <div class="btn btn-lg btn-primary" ui-sref="users({ view: 'list' })"
+         ng-class="{'active': usersView === 'list'}">List View
+    </div>
+  </div>
 
-  <div ui-view></div>
+  <div ng-if="usersView === 'grid'">
+    <div ui-view></div>
+    <div class="users-list clearfix" count-nodes-in-line="[userNode]" ng-model="usersInLine">
+      <div ng-repeat="user in (shownUsers = (users | filter : usersFilter | orderBy: getUserName))"
+           ng-controller="quicktech.core.users.userCtrl" on-finish-render="countNodes()">
 
-  <div class="users-list clearfix" count-nodes-in-line="[userNode]" ng-model="usersInLine">
-    <div ng-repeat="user in (shownUsers = (users | filter : usersFilter | orderBy: getUserName))"
-         ng-controller="quicktech.core.users.userCtrl" on-finish-render="countNodes()">
+        <div class="user-card" userNode ng-show="editUser.id != user.id"
+             show-model-element="{{'show-after-save-' + user.id}}" scroll-offset="110">
 
-      <div class="user-card" userNode ng-show="editUser.id != user.id"
-           show-model-element="{{'show-after-save-' + user.id}}" scroll-offset="110">
+          <div class="content">
 
-        <div class="content">
+            <ul class="user-badges">
 
-          <ul class="user-badges">
+              <li class="icn-sm badge-admin persistent-tooltip" ng-show="user.role === 'ADMIN'"
+                  tooltip="admin" tooltip-append-to-body="true" tooltip-placement="top"></li>
 
-            <li class="icn-sm badge-admin persistent-tooltip" ng-show="user.role === 'ADMIN'"
-                tooltip="admin" tooltip-append-to-body="true" tooltip-placement="top"></li>
+              <li class="icn-sm {{ getUserSubscribeClass() }} persistent-tooltip"
+                  ng-show="user.subscription && (user.subscription.ticket || user.subscription.invoice)"
+                  tooltip="{{ getUserSubscribeTooltip() }}" tooltip-append-to-body="true"
+                  tooltip-placement="top"></li>
 
-            <li class="icn-sm {{ getUserSubscribeClass() }} persistent-tooltip"
-                ng-show="user.subscription && (user.subscription.ticket || user.subscription.invoice)"
-                tooltip="{{ getUserSubscribeTooltip() }}" tooltip-append-to-body="true"
-                tooltip-placement="top"></li>
+            </ul>
 
-          </ul>
+            <div class="title pull-left">
 
-          <div class="title pull-left">
+              <h3 class="name pull-left" tooltip="{{ getUserName(user) }}"
+                  trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
+                <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
+              </h3>
 
-            <h3 class="name pull-left" tooltip="{{ getUserName(user) }}"
-                trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
-              <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
-            </h3>
+              <a href="javascript:void(0)" class="hit-area pull-left has-tooltip"
+                 ng-if="PermissionsService.isAllowed('EDIT_USERS')"
+                 tooltip-placement="top" tooltip="Edit user" ng-click="setEditUserId(user.id); formToCenter()">
+                <i class="icn-sm icn-edit"></i>
+              </a>
 
-            <a href="javascript:void(0)" class="hit-area pull-left has-tooltip"
-               ng-if="PermissionsService.isAllowed('EDIT_USERS')"
-               tooltip-placement="top" tooltip="Edit user" ng-click="setEditUserId(user.id); formToCenter()">
-              <i class="icn-sm icn-edit"></i>
-            </a>
-
-          </div>
-
-          <div class="status pull-left" ng-if="!user.company.default">
-            <div class="user-company pull-left has-tooltip" trimmed-tooltip="1"
-                 tooltip-placement="bottom" tooltip="{{ getUserCompanyName(user) }}"
-                 tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip[1]() }}">
-              <i class="icn-sm icn-user-company"></i>
-              <span trimmed-tooltip-container> {{ getUserCompanyName(user) }}</span>
             </div>
-          </div>
 
-          <div class="status pull-left" ng-if="user.designation">
-            <span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
-            <span class="label label-primary">{{ user.designation }}</span>
-          </div>
+            <div class="status pull-left" ng-if="!user.company.default">
+              <div class="user-company pull-left has-tooltip" trimmed-tooltip="1"
+                   tooltip-placement="bottom" tooltip="{{ getUserCompanyName(user) }}"
+                   tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip[1]() }}">
+                <i class="icn-sm icn-user-company"></i>
+                <span trimmed-tooltip-container> {{ getUserCompanyName(user) }}</span>
+              </div>
+            </div>
 
-          <div class="user-actions pull-left">
+            <div class="status pull-left" ng-if="user.designation">
+              <span class="dot" ng-class="{on: user.online, off: !user.online}"></span>
+              <span class="label label-primary">{{ user.designation }}</span>
+            </div>
+
+            <div class="user-actions pull-left">
 
             <!--<div class="dropdown pull-left">-->
 
@@ -70,120 +78,329 @@
 
             <!--</div>-->
 
-            <div class="btn btn-default pull-left has-tooltip" ng-show="user.primaryEmail && user.primaryEmail.length > 0"
-                 email-to="user.primaryEmail" data-placement="top" tooltip="Send Email">
-              <i class="icn-sm icn-user-mail"></i>
-            </div>
+              <div class="btn btn-default pull-left has-tooltip"
+                   ng-show="user.primaryEmail && user.primaryEmail.length > 0"
+                   email-to="user.primaryEmail" data-placement="top" tooltip="Send Email">
+                <i class="icn-sm icn-user-mail"></i>
+              </div>
 
             <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
                  <!--tooltip-placement="top" tooltip="chat">-->
               <!--<i class="icn-sm icn-user-chat"></i>-->
             <!--</div>-->
 
-            <div class="more pull-left dropdown">
+              <div class="more pull-left dropdown">
 
-              <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip"
-                 aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
-                 tooltip-placement="top" tooltip="More">
-                <i class="icn-more icn-sm"></i>
-              </a>
+                <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip"
+                   aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
+                   tooltip-placement="top" tooltip="More">
+                  <i class="icn-more icn-sm"></i>
+                </a>
 
-              <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu" role="menu">
 
-                <li><a tabindex="-1" href="javascript:void(0)">Chat</a></li>
+                  <li><a tabindex="-1" href="javascript:void(0)">Chat</a></li>
 
-                <li class="dropdown-submenu">
+                  <li class="dropdown-submenu">
 
-                  <a tabindex="-1" href="javascript:void(0)">Set {{ user.firstName }} Privilege</a>
+                    <a tabindex="-1" href="javascript:void(0)">Set {{ user.firstName }} Privilege</a>
 
-                  <div class="dropdown-submenu-wrapper">
-                    <ul class="dropdown-menu dropdown-privilege">
+                    <div class="dropdown-submenu-wrapper">
+                      <ul class="dropdown-menu dropdown-privilege">
 
-                      <li ng-class="{active:user.role==='USER'}" ng-click="changeUserRole(user.id, 'USER')">
-                        <a tabindex="-1" href="javascript:void(0)"> User </a>
-                      </li>
+                        <li ng-class="{active:user.role==='USER'}" ng-click="changeUserRole(user.id, 'USER')">
+                          <a tabindex="-1" href="javascript:void(0)"> User </a>
+                        </li>
 
-                      <li ng-class="{active:user.role==='ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')">
-                        <a tabindex="-1" href="javascript:void(0)"> Administrator </a>
-                      </li>
+                        <li ng-class="{active:user.role==='ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')">
+                          <a tabindex="-1" href="javascript:void(0)"> Administrator </a>
+                        </li>
 
-                    </ul>
-                  </div>
+                      </ul>
+                    </div>
 
-                </li>
+                  </li>
 
-                <li class="dropdown-submenu">
+                  <li class="dropdown-submenu">
 
-                  <a tabindex="-1" href="javascript:void(0)">Subscribe {{ user.firstName }} to...</a>
+                    <a tabindex="-1" href="javascript:void(0)">Subscribe {{ user.firstName }} to...</a>
 
-                  <div class="dropdown-submenu-wrapper" stop-propagation="click">
-                    <ul class="dropdown-menu dropdown-subscribe">
+                    <div class="dropdown-submenu-wrapper" stop-propagation="click">
+                      <ul class="dropdown-menu dropdown-subscribe">
 
-                      <li ng-click="subscribeUser(user, 'ticket')">
-                        <a tabindex="-1" href="javascript:void(0)">
-                          <div class="clearfix">
-                            <label class="control checkbox pull-left">
-                              <input type="checkbox"
-                                     ng-checked="user.subscription.ticket" ng-disabled="disabledCheckbox">
-                              <span class="control-indicator"></span>
-                              Ticket Updates
-                            </label>
-                          </div>
-                        </a>
-                      </li>
+                        <li ng-click="subscribeUser(user, 'ticket')">
+                          <a tabindex="-1" href="javascript:void(0)">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox"
+                                       ng-checked="user.subscription.ticket" ng-disabled="disabledCheckbox">
+                                <span class="control-indicator"></span>
+                                Ticket Updates
+                              </label>
+                            </div>
+                          </a>
+                        </li>
 
-                      <li ng-click="subscribeUser(user, 'invoice')">
-                        <a tabindex="-1" href="javascript:void(0)">
-                          <div class="clearfix">
-                            <label class="control checkbox pull-left">
-                              <input type="checkbox"
-                                     ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
-                              <span class="control-indicator"></span>
-                              Invoice Updates
-                            </label>
-                          </div>
-                        </a>
-                      </li>
+                        <li ng-click="subscribeUser(user, 'invoice')"
+                            ng-if="isLastUserWithInvoiceSubscription(user.id)">
+                          <a tabindex="-1" href="javascript:void(0)">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox"
+                                       ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
+                                <span class="control-indicator"></span>
+                                Invoice Updates
+                              </label>
+                            </div>
+                          </a>
+                        </li>
 
-                    </ul>
-                  </div>
+                      </ul>
+                    </div>
 
-                </li>
+                  </li>
 
-                <li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')">
-                  <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUsers()">
-                    Archive this Contact
-                  </a>
-                </li>
+                  <li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
+                      && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)">
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUsers()">
+                      Archive this Contact
+                    </a>
+                  </li>
 
-              </ul>
+                </ul>
+              </div>
             </div>
+
+            <div class="user-total-tickets pull-left">
+              <i class="icn-sm icn-user-tickets"></i>
+              <span>Sbmt. Tickets</span> {{ user.userStatistic.ticketsSubmitted || 0 }}
+            </div>
+
+            <div class="user-number pull-left" ng-hide="user.phoneNumbers.length < 1">
+              <i class="icn-sm {{ getPriorityNumberInfo('CLASS') }}"></i>
+              <span> {{ getPriorityNumberInfo('NUMBER') }}</span>
+            </div>
+
           </div>
 
-          <div class="user-total-tickets pull-left">
-            <i class="icn-sm icn-user-tickets"></i>
-            <span>Sbmt. Tickets</span> {{ user.userStatistic.ticketsSubmitted || 0 }}
-          </div>
-
-          <div class="user-number pull-left" ng-hide="user.phoneNumbers.length < 1">
-            <i class="icn-sm {{ getPriorityNumberInfo('CLASS') }}"></i>
-            <span> {{ getPriorityNumberInfo('NUMBER') }}</span>
+          <div class="avatar" ng-class="{'no-avatar': !user.avatar}">
+            <img ng-src="{{ getUserAvatarUrl(user) }}">
           </div>
 
         </div>
 
-        <div class="avatar" ng-class="{'no-avatar': !user.avatar}">
-          <img ng-src="{{ getUserAvatarUrl(user) }}">
+        <div ng-if="checkEditUserId($index, usersInLine)">
+          <div class="clearfix"></div>
+          <div ng-include="'/html/scripts/core/users/user-edit.tpl.html'" style="margin-bottom: 30px;"></div>
         </div>
 
       </div>
-
-      <div ng-if="checkEditUserId($index, usersInLine)">
-        <div class="clearfix"></div>
-        <div ng-include="'/html/scripts/core/users/user-edit.tpl.html'" style="margin-bottom: 30px;"></div>
-      </div>
-
     </div>
   </div>
 
+  <ul class="qt-list qt-users" style="margin-bottom: 150px; padding: 0 25px;" ng-if="usersView === 'list'">
+
+    <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
+      <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
+        <span class="sort-span">
+          Name
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'name'}"></i>
+        </span>
+      </div>
+
+      <div class="col-lg-2 col-xs-2" ng-click="setOrderByUsers('company')">
+        <span class="sort-span">
+          Company
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'company'}"></i>
+        </span>
+      </div>
+
+      <div class="col-lg-2 col-xs-2" ng-click="setOrderByUsers('phone')">
+        <span class="sort-span">
+          Contact No.
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'phone'}"></i>
+        </span>
+      </div>
+
+      <div class="col-lg-1 col-xs-1" ng-click="setOrderByUsers('type')">
+        <span class="sort-span">
+          Type
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'type'}"></i>
+        </span>
+      </div>
+
+      <div class="col-lg-1 col-xs-2">Subscription</div>
+
+      <div class="col-lg-1 col-xs-1" ng-click="setOrderByUsers('ticket')">
+        <span class="sort-span">
+          Tickets
+          <i class="icn-sm sort-icon icn-sort"
+             ng-class="{'rotate': orderUsers.reverse, 'active': orderUsers.field === 'ticket'}"></i>
+        </span>
+      </div>
+
+      <div class="col-lg-2 col-xs-1"></div>
+    </li>
+
+    <li ng-if="editedUser && editedUser.newUser" style="min-height: 100px" qt-scroll-to="center"
+        ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/edit-user.tpl.html'"></li>
+
+    <li ng-repeat="user in users | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse track by user.id"
+        ng-controller="quicktech.core.users.userCtrl"
+        show-model-element="{{ 'show-user-on-save-' + user.id }}"
+        ng-style="{'min-height': editedUser && editedUser.id === user.id ? '100px' : 'unset'}">
+
+      <div ng-if="editedUser && editedUser.id === user.id"
+           ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/edit-user.tpl.html'"></div>
+
+      <div ng-if="!editedUser || editedUser.id !== user.id" style="display: flex;">
+        <div class="col-lg-3 col-xs-3">
+          <div class="user-bio">
+            <div class="pull-left avatar">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+              <i class="on bottom"></i>
+            </div>
+
+            <div class="user-name pull-left" trimmed-tooltip="0"
+                 tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
+              <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
+            </div>
+            <span class="label label-light">{{ user.designation }}</span>
+
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-xs-2">
+          {{ getUserCompanyName(user) }}
+        </div>
+
+        <div class="col-lg-2 col-xs-2">
+          <div class="clearfix">
+          <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
+            <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
+            'icn-user-fax': phoneNumber.typeNumber === 'FAX',
+            'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
+            {{ phoneNumber.number }}
+          </span>
+          </div>
+        </div>
+
+        <div class="col-lg-1 col-xs-1">
+          <div class="user-account-type dropdown" style="height: 100%">
+
+            <div class="label-wrapper" aria-expanded="false" data-toggle="dropdown" style="height: 100%">
+              <span>{{ user.role }}</span>
+            </div>
+
+            <ul class="dropdown-menu dropdown-privilege">
+
+              <li ng-class="{'active': user.role === 'USER'}">
+                <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole(user.id, 'USER')">
+                  User
+                </a>
+              </li>
+
+              <li ng-class="{'active': user.role === 'ADMIN'}">
+                <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserRole(user.id, 'ADMIN')">
+                  Administrator
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+
+        <div class="col-lg-1 col-xs-2 dropdown">
+
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" data-toggle="dropdown"
+               tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
+            <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
+          </div>
+
+          <ul class="dropdown-menu dropdown-subscribe">
+
+            <li>
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
+                <div class="clearfix">
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
+                    <span class="control-indicator"></span> Ticket Updates
+                  </label>
+                </div>
+              </a>
+            </li>
+
+            <li ng-hide="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
+                <div class="clearfix">
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                    <span class="control-indicator"></span> Invoice Updates
+                  </label>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <div class="col-lg-1 col-xs-1">
+        <span class="user-submitted-tickets">
+          {{ user.userStatistic.ticketsSubmitted || '0' }}
+        </span>
+        </div>
+
+        <div class="col-lg-2 col-xs-1">
+          <div class="list-actions pull-right">
+
+            <!--<div class="dropdown pull-left">-->
+
+            <!--<div class="btn btn-default pull-left has-tooltip disabled"-->
+            <!--data-toggle="dropdown" tooltip-placement="top" tooltip="logged in devices">-->
+            <!--<i class="icn-sm icn-user-devices"></i>-->
+            <!--</div>-->
+
+            <!--<ul class="dropdown-menu devices-menu dropdown-menu-right" role="menu">-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-server"></i>File.Server</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-computer"></i>Skynet.2013</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-mobile"></i>Mobile.Jack</a></li>-->
+            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-fax"></i>Fax.Sublime</a></li>-->
+            <!--</ul>-->
+            <!--</div>-->
+
+            <div class="btn btn-default pull-left has-tooltip" ng-click="setEditedUser(user)"
+                 ng-if="PermissionsService.isAllowed('EDIT_USERS')"
+                 tooltip-placement="top" tooltip="Edit">
+              <i class="icn-sm icn-edit"></i>
+            </div>
+
+            <div class="btn btn-default btn-user-mail pull-left has-tooltip" ng-show="user.primaryEmail"
+                 email-to="user.primaryEmail" tooltip-placement="top" tooltip="Email">
+              <i class="icn-sm icn-user-mail"></i>
+            </div>
+
+            <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+                 ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
+                      && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
+                 tooltip-placement="top" tooltip="Archive this User">
+              <i class="icn-sm icn-remove-token"></i>
+            </div>
+
+            <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
+            <!--tooltip-placement="top" tooltip="chat" ng-click="startChat()">-->
+            <!--<i class="icn-sm icn-user-chat"></i>-->
+            <!--</div>-->
+
+          </div>
+        </div>
+      </div>
+    </li>
+
+  </ul>
 </div>

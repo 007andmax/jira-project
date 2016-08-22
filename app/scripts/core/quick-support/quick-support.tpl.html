@@ -1,4 +1,10 @@
-<div>
+<div class="quick-support-wrapper">
+  <div class="quick-support-helper">
+    <p style="opacity: 0.87">To create a new support request push <strong>PLUS</strong> icon</p>
+    <div class="btn btn-success add-session-button has-tooltip" ng-click="addQuickSession()" tooltip-placement="top" tooltip="Create">
+      <i class="icn-sm icn-plus"></i>
+    </div>
+  </div>
   <ul class="quick-support-list">
     <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true"
         ng-show="showAllSession ? true : (remoteSession.performer.id === currentUser.id)">
