@@ -50,9 +50,9 @@
 
           $scope.filterUpdateUser = function (item) {
             var isCurrentUser = item.id === $scope.currentUser.id,
-              isAssignedUser,
-              isCreatedUser,
-              isAlreadyShared;
+              isAssignedUser = false,
+              isCreatedUser = false,
+              isAlreadyShared = false;
 
             if ($scope.ticketDetails) {
               var shares = $scope.ticketDetails.shares || [];
@@ -62,21 +62,21 @@
               isAlreadyShared = shares.find(function (shared) {
                 return (shared.user ? shared.user.id : shared.contact.id) === item.id;
               });
-            } else {
+            } else if ($scope.ticket) {
               var assignedUserId;
 
-              if ($scope.ticket) {
-                if (!$scope.ticket.ticketAssignTo) {
-                  if ($scope.ticket.isAssignToMe) {
-                    assignedUserId = $scope.currentUser.id;
-                  }
-                } else {
-                  assignedUserId = $scope.ticket.ticketAssignTo.id;
+              if (!$scope.ticket.ticketAssignTo) {
+                if ($scope.ticket.isAssignToMe) {
+                  assignedUserId = $scope.currentUser.id;
                 }
+              } else {
+                assignedUserId = $scope.ticket.ticketAssignTo.id;
               }
 
               isAssignedUser = assignedUserId && item.id === assignedUserId;
-              isCreatedUser = item.id === $scope.currentUser.id;
+              isCreatedUser = isCurrentUser;
+            } else {
+              isCurrentUser = false;
             }
 
             if (isCurrentUser || isAssignedUser || isCreatedUser || isAlreadyShared) {

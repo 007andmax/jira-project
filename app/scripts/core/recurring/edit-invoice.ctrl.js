@@ -4,13 +4,16 @@
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
     ['$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter', 'UsersService',
-      'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'TaxRatesService',
+      'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'TaxRatesService', 'Utils',
       function ($scope, RecurringService, CompaniesService, ServicesService, $filter, UsersService,
-                ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService) {
+                ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService, Utils) {
 
-        var day = 1000 * 60 * 60 * 24;
-        var form;
+        var day = 1000 * 60 * 60 * 24, form,
+          allClientUsers = UsersService.getClientUsers().filter(function (user) {
+            return !user.default;
+          });
 
+        $scope.clients = [];
         $scope.frequency = {
           sevenDays: '7 days',
           fifteenDays: '15 days',
@@ -172,17 +175,20 @@
         };
 
         $scope.chooseCompany = function (company) {
+          $scope.clients.splice(0, $scope.clients.length);
+
           if (!company) {
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
             $scope.taxRatesCoef = 0;
             $scope.editInvoice.services = [];
-            $scope.clients = UsersService.getClientUsers();
+            Utils.customizeArray(allClientUsers, $scope.clients);
             return;
           }
 
           resetSharedUsers(company);
-          $scope.clients = UsersService.getAllByCompanyId(company.id);
+          Utils.customizeArray(UsersService.getAllByCompanyId(company.id), $scope.clients);
+
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
             id: company.id
