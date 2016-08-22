@@ -1,0 +1,17 @@
+<div>
+  <div class="default-services-header" ng-hide="loadingInProgress['default']"
+       ng-controller="quicktech.core.services.defaultServicesCtrl">
+
+    <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
+
+    <div class="add-service-btn-wrapper" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+      <div class="btn btn-info has-tooltip" ng-show="!showCreateService"
+           ng-click="showCreateServiceForm()"
+           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add service">
+        <i class="icn-sm icn-plus"></i>
+      </div>
+    </div>
+
+  </div>
+  <loading-indicator loading-trigger="loadingInProgress['default']"></loading-indicator>
+</div>
