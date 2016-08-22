@@ -15,6 +15,7 @@
           var rightPanelSharedState = SharedStateService.getSharedState('rightPanel');
           rightPanelSharedState.companyId = '';
 
+          $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
           $scope.TicketsPermissionsService = TicketsPermissionsService;
           $scope.allUpdatesLoaded = false;
           $scope.selectUpdateSharedUser = {};
@@ -508,6 +509,50 @@
               $scope.ticketSharedUsersList[i].notify = isNotifyAll;
             }
           };
+
+          $scope.isShowingErrors = function (form, field) {
+            return form && form[field] && (form[field].$dirty || $scope.tryToSaveTicket) && form[field].$invalid;
+          };
+
+          $scope.validateLink = function (link) {
+            $scope.validLink = {
+              required: !link,
+              pattern: !link.match($scope.linkPattern)
+            };
+          };
+
+          $scope.setEditingTicket = function (value) {
+            $scope.editingTicket = value;
+
+            if (value) {
+              var ticket = $scope.ticketDetails;
+              $scope.editedTicket = {
+                id: ticket.id,
+                subject: ticket.subject,
+                note: ticket.note
+              };
+              $scope.disabledSaveButton = false;
+              $scope.tryToSaveTicket = false;
+            }
+          };
+
+          $scope.saveEditedTicket = function (form) {
+            if (form.$valid) {
+              $scope.disabledSaveButton = true;
+              $scope.tryToSaveTicket = false;
+              TicketsService.save($scope.editedTicket, function () {
+                $scope.editingTicket = false;
+              })
+            } else {
+              $scope.tryToSaveTicket = true;
+            }
+          };
+
+          $scope.$watch('currentUser.permissions', function (permissions) {
+            if (permissions && !$scope.PermissionsService.isAllowed('EDIT_TICKETS')) {
+              $scope.editingTicket = false;
+            }
+          });
 
           function closeTicket() {
             $scope.ticketClosing = true;

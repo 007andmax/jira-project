@@ -26,8 +26,6 @@
 
         RealTimeService.subscribe('/companyPaymentReceived/' + companyId, scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action === 'COMPANY_PAYMENT_RECEIVED') {
             Utils.defineReadOnlyProperty(result, 'value', result.value + newChange.data);
             if (callback) {
@@ -61,8 +59,6 @@
         Utils.customizeArray(resp.data, result);
 
         RealTimeService.subscribe('/todayReceivableChartPoint/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
-
-          console.log(newChange);
 
           if (newChange.action === 'TODAY_RECEIVABLE_CHART_POINT') {
 
@@ -124,8 +120,6 @@
         }
 
         RealTimeService.subscribe('/receivableInvoice', scope, function (newChange) {
-
-          console.log(newChange);
 
           if (newChange.action == 'INVOICE_SAVED') {
 

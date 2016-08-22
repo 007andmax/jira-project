@@ -38,7 +38,6 @@
         }
 
         RealTimeService.subscribe('/receiptArchive', scope, function (newChange) {
-          console.log(newChange);
 
           if (newChange.action === 'RECEIPT_ARCHIVE_ADDED') {
 

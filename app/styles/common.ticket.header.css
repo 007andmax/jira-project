@@ -118,9 +118,14 @@
   margin-top: 1px;
 }
 
-.ticket-header-actions > .btn,
+.ticket-header-actions .btn,
 .ticket-header-actions > .dropdown > .btn {
   margin-left: 10px;
+}
+
+.ticket-header-actions .ticket-edit-actions {
+  padding-right: 10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 @-moz-document url-prefix() {

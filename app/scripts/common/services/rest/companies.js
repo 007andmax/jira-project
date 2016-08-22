@@ -65,8 +65,6 @@
 
     RealTimeService.subscribe('/company', serviceScope, function (newChange) {
 
-      console.log(newChange);
-
       if (!initialized) {
         return;
       }
@@ -220,8 +218,6 @@
 
       RealTimeService.subscribe('/clientCompaniesInfo', scope, function (newChange) {
 
-        console.log(newChange);
-
         if (newChange.action == 'CLIENT_COMPANY_INFO') {
 
           var data = JSON.parse(newChange.data);
@@ -267,8 +263,6 @@
       });
 
       RealTimeService.subscribe('/clientCompaniesInfo', scope, function (newChange) {
-
-        console.log(newChange);
 
         if (newChange.action == 'CLIENT_COMPANY_INFO') {
 
@@ -598,8 +592,6 @@
 
         RealTimeService.subscribe('/companyContact', scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action == 'COMPANY_CONTACT') {
             list.splice(0, list.length);
             Utils.customizeArray(newChange.data, list);
@@ -607,8 +599,6 @@
         });
 
         RealTimeService.subscribe('/subscription/' + companyId, scope, function (newChange) {
-
-          console.log(newChange);
 
           if (!newChange.data.contact) {
             return;

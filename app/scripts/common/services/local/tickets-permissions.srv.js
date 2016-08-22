@@ -38,7 +38,7 @@
             return isBillable(ticket);
 
           } else if (option === 'shared') {
-            return ticket.sharedToCurrentUserAt;
+            return isSharedToCurrentUser(ticket);
 
           } else {
             return true;
@@ -111,7 +111,10 @@
         'UPDATE_AND_CLOSE': isUpdateAllowed,
         'DELETE_UPDATE': editTicketUpdate,
         'EDIT_UPDATE': editTicketUpdate,
-        'ADD_EXPENSE': isUpdateAllowed
+        'ADD_EXPENSE': isUpdateAllowed,
+        'EDIT_TICKET': function (ticket) {
+          return (!ticket.closedAt || isCanBeReOpened(ticket)) && !ticket.hasInvoice && PermissionsService.isAllowed('EDIT_TICKETS');
+        }
       };
 
       function isTicketOpen(ticket) {
@@ -141,7 +144,7 @@
 
         return isTicketOpen(ticket) &&
           ((ticket.assignedUser && $rootScope.currentUser && ticket.assignedUser.id === $rootScope.currentUser.id) ||
-          ticket.sharedToCurrentUserAt);
+          isSharedToCurrentUser(ticket));
       }
 
       function editTicketUpdate(ticket, updateCreator) {
@@ -150,6 +153,12 @@
         }
 
         return isTicketOpen(ticket) && updateCreator.id === $rootScope.currentUser.id;
+      }
+
+      function isSharedToCurrentUser(ticket) {
+        return ticket.shares && ticket.shares.some(function (share) {
+            return share.user && share.user.id === $rootScope.currentUser.id;
+          });
       }
 
       return {

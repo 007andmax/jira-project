@@ -109,8 +109,6 @@
 
       RealTimeService.subscribe('/companyEmailNotification', scope, function (newChange) {
 
-        console.log(newChange);
-
         if (newChange.action == 'COMPANY_EMAIL_NOTIFICATION') {
           Utils.customizeObj(newChange.data, info.activeAndNotDefault);
         }

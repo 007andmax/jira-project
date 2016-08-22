@@ -120,18 +120,18 @@
         </ul>
       </div>
 
-      <span style="float: right; margin-right: 0;">{{ userReadable(ticket.ticketSource) }}</span>
-
       <div class="text-muted"
            ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(ticket.assignedUser) }}
       </div>
 
       <div class="ticket-status pull-right">
-        <span class="label label-info pull-left" ng-show="ticket.unread">NEW</span>
-        <span class="ticket-unread-updates pull-left animation-hide" ng-show="ticket.hasNewUpdates">
+        <span class="label label-info pull-left" ng-show="ticket.unread" style="margin-right: 0;">NEW</span>
+        <span class="ticket-unread-updates pull-left animation-hide" ng-show="ticket.hasNewUpdates" style="margin-right: 0;">
           <i class="icn icn-sm icn-loading"></i>
         </span>
       </div>
+
+      <span style="float: right;">{{ userReadable(ticket.ticketSource) }}</span>
 
     </div>
 

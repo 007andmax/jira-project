@@ -44,8 +44,7 @@
 
                 $timeout(function () {
 
-                  var windowHeight = $(window).height(),
-                    ticketUpdates = element.find('[std-update]');
+                  var ticketUpdates = element.find('[std-update]');
 
                   for (var i = 0; i < ticketUpdates.length; i++) {
                     if (scope.firstUnreadUpdateId === ticketUpdates[i].getAttribute('std-update')) {
@@ -53,10 +52,10 @@
                       var windowWidth = window.innerWidth;
 
                       if (windowWidth > 1700) {
-                        element.nanoScroller({scrollTo: $(ticketUpdates[i]), scrollTop: windowHeight});
+                        element.nanoScroller({scrollTo: $(ticketUpdates[i])});
                       } else {
                         $('html, body').animate({
-                          scrollTop: ($(ticketUpdates[i]).offset().top - 180) + 'px'
+                          scrollTop: ($(ticketUpdates[i]).offset().top - 270) + 'px'
                         }, 'fast');
                       }
 

@@ -42,8 +42,9 @@
         //return frame.headers['user-name'];
       }, function (error) {
 
-        if (stompClient)
+        if (stompClient) {
           stompClient.disconnect();
+        }
 
         if (isInitialized) {
           console.log("Lost connection!! Trying to reconnect", error);
@@ -62,14 +63,16 @@
 
     function subscribeConfig(config) {
 
-      if (!isInitialized)
+      if (!isInitialized) {
         return;
+      }
 
       var subscription = stompClient.subscribe(
         "/user/watch" + config.url,
         function (message) {
-          //console.log(message);
-          config.callback(JSON.parse(message.body));
+          var newChange = JSON.parse(message.body);
+          console.log(newChange);
+          config.callback(newChange);
           config.scope.$apply();
         });
 

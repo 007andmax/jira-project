@@ -45,8 +45,6 @@
 
           RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, scope, function (newChange) {
 
-            console.log(newChange);
-
             if (!newChange.data.contact) {
               return;
             }
@@ -73,8 +71,6 @@
           });
 
           RealTimeService.subscribe('/vendorContacts', scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action == 'VENDOR_CONTACTS_SAVE') {
 
@@ -134,8 +130,6 @@
           Utils.customizeArray(resp.data, info);
 
           RealTimeService.subscribe('/vendorContacts', scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action == 'VENDOR_CONTACTS_SAVE') {
 

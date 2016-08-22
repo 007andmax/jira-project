@@ -18,8 +18,6 @@
 
         RealTimeService.subscribe('/vendor', scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action == 'VENDOR_SAVE') {
 
             var vendor = Utils.findById(list, newChange.data.id);
@@ -70,8 +68,6 @@
 
         RealTimeService.subscribe('/vendor', scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action == 'VENDOR_SAVE') {
 
             var vendor = Utils.findById(list, newChange.data.id);
@@ -117,8 +113,6 @@
       return Utils.getListByUrl('/vendor/autocomplete/list', callback, function (list) {
 
         RealTimeService.subscribe('/vendor', scope, function (newChange) {
-
-          console.log(newChange);
 
           if (newChange.action == 'VENDOR_SAVE') {
 

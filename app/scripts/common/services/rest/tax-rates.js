@@ -22,8 +22,6 @@
 
         RealTimeService.subscribe('/taxRate/' + companyId, scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action == 'TAX_RATE_SAVE') {
 
             var taxRate = Utils.findById(list, newChange.data.versionedId.id);

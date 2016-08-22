@@ -20,7 +20,7 @@
               content: description,
               title: "<div class='account-info'> " +
               "<div><span>Payment Terms</span>Net " + paymentTerms + "</div> " +
-              "<div><span>Account No.</span>" + accountNumber + "</div>" +
+              (accountNumber ? "<div><span>Account No.</span>" + accountNumber + "</div>" : "") +
               "</div>" +
               "<div class='url'> " +
               "<a href='javascript:void(0)'> " +

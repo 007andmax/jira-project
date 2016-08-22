@@ -61,7 +61,7 @@
             throw 'Cannot initialize CompaniesService!';
           });
         RealTimeService.subscribe('/user', serviceScope, function (newChange) {
-          console.log(newChange);
+
           if (!initialized) {
             return;
           }
@@ -116,8 +116,6 @@
         });
         RealTimeService.subscribe('/userSubmittedTicket', serviceScope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action === 'USER_SUBMITTED_TICKET') {
             var user = getOneById(newChange.data);
 
@@ -126,8 +124,6 @@
           }
         });
         RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, serviceScope, function (newChange) {
-
-          console.log(newChange);
 
           if (!newChange.data.user) {
             return;

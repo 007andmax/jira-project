@@ -20,8 +20,6 @@
 
         RealTimeService.subscribe('/recurringChart', scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action === 'RECURRING_CHART') {
 
             checkPoints(new Date(newChange.data.date));
@@ -85,8 +83,6 @@
         Utils.customizeArray(resp.data, recurring);
 
         RealTimeService.subscribe('/recurringTotal', scope, function (newChange) {
-
-          console.log(newChange);
 
           if (newChange.action === 'CLIENT_RECURRING_TOTAL') {
 
@@ -169,8 +165,6 @@
 
         RealTimeService.subscribe('/recurring', scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action == 'RECURRING_SAVED') {
 
             var invoice = Utils.findById(invoices, newChange.data.id);
@@ -215,8 +209,6 @@
         Utils.customizeArray(resp.data, invoices);
 
         RealTimeService.subscribe('/recurring/' + companyId, scope, function (newChange) {
-
-          console.log(newChange);
 
           if (newChange.action == 'RECURRING_SAVED') {
 

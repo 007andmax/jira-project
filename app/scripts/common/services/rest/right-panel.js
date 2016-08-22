@@ -56,7 +56,7 @@
         loadMoreActivities(scope, function (resp) {
           if (isNotSubscribed) {
             RealTimeService.subscribe('/activity', scope, function (newChange) {
-              console.log(newChange);
+
               if (newChange.action == 'ACTIVITY_CREATED') {
                 storage.lists[scope.$id].list.unshift(Utils.customizeObj(newChange.data));
               }
@@ -157,7 +157,7 @@
         });
 
         RealTimeService.subscribe('/activity', scope, function (newChange) {
-          console.log(newChange);
+
           if (newChange.action == 'ACTIVITY_CREATED') {
             list.unshift(Utils.customizeObj(newChange.data));
             list.pop();
@@ -240,8 +240,6 @@
 
         RealTimeService.subscribe('/rightBarUserInfo', scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action == 'RB_USER_INFO') {
             Utils.customizeObj(newChange.data, userInfo);
           }
@@ -277,8 +275,6 @@
         });
 
         RealTimeService.subscribe('/rightBarCompanyInfo/' + companyId, scope, function (newChange) {
-
-          console.log(newChange);
 
           if (newChange.action == 'RB_COMPANY_INFO') {
             Utils.customizeObj(newChange.data, companyInfo);

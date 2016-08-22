@@ -431,11 +431,6 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 /*vendors page*/
-.popover.vendor-popover {
-  /*width: 310px !important;*/
-  margin-left: 145px !important;
-}
-
 .vendor-cover-area {
   background-size: cover;
 }

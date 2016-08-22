@@ -101,8 +101,6 @@
 
         RealTimeService.subscribe('/service', scope, function (newChange) {
 
-          console.log(newChange);
-
           if (newChange.action == 'SERVICE_SAVED') {
             serviceSaved(newChange.data);
           } else if (newChange.action == 'SERVICE_LIST_SAVED') {

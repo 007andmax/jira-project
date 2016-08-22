@@ -27,8 +27,6 @@
 
           RealTimeService.subscribe('/resolvedTicketsCount/' + companyId, scope, function (newChange) {
 
-            console.log(newChange);
-
             if (newChange.action === 'RESOLVED_TICKETS_COUNT') {
               Utils.defineReadOnlyProperty(result, 'value', newChange.data);
             }
@@ -64,8 +62,6 @@
           Utils.customizeObj(resp.data, result);
 
           RealTimeService.subscribe('/ticketsResolutionTimeChart/' + companyId, scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action === 'TICKETS_RESOLUTION_TIME_CHART') {
               Utils.customizeObj(newChange.data, result);
@@ -103,8 +99,6 @@
 
           RealTimeService.subscribe('/billedTimeStatistic/' + companyId, scope, function (newChange) {
 
-            console.log(newChange);
-
             if (newChange.action === 'BILLED_TIME_STATISTIC') {
               Utils.defineReadOnlyProperty(result, 'value', newChange.data);
             }
@@ -140,8 +134,6 @@
           Utils.customizeObj(resp.data, result);
 
           RealTimeService.subscribe('/todayReceivableChartPoint/' + companyId, scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action === 'TODAY_RECEIVABLE_CHART_POINT') {
               Utils.defineReadOnlyProperty(result, 'value', newChange.data.receivableLeft);
@@ -180,8 +172,6 @@
 
           function realTimeCompanyResults(companyId) {
             RealTimeService.subscribe('/companyPaymentReceived/' + companyId, scope, function (newChange) {
-
-              console.log(newChange);
 
               if (newChange.action === 'COMPANY_PAYMENT_RECEIVED') {
                 var currentVal = result[companyId] ? result[companyId] : 0;
@@ -226,8 +216,6 @@
 
           function realTimeCompanyResults(companyId) {
             RealTimeService.subscribe('/resolvedTicketsCount/' + companyId, scope, function (newChange) {
-
-              console.log(newChange);
 
               if (newChange.action === 'RESOLVED_TICKETS_COUNT') {
                 Utils.defineReadOnlyProperty(result, companyId, newChange.data);
@@ -298,8 +286,6 @@
 
           RealTimeService.subscribe('/companyPaymentReceived/' + companyId, scope, function (newChange) {
 
-            console.log(newChange);
-
             if (newChange.action === 'COMPANY_PAYMENT_RECEIVED') {
               var currentDate = new Date();
 
@@ -366,8 +352,6 @@
             if (itCurrentDay(new Date(latestDayStr))) {
               RealTimeService.subscribe('/todayReceivableChartPoint/' + companyId, scope, function (newChange) {
 
-                console.log(newChange);
-
                 if (newChange.action === 'TODAY_RECEIVABLE_CHART_POINT') {
                   if (itCurrentDay(new Date(newChange.data.date))) {
                     Utils.defineReadOnlyProperty(result, latestDayStr, newChange.data.total);
@@ -429,8 +413,6 @@
           Utils.customizeObj(resp.data, result);
 
           RealTimeService.subscribe('/ticketResolution/' + companyId, scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action === 'TICKET_RESOLVED') {
               var day = getDay(newChange.data);
@@ -556,8 +538,6 @@
           Utils.customizeObj(resp.data, result);
 
           RealTimeService.subscribe('/userSubmittedTicket', scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action === 'USER_SUBMITTED_TICKET') {
               var prevValue = result[newChange.data] || 0;

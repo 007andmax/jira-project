@@ -12,7 +12,7 @@
     function ($http, $rootScope, RealTimeService, Utils) {
 
       var scope = $rootScope.$new();
-      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_INVOICED', 'TICKET_SHARE', 'MARKED_AS_SPAM'];
+      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_INVOICED', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
       var queries, loadingInProcess;
       var operators = {
         NULL: function (value) {
@@ -292,7 +292,7 @@
               Utils.customizeObj(newChange.data, update);
             } else {
               update = Utils.customizeObj(newChange.data);
-              ticket.updates.push(update);
+              ticket.updates.unshift(update);
             }
 
             if (attachments && attachments.length) {
@@ -309,8 +309,6 @@
         });
 
         RealTimeService.subscribe('/tagsSpecifying/' + ticket.id, targetScope, function (newChange) {
-
-          console.log(newChange);
 
           if (newChange.action === 'TAG_TICKET_SPECIFYING_SAVED') {
             ticket.tags.splice(0, ticket.tags.length);
@@ -916,6 +914,11 @@
         });
       }
 
+      function saveEditedTicket(ticket, callback) {
+        var future = $http.put('/v2/tickets/edit', ticket);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         getList: fetchTickets,
         getCurrentlyWorkingWith: getCurrentlyWorkingWith,
@@ -941,7 +944,8 @@
         loadRemainingTicketUpdates: loadRemainingTicketUpdates,
         markUpdateAsRead: markUpdateAsRead,
         updateExpenseInTicketUpdate: updateExpenseInTicketUpdate,
-        changeLinkedAgent: changeLinkedAgent
+        changeLinkedAgent: changeLinkedAgent,
+        save: saveEditedTicket
       }
 
     }

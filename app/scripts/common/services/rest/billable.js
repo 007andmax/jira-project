@@ -78,8 +78,6 @@
 
           RealTimeService.subscribe('/billablePage', scope, function (newChange) {
 
-            console.log(newChange);
-
             if (newChange.action == 'BILLABLE_EXPENSE_ADDED') {
 
               var clientCompanyId = newChange.data.companyId;
@@ -185,8 +183,6 @@
 
           RealTimeService.subscribe('/billedTicketsSumAdded', scope, function (newChange) {
 
-            console.log(newChange);
-
             if (newChange.action === 'BILLED_TICKETS_SUM_ADDED') {
               Utils.defineReadOnlyProperty(result, "value", result.value + newChange.data);
             }
@@ -213,8 +209,6 @@
           Utils.customizeArray(resp.data, resultsList);
 
           RealTimeService.subscribe('/billedTicketsSumAdded', scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action === 'BILLED_TICKETS_SUM_ADDED') {
               var lastPoint = resultsList[resultsList.length - 1];

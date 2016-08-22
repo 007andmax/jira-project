@@ -72,7 +72,6 @@
         }
 
         RealTimeService.subscribe('/tagManagement', scope, function (newChange) {
-          console.log(newChange);
 
           if (newChange.action === 'TAG_SAVED') {
             var tagForUpdate = Utils.findById(tags, newChange.data.id);

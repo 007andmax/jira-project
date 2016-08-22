@@ -72,7 +72,6 @@
 
           RealTimeService.subscribe('/oneTimeConnection', $rootScope, function (newChange) {
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
-              console.log(newChange);
               $rootScope.openCreateTicketForm(newChange.data.sessionId, newChange.data.duration, newChange.data.clientCompany.id, newChange.data.deviceId);
             }
           })
@@ -198,7 +197,6 @@
 
         return Utils.getListByUrl('/remote/getRemoteSessions', callback, function (list) {
           RealTimeService.subscribe('/oneTimeConnection', scope, function (newChange) {
-            console.log(newChange);
 
             if (newChange.data.isOneTime) {
               if (newChange.action === 'ONE_TIME_CONNECTION_CLOSED' && !newChange.data.id) {
@@ -481,7 +479,7 @@
           }
 
           RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
-            console.log(newChange);
+
             if (newChange.action === 'NETWORK_SCAN') {
 
               var data = newChange.data,
@@ -641,7 +639,6 @@
         });
 
         RealTimeService.subscribe('/agentSettings/' + companyId, serviceScope, function (newChange) {
-          console.log(newChange);
 
           if (newChange.action === 'MASTER_AGENT_CHANGED') {
 

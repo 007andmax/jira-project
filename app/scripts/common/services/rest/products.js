@@ -146,8 +146,6 @@
 
             RealTimeService.subscribe('/product', scope, function (newChange) {
 
-              console.log(newChange);
-
               if (newChange.action == 'PRODUCT_SAVED') {
 
                 var product = Utils.findById(data.list, newChange.data.versionedId.id);
@@ -186,8 +184,6 @@
           });
 
           RealTimeService.subscribe('/productCategory', scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action == 'PRODUCT_CATEGORY_SAVED') {
 
@@ -237,8 +233,6 @@
         return Utils.getListByUrl("/products/categories", callback, function (list) {
 
           RealTimeService.subscribe('/productCategory', scope, function (newChange) {
-
-            console.log(newChange);
 
             if (newChange.action == 'PRODUCT_CATEGORY_SAVED') {
 

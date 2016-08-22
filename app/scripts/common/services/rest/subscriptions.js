@@ -115,8 +115,6 @@
 
           RealTimeService.subscribe('/subscription/' + companyId, scope, function (newChange) {
 
-            console.log(newChange);
-
             if (newChange.action == 'SUBSCRIPTION_SAVED') {
               if (!newChange.data.user) {
                 return;
