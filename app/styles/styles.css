@@ -9850,3 +9850,18 @@ button.close {
 .bold {
   font-weight: 700;
 }
+.change-view-actions{
+  text-align: right;
+  margin: 10px;
+}
+.change-view-actions .view-change-btn{
+  width: 30px;
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+  background: transparent;
+}
+.change-view-actions .svg-icn{
+  width: 100%;
+}
+

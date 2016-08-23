@@ -12,16 +12,21 @@
   z-index: 1;
   top: 78px;
   transition: .2s ease all .3s;
-  width: calc(100% - 1137px);
+  width: calc(100% - 394px);
   padding: 30px;
   padding-bottom: 24px;
 
   background-color: rgba(255, 255, 255, 0.94);
 }
+.opened-ticket-list .ticket-header.ticket-fixed-header {
+  width: calc(100% - 934px);
+}
 .left-panel-closed .ticket-header.ticket-fixed-header {
-  width: calc(100% - 897px);
+  width: calc(100% - 154px);
   transition: .2s ease all 0s;
-
+}
+.left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
+  width: calc(100% - 693px);
 }
 .right-panel-closed .ticket-header.ticket-fixed-header {
   width: calc(100% - 856px);

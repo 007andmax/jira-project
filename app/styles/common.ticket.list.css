@@ -88,14 +88,14 @@
   background-color: transparent;
   content: '';
 }
-.ticket:hover:before {
-  left: 0;
-  background-color: #e7ecf2;
-}
-.ticket:hover:after {
-  right: 0;
-  background-color: #e7ecf2;
-}
+/*.ticket:hover:before {*/
+  /*left: 0;*/
+  /*background-color: #e7ecf2;*/
+/*}*/
+/*.ticket:hover:after {*/
+  /*right: 0;*/
+  /*background-color: #e7ecf2;*/
+/*}*/
 /*Ticket Hover - End*/
 
 /*Ticket Hover Action Ellipse - Start*/
@@ -282,13 +282,22 @@
   }
 }
 .low-priority-border{
-  border-left:10px solid #4caf50 !important;
+  border-left: 5px solid #4caf50 !important;
 }
 .medium-priority-border{
-  border-left:10px solid #FFC107 !important;
+  border-left: 5px solid #FFC107 !important;
 }
 .high-priority-border{
-  border-left:10px solid #e53935 !important;
+  border-left: 5px solid #e53935 !important;
+}
+.active.low-priority-border {
+  border-left-color: #6AFF6E !important;
+}
+.active.medium-priority-border {
+  border-left-color: #FFFC00 !important;
+}
+.active.high-priority-border {
+  border-left-color: #FF241A !important;
 }
 .ellipsis{
   white-space: nowrap;

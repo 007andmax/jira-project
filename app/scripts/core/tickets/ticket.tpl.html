@@ -12,6 +12,7 @@
 
     <div class="ticket-list-header clearfix">
 
+
       <p class="pull-left text-muted ellipsis">
         {{ getUserName(user) }}
         <span ng-if="!company.isDefault">
@@ -21,7 +22,12 @@
       </p>
 
       <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
-
+      <div class="ticket-status pull-right">
+        <span class="label label-info pull-left" ng-show="ticket.unread" style="margin-right: 0;">NEW</span>
+        <span class="ticket-unread-updates pull-left animation-hide" ng-show="ticket.hasNewUpdates" style="margin-right: 0;">
+          <i class="icn icn-sm icn-loading"></i>
+        </span>
+      </div>
       <!--<ul class="ticket-tags pull-right"-->
       <!--ng-if="TicketsPermissionsService.isTagsVisible(listType, currentUser.role)">-->
       <!--<li ng-repeat="tag in ticket.tags">-->
@@ -124,14 +130,7 @@
            ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(ticket.assignedUser) }}
       </div>
 
-      <div class="ticket-status pull-right">
-        <span class="label label-info pull-left" ng-show="ticket.unread" style="margin-right: 0;">NEW</span>
-        <span class="ticket-unread-updates pull-left animation-hide" ng-show="ticket.hasNewUpdates" style="margin-right: 0;">
-          <i class="icn icn-sm icn-loading"></i>
-        </span>
-      </div>
-
-      <span style="float: right;">{{ userReadable(ticket.ticketSource) }}</span>
+      <span class="text-muted" style="float: right;">{{ userReadable(ticket.ticketSource) }}</span>
 
     </div>
 

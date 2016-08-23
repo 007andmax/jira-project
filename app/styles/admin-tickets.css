@@ -79,7 +79,7 @@
 
 .main-container {
   /*margin: 0 15px;*/
-  padding-top: 85px;
+  padding-top: 80px;
   padding-bottom: 150px;
 }
 @-moz-document url-prefix() {
@@ -113,30 +113,29 @@ body.opened-ticket-list .content-wrapper .container-ticket-list {
 
 body.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-list {
   position: relative;
-
   width: 540px;
 }
 .content-wrapper .container-ticket-content {
   display: none;
 }
 .opened-ticket .content-wrapper .container-ticket-content {
-  right: 281px;
+  right: 77px;
 
   display: block;
   float: right;
 
-  width: calc(100% - 1137px);
+  width: calc(100% - 77px);
   padding-bottom: 30px;
 }
 .opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
   position: fixed;
-  right: 281px;
+  right: 77px;
   transition: .2s ease all .3s;
-
+  width: calc(100% - 933px);
   height: 100%;
 }
 .left-panel-closed.opened-ticket-list.opened-ticket .content-wrapper .container-ticket-content {
-  width: calc(100% - 897px);
+  width: calc(100% - 693px);
   transition: .2s ease all 0s;
 
 }

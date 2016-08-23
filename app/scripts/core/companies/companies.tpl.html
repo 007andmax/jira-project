@@ -1,9 +1,15 @@
 <div>
   <div class="change-view-actions">
-    <div class="btn btn-lg btn-primary" ui-sref="companies({ view: 'grid' })"
-         ng-class="{'active': companiesView === 'grid'}">Grid View</div>
-    <div class="btn btn-lg btn-primary" ui-sref="companies({ view: 'list' })"
-         ng-class="{'active': companiesView === 'list'}">List View</div>
+    <div class="tile-btn view-change-btn" ui-sref="companies({ view: 'grid' })"
+         ng-class="{'active': companiesView === 'grid'}">
+      <img class="svg-icn tile" alt="tile"
+           ng-src="{{ companiesView !== 'grid' ? 'images\\input-icons\\tile-gray.svg' : 'images\\input-icons\\tile-deep-gray.svg' }}">
+    </div>
+    <div class="list-btn view-change-btn" ui-sref="companies({ view: 'list' })"
+         ng-class="{'active': companiesView === 'list'}">
+      <img class="svg-icn list" alt="list"
+           ng-src="{{ companiesView !== 'list' ? 'images\\input-icons\\list-gray.svg' : 'images\\input-icons\\list-deep-gray.svg' }}">
+    </div>
   </div>
 
   <div class="company-profile-content companies-list not-charts-companies-page clearfix" ng-if="companiesView === 'grid'">
@@ -249,7 +255,7 @@
     <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
       <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
       <span class="sort-span">
-        Name-Address-City-Province
+        Name
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
       </span>
@@ -303,6 +309,7 @@
         ng-controller="quicktech.core.companies.companyCtrl"
         ui-sref="companyProfile({ companyId: company.id, tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' })">
       <div class="col-xs-3">
+        <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="">
         <span class="list-company-name">{{ company.name }}</span>
         <span style="display: flex;">{{ location }}</span>
       </div>

@@ -4,7 +4,7 @@
 
 .users-list {
   /*border-top: 1px solid #e7ecf2;*/
-  padding-top: 30px;
+  /*padding-top: 30px;*/
   width: 100%;
   padding-right: 30px;
 }
@@ -15,7 +15,7 @@
   height: 236px;
   margin-left: 30px;
   margin-bottom: 30px;
-  width: calc(100% / 1 - 30px);
+  width: calc(100% / 3 - 30px);
   /*min-width: 405px !important;*/
   -webkit-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   -o-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
