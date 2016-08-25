@@ -1,14 +1,13 @@
 .wrapper {
   width: 250px !important;
-  border: 1px solid black;
-  padding: 0 !important;}
+  padding: 10px !important;}
   .wrapper .row .interior {
     display: block; }
     .wrapper .row .interior .col-md-12 {
       padding: 5px;
       text-align: center; }
     .wrapper .row .interior .agent-head__description {
-      line-height: 2em;
+      line-height: 1em;
       font-size: 1.4em; }
     .wrapper .row .interior .icons-container .svg-icn {
       width: 70%;
@@ -76,5 +75,7 @@
     .internal-wrap .template-actions .or {
       color: #b2becd;
       margin-left: 5px; }
-
+.download-agent-btn{
+  margin-top: 5px;
+}
 /*# sourceMappingURL=agent-install.css.map */
