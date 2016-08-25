@@ -418,7 +418,7 @@ module.exports = function (grunt) {
               }
             ],
             [
-              /<img[^\>]*[^\>\S]+src=['"]([^'"\)#]+)(#.+)?["']/gm,
+              /<img[^\>]*[^\>\S]+(?:ng\-?)src=['"]([^'"\)#]+)(#.+)?["']/gm,
               'Update the HTML with the new img filenames',
               undefined,
               function (s) {
