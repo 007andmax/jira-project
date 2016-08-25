@@ -51,7 +51,10 @@
            ng-required="true" ng-model="product.item.sale" ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
            hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
   </div>
-
+  <div class="btn  has-tooltip"
+       ng-click="addProduct(editInvoiceForm)" tooltip-placement="top" tooltip="Add Product">
+    <i class="icn-sm icn-plus-dark"></i>
+  </div>
   <div class="col-6">
     <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete" ng-click="deleteProduct()">
       <i class="icn-sm icn-delete"></i>

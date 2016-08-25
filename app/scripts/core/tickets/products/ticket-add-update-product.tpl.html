@@ -26,14 +26,6 @@
         </div>
       </div>
 
-      <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
-           style="width: 140px; float: left;">
-
-        <input type="text" maxlength="14" class="form-control" name="productSerialNumber"
-               placeholder="Serial Number" ng-model="productExpense.serialNumber" ng-maxlength="36"
-               tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
-      </div>
-
       <div class="col-4" style="width: 70px; float: left;"
            ng-class="{'has-error': isShowingErrors(addProductForm, 'productQty')}">
 
@@ -53,16 +45,16 @@
       </div>
 
       <div class="col-6" style="float: left;" ng-if="ticketUpdate.products.length > 1">
-        <div class="btn btn-primary has-tooltip" tooltip="Remove" tooltip-placement="top"
+        <div class="btn  has-tooltip" tooltip="Remove" tooltip-placement="top"
              ng-click="removeProduct()">
-          <i class="icn-sm icn-remove-token"></i>
+          <i class="icn-sm icn-delete"></i>
         </div>
       </div>
 
       <div style="float: left;" ng-if="$last">
-        <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Product" tooltip-placement="top"
+        <div class="btn has-tooltip add-expense-btn" tooltip="Add Product" tooltip-placement="top"
              ng-click="addProduct()">
-          <i class="icn-sm icn-plus"></i>
+          <i class="icn-sm icn-plus-dark"></i>
         </div>
       </div>
 

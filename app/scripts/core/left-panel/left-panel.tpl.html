@@ -31,8 +31,8 @@
       </div>
     </div>
   </div>
-  <div class="left-panel-full" ng-hide="isLeftPanelHidden">
-    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'dashboard' && !isLeftPanelHidden">
+  <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'dashboard' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'tickets' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'tickets' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
@@ -100,7 +100,7 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'companies' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'companies' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
@@ -116,7 +116,7 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'users' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'users' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
@@ -131,7 +131,7 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'accounting' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'accounting' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
@@ -158,7 +158,7 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-if="openedCategory === 'products' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'products' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>

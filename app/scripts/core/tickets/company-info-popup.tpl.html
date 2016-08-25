@@ -2,7 +2,7 @@
   <div>
     <!--<img ng-src="{{ getCompanyLogoUrl(company) }}" alt="...">-->
     <p style="font-weight: 700;">{{ company.name }}</p>
-    <div style="white-space: nowrap">
+    <div style="white-space: nowrap; overflow: hidden;-ms-text-overflow: ellipsis;text-overflow: ellipsis;">
       <i style="margin: 4px 5px 0 0 ; float: left;" class="icn-sm icn-sb-location"></i>
       Address: <span>{{ companyAddress.addressWithSuitNumberAndPostalCode }}</span>
     </div>
@@ -11,7 +11,7 @@
       <span>{{ companyAddress.timeZone.name }}</span>
     </div>
     <div ng-if="companyAddress.phoneNumbers && companyAddress.phoneNumbers.length && companyPhoneNumber">
-      <i class="icn-sm" ng-class="{'icn-iphone': companyAddress.phoneNumbers[0].typeNumber === 'MOBILE',
+      <i style="margin: 4px 5px 0 0 ; float: left;" class="icn-sm" ng-class="{'icn-iphone': companyAddress.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': companyAddress.phoneNumbers[0].typeNumber === 'FAX',
             'icn-user-phone': companyAddress.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
       Phone: {{ companyPhoneNumber }}
