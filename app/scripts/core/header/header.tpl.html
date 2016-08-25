@@ -195,7 +195,7 @@
             <li role="presentation">
               <a role="menuitem" tabindex="-1"
                  ng-if="getClientCompanies().length && PermissionsService.isAllowed('CREATE_USERS')"
-                 ui-sref="users.create({ view: 'grid' })">User</a>
+                 ng-click="createUser()">User</a>
             </li>
 
             <li role="presentation">

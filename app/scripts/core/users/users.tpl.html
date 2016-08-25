@@ -1,12 +1,10 @@
 <div class="users-content">
   <div class="change-view-actions">
-    <div class="tile-btn view-change-btn" ui-sref="users({ view: 'grid' })"
-         ng-class="{'active': usersView === 'grid'}">
+    <div class="tile-btn view-change-btn" ng-class="{'active': usersView === 'grid'}" ng-click="changeView('grid')">
       <img class="svg-icn tile" alt="tile"
            ng-src="{{ usersView !== 'grid' ? 'images/input-icons/tile-gray.svg' : 'images/input-icons/tile-deep-gray.svg' }}">
     </div>
-    <div class="list-btn view-change-btn" ui-sref="users({ view: 'list' })"
-         ng-class="{'active': usersView === 'list'}">
+    <div class="list-btn view-change-btn" ng-class="{'active': usersView === 'list'}" ng-click="changeView('list')">
       <img class="svg-icn list" alt="list"
            ng-src="{{ usersView !== 'list' ? 'images/input-icons/list-gray.svg' : 'images/input-icons/list-deep-gray.svg' }}">
     </div>

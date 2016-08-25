@@ -5,8 +5,9 @@
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
     ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
+      'localStorageService',
       function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
-                SharedStateService, PermissionsService, $state) {
+                SharedStateService, PermissionsService, $state, localStorageService) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {
           $state.go('tickets');
@@ -16,7 +17,7 @@
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
           availableViews = ['list', 'grid'];
 
-        $scope.usersView = $state.params.view || 'grid';
+        $scope.usersView = localStorageService.get('users-view') || 'grid';
         $scope.editUser = undefined;
         $scope.orderUsers = {
           field: 'name',
@@ -28,12 +29,15 @@
           return !user.default;
         });
 
-        $scope.$watch(function () {
-          return $state.params.view;
-        }, function (value) {
-          if (availableViews.indexOf(value) !== -1) {
-            $scope.usersView = value;
+        $scope.changeView = function (view) {
+          if (availableViews.indexOf(view) !== -1) {
+            $scope.usersView = view;
+            localStorageService.set('users-view', view);
           }
+        };
+
+        $scope.$on('createNewUser', function () {
+          $scope.usersView = 'grid';
         });
 
         $scope.$watch('shownUsers.length', function (usersCount) {

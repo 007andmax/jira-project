@@ -3,9 +3,10 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
-    ['$modal', 'TicketsService', '$stateParams', '$timeout', '$document',
+    ['$modal', 'TicketsService', '$stateParams', '$timeout', '$document', 'localStorageService',
       'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
-      function ($modal, TicketsService, $stateParams, $timeout, $document, UserNotificationService, SharedStateService) {
+      function ($modal, TicketsService, $stateParams, $timeout, $document, localStorageService, UserNotificationService,
+                SharedStateService) {
 
         return {
           restrict: 'A',
@@ -17,6 +18,10 @@
               ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
             scope.globalSearch = SharedStateService.getSharedState('globalSearch');
+
+            if (!localStorageService.get('ticket-list-view')) {
+              localStorageService.set('ticket-list-view', 'opened');
+            }
 
             scope.$watch(function () {
               if (ticketsHeaderState.searchFilter) {
@@ -84,7 +89,7 @@
 
               if (!$stateParams.ticketId) {
                 body.addClass("opened-ticket-list");
-              } else if (windowWidth > 1700) {
+              } else if (windowWidth > 1700 && localStorageService.get('ticket-list-view') === 'opened') {
                 body.addClass("opened-ticket-list");
                 element.addClass('has-scrollbar nano');
               }

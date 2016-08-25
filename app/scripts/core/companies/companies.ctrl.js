@@ -5,8 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
+      'localStorageService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state,
-                SharedStateService, DevicesService, PermissionsService) {
+                SharedStateService, DevicesService, PermissionsService, localStorageService) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
           availableViews = ['list', 'grid'];
@@ -15,7 +16,7 @@
           $state.go('tickets');
         }
 
-        $scope.companiesView = $state.params.view || 'grid';
+        $scope.companiesView = localStorageService.get('companies-view') || 'grid';
         $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies().filter(function (company) {
@@ -29,13 +30,12 @@
           reverse: false
         };
 
-        $scope.$watch(function () {
-          return $state.params.view;
-        }, function (value) {
-          if (availableViews.indexOf(value) !== -1) {
-            $scope.companiesView = value;
+        $scope.changeView = function (view) {
+          if (availableViews.indexOf(view) !== -1) {
+            $scope.companiesView = view;
+            localStorageService.set('companies-view', view);
           }
-        });
+        };
 
         $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
