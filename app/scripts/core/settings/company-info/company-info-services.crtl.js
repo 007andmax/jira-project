@@ -6,22 +6,7 @@
     ['$scope', 'ServicesService', '$rootScope',
       function ($scope, ServicesService, $rootScope) {
 
-        $scope.services = ServicesService.getServicesData($scope, true, function (resp) {
-          if ($scope.currentCompany.status === "SIGN_UP" && $scope.services.length === 0) {
-            var onsiteServices = {
-              name: 'Onsite Service',
-              rate: 75,
-              billable: true
-            };
-            var remoteServices = {
-              name: 'Remote Service',
-              rate: 65,
-              billable: true
-            };
-
-            $scope.services = [onsiteServices, remoteServices];
-          }
-        });
+        $scope.services = ServicesService.getServicesData($scope, true);
 
         $scope.showCreateServiceForm = function () {
           $rootScope.$broadcast('cancelEditForm');

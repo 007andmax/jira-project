@@ -103,7 +103,7 @@
 
           ServicesService.getAllByCompany($scope, fromRemoteCompanyId, function (resp) {
             $scope.ticket.serviceExpenses[0].item = resp.find(function (service) {
-                return service.name === 'Remote Service';
+                return service.name.toLowerCase() === 'remote service';
               }) || resp[0];
           });
 

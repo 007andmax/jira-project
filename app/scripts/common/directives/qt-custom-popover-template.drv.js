@@ -30,6 +30,12 @@
             popover.hide();
           };
 
+          newScope.forceShowPopover = function () {
+            popoverShown = true;
+            popover.show();
+            calcPosition($attrs.qtPopoverPosition);
+          };
+
           function togglePopover(e) {
             if (!$element[0].hasAttribute('disabled')) {
               if (popoverShown) {
@@ -102,24 +108,19 @@
             var left, top;
 
             if (position === 'top' || !position) {
-
               left = -popover.outerWidth() / 2 + trigger.outerWidth() / 2;
               top = -(popover.outerHeight() + 10);
-              popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
-
             } else if (position === 'bottom') {
-
               left = -popover.outerWidth() / 2 + trigger.outerWidth() / 2;
               top = trigger.outerHeight() + 10;
-              popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
-
             } else if (position === 'bottom-left-align') {
-
               left = 0;
               top = trigger.outerHeight() + 10;
-              popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
-
+            } else if (position === 'bottom-right-align') {
+              left = -popover.outerWidth() + trigger.outerWidth();
+              top = trigger.outerHeight() + 10;
             }
+            popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
           }
 
           function hideOnOutsideClick(e) {

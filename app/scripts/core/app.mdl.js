@@ -173,6 +173,9 @@
       }))
       .state('settings.companyInfo', waitForServices({
         url: '/companyInfo',
+        params: {
+          isAddressFocused: false
+        },
         templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',
         controller: 'quicktech.core.settings.companyInfoCtrl'
       }))
@@ -272,13 +275,6 @@
             globalSearch.goBack.tooltip = 'back to vendors';
           } else {
             globalSearch.goBack.isEnabled = false;
-          }
-        });
-
-        CompaniesService._addInitListener(function () {
-          var currentCompany = CompaniesService.getCurrentCompany();
-          if (currentCompany.status === 'SIGN_UP') {
-            $state.go('settings.companyInfo');
           }
         });
 

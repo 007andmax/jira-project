@@ -377,8 +377,8 @@
           <div>
             <div class="create-user-form">
 
-              <div address-autocomplete template-page="settings" save-func="saveContactInfo"
-                   ng-model="address" show-validation-messages="showRequiredFields"></div>
+              <div address-autocomplete template-page="settings" save-func="saveContactInfo" is-address-required="isAddressRequired"
+                   ng-model="address" show-validation-messages="isTryToSave" focus-address="isAddressFocused"></div>
 
               <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
                    country-code="{{address.countryCode}}" on-lost-focus="saveContactInfo"></div>
@@ -858,16 +858,21 @@
 
         <div class="form-row clearfix">
           <div class="form-group no-label full-width">
-            <div class="btn btn-lg btn-info pull-right"
-                 modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
-                 modal-window-class="invoice-modal-not-background"
-                 mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-                 mw-controller="quicktech.core.settings.invoicePreviewCtrl">
-              Preview Invoice
+            <div qt-popover-position="bottom-left-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
+                 qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
+                 style="display: inline-block;">
+              <div qt-popover-trigger="mouseenter" style="display: inline-block">
+                <div class="btn btn-lg btn-info pull-right" custom-disabled="{{ isCurrentCompanyAddressEmpty }}"
+                     modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+                     modal-window-class="invoice-modal-not-background"
+                     mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+                     mw-controller="quicktech.core.settings.invoicePreviewCtrl">
+                  Preview Invoice
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
       </form>
     </div>
 

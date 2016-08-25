@@ -17,8 +17,8 @@
         });
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
         $scope.currentUrl = ConstantsService.getConstant('website.dns');
-
-        $scope.showRequiredFields = $scope.currentCompany.status === 'SIGN_UP';
+        $scope.isAddressFocused = $stateParams.isAddressFocused || $scope.currentCompany.status === 'SIGN_UP';
+        $scope.isAddressRequired = true;
 
         $scope.emailNotifications = EmailSettingsService.getCompanyEmailNotification(function () {
           $scope.emailNotifications = $scope.emailNotifications.staticCopy();
@@ -39,8 +39,12 @@
           $scope.companyForSettingLoad = true;
         });
 
+        $scope.$watch('companyForSettingPage.addresses[0].address', function (address) {
+          $scope.isCurrentCompanyAddressEmpty = !address;
+        });
+
         $scope.isShowingErrors = function (form, fieldName) {
-          return form && form[fieldName] && (form[fieldName].$dirty || $scope.showRequiredFields) && form[fieldName].$invalid;
+          return form && form[fieldName] && form[fieldName].$dirty && form[fieldName].$invalid;
         };
 
         $scope.saveBusinessDaysHours = function (form) {
@@ -57,11 +61,10 @@
           })
         };
 
-        $scope.$on('$locationChangeStart', function (event) {
-          if ($scope.currentCompany.status === "SIGN_UP") {
-            event.preventDefault();
-          }
-        })
+        $scope.focusOnAddress = function () {
+          $scope.isAddressFocused = false;
+          $scope.$broadcast('focusOnElement');
+        };
 
       }]);
 

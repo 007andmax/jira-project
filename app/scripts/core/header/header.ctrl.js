@@ -14,6 +14,9 @@
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
+        $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
+
 
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
@@ -32,7 +35,7 @@
         };
 
         $scope.userReadable = function (text) {
-          var words = text.split(/[-_]/),
+          var words = text.split(/[\-_]/),
             result = '';
 
           for (var i = 0, len = words.length; i < len; i++) {
@@ -95,6 +98,22 @@
             $scope.ticketsSharedState = undefined;
           }
         });
+
+        $scope.initCompanyStatusWatch = function (hidePopoverFunc) {
+          var unwatch = $scope.$watch('currentCompany.status', function (newValue, oldValue) {
+            if (newValue === 'ACTIVE' && oldValue === 'SIGN_UP') {
+              hidePopoverFunc && hidePopoverFunc();
+              unwatch();
+            }
+          });
+
+          var unsubscribe = $scope.$on('$locationChangeStart', function () {
+            if ($scope.currentCompany.status === 'SIGN_UP') {
+              $scope.changeCompanyStatusToActive();
+              unsubscribe();
+            }
+          })
+        };
 
         $scope.isShowBulkAction = function () {
           return $scope.ticketsSharedState && $scope.ticketsSharedState.checkedTicketsIds.length;

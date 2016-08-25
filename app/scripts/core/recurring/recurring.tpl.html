@@ -1,19 +1,19 @@
 <div>
 
   <!--<div class="billable-head clearfix">-->
-    <!--<div class="chart-wrapper full-width">-->
-      <!--<div class="heading">-->
+  <!--<div class="chart-wrapper full-width">-->
+  <!--<div class="heading">-->
 
-        <!--<strong>Invoices Recurred</strong>-->
-        <!--<span>Last 30 Days</span>-->
-        <!--<span class="dot-sep"></span>-->
-        <!--<span>{{ last30DaysValue | currency:'$' :2 }}</span>-->
+  <!--<strong>Invoices Recurred</strong>-->
+  <!--<span>Last 30 Days</span>-->
+  <!--<span class="dot-sep"></span>-->
+  <!--<span>{{ last30DaysValue | currency:'$' :2 }}</span>-->
 
-      <!--</div>-->
+  <!--</div>-->
 
-      <!--<div billable-chart ng-model="recurringGraphData"></div>-->
+  <!--<div billable-chart ng-model="recurringGraphData"></div>-->
 
-    <!--</div>-->
+  <!--</div>-->
   <!--</div>-->
 
   <div class="billable-content" style="margin-top: 20px;">
@@ -28,11 +28,20 @@
           <li role="presentation" class="active">
             <a href="javascript:void(0)">Recurring Orders</a>
           </li>
-          <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
-               ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
-               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
-               ng-click="toogleEditForm('new-invoice')">
-            <i class="icn-sm icn-add-company"></i>
+          </li>
+          <div ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
+               style="text-align: right">
+            <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
+                 qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
+                 style="display: inline-block;">
+              <div qt-popover-trigger="mouseenter" style="display: inline-block">
+                <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
+                     tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
+                     ng-click="toogleEditForm('new-invoice')" custom-disabled="{{ isCurrentCompanyAddressEmpty }}">
+                  <i class="icn-sm icn-add-company"></i>
+                </div>
+              </div>
+            </div>
           </div>
 
         </ul>
@@ -97,7 +106,9 @@
 
                 <div order-title="invoice.title" class="long-text"></div>
                 <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
-                <div>{{ frequency[invoice.frequency] || invoice.customFrequency + (invoice.customFrequency == 1 ? ' day' : ' days')}}</div>
+                <div>{{ frequency[invoice.frequency] || invoice.customFrequency + (invoice.customFrequency == 1 ? ' day'
+                  : ' days')}}
+                </div>
                 <div>
                   <span class="badge"
                         ng-class="{'badge-orange': invoice.leftGenerations === 1, 'badge-red': invoice.leftGenerations === 0}">
@@ -119,13 +130,21 @@
 
                     <a>
                       <i class="icn-sm icn-description"
-                         popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom" popover-trigger="mouseenter"></i>
+                         popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom"
+                         popover-trigger="mouseenter"></i>
                     </a>
 
-                    <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE')">
-                      <i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top" tooltip-append-to-body="true"
-                         ng-click="toogleEditForm(invoice.id)"></i>
-                    </a>
+                    <span qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
+                         qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
+                         style="display: inline-block;" ng-if="PermissionsService.isAllowed('CREATE_INVOICE')">
+                      <span qt-popover-trigger="mouseenter" style="display: inline-block">
+                        <a custom-disabled="{{ !isCurrentCompanyAddressEmpty }}">
+                          <i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top"
+                             tooltip-append-to-body="true"
+                             ng-click="toogleEditForm(invoice.id)"></i>
+                        </a>
+                      </span>
+                    </span>
 
                     <a custom-disabled="{{ disabledDelete }}">
                       <i class="icn-sm icn-delete"

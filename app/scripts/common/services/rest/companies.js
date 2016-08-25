@@ -666,6 +666,10 @@
       Utils.handleCallback(future, callback);
     }
 
+    function changeCompanyStatusToActive() {
+      return $http.get('/company/changeStatusFromSignUpToActive');
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -704,7 +708,8 @@
       getTechRoles: getTechRoles,
       getEmailAlias: getEmailAlias,
       saveEmailAlias: saveEmailAlias,
-      getIndustries: getIndustries
+      getIndustries: getIndustries,
+      changeCompanyStatusToActive: changeCompanyStatusToActive
     }
 
   }]);
