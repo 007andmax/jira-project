@@ -32,6 +32,7 @@
 
           <li class="billable-main" event-toggle-slider="toggleBillableTickets"
               ng-controller="quicktech.core.billable.companyCtrl"
+              style="padding-left: 10px;padding-right: 10px;"
               ng-repeat="billableCompany in billableData | filterBillableCompany"
               on-finish-render="loadingFinished()">
 

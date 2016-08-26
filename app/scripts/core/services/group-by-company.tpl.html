@@ -4,6 +4,7 @@
     <li qt-toggle-slider ng-repeat="company in companies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name' track by company.id"
         ng-controller="quicktech.core.services.companyCtrl"
         on-finish-render="loadingFinished('companies')"
+        style="padding-left: 10px;padding-right: 10px;"
         event-toggle-slider="toggleServices">
 
       <div style="position: absolute;width: 100%;height: 71px;top: 0;z-index: 1;" ng-click="toggleServices()"></div>
