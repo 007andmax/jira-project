@@ -102,7 +102,7 @@
   0s;
 }
 
-.opened-ticket.opened-ticket-list .content-wrapper .container-ticket-list {
+.opened-ticket .content-wrapper .container-ticket-list {
   width: 0;
   overflow: hidden;
   height: 0;
