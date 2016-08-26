@@ -17,9 +17,8 @@
             body.addClass('opened-ticket');
 
             scope.$on('ticketDetailsLoad', function () {
-              element.fadeIn(1500, function () {
-                controlTicketList(null, true);
-              });
+              controlTicketList(null, true);
+              element.show();
             });
 
             scope.$on('toggleTicketsList', function () {

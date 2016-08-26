@@ -29,13 +29,21 @@
   width: calc(100% - 693px);
 }
 .right-panel-closed .ticket-header.ticket-fixed-header {
-  width: calc(100% - 856px);
+  width: calc(100% - 315px);
   right: 0;
 }
-.right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header {
+.right-panel-closed.left-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header {
   width: calc(100% - 616px);
   right: 0;
 }
+.right-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header{
+  width: calc(100% - 856px);
+}
+.right-panel-closed.left-panel-closed .ticket-header.ticket-fixed-header{
+  width: calc(100% - 77px);
+  right: 0;
+}
+
 
 @media only screen and (max-width: 1700px) {
   .ticket-header.ticket-fixed-header {
@@ -60,7 +68,11 @@
   .left-panel-closed .ticket-header.ticket-fixed-header {
     width: calc(100% - 157px);
   }
+  .btn-collapse{
+    display: none !important;
+  }
 }
+
 @media only screen and (max-width: 1024px) {
   .ticket-header.ticket-fixed-header {
     left: 76px;
@@ -156,4 +168,12 @@
 }
 .ticket-company-info .ticket-company-address {
   color: #94A4B8;
+}
+@media only screen and (min-width: 1316px) and (max-width: 1440px){
+  .opened-ticket-list .ticket-header.ticket-fixed-header {
+    width: calc(100% - 734px);
+  }
+  .right-panel-closed.opened-ticket-list .ticket-header.ticket-fixed-header{
+    width: calc(100% - 656px);
+  }
 }
