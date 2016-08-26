@@ -36,6 +36,7 @@
 
     <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
         ng-controller="quicktech.core.companies.usersTabCtrl"
+        style="padding-left: 10px;padding-right: 10px;"
         show-model-element="{{ 'show-user-on-save-' + user.id }}"
         ng-style="{'min-height': editedUser && editedUser.id === user.id ? '100px' : 'unset'}">
 

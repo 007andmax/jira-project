@@ -4705,6 +4705,9 @@ tbody.collapse.in {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.topNavbar-content .dropdown-menu > li > a{
+  padding:5px 10px;
+}
 .dropdown-submenu-wrapper > li {
   display: block;
   padding: 5px 20px;
