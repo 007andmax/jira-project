@@ -6,8 +6,8 @@
     </div>
   </div>
   <ul class="quick-support-list">
-    <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true"
-        ng-show="showAllSession ? true : (remoteSession.performer.id === currentUser.id)">
+    <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true track by remoteSession.id"
+        ng-show="(showAllSession || remoteSession.performer.id === currentUser.id) && remoteSession.id !== lastDeletedId">
       <div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
     </li>
   </ul>

@@ -51,7 +51,8 @@
         };
 
         $scope.deleteRemoteSession = function (sessionId) {
-          DevicesService.deleteRemoteSession(sessionId)
+          $scope.lastDeletedId = sessionId;
+          DevicesService.deleteRemoteSession(sessionId);
         };
 
         $scope.isUserOnline = function (session) {

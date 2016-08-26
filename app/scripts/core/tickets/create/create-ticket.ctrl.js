@@ -5,11 +5,11 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
     ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'fromRemoteCompanyId', 'fromRemoteDeviceId',
-      'ServicesService', '$timeout', 'quicktech.common.services.TicketsPermissionsService', '$state',
+      'ServicesService', '$timeout', 'quicktech.common.services.TicketsPermissionsService', '$state', 'Utils',
       'quicktech.common.services.PermissionsService',
       function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
                 UserNotificationService, sessionId, sessionTime, fromRemoteCompanyId, fromRemoteDeviceId, ServicesService,
-                $timeout, TicketsPermissionsService, $state, PermissionsService) {
+                $timeout, TicketsPermissionsService, $state, Utils, PermissionsService) {
 
         var agentsByCompany = [];
 
@@ -47,11 +47,9 @@
 
         $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (!item.isDefault) {
-            return item;
-          }
-        });
+        $scope.clientCompanies = CompaniesService.getClientCompanies();
+        Utils.deleteById($scope.clientCompanies, $scope.unassignedCompany.id);
+
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
         DevicesService.getDevicesCount($scope, function (agents) {
@@ -194,11 +192,8 @@
             }
 
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
-            $scope.clients = UsersService.getClientUsers().filter(function (item) {
-              if (!item.isDefault) {
-                return item;
-              }
-            });
+            $scope.clients = UsersService.getClientUsers();
+            Utils.deleteById($scope.clients, UsersService.getUnassignedUser($scope.unassignedCompany.id).id);
 
             $scope.ticketAgent = '';
           }

@@ -13,6 +13,9 @@
         var allUsers = [],
           clientUsers = [],
           clientCompanies = [],
+          realTimeAllUsers = UsersService.getAllUsers(),
+          realTimeClientUsers = UsersService.getClientUsers(),
+          realTimeClientCompanies = CompaniesService.getClientCompanies(),
           preventSearch = false;
 
         $scope.PermissionsService = PermissionsService;
@@ -36,7 +39,7 @@
             $scope.globalSearch.preventClearing = false;
           }
 
-          if (!allUsers.length) {
+          if (!allUsers.length || allUsers.length < realTimeAllUsers.length - 1) {
             allUsers = UsersService.getAllUsers().filter(function (user) {
               return !user.isDefault;
             }).map(function (user) {
@@ -48,7 +51,7 @@
             });
           }
 
-          if (!clientUsers.length) {
+          if (!clientUsers.length || clientUsers.length < realTimeClientUsers.length - 1) {
             clientUsers = UsersService.getClientUsers().filter(function (user) {
               return !user.isDefault;
             }).map(function (user) {
@@ -60,7 +63,7 @@
             });
           }
 
-          if (!clientCompanies.length) {
+          if (!clientCompanies.length || clientCompanies.length < realTimeClientCompanies.length - 1) {
             clientCompanies = CompaniesService.getClientCompanies().filter(function (company) {
               return !company.isDefault;
             }).map(function (item) {

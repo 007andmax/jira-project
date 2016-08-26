@@ -4,16 +4,15 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
-      '$timeout', 'quicktech.common.services.PhoneFormats',
+      '$timeout', 'quicktech.common.services.PhoneFormats', 'Utils',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
-                $timeout, PhoneFormats) {
+                $timeout, PhoneFormats, Utils) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),
           action;
 
-        $scope.clientCompanies = CompaniesService.getClientCompanies().filter(function (company) {
-          return !company.isDefault;
-        });
+        $scope.clientCompanies = CompaniesService.getClientCompanies();
+        Utils.deleteById($scope.clientCompanies, CompaniesService.getUnassignedCompany().id);
 
         $scope.getUsersByCompany = UsersService.getAllByCompanyId;
 
@@ -101,7 +100,7 @@
         $scope.getUserCompanyName = function () {
           if ($scope.editUser.companyId) {
             var company = CompaniesService.getOneById($scope.editUser.companyId);
-            return company.name;
+            return company.default ? '' : company.name;
           }
         };
 

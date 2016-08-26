@@ -5,9 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService',
+      'localStorageService', 'Utils',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state,
-                SharedStateService, DevicesService, PermissionsService, localStorageService) {
+                SharedStateService, DevicesService, PermissionsService, localStorageService, Utils) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
           availableViews = ['list', 'grid'];
@@ -19,9 +19,8 @@
         $scope.companiesView = localStorageService.get('companies-view') || 'grid';
         $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
-        $scope.companies = CompaniesService.getClientCompanies().filter(function (company) {
-          return !company.default;
-        });
+        $scope.companies = CompaniesService.getClientCompanies();
+        Utils.deleteById($scope.companies, CompaniesService.getUnassignedCompany().id);
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
 
