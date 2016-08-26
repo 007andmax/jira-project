@@ -89,7 +89,7 @@
 
               if (!$stateParams.ticketId) {
                 body.addClass("opened-ticket-list");
-              } else if (windowWidth > 1700 && localStorageService.get('ticket-list-view') === 'opened') {
+              } else if (windowWidth > 1315 && localStorageService.get('ticket-list-view') === 'opened') {
                 body.addClass("opened-ticket-list");
                 element.addClass('has-scrollbar nano');
               }

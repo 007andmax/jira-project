@@ -48,9 +48,7 @@
                   for (var i = 0; i < ticketUpdates.length; i++) {
                     if (scope.firstUnreadUpdateId === ticketUpdates[i].getAttribute('std-update')) {
 
-                      var windowWidth = window.innerWidth;
-
-                      if (windowWidth > 1700) {
+                      if (scope.ticketListOpened) {
                         element.nanoScroller({scrollTo: $(ticketUpdates[i])});
                       } else {
                         $('html, body').animate({
@@ -75,7 +73,7 @@
 
               var windowWidth = window.innerWidth;
 
-              if (windowWidth > 1700 && (!isCheckView || localStorageService.get('ticket-list-view') === 'opened')) {
+              if (windowWidth > 1315 && (!isCheckView || localStorageService.get('ticket-list-view') === 'opened')) {
                 scope.ticketListOpened = true;
 
                 body.addClass("opened-ticket-list opened-ticket");
