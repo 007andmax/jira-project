@@ -134,17 +134,11 @@
                          popover-trigger="mouseenter"></i>
                     </a>
 
-                    <span qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
-                         qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
-                         style="display: inline-block;" ng-if="PermissionsService.isAllowed('CREATE_INVOICE')">
-                      <span qt-popover-trigger="mouseenter" style="display: inline-block">
-                        <a custom-disabled="{{ !isCurrentCompanyAddressEmpty }}">
-                          <i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top"
-                             tooltip-append-to-body="true"
-                             ng-click="toogleEditForm(invoice.id)"></i>
-                        </a>
-                      </span>
-                    </span>
+                    <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE') && !isCurrentCompanyAddressEmpty">
+                      <i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top"
+                         tooltip-append-to-body="true"
+                         ng-click="toogleEditForm(invoice.id)"></i>
+                    </a>
 
                     <a custom-disabled="{{ disabledDelete }}">
                       <i class="icn-sm icn-delete"

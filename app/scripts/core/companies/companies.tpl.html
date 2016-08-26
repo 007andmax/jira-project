@@ -1,12 +1,12 @@
 <div>
   <div class="change-view-actions">
     <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}" ng-click="changeView('grid')">
-      <img class="svg-icn tile" alt="tile"
-           ng-src="{{ companiesView !== 'grid' ? 'images/input-icons/tile-gray.svg' : 'images/input-icons/tile-deep-gray.svg' }}">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/tile-gray.svg">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
     </div>
     <div class="list-btn view-change-btn" ng-class="{'active': companiesView === 'list'}" ng-click="changeView('list')">
-      <img class="svg-icn list" alt="list"
-           ng-src="{{ companiesView !== 'list' ? 'images/input-icons/list-gray.svg' : 'images/input-icons/list-deep-gray.svg' }}">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/list-gray.svg">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/list-deep-gray.svg">
     </div>
   </div>
 
