@@ -2,14 +2,14 @@
   <div>
     <img ng-src="{{ getUserAvatarUrl(user) }}" style="float: left;width: 40px;margin-left: -10px; margin-right: 10px;" alt="...">
     <p style="font-weight: 700;">{{ getUserName(user) }}</p>
-    <div ng-if="!company.default">
+    <div style="white-space: nowrap; overflow: hidden;-ms-text-overflow: ellipsis;text-overflow: ellipsis;" ng-if="!company.default">
       Company: <span>{{ company.name }}</span>
     </div>
     <div ng-if="user.primaryEmail">
       Email: <span>{{ user.primaryEmail }}</span>
     </div>
     <div ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0].number">
-      <i class="icn-sm" ng-class="{'icn-iphone': user.phoneNumbers[0].typeNumber === 'MOBILE',
+      <i style="float: left;margin: 4px 5px 0 0;" class="icn-sm" ng-class="{'icn-iphone': user.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': user.phoneNumbers[0].typeNumber === 'FAX',
             'icn-user-phone': user.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
       Phone: {{ user.phoneNumbers[0].number }}
