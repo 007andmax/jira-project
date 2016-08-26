@@ -28,11 +28,8 @@
           }
         });
 
-        $scope.companies = CompaniesService.getClientCompanies().filter(function (item) {
-          if (!item.isDefault) {
-            return item;
-          }
-        });
+        $scope.companies = CompaniesService.getClientCompanies();
+        Utils.deleteById($scope.companies, CompaniesService.getUnassignedCompany().id);
 
         if ($scope.companies && !$scope.companies.length) {
           loadingFinished('companies');

@@ -14,6 +14,12 @@
 
         $scope.totalBilledAmount = BillableService.getTotalBilledAmount($scope);
 
+        $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
+          $scope.$watch('companyData.addresses[0].address', function (address) {
+            $scope.isCurrentCompanyAddressEmpty = !address;
+          });
+        });
+
         $scope.billableData = BillableService.getBillablePageDto($scope, function (respData) {
 
           $scope.billableData = respData;
@@ -98,7 +104,7 @@
 
         $scope.anotherCompanySelected = function (companyId) {
           if ($scope.ticketsSelection[companyId] && $scope.ticketsSelection[companyId].checked) {
-            return  false;
+            return false;
           }
 
           for (var id in $scope.ticketsSelection) {

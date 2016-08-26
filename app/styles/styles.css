@@ -5360,7 +5360,7 @@ tbody.collapse.in {
 /* Dropdown Filter - End */
 /* Dropdown menu tabs - Start */
 .dropdown-menu-tabs {
-  width: 382px;
+  width: auto !important;
   padding: 0;
   margin-top: 6px !important;
   overflow: hidden;

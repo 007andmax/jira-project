@@ -5,8 +5,9 @@
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
     ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
+      'localStorageService', 'Utils',
       function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
-                SharedStateService, PermissionsService, $state) {
+                SharedStateService, PermissionsService, $state, localStorageService, Utils) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {
           $state.go('tickets');
@@ -16,7 +17,7 @@
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
           availableViews = ['list', 'grid'];
 
-        $scope.usersView = $state.params.view || 'grid';
+        $scope.usersView = localStorageService.get('users-view') || 'grid';
         $scope.editUser = undefined;
         $scope.orderUsers = {
           field: 'name',
@@ -24,16 +25,18 @@
         };
 
         $scope.PermissionsService = PermissionsService;
-        $scope.users = UsersService.getClientUsers().filter(function (user) {
-          return !user.default;
-        });
+        $scope.users = UsersService.getClientUsers();
+        Utils.deleteById($scope.users, UsersService.getUnassignedUser(CompaniesService.getUnassignedCompany().id).id);
 
-        $scope.$watch(function () {
-          return $state.params.view;
-        }, function (value) {
-          if (availableViews.indexOf(value) !== -1) {
-            $scope.usersView = value;
+        $scope.changeView = function (view) {
+          if (availableViews.indexOf(view) !== -1) {
+            $scope.usersView = view;
+            localStorageService.set('users-view', view);
           }
+        };
+
+        $scope.$on('createNewUser', function () {
+          $scope.usersView = 'grid';
         });
 
         $scope.$watch('shownUsers.length', function (usersCount) {
@@ -41,14 +44,10 @@
         });
 
         $scope.getUserCompanyName = function (user) {
-          return CompaniesService.getOneById(user.company.id).name;
+          return user.company.default ? '' : CompaniesService.getOneById(user.company.id).name;
         };
 
         $scope.usersFilter = function (value) {
-          if (value.isDefault) {
-            return false;
-          }
-
           if (headerSharedState.filter.userId) {
             return headerSharedState.filter.userId === value.id;
           }

@@ -222,9 +222,10 @@
       }
 
       function getUnassignedUser(companyId) {
-        for (var i = 0; i < storage.usersByCompanies[companyId].length; i++) {
-          if (storage.usersByCompanies[companyId][i].isDefault) {
-            return storage.usersByCompanies[companyId][i];
+        var unassignedCompanyUsers = storage.usersByCompanies[companyId];
+        for (var i = 0; i < unassignedCompanyUsers.length; i++) {
+          if (unassignedCompanyUsers[i].isDefault) {
+            return unassignedCompanyUsers[i];
           }
         }
       }

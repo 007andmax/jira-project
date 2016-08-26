@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="modal-footer" ng-style="{'padding-top': selectingTicket ? '0px' : '19px'}">
-    <div class="btn btn-lg btn-primary" data-dismiss='modal' ng-click=cancelConfirm(selectingTicket)>
+    <div class="btn btn-lg btn-primary" data-dismiss='modal' ng-click="cancelConfirm(selectingTicket)">
       {{ selectingTicket ? 'Back' : 'Cancel' }}
     </div>
     <div class="btn btn-lg btn-info" ng-if="!selectingTicket" ng-click="createTicket()">Create Ticket</div>

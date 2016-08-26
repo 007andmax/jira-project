@@ -5,8 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
+      'localStorageService', 'Utils',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state,
-                SharedStateService, DevicesService, PermissionsService) {
+                SharedStateService, DevicesService, PermissionsService, localStorageService, Utils) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
           availableViews = ['list', 'grid'];
@@ -15,12 +16,11 @@
           $state.go('tickets');
         }
 
-        $scope.companiesView = $state.params.view || 'grid';
+        $scope.companiesView = localStorageService.get('companies-view') || 'grid';
         $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
-        $scope.companies = CompaniesService.getClientCompanies().filter(function (company) {
-          return !company.default;
-        });
+        $scope.companies = CompaniesService.getClientCompanies();
+        Utils.deleteById($scope.companies, CompaniesService.getUnassignedCompany().id);
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
 
@@ -29,13 +29,12 @@
           reverse: false
         };
 
-        $scope.$watch(function () {
-          return $state.params.view;
-        }, function (value) {
-          if (availableViews.indexOf(value) !== -1) {
-            $scope.companiesView = value;
+        $scope.changeView = function (view) {
+          if (availableViews.indexOf(view) !== -1) {
+            $scope.companiesView = view;
+            localStorageService.set('companies-view', view);
           }
-        });
+        };
 
         $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
 

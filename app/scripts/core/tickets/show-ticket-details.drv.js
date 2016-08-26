@@ -3,21 +3,21 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('showTicketDetails',
-    ['$timeout', '$stateParams',
-      function ($timeout, $stateParams) {
+    ['$timeout', '$stateParams', 'localStorageService',
+      function ($timeout, $stateParams, localStorageService) {
         return {
           restrict: 'A',
           link: function (scope, element) {
 
             var body = $('body');
 
-            controlTicketList();
+            controlTicketList(null, true);
 
             element.hide();
             body.addClass('opened-ticket');
 
             scope.$on('ticketDetailsLoad', function () {
-              controlTicketList();
+              controlTicketList(null, true);
               element.show();
             });
 
@@ -29,11 +29,13 @@
                 element.nanoScroller();
               }
               scope.ticketListOpened = !scope.ticketListOpened;
+              localStorageService.set('ticket-list-view', scope.ticketListOpened ? 'opened' : 'closed')
             });
 
             scope.$on('$destroy', function () {
               body.removeClass('opened-ticket');
               body.addClass('opened-ticket-list');
+              $(window).off('resize', controlTicketList);
             });
 
             scope.scrollToFirstUpdate = function (last) {
@@ -46,9 +48,7 @@
                   for (var i = 0; i < ticketUpdates.length; i++) {
                     if (scope.firstUnreadUpdateId === ticketUpdates[i].getAttribute('std-update')) {
 
-                      var windowWidth = window.innerWidth;
-
-                      if (windowWidth > 1700) {
+                      if (scope.ticketListOpened) {
                         element.nanoScroller({scrollTo: $(ticketUpdates[i])});
                       } else {
                         $('html, body').animate({
@@ -66,15 +66,14 @@
 
             $(window).on('resize', controlTicketList);
 
-            function controlTicketList() {
-
+            function controlTicketList(e, isCheckView) {
               if (!$stateParams.ticketId) {
                 return;
               }
 
               var windowWidth = window.innerWidth;
 
-              if (windowWidth > 1700) {
+              if (windowWidth > 1315 && (!isCheckView || localStorageService.get('ticket-list-view') === 'opened')) {
                 scope.ticketListOpened = true;
 
                 body.addClass("opened-ticket-list opened-ticket");
@@ -100,7 +99,6 @@
                 flashDelay: 1000,
                 sliderMinHeight: 98
               });
-
             }
 
           }

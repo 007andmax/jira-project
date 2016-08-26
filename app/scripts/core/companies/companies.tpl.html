@@ -1,14 +1,12 @@
 <div>
   <div class="change-view-actions">
-    <div class="tile-btn view-change-btn" ui-sref="companies({ view: 'grid' })"
-         ng-class="{'active': companiesView === 'grid'}">
-      <img class="svg-icn tile" alt="tile"
-           ng-src="{{ companiesView !== 'grid' ? 'images\\input-icons\\tile-gray.svg' : 'images\\input-icons\\tile-deep-gray.svg' }}">
+    <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}" ng-click="changeView('grid')">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/tile-gray.svg">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
     </div>
-    <div class="list-btn view-change-btn" ui-sref="companies({ view: 'list' })"
-         ng-class="{'active': companiesView === 'list'}">
-      <img class="svg-icn list" alt="list"
-           ng-src="{{ companiesView !== 'list' ? 'images\\input-icons\\list-gray.svg' : 'images\\input-icons\\list-deep-gray.svg' }}">
+    <div class="list-btn view-change-btn" ng-class="{'active': companiesView === 'list'}" ng-click="changeView('list')">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/list-gray.svg">
+      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/list-deep-gray.svg">
     </div>
   </div>
 
@@ -323,21 +321,20 @@
         <span>{{ getUserName(primaryContact) }}</span>
       </div>
       <div class="col-xs-1">
-        <div create-ticket-open-modal="{{ company.id }}"
+        <div create-ticket-open-modal="{{ company.id }}" style="display: inline-block;"
              tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
           <span><i class="nav-icon icn-lg icn-unassigned" style="margin: 0;"></i></span>
           <span class="badge badge-red list-company-badge">{{ company.companyStatistic.ticketsSubmitted || '0' }}</span>
         </div>
       </div>
       <div class="col-xs-1">
-        <div>
+        <div style="display: inline-block;">
           <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
           <span class="badge badge-red list-company-badge">{{ devicesCount[company.id].all || '0' }}</span>
         </div>
       </div>
       <div class="col-xs-1">
-        <div ng-click="createUser(company.id)"
-             tooltip="Create User" tooltip-placement="top">
+        <div ng-click="createUser(company.id)" style="display: inline-block;">
           <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
           <span class="badge badge-red list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
         </div>

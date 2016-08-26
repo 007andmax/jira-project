@@ -9,9 +9,9 @@
                 ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService, Utils) {
 
         var day = 1000 * 60 * 60 * 24, form,
-          allClientUsers = UsersService.getClientUsers().filter(function (user) {
-            return !user.default;
-          });
+          allClientUsers = UsersService.getClientUsers();
+
+        Utils.deleteById(allClientUsers, UsersService.getUnassignedUser(CompaniesService.getUnassignedCompany().id).id);
 
         $scope.clients = [];
         $scope.frequency = {

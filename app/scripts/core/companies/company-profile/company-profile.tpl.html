@@ -86,17 +86,19 @@
           <ul class="user-company-contact clearfix">
             <li class="info-type" tooltip="{{ getUserName(currentContact) }}" tooltip-enable="{{ isShowTooltip[2]() }}"
                 trimmed-tooltip="2">
+              <i class="icn-sm icn-contact"></i>
               Primary contact: <span trimmed-tooltip-container>{{ getUserName(currentContact) }}</span>
             </li>
             <li class="info-type" ng-if="currentContact.primaryEmail" tooltip="{{ currentContact.primaryEmail }}"
                 tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
+              <i class="icn-sm icn-contact-email"></i>
               Contact email: <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
             </li>
             <li class="info-type"
                 ng-if="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">
               <i class="icn-sm" ng-class="{'icn-iphone': currentContact.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': currentContact.phoneNumbers[0].typeNumber === 'FAX',
-            'icn-user-phone': currentContact.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
+            'icn-user-phone': currentContact.phoneNumbers[0].typeNumber === 'OFFICE'}" style="width: 14px;"></i>
               Contact phone: {{ currentContact.phoneNumbers[0].number }}
             </li>
           </ul>
@@ -108,9 +110,10 @@
             <i class="icn-retina new-user pull-left" style="margin-left: 15px;" ng-click="createUser()"
                ng-if="PermissionsService.isAllowed('CREATE_USERS')"
                tooltip="Create User" tooltip-placement="top"></i>
-            <div qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
-                 qt-popover-position="bottom" custom-disabled="{{ !allowAgentInstall }}"
-                 class="pull-right" style="cursor: pointer">
+            <div
+              qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
+              qt-popover-position="bottom" custom-disabled="{{ !allowAgentInstall }}"
+              class="pull-right" style="cursor: pointer">
               <i class="icn-retina save-download pull-right" qt-popover-trigger tooltip-placement="top"
                  tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></i>
             </div>

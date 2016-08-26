@@ -12,14 +12,22 @@
           <li role="presentation">
             <a ui-sref="accounting.recurring">Recurring Orders</a>
           </li>
-          <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
-               custom-disabled="{{ !countTicket }}" ng-if="PermissionsService.isAllowed('CREATE_INVOICE')"
-               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
-               modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
-               modal-window-class="invoice-modal-not-background"
-               mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
-               mw-controller="quicktech.core.billable.createInvoiceCtrl">
-            <i class="icn-sm icn-create-invoice"></i>
+          <div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">
+            <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
+                 qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
+                 style="display: inline-block;">
+              <div qt-popover-trigger="mouseenter" style="display: inline-block">
+                <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
+                     custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty }}"
+                     tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
+                     modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
+                     modal-window-class="invoice-modal-not-background"
+                     mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
+                     mw-controller="quicktech.core.billable.createInvoiceCtrl">
+                  <i class="icn-sm icn-create-invoice"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </ul>
       </div>
@@ -93,8 +101,7 @@
                     </label>
 
                     <div class="checkbox-caption">{{ ticket.subject }}</div>
-                    <span class="label label-primary" stop-propagation="click"
-                          style="cursor: pointer; position: absolute; z-index: 10"
+                    <span class="label label-primary" stop-propagation="click" style="cursor: pointer; position: absolute; z-index: 10"
                           ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
                       Tkt# {{ ticket.ticketNumber }}
                     </span>

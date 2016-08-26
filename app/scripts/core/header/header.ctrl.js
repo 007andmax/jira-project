@@ -5,15 +5,23 @@
   angular.module('quicktech').controller('quicktech.core.header.headerCtrl',
     ['$scope', '$state', 'CompaniesService', 'UsersService', 'quicktech.common.services.PermissionsService',
       'quicktech.common.services.SharedStateService', '$stateParams', '$rootScope',
-      'quicktech.common.services.TicketsPermissionsService',
+      'quicktech.common.services.TicketsPermissionsService', 'localStorageService', '$timeout',
       function ($scope, $state, CompaniesService, UsersService, PermissionsService, SharedStateService,
-                $stateParams, $rootScope, TicketsPermissionsService) {
+                $stateParams, $rootScope, TicketsPermissionsService, localStorageService, $timeout) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
+        $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
+
+        $scope.createUser = function () {
+          $state.go('users.create').then(function () {
+            $rootScope.$broadcast('createNewUser');
+          });
+        };
 
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
@@ -32,7 +40,7 @@
         };
 
         $scope.userReadable = function (text) {
-          var words = text.split(/[-_]/),
+          var words = text.split(/[\-_]/),
             result = '';
 
           for (var i = 0, len = words.length; i < len; i++) {
@@ -95,6 +103,22 @@
             $scope.ticketsSharedState = undefined;
           }
         });
+
+        $scope.initCompanyStatusWatch = function (hidePopoverFunc) {
+          var unwatch = $scope.$watch('currentCompany.status', function (newValue, oldValue) {
+            if (newValue === 'ACTIVE' && oldValue === 'SIGN_UP') {
+              hidePopoverFunc && hidePopoverFunc();
+              unwatch();
+            }
+          });
+
+          var unsubscribe = $scope.$on('$locationChangeStart', function () {
+            if ($scope.currentCompany.status === 'SIGN_UP') {
+              $scope.changeCompanyStatusToActive();
+              unsubscribe();
+            }
+          })
+        };
 
         $scope.isShowBulkAction = function () {
           return $scope.ticketsSharedState && $scope.ticketsSharedState.checkedTicketsIds.length;

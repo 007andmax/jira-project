@@ -198,12 +198,11 @@
         return Utils.getListByUrl('/remote/getRemoteSessions', callback, function (list) {
           RealTimeService.subscribe('/oneTimeConnection', scope, function (newChange) {
 
-            if (newChange.data.isOneTime) {
               if (newChange.action === 'ONE_TIME_CONNECTION_CLOSED' && !newChange.data.id) {
                 //do nothing
               } else if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
                 Utils.deleteById(list, newChange.data);
-              } else {
+              } else if (newChange.data.oneTime) {
                 var session = Utils.findById(list, newChange.data.id);
                 if (session) {
                   Utils.customizeObj(newChange.data, session);
@@ -211,7 +210,6 @@
                   list.unshift(Utils.customizeObj(newChange.data));
                 }
               }
-            }
           })
         });
       }

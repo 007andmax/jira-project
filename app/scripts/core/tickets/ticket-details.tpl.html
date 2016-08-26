@@ -5,6 +5,7 @@
         <div class="ticket-header clearfix ticket-fixed-header">
           <div id="ticket-header-content">
             <div class="pull-left ticket-header-avatar" qt-popover-position="bottom-left-align"
+                 custom-disabled="{{ user.company.default }}"
                  qt-custom-popover-template="/html/scripts/core/tickets/user-info-popup.tpl.html">
               <img qt-popover-trigger="mouseenter"
                    ng-src="{{ getUserAvatarUrl(ticketDetails.createdUser) }}" class="avatar-38 img-circle" alt="...">
@@ -211,7 +212,7 @@
             </div>
           </div>
         </div>
-        <div class="ticket-detail" style="padding-top: 150px;">
+        <div class="ticket-detail" ng-style="{'padding-top': company.default ? '92px' : '150px'}">
           <div  ng-if="!editingTicket">
             <h2>{{ ticketDetails.number + ' - ' + ticketDetails.subject }}</h2>
             <div class="ticket-message" ng-bind-html="getTicketNote()"></div>

@@ -12,6 +12,8 @@
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession');
 
+        $scope.createOneTimeRemoteSession = DevicesService.createOneTimeRemoteSession;
+
         $scope.host = ConstantsService.getConstant('server.url');
         $scope.showHost = $scope.host.replace(/.*?:\/\//g, "");
         $scope.statusMap = {
@@ -49,7 +51,8 @@
         };
 
         $scope.deleteRemoteSession = function (sessionId) {
-          DevicesService.deleteRemoteSession(sessionId)
+          $scope.lastDeletedId = sessionId;
+          DevicesService.deleteRemoteSession(sessionId);
         };
 
         $scope.isUserOnline = function (session) {

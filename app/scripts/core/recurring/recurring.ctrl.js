@@ -9,6 +9,12 @@
 
         var headerSharedState = SharedStateService.getSharedState('recurringHeader');
 
+        $scope.companyData = CompaniesService.getCompanyForSettingPage(function () {
+          $scope.$watch('companyData.addresses[0].address', function (address) {
+            $scope.isCurrentCompanyAddressEmpty = !address;
+          });
+        });
+
         $scope.PermissionsService = PermissionsService;
         $scope.loadingInProgress = true;
         $scope.forceCreating = [];

@@ -11,7 +11,9 @@
           model: '=ngModel',
           showValidationMessages: '=showValidationMessages',
           isMapShown: '=',
-          saveFunc: '=?'
+          saveFunc: '=?',
+          focusAddress: '=?',
+          isAddressRequired: '=?'
         },
         templateUrl: function (elem, attr) {
           return '/html/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';
@@ -141,7 +143,11 @@
               ngModelCtrl.$viewValue.locationLng &&
               savedAddress === ngModelCtrl.$viewValue.address;
 
-            inputCtrl.$setValidity('correct', !!hasMark);
+            if (ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address) {
+              inputCtrl.$setValidity('correct', !!hasMark);
+            } else {
+              inputCtrl.$setValidity('correct', true);
+            }
 
             var hasLocation = ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
 

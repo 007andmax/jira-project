@@ -1115,6 +1115,16 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
   height: 20px;
 }
 
+.icn-contact, .icn-contact:focus {
+  width: 14px;
+  background-position: -480px -227px;
+}
+
+.icn-contact-email, .icn-contact-email:focus {
+  width: 14px;
+  background-position: -458px -227px;
+}
+
 .icn-email, .icn-email:focus {
   background-position: -1115px 0;
   height: 16px;

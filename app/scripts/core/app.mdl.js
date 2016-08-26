@@ -28,204 +28,207 @@
       'ui.bootstrap',
       'ngSanitize',
       'ngMessages',
-      'ngAnimate'
+      'ngAnimate',
+      'LocalStorageModule'
     ]);
 
-  app.config(['$stateProvider', '$urlRouterProvider', '$compileProvider', function ($stateProvider, $urlRouterProvider, $compileProvider) {
+  app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider',
+    function ($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
 
-    //uncomment this line for increasing angularjs performance (when debugging will not need)
-    //$compileProvider.debugInfoEnabled(false);
+      //uncomment this line for increasing angularjs performance (when debugging will not need)
+      //$compileProvider.debugInfoEnabled(false);
 
-    $urlRouterProvider.otherwise(getUserDefaultPage);
+      localStorageServiceProvider
+        .setPrefix('quicktech')
+        .setNotify(false, false);
 
-    $urlRouterProvider.when('/accounting', '/accounting/billable');
-    $urlRouterProvider.when('/settings', '/settings/myProfile');
+      $urlRouterProvider.otherwise(getUserDefaultPage);
 
-    $stateProvider
-      .state('tickets', waitForServices({
-        url: '/tickets/:listType',
-        templateUrl: '/html/scripts/core/tickets/tickets.tpl.html',
-        controller: 'quicktech.core.tickets.ticketsCtrl'
-      }))
-      .state('tickets.details', waitForServices({
-        url: '/:ticketId',
-        params: {
-          ticketId: '',
-          remoteParams: null
-        },
-        templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
-        controller: 'quicktech.core.tickets.ticketDetailsCtrl'
-      }))
-      .state('users', waitForServices({
-        url: '/clients/users?view',
-        params: {
-          view: 'grid'
-        },
-        templateUrl: '/html/scripts/core/users/users.tpl.html',
-        controller: 'quicktech.core.users.usersCtrl'
-      }))
-      .state('users.create', waitForServices({
-        url: '/create',
-        templateUrl: '/html/scripts/core/users/user-edit.tpl.html',
-        controller: 'quicktech.core.users.createUserCtrl'
-      }))
-      .state('companies', waitForServices({
-        url: '/clients/companies?view',
-        params: {
-          view: 'grid'
-        },
-        templateUrl: '/html/scripts/core/companies/companies.tpl.html',
-        controller: 'quicktech.core.companies.companiesCtrl'
-      }))
-      .state('createCompany', waitForServices({
-        url: '/clients/companies/create',
-        templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
-        controller: 'quicktech.core.companies.editCompanyCtrl'
-      }))
-      .state('editCompany', waitForServices({
-        url: '/clients/companies/edit/:companyId',
-        templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
-        controller: 'quicktech.core.companies.editCompanyCtrl'
-      }))
-      .state('companyProfile', waitForServices({
-        url: '/clients/companyProfile/:companyId?tabName',
-        params: {
-          tabName: ''
-        },
-        reloadOnSearch: false,
-        templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
-        controller: 'quicktech.core.companies.companyProfileCtrl'
-      }))
-      .state('products', waitForServices({
-        url: '/inventory/products/:tabName',
-        templateUrl: '/html/scripts/core/products/products.tpl.html',
-        controller: 'quicktech.core.products.productsCtrl'
-      }))
-      .state('services', waitForServices({
-        url: '/inventory/services/:tabName',
-        templateUrl: '/html/scripts/core/services/services.tpl.html',
-        controller: 'quicktech.core.services.servicesCtrl'
-      }))
-      .state('accounting', waitForServices({
-        url: '/accounting',
-        template: '<div ui-view></div>',
-        redirectTo: 'accounting.billable'
-      }))
-      .state('accounting.billable', waitForServices({
-        url: '/billable',
-        templateUrl: '/html/scripts/core/billable/billable.tpl.html',
-        controller: 'quicktech.core.billable.billableCtrl'
-      }))
-      .state('accounting.recurring', waitForServices({
-        url: '/recurring',
-        templateUrl: '/html/scripts/core/recurring/recurring.tpl.html',
-        controller: 'quicktech.core.recurring.recurringCtrl'
-      }))
-      .state('receivable', waitForServices({
-        url: '/accounting/receivable/:mode',
-        templateUrl: '/html/scripts/core/receivable/receivable.tpl.html',
-        controller: 'quicktech.core.receivable.receivableCtrl'
-      }))
-      .state('receipt-archive', waitForServices({
-        url: '/accounting/receipt-archive/:mode',
-        templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
-        controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
-      }))
-      .state('vendors', waitForServices({
-        url: '/inventory/vendors',
-        templateUrl: '/html/scripts/core/vendors/vendors.tpl.html',
-        controller: 'quicktech.core.vendors.vendorsCtrl'
-      }))
-      .state('createVendor', waitForServices({
-        url: '/inventory/vendors/create',
-        templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
-        controller: 'quicktech.core.vendors.editVendorCtrl'
-      }))
-      .state('editVendor', waitForServices({
-        url: '/inventory/vendors/edit/:vendorId',
-        templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
-        controller: 'quicktech.core.vendors.editVendorCtrl'
-      }))
-      .state('settings', waitForServices({
-        url: '/settings',
-        templateUrl: '/html/scripts/core/settings/settings.tpl.html',
-        redirectTo: 'settings.myProfile',
-        controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService',
-          function ($scope, $state, PermissionsService) {
-            $scope.PermissionsService = PermissionsService;
-            $scope.$watch(function () {
-              return $state.current.url;
-            }, function (url) {
-              $scope.settingMode = url;
-            });
-          }
-        ]
-      }))
-      .state('settings.myProfile', waitForServices({
-        url: '/myProfile',
-        templateUrl: '/html/scripts/core/settings/my-profile/my-profile.tpl.html',
-        controller: 'quicktech.core.settings.myProfileCtrl'
-      }))
-      .state('settings.techUsers', waitForServices({
-        url: '/techUsers',
-        templateUrl: '/html/scripts/core/settings/tech-users/tech-users.tpl.html',
-        controller: 'quicktech.core.settings.techUsersCtrl'
-      }))
-      .state('settings.companyInfo', waitForServices({
-        url: '/companyInfo',
-        templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',
-        controller: 'quicktech.core.settings.companyInfoCtrl'
-      }))
-      .state('settings.permissionsManagement', waitForServices({
-        url: '/permissionsManagement',
-        templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html',
-        controller: 'quicktech.core.settings.permissionsManagement'
-      }))
-      .state('settings.emailTemplates', waitForServices({
-        url: '/emailTemplates',
-        templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
-        controller: 'quicktech.core.settings.emailTemplatesCtrl'
-      }))
-      //.state('devices', waitForServices({
-      //  url: '/clients/devices',
-      //  templateUrl: '/html/scripts/core/devices/devices.tpl.html',
-      //  controller: 'quicktech.core.devices.devicesCtrl'
-      //}))
-      //.state('companyDevices', waitForServices({
-      //  url: '/clients/companyDevices/:companyId',
-      //  templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
-      //  controller: 'quicktech.core.devices.companyDevicesCtrl'
-      //}))
-      .state('quickSupport', waitForServices({
-        url: '/quickSupport',
-        templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
-        controller: 'quicktech.core.quickSupport.quickSupportCtrl'
-      }))
-      .state('taxRates', waitForServices({
-        url: '/inventory/taxRates',
-        templateUrl: '/html/scripts/core/tax-rates/tax-rates.tpl.html',
-        controller: 'quicktech.core.taxRates.taxRatesCtrl'
-      }));
+      $urlRouterProvider.when('/accounting', '/accounting/billable');
+      $urlRouterProvider.when('/settings', '/settings/myProfile');
 
-    function waitForServices(conf) {
-      if (!conf.resolve) {
-        conf.resolve = {};
+      $stateProvider
+        .state('tickets', waitForServices({
+          url: '/tickets/:listType',
+          templateUrl: '/html/scripts/core/tickets/tickets.tpl.html',
+          controller: 'quicktech.core.tickets.ticketsCtrl'
+        }))
+        .state('tickets.details', waitForServices({
+          url: '/:ticketId',
+          params: {
+            ticketId: '',
+            remoteParams: null
+          },
+          templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
+          controller: 'quicktech.core.tickets.ticketDetailsCtrl'
+        }))
+        .state('users', waitForServices({
+          url: '/clients/users',
+          templateUrl: '/html/scripts/core/users/users.tpl.html',
+          controller: 'quicktech.core.users.usersCtrl'
+        }))
+        .state('users.create', waitForServices({
+          url: '/create',
+          templateUrl: '/html/scripts/core/users/user-edit.tpl.html',
+          controller: 'quicktech.core.users.createUserCtrl'
+        }))
+        .state('companies', waitForServices({
+          url: '/clients/companies',
+          templateUrl: '/html/scripts/core/companies/companies.tpl.html',
+          controller: 'quicktech.core.companies.companiesCtrl'
+        }))
+        .state('createCompany', waitForServices({
+          url: '/clients/companies/create',
+          templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
+          controller: 'quicktech.core.companies.editCompanyCtrl'
+        }))
+        .state('editCompany', waitForServices({
+          url: '/clients/companies/edit/:companyId',
+          templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
+          controller: 'quicktech.core.companies.editCompanyCtrl'
+        }))
+        .state('companyProfile', waitForServices({
+          url: '/clients/companyProfile/:companyId?tabName',
+          params: {
+            tabName: ''
+          },
+          reloadOnSearch: false,
+          templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',
+          controller: 'quicktech.core.companies.companyProfileCtrl'
+        }))
+        .state('products', waitForServices({
+          url: '/inventory/products/:tabName',
+          templateUrl: '/html/scripts/core/products/products.tpl.html',
+          controller: 'quicktech.core.products.productsCtrl'
+        }))
+        .state('services', waitForServices({
+          url: '/inventory/services/:tabName',
+          templateUrl: '/html/scripts/core/services/services.tpl.html',
+          controller: 'quicktech.core.services.servicesCtrl'
+        }))
+        .state('accounting', waitForServices({
+          url: '/accounting',
+          template: '<div ui-view></div>',
+          redirectTo: 'accounting.billable'
+        }))
+        .state('accounting.billable', waitForServices({
+          url: '/billable',
+          templateUrl: '/html/scripts/core/billable/billable.tpl.html',
+          controller: 'quicktech.core.billable.billableCtrl'
+        }))
+        .state('accounting.recurring', waitForServices({
+          url: '/recurring',
+          templateUrl: '/html/scripts/core/recurring/recurring.tpl.html',
+          controller: 'quicktech.core.recurring.recurringCtrl'
+        }))
+        .state('receivable', waitForServices({
+          url: '/accounting/receivable/:mode',
+          templateUrl: '/html/scripts/core/receivable/receivable.tpl.html',
+          controller: 'quicktech.core.receivable.receivableCtrl'
+        }))
+        .state('receipt-archive', waitForServices({
+          url: '/accounting/receipt-archive/:mode',
+          templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
+          controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
+        }))
+        .state('vendors', waitForServices({
+          url: '/inventory/vendors',
+          templateUrl: '/html/scripts/core/vendors/vendors.tpl.html',
+          controller: 'quicktech.core.vendors.vendorsCtrl'
+        }))
+        .state('createVendor', waitForServices({
+          url: '/inventory/vendors/create',
+          templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
+          controller: 'quicktech.core.vendors.editVendorCtrl'
+        }))
+        .state('editVendor', waitForServices({
+          url: '/inventory/vendors/edit/:vendorId',
+          templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
+          controller: 'quicktech.core.vendors.editVendorCtrl'
+        }))
+        .state('settings', waitForServices({
+          url: '/settings',
+          templateUrl: '/html/scripts/core/settings/settings.tpl.html',
+          redirectTo: 'settings.myProfile',
+          controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService',
+            function ($scope, $state, PermissionsService) {
+              $scope.PermissionsService = PermissionsService;
+              $scope.$watch(function () {
+                return $state.current.url;
+              }, function (url) {
+                $scope.settingMode = url;
+              });
+            }
+          ]
+        }))
+        .state('settings.myProfile', waitForServices({
+          url: '/myProfile',
+          templateUrl: '/html/scripts/core/settings/my-profile/my-profile.tpl.html',
+          controller: 'quicktech.core.settings.myProfileCtrl'
+        }))
+        .state('settings.techUsers', waitForServices({
+          url: '/techUsers',
+          templateUrl: '/html/scripts/core/settings/tech-users/tech-users.tpl.html',
+          controller: 'quicktech.core.settings.techUsersCtrl'
+        }))
+        .state('settings.companyInfo', waitForServices({
+          url: '/companyInfo',
+          params: {
+            isAddressFocused: false
+          },
+          templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',
+          controller: 'quicktech.core.settings.companyInfoCtrl'
+        }))
+        .state('settings.permissionsManagement', waitForServices({
+          url: '/permissionsManagement',
+          templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html',
+          controller: 'quicktech.core.settings.permissionsManagement'
+        }))
+        .state('settings.emailTemplates', waitForServices({
+          url: '/emailTemplates',
+          templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
+          controller: 'quicktech.core.settings.emailTemplatesCtrl'
+        }))
+        //.state('devices', waitForServices({
+        //  url: '/clients/devices',
+        //  templateUrl: '/html/scripts/core/devices/devices.tpl.html',
+        //  controller: 'quicktech.core.devices.devicesCtrl'
+        //}))
+        //.state('companyDevices', waitForServices({
+        //  url: '/clients/companyDevices/:companyId',
+        //  templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
+        //  controller: 'quicktech.core.devices.companyDevicesCtrl'
+        //}))
+        .state('quickSupport', waitForServices({
+          url: '/quickSupport',
+          templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
+          controller: 'quicktech.core.quickSupport.quickSupportCtrl'
+        }))
+        .state('taxRates', waitForServices({
+          url: '/inventory/taxRates',
+          templateUrl: '/html/scripts/core/tax-rates/tax-rates.tpl.html',
+          controller: 'quicktech.core.taxRates.taxRatesCtrl'
+        }));
+
+      function waitForServices(conf) {
+        if (!conf.resolve) {
+          conf.resolve = {};
+        }
+
+        conf.resolve.waitForServicesInitialization = ['$q', 'UsersService', function ($q, UsersService) {
+
+          var def = $q.defer();
+          UsersService._addInitListener(function () {
+            def.resolve();
+          });
+
+          return def.promise;
+        }];
+
+        return conf;
       }
 
-      conf.resolve.waitForServicesInitialization = ['$q', 'UsersService', function ($q, UsersService) {
-
-        var def = $q.defer();
-        UsersService._addInitListener(function () {
-          def.resolve();
-        });
-
-        return def.promise;
-      }];
-
-      return conf;
-    }
-
-  }]);
+    }]);
 
   app.run(
     ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal', 'TicketsService', '$stateParams',
@@ -272,13 +275,6 @@
             globalSearch.goBack.tooltip = 'back to vendors';
           } else {
             globalSearch.goBack.isEnabled = false;
-          }
-        });
-
-        CompaniesService._addInitListener(function () {
-          var currentCompany = CompaniesService.getCurrentCompany();
-          if (currentCompany.status === 'SIGN_UP') {
-            $state.go('settings.companyInfo');
           }
         });
 

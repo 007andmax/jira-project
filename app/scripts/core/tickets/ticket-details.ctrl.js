@@ -31,7 +31,7 @@
 
             ServicesService.getAllByCompany($scope, params.companyId, function (resp) {
               $scope.ticketUpdate.services[0].item = resp.find(function (service) {
-                  return service.name === 'Remote Service';
+                  return service.name.toLowerCase() === 'remote service';
                 }) || resp[0];
             });
 
@@ -69,7 +69,8 @@
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
             CompaniesService.getCompanyData($scope, $scope.ticketDetails.company.id, function (resp) {
               $scope.company = resp;
-              $scope.companyAddress = resp.addresses[0];
+              $scope.company.default = $scope.ticketDetails.company.default;
+              $scope.companyAddress = resp.addresses[0] || {};
               if ($scope.companyAddress.phoneNumbers && $scope.companyAddress.phoneNumbers.length) {
                 $scope.companyPhoneNumber = $scope.companyAddress.phoneNumbers[0].number;
               }
@@ -571,6 +572,7 @@
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
               $scope.uncheckTicket($scope.ticketDetails.id);
+              $scope.ticketClosing = false;
             }, recipientsIds);
           }
 

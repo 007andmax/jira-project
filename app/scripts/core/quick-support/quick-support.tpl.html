@@ -1,14 +1,13 @@
 <div class="quick-support-wrapper">
-  <div class="quick-support-helper">
+  <div class="quick-support-helper" ng-if="!remoteSessions.length">
     <p style="opacity: 0.57">There are no active requests</p>
-    <div class="btn btn-success add-session-button has-tooltip" ng-click="addQuickSession()" tooltip-placement="top"
-         tooltip="Create">
+    <div class="btn btn-success add-session-button has-tooltip" ng-click="createOneTimeRemoteSession()">
       <p style="padding: 6px 0;">Create Request</p>
     </div>
   </div>
   <ul class="quick-support-list">
-    <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true"
-        ng-show="showAllSession ? true : (remoteSession.performer.id === currentUser.id)">
+    <li class="quick-support-session ng-hide" ng-repeat="remoteSession in remoteSessions | orderBy: 'createdAt': true track by remoteSession.id"
+        ng-show="(showAllSession || remoteSession.performer.id === currentUser.id) && remoteSession.id !== lastDeletedId">
       <div ng-include="'/html/scripts/core/quick-support/quick-support-session.tpl.html'"></div>
     </li>
   </ul>

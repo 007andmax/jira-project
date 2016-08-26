@@ -11,8 +11,9 @@
       </div>
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
-        <strong tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}"
-                tooltip-placement="bottom" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+        <strong
+          tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}"
+          tooltip-placement="bottom" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
           <span trimmed-tooltip-container>
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
           </span>
@@ -133,7 +134,8 @@
 
               <li ng-click="moveIntoSpam()"
                   ng-if="TicketsPermissionsService.isActionVisible('send_to_spam', ticketsSharedState.selectedTickets)">
-                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam' }}</a>
+                <a tabindex="-1" href="javascript:void(0)">{{ currentUser.isOwner ? 'Mark as Spam' : 'Report as Spam'
+                  }}</a>
               </li>
 
               <li
@@ -193,7 +195,7 @@
             <li role="presentation">
               <a role="menuitem" tabindex="-1"
                  ng-if="getClientCompanies().length && PermissionsService.isAllowed('CREATE_USERS')"
-                 ui-sref="users.create({ view: 'grid' })">User</a>
+                 ng-click="createUser()">User</a>
             </li>
 
             <li role="presentation">
@@ -216,10 +218,13 @@
       </div>
     </div>
     <div class="col-sm-1 col-xs-1 topNavbarRight">
-      <a ui-sref="settings" class="settings-href has-tooltip"
-         tooltip="Settings" tooltip-placement="bottom" append-to-body="true">
-        <i class="icn-sm icn-settings"></i>
-      </a>
+      <div qt-custom-popover-template="/html/scripts/core/header/first-login-tooltip.tpl.html"
+           class="pull-right" style="display: inline-block" qt-popover-position="bottom">
+        <a ui-sref="settings" class="settings-href has-tooltip" qt-popover-trigger="showing-on-first-login"
+           tooltip="Settings" tooltip-placement="bottom" append-to-body="true">
+          <i class="icn-sm icn-settings"></i>
+        </a>
+      </div>
     </div>
     <div class="col-md-2 col-sm-3 col-xs-3 topNavbarRight">
       <div dropdown>
