@@ -2,7 +2,7 @@
   <div>
     <img ng-src="{{ getUserAvatarUrl(user) }}" style="float: left;width: 40px;margin-left: -10px; margin-right: 10px;" alt="...">
     <p style="font-weight: 700;">{{ getUserName(user) }}</p>
-    <div style="white-space: nowrap; overflow: hidden;-ms-text-overflow: ellipsis;text-overflow: ellipsis;" ng-if="!company.default">
+    <div style="display:inline-flex;white-space: nowrap; overflow: hidden;-ms-text-overflow: ellipsis;text-overflow: ellipsis;" ng-if="!company.default">
       Company: <span>{{ company.name }}</span>
     </div>
     <div ng-if="user.primaryEmail">

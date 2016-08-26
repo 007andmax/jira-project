@@ -2,9 +2,9 @@
   <div>
     <img ng-src="{{ getCompanyLogoUrl(company) }}" alt="..." style="float: left;width: 40px;margin-left: -10px; margin-right: 10px;">
     <p style="font-weight: 700;">{{ company.name }}</p>
-    <div style="white-space: nowrap; overflow: hidden;-ms-text-overflow: ellipsis;text-overflow: ellipsis;">
+    <div style="display:inline-flex;width: 99.9%; white-space: nowrap; overflow: hidden;-ms-text-overflow: ellipsis;text-overflow: ellipsis;">
       <i style="margin: 4px 5px 0 0 ; float: left;" class="icn-sm icn-sb-location"></i>
-      Address: <span>{{ companyAddress.addressWithSuitNumberAndPostalCode }}</span>
+      Address: <span class="ellipsis">{{ companyAddress.addressWithSuitNumberAndPostalCode }}</span>
     </div>
     <div>
       <span>{{ formatOffset(companyAddress.timeZone.timeOffset) }}</span>
