@@ -81,13 +81,13 @@
 
 /*Ticket Hover - Start*/
 .ticket:before, .ticket:after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background-color: transparent;
-  content: '';
-}
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   width: 3px;
+   background-color: transparent;
+   content: '';
+ }
 /*.ticket:hover:before {*/
   /*left: 0;*/
   /*background-color: #e7ecf2;*/

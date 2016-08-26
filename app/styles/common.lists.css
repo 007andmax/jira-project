@@ -65,6 +65,22 @@
 
   border-top: 1px solid #f1f5fa;
 }
+.qt-list > li:before, .qt-list > li:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: transparent;
+  content: '';
+}
+.qt-list > li:hover:before {
+  left: 0;
+  background-color: #e7ecf2;
+}
+.qt-list > li:hover:after {
+  right: 0;
+  background-color: #e7ecf2;
+}
 .qt-list li.list-heading {
   height: auto;
   padding: 28px 0;
