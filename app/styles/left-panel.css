@@ -40,13 +40,12 @@
 
   display: flex;
 
-  width: 240px;
   height: 100%;
 
   background-color: #1f2a37;
 
   flex-flow: row wrap;
-  transition: .2s ease width .0s;
+  transition: .2s ease-in width .0s;
 
 }
 @media only screen and (max-width: 1024px) {
@@ -56,15 +55,16 @@
             box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
   }
 }
-.left-panel-full.ng-hide {
-  width: 0 !important;
-}
-.left-panel-full.ng-hide-add {
-  width: 240px;
- }
-.left-panel-full.ng-hide-remove {
-  width: 0;
- }
+/*.left-panel-full.ng-hide {*/
+  /*width: 0 !important;*/
+/*}*/
+/*.left-panel-full.ng-hide-add {*/
+  /*width: 240px;*/
+  /*display: block !important;*/
+ /*}*/
+/*.left-panel-full.ng-hide-remove {*/
+  /*width: 0;*/
+ /*}*/
 .center-category__category {
   position: relative;
 

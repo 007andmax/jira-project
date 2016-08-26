@@ -4834,6 +4834,7 @@ tbody.collapse.in {
 }
 .open > .dropdown-menu {
   display: block;
+  width: 100%;
 }
 .open > a {
   outline: 0;
@@ -9781,7 +9782,7 @@ button.close {
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-1 {
   display: inline-block;
-  width: calc(100% - 410px);
+  width: calc(100% - 243px);
 }
 .ticket-add-content .ticket-add-product .qt-table li .col-3,
 .ticket-add-content .ticket-add-product .qt-table li .col-4,
@@ -9862,6 +9863,6 @@ button.close {
   background: transparent;
 }
 .change-view-actions .svg-icn{
-  width: 100%;
+  width: 70%;
 }
 

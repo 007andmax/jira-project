@@ -263,10 +263,12 @@
   cursor: not-allowed;
 }
 
+.edit-invoice-form .product-expense > .col1,
+.edit-invoice-form .service-expense > .col1, .col2 {
+  position: relative;
+}
 .edit-invoice-form .product-expense > div,
 .edit-invoice-form .service-expense > div {
-  position: relative;
-
   display: table-cell;
 
   width: 25%;
@@ -274,7 +276,6 @@
 
   vertical-align: top;
 }
-
 .invoice-table-head .invoice-table-head-item {
   line-height: 1;
 

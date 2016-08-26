@@ -25,11 +25,9 @@
             scope.$on('toggleTicketsList', function () {
               if (scope.ticketListOpened) {
                 body.removeClass("opened-ticket-list").addClass("opened-ticket");
-                element.find('.nano-content').css({ 'position': 'static' });
               } else {
                 body.addClass("opened-ticket-list opened-ticket");
                 element.nanoScroller();
-                element.find('.nano-content').css({ 'position': 'absolute' });
               }
               scope.ticketListOpened = !scope.ticketListOpened;
               localStorageService.set('ticket-list-view', scope.ticketListOpened ? 'opened' : 'closed')

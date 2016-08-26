@@ -700,9 +700,9 @@ Devices tab
 .qt-list .list-heading .checkbox {
   margin-top: 0;
 }
-.qt-list .checkbox .control-indicator {
-  top: -2px;
-}
+/*.qt-list .checkbox .control-indicator {*/
+  /*top: -2px;*/
+/*}*/
 .qt-list .checkbox .control-indicator.plus-circle {
   top: -3px;
 }
