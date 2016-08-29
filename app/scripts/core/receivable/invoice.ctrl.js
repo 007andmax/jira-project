@@ -5,6 +5,7 @@
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.invoiceCtrl',
     ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService',
       function ($scope, ReceivableService, $rootScope, CompaniesService) {
+        var disableInvoiceButtons = false;
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
@@ -28,6 +29,24 @@
           ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {
             $scope.sending[idInvoiceToSend] = false;
           });
+        };
+
+        $scope.rollbackInvoice = function (invoiceId) {
+          if (!disableInvoiceButtons) {
+            disableInvoiceButtons = true;
+            ReceivableService.rollback(invoiceId, function () {
+              disableInvoiceButtons = false;
+            })
+          }
+        };
+
+        $scope.deleteInvoice = function (invoiceId) {
+          if (!disableInvoiceButtons) {
+            disableInvoiceButtons = true;
+            ReceivableService.remove(invoiceId, function () {
+              disableInvoiceButtons = false;
+            })
+          }
         };
 
       }]);

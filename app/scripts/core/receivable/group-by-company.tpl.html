@@ -112,8 +112,14 @@
 
             <div class="col-5 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
             <div class="col-6 group-btns">
-              <i class="icn-sm icn-remove-token hide"></i>
-              <i class="icn-sm icn-delete hide" tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"></i>
+              <div tooltip="rollback" tooltip-placement="top" tooltip-append-to-body="true"
+                   ng-click="rollbackInvoice(invoice.id)" ng-if="!invoice.recurringInvoice">
+                <i class="icn-sm icn-restore"></i>
+              </div>
+              <div tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+                   ng-click="deleteInvoice(invoice.id)">
+                <i class="icn-sm icn-delete"></i>
+              </div>
             </div>
 
           </li>

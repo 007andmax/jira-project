@@ -148,6 +148,13 @@
               console.error("!!!!!!!----ATEMPT TO CHANGE STATUS OF UNEXISTING INVOICE-----!!!!!!!!");
             }
 
+          } else if (newChange.action === 'INVOICE_DELETED') {
+
+            Utils.deleteById(data.list, newChange.data.id);
+            if (data.companies[newChange.data.company.id]) {
+              Utils.deleteById(data.companies[newChange.data.company.id], newChange.data.id);
+            }
+
           } else if (newChange.action === 'PAYMENT_RECEIVED') {
 
             var invoiceIds = newChange.data;
@@ -279,6 +286,16 @@
       });
     }
 
+    function rollback(invoiceId, callback) {
+      var future = $http.put('/invoice/rollback?invoiceId=' + invoiceId, {});
+      Utils.handleCallback(future, callback);
+    }
+
+    function remove(invoiceId, callback) {
+      var future = $http.delete('/invoice/delete?invoiceId=' + invoiceId);
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       getReceivedPaymentsSumByCompany: getReceivedPaymentsSumByCompany,
       getReceivableGraphData: getReceivableGraphData,
@@ -287,7 +304,9 @@
       receivePayment: receivePayment,
       resendInvoice: resendInvoice,
       resendInvoices: resendInvoices,
-      search: search
+      search: search,
+      rollback: rollback,
+      remove: remove
     }
   }]);
 

@@ -12,7 +12,7 @@
     function ($http, $rootScope, RealTimeService, Utils) {
 
       var scope = $rootScope.$new();
-      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_INVOICED', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
+      var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
       var queries, loadingInProcess;
       var operators = {
         NULL: function (value) {
@@ -658,13 +658,17 @@
           }
 
         } else if (newChange.action === 'READ') {
-          Utils.defineReadOnlyProperty(ticketById, 'unread', false);
+          if (ticketById) {
+            Utils.defineReadOnlyProperty(ticketById, 'unread', false);
+          }
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.defineReadOnlyProperty(storage.openedTicket, 'unread', false);
           }
 
         } else if (newChange.action === 'TICKET_UPDATES_READ') {
-          Utils.defineReadOnlyProperty(ticketById, 'hasNewUpdates', false);
+          if (ticketById) {
+            Utils.defineReadOnlyProperty(ticketById, 'hasNewUpdates', false);
+          }
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.defineReadOnlyProperty(storage.openedTicket, 'hasNewUpdates', false);
           }
@@ -677,16 +681,26 @@
           }
 
         } else if (newChange.action === 'TICKET_BILLABLE') {
-          Utils.defineReadOnlyProperty(ticketById, 'isBillable', newChange.data.isBillable);
+          if (ticketById) {
+            Utils.defineReadOnlyProperty(ticketById, 'isBillable', newChange.data.isBillable);
+          }
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.defineReadOnlyProperty(storage.openedTicket, 'isBillable', newChange.data.isBillable);
+          }
+
+        } else if (newChange.action === 'TICKET_INVOICED') {
+          if (ticketById) {
+            Utils.defineReadOnlyProperty(ticketById, 'isBillable', newChange.data.hasInvoice);
+          }
+          if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
+            Utils.defineReadOnlyProperty(storage.openedTicket, 'hasInvoice', newChange.data.hasInvoice);
           }
 
         } else if (newChange.action === 'LINKED_AGENT_CHANGED') {
           for (var i = 0; i < newChange.data.ticketIds.length; i++) {
             var ticketId = newChange.data.ticketIds[i],
               ticket = Utils.findById(storage.tickets, ticketId);
-            if (newChange.data.deviceId) {
+            if (newChange.data.deviceId && ticket) {
               Utils.defineReadOnlyProperty(ticket, 'agent', { deviceId: newChange.data.deviceId });
             } else {
               Utils.defineReadOnlyProperty(ticket, 'agent', null);
