@@ -504,6 +504,10 @@
         Utils.handleCallback(future, callback);
       }
 
+      function deactivateAccount(note) {
+        $http.post('/users/deactivate', { note: note });
+      }
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -528,7 +532,8 @@
         getActivityHistory: getActivityHistory,
         closeSessions: closeSessions,
         toggle2FA: toggle2FA,
-        get2FA: get2FA
+        get2FA: get2FA,
+        deactivateAccount: deactivateAccount
       }
 
     }]);

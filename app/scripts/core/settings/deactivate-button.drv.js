@@ -3,18 +3,30 @@
 (function () {
 
   angular.module("quicktech.core.settings").directive("deactivateButton",
-    ['UsersService', 'quicktech.common.services.UserConfirmationsService',
-      function (UsersService, UserConfirmationsService) {
+    ['UsersService', '$modal',
+      function (UsersService, $modal) {
         return {
           restrict: 'A',
           link: function (scope, element) {
 
             element.click(function () {
-              var confirmMesage = 'Do you want to deactivate account?',
-                confirmButton = 'Yes';
+              $modal.open({
+                templateUrl: '/html/scripts/core/settings/deactivate-account.tpl.html',
+                controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                  $scope.modalData = { note: '' };
+                  $scope.dismiss = $modalInstance.dismiss;
+                  $scope.confirm = function () {
+                    $modalInstance.close($scope.modalData.note);
+                  };
+                }],
+                keyboard: false,
+                size: 'custom-size-confirmation-pop-up',
+                windowClass: 'modal-spam',
+                backdrop: 'static',
+                animation: true
 
-              UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-                UsersService.deleteOrArchiveUser(scope.currentUser.id, false);
+              }).result.then(function (note) {
+                UsersService.deactivateAccount(note);
               });
 
             })
