@@ -8,7 +8,7 @@
                  custom-disabled="{{ user.company.default }}"
                  qt-custom-popover-template="/html/scripts/core/tickets/user-info-popup.tpl.html">
               <img qt-popover-trigger="mouseenter"
-                   ng-src="{{ getUserAvatarUrl(ticketDetails.createdUser) }}" class="avatar-38 img-circle" alt="...">
+                   ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
             </div>
             <div class="clearfix pull-left">
               <div class="ticket-header-username pull-left">
@@ -415,14 +415,14 @@
           <span class="pull-left ticket-update-title">Ticket Updates
             <span class="light-cl">{{ ticketDetails.updates.length + ticketDetails.unloadedUpdates }}</span>
           </span>
-          <span class="pull-left label shared-with"
-                style="cursor: pointer" ng-click="openFullSharedUsers()">
+          <span class="pull-left label shared-with" ng-style="{'cursor': shares.length ? 'pointer' : 'default'}"
+                style="cursor: pointer" ng-click="toggleFullSharedUsers()">
             SHARED WITH {{ shares.length }}
           </span>
           </h4>
           <div class="clearfix"></div>
           <ul class="shared-users-list clearfix" ng-show="isFullSharedUserShow === true">
-            <li ng-repeat="share in shares">
+            <li ng-repeat="share in shares track by share.id">
               <div class="pull-left avatar persistent-tooltip"
                    tooltip-placement="top"
                    tooltip-html-unsafe="<p class='tooltip-name'>{{ share.name }}</p><span class='tooltip-designation'>{{ share.title }}</span>">
@@ -431,7 +431,7 @@
             </li>
             <li>
               <div class="btn pull-left btn-primary has-tooltip"
-                   tooltip="Hide All" data-placement="top" ng-click="closeFullSharedUsers()">
+                   tooltip="Hide All" data-placement="top" ng-click="toggleFullSharedUsers()">
                 <i class="icn-sm icn-remove-token"></i>
               </div>
             </li>

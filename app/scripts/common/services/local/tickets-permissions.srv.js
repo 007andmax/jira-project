@@ -37,9 +37,6 @@
           } else if (option === 'billable') {
             return isBillable(ticket);
 
-          } else if (option === 'shared') {
-            return isSharedToCurrentUser(ticket);
-
           } else {
             return true;
           }
