@@ -285,7 +285,7 @@
   border-left: 5px solid #4caf50 !important;
 }
 .medium-priority-border{
-  border-left: 5px solid #FFC107 !important;
+  border-left: 5px solid transparent !important;
 }
 .high-priority-border{
   border-left: 5px solid #e53935 !important;
@@ -294,7 +294,7 @@
   border-left-color: #6AFF6E !important;
 }
 .active.medium-priority-border {
-  border-left-color: #FFFC00 !important;
+  border-left-color: transparent !important;
 }
 .active.high-priority-border {
   border-left-color: #FF241A !important;
