@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.invoiceCtrl',
-    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService',
-      function ($scope, ReceivableService, $rootScope, CompaniesService) {
+    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService) {
         var disableInvoiceButtons = false;
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
@@ -31,21 +31,31 @@
           });
         };
 
-        $scope.rollbackInvoice = function (invoiceId) {
+        $scope.rollbackInvoice = function (invoice) {
           if (!disableInvoiceButtons) {
+            var confirmMessage = 'Do you want to rollback invoice #' + invoice.number + '?';
             disableInvoiceButtons = true;
-            ReceivableService.rollback(invoiceId, function () {
+            UserConfirmationsService.show(confirmMessage, 'OK').then(function (resp) {
+              ReceivableService.rollback(invoice.id, function () {
+                disableInvoiceButtons = false;
+              });
+            }, function () {
               disableInvoiceButtons = false;
-            })
+            });
           }
         };
 
-        $scope.deleteInvoice = function (invoiceId) {
+        $scope.deleteInvoice = function (invoice) {
           if (!disableInvoiceButtons) {
+            var confirmMessage = 'Do you want to delete invoice #' + invoice.number + '?';
             disableInvoiceButtons = true;
-            ReceivableService.remove(invoiceId, function () {
+            UserConfirmationsService.show(confirmMessage, 'OK').then(function (resp) {
+              ReceivableService.remove(invoice.id, function () {
+                disableInvoiceButtons = false;
+              });
+            }, function () {
               disableInvoiceButtons = false;
-            })
+            });
           }
         };
 
