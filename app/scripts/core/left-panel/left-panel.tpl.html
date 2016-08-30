@@ -54,7 +54,7 @@
         </div>
 
         <div ng-show="qSHistoryExpanded" class="category-expanded">
-          <div class="category-expanded-paragraph" ng-repeat="qs in qSHistory | orderBy: 'startedAt' track by qs.id"
+          <div class="category-expanded-paragraph sked" ng-repeat="qs in qSHistory | orderBy: 'startedAt' track by qs.id"
                qt-custom-popover-template="/html/scripts/core/left-panel/quick-support-history-info.tpl.html"
                qt-popover-position="right" qt-popover-append-to-body z-index="9999">
             <div qt-popover-trigger="click">
@@ -123,7 +123,7 @@
         <span class="left-panel-full__head--header">Companies</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
+        <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
              ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
              ng-click="goToCompany(company)"
              ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}"
@@ -140,7 +140,7 @@
         <span class="left-panel-full__head--header">Users</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
+        <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
              style="padding-left: 25px"
              ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
              ng-click="goToUser(user)">

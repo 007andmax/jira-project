@@ -59,8 +59,15 @@
     </div>
   </div>
 
-  <div class="col-5">
-    <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete" ng-click="deleteService()">
+  <div class="col-5" style="min-width: 50px;">
+    <a class="hit-area pull-left order-add-product has-tooltip"
+       ng-disabled="!companyServices || !companyServices.length"
+       ng-click="addService(editInvoiceForm)" tooltip-placement="top"
+       tooltip="{{ companyServices && companyServices.length ? 'Add Service' : 'Company has no services' }}">
+      <i class="icn-sm icn-plus-dark"></i>
+    </a>
+    <a style="margin-left: 5px;" class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete"
+       ng-click="deleteService()">
       <i class="icn-sm icn-delete"></i>
     </a>
   </div>

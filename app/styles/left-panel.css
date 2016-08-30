@@ -55,16 +55,6 @@
             box-shadow: 7px 7px 10px 0 rgba(0,0,0,0.5);
   }
 }
-/*.left-panel-full.ng-hide {*/
-  /*width: 0 !important;*/
-/*}*/
-/*.left-panel-full.ng-hide-add {*/
-  /*width: 240px;*/
-  /*display: block !important;*/
- /*}*/
-/*.left-panel-full.ng-hide-remove {*/
-  /*width: 0;*/
- /*}*/
 .center-category__category {
   position: relative;
 
@@ -80,6 +70,9 @@
 
   align-items: center;
   justify-content: flex-start;
+}
+.sked{
+  height: 35px;
 }
 .center-category__category:hover {
   color: #ffffff;
@@ -171,7 +164,7 @@
   cursor: pointer;
   color: #94a4b8;
   line-height: 2.5em;
-  padding: 0 20px 0 30px;
+  padding: 0 20px 0 20px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
