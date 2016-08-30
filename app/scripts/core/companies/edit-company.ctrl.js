@@ -39,7 +39,7 @@
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
 
-        $scope.clientTypes = ['Clinic', 'Dental'];
+        $scope.clientTypes = ['Client', 'Lead'];
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
