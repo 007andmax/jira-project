@@ -25,10 +25,6 @@
         };
 
         $scope.addService = function (form) {
-          if (!$scope.companyServices || !$scope.companyServices.length) {
-            return;
-          }
-
           if ($scope.openTab !== 'service') {
             $scope.openTab = 'service';
           }
