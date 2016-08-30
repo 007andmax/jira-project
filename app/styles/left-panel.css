@@ -171,7 +171,7 @@
   cursor: pointer;
   color: #94a4b8;
   line-height: 2.5em;
-  padding-left: 30px;
+  padding: 0 20px 0 30px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

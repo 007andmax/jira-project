@@ -3,13 +3,15 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope',
+    ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService', 'TicketsService', 'CompaniesService', 'UsersService',
-      function ($scope, SharedStateService, $state, $rootScope, PermissionsService, TicketsService,
+      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, TicketsService,
                 CompaniesService, UsersService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
+
+        $scope.qSHistoryExpanded = false;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
         $scope.clientUsers = UsersService.getClientUsers;
@@ -18,6 +20,8 @@
         $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
+
+        $scope.qSHistory = DevicesService.getOneTimeHistory();
 
         $scope.$watch(function () {
           return $state.current.url + ' ' + $state.current.name;
@@ -69,6 +73,10 @@
             globalSearch.searchValue = $scope.getUserName(user);
             globalSearch.preventClearing = true;
           });
+        };
+
+        $scope.toggleQSHistory = function ($event) {
+          $scope.qSHistoryExpanded = !$scope.qSHistoryExpanded;
         };
 
         function getOpenedCategory(url) {
