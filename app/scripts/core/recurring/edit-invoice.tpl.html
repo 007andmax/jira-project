@@ -198,10 +198,6 @@
             <div class="tab-pane in active" ng-show="isTabOpened('product')">
               <ul class="qt-table">
 
-                <li ng-show="!editInvoice.products.length">
-                  <span class="text-muted">No products.</span>
-                </li>
-
                 <li ng-repeat="product in editInvoice.products"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
@@ -213,10 +209,6 @@
 
             <div class="tab-pane in active" ng-show="isTabOpened('service')">
               <ul class="qt-table">
-
-                <li ng-show="!editInvoice.services.length">
-                  <span class="text-muted">No services.</span>
-                </li>
 
                 <li ng-repeat="service in editInvoice.services"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">

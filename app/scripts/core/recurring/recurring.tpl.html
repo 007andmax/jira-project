@@ -110,8 +110,7 @@
                   : ' days')}}
                 </div>
                 <div>
-                  <span class="badge"
-                        ng-class="{'badge-orange': invoice.leftGenerations === 1, 'badge-red': invoice.leftGenerations === 0}">
+                  <span ng-class="{'badge-orange': invoice.leftGenerations === 1, 'badge-red': invoice.leftGenerations === 0, 'badge': invoice.leftGenerations <= 1}">
                     {{ invoice.endDate | date:'dd MMM yyyy' }}
                   </span>
                 </div>

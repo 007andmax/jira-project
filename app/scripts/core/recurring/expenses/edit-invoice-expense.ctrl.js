@@ -3,15 +3,19 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceExpenseCtrl',
-    ['$scope',
-      function ($scope) {
+    ['$scope', '$filter',
+      function ($scope, $filter) {
 
         $scope.selectProduct = function (product) {
           $scope.product.item = angular.copy(product);
         };
 
         $scope.deleteProduct = function () {
-          $scope.editInvoice.products.splice($scope.$index, 1);
+          if ($scope.editInvoice.products.length > 1) {
+            $scope.editInvoice.products.splice($scope.$index, 1);
+          } else {
+            $scope.editInvoice.products = [{}];
+          }
         };
 
         $scope.setNewService = function (service) {
@@ -19,7 +23,11 @@
         };
 
         $scope.deleteService = function () {
-          $scope.editInvoice.services.splice($scope.$index, 1);
+          if ($scope.editInvoice.services.length > 1) {
+            $scope.editInvoice.services.splice($scope.$index, 1);
+          } else {
+            $scope.editInvoice.services = [{ date: $filter('date')(new Date(), 'd MMM yyyy') }];
+          }
         }
 
       }]);

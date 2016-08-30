@@ -84,13 +84,19 @@
             memo: $scope.invoice.memo,
             sentOn: $filter('date')($scope.invoice.sentOn, 'dd MMM yyyy'),
             endDate: $filter('date')($scope.invoice.endDate, 'dd MMM yyyy'),
-            products: angular.copy($scope.invoice.products),
-            services: angular.copy($scope.invoice.services)
+            products: $scope.invoice.products.length ? angular.copy($scope.invoice.products) : [{}],
+            services: $scope.invoice.services.length ? angular.copy($scope.invoice.services) : [{}]
           };
 
           for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
-            $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
-            $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+            if ($scope.editInvoice.services[i].quantity) {
+              $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
+            }
+            if ($scope.editInvoice.services[i].date !== undefined) {
+              $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+            } else {
+              $scope.editInvoice.services[i].date = $filter('date')(new Date(), 'd MMM yyyy');
+            }
           }
 
           if ($scope.invoice.frequency) {
@@ -114,8 +120,8 @@
 
           $scope.editInvoice = {
             autoCreate: true,
-            products: [],
-            services: [],
+            products: [{}],
+            services: [{}],
             sentOn: new Date(Date.now() + day),
             endDate: new Date(Date.now() + day)
           };
@@ -181,7 +187,7 @@
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
             $scope.taxRatesCoef = 0;
-            $scope.editInvoice.services = [];
+            $scope.editInvoice.services = [{}];
             Utils.customizeArray(allClientUsers, $scope.clients);
             return;
           }
@@ -195,14 +201,20 @@
           };
 
           if ($scope.invoice && $scope.invoice.id && company.id === $scope.invoice.company.id) {
-            $scope.editInvoice.services = angular.copy($scope.invoice.services);
+            $scope.editInvoice.services = $scope.invoice.services.length ? angular.copy($scope.invoice.services) : [{}];
 
             for (var i = 0, len = $scope.editInvoice.services.length; i < len; i++) {
-              $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
-              $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+              if ($scope.editInvoice.services[i].quantity) {
+                $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
+              }
+              if ($scope.editInvoice.services[i].date !== undefined) {
+                $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+              } else {
+                $scope.editInvoice.services[i].date = $filter('date')(new Date(), 'd MMM yyyy');
+              }
             }
           } else {
-            $scope.editInvoice.services = [];
+            $scope.editInvoice.services = [{}];
           }
 
           TaxRatesService.getAllByCompany(company.id, $scope, function (resp) {
@@ -451,73 +463,99 @@
         }
 
         $scope.saveInvoice = function (form) {
-          if (form.$valid && !$scope.disabledSaveInvoice &&
-            (!$scope.editInvoice.autoCreate || $scope.hasNotifyRecipients($scope.ticketSharedUsersList))) {
+          var productsEmpty = false, servicesEmpty = false;
+          $scope.hardDisabledSave = true;
 
-            $scope.hardDisabledSave = true;
-
-            var editInvoice = angular.copy($scope.editInvoice);
-
-            if (!$scope.paramInvocie.repeatingInvoice && $scope.savedRepeatingInvoice) {
-              $scope.paramInvocie.repeatingInvoice = $scope.savedRepeatingInvoice;
-            }
-
-            if ($scope.paramInvocie.repeatingInvoice === 'Month' || $scope.paramInvocie.repeatingInvoice === 'Year') {
-              editInvoice.frequency = $scope.paramInvocie.repeatingInvoice === 'Month' ? 'MONTHLY' : 'YEARLY'
-            } else {
-              editInvoice.customFrequency = parseInt($scope.paramInvocie.repeatingInvoice)
-            }
-
-            editInvoice.endDate = $filter('date')(new Date(editInvoice.endDate), 'yyyy-MM-dd');
-            editInvoice.sentOn = $filter('date')(new Date(editInvoice.sentOn), 'yyyy-MM-dd');
-
-            for (var i = 0, len = editInvoice.services.length; i < len; i++) {
-              editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)
-            }
-
-            editInvoice.shares = [];
-            for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
-
-              var ticketSharedUser = $scope.ticketSharedUsersList[i];
-
-              if (!ticketSharedUser.notify) {
-                continue;
-              }
-
-              if (ticketSharedUser.user) {
-
-                editInvoice.shares.push({
-                  user: { id: ticketSharedUser.user.id }
-                });
-
-              } else if (ticketSharedUser.contact) {
-
-                editInvoice.shares.push({
-                  contact: { id: ticketSharedUser.contact.id }
-                })
-              }
-            }
-
-            RecurringService.saveRecurringOrder(editInvoice, function () {
-              $scope.toogleEditForm();
-              $scope.hardDisabledSave = false;
-            })
-          } else {
-            $scope.tryAddExpense.tryToAddProduct = true;
-            $scope.tryAddExpense.tryToAddService = true;
-            $scope.triedToSaveInvoice = true;
-
-            for (var i = 0; form['updateInvoiceProduct-' + i] || form['updateInvoiceService-' + i]; i++) {
-              var productForm = form['updateInvoiceProduct-' + i],
-                serviceForm = form['updateInvoiceService-' + i];
-
-              if (productForm && productForm.$invalid && $scope.openTab !== 'product') {
-                $scope.openTab = 'product';
-              } else if (serviceForm && serviceForm.$invalid && $scope.openTab !== 'service') {
-                $scope.openTab = 'service';
-              }
-            }
+          if ($scope.editInvoice.services.length === 1 && isEmpty($scope.editInvoice.services[0])) {
+            $scope.editInvoice.services.splice(0, 1);
+            productsEmpty = true;
           }
+
+          if ($scope.editInvoice.products.length === 1 && isEmpty($scope.editInvoice.products[0])) {
+            $scope.editInvoice.products.splice(0, 1);
+            servicesEmpty = true;
+          }
+
+          $timeout(function () {
+            if (form.$valid && !$scope.disabledSaveInvoice &&
+              (!$scope.editInvoice.autoCreate || $scope.hasNotifyRecipients($scope.ticketSharedUsersList))) {
+
+              var editInvoice = angular.copy($scope.editInvoice);
+
+              if (!$scope.paramInvocie.repeatingInvoice && $scope.savedRepeatingInvoice) {
+                $scope.paramInvocie.repeatingInvoice = $scope.savedRepeatingInvoice;
+              }
+
+              if ($scope.paramInvocie.repeatingInvoice === 'Month' || $scope.paramInvocie.repeatingInvoice === 'Year') {
+                editInvoice.frequency = $scope.paramInvocie.repeatingInvoice === 'Month' ? 'MONTHLY' : 'YEARLY'
+              } else {
+                editInvoice.customFrequency = parseInt($scope.paramInvocie.repeatingInvoice)
+              }
+
+              editInvoice.endDate = $filter('date')(new Date(editInvoice.endDate), 'yyyy-MM-dd');
+              editInvoice.sentOn = $filter('date')(new Date(editInvoice.sentOn), 'yyyy-MM-dd');
+
+              for (var i = 0, len = editInvoice.services.length; i < len; i++) {
+                editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)
+              }
+
+              editInvoice.shares = [];
+              for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
+
+                var ticketSharedUser = $scope.ticketSharedUsersList[i];
+
+                if (!ticketSharedUser.notify) {
+                  continue;
+                }
+
+                if (ticketSharedUser.user) {
+
+                  editInvoice.shares.push({
+                    user: { id: ticketSharedUser.user.id }
+                  });
+
+                } else if (ticketSharedUser.contact) {
+
+                  editInvoice.shares.push({
+                    contact: { id: ticketSharedUser.contact.id }
+                  })
+                }
+              }
+
+              RecurringService.saveRecurringOrder(editInvoice, function () {
+                $scope.toogleEditForm();
+                $scope.hardDisabledSave = false;
+              })
+            } else {
+              if (!productsEmpty) {
+                $scope.tryAddExpense.tryToAddProduct = true;
+              }
+              if (!servicesEmpty) {
+                $scope.tryAddExpense.tryToAddService = true;
+              }
+              $scope.triedToSaveInvoice = true;
+              $scope.hardDisabledSave = false;
+
+              for (var i = 0; form['updateInvoiceProduct-' + i] || form['updateInvoiceService-' + i]; i++) {
+                var productForm = form['updateInvoiceProduct-' + i],
+                  serviceForm = form['updateInvoiceService-' + i];
+
+                if (productForm && productForm.$invalid && $scope.openTab !== 'product') {
+                  $scope.openTab = 'product';
+                } else if (serviceForm && serviceForm.$invalid && $scope.openTab !== 'service') {
+                  $scope.openTab = 'service';
+                }
+              }
+            }
+
+            if (servicesEmpty) {
+              $scope.editInvoice.services.push({});
+            }
+
+            if (productsEmpty) {
+              $scope.editInvoice.products.push({});
+            }
+          })
         };
 
         $scope.setOpenedTab = function (tab) {
@@ -563,6 +601,24 @@
               i--;
             }
           }
+        }
+
+        function isEmpty(object) {
+          for (var prop in object) {
+            if (object.hasOwnProperty(prop) && prop !== 'itemOrder' && prop !== 'date' && prop !== '$$hashKey') {
+              var item = object[prop];
+
+              if (typeof item === 'object') {
+                if (!isEmpty(item)) {
+                  return false;
+                }
+              } else if (item) {
+                return false;
+              }
+            }
+          }
+
+          return true;
         }
 
       }]);
