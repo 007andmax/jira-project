@@ -14,8 +14,10 @@
 
         $scope.createOneTimeRemoteSession = DevicesService.createOneTimeRemoteSession;
 
-        $scope.host = ConstantsService.getConstant('server.url');
-        $scope.showHost = $scope.host.replace(/.*?:\/\//g, "");
+        $scope.host = ConstantsService.getConstant('server.url', function (resp) {
+          $scope.host = resp;
+          $scope.showHost = $scope.host.replace(/.*?:\/\//g, "");
+        });
         $scope.statusMap = {
           'URL_GENERATED': 'URL has been generated',
           'URL_OPENED': 'URL has been opened',

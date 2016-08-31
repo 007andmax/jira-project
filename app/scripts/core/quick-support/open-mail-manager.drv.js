@@ -13,7 +13,9 @@
           link: function (scope, element) {
 
             var currentCompany = CompaniesService.getCurrentCompany();
-            var host = ConstantsService.getConstant('server.url');
+            var host = ConstantsService.getConstant('server.url', function (resp) {
+              host = resp;
+            });
             var link = host + 'remote?key=' + scope.openMailManager;
 
             var subject = currentCompany.name + " remote support agent";

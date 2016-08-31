@@ -44,8 +44,12 @@
             counter = 0;
             message = 'Wait until the connection is established... ';
 
-            var remoteConnectPort = ConstantsService.getConstant('remote.connect.port'),
-              restServerAddress = ConstantsService.getConstant('rest.server.address'),
+            var remoteConnectPort = ConstantsService.getConstant('remote.connect.port', function (resp) {
+                remoteConnectPort = resp;
+              }),
+              restServerAddress = ConstantsService.getConstant('rest.server.address', function (resp) {
+                restServerAddress = resp;
+              }),
               url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
 
 

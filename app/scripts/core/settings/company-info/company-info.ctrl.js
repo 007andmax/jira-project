@@ -15,8 +15,12 @@
         AddressesService.getLocales(true, function (response) {
           $scope.timeZones = response;
         });
-        $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
-        $scope.currentUrl = ConstantsService.getConstant('website.dns');
+        $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix', function (resp) {
+          $scope.currentHost = resp;
+        });
+        $scope.currentUrl = ConstantsService.getConstant('website.dns', function (resp) {
+          $scope.currentUrl = resp;
+        });
         $scope.isAddressFocused = $stateParams.isAddressFocused || $scope.currentCompany.status === 'SIGN_UP';
         $scope.isAddressRequired = true;
 

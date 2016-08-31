@@ -12,7 +12,9 @@
           },
           link: function (scope, element) {
 
-            var host = ConstantsService.getConstant('server.url');
+            var host = ConstantsService.getConstant('server.url', function (resp) {
+              host = resp;
+            });
 
             element.click(function () {
 

@@ -8,7 +8,16 @@
       function ($scope, DevicesService, RemoteAccessService, ConstantsService, SharedStateService, $rootScope, UserConfirmationsService) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
-        var lastAgentArr = ConstantsService.getConstant('rest.server.agent.version').split('.');
+        var constVersion = ConstantsService.getConstant('rest.server.agent.version', function (resp) {
+          var lastAgentArr = resp.split('.');
+          for (var i = 0; i < lastAgentArr.length; i++) {
+            if (lastAgentArr[i] > currentAgentArr[i]) {
+              $scope.agentDeprecated = true;
+              break;
+            }
+          }
+        });
+        var lastAgentArr = constVersion ? constVersion.split('.') : [];
         var currentAgentArr = $scope.agent.agentVersion ? $scope.agent.agentVersion.split('.') : [];
 
         for (var i = 0; i < lastAgentArr.length; i++) {
