@@ -20,7 +20,8 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    buildDate: Date.now()
   };
 
   // Define the configuration for all the tasks
@@ -402,10 +403,20 @@ module.exports = function (grunt) {
         patterns: {
           html: [
             [
+              /[ \t]*<!--\s*build date script\s*-->\s*.*?(dateOfLastBuild).*?\s*<!--\s*end build date script\s*-->/gi,
+              'Save build date for cache busting purposes',
+              undefined,
+              function () {
+                return appConfig.buildDate;
+              }
+            ],
+            [
               /<link[^\>]+href=['"]([^"']+)["']/gm, 'Replacing reference to styles',
               undefined,
               function (s) {
-                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                if (s.indexOf('http') !== 0) {
+                  s = '/html/' + s;
+                }
                 return s
               }
             ],
@@ -413,7 +424,9 @@ module.exports = function (grunt) {
               /<script.+src=['"]([^"']+)["']/gm, 'Replacing reference to scripts',
               undefined,
               function (s) {
-                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                if (s.indexOf('http') !== 0) {
+                  s = '/html/' + s;
+                }
                 return s
               }
             ],
@@ -422,7 +435,9 @@ module.exports = function (grunt) {
               'Update the HTML with the new img filenames',
               undefined,
               function (s) {
-                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                if (s.indexOf('http') !== 0) {
+                  s = '/html/' + s;
+                }
                 return s
               }
             ],
@@ -495,7 +510,9 @@ module.exports = function (grunt) {
               'Update the JS with the new img filenames',
               undefined,
               function (s) {
-                if (s.indexOf('http') !== 0)  s = '/html/' + s;
+                if (s.indexOf('http') !== 0) {
+                  s = '/html/' + s;
+                }
                 return s
               }
             ]
