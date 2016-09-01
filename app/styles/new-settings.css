@@ -14,4 +14,8 @@
       font-weight: 600;
       opacity: 0.87; }
 
+@media screen and (max-width: 1024px) {
+  .settings-wrapper__trow--td .svg-icn-full {
+    width: 60px; } }
+
 /*# sourceMappingURL=new-settings.css.map */
