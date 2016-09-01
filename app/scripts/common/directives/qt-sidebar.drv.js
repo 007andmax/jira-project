@@ -21,9 +21,6 @@
           function initLeftPanel(e) {
             var windowWidth = window.outerWidth;
             $rootScope.isLeftPanelHidden = windowWidth <= 1024;
-            if ($state.includes('settings')) {
-              $rootScope.isLeftPanelHidden = true;
-            }
 
             if ($rootScope.isLeftPanelHidden) {
               $scope.$broadcast('leftPanelClosedFromQTSidebar');

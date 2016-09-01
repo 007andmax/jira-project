@@ -54,7 +54,8 @@
         </div>
 
         <div ng-show="qSHistoryExpanded" class="category-expanded">
-          <div class="category-expanded-paragraph sked" ng-repeat="qs in qSHistory | orderBy: 'startedAt' track by qs.id"
+          <div class="category-expanded-paragraph sked"
+               ng-repeat="qs in qSHistory | orderBy: 'startedAt' track by qs.id"
                qt-custom-popover-template="/html/scripts/core/left-panel/quick-support-history-info.tpl.html"
                qt-popover-position="right" qt-popover-append-to-body z-index="9999">
             <div qt-popover-trigger="click">
@@ -199,6 +200,84 @@
           <i class="nav-icon icn-lg icn-services icon-pos"></i> Services
         </div>
       </div>
+    </div>
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'settings' && !isLeftPanelHidden">
+      <div class="left-panel-full__head">
+        <span class="left-panel-full__head--header">Account<br>Settings</span>
+      </div>
+
+      <div class="center-category collapsed-nav nano-content">
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.myProfile')"
+             ng-class="{active: $state.is('settings.myProfile')}">My Profile</div>
+
+        <div collapse="!$state.is('settings.myProfile')" class="category-expanded">
+          <div ng-if="$state.is('settings.myProfile')" navigation-bar>
+            <div class="category-expanded-paragraph sked" navigate-to="#myProfileBasicInfo">Basic Info</div>
+            <div class="category-expanded-paragraph sked" navigate-to="#myProfileAboutMe">About Me</div>
+            <div class="category-expanded-paragraph sked" navigate-to="#myProfileContactInfo">Contact Info</div>
+            <div class="category-expanded-paragraph sked" navigate-to="#myProfileMiscInfo">Misc. Info</div>
+            <div class="category-expanded-paragraph sked" navigate-to="#myProfileTrackingDevices">Activity History</div>
+          </div>
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.emailNotifications')"
+             ng-class="{active: $state.is('settings.emailNotifications')}">
+          Email Notifications
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.tags')"
+             ng-class="{active: $state.is('settings.tags')}">
+          Manage Tags
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
+             ng-class="{active: $state.is('settings.companyProfile')}">
+          Company Profile
+        </div>
+
+        <div collapse="!$state.is('settings.companyProfile')" class="category-expanded">
+          <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
+            <div class="category-expanded-paragraph sked" navigate-to="#companyInfoBasicInfo">Basic Info</div>
+            <div class="category-expanded-paragraph sked" navigate-to="#companyInfoContactInfo">Contact Info</div>
+          </div>
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
+             ng-class="{active: $state.is('settings.techUsers')}">
+          Tech Users
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
+             ng-class="{active: $state.is('settings.email')}">
+          Email Settings
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.services')"
+             ng-class="{active: $state.is('settings.services')}">
+          Services
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.taxRates')"
+             ng-class="{active: $state.is('settings.taxRates')}">
+          Taxes
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
+             ng-class="{active: $state.is('settings.tickets')}">
+          Ticket Settings
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
+             ng-class="{active: $state.is('settings.permissionsManagement')}">
+          Permission Management
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
+             ng-class="{active: $state.is('settings.emailTemplates')}">
+          Email Templates
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>

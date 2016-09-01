@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoServicesCtrl',
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.servicesCtrl',
     ['$scope', 'ServicesService', '$rootScope',
       function ($scope, ServicesService, $rootScope) {
 

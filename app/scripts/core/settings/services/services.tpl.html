@@ -1,0 +1,93 @@
+<div class="settings-main-wrapper">
+  <div class="services-info-wrapper">
+
+    <div class="default-services-header">
+
+      <h3>Services Info
+        <!--<span class="text-muted" ng-show="services && services.length > 0">{{ services.length }}</span>-->
+      </h3>
+
+      <ul class="qt-list" style="width: 500px"
+          ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
+
+        <li class="list-heading" ng-show="services.length > 0">
+          <div class="col-1" style="width: 205px;">SERVICE NAME</div>
+          <div class="col-2">PER HOUR</div>
+          <div class="col-5" style="margin-right: 28px;">IS BILLABLE</div>
+          <div class="col-4">&nbsp;</div>
+        </li>
+
+        <li ng-repeat="service in services['default'] | orderBy: 'name'"
+            ng-controller="quicktech.core.settings.serviceCtrl"
+            ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
+            show-model-element="{{ 'show-' + service.versionedId.id }}">
+
+          <div class="intermediate-parent-elem" ng-if="!isEditService">
+
+            <div class="col-1">
+              <div class="checkbox-caption"
+                   style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;width: 100%;">
+                {{ service.name }}
+              </div>
+            </div>
+
+            <div class="col-2">
+              {{ service.rate | currency: '$': 2 }}
+            </div>
+
+            <div class="col-5">
+              <label class="control checkbox">
+                <input type="checkbox" ng-model="isBillable"
+                       ng-change="onChangeBillable()" custom-disabled="{{ disabledCheckbox }}">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+
+            <div class="col-4">
+
+              <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                 ng-click="deleteService()"
+                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+                <i class="icn-sm icn-delete"></i>
+              </a>
+
+              <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+                 ng-click="showEditServiceForm()"
+                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">
+                <i class="icn-sm icn-edit"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+          <div ng-if="isEditService" ng-controller="quicktech.core.settings.editServiceCtrl"
+               ng-include="'/html/scripts/core/settings/services/edit-service.tpl.html'"></div>
+
+        </li>
+
+        <li class="qt-service-form add-new-service">
+          <div ng-controller="quicktech.core.settings.editServiceCtrl"
+               ng-include="'/html/scripts/core/settings/services/edit-service.tpl.html'"></div>
+        </li>
+
+      </ul>
+
+
+      <div>
+
+        <span class="text-muted" ng-show="!services || services.length === 0">No Default Services.</span>
+
+        <!--<div class="form-group no-label full-width">-->
+        <!--<button type="button" class="btn btn-lg btn-info pull-right"-->
+        <!--custom-disabled="{{ isServicesChange() || disabledSaveButton }}"-->
+        <!--ng-click="saveAllServices()">Save-->
+        <!--</button>-->
+        <!--</div>-->
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

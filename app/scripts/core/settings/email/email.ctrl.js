@@ -2,9 +2,9 @@
 
 (function () {
 
-  angular.module('quicktech.core.settings').controller('quicktech.core.settings.smtpCtrl',
-    ['$scope', 'CompaniesService', '$timeout',
-      function ($scope, CompaniesService, $timeout) {
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.emailCtrl',
+    ['$scope', 'CompaniesService', '$timeout', 'ConstantsService',
+      function ($scope, CompaniesService, $timeout, ConstantsService) {
         var promise,
           savedSMTPSettings,
           initialized = false,
@@ -36,6 +36,7 @@
           label: 'Quicktech mail server'
         }];
 
+        $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.smtp = {};
         $scope.smtpHintMessage = 'This section allows you to choose server for sending email notifications.\n' +
@@ -45,7 +46,8 @@
           'that you have granted access for unverified applications in your account settings.';
 
         CompaniesService.getCompanySMTPSettings(function (resp) {
-          $scope.smtp = resp;
+          $scope.smtp = resp.smtpSettings;
+          $scope.supportMailBox = resp.supportMailBox;
           $scope.smtp.testEmail = resp.login;
           savedSMTPSettings = angular.copy(resp);
           portIsEmpty = !resp.port;

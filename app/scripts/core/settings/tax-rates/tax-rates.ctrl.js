@@ -2,11 +2,11 @@
 
 (function () {
 
-  angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoDefaultTaxCtrl',
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.taxRatesCtrl',
     ['$scope', 'TaxRatesService',
       function ($scope, TaxRatesService) {
 
-        TaxRatesService.getAllByCompany($scope.currentCompany.id, $scope, function (resp) {
+        TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
           $scope.taxRates = angular.copy(resp);
         });
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
@@ -57,7 +57,7 @@
 
           if (form.$valid) {
             $scope.newTaxRate.company = {};
-            $scope.newTaxRate.company.id = $scope.currentCompany.id;
+            $scope.newTaxRate.company.id = $scope.currentUser.company.id;
             TaxRatesService.save($scope.newTaxRate, function (resp) {
               $scope.newTaxRate = {};
               form.$setPristine();

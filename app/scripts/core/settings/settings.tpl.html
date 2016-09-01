@@ -1,165 +1,59 @@
-<div class="settings-wrapper row">
+<div class="settings-wrapper row" ng-if="settingMode === '/settings'">
   <div class="col-xs-12 settings-wrapper__trow">
-    <div class="col-xs-2 settings-wrapper__trow--td">
-      <img class="svg-icn-full" src="images/input-icons/user-shape (1).svg">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.myProfile">
+      <img class="svg-icn-full" src="images/input-icons/user-shape.svg">
       <p>User Profile</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.emailNotifications">
       <img class="svg-icn-full" src="images/input-icons/envelope.svg">
       <p>Email Notifications</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.tags">
       <img class="svg-icn-full" src="images/input-icons/tags.svg">
       <p>Manage Tags</p>
     </div>
   </div>
-  <div class="col-xs-12 settings-wrapper__trow">
-    <div class="col-xs-2 settings-wrapper__trow--td">
+  <div class="col-xs-12 settings-wrapper__trow" ng-if="currentUser.isOwner">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.companyProfile">
       <img class="svg-icn-full" src="images/input-icons/compass-circular-variant.svg">
       <p>Company Profile</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.techUsers">
       <img class="svg-icn-full" src="images/input-icons/admin-with-cogwheels.svg">
       <p>Tech Users</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.email">
+      <img class="svg-icn-full" src="images/input-icons/email-settings.svg">
+      <p>Email Settings</p>
+    </div>
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.services">
       <img class="svg-icn-full" src="images/input-icons/open-wrench-tool-silhouette.svg">
       <p>Services</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.taxRates">
       <img class="svg-icn-full" src="images/input-icons/dollar-symbol.svg">
       <p>Taxes</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.tickets">
       <img class="svg-icn-full" src="images/input-icons/concert-ticket.svg">
       <p>Ticket Settings</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
-      <img class="svg-icn-full" src="images/input-icons/financial-document.svg">
-      <p>Ticket & Invoice</p>
-    </div>
   </div>
   <div class="col-xs-12 settings-wrapper__trow">
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td"
+         ui-sref="settings.permissionsManagement" ng-if="currentUser.isOwner">
       <img class="svg-icn-full" src="images/input-icons/permission.svg">
       <p>Permission Management</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td"
+         ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner">
       <img class="svg-icn-full" src="images/input-icons/mail.svg">
       <p>Email Templates</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td">
+    <div class="col-xs-2 settings-wrapper__trow--td" deactivate-button>
       <img class="svg-icn-full" src="images/input-icons/cancel.svg">
       <p>Deactivate Account</p>
     </div>
   </div>
 </div>
-<div class="settings-content" >
-
-  <div class="settings-sidebar">
-    <ul class="list-unstyled">
-      <li class="nav-my-profile" ui-sref="settings.myProfile">
-
-        <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/myProfile'}">
-          <i class="icn-sm icn-settings-profile pull-left"></i>
-          My Profile
-        </a>
-
-        <div collapse="!(settingMode === '/myProfile')">
-          <ul class="settings-submenu" ng-if="(settingMode === '/myProfile')"
-              navigation-bar="#navigation-content-wrapper">
-
-            <li navigate-to="#myProfileBasicInfo"><a href="javascript:void(0)">Basic Info</a></li>
-            <li navigate-to="#myProfileAboutMe"><a href="javascript:void(0)">About Me</a></li>
-            <!--<li navigate-to="#myProfileChangePassword"><a href="javascript:void(0)">Change Password</a></li>-->
-            <li navigate-to="#myProfileContactInfo"><a href="javascript:void(0)">Contact Info</a></li>
-            <li navigate-to="#myProfileMiscInfo"><a href="javascript:void(0)">Misc. Info</a></li>
-            <li navigate-to="#myProfileEmailNotifications"><a href="javascript:void(0)">Email Notifications</a></li>
-            <li navigate-to="#myProfileTrackingDevices"><a href="javascript:void(0)">Activity History</a></li>
-
-          </ul>
-        </div>
-      </li>
-
-      <li class="nav-deactivate" ui-sref="settings.techUsers"
-          ng-if="currentUser.accountType !== 'ROOT' && currentUser.isOwner">
-        <a href="javascript:void(0)" ng-class="{'active': settingMode === '/techUsers'}">
-          <i class="icn-sm icn-cusers pull-left"></i>
-          Tech Users
-        </a>
-      </li>
-
-      <li class="nav-company-info" ui-sref="settings.companyInfo" ng-if="currentUser.isOwner">
-
-        <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/companyInfo'}">
-          <i class="icn-sm icn-settings-company-info pull-left"></i>
-          Company Info
-        </a>
-
-        <div collapse="!(settingMode === '/companyInfo')">
-          <ul class="settings-submenu" ng-if="(settingMode === '/companyInfo')"
-              navigation-bar="#navigation-content-wrapper">
-
-            <li navigate-to="#companyInfoBasicInfo"><a href="javascript:void(0)">Basic Info</a></li>
-            <li navigate-to="#smtpSettings"><a href="javascript:void(0)">Email Settings</a></li>
-            <!--<li navigate-to="#companyInfoBusinessTime"><a href="javascript:void(0)">Business Days &amp; Hours</a></li>-->
-            <li navigate-to="#companyInfoContactInfo"><a href="javascript:void(0)">Contact Info</a></li>
-            <li navigate-to="#companyInfoServices"><a href="javascript:void(0)">Services Info</a></li>
-            <li navigate-to="#companyInfoDefaultTax"><a href="javascript:void(0)">Default Tax</a></li>
-            <li navigate-to="#ticketAndInvoice"><a href="javascript:void(0)">Ticket &amp; Invoice</a></li>
-            <li navigate-to="#companyInfoManageTags"><a href="javascript:void(0)">Manage Tags</a></li>
-            <!--<li class="notification-heading">Notifications</li>-->
-            <!--<li navigate-to="#companyInfoTicket"><a href="javascript:void(0)">Ticket</a></li>-->
-            <!--<li navigate-to="#companyInfoAgent"><a href="javascript:void(0)">Agent</a></li>-->
-            <!--<li navigate-to="#companyInfoUser"><a href="javascript:void(0)">User</a></li>-->
-            <!--<li navigate-to="#companyInfoCompany"><a href="javascript:void(0)">Company</a></li>-->
-            <!--<li navigate-to="#companyInfoVendor"><a href="javascript:void(0)">Vendor</a></li>-->
-
-          </ul>
-        </div>
-      </li>
-
-      <li ng-if="currentUser.isOwner">
-        <a ui-sref="settings.permissionsManagement">
-          <i class="icn-sm icn-permissions-key pull-left" style="margin-right: 7px;"></i>
-          Permissions Management
-        </a>
-      </li>
-
-      <li class="nav-email-templates" ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner">
-
-        <a href="javascript:void(0)" ng-class="{'collapsed' : settingMode !== '/emailTemplates'}">
-          <i class="icn-sm icn-settings-email-templates pull-left"></i>
-          Email Templates
-        </a>
-
-        <div collapse="!(settingMode === '/emailTemplates')">
-          <ul class="settings-submenu" ng-if="(settingMode === '/emailTemplates')"
-              navigation-bar="#navigation-content-wrapper">
-
-            <li navigate-to="#emailTemplatesTicket"><a href="javascript:void(0)">Ticket</a></li>
-            <!--<li navigate-to="#emailTemplatesAgent"><a href="javascript:void(0)">Agent</a></li>-->
-            <!--<li navigate-to="#emailTemplatesUser"><a href="javascript:void(0)">User</a></li>-->
-            <!--<li navigate-to="#emailTemplatesCompany"><a href="javascript:void(0)">Company</a></li>-->
-            <li navigate-to="#emailTemplatesInvoice"><a href="javascript:void(0)">Invoice</a></li>
-            <!--<li navigate-to="#emailTemplatesVendor"><a href="javascript:void(0)">Vendor</a></li>-->
-
-          </ul>
-        </div>
-      </li>
-
-      <li class="nav-deactivate">
-        <a href="javascript:void(0)" deactivate-button>
-          <i class="icn-sm icn-settings-deactivate pull-left"></i>
-          Deactivate Account
-        </a>
-      </li>
-
-    </ul>
-  </div>
-
-  <div id="navigation-content-wrapper">
-    <div ui-view></div>
-  </div>
-
-</div>
+<div ui-view ng-if="settingMode !== '/settings'"></div>

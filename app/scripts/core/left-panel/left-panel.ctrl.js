@@ -31,6 +31,8 @@
 
             if (!$scope.openedCategory) {
               $rootScope.isLeftPanelHidden = true;
+            } else if ($scope.openedCategory === 'settings') {
+              $rootScope.isLeftPanelHidden = false;
             }
           }
         });
@@ -82,6 +84,8 @@
         function getOpenedCategory(url) {
           if (url.indexOf('quickSupport') > -1) {
             return 'dashboard';
+          } else if (url.indexOf('settings.') > -1) {
+            return 'settings';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';
           } else if (url.indexOf('companies') > -1 || url.indexOf('companyProfile') > -1) {

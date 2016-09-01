@@ -1,0 +1,202 @@
+<div class="settings-main-wrapper">
+  <div class="smtp-wrap create-user-form" ng-form="smtpForm">
+    <h3>Email settings
+      <span class="hint-icon" tooltip-class="hint-tooltip" tooltip-placement="bottom"
+            tooltip="{{ smtpHintMessage }}">?</span>
+    </h3>
+    <div class="form-row clearfix" style="margin-bottom: 20px;">
+      <div class="form-group">
+        <label class="control-label">Send emails via</label>
+        <select class="form-control" ng-model="usedEmailVia" ng-change="changeEmailVia(smtpForm)"
+                ng-options="item.label for item in emailVia"></select>
+      </div>
+    </div>
+
+    <div ng-if="!smtp.useSMTP">
+      <div class="form-row clearfix">
+        <div class="form-group full-width">
+          <label class="control-label">
+            Your support email address:
+          </label>
+
+          <input class="form-control" type="text" readonly/>
+          <span class="company-url-addon">{{ supportMailBox + '@' + currentHost }}</span>
+        </div>
+
+      </div>
+
+      <div class="form-row clearfix">
+
+        <div class="form-group full-width"
+             ng-class="{'has-error': isShowingErrors(smtpForm, 'emailAlias')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'emailAlias')}">
+            Alias for your email (customers will see it in the field "from" in e-mail):
+          </label>
+
+          <div ng-messages="smtpForm.emailAlias.$error"
+               ng-class="{'hide': !isShowingErrors(smtpForm, 'emailAlias')}">
+            <label class="control-label" ng-message="maxlenght">Alias is too long.</label>
+          </div>
+
+          <input class="form-control" type="text" name="emailAlias"
+                 ng-model="emailAlias" maxlength="50"
+                 execute-when-outfocused="saveEmailAlias(emailAlias, smtpForm.emailAlias)">
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="smtp.useSMTP">
+      <div class="form-row clearfix smtp-domains" style="margin-bottom: 20px;">
+        <span ng-click="setDomain('GMAIL', smtpForm)">
+          <img src="images/input-icons/gmail-logo.png" alt="gmail-logo" width="24">
+          <a>Gmail</a>
+        </span>
+        <span ng-click="setDomain('YAHOO', smtpForm)">
+          <img src="images/input-icons/yahoo-logo.png" alt="yahoo-logo" width="24">
+          <a>Yahoo</a>
+        </span>
+        <span ng-click="setDomain('OUTLOOK', smtpForm)">
+          <img src="images/input-icons/outlook-logo.png" alt="outlook-logo" width="24">
+          <a>Outlook</a>
+        </span>
+      </div>
+
+      <div class="form-row clearfix">
+
+        <div class="form-group domain"
+             ng-class="{'has-error': isShowingErrors(smtpForm, 'domain')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'domain')}">
+            Domain
+          </label>
+
+          <div ng-messages="smtpForm.domain.$error"
+               ng-class="{'hide': !isShowingErrors(smtpForm, 'domain')}">
+            <label class="control-label" ng-message="required">Domain is required.</label>
+            <label class="control-label" ng-message="pattern">Please enter a valid domain.</label>
+          </div>
+
+          <input type="text" class="form-control" ng-pattern="domainPattern" name="domain" ng-model="smtp.domain"
+                 required execute-when-outfocused="saveSMTP(smtpForm)"
+                 custom-disabled="{{ !smtp.useSMTP || disableFields }}">
+
+        </div>
+
+        <div class="form-group port"
+             ng-class="{'has-error': isShowingErrors(smtpForm, 'port')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'port')}">
+            Port
+          </label>
+
+          <div ng-messages="smtpForm.port.$error"
+               ng-class="{'hide': !isShowingErrors(smtpForm, 'port')}">
+            <label class="control-label" ng-message="required">Port is required.</label>
+            <label class="control-label" ng-message="number">Please enter a valid value.</label>
+            <label class="control-label" ng-message="min">Value must be greater then 0.</label>
+            <label class="control-label" ng-message="max">Value must be smaller then 65535.</label>
+          </div>
+
+          <input type="number" min="0" max="65535" class="form-control" name="port" ng-model="smtp.port"
+                 required execute-when-outfocused="saveSMTP(smtpForm)"
+                 custom-disabled="{{ !smtp.useSMTP || disableFields }}">
+
+        </div>
+
+        <div class="form-group encryption-type">
+
+          <label class="control-label">
+            Encryption
+          </label>
+
+          <select class="form-control" name="encryptionType" ng-model="smtp.encryptionType"
+                  custom-disabled="{{ !smtp.useSMTP || disableFields }}" ng-change="saveSMTP(smtpForm)">
+            <option value="NONE">PLAIN</option>
+            <option value="TLS">TLS</option>
+            <option value="SSL">SSL</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="form-row clearfix">
+
+        <div class="form-group"
+             ng-class="{'has-error': isShowingErrors(smtpForm, 'login')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'login')}">
+            Login
+          </label>
+
+          <div ng-messages="smtpForm.login.$error"
+               ng-class="{'hide': !isShowingErrors(smtpForm, 'login')}">
+            <label class="control-label" ng-message="required">Login is required.</label>
+            <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
+            <label class="control-label" ng-message="unique">Login is not unique.</label>
+          </div>
+
+          <input type="text" class="form-control" name="login" ng-model="smtp.login" ng-pattern="emailPattern"
+                 required execute-when-outfocused="saveSMTP(smtpForm)"
+                 custom-disabled="{{ !smtp.useSMTP || disableFields }}"
+                 is-uniq-validation validation-func="checkSMTPLoginUnique">
+
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': isShowingErrors(smtpForm, 'password')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'password')}">
+            Password
+          </label>
+
+          <div ng-messages="smtpForm.password.$error"
+               ng-class="{'hide': !isShowingErrors(smtpForm, 'password')}">
+            <label class="control-label" ng-message="required">Password is required.</label>
+          </div>
+
+          <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control"
+                 name="password" ng-model="smtp.password" execute-when-outfocused="saveSMTP(smtpForm)"
+                 custom-disabled="{{ !smtp.useSMTP || disableFields }}" required>
+
+          <span class="show-password" ng-click="showPassword = !showPassword" ng-show="smtp.password">
+            <i class="icn-sm {{ showPassword ? 'icn-hide-password' : 'icn-show-password' }}"></i>
+          </span>
+
+        </div>
+      </div>
+
+      <div class="form-row clearfix">
+        <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox')}">
+          <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
+            Forward your email to:
+          </label>
+
+          <input class="form-control" type="text" readonly/>
+          <span class="company-url-addon">{{ supportMailBox + '@' + currentHost }}</span>
+        </div>
+
+      </div>
+
+      <div class="form-row clearfix test-smtp-connection">
+        <div class="form-group full-width">
+          <div qt-custom-popover-template="/html/scripts/core/settings/email/send-test-email-popup.tpl.html"
+               style="display: inline-block;" qt-popover-position="top">
+            <div class="btn btn-lg btn-info test-email-popup-btn" qt-popover-trigger
+                 custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}">
+              Send test email
+            </div>
+          </div>
+          <div class="loading-indicator-wrap">
+            <button-with-loading-indicator loading="testingConnection"
+                                           ng-show="!smtp.exeption && (testingConnection || smtp.isValid)">
+            </button-with-loading-indicator>
+          </div>
+          <span class="error-msg" ng-if="smtp.useSMTP && !testingConnection && !smtp.isValid">
+            {{ smtp.errorMessage }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,9 +5,8 @@
     : 'The owner of the company has not filled the address of the company, therefore you can not use invoicing feature.'
     }}
   </div>
-  <div class="modal-footer">
-    <div class="btn btn-lg btn-info" ui-sref="settings.companyInfo({ isAddressFocused: true })"
-         ng-if="currentUser.isOwner" ng-click="focusOnAddress()">
+  <div class="modal-footer" ng-if="currentUser.isOwner">
+    <div class="btn btn-lg btn-info" ui-sref="settings.companyProfile({ isAddressFocused: true })">
       Enter Address
     </div>
   </div>

@@ -387,6 +387,25 @@
         return info;
       }
 
+      function getUserEmailNotifications(callback) {
+
+        var info = {};
+
+        $http.get('/settings/userProfile/emailNotifications').then(function (resp) {
+          Utils.customizeObj(resp.data, info);
+
+          if (callback) {
+            callback(resp.data);
+          }
+
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+        return info;
+      }
+
       function isEmailUnique(email, id, isTechUser, callback) {
 
         if (!email) {
@@ -517,6 +536,7 @@
         getAllByCompanyId: getAllByCompanyId,
         getOneById: getOneById,
         getUserProfile: getUserProfile,
+        getUserEmailNotifications: getUserEmailNotifications,
         getUnassignedUser: getUnassignedUser,
         searchByAllUsers: searchByAllUsers,
         searchByClientUsers: searchByClientUsers,

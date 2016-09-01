@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoTagsManageCtrl',
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.tagsCtrl',
     ['$scope', 'TagsService', 'CompaniesService', function ($scope, TagsService, CompaniesService) {
 
       $scope.orderTags = {

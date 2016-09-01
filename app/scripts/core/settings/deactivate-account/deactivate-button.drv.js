@@ -11,7 +11,7 @@
 
             element.click(function () {
               $modal.open({
-                templateUrl: '/html/scripts/core/settings/deactivate-account.tpl.html',
+                templateUrl: '/html/scripts/core/settings/deactivate-account/deactivate-account.tpl.html',
                 controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                   $scope.modalData = { note: '' };
                   $scope.dismiss = $modalInstance.dismiss;

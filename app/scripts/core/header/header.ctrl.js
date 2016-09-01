@@ -81,7 +81,13 @@
           } else if ($state.includes("vendors")) {
             return 'vendors';
           } else if ($state.includes("settings")) {
-            $scope.globalSearch.openedItemName = 'Account Settings';
+            $scope.globalSearch.count = 0;
+            if ($state.is("settings")) {
+              return 'Account Settings';
+            } else {
+              return $state.current.name.split('.').pop()
+                .replace(/([A-Z])/g, '-$1');
+            }
           } else if ($state.includes("devices")) {
             return 'devices';
           } else if ($state.includes("companyDevices")) {
@@ -89,7 +95,7 @@
           } else if ($state.includes("quickSupport")) {
             return 'quick-support';
           } else if ($state.includes("taxRates")) {
-            $scope.globalSearch.openedItemName = 'Tax Rates';
+            return 'Tax Rates';
           }
         };
 
