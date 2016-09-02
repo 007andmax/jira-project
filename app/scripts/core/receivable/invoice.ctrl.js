@@ -32,8 +32,11 @@
         };
 
         $scope.rollbackInvoice = function (invoice) {
-          if (!disableInvoiceButtons) {
-            var confirmMessage = 'Do you want to rollback invoice #' + invoice.number + '?';
+          if (!disableInvoiceButtons && !invoice.recurringInvoice) {
+            var confirmMessage = 'Do you want to rollback invoice #' + invoice.number + '? ' +
+              (invoice.ticketNumbers.length ? (invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
+              invoice.ticketNumbers.join(', #') + ' will be restored.' : '');
+
             disableInvoiceButtons = true;
             UserConfirmationsService.show(confirmMessage, 'OK').then(function (resp) {
               ReceivableService.rollback(invoice.id, function () {
