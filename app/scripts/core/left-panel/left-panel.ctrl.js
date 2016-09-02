@@ -51,6 +51,13 @@
           }
         };
 
+        $scope.onClickSettings = function () {
+	        if ($state.is('settings')) {
+            $rootScope.isLeftPanelHidden = true;
+          }
+          $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+        };
+
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };

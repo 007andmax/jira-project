@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.settings').controller('quicktech.core.settings.trackingDevicesCtrl',
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.activityHistoryCtrl',
     ['$scope', 'UsersService', 'Utils',
       function ($scope, UsersService, Utils) {
         var currentDevice;

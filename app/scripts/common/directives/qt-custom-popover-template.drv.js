@@ -122,6 +122,9 @@
             } else if (position === 'right') {
               left = trigger.outerWidth() + 10;
               top = trigger.outerHeight() / 2 - popover.outerHeight() / 2;
+            } else if (position === 'right-bottom-align') {
+              left = trigger.outerWidth() + 10;
+              top = trigger.outerHeight() - popover.outerHeight();
             } else if (position === 'bottom-left-align') {
               left = 0;
               top = trigger.outerHeight() + 10;

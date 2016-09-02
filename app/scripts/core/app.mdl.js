@@ -174,6 +174,11 @@
           templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
           controller: 'quicktech.core.settings.tagsCtrl'
         }))
+        .state('settings.activityHistory', waitForServices({
+          url: '/activityHistory',
+          templateUrl: '/html/scripts/core/settings/activity-history/activity-history.tpl.html',
+          controller: 'quicktech.core.settings.activityHistoryCtrl'
+        }))
         .state('settings.companyProfile', waitForServices({
           url: '/companyProfile',
           params: {
