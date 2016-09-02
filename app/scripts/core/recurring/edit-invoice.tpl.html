@@ -183,23 +183,12 @@
               <a href="javascript:void(0)">
                 <i class="icn-lg icn-add-product"></i>Product
               </a>
-
-              <div class="btn order-add-product has-tooltip"
-                   ng-click="addProduct(editInvoiceForm)" tooltip-placement="top" tooltip="Add Product">
-                <i class="icn-sm icn-plus"></i>
-              </div>
             </li>
 
             <li class="invoice-update-btns" ng-click="setOpenedTab('service')">
               <a href="javascript:void(0)">
                 <i class="icn-lg icn-add-service"></i>Service
               </a>
-
-              <div class="btn order-add-service has-tooltip" ng-disabled="!companyServices || !companyServices.length"
-                   ng-click="addService(editInvoiceForm)" tooltip-placement="top"
-                   tooltip="{{ companyServices && companyServices.length ? 'Add Service' : 'Company has no services' }}">
-                <i class="icn-sm icn-plus"></i>
-              </div>
             </li>
 
           </ul>
@@ -208,10 +197,6 @@
 
             <div class="tab-pane in active" ng-show="isTabOpened('product')">
               <ul class="qt-table">
-
-                <li ng-show="!editInvoice.products.length">
-                  <span class="text-muted">No products.</span>
-                </li>
 
                 <li ng-repeat="product in editInvoice.products"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
@@ -224,10 +209,6 @@
 
             <div class="tab-pane in active" ng-show="isTabOpened('service')">
               <ul class="qt-table">
-
-                <li ng-show="!editInvoice.services.length">
-                  <span class="text-muted">No services.</span>
-                </li>
 
                 <li ng-repeat="service in editInvoice.services"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">

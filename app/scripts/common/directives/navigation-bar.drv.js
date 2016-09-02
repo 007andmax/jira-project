@@ -17,6 +17,8 @@
 
           if (wrapperSelector) {
             wrapperOffset = $(wrapperSelector).offset().top;
+          } else {
+            wrapperOffset = 78; //header height
           }
 
           function navigateTo(scrollTop) {
@@ -48,10 +50,13 @@
                 activeNav.addClass('active');
               }
 
-
               if (activeNav.hasClass('notification-heading')) {
                 activeNav = activeNav.prev();
                 activeNav.addClass('active');
+              }
+
+              if (!$(activeNav.attr('navigate-to')).offset()) {
+                return;
               }
 
               var topPoint = $(activeNav.attr('navigate-to')).offset().top - wrapperOffset + 1,

@@ -238,12 +238,10 @@
             })
           };
 
-          $scope.openFullSharedUsers = function () {
-            $scope.isFullSharedUserShow = true;
-          };
-
-          $scope.closeFullSharedUsers = function () {
-            $scope.isFullSharedUserShow = false;
+          $scope.toggleFullSharedUsers = function () {
+            if ($scope.isFullSharedUserShow || $scope.shares.length) {
+              $scope.isFullSharedUserShow = !$scope.isFullSharedUserShow;
+            }
           };
 
           $scope.openedTab = function (tabName) {
@@ -446,7 +444,11 @@
                 $scope.ticketSharedUsersList.push(itemForPush);
               }
 
-              if (processedShares.indexOf(sharedUser.id) > -1) {
+              if (
+                processedShares.indexOf(sharedUser.id) > -1 ||
+                sharedUser.id === $scope.ticketDetails.createdUser.id ||
+                sharedUser.id === $scope.ticketDetails.assignedUser.id
+              ) {
                 continue;
               }
 

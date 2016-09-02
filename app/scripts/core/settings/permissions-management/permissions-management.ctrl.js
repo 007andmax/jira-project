@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.settings').controller('quicktech.core.settings.permissionsManagement',
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.permissionsManagementCtrl',
     ['$scope', 'CompaniesService', '$timeout', function ($scope, CompaniesService, $timeout) {
       var promise;
       var companiesRelatedPermissions = ['CREATE_COMPANIES', 'EDIT_COMPANIES', 'ARCHIVE_COMPANIES',

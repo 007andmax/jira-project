@@ -1,0 +1,26 @@
+<div class="settings-main-wrapper">
+  <div class="email-me-wrapper">
+
+    <form name="emailNotificationsForm">
+
+      <h3>Email me when: </h3>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="emailNotifications.newDevice"
+                 ng-change="saveEmailNotifications(emailNotificationsForm)">
+          <span class="control-indicator"></span> my account is logged in from a new device
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="emailNotifications.ticketCreated"
+                 ng-change="saveEmailNotifications(emailNotificationsForm)">
+          <span class="control-indicator"></span> new ticket created
+        </label>
+      </div>
+
+    </form>
+  </div>
+</div>

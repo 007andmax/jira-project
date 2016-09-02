@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoTaxRateCtrl',
+  angular.module('quicktech.core.settings').controller('quicktech.core.settings.taxRateCtrl',
     ['$scope', 'TaxRatesService',
       function ($scope, TaxRatesService) {
 

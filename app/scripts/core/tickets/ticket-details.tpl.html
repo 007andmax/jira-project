@@ -4,15 +4,23 @@
       <div ng-form="editTicketForm">
         <div class="ticket-header clearfix ticket-fixed-header">
           <div id="ticket-header-content">
-            <div class="pull-left ticket-header-avatar" qt-popover-position="bottom-left-align"
-                 custom-disabled="{{ user.company.default }}"
-                 qt-custom-popover-template="/html/scripts/core/tickets/user-info-popup.tpl.html">
-              <img qt-popover-trigger="mouseenter"
-                   ng-src="{{ getUserAvatarUrl(ticketDetails.createdUser) }}" class="avatar-38 img-circle" alt="...">
+            <div class="pull-left ticket-header-avatar">
+              <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
             </div>
             <div class="clearfix pull-left">
               <div class="ticket-header-username pull-left">
-                <strong>{{ getUserName(user) }}</strong>
+                <strong qt-popover-position="bottom"
+                        custom-disabled="{{ user.company.default }}"
+                        qt-custom-popover-template="/html/scripts/core/tickets/user-info-popup.tpl.html">
+                  <span qt-popover-trigger="mouseenter">{{ getUserName(user) }}</span>
+                </strong>
+                <strong ng-if="!company.default">
+                  <span class="dot-sep"></span>
+                  <span class="company-name" qt-popover-position="bottom"
+                        qt-custom-popover-template="/html/scripts/core/tickets/company-info-popup.tpl.html">
+                    <span qt-popover-trigger="mouseenter">{{ company.name }}</span>
+                  </span>
+                </strong>
               </div>
               <div class="ticket-header-status pull-left">
                 <div class="pull-left" dropdown>
@@ -166,7 +174,8 @@
                 <li class="dropdown-submenu left-align linked-agent-dropdown"
                     ng-if="!ticketDetails.company.default && agentList && agentList.length && isDeviceToLink(agentList, ticketDetails.agent)">
                   <a tabindex="-1" href="javascript:void(0)">
-                    {{ ticketDetails.agent && ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }} Agent
+                    {{ ticketDetails.agent && ticketDetails.agent.deviceId ? 'Relink with another' : 'Link with' }}
+                    Agent
                   </a>
                   <ul class="dropdown-submenu-wrapper dropdown-menu">
                     <li ng-repeat="agent in agentList" ng-click="linkAgent(ticketDetails.id, agent.id)"
@@ -197,23 +206,9 @@
               </div>
             </div>
           </div>
-          <div class="pull-left ticket-company-info" ng-if="!company.default">
-            <div class="pull-left ticket-header-avatar" qt-popover-position="bottom-left-align"
-                 qt-custom-popover-template="/html/scripts/core/tickets/company-info-popup.tpl.html">
-              <img qt-popover-trigger="mouseenter"
-                   ng-src="{{ getCompanyLogoUrl(company) }}" class="avatar-38 img-circle" alt="...">
-            </div>
-            <div style="display: inline-block;">
-              <strong>{{ company.name }}</strong>
-              <span class="text-muted" ng-if="companyPhoneNumber" style="margin-left: 5px">
-                {{ companyPhoneNumber }}
-              </span>
-              <div class="ticket-company-address">{{ companyAddress.address }}</div>
-            </div>
-          </div>
         </div>
-        <div class="ticket-detail" ng-style="{'padding-top': company.default ? '92px' : '150px'}">
-          <div  ng-if="!editingTicket">
+        <div class="ticket-detail" >
+          <div ng-if="!editingTicket">
             <h2>{{ ticketDetails.number + ' - ' + ticketDetails.subject }}</h2>
             <div class="ticket-message" ng-bind-html="getTicketNote()"></div>
           </div>
@@ -325,7 +320,8 @@
                       <div class="dropup pull-left">
 
                         <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                           data-toggle="dropdown" data-container="body" data-placement="top" tooltip="Add or Remove Link">
+                           data-toggle="dropdown" data-container="body" data-placement="top"
+                           tooltip="Add or Remove Link">
                           <i class="icn-sm icn-wysiwyg-link"></i>
                         </a>
 
@@ -335,7 +331,8 @@
 
                               <div class="form-group">
                                 <input type="text" placeholder="http://" class="form-control"
-                                       data-edit="createLink" ng-model="ticketEditorLink" ng-change="validateLink(ticketEditorLink)">
+                                       data-edit="createLink" ng-model="ticketEditorLink"
+                                       ng-change="validateLink(ticketEditorLink)">
                               </div>
 
                               <div class="form-group">
@@ -415,14 +412,14 @@
           <span class="pull-left ticket-update-title">Ticket Updates
             <span class="light-cl">{{ ticketDetails.updates.length + ticketDetails.unloadedUpdates }}</span>
           </span>
-          <span class="pull-left label shared-with"
-                style="cursor: pointer" ng-click="openFullSharedUsers()">
+          <span class="pull-left label shared-with" ng-style="{'cursor': shares.length ? 'pointer' : 'default'}"
+                style="cursor: pointer" ng-click="toggleFullSharedUsers()">
             SHARED WITH {{ shares.length }}
           </span>
           </h4>
           <div class="clearfix"></div>
           <ul class="shared-users-list clearfix" ng-show="isFullSharedUserShow === true">
-            <li ng-repeat="share in shares">
+            <li ng-repeat="share in shares track by share.id">
               <div class="pull-left avatar persistent-tooltip"
                    tooltip-placement="top"
                    tooltip-html-unsafe="<p class='tooltip-name'>{{ share.name }}</p><span class='tooltip-designation'>{{ share.title }}</span>">
@@ -431,7 +428,7 @@
             </li>
             <li>
               <div class="btn pull-left btn-primary has-tooltip"
-                   tooltip="Hide All" data-placement="top" ng-click="closeFullSharedUsers()">
+                   tooltip="Hide All" data-placement="top" ng-click="toggleFullSharedUsers()">
                 <i class="icn-sm icn-remove-token"></i>
               </div>
             </li>

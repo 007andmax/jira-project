@@ -455,11 +455,15 @@ a.ha-24{
   width: 14px;
   left: -1px !important;
 }
-:hover > .icn-restore, :active > .icn-restore, :focus:hover > .icn-restore, :focus:active > .icn-restore, :hover:active > .icn-restore, .active > .icn-restore, .open .icn-restore, .open > .btn:hover .icn-restore {
+:hover > .icn-restore, :focus:hover > .icn-restore, .active > .icn-restore, .open .icn-restore, .open > .btn:hover .icn-restore {
   background-position: -2516px -100px;
 }
 
-
+[disabled] .icn-restore, .disabled .icn-restore, .icn-restore[disabled] {
+  background-position: -2492px -127px;
+  width: 14px;
+  left: -1px !important;
+}
 
 
 .icn-mail{

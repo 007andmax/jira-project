@@ -1,0 +1,97 @@
+<div class="settings-main-wrapper">
+  <div class="help-text">Manage your company's information, enter support &amp; business email addresses, and set weekly
+    schedule. Here, you can set when to notify agents, users, and vendors via email.
+  </div>
+
+  <div class="basic-info-wrapper"
+       id="companyInfoBasicInfo">
+
+    <div class="create-new-user settings-basic-info clearfix"
+         ng-if="companyForSettingLoad"
+         ng-controller="quicktech.core.settings.companyInfoBasicInfoCtrl">
+      <form name="basicInfoForm">
+
+        <div class="create-user-container">
+
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">Basic Info</h3>
+          </div>
+
+          <div class="tech-company-logo" edit-avatar ng-model="editCompany.logo"
+               model-name="techCompanyLogo" model-id="{{ editCompany.id }}"></div>
+
+          <div class="create-user-form">
+            <div class="form-row clearfix">
+
+              <div class="form-group full-width"
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'companyName')}">
+
+                <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'companyName')}">
+                  Company Name
+                </label>
+
+                <div ng-messages="basicInfoForm.companyName.$error"
+                     ng-class="{'hide': !isShowingErrors(basicInfoForm, 'companyName')}">
+                  <label class="control-label" ng-message="required" for="">Company name is required.</label>
+                  <label class="control-label" ng-message="maxlength" for="">Company name is too large.</label>
+                  <label class="control-label" ng-message="minlength" for="">Company name is too short.</label>
+                  <label class="control-label" ng-message="unique" for="">This company name already occupied.</label>
+                </div>
+
+                <input type="text" class="form-control" ng-model="editCompany.name" aria-expanded="true"
+                       ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+                       is-uniq-validation validation-func="validateCompanyName" model-id="editCompany.name"
+                       execute-when-outfocused="saveBasicInfo(basicInfoForm)">
+
+              </div>
+            </div>
+
+            <div class="form-row clearfix">
+
+              <div class="form-group full-width">
+
+                <label class="control-label">Company URL</label>
+
+                <input class="form-control" type="text" readonly>
+                <span class="company-url-addon">
+                  {{ companyForSettingPage.supportMailBox + '.' + currentUrl }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="contact-info-wrapper" id="companyInfoContactInfo">
+    <div class="create-new-user settings-basic-info clearfix"
+         ng-if="companyForSettingLoad" ng-form="addressesWrapForm"
+         ng-controller="quicktech.core.settings.companyInfoContactInfoCtrl">
+      <div class="company-address-list" ng-repeat="address in companyForSettingPage.addresses">
+        <div class="create-user-container">
+          <div class="create-user-header clearfix">
+            <h3 class="pull-left">Contact Info</h3>
+          </div>
+
+          <div>
+            <div class="create-user-form">
+
+              <div address-autocomplete template-page="settings" save-func="saveContactInfo" is-address-required="isAddressRequired"
+                   ng-model="address" show-validation-messages="isTryToSave" focus-address="isAddressFocused"></div>
+
+              <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
+                   country-code="{{address.countryCode}}" on-lost-focus="saveContactInfo"></div>
+
+              <div class="form-row clearfix" style="margin-top: 13px;">
+                <time-zone-autocomplete address="address" time-zones="timeZones"></time-zone-autocomplete>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

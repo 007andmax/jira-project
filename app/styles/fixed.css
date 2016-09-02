@@ -1403,6 +1403,10 @@ span.sort-span {
 .col-6.group-btns{
   padding-top: 5px !important;
 }
+.col-6.group-btns .tooltip-inner{
+  white-space: pre-wrap;
+  height: auto;
+}
 .col-6.group-btns i {
   display: inline-block;
   margin-top: 5px;

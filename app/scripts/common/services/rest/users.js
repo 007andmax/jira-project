@@ -387,6 +387,25 @@
         return info;
       }
 
+      function getUserEmailNotifications(callback) {
+
+        var info = {};
+
+        $http.get('/settings/userProfile/emailNotifications').then(function (resp) {
+          Utils.customizeObj(resp.data, info);
+
+          if (callback) {
+            callback(resp.data);
+          }
+
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+        return info;
+      }
+
       function isEmailUnique(email, id, isTechUser, callback) {
 
         if (!email) {
@@ -504,6 +523,10 @@
         Utils.handleCallback(future, callback);
       }
 
+      function deactivateAccount(note) {
+        $http.post('/users/deactivate', { note: note });
+      }
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -513,6 +536,7 @@
         getAllByCompanyId: getAllByCompanyId,
         getOneById: getOneById,
         getUserProfile: getUserProfile,
+        getUserEmailNotifications: getUserEmailNotifications,
         getUnassignedUser: getUnassignedUser,
         searchByAllUsers: searchByAllUsers,
         searchByClientUsers: searchByClientUsers,
@@ -528,7 +552,8 @@
         getActivityHistory: getActivityHistory,
         closeSessions: closeSessions,
         toggle2FA: toggle2FA,
-        get2FA: get2FA
+        get2FA: get2FA,
+        deactivateAccount: deactivateAccount
       }
 
     }]);

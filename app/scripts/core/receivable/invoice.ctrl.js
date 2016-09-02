@@ -3,8 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.invoiceCtrl',
-    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService',
-      function ($scope, ReceivableService, $rootScope, CompaniesService) {
+    ['$scope', 'ReceivableService', '$rootScope', 'CompaniesService', 'quicktech.common.services.UserConfirmationsService',
+      function ($scope, ReceivableService, $rootScope, CompaniesService, UserConfirmationsService) {
+        var disableInvoiceButtons = false;
 
         $scope.company = CompaniesService.getOneById($scope.invoice.company.id);
 
@@ -28,6 +29,37 @@
           ReceivableService.resendInvoice(idInvoiceToSend, function (resp) {
             $scope.sending[idInvoiceToSend] = false;
           });
+        };
+
+        $scope.rollbackInvoice = function (invoice) {
+          if (!disableInvoiceButtons && !invoice.recurringInvoice) {
+            var confirmMessage = 'Do you want to rollback invoice #' + invoice.number + '? ' +
+              (invoice.ticketNumbers.length ? (invoice.ticketNumbers.length > 1 ? 'Tickets #' : 'Ticket #') +
+              invoice.ticketNumbers.join(', #') + ' will be restored.' : '');
+
+            disableInvoiceButtons = true;
+            UserConfirmationsService.show(confirmMessage, 'OK').then(function (resp) {
+              ReceivableService.rollback(invoice.id, function () {
+                disableInvoiceButtons = false;
+              });
+            }, function () {
+              disableInvoiceButtons = false;
+            });
+          }
+        };
+
+        $scope.deleteInvoice = function (invoice) {
+          if (!disableInvoiceButtons) {
+            var confirmMessage = 'Do you want to delete invoice #' + invoice.number + '?';
+            disableInvoiceButtons = true;
+            UserConfirmationsService.show(confirmMessage, 'OK').then(function (resp) {
+              ReceivableService.remove(invoice.id, function () {
+                disableInvoiceButtons = false;
+              });
+            }, function () {
+              disableInvoiceButtons = false;
+            });
+          }
         };
 
       }]);

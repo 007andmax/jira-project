@@ -8,9 +8,11 @@
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
           var template, popover, popoverShown, promise,
+            $body = angular.element(document.body),
             newScope = $scope.$new(),
             trigger = $element.find('[qt-popover-trigger]'),
-            toggleTrigger = trigger.attr('qt-popover-trigger') || 'click';
+            toggleTrigger = trigger.attr('qt-popover-trigger') || 'click',
+            isAppendToBody = typeof $attrs.qtPopoverAppendToBody === 'string';
 
           $element.css('position', 'relative');
 
@@ -81,7 +83,11 @@
 
           function createPopover() {
             $compile(template)(newScope, function (compiledHtml) {
-              $element.append(compiledHtml);
+              if (isAppendToBody) {
+                $body.append(compiledHtml);
+              } else {
+                $element.append(compiledHtml);
+              }
               popover = compiledHtml;
 
               if (toggleTrigger === 'click') {
@@ -113,6 +119,12 @@
             } else if (position === 'bottom') {
               left = -popover.outerWidth() / 2 + trigger.outerWidth() / 2;
               top = trigger.outerHeight() + 10;
+            } else if (position === 'right') {
+              left = trigger.outerWidth() + 10;
+              top = trigger.outerHeight() / 2 - popover.outerHeight() / 2;
+            } else if (position === 'right-bottom-align') {
+              left = trigger.outerWidth() + 10;
+              top = trigger.outerHeight() - popover.outerHeight();
             } else if (position === 'bottom-left-align') {
               left = 0;
               top = trigger.outerHeight() + 10;
@@ -120,6 +132,13 @@
               left = -popover.outerWidth() + trigger.outerWidth();
               top = trigger.outerHeight() + 10;
             }
+
+            if (isAppendToBody) {
+              var offset = trigger.offset();
+              top += offset.top;
+              left += offset.left
+            }
+
             popover.attr('style', popover.attr('style') + ' top: ' + top + 'px !important;' + ' left: ' + left + 'px !important;');
           }
 

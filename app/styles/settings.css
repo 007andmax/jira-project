@@ -101,7 +101,7 @@
   color: #1586e4;
 }
 .settings-main-wrapper {
-  margin-left: 240px;
+  margin: 0 auto;
   width: 500px;
   padding-top: 25px;
 }
@@ -114,13 +114,6 @@
 .settings-main-wrapper .help-text {
   color: #94a4b8;
   border-bottom: 1px solid #f1f5fa;
-  padding: 15px 0 25px;
-  margin: 20px 0 37px 0;
-}
-@-moz-document url-prefix() {
-  .settings-main-wrapper .help-text {
-    padding: 14px 0 26px;
-  }
 }
 .map-container {
   margin-top: 10px;
@@ -694,11 +687,37 @@ input.default-invoice-terms {
     float: none;
   }
 }
-/*.settings-main-wrapper .services-info-wrapper .col-2.timer-quantity {*/
-/*float: right;*/
-/*padding-left: 10px;*/
-/*padding-right: 0;*/
-/*}*/
+
+.settings-wrapper__trow {
+  border-bottom: 1px solid #eee;
+}
+
+.settings-wrapper__trow--td {
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.settings-wrapper__trow--td:hover {
+  border: 1px solid #eee inset;
+  box-shadow: 0 4px 25px 0 rgba(10, 45, 89, 0.1);
+}
+
+.settings-wrapper__trow--td .svg-icn-full {
+  width: 100px;
+}
+
+.settings-wrapper__trow--td p {
+  padding-top: 10px;
+  font-weight: 600;
+  opacity: 0.87;
+}
+
+@media screen and (max-width: 1024px) {
+  .settings-wrapper__trow--td .svg-icn-full {
+    width: 60px;
+  }
+}
 
 /*********************
 *** Fixed Button ***

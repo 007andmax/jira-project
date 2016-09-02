@@ -9,7 +9,7 @@
   services.factory('DevicesService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'UsersService', 'Downloader', 'CompaniesService',
     function ($http, $rootScope, RealTimeService, Utils, UsersService, Downloader, CompaniesService) {
 
-      var storage = { devices: {}, callbacks: {}, deviceCounter: {} },
+      var storage = { devices: {}, callbacks: {}, deviceCounter: {}, oneTimeCallbacks: {} },
         serviceScope = $rootScope.$new(),
         callbacksForRemoteInstall = {},
         callbacksForRemoteUninstall = {},
@@ -71,6 +71,9 @@
           });
 
           RealTimeService.subscribe('/oneTimeConnection', $rootScope, function (newChange) {
+            storage.oneTimeCallbacks[newChange.action] && storage.oneTimeCallbacks[newChange.action](newChange);
+            storage.oneTimeCallbacks.listener && storage.oneTimeCallbacks.listener(newChange);
+
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
               $rootScope.openCreateTicketForm(newChange.data.sessionId, newChange.data.duration, newChange.data.clientCompany.id, newChange.data.deviceId);
             }
@@ -196,21 +199,22 @@
         }
 
         return Utils.getListByUrl('/remote/getRemoteSessions', callback, function (list) {
-          RealTimeService.subscribe('/oneTimeConnection', scope, function (newChange) {
 
-              if (newChange.action === 'ONE_TIME_CONNECTION_CLOSED' && !newChange.data.id) {
-                //do nothing
-              } else if (newChange.action === 'ONE_TIME_DELETED' || newChange.action === 'ONE_TIME_UNINSTALLED') {
-                Utils.deleteById(list, newChange.data);
-              } else if (newChange.data.oneTime) {
-                var session = Utils.findById(list, newChange.data.id);
-                if (session) {
-                  Utils.customizeObj(newChange.data, session);
-                } else {
-                  list.unshift(Utils.customizeObj(newChange.data));
-                }
+          storage.oneTimeCallbacks.listener = function (newChange) {
+            if (newChange.data.oneTime) {
+              var session = Utils.findById(list, newChange.data.id);
+              if (session) {
+                Utils.customizeObj(newChange.data, session);
+              } else {
+                list.unshift(Utils.customizeObj(newChange.data));
               }
-          })
+            }
+          };
+
+          storage.oneTimeCallbacks.ONE_TIME_DELETED = function (newChange) {
+            Utils.deleteById(list, newChange.data);
+          };
+          storage.oneTimeCallbacks.ONE_TIME_UNINSTALLED = storage.oneTimeCallbacks.ONE_TIME_DELETED;
         });
       }
 
@@ -707,6 +711,26 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getOneTimeHistory(callback) {
+        var history = [];
+
+        $http.get('/remote/history').then(function (resp) {
+          Utils.customizeArray(resp.data, history);
+
+          storage.oneTimeCallbacks.ONE_TIME_CONNECTION_CLOSED = function (newChange) {
+            if (newChange.data.oneTime) {
+              history.unshift(newChange.data);
+            }
+          };
+
+          if (callback) {
+            callback(history);
+          }
+        });
+
+        return history;
+      }
+
       return {
         downloadAgent: downloadAgent,
         sendDownloadAgentLink: sendDownloadAgentLink,
@@ -735,6 +759,7 @@
         getByCompanyId: getByCompanyId,
         devicePasswordShown: devicePasswordShown,
         getDeviceReports: getDeviceReports,
+        getOneTimeHistory: getOneTimeHistory,
         _addInitListener: _addInitListener
       }
     }

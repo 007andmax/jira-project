@@ -45,7 +45,6 @@
       $urlRouterProvider.otherwise(getUserDefaultPage);
 
       $urlRouterProvider.when('/accounting', '/accounting/billable');
-      $urlRouterProvider.when('/settings', '/settings/myProfile');
 
       $stateProvider
         .state('tickets', waitForServices({
@@ -149,7 +148,6 @@
         .state('settings', waitForServices({
           url: '/settings',
           templateUrl: '/html/scripts/core/settings/settings.tpl.html',
-          redirectTo: 'settings.myProfile',
           controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService',
             function ($scope, $state, PermissionsService) {
               $scope.PermissionsService = PermissionsService;
@@ -166,23 +164,58 @@
           templateUrl: '/html/scripts/core/settings/my-profile/my-profile.tpl.html',
           controller: 'quicktech.core.settings.myProfileCtrl'
         }))
+        .state('settings.emailNotifications', waitForServices({
+          url: '/emailNotifications',
+          templateUrl: '/html/scripts/core/settings/email-notifications/email-notifications.tpl.html',
+          controller: 'quicktech.core.settings.emailNotificationsCtrl'
+        }))
+        .state('settings.tags', waitForServices({
+          url: '/tags',
+          templateUrl: '/html/scripts/core/settings/tags/tags.tpl.html',
+          controller: 'quicktech.core.settings.tagsCtrl'
+        }))
+        .state('settings.activityHistory', waitForServices({
+          url: '/activityHistory',
+          templateUrl: '/html/scripts/core/settings/activity-history/activity-history.tpl.html',
+          controller: 'quicktech.core.settings.activityHistoryCtrl'
+        }))
+        .state('settings.companyProfile', waitForServices({
+          url: '/companyProfile',
+          params: {
+            isAddressFocused: false
+          },
+          templateUrl: '/html/scripts/core/settings/company-profile/company-profile.tpl.html',
+          controller: 'quicktech.core.settings.companyProfileCtrl'
+        }))
         .state('settings.techUsers', waitForServices({
           url: '/techUsers',
           templateUrl: '/html/scripts/core/settings/tech-users/tech-users.tpl.html',
           controller: 'quicktech.core.settings.techUsersCtrl'
         }))
-        .state('settings.companyInfo', waitForServices({
-          url: '/companyInfo',
-          params: {
-            isAddressFocused: false
-          },
-          templateUrl: '/html/scripts/core/settings/company-info/company-info.tpl.html',
-          controller: 'quicktech.core.settings.companyInfoCtrl'
+        .state('settings.email', waitForServices({
+          url: '/email',
+          templateUrl: '/html/scripts/core/settings/email/email.tpl.html',
+          controller: 'quicktech.core.settings.emailCtrl'
+        }))
+        .state('settings.services', waitForServices({
+          url: '/services',
+          templateUrl: '/html/scripts/core/settings/services/services.tpl.html',
+          controller: 'quicktech.core.settings.servicesCtrl'
+        }))
+        .state('settings.taxRates', waitForServices({
+          url: '/taxRates',
+          templateUrl: '/html/scripts/core/settings/tax-rates/tax-rates.tpl.html',
+          controller: 'quicktech.core.settings.taxRatesCtrl'
+        }))
+        .state('settings.tickets', waitForServices({
+          url: '/tickets',
+          templateUrl: '/html/scripts/core/settings/tickets/tickets.tpl.html',
+          controller: 'quicktech.core.settings.ticketsCtrl'
         }))
         .state('settings.permissionsManagement', waitForServices({
           url: '/permissionsManagement',
           templateUrl: '/html/scripts/core/settings/permissions-management/permissions-management.tpl.html',
-          controller: 'quicktech.core.settings.permissionsManagement'
+          controller: 'quicktech.core.settings.permissionsManagementCtrl'
         }))
         .state('settings.emailTemplates', waitForServices({
           url: '/emailTemplates',
@@ -273,6 +306,10 @@
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'vendors');
             globalSearch.goBack.tooltip = 'back to vendors';
+          } else if (toState.name.indexOf('settings.') === 0) {
+            globalSearch.goBack.isEnabled = true;
+            globalSearch.goBack.func = $state.go.bind($state, 'settings');
+            globalSearch.goBack.tooltip = 'back to all settings';
           } else {
             globalSearch.goBack.isEnabled = false;
           }

@@ -144,37 +144,5 @@
     </div>
   </div>
 
-  <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'shared')">
-
-    <i class="icn-lg icn-msg-closed"></i>
-
-    <div class="well-message">
-      <p>The shared ticket has been closed by the <strong>Ticket's owner.</strong></p>
-      <span class="text-muted" ><strong>TIP:</strong>
-        If you’ve administrative privileges, you can re-open the ticket by simply clicking
-        "Mark as Open" button, and then add or remove the Ticket updates. </span>
-    </div>
-
-    <div class="well-actions" ng-click="markAsOpen()" ng-if="PermissionsService.isAllowed('REOPEN_CLOSED_TICKETS')">
-      <div class="btn btn-info btn-lg">Mark as Open</div>
-    </div>
-  </div>
-
-  <div class="well ticket-well"
-       ng-if="TicketsPermissionsService.isActionVisible('reopen', ticketDetails, 'shared')">
-    <i class="icn-lg icn-msg-closed"></i>
-
-    <div class="well-message">
-      <p>The shared ticket has been closed by the <strong>Ticket's owner.</strong> You cannot add or remove the ticket
-        update(s) now. </p>
-    </div>
-  </div>
-
-  <div class="alert alert-yellow ng-binding" ng-if="showLockedError"
-       style="display: none; margin-left: -141px;color:red">
-    The ticket “Tkt# 0011” priority has been changed to HIGH
-  </div>
-
 </div>
 

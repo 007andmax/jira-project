@@ -3,13 +3,15 @@
 (function () {
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
-    ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope',
+    ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
       'quicktech.common.services.PermissionsService', 'TicketsService', 'CompaniesService', 'UsersService',
-      function ($scope, SharedStateService, $state, $rootScope, PermissionsService, TicketsService,
+      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, TicketsService,
                 CompaniesService, UsersService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           globalSearch = SharedStateService.getSharedState('globalSearch');
+
+        $scope.qSHistoryExpanded = false;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
         $scope.clientUsers = UsersService.getClientUsers;
@@ -19,6 +21,8 @@
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
 
+        $scope.qSHistory = DevicesService.getOneTimeHistory();
+
         $scope.$watch(function () {
           return $state.current.url + ' ' + $state.current.name;
         }, function (value) {
@@ -27,6 +31,8 @@
 
             if (!$scope.openedCategory) {
               $rootScope.isLeftPanelHidden = true;
+            } else if ($scope.openedCategory === 'settings') {
+              $rootScope.isLeftPanelHidden = false;
             }
           }
         });
@@ -43,6 +49,13 @@
             $scope.openedCategory = section;
             $rootScope.isLeftPanelHidden = false;
           }
+        };
+
+        $scope.onClickSettings = function () {
+	        if ($state.is('settings')) {
+            $rootScope.isLeftPanelHidden = true;
+          }
+          $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
         };
 
         $scope.addQuickSession = function () {
@@ -71,9 +84,15 @@
           });
         };
 
+        $scope.toggleQSHistory = function ($event) {
+          $scope.qSHistoryExpanded = !$scope.qSHistoryExpanded;
+        };
+
         function getOpenedCategory(url) {
           if (url.indexOf('quickSupport') > -1) {
             return 'dashboard';
+          } else if (url.indexOf('settings.') > -1) {
+            return 'settings';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';
           } else if (url.indexOf('companies') > -1 || url.indexOf('companyProfile') > -1) {

@@ -556,54 +556,10 @@
               </div>
             </div>
 
-            <!--<div class="form-row clearfix">-->
-              <!--<div class="form-group no-label full-width">-->
-                <!--<button class="btn btn-lg btn-info pull-right"-->
-                        <!--custom-disabled="{{ !miscInfoForm.$valid || miscInfoForm.$pristine || savingInProcess }}"-->
-                        <!--ng-click="saveMiscInfo(miscInfoForm)">-->
-                  <!--Save-->
-                <!--</button>-->
-              <!--</div>-->
-            <!--</div>-->
-
           </div>
         </div>
       </form>
     </div>
   </div>
-
-  <div class="email-me-wrapper" id="myProfileEmailNotifications">
-
-    <form name="emailNotificationsForm">
-
-      <h3>Email me when: </h3>
-
-      <div class="clearfix">
-        <label class="control checkbox pull-left">
-          <input type="checkbox" ng-model="userProfile.emailNotifications.newDevice"
-                 ng-change="saveEmailNotifications(emailNotificationsForm)">
-          <span class="control-indicator"></span> my account is logged in from a new device
-        </label>
-      </div>
-
-      <div class="clearfix">
-        <label class="control checkbox pull-left">
-          <input type="checkbox" ng-model="userProfile.emailNotifications.ticketCreated"
-                 ng-change="saveEmailNotifications(emailNotificationsForm)">
-          <span class="control-indicator"></span> new ticket created
-        </label>
-      </div>
-
-      <!--<div class="clearfix">-->
-        <!--<div class="btn btn-lg btn-info pull-right"-->
-             <!--custom-disabled="{{ emailNotificationsForm.$pristine || savingEmailInProcess }}"-->
-             <!--ng-click="saveEmailNotifications(emailNotificationsForm)">Save-->
-        <!--</div>-->
-      <!--</div>-->
-
-    </form>
-  </div>
-
-  <div ng-include="'/html/scripts/core/settings/my-profile/tracking-devices.tpl.html'"></div>
 
 </div>

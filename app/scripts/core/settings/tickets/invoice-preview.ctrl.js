@@ -17,7 +17,7 @@
         },
         company: {
           parent: {
-            logo: $rootScope.getCompanyLogoUrl($scope.editCompany)
+            logo: $rootScope.getCompanyLogoUrl($scope.companyForSettingPage)
           },
           default: false,
           companyInfo: {
@@ -26,7 +26,7 @@
           }
         },
         companyName: 'Client Company',
-        techCompanyName: $scope.editCompany.name,
+        techCompanyName: $scope.companyForSettingPage.name,
         senderAddress: $scope.companyForSettingPage.addresses[0].addressWithSuitNumberAndPostalCode,
         number: $scope.invoiceConfig ? $scope.invoiceConfig.count : '0001',
         date: 1460552903659,

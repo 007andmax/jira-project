@@ -4,19 +4,22 @@
       <img width="50px" ng-src="{{ getUserAvatarUrl(user) }}" alt="...">
     </div>
     <div class="pull-right" style="width: calc(100% - 50px)">
-      <p><strong> {{ getUserName(user) }} </strong> <span ng-if="user.role" class="label label-light pull-right">{{ userReadable(user.role) }}</span>
+      <p style="white-space: nowrap; display: inline-flex;"><strong> {{ getUserName(user) }} </strong> <span
+        ng-if="user.role" style="margin-left: 50px;"
+        class="label label-light pull-right">{{ userReadable(user.role) }}</span>
       </p>
       <div style="display: inline-flex;" ng-if="!company.default">
-        <strong>Company:</strong> &nbsp;<span>{{ company.name }}</span>
+        <strong>Company:</strong> &nbsp;<span style="white-space: nowrap;">{{ company.name }}</span>
       </div>
       <div style="display: inline-flex;" ng-if="user.primaryEmail">
-        <strong>Email:</strong>&nbsp <span>{{ user.primaryEmail }}</span>
+        <strong>Email:</strong> &nbsp; <span>{{ user.primaryEmail }}</span>
       </div>
-      <div style="display: inline-flex;" ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0].number">
+      <div style="display: inline-flex;"
+           ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0].number">
         <i style="float: left;margin: 4px 5px 0 0;" class="icn-sm" ng-class="{'icn-iphone': user.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': user.phoneNumbers[0].typeNumber === 'FAX',
             'icn-user-phone': user.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
-        <strong>Phone:</strong> &nbsp <span style="white-space: nowrap">{{ user.phoneNumbers[0].number }}</span>
+        <strong>Phone:</strong> &nbsp; <span style="white-space: nowrap">{{ user.phoneNumbers[0].number }}</span>
       </div>
     </div>
   </div>

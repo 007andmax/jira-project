@@ -20,19 +20,12 @@
       <input type="hidden" name="product" ng-model="product.item.description" ng-required="true">
 
       <div class="nano dropdown-menu custom-product-list" pl-conteiner style="margin-left: -97px;"
-           ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
+  ng-include="'/html/scripts/common/templates/products-list.tpl.html'"></div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
-  <div class="col3"
-       ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'productSerialNumber')}">
-
-    <input type="text" class="form-control" placeholder="Serial Number"
-           name="productSerialNumber" ng-maxlength="36"
-           ng-model="product.serialNumber">
-  </div>
 
   <div class="col4"
        ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'productQty')}">
@@ -48,14 +41,21 @@
        ng-class="{'has-error': isShowingProductErrors(editInvoiceForm[updateInvoiceProduct], 'productPrice')}">
 
     <input type="text" class="form-control" placeholder="Price" name="productPrice" qt-to-fixed="2"
-           ng-required="true" ng-model="product.item.sale" ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
+           ng-required="true" ng-model="product.item.sale"
+           ng-readonly="!PermissionsService.isAllowed('MANAGE_PRODUCTS')"
            hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
   </div>
 
-  <div class="col-6">
-    <a class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete" ng-click="deleteProduct()">
+  <div class="col-6" style="min-width: 50px;">
+    <a class="hit-area pull-left order-add-product has-tooltip"
+       ng-click="addProduct(editInvoiceForm)" tooltip-placement="top" tooltip="Add Product">
+      <i class="icn-sm icn-plus-dark"></i>
+    </a>
+    <a style="margin-left: 5px;" class="hit-area pull-left has-tooltip" tooltip-placement="top" tooltip="Delete"
+       ng-click="deleteProduct()">
       <i class="icn-sm icn-delete"></i>
     </a>
+
   </div>
 
 </div>

@@ -16,14 +16,14 @@
         <i style="margin: 4px 5px 0 0 ; float: left;" class="icn-sm" ng-class="{'icn-iphone': companyAddress.phoneNumbers[0].typeNumber === 'MOBILE',
             'icn-user-fax': companyAddress.phoneNumbers[0].typeNumber === 'FAX',
             'icn-user-phone': companyAddress.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
-        <strong>Phone:nbsp</strong> <span style="white-space: nowrap;">{{ companyPhoneNumber }}</span>
+        <strong>Phone: &nbsp;</strong> <span style="white-space: nowrap;">{{ companyPhoneNumber }}</span>
       </div>
 
       <div ng-if="company.serviceType">
-        <strong>Service type:nbsp</strong> {{ company.serviceType }}
+        <strong>Service type: &nbsp;</strong> {{ company.serviceType }}
       </div>
       <div style="display: inline-flex;" ng-if="company.clientType">
-        <strong>Client type:nbsp</strong> {{ company.clientType }}
+        <strong>Client type: &nbsp;</strong> {{ company.clientType }}
       </div>
     </div>
   </div>

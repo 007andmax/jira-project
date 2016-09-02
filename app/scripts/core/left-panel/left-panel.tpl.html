@@ -29,6 +29,18 @@
            ng-click="toggleLeftPanel('products')">
         <i class="nav-icon icn-products icn-lg"></i>
       </div>
+      <div class="left-panel__category settings-left-bar">
+        <div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"
+             style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>
+          <div qt-popover-trigger="showing-on-first-login" style="width: calc(100% - 10px)">
+            <div class="left-panel__category" ui-sref="settings" ng-click="onClickSettings()"
+                 ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
+                 style="width: calc(100% + 10px)">
+              <div class="svg-icn-settings"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
@@ -42,11 +54,27 @@
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')"
              ng-click="stateGo($event, 'quickSupport');">
-          <div class="btn btn-success add-session-button has-tooltip icon-pos" style="top: 11px" ng-click="addQuickSession()"
+          <div class="btn btn-success add-session-button has-tooltip icon-pos" style="top: 11px"
+               ng-click="addQuickSession()"
                tooltip-placement="top" tooltip="Create">
             <i class="icn-sm icn-plus"></i>
           </div>
           Quick Support
+          <div class="slider-pos" ng-click="toggleQSHistory()" ng-if="qSHistory.length">
+            <i class="icn-sm {{ qSHistoryExpanded ? 'icn-collapse' : 'icn-expand' }}"></i>
+          </div>
+        </div>
+
+        <div ng-show="qSHistoryExpanded" class="category-expanded">
+          <div class="category-expanded-paragraph sked"
+               ng-repeat="qs in qSHistory | orderBy: 'startedAt' track by qs.id"
+               qt-custom-popover-template="/html/scripts/core/left-panel/quick-support-history-info.tpl.html"
+               qt-popover-position="right" qt-popover-append-to-body z-index="9999">
+            <div qt-popover-trigger="click">
+              <span>{{ qs.userName }}</span>
+              <span class="pull-right">{{ qs.startedAt | date: 'dd/MM/yy hh:mm' }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -108,9 +136,10 @@
         <span class="left-panel-full__head--header">Companies</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
+        <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
              ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
-             ng-click="goToCompany(company)" ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}"
+             ng-click="goToCompany(company)"
+             ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}"
              style="padding-left: 25px">
           {{ company.name }}
         </div>
@@ -124,7 +153,8 @@
         <span class="left-panel-full__head--header">Users</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_USERS')" style="padding-left: 25px"
+        <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
+             style="padding-left: 25px"
              ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
              ng-click="goToUser(user)">
           {{ getUserName(user) }}
@@ -182,6 +212,105 @@
           <i class="nav-icon icn-lg icn-services icon-pos"></i> Services
         </div>
       </div>
+    </div>
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'settings' && !isLeftPanelHidden">
+      <div class="left-panel-full__head">
+        <span class="left-panel-full__head--header">Settings</span>
+      </div>
+
+      <div class="center-category collapsed-nav nano-content">
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.myProfile')"
+             ng-class="{active: $state.is('settings.myProfile')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/user-shape.svg">My Profile
+        </div>
+
+        <div ng-style="{'height': $state.is('settings.myProfile') ? '140px' : '0'}" class="category-expanded">
+          <div ng-if="$state.is('settings.myProfile')" navigation-bar>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileMiscInfo">Misc. Info</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileTrackingDevices">Activity
+              History
+            </div>
+          </div>
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.emailNotifications')"
+             ng-class="{active: $state.is('settings.emailNotifications')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/envelope.svg">
+          Email Notifications
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.tags')"
+             ng-class="{active: $state.is('settings.tags')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">
+          Manage Tags
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.activityHistory')"
+             ng-class="{active: $state.is('settings.activityHistory')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/history.svg">
+          Activity History
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
+             ng-class="{active: $state.is('settings.companyProfile')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">
+          Company Profile
+        </div>
+
+        <div ng-style="{'height': $state.is('settings.companyProfile') ? '70px' : '0'}" class="category-expanded">
+          <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
+            </div>
+          </div>
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
+             ng-class="{active: $state.is('settings.techUsers')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/admin-with-cogwheels.svg">
+          Tech Users
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
+             ng-class="{active: $state.is('settings.email')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/email-settings.svg">
+          Email Settings
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.services')"
+             ng-class="{active: $state.is('settings.services')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/open-wrench-tool-silhouette.svg">
+          Services
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.taxRates')"
+             ng-class="{active: $state.is('settings.taxRates')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/dollar-symbol.svg">
+          Taxes
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
+             ng-class="{active: $state.is('settings.tickets')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/concert-ticket.svg">
+          Ticket Settings
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
+             ng-class="{active: $state.is('settings.permissionsManagement')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/permission.svg">
+          Permission Management
+        </div>
+
+        <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
+             ng-class="{active: $state.is('settings.emailTemplates')}">
+          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/mail.svg">
+          Email Templates
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
