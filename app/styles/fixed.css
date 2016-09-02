@@ -558,6 +558,11 @@ body.modal-open {
 .invoice-modal-not-background {
   background: none !important;
 }
+.icon-render{
+  display: inline-block;
+  margin: 0 5px;
+  float: left;
+}
 
 /*device*/
 

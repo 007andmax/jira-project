@@ -20,9 +20,9 @@
 
   background-color: rgba(255, 255, 255, 0.94);
 }
-.ticket-header-details:before{
+.expand-ticket-btn{
   position: absolute;
-  left: 0;
+  left: -2px;
   top: 30px;
   width: 40px;
   height: 40px;
@@ -33,10 +33,15 @@
   padding: 5px;
   font-size: 2em;
   color: #4c5c6f;
-
-  content: "<";
+  transition: all .5s ease;
 }
-.ticket-header-details:hover:before{
+.expand-ticket-btn > div{
+  transition: all .5s ease;
+  width: 18px;
+  height: 100%;
+}
+.expand-ticket-btn:hover,
+.active.expand-ticket-btn{
   box-shadow: 0 4px 25px 0 rgba(10,45,89,.1) inset;
 }
 .opened-ticket-list .ticket-header.ticket-fixed-header {

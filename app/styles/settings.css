@@ -691,6 +691,9 @@ input.default-invoice-terms {
 .settings-wrapper__trow {
   border-bottom: 1px solid #eee;
 }
+.settings-wrapper__trow:first-child{
+  margin-top: 10px;
+}
 
 .settings-wrapper__trow--td {
   padding: 20px;
@@ -699,7 +702,6 @@ input.default-invoice-terms {
 }
 
 .settings-wrapper__trow--td:hover {
-  border: 1px solid #eee inset;
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, 0.1);
 }
 

@@ -4,6 +4,10 @@
       <div ng-form="editTicketForm">
         <div class="ticket-header clearfix ticket-fixed-header">
           <div id="ticket-header-content">
+            <div class="expand-ticket-btn" ng-click="toggleTicketsList()"
+                 ng-class="{'active': !ticketListOpened}">
+              <div ng-style="{'transform': ticketListOpened ? 'rotate(180deg)' : 'rotate(0)'}">></div>
+            </div>
             <div class="pull-left ticket-header-avatar">
               <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
             </div>
@@ -198,12 +202,6 @@
                   <a tabindex="-1" href="javascript:void(0)" ng-click="moveToTrash(true)">Move to Trash</a>
                 </li>
               </ul>
-            </div>
-            <div style="position: relative;float: left;">
-              <div class="btn btn-default btn-collapse pull-left has-tooltip" ng-click="toggleTicketsList()"
-                   tooltip="{{ ticketListOpened ? 'Collapse List' : 'Expand List'}}" tooltip-placement="top">
-                <i class="icn-lg {{ ticketListOpened ? 'icn-increase' : 'icn-decrease' }}"></i>
-              </div>
             </div>
           </div>
         </div>

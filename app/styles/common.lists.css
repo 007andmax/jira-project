@@ -145,7 +145,7 @@
   content: '';
 }
 .qt-list > li > [class*='col-']:first-child {
-  padding-left: 0;
+  padding-left: 15px;
 }
 .qt-list > li > [class*='col-']:last-child {
   padding-right: 0;
@@ -1331,7 +1331,7 @@ Devices tab
   margin-top: 0;
 }
 .qt-receivable .qt-invoices > li {
-  padding: 16px 0;
+  padding: 16px 15px;
 
   cursor: pointer;
 }
