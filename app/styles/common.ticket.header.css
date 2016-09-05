@@ -29,6 +29,7 @@
   border: 2px solid #eee;
   border-bottom-right-radius: 50%;
   border-top-right-radius: 50%;
+  border-left-color: transparent;
   cursor: pointer;
   padding: 5px;
   font-size: 2em;

@@ -9868,4 +9868,6 @@ button.close {
 .change-view-actions .svg-icn{
   width: 70%;
 }
-
+.bootstrap-datetimepicker-widget.dropdown-menu{
+  width: 298px;
+}
