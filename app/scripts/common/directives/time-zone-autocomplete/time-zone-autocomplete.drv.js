@@ -198,6 +198,8 @@
               $scope.address.fromGoogle = false;
             }
           } else if ($scope.address && $scope.address.country) {
+            $scope.address.fromGoogle = false;
+
             var filteredTimeZones = [];
             for (var i = 0; i < $scope.timeZonesMapped.length; i++) {
               var timeZone = $scope.timeZonesMapped[i],
@@ -212,6 +214,8 @@
               }
             }
             $scope.filteredTimeZones = filteredTimeZones;
+          } else if ($scope.address) {
+            $scope.address.fromGoogle = false;
           }
 
           $scope.preventDropDownOpening = $scope.address.fromGoogle;

@@ -77,7 +77,7 @@
 
         $scope.saveContactInfo = function (form) {
 
-          if ((form && form.$valid || $scope.addressesWrapForm.$valid) && $scope.companyForSettingPage.addresses[0].address) {
+          if ($scope.addressesWrapForm.$valid && $scope.companyForSettingPage.addresses[0].address) {
             var copyAddress = angular.copy($scope.companyForSettingPage.addresses);
 
             for (var i = 0; i < copyAddress.length; i++) {

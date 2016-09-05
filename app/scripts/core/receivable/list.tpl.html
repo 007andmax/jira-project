@@ -91,13 +91,13 @@
       <div class="col-6">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
       <div class="col-6 group-btns">
 
-        <div tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
-             ng-click="deleteInvoice(invoice)">
-          <i class="icn-sm icn-delete icon-render"></i>
-        </div>
         <div tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
              tooltip-placement="top" ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">
           <i class="icn-sm icn-restore icon-render"></i>
+        </div>
+        <div tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+             ng-click="deleteInvoice(invoice)">
+          <i class="icn-sm icn-delete icon-render"></i>
         </div>
       </div>
     </li>
