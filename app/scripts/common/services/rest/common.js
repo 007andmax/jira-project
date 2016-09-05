@@ -11,15 +11,17 @@
     $provide.factory('myHttpInterceptor', ['$rootScope', '$q', function ($rootScope, $q) {
 
       function processResponse(response) {
+        var isUnauthorized= response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',
+          isDisabled = response.data.message === 'userDisabled' || response.headers('USER_DISABLED') === 'TRUE';
 
-        if (response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized' || response.data.message === 'userDisabled') {
+        if (isUnauthorized || isDisabled) {
 
           if (window.location.pathname === "/test") {
             return;
           }
 
           if (!$rootScope.isLogOut) {
-            if ($rootScope.logOut && response.data.message === 'userDisabled') {
+            if ($rootScope.logOut && isDisabled) {
               $rootScope.logOut('Your account has been disabled.');
             } else if ($rootScope.logOut) {
               $rootScope.logOut();
