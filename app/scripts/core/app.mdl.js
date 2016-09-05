@@ -278,7 +278,7 @@
             if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
               return;
             }
-            globalSearch.count = 0;
+            globalSearch.count = undefined;
             globalSearch.selectedItemsCount = undefined;
           }
           globalSearch.openedItemName = undefined;

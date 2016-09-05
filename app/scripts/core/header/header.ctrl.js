@@ -81,7 +81,6 @@
           } else if ($state.includes("vendors")) {
             return 'vendors';
           } else if ($state.includes("settings")) {
-            $scope.globalSearch.count = 0;
             if ($state.is("settings")) {
               return 'Account Settings';
             } else {
