@@ -128,7 +128,7 @@
               var ticket = Utils.findById($scope.tickets, ticketId) || Utils.findById($scope.reportSpamTickets, ticketId);
 
               if (!ticketsHeaderState.agentList) {
-                DevicesService.getAgentsByCompany($scope, ticket.company.id, function (resp) {
+                DevicesService.getAgentsByCompany($scope, ticket.companyId, function (resp) {
                   ticketsHeaderState.agentList = resp;
                 });
               }

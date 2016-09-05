@@ -127,7 +127,7 @@
       </div>
 
       <div class="text-muted"
-           ng-if="ticket.assignedUser && ticket.assignedUser.id">{{ getUserName(ticket.assignedUser) }}
+           ng-if="ticket.assignedUserId">{{ getUserName(getUserById(ticket.assignedUserId)) }}
       </div>
 
       <span class="text-muted" style="float: right; margin-right: 0;">{{ userReadable(ticket.ticketSource) }}</span>

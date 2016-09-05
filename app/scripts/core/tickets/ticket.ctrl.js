@@ -9,8 +9,9 @@
       function ($scope, TicketsService, CompaniesService, UsersService, $state, $stateParams, $timeout,
                 UserConfirmationsService, UserNotificationService, DevicesService) {
 
-        $scope.user = UsersService.getOneById($scope.ticket.createdUser.id);
-        $scope.company = CompaniesService.getOneById($scope.ticket.company.id);
+        $scope.user = UsersService.getOneById($scope.ticket.createdUserId);
+        $scope.getUserById = UsersService.getOneById;
+        $scope.company = CompaniesService.getOneById($scope.ticket.companyId);
 
         DevicesService.getAgentsByCompany($scope, $scope.company.id, function (resp) {
           $scope.agentList = resp;
