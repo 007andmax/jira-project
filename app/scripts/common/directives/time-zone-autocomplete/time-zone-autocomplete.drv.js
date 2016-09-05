@@ -8,7 +8,8 @@
       templateUrl: '/html/scripts/common/directives/time-zone-autocomplete/time-zone-autocomplete.tpl.html',
       scope: {
         timeZones: '=',
-        address: '='
+        address: '=',
+        saveFunc: '=?'
       },
       link: function ($scope, element) {
         var currentFocused,
@@ -168,6 +169,7 @@
           $scope.address.locale = timeZoneName;
           $scope.address.timeZone.name = timeZoneName;
           $scope.address.timeZone.timeOffset = offset;
+          $timeout($scope.saveFunc);
           $scope.timeZoneForm.$setPristine();
         };
 

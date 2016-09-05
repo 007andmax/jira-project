@@ -32,8 +32,7 @@
               address.longCity,
               address.shortCity,
               address.longState,
-              address.shortState,
-              address.timeZone
+              address.shortState
             ];
           }
         }, function (value) {
@@ -77,7 +76,8 @@
 
         $scope.saveContactInfo = function (form) {
 
-          if ($scope.addressesWrapForm.$valid && $scope.companyForSettingPage.addresses[0].address) {
+          var address = $scope.companyForSettingPage.addresses[0];
+          if ($scope.addressesWrapForm.$valid && address.address && address.timeZone && address.locale === address.timeZone.name) {
             var copyAddress = angular.copy($scope.companyForSettingPage.addresses);
 
             for (var i = 0; i < copyAddress.length; i++) {
