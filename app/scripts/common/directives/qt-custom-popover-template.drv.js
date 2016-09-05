@@ -47,8 +47,6 @@
                 popover.show();
                 calcPosition($attrs.qtPopoverPosition);
               }
-
-              e.stopPropagation();
             }
           }
 
@@ -59,8 +57,6 @@
                 popover.show();
                 calcPosition($attrs.qtPopoverPosition);
               }
-
-              e.stopPropagation();
             }
           }
 
