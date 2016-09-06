@@ -9,7 +9,6 @@
 
       var defaultStates = {
         globalSearch: {
-          counts: [],
           goBack: {}
         },
         ticketsHeader: {

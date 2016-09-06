@@ -17,6 +17,8 @@
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
           availableViews = ['list', 'grid'];
 
+        $scope.usersCtrl = {};
+
         $scope.usersView = localStorageService.get('users-view') || 'grid';
         $scope.editUser = undefined;
         $scope.orderUsers = {
@@ -39,7 +41,7 @@
           $scope.usersView = 'grid';
         });
 
-        $scope.$watch('shownUsers.length', function (usersCount) {
+        $scope.$watch('usersCtrl.shownUsers.length', function (usersCount) {
           globalSearch.count = usersCount;
         });
 
