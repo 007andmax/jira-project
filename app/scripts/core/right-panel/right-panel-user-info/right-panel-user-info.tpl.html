@@ -64,15 +64,6 @@
 
         </div>
       </div>
-      <div class="sb-heading recent-heading">Recent activity</div>
-
-      <ul class="recent-activities-by" ng-controller="quicktech.core.rightPanel.recentActivitiesCtrl">
-        <li class="list-users" ng-repeat="activity in activities"
-            ng-controller="quicktech.core.rightPanel.activityCtrl"
-            ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">
-
-        </li>
-      </ul>
 
       <div class="sb-heading currently-heading"
            ng-show="workingWithIdsUsers.length > 0">
@@ -107,30 +98,6 @@
         </li>
 
       </ul>
-    </div>
-
-    <div role="tabpanel" class="tab-pane tab-activities" ng-class="{'active': currentTicketInfoTab === 'ACTIVITY'}"
-         ng-if="currentTicketInfoTab === 'ACTIVITY'" load-activities>
-
-      <div class="form-search clearfix">
-        <form class="navbar-form navbar-form-search" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control-search"
-                   ng-model="searchActivity" placeholder="Filter activity...">
-            <i class="icn-sm icn-search-input" tabindex="-1"></i>
-          </div>
-        </form>
-      </div>
-
-      <div class="sb-heading activity-heading">All Activity</div>
-
-      <ul class="recent-activities-by" lma-all-activities>
-        <li class="list-users" ng-repeat="activity in activities" lma-all-activity
-            ng-controller="quicktech.core.rightPanel.activityCtrl"
-            ng-include="'/html/scripts/core/right-panel/right-panel-user-info/activities/activities-template/' + (activity.action).toLowerCase() + '.tpl.html'">
-        </li>
-      </ul>
-
     </div>
 
     <div role="tabpanel" class="tab-pane tab-companies" ng-class="{'active': currentTicketInfoTab === 'USER_COMPANY'}"

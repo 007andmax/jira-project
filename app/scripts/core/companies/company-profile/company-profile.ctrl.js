@@ -57,34 +57,34 @@
           $scope.allowAgentInstall = resp.allowAgentInstall;
         });
 
-        $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
-        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
-        $scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function () {
-
-          $scope.$watch('countsTicketsCompany', function () {
-
-            $scope.countsByTypesAndCompany = [{
-              label: 'Unassigned',
-              value: $scope.countsTicketsCompany['UNASSIGNED'],
-              color: "#1586e4"
-            }, {
-              label: 'Open',
-              value: $scope.countsTicketsCompany['OPEN'],
-              color: "#ffa726"
-            }];
-
-            for (var i = 0; i < $scope.countsByTypesAndCompany.length; i++) {
-              if ($scope.countsByTypesAndCompany[i].value > 0 && !$scope.isChartHasOpen) {
-                //$scope.isCollapsed = false;
-                $scope.isChartHasOpen = true;
-                $scope.isCompanyHasTickets = true;
-                return;
-              }
-            }
-
-          })
-
-        });
+        //$scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
+        //$scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
+        //$scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function () {
+        //
+        //  $scope.$watch('countsTicketsCompany', function () {
+        //
+        //    $scope.countsByTypesAndCompany = [{
+        //      label: 'Unassigned',
+        //      value: $scope.countsTicketsCompany['UNASSIGNED'],
+        //      color: "#1586e4"
+        //    }, {
+        //      label: 'Open',
+        //      value: $scope.countsTicketsCompany['OPEN'],
+        //      color: "#ffa726"
+        //    }];
+        //
+        //    for (var i = 0; i < $scope.countsByTypesAndCompany.length; i++) {
+        //      if ($scope.countsByTypesAndCompany[i].value > 0 && !$scope.isChartHasOpen) {
+        //        //$scope.isCollapsed = false;
+        //        $scope.isChartHasOpen = true;
+        //        $scope.isCompanyHasTickets = true;
+        //        return;
+        //      }
+        //    }
+        //
+        //  })
+        //
+        //});
 
         $scope.archiveCompany = function () {
           var company = CompaniesService.getOneById($scope.company.id);

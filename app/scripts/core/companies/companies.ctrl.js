@@ -36,35 +36,35 @@
           }
         };
 
-        $scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
-
-        $scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function () {
-          $scope.mostTicketsResolved = 0;
-
-          for (var companyId in $scope.topCompaniesByResolvedTickets) {
-            if (companyId === 'staticCopy') {
-              continue;
-            }
-            $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
-          }
-
-        });
-        $scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function () {
-          $scope.contributedToEarnings = 0;
-
-          for (var companyId in $scope.contributedToEarningTopCompanies) {
-            if (companyId === 'staticCopy') {
-              continue;
-            }
-            $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
-          }
-
-          if ($scope.contributedToEarnings) {
-            $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
-          }
-        });
-
-        $scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
+        //$scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
+        //
+        //$scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function () {
+        //  $scope.mostTicketsResolved = 0;
+        //
+        //  for (var companyId in $scope.topCompaniesByResolvedTickets) {
+        //    if (companyId === 'staticCopy') {
+        //      continue;
+        //    }
+        //    $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
+        //  }
+        //
+        //});
+        //$scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function () {
+        //  $scope.contributedToEarnings = 0;
+        //
+        //  for (var companyId in $scope.contributedToEarningTopCompanies) {
+        //    if (companyId === 'staticCopy') {
+        //      continue;
+        //    }
+        //    $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
+        //  }
+        //
+        //  if ($scope.contributedToEarnings) {
+        //    $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
+        //  }
+        //});
+        //
+        //$scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
         $scope.$watch('companies.length', function (companiesCount) {
           globalSearch.count = companiesCount == 0 ? companiesCount : (companiesCount - 1);
