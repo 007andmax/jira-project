@@ -5,6 +5,8 @@ aside#right {
   height: calc(100% - 78px);
   width: 281px;
   border-left: 1px solid #e7ecf2;
+  transition: width 0.2s ease-in 0s;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0 3px 10px;
   background-color: #fff;
   z-index: 1000;
 }
