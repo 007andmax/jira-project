@@ -254,7 +254,7 @@
         <li class="list-users" ng-class="{'checked': selectedUsers[user.id]}" custom-popover-menu
             custom-popover-menu-margin-top="-32px"
             custom-popover-template="/html/scripts/core/right-panel/custom-popover.tpl.html"
-            ng-repeat="user in companyGroupedData.users | filter: usersFilter | orderBy: getUserName" ng-hide="user.default">
+            ng-repeat="user in companyGroupedData.users | filter: usersFilter | orderBy: getUserName" ng-hide="user.isDefault">
 
           <a href="javascript:void(0)" class="pull-left avatar">
             <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">

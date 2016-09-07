@@ -155,7 +155,7 @@
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
              style="padding-left: 25px"
-             ng-repeat="user in clientUsers() | filter: {default: false} | orderBy: ['firstName', 'lastName'] track by user.id"
+             ng-repeat="user in clientUsers() | filter: {isDefault: false} | orderBy: ['firstName', 'lastName'] track by user.id"
              ng-click="goToUser(user)">
           {{ getUserName(user) }}
         </div>
