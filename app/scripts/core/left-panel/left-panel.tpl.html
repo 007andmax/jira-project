@@ -213,7 +213,8 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'settings' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano"
+         ng-show="openedCategory === 'settings' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <span class="left-panel-full__head--header">Settings</span>
       </div>
@@ -243,7 +244,7 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.tags')"
-             ng-class="{active: $state.is('settings.tags')}">
+             ng-class="{active: $state.is('settings.tags')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">
           Manage Tags
         </div>
@@ -255,12 +256,13 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
-             ng-class="{active: $state.is('settings.companyProfile')}">
+             ng-class="{active: $state.is('settings.companyProfile')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">
           Company Profile
         </div>
 
-        <div ng-style="{'height': $state.is('settings.companyProfile') ? '70px' : '0'}" class="category-expanded">
+        <div ng-style="{'height': $state.is('settings.companyProfile') ? '70px' : '0'}"
+             class="category-expanded" ng-if="currentUser.isOwner">
           <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
@@ -269,43 +271,43 @@
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
-             ng-class="{active: $state.is('settings.techUsers')}">
+             ng-class="{active: $state.is('settings.techUsers')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/admin-with-cogwheels.svg">
           Tech Users
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
-             ng-class="{active: $state.is('settings.email')}">
+             ng-class="{active: $state.is('settings.email')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/email-settings.svg">
           Email Settings
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.services')"
-             ng-class="{active: $state.is('settings.services')}">
+             ng-class="{active: $state.is('settings.services')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/open-wrench-tool-silhouette.svg">
           Services
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.taxRates')"
-             ng-class="{active: $state.is('settings.taxRates')}">
+             ng-class="{active: $state.is('settings.taxRates')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/dollar-symbol.svg">
           Taxes
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
-             ng-class="{active: $state.is('settings.tickets')}">
+             ng-class="{active: $state.is('settings.tickets')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/concert-ticket.svg">
           Ticket Settings
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
-             ng-class="{active: $state.is('settings.permissionsManagement')}">
+             ng-class="{active: $state.is('settings.permissionsManagement')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/permission.svg">
           Permission Management
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
-             ng-class="{active: $state.is('settings.emailTemplates')}">
+             ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
           <img class="icon-pos nav-icon icn-lg" src="images/input-icons/mail.svg">
           Email Templates
         </div>

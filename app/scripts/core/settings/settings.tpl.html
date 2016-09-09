@@ -8,7 +8,7 @@
       <img class="svg-icn-full" src="images/input-icons/envelope.svg">
       <p>Email Notifications</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.tags">
+    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.tags" ng-if="currentUser.isOwner">
       <img class="svg-icn-full" src="images/input-icons/tags.svg">
       <p>Manage Tags</p>
     </div>
