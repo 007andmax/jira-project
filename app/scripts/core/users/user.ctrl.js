@@ -14,7 +14,7 @@
 
           usersInLine *= 1;
 
-          var isLastInArray = (index + 1) === $scope.shownUsers.length,
+          var isLastInArray = (index + 1) === $scope.usersCtrl.shownUsers.length,
             isLastInLine = index > 0 && !(index % usersInLine);
 
           if (isLastInLine || isLastInArray) {
@@ -23,13 +23,13 @@
             }
 
             if (isLastInArray && !isLastInLine) {
-              var shownUsersCount = $scope.shownUsers.length - 1;
+              var shownUsersCount = $scope.usersCtrl.shownUsers.length - 1;
               var fullRows = Math.floor(shownUsersCount / usersInLine);
               usersInLine = shownUsersCount - fullRows * usersInLine;
             }
 
             for (var i = 1; i <= usersInLine; i++) {
-              if ($scope.editUser.id === $scope.shownUsers[index - i].id) {
+              if ($scope.editUser.id === $scope.usersCtrl.shownUsers[index - i].id) {
                 return true;
               }
             }
