@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.invoicePreviewCtrl',
-    ['$scope', '$modalInstance', '$rootScope', function ($scope, $modalInstance, $rootScope) {
+    ['$scope', '$modalInstance', '$rootScope', 'CompaniesService', function ($scope, $modalInstance, $rootScope, CompaniesService) {
 
       $scope.locksInitialized = true;
       $scope.invoicePreview = true;
@@ -17,7 +17,7 @@
         },
         company: {
           parent: {
-            logo: $rootScope.getCompanyLogoUrl($scope.companyForSettingPage)
+            logo: $rootScope.getCompanyLogoUrl(CompaniesService.getCurrentCompany())
           },
           default: false,
           companyInfo: {
