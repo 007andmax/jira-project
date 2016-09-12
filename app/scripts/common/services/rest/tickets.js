@@ -212,8 +212,8 @@
 
         loadingInProcess = true;
 
-        $http.post('/v2/tickets/ticketTest', storage.lastParams).then(function (resp) {
-
+        $http.post('/v2/tickets/getTickets', storage.lastParams).then(function (resp) {
+          storage.tickets = [];
           if (resp) {
 
             for (var i = 0; i < resp.data.length; i++) {
@@ -415,7 +415,7 @@
         });
 
         function getTicketQuantity(callback) {
-          $http.post('/v2/tickets/ticketTest/count', storage.lastParams).then(function (resp) {
+          $http.post('/v2/tickets/count', storage.lastParams).then(function (resp) {
             storage.ticketsQuantity = resp.data;
 
             if (callback) {
@@ -787,6 +787,10 @@
       function isTicketMatchesFilters(ticket, params) {
         var conditionsGroup = params.groupFieldFilters,
           groupRule = params.predicateRule;
+
+        if (params.excludeTrashSpam && (ticket.trash || ticket.markedAsSpamAt || ticket.reportedAsSpamAt)) {
+          return false;
+        }
 
         for (var prop in conditionsGroup) {
           var conditionGroup = conditionsGroup[prop],
