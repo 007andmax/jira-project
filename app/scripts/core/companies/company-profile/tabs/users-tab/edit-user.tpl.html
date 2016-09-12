@@ -59,7 +59,7 @@
              country="{{companyAddress.countryCode}}" make-dirty-on-blur>
     </div>
   </div>
-  <div class="col-md-2 ui half-3-col" style="width: 132px;">
+  <div class="col-md-2 ui ">
     <div class="form-group">
 
       <label class="control-label">Account Type</label>
@@ -81,7 +81,7 @@
 
     </div>
   </div>
-  <div style="width: 190px;" class="col-md-2 ui">
+  <div class="col-md-2 ui">
     <label class="control-label">Subscribe to</label>
 
     <div class="dropdown">
@@ -109,7 +109,7 @@
              ng-model="editedUser.subscription.ticket">
 
             <div class="clearfix">
-              <label class="control checkbox pull-left">
+              <label class="control checkbox pull-left" style="padding-left: 45px;">
                 <input type="checkbox" ng-model="editedUser.subscription.ticket">
                 <span class="control-indicator"></span> Ticket Updates
               </label>
@@ -123,7 +123,7 @@
              qt-checkbox ng-model="editedUser.subscription.invoice">
 
             <div class="clearfix">
-              <label class="control checkbox pull-left">
+              <label class="control checkbox pull-left" style="padding-left: 45px;">
                 <input type="checkbox" ng-model="editedUser.subscription.invoice">
                 <span class="control-indicator"></span> Invoice Updates
               </label>
@@ -135,16 +135,6 @@
       </ul>
 
     </div>
-  </div>
-  <div class="col-md-2 ui half-3-col">
-    <label class="control-label">Subscribe to</label>
-
-    <div class="dropdown">
-      <input class="form-control has-dropdown" type="text" value=""
-             data-toggle="dropdown" aria-expanded="false" readonly="readonly">
-      <i class="icn-sm icn-caret-gray"></i>
-    </div>
-
   </div>
   <div class="ui">
     <div class="inline-user-edit-action center-btn">
