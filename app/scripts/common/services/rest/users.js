@@ -44,9 +44,10 @@
                 storage.usersByCompanies[user.company.id].push(user);
               }
               var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
-              if (user.company.id !== CompaniesService.getCurrentCompany().id && (oneByIdIncludeDeleted && !oneByIdIncludeDeleted.deletedAt)) {
+              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
+                if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted) {
                 storage.clientUsers.push(user);
-              } else if (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) {
+              } else if (isDeleted) {
                 storage.deleted.push(user);
               }
             }
