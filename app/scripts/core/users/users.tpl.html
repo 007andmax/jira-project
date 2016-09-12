@@ -144,7 +144,7 @@
                         </li>
 
                         <li ng-click="subscribeUser(user, 'invoice')"
-                            ng-if="isLastUserWithInvoiceSubscription(user.id)">
+                            ng-if="!isLastUserWithInvoiceSubscription(user)">
                           <a tabindex="-1" href="javascript:void(0)">
                             <div class="clearfix">
                               <label class="control checkbox pull-left">
@@ -163,7 +163,7 @@
                   </li>
 
                   <li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
-                      && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)">
+                      && !user.isContact && !isLastUserWithInvoiceSubscription(user)">
                     <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUsers()">
                       Archive this Contact
                     </a>
@@ -327,21 +327,21 @@
           <ul class="dropdown-menu dropdown-subscribe">
 
             <li>
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticket')">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticket')">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
-                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticket">
+                    <input type="checkbox" ng-checked="user.subscription.ticket">
                     <span class="control-indicator"></span> Ticket Updates
                   </label>
                 </div>
               </a>
             </li>
 
-            <li ng-hide="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
-              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
+            <li ng-if="!isLastUserWithInvoiceSubscription(user)">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')">
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
-                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].invoice">
+                    <input type="checkbox" ng-checked="user.subscription.invoice">
                     <span class="control-indicator"></span> Invoice Updates
                   </label>
                 </div>
@@ -389,7 +389,7 @@
 
             <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
                  ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
-                      && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
+                      && !user.isContact && !isLastUserWithInvoiceSubscription(user)"
                  tooltip-placement="top" tooltip="Archive this User">
               <i class="icn-sm icn-remove-token"></i>
             </div>

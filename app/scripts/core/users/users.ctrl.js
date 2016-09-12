@@ -171,17 +171,16 @@
           $scope.editedUser = angular.copy(user);
         };
 
-        $scope.isLastUserWithInvoiceSubscription = function (userId) {
-          var users = $scope.userSubscriptionsByCompanyId;
+        $scope.isLastUserWithInvoiceSubscription = function (targetUser) {
+          var users = UsersService.getAllByCompanyId(targetUser.company.id);
 
           for (var id in users) {
-            if (id === userId) {
+            var user = users[id];
+            if (user.id === targetUser.id) {
               continue;
             }
 
-            var user = users[id];
-
-            if (user.invoice) {
+            if (user.subscription.invoice) {
               return false;
             }
           }
