@@ -212,7 +212,7 @@
 
         loadingInProcess = true;
 
-        $http.post('/v2/getTickets', storage.lastParams).then(function (resp) {
+        $http.post('/v2/tickets/getTickets', storage.lastParams).then(function (resp) {
           storage.tickets = [];
           if (resp) {
 
@@ -415,7 +415,7 @@
         });
 
         function getTicketQuantity(callback) {
-          $http.post('/v2/getTickets/count', storage.lastParams).then(function (resp) {
+          $http.post('/v2/tickets/count', storage.lastParams).then(function (resp) {
             storage.ticketsQuantity = resp.data;
 
             if (callback) {
