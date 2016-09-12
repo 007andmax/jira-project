@@ -788,6 +788,10 @@
         var conditionsGroup = params.groupFieldFilters,
           groupRule = params.predicateRule;
 
+        if (params.excludeTrashSpam && (ticket.trash || ticket.markedAsSpamAt || ticket.reportedAsSpamAt)) {
+          return false;
+        }
+
         for (var prop in conditionsGroup) {
           var conditionGroup = conditionsGroup[prop],
             conditions = conditionGroup.fieldFilterDtos,
