@@ -56,10 +56,9 @@
                   });
 
                   UserNotificationService.hide();
+                  initScrollListener();
+                  openTicketList();
                 }
-
-                initScrollListener();
-                openTicketList();
               });
             }
 
