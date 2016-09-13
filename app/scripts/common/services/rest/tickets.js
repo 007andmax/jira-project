@@ -206,15 +206,14 @@
       }
 
       function loadMore(listType, callback) {
-
+        if (callback) {
+          storage.tickets = [];
+        }
         storage.lastParams.offset = storage.tickets.length;
 
         loadingInProcess = true;
 
         $http.post('/v2/tickets/getTickets', storage.lastParams).then(function (resp) {
-          if (callback) {
-            storage.tickets = [];
-          }
 
           if (resp) {
 

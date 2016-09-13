@@ -14,9 +14,9 @@
 
             var $win = $(window),
               lastListType,
-              loadingOrRendering = false,
               ticketsHeaderState = SharedStateService.getSharedState('ticketsHeader');
 
+            scope.loadingOrRendering = false;
             scope.globalSearch = SharedStateService.getSharedState('globalSearch');
 
             if (!localStorageService.get('ticket-list-view')) {
@@ -34,7 +34,7 @@
 
 
             scope.onFinishRendering = function () {
-              loadingOrRendering = false;
+              scope.loadingOrRendering = false;
             };
 
             function getTicketsList(filter) {
@@ -44,7 +44,7 @@
 
               UserNotificationService.show('Loading...');
 
-              loadingOrRendering = true;
+              scope.loadingOrRendering = true;
               lastListType = $stateParams.listType.toUpperCase();
               TicketsService.getList(lastListType, filter.userId, filter.companyId, function (uploadedTickets, listType) {
 
@@ -70,12 +70,12 @@
               });
 
               function scrollHandler(e) {
-                if (!loadingOrRendering) {
+                if (!scope.loadingOrRendering) {
                   var scrollTop = $(e.target).scrollTop(),
                     isNeedToLoadMoreTickets = ($('[tu-tickets-container]').height() - $win.innerHeight()) <= scrollTop + 200;
 
                   if (isNeedToLoadMoreTickets && (!scope.tickets || scope.tickets.length < scope.globalSearch.count)) {
-                    loadingOrRendering = true;
+                    scope.loadingOrRendering = true;
                     TicketsService.loadMore(lastListType);
                   }
                 }

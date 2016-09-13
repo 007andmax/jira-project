@@ -1,7 +1,7 @@
 <div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader>
 
   <div class="container-ticket-list pull-left">
-    <div class="empty-page-helper" ng-if="!tickets.length">
+    <div class="empty-page-helper" ng-if="!tickets.length && !loadingOrRendering">
       <p style="opacity: 0.57">There are no tickets</p>
     </div>
 
