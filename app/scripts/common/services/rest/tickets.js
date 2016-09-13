@@ -177,7 +177,6 @@
       function fetchTickets(listType, userId, companyId, callback) {
         var query = queries[listType.toUpperCase()];
         if (query) {
-          storage.tickets = [];
           storage.lastParams = angular.copy(query);
 
           if (userId) {
@@ -213,7 +212,10 @@
         loadingInProcess = true;
 
         $http.post('/v2/tickets/getTickets', storage.lastParams).then(function (resp) {
-          storage.tickets = [];
+          if (callback) {
+            storage.tickets = [];
+          }
+
           if (resp) {
 
             for (var i = 0; i < resp.data.length; i++) {
