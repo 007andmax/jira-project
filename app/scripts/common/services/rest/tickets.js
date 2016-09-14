@@ -13,7 +13,7 @@
 
       var scope = $rootScope.$new();
       var ticketChangedActions = ['ASSIGNED_USER', 'PRIORITY_CHANGED', 'STATUS', 'TRASH', 'REPORT_AS_SPAM', 'RESTORE_FROM_SPAM', 'TICKET_SHARE', 'MARKED_AS_SPAM', 'EDITED_TICKET'];
-      var queries, loadingInProcess;
+      var queries, loadingInProcess, lastListType;
       var operators = {
         NULL: function (value) {
           return value === null || value === undefined;
@@ -177,6 +177,7 @@
       function fetchTickets(listType, userId, companyId, callback) {
         var query = queries[listType.toUpperCase()];
         if (query) {
+          storage.tickets = [];
           storage.lastParams = angular.copy(query);
 
           if (userId) {
@@ -206,16 +207,15 @@
       }
 
       function loadMore(listType, callback) {
-        if (callback) {
-          storage.tickets = [];
-        }
+
+        lastListType = listType;
         storage.lastParams.offset = storage.tickets.length;
 
         loadingInProcess = true;
 
-        $http.post('/v2/tickets/getTickets', storage.lastParams).then(function (resp) {
+        $http.post('/v2/tickets/getTickets', storage.lastParams, { params: { listType: listType } }).then(function (resp) {
 
-          if (resp) {
+          if (resp && resp.config.params.listType === lastListType) {
 
             for (var i = 0; i < resp.data.length; i++) {
               var ticket = resp.data[i];
@@ -640,7 +640,6 @@
           }
 
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
-
 
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             Utils.customizeObj(newChange.data, storage.openedTicket);

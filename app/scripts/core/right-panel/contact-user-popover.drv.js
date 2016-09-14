@@ -80,8 +80,8 @@
                 <h3 class="popover-title pull-left"></h3>\
                 <i style="margin-left:9px;margin-top:4px;" class="pull-left icn-sm persistent-tooltip ' + icnSubscription + ' " data-placement="top"></i>\
               </div>\
-              <div class="label" style="height:20px">' + contactDesignation + '</div>\
-              <div class="popover-content"></div>\
+              ' + (contactDesignation ? '<div class="label" style="height:20px">' + contactDesignation + '</div>' : '<div style="height:20px"></div>') +
+              '<div class="popover-content"></div>\
             </div>';
 
               var user_popover_content = '<div class="user-email">' +

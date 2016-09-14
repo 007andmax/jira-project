@@ -46,9 +46,7 @@
 
               scope.loadingOrRendering = true;
               lastListType = $stateParams.listType.toUpperCase();
-              TicketsService.getList(lastListType, filter.userId, filter.companyId, function (uploadedTickets, listType) {
-
-                if (listType === lastListType) {
+              TicketsService.getList(lastListType, filter.userId, filter.companyId, function (uploadedTickets) {
                   scope.tickets = uploadedTickets;
 
                   TicketsService.getCount(function (quantity) {
@@ -58,7 +56,6 @@
                   UserNotificationService.hide();
                   initScrollListener();
                   openTicketList();
-                }
               });
             }
 
