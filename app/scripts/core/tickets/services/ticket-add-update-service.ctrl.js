@@ -17,7 +17,7 @@
           };
 
           $scope.$watch('serviceExpense.item.name', function () {
-            if(!$scope.serviceExpense.item.name){
+            if(!$scope.serviceExpense || !$scope.serviceExpense.item || !$scope.serviceExpense.item.name){
               return;
             }
 

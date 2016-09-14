@@ -75,7 +75,8 @@
             storage.oneTimeCallbacks.listener && storage.oneTimeCallbacks.listener(newChange);
 
             if (newChange.action === 'REMOTE_CONNECTION_CLOSED') {
-              $rootScope.openCreateTicketForm(newChange.data.sessionId, newChange.data.duration, newChange.data.clientCompany.id, newChange.data.deviceId);
+              var session = newChange.data;
+              $rootScope.openCreateTicketForm(session.sessionId, session.duration, session.clientCompany.id, session.oneTime ? '' : session.deviceId);
             }
           })
         });
@@ -717,7 +718,7 @@
         $http.get('/remote/history').then(function (resp) {
           Utils.customizeArray(resp.data, history);
 
-          storage.oneTimeCallbacks.ONE_TIME_CONNECTION_CLOSED = function (newChange) {
+          storage.oneTimeCallbacks.REMOTE_CONNECTION_CLOSED = function (newChange) {
             if (newChange.data.oneTime) {
               history.unshift(newChange.data);
             }

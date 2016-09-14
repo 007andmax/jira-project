@@ -76,7 +76,10 @@
 
         if (fromRemoteCompanyId) {
           $timeout(function () {
-            $scope.ticketCompany = CompaniesService.getOneById(fromRemoteCompanyId);
+            var company = CompaniesService.getOneById(fromRemoteCompanyId);
+            if (!company.default) {
+              $scope.ticketCompany = company;
+            }
           });
         }
 
@@ -153,7 +156,9 @@
               $scope.ticket.createdUser.companyId = val.id;
             }
 
-            $scope.filteredAgentList = agentsByCompany[val.id];
+            if (agentsByCompany) {
+              $scope.filteredAgentList = agentsByCompany[val.id];
+            }
             $scope.clients = UsersService.getAllByCompanyId(val.id);
             resetSharedUsers(val);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);

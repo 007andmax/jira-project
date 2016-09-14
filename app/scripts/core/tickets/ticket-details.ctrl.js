@@ -24,18 +24,15 @@
           $scope.autocompleteData = ProductsService.getFullListForAutocomplete($scope);
 
           var params = $state.params.remoteParams;
-          if (params && (params.deviceId || params.companyId || params.connectionDuration)) {
+          var isFromRemote = params && (params.deviceId || params.companyId || params.connectionDuration);
+          if (isFromRemote) {
 
             $scope.ticketUpdate = { services: [{}] };
             $scope.ticketUpdate.services[0].quantity = params.connectionDuration ? params.connectionDuration.toFixed() : undefined;
 
-            ServicesService.getAllByCompany($scope, params.companyId, function (resp) {
-              $scope.ticketUpdate.services[0].item = resp.find(function (service) {
-                  return service.name.toLowerCase() === 'remote service';
-                }) || resp[0];
-            });
-
-            $scope.linkAgent($stateParams.ticketId, params.deviceId);
+            if (params.deviceId) {
+              $scope.linkAgent($stateParams.ticketId, params.deviceId);
+            }
 
             $scope.currentOpenTab = 'SERVICE';
           }
@@ -45,6 +42,14 @@
           TicketsService.getOne($scope.ticketDetails, $scope, function (details) {
 
             $scope.ticketDetails = details;
+
+            if (isFromRemote) {
+              ServicesService.getAllByCompany($scope, details.company.id, function (resp) {
+                $scope.ticketUpdate.services[0].item = resp.find(function (service) {
+                    return service.name.toLowerCase() === 'remote service';
+                  }) || resp[0];
+              });
+            }
 
             if (details.message !== undefined && (details.code === 400 || details.code === 403)) {
               $state.go('tickets', { listType: $stateParams.listType });
