@@ -248,11 +248,12 @@
           conf.resolve = {};
         }
 
-        conf.resolve.waitForServicesInitialization = ['$q', 'UsersService', function ($q, UsersService) {
+        conf.resolve.waitForServicesInitialization = ['$q', 'UsersService', '$rootScope', function ($q, UsersService, $rootScope) {
 
           var def = $q.defer();
           UsersService._addInitListener(function () {
             def.resolve();
+            $rootScope.applicationLoaded = true;
           });
 
           return def.promise;
