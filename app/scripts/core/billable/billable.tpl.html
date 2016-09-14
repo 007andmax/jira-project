@@ -101,10 +101,10 @@
                     </label>
 
                     <div class="checkbox-caption">{{ ticket.subject }}</div>
-                    <span class="label label-primary" stop-propagation="click" style="cursor: pointer; position: absolute; z-index: 10"
+                    <a class="label label-primary" stop-propagation="click" style="cursor: pointer; position: absolute; z-index: 10" custom-disabled="{{ ticket.isOrder }}"
                           ui-sref="tickets.details({ listType: 'all', ticketId: ticket.id, remoteParams: null })">
                       Tkt# {{ ticket.ticketNumber }}
-                    </span>
+                    </a>
                   </div>
                 </div>
 
