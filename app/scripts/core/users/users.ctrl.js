@@ -46,7 +46,7 @@
         });
 
         $scope.getUserCompanyName = function (user) {
-          return user.company.default ? '' : CompaniesService.getOneById(user.company.id).name;
+          return user.company.isDefault ? '' : CompaniesService.getOneById(user.company.id).name;
         };
 
         $scope.usersFilter = function (value) {

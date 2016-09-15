@@ -137,7 +137,7 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
-             ng-repeat="company in clientCompanies() | filter: {default: false} | orderBy: 'name' track by company.id"
+             ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id"
              ng-click="goToCompany(company)"
              ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}"
              style="padding-left: 25px">

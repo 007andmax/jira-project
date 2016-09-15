@@ -48,7 +48,7 @@
 
             </div>
 
-            <div class="status pull-left" ng-if="!user.company.default">
+            <div class="status pull-left" ng-if="!user.company.isDefault">
               <div class="user-company pull-left has-tooltip" trimmed-tooltip="1"
                    tooltip-placement="bottom" tooltip="{{ getUserCompanyName(user) }}"
                    tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip[1]() }}">

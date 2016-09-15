@@ -38,7 +38,7 @@
          ng-class="{'active': currentTicketInfoTab === 'COMPANY'}"
          ng-controller="quicktech.core.rightPanel.rightPanelCompanyInfoTabCtrl">
 
-      <div class="company-detail" ng-hide="companyGroupedData.company.default">
+      <div class="company-detail" ng-hide="companyGroupedData.company.isDefault">
 
         <h4>{{ companyGroupedData.company.name }}</h4>
 
@@ -134,9 +134,9 @@
 
       </div>
       <div ng-if="PermissionsService.isAllowed('VIEW_USERS')">
-        <div class="sb-heading primary-contact-heading" ng-hide="companyGroupedData.company.default">Primary Contact(s)</div>
+        <div class="sb-heading primary-contact-heading" ng-hide="companyGroupedData.company.isDefault">Primary Contact(s)</div>
 
-        <ul class="primary-contacts" ng-hide="companyGroupedData.company.default">
+        <ul class="primary-contacts" ng-hide="companyGroupedData.company.isDefault">
 
           <li class="list-users" style="padding: 0 30px 0 0"
               ng-repeat="companyContact in companyContacts | orderBy: getUserName">
@@ -247,7 +247,7 @@
 
       <div class="sb-heading users-heading">Users
         <span class="total">
-          {{ companyGroupedData.users.length - (companyGroupedData.company.default ? 1 : 0) }}</span>
+          {{ companyGroupedData.users.length - (companyGroupedData.company.isDefault ? 1 : 0) }}</span>
       </div>
 
       <ul class="general-users" custom-selection>

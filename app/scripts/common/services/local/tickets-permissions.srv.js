@@ -12,7 +12,7 @@
         'CHANGE_STATUS': isUpdateAllowed,
         'CHANGE_PRIORITY': isTicketOpen,
         'LINK_AGENT': function (ticket, company) {
-          return isTicketOpen(ticket) && !company.default && ticket.company.id === company.id;
+          return isTicketOpen(ticket) && !company.isDefault && ticket.company.id === company.id;
         },
         'SEND_TO_SPAM': isTicketOpen,
         'SEND_TO_TRASH': isTicketOpen,

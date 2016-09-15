@@ -77,7 +77,7 @@
         if (fromRemoteCompanyId) {
           $timeout(function () {
             var company = CompaniesService.getOneById(fromRemoteCompanyId);
-            if (!company.default) {
+            if (!company.isDefault) {
               $scope.ticketCompany = company;
             }
           });

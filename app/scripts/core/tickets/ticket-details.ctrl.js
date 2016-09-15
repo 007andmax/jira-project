@@ -74,7 +74,7 @@
             $scope.user = UsersService.getOneById($scope.ticketDetails.createdUser.id);
             CompaniesService.getCompanyData($scope, $scope.ticketDetails.company.id, function (resp) {
               $scope.company = resp;
-              $scope.company.default = $scope.ticketDetails.company.default;
+              $scope.company.isDefault = $scope.ticketDetails.company.isDefault;
               $scope.companyAddress = resp.addresses[0] || {};
               if ($scope.companyAddress.phoneNumbers && $scope.companyAddress.phoneNumbers.length) {
                 $scope.companyPhoneNumber = $scope.companyAddress.phoneNumbers[0].number;

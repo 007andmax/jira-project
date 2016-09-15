@@ -8,7 +8,7 @@
         ng-if="user.role" style="margin-left: 50px;"
         class="label label-light pull-right">{{ userReadable(user.role) }}</span>
       </p>
-      <div style="display: inline-flex;" ng-if="!company.default">
+      <div style="display: inline-flex;" ng-if="!company.isDefault">
         <strong>Company:</strong> &nbsp;<span style="white-space: nowrap;">{{ company.name }}</span>
       </div>
       <div style="display: inline-flex;" ng-if="user.primaryEmail">

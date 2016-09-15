@@ -100,7 +100,7 @@
         $scope.getUserCompanyName = function () {
           if ($scope.editUser.companyId) {
             var company = CompaniesService.getOneById($scope.editUser.companyId);
-            return company.default ? '' : company.name;
+            return company.isDefault ? '' : company.name;
           }
         };
 
