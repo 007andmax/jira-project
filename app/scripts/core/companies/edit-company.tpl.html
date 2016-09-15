@@ -189,18 +189,31 @@
                              readonly qt-typeahead-async-show-on-focus>
                     </div>
 
-                    <div class="form-row clearfix">
-                      <div class="form-group full-width">
+                  </div>
+
+                  <div class="form-row clearfix">
+                    <div class="form-group full-width">
+
+                      <label class="control-label">Default Payment Method</label>
+
+                      <input type="text" class="form-control" ng-model="editCompany.defaultPaymentMethod"
+                             name="defaultPaymentMethod" typeahead="paymentMethod for paymentMethod in paymentMethods"
+                             readonly qt-typeahead-async-show-on-focus>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row clearfix">
+
+                    <div class="form-group full-width">
 
                       <label class="control-label">Note</label>
 
                       <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
                                 maxlength="80" ng-trim="false" make-dirty-on-blur></textarea>
 
-                        <div class="word-count">{{ 80 - editCompany.description.length }}</div>
-                      </div>
+                      <div class="word-count">{{ 80 - editCompany.description.length }}</div>
                     </div>
-
                   </div>
 
                 </div>

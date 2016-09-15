@@ -197,6 +197,26 @@
           }
         };
 
+        $scope.userReadable = function (text) {
+          if (!text) {
+            return '';
+          }
+
+          var words = text.split('_'),
+            result = '';
+
+          for (var i = 0, len = words.length; i < len; i++) {
+            var word = words[i];
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+
+            if (i !== len - 1) {
+              result += ' ';
+            }
+          }
+
+          return result;
+        };
+
       }]);
 
 }());

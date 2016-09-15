@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivePaymentCtrl',
-    ['$scope', '$modalInstance', '$stateParams', 'ReceivableService',
-      function ($scope, $modalInstance, $stateParams, ReceivableService) {
+    ['$scope', '$modalInstance', '$stateParams', 'ReceivableService', 'CompaniesService',
+      function ($scope, $modalInstance, $stateParams, ReceivableService, CompaniesService) {
 
         var invoiceList = $scope.receivableInvoicesData.list;
 
@@ -47,6 +47,11 @@
 
         for (var i = 0; i < $scope.receivePaymentInvoices.length; i++) {
           $scope.invoiceToReceive.invoices[$scope.receivePaymentInvoices[i].id] = true;
+        }
+
+        var company = CompaniesService.getOneById($scope.receivePaymentInvoices[0].company.id);
+        if (company.defaultPaymentMethod) {
+          $scope.invoiceToReceive.method = company.defaultPaymentMethod;
         }
 
         $scope.$watch('invoiceToReceive.invoices', function () {

@@ -20,7 +20,9 @@
         <span class="label label-light">{{ receivableInvoicesData.companies[company.id].length }}</span>
 
         <i class="priority-dot high" ng-show="showIndicator"></i>
-
+        <span class="label label-light pull-right" ng-if="company.defaultPaymentMethod">
+          {{ userReadable(company.defaultPaymentMethod) }}
+        </span>
       </div>
 
       <div class="col-2" ng-click="toggleReceivableInvoices()">

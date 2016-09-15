@@ -41,6 +41,7 @@
 
         $scope.clientTypes = ['Client', 'Lead'];
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
+        $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
@@ -96,6 +97,12 @@
 
             $scope.editCompany = companyData.staticCopy();
 
+            if (company.defaultPaymentMethod) {
+              $scope.editCompany.defaultPaymentMethod = company.defaultPaymentMethod.split('_').map(function (str) {
+                return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+              }).join(' ');
+            }
+
             if (!$scope.editCompany.credential) {
               $scope.editCompany.login = '';
               $scope.editCompany.password = '';
@@ -120,6 +127,7 @@
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: [],
+            defaultPaymentMethod: $scope.paymentMethods[0],
             login: '',
             password: ''
           };
@@ -166,8 +174,9 @@
           if (form.$valid) {
             $scope.savingInProcess = true;
 
-            var contacts = $scope.editCompany.contacts,
-              addresses = $scope.editCompany.addresses;
+            var editCompany = angular.copy($scope.editCompany);
+            var contacts = editCompany.contacts,
+              addresses = editCompany.addresses;
 
             for (var i = 0; i < contacts.length; i++) {
               var contact = contacts[i];
@@ -183,7 +192,11 @@
               processPhoneNumbers(addresses[i].phoneNumbers);
             }
 
-            CompaniesService.save($scope.editCompany, function (resp) {
+            if (editCompany.defaultPaymentMethod) {
+              editCompany.defaultPaymentMethod = editCompany.defaultPaymentMethod.toUpperCase().split(' ').join('_');
+            }
+
+            CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
               $state.go('companyProfile', { companyId: resp.id || resp });
             })
