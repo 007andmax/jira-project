@@ -545,6 +545,8 @@
           return function (item) {
             if (!value || value === '[$empty$]') {
               return true;
+            } else if (!item.agentId) {
+              return false;
             }
 
             if (item.hostName) {
