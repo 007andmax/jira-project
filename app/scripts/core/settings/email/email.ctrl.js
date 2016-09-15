@@ -51,7 +51,7 @@
           $scope.smtp.testEmail = resp.login;
           savedSMTPSettings = angular.copy(resp);
           portIsEmpty = !resp.port;
-          $scope.usedEmailVia = resp.useSMTP ? $scope.emailVia[0] : $scope.emailVia[1];
+          $scope.usedEmailVia = $scope.smtp.useSMTP ? $scope.emailVia[0] : $scope.emailVia[1];
         });
 
         CompaniesService.getEmailAlias(function (resp) {
