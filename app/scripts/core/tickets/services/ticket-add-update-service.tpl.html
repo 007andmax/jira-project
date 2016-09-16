@@ -4,10 +4,10 @@
       <div class="col-1" ng-class="{'has-error': isShowingErrors(addServiceForm, 'service')}">
         <div class="dropdown">
           <input type="text" class="form-control has-dropdown"
-          name="serviceName" autocomplete="off"
+          name="serviceName" autocomplete="off" ng-disabled="!serviceList.length"
           placeholder="Service" autocomplete-service-item="serviceExpense.item"
           ng-model="serviceExpense.item.name" service-list="serviceList"
-          autocomplete-service-list="autocompleteServiceList"/>
+          autocomplete-service-list/>
           <i class="icn-sm icn-caret-gray"></i>
           <div class="service-list-container"></div>
           <input type="hidden" name="service" ng-model="serviceExpense.item.versionedId.id" ng-required="true">
@@ -41,7 +41,7 @@
                 <i class="icn-sm icn-remove-token"></i>
               </span>
             </div>
-            
+
             <div style="float: left;" ng-if="$last">
               <div class="btn btn-dark has-tooltip add-expense-btn" tooltip="Add Service" tooltip-placement="top" ng-click="addService()">
                 <i class="icn-sm icn-plus"></i>

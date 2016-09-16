@@ -41,6 +41,7 @@
 
         if (!$scope.company) {
           $state.go('companies');
+          return;
         }
 
         globalSearch.openedItemName = $scope.company.name;

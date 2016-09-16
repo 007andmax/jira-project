@@ -33,28 +33,28 @@
 
         return Utils.getListByUrl('/services/' + companyId, callback, function (list) {
 
-          //TODO implement real-time!
-          //RealTimeService.subscribe('/service', scope, function (newChange) {
-          //
-          //    console.log(newChange);
-          //
-          //    if (newChange.action == 'SERVICE_SAVED') {
-          //
-          //        var service = Utils.findById(list, newChange.data.versionedId.id);
-          //
-          //        if (service) {
-          //            Utils.customizeObj(newChange.data, service);
-          //        } else {
-          //            list.push(Utils.customizeObj(newChange.data));
-          //        }
-          //    } else if (newChange.action == 'SERVICE_DELETED') {
-          //        Utils.deleteById(list, newChange.data.versionedId.id);
-          //        scope.$broadcast("service_deleted", newChange.data);
-          //    } else {
-          //        //            todo remove this later
-          //        console.log("DEBUUUG!!!", newChange);
-          //    }
-          //});
+          RealTimeService.subscribe('/service', scope, function (newChange) {
+
+            var services = newChange.data;
+            if (newChange.action == 'SERVICES_MOVED') {
+
+               for (var i = 0; i < services.length; i++) {
+                 var movedService = services[i],
+                   service = Utils.findById(list, movedService.versionedId.id);
+
+                 if (service) {
+                   Utils.customizeObj(movedService, service);
+                 } else if (movedService.company && movedService.company.id === companyId) {
+                   list.push(Utils.customizeObj(movedService));
+                 }
+               }
+             } else if (newChange.action == 'SERVICES_DELETED') {
+              for (var i = 0; i < services.length; i++) {
+                var deletedService = services[i];
+                Utils.deleteById(list, deletedService.versionedId.id);
+              }
+             }
+          });
 
         });
       }
