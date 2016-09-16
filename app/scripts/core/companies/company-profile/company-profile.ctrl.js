@@ -39,6 +39,10 @@
           }
         });
 
+        if (!$scope.company) {
+          $state.go('companies');
+        }
+
         globalSearch.openedItemName = $scope.company.name;
         rightPanelSharedState.companyId = $scope.company.id;
 
