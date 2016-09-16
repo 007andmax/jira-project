@@ -186,7 +186,11 @@
           </div>
 
           <div class="avatar" ng-class="{'no-avatar': !user.avatar}">
-            <img ng-src="{{ getUserAvatarUrl(user) }}">
+            <div class="center-horizontally">
+              <div class="center-vertically">
+                <img ng-src="{{ getUserAvatarUrl(user) }}">
+              </div>
+            </div>
           </div>
 
         </div>

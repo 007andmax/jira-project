@@ -9871,3 +9871,13 @@ button.close {
 .bootstrap-datetimepicker-widget.dropdown-menu{
   width: 298px;
 }
+.center-horizontally {
+  display: table;
+  margin: auto;
+  width: 50%;
+  height: 100%;
+}
+.center-vertically {
+  display: table-cell;
+  vertical-align: middle;
+}
