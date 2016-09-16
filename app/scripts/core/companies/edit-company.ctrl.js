@@ -127,7 +127,7 @@
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: [],
-            defaultPaymentMethod: $scope.paymentMethods[0],
+            defaultPaymentMethod: '',
             login: '',
             password: ''
           };
