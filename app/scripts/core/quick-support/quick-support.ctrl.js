@@ -28,6 +28,8 @@
           'ENDED': 'Agent finished connected'
         };
 
+        $scope.loadingInProgress = true;
+
         $scope.remoteSessions = DevicesService.getRemoteSessions($scope, function () {
           $scope.$watch(function () {
             return sharedQuickSession.isCreateNew
@@ -38,6 +40,7 @@
             }
             UserNotificationService.hide();
           });
+          $scope.loadingInProgress = false;
         });
 
         $scope.$watch(function () {
