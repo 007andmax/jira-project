@@ -396,6 +396,7 @@
   height: 120px;
   border: 1px solid #e7ecf2;
   border-radius: 0;
+  line-height: 120px;
 }
 .create-user-avatar .avatar.avatar-loading{
   padding: 55px 0;

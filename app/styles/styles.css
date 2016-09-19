@@ -9644,7 +9644,7 @@ button.close {
   background-color: #f1f5fa;
 }
 .device-settings-button-assigned .dropdown-menu-tabs {
-  width: 100%;
+  width: 100% !important;
 }
 .device-settings-button-assigned .nav-tabs-dropdown li {
   padding: 15px;
