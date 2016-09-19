@@ -1320,6 +1320,7 @@ span.sort-span {
   width: 450px;
   height: 200px;
   margin-bottom: 15px;
+  line-height: 200px;
 }
 .tech-company-logo .create-user-avatar .avatar img {
   max-width: 450px;

@@ -36,6 +36,11 @@
   color: #4c5c6f;
   transition: all .5s ease;
 }
+@media screen and (max-width: 1024px){
+  .expand-ticket-btn{
+    display: none;
+  }
+}
 .expand-ticket-btn > div{
   transition: all .5s ease;
   width: 18px;
