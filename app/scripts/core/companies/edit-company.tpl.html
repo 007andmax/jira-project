@@ -146,7 +146,7 @@
                       </div>
 
                       <input type="text" class="form-control" ng-model="editCompany.industryName" name="industry"
-                             ng-maxlength="40" typeahead="industry for industry in industries"
+                             ng-maxlength="40" typeahead="industry for industry in industries | orderBy: 'toString()'"
                              autocomplete="off" qt-typeahead-async-show-on-focus>
                     </div>
 

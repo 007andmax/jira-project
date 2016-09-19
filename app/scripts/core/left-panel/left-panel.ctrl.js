@@ -14,7 +14,6 @@
         $scope.qSHistoryExpanded = false;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
-        $scope.clientUsers = UsersService.getClientUsers;
 
         $scope.$state = $state;
         $scope.ticketCounts = TicketsService.getCounts($scope);
@@ -22,6 +21,10 @@
         $rootScope.isLeftPanelHidden = false;
 
         $scope.qSHistory = DevicesService.getOneTimeHistory();
+
+        CompaniesService.getIndustries(function (resp) {
+          $scope.industries = resp;
+        });
 
         $scope.$watch(function () {
           return $state.current.url + ' ' + $state.current.name;
@@ -52,7 +55,7 @@
         };
 
         $scope.onClickSettings = function () {
-	        if ($state.is('settings')) {
+          if ($state.is('settings')) {
             $rootScope.isLeftPanelHidden = true;
           }
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
@@ -76,17 +79,37 @@
           $state.go('companyProfile', { companyId: company.id });
         };
 
-        $scope.goToUser = function (user) {
-          $state.go('users').then(function () {
-            SharedStateService.getSharedState('usersHeader').filter.userId = user.id;
-            globalSearch.searchValue = $scope.getUserName(user);
-            globalSearch.preventClearing = true;
-          });
+        $scope.filterUsers = function (filter, value) {
+          var sharedFilter = SharedStateService.getSharedState('usersHeader').filter
+          clearFilter(sharedFilter);
+
+          switch (filter) {
+            case 'managers':
+              sharedFilter.isContact = true;
+              break;
+            case 'leads':
+              sharedFilter.isLead = true;
+              break;
+            case 'byIndustry':
+              sharedFilter.industry = value;
+              break;
+            case 'byCompany':
+              sharedFilter.companyId = value;
+              break;
+          }
         };
 
         $scope.toggleQSHistory = function ($event) {
           $scope.qSHistoryExpanded = !$scope.qSHistoryExpanded;
         };
+
+        function clearFilter(sharedFilter) {
+          sharedFilter.isContact = false;
+          sharedFilter.isLead = false;
+          sharedFilter.industry = false;
+          sharedFilter.companyId = false;
+          globalSearch.searchValue = '';
+        }
 
         function getOpenedCategory(url) {
           if (url.indexOf('quickSupport') > -1) {

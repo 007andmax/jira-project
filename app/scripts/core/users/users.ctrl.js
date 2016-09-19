@@ -57,6 +57,20 @@
           if (headerSharedState.filter.companyId) {
             return headerSharedState.filter.companyId === value.company.id;
           }
+
+          if (headerSharedState.filter.isContact) {
+            return value.isContact;
+          }
+
+          if (headerSharedState.filter.isLead) {
+            var clientType = value.clientType;
+            return clientType && clientType.toLowerCase() === 'lead';
+          }
+
+          if (headerSharedState.filter.industry) {
+            var industryName = value.industryName;
+            return industryName && industryName.toLowerCase() === headerSharedState.filter.industry;
+          }
           return true;
         };
 

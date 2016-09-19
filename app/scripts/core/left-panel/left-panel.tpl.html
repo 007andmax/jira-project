@@ -153,11 +153,32 @@
         <span class="left-panel-full__head--header">Users</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_USERS')"
-             style="padding-left: 25px"
-             ng-repeat="user in clientUsers() | filter: {isDefault: false} | orderBy: ['firstName', 'lastName'] track by user.id"
-             ng-click="goToUser(user)">
-          {{ getUserName(user) }}
+        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers()">
+          All Users
+        </div>
+        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('managers')">
+          Managers
+        </div>
+        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('leads')">
+          Leads
+        </div>
+        <div class="center-category__category sked" style="padding-left: 25px" dropdown>
+          <span dropdown-toggle>By Industry</span>
+          <ul class="dropdown-menu">
+            <li ng-repeat="industry in industries | orderBy: 'toString()'"
+                ng-click="filterUsers('byIndustry', industry)">
+              {{ industry }}
+            </li>
+          </ul>
+        </div>
+        <div class="center-category__category sked" style="padding-left: 25px" dropdown>
+          <span dropdown-toggle>By Company</span>
+          <ul class="dropdown-menu">
+            <li ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id"
+                ng-click="filterUsers('byCompany', company.id)">
+              {{ company.name }}
+            </li>
+          </ul>
         </div>
       </div>
     </div>
