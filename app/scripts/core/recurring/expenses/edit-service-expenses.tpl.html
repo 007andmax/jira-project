@@ -2,11 +2,10 @@
      ng-form="{{ updateInvoiceService }}">
   <div class="col1" ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'service')}">
 
-    <div class="dropdown">
+    <div dropdown>
 
       <input type="text" class="form-control has-dropdown" placeholder="Service" autocomplete="off"
-             data-toggle="dropdown" aria-expanded="false"
-             name="serviceName" placeholder="Service" data-toggle="dropdown" aria-expanded="true"
+             dropdown-toggle aria-expanded="false" name="serviceName"
              ng-model="service.item.name" custom-disabled="{{ !companyServices }}">
       <i class="icn-sm icn-caret-gray"></i>
 
@@ -48,11 +47,11 @@
   <div class="col4"
        ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'serviceData')}">
 
-    <div class="dropdown">
+    <div dropdown>
 
       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
       <input type="text" qt-data-time-picker max-date="maxServiceDate"
-             class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
+             class="form-control has-dropdown" dropdown-toggle aria-expanded="false"
              placeholder="Date" ng-model="service.date"
              name="serviceData" ng-required="true">
 

@@ -187,10 +187,10 @@
             <i class="icn-sm icn-description"></i>
           </div>
 
-          <div class="more pull-right dropdown" ng-if="agent.online">
+          <div class="more pull-right" dropdown ng-if="agent.online">
 
             <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
-               aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">
+               aria-expanded="false" dropdown-toggle tooltip-placement="top" tooltip="More">
               <i class="icn-more icn-sm"></i>
             </a>
 
@@ -205,7 +205,7 @@
             </ul>
           </div>
 
-          <div class="pull-right dropdown" ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
+          <div class="pull-right" dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
             <div class="btn btn-default pull-left has-tooltip"
                  ng-if="(agent.type !== 'workstation') && agent.online"
                  ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
@@ -215,7 +215,7 @@
             <div class="btn btn-default pull-left has-tooltip"
                  ng-if="(agent.type === 'workstation') && agent.online"
                  tooltip-placement="top" tooltip="Remote Access"
-                 aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+                 aria-haspopup="true" aria-expanded="false" dropdown-toggle>
               <i class="icn-sm icn-remote-access"></i>
             </div>
 

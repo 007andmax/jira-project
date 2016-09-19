@@ -66,8 +66,8 @@
                 <i class="icn-sm icn-remove-token"></i>
               </div>
 
-              <div class="dropdown">
-                <div class="btn btn-default has-tooltip pull-right" data-toggle="dropdown"
+              <div dropdown>
+                <div class="btn btn-default has-tooltip pull-right" dropdown-toggle
                      tooltip-placement="bottom" tooltip="Subscribe to...">
                   <i class="icn-sm icn-user-subscription"></i>
                 </div>
@@ -99,8 +99,8 @@
                 </ul>
               </div>
 
-              <div class="dropdown">
-                <div class="btn btn-default has-tooltip pull-right" data-toggle="dropdown"
+              <div dropdown>
+                <div class="btn btn-default has-tooltip pull-right" dropdown-toggle
                      tooltip-placement="bottom" tooltip="Set Privilege to...">
                   <i class="icn-sm icn-user-privilege"></i>
                 </div>
@@ -168,8 +168,7 @@
            ng-show="currentOpenTab === 'network-scan'"
            tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
         <div class="btn btn-info has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
-             custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}"
-             data-toggle="dropdown" aria-expanded="false">
+             custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}">
           <i class="icn-sm icn-scan-network"></i>
         </div>
       </div>

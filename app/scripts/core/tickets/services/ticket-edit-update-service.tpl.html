@@ -6,11 +6,10 @@
       <li>
 
         <div class="edit-col1" ng-class="{'has-error': !editService.item.versionedId.id}">
-          <div class="dropdown">
+          <div dropdown>
 
             <input type="text" value="Onsite" class="form-control has-dropdown" placeholder="Service"
-                   data-toggle="dropdown" aria-expanded="false"
-                   name="serviceName" placeholder="Service" data-toggle="dropdown" aria-expanded="true"
+                   name="serviceName" placeholder="Service" dropdown-toggle aria-expanded="false"
                    ng-model="editService.item.name">
             <i class="icn-sm icn-caret-gray"></i>
 
@@ -47,11 +46,11 @@
 
         <div class="edit-col4" ng-class="{'has-error': isShowingErrors(updateTicketService, 'serviceData')}">
 
-          <div class="dropdown">
+          <div dropdown>
 
             <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
             <input type="text" qt-data-time-picker max-date="maxServiceDate"
-                   class="form-control has-dropdown" data-toggle="dropdown" aria-expanded="false"
+                   class="form-control has-dropdown" dropdown-toggle aria-expanded="false"
                    placeholder="Date" ng-model="editService.date"
                    name="serviceData" ng-required="true">
 

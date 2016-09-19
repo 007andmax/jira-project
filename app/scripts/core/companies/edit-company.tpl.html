@@ -400,9 +400,9 @@
 
                       <label class="control-label">Subscribe to</label>
 
-                      <div class="dropdown">
+                      <div dropdown>
 
-                        <input class="form-control has-dropdown" type="text" value="" data-toggle="dropdown"
+                        <input class="form-control has-dropdown" type="text" value="" dropdown-toggle
                                aria-expanded="false" readonly="readonly">
                         <i class="icn-sm icn-caret-gray"></i>
 
@@ -497,9 +497,9 @@
 
             <h3>Services Info</h3>
 
-            <div class="form-row clearfix dropdown" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+            <div class="form-row clearfix" dropdown ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
-              <div class="btn btn-lg btn-primary pull-right" data-toggle="dropdown"
+              <div class="btn btn-lg btn-primary pull-right" dropdown-toggle
                    style="margin-top: -47px; width: auto; font-weight: bold;"
                    aria-expanded="false">
                 Add Service
@@ -637,9 +637,9 @@
 
           <h3>Tax Rates</h3>
 
-          <div class="form-row clearfix dropdown">
+          <div class="form-row clearfix" dropdown>
 
-            <div class="btn btn-lg btn-primary pull-right" data-toggle="dropdown"
+            <div class="btn btn-lg btn-primary pull-right" dropdown-toggle
                  style="margin-top: -47px; width:auto; font-weight: bold;"
                  aria-expanded="false">
               Add Tax

@@ -78,9 +78,9 @@
         </div>
 
         <div class="col-3">
-          <div class="user-account-type dropdown">
+          <div class="user-account-type" dropdown>
 
-            <div class="label-wrapper" aria-expanded="false" data-toggle="dropdown">
+            <div class="label-wrapper" aria-expanded="false" dropdown-toggle>
             <span>
               {{ user.role }}
             </span>
@@ -105,9 +105,9 @@
           </div>
         </div>
 
-        <div class="col-3-2 dropdown">
+        <div class="col-3-2" dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" data-toggle="dropdown"
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" dropdown-toggle
                tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
             <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
           </div>

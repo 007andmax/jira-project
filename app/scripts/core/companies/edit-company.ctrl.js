@@ -194,6 +194,8 @@
 
             if (editCompany.defaultPaymentMethod) {
               editCompany.defaultPaymentMethod = editCompany.defaultPaymentMethod.toUpperCase().split(' ').join('_');
+            } else {
+              editCompany.defaultPaymentMethod = null;
             }
 
             CompaniesService.save(editCompany, function (resp) {

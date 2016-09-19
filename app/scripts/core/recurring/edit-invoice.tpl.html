@@ -6,13 +6,13 @@
       <fieldset class="main-form">
         <fieldset class="half">
 
-          <label class="dropdown company-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}"
+          <label class="company-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}"
                  dropdown-arrow-navigation on-enter="chooseCompany" dropdown-data-item-name="company"
-                 open-dropdown-on-model-change>
+                 open-dropdown-on-model-change dropdown>
             <span>Customer</span>
 
             <input ng-model="searchCompany"
-                   type="text" placeholder="Company" data-toggle="dropdown" aria-expanded="true">
+                   type="text" placeholder="Company" dropdown-toggle aria-expanded="true">
 
             <input type="hidden" ng-model="editInvoice.company.id" ng-required="true" name="customer">
 
@@ -42,12 +42,12 @@
                      ng-model="editInvoice.purchaseOrder" name="purchaseOrder" ng-required="false" ng-maxlength="15">
             </label>
 
-            <label class="for-small dropdown"
+            <label class="for-small" dropdown
                    ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'paymentTerms')}">
               <span>Payments Terms</span>
 
               <input type="text" class="small payment" ng-model="paramInvocie.paymentTerms"
-                     data-toggle="dropdown" aria-expanded="true" maxlength="5" hard-reset-pattern="numberPattern">
+                     dropdown-toggle aria-expanded="true" maxlength="5" hard-reset-pattern="numberPattern">
               <span class="suffix-days">{{ paramInvocie.paymentTerms == 1 ? 'day' : 'days' }}</span>
               <i class="icn-sm icn-caret-gray"></i>
 
@@ -76,10 +76,10 @@
 
         <fieldset class="full">
 
-          <label class="dropdown" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
+          <label dropdown ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
             <span>Repeating Invoice every</span>
 
-            <input class="form-control" type="text" data-toggle="dropdown" aria-expanded="true"
+            <input class="form-control" type="text" dropdown-toggle aria-expanded="true"
                    ng-readonly="hasGeneratedInvoices(editInvoice.sentOn)"
                    ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
                    hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"

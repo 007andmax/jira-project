@@ -165,10 +165,10 @@
                     </div>
 
                     <div class="quote-link pull-left">
-                      <div class="dropup pull-left">
+                      <div class="dropup pull-left" dropdown>
 
                         <a class="hit-area ha-19-14 pull-left has-tooltip"
-                           data-toggle="dropdown"
+                           dropdown-toggle
                            tooltip="Add Link" tooltip-placement="top" tooltip-append-to-body="true"
                            tooltip-html-unsafe="<div class='tooltip body-tooltip'><div class='tooltip-inner'></div></div>">
                           <i class="icn-sm icn-wysiwyg-link"></i>
@@ -512,11 +512,11 @@
 
                 <label class="control-label">Page to open after login</label>
 
-                <div class="dropdown">
+                <div dropdown>
 
                   <input class="form-control has-dropdown" type="text"
                          ng-model="pageMapping[pageToOpen]" name="pageToOpen" make-dirty-on-blur
-                         data-toggle="dropdown" aria-expanded="false" readonly="readonly">
+                         dropdown-toggle aria-expanded="false" readonly="readonly">
 
                   <i class="icn-sm icn-caret-gray"></i>
 

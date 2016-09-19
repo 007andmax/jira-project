@@ -91,10 +91,10 @@
               <!--<i class="icn-sm icn-user-chat"></i>-->
             <!--</div>-->
 
-              <div class="more pull-left dropdown">
+              <div class="more pull-left" dropdown>
 
                 <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip"
-                   aria-haspopup="true" aria-expanded="false" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" dropdown-toggle
                    tooltip-placement="top" tooltip="More">
                   <i class="icn-more icn-sm"></i>
                 </a>
@@ -296,9 +296,9 @@
         </div>
 
         <div class="col-lg-1 col-xs-1">
-          <div class="user-account-type dropdown" style="height: 100%">
+          <div class="user-account-type" dropdown style="height: 100%">
 
-            <div class="label-wrapper" aria-expanded="false" data-toggle="dropdown" style="height: 100%">
+            <div class="label-wrapper" aria-expanded="false" dropdown-toggle style="height: 100%">
               <span>{{ user.role }}</span>
             </div>
 
@@ -321,9 +321,9 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-2 dropdown">
+        <div class="col-lg-1 col-xs-2" dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" data-toggle="dropdown"
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" dropdown-toggle
                tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
             <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
           </div>

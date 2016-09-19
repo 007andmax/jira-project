@@ -96,10 +96,10 @@
 
             <label class="control-label">Account Type</label>
 
-            <div class="dropdown">
+            <div dropdown>
 
               <input class="form-control has-dropdown" type="text"
-                     ng-model="roles[editUser.role]" data-toggle="dropdown" aria-expanded="true"
+                     ng-model="roles[editUser.role]" dropdown-toggle aria-expanded="true"
                      class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
               <i class="icn-sm icn-caret-gray"></i>
 
@@ -126,7 +126,7 @@
             <input type="text" class="form-control" name="userCompany"
                    value="{{userCompany.name || userCompany}}" disabled="disabled" ng-hide="isCreation">
 
-            <div class="dropdown" ng-show="isCreation">
+            <div dropdown ng-show="isCreation">
 
               <input type="text" ng-model="userCompany" autocomplete="off"
                      class="form-control form-control-dropdown dropdown-toggle"
@@ -147,9 +147,9 @@
           <div class="form-group">
             <label class="control-label">Subscribe to</label>
 
-            <div class="dropdown">
+            <div dropdown>
               <input class="form-control has-dropdown" type="text" value=""
-                     data-toggle="dropdown" aria-expanded="false" readonly="readonly">
+                     dropdown-toggle aria-expanded="false" readonly="readonly">
               <i class="icn-sm icn-caret-gray"></i>
 
               <div class="subscribe-tokens">
