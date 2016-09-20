@@ -136,12 +136,43 @@
         <span class="left-panel-full__head--header">Companies</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category sked" ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')"
-             ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id"
-             ng-click="goToCompany(company)"
-             ng-class="{active: $state.includes('companyProfile', { companyId: company.id })}"
-             style="padding-left: 25px">
-          {{ company.name }}
+        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers()">
+          All Companies
+        </div>
+        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('managers')">
+          Clients
+        </div>
+        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('leads')">
+          Leads
+        </div>
+        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('leads')">
+          Vendors
+        </div>
+        <div class="filter-block">
+          <div class="center-category__category filter" dropdown>
+            <div>
+              <p>By Industry</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal" dropdown-toggle readonly>
+                <i class="icn-sm icn-caret-gray"></i>
+              </div>
+            </div>
+            <ul class="dropdown-menu">
+              <li ng-repeat="industry in industries | orderBy: 'toString()'"
+                  ng-click="filterUsers('byIndustry', industry)">
+                {{ industry }}
+              </li>
+            </ul>
+          </div>
+          <div class="center-category__category filter">
+            <div>
+              <p>Date Range</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal" readonly>
+                <i class="icn-sm icn-caret-gray"></i>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -162,23 +193,38 @@
         <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('leads')">
           Leads
         </div>
-        <div class="center-category__category sked" style="padding-left: 25px" dropdown>
-          <span dropdown-toggle>By Industry</span>
-          <ul class="dropdown-menu">
-            <li ng-repeat="industry in industries | orderBy: 'toString()'"
-                ng-click="filterUsers('byIndustry', industry)">
-              {{ industry }}
-            </li>
-          </ul>
-        </div>
-        <div class="center-category__category sked" style="padding-left: 25px" dropdown>
-          <span dropdown-toggle>By Company</span>
-          <ul class="dropdown-menu">
-            <li ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id"
+        <div class="filter-block">
+          <div class="center-category__category filter" dropdown>
+            <div>
+              <p>By Industry</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal" dropdown-toggle readonly>
+                <i class="icn-sm icn-caret-gray"></i>
+              </div>
+            </div>
+            <ul class="dropdown-menu">
+              <li ng-repeat="industry in industries | orderBy: 'toString()'"
+                  ng-click="filterUsers('byIndustry', industry)">
+                {{ industry }}
+              </li>
+            </ul>
+          </div>
+          <div class="center-category__category filter" dropdown>
+            <div>
+              <p>By Company</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal" dropdown-toggle readonly>
+                <i class="icn-sm icn-caret-gray"></i>
+              </div>
+            </div>
+            <ul class="dropdown-menu">
+              <li
+                ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id"
                 ng-click="filterUsers('byCompany', company.id)">
-              {{ company.name }}
-            </li>
-          </ul>
+                {{ company.name }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
