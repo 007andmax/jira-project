@@ -89,7 +89,7 @@
         .state('companyProfile', waitForServices({
           url: '/clients/companyProfile/:companyId?tabName',
           params: {
-            tabName: ''
+            tabName: 'devices'
           },
           reloadOnSearch: false,
           templateUrl: '/html/scripts/core/companies/company-profile/company-profile.tpl.html',

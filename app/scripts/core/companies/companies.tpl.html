@@ -114,7 +114,7 @@
       <!--</div>-->
 
       <div class="company-card"
-           ui-sref="companyProfile({ companyId: company.id, tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' })"
+           ui-sref="companyProfile({ companyId: company.id })"
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: 'name')) track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl"
            ng-class="{'large': location.length > 50}">
@@ -224,7 +224,7 @@
       <li class="list-company-row"
           ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
           ng-controller="quicktech.core.companies.companyCtrl"
-          ui-sref="companyProfile({ companyId: company.id, tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' })">
+          ui-sref="companyProfile({ companyId: company.id })">
         <div class="col-xs-3">
           <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="">
           <span class="list-company-name">{{ company.name }}</span>
