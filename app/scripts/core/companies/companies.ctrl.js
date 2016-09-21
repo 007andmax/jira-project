@@ -103,8 +103,8 @@
           }
 
           if (filter.industry) {
-            var industryName = value.industryName;
-            result = result && industryName && industryName.toLowerCase() === filter.industry.toLowerCase();
+            var industryName = value.clientIndustry ? (value.clientIndustry.name || '') : '';
+            result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
           }
 
           if (filter.dateRange) {

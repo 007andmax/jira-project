@@ -127,6 +127,7 @@
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: [],
+            clientIndustry: {},
             defaultPaymentMethod: '',
             login: '',
             password: ''

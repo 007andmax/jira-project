@@ -145,7 +145,7 @@
                         <label class="control-label" ng-message="maxlength">INDUSTRY IS TOO LARGE.</label>
                       </div>
 
-                      <input type="text" class="form-control" ng-model="editCompany.industryName" name="industry"
+                      <input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"
                              ng-maxlength="40" uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
                              autocomplete="off" qt-typeahead-async-show-on-focus>
                     </div>

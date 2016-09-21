@@ -51,7 +51,8 @@
 
         $scope.usersFilter = function (value) {
           var filter = headerSharedState.filter;
-          var clientType = value.clientType;
+          var company = CompaniesService.getOneById(value.company.id);
+          var clientType = company.clientType;
           var result = true;
 
           if (filter.userId) {
@@ -75,8 +76,8 @@
           }
 
           if (filter.industry) {
-            var industryName = value.industryName;
-            result = result && industryName && industryName.toLowerCase() === filter.industry.toLowerCase();
+            var industryName = company.clientIndustry ? (company.clientIndustry.name || '') : '';
+            result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
           }
 
           return result;
