@@ -327,7 +327,7 @@
               <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
                      ng-model="ticketCreatedUser"
                      typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'lastName'"
+                     uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
                      qt-typeahead-show-on-focus ng-trim="false"
                      custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': 'auto'}">
 
