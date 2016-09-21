@@ -7,15 +7,15 @@
           ng-repeat="tag in ticketTags track by $index">
       <span>{{ tag.word }}</span>
       <i ng-show="!readonlyTags" class="icn-xs remove-tag" ng-click="removeTag($index)"
-         tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
+         uib-tooltip="remove" tooltip-placement="top" stop-propagation="click"></i>
     </span>
 
     <div ng-show="!readonlyTags" class="tags-action"
-         dropdown is-open="dropdownOpened && result.length" on-toggle="setDropdownOpened(open)"
+         uib-dropdown is-open="dropdownOpened && result.length" on-toggle="setDropdownOpened(open)"
          dropdown-arrow-navigation on-enter="addTag" dropdown-data-item-name="tag">
       <input type="text" class="tags-input" ng-model="newTag" placeholder="..." set-focus-on-var-change="focusInput">
 
-      <ul class="tag-autocomplete dropdown-menu" dropdown-menu>
+      <ul class="tag-autocomplete dropdown-menu" uib-dropdown-menu>
         <li class="autocomplete-item" ng-repeat="tag in result | orderBy:'word'"
             ng-click="addTag(tag)">
           <span class="tag-name">{{tag.word}}</span>

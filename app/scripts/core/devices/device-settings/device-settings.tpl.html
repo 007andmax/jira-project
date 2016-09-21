@@ -66,13 +66,13 @@
       <div class="form-left-column">
 
         <div class="device-settings-button-assigned" ng-class="{'has-error': assignRequiredError}"
-             dropdown on-toggle="eraseSearch(open)">
+             uib-dropdown on-toggle="eraseSearch(open)">
 
           <label class="control-label">
             {{ assignRequiredError ? 'Assign is required.' : 'Assign' }}
           </label>
 
-          <button type="button" class="btn btn-default" dropdown-toggle ng-click="openDropdown()"
+          <button type="button" class="btn btn-default" uib-dropdown-toggle ng-click="openDropdown()"
                   ng-disabled="!hasEnabledType(credentialTypes) && !hasEnabledDevice(editedCredential)">
             <span class="ellipsis">{{ userReadable() || 'Assign' }}</span>
             <span ng-if="hasEnabledType(credentialTypes) || hasEnabledDevice(editedCredential)"

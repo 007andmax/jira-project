@@ -3,18 +3,21 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService', 'Utils',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state,
-                SharedStateService, DevicesService, PermissionsService, localStorageService, Utils) {
+      'localStorageService', 'Utils', 'VendorsService',
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
+                SharedStateService, DevicesService, PermissionsService, localStorageService, Utils, VendorsService) {
 
+        var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
           availableViews = ['list', 'grid'];
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
         }
+
+        $scope.headerSharedState = headerSharedState;
 
         $scope.companiesView = localStorageService.get('companies-view') || 'grid';
         $scope.PermissionsService = PermissionsService;
@@ -23,6 +26,10 @@
         Utils.deleteById($scope.companies, CompaniesService.getUnassignedCompany().id);
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
+        $scope.vendors = VendorsService.getAll($scope);
+        $scope.user = UsersService.getCurrentUser();
+
+        $scope.companiesCtrl = {};
 
         $scope.orderCompanies = {
           field: 'name',
@@ -66,9 +73,55 @@
         //
         //$scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
-        $scope.$watch('companies.length', function (companiesCount) {
-          globalSearch.count = companiesCount;
-        });
+        $scope.$watch(function () {
+          var shownCompanies = $scope.companiesCtrl.shownCompanies;
+          var shownVendors = $scope.companiesCtrl.shownVendors;
+          return {
+            shownCompanies: shownCompanies ? shownCompanies.length : 0,
+            shownVendors: shownVendors ? shownVendors.length : 0,
+            isVendorShown: headerSharedState.filter.isVendor
+          }
+        }, function (value) {
+          globalSearch.count = value.isVendorShown ? value.shownVendors : value.shownCompanies;
+        }, true);
+
+        $scope.filterCompanies = function (value) {
+          var filter = headerSharedState.filter;
+          var clientType = value.clientType;
+          var result = true;
+
+          if (filter.vendorId) {
+            return filter.vendorId === value.id;
+          }
+
+          if (filter.isClient) {
+            result = result && clientType && clientType.toLowerCase() === 'client';
+          }
+
+          if (filter.isLead) {
+            result = result && clientType && clientType.toLowerCase() === 'lead';
+          }
+
+          if (filter.industry) {
+            var industryName = value.industryName;
+            result = result && industryName && industryName.toLowerCase() === filter.industry.toLowerCase();
+          }
+
+          if (filter.dateRange) {
+            var start = filter.dateRange[0],
+              end = filter.dateRange[1];
+
+            if (start) {
+              result = result && value.createdAt >= (new Date(start)).getTime();
+            }
+
+            if (end) {
+              result = result && value.createdAt <= (new Date(end)).getTime();
+            }
+          }
+          return result;
+
+        };
 
         $scope.setOrderByCompanies = function (option) {
           if (option === $scope.orderCompanies.field) {
@@ -111,6 +164,20 @@
           }
         };
 
-      }]);
+        $scope.attachEvents = function (element) {
+          $('.popover').on('mouseenter', function () {
+            $rootScope.insidePopover = true;
+          });
+          $('.popover').on('mouseleave', function () {
+            $rootScope.insidePopover = false;
+            $(element).popover('hide');
+          });
+        };
 
+        $scope.$on('$destroy', function () {
+          headerSharedState.filter = {};
+          $rootScope.$broadcast('clearCompaniesDateRange');
+        });
+
+      }]);
 }());

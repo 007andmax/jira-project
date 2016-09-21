@@ -2,10 +2,10 @@
      ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
 
   <div class="company-cover-area"
-       style="background: url('images/company/cover.png') transparent right no-repeat; background-size: cover}">
+       style="background: url('images/company/cover.png') transparent right no-repeat; background-size: cover">
 
     <div class="name-rating" style="height: 10%">
-      <div class="company-name" tooltip="{{ vendor.name }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+      <div class="company-name" uib-tooltip="{{ vendor.name }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
         <span trimmed-tooltip-container>{{ vendor.name }}</span>
       </div>
     </div>
@@ -38,7 +38,7 @@
   <div class="vendor-actions user-actions">
 
     <div class="btn btn-info has-tooltip" email-to="getPriorityContact().email"
-         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">
+         tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Email">
       <i class="icn-sm icn-email-white"></i>
     </div>
 
@@ -48,12 +48,12 @@
       </a>
       <a href="javascript:void(0)" class="hit-area has-tooltip"
          ui-sref="editVendor( { vendorId: vendor.id } )"
-         tooltip-placement="top" tooltip="Edit">
+         tooltip-placement="top" uib-tooltip="Edit">
         <i class="icn-md icn-edit-tag"></i>
       </a>
 
       <a class="hit-area has-tooltip" ng-click="archiveVendor()" archive-vendor-button
-         tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Vendor">
+         tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Archive Vendor">
         <i class="icn-sm icn-archive-company"></i>
       </a>
     </div>

@@ -10,10 +10,10 @@
     <label class="control-label">PLEASE SELECT THE TIMEZONE.</label>
   </div>
 
-  <div class="pull-left" dropdown open-dropdown-on-model-change>
+  <div class="pull-left" uib-dropdown open-dropdown-on-model-change>
 
     <input class="form-control form-control-time-zone has-dropdown" type="text"
-           dropdown-toggle aria-expanded="false" ng-model="address.locale"
+           uib-dropdown-toggle aria-expanded="false" ng-model="address.locale"
            name="timeZone" required>
     <a ng-show="address.locale.length" href="javascript:void(0)" class="erase" aria-label="erase"
        ng-click="eraseInput($event)">

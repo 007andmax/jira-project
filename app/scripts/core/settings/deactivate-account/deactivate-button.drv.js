@@ -3,20 +3,20 @@
 (function () {
 
   angular.module("quicktech.core.settings").directive("deactivateButton",
-    ['UsersService', '$modal',
-      function (UsersService, $modal) {
+    ['UsersService', '$uibModal',
+      function (UsersService, $uibModal) {
         return {
           restrict: 'A',
           link: function (scope, element) {
 
             element.click(function () {
-              $modal.open({
+              $uibModal.open({
                 templateUrl: '/html/scripts/core/settings/deactivate-account/deactivate-account.tpl.html',
-                controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
                   $scope.modalData = { note: '' };
-                  $scope.dismiss = $modalInstance.dismiss;
+                  $scope.dismiss = $uibModalInstance.dismiss;
                   $scope.confirm = function () {
-                    $modalInstance.close($scope.modalData.note);
+                    $uibModalInstance.close($scope.modalData.note);
                   };
                 }],
                 keyboard: false,

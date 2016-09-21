@@ -2,8 +2,8 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('controlLogo',
-    ['$modal', 'FilesService', '$rootScope', 'CompaniesService',
-      function ($modal, FilesService, $rootScope, CompaniesService) {
+    ['$uibModal', 'FilesService', '$rootScope', 'CompaniesService',
+      function ($uibModal, FilesService, $rootScope, CompaniesService) {
 
         return {
           restrict: 'A',
@@ -113,7 +113,7 @@
 
               windowScrollTop = wind.scrollTop();
 
-              return $modal.open({
+              return $uibModal.open({
                 animation: true,
                 backdrop: 'static',
                 windowClass: 'modal-customize-avatar',

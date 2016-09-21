@@ -3,11 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
-    ['$scope', '$modalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
+    ['$scope', '$uibModalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
       'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'fromRemoteCompanyId', 'fromRemoteDeviceId',
       'ServicesService', '$timeout', 'quicktech.common.services.TicketsPermissionsService', '$state', 'Utils',
       'quicktech.common.services.PermissionsService',
-      function ($scope, $modalInstance, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
+      function ($scope, $uibModalInstance, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
                 UserNotificationService, sessionId, sessionTime, fromRemoteCompanyId, fromRemoteDeviceId, ServicesService,
                 $timeout, TicketsPermissionsService, $state, Utils, PermissionsService) {
 
@@ -458,7 +458,7 @@
 
             TicketsService.createTicket($scope.ticket, function (resp) {
               $scope.savingInProcess = false;
-              $modalInstance.dismiss();
+              $uibModalInstance.dismiss();
 
               if (resp.code >= 400) {
                 var message = resp.validationResults && resp.validationResults.remoteSessionId ? resp.validationResults.remoteSessionId : resp.message;
@@ -477,7 +477,7 @@
         };
 
         $scope.closeCreateTicketForm = function () {
-          $modalInstance.dismiss();
+          $uibModalInstance.dismiss();
         };
 
         $scope.validateLink = function () {

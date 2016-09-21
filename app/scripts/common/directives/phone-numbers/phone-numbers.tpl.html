@@ -44,10 +44,10 @@
       </div>
 
       <div class="form-group no-label">
-        <div class="pull-left ui" dropdown>
+        <div class="pull-left ui" uib-dropdown>
 
           <input type="text" class="form-control-number has-dropdown"
-                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" dropdown-toggle
+                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
                  aria-expanded="true" READONLY>
 
           <ul class="dropdown-menu dropdown-account-type">
@@ -61,7 +61,7 @@
         </div>
 
         <div class="btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
-             tooltip-placement="top" tooltip="Remove">
+             tooltip-placement="top" uib-tooltip="Remove">
           <i class="icn-sm icn-remove-token"></i>
         </div>
 
@@ -112,10 +112,10 @@
       </div>
 
       <div class="form-group no-label">
-        <div class="pull-left ui" dropdown>
+        <div class="pull-left ui" uib-dropdown>
 
           <input type="text" class="form-control-number has-dropdown"
-                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" dropdown-toggle
+                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
                  aria-expanded="true" READONLY>
 
           <ul class="dropdown-menu dropdown-account-type">
@@ -131,12 +131,12 @@
         <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
 
           <div cns-if class="btn btn-dark has-tooltip pull-right"
-               tooltip-placement="top" tooltip="Add more" ng-click="addPhoneNumber()">
+               tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()">
             <i class="icn-sm icn-plus"></i>
           </div>
 
           <div cns-else class="btn btn-primary has-tooltip pull-right"
-               tooltip-placement="top" title="" tooltip="Remove" ng-click="removePhoneNumber($index)">
+               tooltip-placement="top" title="" uib-tooltip="Remove" ng-click="removePhoneNumber($index)">
             <i class="icn-sm icn-remove-token"></i>
           </div>
 
@@ -145,7 +145,7 @@
       </div>
 
       <!-- <a href="javascript:void(0)" class="btn btn-cr btn-green btn-add-more pull-left tp-hide"
-         tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()"
+         uib-tooltip="Add More" tooltip-placement="top" ng-click="addPhoneNumber()"
          ng-disabled="phoneNumbers.length >= maximalAmountOfPhones">
         <span class="icn-add"></span>
       </a> -->

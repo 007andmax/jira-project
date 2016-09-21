@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.invoicePreviewCtrl',
-    ['$scope', '$modalInstance', '$rootScope', 'CompaniesService', function ($scope, $modalInstance, $rootScope, CompaniesService) {
+    ['$scope', '$uibModalInstance', '$rootScope', 'CompaniesService', function ($scope, $uibModalInstance, $rootScope, CompaniesService) {
 
       $scope.locksInitialized = true;
       $scope.invoicePreview = true;
@@ -130,7 +130,7 @@
       };
 
       $scope.close = function () {
-        $modalInstance.dismiss();
+        $uibModalInstance.dismiss();
       };
 
     }]);

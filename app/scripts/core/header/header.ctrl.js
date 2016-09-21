@@ -65,7 +65,7 @@
           } else if ($state.includes("users")) {
             return 'users';
           } else if ($state.includes("companies")) {
-            return 'companies';
+            return SharedStateService.getSharedState('companiesHeader').filter.isVendor ? 'vendors' : 'companies';
           } else if ($state.includes("products")) {
             return 'products';
           } else if ($state.includes("services")) {
@@ -78,8 +78,6 @@
             return 'receivable';
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
-          } else if ($state.includes("vendors")) {
-            return 'vendors';
           } else if ($state.includes("settings")) {
             if ($state.is("settings")) {
               return 'Account Settings';

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.createInvoiceCtrl',
-    ['$scope', 'BillableService', 'CompaniesService', '$modalInstance', 'Downloader',
-      function ($scope, BillableService, CompaniesService, $modalInstance, Downloader) {
+    ['$scope', 'BillableService', 'CompaniesService', '$uibModalInstance', 'Downloader',
+      function ($scope, BillableService, CompaniesService, $uibModalInstance, Downloader) {
 
         var locksCount = 0;
 
@@ -64,7 +64,7 @@
 
         $scope.$watch('currentUser.permissions', function (permissions) {
           if (permissions && !$scope.PermissionsService.isAllowed('CREATE_INVOICE')) {
-            $modalInstance.dismiss();
+            $uibModalInstance.dismiss();
           }
         });
 
@@ -81,7 +81,7 @@
         };
 
         $scope.close = function () {
-          $modalInstance.dismiss();
+          $uibModalInstance.dismiss();
         };
 
         $scope.print = function () {

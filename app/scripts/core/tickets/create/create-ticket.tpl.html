@@ -56,14 +56,14 @@
                 <span class="file-size">{{ file.size | fileSizeFilter }}</span>
 
                 <a href="javascript:void(0)" class="hit-area pull-right"
-                   tooltip="Remove file" tooltip-placement="top"
+                   uib-tooltip="Remove file" tooltip-placement="top"
                    ng-click="removeAttachment($index, fileInfo[file.name].error)">
                   <i class="icn-sm icn-remove-token"></i>
                 </a>
 
                 <a href="javascript:void(0)" class="hit-area pull-right"
                    ng-show="file.progress !== 100"
-                   tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+                   uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
                   <i class="icn-sm icn-reupload"></i>
                 </a>
 
@@ -75,7 +75,7 @@
                   </div>
                 </div>
 
-                <span class="pull-right" ng-show="fileInfo[file.name].error" tooltip="{{ fileInfo[file.name].message }}"
+                <span class="pull-right" ng-show="fileInfo[file.name].error" uib-tooltip="{{ fileInfo[file.name].message }}"
                       tooltip-append-to-body tooltip-placement="top"
                       style="color: rgb(229, 57, 53);white-space: nowrap;overflow: hidden;max-width: 250px;text-overflow: ellipsis">
                   {{ fileInfo[file.name].message }}
@@ -91,7 +91,7 @@
 
               <div ticket-attachment-files attachment-func="addAttachmentFiles" ng-model="ticketAttachments">
                 <a href="javascript:void(0)" class="pull-left hit-area ha-16-18 has-tooltip"
-                   tooltip-append-to-body="true" tooltip="Attach Files"
+                   tooltip-append-to-body="true" uib-tooltip="Attach Files"
                    tooltip-placement="top">
                   <i class="icn-sm icn-attachment"></i>
                 </a>
@@ -103,17 +103,17 @@
               <div class="font-styles pull-left">
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="bold"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Bold">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">
                   <i class="icn-sm icn-wysiwyg-bold "></i>
                 </a>
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="italic"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Italic">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">
                   <i class="icn-sm icn-wysiwyg-italic"></i>
                 </a>
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="underline"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Underline">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">
                   <i class="icn-sm icn-wysiwyg-underline"></i>
                 </a>
               </div>
@@ -121,12 +121,12 @@
               <div class="text-bullets pull-left">
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="insertorderedlist"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Numbered List">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">
                   <i class="icn-sm icn-wysiwyg-ol"></i>
                 </a>
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="insertunorderedlist"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Bulleted List">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">
                   <i class="icn-sm icn-wysiwyg-ul"></i>
                 </a>
               </div>
@@ -134,27 +134,27 @@
               <div class="text-styles pull-left">
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="justifyleft"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Left Align">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">
                   <i class="icn-sm icn-wysiwyg-align-left"></i>
                 </a>
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="justifycenter"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Center Align">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">
                   <i class="icn-sm icn-wysiwyg-align-center"></i>
                 </a>
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="justifyright"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Right Align">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">
                   <i class="icn-sm icn-wysiwyg-align-right"></i>
                 </a>
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="outdent"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Decrease Indent">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">
                   <i class="icn-sm icn-wysiwyg-unindent"></i>
                 </a>
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="indent"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Increase Indent">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">
                   <i class="icn-sm icn-wysiwyg-indent"></i>
                 </a>
               </div>
@@ -163,14 +163,14 @@
 
                 <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                    data-edit="cblock"
-                   tooltip-append-to-body="true" tooltip-placement="top" tooltip="Quote">
+                   tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">
                   <i class="icn-sm icn-wysiwyg-quote"></i>
                 </a>
 
-                <div class="dropup pull-left" dropdown>
+                <div class="dropup pull-left" uib-dropdown>
 
                   <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                     dropdown-toggle data-container="body" data-placement="top" tooltip="Add or Remove Link">
+                     uib-dropdown-toggle data-container="body" data-placement="top" uib-tooltip="Add or Remove Link">
                     <i class="icn-sm icn-wysiwyg-link"></i>
                   </a>
 
@@ -199,7 +199,7 @@
 
             <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
                data-edit="removeformat"
-               tooltip-append-to-body="true" tooltip-placement="top" tooltip="Reset Formating">
+               tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">
               <i class="icn-sm icn-wysiwyg-reset"></i>
             </a>
 
@@ -216,10 +216,10 @@
             <li>
 
               <div class="col-1" ng-class="{'has-error': isShowingServiceErrors(addServiceForm, 'service')}">
-                <div dropdown is-open="!!isServiceListOpened[serviceExpense.itemOrder]">
+                <div uib-dropdown is-open="!!isServiceListOpened[serviceExpense.itemOrder]">
 
                   <input type="text" class="form-control has-dropdown"
-                         name="serviceName" autocomplete="off" dropdown-toggle
+                         name="serviceName" autocomplete="off" uib-dropdown-toggle
                          custom-disabled="{{ !ticketCompany || serviceList.length < 1 }}"
                          placeholder="Service" autocomplete-service-item="serviceExpense.item"
                          ng-model="serviceExpense.item.name" service-list="serviceList"
@@ -254,11 +254,11 @@
 
               <div class="col-4" ng-class="{'has-error': isShowingServiceErrors(addServiceForm, 'serviceData')}">
 
-                <div dropdown>
+                <div uib-dropdown>
 
                   <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 12px;z-index: 1;"></i>
                   <input type="text" class="form-control has-dropdown" qt-data-time-picker max-date="maxServiceDate"
-                         dropdown-toggle aria-expanded="false" placeholder="Date"
+                         uib-dropdown-toggle aria-expanded="false" placeholder="Date"
                          ng-model="serviceExpense.date"
                          name="serviceData" ng-required="true">
 
@@ -267,14 +267,14 @@
               </div>
 
               <div class="col-5" ng-if="$last">
-                <span class="btn btn-dark has-tooltip" tooltip-placement="top" tooltip="Add more"
+                <span class="btn btn-dark has-tooltip" tooltip-placement="top" uib-tooltip="Add more"
                       ng-click="addService(addServiceForm)">
                   <i class="icn-sm icn-plus"></i>
                 </span>
               </div>
 
               <div class="col-5" ng-if="!$last">
-                <span class="btn btn-primary has-tooltip" tooltip-placement="top" tooltip="Remove"
+                <span class="btn btn-primary has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
                       ng-click="removeService($index)">
                   <i class="icn-sm icn-remove-token"></i>
                 </span>
@@ -297,11 +297,11 @@
 
               <label>Company</label>
 
-              <div class="dropdown">
+              <div style="position: relative;">
 
                 <input type="text" class="form-control has-dropdown" next-after-text-editor
                        ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
-                       typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
+                       uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                        typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                        custom-style="{'max-height': '170px', 'overflow-y': 'auto'}">
 
@@ -310,7 +310,7 @@
 
                   <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
                      ng-show="ticketCompanyChoosen" ng-click="clearTicketCompany()"
-                     tooltip="clear" tooltip-placement="top"></i>
+                     uib-tooltip="clear" tooltip-placement="top"></i>
                 </span>
 
               </div>
@@ -327,7 +327,7 @@
               <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
                      ng-model="ticketCreatedUser"
                      typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'lastName'"
+                     uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'lastName'"
                      qt-typeahead-show-on-focus ng-trim="false"
                      custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': 'auto'}">
 
@@ -342,8 +342,8 @@
 
               <label>Priority</label>
 
-              <div dropdown>
-                <input type="text" class="form-control has-dropdown readonly-normal" dropdown-toggle
+              <div uib-dropdown>
+                <input type="text" class="form-control has-dropdown readonly-normal" uib-dropdown-toggle
                        readonly>
                 <i class="icn-sm icn-caret-gray"></i>
 
@@ -379,7 +379,7 @@
                      ng-model="ticket.ticketAssignTo" name="ticketAssignTo"
                      typeahead-on-select="userAssigned(ticketAssignTo)"
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
-                     typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
+                     uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
                      qt-typeahead-show-on-focus assign-to-validation ng-required="false"
                      custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 
@@ -405,7 +405,7 @@
             <input type="text" class="form-control has-dropdown-with-label" autocomplete="off"
                    ng-model="ticketAgent" name="ticketAgent"
                    ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
-                   typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
+                   uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
                    qt-typeahead-show-on-focus custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
 
             <div typeahead-input-icon="ticketAgent" style="position: absolute;top: 29px;right: 13px;"></div>

@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.core.users").directive('crop',
-    ['$modal', function ($modal) {
+    ['$uibModal', function ($uibModal) {
       return {
         restrict: 'A',
         require: 'ngModel',

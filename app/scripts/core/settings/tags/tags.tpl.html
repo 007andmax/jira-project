@@ -44,7 +44,7 @@
           ng-form="updateTagForm">
           <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
             {{ tag.word }}
-            <i class="icn-sm icn-edit pull-right" tooltip="Edit" tooltip-placement="top"
+            <i class="icn-sm icn-edit pull-right" uib-tooltip="Edit" tooltip-placement="top"
                tooltip-append-to-body="true"></i>
           </div>
           <div class="col-1 form-group" ng-if="editingId === tag.id"
@@ -53,8 +53,8 @@
                    required>
           </div>
 
-          <div class="col-2" dropdown on-toggle="changeColor(open, tag)">
-            <span dropdown-toggle>
+          <div class="col-2" uib-dropdown on-toggle="changeColor(open, tag)">
+            <span uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[tag.colorCode].backgroundColor,
                               'border-color': tagColors[tag.colorCode].borderColor}"></span>
@@ -75,14 +75,14 @@
           <div class="col-3">{{ tag.usedCounter }}</div>
 
           <div class="col-4" ng-click="remove(tag.id)" ng-if="editingId !== tag.id"
-               tooltip="Delete" tooltip-placement="top" tooltip-append-to-body="true">
+               uib-tooltip="Delete" tooltip-placement="top" tooltip-append-to-body="true">
             <i class="icn-sm icn-delete"></i>
           </div>
-          <div class="col-4" dropdown is-open="replaceDropdown[tag.id].isOpen"
-               tooltip="Replace with..." tooltip-placement="top" tooltip-append-to-body="true"
+          <div class="col-4" uib-dropdown is-open="replaceDropdown[tag.id].isOpen"
+               uib-tooltip="Replace with..." tooltip-placement="top" tooltip-append-to-body="true"
                on-toggle="initReplace(open, tag, replaceTagForm)"
                ng-if="tags.length > 1 && tag.usedCounter > 0 && editingId !== tag.id">
-            <i class="icn-sm icn-replace" dropdown-toggle></i>
+            <i class="icn-sm icn-replace" uib-dropdown-toggle></i>
             <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click">
 
               <div class="move-services">
@@ -119,10 +119,10 @@
           </div>
 
           <div class="col-4" ng-click="cancel()" ng-if="editingId === tag.id"
-               tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
+               uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
             <i class="icn-sm icn-remove-token"></i></div>
           <div class="col-4" ng-click="saveOrUpdate(updateTagForm)" ng-if="editingId === tag.id"
-               tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
+               uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
             <i class="icn-sm icn-product-save"></i></div>
         </li>
 
@@ -132,8 +132,8 @@
             <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
                    required>
           </div>
-          <div class="col-2" dropdown>
-            <span dropdown-toggle>
+          <div class="col-2" uib-dropdown>
+            <span uib-dropdown-toggle>
               <span class="colored-circle"
                     ng-style="{'background-color': tagColors[editedTag.colorCode].backgroundColor,
                               'border-color': tagColors[editedTag.colorCode].borderColor}"></span>
@@ -152,10 +152,10 @@
           </div>
           <div class="col-3">{{ editedTag.usedCounter }}</div>
           <div class="col-4" ng-click="cancel()"
-               tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
+               uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
             <i class="icn-sm icn-remove-token"></i></div>
           <div class="col-4" ng-click="saveOrUpdate(createTagForm)"
-               tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
+               uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
             <i class="icn-sm icn-product-save"></i></div>
         </li>
 

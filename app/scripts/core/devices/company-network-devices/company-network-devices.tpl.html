@@ -90,16 +90,16 @@
             <span>{{ (device.hostName | unknownFilter) || device.ipAddress }}</span>
 
             <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
-               popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">
+               uib-popover="{{ device.description }}" popover-placement="right" popover-trigger="mouseenter">
               <i class="icn-sm icn-description"></i>
             </a>
 
-            <div class="dropdown" dropdown is-open="isOpenEditDescrDrpdwn"
+            <div class="dropdown" uib-dropdown is-open="isOpenEditDescrDrpdwn"
                  ng-show="(device.description | unknownFilter)">
 
               <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
                  tooltip-placement="top" tooltip-append-to-body="true"
-                 tooltip="Edit Description" dropdown-toggle>
+                 uib-tooltip="Edit Description" uib-dropdown-toggle>
                 <i class="icn-sm icn-edit"></i>
               </a>
 
@@ -121,12 +121,12 @@
               </div>
             </div>
 
-            <div class="dropdown" dropdown is-open="isOpenDescrDrpdwn"
+            <div class="dropdown" uib-dropdown is-open="isOpenDescrDrpdwn"
                  ng-hide="(device.description | unknownFilter)">
 
               <a href="javascript:void(0)" class="hit-area ha-add-desc pull-right has-tooltip"
                  tooltip-placement="top" tooltip-append-to-body="true"
-                 tooltip="Add Description" dropdown-toggle>
+                 uib-tooltip="Add Description" uib-dropdown-toggle>
                 <i class="icn-sm icn-add-description"></i>
               </a>
 
@@ -200,13 +200,13 @@
                      custom-disabled="{{ !allowAgentInstall }}"
                      ng-click="changeAgentStatus()">
               <span class="toggle-bg"
-                    tooltip="{{ allowAgentInstall ? device.message : 'Maximum installed agent amount reached'}}"
+                    uib-tooltip="{{ allowAgentInstall ? device.message : 'Maximum installed agent amount reached'}}"
                     tooltip-placement="top"></span>
               <span class="toggle-indicator"></span>
             </label>
 
             <!--<a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"-->
-            <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="locked">-->
+            <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="locked">-->
             <!--<i class="icn-sm icn-error-locked"></i>-->
             <!--</a>-->
 
@@ -221,7 +221,7 @@
             </label>
 
             <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
-               tooltip-placement="top" tooltip-append-to-body="true" tooltip="Firewall">
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Firewall">
               <i class="icn-sm icn-error-firewall"></i>
             </a>
 
@@ -235,7 +235,7 @@
             </label>
 
             <a href="javascript:void(0)" class="hit-area error-icon ha-18 has-tooltip"
-               tooltip-placement="top" tooltip-append-to-body="true" tooltip="power/internet or unknown problem">
+               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="power/internet or unknown problem">
               <i class="icn-sm icn-error-power"></i>
             </a>
 

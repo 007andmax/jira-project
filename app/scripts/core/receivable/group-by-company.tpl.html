@@ -84,7 +84,7 @@
               </label>
 
               <div class="checkbox-caption free-number-link"
-                   tooltip-placement="top" tooltip="Invoice Preview"
+                   tooltip-placement="top" uib-tooltip="Invoice Preview"
                    modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
                    modal-window-class="invoice-modal-not-background"
                    mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
@@ -108,19 +108,19 @@
 
               <button-with-loading-indicator class="pull-left has-tooltip resend-button"
                                              icn-classes="icn-sm icn-send-again" ng-click="sentInvoice()"
-                                             tooltip-placement="top" tooltip="Send Again"
+                                             tooltip-placement="top" uib-tooltip="Send Again"
                                              loading="sending[invoice.id]"></button-with-loading-indicator>
             </div>
 
             <div class="col-5 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
             <div class="col-6 group-btns" style="width: 50px;margin-top: 3px;">
 
-              <div tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
+              <div uib-tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
                    tooltip-placement="top"
                    ng-click="rollbackInvoice(invoice)" custom-disabled="{{ invoice.recurringInvoice }}">
                 <i class="icn-sm icn-restore icon-render"></i>
               </div>
-              <div tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+              <div uib-tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
                    ng-click="deleteInvoice(invoice)">
                 <i class="icn-sm icn-delete icon-render"></i>
               </div>
@@ -131,7 +131,7 @@
 
         <!--<div class="send-statemenyt-btn">-->
           <!--<div class="btn btn-primary has-tooltip pull-right" style="width: 96px;"-->
-               <!--tooltip-placement="top" tooltip="Send Statement" tooltip-append-to-body="true"-->
+               <!--tooltip-placement="top" uib-tooltip="Send Statement" tooltip-append-to-body="true"-->
                <!--ng-click="sentInvoices()" custom-disabled="{{ !countInvoicesInCompany }}">-->
             <!--<i class="icn-sm icn-send-statement"></i>-->
           <!--</div>-->

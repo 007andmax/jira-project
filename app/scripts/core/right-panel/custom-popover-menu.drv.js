@@ -57,8 +57,8 @@
                 //     offset = $(settings.relativeTo).offset();
                 // }
 
-                element.one('inserted.bs.popover', function(){
-                  customPopover = $('#'+element.attr('aria-describedby'));
+                element.one('shown.bs.popover', function(){
+                  customPopover = $('.popover.fade');
                   customPopover.find('.popover-content').css('padding', 0);
                   customPopover.css({
                     'padding': 0,
@@ -69,10 +69,8 @@
                   });
                   customPopover.on('click', function(e){
                     e.stopPropagation();
-                  })
-                });
+                  });
 
-                element.one('shown.bs.popover', function(){
                   var left = getMenuPosition(customPopover, (e.clientX-offset.left), 'width', 'scrollLeft');
                   var top = getMenuPosition(customPopover, (e.clientY-offset.top), 'height', 'scrollTop');
                   customPopover.css({

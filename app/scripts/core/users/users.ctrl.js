@@ -50,28 +50,36 @@
         };
 
         $scope.usersFilter = function (value) {
-          if (headerSharedState.filter.userId) {
-            return headerSharedState.filter.userId === value.id;
+          var filter = headerSharedState.filter;
+          var clientType = value.clientType;
+          var result = true;
+
+          if (filter.userId) {
+            result = result && filter.userId === value.id;
           }
 
-          if (headerSharedState.filter.companyId) {
-            return headerSharedState.filter.companyId === value.company.id;
+          if (filter.companyId) {
+            result = result && filter.companyId === value.company.id;
           }
 
-          if (headerSharedState.filter.isContact) {
-            return value.isContact;
+          if (filter.isContact) {
+            result = result && value.isContact;
           }
 
-          if (headerSharedState.filter.isLead) {
-            var clientType = value.clientType;
-            return clientType && clientType.toLowerCase() === 'lead';
+          if (filter.isLead) {
+            result = result && clientType && clientType.toLowerCase() === 'lead';
           }
 
-          if (headerSharedState.filter.industry) {
+          if (filter.isClient) {
+            result = result && clientType && clientType.toLowerCase() === 'client';
+          }
+
+          if (filter.industry) {
             var industryName = value.industryName;
-            return industryName && industryName.toLowerCase() === headerSharedState.filter.industry;
+            result = result && industryName && industryName.toLowerCase() === filter.industry.toLowerCase();
           }
-          return true;
+
+          return result;
         };
 
         $scope.getUserName = function (user) {
@@ -79,7 +87,7 @@
         };
 
         $scope.$on('$destroy', function () {
-          SharedStateService.clearState('usersHeader');
+          headerSharedState.filter = {};
         });
 
         $scope.$on('cancelEditForm', function () {

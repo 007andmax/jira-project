@@ -188,8 +188,9 @@
               };
             case 'VENDORS':
               return function (id, name) {
-                $state.go('vendors').then(function () {
-                  $scope.sharedState = SharedStateService.getSharedState('vendorsHeader');
+                $state.go('companies').then(function () {
+                  $scope.sharedState = SharedStateService.getSharedState('companiesHeader');
+                  $scope.sharedState.filter.isVendor = true;
                   $scope.sharedState.filter.vendorId = id;
                   $scope.globalSearch.searchValue = name;
                   $scope.clearLocalFilter = clearLocalFilter;

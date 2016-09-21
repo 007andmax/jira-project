@@ -5,14 +5,14 @@
       <div ng-if="globalSearch.goBack.isEnabled">
         <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
            style="margin: 5px 8px 0 0;" ng-click="globalSearch.goBack.func()"
-           tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{ globalSearch.goBack.tooltip }}">
+           tooltip-append-to-body="true" tooltip-placement="bottom" uib-tooltip="{{ globalSearch.goBack.tooltip }}">
           <i class="icn-sm icn-back-arrow"></i>
         </a>
       </div>
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
         <strong
-          tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}"
+          uib-tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}"
           tooltip-placement="bottom" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
           <span trimmed-tooltip-container>
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
@@ -34,11 +34,11 @@
 
         <div class="topNavbar-filter">
 
-          <div dropdown ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
+          <div uib-dropdown ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
 
             <div class="btn btn-default has-tooltip"
-                 tooltip-placement="bottom" tooltip="assign ticket to..."
-                 aria-haspopup="true" dropdown-toggle ng-click="isShowAssignUser = true">
+                 tooltip-placement="bottom" uib-tooltip="assign ticket to..."
+                 aria-haspopup="true" uib-dropdown-toggle ng-click="isShowAssignUser = true">
               <i class="icn-sm icn-user"></i>
             </div>
 
@@ -49,12 +49,12 @@
                  aub-ticket-number="ticket.number" users="usersCurrentCompany" aub-current-user="currentUser"></div>
           </div>
 
-          <div dropdown
+          <div uib-dropdown
                ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketsSharedState.selectedTickets)">
 
             <div class="btn btn-default has-tooltip"
-                 tooltip-placement="bottom" tooltip="Change Priority to..."
-                 aria-haspopup="true" dropdown-toggle>
+                 tooltip-placement="bottom" uib-tooltip="Change Priority to..."
+                 aria-haspopup="true" uib-dropdown-toggle>
               <i class="icn-sm icn-ticket-flag"></i>
             </div>
 
@@ -84,11 +84,11 @@
             </ul>
           </div>
 
-          <div class="more" dropdown
+          <div class="more" uib-dropdown
                ng-if="TicketsPermissionsService.isActionVisible('change_status,send_to_spam,send_to_trash,restore', ticketsSharedState.selectedTickets)">
 
-            <a class="hit-area ha-22-38 has-tooltip" tooltip-placement="bottom" tooltip="More"
-               aria-haspopup="true" aria-expanded="false" dropdown-toggle>
+            <a class="hit-area ha-22-38 has-tooltip" tooltip-placement="bottom" uib-tooltip="More"
+               aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
               <i class="icn-sm icn-more"></i>
             </a>
 
@@ -161,7 +161,7 @@
 
           <div ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketsSharedState.selectedTickets)"
                class="btn btn-default has-tooltip"
-               tooltip-placement="bottom" tooltip="Delete Forever"
+               tooltip-placement="bottom" uib-tooltip="Delete Forever"
                ng-click="deleteForever()">
             <i class="icn-sm icn-delete"></i>
           </div>
@@ -179,9 +179,9 @@
     </div>
     <div class="col-md-2 col-sm-1 col-xs-1">
       <div class="topNavbar-create">
-        <div dropdown style="display: inline-block;" ng-if="applicationLoaded">
+        <div uib-dropdown style="display: inline-block;" ng-if="applicationLoaded">
 
-          <div class="btn btn-success has-tooltip" dropdown-toggle>
+          <div class="btn btn-success has-tooltip" uib-dropdown-toggle>
             <div class="create-new-wrap">
               <span class="create-new-label">Create New</span>
               <i class="icn-sm icn-plus"></i>
@@ -222,11 +222,11 @@
     <!--<div class="col-sm-1 col-xs-1 topNavbarRight">-->
     <!--</div>-->
     <div class="col-md-3 col-sm-4 col-xs-4 topNavbarRight">
-      <div dropdown>
-        <div class="nickname-wrap" dropdown-toggle>
+      <div uib-dropdown>
+        <div class="nickname-wrap" uib-dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
           <!--ng-click="currentUser.online = !currentUser.online"></i>-->
-          <div class="nickname" tooltip="{{ getUserName(currentUser) }}" tooltip-placement="bottom"
+          <div class="nickname" uib-tooltip="{{ getUserName(currentUser) }}" tooltip-placement="bottom"
                tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
             <i class="on"></i>
             <span style="margin: 0 5px;" trimmed-tooltip-container>{{ getUserName(currentUser) }}</span>

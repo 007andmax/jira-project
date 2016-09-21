@@ -36,7 +36,7 @@
                  style="display: inline-block;">
               <div qt-popover-trigger="mouseenter" style="display: inline-block">
                 <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
-                     tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Invocie"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Invocie"
                      ng-click="toogleEditForm('new-invoice')" custom-disabled="{{ isCurrentCompanyAddressEmpty }}">
                   <i class="icn-sm icn-add-company"></i>
                 </div>
@@ -129,19 +129,19 @@
 
                     <a>
                       <i class="icn-sm icn-description"
-                         popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom"
+                         uib-popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom"
                          popover-trigger="mouseenter"></i>
                     </a>
 
                     <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE') && !isCurrentCompanyAddressEmpty">
-                      <i class="icn-sm icn-edit" tooltip="edit" tooltip-placement="top"
+                      <i class="icn-sm icn-edit" uib-tooltip="edit" tooltip-placement="top"
                          tooltip-append-to-body="true"
                          ng-click="toogleEditForm(invoice.id)"></i>
                     </a>
 
                     <a custom-disabled="{{ disabledDelete }}">
                       <i class="icn-sm icn-delete"
-                         tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+                         uib-tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
                          ng-click="deleteRecurringInvoice()"></i></a>
                   </div>
 

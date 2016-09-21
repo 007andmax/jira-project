@@ -265,9 +265,9 @@
     }]);
 
   app.run(
-    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$modal', 'TicketsService', '$stateParams',
+    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService',
-      function ($rootScope, $templateCache, CompaniesService, $state, $modal, TicketsService, $stateParams,
+      function ($rootScope, $templateCache, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
                 UserConfirmationsService, SharedStateService) {
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
@@ -305,7 +305,10 @@
             globalSearch.goBack.tooltip = 'back to companies';
           } else if (toState.name === 'createVendor' || toState.name === 'editVendor') {
             globalSearch.goBack.isEnabled = true;
-            globalSearch.goBack.func = $state.go.bind($state, 'vendors');
+            globalSearch.goBack.func = function () {
+              SharedStateService.getSharedState('companiesHeader').filter.isVendor = true;
+              $state.go('companies');
+            };
             globalSearch.goBack.tooltip = 'back to vendors';
           } else if (toState.name.indexOf('settings.') === 0) {
             globalSearch.goBack.isEnabled = true;
@@ -391,9 +394,9 @@
           }
 
           if (sessionId === $rootScope.currentRemoteSessionId) {
-            $modal.open({
+            $uibModal.open({
               templateUrl: '/html/scripts/common/templates/remote-connection-complete.tpl.html',
-              controller: ['$scope', '$modalInstance', 'TicketsService', function ($scope, $modalInstance, TicketsService) {
+              controller: ['$scope', '$uibModalInstance', 'TicketsService', function ($scope, $uibModalInstance, TicketsService) {
                 $scope.selectTicket = false;
                 $scope.selectedTicket = {};
                 $scope.searchTickets = TicketsService.search.bind(this, function (resp) {
@@ -421,18 +424,18 @@
                 };
 
                 $scope.createTicket = function () {
-                  $modalInstance.close();
+                  $uibModalInstance.close();
                 };
 
                 $scope.createTicketUpdate = function () {
-                  $modalInstance.close($scope.selectedTicket.item);
+                  $uibModalInstance.close($scope.selectedTicket.item);
                 };
 
                 $scope.cancelConfirm = function (isGoBack) {
                   if (isGoBack) {
                     $scope.selectingTicket = false;
                   } else {
-                    $modalInstance.dismiss(false);
+                    $uibModalInstance.dismiss(false);
                   }
                 };
 
@@ -464,7 +467,7 @@
                 }
               } else if (ticket === undefined) {
 
-                var modalInstance = $modal.open({
+                var modalInstance = $uibModal.open({
                   templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
                   controller: 'quicktech.core.tickets.createTicketCtrl',
                   windowClass: 'modal-create-ticket',
@@ -520,38 +523,6 @@
 
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
         $rootScope.numberPattern = /^\d?[0-9]{0,17}$/;
-
-        $templateCache.put("template/typeahead/typeahead-popup.html",
-          "<ul class=\"dropdown-menu\" qt-typeahead-styler ng-show=\"isOpen()\" ng-style=\"{top: position.top+'px', left: position.left+'px'}\" style=\"display: block;\" role=\"listbox\" aria-hidden=\"{{!isOpen()}}\">\n" +
-          "    <li ng-repeat=\"match in matches track by $index\" ng-class=\"{active: isActive($index) }\" ng-mouseenter=\"selectActive($index)\" ng-click=\"selectMatch($index)\" role=\"option\" id=\"{{match.id}}\">\n" +
-          "        <div typeahead-match index=\"$index\" match=\"match\" query=\"query\" template-url=\"templateUrl\"></div>\n" +
-          "    </li>\n" +
-          "</ul>\n" +
-          "");
-
-        $templateCache.put("template/datepicker/day.html",
-          "<table role=\"grid\" aria-labelledby=\"{{uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" +
-          "  <thead>\n" +
-          "    <tr>\n" +
-          "      <th colspan=\"{{5 + showWeeks}}\"><button id=\"{{uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"toggleMode()\" ng-disabled=\"datepickerMode === maxMode\" tabindex=\"-1\" style=\"width:100%;\"><strong>{{title}}</strong></button></th>\n" +
-          "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" +
-          "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" +
-          "    </tr>\n" +
-          "    <tr>\n" +
-          "      <th ng-show=\"showWeeks\" class=\"text-center\"></th>\n" +
-          "      <th ng-repeat=\"label in labels track by $index\" class=\"text-center\"><small aria-label=\"{{label.full}}\">{{ label.abbr.substring(0, 2).toUpperCase() }}</small></th>\n" +
-          "    </tr>\n" +
-          "  </thead>\n" +
-          "  <tbody>\n" +
-          "    <tr ng-repeat=\"row in rows track by $index\">\n" +
-          "      <td ng-show=\"showWeeks\" class=\"text-center h6\"><em>{{ weekNumbers[$index] }}</em></td>\n" +
-          "      <td ng-repeat=\"dt in row track by dt.date\" class=\"text-center\" role=\"gridcell\" id=\"{{dt.uid}}\" aria-disabled=\"{{!!dt.disabled}}\" ng-class=\"dt.customClass\">\n" +
-          "        <button type=\"button\" style=\"width:100%;\" class=\"btn btn-default btn-sm\" ng-class=\"{'btn-info': dt.selected, active: isActive(dt)}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" tabindex=\"-1\"><span ng-class=\"{'text-muted': dt.secondary, 'text-info': dt.current}\">{{dt.label}}</span></button>\n" +
-          "      </td>\n" +
-          "    </tr>\n" +
-          "  </tbody>\n" +
-          "</table>\n" +
-          "");
 
       }]);
 

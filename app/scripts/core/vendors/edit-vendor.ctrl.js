@@ -9,6 +9,7 @@
 
         var currentTimeZone;
         var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var companiesHeaderSharedState = SharedStateService.getSharedState('companiesHeader');
 
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
@@ -28,7 +29,8 @@
           var vendor = VendorsService.getOneById($stateParams.vendorId, function (resp) {
 
             if(resp.code === 400){
-              $state.go('vendors');
+              companiesHeaderSharedState.filter.isVendor = true;
+              $state.go('companies');
             }
 
             if (!vendor.addresses || vendor.addresses.length === 0) {
@@ -127,6 +129,11 @@
           form.vendorPaymentTerms.$setValidity('minValue', valid);
         };
 
+        $scope.cancelEdit = function () {
+          companiesHeaderSharedState.filter.isVendor = true;
+          $state.go('companies');
+        };
+
         $scope.saveVendor = function (form) {
           if (form.$valid) {
 
@@ -151,7 +158,8 @@
 
             VendorsService.save($scope.editVendor, function () {
               $scope.savingInProcess = false;
-              $state.go('vendors');
+              companiesHeaderSharedState.filter.isVendor = true;
+              $state.go('companies');
             })
           } else {
             $scope.triedToSave = true;

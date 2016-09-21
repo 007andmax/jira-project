@@ -43,6 +43,7 @@ module.exports = function(config) {
       'bower_components/sockjs-client/dist/sockjs.js',
       'bower_components/stomp-websocket/lib/stomp.min.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'bower_components/tether/dist/js/tether.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

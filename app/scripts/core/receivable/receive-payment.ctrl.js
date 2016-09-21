@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivePaymentCtrl',
-    ['$scope', '$modalInstance', '$stateParams', 'ReceivableService', 'CompaniesService',
-      function ($scope, $modalInstance, $stateParams, ReceivableService, CompaniesService) {
+    ['$scope', '$uibModalInstance', '$stateParams', 'ReceivableService', 'CompaniesService',
+      function ($scope, $uibModalInstance, $stateParams, ReceivableService, CompaniesService) {
 
         var invoiceList = $scope.receivableInvoicesData.list;
 
@@ -24,7 +24,7 @@
         };
 
         $scope.close = function () {
-          $modalInstance.dismiss('cancel');
+          $uibModalInstance.dismiss('cancel');
         };
 
         if ($stateParams.mode === 'list') {
@@ -100,7 +100,7 @@
           ReceivableService.receivePayment(
             $scope.invoiceToReceive.method, invoiceIdPayment, !!$scope.invoiceToReceive.isSendNotification, $scope.note,
             function () {
-              $modalInstance.dismiss('cancel');
+              $uibModalInstance.dismiss('cancel');
               $scope.disableReceiveButton = false;
             }
           );

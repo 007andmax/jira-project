@@ -149,10 +149,6 @@
 
         }
 
-        $scope.$on('$destroy', function () {
-          SharedStateService.clearState('companiesHeader');
-        });
-
         //$scope.addLocation = function () {
         //  $scope.editCompany.addresses.unshift({});
         //  setCurrentTimeZone(currentTimeZone);

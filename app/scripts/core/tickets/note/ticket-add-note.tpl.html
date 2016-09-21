@@ -15,7 +15,7 @@
         <span class="file-size">{{ file.size | fileSizeFilter }}</span>
 
         <a href="javascript:void(0)" class="hit-area pull-right"
-           tooltip="Remove file" tooltip-placement="top" ng-click="removeAttachment($index, fileInfo[file.name].error)">
+           uib-tooltip="Remove file" tooltip-placement="top" ng-click="removeAttachment($index, fileInfo[file.name].error)">
           <i class="icn-sm icn-remove-token"></i>
         </a>
 
@@ -26,7 +26,7 @@
 
         <a href="" class="hit-area pull-right" data-toggle="tooltip" data-placement="top" title="Re-Upload"
            ng-show="file.progress !== 100 && (fileInfo[file.name].code !== 500)"
-           tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
+           uib-tooltip="Re-Upload" tooltip-placement="top" ng-click="reloadAttachment(file)">
           <i class="icn-sm icn-reupload"></i>
         </a>
 

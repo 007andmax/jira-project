@@ -10,7 +10,7 @@
          ng-show="emailSettingPageDto.activeAndNotDefault[template].isNotDefault">
 
       <a href="javascript:void(0)" class="hit-area pull-right restore-default has-tooltip"
-         tooltip-placement="top" tooltip="Restore Default">
+         tooltip-placement="top" uib-tooltip="Restore Default">
         <i class="icn-sm icn-settings-restore-default" ng-click="restoreDefault(template)"></i>
       </a>
 
@@ -83,7 +83,7 @@
 
           <div class="pull-right show-keywords-description">
             <a href="javascript:void(0)" class="hit-area has-tooltip"
-               tooltip-placement="top" tooltip="{{ (isShowingDescription ? 'Hide' : 'Show') }} Keywords Description">
+               tooltip-placement="top" uib-tooltip="{{ (isShowingDescription ? 'Hide' : 'Show') }} Keywords Description">
               <i class="icn-sm {{ 'icn-' + (isShowingDescription ? 'hide' : 'show') + '-password' }}"
                  ng-click="isShowingDescription = !isShowingDescription"></i>
             </a>

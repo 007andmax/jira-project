@@ -9,8 +9,13 @@
                 CompaniesService, UsersService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
-          globalSearch = SharedStateService.getSharedState('globalSearch');
+          globalSearch = SharedStateService.getSharedState('globalSearch'),
+          usersSharedState = SharedStateService.getSharedState('usersHeader'),
+          companiesSharedState = SharedStateService.getSharedState('companiesHeader');
 
+        $scope.globalSearch = globalSearch;
+        $scope.usersSharedState = usersSharedState;
+        $scope.companiesSharedState = companiesSharedState;
         $scope.qSHistoryExpanded = false;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
@@ -75,27 +80,67 @@
 
         };
 
-        $scope.goToCompany = function (company) {
-          $state.go('companyProfile', { companyId: company.id });
-        };
+        $scope.filterCompanies = function (filter, value) {
+          var sharedFilter = companiesSharedState.filter;
 
-        $scope.filterUsers = function (filter, value) {
-          var sharedFilter = SharedStateService.getSharedState('usersHeader').filter
-          clearFilter(sharedFilter);
+          if ($state.includes('companyProfile') && (filter !== 'dateRange' || value && value.length)) {
+            $state.go('companies');
+          }
 
           switch (filter) {
-            case 'managers':
-              sharedFilter.isContact = true;
+            case 'clients':
+              clearFilter(sharedFilter);
+              sharedFilter.isClient = true;
               break;
             case 'leads':
+              clearFilter(sharedFilter);
               sharedFilter.isLead = true;
+              break;
+            case 'vendors':
+              clearFilter(sharedFilter);
+              sharedFilter.isVendor = true;
               break;
             case 'byIndustry':
               sharedFilter.industry = value;
               break;
+            case 'dateRange':
+              if (!value && $scope.clearDateRange) {
+                $scope.clearDateRange();
+              } else {
+                sharedFilter.dateRange = value;
+              }
+              break;
+            default:
+              clearFilter(sharedFilter);
+          }
+        };
+
+        $scope.filterUsers = function (filter, value) {
+          var sharedFilter = usersSharedState.filter;
+
+          switch (filter) {
+            case 'managers':
+              clearFilter(sharedFilter);
+              sharedFilter.isContact = true;
+              break;
+            case 'leads':
+              clearFilter(sharedFilter);
+              sharedFilter.isLead = true;
+              break;
+            case 'clients':
+              clearFilter(sharedFilter);
+              sharedFilter.isClient = true;
+              break;
+            case 'byIndustry':
+              sharedFilter.industry = value;
+              sharedFilter.companyId = false;
+              break;
             case 'byCompany':
               sharedFilter.companyId = value;
+              sharedFilter.industry = false;
               break;
+            default:
+              clearFilter(sharedFilter);
           }
         };
 
@@ -103,11 +148,28 @@
           $scope.qSHistoryExpanded = !$scope.qSHistoryExpanded;
         };
 
+        $scope.getCompanyName = function (companyId) {
+          var company = CompaniesService.getOneById(companyId);
+          if (company) {
+            return company.name;
+          }
+        };
+
+        $scope.$on('clearCompaniesDateRange', function () {
+          if ($scope.clearDateRange) {
+            $scope.clearDateRange();
+          }
+        });
+
         function clearFilter(sharedFilter) {
-          sharedFilter.isContact = false;
-          sharedFilter.isLead = false;
-          sharedFilter.industry = false;
-          sharedFilter.companyId = false;
+          for (var prop in sharedFilter) {
+            sharedFilter[prop] = false;
+          }
+
+          if ($scope.clearDateRange) {
+            $scope.clearDateRange();
+          }
+
           globalSearch.searchValue = '';
         }
 

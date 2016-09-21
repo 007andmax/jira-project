@@ -14,6 +14,19 @@
   transition: 0.3s ease-out box-shadow;
   min-height: 250px;
 }
+.companies-list .company-card.ng-enter,
+.companies-list .company-card.ng-leave {
+  --webkit-transition: none;
+  transition: none;
+}
+.companies-list .company-card.ng-animate {
+  --webkit-transition: none;
+  transition: none;
+}
+.companies-list .company-card.ng-animate {
+  --webkit-animation: none 0s;
+  animation: none 0s;
+}
 @media (max-width: 320px) {
   .companies-list .company-card {
     width: calc(100% - 30px);

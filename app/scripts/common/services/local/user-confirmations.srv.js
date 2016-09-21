@@ -3,8 +3,8 @@
 (function (window, $, undefined) {
 
   angular.module('quicktech.common.services').service('quicktech.common.services.UserConfirmationsService',
-    ['$modal',
-      function ($modal) {
+    ['$uibModal',
+      function ($uibModal) {
 
         var modalParams = {
           animation: true,
@@ -17,24 +17,24 @@
 
         this.show = function (message, button, hideCancel) {
 
-          modalParams.controller = (['$scope', '$modalInstance',
-            function ($scope, $modalInstance) {
+          modalParams.controller = (['$scope', '$uibModalInstance',
+            function ($scope, $uibModalInstance) {
 
               $scope.messageConfirm = message;
               $scope.buttonConfirm = button;
               $scope.hideCancel = hideCancel;
 
               $scope.approveConfirm = function (result) {
-                $modalInstance.close(result);
+                $uibModalInstance.close(result);
               };
 
               $scope.cancelConfirm = function () {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
               };
 
             }]);
 
-          return $modal.open(modalParams).result;
+          return $uibModal.open(modalParams).result;
         };
 
       }]);

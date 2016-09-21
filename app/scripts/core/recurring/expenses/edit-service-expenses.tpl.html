@@ -2,10 +2,10 @@
      ng-form="{{ updateInvoiceService }}">
   <div class="col1" ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'service')}">
 
-    <div dropdown>
+    <div uib-dropdown>
 
       <input type="text" class="form-control has-dropdown" placeholder="Service" autocomplete="off"
-             dropdown-toggle aria-expanded="false" name="serviceName"
+             uib-dropdown-toggle aria-expanded="false" name="serviceName"
              ng-model="service.item.name" custom-disabled="{{ !companyServices }}">
       <i class="icn-sm icn-caret-gray"></i>
 
@@ -47,11 +47,11 @@
   <div class="col4"
        ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'serviceData')}">
 
-    <div dropdown>
+    <div uib-dropdown>
 
       <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
       <input type="text" qt-data-time-picker max-date="maxServiceDate"
-             class="form-control has-dropdown" dropdown-toggle aria-expanded="false"
+             class="form-control has-dropdown" uib-dropdown-toggle aria-expanded="false"
              placeholder="Date" ng-model="service.date"
              name="serviceData" ng-required="true">
 
@@ -61,10 +61,10 @@
   <div class="col-5" style="min-width: 50px;">
     <a class="hit-area pull-left order-add-product has-tooltip"
        ng-click="addService(editInvoiceForm)" tooltip-placement="top"
-       tooltip="Add Service">
+       uib-tooltip="Add Service">
       <i class="icn-sm icn-plus-dark"></i>
     </a>
-    <a style="margin-left: 5px;" class="hit-area pull-right has-tooltip" tooltip-placement="top" tooltip="Delete"
+    <a style="margin-left: 5px;" class="hit-area pull-right has-tooltip" tooltip-placement="top" uib-tooltip="Delete"
        ng-click="deleteService()">
       <i class="icn-sm icn-delete"></i>
     </a>
