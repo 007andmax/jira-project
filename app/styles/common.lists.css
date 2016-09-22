@@ -2390,6 +2390,9 @@ Devices tab
     line-height: 11px;
   }
 }
+.qt-list li:nth-child(even){
+  background-color: #e9f5fb;
+}
 /**Devices**/
 .qt-devices {
   padding: 60px 0 0;

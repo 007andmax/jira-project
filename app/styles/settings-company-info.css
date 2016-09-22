@@ -198,6 +198,9 @@
 .smtp-wrap select {
   padding: 8px;
 }
+.smtp-wrap select option{
+
+}
 .smtp-wrap .smtp-domains > span > a {
   cursor: pointer;
   color: blue;

@@ -40,7 +40,8 @@
   padding-left: 15px;
 }
 .time-zone-dropdown .time-zone {
-  margin-left: 15px;
+  padding-left: 15px;
+  line-height: 2.5;
 }
 .time-zone-dropdown .search-wrap {
   margin: 0;
@@ -67,8 +68,8 @@
   cursor: pointer;
 }
 .clickable:hover {
-  background-color: rgba(0, 0, 0, .12);
+  background-color:#e9f5fb;
 }
 .clickable.time-zone-focused {
-  background-color: rgba(0, 0, 0, .12);
+  background-color: #e9f5fb;
 }

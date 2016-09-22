@@ -30,8 +30,8 @@
               maxWidth: 500,
               minWidth: 150,
               //listMarginTop: 6,
-              listPaddingTop: 10,
-              listPaddingBottom: 10,
+              // listPaddingTop: 10,
+              // listPaddingBottom: 10,
               onSelect: function (suggestion) {
                 $scope.serviceItem = angular.copy(suggestion.data);
                 $('#selection').html('You selected: ' + suggestion.value);

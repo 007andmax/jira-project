@@ -541,15 +541,20 @@
   right: 17px;
 }
 .create-user-form .form-control[readonly]{
-  background-color: #f1f5fa;
+  background-color: #fcfdfd;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
+.create-user-form .form-control[readonly]:focus {
+  box-shadow: inset 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
+  border-color: #e2e6e6;
+  background: #e9f5fb;
+}
 .create-user-form .form-control.readonly-dark[readonly]{
-  background-color: #e7ecf2;
+  background-color: #fcfdfd;
   cursor: default;
 }
 

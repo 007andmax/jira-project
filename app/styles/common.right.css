@@ -130,7 +130,7 @@ aside#right .sidebar-company .recent-activities-by .list-users {
   width: 100%;
 }
 aside#right .list-users:hover, aside#right .list-devices:hover {
-  background-color: #e7ecf2;
+  background-color: #e9f5fb;
   cursor: pointer;
 }
 aside#right .context-menu, .rightbar-context-menu{

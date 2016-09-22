@@ -517,6 +517,9 @@ a.ha-24{
 :hover > .icn-add-company, :active > .icn-add-company, :focus > .icn-add-company, :focus:hover > .icn-add-company, :focus:active > .icn-add-company, :hover:active > .icn-add-company, .active > .icn-add-company, .open > .icn-add-company {
   background-position: -3378px -100px;
 }
+.icn-add-company-light{
+  background-position: -3415px -100px;
+}
 
 .icn-minimize{
   background-position: -3356px 5px;
@@ -1054,7 +1057,9 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
 :hover > .icn-remove-token-white, :active > .icn-remove-token-white, :focus:hover > .icn-remove-token-white, :focus:active > .icn-remove-token-white, :hover:active > .icn-remove-token-white, .active > .icn-remove-token-white, .open .icn-remove-token-white, .open > .btn:hover .icn-remove-token-white {
   background-position: -716px 0px;
 }
-
+.icn-remove-token-light{
+  background-position: -715px 0px;
+}
 .icn-cusers {
   background-position: -3647px 0;
 }

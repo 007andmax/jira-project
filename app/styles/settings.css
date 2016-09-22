@@ -491,7 +491,7 @@
   user-select: none;
 }
 .template-item:hover, .template-item:active {
-  background-color: #e7ecf2;
+  background-color: #e9f5fb;
 }
 .template-item.expanded {
   width: calc(100% + 20px);
@@ -511,7 +511,7 @@
   background-color: #fff;
 }
 .template-item.default:not(.expanded):hover, .template-item.default:not(.expanded):active {
-  background-color: #e7ecf2;
+  background-color: #e9f5fb;
 }
 .template-item .template-title {
   float: left;

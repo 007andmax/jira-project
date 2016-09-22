@@ -897,7 +897,7 @@ aside#left div.nav-title {
 }
 
 .custom-product-list .product-list-container > li:hover {
-  background-color: rgba(21,134,228,0.2);
+  background-color: #e9f5fb;
 }
 
 .custom-product-list .clear-product {
@@ -932,7 +932,7 @@ aside#left div.nav-title {
 }
 
 .custom-product-list .category-list-container {
-  margin: 10px 0;
+  margin: 0;
   display: block;
   padding: 0;
   color: #4c5c6f;
@@ -1221,8 +1221,9 @@ span.sort-span {
   line-height: 1;
   width: 90px;
   color: #4c5c6f;
-  background-color: #f1f5fa;
-  border: 1px solid #e7ecf2;
+  background-color: #fcfdfd;
+  border: 1px solid #e2e6e6;
+  border-radius: 2px;
 }
 .device-settings-tab .deployment-settings label select{
   padding: 10px;
@@ -1231,8 +1232,8 @@ span.sort-span {
   line-height: 1;
   width: 90px;
   color: #4c5c6f;
-  background-color: #f1f5fa;
-  border: 1px solid #e7ecf2;
+  background-color: #fcfdfd;
+  border: 1px solid #e2e6e6;
 }
 .device-settings-tab .deployment-settings label{
   color: #4c5c6f;
@@ -1255,7 +1256,6 @@ span.sort-span {
 }
 .device-settings-button-assigned button {
   width: 100%;
-  background-color: #e7ecf2;
 }
 .device-settings-button-assigned button .ellipsis {
   display: inline-block;
@@ -1304,7 +1304,7 @@ span.sort-span {
   cursor: pointer;
 }
 .device-settings-button-assigned .dropdown-menu .tab-content .tab-pane.device-type li:hover {
-  background-color: rgba(231, 236, 242, .36);
+  background-color: #e9f5fb;
 }
 .device-settings-button-assigned .dropdown-menu .tab-content .tab-pane li.disabled {
   cursor: not-allowed;

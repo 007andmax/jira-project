@@ -62,7 +62,7 @@
 
         <div class="btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
              tooltip-placement="top" tooltip="Remove">
-          <i class="icn-sm icn-remove-token"></i>
+          <i class="icn-sm icn-remove-token-light"></i>
         </div>
 
       </div>
@@ -130,14 +130,14 @@
 
         <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
 
-          <div cns-if class="btn btn-dark has-tooltip pull-right"
+          <div cns-if class="btn btn-primary has-tooltip pull-right"
                tooltip-placement="top" tooltip="Add more" ng-click="addPhoneNumber()">
             <i class="icn-sm icn-plus"></i>
           </div>
 
           <div cns-else class="btn btn-primary has-tooltip pull-right"
                tooltip-placement="top" title="" tooltip="Remove" ng-click="removePhoneNumber($index)">
-            <i class="icn-sm icn-remove-token"></i>
+            <i class="icn-sm icn-remove-token-light"></i>
           </div>
 
         </div>

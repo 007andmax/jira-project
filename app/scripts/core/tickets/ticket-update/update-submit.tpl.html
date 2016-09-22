@@ -21,13 +21,13 @@
   </div>
 
   <div class="pull-right" style="padding-top: 15px;">
-    <div class="btn btn-lg btn-info"
+    <div class="btn btn-lg btn-primary"
          custom-disabled="{{ updateTicketNote.$invalid || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
          ng-click="saveTicketUpdate(ticketUpdateForm)">
       Update
     </div>
     <div ng-show="TicketsPermissionsService.isActionVisible('update_and_close', ticketDetails)"
-         class="btn btn-lg btn-info btn-update"
+         class="btn btn-lg btn-primary-outline btn-primary btn-update"
          custom-disabled="{{ ticketDetails.status === 'COMPLETED' || disabledWhenLoadAttachment || isSavingUpdate || errorAttachSize || ticketClosing }}"
          ng-click="updateAndCloseTicket(ticketUpdateForm)">
       Update &amp; Close

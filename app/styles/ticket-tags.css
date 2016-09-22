@@ -1,7 +1,7 @@
 .tags-wrap {
   position: relative;
   margin: 20px 0;
-  border: 1px solid rgba(0, 0, 0, .23);
+  border: 1px solid #2c9fdd;
   border-radius: 5px;
   cursor: text;
 }
@@ -50,20 +50,19 @@
   min-width: 35px;
   padding: 4px 12px;
   margin: 2px;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 12px;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 10px;
+  border-radius: 2px;
   float: left;
   cursor: inherit;
-  border: 1px solid transparent;
   color: #4C5C6F;
 }
 .tags .tag-label span {
   display: inline-block;
-  padding-right: 6px;
+  padding-right: 9px;
 }
 .remove-tag {
   cursor: pointer;

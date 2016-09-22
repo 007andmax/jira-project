@@ -79,7 +79,7 @@
             {{ assignRequiredError ? 'Assign is required.' : 'Assign' }}
           </label>
 
-          <button type="button" class="btn btn-default" dropdown-toggle ng-click="openDropdown()"
+          <button type="button" class="btn btn-primary" dropdown-toggle ng-click="openDropdown()"
                   ng-disabled="!hasEnabledType(credentialTypes) && !hasEnabledDevice(editedCredential)">
             <span class="ellipsis">{{ userReadable() || 'Assign' }}</span>
             <span ng-if="hasEnabledType(credentialTypes) || hasEnabledDevice(editedCredential)"

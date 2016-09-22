@@ -324,19 +324,19 @@
         <div create-ticket-open-modal="{{ company.id }}" style="display: inline-block;"
              tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
           <span><i class="nav-icon icn-lg icn-unassigned" style="margin: 0;"></i></span>
-          <span class="badge badge-red list-company-badge">{{ company.companyStatistic.ticketsSubmitted || '0' }}</span>
+          <span class="badge badge-primary-outline list-company-badge">{{ company.companyStatistic.ticketsSubmitted || '0' }}</span>
         </div>
       </div>
       <div class="col-xs-1">
         <div style="display: inline-block;">
           <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
-          <span class="badge badge-red list-company-badge">{{ devicesCount[company.id].all || '0' }}</span>
+          <span class="badge badge-primary-outline list-company-badge">{{ devicesCount[company.id].all || '0' }}</span>
         </div>
       </div>
       <div class="col-xs-1">
         <div ng-click="createUser(company.id)" style="display: inline-block;">
           <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
-          <span class="badge badge-red list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
+          <span class="badge badge-primary-outline list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
         </div>
       </div>
     </li>
