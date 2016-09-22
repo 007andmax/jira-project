@@ -120,6 +120,9 @@
                     ngModelCtrl.$viewValue.locale = timeZoneObj.name;
                     ngModelCtrl.$viewValue.timeZone = timeZoneObj;
                     ngModelCtrl.$viewValue.fromGoogle = true;
+                    $timeout(function () {
+                      $scope.saveFunc && $scope.saveFunc();
+                    })
                   })
                 }
               }, function errorCallback(response) {
@@ -132,8 +135,8 @@
                 console.error('Error: ' + message);
               });
 
-            $scope.$apply();
             $scope.saveFunc && $scope.saveFunc();
+            $scope.$apply();
           });
 
           function resetMap(google, map, marker, inputCtrl) {

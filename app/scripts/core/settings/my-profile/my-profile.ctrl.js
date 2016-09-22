@@ -6,6 +6,7 @@
     ['$scope', '$state', '$stateParams', 'UsersService',
       function ($scope, $state, $stateParams, UsersService) {
         $scope.aboutMe = $scope.currentUser.status;
+        $scope.isAddressFocused = false;
 
         $scope.userProfile = UsersService.getUserProfile(function (a) {
           $scope.userProfile = $scope.userProfile.staticCopy();

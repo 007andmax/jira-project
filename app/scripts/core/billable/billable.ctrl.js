@@ -9,7 +9,13 @@
         var globalSearch = SharedStateService.getSharedState('globalSearch');
 
         TicketsService.getCounts($scope, function (resp) {
-          globalSearch.count = resp.BILLABLE;
+          globalSearch.count = resp.BILLABLE || 0;
+
+          $scope.$watch(function () {
+            return resp.BILLABLE;
+          }, function (value) {
+            globalSearch.count = value || 0;
+          });
         });
 
         $scope.PermissionsService = PermissionsService;
