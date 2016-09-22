@@ -11,7 +11,6 @@
           $scope.agents = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
           if ($scope.ticketDetails) {
             $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
-            Utils.deleteById($scope.clients, UsersService.getUnassignedUser(CompaniesService.getUnassignedCompany().id).id);
           }
           $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
 

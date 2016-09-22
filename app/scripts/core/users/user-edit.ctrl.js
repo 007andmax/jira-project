@@ -12,7 +12,6 @@
           action;
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
-        Utils.deleteById($scope.clientCompanies, CompaniesService.getUnassignedCompany().id);
 
         $scope.getUsersByCompany = UsersService.getAllByCompanyId;
 

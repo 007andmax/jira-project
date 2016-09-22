@@ -28,7 +28,6 @@
 
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
-        Utils.deleteById($scope.users, UsersService.getUnassignedUser(CompaniesService.getUnassignedCompany().id).id);
 
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {

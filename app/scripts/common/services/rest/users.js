@@ -41,11 +41,13 @@
                 if (!storage.usersByCompanies[user.company.id]) {
                   storage.usersByCompanies[user.company.id] = [];
                 }
-                storage.usersByCompanies[user.company.id].push(user);
+                if (!user.isDefault) {
+                  storage.usersByCompanies[user.company.id].push(user);
+                }
               }
               var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
               var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
-                if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted) {
+              if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
                 storage.clientUsers.push(user);
               } else if (isDeleted) {
                 storage.deleted.push(user);

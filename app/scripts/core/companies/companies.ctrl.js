@@ -23,7 +23,6 @@
         $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
         $scope.companies = CompaniesService.getClientCompanies();
-        Utils.deleteById($scope.companies, CompaniesService.getUnassignedCompany().id);
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.vendors = VendorsService.getAll($scope);
