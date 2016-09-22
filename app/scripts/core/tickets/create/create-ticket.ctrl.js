@@ -198,7 +198,6 @@
 
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
             $scope.clients = UsersService.getClientUsers();
-            Utils.deleteById($scope.clients, UsersService.getUnassignedUser($scope.unassignedCompany.id).id);
 
             $scope.ticketAgent = '';
           }
@@ -455,6 +454,8 @@
                 })
               }
             }
+
+            $scope.ticket.note = $scope.ticket.note || '';
 
             TicketsService.createTicket($scope.ticket, function (resp) {
               $scope.savingInProcess = false;

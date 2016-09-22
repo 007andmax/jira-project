@@ -550,6 +550,7 @@
             if (form.$valid) {
               $scope.disabledSaveButton = true;
               $scope.tryToSaveTicket = false;
+              $scope.editedTicket.note = $scope.editedTicket.note || '';
               TicketsService.save($scope.editedTicket, function () {
                 $scope.editingTicket = false;
               })
