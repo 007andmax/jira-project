@@ -355,79 +355,19 @@
         return storage.leftPanelCounters;
       }
 
-      function getCountsByTypesAndCompany(scope, companyId, ticketTypes, callback) {
-
-        if (!scope || !scope.$id) {
-          throw 'First argument must be Angularjs scope!'
-        }
-
-        if (!companyId) {
-          throw 'companyId is required!'
-        }
-
-        if (!ticketTypes || ticketTypes.length == 0) {
-          throw 'ticketTypes is required!'
-        }
-
-        var counts = Utils.customizeObj({});
-
-        getCountsFromServer();
-
-        RealTimeService.subscribe('/ticketsCount', scope, function (newChange) {
-          if (newChange.action == 'TICKETS_COUNT_CHANGED') {
-            getCountsFromServer()
-          }
-        });
-
-        function getCountsFromServer() {
-
-          $http({
-            url: '/v2/tickets/counts/',
-            data: {
-              companyId: companyId,
-              types: ticketTypes
-            },
-            method: 'POST'
-          }).then(function (resp) {
-            Utils.customizeObj(resp.data, counts);
-
-            if (callback) {
-              callback(resp.data);
-            }
-          }, function (resp) {
-            if (callback) {
-              callback(resp.data);
-            }
-          });
-        }
-
-        return counts;
-
-      }
-
       function getCount(callback) {
 
-        getTicketQuantity(callback);
+        $http.post('/v2/tickets/count', storage.lastParams).then(function (resp) {
+          storage.ticketsQuantity = resp.data;
 
-        RealTimeService.subscribe('/ticketsCount', scope, function (newChange) {
-          if (newChange.action == 'TICKETS_COUNT_CHANGED') {
-            getTicketQuantity(callback);
+          if (callback) {
+            callback(storage.ticketsQuantity);
+          }
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
           }
         });
-
-        function getTicketQuantity(callback) {
-          $http.post('/v2/tickets/count', storage.lastParams).then(function (resp) {
-            storage.ticketsQuantity = resp.data;
-
-            if (callback) {
-              callback(storage.ticketsQuantity);
-            }
-          }, function (resp) {
-            if (callback) {
-              callback(resp.data);
-            }
-          });
-        }
       }
 
       function changePriority(ticketId, priority, callback) {
@@ -632,11 +572,12 @@
 
             if (ticketById) {
               Utils.customizeObj(newChange.data, ticketById);
-            } else {
-              insertToFitOrdering(newChange.data, storage.tickets);
+            } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
+              storage.ticketsQuantity++;
             }
           } else if (ticketById) {
             Utils.deleteById(storage.tickets, ticketById.id);
+            storage.ticketsQuantity--;
           }
 
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
@@ -649,12 +590,13 @@
 
             if (ticketById) {
               Utils.customizeObj(newChange.data, ticketById);
-            } else {
-              insertToFitOrdering(newChange.data, storage.tickets);
+            } else if (insertToFitOrdering(newChange.data, storage.tickets)) { //returns true if inserted successfully
+              storage.ticketsQuantity++;
             }
 
           } else if (ticketById) {
             storage.tickets.splice(ticketIndex, 1);
+            storage.ticketsQuantity--;
           }
 
         } else if (newChange.action === 'READ') {
@@ -675,6 +617,9 @@
 
         } else if (newChange.action === 'TICKET_DELETED') {
           Utils.deleteById(storage.tickets, newChange.data.id);
+          if (isTicketMatchesFilters(newChange.data, storage.lastParams)) { // if ticket was deleted forever
+            storage.ticketsQuantity--;              //it needs to decrement tickets' counter in trash or spam sections
+          }
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             $rootScope.$broadcast('ticket_is_not_available_anymore', newChange.data);
             storage.openedTicket = undefined;
@@ -738,7 +683,9 @@
         var insertIndex = getIndexToInsert(newTicket, list, orderByList);
         if (insertIndex < list.length || list.length < 15) {
           list.splice(insertIndex, 0, newTicket);
+          return true;
         }
+        return false;
       }
 
       function getIndexToInsert(newTicket, list, orderByList) {
@@ -944,7 +891,6 @@
         search: search,
         getCount: getCount,
         getCounts: getLeftPanelCounts,
-        getCountsByTypesAndCompany: getCountsByTypesAndCompany,
         getOne: getOne,
         changePriority: changePriority,
         assignTo: assignTo,
