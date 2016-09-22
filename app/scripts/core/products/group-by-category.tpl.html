@@ -201,7 +201,7 @@
                       <i class="icn-sm icn-send-again"></i>
                     </a>
 
-                    <ul class="move-prod dropdown-menu">
+                    <ul class="move-prod dropdown-menu" uib-dropdown-menu>
 
                       <li ng-repeat="category in productsData.categories | orderBy: 'name'"
                           ng-if="!category.default && product.category.id !== category.id">
