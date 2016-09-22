@@ -1225,6 +1225,14 @@ span.sort-span {
   border: 1px solid #e2e6e6;
   border-radius: 2px;
 }
+.device-settings-tab .deployment-settings label input[type="number"]:focus,
+.device-settings-tab .deployment-settings label input[type="text"]:focus,
+.device-settings-tab .deployment-settings label select:focus,
+.device-settings-tab .deployment-settings label input[type="password"]:focus{
+  outline: 0;
+  border-color: #2c9fdd;
+  background-color: #fff;
+}
 .device-settings-tab .deployment-settings label select{
   padding: 10px;
   font-size: 14px;

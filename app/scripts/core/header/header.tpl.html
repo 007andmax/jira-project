@@ -1,7 +1,7 @@
-<nav class="topNavbar row">
+<nav class="topNavbar">
   <div class="topNavbar-content" ng-controller="quicktech.core.header.headerCtrl">
 
-    <div class="col-md-2 col-sm-2 col-xs-2 topNavbarLeft">
+    <div class="topNavbarLeft">
       <div ng-if="globalSearch.goBack.isEnabled">
         <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
            style="margin: 5px 8px 0 0;" ng-click="globalSearch.goBack.func()"
@@ -28,7 +28,7 @@
         <span class="text-muted">Selected</span>
       </p>
     </div>
-    <div class="col-sm-3 col-xs-3">
+    <div class="search-block">
       <div class="topNavbarLeft-Left" ng-if="isShowBulkAction()"
            ng-controller="quicktech.core.header.ticketsBulkCtrl">
 
@@ -172,12 +172,7 @@
         <div ng-include="'/html/scripts/core/header/global-search/global-search.tpl.html'"></div>
       </div>
     </div>
-    <div class="col-md-2 col-sm-2 col-xs-2">
-      <a href="javascript:void(0)" class="ha-36-36">
-        <i class="icn-lg logo"></i>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-1 col-xs-1">
+    <div class="">
       <div class="topNavbar-create">
         <div dropdown style="display: inline-block;" ng-if="applicationLoaded">
 
@@ -219,9 +214,7 @@
         </div>
       </div>
     </div>
-    <!--<div class="col-sm-1 col-xs-1 topNavbarRight">-->
-    <!--</div>-->
-    <div class="col-md-3 col-sm-4 col-xs-4 topNavbarRight">
+    <div class=" topNavbarRight">
       <div dropdown>
         <div class="nickname-wrap" dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->

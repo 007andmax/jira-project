@@ -196,9 +196,9 @@
 }
 
 @media only screen and (max-width: 1315px) {
-  .topNavbarLeft {
-    padding-right: 320px;
-  }
+  /*.topNavbarLeft {*/
+    /*padding-right: 320px;*/
+  /*}*/
 
   .topNavbar-user {
     margin-right: 30px;
@@ -223,9 +223,16 @@
   margin-top: 1px;
   margin-left: -16px;
 }
-
+.search-block{
+  width: 40%;
+}
+.form-control-top-search-icn{
+  float: right;
+  margin-right: 10%;
+}
 .topNavbar-content {
-  /*position: relative;*/
+  display: flex;
+  justify-content: space-between;
 }
 
 .topNavbar-create {
