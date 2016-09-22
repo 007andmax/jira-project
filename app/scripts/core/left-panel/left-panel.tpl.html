@@ -269,13 +269,11 @@
              ng-class="{active: $state.includes('accounting')}"
              ng-click="stateGo($event, 'accounting')">
           <i class="nav-icon icn-billable icn-lg icon-pos"></i> Billiable
-          <span class="badge badge-red ng-binding badge-pos ng-scope" ng-if="ticketCounts.BILLABLE">{{ ticketCounts.BILLABLE }}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"
              ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
           <i class="nav-icon icn-lg icn-receivable icon-pos"></i> Receivable
-          <span class="badge badge-red ng-binding badge-pos ng-scope" ng-if="ticketCounts.RECEIVABLE">{{ ticketCounts.RECEIVABLE }}</span>
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receipt-archive')}"

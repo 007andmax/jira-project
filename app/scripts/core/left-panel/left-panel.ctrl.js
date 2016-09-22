@@ -4,9 +4,8 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
-      'quicktech.common.services.PermissionsService', 'TicketsService', 'CompaniesService', 'UsersService',
-      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, TicketsService,
-                CompaniesService, UsersService) {
+      'quicktech.common.services.PermissionsService', 'CompaniesService',
+      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           globalSearch = SharedStateService.getSharedState('globalSearch'),
@@ -21,7 +20,6 @@
         $scope.clientCompanies = CompaniesService.getClientCompanies;
 
         $scope.$state = $state;
-        $scope.ticketCounts = TicketsService.getCounts($scope);
         $scope.PermissionsService = PermissionsService;
         $rootScope.isLeftPanelHidden = false;
 

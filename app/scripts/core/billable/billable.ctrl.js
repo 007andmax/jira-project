@@ -4,8 +4,13 @@
 
   angular.module('quicktech.core.billable').controller('quicktech.core.billable.billableCtrl',
     ['$scope', 'BillableService', 'CompaniesService', 'quicktech.common.services.SharedStateService',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService) {
+      'quicktech.common.services.PermissionsService', 'TicketsService',
+      function ($scope, BillableService, CompaniesService, SharedStateService, PermissionsService, TicketsService) {
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+
+        TicketsService.getCounts($scope, function (resp) {
+          globalSearch.count = resp.BILLABLE;
+        });
 
         $scope.PermissionsService = PermissionsService;
         $scope.headerSharedState = SharedStateService.getSharedState('billableHeader');
