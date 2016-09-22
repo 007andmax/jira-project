@@ -2892,11 +2892,11 @@ _:-ms-fullscreen,
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: #e7ecf2;
+  background-color: #fcfdfd;
   opacity: 1;
 }
 .form-control.readonly-normal[readonly] {
-  background-color: #f1f5fa;
+  background-color: #fcfdfd;
   opacity: 1;
 }
 .form-control[disabled],
