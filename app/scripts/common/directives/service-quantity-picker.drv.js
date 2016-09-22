@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('serviceQuantityPicker',
-    ['$templateRequest', '$compile', function ($templateRequest, $compile) {
+    ['$templateRequest', '$compile', '$timeout', function ($templateRequest, $compile, $timeout) {
       return {
         restrict: 'A',
         scope: {
@@ -254,7 +254,8 @@
             quantityDropdown.hide();
             isDropdownShow = false;
 
-          };
+            scope.$apply();
+          }
 
           function processingColumn(element, target) {
 
