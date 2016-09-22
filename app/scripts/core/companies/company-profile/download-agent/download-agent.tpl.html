@@ -20,7 +20,7 @@
           <div class="form-group">
             <label class="control-label">User Name</label>
             <input type="text" class="form-control" name="userName" typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
-                   typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
+                   uib-typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
                    placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
                    autocomplete="off" qt-scroll-to="center">
 
@@ -40,7 +40,7 @@
             </div>
 
             <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
-                   typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
+                   uib-typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
                    placeholder="Email Address" ng-model="downloadAgentUser.email" qt-typeahead-show-on-focus>
 
             <input type="hidden" ng-model="downloadAgentUser.email" name="email"

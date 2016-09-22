@@ -28,16 +28,16 @@
                 </strong>
               </div>
               <div class="ticket-header-status pull-left">
-                <div class="pull-left" dropdown>
+                <div class="pull-left" uib-dropdown>
                 <span
                   class="label-icn-sm priority-small-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }} persistent-tooltip"
-                  tooltip="{{ userReadable(ticketDetails.priorityLevel) }} priority" tooltip-placement="top"
-                  tooltip-append-to-body="true" dropdown-toggle>
+                  uib-tooltip="{{ userReadable(ticketDetails.priorityLevel) }} priority" tooltip-placement="top"
+                  tooltip-append-to-body="true" uib-dropdown-toggle>
                   <label class="priority-flag"><i class="icn-xs icn-flag"></i></label>
                 </span>
                 <span
                   class="label label-primary priority-big-size label-priority-{{ ticketDetails.priorityLevel.toLowerCase() }}"
-                  dropdown-toggle> {{ userReadable(ticketDetails.priorityLevel) }} </span>
+                  uib-dropdown-toggle> {{ userReadable(ticketDetails.priorityLevel) }} </span>
                   <ul class="dropdown-menu dropdown-menu-custom dropdown-priority" role="menu"
                       ng-if="TicketsPermissionsService.isActionVisible('change_priority', ticketDetails)">
                     <li>
@@ -60,12 +60,12 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pull-left" dropdown>
+                <div class="pull-left" uib-dropdown>
                 <span ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)"
                       class="label-icn-sm progress-small-size label-primary persistent-tooltip"
                       tooltip-append-to-body="true"
-                      tooltip="{{ userReadable(ticketDetails.status) || 'Unclaimed' }}" tooltip-placement="top"
-                      dropdown-toggle>
+                      uib-tooltip="{{ userReadable(ticketDetails.status) || 'Unclaimed' }}" tooltip-placement="top"
+                      uib-dropdown-toggle>
                   <label class="status-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}">
                     <i class="icn-xs icn-ticket-{{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}"></i>
                   </label>
@@ -73,7 +73,7 @@
 
                 <span
                   class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticketDetails.status) || 'Unclaimed' }}-ticket"
-                  ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)" dropdown-toggle>
+                  ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticketDetails)" uib-dropdown-toggle>
                   {{ userReadable(ticketDetails.status) || 'Unclaimed' }}
                 </span>
                   <ul class="dropdown-menu dropdown-priority"
@@ -112,27 +112,27 @@
             <div class="pull-left ticket-edit-actions"
                  ng-if="TicketsPermissionsService.isActionVisible('edit_ticket', ticketDetails)">
               <div class="btn btn-default pull-left" ng-if="editingTicket" ng-disabled="disabledSaveButton"
-                   tooltip="Save" tooltip-placement="top" ng-click="saveEditedTicket(editTicketForm)">
+                   uib-tooltip="Save" tooltip-placement="top" ng-click="saveEditedTicket(editTicketForm)">
                 <i class="icn-sm icn-label-save"></i>
               </div>
               <div class="btn btn-default pull-left"
-                   tooltip="{{ editingTicket ? 'Cancel' : 'Edit subject & note' }}"
+                   uib-tooltip="{{ editingTicket ? 'Cancel' : 'Edit subject & note' }}"
                    tooltip-placement="top" ng-click="setEditingTicket(!editingTicket)">
                 <i class="icn-sm {{ editingTicket ? 'icn-label-cancel' : 'icn-edit' }}"></i>
               </div>
             </div>
-            <div class="pull-left" dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">
+            <div class="pull-left" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS') && ticketAgent">
 
               <div class="btn btn-default pull-left has-tooltip"
                    ng-if="(ticketAgent.type !== 'workstation') && ticketAgent.online"
-                   ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
+                   ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">
                 <i class="icn-sm icn-remote-access"></i>
               </div>
 
               <div class="btn btn-default pull-left has-tooltip"
                    ng-if="(ticketAgent.type === 'workstation') && ticketAgent.online"
-                   tooltip-placement="top" tooltip="Remote Access"
-                   aria-haspopup="true" aria-expanded="false" dropdown-toggle>
+                   tooltip-placement="top" uib-tooltip="Remote Access"
+                   aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
                 <i class="icn-sm icn-remote-access"></i>
               </div>
 
@@ -148,11 +148,11 @@
 
               </ul>
             </div>
-            <div class="pull-left" dropdown>
+            <div class="pull-left" uib-dropdown>
               <div class="btn btn-default pull-left has-tooltip"
                    aria-haspopup="true" aria-expanded="false"
                    ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"
-                   dropdown-toggle tooltip="Settings" tooltip-placement="top">
+                   uib-dropdown-toggle uib-tooltip="Settings" tooltip-placement="top">
                 <i class="icn-sm icn-settings"></i>
               </div>
               <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -241,7 +241,7 @@
               </div>
 
               <div text-editor te-initial-value="{{ editedTicket.note }}"
-                   ng-model="editedTicket.note" te-required="true" name="note">
+                   ng-model="editedTicket.note" name="note">
 
                 <div te-editor class="form-control editor" contenteditable="true"
                      style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
@@ -252,17 +252,17 @@
                     <div class="font-styles pull-left">
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="bold"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Bold">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bold">
                         <i class="icn-sm icn-wysiwyg-bold "></i>
                       </a>
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="italic"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Italic">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Italic">
                         <i class="icn-sm icn-wysiwyg-italic"></i>
                       </a>
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="underline"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Underline">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Underline">
                         <i class="icn-sm icn-wysiwyg-underline"></i>
                       </a>
                     </div>
@@ -270,12 +270,12 @@
                     <div class="text-bullets pull-left">
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="insertorderedlist"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Numbered List">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Numbered List">
                         <i class="icn-sm icn-wysiwyg-ol"></i>
                       </a>
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="insertunorderedlist"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Bulleted List">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Bulleted List">
                         <i class="icn-sm icn-wysiwyg-ul"></i>
                       </a>
                     </div>
@@ -283,27 +283,27 @@
                     <div class="text-styles pull-left">
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="justifyleft"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Left Align">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Left Align">
                         <i class="icn-sm icn-wysiwyg-align-left"></i>
                       </a>
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="justifycenter"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Center Align">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Center Align">
                         <i class="icn-sm icn-wysiwyg-align-center"></i>
                       </a>
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="justifyright"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Right Align">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Right Align">
                         <i class="icn-sm icn-wysiwyg-align-right"></i>
                       </a>
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="outdent"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Decrease Indent">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Decrease Indent">
                         <i class="icn-sm icn-wysiwyg-unindent"></i>
                       </a>
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="indent"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Increase Indent">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Increase Indent">
                         <i class="icn-sm icn-wysiwyg-indent"></i>
                       </a>
                     </div>
@@ -312,15 +312,15 @@
 
                       <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
                          data-edit="cblock"
-                         tooltip-append-to-body="true" tooltip-placement="top" tooltip="Quote">
+                         tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Quote">
                         <i class="icn-sm icn-wysiwyg-quote"></i>
                       </a>
 
-                      <div class="dropup pull-left" dropdown>
+                      <div class="dropup pull-left" uib-dropdown>
 
                         <a href="javascript:void(0)" class="hit-area ha-14 pull-left has-tooltip"
-                           dropdown-toggle data-container="body" data-placement="top"
-                           tooltip="Add or Remove Link">
+                           uib-dropdown-toggle data-container="body" data-placement="top"
+                           uib-tooltip="Add or Remove Link">
                           <i class="icn-sm icn-wysiwyg-link"></i>
                         </a>
 
@@ -350,7 +350,7 @@
 
                   <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
                      data-edit="removeformat"
-                     tooltip-append-to-body="true" tooltip-placement="top" tooltip="Reset Formating">
+                     tooltip-append-to-body="true" tooltip-placement="top" uib-tooltip="Reset Formating">
                     <i class="icn-sm icn-wysiwyg-reset"></i>
                   </a>
 
@@ -368,7 +368,7 @@
           <span class="attachments-count pull-left">{{ ticketDetails.attachments.length }} Attachments</span>
           <div class="download-all pull-right">
             <div class="btn btn-default pull-right has-tooltip"
-                 tooltip="download all attachments" tooltip-append-to-body="true"
+                 uib-tooltip="download all attachments" tooltip-append-to-body="true"
                  tooltip-placement="top" ng-click="downloadAllAttachments()">
               <i class="icn-sm icn-attachments-download"></i>
             </div>
@@ -392,7 +392,7 @@
               <span class="file-name" ng-bind="attachment.file.name"></span>
               <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
               <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
-                 tooltip="Download" tooltip-placement="bottom"
+                 uib-tooltip="Download" tooltip-placement="bottom"
                  ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                 <span class="icn-sm icn-attachments-download"></span>
               </a>
@@ -427,7 +427,7 @@
             </li>
             <li>
               <div class="btn pull-left btn-primary has-tooltip"
-                   tooltip="Hide All" data-placement="top" ng-click="toggleFullSharedUsers()">
+                   uib-tooltip="Hide All" data-placement="top" ng-click="toggleFullSharedUsers()">
                 <i class="icn-sm icn-remove-token"></i>
               </div>
             </li>
@@ -454,7 +454,7 @@
               <div class="updater-name">{{ getUserName(user) }}
                 <span class="text-muted">added {{ updateType() }}</span>
                 <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
-                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete"
                    ng-click="deleteUpdate()"
                    custom-disabled="{{ !TicketsPermissionsService.isActionVisible('delete_update', ticketDetails, ticketUpdate.user) }}">
                   <i class="icn-sm icn-delete"></i>
@@ -480,7 +480,7 @@
                     <span class="file-name" ng-bind="attachment.file.name"></span>
                     <span class="file-size">{{ attachment.file.size | fileSizeFilter }}</span>
                     <a href="javascript:void(0)" class="tp-hide file-download has-tooltip"
-                       data-placement="top" tooltip="Download"
+                       data-placement="top" uib-tooltip="Download"
                        ng-click="downloadAttachment(attachment.file.id, attachment.file.name)">
                       <span class="icn-sm icn-attachments-download"></span>
                     </a>
@@ -492,7 +492,7 @@
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
                   <div class="col-2 col-2-has-serial-number" style="border-left: 0;"
-                       tooltip="{{ product.item.description }}"
+                       uib-tooltip="{{ product.item.description }}"
                        tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0"
                        ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
                     <span trimmed-tooltip-container>{{ product.item.description }}</span>
@@ -502,22 +502,22 @@
                             style="margin-left: 15px;">P/N: {{ product.item.manufacture }}</span>
                     </div>
                   </div>
-                  <div class="col-3" ng-if="product.serialNumber" tooltip="{{ product.serialNumber }}"
+                  <div class="col-3" ng-if="product.serialNumber" uib-tooltip="{{ product.serialNumber }}"
                        tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
                     <span trimmed-tooltip-container>{{ product.serialNumber }}</span>
                   </div>
                   <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'"
-                       tooltip="{{ product.sum | currency :'$':2 }}"
+                       uib-tooltip="{{ product.sum | currency :'$':2 }}"
                        tooltip-enable="{{ isShowTooltip[2]() }}" trimmed-tooltip="2">
                     <span trimmed-tooltip-container>{{ product.sum | currency:'$':2 }}</span>
                   </div>
                   <div class="col-5" ng-show="ticketDetails.status !== 'COMPLETED'"
-                       tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
+                       uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
                        tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
                     <span
                       trimmed-tooltip-container>{{ product.item.sale * product.quantity || '' | currency :'$':2 }}</span>
                   </div>
-                  <div class="col-4" tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
+                  <div class="col-4" uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
                        tooltip-enable="{{ isShowTooltip[4]() }}" trimmed-tooltip="4">
                     <span trimmed-tooltip-container>
                       {{ product.item.sale | currency:'$':2 }}<span class="model">Qty {{ product.quantity }}</span>
@@ -525,7 +525,7 @@
                   </div>
                   <div class="table-content-action pull-right">
                     <a class="hit-area pull-right has-tooltip"
-                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit product"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit product"
                        ng-click="setEditExpenseId(product.id)"
                        custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icn-sm icn-edit"></i>
@@ -549,7 +549,7 @@
                   </div>
                   <div class="table-content-action pull-right">
                     <a class="hit-area pull-right has-tooltip"
-                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit service"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit service"
                        ng-click="setEditExpenseId(service.id)"
                        custom-disabled="{{ !TicketsPermissionsService.isActionVisible('edit_update', ticketDetails, ticketUpdate.user) }}">
                       <i class="icn-sm icn-edit"></i>
@@ -592,7 +592,7 @@
                              ng-src="{{ share.user ? getUserAvatarUrl(getUserById(share.user.id)) : getContactAvatarUrl(share.contact) }}">
                       </div>
                       <div class="btn pull-left btn-primary has-tooltip" ng-click="showAllSharedUsers = false"
-                           tooltip="Show Fewer" data-placement="top">
+                           uib-tooltip="Show Fewer" data-placement="top">
                         <i class="icn-sm icn-close-sm"></i>
                       </div>
                     </div>

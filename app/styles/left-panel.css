@@ -216,3 +216,43 @@
 .active.subsettings:before{
   background-color: #fff;
 }
+.filter-block{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+  border-top: 1px solid #7c8999;
+}
+.filter{
+  display: block;
+  padding-left: 0;
+  width: 100%;
+  height: auto;
+}
+.filter:hover{
+  color: #94a4b8;
+}
+.filter p{
+  padding: 10px 0 5px 0;
+  cursor: default;
+}
+.filter .dropdown-menu{
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+.filter .form-control.readonly-normal{
+  border: transparent;
+  border-radius: 2px;
+}
+.filter .form-control.readonly-normal:focus,
+.filter .form-control.readonly-normal:active {
+  background-color: #e9f5fb;
+  box-shadow: inset 3px 3px 10px 0px rgba(0,0,0,0.35);
+}
+.filter .dropdown-menu li {
+  color: #000000;
+  padding: 10px 15px;
+}
+.filter .dropdown-menu li:hover {
+  background-color: #e9f5fb;
+}

@@ -18,7 +18,7 @@
 
         <div class="icn-sm {{ getUserSubscribeClass(currentContact) }} persistent-tooltip"
              tooltip-append-to-body="true" tooltip-placement="top"
-             tooltip="{{ getUserSubscribeTooltip(currentContact) }}"></div>
+             uib-tooltip="{{ getUserSubscribeTooltip(currentContact) }}"></div>
         </div>
       </div>
 
@@ -34,12 +34,12 @@
       <div class="contact-actions">
 
         <div class="btn btn-default pull-left has-tooltip"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">
+             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Email">
           <i class="icn-sm icn-user-mail"></i>
         </div>
 
         <div class="btn btn-default pull-left has-tooltip"
-             tooltip-placement="top" tooltip-append-to-body="true" tooltip="chat">
+             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="chat">
           <i class="icn-sm icn-user-chat"></i>
         </div>
 

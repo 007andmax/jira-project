@@ -64,11 +64,11 @@
 
       <label class="control-label">Account Type</label>
 
-      <div dropdown>
+      <div uib-dropdown>
 
-        <input class="form-control has-dropdown" type="text"
-               ng-model="roles[editedUser.role]" dropdown-toggle aria-expanded="true"
-               class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
+        <input type="text"
+               ng-model="roles[editedUser.role]" uib-dropdown-toggle aria-expanded="true"
+               class="form-control has-dropdown form-control-dropdown dropdown-toggle no-cursor" READONLY>
         <i class="icn-sm icn-caret-gray"></i>
 
         <ul class="dropdown-menu dropdown-account-type">
@@ -86,7 +86,7 @@
 
     <div>
       <input class="form-control has-dropdown" type="text" value=""
-             dropdown-toggle aria-expanded="false" readonly="readonly">
+             uib-dropdown-toggle aria-expanded="false" readonly="readonly">
       <i class="icn-sm icn-caret-gray"></i>
 
       <div class="subscribe-tokens">
@@ -139,11 +139,11 @@
   <div class="ui">
     <div class="inline-user-edit-action center-btn">
       <div class="btn btn-default distance has-tooltip" ng-click="saveUser(editUserForm)"
-           tooltip-placement="top" tooltip="Save" ng-disabled="savingInProcess">
+           tooltip-placement="top" uib-tooltip="Save" ng-disabled="savingInProcess">
         <i class="icn-sm icn-label-save"></i>
       </div>
       <div class="btn btn-default distance has-tooltip" ng-click="cancelEditing()"
-           tooltip-placement="top" tooltip="Cancel" ng-disabled="savingInProcess">
+           tooltip-placement="top" uib-tooltip="Cancel" ng-disabled="savingInProcess">
         <i class="icn-sm icn-remove-token"></i>
       </div>
     </div>

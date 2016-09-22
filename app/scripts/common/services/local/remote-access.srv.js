@@ -3,8 +3,8 @@
 (function (window, $, undefined) {
 
   angular.module('quicktech.common.services').factory('quicktech.common.services.RemoteAccessService',
-    ['ConstantsService', 'DevicesService', '$modal', '$interval', '$rootScope',
-      function (ConstantsService, DevicesService, $modal, $interval, $rootScope) {
+    ['ConstantsService', 'DevicesService', '$uibModal', '$interval', '$rootScope',
+      function (ConstantsService, DevicesService, $uibModal, $interval, $rootScope) {
 
         var modalParams = {
           animation: true,
@@ -13,7 +13,7 @@
           size: 'custom-size-confirmation-pop-up',
           windowClass: 'modal-spam',
           templateUrl: '/html/scripts/common/services/local/remote-access-timer.tpl.html',
-          controller: ['$scope', '$modalInstance', timerController]
+          controller: ['$scope', '$uibModalInstance', timerController]
         }, counter, message;
 
         function connectRemoteAccess(sessionId, conectionType, isOneTime) {
@@ -54,7 +54,7 @@
 
 
             console.log(url);
-            var modalInstance = $modal.open(modalParams),
+            var modalInstance = $uibModal.open(modalParams),
               promise = $interval(function () {
                 counter++;
               }, 1000);
@@ -82,9 +82,9 @@
 
         }
 
-        function timerController($scope, $modalInstance) {
+        function timerController($scope, $uibModalInstance) {
           $scope.getCounter = getCounter;
-          $scope.close = $modalInstance.dismiss;
+          $scope.close = $uibModalInstance.dismiss;
           $scope.download = function () {
             window.location.href = '/data/connection-viewer';
             $scope.close();

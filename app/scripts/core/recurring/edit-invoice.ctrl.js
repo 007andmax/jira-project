@@ -11,8 +11,6 @@
         var day = 1000 * 60 * 60 * 24, form,
           allClientUsers = UsersService.getClientUsers();
 
-        Utils.deleteById(allClientUsers, UsersService.getUnassignedUser(CompaniesService.getUnassignedCompany().id).id);
-
         $scope.clients = [];
         $scope.frequency = {
           sevenDays: '7 days',

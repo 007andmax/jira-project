@@ -53,10 +53,10 @@
     <div class="ticket-labels clearfix"
          ng-init="dropdowns[ticket.id] = {}; dropdowns[ticket.id]['priority'] = false; dropdowns[ticket.id]['status'] = false;">
 
-      <div class="pull-left" dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['priority']">
+      <div class="pull-left" uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['priority']">
         <!--<span-->
           <!--class="label-icn-lg priority-small-size label-priority-{{ ticket.priorityLevel.toLowerCase() }} persistent-tooltip"-->
-          <!--tooltip="{{ userReadable(ticket.priorityLevel) }} priority" tooltip-placement="top" dropdown-toggle>-->
+          <!--tooltip="{{ userReadable(ticket.priorityLevel) }} priority" tooltip-placement="top" uib-dropdown-toggle>-->
           <!--<label class="priority-flag">-->
             <!--<i class="icn-sm icn-priority"></i>-->
           <!--</label>-->
@@ -94,17 +94,17 @@
         </ul>
       </div>
 
-      <div class="pull-left" dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
+      <div class="pull-left" uib-dropdown stop-propagation="click" is-open="dropdowns[ticket.id]['status']">
         <span class="label-icn-lg label-primary progress-small-size persistent-tooltip {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket"
           ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)"
-          tooltip="{{ userReadable(ticket.status) || 'Unclaimed' }}" tooltip-placement="top" dropdown-toggle>
+          uib-tooltip="{{ userReadable(ticket.status) || 'Unclaimed' }}" tooltip-placement="top" uib-dropdown-toggle>
           <label class="status-{{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}">
             <i class="icn-sm icn-ticket-{{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}"></i>
           </label>
         </span>
 
         <span class="progress-big-size label label-primary {{ ticketStatusToCssFormat(ticket.status) || 'Unclaimed' }}-ticket"
-              ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" dropdown-toggle>
+              ng-if="TicketsPermissionsService.isActionVisible('status_visible', ticket)" uib-dropdown-toggle>
           {{ userReadable(ticket.status) || 'Unclaimed' }}
         </span>
 

@@ -6,7 +6,7 @@
     <li class="active">
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
-         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="about me"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="about me"
          ng-click="currentTicketInfoTab = 'CURRENT_USER'">
         <i class="icn-lg icn-tab-info"></i>
       </a>
@@ -15,7 +15,7 @@
     <li>
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
-         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="all activity"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="all activity"
          ng-click="currentTicketInfoTab = 'ACTIVITY'">
         <i class="icn-lg icn-tab-activities"></i>
       </a>
@@ -24,7 +24,7 @@
     <li ng-show="PermissionsService.isAllowed('VIEW_COMPANIES')">
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
-         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="companies"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="companies"
          ng-click="currentTicketInfoTab = 'USER_COMPANY'">
         <i class="icn-lg icn-tab-companies"></i>
       </a>

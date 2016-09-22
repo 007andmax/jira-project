@@ -1,7 +1,7 @@
 <div>
   <div class="tech-action">
     <a href="javascript:void(0)" class="hit-area pull-right has-tooltip"
-       tooltip-placement="top" tooltip="Close"
+       tooltip-placement="top" uib-tooltip="Close"
        ng-click="openEditUser()">
       <i class="icn-sm icn-remove-token"></i>
     </a>
@@ -59,10 +59,10 @@
 
             <label class="control-label">Account Type</label>
 
-            <div dropdown>
+            <div uib-dropdown>
 
               <input type="text"class="form-control has-dropdown form-control-dropdown dropdown-toggle no-cursor"
-                     ng-model="editUser.techRole" dropdown-toggle aria-expanded="true" READONLY>
+                     ng-model="editUser.techRole" uib-dropdown-toggle aria-expanded="true" READONLY>
               <i class="icn-sm icn-caret-gray"></i>
 
               <ul class="dropdown-menu dropdown-account-type">

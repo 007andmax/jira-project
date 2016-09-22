@@ -89,7 +89,7 @@
 
           <div class="btn btn-default pull-left has-tooltip"
                ng-show="(agent.type === 'workstation') && agent.online"
-               tooltip-placement="top" tooltip="Remote Access"
+               tooltip-placement="top" uib-tooltip="Remote Access"
                dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
             <i class="icn-sm icn-remote-access"></i>
           </div>
@@ -107,14 +107,14 @@
           </ul>
 
           <div class="btn btn-default pull-left has-tooltip" tooltip-placement="top" ng-show="agentDeprecated"
-               tooltip="Update Agent" ng-click="updateAgent()">
+               uib-tooltip="Update Agent" ng-click="updateAgent()">
             <i class="icn-sm icn-attachments-download"></i>
           </div>
 
-          <!--<div class="pull-right for-network-tab" dropdown is-open="isLogOnDrpdwnOpen">-->
+          <!--<div class="pull-right for-network-tab" uib-dropdown is-open="isLogOnDrpdwnOpen">-->
 
           <!--<div class="btn btn-primary has-tooltip" style="width: 38px;margin-right: 10px;" dropdown-toggle-->
-          <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="modify logon info">-->
+          <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="modify logon info">-->
           <!--<i class="icn-sm icn-modify-logon"></i>-->
           <!--</div>-->
 
@@ -136,7 +136,7 @@
 
           <!--<a href="javascript:void(0)"-->
           <!--class="show-password-hit hit-area ha-18 has-tooltip" ng-click="isShowPass = !isShowPass"-->
-          <!--tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"-->
+          <!--tooltip-placement="top" uib-tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"-->
           <!--tooltip-append-to-body="true">-->
           <!--<i class="icn-sm icn-{{ isShowPass ? 'hide' : 'show' }}-password"></i>-->
           <!--</a>-->

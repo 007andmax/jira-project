@@ -12,15 +12,15 @@
               <div class="dropdown" style="transform: translateY(50%)"
                    ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
                    ng-click="archiveCompany()"
-                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Archive Company">
                 <i class="icn-sm icn-archive-company"></i>
               </div>
 
-              <div dropdown>
+              <div uib-dropdown>
 
                 <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-                   dropdown-toggle aria-expanded="false"
-                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Change Cover">
+                   uib-dropdown-toggle aria-expanded="false"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Change Cover">
                   <i class="icn-md icn-cover"></i>
                 </a>
 
@@ -50,16 +50,16 @@
               <a href="javascript:void(0)" class="hit-area has-tooltip"
                  ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
                  ui-sref="editCompany({ companyId: company.id })"
-                 tooltip-placement="top" tooltip-append-to-body="true" tooltip="Edit">
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Edit">
                 <i class="icn-sm icn-edit-white"></i>
               </a>
 
             </div>
-            <p class="company-head" tooltip="{{ companyData.name }}" tooltip-enable="{{ isShowTooltip[0]() }}"
+            <p class="company-head" uib-tooltip="{{ companyData.name }}" tooltip-enable="{{ isShowTooltip[0]() }}"
                trimmed-tooltip="0">
               <span trimmed-tooltip-container>{{ companyData.name }}</span>
             </p>
-            <li class="info-type" tooltip="{{ currentLocation.address }}" tooltip-enable="{{ isShowTooltip[1]() }}"
+            <li class="info-type" uib-tooltip="{{ currentLocation.address }}" tooltip-enable="{{ isShowTooltip[1]() }}"
                 trimmed-tooltip="1">
               <i class="icn-sm icn-location-white"></i>
               Address: <span trimmed-tooltip-container>{{ currentLocation.address }}</span>
@@ -84,12 +84,12 @@
           </div>
 
           <ul class="user-company-contact clearfix">
-            <li class="info-type" tooltip="{{ getUserName(currentContact) }}" tooltip-enable="{{ isShowTooltip[2]() }}"
+            <li class="info-type" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-enable="{{ isShowTooltip[2]() }}"
                 trimmed-tooltip="2">
               <i class="icn-sm icn-contact"></i>
               Primary contact: <span trimmed-tooltip-container>{{ getUserName(currentContact) }}</span>
             </li>
-            <li class="info-type" ng-if="currentContact.primaryEmail" tooltip="{{ currentContact.primaryEmail }}"
+            <li class="info-type" ng-if="currentContact.primaryEmail" uib-tooltip="{{ currentContact.primaryEmail }}"
                 tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
               <i class="icn-sm icn-contact-email"></i>
               Contact email: <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
@@ -106,16 +106,16 @@
 
           <div class="button-container">
             <i class="icn-retina new-ticket pull-left" create-ticket-open-modal="{{ company.id }}"
-               tooltip="Create Ticket" tooltip-placement="top"></i>
+               uib-tooltip="Create Ticket" tooltip-placement="top"></i>
             <i class="icn-retina new-user pull-left" style="margin-left: 15px;" ng-click="createUser()"
                ng-if="PermissionsService.isAllowed('CREATE_USERS')"
-               tooltip="Create User" tooltip-placement="top"></i>
+               uib-tooltip="Create User" tooltip-placement="top"></i>
             <div
               qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
               qt-popover-position="bottom" custom-disabled="{{ !allowAgentInstall }}"
               class="pull-right" style="cursor: pointer">
               <i class="icn-retina save-download pull-right" qt-popover-trigger tooltip-placement="top"
-                 tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></i>
+                 uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></i>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('modalWindowButton',
-    ['$modal', function ($modal) {
+    ['$uibModal', function ($uibModal) {
 
       return {
         restrict: 'A',
@@ -19,7 +19,7 @@
           element.on('click', function () {
             windowScrollTop = wind.scrollTop();
 
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
               animation: true,
               backdrop: 'static',
               windowClass: attrs.modalWindowClass || '',

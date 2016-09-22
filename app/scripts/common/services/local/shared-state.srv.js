@@ -16,6 +16,9 @@
           checkedTicketsIds: [],
           count: 0
         },
+        companiesHeader: {
+          filter: {}
+        },
         usersHeader: {
           filter: {
             companyId: ''

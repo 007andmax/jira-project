@@ -29,7 +29,6 @@
         });
 
         $scope.companies = CompaniesService.getClientCompanies();
-        Utils.deleteById($scope.companies, CompaniesService.getUnassignedCompany().id);
 
         if ($scope.companies && !$scope.companies.length) {
           loadingFinished('companies');

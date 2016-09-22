@@ -62,13 +62,13 @@
             <div class="topNavbar-filter pull-right">
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="archiveUsers()"
-                   tooltip-placement="bottom" tooltip="Archive">
+                   tooltip-placement="bottom" uib-tooltip="Archive">
                 <i class="icn-sm icn-remove-token"></i>
               </div>
 
-              <div dropdown>
-                <div class="btn btn-default has-tooltip pull-right" dropdown-toggle
-                     tooltip-placement="bottom" tooltip="Subscribe to...">
+              <div uib-dropdown>
+                <div class="btn btn-default has-tooltip pull-right" uib-dropdown-toggle
+                     tooltip-placement="bottom" uib-tooltip="Subscribe to...">
                   <i class="icn-sm icn-user-subscription"></i>
                 </div>
 
@@ -99,9 +99,9 @@
                 </ul>
               </div>
 
-              <div dropdown>
-                <div class="btn btn-default has-tooltip pull-right" dropdown-toggle
-                     tooltip-placement="bottom" tooltip="Set Privilege to...">
+              <div uib-dropdown>
+                <div class="btn btn-default has-tooltip pull-right" uib-dropdown-toggle
+                     tooltip-placement="bottom" uib-tooltip="Set Privilege to...">
                   <i class="icn-sm icn-user-privilege"></i>
                 </div>
 
@@ -136,23 +136,23 @@
             <div class="topNavbar-filter pull-right" style="transform: translateY(-40%);">
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="removeDevices()"
-                   tooltip-placement="bottom" tooltip="Remove">
+                   tooltip-placement="bottom" uib-tooltip="Remove">
                 <i class="icn-sm icn-remove-token"></i>
               </div>
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="shutdownDevices()"
-                   tooltip-placement="bottom" tooltip="Shutdown" ng-if="!companyProfileHeader.isOfflineDeviceSelected">
+                   tooltip-placement="bottom" uib-tooltip="Shutdown" ng-if="!companyProfileHeader.isOfflineDeviceSelected">
                 <i class="icn-sm icn-shutdown-device"></i>
               </div>
 
               <div class="btn btn-default has-tooltip pull-right" ng-click="restartDevices()"
-                   tooltip-placement="bottom" tooltip="Restart" ng-if="!companyProfileHeader.isOfflineDeviceSelected">
+                   tooltip-placement="bottom" uib-tooltip="Restart" ng-if="!companyProfileHeader.isOfflineDeviceSelected">
                 <i class="icn-sm icn-restart-device"></i>
               </div>
 
               <div class="btn btn-default has-tooltip pull-left" append-html-to-body data="deviceReport"
                    url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
-                   tooltip-placement="top" tooltip="Open Report" ng-click="getDeviceReport(selectDevicesIds)">
+                   tooltip-placement="top" uib-tooltip="Open Report" ng-click="getDeviceReport(selectDevicesIds)">
                 <i class="icn-sm icn-description"></i>
               </div>
 
@@ -166,7 +166,7 @@
 
       <div class="pull-right for-network-tab" tooltip-placement="top" tooltip-append-to-body="true"
            ng-show="currentOpenTab === 'network-scan'"
-           tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
+           uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
         <div class="btn btn-info has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
              custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}">
           <i class="icn-sm icn-scan-network"></i>

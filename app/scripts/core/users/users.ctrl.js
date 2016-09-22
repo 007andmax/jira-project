@@ -28,7 +28,6 @@
 
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
-        Utils.deleteById($scope.users, UsersService.getUnassignedUser(CompaniesService.getUnassignedCompany().id).id);
 
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
@@ -50,14 +49,37 @@
         };
 
         $scope.usersFilter = function (value) {
-          if (headerSharedState.filter.userId) {
-            return headerSharedState.filter.userId === value.id;
+          var filter = headerSharedState.filter;
+          var company = CompaniesService.getOneById(value.company.id);
+          var clientType = company.clientType;
+          var result = true;
+
+          if (filter.userId) {
+            result = result && filter.userId === value.id;
           }
 
-          if (headerSharedState.filter.companyId) {
-            return headerSharedState.filter.companyId === value.company.id;
+          if (filter.companyId) {
+            result = result && filter.companyId === value.company.id;
           }
-          return true;
+
+          if (filter.isContact) {
+            result = result && value.isContact;
+          }
+
+          if (filter.isLead) {
+            result = result && clientType && clientType.toLowerCase() === 'lead';
+          }
+
+          if (filter.isClient) {
+            result = result && clientType && clientType.toLowerCase() === 'client';
+          }
+
+          if (filter.industry) {
+            var industryName = company.clientIndustry ? (company.clientIndustry.name || '') : '';
+            result = result && industryName.toLowerCase() === filter.industry.toLowerCase();
+          }
+
+          return result;
         };
 
         $scope.getUserName = function (user) {
@@ -65,7 +87,7 @@
         };
 
         $scope.$on('$destroy', function () {
-          SharedStateService.clearState('usersHeader');
+          headerSharedState.filter = {};
         });
 
         $scope.$on('cancelEditForm', function () {

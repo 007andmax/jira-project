@@ -3,9 +3,9 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive('ticketUploader',
-    ['$modal', 'TicketsService', '$stateParams', '$timeout', '$document', 'localStorageService',
+    ['$uibModal', 'TicketsService', '$stateParams', '$timeout', '$document', 'localStorageService',
       'quicktech.common.services.UserNotificationService', 'quicktech.common.services.SharedStateService',
-      function ($modal, TicketsService, $stateParams, $timeout, $document, localStorageService, UserNotificationService,
+      function ($uibModal, TicketsService, $stateParams, $timeout, $document, localStorageService, UserNotificationService,
                 SharedStateService) {
 
         return {

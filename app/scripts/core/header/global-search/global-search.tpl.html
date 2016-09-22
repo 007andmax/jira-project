@@ -49,12 +49,12 @@
             <div class="item-name" ng-class="{'one-string': !item.info}">
               <span highlight-text="{{ item.name }}" substring="{{ globalSearch.searchValue }}"></span>
               <div style="display: inline-block;" ng-if="items.type === 'COMPANIES'" ng-click="filterByType(item, $event)"
-                   tooltip="Filter by {{ item.name }} {{ ::getType(item.type) }}"  tooltip-append-to-body="true">
+                   uib-tooltip="Filter by {{ item.name }} {{ ::getType(item.type) }}"  tooltip-append-to-body="true">
                 <i class="icn-sm icn-ticket-filter" style="display: inline-block;"></i>
               </div>
-              <div dropdown stop-propagation="click" dropdown-append-to-body="true"
+              <div uib-dropdown stop-propagation="click" dropdown-append-to-body="true"
                    ng-if="items.type === 'DEVICES' && getDeviceById(item.id, item.extraInfo).online && PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
-                <div dropdown-toggle style="display: inline-block;">
+                <div uib-dropdown-toggle style="display: inline-block;">
                   <i class="icn-sm icn-remote-access" style="display: inline-block;"></i>
                 </div>
 
@@ -82,7 +82,7 @@
         <li class="list-head">
           <div class="filter-header">
             <div class="" ng-click="closeFilters($event)">
-              <i class="icn-sm icn-back-arrow" tooltip="go back"
+              <i class="icn-sm icn-back-arrow" uib-tooltip="go back"
                  tooltip-placement="bottom" tooltip-append-to-body="true"></i>
             </div>
             <span>Search results ({{ filterResultCount }})</span>
@@ -104,7 +104,7 @@
 
         <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
            ng-show="globalSearch.searchValue" ng-click="globalSearch.searchValue = ''"
-           tooltip="clear" tooltip-placement="top"></i>
+           uib-tooltip="clear" tooltip-placement="top"></i>
       </span>
 
     </div>

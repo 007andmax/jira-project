@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.core.vendors").directive("contactsSlider",
-    ['$state', '$modal', '$rootScope',
-      function ($state, $modal, $rootScope) {
+    ['$state', '$uibModal', '$rootScope',
+      function ($state, $uibModal, $rootScope) {
         return {
           restrict: 'A',
           require: 'ngModel',

@@ -3,8 +3,8 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('editCover',
-    ['$modal', 'FilesService', '$rootScope', '$timeout',
-      function ($modal, FilesService, $rootScope, $timeout) {
+    ['$uibModal', 'FilesService', '$rootScope', '$timeout',
+      function ($uibModal, FilesService, $rootScope, $timeout) {
 
         var urlGetters = {
           company: $rootScope.getCompanyCoverUrl

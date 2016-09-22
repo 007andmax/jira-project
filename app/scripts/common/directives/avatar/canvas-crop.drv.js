@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.core.users").directive('canvasCrop',
-    ['$modal', function ($modal) {
+    [function () {
       return {
         restrict: 'A',
         link: function (scope, element, attrs) {

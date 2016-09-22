@@ -26,10 +26,12 @@
     $http.get('/company/clients').then(function (resp) {
         for (var i = 0; i < resp.data.length; i++) {
           var custCompany = Utils.customizeObj(resp.data[i]);
-          if (resp.data[i].deletedAt) {
+          if (custCompany.deletedAt) {
             storage.deletedCompanies.push(custCompany);
           } else {
-            storage.clientCompanies.push(custCompany);
+            if (!custCompany.isDefault) {
+              storage.clientCompanies.push(custCompany);
+            }
             storage.companies.push(custCompany);
           }
         }

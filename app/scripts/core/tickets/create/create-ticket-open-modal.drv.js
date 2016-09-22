@@ -3,14 +3,14 @@
 (function () {
 
   angular.module("quicktech.core.tickets").directive("createTicketOpenModal",
-    ['$modal', function ($modal) {
+    ['$uibModal', function ($uibModal) {
       return {
         restrict: 'A',
         link: function ($scope, element, attrs) {
 
           element.click(function () {
 
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
               templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
               controller: 'quicktech.core.tickets.createTicketCtrl',
               windowClass: 'modal-create-ticket',

@@ -14,8 +14,6 @@
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
-        $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
-        $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.createUser = function () {
           $state.go('users.create').then(function () {
@@ -65,7 +63,7 @@
           } else if ($state.includes("users")) {
             return 'users';
           } else if ($state.includes("companies")) {
-            return 'companies';
+            return SharedStateService.getSharedState('companiesHeader').filter.isVendor ? 'vendors' : 'companies';
           } else if ($state.includes("products")) {
             return 'products';
           } else if ($state.includes("services")) {
@@ -78,8 +76,6 @@
             return 'receivable';
           } else if ($state.includes("receipt-archive")) {
             return 'receipt-archive';
-          } else if ($state.includes("vendors")) {
-            return 'vendors';
           } else if ($state.includes("settings")) {
             if ($state.is("settings")) {
               return 'Account Settings';
@@ -108,22 +104,6 @@
             $scope.ticketsSharedState = undefined;
           }
         });
-
-        $scope.initCompanyStatusWatch = function (hidePopoverFunc) {
-          var unwatch = $scope.$watch('currentCompany.status', function (newValue, oldValue) {
-            if (newValue === 'ACTIVE' && oldValue === 'SIGN_UP') {
-              hidePopoverFunc && hidePopoverFunc();
-              unwatch();
-            }
-          });
-
-          var unsubscribe = $scope.$on('$locationChangeStart', function () {
-            if ($scope.currentCompany.status === 'SIGN_UP') {
-              $scope.changeCompanyStatusToActive();
-              unsubscribe();
-            }
-          })
-        };
 
         $scope.isShowBulkAction = function () {
           return $scope.ticketsSharedState && $scope.ticketsSharedState.checkedTicketsIds.length;

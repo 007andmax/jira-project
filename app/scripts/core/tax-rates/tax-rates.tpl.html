@@ -9,7 +9,7 @@
 
       <div class="btn btn-primary has-tooltip" data-toggle="dropdown" ng-click="openDropdown()"
            aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"
-           tooltip="Move Tax Rate(s) to..."
+           uib-tooltip="Move Tax Rate(s) to..."
            ng-click="cancelEditForm(); generateMovementData()" qt-hide-dropdown="hideMovementDropdown"
            custom-disabled="{{ !quantitySelectTAx }}">
         <i class="icn-sm icn-add-services"></i>
@@ -58,7 +58,7 @@
       <div class="btn btn-info has-tooltip"
            ng-click="showEditTaxForm('create_new')"
            custom-disabled="{{ showCreateTax }}"
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="Add Tax Rate">
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Tax Rate">
         <i class="icn-sm icn-service-add"></i>
       </div>
     </div>

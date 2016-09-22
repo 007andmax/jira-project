@@ -454,6 +454,7 @@ hr {
 .avatar-26 {
   display: inline-block;
   width: 26px;
+  height: 26px;
   background-color: #b2becd;
 }
 .avatar-26.remove:hover {

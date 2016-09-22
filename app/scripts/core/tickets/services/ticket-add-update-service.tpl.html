@@ -27,24 +27,24 @@
                name="serviceDescription" max-length-word="30"/>
       </div>
       <div class="col-4" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
-        <div dropdown>
+        <div uib-dropdown>
           <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
           <input type="text" class="form-control has-dropdown" qt-data-time-picker max-date="maxServiceDate"
-                 dropdown-toggle aria-expanded="false" placeholder="Date"
+                 uib-dropdown-toggle aria-expanded="false" placeholder="Date"
                  ng-model="serviceExpense.date"
                  name="serviceData" ng-required="true">
         </div>
       </div>
       <div style="width: 100px">
         <div class="col-5" ng-if="ticketUpdate.services.length > 1" style="float: left;">
-              <span class="btn btn-primary has-tooltip" tooltip-placement="top" tooltip="Remove"
+              <span class="btn btn-primary has-tooltip" tooltip-placement="top" uib-tooltip="Remove"
                     ng-click="removeService()">
                 <i class="icn-sm icn-remove-token-light"></i>
               </span>
         </div>
 
         <div style="float: left;" ng-if="$last">
-          <div class="btn btn-primary has-tooltip add-expense-btn" tooltip="Add Service" tooltip-placement="top"
+          <div class="btn btn-primary has-tooltip add-expense-btn" uib-tooltip="Add Service" tooltip-placement="top"
                ng-click="addService()">
             <i class="icn-sm icn-plus"></i>
           </div>

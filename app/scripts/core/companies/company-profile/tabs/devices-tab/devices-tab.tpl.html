@@ -64,7 +64,7 @@
             <span class="control-indicator"></span>
           </label>
 
-          <div class="checkbox-caption" tooltip="{{ (agent.hostName | unknownFilter) || agent.ip }}"
+          <div class="checkbox-caption" uib-tooltip="{{ (agent.hostName | unknownFilter) || agent.ip }}"
                trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
             <span trimmed-tooltip-container>{{ (agent.hostName | unknownFilter) || agent.ip }}</span>
           </div>
@@ -82,10 +82,10 @@
       <!--<div class="col-2" ng-show="device.description | unknownFilter">-->
       <!--<div class="device-desc"><span>{{ agent.description }}</span>-->
 
-      <!--<div class="dropdown pull-right" dropdown is-open="dropdownStatus.isOpen">-->
+      <!--<div class="dropdown pull-right" uib-dropdown is-open="dropdownStatus.isOpen">-->
 
       <!--<a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"-->
-      <!--tooltip-placement="top" tooltip="edit" tooltip-append-to-body="true" dropdown-toggle>-->
+      <!--tooltip-placement="top" uib-tooltip="edit" tooltip-append-to-body="true" uib-dropdown-toggle>-->
       <!--<i class="icn-sm icn-edit"></i>-->
       <!--</a>-->
 
@@ -110,10 +110,10 @@
       <!--</div>-->
       <!--</div>-->
 
-      <!--<div class="col-2" dropdown is-open="dropdownStatus.isopen"-->
+      <!--<div class="col-2" uib-dropdown is-open="dropdownStatus.isopen"-->
       <!--ng-hide="device.description | unknownFilter">-->
 
-      <!--<div class="device-desc no-desc-added" dropdown-toggle>-->
+      <!--<div class="device-desc no-desc-added" uib-dropdown-toggle>-->
       <!--<span>Add Description-->
       <!--<i class="icn-sm icn-add-description pull-left"></i>-->
       <!--</span>-->
@@ -144,21 +144,21 @@
         <div class="device-type-icons">
 
           <i ng-show="agent.type === 'workstation'"
-             class="icn-lg icn-computer has-tooltip" tooltip-placement="top" tooltip="Computer"></i>
+             class="icn-lg icn-computer has-tooltip" tooltip-placement="top" uib-tooltip="Computer"></i>
 
           <i ng-show="agent.type === 'mobile'"
-             class="icn-lg icn-mobile has-tooltip" tooltip-placement="top" tooltip="Mobile"></i>
+             class="icn-lg icn-mobile has-tooltip" tooltip-placement="top" uib-tooltip="Mobile"></i>
 
           <i ng-show="agent.type === 'printer'"
-             class="icn-lg icn-printer has-tooltip" tooltip-placement="top" tooltip="Printer"></i>
+             class="icn-lg icn-printer has-tooltip" tooltip-placement="top" uib-tooltip="Printer"></i>
 
           <i ng-show="agent.type === 'server'"
-             class="icn-lg icn-server has-tooltip" tooltip-placement="top" tooltip="Server"></i>
+             class="icn-lg icn-server has-tooltip" tooltip-placement="top" uib-tooltip="Server"></i>
 
-          <!--<i class="icn-lg icn-file-server has-tooltip" tooltip-placement="top" tooltip="File Server"></i>-->
-          <!--<i class="icn-lg icn-mail-server has-tooltip" tooltip-placement="top" tooltip="Mail Server"></i>-->
-          <!--<i class="icn-lg icn-domain-controller has-tooltip" tooltip-placement="top" tooltip="Domain Controller"></i>-->
-          <!--<i class="icn-lg icn-app-server has-tooltip" tooltip-placement="top" tooltip="Application Server"></i>-->
+          <!--<i class="icn-lg icn-file-server has-tooltip" tooltip-placement="top" uib-tooltip="File Server"></i>-->
+          <!--<i class="icn-lg icn-mail-server has-tooltip" tooltip-placement="top" uib-tooltip="Mail Server"></i>-->
+          <!--<i class="icn-lg icn-domain-controller has-tooltip" tooltip-placement="top" uib-tooltip="Domain Controller"></i>-->
+          <!--<i class="icn-lg icn-app-server has-tooltip" tooltip-placement="top" uib-tooltip="Application Server"></i>-->
 
         </div>
       </div>
@@ -183,14 +183,14 @@
 
           <div class="btn btn-default has-tooltip pull-left" append-html-to-body data="deviceReport"
                url="/html/scripts/core/companies/company-profile/tabs/devices-tab/report-device.tpl.html"
-               tooltip-placement="top" tooltip="Open Report" ng-click="getDeviceReport(agent.agentId)">
+               tooltip-placement="top" uib-tooltip="Open Report" ng-click="getDeviceReport(agent.agentId)">
             <i class="icn-sm icn-description"></i>
           </div>
 
-          <div class="more pull-right" dropdown ng-if="agent.online">
+          <div class="more pull-right" uib-dropdown ng-if="agent.online">
 
             <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
-               aria-expanded="false" dropdown-toggle tooltip-placement="top" tooltip="More">
+               aria-expanded="false" uib-dropdown-toggle tooltip-placement="top" uib-tooltip="More">
               <i class="icn-more icn-sm"></i>
             </a>
 
@@ -205,17 +205,17 @@
             </ul>
           </div>
 
-          <div class="pull-right" dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
+          <div class="pull-right" uib-dropdown ng-if="PermissionsService.isAllowed('REMOTE_CONNECTIONS')">
             <div class="btn btn-default pull-left has-tooltip"
                  ng-if="(agent.type !== 'workstation') && agent.online"
-                 ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
+                 ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">
               <i class="icn-sm icn-remote-access"></i>
             </div>
 
             <div class="btn btn-default pull-left has-tooltip"
                  ng-if="(agent.type === 'workstation') && agent.online"
-                 tooltip-placement="top" tooltip="Remote Access"
-                 aria-haspopup="true" aria-expanded="false" dropdown-toggle>
+                 tooltip-placement="top" uib-tooltip="Remote Access"
+                 aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
               <i class="icn-sm icn-remote-access"></i>
             </div>
 
@@ -233,13 +233,13 @@
           </div>
 
           <div class="btn btn-default pull-left has-tooltip" tooltip-placement="top" ng-show="agentDeprecated"
-               tooltip="Update Agent" ng-click="updateAgent()">
+               uib-tooltip="Update Agent" ng-click="updateAgent()">
             <i class="icn-sm icn-attachments-download"></i>
           </div>
 
           <div class="btn btn-default has-tooltip pull-right" ng-click="remove()"
                ng-if="!agent.online && PermissionsService.isAllowed('clients/companyProfile', currentUser.role, 'd_device')"
-               tooltip-placement="top" tooltip="Remove">
+               tooltip-placement="top" uib-tooltip="Remove">
             <i class="icn-sm icn-remove-token"></i>
           </div>
 

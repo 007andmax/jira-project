@@ -249,7 +249,7 @@
     </div>
 
     <div class="pull-right for-network-tab" tooltip-placement="top" tooltip-append-to-body="true"
-         tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
+         uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
       <div class="btn btn-info has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
            custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}"
            data-toggle="dropdown" aria-expanded="false">
@@ -257,10 +257,10 @@
       </div>
     </div>
 
-    <div class="pull-right for-network-tab hide" dropdown is-open="isDropdownOpen">
+    <div class="pull-right for-network-tab hide" uib-dropdown is-open="isDropdownOpen">
 
-      <div class="btn btn-primary has-tooltip" style="width: 94px;margin-right: 10px;" dropdown-toggle
-           tooltip-placement="top" tooltip-append-to-body="true" tooltip="modify logon info">
+      <div class="btn btn-primary has-tooltip" style="width: 94px;margin-right: 10px;" uib-dropdown-toggle
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="modify logon info">
         <i class="icn-sm icn-modify-logon"></i>
       </div>
 
@@ -282,7 +282,7 @@
 
               <a href="javascript:void(0)"
                  class="show-password-hit hit-area ha-18 has-tooltip" ng-click="isShowPass = !isShowPass"
-                 tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"
+                 tooltip-placement="top" uib-tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"
                  tooltip-append-to-body="true">
                 <i class="icn-sm icn-{{ isShowPass ? 'hide' : 'show' }}-password"></i>
               </a>

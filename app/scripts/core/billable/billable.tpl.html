@@ -19,7 +19,7 @@
               <div qt-popover-trigger="mouseenter" style="display: inline-block">
                 <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
                      custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty }}"
-                     tooltip-placement="top" tooltip-append-to-body="true" tooltip="Create Invoice"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Create Invoice"
                      modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
                      modal-window-class="invoice-modal-not-background"
                      mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"
@@ -87,7 +87,7 @@
                     <a href="javascript:void(0)" class="hit-area ha-16-18 lock-icon has-tooltip pull-left"
                        ng-if="ticket.lockedBy" stop-propagation="click"
                        tooltip-placement="top" tooltip-append-to-body="true"
-                       tooltip="{{ getTooltipName(ticket.lockedBy) }}">
+                       uib-tooltip="{{ getTooltipName(ticket.lockedBy) }}">
                       <i class="icn-sm icn-locked-blue"></i>
                     </a>
 

@@ -6,7 +6,7 @@
     <li ng-class="{'active': currentTicketInfoTab === 'COMPANY'}">
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
-         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Company Info"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="Company Info"
          ng-click="currentTicketInfoTab = 'COMPANY'">
         <i class="icn-lg icn-tab-company-info"></i>
       </a>
@@ -16,7 +16,7 @@
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
          ng-click="currentTicketInfoTab = 'DEVICE'"
-         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Devices">
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="Devices">
         <i class="icn-lg icn-tab-devices"></i>
       </a>
     </li>
@@ -24,7 +24,7 @@
     <li ng-class="{'active': currentTicketInfoTab === 'USER'}" ng-show="PermissionsService.isAllowed('VIEW_USERS')">
       <a href="javascript:void(0)" orp-navigation class="has-tooltip"
          tooltip-append-to-body="true" tooltip-popup-delay="200"
-         tooltip-placement="{{ getTooltipPlacemant() }}" tooltip="Users"
+         tooltip-placement="{{ getTooltipPlacemant() }}" uib-tooltip="Users"
          ng-click="currentTicketInfoTab = 'USER'">
         <i class="icn-lg icn-tab-users"></i>
       </a>
@@ -78,13 +78,13 @@
             <a ng-class="{'hide': showPassword}" href="javascript:void(0)"
                class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
                ng-click="showPassword = true" tooltip-placement="top"
-               tooltip="Show Password">
+               uib-tooltip="Show Password">
               <i class="icn-sm icn-hide-password"></i>
             </a>
 
             <a ng-class="{'hide': !showPassword}" href="javascript:void(0)"
                class="hide-password-hit hit-area ha-18 has-tooltip load-agent-password"
-               ng-click="showPassword = false" tooltip-placement="top" tooltip="Hide Password"
+               ng-click="showPassword = false" tooltip-placement="top" uib-tooltip="Hide Password"
                style="position: absolute;right: 12px;">
               <i class="icn-sm icn-show-password"></i>
             </a>
@@ -94,7 +94,7 @@
         </div>
 
         <div tooltip-placement="top" tooltip-append-to-body="true"
-             tooltip="{{ !allowAgentInstall ? 'Maximum installed agent amount reached' : '' }}">
+             uib-tooltip="{{ !allowAgentInstall ? 'Maximum installed agent amount reached' : '' }}">
           <div class="btn btn-lg btn-info download-agent-btn"
                ng-click="downloadAgent()" custom-disabled="{{ !allowAgentInstall }}">
             Download Agent

@@ -5,7 +5,7 @@
      ng-click="deleteRemoteSession(remoteSession.id)"
      style="position: absolute;right: 10px;top: 8px;">
     <i class="icn-sm icn-remove-token"
-       tooltip="Delete remote session" tooltip-append-to-body="true" tooltip-placement="top"></i>
+       uib-tooltip="Delete remote session" tooltip-append-to-body="true" tooltip-placement="top"></i>
   </a>
 
   <div class="support-session-info pull-left">
@@ -50,12 +50,12 @@
 
     </div>
 
-    <div class="action-section-control" dropdown
+    <div class="action-section-control" uib-dropdown
          ng-show="remoteSession.status === 'INSTALLED' && remoteSession.online">
 
       <div class="btn btn-default pull-left has-tooltip"
-           tooltip-placement="top" tooltip="Remote Access"
-           dropdown-toogle aria-haspopup="true" aria-expanded="false" dropdown-toggle>
+           tooltip-placement="top" uib-tooltip="Remote Access"
+           dropdown-toogle aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle>
         <i class="icn-sm icn-remote-access"></i>
       </div>
 
@@ -89,7 +89,7 @@
 
     <div class="device-type-icons">
       <i class="icn-lg icn-computer has-tooltip"
-         data-placement="top" tooltip="Computer"></i>
+         data-placement="top" uib-tooltip="Computer"></i>
       <span class="session-status">{{ statusMap[remoteSession.status] }}</span>
     </div>
 

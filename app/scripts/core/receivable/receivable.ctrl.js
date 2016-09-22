@@ -3,11 +3,16 @@
 (function () {
 
   angular.module('quicktech.core.receivable').controller('quicktech.core.receivable.receivableCtrl',
-    ['$scope', '$state', '$stateParams', 'ReceivableService', 'CompaniesService',
+    ['$scope', '$state', '$stateParams', 'ReceivableService', 'CompaniesService', 'TicketsService',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
-      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, SharedStateService, PermissionsService) {
+      function ($scope, $state, $stateParams, ReceivableService, CompaniesService, TicketsService, SharedStateService, PermissionsService) {
 
         var availableMods = ['group-by-company', 'list'];
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+
+        TicketsService.getCounts($scope, function (resp) {
+          globalSearch.count = resp.RECEIVABLE;
+        });
 
         $scope.PermissionsService = PermissionsService;
         $scope.mode = availableMods[0];

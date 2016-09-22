@@ -2,8 +2,8 @@
 
 (function () {
   angular.module("quicktech.common.directives").directive('editAvatar',
-    ['$modal', 'FilesService', '$rootScope',
-      function ($modal, FilesService, $rootScope) {
+    ['$uibModal', 'FilesService', '$rootScope',
+      function ($uibModal, FilesService, $rootScope) {
 
         var urlGetters = {
           user: $rootScope.getUserAvatarUrl,
@@ -130,7 +130,7 @@
 
               windowScrollTop = wind.scrollTop();
 
-              return $modal.open({
+              return $uibModal.open({
                 animation: true,
                 backdrop: 'static',
                 windowClass: 'modal-customize-avatar',

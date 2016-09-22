@@ -127,6 +127,7 @@
             contacts: [getEmptyContact()],
             companyAssociations: [],
             services: [],
+            clientIndustry: {},
             defaultPaymentMethod: '',
             login: '',
             password: ''
@@ -148,10 +149,6 @@
           });
 
         }
-
-        $scope.$on('$destroy', function () {
-          SharedStateService.clearState('companiesHeader');
-        });
 
         //$scope.addLocation = function () {
         //  $scope.editCompany.addresses.unshift({});

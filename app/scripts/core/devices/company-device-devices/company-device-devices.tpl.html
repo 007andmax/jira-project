@@ -66,10 +66,10 @@
       <!--<div class="col-2" ng-show="device.description | unknownFilter">-->
       <!--<div class="device-desc"><span>{{ agent.description }}</span>-->
 
-      <!--<div class="dropdown pull-right" dropdown is-open="dropdownStatus.isOpen">-->
+      <!--<div class="dropdown pull-right" uib-dropdown is-open="dropdownStatus.isOpen">-->
 
       <!--<a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"-->
-      <!--tooltip-placement="top" tooltip="edit" tooltip-append-to-body="true" dropdown-toggle>-->
+      <!--tooltip-placement="top" uib-tooltip="edit" tooltip-append-to-body="true" uib-dropdown-toggle>-->
       <!--<i class="icn-sm icn-edit"></i>-->
       <!--</a>-->
 
@@ -94,10 +94,10 @@
       <!--</div>-->
       <!--</div>-->
 
-      <!--<div class="col-2" dropdown is-open="dropdownStatus.isopen"-->
+      <!--<div class="col-2" uib-dropdown is-open="dropdownStatus.isopen"-->
       <!--ng-hide="device.description | unknownFilter">-->
 
-      <!--<div class="device-desc no-desc-added" dropdown-toggle>-->
+      <!--<div class="device-desc no-desc-added" uib-dropdown-toggle>-->
       <!--<span>Add Description-->
       <!--<i class="icn-sm icn-add-description pull-left"></i>-->
       <!--</span>-->
@@ -128,21 +128,21 @@
         <div class="device-type-icons">
 
           <i ng-show="agent.type === 'workstation'"
-             class="icn-lg icn-computer has-tooltip" tooltip-placement="top" tooltip="Computer"></i>
+             class="icn-lg icn-computer has-tooltip" tooltip-placement="top" uib-tooltip="Computer"></i>
 
           <i ng-show="agent.type === 'mobile'"
-             class="icn-lg icn-mobile has-tooltip" tooltip-placement="top" tooltip="Mobile"></i>
+             class="icn-lg icn-mobile has-tooltip" tooltip-placement="top" uib-tooltip="Mobile"></i>
 
           <i ng-show="agent.type === 'printer'"
-             class="icn-lg icn-printer has-tooltip" tooltip-placement="top" tooltip="Printer"></i>
+             class="icn-lg icn-printer has-tooltip" tooltip-placement="top" uib-tooltip="Printer"></i>
 
           <i ng-show="agent.type === 'server'"
-             class="icn-lg icn-server has-tooltip" tooltip-placement="top" tooltip="Server"></i>
+             class="icn-lg icn-server has-tooltip" tooltip-placement="top" uib-tooltip="Server"></i>
 
-          <!--<i class="icn-lg icn-file-server has-tooltip" tooltip-placement="top" tooltip="File Server"></i>-->
-          <!--<i class="icn-lg icn-mail-server has-tooltip" tooltip-placement="top" tooltip="Mail Server"></i>-->
-          <!--<i class="icn-lg icn-domain-controller has-tooltip" tooltip-placement="top" tooltip="Domain Controller"></i>-->
-          <!--<i class="icn-lg icn-app-server has-tooltip" tooltip-placement="top" tooltip="Application Server"></i>-->
+          <!--<i class="icn-lg icn-file-server has-tooltip" tooltip-placement="top" uib-tooltip="File Server"></i>-->
+          <!--<i class="icn-lg icn-mail-server has-tooltip" tooltip-placement="top" uib-tooltip="Mail Server"></i>-->
+          <!--<i class="icn-lg icn-domain-controller has-tooltip" tooltip-placement="top" uib-tooltip="Domain Controller"></i>-->
+          <!--<i class="icn-lg icn-app-server has-tooltip" tooltip-placement="top" uib-tooltip="Application Server"></i>-->
 
         </div>
       </div>
@@ -167,13 +167,13 @@
 
           <div class="btn btn-default pull-left has-tooltip"
                ng-show="(agent.type !== 'workstation') && agent.online"
-               ng-click="remoteAccess('PROXY')" tooltip-placement="top" tooltip="Remote Access">
+               ng-click="remoteAccess('PROXY')" tooltip-placement="top" uib-tooltip="Remote Access">
             <i class="icn-sm icn-remote-access"></i>
           </div>
 
           <div class="btn btn-default pull-left has-tooltip"
                ng-show="(agent.type === 'workstation') && agent.online"
-               tooltip-placement="top" tooltip="Remote Access"
+               tooltip-placement="top" uib-tooltip="Remote Access"
                dropdown-toogle aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
             <i class="icn-sm icn-remote-access"></i>
           </div>
@@ -191,19 +191,19 @@
           </ul>
 
           <!--<div class="btn btn-default btn-alert pull-left has-tooltip" ng-click="sendAlert()"-->
-          <!--tooltip-placement="top" tooltip="Send Alert">-->
+          <!--tooltip-placement="top" uib-tooltip="Send Alert">-->
           <!--<i class="icn-sm icn-send-alert"></i>-->
           <!--</div>-->
 
           <!--<div class="btn btn-default btn-spec-report pull-left has-tooltip" ng-click="specReport()"-->
-          <!--tooltip-placement="top" tooltip="Spec. Report">-->
+          <!--tooltip-placement="top" uib-tooltip="Spec. Report">-->
           <!--<i class="icn-sm icn-spec-report"></i>-->
           <!--</div>-->
 
           <div class="more pull-left dropdown" ng-show="agent.online">
 
             <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip" aria-haspopup="true"
-               aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" tooltip="More">
+               aria-expanded="false" data-toggle="dropdown" tooltip-placement="top" uib-tooltip="More">
               <i class="icn-more icn-sm"></i>
             </a>
 
@@ -219,7 +219,7 @@
 
           <div class="btn btn-default pull-left has-tooltip"
                ng-show="!agent.online" ng-click="remove()"
-               tooltip-placement="top" tooltip="Remove" aria-haspopup="true">
+               tooltip-placement="top" uib-tooltip="Remove" aria-haspopup="true">
             <i class="icn-sm icn-remove-token"></i>
           </div>
 

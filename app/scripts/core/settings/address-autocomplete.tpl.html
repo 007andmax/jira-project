@@ -31,7 +31,7 @@
       <div class="control-label" ng-message="correct">Please select address from autocomplete.</div>
     </div>
 
-    <input class="form-control" type="text" popover="Enter the user's full address." ng-required="isAddressRequired"
+    <input class="form-control" type="text" uib-popover="Enter the user's full address." ng-required="isAddressRequired"
            name="address" autocomplete="off" map-input focus-on="{{ focusAddress }}" delay="{{ focusAddress ? 500 : 0 }}"
            popover-placement="bottom" popover-trigger="qtCustomPopover" qt-custom-popover
            make-dirty-on-blur ng-model="model.address" execute-when-outfocused="saveFunc(addressForm)">

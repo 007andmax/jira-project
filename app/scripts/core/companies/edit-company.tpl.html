@@ -145,8 +145,8 @@
                         <label class="control-label" ng-message="maxlength">INDUSTRY IS TOO LARGE.</label>
                       </div>
 
-                      <input type="text" class="form-control" ng-model="editCompany.industryName" name="industry"
-                             ng-maxlength="40" typeahead="industry for industry in industries"
+                      <input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"
+                             ng-maxlength="40" uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
                              autocomplete="off" qt-typeahead-async-show-on-focus>
                     </div>
 
@@ -177,7 +177,7 @@
                       <label>Client Type</label>
 
                       <input type="text" class="form-control" ng-model="editCompany.clientType" name="clientType"
-                             typeahead="clientType for clientType in clientTypes"
+                             uib-typeahead="clientType for clientType in clientTypes"
                              readonly qt-typeahead-async-show-on-focus>
                     </div>
 
@@ -186,7 +186,7 @@
                       <label class="control-label">Service Type</label>
 
                       <input type="text" class="form-control" ng-model="editCompany.serviceType" name="serviceType"
-                             typeahead="serviceType for serviceType in serviceTypes"
+                             uib-typeahead="serviceType for serviceType in serviceTypes"
                              readonly qt-typeahead-async-show-on-focus>
                     </div>
 
@@ -198,7 +198,7 @@
                       <label class="control-label">Default Payment Method</label>
 
                       <input type="text" class="form-control" ng-model="editCompany.defaultPaymentMethod"
-                             name="defaultPaymentMethod" typeahead="paymentMethod for paymentMethod in paymentMethods"
+                             name="defaultPaymentMethod" uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
                              readonly qt-typeahead-async-show-on-focus>
                     </div>
 
@@ -250,13 +250,13 @@
                     <!--<div custom-ng-show-if="$last && editCompany.addresses.length < locationsMaxCount">-->
                     <!--<div class="btn btn-primary has-tooltip pull-right"-->
                     <!--ng-click="removeLocation($index)" cns-else-->
-                    <!--tooltip-placement="top" tooltip="Remove site/location">-->
+                    <!--tooltip-placement="top" uib-tooltip="Remove site/location">-->
                     <!--<i class="icn-sm icn-remove-token"></i>-->
                     <!--</div>-->
 
                     <!--<div class="btn btn-dark has-tooltip pull-right"-->
                     <!--ng-click="addLocation()" ng-show="$last" cns-if-->
-                    <!--tooltip-placement="top" tooltip="Add another site/location">-->
+                    <!--tooltip-placement="top" uib-tooltip="Add another site/location">-->
                     <!--<i class="icn-sm icn-plus"></i>-->
                     <!--</div>-->
                     <!--</div>-->
@@ -400,9 +400,9 @@
 
                       <label class="control-label">Subscribe to</label>
 
-                      <div dropdown>
+                      <div uib-dropdown>
 
-                        <input class="form-control has-dropdown" type="text" value="" dropdown-toggle
+                        <input class="form-control has-dropdown" type="text" value="" uib-dropdown-toggle
                                aria-expanded="false" readonly="readonly">
                         <i class="icn-sm icn-caret-gray"></i>
 
@@ -497,9 +497,9 @@
 
             <h3>Services Info</h3>
 
-            <div class="form-row clearfix" dropdown ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+            <div class="form-row clearfix" uib-dropdown ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
-              <div class="btn btn-lg btn-primary pull-right" dropdown-toggle
+              <div class="btn btn-lg btn-primary pull-right" uib-dropdown-toggle
                    style="margin-top: -47px; width: auto; font-weight: bold;"
                    aria-expanded="false">
                 Add Service
@@ -611,7 +611,7 @@
 
                     <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                        ng-click="deleteService(service.name)" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
-                       tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
                       <i class="icn-sm icn-delete"></i>
                     </a>
 
@@ -637,9 +637,9 @@
 
           <h3>Tax Rates</h3>
 
-          <div class="form-row clearfix" dropdown>
+          <div class="form-row clearfix" uib-dropdown>
 
-            <div class="btn btn-lg btn-primary pull-right" dropdown-toggle
+            <div class="btn btn-lg btn-primary pull-right" uib-dropdown-toggle
                  style="margin-top: -47px; width:auto; font-weight: bold;"
                  aria-expanded="false">
               Add Tax
@@ -702,13 +702,13 @@
 
                 <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                    ng-click="deleteTaxRate(tax.code)"
-                   tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
                   <i class="icn-sm icn-delete"></i>
                 </a>
 
                 <!--<a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"-->
                 <!--ng-click="editTaxRate()"-->
-                <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="edit">-->
+                <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">-->
                 <!--<i class="icn-sm icn-edit"></i>-->
                 <!--</a>-->
 
@@ -758,7 +758,7 @@
                          hard-reset-pattern="taxRateNumberPattern">
 
                   <div class="btn btn-primary has-tooltip" ng-click="cancelTax()" style="margin: 0 8px;"
-                       tooltip-placement="top" tooltip="cancel">
+                       tooltip-placement="top" uib-tooltip="cancel">
                     <i class="icn-sm icn-remove-token"></i>
                   </div>
 
@@ -813,7 +813,7 @@
 
                   <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
                      ng-click="deleteTaxRate(tax.code)" style="top: 12px;"
-                     tooltip-placement="top" tooltip-append-to-body="true" tooltip="Delete">
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
                     <i class="icn-sm icn-delete"></i>
                   </a>
 
@@ -846,7 +846,7 @@
                       <input class="form-control show-password" type="{{ isShowPass ? 'text' : 'password' }}"
                              ng-model="editCompany.password">
                       <a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"
-                         tooltip-placement="top" tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"
+                         tooltip-placement="top" uib-tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"
                          ng-click="isShowPass = !isShowPass">
                         <i class="icn-sm"
                            ng-class="{'icn-hide-password': isShowPass, 'icn-show-password': !isShowPass}"></i>

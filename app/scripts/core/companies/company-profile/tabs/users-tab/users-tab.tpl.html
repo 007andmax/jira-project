@@ -58,7 +58,7 @@
             </div>
 
             <div class="user-name pull-left" trimmed-tooltip="0"
-                 tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
+                 uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
               <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
             </div>
             <span class="label label-light">{{ user.designation }}</span>
@@ -78,9 +78,9 @@
         </div>
 
         <div class="col-3">
-          <div class="user-account-type" dropdown>
+          <div class="user-account-type" uib-dropdown>
 
-            <div class="label-wrapper" aria-expanded="false" dropdown-toggle>
+            <div class="label-wrapper" aria-expanded="false" uib-dropdown-toggle>
             <span>
               {{ user.role }}
             </span>
@@ -105,10 +105,10 @@
           </div>
         </div>
 
-        <div class="col-3-2" dropdown>
+        <div class="col-3-2" uib-dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" dropdown-toggle
-               tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
+               uib-tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
             <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
           </div>
 
@@ -152,7 +152,7 @@
             <!--<div class="dropdown pull-left">-->
 
             <!--<div class="btn btn-default pull-left has-tooltip disabled"-->
-            <!--data-toggle="dropdown" tooltip-placement="top" tooltip="logged in devices">-->
+            <!--data-toggle="dropdown" tooltip-placement="top" uib-tooltip="logged in devices">-->
             <!--<i class="icn-sm icn-user-devices"></i>-->
             <!--</div>-->
 
@@ -166,24 +166,24 @@
 
             <div class="btn btn-default pull-left has-tooltip" ng-click="setEditedUser(user)"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS')"
-                 tooltip-placement="top" tooltip="Edit">
+                 tooltip-placement="top" uib-tooltip="Edit">
               <i class="icn-sm icn-edit"></i>
             </div>
 
             <div class="btn btn-default btn-user-mail pull-left has-tooltip" ng-show="user.primaryEmail"
-                 email-to="user.primaryEmail" tooltip-placement="top" tooltip="Email">
+                 email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
           <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
                ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
                       && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
-               tooltip-placement="top" tooltip="Archive this User">
+               tooltip-placement="top" uib-tooltip="Archive this User">
             <i class="icn-sm icn-remove-token"></i>
           </div>
 
             <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
-            <!--tooltip-placement="top" tooltip="chat" ng-click="startChat()">-->
+            <!--tooltip-placement="top" uib-tooltip="chat" ng-click="startChat()">-->
             <!--<i class="icn-sm icn-user-chat"></i>-->
             <!--</div>-->
 

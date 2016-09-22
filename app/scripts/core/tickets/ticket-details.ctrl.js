@@ -578,6 +578,7 @@
 
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
+              $state.go('tickets');
               $scope.uncheckTicket($scope.ticketDetails.id);
               $scope.ticketClosing = false;
             }, recipientsIds);

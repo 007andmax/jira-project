@@ -1,345 +1,275 @@
 <div>
-  <div class="change-view-actions">
-    <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}" ng-click="changeView('grid')">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/tile-gray.svg">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
+  <div ng-if="!headerSharedState.filter.isVendor">
+    <div class="change-view-actions">
+      <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}" ng-click="changeView('grid')">
+        <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/tile-gray.svg">
+        <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
+      </div>
+      <div class="list-btn view-change-btn" ng-class="{'active': companiesView === 'list'}" ng-click="changeView('list')">
+        <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/list-gray.svg">
+        <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/list-deep-gray.svg">
+      </div>
     </div>
-    <div class="list-btn view-change-btn" ng-class="{'active': companiesView === 'list'}" ng-click="changeView('list')">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/list-gray.svg">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/list-deep-gray.svg">
-    </div>
-  </div>
 
-  <div class="company-profile-content companies-list not-charts-companies-page clearfix" ng-if="companiesView === 'grid'">
-    <!--ng-class="{'not-charts-companies-page': !isChartsAccess()}"-->
+    <div class="company-profile-content companies-list not-charts-companies-page" ng-if="companiesView === 'grid'">
+      <!--ng-class="{'not-charts-companies-page': !isChartsAccess()}"-->
 
-    <!--<div collapse="isCollapsed" class="charts-n-graphs-container">-->
+      <!--<div collapse="isCollapsed" class="charts-n-graphs-container">-->
 
-    <!--<div class="devices-chart">-->
-    <!--<div class="chart-content">-->
-    <!--<div class="chart-circle"></div>-->
-    <!--<ul class="chart-legend">-->
-    <!--<li><i class="circle-indicator blue"></i>Clients</li>-->
-    <!--<li><i class="circle-indicator green"></i>Portable</li>-->
-    <!--<li><i class="circle-indicator yellow"></i>Printers</li>-->
-    <!--<li><i class="circle-indicator orange"></i>Member Servers</li>-->
-    <!--<li><i class="circle-indicator red"></i>Servers</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
+      <!--<div class="devices-chart">-->
+      <!--<div class="chart-content">-->
+      <!--<div class="chart-circle"></div>-->
+      <!--<ul class="chart-legend">-->
+      <!--<li><i class="circle-indicator blue"></i>Clients</li>-->
+      <!--<li><i class="circle-indicator green"></i>Portable</li>-->
+      <!--<li><i class="circle-indicator yellow"></i>Printers</li>-->
+      <!--<li><i class="circle-indicator orange"></i>Member Servers</li>-->
+      <!--<li><i class="circle-indicator red"></i>Servers</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>-->
 
-    <!--<div class="tickets-chart">-->
-    <!--<div class="chart-content">-->
+      <!--<div class="tickets-chart">-->
+      <!--<div class="chart-content">-->
 
-    <!--<div pie-chart ng-show="ticketsResolution.quick || ticketsResolution.delayed"-->
-    <!--pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"-->
-    <!--pie-chart-color="['#1586E4', '#EF6C00']" pie-chart-size="140"></div>-->
+      <!--<div pie-chart ng-show="ticketsResolution.quick || ticketsResolution.delayed"-->
+      <!--pie-chart-value="[ticketsResolution.quick, ticketsResolution.delayed]"-->
+      <!--pie-chart-color="['#1586E4', '#EF6C00']" pie-chart-size="140"></div>-->
 
-    <!--<div ng-hide="ticketsResolution.quick || ticketsResolution.delayed" class="chart-circle"></div>-->
+      <!--<div ng-hide="ticketsResolution.quick || ticketsResolution.delayed" class="chart-circle"></div>-->
 
-    <!--<ul class="chart-legend">-->
-    <!--<li class="legend-heading"><span>Tkt Resolutions</span> All Time</li>-->
-    <!--<li><i class="circle-indicator blue"></i>Quick</li>-->
-    <!--<li><i class="circle-indicator orange"></i>DELAYED</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
+      <!--<ul class="chart-legend">-->
+      <!--<li class="legend-heading"><span>Tkt Resolutions</span> All Time</li>-->
+      <!--<li><i class="circle-indicator blue"></i>Quick</li>-->
+      <!--<li><i class="circle-indicator orange"></i>DELAYED</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>-->
 
-    <!--<div class="stats-charts">-->
-    <!--<div class="service-time-billed">-->
-    <!--<div class="chart-content">-->
-    <!--<div class="chart-circle">-->
-    <!--<i class="icn-lg icn-add-service-white"></i>-->
-    <!--</div>-->
-    <!--<ul class="chart-legend">-->
-    <!--<li class="legend-heading">service time billed</li>-->
-    <!--<li class="legend-stat">{{ timeBilledByCompany.value || 0 }} <span>hrs</span></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
+      <!--<div class="stats-charts">-->
+      <!--<div class="service-time-billed">-->
+      <!--<div class="chart-content">-->
+      <!--<div class="chart-circle">-->
+      <!--<i class="icn-lg icn-add-service-white"></i>-->
+      <!--</div>-->
+      <!--<ul class="chart-legend">-->
+      <!--<li class="legend-heading">service time billed</li>-->
+      <!--<li class="legend-stat">{{ timeBilledByCompany.value || 0 }} <span>hrs</span></li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>-->
 
-    <!--<div class="online-devices">-->
-    <!--<div class="chart-content">-->
-    <!--<div class="chart-circle">-->
-    <!--<i class="icn-lg icn-tab-devices active"></i>-->
-    <!--</div>-->
-    <!--<ul class="chart-legend">-->
-    <!--<li class="legend-heading">online devices</li>-->
-    <!--<li class="legend-stat">0</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+      <!--<div class="online-devices">-->
+      <!--<div class="chart-content">-->
+      <!--<div class="chart-circle">-->
+      <!--<i class="icn-lg icn-tab-devices active"></i>-->
+      <!--</div>-->
+      <!--<ul class="chart-legend">-->
+      <!--<li class="legend-heading">online devices</li>-->
+      <!--<li class="legend-stat">0</li>-->
+      <!--</ul>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
 
-    <!--<div class="simple-chart">-->
-    <!--<div class="chart-wrapper full-width">-->
-    <!--<div class="heading"><strong>Top 10 Companies</strong> <span>Contributed to Earnings</span>-->
-    <!--<span class="label label-success pull-right chart-label">{{ contributedToEarnings | currency: '$':2 }}</span>-->
-    <!--</div>-->
+      <!--<div class="simple-chart">-->
+      <!--<div class="chart-wrapper full-width">-->
+      <!--<div class="heading"><strong>Top 10 Companies</strong> <span>Contributed to Earnings</span>-->
+      <!--<span class="label label-success pull-right chart-label">{{ contributedToEarnings | currency: '$':2 }}</span>-->
+      <!--</div>-->
 
-    <!--<div ng-class="{'hide': contributedToEarnings <= 0}"-->
-    <!--top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'"-->
-    <!--second-gradient-color="'#7BAF3F'"></div>-->
+      <!--<div ng-class="{'hide': contributedToEarnings <= 0}"-->
+      <!--top-companies-charts ng-model="contributedToEarningTopCompanies" first-gradient-color="'#4B9D2B'"-->
+      <!--second-gradient-color="'#7BAF3F'"></div>-->
 
-    <!--<div ng-hide="contributedToEarnings > 0" class="chart"></div>-->
+      <!--<div ng-hide="contributedToEarnings > 0" class="chart"></div>-->
 
-    <!--</div>-->
-    <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
 
-    <!--<div class="simple-chart">-->
-    <!--<div class="chart-wrapper full-width">-->
-    <!--<div class="heading"><strong>Top 10 Companies</strong> <span>Most Tickets Resolved</span>-->
-    <!--<span class="label label-info pull-right chart-label">{{ mostTicketsResolved }} TICKETS</span>-->
-    <!--</div>-->
+      <!--<div class="simple-chart">-->
+      <!--<div class="chart-wrapper full-width">-->
+      <!--<div class="heading"><strong>Top 10 Companies</strong> <span>Most Tickets Resolved</span>-->
+      <!--<span class="label label-info pull-right chart-label">{{ mostTicketsResolved }} TICKETS</span>-->
+      <!--</div>-->
 
-    <!--<div ng-class="{'hide': mostTicketsResolved <= 0}"-->
-    <!--top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'"-->
-    <!--second-gradient-color="'#3AA4E5'"></div>-->
+      <!--<div ng-class="{'hide': mostTicketsResolved <= 0}"-->
+      <!--top-companies-charts ng-model="topCompaniesByResolvedTickets" first-gradient-color="'#1A7DDC'"-->
+      <!--second-gradient-color="'#3AA4E5'"></div>-->
 
-    <!--<div ng-hide="mostTicketsResolved > 0" class="chart"></div>-->
+      <!--<div ng-hide="mostTicketsResolved > 0" class="chart"></div>-->
 
-    <!--</div>-->
-    <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
 
-    <!--</div>-->
+      <!--</div>-->
 
-    <!--<div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">-->
-    <!--<span><i class="icn-sm icn-collapse"></i></span>-->
-    <!--</div>-->
+      <!--<div class="collapse-charts" ng-click="toggleCollapsed()" ng-class="{'hide': isCollapsed}">-->
+      <!--<span><i class="icn-sm icn-collapse"></i></span>-->
+      <!--</div>-->
 
-    <!--<div class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">-->
-    <!--<p class="pull-left">Expand to view overall statistics</p>-->
-    <!--<i class="icn-sm icn-expand pull-right"></i>-->
-    <!--</div>-->
+      <!--<div class="expand-charts" ng-click="toggleCollapsed()" ng-class="{'hide': !isCollapsed}">-->
+      <!--<p class="pull-left">Expand to view overall statistics</p>-->
+      <!--<i class="icn-sm icn-expand pull-right"></i>-->
+      <!--</div>-->
 
-    <div class="company-card clearfix"
-         ui-sref="companyProfile({ companyId: company.id, tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' })"
-         ng-repeat="company in companies | orderBy: 'name' track by company.id"
-         ng-controller="quicktech.core.companies.companyCtrl"
-         ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
+      <div class="company-card"
+           ui-sref="companyProfile({ companyId: company.id })"
+           ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: 'name')) track by company.id"
+           ng-controller="quicktech.core.companies.companyCtrl"
+           ng-class="{'large': location.length > 50}">
 
-      <div class="company-cover-area"
-           ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') center no-repeat', 'background-size': 'cover'}">
+        <div class="company-cover-area"
+             ng-style="{'background':'url(' + getCompanyLogoUrl(company) + ') center no-repeat', 'background-size': 'cover'}">
 
-        <div class="hover-logo">
-          <div class="logo-control" stop-propagation="click">
-            <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
+          <div class="hover-logo">
+            <div class="logo-control" stop-propagation="click">
+              <div control-logo ng-model="company.logo" model-name="company" model-id="{{ company.id }}"></div>
+            </div>
+          </div>
+          <div class="name-rating">
+
+            <div class="company-name" uib-tooltip="{{ company.name }}" tooltip-enable="{{ isShowTooltip[0]() }}"
+                 trimmed-tooltip="0">
+              <span trimmed-tooltip-container>{{ company.name }}</span>
+            </div>
+
           </div>
         </div>
 
-        <!--<div class="btn btn-archive has-tooltip" stop-propagation="click" style="position: absolute"-->
-        <!--ng-show="currentUser.role === 'SUPER_TECH_ADMIN'" ng-click="archiveCompany(company.id)"-->
-        <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Archive Company">-->
-        <!--<i class="icn-sm icn-archive-company"></i>-->
-        <!--</div>-->
-        <ul class="rating rating-5 clearfix">
-          <!--<li class="icn-sm icn-star-full star-1"></li>-->
-          <!--<li class="icn-sm icn-star-full star-2"></li>-->
-          <!--<li class="icn-sm icn-star-full star-3"></li>-->
-          <!--<li class="icn-sm icn-star-half star-4"></li>-->
-          <!--<li class="icn-sm icn-star-empty star-5"></li>-->
+        <div class="company-primary-contact">
+          <div class="user-location"><i class="icn-sm icn-sb-location"></i>
+            <span class="company-address-formatting">{{ location }}</span>
+          </div>
+          <div class="user-contact-no">
+            <i class="icn-sm {{ getPhoneNumberCssClass(primaryPhone) }}"></i>{{ primaryPhone.number }}
+          </div>
+          <div class="user-info">
+
+            <div class="name-designation">
+
+              <h4 uib-tooltip="{{ getUserName(primaryContact) }}" tooltip-enable="{{ isShowTooltip[1]() }}"
+                  trimmed-tooltip="1">
+                <span trimmed-tooltip-container>{{ getUserName(primaryContact) }}</span>
+              </h4>
+
+              <span class="label label-light">{{ primaryContact.designation }}</span>
+            </div>
+          </div>
+        </div>
+        <ul class="company-numbers">
+          <li><span>Tickets</span>{{ company.companyStatistic.ticketsSubmitted || '0' }}</li>
+          <li><span>Users</span>{{ companyComponentsCount.users.length || '0' }}</li>
+          <li><span>Devices</span>{{ devicesCount[company.id].all || '0' }}</li>
         </ul>
-
-        <div class="name-rating">
-
-          <div class="company-name" tooltip="{{ company.name }}" tooltip-enable="{{ isShowTooltip[0]() }}"
-               trimmed-tooltip="0">
-            <span trimmed-tooltip-container>{{ company.name }}</span>
-          </div>
-
-
-          <!--<i class="dot-sep"></i>-->
-
-          <!--<a href="javascript:void(0)" class="hit-area ha-14-16" stop-propagation="click"-->
-          <!--custom-popover custom-popover-content="{{ company.description }}"-->
-          <!--custom-popover-placement="bottom" custom-popover-first-left="25">-->
-          <!--<i class="icn-sm icn-description-white companies-new"></i></a>-->
-
-          <!--<div class="dropdown pull-left">-->
-
-          <!--<a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip" data-toggle="dropdown"-->
-          <!--aria-expanded="false" tooltip-placement="top" tooltip-append-to-body="true"-->
-          <!--tooltip="{{ company.cover && company.cover.id ? 'change cover' : 'add cover photo' }}">-->
-          <!--<i class="icn-md icn-cover"></i>-->
-          <!--</a>-->
-
-          <!--<ul class="dropdown-menu">-->
-
-          <!--<li role="presentation">-->
-          <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
-          <!--Upload Photo...-->
-          <!--</a>-->
-          <!--</li>-->
-
-          <!--<li role="presentation">-->
-          <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
-          <!--Restore Default Photo...-->
-          <!--</a>-->
-          <!--</li>-->
-
-          <!--<li role="presentation">-->
-          <!--<a role="menuitem" tabindex="-1" href="javascript:void(0)">-->
-          <!--Reposition...-->
-          <!--</a>-->
-          <!--</li>-->
-
-          <!--</ul>-->
-          <!--</div>-->
-
-          <!--<a href="javascript:void(0)" class="hit-area has-tooltip" stop-propagation="click"-->
-          <!--ng-hide="currentUser.role !== 'SUPER_TECH_ADMIN' && currentUser.role !== 'ADMIN'"-->
-          <!--ui-sref="editCompany( { companyId: company.id } )"-->
-          <!--tooltip-placement="top" tooltip="Edit Company info">-->
-          <!--<i class="icn-md icn-edit-tag companies-new"></i>-->
-          <!--</a>-->
-
-        </div>
       </div>
 
-      <div class="company-primary-contact">
-        <div class="user-location"><i class="icn-sm icn-sb-location"></i>
-          <span class="company-address-formatting">{{ location }}</span>
-        </div>
-        <div class="user-contact-no">
-          <i class="icn-sm {{ getPhoneNumberCssClass(primaryPhone) }}"></i>{{ primaryPhone.number }}
-        </div>
-        <div class="user-info">
-
-          <!--<div class="avatar">-->
-          <!--<img ng-src="{{ getUserAvatarUrl(primaryContact) }}" alt="..." class="img-circle avatar-50">-->
-          <!--</div>-->
-
-          <div class="name-designation">
-
-            <h4 tooltip="{{ getUserName(primaryContact) }}" tooltip-enable="{{ isShowTooltip[1]() }}"
-                trimmed-tooltip="1">
-              <span trimmed-tooltip-container>{{ getUserName(primaryContact) }}</span>
-            </h4>
-
-            <span class="label label-light">{{ primaryContact.designation }}</span>
-
-            <!--<div class="icn-sm persistent-tooltip {{ getUserSubscribeClass() }}"-->
-            <!--tooltip-append-to-body="true"-->
-            <!--tooltip-placement="top" tooltip="{{ getUserSubscribeTooltip() }}"></div>-->
-          </div>
-        </div>
-
-
-        <!--<div class="user-actions" stop-propagation="clack">-->
-
-        <!--<div class="btn btn-info has-tooltip"-->
-        <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Email">-->
-        <!--<i class="icn-sm icn-email-white"></i>-->
-        <!--</div>-->
-
-        <!--<div class="btn btn-default has-tooltip"-->
-        <!--tooltip-placement="top" tooltip-append-to-body="true" tooltip="Chat">-->
-        <!--<i class="icn-sm icn-user-chat"></i>-->
-        <!--</div>-->
-
-        <!--</div>-->
-      </div>
-      <ul class="company-numbers clearfix">
-        <li><span>Tickets</span>{{ company.companyStatistic.ticketsSubmitted || '0' }}</li>
-        <li><span>Users</span>{{ companyComponentsCount.users.length || '0' }}</li>
-        <li><span>Devices</span>{{ devicesCount[company.id].all || '0' }}</li>
-      </ul>
     </div>
 
-  </div>
+    <ul class="qt-list" style="margin-bottom: 150px; padding: 0 25px;" ng-if="companiesView === 'list'">
 
-  <ul class="qt-list" style="margin-bottom: 150px; padding: 0 25px;" ng-if="companiesView === 'list'">
-
-    <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
-      <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
+      <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
+        <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
       <span class="sort-span">
         Name
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
       </span>
-      </div>
+        </div>
 
-      <div class="col-xs-2" ng-click="setOrderByCompanies('phone')">
+        <div class="col-xs-2" ng-click="setOrderByCompanies('phone')">
       <span class="sort-span">
       Contact No.
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'phone'}"></i>
       </span>
-      </div>
-      <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
+        </div>
+        <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
       <span class="sort-span">
         Email Address
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'email'}"></i>
       </span>
-      </div>
-      <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
+        </div>
+        <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
       <span class="sort-span">
         Primary Contact
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'contact'}"></i>
       </span>
-      </div>
-      <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
+        </div>
+        <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
       <span class="sort-span">
         Tickets
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
       </span>
-      </div>
-      <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
+        </div>
+        <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
       <span class="sort-span">
         Devices
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
       </span>
-      </div>
-      <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
+        </div>
+        <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
       <span class="sort-span">
         Users
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
       </span>
-      </div>
-    </li>
+        </div>
+      </li>
 
-    <li class="list-company-row" ng-repeat="company in companies | orderBy: orderByForCompanies: orderCompanies.reverse track by company.id"
-        ng-controller="quicktech.core.companies.companyCtrl"
-        ui-sref="companyProfile({ companyId: company.id, tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' })">
-      <div class="col-xs-3">
-        <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="">
-        <span class="list-company-name">{{ company.name }}</span>
-        <span style="display: flex;">{{ location }}</span>
-      </div>
-      <div class="col-xs-2">
-        <span>{{ primaryPhone.number || '' }}</span>
-      </div>
-      <div class="col-xs-2">
-        <span>{{ primaryContact.primaryEmail }}</span>
-      </div>
-      <div class="col-xs-2">
-        <span>{{ getUserName(primaryContact) }}</span>
-      </div>
-      <div class="col-xs-1">
-        <div create-ticket-open-modal="{{ company.id }}" style="display: inline-block;"
-             tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
-          <span><i class="nav-icon icn-lg icn-unassigned" style="margin: 0;"></i></span>
-          <span class="badge badge-primary-outline list-company-badge">{{ company.companyStatistic.ticketsSubmitted || '0' }}</span>
+      <li class="list-company-row"
+          ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
+          ng-controller="quicktech.core.companies.companyCtrl"
+          ui-sref="companyProfile({ companyId: company.id })">
+        <div class="col-xs-3">
+          <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="">
+          <span class="list-company-name">{{ company.name }}</span>
+          <span style="display: flex;">{{ location }}</span>
         </div>
-      </div>
-      <div class="col-xs-1">
-        <div style="display: inline-block;">
-          <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
-          <span class="badge badge-primary-outline list-company-badge">{{ devicesCount[company.id].all || '0' }}</span>
+        <div class="col-xs-2">
+          <span>{{ primaryPhone.number || '' }}</span>
         </div>
-      </div>
-      <div class="col-xs-1">
-        <div ng-click="createUser(company.id)" style="display: inline-block;">
-          <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
-          <span class="badge badge-primary-outline list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
+        <div class="col-xs-2">
+          <span>{{ primaryContact.primaryEmail }}</span>
         </div>
-      </div>
-    </li>
-  </ul>
+        <div class="col-xs-2">
+          <span>{{ getUserName(primaryContact) }}</span>
+        </div>
+        <div class="col-xs-1">
+          <div create-ticket-open-modal="{{ company.id }}" style="display: inline-block;"
+               uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
+            <span><i class="nav-icon icn-lg icn-unassigned" style="margin: 0;"></i></span>
+            <span class="badge badge-primary-outline list-company-badge">{{ company.companyStatistic.ticketsSubmitted || '0' }}</span>
+          </div>
+        </div>
+        <div class="col-xs-1">
+          <div style="display: inline-block;">
+            <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
+            <span class="badge badge-primary-outline list-company-badge">{{ devicesCount[company.id].all || '0' }}</span>
+          </div>
+        </div>
+        <div class="col-xs-1">
+          <div ng-click="createUser(company.id)" style="display: inline-block;">
+            <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
+            <span class="badge badge-primary-outline list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
 
+  </div>
+  <div ng-if="headerSharedState.filter.isVendor">
+    <div class="company-profile-content companies-list" style="margin-top: 30px">
+
+      <div class="company-card"
+           ng-repeat="vendor in (companiesCtrl.shownVendors = (vendors | filter : filterCompanies | orderBy: 'name')) track by vendor.id"
+           ng-include="'/html/scripts/core/vendors/vendor.tpl.html'"  style="height: auto; cursor: default">
+      </div>
+
+    </div>
+  </div>
 </div>

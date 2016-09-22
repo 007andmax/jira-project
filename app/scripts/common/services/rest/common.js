@@ -56,7 +56,7 @@
               config.params = {};
             }
 
-            if (window.qtBuildDate !== 'dateOfLastBuild' && config.url.indexOf('template/') !== 0) {
+            if (window.qtBuildDate !== 'dateOfLastBuild' && config.url.indexOf('uib/') !== 0) {
               config.params.t = window.qtBuildDate;
             } else if (!(config.url.indexOf('.html') >= 0)) {
               config.params.t = new Date().getTime();

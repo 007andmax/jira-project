@@ -19,7 +19,7 @@
         $scope.isCollapsedGraph = true;
         $scope.isScanDevicesLoad = false; // change in services
         if (tabs.indexOf($stateParams.tabName) === -1) {
-          $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
+          $state.go('companyProfile', { tabName: 'devices' });
         }
         $scope.orderScanBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';

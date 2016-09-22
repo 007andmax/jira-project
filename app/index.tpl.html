@@ -61,6 +61,7 @@
   <link rel='stylesheet' href='styles/left-panel.css'/>
   <link rel='stylesheet' href='styles/agent-install.css'/>
   <link rel='stylesheet' href='styles/report-device-name.css'/>
+  <link rel='stylesheet' href='styles/datepicker.css'/>
    <!-- endbuild -->
 
   <script src="../configs.js"></script>
@@ -136,13 +137,14 @@
 <!-- build:js({.,app}) scripts/vendor.js -->
 <script src="/bower_components/jquery/dist/jquery.js"></script>
 <script src="/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
 <script src="/bower_components/angular-messages/angular-messages.js"></script>
 <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="/bower_components/angular-ui-select/dist/select.min.js"></script>
-<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="/bower_components/angular-ui-select/dist/select.js"></script>
+<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/tether/dist/js/tether.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/bower_components/bootstrap-tokenfield/dist/bootstrap-tokenfield.js"></script>
 <script src="/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js"></script>
@@ -151,8 +153,8 @@
 <script src="/bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
 <script src="/bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
 <script src="/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js"></script>
-<script src="/bower_components/sockjs-client/dist/sockjs.min.js"></script>
-<script src="/bower_components/stomp-websocket/lib/stomp.min.js"></script>
+<script src="/bower_components/sockjs-client/dist/sockjs.js"></script>
+<script src="/bower_components/stomp-websocket/lib/stomp.js"></script>
 <script src="/bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <!--<script src="/bower_components/quicktech-angularjs-services/rest-services.js"></script>-->
 <script src="scripts/js/vendors/jquery.jscrollpane.js"></script>
@@ -168,6 +170,8 @@
 <script src="scripts/js/vendors/jquery.productAutocomplete.js"></script>
 <script src="scripts/js/vendors/md5-min.js"></script>
 <script src="scripts/js/vendors/nouislider.min.js"></script>
+<script src="scripts/js/vendors/date-range-picker/datepicker.js"></script>
+<script src="scripts/js/vendors/date-range-picker/datepicker.en.js"></script>
 <!-- endbuild -->
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&language=en"></script>
