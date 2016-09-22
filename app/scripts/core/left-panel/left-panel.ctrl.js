@@ -8,14 +8,17 @@
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
-          globalSearch = SharedStateService.getSharedState('globalSearch'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
           companiesSharedState = SharedStateService.getSharedState('companiesHeader');
 
-        $scope.globalSearch = globalSearch;
+        $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
         $scope.qSHistoryExpanded = false;
+
+        //for one time popover
+        $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
+        $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
 
@@ -160,6 +163,23 @@
           }
         });
 
+        //for one time popover
+        $scope.initCompanyStatusWatch = function (hidePopoverFunc) {
+          var unwatch = $scope.$watch('currentCompany.status', function (newValue, oldValue) {
+            if (newValue === 'ACTIVE' && oldValue === 'SIGN_UP') {
+              hidePopoverFunc && hidePopoverFunc();
+              unwatch();
+            }
+          });
+
+          var unsubscribe = $scope.$on('$locationChangeStart', function () {
+            if ($scope.currentCompany.status === 'SIGN_UP') {
+              $scope.changeCompanyStatusToActive();
+              unsubscribe();
+            }
+          })
+        };
+
         function clearFilter(sharedFilter) {
           for (var prop in sharedFilter) {
             sharedFilter[prop] = false;
@@ -169,7 +189,7 @@
             $scope.clearDateRange();
           }
 
-          globalSearch.searchValue = '';
+          SharedStateService.getSharedState('globalSearch').searchValue = '';
         }
 
         function getOpenedCategory(url) {
