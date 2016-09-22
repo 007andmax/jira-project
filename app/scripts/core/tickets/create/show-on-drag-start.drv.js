@@ -12,6 +12,13 @@
         var dragTimer, dropArea = element.find('.drop-area');
         element.hide();
 
+        $timeout(function () {
+          var teEditor = $document.find('[te-editor]');
+          if (teEditor.length) {
+            teEditor.off('dragover');
+          }
+        });
+
         $document.on('dragover', onDragOver);
         $document.on('dragleave', onDragLeave);
         $document.on('drop', preventDropDefault);
