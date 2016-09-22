@@ -109,6 +109,10 @@
               if (!value && $scope.clearDateRange) {
                 $scope.clearDateRange();
               } else {
+                var endDate = value[1];
+                if (endDate) {
+                  value[1] = new Date(endDate.setHours(23, 59, 59));
+                }
                 sharedFilter.dateRange = value;
               }
               break;
