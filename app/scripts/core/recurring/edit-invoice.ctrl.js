@@ -466,12 +466,12 @@
 
           if ($scope.editInvoice.services.length === 1 && isEmpty($scope.editInvoice.services[0])) {
             $scope.editInvoice.services.splice(0, 1);
-            productsEmpty = true;
+            servicesEmpty = true;
           }
 
           if ($scope.editInvoice.products.length === 1 && isEmpty($scope.editInvoice.products[0])) {
             $scope.editInvoice.products.splice(0, 1);
-            servicesEmpty = true;
+            productsEmpty = true;
           }
 
           $timeout(function () {
