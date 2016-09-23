@@ -43,6 +43,11 @@
             //  dropdown.css({'left': '95px'})
             //});
 
+            element.bind('dp.show', function (e) {
+              element.parent().find('.datepicker').removeClass('datepicker');
+            });
+
+
             element.bind('dp.change', function (e) {
               ctrl.$setViewValue(e.date._d);
             });

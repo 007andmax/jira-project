@@ -89,6 +89,10 @@
                 dp.data("DateTimePicker").enabledDates(enabledDates);
               }
             });
+            
+            element.bind('dp.show', function (e) {
+              element.parent().find('.datepicker').removeClass('datepicker');
+            });
 
             function getEnabledDates(start, period) {
               var dates = [],
