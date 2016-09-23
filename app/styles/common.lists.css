@@ -83,7 +83,7 @@
 }
 .qt-list li.list-heading {
   height: auto;
-  padding: 28px 0;
+  padding: 28px 15px;
 
   cursor: auto !important;
 }
@@ -936,7 +936,7 @@ Devices tab
 
   width: 100%;
   margin-top: 25px;
-  padding: 0 0 0 26px;
+  padding-left: 15px;
 }
 .qt-invoices .lock-icon {
   position: absolute;
@@ -1044,9 +1044,11 @@ Devices tab
   height: auto;
   padding: 25px 0;
 }
+.qt-invoices > li:nth-child(even){
+  background-color: #e9f5fb;
+}
 .qt-invoices > li + li {
   height: auto;
-  min-height: 71px;
 }
 .qt-invoices > li:before {
   left: -56px;
@@ -1576,7 +1578,7 @@ Devices tab
   margin-top: 12px;
 }
 .qt-receipt-archive .qt-invoices > li {
-  padding: 16px 0;
+  padding: 15px;
 
   cursor: auto;
 }
