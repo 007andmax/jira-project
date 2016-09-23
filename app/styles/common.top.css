@@ -19,8 +19,7 @@
 }
 
 .topNavbarLeft {
-/*  width: 100%;
-  padding-right: 310px;*/
+  min-width: 105px;
   display: flex;
   -ms-align-items: center;
   align-items: center;

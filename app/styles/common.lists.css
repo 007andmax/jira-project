@@ -3,7 +3,7 @@
 
   width: 100%;
   margin: 0;
-  padding: 30px 30px 0;
+  padding: 30px 10px;
 
   list-style: none;
 }
@@ -18,7 +18,7 @@
 
   width: 100%;
   height: 70px;
-  padding: 16px 0;
+  padding: 15px;
 }
 .qt-list > li:before,
 .qt-list > li:after {
@@ -1428,6 +1428,9 @@ Devices tab
 
   cursor: pointer;
 }
+.qt-receivable-number > li:nth-child(even){
+  background-color: #e9f5fb;
+}
 
 .qt-receivable-number > li > .col-1 {
   width: 120px;
@@ -1849,7 +1852,7 @@ Devices tab
 .qt-product-list {
   position: relative;
 
-  padding: 0 0 1px 26px;
+  padding: 0;
 
   cursor: auto;
   text-align: center;
@@ -2155,10 +2158,13 @@ Devices tab
   width: 92px;
 }
 .qt-default-services {
-  padding: 16px 0 30px 26px;
+  padding: 16px 0 26px;
 }
 .qt-default-services > li {
   cursor: pointer;
+}
+.qt-default-services > li:nth-child(even) {
+  background-color: #e9f5fb;
 }
 .qt-default-services > li:before {
   left: -56px;
@@ -2311,6 +2317,9 @@ Devices tab
 
   cursor: pointer;
 }
+/*.qt-services > li:nth-child(even) {*/
+  /*background-color: #e9f5fb;*/
+/*}*/
 .qt-services > li + li {
   height: auto;
   min-height: 71px;
@@ -2390,13 +2399,22 @@ Devices tab
     line-height: 11px;
   }
 }
-.qt-list li:nth-child(even){
+.qt-users li:nth-child(even){
+  background-color: #e9f5fb;
+}
+.list-company-row:nth-child(even){
+  background-color: #e9f5fb;
+}
+.qt-product-list > li:nth-child(even){
   background-color: #e9f5fb;
 }
 /**Devices**/
 .qt-devices {
-  padding: 60px 0 0;
+  padding: 60px 10px 0;
 }
+.qt-devices > li:nth-child(even){
+    background-color: #e9f5fb;
+  }
 .qt-devices .list-heading > div[ng-click] {
   cursor: pointer;
 }
@@ -2559,8 +2577,8 @@ Devices tab
   padding-left: 0;
 }
 .qt-devices .device-status {
-  top: 15px;
-  left: -19px;
+  top: 17px;
+  left: -5px;
 }
 .qt-devices .device-user-name a {
   display: inline-block;
