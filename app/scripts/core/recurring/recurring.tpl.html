@@ -116,7 +116,7 @@
                 </div>
                 <div>{{ invoice.generatedCount }}</div>
                 <!--<div class="numbs">{{ invoice.number }}</div>-->
-                <div>
+                <div style="display: flex; align-items: center">
                   <span class="currency-invoice">
                     {{ invoice.total | currency:'$':2 }}
                   </span>
@@ -127,22 +127,24 @@
                                                    label="Force Create" loading="forceCreating[invoice.id]"
                                                    ng-click="forceCreate(invoice.id)"></button-with-loading-indicator>
 
-                    <a>
-                      <i class="icn-sm icn-description"
-                         uib-popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom"
-                         popover-trigger="mouseenter"></i>
-                    </a>
+                    <div>
+                      <a>
+                        <i class="icn-sm icn-description"
+                           uib-popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom"
+                           popover-trigger="mouseenter"></i>
+                      </a>
 
-                    <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE') && !isCurrentCompanyAddressEmpty">
-                      <i class="icn-sm icn-edit" uib-tooltip="edit" tooltip-placement="top"
-                         tooltip-append-to-body="true"
-                         ng-click="toogleEditForm(invoice.id)"></i>
-                    </a>
+                      <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE') && !isCurrentCompanyAddressEmpty">
+                        <i class="icn-sm icn-edit" uib-tooltip="edit" tooltip-placement="top"
+                           tooltip-append-to-body="true"
+                           ng-click="toogleEditForm(invoice.id)"></i>
+                      </a>
 
-                    <a custom-disabled="{{ disabledDelete }}">
-                      <i class="icn-sm icn-delete"
-                         uib-tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
-                         ng-click="deleteRecurringInvoice()"></i></a>
+                      <a custom-disabled="{{ disabledDelete }}">
+                        <i class="icn-sm icn-delete"
+                           uib-tooltip="delete" tooltip-placement="top" tooltip-append-to-body="true"
+                           ng-click="deleteRecurringInvoice()"></i></a>
+                    </div>
                   </div>
 
                 </div>

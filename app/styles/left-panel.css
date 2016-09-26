@@ -248,9 +248,9 @@
 }
 .filter .form-control.readonly-normal:focus,
 .filter .form-control.readonly-normal:active {
-  background-color: #e9f5fb;
+  background: #33404c;
   box-shadow: inset 3px 3px 10px 0px rgba(0,0,0,0.35);
-  color: #000;
+  color: #fff;
 }
 .filter .dropdown-menu li {
   color: #000000;

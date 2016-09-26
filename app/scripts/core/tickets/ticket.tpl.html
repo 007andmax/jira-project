@@ -42,7 +42,7 @@
     <div class="ticket-title ellipsis clearfix">
       <p class="pull-left ellipsis"><strong>{{ ticket.number + ' - ' + ticket.subject }}</strong>
       </p>
-      <span class="text-muted ellipsis">{{ ticket.previewNote }}</span>
+      <span class="text-muted ellipsis">{{ ticket.previewNote || '&nbsp;' }}</span>
       <a href="javascript:void(0)" class="ticket-list-attachment pull-right"
          ng-show="ticket.hasAttachments === true">
         <i class="icn-sm icn-ticket-list-attachment"></i>

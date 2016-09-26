@@ -367,7 +367,6 @@
 
   width: 12%;
   margin-right: 0.5%;
-  padding: 10px 0;
 
   text-align: center;
 
@@ -517,11 +516,10 @@ ul.qt-recurring-invoices {
   width: 40%;
 }
 .invoice-table .table-invoice-item div div.currency-icons {
-  display: inline-block;
-  float: right;
-
   width: 60%;
-  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .invoice-table .table-invoice-item div div.currency-icons .btn {
   font-size: 12px;
@@ -530,7 +528,6 @@ ul.qt-recurring-invoices {
   display: inline-block;
 
   width: 75px;
-  margin-top: -9px;
   padding: 0 5px;
 
   text-align: center;

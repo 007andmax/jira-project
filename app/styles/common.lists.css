@@ -35,6 +35,10 @@
 
   background-color: #e7ecf2;
 }
+.table-invoice-item{
+  display: flex;
+  align-items: center;
+}
 .qt-list > li:before {
   left: -30px;
 

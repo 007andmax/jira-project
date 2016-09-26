@@ -9267,13 +9267,12 @@ button.close {
   font-size: 14px;
 }
 .popover-content {
-  padding: 20px;
+  /*padding: 20px;*/
   white-space: nowrap;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
   width:auto !important;
-}
 }
 .location-popover .popover-content {
   padding: 0;
