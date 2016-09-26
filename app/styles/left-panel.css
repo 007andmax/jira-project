@@ -28,10 +28,10 @@
   color: #ffffff;
 }
 .left-panel__category:hover {
-  background-color: rgba(31, 42, 55, 0.5);
+  background-color: rgb(51, 64, 76);
 }
 .left-panel .active {
-  background-color: #182734;
+  background-color: rgb(51, 64, 76);
 }
 .left-panel-full {
   position: fixed;
@@ -243,11 +243,14 @@
 .filter .form-control.readonly-normal{
   border: transparent;
   border-radius: 2px;
+  background: #33404c;
+  color: #fff;
 }
 .filter .form-control.readonly-normal:focus,
 .filter .form-control.readonly-normal:active {
   background-color: #e9f5fb;
   box-shadow: inset 3px 3px 10px 0px rgba(0,0,0,0.35);
+  color: #000;
 }
 .filter .dropdown-menu li {
   color: #000000;

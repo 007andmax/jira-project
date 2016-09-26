@@ -53,13 +53,13 @@ body.non-body-scroll::-webkit-scrollbar {
   position: relative;
 }
 
-.qt-list > li > .intermediate-parent-elem > [class*="col-"]:first-child {
-  padding-left: 25px;
-}
+/*.qt-list > li > .intermediate-parent-elem > [class*="col-"]:first-child {*/
+  /*padding-left: 25px;*/
+/*}*/
 
-.qt-list > li > .intermediate-parent-elem > [class*="col-"]:last-child {
-  padding-right: 25px;
-}
+/*.qt-list > li > .intermediate-parent-elem > [class*="col-"]:last-child {*/
+  /*padding-right: 25px;*/
+/*}*/
 
 .qt-product-list > li > .intermediate-parent-elem > .col-1 {
   height: 18px;
