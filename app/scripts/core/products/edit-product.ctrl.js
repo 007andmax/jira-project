@@ -49,11 +49,12 @@
               var isIlcChange = $scope.editProduct.ilc != $scope.product.ilc;
               var isManufactureChange = $scope.editProduct.manufacture != $scope.product.manufacture;
               var isDescriptionChange = $scope.editProduct.description != $scope.product.description;
+              var isCategoryChange = ($scope.editProduct.category && $scope.editProduct.category.id) !== ($scope.product.category && $scope.product.category.id);
               var isVendorChange = ($scope.editProduct.vendor && $scope.editProduct.vendor.id) !== ($scope.product.vendor && $scope.product.vendor.id);
               var isCostChange = $scope.editProduct.cost != $scope.product.cost;
               var isSaleChange = $scope.editProduct.sale != $scope.product.sale;
 
-              if (!(isIlcChange || isManufactureChange || isDescriptionChange || isVendorChange || isCostChange || isSaleChange)) {
+              if (!(isIlcChange || isManufactureChange || isDescriptionChange || isCategoryChange || isVendorChange || isCostChange || isSaleChange)) {
                 $rootScope.$broadcast('cancelEditForm', 'isProductCreation');
                 return;
               }
