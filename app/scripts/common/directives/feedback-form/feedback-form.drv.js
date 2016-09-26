@@ -15,7 +15,7 @@
               if (e.target === element[0]) {
                 element.toggleClass('close');
                 scope.formShown = !scope.formShown;
-                init(scope);
+                init(scope, scope.feedbackForm);
                 scope.$apply();
               }
             });
@@ -43,7 +43,6 @@
             }
           },
           controller: function ($scope) {
-            var feedbackForm;
             $scope.types = {
               BUG: 'Bug',
               FEATURE: 'Feature',
@@ -86,9 +85,9 @@
                     };
 
                     $scope.fileInfo.quantityErrorFiles++;
-                    feedbackForm.$setValidity('errorFile', false);
+                    $scope.feedbackForm.$setValidity('errorFile', false);
                   } else {
-                    feedbackForm.$setValidity('errorFile', true);
+                    $scope.feedbackForm.$setValidity('errorFile', true);
                   }
 
                   file.id = finish.id;
@@ -126,7 +125,7 @@
             };
 
             $scope.saveForm = function (form) {
-              feedbackForm = form;
+              $scope.feedbackForm = form;
             };
           }
         };
@@ -134,6 +133,9 @@
         function init($scope) {
           $scope.submitSuccsesfull = false;
           $scope.triedToSave = false;
+          if ($scope.feedbackForm) {
+            $scope.feedbackForm.$setPristine();
+          }
           $scope.fileInfo = {};
           $scope.feedbackDto = {
             type: 'FEATURE',
