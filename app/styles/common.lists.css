@@ -17,7 +17,7 @@
   float: left;
 
   width: 100%;
-  height: 70px;
+  /*height: 70px;*/
   padding: 15px;
 }
 .qt-list > li:before,
@@ -29,7 +29,7 @@
   clear: both;
 
   width: 3px;
-  height: 70px;
+  /*height: 70px;*/
 
   content: '';
 
@@ -61,7 +61,7 @@
   display: none;
 }
 .qt-list > li + li {
-  height: 71px;
+  /*height: 71px;*/
 
   border-top: 1px solid #f1f5fa;
 }
@@ -1865,7 +1865,7 @@ Devices tab
   }
 }
 .qt-product-list > li {
-  padding: 25px 0;
+  padding: 15px;
 }
 .qt-product-list > li:before,
 .qt-product-list > li:after {

@@ -483,7 +483,7 @@ ul.qt-recurring-invoices {
 .invoice-table .table-invoice-item div .popover {
   min-width: 50px;
   padding: 10px;
-  width: 100px !important;
+  width: auto !important;
 }
 .invoice-table .table-invoice-item div :hover > .icn-description {
   background-position: -797px -202px;
