@@ -77,10 +77,11 @@
               <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
               <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
               <div class="control-label" ng-message="unique">This email already occupied.</div>
+              <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
             </div>
 
             <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-                   ng-model="editUser.primaryEmail" ng-pattern="emailPattern"
+                   ng-model="editUser.primaryEmail" ng-pattern="emailPattern" ng-maxlength="128"
                    is-uniq-validation validation-func="validateUserEmail">
 
           </div>

@@ -9,7 +9,6 @@
           templateKey = 'DOWNLOAD_AGENT',
           timeout = $timeout(angular.noop);
 
-        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.usersWithEmails = UsersService.getAllByCompanyId($scope.company.id).filter(function (user) {
           return !!user.primaryEmail;
         });

@@ -38,6 +38,12 @@
           if (value && value !== '^ ') {
             $scope.openedCategory = getOpenedCategory(value);
 
+            if ($scope.openedCategory) {
+              document.title = $scope.openedCategory.charAt(0).toUpperCase() + $scope.openedCategory.slice(1);
+            } else if (value.indexOf('settings') > -1) {
+              document.title = 'Settings';
+            }
+
             if (!$scope.openedCategory) {
               $rootScope.isLeftPanelHidden = true;
             } else if ($scope.openedCategory === 'settings') {
@@ -65,6 +71,7 @@
             $rootScope.isLeftPanelHidden = true;
           }
           $scope.openedCategory = getOpenedCategory($state.current.url + ' ' + $state.current.name);
+          document.title = 'Settings';
         };
 
         $scope.addQuickSession = function () {
@@ -208,9 +215,9 @@
           } else if (url.indexOf('users') > -1) {
             return 'users';
           } else if (url.indexOf('accounting') > -1) {
-            return 'accounting';
+            return 'billing';
           } else if (url.indexOf('inventory') > -1) {
-            return 'products';
+            return 'inventory';
           } else {
             return undefined;
           }

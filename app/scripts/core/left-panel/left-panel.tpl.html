@@ -23,12 +23,12 @@
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
         <i class="nav-icon icn-lg icn-users"></i>
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'accounting'}"
-           ng-click="toggleLeftPanel('accounting')" ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
+           ng-click="toggleLeftPanel('billing')" ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <i class="nav-icon icn-billable icn-lg"></i>
       </div>
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'products'}"
-           ng-click="toggleLeftPanel('products')">
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
+           ng-click="toggleLeftPanel('inventory')">
         <i class="nav-icon icn-products icn-lg"></i>
       </div>
       <div class="left-panel__category settings-left-bar">
@@ -259,7 +259,7 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'accounting' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'billing' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
@@ -284,12 +284,12 @@
         </div>
       </div>
     </div>
-    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'products' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'inventory' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
         </div>
-        <span class="left-panel-full__head--header">Product</span>
+        <span class="left-panel-full__head--header">Inventory</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category"

@@ -45,7 +45,6 @@
         $scope.ticketSharedUsersList = [];
         $scope.selectUpdateSharedUser = {};
 
-        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.clientCompanies = CompaniesService.getClientCompanies();
         Utils.deleteById($scope.clientCompanies, $scope.unassignedCompany.id);
@@ -237,7 +236,7 @@
               resetSharedUsers($scope.unassignedCompany);
               $scope.ticketAgent = '';
             }
-          } else if (val && val.match($scope.emailPattern)) {
+          } else if (val && val.length <= 128 && val.match($scope.emailPattern)) {
 
             $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
 
@@ -511,7 +510,11 @@
             }
           }
 
-          if (primaryError === 'pattern') {
+          if (form.ticketSubject.$error.maxlength) {
+            return 'Subject is too large.';
+          } else if (form.note.$error.maxlength) {
+            return 'Note is too large.';
+          } else if (primaryError === 'pattern') {
             return 'Incorrect email.';
           } else if (primaryError === 'unique') {
             return 'Email already occupied by tech user.';

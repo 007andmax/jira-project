@@ -29,7 +29,6 @@
         $scope.loadingInProgress = true;
         $scope.locationsMaxCount = 3;
         $scope.contactsMaxCount = 3;
-        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.vendorsSelection = {};

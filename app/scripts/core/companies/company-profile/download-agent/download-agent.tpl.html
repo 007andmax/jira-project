@@ -37,6 +37,7 @@
                  ng-class="{ 'hide': !isShowingErrors(downloadAgentForm, 'email')}">
               <label class="control-label" ng-message="required">Email field is required if u want to send email</label>
               <label class="control-label" ng-message="pattern">Email should be valid</label>
+              <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
             </div>
 
             <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
@@ -44,7 +45,7 @@
                    placeholder="Email Address" ng-model="downloadAgentUser.email" qt-typeahead-show-on-focus>
 
             <input type="hidden" ng-model="downloadAgentUser.email" name="email"
-                   ng-pattern="emailPattern" ng-required="true">
+                   ng-pattern="emailPattern" ng-required="true" ng-maxlength="128">
 
             <div typeahead-input-icon="downloadAgentUser.email" style="position: absolute;top: 35px;right: 13px;"></div>
           </div>

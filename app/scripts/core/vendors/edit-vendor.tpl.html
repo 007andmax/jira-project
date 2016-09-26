@@ -108,7 +108,7 @@
                         <label class="control-label" ng-message="maxlength">Vendor number is too large.</label>
                       </div>
 
-                      <input class="form-control" type="text" aria-expanded="true" ng-maxlength="150"
+                      <input class="form-control" type="text" aria-expanded="true" ng-maxlength="30"
                              name="vendorAccountNumber" ng-model="editVendor.accountNumber">
                     </div>
                   </div>
@@ -270,11 +270,12 @@
                         <label class="control-label" ng-message="required">Email field cannot be left empty.</label>
                         <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
                         <label class="control-label" ng-message="unique">This email already occupied.</label>
+                        <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
                       </div>
 
                       <input class="form-control" type="text" aria-expanded="true"
                              name="email" make-dirty-on-blur
-                             ng-model="contact.email" required="true" ng-pattern="emailPattern"
+                             ng-model="contact.email" required="true" ng-pattern="emailPattern" ng-maxlength="128"
                              contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
                              model-id="contact.id">
                     </div>
