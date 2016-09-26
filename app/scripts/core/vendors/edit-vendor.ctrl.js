@@ -16,7 +16,6 @@
         AddressesService.getLocales(true, function (response) {
           $scope.timeZones = response;
         });
-        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.websitePattern = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)/;
         $scope.phoneNumberPattern = /^\+?[0-9\s\-]{0,19}$/;
         $scope.phoneNumberTypes = {

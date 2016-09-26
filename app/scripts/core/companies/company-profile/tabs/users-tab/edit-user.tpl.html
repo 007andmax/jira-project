@@ -35,10 +35,11 @@
          ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
       <div class="control-label" ng-message="pattern">Invalid email.</div>
       <div class="control-label" ng-message="unique">Not unique.</div>
+      <div class="control-label" ng-message="maxlength">Too large.</div>
     </div>
 
     <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur
-           ng-model="editedUser.primaryEmail" ng-pattern="emailPattern"
+           ng-model="editedUser.primaryEmail" ng-pattern="emailPattern" ng-maxlength="128"
            is-uniq-validation validation-func="validateUserEmail">
   </div>
   <div class="col-md-2 ui half-3-col">

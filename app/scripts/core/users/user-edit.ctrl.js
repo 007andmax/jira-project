@@ -70,8 +70,6 @@
           }
         });
 
-        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-
         $scope.$watch('currentUser.permissions', function (permissions) {
           if (permissions && !$scope.PermissionsService.isAllowed(action)) {
             $scope.cancelEdit();

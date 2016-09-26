@@ -8,7 +8,6 @@
 
         $scope.currentUser = UsersService.getCurrentUser();
         $scope.editUser = $scope.currentUser.staticCopy();
-        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.accountType = {
           SUPER_TECH_ADMIN: "Super Admin",

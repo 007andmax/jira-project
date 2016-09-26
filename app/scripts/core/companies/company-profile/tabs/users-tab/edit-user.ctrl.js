@@ -12,7 +12,6 @@
         CompaniesService.getCompanyData($scope, companyId, function (resp) {
           $scope.companyAddress = resp.addresses[0];
         });
-        $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.phoneNumberPattern = /^[\+\d\(\)\-\s]+$/;
         $scope.isPrefixValid = PhoneFormats.isPrefixValid;
         $scope.roles = {

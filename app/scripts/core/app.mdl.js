@@ -523,6 +523,7 @@
 
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
         $rootScope.numberPattern = /^\d?[0-9]{0,17}$/;
+        $rootScope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
       }]);
 
