@@ -7,8 +7,10 @@
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background: url("../images/input-icons/warning.svg");
-  z-index: 10000; }
+  background: url("../images/input-icons/warning.svg") no-repeat;
+  transition: background-position .3s ease;
+  z-index: 10000;
+  cursor: pointer; }
 
 .close {
   background: url("../images/input-icons/error.svg"); }
