@@ -3,235 +3,304 @@
 (function () {
 
   angular.module('quicktech').directive('feedbackForm',
-    ['$document', '$state', '$http', '$timeout', function ($document, $state, $http, $timeout) {
-      return {
-        restrict: 'A',
-        templateUrl: '/html/scripts/common/directives/feedback-form/feedback-form.tpl.html',
-        link: function (scope, element) {
-          element.addClass('feed-back-btn');
+    ['$document', '$state', '$http', '$timeout', 'FilesService', 'quicktech.common.services.SharedStateService',
+      function ($document, $state, $http, $timeout, FilesService, SharedStateService) {
+        return {
+          restrict: 'A',
+          templateUrl: '/html/scripts/common/directives/feedback-form/feedback-form.tpl.html',
+          link: function (scope, element) {
+            element.addClass('feed-back-btn');
 
-          element.on('click', function (e) {
-            if (e.target === element[0]) {
-              element.toggleClass('close');
-              scope.formShown = !scope.formShown;
-              init(scope);
-              scope.$apply();
-            }
-          });
-
-          $document.on('click', closeIfClickOutside);
-          $document.on('keydown', closeIfEscape);
-
-          scope.$on('$destroy', function () {
-            $document.off('click', closeIfClickOutside);
-            $document.off('keydown', closeIfEscape);
-          });
-
-          function closeIfEscape(e) {
-            if ((e.which === 27 || e.keyCode === 27) && scope.formShown) {
-              closeForm(scope, element);
-            }
-          }
-
-          function closeIfClickOutside(e) {
-            var isInside = angular.element(e.target).closest(element);
-
-            if (!isInside.length) {
-              closeForm(scope, element);
-            }
-          }
-        },
-        controller: function ($scope) {
-          $scope.types = {
-            BUG: 'Bug',
-            FEATURE: 'Feature',
-            USABILITY: 'Usability Problem',
-            PERFORMANCE: 'Performance Problem',
-            COSMETICS: 'Cosmetics'
-          };
-          $scope.priorities = {
-            LOW: 'Low',
-            MEDIUM: 'Medium',
-            HIGH: 'High'
-          };
-
-          $scope.submit = function (form) {
-            if (form.$valid) {
-              $http.post('/feedback', $scope.feedbackDto).then(function () {
-                $scope.submitSuccsesfull = true;
-                $timeout(function () {
-                  closeForm($scope);
-                }, 3000)
-              })
-            }
-          };
-        }
-      };
-
-      function init($scope) {
-        $scope.submitSuccsesfull = false;
-        $scope.feedbackDto = {
-          type: 'FEATURE',
-          priority: 'MEDIUM',
-          subject: '',
-          message: '',
-          page: getProblematicPage(),
-          os: getOSName(),
-          browserName: getBrowserVersion()
-        };
-      }
-
-      function closeForm(scope, element) {
-        if (element) {
-          element.removeClass('close');
-        } else {
-          $document.find('.feed-back-btn').removeClass('close');
-        }
-        scope.formShown = false;
-        scope.$apply();
-      }
-
-      function getProblematicPage() {
-        if ($state.includes("tickets")) {
-          return 'Tickets';
-        } else if ($state.includes("users")) {
-          return 'Users';
-        } else if ($state.includes("companies")) {
-          return 'Companies';
-        } else if ($state.includes("companyProfile")) {
-          return 'Company Profile';
-        } else if ($state.includes("createCompany")) {
-          return 'Create Company';
-        } else if ($state.includes("editCompany")) {
-          return 'Edit Company';
-        } else if ($state.includes("createVendor")) {
-          return 'Create Vendor';
-        } else if ($state.includes("editVendor")) {
-          return 'Edit Vendor';
-        } else if ($state.includes("products")) {
-          return 'Products';
-        } else if ($state.includes("services")) {
-          return 'Services';
-        } else if ($state.includes("accounting.billable")) {
-          return 'Billable';
-        } else if ($state.includes("accounting.recurring")) {
-          return 'Recurring';
-        } else if ($state.includes("receivable")) {
-          return 'Receivable';
-        } else if ($state.includes("receipt-archive")) {
-          return 'Receipt Archive';
-        } else if ($state.includes("settings")) {
-          if ($state.is("settings")) {
-            return 'Account Settings';
-          } else {
-            return $state.current.name.split('.').pop()
-              .replace(/([A-Z])/g, ' $1')
-              .replace(/\b\w/g, function (letter) {
-              return letter.toUpperCase();
+            element.on('click', function (e) {
+              if (e.target === element[0]) {
+                element.toggleClass('close');
+                scope.formShown = !scope.formShown;
+                init(scope);
+                scope.$apply();
+              }
             });
+
+            $document.on('click', closeIfClickOutside);
+            $document.on('keydown', closeIfEscape);
+
+            scope.$on('$destroy', function () {
+              $document.off('click', closeIfClickOutside);
+              $document.off('keydown', closeIfEscape);
+            });
+
+            function closeIfEscape(e) {
+              if ((e.which === 27 || e.keyCode === 27) && scope.formShown) {
+                closeForm(scope, element);
+              }
+            }
+
+            function closeIfClickOutside(e) {
+              var isInside = angular.element(e.target).closest(element);
+
+              if (!isInside.length) {
+                closeForm(scope, element);
+              }
+            }
+          },
+          controller: function ($scope) {
+            var feedbackForm;
+            $scope.types = {
+              BUG: 'Bug',
+              FEATURE: 'Feature',
+              USABILITY: 'Usability Problem',
+              PERFORMANCE: 'Performance Problem',
+              COSMETICS: 'Cosmetics',
+              OTHER: 'Other'
+            };
+            $scope.priorities = {
+              LOW: 'Low',
+              MEDIUM: 'Medium',
+              HIGH: 'High'
+            };
+
+            $scope.isShowingErrors = function (form, fieldName) {
+              return form[fieldName] && ($scope.triedToSave || form[fieldName].$dirty) && form[fieldName].$invalid;
+            };
+
+            $scope.addAttachmentFiles = function (file) {
+
+              $scope.feedbackDto.attachments.push(file);
+              $scope.$apply();
+
+              FilesService.create(file,
+                function (progress) {
+                  $scope.fileLoadOrError = true;
+                  file.progress = 100 * (progress.loaded / progress.total);
+                  $scope.$apply();
+                }, function (finish) {
+
+                  $scope.fileLoadOrError = false;
+
+                  if (finish.code === 400 || finish.code === 500) {
+
+                    $scope.fileLoadOrError = true;
+
+                    $scope.fileInfo[file.name] = {
+                      error: true,
+                      message: finish.message.split(';')[0]
+                    };
+
+                    $scope.fileInfo.quantityErrorFiles++;
+                    feedbackForm.$setValidity('errorFile', false);
+                  } else {
+                    feedbackForm.$setValidity('errorFile', true);
+                  }
+
+                  file.id = finish.id;
+                  file.shown = true;
+                  $scope.$apply();
+                }, function (error) {
+                  console.error(error);
+                });
+            };
+
+            $scope.removeAttachment = function (index) {
+              $scope.feedbackDto.attachments.splice(index, 1);
+            };
+
+            $scope.submit = function (form) {
+              if (form.$valid) {
+                var feedbackDto = angular.copy($scope.feedbackDto);
+                $scope.triedToSave = false;
+
+                if (feedbackDto.attachments.length) {
+                  feedbackDto.attachments = feedbackDto.attachments.map(function (file) {
+                    return file.id;
+                  })
+                }
+
+                $http.post('/feedback', feedbackDto).then(function () {
+                  $scope.submitSuccsesfull = true;
+                  $timeout(function () {
+                    closeForm($scope);
+                  }, 3000)
+                })
+              } else {
+                $scope.triedToSave = true;
+              }
+            };
+
+            $scope.saveForm = function (form) {
+              feedbackForm = form;
+            };
           }
-        }else if ($state.includes("quickSupport")) {
-          return 'Quick Support';
-        }
-      }
+        };
 
-      function getOSName() {
-        var OSName = '';
-
-        if (navigator.appVersion.indexOf('Windows') != -1) {
-          OSName = 'Windows';
-        }
-        if (navigator.appVersion.indexOf('Windows NT 6.3') != -1) {
-          OSName = 'Windows 8.1';
-        }
-        if (navigator.appVersion.indexOf('Windows NT 6.2') != -1) {
-          OSName = 'Windows 8';
-        }
-        if (navigator.appVersion.indexOf('Windows NT 6.1') != -1) {
-          OSName = 'Windows 7';
-        }
-        if (navigator.appVersion.indexOf('Windows NT 6.0') != -1) {
-          OSName = 'Windows Vista';
-        }
-        if (navigator.appVersion.indexOf('Windows NT 5.1') != -1) {
-          OSName = 'Windows XP';
-        }
-        if (navigator.appVersion.indexOf('Windows NT 5.0') != -1) {
-          OSName = 'Windows 2000';
-        }
-        if (navigator.appVersion.indexOf('Mac') != -1) {
-          OSName = 'Mac/iOS';
-        }
-        if (navigator.appVersion.indexOf('X11') != -1) {
-          OSName = 'UNIX';
-        }
-        if (navigator.appVersion.indexOf('Linux') != -1) {
-          OSName = 'Linux';
+        function init($scope) {
+          $scope.submitSuccsesfull = false;
+          $scope.triedToSave = false;
+          $scope.fileInfo = {};
+          $scope.feedbackDto = {
+            type: 'FEATURE',
+            priority: 'MEDIUM',
+            subject: '',
+            message: '',
+            page: getProblematicPage(),
+            os: getOSName(),
+            browserName: getBrowserVersion(),
+            attachments: []
+          };
         }
 
-        return OSName;
-      }
-
-      function getBrowserVersion() {
-        var nAgt = navigator.userAgent;
-        var browserName = navigator.appName;
-        var fullVersion = '' + parseFloat(navigator.appVersion);
-        var nameOffset, verOffset, ix;
-
-        // In Opera 15+, the true version is after 'OPR/'
-        if ((verOffset = nAgt.indexOf('OPR/')) != -1) {
-          browserName = 'Opera';
-          fullVersion = nAgt.substring(verOffset + 4);
+        function closeForm(scope, element) {
+          if (element) {
+            element.removeClass('close');
+          } else {
+            $document.find('.feed-back-btn').removeClass('close');
+          }
+          scope.formShown = false;
+          scope.$apply();
         }
-        // In older Opera, the true version is after 'Opera' or after 'Version'
-        else if ((verOffset = nAgt.indexOf('Opera')) != -1) {
-          browserName = 'Opera';
-          fullVersion = nAgt.substring(verOffset + 6);
-          if ((verOffset = nAgt.indexOf('Version')) != -1) {
+
+        function getProblematicPage() {
+          if ($state.includes("tickets")) {
+            return 'Tickets';
+          } else if ($state.includes("users")) {
+            return 'Users';
+          } else if ($state.includes("companies")) {
+            return SharedStateService.getSharedState('companiesHeader').filter.isVendor ? 'Vendors' : 'Companies';
+          } else if ($state.includes("companyProfile")) {
+            return 'Company Profile';
+          } else if ($state.includes("createCompany")) {
+            return 'Create Company';
+          } else if ($state.includes("editCompany")) {
+            return 'Edit Company';
+          } else if ($state.includes("createVendor")) {
+            return 'Create Vendor';
+          } else if ($state.includes("editVendor")) {
+            return 'Edit Vendor';
+          } else if ($state.includes("products")) {
+            return 'Products';
+          } else if ($state.includes("services")) {
+            return 'Services';
+          } else if ($state.includes("accounting.billable")) {
+            return 'Billable';
+          } else if ($state.includes("accounting.recurring")) {
+            return 'Recurring';
+          } else if ($state.includes("receivable")) {
+            return 'Receivable';
+          } else if ($state.includes("receipt-archive")) {
+            return 'Receipt Archive';
+          } else if ($state.includes("settings")) {
+            if ($state.is("settings")) {
+              return 'Account Settings';
+            } else {
+              return $state.current.name.split('.').pop()
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/\b\w/g, function (letter) {
+                  return letter.toUpperCase();
+                });
+            }
+          } else if ($state.includes("quickSupport")) {
+            return 'Quick Support';
+          }
+        }
+
+        function getOSName() {
+          var OSName = '';
+
+          if (navigator.appVersion.indexOf('Windows') != -1) {
+            OSName = 'Windows';
+          }
+          if (navigator.appVersion.indexOf('Windows NT 10') != -1) {
+            OSName = 'Windows 10';
+          }
+          if (navigator.appVersion.indexOf('Windows NT 6.3') != -1) {
+            OSName = 'Windows 8.1';
+          }
+          if (navigator.appVersion.indexOf('Windows NT 6.2') != -1) {
+            OSName = 'Windows 8';
+          }
+          if (navigator.appVersion.indexOf('Windows NT 6.1') != -1) {
+            OSName = 'Windows 7';
+          }
+          if (navigator.appVersion.indexOf('Windows NT 6.0') != -1) {
+            OSName = 'Windows Vista';
+          }
+          if (navigator.appVersion.indexOf('Windows NT 5.1') != -1) {
+            OSName = 'Windows XP';
+          }
+          if (navigator.appVersion.indexOf('Windows NT 5.0') != -1) {
+            OSName = 'Windows 2000';
+          }
+          if (navigator.appVersion.indexOf('Mac') != -1) {
+            OSName = 'Mac/iOS';
+          }
+          if (navigator.appVersion.indexOf('X11') != -1) {
+            OSName = 'UNIX';
+          }
+          if (navigator.appVersion.indexOf('Linux') != -1) {
+            OSName = 'Linux';
+          }
+
+          return OSName;
+        }
+
+        function getBrowserVersion() {
+          var nAgt = navigator.userAgent;
+          var browserName = navigator.appName;
+          var fullVersion = '' + parseFloat(navigator.appVersion);
+          var nameOffset, verOffset, ix;
+
+          // In Opera 15+, the true version is after 'OPR/'
+          if ((verOffset = nAgt.indexOf('OPR/')) != -1) {
+            browserName = 'Opera';
+            fullVersion = nAgt.substring(verOffset + 4);
+          }
+          // In older Opera, the true version is after 'Opera' or after 'Version'
+          else if ((verOffset = nAgt.indexOf('Opera')) != -1) {
+            browserName = 'Opera';
+            fullVersion = nAgt.substring(verOffset + 6);
+            if ((verOffset = nAgt.indexOf('Version')) != -1) {
+              fullVersion = nAgt.substring(verOffset + 8);
+            }
+          }
+          // In MSIE, the true version is after 'MSIE' in userAgent
+          else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
+            browserName = 'Microsoft Internet Explorer';
+            fullVersion = nAgt.substring(verOffset + 5);
+          }
+          // In Chrome, the true version is after 'Chrome'
+          else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
+            browserName = 'Chrome';
+            fullVersion = nAgt.substring(verOffset + 7);
+          }
+          // In Safari, the true version is after 'Safari' or after 'Version'
+          else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
+            browserName = 'Safari';
+            fullVersion = nAgt.substring(verOffset + 7);
+            if ((verOffset = nAgt.indexOf('Version')) != -1) {
+              fullVersion = nAgt.substring(verOffset + 8);
+            }
+          }
+          // In Firefox, the true version is after 'Firefox'
+          else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
+            browserName = 'Firefox';
             fullVersion = nAgt.substring(verOffset + 8);
           }
-        }
-        // In MSIE, the true version is after 'MSIE' in userAgent
-        else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
-          browserName = 'Microsoft Internet Explorer';
-          fullVersion = nAgt.substring(verOffset + 5);
-        }
-        // In Chrome, the true version is after 'Chrome'
-        else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
-          browserName = 'Chrome';
-          fullVersion = nAgt.substring(verOffset + 7);
-        }
-        // In Safari, the true version is after 'Safari' or after 'Version'
-        else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
-          browserName = 'Safari';
-          fullVersion = nAgt.substring(verOffset + 7);
-          if ((verOffset = nAgt.indexOf('Version')) != -1) {
-            fullVersion = nAgt.substring(verOffset + 8);
+          // In most other browsers, 'name/version' is at the end of userAgent
+          else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) <
+            (verOffset = nAgt.lastIndexOf('/'))) {
+            browserName = nAgt.substring(nameOffset, verOffset);
+            fullVersion = nAgt.substring(verOffset + 1);
+            if (browserName.toLowerCase() == browserName.toUpperCase()) {
+              browserName = navigator.appName;
+            }
           }
-        }
-        // In Firefox, the true version is after 'Firefox'
-        else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
-          browserName = 'Firefox';
-          fullVersion = nAgt.substring(verOffset + 8);
-        }
-        // In most other browsers, 'name/version' is at the end of userAgent
-        else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) <
-          (verOffset = nAgt.lastIndexOf('/'))) {
-          browserName = nAgt.substring(nameOffset, verOffset);
-          fullVersion = nAgt.substring(verOffset + 1);
-          if (browserName.toLowerCase() == browserName.toUpperCase()) {
-            browserName = navigator.appName;
+          // trim the fullVersion string at semicolon/space if present
+          if ((ix = fullVersion.indexOf(';')) != -1) {
+            fullVersion = fullVersion.substring(0, ix);
           }
-        }
-        // trim the fullVersion string at semicolon/space if present
-        if ((ix = fullVersion.indexOf(';')) != -1) {
-          fullVersion = fullVersion.substring(0, ix);
-        }
-        if ((ix = fullVersion.indexOf(' ')) != -1) {
-          fullVersion = fullVersion.substring(0, ix);
-        }
+          if ((ix = fullVersion.indexOf(' ')) != -1) {
+            fullVersion = fullVersion.substring(0, ix);
+          }
 
-        return browserName + ' ' + fullVersion;
-      }
-    }]);
+          return browserName + ' ' + fullVersion;
+        }
+      }]);
 })();

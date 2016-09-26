@@ -89,16 +89,18 @@
 </head>
 <body ng-app="quicktech" ng-class="{'left-panel-closed': isLeftPanelHidden, 'right-panel-closed': isRightPanelHidden}">
 
-<div class="alert alert-yellow hide" user-notification style="z-index: 1039;"></div>
+<div class="alert alert-yellow hide" user-notification style="z-index: 1039;" ng-if="applicationLoaded"></div>
 
-<div class="top-bar" style="z-index: 1038;" ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
+<div class="top-bar" style="z-index: 1038;" ng-if="applicationLoaded"
+     ng-include="'/html/scripts/core/header/header.tpl.html'"></div>
 
-<aside id="left" qt-sidebar style="z-index: 1039;"
+<aside id="left" qt-sidebar style="z-index: 1039;" ng-if="applicationLoaded"
        ng-include="'/html/scripts/core/left-panel/left-panel.tpl.html'"></aside>
 
-<aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden" right-panel ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
+<aside id="right" class="nano collapsed" ng-if="!isRightPanelHidden && applicationLoaded" right-panel
+       ng-include="'/html/scripts/core/right-panel/right-panel.tpl.html'"></aside>
 
-<div class="main-container">
+<div class="main-container" ng-if="applicationLoaded">
   <div class="row">
     <div class="content-container" ng-class="{'large': isRightPanelHidden}">
       <div class="content-wrapper">
@@ -107,7 +109,7 @@
     </div>
   </div>
 </div>
-<div feedback-form></div>
+<div feedback-form ng-if="applicationLoaded"></div>
 
 <!--&lt;!&ndash;[if lt IE 7]>-->
 <!--<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade-->
