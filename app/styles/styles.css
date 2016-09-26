@@ -5379,10 +5379,10 @@ tbody.collapse.in {
   color: #1f2a37;
 }
 .dropdown-menu-tabs .nav-tabs-dropdown > li:nth-child(2) {
-  right: -54px;
+  right: -42px;
 }
 .dropdown-menu-tabs .nav-tabs-dropdown > li:last-child {
-  right: -109px;
+  right: -84px;
 }
 @-moz-document url-prefix() {
   .dropdown-menu-tabs .nav-tabs-dropdown > li > a {
@@ -9885,3 +9885,4 @@ button.close {
 .company-item:hover{
   background-color: #e9f5fb;
 }
+

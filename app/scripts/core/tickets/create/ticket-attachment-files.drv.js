@@ -12,10 +12,12 @@
       link: function (scope, element) {
 
 
-        element.on('click', 'a', function () {
-          var file = element.find('input[type=file]');
-          file.replaceWith(file = file.clone(true));
-          file.trigger('click');
+        element.on('click', 'a', function (e) {
+          if (!angular.element(e.target).hasClass('disabled')) {
+            var file = element.find('input[type=file]');
+            file.replaceWith(file = file.clone(true));
+            file.trigger('click');
+          }
         });
 
         element.on('change', 'input[type=file]', function () {
