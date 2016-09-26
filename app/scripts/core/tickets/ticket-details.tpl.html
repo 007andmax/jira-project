@@ -223,9 +223,10 @@
               <div ng-messages="editTicketForm.subject.$error"
                    ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">
                 <label class="control-label" ng-message="required">Subject can not be left empty.</label>
+                <label class="control-label" ng-message="required">Subject is too large.</label>
               </div>
 
-              <input type="text" class="form-control" placeholder="Subject"
+              <input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"
                      name="subject" required make-dirty-on-blur ng-model="editedTicket.subject">
             </div>
 
@@ -237,11 +238,11 @@
 
               <div ng-messages="editTicketForm.note.$error"
                    ng-class="{'hide': !isShowingErrors(editTicketForm, 'note')}">
-                <label class="control-label" ng-message="required">Note can not be left empty.</label>
+                <label class="control-label" ng-message="maxlength">Note is too large.</label>
               </div>
 
               <div text-editor te-initial-value="{{ editedTicket.note }}"
-                   ng-model="editedTicket.note" name="note">
+                   ng-model="editedTicket.note" name="note" te-maxlength="5000">
 
                 <div te-editor class="form-control editor" contenteditable="true"
                      style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>

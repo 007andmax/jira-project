@@ -510,7 +510,11 @@
             }
           }
 
-          if (primaryError === 'pattern') {
+          if (form.ticketSubject.$error.maxlength) {
+            return 'Subject is too large.';
+          } else if (form.note.$error.maxlength) {
+            return 'Note is too large.';
+          } else if (primaryError === 'pattern') {
             return 'Incorrect email.';
           } else if (primaryError === 'unique') {
             return 'Email already occupied by tech user.';

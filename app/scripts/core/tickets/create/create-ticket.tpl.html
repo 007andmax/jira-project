@@ -34,14 +34,14 @@
            style="margin-bottom: 10px;">
 
         <input type="text" class="form-control" placeholder="Subject"
-               name="ticketSubject"
+               name="ticketSubject" ng-maxlength="300"
                required="true" make-dirty-on-blur
                ng-model="ticket.subject">
       </div>
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'note')}">
 
-        <div text-editor ng-model="ticket.note" name="note">
+        <div text-editor ng-model="ticket.note" name="note" te-maxlength="5000">
 
           <div te-editor class="form-control editor" contenteditable="true"
                style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
