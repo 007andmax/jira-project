@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive("companyAddressAutocomplete",
-    ['$timeout', function ($timeout) {
+    ['$timeout', 'quicktech.common.services.GoogleMapService', function ($timeout, GoogleMapService) {
       return {
         restrict: 'A',
         require: 'ngModel',
@@ -15,22 +15,8 @@
         templateUrl: '/html/scripts/core/companies/company-profile/address-autocomplete.tpl.html',
         link: function ($scope, element, attrs, ngModelCtrl) {
 
-          var defaultZoom = 15,
-            defaultCenter = new google.maps.LatLng(41.9955835, -93.63813119999998),
-            mapOptions = {
-              center: defaultCenter,
-              zoom: defaultZoom,
-              zoomControl: true,
-              scaleControl: true,
-              scrollwheel: false,
-              streetViewControl: false,
-              zoomControlOptions: {
-                position: google.maps.ControlPosition.LEFT_CENTER
-              }
-            },
-            mapDiv = element.find('[map]')[0],
-            map,
-            marker;
+          var mapDiv = element.find('[map]');
+          var map;
 
           $scope.$watch(function () {
             return ngModelCtrl.$viewValue
@@ -40,17 +26,19 @@
               var hasLocation = ngModelCtrl.$viewValue.locationLat && ngModelCtrl.$viewValue.locationLng;
 
               if (hasLocation) {
-                mapOptions.center = new google.maps.LatLng(ngModelCtrl.$viewValue.locationLat, ngModelCtrl.$viewValue.locationLng);
-              }
-
-              map = new google.maps.Map(mapDiv, mapOptions);
-              marker = new google.maps.Marker({
-                map: map,
-                position: {
+                var centerLatLng = {
                   lat: ngModelCtrl.$viewValue.locationLat,
                   lng: ngModelCtrl.$viewValue.locationLng
+                };
+
+                if (!map) {
+                  map = GoogleMapService.createMap(mapDiv, centerLatLng).map;
+                } else {
+                  GoogleMapService.setCenter(centerLatLng)
                 }
-              });
+
+              }
+
             }
           }, true);
 
