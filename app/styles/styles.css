@@ -549,7 +549,7 @@ hr {
   padding: 3px 0 0;
 }
 .modal-create-ticket .upload-attachments {
-  padding: 0 10px 10px;
+  padding:10px 10px;
   background-color: #f1f5fa;
 }
 .modal-create-ticket .upload-attachments:empty {
@@ -782,7 +782,7 @@ hr {
 .right-panel-closed .company-profile-content {
   float: left;
   width: 100%;
-  padding: 0 30px 30px;
+  padding: 0 10px 30px;
   /*overflow: hidden;*/
 }
 .company-profile-content.companies-list {
@@ -793,7 +793,7 @@ hr {
 .services-content {
   float: left;
   width: 100%;
-  padding: 31px 30px 30px;
+  padding: 31px 10px 30px;
 }
 .devices-content,
 .receipt-archive-content {
@@ -3989,9 +3989,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success:hover {
   color: #ffffff;
-  /*    background-color: darken(@background, 10%);*/
-  background-color: #4caf50;
-  /*border-color: darken(@border, 12%);*/
+  background-color: #429845;
+  border-color: #429845;
 }
 .btn-success:active,
 .btn-success.active,

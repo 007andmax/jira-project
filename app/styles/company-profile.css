@@ -196,4 +196,5 @@
 }
 .dropdown-menu-custom{
   right: 0;
+  width: auto !important;
 }

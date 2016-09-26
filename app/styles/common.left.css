@@ -4,8 +4,18 @@ aside#left {
   left: 0;
   width: 76px;
   height: 100vh;
-  background-color: #08a8dd;
+  background-color: #182734;
   z-index: 1060;
+}
+aside#left:after {
+  position: absolute;
+  top: 78px;
+  left: 75px;
+  width: 1px;
+  height: calc(100% - 128px);
+  background-color: #94a4b8;
+
+  content: '';
 }
 
 aside#left.opened {

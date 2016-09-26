@@ -475,9 +475,15 @@ ul.qt-recurring-invoices {
 
   background-position: -777px -202px;
 }
+.invoice-table .badge {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
 .invoice-table .table-invoice-item div .popover {
   min-width: 50px;
   padding: 10px;
+  width: 100px !important;
 }
 .invoice-table .table-invoice-item div :hover > .icn-description {
   background-position: -797px -202px;

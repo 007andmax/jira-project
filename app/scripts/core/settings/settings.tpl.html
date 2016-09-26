@@ -1,60 +1,60 @@
 <div class="settings-wrapper row" ng-if="settingMode === '/settings'">
   <div class="col-xs-12 settings-wrapper__trow">
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.myProfile">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.myProfile">
       <img class="svg-icn-full" src="images/input-icons/user-shape.svg">
       <p>User Profile</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.emailNotifications">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.emailNotifications">
       <img class="svg-icn-full" src="images/input-icons/envelope.svg">
       <p>Email Notifications</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.tags" ng-if="currentUser.isOwner">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.tags" ng-if="currentUser.isOwner">
       <img class="svg-icn-full" src="images/input-icons/tags.svg">
       <p>Manage Tags</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.activityHistory">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.activityHistory">
       <img class="svg-icn-full" src="images/input-icons/history.svg">
       <p>Activity History</p>
     </div>
   </div>
   <div class="col-xs-12 settings-wrapper__trow" ng-if="currentUser.isOwner">
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.companyProfile">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.companyProfile">
       <img class="svg-icn-full" src="images/input-icons/building.svg">
       <p>Company Profile</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.techUsers">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.techUsers">
       <img class="svg-icn-full" src="images/input-icons/admin-with-cogwheels.svg">
       <p>Tech Users</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.email">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.email">
       <img class="svg-icn-full" src="images/input-icons/email-settings.svg">
       <p>Email Settings</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.services">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.services">
       <img class="svg-icn-full" src="images/input-icons/open-wrench-tool-silhouette.svg">
       <p>Services</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.taxRates">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.taxRates">
       <img class="svg-icn-full" src="images/input-icons/dollar-symbol.svg">
       <p>Taxes</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" ui-sref="settings.tickets">
+    <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.tickets">
       <img class="svg-icn-full" src="images/input-icons/concert-ticket.svg">
       <p>Ticket Settings</p>
     </div>
   </div>
   <div class="col-xs-12 settings-wrapper__trow">
-    <div class="col-xs-2 settings-wrapper__trow--td"
+    <div class="col-xs-1 settings-wrapper__trow--td"
          ui-sref="settings.permissionsManagement" ng-if="currentUser.isOwner">
       <img class="svg-icn-full" src="images/input-icons/permission.svg">
       <p>Permission Management</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td"
+    <div class="col-xs-1 settings-wrapper__trow--td"
          ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner">
       <img class="svg-icn-full" src="images/input-icons/mail.svg">
       <p>Email Templates</p>
     </div>
-    <div class="col-xs-2 settings-wrapper__trow--td" deactivate-button>
+    <div class="col-xs-1 settings-wrapper__trow--td" deactivate-button>
       <img class="svg-icn-full" src="images/input-icons/cancel.svg">
       <p>Deactivate Account</p>
     </div>

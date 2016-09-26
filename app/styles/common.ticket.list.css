@@ -167,10 +167,6 @@
   display: block;
 }
 
-.ticket:hover .ticket-meta .ticket-title .icn-ticket-list-attachment{
-  display: none;
-}
-
 .ticket:hover.no-action .ticket-meta .ticket-title .icn-ticket-list-attachment{
   display: block;
   cursor: default;
@@ -180,7 +176,7 @@
 
 
 .ticket .ticket-checkbox{
-  padding-top: 2px;
+  padding-top: 12px;
   padding-left: 30px;
   width: 62px;
 }
@@ -195,7 +191,7 @@
 }
 
 .ticket .ticket-meta .ticket-title .ticket-list-attachment{
-  margin-top: 4px;
+  margin:0 10px;
 }
 
 
@@ -307,5 +303,5 @@
 }
 .ticket-title > .text-muted{
   float: left;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
 }
