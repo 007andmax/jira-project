@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.updateAddUserCtrl',
-      ['$scope', 'UsersService', 'CompaniesService', 'ContactsService', 'Utils',
-        function ($scope, UsersService, CompaniesService, ContactsService, Utils) {
+      ['$scope', 'UsersService', 'CompaniesService', 'ContactsService', 'Utils', '$timeout',
+        function ($scope, UsersService, CompaniesService, ContactsService, Utils, $timeout) {
 
           $scope.currentAddUserTab = 'TEAM_MEMBER';
           $scope.searchFilter = {};
@@ -25,6 +25,17 @@
 
           });
           //$scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket();
+
+          $scope.$watchCollection(function () {
+            return $scope.clients.map(function (user) {
+              return user.id;
+            });
+          }, function () {
+            $scope.isNeedReset = true;
+            $timeout(function () {
+              $scope.isNeedReset = false;
+            });
+          });
 
           $scope.openAddUserTab = function (mode) {
 

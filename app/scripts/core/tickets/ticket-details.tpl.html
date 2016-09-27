@@ -223,7 +223,7 @@
               <div ng-messages="editTicketForm.subject.$error"
                    ng-class="{'hide': !isShowingErrors(editTicketForm, 'subject')}">
                 <label class="control-label" ng-message="required">Subject can not be left empty.</label>
-                <label class="control-label" ng-message="required">Subject is too large.</label>
+                <label class="control-label" ng-message="maxlength">Subject is too large.</label>
               </div>
 
               <input type="text" class="form-control" placeholder="Subject" ng-maxlength="300"
