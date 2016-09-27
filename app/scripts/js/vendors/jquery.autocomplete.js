@@ -970,9 +970,11 @@
             container.show();
 
             if (that.options.useCustomScroller) {
+                container.closest('.dropdown-menu').css('display', 'block');
                 container.find('.'+that.classes.suggestion).each(function(){
                     contentHeight += $(this).outerHeight();
                 });
+                container.closest('.dropdown-menu').css('display', '');
 
                 if( contentHeight < that.options.maxHeight ) {
                     container.css('height', contentHeight);

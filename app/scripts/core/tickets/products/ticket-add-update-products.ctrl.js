@@ -33,7 +33,7 @@
 
             for (var i = 0; i < $scope.ticketUpdate.products.length; i++) {
               if($scope.ticketUpdate.products[i].item){
-                $scope.productTotalAmount += ($scope.ticketUpdate.products[i].item.sale * $scope.ticketUpdate.products[i].quantity);
+                $scope.productTotalAmount += ($scope.ticketUpdate.products[i].item.sale * $scope.ticketUpdate.products[i].quantity) || 0;
               }
             }
 
