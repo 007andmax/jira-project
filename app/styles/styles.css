@@ -6171,6 +6171,19 @@ tbody.collapse.in {
   padding-left: 12px;
   padding-right: 12px;
 }
+.btn.ng-enter,
+.btn.ng-leave {
+  --webkit-transition: none;
+  transition: none;
+}
+.btn.ng-animate {
+  --webkit-transition: none;
+  transition: none;
+}
+.btn.ng-animate {
+  --webkit-animation: none 0s;
+  animation: none 0s;
+}
 .btn .caret {
   margin-left: 0;
 }
