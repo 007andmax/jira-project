@@ -569,6 +569,7 @@ body.modal-open {
 
 .dropdown-menu.add-description-form {
   padding: 25px 30px 30px;
+  width: 310px;
 }
 
 .collapsed-nav {

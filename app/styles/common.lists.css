@@ -477,7 +477,7 @@ Devices tab
 .device-manufacturer,
 .device-mac-address,
 .last-seen-date {
-  margin-top: 9px;
+  /*margin-top: 9px;*/
 }
 
 @-moz-document url-prefix() {
@@ -559,8 +559,6 @@ Devices tab
 .qt-list .no-value {
   width: 6px;
   height: 2px;
-  margin-top: 18px;
-
   border-radius: 1px;
   background-color: #94a4b8;
 }
@@ -2913,6 +2911,8 @@ Devices tab
 
 .qt-devices > li {
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .qt-devices > li > .col-1 {
@@ -3080,7 +3080,7 @@ Devices tab
 }
 
 .qt-devices .device-status {
-  top: 17px;
+  top: 8px;
   left: -5px;
 }
 
@@ -3315,9 +3315,6 @@ Devices tab
 
 .agent-version {
   float: left;
-
-  margin-top: 9px;
-
   color: #94a4b8;
 }
 
