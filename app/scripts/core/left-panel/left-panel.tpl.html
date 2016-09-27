@@ -43,6 +43,9 @@
           </div>
         </div>
       </div>
+      <div class="left-panel__category tutorial-left-bar" ng-click="toggleLeftPanel('tutorial')">
+        <div class="svg-icn-tutorial"></div>
+      </div>
     </div>
   </div>
   <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
@@ -302,6 +305,16 @@
              ng-click="stateGo($event, 'services', { tabName: 'default' })">
           <i class="nav-icon icn-lg icn-services icon-pos"></i> Services
         </div>
+      </div>
+    </div>
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'tutorial' && !isLeftPanelHidden">
+      <div class="left-panel-full__head">
+        <span class="left-panel-full__head--header">Tutorial</span>
+      </div>
+
+      <div class="center-category collapsed-nav nano-content">
+        <div class="center-category__category sked" style="padding-left: 25px" ng-repeat="type in tutorialTypes"
+             ng-click="openTutorial(type)">{{ userReadable(type) }}</div>
       </div>
     </div>
     <div class="left-panel-full-wrapper nano"
