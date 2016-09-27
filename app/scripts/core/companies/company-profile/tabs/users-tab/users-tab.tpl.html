@@ -42,7 +42,7 @@
       <div ng-if="editedUser && editedUser.id === user.id"
            ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/edit-user.tpl.html'"></div>
 
-      <div ng-if="!editedUser || editedUser.id !== user.id" style="display: flex;">
+      <div ng-if="!editedUser || editedUser.id !== user.id" class="users-list-wrapper">
         <div class="col-1">
           <div class="user-bio">
 

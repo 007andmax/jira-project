@@ -490,6 +490,7 @@ hr {
   -o-transition: top 0.3s ease-out, right 0.3s ease-out;
   -ms-ransition: top 0.3s ease-out, right 0.3s ease-out;
   transition: top 0.3s ease-out, right 0.3s ease-out;
+  display: none;
 }
 .avatar > i.right {
   right: 0;
@@ -3193,8 +3194,8 @@ input[type="search"] {
 .checkbox {
   position: relative;
   display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 15px;
   line-height: 16px;
 }
 .radio label,
@@ -3969,6 +3970,7 @@ fieldset[disabled] .btn-primary.active {
   background-color: #e7ecf2;
   border-color: #e7ecf2;
   pointer-events: none;
+  color: #fff;
 }
 .btn-primary .badge {
   color: #e7ecf2;
@@ -4061,7 +4063,6 @@ fieldset[disabled] .btn-success.active {
   color: #ffffff;
   background-color: #2c9fdd;
   border-color: #2c9fdd;
-  font-weight: bold;
 }
 .btn-info:focus,
 .btn-info.focus {
@@ -5916,23 +5917,26 @@ tbody.collapse.in {
 .dropdown-subscribe > li > a label {
   display: block;
   width: 100%;
-  padding: 8px 20px 8px 46px;
+  padding: 8px 20px 8px 40px;
   margin: 0 !important;
   font-size: 14px;
   line-height: 20px;
 }
 @-moz-document url-prefix() {
   .dropdown-subscribe > li > a label {
-    padding: 7px 20px 9px 46px;
+    padding: 7px 20px 9px 40px;
   }
 }
 .dropdown-subscribe > li > a label .control-indicator {
   top: 10px;
-  left: 20px;
+  left: 15px;
 }
 .dropdown-tag-colors {
   padding: 22px 16px 18px 16px;
   min-width: 232px;
+}
+.dropdown-menu > li{
+  background-color: transparent !important;
 }
 .dropdown-tag-colors li {
   float: left;
@@ -9642,7 +9646,6 @@ button.close {
   opacity: 0 !important;
 }
 .form-left-column {
-  margin-top: 50px;
   width: 43%;
   float: left;
 }

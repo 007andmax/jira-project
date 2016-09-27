@@ -502,7 +502,7 @@
             <div class="form-row clearfix" uib-dropdown ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
 
               <div class="btn btn-lg btn-primary pull-right" uib-dropdown-toggle
-                   style="margin-top: -47px; width: auto; font-weight: bold;"
+                   style="margin-top: -47px; width: auto;"
                    aria-expanded="false">
                 Add Service
               </div>
@@ -638,7 +638,7 @@
           <div class="form-row clearfix" uib-dropdown>
 
             <div class="btn btn-lg btn-primary pull-right" uib-dropdown-toggle
-                 style="margin-top: -47px; width:auto; font-weight: bold;"
+                 style="margin-top: -47px; width:auto;"
                  aria-expanded="false">
               Add Tax
             </div>
@@ -755,7 +755,7 @@
                          ng-model="tax.rate" name="currentlyTaxRate" hard-reset-required="true"
                          hard-reset-pattern="taxRateNumberPattern">
 
-                  <div class="btn btn-primary has-tooltip" ng-click="cancelTax()" style="margin: 0 8px;"
+                  <div class="btn btn-primary  has-tooltip" ng-click="cancelTax()" style="margin: 0 8px;"
                        tooltip-placement="top" uib-tooltip="cancel">
                     <i class="icn-sm icn-remove-token"></i>
                   </div>
@@ -860,7 +860,7 @@
 
         <div id="finish-navs" class="create-company-actions clearfix">
 
-          <div class="btn btn-lg btn-primary pull-right" ui-sref="companies">
+          <div class="btn btn-lg btn-primary btn-primary-outline pull-right" ui-sref="companies">
             Cancel
           </div>
 
