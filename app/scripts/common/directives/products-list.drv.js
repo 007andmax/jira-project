@@ -31,6 +31,7 @@
             }
 
             scope.selectProduct(product);
+            scope.$broadcast('addFloatPartOfNumber');
             hideDropdown();
           };
 

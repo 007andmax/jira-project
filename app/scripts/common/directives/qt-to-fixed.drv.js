@@ -3,7 +3,7 @@
 (function () {
 
   angular.module("quicktech.common.directives").directive('qtToFixed',
-    function () {
+    ['$timeout', function ($timeout) {
       return {
         restrict: 'A',
         link: function (scope, element, attrs) {
@@ -17,14 +17,18 @@
             unwatch();
           });
 
-          element.on('blur', function () {
-            var val = element.val();
-            if (val) {
-              element.val(parseFloat(val).toFixed(parseInt(attrs.qtToFixed)));
-              scope.$apply();
-            }
-          });
+          element.on('blur', formatNumber);
+          scope.$on('addFloatPartOfNumber', formatNumber);
+
+          function formatNumber() {
+            $timeout(function () {
+              var val = element.val();
+              if (val) {
+                element.val(parseFloat(val).toFixed(parseInt(attrs.qtToFixed)));
+              }
+            });
+          }
         }
       }
-    });
+    }]);
 })();

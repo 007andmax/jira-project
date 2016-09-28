@@ -4641,7 +4641,7 @@ tbody.collapse.in {
 .dropdown-toggle:focus {
   outline: 0;
 }
-.dropdown-menu {
+.dropdown-menu, .uib-dropdown-menu {
   position: absolute;
   top: 100%;
   /*left: 25px;*/
@@ -5694,7 +5694,7 @@ tbody.collapse.in {
   color: #94a4b8;
 }
 /* Custom dropdowns End */
-.service-list-container .dropdown-menu {
+.service-list-container .uib-dropdown-menu {
   padding: 0px !important;
   margin: 0px !important;
 }
@@ -5723,14 +5723,12 @@ tbody.collapse.in {
   }
 }
 .company-item.active {
-  background-color: #e7ecf2;
+  background-color: #e2f1fd;
   cursor: pointer;
-  text-decoration:
 }
 .company-item.selected {
   background-color: #e2f1fd;
   cursor: pointer;
-  text-decoration:
 }
 /* Dropdown company - End */
 /* Dropdown users - Start */
