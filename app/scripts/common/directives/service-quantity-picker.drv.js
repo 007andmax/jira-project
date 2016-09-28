@@ -266,7 +266,7 @@
             dropdownElement['hover' + element + 'Element'] = $(target);
             dropdownElement['hover' + element] = target.text;
 
-            dropdownElement['hover' + element + 'Element'].css('background-color', '#f1f5fa');
+            dropdownElement['hover' + element + 'Element'].css('background-color', '#e2f1fd');
 
           }
 

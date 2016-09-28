@@ -43,7 +43,7 @@
               preserveLastSelected: true,
 
               classes: {
-                containerClass: 'dropdown-menu dropdown-company',
+                containerClass: 'uib-dropdown-menu dropdown-company',
                 suggestion: 'company-item',
                 selected: 'active',
                 lastSelected: 'selected'

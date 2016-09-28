@@ -179,7 +179,6 @@
 
 .ticket-header-actions .ticket-edit-actions {
   padding-right: 10px;
-  border-right: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 @-moz-document url-prefix() {

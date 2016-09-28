@@ -98,7 +98,7 @@
           }
         };
 
-        $scope.archiveUsers = function () {
+        $scope.archiveUser = function () {
           var confirmMesage = 'Do you want to archive ' + $scope.user.firstName + ' ' + $scope.user.lastName + '?',
             confirmButton = 'Yes';
 
