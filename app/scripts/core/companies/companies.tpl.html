@@ -253,7 +253,7 @@
           </div>
         </div>
         <div class="col-xs-1">
-          <div ng-click="createUser(company.id)" style="display: inline-block;">
+          <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })" style="display: inline-block;" stop-propagation="click">
             <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
             <span class="badge badge-primary-outline list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
           </div>
