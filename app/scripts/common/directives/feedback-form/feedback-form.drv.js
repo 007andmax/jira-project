@@ -37,7 +37,7 @@
             function closeIfClickOutside(e) {
               var isInside = angular.element(e.target).closest(element);
 
-              if (!isInside.length) {
+              if (scope.formShown && !isInside.length) {
                 closeForm(scope, element);
               }
             }
