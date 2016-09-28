@@ -169,14 +169,14 @@
               <i class="icn-sm icn-edit"></i>
             </div>
 
-            <div class="btn btn-default btn-user-mail pull-left has-tooltip" ng-show="user.primaryEmail"
+            <div class="btn btn-default btn-user-mail pull-left has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
           <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
-               ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
-                      && !user.isContact && !isLastUserWithInvoiceSubscription(user.id)"
+               custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
+                      || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"
                tooltip-placement="top" uib-tooltip="Archive this User">
             <i class="icn-sm icn-remove-token"></i>
           </div>

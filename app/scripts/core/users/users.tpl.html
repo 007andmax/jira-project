@@ -80,8 +80,7 @@
 
             <!--</div>-->
 
-              <div class="btn btn-default pull-left has-tooltip"
-                   ng-show="user.primaryEmail && user.primaryEmail.length > 0"
+              <div class="btn btn-default pull-left has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
                    email-to="user.primaryEmail" data-placement="top" uib-tooltip="Send Email">
                 <i class="icn-sm icn-user-mail"></i>
               </div>
@@ -164,7 +163,7 @@
 
                   <li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
                       && !user.isContact && !isLastUserWithInvoiceSubscription(user)">
-                    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUsers()">
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUser()">
                       Archive this Contact
                     </a>
                   </li>
@@ -386,14 +385,14 @@
               <i class="icn-sm icn-edit"></i>
             </div>
 
-            <div class="btn btn-default btn-user-mail pull-left has-tooltip" ng-show="user.primaryEmail"
+            <div class="btn btn-default btn-user-mail pull-left has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
             <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
-                 ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
-                      && !user.isContact && !isLastUserWithInvoiceSubscription(user)"
+                 custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
+                      || user.isContact || isLastUserWithInvoiceSubscription(user) }}"
                  tooltip-placement="top" uib-tooltip="Archive this User">
               <i class="icn-sm icn-delete"></i>
             </div>
