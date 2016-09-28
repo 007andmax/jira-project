@@ -1,4 +1,11 @@
 <div class="feed-back-form" ng-form="feedbackForm" ng-class="{'shown': formShown}">
+  <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
+        <span class="drop-area-subwrapper">
+          <span class="drop-area">
+            Drop Files Here
+          </span>
+        </span>
+  </div>
   <div class="row" ng-init="saveForm(feedbackForm)">
     <div class="col-sm-12 feed-head">
       <h1>Leave feedback</h1>
