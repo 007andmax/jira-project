@@ -391,6 +391,7 @@
 
 .qt-list .user-bio .label {
   flex-shrink: 5;
+  margin-left: 15px;
 }
 
 .users-list-wrapper {
@@ -1374,7 +1375,7 @@ Devices tab
 .qt-create-invoice {
   min-height: 166px;
   margin-bottom: 25px;
-  padding: 30px 96px 30px 86px;
+  padding: 15px;
 
   background-color: #ffffff;
   box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
