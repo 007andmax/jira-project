@@ -226,7 +226,7 @@
           ng-controller="quicktech.core.companies.companyCtrl"
           ui-sref="companyProfile({ companyId: company.id })">
         <div class="col-xs-3">
-          <img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt="">
+          <div style="min-height: 38px; display: inline-block; float: left;"><img ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
           <span class="list-company-name">{{ company.name }}</span>
           <span style="display: flex;">{{ location }}</span>
         </div>

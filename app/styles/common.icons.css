@@ -1512,6 +1512,10 @@ a:hover > .icn-tab-companies, a:active > .icn-tab-companies, li.active > a > .ic
 .icn-user-mail{
   background-position: -458px -206px;
 }
+.disabled .icn-user-mail,
+.disabled .icn-user-mail:hover{
+  background-position: -458px -227px;
+}
 :hover > .icn-user-mail, :active > .icn-user-mail, :focus:hover > .icn-user-mail, :focus:active > .icn-user-mail, :hover:active > .icn-user-mail, .active > .icn-user-mail, .open > .icn-user-mail, .open .icn-user-mail {
   background-position: -480px -206px;
 }
