@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
-      '$timeout', 'quicktech.common.services.PhoneFormats', 'Utils',
+      '$timeout', 'quicktech.common.services.PhoneFormats', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
-                $timeout, PhoneFormats, Utils) {
+                $timeout, PhoneFormats, UserConfirmationsService) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),
           action;
@@ -182,6 +182,8 @@
         $scope.changeAccountEnabled = function () {
           $scope.isResetPassCollapsed = true;
         };
+
+        UserConfirmationsService.preventLocationChange($scope);
 
       }]);
 

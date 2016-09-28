@@ -5,7 +5,9 @@
   angular.module('quicktech.core.vendors').controller('quicktech.core.vendors.editVendorCtrl',
     ['$scope', '$stateParams', 'AddressesService', 'VendorsService', 'ContactsService', '$state',
       'quicktech.common.services.PhoneFormats', 'quicktech.common.services.SharedStateService',
-      function ($scope, $stateParams, AddressesService, VendorsService, ContactsService, $state, PhoneFormats, SharedStateService) {
+      'quicktech.common.services.UserConfirmationsService',
+      function ($scope, $stateParams, AddressesService, VendorsService, ContactsService, $state, PhoneFormats,
+                SharedStateService, UserConfirmationsService) {
 
         var currentTimeZone;
         var globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -186,6 +188,8 @@
         function setCurrentTimeZone(timeZoneObject) {
           $scope.editVendor.addresses[0].locale = timeZoneObject;
         }
+
+        UserConfirmationsService.preventLocationChange($scope);
 
       }]);
 

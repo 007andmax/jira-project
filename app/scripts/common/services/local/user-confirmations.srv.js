@@ -3,8 +3,8 @@
 (function (window, $, undefined) {
 
   angular.module('quicktech.common.services').service('quicktech.common.services.UserConfirmationsService',
-    ['$uibModal',
-      function ($uibModal) {
+    ['$uibModal', '$state',
+      function ($uibModal, $state) {
 
         var modalParams = {
           animation: true,
@@ -14,6 +14,8 @@
           windowClass: 'modal-spam',
           templateUrl: '/commonHtml/assets/templates/user-confirmations.tpl.html'
         };
+
+        this.preventMessage = 'Do you want to leave this page? All entered information will be lost.';
 
         this.show = function (message, button, hideCancel) {
 
@@ -35,6 +37,22 @@
             }]);
 
           return $uibModal.open(modalParams).result;
+        };
+
+        this.preventLocationChange = function ($scope) {
+          var preventLocationChange = true,
+            self = this;
+
+          $scope.$on('$stateChangeStart', function (event, toState, toParams) {
+            if (preventLocationChange) {
+              event.preventDefault();
+
+              self.show(self.preventMessage, 'OK').then(function () {
+                preventLocationChange = false;
+                $state.go(toState.name, toParams);
+              });
+            }
+          });
         };
 
       }]);

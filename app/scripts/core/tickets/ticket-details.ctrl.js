@@ -117,7 +117,6 @@
               }
             });
 
-
             $timeout(function () {
               $scope.$broadcast('ticketDetailsLoad');
             }, 0)
@@ -250,7 +249,16 @@
           };
 
           $scope.openedTab = function (tabName) {
-            $scope.currentOpenTab = tabName;
+            var ticketUpdate = $scope.ticketUpdate;
+            if (ticketUpdate.note || (ticketUpdate.products && ticketUpdate.products.length > 1)
+              || (ticketUpdate.services && ticketUpdate.services.length > 1)) {
+              var message = 'Do you want to leave this tab? All entered information will be lost';
+              UserConfirmationsService.show(message, 'OK').then(function () {
+                $scope.currentOpenTab = tabName;
+              });
+            } else {
+              $scope.currentOpenTab = tabName;
+            }
           };
 
           $scope.postTicketUpdate = function () {

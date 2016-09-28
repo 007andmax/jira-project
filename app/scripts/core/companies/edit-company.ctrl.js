@@ -7,10 +7,10 @@
       '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
       'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
-      'quicktech.common.services.PermissionsService',
+      'quicktech.common.services.PermissionsService', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
-                TaxRatesService, AddressesService, ServicesService, PhoneFormats,
-                SharedStateService, $stateParams, $state, VendorsService, $timeout, PermissionsService) {
+                TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService, $stateParams,
+                $state, VendorsService, $timeout, PermissionsService, UserConfirmationsService) {
 
         if ($stateParams.companyId && !PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -470,6 +470,7 @@
           };
         }
 
+        UserConfirmationsService.preventLocationChange($scope);
       }
     ]);
 
