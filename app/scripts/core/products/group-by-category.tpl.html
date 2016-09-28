@@ -50,12 +50,11 @@
     <li ng-repeat="category in productsData.categories | orderBy: ['default', 'name'] track by category.id"
         ng-controller="quicktech.core.products.categoryCtrl" ng-form="editCategoryForm"
         on-finish-render="loadingFinished()"
-        style="padding-left: 10px;padding-right: 10px;"
         ng-show="(!category.default || category.productsList.length > 0) && (!showCategory || showCategory === category.id)"
         ng-class="{'has-error': isShowingErrors(editCategoryForm, 'editCategoryName'),
                    'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
 
-      <div style="height: 71px;position: absolute;width: 100%;top: 0;z-index: 1;"
+      <div class="clickable-layer"
            ng-click="category.productsList.length > 0 ? setExpandedCategoryId(category.id) : null"
            ng-hide="isEditCategory"></div>
 

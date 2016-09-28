@@ -1348,6 +1348,10 @@
   display: block;
   font-size: 1.1em;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .list-company-badge{
   position: absolute;

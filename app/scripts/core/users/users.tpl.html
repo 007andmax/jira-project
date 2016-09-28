@@ -204,7 +204,7 @@
     </div>
   </div>
 
-  <ul class="qt-list qt-users" style="margin-bottom: 150px; padding: 0 25px;" ng-if="usersView === 'list'">
+  <ul class="qt-list qt-users"  ng-if="usersView === 'list'">
 
     <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
       <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
@@ -252,18 +252,18 @@
       <div class="col-lg-2 col-xs-1"></div>
     </li>
 
-    <li ng-if="editedUser && editedUser.newUser" style="min-height: 100px" qt-scroll-to="center"
+    <li ng-if="editedUser && editedUser.newUser"  qt-scroll-to="center"
         ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/edit-user.tpl.html'"></li>
 
     <li ng-repeat="user in (usersCtrl.shownUsers = (users | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) track by user.id"
         ng-controller="quicktech.core.users.userCtrl"
-        show-model-element="{{ 'show-user-on-save-' + user.id }}"
-        ng-style="{'min-height': editedUser && editedUser.id === user.id ? '100px' : 'unset'}">
+        show-model-element="{{ 'show-user-on-save-' + user.id }}">
+        <!--ng-style="{'min-height': editedUser && editedUser.id === user.id ? '100px' : 'unset'}">-->
 
       <div ng-if="editedUser && editedUser.id === user.id"
            ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/edit-user.tpl.html'"></div>
 
-      <div ng-if="!editedUser || editedUser.id !== user.id" style="display: flex;">
+      <div ng-if="!editedUser || editedUser.id !== user.id" class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3">
           <div class="user-bio">
             <div class="pull-left avatar">
@@ -280,7 +280,7 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2" style="display: flex;align-self: center;">
+        <div class="col-lg-2 col-xs-2 ellipsis" >
           {{ getUserCompanyName(user) }}
         </div>
 
@@ -296,9 +296,9 @@
         </div>
 
         <div class="col-lg-1 col-xs-1">
-          <div class="user-account-type" uib-dropdown style="height: 100%">
+          <div class="user-account-type" uib-dropdown>
 
-            <div class="label-wrapper" aria-expanded="false" uib-dropdown-toggle style="height: 100%">
+            <div class="label-wrapper" aria-expanded="false" uib-dropdown-toggle >
               <span>{{ user.role }}</span>
             </div>
 
@@ -395,7 +395,7 @@
                  ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
                       && !user.isContact && !isLastUserWithInvoiceSubscription(user)"
                  tooltip-placement="top" uib-tooltip="Archive this User">
-              <i class="icn-sm icn-remove-token"></i>
+              <i class="icn-sm icn-delete"></i>
             </div>
 
             <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->

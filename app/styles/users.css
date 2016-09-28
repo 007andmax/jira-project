@@ -432,7 +432,7 @@
   display: none;
 }
 .create-user-avatar .btn{
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 .create-user-avatar .file-name {
   color: #94a4b8;

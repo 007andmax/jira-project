@@ -569,6 +569,7 @@ body.modal-open {
 
 .dropdown-menu.add-description-form {
   padding: 25px 30px 30px;
+  width: 310px;
 }
 
 .collapsed-nav {
@@ -1120,7 +1121,6 @@ span.sort-span {
   color: #e53935;
 }
 .devices-settings-title{
-  display: inline-block;
   margin-top: 30px;
   font-size: 17px;
   color: #4c5c6f;
@@ -1134,7 +1134,7 @@ span.sort-span {
   width: 70%;
   display: block;
 }
-.device-settings-tab .btn-info{
+.device-settings-tab .btn-primary{
   margin-left: 15px;
   display: inline-block;
   width: 80px;
@@ -1144,6 +1144,7 @@ span.sort-span {
   color: #94A4B8;
   width: 57%;
   min-height: 277px;
+  margin-top: 20px;
 }
 .device-settings-tab .right-column-content .icn-hide-password {
   display: inline-block;

@@ -172,11 +172,11 @@
           </span>
         </div>
 
-        <div class="btn btn-lg btn-info" ng-click="updateCredentials(deviceSettingsForm)"
+        <div class="btn btn-lg btn-primary" ng-click="updateCredentials(deviceSettingsForm)"
              custom-disabled="{{!!(deviceSettingsForm.$pristine || (triedToSave && deviceSettingsForm.$invalid) || updating)}}">
           {{ selectedCredentialId !== undefined ? 'Update' : 'Create' }}
         </div>
-        <div class="btn btn-lg btn-info" ng-click="cancelEdit(deviceSettingsForm)"
+        <div class="btn btn-lg btn-primary btn-primary-outline" ng-click="cancelEdit(deviceSettingsForm)"
              custom-disabled="{{ deviceSettingsForm.$pristine && selectedCredentialId === undefined }}">
           Cancel
         </div>

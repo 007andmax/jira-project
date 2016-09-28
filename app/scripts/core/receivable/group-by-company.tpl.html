@@ -6,7 +6,7 @@
         on-finish-render="hideLoadingIndicator()" ng-if="receivableInvoicesData.companies[company.id].length"
         ng-controller="quicktech.core.receivable.companyCtrl">
 
-      <div class="col-1" ng-click="toggleReceivableInvoices()">
+      <div class="col-sm-10" ng-click="toggleReceivableInvoices()">
 
         <label class="control checkbox pull-left" stop-propagation="click">
           <input type="checkbox"
@@ -25,7 +25,7 @@
         </span>
       </div>
 
-      <div class="col-2" ng-click="toggleReceivableInvoices()">
+      <div class="col-sm-2 text-right" ng-click="toggleReceivableInvoices()">
         <div class="billable-amount bold">{{ totalSum.companies[company.id] | currency: '$': 2 }}</div>
       </div>
 
@@ -34,47 +34,47 @@
 
           <li class="list-heading" style="cursor: pointer !important;" ng-show="showInvoices"
               fixed-block-top offset-top="148" disable-stick="!$first">
-            <div class="col-1" ng-click="setOrderForInvoices('number')">
+            <div class="col-sm-4" ng-click="setOrderForInvoices('number')">
               <span class="sort-span">
                 INVOICE NO.
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'number'}"></i></span>
             </div>
-            <div class="col-2" ng-click="setOrderForInvoices('readedAt')">
+            <div class="col-sm-2" ng-click="setOrderForInvoices('readedAt')">
               <span class="sort-span">
                 READ ON
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'readedAt'}"></i></span>
             </div>
-            <div class="col-2" ng-click="setOrderForInvoices('date')">
+            <div class="col-sm-1" ng-click="setOrderForInvoices('date')">
               <span class="sort-span">
                 SENT ON
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'date'}"></i></span>
             </div>
-            <div class="col-3" ng-click="setOrderForInvoices('dueDate')">
+            <div class="col-sm-1" ng-click="setOrderForInvoices('dueDate')">
               <span class="sort-span">
                 DUE DATE
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'dueDate'}"></i></span>
             </div>
-            <div class="col-4">
+            <div class="col-sm-1">
               STATUS
             </div>
-            <div class="col-5" ng-click="setOrderForInvoices('amount')">
+            <div class="col-sm-2" ng-click="setOrderForInvoices('amount')">
               <span class="sort-span">
                 AMOUNT
                 <i class="icn-sm sort-icon icn-sort"
                    ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'amount'}"></i></span>
             </div>
-            <div class="col-6"></div>
+            <div class="col-sm-1"></div>
           </li>
 
           <li ng-repeat="invoice in receivableInvoicesData.companies[company.id] | orderBy: orderByForInvoices : orderInvoices.reverse track by invoice.id"
               ng-controller="quicktech.core.receivable.invoiceCtrl"
               show-model-element="{{ 'showInvoice-' + invoice.id }}">
 
-            <div class="col-1">
+            <div class="col-sm-4">
 
               <label class="control checkbox pull-left">
                 <input type="checkbox"
@@ -94,16 +94,16 @@
 
             </div>
 
-            <div class="col-2">{{ invoice.readedAt | date:'dd MMM yyyy' }}</div>
-            <div class="col-2">{{ invoice.date | date:'dd MMM yyyy' }}</div>
+            <div class="col-sm-2">{{ invoice.readedAt | date:'dd MMM yyyy' }}</div>
+            <div class="col-sm-1">{{ invoice.date | date:'dd MMM yyyy' }}</div>
 
-            <div class="col-3">
+            <div class="col-sm-1">
               <span class="label" ng-class="{'label-info': !dueDate.over, 'label-danger': dueDate.over}">
                 {{ dueDate.value | date:'dd MMM yyyy' }}
               </span>
             </div>
 
-            <div class="col-4">
+            <div class="col-sm-1">
               <span class="send-again-txt">{{ invoice.status === 'SENT' ? 'Sent' : 'Resent' }}</span>
 
               <button-with-loading-indicator class="pull-left has-tooltip resend-button"
@@ -112,8 +112,8 @@
                                              loading="sending[invoice.id]"></button-with-loading-indicator>
             </div>
 
-            <div class="col-5 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
-            <div class="col-6 group-btns" style="width: 50px;margin-top: 3px;">
+            <div class="col-sm-2 bold">{{ totalSum.invoices[invoice.id] | currency: '$': 2 }}</div>
+            <div class="col-sm-1 group-btns" style="margin-top: 3px;">
 
               <div uib-tooltip="{{ invoice.recurringInvoice ? 'reccuring&nbsp;invoices&nbsp;\ncan&nbsp;not&nbsp;be&nbsp;rolled&nbsp;back' : 'rollback' }}"
                    tooltip-placement="top"

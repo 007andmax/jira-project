@@ -71,11 +71,6 @@
   margin: 0;
 }
 
-.company-profile-content .qt-users li:not(.list-heading) .col-2 {
-  height: 71px;
-  top: -16px;
-}
-
 .company-profile-content .qt-users li:not(.list-heading) .col-2 .clearfix {
   position: absolute;
   top: 50%;
@@ -117,7 +112,6 @@
 
 .company-profile-content .qt-users .dropdown-subscribe {
   top: 35px;
-  /*left: -80px;*/
 }
 
 .company-profile-content .qt-users .dropdown-subscribe .control {
@@ -128,9 +122,7 @@
   top: 10px
 }
 
-.company-profile-content .qt-users .col-3-2 .persistent-tooltip {
-  margin-top: 13px;
-}
+
 
 .company-profile-content .qt-users .col-3-2 .persistent-tooltip i.badge-not-updates {
   background-position: -368px -51px;
@@ -138,12 +130,7 @@
 }
 
 .company-profile-content .bulk-option {
-  /*position: absolute;*/
-  /*right: -35px;*/
-
-  /*top: 50px;*/
   margin-right: 20px;
-  /*transform: translateY(50%);*/
   float: right;
 }
 

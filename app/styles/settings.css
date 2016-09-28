@@ -700,6 +700,7 @@ input.default-invoice-terms {
   text-align: center;
   cursor: pointer;
   margin-right: 20px;
+  min-height: 200px;
 }
 
 .settings-wrapper__trow--td:hover {

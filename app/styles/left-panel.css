@@ -255,6 +255,9 @@
 .filter .dropdown-menu li {
   color: #000000;
   padding: 10px 15px;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .filter .dropdown-menu li:hover {
   background-color: #e9f5fb;

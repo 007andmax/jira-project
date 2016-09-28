@@ -79,7 +79,7 @@
             {{ assignRequiredError ? 'Assign is required.' : 'Assign' }}
           </label>
 
-          <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-click="openDropdown()"
+          <button type="button" class="btn btn-info" uib-dropdown-toggle ng-click="openDropdown()"
                   ng-disabled="!hasEnabledType(credentialTypes) && !hasEnabledDevice(editedCredential)">
             <span class="ellipsis">{{ userReadable() || 'Assign' }}</span>
             <span ng-if="hasEnabledType(credentialTypes) || hasEnabledDevice(editedCredential)"
@@ -185,11 +185,11 @@
           </span>
         </div>
 
-        <div class="btn btn-lg btn-info" ng-click="updateCredentials(deviceSettingsForm)"
+        <div class="btn btn-lg btn-primary" ng-click="updateCredentials(deviceSettingsForm)"
              custom-disabled="{{!!(deviceSettingsForm.$pristine || (triedToSave && deviceSettingsForm.$invalid) || updating)}}">
           {{ selectedCredentialId !== undefined ? 'Update' : 'Create' }}
         </div>
-        <div class="btn btn-lg btn-info" ng-click="cancelEdit(deviceSettingsForm)"
+        <div class="btn btn-lg btn-primary btn-primary-outline" ng-click="cancelEdit(deviceSettingsForm)"
              custom-disabled="{{ deviceSettingsForm.$pristine && selectedCredentialId === undefined }}">
           Cancel
         </div>
