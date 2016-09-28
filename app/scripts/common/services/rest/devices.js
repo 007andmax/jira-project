@@ -451,7 +451,7 @@
           throw "CompanyId is required!"
         }
 
-        scannedDevices.devices = [];
+        scannedDevices[companyId] = [];
 
         $http.get('/devices/refreshNetworkScan?companyId=' + companyId).success(function (resp) {
           if (callback) {
@@ -478,7 +478,7 @@
 
           if (networkScan) {
             Utils.defineReadOnlyProperty(scannedDevices, "status", networkScan.netScanStatus.toLowerCase());
-            scannedDevices.devices = networkScan.devices;
+            scannedDevices[companyId] = networkScan.devices;
           }
 
           RealTimeService.subscribe('/netScan/' + companyId, scope, function (newChange) {
@@ -489,18 +489,18 @@
                 newDevices = data.deviceList,
                 status = data.status.toLowerCase();
 
-              if (!scannedDevices.devices || (scannedDevices.status === 'finished' && status !== 'finished')) {
-                scannedDevices.devices = [];
+              if (!scannedDevices[data.companyId] || (scannedDevices.status === 'finished' && status !== 'finished')) {
+                scannedDevices[data.companyId] = [];
               }
 
               Utils.defineReadOnlyProperty(scannedDevices, "status", status);
 
               for (var i = 0; i < newDevices.length; i++) {
                 var newDevice = newDevices[i],
-                  dublicatedDevice = Utils.findById(scannedDevices.devices, newDevice.id);
+                  dublicatedDevice = Utils.findById(scannedDevices[data.companyId], newDevice.id);
 
                 if (!dublicatedDevice) {
-                  scannedDevices.devices.push(newDevice);
+                  scannedDevices[data.companyId].push(newDevice);
                 } else {
                   Utils.customizeObj(newDevice, dublicatedDevice);
                 }
@@ -508,12 +508,12 @@
 
             } else if (newChange.action === 'REMOTE_INSTALL') {
 
-              var device = Utils.findById(scannedDevices.devices, newChange.data.netScanId);
+              var device = Utils.findById(scannedDevices[companyId], newChange.data.netScanId);
 
               if (!device) {
-                for (var i in scannedDevices.devices) {
-                  if (scannedDevices.devices[i].deviceId === newChange.data.deviceId) {
-                    device = scannedDevices.devices[i];
+                for (var i in scannedDevices[companyId]) {
+                  if (scannedDevices[companyId][i].deviceId === newChange.data.deviceId) {
+                    device = scannedDevices[companyId][i];
                   }
                 }
               }

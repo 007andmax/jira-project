@@ -40,6 +40,7 @@
 
         $scope.runScanDevices = function () {
           $scope.isScanDevicesLoad = true;
+          $scope.scanDevices = {};
           DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
             $scope.masterAgentOffline = resp.code === 400;
             if ($scope.masterAgentOffline) {
@@ -73,7 +74,9 @@
 
             if (lastMasterAgentId && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getLastScanDevices($scope, $scope.company.id, function (resp) {
-                $scope.scanDevices = resp;
+                $scope.scanDevices = $scope.scanDevices || {};
+                $scope.scanDevices.devices = resp[$scope.company.id];
+                $scope.scanDevices.status = resp.status;
               });
             } else {
               $scope.scanDevices = undefined;
@@ -118,8 +121,9 @@
                 var isAutoRescanEnable = resp.autoScanNetwork;
 
                 $scope.masterAgentOffline = false;
-                if (isAutoRescanEnable) {
+                if (isAutoRescanEnable && !$scope.isScanDevicesLoad) {
                   $scope.isScanDevicesLoad = true;
+                  $scope.scanDevices = {};
                   DevicesService.runScanDevices($scope, $scope.company.id, function (resp) {
                     $scope.masterAgentOffline = resp.code === 400;
                   });
