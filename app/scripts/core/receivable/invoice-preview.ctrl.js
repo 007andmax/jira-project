@@ -35,6 +35,7 @@
         $scope.print = function () {
           var wnd = window.open('/invoice/show/' + $scope.invoice.id + '/pdf');
           wnd.print();
+          $scope.close();
         };
 
         $scope.download = function () {
@@ -42,6 +43,7 @@
             '/invoice/show/' + $scope.invoice.id + '/pdf',
             CompaniesService.getOneById($scope.invoice.company.id).name + '-' + $scope.invoice.number + '.pdf'
           );
+          $scope.close();
         };
       }]);
 
