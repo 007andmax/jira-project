@@ -40,7 +40,7 @@
       xhr.open("POST", "/file?isAvatar=" + !!isAvatar);
       xhr.send(fd);
 
-      return storedFile;
+      return xhr;
     }
 
     function createImageFromBase64Url(base64Url, onFinish) {

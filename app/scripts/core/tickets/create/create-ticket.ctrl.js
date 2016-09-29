@@ -328,11 +328,10 @@
 
         $scope.addAttachmentFiles = function (file) {
           $scope.ticketAttachments.push(file);
-          $scope.$apply();
 
           if (file.size < 4194304) {
 
-            FilesService.create(file,
+            file.xhr = FilesService.create(file,
               function (progress) {
                 $scope.fileLoadOrError = true;
                 file.progress = 100 * (progress.loaded / progress.total);
@@ -356,6 +355,7 @@
                   $scope.ticketForm.$setValidity('errorFile', true);
                 }
 
+                file.xhr = null;
                 file.id = finish.id;
                 $scope.$apply();
               }, function (error) {});
@@ -364,12 +364,14 @@
 
             $scope.fileInfo[file.name] = {
               error: true,
-              message: 'Too large file (' + (file.size / 1048576).toFixed(2) + ' mb > 4 mb)'
+              message: 'File must be less then 4 MB'
             };
 
             $scope.fileInfo.quantityErrorFiles++;
             $scope.ticketForm.$setValidity('errorFile', false);
           }
+
+          $scope.$apply();
         };
 
         $scope.removeAttachment = function (index, isErrorFile) {
@@ -387,7 +389,13 @@
         };
 
         $scope.reloadAttachment = function (file) {
-          FilesService.create(file,
+          if ($scope.fileInfo[file.name] && $scope.fileInfo[file.name].error) {
+            return;
+          }
+          if (file.xhr && file.xhr.abort) {
+            file.xhr.abort();
+          }
+          file.xhr = FilesService.create(file,
             function (progress) {
               $scope.fileLoadOrError = true;
               file.progress = 100 * (progress.loaded / progress.total);
@@ -395,7 +403,9 @@
             },
             function (finish) {
               $scope.fileLoadOrError = false;
+              file.xhr = null;
               file.id = finish.id;
+              $scope.$apply();
             }, function (error) {
             });
         };

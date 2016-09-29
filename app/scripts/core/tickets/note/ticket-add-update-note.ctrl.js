@@ -8,7 +8,7 @@
 
           var uploadingAttachmentsCount = 0;
 
-          $scope.fileInfo = {quantityErrorFiles: 0};
+          $scope.fileInfo = { quantityErrorFiles: 0 };
 
           setTicketUpdateToDefault();
 
@@ -22,50 +22,71 @@
 
           $scope.addAttachmentFiles = function (file) {
             $scope.ticketUpdate.attachments.push(file);
-            $scope.$apply();
             $scope.disabledWhenLoadAttachment = true;
 
             uploadingAttachmentsCount++;
-
-            FilesService.create(file,
-              function (progress) {
-                file.progress = 100 * (progress.loaded / progress.total);
-                $scope.$apply();
-              },
-              function (finish) {
-
-                if (finish.code === 400 || finish.code === 500) {
-
-                  var message = finish.code === 500 ? 'Maximum upload size of 4 MB' : finish.message;
-
-                  $scope.fileInfo[file.name] = {
-                    error: true,
-                    message: message,
-                    code: finish.code
-                  };
-
-                  $scope.fileInfo.quantityErrorFiles++;
-                  $scope.updateTicketNote.$setValidity('errorFile', false);
-                }
-
-                if (--uploadingAttachmentsCount === 0) {
-                  $scope.disabledWhenLoadAttachment = false;
+            if (file.size < 4194304) {
+              file.xhr = FilesService.create(file,
+                function (progress) {
+                  file.progress = 100 * (progress.loaded / progress.total);
                   $scope.$apply();
-                }
+                },
+                function (finish) {
 
-                file.id = finish.id;
-              }, function (error) {
-              });
+                  if (finish.code === 400 || finish.code === 500) {
+
+                    var message = finish.code === 500 ? 'Maximum upload size of 4 MB' : finish.message;
+
+                    $scope.fileInfo[file.name] = {
+                      error: true,
+                      message: message,
+                      code: finish.code
+                    };
+
+                    $scope.fileInfo.quantityErrorFiles++;
+                    $scope.updateTicketNote.$setValidity('errorFile', false);
+                  }
+
+                  if (--uploadingAttachmentsCount === 0) {
+                    $scope.disabledWhenLoadAttachment = false;
+                  }
+
+                  file.xhr = null;
+                  file.id = finish.id;
+                  $scope.$apply();
+                }, function (error) {
+                });
+            } else {
+              $scope.fileLoadOrError = true;
+
+              $scope.fileInfo[file.name] = {
+                error: true,
+                message: 'File must be less then 4 MB'
+              };
+
+              $scope.fileInfo.quantityErrorFiles++;
+              $scope.ticketForm.$setValidity('errorFile', false);
+            }
+
+            $scope.$apply();
           };
 
           $scope.reloadAttachment = function (file) {
-            FilesService.create(file,
+            if ($scope.fileInfo[file.name] && $scope.fileInfo[file.name].error) {
+              return;
+            }
+            if (file.xhr && file.xhr.abort) {
+              file.xhr.abort();
+            }
+            file.xhr = FilesService.create(file,
               function (progress) {
                 file.progress = 100 * (progress.loaded / progress.total);
                 $scope.$apply();
               },
               function (finish) {
+                file.xhr = null;
                 file.id = finish.id;
+                $scope.$apply();
               }, function (error) {
               });
           };
