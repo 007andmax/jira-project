@@ -110,11 +110,15 @@
 
         $scope.$watch(function () {
           return $stateParams.tabName;
-        }, function (tabName) {
+        }, function (tabName, prevTab) {
           if (tabs.indexOf(tabName) < 0) {
             $scope.currentOpenTab = tabs[0];
           } else {
             $scope.currentOpenTab = tabName;
+
+            if ((tabName === 'devices' || tabName === 'network-scan') && !$scope.isHasDevices) {
+              $scope.currentOpenTab = prevTab;
+            }
 
             if (tabName === 'network-scan' && PermissionsService.isAllowed('NETWORK_SCAN_CLIENTS')) {
               DevicesService.getAgentSettingsByCompany($scope.company.id, function (resp) {
