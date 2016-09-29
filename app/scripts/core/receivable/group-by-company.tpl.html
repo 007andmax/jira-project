@@ -15,9 +15,8 @@
                  ng-change="changeCompanyCheckbox(company.id)">
           <span class="control-indicator"></span>
         </label>
-        <i class="priority-dot high" style="float: left;margin-top: 7px;margin-right: 13px;" ng-show="showIndicator"></i>
         <div class="checkbox-caption bold">{{ company.name }}</div>
-        <span class="label label-light">{{ receivableInvoicesData.companies[company.id].length }}</span>
+        <span class="label label-light" ng-class="{'high':showIndicator}">{{ receivableInvoicesData.companies[company.id].length }}</span>
 
 
         <span class="label label-light pull-right" ng-if="company.defaultPaymentMethod">

@@ -8,11 +8,27 @@
       align-content: flex-start;
 }
 .left-panel-head {
+  position: relative;
   width: 100%;
   height: 78px;
   display: flex;
   background-color: transparent;
   z-index: 2;
+}
+.left-panel-head:after{
+  position: absolute;
+  width: 41px;
+  height: 13px;
+  background-color: #f73d3d;
+  color: #fff;
+  font-size: 12px;
+  bottom: 7px;
+  line-height: 1em;
+  border-radius: 10px;
+  left: 24%;
+  padding: 0px 9px;
+
+  content: 'Beta';
 }
 .left-panel__category-wrap {
   padding-top: 78px;
@@ -193,7 +209,7 @@
 }
 .subsettings{
   height: 35px;
-  padding-left: 70px;
+  padding-left: 50px;
   position: relative;
 }
 
@@ -202,7 +218,7 @@
 }
 .subsettings:before{
   position: absolute;
-  left: 55px;
+  left: 30px;
   top: 41%;
   width: 7px;
   height: 7px;

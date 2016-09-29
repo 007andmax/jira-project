@@ -9107,6 +9107,10 @@ button.close {
     line-height: 19px;
   }
 }
+.label-light.high{
+  background-color: #e53935;
+  color: #fff;
+}
 .tooltip {
   position: absolute;
   z-index: 1070;

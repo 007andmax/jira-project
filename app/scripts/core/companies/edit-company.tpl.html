@@ -566,13 +566,13 @@
 
               <li ng-repeat="service in editCompany.services | orderBy: 'name'">
 
-                <div class="intermediate-parent-elem" ng-style="{'padding-top': service.versionedId ? '0' : '5px'}">
+                <div class="intermediate-parent-elem">
 
                   <div ng-if="service.versionedId" class="col-sm-6" >
                     <div class="checkbox-caption">{{ service.name }}</div>
                   </div>
 
-                  <div ng-if="!service.versionedId" class="col-1"
+                  <div ng-if="!service.versionedId" class="col-sm-6"
                        ng-class="{'has-error': (servicesForm['serviceName' + $index].$dirty || triedToSave) && isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
 
                     <div ng-messages="servicesForm['serviceName' + $index].$error" style="margin-top: -20px"
