@@ -327,38 +327,49 @@
         });
 
         $scope.addAttachmentFiles = function (file) {
-
           $scope.ticketAttachments.push(file);
           $scope.$apply();
 
-          FilesService.create(file,
-            function (progress) {
-              $scope.fileLoadOrError = true;
-              file.progress = 100 * (progress.loaded / progress.total);
-              $scope.$apply();
-            }, function (finish) {
+          if (file.size < 4194304) {
 
-              $scope.fileLoadOrError = false;
-
-              if (finish.code === 400 || finish.code === 500) {
-
+            FilesService.create(file,
+              function (progress) {
                 $scope.fileLoadOrError = true;
+                file.progress = 100 * (progress.loaded / progress.total);
+                $scope.$apply();
+              }, function (finish) {
 
-                $scope.fileInfo[file.name] = {
-                  error: true,
-                  message: finish.message.split(';')[0]
-                };
+                $scope.fileLoadOrError = false;
 
-                $scope.fileInfo.quantityErrorFiles++;
-                $scope.ticketForm.$setValidity('errorFile', false);
-              } else {
-                $scope.ticketForm.$setValidity('errorFile', true);
-              }
+                if (finish.code === 400 || finish.code === 500) {
 
-              file.id = finish.id;
-              $scope.$apply();
-            }, function (error) {
-            });
+                  $scope.fileLoadOrError = true;
+
+                  $scope.fileInfo[file.name] = {
+                    error: true,
+                    message: finish.message.split(';')[0]
+                  };
+
+                  $scope.fileInfo.quantityErrorFiles++;
+                  $scope.ticketForm.$setValidity('errorFile', false);
+                } else {
+                  $scope.ticketForm.$setValidity('errorFile', true);
+                }
+
+                file.id = finish.id;
+                $scope.$apply();
+              }, function (error) {});
+          } else {
+            $scope.fileLoadOrError = true;
+
+            $scope.fileInfo[file.name] = {
+              error: true,
+              message: 'Too large file (' + (file.size / 1048576).toFixed(2) + ' mb > 4 mb)'
+            };
+
+            $scope.fileInfo.quantityErrorFiles++;
+            $scope.ticketForm.$setValidity('errorFile', false);
+          }
         };
 
         $scope.removeAttachment = function (index, isErrorFile) {

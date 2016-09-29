@@ -83,6 +83,11 @@
     font-weight: bold; }
   .feed-back-form .btn-default {
     background: #fff; }
+  .feed-back-form .alert {
+    z-index: 50;
+    position: absolute;
+    white-space: nowrap;
+    transform: translateY(43%); }
   .feed-back-form .thanks-backdrop {
     height: 100.5%;
     width: 101%;
