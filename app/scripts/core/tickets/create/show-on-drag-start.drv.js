@@ -51,7 +51,7 @@
         }
 
         function onDrop(e) {
-          e.stopPropagation();
+          // e.stopPropagation();
           e.preventDefault();
           element.hide();
 
@@ -67,6 +67,7 @@
         function preventDropDefault(e) {
           e.stopPropagation();
           e.preventDefault();
+          element.hide();
         }
       }
     }

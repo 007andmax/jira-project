@@ -1,4 +1,11 @@
 <div class="feed-back-form" ng-form="feedbackForm" ng-class="{'shown': formShown}">
+  <div class="drop-area-wrapper" attach-files attach-func="addAttachmentFiles">
+        <span class="drop-area-subwrapper">
+          <span class="drop-area">
+            Drop Files Here
+          </span>
+        </span>
+  </div>
   <div class="row" ng-init="saveForm(feedbackForm)">
     <div class="col-sm-12 feed-head">
       <h1>Leave feedback</h1>
@@ -82,9 +89,14 @@
       <input type="text" class="form-control" ng-model="feedbackDto.browserName">
     </div>
     <div class="col-sm-2">
+      <div class="alert alert-danger" role="alert" ng-if="erorrFileMessage">
+        {{ erorrFileMessage }}
+      </div>
       <div class="center-horizontally">
         <div class="center-vertically" ng-show="feedbackDto.attachments[0].shown">
-          <img width="30px" ng-src="/file/{{ feedbackDto.attachments[0].id }}">
+          <a ng-href="/file/{{ feedbackDto.attachments[0].id }}" target="_blank">
+            <img width="30px" ng-src="/file/{{ feedbackDto.attachments[0].id }}">
+          </a>
           <i class="icn-sm icn-remove-token"
              ng-class="{'shown': feedbackDto.attachments[0].shown}"
              ng-click="removeAttachment(0)" stop-propagation="click"></i>
@@ -94,7 +106,9 @@
     <div class="col-sm-2">
       <div class="center-horizontally">
         <div class="center-vertically" ng-show="feedbackDto.attachments[1].shown">
-          <img width="30px" ng-src="/file/{{ feedbackDto.attachments[1].id }}">
+          <a ng-href="/file/{{ feedbackDto.attachments[1].id }}" target="_blank">
+            <img width="30px" ng-src="/file/{{ feedbackDto.attachments[1].id }}">
+          </a>
           <i class="icn-sm icn-remove-token"
              ng-class="{'shown': feedbackDto.attachments[1].shown}"
              ng-click="removeAttachment(1)" stop-propagation="click"></i>
@@ -104,7 +118,9 @@
     <div class="col-sm-2">
       <div class="center-horizontally">
         <div class="center-vertically" ng-show="feedbackDto.attachments[2].shown">
-          <img width="30px" ng-src="/file/{{ feedbackDto.attachments[2].id }}">
+          <a ng-href="/file/{{ feedbackDto.attachments[2].id }}" target="_blank">
+            <img width="30px" ng-src="/file/{{ feedbackDto.attachments[2].id }}">
+          </a>
           <i class="icn-sm icn-remove-token"
              ng-class="{'shown': feedbackDto.attachments[2].shown}"
              ng-click="removeAttachment(2)" stop-propagation="click"></i>

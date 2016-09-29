@@ -50,6 +50,7 @@
 
             element.bind('dp.change', function (e) {
               ctrl.$setViewValue(e.date._d);
+              element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
 
           }

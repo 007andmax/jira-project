@@ -159,6 +159,7 @@
 
             VendorsService.save($scope.editVendor, function () {
               $scope.savingInProcess = false;
+              $scope.disablePreventingLocationChange = true;
               companiesHeaderSharedState.filter.isVendor = true;
               $state.go('companies');
             })
