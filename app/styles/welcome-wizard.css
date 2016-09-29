@@ -1,0 +1,68 @@
+.welcome-wrapper {
+  position: relative;
+  text-align: center;
+  font-family: "Roboto Regular", sans-serif; }
+  .welcome-wrapper__header {
+    font-family: "Roboto Medium", sans-serif; }
+    .welcome-wrapper__header--description {
+      position: relative; }
+      .welcome-wrapper__header--description span {
+        color: #4b4e6d; }
+      .welcome-wrapper__header--description:after {
+        position: absolute;
+        background-color: #f73d3d;
+        color: #fff;
+        font-size: 12px;
+        top: 140%;
+        border-radius: 20px;
+        right: 26%;
+        padding: 0px 15px;
+        content: 'BETA'; }
+  .welcome-wrapper .row img {
+    width: 100%; }
+  .welcome-wrapper .row .descr {
+    color: #0a678f;
+    font-size: 28px;
+    line-height: 1.2;
+    border-radius: 10px; }
+    .welcome-wrapper .row .descr--first {
+      margin-top: 140px;
+      background-color: rgba(0, 177, 71, 0.1); }
+    .welcome-wrapper .row .descr--second {
+      background-color: rgba(66, 90, 171, 0.1); }
+    .welcome-wrapper .row .descr--third {
+      background-color: rgba(147, 108, 95, 0.1); }
+  .welcome-wrapper .circles {
+    position: absolute;
+    top: 280px;
+    opacity: .55;
+    width: 116px;
+    height: 20px;
+    background: url("../images/input-icons/666.png");
+    background-size: contain; }
+    .welcome-wrapper .circles--first {
+      transform: rotate(38deg);
+      left: 30%; }
+    .welcome-wrapper .circles--second {
+      transform: rotate(-38deg);
+      right: 30%; }
+  .welcome-wrapper__footer {
+    width: 40%;
+    margin: 20px auto; }
+    .welcome-wrapper__footer button {
+      width: 100%;
+      border-radius: 5px;
+      background: #00b147;
+      border-color: #00b147;
+      font-size: 20px; }
+
+.welcome-wizard .modal-dialog {
+  top: 0;
+  left: calc(50% - 450px);
+  margin-left: 0;
+  margin-top: 30px;
+  width: 900px; }
+.welcome-wizard .modal-content {
+  border-radius: 25px; }
+
+/*# sourceMappingURL=welcome-wizard.css.map */
