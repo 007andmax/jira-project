@@ -80,15 +80,11 @@
               companyData.contacts = [getEmptyContact()];
             }
 
-            $scope.isLastInvoiceSubsciption = companyData.contacts[0].subscription.invoice &&
+            $scope.isLastInvoiceSubsciption = companyData.contacts[0].subscription &&
+              companyData.contacts[0].subscription.invoice &&
               UsersService.getAllByCompanyId($stateParams.companyId).filter(function (user) {
                 return user.subscription.invoice;
               }).length <= 1;
-
-            for (var i = 0; i < companyData.companyAssociations.length; i++) {
-              var association = companyData.companyAssociations[i];
-              $scope.vendorsSelection[association.vendor.id] = true;
-            }
 
             for (var k = 0; k < companyData.services.length; k++) {
               $scope.selectedServices[companyData.services[k].name] = true
@@ -196,6 +192,7 @@
 
             CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
+              $scope.disablePreventingLocationChange = true;
               $state.go('companyProfile', { companyId: resp.id || resp });
             })
           } else {

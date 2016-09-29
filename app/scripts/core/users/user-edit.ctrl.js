@@ -137,6 +137,8 @@
             UsersService.save(editUser, function (resp) {
               var userId = resp.id;
               $scope.savingInProcess = false;
+              $scope.disablePreventingLocationChange = true;
+
               $timeout(function () {
                 $rootScope.$broadcast('show-after-save-' + userId);
               }, 0);

@@ -44,7 +44,7 @@
             self = this;
 
           $scope.$on('$stateChangeStart', function (event, toState, toParams) {
-            if (preventLocationChange) {
+            if (preventLocationChange && !$scope.disablePreventingLocationChange) {
               event.preventDefault();
 
               self.show(self.preventMessage, 'OK').then(function () {
