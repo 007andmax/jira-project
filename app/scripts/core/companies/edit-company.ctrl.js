@@ -368,6 +368,7 @@
 
           if (originService === 'new-service') {
             var newService = {
+              new: true,
               name: '',
               rate: 0,
               billable: true
@@ -428,6 +429,7 @@
 
           if (originTax === 'new-tax-rate') {
             var newTaxRate = {
+              new: true,
               code: '',
               rate: 0
             };
