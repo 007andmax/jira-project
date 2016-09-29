@@ -890,9 +890,9 @@ Devices tab
   color: #94a4b8;
 }
 
-.qt-billable-sub > li + li {
-  min-height: 71px;
-}
+/*.qt-billable-sub > li + li {*/
+  /*min-height: 71px;*/
+/*}*/
 
 .inventory-details .qt-table {
   display: none;
@@ -1066,7 +1066,6 @@ Devices tab
 
 .qt-recurring-invoices > li + li {
   height: auto;
-  min-height: 71px;
 }
 
 .qt-recurring-invoices > li > .col-1 {
