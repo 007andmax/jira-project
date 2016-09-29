@@ -249,9 +249,16 @@
           };
 
           $scope.openedTab = function (tabName) {
+            if ($scope.currentOpenTab === tabName) {
+              return;
+            }
+
             var ticketUpdate = $scope.ticketUpdate;
-            if (ticketUpdate.note || (ticketUpdate.products && ticketUpdate.products.length > 1)
-              || (ticketUpdate.services && ticketUpdate.services.length > 1)) {
+            if (ticketUpdate.note
+              || (ticketUpdate.attachments && ticketUpdate.attachments.length)
+              || (ticketUpdate.products && ticketUpdate.products.length > 1)
+              || (ticketUpdate.services && ticketUpdate.services.length > 1)
+            ) {
               var message = 'Do you want to leave this tab? All entered information will be lost';
               UserConfirmationsService.show(message, 'OK').then(function () {
                 $scope.currentOpenTab = tabName;
@@ -587,6 +594,7 @@
 
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);
+              $scope.disablePreventingLocationChange = true;
               $state.go('tickets');
               $scope.uncheckTicket($scope.ticketDetails.id);
               $scope.ticketClosing = false;
@@ -634,6 +642,13 @@
 
             return result;
           }
+
+          var condition = 'ticketUpdate.note' +
+            '|| (ticketUpdate.attachments && ticketUpdate.attachments.length)' +
+            '|| (ticketUpdate.products && ticketUpdate.products.length > 1)' +
+            '|| (ticketUpdate.services && ticketUpdate.services.length > 1)';
+
+          UserConfirmationsService.preventLocationChange($scope, condition);
 
         }]);
   }()

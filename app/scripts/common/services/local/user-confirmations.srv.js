@@ -39,12 +39,16 @@
           return $uibModal.open(modalParams).result;
         };
 
-        this.preventLocationChange = function ($scope) {
+        this.preventLocationChange = function ($scope, condition) {
           var preventLocationChange = true,
             self = this;
 
           $scope.$on('$stateChangeStart', function (event, toState, toParams) {
-            if (preventLocationChange && !$scope.disablePreventingLocationChange) {
+            var isNeedToPrevent = true;
+            if (condition) {
+              isNeedToPrevent = $scope.$eval(condition);
+            }
+            if (preventLocationChange && !$scope.disablePreventingLocationChange && isNeedToPrevent) {
               event.preventDefault();
 
               self.show(self.preventMessage, 'OK').then(function () {
