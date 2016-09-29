@@ -25,15 +25,15 @@
               }, dp,
               enabledDates = [],
               lastDate = '';
-  
+
             if (scope.minDate) {
               options.minDate = $filter('date')(scope.minDate, 'dd MMM yyyy');
             }
-  
+
             if (scope.maxDate) {
               options.maxDate = $filter('date')(scope.maxDate, 'dd MMM yyyy');
             }
-  
+
             if (scope.defaultDate) {
               options.defaultDate = $filter('date')(scope.defaultDate, 'dd MMM yyyy');
             }
@@ -79,6 +79,7 @@
 
             element.bind('dp.change', function (e) {
               ctrl.$setViewValue(e.date._d);
+              element.data('DateTimePicker') && element.data('DateTimePicker').hide();
             });
 
             element.bind('dp.hide', function (e) {
@@ -89,7 +90,7 @@
                 dp.data("DateTimePicker").enabledDates(enabledDates);
               }
             });
-            
+
             element.bind('dp.show', function (e) {
               element.parent().find('.datepicker').removeClass('datepicker');
             });

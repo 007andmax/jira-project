@@ -27,10 +27,10 @@
                name="serviceDescription" max-length-word="30"/>
       </div>
       <div class="col-4" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
-        <div uib-dropdown>
+        <div>
           <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
           <input type="text" class="form-control has-dropdown" qt-data-time-picker max-date="maxServiceDate"
-                 uib-dropdown-toggle aria-expanded="false" placeholder="Date"
+                 aria-expanded="false" placeholder="Date"
                  ng-model="serviceExpense.date"
                  name="serviceData" ng-required="true">
         </div>
