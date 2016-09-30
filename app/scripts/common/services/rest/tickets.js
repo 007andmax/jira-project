@@ -356,6 +356,7 @@
       }
 
       function getCount(callback) {
+        storage.ticketsQuantityCallback = callback;
 
         $http.post('/v2/tickets/count', storage.lastParams).then(function (resp) {
           storage.ticketsQuantity = resp.data;
@@ -579,6 +580,7 @@
             Utils.deleteById(storage.tickets, ticketById.id);
             storage.ticketsQuantity--;
           }
+          storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
 
         } else if (ticketChangedActions.indexOf(newChange.action) > -1) {
 
@@ -598,6 +600,7 @@
             storage.tickets.splice(ticketIndex, 1);
             storage.ticketsQuantity--;
           }
+          storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
 
         } else if (newChange.action === 'READ') {
           if (ticketById) {
@@ -618,7 +621,8 @@
         } else if (newChange.action === 'TICKET_DELETED') {
           Utils.deleteById(storage.tickets, newChange.data.id);
           if (isTicketMatchesFilters(newChange.data, storage.lastParams)) { // if ticket was deleted forever
-            storage.ticketsQuantity--;              //it needs to decrement tickets' counter in trash or spam sections
+            storage.ticketsQuantity--;            //it needs to decrement tickets' counter in trash or spam sections
+            storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
           }
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {
             $rootScope.$broadcast('ticket_is_not_available_anymore', newChange.data);

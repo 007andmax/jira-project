@@ -764,3 +764,7 @@
 .vendor-actions.user-actions .btn {
   width: 100px;
 }
+.vendor-cover {
+  background: url('../images/company/cover.png') transparent right no-repeat;
+  background-size: cover;
+}
