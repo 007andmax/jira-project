@@ -44,13 +44,13 @@
       </div>
 
       <div class="form-group no-label">
-        <div class="pull-left ui" uib-dropdown>
+        <div class="pull-left ui" uib-dropdown dropdown-append-to-body="true">
 
           <input type="text" class="form-control-number has-dropdown"
                  ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
                  aria-expanded="true" READONLY>
 
-          <ul class="dropdown-menu dropdown-account-type">
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 200px;">
             <li ng-repeat="(type, label) in phoneNumberTypes"
                 ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
@@ -112,13 +112,13 @@
       </div>
 
       <div class="form-group no-label">
-        <div class="pull-left ui" uib-dropdown>
+        <div class="pull-left ui" uib-dropdown dropdown-append-to-body="true">
 
           <input type="text" class="form-control-number has-dropdown"
                  ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
                  aria-expanded="true" READONLY>
 
-          <ul class="dropdown-menu dropdown-account-type">
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 200px;">
             <li ng-repeat="(type, label) in phoneNumberTypes"
                 ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>

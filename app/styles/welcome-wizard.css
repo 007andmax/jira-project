@@ -23,17 +23,38 @@
     cursor: pointer; }
   .welcome-wrapper .row .descr {
     color: #0a678f;
+    position: relative;
     font-size: 28px;
     line-height: 1.2;
     border-radius: 10px;
-    margin: 76px 0; }
+    margin: 82.5px 0;
+    padding: 5px 0;}
     .welcome-wrapper .row .descr--first {
       background-color: rgba(0, 177, 71, 0.3); }
     .welcome-wrapper .row .descr--second {
       background-color: rgba(66, 90, 171, 0.3); }
     .welcome-wrapper .row .descr--third {
       background-color: rgba(147, 108, 95, 0.3); }
-  .welcome-wrapper .circles {
+.welcome-wrapper .row .descr:after{
+   position: absolute;
+   width: 5px;
+   bottom: 100%;
+   left: 118px;
+   height: 100px;
+
+   content: '';
+ }
+.welcome-wrapper .row .descr--first:after{
+  top: 100%;
+  background-color: rgba(0, 177, 71, 0.3);;
+}
+.welcome-wrapper .row .descr--second:after{
+  background-color: rgba(66, 90, 171, 0.3);
+}
+.welcome-wrapper .row .descr--third:after{
+  background-color: rgba(147, 108, 95, 0.3);
+}
+.welcome-wrapper .circles {
     position: absolute;
     top: 280px;
     opacity: .55;
