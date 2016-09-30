@@ -1,8 +1,7 @@
 <div ng-controller="quicktech.core.vendors.vendorCtrl" vendor-card
      ng-class="{'hide': company.isDefault, 'large': location.length > 50}">
 
-  <div class="company-cover-area"
-       style="background: url('images/company/cover.png') transparent right no-repeat; background-size: cover">
+  <div class="company-cover-area vendor-cover">
 
     <div class="name-rating" style="height: 10%">
       <div class="company-name" uib-tooltip="{{ vendor.name }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">

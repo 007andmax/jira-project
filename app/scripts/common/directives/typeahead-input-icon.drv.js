@@ -8,7 +8,7 @@
         restrict: 'A',
         template: '' +
         '<i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"' +
-        'ng-show="showClearIcon" ng-click="clearInput()" tooltip="clear" tooltip-placement="top"></i>' +
+        'ng-show="showClearIcon" ng-click="clearInput($event)" tooltip="clear" tooltip-placement="top"></i>' +
         '<i class="icn-sm icn-caret-gray" ng-hide="showClearIcon"></i>',
         scope: true,
         link: function (scope, element, attrs) {
@@ -25,7 +25,8 @@
             scope.showClearIcon = !!input.val();
           });
 
-          scope.clearInput = function () {
+          scope.clearInput = function (e) {
+            e.stopPropagation();
 
             var deleteItems = attrs.typeaheadInputIcon.split(',');
 

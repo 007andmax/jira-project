@@ -130,7 +130,12 @@
            ng-if="ticket.assignedUserId">{{ getUserName(getUserById(ticket.assignedUserId)) }}
       </div>
 
-      <span class="text-muted" style="float: right; margin-right: 0;">{{ userReadable(ticket.ticketSource) }}</span>
+      <span class="text-muted" style="float: right; margin-right: 0;">
+        {{ userReadable(ticket.ticketSource) }}
+        <span ng-if="ticket.sourceName && ticket.ticketSource.toLowerCase() === 'from_agent'">
+          &nbsp;({{ ticket.sourceName }})
+        </span>
+      </span>
 
     </div>
 

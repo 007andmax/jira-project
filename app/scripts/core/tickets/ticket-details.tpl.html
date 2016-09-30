@@ -105,6 +105,9 @@
                 {{ ticketDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}
                 <i class="dot-sep"></i>
                 {{ userReadable(ticketDetails.ticketSource) }}
+                <span ng-if="ticketDetails.sourceName && ticketDetails.ticketSource.toLowerCase() === 'from_agent'">
+                  &nbsp;({{ ticketDetails.sourceName }})
+                </span>
               </div>
             </div>
           </div>
