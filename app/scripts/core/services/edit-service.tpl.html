@@ -48,7 +48,7 @@
     <div class="btn btn-lg btn-info pull-right"
          ng-click="saveEditService(editServiceForm)"
          custom-disabled="{{ disabledSaveButton }}">
-      {{ editService.id ? 'Save' : 'Add' }}
+      {{ editService.versionedId.id ? 'Save' : 'Add' }}
     </div>
 
     <div class="btn btn-lg btn-primary pull-right" ng-click="cancelEditForm()">Cancel</div>

@@ -176,10 +176,10 @@
         var url = '/services',
           method = 'POST';
 
-        if (service.id) {
+        if (service.versionedId && service.versionedId.id) {
+          service.id = service.versionedId.id;
           method = 'PUT';
-          url = url + '/' + service.id;
-
+          url = url + '/' + service.versionedId.id;
         }
 
         var future = $http({
@@ -275,7 +275,7 @@
         }
 
         var services = data[key],
-          realTimeService = Utils.findById(services, service.id);
+          realTimeService = Utils.findById(services, service.versionedId.id);
 
         if (realTimeService) {
           Utils.customizeObj(service, realTimeService);
