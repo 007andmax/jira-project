@@ -411,7 +411,7 @@
 }
 
 .qt-users .user-contact-no {
-  /*color: #94a4b8;*/
+  display: block;
 }
 
 .qt-users .avatar {
@@ -429,6 +429,9 @@
 
   margin-top: 4px;
   margin-right: 10px;
+}
+.add-new-service{
+  background: #fff !important;
 }
 
 .qt-users .persistent-tooltip {
@@ -2402,7 +2405,7 @@ Devices tab
 }
 
 .qt-product-form {
-  height: 214px !important;
+  /*height: 214px !important;*/
   padding: 0 !important;
 
   border: none !important;
@@ -2418,10 +2421,6 @@ Devices tab
 }
 
 .product-form-wrapper {
-  position: absolute;
-  right: -60px;
-  left: -86px;
-
   height: 166px; /*height: 214px;*/
   padding: 30px 129px 30px 86px;
 

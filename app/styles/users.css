@@ -81,13 +81,11 @@
 }
 
 .users-list .user-card .avatar {
-  width: 170px;
+  width: 169px;
   overflow: hidden;
-  margin-top: -1px;
-  margin-right: -1px;
   float: right;
   border-radius: 0px;
-  height: 236px;
+  height: 234px;
 }
 
 .users-list .user-card .avatar.no-avatar {

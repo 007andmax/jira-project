@@ -240,20 +240,20 @@
           <span>{{ getUserName(primaryContact) }}</span>
         </div>
         <div class="col-xs-1">
-          <div create-ticket-open-modal="{{ company.id }}" style="display: inline-block;"
+          <div create-ticket-open-modal="{{ company.id }}" style="margin-left: 15px; display: inline-block;"
                uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
-            <span><i class="nav-icon icn-lg icn-unassigned" style="margin: 0;"></i></span>
+            <span><i class="nav-icon icn-lg icn-unassigned"></i></span>
             <span class="badge badge-primary-outline list-company-badge">{{ company.companyStatistic.ticketsSubmitted || '0' }}</span>
           </div>
         </div>
         <div class="col-xs-1">
-          <div style="display: inline-block;">
+          <div style="display: inline-block;margin-left: 15px;">
             <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
             <span class="badge badge-primary-outline list-company-badge">{{ devicesCount[company.id].all || '0' }}</span>
           </div>
         </div>
         <div class="col-xs-1">
-          <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })" style="display: inline-block;" stop-propagation="click">
+          <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })" style="display: inline-block;margin-left: 15px;" stop-propagation="click">
             <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
             <span class="badge badge-primary-outline list-company-badge">{{ companyComponentsCount.users.length || '0' }}</span>
           </div>

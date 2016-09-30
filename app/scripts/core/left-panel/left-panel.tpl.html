@@ -7,29 +7,39 @@
     <div class="left-panel__category-wrap nano-content">
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'dashboard'}"
            ng-click="toggleLeftPanel('dashboard')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
-        <i class="nav-icon icn-lg icn-unassigned"></i>
+        <img class="menu-img" ng-if="openedCategory !== 'dashboard'" src="images/input-icons/dashboard.png">
+        <img class="menu-img" ng-if="openedCategory === 'dashboard'" src="images/input-icons/dashboard2.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ng-click="toggleLeftPanel('tickets')">
-        <i class="nav-icon icn-lg icn-tickets"></i>
+        <img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/input-icons/Tickets.png">
+        <img class="menu-img" ng-if="openedCategory === 'tickets'" src="images/input-icons/Tickets2.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
            ng-click="toggleLeftPanel('companies')" ui-sref="companies"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
-        <i class="nav-icon icn-lg icn-companies"></i>
+        <img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/input-icons/Company.png">
+        <img class="menu-img" ng-if="openedCategory === 'companies'" src="images/input-icons/Company2.png">
+
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
            ng-click="toggleLeftPanel('users')" ui-sref="users"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
-        <i class="nav-icon icn-lg icn-users"></i>
+        <img class="menu-img" ng-if="openedCategory !== 'users'" src="images/input-icons/User.png">
+        <img class="menu-img" ng-if="openedCategory === 'users'" src="images/input-icons/User2.png">
+
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
            ng-click="toggleLeftPanel('billing')" ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
-        <i class="nav-icon icn-billable icn-lg"></i>
+        <img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/input-icons/Billing.png">
+        <img class="menu-img" ng-if="openedCategory === 'billing'" src="images/input-icons/Billing2.png">
+
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
            ng-click="toggleLeftPanel('inventory')">
-        <i class="nav-icon icn-products icn-lg"></i>
+        <img class="menu-img" ng-if="openedCategory !== 'inventory'" src="images/input-icons/Inventory.png">
+        <img class="menu-img" ng-if="openedCategory === 'inventory'" src="images/input-icons/Inventory2.png">
+
       </div>
       <div class="left-panel__category settings-left-bar">
         <div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"
@@ -38,13 +48,19 @@
             <div class="left-panel__category" ui-sref="settings" ng-click="onClickSettings()"
                  ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
                  style="width: calc(100% + 10px)">
-              <div class="svg-icn-settings"></div>
+              <img class="menu-img"
+                   ng-if="openedCategory !== 'settings' && (openedCategory !== undefined || !$state.is('settings'))"
+                   src="images/input-icons/settings.png">
+              <img class="menu-img"
+                   ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"
+                   src="images/input-icons/settings2.png">
             </div>
           </div>
         </div>
       </div>
-      <div class="left-panel__category tutorial-left-bar" ng-click="toggleLeftPanel('tutorial')">
-        <div class="svg-icn-tutorial"></div>
+      <div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}" ng-click="toggleLeftPanel('tutorial')">
+        <img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/input-icons/Tutotial.png">
+        <img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/input-icons/Tutotial2.png">
       </div>
     </div>
   </div>
@@ -96,17 +112,17 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'all'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'all'})">
-             All Tickets
+          All Tickets
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
-           Unassigned
+          Unassigned
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'user'})">
-           My Tickets
+          My Tickets
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'shared'})}"
@@ -121,17 +137,17 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
-           Closed
+          Closed
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
-           Trash
+          Trash
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'spam'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'spam'})">
-           Spam
+          Spam
         </div>
       </div>
     </div>
@@ -205,19 +221,19 @@
         <span class="left-panel-full__head--header">Users</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category"  ng-click="filterUsers()"
+        <div class="center-category__category" ng-click="filterUsers()"
              ng-class="{'active': !(usersSharedState.filter.isContact || usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)}">
           All Users
         </div>
-        <div class="center-category__category"  ng-click="filterUsers('managers')"
+        <div class="center-category__category" ng-click="filterUsers('managers')"
              ng-class="{'active': usersSharedState.filter.isContact}">
           Managers
         </div>
-        <div class="center-category__category"  ng-click="filterUsers('clients')"
+        <div class="center-category__category" ng-click="filterUsers('clients')"
              ng-class="{'active': usersSharedState.filter.isClient}">
           Clients
         </div>
-        <div class="center-category__category"  ng-click="filterUsers('leads')"
+        <div class="center-category__category" ng-click="filterUsers('leads')"
              ng-class="{'active': usersSharedState.filter.isLead}">
           Leads
         </div>
@@ -246,7 +262,8 @@
               <p>By Company</p>
               <div style="position: relative;">
                 <input type="text" class="form-control has-dropdown readonly-normal"
-                       value="{{ getCompanyName(usersSharedState.filter.companyId) || '' }}" uib-dropdown-toggle readonly>
+                       value="{{ getCompanyName(usersSharedState.filter.companyId) || '' }}" uib-dropdown-toggle
+                       readonly>
                 <i class="icn-sm icn-caret-gray" ng-show="!usersSharedState.filter.companyId"></i>
                 <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
                    ng-show="usersSharedState.filter.companyId" ng-click="filterUsers('byCompany')"
@@ -300,7 +317,7 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('products')}"
              ng-click="stateGo($event, 'products', { tabName: 'category' })">
-        Products
+          Products
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('services')}"
@@ -316,7 +333,8 @@
 
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category sked" style="padding-left: 25px" ng-repeat="type in tutorialTypes"
-             ng-click="openTutorial(type)">{{ userReadable(type) }}</div>
+             ng-click="openTutorial(type)">{{ userReadable(type) }}
+        </div>
       </div>
     </div>
     <div class="left-panel-full-wrapper nano"

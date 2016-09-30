@@ -1081,7 +1081,8 @@ aside#left div.nav-title {
 }
 
 .services-info-wrapper .service-form-wrapper.edit-is-billable .col-3 label.checkbox {
-  left: 25px;
+  left: 20px;
+  top: 10px;
 }
 
 .services-content span.plus-circle {
@@ -1331,6 +1332,7 @@ span.sort-span {
   height: 200px;
   margin-bottom: 15px;
   line-height: 200px;
+  text-align: center;
 }
 .tech-company-logo .create-user-avatar .avatar img {
   max-width: 450px;

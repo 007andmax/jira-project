@@ -448,8 +448,11 @@
     margin-top: 20px;
   }
 }
-.settings-main-wrapper .control-indicator {
-  top: -2px;
+/*.settings-main-wrapper .control-indicator {*/
+  /*top: -2px;*/
+/*}*/
+.settings-main-wrapper .permission-line .control-indicator {
+  top: 6px;
 }
 .form-group.full-width label.control {
   margin-top: 17px;
