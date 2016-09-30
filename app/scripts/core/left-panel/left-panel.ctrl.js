@@ -4,8 +4,9 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
-      'quicktech.common.services.PermissionsService', 'CompaniesService',
-      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService) {
+      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService',
+      function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
+                TutorialsService) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -21,6 +22,9 @@
         $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
+        TutorialsService.getTypes(function (resp) {
+          $scope.tutorialTypes = resp;
+        });
 
         $scope.$state = $state;
         $scope.PermissionsService = PermissionsService;
@@ -86,6 +90,10 @@
             $state.go(state, stateParams);
           }
 
+        };
+
+        $scope.openTutorial = function (type) {
+          window.open('/tutorials/pdf/' + type + '.pdf');
         };
 
         $scope.filterCompanies = function (filter, value) {
@@ -173,6 +181,22 @@
             $scope.clearDateRange();
           }
         });
+
+        $scope.userReadable = function (text) {
+          var words = text.split(/[\-_]/),
+            result = '';
+
+          for (var i = 0, len = words.length; i < len; i++) {
+            var word = words[i];
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+
+            if (i !== len - 1) {
+              result += ' ';
+            }
+          }
+
+          return result;
+        };
 
         //for one time popover
         $scope.initCompanyStatusWatch = function (hidePopoverFunc) {

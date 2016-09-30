@@ -193,6 +193,10 @@
   position: absolute;
   bottom: 0;
 }
+.tutorial-left-bar{
+  position: absolute;
+  bottom: 50px;
+}
 .svg-icn-settings {
   width: 40%;
   height: 100%;
@@ -204,6 +208,20 @@
 .left-panel__category:hover .svg-icn-settings,
 .active .svg-icn-settings{
   background: url('../images/input-icons/settings-gears-active.svg') no-repeat;
+  background-size: contain;
+  background-position: 50%;
+}
+.svg-icn-tutorial {
+  width: 40%;
+  height: 100%;
+  margin: auto;
+  background: url('../images/input-icons/man-with-a-question-in-speech-bubble.svg') no-repeat;
+  background-size: contain;
+  background-position: 50%;
+}
+.left-panel__category:hover .svg-icn-tutorial,
+.active .svg-icn-tutorial{
+  background: url('../images/input-icons/man-with-a-question-in-speech-bubble-active.svg') no-repeat;
   background-size: contain;
   background-position: 50%;
 }
