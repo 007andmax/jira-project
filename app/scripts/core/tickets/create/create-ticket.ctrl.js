@@ -327,38 +327,51 @@
         });
 
         $scope.addAttachmentFiles = function (file) {
-
           $scope.ticketAttachments.push(file);
-          $scope.$apply();
 
-          FilesService.create(file,
-            function (progress) {
-              $scope.fileLoadOrError = true;
-              file.progress = 100 * (progress.loaded / progress.total);
-              $scope.$apply();
-            }, function (finish) {
+          if (file.size < 4194304) {
 
-              $scope.fileLoadOrError = false;
-
-              if (finish.code === 400 || finish.code === 500) {
-
+            file.xhr = FilesService.create(file,
+              function (progress) {
                 $scope.fileLoadOrError = true;
+                file.progress = 100 * (progress.loaded / progress.total);
+                $scope.$apply();
+              }, function (finish) {
 
-                $scope.fileInfo[file.name] = {
-                  error: true,
-                  message: finish.message.split(';')[0]
-                };
+                $scope.fileLoadOrError = false;
 
-                $scope.fileInfo.quantityErrorFiles++;
-                $scope.ticketForm.$setValidity('errorFile', false);
-              } else {
-                $scope.ticketForm.$setValidity('errorFile', true);
-              }
+                if (finish.code === 400 || finish.code === 500) {
 
-              file.id = finish.id;
-              $scope.$apply();
-            }, function (error) {
-            });
+                  $scope.fileLoadOrError = true;
+
+                  $scope.fileInfo[file.name] = {
+                    error: true,
+                    message: finish.message.split(';')[0]
+                  };
+
+                  $scope.fileInfo.quantityErrorFiles++;
+                  $scope.ticketForm.$setValidity('errorFile', false);
+                } else {
+                  $scope.ticketForm.$setValidity('errorFile', true);
+                }
+
+                file.xhr = null;
+                file.id = finish.id;
+                $scope.$apply();
+              }, function (error) {});
+          } else {
+            $scope.fileLoadOrError = true;
+
+            $scope.fileInfo[file.name] = {
+              error: true,
+              message: 'File must be less then 4 MB'
+            };
+
+            $scope.fileInfo.quantityErrorFiles++;
+            $scope.ticketForm.$setValidity('errorFile', false);
+          }
+
+          $scope.$apply();
         };
 
         $scope.removeAttachment = function (index, isErrorFile) {
@@ -376,7 +389,13 @@
         };
 
         $scope.reloadAttachment = function (file) {
-          FilesService.create(file,
+          if ($scope.fileInfo[file.name] && $scope.fileInfo[file.name].error) {
+            return;
+          }
+          if (file.xhr && file.xhr.abort) {
+            file.xhr.abort();
+          }
+          file.xhr = FilesService.create(file,
             function (progress) {
               $scope.fileLoadOrError = true;
               file.progress = 100 * (progress.loaded / progress.total);
@@ -384,7 +403,9 @@
             },
             function (finish) {
               $scope.fileLoadOrError = false;
+              file.xhr = null;
               file.id = finish.id;
+              $scope.$apply();
             }, function (error) {
             });
         };

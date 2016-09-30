@@ -43,6 +43,7 @@
             }
           },
           controller: function ($scope) {
+            var deleteErrorFile, maxAttachments;
             $scope.types = {
               BUG: 'Bug',
               FEATURE: 'Feature',
@@ -62,40 +63,45 @@
             };
 
             $scope.addAttachmentFiles = function (file) {
-
-              $scope.feedbackDto.attachments.push(file);
-              $scope.$apply();
-
-              FilesService.create(file,
-                function (progress) {
-                  $scope.fileLoadOrError = true;
-                  file.progress = 100 * (progress.loaded / progress.total);
-                  $scope.$apply();
-                }, function (finish) {
-
-                  $scope.fileLoadOrError = false;
-
-                  if (finish.code === 400 || finish.code === 500) {
-
-                    $scope.fileLoadOrError = true;
-
-                    $scope.fileInfo[file.name] = {
-                      error: true,
-                      message: finish.message.split(';')[0]
-                    };
-
-                    $scope.fileInfo.quantityErrorFiles++;
-                    $scope.feedbackForm.$setValidity('errorFile', false);
-                  } else {
-                    $scope.feedbackForm.$setValidity('errorFile', true);
+              $timeout(function () {
+                if ($scope.feedbackDto.attachments.length > 2) {
+                  $scope.erorrFileMessage = 'Max 3 attachments';
+                  if (maxAttachments) {
+                    $timeout.cancel(maxAttachments);
                   }
+                  maxAttachments = $timeout(function () {
+                    $scope.erorrFileMessage = '';
+                  }, 3000);
+                  return;
+                }
 
-                  file.id = finish.id;
-                  file.shown = true;
-                  $scope.$apply();
-                }, function (error) {
-                  console.error(error);
-                });
+                $scope.feedbackDto.attachments.push(file);
+                if (file.size < 4194304) {
+
+                  FilesService.create(file,
+                    function (progress) {
+                      $scope.fileLoadOrError = true;
+                      file.progress = 100 * (progress.loaded / progress.total);
+                      $scope.$apply();
+                    }, function (finish) {
+
+                      $scope.fileLoadOrError = false;
+
+                      if (finish.code === 400 || finish.code === 500) {
+                        onFileError(finish.message.split(';')[0], file);
+                      } else {
+                        file.shown = true;
+                      }
+
+                      file.id = finish.id;
+                      $scope.$apply();
+                    }, function (error) {
+                      console.error(error);
+                    });
+                } else {
+                  onFileError('Too large file (max 4 mb)', file);
+                }
+              });
             };
 
             $scope.removeAttachment = function (index) {
@@ -106,9 +112,15 @@
               if (form.$valid) {
                 var feedbackDto = angular.copy($scope.feedbackDto);
                 $scope.triedToSave = false;
+                if ($scope.erorrFileMessage) {
+                  $scope.erorrFileMessage = '';
+                  $timeout.cancel(deleteErrorFile);
+                }
 
                 if (feedbackDto.attachments.length) {
-                  feedbackDto.attachments = feedbackDto.attachments.map(function (file) {
+                  feedbackDto.attachments = feedbackDto.attachments.filter(function (file) {
+                    return !file.error;
+                  }).map(function (file) {
                     return file.id;
                   })
                 }
@@ -127,6 +139,30 @@
             $scope.saveForm = function (form) {
               $scope.feedbackForm = form;
             };
+
+            function onFileError(message, file) {
+              var attachments = $scope.feedbackDto.attachments;
+
+              $scope.fileLoadOrError = true;
+              $scope.erorrFileMessage = message;
+
+              file.error = true;
+              if (deleteErrorFile) {
+                $timeout.cancel(deleteErrorFile);
+                var indexOfError = attachments.indexOf(file);
+                if (indexOfError > -1) {
+                  attachments.splice(indexOfError, 1);
+                }
+              }
+
+              deleteErrorFile = $timeout(function () {
+                $scope.erorrFileMessage = '';
+                var indexOfError = attachments.indexOf(file);
+                if (indexOfError > -1) {
+                  attachments.splice(indexOfError, 1);
+                }
+              }, 3000);
+            }
           }
         };
 
@@ -136,7 +172,7 @@
           if ($scope.feedbackForm) {
             $scope.feedbackForm.$setPristine();
           }
-          $scope.fileInfo = {};
+          $scope.erorrFileMessage = '';
           $scope.feedbackDto = {
             type: 'FEATURE',
             priority: 'MEDIUM',

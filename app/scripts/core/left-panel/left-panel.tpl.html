@@ -54,9 +54,11 @@
         <span class="left-panel-full__head--header">Dashboard</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')"
+        <div class="center-category__category"
+             style="padding-left: 55px;"
+             ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')"
              ng-click="stateGo($event, 'quickSupport');">
-          <div class="btn btn-success add-session-button has-tooltip icon-pos" style="top: 11px"
+          <div class="btn btn-success add-session-button has-tooltip icon-pos" style="top: 4px"
                ng-click="addQuickSession()"
                tooltip-placement="top" uib-tooltip="Create">
             <i class="icn-sm icn-plus"></i>
@@ -91,42 +93,42 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'all'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'all'})">
-          <i class="nav-icon icn-lg icn-tickets icon-pos"></i> All Tickets
+             All Tickets
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'unassigned'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'unassigned'})">
-          <i class="nav-icon icn-lg icn-unassigned icon-pos"></i> Unassigned
+           Unassigned
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'user'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'user'})">
-          <i class="nav-icon icn-lg icn-user-lg icon-pos"></i> My Tickets
+           My Tickets
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'shared'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'shared'})">
-          <i class="nav-icon icn-lg icn-shared icon-pos"></i> Shared
+          Shared
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'open'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'open'})">
-          <i class="nav-icon icn-lg icn-open icon-pos"></i> Open
+          Open
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'closed'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'closed'})">
-          <i class="nav-icon icn-lg icn-closed icon-pos"></i> Closed
+           Closed
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'trash'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'trash'})">
-          <i class="nav-icon icn-lg icn-trash icon-pos"></i> Trash
+           Trash
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'spam'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'spam'})">
-          <i class="nav-icon icn-lg icn-spam icon-pos"></i> Spam
+           Spam
         </div>
       </div>
     </div>
@@ -200,19 +202,19 @@
         <span class="left-panel-full__head--header">Users</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
-        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers()"
+        <div class="center-category__category"  ng-click="filterUsers()"
              ng-class="{'active': !(usersSharedState.filter.isContact || usersSharedState.filter.isLead || usersSharedState.filter.isClient || usersSharedState.filter.userId)}">
           All Users
         </div>
-        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('managers')"
+        <div class="center-category__category"  ng-click="filterUsers('managers')"
              ng-class="{'active': usersSharedState.filter.isContact}">
           Managers
         </div>
-        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('clients')"
+        <div class="center-category__category"  ng-click="filterUsers('clients')"
              ng-class="{'active': usersSharedState.filter.isClient}">
           Clients
         </div>
-        <div class="center-category__category sked" style="padding-left: 25px" ng-click="filterUsers('leads')"
+        <div class="center-category__category"  ng-click="filterUsers('leads')"
              ng-class="{'active': usersSharedState.filter.isLead}">
           Leads
         </div>
@@ -270,17 +272,17 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('accounting')}"
              ng-click="stateGo($event, 'accounting')">
-          <i class="nav-icon icn-billable icn-lg icon-pos"></i> Billiable
+          Billiable
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"
              ng-click="stateGo($event, 'receivable', {mode: 'group-by-company'})">
-          <i class="nav-icon icn-lg icn-receivable icon-pos"></i> Receivable
+          Receivable
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receipt-archive')}"
              ng-click="stateGo($event, 'receipt-archive', {mode: 'group-by-company'})">
-          <i class="nav-icon icn-lg icn-receipt-archive icon-pos"></i> Receipt Archive
+          Receipt Archive
         </div>
       </div>
     </div>
@@ -295,12 +297,12 @@
         <div class="center-category__category"
              ng-class="{active: $state.includes('products')}"
              ng-click="stateGo($event, 'products', { tabName: 'category' })">
-          <i class="nav-icon icn-lg icn-products icon-pos"></i> Products
+        Products
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('services')}"
              ng-click="stateGo($event, 'services', { tabName: 'default' })">
-          <i class="nav-icon icn-lg icn-services icon-pos"></i> Services
+          Services
         </div>
       </div>
     </div>
@@ -313,7 +315,8 @@
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category" ng-click="stateGo($event, 'settings.myProfile')"
              ng-class="{active: $state.is('settings.myProfile')}">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/user-shape.svg">My Profile
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/user-shape.svg">-->
+          My Profile
         </div>
 
         <div ng-style="{'height': $state.is('settings.myProfile') ? '140px' : '0'}" class="category-expanded">
@@ -330,25 +333,25 @@
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailNotifications')"
              ng-class="{active: $state.is('settings.emailNotifications')}">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/envelope.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/envelope.svg">-->
           Email Notifications
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.tags')"
              ng-class="{active: $state.is('settings.tags')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/tags.svg">-->
           Manage Tags
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.activityHistory')"
              ng-class="{active: $state.is('settings.activityHistory')}">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/history.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/history.svg">-->
           Activity History
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.companyProfile')"
              ng-class="{active: $state.is('settings.companyProfile')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/building.svg">-->
           Company Profile
         </div>
 
@@ -363,43 +366,43 @@
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.techUsers')"
              ng-class="{active: $state.is('settings.techUsers')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/admin-with-cogwheels.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/admin-with-cogwheels.svg">-->
           Tech Users
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.email')"
              ng-class="{active: $state.is('settings.email')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/email-settings.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/email-settings.svg">-->
           Email Settings
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.services')"
              ng-class="{active: $state.is('settings.services')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/open-wrench-tool-silhouette.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/open-wrench-tool-silhouette.svg">-->
           Services
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.taxRates')"
              ng-class="{active: $state.is('settings.taxRates')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/dollar-symbol.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/dollar-symbol.svg">-->
           Taxes
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.tickets')"
              ng-class="{active: $state.is('settings.tickets')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/concert-ticket.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/concert-ticket.svg">-->
           Ticket Settings
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.permissionsManagement')"
              ng-class="{active: $state.is('settings.permissionsManagement')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/permission.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/permission.svg">-->
           Permission Management
         </div>
 
         <div class="center-category__category" ng-click="stateGo($event, 'settings.emailTemplates')"
              ng-class="{active: $state.is('settings.emailTemplates')}" ng-if="currentUser.isOwner">
-          <img class="icon-pos nav-icon icn-lg" src="images/input-icons/mail.svg">
+          <!--<img class="icon-pos nav-icon icn-lg" src="images/input-icons/mail.svg">-->
           Email Templates
         </div>
       </div>

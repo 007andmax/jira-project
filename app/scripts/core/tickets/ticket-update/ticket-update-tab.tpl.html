@@ -9,19 +9,19 @@
       ng-if="TicketsPermissionsService.isActionVisible('add_expense', ticketDetails)">
 
     <li ng-class="{'active': currentOpenTab === 'NOTE'}">
-      <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('NOTE')">
+      <a href="javascript:void(0)" ng-click="openedTab('NOTE')">
         <i class="icn-lg icn-add-note"></i>Note
       </a>
     </li>
 
     <li ng-class="{'active': currentOpenTab === 'PRODUCT'}">
-      <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
+      <a href="javascript:void(0)" ng-click="openedTab('PRODUCT')">
         <i class="icn-lg icn-add-product"></i>Product
       </a>
     </li>
 
     <li ng-class="{'active': currentOpenTab === 'SERVICE'}">
-      <a data-toggle="pill" href="javascript:void(0)" ng-click="openedTab('SERVICE')">
+      <a href="javascript:void(0)" ng-click="openedTab('SERVICE')">
         <i class="icn-lg icn-add-service"></i>Service
       </a>
     </li>

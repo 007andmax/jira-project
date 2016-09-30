@@ -564,15 +564,15 @@
 
               </li>
 
-              <li ng-repeat="service in editCompany.services | orderBy: 'name'">
+              <li ng-repeat="service in editCompany.services | orderBy: ['new', 'name']">
 
-                <div class="intermediate-parent-elem" ng-style="{'padding-top': service.versionedId ? '0' : '5px'}">
+                <div class="intermediate-parent-elem">
 
                   <div ng-if="service.versionedId" class="col-sm-6" >
                     <div class="checkbox-caption">{{ service.name }}</div>
                   </div>
 
-                  <div ng-if="!service.versionedId" class="col-1"
+                  <div ng-if="!service.versionedId" class="col-sm-6"
                        ng-class="{'has-error': (servicesForm['serviceName' + $index].$dirty || triedToSave) && isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
 
                     <div ng-messages="servicesForm['serviceName' + $index].$error" style="margin-top: -20px"
@@ -689,7 +689,7 @@
               <div class="col-2">TAX PERCENT</div>
             </li>
 
-            <li ng-repeat="tax in editCompany.taxRates | orderBy: 'code'" ng-class="{'new-tax': isEditing}"
+            <li ng-repeat="tax in editCompany.taxRates | orderBy: ['new', 'code']" ng-class="{'new-tax': isEditing}"
                 ng-controller="quicktech.core.companies.taxRateCtrl">
 
               <div class="helping-additional-class" ng-if="!isEditing && tax.versionedId">

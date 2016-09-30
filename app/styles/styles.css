@@ -4927,6 +4927,11 @@ tbody.collapse.in {
 .dropdown-submenu:hover .dropdown-menu {
   display: block;
 }
+.justify-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 /*JscrollPane Container Class*/
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
@@ -4941,6 +4946,9 @@ tbody.collapse.in {
   color: #4c5c6f;
   background-color: #e9f5fb;
   cursor: pointer;
+}
+.topNavbar-logout > a:hover{
+  background-color: transparent !important;
 }
 .dropdown-menu.dropdown-labels {
   min-width: 160px;
@@ -9089,7 +9097,7 @@ button.close {
   margin-bottom: 0;
 }
 .modal-receive-payment .modal-footer .total-amount {
-  margin-top: 3px;
+  display: flex;
 }
 @-moz-document url-prefix() {
   .modal-receive-payment .modal-header {
@@ -9098,6 +9106,10 @@ button.close {
   .modal-receive-payment .modal-footer .total-amount {
     line-height: 19px;
   }
+}
+.label-light.high{
+  background-color: #e53935;
+  color: #fff;
 }
 .tooltip {
   position: absolute;
