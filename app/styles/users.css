@@ -489,6 +489,11 @@
   margin-top: 21px;
   max-width: 50%; /*experemental*/
 }
+@-moz-document url-prefix() {
+  .form-row .form-group.no-label {
+    margin-top: 3px;
+  }
+}
 .settings-main-wrapper .form-row .form-group.full-width.no-label {
   margin-top: 17px;
 }
