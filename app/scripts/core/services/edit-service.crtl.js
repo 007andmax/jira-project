@@ -8,7 +8,7 @@
 
         if ($scope.service) {
           $scope.editService = {
-            id: $scope.service.versionedId.id,
+            versionedId: $scope.service.versionedId,
             name: $scope.service.name,
             rate: $scope.service.rate,
             timeBlock: Math.round($scope.service.timeBlock * 60),
@@ -26,7 +26,7 @@
           if (form.$valid) {
             $scope.disabledSaveButton = true;
             ServicesService.save({
-              id: $scope.editService.id,
+              versionedId: $scope.editService.versionedId,
               name: $scope.editService.name,
               rate: $scope.editService.rate,
               timeBlock: $scope.editService.timeBlock / 60,

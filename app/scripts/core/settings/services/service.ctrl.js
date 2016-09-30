@@ -6,7 +6,9 @@
     ['$scope', '$rootScope', 'ServicesService',
       function ($scope, $rootScope, ServicesService) {
 
-        $scope.isBillable = $scope.service.billable;
+        $scope.$watch('service.billable', function (value) {
+          $scope.isBillable = value;
+        });
 
         $scope.deleteService = function () {
           ServicesService.deleteService($scope.service.versionedId.id);
