@@ -304,6 +304,7 @@
 
           var repeat = val[0];
           var startDay = val[1];
+          var numToGenerate = ($scope.paramInvocie.numToGenerate || 1) - 1;
           var endDay = new Date(startDay);
 
           if ($scope.editInvoiceForm.repeatingInvoice && $scope.editInvoiceForm.repeatingInvoice.$pristine) {
@@ -312,13 +313,13 @@
 
           if (repeat === 'Month') {
             $scope.repeatingInvoiceModel = true;
-            endDay.setMonth(startDay.getMonth());
+            endDay.setMonth(startDay.getMonth() + numToGenerate);
           } else if (repeat === 'Year') {
             $scope.repeatingInvoiceModel = true;
-            endDay.setFullYear(startDay.getFullYear());
+            endDay.setFullYear(startDay.getFullYear() + numToGenerate);
           } else if (parseInt(repeat) > 0) {
             $scope.repeatingInvoiceModel = true;
-            endDay = new Date(startDay);
+            endDay.setDate(startDay.getDate() + repeat * numToGenerate);
           } else {
             $scope.repeatingInvoiceModel = undefined;
             endDay = undefined
