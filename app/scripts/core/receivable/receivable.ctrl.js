@@ -194,7 +194,7 @@
 
         $scope.orderByForInvoices = function (item) {
           if ($scope.orderInvoices.field === 'number') {
-            return item.number;
+            return parseInt(item.number) || 0;
           } else if ($scope.orderInvoices.field === 'company') {
             return CompaniesService.getOneById(item.company.id).name;
           } else if ($scope.orderInvoices.field === 'readedAt') {
