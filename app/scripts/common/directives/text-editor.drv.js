@@ -37,11 +37,13 @@
             var html = wysiwyg.html();
             ctrl.$setViewValue(html);
 
-            if (attrs.teMaxlength) {
-              ctrl.$setValidity('maxlength', html.length <= attrs.teMaxlength);
-            }
+            $timeout(function () {
+              if (attrs.teMaxlength) {
+                ctrl.$setValidity('maxlength', html.length <= attrs.teMaxlength);
+              }
 
-            validateRequired();
+              validateRequired();
+            })
           });
 
           element.on('click', "a[data-edit='cblock']", function () {

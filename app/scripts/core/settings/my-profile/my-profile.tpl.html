@@ -130,12 +130,20 @@
             <div class="form-row clearfix" ng-if="loadUserProfile">
 
               <div class="form-group full-width" text-editor ng-model="userProfile.signature.content"
-                   te-initial-value="{{ userProfile.signature.content }}">
+                   te-initial-value="{{ userProfile.signature.content }}" te-maxlength="5000" name="signature"
+                   ng-class="{'has-error': isShowingErrors(basicInfoForm, 'signature')}">
 
-                <label class="control-label">Signature</label>
+                <label class="control-label" ng-hide="isShowingErrors(basicInfoForm, 'signature')">
+                  Signature
+                </label>
 
-                <div id="editor" class="form-control" contenteditable="true"
-                     te-editor class="editor" contenteditable="true" placeholder="Type your message..."
+                <div ng-messages="basicInfoForm.signature.$error"
+                     ng-show="isShowingErrors(basicInfoForm, 'signature')">
+                  <div class="control-label" ng-message="maxlength">Signature mustn't be greater then 5000 characters.</div>
+                </div>
+
+                <div id="editor" class="form-control editor" contenteditable="true"
+                     te-editor contenteditable="true" placeholder="Type your message..."
                      execute-when-outfocused="saveBasicInfo(basicInfoForm)"></div>
 
                 <div class="wysiwyg-controls-wrapper clearfix">

@@ -32,11 +32,13 @@
       'LocalStorageModule'
     ]);
 
-  app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider',
-    function ($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+  app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',
+    function ($stateProvider, $urlRouterProvider, localStorageServiceProvider, $animateProvider) {
 
       //uncomment this line for increasing angularjs performance (when debugging will not need)
       //$compileProvider.debugInfoEnabled(false);
+
+      $animateProvider.classNameFilter(/angular-animate/);
 
       localStorageServiceProvider
         .setPrefix('quicktech')

@@ -88,7 +88,7 @@
           </div>
         </div>
 
-        <div ng-show="qSHistoryExpanded" class="category-expanded">
+        <div ng-show="qSHistoryExpanded" class="category-expanded angular-animate">
           <div class="category-expanded-paragraph sked"
                ng-repeat="qs in qSHistory | orderBy: 'startedAt' track by qs.id"
                qt-custom-popover-template="/html/scripts/core/left-panel/quick-support-history-info.tpl.html"
@@ -350,7 +350,7 @@
           My Profile
         </div>
 
-        <div ng-style="{'height': $state.is('settings.myProfile') ? '140px' : '0'}" class="category-expanded">
+        <div ng-style="{'height': $state.is('settings.myProfile') ? '140px' : '0'}" class="category-expanded angular-animate">
           <div ng-if="$state.is('settings.myProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
@@ -387,7 +387,7 @@
         </div>
 
         <div ng-style="{'height': $state.is('settings.companyProfile') ? '70px' : '0'}"
-             class="category-expanded" ng-if="currentUser.isOwner">
+             class="category-expanded angular-animate" ng-if="currentUser.isOwner">
           <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info

@@ -125,21 +125,6 @@
 
   padding-top: 78px;
 }
-.left-panel__category .menu-img.ng-enter,
-.left-panel__category .menu-img.ng-leave {
-  --webkit-transition: none;
-  transition: none;
-}
-.left-panel__category .menu-img.ng-animate,
-.left-panel__category.ng-animate {
-  --webkit-transition: none;
-  transition: none;
-}
-.left-panel__category .menu-img.ng-animate,
-.left-panel__category.ng-animate {
-  --webkit-animation: none 0s;
-  animation: none 0s;
-}
 .left-panel-full__head--header {
   font-size: 2.2em;
   line-height: 1em;

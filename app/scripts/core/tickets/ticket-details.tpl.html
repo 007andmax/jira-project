@@ -442,7 +442,7 @@
                ng-controller="quicktech.core.tickets.ticketUpdateCtrl" ng-init="scrollToFirstUpdate($last)"
                ng-class="{'has-attachment': ticketUpdate.attachments.length > 0}" ng-init="updateIndex = $index;">
             <div class="ticket-update-avatar pull-left">
-              <div class="indicator-new-update animation-hide" ng-show="ticketUpdate.unread"
+              <div class="indicator-new-update animation-hide angular-animate" ng-show="ticketUpdate.unread"
                    std-update="{{ ticketUpdate.id }}"></div>
               <div class="pull-left avatar m-r">
                 <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="avatar-38 img-circle">
