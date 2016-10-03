@@ -184,7 +184,7 @@
           <div qt-custom-popover-template="/html/scripts/core/settings/email/send-test-email-popup.tpl.html"
                style="display: inline-block;" qt-popover-position="top">
             <div class="btn btn-lg btn-info test-email-popup-btn" qt-popover-trigger
-                 custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid }}">
+                 custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid || !smtp.isValid }}">
               Send test email
             </div>
           </div>
