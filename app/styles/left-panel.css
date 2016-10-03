@@ -126,7 +126,7 @@
   padding-top: 78px;
 }
 .left-panel-full__head--header {
-  font-size: 2.2em;
+  font-size: 1.9em;
   line-height: 1em;
 }
 .center-category .active {
@@ -136,7 +136,7 @@
 .icon-pos {
   position: absolute;
   top: 15px;
-  left: 20px;
+  left: 15px;
   cursor: pointer;
 }
 .left-panel-full-wrapper {

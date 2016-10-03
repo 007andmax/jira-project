@@ -43,7 +43,7 @@
             $scope.openedCategory = getOpenedCategory(value);
 
             if ($scope.openedCategory) {
-              document.title = $scope.openedCategory.charAt(0).toUpperCase() + $scope.openedCategory.slice(1);
+              document.title = $scope.userReadable($scope.openedCategory);
             } else if (value.indexOf('settings') > -1) {
               document.title = 'Settings';
             }
@@ -229,7 +229,7 @@
 
         function getOpenedCategory(url) {
           if (url.indexOf('quickSupport') > -1) {
-            return 'dashboard';
+            return 'quick-support';
           } else if (url.indexOf('settings.') > -1) {
             return 'settings';
           } else if (url.indexOf('tickets') > -1) {

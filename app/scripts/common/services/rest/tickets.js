@@ -620,8 +620,8 @@
 
         } else if (newChange.action === 'TICKET_DELETED') {
           Utils.deleteById(storage.tickets, newChange.data.id);
-          if (isTicketMatchesFilters(newChange.data, storage.lastParams)) { // if ticket was deleted forever
-            storage.ticketsQuantity--;            //it needs to decrement tickets' counter in trash or spam sections
+          if (newChange.data.trash || newChange.data.spam) {
+            storage.ticketsQuantity--;
             storage.ticketsQuantityCallback && storage.ticketsQuantityCallback(storage.ticketsQuantity);
           }
           if (storage.openedTicket && newChange.data.id === storage.openedTicket.id) {

@@ -5,10 +5,10 @@
     </div>
 
     <div class="left-panel__category-wrap nano-content">
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'dashboard'}"
-           ng-click="toggleLeftPanel('dashboard')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
-        <img class="menu-img" ng-if="openedCategory !== 'dashboard'" src="images/input-icons/Dashboard.png">
-        <img class="menu-img" ng-if="openedCategory === 'dashboard'" src="images/input-icons/Dashboard2.png">
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'quick-support'}"
+           ng-click="toggleLeftPanel('quick-support')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
+        <img class="menu-img" ng-if="openedCategory !== 'quick-support'" src="images/input-icons/QuickSupport.png">
+        <img class="menu-img" ng-if="openedCategory === 'quick-support'" src="images/input-icons/QuickSupportActive.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ng-click="toggleLeftPanel('tickets')">
@@ -65,12 +65,12 @@
     </div>
   </div>
   <div class="left-panel-full" ng-style="{'width': isLeftPanelHidden ? '0px' : '240px'}">
-    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'dashboard' && !isLeftPanelHidden">
+    <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'quick-support' && !isLeftPanelHidden">
       <div class="left-panel-full__head">
         <div class="icon-pos go-back-left-panel" ng-click="toggleLeftPanel(openedCategory)">
           <i class="icn-sm icn-expand-back"></i>
         </div>
-        <span class="left-panel-full__head--header">Dashboard</span>
+        <span class="left-panel-full__head--header">Quick Support</span>
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category"
