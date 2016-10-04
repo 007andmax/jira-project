@@ -603,6 +603,14 @@ hr {
   padding: 10px;
   border: 0;
 }
+.ticket-update-note .wysiwyg-controls-wrapper {
+  position: absolute;
+  top: calc(100% - 286px);
+  left: 40px;
+}
+.ticket-update-note .wysiwyg-controls-wrapper .reset-formatting {
+  left: 305px;
+}
 .modal-create-ticket .wysiwyg-controls-wrapper {
   padding: 18px 10px;
   height: 67px;

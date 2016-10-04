@@ -384,7 +384,7 @@
                   switch (ticketUpdateToSend.type) {
 
                     case 'NOTE':
-
+                      $scope.ticketUpdate.note = '';
                       UserNotificationService.show('New ticket update containing a note has been posted', true);
                       setCreateUpdateFormToDefault();
                       return;
