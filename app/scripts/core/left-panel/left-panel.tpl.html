@@ -7,38 +7,44 @@
     <div class="left-panel__category-wrap nano-content">
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'quick-support'}"
            ng-click="toggleLeftPanel('quick-support')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
-        <img class="menu-img" ng-if="openedCategory !== 'quick-support'" src="images/input-icons/QuickSupport.png">
-        <img class="menu-img" ng-if="openedCategory === 'quick-support'" src="images/input-icons/QuickSupportActive.png">
+        <img class="menu-img" ng-if="openedCategory !== 'quick-support'"
+             src="images/input-icons/left-panel/quick-support.png">
+        <img class="menu-img" ng-if="openedCategory === 'quick-support'"
+             src="images/input-icons/left-panel/active_quick-support.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
            ng-click="toggleLeftPanel('tickets')">
-        <img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/input-icons/Tickets.png">
-        <img class="menu-img" ng-if="openedCategory === 'tickets'" src="images/input-icons/Tickets2.png">
+        <img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/input-icons/left-panel/tickets.png">
+        <img class="menu-img" ng-if="openedCategory === 'tickets'"
+             src="images/input-icons/left-panel/active_tickets.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'companies'}"
            ng-click="toggleLeftPanel('companies')" ui-sref="companies"
            ng-if="PermissionsService.isAllowed('VIEW_COMPANIES')">
-        <img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/input-icons/Company.png">
-        <img class="menu-img" ng-if="openedCategory === 'companies'" src="images/input-icons/Company2.png">
+        <img class="menu-img" ng-if="openedCategory !== 'companies'" src="images/input-icons/left-panel/companies.png">
+        <img class="menu-img" ng-if="openedCategory === 'companies'"
+             src="images/input-icons/left-panel/active_companies.png">
 
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'users'}"
            ng-click="toggleLeftPanel('users')" ui-sref="users"
            ng-if="PermissionsService.isAllowed('VIEW_USERS')">
-        <img class="menu-img" ng-if="openedCategory !== 'users'" src="images/input-icons/User.png">
-        <img class="menu-img" ng-if="openedCategory === 'users'" src="images/input-icons/User2.png">
+        <img class="menu-img" ng-if="openedCategory !== 'users'" src="images/input-icons/left-panel/users.png">
+        <img class="menu-img" ng-if="openedCategory === 'users'" src="images/input-icons/left-panel/active_users.png">
 
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
            ng-click="toggleLeftPanel('billing')" ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
-        <img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/input-icons/Billing.png">
-        <img class="menu-img" ng-if="openedCategory === 'billing'" src="images/input-icons/Billing2.png">
+        <img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/input-icons/left-panel/billing.png">
+        <img class="menu-img" ng-if="openedCategory === 'billing'"
+             src="images/input-icons/left-panel/active_billing.png">
 
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
            ng-click="toggleLeftPanel('inventory')">
-        <img class="menu-img" ng-if="openedCategory !== 'inventory'" src="images/input-icons/Inventory.png">
-        <img class="menu-img" ng-if="openedCategory === 'inventory'" src="images/input-icons/Inventory2.png">
+        <img class="menu-img" ng-if="openedCategory !== 'inventory'" src="images/input-icons/left-panel/inventory.png">
+        <img class="menu-img" ng-if="openedCategory === 'inventory'"
+             src="images/input-icons/left-panel/active_inventory.png">
 
       </div>
       <div class="left-panel__category settings-left-bar">
@@ -50,17 +56,18 @@
                  style="width: calc(100% + 10px)">
               <img class="menu-img"
                    ng-if="openedCategory !== 'settings' && (openedCategory !== undefined || !$state.is('settings'))"
-                   src="images/input-icons/settings.png">
+                   src="images/input-icons/left-panel/settings.png">
               <img class="menu-img"
                    ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"
-                   src="images/input-icons/settings2.png">
+                   src="images/input-icons/left-panel/settings2.png">
             </div>
           </div>
         </div>
       </div>
-      <div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}" ng-click="toggleLeftPanel('tutorial')">
-        <img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/input-icons/Tutotial.png">
-        <img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/input-icons/Tutotial2.png">
+      <div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}"
+           ng-click="toggleLeftPanel('tutorial')">
+        <img class="menu-img" ng-if="openedCategory !== 'tutorial'" src="images/input-icons/left-panel/Tutotial.png">
+        <img class="menu-img" ng-if="openedCategory === 'tutorial'" src="images/input-icons/left-panel/Tutotial2.png">
       </div>
     </div>
   </div>
@@ -350,7 +357,8 @@
           My Profile
         </div>
 
-        <div ng-style="{'height': $state.is('settings.myProfile') ? '140px' : '0'}" class="category-expanded angular-animate">
+        <div ng-style="{'height': $state.is('settings.myProfile') ? '140px' : '0'}"
+             class="category-expanded angular-animate">
           <div ng-if="$state.is('settings.myProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
