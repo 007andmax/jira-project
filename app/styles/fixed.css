@@ -1093,6 +1093,7 @@ aside#left div.nav-title {
 }
 .move-services .control{
   padding-left: 1.5rem;
+  margin: 7px 0;
 }
 .move-services .btn-lg, .btn-group-lg > .btn{
   margin-left: 15px;

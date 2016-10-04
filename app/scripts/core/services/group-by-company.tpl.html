@@ -22,12 +22,12 @@
               <label>Add Services</label>
             </div>
 
-            <div class="custom-scroll" style="max-height: 164px">
+            <div class="custom-scroll" style="max-height: 250px">
 
               <div ng-repeat="service in servicesData.default | orderBy: 'name'">
-                <label class="control checkbox">
+                <label class="control ellipsis checkbox">
                   <input type="checkbox" ng-model="addServiceDropdown.serviceMap[service.versionedId.id]">
-                  <span class="control-indicator pull-left"></span>
+                  <span class="control-indicator  pull-left"></span>
                   {{ service.name }}
                 </label>
               </div>

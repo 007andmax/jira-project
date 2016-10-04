@@ -12,7 +12,7 @@
             <div class="pull-left ticket-header-avatar">
               <img ng-src="{{ getUserAvatarUrl(user) }}" class="avatar-38 img-circle" alt="...">
             </div>
-            <div class="clearfix pull-left">
+            <div class="clearfix pull-left" style="width: calc(100% - 255px);">
               <div class="ticket-header-username pull-left">
                 <strong qt-popover-position="bottom"
                         custom-disabled="{{ user.company.isDefault }}"
@@ -151,7 +151,7 @@
 
               </ul>
             </div>
-            <div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);">
+            <div class="pull-left" uib-dropdown style="border-left: 1px solid rgba(0, 0, 0, 0.6);margin-left: 10px;">
               <div class="btn btn-default pull-left has-tooltip"
                    aria-haspopup="true" aria-expanded="false"
                    ng-if="TicketsPermissionsService.isActionVisible('claim_ticket,send_to_spam,send_to_trash', ticketDetails)"

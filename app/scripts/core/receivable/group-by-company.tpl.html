@@ -1,14 +1,14 @@
 <div role="tabpanel" class="tab-pane active">
   <ul class="qt-list qt-receivable" ftt-tab-content>
 
-    <li class="expanded" event-toggle-slider="toggleReceivableInvoices"
+    <li event-toggle-slider="toggleReceivableInvoices"
         ng-repeat="company in receivableCompanies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name' track by company.id"
         on-finish-render="hideLoadingIndicator()" ng-if="receivableInvoicesData.companies[company.id].length"
         ng-controller="quicktech.core.receivable.companyCtrl">
+      <div ng-click="toggleReceivableInvoices()" class="clickable-layer"></div>
+      <div class="col-sm-10" >
 
-      <div class="col-sm-10" ng-click="toggleReceivableInvoices()">
-
-        <label class="control checkbox pull-left" stop-propagation="click">
+        <label class="control checkbox pull-left" stop-propagation="click" style="z-index: 2;">
           <input type="checkbox"
                  ng-model="invoiceToSent[company.id].checked"
                  ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === company.id)"
@@ -24,7 +24,7 @@
         </span>
       </div>
 
-      <div class="col-sm-2 text-right" ng-click="toggleReceivableInvoices()">
+      <div class="col-sm-2 text-right" >
         <div class="billable-amount bold">{{ totalSum.companies[company.id] | currency: '$': 2 }}</div>
       </div>
 
