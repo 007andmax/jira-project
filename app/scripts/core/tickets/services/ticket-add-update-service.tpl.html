@@ -26,13 +26,14 @@
                ng-model="serviceExpense.description" ng-maxlength="2000"
                name="serviceDescription" max-length-word="30"/>
       </div>
-      <div class="col-4" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
+      <div class="col-5" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
         <div>
           <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
-          <input type="text" class="form-control has-dropdown" qt-data-time-picker max-date="maxServiceDate"
-                 aria-expanded="false" placeholder="Date"
-                 ng-model="serviceExpense.date"
-                 name="serviceData" ng-required="true">
+          <div class="btn btn-primary" qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date">
+            <input type="text" class="form-control has-dropdown" placeholder="Date"
+                   ng-model="serviceExpense.date" name="serviceData" ng-required="true">
+            <img src="images/input-icons/calendar.svg"  width="100%" height="100%" alt="">
+          </div>
         </div>
       </div>
       <div style="width: 100px">

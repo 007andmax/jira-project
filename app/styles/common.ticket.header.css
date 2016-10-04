@@ -129,6 +129,11 @@
 
 .ticket-header-username {
   margin-right: 10px;
+  max-width: calc(100% - 170px);
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .ticket-header-status {
@@ -177,9 +182,6 @@
   margin-left: 10px;
 }
 
-.ticket-header-actions .ticket-edit-actions {
-  padding-right: 10px;
-}
 
 @-moz-document url-prefix() {
   .ticket-header.ticket-fixed-header {

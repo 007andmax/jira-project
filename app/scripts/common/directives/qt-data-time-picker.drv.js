@@ -17,7 +17,7 @@
 
             var options = {
               keepOpen: true,
-              format: 'DD MMM YYYY',
+              format: 'DD/MM/YY',
               defaultDate: $filter('date')(Date.now(), 'dd MMM yyyy'),
               ignoreReadonly: true
             };
