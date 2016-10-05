@@ -7,7 +7,7 @@
 		restrict: 'A',
 		link: function ($scope, element, attrs) {
 
-			var updateAddUser = $scope.addItemToUpdate;
+			var updateAddUser = $scope.addUserToUpdate;
 			var getUsers = function(type){
 
 				var users = [];
@@ -27,15 +27,6 @@
 				  case 'CLIENT_USER':
 					users = $scope.clients;
 					break;
-
-				  case 'VENDOS':
-					users = $scope.vendorsContacts;
-					getEmail = function(user){
-						return user.email;
-					};
-					getAvatarUrl = $scope.getContactAvatarUrl;
-					updateAddUser = $scope.addItemToUpdate;
-					break;
 				}
 
 				return {
@@ -47,7 +38,7 @@
 
 			}
 
-			var types = ['TEAM_MEMBER', 'CLIENT_USER', 'VENDOS'];
+			var types = ['TEAM_MEMBER', 'CLIENT_USER'];
 			var users;
 			var maxProductWidth = 0;
 

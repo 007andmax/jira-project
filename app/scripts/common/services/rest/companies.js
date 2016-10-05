@@ -14,6 +14,7 @@
       amountChangeListeners = [],
       storage = {
         companies: [],
+        vendors: [],
         clientCompanies: [],
         deletedCompanies: [],
         currentCompany: {}
@@ -29,9 +30,14 @@
           if (custCompany.deletedAt) {
             storage.deletedCompanies.push(custCompany);
           } else {
-            if (!custCompany.isDefault) {
+            if (!custCompany.isDefault && (!custCompany.isVendor || custCompany.clientType)) {
               storage.clientCompanies.push(custCompany);
             }
+
+            if (custCompany.isVendor) {
+              storage.vendors.push(custCompany);
+            }
+
             storage.companies.push(custCompany);
           }
         }
@@ -44,7 +50,6 @@
 
     $http.get('/company/current').then(function (resp) {
         Utils.customizeObj(resp.data, storage.currentCompany);
-        storage.companies.push(storage.currentCompany);
         checkInit();
       },
       function (resp) {
@@ -81,7 +86,13 @@
         } else {
           var newClient = Utils.customizeObj(newChange.data);
           storage.companies.push(newClient);
-          storage.clientCompanies.push(newClient);
+          if (!newClient.isVendor || newClient.clientType) {
+            storage.clientCompanies.push(newClient);
+          }
+
+          if(newClient.isVendor) {
+            storage.vendors.push(newClient);
+          }
 
           for (var i = 0; i < amountChangeListeners.length; i++) {
             amountChangeListeners[i]();
@@ -97,6 +108,7 @@
 
         Utils.deleteById(storage.companies, companyId);
         Utils.deleteById(storage.clientCompanies, companyId);
+        Utils.deleteById(storage.vendors, companyId);
 
         if (callbackForArchive && (typeof callbackForArchive == 'function')) {
           callbackForArchive(companyId);
@@ -109,7 +121,14 @@
 
         var company = Utils.customizeObj(newChange.data);
 
-        storage.clientCompanies.push(company);
+        if (!company.isVendor || company.clientType) {
+          storage.clientCompanies.push(company);
+        }
+
+        if(company.isVendor) {
+          storage.vendors.push(company);
+        }
+
         storage.companies.push(company);
 
         for (var i = 0; i < amountChangeListeners.length; i++) {
@@ -135,6 +154,10 @@
       return storage.companies;
     }
 
+    function getVendors() {
+      return storage.vendors;
+    }
+
     function getUnassignedCompany() {
       for (var i = 0; i < storage.companies.length; i++) {
         if (storage.companies[i].isDefault) {
@@ -146,6 +169,9 @@
     function getOneById(companyId, callback) {
       if (callback) {
         callbackForArchive = callback;
+      }
+      if (companyId === storage.currentCompany.id) {
+        return storage.currentCompany;
       }
       return Utils.findById(storage.companies, companyId) || Utils.findById(storage.deletedCompanies, companyId);
     }
@@ -672,12 +698,18 @@
       return $http.get('/company/changeStatusFromSignUpToActive');
     }
 
+    function isVendorHasProducts(vendorId, callback) {
+      var future = $http.get('/company/' + vendorId + '/isProductExist');
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
       _search: search,
       _isInitialized: isInitialized,
       getCurrentCompany: getCurrentCompany,
+      getVendors: getVendors,
       getClientCompanies: getClientCompanies,
       getAllCompanies: getAllCompanies,
       getOneById: getOneById,
@@ -711,7 +743,8 @@
       getEmailAlias: getEmailAlias,
       saveEmailAlias: saveEmailAlias,
       getIndustries: getIndustries,
-      changeCompanyStatusToActive: changeCompanyStatusToActive
+      changeCompanyStatusToActive: changeCompanyStatusToActive,
+      isVendorHasProducts: isVendorHasProducts
     }
 
   }]);

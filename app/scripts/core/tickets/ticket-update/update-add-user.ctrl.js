@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.updateAddUserCtrl',
-      ['$scope', 'UsersService', 'CompaniesService', 'ContactsService', 'Utils', '$timeout',
-        function ($scope, UsersService, CompaniesService, ContactsService, Utils, $timeout) {
+      ['$scope', 'UsersService', 'CompaniesService', 'Utils', '$timeout',
+        function ($scope, UsersService, CompaniesService, Utils, $timeout) {
 
           $scope.currentAddUserTab = 'TEAM_MEMBER';
           $scope.searchFilter = {};
@@ -12,19 +12,6 @@
           if ($scope.ticketDetails) {
             $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
           }
-          $scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket($scope, function () {
-
-            for (var i = $scope.ticketSharedUsersList.length - 1; i >= 0; i--) {
-              var share = $scope.ticketSharedUsersList[i];
-
-              if (share.contact && !Utils.findById($scope.vendorsContacts, share.contact.id)) {
-                $scope.ticketSharedUsersList.splice(i, 1);
-                delete $scope.selectUpdateSharedUser[share.contact.id];
-              }
-            }
-
-          });
-          //$scope.vendorsContacts = ContactsService.getSubscribedContactsOnTicket();
 
           $scope.$watchCollection(function () {
             return $scope.clients.map(function (user) {
@@ -47,10 +34,6 @@
                 $scope.currentAddUserTab = 'TEAM_MEMBER';
                 return;
 
-              case 'VENDOS':
-                $scope.currentAddUserTab = 'VENDOS';
-                return;
-
               case 'CLIENT_USER':
                 $scope.currentAddUserTab = 'CLIENT_USER';
                 return;
@@ -69,7 +52,7 @@
               isAssignedUser = $scope.ticketDetails.assignedUser && item.id === $scope.ticketDetails.assignedUser.id;
               isCreatedUser = item.id === $scope.ticketDetails.createdUser.id;
               isAlreadyShared = shares.find(function (shared) {
-                return (shared.user ? shared.user.id : shared.contact.id) === item.id;
+                return shared.user.id === item.id;
               });
             } else if ($scope.ticket) {
               var assignedUserId;
@@ -115,31 +98,6 @@
                 }
               }
 
-            }
-          };
-
-          $scope.addContactToUpdate = function (contact) {
-
-            if ($scope.selectUpdateSharedUser[contact.id]) {
-
-              $scope.ticketSharedUsersList.push({ contact: contact, notify: true });
-
-            } else {
-
-              for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
-                if ($scope.ticketSharedUsersList[i].contact && $scope.ticketSharedUsersList[i].contact.id === contact.id) {
-                  $scope.ticketSharedUsersList.splice(i, 1);
-                }
-              }
-
-            }
-          };
-
-          $scope.addItemToUpdate = function (item) {
-            if (item.accountType) {
-              $scope.addUserToUpdate(item);
-            } else {
-              $scope.addContactToUpdate(item);
             }
           };
 

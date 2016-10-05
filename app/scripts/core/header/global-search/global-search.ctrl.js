@@ -190,8 +190,7 @@
               return function (id, name) {
                 $state.go('companies').then(function () {
                   $scope.sharedState = SharedStateService.getSharedState('companiesHeader');
-                  $scope.sharedState.filter.isVendor = true;
-                  $scope.sharedState.filter.vendorId = id;
+                  $scope.sharedState.filter.companyId = id;
                   $scope.globalSearch.searchValue = name;
                   $scope.clearLocalFilter = clearLocalFilter;
                 });

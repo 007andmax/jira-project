@@ -27,7 +27,7 @@
         };
 
         $scope.PermissionsService = PermissionsService;
-        $scope.users = UsersService.getClientUsers();
+        $scope.users = UsersService.getClientUsersWithVendors();
 
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {

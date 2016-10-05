@@ -431,7 +431,7 @@
               <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList">
                 <input type="checkbox" ng-model="sharedUser.notify">
                 <span class="control-indicator"></span>
-                <span style="text-transform: none">{{ getUserName(sharedUser.user || sharedUser.contact) }}</span>
+                <span style="text-transform: none">{{ getUserName(sharedUser.user) }}</span>
               </label>
 
               <label class="control checkbox pull-left"

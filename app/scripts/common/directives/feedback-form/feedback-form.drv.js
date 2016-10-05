@@ -201,7 +201,7 @@
           } else if ($state.includes("users")) {
             return 'Users';
           } else if ($state.includes("companies")) {
-            return SharedStateService.getSharedState('companiesHeader').filter.isVendor ? 'Vendors' : 'Companies';
+            return 'Companies';
           } else if ($state.includes("companyProfile")) {
             return 'Company Profile';
           } else if ($state.includes("createCompany")) {

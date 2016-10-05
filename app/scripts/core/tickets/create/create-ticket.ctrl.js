@@ -461,18 +461,9 @@
                 continue;
               }
 
-              if (ticketSharedUser.user) {
-
-                $scope.ticket.shares.push({
-                  user: { id: ticketSharedUser.user.id }
-                });
-
-              } else if (ticketSharedUser.contact) {
-
-                $scope.ticket.shares.push({
-                  contact: { id: ticketSharedUser.contact.id }
-                })
-              }
+              $scope.ticket.shares.push({
+                user: { id: ticketSharedUser.user.id }
+              });
             }
 
             $scope.ticket.note = $scope.ticket.note || '';

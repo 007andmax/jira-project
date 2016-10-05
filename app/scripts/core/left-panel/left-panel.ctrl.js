@@ -170,9 +170,11 @@
         };
 
         $scope.getCompanyName = function (companyId) {
-          var company = CompaniesService.getOneById(companyId);
-          if (company) {
-            return company.name;
+          if (companyId) {
+            var company = CompaniesService.getOneById(companyId);
+            if (company) {
+              return company.name;
+            }
           }
         };
 

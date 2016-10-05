@@ -4,13 +4,13 @@
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
     [
-      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', 'ContactsService',
+      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
       'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
-      'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'VendorsService', '$timeout',
+      'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$timeout',
       'quicktech.common.services.PermissionsService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, ContactsService,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService, $stateParams,
-                $state, VendorsService, $timeout, PermissionsService, UserConfirmationsService) {
+                $state, $timeout, PermissionsService, UserConfirmationsService) {
 
         if ($stateParams.companyId && !PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -33,7 +33,6 @@
         $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
         $scope.vendorsSelection = {};
         $scope.companies = CompaniesService.getClientCompanies();
-        $scope.vendors = VendorsService.getAllForAutocomplete($scope);
         $scope.selectedServices = {};
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
@@ -91,6 +90,12 @@
             }
 
             $scope.editCompany = companyData.staticCopy();
+
+            if ($scope.editCompany.isVendor) {
+              CompaniesService.isVendorHasProducts($stateParams.companyId, function (resp) {
+                $scope.editCompany.hasProducts = resp.isProductExist;
+              });
+            }
 
             if (company.defaultPaymentMethod) {
               $scope.editCompany.defaultPaymentMethod = company.defaultPaymentMethod.split('_').map(function (str) {
@@ -237,6 +242,11 @@
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
+        };
+
+        $scope.validatePaymentTerms = function (form) {
+          var valid = ($scope.editCompany.paymentTerms > 0 || $scope.editCompany.paymentTerms === undefined);
+          form.vendorPaymentTerms.$setValidity('minValue', valid || !$scope.editCompany.isVendor);
         };
 
         $scope.validateCompanyDomain = function (ngModelCtrl) {

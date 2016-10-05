@@ -18,6 +18,7 @@
       <input type="text" class="form-control has-dropdown" placeholder="Category"
              autocomplete="off" ng-model="editProduct.category" name="editProductCategory" typeahead-editable="true"
              typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
+             typeahead-input-formatter="getItemName($model)"
              uib-typeahead="category as category.name for category in productsData.categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
              qt-typeahead-show-on-focus custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
@@ -35,12 +36,12 @@
     <div class="dropdown">
 
       <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
-             autocomplete="off" ng-model="editProduct.vendor" name="editProductVendor"
+             autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
+             typeahead-input-formatter="getItemName($model)"
              uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"
-             typeahead-editable="true" qt-typeahead-show-on-focus
-             custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
+             qt-typeahead-show-on-focus custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
-      <div typeahead-input-icon="editProduct.vendor" style="position: absolute;top: 13px;right: 13px;"></div>
+      <div typeahead-input-icon="editProduct.company" style="position: absolute;top: 13px;right: 13px;"></div>
 
     </div>
   </div>

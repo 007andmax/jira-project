@@ -63,7 +63,7 @@
           } else if ($state.includes("users")) {
             return 'users';
           } else if ($state.includes("companies")) {
-            return SharedStateService.getSharedState('companiesHeader').filter.isVendor ? 'vendors' : 'companies';
+            return 'companies';
           } else if ($state.includes("products")) {
             return 'products';
           } else if ($state.includes("services")) {

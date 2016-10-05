@@ -362,18 +362,9 @@
                   continue;
                 }
 
-                if (ticketSharedUser.user) {
-
-                  ticketUpdateToSend.shares.push({
-                    user: { id: ticketSharedUser.user.id }
-                  });
-
-                } else if (ticketSharedUser.contact) {
-
-                  ticketUpdateToSend.shares.push({
-                    contact: { id: ticketSharedUser.contact.id }
-                  })
-                }
+                ticketUpdateToSend.shares.push({
+                  user: { id: ticketSharedUser.user.id }
+                });
               }
 
               TicketsService.createTicketUpdate(ticketUpdateToSend, false, function () {
@@ -453,15 +444,13 @@
             for (var i = 0; i < shares.length; i++) {
 
               var share = shares[i],
-                sharedUser = share.user || share.contact,
+                sharedUser = share.user,
                 isAlreadyAdded = $scope.ticketSharedUsersList.findIndex(function (shared) {
-                  return (shared.user ? shared.user.id : shared.contact.id) === this.id;
+                  return shared.user.id === this.id;
                 }, sharedUser);
 
               if (isAlreadyAdded === -1) {
-                var itemForPush = share.user ? { user: share.user } : { contact: share.contact };
-                itemForPush.notify = false;
-                $scope.ticketSharedUsersList.push(itemForPush);
+                $scope.ticketSharedUsersList.push({ user: share.user, notify: false });
               }
 
               if (
@@ -475,9 +464,9 @@
               processedShares.push(sharedUser.id);
 
               $scope.shares.push({
-                name: share.user ? $scope.getUserName($scope.getUserById(share.user.id)) : $scope.getContactName(share.contact),
+                name: $scope.getUserName($scope.getUserById(share.user.id)),
                 title: $scope.getSharedTitle(share),
-                avatarUrl: share.user ? $scope.getUserAvatarUrl($scope.getUserById(share.user.id)) : $scope.getContactAvatarUrl(share.contact)
+                avatarUrl: $scope.getUserAvatarUrl($scope.getUserById(share.user.id))
               })
             }
 
@@ -583,14 +572,9 @@
           function closeTicket() {
             $scope.ticketClosing = true;
 
-            var recipientsIds = [];
-            for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
-              var shared = $scope.ticketSharedUsersList[i];
-
-              if (shared.notify) {
-                recipientsIds.push(shared.user ? shared.user.id : shared.contact.id);
-              }
-            }
+            var recipientsIds = $scope.ticketSharedUsersList.map(function (shared) {
+              return shared.user.id;
+            });
 
             TicketsService.changeStatus($scope.ticketDetails.id, 'COMPLETED', function () {
               UserNotificationService.show('The ticket “' + $scope.ticketDetails.number + '” has been marked as closed', true);

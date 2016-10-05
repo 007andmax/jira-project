@@ -53,20 +53,12 @@
 
           if ($scope.invoice.shares) {
             $scope.ticketSharedUsersList = $scope.invoice.shares.map(function (share) {
-              if (share.user) {
-                return { user: share.user, notify: true };
-              } else {
-                return { contact: share.user, notify: true };
-              }
+              return { user: share.user, notify: true };
             });
 
             for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
               var share = $scope.ticketSharedUsersList[i];
-              if (share.user) {
-                $scope.selectUpdateSharedUser[share.user.id] = true;
-              } else {
-                $scope.selectUpdateSharedUser[share.contact.id] = true;
-              }
+              $scope.selectUpdateSharedUser[share.user.id] = true;
             }
           }
 
@@ -507,18 +499,9 @@
                   continue;
                 }
 
-                if (ticketSharedUser.user) {
-
-                  editInvoice.shares.push({
-                    user: { id: ticketSharedUser.user.id }
-                  });
-
-                } else if (ticketSharedUser.contact) {
-
-                  editInvoice.shares.push({
-                    contact: { id: ticketSharedUser.contact.id }
-                  })
-                }
+                editInvoice.shares.push({
+                  user: { id: ticketSharedUser.user.id }
+                });
               }
 
               RecurringService.saveRecurringOrder(editInvoice, function () {

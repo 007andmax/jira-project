@@ -146,7 +146,8 @@
                       </div>
 
                       <input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"
-                             ng-maxlength="40" uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
+                             ng-maxlength="40"
+                             uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
                              autocomplete="off" qt-typeahead-async-show-on-focus>
                     </div>
 
@@ -172,22 +173,88 @@
 
                   <div class="form-row clearfix">
 
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'clientType')}">
 
-                      <label>Client Type</label>
+                      <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'clientType')}">
+                        Client Type
+                      </label>
+
+                      <div ng-messages="companyForm.clientType.$error"
+                           ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
+                        <label class="control-label" ng-message="required">Client Type is required.</label>
+                      </div>
 
                       <input type="text" class="form-control" ng-model="editCompany.clientType" name="clientType"
                              uib-typeahead="clientType for clientType in clientTypes"
-                             readonly qt-typeahead-async-show-on-focus>
+                             readonly qt-typeahead-async-show-on-focus ng-required="!editCompany.isVendor">
+                      <div typeahead-input-icon="editCompany.clientType"
+                           style="position: absolute;top: 34px;right: 13px;"></div>
                     </div>
 
                     <div class="form-group">
 
-                      <label class="control-label">Service Type</label>
+                      <label>Service Type</label>
 
                       <input type="text" class="form-control" ng-model="editCompany.serviceType" name="serviceType"
                              uib-typeahead="serviceType for serviceType in serviceTypes"
                              readonly qt-typeahead-async-show-on-focus>
+                      <div typeahead-input-icon="editCompany.serviceType"
+                           style="position: absolute;top: 34px;right: 13px;"></div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-row clearfix">
+
+                    <div class="form-group full-width">
+
+                      <label class="control checkbox pull-left" uib-tooltip="Current vendor has linked products"
+                             tooltip-enable="editCompany.hasProducts">
+                        <input type="checkbox" ng-model="editCompany.isVendor" ng-disabled="editCompany.hasProducts">
+                        <span class="control-indicator"></span> Vendor (allows you to link company with products)
+                      </label>
+                    </div>
+                  </div>
+
+
+                  <div class="form-row clearfix">
+
+                    <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'vendorPaymentTerms')}">
+
+                      <label class="control-label" ng-hide="isShowingErrors(companyForm, 'vendorPaymentTerms')">
+                        Payment Terms
+                      </label>
+
+                      <div class="error-vendor-form-message" ng-messages="companyForm.vendorPaymentTerms.$error"
+                           ng-class="{'hide': !isShowingErrors(companyForm, 'vendorPaymentTerms')}">
+                        <label class="control-label" ng-message="required">Payment terms is required.</label>
+                        <label class="control-label" ng-message="pattern">Please enter a valid payment terms.</label>
+                        <label class="control-label" ng-message="minValue">Vendor payment terms should be bigger that 0.
+                        </label>
+                        <label class="control-label" ng-message="maxlength">Payment terms is too large.</label>
+                      </div>
+
+                      <input class="form-control" type="text"  name="vendorPaymentTerms"
+                             ng-disabled="!editCompany.isVendor"
+                             ng-model="editCompany.paymentTerms" ng-required="editCompany.isVendor"
+                             ng-change="validatePaymentTerms(companyForm)" ng-maxlength="3"
+                             ng-pattern="numberPattern" hard-reset-pattern="numberPattern">
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': isShowingErrors(companyForm, 'vendorAccountNumber')}">
+
+                      <label class="control-label" ng-hide="isShowingErrors(companyForm, 'vendorAccountNumber')">
+                        Account Number
+                      </label>
+
+                      <div class="error-vendor-form-message" ng-messages="companyForm.vendorAccountNumber.$error"
+                           ng-class="{'hide': !isShowingErrors(companyForm, 'vendorAccountNumber')}">
+                        <label class="control-label" ng-message="maxlength">Vendor number is too large.</label>
+                      </div>
+
+                      <input class="form-control" type="text" ng-disabled="!editCompany.isVendor" ng-maxlength="30"
+                             name="vendorAccountNumber" ng-model="editCompany.accountNumber">
                     </div>
 
                   </div>
@@ -198,7 +265,8 @@
                       <label class="control-label">Default Payment Method</label>
 
                       <input type="text" class="form-control" ng-model="editCompany.defaultPaymentMethod"
-                             name="defaultPaymentMethod" uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
+                             name="defaultPaymentMethod"
+                             uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
                              readonly qt-typeahead-async-show-on-focus>
                       <div typeahead-input-icon="editCompany.defaultPaymentMethod"
                            style="position: absolute;top: 34px;right: 13px;"></div>
@@ -556,7 +624,7 @@
                 <div class="col-sm-6">SERVICE NAME</div>
                 <!--style="width: 183px;" TODO hide timeAllotment -->
 
-                <div class="col-sm-3" >PER HOUR</div>
+                <div class="col-sm-3">PER HOUR</div>
 
                 <div class="col-sm-3 text-right">IS BILLABLE</div>
 
@@ -570,7 +638,7 @@
 
                 <div class="intermediate-parent-elem">
 
-                  <div ng-if="service.versionedId" class="col-sm-6" >
+                  <div ng-if="service.versionedId" class="col-sm-6">
                     <div class="checkbox-caption">{{ service.name }}</div>
                   </div>
 
@@ -592,8 +660,9 @@
                            ng-maxlength="100" ng-minlength="3">
                   </div>
 
-                  <div class="col-sm-3" ng-class="{'has-error': isShowingErrors(servicesForm, 'editServiceRate' + $index)}"
-                       >
+                  <div class="col-sm-3"
+                       ng-class="{'has-error': isShowingErrors(servicesForm, 'editServiceRate' + $index)}"
+                  >
                     <input type="text" class="form-control" placeholder="Rate" qt-to-fixed="2"
                            ng-model="service.rate" ng-required="true" name="{{'editServiceRate' + $index}}"
                            ng-readonly="!PermissionsService.isAllowed('MANAGE_SERVICES')"
@@ -601,20 +670,21 @@
                     <span class="days" style="top: 9px;">$</span>
                   </div>
 
-                    <div class="col-sm-3">
-                      <label class="control checkbox pull-right" style="margin-top: 14px;">
-                        <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()"
-                               ng-disabled="!PermissionsService.isAllowed('MANAGE_SERVICES')">
-                        <span class="control-indicator"></span>
-                      </label>
+                  <div class="col-sm-3">
+                    <label class="control checkbox pull-right" style="margin-top: 14px;">
+                      <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()"
+                             ng-disabled="!PermissionsService.isAllowed('MANAGE_SERVICES')">
+                      <span class="control-indicator"></span>
+                    </label>
 
 
-                      <a href="javascript:void(0)" style="margin-top: 12px; margin-right: 10px;" class="ha-delete hit-area pull-right has-tooltip"
-                         ng-click="deleteService(service.name)" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
-                         tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
-                        <i class="icn-sm icn-delete"></i>
-                      </a>
-                    </div>
+                    <a href="javascript:void(0)" style="margin-top: 12px; margin-right: 10px;"
+                       class="ha-delete hit-area pull-right has-tooltip"
+                       ng-click="deleteService(service.name)" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
+                       tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+                      <i class="icn-sm icn-delete"></i>
+                    </a>
+                  </div>
 
 
                 </div>

@@ -4,17 +4,14 @@
 
   angular.module('quicktech.core.rightPanel').controller('quicktech.core.rightPanel.rightPanelCtrl',
     ['$scope', 'RightPanelService', 'quicktech.common.services.SharedStateService', 'UsersService', 'TicketsService',
-      'ContactsService', 'quicktech.common.services.PermissionsService',
-      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, ContactsService, PermissionsService) {
+      'quicktech.common.services.PermissionsService',
+      function ($scope, RightPanelService, SharedStateService, UsersService, TicketsService, PermissionsService) {
 
         $scope.PermissionsService = PermissionsService;
         $scope.gmtPattern = /\w+/;
         $scope.hourPattern = /\d+\:\d+/;
 
         $scope.workingWithIdsUsers = TicketsService.getCurrentlyWorkingWith($scope);
-        $scope.vendorContacts = ContactsService.getAllVendorsContacts($scope, function () {
-          $scope.vendorContactsLoad = true;
-        });
 
         UsersService._addInitListener(function () {
 

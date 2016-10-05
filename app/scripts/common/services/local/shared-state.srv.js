@@ -44,11 +44,6 @@
             companyId: ''
           }
         },
-        vendorsHeader: {
-          filter: {
-            vendorId: ''
-          }
-        },
         servicesHeader: {
           filter: {
             companyId: ''

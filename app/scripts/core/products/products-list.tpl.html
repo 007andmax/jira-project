@@ -75,7 +75,7 @@
           <span trimmed-tooltip-container>{{ product.description }}</span>
         </div>
 
-        <div class="col-1" style="height: 20px">{{ product.vendor.name}}</div>
+        <div class="col-1" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
 
         <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
           {{ product.cost | currency: '$': 2 }}

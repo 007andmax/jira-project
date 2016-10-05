@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.editProductCtrl',
-    ['$scope', '$rootScope', 'ProductsService',
-      function ($scope, $rootScope, ProductsService) {
+    ['$scope', '$rootScope', 'ProductsService', 'CompaniesService',
+      function ($scope, $rootScope, ProductsService, CompaniesService) {
 
         if ($scope.pageTab === 'list') {
           $scope.withCategory = true;
@@ -12,6 +12,11 @@
 
         if ($scope.product) {
           $scope.editProduct = angular.copy($scope.product);
+
+          var company = $scope.editProduct.company;
+          if (company) {
+            $scope.editProduct.company = CompaniesService.getOneById(company.id);
+          }
           if ($scope.category) {
             $scope.editProduct.category = { id: $scope.category.id };
           }
@@ -27,8 +32,20 @@
           $scope.editProduct = {};
         }
 
+        $scope.vendors = CompaniesService.getVendors();
+
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveProduct || form[fieldName].$dirty) && !form[fieldName].$valid;
+        };
+
+        $scope.$watch('editProduct.company', function (value) {
+          if ($scope.editProductForm.editProductVendor.$dirty) {
+            $scope.editProductForm.editProductVendor.$setValidity('vendorNotExist', !value || typeof value !== 'string');
+          }
+        });
+
+        $scope.getItemName = function (model) {
+          return model ? model.name : '';
         };
 
         $scope.cancelEditProduct = function () {
@@ -50,25 +67,17 @@
               var isManufactureChange = $scope.editProduct.manufacture != $scope.product.manufacture;
               var isDescriptionChange = $scope.editProduct.description != $scope.product.description;
               var isCategoryChange = ($scope.editProduct.category && $scope.editProduct.category.id) !== ($scope.product.category && $scope.product.category.id);
-              var isVendorChange = ($scope.editProduct.vendor && $scope.editProduct.vendor.id) !== ($scope.product.vendor && $scope.product.vendor.id);
+              var isCompanyChange = ($scope.editProduct.company && $scope.editProduct.company.id) !== ($scope.product.company && $scope.product.company.id);
               var isCostChange = $scope.editProduct.cost != $scope.product.cost;
               var isSaleChange = $scope.editProduct.sale != $scope.product.sale;
 
-              if (!(isIlcChange || isManufactureChange || isDescriptionChange || isCategoryChange || isVendorChange || isCostChange || isSaleChange)) {
+              if (!(isIlcChange || isManufactureChange || isDescriptionChange || isCategoryChange || isCompanyChange || isCostChange || isSaleChange)) {
                 $rootScope.$broadcast('cancelEditForm', 'isProductCreation');
                 return;
               }
             }
 
             $scope.disabledSaveChangeButton = true;
-
-            if ((typeof $scope.editProduct.vendor) === 'string') {
-              if ($scope.editProduct.vendor.length > 0) {
-                $scope.editProduct.vendor = { name: $scope.editProduct.vendor };
-              } else {
-                $scope.editProduct.vendor = undefined;
-              }
-            }
 
             ProductsService.saveProduct($scope.editProduct, function (versionedId, isCreated) {
               $scope.cancelEditProduct();

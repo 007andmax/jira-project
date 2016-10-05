@@ -5,9 +5,9 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService', 'Utils', 'VendorsService',
+      'localStorageService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
-                SharedStateService, DevicesService, PermissionsService, localStorageService, Utils, VendorsService) {
+                SharedStateService, DevicesService, PermissionsService, localStorageService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
@@ -22,10 +22,9 @@
         $scope.companiesView = localStorageService.get('companies-view') || 'grid';
         $scope.PermissionsService = PermissionsService;
         $scope.isCollapsed = true;
-        $scope.companies = CompaniesService.getClientCompanies();
+        $scope.companies = CompaniesService.getAllCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
-        $scope.vendors = VendorsService.getAll($scope);
         $scope.user = UsersService.getCurrentUser();
 
         $scope.companiesCtrl = {};
@@ -72,25 +71,25 @@
         //
         //$scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
-        $scope.$watch(function () {
-          var shownCompanies = $scope.companiesCtrl.shownCompanies;
-          var shownVendors = $scope.companiesCtrl.shownVendors;
-          return {
-            shownCompanies: shownCompanies ? shownCompanies.length : 0,
-            shownVendors: shownVendors ? shownVendors.length : 0,
-            isVendorShown: headerSharedState.filter.isVendor
-          }
-        }, function (value) {
-          globalSearch.count = value.isVendorShown ? value.shownVendors : value.shownCompanies;
-        }, true);
+        $scope.$watch('companiesCtrl.shownCompanies.length', function (value) {
+          globalSearch.count = value;
+        });
 
         $scope.filterCompanies = function (value) {
           var filter = headerSharedState.filter;
           var clientType = value.clientType;
           var result = true;
 
-          if (filter.vendorId) {
-            return filter.vendorId === value.id;
+          if (value.isDefault || value.default) {
+            return false;
+          }
+
+          if (filter.companyId) {
+            return filter.companyId === value.id;
+          }
+
+          if (filter.isVendor) {
+            return value.isVendor;
           }
 
           if (filter.isClient) {

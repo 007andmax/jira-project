@@ -16,7 +16,6 @@
       'quicktech.core.recurring',
       'quicktech.core.receivable',
       'quicktech.core.receiptArchive',
-      'quicktech.core.vendors',
       'quicktech.core.leftPanel',
       'quicktech.core.rightPanel',
       'quicktech.core.settings',
@@ -131,21 +130,6 @@
           url: '/accounting/receipt-archive/:mode',
           templateUrl: '/html/scripts/core/receipt-archive/receipt-archive.tpl.html',
           controller: 'quicktech.core.receiptArchive.receiptArchiveCtrl'
-        }))
-        .state('vendors', waitForServices({
-          url: '/inventory/vendors',
-          templateUrl: '/html/scripts/core/vendors/vendors.tpl.html',
-          controller: 'quicktech.core.vendors.vendorsCtrl'
-        }))
-        .state('createVendor', waitForServices({
-          url: '/inventory/vendors/create',
-          templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
-          controller: 'quicktech.core.vendors.editVendorCtrl'
-        }))
-        .state('editVendor', waitForServices({
-          url: '/inventory/vendors/edit/:vendorId',
-          templateUrl: '/html/scripts/core/vendors/edit-vendor.tpl.html',
-          controller: 'quicktech.core.vendors.editVendorCtrl'
         }))
         .state('settings', waitForServices({
           url: '/settings',
@@ -305,13 +289,6 @@
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'companies');
             globalSearch.goBack.tooltip = 'back to companies';
-          } else if (toState.name === 'createVendor' || toState.name === 'editVendor') {
-            globalSearch.goBack.isEnabled = true;
-            globalSearch.goBack.func = function () {
-              SharedStateService.getSharedState('companiesHeader').filter.isVendor = true;
-              $state.go('companies');
-            };
-            globalSearch.goBack.tooltip = 'back to vendors';
           } else if (toState.name.indexOf('settings.') === 0) {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'settings');

@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech.core.products').controller('quicktech.core.products.productsCtrl',
-    ['$scope', '$rootScope', 'ProductsService', 'VendorsService', 'CompaniesService', '$timeout',
+    ['$scope', '$rootScope', 'ProductsService', 'CompaniesService', '$timeout',
       'quicktech.common.services.SharedStateService', '$stateParams', '$state', 'quicktech.common.services.PermissionsService',
-      function ($scope, $rootScope, ProductsService, VendorsService, CompaniesService, $timeout,
+      function ($scope, $rootScope, ProductsService, CompaniesService, $timeout,
                 SharedStateService, $stateParams, $state, PermissionsService) {
 
         var categories,
@@ -32,7 +32,6 @@
 
         $scope.isCreateCategoryShow = false;
         $scope.newCategory = {};
-        $scope.vendors = VendorsService.getAllInCompanyForAutocomplete(CompaniesService.getCurrentCompany().id);
         $scope.status = {
           isopen: false
         };
@@ -78,6 +77,10 @@
         $scope.$on('showAllCategories', function (event) {
           $scope.setShowingCategory('');
         });
+
+        $scope.getCompanyById = function (companyId) {
+          return CompaniesService.getOneById(companyId);
+        };
 
         $scope.loadingFinished = function () {
           $scope.loadingInProgress = false;
@@ -165,7 +168,7 @@
           } else if ($scope.orderProducts.field === 'description') {
             return item.description;
           } else if ($scope.orderProducts.field === 'vendor') {
-            return item.vendor ? item.vendor.name : '';
+            return item.company ? item.company.name : '';
           } else if ($scope.orderProducts.field === 'cost') {
             return item.cost;
           } else if ($scope.orderProducts.field === 'sale') {

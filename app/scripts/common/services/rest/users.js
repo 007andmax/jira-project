@@ -16,6 +16,7 @@
         storage = {
           users: [],
           clientUsers: [],
+          clientUsersWithVendors: [],
           deleted: [],
           usersByCompanies: {}
         };
@@ -46,9 +47,13 @@
                 }
               }
               var oneByIdIncludeDeleted = CompaniesService.getOneById(user.company.id);
-              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt;
+              var isDeleted = (oneByIdIncludeDeleted && oneByIdIncludeDeleted.deletedAt) || user.deletedAt,
+                isManaged = !oneByIdIncludeDeleted.isVendor || oneByIdIncludeDeleted.clientType;
               if (user.company.id !== CompaniesService.getCurrentCompany().id && !isDeleted && !user.isDefault) {
-                storage.clientUsers.push(user);
+                if (isManaged) {
+                  storage.clientUsers.push(user);
+                }
+                storage.clientUsersWithVendors.push(user);
               } else if (isDeleted) {
                 storage.deleted.push(user);
               }
@@ -81,6 +86,7 @@
               if (findById) {
                 Utils.customizeObj(newChange.data, findById);
               } else {
+                storage.usersByCompanies[newChange.data.company.id] = storage.usersByCompanies[newChange.data.company.id] || [];
                 storage.usersByCompanies[newChange.data.company.id].push(Utils.customizeObj(newChange.data));
                 storage.users.push(Utils.customizeObj(newChange.data));
               }
@@ -90,6 +96,7 @@
             storage.deleted.push(user);
             Utils.deleteById(storage.users, newChange.data.id);
             Utils.deleteById(storage.clientUsers, newChange.data.id);
+            Utils.deleteById(storage.clientUsersWithVendors, newChange.data.id);
             if (user) {
               Utils.deleteById(storage.usersByCompanies[user.company.id], newChange.data.id);
             }
@@ -109,6 +116,7 @@
             for (var i = 0; i < storage.clientUsers.length; i++) {
               if (storage.clientUsers[i].company.id === newChange.data.id) {
                 storage.clientUsers.splice(i, 1);
+                storage.clientUsersWithVendors.splice(i, 1);
                 i--;
               }
             }
@@ -158,9 +166,13 @@
         } else {
           var newUser = Utils.customizeObj(updUser);
           storage.users.push(newUser);
-          //todo check company
-          if (newUser.company.id !== CompaniesService.getCurrentCompany().id) {
-            storage.clientUsers.push(newUser);
+          var company = CompaniesService.getOneById(newUser.company.id);
+          if (company.id !== CompaniesService.getCurrentCompany().id) {
+            if (!company.isVendor || company.clientType) {
+              storage.clientUsers.push(newUser);
+            } else {
+              storage.clientUsersWithVendors.push(newUser);
+            }
           }
 
           generateInitials(newUser);
@@ -199,6 +211,10 @@
 
       function getClientUsers() {
         return storage.clientUsers;
+      }
+
+      function getClientUsersWithVendors() {
+        return storage.clientUsersWithVendors;
       }
 
       function getCurrentUser() {
@@ -535,6 +551,7 @@
         getCurrentUser: getCurrentUser,
         getAllUsers: getAllUsers,
         getClientUsers: getClientUsers,
+        getClientUsersWithVendors: getClientUsersWithVendors,
         getTechUsers: getTechUsers,
         getAllByCompanyId: getAllByCompanyId,
         getOneById: getOneById,
