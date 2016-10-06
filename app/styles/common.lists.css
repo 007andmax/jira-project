@@ -159,6 +159,10 @@
   display: none !important;
 }
 
+.user-submitted-tickets{
+  margin-left: 20px;
+}
+
 .qt-list > li > [class*='col-'] {
   position: relative;
 
@@ -167,6 +171,9 @@
   padding: 0 5px;
 
   vertical-align: top;
+}
+.qt-list.qt-users > li > [class*='col-'] {
+  padding: 0 15px;
 }
 
 .qt-list > li > [class*='col-']:after {
