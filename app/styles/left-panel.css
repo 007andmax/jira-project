@@ -283,12 +283,12 @@
 .filter .form-control.readonly-normal{
   border: transparent;
   border-radius: 2px;
-  background: #33404c;
+  background: #576072;
   color: #fff;
 }
 .filter .form-control.readonly-normal:focus,
 .filter .form-control.readonly-normal:active {
-  background: #33404c;
+  background: #576072;
   box-shadow: inset 3px 3px 10px 0px rgba(0,0,0,0.35);
   color: #fff;
 }
