@@ -14,6 +14,7 @@
   display: flex;
   background-color: transparent;
   z-index: 2;
+  justify-content: center;
 }
 .left-panel-head:after{
   position: absolute;
@@ -45,10 +46,10 @@
   color: #ffffff;
 }
 .left-panel__category:hover {
-  background-color: rgb(51, 64, 76);
+  background-color: rgb(87, 96, 114);
 }
 .left-panel .active {
-  background-color: rgba(255, 255, 255, 0.12)g;
+  background-color: rgb(87, 96, 114);
 }
 .left-panel-full {
   position: fixed;
@@ -59,7 +60,7 @@
 
   height: 100%;
 
-  background-color: #1f2a37;
+  background-color: #404b5f;
 
   flex-flow: row wrap;
   transition: .2s ease-in width .0s;
@@ -83,7 +84,7 @@
 
   cursor: pointer;
 
-  color: #94a4b8;
+  color: #a1acc0;
 
   align-items: center;
   justify-content: flex-start;
@@ -92,7 +93,7 @@
   height: 35px;
 }
 .center-category__category:hover {
-  color: #ffffff;
+  color: #dee0e2;
 }
 .left-panel-full__head {
   display: -webkit-flex;
@@ -106,8 +107,8 @@
 
   text-align: center;
 
-  color: #ffffff;
-  background-color: rgba(24,39,52,0.72);
+  color: #dee0e2;
+  background-color: transparent;
 
   align-items: center;
   justify-content: center;
@@ -130,7 +131,7 @@
   line-height: 1em;
 }
 .center-category .active {
-  color: #ffffff;
+  color: #dee0e2;
   background: rgba(255, 255, 255, 0.12);
 }
 .icon-pos {
@@ -300,4 +301,9 @@
 }
 .filter .dropdown-menu li:hover {
   background-color: #e9f5fb;
+}
+.logo-head{
+  width: 50%;
+  height: 50%;
+  margin-top: 15px;
 }

@@ -4,16 +4,16 @@ aside#left {
   left: 0;
   width: 76px;
   height: 100vh;
-  background-color: #182734;
+  background-color: #354052;
   z-index: 1060;
 }
 aside#left:after {
   position: absolute;
-  top: 78px;
+  top: 0;
   left: 75px;
   width: 1px;
-  height: calc(100% - 128px);
-  background-color: #94a4b8;
+  height: 100%;
+  background-color: rgba(148,164,184,0.35);
 
   content: '';
 }
