@@ -9415,7 +9415,7 @@ button.close {
   float: right !important;
 }
 .head-triangle {
-  margin-top: 5%;
+  margin-top: 15px;
 }
 .pull-left {
   float: left !important;
@@ -9655,7 +9655,7 @@ button.close {
 .slide-category-content {
   opacity: 1;
   max-height: 9999px;
-  margin-top: 25px;
+  /*margin-top: 25px;*/
   overflow: hidden;
   float: left;
   width: 100%;
