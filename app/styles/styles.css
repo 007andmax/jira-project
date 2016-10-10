@@ -4659,7 +4659,7 @@ tbody.collapse.in {
   z-index: 1000;
   display: none;
   float: left;
-  min-width: 140px;
+  min-width: 150px;
   /*max-width: 382px;*/
   padding: 0;
   margin: 6px 0 0;
@@ -9915,4 +9915,11 @@ button.close {
 .company-item:hover{
   background-color: #e9f5fb;
 }
-
+.absolute-stick-datepicker{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 40px;
+  padding: 0;
+  z-index: 999;
+}
