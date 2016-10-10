@@ -435,6 +435,43 @@
         return info;
       }
 
+      function getProductsByCompany(scope, companyId, callback) {
+        var data = [];
+        $http.get('/products/' + companyId).then(function (resp) {
+
+          data = resp.data;
+
+          if (callback) {
+            callback(Utils.customizeObj(data));
+          }
+
+          RealTimeService.subscribe('/product', scope, function (newChange) {
+
+            if (newChange.action == 'PRODUCT_SAVED') {
+
+              var product = Utils.findById(data, newChange.data.versionedId.id);
+
+              if (product) {
+                Utils.customizeObj(newChange.data, product);
+              } else {
+                data.push(newChange.data);
+              }
+
+            } else if (newChange.action == 'PRODUCT_DELETED') {
+              Utils.deleteById(data, newChange.data.versionedId.id);
+            }
+            if (callback) {
+              callback(data);
+            }
+          });
+
+        }, function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        });
+      }
+
       return {
         search: search,
         getFullListForAutocomplete: getFullListForAutocomplete,
@@ -448,7 +485,8 @@
         isILCUnique: isILCUnique,
         isMfgUnique: isMfgUnique,
         moveProducts: moveProducts,
-        getAllProducts: getAllProducts
+        getAllProducts: getAllProducts,
+        getProductsByCompany: getProductsByCompany
       }
 
     }]);

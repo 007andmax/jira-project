@@ -106,11 +106,11 @@
 
           <div class="button-container">
             <i class="icn-retina new-ticket pull-left" create-ticket-open-modal="{{ company.id }}"
-               uib-tooltip="Create Ticket" tooltip-placement="top"></i>
+               uib-tooltip="Create Ticket" tooltip-placement="top" ng-if="!company.isVendor || company.clientType"></i>
             <i class="icn-retina new-user pull-left" style="margin-left: 15px;" ng-click="createUser()"
                ng-if="PermissionsService.isAllowed('CREATE_USERS')"
                uib-tooltip="Create User" tooltip-placement="top"></i>
-            <div
+            <div ng-if="!company.isVendor || company.clientType"
               qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
               qt-popover-position="bottom" custom-disabled="{{ !allowAgentInstall }}"
               class="pull-right" style="cursor: pointer">

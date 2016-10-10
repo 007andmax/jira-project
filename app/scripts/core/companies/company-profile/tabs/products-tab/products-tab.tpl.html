@@ -1,0 +1,124 @@
+<div class="with-category" ng-controller="quicktech.core.companies.productsTabCtrl">
+  <ul class="qt-list qt-product-list" style="margin-bottom: 150px; margin-top: 110px">
+
+    <li class="list-heading" style="cursor: pointer !important;" fixed-block-top offset-top="148">
+      <div class="col-1" ng-click="setOrderForProducts('ilc')">
+        <span class="sort-span">ILC<i class="icn-sm sort-icon icn-sort"
+                                      ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('manufacture')">
+        <span class="sort-span">Mfg#<i class="icn-sm sort-icon icn-sort"
+                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('category')">
+        <span class="sort-span">Category<i class="icn-sm sort-icon icn-sort"
+                                           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'category'}"></i></span>
+
+      </div>
+      <div class="col-2" ng-click="setOrderForProducts('description')">
+        <span class="sort-span">DESCRIPTION<i class="icn-sm sort-icon icn-sort"
+                                              ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'description'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('vendor')">
+        <span class="sort-span">VENDOR/SUPPLIER <i class="icn-sm sort-icon icn-sort"
+                                                   ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
+
+      </div>
+      <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+        <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
+                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
+
+      </div>
+      <div class="col-4" ng-click="setOrderForProducts('sale')">
+        <span class="sort-span">SALE PRICE<i class="icn-sm sort-icon icn-sort"
+                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'sale'}"></i></span>
+
+      </div>
+      <div class="col-4" ng-click="setOrderForProducts('taxable')">
+        <span class="sort-span">TAXABLE<i class="icn-sm sort-icon icn-sort"
+                                          ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'taxable'}"></i></span>
+
+      </div>
+      <div class="col-6">&nbsp;</div>
+    </li>
+
+    <li ng-repeat="product in productsData | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
+        ng-controller="quicktech.core.products.productCtrl">
+
+      <div class="intermediate-parent-elem">
+
+        <div class="col-1" style="height: 18px;">
+          {{ product.ilc}}
+        </div>
+
+        <div class="col-1">
+          {{ product.manufacture}}
+        </div>
+
+        <div class="col-1">
+          {{ product.category.default ? '' : product.category.name}}
+        </div>
+
+        <div class="col-2" ng-class="{'product-description': product.category.default}"
+             uib-tooltip="{{ product.description }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+          <span trimmed-tooltip-container>{{ product.description }}</span>
+        </div>
+
+        <div class="col-1" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
+
+        <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+          {{ product.cost | currency: '$': 2 }}
+        </div>
+
+        <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
+
+        <div class="col-4" style="width: 50px">
+          <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
+            <input type="checkbox" ng-checked="product.taxable" ng-click="onChangeTaxable()"
+                   custom-disabled="{{ disabledCheckbox || !PermissionsService.isAllowed('MANAGE_PRODUCTS') }}">
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+
+        <div class="col-6 pull-right" uib-dropdown dropdown-append-to-body="true" keyboard-nav="true"
+             ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
+
+          <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+             ng-click="deleteProduct()"
+             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+            <i class="icn-sm icn-delete"></i>
+          </a>
+
+          <!--<a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"-->
+             <!--create-new-entity="product" item="product"-->
+             <!--tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">-->
+            <!--<i class="icn-sm icn-edit"></i>-->
+          <!--</a>--> <!--todo uncomment on create-new-feature branch-->
+
+          <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
+             aria-expanded="false" uib-dropdown-toggle
+             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="move to other category">
+            <i class="icn-sm icn-send-again"></i>
+          </a>
+
+          <ul class="dropdown-menu move-prod" role="menu" uib-dropdown-menu>
+
+            <li ng-repeat="category in categories | orderBy: 'name'"
+                ng-if="!category.default && product.category.id !== category.id">
+              <a tabindex="-1" href="javascript:void(0)" ng-click="moveToCategory(category)">
+                {{ category.name }}
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+
+    </li>
+
+  </ul>
+</div>

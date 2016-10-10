@@ -5,12 +5,12 @@
   angular.module('quicktech.core.devices').controller('quicktech.core.companies.companyProfileTabsCtrl',
     ['$scope', 'DevicesService', '$state', '$stateParams', 'quicktech.common.services.SharedStateService',
       'quicktech.common.services.UserConfirmationsService', 'CompaniesService', 'UsersService', 'SubscriptionsService',
-      'Utils', 'quicktech.common.services.PermissionsService',
+      'Utils', 'quicktech.common.services.PermissionsService', 'ProductsService',
       function ($scope, DevicesService, $state, $stateParams, SharedStateService,
                 UserConfirmationsService, CompaniesService, UsersService, SubscriptionsService,
-                Utils, PermissionsService) {
+                Utils, PermissionsService, ProductsService) {
 
-        var tabs = ['users', 'devices', 'agents', 'network-scan', 'settings'], /*... ['VENDORS', 'ACTIVITIES']*/
+        var tabs = ['users', 'devices', 'agents', 'network-scan', 'settings', 'products'],
           devicesHeaderState = SharedStateService.getSharedState('devicesHeader'),
           lastMasterAgentId;
 
@@ -23,6 +23,7 @@
         }
         $scope.orderScanBy = 'hostName';
         $scope.orderDevicesBy = 'hostName';
+        $scope.currentOpenTab = $stateParams.tabName || 'devices';
 
 
         $scope.credential = {
@@ -34,6 +35,22 @@
           selectDevicesIds: [],
           isOfflineDeviceSelected: false
         };
+
+        if ($scope.company.isVendor) {
+          CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
+            $scope.company.hasProducts = resp.isProductExist;
+
+            if ($scope.isHasDevices) {
+              $state.go('companyProfile', { tabName: 'devices' });
+            } else {
+              $state.go('companyProfile', { tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings' });
+            }
+          });
+
+          ProductsService.getProductsByCompany($scope, $scope.company.id, function (resp) {
+            $scope.productsData = resp;
+          });
+        }
 
         $scope.users = UsersService.getAllByCompanyId($scope.company.id);
         $scope.userSubscriptionsByCompanyId = SubscriptionsService.getUserSubscriptionsByCompanyId($scope.company.id, $scope);
@@ -90,9 +107,8 @@
             $scope.isHasDevices = true;
           } else {
             $scope.isHasDevices = false;
-            if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings') {
+            if ($scope.currentOpenTab !== 'users' && $scope.currentOpenTab !== 'settings' && $scope.currentOpenTab !== 'products') {
               $state.go('companyProfile', {
-                companyId: $stateParams.companyId,
                 tabName: PermissionsService.isAllowed('VIEW_USERS') ? 'users' : 'settings'
               });
             }

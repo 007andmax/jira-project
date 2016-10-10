@@ -42,6 +42,13 @@
           </a>
         </li>
 
+        <li ng-class="{'active': currentOpenTab === 'products'}" style="cursor: pointer;"
+            ng-if="company.isVendor && (company.hasProducts || productsData.length)">
+          <a ui-sref="companyProfile({ tabName: 'products' })">
+            Products
+          </a>
+        </li>
+
         <!--<li ng-class="{active: mode === 'vendors'}">-->
         <!--<a data-toggle="tab" href="javascript:void(0)" ng-click="mode = 'vendors'">-->
         <!--Assc. Vendors-->
