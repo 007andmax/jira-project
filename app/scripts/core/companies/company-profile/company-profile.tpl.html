@@ -75,7 +75,7 @@
               Service type: {{ companyData.serviceType }}
             </li>
             <li class="info-type" ng-if="companyData.clientType">
-              Client type: {{ companyData.clientType }}
+              Client type: {{ companyData.clientType }}<span ng-if="company.isVendor">, Vendor</span>
             </li>
           </ul>
 
