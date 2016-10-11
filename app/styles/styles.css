@@ -4659,7 +4659,7 @@ tbody.collapse.in {
   z-index: 1000;
   display: none;
   float: left;
-  min-width: 140px;
+  min-width: 150px;
   /*max-width: 382px;*/
   padding: 0;
   margin: 6px 0 0;
@@ -9415,7 +9415,7 @@ button.close {
   float: right !important;
 }
 .head-triangle {
-  margin-top: 5%;
+  margin-top: 15px;
 }
 .pull-left {
   float: left !important;
@@ -9655,7 +9655,7 @@ button.close {
 .slide-category-content {
   opacity: 1;
   max-height: 9999px;
-  margin-top: 25px;
+  /*margin-top: 25px;*/
   overflow: hidden;
   float: left;
   width: 100%;
@@ -9915,4 +9915,11 @@ button.close {
 .company-item:hover{
   background-color: #e9f5fb;
 }
-
+.absolute-stick-datepicker{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 40px;
+  padding: 0;
+  z-index: 999;
+}
