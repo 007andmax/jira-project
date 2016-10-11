@@ -35,24 +35,6 @@
             hideDropdown();
           };
 
-          scope.createNewProduct = function () {
-
-            var newProduct = {
-              description: scope.searchProduct
-            };
-
-            productInput.val(newProduct.description);
-            scope.selectProduct(newProduct);
-            hideDropdown();
-
-            for (var i = 0; i < scope.autocompleteData.length; i++) {
-              if (scope.autocompleteData[i].default) {
-                scope.autocompleteData[i].products.push(newProduct);
-                return;
-              }
-            }
-          };
-
           scope.$watch('categoryExpanded', function () {
             if (dropdown) {
               $timeout(function () {

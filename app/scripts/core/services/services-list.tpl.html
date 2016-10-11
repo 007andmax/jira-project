@@ -17,17 +17,15 @@
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
 
     </div>
-    <!--<div class="col-3" ng-show="currentUser.role === 'SUPER_TECH_ADMIN'">TIME ALLOTMENT</div> TODO hide timeAllotment-->
     <div class="col-4">&nbsp;</div>
   </li>
 
   <li ng-repeat="service in services | orderBy : orderByForServices : orderServices.reverse"
       ng-controller="quicktech.core.services.serviceCtrl"
       on-finish-render="loadingFinished('default')"
-      ng-class="{'no-border': isEditService, 'add-new': isEditService, 'qt-service-form': isEditService}"
       show-model-element="{{ 'show-' + service.versionedId.id }}">
 
-    <div class="intermediate-parent-elem" ng-if="!isEditService">
+    <div class="intermediate-parent-elem">
 
       <div class="col-1">
         <div>{{ service.name }}</div>
@@ -54,7 +52,7 @@
         </a>
 
         <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
-           ng-click="showEditServiceForm()"
+           create-new-entity="service" item="service"
            tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">
           <i class="icn-sm icn-edit"></i>
         </a>
@@ -63,14 +61,6 @@
 
     </div>
 
-    <div ng-if="isEditService" ng-controller="quicktech.core.services.editServiceCtrl"
-         ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
-
-  </li>
-
-  <li class="qt-service-form" ng-if="showCreateService">
-    <div ng-controller="quicktech.core.services.editServiceCtrl"
-         ng-include="'/html/scripts/core/services/edit-service.tpl.html'"></div>
   </li>
 
 </ul>

@@ -1,4 +1,5 @@
-<div class="service-form-wrapper edit-form-checkbox" ng-form="editServiceForm">
+<div class="service-form-wrapper edit-form-checkbox" ng-form="editServiceForm"
+     ng-controller="quicktech.editServiceCtrl">
 
   <div class="col-1" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
 
@@ -22,26 +23,6 @@
     </label>
   </div>
 
-  <!--<div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;" TODO hide timeAllotment-->
-       <!--service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"-->
-       <!--ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">-->
-
-    <!--<input id="service-quantity-picker" type="text" class="form-control" placeholder="Time Allotment"-->
-           <!--sqp-input readonly>-->
-
-    <!--<input type="hidden" invalid-when="!editService.timeBlock || editService.timeBlock <= 0"-->
-           <!--name="timeBlock" ng-model="editService.timeBlock" hard-reset-required="true"/>-->
-
-  <!--</div>-->
-
-  <!--<div ng-if="(!service.isDefault && service)" class="col-3"-->
-       <!--ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">-->
-
-    <!--<input type="text" class="form-control disabled" placeholder="Time Allotment"-->
-           <!--ng-value="(editService.timeBlock / 60) | timeFilter"-->
-           <!--ng-disabled="true">-->
-  <!--</div>-->
-
   <div class="qt-form-actions">
     <div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>
 
@@ -51,6 +32,6 @@
       {{ editService.versionedId.id ? 'Save' : 'Add' }}
     </div>
 
-    <div class="btn btn-lg btn-primary btn-primary-outline pull-right" ng-click="cancelEditForm()">Cancel</div>
+    <div class="btn btn-lg btn-primary btn-primary-outline pull-right" ng-click="editService = {}">Clear</div>
   </div>
 </div>

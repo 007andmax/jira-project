@@ -1,16 +1,10 @@
-<div class="create-new-user clearfix" ng-controller="quicktech.core.users.editCtrl"
-     ng-class="{'edit-user': editUser && editUser.id}" edit-user-form-position>
+<div class="create-new-user clearfix" ng-controller="quicktech.createUserCtrl">
   <form name="userForm">
     <div class="create-user-container">
 
       <div class="create-user-header clearfix">
 
         <h3 class="pull-left">{{ isCreation ? 'Create' : 'Edit' }} User</h3>
-
-        <a href="javascript:void(0)" class="hit-area pull-right"
-           data-dismiss="modal" aria-label="Close" ng-click="cancelEdit()">
-          <i class="icn-sm icn-remove-token"></i>
-        </a>
 
       </div>
 
@@ -182,7 +176,7 @@
                   </a>
                 </li>
 
-                <li ng-if="isCreation || !isLastInvoiceSubsciption">
+                <li ng-if="isCreation || !isLastUserWithInvoiceSubscription(editUser)">
                   <a tabindex="-1" href="javascript:void(0)"
                      qt-checkbox ng-model="editUser.subscription.invoice">
 

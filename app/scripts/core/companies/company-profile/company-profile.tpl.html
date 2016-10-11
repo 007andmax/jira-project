@@ -49,7 +49,7 @@
 
               <a href="javascript:void(0)" class="hit-area has-tooltip"
                  ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
-                 ui-sref="editCompany({ companyId: company.id })"
+                 create-new-entity="company" item="company"
                  tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Edit">
                 <i class="icn-sm icn-edit-white"></i>
               </a>

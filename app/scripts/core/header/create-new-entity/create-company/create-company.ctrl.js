@@ -2,74 +2,28 @@
 
 (function () {
 
-  angular.module('quicktech.core.companies').controller('quicktech.core.companies.editCompanyCtrl',
+  angular.module('quicktech').controller('quicktech.createCompanyCtrl',
     [
       '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
       'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
-      'quicktech.common.services.SharedStateService', '$stateParams', '$state', '$timeout',
+      'quicktech.common.services.SharedStateService', '$state', '$timeout', '$rootScope',
       'quicktech.common.services.PermissionsService', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
-                TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService, $stateParams,
-                $state, $timeout, PermissionsService, UserConfirmationsService) {
+                TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService,
+                $state, $timeout, $rootScope, PermissionsService, UserConfirmationsService) {
 
-        if ($stateParams.companyId && !PermissionsService.isAllowed('VIEW_COMPANIES')) {
-          $state.go('tickets');
+        if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
+          $scope.closeWindow();
         }
 
-        var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var steps = ['info', 'location', 'contact', 'billing', 'agent'];
+        var savedState = $scope.getLastSavedState('company');
 
-        if ($stateParams.companyId) {
-          var company = CompaniesService.getOneById($stateParams.companyId);
-          globalSearch.openedItemName = 'Edit ' + company.name;
-        } else {
-          globalSearch.openedItemName = 'Create Company';
-        }
+        if (savedState.type === 'company' && savedState.item) {
+          var companyId = savedState.item.id,
+            company = CompaniesService.getOneById(companyId);
 
-        $scope.PermissionsService = PermissionsService;
-        $scope.loadingInProgress = true;
-        $scope.locationsMaxCount = 3;
-        $scope.contactsMaxCount = 3;
-        $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-        $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
-        $scope.vendorsSelection = {};
-        $scope.companies = CompaniesService.getClientCompanies();
-        $scope.selectedServices = {};
-        $scope.selectedTax = {};
-        $scope.techCompanyTax = [];
-
-        $scope.clientTypes = ['Client', 'Lead'];
-        $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
-        $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
-        CompaniesService.getIndustries(function (resp) {
-          $scope.industries = resp;
-        });
-
-        $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
-          if (!$stateParams.companyId) {
-            $timeout(function () {
-              if ($scope.servicesData && $scope.servicesData.default) {
-                for (var i = 0; i < $scope.servicesData.default.length; i++) {
-                  var service = angular.copy($scope.servicesData.default[i]);
-                  $scope.editCompany.services.push(service);
-                  $scope.selectedServices[$scope.servicesData.default[i].name] = true;
-                }
-              }
-            }, 0)
-          }
-        });
-
-        AddressesService.getLocales(true, function (response) {
-          $scope.timeZones = response;
-        });
-
-        if ($stateParams.companyId) {
-
-          if (!company) {
-            $state.go('companies');
-            throw 'wrong cmpany id specified!';
-          }
-
-          var companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function () {
+          var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
 
             if (!companyData.addresses || companyData.addresses.length === 0) {
               companyData.addresses = [{}];
@@ -81,7 +35,7 @@
 
             $scope.isLastInvoiceSubsciption = companyData.contacts[0].subscription &&
               companyData.contacts[0].subscription.invoice &&
-              UsersService.getAllByCompanyId($stateParams.companyId).filter(function (user) {
+              UsersService.getAllByCompanyId(companyId).filter(function (user) {
                 return user.subscription.invoice;
               }).length <= 1;
 
@@ -90,9 +44,10 @@
             }
 
             $scope.editCompany = companyData.staticCopy();
+            $scope.contact = $scope.editCompany.contacts[0];
 
             if ($scope.editCompany.isVendor) {
-              CompaniesService.isVendorHasProducts($stateParams.companyId, function (resp) {
+              CompaniesService.isVendorHasProducts(companyId, function (resp) {
                 $scope.editCompany.hasProducts = resp.isProductExist;
               });
             }
@@ -114,8 +69,6 @@
               for (var i = 0; i < $scope.editCompany.taxRates.length; i++) {
                 $scope.selectedTax[$scope.editCompany.taxRates[i].code] = true;
               }
-
-              $scope.loadingInProgress = false;
             });
 
           });
@@ -125,13 +78,13 @@
           $scope.editCompany = {
             addresses: [{ isPrimary: true }],
             contacts: [getEmptyContact()],
-            companyAssociations: [],
             services: [],
             clientIndustry: {},
             defaultPaymentMethod: '',
             login: '',
             password: ''
           };
+          $scope.contact = $scope.editCompany.contacts[0];
 
           TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
             $scope.techCompanyTax = angular.copy(resp);
@@ -145,22 +98,42 @@
               $scope.editCompany.taxRates.push(resp[i]);
               $scope.selectedTax[resp[i].code] = true;
             }
-            $scope.loadingInProgress = false;
           });
-
         }
 
-        //$scope.addLocation = function () {
-        //  $scope.editCompany.addresses.unshift({});
-        //  setCurrentTimeZone(currentTimeZone);
-        //};
+        $scope.tryToSave = false;
+        $scope.currentStep = 'info';
+        $scope.PermissionsService = PermissionsService;
+        $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $scope.taxRateNumberPattern = /^\+?[0-9]{0,19}$/;
+        $scope.selectedServices = {};
+        $scope.selectedTax = {};
+        $scope.techCompanyTax = [];
 
-        //$scope.removeLocation = function (index) {
-        //  if ($scope.editCompany.addresses[index].isPrimary) {
-        //    $scope.editCompany.addresses[$scope.editCompany.addresses.length - 1].isPrimary = true;
-        //  }
-        //  $scope.editCompany.addresses.splice(index, 1);
-        //};
+        $scope.clientTypes = ['Client', 'Lead'];
+        $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
+        $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
+        CompaniesService.getIndustries(function (resp) {
+          $scope.industries = resp;
+        });
+
+        $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
+          if (!$scope.editCompany.id) {
+            $timeout(function () {
+              if ($scope.servicesData && $scope.servicesData.default) {
+                for (var i = 0; i < $scope.servicesData.default.length; i++) {
+                  var service = angular.copy($scope.servicesData.default[i]);
+                  $scope.editCompany.services.push(service);
+                  $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+                }
+              }
+            });
+          }
+        });
+
+        AddressesService.getLocales(true, function (response) {
+          $scope.timeZones = response;
+        });
 
         $scope.isShowingContactErrors = function (contact, form, fieldName) {
           return form[fieldName] && ((contact && contact.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
@@ -198,11 +171,15 @@
             CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
               $scope.disablePreventingLocationChange = true;
-              $state.go('companyProfile', { companyId: resp.id || resp });
+
+              $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
+              if (!$scope.savedState.items.length) {
+                $scope.closeWindow();
+                $state.go('companyProfile', { companyId: resp.id || resp });
+              }
             })
           } else {
             $scope.triedToSave = true;
-            $scope.$broadcast('scrollToErrorFild')
           }
 
           function processPhoneNumbers(phoneNumbers) {
@@ -468,6 +445,14 @@
               return;
             }
           }
+        };
+
+        $scope.nextStep = function () {
+          $scope.currentStep = steps[steps.indexOf($scope.currentStep) + 1];
+        };
+
+        $scope.setCurrentStep = function (step) {
+          $scope.currentStep = step;
         };
 
         function getEmptyContact() {

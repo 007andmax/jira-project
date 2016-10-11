@@ -1,0 +1,629 @@
+<div ng-controller="quicktech.createCompanyCtrl" ng-form="companyForm">
+  <div class="company-window">
+    <div class="company-steps clearfix">
+      <ul class="company-steps__list clearfix">
+        <li class="company-steps__list--point" ng-class="{'checked': currentStep === 'info'}"
+            ng-click="setCurrentStep('info')">Info</li>
+        <li class="company-steps__list--point" ng-class="{'checked': currentStep === 'location'}"
+            ng-click="setCurrentStep('location')">Location</li>
+        <li class="company-steps__list--point" ng-class="{'checked': currentStep === 'contact'}"
+            ng-click="setCurrentStep('contact')">Primary Contact</li>
+        <li class="company-steps__list--point" ng-class="{'checked': currentStep === 'billing'}"
+            ng-click="setCurrentStep('billing')">Billing</li>
+        <li class="company-steps__list--point" ng-class="{'checked': currentStep === 'agent'}"
+            ng-click="setCurrentStep('agent')">Deploy Agents</li>
+      </ul>
+    </div>
+
+    <div class="company-window__info row" ng-show="currentStep === 'info'">
+      <div class="col-xs-6">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'companyName')}">
+            Company Name
+          </label>
+
+          <div ng-messages="companyForm.companyName.$error"
+               ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
+            <label class="control-label" ng-message="required">COMPANY NAME IS REQUIRED.</label>
+            <label class="control-label" ng-message="maxlength">COMPANY NAME IS TOO LARGE.</label>
+            <label class="control-label" ng-message="minlength">COMPANY NAME IS TOO SHORT.</label>
+            <label class="control-label" ng-message="unique">THIS COMPANY NAME ALREADY OCCUPIED.</label>
+          </div>
+
+          <input class="form-control" type="text" ng-model="editCompany.name" aria-expanded="true"
+                 ng-minlength="2" ng-maxlength="40" name="companyName" required="true" make-dirty-on-blur
+                 is-uniq-validation validation-func="validateCompanyName">
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'companyDomain')}">
+            Domain
+          </label>
+
+          <div ng-messages="companyForm.companyDomain.$error"
+               ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
+            <label class="control-label" ng-message="unique">THIS DOMAIN ALREADY OCCUPIED.</label>
+            <label class="control-label" ng-message="pattern">PLEASE ENTER A VALID DOMAIN.</label>
+          </div>
+
+          <input type="text" class="form-control" ng-model="editCompany.domain"
+                 placeholder="yourcompany.com"
+                 name="companyDomain"
+                 is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'industry')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'industry')}">
+            Industry
+          </label>
+
+          <div ng-messages="companyForm.industry.$error"
+               ng-class="{'hide': !isShowingErrors(companyForm, 'industry')}">
+            <label class="control-label" ng-message="maxlength">INDUSTRY IS TOO LARGE.</label>
+          </div>
+
+          <input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"
+                 ng-maxlength="40"
+                 uib-typeahead="industry for industry in industries | orderBy: 'toString()'"
+                 autocomplete="off" qt-typeahead-async-show-on-focus>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'clientType')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'clientType')}">
+            Client Type
+          </label>
+
+          <div ng-messages="companyForm.clientType.$error"
+               ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
+            <label class="control-label" ng-message="required">Client Type is required.</label>
+          </div>
+
+          <input type="text" class="form-control" ng-model="editCompany.clientType" name="clientType"
+                 uib-typeahead="clientType for clientType in clientTypes"
+                 readonly qt-typeahead-async-show-on-focus ng-required="!editCompany.isVendor">
+          <div typeahead-input-icon="editCompany.clientType"
+               style="position: absolute;top: 34px;right: 13px;"></div>
+        </div>
+
+        <div class="form-group clearfix">
+          <label class="control checkbox" uib-tooltip="Current vendor has linked products"
+                 tooltip-enable="editCompany.hasProducts">
+            <input type="checkbox" ng-model="editCompany.isVendor" ng-disabled="editCompany.hasProducts">
+            <span class="control-indicator"></span>
+          </label>
+          <label class="vendor-descr">Vendor (allows you to link company with products)</label>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'vendorPaymentTerms')}">
+
+          <label class="control-label" ng-hide="isShowingErrors(companyForm, 'vendorPaymentTerms')">
+            Payment Terms
+          </label>
+
+          <div class="error-vendor-form-message" ng-messages="companyForm.vendorPaymentTerms.$error"
+               ng-class="{'hide': !isShowingErrors(companyForm, 'vendorPaymentTerms')}">
+            <label class="control-label" ng-message="required">Payment terms is required.</label>
+            <label class="control-label" ng-message="pattern">Please enter a valid payment terms.</label>
+            <label class="control-label" ng-message="minValue">Vendor payment terms should be bigger that 0.
+            </label>
+            <label class="control-label" ng-message="maxlength">Payment terms is too large.</label>
+          </div>
+
+          <input class="form-control" type="text"  name="vendorPaymentTerms"
+                 ng-disabled="!editCompany.isVendor"
+                 ng-model="editCompany.paymentTerms" ng-required="editCompany.isVendor"
+                 ng-change="validatePaymentTerms(companyForm)" ng-maxlength="3"
+                 ng-pattern="numberPattern" hard-reset-pattern="numberPattern">
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'vendorAccountNumber')}">
+
+          <label class="control-label" ng-hide="isShowingErrors(companyForm, 'vendorAccountNumber')">
+            Account Number
+          </label>
+
+          <div class="error-vendor-form-message" ng-messages="companyForm.vendorAccountNumber.$error"
+               ng-class="{'hide': !isShowingErrors(companyForm, 'vendorAccountNumber')}">
+            <label class="control-label" ng-message="maxlength">Vendor number is too large.</label>
+          </div>
+
+          <input class="form-control" type="text" ng-disabled="!editCompany.isVendor" ng-maxlength="30"
+                 name="vendorAccountNumber" ng-model="editCompany.accountNumber">
+        </div>
+      </div>
+
+      <div class="col-xs-6 avatar-create">
+        <label>Company Logo</label>
+        <div class="avatar">
+          <div class="empty-avatar" edit-avatar
+               ng-model="editCompany.logo" model-name="company" model-id="{{ editCompany.id }}"></div>
+        </div>
+        <!--<div class="btns-container">-->
+          <!--<button class="btn btn-primary">Change</button>-->
+          <!--<button class="btn btn-primary btn-primary-outline pull-right disabled">Restore</button>-->
+        <!--</div>-->
+
+        <div class="form-group">
+
+          <label class="control-label">Note</label>
+
+          <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
+                    maxlength="80" ng-trim="false" make-dirty-on-blur></textarea>
+
+          <div class="word-count">{{ 80 - editCompany.description.length }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="company-window__location row" ng-show="currentStep === 'location'">
+
+      <div class="col-xs-6">
+        <div class="form-group" use-alternative-map="true" ng-if="currentStep === 'location'"
+             address-autocomplete template-page="header/create-new-entity/create-company"
+             ng-model="editCompany.addresses[0]" show-validation-messages="triedToSave"></div>
+
+        <div class="form-group">
+          <time-zone-autocomplete address="editCompany.addresses[0]" time-zones="timeZones"></time-zone-autocomplete>
+        </div>
+
+        <div phone-numbers-edit ng-model="editCompany.addresses[0].phoneNumbers" is-try-to-save="triedToSave"
+             country-code="{{editCompany.addresses[0].countryCode}}"></div>
+
+      </div>
+      <div class="col-xs-6">
+        <div style="width: 100%; height: 250px" map alternative-map></div>
+      </div>
+    </div>
+
+    <div class="company-window__contact row" ng-show="currentStep === 'contact'" ng-form="contactForm">
+      <div class="col-xs-6">
+        <div class="form-group" ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'firstName')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingContactErrors(contact, contactForm, 'firstName')}">
+            First Name
+          </label>
+
+          <div ng-messages="contactForm.firstName.$error"
+               ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'firstName')}">
+            <label class="control-label" ng-message="required">First name is required.</label>
+            <label class="control-label" ng-message="maxlength">First name is too large.</label>
+            <label class="control-label" ng-message="minlength">First name is too short.</label>
+          </div>
+
+          <input class="form-control" type="text" ng-minlength="2" ng-maxlength="15"
+                 name="firstName" ng-model="contact.firstName" required="true" make-dirty-on-blur>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'lastName')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingContactErrors(contact, contactForm, 'lastName')}">
+            Last Name
+          </label>
+
+          <div ng-messages="contactForm.lastName.$error"
+               ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'lastName')}">
+            <label class="control-label" ng-message="maxlength">Last name is too large.</label>
+          </div>
+
+          <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
+                 name="lastName" ng-model="contact.lastName" make-dirty-on-blur>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'designation')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingContactErrors(contact, contactForm, 'designation')}">
+            Designation
+          </label>
+
+          <div ng-messages="contactForm.designation.$error"
+               ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'designation')}">
+            <label class="control-label" ng-message="maxlength">Designation is too large</label>
+            <label class="control-label" ng-message="minlength">Designation is too short</label>
+          </div>
+
+          <input class="form-control" type="text" name="designation"
+                 aria-expanded="true" make-dirty-on-blur
+                 ng-model="contact.designation" ng-minlength="3" ng-maxlength="30">
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': isShowingContactErrors(contact, contactForm, 'primaryEmail')}">
+
+          <label class="control-label" ng-class="{'hide': isShowingContactErrors(contact, contactForm, 'primaryEmail')}">
+            Email
+          </label>
+
+          <div ng-messages="contactForm.primaryEmail.$error"
+               ng-class="{'hide': !isShowingContactErrors(contact, contactForm, 'primaryEmail')}">
+            <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
+            <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
+            <div class="control-label" ng-message="unique">This email already occupied.</div>
+            <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+          </div>
+
+          <input class="form-control" type="text" name="primaryEmail" aria-expanded="true"
+                 make-dirty-on-blur ng-model="contact.primaryEmail" ng-pattern="emailPattern"
+                 ng-maxlength="128"
+                 contact-id="contact.id" is-uniq-validation validation-func="validateContactEmail"
+                 model-id="contact.id">
+        </div>
+
+        <div is-try-to-save="triedToSave" phone-numbers-edit country-code="{{editCompany.addresses[0].countryCode}}"
+             ng-model="contact.phoneNumbers"></div>
+      </div>
+
+      <div class="col-xs-6 avatar-create">
+        <label>Photo</label>
+        <div class="avatar">
+          <div edit-avatar ng-model="contact.avatar" model-name="contact" model-id="{{ contact.id }}"></div>
+        </div>
+        <!--<div class="btns-container">-->
+          <!--<button class="btn btn-primary">Change</button>-->
+          <!--<button class="btn btn-primary btn-primary-outline pull-right disabled">Restore</button>-->
+        <!--</div>-->
+
+        <div class="form-group">
+
+          <label class="control-label">Subscribe to</label>
+
+          <div uib-dropdown>
+
+            <input class="form-control has-dropdown" type="text" value="" uib-dropdown-toggle
+                   aria-expanded="false" readonly="readonly">
+            <i class="icn-sm icn-caret-gray"></i>
+
+            <div class="subscribe-tokens">
+              <div class="invoice-update-token" ng-show="contact.subscription.invoice">Inv. Updates</div>
+              <div class="ticket-update-token" ng-show="contact.subscription.ticket">Tkt Updates</div>
+            </div>
+
+            <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
+
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+                   ng-model="contact.subscription.ticket">
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-model="contact.subscription.ticket">
+                      <span class="control-indicator"></span> Ticket Updates
+                    </label>
+                  </div>
+                </a>
+              </li>
+
+              <li ng-if="!isLastInvoiceSubsciption">
+                <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+                   ng-model="contact.subscription.invoice">
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-model="contact.subscription.invoice">
+                      <span class="control-indicator"></span> Invoice Updates
+                    </label>
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="company-window__billing row" ng-show="currentStep === 'billing'">
+      <div class="col-xs-6">
+        <div class="form-group">
+
+          <label class="control-label">Default Payment Method</label>
+
+          <input type="text" class="form-control" ng-model="editCompany.defaultPaymentMethod"
+                 name="defaultPaymentMethod"
+                 uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
+                 readonly qt-typeahead-async-show-on-focus>
+          <div typeahead-input-icon="editCompany.defaultPaymentMethod"
+               style="position: absolute;top: 34px;right: 13px;"></div>
+        </div>
+
+        <div class="form-group">
+          <p class="rate-label">Tax Rates</p>
+          <div uib-dropdown>
+
+            <div class="btn btn-lg btn-primary pull-right" uib-dropdown-toggle
+                 style="margin-top: -47px; width:auto;"
+                 aria-expanded="false">
+              Edit Taxes
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"
+                 style="margin-top: -8px;">
+
+              <div role="presentation" class="checkbox-dropdown-header">
+                <div class="form-group" style="float: none; max-width: 100%">
+                  <input type="text" class="form-control-filter"
+                         placeholder="Search Tax Rates..." ng-model="searchTax">
+                  <i class="icn-sm icn-search-input" tabindex="-1"></i>
+                </div>
+              </div>
+
+              <div class="list-container">
+                <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
+
+                  <div class="checkbox-dd-item"
+                       ng-repeat="taxRate in techCompanyTax | filter:searchTax">
+                    <label class="control checkbox">
+                      <input type="checkbox" ng-model="selectedTax[taxRate.code]"
+                             ng-change="movingTax(taxRate)">
+                      <span class="control-indicator pull-left plus-circle"></span>
+                      {{ taxRate.code }}
+                    </label>
+                  </div>
+
+                  <div class="checkbox-dd-item clickable create-custom"
+                       ng-click="movingTax('new-tax-rate', newTaxRateForm)">
+                    <label class="control checkbox">
+                      <span class="control-indicator pull-left plus-circle"></span>
+                      Create Custom
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <ul class="qt-list rates__list" ng-form="newTaxRateForm">
+            <li class="rates__list--point list-heading" ng-if="editCompany.taxRates.length > 0">
+              <div class="col-xs-5">Tax Description</div>
+              <div class="col-xs-5">Tax Percent</div>
+              <div class="col-xs-2"></div>
+            </li>
+            <li class="rates__list--point"
+                ng-repeat="tax in editCompany.taxRates | orderBy: ['new', 'code']">
+
+              <div ng-if="tax.versionedId">
+                <div class="col-xs-5">{{ tax.code }}</div>
+                <div class="col-xs-5"><span>{{ tax.rate }}</span>%</div>
+                <div class="col-xs-2">
+                  <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                     ng-click="deleteTaxRate(tax.code)"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+                    <i class="icn-sm icn-delete"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="new-tax" ng-if="!tax.versionedId">
+                <div class="col-xs-5"
+                     ng-class="{'has-error': (newTaxRateForm['taxCode' + $index].$dirty || triedToSave) && isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
+
+                  <div ng-messages="newTaxRateForm['taxCode' + $index].$error"
+                       style="position: absolute;margin-top: -19px;"
+                       ng-class="{'hide': (newTaxRateForm['taxCode' + $index].$pristine && !triedToSave) || !isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
+
+                    <label class="control-label" ng-message="required">
+                      TAX NAME IS REQUIRED.
+                    </label>
+                    <label class="control-label" ng-message="maxlength">
+                      TAX NAME IS TOO LARGE.
+                    </label>
+                    <label class="control-label" ng-message="unique">
+                      THIS TAX NAME ALREADY OCCUPIED.
+                    </label>
+                  </div>
+
+                  <input type="text" class="form-control"
+                         ng-model="tax.code" name="{{'taxCode' + $index}}" ng-required="true"
+                         is-uniq-validation validation-func="validateTaxRateCode"
+                         ng-maxlength="30" placeholder="Description">
+                </div>
+
+                <div class="col-xs-5" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'taxRate' + $index)}">
+
+                  <div ng-messages="newTaxRateForm['taxRate' + $index].$error"
+                       style="position: absolute;margin-top: -19px;"
+                       ng-if="isShowingErrors(newTaxRateForm, 'taxRate' + $index)">
+                    <label class="control-label" ng-message="required">
+                      RATE IS REQUIRED.
+                    </label>
+                  </div>
+
+                  <input type="text" class="form-control" placeholder="Rate" style="width: 200px;"
+                         ng-model="tax.rate" name="{{'taxRate' + $index}}" hard-reset-required="true"
+                         hard-reset-pattern="taxRateNumberPattern">
+                  <span class="procent-rate" style="right: 60px; top: 10px;">%</span>
+
+                </div>
+
+                <div class="col-xs-2">
+                  <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                     ng-click="deleteTaxRate(tax.code)"
+                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+                    <i class="icn-sm icn-delete"></i>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <label>Service Type</label>
+
+          <input type="text" class="form-control" ng-model="editCompany.serviceType" name="serviceType"
+                 uib-typeahead="serviceType for serviceType in serviceTypes"
+                 readonly qt-typeahead-async-show-on-focus>
+          <div typeahead-input-icon="editCompany.serviceType"
+               style="position: absolute;top: 34px;right: 13px;"></div>
+        </div>
+
+        <div class="form-group">
+          <p class="rate-label">Service Info</p>
+
+          <div uib-dropdown ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
+
+            <div class="btn btn-lg btn-primary pull-right" uib-dropdown-toggle
+                 style="margin-top: -47px; width: auto;"
+                 aria-expanded="false">
+              Edit Services
+            </div>
+
+            <div class="dropdown-menu dropdown-menu-right checkbox-dropdown" stop-propagation="click"
+                 style="margin-top: -8px;">
+
+              <div role="presentation" class="checkbox-dropdown-header">
+                <div class="form-group" style="float: none; max-width: 100%">
+                  <input type="text" class="form-control-filter"
+                         placeholder="Search services..." ng-model="searchService">
+                  <i class="icn-sm icn-search-input" tabindex="-1"></i>
+                </div>
+              </div>
+
+              <div class="list-container">
+                <div class="custom-scroll" style="max-height: 164px;margin-bottom: 10px;">
+
+                  <div class="checkbox-dd-item"
+                       ng-repeat="defaultService in servicesData.default | filter:searchService">
+                    <label class="control checkbox">
+                      <input type="checkbox" ng-model="selectedServices[defaultService.name]"
+                             ng-change="movingService(defaultService)">
+                      <span class="control-indicator pull-left plus-circle"></span>
+                      {{ defaultService.name }}
+                    </label>
+                  </div>
+
+                  <div class="checkbox-dd-item clickable create-custom"
+                       ng-click="movingService('new-service', servicesForm)">
+                    <label class="control checkbox">
+                      <span class="control-indicator pull-left plus-circle"></span>
+                      Create Custom
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <ul class="qt-list rates__list" ng-form="servicesForm">
+            <li class="rates__list--point list-heading" ng-if="editCompany.services.length > 0">
+              <div class="col-xs-6">Service Name</div>
+              <div class="col-xs-3">Per Hour</div>
+              <div class="col-xs-3">Is Billable</div>
+            </li>
+            <li class="rates__list--point" ng-repeat="service in editCompany.services | orderBy: ['new', 'name']">
+              <div class="col-xs-6" ng-if="service.versionedId">{{ service.name }}</div>
+              <div ng-if="!service.versionedId" class="col-xs-6"
+                   ng-class="{'has-error': (servicesForm['serviceName' + $index].$dirty || triedToSave) && isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
+
+                <div ng-messages="servicesForm['serviceName' + $index].$error" style="margin-top: -20px"
+                     ng-class="{'hide': !(servicesForm['serviceName' + $index].$dirty || triedToSave) || !isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
+                  <label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>
+                  <label class="control-label" ng-message="maxlength">IS TOO LARGE.</label>
+                  <label class="control-label" ng-message="minlength">IS TOO SHORT.</label>
+                  <label class="control-label" ng-message="unique">ALREADY OCCUPIED.</label>
+                </div>
+
+                <input type="text" class="form-control"
+                       ng-model="service.name" placeholder="Name"
+                       name="{{'serviceName' + $index}}" ng-required="true"
+                       is-uniq-validation validation-func="validateServiceName"
+                       ng-maxlength="100" ng-minlength="3">
+              </div>
+
+              <div class="col-xs-3"
+                   ng-class="{'has-error': isShowingErrors(servicesForm, 'editServiceRate' + $index)}">
+                <input type="text" class="form-control" placeholder="Rate" qt-to-fixed="2"
+                       ng-model="service.rate" ng-required="true" name="{{'editServiceRate' + $index}}"
+                       ng-readonly="!PermissionsService.isAllowed('MANAGE_SERVICES')"
+                       hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
+                <span class="days" style="top: 9px;">$</span>
+              </div>
+
+              <div class="col-xs-3 justify-flex">
+                <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                   ng-click="deleteService(service.name)" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')"
+                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+                  <i class="icn-sm icn-delete"></i>
+                </a>
+                <label class="control checkbox pull-right">
+                  <input type="checkbox" ng-model="service.billable" ng-click="onChangeBillable()"
+                         ng-disabled="!PermissionsService.isAllowed('MANAGE_SERVICES')">
+                  <span class="control-indicator"></span>
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="company-window__deploy-agents row" ng-show="currentStep === 'agent'">
+      <div class="col-xs-6" ng-init="isShowPass = false">
+        <h3>Agent Credentials</h3>
+
+        <div class="form-group">
+          <label>Domain/Username</label>
+          <input class="form-control" type="text" ng-model="editCompany.login">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input class="form-control show-password" type="{{ isShowPass ? 'text' : 'password' }}"
+                 ng-model="editCompany.password">
+          <a href="javascript:void(0)" class="show-password-hit hit-area ha-18 has-tooltip"
+             tooltip-placement="top" uib-tooltip="{{ isShowPass ? 'Hide' : 'Show' }} Password"
+             ng-click="isShowPass = !isShowPass">
+            <i class="icn-sm"
+               ng-class="{'icn-hide-password': isShowPass, 'icn-show-password': !isShowPass}"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-xs-6 company-window__deploy-agents--settings" ng-form="agentSettingsForm">
+        <h3>Agent Settings</h3>
+
+        <div class="form-group justify-flex" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'maxAgents')}">
+          <p>Maximum agents install for this client</p>
+          <input class="form-control" type="number" name="maxAgents" min="0" ng-model="editCompany.maxAgents">
+        </div>
+
+        <div class="form-group justify-flex">
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="autoScanNetwork">
+            Automatically Scan Network
+            <span class="control-indicator"></span>
+          </label>
+        </div>
+        <div class="form-group justify-flex" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'removeOfflineTime')}">
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="editCompany.autoRemoveDevice">
+            Automatically remove device <br> if offline for more then days
+            <span class="control-indicator"></span>
+          </label>
+          <input type="number" class="form-control"
+                 name="removeOfflineTime" min="0" ng-model="editCompany.removeOfflineTime">
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="clearfix">
+    <div class="col-xs-6 pull-right btns-container">
+      <button class="btn btn-primary btn-primary-outline" ng-click="save(companyForm)"
+              custom-disabled="{{ savingInProcess }}">
+        {{ editCompany.id ? 'Save' : 'Create' }}
+      </button>
+      <button class="btn btn-success pull-right" ng-click="nextStep()" custom-disabled="{{ currentStep === 'agent' }}">
+        NEXT STEP
+      </button>
+    </div>
+  </footer>
+</div>

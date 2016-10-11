@@ -2,14 +2,12 @@
 
 (function () {
 
-  angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.createTicketCtrl',
-    ['$scope', '$uibModalInstance', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
-      'quicktech.common.services.UserNotificationService', 'sessionId', 'sessionTime', 'fromRemoteCompanyId', 'fromRemoteDeviceId',
-      'ServicesService', '$timeout', 'quicktech.common.services.TicketsPermissionsService', '$state', 'Utils',
-      'quicktech.common.services.PermissionsService',
-      function ($scope, $uibModalInstance, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
-                UserNotificationService, sessionId, sessionTime, fromRemoteCompanyId, fromRemoteDeviceId, ServicesService,
-                $timeout, TicketsPermissionsService, $state, Utils, PermissionsService) {
+  angular.module('quicktech').controller('quicktech.createTicketCtrl',
+    ['$scope', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
+      'quicktech.common.services.UserNotificationService', 'ServicesService', '$timeout', '$state',
+      'quicktech.common.services.TicketsPermissionsService',
+      function ($scope, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
+                UserNotificationService, ServicesService, $timeout, $state, TicketsPermissionsService) {
 
         var agentsByCompany = [];
 
@@ -35,19 +33,34 @@
         $scope.unassignedCompany = CompaniesService.getUnassignedCompany();
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
-        $scope.ticket = { priorityLevel: 'MEDIUM' };
-        $scope.ticketAttachments = [];
+
+        var savedState = $scope.getLastSavedState('ticket');
+        var savedItem = savedState.item;
+        if (savedState.type === 'ticket' && savedItem) {
+          $scope.ticketAttachments = angular.copy(savedItem.attachments);
+          $scope.ticketSharedUsersList = angular.copy(savedItem.ticketSharedUsersList);
+          $scope.selectUpdateSharedUser = angular.copy(savedItem.selectUpdateSharedUser);
+
+
+          savedItem.attachments = undefined;
+          savedItem.ticketSharedUsersList = undefined;
+          savedItem.selectUpdateSharedUser = undefined;
+          $scope.ticket = angular.copy(savedItem);
+        } else {
+          $scope.ticket = { priorityLevel: 'MEDIUM' };
+          $scope.ticketAttachments = [];
+          $scope.ticketSharedUsersList = [];
+          $scope.selectUpdateSharedUser = {};
+        }
+
         $scope.ticketPriorityValue = {
           LOW: 'Low',
           MEDIUM: 'Medium',
           HIGH: 'High'
         };
-        $scope.ticketSharedUsersList = [];
-        $scope.selectUpdateSharedUser = {};
 
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.clientCompanies = CompaniesService.getClientCompanies();
-        Utils.deleteById($scope.clientCompanies, $scope.unassignedCompany.id);
 
         $scope.usersCurrentCompany = UsersService.getAllByCompanyId(CompaniesService.getCurrentCompany().id);
 
@@ -60,7 +73,7 @@
               agentsList = agentsList.concat(agents[companyId].map(function (agent) {
                 agent.companyId = companyId;
 
-                if (fromRemoteCompanyId === companyId && fromRemoteDeviceId === agent.id) {
+                if ($scope.resolvedCompanyId === companyId && $scope.resolvedDeviceId === agent.id) {
                   $timeout(function () {
                     $scope.ticketAgent = agent;
                   })
@@ -73,16 +86,25 @@
           $scope.agentsList = angular.copy(agentsList);
         });
 
-        if (fromRemoteCompanyId) {
+        if ($scope.resolvedCompanyId) {
           $timeout(function () {
-            var company = CompaniesService.getOneById(fromRemoteCompanyId);
+            var company = CompaniesService.getOneById($scope.resolvedCompanyId);
             if (!company.isDefault) {
               $scope.ticketCompany = company;
             }
           });
         }
 
-        if (sessionId) {
+        if ($scope.resolvedCreatedUserId) {
+          $timeout(function () {
+            var createdUser = UsersService.getOneById($scope.resolvedCreatedUserId);
+            if (!createdUser.isDefault) {
+              $scope.ticketCreatedUser = createdUser;
+            }
+          });
+        }
+
+        if ($scope.sessionId) {
 
           $timeout(function () {
             var techUsers = UsersService.getTechUsers();
@@ -93,15 +115,15 @@
             }
           });
 
-          $scope.ticket.remoteSessionId = sessionId;
+          $scope.ticket.remoteSessionId = $scope.sessionId;
           $scope.ticket.serviceExpenses = [{}];
 
-          var quantity = parseFloat(sessionTime);
+          var quantity = parseFloat($scope.sessionTime);
           $scope.ticket.serviceExpenses[0].quantity = quantity ? quantity.toFixed() : undefined;
           $scope.isShowService = true;
           $scope.maxServiceDate = new Date();
 
-          ServicesService.getAllByCompany($scope, fromRemoteCompanyId, function (resp) {
+          ServicesService.getAllByCompany($scope, $scope.resolvedCompanyId, function (resp) {
             $scope.ticket.serviceExpenses[0].item = resp.find(function (service) {
                 return service.name.toLowerCase() === 'remote service';
               }) || resp[0];
@@ -148,11 +170,9 @@
             if ($scope.ticket.createdUser) {
               var ticketUserId = $scope.ticket.createdUser.id,
                 ticketCompanyId = $scope.ticket.createdUser.companyId;
-              if (ticketUserId && ticketCompanyId !== val.id && ticketCompanyId !== $scope.unassignedCompany.id) {
+              if (ticketUserId && ticketCompanyId !== val.id) {
                 delete $scope.ticketCreatedUser;
               }
-
-              $scope.ticket.createdUser.companyId = val.id;
             }
 
             if (agentsByCompany) {
@@ -185,11 +205,6 @@
               resetSharedUsers(selectedCompany);
             }
           } else {
-            if ($scope.ticket.createdUser) {
-              $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
-              resetSharedUsers($scope.unassignedCompany);
-            }
-
             if ($scope.ticket.serviceExpenses && $scope.ticket.serviceExpenses.length) {
               $scope.ticket.serviceExpenses[0].item = undefined;
               $scope.ticket.serviceExpenses.splice(1);
@@ -204,19 +219,22 @@
 
         $scope.$watch('ticketCreatedUser', function (val) {
 
-          if ((val !== null) && (typeof val === 'object') && (val.id)) {
-            $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
-            $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
-            $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', true);
+          if (val && (typeof val === 'object') && val.id) {
+            $scope.ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
+
+            if ($scope.ticket.createdUser && $scope.ticket.createdUser.id) {
+              $scope.selectUpdateSharedUser[$scope.ticket.createdUser.id] = false;
+            }
 
             $scope.ticket.createdUser = {
               firstName: $scope.ticketCreatedUser.firstName,
               id: $scope.ticketCreatedUser.id,
-              primaryEmail: $scope.ticketCreatedUser.primaryEmail
+              primaryEmail: $scope.ticketCreatedUser.primaryEmail,
+              companyId: $scope.ticketCompany.id
             };
 
             $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
-              return !share.user || (share.user.id !== 'new' && share.user.id !== $scope.ticketCreatedUser.id);
+              return share.user.id !== $scope.ticketCreatedUser.id;
             });
 
             $scope.ticketSharedUsersList.push({
@@ -225,22 +243,12 @@
             });
 
             $scope.selectUpdateSharedUser[$scope.ticketCreatedUser.id] = true;
+            $scope.ticketForm.ticketCreatedUser.$setValidity('invalidUser', true);
 
-            var ticketCompany = CompaniesService.getOneById($scope.ticketCreatedUser.company.id);
-
-            if (ticketCompany.id !== $scope.unassignedCompany.id) {
-              $scope.ticketCompany = ticketCompany;
-              $scope.ticket.createdUser.companyId = ticketCompany.id;
-            } else {
-              $scope.ticket.createdUser.companyId = $scope.unassignedCompany.id;
-              resetSharedUsers($scope.unassignedCompany);
-              $scope.ticketAgent = '';
-            }
-          } else if (val && val.length <= 128 && val.match($scope.emailPattern)) {
-
-            $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', true);
+          } else if (val) {
 
             var selectedUser = null;
+
             for (var i = 0, len = $scope.clients.length; i < len; i++) {
               var user = $scope.clients[i];
               if (user.primaryEmail === val) {
@@ -250,59 +258,28 @@
             }
 
             if (!selectedUser) {
+              $scope.ticketForm.ticketCreatedUser.$setValidity('invalidUser', false);
 
-              if (!PermissionsService.isAllowed('CREATE_USERS')) {
-                $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', false);
-              } else {
-                $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', true);
+              if ($scope.ticket.createdUser && $scope.ticket.createdUser.id) {
+                $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
+                  return share.user.id !== $scope.ticket.createdUser.id;
+                });
+                $scope.selectUpdateSharedUser[$scope.ticket.createdUser.id] = false;
               }
-
-              UsersService.isEmailUnique(val, '', false, function (resp) {
-                if (resp.value) {
-                  $scope.ticketForm.ticketCreatedUser.$setValidity('unique', true);
-                  var firstName = val.split('@')[0],
-                    selectedCompany = $scope.ticketCompany ? $scope.ticketCompany : $scope.unassignedCompany;
-
-                  $scope.ticket.createdUser = {
-                    primaryEmail: val,
-                    firstName: firstName,
-                    companyId: selectedCompany.id
-                  };
-
-                  resetSharedUsers(selectedCompany);
-                  $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
-                    return share.user.id !== 'new';
-                  });
-
-                  $scope.ticketSharedUsersList.push({
-                    user: {
-                      id: 'new',
-                      primaryEmail: val,
-                      firstName: val
-                    },
-                    notify: false
-                  });
-
-                  $scope.ticketAgent = $scope.ticketCompany ? $scope.ticketAgent : '';
-                } else {
-                  $scope.ticketForm.ticketCreatedUser.$setValidity('unique', false);
-                }
-              });
             } else {
               $scope.ticketCreatedUser = selectedUser;
-              $scope.ticketForm.ticketCreatedUser.$setValidity('permissions', true);
+              $scope.ticketForm.ticketCreatedUser.$setValidity('invalidUser', true);
             }
 
-          } else if (val) {
-            $scope.ticketForm.ticketCreatedUser.$setValidity('pattern', false);
-            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
-              return share.user.id !== 'new';
-            });
           } else {
+            if ($scope.ticket.createdUser && $scope.ticket.createdUser.id) {
+              $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
+                return share.user.id !== $scope.ticket.createdUser.id;
+              });
+              $scope.selectUpdateSharedUser[$scope.ticket.createdUser.id] = false;
+            }
             $scope.ticket.createdUser = undefined;
-            $scope.ticketSharedUsersList = $scope.ticketSharedUsersList.filter(function (share) {
-              return share.user.id !== 'new';
-            });
+            $scope.ticketForm.ticketCreatedUser.$setValidity('invalidUser', true);
           }
 
         });
@@ -470,7 +447,7 @@
 
             TicketsService.createTicket($scope.ticket, function (resp) {
               $scope.savingInProcess = false;
-              $uibModalInstance.dismiss();
+              $scope.closeWindow();
 
               if (resp.code >= 400) {
                 var message = resp.validationResults && resp.validationResults.remoteSessionId ? resp.validationResults.remoteSessionId : resp.message;
@@ -486,10 +463,6 @@
           } else {
             $scope.triedToSaveTicket = true;
           }
-        };
-
-        $scope.closeCreateTicketForm = function () {
-          $uibModalInstance.dismiss();
         };
 
         $scope.validateLink = function () {
@@ -516,7 +489,7 @@
 
           for (var i = 0, len = errors.length; i < len; i++) {
             var error = errors[i];
-            if (error === 'pattern' || error === 'unique' || error === 'invalidName' || error === 'permissions') {
+            if (error === 'invalidName' || error === 'invalidUser') {
               primaryError = error;
               break;
             }
@@ -526,14 +499,10 @@
             return 'Subject is too large.';
           } else if (form.note.$error.maxlength) {
             return 'Note is too large.';
-          } else if (primaryError === 'pattern') {
-            return 'Incorrect email.';
-          } else if (primaryError === 'unique') {
-            return 'Email already occupied by tech user.';
           } else if (primaryError === 'invalidName') {
             return 'Invalid company name.';
-          } else if (primaryError === 'permissions') {
-            return 'You have no permissions to create new user.';
+          } else if (primaryError === 'invalidUser') {
+            return 'Invalid user name.';
           } else if (!primaryError && errors.indexOf('required') > -1) {
             return 'Required fields can\'t be left empty.';
           }
@@ -617,11 +586,20 @@
           });
         };
 
+        $scope.$on('createNewEntity', function (event, type) {
+          $scope.ticket.attachments = $scope.ticketAttachments;
+          $scope.ticket.ticketSharedUsersList = $scope.ticketSharedUsersList;
+          $scope.ticket.selectUpdateSharedUser = $scope.selectUpdateSharedUser;
+          $scope.savedState.types.push('ticket');
+          $scope.savedState.items.push($scope.ticket);
+          $scope.setOpenedTab(type);
+        });
+
         function resetSharedUsers(company) {
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
-            if (!shares.user || shares.user.id === 'new' || UsersService.getOneById(shares.user.id).accountType === 'TECH') {
+            if (UsersService.getOneById(shares.user.id).accountType === 'TECH') {
               continue;
             }
 

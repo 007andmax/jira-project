@@ -1,0 +1,114 @@
+<div ng-controller="quicktech.createProductCtrl">
+  <div class="qt-product-edit" ng-form="newCategoryNameForm"
+       ng-class="{'has-error': isShowingCreateCategoryError(newCategoryNameForm, 'newCategoryName')}">
+
+    <div class="col-1">
+      <input type="text" class="form-control" placeholder="Category name..."
+             style="background-color: transparent;border-color: transparent;"
+             ng-model="editCategory.name"
+             name="newCategoryName" ng-required="true" ng-maxlength="100"
+             is-uniq-validation validation-func="isUniqueCategoryName">
+    </div>
+
+    <div class="col-2">
+      <div class="product-actions">
+
+        <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
+           custom-disabled="{{ newCategoryNameForm.$invalid }}"
+           ng-click="addCategory(newCategoryNameForm)">
+          <i class="icn-sm icn-product-save"></i>
+        </a>
+
+        <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
+           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
+           ng-click="editCategory.name = ''">
+          <i class="icn-sm icn-product-cancel"></i>
+        </a>
+
+      </div>
+    </div>
+
+    <div ng-messages="newCategoryNameForm.newCategoryName.$error"
+         ng-if="isShowingCreateCategoryError(newCategoryNameForm, 'newCategoryName')">
+      <div class="error-msg" ng-message="required">Name is required.</div>
+      <div class="error-msg" ng-message="maxlength">Name is too large.</div>
+      <div class="error-msg" ng-message="unique">Name already occupied.</div>
+    </div>
+
+  </div>
+
+  <div class="product-form-wrapper" ng-form="editProductForm">
+
+    <div class="col-1" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+      <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
+             ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50"
+             is-uniq-validation validation-func="validateProductIls" model-id="product.versionedId.id">
+    </div>
+
+    <div class="col-2" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
+      <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
+             ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50"
+             is-uniq-validation validation-func="validateProductMnf" model-id="product.versionedId.id">
+    </div>
+
+    <div class="col-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
+      <div class="dropdown">
+        <input type="text" class="form-control has-dropdown" placeholder="Category"
+               autocomplete="off" ng-model="editProduct.category" name="editProductCategory" typeahead-editable="true"
+               typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
+               typeahead-input-formatter="getItemName($model)"
+               uib-typeahead="category as category.name for category in categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
+               qt-typeahead-show-on-focus custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+        <div typeahead-input-icon="editProduct.category" style="position: absolute;top: 13px;right: 13px;"></div>
+      </div>
+    </div>
+
+    <div class="col-desc" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+      <input type="text" class="form-control" placeholder="Description"
+             ng-model="editProduct.description" ng-required="true"
+             ng-maxlength="500" name="editProductDescription">
+    </div>
+
+    <div class="col-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
+      <div class="dropdown">
+
+        <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
+               autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
+               typeahead-input-formatter="getItemName($model)"
+               uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"
+               qt-typeahead-show-on-focus custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
+
+        <div typeahead-input-icon="editProduct.company" style="position: absolute;top: 13px;right: 13px;"></div>
+
+      </div>
+    </div>
+
+    <div class="col-4" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
+         ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+      <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
+             name="cost" ng-change="validateSaleAndCost(editProductForm)"
+             hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+    </div>
+
+    <div class="col-5" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
+      <input type="text" class="form-control" placeholder="S. Price" ng-model="editProduct.sale"
+             name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
+             hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
+    </div>
+
+    <div class="qt-form-actions">
+
+      <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
+
+      <div class="btn btn-lg btn-info pull-right" ng-click="saveChangeProduct(editProductForm)"
+           custom-disabled="{{ disabledSaveChangeButton }}">
+        {{ editProduct.id ? 'Save' : 'Add' }}
+      </div>
+
+      <div class="btn btn-lg btn-primary btn-primary-outline pull-right" ng-click="editProduct = {}">Clear</div>
+    </div>
+
+  </div>
+</div>

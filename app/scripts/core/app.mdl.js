@@ -427,6 +427,8 @@
 
             }).result.then(function (ticket) {
               if (ticket) {
+
+                //create ticket update
                 var params = {
                   listType: 'all',
                   ticketId: ticket.id,
@@ -446,10 +448,11 @@
                 }
               } else if (ticket === undefined) {
 
+                //create ticket
                 var modalInstance = $uibModal.open({
-                  templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
-                  controller: 'quicktech.core.tickets.createTicketCtrl',
-                  windowClass: 'modal-create-ticket',
+                  templateUrl: '/html/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
+                  controller: 'createNewEntityCtrl',
+                  windowClass: 'create-popup',
                   backdrop: 'static',
                   animation: true,
                   resolve: {
@@ -459,11 +462,14 @@
                     sessionTime: function () {
                       return sessionTime;
                     },
-                    fromRemoteCompanyId: function () {
+                    resolvedDeviceId: function () {
+                      return deviceId;
+                    },
+                    resolvedCompanyId: function () {
                       return companyId;
                     },
-                    fromRemoteDeviceId: function () {
-                      return deviceId;
+                    resolvedOpenedTab: function () {
+                      return 'ticket';
                     }
                   }
                 });

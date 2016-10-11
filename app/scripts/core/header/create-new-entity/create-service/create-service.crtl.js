@@ -2,19 +2,14 @@
 
 (function () {
 
-  angular.module('quicktech.core.services').controller('quicktech.core.services.editServiceCtrl',
+  angular.module('quicktech').controller('quicktech.editServiceCtrl',
     ['$scope', '$rootScope', 'ServicesService',
       function ($scope, $rootScope, ServicesService) {
 
-        if ($scope.service) {
-          $scope.editService = {
-            versionedId: $scope.service.versionedId,
-            name: $scope.service.name,
-            rate: $scope.service.rate,
-            timeBlock: Math.round($scope.service.timeBlock * 60),
-            taxable: $scope.service.taxable,
-            billable: $scope.service.billable
-          }
+        var savedState = $scope.getLastSavedState('service');
+
+        if (savedState.type === 'service' && savedState.item) {
+          $scope.editService = angular.copy(savedState.item);
         } else {
           $scope.editService = {
             taxable: true,
@@ -25,17 +20,10 @@
         $scope.saveEditService = function (form) {
           if (form.$valid) {
             $scope.disabledSaveButton = true;
-            ServicesService.save({
-              versionedId: $scope.editService.versionedId,
-              name: $scope.editService.name,
-              rate: $scope.editService.rate,
-              timeBlock: $scope.editService.timeBlock / 60,
-              taxable: $scope.editService.taxable,
-              billable: $scope.editService.billable
-            }, function () {
+            var saveService = angular.copy($scope.editService);
+            ServicesService.save(saveService, function () {
               $scope.disabledSaveButton = false;
-              $rootScope.$broadcast('cancelEditForm');
-            })
+            });
           } else {
             $scope.triedToSaveService = true;
           }

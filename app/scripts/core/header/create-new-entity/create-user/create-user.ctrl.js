@@ -2,14 +2,20 @@
 
 (function () {
 
-  angular.module('quicktech.core.users').controller('quicktech.core.users.editCtrl',
+  angular.module('quicktech').controller('quicktech.createUserCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
-      '$timeout', 'quicktech.common.services.PhoneFormats', 'quicktech.common.services.UserConfirmationsService',
+      '$timeout', 'quicktech.common.services.PhoneFormats',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
-                $timeout, PhoneFormats, UserConfirmationsService) {
+                $timeout, PhoneFormats) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),
           action;
+
+        var savedState = $scope.getLastSavedState('user');
+        if (savedState.type === 'user' && savedState.item) {
+          $scope.editUser = angular.copy(savedState.item);
+          $scope.editUser.companyId = $scope.editUser.company.id;
+        }
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
 
@@ -17,13 +23,7 @@
 
         if (!$scope.clientCompanies || $scope.clientCompanies.length < 1) {
           alert('Create at list one company before adding users');
-
-          if ($scope.editUser && $scope.editUser.id) {
-            $scope.setEditUserId();
-          } else {
-            $state.go('users');
-          }
-
+          $scope.openedTab = 'company';
           return;
         }
 
@@ -72,7 +72,7 @@
 
         $scope.$watch('currentUser.permissions', function (permissions) {
           if (permissions && !$scope.PermissionsService.isAllowed(action)) {
-            $scope.cancelEdit();
+            $scope.closeWindow();
           }
         });
 
@@ -85,14 +85,6 @@
             $scope.userCompanyCountryCode = $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses[0].countryCode;
           }
         });
-
-        $scope.cancelEdit = function () {
-          if ($scope.editUser && $scope.editUser.id) {
-            $scope.setEditUserId();
-          } else {
-            $state.go('users');
-          }
-        };
 
         $scope.getUserCompanyName = function () {
           if ($scope.editUser.companyId) {
@@ -140,9 +132,12 @@
               $scope.disablePreventingLocationChange = true;
 
               $timeout(function () {
+                $rootScope.$broadcast('newUserHasBeenCreated', resp.id);
+                if (!$scope.savedState.items.length) {
+                  $scope.closeWindow();
+                }
                 $rootScope.$broadcast('show-after-save-' + userId);
-              }, 0);
-              $scope.cancelEdit();
+              });
             })
           } else {
             $scope.triedToSave = true;
@@ -185,7 +180,21 @@
           $scope.isResetPassCollapsed = true;
         };
 
-        UserConfirmationsService.preventLocationChange($scope);
+        $scope.isLastUserWithInvoiceSubscription = function (targetUser) {
+          var users = UsersService.getAllByCompanyId(targetUser.company.id);
+
+          for (var id in users) {
+            var user = users[id];
+            if (user.id === targetUser.id) {
+              continue;
+            }
+
+            if (user.subscription.invoice) {
+              return false;
+            }
+          }
+          return true;
+        };
 
       }]);
 

@@ -7,16 +7,6 @@
       'quicktech.common.services.UserConfirmationsService',
       function ($scope, ProductsService, $rootScope, UserNotificationService, UserConfirmationsService) {
 
-        $scope.openEditProduct = function () {
-          $rootScope.$broadcast('cancelEditForm');
-          $scope.setShowCreateProductInList(false);
-          $scope.showEditProduct = true;
-        };
-
-        $scope.$on('cancelEditForm', function () {
-          $scope.showEditProduct = false;
-        });
-
         if ($scope.product.category){
           $scope.$on($scope.product.category.id + '-showProduct', function (event, productId) {
             $scope.setHighlightProductId(productId);

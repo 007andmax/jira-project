@@ -9915,4 +9915,7 @@ button.close {
 .company-item:hover{
   background-color: #e9f5fb;
 }
+.pac-container {
+  z-index: 9999;
+}
 

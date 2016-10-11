@@ -9,7 +9,7 @@
         attachFunc: '='
       },
       link: function ($scope, element) {
-        var dragTimer, dropArea = element.find('.drop-area');
+        var dragTimer;
         element.hide();
 
         $timeout(function () {
