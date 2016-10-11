@@ -82,7 +82,9 @@
             clientIndustry: {},
             defaultPaymentMethod: '',
             login: '',
-            password: ''
+            password: '',
+            maxAgents: 0,
+            removeOfflineTime: 30
           };
           $scope.contact = $scope.editCompany.contacts[0];
 
@@ -175,11 +177,15 @@
               $rootScope.$broadcast('newCompanyHasBeenCreated', resp.id || resp);
               if (!$scope.savedState.items.length) {
                 $scope.closeWindow();
-                $state.go('companyProfile', { companyId: resp.id || resp });
               }
             })
           } else {
             $scope.triedToSave = true;
+
+            for (var error in form.$error) {
+              var subForm = form.$error[error][0];
+              $scope.setCurrentStep(subForm.$name.replace('Form', ''));
+            }
           }
 
           function processPhoneNumbers(phoneNumbers) {

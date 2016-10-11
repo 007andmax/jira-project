@@ -121,7 +121,7 @@
             <input type="text" class="form-control" name="userCompany"
                    value="{{userCompany.name || userCompany}}" disabled="disabled" ng-hide="isCreation">
 
-            <div uib-dropdown ng-show="isCreation">
+            <div uib-dropdown ng-show="isCreation" add-create-new-button="company">
 
               <input type="text" ng-model="userCompany" autocomplete="off"
                      class="form-control form-control-dropdown dropdown-toggle"

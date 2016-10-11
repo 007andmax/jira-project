@@ -90,7 +90,9 @@
           $timeout(function () {
             var company = CompaniesService.getOneById($scope.resolvedCompanyId);
             if (!company.isDefault) {
-              $scope.ticketCompany = company;
+              $scope.ticketCreatedUser = UsersService.getAllByCompanyId(company.id).find(function (user) {
+                return user.isContact;
+              });
             }
           });
         }
@@ -590,8 +592,8 @@
           $scope.ticket.attachments = $scope.ticketAttachments;
           $scope.ticket.ticketSharedUsersList = $scope.ticketSharedUsersList;
           $scope.ticket.selectUpdateSharedUser = $scope.selectUpdateSharedUser;
-          $scope.savedState.types.push('ticket');
-          $scope.savedState.items.push($scope.ticket);
+          $scope.savedState.types.unshift('ticket');
+          $scope.savedState.items.unshift($scope.ticket);
           $scope.setOpenedTab(type);
         });
 

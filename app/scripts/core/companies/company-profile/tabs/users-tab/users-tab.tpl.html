@@ -31,18 +31,11 @@
 
     </li>
 
-    <li ng-if="editedUser && editedUser.newUser" style="min-height: 100px" qt-scroll-to="center"
-        ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/edit-user.tpl.html'"></li>
-
     <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
         ng-controller="quicktech.core.companies.usersTabCtrl"
-        show-model-element="{{ 'show-user-on-save-' + user.id }}"
-        ng-style="{'min-height': editedUser && editedUser.id === user.id ? '100px' : 'unset'}">
+        show-model-element="{{ 'show-user-on-save-' + user.id }}">
 
-      <div ng-if="editedUser && editedUser.id === user.id"
-           ng-include="'/html/scripts/core/companies/company-profile/tabs/users-tab/edit-user.tpl.html'"></div>
-
-      <div ng-if="!editedUser || editedUser.id !== user.id" class="users-list-wrapper">
+      <div class="users-list-wrapper">
         <div class="col-1">
           <div class="user-bio">
 
@@ -148,22 +141,7 @@
         <div class="col-5">
           <div class="list-actions pull-right">
 
-            <!--<div class="dropdown pull-left">-->
-
-            <!--<div class="btn btn-default pull-left has-tooltip disabled"-->
-            <!--data-toggle="dropdown" tooltip-placement="top" uib-tooltip="logged in devices">-->
-            <!--<i class="icn-sm icn-user-devices"></i>-->
-            <!--</div>-->
-
-            <!--<ul class="dropdown-menu devices-menu dropdown-menu-right" role="menu">-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-server"></i>File.Server</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-computer"></i>Skynet.2013</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-mobile"></i>Mobile.Jack</a></li>-->
-            <!--<li><a tabindex="-1" href="javascript:void(0)"><i class="icn-lg icn-fax"></i>Fax.Sublime</a></li>-->
-            <!--</ul>-->
-            <!--</div>-->
-
-            <div class="btn btn-default pull-left has-tooltip" ng-click="setEditedUser(user)"
+            <div class="btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS')"
                  tooltip-placement="top" uib-tooltip="Edit">
               <i class="icn-sm icn-edit"></i>
@@ -174,18 +152,12 @@
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
-          <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
-               custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
+            <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+                 custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"
-               tooltip-placement="top" uib-tooltip="Archive this User">
-            <i class="icn-sm icn-remove-token"></i>
-          </div>
-
-            <!--<div class="btn btn-default btn-user-chat pull-left has-tooltip disabled"-->
-            <!--tooltip-placement="top" uib-tooltip="chat" ng-click="startChat()">-->
-            <!--<i class="icn-sm icn-user-chat"></i>-->
-            <!--</div>-->
-
+                 tooltip-placement="top" uib-tooltip="Archive this User">
+              <i class="icn-sm icn-remove-token"></i>
+            </div>
           </div>
         </div>
       </div>

@@ -564,6 +564,15 @@
           });
         };
 
+        $scope.$on('createNewEntity', function (event, type) {
+          var unsubscribe = $scope.$on('new' + type.charAt(0).toUpperCase() + type.slice(1) + 'HasBeenCreated',
+            function (e, id) {
+              var company = CompaniesService.getOneById(id) || {};
+              $scope.searchCompany = company.name;
+              unsubscribe();
+            });
+        });
+
         function resetSharedUsers(company) {
           if (!company) {
             $scope.ticketSharedUsersList = [];

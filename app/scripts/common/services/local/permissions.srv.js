@@ -18,13 +18,10 @@
 
       function isPermissionConflict(permissions) {
         return $state.includes("users") && permissions.indexOf('VIEW_USERS') === -1 ||
-          $state.includes("users.create") && permissions.indexOf('CREATE_USERS') === -1 ||
           $state.includes("companies") && permissions.indexOf('VIEW_COMPANIES') === -1 ||
           $state.includes("companyProfile") && permissions.indexOf('VIEW_COMPANIES') === -1 ||
           $state.includes("companyProfile", { tabName: 'users' }) && permissions.indexOf('VIEW_USERS') === -1 ||
           $state.includes("companyProfile", { tabName: 'network-scan' }) && permissions.indexOf('NETWORK_SCAN_CLIENTS') === -1 ||
-          $state.includes("createCompany") && permissions.indexOf('CREATE_COMPANIES') === -1 ||
-          $state.includes("editCompany") && permissions.indexOf('EDIT_COMPANIES') === -1 ||
           ($state.current.url + ' ' + $state.current.name).indexOf("accounting") > -1 && permissions.indexOf('VIEW_ACCOUNTING') === -1 ||
           $state.includes("quickSupport") && permissions.indexOf('ALLOW_QUICK_CONNECT') === -1;
       }

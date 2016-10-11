@@ -21,8 +21,13 @@
           if (form.$valid) {
             $scope.disabledSaveButton = true;
             var saveService = angular.copy($scope.editService);
-            ServicesService.save(saveService, function () {
+            ServicesService.save(saveService, function (resp) {
               $scope.disabledSaveButton = false;
+
+              $rootScope.$broadcast('newProductHasBeenCreated', resp.id);
+              if (!$scope.savedState.items.length) {
+                $scope.closeWindow();
+              }
             });
           } else {
             $scope.triedToSaveService = true;

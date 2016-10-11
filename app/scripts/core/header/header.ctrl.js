@@ -15,12 +15,6 @@
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        $scope.createUser = function () {
-          $state.go('users.create').then(function () {
-            $rootScope.$broadcast('createNewUser');
-          });
-        };
-
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };

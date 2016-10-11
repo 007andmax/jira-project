@@ -99,8 +99,7 @@
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
 
-          var isInCompanies = $state.includes('companyProfile') || $state.includes('editCompany') || $state.includes('createCompany');
-          if (isInCompanies && (filter !== 'dateRange' || value && value.length)) {
+          if ($state.includes('companyProfile') && (filter !== 'dateRange' || value && value.length)) {
             $state.go('companies');
           }
 

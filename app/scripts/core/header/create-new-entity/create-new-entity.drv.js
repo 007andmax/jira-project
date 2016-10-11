@@ -21,9 +21,9 @@
               return;
             }
 
-            if (angular.element(document).find('.create-popup.modal-create-ticket').length) {
-              $rootScope.$broadcast('createNewEntity', attrs.createNewEntity);
-            } else {
+            $rootScope.$broadcast('createNewEntity', attrs.createNewEntity);
+
+            if (!angular.element(document).find('.create-popup.modal-create-ticket').length) {
               var modalInstance = $uibModal.open({
                 templateUrl: '/html/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
                 controller: 'createNewEntityCtrl',

@@ -67,25 +67,10 @@
           templateUrl: '/html/scripts/core/users/users.tpl.html',
           controller: 'quicktech.core.users.usersCtrl'
         }))
-        .state('users.create', waitForServices({
-          url: '/create',
-          templateUrl: '/html/scripts/core/users/user-edit.tpl.html',
-          controller: 'quicktech.core.users.createUserCtrl'
-        }))
         .state('companies', waitForServices({
           url: '/clients/companies',
           templateUrl: '/html/scripts/core/companies/companies.tpl.html',
           controller: 'quicktech.core.companies.companiesCtrl'
-        }))
-        .state('createCompany', waitForServices({
-          url: '/clients/companies/create',
-          templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
-          controller: 'quicktech.core.companies.editCompanyCtrl'
-        }))
-        .state('editCompany', waitForServices({
-          url: '/clients/companies/edit/:companyId',
-          templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
-          controller: 'quicktech.core.companies.editCompanyCtrl'
         }))
         .state('companyProfile', waitForServices({
           url: '/clients/companyProfile/:companyId?tabName',
@@ -208,25 +193,10 @@
           templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
           controller: 'quicktech.core.settings.emailTemplatesCtrl'
         }))
-        //.state('devices', waitForServices({
-        //  url: '/clients/devices',
-        //  templateUrl: '/html/scripts/core/devices/devices.tpl.html',
-        //  controller: 'quicktech.core.devices.devicesCtrl'
-        //}))
-        //.state('companyDevices', waitForServices({
-        //  url: '/clients/companyDevices/:companyId',
-        //  templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
-        //  controller: 'quicktech.core.devices.companyDevicesCtrl'
-        //}))
         .state('quickSupport', waitForServices({
           url: '/quickSupport',
           templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
           controller: 'quicktech.core.quickSupport.quickSupportCtrl'
-        }))
-        .state('taxRates', waitForServices({
-          url: '/inventory/taxRates',
-          templateUrl: '/html/scripts/core/tax-rates/tax-rates.tpl.html',
-          controller: 'quicktech.core.taxRates.taxRatesCtrl'
         }));
 
       function waitForServices(conf) {
@@ -262,9 +232,6 @@
           $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
           if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
-            if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
-              return;
-            }
             globalSearch.count = undefined;
             globalSearch.selectedItemsCount = undefined;
           }
@@ -281,11 +248,7 @@
               globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
             };
             globalSearch.goBack.tooltip = 'collapse ticket';
-          } else if (toState.name === 'editCompany') {
-            globalSearch.goBack.isEnabled = true;
-            globalSearch.goBack.func = $state.go.bind($state, 'companyProfile', { companyId: $stateParams.companyId });
-            globalSearch.goBack.tooltip = 'back to company profile';
-          } else if (toState.name === 'companyProfile' || toState.name === 'createCompany') {
+          } else if (toState.name === 'companyProfile') {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'companies');
             globalSearch.goBack.tooltip = 'back to companies';

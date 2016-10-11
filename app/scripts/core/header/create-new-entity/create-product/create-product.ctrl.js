@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.createProductCtrl',
-    ['$scope', 'ProductsService', 'CompaniesService',
-    function ($scope, ProductsService, CompaniesService) {
+    ['$scope', 'ProductsService', 'CompaniesService', '$rootScope',
+    function ($scope, ProductsService, CompaniesService, $rootScope) {
 
       ProductsService.getCategories($scope, function (resp) {
         $scope.categories = resp;
@@ -22,11 +22,12 @@
         $scope.editProduct = angular.copy(savedState.item);
         var company = $scope.editProduct.company;
 
-        if ($scope.editProduct.category.default) {
+        if ($scope.editProduct.category && $scope.editProduct.category.default) {
           $scope.editProduct.category.name = null;
         }
         if (company) {
-          $scope.editProduct.company = CompaniesService.getOneById(company.id);
+          company = CompaniesService.getOneById(company.id);
+          $scope.editProduct.company = company.isVendor ? company : undefined;
         }
 
       } else if (savedState.type === 'category' && savedState.item) {
@@ -90,8 +91,13 @@
 
           $scope.disabledSaveChangeButton = true;
 
-          ProductsService.saveProduct($scope.editProduct, function () {
+          ProductsService.saveProduct($scope.editProduct, function (resp) {
             $scope.disabledSaveChangeButton = false;
+
+            $rootScope.$broadcast('newProductHasBeenCreated', resp.id);
+            if (!$scope.savedState.items.length) {
+              $scope.closeWindow();
+            }
           });
         } else {
           $scope.triedToSaveProduct = true;
@@ -170,6 +176,12 @@
         }
 
       };
+
+      $scope.$on('createNewEntity', function (event, type) {
+        $scope.savedState.types.unshift('product');
+        $scope.savedState.items.unshift($scope.editProduct);
+        $scope.setOpenedTab(type);
+      });
 
     }]);
 

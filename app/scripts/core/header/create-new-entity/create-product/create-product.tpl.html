@@ -72,7 +72,7 @@
     </div>
 
     <div class="col-3" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
-      <div class="dropdown">
+      <div class="dropdown" add-create-new-button="company">
 
         <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
                autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
@@ -107,7 +107,6 @@
         {{ editProduct.id ? 'Save' : 'Add' }}
       </div>
 
-      <div class="btn btn-lg btn-primary btn-primary-outline pull-right" ng-click="editProduct = {}">Clear</div>
     </div>
 
   </div>

@@ -14,7 +14,17 @@
         var savedState = $scope.getLastSavedState('user');
         if (savedState.type === 'user' && savedState.item) {
           $scope.editUser = angular.copy(savedState.item);
-          $scope.editUser.companyId = $scope.editUser.company.id;
+          $timeout(function () {
+            if ($scope.editUser.company) {
+              $scope.editUser.companyId = $scope.editUser.company.id;
+            }
+          });
+        }
+
+        if ($scope.resolvedCompanyId) {
+          $timeout(function () {
+            $scope.editUser.companyId = $scope.resolvedCompanyId;
+          });
         }
 
         $scope.clientCompanies = CompaniesService.getClientCompanies();
@@ -40,7 +50,7 @@
 
         if (!$scope.editUser || !$scope.editUser.id) {
           $scope.isCreation = true;
-          $scope.editUser = {
+          $scope.editUser = $scope.editUser || {
             role: 'USER',
             phoneNumbers: [],
             subscription: {},
@@ -195,6 +205,13 @@
           }
           return true;
         };
+
+        $scope.$on('createNewEntity', function (event, type) {
+          $scope.savedState.types.unshift('user');
+          $scope.editUser.company = { id: $scope.editUser.companyId };
+          $scope.savedState.items.unshift($scope.editUser);
+          $scope.setOpenedTab(type);
+        });
 
       }]);
 

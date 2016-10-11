@@ -156,12 +156,6 @@
           $scope.isCollapsed = !$scope.isCollapsed;
         };
 
-        $scope.createUser = function (companyId) {
-          if (PermissionsService.isAllowed('CREATE_USERS')) {
-            //todo: implement user creation on modal window
-          }
-        };
-
         $scope.attachEvents = function (element) {
           $('.popover').on('mouseenter', function () {
             $rootScope.insidePopover = true;

@@ -53,8 +53,12 @@
               if (savedState.types[0] === 'ticket') {
                 if (type === 'user') {
                   $scope.resolvedCreatedUserId = id;
+                  $scope.resolvedDeviceId = undefined;
+                  $scope.resolvedCompanyId = undefined;
                 } else if (type === 'company') {
                   $scope.resolvedCompanyId = id;
+                  $scope.resolvedCreatedUserId = undefined;
+                  $scope.resolvedDeviceId = undefined;
                 }
               } else if ((savedState.types[0] === 'user' || savedState.types[0] === 'product') && type === 'company') {
                 savedItem.company = { id: id };

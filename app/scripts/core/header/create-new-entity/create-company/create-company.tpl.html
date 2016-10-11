@@ -15,16 +15,16 @@
       </ul>
     </div>
 
-    <div class="company-window__info row" ng-show="currentStep === 'info'">
+    <div class="company-window__info row" ng-show="currentStep === 'info'" ng-form="infoForm">
       <div class="col-xs-6">
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'companyName')}">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'companyName')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'companyName')}">
+          <label class="control-label" ng-class="{'hide': isShowingErrors(infoForm, 'companyName')}">
             Company Name
           </label>
 
-          <div ng-messages="companyForm.companyName.$error"
-               ng-class="{'hide': !isShowingErrors(companyForm, 'companyName')}">
+          <div ng-messages="infoForm.companyName.$error"
+               ng-class="{'hide': !isShowingErrors(infoForm, 'companyName')}">
             <label class="control-label" ng-message="required">COMPANY NAME IS REQUIRED.</label>
             <label class="control-label" ng-message="maxlength">COMPANY NAME IS TOO LARGE.</label>
             <label class="control-label" ng-message="minlength">COMPANY NAME IS TOO SHORT.</label>
@@ -37,14 +37,14 @@
 
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'companyDomain')}">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'companyDomain')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'companyDomain')}">
+          <label class="control-label" ng-class="{'hide': isShowingErrors(infoForm, 'companyDomain')}">
             Domain
           </label>
 
-          <div ng-messages="companyForm.companyDomain.$error"
-               ng-class="{'hide': !isShowingErrors(companyForm, 'companyDomain')}">
+          <div ng-messages="infoForm.companyDomain.$error"
+               ng-class="{'hide': !isShowingErrors(infoForm, 'companyDomain')}">
             <label class="control-label" ng-message="unique">THIS DOMAIN ALREADY OCCUPIED.</label>
             <label class="control-label" ng-message="pattern">PLEASE ENTER A VALID DOMAIN.</label>
           </div>
@@ -55,14 +55,14 @@
                  is-uniq-validation validation-func="validateCompanyDomain" ng-pattern="domainPattern">
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'industry')}">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'industry')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'industry')}">
+          <label class="control-label" ng-class="{'hide': isShowingErrors(infoForm, 'industry')}">
             Industry
           </label>
 
-          <div ng-messages="companyForm.industry.$error"
-               ng-class="{'hide': !isShowingErrors(companyForm, 'industry')}">
+          <div ng-messages="infoForm.industry.$error"
+               ng-class="{'hide': !isShowingErrors(infoForm, 'industry')}">
             <label class="control-label" ng-message="maxlength">INDUSTRY IS TOO LARGE.</label>
           </div>
 
@@ -72,14 +72,14 @@
                  autocomplete="off" qt-typeahead-async-show-on-focus>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'clientType')}">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'clientType')}">
 
-          <label class="control-label" ng-class="{'hide': isShowingErrors(companyForm, 'clientType')}">
+          <label class="control-label" ng-class="{'hide': isShowingErrors(infoForm, 'clientType')}">
             Client Type
           </label>
 
-          <div ng-messages="companyForm.clientType.$error"
-               ng-class="{'hide': !isShowingErrors(companyForm, 'clientType')}">
+          <div ng-messages="infoForm.clientType.$error"
+               ng-class="{'hide': !isShowingErrors(infoForm, 'clientType')}">
             <label class="control-label" ng-message="required">Client Type is required.</label>
           </div>
 
@@ -99,14 +99,14 @@
           <label class="vendor-descr">Vendor (allows you to link company with products)</label>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'vendorPaymentTerms')}">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorPaymentTerms')}">
 
-          <label class="control-label" ng-hide="isShowingErrors(companyForm, 'vendorPaymentTerms')">
+          <label class="control-label" ng-hide="isShowingErrors(infoForm, 'vendorPaymentTerms')">
             Payment Terms
           </label>
 
-          <div class="error-vendor-form-message" ng-messages="companyForm.vendorPaymentTerms.$error"
-               ng-class="{'hide': !isShowingErrors(companyForm, 'vendorPaymentTerms')}">
+          <div class="error-vendor-form-message" ng-messages="infoForm.vendorPaymentTerms.$error"
+               ng-class="{'hide': !isShowingErrors(infoForm, 'vendorPaymentTerms')}">
             <label class="control-label" ng-message="required">Payment terms is required.</label>
             <label class="control-label" ng-message="pattern">Please enter a valid payment terms.</label>
             <label class="control-label" ng-message="minValue">Vendor payment terms should be bigger that 0.
@@ -117,18 +117,18 @@
           <input class="form-control" type="text"  name="vendorPaymentTerms"
                  ng-disabled="!editCompany.isVendor"
                  ng-model="editCompany.paymentTerms" ng-required="editCompany.isVendor"
-                 ng-change="validatePaymentTerms(companyForm)" ng-maxlength="3"
+                 ng-change="validatePaymentTerms(infoForm)" ng-maxlength="3"
                  ng-pattern="numberPattern" hard-reset-pattern="numberPattern">
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(companyForm, 'vendorAccountNumber')}">
+        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorAccountNumber')}">
 
-          <label class="control-label" ng-hide="isShowingErrors(companyForm, 'vendorAccountNumber')">
+          <label class="control-label" ng-hide="isShowingErrors(infoForm, 'vendorAccountNumber')">
             Account Number
           </label>
 
-          <div class="error-vendor-form-message" ng-messages="companyForm.vendorAccountNumber.$error"
-               ng-class="{'hide': !isShowingErrors(companyForm, 'vendorAccountNumber')}">
+          <div class="error-vendor-form-message" ng-messages="infoForm.vendorAccountNumber.$error"
+               ng-class="{'hide': !isShowingErrors(infoForm, 'vendorAccountNumber')}">
             <label class="control-label" ng-message="maxlength">Vendor number is too large.</label>
           </div>
 
@@ -160,7 +160,7 @@
       </div>
     </div>
 
-    <div class="company-window__location row" ng-show="currentStep === 'location'">
+    <div class="company-window__location row" ng-show="currentStep === 'location'" ng-form="locationForm">
 
       <div class="col-xs-6">
         <div class="form-group" use-alternative-map="true" ng-if="currentStep === 'location'"
@@ -314,7 +314,7 @@
       </div>
     </div>
 
-    <div class="company-window__billing row" ng-show="currentStep === 'billing'">
+    <div class="company-window__billing row" ng-show="currentStep === 'billing'" ng-form="billingForm">
       <div class="col-xs-6">
         <div class="form-group">
 
@@ -567,7 +567,7 @@
       </div>
     </div>
 
-    <div class="company-window__deploy-agents row" ng-show="currentStep === 'agent'">
+    <div class="company-window__deploy-agents row" ng-show="currentStep === 'agent'" ng-form="agentForm">
       <div class="col-xs-6" ng-init="isShowPass = false">
         <h3>Agent Credentials</h3>
 

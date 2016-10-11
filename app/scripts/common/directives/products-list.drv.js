@@ -65,6 +65,28 @@
             return isDescription || isILC || isManufacture;
           };
 
+          scope.$on('createNewEntity', function (event, type) {
+            var unsubscribe = scope.$on('new' + type.charAt(0).toUpperCase() + type.slice(1) + 'HasBeenCreated',
+              function (e, id) {
+                $timeout(function () {
+                  var categories = scope.autocompleteData;
+                  for (var i = 0; i < categories.length; i++) {
+                    var products = categories[i].products;
+                    for (var j = 0; j < products.length; j++) {
+                      var product = products[j];
+
+                      if (product.versionedId.id === id) {
+                        scope.chooseProductItem(product);
+                        unsubscribe();
+                        return;
+                      }
+                    }
+                  }
+                }, 100);
+                unsubscribe();
+              });
+          });
+
           function showDropdown() {
             if (!scope.isPLOpen) {
               if (!dropdown) {
