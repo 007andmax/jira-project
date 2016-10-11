@@ -354,6 +354,45 @@
       return companyDto;
     }
 
+    function getCompanyProfileData(scope, companyId, callback) {
+
+      var companyDto = Utils.customizeObj({});
+
+      $http.get('/company/' + companyId + '/profile').then(function (resp) {
+        Utils.customizeObj(resp.data, companyDto);
+
+        if (callback) {
+          callback(resp.data);
+        }
+
+      }, function (resp) {
+        if (callback) {
+          callback(resp.data);
+        }
+      });
+
+      RealTimeService.subscribe('/companyDto/' + companyId, scope, function (newChange) {
+
+        if (newChange.action == 'COMPANY_DTO_CHANGED') {
+
+          var data = JSON.parse(newChange.data);
+          if (data[companyId]) {
+            Utils.customizeObj(data[companyId], companyDto);
+          }
+        }
+      });
+
+      RealTimeService.subscribe('/user', serviceScope, function (newChange) {
+        if (newChange.action === 'USER_SAVED') {
+          if (newChange.data.id === companyDto.contacts[0].id) {
+            Utils.customizeObj(newChange.data, companyDto.contacts[0]);
+          }
+        }
+      });
+
+      return companyDto;
+    }
+
     function isInitialized() {
       return initialized;
     }
@@ -725,6 +764,7 @@
       saveCompanySettingsDto: saveCompanySettingsDto,
       getCompanyForSettingPage: getCompanyForSettingPage,
       getCompanyData: getCompanyData,
+      getCompanyProfileData: getCompanyProfileData,
       isNameUnique: isNameUnique,
       isDomainUnique: isDomainUnique,
       isCompanyInboxUnique: isCompanyInboxUnique,

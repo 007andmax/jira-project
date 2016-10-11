@@ -22,9 +22,9 @@
       </p>
 
       <p class="pull-right text-muted">{{ ticket.createdAt | ticketCreateDate }}</p>
-      <div class="ticket-status pull-right">
-        <span class="label label-info pull-left" ng-show="ticket.unread" style="margin-top: 15px;margin-right: 0;">NEW</span>
-        <span class="ticket-unread-updates pull-left animation-hide" ng-show="ticket.hasNewUpdates" style="margin-right: 0;">
+      <div class="ticket-status pull-right"style="margin-top: 15px; min-width: 30px;">
+        <span class="label label-info pull-left" ng-show="ticket.unread">NEW</span>
+        <span class="ticket-unread-updates pull-left animation-hide" ng-show="ticket.hasNewUpdates" style="margin-left: 10px; transform: translateY(20%)">
           <i class="icn icn-sm icn-loading"></i>
         </span>
       </div>

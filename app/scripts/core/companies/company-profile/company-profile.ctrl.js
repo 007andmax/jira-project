@@ -47,7 +47,7 @@
         globalSearch.openedItemName = $scope.company.name;
         rightPanelSharedState.companyId = $scope.company.id;
 
-        $scope.companyData = CompaniesService.getCompanyData($scope, $stateParams.companyId, function (resp) {
+        $scope.companyData = CompaniesService.getCompanyProfileData($scope, $stateParams.companyId, function (resp) {
           $scope.currentLocation = $scope.companyData.addresses[$scope.locationIndex];
           $scope.currentContact = $scope.companyData.contacts[$scope.contactIndex];
 
