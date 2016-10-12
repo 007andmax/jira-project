@@ -317,25 +317,15 @@
 .create-new-user{
   position: relative;
 }
-.create-new-user form {
-  position: relative;
-  left: -30px;
-  right: -30px;
-  width: calc(100% + 60px);
-  padding: 45px 30px 50px;
-  box-shadow: 0 0 25px 0 rgba(10,45,89,.15);
-}
 .create-new-user.edit-user form{
   padding-top: 44px;
 }
 .create-new-user.settings-basic-info form{
   box-shadow: none;
-  padding: 37px 30px;
+  /*padding: 37px 30px;*/
 }
 .create-user-container{
-  width: 562px;
-  /*margin: 0 auto;*/
-  padding: 0 30px;
+  /*padding: 0 30px;*/
 }
 .settings-basic-info .create-user-container{
   width: 500px;
@@ -386,7 +376,7 @@
   margin-top: 4px;
 }
 .create-user-avatar{
-  margin-top: 24px;
+  /*margin-top: 24px;*/
 }
 .create-user-avatar .avatar{
   margin-right: 15px;
@@ -400,13 +390,12 @@
   padding: 55px 0;
 }
 .create-user-avatar .avatar img{
-  max-width: 120px;
   margin-top: -1px;
   margin-left: -1px;
 }
 .create-user-avatar .avatar .reposition{
   position: absolute;
-  width: 120px;
+  width: 101%;
   height: 26px;
   left: -1px;
   bottom: -1px;
@@ -423,7 +412,9 @@
   -ms-user-select: none;
   user-select: none;
 }
+.create-user-avatar .avatar img,
 .create-user-avatar .no-avatar{
+  max-width: 120px;
   background-color: transparent;
 }
 .create-user-avatar input[type=file]{
@@ -484,7 +475,7 @@
   margin: 0;
 }
 .form-row .form-group.no-label{
-  margin-top: 21px;
+  margin-top: 16px;
   max-width: 50%; /*experemental*/
 }
 @-moz-document url-prefix() {

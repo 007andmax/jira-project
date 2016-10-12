@@ -299,7 +299,7 @@
                        ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
                        uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                        typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
-                       custom-style="{'max-height': '170px', 'overflow-y': 'auto'}">
+                       custom-style="{'max-height': '170px', 'overflow-y': 'auto', 'width': '100%'}">
 
                 <span style="position: absolute; top: 14px; right: 13px;">
                   <i class="icn-sm icn-caret-gray" ng-hide="ticketCompanyChoosen"></i>

@@ -1,8 +1,8 @@
 <div ng-form="phoneNumbersForm" class="phone-number-form">
-  <div class="form-row clearfix" ng-repeat="phoneNumber in phoneNumbers">
+  <div class="row clearfix" ng-repeat="phoneNumber in phoneNumbers">
 
     <div ng-if="$index !== phoneNumbers.length - 1">
-      <div class="form-group"
+      <div class="form-group custom-phone-number col-xs-6"
            ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
 
         <label class="control-label"
@@ -10,24 +10,24 @@
           {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
         </label>
 
-        <div style="min-height: 20px;" ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
+        <div  ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
 
-          <label class="control-label"
+          <label style="font-size: 12px;" class="control-label"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['required']}">
             Phone Number IS REQUIRED.
           </label>
 
-          <label class="control-label"
+          <label class="control-label" style="font-size: 12px;"
                  ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['maxlength']}">
             Phone Number IS TOO LARGE.
           </label>
 
-          <label class="control-label" ng-show="!phoneNumbersForm['phoneNumber' + $index].$error['required'] &&
+          <label class="control-label" style="font-size: 12px;" ng-show="!phoneNumbersForm['phoneNumber' + $index].$error['required'] &&
                                                 phoneNumber.number.length < 5 && !isPrefixValid(phoneNumber.number)">
             Phone Number IS TOO SHORT.
           </label>
 
-          <label class="control-label"
+          <label class="control-label" style="font-size: 12px;"
                  ng-class="{'hide': phoneNumber.number.length >= 5 ||
                                     phoneNumbersForm['phoneNumber' + $index].$error['maxlength'] ||
                                     !phoneNumbersForm['phoneNumber' + $index].$error['pattern'] ||
@@ -43,14 +43,14 @@
                make-dirty-on-blur execute-when-outfocused="onLostFocus()">
       </div>
 
-      <div class="form-group no-label">
-        <div class="pull-left ui" uib-dropdown dropdown-append-to-body="true">
+      <div class="form-group custom-phone-type col-xs-6 no-label">
+        <div class="pull-left" uib-dropdown dropdown-append-to-body="true">
 
           <input type="text" class="form-control-number has-dropdown"
                  ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
                  aria-expanded="true" READONLY>
 
-          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 200px;">
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 250px; z-index: 9999;">
             <li ng-repeat="(type, label) in phoneNumberTypes"
                 ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
@@ -69,7 +69,7 @@
     </div>
 
     <div ng-if="$index === phoneNumbers.length - 1">
-      <div class="form-group"
+      <div class="form-group custom-phone-number col-xs-6"
            ng-class="{'has-error': phoneNumbersForm['phoneNumber' + $index].$invalid && (phoneNumbersForm['phoneNumber' + $index].$dirty || isTryToSave)}">
 
         <label class="control-label"
@@ -77,7 +77,7 @@
           {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
         </label>
 
-        <div style="min-height: 20px;"
+        <div
              ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid || (phoneNumbersForm['phoneNumber' + $index].$pristine && !isTryToSave)}">
 
           <label class="control-label"
@@ -111,14 +111,14 @@
                hard-reset-required="{{ isFirstRequired }}" hard-phone-number-pattern country="{{countryCode}}">
       </div>
 
-      <div class="form-group no-label">
-        <div class="pull-left ui" uib-dropdown dropdown-append-to-body="true">
+      <div class="form-group col-xs-6 custom-phone-type no-label">
+        <div class="pull-left " uib-dropdown dropdown-append-to-body="true">
 
           <input type="text" class="form-control-number has-dropdown"
                  ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
                  aria-expanded="true" READONLY>
 
-          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 200px;">
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 250px;z-index: 9999;">
             <li ng-repeat="(type, label) in phoneNumberTypes"
                 ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>

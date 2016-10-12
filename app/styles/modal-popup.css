@@ -3,156 +3,281 @@
   height: 700px;
   top: 5%;
   left: calc(50% - 500px);
-  margin: 0; }
+  margin: 0;
+}
+
 .create-popup .modal-content {
-  border-radius: 10px; }
+  border-radius: 10px;
+}
 
 .create-window {
   background: #fff;
-  overflow: hidden;
-  border-radius: 10px; }
-  .create-window .checked {
-    color: #000000 !important; }
-  .create-window .close-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px; }
-  .create-window .navigation {
-    float: left;
-    display: inline-block;
-    padding: 30px 0; }
-    .create-window .navigation__list {
-      padding-right: 85px;
-      list-style-type: none; }
-      .create-window .navigation__list--category {
-        font-size: 24px;
-        line-height: 2em; }
-        .create-window .navigation__list--category a {
-          color: #b3b3b3; }
-          .create-window .navigation__list--category a:hover {
-            color: #000; }
-  .create-window .general {
-    float: left;
-    padding: 30px;
-    width: calc(100% - 225px);
-    height: 100%; }
-    .create-window .general .form-row .form-group {
-      max-width: 48%;
-      width: 100%;
-      margin: 0;
-      margin-bottom: 15px; }
-    .create-window .general > div {
-      border-left: 1px solid #e2e6e6; }
-    .create-window .general .company-window {
-      height: 535px; }
-      .create-window .general .company-window .company-steps {
-        margin-bottom: 30px; }
-        .create-window .general .company-window .company-steps__list {
-          position: relative;
-          display: flex;
-          justify-content: space-around;
-          margin: 0;
-          padding-bottom: 20px;
-          list-style-type: none; }
-          .create-window .general .company-window .company-steps__list:before {
-            position: absolute;
-            width: calc(100% - 215px);
-            bottom: 0;
-            left: 75px;
-            height: 2px;
-            opacity: .3;
-            background-color: black;
-            content: ''; }
-          .create-window .general .company-window .company-steps__list--point {
-            font-size: 18px;
-            float: left;
-            position: relative;
-            color: #b3b3b3;
-            cursor: pointer; }
-            .create-window .general .company-window .company-steps__list--point:hover {
-              color: #000; }
-            .create-window .general .company-window .company-steps__list--point:before {
-              position: absolute;
-              width: 26px;
-              bottom: -31px;
-              left: calc(50% - 13px);
-              height: 26px;
-              border: 2px solid #b3b3b3;
-              border-radius: 50%;
-              background-color: white;
-              content: ''; }
-            .create-window .general .company-window .company-steps__list--point.checked:after {
-              position: absolute;
-              width: 18px;
-              bottom: -27px;
-              left: calc(50% - 9px);
-              height: 18px;
-              border-radius: 50%;
-              background-color: #4caf50;
-              content: ''; }
-        .create-window .general .company-window__info .form-group.clearfix {
-          margin-bottom: 10px; }
-        .create-window .general .company-window__info .checkbox {
-          float: left; }
-        .create-window .general .company-window__info .vendor-descr {
-          float: left;
-          width: 90%;
-          line-height: 1.2; }
-        .create-window .general .company-window__info .avatar-create textarea {
-          height: 110px; }
-        .create-window .general .company-window__info .avatar-create .btns-container {
-          margin: 10px 0; }
-          .create-window .general .company-window__info .avatar-create .btns-container button {
-            width: 48%; }
-        .create-window .general .company-window__contact .btns-container {
-          margin-top: 34px;
-          margin-bottom: 15px; }
-          .create-window .general .company-window__contact .btns-container button {
-            width: 48%; }
-        .create-window .general .company-window__billing .rate-label {
-          display: inline-block;
-          line-height: 2;
-          font-size: 20px; }
-        .create-window .general .company-window__billing .rates__list {
-          padding: 15px 0; }
-          .create-window .general .company-window__billing .rates__list--point {
-            padding: 15px 0;
-            display: flex;
-            align-items: center; }
-        .create-window .general .company-window__billing .justify-flex {
-          justify-content: space-around; }
-          .create-window .general .company-window__billing .justify-flex .checkbox {
-            margin-top: 0; }
-      .create-window .general .company-window__deploy-agents {
-        display: block; }
-        .create-window .general .company-window__deploy-agents--settings .form-control {
-          width: 25%;
-          min-width: 80px; }
-        .create-window .general .company-window__deploy-agents--settings .form-group .control {
-          margin-bottom: 0; }
-        .create-window .general .company-window__deploy-agents--settings .form-group:last-child .control .control-indicator {
-          top: 25%; }
-      .create-window .general .company-window .phone-form {
-        display: flex;
-        justify-content: space-between; }
-        .create-window .general .company-window .phone-form--number {
-          width: 45%; }
-        .create-window .general .company-window .phone-form--type {
-          width: 40%; }
-      .create-window .general .company-window .avatar-create .avatar {
-        border: 1px solid #e2e6e6;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0;
-        height: 185px;
-        display: flex;
-        justify-content: center;
-        align-items: center; }
-    .create-window .general footer {
-      padding-top: 15px; }
-      .create-window .general footer .btns-container {
-        width: 50%; }
-        .create-window .general footer .btns-container button {
-          width: 48%; }
+  border-radius: 10px;
+}
+
+.create-window .checked {
+  color: #000000 !important;
+}
+
+.create-window .close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.create-window .navigation {
+  float: left;
+  display: inline-block;
+  padding: 30px 0;
+}
+
+.create-window .navigation__list {
+  padding-right: 85px;
+  list-style-type: none;
+}
+
+.create-window .navigation__list--category {
+  font-size: 24px;
+  line-height: 2em;
+}
+
+.create-window .navigation__list--category a {
+  color: #b3b3b3;
+}
+
+.create-window .navigation__list--category a:hover {
+  color: #000;
+}
+
+.create-window .general {
+  float: left;
+  padding: 30px;
+  width: calc(100% - 225px);
+  height: 100%;
+}
+.create-window .general .create-user-form .form-control-number{
+  width: 250px;
+}
+.create-window .general .form-row .form-group {
+  max-width: 48%;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 15px;
+}
+.create-window .general .dropdown-subscribe,
+.create-window .general .dropdown-priority,
+.create-window .general .dropdown-account-type{
+  width: 100%;
+}
+.create-window .general .no-label{
+  margin-top: 16px;
+}
+
+.create-window .general > div {
+  border-left: 1px solid #e2e6e6;
+}
+
+.create-window .general .company-window {
+  height: 535px;
+}
+
+.create-window .general .company-window .company-steps {
+  margin-bottom: 30px;
+}
+
+.create-window .general .company-window .company-steps__list {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding-bottom: 20px;
+  list-style-type: none;
+}
+
+.create-window .general .company-window .company-steps__list:before {
+  position: absolute;
+  width: calc(100% - 215px);
+  bottom: 0;
+  left: 75px;
+  height: 2px;
+  opacity: .3;
+  background-color: black;
+  content: '';
+}
+
+.create-window .general .company-window .company-steps__list--point {
+  font-size: 18px;
+  float: left;
+  position: relative;
+  color: #b3b3b3;
+  cursor: pointer;
+}
+
+.create-window .general .company-window .company-steps__list--point:hover {
+  color: #000;
+}
+
+.create-window .general .company-window .company-steps__list--point:before {
+  position: absolute;
+  width: 26px;
+  bottom: -31px;
+  left: calc(50% - 13px);
+  height: 26px;
+  border: 2px solid #b3b3b3;
+  border-radius: 50%;
+  background-color: white;
+  content: '';
+}
+
+.create-window .general .company-window .company-steps__list--point.checked:after {
+  position: absolute;
+  width: 18px;
+  bottom: -27px;
+  left: calc(50% - 9px);
+  height: 18px;
+  border-radius: 50%;
+  background-color: #4caf50;
+  content: '';
+}
+
+.create-window .general .company-window__info .form-group.clearfix {
+  margin-bottom: 10px;
+}
+
+.create-window .general .company-window__info .checkbox {
+  float: left;
+}
+
+.create-window .general .company-window__info .vendor-descr {
+  float: left;
+  width: 90%;
+  line-height: 1.2;
+}
+
+.create-window .general .company-window__info .avatar-create textarea {
+  height: 110px;
+}
+
+.create-window .general .company-window__info .avatar-create .btns-container {
+  margin: 10px 0;
+}
+
+.create-window .general .company-window__info .avatar-create .btns-container button {
+  width: 48%;
+}
+.create-window .general .company-window__contact .custom-phone-number,
+.create-window .general .company-window__location .custom-phone-number{
+  padding: 0;
+}
+.create-window .general .company-window__contact .custom-phone-type,
+.create-window .general .company-window__location .custom-phone-type{
+  padding-right: 0;
+}
+.create-window .general .company-window__contact .custom-phone-type input,
+.create-window .general .company-window__location .custom-phone-type input{
+  width: 100px;
+}
+.create-window .general .company-window__contact .btns-container {
+  margin-top: 34px;
+  margin-bottom: 15px;
+}
+
+.create-window .general .company-window__contact .btns-container button {
+  width: 48%;
+}
+
+.create-window .general .company-window__billing .rate-label {
+  display: inline-block;
+  line-height: 2;
+  font-size: 20px;
+}
+
+.create-window .general .company-window__billing .rates__list {
+  padding: 15px 0;
+  height: 350px;
+  overflow: auto;
+  margin-bottom: 15px;
+}
+
+.create-window .general .company-window__billing .rates__list--point {
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+}
+
+.create-window .general .company-window__billing .justify-flex {
+  justify-content: space-around;
+}
+
+.create-window .general .company-window__billing .justify-flex .checkbox {
+  margin-top: -10px;
+}
+
+.create-window .general .company-window__deploy-agents {
+  display: block;
+}
+
+.create-window .general .company-window__deploy-agents--settings .form-control {
+  width: 25%;
+  min-width: 80px;
+}
+
+.create-window .general .company-window__deploy-agents--settings .form-group .control {
+  margin-bottom: 0;
+}
+
+.create-window .general .company-window__deploy-agents--settings .form-group:last-child .control .control-indicator {
+  top: 25%;
+}
+.create-window .general .company-window__deploy-agents .form-control.show-password + a.show-password-hit{
+  top: 26px;
+}
+
+.create-window .general .company-window .phone-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-window .general .company-window .phone-form--number {
+  width: 45%;
+}
+
+.create-window .general .company-window .phone-form--type {
+  width: 40%;
+}
+.create-window .general .choose-file{
+  margin-top: 22px;
+  margin-bottom: 30px;
+}
+.create-window .general .company-window .avatar-create .avatar {
+  border: 1px solid #e2e6e6;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  height: 185px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.create-window .general .service-form-wrapper{
+  height: 585px;
+  box-shadow: none;
+  padding: 50px 15px;
+}
+.create-window .general .service-form-wrapper.edit-form-checkbox .col-3 label{
+  left: 0;
+}
+.create-window .general footer {
+  padding-top: 15px;
+}
+
+.create-window .general footer .btns-container {
+  width: 50%;
+}
+
+.create-window .general footer .btns-container button {
+  width: 48%;
+}
 
 /*# sourceMappingURL=modal-popup.css.map */

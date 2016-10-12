@@ -10,7 +10,9 @@
            ng-maxlength="100" ng-minlength="3">
   </div>
 
-  <div class="col-2" ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
+  <div class="col-2"
+
+       ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
     <input type="text" class="form-control" placeholder="Per Hour"
            ng-model="editService.rate" qt-to-fixed="2"
            name="editServiceRate" hard-reset-required="true" hard-reset-pattern="decimalNumberPattern">
