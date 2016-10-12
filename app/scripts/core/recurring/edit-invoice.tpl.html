@@ -198,7 +198,7 @@
             <div class="tab-pane in active" ng-show="isTabOpened('product')">
               <ul class="qt-table">
 
-                <li ng-repeat="product in editInvoice.products"
+                <li ng-repeat="product in editInvoice.products track by (product.item ? product.item.versionedId.id + $index : $index)"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
                   <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
@@ -210,7 +210,7 @@
             <div class="tab-pane in active" ng-show="isTabOpened('service')">
               <ul class="qt-table">
 
-                <li ng-repeat="service in editInvoice.services"
+                <li ng-repeat="service in editInvoice.services track by (service.item ? service.item.versionedId.id + $index : $index)"
                     ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
                   <div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
