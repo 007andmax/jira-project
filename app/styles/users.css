@@ -569,7 +569,7 @@
 }
 .create-user-form .form-control-number {
   padding-left: 19px;
-  width: 197px;
+  width: 100%;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
