@@ -117,6 +117,11 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category"
+             ng-class="{active: $state.includes('tickets-dashboard')}"
+             ng-click="stateGo($event, 'tickets-dashboard')">
+          Dashboard
+        </div>
+        <div class="center-category__category"
              ng-class="{active: $state.includes('tickets', {listType: 'all'})}"
              ng-click="stateGo($event, 'tickets', {listType: 'all'})">
           All Tickets
@@ -297,9 +302,14 @@
       </div>
       <div class="center-category collapsed-nav nano-content">
         <div class="center-category__category"
-             ng-class="{active: $state.includes('accounting')}"
+             ng-class="{active: $state.includes('accounting.dashboard')}"
+             ng-click="stateGo($event, 'accounting.dashboard')">
+          Dashboard
+        </div>
+        <div class="center-category__category"
+             ng-class="{active: $state.includes('accounting.billable')}"
              ng-click="stateGo($event, 'accounting')">
-          Billiable
+          Billable
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"

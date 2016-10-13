@@ -5,6 +5,7 @@
   var app = angular.module("quicktech",
     [
       'main.services',
+      'quicktech.core.dashboards',
       'quicktech.core.tickets',
       'quicktech.core.users',
       'quicktech.common.services',
@@ -62,6 +63,11 @@
           templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
           controller: 'quicktech.core.tickets.ticketDetailsCtrl'
         }))
+        .state('tickets-dashboard', waitForServices({
+          url: '/tickets-dashboard',
+          templateUrl: '/html/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
+          controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
+        }))
         .state('users', waitForServices({
           url: '/clients/users',
           templateUrl: '/html/scripts/core/users/users.tpl.html',
@@ -94,7 +100,12 @@
         .state('accounting', waitForServices({
           url: '/accounting',
           template: '<div ui-view></div>',
-          redirectTo: 'accounting.billable'
+          redirectTo: 'accounting.dashboard'
+        }))
+        .state('accounting.dashboard', waitForServices({
+          url: '/dashboard',
+          templateUrl: '/html/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
+          controller: 'quicktech.core.dashboards.billingDashboardCtrl'
         }))
         .state('accounting.billable', waitForServices({
           url: '/billable',
