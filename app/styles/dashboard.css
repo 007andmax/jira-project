@@ -1,0 +1,127 @@
+.bg-yellow {
+  background-color: #ffb55c; }
+
+.font-yellow {
+  color: #ffb55c; }
+
+.bg-green {
+  background-color: #00bf8e; }
+
+.font-green {
+  color: #00bf8e; }
+
+.bg-red {
+  background-color: #ff7877; }
+
+.font-red {
+  color: #ff7877; }
+
+.bg-deep-blue {
+  background-color: #00a4b5; }
+
+.font-deep-blue {
+  color: #00a4b5; }
+
+.bg-purple {
+  background-color: #8849ae; }
+
+.font-purple {
+  color: #8849ae; }
+
+.bg-light-blue {
+  background-color: #27c1e3; }
+
+.font-light-blue {
+  color: #27c1e3; }
+
+.tickets-dashboard .container-fluid {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+.board-head {
+  font-size: 24px;
+  margin: 20px;
+  text-transform: uppercase;
+  font-family: "Roboto Regular", sans-serif;
+  line-height: 1;
+  color: #000134; }
+
+header {
+  margin: 15px 0; }
+  header h2 {
+    display: inline-block;
+    float: left;
+    padding-left: 15px; }
+  header .calendar-top {
+    width: 200px;
+    height: 50px;
+    display: inline-block;
+    float: right; }
+
+.dashboard-main .stats {
+  height: 250px;
+  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px; }
+  .dashboard-main .stats__main {
+    float: left;
+    width: 70%; }
+    .dashboard-main .stats__main--count {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 130px;
+      max-height: 182px;
+      font-size: 72px; }
+  .dashboard-main .stats__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 30%;
+    height: 100%; }
+    .dashboard-main .stats__icon img {
+      width: 50%; }
+.dashboard-main .top-ten {
+  height: 400px;
+  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px; }
+  .dashboard-main .top-ten__list {
+    padding: 0;
+    list-style-type: none; }
+    .dashboard-main .top-ten__list .scrolled-list {
+      height: 300px;
+      overflow: auto; }
+    .dashboard-main .top-ten__list--point-head .point-name {
+      text-align: center; }
+      .dashboard-main .top-ten__list--point-head .point-name p {
+        padding-left: 20px; }
+    .dashboard-main .top-ten__list--point {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 15px 0; }
+      .dashboard-main .top-ten__list--point:after {
+        position: absolute;
+        width: 80%;
+        height: 1px;
+        bottom: 0;
+        left: 15%;
+        background-color: #eee;
+        content: ""; }
+      .dashboard-main .top-ten__list--point .point-name {
+        display: flex;
+        align-items: center;
+        justify-content: space-around; }
+        .dashboard-main .top-ten__list--point .point-name .list-avatar {
+          border-radius: 50%;
+          width: 40px;
+          box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4); }
+          .dashboard-main .top-ten__list--point .point-name .list-avatar img {
+            width: 100%; }
+.dashboard-main .chart {
+  height: 400px;
+  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px; }
+
+/*# sourceMappingURL=dashboard.css.map */
