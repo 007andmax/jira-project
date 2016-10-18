@@ -32,7 +32,7 @@
 }
 
 .create-window .navigation__list {
-  padding-right: 85px;
+  padding-right: 50px;
   list-style-type: none;
 }
 
@@ -263,7 +263,7 @@
 .create-window .general .service-form-wrapper{
   height: 585px;
   box-shadow: none;
-  padding: 50px 15px;
+  padding: 0 15px;
 }
 .create-window .general .service-form-wrapper.edit-form-checkbox .col-3 label{
   left: 0;

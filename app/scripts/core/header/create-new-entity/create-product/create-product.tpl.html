@@ -1,8 +1,9 @@
 <div ng-controller="quicktech.createProductCtrl">
+
   <div class="qt-product-edit" ng-form="newCategoryNameForm"
        style="margin: 15px;position: relative; margin-top: 0;"
        ng-class="{'has-error': isShowingCreateCategoryError(newCategoryNameForm, 'newCategoryName')}">
-
+    <h4 class="modal-title title-services">Create new Product</h4>
     <div class="col-1">
       <input type="text" class="form-control" placeholder="Category name..."
              style="background-color: transparent;border-color: transparent;"
@@ -113,7 +114,7 @@
 
       <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
 
-      <div class="btn btn-lg btn-info pull-right" ng-click="saveChangeProduct(editProductForm)"
+      <div class="btn btn-lg btn-info btn-create pull-right" ng-click="saveChangeProduct(editProductForm)"
            custom-disabled="{{ disabledSaveChangeButton }}">
         {{ editProduct.id ? 'Save' : 'Add' }}
       </div>

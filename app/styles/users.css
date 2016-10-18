@@ -523,6 +523,81 @@
   text-transform: uppercase;
   margin-bottom: 4px;
 }
+.priority-select{
+  display: inline-block;
+}
+.priority-select label{
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+  margin-top: 8px;
+}
+.create-ticket-form{
+  padding: 0 20px;
+}
+.btn-primary.btn-create{
+  line-height: 34px;
+  width: 140px;
+}
+.modal-create-ticket .modal-header.create-ticket-header{
+  padding: 10px 0 0;
+}
+.create-ticket-form .modal-footer{
+  margin: 0;
+  border-top: 0;
+  padding: 10px 0;
+}
+.services-description{
+  margin-bottom: 20px;
+}
+.ticket-drop{
+  height: 30px;
+}
+.title-services{
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+}
+.description-area{
+  border: 1px solid #e2e6e6;
+}
+.user-btn-create{
+  display: inline-block;
+  float: right;
+  margin-top: 35px;
+}
+.create-ticket-form .modal-body .form-control{
+  border-width: 1px;
+}
+.del-tax{
+  margin-top: 11px;
+}
+.modal-create-ticket .modal-header.create-ticket-header .ticket-number{
+  margin-top: 8px;
+}
+.create-ticket-header .modal-title{
+  margin-top: 3px;
+}
+.priority-select .create-dropdown{
+  display: inline-block;
+  line-height: 10px;
+}
+.create-user-form label.control-label{
+  text-transform: capitalize;
+}
+.ticket-drop.has-dropdown ~ i{
+  top: 10px;
+}
+.create-ticket-form .priority-dot{
+  vertical-align: middle;
+}
+.btn-create{
+  width: 140px;
+}
+.btn-create.user-create{
+  margin-right: 15px;
+}
 .create-user-form label.control{
   text-transform: none;
 }

@@ -550,7 +550,7 @@ hr {
   padding: 3px 0 0;
 }
 .modal-create-ticket .upload-attachments {
-  padding:10px 10px;
+  padding:0;
   background-color: #f1f5fa;
 }
 .modal-create-ticket .upload-attachments:empty {
@@ -612,9 +612,9 @@ hr {
   left: 305px;
 }
 .modal-create-ticket .wysiwyg-controls-wrapper {
-  padding: 18px 10px;
-  height: 67px;
-  border-top: 1px solid #e7ecf2;
+  padding: 5px;
+  height: 50px;
+  border: 1px solid #e7ecf2;
 }
 .wysiwyg-controls-wrapper .btn-send {
   width: 92px;
