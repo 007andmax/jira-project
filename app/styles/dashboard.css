@@ -44,7 +44,11 @@
   text-transform: uppercase;
   font-family: "Roboto Regular", sans-serif;
   line-height: 1;
-  color: #000134; }
+  color: #000134;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 header {
   margin: 15px 0; }
@@ -116,12 +120,38 @@ header {
         .dashboard-main .top-ten__list--point .point-name .list-avatar {
           border-radius: 50%;
           width: 40px;
-          box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4); }
+          box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+          margin-right: 5px;}
           .dashboard-main .top-ten__list--point .point-name .list-avatar img {
             width: 100%; }
 .dashboard-main .chart {
   height: 400px;
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
   margin-bottom: 30px; }
+@media screen and (max-width: 1920px){
+  .board-head{
+    font-size: 18px;
+  }
+}
 
+@media screen and (max-width: 1480px) {
+  .dashboard-main .stats__main--count{
+    font-size: 54px;
+  }
+  .top-ten__list--point-head div, .dashboard-main .top-ten__list--point div{
+    padding: 5px;
+  }
+  .top-ten__list--point-head div p, .dashboard-main .top-ten__list--point div p{
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .dashboard-main .top-ten__list--point .point-name p{
+    width: 45%;
+  }
+}
 /*# sourceMappingURL=dashboard.css.map */
