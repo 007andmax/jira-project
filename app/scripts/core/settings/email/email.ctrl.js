@@ -37,7 +37,7 @@
         }];
 
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
-        $scope.domainPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $scope.domainPattern = /^(((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?))|((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/;
         $scope.smtp = {};
         $scope.smtpHintMessage = 'This section allows you to choose server for sending email notifications.\n' +
           'Please, acknowledge, if you set invalid settings the system will use Mandrill.\n' +

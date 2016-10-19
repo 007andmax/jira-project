@@ -79,6 +79,10 @@
   services.run(['$http', '$rootScope', 'RealTimeService', function ($http, $rootScope, RealTimeService) {
     $http.get('/users/current').success(function (resp) {
       $rootScope.currentUser = resp;
+      $rootScope.currentUserLoaded = true;
+      if ($rootScope.servicesLoaded) {
+        $rootScope.applicationLoaded = true;
+      }
       RealTimeService.subscribe('/permissions', $rootScope.$new(), function (newChange) {
         if (newChange.action === 'PERMISSIONS_UPDATE') {
           $rootScope.currentUser.permissions = newChange.data.permissions;

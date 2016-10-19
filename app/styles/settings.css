@@ -22,6 +22,16 @@
   -ms-user-select: none;
   user-select: none;
 }
+.custom-phone-number{
+  padding: 0;
+}
+.custom-phone-type{
+  padding-right: 0;
+}
+
+.custom-phone-type.no-label{
+  margin-top:20px;
+}
 @-moz-document url-prefix() {
   .settings-sidebar > ul > li > a {
     line-height: 19px;
