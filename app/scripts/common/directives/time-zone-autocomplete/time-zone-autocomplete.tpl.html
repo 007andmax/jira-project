@@ -1,4 +1,4 @@
-<div class="form-group full-width" ng-form="timeZoneForm"
+<div class="form-group clearfix full-width" ng-form="timeZoneForm"
      ng-class="{'has-error': isShowingErrors(timeZoneForm, 'timeZone')}">
 
   <label class="control-label"
@@ -10,7 +10,7 @@
     <label class="control-label">PLEASE SELECT THE TIMEZONE.</label>
   </div>
 
-  <div class="pull-left" uib-dropdown open-dropdown-on-model-change>
+  <div class="pull-left" style="width: 100%;" uib-dropdown open-dropdown-on-model-change>
 
     <input class="form-control form-control-time-zone has-dropdown" type="text"
            uib-dropdown-toggle aria-expanded="false" ng-model="address.locale"
@@ -20,7 +20,7 @@
       <i class="icn-sm icn-remove-token"></i>
     </a>
 
-    <ul class="dropdown-menu time-zone-dropdown">
+    <ul style="width: 100%;" class="dropdown-menu time-zone-dropdown">
       <li class="time-zone clickable" ng-if="(address.locale || address.country) && filteredTimeZones.length"
           ng-repeat="timeZone in filteredTimeZones" offset="{{timeZone.offset}}" locale="{{timeZone.name}}"
           ng-click="setTimeZone(timeZone.name, timeZone.offset)"
