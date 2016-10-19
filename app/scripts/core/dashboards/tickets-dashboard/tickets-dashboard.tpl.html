@@ -2,8 +2,10 @@
   <div class="container-fluid">
     <header class="clearfix">
       <div class="calendar-top">
+        <span class="calendar-top-img"><img src="images/input-icons/date-picker-dashboard.svg" alt="date-picker"></span>
         {{ shownDateRange }}
         <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic">
+        <i class="icn-sm icn-expand"></i>
       </div>
     </header>
     <section class="dashboard-main">
@@ -99,7 +101,7 @@
                   <span class="legend-{{ $index }}" ng-repeat="legend in ticketsPriorityLegend">{{ legend }}</span>
                 </div>
               </div>
-              <div ng-if="!ticketsPriority || !ticketsPriority.length">
+              <div ng-if="!ticketsPriority || !ticketsPriority.length" class="tickets-priority">
                 You don't have tickets yet
               </div>
             </div>
@@ -232,29 +234,30 @@
               <d3line x="date" y="total"></d3line>
             </div>
 
-            <div ng-if="!ticketCreationTimeline || !ticketCreationTimeline.length">
+            <div ng-if="!ticketCreationTimeline || !ticketCreationTimeline.length" class="tickets-priority">
               You don't have tickets yet
             </div>
           </div>
         </div>
         <div class="col-lg-6 col-xs-12">
           <div class="chart clearfix">
-            <p class="board-head">
+            <p class="board-head graph-ticket">
               avarage ticket response time
             </p>
-            <div>Response Time {{ dashboard.averageResponseTime }}</div>
+            <div class="ticket-right-text">
+              <div>Response Time <span class="responsive-time">{{ dashboard.averageResponseTime }} minutes</span></div>
 
-            <div ng-if="averageTicketsResponseTimeMap && averageTicketsResponseTimeMap.length"
-                 d3chart data="averageTicketsResponseTimeMap"
-                 margin="{ top: 40, right: 60, bottom: 60, left: 60}" style="height: 80%;">
-              <d3axis name="date" extent="true" orientation="bottom" time-format="%d-%m-%Y"
-                      ticks="{{ averageTicketsResponseTimeTicks.length }}"
-                      tick-values="averageTicketsResponseTimeTicks"></d3axis>
-              <d3axis name="total" orientation="left"></d3axis>
-              <d3line x="date" y="total"></d3line>
+              <div ng-if="averageTicketsResponseTimeMap && averageTicketsResponseTimeMap.length"
+                   d3chart data="averageTicketsResponseTimeMap"
+                   margin="{ top: 40, right: 60, bottom: 60, left: 60}" style="height: 80%;">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="%d-%m-%Y"
+                        ticks="{{ averageTicketsResponseTimeTicks.length }}"
+                        tick-values="averageTicketsResponseTimeTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total"></d3line>
+              </div>
             </div>
-
-            <div ng-if="!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length">
+            <div ng-if="!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length" class="tickets-priority">
               You don't have tickets yet
             </div>
           </div>

@@ -15,7 +15,34 @@
 
 .font-red {
   color: #ff7877; }
-
+.tickets-priority{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130px;
+  max-height: 182px;
+  font-size: 18px;
+  padding: 0 10px;
+  color: #27c1e3;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.ticket-right-text{
+  position: absolute;
+  right: 25px;
+  top: 18px;
+}
+.graph-ticket{
+  padding-right: 90px;
+}
+.responsive-time{
+  display: block;
+  text-align: right;
+  color: #00bf8e;
+}
 .bg-deep-blue {
   background-color: #00a4b5; }
 
@@ -58,9 +85,11 @@ header {
     padding-left: 15px; }
   header .calendar-top {
     position: relative;
-    margin-right: 150px;
+    margin-right: 15px;
     display: inline-block;
-    float: right; }
+    float: right;
+    padding: 5px 25px;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);}
   header .calendar-top input {
     position: absolute;
     left: 0;
@@ -70,7 +99,22 @@ header {
     height: 100%;
     opacity: 0;
   }
-
+.calendar-top-img{
+  display: inline-block;
+  position: absolute;
+  width: 15px;
+  height: 20px;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-60%);
+}
+.calendar-top .icn-sm{
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .dashboard-main .stats {
   height: 250px;
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
