@@ -1,4 +1,5 @@
 <div class="create-new-user clearfix" ng-controller="quicktech.createUserCtrl">
+  <h4 class="modal-title pull-left">Create new User</h4>
   <form name="userForm">
     <div class="create-user-container">
 
@@ -301,15 +302,17 @@
 
         </div>
 
-        <div class="form-row user-btn-create clearfix">
-          <div class="btn btn-lg btn-create user-create btn-info pull-right"
-               custom-disabled="{{ !userForm.$valid || savingInProcess }}"
-               ng-click="save(userForm)">
-            {{ isCreation ? 'Create' : 'Save' }}
-          </div>
-        </div>
+
 
       </div>
     </div>
   </form>
+  <div class="form-row user-btn-create clearfix btn-bottom">
+    <div class="btn btn-lg btn-create user-create btn-info pull-right"
+         custom-disabled="{{ !userForm.$valid || savingInProcess }}"
+         ng-click="save(userForm)">
+      {{ isCreation ? 'Create' : 'Save' }}
+    </div>
+  </div>
 </div>
+

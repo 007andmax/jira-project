@@ -15,7 +15,7 @@
     <div class="col-2"
          style="position: absolute;
        right: 0;
-       top: 0;
+       top: 20px;
        width: 100px;">
       <div class="product-actions">
 
@@ -110,13 +110,13 @@
     </div>
 
 
-    <div class="col-xs-12 qt-form-actions">
+    <div class="col-xs-12 qt-form-actions btn-bottom" style="margin-right: 5px;">
 
       <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
 
       <div class="btn btn-lg btn-info btn-create pull-right" ng-click="saveChangeProduct(editProductForm)"
            custom-disabled="{{ disabledSaveChangeButton }}">
-        {{ editProduct.id ? 'Save' : 'Add' }}
+        {{ editProduct.id ? 'Save' : 'Create' }}
       </div>
 
     </div>

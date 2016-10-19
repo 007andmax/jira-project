@@ -32,7 +32,7 @@
 }
 
 .create-window .navigation__list {
-  padding-right: 50px;
+  padding-right: 5px;
   list-style-type: none;
 }
 
@@ -50,13 +50,20 @@
 }
 
 .create-window .general {
+  position: relative;
   float: left;
   padding: 30px;
-  width: calc(100% - 225px);
+  width: calc(100% - 145px);
   height: 100%;
 }
+.btn-bottom{
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  width: 100%;
+}
 .create-window .general .create-user-form .form-control-number{
-  width: 250px;
+  width: 305px;
 }
 .create-window .general .form-row .form-group {
   max-width: 48%;

@@ -314,9 +314,9 @@
 
 
 */
-.create-new-user{
-  position: relative;
-}
+/*.create-new-user{*/
+  /*position: relative;*/
+/*}*/
 .create-new-user.edit-user form{
   padding-top: 44px;
 }
@@ -533,14 +533,23 @@
   margin-top: 8px;
 }
 .create-ticket-form{
-  padding: 0 20px;
+  padding: 0 15px;
+}
+.create-ticket-form .form-group{
+  margin-bottom: 0;
 }
 .btn-primary.btn-create{
   line-height: 34px;
-  width: 140px;
+  width: 190px;
 }
 .modal-create-ticket .modal-header.create-ticket-header{
-  padding: 10px 0 0;
+  padding: 0;
+}
+.create-new-user .modal-title{
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 15px;
+  margin-bottom: 10px;
 }
 .create-ticket-form .modal-footer{
   margin: 0;
@@ -549,6 +558,13 @@
 }
 .services-description{
   margin-bottom: 20px;
+}
+.advanced-options{
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+  color: #2c9fdd;
+  text-decoration: underline;
 }
 .ticket-drop{
   height: 30px;
@@ -569,6 +585,7 @@
 }
 .create-ticket-form .modal-body .form-control{
   border-width: 1px;
+  height: 38px;
 }
 .del-tax{
   margin-top: 11px;
@@ -593,10 +610,10 @@
   vertical-align: middle;
 }
 .btn-create{
-  width: 140px;
+  width: 190px;
 }
 .btn-create.user-create{
-  margin-right: 15px;
+  margin-right: 20px;
 }
 .create-user-form label.control{
   text-transform: none;

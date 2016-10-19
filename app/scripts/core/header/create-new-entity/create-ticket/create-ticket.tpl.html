@@ -2,7 +2,7 @@
 
     <div class="modal-header create-ticket-header clearfix">
 
-      <h4 class="modal-title pull-left">Create Ticket <span class="dot-sep"></span></h4>
+      <h4 class="modal-title pull-left">Create new Ticket <span class="dot-sep"></span></h4>
       <span class="ticket-number pull-left">TKT# {{ ticketNumber }}</span>
       <div class="priority-select pull-right">
         <div class="form-group">
@@ -409,7 +409,7 @@
           </div>
 
         </li>
-
+        <a href="#!" class="advanced-options">Advanced options</a>
         <li>
           <div class="pull-left" style="width: 100%;">
             <div style="font-weight: bold;">Notify</div>
@@ -440,11 +440,11 @@
           </div>
         </li>
 
-        <li>
+        <li class="btn-bottom" style="margin-right: 20px;">
           <div></div>
           <div style="padding-top: 10px;">
             <div class="btn btn-lg btn-success pull-right" ng-click="saveTicket(ticketForm, true)"
-                 style="margin-left: 7px;"
+                 style="margin-left: 7px; width: 190px;"
                  custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
               Create and Open
             </div>
