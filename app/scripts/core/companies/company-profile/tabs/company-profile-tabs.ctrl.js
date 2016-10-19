@@ -161,7 +161,7 @@
 
         $scope.saveDescription = function (deviceId, description) {
           if (deviceId && description) {
-            console.log('save ' + description + '; devicesId =  ' + deviceId);
+            // console.log('save ' + description + '; devicesId =  ' + deviceId);
           }
         };
 

@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$state', '$rootScope',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
       'localStorageService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
                 SharedStateService, DevicesService, PermissionsService, localStorageService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
@@ -40,36 +40,6 @@
             localStorageService.set('companies-view', view);
           }
         };
-
-        //$scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany(CompaniesService.getCurrentCompany().id, $scope);
-        //
-        //$scope.topCompaniesByResolvedTickets = StatisticsService.getTopCompaniesByResolvedTickets(10, $scope, function () {
-        //  $scope.mostTicketsResolved = 0;
-        //
-        //  for (var companyId in $scope.topCompaniesByResolvedTickets) {
-        //    if (companyId === 'staticCopy') {
-        //      continue;
-        //    }
-        //    $scope.mostTicketsResolved += $scope.topCompaniesByResolvedTickets[companyId];
-        //  }
-        //
-        //});
-        //$scope.contributedToEarningTopCompanies = StatisticsService.getContributedToEarningTopCompanies(10, $scope, function () {
-        //  $scope.contributedToEarnings = 0;
-        //
-        //  for (var companyId in $scope.contributedToEarningTopCompanies) {
-        //    if (companyId === 'staticCopy') {
-        //      continue;
-        //    }
-        //    $scope.contributedToEarnings += $scope.contributedToEarningTopCompanies[companyId];
-        //  }
-        //
-        //  if ($scope.contributedToEarnings) {
-        //    $scope.contributedToEarnings = $scope.contributedToEarnings.toFixed(2);
-        //  }
-        //});
-        //
-        //$scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany(CompaniesService.getCurrentCompany().id, $scope);
 
         $scope.$watch('companiesCtrl.shownCompanies.length', function (value) {
           globalSearch.count = value;

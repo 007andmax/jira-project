@@ -86,7 +86,6 @@
         }
 
         if (listData.loadingInProcess) {
-          console.log('Loading tickets already in process');
           return;
         }
 

@@ -365,7 +365,6 @@
         });
 
         RealTimeService.subscribe('/number/INVOICE', scope, function (change) {
-          console.log(change);
           if (change.action === 'NUMBER_CHANGED') {
             callback(Utils.getFormattedNumber(change.data, false));
           }

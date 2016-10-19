@@ -3,9 +3,9 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.createUserCtrl',
-    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService', '$state', '$rootScope',
+    ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$state', '$rootScope',
       '$timeout', 'quicktech.common.services.PhoneFormats',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService, $state, $rootScope,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
                 $timeout, PhoneFormats) {
 
         var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),

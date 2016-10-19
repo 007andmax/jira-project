@@ -32,7 +32,6 @@
               }
             }, getTicketsList, true);
 
-
             scope.onFinishRendering = function () {
               scope.loadingOrRendering = false;
             };
@@ -47,15 +46,19 @@
               scope.loadingOrRendering = true;
               lastListType = $stateParams.listType.toUpperCase();
               TicketsService.getList(lastListType, filter.userId, filter.companyId, function (uploadedTickets) {
-                  scope.tickets = uploadedTickets;
+                scope.tickets = uploadedTickets;
 
-                  TicketsService.getCount(function (quantity) {
-                    scope.globalSearch.count = quantity;
-                  });
+                if (!uploadedTickets.length) {
+                  scope.onFinishRendering();
+                }
 
-                  UserNotificationService.hide();
-                  initScrollListener();
-                  openTicketList();
+                TicketsService.getCount(function (quantity) {
+                  scope.globalSearch.count = quantity;
+                });
+
+                UserNotificationService.hide();
+                initScrollListener();
+                openTicketList();
               });
             }
 

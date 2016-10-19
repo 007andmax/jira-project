@@ -1,0 +1,98 @@
+/* Axis */
+.d3 .axis line {
+  fill: none;
+  stroke-width: 1px;
+  stroke: #222222;
+  opacity: 0.5;
+}
+.d3 .axis path {
+  fill: none;
+  stroke-width: 1px;
+  stroke: #222222;
+  opacity: 0.5;
+}
+.d3 .axis text {
+  fill: #222222;
+}
+
+.d3 .axis-grid line {
+  fill: none;
+  stroke-width: 1px;
+  stroke: #222222;
+  opacity: 0.5;
+}
+.d3 .axis-grid text {
+  display: none;
+}
+
+/* Area Chart */
+.d3 .area {
+  fill: #098aae;
+  stroke-width: 0px;
+  stroke: #222222;
+}
+
+/* Line Chart */
+.d3 .line {
+  fill: none;
+  stroke-width: 1.5px;
+  stroke: #222222;
+}
+
+/* Bar Chart */
+.d3 .bar {
+  fill: #eda646;
+  stroke-width: 0px;
+  stroke: #222222;
+  opacity: 0.7;
+}
+
+/* Pie Chart */
+.pie-chart .d3 {
+  padding-left: 25%;
+}
+.d3 .pie.pie-0 path {
+  fill: #98abc5;
+}
+.d3 .pie.pie-1 path {
+  fill: #8a89a6;
+}
+.d3 .pie.pie-2 path {
+  fill: #7b6888;
+}
+.d3 .pie.pie-3 path {
+  fill: #6b486b;
+}
+.d3 .pie.pie-4 path {
+  fill: #a05d56;
+}
+.d3 .pie.pie-5 path {
+  fill: #d0743c;
+}
+.d3 .pie.pie-6 path {
+  fill: #ff8c00;
+}
+.d3 .pie-label {
+  font-size: 20px;
+}
+
+/* Simple Arcs */
+.d3 path.arc {
+  fill: #98abc5;
+}
+
+.simple-arc1 .d3 .arc {
+  fill: #98abc5;
+}
+
+.simple-arc2 .d3 .arc {
+  fill: #d0743c;
+}
+
+.area.savings {
+  fill: #d0743c;
+}
+
+.area.optimal {
+  fill: #98abc5;
+}

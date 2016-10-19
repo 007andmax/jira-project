@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
-    ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
+    ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
       'localStorageService',
-      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
+      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService,
                 SharedStateService, PermissionsService, $state, localStorageService) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {

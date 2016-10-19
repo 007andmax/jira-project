@@ -1,9 +1,9 @@
 <div class="tickets-dashboard">
   <div class="container-fluid">
     <header class="clearfix">
-      <h2>Dashboard</h2>
       <div class="calendar-top">
-        Datepicker
+        {{ shownDateRange }}
+        <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic">
       </div>
     </header>
     <section class="dashboard-main">
@@ -15,7 +15,7 @@
                 Total tickets
               </p>
               <div class="stats__main--count font-yellow">
-                <p>10</p>
+                <p>{{ dashboard.totalTickets || 0 }}</p>
               </div>
             </div>
             <div class="stats__icon bg-yellow">
@@ -30,7 +30,7 @@
                 Open tickets
               </p>
               <div class="stats__main--count font-green">
-                <p>287</p>
+                <p>{{ dashboard.openTickets || 0 }}</p>
               </div>
             </div>
             <div class="stats__icon bg-green">
@@ -45,7 +45,7 @@
                 closed tickets
               </p>
               <div class="stats__main--count font-red">
-                <p>179</p>
+                <p>{{ dashboard.closedTickets || 0 }}</p>
               </div>
             </div>
             <div class="stats__icon bg-red">
@@ -60,7 +60,7 @@
                 average time per ticket
               </p>
               <div class="stats__main--count font-deep-blue">
-                <p>3 hours</p>
+                <p>{{ getAverageTimePerTicket(dashboard.averageTimePerTicket) }}</p>
               </div>
             </div>
             <div class="stats__icon bg-deep-blue">
@@ -75,7 +75,7 @@
                 average sales per ticket
               </p>
               <div class="stats__main--count font-purple">
-                <p>$70</p>
+                <p>{{ dashboard.averageSalesPerTicket || 0 }}$</p>
               </div>
             </div>
             <div class="stats__icon bg-purple">
@@ -89,8 +89,18 @@
               <p class="board-head">
                 tickets by priority
               </p>
-              <div class="stats__main--count font-light-blue">
-
+              <div ng-if="ticketsPriority && ticketsPriority.length">
+                <div class="pie-chart"
+                     d3chart data="ticketsPriority" class="col-12"
+                     margin="{left: 0, right: 0, bottom: 15, top: 0}">
+                  <d3pie label="count" value="count" colors="['#00bf8e','#ffb55c','#ff7877']"></d3pie>
+                </div>
+                <div class="pie-legend">
+                  <span class="legend-{{ $index }}" ng-repeat="legend in ticketsPriorityLegend">{{ legend }}</span>
+                </div>
+              </div>
+              <div ng-if="!ticketsPriority || !ticketsPriority.length">
+                You don't have tickets yet
               </div>
             </div>
             <div class="stats__icon bg-light-blue">
@@ -107,103 +117,28 @@
             </p>
             <ul class="top-ten__list">
               <li class="top-ten__list--point-head clearfix">
-                <div class="col-xs-4 point-name">
-                  <p>Name</p>
-                </div>
-                <div class="col-xs-4">
-                  <p>Email</p>
-                </div>
-                <div class="col-xs-2">
-                  <p>Created</p>
-                </div>
-                <div class="col-xs-2">
-                  <p>Closed</p>
-                </div>
+                <div class="col-xs-4 point-name"><p>Name</p></div>
+                <div class="col-xs-4"><p>Email</p></div>
+                <div class="col-xs-2"><p>Created</p></div>
+                <div class="col-xs-2"><p>Closed</p></div>
               </li>
               <div class="scrolled-list">
-                <li class="top-ten__list--point">
+                <li class="top-ten__list--point"
+                    ng-repeat="client in dashboard.topClients | orderBy: 'created' track by client.id">
                   <div class="col-xs-4 point-name">
                     <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
+                      <img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}">
                     </div>
-                    <p>Harold Pain</p>
+                    <p>{{ getUserName(getUserById(client.id)) }}</p>
                   </div>
                   <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
+                    <p class="text-muted">{{ getUserById(client.id).primaryEmail }}</p>
                   </div>
                   <div class="col-xs-2">
-                    <p class="text-muted">742</p>
+                    <p class="text-muted">{{ client.created }}</p>
                   </div>
                   <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
+                    <p class="text-muted">{{ client.closed }}</p>
                   </div>
                 </li>
               </div>
@@ -217,103 +152,28 @@
             </p>
             <ul class="top-ten__list">
               <li class="top-ten__list--point-head clearfix">
-                <div class="col-xs-4 point-name">
-                  <p>Company</p>
-                </div>
-                <div class="col-xs-4">
-                  <p>Email</p>
-                </div>
-                <div class="col-xs-2">
-                  <p>Created</p>
-                </div>
-                <div class="col-xs-2">
-                  <p>Closed</p>
-                </div>
+                <div class="col-xs-4 point-name"><p>Company</p></div>
+                <div class="col-xs-4"><p>Email</p></div>
+                <div class="col-xs-2"><p>Created</p></div>
+                <div class="col-xs-2"><p>Closed</p></div>
               </li>
               <div class="scrolled-list">
-                <li class="top-ten__list--point">
+                <li class="top-ten__list--point"
+                    ng-repeat="company in dashboard.topCompanies | orderBy: 'created' track by company.id">
                   <div class="col-xs-4 point-name">
                     <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
+                      <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
                     </div>
-                    <p>Harold Pain</p>
+                    <p>{{ getCompanyById(company.id).name }}</p>
                   </div>
                   <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
+                    <p class="text-muted">{{ getPrimaryContact(company.id).primaryEmail }}</p>
                   </div>
                   <div class="col-xs-2">
-                    <p class="text-muted">742</p>
+                    <p class="text-muted">{{ company.created }}</p>
                   </div>
                   <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
+                    <p class="text-muted">{{ company.closed }}</p>
                   </div>
                 </li>
               </div>
@@ -327,103 +187,28 @@
             </p>
             <ul class="top-ten__list">
               <li class="top-ten__list--point-head clearfix">
-                <div class="col-xs-4 point-name">
-                  <p>Name</p>
-                </div>
-                <div class="col-xs-4">
-                  <p>Email</p>
-                </div>
-                <div class="col-xs-2">
-                  <p>Created</p>
-                </div>
-                <div class="col-xs-2">
-                  <p>Closed</p>
-                </div>
+                <div class="col-xs-4 point-name"><p>Name</p></div>
+                <div class="col-xs-4"><p>Email</p></div>
+                <div class="col-xs-2"><p>Created</p></div>
+                <div class="col-xs-2"><p>Closed</p></div>
               </li>
               <div class="scrolled-list">
-                <li class="top-ten__list--point">
+                <li class="top-ten__list--point"
+                    ng-repeat="tech in dashboard.topTechUsers | orderBy: 'created' track by tech.id">
                   <div class="col-xs-4 point-name">
                     <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
+                      <img ng-src="{{ getUserAvatarUrl(getUserById(tech.id)) }}">
                     </div>
-                    <p>Harold Pain</p>
+                    <p>{{ getUserName(getUserById(tech.id)) }}</p>
                   </div>
                   <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
+                    <p class="text-muted">{{ getUserById(tech.id).primaryEmail }}</p>
                   </div>
                   <div class="col-xs-2">
-                    <p class="text-muted">742</p>
+                    <p class="text-muted">{{ tech.created }}</p>
                   </div>
                   <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
-                  </div>
-                </li>
-                <li class="top-ten__list--point">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img src="images/logo.png" alt="">
-                    </div>
-                    <p>Harold Pain</p>
-                  </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">harold@mail.com</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">742</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">650</p>
+                    <p class="text-muted">{{ tech.closed }}</p>
                   </div>
                 </li>
               </div>
@@ -437,6 +222,19 @@
             <p class="board-head">
               Ticket creation timeline
             </p>
+
+            <div ng-if="ticketCreationTimeline && ticketCreationTimeline.length" d3chart data="ticketCreationTimeline"
+                 margin="{ top: 40, right: 60, bottom: 60, left: 60}" style="height: 80%;">
+              <d3axis name="date" extent="true" orientation="bottom" time-format="%d-%m-%Y"
+                      ticks="{{ ticketCreationTimelineTicks.length }}"
+                      tick-values="ticketCreationTimelineTicks"></d3axis>
+              <d3axis name="total" orientation="left"></d3axis>
+              <d3line x="date" y="total"></d3line>
+            </div>
+
+            <div ng-if="!ticketCreationTimeline || !ticketCreationTimeline.length">
+              You don't have tickets yet
+            </div>
           </div>
         </div>
         <div class="col-lg-6 col-xs-12">
@@ -444,6 +242,21 @@
             <p class="board-head">
               avarage ticket response time
             </p>
+            <div>Response Time {{ dashboard.averageResponseTime }}</div>
+
+            <div ng-if="averageTicketsResponseTimeMap && averageTicketsResponseTimeMap.length"
+                 d3chart data="averageTicketsResponseTimeMap"
+                 margin="{ top: 40, right: 60, bottom: 60, left: 60}" style="height: 80%;">
+              <d3axis name="date" extent="true" orientation="bottom" time-format="%d-%m-%Y"
+                      ticks="{{ averageTicketsResponseTimeTicks.length }}"
+                      tick-values="averageTicketsResponseTimeTicks"></d3axis>
+              <d3axis name="total" orientation="left"></d3axis>
+              <d3line x="date" y="total"></d3line>
+            </div>
+
+            <div ng-if="!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length">
+              You don't have tickets yet
+            </div>
           </div>
         </div>
       </div>

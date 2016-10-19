@@ -52,8 +52,6 @@
               }),
               url = 'quicktech://connect?serverIP=' + restServerAddress + '&port=' + remoteConnectPort + '&sessionID=' + realSessionId;
 
-
-            console.log(url);
             var modalInstance = $uibModal.open(modalParams),
               promise = $interval(function () {
                 counter++;

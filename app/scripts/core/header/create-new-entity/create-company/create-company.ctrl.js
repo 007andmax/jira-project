@@ -4,11 +4,11 @@
 
   angular.module('quicktech').controller('quicktech.createCompanyCtrl',
     [
-      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
+      '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService',
       'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
       'quicktech.common.services.SharedStateService', '$state', '$timeout', '$rootScope',
       'quicktech.common.services.PermissionsService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
+      function ($scope, UsersService, SubscriptionsService, CompaniesService,
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService,
                 $state, $timeout, $rootScope, PermissionsService, UserConfirmationsService) {
 

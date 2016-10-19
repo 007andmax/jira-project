@@ -96,6 +96,10 @@
           window.open('/tutorials/pdf/' + type + '.pdf');
         };
 
+        $scope.onDateRangeChange = function (dates) {
+          $scope.filterCompanies('dateRange', dates);
+        };
+
         $scope.filterCompanies = function (filter, value) {
           var sharedFilter = companiesSharedState.filter;
 
