@@ -5,7 +5,7 @@
     </div>
 
     <div class="left-panel__category-wrap nano-content">
-      <div class="left-panel__category" ng-class="{'active': openedCategory === 'quick-support'}"
+      <div class="left-panel__category" ng-class="{'active': openedCategory === 'quick-support'}" ui-sref="quickSupport"
            ng-click="toggleLeftPanel('quick-support')" ng-if="PermissionsService.isAllowed('ALLOW_QUICK_CONNECT')">
         <img class="menu-img" ng-if="openedCategory !== 'quick-support'"
              src="images/input-icons/left-panel/quick-support.png">
@@ -13,6 +13,7 @@
              src="images/input-icons/left-panel/active_quick-support.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
+           ui-sref="tickets({ listType: 'user' })"
            ng-click="toggleLeftPanel('tickets')">
         <img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/input-icons/left-panel/tickets.png">
         <img class="menu-img" ng-if="openedCategory === 'tickets'"
@@ -34,14 +35,15 @@
 
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'billing'}"
-           ng-click="toggleLeftPanel('billing')" ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
+           ng-click="toggleLeftPanel('billing')" ui-sref="accounting.billable"
+           ng-if="PermissionsService.isAllowed('VIEW_ACCOUNTING')">
         <img class="menu-img" ng-if="openedCategory !== 'billing'" src="images/input-icons/left-panel/billing.png">
         <img class="menu-img" ng-if="openedCategory === 'billing'"
              src="images/input-icons/left-panel/active_billing.png">
 
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'inventory'}"
-           ng-click="toggleLeftPanel('inventory')">
+           ng-click="toggleLeftPanel('inventory')" ui-sref="products({ tabName: 'category' })">
         <img class="menu-img" ng-if="openedCategory !== 'inventory'" src="images/input-icons/left-panel/inventory.png">
         <img class="menu-img" ng-if="openedCategory === 'inventory'"
              src="images/input-icons/left-panel/active_inventory.png">
