@@ -1,1 +1,165 @@
-<div></div>
+<div class="billing-dashboard">
+  <div class="container-fluid">
+    <header class="clearfix">
+      <div class="calendar-top">
+        <span class="calendar-top-img"><img src="images/input-icons/date-picker-dashboard.svg" alt="date-picker"></span>
+        {{ shownDateRange }}
+        <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic">
+        <i class="icn-sm icn-expand"></i>
+      </div>
+    </header>
+    <section class="dashboard-main">
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats">
+            <div class="stats__main">
+              <p class="board-head">total projection</p>
+              <div class="stats__main--count font-light-blue">
+                <p>$5670</p>
+              </div>
+            </div>
+            <div class="stats__icon bg-light-blue">
+              <img src="images/input-icons/transfer.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats half-stats">
+            <div class="stats__main">
+              <p class="board-head">total sales</p>
+              <div class="stats__main--count font-blue-steel">
+                <p>$4398</p>
+              </div>
+            </div>
+            <div class="stats__icon bg-blue-steel">
+              <img src="images/input-icons/dollar-white.png" alt="">
+            </div>
+          </div>
+          <div class="stats half-stats">
+            <div class="stats__main">
+              <p class="board-head">total receivables</p>
+              <div class="stats__main--count font-light-green">
+                <p>$5670</p>
+              </div>
+            </div>
+            <div class="stats__icon bg-light-green">
+              <img src="images/input-icons/dollar-white.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats ">
+            <div class="stats__main">
+              <p class="board-head">invoicable</p>
+              <div class="stats__main--count font-yellow">
+                <p>$1372</p>
+              </div>
+            </div>
+            <div class="stats__icon bg-yellow">
+              <img src="images/input-icons/cash.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats">
+            <div class="stats__main">
+              <p class="board-head">monthly sales</p>
+              <div class="stats__main--count font-green">
+                <p>$3547</p>
+              </div>
+            </div>
+            <div class="stats__icon bg-green">
+              <img src="images/input-icons/finances.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats">
+            <div class="stats__main">
+              <p class="board-head">tax collected</p>
+              <div class="stats__main--count font-light-purple">
+                <p>$872</p>
+              </div>
+            </div>
+            <div class="stats__icon bg-light-purple">
+              <img src="images/input-icons/percentage.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats">
+            <div class="stats__main">
+              <p class="board-head">total overdue</p>
+              <div class="stats__main--count font-red">
+                <p></p>
+              </div>
+            </div>
+            <div class="stats__icon bg-red">
+              <img src="images/input-icons/Pclose.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+          <div class="stats clearfix">
+            <p class="board-head graph-ticket">
+              managed vs. non managed
+            </p>
+
+          </div>
+        </div>
+ <div class="col-lg-4 col-xs-6">
+          <div class="chart clearfix">
+            <p class="board-head graph-ticket">
+              revenue
+            </p>
+
+          </div>
+        </div>
+ <div class="col-lg-4 col-xs-6">
+          <div class="chart clearfix">
+            <p class="board-head graph-ticket">
+              revenue by payment method
+            </p>
+
+          </div>
+        </div>
+ <div class="col-lg-4 col-xs-12">
+   <div class="top-ten clearfix">
+     <p class="board-head">
+       top-10 companies
+     </p>
+     <ul class="top-ten__list">
+       <li class="top-ten__list--point-head clearfix">
+         <div class="col-xs-4 point-name"><p>Company</p></div>
+         <div class="col-xs-4"><p>Email</p></div>
+         <div class="col-xs-2"><p>Created</p></div>
+         <div class="col-xs-2"><p>Closed</p></div>
+       </li>
+       <div class="scrolled-list">
+         <li class="top-ten__list--point"
+             ng-repeat="company in dashboard.topCompanies | orderBy: 'created' track by company.id">
+           <div class="col-xs-4 point-name">
+             <div class="list-avatar">
+               <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
+             </div>
+             <p>{{ getCompanyById(company.id).name }}</p>
+           </div>
+           <div class="col-xs-4">
+             <p class="text-muted">{{ getPrimaryContact(company.id).primaryEmail }}</p>
+           </div>
+           <div class="col-xs-2">
+             <p class="text-muted">{{ company.created }}</p>
+           </div>
+           <div class="col-xs-2">
+             <p class="text-muted">{{ company.closed }}</p>
+           </div>
+         </li>
+       </div>
+     </ul>
+   </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>

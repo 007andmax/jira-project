@@ -10,11 +10,20 @@
 .font-green {
   color: #00bf8e; }
 
+.bg-light-green{
+  background-color: #86db5e;
+}
+
+.font-light-green{
+  color: #86db5e;
+}
+
 .bg-red {
   background-color: #ff7877; }
 
 .font-red {
   color: #ff7877; }
+
 .tickets-priority{
   display: flex;
   justify-content: center;
@@ -49,19 +58,32 @@
 .font-deep-blue {
   color: #00a4b5; }
 
+.bg-blue-steel{
+  background-color: #759df5 ;
+}
+.font-blue-steel{
+  color: #759df5;
+}
 .bg-purple {
   background-color: #8849ae; }
 
 .font-purple {
   color: #8849ae; }
 
+.bg-light-purple{
+  background-color: #a677b1;
+}
+.font-light-purple{
+  color: #a677b1;
+}
 .bg-light-blue {
   background-color: #27c1e3; }
 
 .font-light-blue {
   color: #27c1e3; }
 
-.tickets-dashboard .container-fluid {
+.tickets-dashboard .container-fluid,
+.billing-dashboard .container-fluid {
   padding-left: 15px;
   padding-right: 15px; }
 
@@ -119,6 +141,14 @@ header {
   height: 250px;
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
   margin-bottom: 30px; }
+.dashboard-main .stats.half-stats {
+  height: 110px;
+  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px; }
+.dashboard-main .stats.half-stats .stats__main--count{
+  height: 20px;
+  font-size: 54px;
+}
   .dashboard-main .stats__main {
     position: relative;
     float: left;
