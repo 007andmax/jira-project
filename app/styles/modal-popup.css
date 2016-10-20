@@ -56,11 +56,11 @@
   width: calc(100% - 145px);
   height: 100%;
 }
-.btn-bottom{
+.create-window .general .btn-bottom{
   position: absolute;
   bottom: 25px;
   right: 25px;
-  width: 100%;
+  width: 90%;
 }
 .create-window .general .create-user-form .form-control-number{
   width: 305px;
@@ -182,7 +182,7 @@
 }
 .create-window .general .company-window__contact .custom-phone-type input,
 .create-window .general .company-window__location .custom-phone-type input{
-  width: 100px;
+  width: 115px;
 }
 .create-window .general .company-window__contact .btns-container {
   margin-top: 34px;
@@ -253,8 +253,8 @@
   width: 40%;
 }
 .create-window .general .choose-file{
-  margin-top: 22px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 .create-window .general .company-window .avatar-create .avatar {
   border: 1px solid #e2e6e6;
@@ -285,6 +285,10 @@
 
 .create-window .general footer .btns-container button {
   width: 48%;
+}
+.create-window .create-new-user .custom-phone-type,
+.create-window .create-new-user .custom-phone-number{
+  padding: 0 15px;
 }
 
 /*# sourceMappingURL=modal-popup.css.map */
