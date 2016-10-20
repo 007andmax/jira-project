@@ -133,8 +133,8 @@
                     </div>
                     <p>{{ getUserName(getUserById(client.id)) }}</p>
                   </div>
-                  <div class="col-xs-4">
-                    <p class="text-muted">{{ getUserById(client.id).primaryEmail }}</p>
+                  <div class="col-xs-4 ">
+                    <p class="text-muted mail-field">{{ getUserById(client.id).primaryEmail }}</p>
                   </div>
                   <div class="col-xs-2">
                     <p class="text-muted">{{ client.created }}</p>
@@ -169,7 +169,7 @@
                     <p>{{ getCompanyById(company.id).name }}</p>
                   </div>
                   <div class="col-xs-4">
-                    <p class="text-muted">{{ getPrimaryContact(company.id).primaryEmail }}</p>
+                    <p class="text-muted mail-field">{{ getPrimaryContact(company.id).primaryEmail }}</p>
                   </div>
                   <div class="col-xs-2">
                     <p class="text-muted">{{ company.created }}</p>
@@ -204,7 +204,7 @@
                     <p>{{ getUserName(getUserById(tech.id)) }}</p>
                   </div>
                   <div class="col-xs-4">
-                    <p class="text-muted">{{ getUserById(tech.id).primaryEmail }}</p>
+                    <p class="text-muted mail-field">{{ getUserById(tech.id).primaryEmail }}</p>
                   </div>
                   <div class="col-xs-2">
                     <p class="text-muted">{{ tech.created }}</p>

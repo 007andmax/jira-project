@@ -173,6 +173,12 @@ header {
   height: 400px;
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
   margin-bottom: 30px; }
+.dashboard-main .top-ten .mail-field{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
   .dashboard-main .top-ten__list {
     padding: 0;
     list-style-type: none; }
@@ -199,14 +205,14 @@ header {
         content: ""; }
       .dashboard-main .top-ten__list--point .point-name {
         display: flex;
-        align-items: center;
-        justify-content: space-around; }
+        align-items: center; }
         .dashboard-main .top-ten__list--point .point-name .list-avatar {
           border-radius: 50%;
           box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
-          margin-right: 5px;}
+          margin-right: 10px;}
           .dashboard-main .top-ten__list--point .point-name .list-avatar img {
-            width: 40px; }
+            width: 40px;
+            height: 40px;}
 .dashboard-main .chart {
   height: 400px;
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
