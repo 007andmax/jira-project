@@ -2952,6 +2952,8 @@ textarea.autosize {
 }
 .has-error .control-label {
   color: #e53935;
+  margin-bottom: 4px;
+  line-height: 12px;
 }
 .form-control-search {
   display: block;
