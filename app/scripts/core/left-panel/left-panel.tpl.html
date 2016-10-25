@@ -48,9 +48,9 @@
 
       </div>
       <div class="left-panel__category settings-left-bar">
-        <div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"
-             style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>
-          <div qt-popover-trigger="showing-on-first-login" style="width: calc(100% - 10px)">
+        <!--<div qt-custom-popover-template="/html/scripts/core/left-panel/first-login-tooltip.tpl.html"-->
+             <!--style="width: 100%;" qt-popover-position="right-bottom-align" z-index="9999" qt-popover-append-to-body>-->
+          <!--<div qt-popover-trigger="showing-on-first-login" style="width: calc(100% - 10px)">-->
             <div class="left-panel__category" ui-sref="settings" ng-click="onClickSettings()"
                  ng-class="{'active': openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))}"
                  style="width: calc(100% + 10px)">
@@ -61,8 +61,8 @@
                    ng-if="openedCategory === 'settings' || (openedCategory === undefined && $state.is('settings'))"
                    src="images/input-icons/left-panel/settings2.png">
             </div>
-          </div>
-        </div>
+          <!--</div>-->
+        <!--</div>-->
       </div>
       <div class="left-panel__category tutorial-left-bar" ng-class="{'active': openedCategory === 'tutorial'}"
            ng-click="toggleLeftPanel('tutorial')">

@@ -18,7 +18,7 @@
         $scope.qSHistoryExpanded = false;
 
         //for one time popover
-        $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
+        // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
         $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.clientCompanies = CompaniesService.getClientCompanies;
@@ -201,21 +201,22 @@
         };
 
         //for one time popover
-        $scope.initCompanyStatusWatch = function (hidePopoverFunc) {
-          var unwatch = $scope.$watch('currentCompany.status', function (newValue, oldValue) {
-            if (newValue === 'ACTIVE' && oldValue === 'SIGN_UP') {
-              hidePopoverFunc && hidePopoverFunc();
-              unwatch();
-            }
-          });
-
-          var unsubscribe = $scope.$on('$locationChangeStart', function () {
-            if ($scope.currentCompany.status === 'SIGN_UP') {
-              $scope.changeCompanyStatusToActive();
-              unsubscribe();
-            }
-          })
-        };
+        // $scope.initCompanyStatusWatch = function (hidePopoverFunc) {
+        //   var unwatch = $scope.$watch('currentCompany.status', function (newValue, oldValue) {
+        //     if (newValue === 'ACTIVE' && oldValue === 'SIGN_UP') {
+        //       hidePopoverFunc && hidePopoverFunc();
+        //       unwatch();
+        //     }
+        //   });
+        //
+        //   var unsubscribe = $scope.$on('$locationChangeStart', function () {
+        //     if ($scope.currentCompany.status === 'SIGN_UP') {
+        //       $scope.changeCompanyStatusToActive();
+        //       hidePopoverFunc && hidePopoverFunc();
+        //       unsubscribe();
+        //     }
+        //   })
+        // };
 
         function clearFilter(sharedFilter) {
           for (var prop in sharedFilter) {
