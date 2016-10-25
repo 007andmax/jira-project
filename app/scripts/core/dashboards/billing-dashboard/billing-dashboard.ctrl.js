@@ -313,9 +313,11 @@
             productExpense = 0,
             serviceExpense = 0;
 
-          for (var i = 1; i <= data.length; i++) {
-            var item = data[i - 1],
-              currentDate = data[i] ? new Date(data[i].date) : undefined;
+          var firstResult = result[0];
+          var secondResult = result[1];
+          for (var i = 0; i < data.length; i++) {
+            var item = data[i],
+              currentDate = data[i + 1] ? new Date(data[i + 1].date) : undefined;
 
             for (var j = 0; j < splitPath.length; j++) {
               var property = splitPath[j];
@@ -324,64 +326,70 @@
 
             if (!lastItem) {
               lastItem = item;
+              lastMonth = currentDate.getMonth();
+              lastYear = currentDate.getFullYear();
               continue;
             }
 
-            if (data.length > 366) {
-              if (!lastYear) {
-                lastYear = new Date(data[i - 1].date).getFullYear();
-              }
+            if (!currentDate) {
+              currentDate = new Date(data[i].date);
+            }
+
+            if (data.length - 1 > 366) {
 
               if (!currentDate || lastYear !== currentDate.getFullYear()) {
+
+                var saveCurrentYear = currentDate.getFullYear();
                 currentDate.setDate(1);
                 currentDate.setMonth(0);
                 currentDate.setFullYear(lastYear);
 
                 productExpense = parseFloat((item.productExpenseSum - lastItem.productExpenseSum).toFixed(2));
                 serviceExpense = parseFloat((item.serviceExpenseSum - lastItem.serviceExpenseSum).toFixed(2));
-                result[0].push({
+                firstResult.push({
                   date: currentDate,
                   y: productExpense
                 });
-                result[1].push({
+                secondResult.push({
                   date: currentDate,
                   y: serviceExpense
                 });
-                lastYear = undefined;
+
+                lastYear = saveCurrentYear;
                 lastItem = item;
               }
-            } else if (data.length > 31) {
-              if (!lastMonth) {
-                lastMonth = new Date(data[i - 1].date).getMonth();
-              }
+            } else if (data.length - 1 > 31) {
 
-              if (!currentDate || lastMonth !== currentDate.getMonth()) {
-                currentDate = currentDate || new Date(data[i - 1].date);
+              if (i === data.length - 1 || lastMonth !== currentDate.getMonth()) {
+
+                var saveCurrentMonth = currentDate.getMonth();
                 currentDate.setDate(1);
                 currentDate.setMonth(lastMonth);
 
                 productExpense = parseFloat((item.productExpenseSum - lastItem.productExpenseSum).toFixed(2));
                 serviceExpense = parseFloat((item.serviceExpenseSum - lastItem.serviceExpenseSum).toFixed(2));
-                result[0].push({
+                firstResult.push({
                   date: currentDate,
                   y: productExpense
                 });
-                result[1].push({
+                secondResult.push({
                   date: currentDate,
                   y: serviceExpense
                 });
-                lastMonth = undefined;
+
+                lastMonth = saveCurrentMonth;
                 lastItem = item;
               }
             } else {
-              currentDate = currentDate || new Date(data[i - 1].date);
+              currentDate.setDate(currentDate.getDate() - 1);
+
               productExpense = parseFloat((item.productExpenseSum - lastItem.productExpenseSum).toFixed(2));
               serviceExpense = parseFloat((item.serviceExpenseSum - lastItem.serviceExpenseSum).toFixed(2));
-              result[0].push({
+              firstResult.push({
                 date: currentDate,
                 y: productExpense
               });
-              result[1].push({
+              secondResult.push({
                 date: currentDate,
                 y: serviceExpense
               });
@@ -390,24 +398,36 @@
             }
           }
 
-          if (result[0][0]) {
-            var fakeObj1 = { date: new Date(result[0][0].date), y: 0 };
-            var fakeObj2 = { date: new Date(result[1][result[1].length - 1].date), y: 0 };
+          var firstResultStart = firstResult[0];
+          var secondResultStart = secondResult[0];
+          if (firstResultStart && secondResultStart && firstResultStart.y && secondResultStart.y) {
+            var fakeObj1 = { date: new Date(firstResultStart.date), y: 0 };
             if (data.length > 366) {
               fakeObj1.date.setFullYear(fakeObj1.date.getFullYear() - 1);
-              fakeObj2.date.setFullYear(fakeObj2.date.getFullYear() + 1);
             } else if (data.length > 31) {
               fakeObj1.date.setMonth(fakeObj1.date.getMonth() - 1);
-              fakeObj2.date.setMonth(fakeObj2.date.getMonth() + 1);
             } else {
               fakeObj1.date.setDate(fakeObj1.date.getDate() - 1);
+            }
+
+            firstResult.unshift(fakeObj1);
+            secondResult.unshift(fakeObj1);
+          }
+
+          var firstResultEnd = firstResult[firstResult.length - 1];
+          var secondResultEnd = secondResult[secondResult.length - 1];
+          if (firstResultEnd && secondResultEnd && firstResultEnd.y && secondResultEnd.y) {
+            var fakeObj2 = { date: new Date(secondResult[secondResult.length - 1].date), y: 0 };
+            if (data.length > 366) {
+              fakeObj2.date.setFullYear(fakeObj2.date.getFullYear() + 1);
+            } else if (data.length > 31) {
+              fakeObj2.date.setMonth(fakeObj2.date.getMonth() + 1);
+            } else {
               fakeObj2.date.setDate(fakeObj2.date.getDate() + 1);
             }
 
-            result[0].unshift(fakeObj1);
-            result[1].unshift(fakeObj1);
-            result[0].push(fakeObj2);
-            result[1].push(fakeObj2);
+            firstResult.push(fakeObj2);
+            secondResult.push(fakeObj2);
           }
 
           return result;
