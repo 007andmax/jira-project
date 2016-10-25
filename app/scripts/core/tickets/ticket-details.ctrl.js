@@ -572,7 +572,9 @@
           function closeTicket() {
             $scope.ticketClosing = true;
 
-            var recipientsIds = $scope.ticketSharedUsersList.map(function (shared) {
+            var recipientsIds = $scope.ticketSharedUsersList.filter(function (shared) {
+              return shared.notify;
+            }).map(function (shared) {
               return shared.user.id;
             });
 
