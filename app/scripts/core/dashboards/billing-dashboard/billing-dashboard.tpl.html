@@ -3,23 +3,42 @@
     <header class="clearfix">
       <div class="calendar-top">
         <span class="calendar-top-img"><img src="images/input-icons/date-picker-dashboard.svg" alt="date-picker"></span>
-        {{ shownDateRange }}
+        {{ shownDateRange || 'All Time' }}
         <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic">
-        <i class="icn-sm icn-expand"></i>
+        <i class="icn-sm icn-expand" ng-if="!dateRange || !dateRange.length"></i>
+        <i class="icn-sm icn-remove-token" ng-if="dateRange && dateRange.length"
+           ng-mousedown="clearDateRangeAndReload($event)"></i>
       </div>
     </header>
     <section class="dashboard-main">
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-          <div class="stats">
-            <div class="stats__main">
-              <p class="board-head">total projection</p>
-              <div class="stats__main--count font-light-blue">
-                <p>$5670</p>
+          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">total projection</p>
+                <div class="stats__main--count font-light-blue">
+                  <p>${{ dashboard.totalProjection.toFixed() || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-light-blue">
+                <img src="images/input-icons/transfer.png" alt="">
               </div>
             </div>
-            <div class="stats__icon bg-light-blue">
-              <img src="images/input-icons/transfer.png" alt="">
+            <div class="back">
+              <p class="board-head">total projection</p>
+              <div ng-if="!loading && totalProjectionData && totalProjectionData.length"
+                   d3chart data="totalProjectionData" class="open-tickets-chart"
+                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                        ticks="{{ totalProjectionTicks.length }}" max-labels-count="5"
+                        tick-values="totalProjectionTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total"></d3line>
+              </div>
+              <div ng-if="!loading && (!totalProjectionData || !totalProjectionData.length)" class="no-data-message">
+                There is no data.
+              </div>
             </div>
           </div>
         </div>
@@ -28,7 +47,7 @@
             <div class="stats__main">
               <p class="board-head">total sales</p>
               <div class="stats__main--count font-blue-steel">
-                <p>$4398</p>
+                <p>${{ (dashboard.totalSales - startDashboard.totalSales).toFixed() || 0 }}</p>
               </div>
             </div>
             <div class="stats__icon bg-blue-steel">
@@ -37,48 +56,9 @@
           </div>
           <div class="stats half-stats">
             <div class="stats__main">
-              <p class="board-head">total receivables</p>
-              <div class="stats__main--count font-light-green">
-                <p>$5670</p>
-              </div>
-            </div>
-            <div class="stats__icon bg-light-green">
-              <img src="images/input-icons/dollar-white.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-xs-6">
-          <div class="stats ">
-            <div class="stats__main">
-              <p class="board-head">invoicable</p>
-              <div class="stats__main--count font-yellow">
-                <p>$1372</p>
-              </div>
-            </div>
-            <div class="stats__icon bg-yellow">
-              <img src="images/input-icons/cash.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-xs-6">
-          <div class="stats">
-            <div class="stats__main">
-              <p class="board-head">monthly sales</p>
-              <div class="stats__main--count font-green">
-                <p>$3547</p>
-              </div>
-            </div>
-            <div class="stats__icon bg-green">
-              <img src="images/input-icons/finances.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-xs-6">
-          <div class="stats">
-            <div class="stats__main">
               <p class="board-head">tax collected</p>
               <div class="stats__main--count font-light-purple">
-                <p>$872</p>
+                <p>${{ (dashboard.taxCollected - startDashboard.taxCollected).toFixed() || 0 }}</p>
               </div>
             </div>
             <div class="stats__icon bg-light-purple">
@@ -87,76 +67,213 @@
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="stats">
-            <div class="stats__main">
-              <p class="board-head">total overdue</p>
-              <div class="stats__main--count font-red">
-                <p></p>
+          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">total receivables</p>
+                <div class="stats__main--count font-light-green">
+                  <p>${{ dashboard.totalReceivable.toFixed() || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-light-green">
+                <img src="images/input-icons/dollar-white.png" alt="">
               </div>
             </div>
-            <div class="stats__icon bg-red">
-              <img src="images/input-icons/Pclose.png" alt="">
+            <div class="back">
+              <p class="board-head">total receivables</p>
+              <div ng-if="!loading && totalReceivableData && totalReceivableData.length"
+                   d3chart data="totalReceivableData" class="open-tickets-chart"
+                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                        ticks="{{ totalReceivableTicks.length }}" max-labels-count="5"
+                        tick-values="totalReceivableTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total"></d3line>
+              </div>
+              <div ng-if="!loading && (!totalReceivableData || !totalReceivableData.length)" class="no-data-message">
+                There is no data.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">invoicable</p>
+                <div class="stats__main--count font-yellow">
+                  <p>${{ dashboard.totalInvoicable.toFixed() || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-yellow">
+                <img src="images/input-icons/cash.png" alt="">
+              </div>
+            </div>
+            <div class="back">
+              <p class="board-head">invoicable</p>
+              <div ng-if="!loading && totalInvoicableData && totalInvoicableData.length"
+                   d3chart data="totalInvoicableData" class="open-tickets-chart"
+                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                        ticks="{{ totalInvoicableTicks.length }}" max-labels-count="5"
+                        tick-values="totalInvoicableTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total"></d3line>
+              </div>
+              <div ng-if="!loading && (!totalInvoicableData || !totalInvoicableData.length)" class="no-data-message">
+                There is no data.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">monthly sales</p>
+                <div class="stats__main--count font-green">
+                  <p>${{ dashboard.monthlySales.toFixed() }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-green">
+                <img src="images/input-icons/finances.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="stats">
+            <div class="front">
+              <div class="stats__main" style="height: 100%">
+                <p class="board-head">total overdue</p>
+                <div d3chart data="totalOverdueData" ng-if="!loading && !noTotalOverdueData"
+                     margin="{ top: 20, right: 40, bottom: 30, left: 40}" style="height: 70%">
+                  <d3axis name="group" orientation="bottom" scale="ordinal"
+                          tick-values="totalOverdueTicks"></d3axis>
+                  <d3axis name="y" orientation="left" hide="true"></d3axis>
+                  <d3bars x="group" y="y" width="40" preffix="$"></d3bars>
+                </div>
+
+                <div ng-if="!loading && !noTotalOverdueData">${{ dashboard.overdueSum.toFixed() || 0 }}</div>
+
+                <div ng-if="!loading && noTotalOverdueData"
+                     class="no-data-message">
+                  There is no data.
+                </div>
+              </div>
+              <div class="stats__icon bg-red">
+                <img src="images/input-icons/Pclose.png" alt="">
+              </div>
             </div>
           </div>
         </div>
         <div class="col-lg-6 col-xs-12">
           <div class="stats clearfix">
-            <p class="board-head graph-ticket">
-              managed vs. non managed
-            </p>
+            <div class="front">
+              <p class="board-head graph-ticket">
+                managed vs. non managed
+              </p>
+              <div ng-if="!loading && isStackedBarsShown(managedNonManagedData)"
+                   d3chart data="managedNonManagedData" class="managed-non-managed"
+                   margin="{ top: 5, right: 150, bottom: 40, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" max-labels-count="8"
+                        filter="xFilter" grid="true" time-format="{{ dateFormat }}"
+                        ticks="{{ managedNonManagedTicks.length }}" tick-values="managedNonManagedTicks"></d3axis>
+                <d3axis name="y" orientation="left" filter="yFilter" grid="true"></d3axis>
+                <d3stacked-bars x="date" y="y" values="recurring" width="{{ barsWidth }}"
+                                colors="['#006864','#00c8c4']"></d3stacked-bars>
+                <d3stacked-bars x="date" y="y" values="regular" width="{{ barsWidth }}"
+                                colors="['#c35f1b','#ffb55c']" xoffset="true"></d3stacked-bars>
+              </div>
 
+              <div ng-if="!loading && !isStackedBarsShown(managedNonManagedData)"
+                   class="no-data-message">
+                There is no data.
+              </div>
+            </div>
           </div>
         </div>
- <div class="col-lg-4 col-xs-6">
-          <div class="chart clearfix">
-            <p class="board-head graph-ticket">
+        <div class="col-lg-4 col-xs-6">
+          <div class="chart clearfix" style="position: relative">
+            <p class="board-head">
               revenue
             </p>
 
+            <div style="height: 65%" ng-if="!loading && !noRevenue">
+              <div class="donut-chart pie-chart col-12" d3chart data="revenue" style="height: 100%"
+                   margin="{left: 0, right: 0, bottom: 30, top: 40}">
+                <d3pie label="percents" value="percents" colors="['#ffb55c','#00bf8e']"
+                       label-affix="%" label-radius="1.25" inner-radius="0.7"></d3pie>
+              </div>
+              <div class="pie-legend">
+                <div ng-repeat="legend in revenueLegend" class="pie-legend-wrap">
+                  <span class="legend-{{ $index }} filled">{{ legend }}</span>
+                  <br>
+                  <span class="legend-{{ $index }}">
+                    ${{ dashboard.revenueByExpenseType[legend.slice(0, legend.length - 1).toUpperCase()].toFixed() || 0 }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div ng-if="!loading && noRevenue" class="no-data-message">
+              There is no data.
+            </div>
           </div>
         </div>
- <div class="col-lg-4 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <div class="chart clearfix">
-            <p class="board-head graph-ticket">
+            <p class="board-head">
               revenue by payment method
             </p>
 
+            <div style="height: 75%">
+              <div class="pie-chart-2 col-12" d3chart data="revenueByMethod" style="height: 100%"
+                   margin="{left: 100, right: 100, bottom: 50, top: 50}">
+                <d3pie label="percents" additional-label="method" value="percents" avoid-collisions="true"
+                       colors="['#ffb55c','#00bf8e','#ff7877','#27c1e3','#a677b1']"
+                       label-affix="%" label-radius="0.7" additional-label-radius="1.45"></d3pie>
+              </div>
+            </div>
+            <div ng-if="dashboard.noRevenue" class="no-data-message">
+              There is no data.
+            </div>
+
           </div>
         </div>
- <div class="col-lg-4 col-xs-12">
-   <div class="top-ten clearfix">
-     <p class="board-head">
-       top-10 companies
-     </p>
-     <ul class="top-ten__list">
-       <li class="top-ten__list--point-head clearfix">
-         <div class="col-xs-4 point-name"><p>Company</p></div>
-         <div class="col-xs-4"><p>Email</p></div>
-         <div class="col-xs-2"><p>Created</p></div>
-         <div class="col-xs-2"><p>Closed</p></div>
-       </li>
-       <div class="scrolled-list">
-         <li class="top-ten__list--point"
-             ng-repeat="company in dashboard.topCompanies | orderBy: 'created' track by company.id">
-           <div class="col-xs-4 point-name">
-             <div class="list-avatar">
-               <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
-             </div>
-             <p>{{ getCompanyById(company.id).name }}</p>
-           </div>
-           <div class="col-xs-4">
-             <p class="text-muted">{{ getPrimaryContact(company.id).primaryEmail }}</p>
-           </div>
-           <div class="col-xs-2">
-             <p class="text-muted">{{ company.created }}</p>
-           </div>
-           <div class="col-xs-2">
-             <p class="text-muted">{{ company.closed }}</p>
-           </div>
-         </li>
-       </div>
-     </ul>
-   </div>
+        <div class="col-lg-4 col-xs-12">
+          <div class="top-ten clearfix">
+            <p class="board-head">
+              top-10 companies
+            </p>
+            <ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">
+              <li class="top-ten__list--point-head clearfix">
+                <div class="col-xs-4 point-name"><p>Company</p></div>
+                <div class="col-xs-5"><p>Email</p></div>
+                <div class="col-xs-3"><p>By revenue</p></div>
+              </li>
+              <div class="scrolled-list">
+                <li class="top-ten__list--point"
+                    ng-repeat="company in dashboard.topCompanies | orderBy: '-revenue' track by company.id">
+                  <div class="col-xs-4 point-name">
+                    <div class="list-avatar">
+                      <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
+                    </div>
+                    <p>{{ getCompanyById(company.id).name }}</p>
+                  </div>
+                  <div class="col-xs-5">
+                    <p class="text-muted">{{ getPrimaryContact(company.id).primaryEmail }}</p>
+                  </div>
+                  <div class="col-xs-3">
+                    <p class="text-muted">{{ company.revenue.toFixed() || 0 }}</p>
+                  </div>
+                </li>
+              </div>
+            </ul>
+
+            <div ng-if="!dashboard.topCompanies || !dashboard.topCompanies.length" class="no-data-message">
+              There is no data.
+            </div>
+          </div>
         </div>
 
       </div>

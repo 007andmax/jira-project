@@ -34,7 +34,7 @@
           chartController.getChart().selectAll("circle").remove();
 
           var dots = chartController.getChart().selectAll("dot").data(data);
-          dots.enter().append("circle").attr("r", 5)
+          dots.enter().append("circle").attr("r", 5).attr('class', 'outer-circle')
             .attr("cx", function (d) {
               return x(d[options.x]);
             })
@@ -43,17 +43,18 @@
             })
             .on("mouseover", function (d) {
               tooltip.transition().duration(200).style("opacity", .9);
-              return tooltip.html('<div class="tooltip-inner">' + d[options.y] + '</div>')
+              return tooltip.html('<div class="tooltip-inner">' + (options.tooltipPreffix || '') + d[options.y] + (options.tooltipAffix || '') + '</div>')
                 .attr('class', 'tooltip')
                 .style("left", d3.event.pageX - tooltip[0][0].clientWidth / 2 + "px")
                 .style("top", (d3.event.pageY - 35) + "px");
             })
             .on("mouseleave", function () {
               tooltip.transition().duration(200).style("opacity", 0);
+              tooltip.style('left', '-10000px');
             });
           dots.exit();
 
-          dots.enter().append("circle").attr("r", 2.5).attr('fill', 'white')
+          dots.enter().append("circle").attr("r", 2.5).attr('fill', 'white').attr('class', 'inner-circle')
             .attr("cx", function (d) {
               return x(d[options.x]);
             })
@@ -62,13 +63,14 @@
             })
             .on("mouseover", function (d) {
               tooltip.transition().duration(200).style("opacity", .9);
-              return tooltip.html('<div class="tooltip-inner">' + d[options.y] + '</div>')
+              return tooltip.html('<div class="tooltip-inner">' + (options.tooltipPreffix || '') + d[options.y] + (options.tooltipAffix || '') + '</div>')
                 .attr('class', 'tooltip')
                 .style("left", d3.event.pageX - tooltip[0][0].clientWidth / 2 + "px")
                 .style("top", (d3.event.pageY - 35) + "px");
             })
             .on("mouseleave", function () {
               tooltip.transition().duration(200).style("opacity", 0);
+              tooltip.style('left', '-10000px');
             });
           dots.exit();
 

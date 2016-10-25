@@ -13,7 +13,7 @@
              src="images/input-icons/left-panel/active_quick-support.png">
       </div>
       <div class="left-panel__category" ng-class="{'active': openedCategory === 'tickets'}"
-           ui-sref="tickets({ listType: 'user' })"
+           ui-sref="tickets({ listType: currentUser.startPage.toLowerCase() || 'user' })"
            ng-click="toggleLeftPanel('tickets')">
         <img class="menu-img" ng-if="openedCategory !== 'tickets'" src="images/input-icons/left-panel/tickets.png">
         <img class="menu-img" ng-if="openedCategory === 'tickets'"

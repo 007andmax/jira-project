@@ -23,8 +23,7 @@
 
 .font-red {
   color: #ff7877; }
-
-.tickets-priority{
+.no-data-message{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,14 +42,18 @@
   position: absolute;
   right: 25px;
   top: 18px;
+  text-align: right;
 }
 .graph-ticket{
   padding-right: 90px;
 }
 .responsive-time{
   display: block;
-  text-align: right;
   color: #00bf8e;
+}
+.outliers{
+  display: block;
+  color: #ff7877;
 }
 .bg-deep-blue {
   background-color: #00a4b5; }
@@ -139,6 +142,28 @@ header {
 }
 .dashboard-main .stats {
   height: 250px;
+  margin-bottom: 30px;
+  position: relative;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -ms-perspective: 1000px;
+  -o-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
+.dashboard-main .stats .front,
+.dashboard-main .stats .back {
+  width: 100%;
+  height: 100%;
+
   box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
   margin-bottom: 30px; }
 .dashboard-main .stats.half-stats {
@@ -148,6 +173,61 @@ header {
 .dashboard-main .stats.half-stats .stats__main--count{
   height: 20px;
   font-size: 54px;
+}
+.dashboard-main .stats .front {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-backface-visibility: hidden;
+  -moz-visibility: hidden;
+  -ms-visibility: hidden;
+  -o-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-transition: -webkit-transform .6s;
+  -moz-transition: -moz-transform .6s;
+  -ms-transition: -ms-transform .6s;
+  -o-transition: -o-transform .6s;
+  transition: transform .6s;
+}
+.dashboard-main .stats .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-backface-visibility: hidden;
+  -moz-visibility: hidden;
+  -ms-visibility: hidden;
+  -o-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-transition: -webkit-transform .6s;
+  -moz-transition: -moz-transform .6s;
+  -ms-transition: -ms-transform .6s;
+  -o-transition: -o-transform .6s;
+  transition: transform .6s;
+
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+.dashboard-main .stats.flipped .front {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.dashboard-main .stats.flipped .back {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  transform: rotateY(0deg);
 }
   .dashboard-main .stats__main {
     position: relative;
@@ -256,6 +336,38 @@ header {
   width: 100%;
   padding: 20px;
 }
+.donut-chart ~ .pie-legend {
+  bottom: 10px;
+  justify-content: space-around;
+  padding: 10px;
+}
+.pie-legend .filled {
+  padding: 3px 15px;
+  color: white !important;
+  line-height: 30px;
+}
+.pie-legend span {
+  text-align: center;
+}
+.pie-legend .pie-legend-wrap {
+  text-align: center;
+  line-height: 25px;
+}
+.pie-legend .legend-0.filled {
+  background-color: #00bf8e;
+}
+.pie-legend .legend-1.filled {
+  background-color: #ffb55c;
+}
+.pie-legend .legend-2.filled {
+  background-color: #ff7877;
+}
+.pie-legend .legend-3.filled {
+  background-color: #27c1e3;
+}
+.pie-legend .legend-4.filled {
+  background-color: #a677b1;
+}
 .pie-legend .legend-0 {
   color: #00bf8e;
 }
@@ -264,4 +376,48 @@ header {
 }
 .pie-legend .legend-2 {
   color: #ff7877;
+}
+.pie-legend .legend-3 {
+  color: #27c1e3;
+}
+.pie-legend .legend-4 {
+  color: #a677b1;
+}
+.chart .creation-timeline,
+.chart .ticket-resp-time,
+.open-tickets-chart,
+.average-service-time-chart,
+.average-sales-chart,
+.managed-non-managed {
+  height: 80%;
+}
+.chart .creation-timeline .d3 .line {
+  stroke: #369ce3;
+}
+.chart .creation-timeline .d3 .outer-circle {
+  fill: #369ce3;
+}
+.chart .ticket-resp-time .d3 .line {
+  stroke: #00bf8e;
+}
+.chart .ticket-resp-time .d3 .outer-circle {
+  fill: #00bf8e;
+}
+.open-tickets-chart .d3 .line {
+  stroke: #00bf8e;
+}
+.open-tickets-chart .d3 .outer-circle {
+  fill: #00bf8e;
+}
+.average-service-time-chart .d3 .line {
+  stroke: #00a4b5;
+}
+.average-service-time-chart .d3 .outer-circle {
+  fill: #00a4b5;
+}
+.average-sales-chart .d3 .line {
+  stroke: #8849ae;
+}
+.average-sales-chart .d3 .outer-circle {
+  fill: #8849ae;
 }

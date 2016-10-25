@@ -25,10 +25,15 @@
         chart = chartController.getChart();
         innerRadius = parseFloat(options.innerRadius);
         labelRadius = parseFloat(options.labelRadius);
+        var additionalLabelRadius = parseFloat(options.additionalLabelRadius);
 
         if (attrs.colors) {
           var colorsArray = scope.$eval(attrs.colors);
-          if (typeof colorsArray === 'string') {
+          if (Array.isArray(colorsArray)) {
+            colorScale = function (i) {
+              return colorsArray[i];
+            }
+          } else {
             colorScale = (function () {
               switch (attrs.colors) {
                 case 'category20':
@@ -39,10 +44,6 @@
                   return d3.scale.category20c();
               }
             })();
-          } else if (Array.isArray(colorsArray)) {
-            colorScale = function (i) {
-              return colorsArray[i];
-            }
           }
         }
 
@@ -65,7 +66,7 @@
           arc = d3.svg.arc().outerRadius(radius).innerRadius(radius * innerRadius);
           phantomArc = d3.svg.arc().outerRadius(radius).innerRadius(0);
 
-          chart.selectAll("g.phantom-arc").data(pie(data)).remove()
+          chart.selectAll("g.phantom-arc").data(pie(data)).remove();
           var phantomArcs = chart.selectAll("g.phantom-arc").data(pie(data));
 
           phantomArcs.enter().append("g")
@@ -76,7 +77,7 @@
             .attr("fill", 'white')
             .attr("fill-opacity", 0.1)
             .style('stroke', 'white')
-            .style('stroke-width', 2)
+            .style('stroke-width', 1)
             .attr("d", phantomArc);
 
           phantomArcs.exit();
@@ -91,6 +92,7 @@
           };
 
           labelArc = d3.svg.arc().outerRadius(radius * labelRadius).innerRadius(radius * labelRadius);
+          var additionalLabelArc = d3.svg.arc().outerRadius(radius * additionalLabelRadius).innerRadius(radius * additionalLabelRadius);
           slice = center.selectAll('.pie').data(pie(data));
           slice.enter().append('path').attr('class', function (d, i) {
             return 'pie pie-' + i;
@@ -152,7 +154,7 @@
                   cty = thisbb.top + (thisbb.bottom - thisbb.top) / 2;
                   cpx = prevbb.left + (prevbb.right - prevbb.left) / 2;
                   cpy = prevbb.top + (prevbb.bottom - prevbb.top) / 2;
-                  offset = Math.sqrt(Math.pow(ctx - cpx, 2) + Math.pow(cty - cpy, 2)) / 2;
+                  offset = Math.sqrt(Math.pow(ctx - cpx, 2) + Math.pow(cty - cpy, 2)) / 1.5;
                   offsetArc = d3.svg.arc().outerRadius(radius * labelRadius + offset).innerRadius(radius * labelRadius + offset);
                   position = offsetArc.centroid(d);
                 }
@@ -165,20 +167,99 @@
             label = center.selectAll('text').data(pie(data));
             label.enter().append('text')
               .style('text-anchor', 'middle')
-              .attr('fill', 'white')
+              .attr('fill', function (d, i) {
+                return labelRadius > 1 ? colorScale(i) : 'white';
+              })
               .attr('class', function (d, i) {
                 return 'pie-label pie-label-' + i;
               });
             label.exit().remove();
             label.text(function (d, i) {
               if (data[i][options.value]){
-                return data[i][options.label];
+                return data[i][options.label] + (options.labelAffix || '');
               } else {
                 return '';
               }
             });
 
-            return label.attr('transform', getPosition);
+            if (options.additionalLabel) {
+              padding = +options.minOffset;
+
+              var getAdditionalPosition = function (d, i) {
+                var cpx, cpy, ctx, cty, offset, offsetArc, position, relativePosition, thisbb;
+                position = additionalLabelArc.centroid(d);
+
+                if (options.avoidCollisions) {
+                  relativePosition = [position[0], position[1]];
+                  if (this._position) {
+                    relativePosition[0] -= this._position[0];
+                    relativePosition[1] -= this._position[1];
+                  }
+
+                  var boundingClientRect = this.getBoundingClientRect();
+
+                  thisbb = {};
+                  for (var direction in boundingClientRect) {
+                    var value = boundingClientRect[direction];
+                    switch (direction) {
+                      case 'left':
+                        thisbb[direction] = value - padding + relativePosition[0];
+                        break;
+                      case 'top':
+                        thisbb[direction] = value - padding + relativePosition[1];
+                        break;
+                      case 'right':
+                        thisbb[direction] = value + padding + relativePosition[0];
+                        break;
+                      case 'bottom':
+                        thisbb[direction] = value + padding + relativePosition[1];
+                    }
+                  }
+
+                  if (prevbb && !(thisbb.right < prevbb.left || thisbb.left > prevbb.right || thisbb.bottom < prevbb.top || thisbb.top > prevbb.bottom)) {
+                    ctx = thisbb.left + (thisbb.right - thisbb.left) / 2;
+                    cty = thisbb.top + (thisbb.bottom - thisbb.top) / 2;
+                    cpx = prevbb.left + (prevbb.right - prevbb.left) / 2;
+                    cpy = prevbb.top + (prevbb.bottom - prevbb.top) / 2;
+                    offset = Math.sqrt(Math.pow(ctx - cpx, 2) + Math.pow(cty - cpy, 2)) / 1.5;
+                    offsetArc = d3.svg.arc().outerRadius(radius * additionalLabelRadius - offset).innerRadius(radius * additionalLabelRadius - offset);
+                    position = offsetArc.centroid(d);
+                  }
+                  this._position = position;
+                  prevbb = thisbb;
+                }
+
+                if (!position[0]) {
+                  position[0] = 0;
+                }
+                if (!position[1]) {
+                  position[1] = 0;
+                }
+                return 'translate(' + position + ')';
+              };
+
+              var additionalLabel = center.selectAll('text .additional-label').data(pie(data));
+              additionalLabel.enter().append('text').attr('class', 'additional-label')
+                .style('text-anchor', 'middle')
+                .attr('fill', function (d, i) {
+                  return additionalLabelRadius > 1 ? colorScale(i) : 'white';
+                })
+                .attr('class', function (d, i) {
+                  return 'pie-label pie-label-' + i;
+                });
+              additionalLabel.exit().remove();
+              additionalLabel.text(function (d, i) {
+                if (data[i][options.value]){
+                  return data[i][options.additionalLabel];
+                } else {
+                  return '';
+                }
+              });
+
+              additionalLabel.attr('transform', getAdditionalPosition);
+            }
+
+            label.attr('transform', getPosition);
           }
         };
 

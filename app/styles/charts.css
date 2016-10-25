@@ -44,12 +44,24 @@
   fill: #eda646;
   stroke-width: 0px;
   stroke: #222222;
-  opacity: 0.7;
+}
+.d3 .bar.bar-2, .bar-label-2 {
+  fill: #c32e2e;
+}
+.d3 .bar.bar-1, .bar-label-1 {
+  fill: #da7070;
+}
+.d3 .bar.bar-0, .bar-label-0 {
+  fill: #ecafae;
 }
 
 /* Pie Chart */
 .pie-chart .d3 {
   padding-left: 25%;
+}
+.pie-chart-2 .d3 {
+  padding-left: 3%;
+  padding-top: 5%;
 }
 .d3 .pie.pie-0 path {
   fill: #98abc5;

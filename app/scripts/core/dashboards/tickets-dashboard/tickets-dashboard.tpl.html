@@ -3,110 +3,176 @@
     <header class="clearfix">
       <div class="calendar-top">
         <span class="calendar-top-img"><img src="images/input-icons/date-picker-dashboard.svg" alt="date-picker"></span>
-        {{ shownDateRange }}
+        {{ shownDateRange || 'All Time' }}
         <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic">
-        <i class="icn-sm icn-expand"></i>
+        <i class="icn-sm icn-expand" ng-if="!dateRange || !dateRange.length"></i>
+        <i class="icn-sm icn-remove-token" ng-if="dateRange && dateRange.length"
+           ng-mousedown="clearDateRangeAndReload($event)"></i>
       </div>
     </header>
     <section class="dashboard-main">
       <div class="row">
         <div class="col-lg-4 col-xs-6">
           <div class="stats">
-            <div class="stats__main">
-              <p class="board-head">
-                Total tickets
-              </p>
-              <div class="stats__main--count font-yellow">
-                <p>{{ dashboard.totalTickets || 0 }}</p>
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  Total tickets
+                </p>
+                <div class="stats__main--count font-yellow">
+                  <p>{{ (startDashboard ? dashboard.totalTickets - startDashboard.totalTickets : dashboard.totalTickets)
+                    || 0 }}</p>
+                </div>
               </div>
-            </div>
-            <div class="stats__icon bg-yellow">
-              <img src="images/input-icons/ticket-white.png" alt="">
+              <div class="stats__icon bg-yellow">
+                <img src="images/input-icons/ticket-white.png" alt="">
+              </div>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-xs-6">
-          <div class="stats">
-            <div class="stats__main">
+          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  Open tickets
+                </p>
+                <div class="stats__main--count font-green">
+                  <p>{{ dashboard.openTickets || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-green">
+                <img src="images/input-icons/ticket-white.png" alt="">
+              </div>
+            </div>
+            <div class="back">
               <p class="board-head">
                 Open tickets
               </p>
-              <div class="stats__main--count font-green">
-                <p>{{ dashboard.openTickets || 0 }}</p>
+              <div ng-if="!loading && openTicketsData && openTicketsData.length"
+                   d3chart data="openTicketsData" class="open-tickets-chart"
+                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                        ticks="{{ openTicketsTicks.length }}" max-labels-count="6"
+                        tick-values="openTicketsTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total"></d3line>
               </div>
-            </div>
-            <div class="stats__icon bg-green">
-              <img src="images/input-icons/ticket-white.png" alt="">
+              <div ng-if="!loading && (!openTicketsData || !openTicketsData.length)" class="no-data-message">
+                There is no data.
+              </div>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-xs-6">
           <div class="stats">
-            <div class="stats__main">
-              <p class="board-head">
-                closed tickets
-              </p>
-              <div class="stats__main--count font-red">
-                <p>{{ dashboard.closedTickets || 0 }}</p>
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  closed tickets
+                </p>
+                <div class="stats__main--count font-red">
+                  <p>{{ (startDashboard ? dashboard.closedTickets - startDashboard.closedTickets :
+                    dashboard.closedTickets) || 0 }}</p>
+                </div>
               </div>
-            </div>
-            <div class="stats__icon bg-red">
-              <img src="images/input-icons/ticket-white.png" alt="">
+              <div class="stats__icon bg-red">
+                <img src="images/input-icons/ticket-white.png" alt="">
+              </div>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-xs-6">
-          <div class="stats">
-            <div class="stats__main">
+          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  average time per ticket
+                </p>
+                <div class="stats__main--count font-deep-blue">
+                  <p>{{ getAverageTimePerDay(dashboard.averageTimePerDay) }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-deep-blue">
+                <img src="images/input-icons/watch-white.png" alt="">
+              </div>
+            </div>
+            <div class="back">
               <p class="board-head">
                 average time per ticket
               </p>
-              <div class="stats__main--count font-deep-blue">
-                <p>{{ getAverageTimePerTicket(dashboard.averageTimePerTicket) }}</p>
+              <div ng-if="!loading && averageServiceTimeData && averageServiceTimeData.length"
+                   d3chart data="averageServiceTimeData" class="average-service-time-chart"
+                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                        ticks="{{ averageServiceTimeTicks.length }}" max-labels-count="6"
+                        tick-values="averageServiceTimeTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total" tooltip-affix="m"></d3line>
+              </div>
+              <div ng-if="!loading && (!averageServiceTimeData || !averageServiceTimeData.length)" class="no-data-message">
+                There is no data.
               </div>
             </div>
-            <div class="stats__icon bg-deep-blue">
-              <img src="images/input-icons/watch-white.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-4 col-xs-6">
+          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  average sales per ticket
+                </p>
+                <div class="stats__main--count font-purple">
+                  <p>${{ dashboard.averageSalesPerDay.toFixed(0) || 0 }}</p>
+                </div>
+              </div>
+              <div class="stats__icon bg-purple">
+                <img src="images/input-icons/dollar-white.png" alt="">
+              </div>
+            </div>
+            <div class="back">
+              <p class="board-head">
+                average time per ticket
+              </p>
+              <div ng-if="!loading && averageSalesData && averageSalesData.length"
+                   d3chart data="averageSalesData" class="average-sales-chart"
+                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                        ticks="{{ averageSalesTicks.length }}" max-labels-count="6"
+                        tick-values="averageSalesTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total" tooltip-preffix="$"></d3line>
+              </div>
+              <div ng-if="!loading && (!averageSalesData || !averageSalesData.length)" class="no-data-message">
+                There is no data.
+              </div>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-xs-6">
           <div class="stats">
-            <div class="stats__main">
-              <p class="board-head">
-                average sales per ticket
-              </p>
-              <div class="stats__main--count font-purple">
-                <p>{{ dashboard.averageSalesPerTicket || 0 }}$</p>
-              </div>
-            </div>
-            <div class="stats__icon bg-purple">
-              <img src="images/input-icons/dollar-white.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-xs-6">
-          <div class="stats">
-            <div class="stats__main">
-              <p class="board-head">
-                tickets by priority
-              </p>
-              <div ng-if="ticketsPriority && ticketsPriority.length">
-                <div class="pie-chart"
-                     d3chart data="ticketsPriority" class="col-12"
-                     margin="{left: 0, right: 0, bottom: 15, top: 0}">
-                  <d3pie label="count" value="count" colors="['#00bf8e','#ffb55c','#ff7877']"></d3pie>
+            <div class="front">
+              <div class="stats__main">
+                <p class="board-head">
+                  tickets by priority
+                </p>
+                <div ng-if="!dashboard.noPriorities">
+                  <div class="pie-chart col-12" d3chart data="ticketsPriority"
+                       margin="{left: 0, right: 0, bottom: 15, top: 0}">
+                    <d3pie label="count" value="count" colors="['#00bf8e','#ffb55c','#ff7877']"></d3pie>
+                  </div>
+                  <div class="pie-legend">
+                    <span class="legend-{{ $index }}" ng-repeat="legend in ticketsPriorityLegend">{{ legend }}</span>
+                  </div>
                 </div>
-                <div class="pie-legend">
-                  <span class="legend-{{ $index }}" ng-repeat="legend in ticketsPriorityLegend">{{ legend }}</span>
+                <div ng-if="dashboard.noPriorities" class="no-data-message">
+                  There is no data.
                 </div>
               </div>
-              <div ng-if="!ticketsPriority || !ticketsPriority.length" class="tickets-priority">
-                You don't have tickets yet
+              <div class="stats__icon bg-light-blue">
+                <img src="images/input-icons/warning-white.png" alt="">
               </div>
-            </div>
-            <div class="stats__icon bg-light-blue">
-              <img src="images/input-icons/warning-white.png" alt="">
             </div>
           </div>
         </div>
@@ -117,7 +183,7 @@
             <p class="board-head">
               top-10 clients
             </p>
-            <ul class="top-ten__list">
+            <ul class="top-ten__list" ng-if="dashboard.topClients && dashboard.topClients.length">
               <li class="top-ten__list--point-head clearfix">
                 <div class="col-xs-4 point-name"><p>Name</p></div>
                 <div class="col-xs-4"><p>Email</p></div>
@@ -126,7 +192,7 @@
               </li>
               <div class="scrolled-list">
                 <li class="top-ten__list--point"
-                    ng-repeat="client in dashboard.topClients | orderBy: 'created' track by client.id">
+                    ng-repeat="client in dashboard.topClients | orderBy: '-created' track by client.id">
                   <div class="col-xs-4 point-name">
                     <div class="list-avatar">
                       <img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}">
@@ -145,6 +211,10 @@
                 </li>
               </div>
             </ul>
+
+            <div ng-if="!dashboard.topClients || !dashboard.topClients.length" class="no-data-message">
+              There is no data.
+            </div>
           </div>
         </div>
         <div class="col-lg-4 col-xs-6 ">
@@ -152,7 +222,7 @@
             <p class="board-head">
               top-10 companies
             </p>
-            <ul class="top-ten__list">
+            <ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">
               <li class="top-ten__list--point-head clearfix">
                 <div class="col-xs-4 point-name"><p>Company</p></div>
                 <div class="col-xs-4"><p>Email</p></div>
@@ -161,7 +231,7 @@
               </li>
               <div class="scrolled-list">
                 <li class="top-ten__list--point"
-                    ng-repeat="company in dashboard.topCompanies | orderBy: 'created' track by company.id">
+                    ng-repeat="company in dashboard.topCompanies | orderBy: '-created' track by company.id">
                   <div class="col-xs-4 point-name">
                     <div class="list-avatar">
                       <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
@@ -180,6 +250,10 @@
                 </li>
               </div>
             </ul>
+
+            <div ng-if="!dashboard.topCompanies || !dashboard.topCompanies.length" class="no-data-message">
+              There is no data.
+            </div>
           </div>
         </div>
         <div class="col-lg-4 col-xs-12 ">
@@ -187,7 +261,7 @@
             <p class="board-head">
               top-10 tech-users
             </p>
-            <ul class="top-ten__list">
+            <ul class="top-ten__list" ng-if="dashboard.topTechUsers && dashboard.topTechUsers.length">
               <li class="top-ten__list--point-head clearfix">
                 <div class="col-xs-4 point-name"><p>Name</p></div>
                 <div class="col-xs-4"><p>Email</p></div>
@@ -196,7 +270,7 @@
               </li>
               <div class="scrolled-list">
                 <li class="top-ten__list--point"
-                    ng-repeat="tech in dashboard.topTechUsers | orderBy: 'created' track by tech.id">
+                    ng-repeat="tech in dashboard.topTechUsers | orderBy: '-created' track by tech.id">
                   <div class="col-xs-4 point-name">
                     <div class="list-avatar">
                       <img ng-src="{{ getUserAvatarUrl(getUserById(tech.id)) }}">
@@ -215,6 +289,10 @@
                 </li>
               </div>
             </ul>
+
+            <div ng-if="!dashboard.topTechUsers || !dashboard.topTechUsers.length" class="no-data-message">
+              There is no data.
+            </div>
           </div>
         </div>
       </div>
@@ -225,40 +303,47 @@
               Ticket creation timeline
             </p>
 
-            <div ng-if="ticketCreationTimeline && ticketCreationTimeline.length" d3chart data="ticketCreationTimeline"
-                 margin="{ top: 40, right: 60, bottom: 60, left: 60}" style="height: 80%;">
-              <d3axis name="date" extent="true" orientation="bottom" time-format="%d-%m-%Y"
-                      ticks="{{ ticketCreationTimelineTicks.length }}"
+            <div ng-if="!loading && ticketCreationTimeline && ticketCreationTimeline.length" d3chart
+                 data="ticketCreationTimeline"
+                 margin="{ top: 40, right: 60, bottom: 60, left: 60}" class="creation-timeline">
+              <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                      ticks="{{ ticketCreationTimelineTicks.length }}" max-labels-count="10"
                       tick-values="ticketCreationTimelineTicks"></d3axis>
               <d3axis name="total" orientation="left"></d3axis>
               <d3line x="date" y="total"></d3line>
             </div>
 
-            <div ng-if="!ticketCreationTimeline || !ticketCreationTimeline.length" class="tickets-priority">
-              You don't have tickets yet
+            <div ng-if="!loading && (!ticketCreationTimeline || !ticketCreationTimeline.length)" class="no-data-message">
+              There is no data.
             </div>
           </div>
         </div>
         <div class="col-lg-6 col-xs-12">
           <div class="chart clearfix">
             <p class="board-head graph-ticket">
-              avarage ticket response time
+              average ticket response time
             </p>
             <div class="ticket-right-text">
-              <div>Response Time <span class="responsive-time">{{ dashboard.averageResponseTime }} minutes</span></div>
-
-              <div ng-if="averageTicketsResponseTimeMap && averageTicketsResponseTimeMap.length"
-                   d3chart data="averageTicketsResponseTimeMap"
-                   margin="{ top: 40, right: 60, bottom: 60, left: 60}" style="height: 80%;">
-                <d3axis name="date" extent="true" orientation="bottom" time-format="%d-%m-%Y"
-                        ticks="{{ averageTicketsResponseTimeTicks.length }}"
-                        tick-values="averageTicketsResponseTimeTicks"></d3axis>
-                <d3axis name="total" orientation="left"></d3axis>
-                <d3line x="date" y="total"></d3line>
+              <div>
+                Response Time <span class="responsive-time">{{ dashboard.averageResponseTime || 0 }} minute(s)</span>
+              </div>
+              <div ng-if="numberOutliersTicketsResponseTime">
+                Outliers ( > 24 hours)
+                <span class="outliers">{{ numberOutliersTicketsResponseTime }} ticket(s)</span>
               </div>
             </div>
-            <div ng-if="!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length" class="tickets-priority">
-              You don't have tickets yet
+            <div ng-if="!loading && averageTicketsResponseTimeMap && averageTicketsResponseTimeMap.length"
+                 d3chart data="averageTicketsResponseTimeMap" class="ticket-resp-time"
+                 margin="{ top: 50, right: 60, bottom: 60, left: 60}">
+              <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                      ticks="{{ averageTicketsResponseTimeTicks.length }}" max-labels-count="10"
+                      tick-values="averageTicketsResponseTimeTicks"></d3axis>
+              <d3axis name="total" orientation="left"></d3axis>
+              <d3line x="date" y="total" tooltip-affix="m"></d3line>
+            </div>
+            <div ng-if="!loading && (!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length)"
+                 class="no-data-message">
+              There is no data.
             </div>
           </div>
         </div>

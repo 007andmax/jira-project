@@ -7,7 +7,8 @@
       restrict: 'A',
       scope: {
         dateRangePicker: '=?',
-        onHide: '=?'
+        onHide: '=?',
+        minDate: '=?'
       },
       link: function (scope, element, attrs) {
         var hideTimeout;
@@ -18,6 +19,7 @@
           language: 'en',
           multipleDatesSeparator: ' - ',
           position: attrs.position,
+          minDate: scope.minDate ? new Date(+scope.minDate) : '',
           maxDate: new Date(),
           onSelect: function () {
             $timeout(function () {

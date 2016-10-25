@@ -23,18 +23,43 @@
         var adjustTickLabels, axisElement, drawGrid, getAxis, grid, label, options, positionLabel,
           range, redraw, scale, translation, updateScale;
         options = angular.extend(defaults(), $attrs);
-        range = function () {
-          if (options.orientation === 'top' || options.orientation === 'bottom') {
-            if (options.reverse != null) {
-              return [chartController.innerWidth, 0];
+        range = function (domainValues) {
+          if (options.scale !== 'ordinal') {
+            if (options.orientation === 'top' || options.orientation === 'bottom') {
+              if (options.reverse != null) {
+                return [chartController.innerWidth, 0];
+              } else {
+                return [0, chartController.innerWidth];
+              }
             } else {
-              return [0, chartController.innerWidth];
+              if (options.reverse != null) {
+                return [0, chartController.innerHeight];
+              } else {
+                return [chartController.innerHeight, 0];
+              }
             }
           } else {
-            if (options.reverse != null) {
-              return [0, chartController.innerHeight];
+            var interval = 0, range;
+            if (options.orientation === 'top' || options.orientation === 'bottom') {
+              interval = chartController.innerWidth / (domainValues.length - 1);
+              range = domainValues.map(function (value, i) {
+                return interval * i;
+              });
+              if (options.reverse != null) {
+                return range.reverse();
+              } else {
+                return range;
+              }
             } else {
-              return [chartController.innerHeight, 0];
+              interval = chartController.innerHeight / (domainValues.length - 1);
+              range = domainValues.map(function (value, i) {
+                return interval * i;
+              });
+              if (options.reverse != null) {
+                return range;
+              } else {
+                return range.reverse();
+              }
             }
           }
         };
@@ -127,6 +152,15 @@
         adjustTickLabels = function (g) {
           var firstTickLabels, lastTickLabels, tickLabels;
           tickLabels = g.selectAll('.tick text');
+          if (options.maxLabelsCount) {
+            var maxLabels = +options.maxLabelsCount;
+            if (tickLabels[0].length > maxLabels) {
+              var reduceIn = Math.ceil(tickLabels[0].length / maxLabels);
+              tickLabels.text(function (d, i) {
+                return i % reduceIn === 0 ? this.innerHTML : '';
+              });
+            }
+          }
           if (options.tickDy) {
             tickLabels.attr('dy', options.tickDy);
           }
@@ -165,35 +199,48 @@
           if (!((data != null) && data.length !== 0)) {
             return;
           }
-          axisElement || (axisElement = chartController.getChart().append("g")
-            .attr("class", "axis axis-" + options.orientation + " axis-" + options.name)
-            .attr("transform", translation()));
-          if (options.label) {
-            label || (label = axisElement.append("text").attr("class", "axis-label").text(options.label));
-          }
-          if (options.grid) {
-            grid || (grid = chartController.getChart().append("g")
-              .attr("class", "axis-grid axis-grid-" + options.name));
-          }
           axis = getAxis();
-          if (label) {
-            positionLabel(label.transition().duration(500));
+          if (options.hide == null) {
+            axisElement || (axisElement = chartController.getChart().append("g")
+              .attr("class", "axis axis-" + options.orientation + " axis-" + options.name)
+              .attr("transform", translation()));
+            if (options.label) {
+              label || (label = axisElement.append("text").attr("class", "axis-label").text(options.label));
+            }
+            if (options.grid) {
+              grid || (grid = chartController.getChart().append("g")
+                .attr("class", "axis-grid axis-grid-" + options.name));
+            }
+            if (label) {
+              positionLabel(label.transition().duration(500));
+            }
+            axisElement.transition().duration(500).attr("transform", translation())
+              .call(axis).selectAll('tick text').tween("attr.dx", null)
+              .tween("attr.dy", null).tween("style.text-anchor", null);
+            if (grid != null) {
+              drawGrid(grid.transition().duration(500), axis);
+            }
+            tickLabels = axisElement.selectAll('.tick text');
+            return axisElement.call(adjustTickLabels);
           }
-          axisElement.transition().duration(500).attr("transform", translation())
-            .call(axis).selectAll('tick text').tween("attr.dx", null)
-            .tween("attr.dy", null).tween("style.text-anchor", null);
-          if (grid != null) {
-            drawGrid(grid.transition().duration(500), axis);
-          }
-          tickLabels = axisElement.selectAll('.tick text');
-          return axisElement.call(adjustTickLabels);
+
+
+          // if (options.tickDy && tickLabels[0].length > +options.maxLabelsCount) {
+          //   axisElement.selectAll('.tick line').remove();
+          //   var tickLines = axisElement.selectAll('g.tick'),
+          //     x2 = Math.round(chartController.innerWidth / tickLines.length);
+          //   tickLines.each(function (d, i) {
+          //     d3.select(this).append("line")
+          //       .attr("y2", (i % 2 === 0 ? +options.tickDy + 15 : +options.tickDy) - 5)
+          //       .attr("x2", 0);
+          //   });
+          // }
         };
         updateScale = function (data) {
           var datum, domainValues;
           if (!((data != null) && data.length !== 0)) {
             return;
           }
-          scale.range(range());
           if ($scope.filter) {
             domainValues = $scope.filter(data);
           } else {
@@ -207,10 +254,15 @@
               return results;
             })();
           }
+          scale.range(range(domainValues));
           if (options.extent) {
             return scale.domain(d3.extent(domainValues));
           } else {
-            return scale.domain([0, d3.max(domainValues)]);
+            if (options.scale !== 'ordinal') {
+              return scale.domain([0, d3.max(domainValues)]);
+            } else {
+              return scale.domain(domainValues);
+            }
           }
         };
         chartController.addScale(options.name, scale, updateScale);
