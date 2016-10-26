@@ -206,11 +206,11 @@
                        label-affix="%" label-radius="1.25" inner-radius="0.7"></d3pie>
               </div>
               <div class="pie-legend">
-                <div ng-repeat="legend in revenueLegend" class="pie-legend-wrap">
+                <div ng-repeat="(legend, value) in revenueLegend" class="pie-legend-wrap">
                   <span class="legend-{{ $index }} filled">{{ legend }}</span>
                   <br>
                   <span class="legend-{{ $index }}">
-                    ${{ dashboard.revenueByExpenseType[legend.slice(0, legend.length - 1).toUpperCase()].toFixed() || 0 }}
+                    ${{ value.toFixed() || 0 }}
                   </span>
                 </div>
               </div>
@@ -226,7 +226,7 @@
               revenue by payment method
             </p>
 
-            <div style="height: 75%" ng-if="!loading && !noRevenue">
+            <div style="height: 85%" ng-if="!loading && !noRevenue">
               <div class="pie-chart-2 col-12" d3chart data="revenueByMethod" style="height: 100%"
                    margin="{left: 100, right: 100, bottom: 50, top: 50}">
                 <d3pie label="percents" additional-label="method" value="percents" avoid-collisions="true"

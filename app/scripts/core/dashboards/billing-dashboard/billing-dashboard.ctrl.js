@@ -13,7 +13,7 @@
         $scope.startDashboard = {};
         $scope.allDashboards = [];
         $scope.totalOverdueTicks = ['30 days', '60 days', '90+ days'];
-        $scope.revenueLegend = ['Services', 'Products'];
+        $scope.revenueLegend = {'Services': 0, 'Products': 0};
         $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         getStatistic();
@@ -168,39 +168,59 @@
                 $scope.barsWidth = 15;
               }
 
-              var product = $scope.dashboard.revenueByExpenseType.PRODUCT;
-              var service = $scope.dashboard.revenueByExpenseType.SERVICE;
-              var revenueSum = product + service;
-              if (product || service) {
+              var product = $scope.dashboard.revenueByExpenseType.PRODUCT,
+                service = $scope.dashboard.revenueByExpenseType.SERVICE,
+                firstProduct = $scope.startDashboard ? $scope.startDashboard.revenueByExpenseType.PRODUCT : 0,
+                firstService = $scope.startDashboard ? $scope.startDashboard.revenueByExpenseType.SERVICE : 0;
+
+              var productDiff = product - firstProduct,
+                serviceDiff = service - firstService,
+                revenueSum = (productDiff + serviceDiff) || 1;
+              if (productDiff || serviceDiff) {
                 $scope.revenue = [{
-                  percents: Math.round(product * 100 / revenueSum)
+                  percents: Math.round(productDiff * 100 / revenueSum)
                 }, {
-                  percents: Math.round(service * 100 / revenueSum)
+                  percents: Math.round(serviceDiff * 100 / revenueSum)
                 }];
+                $scope.revenueLegend['Products'] = productDiff;
+                $scope.revenueLegend['Services'] = serviceDiff;
                 $scope.noRevenue = false;
               } else {
                 $scope.noRevenue = true;
               }
 
+              $scope.revenueByMethod = [];
               var revenueByPaymentMethod = $scope.dashboard.revenueByPaymentMethod, sum = 0;
               for (var method in revenueByPaymentMethod) {
-                sum += revenueByPaymentMethod[method];
+                var lastRevenue = revenueByPaymentMethod[method];
+                var firstRevenue = $scope.startDashboard ? $scope.startDashboard.revenueByPaymentMethod[method] : 0;
+                var diff = lastRevenue - firstRevenue;
+                sum += diff;
+
+                var formattedMethod = method.split('_').join(' ');
+                formattedMethod = formattedMethod.charAt(0).toUpperCase() + formattedMethod.slice(1).toLowerCase();
+                $scope.revenueByMethod.push({ method: formattedMethod, percents: diff * 100 });
               }
 
-              $scope.revenueByMethod = [{
-                method: 'Cash', percents: Math.round($scope.dashboard.revenueByPaymentMethod.CASH * 100 / sum)
-              }, {
-                method: 'Cheque', percents: Math.round($scope.dashboard.revenueByPaymentMethod.CHEQUE * 100 / sum)
-              }, {
-                method: 'Credit Card',
-                percents: Math.round($scope.dashboard.revenueByPaymentMethod.CREDIT_CARD * 100 / sum)
-              }, {
-                method: 'Debit Card',
-                percents: Math.round($scope.dashboard.revenueByPaymentMethod.DEBIT_CARD * 100 / sum)
-              }, {
-                method: 'Wire Transfer',
-                percents: Math.round($scope.dashboard.revenueByPaymentMethod.WIRE_TRANSFER * 100 / sum)
-              }];
+              var others = 0;
+              for (var u = 0; u < $scope.revenueByMethod.length; u++) {
+                var item = $scope.revenueByMethod[u];
+                item.percents = Math.round(item.percents / sum);
+
+                if (item.percents <= 3) {
+                  others += item.percents;
+                  $scope.revenueByMethod.splice(u, 1);
+                  u--;
+                }
+              }
+
+              if (others) {
+                $scope.revenueByMethod.push({ method: 'Others', percents: others });
+              }
+
+              $scope.revenueByMethod.sort(function (a, b) {
+                return b.percents - a.percents;
+              });
 
               $scope.totalReceivableData = getDataForLineChart($scope.allDashboards, 'totalReceivable');
               $scope.totalReceivableTicks = $scope.totalReceivableData.map(function (item) {
@@ -212,14 +232,10 @@
                 return item.date;
               });
 
-              if ($scope.allDashboards.length >= 1) {
-                for (var i = 0; i < $scope.allDashboards.length; i++) {
-                  var dashboard = $scope.allDashboards[i],
-                    lastDashboard = $scope.allDashboards[i - 1] || $scope.startDashboard;
-                  dashboard.totalProjection = (dashboard.totalSales - lastDashboard.totalSales) + dashboard.totalReceivable;
-                }
-              } else {
-                $scope.dashboard.totalProjection = $scope.dashboard.totalSales + $scope.dashboard.totalReceivable;
+              for (var i = 0; i < $scope.allDashboards.length; i++) {
+                var dashboard = $scope.allDashboards[i],
+                  lastDashboard = $scope.allDashboards[i - 1] || $scope.startDashboard;
+                dashboard.totalProjection = (dashboard.totalSales - (lastDashboard ? lastDashboard.totalSales : 0)) + dashboard.totalReceivable;
               }
               $scope.totalProjectionData = getDataForLineChart($scope.allDashboards, 'totalProjection');
               $scope.totalProjectionTicks = $scope.totalProjectionData.map(function (item) {
