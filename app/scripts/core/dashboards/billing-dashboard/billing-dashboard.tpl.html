@@ -13,7 +13,7 @@
     <section class="dashboard-main">
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">total projection</p>
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">total receivables</p>
@@ -97,7 +97,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">invoicable</p>
@@ -226,7 +226,7 @@
               revenue by payment method
             </p>
 
-            <div style="height: 75%">
+            <div style="height: 75%" ng-if="!loading && !noRevenue">
               <div class="pie-chart-2 col-12" d3chart data="revenueByMethod" style="height: 100%"
                    margin="{left: 100, right: 100, bottom: 50, top: 50}">
                 <d3pie label="percents" additional-label="method" value="percents" avoid-collisions="true"
@@ -234,7 +234,7 @@
                        label-affix="%" label-radius="0.7" additional-label-radius="1.45"></d3pie>
               </div>
             </div>
-            <div ng-if="dashboard.noRevenue" class="no-data-message">
+            <div ng-if="!loading && noRevenue" class="no-data-message">
               There is no data.
             </div>
 

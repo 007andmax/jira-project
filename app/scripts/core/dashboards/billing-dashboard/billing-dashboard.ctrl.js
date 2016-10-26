@@ -212,10 +212,14 @@
                 return item.date;
               });
 
-              for (var i = 0; i < $scope.allDashboards.length; i++) {
-                var dashboard = $scope.allDashboards[i],
-                  lastDashboard = $scope.allDashboards[i - 1] || $scope.startDashboard;
-                dashboard.totalProjection = (dashboard.totalSales - lastDashboard.totalSales) + dashboard.totalReceivable;
+              if ($scope.allDashboards.length >= 1) {
+                for (var i = 0; i < $scope.allDashboards.length; i++) {
+                  var dashboard = $scope.allDashboards[i],
+                    lastDashboard = $scope.allDashboards[i - 1] || $scope.startDashboard;
+                  dashboard.totalProjection = (dashboard.totalSales - lastDashboard.totalSales) + dashboard.totalReceivable;
+                }
+              } else {
+                $scope.dashboard.totalProjection = $scope.dashboard.totalSales + $scope.dashboard.totalReceivable;
               }
               $scope.totalProjectionData = getDataForLineChart($scope.allDashboards, 'totalProjection');
               $scope.totalProjectionTicks = $scope.totalProjectionData.map(function (item) {
@@ -290,7 +294,7 @@
                 groupedForMonth = 0;
               }
             } else {
-              result.push({ date: currentDate, total: transformer ? transformer(item[property]) : item[property] });
+              result.push({ date: currentDate, total: transformer ? transformer(item[property]) : parseFloat(item[property].toFixed(2)) });
             }
           }
 
@@ -311,13 +315,15 @@
             lastYear,
             lastItem,
             productExpense = 0,
-            serviceExpense = 0;
+            serviceExpense = 0,
+            item,
+            currentDate;
 
           var firstResult = result[0];
           var secondResult = result[1];
           for (var i = 0; i < data.length; i++) {
-            var item = data[i],
-              currentDate = data[i + 1] ? new Date(data[i + 1].date) : undefined;
+            item = data[i];
+            currentDate = data[i + 1] ? new Date(data[i + 1].date) : undefined;
 
             for (var j = 0; j < splitPath.length; j++) {
               var property = splitPath[j];
@@ -326,8 +332,10 @@
 
             if (!lastItem) {
               lastItem = item;
-              lastMonth = currentDate.getMonth();
-              lastYear = currentDate.getFullYear();
+              if (currentDate) {
+                lastMonth = currentDate.getMonth();
+                lastYear = currentDate.getFullYear();
+              }
               continue;
             }
 
@@ -337,7 +345,7 @@
 
             if (data.length - 1 > 366) {
 
-              if (!currentDate || lastYear !== currentDate.getFullYear()) {
+              if (i === data.length - 1 || lastYear !== currentDate.getFullYear()) {
 
                 var saveCurrentYear = currentDate.getFullYear();
                 currentDate.setDate(1);
@@ -381,7 +389,9 @@
                 lastItem = item;
               }
             } else {
-              currentDate.setDate(currentDate.getDate() - 1);
+              if (data.length > 2 && i !== data.length - 1) {
+                currentDate.setDate(currentDate.getDate() - 1);
+              }
 
               productExpense = parseFloat((item.productExpenseSum - lastItem.productExpenseSum).toFixed(2));
               serviceExpense = parseFloat((item.serviceExpenseSum - lastItem.serviceExpenseSum).toFixed(2));
@@ -396,6 +406,24 @@
 
               lastItem = item;
             }
+          }
+
+          if (data.length === 1) {
+            item = data[0];
+            currentDate = new Date(item.date);
+
+            for (var k = 0; k < splitPath.length; k++) {
+              var prop = splitPath[k];
+              item = item[prop];
+            }
+            firstResult.push({
+              date: currentDate,
+              y: parseFloat((item.productExpenseSum).toFixed(2))
+            });
+            secondResult.push({
+              date: currentDate,
+              y: parseFloat((item.serviceExpenseSum).toFixed(2))
+            });
           }
 
           var firstResultStart = firstResult[0];
