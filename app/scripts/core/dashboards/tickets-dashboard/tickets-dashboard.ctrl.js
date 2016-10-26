@@ -84,15 +84,7 @@
               $scope.ticketsPriority = [];
 
               var low = 0, medium = 0, high = 0;
-              if ($scope.dashboard && $scope.startDashboard) {
-                low = $scope.dashboard.lowPriority - $scope.startDashboard.lowPriority;
-                medium = $scope.dashboard.mediumPriority - $scope.startDashboard.mediumPriority;
-                high = $scope.dashboard.highPriority - $scope.startDashboard.highPriority;
-
-                $scope.ticketsPriority.push({ count: low });
-                $scope.ticketsPriority.push({ count: medium });
-                $scope.ticketsPriority.push({ count: high });
-              } else if ($scope.dashboard) {
+              if ($scope.dashboard) {
                 low = $scope.dashboard.lowPriority;
                 medium = $scope.dashboard.mediumPriority;
                 high = $scope.dashboard.highPriority;
@@ -147,6 +139,11 @@
                 }
                 $scope.dashboard.averageResponseTime = Math.round(sumTicketsResponseTime / (count || 1) / 60) || 0;
               }
+
+              $scope.totalTicketsData = getDataForChart($scope.allDashboards, 'totalTickets');
+              $scope.totalTicketsTicks = $scope.totalTicketsData.map(function (item) {
+                return item.date;
+              });
 
               $scope.openTicketsData = getDataForChart($scope.allDashboards, 'openTickets');
               $scope.openTicketsTicks = $scope.openTicketsData.map(function (item) {

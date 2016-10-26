@@ -13,25 +13,41 @@
     <section class="dashboard-main">
       <div class="row">
         <div class="col-lg-4 col-xs-6">
-          <div class="stats">
+          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
                   Total tickets
                 </p>
                 <div class="stats__main--count font-yellow">
-                  <p>{{ (startDashboard ? dashboard.totalTickets - startDashboard.totalTickets : dashboard.totalTickets)
-                    || 0 }}</p>
+                  <p>{{  dashboard.totalTickets || 0 }}</p>
                 </div>
               </div>
               <div class="stats__icon bg-yellow">
                 <img src="images/input-icons/ticket-white.png" alt="">
               </div>
             </div>
+            <div class="back">
+              <p class="board-head">
+                Total tickets
+              </p>
+              <div ng-if="!loading && totalTicketsData && totalTicketsData.length"
+                   d3chart data="totalTicketsData" class="open-tickets-chart"
+                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
+                        ticks="{{ totalTicketsTicks.length }}" max-labels-count="6"
+                        tick-values="totalTicketsTicks"></d3axis>
+                <d3axis name="total" orientation="left"></d3axis>
+                <d3line x="date" y="total"></d3line>
+              </div>
+              <div ng-if="!loading && (!totalTicketsData || !totalTicketsData.length)" class="no-data-message">
+                There is no data.
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-lg-4 col-xs-6">
-          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
@@ -83,7 +99,7 @@
           </div>
         </div>
         <div class="col-lg-4 col-xs-6">
-          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
@@ -117,7 +133,7 @@
           </div>
         </div>
         <div class="col-lg-4 col-xs-6">
-          <div class="stats" ng-class="{'flipped': allDashboards.length !== 1 || (dateRange.length !== 1 && loading)}">
+          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
@@ -265,7 +281,7 @@
               <li class="top-ten__list--point-head clearfix">
                 <div class="col-xs-4 point-name"><p>Name</p></div>
                 <div class="col-xs-4"><p>Email</p></div>
-                <div class="col-xs-2"><p>Created</p></div>
+                <div class="col-xs-2"><p>Claimed</p></div>
                 <div class="col-xs-2"><p>Closed</p></div>
               </li>
               <div class="scrolled-list">
