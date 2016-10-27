@@ -140,7 +140,7 @@
                 $scope.dashboard.averageResponseTime = Math.round(sumTicketsResponseTime / (count || 1) / 60) || 0;
               }
 
-              $scope.totalTicketsData = getDataForChart($scope.allDashboards, 'totalTickets');
+              $scope.totalTicketsData = getDataForChart($scope.allDashboards, 'totalTickets', null, null, true);
               $scope.totalTicketsTicks = $scope.totalTicketsData.map(function (item) {
                 return item.date;
               });
@@ -167,7 +167,7 @@
           }
         }
 
-        function getDataForChart(data, property, transformer, counterTransformer) {
+        function getDataForChart(data, property, transformer, counterTransformer, isLastValue) {
           var result = [], lastMonth, lastYear,
             groupedForMonth = 0,
             groupedForYear = 0,
@@ -186,7 +186,11 @@
                 currentDate.setDate(1);
                 currentDate.setMonth(0);
                 currentDate.setFullYear(lastYear);
-                result.push({ date: currentDate, total: parseFloat((groupedForYear / counter).toFixed(2)) });
+                if (isLastValue) {
+                  result.push({ date: currentDate, total: data[i - 1][property] });
+                } else {
+                  result.push({ date: currentDate, total: parseFloat((groupedForYear / counter).toFixed(2)) });
+                }
                 lastYear = undefined;
                 counter = 0;
                 groupedForYear = 0;
@@ -199,7 +203,11 @@
                 currentDate.setDate(1);
                 currentDate.setMonth(0);
                 currentDate.setFullYear(lastYear);
-                result.push({ date: currentDate, total: parseFloat((groupedForYear / counter).toFixed(2)) });
+                if (isLastValue) {
+                  result.push({ date: currentDate, total: item[property] });
+                } else {
+                  result.push({ date: currentDate, total: parseFloat((groupedForYear / counter).toFixed(2)) });
+                }
                 lastYear = undefined;
                 counter = 0;
                 groupedForYear = 0;
@@ -212,7 +220,11 @@
               if (lastMonth !== currentDate.getMonth()) {
                 currentDate.setDate(1);
                 currentDate.setMonth(lastMonth);
-                result.push({ date: currentDate, total: parseFloat((groupedForMonth / counter).toFixed(2)) });
+                if (isLastValue) {
+                  result.push({ date: currentDate, total: data[i - 1][property] });
+                } else {
+                  result.push({ date: currentDate, total: parseFloat((groupedForMonth / counter).toFixed(2)) });
+                }
                 lastMonth = undefined;
                 counter = 0;
                 groupedForMonth = 0;
@@ -224,7 +236,11 @@
               if (i === data.length - 1) {
                 currentDate.setDate(1);
                 currentDate.setMonth(lastMonth);
-                result.push({ date: currentDate, total: parseFloat((groupedForMonth / counter).toFixed(2)) });
+                if (isLastValue) {
+                  result.push({ date: currentDate, total: data[i][property] });
+                } else {
+                  result.push({ date: currentDate, total: parseFloat((groupedForMonth / counter).toFixed(2)) });
+                }
                 lastMonth = undefined;
                 counter = 0;
                 groupedForMonth = 0;
