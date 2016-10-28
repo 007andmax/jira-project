@@ -1,3 +1,27 @@
+.hardware-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #fff;
+  padding-bottom: 20px;
+}
+.hardware .password {
+  position: relative;
+}
+.hardware .password .icn-sm {
+  position: absolute;
+  right: -20px;
+}
+.hardware .password .icn-show-password {
+  top: 8px;
+}
+.hardware .password .icn-hide-password {
+  top: 6px;
+}
 .hardware {
   width: 80%;
   margin: 20px auto; }
@@ -50,7 +74,8 @@
           text-align: right; }
       .hardware__wrapper--report h2 {
         margin: 0 0 15px 0; }
-      .hardware__wrapper--report p {
+      .hardware__wrapper--report p,
+      .hardware__wrapper--report .date {
         line-height: 24px;
         font-size: 18px; }
       .hardware__wrapper--report .info-row {

@@ -1,174 +1,58 @@
-<div class="hardware">
-  <div class="hardware__control-panel">
-    <div class="hardware__control-panel--btn">
-      <img src="images/input-icons/printer.png" alt="">
-      <p>Print</p>
+<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader>
+
+  <div class="container-ticket-list pull-left">
+    <div class="empty-page-helper" ng-if="!tickets.length && !loadingOrRendering">
+      <p style="opacity: 0.57">There are no tickets</p>
     </div>
-    <div class="hardware__control-panel--btn">
-      <img src="images/input-icons/edit.png" alt="">
-      <p>Edit</p>
-    </div>
-    <div class="hardware__control-panel--btn">
-      <img src="images/input-icons/reload.png" alt="">
-      <p>Restart</p>
-    </div>
-    <div class="hardware__control-panel--btn">
-      <img src="images/input-icons/logout.png" alt="">
-      <p>Log out</p>
-    </div>
-    <div class="hardware__control-panel--btn">
-      <img src="images/input-icons/garbage.png" alt="">
-      <p>Delete</p>
+
+    <div class="ticket-list">
+      <ul class="tickets" tu-tickets-container>
+        <li class="ticket {{ ticket.priorityLevel.toLowerCase() }}-priority-border" ng-repeat="ticket in tickets track by ticket.id"
+            ng-controller="quicktech.core.tickets.ticketCtrl" on-finish-render="onFinishRendering()"
+            ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
+            ui-sref="tickets.details({ ticketId: ticket.id, remoteParams: null })">
+          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="hardware__wrapper">
-    <div class="hardware__wrapper--report">
-      <div class="main-info">
-        <div class="main-info--gadget">
-          <h2><strong>Jarred Office PC</strong></h2>
-          <p><strong>Manufacturer:</strong>Whitebox</p>
-          <p><strong>Model:</strong>Tower System</p>
-          <p><strong>Serial Number:</strong></p>
-          <p><strong>Asset Tog:</strong></p>
-          <p><strong>Install Date:</strong>19.10.2016</p>
-          <p><strong>Warranty Date:</strong>19.10.2020</p>
 
-        </div>
-        <div class="main-info--user">
-          <h2><strong>Demension Dentistry</strong></h2>
-          <p>51 Sunpark Dr SE #302 Calgary, AB, T2X 3V4</p>
-          <p><strong>Phone number:</strong>(403) 201-3248</p>
-          <p><strong>Email:</strong>infod@demensiondenistry.com</p>
+  <div ui-view></div>
 
-        </div>
-      </div>
-      <div class="info-row">
-        <div class="network-info info-label">
-          <p><strong>Network Adapter:</strong>Intel 82579V Gigabit Network Connection</p>
-          <p><strong>IP Address:</strong>192.168.1.204</p>
-          <p><strong>Subnet Mask:</strong>255.255.255.0</p>
-          <p><strong>Prefered DNS Server:</strong> 192.168.204.254</p>
-          <p><strong>Gateway:</strong>192.168.204.254</p>
-          <p><strong>External IP:</strong>95.51.169.86</p>
-          <p><strong>Link Speed:</strong>10/100/1000 (Gigabit)</p>
-          <p><strong>MAC Address:</strong>11 22 33 44 55 66</p>
-        </div>
-        <div class="device-info info-label">
-          <p><strong>Motherboard:</strong>ASUSTeK Computer INC Rampage III Formula Rev 1.xx</p>
-          <p><strong>SN:</strong>107933510000126</p>
-          <p><strong>Bios Version:</strong>XX.XX.XX</p>
-          <p><strong>CPU:</strong>Intel® Core™ i7-950 Processor (8M Cache, 3.06 GHz, 4.80 GT/s Intel® QPI)</p>
-          <p><strong>Ram:</strong>24568 Megabytes Usable Installed Memory</p>
-          <p><strong>Windows info:</strong>Windows 7 Ultimate N (x64) Service Pack 1 (build 7601)
-            7XD71-2X76P-84QVF-4VQRV-9K936</p>
-          <p><strong>Office Professinal Plus 2013:</strong>YC7DK-G2NP3-2QQC3-J6H88-GVGXT expires 26/07/2016</p>
-          <p><strong>Office Account:</strong>jarett@activeis.ca</p>
-          <p><strong>Password:</strong>********</p>
-        </div>
-      </div>
-      <div class="info-row">
-        <div class="hard-drive extra info-label">
-          <div class="hard-drive__point ">
-            <div class="hard-drive__point--info">
-              <p><strong>C:</strong>(NTFS on drive 1)
-              479.40 GB 37.01 GB free</p>
-              <p><strong>Model:</strong> ST500DM001</p>
-              <p><strong>SN:</strong>2S76AG</p>
-              <p><strong>OS Drive:</strong>Windows</p>
-            </div>
-            <div class="hard-drive__point--icon">
-              <img src="images/input-icons/pie.png" alt="">
-
-            </div>
-          </div>
-          <div class="hard-drive__point ">
-            <div class="hard-drive__point--info">
-              <p><strong>C:</strong>(NTFS on drive 1)
-                479.40 GB 37.01 GB free</p>
-              <p><strong>Model:</strong> ST500DM001</p>
-              <p><strong>SN:</strong>2S76AG</p>
-            </div>
-            <div class="hard-drive__point--icon">
-              <img src="images/input-icons/pie.png" alt="">
-
-            </div>
-          </div>
-          <div class="hard-drive__point ">
-            <div class="hard-drive__point--info">
-              <p><strong>C:</strong>(NTFS on drive 1)
-                479.40 GB 37.01 GB free</p>
-              <p><strong>Model:</strong> ST500DM001</p>
-              <p><strong>SN:</strong>2S76AG</p>
-            </div>
-            <div class="hard-drive__point--icon">
-              <img src="images/input-icons/pie.png" alt="">
-
-            </div>
-          </div>
-          <div class="hard-drive__point ">
-            <div class="hard-drive__point--info">
-              <p><strong>C:</strong>(NTFS on drive 1)
-                479.40 GB 37.01 GB free</p>
-              <p><strong>Model:</strong> ST500DM001</p>
-              <p><strong>SN:</strong>2S76AG</p>
-            </div>
-            <div class="hard-drive__point--icon">
-              <img src="images/input-icons/pie.png" alt="">
-
-            </div>
-          </div>
-        </div>
-        <div class="security info-label">
-          <div class="security__antivirus">
-            <div class="security__antivirus--info">
-              <p><strong>Antivirus:</strong> <br>
-                Windows Defender Version 4.9.10586.0 Virus Definitions Version 17/5/2016 Rev 1.219.2175.0
-              </p>
-            </div>
-            <div class="security__antivirus--icon">
-              <img src="images/input-icons/shield.png" alt="">
-            </div>
-          </div>
-          <div class="security__updates">
-            <div class="security__updates--info">
-              <p><strong>Security Updates:</strong> <br>
-                7 Missing Sucurity Updates
-              </p>
-              <p><strong>Last install:</strong> <br>
-                13/05/2016 3:00:16 AM Hotfixes from Microsoft Update (agent version 7.6.7601.19161)
-              </p>
-            </div>
-            <div class="security__updates--icon">
-              <img src="images/input-icons/shield-non.png" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="equipment info-label">
-        <ul class="equipment__list"><p><strong>Printers:</strong></p>
-          <li>Lexmark X544 XL Laserjet Printer</li>
-          <li>HP Officejet Pro 6830 e-All-in-One</li>
-          <li>HP Laserjet Pro 200 M276DW All-in-One</li>
-          <li>Lexmark X544 XL Laserjet Printer</li>
-          <li>HP Officejet Pro 6830 e-All-in-One</li>
-          <li>HP Laserjet Pro 200 M276DW All-in-One</li>
-          <li>Lexmark X544 XL Laserjet Printer</li>
-          <li>HP Officejet Pro 6830 e-All-in-One</li>
-          <li>HP Laserjet Pro 200 M276DW All-in-One</li>
-          <li>Lexmark X544 XL Laserjet Printer</li>
-          <li>HP Officejet Pro 6830 e-All-in-One</li>
-          <li>HP Laserjet Pro 200 M276DW All-in-One</li>
-          <li>Lexmark X544 XL Laserjet Printer</li>
-          <li>HP Officejet Pro 6830 e-All-in-One</li>
-          <li>HP Laserjet Pro 200 M276DW All-in-One</li>
-          <li>Lexmark X544 XL Laserjet Printer</li>
-          <li>HP Officejet Pro 6830 e-All-in-One</li>
-          <li>HP Laserjet Pro 200 M276DW All-in-One</li>
-          <li>Lexmark X544 XL Laserjet Printer</li>
-          <li>HP Officejet Pro 6830 e-All-in-One</li>
-          <li>HP Laserjet Pro 200 M276DW All-in-One</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 </div>
+
+<!--<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader ng-if="currentUser.isOwner">-->
+  <!--<div class="container-ticket-list pull-left" tu-tickets-container>-->
+
+    <!--<div class="ticket-list" upload-admin-spam="true">-->
+
+      <!--<ul class="tickets">-->
+
+        <!--<li class="ticket-type" ng-if="listType === 'spam' && tickets && tickets.length">-->
+          <!--<small><b>TICKETS MARKED AS SPAM</b></small>-->
+        <!--</li>-->
+
+        <!--<li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)" ticket-review-size-->
+            <!--ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"-->
+            <!--ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">-->
+          <!--<div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>-->
+        <!--</li>-->
+
+        <!--<li class="ticket-type" ng-if="reportSpamTickets && reportSpamTickets.length">-->
+          <!--<small><b>TICKETS REPORTED AS SPAM</b></small>-->
+        <!--</li>-->
+
+        <!--<li class="ticket" ng-repeat="ticket in reportSpamTickets"-->
+            <!--ng-init="onReportedAsSpamTicketRendering($last)" ticket-review-size-->
+            <!--ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"-->
+            <!--ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">-->
+          <!--<div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>-->
+        <!--</li>-->
+
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <!--<div ui-view ticket-fixed-header></div>-->
+
+<!--</div>-->

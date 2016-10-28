@@ -155,6 +155,12 @@
           $scope.companyProfileHeader.unCheckAll();
         });
 
+        $scope.getPrimaryContact = function (companyId) {
+          return UsersService.getAllByCompanyId(companyId).find(function (user) {
+            return user.isContact;
+          });
+        };
+
         $scope.toggleCollapsed = function () {
           $scope.isCollapsedGraph = !$scope.isCollapsedGraph;
         };

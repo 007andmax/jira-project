@@ -732,6 +732,15 @@
         return history;
       }
 
+      function getOneById(agentId, companyId) {
+        return Utils.findById(storage.devices[companyId], agentId);
+      }
+
+      function saveReportEditedFields(companyId, agentId, dto, callback) {
+        var future = $http.post('/devices/report/edit', { companyId: companyId, deviceId: agentId, field: dto });
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         downloadAgent: downloadAgent,
         sendDownloadAgentLink: sendDownloadAgentLink,
@@ -761,6 +770,8 @@
         devicePasswordShown: devicePasswordShown,
         getDeviceReports: getDeviceReports,
         getOneTimeHistory: getOneTimeHistory,
+        getOneById: getOneById,
+        saveReportEditedFields: saveReportEditedFields,
         _addInitListener: _addInitListener
       }
     }

@@ -3,9 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.devicesTabCtrl',
-    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService',
+    ['$scope', 'DevicesService', 'quicktech.common.services.RemoteAccessService', 'ConstantsService', 'CompaniesService',
       'quicktech.common.services.SharedStateService', '$rootScope', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, DevicesService, RemoteAccessService, ConstantsService, SharedStateService, $rootScope, UserConfirmationsService) {
+      function ($scope, DevicesService, RemoteAccessService, ConstantsService, CompaniesService, SharedStateService,
+                $rootScope, UserConfirmationsService) {
 
         var globalSearch = SharedStateService.getSharedState('globalSearch');
         var constVersion = ConstantsService.getConstant('rest.server.agent.version', function (resp) {
@@ -97,26 +98,29 @@
           });
         };
 
-        $scope.getDeviceReport = function (agentId) {
-          DevicesService.getDeviceReports([agentId], $scope.company.id, function (resp) {
+        $scope.getDeviceReport = function (agent) {
+          DevicesService.getDeviceReports([agent.agentId], $scope.company.id, function (resp) {
             var report = resp.reports[0],
               agentId = report.agentId;
             delete report.agentId;
             groupSingleFields(report);
 
             $scope.deviceReport = {};
+            report.agent = agent;
+            report.company = CompaniesService.getOneById(resp.companyId);
+            report.primaryContact = $scope.getPrimaryContact(resp.companyId);
+            report.address = resp.address;
             $scope.deviceReport[agentId] = report;
-
           });
         };
 
         function groupSingleFields(report) {
-          report['General'] = {};
+          report.general = {};
           for (var prop in report) {
             var value = report[prop];
 
             if (typeof value !== 'object') {
-              report['General'][prop] = value;
+              report.general[prop] = value;
               delete report[prop];
             }
           }

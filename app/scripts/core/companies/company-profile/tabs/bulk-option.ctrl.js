@@ -81,6 +81,10 @@
 
               delete report.agentId;
               groupSingleFields(report);
+              report.agent = DevicesService.getOneById(agentId, resp.companyId);
+              report.company = CompaniesService.getOneById(resp.companyId);
+              report.primaryContact = $scope.getPrimaryContact(resp.companyId);
+              report.address = resp.address;
               $scope.deviceReport[agentId] = report;
             }
 
@@ -99,12 +103,12 @@
         };
 
         function groupSingleFields(report) {
-          report['General'] = {};
+          report.general = {};
           for (var prop in report) {
             var value = report[prop];
 
             if (typeof value !== 'object') {
-              report['General'][prop] = value;
+              report.general[prop] = value;
               delete report[prop];
             }
           }

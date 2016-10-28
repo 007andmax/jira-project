@@ -1,54 +1,259 @@
-<div class="report-device-wrapper" prevent-hash-change="close()"
-     ng-controller="quicktech.core.companies.deviceReports">
-  <div ng-repeat="(agentId, report) in data" ng-if="!isReportClosed[$index]"
-       ng-init="reportNotEmpty = isNotEmptyObject(report); isReportClosed[$index] = false">
-    <div class="report-device-wrapper__title" fixed-block-top=".report-device-wrapper"
-         offset-top="0" background-color="#fff">
-      <div class="close" ng-click="closeReport($index)"><i class="icn-sm icn-remove-token"></i></div>
-      <h2>#{{$index + 1}} Report {{ getDeviceNameByAgentId(agentId) }}</h2>
+<div class="hardware-wrap" prevent-hash-change="close()" ng-controller="quicktech.core.companies.deviceReports">
+  <div class="hardware">
+    <div class="hardware__control-panel">
+      <div class="hardware__control-panel--btn">
+        <img src="images/input-icons/printer.png" alt="">
+        <p>Print</p>
+      </div>
+      <div ng-if="!showEdit" class="hardware__control-panel--btn" ng-click="toggleEdit()">
+        <img src="images/input-icons/edit.png" alt="">
+        <p>Edit</p>
+      </div>
+      <div ng-if="showEdit" class="hardware__control-panel--btn" ng-click="saveEditedFields()"
+           custom-disabled="{{ saveInProgress }}">
+        <img src="images/input-icons/edit.png" alt="">
+        <p>Save</p>
+      </div>
+      <div class="hardware__control-panel--btn" ng-click="restart(currentAgent)">
+        <img src="images/input-icons/reload.png" alt="">
+        <p>Restart</p>
+      </div>
+      <div class="hardware__control-panel--btn" ng-click="shutdown(currentAgent)">
+        <img src="images/input-icons/logout.png" alt="">
+        <p>Log out</p>
+      </div>
+      <div class="hardware__control-panel--btn" ng-click="remove(currentAgent)">
+        <img src="images/input-icons/garbage.png" alt="">
+        <p>Delete</p>
+      </div>
     </div>
-    <div class="row" style="margin-bottom: 40px">
-      <div class="col-xs-12">
-        <div class="table-wrap">
-          <table class="table-content table-condensed" ng-if="!reportNotEmpty">
-            <tr><td><p class="table-header">Report has no information to display.</p></td></tr>
-          </table>
-          <table class="table-content table-condensed" ng-if="reportNotEmpty">
+    <div class="hardware__wrapper" ng-repeat="(agentId, report) in data track by agentId">
+      <div class="hardware__wrapper--report">
+        <div class="main-info">
+          <div class="main-info--gadget">
+            <h2><strong>{{ report.agent ? (report.agent.hostName || report.agent.ip) : 'Unknown' }}</strong></h2>
+            <p>
+              <strong>Manufacturer:</strong>
+              <span ng-if="!showEdit">&nbsp;{{ dto.manufacturer }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.manufacturer">
+            </p>
+            <p>
+              <strong>Model:</strong>
+              <span ng-if="!showEdit">&nbsp;{{ dto.model }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.model">
+            </p>
+            <p>
+              <strong>Serial Number:</strong>
+              <span ng-if="!showEdit">&nbsp;{{ dto.serial_number }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.serial_number">
+            </p>
+            <p>
+              <strong>Asset Tag:</strong>
+              <span ng-if="!showEdit">&nbsp;{{ dto.asset_tag }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.asset_tag">
+            </p>
+            <div class="date">
+              <strong>Install Date:</strong>
+              <span ng-if="!showEdit">
+                {{ isInstallDateChanged ? ((parseDate(dto.install_date) || '') | date: 'dd.MM.yyyy') : '' }}
+              </span>
+              <div ng-show="showEdit" class="dropdown">
 
-            <tbody ng-init="general = report['General']" ng-if="isNotEmptyObject(report['General'])">
-            <tr>
-              <td colspan="2"><p class="table-header">General</p></td>
-            </tr>
-            <tr ng-repeat="(deepName, deepValue) in general" ng-if="deepValue">
-              <td><p>{{ userReadable(deepName) }}</p></td>
-              <td><p>{{ deepValue }}</p></td>
-            </tr>
-            </tbody>
+                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                <input type="text" qt-data-time-picker class="form-control has-dropdown"
+                       data-toggle="dropdown" aria-expanded="false" readonly
+                       placeholder="Install Date" ng-model="dto.install_date">
 
-            <tbody ng-repeat-start="(name, value) in report"
-                   ng-if="name !== 'General' && qtIsObject(value) && isNotEmptyObject(value)">
-            <tr>
-              <td colspan="2"><p class="table-header">{{ userReadable(name) }}</p></td>
-            </tr>
-            <tr ng-repeat="(deepName, deepValue) in value" ng-if="deepValue">
-              <td><p>{{ userReadable(deepName) }}</p></td>
-              <td><p>{{ formatValueIfNeeded(deepValue, deepName) }}</p></td>
-            </tr>
-            </tbody>
+              </div>
+            </div>
+            <div class="date">
+              <strong>Warranty Date:</strong>
+              <span ng-if="!showEdit">
+                {{ isWarrantyDateChanged ? ((parseDate(dto.warranty_date) || '') | date: 'dd.MM.yyyy') : '' }}
+              </span>
+              <div ng-show="showEdit" class="dropdown">
 
-            <tbody ng-repeat-end ng-if="name !== 'General' && qtIsArray(value) && value.length">
-            <tr>
-              <td colspan="2"><p class="table-header">{{ userReadable(name) }}</p></td>
-            </tr>
-            <tr ng-repeat-start="obj in value">
-              <td colspan="2"><p class="table-subheader">#{{ $index + 1 }}</p></td>
-            </tr>
-            <tr ng-repeat-end ng-repeat="(deepName, deepValue) in obj" ng-if="deepValue">
-              <td><p>{{ userReadable(deepName) }}</p></td>
-              <td><p>{{ formatValueIfNeeded(deepValue, deepName) }}</p></td>
-            </tr>
-            </tbody>
-          </table>
+                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                <input type="text" qt-data-time-picker class="form-control has-dropdown"
+                       data-toggle="dropdown" aria-expanded="false" readonly
+                       placeholder="Warranty Date" ng-model="dto.warranty_date">
+
+              </div>
+            </div>
+
+          </div>
+          <div class="main-info--user">
+            <h2><strong>{{ report.company.name }}</strong></h2>
+            <p style="white-space: pre-wrap;">{{ report.address }}</p>
+            <p><strong>Phone number:</strong>&nbsp;{{ getPrimaryPhoneNumber(report.primaryContact.phoneNumbers) }}</p>
+            <p><strong>Email:</strong>&nbsp;{{ report.primaryContact.primaryEmail }}</p>
+
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="network-info info-label">
+            <p>
+              <strong>Network Adapter:</strong>
+              <span ng-if="report.networkAdapters && report.networkAdapters.length">
+              &nbsp;{{ report.networkAdapters[0].description }}
+            </span>
+            </p>
+            <p>
+              <strong>IP Address:</strong>
+              <span ng-if="report.networkAdapters && report.networkAdapters.length">
+              &nbsp;{{ report.networkAdapters[0].ip_address }}
+            </span>
+            </p>
+            <p>
+              <strong>Subnet Mask:</strong>
+              <span ng-if="report.networkAdapters && report.networkAdapters.length">
+              &nbsp;{{(report.networkAdapters[0].subnet || '').split(';')[0] || '' }}
+            </span>
+            </p>
+            <p>
+              <strong>Preferred DNS Server:</strong>
+              <span ng-if="report.networkAdapters && report.networkAdapters.length">
+              &nbsp;{{ report.networkAdapters[0].dns }}
+            </span>
+            </p>
+            <p>
+              <strong>Gateway:</strong>
+              <span ng-if="report.networkAdapters && report.networkAdapters.length">
+              &nbsp;{{ report.networkAdapters[0].gateway }}
+            </span>
+            </p>
+            <p>
+              <strong>External IP:</strong>&nbsp;{{ report.general.externalIp }}</p>
+            <p>
+              <strong>Link Speed:</strong>
+              <span ng-if="report.networkAdapters && report.networkAdapters.length">
+              &nbsp;{{ report.networkAdapters[0].speed | fileSizeFilter: true }}
+            </span>
+            </p>
+            <p>
+              <strong>MAC Address:</strong>
+              <span ng-if="report.networkAdapters && report.networkAdapters.length">
+              &nbsp;{{ formatMacAddress(report.networkAdapters[0].mac) }}
+            </span>
+            </p>
+          </div>
+          <div class="device-info info-label">
+            <p><strong>Motherboard:</strong>
+              &nbsp;{{ report.motherboard.motherboardManufacturer + ' ' }}
+              {{ report.motherboard.motherboardProduct }} {{ report.motherboard.motherboardVersion }}
+            </p>
+            <p><strong>SN:</strong>&nbsp;{{ report.motherboard.motherboardSerial }}</p>
+            <p><strong>Bios Version:</strong>&nbsp;{{ (report.bios.biosCaption || '').split('Ver: ').pop() || '' }}</p>
+            <p>
+              <strong>CPU:</strong>
+              <span ng-if="report.processors && report.processors.length">
+              &nbsp;{{ report.processors[0].processorName }}
+            </span>
+            </p>
+            <p>
+              <strong>Ram:</strong>
+              <span ng-if="report.ramSlots && report.ramSlots.length">
+              &nbsp;{{ report.ramSlots[0].ramCapacity | fileSizeFilter }}
+            </span>
+            </p>
+            <p>
+              <strong>Windows info:</strong>
+              &nbsp;{{ report.operationSystem.systemCaption + ' ' + report.operationSystem.systemServicePack }}
+              <br>{{ report.general.WindowsLicenseKey }}
+            </p>
+            <p ng-if="report.general.OfficeName">
+              <strong>{{ report.general.OfficeName }}:</strong>
+              &nbsp;{{ report.general.OfficeLicenseKey }}
+            </p>
+            <p>
+              <strong>Office Account:</strong>
+              <span ng-if="!showEdit">{{ dto.account }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.account" autocomplete="off">
+            </p>
+            <p>
+              <strong>Password:</strong>
+              <span ng-if="!showEdit && dto.password" class="password">
+                {{ dto.password }}
+                <i class="icn-sm {{ passwordShown ? 'icn-hide-password' : 'icn-show-password' }}"
+                   ng-click="showPassword()"></i>
+              </span>
+              <span ng-if="showEdit" class="password">
+                <input type="{{ passwordShown ? 'text' : 'password' }}"
+                       ng-model="dto.password" autocomplete="off">
+                <i class="icn-sm {{ passwordShown ? 'icn-hide-password' : 'icn-show-password' }}"
+                   ng-click="showPassword()"></i>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="hard-drive info-label" ng-class="{'extra': report.logicalDisks.length > 2}">
+            <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks track by disk.id">
+              <div class="hard-drive__point--info">
+                <p><strong>{{ disk.device_id }}</strong>
+                  &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
+                  {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }}</p>
+                <p><strong>Model:</strong>{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
+                <p><strong>SN:</strong>{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
+                <p ng-if="disk.is_system"><strong>OS Drive:</strong>Windows</p>
+              </div>
+              <div class="hard-drive__point--icon">
+                <img src="images/input-icons/pie.png" alt="">
+
+              </div>
+            </div>
+            <div class="hard-drive__point" ng-if="!(report.logicalDisks && report.logicalDisks.length)">
+              <p style="text-align: center;width: 200%;">No Hard Drives detected</p>
+            </div>
+          </div>
+          <div class="security info-label">
+            <div class="security__antivirus">
+              <div class="security__antivirus--info">
+                <p><strong>Antivirus:</strong>
+                  <span ng-if="!(report.antivirus && report.antivirus.length)">&nbsp;no antivirus installed</span>
+                  <br>
+                  <span ng-if="report.antivirus && report.antivirus.length">
+                  {{ report.antivirus[0].displayName }} <br> Version {{ report.antivirus[0].version }}
+                </span>
+                </p>
+              </div>
+              <div class="security__antivirus--icon">
+                <img
+                  ng-if="report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate"
+                  src="images/input-icons/shield.png" alt="">
+                <img
+                  ng-if="!(report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate)"
+                  src="images/input-icons/shield-non.png" alt="">
+              </div>
+            </div>
+            <div class="security__updates">
+              <div class="security__updates--info">
+                <p>
+                  <strong>Last install:</strong>
+                  <span ng-if="!(report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion)">
+                    &nbsp;no security installed
+                  </span>
+                  <br>
+                  <span ng-if="report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion">
+                    {{ parseDate(report.wuaInfo.lastInstall) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
+                    Hotfixes from Microsoft Update (agent version {{ report.wuaInfo.wuaVersion }})
+                  </span>
+                </p>
+              </div>
+              <div class="security__updates--icon">
+                <img ng-if="report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion"
+                     src="images/input-icons/shield.png" alt="">
+                <img ng-if="!(report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion)"
+                     src="images/input-icons/shield-non.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="equipment info-label">
+          <ul class="equipment__list"><p ng-if="report.printers && report.printers.length"><strong>Printers:</strong></p>
+            <li ng-repeat="printer in report.printers">{{ printer.printerName }}</li>
+            <li ng-if="!(report.printers && report.printers.length)"> No Printers detected</li>
+          </ul>
         </div>
       </div>
     </div>
