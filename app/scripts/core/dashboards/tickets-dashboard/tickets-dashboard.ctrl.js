@@ -81,6 +81,9 @@
               }
               $scope.dashboard = $scope.allDashboards[$scope.allDashboards.length - 1];
 
+              $scope.closedTickets = $scope.allDashboards.reduce(function (sum, dashboard) {
+                return sum + dashboard.closedTickets;
+              }, 0);
               $scope.ticketsPriority = [];
 
               var low = 0, medium = 0, high = 0;

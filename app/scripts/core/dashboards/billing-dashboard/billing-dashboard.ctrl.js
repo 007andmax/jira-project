@@ -235,7 +235,7 @@
               for (var i = 0; i < $scope.allDashboards.length; i++) {
                 var dashboard = $scope.allDashboards[i],
                   lastDashboard = $scope.allDashboards[i - 1] || $scope.startDashboard;
-                dashboard.totalProjection = (dashboard.totalSales - (lastDashboard ? lastDashboard.totalSales : 0)) + dashboard.totalReceivable;
+                dashboard.totalProjection = (dashboard.totalSales - (lastDashboard ? lastDashboard.totalSales : 0)) + dashboard.totalReceivable + dashboard.totalInvoicable;
               }
               $scope.totalProjectionData = getDataForLineChart($scope.allDashboards, 'totalProjection');
               $scope.totalProjectionTicks = $scope.totalProjectionData.map(function (item) {

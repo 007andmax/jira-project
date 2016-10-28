@@ -247,24 +247,20 @@
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">
               <li class="top-ten__list--point-head clearfix">
-                <div class="col-xs-4 point-name"><p>Company</p></div>
-                <div class="col-xs-5"><p>Email</p></div>
-                <div class="col-xs-3"><p>By revenue</p></div>
+                <div class="col-xs-8 point-name"><p>Company</p></div>
+                <div class="col-xs-4"><p>By revenue</p></div>
               </li>
               <div class="scrolled-list">
                 <li class="top-ten__list--point"
                     ng-repeat="company in dashboard.topCompanies | orderBy: '-revenue' track by company.id">
-                  <div class="col-xs-4 point-name">
+                  <div class="col-xs-8 point-name">
                     <div class="list-avatar">
                       <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
                     </div>
                     <p>{{ getCompanyById(company.id).name }}</p>
                   </div>
-                  <div class="col-xs-5">
-                    <p class="text-muted">{{ getPrimaryContact(company.id).primaryEmail }}</p>
-                  </div>
-                  <div class="col-xs-3">
-                    <p class="text-muted">{{ company.revenue.toFixed() || 0 }}</p>
+                  <div class="col-xs-4">
+                    <p class="text-muted">${{ company.revenue.toFixed() || 0 }}</p>
                   </div>
                 </li>
               </div>
