@@ -12,7 +12,7 @@
     </header>
     <section class="dashboard-main">
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
@@ -42,7 +42,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <div class="stats half-stats">
             <div class="stats__main">
               <p class="board-head">total sales</p>
@@ -66,7 +66,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
@@ -96,7 +96,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
             <div class="front">
               <div class="stats__main">
@@ -126,7 +126,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <div class="stats">
             <div class="front">
               <div class="stats__main">
@@ -141,20 +141,20 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-4 col-xs-6">
           <div class="stats">
             <div class="front">
               <div class="stats__main" style="height: 100%">
                 <p class="board-head">total overdue</p>
                 <div d3chart data="totalOverdueData" ng-if="!loading && !noTotalOverdueData"
-                     margin="{ top: 20, right: 40, bottom: 30, left: 40}" style="height: 70%">
+                     margin="{ top: 20, right: 40, bottom: 40, left: 40}" style="height: 65%">
                   <d3axis name="group" orientation="bottom" scale="ordinal"
                           tick-values="totalOverdueTicks"></d3axis>
                   <d3axis name="y" orientation="left" hide="true"></d3axis>
                   <d3bars x="group" y="y" width="40" preffix="$"></d3bars>
                 </div>
 
-                <div ng-if="!loading && !noTotalOverdueData">${{ dashboard.overdueSum.toFixed() || 0 }}</div>
+                <div class="total-overdue-sum"  ng-if="!loading && !noTotalOverdueData">${{ dashboard.overdueSum.toFixed() || 0 }}</div>
 
                 <div ng-if="!loading && noTotalOverdueData"
                      class="no-data-message">
@@ -167,7 +167,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-xs-12">
+        <div class="col-lg-12 col-xs-12">
           <div class="stats clearfix">
             <div class="front">
               <p class="board-head graph-ticket">
@@ -175,7 +175,7 @@
               </p>
               <div ng-if="!loading && isStackedBarsShown(managedNonManagedData)"
                    d3chart data="managedNonManagedData" class="managed-non-managed"
-                   margin="{ top: 5, right: 150, bottom: 40, left: 60}">
+                   margin="{ top: 5, right: 65, bottom: 40, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" max-labels-count="8"
                         filter="xFilter" grid="true" time-format="{{ dateFormat }}"
                         ticks="{{ managedNonManagedTicks.length }}" tick-values="managedNonManagedTicks"></d3axis>
@@ -185,6 +185,17 @@
                 <d3stacked-bars x="date" y="y" values="regular" width="{{ barsWidth }}"
                                 colors="['#c35f1b','#ffb55c']" xoffset="true"></d3stacked-bars>
               </div>
+              <div ng-if="!loading && isStackedBarsShown(managedNonManagedData)"
+                style="display: inline-block;">
+                <ul> <strong>Fixed</strong>
+                  <li style="color: #ffb55c;"><span style="color: #000">Services</span></li>
+                  <li style="color: #c35f1b;"><span style="color: #000">Products</span></li>
+                </ul>
+                <ul> <strong>Reccuring</strong>
+                  <li style="color: #00c8c4;"><span style="color: #000">Services</span></li>
+                  <li style="color: #006864;"><span style="color: #000">Products</span></li>
+                </ul>
+              </div>
 
               <div ng-if="!loading && !isStackedBarsShown(managedNonManagedData)"
                    class="no-data-message">
@@ -193,7 +204,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-xs-6">
+        <div class="col-lg-6 col-xs-6">
           <div class="chart clearfix" style="position: relative">
             <p class="board-head">
               revenue
@@ -220,7 +231,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-xs-6">
+        <div class="col-lg-6 col-xs-6">
           <div class="chart clearfix">
             <p class="board-head">
               revenue by payment method
@@ -240,7 +251,7 @@
 
           </div>
         </div>
-        <div class="col-lg-4 col-xs-12">
+        <div class="col-lg-12 col-xs-12">
           <div class="top-ten clearfix">
             <p class="board-head">
               top-10 companies
