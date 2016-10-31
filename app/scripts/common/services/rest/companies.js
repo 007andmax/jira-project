@@ -83,7 +83,7 @@
 
         if (company) {
           Utils.customizeObj(newChange.data, company);
-        } else {
+        } else if (newChange.data.accountType !== 'TECH') {
           var newClient = Utils.customizeObj(newChange.data);
           storage.companies.push(newClient);
           if (!newClient.isVendor || newClient.clientType) {
