@@ -79,7 +79,7 @@
       var companyId = newChange.data.id;
       if (newChange.action == 'COMPANY_SAVED') {
 
-        var company = Utils.findById(storage.companies, companyId);
+        var company = getOneById(companyId);
 
         if (company) {
           Utils.customizeObj(newChange.data, company);
