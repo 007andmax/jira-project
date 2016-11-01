@@ -220,7 +220,10 @@
           var def = $q.defer();
           UsersService._addInitListener(function () {
             def.resolve();
-            $rootScope.applicationLoaded = true;
+            $rootScope.servicesLoaded = true;
+            if ($rootScope.currentUserLoaded) {
+              $rootScope.applicationLoaded = true;
+            }
           });
 
           return def.promise;

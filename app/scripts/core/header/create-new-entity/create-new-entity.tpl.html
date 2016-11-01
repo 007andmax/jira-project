@@ -1,4 +1,4 @@
-<div class="create-window">
+<div class="create-window clearfix">
   <div class="close-btn btn">
     <i class="icn-sm icn-remove-token" ng-click="closeWindow()"></i>
   </div>
@@ -27,7 +27,7 @@
     </ul>
   </aside>
   <section class="general">
-    <div ng-switch="openedTab">
+    <div style="height: 588px;" ng-switch="openedTab">
       <div ng-switch-when="ticket">
         <div ng-include="'/html/scripts/core/header/create-new-entity/create-ticket/create-ticket.tpl.html'"></div>
       </div>

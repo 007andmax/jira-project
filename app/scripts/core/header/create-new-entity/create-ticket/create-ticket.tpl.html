@@ -1,10 +1,37 @@
-<form name="ticketForm" ng-controller="quicktech.createTicketCtrl">
+<form name="ticketForm" ng-controller="quicktech.createTicketCtrl" class="create-ticket-form">
 
-    <div class="modal-header clearfix">
+    <div class="modal-header create-ticket-header clearfix">
 
-      <h4 class="modal-title pull-left">Create Ticket <span class="dot-sep"></span></h4>
+      <h4 class="modal-title pull-left">Create new Ticket <span class="dot-sep"></span></h4>
       <span class="ticket-number pull-left">TKT# {{ ticketNumber }}</span>
+      <div class="priority-select pull-right">
+        <div class="form-group">
 
+          <label>Priority</label>
+
+          <div uib-dropdown class="create-dropdown">
+            <input type="text" class="form-control ticket-drop has-dropdown readonly-normal" uib-dropdown-toggle
+                   readonly>
+            <i class="icn-sm icn-caret-gray"></i>
+
+            <ul class="dropdown-menu dropdown-priority" role="menu">
+
+              <li ng-repeat="(priority, label) in ticketPriorityValue" ng-click="ticket.priorityLevel = priority">
+                <a tabindex="-1" href="javascript:void(0)">
+                  <span class="priority-dot {{ label.toLowerCase() }}"></span>{{ label }}
+                </a>
+              </li>
+
+            </ul>
+
+            <div class="default-value"><span
+              class="priority-dot {{ ticketPriorityValue[ticket.priorityLevel].toLowerCase() }}"></span> {{
+              ticketPriorityValue[ticket.priorityLevel] }}
+            </div>
+          </div>
+
+        </div>
+      </div>
       <div class="validation-msg pull-left" ng-hide="errorFileMessage"
            style="padding-left: 20px;margin-top: 4px;color: rgb(229, 57, 53);font-size: 11px;line-height: 12px;text-transform: uppercase;">
         {{ validationMessage(ticketForm) }}
@@ -28,8 +55,8 @@
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'ticketSubject')}"
            style="margin-bottom: 10px;">
-
-        <input type="text" class="form-control" placeholder="Subject"
+        <label>Subject</label>
+        <input type="text" class="form-control"
                name="ticketSubject" ng-maxlength="300"
                required="true" make-dirty-on-blur
                ng-model="ticket.subject">
@@ -38,9 +65,9 @@
       <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'note')}">
 
         <div text-editor ng-model="ticket.note" name="note" te-maxlength="5000">
-
-          <div te-editor class="form-control editor" contenteditable="true"
-               style="min-height: 92px;height: auto;border: none;" data-text="Type your message..."></div>
+          <label>Description</label>
+          <div te-editor class="form-control editor description-area" contenteditable="true"
+               style="min-height: 92px;height: auto;" ></div>
 
           <div class="form-group">
             <ul class="upload-attachments"><!--
@@ -299,7 +326,7 @@
                        ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
                        uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                        typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
-                       custom-style="{'max-height': '170px', 'overflow-y': 'auto'}">
+                       custom-style="{'max-height': '170px', 'overflow-y': 'auto', 'width': '100%'}">
 
                 <span style="position: absolute; top: 14px; right: 13px;">
                   <i class="icn-sm icn-caret-gray" ng-hide="ticketCompanyChoosen"></i>
@@ -333,34 +360,7 @@
 
             </div>
           </div>
-          <div>
-            <div class="form-group">
 
-              <label>Priority</label>
-
-              <div uib-dropdown>
-                <input type="text" class="form-control has-dropdown readonly-normal" uib-dropdown-toggle
-                       readonly>
-                <i class="icn-sm icn-caret-gray"></i>
-
-                <ul class="dropdown-menu dropdown-priority" role="menu">
-
-                  <li ng-repeat="(priority, label) in ticketPriorityValue" ng-click="ticket.priorityLevel = priority">
-                    <a tabindex="-1" href="javascript:void(0)">
-                      <span class="priority-dot {{ label.toLowerCase() }}"></span>{{ label }}
-                    </a>
-                  </li>
-
-                </ul>
-
-                <div class="default-value"><span
-                  class="priority-dot {{ ticketPriorityValue[ticket.priorityLevel].toLowerCase() }}"></span> {{
-                  ticketPriorityValue[ticket.priorityLevel] }}
-                </div>
-              </div>
-
-            </div>
-          </div>
         </li>
 
         <li>
@@ -408,9 +408,8 @@
 
           </div>
 
-          <div></div>
         </li>
-
+        <a href="#!" class="advanced-options">Advanced options</a>
         <li>
           <div class="pull-left" style="width: 100%;">
             <div style="font-weight: bold;">Notify</div>
@@ -441,16 +440,16 @@
           </div>
         </li>
 
-        <li>
+        <li class="btn-bottom" style="margin-right: 20px;">
           <div></div>
           <div style="padding-top: 10px;">
-            <div class="btn btn-lg btn-info pull-right" ng-click="saveTicket(ticketForm, true)"
-                 style="margin-left: 7px;"
+            <div class="btn btn-lg btn-success pull-right" ng-click="saveTicket(ticketForm, true)"
+                 style="margin-left: 7px; width: 190px;"
                  custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
               Create and Open
             </div>
 
-            <div class="btn btn-lg btn-info pull-right" ng-click="saveTicket(ticketForm)"
+            <div class="btn btn-primary btn-create btn-primary-outline pull-right" ng-click="saveTicket(ticketForm)"
                  custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
               Create
             </div>
