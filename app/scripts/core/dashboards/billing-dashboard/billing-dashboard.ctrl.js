@@ -266,7 +266,7 @@
                 currentDate.setDate(1);
                 currentDate.setMonth(0);
                 currentDate.setFullYear(lastYear);
-                result.push({ date: currentDate, total: parseFloat((groupedForYear / counter).toFixed(2)) });
+                result.push({ date: currentDate, total: parseFloat((groupedForYear / (counter || 1)).toFixed(2)) });
                 lastYear = undefined;
                 counter = 0;
                 groupedForYear = 0;
@@ -276,10 +276,10 @@
               counter++;
 
               if (i === data.length - 1) {
+                currentDate = new Date(item.date);
                 currentDate.setDate(1);
                 currentDate.setMonth(0);
-                currentDate.setFullYear(lastYear);
-                result.push({ date: currentDate, total: parseFloat((groupedForYear / counter).toFixed(2)) });
+                result.push({ date: currentDate, total: parseFloat((groupedForYear / (counter || 1)).toFixed(2)) });
                 lastYear = undefined;
                 counter = 0;
                 groupedForYear = 0;
@@ -292,7 +292,7 @@
               if (lastMonth !== currentDate.getMonth()) {
                 currentDate.setDate(1);
                 currentDate.setMonth(lastMonth);
-                result.push({ date: currentDate, total: parseFloat((groupedForMonth / counter).toFixed(2)) });
+                result.push({ date: currentDate, total: parseFloat((groupedForMonth / (counter || 1)).toFixed(2)) });
                 lastMonth = undefined;
                 counter = 0;
                 groupedForMonth = 0;
@@ -302,9 +302,9 @@
               counter++;
 
               if (i === data.length - 1) {
+                currentDate = new Date(item.date);
                 currentDate.setDate(1);
-                currentDate.setMonth(lastMonth);
-                result.push({ date: currentDate, total: parseFloat((groupedForMonth / counter).toFixed(2)) });
+                result.push({ date: currentDate, total: parseFloat((groupedForMonth / (counter || 1)).toFixed(2)) });
                 lastMonth = undefined;
                 counter = 0;
                 groupedForMonth = 0;
