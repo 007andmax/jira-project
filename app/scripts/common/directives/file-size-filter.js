@@ -5,7 +5,7 @@
   angular.module("quicktech.common.directives").filter('fileSizeFilter', function () {
     return function (input, isSpeed) {
       if (isNaN(parseInt(input))) {
-        return '';
+        return input;
       }
 
       if (!isSpeed) {

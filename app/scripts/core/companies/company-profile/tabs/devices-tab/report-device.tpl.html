@@ -1,30 +1,37 @@
-<div class="hardware-wrap" prevent-hash-change="close()" ng-controller="quicktech.core.companies.deviceReports">
+<div class="hardware-wrap" prevent-hash-change="close()" ng-controller="quicktech.core.companies.deviceReports"
+     convert-to-pdf="/devices/agentReport/pdf">
   <div class="hardware">
     <div class="hardware__control-panel">
-      <div class="hardware__control-panel--btn">
-        <img src="images/input-icons/printer.png" alt="">
+      <div ng-if="!showEdit" class="hardware__control-panel--btn"
+           ng-click="openInPdf('.hardware__wrapper', currentReport.agent ? (currentReport.agent.hostName || currentReport.agent.ip) : 'Unknown')">
+        <img src="images/input-icons/hardware-report/printer.png" alt="">
         <p>Print</p>
       </div>
-      <div ng-if="!showEdit" class="hardware__control-panel--btn" ng-click="toggleEdit()">
-        <img src="images/input-icons/edit.png" alt="">
+      <div class="hardware__control-panel--btn" ng-click="toggleEdit()">
+        <img ng-if="!showEdit" src="images/input-icons/hardware-report/edit.png" alt="">
+        <img ng-if="showEdit" src="images/input-icons/hardware-report/cancel.png" alt="">
         <p>Edit</p>
       </div>
       <div ng-if="showEdit" class="hardware__control-panel--btn" ng-click="saveEditedFields()"
            custom-disabled="{{ saveInProgress }}">
-        <img src="images/input-icons/edit.png" alt="">
+        <img src="images/input-icons/hardware-report/confirm.png" alt="">
         <p>Save</p>
       </div>
       <div class="hardware__control-panel--btn" ng-click="restart(currentAgent)">
-        <img src="images/input-icons/reload.png" alt="">
+        <img src="images/input-icons/hardware-report/reload.png" alt="">
         <p>Restart</p>
       </div>
       <div class="hardware__control-panel--btn" ng-click="shutdown(currentAgent)">
-        <img src="images/input-icons/logout.png" alt="">
+        <img src="images/input-icons/hardware-report/power.png" alt="">
         <p>Log out</p>
       </div>
       <div class="hardware__control-panel--btn" ng-click="remove(currentAgent)">
-        <img src="images/input-icons/garbage.png" alt="">
+        <img src="images/input-icons/hardware-report/garbage.png" alt="">
         <p>Delete</p>
+      </div>
+      <div class="hardware__control-panel--btn" ng-click="closeReport()">
+        <img src="images/input-icons/hardware-report/logout.png" alt="">
+        <p>Close</p>
       </div>
     </div>
     <div class="hardware__wrapper" ng-repeat="(agentId, report) in data track by agentId">
@@ -55,7 +62,7 @@
             <div class="date">
               <strong>Install Date:</strong>
               <span ng-if="!showEdit">
-                {{ isInstallDateChanged ? ((parseDate(dto.install_date) || '') | date: 'dd.MM.yyyy') : '' }}
+                {{ isInstallDateChanged || report.variant.installDate ? ((parseDate(dto.install_date) || '') | date: 'dd.MM.yyyy') : '' }}
               </span>
               <div ng-show="showEdit" class="dropdown">
 
@@ -69,7 +76,7 @@
             <div class="date">
               <strong>Warranty Date:</strong>
               <span ng-if="!showEdit">
-                {{ isWarrantyDateChanged ? ((parseDate(dto.warranty_date) || '') | date: 'dd.MM.yyyy') : '' }}
+                {{ isWarrantyDateChanged || report.variant.warrantyDate ? ((parseDate(dto.warranty_date) || '') | date: 'dd.MM.yyyy') : '' }}
               </span>
               <div ng-show="showEdit" class="dropdown">
 
@@ -85,8 +92,12 @@
           <div class="main-info--user">
             <h2><strong>{{ report.company.name }}</strong></h2>
             <p style="white-space: pre-wrap;">{{ report.address }}</p>
-            <p><strong>Phone number:</strong>&nbsp;{{ getPrimaryPhoneNumber(report.primaryContact.phoneNumbers) }}</p>
-            <p><strong>Email:</strong>&nbsp;{{ report.primaryContact.primaryEmail }}</p>
+            <p ng-if="getPrimaryPhoneNumber(report.primaryContact.phoneNumbers)">
+              <strong>Phone number:</strong>&nbsp;{{ getPrimaryPhoneNumber(report.primaryContact.phoneNumbers) }}
+            </p>
+            <p ng-if="report.primaryContact.primaryEmail">
+              <strong>Email:</strong>&nbsp;{{ report.primaryContact.primaryEmail }}
+            </p>
 
           </div>
         </div>
@@ -95,31 +106,31 @@
             <p>
               <strong>Network Adapter:</strong>
               <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ report.networkAdapters[0].description }}
+              &nbsp;{{ networkAdapter.description }}
             </span>
             </p>
             <p>
               <strong>IP Address:</strong>
               <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ report.networkAdapters[0].ip_address }}
+              &nbsp;{{ networkAdapter.ip_address }}
             </span>
             </p>
             <p>
               <strong>Subnet Mask:</strong>
               <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{(report.networkAdapters[0].subnet || '').split(';')[0] || '' }}
+              &nbsp;{{(networkAdapter.subnet || '').split(';')[0] || '' }}
             </span>
             </p>
             <p>
               <strong>Preferred DNS Server:</strong>
               <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ report.networkAdapters[0].dns }}
+              &nbsp;{{ networkAdapter.dns }}
             </span>
             </p>
             <p>
               <strong>Gateway:</strong>
               <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ report.networkAdapters[0].gateway }}
+              &nbsp;{{ networkAdapter.gateway }}
             </span>
             </p>
             <p>
@@ -127,34 +138,35 @@
             <p>
               <strong>Link Speed:</strong>
               <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ report.networkAdapters[0].speed | fileSizeFilter: true }}
+              &nbsp;{{ networkAdapter.speed | fileSizeFilter: true }}
             </span>
             </p>
             <p>
               <strong>MAC Address:</strong>
               <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ formatMacAddress(report.networkAdapters[0].mac) }}
+              &nbsp;{{ formatMacAddress(networkAdapter.mac) }}
             </span>
             </p>
           </div>
           <div class="device-info info-label">
             <p><strong>Motherboard:</strong>
-              &nbsp;{{ report.motherboard.motherboardManufacturer + ' ' }}
-              {{ report.motherboard.motherboardProduct }} {{ report.motherboard.motherboardVersion }}
+              &nbsp;{{ report.motherboard.manufacturer + ' ' }}
+              {{ report.motherboard.product }} {{ report.motherboard.version }}
             </p>
-            <p><strong>SN:</strong>&nbsp;{{ report.motherboard.motherboardSerial }}</p>
+            <p><strong>SN:</strong>&nbsp;{{ report.motherboard.serial_number }}</p>
             <p><strong>Bios Version:</strong>&nbsp;{{ (report.bios.biosCaption || '').split('Ver: ').pop() || '' }}</p>
             <p>
               <strong>CPU:</strong>
               <span ng-if="report.processors && report.processors.length">
-              &nbsp;{{ report.processors[0].processorName }}
-            </span>
+                &nbsp;{{ report.processors[0].processorName }}
+              </span>
             </p>
             <p>
               <strong>Ram:</strong>
               <span ng-if="report.ramSlots && report.ramSlots.length">
-              &nbsp;{{ report.ramSlots[0].ramCapacity | fileSizeFilter }}
-            </span>
+                &nbsp;{{ report.ramSlots[0].ramCapacity | fileSizeFilter }}
+              </span>
+              <span ng-if="!(report.ramSlots && report.ramSlots.length)">No RAM detected</span>
             </p>
             <p>
               <strong>Windows info:</strong>
@@ -192,14 +204,13 @@
               <div class="hard-drive__point--info">
                 <p><strong>{{ disk.device_id }}</strong>
                   &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
-                  {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }}</p>
-                <p><strong>Model:</strong>{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
-                <p><strong>SN:</strong>{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
-                <p ng-if="disk.is_system"><strong>OS Drive:</strong>Windows</p>
+                  {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
+                <p><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
+                <p><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
+                <p ng-if="disk.is_system"><strong>System Drive</strong></p>
               </div>
               <div class="hard-drive__point--icon">
-                <img src="images/input-icons/pie.png" alt="">
-
+                <img src="images/input-icons/hardware-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
               </div>
             </div>
             <div class="hard-drive__point" ng-if="!(report.logicalDisks && report.logicalDisks.length)">
@@ -220,15 +231,17 @@
               <div class="security__antivirus--icon">
                 <img
                   ng-if="report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate"
-                  src="images/input-icons/shield.png" alt="">
+                  src="/commonHtml/assets/images/agent-report/shield.png" alt="">
                 <img
                   ng-if="!(report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate)"
-                  src="images/input-icons/shield-non.png" alt="">
+                  src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
               </div>
             </div>
             <div class="security__updates">
               <div class="security__updates--info">
                 <p>
+                  <!--<strong>Security updates:</strong><br>-->
+                  <!--<span>{{  }}</span>-->
                   <strong>Last install:</strong>
                   <span ng-if="!(report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion)">
                     &nbsp;no security installed
@@ -236,21 +249,23 @@
                   <br>
                   <span ng-if="report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion">
                     {{ parseDate(report.wuaInfo.lastInstall) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
-                    Hotfixes from Microsoft Update (agent version {{ report.wuaInfo.wuaVersion }})
+                    Hotfixies from Microsoft Update
+                    (agent version {{ report.wuaInfo.wuaVersion }})
                   </span>
                 </p>
               </div>
               <div class="security__updates--icon">
                 <img ng-if="report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion"
-                     src="images/input-icons/shield.png" alt="">
+                     src="/commonHtml/assets/images/agent-report/shield.png" alt="">
                 <img ng-if="!(report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion)"
-                     src="images/input-icons/shield-non.png" alt="">
+                     src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
               </div>
             </div>
           </div>
         </div>
         <div class="equipment info-label">
-          <ul class="equipment__list"><p ng-if="report.printers && report.printers.length"><strong>Printers:</strong></p>
+          <ul class="equipment__list"><p ng-if="report.printers && report.printers.length"><strong>Printers:</strong>
+          </p>
             <li ng-repeat="printer in report.printers">{{ printer.printerName }}</li>
             <li ng-if="!(report.printers && report.printers.length)"> No Printers detected</li>
           </ul>

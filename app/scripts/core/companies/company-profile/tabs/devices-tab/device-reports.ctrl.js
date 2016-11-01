@@ -10,6 +10,9 @@
         $scope.$watch('data', function (value) {
           if (value) {
             currentReport = value[Object.keys(value)[0]];
+            $scope.networkAdapter = currentReport.networkAdapters.find(function (net) {
+              return net.is_default;
+            });
             $scope.currentAgent = currentReport.agent;
             currentReport.variant = currentReport.variant || {};
             $scope.dto = {
@@ -45,14 +48,20 @@
           if (!$scope.isWarrantyDateChanged) {
             $scope.isWarrantyDateChanged = dto.warranty_date !== currentReport.variant.warrantyDate;
           }
-          dto.install_date = new Date(dto.install_date);
-          dto.warranty_date = new Date(dto.warranty_date);
+          if (dto.install_date) {
+            dto.install_date = new Date(dto.install_date);
+            dto.install_date = dto.install_date.getFullYear() + '-' + dto.install_date.getMonth() + '-' + dto.install_date.getDate();
+          }
 
-          dto.install_date = dto.install_date.getFullYear() + '-' + dto.install_date.getMonth() + '-' + dto.install_date.getDate();
-          dto.warranty_date = dto.warranty_date.getFullYear() + '-' + dto.warranty_date.getMonth() + '-' + dto.warranty_date.getDate();
+          if (dto.warranty_date) {
+            dto.warranty_date = new Date(dto.warranty_date);
+            dto.warranty_date = dto.warranty_date.getFullYear() + '-' + dto.warranty_date.getMonth() + '-' + dto.warranty_date.getDate();
+          }
 
           DevicesService.saveReportEditedFields(currentReport.company.id, currentReport.agent.id, dto, function () {
             $scope.saveInProgress = false;
+            dto.install_date = new Date(dto.install_date);
+            dto.warranty_date = new Date(dto.warranty_date);
             $scope.toggleEdit();
           });
         };
@@ -108,8 +117,16 @@
           return mac.match(/.{1,2}/g).join(' ');
         };
 
+        $scope.getFilledSpacePercents = function (size, free) {
+          return Math.round((size - free) * 10 / (size || 1));
+        };
+
         $scope.toggleEdit = function () {
           $scope.showEdit = !$scope.showEdit;
+        };
+
+        $scope.closeReport = function () {
+          $scope.close();
         };
 
       }]);
