@@ -6,12 +6,16 @@
       restrict: 'A',
       link: function (scope, element, attrs) {
         scope.openInPdf = function (selector, fileName, callback) {
-          var target = element.find(selector).clone();
+          var target = element.find(selector).clone(),
+            fckingLoadingStr = 'Loading...';
 
           target.find('.ng-hide').remove();
 
           var selectedHtml = target.wrap('div').parent().html();
-          $http.post(attrs.convertToPdf, { fileName: fileName, content: selectedHtml }).then(function (resp) {
+          if (selectedHtml.indexOf(fckingLoadingStr) !== -1) {
+            selectedHtml = selectedHtml.slice(fckingLoadingStr.length);
+          }
+          $http.post(attrs.convertToPdf, {fileName: fileName, content: selectedHtml}).then(function (resp) {
             if (callback) {
               callback(resp.data);
             }

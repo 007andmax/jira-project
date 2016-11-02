@@ -3,7 +3,7 @@
   <div class="hardware">
     <div class="hardware__control-panel">
       <div ng-if="!showEdit" class="hardware__control-panel--btn"
-           ng-click="openInPdf('.hardware__wrapper', currentReport.agent ? (currentReport.agent.hostName || currentReport.agent.ip) : 'Unknown')">
+           ng-click="openInPdf('.hardware__wrapper', currentAgent ? (currentAgent.hostName || currentAgent.ip) : 'Unknown')">
         <img src="images/input-icons/hardware-report/printer.png" alt="">
         <p>Print</p>
       </div>
@@ -200,17 +200,34 @@
         </div>
         <div class="info-row">
           <div class="hard-drive info-label" ng-class="{'extra': report.logicalDisks.length > 2}">
-            <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks track by disk.id">
-              <div class="hard-drive__point--info">
-                <p><strong>{{ disk.device_id }}</strong>
-                  &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
-                  {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
-                <p><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
-                <p><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
-                <p ng-if="disk.is_system"><strong>System Drive</strong></p>
+            <div class="extra-hidden">
+              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks track by disk.id" ng-if="$index < 2">
+                <div class="hard-drive__point--info">
+                  <p><strong>{{ disk.device_id }}</strong>
+                    &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
+                    {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
+                  <p><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
+                  <p><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
+                  <p ng-if="disk.is_system"><strong>System Drive</strong></p>
+                </div>
+                <div class="hard-drive__point--icon">
+                  <img src="images/input-icons/hardware-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+                </div>
               </div>
-              <div class="hard-drive__point--icon">
-                <img src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+            </div>
+            <div class="extra-hidden" ng-if="report.logicalDisks.length > 2">
+              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks | limitTo: 2 track by disk.id" ng-if="$index >= 2">
+                <div class="hard-drive__point--info">
+                  <p><strong>{{ disk.device_id }}</strong>
+                    &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
+                    {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
+                  <p><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
+                  <p><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
+                  <p ng-if="disk.is_system"><strong>System Drive</strong></p>
+                </div>
+                <div class="hard-drive__point--icon">
+                  <img src="images/input-icons/hardware-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+                </div>
               </div>
             </div>
             <div class="hard-drive__point" ng-if="!(report.logicalDisks && report.logicalDisks.length)">

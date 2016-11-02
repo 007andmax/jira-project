@@ -1,3 +1,17 @@
+@page {
+  size: A4;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@media print {
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
+}
+
 .hardware-wrap {
   position: fixed;
   top: 0;
@@ -23,139 +37,189 @@
   top: 6px;
 }
 .hardware {
-  width: 80%;
+  /*width: 80%;*/
   margin: 20px auto; }
-  .hardware .info-label {
-    position: relative;
-    padding: 15px;
-    padding-top: 45px; }
-    .hardware .info-label:before {
-      position: absolute;
-      left: 0;
-      top: 0;
-      text-align: center;
-      width: 200px;
-      padding: 5px 0;
-      color: #fff;
-      background: #bbb;
-      font-size: 20px;
-      font-weight: bold; }
-  .hardware__control-panel {
-    width: 400px;
-    margin: auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35); }
-    .hardware__control-panel--btn {
-      padding: 5px;
-      cursor: pointer;
-      text-align: center;
-      width: 80px; }
-      .hardware__control-panel--btn:hover {
-        background: #eee; }
-      .hardware__control-panel--btn img {
-        width: 30px;
-        height: 30px; }
-  .hardware__wrapper {
-    width: 90%;
-    margin: 30px auto;
-    padding: 15px;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35); }
-    .hardware__wrapper--report {
-      width: 100%;
-      border: 1px solid #bbb; }
-      .hardware__wrapper--report .main-info {
-        border-bottom: 1px solid #bbb;
-        display: flex;
-        justify-content: space-between;
-        padding: 15px; }
-        .hardware__wrapper--report .main-info--user {
-          text-align: right; }
-      .hardware__wrapper--report h2 {
-        margin: 0 0 15px 0; }
-      .hardware__wrapper--report p,
-      .hardware__wrapper--report .date {
-        line-height: 24px;
-        font-size: 18px; }
-      .hardware__wrapper--report .info-row {
-        display: flex;
-        border-bottom: 1px solid #bbb; }
-        .hardware__wrapper--report .info-row .info-label {
-          width: 50%; }
-        .hardware__wrapper--report .info-row .network-info {
-          border-right: 1px solid #bbb; }
-          .hardware__wrapper--report .info-row .network-info:before {
-            content: 'Network info'; }
-        .hardware__wrapper--report .info-row .device-info:before {
-          content: 'Device info'; }
-        .hardware__wrapper--report .info-row .hard-drive {
-          padding: 15px 0 0 0;
-          border-right: 1px solid #bbb;
-          display: flex;
-          flex-wrap: wrap; }
-          .hardware__wrapper--report .info-row .hard-drive.extra {
-            padding: 0; }
-            .hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point {
-              width: 50%;
-              height: 201px;
-              border-bottom: none; }
-              .hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point--info {
-                width: auto; }
-              .hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point--icon {
-                width: 25%;
-                align-self: flex-end; }
-                .hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point--icon img {
-                  width: 100%;
-                  height: 100%; }
-              .hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point:nth-child(-n+2) {
-                border-bottom: 1px solid #bbb; }
-              .hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point:nth-child(odd) {
-                border-right: 1px solid #bbb; }
-          .hardware__wrapper--report .info-row .hard-drive__point {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #bbb; }
-            .hardware__wrapper--report .info-row .hard-drive__point:last-child {
-              border-bottom: none; }
-            .hardware__wrapper--report .info-row .hard-drive__point--info {
-              width: 50%; }
-            .hardware__wrapper--report .info-row .hard-drive__point--icon {
-              display: flex;
-              justify-content: center;
-              width: 50%; }
-          .hardware__wrapper--report .info-row .hard-drive:before {
-            content: 'Hard drive'; }
-        .hardware__wrapper--report .info-row .security {
-          padding: 15px 0 0 0; }
-          .hardware__wrapper--report .info-row .security__antivirus, .hardware__wrapper--report .info-row .security__updates {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px; }
-            .hardware__wrapper--report .info-row .security__antivirus--info, .hardware__wrapper--report .info-row .security__updates--info {
-              width: 50%; }
-            .hardware__wrapper--report .info-row .security__antivirus--icon, .hardware__wrapper--report .info-row .security__updates--icon {
-              display: flex;
-              justify-content: center;
-              width: 50%; }
-          .hardware__wrapper--report .info-row .security__updates {
-            border-top: 1px solid #bbb; }
-          .hardware__wrapper--report .info-row .security:before {
-            content: 'Security'; }
-      .hardware__wrapper--report .equipment:before {
-        content: 'Equipment'; }
-      .hardware__wrapper--report .equipment__list {
-        -moz-column-count: 3;
-        -moz-column-gap: 20px;
-        -webkit-column-count: 3;
-        -webkit-column-gap: 20px;
-        column-count: 3;
-        column-gap: 20px;
-        list-style-type: none;
-        font-size: 16px; }
+.main-info--gadget{
+  width: 49%;
+  display: inline-block;
+}
+.main-info--user{
+  width: 50%;
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.hardware .info-label {
+  position: relative;
+  padding: 15px;
+  padding-top: 45px; }
+.hardware .info-label:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  width: 200px;
+  padding: 5px 0;
+  color: #fff;
+  background: #bbb;
+  font-size: 20px;
+  font-weight: bold; }
+.hardware__control-panel {
+  width: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35); }
+.hardware__control-panel--btn {
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 80px; }
+.hardware__control-panel--btn:hover {
+  background: #eee; }
+.hardware__control-panel--btn img {
+  width: 30px;
+  height: 30px; }
+.hardware__wrapper {
+  width: 90%;
+  margin: 30px auto;
+  padding: 15px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35); }
+.hardware__wrapper--report {
+  width: 100%;
+  border: 1px solid #bbb; }
+.hardware__wrapper--report .main-info {
+  border-bottom: 1px solid #bbb;
+  position: relative;
+  padding: 15px; }
+.hardware__wrapper--report .main-info--user {
+  text-align: right; }
+.hardware__wrapper--report h4 {
+  margin: 0 0 15px 0; }
+.hardware__wrapper--report p,
+.hardware__wrapper--report .date {
+  line-height: 20px;
+  font-size: 14px;
+  margin: 5px 0; }
+.hardware__wrapper--report .info-row {
+  overflow: hidden;
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #bbb; }
+.hardware__wrapper--report .info-row .info-label {
+  width: 50%;
+  /*    float: left;*/
+  display: table-cell;
+  vertical-align: middle;}
+.hardware__wrapper--report .info-row .network-info {
+  border-right: 1px solid #bbb; }
+.hardware__wrapper--report .info-row .network-info:before {
+  content: 'Network info'; }
+.hardware__wrapper--report .info-row .device-info:before {
+  content: 'Device info'; }
+.hardware__wrapper--report .info-row .hard-drive {
+  padding-left: 0;
+  padding-right: 0;
+  border-right: 1px solid #bbb;
+  /* display: flex;
+   flex-wrap: wrap;*/ }
+.hardware__wrapper--report .info-row .hard-drive.extra {
+  padding: 30px 0 0 0; }
+.hardware__wrapper--report .info-row .hard-drive.extra .extra-hidden{
+  display: table;
+  width: 100%;
+}
+.hardware__wrapper--report .info-row .hard-drive.extra .extra-hidden:last-child .hard-drive__point{
+  border-bottom: none;
+}
+.hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point {
+  width: 50%;
+  display: table-cell;
+  height: 201px;
+  border-bottom: none; }
+.hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point--info {
+  width: 80%; }
+.hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point--icon {
+  vertical-align: bottom;
+  width: 20%; }
+.hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point--icon img {
+  width: 30px; }
+.hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point:nth-child(-n+2) {
+  border-bottom: 1px solid #bbb; }
+.hardware__wrapper--report .info-row .hard-drive.extra .hard-drive__point:nth-child(even) {
+  border-left: 1px solid #bbb; }
+.hardware__wrapper--report .info-row .hard-drive__point {
+  width: 100%;
+  overflow: hidden;
+  /*padding: 0 10px;*/
+  border-bottom: 1px solid #bbb;
+  display: table; }
+.hardware__wrapper--report .info-row .hard-drive__point:last-child {
+  border-bottom: none; }
+.hardware__wrapper--report .info-row .hard-drive__point--info {
+  width: 50%;
+  padding-left: 10px;
+  display: table-cell; }
+.hardware__wrapper--report .info-row .hard-drive__point--icon {
+  width: 50%;
+  padding-right: 10px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;}
+.hardware__wrapper--report .info-row .hard-drive__point--icon img{
+  width: 150px;
 
-/*# sourceMappingURL=hardware-report.css.map */
+}
+.hardware__wrapper--report .info-row .hard-drive:before {
+  content: 'Hard drive'; }
+.hardware__wrapper--report .info-row .security {
+  padding: 30px 0 0 0; }
+.hardware__wrapper--report .info-row .security__antivirus, .hardware__wrapper--report .info-row .security__updates {
+  display: table;
+  width: 100%;
+  height: 170px;
+  /*padding: 15px;*/ }
+.hardware__wrapper--report .info-row .security__antivirus--info, .hardware__wrapper--report .info-row .security__updates--info {
+  width: 50%;
+  vertical-align: middle;
+  padding-left: 10px;
+  display: table-cell; }
+.hardware__wrapper--report .info-row .security__antivirus--icon, .hardware__wrapper--report .info-row .security__updates--icon {
+  width: 50%;
+  padding-right: 10px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle; }
+.hardware__wrapper--report .info-row .security__antivirus--icon img, .hardware__wrapper--report .info-row .security__updates--icon img{
+  width: 70px;
+}
+
+.hardware__wrapper--report .info-row .security__updates {
+  border-top: 1px solid #bbb; }
+.hardware__wrapper--report .info-row .security:before {
+  content: 'Security'; }
+.hardware__wrapper--report .equipment:before {
+  content: 'Equipment'; }
+.hardware__wrapper--report .equipment__list {
+  /* -moz-column-count: 3;
+   -moz-column-gap: 20px;
+   -webkit-column-count: 3;
+   -webkit-column-gap: 20px;
+   column-count: 3;
+   column-gap: 20px;*/
+  /*list-style-type: none;*/
+  font-size: 14px;
+  overflow: hidden;
+  margin: 0;
+  padding-left: 0;}
+.hardware__wrapper--report .equipment__list li{
+  float: left;
+  margin-left: 25px;
+}
+.equipment{
+  padding-top: 30px !important;
+  max-height: 80px;
+  overflow: hidden;
+}
