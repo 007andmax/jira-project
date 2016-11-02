@@ -210,7 +210,7 @@
                 <p ng-if="disk.is_system"><strong>System Drive</strong></p>
               </div>
               <div class="hard-drive__point--icon">
-                <img src="images/input-icons/hardware-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+                <img src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
               </div>
             </div>
             <div class="hard-drive__point" ng-if="!(report.logicalDisks && report.logicalDisks.length)">
