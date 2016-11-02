@@ -10,11 +10,11 @@
       </li>
       <li class="navigation__list--category">
         <a ng-class="{'checked': openedTab === 'user'}"
-           href="javascript:void(0)" ng-click="setOpenedTab('user')">User</a>
+           href="javascript:void(0)" ng-click="setOpenedTab('user')" ng-if="PermissionsService.isAllowed('CREATE_USERS')">User</a>
       </li>
       <li class="navigation__list--category">
         <a ng-class="{'checked': openedTab === 'company'}"
-           href="javascript:void(0)" ng-click="setOpenedTab('company')">Company</a>
+           href="javascript:void(0)" ng-click="setOpenedTab('company')" ng-if="PermissionsService.isAllowed('CREATE_COMPANIES')">Company</a>
       </li>
       <li class="navigation__list--category">
         <a ng-class="{'checked': openedTab === 'service'}"
@@ -22,7 +22,7 @@
       </li>
       <li class="navigation__list--category">
         <a ng-class="{'checked': openedTab === 'product'}"
-           href="javascript:void(0)" ng-click="setOpenedTab('product')">Product</a>
+           href="javascript:void(0)" ng-click="setOpenedTab('product')" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">Product</a>
       </li>
     </ul>
   </aside>

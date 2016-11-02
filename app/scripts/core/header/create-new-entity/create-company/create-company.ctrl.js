@@ -12,16 +12,15 @@
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService,
                 $state, $timeout, $rootScope, PermissionsService, UserConfirmationsService) {
 
-        if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
-          $scope.closeWindow();
-        }
-
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
         var savedState = $scope.getLastSavedState('company');
+        var action = 'CREATE_COMPANIES';
 
         if (savedState.type === 'company' && savedState.item) {
           var companyId = savedState.item.id,
             company = CompaniesService.getOneById(companyId);
+
+          action = 'EDIT_COMPANIES';
 
           var companyData = CompaniesService.getCompanyData($scope, companyId, function () {
 
@@ -102,6 +101,12 @@
             }
           });
         }
+
+        $scope.$watch('currentUser.permissions', function (permissions) {
+          if (permissions && !PermissionsService.isAllowed(action)) {
+            $scope.closeWindow();
+          }
+        });
 
         $scope.tryToSave = false;
         $scope.currentStep = 'info';

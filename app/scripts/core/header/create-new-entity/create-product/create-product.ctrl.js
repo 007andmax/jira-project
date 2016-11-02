@@ -3,8 +3,14 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.createProductCtrl',
-    ['$scope', 'ProductsService', 'CompaniesService', '$rootScope',
-    function ($scope, ProductsService, CompaniesService, $rootScope) {
+    ['$scope', 'ProductsService', 'CompaniesService', '$rootScope', 'quicktech.common.services.PermissionsService',
+    function ($scope, ProductsService, CompaniesService, $rootScope, PermissionsService) {
+
+      $scope.$watch('currentUser.permissions', function (permissions) {
+        if (permissions && !PermissionsService.isAllowed('MANAGE_PRODUCTS')) {
+          $scope.closeWindow();
+        }
+      });
 
       ProductsService.getCategories($scope, function (resp) {
         $scope.categories = resp;
