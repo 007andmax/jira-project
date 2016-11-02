@@ -315,13 +315,9 @@ header .calendar-top input {
 }
 
 .dashboard-main .top-ten__list {
+  height: 300px;
   padding: 0;
   list-style-type: none;
-}
-
-.dashboard-main .top-ten__list .scrolled-list {
-  height: 300px;
-  overflow: auto;
 }
 
 .dashboard-main .top-ten__list--point-head .point-name {

@@ -207,25 +207,27 @@
                 <div class="col-xs-2"><p>Created</p></div>
                 <div class="col-xs-2"><p>Closed</p></div>
               </li>
-              <div class="scrolled-list">
-                <li class="top-ten__list--point"
-                    ng-repeat="client in dashboard.topClients | orderBy: '-created' track by client.id">
-                  <div class="col-xs-4 point-name">
-                    <div class="list-avatar">
-                      <img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}">
+              <div qt-nano-scroller>
+                <div>
+                  <li class="top-ten__list--point"
+                      ng-repeat="client in dashboard.topClients | orderBy: '-created' track by client.id">
+                    <div class="col-xs-4 point-name">
+                      <div class="list-avatar">
+                        <img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}">
+                      </div>
+                      <p>{{ getUserName(getUserById(client.id)) }}</p>
                     </div>
-                    <p>{{ getUserName(getUserById(client.id)) }}</p>
-                  </div>
-                  <div class="col-xs-4 ">
-                    <p class="text-muted mail-field">{{ getCompanyById(getUserById(client.id).company.id).name }}</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">{{ client.created }}</p>
-                  </div>
-                  <div class="col-xs-2">
-                    <p class="text-muted">{{ client.closed }}</p>
-                  </div>
-                </li>
+                    <div class="col-xs-4 ">
+                      <p class="text-muted mail-field">{{ getCompanyById(getUserById(client.id).company.id).name }}</p>
+                    </div>
+                    <div class="col-xs-2">
+                      <p class="text-muted">{{ client.created }}</p>
+                    </div>
+                    <div class="col-xs-2">
+                      <p class="text-muted">{{ client.closed }}</p>
+                    </div>
+                  </li>
+                </div>
               </div>
             </ul>
 
@@ -245,22 +247,24 @@
                 <div class="col-xs-3"><p>Created</p></div>
                 <div class="col-xs-3"><p>Closed</p></div>
               </li>
-              <div class="scrolled-list">
-                <li class="top-ten__list--point"
-                    ng-repeat="company in dashboard.topCompanies | orderBy: '-created' track by company.id">
-                  <div class="col-xs-6 point-name">
-                    <div class="list-avatar">
-                      <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
+              <div qt-nano-scroller>
+                <div>
+                  <li class="top-ten__list--point"
+                      ng-repeat="company in dashboard.topCompanies | orderBy: '-created' track by company.id">
+                    <div class="col-xs-6 point-name">
+                      <div class="list-avatar">
+                        <img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">
+                      </div>
+                      <p>{{ getCompanyById(company.id).name }}</p>
                     </div>
-                    <p>{{ getCompanyById(company.id).name }}</p>
-                  </div>
-                  <div class="col-xs-3">
-                    <p class="text-muted">{{ company.created }}</p>
-                  </div>
-                  <div class="col-xs-3">
-                    <p class="text-muted">{{ company.closed }}</p>
-                  </div>
-                </li>
+                    <div class="col-xs-3">
+                      <p class="text-muted">{{ company.created }}</p>
+                    </div>
+                    <div class="col-xs-3">
+                      <p class="text-muted">{{ company.closed }}</p>
+                    </div>
+                  </li>
+                </div>
               </div>
             </ul>
 
@@ -280,22 +284,24 @@
                 <div class="col-xs-3"><p>Claimed</p></div>
                 <div class="col-xs-3"><p>Closed</p></div>
               </li>
-              <div class="scrolled-list">
-                <li class="top-ten__list--point"
-                    ng-repeat="tech in dashboard.topTechUsers | orderBy: '-created' track by tech.id">
-                  <div class="col-xs-6 point-name">
-                    <div class="list-avatar">
-                      <img ng-src="{{ getUserAvatarUrl(getUserById(tech.id)) }}">
+              <div qt-nano-scroller>
+                <div>
+                  <li class="top-ten__list--point"
+                      ng-repeat="tech in dashboard.topTechUsers | orderBy: '-created' track by tech.id">
+                    <div class="col-xs-6 point-name">
+                      <div class="list-avatar">
+                        <img ng-src="{{ getUserAvatarUrl(getUserById(tech.id)) }}">
+                      </div>
+                      <p>{{ getUserName(getUserById(tech.id)) }}</p>
                     </div>
-                    <p>{{ getUserName(getUserById(tech.id)) }}</p>
-                  </div>
-                  <div class="col-xs-3">
-                    <p class="text-muted">{{ tech.created }}</p>
-                  </div>
-                  <div class="col-xs-3">
-                    <p class="text-muted">{{ tech.closed }}</p>
-                  </div>
-                </li>
+                    <div class="col-xs-3">
+                      <p class="text-muted">{{ tech.created }}</p>
+                    </div>
+                    <div class="col-xs-3">
+                      <p class="text-muted">{{ tech.closed }}</p>
+                    </div>
+                  </li>
+                </div>
               </div>
             </ul>
 
