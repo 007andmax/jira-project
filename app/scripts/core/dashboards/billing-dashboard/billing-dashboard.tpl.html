@@ -18,7 +18,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">total projection
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalProjection }}">?</span>
                 </p>
                 <div class="stats__main--count font-light-blue">
@@ -31,7 +31,7 @@
             </div>
             <div class="back">
               <p class="board-head">total projection
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalProjection }}">?</span>
               </p>
               <div ng-if="!loading && totalProjectionData && totalProjectionData.length"
@@ -53,7 +53,7 @@
           <div class="stats half-stats">
             <div class="stats__main">
               <p class="board-head">total sales
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalSales }}">?</span>
               </p>
 
@@ -68,7 +68,7 @@
           <div class="stats half-stats">
             <div class="stats__main">
               <p class="board-head">tax collected
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.taxCollected }}">?</span>
               </p>
               <div class="stats__main--count font-light-purple">
@@ -85,7 +85,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">total receivables
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalReceivables }}">?</span>
                 </p>
                 <div class="stats__main--count font-light-green">
@@ -98,7 +98,7 @@
             </div>
             <div class="back">
               <p class="board-head">total receivables
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalReceivables }}">?</span>
               </p>
               <div ng-if="!loading && totalReceivableData && totalReceivableData.length"
@@ -121,7 +121,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">invoiceable
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.invoiceable }}">?</span>
                 </p>
                 <div class="stats__main--count font-yellow">
@@ -134,7 +134,7 @@
             </div>
             <div class="back">
               <p class="board-head">invoiceable
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.invoiceable }}">?</span>
               </p>
               <div ng-if="!loading && totalInvoiceableData && totalInvoiceableData.length"
@@ -157,7 +157,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">monthly sales
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.monthlySales }}">?</span>
                 </p>
                 <div class="stats__main--count font-green">
@@ -175,7 +175,7 @@
             <div class="front">
               <div class="stats__main" style="height: 100%">
                 <p class="board-head">total overdue
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalOverdue }}">?</span>
                 </p>
                 <div d3chart data="totalOverdueData" ng-if="!loading && !noTotalOverdueData"
@@ -206,7 +206,7 @@
             <div class="front">
               <p class="board-head graph-ticket">
                 managed vs. non managed
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.managedNonManaged }}">?</span>
               </p>
               <div ng-if="!loading && isStackedBarsShown(managedNonManagedData)"
@@ -248,7 +248,7 @@
           <div class="chart clearfix" style="position: relative">
             <p class="board-head">
               revenue
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.revenue }}">?</span>
             </p>
 
@@ -274,7 +274,7 @@
           <div class="chart clearfix">
             <p class="board-head">
               revenue by payment method
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.revenueByPaymentMethod }}">?</span>
             </p>
 
@@ -302,7 +302,7 @@
           <div class="top-ten clearfix">
             <p class="board-head">
               top-10 companies
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.topCompanies }}">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">

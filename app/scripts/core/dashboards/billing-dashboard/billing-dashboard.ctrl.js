@@ -18,12 +18,12 @@
         $scope.currentCompany = CompaniesService.getCurrentCompany();
 
         $scope.chartTooltips = {
-          totalProjection: 'Shows a potential income in the system\n during a selected period.\n Calculates as the sum of total sales, total receivables\n and total invoiceable during a selected period.',
+          totalProjection: 'Shows a potential income in the system during a selected period.\n Calculates as the sum of total sales, total receivables and total invoiceable\n during a selected period.',
           totalSales: 'Shows an amount of money that has already been received from invoices\n during a selected period (includes taxes).',
           taxCollected: 'Shows an amount of taxes from total sales during a selected period.',
-          totalReceivables: 'Shows an amount of money that has been sent\n to clients as invoices and are waiting to be received\n during a selected period (includes taxes).',
+          totalReceivables: 'Shows an amount of money that has been sent to clients as invoices\n and are waiting to be received during a selected period (includes taxes).',
           invoiceable: 'Shows an amount of money in closed tickets\n that have not been sent as invoices to clients yet\n during a selected period.',
-          monthlySales: 'Shows an amount of money that has already been received\n from invoices during the current month (includes taxes).',
+          monthlySales: 'Shows an amount of money that has already been received from invoices\n during the current month (includes taxes).',
           totalOverdue: 'Shows an amount of money in outstanding invoices.',
           managedNonManaged: 'Shows an amount of total sales sorted by a type of invoice:\n fixed and recurring. Each type of invoice is sorted by products and services.\n During a selected period.',
           revenue: 'Shows an amount and percentage of total sales\n sorted by products and services. During a selected period.',

@@ -18,7 +18,7 @@
               <div class="stats__main">
                 <p class="board-head">
                   Total tickets
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalTickets }}">?</span>
                 </p>
                 <div class="stats__main--count font-yellow">
@@ -32,7 +32,7 @@
             <div class="back">
               <p class="board-head">
                 Total tickets
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalTickets }}">?</span>
               </p>
               <div ng-if="!loading && totalTicketsData && totalTicketsData.length"
@@ -56,7 +56,7 @@
               <div class="stats__main">
                 <p class="board-head">
                   Open tickets
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.openTickets }}">?</span>
                 </p>
                 <div class="stats__main--count font-green">
@@ -70,7 +70,7 @@
             <div class="back">
               <p class="board-head">
                 Open tickets
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.openTickets }}">?</span>
               </p>
               <div ng-if="!loading && openTicketsData && openTicketsData.length"
@@ -94,7 +94,7 @@
               <div class="stats__main">
                 <p class="board-head">
                   closed tickets
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.closedTickets }}">?</span>
                 </p>
                 <div class="stats__main--count font-red">
@@ -113,7 +113,7 @@
               <div class="stats__main">
                 <p class="board-head">
                   average time / ticket
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageServiceTime }}">?</span>
                 </p>
                 <div class="stats__main--count font-deep-blue">
@@ -127,7 +127,7 @@
             <div class="back">
               <p class="board-head">
                 average time / ticket
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageServiceTime }}">?</span>
               </p>
               <div ng-if="!loading && averageServiceTimeData && averageServiceTimeData.length"
@@ -151,7 +151,7 @@
               <div class="stats__main">
                 <p class="board-head">
                   average sales / ticket
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageSales }}">?</span>
                 </p>
                 <div class="stats__main--count font-purple">
@@ -165,7 +165,7 @@
             <div class="back">
               <p class="board-head">
                 average sales / ticket
-                <span class="helper" tooltip-class="chart-tooltip"
+                <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                       tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageSales }}">?</span>
               </p>
               <div ng-if="!loading && averageSalesData && averageSalesData.length"
@@ -189,7 +189,7 @@
               <div class="stats__main">
                 <p class="board-head">
                   tickets by priority
-                  <span class="helper" tooltip-class="chart-tooltip"
+                  <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                         tooltip-placement="top" uib-tooltip="{{ chartTooltips.priority }}">?</span>
                 </p>
                 <div ng-if="!dashboard.noPriorities">
@@ -219,7 +219,7 @@
           <div class="top-ten clearfix">
             <p class="board-head">
               top-10 clients
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.topClients }}">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topClients && dashboard.topClients.length">
@@ -262,7 +262,7 @@
           <div class="top-ten clearfix">
             <p class="board-head">
               top-10 companies
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.topCompanies }}">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">
@@ -301,7 +301,7 @@
           <div class="top-ten clearfix">
             <p class="board-head">
               top-10 tech-users
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.topTech }}">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topTechUsers && dashboard.topTechUsers.length">
@@ -342,7 +342,7 @@
           <div class="chart clearfix">
             <p class="board-head">
               Ticket creation timeline
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.createdTickets }}">?</span>
             </p>
 
@@ -365,7 +365,7 @@
           <div class="chart clearfix">
             <p class="board-head graph-ticket">
               average ticket response time
-              <span class="helper" tooltip-class="chart-tooltip"
+              <span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.responseTime }}">?</span>
             </p>
             <div class="ticket-right-text">
