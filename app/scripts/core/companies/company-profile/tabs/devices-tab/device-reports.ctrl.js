@@ -14,16 +14,26 @@
               return net.is_default;
             });
             $scope.currentAgent = currentReport.agent;
-            currentReport.variant = currentReport.variant || {};
+            currentReport.editableFields = currentReport.editableFields || {};
+
+            if (currentReport.editableFields.installDate) {
+              currentReport.editableFields.installDate = new Date(currentReport.editableFields.installDate);
+            }
+            if (currentReport.editableFields.warrantyDate) {
+              currentReport.editableFields.warrantyDate = new Date(currentReport.editableFields.warrantyDate);
+            }
+
             $scope.dto = {
-              manufacturer: currentReport.variant.manufacturer,
-              model: currentReport.variant.model,
-              serial_number: currentReport.variant.serialNumber,
-              asset_tag: currentReport.variant.assetTag,
-              install_date: currentReport.variant.installDate,
-              warranty_date: currentReport.variant.warrantyDate,
-              account: currentReport.variant.account,
-              password: currentReport.variant.password
+              manufacturer: currentReport.editableFields.manufacturer,
+              model: currentReport.editableFields.model,
+              serialNumber: currentReport.editableFields.serialNumber,
+              assetTag: currentReport.editableFields.assetTag,
+              installDate: currentReport.editableFields.installDate,
+              warrantyDate: currentReport.editableFields.warrantyDate,
+              officeAccount: currentReport.editableFields.officeAccount,
+              password: currentReport.editableFields.password,
+              agentId: currentReport.agent.agentId,
+              companyId: currentReport.company.id
             };
           }
         });
@@ -35,7 +45,17 @@
         });
 
         $scope.showPassword = function () {
-          $scope.passwordShown = !$scope.passwordShown;
+          if ($scope.passwordShown || $scope.showEdit) {
+            if (!$scope.showEdit) {
+              $scope.dto.password = undefined;
+            }
+            $scope.passwordShown = !$scope.passwordShown;
+          } else {
+            DevicesService.reportPasswordShow($scope.dto.agentId, $scope.dto.companyId, function (resp) {
+              $scope.dto.password = resp.password;
+              $scope.passwordShown = !$scope.passwordShown;
+            });
+          }
         };
 
         $scope.saveEditedFields = function () {
@@ -43,25 +63,31 @@
           var dto = angular.copy($scope.dto);
 
           if (!$scope.isInstallDateChanged) {
-            $scope.isInstallDateChanged = dto.install_date !== currentReport.variant.installDate;
+            $scope.isInstallDateChanged = dto.installDate !== currentReport.editableFields.installDate;
           }
           if (!$scope.isWarrantyDateChanged) {
-            $scope.isWarrantyDateChanged = dto.warranty_date !== currentReport.variant.warrantyDate;
+            $scope.isWarrantyDateChanged = dto.warrantyDate !== currentReport.editableFields.warrantyDate;
           }
-          if (dto.install_date) {
-            dto.install_date = new Date(dto.install_date);
-            dto.install_date = dto.install_date.getFullYear() + '-' + dto.install_date.getMonth() + '-' + dto.install_date.getDate();
-          }
-
-          if (dto.warranty_date) {
-            dto.warranty_date = new Date(dto.warranty_date);
-            dto.warranty_date = dto.warranty_date.getFullYear() + '-' + dto.warranty_date.getMonth() + '-' + dto.warranty_date.getDate();
+          if (dto.installDate) {
+            dto.installDate = new Date(dto.installDate);
+            dto.installDate = dto.installDate.getFullYear() + '-' + dto.installDate.getMonth() + '-' + dto.installDate.getDate();
           }
 
-          DevicesService.saveReportEditedFields(currentReport.company.id, currentReport.agent.id, dto, function () {
+          if (dto.warrantyDate) {
+            dto.warrantyDate = new Date(dto.warrantyDate);
+            dto.warrantyDate = dto.warrantyDate.getFullYear() + '-' + dto.warrantyDate.getMonth() + '-' + dto.warrantyDate.getDate();
+          }
+
+          DevicesService.saveReportEditedFields(dto, function () {
             $scope.saveInProgress = false;
-            dto.install_date = new Date(dto.install_date);
-            dto.warranty_date = new Date(dto.warranty_date);
+            dto.installDate = new Date(dto.installDate);
+            dto.warrantyDate = new Date(dto.warrantyDate);
+
+            if ($scope.passwordShown) {
+              $scope.dto.password = undefined;
+              $scope.passwordShown = !$scope.passwordShown;
+            }
+
             $scope.toggleEdit();
           });
         };
@@ -122,7 +148,26 @@
         };
 
         $scope.toggleEdit = function () {
-          $scope.showEdit = !$scope.showEdit;
+          if (!$scope.dto.password) {
+            DevicesService.reportPasswordShow($scope.dto.agentId, $scope.dto.companyId, function (resp) {
+              $scope.dto.password = resp.password;
+              $scope.showEdit = !$scope.showEdit;
+            });
+          } else {
+            $scope.showEdit = !$scope.showEdit;
+          }
+        };
+
+        $scope.setInstallDate = function (dates) {
+          if (dates && dates.length) {
+            $scope.dto.installDate = dates[0];
+          }
+        };
+
+        $scope.setWarrantyDate = function (dates) {
+          if (dates && dates.length) {
+            $scope.dto.warrantyDate = dates[0];
+          }
         };
 
         $scope.closeReport = function () {

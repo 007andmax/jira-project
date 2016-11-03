@@ -8,32 +8,36 @@
       scope: {
         dateRangePicker: '=?',
         onHide: '=?',
-        minDate: '=?'
+        minDate: '=?',
+        dateFormat: '@?'
       },
       link: function (scope, element, attrs) {
         var hideTimeout;
         var datepicker = element.datepicker({
-          range: true,
+          range: attrs.isRange ? scope.$eval(attrs.isRange) : true,
           autoClose: true,
           frequency: 'DAILY',
           language: 'en',
           multipleDatesSeparator: ' - ',
+          dateFormat: scope.dateFormat,
           position: attrs.position,
           minDate: scope.minDate ? new Date(+scope.minDate) : '',
-          maxDate: new Date(),
+          maxDate: scope.$eval(attrs.disableMaxDate) ? '' : new Date(),
           onSelect: function () {
             $timeout(function () {
-              scope.dateRangePicker(datepicker.selectedDates);
+              scope.dateRangePicker && scope.dateRangePicker(datepicker.selectedDates);
             });
           },
           onHide: function () {
-            if (hideTimeout) {
-              $timeout.cancel(hideTimeout);
+            if (scope.onHide) {
+              if (hideTimeout) {
+                $timeout.cancel(hideTimeout);
+              }
+              hideTimeout = $timeout(function () {
+                scope.onHide(datepicker.selectedDates);
+                hideTimeout = undefined;
+              }, 50);
             }
-            hideTimeout = $timeout(function () {
-              scope.onHide(datepicker.selectedDates);
-              hideTimeout = undefined;
-            }, 50);
           }
         }).data('datepicker');
 

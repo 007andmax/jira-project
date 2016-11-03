@@ -736,8 +736,13 @@
         return Utils.findById(storage.devices[companyId], agentId);
       }
 
-      function saveReportEditedFields(companyId, agentId, dto, callback) {
-        var future = $http.post('/devices/report/edit', { companyId: companyId, deviceId: agentId, field: dto });
+      function saveReportEditedFields(dto, callback) {
+        var future = $http.post('/devices/report/edit', dto);
+        Utils.handleCallback(future, callback);
+      }
+
+      function reportPasswordShow(agentId, companyId, callback) {
+        var future = $http.get('/devices/report/showPassword?agentId=' + agentId + '&companyId=' + companyId);
         Utils.handleCallback(future, callback);
       }
 
@@ -772,6 +777,7 @@
         getOneTimeHistory: getOneTimeHistory,
         getOneById: getOneById,
         saveReportEditedFields: saveReportEditedFields,
+        reportPasswordShow: reportPasswordShow,
         _addInitListener: _addInitListener
       }
     }

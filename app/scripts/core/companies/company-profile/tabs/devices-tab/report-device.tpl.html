@@ -38,7 +38,7 @@
       <div class="hardware__wrapper--report">
         <div class="main-info">
           <div class="main-info--gadget">
-            <h2><strong>{{ report.agent ? (report.agent.hostName || report.agent.ip) : 'Unknown' }}</strong></h2>
+            <h2><strong>{{ currentAgent ? (currentAgent.hostName || currentAgent.ip) : 'Unknown' }}</strong></h2>
             <p>
               <strong>Manufacturer:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.manufacturer }}</span>
@@ -51,39 +51,39 @@
             </p>
             <p>
               <strong>Serial Number:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.serial_number }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.serial_number">
+              <span ng-if="!showEdit">&nbsp;{{ dto.serialNumber }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.serialNumber">
             </p>
             <p>
               <strong>Asset Tag:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.asset_tag }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.asset_tag">
+              <span ng-if="!showEdit">&nbsp;{{ dto.assetTag }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.assetTag">
             </p>
             <div class="date">
               <strong>Install Date:</strong>
               <span ng-if="!showEdit">
-                {{ isInstallDateChanged || report.variant.installDate ? ((parseDate(dto.install_date) || '') | date: 'dd.MM.yyyy') : '' }}
+                {{ isInstallDateChanged || report.editableFields.installDate ? ((dto.installDate || '') | date: 'dd MMM yyyy') : '' }}
               </span>
-              <div ng-show="showEdit" class="dropdown">
+              <div ng-if="showEdit" style="position: relative">
 
                 <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
-                <input type="text" qt-data-time-picker class="form-control has-dropdown"
-                       data-toggle="dropdown" aria-expanded="false" readonly
-                       placeholder="Install Date" ng-model="dto.install_date">
+                <input type="text" date-range-picker="setInstallDate" is-range="false" date-format="dd M yyyy"
+                       value="{{ (dto.installDate || '') | date: 'dd MMM yyyy' }}"
+                       class="form-control" readonly placeholder="Install Date">
 
               </div>
             </div>
             <div class="date">
               <strong>Warranty Date:</strong>
               <span ng-if="!showEdit">
-                {{ isWarrantyDateChanged || report.variant.warrantyDate ? ((parseDate(dto.warranty_date) || '') | date: 'dd.MM.yyyy') : '' }}
+                {{ isWarrantyDateChanged || report.editableFields.warrantyDate ? ((dto.warrantyDate || '') | date: 'dd MMM yyyy') : '' }}
               </span>
-              <div ng-show="showEdit" class="dropdown">
+              <div ng-if="showEdit" class="dropdown">
 
                 <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
-                <input type="text" qt-data-time-picker class="form-control has-dropdown"
-                       data-toggle="dropdown" aria-expanded="false" readonly
-                       placeholder="Warranty Date" ng-model="dto.warranty_date">
+                <input type="text" date-range-picker="setWarrantyDate" is-range="false" date-format="dd M yyyy"
+                       value="{{ (dto.warrantyDate || '') | date: 'dd MMM yyyy' }}"
+                       class="form-control" readonly placeholder="Warranty Date">
 
               </div>
             </div>
@@ -179,13 +179,13 @@
             </p>
             <p>
               <strong>Office Account:</strong>
-              <span ng-if="!showEdit">{{ dto.account }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.account" autocomplete="off">
+              <span ng-if="!showEdit">{{ dto.officeAccount }}</span>
+              <input ng-if="showEdit" type="text" ng-model="dto.officeAccount" autocomplete="off">
             </p>
             <p>
               <strong>Password:</strong>
-              <span ng-if="!showEdit && dto.password" class="password">
-                {{ dto.password }}
+              <span ng-if="!showEdit" class="password">
+                {{ passwordShown ? dto.password : '********' }}
                 <i class="icn-sm {{ passwordShown ? 'icn-hide-password' : 'icn-show-password' }}"
                    ng-click="showPassword()"></i>
               </span>
@@ -211,7 +211,7 @@
                   <p ng-if="disk.is_system"><strong>System Drive</strong></p>
                 </div>
                 <div class="hard-drive__point--icon">
-                  <img src="images/input-icons/hardware-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+                  <img ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
                 </div>
               </div>
             </div>
@@ -226,7 +226,7 @@
                   <p ng-if="disk.is_system"><strong>System Drive</strong></p>
                 </div>
                 <div class="hard-drive__point--icon">
-                  <img src="images/input-icons/hardware-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+                  <img ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
                 </div>
               </div>
             </div>
