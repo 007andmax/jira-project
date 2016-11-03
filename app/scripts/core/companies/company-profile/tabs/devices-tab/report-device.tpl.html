@@ -67,7 +67,7 @@
               <div ng-if="showEdit" style="position: relative">
 
                 <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
-                <input type="text" date-range-picker="setInstallDate" is-range="false" date-format="dd M yyyy"
+                <input type="text" date-range-picker="setInstallDate" date-format="dd M yyyy"
                        value="{{ (dto.installDate || '') | date: 'dd MMM yyyy' }}"
                        class="form-control" readonly placeholder="Install Date">
 
@@ -81,7 +81,7 @@
               <div ng-if="showEdit" class="dropdown">
 
                 <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
-                <input type="text" date-range-picker="setWarrantyDate" is-range="false" date-format="dd M yyyy"
+                <input type="text" date-range-picker="setWarrantyDate" date-format="dd M yyyy"
                        value="{{ (dto.warrantyDate || '') | date: 'dd MMM yyyy' }}"
                        class="form-control" readonly placeholder="Warranty Date">
 

@@ -700,6 +700,15 @@ header .calendar-top input {
   right: 0;
 }
 
+.chart-tooltip .tooltip-inner {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  text-transform: none;
+  white-space: pre-wrap;
+  height: auto;
+}
+
 /*=============================Mediaqueries===============================*/
 @media screen and (min-width: 1440px) and (max-width: 1600px) {
 

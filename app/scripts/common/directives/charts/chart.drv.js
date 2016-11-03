@@ -9,7 +9,7 @@
         data: '='
       },
       controller: [
-        '$scope', '$element', '$attrs', '$window', '$timeout', function($scope, $el, $attrs, $window, $timeout) {
+        '$scope', '$element', '$attrs', '$window', '$timeout', '$rootScope', function($scope, $el, $attrs, $window, $timeout, $rootScope) {
           var chart, debounce, elements, height, scales, sortOrder, svg, updateSize, width;
           scales = $scope.scales = {};
           elements = $scope.elements = [];
@@ -119,6 +119,7 @@
           }
 
           $scope.$watch(updateSize);
+          $rootScope.$watch('isLeftPanelHidden', updateSize);
           updateSize();
         }
       ]

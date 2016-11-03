@@ -16,6 +16,7 @@
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
         $scope.qSHistoryExpanded = false;
+        $scope.maxDate = Date.now();
 
         //for one time popover
         $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
