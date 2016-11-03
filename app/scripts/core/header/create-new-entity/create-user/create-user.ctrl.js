@@ -155,7 +155,7 @@
         };
 
         $scope.isShowingErrors = function (form, fieldName) {
-          return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;
+          return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty || $scope.triedToSave) && !form[fieldName].$valid;
         };
 
         $scope.validateUserEmail = function (ngModelCtrl) {
