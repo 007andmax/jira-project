@@ -45,18 +45,13 @@
       <div class="col-6">&nbsp;</div>
     </li>
 
-    <li class="qt-product-form" ng-if="isCreationFormShown()">
-      <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
-    </li>
-
     <li ng-repeat="product in productsData.list | filter : filterByCategory | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
-        ng-class="{'qt-product-form': showEditProduct}"
         ng-controller="quicktech.core.products.productCtrl"
         show-model-element="{{ 'show-' + product.versionedId.id}}"
         on-finish-render="loadingFinished()"
         ng-init="setHighlightCreatedProductId(product.versionedId.id)">
 
-      <div class="intermediate-parent-elem" ng-if="!showEditProduct">
+      <div class="intermediate-parent-elem">
 
         <div class="col-1" style="height: 18px;">
           {{ product.ilc}}
@@ -101,7 +96,7 @@
           </a>
 
           <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
-             ng-click="openEditProduct()"
+             create-new-entity="product" item="product"
              tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">
             <i class="icn-sm icn-edit"></i>
           </a>
@@ -126,10 +121,6 @@
         </div>
       </div>
 
-
-      <div ng-if="showEditProduct"
-           ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'">
-      </div>
 
     </li>
 

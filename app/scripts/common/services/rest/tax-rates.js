@@ -143,7 +143,6 @@
       });
 
       RealTimeService.subscribe('/taxRate', scope, function (change) {
-        console.log(change);
         if (change.action === 'TAX_RATE_SAVE') {
           if (taxRates[change.data.company.id]) {
             var findById = Utils.findById(taxRates[change.data.company.id], change.data.versionedId.id);

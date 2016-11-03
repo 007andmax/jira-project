@@ -1,0 +1,48 @@
+<div class="create-window clearfix">
+  <div class="close-btn btn">
+    <i class="icn-sm icn-remove-token" ng-click="closeWindow()"></i>
+  </div>
+  <aside class="navigation">
+    <ul class="navigation__list">
+      <li class="navigation__list--category">
+        <a ng-class="{'checked': openedTab === 'ticket'}"
+           href="javascript:void(0)" ng-click="setOpenedTab('ticket')">Ticket</a>
+      </li>
+      <li class="navigation__list--category">
+        <a ng-class="{'checked': openedTab === 'user'}"
+           href="javascript:void(0)" ng-click="setOpenedTab('user')" ng-if="PermissionsService.isAllowed('CREATE_USERS')">User</a>
+      </li>
+      <li class="navigation__list--category">
+        <a ng-class="{'checked': openedTab === 'company'}"
+           href="javascript:void(0)" ng-click="setOpenedTab('company')" ng-if="PermissionsService.isAllowed('CREATE_COMPANIES')">Company</a>
+      </li>
+      <li class="navigation__list--category">
+        <a ng-class="{'checked': openedTab === 'service'}"
+           href="javascript:void(0)" ng-click="setOpenedTab('service')">Service</a>
+      </li>
+      <li class="navigation__list--category">
+        <a ng-class="{'checked': openedTab === 'product'}"
+           href="javascript:void(0)" ng-click="setOpenedTab('product')" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">Product</a>
+      </li>
+    </ul>
+  </aside>
+  <section class="general">
+    <div style="height: 588px;" ng-switch="openedTab">
+      <div ng-switch-when="ticket">
+        <div ng-include="'/html/scripts/core/header/create-new-entity/create-ticket/create-ticket.tpl.html'"></div>
+      </div>
+      <div ng-switch-when="user">
+        <div ng-include="'/html/scripts/core/header/create-new-entity/create-user/create-user.tpl.html'"></div>
+      </div>
+      <div ng-switch-when="company">
+        <div ng-include="'/html/scripts/core/header/create-new-entity/create-company/create-company.tpl.html'"></div>
+      </div>
+      <div ng-switch-when="product">
+        <div ng-include="'/html/scripts/core/header/create-new-entity/create-product/create-product.tpl.html'"></div>
+      </div>
+      <div ng-switch-when="service">
+        <div ng-include="'/html/scripts/core/header/create-new-entity/create-service/create-service.tpl.html'"></div>
+      </div>
+    </div>
+  </section>
+</div>

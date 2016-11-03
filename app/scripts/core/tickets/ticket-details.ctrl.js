@@ -268,10 +268,6 @@
             }
           };
 
-          $scope.postTicketUpdate = function () {
-            console.log('post update ticket' + $scope.ticketDetails.id);
-          };
-
           $scope.getUserType = function (accountType) {
 
             switch (accountType) {

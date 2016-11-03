@@ -174,39 +174,11 @@
     </div>
     <div class="">
       <div class="topNavbar-create">
-        <div uib-dropdown style="display: inline-block;" ng-if="applicationLoaded">
-
-          <div class="btn btn-success has-tooltip" uib-dropdown-toggle>
-            <div class="create-new-wrap">
-              <span class="create-new-label">Create New</span>
-              <i class="icn-sm icn-plus"></i>
-            </div>
+        <div class="btn btn-success has-tooltip" ng-if="applicationLoaded" create-new-entity>
+          <div class="create-new-wrap">
+            <span class="create-new-label">Create New</span>
+            <i class="icn-sm icn-plus"></i>
           </div>
-
-          <ul class="dropdown-menu">
-
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1" create-ticket-open-modal>Ticket</a>
-            </li>
-
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1"
-                 ng-if="getClientCompanies().length && PermissionsService.isAllowed('CREATE_USERS')"
-                 ng-click="createUser()">User</a>
-            </li>
-
-            <li role="presentation">
-              <a role="menuitem" tabindex="-1"
-                 ng-if="PermissionsService.isAllowed('CREATE_COMPANIES')"
-                 ui-sref="createCompany">Company</a>
-            </li>
-
-            <li role="presentation" ui-sref="quickSupport">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="addQuickSession()">Quick Support</a>
-            </li>
-
-          </ul>
-
         </div>
       </div>
     </div>

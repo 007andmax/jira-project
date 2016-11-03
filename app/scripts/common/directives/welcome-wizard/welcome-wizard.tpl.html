@@ -3,15 +3,13 @@
     <h1 class="welcome-wrapper__header--description">Welcome to <span>QUICK</span>TECH</h1>
   </div>
   <div class="row">
-    <div class="col-sm-4 col-xs-12"
-         ui-sref="settings.companyProfile" ng-click="closeWizard()">
+    <div class="col-sm-4 col-xs-12" ui-sref="settings.companyProfile" ng-click="closeWizard()">
       <img src="images/input-icons/wizard-step-1.png" alt="Set up settings">
     </div>
     <div class="col-sm-4 col-xs-12">
       <p class="descr descr--first">Create your first client company</p>
     </div>
-    <div class="col-sm-4 col-xs-12"
-         create-ticket-open-modal ng-click="closeWizard()">
+    <div class="col-sm-4 col-xs-12" create-new-entity="ticket" ng-click="closeWizard()">
       <img src="images/input-icons/wizard-step-3.png" alt="Create ticket">
     </div>
   </div>
@@ -20,8 +18,7 @@
     <div class="col-sm-4 col-xs-12">
       <p class="descr descr--second">Set up your company settings</p>
     </div>
-    <div class="col-sm-4 col-xs-12"
-         ui-sref="createCompany" ng-click="closeWizard()">
+    <div class="col-sm-4 col-xs-12" create-new-entity="company" ng-click="closeWizard()">
       <img src="images/input-icons/wizard-step-2.png" alt="Create company">
     </div>
     <div class="col-sm-4 col-xs-12">

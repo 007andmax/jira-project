@@ -240,7 +240,7 @@
         <span>{{ getUserName(primaryContact) }}</span>
       </div>
       <div class="col-xs-1">
-        <div create-ticket-open-modal="{{ company.id }}" style="margin-left: 15px; display: inline-block;"
+        <div create-new-entity="ticket" company-id="{{ company.id }}" style="margin-left: 15px; display: inline-block;"
              uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
           <span><i class="nav-icon icn-lg icn-unassigned"></i></span>
           <span class="badge badge-primary-outline list-company-badge" ng-if="!company.isVendor || company.clientType">

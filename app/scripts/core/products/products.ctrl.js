@@ -8,9 +8,7 @@
       function ($scope, $rootScope, ProductsService, CompaniesService, $timeout,
                 SharedStateService, $stateParams, $state, PermissionsService) {
 
-        var categories,
-          availableTabs = ['category', 'list'],
-          showCreateProductInList = false,
+        var availableTabs = ['category', 'list'],
           globalSearch = SharedStateService.getSharedState('globalSearch');
 
         $scope.PermissionsService = PermissionsService;
@@ -22,7 +20,6 @@
         $scope.loadingInProgress = true;
 
         ProductsService.getAllProducts($scope, function (resp) {
-          categories = resp.categories;
           $scope.productsData = resp;
 
           if (resp && resp.list && !resp.list.length) {
@@ -30,11 +27,6 @@
           }
         });
 
-        $scope.isCreateCategoryShow = false;
-        $scope.newCategory = {};
-        $scope.status = {
-          isopen: false
-        };
         $scope.pageTab = $stateParams.tabName;
         $scope.expandedCategoryId = '';
         $scope.showCategory = '';
@@ -93,46 +85,8 @@
           }
         };
 
-        $scope.openCreationCategory = function () {
-          $scope.isCreateCategoryShow = true;
-        };
-
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSaveCategory || form[fieldName].$dirty) && !form[fieldName].$valid;
-        };
-
-        $scope.addCategory = function (form) {
-          if (form.$valid) {
-            ProductsService.saveCategory($scope.newCategory, function () {
-              $scope.isCreateCategoryShow = false;
-              $scope.newCategory = {};
-              form.$setPristine();
-            });
-          } else {
-            $scope.triedToSaveCategory = true;
-          }
-        };
-
-        $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {
-          if (!categories) {
-            return;
-          }
-
-          var uniqueNameCount = 0;
-          for (var i = 0; i < categories.length; i++) {
-            if ((ngModelCtrl.$viewValue.toLowerCase() === categories[i].name.toLowerCase()) && (modelId !== categories[i].id)) {
-              uniqueNameCount++;
-            }
-          }
-          ngModelCtrl.$setValidity('unique', uniqueNameCount < 1);
-        };
-
-        $scope.cancelEditForms = function () {
-          $rootScope.$broadcast('cancelEditForm');
-        };
-
-        $scope.closeCreateCategoryForm = function () {
-          $scope.isCreateCategoryShow = false;
         };
 
         $scope.setHighlightProductId = function (productId) {
@@ -189,19 +143,6 @@
 
         $scope.setShowingCategory = function (id) {
           $scope.showCategory = id;
-        };
-
-        $scope.setShowCreateProductInList = function (trigger) {
-          showCreateProductInList = trigger;
-        };
-
-        $scope.isCreationFormShown = function () {
-          return showCreateProductInList;
-        };
-
-        $scope.openCreationForm = function () {
-          showCreateProductInList = true;
-          $scope.$broadcast('cancelEditForm');
         };
 
       }]);

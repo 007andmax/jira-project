@@ -13,13 +13,6 @@
             <a ui-sref="products({ tabName: 'list' })">Products List</a>
           </li>
 
-          <li class="product-create-btn-form" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
-            <div class="btn btn-info has-tooltip" ng-if="pageTab === 'list'" ng-click="openCreationForm()"
-                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Product">
-              <i class="icn-sm icn-product-add"></i>
-            </div>
-          </li>
-
         </ul>
       </div>
 

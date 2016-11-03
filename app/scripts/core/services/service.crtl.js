@@ -15,21 +15,12 @@
           });
         };
 
-        $scope.showEditServiceForm = function () {
-          $rootScope.$broadcast('cancelEditForm');
-          $scope.isEditService = true;
-        };
-
         $scope.onChangeBillable = function () {
           $scope.disabledCheckbox = true;
           ServicesService.changeBillableStatus($scope.service.versionedId.id, !$scope.service.billable, function () {
             $scope.disabledCheckbox = false;
           })
         };
-
-        $scope.$on('cancelEditForm', function () {
-          $scope.isEditService = false;
-        })
 
       }]);
 

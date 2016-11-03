@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
-    ['$scope', '$state', '$stateParams', 'CompaniesService', 'StatisticsService', 'TicketsService', 'DevicesService',
+    ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
-      function ($scope, $state, $stateParams, CompaniesService, StatisticsService, TicketsService, DevicesService,
+      function ($scope, $state, $stateParams, CompaniesService, DevicesService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
@@ -61,35 +61,6 @@
           $scope.isDomainPresent = resp.domainPresent;
           $scope.allowAgentInstall = resp.allowAgentInstall;
         });
-
-        //$scope.ticketsResolution = StatisticsService.getTicketsResolutionTimeChartDataByCompany($stateParams.companyId, $scope);
-        //$scope.timeBilledByCompany = StatisticsService.getTimeBilledByCompany($stateParams.companyId, $scope);
-        //$scope.countsTicketsCompany = TicketsService.getCountsByTypesAndCompany($scope, $stateParams.companyId, ['UNASSIGNED', 'OPEN'], function () {
-        //
-        //  $scope.$watch('countsTicketsCompany', function () {
-        //
-        //    $scope.countsByTypesAndCompany = [{
-        //      label: 'Unassigned',
-        //      value: $scope.countsTicketsCompany['UNASSIGNED'],
-        //      color: "#1586e4"
-        //    }, {
-        //      label: 'Open',
-        //      value: $scope.countsTicketsCompany['OPEN'],
-        //      color: "#ffa726"
-        //    }];
-        //
-        //    for (var i = 0; i < $scope.countsByTypesAndCompany.length; i++) {
-        //      if ($scope.countsByTypesAndCompany[i].value > 0 && !$scope.isChartHasOpen) {
-        //        //$scope.isCollapsed = false;
-        //        $scope.isChartHasOpen = true;
-        //        $scope.isCompanyHasTickets = true;
-        //        return;
-        //      }
-        //    }
-        //
-        //  })
-        //
-        //});
 
         $scope.archiveCompany = function () {
           var company = CompaniesService.getOneById($scope.company.id);
@@ -217,24 +188,6 @@
             return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
           }
 
-        };
-
-        $scope.setEditedUser = function (user) {
-          $scope.editedUser = angular.copy(user);
-        };
-
-        $scope.createUser = function () {
-          if (!$scope.editedUser || !$scope.editedUser.newUser) {
-            $state.go('companyProfile', { tabName: 'user' }).then(function () {
-              $scope.editedUser = {
-                newUser: true,
-                company: { id: $scope.company.id },
-                role: 'USER',
-                phoneNumbers: [{ typeNumber: 'OFFICE' }],
-                subscription: {}
-              };
-            });
-          }
         };
 
       }]);

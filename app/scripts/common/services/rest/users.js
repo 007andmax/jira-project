@@ -170,9 +170,8 @@
           if (company.id !== CompaniesService.getCurrentCompany().id) {
             if (!company.isVendor || company.clientType) {
               storage.clientUsers.push(newUser);
-            } else {
-              storage.clientUsersWithVendors.push(newUser);
             }
+            storage.clientUsersWithVendors.push(newUser);
           }
 
           generateInitials(newUser);

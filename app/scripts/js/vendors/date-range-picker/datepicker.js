@@ -827,6 +827,10 @@ var Datepicker;
             this.inFocus = false;
             this.visible = false;
             this.$el.blur();
+
+            if (this.opts.onHide) {
+              this.opts.onHide();
+            }
         },
 
         down: function (date) {

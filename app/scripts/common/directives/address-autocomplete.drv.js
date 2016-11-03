@@ -13,7 +13,8 @@
             showValidationMessages: '=showValidationMessages',
             saveFunc: '=?',
             focusAddress: '=?',
-            isAddressRequired: '=?'
+            isAddressRequired: '=?',
+            useAlternativeMap: '@?'
           },
           templateUrl: function (elem, attr) {
             return '/html/scripts/core/' + attr.templatePage + '/address-autocomplete.tpl.html';
@@ -25,6 +26,7 @@
               inputCtrl = input.controller('ngModel'),
               autocomplete = new google.maps.places.Autocomplete(input[0]),
               map,
+              useAlternativeMap = $scope.$eval($scope.useAlternativeMap),
               marker,
               centerLatLng,
               savedAddress = ngModelCtrl.$viewValue && ngModelCtrl.$viewValue.address;
@@ -38,7 +40,10 @@
               };
             }
 
-            var googleData = GoogleMapService.createMap(mapDiv, centerLatLng);
+            if (!mapDiv.length) {
+              mapDiv = angular.element(document).find('[alternative-map]');
+            }
+            var googleData = GoogleMapService.createMap(mapDiv, centerLatLng, useAlternativeMap);
 
             map = googleData.map;
             marker = googleData.marker;
@@ -143,7 +148,7 @@
                   lng: ngModelCtrl.$viewValue.locationLng
                 };
 
-                GoogleMapService.setCenter(centerLatLng);
+                GoogleMapService.setCenter(centerLatLng, useAlternativeMap);
                 marker.setVisible(true);
               } else {
                 marker.setVisible(false);

@@ -5,6 +5,7 @@
   var app = angular.module("quicktech",
     [
       'main.services',
+      'quicktech.core.dashboards',
       'quicktech.core.tickets',
       'quicktech.core.users',
       'quicktech.common.services',
@@ -62,30 +63,20 @@
           templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
           controller: 'quicktech.core.tickets.ticketDetailsCtrl'
         }))
+        .state('tickets-dashboard', waitForServices({
+          url: '/tickets-dashboard',
+          templateUrl: '/html/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
+          controller: 'quicktech.core.dashboards.ticketsDashboardCtrl'
+        }))
         .state('users', waitForServices({
           url: '/clients/users',
           templateUrl: '/html/scripts/core/users/users.tpl.html',
           controller: 'quicktech.core.users.usersCtrl'
         }))
-        .state('users.create', waitForServices({
-          url: '/create',
-          templateUrl: '/html/scripts/core/users/user-edit.tpl.html',
-          controller: 'quicktech.core.users.createUserCtrl'
-        }))
         .state('companies', waitForServices({
           url: '/clients/companies',
           templateUrl: '/html/scripts/core/companies/companies.tpl.html',
           controller: 'quicktech.core.companies.companiesCtrl'
-        }))
-        .state('createCompany', waitForServices({
-          url: '/clients/companies/create',
-          templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
-          controller: 'quicktech.core.companies.editCompanyCtrl'
-        }))
-        .state('editCompany', waitForServices({
-          url: '/clients/companies/edit/:companyId',
-          templateUrl: '/html/scripts/core/companies/edit-company.tpl.html',
-          controller: 'quicktech.core.companies.editCompanyCtrl'
         }))
         .state('companyProfile', waitForServices({
           url: '/clients/companyProfile/:companyId?tabName',
@@ -109,7 +100,12 @@
         .state('accounting', waitForServices({
           url: '/accounting',
           template: '<div ui-view></div>',
-          redirectTo: 'accounting.billable'
+          redirectTo: 'accounting.dashboard'
+        }))
+        .state('accounting.dashboard', waitForServices({
+          url: '/dashboard',
+          templateUrl: '/html/scripts/core/dashboards/billing-dashboard/billing-dashboard.tpl.html',
+          controller: 'quicktech.core.dashboards.billingDashboardCtrl'
         }))
         .state('accounting.billable', waitForServices({
           url: '/billable',
@@ -208,25 +204,10 @@
           templateUrl: '/html/scripts/core/settings/email-templates/email-templates.tpl.html',
           controller: 'quicktech.core.settings.emailTemplatesCtrl'
         }))
-        //.state('devices', waitForServices({
-        //  url: '/clients/devices',
-        //  templateUrl: '/html/scripts/core/devices/devices.tpl.html',
-        //  controller: 'quicktech.core.devices.devicesCtrl'
-        //}))
-        //.state('companyDevices', waitForServices({
-        //  url: '/clients/companyDevices/:companyId',
-        //  templateUrl: '/html/scripts/core/devices/company-devices.tpl.html',
-        //  controller: 'quicktech.core.devices.companyDevicesCtrl'
-        //}))
         .state('quickSupport', waitForServices({
           url: '/quickSupport',
           templateUrl: '/html/scripts/core/quick-support/quick-support.tpl.html',
           controller: 'quicktech.core.quickSupport.quickSupportCtrl'
-        }))
-        .state('taxRates', waitForServices({
-          url: '/inventory/taxRates',
-          templateUrl: '/html/scripts/core/tax-rates/tax-rates.tpl.html',
-          controller: 'quicktech.core.taxRates.taxRatesCtrl'
         }));
 
       function waitForServices(conf) {
@@ -265,9 +246,6 @@
           $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
           if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
-            if (fromState.name === 'users.create' && toState.name === 'users' || fromState.name === 'users' && toState.name === 'users.create') {
-              return;
-            }
             globalSearch.count = undefined;
             globalSearch.selectedItemsCount = undefined;
           }
@@ -284,11 +262,7 @@
               globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
             };
             globalSearch.goBack.tooltip = 'collapse ticket';
-          } else if (toState.name === 'editCompany') {
-            globalSearch.goBack.isEnabled = true;
-            globalSearch.goBack.func = $state.go.bind($state, 'companyProfile', { companyId: $stateParams.companyId });
-            globalSearch.goBack.tooltip = 'back to company profile';
-          } else if (toState.name === 'companyProfile' || toState.name === 'createCompany') {
+          } else if (toState.name === 'companyProfile') {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'companies');
             globalSearch.goBack.tooltip = 'back to companies';
@@ -430,6 +404,8 @@
 
             }).result.then(function (ticket) {
               if (ticket) {
+
+                //create ticket update
                 var params = {
                   listType: 'all',
                   ticketId: ticket.id,
@@ -449,10 +425,11 @@
                 }
               } else if (ticket === undefined) {
 
+                //create ticket
                 var modalInstance = $uibModal.open({
-                  templateUrl: '/html/scripts/core/tickets/create/create-ticket.tpl.html',
-                  controller: 'quicktech.core.tickets.createTicketCtrl',
-                  windowClass: 'modal-create-ticket',
+                  templateUrl: '/html/scripts/core/header/create-new-entity/create-new-entity.tpl.html',
+                  controller: 'createNewEntityCtrl',
+                  windowClass: 'create-popup',
                   backdrop: 'static',
                   animation: true,
                   resolve: {
@@ -462,11 +439,14 @@
                     sessionTime: function () {
                       return sessionTime;
                     },
-                    fromRemoteCompanyId: function () {
+                    resolvedDeviceId: function () {
+                      return deviceId;
+                    },
+                    resolvedCompanyId: function () {
                       return companyId;
                     },
-                    fromRemoteDeviceId: function () {
-                      return deviceId;
+                    resolvedOpenedTab: function () {
+                      return 'ticket';
                     }
                   }
                 });

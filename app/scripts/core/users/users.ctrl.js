@@ -3,11 +3,11 @@
 (function () {
 
   angular.module('quicktech.core.users').controller('quicktech.core.users.usersCtrl',
-    ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService', 'StatisticsService',
+    ['$scope', '$rootScope', 'UsersService', 'SubscriptionsService', 'CompaniesService',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService', '$state',
-      'localStorageService', 'Utils',
-      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService, StatisticsService,
-                SharedStateService, PermissionsService, $state, localStorageService, Utils) {
+      'localStorageService',
+      function ($scope, $rootScope, UsersService, SubscriptionsService, CompaniesService,
+                SharedStateService, PermissionsService, $state, localStorageService) {
 
         if (!PermissionsService.isAllowed('VIEW_USERS')) {
           $state.go('tickets');
@@ -20,7 +20,6 @@
         $scope.usersCtrl = {};
 
         $scope.usersView = localStorageService.get('users-view') || 'grid';
-        $scope.editUser = undefined;
         $scope.orderUsers = {
           field: 'name',
           reverse: false
@@ -35,10 +34,6 @@
             localStorageService.set('users-view', view);
           }
         };
-
-        $scope.$on('createNewUser', function () {
-          $scope.usersView = 'grid';
-        });
 
         $scope.$watch('usersCtrl.shownUsers.length', function (usersCount) {
           globalSearch.count = usersCount;
@@ -90,56 +85,8 @@
           headerSharedState.filter = {};
         });
 
-        $scope.$on('cancelEditForm', function () {
-          $scope.editUser = undefined;
-        });
-
         $scope.changeUserRole = function (userId, userRole) {
           UsersService.changeUserRole(userId, userRole);
-        };
-
-        $scope.setEditUserId = function (userId) {
-
-          $rootScope.$broadcast('cancelEditForm');
-
-          if (userId) {
-
-            var clientCompanies = CompaniesService.getClientCompanies();
-
-            if (!clientCompanies || clientCompanies.length < 1) {
-              alert('Create at list one company before adding users');
-              return;
-            }
-
-            var user = UsersService.getOneById(userId);
-            var userSubscription = user.subscription;
-            var avatar = user.avatar;
-
-            userSubscription = userSubscription ? userSubscription.staticCopy() : {};
-            avatar = avatar ? avatar.staticCopy() : {};
-
-            $scope.editUser = {
-              id: user.id,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              designation: user.designation,
-              role: user.role,
-              primaryEmail: user.primaryEmail,
-              phoneNumbers: user.phoneNumbers.staticCopy(),
-              companyId: user.company.id,
-              subscription: userSubscription,
-              avatar: avatar,
-              userEnabled: user.userEnabled
-            };
-
-            $scope.isLastInvoiceSubsciption = userSubscription.invoice &&
-              UsersService.getAllByCompanyId(user.company.id).filter(function (user) {
-                return user.subscription.invoice;
-              }).length <= 1;
-
-          } else {
-            $scope.editUser = undefined;
-          }
         };
 
         $scope.subscribeUser = function (user, nameSubscription) {
@@ -187,10 +134,6 @@
             return item.userStatistic ? item.userStatistic.ticketsSubmitted : false;
           }
 
-        };
-
-        $scope.setEditedUser = function (user) {
-          $scope.editedUser = angular.copy(user);
         };
 
         $scope.isLastUserWithInvoiceSubscription = function (targetUser) {

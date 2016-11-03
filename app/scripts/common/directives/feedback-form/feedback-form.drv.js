@@ -204,14 +204,6 @@
             return 'Companies';
           } else if ($state.includes("companyProfile")) {
             return 'Company Profile';
-          } else if ($state.includes("createCompany")) {
-            return 'Create Company';
-          } else if ($state.includes("editCompany")) {
-            return 'Edit Company';
-          } else if ($state.includes("createVendor")) {
-            return 'Create Vendor';
-          } else if ($state.includes("editVendor")) {
-            return 'Edit Vendor';
           } else if ($state.includes("products")) {
             return 'Products';
           } else if ($state.includes("services")) {

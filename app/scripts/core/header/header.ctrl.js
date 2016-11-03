@@ -15,12 +15,6 @@
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
 
-        $scope.createUser = function () {
-          $state.go('users.create').then(function () {
-            $rootScope.$broadcast('createNewUser');
-          });
-        };
-
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
         };
@@ -91,6 +85,8 @@
             return 'quick-support';
           } else if ($state.includes("taxRates")) {
             return 'Tax Rates';
+          } else if ($state.current.url.indexOf('dashboard') > -1) {
+            return 'Dashboard';
           }
         };
 

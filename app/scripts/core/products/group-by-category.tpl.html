@@ -1,64 +1,17 @@
 <div>
-  <div class="btn btn-block btn-lg btn-add-category pull-left"
-       custom-disabled="{{ isCreateCategoryShow }}"
-       ng-click="openCreationCategory()" ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">
-    <i class="icn-sm icn-add-category"></i>
-    Add Category
-  </div>
 
   <ul class="qt-list qt-products">
-
-    <li class="qt-product-edit" ng-if="isCreateCategoryShow" ng-form="newCategoryNameForm"
-        ng-class="{'has-error': isShowingErrors(newCategoryNameForm, 'newCategoryName')}">
-
-      <div class="col-1">
-        <input type="text" class="form-control" placeholder="Category name..."
-               style="background-color: transparent;border-color: transparent;"
-               ng-model="newCategory.name"
-               name="newCategoryName" ng-required="true" ng-maxlength="100"
-               is-uniq-validation validation-func="isUniqueCategoryName">
-      </div>
-
-      <div class="col-2">
-        <div class="product-actions">
-
-          <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
-             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save"
-             custom-disabled="{{ newCategoryNameForm.$invalid }}"
-             ng-click="addCategory(newCategoryNameForm)">
-            <i class="icn-sm icn-product-save"></i>
-          </a>
-
-          <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
-             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Cancel"
-             ng-click="closeCreateCategoryForm()">
-            <i class="icn-sm icn-product-cancel"></i>
-          </a>
-
-        </div>
-      </div>
-
-      <div ng-messages="newCategoryNameForm.newCategoryName.$error"
-           ng-if="isShowingErrors(newCategoryNameForm, 'newCategoryName')">
-        <div class="error-msg" ng-message="required">Name is required.</div>
-        <div class="error-msg" ng-message="maxlength">Name is too large.</div>
-        <div class="error-msg" ng-message="unique">Name already occupied.</div>
-      </div>
-
-    </li>
 
     <li ng-repeat="category in productsData.categories | orderBy: ['default', 'name'] track by category.id"
         ng-controller="quicktech.core.products.categoryCtrl" ng-form="editCategoryForm"
         on-finish-render="loadingFinished()"
         ng-show="(!category.default || category.productsList.length > 0) && (!showCategory || showCategory === category.id)"
-        ng-class="{'has-error': isShowingErrors(editCategoryForm, 'editCategoryName'),
-                   'qt-product-edit': isEditCategory, 'default-ctgr-prdcs': category.default}">
+        ng-class="{'default-ctgr-prdcs': category.default}">
 
       <div class="clickable-layer"
-           ng-click="category.productsList.length > 0 ? setExpandedCategoryId(category.id) : null"
-           ng-hide="isEditCategory"></div>
+           ng-click="category.productsList.length > 0 ? setExpandedCategoryId(category.id) : null"></div>
 
-      <div class="intermediate-category" ng-if="!isEditCategory">
+      <div class="intermediate-category">
         <div class="col-1">
           <div class="category-name">{{ category.name}}</div>
         </div>
@@ -72,7 +25,7 @@
 
           <div class="product-actions" ng-if="!category.default && PermissionsService.isAllowed('MANAGE_PRODUCTS')">
 
-            <div class="btn btn-info has-tooltip" ng-click="addProductAndOpenCategory(category.id)"
+            <div class="btn btn-info has-tooltip" create-new-entity="product" item="category"
                  tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Product">
               <i class="icn-sm icn-product-add"></i>
             </div>
@@ -85,7 +38,7 @@
 
             <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
                tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit category"
-               ng-click="openEditCategory()">
+               create-new-entity="category" item="category">
               <i class="icn-sm icn-edit"></i>
             </a>
 
@@ -138,17 +91,12 @@
                 <div class="col-6">&nbsp;</div>
               </li>
 
-              <li class="qt-product-form" ng-if="showCreateProduct === 'start'">
-                <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
-              </li>
-
               <li ng-repeat="product in category.productsList | orderBy : orderByForProducts : orderProducts.reverse track by product.versionedId.id"
-                  ng-class="{'qt-product-form': showEditProduct}"
                   ng-controller="quicktech.core.products.productCtrl"
                   show-model-element="{{ 'show-' + product.versionedId.id}}"
                   ng-init="setHighlightCreatedProductId(product.versionedId.id)">
 
-                <div class="intermediate-parent-elem" ng-if="!showEditProduct">
+                <div class="intermediate-parent-elem">
 
                   <div class="col-1" style="height: 18px;">
                     {{ product.ilc}}
@@ -189,7 +137,7 @@
                     </a>
 
                     <a href="javascript:void(0)" class="ha-edit hit-area pull-right has-tooltip"
-                       ng-click="openEditProduct()"
+                       create-new-entity="product" item="product"
                        tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">
                       <i class="icn-sm icn-edit"></i>
                     </a>
@@ -210,70 +158,12 @@
                       </li>
 
                     </ul>
-
                   </div>
                 </div>
-
-
-                <div ng-if="showEditProduct"
-                     ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'">
-                </div>
-
               </li>
-
-              <li class="qt-product-form" ng-if="showCreateProduct === 'end'">
-                <div ng-include="'/html/scripts/core/products/edit-product-form.tpl.html'"></div>
-              </li>
-
             </ul>
-
-            <div class="add-product-btn-wrapper"
-                 ng-if="!category.default && PermissionsService.isAllowed('MANAGE_PRODUCTS')">
-              <div class="btn btn-info has-tooltip"
-                   ng-click="addProduct(category.id, 'end')"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Product">
-                <i class="icn-sm icn-product-add"></i>
-              </div>
-            </div>
-
           </div>
         </div>
-      </div>
-
-      <div class="intermediate-category" ng-if="isEditCategory">
-
-        <div class="col-1">
-          <input type="text" class="form-control" placeholder="Category name..."
-                 style="background-color: transparent;border-color: transparent;"
-                 ng-model="editCategory.name" focus-on
-                 name="editCategoryName" ng-required="true" ng-maxlength="100"
-                 is-uniq-validation validation-func="isUniqueCategoryName" model-id="category.id"/>
-        </div>
-
-        <div class="col-2">
-          <div class="product-actions">
-
-            <a href="javascript:void(0)" class="hit-area ha-18-14 pull-right has-tooltip"
-               ng-click="saveEditCategory(editCategoryForm)" custom-disabled="{{ disabledSaveButton }}"
-               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Save">
-              <i class="icn-sm icn-product-save"></i>
-            </a>
-            <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
-               ng-click="cancelEditCategory()"
-               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Cancel">
-              <i class="icn-sm icn-product-cancel"></i>
-            </a>
-
-          </div>
-        </div>
-
-        <div ng-messages="editCategoryForm.editCategoryName.$error"
-             ng-if="isShowingErrors(editCategoryForm, 'editCategoryName')">
-          <div class="error-msg" ng-message="required">Name is required.</div>
-          <div class="error-msg" ng-message="maxlength">Name is too large.</div>
-          <div class="error-msg" ng-message="unique">Name already occupied.</div>
-        </div>
-
       </div>
 
     </li>

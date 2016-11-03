@@ -49,7 +49,7 @@
 
               <a href="javascript:void(0)" class="hit-area has-tooltip"
                  ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
-                 ui-sref="editCompany({ companyId: company.id })"
+                 create-new-entity="company" item="company"
                  tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Edit">
                 <i class="icn-sm icn-edit-white"></i>
               </a>
@@ -105,9 +105,9 @@
 
 
           <div class="button-container">
-            <i class="icn-retina new-ticket pull-left" create-ticket-open-modal="{{ company.id }}"
+            <i class="icn-retina new-ticket pull-left" create-new-entity="ticket" company-id="{{ company.id }}"
                uib-tooltip="Create Ticket" tooltip-placement="top" ng-if="!company.isVendor || company.clientType"></i>
-            <i class="icn-retina new-user pull-left" style="margin-left: 15px;" ng-click="createUser()"
+            <i class="icn-retina new-user pull-left" style="margin-left: 15px;" create-new-entity="user" company-id="{{ company.id }}"
                ng-if="PermissionsService.isAllowed('CREATE_USERS')"
                uib-tooltip="Create User" tooltip-placement="top"></i>
             <div ng-if="!company.isVendor || company.clientType"

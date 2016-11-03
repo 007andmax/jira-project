@@ -1,14 +1,13 @@
 <div class="qt-create-invoice clearfix" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
   <div class="edit-invoice-form">
     <form name="editInvoiceForm">
-      <!--<span class="numb-form">{{ actualInvoiceNumber }}</span>-->
 
       <fieldset class="main-form">
         <fieldset class="half">
 
           <label class="company-label" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}"
                  dropdown-arrow-navigation on-enter="chooseCompany" dropdown-data-item-name="company"
-                 open-dropdown-on-model-change uib-dropdown>
+                 open-dropdown-on-model-change uib-dropdown add-create-new-button="company">
             <span>Customer</span>
 
             <input ng-model="searchCompany"
