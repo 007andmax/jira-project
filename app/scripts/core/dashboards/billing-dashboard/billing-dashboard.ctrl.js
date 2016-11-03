@@ -227,8 +227,8 @@
                 return item.date;
               });
 
-              $scope.totalInvoicableData = getDataForLineChart($scope.allDashboards, 'totalInvoicable');
-              $scope.totalInvoicableTicks = $scope.totalInvoicableData.map(function (item) {
+              $scope.totalInvoiceableData = getDataForLineChart($scope.allDashboards, 'totalInvoicable');
+              $scope.totalInvoiceableTicks = $scope.totalInvoiceableData.map(function (item) {
                 return item.date;
               });
 

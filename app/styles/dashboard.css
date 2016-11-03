@@ -474,10 +474,14 @@ header .calendar-top input {
 
 .chart .creation-timeline,
 .chart .ticket-resp-time,
+.total-tickets-chart,
 .open-tickets-chart,
 .average-service-time-chart,
 .average-sales-chart,
-.managed-non-managed {
+.managed-non-managed,
+.total-projection-chart,
+.total-receivables-chart,
+.total-invoiceable-chart {
   height: 80%;
 }
 .managed-non-managed{
@@ -501,11 +505,21 @@ header .calendar-top input {
   fill: #00bf8e;
 }
 
+.total-tickets-chart .d3 .line {
+  stroke: #ffb55c;
+}
+
+.total-tickets-chart .d3 .outer-circle,
+.total-tickets-chart .d3 .axis-tooltip rect {
+  fill: #ffb55c;
+}
+
 .open-tickets-chart .d3 .line {
   stroke: #00bf8e;
 }
 
-.open-tickets-chart .d3 .outer-circle {
+.open-tickets-chart .d3 .outer-circle,
+.open-tickets-chart .d3 .axis-tooltip rect {
   fill: #00bf8e;
 }
 
@@ -513,7 +527,8 @@ header .calendar-top input {
   stroke: #00a4b5;
 }
 
-.average-service-time-chart .d3 .outer-circle {
+.average-service-time-chart .d3 .outer-circle,
+.average-service-time-chart .d3 .axis-tooltip rect {
   fill: #00a4b5;
 }
 
@@ -521,8 +536,40 @@ header .calendar-top input {
   stroke: #8849ae;
 }
 
-.average-sales-chart .d3 .outer-circle {
+.average-sales-chart .d3 .outer-circle,
+.average-sales-chart .d3 .axis-tooltip rect {
   fill: #8849ae;
+}
+
+.total-projection-chart .d3 .line {
+  stroke: #27c1e3;
+}
+
+.total-projection-chart .d3 .outer-circle,
+.total-projection-chart .d3 .axis-tooltip rect {
+  fill: #27c1e3;
+}
+
+.total-receivables-chart .d3 .line {
+  stroke: #86db5e;
+}
+
+.total-receivables-chart .d3 .outer-circle,
+.total-receivables-chart .d3 .axis-tooltip rect {
+  fill: #86db5e;
+}
+
+.total-invoiceable-chart .d3 .line {
+  stroke: #ffb55c;
+}
+
+.total-invoiceable-chart .d3 .outer-circle,
+.total-invoiceable-chart .d3 .axis-tooltip rect {
+  fill: #ffb55c;
+}
+
+.d3 .axis-tooltip text {
+  fill: white !important;
 }
 
 .total-overdue-sum {

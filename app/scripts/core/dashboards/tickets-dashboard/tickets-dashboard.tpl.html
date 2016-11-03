@@ -32,10 +32,10 @@
                 Total tickets
               </p>
               <div ng-if="!loading && totalTicketsData && totalTicketsData.length"
-                   d3chart data="totalTicketsData" class="open-tickets-chart"
+                   d3chart data="totalTicketsData" class="total-tickets-chart"
                    margin="{ top: 10, right: 60, bottom: 60, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
-                        ticks="{{ totalTicketsTicks.length }}" max-labels-count="6"
+                        ticks="{{ totalTicketsTicks.length }}" only-first-and-last="true"
                         tick-values="totalTicketsTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
                 <d3line x="date" y="total"></d3line>
@@ -69,7 +69,7 @@
                    d3chart data="openTicketsData" class="open-tickets-chart"
                    margin="{ top: 10, right: 60, bottom: 60, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
-                        ticks="{{ openTicketsTicks.length }}" max-labels-count="6"
+                        ticks="{{ openTicketsTicks.length }}" only-first-and-last="true"
                         tick-values="openTicketsTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
                 <d3line x="date" y="total"></d3line>
@@ -120,7 +120,7 @@
                    d3chart data="averageServiceTimeData" class="average-service-time-chart"
                    margin="{ top: 10, right: 60, bottom: 60, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
-                        ticks="{{ averageServiceTimeTicks.length }}" max-labels-count="6"
+                        ticks="{{ averageServiceTimeTicks.length }}" only-first-and-last="true"
                         tick-values="averageServiceTimeTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
                 <d3line x="date" y="total" tooltip-affix="m"></d3line>
@@ -154,7 +154,7 @@
                    d3chart data="averageSalesData" class="average-sales-chart"
                    margin="{ top: 10, right: 60, bottom: 60, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
-                        ticks="{{ averageSalesTicks.length }}" max-labels-count="6"
+                        ticks="{{ averageSalesTicks.length }}" only-first-and-last="true"
                         tick-values="averageSalesTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
                 <d3line x="date" y="total" tooltip-preffix="$"></d3line>
@@ -174,7 +174,7 @@
                 </p>
                 <div ng-if="!dashboard.noPriorities">
                   <div class="pie-chart col-12" d3chart data="ticketsPriority"
-                       margin="{left: 0, right: 0, bottom: 20, top: 0}">
+                       margin="{left: 0, right: 0, bottom: 20, top: 0}" is-center>
                     <d3pie value="count" colors="['#00bf8e','#ffb55c','#ff7877']"></d3pie>
                   </div>
                   <div class="pie-legend">

@@ -29,7 +29,12 @@
             return $el[0].offsetHeight;
           };
 
-          chart = svg.append("g").attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+          if (typeof $attrs.isCenter === 'string') {
+            var center = width() / 2 - Math.min(width(), height()) / 2.7;
+            chart = svg.append("g").attr("transform", "translate(" + center + "," + this.margin.top + ")");
+          } else {
+            chart = svg.append("g").attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+          }
 
           this.getSvg = function() {
             return svg;
@@ -67,6 +72,10 @@
                 _this.height = height();
                 _this.innerWidth = _this.width - _this.margin.left - _this.margin.right;
                 _this.innerHeight = _this.height - _this.margin.top - _this.margin.bottom;
+                if (typeof $attrs.isCenter === 'string') {
+                  var center = width() / 2 - Math.min(width(), height()) / 2.7;
+                  chart.attr("transform", "translate(" + center + "," + $scope.margin.top + ")");
+                }
                 return _this.redraw();
               }
             };

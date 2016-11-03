@@ -41,14 +41,16 @@
             .attr("cy", function (d) {
               return y(d[options.y]);
             })
-            .on("mouseover", function (d) {
+            .on("mouseover", function (d, i) {
               tooltip.transition().duration(200).style("opacity", .9);
+              chartController.xAxisShowLabel && chartController.xAxisShowLabel(i);
               return tooltip.html('<div class="tooltip-inner">' + (options.tooltipPreffix || '') + d[options.y] + (options.tooltipAffix || '') + '</div>')
                 .attr('class', 'tooltip')
                 .style("left", d3.event.pageX - tooltip[0][0].clientWidth / 2 + "px")
                 .style("top", (d3.event.pageY - 35) + "px");
             })
-            .on("mouseleave", function () {
+            .on("mouseleave", function (d, i) {
+              chartController.xAxisHideLabel && chartController.xAxisHideLabel(i);
               tooltip.transition().duration(200).style("opacity", 0);
               tooltip.style('left', '-10000px');
             });
@@ -61,15 +63,17 @@
             .attr("cy", function (d) {
               return y(d[options.y]);
             })
-            .on("mouseover", function (d) {
+            .on("mouseover", function (d, i) {
               tooltip.transition().duration(200).style("opacity", .9);
+              chartController.xAxisShowLabel && chartController.xAxisShowLabel(i);
               return tooltip.html('<div class="tooltip-inner">' + (options.tooltipPreffix || '') + d[options.y] + (options.tooltipAffix || '') + '</div>')
                 .attr('class', 'tooltip')
                 .style("left", d3.event.pageX - tooltip[0][0].clientWidth / 2 + "px")
                 .style("top", (d3.event.pageY - 35) + "px");
             })
-            .on("mouseleave", function () {
+            .on("mouseleave", function (d, i) {
               tooltip.transition().duration(200).style("opacity", 0);
+              chartController.xAxisHideLabel && chartController.xAxisHideLabel(i);
               tooltip.style('left', '-10000px');
             });
           dots.exit();
@@ -77,7 +81,7 @@
           if (data == null || data.length === 0) {
             return;
           }
-          return linePath.datum(data).attr("d", line);
+          return linePath.datum(data).transition().duration(500).attr("d", line);
         };
 
         return chartController.registerElement(redraw, options.order);

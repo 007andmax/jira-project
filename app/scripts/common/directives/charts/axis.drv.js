@@ -21,8 +21,44 @@
       },
       link: function ($scope, $el, $attrs, chartController) {
         var adjustTickLabels, axisElement, drawGrid, getAxis, grid, label, options, positionLabel,
-          range, redraw, scale, translation, updateScale;
+          range, redraw, scale, translation, updateScale, rect, text, hoveredGroup;
         options = angular.extend(defaults(), $attrs);
+
+        if (options.onlyFirstAndLast) {
+          chartController.xAxisShowLabel = function (index) {
+            if (index !== 0 && index !== axisElement.selectAll('.tick text')[0].length - 1) {
+              var ticks = axisElement.selectAll('.tick text');
+              var target = ticks.filter(function (d, i) { return i === index; });
+              var bBox = target.node().getBBox(),
+                padding = 2;
+
+              var group = axisElement.selectAll('.tick').filter(function (d, i) { return i === index; });
+
+              hoveredGroup = axisElement.append('g').attr('transform', group.attr('transform')).attr('class', 'axis-tooltip');
+
+              rect = hoveredGroup.append('rect')
+                .attr("x", bBox.x - padding)
+                .attr("y", bBox.y - padding)
+                .attr("rx", 3)
+                .attr("ry", 3)
+                .attr("width", bBox.width + (padding * 2))
+                .attr("height", bBox.height + (padding * 2));
+
+              text = hoveredGroup.append('text').text(target.node().innerHTML)
+                .attr("x", target.attr('x'))
+                .attr("y", target.attr('y'))
+                .attr("dy", target.attr('dy'))
+                .attr("style", target.attr('style'));
+            }
+          };
+
+          chartController.xAxisHideLabel = function (index) {
+            if (index !== 0 && index !== axisElement.selectAll('.tick text')[0].length - 1) {
+              hoveredGroup.remove();
+            }
+          };
+        }
+
         range = function (domainValues) {
           if (options.scale !== 'ordinal') {
             if (options.orientation === 'top' || options.orientation === 'bottom') {
@@ -156,10 +192,14 @@
             var maxLabels = +options.maxLabelsCount;
             if (tickLabels[0].length > maxLabels) {
               var reduceIn = Math.ceil(tickLabels[0].length / maxLabels);
-              tickLabels.text(function (d, i) {
-                return i % reduceIn === 0 ? this.innerHTML : '';
+              tickLabels.attr('opacity', function (d, i) {
+                return i % reduceIn === 0 ? 1 : 0;
               });
             }
+          } else if (options.onlyFirstAndLast) {
+            tickLabels.attr('opacity', function (d, i) {
+              return i === 0 || i === tickLabels[0].length - 1 ? 1 : 0;
+            });
           }
           if (options.tickDy) {
             tickLabels.attr('dy', options.tickDy);
@@ -223,7 +263,6 @@
             tickLabels = axisElement.selectAll('.tick text');
             return axisElement.call(adjustTickLabels);
           }
-
 
           // if (options.tickDy && tickLabels[0].length > +options.maxLabelsCount) {
           //   axisElement.selectAll('.tick line').remove();
