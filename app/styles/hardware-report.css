@@ -34,7 +34,7 @@
   top: 4px;
 }
 .hardware .password .icn-hide-password {
-  top: 6px;
+  top: 2px;
 }
 .hardware {
   /*width: 80%;*/
@@ -102,6 +102,7 @@
 .hardware__wrapper--report .date {
   line-height: 20px;
   font-size: 14px;
+  word-break: break-all;
   margin: 5px 0; }
 .hardware__wrapper--report .info-row {
   overflow: hidden;
@@ -160,7 +161,7 @@
 .hardware__wrapper--report .info-row .hard-drive__point:last-child {
   border-bottom: none; }
 .hardware__wrapper--report .info-row .hard-drive__point--info {
-  width: 50%;
+  width: 60%;
   padding-left: 10px;
   display: table-cell; }
 .hardware__wrapper--report .info-row .hard-drive__point--icon {
@@ -183,7 +184,7 @@
   height: 170px;
   /*padding: 15px;*/ }
 .hardware__wrapper--report .info-row .security__antivirus--info, .hardware__wrapper--report .info-row .security__updates--info {
-  width: 50%;
+  width: 60%;
   vertical-align: middle;
   padding-left: 10px;
   display: table-cell; }
