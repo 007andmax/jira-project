@@ -8,11 +8,26 @@
         var lastRange;
         $scope.loading = false;
         $scope.dateRange = [];
+        $scope.maxDate = Date.now();
         $scope.shownDateRange = '';
         $scope.dashboard = {};
         $scope.startDashboard = {};
         $scope.allDashboards = [];
         $scope.ticketsPriorityLegend = ['low', 'medium', 'high'];
+
+        $scope.chartTooltips = {
+          totalTickets: 'Total number of tickets for a selected period\n (don’t include spam and trash).',
+          openTickets: 'Number of open tickets\n during a selected period.',
+          closedTickets: 'How many tickets were closed\n during a selected period.',
+          averageServiceTime: 'Average service time (minutes)\n spent per ticket\n during a selected period.',
+          averageSales: 'Average product price sold per ticket\n during a selected period.',
+          priority: 'Number of tickets by priority\n during a selected period.',
+          topClients: 'Top-10 clients sorted by amount of created tickets.',
+          topCompanies: 'Top-10 companies sorted by amount of created tickets.',
+          topTech: 'Top-10 tech-users sorted by amount of closed tickets.',
+          createdTickets: 'Line chart shows how many new tickets were created\n during a selected period.',
+          responseTime: 'Line chart shows average response time (minutes) per ticket \nduring a selected period. Response time is time between \ncreating a ticket and claiming a ticket.\n Outliers - tickets with response time more than 24 hours.'
+        };
 
         getStatistic();
 

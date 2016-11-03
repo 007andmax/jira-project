@@ -4,7 +4,7 @@
       <div class="calendar-top">
         <span class="calendar-top-img"><img src="images/input-icons/date-picker-dashboard.svg" alt="date-picker"></span>
         {{ shownDateRange || 'All Time' }}
-        <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic">
+        <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic" range max-date="{{ maxDate }}">
         <i class="icn-sm icn-expand" ng-if="!dateRange || !dateRange.length"></i>
         <div class="close-cld"  ng-if="dateRange && dateRange.length"
              ng-mousedown="clearDateRangeAndReload($event)"><i class="icn-sm icn-remove-token-light"></i></div>
@@ -17,7 +17,9 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  Total tickets<span class="helper">?</span>
+                  Total tickets
+                  <span class="helper" tooltip-class="chart-tooltip"
+                        tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalTickets }}">?</span>
                 </p>
                 <div class="stats__main--count font-yellow">
                   <p>{{  dashboard.totalTickets || 0 }}</p>
@@ -29,7 +31,9 @@
             </div>
             <div class="back">
               <p class="board-head">
-                Total tickets<span class="helper">?</span>
+                Total tickets
+                <span class="helper" tooltip-class="chart-tooltip"
+                      tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalTickets }}">?</span>
               </p>
               <div ng-if="!loading && totalTicketsData && totalTicketsData.length"
                    d3chart data="totalTicketsData" class="total-tickets-chart"
@@ -51,7 +55,9 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  Open tickets<span class="helper">?</span>
+                  Open tickets
+                  <span class="helper" tooltip-class="chart-tooltip"
+                        tooltip-placement="top" uib-tooltip="{{ chartTooltips.openTickets }}">?</span>
                 </p>
                 <div class="stats__main--count font-green">
                   <p>{{ dashboard.openTickets || 0 }}</p>
@@ -63,7 +69,9 @@
             </div>
             <div class="back">
               <p class="board-head">
-                Open tickets<span class="helper">?</span>
+                Open tickets
+                <span class="helper" tooltip-class="chart-tooltip"
+                      tooltip-placement="top" uib-tooltip="{{ chartTooltips.openTickets }}">?</span>
               </p>
               <div ng-if="!loading && openTicketsData && openTicketsData.length"
                    d3chart data="openTicketsData" class="open-tickets-chart"
@@ -85,7 +93,9 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  closed tickets<span class="helper">?</span>
+                  closed tickets
+                  <span class="helper" tooltip-class="chart-tooltip"
+                        tooltip-placement="top" uib-tooltip="{{ chartTooltips.closedTickets }}">?</span>
                 </p>
                 <div class="stats__main--count font-red">
                   <p>{{ closedTickets || 0 }}</p>
@@ -102,7 +112,9 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  average time / ticket<span class="helper">?</span>
+                  average time / ticket
+                  <span class="helper" tooltip-class="chart-tooltip"
+                        tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageServiceTime }}">?</span>
                 </p>
                 <div class="stats__main--count font-deep-blue">
                   <p>{{ getAverageTimePerDay(dashboard.averageTimePerDay) }}</p>
@@ -114,7 +126,9 @@
             </div>
             <div class="back">
               <p class="board-head">
-                average time / ticket<span class="helper">?</span>
+                average time / ticket
+                <span class="helper" tooltip-class="chart-tooltip"
+                      tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageServiceTime }}">?</span>
               </p>
               <div ng-if="!loading && averageServiceTimeData && averageServiceTimeData.length"
                    d3chart data="averageServiceTimeData" class="average-service-time-chart"
@@ -136,7 +150,9 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  average sales / ticket<span class="helper">?</span>
+                  average sales / ticket
+                  <span class="helper" tooltip-class="chart-tooltip"
+                        tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageSales }}">?</span>
                 </p>
                 <div class="stats__main--count font-purple">
                   <p>${{ dashboard.averageSalesPerDay.toFixed(0) || 0 }}</p>
@@ -148,7 +164,9 @@
             </div>
             <div class="back">
               <p class="board-head">
-                average sales / ticket<span class="helper">?</span>
+                average sales / ticket
+                <span class="helper" tooltip-class="chart-tooltip"
+                      tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageSales }}">?</span>
               </p>
               <div ng-if="!loading && averageSalesData && averageSalesData.length"
                    d3chart data="averageSalesData" class="average-sales-chart"
@@ -170,7 +188,9 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  tickets by priority<span class="helper">?</span>
+                  tickets by priority
+                  <span class="helper" tooltip-class="chart-tooltip"
+                        tooltip-placement="top" uib-tooltip="{{ chartTooltips.priority }}">?</span>
                 </p>
                 <div ng-if="!dashboard.noPriorities">
                   <div class="pie-chart col-12" d3chart data="ticketsPriority"
@@ -198,7 +218,9 @@
         <div class="col-lg-4 smart-sized col-xs-12 ">
           <div class="top-ten clearfix">
             <p class="board-head">
-              top-10 clients<span class="helper">?</span>
+              top-10 clients
+              <span class="helper" tooltip-class="chart-tooltip"
+                    tooltip-placement="top" uib-tooltip="{{ chartTooltips.topClients }}">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topClients && dashboard.topClients.length">
               <li class="top-ten__list--point-head clearfix">
@@ -239,7 +261,9 @@
         <div class="col-lg-4 smart-sized col-xs-6 ">
           <div class="top-ten clearfix">
             <p class="board-head">
-              top-10 companies<span class="helper">?</span>
+              top-10 companies
+              <span class="helper" tooltip-class="chart-tooltip"
+                    tooltip-placement="top" uib-tooltip="{{ chartTooltips.topCompanies }}">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">
               <li class="top-ten__list--point-head clearfix">
@@ -276,7 +300,9 @@
         <div class="col-lg-4 smart-sized col-xs-6 ">
           <div class="top-ten clearfix">
             <p class="board-head">
-              top-10 tech-users<span class="helper">?</span>
+              top-10 tech-users
+              <span class="helper" tooltip-class="chart-tooltip"
+                    tooltip-placement="top" uib-tooltip="{{ chartTooltips.topTech }}">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topTechUsers && dashboard.topTechUsers.length">
               <li class="top-ten__list--point-head clearfix">
@@ -315,7 +341,9 @@
         <div class="col-lg-6 smart-sized col-xs-12">
           <div class="chart clearfix">
             <p class="board-head">
-              Ticket creation timeline<span class="helper">?</span>
+              Ticket creation timeline
+              <span class="helper" tooltip-class="chart-tooltip"
+                    tooltip-placement="top" uib-tooltip="{{ chartTooltips.createdTickets }}">?</span>
             </p>
 
             <div ng-if="!loading && ticketCreationTimeline && ticketCreationTimeline.length" d3chart
@@ -336,7 +364,9 @@
         <div class="col-lg-6 smart-sized col-xs-12">
           <div class="chart clearfix">
             <p class="board-head graph-ticket">
-              average ticket response time<span class="helper">?</span>
+              average ticket response time
+              <span class="helper" tooltip-class="chart-tooltip"
+                    tooltip-placement="top" uib-tooltip="{{ chartTooltips.responseTime }}">?</span>
             </p>
             <div class="ticket-right-text">
               <div>

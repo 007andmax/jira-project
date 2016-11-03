@@ -8,13 +8,14 @@
       scope: {
         dateRangePicker: '=?',
         onHide: '=?',
-        minDate: '=?',
+        minDate: '@?',
+        maxDate: '@?',
         dateFormat: '@?'
       },
       link: function (scope, element, attrs) {
         var hideTimeout;
         var datepicker = element.datepicker({
-          range: attrs.isRange ? scope.$eval(attrs.isRange) : true,
+          range: typeof attrs.range === 'string',
           autoClose: true,
           frequency: 'DAILY',
           language: 'en',
@@ -22,7 +23,7 @@
           dateFormat: scope.dateFormat,
           position: attrs.position,
           minDate: scope.minDate ? new Date(+scope.minDate) : '',
-          maxDate: scope.$eval(attrs.disableMaxDate) ? '' : new Date(),
+          maxDate: scope.maxDate ? new Date(+scope.maxDate) : '',
           onSelect: function () {
             $timeout(function () {
               scope.dateRangePicker && scope.dateRangePicker(datepicker.selectedDates);
