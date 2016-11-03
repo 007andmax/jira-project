@@ -163,6 +163,7 @@
                 return item.date;
               });
 
+              
               $scope.openTicketsData = getDataForChart($scope.allDashboards, 'openTickets', null, null, null, 0);
               $scope.openTicketsTicks = $scope.openTicketsData.map(function (item) {
                 return item.date;

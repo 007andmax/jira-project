@@ -42,34 +42,35 @@
             <p>
               <strong>Manufacturer:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.manufacturer }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.manufacturer">
+              <input style="margin-left: 8px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.manufacturer">
             </p>
             <p>
               <strong>Model:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.model }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.model">
+              <input style="margin-left: 54px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.model">
             </p>
             <p>
               <strong>Serial Number:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.serialNumber }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.serialNumber">
+              <input style="margin-left: 5px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.serialNumber">
             </p>
             <p>
               <strong>Asset Tag:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.assetTag }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.assetTag">
+              <input style="margin-left: 35px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.assetTag">
             </p>
             <div class="date">
               <strong>Install Date:</strong>
               <span ng-if="!showEdit">
                 {{ isInstallDateChanged || report.editableFields.installDate ? ((dto.installDate || '') | date: 'dd MMM yyyy') : '' }}
               </span>
-              <div ng-if="showEdit" style="position: relative">
+              <div ng-if="showEdit" style="display: inline-block; position: relative; margin-left: 23px;">
 
-                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 9px;right: 13px;z-index: 1;"></i>
                 <input type="text" date-range-picker="setInstallDate" date-format="dd M yyyy"
                        value="{{ (dto.installDate || '') | date: 'dd MMM yyyy' }}"
-                       class="form-control" readonly placeholder="Install Date">
+                       class="form-control hw-input"
+                       readonly placeholder="Install Date">
 
               </div>
             </div>
@@ -78,12 +79,12 @@
               <span ng-if="!showEdit">
                 {{ isWarrantyDateChanged || report.editableFields.warrantyDate ? ((dto.warrantyDate || '') | date: 'dd MMM yyyy') : '' }}
               </span>
-              <div ng-if="showEdit" class="dropdown">
+              <div ng-if="showEdit" style="display: inline-block; margin-left: 4px;" class="dropdown">
 
-                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 13px;z-index: 1;"></i>
+                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 9px;right: 13px;z-index: 1;"></i>
                 <input type="text" date-range-picker="setWarrantyDate" date-format="dd M yyyy"
                        value="{{ (dto.warrantyDate || '') | date: 'dd MMM yyyy' }}"
-                       class="form-control" readonly placeholder="Warranty Date">
+                       class="form-control hw-input" readonly placeholder="Warranty Date">
 
               </div>
             </div>
@@ -180,7 +181,8 @@
             <p>
               <strong>Office Account:</strong>
               <span ng-if="!showEdit">{{ dto.officeAccount }}</span>
-              <input ng-if="showEdit" type="text" ng-model="dto.officeAccount" autocomplete="off">
+              <input style="margin-left: 5px;"
+                ng-if="showEdit" class="form-control hw-input" type="text" ng-model="dto.officeAccount" autocomplete="off">
             </p>
             <p>
               <strong>Password:</strong>
@@ -191,7 +193,8 @@
               </span>
               <span ng-if="showEdit" class="password">
                 <input type="{{ passwordShown ? 'text' : 'password' }}"
-                       ng-model="dto.password" autocomplete="off">
+                       style="margin-left: 35px;"
+                       class="form-control hw-input" ng-model="dto.password" autocomplete="off">
                 <i class="icn-sm {{ passwordShown ? 'icn-hide-password' : 'icn-show-password' }}"
                    ng-click="showPassword()"></i>
               </span>
