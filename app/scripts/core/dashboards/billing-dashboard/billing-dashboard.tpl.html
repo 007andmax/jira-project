@@ -29,7 +29,7 @@
               <p class="board-head">total projection</p>
               <div ng-if="!loading && totalProjectionData && totalProjectionData.length"
                    d3chart data="totalProjectionData" class="total-projection-chart"
-                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                   margin="{ top: 10, right: 20, bottom: 35, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                         ticks="{{ totalProjectionTicks.length }}" only-first-and-last="true"
                         tick-values="totalProjectionTicks"></d3axis>
@@ -83,7 +83,7 @@
               <p class="board-head">total receivables</p>
               <div ng-if="!loading && totalReceivableData && totalReceivableData.length"
                    d3chart data="totalReceivableData" class="total-receivables-chart"
-                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                   margin="{ top: 10, right: 20, bottom: 35, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                         ticks="{{ totalReceivableTicks.length }}" only-first-and-last="true"
                         tick-values="totalReceivableTicks"></d3axis>
@@ -113,7 +113,7 @@
               <p class="board-head">invoiceable</p>
               <div ng-if="!loading && totalInvoiceableData && totalInvoiceableData.length"
                    d3chart data="totalInvoiceableData" class="total-invoiceable-chart"
-                   margin="{ top: 10, right: 60, bottom: 60, left: 60}">
+                   margin="{ top: 10, right: 20, bottom: 35, left: 60}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                         ticks="{{ totalInvoiceableTicks.length }}" only-first-and-last="true"
                         tick-values="totalInvoiceableTicks"></d3axis>
@@ -230,8 +230,6 @@
               There is no data.
             </div>
           </div>
-        </div>
-        <div class="col-lg-6 col-xs-6">
           <div class="chart clearfix">
             <p class="board-head">
               revenue by payment method
@@ -251,7 +249,7 @@
 
           </div>
         </div>
-        <div class="col-lg-12 col-xs-12">
+        <div class="col-lg-6 col-xs-6">
           <div class="top-ten clearfix">
             <p class="board-head">
               top-10 companies

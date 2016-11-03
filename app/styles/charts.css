@@ -56,13 +56,6 @@
 }
 
 /* Pie Chart */
-/*.pie-chart .d3 {*/
-  /*padding-left: 25%;*/
-/*}*/
-/*.pie-chart-2 .d3 {*/
-  /*padding-left: 3%;*/
-  /*padding-top: 5%;*/
-/*}*/
 .d3 .pie.pie-0 path {
   fill: #98abc5;
 }
