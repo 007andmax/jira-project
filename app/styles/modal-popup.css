@@ -286,6 +286,7 @@
 
 .create-window .general footer .btns-container button {
   width: 48%;
+  font-weight: normal;
 }
 .create-window .create-new-user .custom-phone-type,
 .create-window .create-new-user .custom-phone-number{
