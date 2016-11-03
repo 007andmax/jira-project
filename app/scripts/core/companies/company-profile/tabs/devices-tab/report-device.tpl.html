@@ -42,22 +42,26 @@
             <p>
               <strong>Manufacturer:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.manufacturer }}</span>
-              <input style="margin-left: 8px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.manufacturer">
+              <input style="margin-left: 8px;" class="form-control hw-input" ng-if="showEdit" type="text"
+                     ng-model="dto.manufacturer">
             </p>
             <p>
               <strong>Model:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.model }}</span>
-              <input style="margin-left: 54px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.model">
+              <input style="margin-left: 54px;" class="form-control hw-input" ng-if="showEdit" type="text"
+                     ng-model="dto.model">
             </p>
             <p>
               <strong>Serial Number:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.serialNumber }}</span>
-              <input style="margin-left: 5px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.serialNumber">
+              <input style="margin-left: 5px;" class="form-control hw-input" ng-if="showEdit" type="text"
+                     ng-model="dto.serialNumber">
             </p>
             <p>
               <strong>Asset Tag:</strong>
               <span ng-if="!showEdit">&nbsp;{{ dto.assetTag }}</span>
-              <input style="margin-left: 35px;" class="form-control hw-input" ng-if="showEdit" type="text" ng-model="dto.assetTag">
+              <input style="margin-left: 35px;" class="form-control hw-input" ng-if="showEdit" type="text"
+                     ng-model="dto.assetTag">
             </p>
             <div class="date">
               <strong>Install Date:</strong>
@@ -154,7 +158,7 @@
               &nbsp;{{ report.motherboard.manufacturer + ' ' }}
               {{ report.motherboard.product }} {{ report.motherboard.version }}
             </p>
-            <p><strong>SN:</strong>&nbsp;{{ report.motherboard.serial_number }}</p>
+            <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ report.motherboard.serial_number }}</p>
             <p><strong>Bios Version:</strong>&nbsp;{{ (report.bios.biosCaption || '').split('Ver: ').pop() || '' }}</p>
             <p>
               <strong>CPU:</strong>
@@ -164,10 +168,10 @@
             </p>
             <p>
               <strong>Ram:</strong>
-              <span ng-if="report.ramSlots && report.ramSlots.length">
-                &nbsp;{{ report.ramSlots[0].ramCapacity | fileSizeFilter }}
+              <span ng-if="report.ram">
+                &nbsp;{{ report.ram.total | fileSizeFilter }}
               </span>
-              <span ng-if="!(report.ramSlots && report.ramSlots.length)">No RAM detected</span>
+              <span ng-if="!report.ram">No RAM detected</span>
             </p>
             <p>
               <strong>Windows info:</strong>
@@ -182,7 +186,8 @@
               <strong>Office Account:</strong>
               <span ng-if="!showEdit">{{ dto.officeAccount }}</span>
               <input style="margin-left: 5px;"
-                ng-if="showEdit" class="form-control hw-input" type="text" ng-model="dto.officeAccount" autocomplete="off">
+                     ng-if="showEdit" class="form-control hw-input" type="text" ng-model="dto.officeAccount"
+                     autocomplete="off">
             </p>
             <p>
               <strong>Password:</strong>
@@ -204,32 +209,38 @@
         <div class="info-row">
           <div class="hard-drive info-label" ng-class="{'extra': report.logicalDisks.length > 2}">
             <div class="extra-hidden">
-              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks track by disk.id" ng-if="$index < 2">
+              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks track by disk.id"
+                   ng-if="$index < 2">
                 <div class="hard-drive__point--info">
                   <p><strong>{{ disk.device_id }}</strong>
                     &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
                     {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
-                  <p><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
-                  <p><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
+                  <p style="word-break: break-all;"><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
+                  <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number
+                    }}</p>
                   <p ng-if="disk.is_system"><strong>System Drive</strong></p>
                 </div>
                 <div class="hard-drive__point--icon">
-                  <img ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+                  <img
+                    ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
                 </div>
               </div>
             </div>
             <div class="extra-hidden" ng-if="report.logicalDisks.length > 2">
-              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks | limitTo: 2 track by disk.id" ng-if="$index >= 2">
+              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks | limitTo: 2 track by disk.id"
+                   ng-if="$index >= 2">
                 <div class="hard-drive__point--info">
                   <p><strong>{{ disk.device_id }}</strong>
                     &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
                     {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
-                  <p><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
-                  <p><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number }}</p>
+                  <p style="word-break: break-all;"><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
+                  <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number
+                    }}</p>
                   <p ng-if="disk.is_system"><strong>System Drive</strong></p>
                 </div>
                 <div class="hard-drive__point--icon">
-                  <img ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
+                  <img
+                    ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
                 </div>
               </div>
             </div>
@@ -240,7 +251,8 @@
           <div class="security info-label">
             <div class="security__antivirus">
               <div class="security__antivirus--info">
-                <p><strong>Antivirus:</strong>
+                <p>
+                  <strong>Antivirus:</strong>
                   <span ng-if="!(report.antivirus && report.antivirus.length)">&nbsp;no antivirus installed</span>
                   <br>
                   <span ng-if="report.antivirus && report.antivirus.length">
@@ -260,24 +272,27 @@
             <div class="security__updates">
               <div class="security__updates--info">
                 <p>
-                  <!--<strong>Security updates:</strong><br>-->
-                  <!--<span>{{  }}</span>-->
+                  <span ng-if="report.wu_agent.status === 'Finished'">
+                    <strong>Security updates:</strong><br>
+                    <span>{{ report.wu_agent.missing_updates }} Missing Security Updates</span>
+                  </span>
+                  <br>
                   <strong>Last install:</strong>
-                  <span ng-if="!(report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion)">
+                  <span ng-if="!report.wu_agent">
                     &nbsp;no security installed
                   </span>
                   <br>
-                  <span ng-if="report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion">
-                    {{ parseDate(report.wuaInfo.lastInstall) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
+                  <span ng-if="report.wu_agent">
+                    {{ parseDate(report.wu_agent.last_install) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
                     Hotfixies from Microsoft Update
-                    (agent version {{ report.wuaInfo.wuaVersion }})
+                    (agent version {{ report.wu_agent.version }})
                   </span>
                 </p>
               </div>
               <div class="security__updates--icon">
-                <img ng-if="report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion"
+                <img ng-if="report.wu_agent && report.wu_agent.lastInstall && report.wu_agent.wuaVersion"
                      src="/commonHtml/assets/images/agent-report/shield.png" alt="">
-                <img ng-if="!(report.wuaInfo && report.wuaInfo.lastInstall && report.wuaInfo.wuaVersion)"
+                <img ng-if="!(report.wu_agent && report.wu_agent.lastInstall && report.wu_agent.wuaVersion)"
                      src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
               </div>
             </div>
