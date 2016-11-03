@@ -44,7 +44,7 @@
             .on("mouseover", function (d, i) {
               tooltip.transition().duration(200).style("opacity", .9);
               chartController.xAxisShowLabel && chartController.xAxisShowLabel(i);
-              return tooltip.html('<div class="tooltip-inner">' + (options.tooltipPreffix || '') + d[options.y] + (options.tooltipAffix || '') + '</div>')
+              return tooltip.html('<div class="tooltip-inner ' + options.chartTooltip + '-tooltip">' + (options.tooltipPreffix || '') + d[options.y] + ' ' + (options.tooltipAffix || '') + '</div>')
                 .attr('class', 'tooltip')
                 .style("left", d3.event.pageX - tooltip[0][0].clientWidth / 2 + "px")
                 .style("top", (d3.event.pageY - 35) + "px");
@@ -66,7 +66,7 @@
             .on("mouseover", function (d, i) {
               tooltip.transition().duration(200).style("opacity", .9);
               chartController.xAxisShowLabel && chartController.xAxisShowLabel(i);
-              return tooltip.html('<div class="tooltip-inner">' + (options.tooltipPreffix || '') + d[options.y] + (options.tooltipAffix || '') + '</div>')
+              return tooltip.html('<div class="tooltip-inner ' + options.chartTooltip + '-tooltip">' + (options.tooltipPreffix || '') + d[options.y] + ' ' + (options.tooltipAffix || '') + '</div>')
                 .attr('class', 'tooltip')
                 .style("left", d3.event.pageX - tooltip[0][0].clientWidth / 2 + "px")
                 .style("top", (d3.event.pageY - 35) + "px");

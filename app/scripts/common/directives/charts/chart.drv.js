@@ -30,7 +30,7 @@
           };
 
           if (typeof $attrs.isCenter === 'string') {
-            var center = width() / 2 - Math.min(width(), height()) / 2.7;
+            var center = width() / 2 - Math.min(width(), height()) / 2 + this.margin.left;
             chart = svg.append("g").attr("transform", "translate(" + center + "," + this.margin.top + ")");
           } else {
             chart = svg.append("g").attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -73,7 +73,7 @@
                 _this.innerWidth = _this.width - _this.margin.left - _this.margin.right;
                 _this.innerHeight = _this.height - _this.margin.top - _this.margin.bottom;
                 if (typeof $attrs.isCenter === 'string') {
-                  var center = width() / 2 - Math.min(width(), height()) / 2.7;
+                  var center = width() / 2 - Math.min(width(), height()) / 2 + $scope.margin.left;
                   chart.attr("transform", "translate(" + center + "," + $scope.margin.top + ")");
                 }
                 return _this.redraw();

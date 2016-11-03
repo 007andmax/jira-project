@@ -591,10 +591,10 @@
   margin-top: 11px;
 }
 .modal-create-ticket .modal-header.create-ticket-header .ticket-number{
-  margin-top: 8px;
+  margin-top: 3px;
 }
 .create-ticket-header .modal-title{
-  margin-top: 3px;
+  margin-top: 0px;
 }
 .priority-select .create-dropdown{
   display: inline-block;

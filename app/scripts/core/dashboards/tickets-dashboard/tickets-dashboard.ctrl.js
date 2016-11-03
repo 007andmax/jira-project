@@ -124,7 +124,7 @@
                 return byDay ? Math.round(value / (item.countOfTicketsForResponseTime || 1) / 60) : Math.round(value / 60);
               }, function (counter, item) {
                 return counter + item.countOfTicketsForResponseTime;
-              });
+              }, null, 0);
               $scope.averageTicketsResponseTimeTicks = $scope.averageTicketsResponseTimeMap.map(function (item) {
                 return item.date;
               });
@@ -155,7 +155,7 @@
 
               $scope.averageServiceTimeData = getDataForChart($scope.allDashboards, 'averageTimePerDay', function (value) {
                 return parseFloat((value * 60).toFixed(2));
-              });
+              }, null, null, 0);
               $scope.averageServiceTimeTicks = $scope.averageServiceTimeData.map(function (item) {
                 return item.date;
               });

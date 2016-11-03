@@ -6,8 +6,8 @@
         {{ shownDateRange || 'All Time' }}
         <input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic">
         <i class="icn-sm icn-expand" ng-if="!dateRange || !dateRange.length"></i>
-        <i class="icn-sm icn-remove-token" ng-if="dateRange && dateRange.length"
-           ng-mousedown="clearDateRangeAndReload($event)"></i>
+        <div class="close-cld"  ng-if="dateRange && dateRange.length"
+             ng-mousedown="clearDateRangeAndReload($event)"><i class="icn-sm icn-remove-token-light"></i></div>
       </div>
     </header>
     <section class="dashboard-main">
@@ -17,7 +17,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  Total tickets
+                  Total tickets<span class="helper">?</span>
                 </p>
                 <div class="stats__main--count font-yellow">
                   <p>{{  dashboard.totalTickets || 0 }}</p>
@@ -29,16 +29,16 @@
             </div>
             <div class="back">
               <p class="board-head">
-                Total tickets
+                Total tickets<span class="helper">?</span>
               </p>
               <div ng-if="!loading && totalTicketsData && totalTicketsData.length"
                    d3chart data="totalTicketsData" class="total-tickets-chart"
-                   margin="{ top: 10, right: 20, bottom: 35, left: 35}">
+                   margin="{ top: 10, right: 35, bottom: 35, left: 45}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                         ticks="{{ totalTicketsTicks.length }}" only-first-and-last="true"
                         tick-values="totalTicketsTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
-                <d3line x="date" y="total"></d3line>
+                <d3line x="date" y="total" chart-tooltip="total-tickets"></d3line>
               </div>
               <div ng-if="!loading && (!totalTicketsData || !totalTicketsData.length)" class="no-data-message">
                 There is no data.
@@ -51,7 +51,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  Open tickets
+                  Open tickets<span class="helper">?</span>
                 </p>
                 <div class="stats__main--count font-green">
                   <p>{{ dashboard.openTickets || 0 }}</p>
@@ -63,16 +63,16 @@
             </div>
             <div class="back">
               <p class="board-head">
-                Open tickets
+                Open tickets<span class="helper">?</span>
               </p>
               <div ng-if="!loading && openTicketsData && openTicketsData.length"
                    d3chart data="openTicketsData" class="open-tickets-chart"
-                   margin="{ top: 10, right: 20, bottom: 35, left: 35}">
+                   margin="{ top: 10, right: 35, bottom: 35, left: 45}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                         ticks="{{ openTicketsTicks.length }}" only-first-and-last="true"
                         tick-values="openTicketsTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
-                <d3line x="date" y="total"></d3line>
+                <d3line x="date" y="total" chart-tooltip="open-tickets"></d3line>
               </div>
               <div ng-if="!loading && (!openTicketsData || !openTicketsData.length)" class="no-data-message">
                 There is no data.
@@ -85,7 +85,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  closed tickets
+                  closed tickets<span class="helper">?</span>
                 </p>
                 <div class="stats__main--count font-red">
                   <p>{{ closedTickets || 0 }}</p>
@@ -102,7 +102,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  average time / ticket
+                  average time / ticket<span class="helper">?</span>
                 </p>
                 <div class="stats__main--count font-deep-blue">
                   <p>{{ getAverageTimePerDay(dashboard.averageTimePerDay) }}</p>
@@ -114,16 +114,16 @@
             </div>
             <div class="back">
               <p class="board-head">
-                average time / ticket
+                average time / ticket<span class="helper">?</span>
               </p>
               <div ng-if="!loading && averageServiceTimeData && averageServiceTimeData.length"
                    d3chart data="averageServiceTimeData" class="average-service-time-chart"
-                   margin="{ top: 10, right: 20, bottom: 35, left: 35}">
+                   margin="{ top: 10, right: 35, bottom: 35, left: 45}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                         ticks="{{ averageServiceTimeTicks.length }}" only-first-and-last="true"
                         tick-values="averageServiceTimeTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
-                <d3line x="date" y="total" tooltip-affix="m"></d3line>
+                <d3line x="date" y="total" tooltip-affix=" min" chart-tooltip="average-service-time"></d3line>
               </div>
               <div ng-if="!loading && (!averageServiceTimeData || !averageServiceTimeData.length)" class="no-data-message">
                 There is no data.
@@ -136,7 +136,7 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  average sales / ticket
+                  average sales / ticket<span class="helper">?</span>
                 </p>
                 <div class="stats__main--count font-purple">
                   <p>${{ dashboard.averageSalesPerDay.toFixed(0) || 0 }}</p>
@@ -148,16 +148,16 @@
             </div>
             <div class="back">
               <p class="board-head">
-                average sales / ticket
+                average sales / ticket<span class="helper">?</span>
               </p>
               <div ng-if="!loading && averageSalesData && averageSalesData.length"
                    d3chart data="averageSalesData" class="average-sales-chart"
-                   margin="{ top: 10, right: 20, bottom: 35, left: 35}">
+                   margin="{ top: 10, right: 35, bottom: 35, left: 45}">
                 <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                         ticks="{{ averageSalesTicks.length }}" only-first-and-last="true"
                         tick-values="averageSalesTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
-                <d3line x="date" y="total" tooltip-preffix="$"></d3line>
+                <d3line x="date" y="total" tooltip-preffix="$" chart-tooltip="average-sales"></d3line>
               </div>
               <div ng-if="!loading && (!averageSalesData || !averageSalesData.length)" class="no-data-message">
                 There is no data.
@@ -170,14 +170,14 @@
             <div class="front">
               <div class="stats__main">
                 <p class="board-head">
-                  tickets by priority
+                  tickets by priority<span class="helper">?</span>
                 </p>
                 <div ng-if="!dashboard.noPriorities">
                   <div class="pie-chart col-12" d3chart data="ticketsPriority"
                        margin="{left: 0, right: 0, bottom: 20, top: 0}" is-center>
                     <d3pie value="count" colors="['#00bf8e','#ffb55c','#ff7877']"></d3pie>
                   </div>
-                  <div class="pie-legend">
+                  <div class="pie-legend pie-legend-custom">
                     <span class="legend-{{ $index }}" ng-repeat="legend in ticketsPriorityLegend">
                       {{ legend }}<br>{{ ' (' + (ticketsPriority[$index].count || 0) }})
                     </span>
@@ -198,17 +198,17 @@
         <div class="col-lg-4 smart-sized col-xs-12 ">
           <div class="top-ten clearfix">
             <p class="board-head">
-              top-10 clients
+              top-10 clients<span class="helper">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topClients && dashboard.topClients.length">
               <li class="top-ten__list--point-head clearfix">
                 <div class="col-xs-8 point-name"><p>Name</p></div>
-                <div class="col-xs-2"><p>Created</p></div>
-                <div class="col-xs-2"><p>Closed</p></div>
+                <div class="col-xs-2 text-center"><p>Created</p></div>
+                <div class="col-xs-2 text-center"><p>Closed</p></div>
               </li>
 
               <div qt-nano-scroller>
-                <div>
+                <div style="overflow-y: scroll">
                   <li class="top-ten__list--point"
                       ng-repeat="client in dashboard.topClients | orderBy: '-created' track by client.id">
                     <div class="col-xs-8 point-name">
@@ -220,10 +220,10 @@
                         <p class="text-muted mail-field">{{ getCompanyById(getUserById(client.id).company.id).name }}</p>
                       </div>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-2 text-center">
                       <p class="text-muted">{{ client.created }}</p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-2 text-center">
                       <p class="text-muted">{{ client.closed }}</p>
                     </div>
                   </li>
@@ -239,16 +239,16 @@
         <div class="col-lg-4 smart-sized col-xs-6 ">
           <div class="top-ten clearfix">
             <p class="board-head">
-              top-10 companies
+              top-10 companies<span class="helper">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">
               <li class="top-ten__list--point-head clearfix">
                 <div class="col-xs-8 point-name"><p>Company</p></div>
-                <div class="col-xs-2"><p>Created</p></div>
-                <div class="col-xs-2"><p>Closed</p></div>
+                <div class="col-xs-2 text-center"><p>Created</p></div>
+                <div class="col-xs-2 text-center"><p>Closed</p></div>
               </li>
               <div qt-nano-scroller>
-                <div>
+                <div style="overflow-y: scroll">
                   <li class="top-ten__list--point"
                       ng-repeat="company in dashboard.topCompanies | orderBy: '-created' track by company.id">
                     <div class="col-xs-8 point-name">
@@ -257,10 +257,10 @@
                       </div>
                       <p>{{ getCompanyById(company.id).name }}</p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-2 text-center">
                       <p class="text-muted">{{ company.created }}</p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-2 text-center">
                       <p class="text-muted">{{ company.closed }}</p>
                     </div>
                   </li>
@@ -276,16 +276,16 @@
         <div class="col-lg-4 smart-sized col-xs-6 ">
           <div class="top-ten clearfix">
             <p class="board-head">
-              top-10 tech-users
+              top-10 tech-users<span class="helper">?</span>
             </p>
             <ul class="top-ten__list" ng-if="dashboard.topTechUsers && dashboard.topTechUsers.length">
               <li class="top-ten__list--point-head clearfix">
                 <div class="col-xs-8 point-name"><p>Name</p></div>
-                <div class="col-xs-2"><p>Claimed</p></div>
-                <div class="col-xs-2"><p>Closed</p></div>
+                <div class="col-xs-2 text-center"><p>Claimed</p></div>
+                <div class="col-xs-2 text-center"><p>Closed</p></div>
               </li>
               <div qt-nano-scroller>
-                <div>
+                <div style="overflow-y: scroll">
                   <li class="top-ten__list--point"
                       ng-repeat="tech in dashboard.topTechUsers | orderBy: '-created' track by tech.id">
                     <div class="col-xs-8 point-name">
@@ -294,10 +294,10 @@
                       </div>
                       <p>{{ getUserName(getUserById(tech.id)) }}</p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-2 text-center">
                       <p class="text-muted">{{ tech.created }}</p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-2 text-center">
                       <p class="text-muted">{{ tech.closed }}</p>
                     </div>
                   </li>
@@ -315,17 +315,17 @@
         <div class="col-lg-6 smart-sized col-xs-12">
           <div class="chart clearfix">
             <p class="board-head">
-              Ticket creation timeline
+              Ticket creation timeline<span class="helper">?</span>
             </p>
 
             <div ng-if="!loading && ticketCreationTimeline && ticketCreationTimeline.length" d3chart
                  data="ticketCreationTimeline"
-                 margin="{ top: 10, right: 30, bottom: 20, left: 30}" class="creation-timeline">
+                 margin="{ top: 10, right: 35, bottom: 20, left: 40}" class="creation-timeline">
               <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                       ticks="{{ ticketCreationTimelineTicks.length }}" max-labels-count="10"
                       tick-values="ticketCreationTimelineTicks"></d3axis>
               <d3axis name="total" orientation="left"></d3axis>
-              <d3line x="date" y="total"></d3line>
+              <d3line x="date" y="total" chart-tooltip="creation-timeline"></d3line>
             </div>
 
             <div ng-if="!loading && (!ticketCreationTimeline || !ticketCreationTimeline.length)" class="no-data-message">
@@ -336,7 +336,7 @@
         <div class="col-lg-6 smart-sized col-xs-12">
           <div class="chart clearfix">
             <p class="board-head graph-ticket">
-              average ticket response time
+              average ticket response time<span class="helper">?</span>
             </p>
             <div class="ticket-right-text">
               <div>
@@ -349,12 +349,12 @@
             </div>
             <div ng-if="!loading && averageTicketsResponseTimeMap && averageTicketsResponseTimeMap.length"
                  d3chart data="averageTicketsResponseTimeMap" class="ticket-resp-time"
-                 margin="{ top: 10, right: 30, bottom: 20, left: 35}">
+                 margin="{top: 10, right: 35, bottom: 20, left: 40}">
               <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
                       ticks="{{ averageTicketsResponseTimeTicks.length }}" max-labels-count="10"
                       tick-values="averageTicketsResponseTimeTicks"></d3axis>
               <d3axis name="total" orientation="left"></d3axis>
-              <d3line x="date" y="total" tooltip-affix="m"></d3line>
+              <d3line x="date" y="total" tooltip-affix="min" chart-tooltip="ticket-resp-time"></d3line>
             </div>
             <div ng-if="!loading && (!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length)"
                  class="no-data-message">

@@ -199,23 +199,24 @@
 
                 var formattedMethod = method.split('_').join(' ');
                 formattedMethod = formattedMethod.charAt(0).toUpperCase() + formattedMethod.slice(1).toLowerCase();
-                $scope.revenueByMethod.push({ method: formattedMethod, percents: diff * 100 });
+                $scope.revenueByMethod.push({ method: formattedMethod, percents: diff * 100, amount: diff });
               }
 
-              var others = 0;
+              var others = 0, othersAmount = 0;
               for (var u = 0; u < $scope.revenueByMethod.length; u++) {
                 var item = $scope.revenueByMethod[u];
                 item.percents = Math.round(item.percents / sum);
 
                 if (item.percents <= 3) {
                   others += item.percents;
+                  othersAmount += item.amount;
                   $scope.revenueByMethod.splice(u, 1);
                   u--;
                 }
               }
 
               if (others) {
-                $scope.revenueByMethod.push({ method: 'Others', percents: others });
+                $scope.revenueByMethod.push({ method: 'Others', percents: others, amount: othersAmount });
               }
 
               $scope.revenueByMethod.sort(function (a, b) {

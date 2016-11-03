@@ -60,7 +60,7 @@
 .create-window .general .btn-bottom{
   position: absolute;
   bottom: 25px;
-  right: 25px;
+  right: 30px;
   width: 90%;
 }
 .create-window .general .create-user-form .form-control-number{
