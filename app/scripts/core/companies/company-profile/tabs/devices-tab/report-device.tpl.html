@@ -301,7 +301,7 @@
         <div class="equipment info-label">
           <ul class="equipment__list"><p ng-if="report.printers && report.printers.length"><strong>Printers:</strong>
           </p>
-            <li ng-repeat="printer in report.printers">{{ printer.printerName }}</li>
+            <li ng-repeat="printer in report.printers">{{ printer.name }}</li>
             <li ng-if="!(report.printers && report.printers.length)"> No Printers detected</li>
           </ul>
         </div>
