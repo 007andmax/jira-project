@@ -254,7 +254,7 @@
 
             <div style="height: 80%; width: 70%;" ng-if="!loading && !noRevenue">
               <div class="donut-chart pie-chart col-12" d3chart data="revenue" style="height: 100%"
-                   margin="{left: 0, right: 0, bottom: 30, top: 40}" is-center>
+                   margin="{left: 25, right: 40, bottom: 40, top: 40}" is-center>
                 <d3pie label="percents" value="percents" colors="['#ffb55c','#00bf8e']"
                        label-affix="%" label-radius="1.25" inner-radius="0.7"></d3pie>
               </div>
@@ -278,18 +278,18 @@
                     tooltip-placement="top" uib-tooltip="{{ chartTooltips.revenueByPaymentMethod }}">?</span>
             </p>
 
-            <div style="height: 65%; width: 65%;" ng-if="!loading && !noRevenue">
+            <div style="height: 80%; width: 70%;" ng-if="!loading && !noRevenue">
               <div class="pie-chart-2 col-12" d3chart data="revenueByMethod" style="height: 100%"
-                   margin="{left: 10, right: 10, bottom: 10, top: 10}" is-center>
+                   margin="{left: 20, right: 10, bottom: 40, top: 70}" is-center>
                 <d3pie label="percents" value="percents" avoid-collisions="true"
-                       colors="['#ffb55c','#00bf8e','#ff7877','#27c1e3','#a677b1']"
-                       label-affix="%" label-radius="1.25"></d3pie>
+                       colors="['#00bf8e','#ffb55c','#ff7877','#27c1e3','#a677b1']"
+                       label-affix="%" label-radius="1.3"></d3pie>
               </div>
             </div>
             <div class="pie-legend" ng-if="!loading && !noRevenue">
               <div class="legend-{{ $index }}" ng-repeat="item in revenueByMethod">
                 <div class="filled legend-{{ $index }}">{{ item.method }}</div>
-                <div>{{ item.amount.toFixed() }}</div>
+                <div>${{ item.amount.toFixed() }}</div>
               </div>
             </div>
             <div ng-if="!loading && noRevenue" class="no-data-message">
