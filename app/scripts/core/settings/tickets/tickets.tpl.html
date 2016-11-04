@@ -113,7 +113,8 @@
                  qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
                  style="display: inline-block;">
               <div qt-popover-trigger="mouseenter" style="display: inline-block">
-                <div class="btn btn-lg btn-info pull-right" custom-disabled="{{ isCurrentCompanyAddressEmpty }}"
+                <div class="btn btn-lg btn-info pull-right"
+                     custom-disabled="{{ isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
                      modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
                      modal-window-class="invoice-modal-not-background"
                      mw-window-template-url="/html/scripts/core/billable/create-invoice-modal.tpl.html"

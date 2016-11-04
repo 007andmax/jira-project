@@ -18,7 +18,7 @@
                  style="display: inline-block;">
               <div qt-popover-trigger="mouseenter" style="display: inline-block">
                 <div class="btn btn-create-invoice btn-info pull-right has-tooltip" style="width: 98px;"
-                     custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty }}"
+                     custom-disabled="{{ !countTicket || isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}"
                      tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Create Invoice"
                      modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
                      modal-window-class="invoice-modal-not-background"
