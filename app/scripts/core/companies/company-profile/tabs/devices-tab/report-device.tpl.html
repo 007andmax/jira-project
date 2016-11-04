@@ -263,10 +263,10 @@
               <div class="security__antivirus--icon">
                 <img
                   ng-if="report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate"
-                  src="/commonHtml/assets/images/agent-report/shield.png" alt="">
+                  ng-src="/commonHtml/assets/images/agent-report/shield.png" alt="">
                 <img
                   ng-if="!(report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate)"
-                  src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
+                  ng-src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
               </div>
             </div>
             <div class="security__updates">
@@ -291,9 +291,9 @@
               </div>
               <div class="security__updates--icon">
                 <img ng-if="report.wu_agent && report.wu_agent.lastInstall && report.wu_agent.wuaVersion"
-                     src="/commonHtml/assets/images/agent-report/shield.png" alt="">
+                     ng-src="/commonHtml/assets/images/agent-report/shield.png" alt="">
                 <img ng-if="!(report.wu_agent && report.wu_agent.lastInstall && report.wu_agent.wuaVersion)"
-                     src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
+                     ng-src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
               </div>
             </div>
           </div>
