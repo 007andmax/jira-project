@@ -120,6 +120,7 @@
         $scope.clientTypes = ['Client', 'Lead'];
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
         $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
+        $scope.paymentTerms = ['7 days', '14 days', '30 days'];
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
@@ -173,6 +174,10 @@
               editCompany.defaultPaymentMethod = editCompany.defaultPaymentMethod.toUpperCase().split(' ').join('_');
             } else {
               editCompany.defaultPaymentMethod = null;
+            }
+
+            if (editCompany.paymentTerms) {
+              editCompany.paymentTerms = parseInt(editCompany.paymentTerms);
             }
 
             CompaniesService.save(editCompany, function (resp) {
@@ -230,11 +235,6 @@
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
-        };
-
-        $scope.validatePaymentTerms = function (form) {
-          var valid = ($scope.editCompany.paymentTerms > 0 || $scope.editCompany.paymentTerms === undefined);
-          form.vendorPaymentTerms.$setValidity('minValue', valid || !$scope.editCompany.isVendor);
         };
 
         $scope.validateCompanyDomain = function (ngModelCtrl) {

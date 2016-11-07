@@ -109,17 +109,13 @@
           <div class="error-vendor-form-message" ng-messages="infoForm.vendorPaymentTerms.$error"
                ng-class="{'hide': !isShowingErrors(infoForm, 'vendorPaymentTerms')}">
             <label class="control-label" ng-message="required">Payment terms is required.</label>
-            <label class="control-label" ng-message="pattern">Please enter a valid payment terms.</label>
-            <label class="control-label" ng-message="minValue">Vendor payment terms should be bigger that 0.
-            </label>
-            <label class="control-label" ng-message="maxlength">Payment terms is too large.</label>
           </div>
 
-          <input class="form-control" type="text"  name="vendorPaymentTerms"
-                 ng-disabled="!editCompany.isVendor"
-                 ng-model="editCompany.paymentTerms" ng-required="editCompany.isVendor"
-                 ng-change="validatePaymentTerms(infoForm)" ng-maxlength="3"
-                 ng-pattern="numberPattern" hard-reset-pattern="numberPattern">
+          <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.paymentTerms"
+                 uib-typeahead="paymentTerm for paymentTerm in paymentTerms" ng-disabled="!editCompany.isVendor"
+                 readonly qt-typeahead-show-on-focus ng-required="editCompany.isVendor" name="vendorPaymentTerms">
+          <div typeahead-input-icon="editCompany.paymentTerms"
+               style="position: absolute;top: 30px;right: 13px;"></div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorAccountNumber')}">
