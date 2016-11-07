@@ -45,13 +45,21 @@
   </div>
 
   <div class="row" ng-form="editProductForm">
-    <div class="col-xs-6">
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
-        <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
-               ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50"
-               is-uniq-validation validation-func="validateProductIls" model-id="product.versionedId.id">
-      </div>
 
+    <div class="col-xs-12 form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+      <input type="text" class="form-control" placeholder="Description"
+             ng-model="editProduct.description" ng-required="true"
+             ng-maxlength="500" name="editProductDescription">
+    </div>
+
+    <div class="col-xs-6">
+
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
+           ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+        <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
+               name="cost" ng-change="validateSaleAndCost(editProductForm)"
+               hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+      </div>
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
         <div class="dropdown">
@@ -65,21 +73,20 @@
           <div typeahead-input-icon="editProduct.category" style="position: absolute;top: 13px;right: 13px;"></div>
         </div>
       </div>
+
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
+        <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
+               ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50"
+               is-uniq-validation validation-func="validateProductIls" model-id="product.versionedId.id">
+      </div>
+
+    </div>
+    <div class="col-xs-6">
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
         <input type="text" class="form-control" placeholder="S. Price" ng-model="editProduct.sale"
                name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
                hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
       </div>
-
-    </div>
-    <div class="col-xs-6">
-
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
-        <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
-               ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50"
-               is-uniq-validation validation-func="validateProductMnf" model-id="product.versionedId.id">
-      </div>
-
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
         <div class="dropdown" add-create-new-button="company">
@@ -95,20 +102,12 @@
         </div>
       </div>
 
-      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'cost')}"
-           ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
-        <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
-               name="cost" ng-change="validateSaleAndCost(editProductForm)"
-               hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+      <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
+        <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
+               ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50"
+               is-uniq-validation validation-func="validateProductMnf" model-id="product.versionedId.id">
       </div>
     </div>
-
-    <div class="col-xs-12" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
-      <input type="text" class="form-control" placeholder="Description"
-             ng-model="editProduct.description" ng-required="true"
-             ng-maxlength="500" name="editProductDescription">
-    </div>
-
 
     <div class="col-xs-12 qt-form-actions btn-bottom" style="margin-right: -5px;">
 

@@ -2,29 +2,9 @@
   <ul class="qt-list qt-product-list">
 
     <li class="list-heading" ng-show="productsData.list.length > 0" style="cursor: pointer !important;" fixed-block-top offset-top="148">
-      <div class="col-1" ng-click="setOrderForProducts('ilc')">
-        <span class="sort-span">ILC<i class="icn-sm sort-icon icn-sort"
-                                      ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
-
-      </div>
-      <div class="col-1" ng-click="setOrderForProducts('manufacture')">
-        <span class="sort-span">Mfg#<i class="icn-sm sort-icon icn-sort"
-                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
-
-      </div>
-      <div class="col-1" ng-click="setOrderForProducts('category')">
-        <span class="sort-span">Category<i class="icn-sm sort-icon icn-sort"
-                                           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'category'}"></i></span>
-
-      </div>
       <div class="col-2" ng-click="setOrderForProducts('description')">
         <span class="sort-span">DESCRIPTION<i class="icn-sm sort-icon icn-sort"
                                               ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'description'}"></i></span>
-
-      </div>
-      <div class="col-1" ng-click="setOrderForProducts('vendor')">
-        <span class="sort-span">VENDOR/SUPPLIER <i class="icn-sm sort-icon icn-sort"
-                                                   ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
       </div>
       <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
@@ -35,6 +15,26 @@
       <div class="col-4" ng-click="setOrderForProducts('sale')">
         <span class="sort-span">SALE PRICE<i class="icn-sm sort-icon icn-sort"
                                              ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'sale'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('category')">
+        <span class="sort-span">Category<i class="icn-sm sort-icon icn-sort"
+                                           ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'category'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('vendor')">
+        <span class="sort-span">VENDOR/SUPPLIER <i class="icn-sm sort-icon icn-sort"
+                                                   ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('ilc')">
+        <span class="sort-span">ILC<i class="icn-sm sort-icon icn-sort"
+                                      ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
+
+      </div>
+      <div class="col-1" ng-click="setOrderForProducts('manufacture')">
+        <span class="sort-span">Mfg#<i class="icn-sm sort-icon icn-sort"
+                                       ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
 
       </div>
       <div class="col-4" ng-click="setOrderForProducts('taxable')">
@@ -53,6 +53,23 @@
 
       <div class="intermediate-parent-elem">
 
+        <div class="col-2" ng-class="{'product-description': category.default}"
+             uib-tooltip="{{ product.description }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+          <span trimmed-tooltip-container>{{ product.description }}</span>
+        </div>
+
+        <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
+          {{ product.cost | currency: '$': 2 }}
+        </div>
+
+        <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
+
+        <div class="col-1">
+          {{ product.category.default ? '' : product.category.name}}
+        </div>
+
+        <div class="col-1" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
+
         <div class="col-1" style="height: 18px;">
           {{ product.ilc}}
         </div>
@@ -60,23 +77,6 @@
         <div class="col-1">
           {{ product.manufacture}}
         </div>
-
-        <div class="col-1">
-          {{ product.category.default ? '' : product.category.name}}
-        </div>
-
-        <div class="col-2" ng-class="{'product-description': category.default}"
-             uib-tooltip="{{ product.description }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
-          <span trimmed-tooltip-container>{{ product.description }}</span>
-        </div>
-
-        <div class="col-1" style="height: 20px">{{ getCompanyById(product.company.id).name}}</div>
-
-        <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
-          {{ product.cost | currency: '$': 2 }}
-        </div>
-
-        <div class="col-4">{{ product.sale | currency: '$': 2 }}</div>
 
         <div class="col-4" style="width: 50px">
           <label class="control checkbox pull-left ng-scope" style="margin-top: 4px;">
