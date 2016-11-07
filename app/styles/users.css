@@ -601,7 +601,7 @@
   line-height: 10px;
 }
 .create-user-form label.control-label{
-  text-transform: capitalize;
+  text-transform: none;
 }
 .ticket-drop.has-dropdown ~ i{
   top: 10px;

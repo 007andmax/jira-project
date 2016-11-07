@@ -159,11 +159,14 @@
               {{ report.motherboard.product }} {{ report.motherboard.version }}
             </p>
             <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ report.motherboard.serial_number }}</p>
-            <p><strong>Bios Version:</strong>&nbsp;{{ (report.bios.biosCaption || '').split('Ver: ').pop() || '' }}</p>
+            <p>
+              <strong>Bios Version:</strong>
+              &nbsp;{{ report.bios.manufacturer + ' ' + report.bios.version + ' ' + (parseDate(report.bios.release_date) | date: 'dd MMM yyyy') }}
+            </p>
             <p>
               <strong>CPU:</strong>
               <span ng-if="report.processors && report.processors.length">
-                &nbsp;{{ report.processors[0].processorName }}
+                &nbsp;{{ report.processors[0].name }}
               </span>
             </p>
             <p>
@@ -175,7 +178,7 @@
             </p>
             <p>
               <strong>Windows info:</strong>
-              &nbsp;{{ report.operationSystem.systemCaption + ' ' + report.operationSystem.systemServicePack }}
+              &nbsp;{{ report.system.caption + ' ' + report.system.architecture + ' ' + report.system.service_pack }}
               <br>{{ report.general.WindowsLicenseKey }}
             </p>
             <p ng-if="report.general.OfficeName">
@@ -218,7 +221,7 @@
                   <p style="word-break: break-all;"><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
                   <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number
                     }}</p>
-                  <p ng-if="disk.is_system"><strong>System Drive</strong></p>
+                  <p ng-if="disk.is_system"><strong>OS Drive:</strong>&nbsp;Windows</p>
                 </div>
                 <div class="hard-drive__point--icon">
                   <img
@@ -236,7 +239,7 @@
                   <p style="word-break: break-all;"><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
                   <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number
                     }}</p>
-                  <p ng-if="disk.is_system"><strong>System Drive</strong></p>
+                  <p ng-if="disk.is_system"><strong>OS Drive:</strong>&nbsp;Windows</p>
                 </div>
                 <div class="hard-drive__point--icon">
                   <img
@@ -272,27 +275,27 @@
             <div class="security__updates">
               <div class="security__updates--info">
                 <p>
-                  <span ng-if="report.wu_agent.status === 'Finished'">
+                  <span ng-if="report.wuAgent.status === 'Finished'">
                     <strong>Security updates:</strong><br>
-                    <span>{{ report.wu_agent.missing_updates }} Missing Security Updates</span>
+                    <span>{{ report.wuAgent.missing_updates }} Missing Security Updates</span>
                   </span>
                   <br>
                   <strong>Last install:</strong>
-                  <span ng-if="!report.wu_agent">
+                  <span ng-if="!report.wuAgent">
                     &nbsp;no security installed
                   </span>
                   <br>
-                  <span ng-if="report.wu_agent">
-                    {{ parseDate(report.wu_agent.last_install) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
+                  <span ng-if="report.wuAgent">
+                    {{ parseDate(report.wuAgent.last_install) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
                     Hotfixies from Microsoft Update
-                    (agent version {{ report.wu_agent.version }})
+                    (agent version {{ report.wuAgent.version }})
                   </span>
                 </p>
               </div>
               <div class="security__updates--icon">
-                <img ng-if="report.wu_agent && report.wu_agent.lastInstall && report.wu_agent.wuaVersion"
+                <img ng-if="report.wuAgent && report.wuAgent.last_install && report.wuAgent.version"
                      ng-src="/commonHtml/assets/images/agent-report/shield.png" alt="">
-                <img ng-if="!(report.wu_agent && report.wu_agent.lastInstall && report.wu_agent.wuaVersion)"
+                <img ng-if="!(report.wuAgent && report.wuAgent.last_install && report.wuAgent.version)"
                      ng-src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
               </div>
             </div>

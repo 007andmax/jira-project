@@ -6,8 +6,6 @@
     ['$scope', 'CompaniesService',
       function ($scope, CompaniesService) {
 
-        $scope.techDomainName = $scope.companyForSettingPage.techDomain.split('.')[0];
-
         $scope.validateCompanyName = function (ngModelCtrl) {
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
@@ -33,12 +31,6 @@
               form.$setPristine();
             });
           }
-        };
-
-        $scope.validateCompanyDomain = function (ngModelCtrl) {
-          var validationResult = CompaniesService.isDomainUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
-            ngModelCtrl.$setValidity('unique', !validationResult.value);
-          });
         };
 
       }]);
