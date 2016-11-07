@@ -28,7 +28,6 @@
           if (form.$valid) {
 
             var miscInfo = {
-              timeRange: getMinFromTime($scope.shiftTiming),
               startPage: $scope.pageToOpen
             };
 

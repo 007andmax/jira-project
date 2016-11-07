@@ -498,26 +498,7 @@
           <div class="create-user-form">
             <div class="form-row clearfix">
 
-              <div class="form-group" ng-class="{'has-error': isShowingErrors(miscInfoForm, 'shiftTiming')}">
-
-                <label class="control-label"  ng-class="{'hide': isShowingErrors(miscInfoForm, 'shiftTiming')}">
-                  Shift Timings
-                </label>
-
-                <div ng-messages="miscInfoForm.shiftTiming.$error"
-                     ng-class="{'hide': !isShowingErrors(miscInfoForm, 'shiftTiming')}">
-                  <label class="control-label" ng-message="required">Shift Timings field cannot be left empty.</label>
-                  <label class="control-label" ng-message="pattern">Please enter a valid time. For example 9:00 18:00</label>
-                  <label class="control-label" ng-message="validShiftTiming">FROM should be less that TO</label>
-                </div>
-
-                <input class="form-control" type="text" name="shiftTiming" placeholder="00:00 to 00:00"
-                       ng-model="shiftTiming" make-dirty-on-blur ng-change="validShiftTiming(miscInfoForm)"
-                       ng-required="true" ng-pattern="patternShiftTiming"
-                       execute-when-outfocused="saveMiscInfo(miscInfoForm)">
-              </div>
-
-              <div class="form-group">
+              <div class="form-group full-width">
 
                 <label class="control-label">Page to open after login</label>
 
