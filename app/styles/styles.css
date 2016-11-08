@@ -598,6 +598,9 @@ hr {
   top: 0;
   right: 0;
 }
+.ticket-update-note{
+  position: relative;
+}
 .wysiwyg-controls-wrapper {
   height: 58px;
   padding: 10px;
@@ -605,11 +608,13 @@ hr {
 }
 .ticket-update-note .wysiwyg-controls-wrapper {
   position: absolute;
-  top: calc(100% - 286px);
+  top: calc(100% + 15px);
   left: 40px;
+  width: calc(100% - 80px);
 }
 .ticket-update-note .wysiwyg-controls-wrapper .reset-formatting {
-  left: 305px;
+  left: 100%;
+  position: absolute;
 }
 .modal-create-ticket .wysiwyg-controls-wrapper {
   padding: 5px;
