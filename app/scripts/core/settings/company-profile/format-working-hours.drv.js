@@ -75,6 +75,7 @@
 
             if (!value) {
               element.val(defaultValue);
+              ctrl.$setViewValue(defaultValue);
               $scope.from = defaultFrom;
               $scope.to = defaultTo;
               return;

@@ -128,10 +128,9 @@
 
           <div class="row" ng-repeat="day in companyForSettingPage.responseTimeSettings.workingDays">
 
-            <div class="form-row clearfix">
+            <div class="form-row clearfix" ng-form="workingHoursForm">
               <div class="form-group">
-                <label class="control-label" style="position: relative;top: -10px;"
-                       ng-hide="isShowingErrors(responseTimeSettingsForm, 'workingHours' + day.dayOfWeek)">
+                <label class="control-label" style="position: relative;top: -10px;" ng-if="$first">
                   Working Days
                 </label>
                <div>
@@ -146,29 +145,22 @@
               </div>
 
               <div class="form-group"
-                   ng-class="{'has-error': isShowingErrors(responseTimeSettingsForm, 'workingHours' + day.dayOfWeek)}">
+                   ng-class="{'has-error': isShowingErrors(workingHoursForm, 'workingHours' + day.dayOfWeek)}">
 
                 <label class="control-label"
-                       ng-hide="isShowingErrors(responseTimeSettingsForm, 'workingHours' + day.dayOfWeek)">
+                       ng-if="$first && (workingHoursForm.$pristine || workingHoursForm.$valid)">
                   Working Hours
                 </label>
 
-                <div ng-messages="responseTimeSettingsForm['workingHours' + day.dayOfWeek].$error">
-                  <label class="control-label" ng-message="required">
-                    Working Hours field cannot be left empty.
-                  </label>
-                  <label class="control-label" ng-message="invalidWorkingHours">
-                    Pattern - "from hh:mm to hh:mm".
-                  </label>
-                  <label class="control-label" ng-message="invalidTimeRange">
+                <div class="has-error" ng-if="$first && workingHoursForm.$dirty && workingHoursForm.$invalid">
+                  <label class="control-label">
                     "from" must be less than "to".
                   </label>
                 </div>
 
                 <input type="text" class="form-control" placeholder="from 00:00 to 23:59" name="workingHours{{ day.dayOfWeek }}"
                        format-working-hours from="day.startTime" to="day.endTime" ng-disabled="!day.isSelected"
-                       ng-required="day.isSelected" ng-model="day.workingHours"
-                       execute-when-outfocused="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
+                       ng-model="day.workingHours" execute-when-outfocused="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
               </div>
             </div>
 
