@@ -17,7 +17,7 @@
         $scope.currentUrl = ConstantsService.getConstant('website.dns', function (resp) {
           $scope.currentUrl = resp;
         });
-        $scope.isAddressFocused = $stateParams.isAddressFocused || $scope.currentCompany.status === 'SIGN_UP';
+        $scope.isAddressFocused = $stateParams.isAddressFocused;
         $scope.isAddressRequired = true;
 
         $scope.companyForSettingPage = CompaniesService.getCompanyForSettingPage(function () {

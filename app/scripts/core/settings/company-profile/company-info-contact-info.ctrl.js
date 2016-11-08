@@ -23,24 +23,6 @@
           });
         }
 
-        $scope.$watch(function () {
-          if ($scope.companyForSettingLoad) {
-            var address = $scope.companyForSettingPage.addresses[0];
-            return [
-              address.country,
-              address.countryCode,
-              address.longCity,
-              address.shortCity,
-              address.longState,
-              address.shortState
-            ];
-          }
-        }, function (value) {
-          if (value) {
-            $scope.saveContactInfo($scope.addressesWrapForm);
-          }
-        }, true);
-
         $scope.addPhoneNumber = function (address) {
           address.phoneNumbers.unshift({
             typeNumber: 'OFFICE'

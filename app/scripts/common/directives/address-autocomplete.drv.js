@@ -122,9 +122,6 @@
                   }
                   console.error('Error: ' + message);
                 });
-
-              $scope.saveFunc && $scope.saveFunc();
-              $scope.$apply();
             });
 
             function resetMap() {

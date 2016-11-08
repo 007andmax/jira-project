@@ -31,24 +31,6 @@
           form.$setDirty();
         };
 
-        $scope.$watchCollection(function () {
-          if ($scope.loadUserProfile) {
-            var address = $scope.userProfile.address;
-            return [
-              address.country,
-              address.countryCode,
-              address.longCity,
-              address.shortCity,
-              address.longState,
-              address.shortState
-            ];
-          }
-        }, function (value) {
-          if (value) {
-            $scope.saveContactInfo($scope.phoneNumbersForm);
-          }
-        });
-
         $scope.saveContactInfo = function (form) {
 
           if (form && form.$valid || $scope.phoneNumbersForm.$valid) {
