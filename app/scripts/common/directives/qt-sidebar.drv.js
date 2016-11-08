@@ -20,18 +20,20 @@
 
           function initLeftPanel(e) {
             var windowWidth = window.outerWidth;
-            $rootScope.isLeftPanelHidden = windowWidth <= 1024;
+            if (!$state.is('settings')) {
+              $rootScope.isLeftPanelHidden = windowWidth <= 1024;
 
-            if ($rootScope.isLeftPanelHidden) {
-              $scope.$broadcast('leftPanelClosedFromQTSidebar');
+              if ($rootScope.isLeftPanelHidden) {
+                $scope.$broadcast('leftPanelClosedFromQTSidebar');
+              }
+
+              if (e) {
+                $scope.$apply();
+              }
+
+              $document.off('click', closeLeftPanelOnSmallScreen);
+              $document.on('click', closeLeftPanelOnSmallScreen);
             }
-
-            if (e) {
-              $scope.$apply();
-            }
-
-            $document.off('click', closeLeftPanelOnSmallScreen);
-            $document.on('click', closeLeftPanelOnSmallScreen);
           }
 
           function closeLeftPanelOnSmallScreen(e) {
