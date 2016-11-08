@@ -144,6 +144,22 @@
                 return item.date;
               });
 
+              var outliers = getDataForChart($scope.allDashboards, 'numberOutliersTicketsResponseTime', null, function () {
+                return 1;
+              }, null, 0);
+              for (var j = 0; j < outliers.length; j++) {
+                var outliersItem = outliers[j],
+                  nextItem = outliers[j + 1] || {};
+
+                if ($scope.allDashboards.length > 31) {
+                  outliersItem.total += ' outlier(s) (' + getOutliersTime($scope.allDashboards, outliersItem.date, nextItem.date) + ' h)';
+                } else {
+                  outliersItem.total += ' outlier(s) (' + $scope.allDashboards[j].outliersTime / 3600 + ' h)';
+                }
+
+                $scope.averageTicketsResponseTimeMap[j].outliers = outliersItem.total;
+              }
+
               $scope.dashboard.averageResponseTime = 0;
               $scope.numberOutliersTicketsResponseTime = 0;
               var sumTicketsResponseTime = 0,
@@ -163,7 +179,6 @@
                 return item.date;
               });
 
-              
               $scope.openTicketsData = getDataForChart($scope.allDashboards, 'openTickets', null, null, null, 0);
               $scope.openTicketsTicks = $scope.openTicketsData.map(function (item) {
                 return item.date;
@@ -274,6 +289,30 @@
           }
 
           return result;
+        }
+
+        function getOutliersTime(data, from, to) {
+          var minOutliersTime = 120 * 3600, maxOutliersTime = 0;
+          for (var i = 0; i < data.length; i++) {
+            var dashboard = data[i],
+              date = dashboard.date ? new Date(dashboard.date) : undefined;
+
+            if (date && date.getTime() >= from.getTime() && (!to || date.getTime() <= to.getTime())) {
+              if (minOutliersTime > dashboard.outliersTime) {
+                minOutliersTime = dashboard.outliersTime;
+              }
+
+              if (maxOutliersTime < dashboard.outliersTime) {
+                maxOutliersTime = dashboard.outliersTime;
+              }
+            }
+          }
+
+          if (minOutliersTime === maxOutliersTime) {
+            return minOutliersTime / 3600;
+          } else {
+            return minOutliersTime / 3600 + '-' + maxOutliersTime / 3600;
+          }
         }
 
       }]);

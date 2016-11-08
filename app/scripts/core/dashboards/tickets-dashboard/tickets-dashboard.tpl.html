@@ -373,7 +373,7 @@
                 Response Time <span class="responsive-time">{{ dashboard.averageResponseTime || 0 }} minute(s)</span>
               </div>
               <div ng-if="numberOutliersTicketsResponseTime">
-                Outliers ( > {{ dashboard.outliersTime }} hours)
+                Outliers
                 <span class="outliers">{{ numberOutliersTicketsResponseTime }} ticket(s)</span>
               </div>
             </div>
@@ -384,7 +384,8 @@
                       ticks="{{ averageTicketsResponseTimeTicks.length }}" max-labels-count="10"
                       tick-values="averageTicketsResponseTimeTicks"></d3axis>
               <d3axis name="total" orientation="left"></d3axis>
-              <d3line x="date" y="total" tooltip-affix="min" chart-tooltip="ticket-resp-time"></d3line>
+              <d3line x="date" y="total" tooltip-affix="min" chart-tooltip="chart-tooltip ticket-resp-time"
+                      additional-tooltip-field="outliers" tooltip-top-offset="50"></d3line>
             </div>
             <div ng-if="!loading && (!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length)"
                  class="no-data-message">
