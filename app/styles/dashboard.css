@@ -158,7 +158,6 @@ header .calendar-top {
   display: inline-block;
   float: right;
   padding: 5px 40px 5px 25px;
-  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
 header .calendar-top input {
@@ -213,15 +212,23 @@ header .calendar-top input {
 .dashboard-main .stats .back {
   width: 100%;
   height: 100%;
-
-  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  transition: 0.3s ease-out all;
+  border: 1px solid #bbb;
   margin-bottom: 30px;
+}
+
+.dashboard-main .stats .front:hover,
+.dashboard-main .stats .back:hover,
+.dashboard-main .stats.half-stats:hover{
+  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  border-color: transparent;
 }
 
 .dashboard-main .stats.half-stats {
   height: 110px;
-  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  border: 1px solid #bbb;
   margin-bottom: 30px;
+  transition: 0.3s ease-out all;
 }
 
 .dashboard-main .stats.half-stats .stats__main--count {
