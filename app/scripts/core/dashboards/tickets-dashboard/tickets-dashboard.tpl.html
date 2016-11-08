@@ -373,7 +373,7 @@
                 Response Time <span class="responsive-time">{{ dashboard.averageResponseTime || 0 }} minute(s)</span>
               </div>
               <div ng-if="numberOutliersTicketsResponseTime">
-                Outliers ( > 24 hours)
+                Outliers ( > {{ dashboard.outliersTime }} hours)
                 <span class="outliers">{{ numberOutliersTicketsResponseTime }} ticket(s)</span>
               </div>
             </div>
