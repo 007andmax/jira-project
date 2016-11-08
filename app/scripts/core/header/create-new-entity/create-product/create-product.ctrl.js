@@ -19,6 +19,9 @@
       $scope.vendors = CompaniesService.getVendors();
 
       var savedState = $scope.getLastSavedState('product');
+      if (!savedState.type) {
+        savedState = $scope.getLastSavedState('category');
+      }
 
       if (savedState.type === 'product' && savedState.item) {
         if (savedState.item.name) {
@@ -37,8 +40,7 @@
         }
 
       } else if (savedState.type === 'category' && savedState.item) {
-        $scope.editCategory = {};
-        $scope.editCategory.name = savedState.item.name;
+        $scope.editCategory = angular.copy(savedState.item);
 
       } else {
         $scope.editProduct = {};
@@ -81,8 +83,8 @@
 
       $scope.addCategory = function (form) {
         if (form.$valid) {
-          ProductsService.saveCategory($scope.newCategory, function () {
-            $scope.newCategory = {};
+          ProductsService.saveCategory($scope.editCategory, function () {
+            $scope.editCategory = {};
             form.$setPristine();
           });
         } else {

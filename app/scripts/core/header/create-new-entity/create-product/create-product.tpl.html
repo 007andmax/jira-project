@@ -6,8 +6,7 @@
     <h4 class="modal-title title-services">Create new Product</h4>
     <div class="col-1">
       <input type="text" class="form-control" placeholder="Category name..."
-             style="background-color: transparent;border-color: transparent;"
-             ng-model="editCategory.name"
+             style="background-color: transparent;border-color: transparent;" ng-model="editCategory.name"
              name="newCategoryName" ng-required="true" ng-maxlength="100"
              is-uniq-validation validation-func="isUniqueCategoryName">
     </div>
@@ -28,7 +27,7 @@
 
         <a href="javascript:void(0)" class="hit-area ha-14 pull-right has-tooltip"
            tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Clear"
-           ng-click="editCategory.name = ''">
+           ng-click="editCategory = {}">
           <i class="icn-sm icn-product-cancel"></i>
         </a>
 
