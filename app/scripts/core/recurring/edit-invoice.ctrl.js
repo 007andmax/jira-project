@@ -172,6 +172,7 @@
 
         $scope.chooseCompany = function (company) {
           $scope.clients.splice(0, $scope.clients.length);
+          resetSharedUsers(company);
 
           if (!company) {
             delete $scope.editInvoice.company;
@@ -182,7 +183,6 @@
             return;
           }
 
-          resetSharedUsers(company);
           Utils.customizeArray(UsersService.getAllByCompanyId(company.id), $scope.clients);
 
           $scope.searchCompany = company.name;
@@ -574,23 +574,27 @@
         });
 
         function resetSharedUsers(company) {
-          if (!company) {
-            $scope.ticketSharedUsersList = [];
-            $scope.selectUpdateSharedUser = {};
+
+          if (company) {
+            var usersWithInvoiceSubscription = UsersService.getAllByCompanyId(company.id).filter(function (user) {
+              return user.subscription && user.subscription.invoice;
+            });
           }
 
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
-            if (!shares.user || UsersService.getOneById(shares.user.id).accountType === 'TECH') {
-              continue;
-            }
-
-            if (!shares.user.company || shares.user.company.id !== company.id) {
+            if (shares.user && UsersService.getOneById(shares.user.id).accountType !== 'TECH') {
               $scope.ticketSharedUsersList.splice(i, 1);
               $scope.selectUpdateSharedUser[shares.user.id] = false;
               i--;
             }
+          }
+
+          for (var j = 0; j < usersWithInvoiceSubscription.length; j++) {
+            var user = usersWithInvoiceSubscription[j];
+            $scope.ticketSharedUsersList.push({ user: user, notify: false });
+            $scope.selectUpdateSharedUser[user.id] = true;
           }
         }
 
