@@ -20,10 +20,10 @@
       </div>
 
       <div ng-if="company.serviceType">
-        <strong>Service type: &nbsp;</strong> {{ company.serviceType }}
+        <strong>Service type: &nbsp;</strong> {{ userReadable(company.serviceType) }}
       </div>
       <div style="display: inline-flex;" ng-if="company.clientType">
-        <strong>Client type: &nbsp;</strong> {{ company.clientType }}
+        <strong>Client type: &nbsp;</strong> {{ userReadable(company.clientType) }}
       </div>
     </div>
   </div>

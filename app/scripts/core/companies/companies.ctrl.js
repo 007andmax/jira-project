@@ -59,7 +59,7 @@
           }
 
           if (filter.isVendor) {
-            return value.isVendor;
+            result = result && clientType && clientType.toLowerCase() === 'vendor';
           }
 
           if (filter.isClient) {

@@ -36,7 +36,7 @@
           isOfflineDeviceSelected: false
         };
 
-        if ($scope.company.isVendor) {
+        if ($scope.company.clientType.toLowerCase() === 'vendor') {
           CompaniesService.isVendorHasProducts($scope.company.id, function (resp) {
             $scope.company.hasProducts = resp.isProductExist;
 

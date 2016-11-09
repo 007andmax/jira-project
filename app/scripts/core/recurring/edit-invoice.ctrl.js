@@ -185,6 +185,7 @@
           resetSharedUsers(company);
           Utils.customizeArray(UsersService.getAllByCompanyId(company.id), $scope.clients);
 
+          $scope.paramInvocie.paymentTerms = company.paymentTerms;
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
             id: company.id

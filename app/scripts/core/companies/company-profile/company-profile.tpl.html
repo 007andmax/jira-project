@@ -72,10 +72,10 @@
               Phone: {{ currentLocation.phoneNumbers[0].number }}
             </li>
             <li class="info-type" ng-if="companyData.serviceType">
-              Service type: {{ companyData.serviceType }}
+              Service type: {{ userReadable(companyData.serviceType) }}
             </li>
             <li class="info-type" ng-if="companyData.clientType">
-              Client type: {{ companyData.clientType }}<span ng-if="company.isVendor">, Vendor</span>
+              Client type: {{ userReadable(companyData.clientType) }}
             </li>
           </ul>
 
@@ -106,12 +106,11 @@
 
           <div class="button-container">
             <i class="icn-retina new-ticket pull-left" create-new-entity="ticket" company-id="{{ company.id }}"
-               uib-tooltip="Create Ticket" tooltip-placement="top" ng-if="!company.isVendor || company.clientType"></i>
+               uib-tooltip="Create Ticket" tooltip-placement="top"></i>
             <i class="icn-retina new-user pull-left" style="margin-left: 15px;" create-new-entity="user" company-id="{{ company.id }}"
                ng-if="PermissionsService.isAllowed('CREATE_USERS')"
                uib-tooltip="Create User" tooltip-placement="top"></i>
-            <div ng-if="!company.isVendor || company.clientType"
-              qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
+            <div qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
               qt-popover-position="bottom" custom-disabled="{{ !allowAgentInstall }}"
               class="pull-right" style="cursor: pointer">
               <i class="icn-retina save-download pull-right" qt-popover-trigger tooltip-placement="top"

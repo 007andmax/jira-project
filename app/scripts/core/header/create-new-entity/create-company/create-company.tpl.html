@@ -85,19 +85,10 @@
           </div>
 
           <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.clientType" name="clientType"
-                 uib-typeahead="clientType for clientType in clientTypes"
-                 readonly qt-typeahead-show-on-focus ng-required="!editCompany.isVendor">
-          <div typeahead-input-icon="editCompany.clientType"
-               style="position: absolute;top: 30px;right: 13px;"></div>
-        </div>
-
-        <div class="form-group clearfix">
-          <label class="control checkbox" uib-tooltip="Current vendor has linked products"
-                 tooltip-enable="editCompany.hasProducts">
-            <input type="checkbox" ng-model="editCompany.isVendor" ng-disabled="editCompany.hasProducts">
-            <span class="control-indicator"></span>
-          </label>
-          <label class="vendor-descr">Vendor (allows you to link company with products)</label>
+                 uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
+                 readonly qt-typeahead-show-on-focus required uib-tooltip="Current vendor has linked products"
+                 ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
+          <div typeahead-input-icon="editCompany.clientType" style="position: absolute;top: 30px;right: 13px;"></div>
         </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorPaymentTerms')}">
@@ -109,11 +100,12 @@
           <div class="error-vendor-form-message" ng-messages="infoForm.vendorPaymentTerms.$error"
                ng-class="{'hide': !isShowingErrors(infoForm, 'vendorPaymentTerms')}">
             <label class="control-label" ng-message="required">Payment terms is required.</label>
+            <label class="control-label" ng-message="maxlength">Payment terms must be less then 1000.</label>
           </div>
 
           <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.paymentTerms"
-                 uib-typeahead="paymentTerm for paymentTerm in paymentTerms" ng-disabled="!editCompany.isVendor"
-                 readonly qt-typeahead-show-on-focus ng-required="editCompany.isVendor" name="vendorPaymentTerms">
+                 uib-typeahead="paymentTerm for paymentTerm in paymentTerms"
+                 qt-typeahead-show-on-focus readonly>
           <div typeahead-input-icon="editCompany.paymentTerms"
                style="position: absolute;top: 30px;right: 13px;"></div>
         </div>
@@ -129,8 +121,8 @@
             <label class="control-label" ng-message="maxlength">Vendor number is too large.</label>
           </div>
 
-          <input class="form-control" type="text" ng-disabled="!editCompany.isVendor" ng-maxlength="30"
-                 name="vendorAccountNumber" ng-model="editCompany.accountNumber">
+          <input class="form-control" type="text" ng-if="editCompany.clientType.toLowerCase() === 'vendor'"
+                 name="vendorAccountNumber" ng-model="editCompany.accountNumber" ng-maxlength="30">
         </div>
       </div>
 

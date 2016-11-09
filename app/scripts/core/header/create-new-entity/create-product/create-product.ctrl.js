@@ -36,7 +36,7 @@
         }
         if (company) {
           company = CompaniesService.getOneById(company.id);
-          $scope.editProduct.company = company.isVendor ? company : undefined;
+          $scope.editProduct.company = company.clientType.toLowerCase() === 'vendor' ? company : undefined;
         }
 
       } else if (savedState.type === 'category' && savedState.item) {
