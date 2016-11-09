@@ -82,12 +82,14 @@
             if (newChange.data.company.id !== getCurrentUser().company.id) {
               addOrUpdateClientUser(newChange.data);
             } else {
-              var findById = Utils.findById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
-              if (findById) {
-                Utils.customizeObj(newChange.data, findById);
+              var techUser = Utils.findById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
+
+              if (techUser) {
+                Utils.customizeObj(newChange.data, techUser);
               } else {
                 storage.usersByCompanies[newChange.data.company.id] = storage.usersByCompanies[newChange.data.company.id] || [];
                 storage.usersByCompanies[newChange.data.company.id].push(Utils.customizeObj(newChange.data));
+                Utils.deleteById(storage.deleted, newChange.data.id);
                 storage.users.push(Utils.customizeObj(newChange.data));
               }
             }
@@ -233,6 +235,10 @@
         }
 
         return storage.usersByCompanies[$rootScope.currentUser.company.id] || [];
+      }
+
+      function getArchivedUsers() {
+        return storage.deleted;
       }
 
       function getOneById(userId) {
@@ -545,6 +551,16 @@
         $http.post('/users/deactivate', { note: note });
       }
 
+      function restoreUser(userId, callback) {
+        var future = $http.post('/users/restore', { userId: userId });
+        Utils.handleCallback(future, callback);
+      }
+
+      function requestToChangePassword(userId, callback) {
+        var future = $http.post('/users/changePasswordRequest', { userId: userId });
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -552,6 +568,7 @@
         getClientUsers: getClientUsers,
         getClientUsersWithVendors: getClientUsersWithVendors,
         getTechUsers: getTechUsers,
+        getArchivedUsers: getArchivedUsers,
         getAllByCompanyId: getAllByCompanyId,
         getOneById: getOneById,
         getUserProfile: getUserProfile,
@@ -572,7 +589,9 @@
         closeSessions: closeSessions,
         toggle2FA: toggle2FA,
         get2FA: get2FA,
-        deactivateAccount: deactivateAccount
+        deactivateAccount: deactivateAccount,
+        restoreUser: restoreUser,
+        requestToChangePassword: requestToChangePassword
       }
 
     }]);
