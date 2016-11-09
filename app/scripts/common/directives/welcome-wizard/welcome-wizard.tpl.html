@@ -1,37 +1,35 @@
 <div class="welcome-wrapper container-fluid">
   <div class="welcome-wrapper__header">
-    <h1 class="welcome-wrapper__header--description">Welcome to <span>QUICK</span>TECH</h1>
+    <h1 class="welcome-wrapper__header--description">
+      Welcome to
+      <img src="images/input-icons/Quicktech-logo.png" alt="">
+    </h1>
+    <p>Please update thee areas so that you get the most out of your package</p>
   </div>
-  <div class="row">
-    <div class="col-sm-4 col-xs-12" ui-sref="settings.companyProfile" ng-click="closeWizard()">
-      <img src="images/input-icons/wizard-step-1.png" alt="Set up settings">
+  <div class="first-time-setup-container">
+    <div class="setup-point">
+      <img src="images/input-icons/tech-user.png" alt="">
+      <p>Add Staff</p>
     </div>
-    <div class="col-sm-4 col-xs-12">
-      <p class="descr descr--first">Create your first client company</p>
+    <div class="setup-point">
+      <img src="images/input-icons/email-settings.png" alt="">
+      <p>Email Settings</p>
     </div>
-    <div class="col-sm-4 col-xs-12" create-new-entity="ticket" ng-click="closeWizard()">
-      <img src="images/input-icons/wizard-step-3.png" alt="Create ticket">
+    <div class="setup-point">
+      <img src="images/input-icons//taxes.png" alt="">
+      <p>Rates</p>
+    </div>
+    <div class="setup-point">
+      <img src="images/input-icons/company-profile.png" alt="">
+      <p>Company Settings</p>
+    </div>
+    <div class="setup-point">
+      <img src="images/input-icons/group.png" alt="">
+      <p>Setup Client</p>
     </div>
   </div>
-  <div class="circles circles--first"></div>
-  <div class="row">
-    <div class="col-sm-4 col-xs-12">
-      <p class="descr descr--second">Set up your company settings</p>
-    </div>
-    <div class="col-sm-4 col-xs-12" create-new-entity="company" ng-click="closeWizard()">
-      <img src="images/input-icons/wizard-step-2.png" alt="Create company">
-    </div>
-    <div class="col-sm-4 col-xs-12">
-      <p class="descr descr--third">Add your <br> first ticket</p>
-    </div>
-  </div>
-  <div class="circles circles--second"></div>
-  <div class="welcome-wrapper__footer">
-    <label class="control checkbox">
-      <input type="checkbox" ng-model="dontShowThisAgain">
-      <span class="control-indicator"></span>
-      Don't show this again
-    </label>
-    <button class="btn btn-success" ng-click="closeWizard()">Start exploring</button>
+  <div class="footer-container">
+    <input type="text" class="form-control">
+    <button class="btn btn-primary">Just take me to Tickets</button>
   </div>
 </div>
