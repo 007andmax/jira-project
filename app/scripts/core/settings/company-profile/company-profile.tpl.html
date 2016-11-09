@@ -106,7 +106,7 @@
 
           <div class="form-row clearfix">
 
-            <div class="form-group full-width" style="width: 100%;"
+            <div class="form-group full-width out-time" style="width: 100%;"
                  ng-class="{'has-error': isShowingErrors(responseTimeSettingsForm, 'outliersTime')}">
 
               <label class="control-label" ng-hide="isShowingErrors(responseTimeSettingsForm, 'outliersTime')">
@@ -133,15 +133,15 @@
                 <label class="control-label" style="position: relative;top: -10px;" ng-if="$first">
                   Working Days
                 </label>
-               <div>
-                 <label class="control checkbox pull-left">
-                   <input type="checkbox" ng-model="day.isSelected"
-                          ng-disabled="isLastEnabledDay(companyForSettingPage.responseTimeSettings.workingDays, day)"
-                          ng-change="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
-                   <span class="control-indicator"></span>
-                 </label>
-                 <span style="text-transform: capitalize;">{{ day.dayOfWeek.toLowerCase() }}</span>
-               </div>
+                <div>
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-model="day.isSelected"
+                           ng-disabled="isLastEnabledDay(companyForSettingPage.responseTimeSettings.workingDays, day)"
+                           ng-change="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
+                    <span class="control-indicator"></span>
+                  </label>
+                  <span style="text-transform: capitalize;">{{ day.dayOfWeek.toLowerCase() }}</span>
+                </div>
               </div>
 
               <div class="form-group"

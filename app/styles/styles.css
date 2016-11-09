@@ -2927,6 +2927,11 @@ textarea.form-control {
   top: 31px;
   cursor: pointer;
 }
+
+.form-control[disabled]{
+  background-color: rgb(235, 235, 228);
+}
+
 .form-control.show-password + a.show-password-hit:focus {
   outline: 0;
 }
