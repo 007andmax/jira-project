@@ -593,7 +593,7 @@
 
           for (var j = 0; j < usersWithInvoiceSubscription.length; j++) {
             var user = usersWithInvoiceSubscription[j];
-            $scope.ticketSharedUsersList.push({ user: user, notify: false });
+            $scope.ticketSharedUsersList.push({ user: user, notify: true });
             $scope.selectUpdateSharedUser[user.id] = true;
           }
         }
