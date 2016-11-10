@@ -19,7 +19,7 @@
 
 .welcome-wrapper__header--description img{
   width: 200px;
-  margin-top: -5px;
+  margin-top: -9px;
 }
 
 /*.welcome-wrapper__header--description img:after {*/
@@ -42,7 +42,7 @@
 .first-time-setup-container .setup-point{
   display: table-cell;
   width: 250px;
-  padding: 10px 10px 0;
+  padding: 22px 10px 0;
   vertical-align: bottom;
   border: 1px solid;
   border-color: #eee;
@@ -50,6 +50,7 @@
   cursor: pointer;
   transition: border-color .3s, box-shadow .3s;
   font-family: "Roboto Medium", sans-serif;
+  position: relative;
 }
 
 .first-time-setup-container .setup-point:hover {
@@ -58,13 +59,74 @@
 }
 .first-time-setup-container .setup-point img{
   width:100px;
-  min-height: 75px;
-  max-height: 110px;
 }
 .first-time-setup-container .setup-point p{
-  padding:10px 0;
+  padding:10px 0 0;
 }
 
+.footer-container{
+  width: 200px;
+  margin:auto;
+}
+
+.footer-container input{
+  margin: 20px 0 10px;
+  height: 32px;
+}
+
+.footer-container .btn{
+  width: 100%;
+  margin: 10px 0 20px;
+  height: 32px;
+
+}
+
+.confirm-arrow{
+  position: relative;
+  top: -145px;
+  right: -120px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  color: #00bf8e;
+  border: 1px solid #00bf8e;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.confirm-arrow:before{
+  position: absolute;
+  display: block;
+  top: 8px;
+  left: 8px;
+  width: 10px;
+  height: 6px;
+  border-bottom: 1px solid #00bf8e;
+  transform: rotate(130deg);
+  content: '';
+}
+
+.confirm-arrow:after{
+  position: absolute;
+  display: block;
+  left: 5px;
+  top: 7px;
+  width: 6px;
+  height: 5px;
+  border-bottom: 1px solid #00bf8e;
+  transform: rotate(45deg);
+  content: '';
+}
+
+.confirm-arrow[disabled],
+.confirm-arrow[disabled]:before,
+.confirm-arrow[disabled]:after
+{
+  color: grey;
+  border-color: grey;
+  opacity: 0.7;
+}
 
 
 .welcome-wizard .modal-dialog {
