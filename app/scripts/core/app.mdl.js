@@ -447,7 +447,8 @@
                     },
                     resolvedOpenedTab: function () {
                       return 'ticket';
-                    }
+                    },
+                    resolvedExistedItem: false
                   }
                 });
 
