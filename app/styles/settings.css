@@ -701,23 +701,28 @@ input.default-invoice-terms {
   }
 }
 
-.settings-wrapper__trow {
-  border-bottom: 1px solid #eee;
-}
+
 .settings-wrapper__trow:first-child{
   margin-top: 10px;
 }
 
 .settings-wrapper__trow--td {
-  padding: 20px 0;
+  padding: 10px;
+  padding-bottom: 0;
   text-align: center;
+  width: 160px;
   cursor: pointer;
-  margin-right: 20px;
-  min-height: 200px;
+  margin: 10px;
+  height: 162px;
+  border: 1px solid;
+  border-color: #eee;
+  box-shadow: 0 4px 25px 0 rgba(10, 45, 89, 0);
+  transition: all .3s;
 }
 
 .settings-wrapper__trow--td:hover {
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, 0.1);
+  border-color: transparent;
 }
 
 .settings-wrapper__trow--td .svg-icn-full {
@@ -730,11 +735,11 @@ input.default-invoice-terms {
   opacity: 0.87;
 }
 
-@media screen and (max-width: 1024px) {
-  .settings-wrapper__trow--td .svg-icn-full {
-    width: 60px;
-  }
-}
+/*@media screen and (max-width: 1024px) {*/
+  /*.settings-wrapper__trow--td .svg-icn-full {*/
+    /*width: 60px;*/
+  /*}*/
+/*}*/
 
 /*********************
 *** Fixed Button ***
