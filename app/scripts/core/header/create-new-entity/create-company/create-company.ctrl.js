@@ -48,7 +48,7 @@
             if ($scope.editCompany.paymentTerms) {
               $scope.editCompany.paymentTerms += ' days';
             } else if ($scope.editCompany.paymentTerms === 0) {
-              $scope.editCompany.paymentTerms = 'on receipt';
+              $scope.editCompany.paymentTerms = 'COD';
             }
 
             if ($scope.editCompany.clientType === 'VENDOR') {
@@ -132,7 +132,7 @@
         $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
         $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
-        $scope.paymentTerms = ['on receipt', '7 days', '15 days', '30 days'];
+        $scope.paymentTerms = ['COD', '7 days', '15 days', '30 days'];
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
