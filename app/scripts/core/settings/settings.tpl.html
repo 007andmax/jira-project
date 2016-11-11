@@ -1,63 +1,63 @@
-<div class="settings-wrapper row" ng-if="settingMode === '/settings'">
+<div class="settings-wrapper" ng-if="settingMode === '/settings'">
   <div class="col-xs-12 settings-wrapper__trow">
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.myProfile">
-      <img class="svg-icn-full" src="images/input-icons/user-shape.svg">
+      <img class="svg-icn-full" src="images/settings-icon/user-profile.png">
       <p>User Profile</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.emailNotifications">
-      <img class="svg-icn-full" src="images/input-icons/envelope.svg">
+      <img class="svg-icn-full" src="images/settings-icon/email-notifications.png">
       <p>Email Notifications</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.tags" ng-if="currentUser.isOwner">
-      <img class="svg-icn-full" src="images/input-icons/tags.svg">
+      <img class="svg-icn-full" src="images/settings-icon/manage-tags.png">
       <p>Manage Tags</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.activityHistory">
-      <img class="svg-icn-full" src="images/input-icons/history.svg">
+      <img class="svg-icn-full" src="images/settings-icon/activity-history.png">
       <p>Activity History</p>
     </div>
   </div>
   <div class="col-xs-12 settings-wrapper__trow" ng-if="currentUser.isOwner">
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.companyProfile">
-      <img class="svg-icn-full" src="images/input-icons/building.svg">
+      <img class="svg-icn-full" src="images/settings-icon/company-profile.png">
       <p>Company Profile</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.techUsers">
-      <img class="svg-icn-full" src="images/input-icons/admin-with-cogwheels.svg">
+      <img class="svg-icn-full" src="images/settings-icon/user.png">
       <p>Tech Users</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.email">
-      <img class="svg-icn-full" src="images/input-icons/email-settings.svg">
+      <img class="svg-icn-full" src="images/settings-icon/email-settings.png">
       <p>Email Settings</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.services">
-      <img class="svg-icn-full" src="images/input-icons/open-wrench-tool-silhouette.svg">
+      <img class="svg-icn-full" src="images/settings-icon/services.png">
       <p>Services</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.taxRates">
-      <img class="svg-icn-full" src="images/input-icons/dollar-symbol.svg">
+      <img class="svg-icn-full" src="images/settings-icon/taxes.png">
       <p>Taxes</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td" ui-sref="settings.tickets">
-      <img class="svg-icn-full" src="images/input-icons/concert-ticket.svg">
+      <img class="svg-icn-full" src="images/settings-icon/tickets-settings.png">
       <p>Ticket Settings</p>
     </div>
   </div>
   <div class="col-xs-12 settings-wrapper__trow">
     <div class="col-xs-1 settings-wrapper__trow--td"
          ui-sref="settings.permissionsManagement" ng-if="currentUser.isOwner">
-      <img class="svg-icn-full" src="images/input-icons/permission.svg">
+      <img class="svg-icn-full" src="images/settings-icon/permission-management.png">
       <p>Permission Management</p>
     </div>
     <div class="col-xs-1 settings-wrapper__trow--td"
          ui-sref="settings.emailTemplates" ng-if="currentUser.isOwner">
-      <img class="svg-icn-full" src="images/input-icons/mail.svg">
+      <img class="svg-icn-full" src="images/settings-icon/email-templates.png">
       <p>Email Templates</p>
     </div>
-    <div class="col-xs-1 settings-wrapper__trow--td" deactivate-button>
-      <img class="svg-icn-full" src="images/input-icons/cancel.svg">
-      <p>Deactivate Account</p>
-    </div>
+    <!--<div class="col-xs-1 settings-wrapper__trow&#45;&#45;td" deactivate-button>-->
+      <!--<img class="svg-icn-full" src="images/input-icons/cancel.svg">-->
+      <!--<p>Deactivate Account</p>-->
+    <!--</div>-->
   </div>
 </div>
 <div ui-view ng-if="settingMode !== '/settings'"></div>
