@@ -720,6 +720,10 @@ input.default-invoice-terms {
   transition: all .3s;
 }
 
+.settings-wrapper__trow--td .confirm-arrow{
+  top: -132px;
+}
+
 .settings-wrapper__trow--td:hover {
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, 0.1);
   border-color: transparent;
