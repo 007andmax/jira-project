@@ -7,12 +7,12 @@
       <li class="template-item tech-user-item new-tech-user"
           ng-class="{'expanded': editUserId === 'new_user'}">
 
-        <h4 class="template-title ng-binding" ng-click="openEditUser('new_user')"
+        <h4 class="template-title btn btn-success ng-binding" style="height: 100%;" ng-click="openEditUser('new_user')"
             ng-hide="editUserId === 'new_user'">Create New Tech User</h4>
 
         <div class="clearfix tech-user">
 
-          <div class="template-details pull-left" style="margin-top:10px;margin-left: -21px;"
+          <div class="template-details pull-left" style="margin-top:10px;"
                ng-if="editUserId === 'new_user'"
                ng-include="'/html/scripts/core/settings/tech-users/edit-tech-user.tpl.html'">
           </div>
@@ -31,7 +31,9 @@
             <div class="user-info">
 
               <div class="avatar">
-                <img ng-src="{{ getContactAvatarUrl(user) }}" alt="..." class="img-circle avatar-50">
+                <img ng-if="user.avatar" ng-src="{{ getContactAvatarUrl(user) }}"
+                     alt="..." class="img-circle">
+                <img ng-if="!user.avatar" src="images/settings-icon/user.png" alt="..." class="img-circle ">
               </div>
 
               <div class="name-designation">
@@ -39,6 +41,9 @@
                 <span class="label label-light">{{ user.techRole }}</span><br/>
 
                 <div class="user-email"><i class="icn-sm icn-at pull-left"></i> {{ user.primaryEmail }}</div>
+              </div>
+              <div class="tech-request">
+                <p>Send a request to change password</p>
               </div>
 
             </div>

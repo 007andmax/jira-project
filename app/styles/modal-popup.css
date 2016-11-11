@@ -201,16 +201,27 @@
 }
 
 .create-window .general .company-window__billing .rates__list {
-  padding: 15px 0;
-  height: 350px;
+  padding: 0px 0;
+  max-height: 155px;
   overflow: auto;
   margin-bottom: 15px;
 }
 
 .create-window .general .company-window__billing .rates__list--point {
-  padding: 15px 0;
+  padding: 3px 0;
   display: flex;
   align-items: center;
+}
+
+.new-tax{
+  width: 100%;
+}
+
+.qt-list > li > .new-tax >[class*='col-'] {
+  position: relative;
+  float: left;
+  padding: 0 5px;
+  vertical-align: top;
 }
 
 .create-window .general .company-window__billing .justify-flex {
