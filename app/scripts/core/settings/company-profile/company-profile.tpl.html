@@ -80,7 +80,7 @@
               <div address-autocomplete template-page="settings" save-func="saveContactInfo" is-address-required="isAddressRequired"
                    ng-model="address" show-validation-messages="isTryToSave" focus-address="isAddressFocused"></div>
 
-              <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave"
+              <div phone-numbers-edit ng-model="address.phoneNumbers" is-try-to-save="isTryToSave" is-first-required="isFromWelcomeWizard"
                    country-code="{{address.countryCode}}" on-lost-focus="saveContactInfo"></div>
 
               <div class="form-row clearfix" style="margin-top: 13px;">

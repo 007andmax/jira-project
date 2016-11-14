@@ -547,6 +547,19 @@
         Utils.handleCallback(future, callback);
       }
 
+      function updateWelcomeWizard(state, dontShowThisAgain) {
+        var dto = $rootScope.currentUser.wizardTracker || {};
+        switch (state.split('.').pop()) {
+          case 'techUsers': dto.addStaff = true; break;
+          case 'email': dto.emailSettings = true; break;
+          case 'taxRates': dto.rates = true; break;
+          case 'companyProfile': dto.companySettings = true; break;
+          case 'setupClient': dto.setupClient = true; break;
+        }
+
+        $http.put('/settings/userProfile/updateWizard' + (dontShowThisAgain ? '?dontShowThisAgain=' + dontShowThisAgain : ''), dto);
+      }
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -576,7 +589,8 @@
         get2FA: get2FA,
         deactivateAccount: deactivateAccount,
         restoreUser: restoreUser,
-        requestToChangePassword: requestToChangePassword
+        requestToChangePassword: requestToChangePassword,
+        updateWelcomeWizard: updateWelcomeWizard
       }
 
     }]);
