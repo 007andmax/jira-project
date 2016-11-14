@@ -35,14 +35,12 @@
             <input type="text" class="form-control" name="userCompany"
                    value="{{userCompany.name || userCompany}}" disabled="disabled" ng-if="!isCreation">
 
-            <div uib-dropdown ng-if="isCreation" add-create-new-button="company">
+            <div uib-dropdown ng-show="isCreation" add-create-new-button="company">
 
               <input type="text" ng-model="userCompany" autocomplete="off"
                      class="form-control form-control-dropdown dropdown-toggle"
                      uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
-                     typeahead-editable="false" typeahead-min-length="0"
-                     qt-typeahead-show-on-focus
-                     name="userCompany" ng-trim="false" ng-required="true"
+                     qt-typeahead-show-on-focus name="userCompany" ng-required="isCreation"
                      custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
               <div typeahead-input-icon="userCompany" style="position: absolute;top: 13px;right: 13px;"></div>

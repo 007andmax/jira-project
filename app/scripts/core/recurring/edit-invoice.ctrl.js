@@ -182,6 +182,7 @@
             return;
           }
 
+          $scope.paramInvocie.paymentTerms = company.paymentTerms;
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
             id: company.id

@@ -45,16 +45,28 @@
             $scope.editCompany = companyData.staticCopy();
             $scope.contact = $scope.editCompany.contacts[0];
 
-            if ($scope.editCompany.isVendor) {
+            if ($scope.editCompany.paymentTerms) {
+              $scope.editCompany.paymentTerms += ' days';
+            } else if ($scope.editCompany.paymentTerms === 0) {
+              $scope.editCompany.paymentTerms = 'COD';
+            }
+
+            if ($scope.editCompany.clientType === 'VENDOR') {
               CompaniesService.isVendorHasProducts(companyId, function (resp) {
                 $scope.editCompany.hasProducts = resp.isProductExist;
               });
             }
 
+            if ($scope.editCompany.clientType) {
+              $scope.editCompany.clientType = userReadable($scope.editCompany.clientType);
+            }
+
+            if ($scope.editCompany.serviceType) {
+              $scope.editCompany.serviceType = userReadable($scope.editCompany.serviceType);
+            }
+
             if (company.defaultPaymentMethod) {
-              $scope.editCompany.defaultPaymentMethod = company.defaultPaymentMethod.split('_').map(function (str) {
-                return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-              }).join(' ');
+              $scope.editCompany.defaultPaymentMethod = userReadable(company.defaultPaymentMethod);
             }
 
             if (!$scope.editCompany.credential) {
@@ -117,9 +129,10 @@
         $scope.selectedTax = {};
         $scope.techCompanyTax = [];
 
-        $scope.clientTypes = ['Client', 'Lead'];
+        $scope.clientTypes = ['Client', 'Lead', 'Vendor'];
         $scope.serviceTypes = ['Fully Managed', 'Semi Managed', 'Hourly'];
         $scope.paymentMethods = ['Cash', 'Cheque', 'Debit Card', 'Credit Card', 'Wire Transfer'];
+        $scope.paymentTerms = ['COD', '7 days', '15 days', '30 days'];
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
         });
@@ -173,6 +186,21 @@
               editCompany.defaultPaymentMethod = editCompany.defaultPaymentMethod.toUpperCase().split(' ').join('_');
             } else {
               editCompany.defaultPaymentMethod = null;
+            }
+
+            if (editCompany.paymentTerms) {
+              editCompany.paymentTerms = parseInt(editCompany.paymentTerms) || 0;
+            }
+
+            if (editCompany.clientType) {
+              if (editCompany.clientType.toLowerCase() !== 'vendor') {
+                editCompany.accountNumber = undefined;
+              }
+              editCompany.clientType = toEnum(editCompany.clientType);
+            }
+
+            if (editCompany.serviceType) {
+              editCompany.serviceType = toEnum(editCompany.serviceType);
             }
 
             CompaniesService.save(editCompany, function (resp) {
@@ -230,11 +258,6 @@
           var validationResult = CompaniesService.isNameUnique(ngModelCtrl.$viewValue, $scope.editCompany.id || '', function () {
             ngModelCtrl.$setValidity('unique', validationResult.value);
           });
-        };
-
-        $scope.validatePaymentTerms = function (form) {
-          var valid = ($scope.editCompany.paymentTerms > 0 || $scope.editCompany.paymentTerms === undefined);
-          form.vendorPaymentTerms.$setValidity('minValue', valid || !$scope.editCompany.isVendor);
         };
 
         $scope.validateCompanyDomain = function (ngModelCtrl) {
@@ -473,6 +496,30 @@
               scale: 50
             }
           };
+        }
+
+        function userReadable(text) {
+          if (!text) {
+            return '';
+          }
+
+          var words = text.split('_'),
+            result = '';
+
+          for (var i = 0, len = words.length; i < len; i++) {
+            var word = words[i];
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+
+            if (i !== len - 1) {
+              result += ' ';
+            }
+          }
+
+          return result;
+        }
+
+        function toEnum(text) {
+          return text.split(' ').join('_').toUpperCase();
         }
 
         UserConfirmationsService.preventLocationChange($scope);

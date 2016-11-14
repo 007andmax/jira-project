@@ -16,7 +16,7 @@
           $scope.savedState = { types: [], items: [] };
         }
 
-        if ($scope.openedTab === 'categories') {
+        if ($scope.openedTab === 'category') {
           $scope.openedTab = 'product';
         }
 

@@ -12,11 +12,9 @@
           reverse: false
         };
 
-        if ($scope.company.isVendor) {
-          ProductsService.getCategories($scope, function (resp) {
-            $scope.categories = resp;
-          })
-        }
+        ProductsService.getCategories($scope, function (resp) {
+          $scope.categories = resp;
+        });
 
         $scope.$on('productDeleted', function (event, id) {
           if ($scope.productsData.length === 0 || ($scope.productsData.length === 1 && $scope.productsData[0].versionedId.id === id)) {

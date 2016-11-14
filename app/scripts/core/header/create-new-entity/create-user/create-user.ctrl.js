@@ -8,7 +8,7 @@
       function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
                 $timeout, PhoneFormats) {
 
-        var curentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),
+        var currentUsersCompany = CompaniesService.getCurrentCompany($scope.currentUser.company.id),
           action;
 
         var savedState = $scope.getLastSavedState('user');
@@ -43,7 +43,7 @@
           ADMIN: 'Administrator'
         };
 
-        if (curentUsersCompany.accountType === 'ROOT') {
+        if (currentUsersCompany.accountType === 'ROOT') {
           $scope.isTechUser = true;
           $scope.roles.SUPER_TECH_ADMIN = 'Super Admin'
         }
@@ -59,10 +59,6 @@
               scale: 50
             }
           };
-
-          $scope.$watch('userCompany', function (userCompany) {
-            $scope.editUser.companyId = userCompany ? userCompany.id : undefined;
-          });
 
           action = 'CREATE_USERS';
         } else {
@@ -111,6 +107,10 @@
             delete editUser.confPassword;
 
             $scope.savingInProcess = true;
+
+            if ($scope.userCompany) {
+              editUser.companyId = $scope.userCompany.id;
+            }
 
             var phoneNumbers = editUser.phoneNumbers,
               firstPhone = phoneNumbers[0].number,

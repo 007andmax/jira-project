@@ -30,12 +30,13 @@
           if (custCompany.deletedAt) {
             storage.deletedCompanies.push(custCompany);
           } else {
-            if (!custCompany.isDefault && (!custCompany.isVendor || custCompany.clientType)) {
-              storage.clientCompanies.push(custCompany);
-            }
-
-            if (custCompany.isVendor) {
-              storage.vendors.push(custCompany);
+            if (!custCompany.isDefault) {
+              if (custCompany.clientType.toLowerCase() !== 'vendor') {
+                storage.clientCompanies.push(custCompany);
+              } else {
+                storage.clientCompanies.push(custCompany);
+                storage.vendors.push(custCompany);
+              }
             }
 
             storage.companies.push(custCompany);
@@ -86,11 +87,10 @@
         } else if (newChange.data.accountType !== 'TECH') {
           var newClient = Utils.customizeObj(newChange.data);
           storage.companies.push(newClient);
-          if (!newClient.isVendor || newClient.clientType) {
+          if (newClient.clientType.toLowerCase() !== 'vendor') {
             storage.clientCompanies.push(newClient);
-          }
-
-          if(newClient.isVendor) {
+          } else {
+            storage.clientCompanies.push(newClient);
             storage.vendors.push(newClient);
           }
 
@@ -121,11 +121,10 @@
 
         var company = Utils.customizeObj(newChange.data);
 
-        if (!company.isVendor || company.clientType) {
+        if (company.clientType.toLowerCase() !== 'vendor') {
           storage.clientCompanies.push(company);
-        }
-
-        if(company.isVendor) {
+        } else {
+          storage.clientCompanies.push(company);
           storage.vendors.push(company);
         }
 

@@ -43,7 +43,7 @@
         </li>
 
         <li ng-class="{'active': currentOpenTab === 'products'}" style="cursor: pointer;"
-            ng-if="company.isVendor && (company.hasProducts || productsData.length)">
+            ng-if="company.clientType.toLowerCase() === 'vendor' && (company.hasProducts || productsData.length)">
           <a ui-sref="companyProfile({ tabName: 'products' })">
             Products
           </a>
