@@ -235,9 +235,9 @@
     }]);
 
   app.run(
-    ['$rootScope', '$templateCache', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
+    ['$rootScope', '$templateRequest', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService',
-      function ($rootScope, $templateCache, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
+      function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
                 UserConfirmationsService, SharedStateService) {
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
@@ -487,6 +487,8 @@
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
         $rootScope.numberPattern = /^\d?[0-9]{0,17}$/;
         $rootScope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
+        $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
 
       }]);
 

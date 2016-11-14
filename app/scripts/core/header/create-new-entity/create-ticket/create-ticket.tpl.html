@@ -423,7 +423,9 @@
                 <span ng-click="toggleAllShared(true)">Select Everyone</span> | <span ng-click="toggleAllShared(false)">Select None</span>
               </div>
 
-              <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList">
+              <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList"
+                     custom-disabled="{{ !sharedUser.user.subscription || !sharedUser.user.subscription.invoice }}"
+                     ng-mousedown="validateNotifying(sharedUser, $event)">
                 <input type="checkbox" ng-model="sharedUser.notify">
                 <span class="control-indicator"></span>
                 <span style="text-transform: none">{{ getUserName(sharedUser.user) }}</span>

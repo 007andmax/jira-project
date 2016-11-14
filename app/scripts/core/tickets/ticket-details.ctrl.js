@@ -515,8 +515,42 @@
           });
 
           $scope.toggleAllShared = function (isNotifyAll) {
+            var sharesWithoutSubscription = [];
             for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
-              $scope.ticketSharedUsersList[i].notify = isNotifyAll;
+              var share = $scope.ticketSharedUsersList[i];
+              if (!isNotifyAll) {
+                share.notify = isNotifyAll;
+              } else {
+                if ((share.user.subscription && share.user.subscription.invoice) || share.user.accountType === 'TECH') {
+                  share.notify = isNotifyAll;
+                } else {
+                  sharesWithoutSubscription.push(share);
+                }
+              }
+            }
+
+            if (sharesWithoutSubscription.length > 1) {
+              UserConfirmationsService
+                .show(sharesWithoutSubscription.length + ' users have disabled invoice updates subscription. Do you still want to notify them?', 'Yes')
+                .then(function () {
+                  for (var i = 0; i < sharesWithoutSubscription.length; i++) {
+                    var share = sharesWithoutSubscription[i];
+                    share.notify = true;
+                  }
+                });
+            } else if (sharesWithoutSubscription.length) {
+              $scope.validateNotifying(sharesWithoutSubscription.pop());
+            }
+          };
+
+          $scope.validateNotifying = function (share, event) {
+            if (!share.notify && share.user.accountType !== 'TECH' && (!share.user.subscription || !share.user.subscription.invoice)) {
+              UserConfirmationsService
+                .show($scope.getUserName(share.user) + ' has disabled invoice updates subscription. Do you still want to notify him?', 'Yes')
+                .then(function () {
+                  share.notify = true;
+                });
+              event && event.stopPropagation();
             }
           };
 
@@ -614,12 +648,14 @@
           function getDefaultSharedList() {
             var result = [];
 
-            if ($scope.user) {
-              result.push({ user: $scope.user, notify: false });
-            }
-
             if ($scope.assignedUser && $scope.user && $scope.user.id !== $scope.assignedUser.id) {
               result.push({ user: $scope.assignedUser, notify: false });
+            }
+
+            var usersByCompanyId = UsersService.getAllByCompanyId(CompaniesService.getOneById($scope.ticketDetails.company.id).id);
+            for (var i = 0; i < usersByCompanyId.length; i++) {
+              var user = usersByCompanyId[i];
+              result.push({ user: user, notify: user.subscription && user.subscription.ticket });
             }
 
             return result;
