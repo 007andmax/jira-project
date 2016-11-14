@@ -233,6 +233,13 @@ header .calendar-top input {
 
 }
 
+.dashboard-main .stats .front:hover,
+.dashboard-main .stats .back:hover,
+.dashboard-main .stats.half-stats:hover{
+  box-shadow: 2px 4px 20px 0px rgba(0, 0, 0, 0.4);
+  border-color: transparent;
+}
+
 .dashboard-main .stats.half-stats {
   height: 110px;
   margin-bottom: 30px;
@@ -742,7 +749,8 @@ header .calendar-top input {
   right: 0;
 }
 
-.chart-tooltip .tooltip-inner {
+.chart-tooltip .tooltip-inner,
+.chart-tooltip.tooltip-inner {
   font-size: 12px;
   font-weight: 500;
   line-height: 14px;

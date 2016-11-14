@@ -73,7 +73,7 @@
   height: 21px;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 0 5px;
+  /*margin-right: 0 5px;*/
 }
 
 .global-search .dropdown-menu .category .item {
@@ -303,13 +303,13 @@
 }
 
 @media only screen and (min-width: 1930px) {
-  ..topNavbarLeft .searchField {
+  .topNavbarLeft .searchField {
     width: 511px;
   }
 }
 
 @media only screen and (min-width: 2510px) {
-  ..topNavbarLeft .searchField {
+  .topNavbarLeft .searchField {
     width: 671px;
   }
 }

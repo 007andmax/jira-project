@@ -224,7 +224,8 @@
   margin-left: 20px;
   vertical-align: middle;
 }
-.hint-tooltip .tooltip-inner {
+.hint-tooltip .tooltip-inner,
+.hint-tooltip.tooltip-inner {
   white-space: pre-wrap;
   height: auto;
 }

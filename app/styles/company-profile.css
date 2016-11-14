@@ -166,6 +166,7 @@
 .company-profile-content ul.nav-qt {
   position: relative;
   float: left;
+  float: left;
   width: 100%;
 }
 .for-network-tab{
@@ -185,6 +186,20 @@
   right: 0;
   width: auto !important;
 }
-.settings-main-wrapper .company-address-list .create-user-container{
-  margin-bottom: 100px;
+
+.out-time{
+  position: relative;
 }
+
+.out-time:after{
+  position: absolute;
+  bottom: 9px;
+  left: 42px;
+  font-size: 13px;
+
+  color: #94a4b8;
+  content: 'hours';
+}
+/*.settings-main-wrapper .company-address-list .create-user-container{*/
+  /*margin-bottom: 100px;*/
+/*}*/

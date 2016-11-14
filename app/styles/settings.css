@@ -739,11 +739,24 @@ input.default-invoice-terms {
   opacity: 0.87;
 }
 
-/*@media screen and (max-width: 1024px) {*/
-  /*.settings-wrapper__trow--td .svg-icn-full {*/
-    /*width: 60px;*/
-  /*}*/
-/*}*/
+.response-time-settings-wrapper .form-row{
+  display: table;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.response-time-settings-wrapper .form-row .form-group{
+  display: table-cell;
+  width: 50%;
+  vertical-align: middle;
+  float: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .settings-wrapper__trow--td .svg-icn-full {
+    width: 60px;
+  }
+}
 
 /*********************
 *** Fixed Button ***

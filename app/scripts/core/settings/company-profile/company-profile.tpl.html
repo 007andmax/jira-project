@@ -94,4 +94,81 @@
     </div>
   </div>
 
+  <div class="response-time-settings-wrapper" id="responseTimeSettings">
+    <div ng-form="responseTimeSettingsForm" ng-controller="quicktech.core.settings.workingHoursCtrl">
+      <div class="create-user-container">
+
+        <div class="create-user-header clearfix">
+          <h3 class="pull-left">Ticket Response Time Settings</h3>
+        </div>
+
+        <div class="create-user-form">
+
+          <div class="form-row clearfix">
+
+            <div class="form-group full-width out-time" style="width: 100%;"
+                 ng-class="{'has-error': isShowingErrors(responseTimeSettingsForm, 'outliersTime')}">
+
+              <label class="control-label" ng-hide="isShowingErrors(responseTimeSettingsForm, 'outliersTime')">
+                Outliers Time
+              </label>
+
+              <div ng-messages="responseTimeSettingsForm.outliersTime.$error">
+                <label class="control-label" ng-message="required">Outliers Time is required.</label>
+                <label class="control-label" ng-message="min">Outliers Time must not be less than 1 hour.</label>
+                <label class="control-label" ng-message="max">Outliers Time must not be greater than 120 hour.</label>
+                <label class="control-label" ng-message="number">Outliers Time must be a number of hours.</label>
+              </div>
+
+              <input type="number" min="1" max="120" class="form-control" ng-model="outliersTime" name="outliersTime"
+                     required execute-when-outfocused="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
+
+            </div>
+          </div>
+
+          <div class="row" ng-repeat="day in companyForSettingPage.responseTimeSettings.workingDays">
+
+            <div class="form-row clearfix" ng-form="workingHoursForm">
+              <div class="form-group">
+                <label class="control-label" style="position: relative;top: -10px;" ng-if="$first">
+                  Working Days
+                </label>
+                <div>
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-model="day.isSelected"
+                           ng-disabled="isLastEnabledDay(companyForSettingPage.responseTimeSettings.workingDays, day)"
+                           ng-change="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
+                    <span class="control-indicator"></span>
+                  </label>
+                  <span style="text-transform: capitalize;">{{ day.dayOfWeek.toLowerCase() }}</span>
+                </div>
+              </div>
+
+              <div class="form-group"
+                   ng-class="{'has-error': isShowingErrors(workingHoursForm, 'workingHours' + day.dayOfWeek)}">
+
+                <label class="control-label"
+                       ng-if="$first && (workingHoursForm.$pristine || workingHoursForm.$valid)">
+                  Working Hours
+                </label>
+
+                <div class="has-error" ng-if="$first && workingHoursForm.$dirty && workingHoursForm.$invalid">
+                  <label class="control-label">
+                    "from" must be less than "to".
+                  </label>
+                </div>
+
+                <input type="text" class="form-control" placeholder="from 00:00 to 23:59" name="workingHours{{ day.dayOfWeek }}"
+                       format-working-hours from="day.startTime" to="day.endTime" ng-disabled="!day.isSelected"
+                       ng-model="day.workingHours" execute-when-outfocused="saveTicketResponseTimeSettings(responseTimeSettingsForm)">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
