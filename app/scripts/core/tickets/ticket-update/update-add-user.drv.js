@@ -23,10 +23,6 @@
 				  case 'TEAM_MEMBER':
 					users = $scope.agents;
 					break;
-
-				  case 'CLIENT_USER':
-					users = $scope.clients;
-					break;
 				}
 
 				return {
@@ -38,7 +34,7 @@
 
 			}
 
-			var types = ['TEAM_MEMBER', 'CLIENT_USER'];
+			var types = ['TEAM_MEMBER'];
 			var users;
 			var maxProductWidth = 0;
 

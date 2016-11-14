@@ -5,13 +5,14 @@
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceCtrl',
     ['$scope', 'RecurringService', 'CompaniesService', 'ServicesService', '$filter', 'UsersService',
       'ProductsService', 'EmailSettingsService', '$timeout', 'TicketsService', 'TaxRatesService', 'Utils',
+      'quicktech.common.services.UserConfirmationsService',
       function ($scope, RecurringService, CompaniesService, ServicesService, $filter, UsersService,
-                ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService, Utils) {
+                ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService, Utils,
+                UserConfirmationsService) {
 
         var day = 1000 * 60 * 60 * 24, form,
           allClientUsers = UsersService.getClientUsers();
 
-        $scope.clients = [];
         $scope.frequency = {
           sevenDays: '7 days',
           fifteenDays: '15 days',
@@ -171,7 +172,6 @@
         };
 
         $scope.chooseCompany = function (company) {
-          $scope.clients.splice(0, $scope.clients.length);
           resetSharedUsers(company);
 
           if (!company) {
@@ -179,11 +179,8 @@
             delete $scope.companyServices;
             $scope.taxRatesCoef = 0;
             $scope.editInvoice.services = [{}];
-            Utils.customizeArray(allClientUsers, $scope.clients);
             return;
           }
-
-          Utils.customizeArray(UsersService.getAllByCompanyId(company.id), $scope.clients);
 
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
@@ -553,8 +550,31 @@
         };
 
         $scope.toggleAllShared = function (isNotifyAll) {
+          var sharesWithoutSubscription = [];
           for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
-            $scope.ticketSharedUsersList[i].notify = isNotifyAll;
+            var share = $scope.ticketSharedUsersList[i];
+            if (!isNotifyAll) {
+              share.notify = isNotifyAll;
+            } else {
+              if ((share.user.subscription && share.user.subscription.invoice) || share.user.accountType === 'TECH') {
+                share.notify = isNotifyAll;
+              } else {
+                sharesWithoutSubscription.push(share);
+              }
+            }
+          }
+
+          if (sharesWithoutSubscription.length > 1) {
+            UserConfirmationsService
+              .show(sharesWithoutSubscription.length + ' users have disabled invoice updates subscription. Do you still want to notify them?', 'Yes')
+              .then(function () {
+                for (var i = 0; i < sharesWithoutSubscription.length; i++) {
+                  var share = sharesWithoutSubscription[i];
+                  share.notify = true;
+                }
+              });
+          } else if (sharesWithoutSubscription.length) {
+            $scope.validateNotifying(sharesWithoutSubscription.pop());
           }
         };
 
@@ -562,6 +582,17 @@
           return shares.some(function (share) {
             return share.notify;
           });
+        };
+
+        $scope.validateNotifying = function (share, event) {
+          if (!share.notify && share.user.accountType !== 'TECH' && (!share.user.subscription || !share.user.subscription.invoice)) {
+            UserConfirmationsService
+              .show($scope.getUserName(share.user) + ' has disabled invoice updates subscription. Do you still want to notify him?', 'Yes')
+              .then(function () {
+                share.notify = true;
+              });
+            event && event.stopPropagation();
+          }
         };
 
         $scope.$on('createNewEntity', function (event, type) {
@@ -575,12 +606,6 @@
 
         function resetSharedUsers(company) {
 
-          if (company) {
-            var usersWithInvoiceSubscription = UsersService.getAllByCompanyId(company.id).filter(function (user) {
-              return user.subscription && user.subscription.invoice;
-            });
-          }
-
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
@@ -591,10 +616,13 @@
             }
           }
 
-          for (var j = 0; j < usersWithInvoiceSubscription.length; j++) {
-            var user = usersWithInvoiceSubscription[j];
-            $scope.ticketSharedUsersList.push({ user: user, notify: true });
-            $scope.selectUpdateSharedUser[user.id] = true;
+          if (company) {
+            var usersByCompany = UsersService.getAllByCompanyId(company.id);
+            for (var j = 0; j < usersByCompany.length; j++) {
+              var user = usersByCompany[j];
+              $scope.ticketSharedUsersList.push({ user: user, notify: user.subscription && user.subscription.invoice });
+              $scope.selectUpdateSharedUser[user.id] = true;
+            }
           }
         }
 

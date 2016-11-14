@@ -3,8 +3,8 @@
 (function () {
 
     angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.updateAddUserCtrl',
-      ['$scope', 'UsersService', 'CompaniesService', 'Utils', '$timeout',
-        function ($scope, UsersService, CompaniesService, Utils, $timeout) {
+      ['$scope', 'UsersService', 'CompaniesService',
+        function ($scope, UsersService, CompaniesService) {
 
           $scope.currentAddUserTab = 'TEAM_MEMBER';
           $scope.searchFilter = {};
@@ -12,33 +12,6 @@
           if ($scope.ticketDetails) {
             $scope.clients = UsersService.getAllByCompanyId($scope.ticketDetails.company.id);
           }
-
-          $scope.$watchCollection(function () {
-            return $scope.clients.map(function (user) {
-              return user.id;
-            });
-          }, function () {
-            $scope.isNeedReset = true;
-            $timeout(function () {
-              $scope.isNeedReset = false;
-            });
-          });
-
-          $scope.openAddUserTab = function (mode) {
-
-            $scope.searchFilter = {};
-
-            switch (mode) {
-
-              case 'TEAM_MEMBER':
-                $scope.currentAddUserTab = 'TEAM_MEMBER';
-                return;
-
-              case 'CLIENT_USER':
-                $scope.currentAddUserTab = 'CLIENT_USER';
-                return;
-            }
-          };
 
           $scope.filterUpdateUser = function (item) {
             var isCurrentUser = item.id === $scope.currentUser.id,

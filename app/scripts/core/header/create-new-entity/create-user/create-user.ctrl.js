@@ -53,7 +53,7 @@
           $scope.editUser = $scope.editUser || {
             role: 'USER',
             phoneNumbers: [],
-            subscription: {},
+            subscription: { ticket: true },
             welcomeEmail: true,
             avatar: {
               scale: 50

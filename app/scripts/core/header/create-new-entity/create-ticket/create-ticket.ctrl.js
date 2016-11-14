@@ -5,9 +5,9 @@
   angular.module('quicktech').controller('quicktech.createTicketCtrl',
     ['$scope', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
       'quicktech.common.services.UserNotificationService', 'ServicesService', '$timeout', '$state',
-      'quicktech.common.services.TicketsPermissionsService',
+      'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.UserConfirmationsService',
       function ($scope, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
-                UserNotificationService, ServicesService, $timeout, $state, TicketsPermissionsService) {
+                UserNotificationService, ServicesService, $timeout, $state, TicketsPermissionsService, UserConfirmationsService) {
 
         var agentsByCompany = [];
 
@@ -577,8 +577,42 @@
         };
 
         $scope.toggleAllShared = function (isNotifyAll) {
+          var sharesWithoutSubscription = [];
           for (var i = 0, len = $scope.ticketSharedUsersList.length; i < len; i++) {
-            $scope.ticketSharedUsersList[i].notify = isNotifyAll;
+            var share = $scope.ticketSharedUsersList[i];
+            if (!isNotifyAll) {
+              share.notify = isNotifyAll;
+            } else {
+              if ((share.user.subscription && share.user.subscription.ticket) || share.user.accountType === 'TECH') {
+                share.notify = isNotifyAll;
+              } else {
+                sharesWithoutSubscription.push(share);
+              }
+            }
+          }
+
+          if (sharesWithoutSubscription.length > 1) {
+            UserConfirmationsService
+              .show(sharesWithoutSubscription.length + ' users have disabled invoice updates subscription. Do you still want to notify them?', 'Yes')
+              .then(function () {
+                for (var i = 0; i < sharesWithoutSubscription.length; i++) {
+                  var share = sharesWithoutSubscription[i];
+                  share.notify = true;
+                }
+              });
+          } else if (sharesWithoutSubscription.length) {
+            $scope.validateNotifying(sharesWithoutSubscription.pop());
+          }
+        };
+
+        $scope.validateNotifying = function (share, event) {
+          if (!share.notify && share.user.accountType !== 'TECH' && (!share.user.subscription || !share.user.subscription.ticket)) {
+            UserConfirmationsService
+              .show($scope.getUserName(share.user) + ' has disabled invoice updates subscription. Do you still want to notify him?', 'Yes')
+              .then(function () {
+                share.notify = true;
+              });
+            event && event.stopPropagation();
           }
         };
 
@@ -598,17 +632,23 @@
         });
 
         function resetSharedUsers(company) {
+
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
-            if (UsersService.getOneById(shares.user.id).accountType === 'TECH') {
-              continue;
-            }
-
-            if (!shares.user.company || shares.user.company.id !== company.id) {
+            if (shares.user && UsersService.getOneById(shares.user.id).accountType !== 'TECH') {
               $scope.ticketSharedUsersList.splice(i, 1);
               $scope.selectUpdateSharedUser[shares.user.id] = false;
               i--;
+            }
+          }
+
+          if (company) {
+            var usersByCompany = UsersService.getAllByCompanyId(company.id);
+            for (var j = 0; j < usersByCompany.length; j++) {
+              var user = usersByCompany[j];
+              $scope.ticketSharedUsersList.push({ user: user, notify: user.subscription && user.subscription.ticket });
+              $scope.selectUpdateSharedUser[user.id] = true;
             }
           }
         }
