@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.companyInfoContactInfoCtrl',
-    ['$scope', 'quicktech.common.services.PhoneFormats', 'CompaniesService',
-      function ($scope, PhoneFormats, CompaniesService) {
+    ['$scope', 'quicktech.common.services.PhoneFormats', 'CompaniesService', 'UsersService',
+      function ($scope, PhoneFormats, CompaniesService, UsersService) {
 
         $scope.currentAddressIndex = 0;
         $scope.maximalAmountOfPhones = 3;
@@ -81,6 +81,10 @@
             }
 
             copyAddress[0].isPrimary = true;
+
+            if (copyAddress[0].phoneNumbers && copyAddress[0].phoneNumbers[0] && copyAddress[0].phoneNumbers[0].number) {
+              UsersService.updateWelcomeWizard('companyProfile');
+            }
 
             CompaniesService.saveForCompanyProfile(copyAddress, 'addresses', function () {
               if (form) {

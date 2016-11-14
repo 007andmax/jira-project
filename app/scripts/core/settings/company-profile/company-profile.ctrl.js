@@ -26,6 +26,11 @@
         $scope.isAddressFocused = $stateParams.isAddressFocused;
         $scope.isAddressRequired = true;
 
+        if ($stateParams.fromWelcomeWizard) {
+          $scope.isTryToSave = true;
+          $scope.isFromWelcomeWizard = $stateParams.fromWelcomeWizard;
+        }
+
         $scope.companyForSettingPage = CompaniesService.getCompanyForSettingPage(function () {
 
           $scope.companyForSettingPage = $scope.companyForSettingPage.staticCopy();

@@ -164,7 +164,8 @@
         .state('settings.companyProfile', waitForServices({
           url: '/companyProfile',
           params: {
-            isAddressFocused: false
+            isAddressFocused: false,
+            fromWelcomeWizard: false
           },
           templateUrl: '/html/scripts/core/settings/company-profile/company-profile.tpl.html',
           controller: 'quicktech.core.settings.companyProfileCtrl'
