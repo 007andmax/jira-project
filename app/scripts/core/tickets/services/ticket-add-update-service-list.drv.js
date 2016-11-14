@@ -18,8 +18,10 @@
 
           $scope.$watch('serviceList.length', function () {
             autocompleteServiceList = [];
-            for (var i = 0; i < $scope.serviceList.length; i++) {
-              autocompleteServiceList.push({ 'value': $scope.serviceList[i].name, 'data': $scope.serviceList[i] });
+            if ($scope.serviceList && $scope.serviceList.length) {
+              for (var i = 0; i < $scope.serviceList.length; i++) {
+                autocompleteServiceList.push({ 'value': $scope.serviceList[i].name, 'data': $scope.serviceList[i] });
+              }
             }
 
             $(element).autocomplete({

@@ -655,7 +655,7 @@
               ticket = Utils.findById(storage.tickets, ticketId);
             if (newChange.data.deviceId && ticket) {
               Utils.defineReadOnlyProperty(ticket, 'agent', { deviceId: newChange.data.deviceId });
-            } else {
+            } else if (ticket) {
               Utils.defineReadOnlyProperty(ticket, 'agent', null);
             }
 
