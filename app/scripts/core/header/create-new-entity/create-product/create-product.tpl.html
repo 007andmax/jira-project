@@ -45,7 +45,8 @@
 
   <div class="row" ng-form="editProductForm">
 
-    <div class="col-xs-12 form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
+    <div class="col-xs-12 form-group"
+         ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
       <input type="text" class="form-control" placeholder="Description"
              ng-model="editProduct.description" ng-required="true"
              ng-maxlength="500" name="editProductDescription">
@@ -107,6 +108,8 @@
                is-uniq-validation validation-func="validateProductMnf" model-id="product.versionedId.id">
       </div>
 
+
+    </div>
     <div class="col-xs-12 qt-form-actions btn-bottom" style="margin-right: -5px;">
 
       <div class="pull-left text-error">{{ getValidationMessage(editProductForm) }}</div>
@@ -119,4 +122,3 @@
     </div>
 
   </div>
-</div>

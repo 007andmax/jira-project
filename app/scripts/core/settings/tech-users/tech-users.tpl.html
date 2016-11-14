@@ -38,9 +38,9 @@
 
               <div class="name-designation">
                 <h4>{{ getUserName(user) }}</h4>
-                <span class="label label-light">{{ user.techRole }}</span><br/>
+                <span class="label label-{{ user.techRole.split(' ').join('-').toLowerCase() }}">{{ user.techRole }}</span><br/>
 
-                <div class="user-email"><i class="icn-sm icn-at pull-left"></i> {{ user.primaryEmail }}</div>
+                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"></img> {{ user.primaryEmail }}</div>
               </div>
               <div class="tech-request">
                 <p>Send a request to change password</p>
@@ -75,43 +75,50 @@
         </div>
       </li>
 
-      <li class="template-item tech-user-item"
-          ng-repeat="user in archivedUsers | filter: { accountType: 'TECH' } | orderBy: getUserName track by user.id"
-          show-model-element="{{ 'showTechUser-' + user.id}}"
-          on-finish-render="highlightTechUser()">
+      <div class="archived">
 
-        <div class="clearfix tech-user">
+        <h2 class="text-center" style="font-weight: normal;">Achived tech-users</h2>
 
-          <div class="user-info">
+        <li class="template-item tech-user-item"
+            ng-repeat="user in archivedUsers | filter: { accountType: 'TECH' } | orderBy: getUserName track by user.id"
+            show-model-element="{{ 'showTechUser-' + user.id}}"
+            on-finish-render="highlightTechUser()">
+          <div class="opacity-layer"></div>
+          <div class="clearfix tech-user">
 
-            <div class="avatar">
-              <img ng-src="{{ getContactAvatarUrl(user) }}" alt="..." class="img-circle avatar-50">
+            <div class="user-info">
+
+              <div class="avatar">
+                <img ng-if="user.avatar" ng-src="{{ getContactAvatarUrl(user) }}"
+                     alt="..." class="img-circle">
+                <img ng-if="!user.avatar" src="images/settings-icon/user-5.png" alt="..." >
+              </div>
+
+              <div class="name-designation">
+                <h4>{{ getUserName(user) }}</h4>
+                <span class="label label-{{ user.techRole.split(' ').join('-').toLowerCase() }}">{{ user.techRole }}</span><br/>
+
+                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"></img> {{ user.primaryEmail }}</div>
+              </div>
+
             </div>
 
-            <div class="name-designation">
-              <h4>{{ getUserName(user) }}</h4>
-              <span class="label label-light">{{ user.techRole }}</span><br/>
+            <div class="tech-action">
 
-              <div class="user-email"><i class="icn-sm icn-at pull-left"></i> {{ user.primaryEmail }}</div>
+              <a href="javascript:void(0)" class="hit-area pull-right has-tooltip">
+                <i class="icn-sm icn-remove-token"></i>
+              </a>
+
+              <a href="javascript:void(0)" class="hit-area pull-right has-tooltip">
+                <i class="icn-sm icn-edit"></i>
+              </a>
+
             </div>
 
+            <div class="btn btl-lg pull-right btn-info" style="height: 26px; z-index: 3;" ng-click="restoreUser(user)">Restore User</div>
           </div>
-
-          <div class="tech-action">
-
-            <a href="javascript:void(0)" class="hit-area pull-right has-tooltip">
-              <i class="icn-sm icn-remove-token"></i>
-            </a>
-
-            <a href="javascript:void(0)" class="hit-area pull-right has-tooltip">
-              <i class="icn-sm icn-edit"></i>
-            </a>
-
-          </div>
-
-          <div class="btn btl-lg btn-info" ng-click="restoreUser(user)">Restore User</div>
-        </div>
-      </li>
+        </li>
+      </div>
 
     </ul>
 
