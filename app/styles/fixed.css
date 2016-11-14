@@ -827,7 +827,7 @@ aside#left div.nav-title {
 }
 
 .tech-user-templates-wrapper .tech-user .name-designation .user-email {
-  color: #94a4b8;
+  /*color: #94a4b8;*/
   padding-bottom: 5px;
 }
 
@@ -840,6 +840,28 @@ aside#left div.nav-title {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.label-help-desk-user{
+  background-color: #e16767;
+}
+
+.label-administrator{
+  background-color: #63be8f;
+}
+
+.label-tech-user{
+  background-color: #3c92ca;
+}
+
+.archived .opacity-layer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,.6);
+  z-index: 2;
 }
 
 .tech-request p{
@@ -1499,4 +1521,10 @@ span.sort-span {
   background-color: rgba(255, 255, 255, 0.8);
   line-height: normal;
   padding: 0 10px;
+}
+
+.archived{
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top:1px solid #eee;
 }
