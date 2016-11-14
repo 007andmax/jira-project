@@ -374,11 +374,8 @@
           <div ng-if="$state.is('settings.myProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileAboutMe">About Me</div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileChangePassword">Change Password</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileContactInfo">Contact Info</div>
-            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileMiscInfo">Misc. Info</div>
-            <div class="category-expanded-paragraph subsettings" navigate-to="#myProfileTrackingDevices">Activity
-              History
-            </div>
           </div>
         </div>
 
@@ -406,11 +403,13 @@
           Company Profile
         </div>
 
-        <div ng-style="{'height': $state.is('settings.companyProfile') ? '70px' : '0'}"
+        <div ng-style="{'height': $state.is('settings.companyProfile') ? '105px' : '0'}"
              class="category-expanded angular-animate" ng-if="currentUser.isOwner">
           <div ng-if="$state.is('settings.companyProfile')" navigation-bar>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoBasicInfo">Basic Info</div>
             <div class="category-expanded-paragraph subsettings" navigate-to="#companyInfoContactInfo">Contact Info
+            </div>
+            <div class="category-expanded-paragraph subsettings" navigate-to="#responseTimeSettings">Response Time Settings
             </div>
           </div>
         </div>

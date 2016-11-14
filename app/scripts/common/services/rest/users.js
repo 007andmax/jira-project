@@ -560,6 +560,18 @@
         $http.put('/settings/userProfile/updateWizard' + (dontShowThisAgain ? '?dontShowThisAgain=' + dontShowThisAgain : ''), dto);
       }
 
+      function changePassword(oldPass, newPass, callback) {
+        $http.post('/resetPassword', { oldPass: hex_md5(oldPass), newPass: hex_md5(newPass) }).then(function (resp) {
+          if (callback) {
+            callback(resp.data);
+          }
+        }, function (resp) {
+          if (callback) {
+            callback(resp);
+          }
+        });
+      }
+
       return {
         _addInitListener: addInitListener,
         getCurrentUser: getCurrentUser,
@@ -590,7 +602,8 @@
         deactivateAccount: deactivateAccount,
         restoreUser: restoreUser,
         requestToChangePassword: requestToChangePassword,
-        updateWelcomeWizard: updateWelcomeWizard
+        updateWelcomeWizard: updateWelcomeWizard,
+        changePassword: changePassword
       }
 
     }]);
