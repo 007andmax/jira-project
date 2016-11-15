@@ -46,8 +46,8 @@
               <span>Payments Terms</span>
 
               <input type="text" class="small payment" ng-model="paramInvocie.paymentTerms"
-                     uib-dropdown-toggle aria-expanded="true" maxlength="5" hard-reset-pattern="numberPattern">
-              <span class="suffix-days">{{ paramInvocie.paymentTerms == 1 ? 'day' : 'days' }}</span>
+                     uib-dropdown-toggle readonly>
+              <!--<span class="suffix-days">{{ paramInvocie.paymentTerms == 1 ? 'day' : 'days' }}</span>-->
               <i class="icn-sm icn-caret-gray"></i>
 
               <input type="hidden" ng-model="editInvoice.paymentTerms" name="paymentTerms" ng-required="true">
@@ -94,7 +94,7 @@
                    ng-required="true">
 
             <ul class="dropdown-menu dropdown-menu-right">
-              <li ng-repeat="(value, label) in frequency" ng-click="setRepeatingInvoice(label)">
+              <li ng-repeat="(value, label) in frequency" ng-click="setRepeatingInvoice(label)" ng-if="value !== 'cod'">
                 <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
               </li>
             </ul>
