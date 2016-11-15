@@ -99,8 +99,8 @@
               }
             }
 
-            from = getValid24HoursTime(from);
-            to = getValid24HoursTime(to);
+            from = getValid24HoursTime(from, $scope, 'from');
+            to = getValid24HoursTime(to, $scope, 'to');
 
             value = startWith + from + splitWith + to;
             element.val(value);
@@ -109,7 +109,7 @@
             checkPattern(value);
           }
 
-          function getValid24HoursTime(time) {
+          function getValid24HoursTime(time, model, field) {
             var splitTime = time.split(':'),
               hours = parseInt(splitTime[0]) || 0,
               minutes = (!splitTime[1] || splitTime[1].length > 1 ? parseInt(splitTime[1]) : parseInt(splitTime[1] + '0')) || 0;
@@ -121,6 +121,8 @@
             if (hours > 23) {
               hours = 23;
             }
+
+            model[field] = hours * 3600 + minutes * 60;
 
             return (hours > 9 ? hours : '0' + hours) + ':' + (minutes > 9 ? minutes : '0' + minutes)
           }
