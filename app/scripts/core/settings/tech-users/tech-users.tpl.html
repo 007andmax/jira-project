@@ -30,19 +30,25 @@
           <div ng-hide="editUserId === user.id">
             <div class="user-info">
 
-              <div class="avatar">
+              <div class="avatar" ng-if="!user.requestToChangePassword && user.isEmailVerified">
                 <img ng-if="user.avatar" ng-src="{{ getContactAvatarUrl(user) }}"
                      alt="..." class="img-circle">
-                <img ng-if="!user.avatar" src="images/settings-icon/user.png" alt="..." class="img-circle ">
+                <img ng-if="!user.avatar" src="images/settings-icon/tech-user.png" alt="..." class="img-circle">
+              </div>
+
+              <div class="avatar" ng-if="user.requestToChangePassword || !user.isEmailVerified" style="position: relative">
+                <img src="images/settings-icon/unverified-user.png" alt="" class="img-circle">
+                <img src="images/settings-icon/unverified-user-mark.png" alt="" class="unverified-user-mark"
+                     uib-tooltip="Tech-user hasn't confirmed his account yet." tooltip-placement="bottom">
               </div>
 
               <div class="name-designation">
                 <h4>{{ getUserName(user) }}</h4>
                 <span class="label label-{{ user.techRole.split(' ').join('-').toLowerCase() }}">{{ user.techRole }}</span><br/>
 
-                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"></img> {{ user.primaryEmail }}</div>
+                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"> {{ user.primaryEmail }}</div>
               </div>
-              <div class="tech-request">
+              <div class="tech-request" ng-click="changePasswordRequired(user)" ng-if="user.isEmailVerified">
                 <p>Send a request to change password</p>
               </div>
 
@@ -63,9 +69,6 @@
               </a>
 
             </div>
-
-            <a href="javascript:void(0)" ng-click="changePasswordRequired(user)"
-               ng-if="user.isEmailVerified">Send a request to change password</a>
           </div>
 
           <div class="template-details pull-left" style="margin-top:10px;"
@@ -75,12 +78,12 @@
         </div>
       </li>
 
-      <div class="archived">
+      <div class="archived" ng-show="filteredArchivedUsers && filteredArchivedUsers.length">
 
         <h2 class="text-center" style="font-weight: normal;">Achived tech-users</h2>
 
         <li class="template-item tech-user-item"
-            ng-repeat="user in archivedUsers | filter: { accountType: 'TECH' } | orderBy: getUserName track by user.id"
+            ng-repeat="user in (filteredArchivedUsers = (archivedUsers | filter: { accountType: 'TECH' }) | orderBy: getUserName) track by user.id"
             show-model-element="{{ 'showTechUser-' + user.id}}"
             on-finish-render="highlightTechUser()">
           <div class="opacity-layer"></div>
@@ -91,14 +94,14 @@
               <div class="avatar">
                 <img ng-if="user.avatar" ng-src="{{ getContactAvatarUrl(user) }}"
                      alt="..." class="img-circle">
-                <img ng-if="!user.avatar" src="images/settings-icon/user-5.png" alt="..." >
+                <img ng-if="!user.avatar" src="images/settings-icon/deleted-tech-user.png" alt="..." >
               </div>
 
               <div class="name-designation">
                 <h4>{{ getUserName(user) }}</h4>
                 <span class="label label-{{ user.techRole.split(' ').join('-').toLowerCase() }}">{{ user.techRole }}</span><br/>
 
-                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"></img> {{ user.primaryEmail }}</div>
+                <div class="user-email"><img style="width: 13px;" src="images/settings-icon/new-email.png"> {{ user.primaryEmail }}</div>
               </div>
 
             </div>
@@ -115,7 +118,9 @@
 
             </div>
 
-            <div class="btn btl-lg pull-right btn-info" style="height: 26px; z-index: 3;" ng-click="restoreUser(user)">Restore User</div>
+            <button-with-loading-indicator class="btn btl-lg pull-right btn-info" style="height: 26px; z-index: 3;"
+                                           ng-click="restoreUser(user)" label="Restore User"
+                                           loading="user.loadingInProgress"></button-with-loading-indicator>
           </div>
         </li>
       </div>
