@@ -63,6 +63,16 @@
           templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
           controller: 'quicktech.core.tickets.ticketDetailsCtrl'
         }))
+        .state('drafts', waitForServices({
+          url: '/drafts',
+          templateUrl: '/html/scripts/core/tickets/drafts/drafts.tpl.html',
+          controller: 'quicktech.core.tickets.draftsCtrl'
+        }))
+        .state('drafts.details', waitForServices({
+          url: '/:draftId',
+          templateUrl: '/html/scripts/core/tickets/drafts/draft-details.tpl.html',
+          controller: 'quicktech.core.tickets.draftDetailsCtrl'
+        }))
         .state('tickets-dashboard', waitForServices({
           url: '/tickets-dashboard',
           templateUrl: '/html/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',

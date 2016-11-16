@@ -54,6 +54,8 @@
         $scope.getPageNameByState = function () {
           if ($state.includes("tickets")) {
             return 'tickets';
+          } else if ($state.includes("drafts")) {
+            return 'inbox';
           } else if ($state.includes("users")) {
             return 'users';
           } else if ($state.includes("companies")) {

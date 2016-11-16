@@ -102,7 +102,11 @@
 
     function downloadTicketAttachments(id) {
       downloadByUrl('/v2/tickets/' + id + '/downloadAttachments');
-    };
+    }
+
+    function downloadDraftAttachments(id) {
+      downloadByUrl('/drafts/' + id + '/downloadAttachments');
+    }
 
     function downloadByUrl(url, fileName) {
 
@@ -155,6 +159,7 @@
     return {
       downloadByUrl: downloadByUrl,
       downloadTicketAttachments: downloadTicketAttachments,
+      downloadDraftAttachments: downloadDraftAttachments,
       downloadFile: downloadFile
     };
   });
