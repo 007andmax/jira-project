@@ -633,7 +633,16 @@ a.ha-24{
 .icn-edit-white {
   background-position: -1042px 0;
 }
+
+.icn-edit-light{
+  background-position: -976px 0;
+}
+
 :hover > .icn-edit-white, :active > .icn-edit-white, :focus:hover > .icn-edit-white, :focus:active > .icn-edit-white, :hover:active > .icn-edit-white, .active > .icn-edit-white, .open .icn-edit-white, .open > .btn:hover .icn-edit-white {
+  background-position: -1020px 0;
+}
+
+:hover > .icn-edit-light, :active > .icn-edit-light, :focus:hover > .icn-edit-light, :focus:active > .icn-edit-light, :hover:active > .icn-edit-light, .active > .icn-edit-light, .open .icn-edit-light, .open > .btn:hover .icn-edit-light {
   background-position: -1020px 0;
 }
 

@@ -12,165 +12,50 @@
 
   <div ng-if="usersView === 'grid'">
     <div ui-view></div>
-    <div class="users-list clearfix" count-nodes-in-line="[userNode]" ng-model="usersInLine">
-      <div ng-repeat="user in (usersCtrl.shownUsers = (users | filter : usersFilter | orderBy: getUserName)) track by user.id"
-           ng-controller="quicktech.core.users.userCtrl" on-finish-render="countNodes()">
 
-        <div class="user-card" userNode show-model-element="{{'show-after-save-' + user.id}}" scroll-offset="110">
-
-          <div class="content">
-
-            <ul class="user-badges">
-
-              <li class="icn-sm badge-admin persistent-tooltip" ng-show="user.role === 'ADMIN'"
-                  uib-tooltip="admin" tooltip-append-to-body="true" tooltip-placement="top"></li>
-
-              <li class="icn-sm {{ getUserSubscribeClass() }} persistent-tooltip"
-                  ng-show="user.subscription && (user.subscription.ticket || user.subscription.invoice)"
-                  uib-tooltip="{{ getUserSubscribeTooltip() }}" tooltip-append-to-body="true"
-                  tooltip-placement="top"></li>
-
-            </ul>
-
-            <div class="title pull-left">
-
-              <h3 class="name pull-left" uib-tooltip="{{ getUserName(user) }}"
-                  trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
-                <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
-              </h3>
-
-              <a href="javascript:void(0)" class="hit-area pull-left has-tooltip"
-                 ng-if="PermissionsService.isAllowed('EDIT_USERS')"
-                 tooltip-placement="top" uib-tooltip="Edit user" create-new-entity="user" item="user">
-                <i class="icn-sm icn-edit"></i>
-              </a>
-
-            </div>
-
-            <div class="status pull-left" ng-if="!user.company.isDefault">
-              <div class="user-company pull-left has-tooltip" trimmed-tooltip="1"
-                   tooltip-placement="bottom" uib-tooltip="{{ getUserCompanyName(user) }}"
-                   tooltip-append-to-body="true" tooltip-enable="{{ isShowTooltip[1]() }}">
-                <i class="icn-sm icn-user-company"></i>
-                <span trimmed-tooltip-container> {{ getUserCompanyName(user) }}</span>
+    <div class="card-view-wrapper clearfix">
+      <div class="card-wrapper" ng-controller="quicktech.core.users.userCtrl"
+           ng-repeat="user in (usersCtrl.shownUsers = (users | filter : usersFilter | orderBy: getUserName)) track by user.id">
+        <div class="card">
+          <div class="card__cover" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}">
+            <div class="card__cover--hover user-type">
+              <div class="drop-menu"></div>
+              <div class="change-img">
+                <img src="images/input-icons/photo-camera.png" alt="">
               </div>
             </div>
-
-            <div class="status pull-left" ng-if="user.designation">
-              <span class="label label-primary">{{ user.designation }}</span>
-            </div>
-
-            <div class="user-actions pull-left">
-
-              <div class="btn btn-default pull-left has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
-                   email-to="user.primaryEmail" data-placement="top" uib-tooltip="Send Email">
-                <i class="icn-sm icn-user-mail"></i>
+            <div class="card__cover--name user-type clearfix">
+              <p>{{ getUserName(user) }}</p>
+              <div ng-if="PermissionsService.isAllowed('EDIT_USERS')" tooltip-placement="top"
+                   uib-tooltip="Edit user" create-new-entity="user" item="user">
+                <i class="icn-sm icn-edit-light"></i>
               </div>
-
-              <div class="more pull-left" uib-dropdown>
-
-                <a href="javascript:void(0)" class="hit-area ha-22-38 has-tooltip"
-                   aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle
-                   tooltip-placement="top" uib-tooltip="More">
-                  <i class="icn-more icn-sm"></i>
-                </a>
-
-                <ul class="dropdown-menu" style="min-width: 200px" role="menu">
-
-                  <li><a tabindex="-1" href="javascript:void(0)">Chat</a></li>
-
-                  <li class="dropdown-submenu">
-
-                    <a tabindex="-1" href="javascript:void(0)">Set {{ user.firstName }} Privilege</a>
-
-                    <div class="dropdown-submenu-wrapper">
-                      <ul class="dropdown-menu dropdown-privilege">
-
-                        <li ng-class="{active:user.role==='USER'}" ng-click="changeUserRole(user.id, 'USER')">
-                          <a tabindex="-1" href="javascript:void(0)"> User </a>
-                        </li>
-
-                        <li ng-class="{active:user.role==='ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')">
-                          <a tabindex="-1" href="javascript:void(0)"> Administrator </a>
-                        </li>
-
-                      </ul>
-                    </div>
-
-                  </li>
-
-                  <li class="dropdown-submenu">
-
-                    <a tabindex="-1" href="javascript:void(0)">Subscribe {{ user.firstName }} to...</a>
-
-                    <div class="dropdown-submenu-wrapper" stop-propagation="click">
-                      <ul class="dropdown-menu dropdown-subscribe">
-
-                        <li ng-click="subscribeUser(user, 'ticket')">
-                          <a tabindex="-1" href="javascript:void(0)">
-                            <div class="clearfix">
-                              <label class="control checkbox pull-left">
-                                <input type="checkbox"
-                                       ng-checked="user.subscription.ticket" ng-disabled="disabledCheckbox">
-                                <span class="control-indicator"></span>
-                                Ticket Updates
-                              </label>
-                            </div>
-                          </a>
-                        </li>
-
-                        <li ng-click="subscribeUser(user, 'invoice')"
-                            ng-if="!isLastUserWithInvoiceSubscription(user)">
-                          <a tabindex="-1" href="javascript:void(0)">
-                            <div class="clearfix">
-                              <label class="control checkbox pull-left">
-                                <input type="checkbox"
-                                       ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
-                                <span class="control-indicator"></span>
-                                Invoice Updates
-                              </label>
-                            </div>
-                          </a>
-                        </li>
-
-                      </ul>
-                    </div>
-
-                  </li>
-
-                  <li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
-                      && !user.isContact && !isLastUserWithInvoiceSubscription(user)">
-                    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUser()">
-                      Archive this Contact
-                    </a>
-                  </li>
-
-                </ul>
-              </div>
-            </div>
-
-            <div class="user-total-tickets pull-left">
-              <i class="icn-sm icn-user-tickets"></i>
-              <span>Sbmt. Tickets</span> {{ user.userStatistic.ticketsSubmitted || 0 }}
-            </div>
-
-            <div class="user-number pull-left" ng-hide="user.phoneNumbers.length < 1">
-              <i class="icn-sm {{ getPriorityNumberInfo('CLASS') }}"></i>
-              <span> {{ getPriorityNumberInfo('NUMBER') }}</span>
-            </div>
-
-          </div>
-
-          <div class="avatar" ng-class="{'no-avatar': !user.avatar}">
-            <div class="center-horizontally">
-              <div class="center-vertically">
-                <img ng-src="{{ getUserAvatarUrl(user) }}">
-              </div>
+              <span class="label label-tech-user" ng-if="user.designation">{{ user.designation }}</span>
             </div>
           </div>
-
+          <div class="card__info user-type">
+            <div>
+              <img src="images/input-icons/company-user.png" alt="">
+              <p>{{ getUserCompanyName(user) }}</p>
+            </div>
+            <div ng-if="getPriorityNumberInfo('NUMBER')">
+              <img src="images/input-icons/smartphone.png" alt="">
+              <p>{{ getPriorityNumberInfo('NUMBER') }}</p>
+            </div>
+            <div ng-if="user.primaryEmail">
+              <img src="images/settings-icon/new-email.png" alt="">
+              <p class="ellipsis">{{ user.primaryEmail }}</p>
+            </div>
+            <div>
+              <img src="images/input-icons/ticket-black.png" alt="">
+              <p>Sbmt. tickets {{ user.userStatistic.ticketsSubmitted || 0 }}</p>
+            </div>
+          </div>
+          <div class="card__create-btn clearfix">
+            <button class="btn btn-success" create-new-entity="ticket"
+                    company-id="{{ user.company.id }}">CREATE TICKET</button>
+          </div>
         </div>
-
       </div>
     </div>
   </div>
