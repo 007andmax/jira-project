@@ -130,9 +130,10 @@
         .state('settings', waitForServices({
           url: '/settings',
           templateUrl: '/html/scripts/core/settings/settings.tpl.html',
-          controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService',
-            function ($scope, $state, PermissionsService) {
+          controller: ['$scope', '$state', 'quicktech.common.services.PermissionsService', 'UsersService',
+            function ($scope, $state, PermissionsService, UsersService) {
               $scope.PermissionsService = PermissionsService;
+              $scope.updateWelcomeWizard = UsersService.updateWelcomeWizard;
               $scope.$watch(function () {
                 return $state.current.url;
               }, function (url) {

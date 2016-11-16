@@ -10,10 +10,10 @@
                 ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService, Utils,
                 UserConfirmationsService) {
 
-        var day = 1000 * 60 * 60 * 24, form,
-          allClientUsers = UsersService.getClientUsers();
+        var day = 1000 * 60 * 60 * 24, form;
 
         $scope.frequency = {
+          cod: 'COD',
           sevenDays: '7 days',
           fifteenDays: '15 days',
           thirtyDays: '30 days',
@@ -96,7 +96,9 @@
             $scope.paramInvocie.repeatingInvoice = $scope.invoice.customFrequency;
           }
 
-          $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms;
+          $timeout(function () {
+            $scope.paramInvocie.paymentTerms = $scope.invoice.paymentTerms === 0 ? $scope.invoice.paymentTerms : ($scope.invoice.paymentTerms + ' days');
+          });
 
         } else {
 
@@ -118,7 +120,7 @@
           };
 
           EmailSettingsService.getTermsAndConditions(function (invoiceInfo) {
-            $scope.paramInvocie.paymentTerms = invoiceInfo.term;
+            $scope.paramInvocie.paymentTerms = invoiceInfo.term + ' days';
             $scope.editInvoice.paymentTerms = invoiceInfo.term;
           });
 
@@ -182,7 +184,7 @@
             return;
           }
 
-          $scope.paramInvocie.paymentTerms = company.paymentTerms;
+          $scope.paramInvocie.paymentTerms = company.paymentTerms === 0 ? 'COD' : company.paymentTerms;
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
             id: company.id
@@ -238,14 +240,14 @@
         });
 
         $scope.setPaymentTerms = function (value) {
-          $scope.paramInvocie.paymentTerms = parseInt(value);
+          $scope.paramInvocie.paymentTerms = value;
         };
 
         $scope.$watch('paramInvocie.paymentTerms', function (val) {
           if (val && $scope.editInvoiceForm.paymentTerms && $scope.editInvoiceForm.paymentTerms.$pristine) {
             $scope.editInvoiceForm.paymentTerms.$setDirty();
           }
-          $scope.editInvoice.paymentTerms = parseInt(val);
+          $scope.editInvoice.paymentTerms = parseInt(val) || 0;
         });
 
         $scope.changeRepeatInvoice = function () {
