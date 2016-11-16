@@ -57,6 +57,32 @@
   width: calc(100% - 145px);
   height: 100%;
 }
+
+.create-window .general .create-ticket-form{
+  height: 550px;
+  overflow: auto;
+}
+
+.create-window .general .create-ticket-form .services-in-create-tkt{
+  padding: 3px 0;
+}
+
+.create-window .general .create-ticket-form .qt-table{
+  text-align: left;
+  padding: 0px;
+}
+
+.create-window .general .create-ticket-form .qt-table .timer-quantity{
+  width: 100px;
+}
+
+.create-window .general .create-ticket-form .modal-footer .qt-table{
+  text-align: left;
+  padding: 15px;
+}
+
+
+
 .create-window .general .btn-bottom{
   position: absolute;
   bottom: 25px;

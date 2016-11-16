@@ -275,16 +275,15 @@
                        name="serviceDescription" max-length-word="30"/>
               </div>
 
-              <div class="col-4" ng-class="{'has-error': isShowingServiceErrors(addServiceForm, 'serviceData')}">
+              <div class="col-4" style="width: 50px;" ng-class="{'has-error': isShowingServiceErrors(addServiceForm, 'serviceData')}">
 
-                <div uib-dropdown>
-
-                  <i class="icn-sm icn-caret-gray" style="position: absolute;top: 13px;right: 12px;z-index: 1;"></i>
-                  <input type="text" class="form-control has-dropdown" qt-data-time-picker max-date="maxServiceDate"
-                         uib-dropdown-toggle aria-expanded="false" placeholder="Date"
-                         ng-model="serviceExpense.date"
+                <div>
+                  <input type="text" class="form-control absolute-stick-datepicker has-dropdown" placeholder="Date"
+                         qt-data-time-picker max-date="maxServiceDate" ng-model="serviceExpense.date"
                          name="serviceData" ng-required="true">
-
+                  <div class="btn btn-primary">
+                    <img src="images/input-icons/calendar.svg" width="100%" height="100%" alt="">
+                  </div>
                 </div>
 
               </div>
