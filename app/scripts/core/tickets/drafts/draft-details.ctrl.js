@@ -5,8 +5,9 @@
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.draftDetailsCtrl',
     ['$scope', 'DraftsService', '$stateParams', '$state', '$sce', 'Downloader', '$rootScope',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      'quicktech.common.services.PermissionsService',
       function ($scope, DraftsService, $stateParams, $state, $sce, Downloader, $rootScope, UserConfirmationsService,
-                UserNotificationService) {
+                UserNotificationService, PermissionsService) {
         if (!$stateParams.draftId) {
           $state.go('drafts');
         }
@@ -71,6 +72,10 @@
 
         $scope.downloadAttachment = function (attachmentId, fileName) {
           Downloader.downloadFile(attachmentId, fileName)
+        };
+
+        $scope.isProceedAllowed = function () {
+          return PermissionsService.isAllowed('CREATE_USERS') && PermissionsService.isAllowed('CREATE_COMPANIES');
         };
 
       }]);
