@@ -254,6 +254,7 @@
             <div class="subscribe-tokens">
               <div class="invoice-update-token" ng-show="contact.subscription.invoice">Inv. Updates</div>
               <div class="ticket-update-token" ng-show="contact.subscription.ticket">Tkt Updates</div>
+              <div class="ticket-update-token" ng-show="contact.subscription.ticketManager">Tkt Manages</div>
             </div>
 
             <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
@@ -265,6 +266,18 @@
                     <label class="control checkbox pull-left">
                       <input type="checkbox" ng-model="contact.subscription.ticket">
                       <span class="control-indicator"></span> Ticket Updates
+                    </label>
+                  </div>
+                </a>
+              </li>
+
+              <li>
+                <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+                   ng-model="contact.subscription.ticketManager">
+                  <div class="clearfix">
+                    <label class="control checkbox pull-left">
+                      <input type="checkbox" ng-model="contact.subscription.ticketManager">
+                      <span class="control-indicator"></span> Ticket Manages
                     </label>
                   </div>
                 </a>

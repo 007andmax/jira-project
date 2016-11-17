@@ -13,9 +13,17 @@
 
       <ul class="nav nav-justified nav-tabs-dropdown" role="tablist">
 
-        <li class="active">
-          <a href="javascript:void(0)">
+        <li ng-class="{'active': currentAddUserTab === 'TEAM_MEMBER'}">
+          <a href="javascript:void(0)" role="tab" data-toggle="tab"
+             ng-click="openAddUserTab('TEAM_MEMBER')">
             Agents
+          </a>
+        </li>
+
+        <li ng-class="{'active': currentAddUserTab === 'CLIENT_USER'}">
+          <a href="javascript:void(0)" role="tab" data-toggle="tab"
+             ng-click="openAddUserTab('CLIENT_USER')">
+            Client Users
           </a>
         </li>
 
@@ -23,13 +31,23 @@
 
       <div class="tab-content">
 
-        <div class="tab-pane active" update-add-user>
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'TEAM_MEMBER'" update-add-user>
           <div class="form-group">
             <input type="email" class="form-control form-control-filter"
                    placeholder="Search agent...">
             <i class="icn-sm icn-search-input" tabindex="-1"></i>
           </div>
           <div class="scroll-pane"></div>
+        </div>
+
+        <div class="tab-pane active" ng-if="currentAddUserTab === 'CLIENT_USER' && !isNeedReset" update-add-user>
+          <div class="form-group">
+            <input type="email" class="form-control form-control-filter"
+                   placeholder="Search client...">
+            <i class="icn-sm icn-search-input" tabindex="-1"></i>
+          </div>
+          <div class="scroll-pane"></div>
+
         </div>
 
       </div>

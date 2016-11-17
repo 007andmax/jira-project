@@ -117,6 +117,17 @@
               </a>
             </li>
 
+            <li>
+              <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('ticketManager')">
+                <div class="clearfix">
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-checked="userSubscriptionsByCompanyId[user.id].ticketManager">
+                    <span class="control-indicator"></span> Ticket Manages
+                  </label>
+                </div>
+              </a>
+            </li>
+
             <li ng-hide="users.length === 1 || isLastUserWithInvoiceSubscription(user.id)">
               <a tabindex="-1" href="javascript:void(0)" ng-click="changeUserSubscription('invoice')">
                 <div class="clearfix">

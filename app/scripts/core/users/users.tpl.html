@@ -304,6 +304,17 @@
               </a>
             </li>
 
+            <li>
+              <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'ticketManager')">
+                <div class="clearfix">
+                  <label class="control checkbox pull-left">
+                    <input type="checkbox" ng-checked="user.subscription.ticketManager">
+                    <span class="control-indicator"></span> Ticket Manages
+                  </label>
+                </div>
+              </a>
+            </li>
+
             <li ng-if="!isLastUserWithInvoiceSubscription(user)">
               <a tabindex="-1" href="javascript:void(0)" ng-click="subscribeUser(user, 'invoice')">
                 <div class="clearfix">
