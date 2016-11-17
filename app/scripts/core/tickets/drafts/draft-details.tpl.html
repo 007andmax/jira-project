@@ -1,4 +1,4 @@
-<div class="container-ticket-content" qt-nano-scroller show-draft-details>
+<div class="container-ticket-content inbox" qt-nano-scroller show-draft-details>
   <div style="height: 100%">
     <div class="ticket-content" style="margin-bottom: 200px;">
       <div ng-form="editDraftForm">
@@ -11,11 +11,7 @@
             </div>
             <div class="clearfix pull-left" style="width: calc(100% - 255px);">
               <div class="ticket-header-username pull-left">
-                <strong ng-if="draftDetails.firstName || draftDetails.lastName">
-                  {{ draftDetails.firstName + ' ' + draftDetails.lastName }}
-                </strong>
-                <i class="dot-sep"></i>
-                <strong>{{ draftDetails.source }}</strong>
+                <p>{{ draftDetails.source }}</p>
               </div>
               <div class="ticket-header-details text-muted">
                 <i ng-show="draftDetails.hasAttachments === true"
@@ -26,7 +22,7 @@
           </div>
         </div>
         <div class="ticket-detail">
-          <div>
+          <div style="padding-left: 20px;">
             <h2>{{ draftDetails.number + ' - ' + draftDetails.subject }}</h2>
             <div class="ticket-message" ng-bind-html="getDraftNote()"></div>
           </div>
@@ -74,13 +70,12 @@
         <i class="icn-lg icn-msg-claim"></i>
 
         <div class="well-message">
-          <p>Got nothing to work on today? Hit up the <strong>“Claim Ticket”</strong> button to get the troubleshooting
-            process started!</p>
+          <p>YOU CLAIMED THIS TICKET ON THU, 20 OCT 2016, 5:40 PM</p>
         </div>
 
         <div class="well-actions">
-          <button class="btn btn-primary btn-lg" ng-click="deleteForever()">Delete Forever</button>
           <button class="btn btn-primary btn-lg">Proceed</button>
+          <button class="btn btn-danger btn-lg" ng-click="deleteForever()">Delete Forever</button>
         </div>
 
       </div>

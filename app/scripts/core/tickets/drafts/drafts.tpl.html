@@ -1,17 +1,25 @@
 <div>
-  <div class="container-ticket-list pull-left">
+  <div class="container-ticket-list inbox pull-left">
     <div class="empty-page-helper" ng-if="!sources.length && !loadingOrRendering && isAnyDraftsExist(sources)">
       <p style="opacity: 0.57">There are no inbox</p>
     </div>
 
     <div class="ticket-list sources-wrap">
       <ul class="tickets sources">
-        <li class="ticket source" ng-repeat="source in sources track by source.source" ng-click="openSource(source)"
+        <li class="ticket " ng-repeat="source in sources track by source.source" ng-click="openSource(source)"
             draft-uploader event-toggle-slider="toggleDrafts{{ source.source }}" ng-if="source.amount > 0">
-
-          <div>
-            <p>{{ source.source }}</p>
-            <span>{{ source.amount }}</span>
+          <div class="source">
+            <div class="ticket-checkbox pull-left" stop-propagation="click">
+              <label class="control checkbox">
+                <input type="checkbox">
+                <span class="control-indicator"></span>
+              </label>
+            </div>
+            <div class="ticket-meta">
+              <p><strong>{{ source.source }}</strong></p>
+              <p class="text-muted">Andrew Lipsing</p>
+              <p style="display: block;"  class="text-muted">Amount: &nbsp;{{ source.amount }}</p>
+            </div>
           </div>
           <ul class="drafts" drafts-container stop-propagation="click" ets-slider style="display: none;">
             <li class="ticket" ng-repeat="draft in source.drafts track by draft.id" on-finish-render="onFinishRendering()"
@@ -27,10 +35,9 @@
               <div class="ticket-meta">
                 <div class="ticket-list-header clearfix">
                   <p class="pull-left text-muted ellipsis">
-                    <span ng-if="draft.firstName || draft.lastName">{{ draft.firstName + ' ' + draft.lastName }}</span>
                     <span ng-if="!draft.firstName && !draft.lastName">{{ draft.source }}</span>
+
                   </p>
-                  <p class="pull-right text-muted">{{ draft.createdAt | ticketCreateDate }}</p>
                 </div>
 
                 <div class="ticket-title ellipsis clearfix">
@@ -40,6 +47,8 @@
                      ng-show="ticket.hasAttachments === true">
                     <i class="icn-sm icn-ticket-list-attachment"></i>
                   </a>
+                  <p class="text-muted ellipsis">{{ draft.createdAt | ticketCreateDate }}</p>
+
                 </div>
               </div>
             </li>

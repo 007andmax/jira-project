@@ -1534,3 +1534,54 @@ span.sort-span {
   top: 45px;
   left: 26px;
 }
+
+.inbox .ticket{
+  padding: 0;
+  min-height: 100px;
+}
+
+.inbox .source{
+  height: 100px;
+  padding: 15px;
+  min-height: 0;
+}
+
+.inbox .source .ticket-checkbox{
+  padding-top: 3px;
+}
+.inbox .ticket-checkbox{
+  padding-left: 10px;
+  width: 40px;
+}
+.inbox .ticket-meta{
+  margin-left: 40px;
+}
+
+.inbox .drafts{
+  padding-left: 0;
+}
+
+.inbox .drafts li{
+  padding-left: 40px;
+}
+
+.inbox .drafts .ticket.active:first-child {
+  border-top:1px solid #08a8dd;
+}
+
+.container-ticket-content.inbox .ticket-header-username p{
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.container-ticket-content.inbox .ticket-message{
+  color: #94A4B8;;
+}
+
+.inbox .btn-danger{
+  font-weight: normal;
+}
+
+.inbox .well-message{
+  font-weight: 600;
+}
