@@ -15,20 +15,22 @@
             var dropdown = element.find('.dropdown-menu'),
               createNewButton;
 
-            if (dropdown[0].nodeName.toLowerCase() === 'ul') {
-              createNewButton = document.createElement('li');
-            } else {
-              createNewButton = document.createElement('div');
-            }
+            if (dropdown.length) {
+              if (dropdown[0].nodeName.toLowerCase() === 'ul') {
+                createNewButton = document.createElement('li');
+              } else {
+                createNewButton = document.createElement('div');
+              }
 
-            createNewButton.setAttribute('create-new-entity', attrs.addCreateNewButton || 'ticket');
-            var createNewText = document.createElement('a');
-            createNewText.innerHTML = 'Create New';
-            createNewText.style['text-align'] = 'center';
-            createNewButton.appendChild(createNewText);
-            $compile(createNewButton)(newScope, function (compiledHtml) {
-              dropdown.prepend(compiledHtml);
-            });
+              createNewButton.setAttribute('create-new-entity', attrs.addCreateNewButton || 'ticket');
+              var createNewText = document.createElement('a');
+              createNewText.innerHTML = 'Create New';
+              createNewText.style['text-align'] = 'center';
+              createNewButton.appendChild(createNewText);
+              $compile(createNewButton)(newScope, function (compiledHtml) {
+                dropdown.prepend(compiledHtml);
+              });
+            }
           })
         }
       }

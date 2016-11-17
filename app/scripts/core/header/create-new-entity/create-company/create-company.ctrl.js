@@ -16,7 +16,7 @@
         var savedState = $scope.getLastSavedState('company');
         var action = 'CREATE_COMPANIES';
 
-        if (savedState.type === 'company' && savedState.item) {
+        if (savedState.type === 'company' && savedState.item && savedState.item.id) {
           var companyId = savedState.item.id,
             company = CompaniesService.getOneById(companyId);
 
@@ -84,6 +84,42 @@
 
           });
 
+        } else if (savedState.item) {
+          $scope.isLastInvoiceSubsciption = true;
+          $scope.editCompany = {
+            addresses: [{ isPrimary: true }],
+            contacts: [{
+              firstName: savedState.item.firstName,
+              lastName: savedState.item.lastName,
+              primaryEmail: savedState.item.source,
+              subscription: { ticket: true, invoice: true },
+              avatar: {
+                scale: 50
+              }
+            }],
+            services: [],
+            clientIndustry: {},
+            defaultPaymentMethod: '',
+            login: '',
+            password: '',
+            maxAgents: 0,
+            removeOfflineTime: 30
+          };
+          $scope.contact = $scope.editCompany.contacts[0];
+
+          TaxRatesService.getAllByCompany($scope.currentUser.company.id, $scope, function (resp) {
+            $scope.techCompanyTax = angular.copy(resp);
+
+            if ($scope.editCompany.taxRates) {
+              return;
+            }
+
+            $scope.editCompany.taxRates = [];
+            for (var i = 0; i < resp.length; i++) {
+              $scope.editCompany.taxRates.push(resp[i]);
+              $scope.selectedTax[resp[i].code] = true;
+            }
+          });
         } else {
           $scope.isLastInvoiceSubsciption = true;
           $scope.editCompany = {
@@ -491,7 +527,7 @@
 
         function getEmptyContact() {
           return {
-            subscription: { invoice: true },
+            subscription: { ticket: true, invoice: true },
             avatar: {
               scale: 50
             }

@@ -3,8 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.tickets').controller('quicktech.core.tickets.draftDetailsCtrl',
-    ['$scope', 'DraftsService', '$stateParams', '$state', '$sce', 'Downloader',
-      function ($scope, DraftsService, $stateParams, $state, $sce, Downloader) {
+    ['$scope', 'DraftsService', '$stateParams', '$state', '$sce', 'Downloader', '$rootScope',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, DraftsService, $stateParams, $state, $sce, Downloader, $rootScope, UserConfirmationsService,
+                UserNotificationService) {
         if (!$stateParams.draftId) {
           $state.go('drafts');
         }
@@ -37,11 +39,26 @@
 
         DraftsService.getFullDraft($stateParams.draftId, function (resp) {
           $scope.draftDetails = resp;
-          angular.element(document.body).addClass('opened-ticket');//move to directive
+          $rootScope.$broadcast('draftDetailsLoad');
+          $rootScope.$broadcast('openDraftSource', resp.source, resp.id);
         });
 
-        $scope.deleteForever = function (draftId) {
-          DraftsService.deleteForever(draftId);
+        $scope.toggleDraftsList = function () {
+          $rootScope.$broadcast('toggleDraftsList');
+        };
+
+        $scope.deleteForever = function () {
+          var confirmMesage = 'The inbox will become inaccessible. Continue with permanent deletion?',
+            confirmButton = 'Delete';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            DraftsService.deleteForever([$scope.draftDetails.id], function () {
+              UserNotificationService.show('The inbox “' + $scope.draftDetails.number + '” has been deleted', true);
+              $state.go('drafts').then(function () {
+                $rootScope.$broadcast('uncheckIfSelectedDraft', $scope.draftDetails.id);
+              });
+            });
+          });
         };
 
         $scope.getDraftNote = function () {

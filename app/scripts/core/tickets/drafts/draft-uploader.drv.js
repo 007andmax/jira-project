@@ -13,7 +13,8 @@
           link: function (scope, element) {
 
             var $win = $(window),
-              loadingMore = false;
+              loadingMore = false,
+              lastScrollTop = 0;
 
             scope.loadingOrRendering = false;
             scope.globalSearch = SharedStateService.getSharedState('globalSearch');
@@ -26,14 +27,14 @@
 
             scope.onFinishRendering = function () {
               if (scope.loadingOrRendering && !loadingMore && scope.openedSource === scope.source.source) {
-                $rootScope.$broadcast('toggleDrafts' + scope.openedSource);
+                $rootScope.$broadcast('showDrafts' + scope.openedSource);
               }
               scope.loadingOrRendering = false;
             };
 
             scope.$on('removeOtherDrafts', function () {
               if (scope.source.source !== scope.openedSource && scope.source.drafts) {
-                $rootScope.$broadcast('toggleDrafts' + scope.source.source);
+                $rootScope.$broadcast('hideDrafts' + scope.source.source);
                 $timeout(function () {
                   scope.source.drafts = [];
                 });
@@ -70,11 +71,15 @@
 
               function scrollHandler(e) {
                 if (!scope.loadingOrRendering) {
+                  var draftsContainerHeight = $('[drafts-container]').height();
                   var scrollTop = $(e.target).scrollTop(),
-                    isNeedToLoadMoreTickets = ($('[drafts-container]').height() - $win.innerHeight()) <= scrollTop + 200;
+                    isNeedToLoadMoreTickets = (draftsContainerHeight - $win.innerHeight()) <= scrollTop + 200;
 
-                  if (isNeedToLoadMoreTickets && !scope.loadingOrRendering &&
-                    (!scope.source.drafts || scope.source.drafts.length < scope.openedSourceCount)) {
+                  lastScrollTop = scrollTop;
+
+                  if (isNeedToLoadMoreTickets && draftsContainerHeight && lastScrollTop < scrollTop &&
+                    (!scope.source.drafts || scope.source.drafts.length < scope.source.amount)) {
+
                     scope.loadingOrRendering = true;
                     loadingMore = true;
                     DraftsService.loadMoreDrafts(scope.openedSource);

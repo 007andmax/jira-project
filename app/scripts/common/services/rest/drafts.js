@@ -10,17 +10,20 @@
     function ($http, $rootScope, RealTimeService, Utils) {
 
       var storage = {
-        sources: [],
-        drafts: [],
-        lastDraftParams: {}
-      },
+          sources: [],
+          drafts: [],
+          lastDraftParams: {}
+        },
         scope = $rootScope.$new();
 
       RealTimeService.subscribe('/drafts', scope, function (newChange) {
+        var source, draft;
+
         if (newChange.action === 'DRAFT_CREATED') {
-          var draft = newChange.data;
+
+          draft = newChange.data;
           for (var i = 0; i < storage.sources.length; i++) {
-            var source = storage.sources[i];
+            source = storage.sources[i];
             if (source.source === draft.source) {
               source.amount++;
               if (source.drafts && source.drafts.length) {
@@ -30,6 +33,26 @@
             }
           }
           storage.sources.push({ source: draft.source, amount: 1 });
+
+        } else if (newChange.action === 'DRAFT_DELETED') {
+
+          var draftId = newChange.data.id;
+          draft = Utils.findById(storage.drafts, draftId);
+          Utils.deleteById(storage.drafts, draftId);
+
+          for (var j = 0; j < storage.sources.length; j++) {
+            source = storage.sources[j];
+
+            if (source.source === draft.source) {
+              if (source.amount > 1) {
+                source.amount--;
+              } else {
+                storage.sources.splice(j, 1);
+                j--;
+              }
+              break;
+            }
+          }
         }
       });
 
@@ -84,7 +107,17 @@
       }
 
       function getFullDraft(draftId, callback) {
-        var future = $http.get('/drafts/' + draftId);
+        $http.get('/drafts/' + draftId).then(function (resp) {
+          var draft = resp.data;
+          draft.number = draftNumberPrefix + draft.number;
+          if (callback) {
+            callback(draft);
+          }
+        });
+      }
+
+      function deleteForever(ids, callback) {
+        var future = $http.post('/drafts/delete', { draftIds: ids });
         Utils.handleCallback(future, callback);
       }
 
@@ -92,7 +125,8 @@
         getDrafts: fetchDrafts,
         loadMoreDrafts: loadMoreDrafts,
         getSources: getSources,
-        getFullDraft: getFullDraft
+        getFullDraft: getFullDraft,
+        deleteForever: deleteForever
       }
 
     }

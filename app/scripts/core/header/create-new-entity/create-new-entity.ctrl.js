@@ -18,6 +18,8 @@
 
         if ($scope.openedTab === 'category') {
           $scope.openedTab = 'product';
+        } else if ($scope.openedTab === 'ticketFromDraft') {
+          $scope.openedTab = 'ticket';
         }
 
         $scope.sessionId = sessionId;

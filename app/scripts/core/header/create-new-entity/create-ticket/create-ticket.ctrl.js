@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech').controller('quicktech.createTicketCtrl',
-    ['$scope', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService',
+    ['$scope', 'TicketsService', 'FilesService', 'CompaniesService', 'UsersService', 'DevicesService', '$rootScope',
       'quicktech.common.services.UserNotificationService', 'ServicesService', '$timeout', '$state',
       'quicktech.common.services.TicketsPermissionsService', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, TicketsService, FilesService, CompaniesService, UsersService, DevicesService,
+      function ($scope, TicketsService, FilesService, CompaniesService, UsersService, DevicesService, $rootScope,
                 UserNotificationService, ServicesService, $timeout, $state, TicketsPermissionsService, UserConfirmationsService) {
 
         var agentsByCompany = [];
@@ -34,23 +34,56 @@
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.fileInfo = { quantityErrorFiles: 0 };
 
-        var savedState = $scope.getLastSavedState('ticket');
-        var savedItem = savedState.item;
-        if (savedState.type === 'ticket' && savedItem) {
-          $scope.ticketAttachments = angular.copy(savedItem.attachments);
-          $scope.ticketSharedUsersList = angular.copy(savedItem.ticketSharedUsersList);
-          $scope.selectUpdateSharedUser = angular.copy(savedItem.selectUpdateSharedUser);
+        var savedState = $scope.getLastSavedState('ticketFromDraft'),
+          savedItem;
 
+        if (savedState.item) {
+          savedItem = savedState.item;
+          savedItem.draftId = savedState.item.id;
+          savedItem.id = undefined;
 
-          savedItem.attachments = undefined;
-          savedItem.ticketSharedUsersList = undefined;
-          savedItem.selectUpdateSharedUser = undefined;
-          $scope.ticket = angular.copy(savedItem);
-        } else {
-          $scope.ticket = { priorityLevel: 'MEDIUM' };
-          $scope.ticketAttachments = [];
+          for (var i = 0; i < savedItem.attachments.length; i++) {
+            var attachment = savedItem.attachments[i];
+            attachment.file.progress = 100;
+            savedItem.attachments[i] = attachment.file;
+          }
+          $scope.ticketAttachments = savedItem.attachments;
           $scope.ticketSharedUsersList = [];
           $scope.selectUpdateSharedUser = {};
+          savedItem.priorityLevel = 'MEDIUM';
+          $scope.ticket = savedItem;
+
+          var existingUser = UsersService.getClientUsers().find(function (user) {
+            return user.primaryEmail === savedState.item.source;
+          });
+
+          if (existingUser && !existingUser.company.default) {
+            setResolvedCompany(existingUser.company.id, existingUser);
+          } else {
+            $timeout(function () {
+              $rootScope.$broadcast('createNewEntity', 'company', savedItem);
+            });
+          }
+
+        } else {
+          savedState = $scope.getLastSavedState('ticket');
+          savedItem = savedState.item;
+          if (savedState.type === 'ticket' && savedItem) {
+            $scope.ticketAttachments = angular.copy(savedItem.attachments);
+            $scope.ticketSharedUsersList = angular.copy(savedItem.ticketSharedUsersList);
+            $scope.selectUpdateSharedUser = angular.copy(savedItem.selectUpdateSharedUser);
+
+
+            savedItem.attachments = undefined;
+            savedItem.ticketSharedUsersList = undefined;
+            savedItem.selectUpdateSharedUser = undefined;
+            $scope.ticket = angular.copy(savedItem);
+          } else {
+            $scope.ticket = { priorityLevel: 'MEDIUM' };
+            $scope.ticketAttachments = [];
+            $scope.ticketSharedUsersList = [];
+            $scope.selectUpdateSharedUser = {};
+          }
         }
 
         $scope.ticketPriorityValue = {
@@ -87,14 +120,7 @@
         });
 
         if ($scope.resolvedCompanyId) {
-          $timeout(function () {
-            var company = CompaniesService.getOneById($scope.resolvedCompanyId);
-            if (!company.isDefault) {
-              $scope.ticketCreatedUser = UsersService.getAllByCompanyId(company.id).find(function (user) {
-                return user.isContact;
-              });
-            }
-          });
+          setResolvedCompany($scope.resolvedCompanyId);
         }
 
         if ($scope.resolvedCreatedUserId) {
@@ -458,6 +484,8 @@
                 UserNotificationService.show('New Ticket “' + ticketNumber + '” has been created', true);
                 if (isOpenAfterCreation) {
                   $state.go('tickets.details', { listType: 'all', ticketId: resp.id, remoteParams: null });
+                } else if ($scope.ticket.draftId) {
+                  $state.go('drafts');
                 }
               }
             });
@@ -622,14 +650,22 @@
           });
         };
 
-        $scope.$on('createNewEntity', function (event, type) {
+        $scope.$on('createNewEntity', archiveTicketState);
+
+        function archiveTicketState(event, type, userFromDreft) {
           $scope.ticket.attachments = $scope.ticketAttachments;
           $scope.ticket.ticketSharedUsersList = $scope.ticketSharedUsersList;
           $scope.ticket.selectUpdateSharedUser = $scope.selectUpdateSharedUser;
           $scope.savedState.types.unshift('ticket');
           $scope.savedState.items.unshift($scope.ticket);
+
+          if ($scope.ticket.draftId) {
+            $scope.savedState.types.unshift('company');
+            $scope.savedState.items.unshift(userFromDreft);
+          }
+
           $scope.setOpenedTab(type);
-        });
+        }
 
         function resetSharedUsers(company) {
 
@@ -651,6 +687,21 @@
               $scope.selectUpdateSharedUser[user.id] = true;
             }
           }
+        }
+
+        function setResolvedCompany(resolvedCompanyId, ticketCreatedUser) {
+          $timeout(function () {
+            var company = CompaniesService.getOneById(resolvedCompanyId);
+            if (!company.isDefault) {
+              if (ticketCreatedUser) {
+                $scope.ticketCreatedUser = ticketCreatedUser;
+              } else {
+                $scope.ticketCreatedUser = UsersService.getAllByCompanyId(company.id).find(function (user) {
+                  return user.isContact;
+                });
+              }
+            }
+          });
         }
 
       }]);

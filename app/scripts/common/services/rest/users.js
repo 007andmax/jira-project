@@ -90,7 +90,9 @@
             }
           } else if (newChange.action == 'USER_DELETED') {
             var user = Utils.findById(storage.users, newChange.data.id);
-            storage.deleted.push(user);
+            if (user) {
+              storage.deleted.push(user);
+            }
             Utils.deleteById(storage.users, newChange.data.id);
             Utils.deleteById(storage.clientUsers, newChange.data.id);
             if (user) {
@@ -103,8 +105,9 @@
             }
           } else if (newChange.action == 'COMPANY_ARCHIVED') {
             for (var i = 0; i < storage.users.length; i++) {
-              if (storage.users[i].company.id === newChange.data.id) {
-                storage.deleted.push(storage.users[i]);
+              var user = storage.users[i];
+              if (user.company.id === newChange.data.id) {
+                storage.deleted.push(user);
                 storage.users.splice(i, 1);
                 i--;
               }

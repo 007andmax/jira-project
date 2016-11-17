@@ -1,31 +1,29 @@
 <div class="container-ticket-content inbox" qt-nano-scroller show-draft-details>
   <div style="height: 100%">
     <div class="ticket-content" style="margin-bottom: 200px;">
-      <div ng-form="editDraftForm">
-        <div class="ticket-header clearfix ticket-fixed-header">
-          <div id="ticket-header-content">
-            <div class="expand-ticket-btn" ng-click="toggleTicketsList()"
-                 ng-class="{'active': !ticketListOpened}">
-              <div ng-style="{'transform': ticketListOpened ? 'rotate(0)' : 'rotate(180deg)'}">
-                <i class="icn-sm icn-back-arrow" style="position: absolute;top: 7px;left: 3px;"></i></div>
+      <div class="ticket-header clearfix ticket-fixed-header">
+        <div id="ticket-header-content">
+          <div class="expand-ticket-btn" ng-click="toggleDraftsList()"
+               ng-class="{'active': !draftListOpened}">
+            <div ng-style="{'transform': draftListOpened ? 'rotate(0)' : 'rotate(180deg)'}">
+              <i class="icn-sm icn-back-arrow" style="position: absolute;top: 7px;left: 3px;"></i></div>
+          </div>
+          <div class="clearfix pull-left" style="width: calc(100% - 255px);">
+            <div class="ticket-header-username pull-left">
+              <p>{{ draftDetails.source }}</p>
             </div>
-            <div class="clearfix pull-left" style="width: calc(100% - 255px);">
-              <div class="ticket-header-username pull-left">
-                <p>{{ draftDetails.source }}</p>
-              </div>
-              <div class="ticket-header-details text-muted">
-                <i ng-show="draftDetails.hasAttachments === true"
-                   class="icn-sm icn-ticket-attachment pull-left"></i>
-                {{ draftDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}
-              </div>
+            <div class="ticket-header-details text-muted">
+              <i ng-show="draftDetails.attachments && draftDetails.attachments.length"
+                 class="icn-sm icn-ticket-attachment pull-left"></i>
+              {{ draftDetails.createdAt | date: 'EEE, d MMM yyyy, h:mm a'}}
             </div>
           </div>
         </div>
-        <div class="ticket-detail">
-          <div style="padding-left: 20px;">
-            <h2>{{ draftDetails.number + ' - ' + draftDetails.subject }}</h2>
-            <div class="ticket-message" ng-bind-html="getDraftNote()"></div>
-          </div>
+      </div>
+      <div class="ticket-detail">
+        <div style="padding-left: 20px;">
+          <h2>{{ draftDetails.number + ' - ' + draftDetails.subject }}</h2>
+          <div class="ticket-message" ng-bind-html="getDraftNote()"></div>
         </div>
       </div>
       <div class="ticket-attachment clearfix" ng-if="draftDetails.attachments.length > 0">
@@ -74,7 +72,7 @@
         </div>
 
         <div class="well-actions">
-          <button class="btn btn-primary btn-lg">Proceed</button>
+          <button class="btn btn-primary btn-lg" create-new-entity="ticketFromDraft" item="draftDetails">Proceed</button>
           <button class="btn btn-danger btn-lg" ng-click="deleteForever()">Delete Forever</button>
         </div>
 
