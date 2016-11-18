@@ -34,10 +34,6 @@
 
       function changeSubscriptionsForUsers(userIds, type, toSubscribe, callback) {
 
-        if (!userIds) throw 'userIds is required argument!';
-        if (toSubscribe === undefined) throw 'toSubscribe is required argument!';
-        if (!type || (type.toLowerCase() !== 'ticket' && type.toLowerCase() !== 'invoice')) throw 'type is required argument and must be ticket or invoice!';
-
         var future = $http({
           url: '/subscription/changeSubscriptionsForUsers?type=' + type + '&toSubscribe=' + !!toSubscribe,
           method: 'POST',

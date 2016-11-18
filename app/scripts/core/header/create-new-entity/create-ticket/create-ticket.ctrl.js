@@ -207,6 +207,18 @@
               $scope.filteredAgentList = agentsByCompany[val.id];
             }
             $scope.clients = UsersService.getAllByCompanyId(val.id);
+
+            var manager = $scope.clients.find(function (client) {
+              return client.subscription && client.subscription.ticketManager;
+            });
+
+            if (manager) {
+              $scope.ticketSharedUsersList.push({
+                user: manager,
+                notify: false
+              });
+            }
+
             resetSharedUsers(val);
             $scope.serviceList = ServicesService.getAllByCompany($scope, val.id);
             $scope.ticketForm.ticketCompany.$setValidity('invalidName', true);
@@ -621,7 +633,7 @@
 
           if (sharesWithoutSubscription.length > 1) {
             UserConfirmationsService
-              .show(sharesWithoutSubscription.length + ' users have disabled invoice updates subscription. Do you still want to notify them?', 'Yes')
+              .show(sharesWithoutSubscription.length + ' users have disabled ticket updates subscription. Do you still want to notify them?', 'Yes')
               .then(function () {
                 for (var i = 0; i < sharesWithoutSubscription.length; i++) {
                   var share = sharesWithoutSubscription[i];
@@ -636,7 +648,7 @@
         $scope.validateNotifying = function (share, event) {
           if (!share.notify && share.user.accountType !== 'TECH' && (!share.user.subscription || !share.user.subscription.ticket)) {
             UserConfirmationsService
-              .show($scope.getUserName(share.user) + ' has disabled invoice updates subscription. Do you still want to notify him?', 'Yes')
+              .show($scope.getUserName(share.user) + ' has disabled ticket updates subscription. Do you still want to notify him?', 'Yes')
               .then(function () {
                 share.notify = true;
               });
@@ -668,23 +680,17 @@
         }
 
         function resetSharedUsers(company) {
-
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
-            if (shares.user && UsersService.getOneById(shares.user.id).accountType !== 'TECH') {
+            if (UsersService.getOneById(shares.user.id).accountType === 'TECH') {
+              continue;
+            }
+
+            if (!shares.user.company || shares.user.company.id !== company.id) {
               $scope.ticketSharedUsersList.splice(i, 1);
               $scope.selectUpdateSharedUser[shares.user.id] = false;
               i--;
-            }
-          }
-
-          if (company) {
-            var usersByCompany = UsersService.getAllByCompanyId(company.id);
-            for (var j = 0; j < usersByCompany.length; j++) {
-              var user = usersByCompany[j];
-              $scope.ticketSharedUsersList.push({ user: user, notify: user.subscription && user.subscription.ticket });
-              $scope.selectUpdateSharedUser[user.id] = true;
             }
           }
         }

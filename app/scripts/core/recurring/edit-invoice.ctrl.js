@@ -10,8 +10,10 @@
                 ProductsService, EmailSettingsService, $timeout, TicketsService, TaxRatesService, Utils,
                 UserConfirmationsService) {
 
-        var day = 1000 * 60 * 60 * 24, form;
+        var day = 1000 * 60 * 60 * 24, form,
+          allClientUsers = UsersService.getClientUsers();
 
+        $scope.clients = [];
         $scope.frequency = {
           cod: 'COD',
           sevenDays: '7 days',
@@ -174,6 +176,7 @@
         };
 
         $scope.chooseCompany = function (company) {
+          $scope.clients.splice(0, $scope.clients.length);
           resetSharedUsers(company);
 
           if (!company) {
@@ -181,10 +184,12 @@
             delete $scope.companyServices;
             $scope.taxRatesCoef = 0;
             $scope.editInvoice.services = [{}];
+            Utils.customizeArray(allClientUsers, $scope.clients);
             return;
           }
 
-          $scope.paramInvocie.paymentTerms = company.paymentTerms === 0 ? 'COD' : company.paymentTerms;
+          Utils.customizeArray(UsersService.getAllByCompanyId(company.id), $scope.clients);
+
           $scope.searchCompany = company.name;
           $scope.editInvoice.company = {
             id: company.id
@@ -609,6 +614,12 @@
 
         function resetSharedUsers(company) {
 
+          if (company) {
+            var usersWithInvoiceSubscription = UsersService.getAllByCompanyId(company.id).filter(function (user) {
+              return user.subscription && user.subscription.invoice;
+            });
+          }
+
           for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
             var shares = $scope.ticketSharedUsersList[i];
 
@@ -619,13 +630,10 @@
             }
           }
 
-          if (company) {
-            var usersByCompany = UsersService.getAllByCompanyId(company.id);
-            for (var j = 0; j < usersByCompany.length; j++) {
-              var user = usersByCompany[j];
-              $scope.ticketSharedUsersList.push({ user: user, notify: user.subscription && user.subscription.invoice });
-              $scope.selectUpdateSharedUser[user.id] = true;
-            }
+          for (var j = 0; j < usersWithInvoiceSubscription.length; j++) {
+            var user = usersWithInvoiceSubscription[j];
+            $scope.ticketSharedUsersList.push({ user: user, notify: true });
+            $scope.selectUpdateSharedUser[user.id] = true;
           }
         }
 

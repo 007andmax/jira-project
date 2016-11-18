@@ -521,7 +521,7 @@
               if (!isNotifyAll) {
                 share.notify = isNotifyAll;
               } else {
-                if ((share.user.subscription && share.user.subscription.invoice) || share.user.accountType === 'TECH') {
+                if ((share.user.subscription && (share.user.subscription.ticket || share.user.subscription.ticketManager)) || share.user.accountType === 'TECH') {
                   share.notify = isNotifyAll;
                 } else {
                   sharesWithoutSubscription.push(share);
@@ -531,7 +531,7 @@
 
             if (sharesWithoutSubscription.length > 1) {
               UserConfirmationsService
-                .show(sharesWithoutSubscription.length + ' users have disabled invoice updates subscription. Do you still want to notify them?', 'Yes')
+                .show(sharesWithoutSubscription.length + ' users have disabled ticket updates subscription. Do you still want to notify them?', 'Yes')
                 .then(function () {
                   for (var i = 0; i < sharesWithoutSubscription.length; i++) {
                     var share = sharesWithoutSubscription[i];
@@ -544,9 +544,9 @@
           };
 
           $scope.validateNotifying = function (share, event) {
-            if (!share.notify && share.user.accountType !== 'TECH' && (!share.user.subscription || !share.user.subscription.invoice)) {
+            if (!share.notify && share.user.accountType !== 'TECH' && (!share.user.subscription || !(share.user.subscription.ticket || share.user.subscription.ticketManager))) {
               UserConfirmationsService
-                .show($scope.getUserName(share.user) + ' has disabled invoice updates subscription. Do you still want to notify him?', 'Yes')
+                .show($scope.getUserName(share.user) + ' has disabled ticket updates subscription. Do you still want to notify him?', 'Yes')
                 .then(function () {
                   share.notify = true;
                 });
@@ -648,14 +648,20 @@
           function getDefaultSharedList() {
             var result = [];
 
+            if ($scope.user) {
+              result.push({ user: $scope.user, notify: false });
+            }
+
             if ($scope.assignedUser && $scope.user && $scope.user.id !== $scope.assignedUser.id) {
               result.push({ user: $scope.assignedUser, notify: false });
             }
 
-            var usersByCompanyId = UsersService.getAllByCompanyId(CompaniesService.getOneById($scope.ticketDetails.company.id).id);
-            for (var i = 0; i < usersByCompanyId.length; i++) {
-              var user = usersByCompanyId[i];
-              result.push({ user: user, notify: user.subscription && user.subscription.ticket });
+            var manager = UsersService.getAllByCompanyId($scope.ticketDetails.company.id).find(function (client) {
+              return client.subscription && client.subscription.ticketManager;
+            });
+
+            if (manager) {
+              result.push({ user: manager, notify: false });
             }
 
             return result;
