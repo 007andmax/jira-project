@@ -56,9 +56,10 @@
           height: 18px;
           width: 30px;
           display: inline-block;
-          float: right;
-          margin: 10px 2px;
-          opacity: .8; }
+          margin: 10px 10px;
+          opacity: .8;
+          background: url(../images/input-icons/menu-button.png) no-repeat;
+          background-size: contain;}
       .card-wrapper .card__cover--name {
         background-color: rgba(0, 0, 0, 0.6);
         color: #fff;

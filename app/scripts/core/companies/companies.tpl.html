@@ -119,12 +119,13 @@
            ng-controller="quicktech.core.companies.companyCtrl">
         <div class="card">
           <div class="card__cover" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}">
-            <div class="card__cover--hover">
+            <div class="card__cover--hover user-type">
+              <div class="drop-menu"> </div>
               <div class="change-img">
                 <img src="images/input-icons/photo-camera.png" alt="" >
               </div>
             </div>
-            <div class="card__cover--name clearfix">
+            <div class="card__cover--name  clearfix">
               <p>{{ company.name }}</p>
               <p>{{ getUserName(primaryContact) }}</p>
               <span class="label label-tech-user">{{ primaryContact.designation }}</span>
