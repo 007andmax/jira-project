@@ -5,23 +5,23 @@
     <!--style for TODO hide timeAllotment-->
 
     <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceName')}">
-      SERVICE NAME
+      Service name
     </label>
 
     <div ng-messages="editServiceForm.editServiceName.$error"
          ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceName')}">
 
       <label class="control-label" ng-message="required">
-        SERVICE NAME IS REQUIRED.
+        Service name is required.
       </label>
       <label class="control-label" ng-message="maxlength">
-        SERVICE NAME IS TOO LARGE.
+        Service name is too large.
       </label>
       <label class="control-label" ng-message="minlength">
-        SERVICE NAME IS TOO SHORT.
+        Service name is too short.
       </label>
       <label class="control-label" ng-message="unique">
-        THIS SERVICE NAME ALREADY OCCUPIED.
+        This service name already occupied.
       </label>
     </div>
 
@@ -37,13 +37,13 @@
     <!--style for TODO hide timeAllotment-->
 
     <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceRate')}">
-      PER HOUR
+      Per hour
     </label>
 
     <div ng-messages="editServiceForm.editServiceRate.$error"
          ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceRate')}">
       <label class="control-label" ng-message="required">
-        PER HOUR IS REQUIRED.
+        Per hour is required.
       </label>
     </div>
 
@@ -55,7 +55,7 @@
   <div class="col-3">
 
     <label class="control-label">
-      IS BILLABLE
+      Is billable
     </label>
 
     <label class="control checkbox pull-left">

@@ -13,7 +13,7 @@
                ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'ticketCount')}">
 
             <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'ticketCount')}">
-              Starting Ticket Number
+              Starting ticket number
             </label>
 
             <div ng-messages="invoiceAndTicketForm.ticketCount.$error"
@@ -39,7 +39,7 @@
                ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'invoiceCount')}">
 
             <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'invoiceCount')}">
-              Starting Invoice Number
+              Starting invoice number
             </label>
 
             <div ng-messages="invoiceAndTicketForm.invoiceCount.$error"
@@ -63,8 +63,8 @@
           <div class="form-group" style="max-width: 120px"
                ng-class="{'has-error': isShowingErrors(invoiceAndTicketForm, 'invoiceTerms')}">
 
-            <label class="control-label" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'invoiceTerms')}">
-              Default Invoice terms
+            <label class="control-label" style="white-space: nowrap;" ng-class="{ 'hide': isShowingErrors(invoiceAndTicketForm, 'invoiceTerms')}">
+              Default invoice terms
             </label>
 
             <div ng-messages="invoiceAndTicketForm.invoiceTerms.$error"

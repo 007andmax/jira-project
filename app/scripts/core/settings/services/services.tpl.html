@@ -7,13 +7,17 @@
         <!--<span class="text-muted" ng-show="services && services.length > 0">{{ services.length }}</span>-->
       </h3>
 
+      <p>Services are used to bill customers, for specialized labor, hourly consulting hours or professional fees
+       These default services can be assigned to any or all customers. You can modify the service rate per customer
+      once you have assigned the service to them.</p>
+
       <ul class="qt-list" style="width: 500px"
           ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
-        <li class="list-heading" ng-show="services.length > 0">
-          <div class="col-1" style="width: 205px;">SERVICE NAME</div>
-          <div class="col-2">PER HOUR</div>
-          <div class="col-5" style="margin-right: 28px;">IS BILLABLE</div>
+        <li class="list-heading" style="padding: 15px 0;" ng-show="services['default'].length > 0">
+          <div class="col-1" style="width: 205px;">Service name</div>
+          <div class="col-2">Per hour</div>
+          <div class="col-5" style="margin-right: 28px;">Is billable</div>
           <div class="col-4">&nbsp;</div>
         </li>
 

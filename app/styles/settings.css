@@ -661,7 +661,6 @@
   margin-left: 10px;
 }
 .template-form-wrapper .control-label {
-  text-transform: uppercase;
   margin-bottom: 4px;
 }
 @-moz-document url-prefix() {

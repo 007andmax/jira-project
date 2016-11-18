@@ -331,7 +331,7 @@
                style="position: absolute;top: 30px;right: 13px;"></div>
         </div>
 
-        <div class="form-group pull-left">
+        <div class="form-group">
           <p class="rate-label">Service Info</p>
 
           <div uib-dropdown ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
@@ -394,10 +394,10 @@
 
                 <div ng-messages="servicesForm['serviceName' + $index].$error" style="margin-top: -20px"
                      ng-class="{'hide': !(servicesForm['serviceName' + $index].$dirty || triedToSave) || !isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
-                  <label class="control-label" ng-message="required">CANNOT BE LEFT EMPTY.</label>
-                  <label class="control-label" ng-message="maxlength">IS TOO LARGE.</label>
-                  <label class="control-label" ng-message="minlength">IS TOO SHORT.</label>
-                  <label class="control-label" ng-message="unique">ALREADY OCCUPIED.</label>
+                  <label class="control-label" ng-message="required">Cannot be left empty.</label>
+                  <label class="control-label" ng-message="maxlength">Is too large.</label>
+                  <label class="control-label" ng-message="minlength">Is too large.</label>
+                  <label class="control-label" ng-message="unique">Already occupied.</label>
                 </div>
 
                 <input type="text" class="form-control"
@@ -514,13 +514,13 @@
                        ng-class="{'hide': (newTaxRateForm['taxCode' + $index].$pristine && !triedToSave) || !isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
 
                     <label class="control-label" ng-message="required">
-                      TAX NAME IS REQUIRED.
+                      Tax name is required.
                     </label>
                     <label class="control-label" ng-message="maxlength">
-                      TAX NAME IS TOO LARGE.
+                      Tax name is too large.
                     </label>
                     <label class="control-label" ng-message="unique">
-                      THIS TAX NAME ALREADY OCCUPIED.
+                      This tax name is already occupied.
                     </label>
                   </div>
 
@@ -536,7 +536,7 @@
                        style="position: absolute;margin-top: -19px;"
                        ng-if="isShowingErrors(newTaxRateForm, 'taxRate' + $index)">
                     <label class="control-label" ng-message="required">
-                      RATE IS REQUIRED.
+                      Rate is required.
                     </label>
                   </div>
 

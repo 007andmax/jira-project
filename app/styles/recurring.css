@@ -174,7 +174,7 @@
 }
 
 .edit-invoice-form form fieldset.full .date.end-date {
-  width: 197px;
+  width: 215px;
 }
 
 .edit-invoice-form form fieldset.full .date.end-date input.disabled,
@@ -183,7 +183,7 @@
 }
 
 .edit-invoice-form form fieldset.full .date .icn-remove-token {
-  right: 34px;
+  right: 44px;
 
   cursor: pointer;
   pointer-events: auto;

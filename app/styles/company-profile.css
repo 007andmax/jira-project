@@ -200,6 +200,14 @@
   color: #94a4b8;
   content: 'hours';
 }
+
+.account-number{
+  font-size: 18px;
+  margin-right: 3px;
+  color: #b2becd;
+  font-family: fantasy;
+  line-height: 0.2;
+}
 /*.settings-main-wrapper .company-address-list .create-user-container{*/
   /*margin-bottom: 100px;*/
 /*}*/

@@ -187,6 +187,10 @@
   padding-left: 15px;
 }
 
+.qt-list.rates__list > li > [class*='col-']:first-child {
+  padding-left: 5px;
+}
+
 .qt-list > li > [class*='col-']:last-child {
   padding-right: 0;
 }
