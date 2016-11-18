@@ -220,9 +220,7 @@
   color: red;
 }
 .test-smtp-connection .loading-indicator-wrap {
-  display: inline-block;
-  margin-left: 20px;
-  vertical-align: middle;
+  margin-right: 20px;
 }
 .hint-tooltip .tooltip-inner,
 .hint-tooltip.tooltip-inner {

@@ -1,37 +1,43 @@
 <div class="settings-main-wrapper">
   <div class="smtp-wrap create-user-form" ng-form="smtpForm">
-    <h3>Email settings
-      <span class="hint-icon" tooltip-class="hint-tooltip" tooltip-placement="bottom"
-            uib-tooltip="{{ smtpHintMessage }}">?</span>
+    <h3>Incoming
     </h3>
-    <div class="form-row clearfix" style="margin-bottom: 20px;">
-      <div class="form-group">
-        <label class="control-label">Send emails via</label>
-        <select class="form-control" ng-model="usedEmailVia" ng-change="changeEmailVia(smtpForm)"
-                ng-options="item.label for item in emailVia"></select>
+
+    <p style="margin-bottom: 10px;">Incoming emails sent to your default address will automaticly create a new ticket.
+    If you have a support email already setup with your existing domain then you should forward it to the email
+    address below</p>
+
+    <div class="form-row clearfix">
+      <div class="form-group full-width">
+
+        <input class="form-control" type="text" readonly/>
+        <span style="top: 10px;" class="company-url-addon">{{ supportMailBox + '@' + currentHost }}</span>
       </div>
+      <label style="margin: 10px;" class="control checkbox pull-left">
+        <input type="checkbox" ng-model="emailNotifications.ticketCreated" ng-change="saveEmailNotifications(emailNotificationsForm)" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+        <span class="control-indicator"></span> only create tickets for specified domains in client lists.
+      </label>
     </div>
 
-    <div ng-if="!smtp.useSMTP">
+    <h3 style="border-top: 1px solid #eee; padding-top: 20px; position: relative;">Outgoing email
+      <span class="helper" style="line-height: 1.1; padding: 1px 5px; height: 16px;margin-top: 7px;" tooltip-class="hint-tooltip" tooltip-placement="bottom"
+            uib-tooltip="{{ smtpHintMessage }}">?</span>
+    </h3>
+
+    <p style="margin-bottom: 10px;">You can specify a custom outgoing email service if you prefer to use your own, or you can use
+    our quicktech email servers. If you select customer mails servers this is only for outgoing, you still
+    need to forward your email to the above incoming email address.</p>
+
+    <div>
+
+
       <div class="form-row clearfix">
-        <div class="form-group full-width">
-          <label class="control-label">
-            Your support email address:
-          </label>
 
-          <input class="form-control" type="text" readonly/>
-          <span class="company-url-addon">{{ supportMailBox + '@' + currentHost }}</span>
-        </div>
-
-      </div>
-
-      <div class="form-row clearfix">
-
-        <div class="form-group full-width"
+        <div class="form-group full-width" style="margin-bottom: 20px;"
              ng-class="{'has-error': isShowingErrors(smtpForm, 'emailAlias')}">
 
           <label class="control-label" ng-class="{'hide': isShowingErrors(smtpForm, 'emailAlias')}">
-            Alias for your email (customers will see it in the field "from" in e-mail):
+            Alias that you want your customers to see.
           </label>
 
           <div ng-messages="smtpForm.emailAlias.$error"
@@ -46,21 +52,15 @@
       </div>
     </div>
 
-    <div ng-if="smtp.useSMTP">
-      <div class="form-row clearfix smtp-domains" style="margin-bottom: 20px;">
-        <span ng-click="setDomain('GMAIL', smtpForm)">
-          <img src="images/input-icons/gmail-logo.png" alt="gmail-logo" width="24">
-          <a>Gmail</a>
-        </span>
-        <span ng-click="setDomain('YAHOO', smtpForm)">
-          <img src="images/input-icons/yahoo-logo.png" alt="yahoo-logo" width="24">
-          <a>Yahoo</a>
-        </span>
-        <span ng-click="setDomain('OUTLOOK', smtpForm)">
-          <img src="images/input-icons/outlook-logo.png" alt="outlook-logo" width="24">
-          <a>Outlook</a>
-        </span>
+    <div class="form-row justify-flex" style="margin-bottom: 20px;">
+      <p class="pull-left">Outgoing mail server</p>
+      <div class="form-group">
+        <select class="form-control" ng-model="usedEmailVia" ng-change="changeEmailVia(smtpForm)"
+                ng-options="item.label for item in emailVia"></select>
       </div>
+    </div>
+
+    <div>
 
       <div class="form-row clearfix">
 
@@ -167,32 +167,25 @@
         </div>
       </div>
 
-      <div class="form-row clearfix">
-        <div class="form-group full-width" ng-class="{'has-error': isShowingErrors(basicInfoForm, 'supportMailBox')}">
-          <label class="control-label" ng-class="{'hide': isShowingErrors(basicInfoForm, 'supportMailBox')}">
-            Forward your email to:
-          </label>
-
-          <input class="form-control" type="text" readonly/>
-          <span class="company-url-addon">{{ supportMailBox + '@' + currentHost }}</span>
-        </div>
-
-      </div>
 
       <div class="form-row clearfix test-smtp-connection">
-        <div class="form-group full-width">
-          <div qt-custom-popover-template="/html/scripts/core/settings/email/send-test-email-popup.tpl.html"
-               style="display: inline-block;" qt-popover-position="top">
-            <div class="btn btn-lg btn-info test-email-popup-btn" qt-popover-trigger
-                 custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid || !smtp.isValid }}">
-              Send test email
-            </div>
-          </div>
+        <div class="form-group full-width" style="  display: flex;
+          justify-content: flex-end;
+          align-items: center;">
           <div class="loading-indicator-wrap">
             <button-with-loading-indicator loading="testingConnection"
                                            ng-show="!smtp.exeption && (testingConnection || smtp.isValid)">
             </button-with-loading-indicator>
           </div>
+          <div qt-custom-popover-template="/html/scripts/core/settings/email/send-test-email-popup.tpl.html"
+               style="display: inline-block;" qt-popover-position="top">
+          </div>
+            <div class="btn btn-lg btn-info test-email-popup-btn" qt-popover-trigger
+                 custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid || !smtp.isValid }}">
+              Test server
+            </div>
+
+
           <span class="error-msg" ng-if="smtp.useSMTP && !testingConnection && !smtp.isValid">
             {{ smtp.errorMessage }}
           </span>
