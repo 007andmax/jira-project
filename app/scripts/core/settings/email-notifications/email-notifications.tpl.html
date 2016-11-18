@@ -5,11 +5,14 @@
 
       <h3>Email me when: </h3>
 
+      <p>Email notifications will email if one of the follow events are created. Please select what notifications
+      you want to be notified about</p>
+
       <div class="clearfix">
         <label class="control checkbox pull-left">
           <input type="checkbox" ng-model="emailNotifications.newDevice"
                  ng-change="saveEmailNotifications(emailNotificationsForm)">
-          <span class="control-indicator"></span> my account is logged in from a new device
+          <span class="control-indicator"></span> When my account is logged in from a new device
         </label>
       </div>
 
@@ -17,7 +20,15 @@
         <label class="control checkbox pull-left">
           <input type="checkbox" ng-model="emailNotifications.ticketCreated"
                  ng-change="saveEmailNotifications(emailNotificationsForm)">
-          <span class="control-indicator"></span> new ticket created
+          <span class="control-indicator"></span> When a New Ticket created
+        </label>
+      </div>
+
+      <div class="clearfix">
+        <label class="control checkbox pull-left">
+          <input type="checkbox" ng-model="emailNotifications.myTicketUpdated"
+                 ng-change="saveEmailNotifications(emailNotificationsForm)">
+          <span class="control-indicator"></span> When a ticket that is assigned to me is updated
         </label>
       </div>
 
