@@ -1,0 +1,114 @@
+.card-wrapper {
+  padding: 15px;
+  display: inline-block;
+  float: left; }
+  .card-wrapper .card {
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid;
+    border-color: #eee;
+    box-shadow: 2px 4px 20px 0 transparent;
+    -webkit-transition: -webkit-box-shadow .3s, -webkit-border-color .3s;
+    -moz-transition: -moz-box-shadow .3s, -moz-border-color .3s;
+    -ms-transition: -ms-box-shadow .3s, -ms-border-color .3s;
+    -o-transition: -o-box-shadow .3s, -o-border-color .3s;
+    transition: box-shadow .3s, border-color .3s; }
+    .card-wrapper .card:hover {
+      border-color: transparent;
+      box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4); }
+    .card-wrapper .card__cover {
+      height: 200px;
+      -webkit-background-size: contain !important;
+      background-size: contain !important;
+      background-position: center center !important;
+      position: relative; }
+      .card-wrapper .card__cover--hover {
+        width: 100%;
+        height: 144px;
+        position: relative; }
+        .card-wrapper .card__cover--hover .change-img {
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.6);
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 0;
+          text-align: center;
+          transition: height;
+          transition-duration: .3s;
+          transition-delay: .4s; }
+          .card-wrapper .card__cover--hover .change-img img {
+            width: 60px;
+            margin-top: 70px;
+            transition: opacity ease-out;
+            transition-duration: .5s;
+            transition-delay: .4s;
+            opacity: 0; }
+        .card-wrapper .card__cover--hover:hover .change-img {
+          height: 144px; }
+          .card-wrapper .card__cover--hover:hover .change-img img {
+            opacity: 1; }
+        .card-wrapper .card__cover--hover.user-type .change-img {
+          height: 0; }
+          .card-wrapper .card__cover--hover.user-type .change-img img {
+            opacity: 0; }
+        .card-wrapper .card__cover--hover.user-type .drop-menu {
+          height: 18px;
+          width: 30px;
+          display: inline-block;
+          margin: 10px 10px;
+          opacity: .8;
+          background: url(../images/input-icons/menu-button.png) no-repeat;
+          background-size: contain;}
+      .card-wrapper .card__cover--name {
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 5px 10px;
+        width: 100%;
+        height: 56px; }
+        .card-wrapper .card__cover--name p {
+          line-height: 15px; }
+          .card-wrapper .card__cover--name p:first-child {
+            font-weight: 700; }
+        .card-wrapper .card__cover--name .label {
+          padding: 2px 8px; }
+        .card-wrapper .card__cover--name.user-type p:first-child {
+          margin-right: 5px;
+          float: left;
+          line-height: 25px; }
+        .card-wrapper .card__cover--name.user-type div {
+          display: inline-block; }
+          .card-wrapper .card__cover--name.user-type div .icn-edit-light {
+            transform: translateY(3px); }
+        .card-wrapper .card__cover--name.user-type .label {
+          clear: left; }
+    .card-wrapper .card__info {
+      padding: 0 5px;
+      height: 125px; }
+      .card-wrapper .card__info div {
+        padding: 5px 0px; }
+        .card-wrapper .card__info div img {
+          width: 25px;
+          height: 25px;
+          padding: 2px;
+          float: left; }
+        .card-wrapper .card__info div p {
+          padding-left: 30px;
+          line-height: 24px; }
+        .card-wrapper .card__info div .ellipsis {
+          padding-left: 7px; }
+      .card-wrapper .card__info.user-type {
+        height: 160px; }
+    .card-wrapper .card__stats {
+      border-top: 1px solid #eee;
+      padding: 10px 0; }
+      .card-wrapper .card__stats div {
+        display: inline-block;
+        float: left;
+        width: 33.333333%;
+        text-align: center; }
+    .card-wrapper .card__create-btn .btn {
+      width: 100%;
+      height: 26px; }
+
+/*# sourceMappingURL=card-view.css.map */
