@@ -241,6 +241,8 @@
             return 'settings';
           } else if (url.indexOf('tickets') > -1) {
             return 'tickets';
+          } else if (url.indexOf('drafts') > -1) {
+            return 'inbox';
           } else if (url.indexOf('companies') > -1 || url.indexOf('companyProfile') > -1) {
             return 'companies';
           } else if (url.indexOf('users') > -1) {

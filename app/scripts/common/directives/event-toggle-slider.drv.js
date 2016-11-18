@@ -8,10 +8,21 @@
         restrict: 'A',
         link: function (scope, element, attrs) {
 
-          scope.$on(attrs.eventToggleSlider, function () {
-            element.toggleClass("expanded");
-            element.find('[ets-slider]').slideToggle('fast');
-          });
+          if (attrs.eventToggleSlider) {
+            scope.$on(attrs.eventToggleSlider, function () {
+              element.toggleClass("expanded");
+              element.find('[ets-slider]').slideToggle('fast');
+            });
+          } else {
+            scope.$on(attrs.showEvent, function () {
+              element.addClass("expanded");
+              element.find('[ets-slider]').slideDown('fast');
+            });
+            scope.$on(attrs.hideEvent, function () {
+              element.removeClass("expanded");
+              element.find('[ets-slider]').slideUp('fast');
+            });
+          }
         }
       }
     }]);

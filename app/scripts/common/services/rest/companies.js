@@ -104,7 +104,10 @@
         }
 
       } else if (newChange.action == 'COMPANY_ARCHIVED') {
-        storage.deletedCompanies.push(Utils.findById(storage.companies, companyId));
+        var deletedCompany = Utils.findById(storage.companies, companyId);
+        if (deletedCompany) {
+          storage.deletedCompanies.push(deletedCompany);
+        }
 
         Utils.deleteById(storage.companies, companyId);
         Utils.deleteById(storage.clientCompanies, companyId);

@@ -63,6 +63,16 @@
           templateUrl: '/html/scripts/core/tickets/ticket-details.tpl.html',
           controller: 'quicktech.core.tickets.ticketDetailsCtrl'
         }))
+        .state('drafts', waitForServices({
+          url: '/drafts',
+          templateUrl: '/html/scripts/core/tickets/drafts/drafts.tpl.html',
+          controller: 'quicktech.core.tickets.draftsCtrl'
+        }))
+        .state('drafts.details', waitForServices({
+          url: '/:draftId',
+          templateUrl: '/html/scripts/core/tickets/drafts/draft-details.tpl.html',
+          controller: 'quicktech.core.tickets.draftDetailsCtrl'
+        }))
         .state('tickets-dashboard', waitForServices({
           url: '/tickets-dashboard',
           templateUrl: '/html/scripts/core/dashboards/tickets-dashboard/tickets-dashboard.tpl.html',
@@ -247,10 +257,16 @@
           var globalSearch = SharedStateService.getSharedState('globalSearch');
           $rootScope.isRightPanelHidden = toState.name !== 'tickets.details';
 
-          if (toState.name !== 'tickets' && toState.name !== 'tickets.details') {
+          var toTickets = toState.name === 'tickets' || toState.name === 'tickets.details';
+          var toDrafts = toState.name === 'drafts' || toState.name === 'drafts.details';
+          var fromTickets = fromState.name === 'tickets' || fromState.name === 'tickets.details';
+          var fromDrafts = fromState.name === 'drafts' || fromState.name === 'drafts.details';
+
+          if (!toTickets && !fromDrafts || !toDrafts && !fromTickets) {
             globalSearch.count = undefined;
             globalSearch.selectedItemsCount = undefined;
           }
+
           globalSearch.openedItemName = undefined;
           globalSearch.searchValue = '';
 
@@ -264,6 +280,16 @@
               globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
             };
             globalSearch.goBack.tooltip = 'collapse ticket';
+          } else if (toState.name === 'drafts' || (toState.name === 'drafts.details' && globalSearch.selectedItemsCount)) {
+            globalSearch.goBack.func = $rootScope.$broadcast.bind($rootScope, 'uncheckAllDrafts');
+            globalSearch.goBack.tooltip = 'reset selected items';
+          } else if (toState.name === 'drafts.details') {
+            globalSearch.goBack.isEnabled = true;
+            globalSearch.goBack.func = function () {
+              $state.go('drafts');
+              globalSearch.goBack.isEnabled = !!globalSearch.selectedItemsCount;
+            };
+            globalSearch.goBack.tooltip = 'collapse inbox';
           } else if (toState.name === 'companyProfile') {
             globalSearch.goBack.isEnabled = true;
             globalSearch.goBack.func = $state.go.bind($state, 'companies');

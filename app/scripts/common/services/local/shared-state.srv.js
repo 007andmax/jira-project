@@ -16,6 +16,9 @@
           checkedTicketsIds: [],
           count: 0
         },
+        draftsHeader: {
+          selectedIds: []
+        },
         companiesHeader: {
           filter: {}
         },

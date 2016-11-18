@@ -29,10 +29,10 @@
       </p>
     </div>
     <div class="search-block">
-      <div class="topNavbarLeft-Left" ng-if="isShowBulkAction()"
-           ng-controller="quicktech.core.header.ticketsBulkCtrl">
+      <div class="topNavbarLeft-Left" ng-if="isShowTicketsBulkAction() || isShowDraftsBulkAction()">
 
-        <div class="topNavbar-filter">
+        <div ng-if="isShowTicketsBulkAction()" class="topNavbar-filter"
+             ng-controller="quicktech.core.header.ticketsBulkCtrl">
 
           <div uib-dropdown ng-if="TicketsPermissionsService.isActionVisible('assign', ticketsSharedState.selectedTickets)">
 
@@ -166,9 +166,16 @@
             <i class="icn-sm icn-delete"></i>
           </div>
         </div>
+        <div ng-if="isShowDraftsBulkAction()" class="topNavbar-filter"
+             ng-controller="quicktech.core.header.draftsBulkCtrl">
+          <div class="btn btn-default has-tooltip" tooltip-placement="bottom" uib-tooltip="delete forever"
+               ng-click="deleteForever()">
+            <i class="icn-sm icn-delete"></i>
+          </div>
+        </div>
       </div>
 
-      <div ng-if="!isShowBulkAction()" class="searchField">
+      <div ng-if="!isShowTicketsBulkAction() && !isShowDraftsBulkAction()" class="searchField">
         <div ng-include="'/html/scripts/core/header/global-search/global-search.tpl.html'"></div>
       </div>
     </div>

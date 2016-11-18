@@ -14,6 +14,7 @@
         $scope.TicketsPermissionsService = TicketsPermissionsService;
         $scope.PermissionsService = PermissionsService;
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
+        $scope.draftsSharedState = SharedStateService.getSharedState('draftsHeader');
 
         $scope.addQuickSession = function () {
           sharedQuickSession.isCreateNew = true;
@@ -54,6 +55,8 @@
         $scope.getPageNameByState = function () {
           if ($state.includes("tickets")) {
             return 'tickets';
+          } else if ($state.includes("drafts")) {
+            return 'inbox';
           } else if ($state.includes("users")) {
             return 'users';
           } else if ($state.includes("companies")) {
@@ -101,8 +104,12 @@
           }
         });
 
-        $scope.isShowBulkAction = function () {
+        $scope.isShowTicketsBulkAction = function () {
           return $scope.ticketsSharedState && $scope.ticketsSharedState.checkedTicketsIds.length;
+        };
+
+        $scope.isShowDraftsBulkAction = function () {
+          return $scope.draftsSharedState && $scope.draftsSharedState.selectedIds.length;
         };
 
       }]);

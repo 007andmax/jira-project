@@ -64,7 +64,7 @@
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(ticketForm, 'note')}">
 
-        <div text-editor ng-model="ticket.note" name="note" te-maxlength="5000">
+        <div text-editor ng-model="ticket.note" name="note" te-maxlength="5000" te-initial-value="{{ ticket.note }}">
           <label>Description</label>
           <div te-editor class="form-control editor description-area" contenteditable="true"
                style="min-height: 92px;height: auto;" ></div>

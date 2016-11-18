@@ -11,7 +11,7 @@
         },
         link: function ($scope, element, attrs) {
           var existingItem = false;
-          if ($scope.item) {
+          if ($scope.item || attrs.item) {
             existingItem = function () { return $scope.item; };
           }
 
