@@ -1,8 +1,8 @@
 <div>
+  <div class="empty-page-helper" ng-if="!sources.length && !loadingOrRendering && !isAnyDraftsExist(sources)">
+    <p style="opacity: 0.57">There are no inbox</p>
+  </div>
   <div class="container-ticket-list inbox pull-left">
-    <div class="empty-page-helper" ng-if="!sources.length && !loadingOrRendering && isAnyDraftsExist(sources)">
-      <p style="opacity: 0.57">There are no inbox</p>
-    </div>
 
     <div class="ticket-list sources-wrap">
       <ul class="tickets sources">
