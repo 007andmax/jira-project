@@ -91,24 +91,7 @@
           <div typeahead-input-icon="editCompany.clientType" style="position: absolute;top: 30px;right: 13px;"></div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorPaymentTerms')}">
 
-          <label class="control-label" ng-hide="isShowingErrors(infoForm, 'vendorPaymentTerms')">
-            Payment Terms
-          </label>
-
-          <div class="error-vendor-form-message" ng-messages="infoForm.vendorPaymentTerms.$error"
-               ng-class="{'hide': !isShowingErrors(infoForm, 'vendorPaymentTerms')}">
-            <label class="control-label" ng-message="required">Payment terms is required.</label>
-            <label class="control-label" ng-message="maxlength">Payment terms must be less then 1000.</label>
-          </div>
-
-          <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.paymentTerms"
-                 uib-typeahead="paymentTerm for paymentTerm in paymentTerms"
-                 qt-typeahead-show-on-focus readonly>
-          <div typeahead-input-icon="editCompany.paymentTerms"
-               style="position: absolute;top: 30px;right: 13px;"></div>
-        </div>
 
         <div class="form-group" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorAccountNumber')}"
              ng-if="editCompany.clientType.toLowerCase() === 'vendor'">
@@ -320,7 +303,7 @@
 
     <div class="company-window__billing row" ng-show="currentStep === 'billing'" ng-form="billingForm">
       <div class="col-xs-12">
-        <div class="form-group" style="width: 49%;float: left;">
+        <div class="form-group col-xs-4" style="padding-left: 0;padding-right: 0;">
           <label>Service Type</label>
 
           <input type="text" class="form-control" ng-model="editCompany.serviceType" name="serviceType"
@@ -331,7 +314,26 @@
                style="position: absolute;top: 30px;right: 13px;"></div>
         </div>
 
-        <div class="form-group" style="width: 49%;float: right;">
+        <div class="form-group col-xs-4" style="padding-right: 0;" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorPaymentTerms')}">
+
+          <label class="control-label" ng-hide="isShowingErrors(infoForm, 'vendorPaymentTerms')">
+            Payment Terms
+          </label>
+
+          <div class="error-vendor-form-message" ng-messages="infoForm.vendorPaymentTerms.$error"
+               ng-class="{'hide': !isShowingErrors(infoForm, 'vendorPaymentTerms')}">
+            <label class="control-label" ng-message="required">Payment terms is required.</label>
+            <label class="control-label" ng-message="maxlength">Payment terms must be less then 1000.</label>
+          </div>
+
+          <input custom-style="{'width':'100%'}" type="text" class="form-control" ng-model="editCompany.paymentTerms"
+                 uib-typeahead="paymentTerm for paymentTerm in paymentTerms"
+                 qt-typeahead-show-on-focus readonly>
+          <div typeahead-input-icon="editCompany.paymentTerms"
+               style="position: absolute;top: 30px;right: 13px;"></div>
+        </div>
+
+        <div class="form-group col-xs-4" style="padding-right: 0;" >
 
           <label class="control-label">Default Payment Method</label>
 
