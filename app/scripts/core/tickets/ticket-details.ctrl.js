@@ -544,7 +544,7 @@
           };
 
           $scope.validateNotifying = function (share, event) {
-            if (!share.notify && share.user.accountType !== 'TECH' && (!share.user.subscription || !share.user.subscription.invoice)) {
+            if (!share.notify && (share.user.accountType !== 'TECH' ? (!share.user.subscription || !share.user.subscription.invoice) : !share.user.myTicketUpdated)) {
               UserConfirmationsService
                 .show($scope.getUserName(share.user) + ' has disabled invoice updates subscription. Do you still want to notify him?', 'Yes')
                 .then(function () {

@@ -13,7 +13,7 @@
       </div>
 
       <label class="control checkbox pull-left" ng-repeat="sharedUser in ticketSharedUsersList"
-             custom-disabled="{{ !sharedUser.user.subscription || !sharedUser.user.subscription.invoice }}"
+             custom-disabled="{{ sharedUser.user.accountType !== 'TECH' ? (!sharedUser.user.subscription || !sharedUser.user.subscription.invoice) : !sharedUser.user.myTicketUpdated }}"
              ng-mousedown="validateNotifying(sharedUser, $event)">
         <input type="checkbox" ng-model="sharedUser.notify">
         <span class="control-indicator"></span>
