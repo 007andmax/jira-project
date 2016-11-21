@@ -239,6 +239,10 @@
               editCompany.serviceType = toEnum(editCompany.serviceType);
             }
 
+            if (!editCompany.agentLinkToEmailEnabled) {
+              editCompany.agentLinkToEmail = null;
+            }
+
             CompaniesService.save(editCompany, function (resp) {
               $scope.savingInProcess = false;
               $scope.disablePreventingLocationChange = true;
@@ -385,42 +389,6 @@
           form.invalid = form.validation.rate.invalid || form.validation.code.invalid;
         };
 
-        //$scope.saveNewTax = function (form) {
-        //
-        //  $scope.validateNewTaxRate(form);
-        //
-        //  if (form.validation && !form.validation.code.invalid && !form.validation.rate.invalid) {
-        //    $scope.editCompany.taxRates.push($scope.newTaxRate);
-        //    $scope.newTaxRate = {};
-        //    form.$setPristine();
-        //    //$scope.newTaxRateFormShowErrors = false;
-        //  }
-        //  /*else {*/
-        //  //$scope.newTaxRateFormShowErrors = true;
-        //  //}
-        //};
-
-        $scope.removeAssociation = function (index) {
-          var association = $scope.editCompany.companyAssociations[index];
-          $scope.vendorsSelection[association.vendor.id] = false;
-          $scope.editCompany.companyAssociations.splice(index, 1);
-        };
-
-        $scope.changeAssociation = function (vendor, isAdd) {
-          if (isAdd) {
-            $scope.editCompany.companyAssociations.push({
-              vendor: vendor
-            })
-          } else {
-            for (var i = 0; i < $scope.editCompany.companyAssociations.length; i++) {
-              var association = $scope.editCompany.companyAssociations[i];
-              if (association.vendor.id === vendor.id) {
-                $scope.editCompany.companyAssociations.splice(i, 1);
-              }
-            }
-          }
-        };
-
         $scope.movingService = function (originService, form) {
 
           if (originService === 'new-service') {
@@ -517,13 +485,22 @@
           }
         };
 
-        $scope.nextStep = function () {
-          $scope.currentStep = steps[steps.indexOf($scope.currentStep) + 1];
+        $scope.nextStep = function (form) {
+          if (getFormByStep($scope.currentStep, form).$valid) {
+            $scope.triedToSave = false;
+            $scope.currentStep = steps[steps.indexOf($scope.currentStep) + 1];
+          } else {
+            $scope.triedToSave = true;
+          }
         };
 
         $scope.setCurrentStep = function (step) {
           $scope.currentStep = step;
         };
+
+        function getFormByStep(step, parentForm) {
+          return parentForm[step + 'Form'];
+        }
 
         function getEmptyContact() {
           return {

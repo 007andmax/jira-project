@@ -25,10 +25,10 @@
 
           <div ng-messages="infoForm.companyName.$error"
                ng-class="{'hide': !isShowingErrors(infoForm, 'companyName')}">
-            <label class="control-label" ng-message="required">COMPANY NAME IS REQUIRED.</label>
-            <label class="control-label" ng-message="maxlength">COMPANY NAME IS TOO LARGE.</label>
-            <label class="control-label" ng-message="minlength">COMPANY NAME IS TOO SHORT.</label>
-            <label class="control-label" ng-message="unique">THIS COMPANY NAME ALREADY OCCUPIED.</label>
+            <label class="control-label" ng-message="required">Company name is required.</label>
+            <label class="control-label" ng-message="maxlength">Company name is too large.</label>
+            <label class="control-label" ng-message="minlength">Company name is too short.</label>
+            <label class="control-label" ng-message="unique">This company name already occupied.</label>
           </div>
 
           <input class="form-control" type="text" ng-model="editCompany.name" aria-expanded="true"
@@ -45,8 +45,8 @@
 
           <div ng-messages="infoForm.companyDomain.$error"
                ng-class="{'hide': !isShowingErrors(infoForm, 'companyDomain')}">
-            <label class="control-label" ng-message="unique">THIS DOMAIN ALREADY OCCUPIED.</label>
-            <label class="control-label" ng-message="pattern">PLEASE ENTER A VALID DOMAIN.</label>
+            <label class="control-label" ng-message="unique">This domain already occupied.</label>
+            <label class="control-label" ng-message="pattern">Please enter a valid domain.</label>
           </div>
 
           <input type="text" class="form-control" ng-model="editCompany.domain"
@@ -63,7 +63,7 @@
 
           <div ng-messages="infoForm.industry.$error"
                ng-class="{'hide': !isShowingErrors(infoForm, 'industry')}">
-            <label class="control-label" ng-message="maxlength">INDUSTRY IS TOO LARGE.</label>
+            <label class="control-label" ng-message="maxlength">Industry is too large.</label>
           </div>
 
           <input type="text" class="form-control" ng-model="editCompany.clientIndustry.name" name="industry"
@@ -624,13 +624,14 @@
           <input type="number" class="form-control"
                  name="removeOfflineTime" min="0" ng-model="editCompany.removeOfflineTime">
         </div>
-        <div class="form-group justify-flex" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'removeOfflineTime')}">
+        <div class="form-group justify-flex" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'agentLinkToEmail')}">
           <label class="control checkbox">
-            <input type="checkbox" ng-model="editCompany.autoRemoveDevice">
+            <input type="checkbox" ng-model="editCompany.agentLinkToEmailEnabled">
             Email agent link to:
             <span class="control-indicator"></span>
           </label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" name="agentLinkToEmail" ng-model="editCompany.agentLinkToEmail"
+                 custom-disabled="{{ !editCompany.agentLinkToEmailEnabled }}" ng-pattern="emailPattern">
         </div>
       </div>
     </div>
@@ -641,7 +642,7 @@
               custom-disabled="{{ savingInProcess }}">
         {{ editCompany.id ? 'Save' : 'Create' }}
       </button>
-      <button class="btn btn-success pull-right" ng-click="nextStep()" custom-disabled="{{ currentStep === 'agent' }}">
+      <button class="btn btn-success pull-right" ng-click="nextStep(companyForm)" custom-disabled="{{ currentStep === 'agent' }}">
         Next Step
       </button>
     </div>
