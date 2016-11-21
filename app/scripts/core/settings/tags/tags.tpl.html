@@ -8,16 +8,24 @@
     <br>
 
     <div class="clearfix">
-      <span>Allow user to create custom Tags</span>
       <label class="control checkbox">
         <input type="checkbox" name="allowCreateTags"
                ng-model="allowCreateTags" ng-change="saveAllowingCreateCustomTags(allowCreateTags)">
         <span style="margin-top: 1px; margin-left: 5px;" class="control-indicator"></span>
       </label>
+      <span>Allow user to create custom Tags</span>
     </div>
 
     <div class="form-group">
       <input type="search" class="form-control" placeholder="Search Tags..." ng-model="keyword">
+    </div>
+
+    <div class="add-tag" ng-if="!editingId">
+      <a href="javascript:void(0)" class="tag-add" ng-click="createOrEdit()">
+        <div class="btn btn-primary">
+          <i class="icn-sm icn-plus"></i>
+        </div>
+        Create new tag</a>
     </div>
 
     <div class="clearfix">
@@ -29,14 +37,14 @@
         <li class="list-heading" ng-show="filteredTags.length">
           <div class="col-1" ng-click="setOrderForTags('word')">
             <span class="sort-span">
-              TAG NAME
+              Custom tags
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'word'}"></i></span>
           </div>
-          <div class="col-2">COLOR PICKER</div>
+          <div class="col-2">Color</div>
           <div class="col-3" ng-click="setOrderForTags('usedCounter')">
             <span class="sort-span">
-              USAGE NUMBER
+              Count
               <i class="icn-sm sort-icon icn-sort"
                  ng-class="{'rotate': orderTags.reverse, 'active': orderTags.field === 'usedCounter'}"></i></span>
           </div>
@@ -167,9 +175,7 @@
       </ul>
     </div>
 
-    <div ng-if="!editingId">
-      <a href="javascript:void(0)" class="tag-add" ng-click="createOrEdit()">Add tag</a>
-    </div>
+
 
   </div>
 </div>
