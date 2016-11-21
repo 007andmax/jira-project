@@ -521,7 +521,7 @@
               if (!isNotifyAll) {
                 share.notify = isNotifyAll;
               } else {
-                if ((share.user.subscription && (share.user.subscription.ticket || share.user.subscription.ticketManager)) || share.user.accountType === 'TECH') {
+                if (share.user.accountType !== 'TECH' ? (share.user.subscription && (share.user.subscription.ticket || share.user.subscription.ticketManager)) : share.user.myTicketUpdated) {
                   share.notify = isNotifyAll;
                 } else {
                   sharesWithoutSubscription.push(share);
