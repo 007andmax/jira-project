@@ -454,7 +454,7 @@
 
 .create-user-avatar .avatar img,
 .create-user-avatar .no-avatar {
-  max-width: 120px;
+  max-width: 100%;
   background-color: transparent;
 }
 

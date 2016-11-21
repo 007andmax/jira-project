@@ -53,7 +53,7 @@
               <img src="images/input-icons/smartphone.png" alt="">
               <p>{{ primaryPhone.number }}</p>
             </div>
-            <div>
+            <div ng-if="primaryContact.primaryEmail">
               <img src="images/settings-icon/new-email.png" alt="">
               <p class="ellipsis">{{ primaryContact.primaryEmail }}</p>
             </div>
