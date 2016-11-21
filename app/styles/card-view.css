@@ -18,9 +18,7 @@
       box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.4); }
     .card-wrapper .card__cover {
       height: 200px;
-      -webkit-background-size: contain !important;
-      background-size: contain !important;
-      background-position: center center !important;
+      background-size: cover !important;
       position: relative; }
       .card-wrapper .card__cover--hover {
         width: 100%;
@@ -56,10 +54,11 @@
           height: 18px;
           width: 30px;
           display: inline-block;
-          margin: 10px 10px;
+          margin: 10px 0;
+          padding: 10px;
           opacity: .8;
-          background: url(../images/input-icons/menu-button.png) no-repeat;
-          background-size: contain;}
+          background-position: center !important;
+          background-size: contain !important;}
       .card-wrapper .card__cover--name {
         background-color: rgba(0, 0, 0, 0.6);
         color: #fff;

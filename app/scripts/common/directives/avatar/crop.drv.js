@@ -26,9 +26,9 @@
                 cropBox = element.find('[crop-box]');
 
               cropBox.jWindowCrop({
-                customTypeCrop: scope.cropInfo === 'tech-logo' ? 'tech-logo' : 'avatar',
-                cropBoxWidth: scope.cropInfo === 'tech-logo' ? 450 : 244,
-                cropBoxHeight: scope.cropInfo === 'tech-logo' ? 200 : 244,
+                customTypeCrop: 'tech-logo',
+                cropBoxWidth: scope.cropInfo === 'tech-logo' ? 450 : 460,
+                cropBoxHeight: scope.cropInfo === 'tech-logo' ? 200 : 280,
                 maxZoom: 2,
                 imageSource: '/file/' + scope.model.origin.id,
                 loadingText: '  ',
