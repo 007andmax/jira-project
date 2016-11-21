@@ -11,12 +11,12 @@
         });
 
         $scope.saveEmailNotifications = function (form) {
-
           if (form.$valid) {
 
             var emailObjToSend = {
               newDevice: $scope.emailNotifications.newDevice,
-              ticketCreated: $scope.emailNotifications.ticketCreated
+              ticketCreated: $scope.emailNotifications.ticketCreated,
+              myTicketUpdated: $scope.emailNotifications.myTicketUpdated
             };
 
             UsersService.saveForUserProfile(emailObjToSend, 'email', function () {
