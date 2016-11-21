@@ -267,13 +267,14 @@
   min-width: 80px;
 }
 
+.create-window .general .company-window__deploy-agents--settings .form-group:last-child  .form-control{
+  width: 60%;
+}
+
 .create-window .general .company-window__deploy-agents--settings .form-group .control {
   margin-bottom: 0;
 }
 
-.create-window .general .company-window__deploy-agents--settings .form-group:last-child .control .control-indicator {
-  top: 25%;
-}
 .create-window .general .company-window__deploy-agents .form-control.show-password + a.show-password-hit{
   top: 26px;
 }

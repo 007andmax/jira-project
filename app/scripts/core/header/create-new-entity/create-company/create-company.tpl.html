@@ -602,15 +602,16 @@
       <div class="col-xs-6 company-window__deploy-agents--settings" ng-form="agentSettingsForm">
         <h3>Agent Settings</h3>
 
-        <div class="form-group justify-flex" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'maxAgents')}">
+        <div class="form-group justify-flex" style="margin-bottom: 5px;" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'maxAgents')}">
           <p>Maximum agents install for this client</p>
           <input class="form-control" type="number" name="maxAgents" min="0" ng-model="editCompany.maxAgents">
         </div>
+        <p class="text-muted" style="font-style: italic; margin-bottom: 15px; position: relative; top: -15px;">*0 - unlimited for maximum agents.</p>
 
         <div class="form-group justify-flex">
           <label class="control checkbox">
             <input type="checkbox" ng-model="autoScanNetwork">
-            Automatically Scan Network
+            Automatically scan network
             <span class="control-indicator"></span>
           </label>
         </div>
@@ -622,6 +623,14 @@
           </label>
           <input type="number" class="form-control"
                  name="removeOfflineTime" min="0" ng-model="editCompany.removeOfflineTime">
+        </div>
+        <div class="form-group justify-flex" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'removeOfflineTime')}">
+          <label class="control checkbox">
+            <input type="checkbox" ng-model="editCompany.autoRemoveDevice">
+            Email agent link to:
+            <span class="control-indicator"></span>
+          </label>
+          <input type="text" class="form-control">
         </div>
       </div>
     </div>

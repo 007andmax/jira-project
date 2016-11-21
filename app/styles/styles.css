@@ -8960,7 +8960,6 @@ button.close {
 }
 .modal-create-ticket label {
   display: block;
-  text-transform: capitalize;
   margin-bottom: 4px;
 }
 @-moz-document url-prefix() {
