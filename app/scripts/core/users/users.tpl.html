@@ -19,8 +19,96 @@
         <div class="card">
           <div class="card__cover" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}">
             <div class="card__cover--hover user-type">
-              <div class="drop-menu"></div>
-              <div class="change-img">
+              <div class="drop-menu" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
+                   ng-style="{'background': 'url(./images/input-icons/menu-button' +
+                   (user.avatar && user.avatar.cropped.darkCorner ? '-white' : '') + '.png) no-repeat'}">
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                  <li class="dropdown-submenu">
+                    <a tabindex="-1" href="javascript:void(0)">Set Privilege</a>
+                    <div class="dropdown-submenu-wrapper">
+                      <ul class="dropdown-menu dropdown-privilege">
+                        <li ng-class="{active: user.role === 'USER'}" ng-click="changeUserRole(user.id, 'USER')">
+                          <a tabindex="-1" href="javascript:void(0)">User</a>
+                        </li>
+                        <li ng-class="{active: user.role === 'ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')">
+                          <a tabindex="-1" href="javascript:void(0)">Administrator</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="dropdown-submenu">
+                    <a tabindex="-1" href="javascript:void(0)">Subscribe to...</a>
+                    <div class="dropdown-submenu-wrapper">
+                      <ul class="dropdown-menu dropdown-subscribe">
+
+                        <li ng-click="subscribeUser(user, 'ticket')">
+                          <a tabindex="-1" href="javascript:void(0)">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox"
+                                       ng-checked="user.subscription.ticket" ng-disabled="disabledCheckbox">
+                                <span class="control-indicator"></span>
+                                Ticket Updates
+                              </label>
+                            </div>
+                          </a>
+                        </li>
+
+                        <li ng-click="subscribeUser(user, 'ticketMaanager')">
+                          <a tabindex="-1" href="javascript:void(0)">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox"
+                                       ng-checked="user.subscription.ticketMaanager" ng-disabled="disabledCheckbox">
+                                <span class="control-indicator"></span>
+                                Ticket Manages
+                              </label>
+                            </div>
+                          </a>
+                        </li>
+
+                        <li ng-click="subscribeUser(user, 'invoice')"
+                            ng-if="!isLastUserWithInvoiceSubscription(user)">
+                          <a tabindex="-1" href="javascript:void(0)">
+                            <div class="clearfix">
+                              <label class="control checkbox pull-left">
+                                <input type="checkbox"
+                                       ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
+                                <span class="control-indicator"></span>
+                                Invoice Updates
+                              </label>
+                            </div>
+                          </a>
+                        </li>
+
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="dropdown-submenu" change-image="user" model-image-path="avatar">
+                    <a tabindex="-1" href="javascript:void(0)">Upload photo</a>
+                    <div class="dropdown-submenu-wrapper">
+                      <ul class="dropdown-menu dropdown-privilege" stop-propagation="click">
+                        <li change-image-button>
+                          <a tabindex="-1" href="javascript:void(0)">Change Image</a>
+                        </li>
+                        <li restore-default-button ng-show="user.avatar">
+                          <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
+                        </li>
+                        <li reposition-button ng-show="user.avatar">
+                          <a tabindex="-1" href="javascript:void(0)">Reposition</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')
+                      && !user.isContact && !isLastUserWithInvoiceSubscription(user)">
+                    <a tabindex="-1" href="javascript:void(0)" ng-click="archiveUser()">
+                      Archive this Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="change-img ng-hide">
                 <img src="images/input-icons/photo-camera.png" alt="">
               </div>
             </div>
@@ -53,14 +141,15 @@
           </div>
           <div class="card__create-btn clearfix">
             <button class="btn btn-success" create-new-entity="ticket"
-                    company-id="{{ user.company.id }}">CREATE TICKET</button>
+                    company-id="{{ user.company.id }}">CREATE TICKET
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <ul class="qt-list qt-users"  ng-if="usersView === 'list'">
+  <ul class="qt-list qt-users" ng-if="usersView === 'list'">
 
     <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
       <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
@@ -108,9 +197,10 @@
       <div class="col-lg-2 col-xs-1"></div>
     </li>
 
-    <li ng-repeat="user in (usersCtrl.shownUsers = (users | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) track by user.id"
-        ng-controller="quicktech.core.users.userCtrl"
-        show-model-element="{{ 'show-user-on-save-' + user.id }}">
+    <li
+      ng-repeat="user in (usersCtrl.shownUsers = (users | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) track by user.id"
+      ng-controller="quicktech.core.users.userCtrl"
+      show-model-element="{{ 'show-user-on-save-' + user.id }}">
 
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3">
@@ -128,7 +218,7 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2 ellipsis" >
+        <div class="col-lg-2 col-xs-2 ellipsis">
           {{ getUserCompanyName(user) }}
         </div>
 
@@ -146,7 +236,7 @@
         <div class="col-lg-1 col-xs-1">
           <div class="user-account-type" uib-dropdown>
 
-            <div class="label-wrapper" aria-expanded="false" uib-dropdown-toggle >
+            <div class="label-wrapper" aria-expanded="false" uib-dropdown-toggle>
               <span>{{ user.role }}</span>
             </div>
 

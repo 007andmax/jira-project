@@ -5,9 +5,10 @@
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companiesCtrl',
     ['$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService', '$state', '$rootScope',
       'quicktech.common.services.SharedStateService', 'DevicesService', 'quicktech.common.services.PermissionsService',
-      'localStorageService',
+      'localStorageService', 'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService, $state, $rootScope,
-                SharedStateService, DevicesService, PermissionsService, localStorageService) {
+                SharedStateService, DevicesService, PermissionsService, localStorageService, UserConfirmationsService,
+                UserNotificationService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
         var globalSearch = SharedStateService.getSharedState('globalSearch'),
@@ -120,6 +121,21 @@
             return UsersService.getAllByCompanyId(item.id).length;
           }
 
+        };
+
+        $scope.archiveCompany = function (company) {
+          var confirmMesage = 'Do you want to archive ' + company.name;
+          var confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            CompaniesService.archive(company.id, function (resp) {
+              if (resp.data.code == 403) {
+                UserNotificationService.show(resp.data.message, true);
+              } else {
+                $state.go('companies');
+              }
+            });
+          })
         };
 
         $scope.toggleCollapsed = function () {
