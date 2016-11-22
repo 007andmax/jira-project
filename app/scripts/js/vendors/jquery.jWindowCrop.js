@@ -17,11 +17,11 @@
       var isTechLogo = imgType === 'tech-logo';
 
       if (targetLength <= containerLength) {
-        if (val + targetLength < containerLength - ( (isTechLogo ? 450: 244) - targetLength)) {
-          val = containerLength - (isTechLogo ? 450: 244);
+        if (val + targetLength < containerLength - ( (isTechLogo ? 450: 460) - targetLength)) {
+          val = containerLength - (isTechLogo ? 450: 460);
         }
-        if (val > (isTechLogo ? 450: 244) - targetLength) {
-          val = (isTechLogo ? 450: 244) - targetLength;
+        if (val > (isTechLogo ? 450: 460) - targetLength) {
+          val = (isTechLogo ? 450: 460) - targetLength;
         }
       } else {
         if (val + targetLength < containerLength) val = containerLength - targetLength;
@@ -263,10 +263,11 @@
         oldZoom = base.workingPercent;
       }
 
-      var left = fillContainer((Math.round((base.focalPoint.x * base.workingPercent) - base.options.cropBoxWidth / 2) * -1), base.$image.width(), base.options.cropBoxWidth, base.options.customTypeCrop);
-      var top = fillContainer((Math.round((base.focalPoint.y * base.workingPercent) - base.options.cropBoxHeight / 2) * -1), base.$image.height(), base.options.cropBoxHeight, base.options.customTypeCrop);
+      var customTypeCrop = base.options.customTypeCrop;
+      var left = fillContainer((Math.round((base.focalPoint.x * base.workingPercent) - base.options.cropBoxWidth / 2) * -1), base.$image.width(), base.options.cropBoxWidth, customTypeCrop);
+      var top = fillContainer((Math.round((base.focalPoint.y * base.workingPercent) - base.options.cropBoxHeight / 2) * -1), base.$image.height(), base.options.cropBoxHeight, customTypeCrop);
 
-      if(base.options.customTypeCrop === 'tech-logo'){
+      if(customTypeCrop === 'tech-logo' || customTypeCrop === 'avatar' || customTypeCrop === 'logo'){
         if(left > 0){
           left = 0;
         }
@@ -323,10 +324,11 @@
       if (base.isDragging) {
         var xDif = (event.pageX || event.originalEvent.touches[0].pageX) - base.dragMouseCoords.x;
         var yDif = (event.pageY || event.originalEvent.touches[0].pageY) - base.dragMouseCoords.y;
-        var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width() - 1, base.options.cropBoxWidth, base.options.customTypeCrop);
-        var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height() - 1, base.options.cropBoxHeight, base.options.customTypeCrop);
+        var customTypeCrop = base.options.customTypeCrop;
+        var newLeft = fillContainer((base.dragImageCoords.x + xDif), base.$image.width() - 1, base.options.cropBoxWidth, customTypeCrop);
+        var newTop = fillContainer((base.dragImageCoords.y + yDif), base.$image.height() - 1, base.options.cropBoxHeight, customTypeCrop);
 
-        if(base.options.customTypeCrop === 'tech-logo'){
+        if(customTypeCrop === 'tech-logo' || customTypeCrop === 'avatar' || customTypeCrop === 'logo'){
           if(newLeft > 0){
             newLeft = 0
           }

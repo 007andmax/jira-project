@@ -20,9 +20,9 @@
       <input type="search" class="form-control" placeholder="Search Tags..." ng-model="keyword">
     </div>
 
-    <div class="add-tag" ng-if="!editingId">
-      <a href="javascript:void(0)" class="tag-add" ng-click="createOrEdit()">
-        <div class="btn btn-primary">
+    <div class="add-tag">
+      <a href="javascript:void(0)" class="tag-add" ng-click="createOrEdit()" custom-disabled="{{ !!editingId }}">
+        <div class="btn btn-primary" custom-disabled="{{ !!editingId }}">
           <i class="icn-sm icn-plus"></i>
         </div>
         Create new tag</a>
@@ -52,8 +52,40 @@
           <div class="col-5">&nbsp;</div>
         </li>
 
-        <li
-          ng-repeat="tag in filteredTags = (tags | filter: {word: keyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
+        <li ng-if="editingId === 'new'" ng-form="createTagForm">
+          <div class="col-1 form-group"
+               ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
+            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
+                   required>
+          </div>
+          <div class="col-2" uib-dropdown>
+            <span uib-dropdown-toggle>
+              <span class="colored-circle"
+                    ng-style="{'background-color': tagColors[editedTag.colorCode].backgroundColor,
+                              'border-color': tagColors[editedTag.colorCode].borderColor}"></span>
+              <i class="icn-sm icn-picker"></i>
+            </span>
+
+            <ul class="dropdown-menu dropdown-tag-colors">
+              <li ng-repeat="tagColor in tagColors"
+                  ng-class="{'active': editedTag.colorCode === $index}"
+                  ng-click="editedTag.colorCode = $index">
+                <i class="tag-color tag-color-md"
+                   ng-style="{'background-color': tagColor.backgroundColor,
+                              'border-color': tagColor.borderColor}"></i>
+              </li>
+            </ul>
+          </div>
+          <div class="col-3">{{ editedTag.usedCounter }}</div>
+          <div class="col-4" ng-click="cancel()"
+               uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
+            <i class="icn-sm icn-remove-token"></i></div>
+          <div class="col-4" ng-click="saveOrUpdate(createTagForm)"
+               uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
+            <i class="icn-sm icn-product-save"></i></div>
+        </li>
+
+        <li ng-repeat="tag in filteredTags = (tags | filter: {word: keyword}) | orderBy: orderByForTags: orderTags.reverse track by tag.id"
           ng-form="updateTagForm">
           <div class="col-1" ng-if="editingId !== tag.id" ng-click="createOrEdit(tag)">
             {{ tag.word }}
@@ -135,39 +167,6 @@
                uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
             <i class="icn-sm icn-remove-token"></i></div>
           <div class="col-4" ng-click="saveOrUpdate(updateTagForm)" ng-if="editingId === tag.id"
-               uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icn-sm icn-product-save"></i></div>
-        </li>
-
-        <li ng-if="editingId === 'new'" ng-form="createTagForm">
-          <div class="col-1 form-group"
-               ng-class="{'has-error': (triedToSave || createTagForm.word.$dirty) && createTagForm.$invalid}">
-            <input class="form-control" type="text" name="word" ng-model="editedTag.word" placeholder="Enter name..."
-                   required>
-          </div>
-          <div class="col-2" uib-dropdown>
-            <span uib-dropdown-toggle>
-              <span class="colored-circle"
-                    ng-style="{'background-color': tagColors[editedTag.colorCode].backgroundColor,
-                              'border-color': tagColors[editedTag.colorCode].borderColor}"></span>
-              <i class="icn-sm icn-picker"></i>
-            </span>
-
-            <ul class="dropdown-menu dropdown-tag-colors">
-              <li ng-repeat="tagColor in tagColors"
-                  ng-class="{'active': editedTag.colorCode === $index}"
-                  ng-click="editedTag.colorCode = $index">
-                <i class="tag-color tag-color-md"
-                   ng-style="{'background-color': tagColor.backgroundColor,
-                              'border-color': tagColor.borderColor}"></i>
-              </li>
-            </ul>
-          </div>
-          <div class="col-3">{{ editedTag.usedCounter }}</div>
-          <div class="col-4" ng-click="cancel()"
-               uib-tooltip="Cancel" tooltip-placement="top" tooltip-append-to-body="true">
-            <i class="icn-sm icn-remove-token"></i></div>
-          <div class="col-4" ng-click="saveOrUpdate(createTagForm)"
                uib-tooltip="Save" tooltip-placement="top" tooltip-append-to-body="true">
             <i class="icn-sm icn-product-save"></i></div>
         </li>

@@ -88,13 +88,14 @@
               fixScroll();
               FilesService.cropAvatar(image, function (cropped) {
                 image.cropped = cropped;
-                Utils.defineReadOnlyProperty(scope.model, attrs.modelImagePath, image);
+                var model = angular.copy(scope.model);
+                Utils.defineReadOnlyProperty(model, attrs.modelImagePath, image);
 
                 if (attrs.modelImagePath === 'avatar') {
-                  scope.model.companyId = scope.model.company.id;
-                  UsersService.save(scope.model);
+                  model.companyId = model.company.id;
+                  UsersService.save(model);
                 } else if (attrs.modelImagePath === 'logo') {
-                  CompaniesService.saveLogo(image, scope.model.id);
+                  CompaniesService.saveLogo(image, model.id);
                 }
               });
             }, function () {

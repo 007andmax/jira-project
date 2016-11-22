@@ -20,8 +20,7 @@
           <div class="card__cover" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}">
             <div class="card__cover--hover user-type">
               <div class="drop-menu" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
-                   ng-style="{'background': 'url(./images/input-icons/menu-button' +
-                   (user.avatar && user.avatar.cropped.darkCorner ? '-white' : '') + '.png) no-repeat'}">
+                   ng-class="{'white': user.avatar && user.avatar.cropped.darkCorner}">
                 <ul class="dropdown-menu" uib-dropdown-menu>
                   <li class="dropdown-submenu">
                     <a tabindex="-1" href="javascript:void(0)">Set Privilege</a>

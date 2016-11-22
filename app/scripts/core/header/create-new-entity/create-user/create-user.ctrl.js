@@ -87,8 +87,9 @@
           if ($scope.userCompany && $scope.userCompany.isDefault) {
             $scope.userCompany = '';
           }
-          if ($scope.editUser.companyId && $scope.clientCompaniesInfo) {
-            $scope.userCompanyCountryCode = $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses[0].countryCode;
+          var addresses = $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses;
+          if ($scope.editUser.companyId && $scope.clientCompaniesInfo && addresses && addresses.length) {
+            $scope.userCompanyCountryCode = addresses[0].countryCode;
           }
         });
 

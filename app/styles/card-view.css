@@ -57,8 +57,11 @@
           margin: 10px 0;
           padding: 10px;
           opacity: .8;
+          background: url('../images/input-icons/menu-button.png') no-repeat;
           background-position: center !important;
           background-size: contain !important;}
+        .card-wrapper .card__cover--hover.user-type .drop-menu.white {
+          background: url('../images/input-icons/menu-button-white.png') no-repeat;}
       .card-wrapper .card__cover--name {
         background-color: rgba(0, 0, 0, 0.6);
         color: #fff;
