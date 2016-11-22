@@ -325,7 +325,7 @@
                        ng-model="ticketCompany" name="ticketCompany" autocomplete="off"
                        uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
                        typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
-                       custom-style="{'max-height': '170px', 'overflow-y': 'auto', 'width': '100%'}">
+                       custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '100%'}">
 
                 <span style="position: absolute; top: 14px; right: 13px;">
                   <i class="icn-sm icn-caret-gray" ng-hide="ticketCompanyChoosen"></i>
@@ -351,7 +351,7 @@
                      typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      uib-typeahead="user as getUserName(user) for user in clients | filter: filterUserFullName($viewValue) | orderBy:'firstName'"
                      qt-typeahead-show-on-focus ng-trim="false"
-                     custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': 'auto'}">
+                     custom-style="{'max-height': '204px', 'overflow-y': 'auto', 'width': '350px', 'height': '180px'}">
 
               <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
 
@@ -376,7 +376,7 @@
                      typeahead-editable="false" typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
                      uib-typeahead="user as getUserName(user) for user in usersCurrentCompany | filter:filterUserFullName($viewValue) | orderBy:'firstName'"
                      qt-typeahead-show-on-focus ng-required="false"
-                     custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
+                     custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '360px'}">
 
               <div typeahead-input-icon="ticketAssignTo" style="position: absolute;top: 29px;right: 13px;"></div>
 
@@ -401,7 +401,7 @@
                    ng-model="ticketAgent" name="ticketAgent"
                    ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
                    uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
-                   qt-typeahead-show-on-focus custom-style="{'max-height': '204px', 'overflow-y': 'auto'}">
+                   qt-typeahead-show-on-focus custom-style="{'max-height': '113px', 'overflow-y': 'auto'}">
 
             <div typeahead-input-icon="ticketAgent" style="position: absolute;top: 29px;right: 13px;"></div>
 
@@ -418,7 +418,7 @@
                  ng-include="'/html/scripts/core/tickets/ticket-update/update-add-user.tpl.html'"></div>
 
             <div class="pull-left shared-user-add">
-              <div class="notify-select">
+              <div class="notify-select" style="padding-top: 0;">
                 <span ng-click="toggleAllShared(true)">Select Everyone</span> | <span ng-click="toggleAllShared(false)">Select None</span>
               </div>
 
