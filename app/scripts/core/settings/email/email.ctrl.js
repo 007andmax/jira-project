@@ -5,7 +5,8 @@
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.emailCtrl',
     ['$scope', 'CompaniesService', '$timeout', 'ConstantsService',
       function ($scope, CompaniesService, $timeout, ConstantsService) {
-        var promise,
+        var smtpPromise,
+          inboxEnabledPromise,
           savedSMTPSettings,
           initialized = false,
           portIsEmpty = false,
@@ -29,11 +30,20 @@
           };
 
         $scope.emailVia = [{
-          value: true,
-          label: 'your own SMTP server'
-        }, {
           value: false,
           label: 'Quicktech mail server'
+        }, {
+          value: true,
+          label: 'Custom'
+        }, {
+          value: true,
+          label: 'Gmail'
+        }, {
+          value: true,
+          label: 'Yahoo'
+        }, {
+          value: true,
+          label: 'Outlook'
         }];
 
         $scope.currentHost = ConstantsService.getConstant('mandrill.domain.suffix');
@@ -51,7 +61,7 @@
           $scope.smtp.testEmail = resp.login;
           savedSMTPSettings = angular.copy(resp);
           portIsEmpty = !resp.port;
-          $scope.usedEmailVia = $scope.smtp.useSMTP ? $scope.emailVia[0] : $scope.emailVia[1];
+          $scope.usedEmailVia = $scope.smtp.useSMTP ? getEmailViaByDomain($scope.smtp.domain) : $scope.emailVia[0];
         });
 
         CompaniesService.getEmailAlias(function (resp) {
@@ -81,28 +91,8 @@
 
         $scope.changeEmailVia = function (form) {
           $scope.smtp.useSMTP = $scope.usedEmailVia.value;
+          setDomain($scope.usedEmailVia.label.toUpperCase());
           $scope.saveSMTP(form);
-        };
-
-        $scope.setDomain = function (value, form) {
-          if (!$scope.disableFields) {
-            var domain = preinitializedDomains[value],
-              port = portToTypes[$scope.smtp.encryptionType];
-
-            if (domain) {
-              for (var prop in domain) {
-                $scope.smtp[prop] = domain[prop];
-              }
-            }
-
-            if (port && !domain.port) {
-              $scope.smtp.port = port;
-            }
-
-            $timeout(function () {
-              $scope.saveSMTP(form);
-            });
-          }
         };
 
         $scope.sendTestEmail = function (formForSave, formForTest, isTest, hideFunc) {
@@ -115,14 +105,14 @@
 
         $scope.saveSMTP = function (form, isTest) {
           if (form.$valid && (isTest || !angular.equals($scope.smtp, savedSMTPSettings)) && $scope.smtp.useSMTP) {
-            if (promise) {
-              $timeout.cancel(promise);
+            if (smtpPromise) {
+              $timeout.cancel(smtpPromise);
             }
             $scope.testingConnection = true;
             $scope.smtp.exeption = false;
             $scope.disableFields = !!isTest;
 
-            promise = $timeout(function () {
+            smtpPromise = $timeout(function () {
               $scope.smtp.sendTestEmail = !!isTest;
               CompaniesService.saveForCompanyProfile($scope.smtp, 'SMTPSettings', function (resp, oldSettings) {
                 if (angular.equals($scope.smtp, oldSettings)) {
@@ -146,7 +136,7 @@
                     }
                   }
                 }
-                promise = undefined;
+                smtpPromise = undefined;
               });
             }, 500);
           } else if (!$scope.smtp.useSMTP) {
@@ -159,6 +149,44 @@
             CompaniesService.saveEmailAlias(emailAlias);
           }
         };
+
+        $scope.saveInboxEnabled = function (isEnabled) {
+          if (inboxEnabledPromise) {
+            $timeout.cancel(inboxEnabledPromise);
+          }
+
+          inboxEnabledPromise = $timeout(function () {
+            CompaniesService.saveInboxEnabled(isEnabled);
+          })
+        };
+
+        function setDomain(value) {
+          if (!$scope.disableFields) {
+            var domain = preinitializedDomains[value],
+              port = portToTypes[$scope.smtp.encryptionType];
+
+            if (domain) {
+              for (var prop in domain) {
+                $scope.smtp[prop] = domain[prop];
+              }
+
+              if (port && !domain.port) {
+                $scope.smtp.port = port;
+              }
+            }
+          }
+        }
+
+        function getEmailViaByDomain(domain) {
+          var counter = 0;
+          for (var prop in preinitializedDomains) {
+            var defaultSmtp = preinitializedDomains[prop];
+            if (domain === defaultSmtp.domain) {
+              return $scope.emailVia[counter + 2];
+            }
+            counter++;
+          }
+        }
 
       }]);
 

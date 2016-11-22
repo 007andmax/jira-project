@@ -744,6 +744,11 @@
       Utils.handleCallback(future, callback);
     }
 
+    function saveInboxEnabled(isEnabled, callback) {
+      var future = $http.put('/settings/companyProfile/inbox', { enabled: isEnabled });
+      Utils.handleCallback(future, callback);
+    }
+
     return {
       _addInitListener: addInitListener,
       _addAmountChangeListener: _addAmountChangeListener,
@@ -786,7 +791,8 @@
       saveEmailAlias: saveEmailAlias,
       getIndustries: getIndustries,
       changeCompanyStatusToActive: changeCompanyStatusToActive,
-      isVendorHasProducts: isVendorHasProducts
+      isVendorHasProducts: isVendorHasProducts,
+      saveInboxEnabled: saveInboxEnabled
     }
 
   }]);

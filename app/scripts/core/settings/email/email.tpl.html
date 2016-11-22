@@ -14,7 +14,7 @@
         <span style="top: 10px;" class="company-url-addon">{{ supportMailBox + '@' + currentHost }}</span>
       </div>
       <label style="margin: 10px;" class="control checkbox pull-left">
-        <input type="checkbox" ng-model="emailNotifications.ticketCreated" ng-change="saveEmailNotifications(emailNotificationsForm)" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+        <input type="checkbox" ng-model="inboxEnabled" ng-change="saveInboxEnabled(inboxEnabled)">
         <span class="control-indicator"></span> only create tickets for specified domains in client lists.
       </label>
     </div>
@@ -172,6 +172,9 @@
         <div class="form-group full-width" style="  display: flex;
           justify-content: flex-end;
           align-items: center;">
+          <span class="error-msg" ng-if="smtp.useSMTP && !testingConnection && !smtp.isValid">
+            {{ smtp.errorMessage }}
+          </span>
           <div class="loading-indicator-wrap">
             <button-with-loading-indicator loading="testingConnection"
                                            ng-show="!smtp.exeption && (testingConnection || smtp.isValid)">
@@ -179,16 +182,11 @@
           </div>
           <div qt-custom-popover-template="/html/scripts/core/settings/email/send-test-email-popup.tpl.html"
                style="display: inline-block;" qt-popover-position="top">
-          </div>
             <div class="btn btn-lg btn-info test-email-popup-btn" qt-popover-trigger
                  custom-disabled="{{ testingConnection || !smtp.useSMTP || smtpForm.$invalid || !smtp.isValid }}">
               Test server
             </div>
-
-
-          <span class="error-msg" ng-if="smtp.useSMTP && !testingConnection && !smtp.isValid">
-            {{ smtp.errorMessage }}
-          </span>
+          </div>
         </div>
       </div>
     </div>
