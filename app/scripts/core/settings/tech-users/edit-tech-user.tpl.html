@@ -26,9 +26,9 @@
 
             <div ng-messages="editUserForm.firstName.$error"
                  ng-class="{'hide': !isShowingErrors(editUserForm, 'firstName')}">
-              <div class="control-label" ng-message="required">First name is required.</div>
-              <div class="control-label" ng-message="maxlength">First name is too large.</div>
-              <div class="control-label" ng-message="minlength">First name is too short.</div>
+              <label class="control-label" ng-message="required">First name is required.</label>
+              <label class="control-label" ng-message="maxlength">First name is too large.</label>
+              <label class="control-label" ng-message="minlength">First name is too short.</label>
             </div>
 
             <input class="form-control" type="text" aria-expanded="true" ng-minlength="2" ng-maxlength="15"
@@ -43,7 +43,7 @@
 
             <div ng-messages="editUserForm.lastName.$error"
                  ng-class="{'hide': !isShowingErrors(editUserForm, 'lastName')}">
-              <div class="control-label" ng-message="maxlength">Last name is too large.</div>
+              <label class="control-label" ng-message="maxlength">Last name is too large.</label>
             </div>
 
             <input class="form-control" type="text" aria-expanded="true" ng-maxlength="15"
@@ -82,10 +82,10 @@
 
             <div ng-messages="editUserForm.primaryEmail.$error"
                  ng-class="{'hide': !isShowingErrors(editUserForm, 'primaryEmail')}">
-              <div class="control-label" ng-message="required">Email field cannot be left empty.</div>
-              <div class="control-label" ng-message="pattern">Please enter a valid email address.</div>
-              <div class="control-label" ng-message="unique">This email already occupied.</div>
-              <div class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</div>
+              <label class="control-label" ng-message="required">Email field cannot be left empty.</label>
+              <label class="control-label" ng-message="pattern">Please enter a valid email address.</label>
+              <label class="control-label" ng-message="unique">This email already occupied.</label>
+              <label class="control-label" ng-message="maxlength">Email mustn't be greater then 128 chars.</label>
             </div>
 
             <input class="form-control" type="text" name="primaryEmail" aria-expanded="true" make-dirty-on-blur

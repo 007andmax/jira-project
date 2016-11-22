@@ -6,8 +6,8 @@
 
     <input type="text" class="form-control" placeholder="Service Name"
            ng-model="editService.name"
-           name="editServiceName" ng-required="true" custom-disabled="{{ !!(!service.isDefault && service) }}"
-           is-uniq-validation validation-func="validateServiceName" model-id="service.versionedId.id"
+           name="editServiceName" ng-required="true" custom-disabled="{{ !editService.isDefault }}"
+           is-uniq-validation validation-func="validateServiceName" model-id="editService.versionedId.id"
            ng-maxlength="100" ng-minlength="3">
   </div>
 

@@ -39,7 +39,8 @@
               }).length <= 1;
 
             for (var k = 0; k < companyData.services.length; k++) {
-              $scope.selectedServices[companyData.services[k].name] = true
+              var service = companyData.services[k].originService || companyData.services[k];
+              $scope.selectedServices[service.versionedId.id] = true;
             }
 
             $scope.editCompany = companyData.staticCopy();
@@ -174,13 +175,13 @@
         });
 
         $scope.servicesData = ServicesService.getServicesData($scope, false, function () {
-          if (!$scope.editCompany.id) {
+          if (!savedState.item || !savedState.item.id) {
             $timeout(function () {
               if ($scope.servicesData && $scope.servicesData.default) {
                 for (var i = 0; i < $scope.servicesData.default.length; i++) {
                   var service = angular.copy($scope.servicesData.default[i]);
                   $scope.editCompany.services.push(service);
-                  $scope.selectedServices[$scope.servicesData.default[i].name] = true;
+                  $scope.selectedServices[service.versionedId.id] = true;
                 }
               }
             });
@@ -402,24 +403,25 @@
             form.$setPristine();
 
           } else {
-            var service = angular.copy(originService)
+            var service = angular.copy(originService);
 
-            if ($scope.selectedServices[service.name]) {
+            if ($scope.selectedServices[service.versionedId.id]) {
               $scope.editCompany.services.push(service);
             } else {
-              $scope.deleteService(service.name);
+              $scope.deleteService(service);
             }
           }
         };
 
-        $scope.deleteService = function (name) {
+        $scope.deleteService = function (service) {
 
-          if ($scope.selectedServices[name]) {
-            $scope.selectedServices[name] = false;
+          if ($scope.selectedServices[service.versionedId.id]) {
+            $scope.selectedServices[service.versionedId.id] = false;
           }
 
           for (var i = 0; i < $scope.editCompany.services.length; i++) {
-            if (name === $scope.editCompany.services[i].name) {
+            var companyService = $scope.editCompany.services[i].originService || $scope.editCompany.services[i];
+            if (service.versionedId.id === companyService.versionedId.id) {
               $scope.editCompany.services.splice(i, 1);
               return;
             }
@@ -532,7 +534,7 @@
         }
 
         function toEnum(text) {
-          return text.split(' ').join('_').toUpperCase();
+          return text.trim().split(' ').join('_').toUpperCase();
         }
 
         UserConfirmationsService.preventLocationChange($scope);

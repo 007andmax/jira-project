@@ -77,7 +77,7 @@
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
         <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
                ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50"
-               is-uniq-validation validation-func="validateProductIls" model-id="product.versionedId.id">
+               is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
       </div>
 
     </div>
@@ -105,7 +105,7 @@
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
         <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
                ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50"
-               is-uniq-validation validation-func="validateProductMnf" model-id="product.versionedId.id">
+               is-uniq-validation validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
       </div>
 
 
@@ -116,9 +116,10 @@
 
       <div class="btn btn-lg btn-info btn-create pull-right" ng-click="saveChangeProduct(editProductForm)"
            custom-disabled="{{ disabledSaveChangeButton }}">
-        {{ editProduct.id ? 'Save' : 'Create' }}
+        {{ editProduct.versionedId && editProduct.versionedId.id ? 'Save' : 'Create' }}
       </div>
 
     </div>
 
   </div>
+</div>
