@@ -2654,9 +2654,8 @@ Devices tab
 }
 
 .qt-service-form {
-  height: 166px !important;
   padding: 0 !important;
-
+  list-style-type: none;
   cursor: auto !important;
 
   border: none !important;
@@ -2672,7 +2671,6 @@ Devices tab
 }
 
 .service-form-wrapper {
-  height: 167px;
   padding: 30px;
   box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
 }

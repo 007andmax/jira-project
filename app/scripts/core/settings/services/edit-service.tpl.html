@@ -1,6 +1,6 @@
-<div class="service-form-wrapper edit-is-billable" ng-form="editServiceForm">
+<div class="clearfix service-form-wrapper edit-is-billable" ng-form="editServiceForm">
 
-  <div class="col-1" style="width: calc(100% - 205px);"
+  <div class="col-1" style="width: calc(100% - 240px);"
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
     <!--style for TODO hide timeAllotment-->
 
@@ -32,7 +32,7 @@
            ng-maxlength="50" ng-minlength="3">
   </div>
 
-  <div class="col-2" style="padding-right: 0"
+  <div class="col-2" style="padding-right: 0; width: 100px;"
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
     <!--style for TODO hide timeAllotment-->
 
@@ -88,7 +88,7 @@
 
   <!--</div>-->
 
-  <div class="qt-form-actions">
+  <div class="qt-form-actions" style="width: auto;">
     <!--<div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>-->
 
     <div class="btn btn-lg btn-info pull-right"

@@ -11,6 +11,12 @@
        These default services can be assigned to any or all customers. You can modify the service rate per customer
       once you have assigned the service to them.</p>
 
+      <li class="qt-service-form add-new-service">
+        <div ng-controller="quicktech.core.settings.editServiceCtrl"
+             ng-include="'/html/scripts/core/settings/services/edit-service.tpl.html'"></div>
+      </li>
+
+
       <ul class="qt-list" style="width: 500px"
           ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
@@ -70,10 +76,7 @@
 
         </li>
 
-        <li class="qt-service-form add-new-service">
-          <div ng-controller="quicktech.core.settings.editServiceCtrl"
-               ng-include="'/html/scripts/core/settings/services/edit-service.tpl.html'"></div>
-        </li>
+
 
       </ul>
 
