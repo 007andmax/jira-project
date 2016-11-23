@@ -37,7 +37,7 @@
         var savedState = $scope.getLastSavedState('ticketFromDraft'),
           savedItem;
 
-        if (savedState.item) {
+        if (savedState.item) {                                                                       //ticket from draft
           savedItem = savedState.item;
           savedItem.draftId = savedState.item.id;
           savedItem.id = undefined;
@@ -65,20 +65,20 @@
             });
           }
 
-        } else {
+        } else {                                                                               //ticket from saved state
           savedState = $scope.getLastSavedState('ticket');
           savedItem = savedState.item;
           if (savedState.type === 'ticket' && savedItem) {
-            $scope.ticketAttachments = angular.copy(savedItem.attachments);
-            $scope.ticketSharedUsersList = angular.copy(savedItem.ticketSharedUsersList);
-            $scope.selectUpdateSharedUser = angular.copy(savedItem.selectUpdateSharedUser);
-
+            $scope.ticketAttachments = savedItem.attachments;
+            $scope.ticketSharedUsersList = savedItem.ticketSharedUsersList;
+            $scope.selectUpdateSharedUser = savedItem.selectUpdateSharedUser;
+            $scope.fileInfo = savedItem.fileInfo;
 
             savedItem.attachments = undefined;
             savedItem.ticketSharedUsersList = undefined;
             savedItem.selectUpdateSharedUser = undefined;
             $scope.ticket = angular.copy(savedItem);
-          } else {
+          } else {                                                                                          //new ticket
             $scope.ticket = { priorityLevel: 'MEDIUM' };
             $scope.ticketAttachments = [];
             $scope.ticketSharedUsersList = [];
@@ -664,16 +664,25 @@
 
         $scope.$on('createNewEntity', archiveTicketState);
 
-        function archiveTicketState(event, type, userFromDreft) {
-          $scope.ticket.attachments = $scope.ticketAttachments;
-          $scope.ticket.ticketSharedUsersList = $scope.ticketSharedUsersList;
-          $scope.ticket.selectUpdateSharedUser = $scope.selectUpdateSharedUser;
+        function archiveTicketState(event, type, userFromDraft) {
+          $scope.ticket.attachments = $scope.ticketAttachments.map(function (file) {
+            return {
+              id: file.id,
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              progress: file.progress
+            };
+          });
+          $scope.ticket.fileInfo = angular.copy($scope.fileInfo);
+          $scope.ticket.ticketSharedUsersList = angular.copy($scope.ticketSharedUsersList);
+          $scope.ticket.selectUpdateSharedUser = angular.copy($scope.selectUpdateSharedUser);
           $scope.savedState.types.unshift('ticket');
           $scope.savedState.items.unshift($scope.ticket);
 
           if ($scope.ticket.draftId) {
             $scope.savedState.types.unshift('company');
-            $scope.savedState.items.unshift(userFromDreft);
+            $scope.savedState.items.unshift(userFromDraft);
           }
 
           $scope.setOpenedTab(type);
