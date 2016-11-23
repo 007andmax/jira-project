@@ -139,9 +139,10 @@
           }
 
           function hideOnOutsideClick(e) {
-            var isInside = e.target === $element[0] || angular.element(e.target).closest($element);
+            var targetElement = angular.element(e.target);
+            var isInside = e.target === $element[0] || targetElement.parent().hasClass('uib-typeahead-match');
 
-            if (!isInside.length) {
+            if (!isInside && !targetElement.closest($element).length) {
               newScope.hidePopover();
             }
           }
