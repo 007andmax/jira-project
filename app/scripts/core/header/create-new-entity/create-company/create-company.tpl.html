@@ -413,7 +413,7 @@
                      ng-class="{'hide': !(servicesForm['serviceName' + $index].$dirty || triedToSave) || !isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
                   <label class="control-label" ng-message="required">Cannot be left empty.</label>
                   <label class="control-label" ng-message="maxlength">Is too large.</label>
-                  <label class="control-label" ng-message="minlength">Is too large.</label>
+                  <label class="control-label" ng-message="minlength">Is too small.</label>
                   <label class="control-label" ng-message="unique">Already occupied.</label>
                 </div>
 

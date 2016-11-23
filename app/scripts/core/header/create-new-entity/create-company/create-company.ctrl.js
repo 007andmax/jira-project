@@ -12,6 +12,7 @@
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService,
                 $state, $timeout, $rootScope, PermissionsService, UserConfirmationsService) {
 
+        var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
         var savedState = $scope.getLastSavedState('company');
         var action = 'CREATE_COMPANIES';
@@ -395,6 +396,7 @@
           if (originService === 'new-service') {
             var newService = {
               new: true,
+              newId: newServiceCounter++,
               name: '',
               rate: 0,
               billable: true
@@ -415,13 +417,16 @@
 
         $scope.deleteService = function (service) {
 
-          if ($scope.selectedServices[service.versionedId.id]) {
+          if (service.versionedId && $scope.selectedServices[service.versionedId.id]) {
             $scope.selectedServices[service.versionedId.id] = false;
           }
 
           for (var i = 0; i < $scope.editCompany.services.length; i++) {
             var companyService = $scope.editCompany.services[i].originService || $scope.editCompany.services[i];
-            if (service.versionedId.id === companyService.versionedId.id) {
+
+            if (service.new && service.newId === companyService.newId ||
+              service.versionedId && service.versionedId.id === companyService.versionedId.id
+            ) {
               $scope.editCompany.services.splice(i, 1);
               return;
             }
