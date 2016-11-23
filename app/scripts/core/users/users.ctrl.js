@@ -145,7 +145,7 @@
               continue;
             }
 
-            if (user.subscription.invoice) {
+            if (user.subscription && user.subscription.invoice) {
               return false;
             }
           }

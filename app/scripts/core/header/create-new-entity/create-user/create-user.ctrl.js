@@ -15,15 +15,19 @@
         if (savedState.type === 'user' && savedState.item) {
           $scope.editUser = angular.copy(savedState.item);
           $timeout(function () {
-            if ($scope.editUser.company) {
-              $scope.editUser.companyId = $scope.editUser.company.id;
+            if ($scope.editUser.company && !$scope.editUser.company.isDefault) {
+              var companyId = $scope.editUser.company.id;
+              $scope.userCompany = CompaniesService.getOneById(companyId);
             }
           });
         }
 
         if ($scope.resolvedCompanyId) {
           $timeout(function () {
-            $scope.editUser.companyId = $scope.resolvedCompanyId;
+            var company = CompaniesService.getOneById($scope.resolvedCompanyId);
+            if (company && company.isDefault) {
+              $scope.userCompany = CompaniesService.getOneById($scope.resolvedCompanyId);
+            }
           });
         }
 
@@ -68,8 +72,8 @@
 
         CompaniesService.getClientCompaniesInfo($scope, function (resp) {
           $scope.clientCompaniesInfo = resp;
-          if ($scope.editUser.companyId) {
-            var address = resp[$scope.editUser.companyId].addresses[0];
+          if ($scope.userCompany && $scope.userCompany.id) {
+            var address = resp[$scope.userCompany.id].addresses[0];
             if (address) {
               $scope.userCompanyCountryCode = address.countryCode;
             }
@@ -82,27 +86,19 @@
           }
         });
 
-        $scope.$watch('editUser.companyId', function (companyId) {
-          $scope.userCompany = CompaniesService.getOneById(companyId);
+        $scope.$watch('userCompany.id', function (companyId) {
           if ($scope.userCompany && $scope.userCompany.isDefault) {
             $scope.userCompany = '';
           }
 
-          if ($scope.editUser.companyId && $scope.clientCompaniesInfo &&
-            $scope.clientCompaniesInfo[$scope.editUser.companyId] &&
-            $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses &&
-            $scope.clientCompaniesInfo[$scope.editUser.companyId].addresses.length
+          if (companyId && $scope.clientCompaniesInfo &&
+            $scope.clientCompaniesInfo[companyId] &&
+            $scope.clientCompaniesInfo[companyId].addresses &&
+            $scope.clientCompaniesInfo[companyId].addresses.length
           ) {
-            $scope.userCompanyCountryCode = addresses[0].countryCode;
+            $scope.userCompanyCountryCode = $scope.clientCompaniesInfo[companyId].addresses[0].countryCode;
           }
         });
-
-        $scope.getUserCompanyName = function () {
-          if ($scope.editUser.companyId) {
-            var company = CompaniesService.getOneById($scope.editUser.companyId);
-            return company.isDefault ? '' : company.name;
-          }
-        };
 
         $scope.save = function (form) {
           if (form.$valid) {
@@ -127,7 +123,7 @@
               phoneNumbers.splice(phoneNumbers.length - 1, 1);
 
               if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
-                phoneNumbers[0].number = '';
+                phoneNumbers.pop();
               }
             } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
               phoneNumbers.shift();
@@ -213,7 +209,9 @@
 
         $scope.$on('createNewEntity', function (event, type) {
           $scope.savedState.types.unshift('user');
-          $scope.editUser.company = { id: $scope.editUser.companyId };
+          if ($scope.userCompany && $scope.userCompany.id) {
+            $scope.editUser.company = { id: $scope.userCompany.id };
+          }
           $scope.savedState.items.unshift($scope.editUser);
           $scope.setOpenedTab(type);
         });

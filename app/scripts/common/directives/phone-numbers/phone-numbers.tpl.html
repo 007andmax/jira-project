@@ -2,45 +2,20 @@
   <div class="row clearfix" ng-repeat="phoneNumber in phoneNumbers">
 
     <div ng-if="$index !== phoneNumbers.length - 1">
-      <div class="form-group custom-phone-number col-xs-6"
-           ng-class="{'has-error': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+      <div class="form-group custom-phone-number col-xs-6" ng-class="{'has-error': phoneNumber.error}">
 
-        <label class="control-label"
-               ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$valid}">
+        <label class="control-label" ng-if="!phoneNumber.error">
           {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
         </label>
 
-        <div  ng-class="{'hide': phoneNumbersForm['phoneNumber' + $index].$valid}">
-
-          <label style="font-size: 12px;" class="control-label"
-                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['required']}">
-            Phone Number IS REQUIRED.
-          </label>
-
-          <label class="control-label" style="font-size: 12px;"
-                 ng-class="{'hide': !phoneNumbersForm['phoneNumber' + $index].$error['maxlength']}">
-            Phone Number IS TOO LARGE.
-          </label>
-
-          <label class="control-label" style="font-size: 12px;" ng-show="!phoneNumbersForm['phoneNumber' + $index].$error['required'] &&
-                                                phoneNumber.number.length < 5 && !isPrefixValid(phoneNumber.number)">
-            Phone Number IS TOO SHORT.
-          </label>
-
-          <label class="control-label" style="font-size: 12px;"
-                 ng-class="{'hide': phoneNumber.number.length >= 5 ||
-                                    phoneNumbersForm['phoneNumber' + $index].$error['maxlength'] ||
-                                    !phoneNumbersForm['phoneNumber' + $index].$error['pattern'] ||
-                                    isPrefixValid(phoneNumber.number)}">
-            INVALID Phone Number.
-          </label>
-
+        <div ng-if="phoneNumber.error">
+          <label class="control-label">{{ phoneNumber.error }}</label>
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
-               aria-expanded="true" hard-reset-required="true" ng-maxlength="20"
-               ng-pattern="phoneNumberPattern" hard-phone-number-pattern country="{{countryCode}}"
-               make-dirty-on-blur execute-when-outfocused="onLostFocus()">
+               ng-pattern="phoneNumberPattern" hard-phone-number-pattern country="{{ countryCode }}"
+               execute-when-outfocused="onLostFocus()"
+               ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
       </div>
 
       <div class="form-group custom-phone-type col-xs-6 no-label">
@@ -69,23 +44,22 @@
     </div>
 
     <div ng-if="$index === phoneNumbers.length - 1">
-      <div class="form-group custom-phone-number col-xs-6"
-           ng-class="{'has-error': error}">
+      <div class="form-group custom-phone-number col-xs-6" ng-class="{'has-error': phoneNumber.error}">
 
-        <label class="control-label" ng-if="!error">
+        <label class="control-label" ng-if="!phoneNumber.error">
           {{ $first ? 'Primary Phone Number' : 'Phone Number' }}
         </label>
 
-        <div ng-if="error">
+        <div ng-if="phoneNumber.error">
           <label class="control-label">
-            {{ error }}
+            {{ phoneNumber.error }}
           </label>
         </div>
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                ng-pattern="phoneNumberPattern" execute-when-outfocused="onLostFocus()"
-               hard-phone-number-pattern country="{{countryCode}}"
-               ng-change="error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
+               hard-phone-number-pattern country="{{ countryCode }}"
+               ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
       </div>
 
       <div class="form-group col-xs-6 custom-phone-type no-label">

@@ -66,7 +66,7 @@
               if ((number && !prefixValid) || formField.$error.pattern) {
                 invalid = true;
                 error = 'Invalid primary phone number';
-              } else if ($scope.isFirstRequired && (!number || (prefixValid && isPrefixOnly))) {
+              } else if (($scope.isFirstRequired || (index === 0 && $scope.phoneNumbers.length > 1)) && (!number || (prefixValid && isPrefixOnly))) {
                 required = true;
                 error = 'Primary phone number is required';
               } else if (!isPrefixOnly && number && number.length < 5) {

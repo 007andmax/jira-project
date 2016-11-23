@@ -73,7 +73,7 @@
                 phoneNumbers.splice(phoneNumbers.length - 1, 1);
 
                 if (phoneNumbers.length && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
-                  phoneNumbers[0].number = '';
+                  phoneNumbers.pop();
                 }
               } else if (phoneNumbers.length > 1 && firstPhone.split(' ').length === 1 && PhoneFormats.isPrefixValid(firstPhone)) {
                 phoneNumbers.shift();
