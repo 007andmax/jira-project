@@ -613,9 +613,10 @@
         });
 
         function resetSharedUsers(company) {
+          var usersWithInvoiceSubscription = [];
 
           if (company) {
-            var usersWithInvoiceSubscription = UsersService.getAllByCompanyId(company.id).filter(function (user) {
+            usersWithInvoiceSubscription = UsersService.getAllByCompanyId(company.id).filter(function (user) {
               return user.subscription && user.subscription.invoice;
             });
           }

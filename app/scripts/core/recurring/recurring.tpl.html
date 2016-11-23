@@ -130,9 +130,8 @@
 
                     <div>
                       <a>
-                        <i class="icn-sm icn-description"
-                           uib-popover="{{ invoice.memo || 'No memo provided' }}" popover-placement="bottom"
-                           popover-trigger="mouseenter"></i>
+                        <i class="icn-sm icn-description" tooltip-append-to-body="true" tooltip-class="recurring-memo-tooltip"
+                           uib-tooltip="{{ invoice.memo || 'No memo provided' }}" tooltip-placement="left"></i>
                       </a>
 
                       <a ng-if="PermissionsService.isAllowed('CREATE_INVOICE') && !isCurrentCompanyAddressEmpty">

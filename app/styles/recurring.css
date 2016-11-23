@@ -594,3 +594,13 @@ fieldset.primary-edit-form {
   margin-left: 5px;
   margin-top: 10px;
 }
+.recurring-memo-tooltip .tooltip-inner {
+  width: 200px;
+  white-space: normal;
+  height: auto;
+  background: white;
+  color: black;
+  text-transform: none;
+  font-size: 12px;
+  font-weight: 400;
+}
