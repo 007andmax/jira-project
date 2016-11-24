@@ -12,7 +12,7 @@
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats,
                 SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
 
-        var newServiceCounter = 0;
+        var newServiceCounter = 0, newTaxCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
         var savedState = $scope.getLastSavedState('company');
         var action = 'CREATE_COMPANIES';
@@ -462,6 +462,7 @@
           if (originTax === 'new-tax-rate') {
             var newTaxRate = {
               new: true,
+              newId: newTaxCounter++,
               code: '',
               rate: 0
             };

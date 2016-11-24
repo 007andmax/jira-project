@@ -404,7 +404,7 @@
               <div class="col-xs-3">Per Hour</div>
               <div class="col-xs-3 text-center">Is Billable</div>
             </li>
-            <li class="rates__list--point" ng-repeat="service in editCompany.services | orderBy: ['new', 'name']">
+            <li class="rates__list--point" ng-repeat="service in editCompany.services | orderBy: ['newId', 'name']">
               <div class="col-xs-6 ellipsis" ng-if="service.versionedId">{{ service.name }}</div>
               <div ng-if="!service.versionedId" class="col-xs-6"
                    ng-class="{'has-error': (servicesForm['serviceName' + $index].$dirty || triedToSave) && isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
@@ -509,7 +509,7 @@
               <div class="col-xs-3"></div>
             </li>
             <li class="rates__list--point"
-                ng-repeat="tax in editCompany.taxRates | orderBy: ['new', 'code']">
+                ng-repeat="tax in editCompany.taxRates | orderBy: ['newId', 'code']">
 
               <div style="width: 100%;" ng-if="tax.versionedId">
                 <div class="col-xs-6">{{ tax.code }}</div>
