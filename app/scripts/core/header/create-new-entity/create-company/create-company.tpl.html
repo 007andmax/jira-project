@@ -627,7 +627,8 @@
           <input type="number" class="form-control"
                  name="removeOfflineTime" min="0" ng-model="editCompany.removeOfflineTime">
         </div>
-        <div class="form-group justify-flex" ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'agentLinkToEmail')}">
+        <div class="form-group justify-flex" ng-hide="editCompany.id"
+             ng-class="{'has-error': isShowingErrors(agentSettingsForm, 'agentLinkToEmail')}">
           <label class="control checkbox">
             <input type="checkbox" ng-model="editCompany.agentLinkToEmailEnabled">
             Email agent link to:
