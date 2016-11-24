@@ -49,7 +49,7 @@
          ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductDescription')}">
       <input type="text" class="form-control" placeholder="Description"
              ng-model="editProduct.description" ng-required="true"
-             ng-maxlength="500" name="editProductDescription">
+             ng-maxlength="500" name="editProductDescription" tabindex="1">
     </div>
 
     <div class="col-xs-6">
@@ -58,7 +58,7 @@
            ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
         <input type="text" class="form-control" placeholder="Cost" ng-model="editProduct.cost"
                name="cost" ng-change="validateSaleAndCost(editProductForm)"
-               hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2">
+               hard-reset-pattern="decimalNumberPattern" qt-to-fixed="2" tabindex="2">
       </div>
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductCategory')}">
@@ -66,7 +66,7 @@
           <input type="text" class="form-control has-dropdown" placeholder="Category"
                  autocomplete="off" ng-model="editProduct.category" name="editProductCategory" typeahead-editable="true"
                  typeahead-on-select="validateCategory(editProduct.category, editProductForm)"
-                 typeahead-input-formatter="getItemName($model)"
+                 typeahead-input-formatter="getItemName($model)" tabindex="4"
                  uib-typeahead="category as category.name for category in categories | filter: { name: $viewValue, default: false }:stateComparator | orderBy:'name'"
                  qt-typeahead-show-on-focus custom-style="{width: '100%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
@@ -76,7 +76,7 @@
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductILC')}">
         <input type="text" class="form-control" placeholder="ILC" name="editProductILC"
-               ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50"
+               ng-required="false" ng-model="editProduct.ilc" ng-maxlength="50" tabindex="6"
                is-uniq-validation validation-func="validateProductIls" model-id="editProduct.versionedId.id">
       </div>
 
@@ -85,7 +85,7 @@
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'sale')}">
         <input type="text" class="form-control" placeholder="S. Price" ng-model="editProduct.sale"
                name="sale" ng-change="validateSaleAndCost(editProductForm)" qt-to-fixed="2"
-               hard-reset-pattern="decimalNumberPattern" hard-reset-required="true">
+               hard-reset-pattern="decimalNumberPattern" hard-reset-required="true" tabindex="3">
       </div>
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductVendor')}">
@@ -93,7 +93,7 @@
 
           <input type="text" class="form-control has-dropdown" placeholder="Vendor/Supplier"
                  autocomplete="off" ng-model="editProduct.company" name="editProductVendor"
-                 typeahead-input-formatter="getItemName($model)"
+                 typeahead-input-formatter="getItemName($model)" tabindex="5"
                  uib-typeahead="vendor as vendor.name for vendor in vendors | filter:{name: $viewValue}:stateComparator | orderBy:'name'"
                  qt-typeahead-show-on-focus custom-style="{width: '97%', 'max-height': '160px', 'overflow-y': 'auto'}">
 
@@ -104,7 +104,7 @@
 
       <div class="form-group" ng-class="{'has-error': isShowingErrors(editProductForm, 'editProductMfg')}">
         <input type="text" class="form-control" placeholder="Mfg#" name="editProductMfg"
-               ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50"
+               ng-required="false" ng-model="editProduct.manufacture" ng-maxlength="50" tabindex="7"
                is-uniq-validation validation-func="validateProductMnf" model-id="editProduct.versionedId.id">
       </div>
 
