@@ -29,8 +29,8 @@
       <div class="col-3" ng-class="{'has-error': isShowingErrors(addProductForm, 'productSerialNumber')}"
            style="width: 140px; float: left;">
 
-        <input type="text" maxlength="14" class="form-control" name="productSerialNumber"
-               placeholder="Serial Number" ng-model="productExpense.serialNumber" ng-maxlength="36"
+        <input type="text" class="form-control" name="productSerialNumber"
+               placeholder="Serial Number" ng-model="productExpense.serialNumber" ng-maxlength="25"
                uib-tooltip="{{ productExpense.serialNumber }}" tooltip-placement="top" tooltip-append-to-body="true"/>
       </div>
 
