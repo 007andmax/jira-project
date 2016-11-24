@@ -68,13 +68,13 @@
                 error = 'Invalid primary phone number';
               } else if (($scope.isFirstRequired || (index === 0 && $scope.phoneNumbers.length > 1)) && (!number || (prefixValid && isPrefixOnly))) {
                 required = true;
-                error = 'Primary phone number is required';
+                error = 'Phone number is required';
               } else if (!isPrefixOnly && number && number.length < 5) {
                 minlength = true;
-                error = 'Primary phone number is too short';
+                error = 'Phone number is too short';
               } else if (number.length > 20) {
                 maxlength = true;
-                error = 'Primary phone number is too long';
+                error = 'Phone number is too long';
               }
             }
 

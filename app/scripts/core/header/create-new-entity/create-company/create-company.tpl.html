@@ -409,7 +409,7 @@
               <div ng-if="!service.versionedId" class="col-xs-6"
                    ng-class="{'has-error': (servicesForm['serviceName' + $index].$dirty || triedToSave) && isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
 
-                <div ng-messages="servicesForm['serviceName' + $index].$error" style="margin-top: -20px"
+                <div ng-messages="servicesForm['serviceName' + $index].$error" style="text-align: center; margin-top: -20px"
                      ng-class="{'hide': !(servicesForm['serviceName' + $index].$dirty || triedToSave) || !isShowingServiceErrors(servicesForm, 'serviceName' + $index)}">
                   <label class="control-label" ng-message="required">Cannot be left empty.</label>
                   <label class="control-label" ng-message="maxlength">Is too large.</label>
@@ -528,7 +528,7 @@
                      ng-class="{'has-error': (newTaxRateForm['taxCode' + $index].$dirty || triedToSave) && isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
 
                   <div ng-messages="newTaxRateForm['taxCode' + $index].$error"
-                       style="position: absolute;margin-top: -19px;"
+                       style="position: absolute;margin-top: -21px; left: 32%;"
                        ng-class="{'hide': (newTaxRateForm['taxCode' + $index].$pristine && !triedToSave) || !isShowingErrors(newTaxRateForm, 'taxCode' + $index)}">
 
                     <label class="control-label" ng-message="required">
@@ -551,7 +551,7 @@
                 <div class="col-xs-3" ng-class="{'has-error': isShowingErrors(newTaxRateForm, 'taxRate' + $index)}">
 
                   <div ng-messages="newTaxRateForm['taxRate' + $index].$error"
-                       style="position: absolute;margin-top: -19px;"
+                       style="position: absolute;margin-top: -21px;left: 41%;"
                        ng-if="isShowingErrors(newTaxRateForm, 'taxRate' + $index)">
                     <label class="control-label" ng-message="required">
                       Rate is required.
