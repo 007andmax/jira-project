@@ -301,7 +301,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          map: true,
+          map: true
         },
         files: [{
           expand: true,
@@ -317,6 +317,18 @@ module.exports = function (grunt) {
           src: '{,*/}*.css',
           dest: '.tmp/styles/'
         }]
+      }
+    },
+
+    //{sass,scss} -> css
+    sass: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          '<%= yeoman.app %>/styles/test.css': '<%= yeoman.app %>/styles/test.scss'
+        }
       }
     },
 
@@ -671,7 +683,6 @@ module.exports = function (grunt) {
     }
   });
 
-
   grunt.registerTask('serveLocal', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -716,6 +727,7 @@ module.exports = function (grunt) {
       'includeSource',
       'wiredep',
       'configureProxies:localDevServer',
+      'sass:dist',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
@@ -754,6 +766,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'sass:dist',
     'includeSource',
     'wiredep',
     'useminPrepare',
