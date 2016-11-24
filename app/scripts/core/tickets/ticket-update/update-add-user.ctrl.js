@@ -59,11 +59,7 @@
             } else if ($scope.ticket) {
               var assignedUserId;
 
-              if (!$scope.ticket.ticketAssignTo) {
-                if ($scope.ticket.isAssignToMe) {
-                  assignedUserId = $scope.currentUser.id;
-                }
-              } else {
+              if ($scope.ticket.ticketAssignTo && $scope.ticket.ticketAssignTo.id) {
                 assignedUserId = $scope.ticket.ticketAssignTo.id;
               }
 

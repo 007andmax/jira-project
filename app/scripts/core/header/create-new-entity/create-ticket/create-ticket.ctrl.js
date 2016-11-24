@@ -135,12 +135,7 @@
         if ($scope.sessionId) {
 
           $timeout(function () {
-            var techUsers = UsersService.getTechUsers();
-            if (techUsers.length > 1) {
-              $scope.ticket.ticketAssignTo = $scope.currentUser;
-            } else {
-              $scope.ticket.isAssignToMe = true;
-            }
+            $scope.ticket.ticketAssignTo = $scope.currentUser;
           });
 
           $scope.ticket.remoteSessionId = $scope.sessionId;
@@ -452,13 +447,7 @@
               }
             }
 
-            if (!$scope.ticket.ticketAssignTo) {
-              if ($scope.ticket.isAssignToMe) {
-                $scope.ticket.assignedUser = $scope.currentUser.id;
-              } else {
-                $scope.ticket.assignedUser = undefined;
-              }
-            } else {
+            if ($scope.ticket.ticketAssignTo && $scope.ticket.ticketAssignTo.id) {
               $scope.ticket.assignedUser = $scope.ticket.ticketAssignTo.id;
             }
 
