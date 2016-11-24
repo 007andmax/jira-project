@@ -5,7 +5,6 @@
   angular.module('quicktech.core.settings').controller('quicktech.core.settings.myProfileCtrl',
     ['$scope', '$state', '$stateParams', 'UsersService',
       function ($scope, $state, $stateParams, UsersService) {
-        $scope.aboutMe = $scope.currentUser.status;
         $scope.isAddressFocused = false;
         $scope.password = {};
 
@@ -19,6 +18,10 @@
           }
           $scope.loadUserProfile = true;
         });
+
+        $scope.$watch('currentUser.status', function (value) {
+          $scope.aboutMe = value;
+        }, true);
 
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && (($scope.editUser && $scope.editUser.id) || form[fieldName].$dirty) && !form[fieldName].$valid;

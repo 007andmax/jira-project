@@ -48,10 +48,6 @@
           return result;
         };
 
-        UsersService._addInitListener(function () {
-          $scope.currentUser = UsersService.getCurrentUser();
-        });
-
         $scope.getPageNameByState = function () {
           if ($state.includes("tickets")) {
             return 'tickets';

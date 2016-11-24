@@ -26,7 +26,7 @@
         $scope.companies = CompaniesService.getAllCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
-        $scope.user = UsersService.getCurrentUser();
+        $scope.user = $scope.currentUser;
 
         $scope.companiesCtrl = {};
 

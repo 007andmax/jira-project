@@ -70,11 +70,13 @@
           }
           if (newChange.action == 'USER_SAVED') {
 
-            if (getCurrentUser().id === newChange.data.id) {
-              window.startPage = newChange.data.startPage;
+            var currentUser = getCurrentUser();
+            if (currentUser.id === newChange.data.id) {
+              Utils.customizeObj(newChange.data, currentUser);
+              return;
             }
 
-            if (newChange.data.company.id !== getCurrentUser().company.id) {
+            if (newChange.data.company.id !== currentUser.company.id) {
               addOrUpdateClientUser(newChange.data);
             } else {
               var techUser = Utils.findById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
@@ -211,7 +213,7 @@
         if (!$rootScope.currentUser) {
           return {};
         }
-        return getOneById($rootScope.currentUser.id);
+        return $rootScope.currentUser;
       }
 
       function getAllByCompanyId(companyId) {
@@ -577,7 +579,6 @@
 
       return {
         _addInitListener: addInitListener,
-        getCurrentUser: getCurrentUser,
         getAllUsers: getAllUsers,
         getClientUsers: getClientUsers,
         getTechUsers: getTechUsers,

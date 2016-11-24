@@ -6,8 +6,7 @@
     ['$scope', '$state', '$stateParams', '$location', 'UsersService',
       function ($scope, $state, $stateParams, $location, UsersService) {
 
-        $scope.currentUser = UsersService.getCurrentUser();
-        $scope.editUser = $scope.currentUser.staticCopy();
+        $scope.editUser = angular.copy($scope.currentUser);
         $scope.linkPattern = /^((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
         $scope.accountType = {
           SUPER_TECH_ADMIN: "Super Admin",
