@@ -52,7 +52,7 @@
       };
 
       $scope.isShowingCreateCategoryError = function (form, fieldName) {
-        return form[fieldName] && ($scope.triedToSaveCategory || form[fieldName].$dirty) && !form[fieldName].$valid;
+        return form[fieldName] && ($scope.triedToSaveCategory || (form[fieldName].$dirty && !form[fieldName].$error['required'])) && !form[fieldName].$valid;
       };
 
       $scope.isUniqueCategoryName = function (ngModelCtrl, modelId) {

@@ -36,7 +36,7 @@
 
     <div ng-messages="newCategoryNameForm.newCategoryName.$error"
          ng-if="isShowingCreateCategoryError(newCategoryNameForm, 'newCategoryName')">
-      <div class="error-msg" ng-message="required">Name is required.</div>
+      <div class="error-msg" ng-message="required" ng-if="triedToSaveCategory">Name is required.</div>
       <div class="error-msg" ng-message="maxlength">Name is too large.</div>
       <div class="error-msg" ng-message="unique">Name already occupied.</div>
     </div>
