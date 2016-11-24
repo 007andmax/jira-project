@@ -12,17 +12,188 @@
   width: 450px;
   height: 300px;
   background-size: 100% 100%;
+  color: #f7f7f7;
+  font-family: "Roboto", sans-serif;
 }
+.company-new-cover-wrapper .company-logo{
+  position: absolute;
+  right: 10px;
+  top: 9px;
+  width: 145px;
+  height: 75px;
+}
+
+.company-new-cover-wrapper .company-logo img{
+  width: 100%;
+  height: 100%;
+}
+
+.company-new-cover-wrapper .company-name-header p{
+  font-size: 24px;
+  line-height: 1;
+  padding: 9px 0px;
+}
+
+.company-new-cover-wrapper .company-info-type{
+  padding: 3px 0 5px;
+}
+
+.company-service-type{
+  padding: 4px 0 7px;
+}
+
+.company-service-type:nth-child(odd){
+  padding-bottom: 13px;
+  width: 408px;
+  border-bottom: 1px solid #eee;
+}
+
+.company-new-cover-wrapper .company-service-type strong,
+.company-new-cover-wrapper .company-contact-type strong{
+  font-weight: 500;
+  margin-right: 3px;
+}
+.company-service-type p{
+  font-size: 14px;
+  line-height: 11px;
+  font-weight: 100;
+}
+
+.company-new-cover-wrapper .company-info-type img{
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  top: -1px;
+}
+
+.company-contact-type p{
+  font-weight: 100;
+}
+
+.company-contact-type:nth-child(8){
+  padding-top: 11px;
+}
+
+.company-new-cover-wrapper .company-info-type p{
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.btns-block{
+  padding: 8px 0;
+}
+
+.btns-block .icn{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  float: left;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.btns-block .icn-create-ticket{
+  background: url("../images/input-icons/tickets-createnew.png") no-repeat;
+  margin-left: -2px;
+  background-size: cover;
+}
+.btns-block .icn-agent-download{
+  background: url("../images/input-icons/download-agent.png") no-repeat;
+  background-size: cover;
+}
+.btns-block .icn-camera{
+  background: url("../images/input-icons/photo-camera.png") no-repeat;
+  width: 22px;
+  height: 22px;
+  margin-right: 12px;
+  transform: translateY(-1px);
+  background-size: cover;
+
+}
+.btns-block .icn-address{
+  background: url("../images/input-icons/placeholder(white).png") no-repeat;
+  width: 18px;
+  height: 18px;
+  margin-right: 9px;
+  transform: translateY(1px);
+  background-size: cover;
+
+}
+.btns-block .icn-edit-new{
+  background: url("../images/input-icons/edit.png") no-repeat;
+  width: 16px;
+  height: 16px;
+  background-size: cover;
+  transform: translateY(2px);
+}
+
 
 .company-profile-header .company-new-cover-wrapper .background-layer {
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #535353;
 }
 
 .company-profile-header .company-map-wrapper {
-  width: calc(100% - 450px);
+  width: calc(100% - 725px);
   height: 300px;
-  float: right;
+  float: left;
+}
+
+.company-profile-header .company-work-info{
+  display: inline-block;
+  width: 275px;
+}
+
+
+.company-work-info table{
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  border-collapse: separate;
+}
+
+.company-work-info table tbody:not(:first-child) p:first-child{
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+.company-work-info table tbody:hover td{
+  border: 1px solid;
+  border-color: deepskyblue ;
+}
+
+.company-work-info table tbody:hover td.bd-left-disabled{
+  border-left-color: #eee;
+}
+.company-work-info table tbody:hover td.bd-top-disabled{
+  border-top-color: #eee;
+}
+.company-work-info table tbody:hover td.bd-right-disabled{
+  border-right-color: #eee;
+}
+.company-work-info table tbody:hover td.bd-bottom-disabled{
+  border-bottom-color: #eee;
+}
+
+.company-work-info table td{
+  border: 1px solid #eee ;
+  cursor: pointer;
+}
+
+.company-work-info table td p{
+  font-size: 16px;
+}
+
+.company-work-info table td p.big-count{
+  font-size: 38px;
+  line-height: 38px;
+  font-weight: 100;
+}
+
+.company-work-info table td p.big-count:not(.no-padding){
+  padding: 0 0 20px;
 }
 
 .company-profile-header .company-new-cover-wrapper .btn-archive {
@@ -45,7 +216,7 @@
 }
 .company-profile-header .company-new-cover-wrapper .company-info {
   width: 100%;
-  padding: 20px;
+  padding: 9px 10px 9px 23px;
   height: 100%;
   position: relative;
 }
