@@ -216,6 +216,19 @@
           $scope.setOpenedTab(type);
         });
 
+        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+
+        function createNewWindowClosing() {
+          var user = $scope.editUser;
+          var isUserChanged = user.firstName || user.lastName || $scope.userCompany || user.primaryEmail ||
+            user.designation || $scope.editUser.avatar.cropped;
+
+          if (isUserChanged) {
+            $scope.savedState.types.unshift('user');
+            $scope.savedState.items.unshift($scope.editUser);
+          }
+        }
+
       }]);
 
 }());

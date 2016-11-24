@@ -191,6 +191,19 @@
         $scope.setOpenedTab(type);
       });
 
+      $scope.$on('createNewWindowClosing', createNewWindowClosing);
+
+      function createNewWindowClosing() {
+        var product = $scope.editProduct;
+        var isProductChanged = product.description || product.cost || product.sale || product.ilc ||
+          product.manufacture || (product.category && product.category.id) || (product.company && product.company.id);
+
+        if (isProductChanged || $scope.editCategory.name) {
+          $scope.savedState.types.unshift('product');
+          $scope.savedState.items.unshift($scope.editProduct);
+        }
+      }
+
     }]);
 
 }());

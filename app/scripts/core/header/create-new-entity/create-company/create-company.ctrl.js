@@ -7,10 +7,10 @@
       '$scope', 'UsersService', 'SubscriptionsService', 'CompaniesService',
       'TaxRatesService', 'AddressesService', 'ServicesService', 'quicktech.common.services.PhoneFormats',
       'quicktech.common.services.SharedStateService', '$state', '$timeout', '$rootScope',
-      'quicktech.common.services.PermissionsService', 'quicktech.common.services.UserConfirmationsService',
+      'quicktech.common.services.PermissionsService',
       function ($scope, UsersService, SubscriptionsService, CompaniesService,
-                TaxRatesService, AddressesService, ServicesService, PhoneFormats, SharedStateService,
-                $state, $timeout, $rootScope, PermissionsService, UserConfirmationsService) {
+                TaxRatesService, AddressesService, ServicesService, PhoneFormats,
+                SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
 
         var newServiceCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
@@ -505,6 +505,25 @@
           $scope.currentStep = step;
         };
 
+        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+
+        function createNewWindowClosing() {
+          var company = $scope.editCompany;
+          var hasClientType = company.clientType && company.clientType.trim();
+          var hasAddress = company.addresses && company.addresses.length && company.addresses[0].address;
+          var hasContact = company.contacts && company.contacts.length && (
+              company.contacts[0].firstName || company.contacts[0].lastName || company.contacts[0].primaryEmail ||
+              company.contacts[0].designation || company.contacts[0].avatar.cropped
+            );
+          var isCompanyChanged = company.name || company.domain || hasClientType || company.logo ||
+            company.accountNumber || company.description || hasAddress || hasContact || company.login || company.password;
+
+          if (isCompanyChanged) {
+            $scope.savedState.types.unshift('company');
+            $scope.savedState.items.unshift($scope.editCompany);
+          }
+        }
+
         function getFormByStep(step, parentForm) {
           return parentForm[step + 'Form'];
         }
@@ -541,8 +560,6 @@
         function toEnum(text) {
           return text.trim().split(' ').join('_').toUpperCase();
         }
-
-        UserConfirmationsService.preventLocationChange($scope);
       }
     ]);
 

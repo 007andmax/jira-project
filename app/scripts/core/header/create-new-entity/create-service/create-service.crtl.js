@@ -83,6 +83,18 @@
           }
         };
 
+        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+
+        function createNewWindowClosing() {
+          var service = $scope.editService;
+          var isServiceChanged = service.name || service.rate;
+
+          if (isServiceChanged) {
+            $scope.savedState.types.unshift('service');
+            $scope.savedState.items.unshift($scope.editService);
+          }
+        }
+
       }]);
 
 }());

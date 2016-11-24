@@ -3,10 +3,11 @@
 (function () {
 
   angular.module("quicktech").controller("createNewEntityCtrl",
-    ['$scope', 'resolvedExistedItem', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId', 'resolvedOpenedTab',
-      '$uibModalInstance', 'quicktech.common.services.PermissionsService',
-      function ($scope, resolvedExistedItem, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId, resolvedOpenedTab,
-                $uibModalInstance, PermissionsService) {
+    ['$scope', 'resolvedExistedItem', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId',
+      'resolvedOpenedTab', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
+      'quicktech.common.services.UserConfirmationsService',
+      function ($scope, resolvedExistedItem, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId,
+                resolvedOpenedTab, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService) {
 
         $scope.openedTab = resolvedOpenedTab || 'ticket';
 
@@ -26,11 +27,34 @@
         $scope.sessionTime = sessionTime;
         $scope.resolvedDeviceId = resolvedDeviceId;
         $scope.resolvedCompanyId = resolvedCompanyId;
-
         $scope.closeWindow = $uibModalInstance.dismiss;
+
+        $scope.closeWindowWithConfirm = function () {
+          $scope.$broadcast('createNewWindowClosing');
+          var message = 'Do you want to close this window? All entered information will be lost.';
+          confirmation(message, $uibModalInstance.dismiss, function () {
+            var type = $scope.savedState.types.shift();
+            var item = $scope.savedState.items.shift();
+            return type && item;
+          });
+        };
 
         $scope.setOpenedTab = function (tabName) {
           $scope.openedTab = tabName;
+        };
+
+        $scope.setOpenedTabWithConfirm = function (tabName) {
+          $scope.$broadcast('createNewWindowClosing');
+          var message = 'Do you want to leave this tab? All entered information will be lost.';
+          confirmation(message, $scope.setOpenedTab.bind($scope, tabName), function () {
+            var type = $scope.savedState.types[0];
+            if (type === $scope.openedTab) {
+              $scope.savedState.types.shift();
+              $scope.savedState.items.shift();
+              return true;                                                 //there is entered information in current tab
+            }
+            return type && type !== tabName;                                      //isn't going to the earlier saved tab
+          });
         };
 
         $scope.getLastSavedState = function (type) {
@@ -71,5 +95,16 @@
               unsubscribe();
             });
         });
+
+        function confirmation(message, onSuccess, predicate) {
+          $timeout(function () {
+            if (predicate()) {
+              UserConfirmationsService.show(message, 'Yes').then(onSuccess);
+            } else {
+              onSuccess();
+            }
+          }, 100);
+        }
+
       }]);
 })();

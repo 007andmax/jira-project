@@ -663,6 +663,16 @@
         };
 
         $scope.$on('createNewEntity', archiveTicketState);
+        $scope.$on('createNewWindowClosing', createNewWindowClosing);
+
+        function createNewWindowClosing() {
+          var ticket = $scope.ticket;
+          var isTicketChanged = ticket.subject || ticket.note || $scope.ticketAttachments.length;
+          if (isTicketChanged) {
+            $scope.savedState.types.unshift('ticket');
+            $scope.savedState.items.unshift($scope.ticket);
+          }
+        }
 
         function archiveTicketState(event, type, userFromDraft) {
           $scope.ticket.attachments = $scope.ticketAttachments.map(function (file) {
