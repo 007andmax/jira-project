@@ -35,14 +35,14 @@
 }
 
 .company-new-cover-wrapper .company-info-type{
-  padding: 3px 0 5px;
+  padding: 3px 0 9px;
 }
 
 .company-service-type{
-  padding: 4px 0 7px;
+  padding: 2px 0 8px;
 }
 
-.company-service-type:nth-child(odd){
+.last-of-type{
   padding-bottom: 13px;
   width: 408px;
   border-bottom: 1px solid #eee;
@@ -73,7 +73,7 @@
 }
 
 .company-contact-type:nth-child(8){
-  padding-top: 11px;
+  padding-top: 9px;
 }
 
 .company-new-cover-wrapper .company-info-type p{
@@ -127,6 +127,14 @@
   height: 16px;
   background-size: cover;
   transform: translateY(2px);
+  margin-right: 18px;
+}
+
+.btns-block .icn-archive-usr{
+  background: url("../images/input-icons/archive-user.png") no-repeat;
+  background-size: cover;
+  width: 19px;
+  height: 19px;
 }
 
 
