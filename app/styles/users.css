@@ -27,65 +27,11 @@
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
 }
 
-@media (max-width: 1440px) {
-  .card-wrapper {
-    width: calc(100% / 3);
-  }
-}
 
-@media (min-width: 1440px) {
-  .card-wrapper {
-    width: calc(100% / 4);
-  }
-}
 
-@media (min-width: 1600px) {
-  .card-wrapper {
-    width: calc(100% / 5);
-  }
-}
 
-@media (max-width: 1025px) {
-  .card-wrapper {
-    width: calc(100% / 2);
-  }
-}
 
-@media (min-width: 1880px) {
-  .card-wrapper {
-    width: calc(100% / 6);
-  }
-}
 
-@media (min-width: 2500px) {
-  .card-wrapper {
-    width: calc(100% / 7);
-  }
-}
-
-@media (min-width: 3000px) {
-  .card-wrapper {
-    width: calc(100% / 9);
-  }
-}
-
-@media (min-width: 3600px) {
-  .card-wrapper {
-    width: calc(100% / 11);
-  }
-}
-
-@media (min-width: 4200px) {
-  .card-wrapper {
-    width: calc(100% / 15);
-  }
-}
-
-@media (min-width: 4900px) {
-  .card-wrapper {
-    width: calc(100% / 20);
-  }
-}
 
 .users-list .user-card .avatar img {
   border-radius: 0px;
