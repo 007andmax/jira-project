@@ -57,8 +57,8 @@
             maxUploadSize: 2 * 1024 * 1024,
             accpetType: '.jpg,.png,.gif,.jpeg,.JPG,.PNG,.GIF,.JPEG',
             allowedExtensions: ['jpg', 'png', 'gif', 'jpeg', 'JPG', 'PNG', 'GIF', 'JPEG'],
-            minImageWidth: 460,
-            minImageHeight: 280,
+            minImageWidth: 283,
+            minImageHeight: 200,
 
             onStart: function () {
               image = {};

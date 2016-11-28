@@ -123,7 +123,10 @@
 
 /*# sourceMappingURL=card-view.css.map */
 
-
+.cards-sub-dropdown{
+  margin: 0 !important;
+  top:0 !important;
+}
 
 
 @media (max-width: 1600px) {
