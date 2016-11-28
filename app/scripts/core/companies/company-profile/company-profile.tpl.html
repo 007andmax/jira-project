@@ -9,8 +9,8 @@
           <div class="company-logo">
             <img ng-src="{{ getCompanyLogoUrl(companyData) }}" alt="">
           </div>
-          <div class="company-name-header">
-            <p>{{ companyData.name }}</p>
+          <div class="company-name-header" style="width: 260px;">
+            <p class="ellipsis">{{ companyData.name }}</p>
           </div>
           <div class="company-info-type clearfix"
                ng-show="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">
@@ -34,7 +34,7 @@
             <p><strong>Primary contact:</strong>{{ getUserName(currentContact) }}</p>
           </div>
           <div class="company-contact-type" ng-show="currentContact.primaryEmail">
-            <p><strong>Contact email:</strong>{{ currentContact.primaryEmail }}</p>
+            <p class="ellipsis"><strong>Contact email:</strong>{{ currentContact.primaryEmail }}</p>
           </div>
           <div class="company-contact-type"
                ng-show="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">
@@ -59,6 +59,7 @@
                  ng-click="archiveCompany()" uib-tooltip="Archive Company"
                  tooltip-placement="top" tooltip-append-to-body="true">
             </div>
+            <div class="icn icn-add-new-user"></div>
           </div>
         </div>
 

@@ -83,6 +83,8 @@
 
 .btns-block{
   padding: 8px 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .btns-block .icn{
@@ -137,6 +139,12 @@
   height: 19px;
 }
 
+.btns-block .icn-add-new-user{
+  background: url("../images/company/user-add.png") no-repeat;
+  background-size: cover;
+  width: 19px;
+  height: 19px;
+}
 
 .company-profile-header .company-new-cover-wrapper .background-layer {
   height: 100%;
