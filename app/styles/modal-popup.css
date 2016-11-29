@@ -331,4 +331,13 @@
   padding: 0 15px;
 }
 
+.buttons-container{
+  padding: 20px 0;
+}
+
+.buttons-container .btn{
+  width: 150px;
+  margin: auto 15px;
+  height: 30px;
+}
 /*# sourceMappingURL=modal-popup.css.map */
