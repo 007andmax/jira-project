@@ -116,13 +116,16 @@
 .board-head {
   font-size: 24px;
   margin: 15px 10px;
-  text-transform: uppercase;
   font-family: "Roboto Regular", sans-serif;
   line-height: 1;
   color: #000134;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.third-part .board-head{
+  text-align: center;
 }
 
 .helper {
@@ -202,7 +205,7 @@ header .calendar-top input {
 }
 
 .dashboard-main .stats {
-  height: 250px;
+  height: 450px;
   margin-bottom: 30px;
   position: relative;
   -webkit-transition: .3s;
@@ -262,6 +265,10 @@ header .calendar-top input {
 .dashboard-main .stats.half-stats .stats__main--count {
   height: 20px;
   font-size: 54px;
+}
+
+.dashboard-main .stats.third-part{
+  height: 130px;
 }
 
 .dashboard-main .stats .front {
@@ -332,9 +339,9 @@ header .calendar-top input {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 160px;
+  height: 40px;
   max-height: 182px;
-  font-size: 72px;
+  font-size: 36px;
 }
 
 .dashboard-main .stats__icon {
@@ -497,11 +504,11 @@ header .calendar-top input {
   transition:  box-shadow .3s, border-color .3s;
 }
 
-@media screen and (max-width: 1920px) {
-  .board-head {
-    font-size: 16px;
-  }
-}
+/*@media screen and (max-width: 1920px) {*/
+  /*.board-head {*/
+    /*font-size: 21px;*/
+  /*}*/
+/*}*/
 
 @media screen and (max-width: 1480px) {
   /*.dashboard-main .stats__main--count {*/
@@ -879,4 +886,8 @@ header .calendar-top input {
   .dashboard-main .col-lg-6.smart-sized.col-xs-12 {
     width: 100%;
   }
+}
+
+.dashboard-main{
+  margin-top: 30px;
 }
