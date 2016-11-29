@@ -154,6 +154,7 @@
   width: calc(100% - 725px);
   height: 300px;
   float: left;
+  position: relative;
 }
 
 .company-profile-header .company-work-info{
@@ -174,21 +175,26 @@
   padding-bottom: 5px;
 }
 
-.company-work-info table tbody:hover td{
+.company-work-info table tbody:hover td,
+.company-work-info table tbody.selected-chart td {
   border: 1px solid;
   border-color: deepskyblue ;
 }
 
-.company-work-info table tbody:hover td.bd-left-disabled{
+.company-work-info table tbody:hover td.bd-left-disabled,
+.company-work-info table tbody.selected-chart td.bd-left-disabled{
   border-left-color: #eee;
 }
-.company-work-info table tbody:hover td.bd-top-disabled{
+.company-work-info table tbody:hover td.bd-top-disabled,
+.company-work-info table tbody.selected-chart td.bd-top-disabled{
   border-top-color: #eee;
 }
-.company-work-info table tbody:hover td.bd-right-disabled{
+.company-work-info table tbody:hover td.bd-right-disabled,
+.company-work-info table tbody.selected-chart td.bd-right-disabled{
   border-right-color: #eee;
 }
-.company-work-info table tbody:hover td.bd-bottom-disabled{
+.company-work-info table tbody:hover td.bd-bottom-disabled,
+.company-work-info table tbody.selected-chart td.bd-bottom-disabled{
   border-bottom-color: #eee;
 }
 

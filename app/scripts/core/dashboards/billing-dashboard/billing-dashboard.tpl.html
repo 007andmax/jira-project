@@ -183,7 +183,7 @@
                   <d3axis name="group" orientation="bottom" scale="ordinal"
                           tick-values="totalOverdueTicks"></d3axis>
                   <d3axis name="y" orientation="left" hide="true"></d3axis>
-                  <d3bars x="group" y="y" width="40" preffix="$"></d3bars>
+                  <d3bars x="group" y="y" width="40" preffix="$" staticLabel="true"></d3bars>
                 </div>
 
                 <div class="total-overdue-sum" ng-if="!loading && !noTotalOverdueData">
@@ -256,7 +256,7 @@
               <div class="donut-chart pie-chart col-12" d3chart data="revenue" style="height: 100%"
                    margin="{left: 25, right: 40, bottom: 40, top: 40}" is-center>
                 <d3pie label="percents" value="percents" colors="['#ffb55c','#00bf8e']"
-                       label-affix="%" label-radius="1.25" inner-radius="0.7"></d3pie>
+                       label-postfix="%" label-radius="1.25" inner-radius="0.7"></d3pie>
               </div>
               <div class="pie-legend">
                 <div ng-repeat="(legend, value) in revenueLegend" class="pie-legend-wrap">
@@ -283,7 +283,7 @@
                    margin="{left: 20, right: 10, bottom: 40, top: 70}" is-center>
                 <d3pie label="percents" value="percents" avoid-collisions="true"
                        colors="['#00bf8e','#ffb55c','#ff7877','#27c1e3','#a677b1']"
-                       label-affix="%" label-radius="1.3"></d3pie>
+                       label-postfix="%" label-radius="1.3"></d3pie>
               </div>
             </div>
             <div class="pie-legend" ng-if="!loading && !noRevenue">

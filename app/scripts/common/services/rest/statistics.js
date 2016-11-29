@@ -33,9 +33,15 @@
         return date ? date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() : null;
       }
 
+      function getStatisticByCompany(params, callback) {
+        var future = $http.get('/dashboard/company?companyId=' + params[0] + '&frequency=' + params[1]);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         getTicketsDashboard: getTicketsDashboard,
-        getBillingDashboard: getBillingDashboard
+        getBillingDashboard: getBillingDashboard,
+        getStatisticByCompany: getStatisticByCompany
       }
     }
 

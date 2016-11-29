@@ -239,6 +239,7 @@
           if (!((data != null) && data.length !== 0)) {
             return;
           }
+          options = angular.extend(defaults(), $attrs);
           axis = getAxis();
           if (options.hide == null) {
             axisElement || (axisElement = chartController.getChart().append("g")

@@ -43,14 +43,34 @@
           <div class="btns-block clearfix">
             <div class="icn icn-create-ticket" create-new-entity="ticket" company-id="{{ company.id }}"
                  uib-tooltip="Create Ticket" tooltip-placement="top"></div>
+            <div class="icn icn-add-new-user" create-new-entity="user" company-id="{{ company.id }}"
+                 uib-tooltip="Create User" tooltip-placement="top"
+                 ng-if="PermissionsService.isAllowed('CREATE_USERS')"></div>
             <div
               qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
               qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}" class="icn">
               <div class="icn icn-agent-download" qt-popover-trigger tooltip-placement="top"
                    uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></div>
             </div>
-            <div class="icn icn-camera"></div>
-            <div class="icn icn-address"></div>
+
+            <div class="icn icn-camera" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
+                 uib-tooltip="Change Logo" tooltip-placement="top">
+              <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
+                  change-image="companyData" model-image-path="logo">
+                <li change-image-button stop-propagation="click">
+                  <a tabindex="-1" href="javascript:void(0)">Change Image</a>
+                </li>
+                <li restore-default-button stop-propagation="click" ng-show="companyData.logo">
+                  <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
+                </li>
+                <li reposition-button stop-propagation="click" ng-show="companyData.logo">
+                  <a tabindex="-1" href="javascript:void(0)">Reposition</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="icn icn-address" ng-click="chartHidden = !chartHidden"
+                 uib-tooltip="Show {{ chartHidden ? 'Chart' : 'Map' }}" tooltip-placement="top"></div>
             <div class="icn icn-edit-new" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
                  create-new-entity="company" item="company" uib-tooltip="Edit"
                  tooltip-placement="top" tooltip-append-to-body="true">
@@ -59,19 +79,45 @@
                  ng-click="archiveCompany()" uib-tooltip="Archive Company"
                  tooltip-placement="top" tooltip-append-to-body="true">
             </div>
-            <div class="icn icn-add-new-user"></div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation"
+    <div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation && chartHidden"
          ng-model="companyData.addresses[0]"></div>
+
+    <div chart-data-restriction fetch-func="getStatisticByCompany"
+         margin="100" divider="60" chart-wrap  param0="companyId" param1="frequency"
+         class="company-map-wrapper" ng-if="!chartHidden">
+
+      <div style="position: absolute">
+        <p>{{ getChartTitle() }}</p>
+        <p>Outliers {{ companyData.companyTicketStatistic.numberOfTicketOutliers || 0 }} Ticket(s)</p>
+      </div>
+
+      <div style="position: absolute;right: 40px;">
+        <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+        <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+        <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+      </div>
+
+      <div d3chart data="chartData" margin="{ top: 60, right: 40, bottom: 40, left: 40}"
+           style="height: 100%" ng-if="!reloading">
+        <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
+                ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
+        <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
+        <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"
+                tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}"></d3bars>
+      </div>
+
+    </div>
 
     <div class="company-work-info">
       <table>
-        <tbody>
+        <tbody ng-click="selectChart('countOfNewTickets')"
+               ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">
         <tr>
           <td rowspan="2" colspan="1" class="bd-right-disabled">
             <p>Open Tickets</p>
@@ -89,19 +135,23 @@
           </td>
         </tr>
         </tbody>
-        <tbody>
+        <tbody ng-click="selectChart('responseTime')"
+               ng-class="{'selected-chart': selectedChart === 'responseTime'}">
         <tr>
           <td colspan="2">
-            <p>Responce Time</p>
+            <p>Response Time</p>
             <p class="big-count font-yellow">{{ (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed() || 0 }} min</p>
           </td>
         </tr>
         </tbody>
-        <tbody>
+        <tbody ng-click="selectChart('averageTime')"
+               ng-class="{'selected-chart': selectedChart === 'averageTime'}">
         <tr>
           <td colspan="2">
-            <p>Average Time per month</p>
-            <p class="big-count font-red">{{ companyData.companyTicketStatistic.averageTime || 0 }} hours</p>
+            <p>Average Time</p>
+            <p class="big-count font-red">
+              {{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}
+            </p>
           </td>
         </tr>
         </tbody>
