@@ -46,7 +46,7 @@
               chartController.xAxisShowLabel && chartController.xAxisShowLabel(i);
               return tooltip.html(
                 '<div class="tooltip-inner ' + options.chartTooltip + '-tooltip">' +
-                  (options.tooltipPreffix || '') + d[options.y] + ' ' + (options.tooltipAffix || '') + '<br>' +
+                  (options.tooltipPreffix || '') + d[options.y] + ' ' + (options.tooltipPostfix || '') + '<br>' +
                   (d[options.additionalTooltipField] !== undefined ? d[options.additionalTooltipField] : '') +
                 '</div>')
                 .attr('class', 'tooltip')
@@ -72,7 +72,7 @@
               chartController.xAxisShowLabel && chartController.xAxisShowLabel(i);
               return tooltip.html(
                 '<div class="tooltip-inner ' + options.chartTooltip + '-tooltip">' +
-                (options.tooltipPreffix || '') + d[options.y] + ' ' + (options.tooltipAffix || '') + '<br>' +
+                (options.tooltipPreffix || '') + d[options.y] + ' ' + (options.tooltipPostfix || '') + '<br>' +
                 (d[options.additionalTooltipField] !== undefined ? d[options.additionalTooltipField] : '') +
                 '</div>')
                 .attr('class', 'tooltip')

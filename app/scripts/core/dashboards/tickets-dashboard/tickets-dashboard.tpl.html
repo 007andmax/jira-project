@@ -137,7 +137,7 @@
                         ticks="{{ averageServiceTimeTicks.length }}" only-first-and-last="true"
                         tick-values="averageServiceTimeTicks"></d3axis>
                 <d3axis name="total" orientation="left"></d3axis>
-                <d3line x="date" y="total" tooltip-affix=" min" chart-tooltip="average-service-time"></d3line>
+                <d3line x="date" y="total" tooltip-postfix=" min" chart-tooltip="average-service-time"></d3line>
               </div>
               <div ng-if="!loading && (!averageServiceTimeData || !averageServiceTimeData.length)" class="no-data-message">
                 There is no data.
@@ -384,7 +384,7 @@
                       ticks="{{ averageTicketsResponseTimeTicks.length }}" max-labels-count="10"
                       tick-values="averageTicketsResponseTimeTicks"></d3axis>
               <d3axis name="total" orientation="left"></d3axis>
-              <d3line x="date" y="total" tooltip-affix="min" chart-tooltip="chart-tooltip ticket-resp-time"
+              <d3line x="date" y="total" tooltip-postfix="min" chart-tooltip="chart-tooltip ticket-resp-time"
                       additional-tooltip-field="outliers" tooltip-top-offset="50"></d3line>
             </div>
             <div ng-if="!loading && (!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length)"
