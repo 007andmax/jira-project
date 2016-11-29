@@ -248,9 +248,9 @@
 
   app.run(
     ['$rootScope', '$templateRequest', 'CompaniesService', '$state', '$uibModal', 'TicketsService', '$stateParams',
-      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.SharedStateService', '$http',
       function ($rootScope, $templateRequest, CompaniesService, $state, $uibModal, TicketsService, $stateParams,
-                UserConfirmationsService, SharedStateService) {
+                UserConfirmationsService, SharedStateService, $http) {
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
 
@@ -510,6 +510,73 @@
             window.location.hash = '';
           });
 
+        };
+
+        $rootScope.showLockModal = function (isNeedReload) {
+          $rootScope.isUnlockShowed = true;
+          var modalParams = {
+            animation: true,
+            backdrop: 'static',
+            keyboard: false,
+            size: 'custom-size-confirmation-pop-up',
+            windowClass: 'lock-screen-modal',
+            templateUrl: '/commonHtml/assets/templates/unlock-modal.tpl.html'
+          };
+
+          modalParams.controller = (['$scope', '$uibModalInstance',
+            function ($scope, $uibModalInstance) {
+              $scope.unlockModel = {};
+
+              $scope.unlock = function (code, model) {
+                if (model.$valid) {
+                  $scope.unlockModel.unlocking = true;
+                  $http.post('/unlockScreen', { code: hex_md5(code) }).then(function (resp) {
+                    $uibModalInstance.close();
+                    $scope.unlockModel.unlocking = false;
+                  }, function (resp) {
+                    if (resp.status === 409) {
+                      model.$setValidity('wrongCode', false);
+                    }
+                    $scope.unlockModel.unlocking = false;
+                  });
+                } else {
+                  $scope.triedToUnlock = true;
+                }
+              };
+
+              $scope.sendCode = function () {
+                $scope.codeSending = true;
+                $http.get('/sendUnlockScreenCode').then(function () {
+                  $scope.codeSending = false;
+                  $scope.unlockModel.codeSent = true;
+                });
+              };
+
+              $scope.onCodeChange = function (model) {
+                model.$setValidity('wrongCode', true);
+              };
+
+              $scope.isShowingErrors = function (form, fieldName) {
+                return form[fieldName] && ($scope.triedToUnlock || form[fieldName].$dirty) && form[fieldName].$invalid;
+              };
+
+            }]);
+
+          var modalInstance = $uibModal.open(modalParams);
+          modalInstance.opened.then(function () {
+            $('body').addClass('non-body-scroll');
+          });
+
+          modalInstance.result.finally(function () {
+            $('body').removeClass('non-body-scroll');
+          });
+
+          modalInstance.result.then(function () {
+            if (isNeedReload) {
+              window.location.reload();
+            }
+            $rootScope.isUnlockShowed = false;
+          });
         };
 
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
