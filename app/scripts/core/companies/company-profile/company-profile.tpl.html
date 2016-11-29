@@ -27,10 +27,10 @@
           <div class="company-service-type" ng-show="companyData.clientType">
             <p><strong>Client Type:</strong>{{ userReadable(companyData.clientType) }}</p>
           </div>
-          <div class="company-service-type last-of-type" ng-show="companyData.clientType.toLowerCase() === 'vendor'">
+          <div class="company-service-type" ng-show="companyData.clientType.toLowerCase() === 'vendor'">
             <p><strong>Account Number:</strong>{{ companyData.accountNumber }}</p>
           </div>
-          <div class="company-contact-type">
+          <div class="company-contact-type first-of-type">
             <p><strong>Primary contact:</strong>{{ getUserName(currentContact) }}</p>
           </div>
           <div class="company-contact-type" ng-show="currentContact.primaryEmail">

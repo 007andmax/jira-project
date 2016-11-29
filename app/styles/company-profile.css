@@ -42,10 +42,9 @@
   padding: 2px 0 8px;
 }
 
-.last-of-type{
-  padding-bottom: 13px;
+.first-of-type{
   width: 408px;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
 }
 
 .company-new-cover-wrapper .company-service-type strong,
