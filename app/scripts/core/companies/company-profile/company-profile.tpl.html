@@ -9,7 +9,7 @@
           <div class="company-logo">
             <img ng-src="{{ getCompanyLogoUrl(companyData) }}" alt="">
           </div>
-          <div class="company-name-header" style="width: 260px;">
+          <div class="company-name-header" style="width: 240px;">
             <p class="ellipsis">{{ companyData.name }}</p>
           </div>
           <div class="company-info-type clearfix"
@@ -17,7 +17,7 @@
             <img src="images/input-icons/phone-number.png" alt="">
             <p style="line-height: 1.7;">{{ currentLocation.phoneNumbers[0].number }}</p>
           </div>
-          <div class="company-info-type clearfix" style="width: 260px; padding-bottom: 5px;">
+          <div class="company-info-type clearfix" style="padding-bottom: 5px;">
             <img src="images/input-icons/placeholder(white).png" style="top: -3px;" alt="">
             <p style="line-height: 1.2;">{{ currentLocation.address }}</p>
           </div>
@@ -89,22 +89,29 @@
          ng-model="companyData.addresses[0]"></div>
 
     <div chart-data-restriction fetch-func="getStatisticByCompany"
-         margin="100" divider="60" chart-wrap  param0="companyId" param1="frequency"
+         margin="100" divider="60" chart-wrap param0="companyId" param1="frequency"
          class="company-map-wrapper" ng-if="!chartHidden">
 
-      <div style="position: absolute">
-        <p>{{ getChartTitle() }}</p>
-        <p>Outliers {{ companyData.companyTicketStatistic.numberOfTicketOutliers || 0 }} Ticket(s)</p>
+      <div class="chart-header">
+        <div class="chart-header-name">
+          <p class="header-title">{{ getChartTitle() }}</p>
+          <p ng-if="selectedChart === 'responseTime'">
+            Outliers
+            <span class="font-yellow">
+              {{ companyData.companyTicketStatistic.numberOfTicketOutliers || 0 }} Ticket(s)
+            </span>
+          </p>
+        </div>
+
+        <div class="chart-header-controls">
+          <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+          <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+          <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+        </div>
       </div>
 
-      <div style="position: absolute;right: 40px;">
-        <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
-        <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
-        <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
-      </div>
-
-      <div d3chart data="chartData" margin="{ top: 60, right: 40, bottom: 40, left: 40}"
-           style="height: 100%" ng-if="!reloading">
+      <div d3chart data="chartData" margin="{ top: 20, right: 40, bottom: 40, left: 40}"
+           style="height: 229px" ng-if="!reloading">
         <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
                 ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
         <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
@@ -140,7 +147,8 @@
         <tr>
           <td colspan="2">
             <p>Response Time</p>
-            <p class="big-count font-yellow">{{ (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed() || 0 }} min</p>
+            <p class="big-count font-yellow">{{ (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
+              || 0 }} min</p>
           </td>
         </tr>
         </tbody>
