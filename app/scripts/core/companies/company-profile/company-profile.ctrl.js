@@ -238,9 +238,9 @@
 
         $scope.getChartTitle = function () {
           switch ($scope.selectedChart) {
-            case 'countOfNewTickets': return 'New Tickets';
-            case 'responseTime': return 'Response Time';
-            case 'averageTime': return 'Average Service Time';
+            case 'countOfNewTickets': return 'New tickets';
+            case 'responseTime': return 'Response time';
+            case 'averageTime': return 'Average service time';
           }
         };
 

@@ -1,66 +1,46 @@
 <div class="tickets-dashboard">
   <div class="container-fluid">
-    <!--<header class="clearfix">-->
-      <!--<div class="calendar-top">-->
-        <!--<span class="calendar-top-img"><img src="images/input-icons/date-picker-dashboard.svg" alt="date-picker"></span>-->
-        <!--{{ shownDateRange || 'All Time' }}-->
-        <!--<input date-range-picker="onDateRangeChange" position="bottom right" on-hide="getStatistic" range max-date="{{ maxDate }}">-->
-        <!--<i class="icn-sm icn-expand" ng-if="!dateRange || !dateRange.length"></i>-->
-        <!--<div class="close-cld"  ng-if="dateRange && dateRange.length"-->
-             <!--ng-mousedown="clearDateRangeAndReload($event)"><i class="icn-sm icn-remove-token-light"></i></div>-->
-      <!--</div>-->
-    <!--</header>-->
     <section class="dashboard-main">
       <div class="row">
         <div class="col-lg-9 col-xs-9">
-          <div class="stats" ng-class="{'flipped': allDashboards.length > 1}">
-            <div class="front">
-              <div class="stats__main">
-                <p class="board-head">
-                  Total tickets
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalTickets }}">?</span>-->
-                </p>
-                <!--<div class="stats__main&#45;&#45;count font-yellow">-->
-                  <!--<p>{{  dashboard.totalTickets || 0 }}</p>-->
-                <!--</div>-->
-              </div>
-              <!--<div class="stats__icon bg-yellow">-->
-                <!--<img src="images/input-icons/ticket-white.png" alt="">-->
-              <!--</div>-->
-            </div>
-            <div class="back">
+          <div class="stats">
+            <div class="stats__main front">
               <p class="board-head">
-                Total tickets
-                <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                      <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalTickets }}">?</span>-->
+                {{ getChartTitle() }}
               </p>
-              <div ng-if="!loading && totalTicketsData && totalTicketsData.length"
-                   d3chart data="totalTicketsData" class="total-tickets-chart"
-                   margin="{ top: 10, right: 35, bottom: 35, left: 45}">
-                <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"
-                        ticks="{{ totalTicketsTicks.length }}" only-first-and-last="true"
-                        tick-values="totalTicketsTicks"></d3axis>
-                <d3axis name="total" orientation="left"></d3axis>
-                <d3line x="date" y="total" chart-tooltip="total-tickets"></d3line>
+
+              <div style="position: absolute;right: 40px;">
+                <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+                <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+                <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
               </div>
-              <div ng-if="!loading && (!totalTicketsData || !totalTicketsData.length)" class="no-data-message">
-                There is no data.
+
+              <div chart-data-restriction fetch-func="getTicketsDashboard" margin="100" divider="60" param0="frequency"
+                   handle-data="handleDashboardData" style="height: 85%">
+
+                <div d3chart data="chartData" margin="{ top: 60, right: 40, bottom: 40, left: 40}"
+                     style="height: 100%" ng-if="!reloading">
+                  <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
+                          ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
+                  <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
+                  <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"></d3bars>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
+
         <div class="col-lg-3 col-xs-3">
-          <div class="stats third-part" ng-class="{'flipped': allDashboards.length > 1}">
-            <div class="front">
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('totalTickets')"
+                 ng-class="{'selected-chart': selectedChart === 'totalTickets'}">
               <div class="stats__main">
                 <p class="board-head">
                   Total tickets
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.totalTickets }}">?</span>-->
                 </p>
                 <div class="stats__main--count font-blue-steel">
-                  <p>{{  dashboard.totalTickets || 0 }}</p>
+                  <p>{{ dashboard.totalTickets || 0 }}</p>
                 </div>
               </div>
               <div class="stats__icon bg-blue-steel">
@@ -68,13 +48,13 @@
               </div>
             </div>
           </div>
-          <div class="stats third-part" ng-class="{'flipped': allDashboards.length > 1}">
-            <div class="front">
+
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('openTickets')"
+                 ng-class="{'selected-chart': selectedChart === 'openTickets'}">
               <div class="stats__main">
                 <p class="board-head">
                   Open tickets
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.openTickets }}">?</span>-->
                 </p>
                 <div class="stats__main--count font-green">
                   <p>{{ dashboard.openTickets || 0 }}</p>
@@ -84,18 +64,17 @@
                 <img src="images/input-icons/ticket-white.png" alt="">
               </div>
             </div>
-
           </div>
-          <div class="stats third-part" ng-class="{'flipped': allDashboards.length > 1}">
-            <div class="front">
+
+          <div class="stats third-part">
+            <div class="front" ng-click="selectChart('onHoldTickets')"
+                 ng-class="{'selected-chart': selectedChart === 'onHoldTickets'}">
               <div class="stats__main">
                 <p class="board-head">
                   Tickets on hold
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.openTickets }}">?</span>-->
                 </p>
                 <div class="stats__main--count font-red">
-                  <p>{{ dashboard.openTickets || 0 }}</p>
+                  <p>{{ dashboard.onHoldTickets || 0 }}</p>
                 </div>
               </div>
               <div class="stats__icon bg-red">
@@ -104,312 +83,7 @@
             </div>
           </div>
         </div>
-        <!--<div class="col-lg-4 col-xs-6">-->
-          <!--<div class="stats">-->
-            <!--<div class="front">-->
-              <!--<div class="stats__main">-->
-                <!--<p class="board-head">-->
-                  <!--closed tickets-->
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.closedTickets }}">?</span>-->
-                <!--</p>-->
-                <!--<div class="stats__main&#45;&#45;count font-red">-->
-                  <!--<p>{{ closedTickets || 0 }}</p>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="stats__icon bg-red">-->
-                <!--<img src="images/input-icons/ticket-white.png" alt="">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4 col-xs-6">-->
-          <!--<div class="stats" ng-class="{'flipped': allDashboards.length > 1}">-->
-            <!--<div class="front">-->
-              <!--<div class="stats__main">-->
-                <!--<p class="board-head">-->
-                  <!--average time / ticket-->
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageServiceTime }}">?</span>-->
-                <!--</p>-->
-                <!--<div class="stats__main&#45;&#45;count font-deep-blue">-->
-                  <!--<p>{{ getAverageTimePerDay(dashboard.averageTimePerDay) }}</p>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="stats__icon bg-deep-blue">-->
-                <!--<img src="images/input-icons/watch-white.png" alt="">-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div class="back">-->
-              <!--<p class="board-head">-->
-                <!--average time / ticket-->
-                <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                      <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageServiceTime }}">?</span>-->
-              <!--</p>-->
-              <!--<div ng-if="!loading && averageServiceTimeData && averageServiceTimeData.length"-->
-                   <!--d3chart data="averageServiceTimeData" class="average-service-time-chart"-->
-                   <!--margin="{ top: 10, right: 35, bottom: 35, left: 45}">-->
-                <!--<d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"-->
-                        <!--ticks="{{ averageServiceTimeTicks.length }}" only-first-and-last="true"-->
-                        <!--tick-values="averageServiceTimeTicks"></d3axis>-->
-                <!--<d3axis name="total" orientation="left"></d3axis>-->
-                <!--<d3line x="date" y="total" tooltip-affix=" min" chart-tooltip="average-service-time"></d3line>-->
-              <!--</div>-->
-              <!--<div ng-if="!loading && (!averageServiceTimeData || !averageServiceTimeData.length)" class="no-data-message">-->
-                <!--There is no data.-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4 col-xs-6">-->
-          <!--<div class="stats" ng-class="{'flipped': allDashboards.length > 1}">-->
-            <!--<div class="front">-->
-              <!--<div class="stats__main">-->
-                <!--<p class="board-head">-->
-                  <!--average sales / ticket-->
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageSales }}">?</span>-->
-                <!--</p>-->
-                <!--<div class="stats__main&#45;&#45;count font-purple">-->
-                  <!--<p>${{ dashboard.averageSalesPerDay.toFixed(0) || 0 }}</p>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="stats__icon bg-purple">-->
-                <!--<img src="images/input-icons/dollar-white.png" alt="">-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div class="back">-->
-              <!--<p class="board-head">-->
-                <!--average sales / ticket-->
-                <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                      <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.averageSales }}">?</span>-->
-              <!--</p>-->
-              <!--<div ng-if="!loading && averageSalesData && averageSalesData.length"-->
-                   <!--d3chart data="averageSalesData" class="average-sales-chart"-->
-                   <!--margin="{ top: 10, right: 35, bottom: 35, left: 45}">-->
-                <!--<d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"-->
-                        <!--ticks="{{ averageSalesTicks.length }}" only-first-and-last="true"-->
-                        <!--tick-values="averageSalesTicks"></d3axis>-->
-                <!--<d3axis name="total" orientation="left"></d3axis>-->
-                <!--<d3line x="date" y="total" tooltip-preffix="$" chart-tooltip="average-sales"></d3line>-->
-              <!--</div>-->
-              <!--<div ng-if="!loading && (!averageSalesData || !averageSalesData.length)" class="no-data-message">-->
-                <!--There is no data.-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4 col-xs-6">-->
-          <!--<div class="stats">-->
-            <!--<div class="front">-->
-              <!--<div class="stats__main">-->
-                <!--<p class="board-head">-->
-                  <!--tickets by priority-->
-                  <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                        <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.priority }}">?</span>-->
-                <!--</p>-->
-                <!--<div ng-if="!dashboard.noPriorities">-->
-                  <!--<div class="pie-chart col-12" d3chart data="ticketsPriority"-->
-                       <!--margin="{left: -20, right: 0, bottom: 20, top: 0}" is-center>-->
-                    <!--<d3pie value="count" colors="['#00bf8e','#ffb55c','#ff7877']"></d3pie>-->
-                  <!--</div>-->
-                  <!--<div class="pie-legend pie-legend-custom">-->
-                    <!--<span class="legend-{{ $index }}" ng-repeat="legend in ticketsPriorityLegend">-->
-                      <!--{{ legend }}<br>{{ ' (' + (ticketsPriority[$index].count || 0) }})-->
-                    <!--</span>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div ng-if="dashboard.noPriorities" class="no-data-message">-->
-                  <!--There is no data.-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="stats__icon bg-light-blue">-->
-                <!--<img src="images/input-icons/warning-white.png" alt="">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
       </div>
-      <!--<div class="row">-->
-        <!--<div class="col-lg-4 smart-sized col-xs-12 ">-->
-          <!--<div class="top-ten clearfix">-->
-            <!--<p class="board-head">-->
-              <!--top-10 clients-->
-              <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                    <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.topClients }}">?</span>-->
-            <!--</p>-->
-            <!--<ul class="top-ten__list" ng-if="dashboard.topClients && dashboard.topClients.length">-->
-              <!--<li class="top-ten__list&#45;&#45;point-head clearfix">-->
-                <!--<div class="col-xs-8 point-name"><p>Name</p></div>-->
-                <!--<div class="col-xs-2 text-center"><p>Created</p></div>-->
-                <!--<div class="col-xs-2 text-center"><p>Closed</p></div>-->
-              <!--</li>-->
-
-              <!--<div qt-nano-scroller>-->
-                <!--<div style="overflow-y: scroll">-->
-                  <!--<li class="top-ten__list&#45;&#45;point"-->
-                      <!--ng-repeat="client in dashboard.topClients | orderBy: '-created' track by client.id">-->
-                    <!--<div class="col-xs-8 point-name">-->
-                      <!--<div class="list-avatar">-->
-                        <!--<img ng-src="{{ getUserAvatarUrl(getUserById(client.id)) }}">-->
-                      <!--</div>-->
-                      <!--<div>-->
-                        <!--<p>{{ getUserName(getUserById(client.id)) }}</p>-->
-                        <!--<p class="text-muted mail-field">{{ getCompanyById(getUserById(client.id).company.id).name }}</p>-->
-                      <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 text-center">-->
-                      <!--<p class="text-muted">{{ client.created }}</p>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 text-center">-->
-                      <!--<p class="text-muted">{{ client.closed }}</p>-->
-                    <!--</div>-->
-                  <!--</li>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</ul>-->
-
-            <!--<div ng-if="!dashboard.topClients || !dashboard.topClients.length" class="no-data-message">-->
-              <!--There is no data.-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4 smart-sized col-xs-6 ">-->
-          <!--<div class="top-ten clearfix">-->
-            <!--<p class="board-head">-->
-              <!--top-10 companies-->
-              <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                    <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.topCompanies }}">?</span>-->
-            <!--</p>-->
-            <!--<ul class="top-ten__list" ng-if="dashboard.topCompanies && dashboard.topCompanies.length">-->
-              <!--<li class="top-ten__list&#45;&#45;point-head clearfix">-->
-                <!--<div class="col-xs-8 point-name"><p>Company</p></div>-->
-                <!--<div class="col-xs-2 text-center"><p>Created</p></div>-->
-                <!--<div class="col-xs-2 text-center"><p>Closed</p></div>-->
-              <!--</li>-->
-              <!--<div qt-nano-scroller>-->
-                <!--<div style="overflow-y: scroll">-->
-                  <!--<li class="top-ten__list&#45;&#45;point"-->
-                      <!--ng-repeat="company in dashboard.topCompanies | orderBy: '-created' track by company.id">-->
-                    <!--<div class="col-xs-8 point-name">-->
-                      <!--<div class="list-avatar">-->
-                        <!--<img ng-src="{{ getCompanyLogoUrl(getCompanyById(company.id)) }}">-->
-                      <!--</div>-->
-                      <!--<p>{{ getCompanyById(company.id).name }}</p>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 text-center">-->
-                      <!--<p class="text-muted">{{ company.created }}</p>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 text-center">-->
-                      <!--<p class="text-muted">{{ company.closed }}</p>-->
-                    <!--</div>-->
-                  <!--</li>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</ul>-->
-
-            <!--<div ng-if="!dashboard.topCompanies || !dashboard.topCompanies.length" class="no-data-message">-->
-              <!--There is no data.-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4 smart-sized col-xs-6 ">-->
-          <!--<div class="top-ten clearfix">-->
-            <!--<p class="board-head">-->
-              <!--top-10 tech-users-->
-              <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                    <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.topTech }}">?</span>-->
-            <!--</p>-->
-            <!--<ul class="top-ten__list" ng-if="dashboard.topTechUsers && dashboard.topTechUsers.length">-->
-              <!--<li class="top-ten__list&#45;&#45;point-head clearfix">-->
-                <!--<div class="col-xs-8 point-name"><p>Name</p></div>-->
-                <!--<div class="col-xs-2 text-center"><p>Claimed</p></div>-->
-                <!--<div class="col-xs-2 text-center"><p>Closed</p></div>-->
-              <!--</li>-->
-              <!--<div qt-nano-scroller>-->
-                <!--<div style="overflow-y: scroll">-->
-                  <!--<li class="top-ten__list&#45;&#45;point"-->
-                      <!--ng-repeat="tech in dashboard.topTechUsers | orderBy: '-created' track by tech.id">-->
-                    <!--<div class="col-xs-8 point-name">-->
-                      <!--<div class="list-avatar">-->
-                        <!--<img ng-src="{{ getUserAvatarUrl(getUserById(tech.id)) }}">-->
-                      <!--</div>-->
-                      <!--<p>{{ getUserName(getUserById(tech.id)) }}</p>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 text-center">-->
-                      <!--<p class="text-muted">{{ tech.created }}</p>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 text-center">-->
-                      <!--<p class="text-muted">{{ tech.closed }}</p>-->
-                    <!--</div>-->
-                  <!--</li>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</ul>-->
-
-            <!--<div ng-if="!dashboard.topTechUsers || !dashboard.topTechUsers.length" class="no-data-message">-->
-              <!--There is no data.-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="row">-->
-        <!--<div class="col-lg-6 smart-sized col-xs-12">-->
-          <!--<div class="chart clearfix">-->
-            <!--<p class="board-head">-->
-              <!--Ticket creation timeline-->
-              <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                    <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.createdTickets }}">?</span>-->
-            <!--</p>-->
-
-            <!--<div ng-if="!loading && ticketCreationTimeline && ticketCreationTimeline.length" d3chart-->
-                 <!--data="ticketCreationTimeline"-->
-                 <!--margin="{ top: 10, right: 35, bottom: 20, left: 40}" class="creation-timeline">-->
-              <!--<d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"-->
-                      <!--ticks="{{ ticketCreationTimelineTicks.length }}" max-labels-count="10"-->
-                      <!--tick-values="ticketCreationTimelineTicks"></d3axis>-->
-              <!--<d3axis name="total" orientation="left"></d3axis>-->
-              <!--<d3line x="date" y="total" chart-tooltip="creation-timeline"></d3line>-->
-            <!--</div>-->
-
-            <!--<div ng-if="!loading && (!ticketCreationTimeline || !ticketCreationTimeline.length)" class="no-data-message">-->
-              <!--There is no data.-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-lg-6 smart-sized col-xs-12">-->
-          <!--<div class="chart clearfix">-->
-            <!--<p class="board-head graph-ticket">-->
-              <!--average ticket response time-->
-              <!--<span class="helper" tooltip-class="chart-tooltip" tooltip-append-to-body="true"-->
-                    <!--tooltip-placement="top" uib-tooltip="{{ chartTooltips.responseTime }}">?</span>-->
-            <!--</p>-->
-            <!--<div class="ticket-right-text">-->
-              <!--<div>-->
-                <!--Response Time <span class="responsive-time">{{ dashboard.averageResponseTime || 0 }} minute(s)</span>-->
-              <!--</div>-->
-              <!--<div ng-if="numberOutliersTicketsResponseTime">-->
-                <!--Outliers-->
-                <!--<span class="outliers">{{ numberOutliersTicketsResponseTime }} ticket(s)</span>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div ng-if="!loading && averageTicketsResponseTimeMap && averageTicketsResponseTimeMap.length"-->
-                 <!--d3chart data="averageTicketsResponseTimeMap" class="ticket-resp-time"-->
-                 <!--margin="{top: 10, right: 35, bottom: 20, left: 40}">-->
-              <!--<d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}"-->
-                      <!--ticks="{{ averageTicketsResponseTimeTicks.length }}" max-labels-count="10"-->
-                      <!--tick-values="averageTicketsResponseTimeTicks"></d3axis>-->
-              <!--<d3axis name="total" orientation="left"></d3axis>-->
-              <!--<d3line x="date" y="total" tooltip-affix="min" chart-tooltip="chart-tooltip ticket-resp-time"-->
-                      <!--additional-tooltip-field="outliers" tooltip-top-offset="50"></d3line>-->
-            <!--</div>-->
-            <!--<div ng-if="!loading && (!averageTicketsResponseTimeMap || !averageTicketsResponseTimeMap.length)"-->
-                 <!--class="no-data-message">-->
-              <!--There is no data.-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
     </section>
   </div>
 </div>

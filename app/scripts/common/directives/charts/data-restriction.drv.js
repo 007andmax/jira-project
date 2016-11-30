@@ -32,7 +32,15 @@
           }
 
           function getChartData() {
-            StatisticsService[attrs.fetchFunc](params, setChartData);
+            StatisticsService[attrs.fetchFunc](params, function (data) {
+              var handledData;
+              if (attrs.handleData && $scope[attrs.handleData]) {
+                handledData = $scope[attrs.handleData](data);
+              } else {
+                handledData = data;
+              }
+              setChartData(handledData);
+            });
           }
 
           function setChartData(data) {

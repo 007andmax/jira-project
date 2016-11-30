@@ -9,13 +9,8 @@
   services.factory('StatisticsService', ['$http', 'Utils',
     function ($http, Utils) {
 
-      function getTicketsDashboard(from, to, callback) {
-        var params = {
-          from: formatDate(from),
-          to: to ? formatDate(to) : formatDate(from)
-        };
-
-        var future = $http.get('/dashboard/ticket', { params: params });
+      function getTicketsDashboard(params, callback) {
+        var future = $http.get('/dashboard/ticket?frequency=' + params[0]);
         Utils.handleCallback(future, callback);
       }
 
