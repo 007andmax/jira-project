@@ -27,9 +27,11 @@
               }
             });
 
-          if (attrs.teInitialValue) {
-            wysiwyg.html(attrs.teInitialValue);
-          }
+          $scope.$watch(function () {
+            return attrs.teInitialValue;
+          }, function (value) {
+            wysiwyg.html(value);
+          });
 
           validateRequired();
 
