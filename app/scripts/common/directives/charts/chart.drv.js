@@ -67,17 +67,19 @@
 
           updateSize = (function(_this) {
             return function() {
-              if (_this.width !== width() || _this.height !== height()) {
-                _this.width = width();
-                _this.height = height();
-                _this.innerWidth = _this.width - _this.margin.left - _this.margin.right;
-                _this.innerHeight = _this.height - _this.margin.top - _this.margin.bottom;
-                if (typeof $attrs.isCenter === 'string') {
-                  var center = width() / 2 - Math.min(width(), height()) / 2 + $scope.margin.left + 20;
-                  chart.attr("transform", "translate(" + center + "," + $scope.margin.top + ")");
+              $timeout(function () {
+                if (_this.width !== width() || _this.height !== height()) {
+                  _this.width = width();
+                  _this.height = height();
+                  _this.innerWidth = _this.width - _this.margin.left - _this.margin.right;
+                  _this.innerHeight = _this.height - _this.margin.top - _this.margin.bottom;
+                  if (typeof $attrs.isCenter === 'string') {
+                    var center = width() / 2 - Math.min(width(), height()) / 2 + $scope.margin.left + 20;
+                    chart.attr("transform", "translate(" + center + "," + $scope.margin.top + ")");
+                  }
+                  return _this.redraw();
                 }
-                return _this.redraw();
-              }
+              });
             };
           })(this);
 
@@ -119,7 +121,7 @@
           }
 
           $scope.$watch(updateSize);
-          $rootScope.$watch('isLeftPanelHidden', updateSize);
+          $scope.$watch('isLeftPanelHidden', updateSize);
           updateSize();
         }
       ]
