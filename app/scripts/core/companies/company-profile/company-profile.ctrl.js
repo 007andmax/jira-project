@@ -248,7 +248,7 @@
           $scope.frequency = newFrequency;
 
           if (newFrequency === 'MONTHLY') {
-            $scope.dateFormat = '%b %y';
+            $scope.dateFormat = '%b';
           } else {
             $scope.dateFormat = '%d %b';
           }
