@@ -5,16 +5,20 @@
         <div class="col-lg-9 col-xs-9">
           <div class="stats">
             <div class="stats__main front">
-              <p class="board-head">
-                {{ getChartTitle() }}
-              </p>
+              <div class="chart-header">
+                <div class="chart-header-name">
+                  <p class="header-title">
+                    {{ getChartTitle() }}
+                  </p>
+                </div>
 
-              <div style="position: absolute;right: 40px;">
-                <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
-                <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
-                <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+                <div class="chart-header-controls">
+                  <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+                  <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+                  <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+                </div>
+
               </div>
-
               <div chart-data-restriction fetch-func="getTicketsDashboard" margin="100" divider="60" param0="frequency"
                    handle-data="handleDashboardData" style="height: 85%">
 

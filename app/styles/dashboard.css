@@ -269,6 +269,7 @@ header .calendar-top input {
 
 .dashboard-main .stats.third-part{
   height: 130px;
+  cursor: pointer;
 }
 
 .dashboard-main .stats .front {
@@ -352,7 +353,6 @@ header .calendar-top input {
   width: 20%;
   height: 100%;
   position: relative;
-  right: -1px;
 }
 
 .dashboard-main .stats__icon img {
@@ -766,127 +766,6 @@ header .calendar-top input {
   height: auto;
 }
 
-/*=============================Mediaqueries===============================*/
-@media screen and (min-width: 1440px) and (max-width: 1600px) {
-
-  .dashboard-main .pie-legend {
-    font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 1440px) {
-  .dashboard-main .pie-legend {
-    font-size: 16px;
-    padding: 20px 15px;
-  }
-}
-
-@media screen and (max-width: 1366px) {
-  .board-head {
-    font-size: 14px;
-    margin: 15px 10px;
-  }
-
-  .legend-managed {
-    position: relative;
-    top: -15px;
-  }
-
-  .dashboard-main .pie-legend {
-    font-size: 14px;
-    line-height: 16px;
-  }
-
-  .dashboard-main .stats {
-    height: 200px;
-  }
-
-  .dashboard-main .stats__main--count {
-    height: 110px;
-  }
-
-  .dashboard-main .top-ten {
-    height: 300px;
-  }
-
-  .dashboard-main .chart {
-    height: 300px;
-  }
-
-  .dashboard-main .top-ten .scrolled-list {
-    height: 225px;
-  }
-
-  .dashboard-main .pie-chart {
-    height: 120px;
-  }
-
-  .dashboard-main .pie-legend {
-    padding: 20px 25px;
-  }
-
-  .dashboard-main .top-ten__list--point .point-name .list-avatar {
-    margin-left: 10px;
-  }
-
-  .top-ten__list--point-head div, .dashboard-main .top-ten__list--point div {
-    padding: 1px;
-  }
-
-  .dashboard-main .top-ten__list--point-head .point-name p {
-    padding-left: 60px;
-  }
-
-  .dashboard-main .stats.half-stats {
-    height: 85px;
-  }
-
-  .dashboard-main .stats.half-stats .stats__main--count {
-    font-size: 40px;
-  }
-
-  .dashboard-main .stats__main--count {
-    font-size: 40px;
-  }
-
-  .total-overdue-sum {
-    font-size: 20px;
-  }
-
-  .dashboard-main .top-ten__list{
-    height: 220px;
-  }
-
-  .billing-dashboard .top-ten {
-    height: 630px;
-  }
-
-  .billing-dashboard .top-ten__list  {
-    height: 550px;
-  }
-
-
-}
-
-@media screen and (max-width: 1024px) {
-  .dashboard-main .pie-legend {
-    font-size: 12px;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1280px) {
-  .dashboard-main .col-lg-4.smart-sized.col-xs-12 {
-    width: 100%;
-  }
-
-  .dashboard-main .col-lg-4.smart-sized.col-xs-6 {
-    width: 50%;
-  }
-
-  .dashboard-main .col-lg-6.smart-sized.col-xs-12 {
-    width: 100%;
-  }
-}
 
 .dashboard-main{
   margin-top: 30px;
