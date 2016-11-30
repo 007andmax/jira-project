@@ -100,7 +100,7 @@
             </div>
 
             <input class="form-control" type="text" name="designation" aria-expanded="true" make-dirty-on-blur
-                   ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30">
+                   ng-model="editUser.designation" ng-minlength="3" ng-maxlength="30" tabindex="30">
 
           </div>
 
@@ -108,16 +108,16 @@
 
             <label class="control-label">Account Type</label>
 
-            <div uib-dropdown>
+            <div uib-dropdown keyboard-nav="true">
 
-              <input class="form-control has-dropdown" type="text"
-                     ng-model="roles[editUser.role]" uib-dropdown-toggle aria-expanded="true"
-                     class="form-control form-control-dropdown dropdown-toggle no-cursor" READONLY>
+              <button class="form-control form-control-dropdown account-type no-cursor has-dropdown"
+                      uib-dropdown-toggle aria-expanded="true" tabindex="32">
+                {{ roles[editUser.role] }}
+              </button>
               <i class="icn-sm icn-caret-gray"></i>
-
               <ul class="dropdown-menu dropdown-account-type">
                 <li ng-repeat="(role, label) in roles" ng-click="editUser.role = role">
-                  <a tabindex="-1" href="javascript:void(0)"> {{ label }} </a>
+                  <a href="javascript:void(0)"> {{ label }} </a>
                 </li>
               </ul>
 
@@ -133,9 +133,9 @@
           <div class="form-group col-xs-6">
             <label class="control-label">Subscribe to</label>
 
-            <div uib-dropdown>
-              <input class="form-control has-dropdown" type="text" value=""
-                     uib-dropdown-toggle aria-expanded="false" readonly="readonly">
+            <div uib-dropdown keyboard-nav="true">
+              <button class="form-control has-dropdown subscribe-dropdown"
+                      tabindex="31" uib-dropdown-toggle aria-expanded="false"></button>
               <i class="icn-sm icn-caret-gray"></i>
 
               <div class="subscribe-tokens">
@@ -159,7 +159,7 @@
               <ul class="dropdown-menu dropdown-subscribe" stop-propagation="click">
 
                 <li>
-                  <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+                  <a href="javascript:void(0)" qt-checkbox
                      ng-model="editUser.subscription.ticket">
 
                     <div class="clearfix">
@@ -173,7 +173,7 @@
                 </li>
 
                 <li>
-                  <a tabindex="-1" href="javascript:void(0)" qt-checkbox
+                  <a href="javascript:void(0)" qt-checkbox
                      ng-model="editUser.subscription.ticketManager">
 
                     <div class="clearfix">
@@ -187,7 +187,7 @@
                 </li>
 
                 <li ng-if="isCreation || !isLastUserWithInvoiceSubscription(editUser)">
-                  <a tabindex="-1" href="javascript:void(0)"
+                  <a href="javascript:void(0)"
                      qt-checkbox ng-model="editUser.subscription.invoice">
 
                     <div class="clearfix">
@@ -208,9 +208,8 @@
 
         <div class="col-xs-6 clearfix" ng-if="isCreation">
           <label class="control checkbox pull-left">
-            <input type="checkbox"
-                   ng-model="editUser.welcomeEmail">
-            <span class="control-indicator" style="margin-top: -2px;"></span>
+            <input type="checkbox" ng-model="editUser.welcomeEmail" tabindex="32">
+            <span class="control-indicator"></span>
             Send Welcome Email
           </label>
         </div>
@@ -320,15 +319,14 @@
         </div>
 
 
-
       </div>
     </div>
   </form>
   <div class="form-row user-btn-create clearfix btn-bottom">
-    <div class="btn btn-lg btn-create user-create btn-info pull-right"
+    <button class="btn btn-lg btn-create user-create btn-info pull-right" tabindex="33"
          custom-disabled="{{ savingInProcess }}" ng-click="save(userForm)">
       {{ isCreation ? 'Create' : 'Save' }}
-    </div>
+    </button>
   </div>
 </div>
 

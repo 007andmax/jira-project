@@ -14,18 +14,18 @@
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                ng-pattern="phoneNumberPattern" hard-phone-number-pattern country="{{ countryCode }}"
-               execute-when-outfocused="onLostFocus()"
+               execute-when-outfocused="onLostFocus()" tabindex="20"
                ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
       </div>
 
       <div class="form-group custom-phone-type col-xs-6 no-label">
-        <div class="pull-left" uib-dropdown dropdown-append-to-body="true">
+        <div class="pull-left" uib-dropdown keyboard-nav="true">
 
-          <input type="text" class="form-control-number has-dropdown"
-                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
-                 aria-expanded="true" READONLY>
+          <button class="form-control form-control-number has-dropdown" tabindex="21" uib-dropdown-toggle>
+            {{ phoneNumberTypes[phoneNumber.typeNumber] }}
+          </button>
 
-          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 250px; z-index: 9999;">
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%; z-index: 9999;">
             <li ng-repeat="(type, label) in phoneNumberTypes"
                 ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
@@ -35,10 +35,10 @@
 
         </div>
 
-        <div class="btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
-             tooltip-placement="top" uib-tooltip="Remove">
+        <button class="btn btn-primary has-tooltip pull-right" ng-click="removePhoneNumber($index)"
+             tooltip-placement="top" uib-tooltip="Remove" tabindex="22">
           <i class="icn-sm icn-remove-token-light"></i>
-        </div>
+        </button>
 
       </div>
     </div>
@@ -58,18 +58,19 @@
 
         <input type="text" class="form-control" name="phoneNumber{{ $index }}" ng-model="phoneNumber.number"
                ng-pattern="phoneNumberPattern" execute-when-outfocused="onLostFocus()"
-               hard-phone-number-pattern country="{{ countryCode }}"
+               hard-phone-number-pattern country="{{ countryCode }}" tabindex="{{ 20 + $index * 3 }}"
                ng-change="phoneNumber.error = getPhoneNumberError(phoneNumber.number, phoneNumbersForm, $index)">
       </div>
 
       <div class="form-group col-xs-6 custom-phone-type no-label">
-        <div class="pull-left " uib-dropdown dropdown-append-to-body="true">
+        <div class="pull-left " uib-dropdown keyboard-nav="true">
 
-          <input type="text" class="form-control-number has-dropdown"
-                 ng-model="phoneNumberTypes[phoneNumber.typeNumber]" uib-dropdown-toggle
-                 aria-expanded="true" READONLY>
+          <button class="form-control form-control-number has-dropdown" tabindex="{{ 21 + $index * 3 }}"
+                  uib-dropdown-toggle>
+            {{ phoneNumberTypes[phoneNumber.typeNumber] }}
+          </button>
 
-          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 250px;z-index: 9999;">
+          <ul class="dropdown-account-type" uib-dropdown-menu style="width: 100%;z-index: 9999;">
             <li ng-repeat="(type, label) in phoneNumberTypes"
                 ng-click="phoneNumber.typeNumber = type; onLostFocus && onLostFocus(phoneNumbersForm)">
               <a tabindex="-1" href="javascript:void(0)">{{ label }}</a>
@@ -81,15 +82,15 @@
 
         <div custom-ng-show-if="phoneNumbers.length < maximalAmountOfPhones">
 
-          <div cns-if class="btn btn-primary has-tooltip pull-right"
-               tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()">
+          <button cns-if class="btn btn-primary has-tooltip pull-right"
+               tooltip-placement="top" uib-tooltip="Add more" ng-click="addPhoneNumber()" tabindex="{{ 22 + $index * 3 }}">
             <i class="icn-sm icn-plus"></i>
-          </div>
+          </button>
 
-          <div cns-else class="btn btn-primary has-tooltip pull-right"
+          <button cns-else class="btn btn-primary has-tooltip pull-right" tabindex="{{ 23 + $index * 3 }}"
                tooltip-placement="top" title="" uib-tooltip="Remove" ng-click="removePhoneNumber($index)">
             <i class="icn-sm icn-remove-token-light"></i>
-          </div>
+          </button>
 
         </div>
 

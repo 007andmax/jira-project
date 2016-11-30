@@ -1,29 +1,29 @@
 <div class="create-window clearfix">
-  <div class="close-btn btn" ng-click="closeWindowWithConfirm()">
+  <div class="close-btn btn" ng-click="closeWindowWithConfirm()" tabindex="-1">
     <i class="icn-sm icn-remove-token" ></i>
   </div>
   <aside class="navigation">
     <ul class="navigation__list">
       <li class="navigation__list--category">
-        <a ng-class="{'checked': openedTab === 'ticket'}"
+        <a ng-class="{'checked': openedTab === 'ticket'}" tabindex="-1"
            href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('ticket')">Ticket</a>
       </li>
       <li class="navigation__list--category">
-        <a ng-class="{'checked': openedTab === 'user'}"
+        <a ng-class="{'checked': openedTab === 'user'}" tabindex="-1"
            href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('user')"
            ng-if="PermissionsService.isAllowed('CREATE_USERS')">User</a>
       </li>
       <li class="navigation__list--category">
-        <a ng-class="{'checked': openedTab === 'company'}"
+        <a ng-class="{'checked': openedTab === 'company'}" tabindex="-1"
            href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('company')"
            ng-if="PermissionsService.isAllowed('CREATE_COMPANIES')">Company</a>
       </li>
       <li class="navigation__list--category">
-        <a ng-class="{'checked': openedTab === 'service'}"
+        <a ng-class="{'checked': openedTab === 'service'}" tabindex="-1"
            href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('service')">Service</a>
       </li>
       <li class="navigation__list--category">
-        <a ng-class="{'checked': openedTab === 'product'}"
+        <a ng-class="{'checked': openedTab === 'product'}" tabindex="-1"
            href="javascript:void(0)" ng-click="setOpenedTabWithConfirm('product')"
            ng-if="PermissionsService.isAllowed('MANAGE_PRODUCTS')">Product</a>
       </li>

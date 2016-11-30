@@ -747,16 +747,6 @@
   width: 100%;
 }
 
-.create-user-form .form-control-number {
-  padding-left: 19px;
-  width: 100%;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 .dropdown-subscribe label {
   text-transform: none;
 }

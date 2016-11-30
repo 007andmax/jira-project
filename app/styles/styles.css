@@ -2826,30 +2826,11 @@ output {
 .form-control-time-zone ~ .dropdown-menu {
   max-width: none;
 }
-.form-control-number {
-  display: block;
-  width: 100%;
-  height: 38px;
-  padding: 13px;
-  font-size: 14px;
-  line-height: 20px;
-  color: #4c5c6f;
-  background-color: #fcfdfd;
-  border: 1px solid #e2e6e6;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  position: relative;
+.form-control-number, .account-type, .subscribe-dropdown {
+  text-align: left;
+  padding: 0 13px !important;
 }
-.form-control-number:active {
-  background-color: #fff;
-  box-shadow: inset 0px 3px 6px 0px rgba(0,0,0,0.15)
-}
-.open .form-control-number {
-  background-color: #e9f5fb;
-  box-shadow: inset 0px 3px 6px 0px rgba(0,0,0,0.15)
-}
-.form-control-number.has-dropdown ~ i {
+.form-control-number.has-dropdown ~ i, .account-type ~ i, .subscribe-dropdown ~ i {
   position: absolute;
   top: 13px;
   right: 13px;
