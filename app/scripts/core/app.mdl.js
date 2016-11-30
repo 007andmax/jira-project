@@ -520,7 +520,7 @@
             keyboard: false,
             size: 'custom-size-confirmation-pop-up',
             windowClass: 'lock-screen-modal',
-            templateUrl: '/commonHtml/assets/templates/unlock-modal.tpl.html'
+            templateUrl: '/html/scripts/common/templates/unlock-modal.tpl.html'
           };
 
           modalParams.controller = (['$scope', '$uibModalInstance',
