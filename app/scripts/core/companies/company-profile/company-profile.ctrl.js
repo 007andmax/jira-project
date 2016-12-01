@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.companyProfileCtrl',
-    ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService',
+    ['$scope', '$state', '$stateParams', 'CompaniesService', 'DevicesService', 'StatisticsService',
       'quicktech.common.services.SharedStateService', '$timeout', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.PermissionsService',
-      function ($scope, $state, $stateParams, CompaniesService, DevicesService,
+      function ($scope, $state, $stateParams, CompaniesService, DevicesService, StatisticsService,
                 SharedStateService, $timeout, UserNotificationService, UserConfirmationsService, PermissionsService) {
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
@@ -33,6 +33,11 @@
           field: 'name',
           reverse: false
         };
+        $scope.companyId = $stateParams.companyId;
+        $scope.frequency = 'WEEKLY';
+        $scope.selectedChart = 'countOfNewTickets';
+        $scope.dateFormat = '%d %b';
+
         $scope.company = CompaniesService.getOneById($stateParams.companyId, function (resp) {
           if (resp === $scope.company.id) {
             $state.go('companies');
@@ -64,10 +69,10 @@
 
         $scope.archiveCompany = function () {
           var company = CompaniesService.getOneById($scope.company.id);
-          var confirmMesage = 'Do you want to archive ' + company.name;
+          var confirmMessage = 'Do you want to archive ' + company.name;
           var confirmButton = 'Yes';
 
-          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+          UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
             CompaniesService.archive($scope.company.id, function (resp) {
               if (resp.data.code == 403) {
                 UserNotificationService.show(resp.data.message, true);
@@ -208,7 +213,46 @@
           }
 
           return result;
-        }
+        };
+
+        $scope.parseDate = function (values) {
+          return values.map(function (obj) {
+            return new Date(obj.date);
+          })
+        };
+
+        $scope.selectChart = function (type) {
+          $scope.selectedChart = type;
+          $scope.reloading = true;
+          $timeout(function () {
+            $scope.reloading = false;
+          });
+        };
+
+        $scope.timeToHoursAndMinutes = function (time) {
+          var hours = Math.floor(time) || 0,
+            minutes = Math.round((time - hours) * 60) || 0;
+
+          return hours + ' h ' + (minutes ? minutes + ' min' : '');
+        };
+
+        $scope.getChartTitle = function () {
+          switch ($scope.selectedChart) {
+            case 'countOfNewTickets': return 'New tickets';
+            case 'responseTime': return 'Response time';
+            case 'averageTime': return 'Average service time';
+          }
+        };
+
+        $scope.setFrequency = function (newFrequency) {
+          $scope.frequency = newFrequency;
+
+          if (newFrequency === 'MONTHLY') {
+            $scope.dateFormat = '%b';
+          } else {
+            $scope.dateFormat = '%d %b';
+          }
+        };
 
       }]);
 

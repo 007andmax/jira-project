@@ -2,122 +2,82 @@
 
   <div class="company-profile-header">
 
-    <div class="company-new-cover-wrapper" ng-if="!isShowEditCover"
-         ng-style="{'background': company.cover ? 'url(' + getCompanyCoverUrl(company) + ')' : 'rgba(0,0,0,.8)', 'background-size': 'cover'}">
+    <div class="company-new-cover-wrapper">
       <div class="background-layer">
 
         <div class="container company-info">
-          <ul class="company-name">
-            <div class="company-short-info">
-              <div class="dropdown" style="transform: translateY(50%)"
-                   ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
-                   ng-click="archiveCompany()"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Archive Company">
-                <i class="icn-sm icn-archive-company"></i>
-              </div>
-
-              <div uib-dropdown>
-
-                <a href="javascript:void(0)" class="hit-area ha-20-16 has-tooltip"
-                   uib-dropdown-toggle aria-expanded="false"
-                   tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Change Cover">
-                  <i class="icn-md icn-cover"></i>
-                </a>
-
-                <ul class="dropdown-menu">
-
-                  <li role="presentation">
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover(true)">
-                      Upload Photo...
-                    </a>
-                  </li>
-
-                  <li role="presentation" ng-show="company.cover">
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="restoreDefaultCover()">
-                      Restore Default Photo...
-                    </a>
-                  </li>
-
-                  <li role="presentation" ng-show="company.cover">
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" ng-click="showEditCover()">
-                      Reposition...
-                    </a>
-                  </li>
-
-                </ul>
-              </div>
-
-              <a href="javascript:void(0)" class="hit-area has-tooltip"
-                 ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
-                 create-new-entity="company" item="company"
-                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Edit">
-                <i class="icn-sm icn-edit-white"></i>
-              </a>
-
-            </div>
-            <p class="company-head" uib-tooltip="{{ companyData.name }}" tooltip-enable="{{ isShowTooltip[0]() }}"
-               trimmed-tooltip="0">
-              <span trimmed-tooltip-container>{{ companyData.name }}</span>
-            </p>
-            <li class="info-type" uib-tooltip="{{ currentLocation.address }}" tooltip-enable="{{ isShowTooltip[1]() }}"
-                trimmed-tooltip="1">
-              <i class="icn-sm icn-location-white"></i>
-              Address: <span trimmed-tooltip-container>{{ currentLocation.address }}</span>
-            </li>
-            <li class="info-type"
-                ng-if="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">
-              <i class="icn-sm" ng-class="{'icn-iphone': currentLocation.phoneNumbers[0].typeNumber === 'MOBILE',
-            'icn-user-fax': currentLocation.phoneNumbers[0].typeNumber === 'FAX',
-            'icn-user-phone': currentLocation.phoneNumbers[0].typeNumber === 'OFFICE'}"></i>
-              Phone: {{ currentLocation.phoneNumbers[0].number }}
-            </li>
-            <li class="info-type" ng-if="companyData.serviceType">
-              Service type: {{ userReadable(companyData.serviceType) }}
-            </li>
-            <li class="info-type" ng-if="companyData.clientType">
-              Client type: {{ userReadable(companyData.clientType) }}
-            </li>
-          </ul>
-
-          <div class="avatar company-user-avatar img-circle" ng-hide="getError().loadingInProcess">
-            <img style="width: 50px; height: 50px;" ng-src="{{ getUserAvatarUrl(currentContact) }}" class="img-circle">
+          <div class="company-logo">
+            <img ng-src="{{ getCompanyLogoUrl(companyData) }}" alt="">
           </div>
+          <div class="company-name-header" style="width: 240px;">
+            <p class="ellipsis">{{ companyData.name }}</p>
+          </div>
+          <div class="company-info-type clearfix"
+               ng-show="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">
+            <img src="images/input-icons/phone-number.png" alt="">
+            <p style="line-height: 1.7;">{{ currentLocation.phoneNumbers[0].number }}</p>
+          </div>
+          <div class="company-info-type clearfix" style="padding-bottom: 5px;">
+            <img src="images/input-icons/placeholder(white).png" style="top: -3px;" alt="">
+            <p style="line-height: 1.2;">{{ currentLocation.address }}</p>
+          </div>
+          <div class="company-service-type" ng-show="companyData.serviceType">
+            <p><strong>Service Type:</strong>{{ userReadable(companyData.serviceType) }}</p>
+          </div>
+          <div class="company-service-type" ng-show="companyData.clientType">
+            <p><strong>Client Type:</strong>{{ userReadable(companyData.clientType) }}</p>
+          </div>
+          <div class="company-service-type" ng-show="companyData.clientType.toLowerCase() === 'vendor'">
+            <p><strong>Account Number:</strong>{{ companyData.accountNumber }}</p>
+          </div>
+          <div class="company-contact-type first-of-type">
+            <p><strong>Primary contact:</strong>{{ getUserName(currentContact) }}</p>
+          </div>
+          <div class="company-contact-type" ng-show="currentContact.primaryEmail">
+            <p class="ellipsis"><strong>Contact email:</strong>{{ currentContact.primaryEmail }}</p>
+          </div>
+          <div class="company-contact-type"
+               ng-show="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">
+            <p><strong>Contact phone:</strong>{{ currentContact.phoneNumbers[0].number }}</p>
+          </div>
+          <div class="btns-block clearfix">
+            <div class="icn icn-create-ticket" create-new-entity="ticket" company-id="{{ company.id }}"
+                 uib-tooltip="Create Ticket" tooltip-placement="top"></div>
+            <div class="icn icn-add-new-user" create-new-entity="user" company-id="{{ company.id }}"
+                 uib-tooltip="Create User" tooltip-placement="top"
+                 ng-if="PermissionsService.isAllowed('CREATE_USERS')"></div>
+            <div
+              qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
+              qt-popover-position="bottom-left-align" custom-disabled="{{ !allowAgentInstall }}" class="icn">
+              <div class="icn icn-agent-download" qt-popover-trigger tooltip-placement="top"
+                   uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></div>
+            </div>
 
-          <ul class="user-company-contact clearfix">
-            <li class="info-type" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-enable="{{ isShowTooltip[2]() }}"
-                trimmed-tooltip="2">
-              <i class="icn-sm icn-contact"></i>
-              Primary contact: <span trimmed-tooltip-container>{{ getUserName(currentContact) }}</span>
-            </li>
-            <li class="info-type" ng-if="currentContact.primaryEmail" uib-tooltip="{{ currentContact.primaryEmail }}"
-                tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
-              <i class="icn-sm icn-contact-email"></i>
-              Contact email: <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
-            </li>
-            <li class="info-type"
-                ng-if="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">
-              <i class="icn-sm" ng-class="{'icn-iphone': currentContact.phoneNumbers[0].typeNumber === 'MOBILE',
-            'icn-user-fax': currentContact.phoneNumbers[0].typeNumber === 'FAX',
-            'icn-user-phone': currentContact.phoneNumbers[0].typeNumber === 'OFFICE'}" style="width: 14px;"></i>
-              Contact phone: {{ currentContact.phoneNumbers[0].number }}
-            </li>
-            <li class="info-type" ng-if="companyData.clientType.toLowerCase() === 'vendor'">
-              <span class="account-number">#</span> Account number: {{ companyData.accountNumber }}
-            </li>
-          </ul>
+            <div class="icn icn-camera" uib-dropdown uib-dropdown-toggle dropdown-append-to-body
+                 uib-tooltip="Change Logo" tooltip-placement="top">
+              <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
+                  change-image="companyData" model-image-path="logo">
+                <li change-image-button stop-propagation="click">
+                  <a tabindex="-1" href="javascript:void(0)">Change Image</a>
+                </li>
+                <li restore-default-button stop-propagation="click" ng-show="companyData.logo">
+                  <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
+                </li>
+                <li reposition-button stop-propagation="click" ng-show="companyData.logo">
+                  <a tabindex="-1" href="javascript:void(0)">Reposition</a>
+                </li>
+              </ul>
+            </div>
 
-
-          <div class="button-container">
-            <i class="icn-retina new-ticket pull-left" create-new-entity="ticket" company-id="{{ company.id }}"
-               uib-tooltip="Create Ticket" tooltip-placement="top"></i>
-            <i class="icn-retina new-user pull-left" style="margin-left: 15px;" create-new-entity="user" company-id="{{ company.id }}"
-               ng-if="PermissionsService.isAllowed('CREATE_USERS')"
-               uib-tooltip="Create User" tooltip-placement="top"></i>
-            <div qt-custom-popover-template="/html/scripts/core/companies/company-profile/download-agent/download-agent.tpl.html"
-              qt-popover-position="bottom" custom-disabled="{{ !allowAgentInstall }}"
-              class="pull-right" style="cursor: pointer">
-              <i class="icn-retina save-download pull-right" qt-popover-trigger tooltip-placement="top"
-                 uib-tooltip="{{ allowAgentInstall ? 'Download Agent' : 'Maximum installed agent amount reached' }}"></i>
+            <div class="icn icn-address" ng-click="chartHidden = !chartHidden"
+                 uib-tooltip="Show {{ chartHidden ? 'Chart' : 'Map' }}" tooltip-placement="top"></div>
+            <div class="icn icn-edit-new" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
+                 create-new-entity="company" item="company" uib-tooltip="Edit"
+                 tooltip-placement="top" tooltip-append-to-body="true">
+            </div>
+            <div class="icn icn-archive-usr" ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
+                 ng-click="archiveCompany()" uib-tooltip="Archive Company"
+                 tooltip-placement="top" tooltip-append-to-body="true">
             </div>
           </div>
         </div>
@@ -125,19 +85,86 @@
       </div>
     </div>
 
-    <div class="hass-error control-label" style="position:absolute; bottom: 10px;left: 10px;color: #e53935;"
-         ng-show="isShowErrorMessage">
-      {{ messageError }}
+    <div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation && chartHidden"
+         ng-model="companyData.addresses[0]"></div>
+
+    <div chart-data-restriction fetch-func="getStatisticByCompany"
+         margin="100" divider="60" chart-wrap param0="companyId" param1="frequency"
+         class="company-map-wrapper" ng-if="!chartHidden">
+
+      <div class="chart-header">
+        <div class="chart-header-name">
+          <p class="header-title">{{ getChartTitle() }}</p>
+          <p ng-if="selectedChart === 'responseTime'">
+            Outliers
+            <span class="font-yellow">
+              {{ companyData.companyTicketStatistic.numberOfTicketOutliers || 0 }} Ticket(s)
+            </span>
+          </p>
+        </div>
+
+        <div class="chart-header-controls">
+          <p ng-click="setFrequency('DAILY')" ng-class="{'choosen': frequency === 'DAILY'}">daily</p>
+          <p ng-click="setFrequency('WEEKLY')" ng-class="{'choosen': frequency === 'WEEKLY'}">weekly</p>
+          <p ng-click="setFrequency('MONTHLY')" ng-class="{'choosen': frequency === 'MONTHLY'}">monthly</p>
+        </div>
+      </div>
+
+      <div d3chart data="chartData" margin="{ top: 20, right: 40, bottom: 40, left: 40}"
+           style="height: 229px" ng-if="!reloading">
+        <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
+                ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
+        <d3axis name="{{ selectedChart }}" orientation="left"></d3axis>
+        <d3bars x="date" y="{{ selectedChart }}" width="30" chart-tooltip="chart"
+                tooltip-postfix="{{ selectedChart === 'countOfNewTickets' ? '' : ' min' }}"></d3bars>
+      </div>
+
     </div>
 
-    <div edit-cover ng-show="isShowEditCover" ec-reset-to-default="restoreDefaultCover"
-         ec-cancel-edit-cover="cancelEditCover" ec-save-edit-cover="saveEditCover"
-         ng-model="editCover" model-name="company" model-id="company.id"
-         ec-is-show-loader-on-cover="isShowLoaderOnCover"
-         ec-disabled-cover-control="disabledCoverControl"></div>
-
-    <div class="company-map-wrapper" company-address-autocomplete ng-if="currentLocation"
-         ng-model="companyData.addresses[0]"></div>
+    <div class="company-work-info">
+      <table>
+        <tbody ng-click="selectChart('countOfNewTickets')"
+               ng-class="{'selected-chart': selectedChart === 'countOfNewTickets'}">
+        <tr>
+          <td rowspan="2" colspan="1" class="bd-right-disabled">
+            <p>Open Tickets</p>
+            <p class="big-count font-green no-padding">{{ companyData.companyTicketStatistic.openTickets || 0 }}</p>
+          </td>
+          <td colspan="1" class="bd-bottom-disabled bd-left-disabled">
+            <p>Total</p>
+            <p>{{ companyData.companyTicketStatistic.totalTickets || 0 }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="1" class="bd-top-disabled bd-left-disabled">
+            <p>On hold</p>
+            <p class="font-light-blue">{{ companyData.companyTicketStatistic.onHoldTickets || 0 }}</p>
+          </td>
+        </tr>
+        </tbody>
+        <tbody ng-click="selectChart('responseTime')"
+               ng-class="{'selected-chart': selectedChart === 'responseTime'}">
+        <tr>
+          <td colspan="2">
+            <p>Response Time</p>
+            <p class="big-count font-yellow">{{ (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
+              || 0 }} min</p>
+          </td>
+        </tr>
+        </tbody>
+        <tbody ng-click="selectChart('averageTime')"
+               ng-class="{'selected-chart': selectedChart === 'averageTime'}">
+        <tr>
+          <td colspan="2">
+            <p>Average Time</p>
+            <p class="big-count font-red">
+              {{ timeToHoursAndMinutes(companyData.companyTicketStatistic.averageTime || 0) }}
+            </p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 

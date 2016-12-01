@@ -176,7 +176,7 @@
             label.exit().remove();
             label.text(function (d, i) {
               if (data[i][options.value]){
-                return data[i][options.label] + (options.labelAffix || '');
+                return data[i][options.label] + (options.labelPostfix || '');
               } else {
                 return '';
               }

@@ -9,33 +9,25 @@
   services.factory('StatisticsService', ['$http', 'Utils',
     function ($http, Utils) {
 
-      function getTicketsDashboard(from, to, callback) {
-        var params = {
-          from: formatDate(from),
-          to: to ? formatDate(to) : formatDate(from)
-        };
-
-        var future = $http.get('/dashboard/ticket', { params: params });
+      function getTicketsDashboard(params, callback) {
+        var future = $http.get('/dashboard/ticket?frequency=' + params[0]);
         Utils.handleCallback(future, callback);
       }
 
-      function getBillingDashboard(from, to, callback) {
-        var params = {
-          from: formatDate(from),
-          to: to ? formatDate(to) : formatDate(from)
-        };
-
-        var future = $http.get('/dashboard/accounting', { params: params });
+      function getBillingDashboard(params, callback) {
+        var future = $http.get('/dashboard/accounting?frequency=' + params[0]);
         Utils.handleCallback(future, callback);
       }
 
-      function formatDate(date) {
-        return date ? date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() : null;
+      function getStatisticByCompany(params, callback) {
+        var future = $http.get('/dashboard/company?companyId=' + params[0] + '&frequency=' + params[1]);
+        Utils.handleCallback(future, callback);
       }
 
       return {
         getTicketsDashboard: getTicketsDashboard,
-        getBillingDashboard: getBillingDashboard
+        getBillingDashboard: getBillingDashboard,
+        getStatisticByCompany: getStatisticByCompany
       }
     }
 
