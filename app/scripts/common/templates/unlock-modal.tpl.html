@@ -1,0 +1,33 @@
+<div class="text-center" ng-form="unlockForm">
+  <img ng-src="{{ getUserAvatarUrl(currentUser) }}" width="350px" height="200px" alt="">
+  <h3>Please unlock your screen</h3>
+  <div class="form-group" ng-class="{'has-error': isShowingErrors(unlockForm, 'code')}">
+
+    <label class="control-label" ng-hide="isShowingErrors(unlockForm, 'code')">
+      Password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }}
+    </label>
+
+    <div ng-messages="unlockForm.code.$error" ng-hide="!isShowingErrors(unlockForm, 'code')">
+      <label class="control-label" ng-message="required">
+        Password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }} name is required.
+      </label>
+      <label class="control-label" ng-message="wrongCode">
+        It is wrong password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }}.
+      </label>
+    </div>
+
+    <input type="text" name="code" ng-change="onCodeChange(unlockForm.code)" ng-model="unlockModel.code" class="form-control" required>
+  </div>
+  <div class="buttons-container">
+    <button class="btn btn-primary" ng-if="currentUser.enableTwoFactorAuth"
+            ng-click="sendCode()" ng-disabled="unlockModel.unlocking">
+      Send code
+    </button>
+    <button class="btn btn-success" ng-click="unlock(unlockModel.code, unlockForm.code)"
+            ng-disabled="unlockModel.unlocking">
+      Unlock
+    </button>
+  </div>
+  <p class="text-muted">users that have 2 factor authentications please click send code then you can enter this into the
+    password box</p>
+</div>

@@ -34,6 +34,11 @@
           }
 
           return;
+        } else if (response.status === 423) {
+          if (!$rootScope.isUnlockShowed) {
+            $rootScope.showLockModal(true);
+          }
+          return;
         } else if (response.data.showMessage) {
           alert(response.data.showMessage);
           return {};

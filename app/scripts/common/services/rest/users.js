@@ -6,8 +6,8 @@
 
   var services = angular.module('main.services');
 
-  services.factory('UsersService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService',
-    function ($http, $rootScope, RealTimeService, Utils, CompaniesService) {
+  services.factory('UsersService', ['$http', '$rootScope', 'RealTimeService', 'Utils', 'CompaniesService', 'localStorageService',
+    function ($http, $rootScope, RealTimeService, Utils, CompaniesService, localStorageService) {
 
       var serviceScope = $rootScope.$new(),
         initListeners = [],
@@ -63,6 +63,7 @@
             console.error(resp);
             throw 'Cannot initialize CompaniesService!';
           });
+
         RealTimeService.subscribe('/user', serviceScope, function (newChange) {
 
           if (!initialized) {
@@ -125,6 +126,7 @@
             newChange.data.forEach(addOrUpdateClientUser);
           }
         });
+
         RealTimeService.subscribe('/userSubmittedTicket', serviceScope, function (newChange) {
 
           if (newChange.action === 'USER_SUBMITTED_TICKET') {
@@ -134,6 +136,7 @@
             Utils.defineReadOnlyProperty(user.userStatistic, 'ticketsSubmitted', prevValue + 1);
           }
         });
+
         RealTimeService.subscribe('/subscription/' + CompaniesService.getCurrentCompany().id, serviceScope, function (newChange) {
 
           if (!newChange.data.user) {
@@ -153,6 +156,18 @@
 
         });
 
+        RealTimeService.subscribe('/lockScreen/' + getCookie('JSESSIONID'), serviceScope, function (newChange) {
+          if (newChange.action === 'LOCK_SCREEN' && !$rootScope.isUnlockShowed) {
+            $rootScope.showLockModal();
+          }
+        });
+      }
+
+      function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
       }
 
       function addOrUpdateClientUser(updUser) {
