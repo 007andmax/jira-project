@@ -124,7 +124,7 @@
   text-overflow: ellipsis;
 }
 
-.third-part .board-head {
+.third-part .board-head{
   text-align: center;
 }
 
@@ -267,7 +267,7 @@ header .calendar-top input {
   font-size: 54px;
 }
 
-.dashboard-main .stats.third-part {
+.dashboard-main .stats.third-part{
   height: 130px;
   cursor: pointer;
 }

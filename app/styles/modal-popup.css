@@ -340,4 +340,18 @@
   margin: auto 15px;
   height: 30px;
 }
+
+.modal-dialog.modal-unlock-window{
+  margin-top: -275px;
+  width: 800px;
+  margin-left: -400px;
+}
+
+.modal-dialog.modal-unlock-window .modal-content{
+  border-radius: 5px;
+}
+
+.unlock-screen-wrapper{
+  padding: 50px 100px;
+}
 /*# sourceMappingURL=modal-popup.css.map */

@@ -1,7 +1,7 @@
-<div class="text-center" ng-form="unlockForm">
-  <img ng-src="{{ getUserAvatarUrl(currentUser) }}" width="350px" height="200px" alt="">
+<div class="text-center unlock-screen-wrapper" ng-form="unlockForm">
+  <img ng-src="{{ getUserAvatarUrl(currentUser) }}" width="200px" height="200px" alt="">
   <h3>Please unlock your screen</h3>
-  <div class="form-group" ng-class="{'has-error': isShowingErrors(unlockForm, 'code')}">
+  <div class="form-group text-left" ng-class="{'has-error': isShowingErrors(unlockForm, 'code')}">
 
     <label class="control-label" ng-hide="isShowingErrors(unlockForm, 'code')">
       Password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }}
