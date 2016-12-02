@@ -9,7 +9,7 @@
 
     <div ng-messages="unlockForm.code.$error" ng-hide="!isShowingErrors(unlockForm, 'code')">
       <label class="control-label" ng-message="required">
-        Password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }} name is required.
+        Password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }} is required.
       </label>
       <label class="control-label" ng-message="wrongCode">
         It is wrong password {{ currentUser.enableTwoFactorAuth && unlockModel.codeSent ? ' or code' : '' }}.
