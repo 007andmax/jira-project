@@ -6,17 +6,19 @@
     ['$scope', 'CompaniesService', '$timeout', function ($scope, CompaniesService, $timeout) {
       var promise;
       var companiesRelatedPermissions = ['CREATE_COMPANIES', 'EDIT_COMPANIES', 'ARCHIVE_COMPANIES',
-        'NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'VIEW_PASSWORDS', 'MODIFY_SETTINGS'];
+        'NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS',
+        'CREATE_PASSWORD_RECORD', 'EDIT_PASSWORD_RECORD'];
       var userRelatedPermissions = ['CREATE_USERS', 'EDIT_USERS', 'ARCHIVE_USERS'];
       var accountingRelatedPermissions = ['CREATE_INVOICE'];
       var productsRelatedPermissions = ['MANAGE_PRODUCTS'];
-      var companySettingsRelatedPermissions = ['MODIFY_SETTINGS'];
+      var passwordsRelatedPermissions = ['CREATE_PASSWORD_RECORD', 'EDIT_PASSWORD_RECORD', 'DELETE_PASSWORD_RECORD'];
 
       $scope.sections = {
         'Tickets Area': ['EDIT_TICKETS', 'DELETE_TICKETS', 'REOPEN_CLOSED_TICKETS'],
         'Company Area': ['VIEW_COMPANIES', 'CREATE_COMPANIES', 'EDIT_COMPANIES', 'ARCHIVE_COMPANIES', 'VIEW_USERS', 'CREATE_USERS', 'EDIT_USERS', 'ARCHIVE_USERS'],
-        'Accounting': ['VIEW_ACCOUNTING', 'CREATE_INVOICE', /*'VOID_INVOICE',*/ 'MANAGE_PRODUCTS', 'VIEW_PRODUCT_COST', 'MANAGE_SERVICES'],
-        'Devices': ['NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'VIEW_PASSWORDS', 'MODIFY_SETTINGS'],
+        'Accounting': ['VIEW_ACCOUNTING', 'CREATE_INVOICE', 'MANAGE_PRODUCTS', 'VIEW_PRODUCT_COST', 'MANAGE_SERVICES'],
+        'Devices': ['NETWORK_SCAN_CLIENTS', 'REMOTE_CONNECTIONS', 'MODIFY_SETTINGS'],
+        'Passwords': ['VIEW_PASSWORD_RECORD', 'CREATE_PASSWORD_RECORD', 'EDIT_PASSWORD_RECORD', 'DELETE_PASSWORD_RECORD'],
         'Quick Support': ['ALLOW_QUICK_CONNECT']
       };
 
@@ -54,7 +56,7 @@
           return true;
         } else if (role.permissions.indexOf('VIEW_PRODUCT_COST') === -1 && productsRelatedPermissions.indexOf(permission) > -1) {
           return true;
-        } else if (role.permissions.indexOf('VIEW_PASSWORDS') === -1 && companySettingsRelatedPermissions.indexOf(permission) > -1) {
+        } else if (role.permissions.indexOf('VIEW_PASSWORD_RECORD') === -1 && passwordsRelatedPermissions.indexOf(permission) > -1) {
           return true;
         } else {
           return false;
@@ -63,7 +65,7 @@
 
       $scope.getRelatedPermission = function (permission) {
         if (companiesRelatedPermissions.indexOf(permission) > -1) {
-          if (companySettingsRelatedPermissions.indexOf(permission) > -1) {
+          if (passwordsRelatedPermissions.indexOf(permission) > -1) {
             return 'View Companies and View Passwords';
           }
           return 'View Companies';
@@ -73,6 +75,8 @@
           return 'View Accounting';
         } else if (productsRelatedPermissions.indexOf(permission) > -1) {
           return 'View Product Cost';
+        } else if (passwordsRelatedPermissions.indexOf(permission) > -1) {
+          return 'View Passwords';
         } else {
           return 'required permission';
         }
@@ -93,8 +97,8 @@
             relatedPermissions = accountingRelatedPermissions;
           } else if (permission === 'VIEW_PRODUCT_COST') {
             relatedPermissions = productsRelatedPermissions;
-          } else if (permission === 'VIEW_PASSWORDS') {
-            relatedPermissions = companySettingsRelatedPermissions;
+          } else if (permission === 'VIEW_PASSWORD_RECORD') {
+            relatedPermissions = passwordsRelatedPermissions;
           }
 
           if (relatedPermissions) {

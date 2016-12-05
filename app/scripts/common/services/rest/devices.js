@@ -564,54 +564,6 @@
         });
       }
 
-      function saveCredentials(list, companyId, callback) {
-        if (!list) {
-          throw "list is required!"
-        }
-        if (!companyId) {
-          throw "companyId is required!"
-        }
-
-        var future = $http({
-          url: '/devices/saveCredentials?companyId=' + companyId,
-          method: 'POST',
-          data: { credentialAgents: list }
-        });
-        Utils.handleCallback(future, callback);
-      }
-
-      function getCredentialsByCompany(companyId, callback) {
-        if (!companyId) {
-          throw "companyId is required!"
-        }
-
-        //var info = [];
-
-        var future = $http({
-          url: '/devices/getAllCredentials?companyId=' + companyId,
-          method: 'GET'
-        });
-
-        RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-
-          if (newChange.action === 'CREDENTIALS_SAVED') {
-            //Utils.customizeArray(newChange.data, info);
-            if (callback) {
-              callback(newChange.data);
-            }
-          }
-        });
-
-        if (callback) {
-          future.then(function (resp) {
-            //Utils.customizeArray(resp.data, info);
-            callback(resp.data);
-          }, function (resp) {
-            callback(resp.data);
-          });
-        }
-      }
-
       function updateAgentSettings(agentsSetting, callback) {
         if (!agentsSetting) {
           throw "agentsSetting is required!"
@@ -702,11 +654,6 @@
         return storage.devices[id];
       }
 
-      function devicePasswordShown(credentialId, callback) {
-        var future = $http.get('/devices/getPassword?credentialAgentId=' + credentialId);
-        Utils.handleCallback(future, callback);
-      }
-
       function getDeviceReports(agentIds, companyId, callback) {
         var future = $http.post('/devices/report?companyId=' + companyId, agentIds);
         Utils.handleCallback(future, callback);
@@ -760,8 +707,6 @@
         sendDescription: sendDescription,
         sendAgentUpdateRequest: sendAgentUpdateRequest,
         sendPowerAction: sendPowerAction,
-        saveCredentials: saveCredentials,
-        getCredentialsByCompany: getCredentialsByCompany,
         updateAgentSettings: updateAgentSettings,
         getAgentSettingsByCompany: getAgentSettingsByCompany,
         createOneTimeRemoteSession: createOneTimeRemoteSession,
@@ -772,7 +717,6 @@
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
         getByCompanyId: getByCompanyId,
-        devicePasswordShown: devicePasswordShown,
         getDeviceReports: getDeviceReports,
         getOneTimeHistory: getOneTimeHistory,
         getOneById: getOneById,
