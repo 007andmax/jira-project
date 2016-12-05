@@ -327,7 +327,7 @@
                        typeahead-min-length="0" qt-typeahead-show-on-focus ng-trim="false"
                        custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '100%'}">
 
-                <span style="position: absolute; top: 14px; right: 13px;">
+                <span class="x-mark" style="top: 4px;" >
                   <i class="icn-sm icn-caret-gray" ng-hide="ticketCompanyChoosen"></i>
 
                   <i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"
@@ -355,7 +355,7 @@
 
               <input type="hidden" ng-model="ticket.createdUser.firstName" name="ticketCreatedUser" ng-required="true">
 
-              <div typeahead-input-icon="ticketCreatedUser" style="position: absolute;top: 29px;right: 13px;"></div>
+              <div typeahead-input-icon="ticketCreatedUser" class="x-mark" ></div>
 
             </div>
           </div>
@@ -377,7 +377,7 @@
                      qt-typeahead-show-on-focus ng-required="false"
                      custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '360px'}">
 
-              <div typeahead-input-icon="ticketAssignTo" style="position: absolute;top: 29px;right: 13px;"></div>
+              <div typeahead-input-icon="ticketAssignTo" class="x-mark" ></div>
 
             </div>
           </div>
@@ -391,9 +391,9 @@
                    ng-model="ticketAgent" name="ticketAgent"
                    ng-disabled="(ticket.createdUser && ticket.createdUser.companyId === unassignedCompany.id) || !filteredAgentList || !filteredAgentList.length"
                    uib-typeahead="agent as (agent.hostName || agent.ip) for agent in filteredAgentList | filter:filterAgents($viewValue) | orderBy:'hostName'"
-                   qt-typeahead-show-on-focus custom-style="{'max-height': '113px', 'overflow-y': 'auto'}">
+                   qt-typeahead-show-on-focus custom-style="{'max-height': '113px', 'overflow-y': 'auto', 'width': '356px'}">
 
-            <div typeahead-input-icon="ticketAgent" style="position: absolute;top: 29px;right: 13px;"></div>
+            <div typeahead-input-icon="ticketAgent" class="x-mark" ></div>
 
           </div>
 

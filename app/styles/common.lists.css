@@ -159,7 +159,7 @@
   display: none !important;
 }
 
-.user-submitted-tickets{
+.user-submitted-tickets {
   margin-left: 20px;
 }
 
@@ -172,6 +172,7 @@
 
   vertical-align: top;
 }
+
 .qt-list.qt-users > li > [class*='col-'] {
   padding: 0 15px;
 }
@@ -441,7 +442,8 @@
   margin-top: 4px;
   margin-right: 10px;
 }
-.add-new-service{
+
+.add-new-service {
   background: #fff !important;
 }
 
@@ -871,9 +873,10 @@ Devices tab
 .qt-list .dropdown-submenu-wrapper .checkbox .control-indicator {
   top: 10px;
 }
+
 .qt-receivable > li.expanded .clickable-layer,
 .billable-main.expanded .clickable-layer,
-.inventory-details.expanded .clickable-layer{
+.inventory-details.expanded .clickable-layer {
   left: 50px;
   width: calc(100% - 50px);
 }
@@ -906,7 +909,7 @@ Devices tab
 }
 
 /*.qt-billable-sub > li + li {*/
-  /*min-height: 71px;*/
+/*min-height: 71px;*/
 /*}*/
 
 .inventory-details .qt-table {
@@ -2584,6 +2587,7 @@ Devices tab
 .qt-default-services > li:nth-child(even) {
   background-color: #e9f5fb;
 }
+
 .qt-receipt-number > li:nth-child(even) {
   background-color: #e9f5fb;
 }
@@ -2626,6 +2630,70 @@ Devices tab
     width: 263px;
   }
 }
+
+.password-manager-wrapper .container-fluid {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+
+.pass-list li:nth-child(even) {
+  background-color: #e9f5fb;
+}
+
+.pass-list .btn-primary.btn-create {
+  width: auto;
+  text-transform: initial;
+}
+
+.pass-icn{
+  width: 30px;
+  padding: 0 5px;
+  cursor: pointer;
+  height: 20px;
+  float: right;
+}
+.pass-delete{
+  background: url("../images/input-icons/pass-manager-icn/delete-grey.png") no-repeat;
+    background-size: contain;
+}
+.pass-delete:hover{
+  background: url("../images/input-icons/pass-manager-icn/delete.png") no-repeat;
+    background-size: contain;
+}
+
+.pass-history{
+  background: url("../images/input-icons/pass-manager-icn/history-grey.png") no-repeat;
+    background-size: contain;
+}
+.pass-history:hover{
+  background: url("../images/input-icons/pass-manager-icn/history.png") no-repeat;
+    background-size: contain;
+}
+
+.pass-edit{
+  background: url("../images/input-icons/pass-manager-icn/edit-grey.png") no-repeat;
+    background-size: contain;
+}
+.pass-edit:hover{
+  background: url("../images/input-icons/pass-manager-icn/edit.png") no-repeat;
+    background-size: contain;
+}
+
+.pass-warning{
+  background: url("../images/input-icons/pass-manager-icn/warning.png") no-repeat;
+    background-size: contain;
+}
+
+.pass-link{
+  background: url("../images/input-icons/pass-manager-icn/link-grey.png") no-repeat;
+  background-size: contain;
+}
+.pass-link:hover{
+  background: url("../images/input-icons/pass-manager-icn/link.png") no-repeat;
+  background-size: contain;
+}
+
 
 @-moz-document url-prefix() {
   .qt-default-services > li > .col-2,
