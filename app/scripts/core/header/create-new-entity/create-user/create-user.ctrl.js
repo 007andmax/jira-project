@@ -25,8 +25,8 @@
         if ($scope.resolvedCompanyId) {
           $timeout(function () {
             var company = CompaniesService.getOneById($scope.resolvedCompanyId);
-            if (company && company.isDefault) {
-              $scope.userCompany = CompaniesService.getOneById($scope.resolvedCompanyId);
+            if (company && !company.isDefault) {
+              $scope.userCompany = company;
             }
           });
         }
