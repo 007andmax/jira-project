@@ -1,8 +1,15 @@
+
+.card-view-wrapper{
+  margin: auto;
+  transition: width .3s;
+}
 .card-wrapper {
+  width: 315px;
   padding: 15px;
   display: inline-block;
   float: left; }
   .card-wrapper .card {
+    background: #fff;
     width: 100%;
     cursor: pointer;
     border: 1px solid;
@@ -19,7 +26,8 @@
     .card-wrapper .card__cover {
       height: 200px;
       background-size: cover !important;
-      position: relative; }
+      position: relative;
+      background-position: center center !important;}
       .card-wrapper .card__cover--hover {
         width: 100%;
         height: 144px;
@@ -114,3 +122,54 @@
       height: 26px; }
 
 /*# sourceMappingURL=card-view.css.map */
+
+.cards-sub-dropdown{
+  margin: 0 !important;
+  top:0 !important;
+}
+
+
+@media (max-width: 1600px) {
+  .card-view-wrapper{
+    width: 1260px;
+  }
+}
+@media (max-width: 1440px) {
+  .card-view-wrapper{
+    width: 950px;
+  }
+  .left-panel-closed .card-view-wrapper{
+    width: 1260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-view-wrapper{
+    width: 630px;
+  }
+  .left-panel-closed .card-view-wrapper{
+    width: 630px;
+  }
+}
+
+
+@media (max-width: 1300px) {
+  .card-view-wrapper{
+    width: 950px;
+  }
+  .left-panel-closed .card-view-wrapper{
+    width: 950px;
+  }
+}
+
+@media (min-width: 1880px) {
+  .card-view-wrapper{
+    width: 1575px;
+  }
+}
+
+@media (min-width: 2500px) {
+  .card-view-wrapper{
+    width: 2205px;
+  }
+}

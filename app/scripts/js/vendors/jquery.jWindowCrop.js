@@ -17,11 +17,11 @@
       var isTechLogo = imgType === 'tech-logo';
 
       if (targetLength <= containerLength) {
-        if (val + targetLength < containerLength - ( (isTechLogo ? 450: 460) - targetLength)) {
-          val = containerLength - (isTechLogo ? 450: 460);
+        if (val + targetLength < containerLength - ( (isTechLogo ? 450: 566) - targetLength)) {
+          val = containerLength - (isTechLogo ? 450: 566);
         }
-        if (val > (isTechLogo ? 450: 460) - targetLength) {
-          val = (isTechLogo ? 450: 460) - targetLength;
+        if (val > (isTechLogo ? 450: 566) - targetLength) {
+          val = (isTechLogo ? 450: 566) - targetLength;
         }
       } else {
         if (val + targetLength < containerLength) val = containerLength - targetLength;

@@ -27,8 +27,8 @@
 
               cropBox.jWindowCrop({
                 customTypeCrop: scope.cropInfo === 'tech-logo' ? 'tech-logo' : scope.cropInfo,
-                cropBoxWidth: scope.cropInfo === 'tech-logo' ? 450 : 460,
-                cropBoxHeight: scope.cropInfo === 'tech-logo' ? 200 : 280,
+                cropBoxWidth: scope.cropInfo === 'tech-logo' ? 450 : 566,
+                cropBoxHeight: scope.cropInfo === 'tech-logo' ? 200 : 400,
                 maxZoom: 2,
                 imageSource: '/file/' + scope.model.origin.id,
                 loadingText: '  ',
