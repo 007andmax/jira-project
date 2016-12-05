@@ -2,19 +2,18 @@
 
 (function () {
 
-  angular.module("quicktech").directive('logoutBtn',
-    ['$rootScope', function ($rootScope) {
-      return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-          element.on('click', function () {
+  angular.module("quicktech").directive('logoutBtn', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        element.on('click', function () {
 
-            window.loggingOut = true;
+          window.loggingOut = true;
 
-            window.location.href = '/logout';
-            window.location.hash = '';
-          })
-        }
+          window.location.href = '/logout';
+          window.location.hash = '';
+        })
       }
-    }]);
+    }
+  });
 })();
