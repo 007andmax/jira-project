@@ -11,8 +11,25 @@
     $provide.factory('myHttpInterceptor', ['$rootScope', '$q', function ($rootScope, $q) {
 
       function processResponse(response) {
+        var unlockExpiredHeader = response.headers('SESSION_UNLOCK_EXPIRED');
+        var userDisabledHeader = response.headers('USER_DISABLED');
         var isUnauthorized= response.data.errorMessage === 'unauthorized' || response.data.authMessage === 'unauthorized',
-          isDisabled = response.data.message === 'userDisabled' || response.headers('USER_DISABLED') === 'TRUE';
+          isDisabled = response.data.message === 'userDisabled';
+
+        if (userDisabledHeader) {
+          isDisabled = isDisabled || userDisabledHeader.toLowerCase() === 'true';
+        }
+
+        if (unlockExpiredHeader) {
+          var isSessionUnlockExpired = unlockExpiredHeader.toLowerCase() === 'true';
+        }
+
+        if (isSessionUnlockExpired && $rootScope.logOut) {
+          if (!$rootScope.isLogOut) {
+            $rootScope.logOut('You have been away for more than 3 hours. You have been logged off. Please login again.');
+          }
+          return;
+        }
 
         if (isUnauthorized || isDisabled) {
 
