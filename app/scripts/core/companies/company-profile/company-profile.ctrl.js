@@ -223,6 +223,7 @@
 
         $scope.selectChart = function (type) {
           $scope.selectedChart = type;
+          $scope.chartHidden = false;
           $scope.reloading = true;
           $timeout(function () {
             $scope.reloading = false;
