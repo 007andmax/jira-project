@@ -156,7 +156,7 @@
 
         });
 
-        RealTimeService.subscribe('/lockScreen/' + getCookie('JSESSIONID'), serviceScope, function (newChange) {
+        RealTimeService.subscribe('/lockScreen/' + getCookie('LOCK_SCREEN_ID'), serviceScope, function (newChange) {
           if (newChange.action === 'LOCK_SCREEN' && !$rootScope.isUnlockShowed) {
             $rootScope.showLockModal();
           }
