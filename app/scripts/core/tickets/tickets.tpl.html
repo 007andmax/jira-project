@@ -1,58 +1,42 @@
-<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader>
-
-  <div class="container-ticket-list pull-left">
-    <div class="empty-page-helper" ng-if="!tickets.length && !loadingOrRendering">
-      <p style="opacity: 0.57">There are no tickets</p>
-    </div>
-
-    <div class="ticket-list">
-      <ul class="tickets" tu-tickets-container>
-        <li class="ticket {{ ticket.priorityLevel.toLowerCase() }}-priority-border" ng-repeat="ticket in tickets track by ticket.id"
-            ng-controller="quicktech.core.tickets.ticketCtrl" on-finish-render="onFinishRendering()"
-            ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"
-            ui-sref="tickets.details({ ticketId: ticket.id, remoteParams: null })">
-          <div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>
-        </li>
-      </ul>
-    </div>
+<div class="password-manager-wrapper">
+  <div class="container-fluid">
+    <h2>Password Manager</h2>
+    <ul class="pass-list qt-list">
+      <li class="list-heading">
+        <div class="col-md-2"><p>Company</p></div>
+        <div class="col-md-2"><p>Type</p></div>
+        <div class="col-md-3"><p>Description</p></div>
+        <div class="col-md-3"><p>User/Device</p></div>
+        <div class="col-md-2 text-right">
+          <div class="btn btn-primary btn-create">Create</div>
+        </div>
+      </li>
+      <li>
+        <div class="col-md-2"><p class="ellipsis">Absolute Dentistry</p></div>
+        <div class="col-md-2"><p class="ellipsis">Office 365 account</p></div>
+        <div class="col-md-3"><p class="ellipsis">Office 365 account for Suzi</p></div>
+        <div class="col-md-3"><p class="ellipsis"><span class="pull-left">Office05.absolute.local</span><span
+          class="pass-icn pass-link pull-left"></span></p></div>
+        <div class="col-md-2 text-right">
+          <div class="pass-icn pass-delete"></div>
+          <div class="pass-icn pass-history"></div>
+          <div class="pass-icn pass-edit"></div>
+          <div class="pass-icn pass-warning"></div>
+        </div>
+      </li>
+      <li>
+        <div class="col-md-2"><p class="ellipsis">Absolute Dentistry</p></div>
+        <div class="col-md-2"><p class="ellipsis">Office 365 account</p></div>
+        <div class="col-md-3"><p class="ellipsis">Office 365 account for Suzi</p></div>
+        <div class="col-md-3"><p class="ellipsis"><span class="pull-left">Office05.absolute.local</span><span
+          class="pass-icn pass-link pull-left"></span></p></div>
+        <div class="col-md-2 text-right">
+          <div class="pass-icn pass-delete"></div>
+          <div class="pass-icn pass-history"></div>
+          <div class="pass-icn pass-edit"></div>
+          <div class="pass-icn pass-warning"></div>
+        </div>
+      </li>
+    </ul>
   </div>
-
-  <div ui-view></div>
-
 </div>
-
-<!--<div ng-controller="quicktech.core.tickets.ticketsCtrl" ticket-uploader ng-if="currentUser.isOwner">-->
-  <!--<div class="container-ticket-list pull-left" tu-tickets-container>-->
-
-    <!--<div class="ticket-list" upload-admin-spam="true">-->
-
-      <!--<ul class="tickets">-->
-
-        <!--<li class="ticket-type" ng-if="listType === 'spam' && tickets && tickets.length">-->
-          <!--<small><b>TICKETS MARKED AS SPAM</b></small>-->
-        <!--</li>-->
-
-        <!--<li class="ticket" ng-repeat="ticket in tickets" ng-init="onTicketRendering($last)" ticket-review-size-->
-            <!--ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"-->
-            <!--ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">-->
-          <!--<div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>-->
-        <!--</li>-->
-
-        <!--<li class="ticket-type" ng-if="reportSpamTickets && reportSpamTickets.length">-->
-          <!--<small><b>TICKETS REPORTED AS SPAM</b></small>-->
-        <!--</li>-->
-
-        <!--<li class="ticket" ng-repeat="ticket in reportSpamTickets"-->
-            <!--ng-init="onReportedAsSpamTicketRendering($last)" ticket-review-size-->
-            <!--ng-class="{'selected' : selectedTickets[ticket.id], 'closed': ticket.status === 'COMPLETED', 'active': ticket.id === currentOpeningTicket}"-->
-            <!--ng-controller="quicktech.core.tickets.ticketCtrl" ng-click="srefToDetails($event)">-->
-          <!--<div ng-include="'/html/scripts/core/tickets/ticket.tpl.html'"></div>-->
-        <!--</li>-->
-
-      <!--</ul>-->
-    <!--</div>-->
-  <!--</div>-->
-
-  <!--<div ui-view ticket-fixed-header></div>-->
-
-<!--</div>-->

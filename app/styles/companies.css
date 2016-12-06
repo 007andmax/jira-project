@@ -14,6 +14,7 @@
   transition: 0.3s ease-out box-shadow;
   min-height: 270px;
 }
+
 @media (max-width: 320px) {
   .companies-list .company-card {
     width: calc(100% - 30px);

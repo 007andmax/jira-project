@@ -19,10 +19,10 @@
                 </div>
 
               </div>
-              <div chart-data-restriction fetch-func="getTicketsDashboard" margin="100" divider="60" param0="frequency"
+              <div chart-data-restriction fetch-func="getTicketsDashboard" margin="120" divider="60" param0="frequency"
                    handle-data="handleDashboardData" style="height: 85%">
 
-                <div d3chart data="chartData" margin="{ top: 60, right: 40, bottom: 40, left: 40}"
+                <div d3chart data="chartData" margin="{ top: 60, right: 40, bottom: 40, left: 80}"
                      style="height: 100%" ng-if="!reloading">
                   <d3axis name="date" extent="true" orientation="bottom" time-format="{{ dateFormat }}" filter="parseDate"
                           ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
@@ -37,8 +37,7 @@
 
         <div class="col-lg-3 col-xs-3">
           <div class="stats third-part">
-            <div class="front" ng-click="selectChart('totalTickets')"
-                 ng-class="{'selected-chart': selectedChart === 'totalTickets'}">
+            <div class="front">
               <div class="stats__main">
                 <p class="board-head">
                   Total tickets

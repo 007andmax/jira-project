@@ -518,7 +518,7 @@
             animation: true,
             backdrop: 'static',
             keyboard: false,
-            size: 'custom-size-confirmation-pop-up',
+            size: 'unlock-window',
             windowClass: 'lock-screen-modal',
             templateUrl: '/html/scripts/common/templates/unlock-modal.tpl.html'
           };

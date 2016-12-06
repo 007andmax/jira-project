@@ -58,52 +58,54 @@
   height: 100%;
 }
 
-.create-window .general .create-ticket-form{
+.create-window .general .create-ticket-form {
   height: 550px;
   overflow: auto;
 }
 
-.create-window .general .create-ticket-form .services-in-create-tkt{
+.create-window .general .create-ticket-form .services-in-create-tkt {
   padding: 3px 0;
 }
 
-.create-window .general .create-ticket-form .qt-table{
+.create-window .general .create-ticket-form .qt-table {
   text-align: left;
   padding: 0px;
 }
 
-.create-window .general .create-ticket-form .qt-table .timer-quantity{
+.create-window .general .create-ticket-form .qt-table .timer-quantity {
   width: 100px;
 }
 
-.create-window .general .create-ticket-form .modal-footer .qt-table{
+.create-window .general .create-ticket-form .modal-footer .qt-table {
   text-align: left;
   padding: 15px;
 }
 
-
-
-.create-window .general .btn-bottom{
+.create-window .general .btn-bottom {
   position: absolute;
   bottom: 25px;
   right: 30px;
   width: 90%;
 }
-.create-window .general .create-user-form .form-control-number{
+
+.create-window .general .create-user-form .form-control-number {
   width: 305px;
 }
+
 .create-window .general .form-row .form-group {
   max-width: 48%;
   width: 100%;
   margin: 0;
   margin-bottom: 15px;
 }
+
 .create-window .general .dropdown-subscribe,
 .create-window .general .dropdown-priority,
-.create-window .general .dropdown-account-type{
+.create-window .general .dropdown-account-type {
   width: 100%;
 }
-.create-window .general .no-label{
+
+.create-window .general .no-label {
   margin-top: 16px;
 }
 
@@ -199,18 +201,22 @@
 .create-window .general .company-window__info .avatar-create .btns-container button {
   width: 48%;
 }
+
 .create-window .general .company-window__contact .custom-phone-number,
-.create-window .general .company-window__location .custom-phone-number{
+.create-window .general .company-window__location .custom-phone-number {
   padding: 0;
 }
+
 .create-window .general .company-window__contact .custom-phone-type,
-.create-window .general .company-window__location .custom-phone-type{
+.create-window .general .company-window__location .custom-phone-type {
   padding-right: 0;
 }
+
 .create-window .general .company-window__contact .custom-phone-type input,
-.create-window .general .company-window__location .custom-phone-type input{
+.create-window .general .company-window__location .custom-phone-type input {
   width: 115px;
 }
+
 .create-window .general .company-window__contact .btns-container {
   margin-top: 34px;
   margin-bottom: 15px;
@@ -239,11 +245,11 @@
   align-items: center;
 }
 
-.new-tax{
+.new-tax {
   width: 100%;
 }
 
-.qt-list > li > .new-tax >[class*='col-'] {
+.qt-list > li > .new-tax > [class*='col-'] {
   position: relative;
   float: left;
   padding: 0 5px;
@@ -267,7 +273,7 @@
   min-width: 80px;
 }
 
-.create-window .general .company-window__deploy-agents--settings .form-group:last-child  .form-control{
+.create-window .general .company-window__deploy-agents--settings .form-group:last-child .form-control {
   width: 60%;
 }
 
@@ -275,7 +281,7 @@
   margin-bottom: 0;
 }
 
-.create-window .general .company-window__deploy-agents .form-control.show-password + a.show-password-hit{
+.create-window .general .company-window__deploy-agents .form-control.show-password + a.show-password-hit {
   top: 26px;
 }
 
@@ -291,10 +297,12 @@
 .create-window .general .company-window .phone-form--type {
   width: 40%;
 }
-.create-window .general .choose-file{
+
+.create-window .general .choose-file {
   margin-top: 20px;
   margin-bottom: 15px;
 }
+
 .create-window .general .company-window .avatar-create .avatar {
   border: 1px solid #e2e6e6;
   -webkit-border-radius: 0;
@@ -306,14 +314,17 @@
   align-items: center;
   width: 100%;
 }
-.create-window .general .service-form-wrapper{
+
+.create-window .general .service-form-wrapper {
   height: 585px;
   box-shadow: none;
   padding: 0 15px;
 }
-.create-window .general .service-form-wrapper.edit-form-checkbox .col-3 label{
+
+.create-window .general .service-form-wrapper.edit-form-checkbox .col-3 label {
   left: 0;
 }
+
 .create-window .general footer {
   padding-top: 15px;
 }
@@ -326,18 +337,42 @@
   width: 48%;
   font-weight: normal;
 }
+
 .create-window .create-new-user .custom-phone-type,
-.create-window .create-new-user .custom-phone-number{
+.create-window .create-new-user .custom-phone-number {
   padding: 0 15px;
 }
 
-.buttons-container{
+.buttons-container {
   padding: 20px 0;
 }
 
-.buttons-container .btn{
+.buttons-container .btn {
   width: 150px;
   margin: auto 15px;
   height: 30px;
 }
+
+.modal-dialog.modal-unlock-window {
+  margin-top: -275px;
+  width: 800px;
+  margin-left: -400px;
+}
+
+.modal-dialog.modal-unlock-window .modal-content {
+  border-radius: 5px;
+}
+
+.unlock-screen-wrapper {
+  padding: 50px 100px;
+}
+
+.create-window .x-mark {
+  position: absolute;
+  top: 19px;
+  right: 3px;
+  padding: 10px;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=modal-popup.css.map */

@@ -22,6 +22,7 @@
             <input type="text" class="form-control" name="userName" typeahead-on-select="setUserEmail(downloadAgentUser.userName)"
                    uib-typeahead="user.firstName for user in usersWithEmails | filter: { firstName: $viewValue }:stateComparator | orderBy:'firstName'"
                    placeholder="Name" ng-model="downloadAgentUser.userName" qt-typeahead-show-on-focus
+                   custom-style="{'width':'100%'}"
                    autocomplete="off" qt-scroll-to="center">
 
             <div typeahead-input-icon="downloadAgentUser.userName" style="position: absolute;top: 35px;right: 13px;"></div>
@@ -42,7 +43,7 @@
 
             <input type="text" class="form-control" typeahead-on-select="setUserName(downloadAgentUser.email)"
                    uib-typeahead="user.primaryEmail for user in usersWithEmails | filter: { primaryEmail: $viewValue }:stateComparator | orderBy:'primaryEmail'"
-                   placeholder="Email Address" ng-model="downloadAgentUser.email" qt-typeahead-show-on-focus>
+                   placeholder="Email Address" ng-model="downloadAgentUser.email" custom-style="{'width':'100%'}" qt-typeahead-show-on-focus>
 
             <input type="hidden" ng-model="downloadAgentUser.email" name="email"
                    ng-pattern="emailPattern" ng-required="true" ng-maxlength="128">

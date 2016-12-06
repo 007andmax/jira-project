@@ -25,7 +25,7 @@
                   <li class="dropdown-submenu">
                     <a tabindex="-1" href="javascript:void(0)">Set Privilege</a>
                     <div class="dropdown-submenu-wrapper">
-                      <ul class="dropdown-menu dropdown-privilege">
+                      <ul class="dropdown-menu dropdown-privilege cards-sub-dropdown">
                         <li ng-class="{active: user.role === 'USER'}" ng-click="changeUserRole(user.id, 'USER')">
                           <a tabindex="-1" href="javascript:void(0)">User</a>
                         </li>
@@ -38,7 +38,7 @@
                   <li class="dropdown-submenu">
                     <a tabindex="-1" href="javascript:void(0)">Subscribe to...</a>
                     <div class="dropdown-submenu-wrapper">
-                      <ul class="dropdown-menu dropdown-subscribe">
+                      <ul class="dropdown-menu dropdown-subscribe cards-sub-dropdown">
 
                         <li ng-click="subscribeUser(user, 'ticket')">
                           <a tabindex="-1" href="javascript:void(0)">
@@ -86,7 +86,7 @@
                   <li class="dropdown-submenu" change-image="user" model-image-path="avatar">
                     <a tabindex="-1" href="javascript:void(0)">Upload photo</a>
                     <div class="dropdown-submenu-wrapper">
-                      <ul class="dropdown-menu dropdown-privilege" stop-propagation="click">
+                      <ul class="dropdown-menu dropdown-privilege cards-sub-dropdown" stop-propagation="click">
                         <li change-image-button>
                           <a tabindex="-1" href="javascript:void(0)">Change Image</a>
                         </li>
@@ -122,19 +122,19 @@
           </div>
           <div class="card__info user-type">
             <div>
-              <img src="images/input-icons/company-user.png" alt="">
+              <img src="images/company/company-profile(blue).png" alt="">
               <p>{{ getUserCompanyName(user) }}</p>
             </div>
             <div ng-if="getPriorityNumberInfo('NUMBER')">
-              <img src="images/input-icons/smartphone.png" alt="">
+              <img src="images/company/smartphone(green).png" alt="">
               <p>{{ getPriorityNumberInfo('NUMBER') }}</p>
             </div>
             <div ng-if="user.primaryEmail">
-              <img src="images/settings-icon/new-email.png" alt="">
+              <img src="images/company/email(purple).png" alt="">
               <p class="ellipsis">{{ user.primaryEmail }}</p>
             </div>
             <div>
-              <img src="images/input-icons/ticket-black.png" alt="">
+              <img src="images/company/copy(yellow).png" alt="">
               <p>Sbmt. tickets {{ user.userStatistic.ticketsSubmitted || 0 }}</p>
             </div>
           </div>
