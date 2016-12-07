@@ -2631,68 +2631,6 @@ Devices tab
   }
 }
 
-.password-manager-wrapper .container-fluid {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-}
-
-.pass-list li:nth-child(even) {
-  background-color: #e9f5fb;
-}
-
-.pass-list .btn-primary.btn-create {
-  width: auto;
-  text-transform: initial;
-}
-
-.pass-icn{
-  width: 30px;
-  padding: 0 5px;
-  cursor: pointer;
-  height: 20px;
-  float: right;
-}
-.pass-delete{
-  background: url("../images/input-icons/pass-manager-icn/delete-grey.png") no-repeat;
-    background-size: contain;
-}
-.pass-delete:hover{
-  background: url("../images/input-icons/pass-manager-icn/delete.png") no-repeat;
-    background-size: contain;
-}
-
-.pass-history{
-  background: url("../images/input-icons/pass-manager-icn/history-grey.png") no-repeat;
-    background-size: contain;
-}
-.pass-history:hover{
-  background: url("../images/input-icons/pass-manager-icn/history.png") no-repeat;
-    background-size: contain;
-}
-
-.pass-edit{
-  background: url("../images/input-icons/pass-manager-icn/edit-grey.png") no-repeat;
-    background-size: contain;
-}
-.pass-edit:hover{
-  background: url("../images/input-icons/pass-manager-icn/edit.png") no-repeat;
-    background-size: contain;
-}
-
-.pass-warning{
-  background: url("../images/input-icons/pass-manager-icn/warning.png") no-repeat;
-    background-size: contain;
-}
-
-.pass-link{
-  background: url("../images/input-icons/pass-manager-icn/link-grey.png") no-repeat;
-  background-size: contain;
-}
-.pass-link:hover{
-  background: url("../images/input-icons/pass-manager-icn/link.png") no-repeat;
-  background-size: contain;
-}
 
 
 @-moz-document url-prefix() {
