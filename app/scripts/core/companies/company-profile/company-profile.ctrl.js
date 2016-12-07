@@ -241,7 +241,7 @@
           switch ($scope.selectedChart) {
             case 'countOfNewTickets': return 'Created tickets';
             case 'responseTime': return 'Response time';
-            case 'averageTime': return 'Average service time';
+            case 'averageTime': return 'Actual service time';
           }
         };
 

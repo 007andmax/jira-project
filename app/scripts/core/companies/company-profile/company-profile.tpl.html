@@ -147,8 +147,15 @@
         <tr>
           <td colspan="2">
             <p>Response Time</p>
-            <p class="big-count font-yellow">{{ (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
-              || 0 }} min</p>
+            <p class="big-count font-yellow">
+              {{
+              companyData.companyTicketStatistic && companyData.companyTicketStatistic.averageResponseTime
+              ?
+              (companyData.companyTicketStatistic.averageResponseTime / 60).toFixed()
+              :
+              0
+              }} min
+            </p>
           </td>
         </tr>
         </tbody>
