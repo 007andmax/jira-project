@@ -18,7 +18,7 @@
 .create-window .checked {
   color: #000000 !important;
 }
-
+.pass-man-popup .close-btn,
 .create-window .close-btn {
   position: absolute;
   right: 10px;
