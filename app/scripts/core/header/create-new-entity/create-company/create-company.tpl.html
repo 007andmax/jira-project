@@ -88,7 +88,7 @@
                  uib-typeahead="clientType for clientType in clientTypes" tooltip-enable="editCompany.hasProducts"
                  readonly qt-typeahead-show-on-focus required uib-tooltip="Current vendor has linked products"
                  ng-disabled="editCompany.clientType.toLowerCase() === 'vendor' && editCompany.hasProducts">
-          <div typeahead-input-icon="editCompany.clientType" style="position: absolute;top: 30px;right: 13px;"></div>
+          <div typeahead-input-icon="editCompany.clientType" class="x-mark"></div>
         </div>
 
 
@@ -311,7 +311,7 @@
                  readonly qt-typeahead-async-show-on-focus
                  custom-style="{'width':'100%'}">
           <div typeahead-input-icon="editCompany.serviceType"
-               style="position: absolute;top: 30px;right: 13px;"></div>
+               class="x-mark"></div>
         </div>
 
         <div class="form-group col-xs-4" style="padding-right: 0;" ng-class="{'has-error': isShowingErrors(infoForm, 'vendorPaymentTerms')}">
@@ -330,7 +330,7 @@
                  uib-typeahead="paymentTerm for paymentTerm in paymentTerms"
                  qt-typeahead-show-on-focus readonly>
           <div typeahead-input-icon="editCompany.paymentTerms"
-               style="position: absolute;top: 30px;right: 13px;"></div>
+               class="x-mark"></div>
         </div>
 
         <div class="form-group col-xs-4" style="padding-right: 0;" >
@@ -343,7 +343,7 @@
                  uib-typeahead="paymentMethod for paymentMethod in paymentMethods"
                  readonly qt-typeahead-async-show-on-focus>
           <div typeahead-input-icon="editCompany.defaultPaymentMethod"
-               style="position: absolute;top: 30px;right: 13px;"></div>
+               class="x-mark"></div>
         </div>
       </div>
 
