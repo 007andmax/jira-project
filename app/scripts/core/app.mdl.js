@@ -13,6 +13,7 @@
       'quicktech.core.companies',
       'quicktech.core.products',
       'quicktech.core.services',
+      'quicktech.core.passwordManager',
       'quicktech.core.billable',
       'quicktech.core.recurring',
       'quicktech.core.receivable',
@@ -106,6 +107,11 @@
           url: '/inventory/services/:tabName',
           templateUrl: '/html/scripts/core/services/services.tpl.html',
           controller: 'quicktech.core.services.servicesCtrl'
+        }))
+        .state('password-manager', waitForServices({
+          url: '/inventory/password-manager',
+          templateUrl: '/html/scripts/core/password-manager/password-manager.tpl.html',
+          controller: 'quicktech.core.passwordManager.passwordManagerCtrl'
         }))
         .state('accounting', waitForServices({
           url: '/accounting',
@@ -582,6 +588,8 @@
         $rootScope.decimalNumberPattern = /^\d{1,10}(\.\d{0,2}){0,1}$/;
         $rootScope.numberPattern = /^\d?[0-9]{0,17}$/;
         $rootScope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        $rootScope.urlPattern = /^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+        $rootScope.ipPattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
         $templateRequest('/commonHtml/assets/templates/user-confirmations.tpl.html');
 

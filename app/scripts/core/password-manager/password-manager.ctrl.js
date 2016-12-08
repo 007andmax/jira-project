@@ -1,0 +1,105 @@
+'use strict';
+
+(function () {
+
+  angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordManagerCtrl',
+    ['$scope', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
+      'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      function ($scope, PasswordManagerService, CompaniesService, UsersService, DevicesService,
+                UserConfirmationsService, UserNotificationService) {
+        $scope.passwords = [];
+        $scope.orderPasswords = {
+          field: 'company',
+          reverse: false
+        };
+
+        PasswordManagerService.getRecords(function (resp) {
+          $scope.passwords = angular.copy(resp);
+        });
+
+        $scope.getCompanyById = CompaniesService.getOneById;
+        $scope.getUserById = UsersService.getOneById;
+        $scope.getDeviceById = DevicesService.getOneById;
+        $scope.parseDate = Date.parse.bind(Date);
+
+        $scope.deletePassword = function (password) {
+          var message = 'Are you sure you want to delete this password?';
+          UserConfirmationsService.show(message, 'Yes').then(function () {
+            PasswordManagerService.deletePassword(password.id, function () {
+              UserNotificationService.show('Password was deleted successfully.');
+            })
+          })
+        };
+
+        $scope.getLinkName = function (link, companyId) {
+          if (!link) {
+            return '';
+          }
+
+          if (link.userId) {
+            var user = UsersService.getOneById(link.userId);
+            if (user) {
+              return $scope.getUserName(user);
+            }
+          } else {
+            var device = DevicesService.getOneByAgentId(link.agentId, companyId);
+            if (device) {
+              return getDeviceName(device);
+            }
+          }
+        };
+
+        $scope.isPasswordExpired = function (password) {
+          if (password.expiredDate) {
+            return Date.now() >= password.expiredDate;
+          }
+        };
+
+        $scope.userReadable = function (text) {
+          if (!text) {
+            return '';
+          }
+
+          var words = text.split('_'),
+            result = '';
+
+          for (var i = 0, len = words.length; i < len; i++) {
+            var word = words[i];
+            result += word[0].toUpperCase() + word.slice(1).toLowerCase();
+
+            if (i !== len - 1) {
+              result += ' ';
+            }
+          }
+
+          return result;
+        };
+
+        $scope.setOrderForPasswords = function (option) {
+          if (option === $scope.orderPasswords.field) {
+            $scope.orderPasswords.reverse = !$scope.orderPasswords.reverse;
+          } else {
+            $scope.orderPasswords.field = option;
+            $scope.orderPasswords.reverse = false;
+          }
+        };
+
+        $scope.orderByForPasswords = function (item) {
+          if ($scope.orderPasswords.field === 'company') {
+            return CompaniesService.getOneById(item.companyId).name;
+          } else if ($scope.orderPasswords.field === 'type') {
+            return $scope.userReadable(item.template);
+          }else if ($scope.orderPasswords.field === 'description') {
+            return item.description;
+          } else if ($scope.orderPasswords.field === 'link') {
+            return $scope.getLinkName(item.links[0]);
+          }
+        };
+
+        function getDeviceName(device) {
+          return device.hostName || device.ip || device.ipAddress;
+        }
+
+      }]);
+
+}());

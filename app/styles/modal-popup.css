@@ -375,4 +375,12 @@
   cursor: pointer;
 }
 
+.pass-man-popup .x-mark {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  padding: 10px;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=modal-popup.css.map */

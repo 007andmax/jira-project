@@ -61,6 +61,8 @@
             return 'products';
           } else if ($state.includes("services")) {
             return 'services';
+          } else if ($state.includes("password-manager")) {
+            return 'password-manager';
           } else if ($state.includes("accounting.billable")) {
             return 'billable';
           } else if ($state.includes("accounting.recurring")) {

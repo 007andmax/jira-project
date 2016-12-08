@@ -12,7 +12,7 @@
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
         <strong
-          uib-tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}"
+          uib-tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName  : userReadable(getPageNameByState()) }}"
           tooltip-placement="bottom" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
           <span trimmed-tooltip-container>
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
