@@ -108,7 +108,7 @@
           }
           var callback = storage.callbacks[scopeId];
           if (callback && callback.callback && typeof callback.callback === "function") {
-            callback.callback(storage.devices[callback.companyId]);
+            callback.callback(storage.devices[callback.companyId] || storage.devices);
           }
         }
       }
@@ -688,7 +688,7 @@
           for (var companyId in devices) {
             if (companyId !== 'staticCopy') {
               var devicesByCompany = devices[companyId];
-              var device = _getDeviceByAgentId(devicesByCompany, companyId);
+              var device = _getDeviceByAgentId(devicesByCompany, agentId);
               if (device) {
                 return device;
               }

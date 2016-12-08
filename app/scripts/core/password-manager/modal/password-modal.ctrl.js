@@ -20,6 +20,7 @@
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.users = UsersService.getClientUsers();
         DevicesService.getDevicesCount($scope, function (resp) {
+          $scope.devicesByCompanies = resp;
           $scope.devices = [];
           for (var companyId in resp) {
             var devicesByCompany = resp[companyId];
@@ -186,6 +187,7 @@
 
         $scope.save = function (form) {
           if (form.$valid) {
+            $scope.editedPassword.links = angular.copy($scope.password.links);
             var toSave = buildDto($scope.editedPassword);
             PasswordManagerService.save(toSave, function () {
               $uibModalInstance.dismiss();
@@ -215,11 +217,12 @@
 
         function buildDto(password) {
           var dto = {
+            id: password.id,
             template: password.template.toUpperCase().split(' ').join('_'),
             companyId: password.companyId,
             username: password.username,
             password: password.password,
-            expiredDate: formatDate(password.expiredDate)
+            expiredDate: formatDate(new Date(password.expiredDate))
           };
 
           switch (dto.template) {
@@ -269,7 +272,10 @@
         }
 
         function formatDate(date) {
-          return date ? date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() : null;
+          if (!date || !date.getTime()) {
+            return null;
+          }
+          return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
 
         function isDataChanged(form) {

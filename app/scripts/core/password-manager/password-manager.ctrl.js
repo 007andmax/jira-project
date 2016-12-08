@@ -5,8 +5,11 @@
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordManagerCtrl',
     ['$scope', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
+      'quicktech.common.services.SharedStateService',
       function ($scope, PasswordManagerService, CompaniesService, UsersService, DevicesService,
-                UserConfirmationsService, UserNotificationService) {
+                UserConfirmationsService, UserNotificationService, SharedStateService) {
+        var headerSharedState = SharedStateService.getSharedState('passwordsHeader');
+
         $scope.passwords = [];
         $scope.orderPasswords = {
           field: 'company',
@@ -26,7 +29,7 @@
           var message = 'Are you sure you want to delete this password?';
           UserConfirmationsService.show(message, 'Yes').then(function () {
             PasswordManagerService.deletePassword(password.id, function () {
-              UserNotificationService.show('Password was deleted successfully.');
+              UserNotificationService.show('Password was deleted successfully.', true);
             })
           })
         };
@@ -75,6 +78,37 @@
           return result;
         };
 
+        $scope.filterPasswords = function (value) {
+          var filter = headerSharedState.filter;
+          var result = true;
+
+          if (filter.companyId) {
+            result = result && filter.companyId === value.companyId;
+          }
+
+          if (filter.agentId) {
+            var isDeviceFound = false;
+            for (var i = 0; i < value.links.length; i++) {
+              var link = value.links[i];
+              if (link.agentId === filter.agentId) {
+                isDeviceFound = true;
+                break;
+              }
+            }
+            result = result && isDeviceFound;
+          }
+
+          if (filter.template) {
+            result = result && filter.template === value.template;
+          }
+
+          if (filter.expiredDate) {
+            result = result && formatDate(filter.expiredDate) === formatDate(new Date(value.expiredDate));
+          }
+
+          return result;
+        };
+
         $scope.setOrderForPasswords = function (option) {
           if (option === $scope.orderPasswords.field) {
             $scope.orderPasswords.reverse = !$scope.orderPasswords.reverse;
@@ -98,6 +132,10 @@
 
         function getDeviceName(device) {
           return device.hostName || device.ip || device.ipAddress;
+        }
+
+        function formatDate(date) {
+          return date ? date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() : null;
         }
 
       }]);

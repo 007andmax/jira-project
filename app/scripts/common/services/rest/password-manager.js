@@ -54,6 +54,11 @@
         Utils.handleCallback(future, callback);
       }
 
+      function deletePassword(recordId, callback) {
+        var future = $http.delete('/passwordRecords/' + recordId);
+        Utils.handleCallback(future, callback);
+      }
+
       function save(data, callback) {
         var future = $http.post('/passwordRecords', data);
         Utils.handleCallback(future, callback);
@@ -63,6 +68,7 @@
         generateRandomPassword: generateRandomPassword,
         getRecords: getRecords,
         getPasswordByRecord: getPasswordByRecord,
+        deletePassword: deletePassword,
         save: save
       }
 

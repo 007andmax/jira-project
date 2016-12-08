@@ -52,6 +52,11 @@
             companyId: ''
           }
         },
+        passwordsHeader: {
+          filter: {
+            companyId: ''
+          }
+        },
         rightPanel: {
           companyId: undefined
         },
