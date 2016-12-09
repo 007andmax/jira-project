@@ -349,6 +349,84 @@
              ng-click="stateGo($event, 'services', { tabName: 'default' })">
           Services
         </div>
+        <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
+             ng-class="{active: $state.includes('password-manager')}"
+             ng-click="stateGo($event, 'password-manager')">
+          Password Manager
+        </div>
+        <div class="filter-block" ng-if="$state.includes('password-manager')">
+          <div class="center-category__category filter" uib-dropdown>
+            <div>
+              <p>By Company</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal"
+                       value="{{ getCompanyName(passwordSharedState.filter.companyId) || '' }}" uib-dropdown-toggle
+                       readonly>
+                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.companyId"></i>
+                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
+                   ng-show="passwordSharedState.filter.companyId" ng-click="filterPasswords('byCompany')"
+                   uib-tooltip="clear" tooltip-placement="top"></i>
+              </div>
+            </div>
+            <ul class="dropdown-menu">
+              <li ng-click="filterPasswords('byCompany', company.id)"
+                ng-repeat="company in clientCompanies() | filter: {isDefault: false} | orderBy: 'name' track by company.id">
+                {{ company.name }}
+              </li>
+            </ul>
+          </div>
+          <div class="center-category__category filter" uib-dropdown>
+            <div>
+              <p>By Device</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal" uib-dropdown-toggle readonly
+                       value="{{ getDeviceNameByAgentId(passwordSharedState.filter.agentId) || '' }}">
+                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.agentId"></i>
+                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
+                   ng-show="passwordSharedState.filter.agentId" ng-click="filterPasswords('byDevice')"
+                   uib-tooltip="clear" tooltip-placement="top"></i>
+              </div>
+            </div>
+            <ul class="dropdown-menu">
+              <li ng-repeat="device in devices | orderBy: 'hostName'"
+                  ng-click="filterPasswords('byDevice', device.agentId)">
+                {{ device.hostName || device.ip }}
+              </li>
+            </ul>
+          </div>
+          <div class="center-category__category filter" uib-dropdown>
+            <div>
+              <p>By Type</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal" uib-dropdown-toggle readonly
+                       value="{{ userReadable(passwordSharedState.filter.template) }}">
+                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.template"></i>
+                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;"
+                   ng-show="passwordSharedState.filter.template" ng-click="filterPasswords('byType')"
+                   uib-tooltip="clear" tooltip-placement="top"></i>
+              </div>
+            </div>
+            <ul class="dropdown-menu">
+              <li ng-repeat="template in templates | orderBy: 'toString()'"
+                  ng-click="filterPasswords('byType', template)">
+                {{ userReadable(template) }}
+              </li>
+            </ul>
+          </div>
+          <div class="center-category__category filter">
+            <div>
+              <p>By Expire date</p>
+              <div style="position: relative;">
+                <input type="text" class="form-control has-dropdown readonly-normal" readonly
+                       date-range-picker="onExpireDateChange" position="right bottom">
+                <i class="icn-sm icn-caret-gray" ng-show="!passwordSharedState.filter.expiredDate">
+                </i>
+                <i class="icn-sm icn-remove-token" style="cursor: pointer; pointer-events: auto;" ng-show="passwordSharedState.filter.expiredDate"
+                   ng-click="clearDateRange()" uib-tooltip="clear" tooltip-placement="top"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="left-panel-full-wrapper nano" ng-show="openedCategory === 'tutorial' && !isLeftPanelHidden">

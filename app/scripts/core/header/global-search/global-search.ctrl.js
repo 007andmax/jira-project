@@ -142,8 +142,7 @@
         };
 
         $scope.getDeviceById = function (id, companyId) {
-          var devices = DevicesService.getByCompanyId(companyId);
-          return Utils.findById(devices, id) || {};
+          return DevicesService.getOneById(id, companyId) || {};
         };
 
         function selectItem(item) {

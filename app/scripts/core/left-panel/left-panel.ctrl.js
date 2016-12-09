@@ -10,13 +10,25 @@
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
-          companiesSharedState = SharedStateService.getSharedState('companiesHeader');
+          companiesSharedState = SharedStateService.getSharedState('companiesHeader'),
+          passwordSharedState = SharedStateService.getSharedState('passwordsHeader');
 
         $scope.globalSearch = SharedStateService.getSharedState('globalSearch');
         $scope.usersSharedState = usersSharedState;
         $scope.companiesSharedState = companiesSharedState;
+        $scope.passwordSharedState = passwordSharedState;
         $scope.qSHistoryExpanded = false;
         $scope.maxDate = Date.now();
+        $scope.templates = [
+          'OFFICE_365_ACCOUNT',
+          'MICROSOFT_ACCOUNT',
+          'EMAIL_ACCOUNT',
+          'HOSTING',
+          'DEVICE',
+          'GENERIC',
+          'AGENT',
+          'LOCAL_USER_ACCOUNT'
+        ];
 
         //for one time popover
         // $scope.changeCompanyStatusToActive = CompaniesService.changeCompanyStatusToActive;
@@ -32,6 +44,19 @@
         $rootScope.isLeftPanelHidden = false;
 
         $scope.qSHistory = DevicesService.getOneTimeHistory();
+        DevicesService.getDevicesCount($scope, function (resp) {
+          $scope.devices = [];
+          for (var companyId in resp) {
+            var devicesByCompany = resp[companyId];
+            if (companyId !== 'staticCopy') {
+              for (var i = 0; i < devicesByCompany.length; i++) {
+                var device = devicesByCompany[i];
+                device.companyId = companyId;
+                $scope.devices.push(device);
+              }
+            }
+          }
+        });
 
         CompaniesService.getIndustries(function (resp) {
           $scope.industries = resp;
@@ -99,6 +124,10 @@
 
         $scope.onDateRangeChange = function (dates) {
           $scope.filterCompanies('dateRange', dates);
+        };
+
+        $scope.onExpireDateChange = function (dates) {
+          $scope.filterPasswords('byExpireDate', dates[0]);
         };
 
         $scope.filterCompanies = function (filter, value) {
@@ -169,6 +198,27 @@
           }
         };
 
+        $scope.filterPasswords = function (filter, value) {
+          var sharedFilter = passwordSharedState.filter;
+
+          switch (filter) {
+            case 'byCompany':
+              sharedFilter.companyId = value;
+              break;
+            case 'byDevice':
+              sharedFilter.agentId = value;
+              break;
+            case 'byType':
+              sharedFilter.template = value;
+              break;
+            case 'byExpireDate':
+              sharedFilter.expiredDate = value;
+              break;
+            default:
+              clearFilter(sharedFilter);
+          }
+        };
+
         $scope.toggleQSHistory = function ($event) {
           $scope.qSHistoryExpanded = !$scope.qSHistoryExpanded;
         };
@@ -182,6 +232,13 @@
           }
         };
 
+        $scope.getDeviceNameByAgentId = function (agentId) {
+          var device = DevicesService.getOneByAgentId(agentId);
+          if (device) {
+            return device.hostName || device.ip;
+          }
+        };
+
         $scope.$on('clearCompaniesDateRange', function () {
           if ($scope.clearDateRange) {
             $scope.clearDateRange();
@@ -189,6 +246,10 @@
         });
 
         $scope.userReadable = function (text) {
+          if (!text) {
+            return '';
+          }
+
           var words = text.split(/[\-_]/),
             result = '';
 

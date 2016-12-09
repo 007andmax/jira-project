@@ -108,7 +108,7 @@
           }
           var callback = storage.callbacks[scopeId];
           if (callback && callback.callback && typeof callback.callback === "function") {
-            callback.callback(storage.devices[callback.companyId]);
+            callback.callback(storage.devices[callback.companyId] || storage.devices);
           }
         }
       }
@@ -564,54 +564,6 @@
         });
       }
 
-      function saveCredentials(list, companyId, callback) {
-        if (!list) {
-          throw "list is required!"
-        }
-        if (!companyId) {
-          throw "companyId is required!"
-        }
-
-        var future = $http({
-          url: '/devices/saveCredentials?companyId=' + companyId,
-          method: 'POST',
-          data: { credentialAgents: list }
-        });
-        Utils.handleCallback(future, callback);
-      }
-
-      function getCredentialsByCompany(companyId, callback) {
-        if (!companyId) {
-          throw "companyId is required!"
-        }
-
-        //var info = [];
-
-        var future = $http({
-          url: '/devices/getAllCredentials?companyId=' + companyId,
-          method: 'GET'
-        });
-
-        RealTimeService.subscribe('/device', serviceScope, function (newChange) {
-
-          if (newChange.action === 'CREDENTIALS_SAVED') {
-            //Utils.customizeArray(newChange.data, info);
-            if (callback) {
-              callback(newChange.data);
-            }
-          }
-        });
-
-        if (callback) {
-          future.then(function (resp) {
-            //Utils.customizeArray(resp.data, info);
-            callback(resp.data);
-          }, function (resp) {
-            callback(resp.data);
-          });
-        }
-      }
-
       function updateAgentSettings(agentsSetting, callback) {
         if (!agentsSetting) {
           throw "agentsSetting is required!"
@@ -698,15 +650,6 @@
         });
       }
 
-      function getByCompanyId(id) {
-        return storage.devices[id];
-      }
-
-      function devicePasswordShown(credentialId, callback) {
-        var future = $http.get('/devices/getPassword?credentialAgentId=' + credentialId);
-        Utils.handleCallback(future, callback);
-      }
-
       function getDeviceReports(agentIds, companyId, callback) {
         var future = $http.post('/devices/report?companyId=' + companyId, agentIds);
         Utils.handleCallback(future, callback);
@@ -732,8 +675,35 @@
         return history;
       }
 
-      function getOneById(agentId, companyId) {
-        return Utils.findById(storage.devices[companyId], agentId);
+      function getOneById(id, companyId) {
+        return Utils.findById(storage.devices[companyId], id);
+      }
+
+      function getOneByAgentId(agentId, companyId) {
+        var devices = storage.devices[companyId] || storage.devices;
+
+        if (companyId) {
+          return _getDeviceByAgentId(devices, agentId);
+        } else {
+          for (var companyId in devices) {
+            if (companyId !== 'staticCopy') {
+              var devicesByCompany = devices[companyId];
+              var device = _getDeviceByAgentId(devicesByCompany, agentId);
+              if (device) {
+                return device;
+              }
+            }
+          }
+        }
+      }
+
+      function _getDeviceByAgentId(devices, agentId) {
+        for (var i = 0; i < devices.length; i++) {
+          var device = devices[i];
+          if (device.agentId === agentId) {
+            return device;
+          }
+        }
       }
 
       function saveReportEditedFields(dto, callback) {
@@ -760,8 +730,6 @@
         sendDescription: sendDescription,
         sendAgentUpdateRequest: sendAgentUpdateRequest,
         sendPowerAction: sendPowerAction,
-        saveCredentials: saveCredentials,
-        getCredentialsByCompany: getCredentialsByCompany,
         updateAgentSettings: updateAgentSettings,
         getAgentSettingsByCompany: getAgentSettingsByCompany,
         createOneTimeRemoteSession: createOneTimeRemoteSession,
@@ -771,11 +739,10 @@
         subscribeToRemoteConnection: subscribeToRemoteConnection,
         deleteRemoteSession: deleteRemoteSession,
         getSomeInfoForDevices: getSomeInfoForDevices,
-        getByCompanyId: getByCompanyId,
-        devicePasswordShown: devicePasswordShown,
         getDeviceReports: getDeviceReports,
         getOneTimeHistory: getOneTimeHistory,
         getOneById: getOneById,
+        getOneByAgentId: getOneByAgentId,
         saveReportEditedFields: saveReportEditedFields,
         reportPasswordShow: reportPasswordShow,
         _addInitListener: _addInitListener

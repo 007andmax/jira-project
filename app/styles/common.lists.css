@@ -159,7 +159,7 @@
   display: none !important;
 }
 
-.user-submitted-tickets{
+.user-submitted-tickets {
   margin-left: 20px;
 }
 
@@ -172,6 +172,7 @@
 
   vertical-align: top;
 }
+
 .qt-list.qt-users > li > [class*='col-'] {
   padding: 0 15px;
 }
@@ -441,7 +442,8 @@
   margin-top: 4px;
   margin-right: 10px;
 }
-.add-new-service{
+
+.add-new-service {
   background: #fff !important;
 }
 
@@ -871,9 +873,10 @@ Devices tab
 .qt-list .dropdown-submenu-wrapper .checkbox .control-indicator {
   top: 10px;
 }
+
 .qt-receivable > li.expanded .clickable-layer,
 .billable-main.expanded .clickable-layer,
-.inventory-details.expanded .clickable-layer{
+.inventory-details.expanded .clickable-layer {
   left: 50px;
   width: calc(100% - 50px);
 }
@@ -906,7 +909,7 @@ Devices tab
 }
 
 /*.qt-billable-sub > li + li {*/
-  /*min-height: 71px;*/
+/*min-height: 71px;*/
 /*}*/
 
 .inventory-details .qt-table {
@@ -2584,6 +2587,7 @@ Devices tab
 .qt-default-services > li:nth-child(even) {
   background-color: #e9f5fb;
 }
+
 .qt-receipt-number > li:nth-child(even) {
   background-color: #e9f5fb;
 }
@@ -2626,6 +2630,8 @@ Devices tab
     width: 263px;
   }
 }
+
+
 
 @-moz-document url-prefix() {
   .qt-default-services > li > .col-2,

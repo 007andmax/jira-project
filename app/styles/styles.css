@@ -5967,6 +5967,12 @@ tbody.collapse.in {
 .dropdown-account-type {
   width: 100%;
 }
+
+.pass-man-popup .dropdown-account-type {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 .dropdown-ip-range {
   min-width: 200px;
   width: 100%;
