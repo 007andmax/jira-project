@@ -349,7 +349,7 @@
              ng-click="stateGo($event, 'services', { tabName: 'default' })">
           Services
         </div>
-        <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_RECORD')"
+        <div class="center-category__category" ng-if="PermissionsService.isAllowed('VIEW_PASSWORD_SECTION')"
              ng-class="{active: $state.includes('password-manager')}"
              ng-click="stateGo($event, 'password-manager')">
           Password Manager

@@ -28,7 +28,10 @@
               backdrop: 'static',
               animation: true,
               resolve: {
-                resolvedExistedItem: existingItem
+                resolvedExistedItem: existingItem,
+                isEditable: function () {
+                  return typeof attrs.notEditable !== 'string';
+                }
               }
             });
 

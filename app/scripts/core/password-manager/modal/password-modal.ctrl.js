@@ -4,9 +4,10 @@
 
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordModalCtrl',
     ['$scope', '$uibModalInstance', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
-      'quicktech.common.services.UserConfirmationsService', 'resolvedExistedItem',
+      'quicktech.common.services.UserConfirmationsService', 'resolvedExistedItem', 'isEditable',
       function ($scope, $uibModalInstance, PasswordManagerService, CompaniesService, UsersService, DevicesService,
-                UserConfirmationsService, resolvedExistedItem) {
+                UserConfirmationsService, resolvedExistedItem, isEditable) {
+        $scope.isEditable = isEditable;
         $scope.templates = [
           'Office 365 account',
           'Microsoft account',
