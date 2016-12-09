@@ -60,7 +60,8 @@
       }
 
       function save(data, callback) {
-        var future = $http.post('/passwordRecords', data);
+        var method = data.id ? 'put' : 'post';
+        var future = $http[method]('/passwordRecords', data);
         Utils.handleCallback(future, callback);
       }
 
