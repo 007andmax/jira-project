@@ -80,6 +80,13 @@
           event.stopPropagation();
         };
 
+        $scope.toggleLock = function () {
+          $scope.password.onlyForMe = !$scope.password.onlyForMe;
+          if (!$scope.password.onlyForMe) {
+            $scope.password.managedBy = '';
+          }
+        };
+
         $scope.onSelectDate = function (dates) {
           $scope.editedPassword.expiredDate = dates[0];
         };
@@ -198,6 +205,7 @@
         $scope.save = function (form) {
           if (form.$valid) {
             $scope.editedPassword.links = angular.copy($scope.password.links);
+            $scope.editedPassword.onlyForMe = $scope.password.onlyForMe;
             var toSave = buildDto($scope.editedPassword);
             PasswordManagerService.save(toSave, function () {
               $uibModalInstance.dismiss();
