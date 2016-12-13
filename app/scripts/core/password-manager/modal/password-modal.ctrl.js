@@ -58,6 +58,15 @@
           }
           $scope.password.companyId = $scope.editedPasswordCompany.id;
           $scope.password.firstLinkName = getLinkName($scope.password.links[0], $scope.password.companyId);
+          var managedById = $scope.editedPassword.managedById;
+          if (managedById) {
+            if ($scope.currentUser.isOwner && managedById !== $scope.currentUser.id) {
+              $scope.password.onlyForMe = true;
+              $scope.password.managedBy = $scope.getUserName(UsersService.getOneById(managedById));
+            } else {
+              $scope.password.onlyForMe = managedById === $scope.currentUser.id;
+            }
+          }
         } else {
           $scope.editedPassword = {
             template: 'Office 365 account'
@@ -225,6 +234,10 @@
             password: password.password,
             expiredDate: formatDate(new Date(password.expiredDate))
           };
+
+          if (password.onlyForMe) {
+            dto.managedById = $scope.currentUser.id;
+          }
 
           switch (dto.template) {
             case 'OFFICE_365_ACCOUNT': {

@@ -312,6 +312,8 @@
             return 'billing';
           } else if (url.indexOf('inventory') > -1) {
             return 'inventory';
+          } else if (url.indexOf('password-manager') > -1) {
+            return 'password-manager';
           } else {
             return undefined;
           }

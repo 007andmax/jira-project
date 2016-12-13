@@ -109,7 +109,7 @@
           controller: 'quicktech.core.services.servicesCtrl'
         }))
         .state('password-manager', waitForServices({
-          url: '/inventory/password-manager',
+          url: '/password-manager',
           templateUrl: '/html/scripts/core/password-manager/password-manager.tpl.html',
           controller: 'quicktech.core.passwordManager.passwordManagerCtrl'
         }))

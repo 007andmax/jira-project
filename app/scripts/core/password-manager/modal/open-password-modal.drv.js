@@ -17,7 +17,7 @@
 
           element.click(function () {
 
-            if (element.hasClass('disabled')) {
+            if (element.hasClass('disabled') || typeof element.attr('disabled') === 'string') {
               return;
             }
 

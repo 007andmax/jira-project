@@ -5,9 +5,9 @@
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordManagerCtrl',
     ['$scope', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
-      'quicktech.common.services.SharedStateService',
+      'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
       function ($scope, PasswordManagerService, CompaniesService, UsersService, DevicesService,
-                UserConfirmationsService, UserNotificationService, SharedStateService) {
+                UserConfirmationsService, UserNotificationService, SharedStateService, PermissionsService) {
         var headerSharedState = SharedStateService.getSharedState('passwordsHeader');
 
         $scope.passwords = [];
@@ -20,18 +20,21 @@
           $scope.passwords = angular.copy(resp);
         });
 
+        $scope.PermissionsService = PermissionsService;
         $scope.getCompanyById = CompaniesService.getOneById;
         $scope.getUserById = UsersService.getOneById;
         $scope.getDeviceById = DevicesService.getOneById;
         $scope.parseDate = Date.parse.bind(Date);
 
         $scope.deletePassword = function (password) {
-          var message = 'Are you sure you want to delete this password?';
-          UserConfirmationsService.show(message, 'Yes').then(function () {
-            PasswordManagerService.deletePassword(password.id, function () {
-              UserNotificationService.show('Password was deleted successfully.', true);
-            })
-          })
+          if (!PermissionsService.isAllowed('DELETE_PASSWORDS')) {
+            var message = 'Are you sure you want to delete this password?';
+            UserConfirmationsService.show(message, 'Yes').then(function () {
+              PasswordManagerService.deletePassword(password.id, function () {
+                UserNotificationService.show('Password was deleted successfully.', true);
+              })
+            });
+          }
         };
 
         $scope.getLinkName = function (link, companyId) {
@@ -53,8 +56,9 @@
         };
 
         $scope.isPasswordExpired = function (password) {
-          if (password.expiredDate) {
-            return Date.now() >= password.expiredDate;
+          var expiredDate = new Date(password.expiredDate);
+          if (expiredDate.getTime()) {
+            return Date.now() >= expiredDate.getTime();
           }
         };
 
@@ -123,7 +127,7 @@
             return CompaniesService.getOneById(item.companyId).name;
           } else if ($scope.orderPasswords.field === 'type') {
             return $scope.userReadable(item.template);
-          }else if ($scope.orderPasswords.field === 'description') {
+          } else if ($scope.orderPasswords.field === 'description') {
             return item.description;
           } else if ($scope.orderPasswords.field === 'link') {
             return $scope.getLinkName(item.links[0]);
