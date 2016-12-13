@@ -27,7 +27,7 @@
         $scope.parseDate = Date.parse.bind(Date);
 
         $scope.deletePassword = function (password) {
-          if (!PermissionsService.isAllowed('DELETE_PASSWORDS')) {
+          if (PermissionsService.isAllowed('DELETE_PASSWORD')) {
             var message = 'Are you sure you want to delete this password?';
             UserConfirmationsService.show(message, 'Yes').then(function () {
               PasswordManagerService.deletePassword(password.id, function () {
