@@ -116,6 +116,7 @@
   position: absolute;
   top: 0;
   right: 0;
+  display: none;
 }
 
 .qt-users .col-4 .sort-icon {
@@ -137,13 +138,13 @@
 }
 
 .qt-list li.list-heading > [class*='col-'] {
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 13px;
+  font-size: 16px;
+  /*font-weight: bold;*/
+  line-height: 11px;
 
-  text-transform: uppercase;
+  text-transform: capitalize;
 
-  color: #748498 !important;
+  color: #000 !important;
 }
 
 @-moz-document url-prefix() {
