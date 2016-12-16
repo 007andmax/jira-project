@@ -10,7 +10,7 @@
         link: function ($scope, element, attrs, ctrl) {
 
           // NOTE this is unidirectional implementation! All changes are aplying from editor to model
-          var pressOnElement;
+          var pressOnElement, inited = false;
           var editor = element.find('[te-editor]'),
             wysiwyg = editor.wysiwyg({
               hotKeys: {
@@ -30,7 +30,10 @@
           $scope.$watch(function () {
             return attrs.teInitialValue;
           }, function (value) {
-            wysiwyg.html(value);
+            if (typeof attrs.teInitialValue === 'string' && (!inited || !value)) {
+              wysiwyg.html(value);
+              inited = true
+            }
           });
 
           validateRequired();
