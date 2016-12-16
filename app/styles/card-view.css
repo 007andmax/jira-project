@@ -246,7 +246,7 @@
 }
 
 .card .set-privileges.open{
-  height: 205px;
+  height: 230px;
   padding: 15px;
   border: 1px solid #bbc2ce;
   transition: height .3s;

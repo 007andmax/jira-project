@@ -28,11 +28,8 @@
               }
             }
 
-            if (primaryAddress) {
-              for (var i = 0; i < primaryAddress.phoneNumbers.length; i++) {
-                if (!primaryPhone || primaryAddress.phoneNumbers[i].priority > primaryPhone.priority)
-                  primaryPhone = primaryAddress.phoneNumbers[i];
-              }
+            if (primaryAddress && primaryAddress.phoneNumbers.length) {
+              primaryPhone = primaryAddress.phoneNumbers[0];
             }
           }
 

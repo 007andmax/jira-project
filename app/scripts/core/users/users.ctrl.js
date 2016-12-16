@@ -109,6 +109,15 @@
           });
         };
 
+        $scope.goToUserTickets = function (user) {
+          $state.go('tickets', { listType: 'all' }).then(function () {
+            $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
+            $scope.sharedState.searchFilter.companyId = '';
+            $scope.sharedState.searchFilter.userId = user.id;
+            globalSearch.searchValue = $scope.getUserName(user);
+          });
+        };
+
         $scope.setOrderByUsers = function (option) {
           if (option === $scope.orderUsers.field) {
             $scope.orderUsers.reverse = !$scope.orderUsers.reverse;

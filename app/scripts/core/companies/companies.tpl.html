@@ -27,17 +27,14 @@
               <p class="ellipsis" style="width: 164px;">{{ getUserName(primaryContact) }}</p>
               <span class="badge badge-default">Doctor</span>
             </div>
-            <div class="clearfix" ng-if="getUserCompanyName(user)">
-              <img src="images/company/company-profile-blue.png" alt="">
-              <p>{{ getUserCompanyName(user) }}</p>
-            </div>
-            <div class="clearfix" ng-if="getPriorityNumberInfo('NUMBER')">
+            <div class="clearfix" ng-if="primaryPhone && primaryPhone.number">
               <img src="images/company/smartphone-green.png" alt="">
-              <p>{{ getPriorityNumberInfo('NUMBER') }}</p>
+              <p>{{ primaryPhone.number }}</p>
             </div>
-            <div class="clearfix" ng-if="user.primaryEmail">
-              <img src="images/company/email-purple.png" alt="">
-              <p class="ellipsis">{{ user.primaryEmail }}</p>
+            <div class="clearfix" ng-if="primaryContact.primaryEmail">
+              <img src="images/company/email-purple.png" alt=""
+                   email-to="primaryContact.primaryEmail" stop-propagation="click">
+              <p class="ellipsis">{{ primaryContact.primaryEmail }}</p>
             </div>
             <div class="clearfix">
                <img src="images/company/placeholder-red.png" alt="">
@@ -58,66 +55,6 @@
               <p><strong>{{ devicesCount[company.id].all || '0' }}</strong></p>
             </div>
         </div>
-        <!--<div class="card__cover" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}">-->
-        <!--<div class="card__cover&#45;&#45;hover user-type">-->
-        <!--<div class="drop-menu" uib-dropdown uib-dropdown-toggle stop-propagation="click" dropdown-append-to-body-->
-        <!--ng-style="{'background': 'url(./images/input-icons/menu-button' +-->
-        <!--(company.logo && company.logo.cropped.darkCorner ? '-white' : '') + '.png) no-repeat'}">-->
-        <!--<ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu-->
-        <!--change-image="company" model-image-path="logo">-->
-        <!--<li change-image-button stop-propagation="click">-->
-        <!--<a tabindex="-1" href="javascript:void(0)">Change Image</a>-->
-        <!--</li>-->
-        <!--<li restore-default-button stop-propagation="click" ng-show="company.logo">-->
-        <!--<a tabindex="-1" href="javascript:void(0)">Restore Default</a>-->
-        <!--</li>-->
-        <!--<li reposition-button stop-propagation="click" ng-show="company.logo">-->
-        <!--<a tabindex="-1" href="javascript:void(0)">Reposition</a>-->
-        <!--</li>-->
-        <!--<li ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"-->
-        <!--ng-click="archiveCompany(company)">-->
-        <!--<a tabindex="-1" href="javascript:void(0)">Archive Company</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;<div class="change-img">&ndash;&gt;-->
-        <!--&lt;!&ndash;<img src="images/input-icons/photo-camera.png" alt="" >&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--</div>-->
-        <!--<div class="card__cover&#45;&#45;name  clearfix">-->
-        <!--<p>{{ company.name }}</p>-->
-        <!--<p>{{ getUserName(primaryContact) }}</p>-->
-        <!--<span class="label label-tech-user">{{ primaryContact.designation }}</span>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="card__info">-->
-        <!--<div ng-if="primaryPhone && primaryPhone.number">-->
-        <!--<img src="images/company/smartphone-green.png" alt="">-->
-        <!--<p>{{ primaryPhone.number }}</p>-->
-        <!--</div>-->
-        <!--<div ng-if="primaryContact.primaryEmail">-->
-        <!--<img src="images/company/email-purple.png" alt="">-->
-        <!--<p class="ellipsis">{{ primaryContact.primaryEmail }}</p>-->
-        <!--</div>-->
-        <!--<div>-->
-        <!--<img src="images/company/placeholder-red.png" alt="">-->
-        <!--<p>{{ location }}</p>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="card__stats clearfix">-->
-          <!--<div>-->
-            <!--<p>Tickets</p>-->
-            <!--<p><strong>{{ company.companyStatistic.ticketsSubmitted || '0' }}</strong></p>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<p>Users</p>-->
-            <!--<p><strong>{{ companyComponentsCount.users.length || '0' }}</strong></p>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<p>Devices</p>-->
-            <!--<p><strong>{{ devicesCount[company.id].all || '0' }}</strong></p>-->
-          <!--</div>-->
-
       </div>
     </div>
   </div>

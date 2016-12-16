@@ -14,192 +14,91 @@
     <div ui-view></div>
 
     <div class="card-view-wrapper clearfix">
-      <!--<div class="card-wrapper" ng-controller="quicktech.core.users.userCtrl"-->
-      <!--ng-repeat="user in (usersCtrl.shownUsers = (users | filter : usersFilter | orderBy: getUserName)) track by user.id">-->
-      <!--<div class="card">-->
-      <!--<div class="card__cover" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}">-->
-      <!--<div class="card__cover&#45;&#45;hover user-type">-->
-      <!--<div class="drop-menu" uib-dropdown uib-dropdown-toggle dropdown-append-to-body-->
-      <!--ng-class="{'white': user.avatar && user.avatar.cropped.darkCorner}">-->
-      <!--<ul class="dropdown-menu" uib-dropdown-menu>-->
-      <!--<li class="dropdown-submenu">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">Set Privilege</a>-->
-      <!--<div class="dropdown-submenu-wrapper">-->
-      <!--<ul class="dropdown-menu dropdown-privilege cards-sub-dropdown">-->
-      <!--<li ng-class="{active: user.role === 'USER'}" ng-click="changeUserRole(user.id, 'USER')">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">User</a>-->
-      <!--</li>-->
-      <!--<li ng-class="{active: user.role === 'ADMIN'}" ng-click="changeUserRole(user.id, 'ADMIN')">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">Administrator</a>-->
-      <!--</li>-->
-      <!--</ul>-->
-      <!--</div>-->
-      <!--</li>-->
-      <!--<li class="dropdown-submenu">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">Subscribe to...</a>-->
-      <!--<div class="dropdown-submenu-wrapper">-->
-      <!--<ul class="dropdown-menu dropdown-subscribe cards-sub-dropdown">-->
-
-      <!--<li ng-click="subscribeUser(user, 'ticket')">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">-->
-      <!--<div class="clearfix">-->
-      <!--<label class="control checkbox pull-left">-->
-      <!--<input type="checkbox"-->
-      <!--ng-checked="user.subscription.ticket" ng-disabled="disabledCheckbox">-->
-      <!--<span class="control-indicator"></span>-->
-      <!--Ticket Updates-->
-      <!--</label>-->
-      <!--</div>-->
-      <!--</a>-->
-      <!--</li>-->
-
-      <!--<li ng-click="subscribeUser(user, 'ticketMaanager')">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">-->
-      <!--<div class="clearfix">-->
-      <!--<label class="control checkbox pull-left">-->
-      <!--<input type="checkbox"-->
-      <!--ng-checked="user.subscription.ticketMaanager" ng-disabled="disabledCheckbox">-->
-      <!--<span class="control-indicator"></span>-->
-      <!--Ticket Manages-->
-      <!--</label>-->
-      <!--</div>-->
-      <!--</a>-->
-      <!--</li>-->
-
-      <!--<li ng-click="subscribeUser(user, 'invoice')"-->
-      <!--ng-if="!isLastUserWithInvoiceSubscription(user)">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">-->
-      <!--<div class="clearfix">-->
-      <!--<label class="control checkbox pull-left">-->
-      <!--<input type="checkbox"-->
-      <!--ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">-->
-      <!--<span class="control-indicator"></span>-->
-      <!--Invoice Updates-->
-      <!--</label>-->
-      <!--</div>-->
-      <!--</a>-->
-      <!--</li>-->
-
-      <!--</ul>-->
-      <!--</div>-->
-      <!--</li>-->
-      <!--<li class="dropdown-submenu" change-image="user" model-image-path="avatar">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">Upload photo</a>-->
-      <!--<div class="dropdown-submenu-wrapper">-->
-      <!--<ul class="dropdown-menu dropdown-privilege cards-sub-dropdown" stop-propagation="click">-->
-      <!--<li change-image-button>-->
-      <!--<a tabindex="-1" href="javascript:void(0)">Change Image</a>-->
-      <!--</li>-->
-      <!--<li restore-default-button ng-show="user.avatar">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">Restore Default</a>-->
-      <!--</li>-->
-      <!--<li reposition-button ng-show="user.avatar">-->
-      <!--<a tabindex="-1" href="javascript:void(0)">Reposition</a>-->
-      <!--</li>-->
-      <!--</ul>-->
-      <!--</div>-->
-      <!--</li>-->
-      <!--<li ng-if="PermissionsService.isAllowed('ARCHIVE_USERS')-->
-      <!--&& !user.isContact && !isLastUserWithInvoiceSubscription(user)">-->
-      <!--<a tabindex="-1" href="javascript:void(0)" ng-click="archiveUser()">-->
-      <!--Archive this Contact-->
-      <!--</a>-->
-      <!--</li>-->
-      <!--</ul>-->
-      <!--</div>-->
-      <!--<div class="change-img ng-hide">-->
-      <!--<img src="images/input-icons/photo-camera.png" alt="">-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card__cover&#45;&#45;name user-type clearfix">-->
-      <!--<p>{{ getUserName(user) }}</p>-->
-      <!--<div ng-if="PermissionsService.isAllowed('EDIT_USERS')" tooltip-placement="top"-->
-      <!--uib-tooltip="Edit user" create-new-entity="user" item="user">-->
-      <!--<i class="icn-sm icn-edit-light"></i>-->
-      <!--</div>-->
-      <!--<span class="label label-tech-user" ng-if="user.designation">{{ user.designation }}</span>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card__info user-type">-->
-      <!--<div>-->
-      <!--<img src="images/company/company-profile-blue.png" alt="">-->
-      <!--<p>{{ getUserCompanyName(user) }}</p>-->
-      <!--</div>-->
-      <!--<div ng-if="getPriorityNumberInfo('NUMBER')">-->
-      <!--<img src="images/company/smartphone-green.png" alt="">-->
-      <!--<p>{{ getPriorityNumberInfo('NUMBER') }}</p>-->
-      <!--</div>-->
-      <!--<div ng-if="user.primaryEmail">-->
-      <!--<img src="images/company/email-purple.png" alt="">-->
-      <!--<p class="ellipsis">{{ user.primaryEmail }}</p>-->
-      <!--</div>-->
-      <!--<div>-->
-      <!--<img src="images/company/copy-yellow.png" alt="">-->
-      <!--<p>Sbmt. tickets {{ user.userStatistic.ticketsSubmitted || 0 }}</p>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="card__create-btn clearfix">-->
-      <!--<button class="btn btn-success" create-new-entity="ticket"-->
-      <!--company-id="{{ user.company.id }}">CREATE TICKET-->
-      <!--</button>-->
-      <!--</div>-->
-      <!--</div>-->
       <div class="card-wrapper" ng-controller="quicktech.core.users.userCtrl"
            ng-repeat="user in (usersCtrl.shownUsers = (users | filter : usersFilter | orderBy: getUserName)) track by user.id">
         <div class="card">
           <div class="card-header">
-            <div class="edit-icn"></div>
+            <div class="edit-icn" create-new-entity="user" item="user"></div>
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
-            <p class="ellipsis name">{{ getUserCompanyName(user) }}</p>
+            <p class="ellipsis name">{{ getUserName(user) }}</p>
             <span class="badge badge-default">Doctor</span>
           </div>
           <div class="card__info">
             <div class="clearfix">
-              <img src="images/company/company-profile-blue.png" alt="">
+              <img src="images/company/company-profile-blue.png" alt="" stop-propagation="click"
+                   ui-sref="companyProfile({ companyId: user.company.id })">
               <p>{{ getUserCompanyName(user) }}</p>
             </div>
-            <div class="clearfix" ng-if="getPriorityNumberInfo('NUMBER')">
+            <div class="clearfix"
+                 ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0] && user.phoneNumbers[0].number">
               <img src="images/company/smartphone-green.png" alt="">
-              <p>{{ getPriorityNumberInfo('NUMBER') }}</p>
+              <p>{{ user.phoneNumbers[0].number }}</p>
+            </div>
+            <div class="clearfix"
+                 ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[1] && user.phoneNumbers[1].number">
+              <img src="images/company/smartphone-green.png" alt="">
+              <p>{{ user.phoneNumbers[1].number }}</p>
             </div>
             <div class="clearfix" ng-if="user.primaryEmail">
-              <img src="images/company/email-purple.png" alt="">
+              <img src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
               <p class="ellipsis">{{ user.primaryEmail }}</p>
             </div>
             <div class="clearfix">
               <span class="ticket-count">{{ user.userStatistic.ticketsSubmitted || 0 }}</span>
-              <p style="padding-left: 0;"><a style="padding-left: 10px;" href="">View Tickets</a></p>
+              <p style="padding-left: 0;" ng-click="goToUserTickets(user)"><a style="padding-left: 10px;" href="">View Tickets</a></p>
             </div>
           </div>
           <div class="card-footer clearfix">
-            <button class="btn btn-default"><span class="plus-card">+</span>New Ticket</button>
+            <button class="btn btn-default" create-new-entity="ticket" company-id="{{ user.company.id }}">
+              <span class="plus-card">+</span>New Ticket
+            </button>
             <img class="pull-right" ng-click="popupOpened = true"
                  src="images/company/more.png" alt="">
           </div>
           <div class="set-privileges" ng-class="{'open': popupOpened}">
             <p><strong>Set privileges</strong></p>
             <div>
-              <label class="control checkbox"> <input type="checkbox"> <span class="control-indicator"></span>
+              <label class="control checkbox" ng-click="changeUserRole(user.id, 'USER');">
+                <input type="checkbox" ng-checked="user.role === 'USER'" ng-disabled="user.role === 'USER'">
+                <span class="control-indicator"></span>
                 <span>User</span>
               </label>
             </div>
             <div>
-              <label class="control checkbox"> <input type="checkbox"> <span class="control-indicator"></span>
+              <label class="control checkbox" ng-click="changeUserRole(user.id, 'ADMIN')">
+                <input type="checkbox" ng-checked="user.role === 'ADMIN'" ng-disabled="user.role === 'ADMIN'">
+                <span class="control-indicator"></span>
                 <span>Administrator</span>
               </label>
             </div>
             <p><strong>Subscribe</strong></p>
             <div>
-              <label class="control checkbox"> <input type="checkbox"> <span class="control-indicator"></span>
+              <label class="control checkbox" ng-click="subscribeUser(user, 'ticket')">
+                <input type="checkbox" ng-checked="user.subscription.ticket" ng-disabled="disabledCheckbox">
+                <span class="control-indicator"></span>
                 <span>Ticket Updates</span>
               </label>
             </div>
             <div>
-              <label class="control checkbox"> <input type="checkbox"> <span class="control-indicator"></span>
+              <label class="control checkbox" ng-click="subscribeUser(user, 'ticketManager')">
+                <input type="checkbox" ng-checked="user.subscription.ticketManager" ng-disabled="disabledCheckbox">
+                <span class="control-indicator"></span>
                 <span>Invoice Updates</span>
               </label>
             </div>
-            <a href="">Archive Contact</a><span class="plus-card" ng-click="popupOpened = false">+</span>
+            <div>
+              <label class="control checkbox" ng-click="subscribeUser(user, 'invoice')">
+                <input type="checkbox" ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
+                <span class="control-indicator"></span>
+                <span>Ticket Manages</span>
+              </label>
+            </div>
+            <a href="javascript:void(0)"
+               ng-if="PermissionsService.isAllowed('ARCHIVE_USERS') && !user.isContact && !isLastUserWithInvoiceSubscription(user)"
+               ng-click="archiveUser()">
+              Archive Contact
+            </a>
+            <span class="plus-card" ng-click="popupOpened = false">+</span>
           </div>
         </div>
       </div>
@@ -377,7 +276,8 @@
               <i class="icn-sm icn-edit"></i>
             </div>
 
-            <div class="btn btn-default btn-user-mail pull-left has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
+            <div class="btn btn-default btn-user-mail pull-left has-tooltip"
+                 custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
