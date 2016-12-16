@@ -10,56 +10,38 @@
     </div>
   </div>
 
-  <div class="company-profile-content companies-list not-charts-companies-page" style="background: #eee">
-    <div class="card-view-wrapper clearfix" ng-if="companiesView === 'grid'">
+  <div class="company-profile-content companies-list not-charts-companies-page" >
+    <div class="card-view-wrapper clearfix" style="background: #eee" ng-if="companiesView === 'grid'">
       <div class="card-wrapper" ui-sref="companyProfile({ companyId: company.id })"
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: 'name')) track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl">
         <div class="card">
-          <div class="card__cover" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}">
-            <div class="card__cover--hover user-type">
-              <div class="drop-menu" uib-dropdown uib-dropdown-toggle stop-propagation="click" dropdown-append-to-body
-                   ng-style="{'background': 'url(./images/input-icons/menu-button' +
-                   (company.logo && company.logo.cropped.darkCorner ? '-white' : '') + '.png) no-repeat'}">
-                <ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu
-                    change-image="company" model-image-path="logo">
-                  <li change-image-button stop-propagation="click">
-                    <a tabindex="-1" href="javascript:void(0)">Change Image</a>
-                  </li>
-                  <li restore-default-button stop-propagation="click" ng-show="company.logo">
-                    <a tabindex="-1" href="javascript:void(0)">Restore Default</a>
-                  </li>
-                  <li reposition-button stop-propagation="click" ng-show="company.logo">
-                    <a tabindex="-1" href="javascript:void(0)">Reposition</a>
-                  </li>
-                  <li ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
-                      ng-click="archiveCompany(company)">
-                    <a tabindex="-1" href="javascript:void(0)">Archive Company</a>
-                  </li>
-                </ul>
-              </div>
-              <!--<div class="change-img">-->
-              <!--<img src="images/input-icons/photo-camera.png" alt="" >-->
-              <!--</div>-->
-            </div>
-            <div class="card__cover--name  clearfix">
-              <p>{{ company.name }}</p>
-              <p>{{ getUserName(primaryContact) }}</p>
-              <span class="label label-tech-user">{{ primaryContact.designation }}</span>
-            </div>
+          <div class="card-header clearfix">
+            <div class="edit-icn" create-new-entity="company" item="company" stop-propagation="click"></div>
+            <div class="photo"  ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
+            <p class="ellipsis name">{{ company.name }}</p>
           </div>
           <div class="card__info">
-            <div ng-if="primaryPhone && primaryPhone.number">
+            <div class="clearfix">
+              <img src="images/settings-icon/user-profile.png" alt="">
+              <p class="ellipsis" style="width: 164px;">{{ getUserName(primaryContact) }}</p>
+              <span class="badge badge-default">Doctor</span>
+            </div>
+            <div class="clearfix" ng-if="getUserCompanyName(user)">
+              <img src="images/company/company-profile-blue.png" alt="">
+              <p>{{ getUserCompanyName(user) }}</p>
+            </div>
+            <div class="clearfix" ng-if="getPriorityNumberInfo('NUMBER')">
               <img src="images/company/smartphone-green.png" alt="">
-              <p>{{ primaryPhone.number }}</p>
+              <p>{{ getPriorityNumberInfo('NUMBER') }}</p>
             </div>
-            <div ng-if="primaryContact.primaryEmail">
+            <div class="clearfix" ng-if="user.primaryEmail">
               <img src="images/company/email-purple.png" alt="">
-              <p class="ellipsis">{{ primaryContact.primaryEmail }}</p>
+              <p class="ellipsis">{{ user.primaryEmail }}</p>
             </div>
-            <div>
-              <img src="images/company/placeholder-red.png" alt="">
-              <p>{{ location }}</p>
+            <div class="clearfix">
+               <img src="images/company/placeholder-red.png" alt="">
+               <p>{{ location }}</p>
             </div>
           </div>
           <div class="card__stats clearfix">
@@ -75,113 +57,174 @@
               <p>Devices</p>
               <p><strong>{{ devicesCount[company.id].all || '0' }}</strong></p>
             </div>
-          </div>
         </div>
+        <!--<div class="card__cover" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}">-->
+        <!--<div class="card__cover&#45;&#45;hover user-type">-->
+        <!--<div class="drop-menu" uib-dropdown uib-dropdown-toggle stop-propagation="click" dropdown-append-to-body-->
+        <!--ng-style="{'background': 'url(./images/input-icons/menu-button' +-->
+        <!--(company.logo && company.logo.cropped.darkCorner ? '-white' : '') + '.png) no-repeat'}">-->
+        <!--<ul class="dropdown-menu dropdown-privilege" uib-dropdown-menu-->
+        <!--change-image="company" model-image-path="logo">-->
+        <!--<li change-image-button stop-propagation="click">-->
+        <!--<a tabindex="-1" href="javascript:void(0)">Change Image</a>-->
+        <!--</li>-->
+        <!--<li restore-default-button stop-propagation="click" ng-show="company.logo">-->
+        <!--<a tabindex="-1" href="javascript:void(0)">Restore Default</a>-->
+        <!--</li>-->
+        <!--<li reposition-button stop-propagation="click" ng-show="company.logo">-->
+        <!--<a tabindex="-1" href="javascript:void(0)">Reposition</a>-->
+        <!--</li>-->
+        <!--<li ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"-->
+        <!--ng-click="archiveCompany(company)">-->
+        <!--<a tabindex="-1" href="javascript:void(0)">Archive Company</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="change-img">&ndash;&gt;-->
+        <!--&lt;!&ndash;<img src="images/input-icons/photo-camera.png" alt="" >&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+        <!--<div class="card__cover&#45;&#45;name  clearfix">-->
+        <!--<p>{{ company.name }}</p>-->
+        <!--<p>{{ getUserName(primaryContact) }}</p>-->
+        <!--<span class="label label-tech-user">{{ primaryContact.designation }}</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="card__info">-->
+        <!--<div ng-if="primaryPhone && primaryPhone.number">-->
+        <!--<img src="images/company/smartphone-green.png" alt="">-->
+        <!--<p>{{ primaryPhone.number }}</p>-->
+        <!--</div>-->
+        <!--<div ng-if="primaryContact.primaryEmail">-->
+        <!--<img src="images/company/email-purple.png" alt="">-->
+        <!--<p class="ellipsis">{{ primaryContact.primaryEmail }}</p>-->
+        <!--</div>-->
+        <!--<div>-->
+        <!--<img src="images/company/placeholder-red.png" alt="">-->
+        <!--<p>{{ location }}</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="card__stats clearfix">-->
+          <!--<div>-->
+            <!--<p>Tickets</p>-->
+            <!--<p><strong>{{ company.companyStatistic.ticketsSubmitted || '0' }}</strong></p>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<p>Users</p>-->
+            <!--<p><strong>{{ companyComponentsCount.users.length || '0' }}</strong></p>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<p>Devices</p>-->
+            <!--<p><strong>{{ devicesCount[company.id].all || '0' }}</strong></p>-->
+          <!--</div>-->
+
       </div>
     </div>
+  </div>
+</div>
 
-    <ul class="qt-list" style="margin-bottom: 150px;" ng-if="companiesView === 'list'">
+<ul class="qt-list" style="margin-bottom: 150px;" ng-if="companiesView === 'list'">
 
-      <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
-        <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
+  <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
+    <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
       <span class="sort-span">
         Name
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
       </span>
-        </div>
+    </div>
 
-        <div class="col-xs-2" ng-click="setOrderByCompanies('phone')">
+    <div class="col-xs-2" ng-click="setOrderByCompanies('phone')">
       <span class="sort-span">
       Contact No.
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'phone'}"></i>
       </span>
-        </div>
-        <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
+    </div>
+    <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
       <span class="sort-span">
         Email Address
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'email'}"></i>
       </span>
-        </div>
-        <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
+    </div>
+    <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
       <span class="sort-span">
         Primary Contact
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'contact'}"></i>
       </span>
-        </div>
-        <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
+    </div>
+    <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
       <span class="sort-span">
         Tickets
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
       </span>
-        </div>
-        <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
+    </div>
+    <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
       <span class="sort-span">
         Devices
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
       </span>
-        </div>
-        <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
+    </div>
+    <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
       <span class="sort-span">
         Users
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
       </span>
-        </div>
-      </li>
+    </div>
+  </li>
 
-      <li class="list-company-row"
-          ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
-          ng-controller="quicktech.core.companies.companyCtrl"
-          ui-sref="companyProfile({ companyId: company.id })">
-        <div class="col-xs-3">
-          <div style="min-height: 38px; display: inline-block; float: left;"><img
-            ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
-          <span class="list-company-name">{{ company.name }}</span>
-          <span style="display: flex;">{{ location }}</span>
-        </div>
-        <div class="col-xs-2">
-          <span>{{ primaryPhone.number || '' }}</span>
-        </div>
-        <div class="col-xs-2" style="word-break: break-all">
-          <span>{{ primaryContact.primaryEmail }}</span>
-        </div>
-        <div class="col-xs-2">
-          <span>{{ getUserName(primaryContact) }}</span>
-        </div>
-        <div class="col-xs-1">
-          <div create-new-entity="ticket" company-id="{{ company.id }}"
-               style="margin-left: 15px; display: inline-block;"
-               uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
-            <span><i class="nav-icon icn-lg icn-unassigned"></i></span>
+  <li class="list-company-row"
+      ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
+      ng-controller="quicktech.core.companies.companyCtrl"
+      ui-sref="companyProfile({ companyId: company.id })">
+    <div class="col-xs-3">
+      <div style="min-height: 38px; display: inline-block; float: left;"><img
+        ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
+      <span class="list-company-name">{{ company.name }}</span>
+      <span style="display: flex;">{{ location }}</span>
+    </div>
+    <div class="col-xs-2">
+      <span>{{ primaryPhone.number || '' }}</span>
+    </div>
+    <div class="col-xs-2" style="word-break: break-all">
+      <span>{{ primaryContact.primaryEmail }}</span>
+    </div>
+    <div class="col-xs-2">
+      <span>{{ getUserName(primaryContact) }}</span>
+    </div>
+    <div class="col-xs-1">
+      <div create-new-entity="ticket" company-id="{{ company.id }}"
+           style="margin-left: 15px; display: inline-block;"
+           uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
+        <span><i class="nav-icon icn-lg icn-unassigned"></i></span>
             <span class="badge badge-primary-outline list-company-badge">
             {{ company.companyStatistic.ticketsSubmitted || '0' }}
           </span>
-          </div>
-        </div>
-        <div class="col-xs-1">
-          <div style="display: inline-block;margin-left: 15px;">
-            <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
+      </div>
+    </div>
+    <div class="col-xs-1">
+      <div style="display: inline-block;margin-left: 15px;">
+        <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
             <span class="badge badge-primary-outline list-company-badge">
             {{ devicesCount[company.id].all || '0' }}
           </span>
-          </div>
-        </div>
-        <div class="col-xs-1">
-          <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })"
-               style="display: inline-block;margin-left: 15px;" stop-propagation="click">
-            <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
+      </div>
+    </div>
+    <div class="col-xs-1">
+      <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })"
+           style="display: inline-block;margin-left: 15px;" stop-propagation="click">
+        <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
             <span class="badge badge-primary-outline list-company-badge">
             {{ companyComponentsCount.users.length || '0' }}
           </span>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
+      </div>
+    </div>
+  </li>
+</ul>
+</div>
 </div>
