@@ -54,6 +54,11 @@
               }
             }
 
+          } else if (newChange.action === 'INVOICE_DELETED') {
+
+            var invoice = Utils.findById(data.list, newChange.data.id);
+            Utils.customizeObj(newChange.data, invoice);
+            
           } else if (newChange.action === 'COMPANY_ARCHIVED') {
 
             for (var i = 0; i < data.list.length; i++) {
@@ -80,10 +85,40 @@
       return data;
 
     }
+  
+    function resendInvoices(invoiceIds, callback) {
+      if (!invoiceIds) {
+        throw 'invoiceIds is required!'
+      }
+    
+      var future = $http({
+        url: '/receiptArchive/resend',
+        method: 'POST',
+        data: { ids: invoiceIds }
+      });
+    
+      Utils.handleCallback(future, callback);
+    }
+  
+    function deleteInvoices(invoiceIds, callback) {
+      if (!invoiceIds) {
+        throw 'invoiceIds is required!'
+      }
+    
+      var future = $http({
+        url: '/receiptArchive/delete',
+        method: 'POST',
+        data: { ids: invoiceIds }
+      });
+    
+      Utils.handleCallback(future, callback);
+    }
 
 
     return {
-      getReceiptArchiveData: getReceiptArchiveData
+      getReceiptArchiveData: getReceiptArchiveData,
+      resendInvoices: resendInvoices,
+      deleteInvoices: deleteInvoices
     }
 
   }]);

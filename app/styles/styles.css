@@ -9736,6 +9736,7 @@ button.close {
   min-width: 200px;
 }
 .free-number-link {
+  display: inline;
   cursor: pointer !important;
   color: blue;
 }

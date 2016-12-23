@@ -17,6 +17,27 @@
           $scope.toggleReceiptArchiveInvoices();
         }
       });
+  
+      $scope.$watch('invoiceToSent[company.id]', function (invoices) {
+    
+        if (!invoices) {
+          return;
+        }
+    
+        $scope.countInvoicesInCompany = 0;
+    
+        var checkedCounter = 0,
+          companyInvoices = $scope.invoiceToSent[$scope.company.id];
+    
+        for (var invoiceId in companyInvoices.invoices) {
+      
+          $scope.countInvoicesInCompany++;
+          if (companyInvoices.invoices[invoiceId]) {
+            checkedCounter++;
+          }
+        }
+        companyInvoices.checked = ($scope.receiptArchiveData.companies[$scope.company.id].length === checkedCounter);
+      }, true);
 
     }]);
 
