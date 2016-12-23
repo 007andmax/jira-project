@@ -1,12 +1,15 @@
 'use strict';
 
 (function () {
-
+  
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordModalCtrl',
-    ['$scope', '$uibModalInstance', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
+    [
+      '$scope', '$uibModalInstance', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
       'quicktech.common.services.UserConfirmationsService', 'resolvedExistedItem', 'isEditable',
       function ($scope, $uibModalInstance, PasswordManagerService, CompaniesService, UsersService, DevicesService,
                 UserConfirmationsService, resolvedExistedItem, isEditable) {
+        $scope.editedPassword = angular.copy(resolvedExistedItem);
+        var isEdit = resolvedExistedItem && resolvedExistedItem.id;
         $scope.isEditable = isEditable;
         $scope.templates = [
           'Office 365 account',
@@ -16,7 +19,8 @@
           'Device',
           'Generic',
           'Agent',
-          'Local user account'
+          'Local user account',
+          'Wifi network'
         ];
         $scope.companies = CompaniesService.getClientCompanies();
         $scope.users = UsersService.getClientUsers();
@@ -34,27 +38,47 @@
             }
           }
         });
+        DevicesService.getGadgets(function (resp) {
+          if (resp && resp.length) {
+            $scope.gadgets = isEdit
+              ?
+              resp.filter(function (gadget) {
+                return !gadget.deletedAt || existInPassword(gadget.id, $scope.editedPassword);
+              })
+              :
+              resp.filter(function (gadget) {
+                return !gadget.deletedAt;
+              });
+            
+            var links = $scope.password.links;
+            if (isEdit && links && links.length && links[0] && links[0].gadgetId) {
+              $scope.password.firstLinkName = getLinkName(links[0], $scope.password.companyId);
+            }
+          } else {
+            $scope.gadgets = [];
+          }
+        });
+        
         $scope.password = { links: [], selectionMap: {} };
         $scope.openedTab = 'user';
         $scope.userTabDisabled = false;
         $scope.deviceTabDisabled = false;
         $scope.generateRandomPassword = PasswordManagerService.generateRandomPassword;
         $scope.getLinkName = getLinkName;
-        $scope.editedPassword = angular.copy(resolvedExistedItem);
-
-        if ($scope.editedPassword && $scope.editedPassword.id) {
+        
+        if (isEdit) {
           var template = $scope.editedPassword.template;
           $scope.editedPassword.template = template.charAt(0) + template.slice(1).toLowerCase().split('_').join(' ');
           $scope.editedPasswordCompany = CompaniesService.getOneById($scope.editedPassword.companyId);
           PasswordManagerService.getPasswordByRecord($scope.editedPassword.id, function (resp) {
             $scope.editedPassword.password = resp.password;
           });
-
+          
           var links = $scope.editedPassword.links;
           $scope.password.links = links.concat([]);
           for (var i = 0; i < links.length; i++) {
             var link = links[i];
-            $scope.password.selectionMap[link.agentId || link.userId] = true;
+            $scope.password.selectionMap[link.agentId || link.userId || link.gadgetId] = true;
           }
           $scope.password.companyId = $scope.editedPasswordCompany.id;
           $scope.password.firstLinkName = getLinkName($scope.password.links[0], $scope.password.companyId);
@@ -72,63 +96,64 @@
             template: 'Office 365 account'
           }
         }
-
+        
         $scope.setOpenedTab = function (tab, isEnabled, event) {
           if (isEnabled) {
             $scope.openedTab = tab;
           }
           event.stopPropagation();
         };
-
+        
+        $scope.toggleCreationGadget = function (isOpen, event) {
+          $scope.addingGadget = isOpen;
+          event && event.stopPropagation();
+        };
+        
         $scope.toggleLock = function () {
           $scope.password.onlyForMe = !$scope.password.onlyForMe;
           if (!$scope.password.onlyForMe) {
             $scope.password.managedBy = '';
           }
         };
-
+        
         $scope.onSelectDate = function (dates) {
           $scope.editedPassword.expiredDate = dates[0];
         };
-
-        $scope.validateLinks = function (type, item) {
+        
+        $scope.validateLinks = function (type, itemId, companyId) {
           var password = $scope.password;
           var firstLink = password.links[0];
-
-          if (!firstLink || !$scope.editedPasswordCompany) {
-            if (type === 'user') {
-              $scope.editedPasswordCompany = CompaniesService.getOneById(item.company.id);
-            } else {
-              $scope.editedPasswordCompany = CompaniesService.getOneById(item.companyId);
-            }
-            $scope.editedPassword.companyId = $scope.editedPasswordCompany.id;
-            $scope.password.companyId = $scope.editedPasswordCompany.id;
+          
+          if (companyId && (!firstLink || !$scope.editedPasswordCompany)) {
+            $scope.editedPasswordCompany = CompaniesService.getOneById(companyId);
+            $scope.editedPassword.companyId = companyId;
+            $scope.password.companyId = companyId;
           }
-
-          if (password.selectionMap[item.agentId || item.id]) {
+          
+          if (password.selectionMap[itemId]) {
             if (firstLink) {
-              if (firstLink.userId && type === 'agent' || firstLink.agentId && type === 'user') {
+              if (firstLink.userId && type !== 'user' || firstLink.agentId && type !== 'agent' || firstLink.gadgetId && type !== 'gadget') {
                 clearLinks();
-                password.selectionMap[item.agentId || item.id] = true;
+                password.selectionMap[itemId] = true;
               }
             }
-
+            
             var newLink = {};
-            newLink[type + 'Id'] = item.agentId || item.id;
+            newLink[type + 'Id'] = itemId;
             password.links.push(newLink);
           } else {
             for (var i = 0; i < password.links.length; i++) {
               var link = password.links[i];
-              if (link.agentId === item.agentId || link.userId === item.id) {
+              if (link[type + 'Id'] === itemId) {
                 password.links.splice(i, 1);
                 break;
               }
             }
           }
-
-          $scope.password.firstLinkName = getLinkName($scope.password.links[0], $scope.password.companyId);
+          
+          $scope.password.firstLinkName = getLinkName(password.links[0], companyId);
         };
-
+        
         $scope.closeWindowWithConfirm = function (form) {
           var message = 'Do you want to close this window? All entered information will be lost.';
           if (isDataChanged(form)) {
@@ -139,14 +164,14 @@
             $uibModalInstance.dismiss();
           }
         };
-
+        
         $scope.setTemplate = function (template, form) {
           $scope.editedPassword.template = template;
           $scope.userTabDisabled = false;
           $scope.deviceTabDisabled = false;
           $scope.triedToSavePassword = false;
-
-          if (template === 'Device') {
+          
+          if (template === 'Device' || template === 'Wifi network') {
             $scope.userTabDisabled = true;
             clearLinks();
             $scope.openedTab = 'device';
@@ -155,10 +180,10 @@
             clearLinks();
             $scope.openedTab = 'user';
           }
-
+          
           form.$setPristine();
         };
-
+        
         $scope.setCompanyId = function () {
           if ($scope.editedPasswordCompany && $scope.editedPasswordCompany.id) {
             if ($scope.editedPasswordCompany.id !== $scope.editedPassword.companyId) {
@@ -170,16 +195,16 @@
             clearLinks();
           }
         };
-
+        
         $scope.isShowingErrors = function (form, fieldName) {
           return form[fieldName] && ($scope.triedToSavePassword || form[fieldName].$dirty) && !form[fieldName].$valid;
         };
-
+        
         $scope.getFormError = function (form) {
           if (form.$invalid) {
             var errors = Object.keys(form.$error),
               primaryError;
-
+            
             for (var i = 0, len = errors.length; i < len; i++) {
               var error = errors[i];
               if (error === 'pattern' || error === 'number' || error === 'min' || error === 'max') {
@@ -187,7 +212,7 @@
                 break;
               }
             }
-
+            
             if (primaryError === 'pattern') {
               return form.ip && from.ip.$invalid ? 'IP address has invalid format' : 'Link has invalid format';
             } else if (primaryError === 'number') {
@@ -201,7 +226,47 @@
             }
           }
         };
-
+        
+        $scope.removeGadget = function (id, event) {
+          toggleGadget(false, id);
+          var gadgets = $scope.gadgets;
+          for (var i = 0; i < gadgets.length; i++) {
+            var gadget = gadgets[i];
+            if (gadget.id === id) {
+              gadgets.splice(i, 1);
+              break;
+            }
+          }
+          DevicesService.removeGadget(id);
+          event.stopPropagation();
+        };
+        
+        $scope.addNewGadget = function (name, event) {
+          if (name) {
+            var gadgets = $scope.gadgets;
+            var selectionMap = $scope.password.selectionMap;
+            for (var i = 0; i < gadgets.length; i++) {
+              var gadget = gadgets[i];
+              if (gadget.name === name && !selectionMap[gadget.id]) {
+                toggleGadget(true, gadget.id);
+                return;
+              }
+            }
+            
+            DevicesService.saveGadget(name, function (resp) {
+              $scope.gadgets.push({
+                id: resp.id,
+                name: name
+              });
+              toggleGadget(true, resp.id);
+              $scope.toggleCreationGadget(false);
+            });
+          } else {
+            $scope.toggleCreationGadget(false);
+          }
+          event.stopPropagation();
+        };
+        
         $scope.save = function (form) {
           if (form.$valid) {
             $scope.editedPassword.links = angular.copy($scope.password.links);
@@ -214,25 +279,37 @@
             $scope.triedToSavePassword = true;
           }
         };
-
+        
         function getLinkName(link, companyId) {
           if (!link) {
             return '';
           }
-
+          
           if (link.userId) {
             var user = UsersService.getOneById(link.userId);
             if (user) {
               return $scope.getUserName(user);
             }
-          } else {
+          } else if (link.agentId) {
             var device = DevicesService.getOneByAgentId(link.agentId, companyId);
             if (device) {
               return getDeviceName(device);
             }
+          } else if (link.gadgetId) {
+            var gadgets = $scope.gadgets;
+            if (gadgets && gadgets.length) {
+              for (var i = 0; i < gadgets.length; i++) {
+                var gadget = gadgets[i];
+                if (gadget.id === link.gadgetId) {
+                  return gadget.name;
+                }
+              }
+            } else {
+              return '';
+            }
           }
         }
-
+        
         function buildDto(password) {
           var dto = {
             id: password.id,
@@ -242,11 +319,11 @@
             password: password.password,
             expiredDate: formatDate(new Date(password.expiredDate))
           };
-
+          
           if (password.onlyForMe) {
             dto.managedById = $scope.currentUser.id;
           }
-
+          
           switch (dto.template) {
             case 'OFFICE_365_ACCOUNT': {
               dto.key = password.key;
@@ -262,7 +339,8 @@
               break;
             }
             case 'EMAIL_ACCOUNT':
-            case 'LOCAL_USER_ACCOUNT': {
+            case 'LOCAL_USER_ACCOUNT':
+            case 'WIFI_NETWORK': {
               dto.links = password.links;
               dto.description = password.description;
               break;
@@ -288,32 +366,58 @@
               dto.description = password.description;
               break;
             }
+            case 'AGENT': {
+              dto.description = 'Agent Network Credentials';
+              break;
+            }
           }
-
+          
           return dto;
         }
-
+        
         function formatDate(date) {
           if (!date || !date.getTime()) {
             return null;
           }
           return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
-
+        
+        function toggleGadget(isSelected, id) {
+          $scope.password.selectionMap[id] = isSelected;
+          $scope.validateLinks('gadget', id);
+        }
+        
         function isDataChanged(form) {
           var data = $scope.editedPassword;
           return (data.username || data.password || data.description) && (!data.id || form.$dirty);
         }
-
+        
+        function existInPassword(gadgetId, password) {
+          var links = password.links;
+          if (!links || !links.length || !links[0] || !links[0].gadgetId) {
+            return false;
+          }
+          
+          for (var i = 0; i < links.length; i++) {
+            var link = links[i];
+            if (link.gadgetId === gadgetId) {
+              return true;
+            }
+          }
+        }
+        
         function getDeviceName(device) {
           return device.hostName || device.ip || device.ipAddress;
         }
-
+        
         function clearLinks() {
-          $scope.password.links = [];
-          $scope.password.selectionMap = {};
+          var password = $scope.password;
+          password.links = [];
+          password.selectionMap = {};
+          password.firstLinkName = '';
         }
-
-      }]);
-
+        
+      }
+    ]);
+  
 }());

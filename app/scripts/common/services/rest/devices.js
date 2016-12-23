@@ -715,6 +715,21 @@
         var future = $http.get('/devices/report/showPassword?agentId=' + agentId + '&companyId=' + companyId);
         Utils.handleCallback(future, callback);
       }
+      
+      function getGadgets(callback) {
+        var future = $http.get('/gadgets');
+        Utils.handleCallback(future, callback);
+      }
+      
+      function saveGadget(name, callback) {
+        var future = $http.post('/gadgets', { name: name });
+        Utils.handleCallback(future, callback);
+      }
+      
+      function removeGadget(id, callback) {
+        var future = $http.delete('/gadgets/' + id);
+        Utils.handleCallback(future, callback);
+      }
 
       return {
         downloadAgent: downloadAgent,
@@ -745,6 +760,9 @@
         getOneByAgentId: getOneByAgentId,
         saveReportEditedFields: saveReportEditedFields,
         reportPasswordShow: reportPasswordShow,
+        getGadgets: getGadgets,
+        saveGadget: saveGadget,
+        removeGadget: removeGadget,
         _addInitListener: _addInitListener
       }
     }
