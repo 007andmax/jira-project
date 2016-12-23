@@ -3,10 +3,10 @@
 (function () {
 
   angular.module('quicktech.core.passwordManager').controller('quicktech.core.passwordManager.passwordManagerCtrl',
-    ['$scope', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService',
+    ['$scope', 'PasswordManagerService', 'CompaniesService', 'UsersService', 'DevicesService', '$rootScope',
       'quicktech.common.services.UserConfirmationsService', 'quicktech.common.services.UserNotificationService',
       'quicktech.common.services.SharedStateService', 'quicktech.common.services.PermissionsService',
-      function ($scope, PasswordManagerService, CompaniesService, UsersService, DevicesService,
+      function ($scope, PasswordManagerService, CompaniesService, UsersService, DevicesService, $rootScope,
                 UserConfirmationsService, UserNotificationService, SharedStateService, PermissionsService) {
         var headerSharedState = SharedStateService.getSharedState('passwordsHeader');
 
@@ -133,6 +133,11 @@
             return $scope.getLinkName(item.links[0]);
           }
         };
+        
+        $scope.$on('$destroy', function () {
+          headerSharedState.filter = {};
+          $rootScope.$broadcast('clearLeftPanelDateRange');
+        });
 
         function getDeviceName(device) {
           return device.hostName || device.ip || device.ipAddress;

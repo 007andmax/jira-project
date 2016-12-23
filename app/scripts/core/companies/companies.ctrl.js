@@ -154,7 +154,7 @@
 
         $scope.$on('$destroy', function () {
           headerSharedState.filter = {};
-          $rootScope.$broadcast('clearCompaniesDateRange');
+          $rootScope.$broadcast('clearLeftPanelDateRange');
         });
 
       }]);

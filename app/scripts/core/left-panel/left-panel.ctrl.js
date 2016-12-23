@@ -239,7 +239,7 @@
           }
         };
 
-        $scope.$on('clearCompaniesDateRange', function () {
+        $scope.$on('clearLeftPanelDateRange', function () {
           if ($scope.clearDateRange) {
             $scope.clearDateRange();
           }
