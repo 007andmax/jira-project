@@ -55,9 +55,12 @@
             }
 
           } else if (newChange.action === 'RECEIPT_ARCHIVE_DELETED') {
-
-            var invoice = Utils.findById(data.list, newChange.data.id);
-            Utils.customizeObj(newChange.data, invoice);
+  
+            for (var i = 0; i < newChange.data.length; i++) {
+              var changedInvoice = newChange.data[i];
+              var invoice = Utils.findById(data.list, changedInvoice.id);
+              Utils.customizeObj(changedInvoice, invoice);
+            }
             
           } else if (newChange.action === 'COMPANY_ARCHIVED') {
 
