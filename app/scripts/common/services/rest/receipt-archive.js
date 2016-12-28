@@ -54,7 +54,7 @@
               }
             }
 
-          } else if (newChange.action === 'INVOICE_DELETED') {
+          } else if (newChange.action === 'RECEIPT_ARCHIVE_DELETED') {
 
             var invoice = Utils.findById(data.list, newChange.data.id);
             Utils.customizeObj(newChange.data, invoice);

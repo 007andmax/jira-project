@@ -181,6 +181,44 @@
             }
           }
         };
+  
+        $scope.resendSelectedInvoices = function () {
+          var invoiceIds = getSelectedInvoices($scope.invoiceToSent);
+  
+          $scope.sendingInvoices = true;
+          ReceiptArchiveService.resendInvoices(invoiceIds, function () {
+            $scope.sendingInvoices = false;
+          });
+        };
+  
+        $scope.deleteSelectedInvoices = function () {
+          var invoiceIds = getSelectedInvoices($scope.invoiceToSent);
+          ReceiptArchiveService.deleteInvoices(invoiceIds);
+        };
+        
+        function getSelectedInvoices(invoiceToSent) {
+          var invoiceIds = [];
+          if ($stateParams.mode === 'list') {
+            for (var invoiceId in invoiceToSent.invoices) {
+              if (invoiceToSent.invoices[invoiceId]) {
+                invoiceIds.push(invoiceId);
+                invoiceToSent.invoices[invoiceId] = false;
+              }
+            }
+          } else {
+            for (var companyId in invoiceToSent) {
+              var invoices = invoiceToSent[companyId].invoices;
+      
+              for (var invoiceId in invoices) {
+                if (invoices[invoiceId]) {
+                  invoiceIds.push(invoiceId);
+                  invoices[invoiceId] = false;
+                }
+              }
+            }
+          }
+          return invoiceIds;
+        }
 
       }]);
 

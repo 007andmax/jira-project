@@ -84,7 +84,7 @@
                 <span style="margin-right: 0;" class="label label-warning pull-right">{{ invoice.paidOn | date:'dd MMM yyyy' }}</span>
               </div>
 
-              <div class="col-sm-2 bold">{{ invoice.deleteAt ? 'deleted' : (invoice.sum | currency:'$':2) }}</div>
+              <div class="col-sm-2 bold">{{ invoice.deletedAt ? 'deleted' : (invoice.sum | currency:'$':2) }}</div>
             </div>
           </li>
 
