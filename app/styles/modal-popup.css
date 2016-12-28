@@ -298,6 +298,10 @@
   width: 40%;
 }
 
+.create-window .general .company-window .custom-phone-type .pull-left.dropdown{
+  width: 70%;
+}
+
 .create-window .general .choose-file {
   margin-top: 20px;
   margin-bottom: 15px;
@@ -373,6 +377,10 @@
   right: 3px;
   padding: 10px;
   cursor: pointer;
+}
+
+.create-window .input-top-4 .x-mark{
+  top: 4px;
 }
 
 .pass-man-popup .x-mark {

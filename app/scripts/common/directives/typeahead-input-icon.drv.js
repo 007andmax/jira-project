@@ -6,10 +6,14 @@
     [function () {
       return {
         restrict: 'A',
-        template: '' +
-        '<i class="icn-sm icn-remove-token" style="cursor:pointer;pointer-events: auto;"' +
-        'ng-show="showClearIcon" ng-click="clearInput($event)" tooltip="clear" tooltip-placement="top"></i>' +
-        '<i class="icn-sm icn-caret-gray" ng-hide="showClearIcon"></i>',
+        template: '<span class="x-mark" ng-click="clearInput($event)">' +
+        '<i class="icn-sm icn-remove-token"' +
+        'ng-show="showClearIcon" ng-click="clearInput($event)"  tooltip="clear" tooltip-placement="top"></i>' +
+        '</span>' +
+        '<span class="x-mark">' +
+        '<i class="icn-sm icn-caret-gray" ng-hide="showClearIcon"></i>' +
+        '</span>' +
+        '',
         scope: true,
         link: function (scope, element, attrs) {
 

@@ -34,279 +34,85 @@
         <p>Close</p>
       </div>
     </div>
-    <div class="hardware__wrapper" ng-repeat="(agentId, report) in data track by agentId">
-      <div class="hardware__wrapper--report">
-        <div class="main-info">
-          <div class="main-info--gadget">
-            <h2><strong>{{ currentAgent ? (currentAgent.hostName || currentAgent.ip) : 'Unknown' }}</strong></h2>
-            <p>
-              <strong>Manufacturer:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.manufacturer }}</span>
-              <input style="margin-left: 8px;" class="form-control hw-input" ng-if="showEdit" type="text"
-                     ng-model="dto.manufacturer">
-            </p>
-            <p>
-              <strong>Model:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.model }}</span>
-              <input style="margin-left: 54px;" class="form-control hw-input" ng-if="showEdit" type="text"
-                     ng-model="dto.model">
-            </p>
-            <p>
-              <strong>Serial Number:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.serialNumber }}</span>
-              <input style="margin-left: 5px;" class="form-control hw-input" ng-if="showEdit" type="text"
-                     ng-model="dto.serialNumber">
-            </p>
-            <p>
-              <strong>Asset Tag:</strong>
-              <span ng-if="!showEdit">&nbsp;{{ dto.assetTag }}</span>
-              <input style="margin-left: 35px;" class="form-control hw-input" ng-if="showEdit" type="text"
-                     ng-model="dto.assetTag">
-            </p>
-            <div class="date">
-              <strong>Install Date:</strong>
-              <span ng-if="!showEdit">
-                {{ isInstallDateChanged || report.editableFields.installDate ? ((dto.installDate || '') | date: 'dd MMM yyyy') : '' }}
-              </span>
-              <div ng-if="showEdit" style="display: inline-block; position: relative; margin-left: 23px;">
+    <div class="customer-ticket">
+      <div class="customer-ticket__report">
+        <div class="customer-ticket__report--summary">
+          <h1>Tickets Summary</h1>
+          <table>
+            <tbody>
+            <tr>
+              <td rowspan="2" colspan="1" class="summary-chart">
 
-                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 9px;right: 13px;z-index: 1;"></i>
-                <input type="text" date-range-picker="setInstallDate" date-format="dd M yyyy"
-                       value="{{ (dto.installDate || '') | date: 'dd MMM yyyy' }}"
-                       class="form-control hw-input"
-                       readonly placeholder="Install Date">
-
-              </div>
-            </div>
-            <div class="date">
-              <strong>Warranty Date:</strong>
-              <span ng-if="!showEdit">
-                {{ isWarrantyDateChanged || report.editableFields.warrantyDate ? ((dto.warrantyDate || '') | date: 'dd MMM yyyy') : '' }}
-              </span>
-              <div ng-if="showEdit" style="display: inline-block; margin-left: 4px;" class="dropdown">
-
-                <i class="icn-sm icn-caret-gray" style="position: absolute;top: 9px;right: 13px;z-index: 1;"></i>
-                <input type="text" date-range-picker="setWarrantyDate" date-format="dd M yyyy"
-                       value="{{ (dto.warrantyDate || '') | date: 'dd MMM yyyy' }}"
-                       class="form-control hw-input" readonly placeholder="Warranty Date">
-
-              </div>
-            </div>
-
-          </div>
-          <div class="main-info--user">
-            <h2><strong>{{ report.company.name }}</strong></h2>
-            <p style="white-space: pre-wrap;">{{ report.address }}</p>
-            <p ng-if="getPrimaryPhoneNumber(report.primaryContact.phoneNumbers)">
-              <strong>Phone number:</strong>&nbsp;{{ getPrimaryPhoneNumber(report.primaryContact.phoneNumbers) }}
-            </p>
-            <p ng-if="report.primaryContact.primaryEmail">
-              <strong>Email:</strong>&nbsp;{{ report.primaryContact.primaryEmail }}
-            </p>
-
-          </div>
+              </td>
+              <td colspan="1" class="time-info">
+                <p>Time spent</p>
+                <h4>1 hour 30 min</h4>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="1" class="time-info">
+                <p>Avarage Responce time</p>
+                <h4>2 hours</h4>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="info-row">
-          <div class="network-info info-label">
-            <p>
-              <strong>Network Adapter:</strong>
-              <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ networkAdapter.description }}
-            </span>
-            </p>
-            <p>
-              <strong>IP Address:</strong>
-              <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ networkAdapter.ip_address }}
-            </span>
-            </p>
-            <p>
-              <strong>Subnet Mask:</strong>
-              <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{(networkAdapter.subnet || '').split(';')[0] || '' }}
-            </span>
-            </p>
-            <p>
-              <strong>Preferred DNS Server:</strong>
-              <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ networkAdapter.dns }}
-            </span>
-            </p>
-            <p>
-              <strong>Gateway:</strong>
-              <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ networkAdapter.gateway }}
-            </span>
-            </p>
-            <p>
-              <strong>External IP:</strong>&nbsp;{{ report.general.externalIp }}</p>
-            <p>
-              <strong>Link Speed:</strong>
-              <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ networkAdapter.speed | fileSizeFilter: true }}
-            </span>
-            </p>
-            <p>
-              <strong>MAC Address:</strong>
-              <span ng-if="report.networkAdapters && report.networkAdapters.length">
-              &nbsp;{{ formatMacAddress(networkAdapter.mac) }}
-            </span>
-            </p>
+        <div class="customer-ticket__report--details clearfix">
+          <h1>Tickets details</h1>
+          <table>
+            <tbody>
+            <tr>
+              <td><p><strong>Date/Time</strong></p>
+              <p>Dec 19 2016 / 17:47PM</p></td>
+              <td><p><strong>Ticket Number</strong></p>
+                <p>52566</p></td>
+              <td><p><strong>Status</strong></p>
+                <p>Open</p></td>
+              <td><p><strong>User</strong></p>
+                <p>John Doe</p></td>
+              <td><p><strong>Device</strong></p>
+                <p>SW-OP01</p></td>
+              <td><p><strong>Responce Time</strong></p>
+                <p>00:15</p></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="details-futures">
+            <p><strong>Description</strong></p>
+            <p class="details-futures-info">Camera in OP is not working, tried to reboot computer but still not working.</p>
           </div>
-          <div class="device-info info-label">
-            <p><strong>Motherboard:</strong>
-              &nbsp;{{ report.motherboard.manufacturer + ' ' }}
-              {{ report.motherboard.product }} {{ report.motherboard.version }}
-            </p>
-            <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ report.motherboard.serial_number }}</p>
-            <p>
-              <strong>Bios Version:</strong>
-              &nbsp;{{ report.bios.manufacturer + ' ' + report.bios.version + ' ' + (parseDate(report.bios.release_date) | date: 'dd MMM yyyy') }}
-            </p>
-            <p>
-              <strong>CPU:</strong>
-              <span ng-if="report.processors && report.processors.length">
-                &nbsp;{{ report.processors[0].name }}
-              </span>
-            </p>
-            <p>
-              <strong>Ram:</strong>
-              <span ng-if="report.ram">
-                &nbsp;{{ report.ram.total | fileSizeFilter }}
-              </span>
-              <span ng-if="!report.ram">No RAM detected</span>
-            </p>
-            <p>
-              <strong>Windows info:</strong>
-              &nbsp;{{ report.system.caption + ' ' + report.system.architecture + ' ' + report.system.service_pack }}
-              <br>{{ report.general.WindowsLicenseKey }}
-            </p>
-            <p ng-if="report.general.OfficeName">
-              <strong>{{ report.general.OfficeName }}:</strong>
-              &nbsp;{{ report.general.OfficeLicenseKey }}
-            </p>
-            <p>
-              <strong>Office Account:</strong>
-              <span ng-if="!showEdit">{{ dto.officeAccount }}</span>
-              <input style="margin-left: 5px;"
-                     ng-if="showEdit" class="form-control hw-input" type="text" ng-model="dto.officeAccount"
-                     autocomplete="off">
-            </p>
-            <p>
-              <strong>Password:</strong>
-              <span ng-if="!showEdit" class="password">
-                {{ passwordShown ? dto.password : '********' }}
-                <i class="icn-sm {{ passwordShown ? 'icn-hide-password' : 'icn-show-password' }}"
-                   ng-click="showPassword()"></i>
-              </span>
-              <span ng-if="showEdit" class="password">
-                <input type="{{ passwordShown ? 'text' : 'password' }}"
-                       style="margin-left: 35px;"
-                       class="form-control hw-input" ng-model="dto.password" autocomplete="off">
-                <i class="icn-sm {{ passwordShown ? 'icn-hide-password' : 'icn-show-password' }}"
-                   ng-click="showPassword()"></i>
-              </span>
-            </p>
-          </div>
+          <h4 class="pull-right"><strong>Tech: </strong>Scott Wilson</h4>
         </div>
-        <div class="info-row">
-          <div class="hard-drive info-label" ng-class="{'extra': report.logicalDisks.length > 2}">
-            <div class="extra-hidden">
-              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks track by disk.id"
-                   ng-if="$index < 2">
-                <div class="hard-drive__point--info">
-                  <p><strong>{{ disk.device_id }}</strong>
-                    &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
-                    {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
-                  <p style="word-break: break-all;"><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
-                  <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number
-                    }}</p>
-                  <p ng-if="disk.is_system"><strong>OS Drive:</strong>&nbsp;Windows</p>
-                </div>
-                <div class="hard-drive__point--icon">
-                  <img
-                    ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
-                </div>
-              </div>
-            </div>
-            <div class="extra-hidden" ng-if="report.logicalDisks.length > 2">
-              <div class="hard-drive__point" ng-repeat="disk in report.logicalDisks | limitTo: 2 track by disk.id"
-                   ng-if="$index >= 2">
-                <div class="hard-drive__point--info">
-                  <p><strong>{{ disk.device_id }}</strong>
-                    &nbsp;({{ disk.file_system + ' ' }} on drive {{ (disk.disk_index + 1) }})<br>
-                    {{ disk.size | fileSizeFilter }}<br>{{ disk.free_space | fileSizeFilter }} free</p>
-                  <p style="word-break: break-all;"><strong>Model:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).model }}</p>
-                  <p style="word-break: break-all;"><strong>SN:</strong>&nbsp;{{ findDiskByIndex(report.physicalDisks, disk.disk_index).serial_number
-                    }}</p>
-                  <p ng-if="disk.is_system"><strong>OS Drive:</strong>&nbsp;Windows</p>
-                </div>
-                <div class="hard-drive__point--icon">
-                  <img
-                    ng-src="/commonHtml/assets/images/agent-report/pie-{{ getFilledSpacePercents(disk.size, disk.free_space) }}.png">
-                </div>
-              </div>
-            </div>
-            <div class="hard-drive__point" ng-if="!(report.logicalDisks && report.logicalDisks.length)">
-              <p style="text-align: center;width: 200%;">No Hard Drives detected</p>
-            </div>
+        <div class="customer-ticket__report--details-plus clearfix">
+          <h1>Tickets details</h1>
+          <table>
+            <tbody>
+            <tr>
+              <td><p><strong>Date/Time</strong></p>
+                <p>Dec 19 2016 / 17:47PM</p></td>
+              <td><p><strong>Ticket Number</strong></p>
+                <p>52566</p></td>
+              <td><p><strong>Status</strong></p>
+                <p>Open</p></td>
+              <td><p><strong>User</strong></p>
+                <p>John Doe</p></td>
+              <td><p><strong>Device</strong></p>
+                <p>SW-OP01</p></td>
+              <td><p><strong>Responce Time</strong></p>
+                <p>00:15</p></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="details-futures">
+            <p><strong>Description</strong></p>
+            <p class="details-futures-info">Camera in OP is not working, tried to reboot computer but still not working.</p>
           </div>
-          <div class="security info-label">
-            <div class="security__antivirus">
-              <div class="security__antivirus--info">
-                <p>
-                  <strong>Antivirus:</strong>
-                  <span ng-if="!(report.antivirus && report.antivirus.length)">&nbsp;no antivirus installed</span>
-                  <br>
-                  <span ng-if="report.antivirus && report.antivirus.length">
-                  {{ report.antivirus[0].displayName }} <br> Version {{ report.antivirus[0].version }}
-                </span>
-                </p>
-              </div>
-              <div class="security__antivirus--icon">
-                <img
-                  ng-if="report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate"
-                  ng-src="/commonHtml/assets/images/agent-report/shield.png" alt="">
-                <img
-                  ng-if="!(report.antivirus && report.antivirus.length && report.antivirus[0].isTurnedOn && report.antivirus[0].isUpToDate)"
-                  ng-src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
-              </div>
-            </div>
-            <div class="security__updates">
-              <div class="security__updates--info">
-                <p>
-                  <span ng-if="report.wuAgent.status === 'Finished'">
-                    <strong>Security updates:</strong><br>
-                    <span>{{ report.wuAgent.missing_updates }} Missing Security Updates</span>
-                  </span>
-                  <br>
-                  <strong>Last install:</strong>
-                  <span ng-if="!report.wuAgent">
-                    &nbsp;no security installed
-                  </span>
-                  <br>
-                  <span ng-if="report.wuAgent">
-                    {{ parseDate(report.wuAgent.last_install) | date: 'dd/MM/yyyy h:mm:ss a' }} <br>
-                    Hotfixies from Microsoft Update
-                    (agent version {{ report.wuAgent.version }})
-                  </span>
-                </p>
-              </div>
-              <div class="security__updates--icon">
-                <img ng-if="report.wuAgent && report.wuAgent.last_install && report.wuAgent.version"
-                     ng-src="/commonHtml/assets/images/agent-report/shield.png" alt="">
-                <img ng-if="!(report.wuAgent && report.wuAgent.last_install && report.wuAgent.version)"
-                     ng-src="/commonHtml/assets/images/agent-report/shield-non.png" alt="">
-              </div>
-            </div>
+          <div class="details-futures">
+            <p><strong>Notes:</strong></p>
+            <p class="details-futures-info">Camera in OP is not working, tried to reboot computer but still not working.</p>
           </div>
-        </div>
-        <div class="equipment info-label">
-          <ul class="equipment__list"><p ng-if="report.printers && report.printers.length"><strong>Printers:</strong>
-          </p>
-            <li ng-repeat="printer in report.printers">{{ printer.name }}</li>
-            <li ng-if="!(report.printers && report.printers.length)"> No Printers detected</li>
-          </ul>
+          <h4 class="pull-right"><strong>Tech: </strong>Scott Wilson</h4>
         </div>
       </div>
     </div>
