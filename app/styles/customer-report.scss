@@ -20,6 +20,7 @@
         &-info{
           border: 1px solid #eee;
           min-height:50px;
+          padding: 5px;
         }
       }
     }
@@ -43,3 +44,8 @@
     }
   }
 }
+
+.customer-report-modal{
+  padding: 15px;
+}
+
