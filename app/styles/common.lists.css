@@ -138,9 +138,8 @@
 }
 
 .qt-list li.list-heading > [class*='col-'] {
-  font-size: 16px;
-  /*font-weight: bold;*/
-  line-height: 11px;
+  font-size: 14px;
+  line-height: 14px;
 
   text-transform: capitalize;
 
@@ -1221,16 +1220,14 @@ Devices tab
 }
 
 .qt-invoices li.list-heading {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: bold;
-  line-height: 12px;
+  line-height: 14px;
 
   height: auto;
   padding: 28px 0;
 
-  text-transform: uppercase;
-
-  color: #748498;
+  text-transform: capitalize;
 }
 
 @-moz-document url-prefix() {

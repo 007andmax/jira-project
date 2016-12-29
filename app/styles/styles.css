@@ -6,7 +6,7 @@
 /*@font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: 'Graphik Regular', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
@@ -279,7 +279,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  font-family: "myriad-pro", sans-serif;
+  font-family: 'Graphik Regular', sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #1f2a37;
@@ -9112,7 +9112,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "myriad-pro", sans-serif;
+  font-family: 'Graphik Regular', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -9218,7 +9218,7 @@ button.close {
   max-width: 400px;
   padding: 5px 10px;
   color: #1f2a37;
-  font-family: "myriad-pro", sans-serif;
+  font-family: 'Graphik Regular', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;

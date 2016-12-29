@@ -54,37 +54,37 @@
               <li class="list-heading" ng-show="category.productsList.length > 0 && category.id === expandedCategoryId" style="cursor: pointer !important;"
                   fixed-block-top offset-top="148">
                 <div class="col-2" ng-click="setOrderForProducts('description')">
-                  <span class="sort-span">DESCRIPTION<i class="icn-sm sort-icon icn-sort"
+                  <span class="sort-span">description<i class="icn-sm sort-icon icn-sort"
                                                         ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'description'}"></i></span>
 
                 </div>
                 <div class="col-4" ng-click="setOrderForProducts('cost')" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">
-                  <span class="sort-span">COST<i class="icn-sm sort-icon icn-sort"
+                  <span class="sort-span">cost<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'cost'}"></i></span>
 
                 </div>
                 <div class="col-4" ng-click="setOrderForProducts('sale')">
-                  <span class="sort-span">SALE PRICE<i class="icn-sm sort-icon icn-sort"
+                  <span class="sort-span">sale price<i class="icn-sm sort-icon icn-sort"
                                                        ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'sale'}"></i></span>
 
                 </div>
                 <div class="col-1" ng-click="setOrderForProducts('vendor')">
-                  <span class="sort-span">VENDOR/SUPPLIER<i class="icn-sm sort-icon icn-sort"
+                  <span class="sort-span">vendor/supplier<i class="icn-sm sort-icon icn-sort"
                                                             ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'vendor'}"></i></span>
 
                 </div>
                 <div class="col-1" ng-click="setOrderForProducts('ilc')">
-                  <span class="sort-span">ILC<i class="icn-sm sort-icon icn-sort"
+                  <span class="sort-span">ilc<i class="icn-sm sort-icon icn-sort"
                                                 ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'ilc'}"></i></span>
 
                 </div>
                 <div class="col-1" ng-click="setOrderForProducts('manufacture')">
-                  <span class="sort-span">Mfg#<i class="icn-sm sort-icon icn-sort"
+                  <span class="sort-span">mfg#<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'manufacture'}"></i></span>
 
                 </div>
                 <div class="col-4" ng-click="setOrderForProducts('taxable')">
-                  <span class="sort-span">TAXABLE<i class="icn-sm sort-icon icn-sort"
+                  <span class="sort-span">taxable<i class="icn-sm sort-icon icn-sort"
                                                     ng-class="{'rotate': orderProducts.reverse, 'active': orderProducts.field === 'taxable'}"></i></span>
 
                 </div>
