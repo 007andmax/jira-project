@@ -30,6 +30,7 @@
   float: left;
   display: inline-block;
   padding: 30px 0;
+  width: 145px;
 }
 
 .create-window .navigation__list {
