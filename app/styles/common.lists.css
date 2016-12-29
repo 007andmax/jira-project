@@ -2996,15 +2996,15 @@ Devices tab
 
 @media only screen and (max-width: 1800px) {
   .qt-devices > li > .col-1 {
-    width: calc(100% - 760px);
+    width: calc(100% - 620px);
   }
 
   .qt-devices > li > .col-2 {
-    width: 200px;
+    width: 150px;
   }
 
   .qt-devices > li > .col-3 {
-    width: 145px;
+    width: 50px;
   }
 
   .qt-devices > li > .col-4 {
@@ -3032,7 +3032,7 @@ Devices tab
 
 @media only screen and (max-width: 1500px) {
   .qt-devices > li > .col-1 {
-    width: calc(100% - 752px);
+    width: calc(100% - 600px);
   }
 
   .qt-devices > li > .col-6 {
@@ -3050,7 +3050,7 @@ Devices tab
 
 @media only screen and (max-width: 1200px) {
   .qt-devices > li > .col-1 {
-    width: calc(100% - 690px);
+    width: calc(100% - 600px);
   }
 
   .qt-devices > li > .col-2 {
@@ -3058,7 +3058,7 @@ Devices tab
   }
 
   .qt-devices > li > .col-3 {
-    width: 120px;
+    width: 50px;
   }
 
   .qt-devices .list-actions .more .dropdown-menu > li:first-child {

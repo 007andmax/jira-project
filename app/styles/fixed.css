@@ -1153,6 +1153,7 @@ span.sort-span {
   display: inline-block;
   position: relative;
   padding-right: 15px;
+  cursor: pointer;
 }
 .avatar-error-message{
   float: left;
