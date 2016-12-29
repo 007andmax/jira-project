@@ -269,7 +269,7 @@
       var future = $http({
         url: '/receivable/resend',
         method: 'POST',
-        data: invoiceIds
+        data: { ids: invoiceIds }
       });
 
       Utils.handleCallback(future, callback);

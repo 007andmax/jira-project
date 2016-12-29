@@ -34,6 +34,7 @@
 
         ReceiptArchiveService.getReceiptArchiveData($scope, function (resp) {
           $scope.receiptArchiveData = resp;
+          $scope.invoiceToSent = {};
 
           var invoicesByCompany = $scope.receiptArchiveData.companies;
 
@@ -62,13 +63,79 @@
               }
 
               $scope.totalCompanySum[companyId] = sumByCompany;
+              $scope.invoiceToSent[companyId] = {
+                checked: false,
+                invoices: {}
+              };
             }
+          } else {
+            $scope.invoiceToSent.invoices = {};
           }
 
           if (!resp.list.length) {
             $scope.loadingInProgress = false;
           }
         });
+  
+        $scope.$watch('invoiceToSent', function () {
+    
+          $scope.selectedInvoiceCount = 0;
+          var disabledCount = 0,
+            invoices;
+    
+          if ($stateParams.mode === 'group-by-company') {
+      
+            for (var companyId in $scope.invoiceToSent) {
+              var invoiceToSent = $scope.invoiceToSent[companyId],
+                companyChecked = invoiceToSent.checked;
+        
+              invoices = invoiceToSent.invoices;
+        
+              if (invoices) {
+                for (var invoiceId in invoices) {
+                  if (invoices[invoiceId]) {
+                    $scope.selectedInvoiceCount++;
+                    if (!companyChecked) {
+                      disabledCount++;
+                      $scope.selectableCompanyId = companyId;
+                    }
+                  }
+                }
+              }
+        
+              if (companyChecked) {
+                disabledCount++;
+                $scope.selectableCompanyId = companyId;
+              }
+            }
+      
+          } else {
+      
+            if (!$scope.invoiceToSent) {
+              return;
+            }
+      
+            invoices = $scope.invoiceToSent.invoices;
+      
+            for (var invoiceId in invoices) {
+              if (invoices[invoiceId]) {
+                $scope.selectedInvoiceCount++;
+                disabledCount++;
+                for (var i = 0; i < $scope.receivableInvoicesData.list.length; i++) {
+                  if (invoiceId === $scope.receivableInvoicesData.list[i].id) {
+                    $scope.selectableCompanyId = $scope.receivableInvoicesData.list[i].company.id;
+                    break;
+                  }
+                }
+              }
+            }
+      
+          }
+    
+          if (disabledCount === 0) {
+            $scope.selectableCompanyId = undefined;
+          }
+        }, true);
 
         $scope.setOrderForInvoices = function (option) {
           if (option === $scope.orderInvoices.field) {
@@ -100,6 +167,58 @@
         $scope.filterByCompany = function (invoice) {
           return !$scope.headerSharedState.filter.companyId || invoice.company.id === $scope.headerSharedState.filter.companyId;
         };
+  
+        $scope.changeCompanyCheckbox = function (companyId) {
+    
+          var invoiceToSentData = $scope.invoiceToSent[companyId];
+    
+          if (invoiceToSentData) {
+      
+            var invoices = $scope.receiptArchiveData.companies[companyId];
+      
+            for (var j = 0; j < invoices.length; j++) {
+              invoiceToSentData.invoices[invoices[j].id] = invoiceToSentData.checked;
+            }
+          }
+        };
+  
+        $scope.resendSelectedInvoices = function () {
+          var invoiceIds = getSelectedInvoices($scope.invoiceToSent);
+  
+          $scope.sendingInvoices = true;
+          ReceiptArchiveService.resendInvoices(invoiceIds, function () {
+            $scope.sendingInvoices = false;
+          });
+        };
+  
+        $scope.deleteSelectedInvoices = function () {
+          var invoiceIds = getSelectedInvoices($scope.invoiceToSent);
+          ReceiptArchiveService.deleteInvoices(invoiceIds);
+        };
+        
+        function getSelectedInvoices(invoiceToSent) {
+          var invoiceIds = [];
+          if ($stateParams.mode === 'list') {
+            for (var invoiceId in invoiceToSent.invoices) {
+              if (invoiceToSent.invoices[invoiceId]) {
+                invoiceIds.push(invoiceId);
+                invoiceToSent.invoices[invoiceId] = false;
+              }
+            }
+          } else {
+            for (var companyId in invoiceToSent) {
+              var invoices = invoiceToSent[companyId].invoices;
+      
+              for (var invoiceId in invoices) {
+                if (invoices[invoiceId]) {
+                  invoiceIds.push(invoiceId);
+                  invoices[invoiceId] = false;
+                }
+              }
+            }
+          }
+          return invoiceIds;
+        }
 
       }]);
 

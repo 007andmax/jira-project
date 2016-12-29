@@ -227,6 +227,37 @@
 
           return result;
         };
+  
+        $scope.resendSelectedInvoices = function () {
+          var invoiceIds = [],
+            invoiceList = $scope.receivableInvoicesData.list;
+          
+          $scope.sendingInvoices = true;
+          
+          if ($stateParams.mode === 'list') {
+            for (var i = 0; i < invoiceList.length; i++) {
+              if ($scope.invoiceToSent.invoices[invoiceList[i].number]) {
+                invoiceIds.push(invoiceList[i].id);
+                $scope.invoiceToSent.invoices[invoiceList[i].number] = false;
+              }
+            }
+          } else {
+            for (var companyId in $scope.invoiceToSent) {
+              var invoices = $scope.invoiceToSent[companyId].invoices;
+      
+              for (var i = 0; i < invoiceList.length; i++) {
+                if (invoices[invoiceList[i].number]) {
+                  invoiceIds.push(invoiceList[i].id);
+                  invoices[invoiceList[i].number] = false;
+                }
+              }
+            }
+          }
+  
+          ReceivableService.resendInvoices(invoiceIds, function () {
+            $scope.sendingInvoices = false;
+          });
+        };
 
       }]);
 

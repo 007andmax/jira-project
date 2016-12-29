@@ -39,6 +39,13 @@
         on-finish-render="hideLoadingIndicator()">
 
       <div class="col-1">
+        <label class="control checkbox pull-left">
+          <input type="checkbox"
+                 ng-disabled="!(selectableCompanyId === undefined || selectableCompanyId === company.id)"
+                 ng-model="invoiceToSent.invoices[invoice.id]">
+          <span class="control-indicator"></span>
+        </label>
+
         <div class="checkbox-caption free-number-link"
              tooltip-placement="top" uib-tooltip="Invoice Preview"
              modal-window-button="/html/scripts/core/billable/create-invoice.tpl.html"
@@ -54,7 +61,7 @@
         <span class="label label-warning">{{ invoice.paidOn | date:'dd MMM yyyy' }}</span>
       </div>
 
-      <div class="col-5">{{ invoice.sum | currency:'$' :2 }}</div>
+      <div class="col-5">{{ invoice.deletedAt ? 'deleted' : (invoice.sum | currency:'$':2) }}</div>
     </li>
 
   </ul>
