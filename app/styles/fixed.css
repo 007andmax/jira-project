@@ -7,7 +7,9 @@
   margin: 0 !important;
   transition: none !important;
 }
-
+body.non-body-scroll {
+  overflow-y: visible;
+}
 body.non-body-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -76,7 +78,6 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-product-list > li > .intermediate-parent-elem > .col-2 {
   width: calc(100% - 1090px);
-  color: #94a4b8;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -89,7 +90,6 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-product-list > li > .intermediate-parent-elem > .col-3 {
   width: 234px;
-  color: #94a4b8;
   overflow: hidden;
   white-space: nowrap;
   -ms-text-overflow: ellipsis;
@@ -127,7 +127,6 @@ body.non-body-scroll::-webkit-scrollbar {
 .qt-product-list > li > .intermediate-parent-elem > .col-4 {
   width: 145px;
   height: 20px;
-  color: #94a4b8;
 }
 
 .with-category .qt-product-list > li > .intermediate-parent-elem > .col-4 {
@@ -137,7 +136,6 @@ body.non-body-scroll::-webkit-scrollbar {
 .qt-product-list > li > .intermediate-parent-elem > .col-5 {
   width: 106px;
   text-align: right;
-  color: #94a4b8;
 }
 
 .qt-product-list > li > .intermediate-parent-elem > .col-6 {
@@ -262,8 +260,6 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-default-services > li > .intermediate-parent-elem > .col-2 {
   width: 133px;
-  color: #94a4b8;
-  /*padding-top: 9px;*/
 }
 
 .qt-default-services > li > .intermediate-parent-elem > .col-3 {
@@ -308,7 +304,6 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .qt-services-list > li > .intermediate-parent-elem > .col-2 {
   width: 133px;
-  color: #94a4b8;
 }
 
 .qt-services-list > li > .intermediate-parent-elem > .col-3 {

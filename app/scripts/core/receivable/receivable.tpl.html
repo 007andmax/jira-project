@@ -10,6 +10,14 @@
              mw-controller="quicktech.core.receivable.receivePaymentCtrl">
           Receive Payment
         </div>
+        <div class="btn btn-info btn-otline pull-right has-tooltip"
+             tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Payment Received"
+             custom-disabled="{{ !selectedInvoiceCount }}"
+             modal-window-button="/html/scripts/core/receivable/receive-payment.tpl.html"
+             modal-window-class="modal-receive-payment"
+             mw-controller="quicktech.core.receivable.receivePaymentCtrl">
+            Resend
+        </div>
 
         <button-with-loading-indicator class="btn btn-info pull-right" ng-click="resendSelectedInvoices()"
                                        custom-disabled="{{ !selectedInvoiceCount || sendingInvoices }}"

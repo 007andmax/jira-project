@@ -38,7 +38,8 @@
           }).attr("height", 0).remove();
 
           bars.attr("x", function (d) {
-            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - width / 2;
+            var offset = options.offset ? parseInt(options.offset) : width / 2;
+            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - offset;
           }).attr("y", function (d) {
             return y(d[options.y]);
           }).attr("rx", 3).attr("ry", 3).attr("height", function (d) {
@@ -46,14 +47,14 @@
           }).attr("width", width);
 
           shadowBars = barsElements.selectAll("rect.shadow-bar").data(data);
-          var yDomain = y.domain();
 
           shadowBars.exit().attr("y", function () {
             return chartController.innerHeight;
           }).attr("height", 0).remove();
 
           shadowBars.attr("x", function (d) {
-            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - width / 2;
+            var offset = options.offset ? parseInt(options.offset) : width / 2;
+            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - offset;
           }).attr("y", 0).attr("rx", 3).attr("ry", 3).attr("height", function (d, i) {
             return (i && i !== data.length - 1 ? chartController.innerHeight : 0);
           }).attr("width", width);
@@ -81,7 +82,8 @@
 
           shadowBars.enter().append("rect").attr("class", 'shadow-bar')
             .attr("rx", 3).attr("ry", 3).attr("x", function (d) {
-            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - width / 2;
+            var offset = options.offset ? parseInt(options.offset) : width / 2;
+            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - offset;
           }).attr("width", width).attr("y", function () {
             return chartController.innerHeight;
           }).attr("height", 0).attr("y", 0).attr("height", function (d, i) {
@@ -90,8 +92,9 @@
 
           return bars.enter().append("rect").attr("class", function (d, i) {
             return "bar bar-" + i;
-          }).attr("rx", 3).attr("ry", 3).attr("x", function (d) {
-            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - width / 2;
+          }).style('fill', options.color).attr("rx", 3).attr("ry", 3).attr("x", function (d) {
+            var offset = options.offset ? parseInt(options.offset) : width / 2;
+            return x(options.x === 'date' ? new Date(d[options.x]) : d[options.x]) - offset;
           }).attr("width", width).attr("y", function () {
             return chartController.innerHeight;
           }).attr("height", 0).attr("y", function (d) {

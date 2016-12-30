@@ -24,10 +24,16 @@
         Utils.handleCallback(future, callback);
       }
 
+      function getCustomerTicketReport(dto, callback) {
+        var future = $http.post('/customerReport', dto);
+        Utils.handleCallback(future, callback);
+      }
+
       return {
         getTicketsDashboard: getTicketsDashboard,
         getBillingDashboard: getBillingDashboard,
-        getStatisticByCompany: getStatisticByCompany
+        getStatisticByCompany: getStatisticByCompany,
+        getCustomerTicketReport: getCustomerTicketReport
       }
     }
 

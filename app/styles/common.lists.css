@@ -103,7 +103,7 @@
 
 .qt-list li.list-heading {
   height: auto;
-  padding: 28px 15px;
+  padding: 18px 15px;
 
   cursor: auto !important;
 }
@@ -125,8 +125,6 @@
 
 .qt-list .list-heading .sort-icon.icn-expand {
   margin-top: -10px;
-  /*position: absolute;*/
-  /*right: 0;*/
 }
 
 .qt-list .invoice-table-head .sort-icon.icn-collapse {
@@ -1126,8 +1124,8 @@ Devices tab
   float: left;
 
   width: 100%;
-  /*margin-top: 25px;*/
   padding-left: 15px;
+  padding-top: 0;
 }
 
 .qt-invoices .lock-icon {
@@ -1584,6 +1582,7 @@ Devices tab
 
 .qt-receivable .qt-invoices {
   margin-top: 0;
+  padding-top: 0;
 }
 
 .qt-receivable .qt-invoices > li {
@@ -1593,7 +1592,7 @@ Devices tab
 }
 
 .qt-receivable .qt-invoices > li.list-heading {
-  padding: 28px 0;
+  padding: 10px 0;
 }
 
 @-moz-document url-prefix() {
@@ -1902,7 +1901,6 @@ Devices tab
   width: 210px;
   padding-top: 9px;
 
-  color: #94a4b8;
 }
 
 .qt-receipt-archive .qt-invoices > li > .col-3 {
@@ -1917,7 +1915,6 @@ Devices tab
 
   text-align: right;
 
-  color: #94a4b8;
 }
 
 @media only screen and (min-width: 2000px) {
@@ -1971,13 +1968,11 @@ Devices tab
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
 
-  color: #94a4b8;
 }
 
 .qt-receipt-number > li > .col-3 {
   width: 210px;
 
-  color: #94a4b8;
 }
 
 .qt-receipt-number > li > .col-4 {
@@ -1990,7 +1985,6 @@ Devices tab
 
   text-align: right;
 
-  color: #94a4b8;
 }
 
 @media only screen and (min-width: 2000px) {

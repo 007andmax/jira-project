@@ -47,7 +47,7 @@
           });
 
           function showPreview() {
-            if (!$scope.$eval($attrs.disableIf)) {
+            if (!($element.hasClass('disabled') || typeof $element.attr('disabled') === 'string')) {
               if (template) {
                 newScope = $scope.$new();
                 $compile(template)(newScope, function (compiledHtml) {
@@ -60,11 +60,6 @@
               } else {
                 waitForTplLoaded = true;
               }
-            } else {
-              var unwatch = $scope.$observe('disableIf', function () {
-                showPreview();
-                unwatch();
-              })
             }
           }
 

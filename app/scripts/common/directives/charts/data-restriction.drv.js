@@ -32,21 +32,25 @@
           }
 
           function getChartData() {
-            StatisticsService[attrs.fetchFunc](params, function (data) {
-              var handledData;
-              if (attrs.handleData && $scope[attrs.handleData]) {
-                handledData = $scope[attrs.handleData](data);
-              } else {
-                handledData = data;
-              }
-              setChartData(handledData);
-            });
+            if (attrs.fetchFunc) {
+              StatisticsService[attrs.fetchFunc](params, function (data) {
+                var handledData;
+                if (attrs.handleData && $scope[attrs.handleData]) {
+                  handledData = $scope[attrs.handleData](data);
+                } else {
+                  handledData = data;
+                }
+                setChartData(handledData);
+              });
+            } else if ($scope[attrs.handleData]) {
+              setChartData($scope[attrs.handleData]);
+            }
           }
 
           function setChartData(data) {
             var canBeShown = Math.floor(getShownCounts('[chart-wrap]'));
             if (canBeShown < data.length - 2) {
-              $scope.chartData = addExtremeValues(data.slice(data.length - canBeShown - 2));
+              $scope.chartData = addExtremeValues(data.slice(data.length - canBeShown + 2));
             } else {
               $scope.chartData = addExtremeValues(data);
             }
