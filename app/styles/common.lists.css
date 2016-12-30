@@ -207,9 +207,13 @@
 }
 
 .qt-users .col-1 {
-  width: calc(100% - 731px);
+  width: calc(100% - 931px);
 
   white-space: nowrap;
+}
+
+.qt-users .col-1-1 {
+  width: 200px;
 }
 
 .qt-users .col-2 {
@@ -269,7 +273,7 @@
 
 @media only screen and (max-width: 1600px) {
   .qt-users .col-1 {
-    width: calc(100% - 603px);
+    width: calc(100% - 803px);
   }
 
   .qt-users .col-2 {
@@ -304,6 +308,10 @@
 @media only screen and (max-width: 1450px) {
   .qt-users .col-1 {
     width: calc(100% - 563px);
+  }
+
+  .qt-users .col-1-1 {
+    display: none;
   }
 
   .qt-users .col-2 {

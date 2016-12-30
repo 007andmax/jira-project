@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane" style="display: block" ng-if="PermissionsService.isAllowed('VIEW_USERS')">
   <ul class="qt-list qt-users" style="margin-bottom: 150px; margin-top: 70px">
 
-    <li class="list-heading" style="cursor: pointer !important;" fixed-block-top offset-top="148">
+    <li class="list-heading" fixed-block-top offset-top="148">
       <div class="col-1" ng-click="setOrderByUsers('name')">
         <label class="control checkbox pull-left" ng-show="users.length > 0">
           <input type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty"
@@ -11,6 +11,10 @@
 
         <span class="sort-span">Name<i class="icn-sm sort-icon icn-sort"
                                        ng-class="{'rotate': orderUsersTab.reverse, 'active': orderUsersTab.field === 'name'}"></i></span>
+      </div>
+
+      <div class="col-1-1">
+        <span>E-Mail</span>
       </div>
 
       <div class="col-2"><span>Contact No.</span></div>
@@ -56,6 +60,10 @@
             <span class="label label-light">{{ user.designation }}</span>
 
           </div>
+        </div>
+
+        <div class="col-1-1">
+          <p class="ellipsis">littleprincess@rumbler.ru</p>
         </div>
 
         <div class="col-2">
