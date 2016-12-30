@@ -7,7 +7,9 @@
   margin: 0 !important;
   transition: none !important;
 }
-
+body.non-body-scroll {
+  overflow-y: visible;
+}
 body.non-body-scroll::-webkit-scrollbar {
   display: none;
 }

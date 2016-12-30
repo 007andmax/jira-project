@@ -4,9 +4,9 @@
 
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.leftPanelCtrl',
     ['$scope', 'quicktech.common.services.SharedStateService', '$state', '$rootScope', 'DevicesService',
-      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService',
+      'quicktech.common.services.PermissionsService', 'CompaniesService', 'TutorialsService', '$uibModal',
       function ($scope, SharedStateService, $state, $rootScope, DevicesService, PermissionsService, CompaniesService,
-                TutorialsService) {
+                TutorialsService, $uibModal) {
 
         var sharedQuickSession = SharedStateService.getSharedState('quickSession'),
           usersSharedState = SharedStateService.getSharedState('usersHeader'),
@@ -244,6 +244,15 @@
             $scope.clearDateRange();
           }
         });
+  
+        $scope.openCreateCustomerReportModal = function () {
+          $uibModal.open({
+            templateUrl: '/html/scripts/core/left-panel/customer-ticket-report/create-report-modal.tpl.html',
+            controller: 'quicktech.core.leftPanel.createReportCtrl',
+            windowClass: 'modal-customer-report',
+            animation: true
+          });
+        };
 
         $scope.userReadable = function (text) {
           if (!text) {

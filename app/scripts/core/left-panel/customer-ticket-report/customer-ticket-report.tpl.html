@@ -1,0 +1,133 @@
+<div class="hardware-wrap" prevent-hash-change="close()"
+     ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
+  <div class="hardware">
+    <div class="hardware__control-panel" style="width: 150px;">
+      <div class="hardware__control-panel--btn">
+        <img src="images/input-icons/hardware-report/printer.png" alt="">
+        <p>Print</p>
+      </div>
+      <div class="hardware__control-panel--btn" ng-click="close()">
+        <img src="images/input-icons/hardware-report/logout.png" alt="">
+        <p>Close</p>
+      </div>
+    </div>
+    <div class="customer-ticket" ng-if="data">
+      <div class="customer-ticket__report">
+        <div class="customer-ticket__report--summary">
+          <h1>Tickets Summary</h1>
+          <div>
+            <h3 class="pull-left">
+              {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '')
+              }}
+            </h3>
+            <span class="pull-right">
+              {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
+            </span>
+          </div>
+          <table>
+            <tbody>
+            <tr>
+              <td rowspan="2" colspan="1" class="summary-chart">
+                <div chart-data-restriction margin="80" divider="40" ng-if="reportChartData && reportChartData.length"
+                     handle-data="reportChartData" style="height: 100%">
+
+                  <div d3chart data="chartData" margin="{ top: 10, right: 40, bottom: 30, left: 40}"
+                       style="height: 100%">
+                    <d3axis name="date" scale="ordinal" orientation="bottom" filter="parseDate"
+                            ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
+                    <d3axis name="tickets" orientation="left" filter="groupBars"></d3axis>
+
+                    <d3bars x="date" y="ticketResolved" yscale="tickets" color="#4caf50"
+                            width="15" offset="16" chart-tooltip="chart"></d3bars>
+                    <d3bars x="date" y="ticketUnresolved" yscale="tickets"
+                            width="15" offset="-1" chart-tooltip="chart"></d3bars>
+                  </div>
+
+                </div>
+              </td>
+              <td colspan="1" class="time-info">
+                <p>Time spent</p>
+                <h4>{{ timeToHoursAndMinutes(data.timeSpent) }}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="1" class="time-info">
+                <p>Average Response time</p>
+                <h4>{{ timeToHoursAndMinutes(data.averageResponseTime / 60) }}</h4>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="customer-ticket__report--details clearfix">
+          <h1>Tickets details</h1>
+          <div ng-repeat="ticket in data.tickets">
+            <table>
+              <tbody>
+              <tr>
+                <td>
+                  <p><strong>Date/Time</strong></p>
+                  <p>{{ ticket.ticketCreatedAt | date: 'MMM d, y / h:mm:ss a' }}</p>
+                </td>
+                <td>
+                  <p><strong>Ticket Number</strong></p>
+                  <p>{{ ticket.ticketNumber }}</p>
+                </td>
+                <td>
+                  <p><strong>Status</strong></p>
+                  <p>{{ ticket.status ? ticket.status[0] + ticket.status.slice(1).toLowerCase() : 'Unclaimed' }}</p>
+                </td>
+                <td>
+                  <p><strong>User</strong></p>
+                  <p>{{ getUserName(getUserById(ticket.clientUserId)) }}</p>
+                </td>
+                <td ng-if="ticket.deviceName">
+                  <p><strong>Device</strong></p>
+                  <p>{{ ticket.deviceName }}</p>
+                </td>
+                <td>
+                  <p><strong>Response Time</strong></p>
+                  <p>
+                    {{ ticket.responseTime ? timeToHoursAndMinutes(ticket.responseTime / 60, true) : 'immediately'}}
+                  </p>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="details-futures" ng-if="ticket.description">
+              <p><strong>Description</strong></p>
+              <p class="details-futures-info" ng-bind-html="getTrustedHtml(ticket.description)"></p>
+            </div>
+            <div class="details-futures" ng-if="data.extendedReport">
+              <div ng-repeat="update in ticket.updates">
+                <div ng-if="update.note">
+                  <p><strong>Notes:</strong></p>
+                  <p class="details-futures-info" ng-bind-html="getTrustedHtml(update.note)"></p>
+                </div>
+                <div ng-repeat="expense in update.expenses" ng-if="update.expenses && update.expenses.length">
+                  <p><strong>{{ update.type[0] + update.type.slice(1).toLowerCase() }}</strong></p>
+                  <div class="details-futures-info" ng-if="update.type === 'PRODUCT'">
+                    <span ng-if="expense.ilc"><strong>ILC:</strong> {{ expense.ilc }}</span>
+                    <span ng-if="expense.manufacture"><strong>P/N:</strong> {{ expense.manufacture }}</span>
+                    <span><strong>Name:</strong> {{ expense.name }}</span>
+                    <span><strong>Quantity:</strong> {{ expense.quantity }}</span>
+                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
+                  </div>
+
+                  <div class="details-futures-info" ng-if="update.type === 'SERVICE'">
+                    <span><strong>Name:</strong> {{ expense.name }}</span>
+                    <span><strong>Duration:</strong> {{ timeToHoursAndMinutes(expense.quantity, true) }}</span>
+                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h4 class="pull-right" ng-if="ticket.techUserId">
+              <strong>Tech:</strong> {{ getUserName(getUserById(ticket.techUserId)) }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
