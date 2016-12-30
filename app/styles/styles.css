@@ -9732,6 +9732,11 @@ button.close {
   margin: 16px 30px 0 0;
   line-height: 34px;
 }
+
+.payment-receive-fixed .btn .windows8{
+  top: 8px;
+}
+
 .assign-ticket {
   min-width: 200px;
 }
