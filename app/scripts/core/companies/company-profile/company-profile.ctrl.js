@@ -234,7 +234,7 @@
           var hours = Math.floor(time) || 0,
             minutes = Math.round((time - hours) * 60) || 0;
 
-          return hours + ' h ' + (minutes ? minutes + ' min' : '');
+          return (hours ? hours + (minutes ? ' h ' : ' hours') : '') + (minutes ? minutes + ' min' : '') || '0 hours';
         };
 
         $scope.getChartTitle = function () {
