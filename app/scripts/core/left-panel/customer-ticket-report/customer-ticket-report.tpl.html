@@ -1,8 +1,9 @@
-<div class="hardware-wrap" prevent-hash-change="close()"
+<div class="hardware-wrap" prevent-hash-change="close()" convert-to-pdf="/customerReport/pdf"
      ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
   <div class="hardware">
     <div class="hardware__control-panel" style="width: 150px;">
-      <div class="hardware__control-panel--btn">
+      <div class="hardware__control-panel--btn"
+           ng-click="openInPdf('.customer-ticket__report', getPdfName(data))">
         <img src="images/input-icons/hardware-report/printer.png" alt="">
         <p>Print</p>
       </div>
@@ -17,8 +18,7 @@
           <h2>Tickets Summary</h2>
           <div>
             <h3>
-              {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '')
-              }}
+              {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '') }}
                <span class="pull-right" style="font-size: 14px;">
               {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
             </span>
@@ -28,7 +28,7 @@
             <tbody>
             <tr>
               <td rowspan="2" colspan="1" class="summary-chart">
-                <div chart-data-restriction margin="80" divider="40" ng-if="reportChartData && reportChartData.length"
+                <div chart-data-restriction margin="80" divider="45" ng-if="reportChartData && reportChartData.length"
                      handle-data="reportChartData" style="height: 100%">
 
                   <div d3chart data="chartData" margin="{ top: 10, right: 40, bottom: 30, left: 40}"
@@ -38,22 +38,22 @@
                     <d3axis name="tickets" orientation="left" filter="groupBars"></d3axis>
 
                     <d3bars x="date" y="ticketResolved" yscale="tickets" color="#4caf50"
-                            width="15" offset="16" chart-tooltip="chart"></d3bars>
-                    <d3bars x="date" y="ticketUnresolved" yscale="tickets"
-                            width="15" offset="-1" chart-tooltip="chart"></d3bars>
+                            width="15" offset="17" chart-tooltip="chart"></d3bars>
+                    <d3bars x="date" y="ticketUnresolved" yscale="tickets" color="#0094d0"
+                            width="15" offset="-2" chart-tooltip="chart"></d3bars>
                   </div>
 
                 </div>
               </td>
               <td colspan="1" class="time-info">
                 <p>Time spent</p>
-                <h4>{{ timeToHoursAndMinutes(data.timeSpent) }}</h4>
+                <h4>{{ timeToHoursAndMinutes(data.timeSpent) || '0 hours' }}</h4>
               </td>
             </tr>
             <tr>
               <td rowspan="1" class="time-info">
                 <p>Average Response time</p>
-                <h4>{{ timeToHoursAndMinutes(data.averageResponseTime / 60) }}</h4>
+                <h4>{{ timeToHoursAndMinutes(data.averageResponseTime / 60) || '0 hours' }}</h4>
               </td>
             </tr>
             </tbody>

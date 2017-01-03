@@ -88,7 +88,7 @@
             return chartController.innerHeight;
           }).attr("height", 0).attr("y", 0).attr("height", function (d, i) {
             return (i && i !== data.length - 1 ? chartController.innerHeight : 0);
-          });
+          }).style('fill', '#e9e9e9');
 
           return bars.enter().append("rect").attr("class", function (d, i) {
             return "bar bar-" + i;

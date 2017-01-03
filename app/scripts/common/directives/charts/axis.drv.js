@@ -262,6 +262,13 @@
               drawGrid(grid.transition().duration(500), axis);
             }
             tickLabels = axisElement.selectAll('.tick text');
+            axisElement.selectAll('path').each(function () {
+              var target = d3.select(this);
+              target.style('fill', 'none');
+              target.style('stroke-width', '1px');
+              target.style('stroke', '#222222');
+              target.style('opacity', '0.5');
+            });
             return axisElement.call(adjustTickLabels);
           }
 

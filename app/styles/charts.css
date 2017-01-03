@@ -5,13 +5,6 @@
   opacity: 0.5;
 }
 
-.d3 .axis path {
-  fill: none;
-  stroke-width: 1px;
-  stroke: #222222;
-  opacity: 0.5;
-}
-
 .d3 .axis-left path.domain{
   stroke: transparent;
 }
@@ -50,11 +43,6 @@
 /* Bar Chart */
 .d3 .bar {
   fill: #0094d0;
-  stroke-width: 0px;
-  stroke: #222222;
-}
-.d3 .shadow-bar {
-  fill: #e9e9e9;
   stroke-width: 0px;
   stroke: #222222;
 }

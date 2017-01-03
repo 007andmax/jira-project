@@ -67,6 +67,16 @@
             return '';
           }
         };
+  
+        $scope.getPdfName = function (data) {
+          var companyName = $scope.getCompanyById(data.companyId).name.toLowerCase().split(' ').join('-');
+          if (data.userId) {
+            var userName = $scope.getUserName($scope.getUserById(data.userId)).toLowerCase().split(' ').join('-');
+            return 'customer-report-' + companyName + '-' + userName;
+          } else {
+            return 'customer-report-' + companyName;
+          }
+        };
         
       }]);
   

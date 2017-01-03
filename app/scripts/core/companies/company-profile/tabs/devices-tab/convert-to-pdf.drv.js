@@ -6,10 +6,32 @@
       restrict: 'A',
       link: function (scope, element, attrs) {
         scope.openInPdf = function (selector, fileName, callback) {
-          var target = element.find(selector).clone(),
-            unknownLoadingStr = 'Loading...';
-
+          var source = element.find(selector);
+          var target = source.clone(),
+            unknownLoadingStr = 'Loading...',
+            sourceSVGs = source.find('svg'),
+            canvas = document.createElement('canvas');
+          
           target.find('.ng-hide').remove();
+          
+          if (sourceSVGs && sourceSVGs.length) {
+            var svgs = target.find('svg');
+            svgs.replaceWith(function (index) {
+              var svg = angular.element(sourceSVGs[index]),
+                img = document.createElement('img');
+              var width = svg.width() + 'px';
+              var height = svg.height() + 'px';
+              
+              svg.attr('width', width);
+              svg.attr('height', height);
+              
+              canvg(canvas, svg[0].outerHTML);
+              img.src = canvas.toDataURL();
+              img.style.width = width;
+              img.style.height = height;
+              return img;
+            });
+          }
 
           var selectedHtml = target.wrap('div').parent().html();
           if (selectedHtml.indexOf(unknownLoadingStr) !== -1) {
