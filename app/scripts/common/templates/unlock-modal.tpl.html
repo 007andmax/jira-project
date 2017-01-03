@@ -1,6 +1,5 @@
 <div class="text-center unlock-screen-wrapper" ng-form="unlockForm">
-  <img ng-src="{{ currentUser.avatar ? getUserAvatarUrl(currentUser): '/company/' + currentUser.company.id + '/logo' }}"
-       width="200px" height="200px" alt="">
+  <img ng-src="{{ getUserAvatarUrl(currentUser) }}" width="200px" height="200px" alt="">
   <h3>Please unlock your screen</h3>
   <div class="form-group text-left" ng-class="{'has-error': isShowingErrors(unlockForm, 'code')}">
 
