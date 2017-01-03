@@ -1,51 +1,82 @@
-.customer-ticket{
+.customer-ticket {
   width: 768px;
   margin: 30px auto;
   padding: 15px;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35);
-  &__report{
+  &__report {
     border: 1px solid #bbb;
     width: 100%;
     &--summary,
     &--details,
-    &--details-plus{
+    &--details-plus {
       padding: 15px;
       border-bottom: 1px solid #bbb;
-      table{
+      table {
         width: 100%;
         border-collapse: separate;
         border-spacing: 0 10px;
       }
-      .details-futures{
-        &-info{
+      .details-futures {
+        &-info {
           border: 1px solid #eee;
-          min-height:50px;
+          min-height: 50px;
           padding: 5px;
         }
       }
     }
-    &--summary{
-      .summary-chart{
+    &--summary {
+      .summary-chart {
         width: 75%;
       }
-      .time-info{
+      .time-info {
         border: 1px solid #eee;
         text-align: center;
-        p{
+        p {
           margin: 5px 0;
         }
-        h4{
+        h4 {
           margin: 10px 0;
         }
       }
     }
-    &--details-plus{
+    &--details-plus {
       border-bottom: none;
     }
   }
 }
 
-.customer-report-modal{
+.customer-report-modal {
   padding: 15px;
 }
 
+.report-info-point {
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.legend-customer {
+  list-style-type: none;
+  padding-left: 10px;
+  li {
+    float: left;
+    font-size: 16px;
+    &:before {
+      font-size: 120px;
+
+      content: ".";
+    }
+    &.resolved {
+      &:before {
+        color: #4caf50;
+      }
+    }
+    &.unresolved {
+      &:before {
+        color: #0071bc;
+      }
+    }
+  }
+}

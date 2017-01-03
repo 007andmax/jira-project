@@ -14,15 +14,15 @@
     <div class="customer-ticket" ng-if="data">
       <div class="customer-ticket__report">
         <div class="customer-ticket__report--summary">
-          <h1>Tickets Summary</h1>
+          <h2>Tickets Summary</h2>
           <div>
-            <h3 class="pull-left">
+            <h3>
               {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '')
               }}
-            </h3>
-            <span class="pull-right">
+               <span class="pull-right" style="font-size: 14px;">
               {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
             </span>
+            </h3>
           </div>
           <table>
             <tbody>
@@ -58,10 +58,14 @@
             </tr>
             </tbody>
           </table>
+          <ul class="legend-customer clearfix">
+            <li class="resolved"> - Resolved</li>
+            <li class="unresolved"> - Unresolved</li>
+          </ul>
         </div>
         <div class="customer-ticket__report--details clearfix">
-          <h1>Tickets details</h1>
-          <div ng-repeat="ticket in data.tickets">
+          <h2>Tickets details</h2>
+          <div class="clearfix report-info-point" ng-repeat="ticket in data.tickets">
             <table>
               <tbody>
               <tr>

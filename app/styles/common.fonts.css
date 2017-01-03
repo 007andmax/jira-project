@@ -30,15 +30,21 @@
 
 
 @font-face {
-  font-family: 'Graphik-Regular';
-  src: url('Graphik-Regular.eot') format('embedded-opentype');
+  font-family: 'Graphik Regular';
+  src: url('../fonts/Graphik-Regular.otf');
+}
+
+
+@font-face {
+  font-family: 'Graphik Regular';
+  src: url('../fonts/Graphik-Regular.eot') format('embedded-opentype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Graphik-Regular';
-  src:  url('Graphik-Regular.otf')  format('opentype'),
+  font-family: 'Graphik Regular';
+  src:  url('../fonts/Graphik-Regular.otf')  format('opentype'),
   url(data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAALdMAA8AAAACNkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAC3MAAAABkA
   AAAcVFwf/UdERUYAAJc0AAAARgAAAFANWQrsR1BPUwAAnuwAABhCAABnxhEKb+RHU1VCAACXfAAA
   B24AABlWTOJXVk9TLzIAAAHQAAAAVgAAAGBlc3RJY21hcAAABkAAAAJVAAADTnN96q1nYXNwAACX
@@ -862,9 +868,10 @@
   0pP0J6SnKI20mw4g/TMdROqi/0L6F/qQbHqaDiN182++/pq+QHpO4EO/ERWigmIiLML0vKgSC+m3
   YpG4gD4Vy8QV9IW4SlwnIuIGpDpxk7hF1Is/R2oQd4m7RaPYKO4TzWKz2CFaxEtIHeIVkRDHiKxh
   illG1IiKTqPeaBKLjEnGJHGB0Wq0igvlv72IrxntRru4+P8AnnBAfwAAeNpjYGBgZACCY6nbT4Hp
-  3yaSMBoATvgGygAAAA==) format('woff'), url('Graphik-Regular.ttf')  format('truetype'), url('Graphik-Regular.svg#Graphik-Regular') format('svg');
+  3yaSMBoATvgGygAAAA==) format('woff'), url('../fonts/Graphik-Regular.ttf')  format('truetype'), url('../fonts/Graphik-Regular.svg#Graphik-Regular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
 
 
