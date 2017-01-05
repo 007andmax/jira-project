@@ -70,12 +70,13 @@
                 console.error(message);
               }
             });
-            
+
+            var isTechLogo = scope.$eval(scope.isTechLogo);
             function showCropper(image) {
               $uibModal.open({
                 animation: true,
                 backdrop: 'static',
-                windowClass: 'modal-customize-avatar',
+                windowClass: 'modal-customize-avatar' + isTechLogo ? 'tech-logo' : '',
                 templateUrl: '/html/scripts/common/directives/crop-image/cropper-modal.tpl.html',
                 controller: ['$scope', '$timeout', '$uibModalInstance', 'Cropper', 'source', 'isTechLogo', 'saveImage', cropperCtrl],
                 resolve: {
@@ -83,7 +84,7 @@
                     return image;
                   },
                   isTechLogo: function () {
-                    return scope.$eval(scope.isTechLogo);
+                    return isTechLogo;
                   },
                   saveImage: function () {
                     if (scope.model && scope.model.id) {
@@ -103,7 +104,6 @@
               var blob, timeout;
   
               $scope.source = source ? angular.copy(source) : {};
-              $scope.isTechLogo = isTechLogo;
               $scope.options = {
                 maximize: true,
                 aspectRatio: isTechLogo ? 450 / 200 : 1,
