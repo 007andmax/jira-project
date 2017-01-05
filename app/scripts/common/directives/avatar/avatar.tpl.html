@@ -1,41 +1,21 @@
-<div class="create-user-avatar clearfix">
+<div class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
+     model-image-path="{{ imagePath }}">
+  <div class="avatar pull-left">
+    <img ng-src="{{ getUrl() }}" ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
+         ng-style="{'max-height': model[imagePath] && model[imagePath].cropped ? '100%' : 'none'}">
 
-  <div class="avatar pull-left" ng-hide="getError().loadingInProcess">
-
-    <img ng-src="{{ getUrl() }}" class="no-avatar" ng-class="{'hide': model.cropped.id}">
-    <img ng-src="/file/{{ model.cropped.id }}" ng-class="{'hide': !model.cropped.id}" style="max-height: 100%">
-
-    <div class="reposition" ng-show="model.origin && !getError().loadingInProcess" change-position-button>
+    <div class="reposition" ng-show="model[imagePath] && model[imagePath].origin" reposition-button>
       Reposition...
     </div>
-
   </div>
-
-  <div class="avatar avatar-loading pull-left" ng-show="getError().loadingInProcess">
-    <div class="loader"></div>
-  </div>
-
   <div class="choose-file pull-left">
-
     <div class="select-file clearfix">
-
-      <input type="file">
-
-      <div class="btn btn-lg btn-primary pull-left" change-avatar-button
-           ng-disabled="getError().loadingInProcess">
-        {{ model.origin ? 'Change': 'Choose' }} {{ isLogo ? 'Logo' : 'Avatar' }}
+      <div class="btn btn-lg btn-primary pull-left" crop-image-button>
+        {{ model[imagePath] && model[imagePath].origin ? 'Change': 'Choose' }} image
       </div>
-
-      <!--<span class="file-name pull-left" ng-show="model.origin">or <a href="javascript:void(0)">Restore Default</a></span>-->
-      <span class="file-name pull-left" ng-show="!model.origin">No File Selected</span>
-
-      <span class="file-name pull-left" ng-show="model.origin">or
-        <a href="javascript:void(0)" ng-click="restoreDefaultAvatar()">Restore Default</a>
+      <span class="file-name pull-left" ng-show="model[imagePath] && model[imagePath].origin">or
+        <a href="javascript:void(0)" restore-default-button>Restore Default</a>
       </span>
-
     </div>
-    <div class="file-type pull-left ">maximum size of 2 MB. jpg, GIF, PNG.</div>
-
-    <div class="avatar-error-message" error-message>Selected file type is not allowed</div>
   </div>
 </div>

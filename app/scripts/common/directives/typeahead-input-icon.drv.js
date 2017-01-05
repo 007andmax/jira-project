@@ -6,12 +6,12 @@
     [function () {
       return {
         restrict: 'A',
-        template: '<span class="x-mark" ng-click="clearInput($event)">' +
+        template: '<span class="x-mark" ng-click="clearInput($event)" ng-show="showClearIcon">' +
         '<i class="icn-sm icn-remove-token"' +
-        'ng-show="showClearIcon" ng-click="clearInput($event)"  tooltip="clear" tooltip-placement="top"></i>' +
+        ' ng-click="clearInput($event)"  tooltip="clear" tooltip-placement="top"></i>' +
         '</span>' +
-        '<span class="x-mark">' +
-        '<i class="icn-sm icn-caret-gray" ng-hide="showClearIcon"></i>' +
+        '<span class="x-mark" ng-hide="showClearIcon">' +
+        '<i class="icn-sm icn-caret-gray"></i>' +
         '</span>' +
         '',
         scope: true,

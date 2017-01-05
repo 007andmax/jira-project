@@ -19,7 +19,7 @@
           <div>
             <h3>
               {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '') }}
-               <span class="pull-right" style="font-size: 14px;">
+               <span class="pull-right" style="font-size: 14px;min-width: 170px">
               {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
             </span>
             </h3>
@@ -45,13 +45,13 @@
 
                 </div>
               </td>
-              <td colspan="1" class="time-info">
+              <td colspan="1" class="time-info" ng-if="data.withTimeSpent">
                 <p>Time spent</p>
                 <h4>{{ timeToHoursAndMinutes(data.timeSpent) || '0 hours' }}</h4>
               </td>
             </tr>
             <tr>
-              <td rowspan="1" class="time-info">
+              <td rowspan="1" class="time-info" ng-if="data.withResponseTime">
                 <p>Average Response time</p>
                 <h4>{{ timeToHoursAndMinutes(data.averageResponseTime / 60) || '0 hours' }}</h4>
               </td>
@@ -66,7 +66,7 @@
         <div class="customer-ticket__report--details clearfix">
           <h2>Tickets details</h2>
           <div class="clearfix report-info-point" ng-repeat="ticket in data.tickets">
-            <table>
+            <table class="dont-break">
               <tbody>
               <tr>
                 <td>
@@ -79,7 +79,7 @@
                 </td>
                 <td>
                   <p><strong>Status</strong></p>
-                  <p>{{ ticket.status ? ticket.status[0] + ticket.status.slice(1).toLowerCase() : 'Unclaimed' }}</p>
+                  <p>{{ ticket.status ? ticket.status[0] + ticket.status.slice(1).split('_').join(' ').toLowerCase() : 'Unclaimed' }}</p>
                 </td>
                 <td>
                   <p><strong>User</strong></p>
@@ -98,35 +98,36 @@
               </tr>
               </tbody>
             </table>
-            <div class="details-futures" ng-if="ticket.description">
+            <div class="dont-break" ng-if="ticket.description">
               <p><strong>Description</strong></p>
               <p class="details-futures-info" ng-bind-html="getTrustedHtml(ticket.description)"></p>
             </div>
-            <div class="details-futures" ng-if="data.extendedReport">
+            <div ng-if="data.extendedReport">
               <div ng-repeat="update in ticket.updates">
                 <div ng-if="update.note">
                   <p><strong>Notes:</strong></p>
                   <p class="details-futures-info" ng-bind-html="getTrustedHtml(update.note)"></p>
                 </div>
-                <div ng-repeat="expense in update.expenses" ng-if="update.expenses && update.expenses.length">
+                <div class="dont-break" ng-repeat="expense in update.expenses"
+                     ng-if="update.expenses && update.expenses.length">
                   <p><strong>{{ update.type[0] + update.type.slice(1).toLowerCase() }}</strong></p>
                   <div class="details-futures-info" ng-if="update.type === 'PRODUCT'">
                     <span ng-if="expense.ilc"><strong>ILC:</strong> {{ expense.ilc }}</span>
                     <span ng-if="expense.manufacture"><strong>P/N:</strong> {{ expense.manufacture }}</span>
                     <span><strong>Name:</strong> {{ expense.name }}</span>
                     <span><strong>Quantity:</strong> {{ expense.quantity }}</span>
-                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
+                    <span><strong>Total price:</strong> {{ '$' + (expense.price * expense.quantity).toFixed(2) }}</span>
                   </div>
 
                   <div class="details-futures-info" ng-if="update.type === 'SERVICE'">
                     <span><strong>Name:</strong> {{ expense.name }}</span>
                     <span><strong>Duration:</strong> {{ timeToHoursAndMinutes(expense.quantity, true) }}</span>
-                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
+                    <span><strong>Total price:</strong> {{ '$' + (expense.price * expense.quantity) }}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <h4 class="pull-right" ng-if="ticket.techUserId">
+            <h4 style="text-align: right;" ng-if="ticket.techUserId">
               <strong>Tech:</strong> {{ getUserName(getUserById(ticket.techUserId)) }}
             </h4>
           </div>

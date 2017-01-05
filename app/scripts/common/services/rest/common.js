@@ -246,10 +246,10 @@
           customizeObj(value);
         }
 
-        defineReadOnlyProperty(targetObj, prop, value);
+        defineProperty(targetObj, prop, value);
       }
 
-      defineReadOnlyProperty(targetObj, 'staticCopy', staticCopy);
+      defineProperty(targetObj, 'staticCopy', staticCopy);
 
       return targetObj;
 
@@ -262,7 +262,7 @@
           target.push(customizeObj(source[i]));
         }
 
-        defineReadOnlyProperty(target, 'staticCopy', staticCopy);
+        defineProperty(target, 'staticCopy', staticCopy);
 
         return target;
 
@@ -272,16 +272,16 @@
         source[i] = customizeObj(source[i]);
       }
 
-      defineReadOnlyProperty(source, 'staticCopy', staticCopy);
+      defineProperty(source, 'staticCopy', staticCopy);
 
       return source;
 
     }
 
-    function defineReadOnlyProperty(obj, prop, value) {
+    function defineProperty(obj, prop, value) {
       Object.defineProperty(obj, prop, {
         value: value,
-        writable: false,
+        writable: true,
         enumerable: true,
         configurable: true
       })
@@ -418,7 +418,7 @@
     return {
       customizeObj: customizeObj,
       customizeArray: customizeArray,
-      defineReadOnlyProperty: defineReadOnlyProperty,
+      defineReadOnlyProperty: defineProperty,
       findById: findById,
       indexOfId: indexOfId,
       handleCallback: handleCallback,

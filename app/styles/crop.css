@@ -1,0 +1,9 @@
+.preview {
+  width: 100px;
+  height: 100px;
+}
+
+.tech-logo .preview {
+  width: 450px;
+  height: 200px;
+}

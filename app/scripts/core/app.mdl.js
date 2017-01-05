@@ -30,7 +30,8 @@
       'ngSanitize',
       'ngMessages',
       'ngAnimate',
-      'LocalStorageModule'
+      'LocalStorageModule',
+      'ngCropper'
     ]);
 
   app.config(['$stateProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$animateProvider',

@@ -1,0 +1,16 @@
+<div>
+  <div>
+    <img ng-src="{{ source.origin.base64 }}" width="800"
+         ng-cropper
+         ng-cropper-show="'show.cropper'"
+         ng-cropper-hide="'hide.cropper'"
+         ng-cropper-options="options">
+    <div ng-show="preview" ng-class="{'tech-logo': isTechLogo}">
+      <img class="preview" ng-src="{{ preview }}"/>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-lg btn-info" ng-click="crop()">Crop</button>
+    <button class="btn btn-lg btn-default" ng-click="close()">Cancel</button>
+  </div>
+</div>

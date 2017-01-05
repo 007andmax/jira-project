@@ -16,12 +16,10 @@
         border-collapse: separate;
         border-spacing: 0 10px;
       }
-      .details-futures {
-        &-info {
-          border: 1px solid #eee;
-          min-height: 50px;
-          padding: 5px;
-        }
+      .details-futures-info {
+        border: 1px solid #eee;
+        min-height: 50px;
+        padding: 5px;
       }
     }
     &--summary {
