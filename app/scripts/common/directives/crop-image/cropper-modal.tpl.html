@@ -1,15 +1,18 @@
-<div>
-  <div>
-    <img ng-src="{{ source.origin.base64 }}" width="800"
+<div class="clearfix crop-wrapper">
+  <div class="close-btn btn" ng-click="close()" tabindex="-1">
+    <i class="icn-sm icn-remove-token"></i>
+  </div>
+  <div class="img-crop">
+    <img ng-src="{{ source.origin.base64 }}"
          ng-cropper
          ng-cropper-show="'show.cropper'"
          ng-cropper-hide="'hide.cropper'"
          ng-cropper-options="options">
-    <div ng-show="preview" ng-class="{'tech-logo': isTechLogo}">
-      <img class="preview" ng-src="{{ preview }}"/>
-    </div>
   </div>
-  <div>
+  <div class="logo-crop" ng-show="preview">
+    <img class="preview" ng-src="{{ preview }}" width="800"/>
+  </div>
+  <div style="clear: both; float: right;">
     <button class="btn btn-lg btn-info" ng-click="crop()" custom-disabled="{{ !preview }}">Crop</button>
     <button class="btn btn-lg btn-default" ng-click="close()">Cancel</button>
   </div>
