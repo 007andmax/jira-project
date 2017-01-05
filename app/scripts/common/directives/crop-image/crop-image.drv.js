@@ -18,9 +18,13 @@
             if (restoreDefaultButton.length) {
               restoreDefaultButton.on('click', function () {
                 if (attrs.modelImagePath === 'avatar') {
-                  UsersService.deleteAvatar(scope.model.id);
+                  UsersService.deleteAvatar(scope.model.id, function () {
+                    scope.model[attrs.modelImagePath] = null;
+                  });
                 } else if (attrs.modelImagePath === 'logo') {
-                  CompaniesService.deleteLogo(scope.model.id);
+                  CompaniesService.deleteLogo(scope.model.id, function () {
+                    scope.model[attrs.modelImagePath] = null;
+                  });
                 }
                 
                 $body.click();
@@ -36,6 +40,7 @@
                 
                 var image = scope.model[attrs.modelImagePath];
                 if (image) {
+                  image.id = scope.model.id;
                   showCropper(image);
                 }
               });
@@ -96,6 +101,10 @@
                     }
                   }
                 }
+              }).result.then(function (resp) {
+                if (resp) {
+                  scope.model[attrs.modelImagePath] = resp;
+                }
               })
             }
             
@@ -135,15 +144,16 @@
               
               $scope.crop = function () {
                 $scope.source.origin.base64 = undefined;
+                $scope.source.base64 = $scope.preview;
                 saveImage($scope.source, $scope.source.id, $scope.close);
               };
               
-              $scope.close = function () {
+              $scope.close = function (resp) {
                 if (timeout) {
                   $timeout.cancel(timeout);
                 }
                 $scope.$broadcast('hide.cropper');
-                $uibModalInstance.dismiss();
+                $uibModalInstance.close(resp);
               };
               
               function getCroppedImage(dataNew) {
@@ -161,7 +171,7 @@
                     $scope.preview = base64;
                     timeout = undefined;
                   })
-                }, 300);
+                }, 100);
               }
   
               function getBase64FromImageUrl(url, callback) {

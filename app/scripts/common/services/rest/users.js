@@ -497,10 +497,15 @@
         }
 
         var future = $http({
-          url: '/users/' + userId + '/',
+          url: '/users/' + userId + '/avatar',
           method: 'DELETE'
         });
 
+        Utils.handleCallback(future, callback);
+      }
+
+      function saveAvatar(model, userId, callback) {
+        var future = $http.post('/users/' + userId + '/avatar', model);
         Utils.handleCallback(future, callback);
       }
 
@@ -614,6 +619,7 @@
         deleteOrArchiveUser: deleteOrArchiveUser,
         isEmailUnique: isEmailUnique,
         deleteAvatar: deleteAvatar,
+        saveAvatar: saveAvatar,
         getActivityHistory: getActivityHistory,
         closeSessions: closeSessions,
         toggle2FA: toggle2FA,

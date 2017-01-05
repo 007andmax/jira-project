@@ -10,7 +10,7 @@
     </div>
   </div>
   <div>
-    <button class="btn btn-lg btn-info" ng-click="crop()">Crop</button>
+    <button class="btn btn-lg btn-info" ng-click="crop()" custom-disabled="{{ !preview }}">Crop</button>
     <button class="btn btn-lg btn-default" ng-click="close()">Cancel</button>
   </div>
 </div>
