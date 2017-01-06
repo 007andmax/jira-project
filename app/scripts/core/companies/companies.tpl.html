@@ -30,9 +30,9 @@
               <p class="ellipsis" style="width: 180px;"
                  uib-tooltip="{{ getUserName(primaryContact) }}" tooltip-placement="bottom"
                  tooltip-enable="{{ isShowTooltip[9 + $index]() }}" trimmed-tooltip="{{ 9 + $index }}">
-                <span  style="max-width: 95px" class="ellipsis badge pull-right badge-default" trimmed-tooltip-container>{{ getUserName(primaryContact) }}</span>
+                <span trimmed-tooltip-container>{{ getUserName(primaryContact) }}</span>
               </p>
-              <span class="badge pull-right badge-default">{{ primaryContact.designation }}</span>
+              <span style="max-width: 95px" class="ellipsis badge pull-right badge-default" >{{ primaryContact.designation }}</span>
             </div>
             <div class="clearfix" ng-if="primaryPhone && primaryPhone.number">
               <img src="images/company/smartphone-green.png" alt="">
