@@ -28,7 +28,7 @@
             <div class="clearfix">
               <img src="images/settings-icon/user-profile.png" alt="">
               <p class="ellipsis" style="width: 180px;">{{ getUserName(primaryContact) }}</p>
-              <span class="badge pull-right badge-default">{{ primaryContact.designation }}</span>
+              <span style="max-width: 95px" class="ellipsis badge pull-right badge-default">{{ primaryContact.designation }}</span>
             </div>
             <div class="clearfix" ng-if="primaryPhone && primaryPhone.number">
               <img src="images/company/smartphone-green.png" alt="">
