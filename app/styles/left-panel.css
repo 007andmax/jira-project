@@ -91,9 +91,11 @@
 }
 
 .center-category__category.cust-report{
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  margin-top: 5px;
-  padding-top: 5px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 10px;
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0;
 }
 
 .center-category__category:hover {
