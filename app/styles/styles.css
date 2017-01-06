@@ -9150,7 +9150,7 @@ button.close {
 }
 .tooltip.bottom {
   margin-top: 6px;
-  padding: 0;
+  padding: 0 !important;
 }
 .tooltip.left {
   margin-left: -6px;
@@ -9179,7 +9179,7 @@ button.close {
   padding: 0;
 }
 .tooltip-inner {
-  padding: 6px 10px;
+  padding: 6px 10px !important;
   height: 24px;
   color: #ffffff;
   text-align: center;
