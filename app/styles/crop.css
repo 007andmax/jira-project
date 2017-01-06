@@ -256,11 +256,12 @@
 }
 
 .tech-logo .logo-crop {
+  float: none;
+  overflow: hidden;
   width: 450px;
   height: 200px;
   margin: auto;
   margin-bottom: 20px;
-  float: none;
 }
 
 .modal-customize-avatar .close-btn,
@@ -273,12 +274,14 @@
 
 .crop-wrapper {
   padding: 30px;
+  padding-bottom: 20px;
 }
 
 .img-crop {
   width: 70%;
-  height: 500px;
-  margin-bottom: 10px;
+  height: 400px;
+  margin-bottom: 20px;
+  float: left;
 }
 
 .tech-logo .img-crop{
@@ -298,3 +301,11 @@
   float: right;
 }
 
+.cropper-btns-container{
+  clear: both;
+  float: right;
+}
+
+.cropper-btns-container .btn{
+  width: 90px;
+}
