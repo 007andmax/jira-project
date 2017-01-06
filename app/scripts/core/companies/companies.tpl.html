@@ -27,7 +27,7 @@
           <div class="card__info">
             <div class="clearfix">
               <img src="images/settings-icon/user-profile.png" alt="">
-              <p class="ellipsis" style="width: 160px;">{{ getUserName(primaryContact) }}</p>
+              <p class="ellipsis" style="width: 215px;">{{ getUserName(primaryContact) }}</p>
               <span class="badge badge-default">{{ primaryContact.designation }}</span>
             </div>
             <div class="clearfix" ng-if="primaryPhone && primaryPhone.number">
@@ -37,7 +37,7 @@
             <div class="clearfix" ng-if="primaryContact.primaryEmail">
               <img src="images/company/email-purple.png" alt=""
                    email-to="primaryContact.primaryEmail" stop-propagation="click">
-              <p style="width: 220px;" class="ellipsis" uib-tooltip="{{ primaryContact.primaryEmail }}" tooltip-placement="bottom"
+              <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ primaryContact.primaryEmail }}" tooltip-placement="bottom"
                  tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
                 <span trimmed-tooltip-container>{{ primaryContact.primaryEmail }}</span>
               </p>

@@ -11,9 +11,9 @@
             unknownLoadingStr = 'Loading...',
             sourceSVGs = source.find('svg'),
             canvas = document.createElement('canvas');
-          
+
           target.find('.ng-hide').remove();
-          
+
           if (sourceSVGs && sourceSVGs.length) {
             var svgs = target.find('svg');
             svgs.replaceWith(function (index) {
@@ -21,11 +21,15 @@
                 img = document.createElement('img');
               var width = svg.width() + 'px';
               var height = svg.height() + 'px';
-              
+
               svg.attr('width', width);
               svg.attr('height', height);
-              
+
               canvg(canvas, svg[0].outerHTML);
+
+              svg.attr('width', '100%');
+              svg.attr('height', '100%');
+
               img.src = canvas.toDataURL();
               img.style.width = width;
               img.style.height = height;

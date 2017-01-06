@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-sm-6 form-group" ng-class="{'has-error': isShowingErrors(customerReportForm, 'reportCompanyId')}">
 
-      <label ng-if="!isShowingErrors(customerReportForm, 'ticketCompany')">Company</label>
+      <span ng-if="!isShowingErrors(customerReportForm, 'ticketCompany')">Company</span>
 
       <div ng-messages="customerReportForm.$error.reportCompanyId">
         <label ng-message="required">Company is required field.</label>
@@ -15,18 +15,18 @@
       <input type="text" class="form-control has-dropdown" ng-model="dto.company" name="reportCompanyId"
              uib-typeahead="company as company.name for company in clientCompanies | filter:{'name': $viewValue}:stateComparator | orderBy:'name'"
              qt-typeahead-show-on-focus required
-             custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '100%'}">
+             custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '254px'}">
 
       <div typeahead-input-icon="dto.companyId"></div>
     </div>
     <div class="col-sm-6 form-group dropdown-user-parent">
 
-      <label>Client</label>
+      <span>Client</span>
       <input type="text" class="form-control has-dropdown" ng-model="dto.user" name="reportUserId"
              typeahead-template-url="/html/partials/user-autocomplete.tpl.html"
              uib-typeahead="user as getUserName(user) for user in clientUsers | filter:filterUsers($viewValue) | orderBy:'firstName'"
              qt-typeahead-show-on-focus typeahead-on-select="onUserSelect(dto.user)"
-             custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '100%'}">
+             custom-style="{'max-height': '180px', 'overflow-y': 'auto', 'width': '254px'}">
 
       <div typeahead-input-icon="dto.userId"></div>
     </div>
@@ -39,7 +39,7 @@
       <span>Type</span>
       <input type="text" class="form-control" readonly uib-dropdown-toggle
              value="{{ dto.extendedReport ? 'Extended report' : 'Simple report' }}">
-      <ul class="dropdown-menu" uib-dropdown-menu>
+      <ul class="dropdown-menu" uib-dropdown-menu style="width: 254px;">
         <li ng-class="{'active': !dto.extendedReport}" ng-click="dto.extendedReport = false">
           <a href="javascript:void(0)">Simple report</a>
         </li>
