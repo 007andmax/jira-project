@@ -11,7 +11,7 @@
           </div>
           <div class="company-name-header" style="width: 240px;">
             <p class="ellipsis" uib-tooltip="{{ company.name }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+               tooltip-enable="{{ isShowTooltip[10]() }}" trimmed-tooltip="10">
               <span trimmed-tooltip-container>{{ company.name }}</span>
             </p>
           </div>
@@ -35,14 +35,14 @@
           </div>
           <div class="company-contact-type first-of-type">
             <p class="ellipsis" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+               tooltip-enable="{{ isShowTooltip[11]() }}" trimmed-tooltip="11">
               <strong>Primary contact:</strong>
               <span trimmed-tooltip-container>{{ getUserName(currentContact) }}</span>
             </p>
           </div>
           <div class="company-contact-type" ng-show="currentContact.primaryEmail">
             <p class="ellipsis" uib-tooltip="{{ currentContact.primaryEmail }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[2]() }}" trimmed-tooltip="2">
+               tooltip-enable="{{ isShowTooltip[12]() }}" trimmed-tooltip="12">
               <strong>Contact email:</strong>
               <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
             </p>

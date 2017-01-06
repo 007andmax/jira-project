@@ -20,15 +20,19 @@
             <div class="edit-icn" create-new-entity="company" item="company" stop-propagation="click"></div>
             <div class="photo"  ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"></div>
             <p class="ellipsis name" uib-tooltip="{{ company.name }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+               tooltip-enable="{{ isShowTooltip[0 + $index]() }}" trimmed-tooltip="{{ 0 + $index }}">
               <span trimmed-tooltip-container>{{ company.name }}</span>
             </p>
           </div>
           <div class="card__info">
             <div class="clearfix">
               <img src="images/settings-icon/user-profile.png" alt="">
-              <p class="ellipsis" style="width: 180px;">{{ getUserName(primaryContact) }}</p>
-              <span style="max-width: 95px" class="ellipsis badge pull-right badge-default">{{ primaryContact.designation }}</span>
+              <p class="ellipsis" style="width: 180px;"
+                 uib-tooltip="{{ getUserName(primaryContact) }}" tooltip-placement="bottom"
+                 tooltip-enable="{{ isShowTooltip[9 + $index]() }}" trimmed-tooltip="{{ 9 + $index }}">
+                <span  style="max-width: 95px" class="ellipsis badge pull-right badge-default" trimmed-tooltip-container>{{ getUserName(primaryContact) }}</span>
+              </p>
+              <span class="badge pull-right badge-default">{{ primaryContact.designation }}</span>
             </div>
             <div class="clearfix" ng-if="primaryPhone && primaryPhone.number">
               <img src="images/company/smartphone-green.png" alt="">
@@ -38,7 +42,7 @@
               <img src="images/company/email-purple.png" alt=""
                    email-to="primaryContact.primaryEmail" stop-propagation="click">
               <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ primaryContact.primaryEmail }}" tooltip-placement="bottom"
-                 tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+                 tooltip-enable="{{ isShowTooltip[1 + $index]() }}" trimmed-tooltip="{{ 1 + $index }}">
                 <span trimmed-tooltip-container>{{ primaryContact.primaryEmail }}</span>
               </p>
             </div>

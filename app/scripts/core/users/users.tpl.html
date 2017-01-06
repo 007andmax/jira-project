@@ -20,7 +20,10 @@
           <div class="card-header">
             <div class="edit-icn" create-new-entity="user" item="user"></div>
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
-            <p class="ellipsis name">{{ getUserName(user) }}</p>
+            <p class="ellipsis name" uib-tooltip="{{ getUserName(user) }}" tooltip-placement="bottom"
+               tooltip-enable="{{ isShowTooltip[10 + $index]() }}" trimmed-tooltip="{{ 10 + $index }}">
+              <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
+            </p>
             <span class="badge badge-default">{{ user.designation }}</span>
           </div>
           <div class="card__info">
@@ -28,7 +31,7 @@
               <img src="images/company/company-profile-blue.png" alt="" stop-propagation="click"
                    ui-sref="companyProfile({ companyId: user.company.id })">
               <p uib-tooltip="{{ getUserCompanyName(user) }}" tooltip-placement="bottom"
-                 tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+                 tooltip-enable="{{ isShowTooltip[0 + $index]() }}" trimmed-tooltip="{{ 0 + $index }}">
                 <span trimmed-tooltip-container>{{ getUserCompanyName(user) }}</span>
               </p>
             </div>
@@ -45,7 +48,7 @@
             <div class="clearfix" ng-if="user.primaryEmail">
               <img src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
               <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
-                 tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+                 tooltip-enable="{{ isShowTooltip[1 + $index]() }}" trimmed-tooltip="{{ 1 + $index }}">
                 <span trimmed-tooltip-container>{{ user.primaryEmail }}</span>
               </p>
             </div>
@@ -171,8 +174,8 @@
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
             </div>
 
-            <div class="user-name pull-left" trimmed-tooltip="0"
-                 uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
+            <div class="user-name pull-left" trimmed-tooltip="{{ 3 + $index }}"
+                 uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[3 + $index]() }}">
               <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
             </div>
             <span class="label label-light">{{ user.designation }}</span>
