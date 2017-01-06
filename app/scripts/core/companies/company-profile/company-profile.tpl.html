@@ -10,7 +10,10 @@
             <img ng-src="{{ getCompanyLogoUrl(companyData) }}" alt="">
           </div>
           <div class="company-name-header" style="width: 240px;">
-            <p class="ellipsis">{{ companyData.name }}</p>
+            <p class="ellipsis" uib-tooltip="{{ company.name }}" tooltip-placement="bottom"
+               tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+              <span trimmed-tooltip-container>{{ company.name }}</span>
+            </p>
           </div>
           <div class="company-info-type clearfix"
                ng-show="currentLocation.phoneNumbers && currentLocation.phoneNumbers.length && currentLocation.phoneNumbers[0].number">
@@ -31,10 +34,18 @@
             <p><strong>Account Number:</strong>{{ companyData.accountNumber }}</p>
           </div>
           <div class="company-contact-type first-of-type">
-            <p><strong>Primary contact:</strong>{{ getUserName(currentContact) }}</p>
+            <p class="ellipsis" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-placement="bottom"
+               tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+              <strong>Primary contact:</strong>
+              <span trimmed-tooltip-container>{{ getUserName(currentContact) }}</span>
+            </p>
           </div>
           <div class="company-contact-type" ng-show="currentContact.primaryEmail">
-            <p class="ellipsis"><strong>Contact email:</strong>{{ currentContact.primaryEmail }}</p>
+            <p class="ellipsis" uib-tooltip="{{ currentContact.primaryEmail }}" tooltip-placement="bottom"
+               tooltip-enable="{{ isShowTooltip[2]() }}" trimmed-tooltip="2">
+              <strong>Contact email:</strong>
+              <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
+            </p>
           </div>
           <div class="company-contact-type"
                ng-show="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">

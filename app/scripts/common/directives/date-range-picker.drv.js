@@ -41,8 +41,16 @@
             }
           }
         }).data('datepicker');
-
-        scope.$parent.clearDateRange = datepicker.clear.bind(datepicker);
+  
+        if (scope.$parent.clearDateRange) {
+          var savePreviousClearFunc = scope.$parent.clearDateRange;
+          scope.$parent.clearDateRange = function () {
+            savePreviousClearFunc();
+            datepicker.clear();
+          }
+        } else {
+          scope.$parent.clearDateRange = datepicker.clear.bind(datepicker);
+        }
       }
     }
   }]);

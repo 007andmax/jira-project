@@ -21,13 +21,16 @@
             <div class="edit-icn" create-new-entity="user" item="user"></div>
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
             <p class="ellipsis name">{{ getUserName(user) }}</p>
-            <span class="badge badge-default">Doctor</span>
+            <span class="badge badge-default">{{ user.designation }}</span>
           </div>
           <div class="card__info">
             <div class="clearfix">
               <img src="images/company/company-profile-blue.png" alt="" stop-propagation="click"
                    ui-sref="companyProfile({ companyId: user.company.id })">
-              <p>{{ getUserCompanyName(user) }}</p>
+              <p uib-tooltip="{{ getUserCompanyName(user) }}" tooltip-placement="bottom"
+                 tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
+                <span trimmed-tooltip-container>{{ getUserCompanyName(user) }}</span>
+              </p>
             </div>
             <div class="clearfix"
                  ng-if="user.phoneNumbers && user.phoneNumbers.length && user.phoneNumbers[0] && user.phoneNumbers[0].number">
@@ -41,7 +44,10 @@
             </div>
             <div class="clearfix" ng-if="user.primaryEmail">
               <img src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
-              <p style="width: 220px;" class="ellipsis">{{ user.primaryEmail }}</p>
+              <p style="width: 220px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
+                 tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+                <span trimmed-tooltip-container>{{ user.primaryEmail }}</span>
+              </p>
             </div>
             <div class="clearfix">
               <span class="ticket-count">{{ user.userStatistic.ticketsSubmitted || 0 }}</span>
