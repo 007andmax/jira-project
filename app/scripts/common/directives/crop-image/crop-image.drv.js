@@ -81,7 +81,7 @@
               $uibModal.open({
                 animation: true,
                 backdrop: 'static',
-                windowClass: 'modal-customize-avatar' + isTechLogo ? 'tech-logo' : '',
+                windowClass: 'modal-customize-avatar ' + (isTechLogo ? 'tech-logo' : ''),
                 templateUrl: '/html/scripts/common/directives/crop-image/cropper-modal.tpl.html',
                 controller: ['$scope', '$timeout', '$uibModalInstance', 'Cropper', 'source', 'isTechLogo', 'saveImage', cropperCtrl],
                 resolve: {
