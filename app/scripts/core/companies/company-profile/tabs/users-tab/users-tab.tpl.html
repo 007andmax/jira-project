@@ -63,7 +63,10 @@
         </div>
 
         <div class="col-1-1">
-          <p class="ellipsis">{{ user.primaryEmail }}</p>
+          <p class="ellipsis" trimmed-tooltip="8" uib-tooltip="{{ user.primaryEmail }}"
+             tooltip-enable="{{ isShowTooltip[8]() }}">
+            <span trimmed-tooltip-container>{{ user.primaryEmail }}</span>
+          </p>
         </div>
 
         <div class="col-2">
