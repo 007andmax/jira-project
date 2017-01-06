@@ -9,10 +9,10 @@
          ng-cropper-hide="'hide.cropper'"
          ng-cropper-options="options">
   </div>
-  <div class="logo-crop" ng-show="preview">
+  <div class="logo-crop clearfix" ng-show="preview">
     <img class="preview" ng-src="{{ preview }}" width="800"/>
   </div>
-  <div style="clear: both; float: right;">
+  <div class="cropper-btns-container" >
     <button class="btn btn-lg btn-info" ng-click="crop()" custom-disabled="{{ !preview }}">Crop</button>
     <button class="btn btn-lg btn-default" ng-click="close()">Cancel</button>
   </div>

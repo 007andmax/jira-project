@@ -92,7 +92,8 @@
         .card-wrapper .card__cover--name.user-type .label {
           clear: left; }
     .card-wrapper .card__info {
-      height: 170px;
+      height: 180px;
+      overflow: hidden;
     }
       .card-wrapper .card__info div {
         padding: 5px 0px; }
@@ -127,6 +128,7 @@
 .card-wrapper .card .card-header{
   margin-bottom: 13px;
   position: relative;
+  min-height: 50px;
 }
 
 .card-wrapper .card .card-header .edit-icn{
