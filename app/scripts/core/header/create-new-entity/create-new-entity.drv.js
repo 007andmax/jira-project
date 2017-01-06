@@ -37,6 +37,9 @@
                   resolvedCompanyId: function () {
                     return attrs.companyId;
                   },
+                  resolvedUserId: function () {
+                    return attrs.userId;
+                  },
                   resolvedOpenedTab: function () {
                     return attrs.createNewEntity;
                   },
