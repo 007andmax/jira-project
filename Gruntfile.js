@@ -637,7 +637,7 @@ module.exports = function (grunt) {
             '!*.tpl.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*',
+            'fonts/{,*/}*.*',
             'scripts/**/*.html',
             'quicktech/**/*.html',
             'partials/{,*/}*.html'
