@@ -113,33 +113,11 @@
       });
     }
 
-    function cropAvatar(image, callback) {
-
-      if (!image) {
-        throw 'image is required!'
-      }
-
-      $http({
-        url: '/file/cropImage',
-        method: 'POST',
-        data: image
-      }).then(function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      }, function (resp) {
-        if (callback) {
-          callback(resp.data);
-        }
-      });
-    }
-
     return {
       create: create,
       createImageFromBase64Url: createImageFromBase64Url,
       getMetadata: getMetadata,
-      remove: remove,
-      cropAvatar: cropAvatar
+      remove: remove
     }
 
   }]);

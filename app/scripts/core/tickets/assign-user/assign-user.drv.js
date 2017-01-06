@@ -21,9 +21,8 @@
             if (typeof( inputElement.data('bs.tokenfield')) != 'undefined') {
               inputElement.tokenfield('setTokens', []);
               inputElement.trigger('tokenfield:removedtoken');
-            } else {
-              inputElement.val('').autocomplete('onValueChange', true);
             }
+            inputElement.val('').autocomplete('onValueChange', true);
 
             inputElement.trigger('focus');
           };
@@ -130,8 +129,8 @@
           });
 
           actionElement.click(function () {
-            inputElement.parents('[dropdown]').removeClass('open').trigger('hide.bs.dropdown');
             $scope.assignUserToTicket();
+            $('body').click();
           });
 
           inputElement.parents('.dropdown-submenu-wrapper').click(function (e) {
@@ -156,6 +155,13 @@
               if ($(this).parents('li').find('.assign-ticket-content').length) {
                 refreshAssignTicket();
               }
+            }
+          });
+
+          parentMenu.find('li > a').on('mouseleave', function (e) {
+            var closest = $(e.target).closest('.dropdown-submenu-wrapper');
+            if (!closest || !closest.length) {
+              parentMenu.find('li .dropdown-submenu-wrapper').removeClass('open');
             }
           });
 

@@ -3,10 +3,10 @@
 (function () {
 
   angular.module("quicktech").controller("createNewEntityCtrl",
-    ['$scope', 'resolvedExistedItem', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId',
+    ['$scope', 'resolvedExistedItem', 'sessionId', 'sessionTime', 'resolvedDeviceId', 'resolvedCompanyId', 'resolvedUserId',
       'resolvedOpenedTab', '$uibModalInstance', 'quicktech.common.services.PermissionsService', '$timeout',
       'quicktech.common.services.UserConfirmationsService',
-      function ($scope, resolvedExistedItem, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId,
+      function ($scope, resolvedExistedItem, sessionId, sessionTime, resolvedDeviceId, resolvedCompanyId, resolvedUserId,
                 resolvedOpenedTab, $uibModalInstance, PermissionsService, $timeout, UserConfirmationsService) {
 
         $scope.openedTab = resolvedOpenedTab || 'ticket';
@@ -27,6 +27,7 @@
         $scope.sessionTime = sessionTime;
         $scope.resolvedDeviceId = resolvedDeviceId;
         $scope.resolvedCompanyId = resolvedCompanyId;
+        $scope.resolvedCreatedUserId = resolvedUserId;
         $scope.closeWindow = $uibModalInstance.dismiss;
 
         $scope.closeWindowWithConfirm = function () {
