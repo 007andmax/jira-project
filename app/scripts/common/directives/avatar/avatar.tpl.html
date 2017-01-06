@@ -1,8 +1,9 @@
 <div class="create-user-avatar clearfix" crop-image="model" is-tech-logo="{{ modelName === 'techCompany' }}"
      model-image-path="{{ imagePath }}">
   <div class="avatar pull-left">
-    <img ng-src="{{ getUrl() }}" ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
-         ng-style="{'max-height': model[imagePath] && model[imagePath].cropped ? '100%' : 'none'}">
+    <img ng-src="{{ model[imagePath] && model[imagePath].cropped || !model[imagePath].base64 ? getUrl() : model[imagePath].base64 }}"
+         ng-class="{'no-avatar': model[imagePath] && model[imagePath].cropped}"
+         ng-style="{'max-height': model[imagePath] && model[imagePath].cropped || model[imagePath].base64 ? '100%' : 'none'}">
 
     <div class="reposition" ng-show="model[imagePath] && model[imagePath].origin" reposition-button>
       Reposition...
