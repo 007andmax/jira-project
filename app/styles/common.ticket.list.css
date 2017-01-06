@@ -100,7 +100,7 @@
 
 /*Ticket Hover Action Ellipse - Start*/
 .ticket .ticket-meta .ticket-list-header p.ellipsis {
-  width: calc(100% - 60px);
+  width: calc(100% - 90px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

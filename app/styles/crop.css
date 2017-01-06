@@ -255,13 +255,8 @@
   border: 1px solid #bbb;
 }
 
-.tech-logo .logo-crop {
-  float: none;
-  overflow: hidden;
-  width: 450px;
-  height: 200px;
-  margin: auto;
-  margin-bottom: 20px;
+.tech-logo .modal-dialog{
+  width: 740px;
 }
 
 .modal-customize-avatar .close-btn,
@@ -278,23 +273,15 @@
 }
 
 .img-crop {
-  width: 70%;
+  width: 400px;
   height: 400px;
   margin-bottom: 20px;
   float: left;
 }
 
-.tech-logo .img-crop{
-  height: 400px;
-}
-
-.tech-logo .img-crop {
-  width: 100%;
-}
-
 .tech-logo .preview{
-  width: 100%;
-  height: 200px;
+  width: 261px;
+  height: 116px;
 }
 
 .logo-crop {
