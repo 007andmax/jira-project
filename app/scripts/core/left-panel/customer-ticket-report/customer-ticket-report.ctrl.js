@@ -5,14 +5,18 @@
   angular.module('quicktech.core.leftPanel').controller('quicktech.core.leftPanel.customerTicketReportCtrl',
     ['$scope', 'CompaniesService', 'UsersService', '$rootScope', '$sce', '$filter',
       function ($scope, CompaniesService, UsersService, $rootScope, $sce, $filter) {
-  
+        var renderFinished = {
+          tickets: false,
+          chart: false
+        };
+        
         $scope.dateFormat = '%d %b';
         $scope.frequency = 'DAILY';
         
         $scope.getCompanyById = CompaniesService.getOneById;
         $scope.getUserById = UsersService.getOneById;
         $scope.getUserName = $rootScope.getUserName;
-  
+        
         $scope.$watch('data', function (data) {
           if (data) {
             if (data.ticketsPerDate && data.ticketsPerDate.length) {
@@ -23,7 +27,7 @@
             data.endDate = new Date(data.endDate);
           }
         });
-  
+        
         $scope.parseDate = function (values) {
           var result = [];
           for (var i = 0; i < values.length; i++) {
@@ -34,7 +38,7 @@
           }
           return result;
         };
-  
+        
         $scope.groupBars = function (data) {
           var result = [];
           for (var i = 0; i < data.length; i++) {
@@ -48,18 +52,18 @@
           }
           return result;
         };
-  
+        
         $scope.timeToHoursAndMinutes = function (time, small) {
           var hours = Math.floor(time) || 0,
             minutes = Math.round((time - hours) * 60) || 0;
-  
+          
           if (small) {
             return (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
           } else {
             return (hours ? hours + ' hours ' : '') + (minutes ? minutes + ' min' : '');
           }
         };
-  
+        
         $scope.getTrustedHtml = function (html) {
           if (html) {
             return $sce.trustAsHtml(html);
@@ -67,14 +71,23 @@
             return '';
           }
         };
-  
+        
         $scope.getPdfName = function (data) {
-          var companyName = $scope.getCompanyById(data.companyId).name.toLowerCase().split(' ').join('-');
-          if (data.userId) {
-            var userName = $scope.getUserName($scope.getUserById(data.userId)).toLowerCase().split(' ').join('-');
-            return 'customer-report-' + companyName + '-' + userName;
-          } else {
-            return 'customer-report-' + companyName;
+          if (data) {
+            var companyName = $scope.getCompanyById(data.companyId).name.toLowerCase().split(' ').join('-');
+            if (data.userId) {
+              var userName = $scope.getUserName($scope.getUserById(data.userId)).toLowerCase().split(' ').join('-');
+              return 'customer-report-' + companyName + '-' + userName;
+            } else {
+              return 'customer-report-' + companyName;
+            }
+          }
+        };
+        
+        $scope.buildPdf = function (part) {
+          renderFinished[part] = true;
+          if (renderFinished['tickets'] && renderFinished['chart']){
+            $scope.$broadcast('buildPdf-' + $scope.getPdfName($scope.data));
           }
         };
         

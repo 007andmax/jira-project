@@ -1,9 +1,9 @@
 <div class="hardware-wrap" prevent-hash-change="close()" convert-to-pdf="/customerReport/pdf"
+     selector=".customer-ticket__report" disable-selector=".open-pdf-btn" file-name="{{ getPdfName(data) }}"
      ng-controller="quicktech.core.leftPanel.customerTicketReportCtrl">
   <div class="hardware">
     <div class="hardware__control-panel" style="width: 150px;">
-      <div class="hardware__control-panel--btn"
-           ng-click="openInPdf('.customer-ticket__report', getPdfName(data))">
+      <div class="hardware__control-panel--btn open-pdf-btn" ng-click="openInPdf()">
         <img src="images/input-icons/hardware-report/printer.png" alt="">
         <p>Print</p>
       </div>
@@ -18,8 +18,9 @@
           <h2>Tickets Summary</h2>
           <div>
             <h3>
-              {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '') }}
-               <span class="pull-right" style="font-size: 14px;min-width: 170px">
+              {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '')
+              }}
+              <span class="pull-right" style="font-size: 14px;min-width: 170px">
               {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
             </span>
             </h3>
@@ -32,7 +33,7 @@
                      handle-data="reportChartData" style="height: 100%">
 
                   <div d3chart data="chartData" margin="{ top: 10, right: 40, bottom: 30, left: 40}"
-                       style="height: 100%">
+                       on-finish-rendering="buildPdf" style="height: 100%">
                     <d3axis name="date" scale="ordinal" orientation="bottom" filter="parseDate"
                             ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
                     <d3axis name="tickets" orientation="left" filter="groupBars"></d3axis>
@@ -65,7 +66,8 @@
         </div>
         <div class="customer-ticket__report--details clearfix">
           <h2>Tickets details</h2>
-          <div class="clearfix report-info-point" ng-repeat="ticket in data.tickets">
+          <div class="clearfix report-info-point" ng-repeat="ticket in data.tickets"
+               on-finish-render="buildPdf('tickets')">
             <table class="dont-break">
               <tbody>
               <tr>
@@ -79,7 +81,8 @@
                 </td>
                 <td>
                   <p><strong>Status</strong></p>
-                  <p>{{ ticket.status ? ticket.status[0] + ticket.status.slice(1).split('_').join(' ').toLowerCase() : 'Unclaimed' }}</p>
+                  <p>{{ ticket.status ? ticket.status[0] + ticket.status.slice(1).split('_').join(' ').toLowerCase() :
+                    'Unclaimed' }}</p>
                 </td>
                 <td>
                   <p><strong>User</strong></p>
@@ -116,13 +119,13 @@
                     <span ng-if="expense.manufacture"><strong>P/N:</strong> {{ expense.manufacture }}</span>
                     <span><strong>Name:</strong> {{ expense.name }}</span>
                     <span><strong>Quantity:</strong> {{ expense.quantity }}</span>
-                    <span><strong>Total price:</strong> {{ '$' + (expense.price * expense.quantity).toFixed(2) }}</span>
+                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
                   </div>
 
                   <div class="details-futures-info" ng-if="update.type === 'SERVICE'">
                     <span><strong>Name:</strong> {{ expense.name }}</span>
                     <span><strong>Duration:</strong> {{ timeToHoursAndMinutes(expense.quantity, true) }}</span>
-                    <span><strong>Total price:</strong> {{ '$' + (expense.price * expense.quantity) }}</span>
+                    <span><strong>Total price:</strong> {{ expense.price * expense.quantity | currency: '$': 2 }}</span>
                   </div>
                 </div>
               </div>
