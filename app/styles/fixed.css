@@ -342,7 +342,7 @@ body.non-body-scroll::-webkit-scrollbar {
 }
 
 .dropdown-user-parent > .dropdown-menu > li {
-  padding: 10px 20px;
+  /*padding: 10px 20px;*/ /*styles of user dropdown fixed*/
   cursor: pointer;
 }
 
@@ -358,6 +358,7 @@ body.non-body-scroll::-webkit-scrollbar {
 
 .dropdown-user-parent > .dropdown-menu > li .avatar {
   margin-right: 7px !important;
+  margin-top: 3px;
 }
 
 .dropdown-user-parent > .dropdown-menu > li .user-name {
