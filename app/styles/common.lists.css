@@ -455,8 +455,13 @@
 
 .qt-users .persistent-tooltip {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-self: center;
+}
+
+.qt-users #has-invoice-updates1.persistent-tooltip img{
+  width: 20px;
+  height: 20px;
 }
 
 @-moz-document url-prefix() {
