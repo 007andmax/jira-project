@@ -166,7 +166,9 @@
         }
 
         $scope.$on('$destroy', function () {
-          SharedStateService.clearState('ticketsHeader');
+          ticketsHeaderState.checkedTicketsIds = [];
+          ticketsHeaderState.selectedTickets = [];
+          ticketsHeaderState.agentList = [];
         });
 
       }]);

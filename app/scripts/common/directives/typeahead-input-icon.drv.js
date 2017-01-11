@@ -45,7 +45,7 @@
               model.$setViewValue('');
             }
 
-            input.focus();
+            input.click();
           }
 
         }

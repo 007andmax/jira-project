@@ -37,7 +37,7 @@
   
         $scope.filterUsers = function (value) {
           return function (item) {
-            var selectedCompanyId = $scope.dto.company.id;
+            var selectedCompanyId = $scope.dto.company && $scope.dto.company.id;
             if (selectedCompanyId && item.company.id !== selectedCompanyId) {
               return false;
             }

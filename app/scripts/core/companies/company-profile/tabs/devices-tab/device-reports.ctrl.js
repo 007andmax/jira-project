@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.companies').controller('quicktech.core.companies.deviceReports',
-    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.UserConfirmationsService',
-      function ($scope, DevicesService, $stateParams, UserConfirmationsService) {
+    ['$scope', 'DevicesService', '$stateParams', 'quicktech.common.services.UserConfirmationsService', '$timeout',
+      function ($scope, DevicesService, $stateParams, UserConfirmationsService, $timeout) {
 
         var currentReport = {};
         $scope.$watch('data', function (value) {
@@ -89,6 +89,9 @@
             }
 
             $scope.toggleEdit();
+            $timeout(function () {
+              $scope.buildPdf();
+            })
           });
         };
 
@@ -168,6 +171,11 @@
           if (dates && dates.length) {
             $scope.dto.warrantyDate = dates[0];
           }
+        };
+  
+        $scope.buildPdf = function () {
+          var currentAgent = $scope.currentAgent;
+          $scope.$broadcast('buildPdf-' + (currentAgent ? (currentAgent.hostName || currentAgent.ip) : ''));
         };
 
         $scope.closeReport = function () {

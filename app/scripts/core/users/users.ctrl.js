@@ -114,6 +114,7 @@
             $scope.sharedState = SharedStateService.getSharedState('ticketsHeader');
             $scope.sharedState.searchFilter.companyId = '';
             $scope.sharedState.searchFilter.userId = user.id;
+            globalSearch.preventClearing = true;
             globalSearch.searchValue = $scope.getUserName(user);
           });
         };

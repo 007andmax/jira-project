@@ -6,7 +6,8 @@
       restrict: 'EA',
       scope: {
         margin: '=',
-        data: '='
+        data: '=',
+        onFinishRendering: '=?'
       },
       controller: [
         '$scope', '$element', '$attrs', '$window', '$timeout', '$rootScope', function($scope, $el, $attrs, $window, $timeout, $rootScope) {
@@ -107,6 +108,10 @@
                   element = ref[i];
                   results.push(element.redraw(data));
                 }
+  
+                $scope.onFinishRendering && $timeout(function () {
+                  $scope.onFinishRendering('chart');
+                }, 300);
                 return results;
               }, $attrs.updateInterval || 200);
             };
