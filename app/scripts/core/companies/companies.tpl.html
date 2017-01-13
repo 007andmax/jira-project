@@ -10,8 +10,8 @@
     </div>
   </div>
 
-  <div class="company-profile-content companies-list not-charts-companies-page" >
-    <div class="card-view-wrapper clearfix" style="background: #eee" ng-if="companiesView === 'grid'">
+  <div class="company-profile-content companies-list not-charts-companies-page" style="background: #eee" >
+    <div class="card-view-wrapper clearfix"  ng-if="companiesView === 'grid'">
       <div class="card-wrapper" ui-sref="companyProfile({ companyId: company.id })"
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: 'name')) track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl">
