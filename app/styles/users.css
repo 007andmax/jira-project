@@ -1,10 +1,4 @@
-.users-content {
-  padding: 0 0px 30px 0px;
-}
-
 .users-list {
-  /*border-top: 1px solid #e7ecf2;*/
-  /*padding-top: 30px;*/
   width: 100%;
   padding-right: 30px;
 }
@@ -16,7 +10,6 @@
   margin-left: 30px;
   margin-bottom: 30px;
   width: calc(100% / 3 - 30px);
-  /*min-width: 405px !important;*/
   -webkit-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   -o-transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
   transition: 0.3s ease-out box-shadow, 0.3s ease-out border;
@@ -26,12 +19,6 @@
   border: 1px solid #fff;
   box-shadow: 0 4px 25px 0 rgba(10, 45, 89, .1);
 }
-
-
-
-
-
-
 
 .users-list .user-card .avatar img {
   border-radius: 0px;
@@ -189,9 +176,7 @@
 }
 
 @media only screen and (min-width: 1380px) and (max-width: 1500px) {
-  .users-list .user-card {
-    /*min-width: 370px !important;*/
-  }
+
 
   .users-list .user-actions .btn-user-chat {
     display: none;

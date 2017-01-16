@@ -319,10 +319,16 @@
   .card-view-wrapper{
     width: 1420px;
   }
+  .left-panel-closed .card-view-wrapper{
+    width: 1775px;
+  }
 }
 
-@media (min-width: 2500px) {
+@media (min-width: 2560px) {
   .card-view-wrapper{
-    width: 2100px;
+    width: 2130px;
+  }
+  .left-panel-closed .card-view-wrapper{
+    width: 2485px;
   }
 }

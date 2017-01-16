@@ -274,15 +274,15 @@ body.non-body-scroll::-webkit-scrollbar {
   /*padding-top: 11px;*/
 }
 
-@media only screen and (min-width: 2000px) {
-  .qt-default-services > li > .intermediate-parent-elem > .col-1 {
-    width: calc(100% - 449px);
-  }
+/*@media only screen and (min-width: 2000px) {*/
+  /*.qt-default-services > li > .intermediate-parent-elem > .col-1 {*/
+    /*width: calc(100% - 449px);*/
+  /*}*/
 
-  .qt-default-services > li > .intermediate-parent-elem > .col-2 {
-    width: 263px;
-  }
-}
+  /*.qt-default-services > li > .intermediate-parent-elem > .col-2 {*/
+    /*width: 263px;*/
+  /*}*/
+/*}*/
 
 .qt-default-services > li > .intermediate-parent-elem > .col-4 > .hit-area {
   margin-right: -2px;
@@ -316,15 +316,15 @@ body.non-body-scroll::-webkit-scrollbar {
   width: 80px;
 }
 
-@media only screen and (min-width: 2000px) {
-  .qt-services-list > li > .intermediate-parent-elem > .col-1 {
-    width: calc(100% - 449px);
-  }
+/*@media only screen and (min-width: 2000px) {*/
+  /*.qt-services-list > li > .intermediate-parent-elem > .col-1 {*/
+    /*width: calc(100% - 449px);*/
+  /*}*/
 
-  .qt-services-list > li > .intermediate-parent-elem > .col-2 {
-    width: 263px;
-  }
-}
+  /*.qt-services-list > li > .intermediate-parent-elem > .col-2 {*/
+    /*width: 263px;*/
+  /*}*/
+/*}*/
 
 .qt-services-list > li > .intermediate-parent-elem > .col-4 > .hit-area {
   margin-right: -2px;
@@ -1111,6 +1111,7 @@ aside#left div.nav-title {
 .services-info-wrapper .service-form-wrapper.edit-is-billable .col-3 {
   width: 75px;
   padding-left: 10px;
+  margin-left: 7px;
 }
 
 .services-info-wrapper .service-form-wrapper.edit-is-billable .col-3 label.checkbox {
@@ -1148,7 +1149,6 @@ aside#left div.nav-title {
 span.sort-span {
   display: inline-block;
   position: relative;
-  padding-right: 15px;
   cursor: pointer;
 }
 .avatar-error-message{

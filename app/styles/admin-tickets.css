@@ -75,9 +75,7 @@
 }
 
 .main-container {
-  /*margin: 0 15px;*/
   padding-top: 80px;
-  padding-bottom: 400px;
 }
 @-moz-document url-prefix() {
   .main-container > .row {

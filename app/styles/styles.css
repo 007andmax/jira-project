@@ -794,13 +794,12 @@ hr {
   float: left;
   width: calc(100% - 277px);
   padding: 0 30px 30px;
-  /*overflow: hidden;*/
+  height: 100vh;
 }
 .right-panel-closed .company-profile-content {
   float: left;
   width: 100%;
   padding: 0 10px 30px;
-  /*overflow: hidden;*/
 }
 .company-profile-content.companies-list {
   padding-left: 0;

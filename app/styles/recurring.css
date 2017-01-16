@@ -524,7 +524,7 @@ ul.qt-recurring-invoices {
 
   display: inline-block;
 
-  width: 75px;
+  width: auto;
   padding: 0 5px;
 
   text-align: center;

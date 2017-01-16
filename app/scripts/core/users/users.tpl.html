@@ -174,20 +174,20 @@
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
             </div>
 
-            <div class="user-name pull-left" trimmed-tooltip="{{ 3 + $index }}"
-                 uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[3 + $index]() }}">
-              <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
-            </div>
-            <span class="label label-light">{{ user.designation }}</span>
+              <div class="user-name pull-left" trimmed-tooltip="{{ 3 + $index }}"
+                   uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[3 + $index]() }}">
+                <p trimmed-tooltip-container>{{ getUserName(user) }}</p>
+                <p class="label label-light">{{ user.designation }}</p>
+              </div>
 
           </div>
         </div>
 
-        <div class="col-lg-2 col-xs-2 ellipsis">
+        <div class="col-lg-2 col-xs-2 ellipsis text-center">
           {{ getUserCompanyName(user) }}
         </div>
 
-        <div class="col-lg-2 col-xs-2">
+        <div class="col-lg-2 col-xs-2 text-center">
           <div class="clearfix">
           <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
             <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
@@ -198,10 +198,10 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-1">
+        <div class="col-lg-1 col-xs-1 text-center">
           <div class="user-account-type" uib-dropdown>
 
-            <div class="label-wrapper" aria-expanded="false" uib-dropdown-toggle>
+            <div aria-expanded="false" uib-dropdown-toggle>
               <span>{{ user.role }}</span>
             </div>
 
@@ -224,11 +224,13 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-2" uib-dropdown>
+        <div class="col-lg-1 col-xs-2 text-center" uib-dropdown>
 
           <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
                uib-tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
-            <i class="icn-sm {{ getUserSubscribeClass(user) }}"></i>
+            <img src="./images/input-icons/ticket-update-green.png" alt="">
+            <img src="./images/input-icons/invoice-update-orange.png" alt="">
+            <img src="./images/input-icons/tick-manager-blue.png" alt="">
           </div>
 
           <ul class="dropdown-menu dropdown-subscribe">
@@ -270,7 +272,7 @@
 
         </div>
 
-        <div class="col-lg-1 col-xs-1">
+        <div class="col-lg-1 col-xs-1 text-center">
         <span class="user-submitted-tickets">
           {{ user.userStatistic.ticketsSubmitted || '0' }}
         </span>

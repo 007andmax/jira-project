@@ -40,38 +40,36 @@
         show-model-element="{{ 'show-user-on-save-' + user.id }}">
 
       <div class="users-list-wrapper">
-        <div class="col-1">
-          <div class="user-bio">
-
-            <label class="control checkbox pull-left">
+        <div class="col-1 column-name">
+            <label class="control checkbox ">
               <input type="checkbox" ng-model="selectedUsers[user.id]" ng-change="changeSelectedUsers(selectedUsers)">
               <span class="control-indicator"></span>
             </label>
 
-            <div class="pull-left avatar">
-              <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
-              <i class="on bottom"></i>
-            </div>
+            <div style="display: flex; overflow: hidden;">
+              <div class=" avatar">
+                <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
+                <i class="on bottom"></i>
+              </div>
 
-            <div class="user-name pull-left" trimmed-tooltip="0"
-                 uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
-              <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
+              <div class="user-name" trimmed-tooltip="0"
+                   uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
+                <p trimmed-tooltip-container>{{ getUserName(user) }}</p>
+                <p class="label label-light">{{ user.designation }}</p>
+              </div>
             </div>
-            <span class="label label-light">{{ user.designation }}</span>
-
-          </div>
         </div>
 
         <div class="col-1-1">
-          <p class="ellipsis" trimmed-tooltip="8" uib-tooltip="{{ user.primaryEmail }}"
+          <p class="ellipsis text-center" trimmed-tooltip="8" uib-tooltip="{{ user.primaryEmail }}"
              tooltip-enable="{{ isShowTooltip[8]() }}">
             <span trimmed-tooltip-container>{{ user.primaryEmail }}</span>
           </p>
         </div>
 
         <div class="col-2">
-          <div class="clearfix">
-          <span class="user-contact-no" ng-repeat="phoneNumber in user.phoneNumbers">
+          <div class="clearfix text-center">
+          <span class="user-contact-no ellipsis" ng-repeat="phoneNumber in user.phoneNumbers">
             <i class="icn-sm" ng-class="{'icn-iphone': phoneNumber.typeNumber === 'MOBILE',
             'icn-user-fax': phoneNumber.typeNumber === 'FAX',
             'icn-user-phone': phoneNumber.typeNumber === 'OFFICE'}"></i>
@@ -83,7 +81,7 @@
         <div class="col-3">
           <div class="user-account-type" uib-dropdown>
 
-            <div class="label-wrapper text-center" aria-expanded="false" uib-dropdown-toggle>
+            <div class="text-center" aria-expanded="false" uib-dropdown-toggle>
             <span>
               {{ user.role }}
             </span>
@@ -156,27 +154,27 @@
 
         </div>
 
-        <div class="col-4" style="text-align: center;">
-        <span class="user-submitted-tickets">
+        <div class="col-4 text-center">
+        <span class="user-submitted-tickets ">
           {{ user.userStatistic.ticketsSubmitted || '0' }}
         </span>
         </div>
 
         <div class="col-5">
-          <div class="list-actions pull-right">
+          <div class="list-actions text-right">
 
-            <div class="btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
+            <div class="btn btn-default  has-tooltip" create-new-entity="user" item="user"
                  ng-if="PermissionsService.isAllowed('EDIT_USERS')"
                  tooltip-placement="top" uib-tooltip="Edit">
               <i class="icn-sm icn-edit"></i>
             </div>
 
-            <div class="btn btn-default btn-user-mail pull-left has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
+            <div class="btn btn-default btn-user-mail  has-tooltip" custom-disabled="{{ !user.primaryEmail }}"
                  email-to="user.primaryEmail" tooltip-placement="top" uib-tooltip="Email">
               <i class="icn-sm icn-user-mail"></i>
             </div>
 
-            <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
+            <div class="btn btn-default  has-tooltip" ng-click="archiveUser()"
                  custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user.id) }}"
                  tooltip-placement="top" uib-tooltip="Archive this User">
