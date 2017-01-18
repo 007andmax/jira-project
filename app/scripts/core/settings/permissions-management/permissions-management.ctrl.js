@@ -24,9 +24,7 @@
       };
 
       CompaniesService.getPermissions(function (resp) {
-        $scope.roles = resp.sort(function (role1, role2) {
-          return role1.name < role2.name;
-        });
+        $scope.roles = resp;
       });
 
       $scope.togglePermission = function (role, permission) {
