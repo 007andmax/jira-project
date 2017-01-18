@@ -208,8 +208,8 @@
                       </div>
 
                       <div class="form-group">
-                        <div class="btn btn-lg btn-info" custom-disabled="{{ validLink.pattern }}">Add</div>
-                        <div class="btn btn-lg btn-primary-outline btn-primary" data-edit="unlink">Cancel</div>
+                        <div class="btn btn-lg btn-primary" custom-disabled="{{ validLink.pattern }}">Add</div>
+                        <div class="btn btn-lg   btn-primary" data-edit="unlink">Cancel</div>
                       </div>
 
                     </div>
@@ -434,7 +434,7 @@
             Create and Open
           </div>
 
-          <div class="btn btn-primary btn-create btn-primary-outline pull-right" ng-click="saveTicket(ticketForm)"
+          <div class="btn btn-primary btn-create   pull-right" ng-click="saveTicket(ticketForm)"
                custom-disabled="{{ (((ticketForm.$invalid && !isTicketFormValid(ticketForm)) || ticketForm.$pristine) && triedToSaveTicket) || savingInProcess || fileLoadOrError || errorFileMessage }}">
             Create
           </div>

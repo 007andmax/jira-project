@@ -176,7 +176,7 @@
              custom-disabled="{{!!(deviceSettingsForm.$pristine || (triedToSave && deviceSettingsForm.$invalid) || updating)}}">
           {{ selectedCredentialId !== undefined ? 'Update' : 'Create' }}
         </div>
-        <div class="btn btn-lg btn-primary btn-primary-outline" ng-click="cancelEdit(deviceSettingsForm)"
+        <div class="btn btn-lg btn-primary  " ng-click="cancelEdit(deviceSettingsForm)"
              custom-disabled="{{ deviceSettingsForm.$pristine && selectedCredentialId === undefined }}">
           Cancel
         </div>

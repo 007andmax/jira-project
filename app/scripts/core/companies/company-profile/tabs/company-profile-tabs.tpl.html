@@ -185,7 +185,7 @@
       <div class="pull-right for-network-tab" tooltip-placement="top" tooltip-append-to-body="true"
            ng-show="currentOpenTab === 'network-scan'"
            uib-tooltip="{{ masterAgentOffline ? 'Master Agent Offline' : isScanDevicesLoad ? 'Scan in progress' : 'Scan Network' }}">
-        <div class="btn btn-info has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
+        <div class="btn btn-primary has-tooltip" style="width: 62px;" ng-click="runScanDevices()"
              custom-disabled="{{ masterAgentOffline || isScanDevicesLoad }}">
           <i class="icn-sm icn-scan-network"></i>
         </div>

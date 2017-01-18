@@ -670,7 +670,7 @@
   cursor: default;
 }
 
-.create-user-form .form-group .btn-info.disabled {
+.create-user-form .form-group .btn-primary.disabled {
   color: #b2becd;
 }
 

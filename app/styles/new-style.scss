@@ -1,0 +1,92 @@
+//COLORS=================================================
+$primary-color: #1586e4;
+$global-color: #354052;
+
+$light-gray: #666f7f;
+$gray: #424e63;
+$green-mint: #00c8c4;
+$purple: #7460ee;
+$green: #4caf50;
+$wet-blue: #5c6bc0;
+$yellow: #ffb810;
+$red: #ff5252;
+
+$primary-active: #1078ce;
+$green-active: #358e39;
+//COLORS-END=============================================
+
+
+
+//BUTTONS================================================
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  height: 36px;
+  min-width: 36px;
+  position: relative;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  outline: none;
+  padding: 0 7px;
+  font-size: 12px;
+  line-height: 32px;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-ransition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  &:focus,
+  &:hover,
+  &:active,
+  &.active{
+    color: #fff;
+    text-decoration: none;
+    outline-color: transparent;
+    outline-style: none;
+  }
+  &[disabled],
+  &.disabled{
+    box-shadow: none;
+    background-color: $light-gray;
+    border-color: $light-gray;
+    pointer-events: none;
+  }
+  &-primary{
+    background-color: $primary-color;
+    border-color: $primary-color;
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active{
+      background-color: $primary-active;
+      border-color: $primary-active;
+    }
+
+  }
+  &-success{
+    background-color: $green;
+    border-color: $green;
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active{
+      background-color: $green-active;
+      border-color: $green-active;
+    }
+  }
+}
+//BUTTONS-END============================================
+
+

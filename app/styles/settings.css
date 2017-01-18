@@ -412,7 +412,7 @@
   margin-top: 19px;
 }
 
-.email-me-wrapper .btn-info.disabled {
+.email-me-wrapper .btn-primary.disabled {
   color: #b2becd;
 }
 
@@ -527,7 +527,7 @@
   margin-top: 10px;
 }
 
-.manage-labels-wrapper .btn-info.disabled {
+.manage-labels-wrapper .btn-primary.disabled {
   color: #b2becd;
 }
 
