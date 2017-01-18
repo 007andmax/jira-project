@@ -2940,6 +2940,11 @@ textarea.autosize {
   margin-bottom: 4px;
   line-height: 12px;
 }
+
+.company-window .custom-phone-number.has-error .control-label{
+  white-space: nowrap;
+}
+
 .form-control-search {
   display: block;
   width: 100%;

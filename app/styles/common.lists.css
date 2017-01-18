@@ -2864,6 +2864,7 @@ Devices tab
 
 .add-service-btn-wrapper .btn {
   float: right;
+  margin-right: 20px;
 }
 
 .all-companies-heading {
