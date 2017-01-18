@@ -2695,7 +2695,7 @@ Devices tab
   cursor: pointer;
 }
 
-.qt-default-services > li:nth-child(even) {
+.services-content .qt-default-services > li:nth-child(even) {
   background-color: #e9f5fb;
 }
 
@@ -3992,17 +3992,6 @@ Devices tab
   display: none !important;
 }
 
-.default-tax-list > li .ha-delete {
-  position: absolute;
-  top: 27px;
-  right: -2px;
-}
-
-.default-tax-list > li .ha-edit {
-  position: absolute;
-  top: 27px;
-  right: 32px;
-}
 
 .default-tax-list > li.new-tax {
   height: auto;
