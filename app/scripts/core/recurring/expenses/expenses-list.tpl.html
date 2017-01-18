@@ -4,14 +4,15 @@
     <div class="table-content pull-left">
       <i class="icn icn-sm icn-update-service"></i>
 
-      <div class="col-1">{{ service.item.name }}</div>
+      <div class="col-sm-2">{{ service.item.name }}</div>
 
-      <div class="col-2" trimmed-popover trimmed-popover-content="service.description">
+      <div class="col-sm-6" trimmed-popover trimmed-popover-content="service.description">
         {{ service.description }}
       </div>
 
-      <div class="col-5">{{ service.sum | currency: '$': 2 }}</div>
-      <div class="col-4">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
+      <div class="col-sm-2">Duration <span class="model">{{ service.quantity | durationFilter }}</span></div>
+
+      <div class="col-sm-2 pull-right">{{ service.sum | currency: '$': 2 }}</div>
 
     </div>
 
