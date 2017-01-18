@@ -541,6 +541,7 @@ ul.qt-recurring-invoices {
 .invoice-table .table-invoice-item div:last-child {
   width: 27%;
   margin-right: 0;
+  min-width: 60px;
 }
 
 .edit-invoice-form .memo-label {

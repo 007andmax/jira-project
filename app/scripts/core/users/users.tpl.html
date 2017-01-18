@@ -117,7 +117,7 @@
   <ul class="qt-list qt-users" ng-if="usersView === 'list'">
 
     <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
-      <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
+      <div class="col-lg-3 col-xs-3" style="padding-left: 15px;" ng-click="setOrderByUsers('name')">
         <span class="sort-span">
           Name
           <i class="icn-sm sort-icon icn-sort"
@@ -141,7 +141,7 @@
         </span>
       </div>
 
-      <div class="col-lg-1 col-xs-1" ng-click="setOrderByUsers('type')">
+      <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('type')">
         <span class="sort-span">
           Type
           <i class="icn-sm sort-icon icn-sort"
@@ -149,7 +149,7 @@
         </span>
       </div>
 
-      <div class="col-lg-1 col-xs-2 text-center">Subscription</div>
+      <div class="col-lg-1 col-xs-2 subscribe-col">Subscription</div>
 
       <div class="col-lg-1 col-xs-1" ng-click="setOrderByUsers('ticket')">
         <span class="sort-span">
@@ -159,7 +159,7 @@
         </span>
       </div>
 
-      <div class="col-lg-2 col-xs-1"></div>
+      <div class="col-lg-2 col-xs-1 buttons-col"></div>
     </li>
 
     <li
@@ -198,7 +198,7 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-1 text-center">
+        <div class="col-lg-1 col-xs-1 type-col text-center">
           <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle>
@@ -224,7 +224,7 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-2 text-center" uib-dropdown>
+        <div class="col-lg-1 col-xs-2  subscribe-col" uib-dropdown>
 
           <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
                uib-tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
@@ -272,13 +272,13 @@
 
         </div>
 
-        <div class="col-lg-1 col-xs-1 text-center">
+        <div class="col-lg-1 col-xs-1 text-center tickets-col">
         <span class="user-submitted-tickets">
           {{ user.userStatistic.ticketsSubmitted || '0' }}
         </span>
         </div>
 
-        <div class="col-lg-2 col-xs-1">
+        <div class="col-lg-2 col-xs-1 buttons-col">
           <div class="list-actions pull-right">
 
             <div class="btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
