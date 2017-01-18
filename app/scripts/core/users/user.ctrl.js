@@ -50,20 +50,6 @@
           }
         };
 
-        $scope.getUserSubscribeTooltip = function () {
-          if (!$scope.user.subscription) {
-            return;
-          }
-
-          if ($scope.user.subscription.ticket && $scope.user.subscription.invoice) {
-            return 'subscriber invoice and ticket updates';
-          } else if ($scope.user.subscription.ticket && !$scope.user.subscription.invoice) {
-            return 'subscriber ticket updates';
-          } else if (!$scope.user.subscription.ticket && $scope.user.subscription.invoice) {
-            return 'subscriber invoice updates';
-          }
-        };
-
         $scope.getPriorityNumberInfo = function (option) {
 
           if (!$scope.user.phoneNumbers || ($scope.user.phoneNumbers.length < 1)) {

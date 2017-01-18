@@ -226,11 +226,12 @@
 
         <div class="col-lg-1 col-xs-2  subscribe-col" uib-dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
-               uib-tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
-            <img src="./images/input-icons/ticket-update-green.png" alt="">
-            <img src="./images/input-icons/invoice-update-orange.png" alt="">
-            <img src="./images/input-icons/tick-manager-blue.png" alt="">
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle tooltip-placement="top">
+            <img src="images/input-icons/ticket-update-green.png" alt="" ng-show="user.subscription.ticket" uib-tooltip="Ticket Updates">
+            <img src="images/input-icons/invoice-update-orange.png" alt="" ng-show="user.subscription.invoice" uib-tooltip="Invoice Updates">
+            <img src="images/input-icons/tick-manager-blue.png" alt="" ng-show="user.subscription.ticketManager" uib-tooltip="Ticket Manages">
+            <img src="images/input-icons/no-subscriptions-strip.png" alt="" uib-tooltip="No Subscriptions"
+                 ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager">
           </div>
 
           <ul class="dropdown-menu dropdown-subscribe">
