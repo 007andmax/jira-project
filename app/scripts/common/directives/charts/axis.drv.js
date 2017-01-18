@@ -6,7 +6,7 @@
     defaults = function () {
       return {
         orientation: 'bottom',
-        ticks: '5',
+        ticks: 5,
         extent: false
       };
     };
@@ -21,7 +21,7 @@
       },
       link: function ($scope, $el, $attrs, chartController) {
         var adjustTickLabels, axisElement, drawGrid, getAxis, grid, label, options, positionLabel,
-          range, redraw, scale, translation, updateScale, rect, text, hoveredGroup;
+          range, redraw, scale, translation, updateScale, rect, text, hoveredGroup, domainMaxValue;
         options = angular.extend(defaults(), $attrs);
 
         if (options.onlyFirstAndLast) {
@@ -121,7 +121,7 @@
           var axis, format, tickSize;
           axis = d3.svg.axis().scale(scale).orient(options.orientation);
           if (options.ticks) {
-            axis.ticks(options.ticks);
+            axis.ticks(!domainMaxValue || domainMaxValue >= 5 ? options.ticks : domainMaxValue);
           }
           if (options.timeScale) {
             axis.ticks(d3.time[options.timeScale], options.timeInterval);
@@ -306,12 +306,31 @@
             return scale.domain(d3.extent(domainValues));
           } else {
             if (options.scale !== 'ordinal') {
-              return scale.domain([0, d3.max(domainValues)]);
+              domainMaxValue = Math.round(roundToNice(d3.max(domainValues)));
+              return scale.domain([0, domainMaxValue]);
             } else {
               return scale.domain(domainValues);
             }
           }
         };
+  
+        function roundToNice(value) {
+          // get the first larger power of 10
+          var log10 = Math.log10 || function (x) { return Math.log(x) / Math.LN10; };
+          var nice = Math.pow(10, Math.ceil(log10(value)));
+    
+          // scale the power to a "nice enough" value
+          if (value <= 0.15 * nice) {
+            nice = 0.15 * nice;
+          } else if (value <= 0.25 * nice) {
+            nice = 0.25 * nice;
+          } else if (value <= 0.5 * nice) {
+            nice = 0.5 * nice;
+          }
+    
+          return nice;
+        }
+        
         chartController.addScale(options.name, scale, updateScale);
         chartController.registerElement(redraw, options.order);
         $scope.$watchCollection('tickValues', chartController.redraw);

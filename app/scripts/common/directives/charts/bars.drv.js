@@ -102,7 +102,7 @@
           }).attr("height", function (d) {
             return chartController.innerHeight - y(d[options.y]);
           }).on("mouseover", function (d, i) {
-            tooltip.transition().duration(200).style("opacity", .9);
+            tooltip.transition().duration(200).style("opacity", .9).style('z-index', 9999);
             chartController.xAxisShowLabel && chartController.xAxisShowLabel(i);
             var postion = angular.element(this).offset();
             return tooltip.html(

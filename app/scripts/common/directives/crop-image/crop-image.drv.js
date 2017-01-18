@@ -54,8 +54,8 @@
               maxUploadSize: 2 * 1024 * 1024,
               accpetType: '.jpg,.png,.gif,.jpeg,.JPG,.PNG,.GIF,.JPEG',
               allowedExtensions: ['jpg', 'png', 'gif', 'jpeg', 'JPG', 'PNG', 'GIF', 'JPEG'],
-              minImageWidth: 100,
-              minImageHeight: 100,
+              minImageWidth: 1,
+              minImageHeight: 1,
               
               onStart: function () {
                 image = {};
@@ -116,7 +116,6 @@
               $scope.options = {
                 maximize: true,
                 aspectRatio: isTechLogo ? 450 / 200 : 1,
-                rotatable: false,
                 crop: getCroppedImage
               };
               

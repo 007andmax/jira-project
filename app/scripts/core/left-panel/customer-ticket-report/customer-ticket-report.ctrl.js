@@ -20,7 +20,13 @@
         $scope.$watch('data', function (data) {
           if (data) {
             if (data.ticketsPerDate && data.ticketsPerDate.length) {
-              $scope.reportChartData = data.ticketsPerDate;
+              $scope.reportChartData = [];
+              for (var i = 0; i < data.ticketsPerDate.length; i++) {
+                var item = data.ticketsPerDate[i];
+                if (item.ticketResolved) {
+                  $scope.reportChartData.push(item);
+                }
+              }
             }
             
             data.startDate = new Date(data.startDate);
@@ -32,9 +38,7 @@
           var result = [];
           for (var i = 0; i < values.length; i++) {
             var item = values[i];
-            if (item.ticketResolved || item.ticketUnresolved || !i || i === values.length - 1) {
-              result.push($filter('date')(new Date(item.date), 'dd MMM'));
-            }
+            result.push($filter('date')(new Date(item.date), 'dd MMM'));
           }
           return result;
         };
@@ -45,9 +49,6 @@
             var item = data[i];
             if (result.indexOf(item.ticketResolved) === -1) {
               result.push(item.ticketResolved);
-            }
-            if (result.indexOf(item.ticketUnresolved) === -1) {
-              result.push(item.ticketUnresolved);
             }
           }
           return result;

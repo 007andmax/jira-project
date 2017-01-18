@@ -29,19 +29,21 @@
             <tbody>
             <tr>
               <td rowspan="2" colspan="1" class="summary-chart">
-                <div chart-data-restriction margin="80" divider="45" ng-if="reportChartData && reportChartData.length"
+                <div chart-data-restriction margin="80" divider="20" ng-if="reportChartData && reportChartData.length"
                      handle-data="reportChartData" style="height: 100%">
 
                   <div d3chart data="chartData" margin="{ top: 10, right: 40, bottom: 30, left: 40}"
                        on-finish-rendering="buildPdf" style="height: 100%">
                     <d3axis name="date" scale="ordinal" orientation="bottom" filter="parseDate"
-                            ticks="{{ chartTicks.length }}" tick-values="chartTicks"></d3axis>
-                    <d3axis name="tickets" orientation="left" filter="groupBars"></d3axis>
+                            ticks="{{ chartTicks.length }}" tick-values="chartTicks"
+                            first-tick-dy="-10000" first-tick-dx="-10000"
+                            last-tick-dy="-10000" last-tick-dx="-10000"></d3axis>
+                    <d3axis name="tickets" orientation="left" filter="groupBars" ></d3axis>
 
                     <d3bars x="date" y="ticketResolved" yscale="tickets" color="#4caf50"
-                            width="15" offset="17" chart-tooltip="chart"></d3bars>
-                    <d3bars x="date" y="ticketUnresolved" yscale="tickets" color="#0094d0"
-                            width="15" offset="-2" chart-tooltip="chart"></d3bars>
+                            width="20" chart-tooltip="chart"></d3bars>
+                    <!--<d3bars x="date" y="ticketUnresolved" yscale="tickets" color="#0094d0"-->
+                            <!--width="15" offset="-2" chart-tooltip="chart"></d3bars>-->
                   </div>
 
                 </div>

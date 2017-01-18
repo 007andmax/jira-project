@@ -1,4 +1,9 @@
 /* Axis */
+.d3 .axis.axis-bottom .tick:first-child,
+.d3 .axis.axis-bottom .tick:last-of-type{
+  display: none;
+}
+
 .d3 .axis line {
   fill: none;
   stroke-width: 1px;
