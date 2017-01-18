@@ -496,7 +496,7 @@
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
                   <div class="col-2 col-2-has-serial-number" style="border-left: 0;"
-                       uib-tooltip="{{ product.item.description }}"
+                       uib-tooltip="{{ product.item.description }}" tooltip-class="fixed-tooltip"
                        tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0"
                        ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
                     <span trimmed-tooltip-container>{{ product.item.description }}</span>

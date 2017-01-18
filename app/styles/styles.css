@@ -2941,6 +2941,13 @@ textarea.autosize {
   line-height: 12px;
 }
 
+.fixed-tooltip .tooltip-inner{
+  white-space: normal;
+  word-break: break-all;
+  width: 200px;
+  height: auto;
+}
+
 .company-window .custom-phone-number.has-error .control-label{
   white-space: nowrap;
 }
