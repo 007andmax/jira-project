@@ -12,6 +12,7 @@
           },
           link: function (scope, element, attrs) {
             var $body = angular.element(document.body), image;
+            var isTechLogo = scope.$eval(scope.isTechLogo);
             
             //delete image
             var restoreDefaultButton = element.find('[restore-default-button]');
@@ -48,7 +49,7 @@
             
             //load image and show crop modal
             element.find('[crop-image-button]').fileUploader({
-              uploadUrl: '/file?isAvatar=true',
+              uploadUrl: '/file?isAvatar=true&ratio=' + (isTechLogo ? 2.25 : 1),
               uploadName: 'file',
               maxUploadSize: 2 * 1024 * 1024,
               accpetType: '.jpg,.png,.gif,.jpeg,.JPG,.PNG,.GIF,.JPEG',
@@ -75,8 +76,7 @@
                 console.error(message);
               }
             });
-
-            var isTechLogo = scope.$eval(scope.isTechLogo);
+            
             function showCropper(image) {
               $uibModal.open({
                 animation: true,
@@ -160,7 +160,7 @@
                 if (timeout) {
                   $timeout.cancel(timeout);
                 }
-                
+  
                 timeout = $timeout(function () {
                   $scope.source.x = dataNew.x;
                   $scope.source.y = dataNew.y;
@@ -169,9 +169,8 @@
   
                   Cropper.crop(blob, dataNew).then(Cropper.encode).then(function (base64) {
                     $scope.preview = base64;
-                    timeout = undefined;
-                  })
-                }, 100);
+                  });
+                }, 250);
               }
   
               function getBase64FromImageUrl(url, callback) {
