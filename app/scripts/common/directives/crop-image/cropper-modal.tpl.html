@@ -3,7 +3,7 @@
     <i class="icn-sm icn-remove-token"></i>
   </div>
   <div class="img-crop">
-    <img ng-src="{{ source.origin.base64 }}"
+    <img ng-src="{{ source.origin.base64 }}" ng-hide="!cropperReady"
          ng-cropper
          ng-cropper-show="'show.cropper'"
          ng-cropper-hide="'hide.cropper'"

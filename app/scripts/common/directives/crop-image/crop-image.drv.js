@@ -154,6 +154,12 @@
                 $scope.$broadcast('hide.cropper');
                 $uibModalInstance.close(resp);
               };
+  
+              $scope.$on('show.cropper', function () {
+                $timeout(function () {
+                  $scope.cropperReady = true;
+                }, 50);
+              });
               
               function getCroppedImage(dataNew) {
                 if (timeout) {
