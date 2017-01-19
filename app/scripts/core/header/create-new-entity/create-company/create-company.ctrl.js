@@ -12,6 +12,8 @@
                 TaxRatesService, AddressesService, ServicesService, PhoneFormats,
                 SharedStateService, $state, $timeout, $rootScope, PermissionsService) {
 
+        $scope.descriptionMaxLength = 300;
+
         var newServiceCounter = 0, newTaxCounter = 0;
         var steps = ['info', 'location', 'contact', 'billing', 'agent'];
         var savedState = $scope.getLastSavedState('company');
