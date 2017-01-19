@@ -14,7 +14,6 @@
     padding: 15px 12px 10px 13px;
     border-left:3px solid #0071bc;
     background: #fff;
-    cursor: pointer;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -113,7 +112,8 @@
         height: 160px; }
     .card-wrapper .card__stats {
       border-top: 1px solid #eee;
-      padding: 10px 0; }
+      padding: 10px 0;
+      cursor: pointer; }
       .card-wrapper .card__stats div {
         display: inline-block;
         float: left;
@@ -141,6 +141,7 @@
   background: url("../images/input-icons/hardware-report/edit.png") no-repeat;
   background-size: cover;
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .card-wrapper .card .card-header .edit-icn:hover {
@@ -162,6 +163,11 @@
   margin-right: 20px;
   float: left;
   background-size:cover !important;
+  cursor: pointer;
+}
+
+.users-content .card-wrapper .card .card-header .photo{
+  cursor: auto;
 }
 
 .card-wrapper .card .card-header .name {
@@ -177,6 +183,7 @@
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  line-height: 12px !important;
 }
 
 .ticket-count{
@@ -224,7 +231,7 @@
 
 .card-footer img{
   padding: 12px 5px;
-}
+  cursor: pointer;}
 
 
 .cards-sub-dropdown{

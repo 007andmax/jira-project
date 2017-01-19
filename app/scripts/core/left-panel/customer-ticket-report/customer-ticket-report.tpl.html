@@ -15,15 +15,15 @@
     <div class="customer-ticket" ng-if="data">
       <div class="customer-ticket__report">
         <div class="customer-ticket__report--summary">
-          <h2>Tickets Summary</h2>
+          <h3>Tickets Summary</h3>
           <div>
-            <h3>
+            <h4>
               {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '')
               }}
               <span class="pull-right" style="font-size: 14px;min-width: 170px">
               {{ (data.startDate | date: 'MM/dd/yyyy') + ' - ' + (data.endDate | date: 'MM/dd/yyyy') }}
             </span>
-            </h3>
+            </h4>
           </div>
           <table>
             <tbody>
@@ -67,7 +67,7 @@
           </ul>
         </div>
         <div class="customer-ticket__report--details clearfix">
-          <h2>Tickets details</h2>
+          <h3>Tickets details</h3>
           <div class="clearfix report-info-point" ng-repeat="ticket in data.tickets"
                on-finish-render="buildPdf('tickets')">
             <table class="dont-break">

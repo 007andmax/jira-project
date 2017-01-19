@@ -37,6 +37,9 @@
 .custom-phone-type.no-label {
   margin-top: 20px;
 }
+.create-user-container .custom-phone-type.no-label .pull-left.dropdown{
+  width: 78%;
+}
 
 @-moz-document url-prefix() {
   .settings-sidebar > ul > li > a {

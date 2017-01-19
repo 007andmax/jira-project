@@ -495,37 +495,32 @@
                    ng-repeat="product in ticketUpdate.products | orderBy: 'itemOrder'"
                    ng-if="ticketUpdate.type === 'PRODUCT'">
                 <div class="table-content pull-left" ng-class="{'hide': product.id === editExpenseId}">
-                  <div class="col-2 col-2-has-serial-number" style="border-left: 0;"
-                       uib-tooltip="{{ product.item.description }}"
-                       tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0"
+                  <div class="col-2 col-2-has-serial-number fixed-tooltip" style="border-left: 0;"
                        ng-class="{'has-ilc-pn': product.item.ilc || product.item.manufacture}">
-                    <span trimmed-tooltip-container>{{ product.item.description }}</span>
-                    <div style="color:#b2becd;position: absolute;top: 14px;font-size: 13px;">
+                    <span class="ellipsis" uib-tooltip="{{ product.item.description }}"
+                           trimmed-tooltip-checker="product.item.description"></span>
+                    <div style="color:#b2becd;position: absolute;top: 16px;font-size: 13px;">
                       <span ng-show="product.item.ilc && product.item.ilc.length > 0">ILC: {{ product.item.ilc }}</span>
                       <span ng-show="product.item.manufacture && product.item.manufacture.length > 0"
-                            style="margin-left: 15px;">P/N: {{ product.item.manufacture }}</span>
+                           >P/N: {{ product.item.manufacture }}</span>
                     </div>
                   </div>
                   <div class="col-3" ng-if="product.serialNumber" uib-tooltip="{{ product.serialNumber }}"
-                       tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
-                    <span trimmed-tooltip-container>{{ product.serialNumber }}</span>
+                       trimmed-tooltip-checker="product.serialNumber">
                   </div>
                   <div class="col-5" ng-show="ticketDetails.status === 'COMPLETED'"
                        uib-tooltip="{{ product.sum | currency :'$':2 }}"
-                       tooltip-enable="{{ isShowTooltip[2]() }}" trimmed-tooltip="2">
-                    <span trimmed-tooltip-container>{{ product.sum | currency:'$':2 }}</span>
+                       trimmed-tooltip-checker="product.sum | currency:'$':2">
                   </div>
                   <div class="col-5" ng-show="ticketDetails.status !== 'COMPLETED'"
                        uib-tooltip="{{ product.item.sale * product.quantity || ''| currency :'$':2 }}"
-                       tooltip-enable="{{ isShowTooltip[3]() }}" trimmed-tooltip="3">
-                    <span
-                      trimmed-tooltip-container>{{ product.item.sale * product.quantity || '' | currency :'$':2 }}</span>
+                       trimmed-tooltip-checker="product.item.sale * product.quantity || '' | currency :'$':2">
                   </div>
-                  <div class="col-4" uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
-                       tooltip-enable="{{ isShowTooltip[4]() }}" trimmed-tooltip="4">
-                    <span trimmed-tooltip-container>
-                      {{ product.item.sale | currency:'$':2 }}<span class="model">Qty {{ product.quantity }}</span>
+                  <div class="col-4" >
+                    <span uib-tooltip="{{ (product.item.sale | currency:'$':2) + '  Qty ' + product.quantity }}"
+                          trimmed-tooltip-checker="product.item.sale | currency:'$':2">
                     </span>
+                    <span class="model">Qty {{ product.quantity }}</span>
                   </div>
                   <div class="table-content-action pull-right">
                     <a class="hit-area pull-right has-tooltip"

@@ -11,10 +11,8 @@
       </div>
 
       <p ng-if="!globalSearch.selectedItemsCount && (globalSearch.openedItemName || getPageNameByState())">
-        <strong
-          uib-tooltip="{{ globalSearch.openedItemName ? globalSearch.openedItemName  : userReadable(getPageNameByState()) }}"
-          tooltip-placement="bottom" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
-          <span trimmed-tooltip-container>
+        <strong>
+          <span>
             {{ globalSearch.openedItemName ? globalSearch.openedItemName : userReadable(getPageNameByState()) }}
           </span>
         </strong>
@@ -194,10 +192,9 @@
         <div class="nickname-wrap" uib-dropdown-toggle>
           <!--<i ng-class="{'on': currentUser.online, 'busy': !currentUser.online}"-->
           <!--ng-click="currentUser.online = !currentUser.online"></i>-->
-          <div class="nickname" uib-tooltip="{{ getUserName(currentUser) }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
+          <div class="nickname">
             <i class="on"></i>
-            <span style="margin: 0 5px;" trimmed-tooltip-container>{{ getUserName(currentUser) }}</span>
+            <span style="margin: 0 5px;">{{ getUserName(currentUser) }}</span>
             <i class="icn-sm icn-expand"></i>
             <i class="icn-sm icn-collapse"></i>
           </div>

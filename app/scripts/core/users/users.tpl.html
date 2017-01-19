@@ -21,8 +21,7 @@
             <div class="edit-icn" create-new-entity="user" item="user"></div>
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
             <p class="ellipsis name" uib-tooltip="{{ getUserName(user) }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[10 + $index]() }}" trimmed-tooltip="{{ 10 + $index }}">
-              <span trimmed-tooltip-container>{{ getUserName(user) }}</span>
+               trimmed-tooltip-checker="getUserName(user)">
             </p>
             <span class="badge badge-default">{{ user.designation }}</span>
           </div>
@@ -31,8 +30,7 @@
               <img src="images/company/company-profile-blue.png" alt="" stop-propagation="click"
                    ui-sref="companyProfile({ companyId: user.company.id })">
               <p uib-tooltip="{{ getUserCompanyName(user) }}" tooltip-placement="bottom"
-                 tooltip-enable="{{ isShowTooltip[0 + $index]() }}" trimmed-tooltip="{{ 0 + $index }}">
-                <span trimmed-tooltip-container>{{ getUserCompanyName(user) }}</span>
+                 trimmed-tooltip-checker="getUserCompanyName(user)">
               </p>
             </div>
             <div class="clearfix"
@@ -48,13 +46,12 @@
             <div class="clearfix" ng-if="user.primaryEmail">
               <img src="images/company/email-purple.png" alt="" email-to="user.primaryEmail" stop-propagation="click">
               <p style="width: 275px;" class="ellipsis" uib-tooltip="{{ user.primaryEmail }}" tooltip-placement="bottom"
-                 tooltip-enable="{{ isShowTooltip[1 + $index]() }}" trimmed-tooltip="{{ 1 + $index }}">
-                <span trimmed-tooltip-container>{{ user.primaryEmail }}</span>
+                 trimmed-tooltip-checker="user.primaryEmail">
               </p>
             </div>
             <div class="clearfix">
               <span class="ticket-count">{{ user.userStatistic.ticketsSubmitted || 0 }}</span>
-              <p style="padding-left: 0;" ng-click="goToUserTickets(user)"><a style="padding-left: 10px;" href="">View Tickets</a></p>
+              <span style="padding-left: 0;" ng-click="goToUserTickets(user)"><a style="padding-left: 10px;" href="">View Tickets</a></span>
             </div>
           </div>
           <div class="card-footer clearfix">
@@ -117,7 +114,7 @@
   <ul class="qt-list qt-users" ng-if="usersView === 'list'">
 
     <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
-      <div class="col-lg-3 col-xs-3" ng-click="setOrderByUsers('name')">
+      <div class="col-lg-3 col-xs-3" style="padding-left: 15px;" ng-click="setOrderByUsers('name')">
         <span class="sort-span">
           Name
           <i class="icn-sm sort-icon icn-sort"
@@ -141,7 +138,7 @@
         </span>
       </div>
 
-      <div class="col-lg-1 col-xs-1" ng-click="setOrderByUsers('type')">
+      <div class="col-lg-1 col-xs-1 type-col" ng-click="setOrderByUsers('type')">
         <span class="sort-span">
           Type
           <i class="icn-sm sort-icon icn-sort"
@@ -149,7 +146,7 @@
         </span>
       </div>
 
-      <div class="col-lg-1 col-xs-2 text-center">Subscription</div>
+      <div class="col-lg-1 col-xs-2 subscribe-col">Subscription</div>
 
       <div class="col-lg-1 col-xs-1" ng-click="setOrderByUsers('ticket')">
         <span class="sort-span">
@@ -159,7 +156,7 @@
         </span>
       </div>
 
-      <div class="col-lg-2 col-xs-1"></div>
+      <div class="col-lg-2 col-xs-1 buttons-col"></div>
     </li>
 
     <li
@@ -174,9 +171,8 @@
               <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
             </div>
 
-              <div class="user-name pull-left" trimmed-tooltip="{{ 3 + $index }}"
-                   uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[3 + $index]() }}">
-                <p trimmed-tooltip-container>{{ getUserName(user) }}</p>
+              <div class="user-name pull-left">
+                <p class="ellipsis" uib-tooltip="{{ getUserName(user) }}" trimmed-tooltip-checker="getUserName(user)"></p>
                 <p class="label label-light">{{ user.designation }}</p>
               </div>
 
@@ -198,7 +194,7 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-1 text-center">
+        <div class="col-lg-1 col-xs-1 type-col text-center">
           <div class="user-account-type" uib-dropdown>
 
             <div aria-expanded="false" uib-dropdown-toggle>
@@ -224,13 +220,14 @@
           </div>
         </div>
 
-        <div class="col-lg-1 col-xs-2 text-center" uib-dropdown>
+        <div class="col-lg-1 col-xs-2  subscribe-col" uib-dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
-               uib-tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
-            <img src="./images/input-icons/ticket-update-green.png" alt="">
-            <img src="./images/input-icons/invoice-update-orange.png" alt="">
-            <img src="./images/input-icons/tick-manager-blue.png" alt="">
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle tooltip-placement="top">
+            <img src="images/input-icons/ticket-update-green.png" alt="" ng-show="user.subscription.ticket" uib-tooltip="Ticket Updates">
+            <img src="images/input-icons/invoice-update-orange.png" alt="" ng-show="user.subscription.invoice" uib-tooltip="Invoice Updates">
+            <img src="images/input-icons/tick-manager-blue.png" alt="" ng-show="user.subscription.ticketManager" uib-tooltip="Ticket Manages">
+            <img src="images/input-icons/no-subscriptions-strip.png" alt="" uib-tooltip="No Subscriptions"
+                 ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager">
           </div>
 
           <ul class="dropdown-menu dropdown-subscribe">
@@ -272,13 +269,13 @@
 
         </div>
 
-        <div class="col-lg-1 col-xs-1 text-center">
+        <div class="col-lg-1 col-xs-1 text-center tickets-col">
         <span class="user-submitted-tickets">
           {{ user.userStatistic.ticketsSubmitted || '0' }}
         </span>
         </div>
 
-        <div class="col-lg-2 col-xs-1">
+        <div class="col-lg-2 col-xs-1 buttons-col">
           <div class="list-actions pull-right">
 
             <div class="btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"

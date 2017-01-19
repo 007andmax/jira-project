@@ -69,8 +69,8 @@
         </li>
 
         <li class="list-heading" style="border-top: none;" ng-show="taxRates.length > 0">
-          <div class="col-1">Tax description</div>
-          <div class="col-2">Tax percent</div>
+          <div class="col-xs-5">Tax description</div>
+          <div class="col-xs-5">Tax percent</div>
         </li>
 
         <li class="tax-list" ng-repeat="tax in taxRates | orderBy: 'code'" ng-class="{'new-tax': isEditing}"
@@ -79,21 +79,23 @@
 
           <div class="helping-additional-class" ng-class="{'hide': isEditing}">
 
-            <div class="col-1">{{ tax.code }}</div>
+            <div class="col-xs-6">{{ tax.code }}</div>
 
-            <div class="col-2">{{ tax.rate }}%</div>
+            <div class="col-xs-5">{{ tax.rate }}%</div>
 
-            <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
-               ng-click="deleteTaxRate()"
-               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
-              <i class="icn-sm icn-delete"></i>
-            </a>
+            <div class="col-xs-1">
+              <a href="javascript:void(0)" class="ha-delete hit-area pull-right has-tooltip"
+                 ng-click="deleteTaxRate()"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Delete">
+                <i class="icn-sm icn-delete"></i>
+              </a>
 
-            <a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"
-               ng-click="editTaxRate(editTaxRateForm)"
-               tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">
-              <i class="icn-sm icn-edit"></i>
-            </a>
+              <a href="javascript:void(0)" class="ha-edit hit-area has-tooltip"
+                 ng-click="editTaxRate(editTaxRateForm)"
+                 tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="edit">
+                <i class="icn-sm icn-edit"></i>
+              </a>
+            </div>
 
           </div>
 

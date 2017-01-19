@@ -54,8 +54,8 @@
       <div class="intermediate-parent-elem">
 
         <div class="col-2" ng-class="{'product-description': category.default}"
-             uib-tooltip="{{ product.description }}" tooltip-enable="{{ isShowTooltip[0]() }}" trimmed-tooltip="0">
-          <span trimmed-tooltip-container>{{ product.description }}</span>
+             uib-tooltip="{{ product.description }}"
+             trimmed-tooltip-checker="product.description">
         </div>
 
         <div class="col-4" ng-if="PermissionsService.isAllowed('VIEW_PRODUCT_COST')">

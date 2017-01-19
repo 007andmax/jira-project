@@ -327,8 +327,13 @@
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('accounting.billable')}"
-             ng-click="stateGo($event, 'accounting')">
+             ng-click="stateGo($event, 'accounting.billable')">
           Billable
+        </div>
+       <div class="center-category__category"
+             ng-class="{active: $state.includes('accounting.recurring')}"
+             ng-click="stateGo($event, 'accounting.recurring')">
+          Recurring
         </div>
         <div class="center-category__category"
              ng-class="{active: $state.includes('receivable')}"

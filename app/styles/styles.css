@@ -792,15 +792,9 @@ hr {
 }
 .company-profile-content {
   float: left;
-  width: calc(100% - 277px);
-  padding: 0 30px 30px;
-  height: 100vh;
-}
-.right-panel-closed .company-profile-content {
-  float: left;
   width: 100%;
-  padding: 0 10px 30px;
 }
+
 .company-profile-content.companies-list {
   padding-left: 0;
   padding-top: 0;
@@ -2946,6 +2940,18 @@ textarea.autosize {
   margin-bottom: 4px;
   line-height: 12px;
 }
+
+.fixed-tooltip .tooltip-inner{
+  white-space: normal;
+  word-break: break-all;
+  width: 200px;
+  height: auto;
+}
+
+.company-window .custom-phone-number.has-error .control-label{
+  white-space: nowrap;
+}
+
 .form-control-search {
   display: block;
   width: 100%;

@@ -11,8 +11,7 @@
           </div>
           <div class="company-name-header" style="width: 240px;">
             <p class="ellipsis" uib-tooltip="{{ company.name }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[10]() }}" trimmed-tooltip="10">
-              <span trimmed-tooltip-container>{{ company.name }}</span>
+               trimmed-tooltip-checker="company.name">
             </p>
           </div>
           <div class="company-info-type clearfix"
@@ -34,18 +33,18 @@
             <p><strong>Account Number:</strong>{{ companyData.accountNumber }}</p>
           </div>
           <div class="company-contact-type first-of-type">
-            <p class="ellipsis" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[11]() }}" trimmed-tooltip="11">
+            <div class="ellipsis">
               <strong>Primary contact:</strong>
-              <span trimmed-tooltip-container>{{ getUserName(currentContact) }}</span>
-            </p>
+              <p class="ellipsis" style="display: inline-block; width: 200px;" uib-tooltip="{{ getUserName(currentContact) }}" tooltip-placement="bottom"
+                    trimmed-tooltip-checker="getUserName(currentContact)"></p>
+            </div>
           </div>
           <div class="company-contact-type" ng-show="currentContact.primaryEmail">
-            <p class="ellipsis" uib-tooltip="{{ currentContact.primaryEmail }}" tooltip-placement="bottom"
-               tooltip-enable="{{ isShowTooltip[12]() }}" trimmed-tooltip="12">
+            <div class="ellipsis">
               <strong>Contact email:</strong>
-              <span trimmed-tooltip-container>{{ currentContact.primaryEmail }}</span>
-            </p>
+              <p style="display: inline-block; width: 210px;" class="ellipsis" uib-tooltip="{{ currentContact.primaryEmail }}" tooltip-placement="bottom"
+                    trimmed-tooltip-checker="currentContact.primaryEmail"></p>
+            </div>
           </div>
           <div class="company-contact-type"
                ng-show="currentContact.phoneNumbers && currentContact.phoneNumbers.length && currentContact.phoneNumbers[0].number">
@@ -89,6 +88,12 @@
             <div class="icn icn-archive-usr" ng-if="PermissionsService.isAllowed('ARCHIVE_COMPANIES')"
                  ng-click="archiveCompany()" uib-tooltip="Archive Company"
                  tooltip-placement="top" tooltip-append-to-body="true">
+            </div>
+
+            <div ng-show="companyData.description"
+              qt-custom-popover-template="/html/scripts/core/companies/company-profile/company-description-popover.tpl.html"
+              qt-popover-position="bottom-left-align" class="icn">
+              <div class="icn icn-company-description" qt-popover-trigger="mouseenter">!!</div>
             </div>
           </div>
         </div>

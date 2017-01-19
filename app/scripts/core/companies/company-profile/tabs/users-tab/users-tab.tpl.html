@@ -51,19 +51,18 @@
                 <img ng-src="{{ getUserAvatarUrl(user) }}" alt="..." class="img-circle avatar-38">
                 <i class="on bottom"></i>
               </div>
-
-              <div class="user-name" trimmed-tooltip="0"
-                   uib-tooltip="{{ getUserName(user) }}" tooltip-enable="{{ isShowTooltip[0]() }}">
-                <p trimmed-tooltip-container>{{ getUserName(user) }}</p>
-                <p class="label label-light">{{ user.designation }}</p>
-              </div>
+                <div style="width: 90%;">
+                  <p style="padding-right: 10px;" class="user-name" uib-tooltip="{{ getUserName(user) }}"
+                     trimmed-tooltip-checker="getUserName(user)">
+                  </p>
+                  <p class="label label-light">{{ user.designation }}</p>
+                </div>
             </div>
         </div>
 
         <div class="col-1-1">
-          <p class="ellipsis text-center" trimmed-tooltip="8" uib-tooltip="{{ user.primaryEmail }}"
-             tooltip-enable="{{ isShowTooltip[8]() }}">
-            <span trimmed-tooltip-container>{{ user.primaryEmail }}</span>
+          <p class="ellipsis text-center" uib-tooltip="{{ user.primaryEmail }}"
+             trimmed-tooltip-checker="user.primaryEmail">
           </p>
         </div>
 
@@ -108,11 +107,12 @@
 
         <div class="col-3-2" uib-dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle
-               uib-tooltip="{{ getUserSubscribeTooltip(user) }}" tooltip-placement="top">
-            <img src="./images/input-icons/ticket-update-green.png" alt="">
-            <img src="./images/input-icons/invoice-update-orange.png" alt="">
-            <img src="./images/input-icons/tick-manager-blue.png" alt="">
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle tooltip-placement="top">
+            <img src="images/input-icons/ticket-update-green.png" alt="" ng-show="user.subscription.ticket" uib-tooltip="Ticket Updates">
+            <img src="images/input-icons/invoice-update-orange.png" alt="" ng-show="user.subscription.invoice" uib-tooltip="Invoice Updates">
+            <img src="images/input-icons/tick-manager-blue.png" alt="" ng-show="user.subscription.ticketManager" uib-tooltip="Ticket Manages">
+            <div class="no-subscribe" uib-tooltip="No Subscriptions"
+                 ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager"></div>
           </div>
 
           <ul class="dropdown-menu dropdown-subscribe">

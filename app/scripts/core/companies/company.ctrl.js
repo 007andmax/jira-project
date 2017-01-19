@@ -58,20 +58,6 @@
           }
         };
 
-        $scope.getUserSubscribeTooltip = function () {
-          if (!$scope.primaryContact || !$scope.primaryContact.subscription) {
-            return;
-          }
-
-          if ($scope.primaryContact.subscription.ticket && $scope.primaryContact.subscription.invoice) {
-            return 'subscriber invoice and ticket updates';
-          } else if ($scope.primaryContact.subscription.ticket && !$scope.primaryContact.subscription.invoice) {
-            return 'subscriber ticket updates';
-          } else if (!$scope.primaryContact.subscription.ticket && $scope.primaryContact.subscription.invoice) {
-            return 'subscriber invoice updates';
-          }
-        };
-
       }]);
 
 }());

@@ -1372,6 +1372,7 @@ span.sort-span {
 .tech-company-logo .create-user-avatar .avatar img {
   max-width: 450px;
   width: 100%;
+  height: 100%;
 }
 .tech-company-logo .create-user-avatar .avatar .no-avatar {
   width: auto;

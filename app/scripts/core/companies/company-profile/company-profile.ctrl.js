@@ -126,22 +126,6 @@
           }
         };
 
-        $scope.getUserSubscribeTooltip = function (user) {
-          if (!user || !user.subscription) {
-            return;
-          }
-
-          if (user.subscription.ticket && user.subscription.invoice) {
-            return 'subscriber invoice and ticket updates';
-          } else if (user.subscription.ticket && !user.subscription.invoice) {
-            return 'subscriber ticket updates';
-          } else if (!user.subscription.ticket && user.subscription.invoice) {
-            return 'subscriber invoice updates';
-          } else {
-            return 'click to choose subscriber';
-          }
-        };
-
         $scope.toggleCollapsed = function () {
           $scope.isCollapsed = !$scope.isCollapsed;
         };

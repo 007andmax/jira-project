@@ -85,8 +85,7 @@
           <div class="checkbox-caption">
 
             <span uib-tooltip="{{ (device.hostName | unknownFilter) || device.ipAddress }}"
-                  trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
-              <span trimmed-tooltip-container>{{ (device.hostName | unknownFilter) || device.ipAddress }}</span>
+                  trimmed-tooltip-checker="(device.hostName | unknownFilter) || device.ipAddress">
             </span>
 
             <a href="javascript:void(0)" class="hit-area pull-right" ng-show="(device.description | unknownFilter)"
@@ -165,8 +164,7 @@
 
       <div class="col-4">
         <div class="device-manufacturer" uib-tooltip="{{ (device.manufacturer | unknownFilter) || 'not defined' }}"
-             tooltip-enable="{{ isShowTooltip[1]() }}" trimmed-tooltip="1">
-          <span trimmed-tooltip-container>{{ (device.manufacturer | unknownFilter) || 'not defined' }}</span>
+             trimmed-tooltip-checker="(device.manufacturer | unknownFilter) || 'not defined'">
         </div>
       </div>
 
