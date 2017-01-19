@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <div style="background: #eee" ng-if="usersView === 'grid'">
+  <div style="background: #edf2f6" ng-if="usersView === 'grid'">
     <div ui-view></div>
 
     <div class="card-view-wrapper clearfix">
@@ -226,8 +226,8 @@
             <img src="images/input-icons/ticket-update-green.png" alt="" ng-show="user.subscription.ticket" uib-tooltip="Ticket Updates">
             <img src="images/input-icons/invoice-update-orange.png" alt="" ng-show="user.subscription.invoice" uib-tooltip="Invoice Updates">
             <img src="images/input-icons/tick-manager-blue.png" alt="" ng-show="user.subscription.ticketManager" uib-tooltip="Ticket Manages">
-            <img src="images/input-icons/no-subscriptions-strip.png" alt="" uib-tooltip="No Subscriptions"
-                 ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager">
+            <div class="no-subscribe" uib-tooltip="No Subscriptions"
+                 ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager"></div>
           </div>
 
           <ul class="dropdown-menu dropdown-subscribe">

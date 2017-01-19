@@ -24,7 +24,7 @@
            ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceDescription')}">
         <input type="text" class="form-control" placeholder="Description"
                ng-model="serviceExpense.description" ng-maxlength="2000"
-               name="serviceDescription" max-length-word="30"/>
+               name="serviceDescription" max-length-word="100"/>
       </div>
       <div class="col-5" ng-class="{'has-error': isShowingErrors(addServiceForm, 'serviceData')}">
         <div>

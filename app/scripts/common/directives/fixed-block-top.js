@@ -38,12 +38,12 @@
             //todo: allow to adjust styles
             if (top > 0) {
               element.css({
-                'background-color': scope.backgroundColor || 'rgba(255, 255, 255, 0.87)',
+                'background-color': scope.backgroundColor || 'rgba(255, 255, 255, 1)',
                 'z-index': 999
               });
             } else {
               element.css({
-                'background-color': scope.backgroundColor || 'transparent',
+                'background-color': scope.backgroundColor || 'rgba(255, 255, 255, 1)',
                 'z-index': 'initial'
               });
             }

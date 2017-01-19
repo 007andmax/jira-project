@@ -15,7 +15,7 @@
     <div class="customer-ticket" ng-if="data">
       <div class="customer-ticket__report">
         <div class="customer-ticket__report--summary">
-          <h3>Tickets Summary</h3>
+          <h3>Resolved tickets</h3>
           <div>
             <h4>
               {{ getCompanyById(data.companyId).name + (data.userId ? ', ' + getUserName(getUserById(data.userId)) : '')
@@ -61,10 +61,6 @@
             </tr>
             </tbody>
           </table>
-          <ul class="legend-customer clearfix">
-            <li class="resolved"> - Resolved</li>
-            <li class="unresolved"> - Unresolved</li>
-          </ul>
         </div>
         <div class="customer-ticket__report--details clearfix">
           <h3>Tickets details</h3>
@@ -132,9 +128,9 @@
                 </div>
               </div>
             </div>
-            <h4 style="text-align: right;" ng-if="ticket.techUserId">
+            <p style="text-align: right; margin: 5px 0;" ng-if="ticket.techUserId">
               <strong>Tech:</strong> {{ getUserName(getUserById(ticket.techUserId)) }}
-            </h4>
+            </p>
           </div>
         </div>
       </div>

@@ -141,14 +141,14 @@
   text-overflow: ellipsis;
 }
 
-.users-list-wrapper .no-subscribe{
+.qt-list.qt-users .no-subscribe{
   width: 20px;
   height: 20px;
   margin: 0 5px;
   position: relative;
 }
 
-.users-list-wrapper .no-subscribe:before{
+.qt-list.qt-users .no-subscribe:before{
   display: block;
   position: absolute;
   top: 9px;
@@ -156,7 +156,7 @@
   width: 100%;
   height: 2px;
   background-color: #748498;
-  
+
   content: '';
 }
 

@@ -9896,7 +9896,8 @@ button.close {
 }
 .change-view-actions{
   text-align: right;
-  margin: 10px;
+  padding: 10px;
+  background-color: #edf2f6;
 }
 .change-view-actions .view-change-btn{
   width: 30px;
@@ -9908,6 +9909,13 @@ button.close {
 .change-view-actions .svg-icn{
   width: 70%;
 }
+
+.table-wrapper .table-content .col-3.service-descr{
+  overflow: visible;
+  white-space: normal;
+  word-break: break-all;
+}
+
 .bootstrap-datetimepicker-widget.dropdown-menu{
   width: 298px;
 }
