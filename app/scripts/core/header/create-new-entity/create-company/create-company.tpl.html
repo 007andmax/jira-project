@@ -125,9 +125,9 @@
           <label class="control-label">Note</label>
 
           <textarea class="form-control" ng-model="editCompany.description" name="companyDescription"
-                    maxlength="80" ng-trim="false" make-dirty-on-blur></textarea>
+                    maxlength="{{ descriptionMaxLength }}" ng-trim="false" make-dirty-on-blur></textarea>
 
-          <div class="word-count">{{ 80 - editCompany.description.length }}</div>
+          <div class="word-count">{{ descriptionMaxLength - editCompany.description.length }}</div>
         </div>
       </div>
     </div>
