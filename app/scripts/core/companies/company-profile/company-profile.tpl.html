@@ -29,7 +29,7 @@
           <div class="company-service-type" ng-show="companyData.clientType">
             <p><strong>Client Type:</strong>{{ userReadable(companyData.clientType) }}</p>
           </div>
-          <div class="company-service-type" ng-show="companyData.clientType.toLowerCase() === 'vendor'">
+          <div class="company-service-type clearfix" ng-show="companyData.clientType.toLowerCase() === 'vendor'">
             <p><strong>Account Number:</strong>{{ companyData.accountNumber }}</p>
           </div>
           <div class="company-contact-type first-of-type">
@@ -81,6 +81,14 @@
 
             <div class="icn icn-address" ng-click="chartHidden = !chartHidden"
                  uib-tooltip="Show {{ chartHidden ? 'Chart' : 'Map' }}" tooltip-placement="top"></div>
+
+            <div ng-show="companyData.description"
+                 style="margin-right: 10px;"
+                 qt-custom-popover-template="/html/scripts/core/companies/company-profile/company-description-popover.tpl.html"
+                 qt-popover-position="bottom-left-align" class="icn">
+              <div class="icn icn-note" qt-popover-trigger="mouseenter"></div>
+            </div>
+
             <div class="icn icn-edit-new" ng-if="PermissionsService.isAllowed('EDIT_COMPANIES')"
                  create-new-entity="company" item="company" uib-tooltip="Edit"
                  tooltip-placement="top" tooltip-append-to-body="true">
@@ -90,11 +98,7 @@
                  tooltip-placement="top" tooltip-append-to-body="true">
             </div>
 
-            <div ng-show="companyData.description"
-              qt-custom-popover-template="/html/scripts/core/companies/company-profile/company-description-popover.tpl.html"
-              qt-popover-position="bottom-left-align" class="icn">
-              <div class="icn icn-company-description" qt-popover-trigger="mouseenter">!!</div>
-            </div>
+
           </div>
         </div>
 
