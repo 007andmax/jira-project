@@ -16,6 +16,7 @@
         $scope.getCompanyById = CompaniesService.getOneById;
         $scope.getUserById = UsersService.getOneById;
         $scope.getUserName = $rootScope.getUserName;
+        $scope.dateParse = Date.parse.bind(Date);
         
         $scope.$watch('data', function (data) {
           if (data) {

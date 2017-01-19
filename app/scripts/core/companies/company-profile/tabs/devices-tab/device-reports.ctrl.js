@@ -70,12 +70,12 @@
           }
           if (dto.installDate) {
             dto.installDate = new Date(dto.installDate);
-            dto.installDate = dto.installDate.getFullYear() + '-' + dto.installDate.getMonth() + '-' + dto.installDate.getDate();
+            dto.installDate = dto.installDate.getFullYear() + '/' + dto.installDate.getMonth() + '/' + dto.installDate.getDate();
           }
 
           if (dto.warrantyDate) {
             dto.warrantyDate = new Date(dto.warrantyDate);
-            dto.warrantyDate = dto.warrantyDate.getFullYear() + '-' + dto.warrantyDate.getMonth() + '-' + dto.warrantyDate.getDate();
+            dto.warrantyDate = dto.warrantyDate.getFullYear() + '/' + dto.warrantyDate.getMonth() + '/' + dto.warrantyDate.getDate();
           }
 
           DevicesService.saveReportEditedFields(dto, function () {

@@ -160,7 +160,7 @@
         }
         
         function formatDate(date) {
-          return date ? date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() : null;
+          return date ? date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate() : null;
         }
         
       }
