@@ -31,7 +31,7 @@
                  uib-tooltip="{{ getUserName(primaryContact) }}" tooltip-placement="bottom"
                  trimmed-tooltip-checker="getUserName(primaryContact)">
               </p>
-              <span style="max-width: 95px" class="ellipsis badge pull-right badge-default"
+              <span style="max-width: 95px" class="ellipsis badge pull-right badge-default" ng-if="primaryContact.designation"
                     uib-tooltip="{{ primaryContact.designation }}" tooltip-placement="bottom"
                     trimmed-tooltip-checker="primaryContact.designation">{{ primaryContact.designation }}</span>
             </div>
