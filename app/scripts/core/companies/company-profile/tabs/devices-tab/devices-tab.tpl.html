@@ -64,9 +64,9 @@
             <span class="control-indicator"></span>
           </label>
 
+          <!--need to test it on environment with devices-->
           <div class="checkbox-caption" uib-tooltip="{{ (agent.hostName | unknownFilter) || agent.ip }}"
-               trimmed-tooltip="0" tooltip-enable="{{ isShowTooltip[0]() }}">
-            <span trimmed-tooltip-container>{{ (agent.hostName | unknownFilter) || agent.ip }}</span>
+               trimmed-tooltip-checker="(agent.hostName | unknownFilter) || agent.ip">
           </div>
         </div>
       </div>

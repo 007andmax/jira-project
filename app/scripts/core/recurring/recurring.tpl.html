@@ -16,32 +16,7 @@
   <!--</div>-->
   <!--</div>-->
 
-  <div class="billable-content" style="margin-top: 20px;">
-    <div class="tabs-container" style="margin-top: 40px">
-      <div class="fixed-block-top" fixed-block-top>
-        <ul class="nav nav-qt" role="tablist">
-
-          <div ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
-               style="text-align: right">
-            <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
-                 qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
-                 style="display: inline-block;">
-              <div qt-popover-trigger="mouseenter" style="display: inline-block">
-                <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
-                     tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Invocie"
-                     ng-click="toogleEditForm('new-invoice')"
-                     custom-disabled="{{ isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}">
-                  <i class="icn-sm icn-add-company-light"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </ul>
-      </div>
-
-    </div>
-
+  <div class="billable-content">
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active">
         <ul class="qt-list qt-recurring-invoices" ng-hide="loadingInProgress">
@@ -50,39 +25,54 @@
             <div ng-include="'/html/scripts/core/recurring/edit-invoice.tpl.html'"></div>
           </li>
 
-          <li class="invoice-table-head" fixed-block-top offset-top="148">
+          <li class="invoice-table-head" fixed-block-top >
             <div class="invoice-table-head-item clearfix">
-              <div ng-click="setOrderForProducts('company')">
+              <div class="head-point" ng-click="setOrderForProducts('company')">
                 <span class="sort-span">Company<i class="icn-sm sort-icon icn-sort"
                                                   ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'company'}"></i></span>
 
               </div>
-              <div>Order Title</div>
-              <div ng-click="setOrderForProducts('startDate')">
+              <div class="head-point">Order Title</div>
+              <div class="head-point" ng-click="setOrderForProducts('startDate')">
                 <span class="sort-span">Start Date<i class="icn-sm sort-icon icn-sort"
                                                      ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'startDate'}"></i></span>
 
               </div>
-              <div ng-click="setOrderForProducts('recurring')">
+              <div class="head-point" ng-click="setOrderForProducts('recurring')">
                 <span class="sort-span">Recurring<i class="icn-sm sort-icon icn-sort"
                                                     ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'recurring'}"></i></span>
 
               </div>
-              <div ng-click="setOrderForProducts('endDate')">
+              <div class="head-point" ng-click="setOrderForProducts('endDate')">
                 <span class="sort-span">Finish Date<i class="icn-sm sort-icon icn-sort"
                                                       ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'endDate'}"></i></span>
 
               </div>
-              <div ng-click="setOrderForProducts('totalCreated')">
+              <div class="head-point" ng-click="setOrderForProducts('totalCreated')">
                 <span class="sort-span">Total Created<i class="icn-sm sort-icon icn-sort"
                                                         ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'totalCreated'}"></i></span>
 
               </div>
               <!--<div class="no-invoice">invoice no</div>-->
-              <div ng-click="setOrderForProducts('amount')">
+              <div class="head-point" ng-click="setOrderForProducts('amount')">
                 <span class="sort-span">Amount<i class="icn-sm sort-icon icn-sort"
                                                  ng-class="{'rotate': orderInvoices.reverse, 'active': orderInvoices.field === 'amount'}"></i></span>
 
+              </div>
+              <div class="head-point" style="padding: 0;">
+                <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
+                     ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
+                     qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
+                     style="width: 100%;padding: 0;display: flex; justify-content: center;">
+                    <div  qt-popover-trigger="mouseenter">
+                      <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
+                           ng-click="toogleEditForm('new-invoice')"
+                           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Invoice"
+                           custom-disabled="{{ isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}">
+                        <i class="icn-sm icn-add-company-light"></i>
+                    </div>
+                    </div>
+                </div>
               </div>
             </div>
           </li>

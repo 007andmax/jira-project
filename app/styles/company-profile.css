@@ -51,6 +51,7 @@
 .company-new-cover-wrapper .company-contact-type strong{
   font-weight: 500;
   margin-right: 3px;
+  float: left;
 }
 .company-service-type p{
   font-size: 14px;
