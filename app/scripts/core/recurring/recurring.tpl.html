@@ -21,14 +21,6 @@
       <div class="fixed-block-top" fixed-block-top>
         <ul class="nav nav-qt" role="tablist">
 
-          <li role="presentation">
-            <a ui-sref="accounting.billable">Billable Clients</a>
-          </li>
-
-          <li role="presentation" class="active">
-            <a href="javascript:void(0)">Recurring Orders</a>
-          </li>
-          </li>
           <div ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
                style="text-align: right">
             <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"

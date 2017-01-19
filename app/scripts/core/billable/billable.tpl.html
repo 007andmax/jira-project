@@ -5,13 +5,6 @@
 
         <ul class="nav nav-qt" role="tablist">
 
-          <li role="presentation" class="active">
-            <a href="javascript:void(0)">Billable Clients</a>
-          </li>
-
-          <li role="presentation">
-            <a ui-sref="accounting.recurring">Recurring Orders</a>
-          </li>
           <div ng-if="PermissionsService.isAllowed('CREATE_INVOICE')" style="text-align: right">
             <div qt-popover-position="bottom-right-align" custom-disabled="{{ !isCurrentCompanyAddressEmpty }}"
                  qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
