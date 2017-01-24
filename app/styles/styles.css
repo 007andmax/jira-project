@@ -9894,6 +9894,22 @@ button.close {
 .bold {
   font-weight: 700;
 }
+
+.action-wrap{
+  width: 89%;
+  margin: auto;
+  border-bottom:1px solid #4f5f79;
+}
+
+.action-wrap .archived-change,
+.action-wrap .view-change{
+  display: inline-block;
+}
+
+.action-wrap .archived-change{
+  float: left;
+}
+
 .change-view-actions{
   text-align: right;
   padding: 10px;
@@ -9943,3 +9959,88 @@ button.close {
   padding: 0;
   z-index: 999;
 }
+
+/*=============================================*/
+
+.switch {
+  width: 70px;
+  height: 20px;
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.switch label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #404b5f;
+  border-radius: 4px;
+}
+
+.switch label:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -8px; right: -8px; bottom: -8px; left: -8px;
+}
+
+.switch label:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -18px; right: -18px; bottom: -18px; left: -18px;
+  border-radius: inherit;
+}
+
+.switch label i {
+  display: block;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background-color: #4f5f79;
+  border-radius: 4px;
+  transition: right .3s;
+}
+
+.switch label i:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  margin-top: -12px;
+  font-size: 24px;
+  transition: right .3s;
+}
+
+.switch input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  opacity: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.switch input:checked ~ label {
+  background: #404b5f;
+}
+
+.switch input:checked ~ label i {
+  left: auto;
+  right: -1%;
+  background-color: #16a4fa;
+  transition: right .3s;
+}
+
+.switch input:checked ~ label i:before {
+  content: "";
+  right: 115%;
+  transition: right .3s;
+}
+/*=============================================*/

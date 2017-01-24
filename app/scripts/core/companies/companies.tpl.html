@@ -1,24 +1,39 @@
 <div>
   <div class="change-view-actions">
-    <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}" ng-click="changeView('grid')">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/tile-gray.svg">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
-    </div>
-    <div class="list-btn view-change-btn" ng-class="{'active': companiesView === 'list'}" ng-click="changeView('list')">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/list-gray.svg">
-      <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/list-deep-gray.svg">
+    <div class="action-wrap clearfix">
+      <div class="archived-change">
+        <span class="pull-left">Archived companies</span>
+        <div class="switch">
+          <input type="checkbox">
+          <label><i></i></label>
+        </div>
+      </div>
+      <div class="view-change">
+        <div class="tile-btn view-change-btn" ng-class="{'active': companiesView === 'grid'}"
+             ng-click="changeView('grid')">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'" src="images/input-icons/tile-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'"
+               src="images/input-icons/tile-deep-gray.svg">
+        </div>
+        <div class="list-btn view-change-btn" ng-class="{'active': companiesView === 'list'}"
+             ng-click="changeView('list')">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'grid'" src="images/input-icons/list-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="companiesView === 'list'"
+               src="images/input-icons/list-deep-gray.svg">
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="company-profile-content companies-list not-charts-companies-page" style="background: #edf2f6" >
-    <div class="card-view-wrapper clearfix"  ng-if="companiesView === 'grid'">
+  <div class="company-profile-content companies-list not-charts-companies-page" style="background: #edf2f6">
+    <div class="card-view-wrapper clearfix" ng-if="companiesView === 'grid'">
       <div class="card-wrapper"
            ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: 'name')) track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl">
         <div class="card">
           <div class="card-header clearfix">
             <div class="edit-icn" create-new-entity="company" item="company" stop-propagation="click"></div>
-            <div class="photo"  ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"
+            <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"
                  ui-sref="companyProfile({ companyId: company.id })"></div>
             <p class="ellipsis name"
                uib-tooltip="{{ company.name }}" tooltip-placement="bottom" trimmed-tooltip-checker="company.name">
@@ -31,7 +46,8 @@
                  uib-tooltip="{{ getUserName(primaryContact) }}" tooltip-placement="bottom"
                  trimmed-tooltip-checker="getUserName(primaryContact)">
               </p>
-              <span style="max-width: 95px" class="ellipsis badge pull-right badge-default" ng-if="primaryContact.designation"
+              <span style="max-width: 95px" class="ellipsis badge pull-right badge-default"
+                    ng-if="primaryContact.designation"
                     uib-tooltip="{{ primaryContact.designation }}" tooltip-placement="bottom"
                     trimmed-tooltip-checker="primaryContact.designation">{{ primaryContact.designation }}</span>
             </div>
@@ -48,8 +64,8 @@
               </p>
             </div>
             <div class="clearfix">
-               <img src="images/company/placeholder-red.png" alt="">
-               <p>{{ location }}</p>
+              <img src="images/company/placeholder-red.png" alt="">
+              <p>{{ location }}</p>
             </div>
           </div>
           <div class="card__stats clearfix" ui-sref="companyProfile({ companyId: company.id })">
@@ -65,114 +81,114 @@
               <p>Devices</p>
               <p><strong>{{ devicesCount[company.id].all || '0' }}</strong></p>
             </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<ul class="qt-list" style="margin-bottom: 150px;" ng-if="companiesView === 'list'">
+  <ul class="qt-list" style="margin-bottom: 150px;" ng-if="companiesView === 'list'">
 
-  <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
-    <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
+    <li class="list-heading" style="cursor: pointer !important;" fixed-block-top>
+      <div class="col-xs-3" ng-click="setOrderByCompanies('name')">
       <span class="sort-span">
         Name
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'name'}"></i>
       </span>
-    </div>
+      </div>
 
-    <div class="col-xs-2" ng-click="setOrderByCompanies('phone')">
+      <div class="col-xs-2" ng-click="setOrderByCompanies('phone')">
       <span class="sort-span">
       Contact No.
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'phone'}"></i>
       </span>
-    </div>
-    <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
+      </div>
+      <div class="col-xs-2" ng-click="setOrderByCompanies('email')">
       <span class="sort-span">
         Email Address
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'email'}"></i>
       </span>
-    </div>
-    <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
+      </div>
+      <div class="col-xs-2" ng-click="setOrderByCompanies('contact')">
       <span class="sort-span">
         Primary Contact
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'contact'}"></i>
       </span>
-    </div>
-    <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
+      </div>
+      <div class="col-xs-1" ng-click="setOrderByCompanies('tickets')">
       <span class="sort-span">
         Tickets
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'tickets'}"></i>
       </span>
-    </div>
-    <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
+      </div>
+      <div class="col-xs-1" ng-click="setOrderByCompanies('devices')">
       <span class="sort-span">
         Devices
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'devices'}"></i>
       </span>
-    </div>
-    <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
+      </div>
+      <div class="col-xs-1" ng-click="setOrderByCompanies('users')">
       <span class="sort-span">
         Users
         <i class="icn-sm sort-icon icn-sort"
            ng-class="{'rotate': orderCompanies.reverse, 'active': orderCompanies.field === 'users'}"></i>
       </span>
-    </div>
-  </li>
+      </div>
+    </li>
 
-  <li class="list-company-row"
-      ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
-      ng-controller="quicktech.core.companies.companyCtrl"
-      ui-sref="companyProfile({ companyId: company.id })">
-    <div class="col-xs-3">
-      <div style="min-height: 38px; display: inline-block; float: left;"><img
-        ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
-      <span class="list-company-name">{{ company.name }}</span>
-      <span style="display: flex;">{{ location }}</span>
-    </div>
-    <div class="col-xs-2">
-      <span>{{ primaryPhone.number || '' }}</span>
-    </div>
-    <div class="col-xs-2" style="word-break: break-all">
-      <span>{{ primaryContact.primaryEmail }}</span>
-    </div>
-    <div class="col-xs-2">
-      <span>{{ getUserName(primaryContact) }}</span>
-    </div>
-    <div class="col-xs-1">
-      <div create-new-entity="ticket" company-id="{{ company.id }}"
-           style="margin-left: 15px; display: inline-block;"
-           uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
-        <span><i class="nav-icon icn-lg icn-unassigned"></i></span>
+    <li class="list-company-row"
+        ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
+        ng-controller="quicktech.core.companies.companyCtrl"
+        ui-sref="companyProfile({ companyId: company.id })">
+      <div class="col-xs-3">
+        <div style="min-height: 38px; display: inline-block; float: left;"><img
+          ng-src="{{ getCompanyLogoUrl(company) }}" class="qwe" alt=""></div>
+        <span class="list-company-name">{{ company.name }}</span>
+        <span style="display: flex;">{{ location }}</span>
+      </div>
+      <div class="col-xs-2">
+        <span>{{ primaryPhone.number || '' }}</span>
+      </div>
+      <div class="col-xs-2" style="word-break: break-all">
+        <span>{{ primaryContact.primaryEmail }}</span>
+      </div>
+      <div class="col-xs-2">
+        <span>{{ getUserName(primaryContact) }}</span>
+      </div>
+      <div class="col-xs-1">
+        <div create-new-entity="ticket" company-id="{{ company.id }}"
+             style="margin-left: 15px; display: inline-block;"
+             uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
+          <span><i class="nav-icon icn-lg icn-unassigned"></i></span>
             <span class="badge badge-primary-outline list-company-badge">
             {{ company.companyStatistic.ticketsSubmitted || '0' }}
           </span>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-1">
-      <div style="display: inline-block;margin-left: 15px;">
-        <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
+      <div class="col-xs-1">
+        <div style="display: inline-block;margin-left: 15px;">
+          <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
             <span class="badge badge-primary-outline list-company-badge">
             {{ devicesCount[company.id].all || '0' }}
           </span>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-1">
-      <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })"
-           style="display: inline-block;margin-left: 15px;" stop-propagation="click">
-        <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
+      <div class="col-xs-1">
+        <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })"
+             style="display: inline-block;margin-left: 15px;" stop-propagation="click">
+          <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
             <span class="badge badge-primary-outline list-company-badge">
             {{ companyComponentsCount.users.length || '0' }}
           </span>
+        </div>
       </div>
-    </div>
-  </li>
-</ul>
+    </li>
+  </ul>
 </div>
 </div>
