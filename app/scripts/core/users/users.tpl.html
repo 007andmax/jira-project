@@ -1,12 +1,23 @@
 <div class="users-content">
   <div class="change-view-actions">
-    <div class="tile-btn view-change-btn" ng-class="{'active': usersView === 'grid'}" ng-click="changeView('grid')">
-      <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/tile-gray.svg">
-      <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
-    </div>
-    <div class="list-btn view-change-btn" ng-class="{'active': usersView === 'list'}" ng-click="changeView('list')">
-      <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="images/input-icons/list-gray.svg">
-      <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/list-deep-gray.svg">
+    <div class="action-wrap clearfix">
+      <div class="archived-change">
+        <span class="pull-left">Archived users</span>
+        <div class="switch">
+          <input type="checkbox">
+          <label><i></i></label>
+        </div>
+      </div>
+      <div class="view-change">
+        <div class="tile-btn view-change-btn" ng-class="{'active': usersView === 'grid'}" ng-click="changeView('grid')">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/tile-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="images/input-icons/tile-deep-gray.svg">
+        </div>
+        <div class="list-btn view-change-btn" ng-class="{'active': usersView === 'list'}" ng-click="changeView('list')">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'grid'" src="images/input-icons/list-gray.svg">
+          <img class="svg-icn tile" alt="tile" ng-if="usersView === 'list'" src="images/input-icons/list-deep-gray.svg">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -96,7 +107,7 @@
               <label class="control checkbox" ng-click="subscribeUser(user, 'invoice')">
                 <input type="checkbox" ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
                 <span class="control-indicator"></span>
-                <span>Ticket Manages</span>
+                <span>Ticket Manager</span>
               </label>
             </div>
             <a href="javascript:void(0)"
@@ -248,7 +259,7 @@
                 <div class="clearfix">
                   <label class="control checkbox pull-left">
                     <input type="checkbox" ng-checked="user.subscription.ticketManager">
-                    <span class="control-indicator"></span> Ticket Manages
+                    <span class="control-indicator"></span> Ticket Manager
                   </label>
                 </div>
               </a>

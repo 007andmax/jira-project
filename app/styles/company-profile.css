@@ -139,6 +139,14 @@
   height: 19px;
 }
 
+.btns-block .icn-note{
+  background: url("../images/input-icons/note.png") no-repeat;
+  background-size: cover;
+  width: 19px;
+  height: 19px;
+  margin-right: 0;
+}
+
 .btns-block .icn-add-new-user{
   background: url("../images/company/user-add.png") no-repeat;
   background-size: cover;

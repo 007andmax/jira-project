@@ -2,6 +2,7 @@
 .card-view-wrapper{
   margin: auto;
   transition: width .3s;
+  min-height: 100vh;
 }
 .card-wrapper {
   padding: 15px;
