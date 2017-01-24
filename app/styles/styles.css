@@ -9999,12 +9999,12 @@ button.close {
   height: 100%;
   width: 50%;
   position: absolute;
-  left: 0;
+  right: 50%;
   top: 0;
   z-index: 2;
   background-color: #4f5f79;
   border-radius: 4px;
-  transition: right .3s;
+  transition: right .3s cubic-bezier(0.98, 0.26, 0.07, 0.96), background-color .2s linear;
 }
 
 .switch label i:before {
@@ -10013,8 +10013,6 @@ button.close {
   top: 50%;
   right: -50%;
   margin-top: -12px;
-  font-size: 24px;
-  transition: right .3s;
 }
 
 .switch input {
@@ -10033,14 +10031,12 @@ button.close {
 
 .switch input:checked ~ label i {
   left: auto;
-  right: -1%;
+  right: 0%;
   background-color: #16a4fa;
-  transition: right .3s;
 }
 
 .switch input:checked ~ label i:before {
   content: "";
   right: 115%;
-  transition: right .3s;
 }
 /*=============================================*/
