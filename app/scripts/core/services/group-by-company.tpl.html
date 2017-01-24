@@ -1,5 +1,5 @@
 <div>
-  <ul class="qt-list qt-services" ng-hide="loadingInProgress['all']">
+  <ul class="qt-list qt-services" style="margin-top: 11px;" ng-hide="loadingInProgress['all']">
 
     <li qt-toggle-slider ng-repeat="company in companies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name' track by company.id"
         ng-controller="quicktech.core.services.companyCtrl"

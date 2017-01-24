@@ -2,8 +2,6 @@
   <div class="{{readonlyTags ? 'readonly-tags' : 'tags'}}">
     <span class="tags-title" ng-hide="readonlyTags">Tags: </span>
     <span class="tag-label"
-          ng-style="{'background-color': tagColors[tag.colorCode].backgroundColor,
-                    'border-color': tagColors[tag.colorCode].borderColor}"
           ng-repeat="tag in ticketTags track by $index">
       <span>{{ tag.word }}</span>
       <i ng-show="!readonlyTags" class="icn-xs remove-tag" ng-click="removeTag($index)"

@@ -91,13 +91,13 @@
 .center-category__category.cust-report{
   border-top: 1px solid rgba(255,255,255,.12);
   padding-top: 10px;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
   position: absolute;
   bottom: 0;
 }
 
 .center-category__category:hover {
-  color: #edf2f6;
+  background-color: #4f5f79;
 }
 .left-panel-full__head {
   display: -webkit-flex;
@@ -280,12 +280,10 @@
   cursor: default;
 }
 .filter .dropdown-menu{
-  max-height: 300px;
   overflow: auto;
   color: #364656;
   padding: 0;
   margin: 0;
-  border-radius: 0;
   background-color: #fff;
 }
 .filter .form-control.readonly-normal{

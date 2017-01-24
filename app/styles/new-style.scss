@@ -15,7 +15,30 @@ $primary-active: #0d79ba;
 $green-active: #5f8643;
 //COLORS-END=============================================
 
-
+.onhold-ticket {
+  background-color: $red;
+}
+.completed-ticket {
+  background-color: $green;
+}
+.progress-ticket {
+  background-color: $yellow;
+}
+.Unclaimed-ticket{
+  background: $primary-color;
+}
+.priority-big-size {
+  color: #FFF;
+  cursor: pointer;
+}
+.progress-big-size {
+  color: #fff;
+  cursor: pointer;
+}
+.label-light.high{
+  background-color: $red;
+  color: #fff;
+}
 
 //BUTTONS================================================
 .btn {

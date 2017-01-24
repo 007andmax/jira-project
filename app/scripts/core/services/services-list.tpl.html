@@ -17,7 +17,6 @@
                                             ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'billable'}"></i></span>
 
     </div>
-    <div class="col-4">&nbsp;</div>
   </li>
 
   <li ng-repeat="service in services | orderBy : orderByForServices : orderServices.reverse"
