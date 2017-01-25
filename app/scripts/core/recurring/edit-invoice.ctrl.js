@@ -34,7 +34,7 @@
         $scope.paramInvocie = {
           paymentTerms: '',
           repeatingInvoice: '',
-          numToGenerate: ''
+          remainGenerations: ''
         };
         $scope.tryAddExpense = {
           tryToAddProduct: false,
@@ -51,19 +51,22 @@
 
           $scope.searchCompany = CompaniesService.getOneById($scope.invoice.company.id).name;
           $scope.actualInvoiceNumber = $scope.invoice.number;
-          $scope.minSentOnDate = new Date($scope.invoice.sentOn);
+          $scope.minSentOnDate = new Date($scope.invoice.nextGenerationAt);
           $scope.minEndDate = new Date($scope.invoice.endDate);
+          $scope.ticketSharedUsersList = [];
 
-          if ($scope.invoice.shares) {
-            $scope.ticketSharedUsersList = $scope.invoice.shares.map(function (share) {
-              return { user: share.user, notify: true };
-            });
-
-            for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
-              var share = $scope.ticketSharedUsersList[i];
-              $scope.selectUpdateSharedUser[share.user.id] = true;
+          $timeout(function () {
+            if ($scope.invoice.shares) {
+              $scope.ticketSharedUsersList = $scope.invoice.shares.map(function (share) {
+                return { user: share.user, notify: true };
+              });
+    
+              for (var i = 0; i < $scope.ticketSharedUsersList.length; i++) {
+                var share = $scope.ticketSharedUsersList[i];
+                $scope.selectUpdateSharedUser[share.user.id] = true;
+              }
             }
-          }
+          });
 
           $scope.editInvoice = {
             id: $scope.invoice.id,
@@ -75,8 +78,8 @@
             purchaseOrder: $scope.invoice.purchaseOrder,
             paymentTerms: $scope.invoice.paymentTerms,
             memo: $scope.invoice.memo,
-            sentOn: $filter('date')($scope.invoice.sentOn, 'dd MMM yyyy'),
-            endDate: $filter('date')($scope.invoice.endDate, 'dd MMM yyyy'),
+            nextGenerationAt: $filter('date')(new Date($scope.invoice.nextGenerationAt), 'dd MMM yyyy'),
+            endDate: $filter('date')(new Date($scope.invoice.endDate), 'dd MMM yyyy'),
             products: $scope.invoice.products.length ? angular.copy($scope.invoice.products) : [{}],
             services: $scope.invoice.services.length ? angular.copy($scope.invoice.services) : [{}]
           };
@@ -86,9 +89,9 @@
               $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
             }
             if ($scope.editInvoice.services[i].date !== undefined) {
-              $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+              $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'dd MMM yyyy');
             } else {
-              $scope.editInvoice.services[i].date = $filter('date')(new Date(), 'd MMM yyyy');
+              $scope.editInvoice.services[i].date = $filter('date')(new Date(), 'dd MMM yyyy');
             }
           }
 
@@ -112,13 +115,14 @@
           TicketsService.getActualNumber($scope, function (number) {
             $scope.actualInvoiceNumber = number;
           });
-
+  
+          var tomorrow = $filter('date')(new Date(Date.now() + day), 'dd MMM yyyy');
           $scope.editInvoice = {
             autoCreate: true,
             products: [{}],
             services: [{}],
-            sentOn: new Date(Date.now() + day),
-            endDate: new Date(Date.now() + day)
+            nextGenerationAt: tomorrow,
+            endDate: tomorrow
           };
 
           EmailSettingsService.getTermsAndConditions(function (invoiceInfo) {
@@ -249,7 +253,7 @@
         };
 
         $scope.$watch('paramInvocie.paymentTerms', function (val) {
-          if (val && $scope.editInvoiceForm.paymentTerms && $scope.editInvoiceForm.paymentTerms.$pristine) {
+          if (val && $scope.editInvoiceForm && $scope.editInvoiceForm.paymentTerms && $scope.editInvoiceForm.paymentTerms.$pristine) {
             $scope.editInvoiceForm.paymentTerms.$setDirty();
           }
           $scope.editInvoice.paymentTerms = parseInt(val) || 0;
@@ -291,7 +295,7 @@
         };
 
         function changeRepeatAndStart() {
-          var val = [$scope.paramInvocie.repeatingInvoice, $scope.editInvoice.sentOn];
+          var val = [$scope.paramInvocie.repeatingInvoice, $scope.editInvoice.nextGenerationAt];
 
           if (!(val[0] && val[1])) {
             $scope.disabledEndAndNum = true;
@@ -301,7 +305,7 @@
 
           var repeat = val[0];
           var startDay = val[1];
-          var numToGenerate = ($scope.paramInvocie.numToGenerate || 1) - 1;
+          var numToGenerate = ($scope.paramInvocie.remainGenerations || 1) - 1;
           var endDay = new Date(startDay);
 
           if ($scope.editInvoiceForm.repeatingInvoice && $scope.editInvoiceForm.repeatingInvoice.$pristine) {
@@ -330,13 +334,13 @@
         }
 
         $scope.changeNumToGenerate = function () {
-          var val = $scope.paramInvocie.numToGenerate;
+          var val = $scope.paramInvocie.remainGenerations;
 
           if (!$scope.numToGeneratePattern.test(val) || val === '') {
             return;
           }
 
-          if (!(val && $scope.paramInvocie.repeatingInvoice && $scope.editInvoice.sentOn)) {
+          if (!(val && $scope.paramInvocie.repeatingInvoice && $scope.editInvoice.nextGenerationAt)) {
             return;
           }
 
@@ -352,11 +356,10 @@
           var val = $scope.editInvoice.endDate;
 
           if (!val) {
-            $scope.paramInvocie.numToGenerate = undefined;
-            $scope.isNumInfinity = true;
-            return
+            $scope.paramInvocie.remainGenerations = undefined;
+            return;
           }
-          if (!($scope.paramInvocie.repeatingInvoice && $scope.editInvoice.sentOn)) {
+          if (!($scope.paramInvocie.repeatingInvoice && $scope.editInvoice.nextGenerationAt)) {
             return;
           }
 
@@ -365,11 +368,11 @@
 
         function setEndAndNum(option) {
           var repeat = $scope.paramInvocie.repeatingInvoice;
-          var sentOn = new Date($filter('date')($scope.editInvoice.sentOn, 'd MMM yyyy'));
+          var sentOn = new Date($filter('date')($scope.editInvoice.nextGenerationAt, 'd MMM yyyy'));
 
           if (option === 'endDate') {
             var endDate = new Date(sentOn);
-            var num = parseInt($scope.paramInvocie.numToGenerate) - 1;
+            var num = parseInt($scope.paramInvocie.remainGenerations) - 1;
 
             if (repeat === 'Month') {
               endDate.setMonth(sentOn.getMonth() + num);
@@ -393,24 +396,18 @@
             } else if (repeat === 'Year') {
               newNum = numOfYear(sentOn, endDate) + 1;
             } else if (parseInt(repeat) > 0) {
-              newNum = Math.floor((+endDate - +sentOn) / (parseInt(repeat) * day)) + 1;
+              newNum = Math.round((+endDate - +sentOn) / (parseInt(repeat) * day)) + 1;
             } else {
               console.error('Unsupported Repeating Invoice every')
             }
 
-            $scope.paramInvocie.numToGenerate = newNum;
+            $scope.paramInvocie.remainGenerations = newNum;
           }
         }
 
         $scope.clearEndDate = function () {
           $scope.editInvoice.endDate = undefined;
           $scope.changeEndDate();
-        };
-
-        $scope.clearInfinity = function () {
-          $scope.isNumInfinity = false;
-          $scope.paramInvocie.numToGenerate = 1;
-          $scope.changeNumToGenerate();
         };
 
         function numOfMonth(sentOn, endDate) {
@@ -481,6 +478,10 @@
               if (!$scope.paramInvocie.repeatingInvoice && $scope.savedRepeatingInvoice) {
                 $scope.paramInvocie.repeatingInvoice = $scope.savedRepeatingInvoice;
               }
+              
+              if ($scope.paramInvocie.remainGenerations != null) {
+                editInvoice.remainGenerations = $scope.paramInvocie.remainGenerations;
+              }
 
               if ($scope.paramInvocie.repeatingInvoice === 'Month' || $scope.paramInvocie.repeatingInvoice === 'Year') {
                 editInvoice.frequency = $scope.paramInvocie.repeatingInvoice === 'Month' ? 'MONTHLY' : 'YEARLY'
@@ -488,8 +489,8 @@
                 editInvoice.customFrequency = parseInt($scope.paramInvocie.repeatingInvoice)
               }
 
-              editInvoice.endDate = $filter('date')(new Date(editInvoice.endDate), 'yyyy-MM-dd');
-              editInvoice.sentOn = $filter('date')(new Date(editInvoice.sentOn), 'yyyy-MM-dd');
+              editInvoice.endDate = null;
+              editInvoice.nextGenerationAt = $filter('date')(new Date(editInvoice.nextGenerationAt), 'yyyy/MM/dd');
 
               for (var i = 0, len = editInvoice.services.length; i < len; i++) {
                 editInvoice.services[i].quantity = (editInvoice.services[i].quantity / 60)

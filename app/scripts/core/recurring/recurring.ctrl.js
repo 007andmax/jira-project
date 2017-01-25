@@ -14,6 +14,8 @@
             $scope.isCurrentCompanyAddressEmpty = !address;
           });
         });
+  
+        $scope.parseDate = Date.parse.bind(Date);
 
         $scope.PermissionsService = PermissionsService;
         $scope.loadingInProgress = true;

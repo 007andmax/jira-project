@@ -25,7 +25,7 @@
             <div ng-include="'/html/scripts/core/recurring/edit-invoice.tpl.html'"></div>
           </li>
 
-          <li class="invoice-table-head" fixed-block-top >
+          <li class="invoice-table-head" fixed-block-top>
             <div class="invoice-table-head-item clearfix">
               <div class="head-point" ng-click="setOrderForProducts('company')">
                 <span class="sort-span">Company<i class="icn-sm sort-icon icn-sort"
@@ -64,14 +64,14 @@
                      ng-if="editInvoiceId !== 'new-invoice' && PermissionsService.isAllowed('CREATE_INVOICE')"
                      qt-custom-popover-template="/html/scripts/common/templates/company-has-no-address-popover.tpl.html"
                      style="width: 100%;padding: 0;display: flex; justify-content: center;">
-                    <div  qt-popover-trigger="mouseenter">
-                      <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
-                           ng-click="toogleEditForm('new-invoice')"
-                           tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Invoice"
-                           custom-disabled="{{ isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}">
-                        <i class="icn-sm icn-add-company-light"></i>
+                  <div qt-popover-trigger="mouseenter">
+                    <div class="btn btn-add-company btn-primary pull-right has-tooltip" style="width: 98px;"
+                         ng-click="toogleEditForm('new-invoice')"
+                         tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Invoice"
+                         custom-disabled="{{ isCurrentCompanyAddressEmpty || isCurrentCompanyAddressEmpty === undefined }}">
+                      <i class="icn-sm icn-add-company-light"></i>
                     </div>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -88,17 +88,17 @@
                 <div class="ellipsis">{{ companyOfInvocie.name }}</div>
 
                 <div order-title="invoice.title" class="long-text"></div>
-                <div>{{ invoice.sentOn | date:'dd MMM yyyy' }}</div>
+                <div>{{ parseDate(invoice.nextGenerationAt) | date:'dd MMM yyyy' }}</div>
                 <div>{{ frequency[invoice.frequency] || invoice.customFrequency + (invoice.customFrequency == 1 ? ' day'
                   : ' days')}}
                 </div>
                 <div>
-                  <span ng-class="{'badge-orange': invoice.leftGenerations === 1, 'badge-red': invoice.leftGenerations === 0, 'badge': invoice.leftGenerations <= 1}">
-                    {{ invoice.endDate | date:'dd MMM yyyy' }}
+                  <span
+                    ng-class="{'badge-orange': invoice.remainGenerations === 1, 'badge-red': invoice.remainGenerations === 0, 'badge': invoice.remainGenerations <= 1}">
+                    {{ parseDate(invoice.endDate) | date:'dd MMM yyyy' }}
                   </span>
                 </div>
                 <div>{{ invoice.generatedCount }}</div>
-                <!--<div class="numbs">{{ invoice.number }}</div>-->
                 <div style="display: flex; align-items: center">
                   <span class="currency-invoice">
                     {{ invoice.total | currency:'$':2 }}
@@ -112,7 +112,8 @@
 
                     <div>
                       <a>
-                        <i class="icn-sm icn-description" tooltip-append-to-body="true" tooltip-class="recurring-memo-tooltip"
+                        <i class="icn-sm icn-description" tooltip-append-to-body="true"
+                           tooltip-class="recurring-memo-tooltip"
                            uib-tooltip="{{ invoice.memo || 'No memo provided' }}" tooltip-placement="left"></i>
                       </a>
 
