@@ -21,8 +21,8 @@
     <div class="btn btn-lg btn-primary" data-dismiss='modal' ng-click="cancelConfirm(selectingTicket)">
       {{ selectingTicket ? 'Back' : 'Cancel' }}
     </div>
-    <div class="btn btn-lg btn-info" ng-if="!selectingTicket" ng-click="createTicket()">Create Ticket</div>
-    <div class="btn btn-lg btn-info"
+    <div class="btn btn-lg btn-primary" ng-if="!selectingTicket" ng-click="createTicket()">Create Ticket</div>
+    <div class="btn btn-lg btn-primary"
          custom-disabled="{{ selectingTicket && (!selectedTicket.item || !selectedTicket.item.id) }}"
          ng-click="selectingTicket ? createTicketUpdate() : selectTicket(true)">
       {{ selectingTicket ? 'Confirm' : 'Create TU' }}

@@ -44,7 +44,7 @@
             <i class="pull-left icn-sm icn-tick-blue"></i>
             <strong>{{ quantitySelectTAx }}</strong> selected
           </div>
-          <div class="btn btn-info btn-lg pull-right" custom-disabled="{{ isDisabledMove() }}" ng-click="moveTax()">
+          <div class="btn btn-primary btn-lg pull-right" custom-disabled="{{ isDisabledMove() }}" ng-click="moveTax()">
             Move
           </div>
         </div>
@@ -55,7 +55,7 @@
     <div ng-include="'/html/scripts/core/tax-rates/tax-rates-list.tpl.html'"></div>
 
     <div class="add-tax-rate-btn-wrapper">
-      <div class="btn btn-info has-tooltip"
+      <div class="btn btn-primary has-tooltip"
            ng-click="showEditTaxForm('create_new')"
            custom-disabled="{{ showCreateTax }}"
            tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add Tax Rate">

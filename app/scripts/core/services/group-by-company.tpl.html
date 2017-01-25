@@ -1,5 +1,5 @@
 <div>
-  <ul class="qt-list qt-services" ng-hide="loadingInProgress['all']">
+  <ul class="qt-list qt-services" style="margin-top: 11px;" ng-hide="loadingInProgress['all']">
 
     <li qt-toggle-slider ng-repeat="company in companies | filter: {id: headerSharedState.filter.companyId} | orderBy: 'name' track by company.id"
         ng-controller="quicktech.core.services.companyCtrl"
@@ -35,11 +35,11 @@
             </div>
 
             <div role="presentation" class="checkbox-dropdown-footer clearfix">
-              <div class="btn btn-info btn-lg pull-right"
+              <div class="btn btn-primary btn-lg pull-right"
                    ng-click="addServices()" custom-disabled="{{ disableAddButton }}">
                 Save
               </div>
-              <div class="btn btn-primary btn-primary-outline btn-lg pull-right" ng-click="addServiceDropdown.isOpen = false">
+              <div class="btn btn-primary   btn-lg pull-right" ng-click="addServiceDropdown.isOpen = false">
                 Cancel
               </div>
             </div>

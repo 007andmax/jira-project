@@ -89,13 +89,13 @@
       <!--</div>-->
       <div ng-if="currentType === 'email'">
         <div class="col-md-12">
-          <div class="btn btn-lg btn-info download-agent-btn" ng-click="sendEmailWithAgent(downloadAgentForm)"
+          <div class="btn btn-lg btn-primary download-agent-btn" ng-click="sendEmailWithAgent(downloadAgentForm)"
                custom-disabled="{{ savingInProcess }}">
             Send Email
           </div>
         </div>
         <div class="col-md-12">
-          <div class="btn btn-lg btn-info download-agent-btn" copy-key="downloadLink"
+          <div class="btn btn-lg btn-primary download-agent-btn" copy-key="downloadLink"
                custom-disabled="{{ gettingLink }}">
             Copy Link to Clipboard
           </div>
@@ -103,7 +103,7 @@
       </div>
 
       <div class="col-md-12" ng-if="currentType === 'download'">
-        <div class="btn btn-lg btn-info download-agent-btn" ng-click="downloadAgent(downloadAgentForm)"
+        <div class="btn btn-lg btn-primary download-agent-btn" ng-click="downloadAgent(downloadAgentForm)"
              custom-disabled="{{ savingInProcess }}">
           {{ isDomainPresent ? 'Download' : 'Save and Download' }}
         </div>
@@ -155,7 +155,7 @@
                     <!--required ng-maxlength="5000" make-dirty-on-blur></textarea>-->
           <!--</div>-->
           <!--<div class="template-actions">-->
-            <!--<div class="btn btn-lg btn-info download-agent-btn">-->
+            <!--<div class="btn btn-lg btn-primary download-agent-btn">-->
               <!--Save-->
             <!--</div>-->
             <!--<div class="btn btn-lg btn-primary download-agent-btn">-->

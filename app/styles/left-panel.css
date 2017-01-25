@@ -46,10 +46,10 @@
   color: #ffffff;
 }
 .left-panel__category:hover {
-  background-color: rgb(87, 96, 114);
+  background-color: #4f5f79;
 }
 .left-panel .active {
-  background-color: rgb(87, 96, 114);
+  background-color: #4f5f79;
 }
 .left-panel-full {
   position: fixed;
@@ -59,8 +59,6 @@
   display: flex;
 
   height: 100%;
-
-  background-color: #404b5f;
 
   flex-flow: row wrap;
   transition: .2s ease-in width .0s;
@@ -84,7 +82,7 @@
 
   cursor: pointer;
 
-  color: #a1acc0;
+  color: #edf2f6;
 
   align-items: center;
   justify-content: flex-start;
@@ -93,14 +91,19 @@
 .center-category__category.cust-report{
   border-top: 1px solid rgba(255,255,255,.12);
   padding-top: 10px;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
   position: absolute;
   bottom: 0;
 }
 
 .center-category__category:hover {
-  color: #dee0e2;
+  background-color: #4f5f79;
 }
+
+.filter.center-category__category:hover {
+  background-color: transparent;
+}
+
 .left-panel-full__head {
   display: -webkit-flex;
   display:    -moz-flex;
@@ -113,7 +116,7 @@
 
   text-align: center;
 
-  color: #dee0e2;
+  color: #edf2f6;
   background-color: transparent;
 
   align-items: center;
@@ -137,8 +140,8 @@
   line-height: 1em;
 }
 .center-category .active {
-  color: #dee0e2;
-  background: rgba(255, 255, 255, 0.12);
+  color: #edf2f6;
+  background: #4f5f79;
 }
 .icon-pos {
   position: absolute;
@@ -173,7 +176,7 @@
   top: 0;
 }
 .slider-pos i{
-  transform: translateY(20px);
+  transform: translateY(15px);
 }
 .category-expanded{
   width: 100%;
@@ -275,38 +278,37 @@
   height: auto;
 }
 .filter:hover{
-  color: #94a4b8;
+  color: #edf2f6;
 }
 .filter p{
   padding: 10px 0 5px 0;
   cursor: default;
 }
 .filter .dropdown-menu{
+  overflow: auto;
+  color: #364656;
   padding: 0;
   margin: 0;
-  border-radius: 0;
+  background-color: #fff;
 }
 .filter .form-control.readonly-normal{
   border: transparent;
   border-radius: 2px;
-  background: #576072;
-  color: #fff;
+  background: #edf2f6;
 }
 .filter .form-control.readonly-normal:focus,
 .filter .form-control.readonly-normal:active {
-  background: #576072;
+  background: #edf2f6;
   box-shadow: inset 3px 3px 10px 0px rgba(0,0,0,0.35);
-  color: #fff;
 }
 .filter .dropdown-menu li {
-  color: #000000;
   padding: 10px 15px;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
 .filter .dropdown-menu li:hover {
-  background-color: #e9f5fb;
+  background-color: #edf2f6 !important;
 }
 .logo-head{
   width: 50%;

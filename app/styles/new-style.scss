@@ -1,0 +1,115 @@
+//COLORS=================================================
+$primary-color: #16a4fa;
+$global-color: #364656;
+
+$light-gray: #edf2f6;
+$gray: #4f5f79;
+$deep-gray: #404b5f;
+$green-mint: #2bc7c6;
+$purple: #7c77cb;
+$green: #90c56b;
+$yellow: #ffb937;
+$red: #d84a3c;
+
+$primary-active: #0d79ba;
+$green-active: #5f8643;
+//COLORS-END=============================================
+
+.onhold-ticket {
+  background-color: $red;
+}
+.completed-ticket {
+  background-color: $green;
+}
+.progress-ticket {
+  background-color: $yellow;
+}
+.Unclaimed-ticket{
+  background: $primary-color;
+}
+.priority-big-size {
+  color: #FFF;
+  cursor: pointer;
+}
+.progress-big-size {
+  color: #fff;
+  cursor: pointer;
+}
+.label-light.high{
+  background-color: $red;
+  color: #fff;
+}
+
+//BUTTONS================================================
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  height: 36px;
+  min-width: 36px;
+  position: relative;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  outline: none;
+  padding: 0 7px;
+  font-size: 12px;
+  line-height: 32px;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -ms-ransition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  &:focus,
+  &:hover,
+  &:active,
+  &.active{
+    color: #fff;
+    text-decoration: none;
+    outline-color: transparent;
+    outline-style: none;
+  }
+  &[disabled],
+  &.disabled{
+    box-shadow: none;
+    background-color: $light-gray;
+    border-color: $light-gray;
+    pointer-events: none;
+  }
+  &-primary{
+    background-color: $primary-color;
+    border-color: $primary-color;
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active{
+      background-color: $primary-active;
+      border-color: $primary-active;
+    }
+
+  }
+  &-success{
+    background-color: $green;
+    border-color: $green;
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active{
+      background-color: $green-active;
+      border-color: $green-active;
+    }
+  }
+}
+//BUTTONS-END============================================
+
+

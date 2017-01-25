@@ -1,11 +1,11 @@
 <div>
-  <div class="default-services-header" ng-hide="loadingInProgress['default']"
+  <div class="default-services-header" style="margin-top: 26px;" ng-hide="loadingInProgress['default']"
        ng-controller="quicktech.core.services.defaultServicesCtrl">
 
     <div ng-include="'/html/scripts/core/services/services-list.tpl.html'"></div>
 
     <div class="add-service-btn-wrapper" ng-if="PermissionsService.isAllowed('MANAGE_SERVICES')">
-      <div class="btn btn-info has-tooltip" create-new-entity="service"
+      <div class="btn btn-primary has-tooltip" create-new-entity="service"
            tooltip-placement="top" tooltip-append-to-body="true" uib-tooltip="Add service">
         <i class="icn-sm icn-plus"></i>
       </div>

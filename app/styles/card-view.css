@@ -13,7 +13,7 @@
     box-sizing: border-box;
     width: 325px;
     padding: 15px 12px 10px 13px;
-    border-left:3px solid #0071bc;
+    border-left:3px solid #16a4fa;
     background: #fff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -150,7 +150,7 @@
 }
 
 .card-wrapper .card a{
-  color: #0071bc;
+  color: #16a4fa;
   text-decoration: underline;
 }
 
@@ -208,6 +208,7 @@
 }
 
 .card-footer .btn-default{
+  line-height: 1.5;
   height: 27px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -227,7 +228,6 @@
   margin-top: 3px;
   margin-right: 4px;
   line-height: 1;
-  padding-left: 1px;
 }
 
 .card-footer img{
@@ -273,10 +273,11 @@
   float: right;
   background: #666f7f;
   color: #fff;
-  margin-top: 4px;
+  margin-top: -10px;
   margin-right: 2px;
   line-height: 1;
   padding-left: 1px;
+  padding-top: 1px;
   transform: rotate(45deg);
   text-align: center;
   user-select: none;

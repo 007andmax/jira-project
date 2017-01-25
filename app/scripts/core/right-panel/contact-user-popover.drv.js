@@ -65,7 +65,7 @@
 
               var user_popover_template = '<div class="popover popover-userinfo" role="tooltip">\
               <div class="clearfix">\
-                <div class="btn btn-info pull-right">\
+                <div class="btn btn-primary pull-right">\
                 \
                   <div class="tooltip fade top in send-email-tooltip" role="tooltip" style="top: -25px;left: -9px;">\
                     <div class="tooltip-arrow"></div><div class="tooltip-inner">email</div>\
@@ -163,7 +163,7 @@
                     subsTooltip = $('.popover .subscription-tooltip'),
                     icnSubs = $('.popover .badge-updates');
 
-                  icnEmail = $('.popover .btn-info');
+                  icnEmail = $('.popover .btn-primary');
 
                   if (!(scope.userInfo.primaryEmail && scope.userInfo.primaryEmail.length > 0)) {
                     icnEmail.addClass('disabled');

@@ -91,12 +91,12 @@
   <div class="qt-form-actions" style="width: auto;">
     <!--<div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>-->
 
-    <div class="btn btn-lg btn-info pull-right"
+    <div class="btn btn-lg btn-primary pull-right"
          ng-click="saveEditService(editServiceForm)"
          custom-disabled="{{ editServiceForm.$pristine || editServiceForm.$invalid || disabledSaveButton }}">
       {{ editService.versionedId.id ? 'Save' : 'Add' }}
     </div>
 
-    <div class="btn btn-lg btn-primary btn-primary-outline pull-right" ng-click="cancelEditForm()">Cancel</div>
+    <div class="btn btn-lg btn-primary   pull-right" ng-click="cancelEditForm()">Cancel</div>
   </div>
 </div>

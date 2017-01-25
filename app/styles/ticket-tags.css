@@ -1,7 +1,7 @@
 .tags-wrap {
   position: relative;
   margin: 20px 0;
-  border: 1px solid #2c9fdd;
+  border: 1px solid #404b5f;
   border-radius: 5px;
   cursor: text;
 }
@@ -55,10 +55,12 @@
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 2px;
+  border-radius: 10px;
+  border-color: #edf2f6;
+  background-color: #edf2f6;
   float: left;
   cursor: inherit;
-  color: #4C5C6F;
+  color: #364656;
 }
 .tags .tag-label span {
   display: inline-block;
@@ -90,7 +92,7 @@
   text-overflow: ellipsis;
 }
 .tag-autocomplete .autocomplete-item {
-  margin: 0 10px;
+  padding: 0 10px;
   cursor: pointer;
 }
 .loading-wrap {

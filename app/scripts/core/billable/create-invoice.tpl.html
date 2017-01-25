@@ -48,7 +48,7 @@
 
     <div class="invoice-actions">
 
-      <div class="btn btn-info pull-left" ng-if="!invoicePreview"
+      <div class="btn btn-primary pull-left" ng-if="!invoicePreview"
            ng-click="receivablePreview ? print() : createInvoice(invoiceLocks[showInvoiceLockIndex], print)"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true"
@@ -56,7 +56,7 @@
         <i class="icn icn-print"></i>
       </div>
 
-      <div style="margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview"
+      <div style="margin-left: 10px;" class="btn btn-primary pull-left" ng-if="!invoicePreview"
            ng-click="receivablePreview ? download() : createInvoice(invoiceLocks[showInvoiceLockIndex], download)"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true"
@@ -64,7 +64,7 @@
         <i class="icn icn-download-white"></i>
       </div>
 
-      <div style="margin-left: 10px;" class="btn btn-info pull-left" ng-if="!invoicePreview && !receivablePreview"
+      <div style="margin-left: 10px;" class="btn btn-primary pull-left" ng-if="!invoicePreview && !receivablePreview"
            ng-click="createInvoice(invoiceLocks[showInvoiceLockIndex])"
            ng-disabled="(savingInvoiceInProcess.indexOf(invoiceLocks[showInvoiceLockIndex].id) > -1) || invoiceLocks[showInvoiceLockIndex].expired"
            tooltip-placement="bottom" tooltip-append-to-body="true" uib-tooltip="Create and Send Invoice">

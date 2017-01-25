@@ -177,7 +177,7 @@
 .ticket-add-footer .btn{
     width: 92px;
 }
-.ticket-add-footer .btn-info.disabled{
+.ticket-add-footer .btn-primary.disabled{
     background-color: #e7ecf2;
     border-color: #e7ecf2;
 }

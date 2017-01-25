@@ -4,8 +4,8 @@ aside#left {
   left: 0;
   width: 76px;
   height: 100vh;
-  background-color: #354052;
   z-index: 1060;
+  background-color: #364656;
 }
 aside#left:after {
   position: absolute;

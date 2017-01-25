@@ -242,7 +242,7 @@ aside#right .recent-activities-by .time-ago {
     padding-bottom: 1px;
   }
 }
-.popover-userinfo .btn-info {
+.popover-userinfo .btn-primary {
   position: absolute;
   top: 32px;
   right: 30px;
