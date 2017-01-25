@@ -90,11 +90,20 @@
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             try {
-              UsersService.deleteOrArchiveUser($scope.user.id, true);
+              UsersService.archiveUser($scope.user.id);
             } catch (err) {
               confirmButton = 'Ok';
               UserConfirmationsService.show(err, confirmButton, true);
             }
+          });
+        };
+
+        $scope.dearchiveUser = function (user) {
+          var confirmMesage = 'Do you want to dearchive ' + user.firstName + ' ' + user.lastName + '?',
+            confirmButton = 'Yes';
+
+          UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
+            UsersService.dearchiveUser(user.id);
           });
         };
 

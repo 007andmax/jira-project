@@ -11,8 +11,8 @@
                 UserNotificationService) {
 
         var headerSharedState = SharedStateService.getSharedState('companiesHeader');
-        var globalSearch = SharedStateService.getSharedState('globalSearch'),
-          availableViews = ['list', 'grid'];
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var availableViews = ['list', 'grid'];
 
         if (!PermissionsService.isAllowed('VIEW_COMPANIES')) {
           $state.go('tickets');
@@ -22,11 +22,13 @@
 
         $scope.companiesView = localStorageService.get('companies-view') || 'grid';
         $scope.PermissionsService = PermissionsService;
-        $scope.isCollapsed = true;
+        
         $scope.companies = CompaniesService.getAllCompanies();
+        $scope.archivedCompanies = CompaniesService.getArchivedCompanies();
         $scope.companiesInfo = CompaniesService.getClientCompaniesInfo($scope);
         $scope.devicesCount = DevicesService.getDevicesCount($scope);
         $scope.user = $scope.currentUser;
+        $scope.archivedShown = false;
 
         $scope.companiesCtrl = {};
 
@@ -45,11 +47,23 @@
         $scope.$watch('companiesCtrl.shownCompanies.length', function (value) {
           globalSearch.count = value;
         });
+  
+        $scope.openCompany = function (company, tabName) {
+          if (!company.deletedAt) {
+            $state.go('companyProfile', { companyId: company.id, tabName: tabName });
+          }
+        };
 
         $scope.filterCompanies = function (value) {
           var filter = headerSharedState.filter;
           var clientType = value.clientType;
           var result = true;
+          
+          if ($scope.archivedShown) {
+            return value.deletedAt;
+          } else {
+            result = result && !value.deletedAt;
+          }
 
           if (value.isDefault || value.default) {
             return false;
@@ -122,24 +136,17 @@
           }
 
         };
-
-        $scope.archiveCompany = function (company) {
-          var confirmMesage = 'Do you want to archive ' + company.name;
+  
+        $scope.dearchiveCompany = function (company) {
+          var name = company.name;
+          var confirmMesage = 'Do you want to dearchive ' + name + '?';
           var confirmButton = 'Yes';
-
+  
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
-            CompaniesService.archive(company.id, function (resp) {
-              if (resp.data.code == 403) {
-                UserNotificationService.show(resp.data.message, true);
-              } else {
-                $state.go('companies');
-              }
+            CompaniesService.dearchive(company.id, function (resp) {
+              UserNotificationService.show('The company ' + name + ' has successfully dearchived.', true);
             });
-          })
-        };
-
-        $scope.toggleCollapsed = function () {
-          $scope.isCollapsed = !$scope.isCollapsed;
+          });
         };
 
         $scope.attachEvents = function (element) {
