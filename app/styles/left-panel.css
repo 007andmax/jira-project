@@ -99,6 +99,11 @@
 .center-category__category:hover {
   background-color: #4f5f79;
 }
+
+.filter.center-category__category:hover {
+  background-color: transparent;
+}
+
 .left-panel-full__head {
   display: -webkit-flex;
   display:    -moz-flex;
@@ -297,7 +302,6 @@
   box-shadow: inset 3px 3px 10px 0px rgba(0,0,0,0.35);
 }
 .filter .dropdown-menu li {
-  background: #edf2f6;
   padding: 10px 15px;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
