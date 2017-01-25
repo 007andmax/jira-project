@@ -1,6 +1,6 @@
 <ul class="qt-list" ng-class="{'qt-services-list': companyService, 'qt-default-services': !companyService}">
 
-  <li class="list-heading" ng-show="services.length > 0" style="cursor: pointer !important;">
+  <li class="list-heading" fixed-block-top offset-top="148" ng-show="services.length > 0" style="cursor: pointer !important;">
     <div class="col-1" ng-click="setOrderForServices('name')">
       <span class="sort-span">Service Name<i class="icn-sm sort-icon icn-sort"
                                              ng-class="{'rotate': orderServices.reverse, 'active': orderServices.field === 'name'}"></i></span>
