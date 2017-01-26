@@ -1,5 +1,5 @@
 <div class="qt-create-invoice clearfix" ng-controller="quicktech.core.recurring.editInvoiceCtrl">
-  <div class="edit-recurring-invoice container" ng-form="editInvoiceForm">
+  <form class="edit-recurring-invoice container" name="editInvoiceForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'customer')}"
@@ -11,21 +11,21 @@
             <label ng-message="required">Customer is required.</label>
           </div>
 
-          <div class="x-mark-wrapper">
+          <div class="x-mark-wrapper" uib-dropdown-toggle>
             <input class="form-control" ng-model="searchCompany"
-                   type="text" placeholder="Company" uib-dropdown-toggle aria-expanded="true">
+                   type="text" placeholder="Company" aria-expanded="true">
 
             <input type="hidden" ng-model="editInvoice.company.id" ng-required="true" name="customer">
 
             <div typeahead-input-icon="searchCompany"></div>
-
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li ng-repeat="company in companies | filter: {'name': searchCompany} | orderBy: 'name'"
-                  ng-click="chooseCompany(company)" ng-if="!company.isDefault">
-                <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
-              </li>
-            </ul>
           </div>
+
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li ng-repeat="company in companies | filter: {'name': searchCompany} | orderBy: 'name'"
+                ng-click="chooseCompany(company)" ng-if="!company.isDefault">
+              <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
+            </li>
+          </ul>
         </div>
         <div class="form-group" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'title')}">
           <label ng-hide="isShowingErrors(editInvoiceForm, 'title')">Title</label>
@@ -46,16 +46,16 @@
             <input class="form-control" type="text" ng-model="editInvoice.purchaseOrder"
                    name="purchaseOrder" ng-maxlength="15">
           </div>
-          <div class="col-sm-6" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'paymentTerms')}">
+          <div class="col-sm-6" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'paymentTerms')}"
+               uib-dropdown keyboard-nav="true">
             <label ng-hide="isShowingErrors(editInvoiceForm, 'paymentTerms')">Payment Terms</label>
             <div ng-messages="editInvoiceForm.paymentTerms.$error"
                  ng-show="isShowingErrors(editInvoiceForm, 'paymentTerms')">
               <label ng-message="required">Payment terms is required.</label>
             </div>
 
-            <div class="x-mark-wrapper">
-              <input class="form-control" type="text" ng-model="paramInvocie.paymentTerms"
-                     uib-dropdown-toggle readonly>
+            <div class="x-mark-wrapper" uib-dropdown-toggle>
+              <input class="form-control" type="text" ng-model="paramInvocie.paymentTerms" readonly>
               <span class="x-mark">
                 <i class="icn-sm icn-caret-gray"></i>
               </span>
@@ -87,20 +87,20 @@
                  qt-data-time-picker default-date="editInvoice.nextGenerationAt" min-date="minSentOnDate">
           <i class="icn-sm calendar"></i>
         </div>
-        <div class="form-group col-sm-3" uib-dropdown
+        <div class="form-group col-sm-3" uib-dropdown keyboard-nav="true"
              ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
           <label>Repeat every</label>
-          <div class="x-mark-wrapper">
-            <input class="form-control" type="text" uib-dropdown-toggle
+          <div class="x-mark-wrapper" uib-dropdown-toggle>
+            <input class="form-control" type="text"
                    ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
                    hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"
                    restore-from="{{ savedRepeatingInvoice }}">
-          <span class="suffix-days"
-                ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">
+            <span class="suffix-days"
+                  ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">
               {{ paramInvocie.repeatingInvoice == 1 ? 'day' : 'days' }}
             </span>
             <span class="x-mark">
-                          <i class="icn-sm icn-caret-gray"></i>
+              <i class="icn-sm icn-caret-gray"></i>
             </span>
           </div>
 
@@ -168,89 +168,89 @@
         </div>
       </div>
     </div>
-  </div>
-  <fieldset class="primary-edit-form invoice-update">
-    <div class="invoice-update" ng-controller="quicktech.core.recurring.editInvoiceExpensesCtrl">
+    <fieldset class="primary-edit-form invoice-update">
+      <div class="invoice-update" ng-controller="quicktech.core.recurring.editInvoiceExpensesCtrl">
 
-      <ul class="nav nav-ticket-add invoice-ticket-add">
+        <ul class="nav nav-ticket-add invoice-ticket-add">
 
-        <li class="invoice-update-btns" ng-click="setOpenedTab('product')">
-          <a href="javascript:void(0)">
-            <i class="icn-lg icn-add-product"></i>Product
-          </a>
-        </li>
+          <li class="invoice-update-btns" ng-click="setOpenedTab('product')">
+            <a href="javascript:void(0)">
+              <i class="icn-lg icn-add-product"></i>Product
+            </a>
+          </li>
 
-        <li class="invoice-update-btns" ng-click="setOpenedTab('service')">
-          <a href="javascript:void(0)">
-            <i class="icn-lg icn-add-service"></i>Service
-          </a>
-        </li>
-
-      </ul>
-
-      <div class="update-content">
-
-        <div class="tab-pane in active" ng-show="isTabOpened('product')">
-          <ul class="qt-table">
-
-            <li
-              ng-repeat="product in editInvoice.products track by (product.item ? product.item.versionedId.id + $index : $index)"
-              ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
-
-              <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
-
-            </li>
-          </ul>
-        </div>
-
-        <div class="tab-pane in active" ng-show="isTabOpened('service')">
-          <ul class="qt-table">
-
-            <li
-              ng-repeat="service in editInvoice.services track by (service.item ? service.item.versionedId.id + $index : $index)"
-              ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
-
-              <div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
-
-            </li>
-          </ul>
-        </div>
-
-        <div class="clearfix">
-          <div class="ticket-add-amount has-error" style="position: absolute;">
-            <span class="control-label">{{ getErrorMessage(editInvoiceForm) }}</span>
-          </div>
-
-          <div class="ticket-add-amount pull-right">
-            <span class="text-muted">Subtotal </span>
-            <strong>{{ subtotal | currency:'$':2 }}</strong>
-          </div>
-          <div class="ticket-add-amount pull-right">
-            <span class="text-muted">Tax </span>
-            <strong>{{ tax | currency:'$':2 }}</strong>
-          </div>
-          <div class="ticket-add-amount pull-right">
-            <span class="text-muted">Total </span>
-            <strong>{{ total | currency:'$':2 }}</strong>
-          </div>
-        </div>
+          <li class="invoice-update-btns" ng-click="setOpenedTab('service')">
+            <a href="javascript:void(0)">
+              <i class="icn-lg icn-add-service"></i>Service
+            </a>
+          </li>
 
         </ul>
+
+        <div class="update-content">
+
+          <div class="tab-pane in active" ng-show="isTabOpened('product')">
+            <ul class="qt-table">
+
+              <li
+                ng-repeat="product in editInvoice.products track by (product.item ? product.item.versionedId.id + $index : $index)"
+                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+
+                <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
+
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-pane in active" ng-show="isTabOpened('service')">
+            <ul class="qt-table">
+
+              <li
+                ng-repeat="service in editInvoice.services track by (service.item ? service.item.versionedId.id + $index : $index)"
+                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+
+                <div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
+
+              </li>
+            </ul>
+          </div>
+
+          <div class="clearfix">
+            <div class="ticket-add-amount has-error" style="position: absolute;">
+              <span class="control-label">{{ getErrorMessage(editInvoiceForm) }}</span>
+            </div>
+
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Subtotal </span>
+              <strong>{{ subtotal | currency:'$':2 }}</strong>
+            </div>
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Tax </span>
+              <strong>{{ tax | currency:'$':2 }}</strong>
+            </div>
+            <div class="ticket-add-amount pull-right">
+              <span class="text-muted">Total </span>
+              <strong>{{ total | currency:'$':2 }}</strong>
+            </div>
+          </div>
+
+          </ul>
+        </div>
+
       </div>
 
-    </div>
+      <div class="ticket-update-edit-actions clearfix">
 
-    <div class="ticket-update-edit-actions clearfix">
+        <div class="btn btn-lg btn-primary pull-right" style="min-width: 80px;" ng-click="saveInvoice(editInvoiceForm)"
+             custom-disabled="{{ hardDisabledSave }}">
+          {{ editInvoice.id ? 'Save' : 'Create' }}
+        </div>
 
-      <div class="btn btn-lg btn-primary pull-right" style="min-width: 80px;" ng-click="saveInvoice(editInvoiceForm)"
-           custom-disabled="{{ hardDisabledSave }}">
-        {{ editInvoice.id ? 'Save' : 'Create' }}
+        <div class="btn btn-lg btn-primary pull-right" style="min-width: 80px;" ng-click="toogleEditForm(false)">
+          Cancel
+        </div>
+
       </div>
-
-      <div class="btn btn-lg btn-primary pull-right" style="min-width: 80px;" ng-click="toogleEditForm(false)">
-        Cancel
-      </div>
-
-    </div>
-  </fieldset>
+    </fieldset>
+  </form>
 </div>

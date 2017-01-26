@@ -4060,6 +4060,7 @@ tbody.collapse.in {
 }
 .dropdown-menu, .uib-dropdown-menu {
   position: absolute;
+  overflow: auto;
   top: calc(100% + 10px);
   z-index: 1000;
   max-height: 300px;

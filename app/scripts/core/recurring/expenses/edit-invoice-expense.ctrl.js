@@ -5,6 +5,7 @@
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceExpenseCtrl',
     ['$scope', '$filter',
       function ($scope, $filter) {
+        var today = $filter('date')(new Date(), 'dd MMM yyyy');
 
         $scope.selectProduct = function (product) {
           $scope.product.item = angular.copy(product);
@@ -20,13 +21,14 @@
 
         $scope.setNewService = function (service) {
           $scope.service.item = angular.copy(service);
+          $scope.service.item.date = today;
         };
 
         $scope.deleteService = function () {
           if ($scope.editInvoice.services.length > 1) {
             $scope.editInvoice.services.splice($scope.$index, 1);
           } else {
-            $scope.editInvoice.services = [{ date: $filter('date')(new Date(), 'd MMM yyyy') }];
+            $scope.editInvoice.services = [{ date: today }];
           }
         }
 
