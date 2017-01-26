@@ -9364,7 +9364,7 @@ button.close {
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #4f5f79;
+  background-color: #fff;
   border-radius: 4px;
 }
 
@@ -9415,7 +9415,7 @@ button.close {
 }
 
 .switch input:checked ~ label {
-  background: #4f5f79;
+  background: #fff;
 }
 
 .switch input:checked ~ label i {
