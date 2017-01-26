@@ -89,7 +89,7 @@
               $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
             }
             if ($scope.editInvoice.services[i].date !== undefined) {
-              $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'dd MMM yyyy');
+              $scope.editInvoice.services[i].date = $filter('date')(new Date($scope.editInvoice.services[i].date), 'dd MMM yyyy');
             } else {
               $scope.editInvoice.services[i].date = $filter('date')(new Date(), 'dd MMM yyyy');
             }
@@ -182,12 +182,13 @@
         $scope.chooseCompany = function (company) {
           $scope.clients.splice(0, $scope.clients.length);
           resetSharedUsers(company);
-
+  
+          var today = $filter('date')(new Date(), 'dd MMM yyyy');
           if (!company) {
             delete $scope.editInvoice.company;
             delete $scope.companyServices;
             $scope.taxRatesCoef = 0;
-            $scope.editInvoice.services = [{}];
+            $scope.editInvoice.services = [{ date: today }];
             Utils.customizeArray(allClientUsers, $scope.clients);
             return;
           }
@@ -207,13 +208,13 @@
                 $scope.editInvoice.services[i].quantity = ( $scope.editInvoice.services[i].quantity * 60);
               }
               if ($scope.editInvoice.services[i].date !== undefined) {
-                $scope.editInvoice.services[i].date = $filter('date')($scope.editInvoice.services[i].date, 'd MMM yyyy');
+                $scope.editInvoice.services[i].date = $filter('date')(new Date($scope.editInvoice.services[i].date), 'dd MMM yyyy');
               } else {
-                $scope.editInvoice.services[i].date = $filter('date')(new Date(), 'd MMM yyyy');
+                $scope.editInvoice.services[i].date = today;
               }
             }
           } else {
-            $scope.editInvoice.services = [{}];
+            $scope.editInvoice.services = [{ date: today }];
           }
 
           TaxRatesService.getAllByCompany(company.id, $scope, function (resp) {
@@ -326,7 +327,7 @@
             endDay = undefined
           }
 
-          endDay = $filter('date')(endDay, 'd MMM yyyy');
+          endDay = $filter('date')(endDay, 'dd MMM yyyy');
 
           $scope.minEndDate = endDay;
           $scope.editInvoice.endDate = endDay;
@@ -368,7 +369,7 @@
 
         function setEndAndNum(option) {
           var repeat = $scope.paramInvocie.repeatingInvoice;
-          var sentOn = new Date($filter('date')($scope.editInvoice.nextGenerationAt, 'd MMM yyyy'));
+          var sentOn = new Date($filter('date')($scope.editInvoice.nextGenerationAt, 'dd MMM yyyy'));
 
           if (option === 'endDate') {
             var endDate = new Date(sentOn);
@@ -384,7 +385,7 @@
               console.error('Unsupported Repeating Invoice every')
             }
 
-            endDate = $filter('date')(endDate, 'd MMM yyyy');
+            endDate = $filter('date')(endDate, 'dd MMM yyyy');
             $scope.editInvoice.endDate = endDate;
 
           } else if (option === 'num') {
@@ -537,7 +538,7 @@
             }
 
             if (servicesEmpty) {
-              $scope.editInvoice.services.push({});
+              $scope.editInvoice.services.push({ date: $filter('date')(new Date(), 'dd MMM yyyy') });
             }
 
             if (productsEmpty) {

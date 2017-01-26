@@ -3,8 +3,8 @@
 (function () {
 
   angular.module('quicktech.core.recurring').controller('quicktech.core.recurring.editInvoiceExpensesCtrl',
-    ['$scope',
-      function ($scope) {
+    ['$scope', '$filter',
+      function ($scope, $filter) {
 
         $scope.openTab = 'product';
         $scope.subtotal = 0;
@@ -30,7 +30,7 @@
           }
 
           if (isLastServiceValid(form)) {
-            $scope.editInvoice.services.push({});
+            $scope.editInvoice.services.push({ date: $filter('date')(new Date(), 'dd MMM yyyy') });
             $scope.tryAddExpense.tryToAddService = false;
           } else {
             $scope.tryAddExpense.tryToAddService = true;
