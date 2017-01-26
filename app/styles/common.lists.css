@@ -2233,7 +2233,8 @@ Devices tab
 }
 
 .qt-product-edit .product-actions {
-  top: 16px;
+  top: 10px;
+  right: 15px;
 }
 
 .qt-products > li:hover .product-actions,
@@ -2268,8 +2269,6 @@ Devices tab
   padding: 0 !important;
 
   cursor: auto !important;
-
-  border-bottom: 1px solid #e2f1fd;
 }
 
 .qt-product-edit:before,
@@ -2300,12 +2299,12 @@ Devices tab
 }
 
 .qt-product-edit .form-control {
-  height: 70px;
-  padding-left: 0;
+  /*height: 70px;*/
+  /*padding-left: 0;*/
 
-  border-color: transparent;
-  border-left: none;
-  background-color: transparent;
+  /*border-color: transparent;*/
+  /*border-left: none;*/
+  /*background-color: transparent;*/
 }
 
 .qt-product-list {

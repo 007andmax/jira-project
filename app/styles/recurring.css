@@ -580,7 +580,7 @@ fieldset.primary-edit-form {
 }
 .suffix-days {
   position: absolute;
-  top: 0;
+  top: 7px;
   right: 30px;
 
   color: rgba(0, 0, 0, 0.23);

@@ -141,6 +141,10 @@
   padding-top: 25px;
 }
 
+.settings-main-wrapper.permission-settings{
+  width: 700px;
+}
+
 .settings-main-wrapper textarea {
   min-height: 200px;
   padding-top: 8px;

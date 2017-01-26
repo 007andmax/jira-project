@@ -75,7 +75,7 @@
 }
 
 .main-container {
-  padding-top: 80px;
+  padding-top: 78px;
 }
 @-moz-document url-prefix() {
   .main-container > .row {
