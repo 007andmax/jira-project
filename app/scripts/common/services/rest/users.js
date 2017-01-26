@@ -89,12 +89,13 @@
             }
           } else if (newChange.action == 'USER_ARCHIVED') {
             var user = Utils.findById(storage.users, newChange.data.id);
+            Utils.customizeObj(newChange.data, user);
             if (user) {
               storage.deleted.push(user);
             }
             Utils.deleteById(storage.users, newChange.data.id);
             Utils.deleteById(storage.clientUsers, newChange.data.id);
-            if (user) {
+            if (storage.usersByCompanies[user.company.id]) {
               Utils.deleteById(storage.usersByCompanies[user.company.id], newChange.data.id);
             }
           } else if (newChange.action == 'USER_ONLINE') {
@@ -108,12 +109,7 @@
               if (user.company.id === newChange.data.id) {
                 storage.deleted.push(user);
                 storage.users.splice(i, 1);
-                i--;
-              }
-            }
-            for (var i = 0; i < storage.clientUsers.length; i++) {
-              if (storage.clientUsers[i].company.id === newChange.data.id) {
-                storage.clientUsers.splice(i, 1);
+                storage.clientUsers.splice(storage.clientUsers.indexOf(user), 1);
                 i--;
               }
             }
@@ -168,6 +164,7 @@
       
       function addOrUpdateClientUser(updUser) {
         var user = Utils.findById(storage.users, updUser.id);
+        Utils.deleteById(storage.deleted, updUser.id);
         
         if (user) {
           Utils.customizeObj(updUser, user);
@@ -187,8 +184,10 @@
           if (!storage.usersByCompanies[newUser.company.id]) {
             storage.usersByCompanies[newUser.company.id] = [];
           }
-          
-          storage.usersByCompanies[newUser.company.id].push(newUser);
+  
+          if (!Utils.findById(storage.usersByCompanies[newUser.company.id], newUser.id)) {
+            storage.usersByCompanies[newUser.company.id].push(newUser);
+          }
         }
       }
       
