@@ -95,8 +95,8 @@
             }
             Utils.deleteById(storage.users, newChange.data.id);
             Utils.deleteById(storage.clientUsers, newChange.data.id);
-            if (storage.usersByCompanies[user.company.id]) {
-              Utils.deleteById(storage.usersByCompanies[user.company.id], newChange.data.id);
+            if (storage.usersByCompanies[newChange.data.company.id]) {
+              Utils.deleteById(storage.usersByCompanies[newChange.data.company.id], newChange.data.id);
             }
           } else if (newChange.action == 'USER_ONLINE') {
             var user = Utils.findById(storage.users, newChange.data.id);
