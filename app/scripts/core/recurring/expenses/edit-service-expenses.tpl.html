@@ -11,7 +11,7 @@
 
       <input type="hidden" name="service" ng-model="service.item.versionedId.id" ng-required="true">
 
-      <ul ng-class="{'dropdown-menu dropdown-menu-services': !!companyServices}" style="margin-left: 10px;">
+      <ul ng-class="{'dropdown-menu dropdown-menu-services': !!companyServices}">
 
         <li role="presentation"
             ng-repeat="companyService in companyServices | filter: {name: editService.item.name} | orderBy: 'name'">

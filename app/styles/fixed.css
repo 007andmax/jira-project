@@ -907,7 +907,11 @@ aside#left div.nav-title {
 }
 
 .custom-product-list {
-  height: 200px;
+  width: 296px;
+  margin-left: 0 !important;
+}
+
+.ticket-add-product .custom-product-list {
   width: 99%;
 }
 

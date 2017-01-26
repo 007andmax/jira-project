@@ -1363,3 +1363,9 @@
   margin-left: 5px;
 }
 
+.restore{
+  position: absolute;
+  right: 1%;
+  width: 20px;
+  height: 20px;
+}
