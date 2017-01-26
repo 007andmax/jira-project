@@ -260,11 +260,11 @@
   cursor: not-allowed;
 }
 
-.edit-invoice-form .product-expense > .col1,
-.edit-invoice-form .service-expense > .col1, .col2 {
+.edit-recurring-invoice .product-expense > .col1,
+.edit-recurring-invoice .service-expense > .col1, .col2 {
   position: relative;
 }
-.edit-invoice-form .product-expense > div{
+.edit-recurring-invoice .product-expense > div{
   display: table-cell;
 
   width: 32%;
@@ -272,7 +272,7 @@
 
   vertical-align: top;
 }
-.edit-invoice-form .service-expense > div {
+.edit-recurring-invoice .service-expense > div {
   display: table-cell;
 
   width: 25%;
@@ -452,6 +452,7 @@ span.control-label.error-required {
 }
 ul.qt-recurring-invoices {
   margin-bottom: 150px;
+  padding-top: 0;
 }
 
 .invoice-table .table-invoice-item div .icn-description,
@@ -572,7 +573,7 @@ ul.qt-recurring-invoices {
   background-color: #fff2f2 !important;
 }
 fieldset.primary-edit-form {
-  padding: 0 15px 0 55px;
+  padding: 0 15px;
 }
 .suffix-days {
   position: absolute;

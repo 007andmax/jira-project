@@ -220,10 +220,9 @@
 .card-footer .btn-default{
   line-height: 1.5;
   height: 27px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  border-radius: 4px;
   float: left;
+  border-color: transparent;
 }
 
 .card-footer .btn-default span.plus-card{

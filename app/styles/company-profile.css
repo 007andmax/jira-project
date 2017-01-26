@@ -68,6 +68,10 @@
   top: -1px;
 }
 
+.company-contact-type .ellipsis{
+  line-height: 18px;
+}
+
 .company-contact-type p{
   font-weight: 100;
 }
@@ -181,7 +185,7 @@
 }
 
 .company-work-info table tbody:not(:first-child) p:first-child{
-  padding-top: 15px;
+  padding-top: 10px;
   padding-bottom: 5px;
 }
 

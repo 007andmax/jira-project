@@ -1504,14 +1504,14 @@ Devices tab
   padding-top: 30px;
 }
 
-.qt-create-invoice {
-  min-height: 166px;
-  margin-bottom: 25px;
-  padding: 15px;
+/*.qt-create-invoice {*/
+  /*min-height: 166px;*/
+  /*margin-bottom: 25px;*/
+  /*padding: 15px;*/
 
-  background-color: #ffffff;
-  box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;
-}
+  /*background-color: #ffffff;*/
+  /*box-shadow: rgba(10, 45, 89, 0.15) 0 0 25px 0;*/
+/*}*/
 
 .qt-invoice-form-wrapper .qt-invoices,
 .qt-create-invoice-form-wrapper .qt-invoices {

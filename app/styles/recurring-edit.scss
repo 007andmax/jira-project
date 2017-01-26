@@ -1,0 +1,30 @@
+.qt-create-invoice{
+  background-color: #edf2f6;
+}
+
+.edit-recurring-invoice.container {
+  max-width: 700px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  .row {
+    padding-left: 0;
+    padding-right: 0;
+    &.form-group {
+      > .col-sm-6 {
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+    textarea{
+      height: 185px;
+    }
+    label{
+      color: #364656;
+    }
+  }
+}
