@@ -11,19 +11,21 @@
             <label ng-message="required">Customer is required.</label>
           </div>
 
-          <input class="form-control" ng-model="searchCompany"
-                 type="text" placeholder="Company" uib-dropdown-toggle aria-expanded="true">
+          <div class="x-mark-wrapper">
+            <input class="form-control" ng-model="searchCompany"
+                   type="text" placeholder="Company" uib-dropdown-toggle aria-expanded="true">
 
-          <input type="hidden" ng-model="editInvoice.company.id" ng-required="true" name="customer">
+            <input type="hidden" ng-model="editInvoice.company.id" ng-required="true" name="customer">
 
-          <div typeahead-input-icon="searchCompany"></div>
+            <div typeahead-input-icon="searchCompany"></div>
 
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li ng-repeat="company in companies | filter: {'name': searchCompany} | orderBy: 'name'"
-                ng-click="chooseCompany(company)" ng-if="!company.isDefault">
-              <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
-            </li>
-          </ul>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li ng-repeat="company in companies | filter: {'name': searchCompany} | orderBy: 'name'"
+                  ng-click="chooseCompany(company)" ng-if="!company.isDefault">
+                <a tabindex="-1" href="javascript:void(0)">{{ company.name }}</a>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="form-group" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'title')}">
           <label ng-hide="isShowingErrors(editInvoiceForm, 'title')">Title</label>
@@ -51,9 +53,13 @@
               <label ng-message="required">Payment terms is required.</label>
             </div>
 
-            <input class="form-control" type="text" ng-model="paramInvocie.paymentTerms"
-                   uib-dropdown-toggle readonly>
-            <i class="icn-sm icn-caret-gray"></i>
+            <div class="x-mark-wrapper">
+              <input class="form-control" type="text" ng-model="paramInvocie.paymentTerms"
+                     uib-dropdown-toggle readonly>
+              <span class="x-mark">
+                <i class="icn-sm icn-caret-gray"></i>
+              </span>
+            </div>
 
             <input type="hidden" ng-model="editInvoice.paymentTerms" name="paymentTerms" required>
 
@@ -84,15 +90,19 @@
         <div class="form-group col-sm-3" uib-dropdown
              ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'repeatingInvoice')}">
           <label>Repeat every</label>
-          <input class="form-control" type="text" uib-dropdown-toggle
-                 ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
-                 hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"
-                 restore-from="{{ savedRepeatingInvoice }}">
+          <div class="x-mark-wrapper">
+            <input class="form-control" type="text" uib-dropdown-toggle
+                   ng-model="paramInvocie.repeatingInvoice" ng-click="saveAndClear()"
+                   hard-reset-pattern="repeatingPattern" ng-change="changeRepeatInvoice()"
+                   restore-from="{{ savedRepeatingInvoice }}">
           <span class="suffix-days"
                 ng-if="!paramInvocie.repeatingInvoice || isNumber(paramInvocie.repeatingInvoice)">
               {{ paramInvocie.repeatingInvoice == 1 ? 'day' : 'days' }}
             </span>
-          <i class="icn-sm icn-caret-gray"></i>
+            <span class="x-mark">
+                          <i class="icn-sm icn-caret-gray"></i>
+            </span>
+          </div>
 
           <input type="hidden" ng-model="repeatingInvoiceModel" name="repeatingInvoice"
                  ng-required="true">
@@ -183,8 +193,9 @@
         <div class="tab-pane in active" ng-show="isTabOpened('product')">
           <ul class="qt-table">
 
-            <li ng-repeat="product in editInvoice.products track by (product.item ? product.item.versionedId.id + $index : $index)"
-                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+            <li
+              ng-repeat="product in editInvoice.products track by (product.item ? product.item.versionedId.id + $index : $index)"
+              ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
               <div ng-include="'/html/scripts/core/recurring/expenses/edit-product-expenses.tpl.html'"></div>
 
@@ -195,8 +206,9 @@
         <div class="tab-pane in active" ng-show="isTabOpened('service')">
           <ul class="qt-table">
 
-            <li ng-repeat="service in editInvoice.services track by (service.item ? service.item.versionedId.id + $index : $index)"
-                ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
+            <li
+              ng-repeat="service in editInvoice.services track by (service.item ? service.item.versionedId.id + $index : $index)"
+              ng-controller="quicktech.core.recurring.editInvoiceExpenseCtrl">
 
               <div ng-include="'/html/scripts/core/recurring/expenses/edit-service-expenses.tpl.html'"></div>
 

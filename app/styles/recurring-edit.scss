@@ -27,4 +27,13 @@
       color: #364656;
     }
   }
+  .x-mark-wrapper{
+    position: relative;
+    .x-mark{
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      padding: 10px;
+    }
+  }
 }

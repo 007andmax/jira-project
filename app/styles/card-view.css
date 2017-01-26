@@ -129,7 +129,7 @@
 .card-wrapper .card .card-header{
   margin-bottom: 13px;
   position: relative;
-  min-height: 50px;
+  min-height: 56px;
 }
 
 .card-wrapper .card .card-header .edit-icn{
@@ -267,7 +267,7 @@
 }
 
 .card .set-privileges.open{
-  height: 230px;
+  height: 240px;
   padding: 15px;
   border: 1px solid #bbc2ce;
   transition: height .3s;

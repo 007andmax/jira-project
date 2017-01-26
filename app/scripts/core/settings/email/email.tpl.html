@@ -10,8 +10,7 @@
     <div class="form-row clearfix">
       <div class="form-group full-width">
 
-        <input class="form-control" type="text" readonly/>
-        <span style="top: 10px;" class="company-url-addon">{{ supportMailBox + '@' + currentHost }}</span>
+        <input style="text-align: center;" class="form-control" value="{{ supportMailBox + '@' + currentHost }}" type="text" readonly/>
       </div>
       <label style="margin: 10px;" class="control checkbox pull-left">
         <input type="checkbox" ng-model="inboxEnabled" ng-change="saveInboxEnabled(inboxEnabled)">
