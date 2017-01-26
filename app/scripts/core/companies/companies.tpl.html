@@ -4,7 +4,7 @@
       <div class="archived-change">
         <span class="pull-left">Archived companies</span>
         <div class="switch">
-          <input type="checkbox">
+          <input type="checkbox" ng-model="archivedShown">
           <label><i></i></label>
         </div>
       </div>
@@ -28,13 +28,16 @@
   <div class="company-profile-content companies-list not-charts-companies-page" style="background: #edf2f6">
     <div class="card-view-wrapper clearfix" ng-if="companiesView === 'grid'">
       <div class="card-wrapper"
-           ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: 'name')) track by company.id"
+           ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: 'name')) track by company.id"
            ng-controller="quicktech.core.companies.companyCtrl">
         <div class="card">
           <div class="card-header clearfix">
-            <div class="edit-icn" create-new-entity="company" item="company" stop-propagation="click"></div>
+            <div class="edit-icn" ng-if="!company.deletedAt"
+                 create-new-entity="company" item="company" stop-propagation="click"></div>
+            <i class="icn-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
+
             <div class="photo" ng-style="{'background': 'url(' + getCompanyLogoUrl(company) + ') no-repeat'}"
-                 ui-sref="companyProfile({ companyId: company.id })"></div>
+                 ng-click="openCompany(company)"></div>
             <p class="ellipsis name"
                uib-tooltip="{{ company.name }}" tooltip-placement="bottom" trimmed-tooltip-checker="company.name">
             </p>
@@ -68,7 +71,7 @@
               <p>{{ location }}</p>
             </div>
           </div>
-          <div class="card__stats clearfix" ui-sref="companyProfile({ companyId: company.id })">
+          <div class="card__stats clearfix" ng-click="openCompany(company)">
             <div>
               <p>Tickets</p>
               <p><strong>{{ company.companyStatistic.ticketsSubmitted || '0' }}</strong></p>
@@ -143,7 +146,7 @@
     </li>
 
     <li class="list-company-row"
-        ng-repeat="company in (companiesCtrl.shownCompanies = (companies | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
+        ng-repeat="company in (companiesCtrl.shownCompanies = (companies.concat(archivedCompanies) | filter: filterCompanies | orderBy: orderByForCompanies: orderCompanies.reverse)) track by company.id"
         ng-controller="quicktech.core.companies.companyCtrl"
         ui-sref="companyProfile({ companyId: company.id })">
       <div class="col-xs-3">
@@ -163,10 +166,10 @@
       </div>
       <div class="col-xs-1">
         <div create-new-entity="ticket" company-id="{{ company.id }}"
-             style="margin-left: 15px; display: inline-block;"
+             style="margin-left: 15px; display: inline-block;" custom-disabled="{{ company.deletedAt }}"
              uib-tooltip="Create Ticket" tooltip-placement="top" stop-propagation="click">
           <span><i class="nav-icon icn-lg icn-unassigned"></i></span>
-            <span class="badge badge-primary-outline list-company-badge">
+          <span class="badge badge-primary-outline list-company-badge">
             {{ company.companyStatistic.ticketsSubmitted || '0' }}
           </span>
         </div>
@@ -174,19 +177,22 @@
       <div class="col-xs-1">
         <div style="display: inline-block;margin-left: 15px;">
           <span><i class="icn-lg icn-tab-devices" style="margin: 0;"></i></span>
-            <span class="badge badge-primary-outline list-company-badge">
+          <span class="badge badge-primary-outline list-company-badge">
             {{ devicesCount[company.id].all || '0' }}
           </span>
         </div>
       </div>
       <div class="col-xs-1">
-        <div ui-sref="companyProfile({ companyId: company.id, tabName: 'users' })"
+        <div ng-click="openCompany(company, 'users')"
              style="display: inline-block;margin-left: 15px;" stop-propagation="click">
           <span><i class="nav-icon icn-lg icn-user-lg" style="margin: 0;"></i></span>
-            <span class="badge badge-primary-outline list-company-badge">
+          <span class="badge badge-primary-outline list-company-badge">
             {{ companyComponentsCount.users.length || '0' }}
           </span>
         </div>
+      </div>
+      <div class="col-xs-1">
+        <i class="icn-sm icn-restore" ng-if="company.deletedAt" ng-click="dearchiveCompany(company)"></i>
       </div>
     </li>
   </ul>

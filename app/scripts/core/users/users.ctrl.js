@@ -14,8 +14,8 @@
         }
 
         var headerSharedState = SharedStateService.getSharedState('usersHeader');
-        var globalSearch = SharedStateService.getSharedState('globalSearch'),
-          availableViews = ['list', 'grid'];
+        var globalSearch = SharedStateService.getSharedState('globalSearch');
+        var availableViews = ['list', 'grid'];
 
         $scope.usersCtrl = {};
 
@@ -24,9 +24,11 @@
           field: 'name',
           reverse: false
         };
+        $scope.archivedShown = false;
 
         $scope.PermissionsService = PermissionsService;
         $scope.users = UsersService.getClientUsers();
+        $scope.archivedUsers = UsersService.getArchivedUsers();
 
         $scope.changeView = function (view) {
           if (availableViews.indexOf(view) !== -1) {
@@ -48,6 +50,12 @@
           var company = CompaniesService.getOneById(value.company.id);
           var clientType = company.clientType;
           var result = true;
+  
+          if ($scope.archivedShown) {
+            return value.deletedAt;
+          } else {
+            result = result && !value.deletedAt;
+          }
 
           if (filter.userId) {
             result = result && filter.userId === value.id;

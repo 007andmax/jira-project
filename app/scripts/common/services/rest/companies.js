@@ -30,7 +30,7 @@
           if (custCompany.deletedAt) {
             storage.deletedCompanies.push(custCompany);
           } else {
-            if (!custCompany.isDefault) {
+            if (!custCompany.isDefault && custCompany.clientType) {
               if (custCompany.clientType.toLowerCase() !== 'vendor') {
                 storage.clientCompanies.push(custCompany);
               } else {
@@ -106,7 +106,7 @@
       } else if (newChange.action == 'COMPANY_ARCHIVED') {
         var deletedCompany = Utils.findById(storage.companies, companyId);
         if (deletedCompany) {
-          storage.deletedCompanies.push(deletedCompany);
+          storage.deletedCompanies.push(Utils.customizeObj(newChange.data, deletedCompany));
         }
 
         Utils.deleteById(storage.companies, companyId);
@@ -132,6 +132,7 @@
         }
 
         storage.companies.push(company);
+        Utils.deleteById(storage.deletedCompanies, company.id);
 
         for (var i = 0; i < amountChangeListeners.length; i++) {
           amountChangeListeners[i]();
@@ -154,6 +155,10 @@
 
     function getAllCompanies() {
       return storage.companies;
+    }
+
+    function getArchivedCompanies() {
+      return storage.deletedCompanies;
     }
 
     function getVendors() {
@@ -211,16 +216,11 @@
     }
 
     function archive(companyId, callback) {
-      if (!companyId) throw 'companyId is required!';
-      $http.get('/company/archive/' + companyId).then(function (resp) {
-        callback(resp);
-      }, function (resp) {
-        callback(resp);
-      });
+      var future = $http.get('/company/archive/' + companyId);
+      Utils.handleCallback(future, callback);
     }
 
     function dearchive(companyId, callback) {
-      if (!companyId) throw 'companyId is required!';
       var future = $http.get('/company/dearchive/' + companyId);
       Utils.handleCallback(future, callback);
     }
@@ -254,12 +254,6 @@
 
           for (var companyId in  data) {
             Utils.defineReadOnlyProperty(info, companyId, Utils.customizeObj(data[companyId]));
-          }
-        } else if (newChange.action == 'COMPANY_ARCHIVED') {
-          delete info[newChange.data.id];
-
-          if (callbackForArchive && (typeof callbackForArchive == 'function')) {
-            callbackForArchive(newChange.data.id);
           }
         }
       });
@@ -758,6 +752,7 @@
       getVendors: getVendors,
       getClientCompanies: getClientCompanies,
       getAllCompanies: getAllCompanies,
+      getArchivedCompanies: getArchivedCompanies,
       getOneById: getOneById,
       getUnassignedCompany: getUnassignedCompany,
       searchByAllCompanies: searchByAllCompanies,

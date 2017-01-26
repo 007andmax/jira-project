@@ -4,7 +4,7 @@
       <div class="archived-change">
         <span class="pull-left">Archived users</span>
         <div class="switch">
-          <input type="checkbox">
+          <input type="checkbox" ng-model="archivedShown">
           <label><i></i></label>
         </div>
       </div>
@@ -26,10 +26,12 @@
 
     <div class="card-view-wrapper clearfix">
       <div class="card-wrapper" ng-controller="quicktech.core.users.userCtrl"
-           ng-repeat="user in (usersCtrl.shownUsers = (users | filter : usersFilter | orderBy: getUserName)) track by user.id">
+           ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter : usersFilter | orderBy: getUserName)) track by user.id">
         <div class="card">
           <div class="card-header">
-            <div class="edit-icn" create-new-entity="user" item="user"></div>
+            <div class="edit-icn" ng-if="!user.deletedAt" create-new-entity="user" item="user"></div>
+            <i class="icn-sm icn-restore" ng-if="user.deletedAt" ng-click="dearchiveUser(user)"></i>
+
             <div class="photo" ng-style="{'background': 'url(' + getUserAvatarUrl(user) + ') no-repeat'}"></div>
             <p class="ellipsis name" uib-tooltip="{{ getUserName(user) }}" tooltip-placement="bottom"
                trimmed-tooltip-checker="getUserName(user)">
@@ -65,7 +67,7 @@
               <span style="padding-left: 0;" ng-click="goToUserTickets(user)"><a style="padding-left: 10px;" href="">View Tickets</a></span>
             </div>
           </div>
-          <div class="card-footer clearfix">
+          <div class="card-footer clearfix" ng-hide="user.deletedAt">
             <button class="btn btn-default" create-new-entity="ticket" user-id="{{ user.id }}">
               <span class="plus-card">+</span>New Ticket
             </button>
@@ -170,10 +172,8 @@
       <div class="col-lg-2 col-xs-1 buttons-col"></div>
     </li>
 
-    <li
-      ng-repeat="user in (usersCtrl.shownUsers = (users | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) track by user.id"
-      ng-controller="quicktech.core.users.userCtrl"
-      show-model-element="{{ 'show-user-on-save-' + user.id }}">
+    <li ng-controller="quicktech.core.users.userCtrl" show-model-element="{{ 'show-user-on-save-' + user.id }}"
+        ng-repeat="user in (usersCtrl.shownUsers = (users.concat(archivedUsers) | filter: usersFilter | orderBy: orderByForUsers: orderUsers.reverse)) track by user.id">
 
       <div class="users-list-wrapper">
         <div class="col-lg-3 col-xs-3">
@@ -208,7 +208,7 @@
         <div class="col-lg-1 col-xs-1 type-col text-center">
           <div class="user-account-type" uib-dropdown>
 
-            <div aria-expanded="false" uib-dropdown-toggle>
+            <div aria-expanded="false" uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
               <span>{{ user.role }}</span>
             </div>
 
@@ -233,12 +233,17 @@
 
         <div class="col-lg-1 col-xs-2  subscribe-col" uib-dropdown>
 
-          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" uib-dropdown-toggle tooltip-placement="top">
-            <img src="images/input-icons/ticket-update-green.png" alt="" ng-show="user.subscription.ticket" uib-tooltip="Ticket Updates">
-            <img src="images/input-icons/invoice-update-orange.png" alt="" ng-show="user.subscription.invoice" uib-tooltip="Invoice Updates">
-            <img src="images/input-icons/tick-manager-blue.png" alt="" ng-show="user.subscription.ticketManager" uib-tooltip="Ticket Manages">
+          <div id="has-invoice-updates1" class="persistent-tooltip" aria-expanded="false" tooltip-placement="top"
+               uib-dropdown-toggle custom-disabled="{{ user.deletedAt }}">
+            <img src="images/input-icons/ticket-update-green.png" alt=""
+                 ng-if="user.subscription.ticket" uib-tooltip="Ticket Updates">
+            <img src="images/input-icons/invoice-update-orange.png" alt=""
+                 ng-if="user.subscription.invoice" uib-tooltip="Invoice Updates">
+            <img src="images/input-icons/tick-manager-blue.png" alt=""
+                 ng-if="user.subscription.ticketManager" uib-tooltip="Ticket Manages">
             <div class="no-subscribe" uib-tooltip="No Subscriptions"
-                 ng-show="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager"></div>
+                 ng-if="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager">
+            </div>
           </div>
 
           <ul class="dropdown-menu dropdown-subscribe">
@@ -290,7 +295,7 @@
           <div class="list-actions pull-right">
 
             <div class="btn btn-default pull-left has-tooltip" create-new-entity="user" item="user"
-                 ng-if="PermissionsService.isAllowed('EDIT_USERS')"
+                 ng-if="PermissionsService.isAllowed('EDIT_USERS') && !user.deletedAt"
                  tooltip-placement="top" uib-tooltip="Edit">
               <i class="icn-sm icn-edit"></i>
             </div>
@@ -304,8 +309,12 @@
             <div class="btn btn-default pull-left has-tooltip" ng-click="archiveUser()"
                  custom-disabled="{{ !PermissionsService.isAllowed('ARCHIVE_USERS')
                       || user.isContact || isLastUserWithInvoiceSubscription(user) }}"
-                 tooltip-placement="top" uib-tooltip="Archive this User">
+                 tooltip-placement="top" uib-tooltip="Archive this User" ng-if="!user.deletedAt">
               <i class="icn-sm icn-delete"></i>
+            </div>
+
+            <div class="btn btn-default pull-left has-tooltip" ng-if="user.deletedAt">
+              <i class="icn-sm icn-restore" ng-click="dearchiveUser(user)"></i>
             </div>
 
           </div>

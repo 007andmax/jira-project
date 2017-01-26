@@ -145,6 +145,16 @@
   cursor: pointer;
 }
 
+.card-wrapper .card .card-header .icn-restore{
+  position: absolute;
+  left: auto !important;
+  right: 0px;
+  top: 4px;
+  margin: auto;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.card-wrapper .card .card-header .icn-restore,
 .card-wrapper .card .card-header .edit-icn:hover {
   opacity: 1;
 }

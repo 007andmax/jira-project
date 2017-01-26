@@ -69,18 +69,18 @@
 
         $scope.archiveCompany = function () {
           var company = CompaniesService.getOneById($scope.company.id);
-          var confirmMessage = 'Do you want to archive ' + company.name;
+          var confirmMessage = 'Do you want to archive ' + company.name + '?';
           var confirmButton = 'Yes';
-
+  
           UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
-            CompaniesService.archive($scope.company.id, function (resp) {
-              if (resp.data.code == 403) {
+            CompaniesService.archive(company.id, function (resp) {
+              if (resp.data && resp.data.code == 403) {
                 UserNotificationService.show(resp.data.message, true);
               } else {
                 $state.go('companies');
               }
             });
-          })
+          });
         };
 
         $scope.showEditCover = function (option) {

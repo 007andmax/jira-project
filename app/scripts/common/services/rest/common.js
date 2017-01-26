@@ -115,6 +115,13 @@
     $rootScope.numberCounterDelimiter = '-';
 
   }]);
+  
+  services.factory('$exceptionHandler', ['$log', function($log) {
+    return function myExceptionHandler(exception, cause) {
+      //todo: send errors to the backend (need endpoint)
+      $log.warn(exception, cause);
+    };
+  }]);
 
   services.service('Downloader', function () {
 

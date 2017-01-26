@@ -34,7 +34,7 @@
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             try {
-              UsersService.deleteOrArchiveUser($scope.user.id, true, function () {
+              UsersService.archiveUser($scope.user.id, function () {
                 if (delete $scope.selectedUsers[$scope.user.id]) {
                   $scope.changeSelectedUsers();
                 }

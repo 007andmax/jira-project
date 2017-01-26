@@ -47,7 +47,7 @@
 
           UserConfirmationsService.show(confirmMessage, confirmButton).then(function () {
             try {
-              UsersService.deleteOrArchiveUser($scope.selectUsersIds, true, function () {
+              UsersService.archiveUser($scope.selectUsersIds, function () {
                 $scope.companyProfileHeader.unCheckAll();
               });
             } catch (err) {
