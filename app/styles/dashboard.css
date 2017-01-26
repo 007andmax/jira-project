@@ -343,6 +343,9 @@ header .calendar-top input {
   align-items: center;
   height: 40px;
   max-height: 182px;
+}
+
+.dashboard-main .stats__main--count p{
   font-size: 28px;
 }
 
