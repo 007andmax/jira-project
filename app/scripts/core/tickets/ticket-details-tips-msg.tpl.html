@@ -95,9 +95,9 @@
         Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+      <div class="btn btn-primary btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
            ng-click="deleteForever()">Delete Forever</div>
-      <div class="btn btn-dark btn-lg" ng-click="moveToTrash(false)">Restore</div>
+      <div class="btn btn-success btn-lg" ng-click="moveToTrash(false)">Restore</div>
     </div>
   </div>
 
@@ -113,9 +113,9 @@
         Restoring ticket moves the ticket back to its original folder where it was deleted from. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+      <div class="btn btn-primary btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
            ng-click="deleteForever()">Delete Forever</div>
-      <div class="btn btn-dark btn-lg" ng-click="moveToTrash(false)">Restore</div>
+      <div class="btn btn-success btn-lg" ng-click="moveToTrash(false)">Restore</div>
     </div>
   </div>
 
@@ -133,14 +133,14 @@
         Restoring ticket moves the ticket back to its original folder where it was reported as spam. </span>
     </div>
     <div class="well-actions">
-      <div class="btn btn-danger btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
+      <div class="btn btn-primary btn-lg" ng-if="TicketsPermissionsService.isActionVisible('delete_forever', ticketDetails)"
            ng-click="deleteForever()">
         Delete Forever
       </div>
-      <div class="btn btn-danger btn-lg" ng-click="moveIntoSpam()" ng-if="currentUser.isOwner && !ticketDetails.spamMarker">
+      <div class="btn btn-primary btn-lg" ng-click="moveIntoSpam()" ng-if="currentUser.isOwner && !ticketDetails.spamMarker">
         Mark as Spam
       </div>
-      <div class="btn btn-dark btn-lg" ng-click="restoreFromSpam()">Restore</div>
+      <div class="btn btn-success btn-lg" ng-click="restoreFromSpam()">Restore</div>
     </div>
   </div>
 

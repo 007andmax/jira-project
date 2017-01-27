@@ -483,13 +483,14 @@
 }
 .ticket-update-edit-actions{
   margin-top: 30px;
+  text-align: right;
 }
 .ticket-update-edit-actions .validation-msg{
   color: #e53935;
   padding-top: 9px;
 }
 .ticket-update-edit-actions .btn{
-  margin-left: 10px;
+  min-width: 80px;
 }
 
 @-moz-document url-prefix() {

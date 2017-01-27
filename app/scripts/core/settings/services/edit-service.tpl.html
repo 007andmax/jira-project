@@ -4,7 +4,8 @@
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceName')}">
     <!--style for TODO hide timeAllotment-->
 
-    <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceName')}">
+    <label class="control-label" ng-if="!editService.versionedId.id"
+           ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceName')}">
       Service name
     </label>
 
@@ -36,14 +37,15 @@
        ng-class="{'has-error': isShowingErrors(editServiceForm, 'editServiceRate')}">
     <!--style for TODO hide timeAllotment-->
 
-    <label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceRate')}">
+    <label class="control-label" ng-if="!editService.versionedId.id"
+           ng-class="{'hide': isShowingErrors(editServiceForm, 'editServiceRate')}">
       Per hour
     </label>
 
     <div ng-messages="editServiceForm.editServiceRate.$error"
          ng-class="{'hide': !isShowingErrors(editServiceForm, 'editServiceRate')}">
       <label class="control-label" ng-message="required">
-        Per hour is required.
+        Price is required.
       </label>
     </div>
 
@@ -54,7 +56,7 @@
 
   <div class="col-3">
 
-    <label class="control-label">
+    <label class="control-label" ng-if="!editService.versionedId.id">
       Is billable
     </label>
 
@@ -88,15 +90,15 @@
 
   <!--</div>-->
 
-  <div class="qt-form-actions" style="width: auto;">
+  <div class="qt-form-actions" ng-class="{'anton': editService.versionedId.id}" style="width: auto;">
     <!--<div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>-->
 
-    <div class="btn btn-lg btn-primary pull-right"
+    <div class="btn btn-lg btn-success"
          ng-click="saveEditService(editServiceForm)"
          custom-disabled="{{ editServiceForm.$pristine || editServiceForm.$invalid || disabledSaveButton }}">
       {{ editService.versionedId.id ? 'Save' : 'Add' }}
     </div>
 
-    <div class="btn btn-lg btn-primary   pull-right" ng-click="cancelEditForm()">Cancel</div>
+    <div class="btn btn-lg btn-primary" ng-click="cancelEditForm()" ng-if="editService.versionedId.id">X</div>
   </div>
 </div>

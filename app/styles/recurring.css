@@ -267,7 +267,6 @@
 .qt-create-invoice .product-expense > div{
   display: table-cell;
 
-  width: 32%;
   padding: 0 5px;
 
   vertical-align: top;
@@ -275,7 +274,6 @@
 .qt-create-invoice .service-expense > div {
   display: table-cell;
 
-  width: 25%;
   padding: 0 5px;
 
   vertical-align: top;
