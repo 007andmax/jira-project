@@ -21,7 +21,6 @@
 
         $scope.setNewService = function (service) {
           $scope.service.item = angular.copy(service);
-          $scope.service.item.date = today;
         };
 
         $scope.deleteService = function () {
