@@ -99,7 +99,7 @@
         };
 
         $scope.dearchiveUser = function (user) {
-          var confirmMesage = 'Do you want to dearchive ' + user.firstName + ' ' + user.lastName + '?',
+          var confirmMesage = 'Do you want to restore ' + user.firstName + ' ' + user.lastName + '?',
             confirmButton = 'Yes';
 
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {

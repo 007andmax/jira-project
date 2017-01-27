@@ -139,12 +139,12 @@
   
         $scope.dearchiveCompany = function (company) {
           var name = company.name;
-          var confirmMesage = 'Do you want to dearchive ' + name + '?';
+          var confirmMesage = 'Do you want to restore ' + name + '?';
           var confirmButton = 'Yes';
   
           UserConfirmationsService.show(confirmMesage, confirmButton).then(function () {
             CompaniesService.dearchive(company.id, function (resp) {
-              UserNotificationService.show('The company ' + name + ' has successfully dearchived.', true);
+              UserNotificationService.show('The company ' + name + ' has successfully restored.', true);
             });
           });
         };

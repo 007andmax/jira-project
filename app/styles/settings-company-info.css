@@ -26,15 +26,22 @@
 }
 
 .services-info-wrapper .service-form-wrapper {
-  padding: 30px 0 0 0;
+  padding: 15px 0;
   box-shadow: none;
   left: 0;
   right: 0;
 }
 
 .services-info-wrapper .service-form-wrapper .qt-form-actions {
-  margin-top: -15px !important;
+  margin-top: 22px !important;
+  margin-right: 22px;
 }
+
+.services-info-wrapper .service-form-wrapper .anton.qt-form-actions {
+  margin-top: 0px !important;
+  margin-right: 22px;
+}
+
 
 .settings-main-wrapper .default-tax-wrapper {
   float: left;

@@ -3,7 +3,7 @@
 }
 
 .edit-recurring-invoice.container {
-  max-width: 700px;
+  max-width: 1000px;
   margin-top: 15px;
   .row {
     padding-left: 0;
@@ -21,9 +21,6 @@
     }
     textarea{
       height: 185px;
-    }
-    label{
-      color: #364656;
     }
   }
   .x-mark-wrapper{

@@ -2653,7 +2653,7 @@ label {
   font-size: 14px;
   line-height: 12px;
   font-weight: 400;
-  color: #94a4b8;
+  color: #404b5f;
   cursor: inherit;
 }
 input[type="search"] {
@@ -2942,6 +2942,8 @@ textarea.autosize {
   color: #e53935;
   margin-bottom: 4px;
   line-height: 12px;
+  white-space: nowrap;
+  white-space: nowrap;
 }
 
 .fixed-tooltip .tooltip-inner{
@@ -8704,12 +8706,9 @@ button.close {
   font-size: 14px;
 }
 .popover-content {
-  /*padding: 20px;*/
-  white-space: nowrap;
-  overflow: hidden;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
   width:auto !important;
+  height: auto;
+  word-break: break-all;
 }
 .location-popover .popover-content {
   padding: 0;

@@ -1,6 +1,6 @@
 <div class="service-expense" ng-init="updateInvoiceService = 'updateInvoiceService-' + $index"
      ng-form="{{ updateInvoiceService }}">
-  <div class="col1" ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'service')}">
+  <div class="col-sm-3" ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'service')}">
 
     <div uib-dropdown>
 
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="col2"
+  <div class="col-sm-2"
        ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'serviceTime')}"
        service-quantity-picker="service.quantity" sqp-is-show-format="false">
 
@@ -36,15 +36,15 @@
 
   </div>
 
-  <div class="col3"
+  <div class="col-sm-4"
        ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'serviceDescription')}">
 
     <input type="text" class="form-control service-description" placeholder="Description"
-           ng-model="service.description" max-length-word="30"
+           ng-model="service.description" max-length-word="100"
            name="serviceDescription" ng-maxlength="2000">
   </div>
 
-  <div class="col4"
+  <div class="col-sm-2"
        ng-class="{'has-error': isShowingServiceErrors(editInvoiceForm[updateInvoiceService], 'serviceData')}">
 
     <div class="dropdown">
@@ -58,13 +58,13 @@
     </div>
   </div>
 
-  <div class="col-5" style="min-width: 50px;">
-    <a class="hit-area pull-left order-add-product has-tooltip"
+  <div class="col-sm-1">
+    <a class="hit-area  order-add-product has-tooltip"
        ng-click="addService(editInvoiceForm)" tooltip-placement="top"
        uib-tooltip="Add Service">
       <i class="icn-sm icn-plus-dark"></i>
     </a>
-    <a style="margin-left: 5px;" class="hit-area pull-right has-tooltip" tooltip-placement="top" uib-tooltip="Delete"
+    <a class="hit-area  has-tooltip" tooltip-placement="top" uib-tooltip="Delete"
        ng-click="deleteService()">
       <i class="icn-sm icn-delete"></i>
     </a>

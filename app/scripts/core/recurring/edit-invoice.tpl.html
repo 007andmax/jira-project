@@ -8,7 +8,7 @@
           <label ng-hide="isShowingErrors(editInvoiceForm, 'customer')">Customer</label>
 
           <div ng-messages="editInvoiceForm.customer.$error" ng-show="isShowingErrors(editInvoiceForm, 'customer')">
-            <label ng-message="required">Customer is required.</label>
+            <label class="control-label" ng-message="required">Customer is required.</label>
           </div>
 
           <div class="x-mark-wrapper" uib-dropdown-toggle>
@@ -30,8 +30,8 @@
         <div class="form-group" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'title')}">
           <label ng-hide="isShowingErrors(editInvoiceForm, 'title')">Title</label>
           <div ng-messages="editInvoiceForm.title.$error" ng-show="isShowingErrors(editInvoiceForm, 'title')">
-            <label ng-message="required">Title is required.</label>
-            <label ng-message="maxlength">Title is too long.</label>
+            <label class="control-label" ng-message="required">Title is required.</label>
+            <label class="control-label" ng-message="maxlength">Title is too long.</label>
           </div>
           <input class="form-control" type="text" ng-model="editInvoice.title" name="title"
                  ng-maxlength="50" required>
@@ -41,7 +41,7 @@
             <label ng-hide="isShowingErrors(editInvoiceForm, 'purchaseOrder')">PO</label>
             <div ng-messages="editInvoiceForm.purchaseOrder.$error"
                  ng-show="isShowingErrors(editInvoiceForm, 'purchaseOrder')">
-              <label ng-message="maxlength">Purchase order is too long.</label>
+              <label class="control-label" ng-message="maxlength">Purchase order is too long.</label>
             </div>
             <input class="form-control" type="text" ng-model="editInvoice.purchaseOrder"
                    name="purchaseOrder" ng-maxlength="15">
@@ -51,7 +51,7 @@
             <label ng-hide="isShowingErrors(editInvoiceForm, 'paymentTerms')">Payment Terms</label>
             <div ng-messages="editInvoiceForm.paymentTerms.$error"
                  ng-show="isShowingErrors(editInvoiceForm, 'paymentTerms')">
-              <label ng-message="required">Payment terms is required.</label>
+              <label class="control-label" ng-message="required">Payment terms is required.</label>
             </div>
 
             <div class="x-mark-wrapper" uib-dropdown-toggle>
@@ -75,7 +75,7 @@
       <div class="col-sm-6" ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'memo')}">
         <label ng-class="{'has-error': isShowingErrors(editInvoiceForm, 'memo')}">Memo</label>
         <div ng-messages="editInvoiceForm.memo.$error">
-          <label ng-message="maxlength">Memo is too long.</label>
+          <label class="control-label" ng-message="maxlength">Memo is too long.</label>
         </div>
         <textarea class="form-control" ng-model="editInvoice.memo" name="memo" ng-maxlength="250"></textarea>
       </div>
@@ -239,14 +239,14 @@
 
       </div>
 
-      <div class="ticket-update-edit-actions clearfix">
+      <div class="ticket-update-edit-actions">
 
-        <div class="btn btn-lg btn-primary pull-right" style="min-width: 80px;" ng-click="saveInvoice(editInvoiceForm)"
+        <div class="btn btn-lg btn-success " ng-click="saveInvoice(editInvoiceForm)"
              custom-disabled="{{ hardDisabledSave }}">
           {{ editInvoice.id ? 'Save' : 'Create' }}
         </div>
 
-        <div class="btn btn-lg btn-primary pull-right" style="min-width: 80px;" ng-click="toogleEditForm(false)">
+        <div class="btn btn-lg btn-primary " ng-click="toogleEditForm(false)">
           Cancel
         </div>
 

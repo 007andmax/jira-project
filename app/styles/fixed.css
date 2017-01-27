@@ -906,9 +906,10 @@ aside#left div.nav-title {
   margin-bottom: 0;
 }
 
-.custom-product-list {
-  width: 296px;
+.custom-product-list.nano {
+  width: calc(100% - 10px);
   margin-left: 0 !important;
+  overflow-x: hidden;
 }
 
 .ticket-add-product .custom-product-list {
@@ -926,6 +927,7 @@ aside#left div.nav-title {
   color: #000;
   display: inline-block;
   width: 85%;
+  word-break: break-all;
 }
 .custom-product-list .product-list-container > li div .total-count{
   font-weight: 700;
