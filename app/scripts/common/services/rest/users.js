@@ -174,8 +174,7 @@
         } else {
           var newUser = Utils.customizeObj(updUser);
           storage.users.push(newUser);
-          var company = CompaniesService.getOneById(newUser.company.id);
-          if (company.id !== CompaniesService.getCurrentCompany().id) {
+          if (newUser.company.id !== CompaniesService.getCurrentCompany().id) {
             storage.clientUsers.push(newUser);
           }
           
