@@ -99,15 +99,15 @@
               </label>
             </div>
             <div>
-              <label class="control checkbox" ng-click="subscribeUser(user, 'ticketManager')">
-                <input type="checkbox" ng-checked="user.subscription.ticketManager" ng-disabled="disabledCheckbox">
+              <label class="control checkbox" ng-click="subscribeUser(user, 'invoice')">
+                <input type="checkbox" ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
                 <span class="control-indicator"></span>
                 <span>Invoice Updates</span>
               </label>
             </div>
             <div>
-              <label class="control checkbox" ng-click="subscribeUser(user, 'invoice')">
-                <input type="checkbox" ng-checked="user.subscription.invoice" ng-disabled="disabledCheckbox">
+              <label class="control checkbox" ng-click="subscribeUser(user, 'ticketManager')">
+                <input type="checkbox" ng-checked="user.subscription.ticketManager" ng-disabled="disabledCheckbox">
                 <span class="control-indicator"></span>
                 <span>Ticket Manager</span>
               </label>
@@ -240,7 +240,7 @@
             <img src="images/input-icons/invoice-update-orange.png" alt=""
                  ng-if="user.subscription.invoice" uib-tooltip="Invoice Updates">
             <img src="images/input-icons/tick-manager-blue.png" alt=""
-                 ng-if="user.subscription.ticketManager" uib-tooltip="Ticket Manages">
+                 ng-if="user.subscription.ticketManager" uib-tooltip="Ticket Manager">
             <div class="no-subscribe" uib-tooltip="No Subscriptions"
                  ng-if="!user.subscription.ticket && !user.subscription.invoice && !user.subscription.ticketManager">
             </div>

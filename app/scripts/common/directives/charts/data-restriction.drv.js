@@ -9,7 +9,9 @@
         link: function ($scope, $element, attrs) {
           var $window = angular.element(window),
             $document = angular.element(document),
-            params;
+            params,
+            lastCanBeShown,
+            handledData = [];
 
           $scope.$watchCollection(getParams, function (value) {
             if (value.every(function (item) {
@@ -19,8 +21,16 @@
               getChartData();
             }
           });
-          $window.on('resize', getChartData);
-
+          $window.on('resize', recropData);
+  
+          $scope.$on('$destroy', function () {
+            $window.off('resize', recropData);
+          });
+          
+          function recropData() {
+            setChartData(handledData);
+          }
+          
           function getParams() {
             var arr = [];
             for (var prop in attrs) {
@@ -34,7 +44,7 @@
           function getChartData() {
             if (attrs.fetchFunc) {
               StatisticsService[attrs.fetchFunc](params, function (data) {
-                var handledData;
+                handledData;
                 if (attrs.handleData && $scope[attrs.handleData]) {
                   handledData = $scope[attrs.handleData](data);
                 } else {
@@ -43,18 +53,24 @@
                 setChartData(handledData);
               });
             } else if ($scope[attrs.handleData]) {
-              setChartData($scope[attrs.handleData]);
+              handledData = $scope[attrs.handleData];
+              setChartData(handledData);
             }
           }
 
           function setChartData(data) {
             var canBeShown = Math.floor(getShownCounts('[chart-wrap]'));
-            if (canBeShown < data.length - 2) {
-              $scope.chartData = addExtremeValues(data.slice(data.length - canBeShown + 2));
-            } else {
-              $scope.chartData = addExtremeValues(data);
+            
+            if (!lastCanBeShown || lastCanBeShown !== canBeShown) {
+              if (canBeShown < data.length - 2) {
+                $scope.chartData = addExtremeValues(data.slice(data.length - canBeShown + 2));
+              } else {
+                $scope.chartData = addExtremeValues(data);
+              }
+              $scope.chartTicks = $scope.parseDate($scope.chartData);
             }
-            $scope.chartTicks = $scope.parseDate($scope.chartData);
+            
+            lastCanBeShown = canBeShown;
           }
 
           function getShownCounts(selector) {
