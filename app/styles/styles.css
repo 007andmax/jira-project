@@ -803,7 +803,7 @@ hr {
 .services-content {
   float: left;
   width: 100%;
-  padding: 31px 10px 30px;
+  padding: 31px 0 30px;
 }
 .devices-content,
 .receipt-archive-content {
@@ -9140,6 +9140,16 @@ button.close {
   top: 0;
   right: 0;
 }
+
+.payment-receive-fixed{
+  background-color: #fff;
+}
+
+.products-content .fixed-block-top,
+.services-content .fixed-block-top{
+  background-color: #fff;
+}
+
 .payment-receive-fixed .btn {
   margin: 16px 30px 0 0;
   line-height: 34px;

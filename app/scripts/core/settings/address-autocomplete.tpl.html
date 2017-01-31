@@ -27,8 +27,8 @@
 
     <div ng-messages="addressForm.address.$error"
          ng-class="{'hide': !((addressForm.address.$dirty || showValidationMessages) && !addressForm.address.$valid)}">
-      <div class="control-label" ng-message="required">Please enter the address.</div>
-      <div class="control-label" ng-message="correct">Please select address from autocomplete.</div>
+      <label class="control-label" ng-message="required">Please enter the address.</label>
+      <label class="control-label" ng-message="correct">Please select address from autocomplete.</label>
     </div>
 
     <input class="form-control" type="text" ng-required="isAddressRequired"

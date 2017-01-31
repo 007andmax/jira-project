@@ -67,31 +67,9 @@
 
   </div>
 
-  <!--<div ng-if="!(!service.isDefault && service)" class="col-3" style="position: relative;" TODO hide timeAllotment-->
-       <!--service-quantity-picker="editService.timeBlock" sqp-is-show-format="false" sqp-form="editServiceForm.timeBlock"-->
-       <!--ng-class="{'has-error': isShowingErrors(editServiceForm, 'timeBlock')}">-->
-
-    <!--<label class="control-label" ng-class="{'hide': isShowingErrors(editServiceForm, 'code')}">-->
-      <!--TIME ALLOTMENT-->
-    <!--</label>-->
-
-    <!--<div ng-messages="editServiceForm.code.$error"-->
-         <!--ng-class="{'hide': !isShowingErrors(editServiceForm, 'code')}">-->
-      <!--<label class="control-label" ng-message="required">-->
-       <!--IS REQUIRED.-->
-      <!--</label>-->
-    <!--</div>-->
-
-    <!--<input id="service-quantity-picker" type="text" class="form-control"-->
-           <!--sqp-input readonly>-->
-
-    <!--<input type="hidden" invalid-when="!editService.timeBlock || editService.timeBlock <= 0"-->
-           <!--name="timeBlock" ng-model="editService.timeBlock" hard-reset-required="true"/>-->
-
-  <!--</div>-->
-
   <div class="qt-form-actions" ng-class="{'anton': editService.versionedId.id}" style="width: auto;">
-    <!--<div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>-->
+
+    <div class="btn btn-lg btn-primary" ng-click="cancelEditForm()" ng-if="editService.versionedId.id">Cancel</div>
 
     <div class="btn btn-lg btn-success"
          ng-click="saveEditService(editServiceForm)"
@@ -99,6 +77,5 @@
       {{ editService.versionedId.id ? 'Save' : 'Add' }}
     </div>
 
-    <div class="btn btn-lg btn-primary" ng-click="cancelEditForm()" ng-if="editService.versionedId.id">X</div>
   </div>
 </div>

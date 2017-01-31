@@ -68,6 +68,7 @@ $green-active: #5f8643;
   -o-transition: all 0.3s ease-out;
   -ms-ransition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+  min-width: 60px;
   &:focus,
   &:hover,
   &:active,
@@ -80,9 +81,10 @@ $green-active: #5f8643;
   &[disabled],
   &.disabled{
     box-shadow: none;
-    background-color: $light-gray;
-    border-color: $light-gray;
+    background-color: $gray;
+    border-color: $gray;
     pointer-events: none;
+    opacity: .5;
   }
   &-primary{
     background-color: $primary-color;

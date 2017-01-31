@@ -69,8 +69,8 @@
         </li>
 
         <li class="list-heading" style="border-top: none;" ng-show="taxRates.length > 0">
-          <div class="col-xs-5">Tax description</div>
-          <div class="col-xs-5">Tax percent</div>
+          <div style="padding-left: 5px;" class="col-xs-6">Tax description</div>
+          <div class="col-xs-6">Tax percent</div>
         </li>
 
         <li class="tax-list" ng-repeat="tax in taxRates | orderBy: 'code'" ng-class="{'new-tax': isEditing}"
@@ -104,8 +104,8 @@
             <div class="col-1"
                  ng-class="{'has-error': isShowingErrors(editTaxRateForm, 'currentlyTaxType')}">
 
-              <p ng-style="{ opacity: isShowingErrors(editTaxRateForm, 'currentlyTaxType') ? '0' : '1' }">Edit Tax
-                Rate</p>
+              <!--<p ng-style="{ opacity: isShowingErrors(editTaxRateForm, 'currentlyTaxType') ? '0' : '1' }">Edit Tax-->
+                <!--Rate</p>-->
 
               <div ng-messages="editTaxRateForm.currentlyTaxType.$error"
                    style="position: absolute;margin-top: -19px;"
@@ -129,7 +129,7 @@
             </div>
 
             <div class="col-1" ng-class="{'has-error': isShowingErrors(editTaxRateForm, 'currentlyTaxRate')}">
-              <p>&nbsp;</p>
+              <!--<p>&nbsp;</p>-->
 
               <div ng-messages="editTaxRateForm.currentlyTaxRate.$error"
                    style="position: absolute;margin-top: -19px;"
@@ -145,7 +145,7 @@
 
             </div>
 
-            <div style="padding-top: 85px;">
+            <div class="clearfix" style="padding-top: 55px; padding-right: 5px;">
               <div class="btn btn-lg btn-success pull-right"
                    ng-click="saveTax()"
                    custom-disabled="{{ editTaxRateForm.$invalid || editTaxRateForm.$pristine }}">
