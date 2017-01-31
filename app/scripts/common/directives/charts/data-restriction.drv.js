@@ -42,9 +42,9 @@
           }
 
           function getChartData() {
+            lastCanBeShown = 0;
             if (attrs.fetchFunc) {
               StatisticsService[attrs.fetchFunc](params, function (data) {
-                handledData;
                 if (attrs.handleData && $scope[attrs.handleData]) {
                   handledData = $scope[attrs.handleData](data);
                 } else {
