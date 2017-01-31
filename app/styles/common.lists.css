@@ -1359,9 +1359,6 @@ Devices tab
   padding: 25px 0;
 }
 
-.qt-invoices > li:nth-child(even) {
-  background-color: #e9f5fb;
-}
 
 .qt-invoices > li + li {
   height: auto;
