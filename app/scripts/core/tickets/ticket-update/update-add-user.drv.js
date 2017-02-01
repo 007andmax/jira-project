@@ -113,12 +113,14 @@
               var data = { suggestions: [] };
               var queryLowerCase = query.toLowerCase();
               for (var i = 0; i < users.data.length; i++) {
-                if ($scope.filterUpdateUser(users.data[i])) {
-
-                  var name = users.getName(users.data[i]);
-
-                  if (name.toLowerCase().indexOf(queryLowerCase) !== -1) {
-                    data.suggestions.push({ value: name, data: users.data[i] })
+                var user = users.data[i];
+                if (!user.deletedAt) {
+                  if ($scope.filterUpdateUser(user)) {
+                    var name = users.getName(user);
+    
+                    if (name.toLowerCase().indexOf(queryLowerCase) !== -1) {
+                      data.suggestions.push({ value: name, data: user })
+                    }
                   }
                 }
               }

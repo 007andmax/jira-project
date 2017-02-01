@@ -542,6 +542,9 @@
         $scope.filterUserFullName = function (value) {
 
           function searchInUsers(item) {
+            if (item.deletedAt) {
+              return false;
+            }
 
             if (value && value.length > 0 && (value !== '[$empty$]')) {
               var userEmail = (item.primaryEmail && item.primaryEmail.length > 0) ? ' ' + item.primaryEmail.toLowerCase() : '';
