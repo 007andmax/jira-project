@@ -17,7 +17,7 @@
         <li ng-class="{'active': currentOpenTab === 'users'}" style="cursor: pointer;" ng-if="PermissionsService.isAllowed('VIEW_USERS')">
           <a ui-sref="companyProfile({ tabName: 'users' })">
             Users
-            <span class="text-muted">{{ users.length }}</span>
+            <span class="text-muted">{{ users.filter(filterDeleted).length }}</span>
           </a>
         </li>
 

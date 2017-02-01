@@ -309,6 +309,10 @@
 
           $scope.changeSelectDevices();
         };
+        
+        $scope.filterDeleted = function (users) {
+          return !users.deletedAt;
+        };
 
         $scope.companyProfileHeader.unCheckAll = function () {
           $scope.selectDevices = {};

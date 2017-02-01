@@ -36,7 +36,7 @@
     </li>
 
     <li ng-repeat="user in users | orderBy: orderByForUsers: orderUsersTab.reverse track by user.id"
-        ng-controller="quicktech.core.companies.usersTabCtrl"
+        ng-controller="quicktech.core.companies.usersTabCtrl" ng-if="!user.deletedAt"
         show-model-element="{{ 'show-user-on-save-' + user.id }}">
 
       <div class="users-list-wrapper">
