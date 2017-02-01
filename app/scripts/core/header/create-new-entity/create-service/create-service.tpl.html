@@ -29,7 +29,7 @@
   <div class="qt-form-actions btn-bottom" style="margin-right: 10px;">
     <div class="pull-left text-error">{{ getValidationMessage(editServiceForm) }}</div>
 
-    <div class="btn btn-lg btn-create btn-primary pull-right"
+    <div class="btn btn-lg btn-create btn-success pull-right"
          ng-click="saveEditService(editServiceForm)"
          custom-disabled="{{ disabledSaveButton }}">
       {{ editService.versionedId.id ? 'Save' : 'Create' }}

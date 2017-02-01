@@ -378,6 +378,7 @@
   right: 3px;
   padding: 10px;
   cursor: pointer;
+  line-height: 1;
 }
 
 .create-window .input-top-4 .x-mark{

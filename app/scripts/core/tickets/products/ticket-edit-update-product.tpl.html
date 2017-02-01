@@ -60,15 +60,15 @@
 
       <div class="validation-msg pull-left">{{ validationMessage() }}</div>
 
+      <div class="btn btn-lg btn-primary"
+           ng-click="setEditExpenseId()">
+        Cancel
+      </div>
+
       <div class="btn btn-lg btn-success"
            custom-disabled="{{ disabledSave || updateTicketProduct.$invalid }}"
            ng-click="saveUpdateProduct(updateTicketProduct)">
         Save
-      </div>
-
-      <div class="btn btn-lg btn-primary"
-           ng-click="setEditExpenseId()">
-        Cancel
       </div>
 
     </div>

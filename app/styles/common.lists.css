@@ -1812,10 +1812,6 @@ Devices tab
   cursor: pointer;
 }
 
-.qt-receivable-number > li:nth-child(even) {
-  background-color: #e9f5fb;
-}
-
 .qt-receivable-number > li > .col-1 {
   width: 120px;
 }

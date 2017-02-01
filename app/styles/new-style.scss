@@ -70,6 +70,7 @@ $green-active: #5f8643;
   transition: all 0.3s ease-out;
   &-icn{
     min-width: 0;
+    line-height: 3;
   }
   &:focus,
   &:hover,
